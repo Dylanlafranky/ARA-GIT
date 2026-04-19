@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>If This Is True — The Geometry of Temporal Friction</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 24px; max-width: 1200px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  h2 { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #ddd; margin-bottom: 16px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .preamble { font-size: 14px; color: #999; font-style: italic; margin-bottom: 40px; line-height: 1.8; }
+  .chart-title { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #aaa; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+  .section-divider { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
+  .section { margin: 40px 0; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 16px; line-height: 1.8; }
+  .callout {
+    background: #111122; border-left: 3px solid #f0c040;
+    padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.8; color: #ccc;
+  }
+  .callout strong { color: #f0c040; }
+  .callout.blue { border-left-color: #4dabf7; }
+  .callout.blue strong { color: #4dabf7; }
+  .callout.green { border-left-color: #40c057; }
+  .callout.green strong { color: #40c057; }
+  .callout.red { border-left-color: #ff6b6b; }
+  .callout.red strong { color: #ff6b6b; }
+  .callout.purple { border-left-color: #b197fc; }
+  .callout.purple strong { color: #b197fc; }
+  .callout.gold { border-left-color: #f0c040; }
+  .comparison-row { display: flex; justify-content: center; gap: 48px; margin: 32px 0; flex-wrap: wrap; }
+  .comparison-item { text-align: center; min-width: 160px; }
+  .comparison-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+  .comparison-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; }
+  .comparison-sub { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #666; margin-top: 4px; }
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .data-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid #333; color: #888; font-weight: 400; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
+  .data-table td { padding: 8px 12px; border-bottom: 1px solid #1a1a2e; color: #ccc; }
+  canvas { display: block; margin: 0 auto 24px; }
+  .eq {
+    text-align: center; font-family: 'JetBrains Mono', monospace;
+    font-size: 18px; color: #f0c040; margin: 24px 0; padding: 16px;
+    background: rgba(240,192,64,0.04); border: 1px solid rgba(240,192,64,0.15);
+    border-radius: 8px;
+  }
+  .eq .label { font-size: 11px; color: #888; display: block; margin-top: 8px; }
+  .footer { font-size: 11px; color: #555; margin-top: 48px; padding-top: 16px; border-top: 1px solid #1a1a2e; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<h1>If This Is True</h1>
+<p class="subtitle">Extrapolating the ARA framework — what φ in time implies about the structure of temporal space</p>
+<p class="preamble">
+  The previous analyses established an empirical pattern: free-running accumulation-release systems
+  converge on φ ≈ 1.618 for their phase ratio. This document asks the next question —
+  if that pattern is real, what does it tell us about the nature of time itself?
+</p>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>1 — The Spatial Analogy We Already Understand</h2>
+
+  <p class="body-text">
+    When a plant sprouts leaves, it faces a packing problem. The stem has 360° of angular space,
+    and each new leaf needs sunlight. If the plant places leaves at a rational fraction of a full
+    turn — say 1/4 (90°) — then leaf #5 grows directly on top of leaf #1. They compete for the
+    exact same light. That is a <em>spatial collision</em>.
+  </p>
+
+  <p class="body-text">
+    The solution, discovered independently across hundreds of millions of years of evolution,
+    is the golden angle: 360° × (1 − 1/φ) ≈ 137.5°. Because φ is irrational, no leaf
+    <em>ever</em> lands exactly on top of a previous leaf. The angular space is packed as
+    efficiently as possible, with no collisions, no wasted light.
+  </p>
+
+  <canvas id="phyllotaxisCanvas" width="800" height="400"></canvas>
+
+  <div class="callout green">
+    <strong>The key insight:</strong> Phyllotaxis works because φ is not just irrational —
+    it is the <em>most</em> irrational number. Its continued fraction is [1; 1, 1, 1, ...],
+    all ones, the slowest possible convergence to any rational approximation. Every other
+    irrational number occasionally has a large term in its continued fraction that lets some
+    rational fraction "sneak up" on it. φ never does. It is maximally resistant to rational
+    approximation, and therefore maximally resistant to overlap.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>2 — Now Replace Space with Time</h2>
+
+  <p class="body-text">
+    A walking human, a beating heart, an erupting geyser, an oscillating ocean — these are
+    all cyclical systems that repeat. Each cycle leaves behind thermodynamic "exhaust": residual
+    heat, mechanical momentum, tectonic stress, chemical gradients. That exhaust doesn't vanish
+    instantly. It persists, it decays, and it <em>occupies a position in time</em>.
+  </p>
+
+  <p class="body-text">
+    Now ask the same question the plant asked: if I'm going to keep cycling, how do I arrange
+    my phases so that the exhaust of one cycle doesn't collide with the peak demand of a future cycle?
+  </p>
+
+  <div class="callout blue">
+    <strong>The temporal collision:</strong> If a system operates at a neat rational ratio
+    (say, accumulation:release = 2:1), then the energy wake of Cycle 1 will perfectly
+    align with the peak of Cycle 3, or Cycle 6, or Cycle 9. The residual energy and fresh
+    energy demands stack up in the same temporal slot. They constructively interfere.
+    That is a <em>resonant blowout</em>.
+  </div>
+
+  <canvas id="resonanceCanvas" width="800" height="360"></canvas>
+
+  <p class="body-text">
+    This is not hypothetical. The Tacoma Narrows Bridge collapsed in 1940 because wind pushed
+    it at a frequency that was a rational harmonic of its natural sway. The energy stacked up
+    in time, cycle after cycle, with nowhere to dissipate. The bridge tore itself apart.
+  </p>
+
+  <p class="body-text">
+    By settling into a φ ratio for accumulation and release, a thermodynamic system guarantees
+    that its energy cycles <em>never</em> overlap perfectly in time. The exhaust of Cycle 1 will
+    never align with the peak of Cycle 10, or Cycle 100, or Cycle 10,000. The energy is
+    distributed across the timeline as uniformly as possible — exactly the way golden-angle
+    leaves are distributed around the stem.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>3 — The KAM Theorem: Why This Isn't Just an Analogy</h2>
+
+  <p class="body-text">
+    The Kolmogorov-Arnold-Moser (KAM) theorem, one of the landmark results in 20th-century
+    dynamical systems theory, makes this precise. It states that in oscillating systems with
+    two or more coupled frequencies, orbits whose frequency ratios are "sufficiently irrational"
+    survive perturbation — they persist, they're stable. Orbits with rational frequency ratios
+    are destroyed by resonance.
+  </p>
+
+  <div class="eq">
+    Orbits survive perturbation when: |ω₁/ω₂ − p/q| > K/q<sup>2.5</sup> for all integers p, q
+    <span class="label">The KAM condition — orbits that can't be well-approximated by rationals persist</span>
+  </div>
+
+  <p class="body-text">
+    The number that satisfies this condition most strongly — the frequency ratio that is hardest
+    to approximate by <em>any</em> rational p/q — is φ. This is provable. It follows directly
+    from φ's continued fraction being all ones.
+  </p>
+
+  <div class="comparison-row">
+    <div class="comparison-item">
+      <div class="comparison-label">√2 continued fraction</div>
+      <div class="comparison-value" style="color: #888; font-size: 18px;">[1; 2, 2, 2, ...]</div>
+      <div class="comparison-sub">decent rational approximations exist</div>
+    </div>
+    <div class="comparison-item">
+      <div class="comparison-label">π continued fraction</div>
+      <div class="comparison-value" style="color: #888; font-size: 18px;">[3; 7, 15, 1, ...]</div>
+      <div class="comparison-sub">the 7 and 15 let rationals get close</div>
+    </div>
+    <div class="comparison-item">
+      <div class="comparison-label">φ continued fraction</div>
+      <div class="comparison-value" style="color: #f0c040; font-size: 18px;">[1; 1, 1, 1, ...]</div>
+      <div class="comparison-sub">maximally hard to approximate</div>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <strong>The connection:</strong> The ARA framework observes that free-running thermodynamic
+    systems converge to φ for their accumulation/release ratio. The KAM theorem predicts that
+    the most stable oscillation in any coupled-frequency system has its frequency ratio at φ.
+    These are the same claim, arrived at from opposite directions — one empirical, one mathematical.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>4 — What This Means for Time</h2>
+
+  <p class="body-text">
+    If all of the above holds, the implication is that time is not merely an abstract,
+    structureless parameter that a clock ticks through. For physical systems operating in
+    continuous cycles, time acts as a <strong>packing dimension</strong> — a space in which
+    energy must be arranged to avoid destructive overlap.
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Property</th><th>Physical Space (Leaves)</th><th>Temporal Space (Energy Cycles)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dimension being packed</td>
+        <td>Angular position (360°)</td>
+        <td>Phase position within cycle</td>
+      </tr>
+      <tr>
+        <td>What is being placed</td>
+        <td>Leaves (matter)</td>
+        <td>Energy demands and exhaust (thermodynamic load)</td>
+      </tr>
+      <tr>
+        <td>Collision = </td>
+        <td>Leaf overlap → shading, lost sunlight</td>
+        <td>Harmonic overlap → resonant amplification, structural failure</td>
+      </tr>
+      <tr>
+        <td>Optimal packing angle/ratio</td>
+        <td>Golden angle ≈ 137.5°</td>
+        <td>Golden ratio ≈ 1.618</td>
+      </tr>
+      <tr>
+        <td>Why φ specifically</td>
+        <td>Most irrational → no angular overlap ever</td>
+        <td>Most irrational → no harmonic overlap ever</td>
+      </tr>
+      <tr>
+        <td>Mathematical backbone</td>
+        <td>Three-distance theorem</td>
+        <td>KAM theorem</td>
+      </tr>
+      <tr>
+        <td>Failure mode</td>
+        <td>Rational angle → all leaves stack</td>
+        <td>Rational frequency ratio → resonant blowout (Tacoma Narrows)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple" style="margin-top: 32px;">
+    <strong>The claim, stated plainly:</strong> Just as matter cannot occupy the same physical
+    space without collision, cyclical energy cannot occupy the same temporal harmonics without
+    resonant destruction. φ is the geometric solution to packing energy into time without it
+    crashing into itself. Time, for non-equilibrium systems, has a geometry — and that geometry
+    is governed by φ for the same reason spatial packing is.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>5 — Predictions This Makes</h2>
+
+  <p class="body-text">
+    If temporal friction is real — if φ ratios emerge because systems are avoiding harmonic
+    self-interference — then several things should follow:
+  </p>
+
+  <div class="callout green">
+    <strong>1. Systems forced away from φ should show resonance damage.</strong>
+    A heart paced at a 1:1 diastole/systole ratio should develop measurable stress
+    accumulation that a φ-paced heart does not. This is partially confirmed: heart failure
+    is associated with deviation from the natural ~1.6:1 ratio, and rigid metronomic heart
+    rates (loss of heart rate variability) predict mortality.
+  </div>
+
+  <div class="callout green">
+    <strong>2. Younger / less-evolved systems should be further from φ.</strong>
+    If φ is an attractor that systems converge toward under selection pressure, then recently
+    formed or low-iteration systems should show noisier, less φ-converged ratios. A newly
+    formed geyser should be less regular than Old Faithful. A fetal heart should have a less
+    stable ARA ratio than an adult heart at rest. Early solar cycles (if measurable) should
+    show more variability in rise/fall asymmetry.
+  </div>
+
+  <div class="callout green">
+    <strong>3. Externally forced systems should NOT show φ.</strong>
+    If the system's timing is imposed from outside (tides forced by the Moon, clocks driven
+    by quartz), there's no selection pressure to avoid self-resonance — the driving force
+    absorbs the harmonic conflicts. φ should only appear in the <em>free-running</em>
+    internal dynamics. This is already observed: tides don't show φ. The 24-hour
+    sleep/wake cycle (entrained by sunlight) doesn't show φ, but the internal NREM/REM
+    crossover does.
+  </div>
+
+  <div class="callout green">
+    <strong>4. Artificial systems under resonance pressure should converge to φ.</strong>
+    An engineered oscillator with feedback (energy from cycle N affects cycle N+1) and no
+    external clock should, given enough iterations and weak selection pressure, drift toward
+    a φ frequency ratio. This could be tested computationally with evolutionary algorithms
+    on coupled oscillators.
+  </div>
+
+  <div class="callout blue">
+    <strong>5. The ARA scale should map to resonance proximity.</strong>
+    Systems near φ on the ARA scale (1.618) should show the lowest self-interference and
+    longest operational lifetimes. Systems at rational ARA values (1.0, 1.5, 2.0) should
+    show periodic bursts of instability at predictable cycle counts — specifically, when the
+    denominator of the rational approximation "catches up." A system at ARA = 1.5 (= 3/2)
+    should show interference peaks every 2 cycles. A system at ARA = 1.667 (= 5/3) should
+    show interference every 3 cycles. A system at ARA = φ should show... none. Ever.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>6 — The Hierarchy of Packing</h2>
+
+  <p class="body-text">
+    If time is a packing dimension, it joins a hierarchy of dimensions where φ solves the
+    same problem at different scales:
+  </p>
+
+  <canvas id="hierarchyCanvas" width="800" height="300"></canvas>
+
+  <div class="callout" style="margin-top: 24px;">
+    <strong>The pattern:</strong> At every scale where a system must pack repeating structures
+    into a finite dimension without destructive overlap — angular space (leaves), frequency
+    space (orbits), temporal space (energy cycles) — the solution converges to the same constant.
+    Not because φ is mystical, but because φ is the number that is <em>worst</em> at being
+    rational. It is the hardest number to "catch" with any periodic repetition. That property
+    is unique and mathematically provable.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>7 — Honest Caveats</h2>
+
+  <div class="callout red">
+    <strong>What this is:</strong> A theoretical extrapolation. The empirical ARA data (hearts,
+    ENSO, geysers, gait, stellar pulsation) shows φ convergence. The KAM theorem provides a
+    mathematical mechanism. The phyllotaxis analogy provides physical intuition. Together they
+    suggest a coherent story. But "suggest" is not "prove."
+  </div>
+
+  <div class="callout red">
+    <strong>What would make this wrong:</strong>
+    (a) If the empirical φ convergence turns out to be measurement artifact or post-hoc fitting —
+    the temporal friction story collapses with it.
+    (b) If KAM-stable orbits in real thermodynamic systems are dominated by a different
+    irrational (e.g., √2), then the mechanism is real but φ is not the specific attractor.
+    (c) If externally forced systems start showing φ too, the "free-running" condition is wrong
+    and something else is going on.
+    (d) The analogy between angular packing and temporal packing may be looser than it appears —
+    leaves occupy a 2D manifold; energy cycles occupy a phase space that may have different
+    dimensionality and topology.
+  </div>
+
+  <div class="callout blue">
+    <strong>What would make this right:</strong> Prediction #4 — an artificial coupled oscillator
+    with feedback, no external clock, and selection for efficiency should converge to φ. That's
+    a clean, reproducible experiment with no room for post-hoc fitting. If it works, the temporal
+    friction hypothesis graduates from "beautiful analogy" to "demonstrated mechanism."
+  </div>
+</div>
+
+<!-- ============================================================ -->
+
+<div class="footer">
+  Geometry of Time — Temporal Friction Extrapolation · Dylan La Franchi · April 2026<br>
+  Theoretical extension of the ARA framework. Not a peer-reviewed claim.<br>
+  References: KAM theorem (Kolmogorov 1954, Arnold 1963, Moser 1962) · Phyllotaxis (Douady &amp; Couder 1992) ·
+  Tacoma Narrows (Billah &amp; Scanlan 1991) · Heart rate variability and mortality (Tsuji et al. 1996, Lancet)
+</div>
+
+<!-- ============================================================ -->
+<script>
+// ========== PHYLLOTAXIS COMPARISON ==========
+(function() {
+  const c = document.getElementById('phyllotaxisCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  function drawPhyllotaxis(cx, cy, angle, n, label, sublabel, color) {
+    // Draw dots
+    for (let i = 0; i < n; i++) {
+      const r = 4 * Math.sqrt(i) + 10;
+      const theta = i * angle * (Math.PI / 180);
+      const x = cx + r * Math.cos(theta);
+      const y = cy + r * Math.sin(theta);
+
+      const overlap = checkOverlap(i, angle);
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = overlap ? '#ff6b6b88' : color;
+      ctx.fill();
+
+      // Number the first 8
+      if (i < 8 && i > 0) {
+        ctx.fillStyle = '#fff';
+        ctx.font = '8px JetBrains Mono';
+        ctx.textAlign = 'center';
+        ctx.fillText(i, x, y - 7);
+      }
+    }
+
+    // Label
+    ctx.fillStyle = '#ccc';
+    ctx.font = 'bold 12px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, cx, cy + 150);
+    ctx.fillStyle = '#888';
+    ctx.font = '10px JetBrains Mono';
+    ctx.fillText(sublabel, cx, cy + 166);
+  }
+
+  function checkOverlap(index, angle) {
+    if (index === 0) return false;
+    const thisAngle = (index * angle) % 360;
+    for (let j = 0; j < index; j++) {
+      const prevAngle = (j * angle) % 360;
+      if (Math.abs(thisAngle - prevAngle) < 8 || Math.abs(thisAngle - prevAngle - 360) < 8 || Math.abs(thisAngle - prevAngle + 360) < 8) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Title
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('PHYLLOTAXIS: PACKING LEAVES AROUND A STEM', c.width / 2, 20);
+
+  // Rational angle (90°) — collisions
+  drawPhyllotaxis(160, 180, 90, 40, '90° (1/4 TURN)', 'COLLISIONS — LEAVES STACK', 'rgba(77,171,247,0.6)');
+
+  // Less rational (120°) — still collisions
+  drawPhyllotaxis(400, 180, 120, 40, '120° (1/3 TURN)', 'COLLISIONS — 3-FOLD STACK', 'rgba(77,171,247,0.6)');
+
+  // Golden angle — no collisions
+  drawPhyllotaxis(640, 180, 137.508, 40, '137.5° (GOLDEN ANGLE)', 'NO COLLISIONS — EVER', 'rgba(64,192,87,0.7)');
+})();
+
+// ========== RESONANCE VS φ VISUALIZATION ==========
+(function() {
+  const c = document.getElementById('resonanceCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  const margin = { left: 60, right: 30, top: 50, bottom: 50 };
+  const w = c.width - margin.left - margin.right;
+  const h = (c.height - margin.top - margin.bottom - 30) / 2;
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('ENERGY RESIDUALS OVER 20 CYCLES: RATIONAL RATIO VS φ RATIO', c.width / 2, 20);
+
+  function drawEnergyTrace(yOffset, ratio, label, color, sublabel) {
+    const baseY = margin.top + yOffset;
+    const cycles = 20;
+    const samplesPerCycle = 80;
+    const total = cycles * samplesPerCycle;
+
+    // Simulate energy residuals
+    let residuals = new Array(total).fill(0);
+
+    for (let cyc = 0; cyc < cycles; cyc++) {
+      const accLen = Math.floor(samplesPerCycle * ratio / (1 + ratio));
+      const relLen = samplesPerCycle - accLen;
+
+      for (let s = 0; s < samplesPerCycle; s++) {
+        const t = cyc * samplesPerCycle + s;
+        if (t >= total) break;
+
+        // Accumulation phase: gradual rise
+        if (s < accLen) {
+          residuals[t] += 0.3 * Math.sin(Math.PI * s / accLen);
+        } else {
+          // Release phase: sharp decay
+          const rs = s - accLen;
+          residuals[t] += 0.5 * Math.exp(-rs / (relLen * 0.3));
+        }
+
+        // Add residual echoes from all previous cycles
+        for (let prev = 1; prev <= cyc; prev++) {
+          const echo = 0.4 * Math.pow(0.7, prev);
+          const phaseInPrev = (s / samplesPerCycle * ratio) % 1;
+          // Rational ratios: echoes align periodically
+          residuals[t] += echo * Math.sin(2 * Math.PI * phaseInPrev * prev);
+        }
+      }
+    }
+
+    // Find max for scaling
+    const maxVal = Math.max(...residuals.map(Math.abs)) || 1;
+
+    // Draw baseline
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.beginPath();
+    ctx.moveTo(margin.left, baseY + h / 2);
+    ctx.lineTo(margin.left + w, baseY + h / 2);
+    ctx.stroke();
+
+    // Draw trace
+    ctx.beginPath();
+    for (let i = 0; i < total; i++) {
+      const x = margin.left + (i / total) * w;
+      const y = baseY + h / 2 - (residuals[i] / maxVal) * (h / 2 - 5);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    ctx.lineWidth = 1;
+
+    // Highlight interference peaks for rational ratio
+    if (ratio === 1.5) {
+      for (let cyc = 2; cyc < cycles; cyc += 2) {
+        const x = margin.left + (cyc * samplesPerCycle / total) * w;
+        ctx.fillStyle = 'rgba(255,107,107,0.15)';
+        ctx.fillRect(x - 3, baseY, 6, h);
+      }
+    }
+
+    // Label
+    ctx.fillStyle = color;
+    ctx.font = 'bold 11px JetBrains Mono';
+    ctx.textAlign = 'left';
+    ctx.fillText(label, margin.left + 5, baseY + 14);
+    ctx.fillStyle = '#666';
+    ctx.font = '10px JetBrains Mono';
+    ctx.fillText(sublabel, margin.left + 5, baseY + 28);
+  }
+
+  drawEnergyTrace(0, 1.5, 'RATIO = 3:2 (RATIONAL)', '#ff6b6b',
+    'Energy echoes align every 2 cycles → constructive interference builds');
+
+  drawEnergyTrace(h + 30, 1.618, 'RATIO = φ (IRRATIONAL)', '#40c057',
+    'Energy echoes never align → no constructive interference');
+
+  // Axis labels
+  ctx.fillStyle = '#555';
+  ctx.font = '10px DM Sans';
+  ctx.textAlign = 'center';
+  ctx.fillText('Cycle number →', margin.left + w / 2, c.height - 10);
+})();
+
+// ========== HIERARCHY VISUALIZATION ==========
+(function() {
+  const c = document.getElementById('hierarchyCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  const levels = [
+    { label: 'ANGULAR SPACE', example: 'Leaves on stems', solution: 'Golden angle (137.5°)', color: '#40c057', y: 60 },
+    { label: 'FREQUENCY SPACE', example: 'Planetary orbits, oscillators', solution: 'KAM-stable at φ ratio', color: '#4dabf7', y: 130 },
+    { label: 'TEMPORAL SPACE', example: 'Hearts, ENSO, geysers, gait', solution: 'ARA ratio → φ', color: '#f0c040', y: 200 },
+  ];
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('THE HIERARCHY OF φ-PACKING ACROSS DIMENSIONS', c.width / 2, 25);
+
+  levels.forEach((lev, i) => {
+    // Box
+    const bx = 60, bw = c.width - 120, bh = 50;
+    ctx.fillStyle = lev.color + '11';
+    ctx.strokeStyle = lev.color + '44';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(bx, lev.y, bw, bh, 6);
+    ctx.fill();
+    ctx.stroke();
+
+    // Label
+    ctx.fillStyle = lev.color;
+    ctx.font = 'bold 12px JetBrains Mono';
+    ctx.textAlign = 'left';
+    ctx.fillText(lev.label, bx + 16, lev.y + 22);
+
+    // Example
+    ctx.fillStyle = '#999';
+    ctx.font = '11px DM Sans';
+    ctx.fillText(lev.example, bx + 16, lev.y + 40);
+
+    // Solution
+    ctx.fillStyle = lev.color;
+    ctx.font = '11px JetBrains Mono';
+    ctx.textAlign = 'right';
+    ctx.fillText(lev.solution, bx + bw - 16, lev.y + 30);
+
+    // Connecting arrow
+    if (i < levels.length - 1) {
+      const nextY = levels[i + 1].y;
+      ctx.strokeStyle = '#333';
+      ctx.beginPath();
+      ctx.moveTo(c.width / 2, lev.y + bh);
+      ctx.lineTo(c.width / 2, nextY);
+      ctx.stroke();
+      // Arrowhead
+      ctx.fillStyle = '#333';
+      ctx.beginPath();
+      ctx.moveTo(c.width / 2 - 4, nextY - 6);
+      ctx.lineTo(c.width / 2, nextY);
+      ctx.lineTo(c.width / 2 + 4, nextY - 6);
+      ctx.fill();
+    }
+  });
+
+  // Right side: the constant
+  ctx.fillStyle = '#f0c040';
+  ctx.font = 'bold 48px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.globalAlpha = 0.15;
+  ctx.fillText('φ', c.width - 60, 165);
+  ctx.globalAlpha = 1;
+
+  ctx.fillStyle = '#555';
+  ctx.font = '9px JetBrains Mono';
+  ctx.fillText('same constant', c.width - 60, 195);
+  ctx.fillText('same reason', c.width - 60, 208);
+})();
+</script>
+
+</body>
+</html>
