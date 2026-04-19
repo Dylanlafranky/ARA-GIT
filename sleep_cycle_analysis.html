@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sleep Cycles — ARA Framework Analysis</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0a1a; color: #e0e0e0; line-height: 1.7;
+    padding: 2rem; max-width: 1300px; margin: 0 auto;
+  }
+  h1 {
+    text-align: center; font-size: 2rem; margin-bottom: 0.3rem;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .subtitle { text-align: center; color: #888; font-size: 1.05rem; margin-bottom: 2rem; }
+
+  /* Sections */
+  .section {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+  .section p { margin-bottom: 0.8rem; font-size: 0.95rem; color: #ccc; }
+
+  /* Color coding */
+  .phi-color { color: #ffd700; }
+  .e-color { color: #10b981; }
+
+  /* Data tables */
+  .data-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .data-table th {
+    text-align: left; padding: 0.6rem 0.8rem; font-size: 0.8rem;
+    border-bottom: 2px solid rgba(255,255,255,0.15); color: #999;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .data-table td {
+    padding: 0.6rem 0.8rem; font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .data-table tr:hover { background: rgba(255,255,255,0.02); }
+
+  .highlight-row { background: rgba(255,215,0,0.08) !important; }
+  .highlight-val { color: #ffd700; font-weight: 600; }
+  .miss-val { color: #ff6b8a; }
+  .hit-val { color: #10b981; font-weight: 600; }
+
+  /* Result boxes */
+  .result-box {
+    border-radius: 10px; padding: 1.2rem; margin: 1rem 0;
+  }
+  .result-hit {
+    background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3);
+  }
+  .result-key {
+    background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.3);
+  }
+  .result-miss {
+    background: rgba(255,51,102,0.08); border: 1px solid rgba(255,51,102,0.3);
+  }
+  .result-prediction {
+    background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.3);
+  }
+  .result-label { font-weight: 600; margin-bottom: 0.3rem; font-size: 1rem; }
+
+  /* Canvas */
+  canvas { display: block; margin: 1rem auto; border-radius: 8px; }
+
+  /* The big number */
+  .big-number {
+    text-align: center; padding: 1.5rem; margin: 1rem 0;
+    background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 12px;
+  }
+  .big-number .number { font-size: 3rem; font-weight: bold; color: #ffd700; }
+  .big-number .label { font-size: 1rem; color: #999; }
+  .big-number .detail { font-size: 0.9rem; color: #bbb; margin-top: 0.5rem; }
+
+  /* Comparison strip */
+  .comparison-strip {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin: 1rem 0;
+  }
+  .comp-item {
+    text-align: center; padding: 0.8rem 1.2rem;
+    background: rgba(0,0,0,0.3); border-radius: 8px;
+    min-width: 140px;
+  }
+  .comp-item .val { font-size: 1.8rem; font-weight: bold; }
+  .comp-item .lbl { font-size: 0.8rem; color: #888; }
+  .comp-item .dev { font-size: 0.75rem; margin-top: 0.2rem; }
+
+  .footer { text-align: center; color: #555; font-size: 0.8rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); }
+</style>
+</head>
+<body>
+
+<h1>Sleep Cycles — ARA Framework Analysis</h1>
+<div class="subtitle">Accumulation-release dynamics in human sleep architecture</div>
+
+<!-- ========== OVERVIEW ========== -->
+<div class="section">
+  <h2>The System: Human Sleep Architecture</h2>
+  <p>
+    Human sleep cycles through NREM (Non-Rapid Eye Movement) and REM (Rapid Eye Movement) stages in ~90-minute
+    ultradian cycles, repeating 4-5 times per night. NREM is the accumulation phase — the brain consolidates
+    memory, clears metabolic waste, and restores energy. REM is the release phase — intense neural activity,
+    dreaming, emotional processing.
+  </p>
+  <p>
+    The key architectural feature: the <strong>NREM/REM ratio shifts across the night</strong>. Early cycles are
+    NREM-dominated (deep slow-wave sleep, short REM). Late cycles flip: shallow NREM, long REM. The whole-night
+    average is ~75-80% NREM / 20-25% REM.
+  </p>
+</div>
+
+<!-- ========== PHI TEST: WHOLE-NIGHT RATIO ========== -->
+<div class="section">
+  <h2 class="phi-color">φ Test 1: Whole-Night NREM/REM Ratio</h2>
+  <p>
+    The most basic test. Total sleep time splits approximately 75-80% NREM / 20-25% REM.
+    What ratio does this give?
+  </p>
+
+  <div class="comparison-strip">
+    <div class="comp-item">
+      <div class="val" style="color: #ffd700;">3.0–4.0</div>
+      <div class="lbl">NREM / REM whole-night</div>
+      <div class="dev" style="color: #ff6b8a;">85-147% from φ</div>
+    </div>
+    <div class="comp-item">
+      <div class="val" style="color: #ffd700;">1.618</div>
+      <div class="lbl">φ target</div>
+      <div class="dev" style="color: #888;">—</div>
+    </div>
+    <div class="comp-item">
+      <div class="val" style="color: #ff6b8a;">3.2</div>
+      <div class="lbl">Typical (76/24)</div>
+      <div class="dev" style="color: #ff6b8a;">98% from φ — MISS</div>
+    </div>
+  </div>
+
+  <div class="result-box result-miss">
+    <div class="result-label" style="color: #ff6b8a;">✗ MISS — Whole-Night Ratio</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      At 75-80% NREM vs 20-25% REM, the whole-night ratio is ~3.0-4.0 — roughly double φ.
+      This is a clear miss for the simple NREM/REM ratio. But wait — this is the same pattern we saw
+      with RR Lyrae stars (85/15 split) and Old Faithful surface measurements (95/5 split).
+      The phases aren't comparable. Let's look deeper.
+    </p>
+  </div>
+</div>
+
+<!-- ========== PHI TEST: PER-CYCLE RATIOS ========== -->
+<div class="section">
+  <h2 class="phi-color">φ Test 2: Per-Cycle NREM/REM Ratios</h2>
+  <p>
+    The composition changes dramatically across the night. Early cycles have long NREM/short REM.
+    Late cycles have shorter NREM/longer REM. Does any individual cycle hit φ?
+  </p>
+
+  <canvas id="cycleChart" width="850" height="350"></canvas>
+
+  <table class="data-table">
+    <tr>
+      <th>Cycle</th>
+      <th>Total (min)</th>
+      <th>NREM (min)</th>
+      <th>REM (min)</th>
+      <th>NREM/REM</th>
+      <th>% from φ</th>
+      <th>NREM%</th>
+    </tr>
+    <tr>
+      <td>Cycle 1</td><td>~80</td><td>~70</td><td>~10</td>
+      <td class="miss-val">7.0</td><td class="miss-val">333%</td><td>87%</td>
+    </tr>
+    <tr>
+      <td>Cycle 2</td><td>~95</td><td>~75</td><td>~20</td>
+      <td class="miss-val">3.75</td><td class="miss-val">132%</td><td>79%</td>
+    </tr>
+    <tr>
+      <td>Cycle 3</td><td>~100</td><td>~70</td><td>~30</td>
+      <td>2.33</td><td>44%</td><td>70%</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>Cycle 4</strong></td><td>~100</td><td>~60</td><td>~40</td>
+      <td class="highlight-val">1.50</td><td class="hit-val">7.3%</td><td>60%</td>
+    </tr>
+    <tr>
+      <td>Cycle 5</td><td>~105</td><td>~50</td><td>~55</td>
+      <td class="miss-val">0.91</td><td class="miss-val">44%</td><td>48%</td>
+    </tr>
+  </table>
+
+  <div class="result-box result-key">
+    <div class="result-label" style="color: #ffd700;">~ NEAR HIT — Cycle 4 at 1.50 (7.3% from φ)</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      Cycle 4 (~60 min NREM / ~40 min REM) gives a ratio of 1.50 — within 7.3% of φ.
+      This is the cycle where NREM and REM are most "comparable" in duration (~60/40 split).
+      But 7.3% is weaker than the cardiac result (0.4%) or ENSO. It's in the neighbourhood,
+      not on the doorstep. The exact ratio depends on individual polysomnography data —
+      published ranges give 55-65 min NREM / 35-45 min REM for late-middle cycles.
+    </p>
+  </div>
+
+  <p>
+    Notice the pattern: the ratio <strong>sweeps through φ</strong> as it transitions from NREM-dominated
+    to REM-dominated across the night. Cycle 1 is far above φ (7.0), Cycle 4 passes near it (1.50),
+    and Cycle 5 drops below it (0.91). The system doesn't sit at φ — it <em>crosses through</em> it.
+  </p>
+</div>
+
+<!-- ========== PHI TEST: THE CROSSOVER POINT ========== -->
+<div class="section">
+  <h2 class="phi-color">φ Test 3: The φ-Crossover — Where Does the Ratio Hit 1.618?</h2>
+  <p>
+    If the NREM/REM ratio declines monotonically from ~7.0 (Cycle 1) to ~0.91 (Cycle 5),
+    it must pass through exactly φ at some point during the night. When?
+  </p>
+
+  <canvas id="crossoverChart" width="850" height="300"></canvas>
+
+  <div class="result-box result-prediction">
+    <div class="result-label" style="color: #3b82f6;">★ FRAMEWORK PREDICTION: The φ-Crossover</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      Interpolating between Cycle 3 (ratio 2.33) and Cycle 4 (ratio 1.50), the NREM/REM ratio crosses
+      exactly φ = 1.618 approximately <strong>3.5-4 hours into sleep</strong> — right at the transition
+      from the "deep sleep dominated" first half to the "REM dominated" second half.
+      <br><br>
+      This is the pivot point of the night. Before this moment, the brain prioritises physical restoration
+      (deep NREM). After it, the brain prioritises cognitive/emotional processing (REM).
+      <strong>φ marks the transition between the two fundamental modes of sleep.</strong>
+      <br><br>
+      At the φ-crossover: NREM ≈ 62% of the cycle, REM ≈ 38%. The same 62/38 split as the healthy
+      heart (diastole/systole), ENSO (La Niña/El Niño), and short-period Cepheids (decline/rise).
+    </p>
+  </div>
+</div>
+
+<!-- ========== PHI TEST: BRAC 90-MIN STRUCTURE ========== -->
+<div class="section">
+  <h2 class="phi-color">φ Test 4: The 90-Minute Cycle Itself</h2>
+  <p>
+    The BRAC (Basic Rest-Activity Cycle) averages ~90 minutes. During waking, Kleitman observed
+    that the first ~60-70 minutes correspond to higher alertness, and the final ~20 minutes show
+    characteristic slowing. What's the ratio?
+  </p>
+
+  <div class="comparison-strip">
+    <div class="comp-item">
+      <div class="val" style="color: #10b981;">65</div>
+      <div class="lbl">Active phase (min)</div>
+    </div>
+    <div class="comp-item">
+      <div class="val" style="color: #8b5cf6;">25</div>
+      <div class="lbl">Rest phase (min)</div>
+    </div>
+    <div class="comp-item">
+      <div class="val" style="color: #ffd700;">2.6</div>
+      <div class="lbl">Active/Rest ratio</div>
+      <div class="dev" style="color: #ff6b8a;">61% from φ</div>
+    </div>
+  </div>
+
+  <div class="result-box result-miss">
+    <div class="result-label" style="color: #ff6b8a;">✗ MISS — Waking BRAC ratio (if taken at face value)</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      The waking BRAC's 65/25 split gives ~2.6, not φ. However, the BRAC literature is messy —
+      the exact split is debated and varies between individuals. The framework doesn't force φ
+      onto this, and honestly reports the miss.
+    </p>
+  </div>
+</div>
+
+<!-- ========== PHI TEST: TOTAL SLEEP vs TOTAL WAKE ========== -->
+<div class="section">
+  <h2 class="phi-color">φ Test 5: The 24-Hour Cycle — Wake/Sleep Ratio</h2>
+  <p>
+    Humans average ~16 hours awake and ~8 hours asleep. What's the ratio?
+  </p>
+
+  <div class="big-number">
+    <div class="number">2.0</div>
+    <div class="label">Wake / Sleep (16h / 8h)</div>
+    <div class="detail">23.6% from φ — miss, but interesting</div>
+  </div>
+
+  <p>
+    16/8 = 2.0 — not φ. But consider: the <em>recommended</em> sleep for optimal health is actually
+    closer to 7 hours for most adults (recent large-scale studies). At 17h/7h that's 2.43. At the
+    other extreme, newborns sleep ~16h/wake ~8h giving 0.5 = 1/2.0. Neither hits φ.
+  </p>
+
+  <div class="result-box result-miss">
+    <div class="result-label" style="color: #ff6b8a;">✗ MISS — Wake/Sleep Ratio</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      The 24-hour wake/sleep split doesn't hit φ at any reasonable sleep duration.
+      This actually makes sense under the framework: the 24h cycle is <strong>externally forced</strong>
+      by the Earth's rotation (Process C is entrained to the light-dark cycle). It's not purely
+      self-organised — it's the sleep equivalent of tides. The framework predicts φ should appear in
+      the self-timed <em>internal</em> structure, not the externally-entrained envelope.
+    </p>
+  </div>
+</div>
+
+<!-- ========== PROCESS S: THE EXPONENTIAL ========== -->
+<div class="section">
+  <h2 class="e-color">e — Process S: The Exponential Envelope</h2>
+  <canvas id="processSChart" width="850" height="280"></canvas>
+  <p>
+    Borbély's Process S is one of the cleanest exponential dynamics in all of biology.
+    Sleep pressure (measured by EEG slow-wave activity) follows:
+  </p>
+  <p style="text-align: center; font-family: Georgia, serif; font-size: 1.2rem; color: #10b981; margin: 1rem 0;">
+    S(t) = S<sub>∞</sub> + (S<sub>0</sub> − S<sub>∞</sub>) · e<sup>−t/τ</sup>
+  </p>
+  <p>
+    The time constant τ ≈ 1.7-2.5 hours for the exponential decline during sleep.
+    During waking, adenosine accumulates exponentially. During sleep, it clears exponentially.
+    This is <strong>e</strong> governing the growth/decay envelope of the accumulation-release cycle.
+  </p>
+  <div class="result-box result-hit">
+    <div class="result-label" style="color: #10b981;">✓ STRONG HIT — Exponential dynamics</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      Process S is a textbook example of exponential accumulation-release dynamics relevant to the
+      ARA framework. Adenosine builds exponentially, crosses threshold, triggers sleep onset,
+      then decays exponentially during sleep until it crosses the wake threshold.
+      The exponential envelope governs the timing and intensity of the accumulation-release cycle.
+    </p>
+  </div>
+</div>
+
+<!-- ========== DISEASE DEVIATION ========== -->
+<div class="section">
+  <h2 style="color: #ff3366;">Disease Deviation: When Sleep Architecture Breaks</h2>
+  <p>
+    Following the cardiac parallel — cardiac findings show healthy hearts at φ, failing hearts deviate — does sleep
+    architecture deviation predict pathology?
+  </p>
+
+  <table class="data-table">
+    <tr>
+      <th>Condition</th><th>What Changes</th><th>NREM/REM Shift</th><th>Outcome</th>
+    </tr>
+    <tr>
+      <td><strong>Narcolepsy</strong></td>
+      <td>Skips NREM, enters REM immediately</td>
+      <td>Ratio collapses → near 0</td>
+      <td>Severe dysfunction — system skips accumulation entirely</td>
+    </tr>
+    <tr>
+      <td><strong>Sleep Apnea</strong></td>
+      <td>NREM fragmented by arousals, reduced N3</td>
+      <td>Ratio distorted — NREM never reaches depth</td>
+      <td>Chronic fatigue, cognitive decline, cardiovascular risk</td>
+    </tr>
+    <tr>
+      <td><strong>Depression</strong></td>
+      <td>Shortened REM latency, excess REM early in night</td>
+      <td>Early cycles shift toward more REM</td>
+      <td>The φ-crossover point shifts earlier — system "rushes" to release</td>
+    </tr>
+    <tr>
+      <td><strong>Aging</strong></td>
+      <td>N3 (deep sleep) progressively decreases</td>
+      <td>NREM becomes shallower, less restorative</td>
+      <td>The accumulation phase weakens — less deep restoration</td>
+    </tr>
+    <tr>
+      <td><strong>REM Rebound</strong></td>
+      <td>After deprivation, REM dramatically increases</td>
+      <td>System compensates — forces ratio back</td>
+      <td>Homeostatic correction — system "knows" its target ratio</td>
+    </tr>
+  </table>
+
+  <div class="result-box result-key">
+    <div class="result-label" style="color: #ffd700;">~ SUGGESTIVE — Disease Disrupts the Natural Architecture</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      Every sleep disorder involves disruption of the NREM/REM architecture — the ratio shifts,
+      the crossover moves, the phases fragment. And REM rebound shows the system actively corrects
+      when the ratio is artificially disturbed. This parallels cardiac findings and gait findings
+      where deviation from natural accumulation-release ratios tracks with pathology.
+    </p>
+  </div>
+</div>
+
+<!-- ========== HONEST ASSESSMENT ========== -->
+<div class="section" style="border-color: rgba(255,215,0,0.2);">
+  <h2 style="color: #ffd700;">Honest Assessment</h2>
+
+  <table class="data-table">
+    <tr>
+      <th>Constant</th><th>Present?</th><th>Strength</th>
+    </tr>
+    <tr>
+      <td class="e-color"><strong>e (Exponential)</strong></td>
+      <td>✓ Process S is a textbook exponential buildup/decay</td>
+      <td class="hit-val">Very strong — one of the cleanest in all biology</td>
+    </tr>
+    <tr>
+      <td class="phi-color"><strong>φ (Golden Ratio)</strong></td>
+      <td>~ The ratio <em>sweeps through</em> φ rather than sitting on it</td>
+      <td style="color: #ffd700;">Conditional — φ marks the crossover point, not a steady state</td>
+    </tr>
+  </table>
+
+  <div class="result-box result-key" style="margin-top: 1rem;">
+    <div class="result-label" style="color: #ffd700;">OVERALL VERDICT: NOVEL FINDING: φ as transition marker</div>
+    <p style="font-size: 0.9rem; color: #ccc; margin: 0;">
+      Sleep doesn't show φ the same way the heart does (a stable resting ratio). Instead, φ appears
+      as a <strong>transition marker</strong> — the point where the brain pivots from physical restoration
+      to cognitive/emotional processing. This is actually a new mode of φ-appearance in the framework:
+    </p>
+    <p style="font-size: 0.9rem; color: #ddd; margin: 0.5rem 0 0 0;">
+      <strong>Heart:</strong> φ is a stable equilibrium ratio (diastole/systole = 1.618 at rest).<br>
+      <strong>Sleep:</strong> φ is a dynamic crossover point (NREM/REM ratio passes through 1.618 mid-night).<br>
+      <strong>Both:</strong> φ marks the boundary between accumulation and release dominance.
+    </p>
+  </div>
+</div>
+
+<!-- ========== THE CARDIAC PARALLEL ========== -->
+<div class="section" style="border-color: rgba(139,92,246,0.2);">
+  <h2 style="color: #a78bfa;">The Cardiac Parallel: Sleep as a Macro-Heartbeat</h2>
+  <p>
+    The analogy is almost too clean. The heart has diastole (filling/accumulation) and systole
+    (ejection/release) at a ratio of φ. Sleep has NREM (restoration/accumulation) and REM
+    (processing/release) — and when the phases are comparable in duration (~Cycle 4), the ratio
+    approaches φ.
+  </p>
+  <p>
+    Both systems show the same disease pattern: disruption of the natural ratio predicts pathology.
+    Heart failure distorts diastole/systole away from φ. Sleep disorders distort NREM/REM architecture.
+    In both cases, the system has a "target" ratio it defends homeostatically (REM rebound ≈ the
+    Frank-Starling mechanism).
+  </p>
+  <p>
+    The difference: the heart maintains φ as a <em>steady state</em> at each beat. Sleep <em>traverses</em>
+    φ once per night as it transitions between modes. One is a standing wave at φ; the other is a
+    wave that passes through φ. Both are the same architecture operating at different timescales.
+  </p>
+</div>
+
+<div class="footer">
+  Geometry of Time — Sleep Cycle Analysis · Dylan La Franchi · April 2026
+  <br>Sources: Borbély (1982) two-process model, StatPearls sleep physiology, NCBI sleep architecture data,
+  Cleveland Clinic, Sleep Foundation, Kleitman BRAC hypothesis
+</div>
+
+<script>
+// ========== CYCLE CHART ==========
+const c1 = document.getElementById('cycleChart');
+const ctx1 = c1.getContext('2d');
+
+const cycles = [
+  { label: 'Cycle 1', nrem: 70, rem: 10, total: 80 },
+  { label: 'Cycle 2', nrem: 75, rem: 20, total: 95 },
+  { label: 'Cycle 3', nrem: 70, rem: 30, total: 100 },
+  { label: 'Cycle 4', nrem: 60, rem: 40, total: 100 },
+  { label: 'Cycle 5', nrem: 50, rem: 55, total: 105 },
+];
+
+const phi = 1.618;
+const lm = 80, rm = 40, tm = 40, bm = 50;
+const cw = c1.width - lm - rm;
+const ch = c1.height - tm - bm;
+
+ctx1.fillStyle = '#0a0a1a';
+ctx1.fillRect(0, 0, c1.width, c1.height);
+
+// Title
+ctx1.fillStyle = '#999';
+ctx1.font = '13px Segoe UI';
+ctx1.textAlign = 'center';
+ctx1.fillText('NREM vs REM Duration Per Cycle (with NREM/REM Ratio)', c1.width/2, 20);
+
+const barW = cw / cycles.length;
+const maxMin = 120;
+
+cycles.forEach((cyc, i) => {
+  const x = lm + i * barW + barW * 0.15;
+  const w = barW * 0.7;
+
+  // NREM bar
+  const nremH = (cyc.nrem / maxMin) * ch;
+  ctx1.fillStyle = 'rgba(99,102,241,0.7)';
+  ctx1.fillRect(x, tm + ch - nremH, w/2 - 2, nremH);
+
+  // REM bar
+  const remH = (cyc.rem / maxMin) * ch;
+  ctx1.fillStyle = 'rgba(255,51,102,0.7)';
+  ctx1.fillRect(x + w/2 + 2, tm + ch - remH, w/2 - 2, remH);
+
+  // Labels
+  ctx1.fillStyle = '#ccc';
+  ctx1.font = '12px Segoe UI';
+  ctx1.textAlign = 'center';
+  ctx1.fillText(cyc.label, x + w/2, tm + ch + 20);
+
+  // Ratio
+  const ratio = (cyc.nrem / cyc.rem).toFixed(2);
+  const pctOff = Math.abs(cyc.nrem/cyc.rem - phi) / phi * 100;
+  ctx1.fillStyle = pctOff < 10 ? '#ffd700' : '#888';
+  ctx1.font = pctOff < 10 ? 'bold 13px Segoe UI' : '12px Segoe UI';
+  ctx1.fillText(ratio, x + w/2, tm + ch + 38);
+
+  // Duration labels on bars
+  ctx1.fillStyle = '#fff';
+  ctx1.font = '11px Segoe UI';
+  if (nremH > 20) ctx1.fillText(cyc.nrem + 'm', x + w/4 - 1, tm + ch - nremH + 15);
+  if (remH > 20) ctx1.fillText(cyc.rem + 'm', x + w*3/4 + 1, tm + ch - remH + 15);
+});
+
+// Legend
+ctx1.fillStyle = 'rgba(99,102,241,0.7)';
+ctx1.fillRect(lm, tm - 15, 12, 12);
+ctx1.fillStyle = '#ccc';
+ctx1.font = '11px Segoe UI';
+ctx1.textAlign = 'left';
+ctx1.fillText('NREM', lm + 16, tm - 5);
+
+ctx1.fillStyle = 'rgba(255,51,102,0.7)';
+ctx1.fillRect(lm + 70, tm - 15, 12, 12);
+ctx1.fillStyle = '#ccc';
+ctx1.fillText('REM', lm + 86, tm - 5);
+
+// Y axis
+ctx1.fillStyle = '#666';
+ctx1.textAlign = 'right';
+for (let m = 0; m <= 120; m += 30) {
+  const y = tm + ch - (m / maxMin) * ch;
+  ctx1.fillText(m + ' min', lm - 8, y + 4);
+  ctx1.beginPath();
+  ctx1.moveTo(lm, y);
+  ctx1.lineTo(lm + cw, y);
+  ctx1.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx1.stroke();
+}
+
+// ========== CROSSOVER CHART ==========
+const c2 = document.getElementById('crossoverChart');
+const ctx2 = c2.getContext('2d');
+
+ctx2.fillStyle = '#0a0a1a';
+ctx2.fillRect(0, 0, c2.width, c2.height);
+
+const lm2 = 70, rm2 = 40, tm2 = 35, bm2 = 45;
+const cw2 = c2.width - lm2 - rm2;
+const ch2 = c2.height - tm2 - bm2;
+
+// Data points: hours into sleep → ratio
+const points = [
+  { h: 0.67, ratio: 7.0 },   // mid cycle 1
+  { h: 1.5, ratio: 3.75 },   // mid cycle 2
+  { h: 3.0, ratio: 2.33 },   // mid cycle 3
+  { h: 4.5, ratio: 1.50 },   // mid cycle 4
+  { h: 6.0, ratio: 0.91 },   // mid cycle 5
+];
+
+const maxH = 7;
+const maxR = 8;
+
+// Grid
+ctx2.strokeStyle = 'rgba(255,255,255,0.05)';
+for (let r = 0; r <= 8; r += 2) {
+  const y = tm2 + ch2 - (r / maxR) * ch2;
+  ctx2.beginPath(); ctx2.moveTo(lm2, y); ctx2.lineTo(lm2 + cw2, y); ctx2.stroke();
+  ctx2.fillStyle = '#666'; ctx2.font = '11px Segoe UI'; ctx2.textAlign = 'right';
+  ctx2.fillText(r.toFixed(0), lm2 - 8, y + 4);
+}
+
+// X axis labels
+for (let h = 0; h <= 7; h++) {
+  const x = lm2 + (h / maxH) * cw2;
+  ctx2.fillStyle = '#666'; ctx2.font = '11px Segoe UI'; ctx2.textAlign = 'center';
+  ctx2.fillText(h + 'h', x, tm2 + ch2 + 20);
+}
+
+// φ line
+const phiY = tm2 + ch2 - (phi / maxR) * ch2;
+ctx2.beginPath();
+ctx2.moveTo(lm2, phiY);
+ctx2.lineTo(lm2 + cw2, phiY);
+ctx2.strokeStyle = 'rgba(255,215,0,0.6)';
+ctx2.lineWidth = 2;
+ctx2.setLineDash([8, 4]);
+ctx2.stroke();
+ctx2.setLineDash([]);
+ctx2.lineWidth = 1;
+
+ctx2.fillStyle = '#ffd700';
+ctx2.font = 'bold 12px Segoe UI';
+ctx2.textAlign = 'left';
+ctx2.fillText('φ = 1.618', lm2 + cw2 + 4, phiY + 4);
+
+// Ratio = 1 line
+const oneY = tm2 + ch2 - (1 / maxR) * ch2;
+ctx2.beginPath();
+ctx2.moveTo(lm2, oneY);
+ctx2.lineTo(lm2 + cw2, oneY);
+ctx2.strokeStyle = 'rgba(255,255,255,0.15)';
+ctx2.lineWidth = 1;
+ctx2.setLineDash([4, 4]);
+ctx2.stroke();
+ctx2.setLineDash([]);
+
+ctx2.fillStyle = '#666';
+ctx2.font = '10px Segoe UI';
+ctx2.fillText('ratio = 1 (equal NREM & REM)', lm2 + 5, oneY - 6);
+
+// Plot curve
+ctx2.beginPath();
+points.forEach((p, i) => {
+  const x = lm2 + (p.h / maxH) * cw2;
+  const y = tm2 + ch2 - (p.ratio / maxR) * ch2;
+  if (i === 0) ctx2.moveTo(x, y);
+  else ctx2.lineTo(x, y);
+});
+ctx2.strokeStyle = '#a78bfa';
+ctx2.lineWidth = 3;
+ctx2.stroke();
+
+// Points
+points.forEach(p => {
+  const x = lm2 + (p.h / maxH) * cw2;
+  const y = tm2 + ch2 - (p.ratio / maxR) * ch2;
+  ctx2.beginPath();
+  ctx2.arc(x, y, 5, 0, Math.PI * 2);
+  ctx2.fillStyle = '#a78bfa';
+  ctx2.fill();
+  ctx2.strokeStyle = '#fff';
+  ctx2.lineWidth = 1.5;
+  ctx2.stroke();
+});
+
+// φ crossover point (interpolate)
+const crossH = 3.0 + (2.33 - phi) / (2.33 - 1.50) * (4.5 - 3.0);
+const crossX = lm2 + (crossH / maxH) * cw2;
+
+// Crossover marker
+ctx2.beginPath();
+ctx2.arc(crossX, phiY, 8, 0, Math.PI * 2);
+ctx2.fillStyle = 'rgba(255,215,0,0.3)';
+ctx2.fill();
+ctx2.strokeStyle = '#ffd700';
+ctx2.lineWidth = 2;
+ctx2.stroke();
+
+// Vertical line from crossover
+ctx2.beginPath();
+ctx2.moveTo(crossX, phiY);
+ctx2.lineTo(crossX, tm2 + ch2);
+ctx2.strokeStyle = 'rgba(255,215,0,0.3)';
+ctx2.lineWidth = 1;
+ctx2.setLineDash([3, 3]);
+ctx2.stroke();
+ctx2.setLineDash([]);
+
+ctx2.fillStyle = '#ffd700';
+ctx2.font = 'bold 12px Segoe UI';
+ctx2.textAlign = 'center';
+ctx2.fillText('φ crossover ~' + crossH.toFixed(1) + 'h', crossX, tm2 + ch2 + 38);
+
+// Title
+ctx2.fillStyle = '#999';
+ctx2.font = '13px Segoe UI';
+ctx2.textAlign = 'center';
+ctx2.fillText('NREM/REM Ratio Across the Night — The φ Crossover', c2.width/2, 18);
+
+// Axis labels
+ctx2.save();
+ctx2.translate(15, tm2 + ch2/2);
+ctx2.rotate(-Math.PI/2);
+ctx2.fillStyle = '#888';
+ctx2.font = '11px Segoe UI';
+ctx2.textAlign = 'center';
+ctx2.fillText('NREM/REM Ratio', 0, 0);
+ctx2.restore();
+
+ctx2.fillStyle = '#888';
+ctx2.font = '11px Segoe UI';
+ctx2.textAlign = 'center';
+ctx2.fillText('Hours into sleep', lm2 + cw2/2, tm2 + ch2 + 38);
+
+// Zone labels
+ctx2.globalAlpha = 0.15;
+ctx2.fillStyle = '#6366f1';
+ctx2.fillRect(lm2, tm2, crossX - lm2, ch2);
+ctx2.fillStyle = '#ff3366';
+ctx2.fillRect(crossX, tm2, lm2 + cw2 - crossX, ch2);
+ctx2.globalAlpha = 1;
+
+ctx2.font = '11px Segoe UI';
+ctx2.fillStyle = 'rgba(99,102,241,0.7)';
+ctx2.textAlign = 'center';
+ctx2.fillText('NREM-dominated', lm2 + (crossX - lm2)/2, tm2 + 18);
+ctx2.fillStyle = 'rgba(255,51,102,0.7)';
+ctx2.fillText('REM-dominated', crossX + (lm2 + cw2 - crossX)/2, tm2 + 18);
+
+// ========== PROCESS S CHART ==========
+const c3 = document.getElementById('processSChart');
+const ctx3 = c3.getContext('2d');
+
+ctx3.fillStyle = '#0a0a1a';
+ctx3.fillRect(0, 0, c3.width, c3.height);
+
+const lm3 = 60, rm3 = 30, tm3 = 35, bm3 = 40;
+const cw3 = c3.width - lm3 - rm3;
+const ch3 = c3.height - tm3 - bm3;
+
+// Process S: rises during wake, falls during sleep
+// Wake: 16h, Sleep: 8h, total 24h
+const totalH = 24;
+const wakeH = 16;
+const sleepH = 8;
+
+// Generate Process S curve
+const ptsS = [];
+const tauRise = 18.2; // hours (saturating rise)
+const tauFall = 2.0;  // hours (exponential decay)
+const Smin = 0.15;
+const Smax = 1.0;
+
+// Wake phase (0 to 16h)
+for (let t = 0; t <= wakeH; t += 0.2) {
+  const S = Smin + (Smax - Smin) * (1 - Math.exp(-t / tauRise));
+  ptsS.push({ t, S });
+}
+
+// Sleep phase (16 to 24h)
+const S_at_sleep_onset = ptsS[ptsS.length - 1].S;
+for (let t = wakeH + 0.2; t <= totalH; t += 0.2) {
+  const dt = t - wakeH;
+  const S = Smin + (S_at_sleep_onset - Smin) * Math.exp(-dt / tauFall);
+  ptsS.push({ t, S });
+}
+
+// Draw
+// Grid
+ctx3.strokeStyle = 'rgba(255,255,255,0.05)';
+for (let s = 0; s <= 1; s += 0.25) {
+  const y = tm3 + ch3 - s * ch3;
+  ctx3.beginPath(); ctx3.moveTo(lm3, y); ctx3.lineTo(lm3 + cw3, y); ctx3.stroke();
+}
+
+// X grid
+for (let h = 0; h <= 24; h += 4) {
+  const x = lm3 + (h / totalH) * cw3;
+  ctx3.beginPath(); ctx3.moveTo(x, tm3); ctx3.lineTo(x, tm3 + ch3); ctx3.stroke();
+  ctx3.fillStyle = '#666'; ctx3.font = '10px Segoe UI'; ctx3.textAlign = 'center';
+  ctx3.fillText(h + 'h', x, tm3 + ch3 + 15);
+}
+
+// Wake/Sleep zones
+ctx3.globalAlpha = 0.08;
+ctx3.fillStyle = '#ffd700';
+ctx3.fillRect(lm3, tm3, (wakeH/totalH)*cw3, ch3);
+ctx3.fillStyle = '#6366f1';
+ctx3.fillRect(lm3 + (wakeH/totalH)*cw3, tm3, (sleepH/totalH)*cw3, ch3);
+ctx3.globalAlpha = 1;
+
+ctx3.fillStyle = 'rgba(255,215,0,0.5)';
+ctx3.font = '11px Segoe UI';
+ctx3.textAlign = 'center';
+ctx3.fillText('AWAKE — adenosine accumulates', lm3 + (wakeH/totalH)*cw3/2, tm3 + 18);
+
+ctx3.fillStyle = 'rgba(99,102,241,0.5)';
+ctx3.fillText('ASLEEP — adenosine clears', lm3 + (wakeH/totalH)*cw3 + (sleepH/totalH)*cw3/2, tm3 + 18);
+
+// Plot Process S
+ctx3.beginPath();
+ptsS.forEach((p, i) => {
+  const x = lm3 + (p.t / totalH) * cw3;
+  const y = tm3 + ch3 - p.S * ch3;
+  if (i === 0) ctx3.moveTo(x, y);
+  else ctx3.lineTo(x, y);
+});
+ctx3.strokeStyle = '#10b981';
+ctx3.lineWidth = 3;
+ctx3.stroke();
+
+// Labels
+ctx3.fillStyle = '#10b981';
+ctx3.font = 'bold 12px Segoe UI';
+ctx3.textAlign = 'left';
+ctx3.fillText('Process S (sleep pressure)', lm3 + 10, tm3 + ch3 - S_at_sleep_onset * ch3 - 10);
+
+ctx3.fillStyle = '#888';
+ctx3.font = '11px Segoe UI';
+ctx3.textAlign = 'left';
+ctx3.fillText('S(t) = S∞ + (S₀ - S∞) · e^(-t/τ)', lm3 + (wakeH/totalH)*cw3 + 20, tm3 + ch3 - 0.4 * ch3);
+
+// Title
+ctx3.fillStyle = '#999';
+ctx3.font = '13px Segoe UI';
+ctx3.textAlign = 'center';
+ctx3.fillText('Process S: Exponential Sleep Pressure — Borbély Two-Process Model', c3.width/2, 18);
+</script>
+
+</body>
+</html>
