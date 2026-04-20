@@ -667,7 +667,68 @@
 <hr class="section-divider">
 
 <div class="section">
-  <h2>9 — The Hierarchy of Packing</h2>
+  <h2>9 — The Shape of a Cycle in Time: The Hourglass</h2>
+
+  <p class="body-text">
+    If time has geometry, what shape does a cycle make as it pushes through it?
+  </p>
+  <p class="body-text">
+    Every accumulation-release cycle has a circular, oscillatory base — energy swelling and
+    contracting. Projected forward through the time axis, this gives each cycle a shape: a
+    bulge where energy fills (accumulation), a pinch where it drains (release), then the next
+    bulge begins. The result is an hourglass — a repeating waist-and-bulge form, tiled along
+    the timeline.
+  </p>
+  <p class="body-text">
+    The ARA ratio determines the <em>shape</em> of the hourglass.
+  </p>
+
+  <canvas id="hourglassCanvas" width="800" height="520"></canvas>
+
+  <div class="callout purple">
+    <strong>ARA = 0 (Black hole):</strong> No waist. The hourglass is just a sphere that
+    never pinches, never releases. Energy accumulates and the shape expands without bound
+    until it collapses under its own density. There is no oscillation, no tiling, no geometry.
+    Just a single, terminal bulge.
+  </div>
+
+  <div class="callout">
+    <strong>ARA = 1.0 (Symmetric):</strong> A perfectly symmetric hourglass. The top and
+    bottom bulges are identical. Every waist lines up with every other waist. The pinch points
+    of Cycle 1 align with the pinch points of Cycle 2, and 3, and 10. Energy stacks at the
+    waists. The shape resonates with itself.
+  </div>
+
+  <div class="callout green">
+    <strong>ARA = φ (1.618 — Sustained):</strong> An asymmetric hourglass — the accumulation
+    bulge is φ× the release bulge. The waist is wide enough to release without choking, narrow
+    enough to actually drain, and <em>offset</em> enough that successive waists never line up.
+    This is the shape that tiles infinitely along the time axis without interfering with itself.
+    The golden hourglass.
+  </div>
+
+  <div class="callout red">
+    <strong>ARA = 2.0 (Cepheid):</strong> An extremely lopsided hourglass. The release
+    phase is so narrow that the waist becomes a chokepoint. Successive hourglasses crush into
+    each other at the pinch — the narrow release end of one cycle aligns with the narrow
+    release end of every second cycle. The shape is collapsing inward at the waists. The
+    system is shaking itself apart, shedding its outer layers. The hourglass is breaking.
+  </div>
+
+  <div class="callout blue" style="margin-top: 24px;">
+    <strong>The geometry of persistence:</strong> Every self-organising system traces an
+    hourglass in temporal space. The shape of that hourglass — set by its ARA ratio —
+    determines whether the system can tile infinitely (φ), resonates with itself (integer
+    ratios), or collapses entirely (0). Time is not a featureless line. It is a dimension
+    with capacity, and the hourglass is the shape that energy makes when it cycles through it.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>10 — The Hierarchy of Packing</h2>
 
   <p class="body-text">
     If time is a packing dimension, it joins a hierarchy of dimensions where φ solves the
@@ -690,7 +751,7 @@
 <hr class="section-divider">
 
 <div class="section">
-  <h2>10 — Honest Caveats</h2>
+  <h2>11 — Honest Caveats</h2>
 
   <div class="callout red">
     <strong>What this is:</strong> A theoretical extrapolation. The empirical ARA data (hearts,
@@ -1211,6 +1272,181 @@
   ctx.textAlign = 'center';
   ctx.fillText('System persistence / stability', 0, 0);
   ctx.restore();
+})();
+
+// ========== HOURGLASS VISUALIZATION ==========
+(function() {
+  const c = document.getElementById('hourglassCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('THE SHAPE OF A CYCLE IN TIME — HOURGLASS AT DIFFERENT ARA VALUES', c.width / 2, 20);
+
+  function drawHourglassRow(yCenter, ara, label, sublabel, color, cycles, opts) {
+    opts = opts || {};
+    const rowH = 100;
+    const startX = 100;
+    const totalW = 620;
+    const cycleW = totalW / cycles;
+
+    // Label
+    ctx.fillStyle = color;
+    ctx.font = 'bold 12px JetBrains Mono';
+    ctx.textAlign = 'left';
+    ctx.fillText(label, 10, yCenter - 24);
+    ctx.fillStyle = '#666';
+    ctx.font = '10px JetBrains Mono';
+    ctx.fillText(sublabel, 10, yCenter - 8);
+
+    // Per-ARA shape parameters — THIS is what creates visual distinction
+    let accBulgeR, relBulgeR, waistR;
+    const maxR = rowH * 0.45;
+
+    if (ara === 0) {
+      // Blob — no waist
+      accBulgeR = maxR; relBulgeR = maxR; waistR = maxR * 0.85;
+    } else if (ara === 1.0) {
+      // Symmetric: equal bulges, moderate waist
+      accBulgeR = maxR * 0.75;
+      relBulgeR = maxR * 0.75;
+      waistR = maxR * 0.18;
+    } else if (ara <= 1.7) {
+      // φ region: large acc bulge, smaller release, gentle waist
+      accBulgeR = maxR * 0.9;
+      relBulgeR = maxR * 0.45;
+      waistR = maxR * 0.22;
+    } else {
+      // 2.0: huge acc bulge, tiny pinched release
+      accBulgeR = maxR * 0.95;
+      relBulgeR = maxR * 0.18;
+      waistR = maxR * 0.06;
+    }
+
+    for (let i = 0; i < cycles; i++) {
+      const cx = startX + i * cycleW;
+      const accFrac = ara === 0 ? 1.0 : ara / (1 + ara);
+      const relFrac = 1 - accFrac;
+
+      if (ara === 0) {
+        // Growing blobs that merge — no waist, no oscillation
+        const r = maxR * (0.7 + i * 0.12);
+        const clampR = Math.min(r, maxR);
+        ctx.beginPath();
+        ctx.ellipse(cx + cycleW / 2, yCenter, cycleW / 2 + 8, clampR, 0, 0, Math.PI * 2);
+        ctx.fillStyle = color + '10';
+        ctx.fill();
+        ctx.strokeStyle = color + '55';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      } else {
+        const pts = 80;
+        const topPts = [];
+        const botPts = [];
+
+        for (let p = 0; p <= pts; p++) {
+          const t = p / pts;
+          let radius;
+
+          if (t < accFrac) {
+            // Accumulation: swell from waist to accBulgeR and back
+            const at = t / accFrac;
+            radius = waistR + (accBulgeR - waistR) * Math.sin(at * Math.PI);
+          } else {
+            // Release: smaller bulge from waist to relBulgeR and back
+            const rt = (t - accFrac) / relFrac;
+            radius = waistR + (relBulgeR - waistR) * Math.sin(rt * Math.PI);
+          }
+
+          const x = cx + t * cycleW;
+          topPts.push({ x, y: yCenter - radius });
+          botPts.push({ x, y: yCenter + radius });
+        }
+
+        // Fill
+        ctx.beginPath();
+        ctx.moveTo(topPts[0].x, topPts[0].y);
+        topPts.forEach(p => ctx.lineTo(p.x, p.y));
+        for (let p = botPts.length - 1; p >= 0; p--) ctx.lineTo(botPts[p].x, botPts[p].y);
+        ctx.closePath();
+        ctx.fillStyle = color + '12';
+        ctx.fill();
+
+        // Outline top
+        ctx.beginPath();
+        topPts.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+        ctx.strokeStyle = color + '88';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Outline bottom
+        ctx.beginPath();
+        botPts.forEach((p, idx) => idx === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+        ctx.stroke();
+
+        // Phase boundary marker
+        const bx = cx + accFrac * cycleW;
+        ctx.strokeStyle = color + '33';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        ctx.moveTo(bx, yCenter - waistR - 3);
+        ctx.lineTo(bx, yCenter + waistR + 3);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
+
+    // For ARA=1.0 and 2.0, draw resonance alignment lines showing waists lining up
+    if (opts.showResonance) {
+      for (let i = 0; i < cycles; i++) {
+        const cx = startX + i * cycleW;
+        // Waist position (start of each cycle = end of previous release)
+        ctx.strokeStyle = '#ff6b6b44';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        ctx.moveTo(cx, yCenter - maxR * 0.55);
+        ctx.lineTo(cx, yCenter + maxR * 0.55);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+      // "stacking" label
+      ctx.fillStyle = '#ff6b6b88';
+      ctx.font = '9px JetBrains Mono';
+      ctx.textAlign = 'center';
+      ctx.fillText('waists align → energy stacks', startX + totalW / 2, yCenter + maxR * 0.55 + 12);
+    }
+
+    if (opts.showOffset) {
+      ctx.fillStyle = '#40c05788';
+      ctx.font = '9px JetBrains Mono';
+      ctx.textAlign = 'center';
+      ctx.fillText('waists offset → no energy stacking → persists forever', startX + totalW / 2, yCenter + maxR * 0.55 + 12);
+    }
+
+    // Time arrow
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(startX, yCenter + rowH * 0.53);
+    ctx.lineTo(startX + totalW, yCenter + rowH * 0.53);
+    ctx.stroke();
+    ctx.fillStyle = '#333';
+    ctx.beginPath();
+    ctx.moveTo(startX + totalW - 6, yCenter + rowH * 0.53 - 4);
+    ctx.lineTo(startX + totalW, yCenter + rowH * 0.53);
+    ctx.lineTo(startX + totalW - 6, yCenter + rowH * 0.53 + 4);
+    ctx.fill();
+  }
+
+  drawHourglassRow(85, 0, 'ARA = 0', 'No release — no waist', '#ff6b6b', 3);
+  drawHourglassRow(205, 1.0, 'ARA = 1.0', 'Symmetric — waists align', '#aaa', 5, { showResonance: true });
+  drawHourglassRow(330, 1.618, 'ARA = φ', 'Asymmetric — waists never align', '#40c057', 5, { showOffset: true });
+  drawHourglassRow(455, 2.0, 'ARA = 2.0', 'Extreme — tiny pinched release', '#ff6b6b', 5, { showResonance: true });
 })();
 
 // ========== HIERARCHY VISUALIZATION ==========
