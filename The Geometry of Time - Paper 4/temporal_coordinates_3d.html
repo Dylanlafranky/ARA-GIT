@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Coordinates 3D — Shape, Scale, Weight</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif; overflow: hidden; }
+  #ui {
+    position: absolute; top: 0; left: 0; right: 0; padding: 16px 24px; z-index: 10;
+    pointer-events: none;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: #fff; margin-bottom: 2px; }
+  .subtitle { font-size: 12px; color: #c0c0c0; margin-bottom: 10px; }
+  .legend {
+    display: flex; gap: 12px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; pointer-events: auto;
+  }
+  .legend-item { display: flex; align-items: center; gap: 4px; cursor: pointer; transition: opacity 0.2s; }
+  .legend-item.dimmed { opacity: 0.25; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .controls {
+    position: absolute; bottom: 16px; left: 24px; z-index: 10;
+    display: flex; gap: 10px; align-items: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #c0c0c0;
+  }
+  .controls button {
+    background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px;
+    padding: 4px 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; cursor: pointer;
+  }
+  .controls button:hover { background: #2a2a3e; }
+  .controls button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+  #tooltip {
+    position: absolute; background: rgba(10,10,20,0.95); border: 1px solid #444;
+    border-radius: 6px; padding: 8px 12px; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; pointer-events: none; display: none; z-index: 20;
+    max-width: 300px; line-height: 1.6;
+  }
+  #tooltip .name { color: #fff; font-weight: bold; font-size: 12px; }
+  #tooltip .sys { color: #c0c0c0; font-size: 10px; }
+  #tooltip .val { color: #f0c040; }
+  .axes-label {
+    position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    color: #999; pointer-events: none; z-index: 5;
+  }
+  .footer {
+    position: absolute; bottom: 16px; right: 24px; font-size: 10px; color: #888;
+    font-family: 'JetBrains Mono', monospace; z-index: 10;
+  }
+</style>
+</head>
+<body>
+
+<div id="ui">
+  <h1>Temporal Coordinates — 3D (18 Systems)</h1>
+  <p class="subtitle">X: Cycle Period (scale) &bull; Y: ARA Ratio (shape) &bull; Z: Action/&pi; (weight) &bull; 8 original + 10 blind-test systems &bull; Drag to rotate, scroll to zoom</p>
+  <div class="legend" id="legend"></div>
+</div>
+
+<div class="controls">
+  <button id="btnCouplings" class="active">Couplings</button>
+  <button id="btnLabels" class="active">Labels</button>
+  <button id="btnGrid" class="active">Grid</button>
+  <button id="btnSpin">Auto-spin</button>
+  <span style="color:#999">| Click legend to toggle, hover to isolate</span>
+</div>
+
+<div id="tooltip"></div>
+<div class="footer">The Geometry of Time &mdash; Dylan La Franchi &bull; April 2026</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ============================================================
+// DATA
+// ============================================================
+
+const systemColors = {
+  engine: 0xff8787, pc: 0x4dabf7, heart: 0xb197fc, hydrogen: 0xffd43b,
+  neuron: 0x69db7c, thunderstorm: 0xe599f7, predprey: 0xff922b, earth: 0x20c997,
+  energygrid: 0xffa94d, rbconvect: 0x74c0fc, honeybee: 0xffe066,
+  slimemold: 0xa9e34b, biofilm: 0x66d9e8, starling: 0xf783ac,
+  galaxy: 0xda77f2, dna: 0xff6b6b, pulsar: 0x38d9a9, laser: 0xe8590c
+};
+const systemColorsHex = {
+  engine: '#ff8787', pc: '#4dabf7', heart: '#b197fc', hydrogen: '#ffd43b',
+  neuron: '#69db7c', thunderstorm: '#e599f7', predprey: '#ff922b', earth: '#20c997',
+  energygrid: '#ffa94d', rbconvect: '#74c0fc', honeybee: '#ffe066',
+  slimemold: '#a9e34b', biofilm: '#66d9e8', starling: '#f783ac',
+  galaxy: '#da77f2', dna: '#ff6b6b', pulsar: '#38d9a9', laser: '#e8590c'
+};
+const sysNames = {
+  engine: 'Engine', pc: 'PC', heart: 'Heart', hydrogen: 'Hydrogen',
+  neuron: 'Neuron', thunderstorm: 'Thunderstorm', predprey: 'Predator-Prey', earth: 'Earth',
+  energygrid: 'Energy Grid', rbconvect: 'RB Convection', honeybee: 'Honeybee',
+  slimemold: 'Slime Mold', biofilm: 'Biofilm', starling: 'Starling',
+  galaxy: 'Spiral Galaxy', dna: 'DNA', pulsar: 'Pulsar', laser: 'Laser'
+};
+
+const PI = Math.PI;
+const nodes = [
+  // id, name, system, period(s), energy(J), ARA
+  { id:'h_orbital', name:'Ground Orbital', sys:'hydrogen', T:1.52e-16, E:2.18e-18, ara:1.00 },
+  { id:'h_lyman', name:'Lyman-alpha', sys:'hydrogen', T:1.596e-9, E:2.18e-18, ara:2.54e-7 },
+  { id:'h_metastable', name:'2s Metastable', sys:'hydrogen', T:0.122, E:2.18e-18, ara:3.32e-15 },
+  { id:'h_balmer', name:'Balmer Cascade', sys:'hydrogen', T:6.96e-9, E:2.18e-18, ara:0.298 },
+  { id:'h_21cm', name:'21-cm Hyperfine', sys:'hydrogen', T:3.47e14, E:9.43e-25, ara:2.03e-24 },
+  { id:'h_angular', name:'Angular Mom. Gate', sys:'hydrogen', T:1.63e-7, E:2.18e-18, ara:0.0339 },
+
+  { id:'pc_clock', name:'CPU Clock', sys:'pc', T:3e-10, E:2.9e-8, ara:1.00 },
+  { id:'pc_boost', name:'CPU Boost/Idle', sys:'pc', T:3.2, E:100*3.2, ara:0.60 },
+  { id:'pc_ram', name:'RAM Refresh', sys:'pc', T:0.064, E:2.9e-8*0.064/3e-10, ara:0.0047 },
+  { id:'pc_thermal', name:'Thermal/Cooling', sys:'pc', T:23, E:100*23, ara:1.30 },
+
+  { id:'n_spike', name:'Integration→Spike', sys:'neuron', T:0.0265, E:5e-12, ara:0.060 },
+  { id:'n_depol', name:'Depol/Repol', sys:'neuron', T:0.0011, E:5e-13, ara:2.14 },
+  { id:'n_refrac', name:'Refractory', sys:'neuron', T:0.0052, E:1e-12, ara:3.33 },
+  { id:'n_vesicle', name:'Synaptic Vesicle', sys:'neuron', T:0.050, E:1e-12, ara:0.003 },
+
+  { id:'eng_combustion', name:'Combustion Cycle', sys:'engine', T:0.04, E:2700, ara:1.00 },
+  { id:'eng_valve', name:'Valve Timing', sys:'engine', T:0.04, E:2700, ara:0.618 },
+  { id:'eng_ignition', name:'Ignition Pulse', sys:'engine', T:0.0053, E:0.05, ara:0.0001 },
+  { id:'eng_cooling', name:'Cooling Cycle', sys:'engine', T:30, E:5000, ara:1.60 },
+
+  { id:'hr_sa', name:'SA Node', sys:'heart', T:0.830, E:1.3, ara:0.043 },
+  { id:'hr_av', name:'AV Node', sys:'heart', T:0.135, E:0.02, ara:0.27 },
+  { id:'hr_pump', name:'Ventricular Pump', sys:'heart', T:0.830, E:1.3, ara:1.60 },
+  { id:'hr_myocyte', name:'Myocyte', sys:'heart', T:0.830, E:1.3, ara:1.73 },
+  { id:'hr_vap', name:'Ventricular AP', sys:'heart', T:0.830, E:0.001, ara:1.35 },
+  { id:'hr_rsa', name:'RSA (Breathing)', sys:'heart', T:4.7, E:7, ara:1.61 },
+
+  { id:'ts_lifecycle', name:'Storm Lifecycle', sys:'thunderstorm', T:3300, E:1e12, ara:2.24 },
+  { id:'ts_lightning', name:'Lightning', sys:'thunderstorm', T:600, E:1e9, ara:1.67e-7 },
+  { id:'ts_precip', name:'Precipitation', sys:'thunderstorm', T:2100, E:5e11, ara:0.75 },
+  { id:'ts_gust', name:'Gust Front', sys:'thunderstorm', T:1140, E:1e11, ara:0.58 },
+
+  { id:'pp_hare', name:'Hare (Prey)', sys:'predprey', T:9.5*365.25*86400, E:1e15, ara:0.46 },
+  { id:'pp_lynx', name:'Lynx (Predator)', sys:'predprey', T:9.5*365.25*86400, E:5e14, ara:0.73 },
+  { id:'pp_veg', name:'Vegetation', sys:'predprey', T:4*365.25*86400, E:1e14, ara:0.60 },
+
+  { id:'e_diurnal', name:'Diurnal Thermal', sys:'earth', T:86400, E:1.5e22, ara:1.667 },
+  { id:'e_tidal', name:'Tidal Cycle', sys:'earth', T:43920, E:3.7e18, ara:1.44 },
+  { id:'e_water', name:'Water Cycle', sys:'earth', T:820800, E:1.3e21, ara:0.056 },
+  { id:'e_season', name:'Seasonal', sys:'earth', T:365.25*86400, E:1.5e22*365, ara:1.017 },
+  { id:'e_enso', name:'ENSO', sys:'earth', T:4*365.25*86400, E:1e21, ara:0.60 },
+  { id:'e_milanko', name:'Milankovitch', sys:'earth', T:1e5*365.25*86400, E:1e28, ara:0.111 },
+
+  // BLIND TEST SYSTEMS (10 systems, April 2026)
+  // Energy Grid
+  { id:'eg_ac', name:'AC Waveform', sys:'energygrid', T:0.02, E:2e7, ara:1.00 },
+  { id:'eg_daily', name:'Daily Load Cycle', sys:'energygrid', T:86400, E:8.64e14, ara:1.40 },
+  // RB Convection
+  { id:'rb_lab', name:'Lab Cell Overturn', sys:'rbconvect', T:30, E:0.02, ara:1.00 },
+  { id:'rb_hadley', name:'Hadley Cell', sys:'rbconvect', T:30*86400, E:1e18, ara:1.00 },
+  // Honeybee
+  { id:'bee_annual', name:'Annual Colony', sys:'honeybee', T:365.25*86400, E:3.8e8, ara:1.40 },
+  { id:'bee_forage', name:'Daily Foraging', sys:'honeybee', T:86400, E:1e6, ara:0.20 },
+  { id:'bee_thermo', name:'Thermoregulation', sys:'honeybee', T:390, E:2000, ara:1.60 },
+  // Slime Mold
+  { id:'sm_stream', name:'Shuttle Streaming', sys:'slimemold', T:120, E:5e-7, ara:1.18 },
+  { id:'sm_network', name:'Network Optimisation', sys:'slimemold', T:21600, E:0.2, ara:2.00 },
+  // Biofilm
+  { id:'bf_metab', name:'Metabolic Oscillation', sys:'biofilm', T:18000, E:1.3, ara:1.50 },
+  { id:'bf_kwave', name:'K+ Wave', sys:'biofilm', T:3600, E:0.01, ara:0.50 },
+  // Starling
+  { id:'st_wing', name:'Wing Beat', sys:'starling', T:1/13.5, E:0.1, ara:1.38 },
+  { id:'st_turn', name:'Flock Turning', sys:'starling', T:9, E:500, ara:2.00 },
+  // Galaxy
+  { id:'gx_orbit', name:'Stellar Orbit', sys:'galaxy', T:225e6*365.25*86400, E:4.84e37, ara:1.00 },
+  { id:'gx_arm', name:'Arm Passage', sys:'galaxy', T:110e6*365.25*86400, E:1e38, ara:2.67 },
+  // DNA
+  { id:'dna_breath', name:'Breathing Bubble', sys:'dna', T:80e-6, E:5e-19, ara:4.33 },
+  { id:'dna_cell', name:'Cell Cycle', sys:'dna', T:84600, E:3e-7, ara:14.7 },
+  // Pulsar
+  { id:'psr_crab', name:'Crab Rotation', sys:'pulsar', T:0.0335, E:1.76e49, ara:1.00 },
+  { id:'psr_typical', name:'Typical Pulsar', sys:'pulsar', T:0.71, E:7.1e25, ara:1.00 },
+  // Laser
+  { id:'las_cw', name:'CW Round-trip', sys:'laser', T:2e-9, E:2e-10, ara:1.00 },
+  { id:'las_relax', name:'Relaxation Osc', sys:'laser', T:1e-9, E:1e-12, ara:1.50 },
+  { id:'las_qswitch', name:'Q-switched', sys:'laser', T:200e-6, E:0.1, ara:20000 },
+  { id:'las_modelock', name:'Mode-locked', sys:'laser', T:12.5e-9, E:1.25e-8, ara:125000 },
+];
+
+// Compute action/pi for each
+nodes.forEach(n => {
+  n.action_pi = (n.T * n.E) / PI;
+  n.logT = Math.log10(n.T);
+  n.logARA = Math.log10(Math.max(n.ara, 1e-25));
+  n.logAction = Math.log10(Math.max(n.action_pi, 1e-40));
+});
+
+const couplings = [
+  { from:'eng_ignition', to:'eng_combustion', type:1 },
+  { from:'eng_valve', to:'eng_combustion', type:1 },
+  { from:'eng_combustion', to:'eng_cooling', type:1 },
+  { from:'hr_sa', to:'hr_av', type:1 },
+  { from:'hr_av', to:'hr_vap', type:1 },
+  { from:'hr_vap', to:'hr_myocyte', type:1 },
+  { from:'hr_myocyte', to:'hr_pump', type:1 },
+  { from:'ts_lifecycle', to:'ts_precip', type:2 },
+  { from:'ts_precip', to:'ts_gust', type:1 },
+  { from:'ts_gust', to:'ts_lifecycle', type:3 },
+  { from:'ts_lifecycle', to:'ts_lightning', type:2 },
+  { from:'n_spike', to:'n_depol', type:1 },
+  { from:'n_depol', to:'n_refrac', type:1 },
+  { from:'pp_veg', to:'pp_hare', type:2 },
+  { from:'pp_hare', to:'pp_lynx', type:2 },
+  { from:'pp_lynx', to:'pp_hare', type:3 },
+  { from:'e_diurnal', to:'e_tidal', type:1 },
+  { from:'e_diurnal', to:'e_season', type:2 },
+  { from:'e_season', to:'e_enso', type:2 },
+  // Blind systems
+  { from:'bee_thermo', to:'bee_forage', type:2 },
+  { from:'bee_forage', to:'bee_annual', type:2 },
+  { from:'sm_stream', to:'sm_network', type:2 },
+  { from:'bf_metab', to:'bf_kwave', type:1 },
+  { from:'bf_kwave', to:'bf_metab', type:1 },
+  { from:'st_wing', to:'st_turn', type:2 },
+  { from:'las_cw', to:'las_relax', type:1 },
+  { from:'las_qswitch', to:'las_cw', type:3 },
+];
+
+// ============================================================
+// SCENE SETUP
+// ============================================================
+
+const W = window.innerWidth, H = window.innerHeight;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0f);
+scene.fog = new THREE.FogExp2(0x0a0a0f, 0.008);
+
+const camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 500);
+camera.position.set(35, 25, 45);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+// ============================================================
+// COORDINATE MAPPING — normalize to ~[-20, 20] range for scene
+// ============================================================
+
+const allLogT = nodes.map(n => n.logT);
+const allLogARA = nodes.map(n => n.logARA);
+const allLogAct = nodes.map(n => n.logAction);
+
+const range = (arr) => ({ min: Math.min(...arr), max: Math.max(...arr) });
+const rT = range(allLogT), rA = range(allLogARA), rAct = range(allLogAct);
+
+const SCALE = 18; // half-extent of the cube
+
+function toScene(n) {
+  const x = ((n.logT - rT.min) / (rT.max - rT.min) - 0.5) * 2 * SCALE;
+  const y = ((n.logARA - rA.min) / (rA.max - rA.min) - 0.5) * 2 * SCALE;
+  const z = ((n.logAction - rAct.min) / (rAct.max - rAct.min) - 0.5) * 2 * SCALE;
+  return new THREE.Vector3(x, y, z);
+}
+
+// Pre-compute scene positions
+nodes.forEach(n => { n.pos = toScene(n); });
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
+// ============================================================
+// GRID / AXES
+// ============================================================
+
+const gridGroup = new THREE.Group();
+scene.add(gridGroup);
+
+function addAxisLine(from, to, color) {
+  const geom = new THREE.BufferGeometry().setFromPoints([from, to]);
+  const mat = new THREE.LineBasicMaterial({ color, opacity: 0.45, transparent: true });
+  gridGroup.add(new THREE.Line(geom, mat));
+}
+
+// Axis lines
+addAxisLine(new THREE.Vector3(-SCALE, -SCALE, -SCALE), new THREE.Vector3(SCALE, -SCALE, -SCALE), 0x888888);
+addAxisLine(new THREE.Vector3(-SCALE, -SCALE, -SCALE), new THREE.Vector3(-SCALE, SCALE, -SCALE), 0x888888);
+addAxisLine(new THREE.Vector3(-SCALE, -SCALE, -SCALE), new THREE.Vector3(-SCALE, -SCALE, SCALE), 0x888888);
+
+// Grid lines on floor (X-Z plane at y = -SCALE)
+for (let i = -SCALE; i <= SCALE; i += 6) {
+  addAxisLine(new THREE.Vector3(i, -SCALE, -SCALE), new THREE.Vector3(i, -SCALE, SCALE), 0x1a1a2e);
+  addAxisLine(new THREE.Vector3(-SCALE, -SCALE, i), new THREE.Vector3(SCALE, -SCALE, i), 0x1a1a2e);
+}
+// Grid on back wall (X-Y plane at z = -SCALE)
+for (let i = -SCALE; i <= SCALE; i += 6) {
+  addAxisLine(new THREE.Vector3(i, -SCALE, -SCALE), new THREE.Vector3(i, SCALE, -SCALE), 0x111122);
+  addAxisLine(new THREE.Vector3(-SCALE, i, -SCALE), new THREE.Vector3(SCALE, i, -SCALE), 0x111122);
+}
+
+// Phi reference plane (horizontal plane at ARA = phi)
+const phiY = ((Math.log10(1.618) - rA.min) / (rA.max - rA.min) - 0.5) * 2 * SCALE;
+const phiPlaneGeom = new THREE.PlaneGeometry(SCALE * 2, SCALE * 2);
+const phiPlaneMat = new THREE.MeshBasicMaterial({ color: 0xb197fc, opacity: 0.03, transparent: true, side: THREE.DoubleSide });
+const phiPlane = new THREE.Mesh(phiPlaneGeom, phiPlaneMat);
+phiPlane.rotation.x = Math.PI / 2;
+phiPlane.position.y = phiY;
+gridGroup.add(phiPlane);
+
+// hbar reference plane (Z plane at Action/pi = hbar)
+const hbarZ = ((Math.log10(1.0546e-34) - rAct.min) / (rAct.max - rAct.min) - 0.5) * 2 * SCALE;
+const hbarPlaneGeom = new THREE.PlaneGeometry(SCALE * 2, SCALE * 2);
+const hbarPlaneMat = new THREE.MeshBasicMaterial({ color: 0xffd43b, opacity: 0.03, transparent: true, side: THREE.DoubleSide });
+const hbarPlane = new THREE.Mesh(hbarPlaneGeom, hbarPlaneMat);
+hbarPlane.position.z = hbarZ;
+gridGroup.add(hbarPlane);
+
+// ============================================================
+// NODES (spheres + point light glow)
+// ============================================================
+
+const spheres = [];
+const spriteGroup = new THREE.Group();
+scene.add(spriteGroup);
+
+nodes.forEach(n => {
+  const geom = new THREE.SphereGeometry(0.5, 16, 16);
+  const mat = new THREE.MeshBasicMaterial({ color: systemColors[n.sys] });
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.position.copy(n.pos);
+  mesh.userData = n;
+  scene.add(mesh);
+  spheres.push(mesh);
+
+  // Glow sprite
+  const spriteMat = new THREE.SpriteMaterial({
+    color: systemColors[n.sys],
+    transparent: true,
+    opacity: 0.15,
+  });
+  const sprite = new THREE.Sprite(spriteMat);
+  sprite.position.copy(n.pos);
+  sprite.scale.set(3, 3, 1);
+  spriteGroup.add(sprite);
+  n.mesh = mesh;
+  n.sprite = sprite;
+});
+
+// ============================================================
+// COUPLING LINES
+// ============================================================
+
+const couplingGroup = new THREE.Group();
+scene.add(couplingGroup);
+
+const couplingColors = { 1: 0x69db7c, 2: 0x4dabf7, 3: 0xff6b6b };
+
+couplings.forEach(cp => {
+  const from = nodeMap[cp.from], to = nodeMap[cp.to];
+  if (!from || !to) return;
+  const geom = new THREE.BufferGeometry().setFromPoints([from.pos, to.pos]);
+  const mat = new THREE.LineBasicMaterial({
+    color: couplingColors[cp.type] || 0x444444,
+    opacity: cp.type === 3 ? 0.4 : 0.2,
+    transparent: true,
+  });
+  if (cp.type === 3) mat.linewidth = 2;
+  const line = new THREE.Line(geom, mat);
+  line.userData = { from: from.sys, to: to.sys };
+  couplingGroup.add(line);
+});
+
+// ============================================================
+// TEXT LABELS (canvas sprites)
+// ============================================================
+
+const labelGroup = new THREE.Group();
+scene.add(labelGroup);
+
+function makeLabel(text, position, color, size) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 512;
+  canvas.height = 64;
+  ctx.font = `bold ${size || 14}px JetBrains Mono, monospace`;
+  ctx.fillStyle = color || '#ffffff';
+  ctx.textAlign = 'left';
+  ctx.fillText(text, 4, 28);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: 0.95 });
+  const sprite = new THREE.Sprite(mat);
+  sprite.position.copy(position);
+  sprite.scale.set(10, 2, 1);
+  return sprite;
+}
+
+nodes.forEach(n => {
+  const labelPos = n.pos.clone().add(new THREE.Vector3(1.2, 0.8, 0));
+  const label = makeLabel(n.name, labelPos, systemColorsHex[n.sys], 12);
+  label.userData = { sys: n.sys };
+  labelGroup.add(label);
+  n.label = label;
+});
+
+// Axis labels
+const axLabelX = makeLabel('PERIOD (scale) →', new THREE.Vector3(0, -SCALE - 3, -SCALE), '#cccccc', 14);
+axLabelX.scale.set(12, 2, 1);
+scene.add(axLabelX);
+
+const axLabelY = makeLabel('ARA (shape) ↑', new THREE.Vector3(-SCALE - 3, 0, -SCALE), '#cccccc', 14);
+axLabelY.scale.set(10, 2, 1);
+scene.add(axLabelY);
+
+const axLabelZ = makeLabel('ACTION/π (weight) →', new THREE.Vector3(-SCALE, -SCALE - 3, 0), '#cccccc', 14);
+axLabelZ.scale.set(12, 2, 1);
+scene.add(axLabelZ);
+
+// Special markers
+const phiLabel = makeLabel('φ plane (ARA = 1.618)', new THREE.Vector3(SCALE + 1, phiY, -SCALE), '#b197fcdd', 12);
+phiLabel.scale.set(10, 2, 1);
+scene.add(phiLabel);
+
+const hbarLabel = makeLabel('ℏ floor (Action/π = 1.055e-34)', new THREE.Vector3(SCALE + 1, -SCALE, hbarZ), '#ffd43bdd', 12);
+hbarLabel.scale.set(12, 2, 1);
+scene.add(hbarLabel);
+
+// ============================================================
+// INTERACTION — orbit controls (manual)
+// ============================================================
+
+let isDragging = false, prevMouse = { x: 0, y: 0 };
+let theta = 0.8, phi2 = 0.5, radius = 65;
+let autoSpin = false;
+let highlightedSys = null;
+const hiddenSystems = new Set();
+
+function updateCamera() {
+  camera.position.x = radius * Math.sin(phi2) * Math.cos(theta);
+  camera.position.y = radius * Math.cos(phi2);
+  camera.position.z = radius * Math.sin(phi2) * Math.sin(theta);
+  camera.lookAt(0, 0, 0);
+}
+updateCamera();
+
+renderer.domElement.addEventListener('mousedown', e => { isDragging = true; prevMouse = { x: e.clientX, y: e.clientY }; });
+renderer.domElement.addEventListener('mousemove', e => {
+  if (isDragging) {
+    theta += (e.clientX - prevMouse.x) * 0.005;
+    phi2 = Math.max(0.1, Math.min(Math.PI - 0.1, phi2 - (e.clientY - prevMouse.y) * 0.005));
+    prevMouse = { x: e.clientX, y: e.clientY };
+    updateCamera();
+  }
+});
+renderer.domElement.addEventListener('mouseup', () => { isDragging = false; });
+renderer.domElement.addEventListener('wheel', e => {
+  radius = Math.max(20, Math.min(150, radius + e.deltaY * 0.05));
+  updateCamera();
+});
+
+// ============================================================
+// HOVER DETECTION
+// ============================================================
+
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const tooltipEl = document.getElementById('tooltip');
+
+renderer.domElement.addEventListener('mousemove', e => {
+  mouse.x = (e.clientX / W) * 2 - 1;
+  mouse.y = -(e.clientY / H) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObjects(spheres);
+
+  if (intersects.length > 0 && !isDragging) {
+    const n = intersects[0].object.userData;
+    const araStr = n.ara < 0.001 ? n.ara.toExponential(2) : n.ara.toFixed(4);
+    const actStr = n.action_pi < 0.001 ? n.action_pi.toExponential(3) : n.action_pi.toFixed(4);
+    tooltipEl.innerHTML = `
+      <div class="name" style="color:${systemColorsHex[n.sys]}">${n.name}</div>
+      <div class="sys">${sysNames[n.sys]}</div>
+      <div class="val">ARA: ${araStr}</div>
+      <div class="val">Period: ${formatPeriod(n.T)}</div>
+      <div class="val">Energy: ${n.E.toExponential(2)} J</div>
+      <div class="val">Action/π: ${actStr} J·s</div>
+    `;
+    tooltipEl.style.display = 'block';
+    tooltipEl.style.left = (e.clientX + 15) + 'px';
+    tooltipEl.style.top = (e.clientY - 10) + 'px';
+  } else {
+    tooltipEl.style.display = 'none';
+  }
+});
+
+function formatPeriod(s) {
+  if (s < 1e-15) return (s * 1e18).toFixed(0) + ' as';
+  if (s < 1e-9) return (s * 1e12).toFixed(1) + ' ps';
+  if (s < 1e-6) return (s * 1e9).toFixed(1) + ' ns';
+  if (s < 1e-3) return (s * 1e6).toFixed(1) + ' µs';
+  if (s < 1) return (s * 1e3).toFixed(1) + ' ms';
+  if (s < 60) return s.toFixed(1) + ' s';
+  if (s < 3600) return (s / 60).toFixed(1) + ' min';
+  if (s < 86400) return (s / 3600).toFixed(1) + ' hr';
+  if (s < 365.25 * 86400) return (s / 86400).toFixed(1) + ' days';
+  if (s < 1e6 * 365.25 * 86400) return (s / (365.25 * 86400)).toFixed(1) + ' yr';
+  return (s / (365.25 * 86400 * 1e6)).toFixed(1) + ' Myr';
+}
+
+// ============================================================
+// LEGEND
+// ============================================================
+
+const legendEl = document.getElementById('legend');
+Object.entries(sysNames).forEach(([key, name]) => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${systemColorsHex[key]}"></div> ${name}`;
+  item.onclick = () => {
+    if (hiddenSystems.has(key)) hiddenSystems.delete(key); else hiddenSystems.add(key);
+    item.classList.toggle('dimmed', hiddenSystems.has(key));
+    updateVisibility();
+  };
+  item.onmouseenter = () => { highlightedSys = key; updateVisibility(); };
+  item.onmouseleave = () => { highlightedSys = null; updateVisibility(); };
+  legendEl.appendChild(item);
+});
+
+function updateVisibility() {
+  nodes.forEach(n => {
+    const hidden = hiddenSystems.has(n.sys);
+    const dimmed = highlightedSys && n.sys !== highlightedSys;
+    n.mesh.visible = !hidden;
+    n.sprite.visible = !hidden;
+    if (n.label) n.label.visible = !hidden && showLabels && !dimmed;
+    if (!hidden) {
+      n.mesh.material.opacity = dimmed ? 0.15 : 1.0;
+      n.mesh.material.transparent = dimmed;
+      n.sprite.material.opacity = dimmed ? 0.03 : 0.15;
+      n.mesh.scale.setScalar(dimmed ? 0.5 : 1.0);
+    }
+  });
+  couplingGroup.children.forEach(line => {
+    const fSys = line.userData.from, tSys = line.userData.to;
+    const hidden = hiddenSystems.has(fSys) || hiddenSystems.has(tSys);
+    const dimmed = highlightedSys && fSys !== highlightedSys && tSys !== highlightedSys;
+    line.visible = !hidden && showCouplings;
+    line.material.opacity = dimmed ? 0.03 : (line.material.userData_baseOpacity || 0.25);
+  });
+}
+
+// Store base opacities
+couplingGroup.children.forEach(line => {
+  line.material.userData_baseOpacity = line.material.opacity;
+});
+
+// ============================================================
+// CONTROLS
+// ============================================================
+
+let showCouplings = true, showLabels = true, showGrid = true;
+
+document.getElementById('btnCouplings').onclick = function() {
+  showCouplings = !showCouplings;
+  this.classList.toggle('active', showCouplings);
+  couplingGroup.visible = showCouplings;
+};
+document.getElementById('btnLabels').onclick = function() {
+  showLabels = !showLabels;
+  this.classList.toggle('active', showLabels);
+  labelGroup.visible = showLabels;
+};
+document.getElementById('btnGrid').onclick = function() {
+  showGrid = !showGrid;
+  this.classList.toggle('active', showGrid);
+  gridGroup.visible = showGrid;
+};
+document.getElementById('btnSpin').onclick = function() {
+  autoSpin = !autoSpin;
+  this.classList.toggle('active', autoSpin);
+};
+
+// ============================================================
+// ANIMATE
+// ============================================================
+
+function animate() {
+  requestAnimationFrame(animate);
+  if (autoSpin && !isDragging) {
+    theta += 0.003;
+    updateCamera();
+  }
+  // Labels always face camera
+  labelGroup.children.forEach(s => s.lookAt(camera.position));
+  axLabelX.lookAt(camera.position);
+  axLabelY.lookAt(camera.position);
+  axLabelZ.lookAt(camera.position);
+  phiLabel.lookAt(camera.position);
+  hbarLabel.lookAt(camera.position);
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// Resize
+window.addEventListener('resize', () => {
+  const w = window.innerWidth, h = window.innerHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+});
+</script>
+</body>
+</html>

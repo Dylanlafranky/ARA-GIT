@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Geometry of Time — Temporal Shapes</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 24px; max-width: 1400px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  h2 { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #ddd; margin-bottom: 16px; }
+  h3 { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #ccc; margin-bottom: 12px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 16px; line-height: 1.8; }
+  .section { margin: 40px 0; }
+  .section-divider { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
+  .callout {
+    background: #111122; border-left: 3px solid #f0c040;
+    padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.8; color: #ccc;
+  }
+  .callout strong { color: #f0c040; }
+  .callout.blue { border-left-color: #4dabf7; }
+  .callout.blue strong { color: #4dabf7; }
+  .callout.green { border-left-color: #40c057; }
+  .callout.green strong { color: #40c057; }
+
+  .viz-container {
+    display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; margin: 24px 0;
+  }
+  .viz-card {
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+    padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.2s;
+  }
+  .viz-card:hover, .viz-card.active { border-color: #f0c040; }
+  .viz-card canvas { display: block; margin: 0 auto 8px; }
+  .viz-card .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #aaa; }
+  .viz-card .ara-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #f0c040; margin-top: 4px; }
+  .viz-card .system-name { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #fff; margin-bottom: 4px; }
+
+  .main-canvas-container {
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+    padding: 24px; margin: 24px 0; text-align: center;
+  }
+  .main-canvas-container canvas { display: block; margin: 0 auto; }
+
+  .controls {
+    display: flex; gap: 16px; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 16px 0;
+  }
+  .controls label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .controls input[type=range] { width: 160px; accent-color: #f0c040; }
+  .controls .val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #f0c040; min-width: 30px; }
+
+  .golden-callout {
+    background: #1a1a0a; border: 1px solid #3a3a1a; border-radius: 8px;
+    padding: 20px; margin: 24px 0; text-align: center;
+  }
+  .golden-callout .big { font-family: 'JetBrains Mono', monospace; font-size: 28px; color: #f0c040; }
+  .golden-callout .explain { font-size: 13px; color: #aaa; margin-top: 8px; line-height: 1.8; }
+
+  .compare-container {
+    display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; margin: 24px 0;
+  }
+  .compare-panel {
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+    padding: 20px; text-align: center; flex: 1; min-width: 300px; max-width: 500px;
+  }
+  .compare-panel h3 { margin-bottom: 8px; }
+  .compare-panel canvas { display: block; margin: 0 auto; }
+
+  .footer { font-size: 11px; color: #555; margin-top: 48px; padding-top: 16px; border-top: 1px solid #1a1a2e; line-height: 1.8; }
+
+  select {
+    background: #111122; color: #e0e0e0; border: 1px solid #333; border-radius: 4px;
+    padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  }
+  button {
+    background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px;
+    padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  button:hover { background: #2a2a3e; }
+  button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+</style>
+</head>
+<body>
+
+<h1>The Geometry of Time — Temporal Shapes</h1>
+<p class="subtitle">What does a system's accumulation-release cycle look like as geometry?</p>
+
+<p class="body-text">
+  Every cyclical system traces a shape through time. During accumulation, energy builds — the radius
+  grows outward. During release, energy discharges — the radius contracts. The <strong>ARA ratio</strong>
+  determines how the cycle's angular territory is split between these phases, and therefore the
+  <strong>shape</strong> the system draws.
+</p>
+
+<div class="golden-callout">
+  <div class="big">360&deg; &divide; (1 + &phi;) = 137.5&deg;</div>
+  <div class="explain">
+    The accumulation angle for a phi-ratio system is the <strong>golden angle</strong> — the exact angle
+    sunflowers use to pack seeds without overlap.<br>
+    The phyllotaxis connection isn't an analogy. It's literally the same geometry — one in space, one in time.
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div class="section">
+  <h2>1 — Single-Cycle Shapes: Real Systems</h2>
+  <p class="body-text">
+    Each shape below is one cycle of a real system. The accumulation phase (blue arc, expanding outward)
+    and release phase (amber arc, contracting inward) split the circle according to the ARA ratio.
+    Click any system to see it enlarged.
+  </p>
+
+  <div class="viz-container" id="systemCards"></div>
+
+  <div class="main-canvas-container">
+    <h3 id="mainLabel">Select a system above</h3>
+    <canvas id="mainCanvas" width="500" height="500"></canvas>
+    <div id="mainInfo" style="font-size: 13px; color: #aaa; margin-top: 12px;"></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div class="section">
+  <h2>2 — Extruded Through Time: The Helix</h2>
+  <p class="body-text">
+    Stack multiple cycles along a time axis and the 2D shape becomes a 3D structure.
+    A phi system produces a helix where successive cycles never overlap — the golden angle
+    ensures each new cycle's peak lands in the largest gap left by previous cycles.
+    A resonant system (ARA = 2.0) overlaps every other cycle. A snap barely traces any arc at all.
+  </p>
+
+  <div class="controls">
+    <label>System:</label>
+    <select id="extrudeSystem"></select>
+    <label>Cycles:</label>
+    <input type="range" id="cycleCount" min="1" max="30" value="12">
+    <span class="val" id="cycleVal">12</span>
+    <label>Rotation:</label>
+    <input type="range" id="rotAngle" min="0" max="360" value="25">
+    <span class="val" id="rotVal">25&deg;</span>
+  </div>
+
+  <div class="main-canvas-container">
+    <canvas id="extrudeCanvas" width="700" height="600"></canvas>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div class="section">
+  <h2>3 — Side-by-Side Comparison</h2>
+  <p class="body-text">
+    Compare two systems' temporal shapes. Notice how the phi system (breathing, watershed)
+    creates the widest open arc without self-intersection, while snaps collapse to spikes
+    and resonant systems close into rigid loops.
+  </p>
+
+  <div class="controls">
+    <label>Left:</label>
+    <select id="compareLeft"></select>
+    <label>Right:</label>
+    <select id="compareRight"></select>
+    <label>Cycles:</label>
+    <input type="range" id="compareCycles" min="1" max="20" value="8">
+    <span class="val" id="compareCycleVal">8</span>
+  </div>
+
+  <div class="compare-container">
+    <div class="compare-panel">
+      <h3 id="compareLeftLabel">—</h3>
+      <canvas id="compareLeftCanvas" width="400" height="400"></canvas>
+    </div>
+    <div class="compare-panel">
+      <h3 id="compareRightLabel">—</h3>
+      <canvas id="compareRightCanvas" width="400" height="400"></canvas>
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<div class="section">
+  <h2>4 — Custom ARA Explorer</h2>
+  <p class="body-text">
+    Slide the ARA ratio and watch the shape change in real time. Notice where the shape
+    is an open arc (healthy asymmetry), where it closes (forced symmetry or resonance),
+    and where it collapses to a spike (snap).
+  </p>
+
+  <div class="controls">
+    <label>ARA Ratio:</label>
+    <input type="range" id="customARA" min="0.01" max="2.5" step="0.01" value="1.618">
+    <span class="val" id="customARAVal">1.618</span>
+    <label>Cycles:</label>
+    <input type="range" id="customCycles" min="1" max="30" value="8">
+    <span class="val" id="customCycleVal">8</span>
+  </div>
+
+  <div class="main-canvas-container">
+    <canvas id="customCanvas" width="600" height="500"></canvas>
+    <div id="customInfo" style="font-size: 13px; color: #aaa; margin-top: 12px;"></div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<div class="footer">
+  The Geometry of Time &mdash; Temporal Shape Visualisation<br>
+  Dylan La Franchi &bull; April 2026 &bull; CC-BY-4.0<br>
+  <a href="https://github.com/Dylanlafranky/ARA-GIT" style="color:#4dabf7">github.com/Dylanlafranky/ARA-GIT</a>
+</div>
+
+<script>
+// ============================================================
+// SYSTEM DATA — real ARA values from mapped systems
+// ============================================================
+const systems = [
+  { name: "Resting Breath", ara: 1.61, category: "phi", color: "#b197fc", source: "Paper 1 — NeuroKit2 dataset" },
+  { name: "Watershed", ara: 1.67, category: "phi", color: "#b197fc", source: "Paper 1 — USDA SCS standard" },
+  { name: "Heart (Ventricular)", ara: 1.60, category: "phi", color: "#b197fc", source: "Paper 3 — cardiac cycle" },
+  { name: "Walking Gait (comfort)", ara: 1.62, category: "phi", color: "#b197fc", source: "Paper 1 — PhysioNet" },
+  { name: "Thunderstorm Lifecycle", ara: 2.24, category: "beyond", color: "#e599f7", source: "Paper 3 — Byers & Braham" },
+  { name: "Lightning Discharge", ara: 0.000000167, category: "snap", color: "#ff6b6b", source: "Paper 3 — Rakov & Uman" },
+  { name: "Neuron Spike", ara: 0.33, category: "consumer", color: "#69db7c", source: "Paper 3 — Hodgkin-Huxley" },
+  { name: "Hydrogen Ground State", ara: 1.0, category: "pacemaker", color: "#4dabf7", source: "Paper 3 — negative control" },
+  { name: "EEG Delta Waves", ara: 1.05, category: "pacemaker", color: "#4dabf7", source: "Paper 1 — negative control" },
+  { name: "Hare Population Cycle", ara: 0.46, category: "consumer", color: "#69db7c", source: "Paper 3 — Elton & Nicholson" },
+  { name: "Solar Cycle", ara: 1.73, category: "exothermic", color: "#ffd43b", source: "Paper 1 — SILSO" },
+  { name: "Cepheid Variable", ara: 2.0, category: "resonance", color: "#ff8787", source: "Paper 1 — instability strip" },
+  { name: "Arctic Sea Ice", ara: 0.91, category: "pacemaker", color: "#4dabf7", source: "Paper 1 — negative control" },
+  { name: "Precipitation Cycle", ara: 0.75, category: "consumer", color: "#69db7c", source: "Paper 3 — thunderstorm subsystem" },
+  { name: "Perfect Symmetry", ara: 1.0, category: "reference", color: "#555", source: "Theoretical reference" },
+  { name: "Golden Ratio (phi)", ara: 1.618, category: "reference", color: "#f0c040", source: "Theoretical reference" },
+];
+
+const PHI = 1.6180339887;
+
+// ============================================================
+// DRAWING FUNCTIONS
+// ============================================================
+
+function classifyARA(ara) {
+  if (ara < 0.02) return "Ultra-extreme snap";
+  if (ara < 0.15) return "Extreme snap";
+  if (ara < 0.4) return "Consumer snap";
+  if (ara < 0.8) return "Consumer";
+  if (ara < 1.15) return "Pacemaker";
+  if (ara < 1.45) return "Shock absorber";
+  if (ara < 1.75) return "Sustained engine (phi zone)";
+  if (ara < 2.0) return "Exothermic source";
+  if (ara < 2.2) return "Resonance";
+  return "Beyond scale";
+}
+
+function drawSingleCycleShape(ctx, cx, cy, radius, ara, color, options = {}) {
+  const { showLabels = false, showPhi = false, lineWidth = 2, showFill = true } = options;
+
+  // Angular split
+  const accAngle = (2 * Math.PI) / (1 + ara);
+  const relAngle = (2 * Math.PI) - accAngle;
+
+  // For very small ARA (snaps), clamp the visual release angle so it's visible
+  const visualARA = Math.max(ara, 0.03);
+  const visAccAngle = (2 * Math.PI) / (1 + visualARA);
+  const visRelAngle = (2 * Math.PI) - visAccAngle;
+
+  const steps = 200;
+  const startAngle = -Math.PI / 2; // start at top
+
+  // Draw reference circle (faint)
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.strokeStyle = '#1a1a2e';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Draw phi reference if requested
+  if (showPhi) {
+    const phiAccAngle = (2 * Math.PI) / (1 + PHI);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    const phiX = cx + radius * Math.cos(startAngle + phiAccAngle);
+    const phiY = cy + radius * Math.sin(startAngle + phiAccAngle);
+    ctx.lineTo(phiX, phiY);
+    ctx.strokeStyle = '#f0c04033';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    if (showLabels) {
+      ctx.font = "10px 'JetBrains Mono'";
+      ctx.fillStyle = '#f0c04066';
+      ctx.fillText('137.5° (golden angle)', phiX + 5, phiY - 5);
+    }
+  }
+
+  // Build the shape path
+  // Accumulation: radius grows from small to full over accAngle
+  // Release: radius shrinks from full to small over relAngle
+  const points = [];
+  const totalSteps = steps;
+  const accSteps = Math.round(totalSteps * (visAccAngle / (2 * Math.PI)));
+  const relSteps = totalSteps - accSteps;
+
+  // Accumulation phase — expanding outward
+  for (let i = 0; i <= accSteps; i++) {
+    const t = i / accSteps;
+    const angle = startAngle + t * visAccAngle;
+    // Smooth easing: ease-in for accumulation (slow start, faster buildup)
+    const easedT = t * t * (3 - 2 * t); // smoothstep
+    const r = radius * (0.15 + 0.85 * easedT);
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), phase: 'acc', t });
+  }
+
+  // Release phase — contracting inward
+  for (let i = 1; i <= relSteps; i++) {
+    const t = i / relSteps;
+    const angle = startAngle + visAccAngle + t * visRelAngle;
+    // Ease-out for release
+    const easedT = 1 - (t * t * (3 - 2 * t));
+    const r = radius * (0.15 + 0.85 * easedT);
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), phase: 'rel', t });
+  }
+
+  // Fill the shape
+  if (showFill) {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    points.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.closePath();
+
+    const accColor = color + '15';
+    ctx.fillStyle = accColor;
+    ctx.fill();
+  }
+
+  // Draw accumulation arc (blue-ish tint of system color)
+  ctx.beginPath();
+  const accPoints = points.filter(p => p.phase === 'acc');
+  ctx.moveTo(accPoints[0].x, accPoints[0].y);
+  accPoints.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = '#4dabf7';
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
+
+  // Draw release arc (amber)
+  ctx.beginPath();
+  const relPoints = points.filter(p => p.phase === 'rel');
+  const lastAcc = accPoints[accPoints.length - 1];
+  ctx.moveTo(lastAcc.x, lastAcc.y);
+  relPoints.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = '#f0c040';
+  ctx.lineWidth = lineWidth;
+  ctx.stroke();
+
+  // Draw the peak point
+  ctx.beginPath();
+  ctx.arc(lastAcc.x, lastAcc.y, 4, 0, Math.PI * 2);
+  ctx.fillStyle = '#fff';
+  ctx.fill();
+
+  // Draw origin point
+  ctx.beginPath();
+  ctx.arc(points[0].x, points[0].y, 3, 0, Math.PI * 2);
+  ctx.fillStyle = '#4dabf7';
+  ctx.fill();
+
+  // Gap indicator — line from end back to start
+  const lastPoint = points[points.length - 1];
+  ctx.beginPath();
+  ctx.moveTo(lastPoint.x, lastPoint.y);
+  ctx.lineTo(points[0].x, points[0].y);
+  ctx.strokeStyle = '#ff6b6b44';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([3, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  if (showLabels) {
+    ctx.font = "11px 'JetBrains Mono'";
+    // Acc label
+    const accMid = accPoints[Math.floor(accPoints.length * 0.4)];
+    ctx.fillStyle = '#4dabf7';
+    const accDeg = Math.round(visAccAngle * 180 / Math.PI);
+    ctx.fillText('accumulation (' + accDeg + '°)', accMid.x + 10, accMid.y);
+
+    // Rel label
+    const relMid = relPoints[Math.floor(relPoints.length * 0.5)];
+    ctx.fillStyle = '#f0c040';
+    const relDeg = Math.round(visRelAngle * 180 / Math.PI);
+    ctx.fillText('release (' + relDeg + '°)', relMid.x + 10, relMid.y);
+  }
+
+  return points;
+}
+
+function drawMultiCycleSpiral(ctx, cx, cy, radius, ara, color, numCycles, options = {}) {
+  const { viewAngle = 25, lineWidth = 1.5 } = options;
+
+  const visualARA = Math.max(ara, 0.03);
+  const accAngle = (2 * Math.PI) / (1 + visualARA);
+  const relAngle = (2 * Math.PI) - accAngle;
+
+  const viewRad = viewAngle * Math.PI / 180;
+  const cosV = Math.cos(viewRad);
+  const sinV = Math.sin(viewRad);
+
+  const stepsPerCycle = 120;
+  const totalHeight = radius * 1.6;
+  const layerHeight = totalHeight / numCycles;
+
+  // Collect all cycle paths for depth sorting
+  const cycles = [];
+
+  for (let c = 0; c < numCycles; c++) {
+    const accSteps = Math.round(stepsPerCycle * (accAngle / (2 * Math.PI)));
+    const relSteps = stepsPerCycle - accSteps;
+
+    const startAngle = -Math.PI / 2;
+    const zBase = (c - numCycles / 2) * layerHeight;
+
+    const accPath = [];
+    const relPath = [];
+
+    // Accumulation
+    for (let i = 0; i <= accSteps; i++) {
+      const t = i / accSteps;
+      const angle = startAngle + t * accAngle;
+      const easedT = t * t * (3 - 2 * t);
+      const r = radius * (0.12 + 0.88 * easedT);
+      const z = zBase + (t * accAngle / (2 * Math.PI)) * layerHeight;
+
+      const x3d = r * Math.cos(angle);
+      const y3d = r * Math.sin(angle);
+      const z3d = z;
+
+      // Simple 3D projection
+      const xProj = cx + x3d;
+      const yProj = cy + y3d * cosV - z3d * sinV;
+      const depth = y3d * sinV + z3d * cosV;
+
+      accPath.push({ x: xProj, y: yProj, depth, r });
+    }
+
+    // Release
+    for (let i = 0; i <= relSteps; i++) {
+      const t = i / relSteps;
+      const angle = startAngle + accAngle + t * relAngle;
+      const easedT = 1 - (t * t * (3 - 2 * t));
+      const r = radius * (0.12 + 0.88 * easedT);
+      const z = zBase + ((accAngle + t * relAngle) / (2 * Math.PI)) * layerHeight;
+
+      const x3d = r * Math.cos(angle);
+      const y3d = r * Math.sin(angle);
+      const z3d = z;
+
+      const xProj = cx + x3d;
+      const yProj = cy + y3d * cosV - z3d * sinV;
+      const depth = y3d * sinV + z3d * cosV;
+
+      relPath.push({ x: xProj, y: yProj, depth, r });
+    }
+
+    const alpha = 0.3 + 0.7 * (c / numCycles);
+    cycles.push({ accPath, relPath, cycle: c, alpha, zBase });
+  }
+
+  // Draw back-to-front
+  cycles.forEach(({ accPath, relPath, alpha }) => {
+    // Acc
+    ctx.beginPath();
+    accPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.strokeStyle = `rgba(77, 171, 247, ${alpha})`;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+
+    // Rel
+    ctx.beginPath();
+    ctx.moveTo(accPath[accPath.length - 1].x, accPath[accPath.length - 1].y);
+    relPath.forEach(p => ctx.lineTo(p.x, p.y));
+    ctx.strokeStyle = `rgba(240, 192, 64, ${alpha})`;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+
+    // Peak dot
+    const peak = accPath[accPath.length - 1];
+    ctx.beginPath();
+    ctx.arc(peak.x, peak.y, 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+    ctx.fill();
+  });
+
+  // Draw time axis
+  const axTop = cy - totalHeight * sinV / 2 - 20;
+  const axBot = cy + totalHeight * sinV / 2 + 20;
+  ctx.beginPath();
+  ctx.moveTo(cx, axBot);
+  ctx.lineTo(cx, axTop);
+  ctx.strokeStyle = '#333';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.font = "10px 'JetBrains Mono'";
+  ctx.fillStyle = '#555';
+  ctx.fillText('time ↑', cx + 6, axTop + 10);
+}
+
+// ============================================================
+// BUILD UI
+// ============================================================
+
+// System cards
+const cardContainer = document.getElementById('systemCards');
+const displaySystems = systems.filter(s => s.category !== 'reference');
+
+displaySystems.forEach((sys, idx) => {
+  const card = document.createElement('div');
+  card.className = 'viz-card';
+  card.innerHTML = `
+    <div class="system-name">${sys.name}</div>
+    <canvas width="130" height="130" id="card-${idx}"></canvas>
+    <div class="ara-val">ARA: ${sys.ara < 0.001 ? sys.ara.toExponential(1) : sys.ara.toFixed(3)}</div>
+    <div class="label">${classifyARA(sys.ara)}</div>
+  `;
+  card.onclick = () => selectSystem(idx);
+  cardContainer.appendChild(card);
+
+  // Draw thumbnail
+  const tctx = document.getElementById(`card-${idx}`).getContext('2d');
+  drawSingleCycleShape(tctx, 65, 65, 50, sys.ara, sys.color, { lineWidth: 1.5 });
+});
+
+let selectedIdx = 0;
+
+function selectSystem(idx) {
+  selectedIdx = idx;
+  document.querySelectorAll('.viz-card').forEach((c, i) => {
+    c.classList.toggle('active', i === idx);
+  });
+  drawMainCanvas();
+}
+
+function drawMainCanvas() {
+  const sys = displaySystems[selectedIdx];
+  const canvas = document.getElementById('mainCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  document.getElementById('mainLabel').textContent = sys.name;
+
+  drawSingleCycleShape(ctx, 250, 250, 180, sys.ara, sys.color, {
+    showLabels: true, showPhi: true, lineWidth: 2.5, showFill: true
+  });
+
+  const accDeg = (360 / (1 + Math.max(sys.ara, 0.03))).toFixed(1);
+  const relDeg = (360 - parseFloat(accDeg)).toFixed(1);
+  const info = `ARA: ${sys.ara < 0.001 ? sys.ara.toExponential(2) : sys.ara.toFixed(3)} · ${classifyARA(sys.ara)} · Acc: ${accDeg}° · Rel: ${relDeg}° · Source: ${sys.source}`;
+  document.getElementById('mainInfo').textContent = info;
+}
+
+// Populate dropdowns
+const extrudeSel = document.getElementById('extrudeSystem');
+const compLeftSel = document.getElementById('compareLeft');
+const compRightSel = document.getElementById('compareRight');
+
+displaySystems.forEach((sys, idx) => {
+  [extrudeSel, compLeftSel, compRightSel].forEach(sel => {
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = `${sys.name} (${sys.ara < 0.001 ? sys.ara.toExponential(1) : sys.ara.toFixed(2)})`;
+    sel.appendChild(opt);
+  });
+});
+
+// Set defaults
+extrudeSel.value = 0; // Resting Breath (phi)
+compLeftSel.value = 0; // Breath
+compRightSel.value = 4; // Thunderstorm
+
+// Extrude view
+function drawExtrude() {
+  const idx = parseInt(extrudeSel.value);
+  const sys = displaySystems[idx];
+  const cycles = parseInt(document.getElementById('cycleCount').value);
+  const rot = parseInt(document.getElementById('rotAngle').value);
+
+  document.getElementById('cycleVal').textContent = cycles;
+  document.getElementById('rotVal').textContent = rot + '°';
+
+  const canvas = document.getElementById('extrudeCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Title
+  ctx.font = "13px 'JetBrains Mono'";
+  ctx.fillStyle = '#888';
+  ctx.textAlign = 'center';
+  ctx.fillText(`${sys.name} — ${cycles} cycles extruded through time`, 350, 25);
+  ctx.textAlign = 'left';
+
+  drawMultiCycleSpiral(ctx, 350, 310, 160, sys.ara, sys.color, cycles, { viewAngle: rot });
+}
+
+// Compare view
+function drawCompare() {
+  const leftIdx = parseInt(compLeftSel.value);
+  const rightIdx = parseInt(compRightSel.value);
+  const cycles = parseInt(document.getElementById('compareCycles').value);
+  document.getElementById('compareCycleVal').textContent = cycles;
+
+  const leftSys = displaySystems[leftIdx];
+  const rightSys = displaySystems[rightIdx];
+
+  document.getElementById('compareLeftLabel').textContent = `${leftSys.name} (ARA: ${leftSys.ara < 0.001 ? leftSys.ara.toExponential(1) : leftSys.ara.toFixed(3)})`;
+  document.getElementById('compareRightLabel').textContent = `${rightSys.name} (ARA: ${rightSys.ara < 0.001 ? rightSys.ara.toExponential(1) : rightSys.ara.toFixed(3)})`;
+
+  [['compareLeftCanvas', leftSys], ['compareRightCanvas', rightSys]].forEach(([canvasId, sys]) => {
+    const canvas = document.getElementById(canvasId);
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawMultiCycleSpiral(ctx, 200, 200, 120, sys.ara, sys.color, cycles, { viewAngle: 25 });
+  });
+}
+
+// Custom ARA explorer
+function drawCustom() {
+  const ara = parseFloat(document.getElementById('customARA').value);
+  const cycles = parseInt(document.getElementById('customCycles').value);
+  document.getElementById('customARAVal').textContent = ara.toFixed(3);
+  document.getElementById('customCycleVal').textContent = cycles;
+
+  const canvas = document.getElementById('customCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw single cycle on left
+  drawSingleCycleShape(ctx, 170, 250, 130, ara, '#f0c040', {
+    showLabels: true, showPhi: true, lineWidth: 2
+  });
+
+  // Draw extrusion on right
+  drawMultiCycleSpiral(ctx, 440, 260, 120, ara, '#f0c040', cycles, { viewAngle: 25 });
+
+  const accDeg = (360 / (1 + Math.max(ara, 0.03))).toFixed(1);
+  const classification = classifyARA(ara);
+  const phiDev = (Math.abs(ara - PHI) / PHI * 100).toFixed(1);
+  document.getElementById('customInfo').textContent = `Classification: ${classification} · Acc angle: ${accDeg}° · Deviation from phi: ${phiDev}%`;
+}
+
+// Event listeners
+extrudeSel.addEventListener('change', drawExtrude);
+document.getElementById('cycleCount').addEventListener('input', drawExtrude);
+document.getElementById('rotAngle').addEventListener('input', drawExtrude);
+compLeftSel.addEventListener('change', drawCompare);
+compRightSel.addEventListener('change', drawCompare);
+document.getElementById('compareCycles').addEventListener('input', drawCompare);
+document.getElementById('customARA').addEventListener('input', drawCustom);
+document.getElementById('customCycles').addEventListener('input', drawCustom);
+
+// Initial draws
+selectSystem(0);
+drawExtrude();
+drawCompare();
+drawCustom();
+</script>
+
+</body>
+</html>

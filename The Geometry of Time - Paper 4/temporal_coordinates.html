@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Coordinates — Every System on One Map</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 20px; max-width: 1600px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #aaa; margin-bottom: 16px; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 14px; line-height: 1.8; }
+  .controls {
+    display: flex; gap: 14px; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 12px 0; padding: 10px;
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+  }
+  .controls label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
+  button { background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; padding: 5px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: pointer; }
+  button:hover { background: #2a2a3e; }
+  button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+  .canvas-wrap { background: #060610; border: 1px solid #1a1a2e; border-radius: 8px; padding: 4px; margin: 12px 0; position: relative; }
+  canvas { display: block; }
+  .legend { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin: 8px 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; cursor: pointer; opacity: 1; transition: opacity 0.2s; }
+  .legend-item.dimmed { opacity: 0.3; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .tooltip {
+    position: absolute; background: rgba(10,10,20,0.95); border: 1px solid #333;
+    border-radius: 6px; padding: 8px 12px; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; pointer-events: none; display: none; z-index: 10;
+    max-width: 280px; line-height: 1.5;
+  }
+  .tooltip .name { color: #fff; font-weight: bold; }
+  .tooltip .sys { color: #aaa; font-size: 10px; }
+  .tooltip .val { color: #f0c040; }
+  .footer { font-size: 11px; color: #777; margin-top: 30px; padding-top: 12px; border-top: 1px solid #1a1a2e; }
+
+  /* ARA zone labels */
+  .zone-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+</style>
+</head>
+<body>
+
+<h1>Temporal Coordinates — 18 Systems on One Map</h1>
+<p class="subtitle">Y axis: ARA ratio (shape). X axis: cycle period (scale). 8 original + 10 blind-test systems. Every oscillatory subsystem maps to a point.</p>
+
+<p class="body-text">
+  The ARA ratio tells you the shape of a cycle. The cycle period tells you how fast it runs.
+  Together they give you the full temporal coordinates of any oscillatory subsystem. Subsystems
+  that cluster together have strong relational predictions. Subsystems far apart share only
+  classification — the string between them is too long for prediction.
+</p>
+
+<div class="controls">
+  <button id="tbLabels" class="active">Labels</button>
+  <button id="tbCouplings" class="active">Couplings</button>
+  <button id="tbZones">ARA Zones</button>
+  <button id="tbAllSystems" class="active">All Systems</button>
+</div>
+
+<div class="legend" id="legend"></div>
+
+<div class="canvas-wrap">
+  <canvas id="c" width="1500" height="900"></canvas>
+  <div class="tooltip" id="tooltip"></div>
+</div>
+
+<div class="footer">
+  The Geometry of Time — Dylan La Franchi &bull; April 2026 &bull; CC-BY-4.0
+</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const tooltipEl = document.getElementById('tooltip');
+
+let showLabels = true, showCouplings = true, showZones = false;
+let hoveredNode = null;
+let hiddenSystems = new Set();
+let highlightedSystem = null; // system key hovered in legend
+
+// ============================================================
+// ALL 8 SYSTEMS — every subsystem with ARA + cycle period in seconds
+// ============================================================
+
+const systemColors = {
+  engine: '#ff8787',
+  pc: '#4dabf7',
+  heart: '#b197fc',
+  hydrogen: '#ffd43b',
+  neuron: '#69db7c',
+  thunderstorm: '#e599f7',
+  predprey: '#ff922b',
+  earth: '#20c997',
+  energygrid: '#ffa94d',
+  rbconvect: '#74c0fc',
+  honeybee: '#ffe066',
+  slimemold: '#a9e34b',
+  biofilm: '#66d9e8',
+  starling: '#f783ac',
+  galaxy: '#da77f2',
+  dna: '#ff6b6b',
+  pulsar: '#38d9a9',
+  laser: '#e8590c'
+};
+
+// Convert all cycle periods to seconds for uniform X axis
+const allNodes = [
+  // ENGINE (at 3000 RPM: one 720° cycle = 0.04s)
+  { id: 'eng_combustion', name: 'Combustion Cycle', sys: 'engine', ara: 1.00, period: 0.04, note: '720° at 3000rpm' },
+  { id: 'eng_valve', name: 'Valve Timing', sys: 'engine', ara: 0.618, period: 0.04, note: '720° cycle' },
+  { id: 'eng_ignition', name: 'Ignition Pulse', sys: 'engine', ara: 0.0001, period: 0.0053, note: '5.3ms' },
+  { id: 'eng_fuel', name: 'Fuel Injection', sys: 'engine', ara: 0.10, period: 0.0165, note: '16.5ms' },
+  { id: 'eng_cooling', name: 'Cooling Cycle', sys: 'engine', ara: 1.60, period: 30, note: 'thermostat ~30s' },
+  { id: 'eng_oil', name: 'Oil Pressure', sys: 'engine', ara: 0.75, period: 20, note: 'pump regulation ~20s' },
+
+  // PC
+  { id: 'pc_clock', name: 'CPU Clock', sys: 'pc', ara: 1.00, period: 3e-10, note: '0.3ns at 3.5GHz' },
+  { id: 'pc_boost', name: 'CPU Boost/Idle', sys: 'pc', ara: 0.60, period: 3.2, note: '3.2s' },
+  { id: 'pc_ram', name: 'RAM Refresh', sys: 'pc', ara: 0.0047, period: 0.064, note: '64ms' },
+  { id: 'pc_disk', name: 'Disk I/O Buffer', sys: 'pc', ara: 0.40, period: 0.007, note: '7ms' },
+  { id: 'pc_thermal', name: 'Thermal/Cooling', sys: 'pc', ara: 1.30, period: 23, note: '23s' },
+  { id: 'pc_psu', name: 'Power Supply', sys: 'pc', ara: 1.00, period: 0.0083, note: '8.3ms (120Hz)' },
+
+  // HEART (resting 72 bpm)
+  { id: 'hr_sa', name: 'SA Node', sys: 'heart', ara: 0.043, period: 0.830, note: '830ms' },
+  { id: 'hr_av', name: 'AV Node', sys: 'heart', ara: 0.27, period: 0.135, note: '135ms' },
+  { id: 'hr_atrial', name: 'Atrial Mechanical', sys: 'heart', ara: 0.137, period: 0.830, note: '830ms' },
+  { id: 'hr_pump', name: 'Ventricular Pump', sys: 'heart', ara: 1.60, period: 0.830, note: '830ms' },
+  { id: 'hr_myocyte', name: 'Myocyte', sys: 'heart', ara: 1.73, period: 0.830, note: '830ms' },
+  { id: 'hr_coronary', name: 'Coronary Flow', sys: 'heart', ara: 1.22, period: 0.830, note: '830ms' },
+  { id: 'hr_vap', name: 'Ventricular AP', sys: 'heart', ara: 1.35, period: 0.830, note: '830ms' },
+  { id: 'hr_rsa', name: 'RSA (Breathing)', sys: 'heart', ara: 1.61, period: 4.7, note: '4.7s' },
+
+  // HYDROGEN
+  { id: 'h_orbital', name: 'Ground Orbital', sys: 'hydrogen', ara: 1.00, period: 1.52e-16, note: '152 attoseconds' },
+  { id: 'h_lyman', name: 'Lyman-alpha', sys: 'hydrogen', ara: 2.54e-7, period: 1.596e-9, note: '1.6ns' },
+  { id: 'h_metastable', name: '2s Metastable', sys: 'hydrogen', ara: 3.32e-15, period: 0.122, note: '122ms' },
+  { id: 'h_balmer', name: 'Balmer Cascade', sys: 'hydrogen', ara: 0.298, period: 6.96e-9, note: '7ns' },
+  { id: 'h_21cm', name: '21-cm Hyperfine', sys: 'hydrogen', ara: 2.03e-24, period: 3.47e14, note: '~11 Myr' },
+  { id: 'h_angular', name: 'Angular Mom. Gate', sys: 'hydrogen', ara: 0.0339, period: 1.63e-7, note: '163ns' },
+  { id: 'h_ionrec', name: 'Ionisation/Recomb', sys: 'hydrogen', ara: 1e-12, period: 1e4, note: '~2.8 hours' },
+
+  // NEURON
+  { id: 'n_spike', name: 'Integration→Spike', sys: 'neuron', ara: 0.060, period: 0.0265, note: '26.5ms' },
+  { id: 'n_depol', name: 'Depol/Repol', sys: 'neuron', ara: 2.14, period: 0.0011, note: '1.1ms' },
+  { id: 'n_refrac', name: 'Refractory', sys: 'neuron', ara: 3.33, period: 0.0052, note: '5.2ms' },
+  { id: 'n_vesicle', name: 'Synaptic Vesicle', sys: 'neuron', ara: 0.003, period: 0.050, note: '50ms' },
+  { id: 'n_pump', name: 'Na+/K+ Pump', sys: 'neuron', ara: 0.10, period: 0.0165, note: '16.5ms' },
+
+  // THUNDERSTORM
+  { id: 'ts_lifecycle', name: 'Storm Lifecycle', sys: 'thunderstorm', ara: 2.24, period: 3300, note: '55 min' },
+  { id: 'ts_lightning', name: 'Lightning', sys: 'thunderstorm', ara: 1.67e-7, period: 600, note: '~10 min charge, 0.1ms discharge' },
+  { id: 'ts_precip', name: 'Precipitation', sys: 'thunderstorm', ara: 0.75, period: 2100, note: '35 min' },
+  { id: 'ts_gust', name: 'Gust Front', sys: 'thunderstorm', ara: 0.58, period: 1140, note: '19 min' },
+  { id: 'ts_multi', name: 'Multicell Pulse', sys: 'thunderstorm', ara: 0.64, period: 1080, note: '18 min' },
+
+  // PREDATOR-PREY (years → seconds)
+  { id: 'pp_hare', name: 'Hare (Prey)', sys: 'predprey', ara: 0.46, period: 9.5 * 365.25 * 86400, note: '9.5 years' },
+  { id: 'pp_lynx', name: 'Lynx (Predator)', sys: 'predprey', ara: 0.73, period: 9.5 * 365.25 * 86400, note: '9.5 years' },
+  { id: 'pp_veg', name: 'Vegetation', sys: 'predprey', ara: 0.60, period: 4.0 * 365.25 * 86400, note: '4 years' },
+  { id: 'pp_lv', name: 'Lotka-Volterra (ref)', sys: 'predprey', ara: 1.00, period: 9.5 * 365.25 * 86400, note: 'theoretical' },
+
+  // EARTH
+  { id: 'e_diurnal', name: 'Diurnal Thermal', sys: 'earth', ara: 1.667, period: 86400, note: '24 hours' },
+  { id: 'e_tidal', name: 'Tidal Cycle', sys: 'earth', ara: 1.44, period: 43920, note: '12.2 hours' },
+  { id: 'e_water', name: 'Water Cycle', sys: 'earth', ara: 0.056, period: 820800, note: '9.5 days' },
+  { id: 'e_enso', name: 'ENSO', sys: 'earth', ara: 0.60, period: 4 * 365.25 * 86400, note: '4 years' },
+  { id: 'e_season', name: 'Seasonal', sys: 'earth', ara: 1.017, period: 365.25 * 86400, note: '1 year' },
+  { id: 'e_carbon', name: 'Carbon Cycle', sys: 'earth', ara: 12.5, period: 54 * 365.25 * 86400, note: '54 years' },
+  { id: 'e_volcanic', name: 'Volcanic Cycle', sys: 'earth', ara: 0.0002, period: 100 * 365.25 * 86400, note: '~100 years' },
+  { id: 'e_thermo', name: 'Thermohaline (AMOC)', sys: 'earth', ara: 0.667, period: 1000 * 365.25 * 86400, note: '~1000 years' },
+  { id: 'e_milanko', name: 'Milankovitch', sys: 'earth', ara: 0.111, period: 1e5 * 365.25 * 86400, note: '100,000 years' },
+  { id: 'e_dynamo', name: 'Geomagnetic Dynamo', sys: 'earth', ara: 0.023, period: 307000 * 365.25 * 86400, note: '307,000 years' },
+
+  // ============================================================
+  // BLIND TEST SYSTEMS (10 systems chosen by external AI, April 2026)
+  // ============================================================
+
+  // ENERGY GRID
+  { id: 'eg_ac', name: 'AC Waveform', sys: 'energygrid', ara: 1.00, period: 0.02, note: '50 Hz mains' },
+  { id: 'eg_daily', name: 'Daily Load Cycle', sys: 'energygrid', ara: 1.40, period: 86400, note: '24-hour demand' },
+
+  // RAYLEIGH-BÉNARD CONVECTION
+  { id: 'rb_lab', name: 'Lab Cell Overturn', sys: 'rbconvect', ara: 1.00, period: 30, note: '~30s steady rolls' },
+  { id: 'rb_hadley', name: 'Hadley Cell', sys: 'rbconvect', ara: 1.00, period: 30 * 86400, note: '~30 days' },
+
+  // HONEYBEE COLONY
+  { id: 'bee_annual', name: 'Annual Colony Cycle', sys: 'honeybee', ara: 1.40, period: 365.25 * 86400, note: '1 year' },
+  { id: 'bee_forage', name: 'Daily Foraging', sys: 'honeybee', ara: 0.20, period: 86400, note: '24 hours' },
+  { id: 'bee_thermo', name: 'Thermoregulation', sys: 'honeybee', ara: 1.60, period: 390, note: '~6.5 min' },
+
+  // SLIME MOLD (Physarum)
+  { id: 'sm_stream', name: 'Shuttle Streaming', sys: 'slimemold', ara: 1.18, period: 120, note: '~2 min' },
+  { id: 'sm_network', name: 'Network Optimisation', sys: 'slimemold', ara: 2.00, period: 21600, note: '~6 hours' },
+
+  // BACTERIAL BIOFILM (B. subtilis)
+  { id: 'bf_metab', name: 'Metabolic Oscillation', sys: 'biofilm', ara: 1.50, period: 18000, note: '~5 hours' },
+  { id: 'bf_kwave', name: 'K+ Wave', sys: 'biofilm', ara: 0.50, period: 3600, note: '~1 hour' },
+  { id: 'bf_growth', name: 'Growth Cycle', sys: 'biofilm', ara: 1.60, period: 6.5 * 86400, note: '~6.5 days' },
+
+  // STARLING MURMURATION
+  { id: 'st_wing', name: 'Wing Beat', sys: 'starling', ara: 1.38, period: 1/13.5, note: '13.5 Hz' },
+  { id: 'st_turn', name: 'Flock Turning Wave', sys: 'starling', ara: 2.00, period: 9, note: '~9 s' },
+  { id: 'st_session', name: 'Murmuration Session', sys: 'starling', ara: 2.00, period: 1800, note: '~30 min' },
+
+  // SPIRAL GALAXY
+  { id: 'gx_orbit', name: 'Stellar Orbit', sys: 'galaxy', ara: 1.00, period: 225e6 * 365.25 * 86400, note: '225 Myr' },
+  { id: 'gx_arm', name: 'Spiral Arm Passage', sys: 'galaxy', ara: 2.67, period: 110e6 * 365.25 * 86400, note: '110 Myr' },
+
+  // DNA
+  { id: 'dna_breath', name: 'Breathing Bubble', sys: 'dna', ara: 4.33, period: 80e-6, note: '~80 μs' },
+  { id: 'dna_cell', name: 'Cell Division Cycle', sys: 'dna', ara: 14.7, period: 84600, note: '~24 hours' },
+
+  // PULSAR
+  { id: 'psr_crab', name: 'Crab Rotation', sys: 'pulsar', ara: 1.00, period: 0.0335, note: '33.5 ms' },
+  { id: 'psr_typical', name: 'Typical Pulsar', sys: 'pulsar', ara: 1.00, period: 0.71, note: '710 ms' },
+  { id: 'psr_glitch', name: 'Vela Glitch Cycle', sys: 'pulsar', ara: 27.4, period: 3 * 365.25 * 86400, note: '~3 years' },
+
+  // LASER
+  { id: 'las_cw', name: 'CW Cavity Round-trip', sys: 'laser', ara: 1.00, period: 2e-9, note: '2 ns (30cm cavity)' },
+  { id: 'las_relax', name: 'Relaxation Oscillation', sys: 'laser', ara: 1.50, period: 1e-9, note: '~1 ns' },
+  { id: 'las_qswitch', name: 'Q-switched Pulse', sys: 'laser', ara: 20000, period: 200e-6, note: '200 μs cycle' },
+  { id: 'las_modelock', name: 'Mode-locked Pulse', sys: 'laser', ara: 125000, period: 12.5e-9, note: '80 MHz rep rate' },
+];
+
+// Couplings within systems (key ones only — keeps the map readable)
+const couplings = [
+  // Engine pipeline
+  { from: 'eng_ignition', to: 'eng_combustion', type: 1 },
+  { from: 'eng_valve', to: 'eng_combustion', type: 1 },
+  { from: 'eng_fuel', to: 'eng_combustion', type: 1 },
+  { from: 'eng_combustion', to: 'eng_cooling', type: 1 },
+  // Heart pipeline
+  { from: 'hr_sa', to: 'hr_av', type: 1 },
+  { from: 'hr_av', to: 'hr_vap', type: 1 },
+  { from: 'hr_vap', to: 'hr_myocyte', type: 1 },
+  { from: 'hr_myocyte', to: 'hr_pump', type: 1 },
+  { from: 'hr_pump', to: 'hr_coronary', type: 1 },
+  // Thunderstorm
+  { from: 'ts_lifecycle', to: 'ts_precip', type: 2 },
+  { from: 'ts_precip', to: 'ts_gust', type: 1 },
+  { from: 'ts_gust', to: 'ts_multi', type: 1 },
+  { from: 'ts_gust', to: 'ts_lifecycle', type: 3 },
+  { from: 'ts_lifecycle', to: 'ts_lightning', type: 2 },
+  // Neuron
+  { from: 'n_spike', to: 'n_depol', type: 1 },
+  { from: 'n_depol', to: 'n_refrac', type: 1 },
+  { from: 'n_vesicle', to: 'n_spike', type: 1 },
+  { from: 'n_pump', to: 'n_spike', type: 1 },
+  // Predator-prey
+  { from: 'pp_veg', to: 'pp_hare', type: 2 },
+  { from: 'pp_hare', to: 'pp_lynx', type: 2 },
+  { from: 'pp_lynx', to: 'pp_hare', type: 3 },
+  { from: 'pp_hare', to: 'pp_veg', type: 3 },
+  // Earth (key connections through ground cycle)
+  { from: 'e_diurnal', to: 'e_tidal', type: 1 },
+  { from: 'e_diurnal', to: 'e_season', type: 2 },
+  { from: 'e_season', to: 'e_water', type: 1 },
+  { from: 'e_season', to: 'e_enso', type: 2 },
+  // Honeybee
+  { from: 'bee_thermo', to: 'bee_forage', type: 2 },
+  { from: 'bee_forage', to: 'bee_annual', type: 2 },
+  // Slime mold
+  { from: 'sm_stream', to: 'sm_network', type: 2 },
+  // Biofilm
+  { from: 'bf_metab', to: 'bf_kwave', type: 1 },
+  { from: 'bf_kwave', to: 'bf_metab', type: 1 },
+  { from: 'bf_metab', to: 'bf_growth', type: 2 },
+  // Starling
+  { from: 'st_wing', to: 'st_turn', type: 2 },
+  { from: 'st_turn', to: 'st_session', type: 2 },
+  // Pulsar
+  { from: 'psr_crab', to: 'psr_glitch', type: 1 },
+  // Laser
+  { from: 'las_cw', to: 'las_relax', type: 1 },
+  { from: 'las_relax', to: 'las_cw', type: 1 },
+  { from: 'las_qswitch', to: 'las_cw', type: 3 },
+];
+
+// ============================================================
+// COORDINATE MAPPING
+// ============================================================
+
+const marginL = 100, marginR = 60, marginT = 70, marginB = 70;
+const plotW = canvas.width - marginL - marginR;
+const plotH = canvas.height - marginT - marginB;
+
+// X: log10 of period in seconds
+const allPeriods = allNodes.map(n => Math.log10(n.period));
+const minLogP = Math.floor(Math.min(...allPeriods)) - 0.5;
+const maxLogP = Math.ceil(Math.max(...allPeriods)) + 0.5;
+
+// Y: ARA — use log scale for the extreme values, but with a custom mapping
+// that expands the 0-2 region where most data lives
+// Use sinh-based mapping to handle the huge range while keeping 0-2 readable
+function araToY(ara) {
+  // Clamp for display
+  const v = Math.max(1e-25, ara);
+  // Log scale — most values span many orders of magnitude
+  const logAra = Math.log10(v);
+  const minLog = -25; // hydrogen 21-cm
+  const maxLog = 1.1; // earth carbon cycle ~12.5
+  const t = (logAra - minLog) / (maxLog - minLog);
+  return marginT + plotH * (1 - t);
+}
+
+function periodToX(period) {
+  const logP = Math.log10(period);
+  const t = (logP - minLogP) / (maxLogP - minLogP);
+  return marginL + plotW * t;
+}
+
+// Pre-compute screen positions
+allNodes.forEach(n => {
+  n.sx = periodToX(n.period);
+  n.sy = araToY(n.ara);
+});
+
+// ============================================================
+// ARA ZONE DEFINITIONS
+// ============================================================
+
+const araZones = [
+  { name: 'Ultra-extreme snap', min: 0, max: 0.01, color: '#ff6b6b' },
+  { name: 'Snap', min: 0.01, max: 0.15, color: '#ff8787' },
+  { name: 'Consumer', min: 0.15, max: 0.85, color: '#69db7c' },
+  { name: 'Shock absorber', min: 0.85, max: 1.15, color: '#74c0fc' },
+  { name: 'Clock-driven', min: 1.15, max: 1.50, color: '#4dabf7' },
+  { name: 'Phi zone (engine)', min: 1.50, max: 1.73, color: '#b197fc' },
+  { name: 'Exothermic', min: 1.73, max: 2.0, color: '#ffd43b' },
+  { name: 'Beyond scale', min: 2.0, max: 100, color: '#e599f7' },
+];
+
+// ============================================================
+// LEGEND
+// ============================================================
+
+const legendEl = document.getElementById('legend');
+const sysNames = {
+  engine: 'Engine', pc: 'PC', heart: 'Heart', hydrogen: 'Hydrogen',
+  neuron: 'Neuron', thunderstorm: 'Thunderstorm', predprey: 'Predator-Prey', earth: 'Earth'
+};
+
+Object.entries(sysNames).forEach(([key, name]) => {
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${systemColors[key]}"></div> ${name}`;
+  item.onclick = () => {
+    if (hiddenSystems.has(key)) hiddenSystems.delete(key);
+    else hiddenSystems.add(key);
+    item.classList.toggle('dimmed', hiddenSystems.has(key));
+  };
+  item.onmouseenter = () => { highlightedSystem = key; };
+  item.onmouseleave = () => { highlightedSystem = null; };
+  legendEl.appendChild(item);
+});
+
+// ============================================================
+// RENDER
+// ============================================================
+
+function formatPeriod(s) {
+  if (s < 1e-15) return (s * 1e18).toFixed(0) + ' as';
+  if (s < 1e-9) return (s * 1e12).toFixed(1) + ' ps';
+  if (s < 1e-6) return (s * 1e9).toFixed(1) + ' ns';
+  if (s < 1e-3) return (s * 1e6).toFixed(1) + ' us';
+  if (s < 1) return (s * 1e3).toFixed(1) + ' ms';
+  if (s < 60) return s.toFixed(1) + ' s';
+  if (s < 3600) return (s / 60).toFixed(1) + ' min';
+  if (s < 86400) return (s / 3600).toFixed(1) + ' hr';
+  if (s < 365.25 * 86400) return (s / 86400).toFixed(1) + ' days';
+  if (s < 1e6 * 365.25 * 86400) return (s / (365.25 * 86400)).toFixed(1) + ' yr';
+  return (s / (365.25 * 86400 * 1e6)).toFixed(1) + ' Myr';
+}
+
+function render() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const nodeMap = {};
+  allNodes.forEach(n => nodeMap[n.id] = n);
+
+  // ---- ARA Zone bands ----
+  if (showZones) {
+    araZones.forEach(z => {
+      const y1 = araToY(z.max);
+      const y2 = araToY(z.min);
+      // Very subtle fill
+      ctx.fillStyle = z.color + '06';
+      ctx.fillRect(marginL, y1, plotW, y2 - y1);
+      // Thin colored border lines at zone boundaries
+      ctx.beginPath();
+      ctx.moveTo(marginL, y1);
+      ctx.lineTo(marginL + plotW, y1);
+      ctx.strokeStyle = '#f0c040' + '44';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(marginL, y2);
+      ctx.lineTo(marginL + plotW, y2);
+      ctx.stroke();
+      // Zone label on left
+      ctx.font = "9px 'JetBrains Mono'";
+      ctx.fillStyle = z.color + 'aa';
+      ctx.textAlign = 'right';
+      const ym = (y1 + y2) / 2;
+      if (ym > marginT && ym < marginT + plotH) {
+        ctx.fillText(z.name, marginL - 5, ym + 3);
+      }
+      ctx.textAlign = 'left';
+    });
+  }
+
+  // ---- Grid lines ----
+  ctx.strokeStyle = '#111';
+  ctx.lineWidth = 0.5;
+
+  // X grid: every 3 orders of magnitude with labels
+  for (let lp = Math.ceil(minLogP); lp <= Math.floor(maxLogP); lp++) {
+    const x = periodToX(Math.pow(10, lp));
+    ctx.beginPath();
+    ctx.moveTo(x, marginT);
+    ctx.lineTo(x, marginT + plotH);
+    ctx.strokeStyle = lp % 3 === 0 ? '#1a1a2e' : '#0e0e1a';
+    ctx.stroke();
+
+    // Label
+    if (lp % 3 === 0 || lp % 2 === 0) {
+      ctx.font = "9px 'JetBrains Mono'";
+      ctx.fillStyle = '#888';
+      ctx.textAlign = 'center';
+      ctx.fillText(formatPeriod(Math.pow(10, lp)), x, marginT + plotH + 18);
+      ctx.fillStyle = '#555';
+      ctx.fillText('10^' + lp + ' s', x, marginT + plotH + 32);
+    }
+  }
+
+  // Y grid: key ARA values
+  const yMarkers = [1e-24, 1e-20, 1e-15, 1e-12, 1e-7, 0.001, 0.01, 0.1, 0.5, 1.0, 1.618, 2.0, 5.0, 12.5];
+  yMarkers.forEach(ara => {
+    const y = araToY(ara);
+    if (y < marginT || y > marginT + plotH) return;
+    ctx.beginPath();
+    ctx.moveTo(marginL, y);
+    ctx.lineTo(marginL + plotW, y);
+    ctx.strokeStyle = ara === 1.618 ? '#b197fc22' : ara === 1.0 ? '#74c0fc15' : '#0e0e1a';
+    ctx.lineWidth = ara === 1.618 ? 1 : 0.5;
+    ctx.stroke();
+
+    ctx.font = "10px 'JetBrains Mono'";
+    ctx.fillStyle = ara === 1.618 ? '#b197fccc' : ara === 1.0 ? '#74c0fcaa' : '#777';
+    ctx.textAlign = 'right';
+    let label = ara >= 0.001 ? ara.toString() : ara.toExponential(0);
+    if (ara === 1.618) label = '\u03C6 (1.618)';
+    if (ara === 1.0) label = '1.0 (symmetric)';
+    ctx.fillText(label, marginL - 8, y + 3);
+  });
+
+  // ---- Axis labels ----
+  ctx.font = "bold 11px 'JetBrains Mono'";
+  ctx.fillStyle = '#999';
+  ctx.textAlign = 'center';
+  ctx.fillText('CYCLE PERIOD (log scale)', marginL + plotW / 2, marginT + plotH + 50);
+
+  ctx.save();
+  ctx.translate(20, marginT + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('ARA RATIO (log scale)', 0, 0);
+  ctx.restore();
+
+  // ---- Coupling lines ----
+  if (showCouplings) {
+    couplings.forEach(cp => {
+      const from = nodeMap[cp.from];
+      const to = nodeMap[cp.to];
+      if (!from || !to) return;
+      if (hiddenSystems.has(from.sys) || hiddenSystems.has(to.sys)) return;
+      const couplingFocused = !highlightedSystem || from.sys === highlightedSystem || to.sys === highlightedSystem;
+      const couplingDim = highlightedSystem && !couplingFocused;
+
+      const mx = (from.sx + to.sx) / 2;
+      const my = (from.sy + to.sy) / 2;
+      const dx = to.sx - from.sx, dy = to.sy - from.sy;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const nx = -dy / (dist || 1), ny = dx / (dist || 1);
+      const bulge = Math.min(dist * 0.2, 30);
+
+      ctx.beginPath();
+      ctx.moveTo(from.sx, from.sy);
+      ctx.quadraticCurveTo(mx + nx * bulge, my + ny * bulge, to.sx, to.sy);
+
+      const cAlpha = couplingDim ? 0.03 : (couplingFocused && highlightedSystem ? 1.0 : 1.0);
+      if (cp.type === 3) {
+        ctx.strokeStyle = `rgba(255, 107, 107, ${0.25 * cAlpha})`;
+        ctx.lineWidth = couplingDim ? 0.5 : (highlightedSystem ? 2 : 1.5);
+        ctx.setLineDash([3, 3]);
+      } else if (cp.type === 2) {
+        ctx.strokeStyle = `rgba(77, 171, 247, ${0.15 * cAlpha})`;
+        ctx.lineWidth = couplingDim ? 0.5 : (highlightedSystem ? 1.5 : 1);
+        ctx.setLineDash([]);
+      } else {
+        ctx.strokeStyle = `rgba(105, 219, 124, ${0.2 * cAlpha})`;
+        ctx.lineWidth = couplingDim ? 0.5 : (highlightedSystem ? 1.5 : 1);
+        ctx.setLineDash([]);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    });
+  }
+
+  // ---- Nodes ----
+  // Two passes: dimmed nodes first, then bright nodes on top
+  const passes = highlightedSystem ? ['dim', 'bright'] : ['normal'];
+  passes.forEach(pass => {
+    allNodes.forEach(n => {
+      if (hiddenSystems.has(n.sys)) return;
+
+      const isFocused = !highlightedSystem || n.sys === highlightedSystem;
+      if (pass === 'dim' && isFocused) return;
+      if (pass === 'bright' && !isFocused) return;
+
+      const isHovered = hoveredNode === n.id;
+      const dimmed = highlightedSystem && !isFocused;
+      const baseR = isHovered ? 7 : dimmed ? 3 : 5;
+      const col = systemColors[n.sys];
+      const alpha = dimmed ? '18' : (isHovered ? 'ff' : 'cc');
+      const labelAlpha = dimmed ? '10' : (isFocused && highlightedSystem ? 'dd' : '99');
+
+      // Glow for hovered or highlighted system
+      if (isHovered || (isFocused && highlightedSystem && !dimmed)) {
+        ctx.beginPath();
+        ctx.arc(n.sx, n.sy, isHovered ? 14 : 10, 0, Math.PI * 2);
+        ctx.fillStyle = col + (isHovered ? '22' : '11');
+        ctx.fill();
+      }
+
+      // Dot
+      ctx.beginPath();
+      ctx.arc(n.sx, n.sy, baseR, 0, Math.PI * 2);
+      ctx.fillStyle = col + alpha;
+      ctx.fill();
+      if (!dimmed) {
+        ctx.strokeStyle = col + (dimmed ? '22' : '88');
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      // Label
+      if (showLabels && !isHovered && !dimmed) {
+        ctx.font = (isFocused && highlightedSystem) ? "bold 10px 'JetBrains Mono'" : "9px 'JetBrains Mono'";
+        ctx.fillStyle = col + labelAlpha;
+        ctx.textAlign = 'left';
+        // Add dark background behind label for readability in clusters
+        const metrics = ctx.measureText(n.name);
+        ctx.fillStyle = 'rgba(6, 6, 16, 0.7)';
+        ctx.fillRect(n.sx + 7, n.sy - 7, metrics.width + 4, 13);
+        ctx.fillStyle = col + labelAlpha;
+        ctx.fillText(n.name, n.sx + 9, n.sy + 3);
+      }
+    });
+  });
+
+  // ---- Title ----
+  ctx.font = "12px 'JetBrains Mono'";
+  ctx.fillStyle = '#666';
+  ctx.textAlign = 'center';
+  const visCount = allNodes.filter(n => !hiddenSystems.has(n.sys)).length;
+  ctx.fillText(`${visCount} subsystems across 8 systems — 30 orders of magnitude`, canvas.width / 2, 25);
+
+  // ---- Scale annotations ----
+  ctx.font = "9px 'JetBrains Mono'";
+  ctx.fillStyle = '#666';
+  ctx.textAlign = 'center';
+  const scaleLabels = [
+    { log: -16, label: 'QUANTUM' },
+    { log: -9, label: 'NANO' },
+    { log: -3, label: 'MILLI' },
+    { log: 0, label: 'SECONDS' },
+    { log: 3, label: 'MINUTES-HOURS' },
+    { log: 7, label: 'MONTHS-YEARS' },
+    { log: 10, label: 'CENTURIES' },
+    { log: 14, label: 'GEOLOGICAL' },
+  ];
+  scaleLabels.forEach(sl => {
+    const x = periodToX(Math.pow(10, sl.log));
+    if (x > marginL && x < marginL + plotW) {
+      ctx.fillText(sl.label, x, marginT - 8);
+    }
+  });
+
+  requestAnimationFrame(render);
+}
+
+// ============================================================
+// MOUSE INTERACTION
+// ============================================================
+
+canvas.addEventListener('mousemove', e => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = (e.clientX - rect.left) * (canvas.width / rect.width);
+  const my = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+  let closest = null;
+  let closestDist = 20; // pixel threshold
+
+  allNodes.forEach(n => {
+    if (hiddenSystems.has(n.sys)) return;
+    const dx = n.sx - mx, dy = n.sy - my;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = n;
+    }
+  });
+
+  hoveredNode = closest ? closest.id : null;
+
+  if (closest) {
+    const araStr = closest.ara < 0.001 ? closest.ara.toExponential(2) : closest.ara.toFixed(4);
+    tooltipEl.innerHTML = `
+      <div class="name" style="color:${systemColors[closest.sys]}">${closest.name}</div>
+      <div class="sys">${sysNames[closest.sys]}</div>
+      <div class="val">ARA: ${araStr}</div>
+      <div class="val">Period: ${formatPeriod(closest.period)}</div>
+      <div style="color:#999;font-size:10px">${closest.note}</div>
+    `;
+    tooltipEl.style.display = 'block';
+    // Position tooltip
+    const tx = e.clientX - rect.left + 15;
+    const ty = e.clientY - rect.top - 10;
+    tooltipEl.style.left = Math.min(tx, rect.width - 200) + 'px';
+    tooltipEl.style.top = ty + 'px';
+  } else {
+    tooltipEl.style.display = 'none';
+  }
+});
+
+canvas.addEventListener('mouseleave', () => {
+  hoveredNode = null;
+  tooltipEl.style.display = 'none';
+});
+
+// ============================================================
+// CONTROLS
+// ============================================================
+
+document.getElementById('tbLabels').onclick = e => { showLabels = !showLabels; e.target.classList.toggle('active', showLabels); };
+document.getElementById('tbCouplings').onclick = e => { showCouplings = !showCouplings; e.target.classList.toggle('active', showCouplings); };
+document.getElementById('tbZones').onclick = e => { showZones = !showZones; e.target.classList.toggle('active', showZones); };
+document.getElementById('tbAllSystems').onclick = e => {
+  if (hiddenSystems.size > 0) {
+    hiddenSystems.clear();
+    document.querySelectorAll('.legend-item').forEach(i => i.classList.remove('dimmed'));
+  }
+  e.target.classList.add('active');
+};
+
+render();
+</script>
+</body>
+</html>

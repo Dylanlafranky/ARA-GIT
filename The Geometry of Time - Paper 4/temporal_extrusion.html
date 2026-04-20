@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Extrusion — Coupled Systems Through Time</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 20px; max-width: 1600px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 20px; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 14px; line-height: 1.8; }
+  .controls {
+    display: flex; gap: 14px; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 12px 0; padding: 10px;
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+  }
+  .controls label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .controls input[type=range] { width: 100px; accent-color: #f0c040; }
+  .controls .val { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #f0c040; min-width: 25px; }
+  select { background: #111122; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  button { background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; padding: 5px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: pointer; }
+  button:hover { background: #2a2a3e; }
+  button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+  .canvas-wrap { background: #060610; border: 1px solid #1a1a2e; border-radius: 8px; padding: 4px; margin: 12px 0; overflow: hidden; }
+  canvas { display: block; }
+  .legend { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 8px 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .footer { font-size: 11px; color: #555; margin-top: 30px; padding-top: 12px; border-top: 1px solid #1a1a2e; }
+</style>
+</head>
+<body>
+
+<h1>Temporal Extrusion — Watching Systems Live and Die</h1>
+<p class="subtitle">Coupled shapes extruded through time. Handoffs reinforce. Destructive couplings fray.</p>
+
+<p class="body-text">
+  Time flows left to right. Each subsystem traces its temporal shape at every cycle, creating a ribbon
+  through time. Where couplings are healthy (amber→blue handoffs), the ribbons braid together cleanly.
+  Where couplings are destructive (amber breaks blue), the ribbons pull apart — the system unravels.
+  Watch the thunderstorm fray and die. Watch the heart hold steady. Watch predator-prey oscillate
+  between stress and recovery — it never collapses, but it never stabilises either.
+</p>
+
+<div class="controls">
+  <label>System:</label>
+  <select id="sysSel">
+    <option value="thunderstorm" selected>Thunderstorm (dies ~3 cycles)</option>
+    <option value="heart">Heart (stable braid)</option>
+    <option value="engine">Engine (stable pipeline)</option>
+    <option value="predprey">Predator-Prey (oscillating fray)</option>
+    <option value="pair">Simple Pair</option>
+  </select>
+  <label>Cycles:</label>
+  <input type="range" id="cycles" min="2" max="20" value="8">
+  <span class="val" id="cyclesV">8</span>
+  <label>Fray strength:</label>
+  <input type="range" id="fray" min="0" max="2" step="0.1" value="1.0">
+  <span class="val" id="frayV">1.0</span>
+  <label>Shape size:</label>
+  <input type="range" id="shapeSize" min="15" max="50" step="2" value="28">
+  <span class="val" id="shapeSizeV">28</span>
+  <button id="tbLabels" class="active">Labels</button>
+  <button id="tbCoupling" class="active">Couplings</button>
+  <button id="tbAnimate" class="active">Animate</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#4dabf7"></div> Accumulation</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0c040"></div> Release</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#69db7c"></div> Handoff coupling</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4dabf7;opacity:0.5"></div> Overflow coupling</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Destructive (fraying)</div>
+</div>
+
+<div class="canvas-wrap">
+  <canvas id="c" width="1500" height="900"></canvas>
+</div>
+
+<div class="footer">
+  The Geometry of Time — Dylan La Franchi &bull; April 2026 &bull; CC-BY-4.0
+</div>
+
+<script>
+const c = document.getElementById('c');
+const X = c.getContext('2d');
+let T = 0;
+let numCycles = 8, frayMul = 1.0, shapeR = 28;
+let showLabels = true, showCouplings = true, animate = true;
+let cur = 'thunderstorm';
+
+// ============================================================
+// SYSTEMS
+// ============================================================
+
+const systems = {
+  pair: {
+    name: "Simple Pair",
+    nodes: [
+      { id: "a", name: "System A (phi)", ara: 1.618, color: "#b197fc", lane: 0 },
+      { id: "b", name: "System B", ara: 0.65, color: "#69db7c", lane: 1 },
+    ],
+    couplings: [
+      { from: "a", to: "b", type: 1, strength: 1.0, label: "Handoff" },
+    ]
+  },
+  thunderstorm: {
+    name: "Thunderstorm — Watch It Die",
+    nodes: [
+      { id: "lifecycle", name: "Storm Lifecycle", ara: 2.24, color: "#e599f7", lane: 0 },
+      { id: "precip", name: "Precipitation", ara: 0.75, color: "#69db7c", lane: 1 },
+      { id: "gust", name: "Gust Front", ara: 0.58, color: "#69db7c", lane: 2 },
+      { id: "multicell", name: "Multicell Pulse", ara: 0.64, color: "#69db7c", lane: 3 },
+      { id: "lightning", name: "Lightning", ara: 1.7e-7, color: "#ff6b6b", lane: 4 },
+    ],
+    couplings: [
+      { from: "lifecycle", to: "precip", type: 2, strength: 1.0, label: "Overflow: updraft" },
+      { from: "precip", to: "gust", type: 1, strength: 1.0, label: "Handoff: evap→cold pool" },
+      { from: "gust", to: "multicell", type: 1, strength: 1.0, label: "Handoff: triggers cell" },
+      { from: "multicell", to: "lifecycle", type: 1, strength: 1.0, label: "Handoff: pulse=lifecycle" },
+      { from: "lifecycle", to: "lightning", type: 2, strength: 1.0, label: "Overflow: charge env" },
+      { from: "gust", to: "lifecycle", type: 3, strength: 0.9, label: "DESTRUCTIVE: kills updraft" },
+    ]
+  },
+  heart: {
+    name: "Heart — Stable Braid",
+    nodes: [
+      { id: "sa", name: "SA Node", ara: 0.043, color: "#ff6b6b", lane: 0 },
+      { id: "av", name: "AV Node", ara: 0.27, color: "#ff8787", lane: 1 },
+      { id: "vap", name: "Ventricular AP", ara: 1.35, color: "#4dabf7", lane: 2 },
+      { id: "myocyte", name: "Myocyte", ara: 1.73, color: "#ffd43b", lane: 3 },
+      { id: "pump", name: "Ventricular Pump", ara: 1.60, color: "#b197fc", lane: 4 },
+      { id: "coronary", name: "Coronary Flow", ara: 1.22, color: "#4dabf7", lane: 5 },
+    ],
+    couplings: [
+      { from: "sa", to: "av", type: 1, strength: 1.0, label: "Handoff: trigger→gate" },
+      { from: "av", to: "vap", type: 1, strength: 1.0, label: "Handoff: gate→AP" },
+      { from: "vap", to: "myocyte", type: 1, strength: 1.0, label: "Handoff: elec→mech" },
+      { from: "myocyte", to: "pump", type: 1, strength: 1.0, label: "Handoff: force→eject" },
+      { from: "pump", to: "coronary", type: 1, strength: 1.0, label: "Handoff: pressure→flow" },
+      { from: "coronary", to: "myocyte", type: 1, strength: 0.8, label: "Handoff: O₂→viability" },
+    ]
+  },
+  predprey: {
+    name: "Predator-Prey — Oscillating Fray",
+    recoveryRate: 0.7, // Type 1 handoffs counteract Type 3 destruction each cycle
+    nodes: [
+      { id: "vegetation", name: "Vegetation", ara: 0.60, color: "#69db7c", lane: 0 },
+      { id: "hare", name: "Hare (Prey)", ara: 0.46, color: "#4dabf7", lane: 1 },
+      { id: "lynx", name: "Lynx (Predator)", ara: 0.73, color: "#ff8787", lane: 2 },
+      { id: "lv", name: "Lotka-Volterra (ref)", ara: 1.00, color: "#888888", lane: 3 },
+    ],
+    couplings: [
+      { from: "vegetation", to: "hare", type: 2, strength: 0.8, label: "Overflow: browse sustains" },
+      { from: "hare", to: "vegetation", type: 3, strength: 0.7, label: "DESTRUCTIVE: overgrazing" },
+      { from: "hare", to: "lynx", type: 2, strength: 0.9, label: "Overflow: prey feeds predator" },
+      { from: "lynx", to: "hare", type: 3, strength: 0.9, label: "DESTRUCTIVE: predation" },
+      { from: "lynx", to: "hare", type: 1, strength: 0.6, label: "Handoff: crash lifts pressure" },
+      { from: "hare", to: "vegetation", type: 1, strength: 0.5, label: "Handoff: pop crash → regrowth" },
+    ]
+  },
+  engine: {
+    name: "Engine — Clean Pipeline",
+    nodes: [
+      { id: "intake", name: "Intake", ara: 0.50, color: "#69db7c", lane: 0 },
+      { id: "ignition", name: "Ignition", ara: 0.0001, color: "#ff6b6b", lane: 1 },
+      { id: "combustion", name: "Combustion", ara: 0.0044, color: "#ff6b6b", lane: 2 },
+      { id: "exhaust", name: "Exhaust", ara: 0.75, color: "#69db7c", lane: 3 },
+      { id: "cooling", name: "Cooling", ara: 1.60, color: "#b197fc", lane: 4 },
+    ],
+    couplings: [
+      { from: "intake", to: "combustion", type: 1, strength: 1.0, label: "Handoff: charge→burn" },
+      { from: "ignition", to: "combustion", type: 1, strength: 1.0, label: "Handoff: spark" },
+      { from: "combustion", to: "exhaust", type: 1, strength: 1.0, label: "Handoff: gases out" },
+      { from: "combustion", to: "cooling", type: 1, strength: 0.8, label: "Handoff: heat" },
+      { from: "exhaust", to: "intake", type: 1, strength: 0.8, label: "Handoff: cycle restart" },
+    ]
+  }
+};
+
+// ============================================================
+// SHAPE GENERATION
+// ============================================================
+
+function shapePoints(cx, cy, radius, ara, rotation, steps = 80) {
+  const vARA = Math.max(ara, 0.04);
+  const accAng = (2 * Math.PI) / (1 + vARA);
+  const relAng = (2 * Math.PI) - accAng;
+  const start = -Math.PI / 2 + rotation;
+  const aSteps = Math.max(3, Math.round(steps * (accAng / (2 * Math.PI))));
+  const rSteps = Math.max(3, steps - aSteps);
+
+  const pts = [];
+  for (let i = 0; i <= aSteps; i++) {
+    const t = i / aSteps;
+    const ang = start + t * accAng;
+    const e = t * t * (3 - 2 * t);
+    const r = radius * (0.2 + 0.8 * e);
+    pts.push({ x: cx + r * Math.cos(ang), y: cy + r * Math.sin(ang), phase: 'acc', r });
+  }
+  for (let i = 1; i <= rSteps; i++) {
+    const t = i / rSteps;
+    const ang = start + accAng + t * relAng;
+    const e = 1 - (t * t * (3 - 2 * t));
+    const r = radius * (0.2 + 0.8 * e);
+    pts.push({ x: cx + r * Math.cos(ang), y: cy + r * Math.sin(ang), phase: 'rel', r });
+  }
+  return pts;
+}
+
+// ============================================================
+// FRAYING MODEL
+// ============================================================
+
+function computeFrayOffsets(sys, cycle) {
+  // Each node accumulates displacement from destructive couplings over cycles
+  const offsets = {};
+  sys.nodes.forEach(n => offsets[n.id] = { dx: 0, dy: 0, scale: 1.0, wobble: 0 });
+  const nodeMap = {};
+  sys.nodes.forEach(n => nodeMap[n.id] = n);
+
+  // Does this system have recovery? (Type 1 handoffs counteracting Type 3)
+  const recovery = sys.recoveryRate || 0;
+
+  // Accumulate destructive effects
+  sys.couplings.forEach(cp => {
+    if (cp.type === 3) {
+      const target = cp.to;
+      const source = cp.from;
+      const targetNode = nodeMap[target];
+      const sourceNode = nodeMap[source];
+      if (!targetNode || !sourceNode) return;
+
+      let frayAmount, wobbleAmount, scaleDecay;
+
+      if (recovery > 0) {
+        // OSCILLATING FRAY — destructive couplings are counterbalanced by recovery
+        // System wobbles periodically: stressed → recovers → stressed again
+        // Phase offset per node so hare and vegetation don't fray in sync
+        const phaseOffset = targetNode.lane * 1.2;
+        const oscPeriod = 2.5; // cycles per full oscillation
+        const wave = Math.sin((cycle / oscPeriod) * Math.PI * 2 + phaseOffset);
+        const envelope = 0.5 + 0.5 * wave; // 0 to 1, oscillating
+
+        frayAmount = cp.strength * frayMul * envelope * 4.0;
+        wobbleAmount = cp.strength * frayMul * envelope * 5.0;
+        scaleDecay = cp.strength * frayMul * envelope * 0.06;
+      } else {
+        // MONOTONIC FRAY — no recovery, system degrades and dies
+        frayAmount = cp.strength * frayMul * (cycle * cycle) * 0.8;
+        wobbleAmount = cp.strength * frayMul * cycle * 2.5;
+        scaleDecay = cp.strength * frayMul * cycle * 0.08;
+      }
+
+      const dir = targetNode.lane < sourceNode.lane ? -1 : 1;
+      offsets[target].dy += dir * frayAmount;
+      offsets[target].wobble += wobbleAmount;
+      offsets[target].scale = Math.max(0.3, offsets[target].scale - scaleDecay);
+
+      // Secondary: source also wobbles slightly from the destructive feedback
+      offsets[source].wobble += wobbleAmount * 0.3;
+    }
+  });
+
+  // Beyond-scale systems (ARA > 2) inherently degrade
+  sys.nodes.forEach(n => {
+    if (n.ara > 2.0) {
+      const selfFray = (n.ara - 2.0) * cycle * frayMul * 1.5;
+      offsets[n.id].wobble += selfFray;
+      offsets[n.id].scale = Math.max(0.2, offsets[n.id].scale - cycle * 0.03 * frayMul);
+    }
+  });
+
+  return offsets;
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+
+function render() {
+  if (animate) T += 0.012;
+  X.clearRect(0, 0, c.width, c.height);
+
+  const sys = systems[cur];
+  const nodeMap = {};
+  sys.nodes.forEach(n => nodeMap[n.id] = n);
+
+  const marginL = 120;
+  const marginR = 40;
+  const marginT = 60;
+  const marginB = 60;
+  const usableW = c.width - marginL - marginR;
+  const usableH = c.height - marginT - marginB;
+
+  const laneCount = sys.nodes.length;
+  const laneH = usableH / laneCount;
+  const cycleW = usableW / numCycles;
+
+  // Time axis
+  X.beginPath();
+  X.moveTo(marginL, c.height - marginB + 20);
+  X.lineTo(c.width - marginR, c.height - marginB + 20);
+  X.strokeStyle = '#222';
+  X.lineWidth = 1;
+  X.stroke();
+  X.font = "10px 'JetBrains Mono'";
+  X.fillStyle = '#444';
+  X.textAlign = 'center';
+  for (let i = 0; i < numCycles; i++) {
+    const x = marginL + (i + 0.5) * cycleW;
+    X.fillText('Cycle ' + (i + 1), x, c.height - marginB + 34);
+  }
+  X.fillText('time →', c.width - marginR - 20, c.height - marginB + 34);
+  X.textAlign = 'left';
+
+  // Lane labels
+  if (showLabels) {
+    sys.nodes.forEach(n => {
+      const y = marginT + (n.lane + 0.5) * laneH;
+      X.font = "bold 10px 'JetBrains Mono'";
+      X.fillStyle = n.color;
+      X.textAlign = 'right';
+      X.fillText(n.name, marginL - 10, y - 6);
+      X.font = "9px 'JetBrains Mono'";
+      X.fillStyle = '#666';
+      const araStr = n.ara < 0.001 ? n.ara.toExponential(1) : n.ara.toFixed(2);
+      X.fillText('ARA: ' + araStr, marginL - 10, y + 8);
+      X.textAlign = 'left';
+    });
+  }
+
+  // Draw each cycle
+  const allShapeData = []; // [cycle][nodeId] = { cx, cy, pts }
+
+  for (let cyc = 0; cyc < numCycles; cyc++) {
+    const cycleData = {};
+    const frayOffsets = computeFrayOffsets(sys, cyc);
+    const cycleAlpha = 0.4 + 0.6 * (cyc / numCycles); // fade in over time
+    const baseCycleX = marginL + (cyc + 0.5) * cycleW;
+
+    sys.nodes.forEach(n => {
+      const baseLaneY = marginT + (n.lane + 0.5) * laneH;
+      const offsets = frayOffsets[n.id];
+
+      // Apply fray displacement
+      const wobble = Math.sin(T * 3 + cyc * 1.7 + n.lane * 0.9) * offsets.wobble;
+      const cx = baseCycleX + wobble * 0.4;
+      const cy = baseLaneY + offsets.dy + wobble * 0.6;
+      const scale = offsets.scale;
+      const r = shapeR * scale;
+
+      // Rotation progresses with cycles + animation
+      const rotSpeed = n.ara < 0.01 ? 2.0 : n.ara < 0.5 ? 0.8 : n.ara < 1.8 ? 0.4 : 0.5;
+      const rotation = (T * rotSpeed) + cyc * Math.PI * 0.7;
+
+      const pts = shapePoints(cx, cy, r, n.ara, rotation, 60);
+
+      // Draw shape
+      // Fill
+      X.beginPath();
+      X.moveTo(cx, cy);
+      pts.forEach(p => X.lineTo(p.x, p.y));
+      X.closePath();
+      X.fillStyle = n.color + Math.round(cycleAlpha * 15).toString(16).padStart(2, '0');
+      X.fill();
+
+      // Acc arc (blue)
+      X.beginPath();
+      const accPts = pts.filter(p => p.phase === 'acc');
+      accPts.forEach((p, i) => i === 0 ? X.moveTo(p.x, p.y) : X.lineTo(p.x, p.y));
+      const alphaHex = Math.round(cycleAlpha * 200).toString(16).padStart(2, '0');
+      X.strokeStyle = '#4dabf7' + alphaHex;
+      X.lineWidth = 1.5;
+      X.stroke();
+
+      // Rel arc (amber)
+      X.beginPath();
+      const relPts = pts.filter(p => p.phase === 'rel');
+      const peak = accPts[accPts.length - 1];
+      if (peak) {
+        X.moveTo(peak.x, peak.y);
+        relPts.forEach(p => X.lineTo(p.x, p.y));
+        X.strokeStyle = '#f0c040' + alphaHex;
+        X.lineWidth = 1.5;
+        X.stroke();
+      }
+
+      // Peak dot
+      if (peak) {
+        X.beginPath();
+        X.arc(peak.x, peak.y, 2, 0, Math.PI * 2);
+        X.fillStyle = '#fff' + alphaHex;
+        X.fill();
+      }
+
+      // If heavily frayed, draw distress marks
+      if (offsets.wobble > 3 || scale < 0.8) {
+        const distress = Math.min(1, (offsets.wobble / 10 + (1 - scale) * 2));
+        X.beginPath();
+        X.arc(cx, cy, r * 1.5, 0, Math.PI * 2);
+        X.strokeStyle = `rgba(255, 107, 107, ${distress * 0.15 * cycleAlpha})`;
+        X.lineWidth = 1;
+        X.setLineDash([2, 4]);
+        X.stroke();
+        X.setLineDash([]);
+      }
+
+      cycleData[n.id] = { cx, cy, r, pts, peak, scale, offsets };
+    });
+
+    allShapeData.push(cycleData);
+
+    // Draw coupling lines for this cycle
+    if (showCouplings) {
+      let labelOffsets = {};
+      sys.couplings.forEach(cp => {
+        const fromData = cycleData[cp.from];
+        const toData = cycleData[cp.to];
+        if (!fromData || !toData) return;
+
+        const fx = fromData.cx, fy = fromData.cy;
+        const tx = toData.cx, ty = toData.cy;
+
+        // Curve the coupling line slightly
+        const mx = (fx + tx) / 2;
+        const my = (fy + ty) / 2;
+        const dx = tx - fx, dy = ty - fy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const nx = -dy / (dist || 1), ny = dx / (dist || 1);
+        const bulge = dist * 0.15;
+
+        X.beginPath();
+        X.moveTo(fx, fy);
+        X.quadraticCurveTo(mx + nx * bulge, my + ny * bulge, tx, ty);
+
+        if (cp.type === 3) {
+          // Destructive — red, gets bolder with cycle
+          const intensity = Math.min(1, (cyc + 1) / numCycles);
+          X.strokeStyle = `rgba(255, 107, 107, ${intensity * 0.4 * cycleAlpha})`;
+          X.lineWidth = 1 + intensity * 2;
+          X.setLineDash([3, 3]);
+        } else if (cp.type === 2) {
+          // Overflow — blue-ish, subtle
+          X.strokeStyle = `rgba(77, 171, 247, ${0.15 * cycleAlpha})`;
+          X.lineWidth = 1;
+          X.setLineDash([]);
+        } else {
+          // Handoff — green
+          X.strokeStyle = `rgba(105, 219, 124, ${0.2 * cycleAlpha * cp.strength})`;
+          X.lineWidth = 1 + cp.strength;
+          X.setLineDash([]);
+        }
+        X.stroke();
+        X.setLineDash([]);
+
+        // Coupling label on first cycle only
+        if (cyc === 0 && showLabels && cp.label) {
+          // Track label offsets for same-pair couplings
+          const pairKey = cp.from + '-' + cp.to;
+          const reversePairKey = cp.to + '-' + cp.from;
+          const existingKey = labelOffsets[pairKey] || labelOffsets[reversePairKey] || 0;
+          labelOffsets[pairKey] = existingKey + 1;
+          const labelIdx = existingKey;
+
+          const lx = mx + nx * bulge * (1 + labelIdx * 0.6);
+          const ly = my + ny * bulge * (1 + labelIdx * 0.6) - 6 - labelIdx * 14;
+
+          X.font = "10px 'JetBrains Mono'";
+          X.textAlign = 'center';
+          const col = cp.type === 3 ? '#ff6b6b' : cp.type === 2 ? '#4dabf7' : '#69db7c';
+
+          // Dark background for readability
+          const metrics = X.measureText(cp.label);
+          X.fillStyle = 'rgba(6, 6, 16, 0.85)';
+          X.fillRect(lx - metrics.width / 2 - 3, ly - 9, metrics.width + 6, 13);
+
+          X.fillStyle = col + 'cc';
+          X.fillText(cp.label, lx, ly);
+          X.textAlign = 'left';
+        }
+      });
+    }
+  }
+
+  // Draw ribbons connecting same node across cycles
+  sys.nodes.forEach(n => {
+    for (let cyc = 0; cyc < numCycles - 1; cyc++) {
+      const curr = allShapeData[cyc][n.id];
+      const next = allShapeData[cyc + 1][n.id];
+      if (!curr || !next) continue;
+
+      // Connect peaks
+      if (curr.peak && next.peak) {
+        X.beginPath();
+        X.moveTo(curr.peak.x, curr.peak.y);
+        X.lineTo(next.peak.x, next.peak.y);
+        X.strokeStyle = n.color + '25';
+        X.lineWidth = 1;
+        X.stroke();
+      }
+
+      // Connect centers
+      X.beginPath();
+      X.moveTo(curr.cx, curr.cy);
+      X.lineTo(next.cx, next.cy);
+
+      // Color by health — green if stable, red if fraying
+      const frayAmount = curr.offsets.wobble + (1 - curr.scale) * 5;
+      if (frayAmount > 2) {
+        const intensity = Math.min(1, frayAmount / 10);
+        X.strokeStyle = `rgba(255, ${Math.round(107 + 148 * (1 - intensity))}, ${Math.round(107 + 148 * (1 - intensity))}, 0.3)`;
+      } else {
+        X.strokeStyle = n.color + '18';
+      }
+      X.lineWidth = 2;
+      X.stroke();
+    }
+  });
+
+  // System title
+  X.font = "12px 'JetBrains Mono'";
+  X.fillStyle = '#333';
+  X.textAlign = 'center';
+  X.fillText(sys.name, c.width / 2, 30);
+  X.textAlign = 'left';
+
+  // Health indicator per cycle
+  for (let cyc = 0; cyc < numCycles; cyc++) {
+    const data = allShapeData[cyc];
+    let totalFray = 0;
+    let count = 0;
+    sys.nodes.forEach(n => {
+      if (data[n.id]) {
+        totalFray += data[n.id].offsets.wobble + (1 - data[n.id].scale) * 5;
+        count++;
+      }
+    });
+    const avgFray = totalFray / count;
+    const health = Math.max(0, Math.min(1, 1 - avgFray / 15));
+
+    const x = marginL + (cyc + 0.5) * cycleW;
+    const barW = cycleW * 0.6;
+    const barH = 4;
+    const barY = marginT - 20;
+
+    // Background
+    X.fillStyle = '#1a1a2e';
+    X.fillRect(x - barW / 2, barY, barW, barH);
+
+    // Health bar
+    const r = Math.round(255 * (1 - health));
+    const g = Math.round(200 * health);
+    X.fillStyle = `rgb(${r}, ${g}, 80)`;
+    X.fillRect(x - barW / 2, barY, barW * health, barH);
+  }
+
+  requestAnimationFrame(render);
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+document.getElementById('sysSel').onchange = e => { cur = e.target.value; };
+document.getElementById('cycles').oninput = e => { numCycles = +e.target.value; document.getElementById('cyclesV').textContent = numCycles; };
+document.getElementById('fray').oninput = e => { frayMul = +e.target.value; document.getElementById('frayV').textContent = frayMul.toFixed(1); };
+document.getElementById('shapeSize').oninput = e => { shapeR = +e.target.value; document.getElementById('shapeSizeV').textContent = shapeR; };
+document.getElementById('tbLabels').onclick = e => { showLabels = !showLabels; e.target.classList.toggle('active', showLabels); };
+document.getElementById('tbCoupling').onclick = e => { showCouplings = !showCouplings; e.target.classList.toggle('active', showCouplings); };
+document.getElementById('tbAnimate').onclick = e => { animate = !animate; e.target.classList.toggle('active', animate); };
+
+render();
+</script>
+</body>
+</html>
