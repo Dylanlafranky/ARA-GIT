@@ -131,11 +131,69 @@ One system's release actively disrupts another's accumulation phase. The energy 
 
 The type of coupling is itself diagnostic. A system dominated by Type 1 couplings has a clean pipeline. A system with Type 2 couplings has a dominant central engine that sustains smaller subsystems passively. A system with Type 3 couplings has built-in self-limitation.
 
+**Naked vs. contained Type 3:** A critical distinction. Naked Type 3 coupling (destructive with no supply chain) leads to system mortality — the BZ reaction in a sealed beaker dies in 15 minutes. Contained Type 3 (wrapped inside a Type 1 supply chain) produces indefinite persistence — the BZ reaction in a CSTR oscillates forever. A human heart consumes ATP every beat (Type 3 at molecular level) but the circulatory system (Type 1) continuously resupplies. Biology doesn't eliminate Type 3 — it contains it within Type 1 logistics. The question to ask is not "is Type 3 present?" but "is it naked or contained?"
+
+---
+
+## Rule 9: Coupling channels have their own ARA.
+
+The coupling between two oscillators is itself an oscillatory process — energy or information transfers from node A through a medium to node B, with its own accumulation and release phases. This coupling channel can be mapped with its own ARA, and that ARA determines the emergent behaviour of the coupled system.
+
+**How to identify the coupling channel's ARA:**
+
+Track the signal between two coupled nodes over time. The coupling channel oscillates between:
+- **Accumulation:** Energy/information builds up in the coupling medium (momentum accumulates in the platform, charge builds in a gap junction, pressure builds in the shared air column)
+- **Release:** The accumulated signal arrives at the receiving node and shifts its phase (the platform nudges the neighbour, ions flow and depolarise, the pressure wave kicks the next oscillator)
+
+The ratio T_acc / T_rel of the coupling channel is its ARA. This is measurable independently of the individual oscillators' ARAs.
+
+**Why coupling ARA matters:**
+
+The coupling channel's ARA determines the emergent collective ARA. Specifically:
+
+| Coupling type | Coupling mechanism | Typical coupling ARA | Emergent sync behaviour |
+|---|---|---|---|
+| Type 2 → Type 1 (passive) | Momentum overflow through shared medium (board, air, water) | High (≈ 3–10) | Slow sync, engine/exothermic zone |
+| Type 1 (active) | Direct handoff through dedicated channel (gap junction, synapse, wire) | Near φ (≈ 1.5–1.7) | Fast sync, φ-zone emergence |
+| Type 3 (destructive) | One node's output damages the other's accumulation | Undefined (no stable cycle) | No stable sync; anti-phase or death |
+
+**Evidence from metronome synchronization:**
+
+- Individual metronome ticks: ARA = 1.0 (symmetric clock)
+- Phase-difference dynamics near lock: ARA ≈ 1.0 (symmetric harmonic)
+- Sync convergence envelope: ARA ≈ 5.0 (slow order-building, fast capture)
+- Coupling channel: Type 2 overflow → Type 1 handoff through passive mechanical platform
+
+The emergent ARA (≈ 5.0) is set by the coupling, not the oscillators.
+
+Contrast with cardiac pacemaker synchronization: individual sinoatrial node cells synchronize at ARA ≈ φ through active gap-junction coupling (Type 1 direct handoff). The coupling channel ARA is near φ, so the emergent sync is near φ.
+
+**The self-similarity principle:**
+
+The ARA framework applies at every level:
+1. **Individual oscillator** — has its own ARA (metronome tick = 1.0, heart beat = 1.6)
+2. **Coupling channel** — has its own ARA (passive mechanical ≈ 5, gap junction ≈ φ)
+3. **Emergent collective** — has its own ARA (mechanical sync ≈ 5, cardiac sync ≈ φ)
+
+The coupling channel's ARA bridges levels 1 and 3. If you want to predict where a collective system will land on the ARA scale, measure the coupling channel. φ-optimal coupling produces φ-optimal emergence.
+
+**How to measure coupling ARA in practice:**
+
+1. Identify two coupled nodes (A and B)
+2. Track the phase difference δ(t) between them over time
+3. In each beat cycle of δ(t), measure:
+   - T_acc: time the phase difference is growing (nodes drifting apart)
+   - T_rel: time the phase difference is shrinking (coupling pulling nodes together)
+4. ARA_coupling = T_acc / T_rel
+5. This ratio predicts the emergent sync ARA of the coupled system
+
+**The Freeze Test for coupling:** Decouple the nodes (lift one metronome off the platform, block the gap junction, cut the wire). If the phase correction stops, you've confirmed the coupling channel was driving the release phase. What remains (the uncorrected drift) is the accumulation.
+
 ---
 
 ## Validation against existing systems
 
-These rules were tested against all 8 mapped systems (April 2026):
+These rules were tested against all 20 mapped systems (April 2026):
 
 | System | Mode | Ground Cycle | All Rules Followed? |
 |--------|------|-------------|-------------------|
@@ -147,7 +205,19 @@ These rules were tested against all 8 mapped systems (April 2026):
 | Neuron | A (peer) | Subthreshold-to-spike | Yes — clean, all subsystems within ms timescale |
 | Thunderstorm | A (peer) | Storm lifecycle | Yes — clean, all subsystems within minutes timescale |
 | Predator-prey | A (peer) | Hare population cycle | Yes — L-V theoretical control flagged as reference |
+| Energy grid | A (peer) | AC cycle / daily load | Yes — clean |
+| RB convection | A (peer) | Convection roll | Yes — clean |
+| Honeybee | B (whole) | Thermoregulation cycle | Yes — whole-system, annual to foraging scales |
+| Slime mold | A (peer) | Contraction cycle | Yes — clean |
+| Bacterial biofilm | A (peer) | Growth-dispersal cycle | Yes — clean |
+| Starling murmuration | A (peer) | Wing beat | Yes — clean |
+| Spiral galaxy | A (peer) | Orbital rotation | Yes — clean |
+| DNA | A (peer) | Breathing bubble | Yes — qualified: only breathing mode is oscillatory |
+| Pulsar | B (whole) | Rotation period | Yes — rotation is the physics; beam is geometry |
+| Laser | B (whole) | CW / relaxation / Q-switch / mode-lock | Yes — single system spanning 4 ARA regimes |
+| BZ reaction | A (peer) | Redox oscillation | Yes — naked vs contained Type 3 distinction (Rule 8) |
+| Coupled metronomes | B (whole) | Individual tick / phase lock / sync envelope | Yes — coupling channel ARA tested (Rule 9) |
 
 ---
 
-*Version 1.2 — Dylan La Franchi, April 2026*
+*Version 1.3 — Dylan La Franchi, April 2026*
