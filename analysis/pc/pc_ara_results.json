@@ -1,0 +1,48 @@
+{
+  "subsystems": {
+    "CPU Clock Cycle": {
+      "ARA": 1.0,
+      "classification": "Pacemaker / forced symmetry",
+      "zone": "pacemaker",
+      "phi_dev": 38.2
+    },
+    "CPU Boost/Idle Cycle": {
+      "ARA": 0.6,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 62.9
+    },
+    "RAM Refresh Cycle": {
+      "ARA": 0.0047,
+      "classification": "Ultra-extreme snap",
+      "zone": "ultra_snap",
+      "phi_dev": 99.7
+    },
+    "Disk I/O (Write Buffer)": {
+      "ARA": 0.4,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 75.3
+    },
+    "Thermal / Cooling": {
+      "ARA": 1.3,
+      "classification": "Shock absorber / managed",
+      "zone": "managed",
+      "phi_dev": 19.7
+    },
+    "PSU (Power Supply)": {
+      "ARA": 1.0,
+      "classification": "Pacemaker / forced symmetry",
+      "zone": "pacemaker",
+      "phi_dev": 38.2
+    }
+  },
+  "predictions": {
+    "CPU Clock Cycle": "PACEMAKER (ARA = 1.0). Forced symmetric by crystal oscillator. Prediction: any deviation from 1:1 means the clock source is failing \u2014 system crash imminent.",
+    "CPU Boost/Idle Cycle": "FREE-RUNNING (ARA variable). Prediction: a well-designed boost algorithm settles near \u03c6 under sustained variable load (maximise throughput without thermal resonance). If thermal headroom drops, boost collapses \u2192 performance cliff.",
+    "RAM Refresh Cycle": "EXTREME SNAP (ARA ~0.005). Prediction: if refresh interval stretches (overclocking) or refresh pulse weakens, data corruption occurs. The snap must complete within its window \u2014 no partial refresh.",
+    "Disk I/O (Write Buffer)": "CONSUMER (ARA ~0.4). Prediction: if buffer flush fails (power loss, drive failure), accumulated writes are lost. The system absorbs more than it commits \u2014 vulnerable during the gap.",
+    "Thermal / Cooling": "MANAGED (ARA ~1.3). Prediction: if cooling fails (dust, fan failure), heat accumulates without release \u2192 thermal throttling \u2192 if sustained, thermal shutdown. Coupled to boost cycle \u2014 thermal failure cascades into CPU performance.",
+    "PSU (Power Supply)": "PACEMAKER (ARA = 1.0). Mains-forced. Prediction: PSU ripple (deviation from 1:1 charge/discharge) causes voltage instability \u2192 cascades to every other subsystem. The PSU is the grid's representative inside the machine."
+  }
+}

@@ -48,7 +48,14 @@
   of coupled oscillators. This document takes the simplest well-understood mechanical system —
   a four-stroke internal combustion engine — decomposes it into its oscillating subsystems,
   maps each one's ARA ratio, traces the couplings between them, and asks: can we predict
-  failure modes from the ARA network alone?
+  failure modes from the ARA network alone?<br><br>
+  <strong>Disclosure:</strong> The framework's author (Dylan La Franchi) has no mechanical
+  engineering training and does not understand how engines work at a technical level.
+  The process was: (a) the author specified the ARA method and classification rules,
+  (b) an AI research assistant (Claude) sourced the phase durations from engineering
+  references, (c) ARA ratios were computed mechanically and failure-mode predictions
+  were generated from generic rules, and (d) validation against known engine pathology
+  was written afterwards. The predictions were blind to the domain.
 </p>
 
 <!-- ============================================================ -->
@@ -447,7 +454,12 @@
     We <em>told</em> the network how the subsystems connect. The harder test is: given only
     the ARA values and their correlations over time, can you <em>discover</em> the couplings?
     Can you find the hidden connections in a system you don't fully understand? That's the
-    next step — and it's where this framework could become genuinely powerful for unknown systems.
+    next step — and it's where this framework could become genuinely powerful for unknown systems.<br><br>
+    <strong>Note on blindness:</strong> The author has no mechanical engineering background.
+    All phase durations and engine specifications were sourced from SAE references and
+    technical literature by an AI research assistant. The failure-mode predictions were
+    generated from generic ARA classification rules, not from domain knowledge.
+    The 5/5 result is a blind test in practice.
   </div>
 </div>
 

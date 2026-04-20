@@ -1,0 +1,41 @@
+{
+  "subsystems": {
+    "Subthreshold Integration \u2192 Spike": {
+      "ARA": 0.06,
+      "classification": "Extreme snap (trigger)",
+      "zone": "trigger",
+      "phi_dev": 96.3
+    },
+    "Depolarisation \u2192 Repolarisation": {
+      "ARA": 2.1429,
+      "classification": "Exothermic source",
+      "zone": "exothermic",
+      "phi_dev": 32.4
+    },
+    "Refractory Period": {
+      "ARA": 3.3333,
+      "classification": "Beyond scale",
+      "zone": "beyond",
+      "phi_dev": 106.0
+    },
+    "Synaptic Vesicle Cycle": {
+      "ARA": 0.003,
+      "classification": "Ultra-extreme snap",
+      "zone": "ultra_snap",
+      "phi_dev": 99.8
+    },
+    "Na+/K+ Pump Recovery": {
+      "ARA": 0.1,
+      "classification": "Extreme snap (trigger)",
+      "zone": "trigger",
+      "phi_dev": 93.8
+    }
+  },
+  "predictions": {
+    "Subthreshold Integration \u2192 Spike": "EXTREME SNAP (ARA = 0.06). Classic trigger \u2014 long integration, explosive discharge. Prediction: (a) If integration is disrupted (inhibitory input, membrane leak), the snap fails to fire \u2014 equivalent to misfire. (b) If threshold drops (hyperexcitability), the system fires too easily from insufficient accumulation \u2192 runaway firing, seizure-like activity. (c) The integration time sets the neuron's bandwidth \u2014 it can only respond to inputs slower than ~1/25 ms = 40 Hz.",
+    "Depolarisation \u2192 Repolarisation": "EXOTHERMIC / BEYOND SCALE (ARA = 2.14). Release-dominant \u2014 the falling phase is slower than the rising phase. Prediction: (a) If the K+ channels fail or slow further, repolarisation is delayed \u2192 action potential broadening. (b) Broadened APs increase Ca2+ influx at the synapse \u2192 increased neurotransmitter release \u2192 downstream hyperexcitability. (c) The asymmetry is a signature of the underlying channel kinetics \u2014 Na+ fast activation vs K+ delayed rectification.",
+    "Refractory Period": "BEYOND SCALE (ARA = 3.33). Gradual recovery dominates. Prediction: (a) The refractory period sets the maximum firing rate (~200 Hz from ~5 ms total refractory). (b) If absolute refractory shortens (Na+ channel recovery accelerates), maximum firing rate increases \u2192 risk of pathological high-frequency discharge. (c) The long relative refractory creates a graded excitability window \u2014 inputs during this period require more strength, creating a natural frequency filter.",
+    "Synaptic Vesicle Cycle": "ULTRA-EXTREME SNAP (ARA = 0.003). The most extreme snap in the neuron. Prediction: (a) If vesicle replenishment can't keep up with firing rate, the synapse depletes \u2014 short-term synaptic depression. (b) The snap must be sharp \u2014 if exocytosis slows, neurotransmitter release becomes unreliable \u2192 synaptic failure. (c) High-frequency firing should exhaust the readily releasable pool faster than it can be refilled.",
+    "Na+/K+ Pump Recovery": "EXTREME SNAP (ARA = 0.10). Slow restoration, fast disruption. Prediction: (a) If the pump fails (ATP depletion, ouabain poisoning), ionic gradients dissipate \u2192 loss of resting potential \u2192 inability to fire. (b) During sustained high-frequency firing, the pump may fall behind \u2014 gradual gradient rundown \u2192 firing rate decline (metabolic fatigue). (c) The pump's energy cost should be a major fraction of the neuron's metabolic budget."
+  }
+}

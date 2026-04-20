@@ -1,0 +1,34 @@
+{
+  "subsystems": {
+    "Hare (Prey) Population Cycle": {
+      "ARA": 0.4615,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 71.5
+    },
+    "Lynx (Predator) Population Cycle": {
+      "ARA": 0.7273,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 55.1
+    },
+    "Vegetation (Browse) Recovery": {
+      "ARA": 0.6,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 62.9
+    },
+    "Lotka-Volterra (Theoretical)": {
+      "ARA": 1.0,
+      "classification": "Pacemaker / forced symmetry",
+      "zone": "pacemaker",
+      "phi_dev": 38.2
+    }
+  },
+  "predictions": {
+    "Hare (Prey) Population Cycle": "CONSUMER (ARA = 0.46). Accumulation-dominant \u2014 growth is slow, crash is fast. Prediction: (a) The crash should be multi-causal \u2014 when release begins, multiple mechanisms fire simultaneously (predation + food depletion + stress). This is typical of snap releases. (b) The system should show hysteresis: even after predators decline, hare recovery is slow because vegetation also needs to recover. (c) Extended growth phases (longer accumulation) should produce higher peaks and more violent crashes.",
+    "Lynx (Predator) Population Cycle": "CONSUMER (ARA = 0.73). More symmetric than prey \u2014 decline is buffered. Prediction: (a) The predator decline should be slower and less catastrophic than prey crash, because adult predators have physiological buffers (fat reserves, prey switching, longevity). (b) The predator cycle should LAG the prey cycle \u2014 it's a driven oscillator, not self-generated. (c) If alternative prey is available, the predator's ARA should approach 1.0 (more symmetric decline).",
+    "Vegetation (Browse) Recovery": "CONSUMER (ARA = 0.60). Growth slower than consumption \u2014 the plant is the energy base. Prediction: (a) Vegetation recovery sets the FLOOR on system cycle time \u2014 hares can't recover until browse recovers. (b) Overgrazing should extend the recovery period \u2014 the more severe the depletion, the longer the regrowth. (c) If vegetation is permanently degraded (habitat loss), the entire cycle amplitude should decrease.",
+    "Lotka-Volterra (Theoretical)": "PACEMAKER (ARA ~ 1.0). Near-symmetric for standard parameterisations \u2014 the model produces closed neutral orbits. Prediction: (a) Classic L-V cannot produce the DEGREE of asymmetry observed in real systems (hare ARA = 0.46). Parameter tuning introduces moderate asymmetry but not enough. (b) The gap between L-V ARA (~1.0) and real data ARA (~0.46-0.73) measures what biology adds to mathematics: multi-causal crashes, recovery lags, physiological buffers. (c) The model is a theoretical baseline \u2014 it defines the near-symmetric reference against which real asymmetry is measured."
+  }
+}

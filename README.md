@@ -23,8 +23,18 @@ The framework is falsifiable, open-source, and actively invites replication.
 | [`engine_ara_map.html`](engine_ara_map.html) | Multi-system ARA mapping — 4-stroke engine decomposed into 6 coupled subsystems |
 | [`pc_ara_map.html`](pc_ara_map.html) | Multi-system ARA mapping — PC decomposed into 6 coupled subsystems |
 | [`heart_ara_map.html`](heart_ara_map.html) | Multi-system ARA mapping — human heart (8 subsystems, blind prediction test: 8/8 hits) |
-| [`substack_draft.md`](substack_draft.md) | Plain-language overview for general audience |
+| [`earth_ara_map.html`](earth_ara_map.html) | Multi-system ARA mapping — Planet Earth (10 subsystems, blind prediction test: 10/10 hits) |
+| [`hydrogen_ara_map.html`](hydrogen_ara_map.html) | Multi-system ARA mapping — Hydrogen atom (7 subsystems, blind prediction test: 7/7 hits, φ negative control) |
+| [`neuron_ara_map.html`](neuron_ara_map.html) | Multi-system ARA mapping — Neuron action potential (5 subsystems, blind prediction test: 5/5 hits) |
+| [`thunderstorm_ara_map.html`](thunderstorm_ara_map.html) | Multi-system ARA mapping — Thunderstorm lifecycle (5 subsystems, blind prediction test: 5/5 hits) |
+| [`predator_prey_ara_map.html`](predator_prey_ara_map.html) | Multi-system ARA mapping — Predator-prey lynx-hare cycle (4 subsystems, blind prediction test: 4/4 hits, L-V theoretical control) |
+| [`ara_multi_system_mapping_preprint.pdf`](ara_multi_system_mapping_preprint.pdf) | Paper 3 preprint — blind prediction tests across 8 substrates (49/49) |
+| [`substack_draft.md`](substack_draft.md) | Plain-language overview for general audience (Paper 1) |
+| [`substack_paper3_draft.md`](substack_paper3_draft.md) | Plain-language overview for Paper 3 (multi-system mapping) |
 | `analysis/` | All Python analysis scripts — reproducible, documented |
+| `analysis/neuron/` | Neuron action potential ARA (5 subsystems, 5/5 predictions) |
+| `analysis/thunderstorm/` | Thunderstorm lifecycle ARA (5 subsystems, 5/5 predictions) |
+| `analysis/predator_prey/` | Lynx-hare predator/prey ARA (4 subsystems, 4/4 predictions, L-V theoretical control) |
 
 ## The Core Idea
 

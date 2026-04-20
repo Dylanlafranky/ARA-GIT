@@ -1,0 +1,48 @@
+{
+  "subsystems": {
+    "Combustion Cycle": {
+      "ARA": 1.0,
+      "classification": "Pacemaker / forced symmetry",
+      "zone": "pacemaker",
+      "phi_dev": 38.2
+    },
+    "Valve Timing (Gas Exchange)": {
+      "ARA": 0.618,
+      "classification": "Consumer",
+      "zone": "consumer",
+      "phi_dev": 61.8
+    },
+    "Cooling Cycle": {
+      "ARA": 1.3,
+      "classification": "Shock absorber / managed",
+      "zone": "managed",
+      "phi_dev": 19.7
+    },
+    "Oil Pressure Cycle": {
+      "ARA": 1.1,
+      "classification": "Pacemaker / forced symmetry",
+      "zone": "pacemaker",
+      "phi_dev": 32.0
+    },
+    "Ignition Pulse": {
+      "ARA": 0.06,
+      "classification": "Extreme snap (trigger)",
+      "zone": "trigger",
+      "phi_dev": 96.3
+    },
+    "Fuel Injection Pulse": {
+      "ARA": 0.1,
+      "classification": "Extreme snap (trigger)",
+      "zone": "trigger",
+      "phi_dev": 93.8
+    }
+  },
+  "predictions": {
+    "Combustion Cycle": "PACEMAKER (ARA = 1.0). Forced symmetric. Prediction: if timing shifts (e.g. timing belt stretch), the 1:1 symmetry breaks, causing detonation or misfires.",
+    "Valve Timing": "CONSUMER \u2192 PHI (ARA 0.5 stock, 1.618 racing). Prediction: optimal power occurs at \u03c6. Beyond \u03c6, reversion destroys performance (temporal friction limit). This is the tunable subsystem.",
+    "Cooling Cycle": "MANAGED (ARA ~1.3). Prediction: if thermostat fails closed, ARA drops toward 0 (heat trapped, no release) \u2192 cascade overheat. If stuck open, ARA rises \u2192 engine runs too cool, inefficient combustion.",
+    "Oil Pressure Cycle": "PACEMAKER (ARA ~1.1). Prediction: if oil pump fails or oil degrades, supply/return balance breaks \u2192 bearing starvation \u2192 seizure. Coupled to thermal subsystem.",
+    "Ignition Pulse": "EXTREME SNAP (ARA ~0.06). Prediction: this is a trigger. If coil weakens (shorter dwell, weaker field), spark energy drops \u2192 incomplete combustion \u2192 misfire. The snap must be sharp.",
+    "Fuel Injection Pulse": "EXTREME SNAP (ARA ~0.1). Prediction: if injector clogs or pressure drops, the snap weakens \u2192 lean mixture \u2192 detonation or power loss. Coupled to combustion cycle."
+  }
+}
