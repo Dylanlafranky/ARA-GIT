@@ -132,7 +132,7 @@ for name, data in subsystems.items():
 
     results[name] = {
         **data,
-        "ARA": round(ara, 4),
+        "ARA": round(ara, 4) if ara >= 0.0001 else float(f"{ara:.4e}"),
         "classification": classification,
         "zone": zone,
         "phi_deviation": round(phi_deviation, 1)
