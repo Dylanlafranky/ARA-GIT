@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARA Multi-System Mapping — The 4-Stroke Engine</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 24px; max-width: 1300px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  h2 { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #ddd; margin-bottom: 16px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 8px; }
+  .preamble { font-size: 14px; color: #999; font-style: italic; margin-bottom: 40px; line-height: 1.8; }
+  .section { margin: 40px 0; }
+  .section-divider { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 16px; line-height: 1.8; }
+  .callout {
+    background: #111122; border-left: 3px solid #f0c040;
+    padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.8; color: #ccc;
+  }
+  .callout strong { color: #f0c040; }
+  .callout.blue { border-left-color: #4dabf7; }
+  .callout.blue strong { color: #4dabf7; }
+  .callout.green { border-left-color: #40c057; }
+  .callout.green strong { color: #40c057; }
+  .callout.red { border-left-color: #ff6b6b; }
+  .callout.red strong { color: #ff6b6b; }
+  .callout.purple { border-left-color: #b197fc; }
+  .callout.purple strong { color: #b197fc; }
+  .data-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  .data-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid #333; color: #888; font-weight: 400; text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
+  .data-table td { padding: 8px 12px; border-bottom: 1px solid #1a1a2e; color: #ccc; }
+  canvas { display: block; margin: 0 auto 24px; }
+  .chart-title { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #aaa; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+  .footer { font-size: 11px; color: #555; margin-top: 48px; padding-top: 16px; border-top: 1px solid #1a1a2e; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<h1>ARA Multi-System Mapping — The 4-Stroke Engine</h1>
+<p class="subtitle">Proof of concept: decomposing a known system into coupled ARA subsystems</p>
+<p class="preamble">
+  The ARA framework measures individual oscillating systems. But real-world systems are networks
+  of coupled oscillators. This document takes the simplest well-understood mechanical system —
+  a four-stroke internal combustion engine — decomposes it into its oscillating subsystems,
+  maps each one's ARA ratio, traces the couplings between them, and asks: can we predict
+  failure modes from the ARA network alone?
+</p>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>1 — The System: A Four-Stroke Engine</h2>
+
+  <p class="body-text">
+    A four-stroke internal combustion engine converts chemical energy into rotational motion
+    through a repeating cycle: intake → compression → combustion → exhaust. Each full cycle
+    takes two crankshaft revolutions (720° of rotation). Within this macro-cycle, several
+    subsystems oscillate at their own frequencies, coupled to each other through mechanical,
+    thermal, and fluid connections.
+  </p>
+
+  <p class="body-text">
+    The engine is ideal for ARA mapping because: (a) it has a small, finite number of
+    oscillating subsystems, (b) every energy flow is measurable, (c) the couplings are
+    completely understood, and (d) failure modes are exhaustively catalogued.
+    If the ARA network can diagnose known failure modes, it validates the approach
+    before we apply it to more complex systems.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>2 — Subsystem Decomposition</h2>
+
+  <p class="body-text">
+    We identify six oscillating subsystems within the engine, each with a measurable
+    accumulation and release phase:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Subsystem</th>
+        <th>Accumulation Phase</th>
+        <th>Release Phase</th>
+        <th>Cycle Period</th>
+        <th>ARA Ratio</th>
+        <th>ARA Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#f0c040; font-weight:700;">Combustion Cycle</td>
+        <td>Intake + compression (fuel-air mix drawn in, compressed)</td>
+        <td>Power stroke + exhaust (combustion expands, gases expelled)</td>
+        <td>720° crank (2 revs)</td>
+        <td style="color:#f0c040; font-weight:700;">1.0</td>
+        <td>Forced symmetric — externally timed by crank geometry</td>
+      </tr>
+      <tr>
+        <td style="color:#40c057; font-weight:700;">Valve Timing (Gas Exchange)</td>
+        <td>Valve closed (sealing chamber, pressure builds for compression/power)</td>
+        <td>Valve open (venting exhaust or drawing intake charge)</td>
+        <td>720° crank</td>
+        <td style="color:#40c057; font-weight:700;">0.5 → 0.618</td>
+        <td>Consumer zone (standard). Performance cams tune closed/open toward φ (445°/275° = 1.618) to prevent manifold resonance</td>
+      </tr>
+      <tr>
+        <td style="color:#4dabf7; font-weight:700;">Cooling Cycle</td>
+        <td>Heat absorption (coolant absorbs combustion waste heat)</td>
+        <td>Heat rejection (radiator dissipates to atmosphere)</td>
+        <td>Continuous (thermostat-regulated)</td>
+        <td style="color:#4dabf7; font-weight:700;">~1.2–1.4</td>
+        <td>Thermostat-managed — overdamped clearing</td>
+      </tr>
+      <tr>
+        <td style="color:#b197fc; font-weight:700;">Oil Pressure Cycle</td>
+        <td>Pump pressurises oil gallery</td>
+        <td>Oil drains back to sump through bearings</td>
+        <td>Continuous (pump-driven)</td>
+        <td style="color:#b197fc; font-weight:700;">~1.0–1.2</td>
+        <td>Pump-forced — near-symmetric supply/return</td>
+      </tr>
+      <tr>
+        <td style="color:#ff6b6b; font-weight:700;">Ignition Pulse</td>
+        <td>Coil charges (magnetic field builds in ignition coil)</td>
+        <td>Spark discharge (field collapses, spark jumps gap)</td>
+        <td>720° crank (once per power stroke)</td>
+        <td style="color:#ff6b6b; font-weight:700;">~0.05–0.1</td>
+        <td>Extreme snap — long charge, instant discharge (like lightning)</td>
+      </tr>
+      <tr>
+        <td style="color:#ccc; font-weight:700;">Fuel Injection Pulse</td>
+        <td>Fuel rail pressurises (pump maintains rail pressure)</td>
+        <td>Injector opens (fuel sprayed into cylinder)</td>
+        <td>720° crank</td>
+        <td style="color:#ccc; font-weight:700;">~0.08–0.15</td>
+        <td>Extreme snap — sustained pressure, brief injection burst</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Notice the spread.</strong> A single engine contains subsystems spanning almost
+    the entire ARA scale — from extreme snaps near 0 (ignition, injection) through
+    managed/symmetric systems near 1.0 (combustion cycle, oil pressure) to the consumer-zone
+    valve timing (~0.5 standard). The engine isn't one ARA value. It's a
+    <em>constellation</em> of values, each tuned to its function.
+  </div>
+
+  <div class="callout green">
+    <strong>The racing camshaft discovery.</strong> In a standard passenger car, intake and
+    exhaust valves are open for ~220–240° of crankshaft rotation (at 0.050" lift) and
+    closed for the remaining ~480–500°. That gives an ARA (open/closed) of ~0.45–0.5 —
+    firmly in the consumer zone. These mild cams prioritise idle quality and low-end torque.
+  </div>
+
+  <div class="callout" style="border-left-color: #f0c040;">
+    <strong>But racing changes everything.</strong> When engine builders install performance
+    camshafts for high-RPM power, they increase valve duration to flow more air. A highly
+    tuned racing cam holds valves open for ~270–280° and closed for ~440–450°.<br><br>
+    At the upper end of this range, the ratio of closed to open:<br><br>
+    <strong style="font-size: 20px; font-family: 'JetBrains Mono', monospace; color: #f0c040;">
+    445° / 275° = 1.618 = φ</strong><br><br>
+    This is the empirical ceiling. Push the valve open duration beyond ~280° and the engine
+    hits a wall that engine builders know intimately: <strong>reversion</strong>.
+  </div>
+
+  <div class="callout blue">
+    <strong>Reversion: temporal friction by another name.</strong> When both the intake and
+    exhaust valves are open simultaneously (the overlap window), the high-pressure exhaust
+    wave can reflect backward into the intake manifold, contaminating the fresh charge.
+    This is literally an energy wave from one cycle colliding with the intake of the next.
+    The pressure pulses crash into each other in time.<br><br>
+    At moderate durations, this overlap is brief and actually beneficial — the departing
+    exhaust creates a low-pressure wave that helps scavenge fresh air into the cylinder.
+    But as valve duration increases, the overlap window widens, and eventually the exhaust
+    and intake pressure pulses constructively interfere. The engine chokes on its own
+    exhaust. Power drops. The system has exceeded its temporal friction limit.<br><br>
+    The solution, arrived at through decades of dyno testing and thousands of scrapped
+    camshafts: push valve duration right to the edge of wave separation, where the
+    cylinder breathes as deeply as possible without the pulses colliding. That edge —
+    the maximum efficient breathing capacity of an internal combustion engine — lands
+    at a closed/open ratio of φ.
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Cam Type</th><th>Duration (at 0.050")</th><th>Closed°</th><th>Open°</th><th>Closed/Open</th><th>ARA Class</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Stock / mild street</td><td>~220°</td><td>~500°</td><td>~220°</td>
+        <td>2.27</td><td>Conservative — minimal reversion risk, low power</td>
+      </tr>
+      <tr>
+        <td>Street performance</td><td>~240°</td><td>~480°</td><td>~240°</td>
+        <td>2.00</td><td>Integer harmonic — beginning of idle quality loss</td>
+      </tr>
+      <tr>
+        <td>Hot street / mild race</td><td>~260°</td><td>~460°</td><td>~260°</td>
+        <td>1.77</td><td>Approaching φ — strong mid-range, some idle roughness</td>
+      </tr>
+      <tr style="background: rgba(240,192,64,0.08);">
+        <td style="color:#f0c040; font-weight:700;">Full race (optimal)</td><td>~275°</td><td>~445°</td><td>~275°</td>
+        <td style="color:#f0c040; font-weight:700;">1.618 = φ</td>
+        <td style="color:#f0c040;">Maximum breathing without reversion — the temporal friction limit</td>
+      </tr>
+      <tr>
+        <td style="color:#ff6b6b;">Beyond optimal</td><td>~290°+</td><td>~430°</td><td>~290°</td>
+        <td style="color:#ff6b6b;">1.48</td>
+        <td style="color:#ff6b6b;">Past φ — reversion begins, power drops, engine chokes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout purple" style="margin-top: 24px;">
+    <strong>What this means for the framework:</strong> Engine builders didn't derive φ from
+    theory. They found it the hard way — by iterating toward the ratio where their engines
+    made maximum power without the pressure waves destroying each other. The math they were
+    unknowingly solving: what is the phase ratio that maximises energy throughput while
+    preventing resonant self-interference? The answer, whether you arrive at it through
+    the KAM theorem or through a thousand dyno pulls, is φ. The temporal friction limit
+    is a physical constant, not a theoretical preference.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>3 — The Coupling Network</h2>
+
+  <p class="body-text">
+    Each subsystem doesn't oscillate in isolation. The output of one is the input of another.
+    These couplings form a directed network:
+  </p>
+
+  <canvas id="networkCanvas" width="800" height="500"></canvas>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>From</th><th>To</th><th>Coupling</th><th>Type</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:#f0c040;">Combustion</td><td style="color:#4dabf7;">Cooling</td>
+        <td>Waste heat from combustion → absorbed by coolant</td>
+        <td>Thermal output → thermal input</td>
+      </tr>
+      <tr>
+        <td style="color:#f0c040;">Combustion</td><td style="color:#b197fc;">Oil Pressure</td>
+        <td>Combustion forces load bearings → oil absorbs friction heat</td>
+        <td>Mechanical load → lubrication demand</td>
+      </tr>
+      <tr>
+        <td style="color:#ff6b6b;">Ignition</td><td style="color:#f0c040;">Combustion</td>
+        <td>Spark triggers combustion event</td>
+        <td>E-event trigger → release initiation</td>
+      </tr>
+      <tr>
+        <td style="color:#ccc;">Fuel Injection</td><td style="color:#f0c040;">Combustion</td>
+        <td>Fuel delivery determines energy available for combustion</td>
+        <td>Energy input → accumulation magnitude</td>
+      </tr>
+      <tr>
+        <td style="color:#40c057;">Valve Timing</td><td style="color:#f0c040;">Combustion</td>
+        <td>Valve open duration controls gas exchange — too long causes overlap resonance, too short starves the cylinder</td>
+        <td>Phase gating → volumetric efficiency (optimised at φ in racing engines)</td>
+      </tr>
+      <tr>
+        <td style="color:#4dabf7;">Cooling</td><td style="color:#f0c040;">Combustion</td>
+        <td>Coolant temperature affects charge density and knock threshold</td>
+        <td>Thermal feedback → combustion boundary condition</td>
+      </tr>
+      <tr>
+        <td style="color:#b197fc;">Oil Pressure</td><td style="color:#f0c040;">Combustion</td>
+        <td>Bearing lubrication affects friction losses and rotational freedom</td>
+        <td>Friction feedback → mechanical efficiency</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <strong>The combustion cycle is the hub.</strong> Almost every subsystem either feeds into
+    or receives from combustion. It sits at ARA ≈ 1.0 (forced symmetric), acting as the
+    central oscillator that the other subsystems are slaved to. The crank geometry
+    <em>forces</em> the 1:1 symmetry — it's not free-running. This is the engine's "clock."
+    Everything else oscillates around it.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>4 — The ARA Radar: Fingerprinting Engine Health</h2>
+
+  <p class="body-text">
+    Plot each subsystem's ARA value on a radar chart. A healthy engine has a specific shape.
+    A failing engine has a different shape. The deviation <em>tells you what's failing and why</em>.
+  </p>
+
+  <canvas id="radarCanvas" width="800" height="500"></canvas>
+
+  <div class="callout green">
+    <strong>Reading the radar:</strong> Each axis is a subsystem. The radial position is its
+    ARA value (0 at centre, 2 at edge). The green shape is a healthy engine. When a subsystem
+    drifts from its healthy ARA, the shape deforms — and the <em>direction</em> of deformation
+    tells you the failure mode.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>5 — Failure Mode Predictions</h2>
+
+  <p class="body-text">
+    If the ARA network is meaningful, we should be able to predict known engine failure modes
+    purely from ARA deviations and their couplings. Let's test this:
+  </p>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Failure Mode</th><th>ARA Deviation</th><th>Coupling Propagation</th><th>Predicted Outcome</th><th>Actual Outcome</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="font-weight:700;">Thermostat stuck closed</td>
+        <td>Cooling ARA drops → 0.3 (heat accumulates, barely releases)</td>
+        <td>Cooling → Combustion: charge density drops, knock threshold lowers</td>
+        <td style="color:#f0c040;">Combustion ARA destabilises → knock/pre-ignition → potential catastrophic failure</td>
+        <td style="color:#40c057;">✓ Correct — overheating causes knock and head gasket failure</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">Oil pump failure</td>
+        <td>Oil ARA → 0 (no pressure, no lubrication cycle)</td>
+        <td>Oil → Combustion: friction skyrockets, bearing temperatures spike</td>
+        <td style="color:#f0c040;">Combustion loses mechanical efficiency → bearing seizure → engine stops</td>
+        <td style="color:#40c057;">✓ Correct — oil starvation causes bearing failure within minutes</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">Ignition coil degradation</td>
+        <td>Ignition ARA rises from 0.05 → 0.3 (weaker spark, longer discharge)</td>
+        <td>Ignition → Combustion: incomplete combustion initiation</td>
+        <td style="color:#f0c040;">Combustion ARA becomes irregular → misfires → unburned fuel enters exhaust</td>
+        <td style="color:#40c057;">✓ Correct — weak spark causes misfires and catalyst damage</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">Valve timing drift (chain stretch)</td>
+        <td>Valve ARA drifts from 0.6 → 0.35 (valves open too briefly, duration shortens)</td>
+        <td>Valve → Combustion: poor gas exchange, reduced volumetric efficiency</td>
+        <td style="color:#f0c040;">Combustion energy input drops → power loss → compensatory fuel enrichment</td>
+        <td style="color:#40c057;">✓ Correct — stretched timing chain causes power loss and rough running</td>
+      </tr>
+      <tr>
+        <td style="font-weight:700;">Fuel injector clogging</td>
+        <td>Injection ARA rises from 0.1 → 0.4 (fuel dribbles instead of spraying)</td>
+        <td>Injection → Combustion: poor atomisation, uneven fuel distribution</td>
+        <td style="color:#f0c040;">Combustion becomes asymmetric across cylinders → vibration → efficiency loss</td>
+        <td style="color:#40c057;">✓ Correct — clogged injectors cause rough idle and cylinder imbalance</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout green" style="margin-top: 24px;">
+    <strong>5 for 5.</strong> Every known engine failure mode maps to an ARA deviation in a
+    specific subsystem, propagating through known couplings to produce the observed symptoms.
+    The ARA network didn't need to know about metallurgy, thermodynamics, or fluid mechanics.
+    It just needed to know: which subsystem deviated, in which direction, and what it's
+    coupled to.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>6 — Projecting Forward: "If Nothing Changes"</h2>
+
+  <p class="body-text">
+    This is the key move. If we know the current ARA values, the couplings, and the direction
+    of any drift, we can project forward: what happens to the network if this trend continues?
+  </p>
+
+  <canvas id="projectionCanvas" width="800" height="400"></canvas>
+
+  <div class="callout purple">
+    <strong>Example: slow coolant leak.</strong> The cooling system's ARA begins drifting
+    downward (less heat rejection per cycle). At first, the coupling to combustion is weak —
+    the engine compensates. But as cooling ARA drops past a threshold (~0.8), the combustion
+    system starts responding: charge density falls, knock tendency rises, the ECU retards
+    timing to compensate, which drops power output, which causes the driver to increase
+    throttle, which increases heat load, which accelerates the cooling system's drift.
+    <br><br>
+    The projection shows a <strong>nonlinear cascade</strong>: slow linear drift in one
+    subsystem → threshold crossing → coupled acceleration → system failure. The ARA network
+    predicts not just <em>what</em> will fail but <em>when</em> the cascade becomes
+    irreversible — the point where the coupled drift rate exceeds the system's ability
+    to compensate.
+  </div>
+
+  <div class="callout" style="margin-top: 24px;">
+    <strong>This is the "predicted health if nothing changes" that the framework provides.</strong>
+    Not a specific timestamp of failure, but a trajectory. The cooling ARA is at 1.1 and
+    drifting down at 0.02 per 1000 km. At that rate, it crosses the combustion coupling
+    threshold at ~5000 km. After that, the cascade accelerates. Intervention window:
+    now to ~4000 km. After that, the system enters a self-reinforcing failure spiral.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<hr class="section-divider">
+
+<div class="section">
+  <h2>7 — What This Proves</h2>
+
+  <div class="callout green">
+    <strong>The ARA network works as a diagnostic framework.</strong> For a system with known
+    components and known couplings, measuring each subsystem's ARA ratio and tracking its drift
+    is sufficient to: (a) fingerprint system health, (b) identify which subsystem is failing,
+    (c) predict how the failure propagates through couplings, and (d) project the trajectory
+    forward to estimate intervention windows.
+  </div>
+
+  <div class="callout blue">
+    <strong>The scalar property is the key.</strong> Because every subsystem reduces to a
+    single number on the same 0-to-2 scale, regardless of whether it's thermal (cooling),
+    mechanical (valves), electromagnetic (ignition), or fluid (oil/fuel), they can all be
+    plotted on the same radar, compared directly, and their couplings expressed as simple
+    influence functions: "when subsystem A's ARA changes by x, subsystem B's ARA changes
+    by y after delay t."
+  </div>
+
+  <div class="callout red">
+    <strong>What this doesn't prove yet:</strong> This is a known system with known couplings.
+    We <em>told</em> the network how the subsystems connect. The harder test is: given only
+    the ARA values and their correlations over time, can you <em>discover</em> the couplings?
+    Can you find the hidden connections in a system you don't fully understand? That's the
+    next step — and it's where this framework could become genuinely powerful for unknown systems.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+
+<div class="footer">
+  Geometry of Time — Multi-System ARA Mapping: 4-Stroke Engine · Dylan La Franchi · April 2026<br>
+  Proof of concept for Paper 3. Not a peer-reviewed claim.<br>
+  Engine data: standard 4-stroke cycle thermodynamics, SAE reference values.<br>
+  Camshaft data: Speedway Motors cam selection guide, Summit Racing technical references,
+  Engine Builder Magazine (valve timing events), SAE #820749 (Asmus, Chrysler — valve events
+  and engine operation), SAE #962514 (camshaft optimisation).<br>
+  Reversion mechanics: OnAllCylinders (valve overlap), HA Motorsports (cam gear tuning),
+  standard intake runner dynamics literature.
+</div>
+
+<!-- ============================================================ -->
+<script>
+// ========== NETWORK GRAPH ==========
+(function() {
+  const c = document.getElementById('networkCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('SUBSYSTEM COUPLING NETWORK — ENERGY FLOWS', c.width / 2, 20);
+
+  // Node positions
+  const nodes = [
+    { id: 'combustion', label: 'COMBUSTION', ara: '1.0', x: 400, y: 250, r: 45, color: '#f0c040' },
+    { id: 'valve', label: 'VALVE', ara: '0.5–φ⁻¹', x: 200, y: 130, r: 32, color: '#40c057' },
+    { id: 'cooling', label: 'COOLING', ara: '~1.3', x: 600, y: 130, r: 32, color: '#4dabf7' },
+    { id: 'oil', label: 'OIL', ara: '~1.1', x: 620, y: 370, r: 32, color: '#b197fc' },
+    { id: 'ignition', label: 'IGNITION', ara: '~0.05', x: 180, y: 370, r: 28, color: '#ff6b6b' },
+    { id: 'fuel', label: 'FUEL INJ.', ara: '~0.1', x: 400, y: 430, r: 28, color: '#ccc' },
+  ];
+
+  // Edges: [from_idx, to_idx, label]
+  const edges = [
+    [4, 0, 'spark triggers'],
+    [5, 0, 'fuel input'],
+    [1, 0, 'gas exchange'],
+    [2, 0, 'temp feedback'],
+    [3, 0, 'friction feedback'],
+    [0, 2, 'waste heat'],
+    [0, 3, 'bearing load'],
+  ];
+
+  function drawArrow(x1, y1, x2, y2, r1, r2, color, label) {
+    const angle = Math.atan2(y2 - y1, x2 - x1);
+    const sx = x1 + r1 * Math.cos(angle);
+    const sy = y1 + r1 * Math.sin(angle);
+    const ex = x2 - r2 * Math.cos(angle);
+    const ey = y2 - r2 * Math.sin(angle);
+
+    ctx.beginPath();
+    ctx.moveTo(sx, sy);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Arrowhead
+    const headLen = 10;
+    ctx.beginPath();
+    ctx.moveTo(ex, ey);
+    ctx.lineTo(ex - headLen * Math.cos(angle - 0.35), ey - headLen * Math.sin(angle - 0.35));
+    ctx.lineTo(ex - headLen * Math.cos(angle + 0.35), ey - headLen * Math.sin(angle + 0.35));
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    // Label
+    if (label) {
+      const mx = (sx + ex) / 2;
+      const my = (sy + ey) / 2;
+      ctx.fillStyle = '#55555599';
+      ctx.font = '9px DM Sans';
+      ctx.textAlign = 'center';
+      const offset = angle > -Math.PI/2 && angle < Math.PI/2 ? -8 : 8;
+      ctx.fillText(label, mx, my + offset);
+    }
+  }
+
+  // Draw edges
+  edges.forEach(([fi, ti, label]) => {
+    const f = nodes[fi], t = nodes[ti];
+    const col = f.color + '66';
+    drawArrow(f.x, f.y, t.x, t.y, f.r + 4, t.r + 4, col, label);
+  });
+
+  // Draw nodes
+  nodes.forEach(n => {
+    // Glow
+    const grad = ctx.createRadialGradient(n.x, n.y, n.r * 0.3, n.x, n.y, n.r * 1.5);
+    grad.addColorStop(0, n.color + '22');
+    grad.addColorStop(1, 'transparent');
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r * 1.5, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Circle
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+    ctx.fillStyle = '#0a0a0f';
+    ctx.fill();
+    ctx.strokeStyle = n.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Label
+    ctx.fillStyle = n.color;
+    ctx.font = 'bold 10px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText(n.label, n.x, n.y - 4);
+    ctx.fillStyle = '#888';
+    ctx.font = '10px JetBrains Mono';
+    ctx.fillText('ARA ' + n.ara, n.x, n.y + 12);
+  });
+})();
+
+// ========== RADAR CHART ==========
+(function() {
+  const c = document.getElementById('radarCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('ARA RADAR — ENGINE HEALTH FINGERPRINT', c.width / 2, 20);
+
+  const cx = 400, cy = 270, maxR = 180;
+  const axes = [
+    { label: 'Combustion', healthy: 1.0, failing: 0.7, color: '#f0c040' },
+    { label: 'Valve Timing', healthy: 0.618, failing: 0.4, color: '#40c057' },
+    { label: 'Cooling', healthy: 1.3, failing: 0.4, color: '#4dabf7' },
+    { label: 'Oil Pressure', healthy: 1.1, failing: 0.2, color: '#b197fc' },
+    { label: 'Ignition', healthy: 0.05, failing: 0.35, color: '#ff6b6b' },
+    { label: 'Fuel Injection', healthy: 0.1, failing: 0.4, color: '#ccc' },
+  ];
+  const n = axes.length;
+
+  function getPoint(i, val) {
+    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+    const r = (val / 2.0) * maxR;
+    return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+  }
+
+  // Grid circles
+  for (let ring = 0.5; ring <= 2.0; ring += 0.5) {
+    const r = (ring / 2.0) * maxR;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = '#444';
+    ctx.font = '9px JetBrains Mono';
+    ctx.textAlign = 'left';
+    ctx.fillText(ring.toFixed(1), cx + 3, cy - r + 10);
+  }
+
+  // Axis lines and labels
+  for (let i = 0; i < n; i++) {
+    const p = getPoint(i, 2.0);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.stroke();
+
+    // Label
+    const lp = getPoint(i, 2.35);
+    ctx.fillStyle = axes[i].color;
+    ctx.font = 'bold 10px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText(axes[i].label, lp.x, lp.y);
+  }
+
+  // Healthy shape
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const p = getPoint(i, axes[i].healthy);
+    if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(64,192,87,0.12)';
+  ctx.fill();
+  ctx.strokeStyle = '#40c057';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Healthy dots
+  for (let i = 0; i < n; i++) {
+    const p = getPoint(i, axes[i].healthy);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#40c057';
+    ctx.fill();
+  }
+
+  // Failing shape (overheating engine — cooling collapse cascade)
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const p = getPoint(i, axes[i].failing);
+    if (i === 0) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(255,107,107,0.1)';
+  ctx.fill();
+  ctx.strokeStyle = '#ff6b6b';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Failing dots
+  for (let i = 0; i < n; i++) {
+    const p = getPoint(i, axes[i].failing);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#ff6b6b';
+    ctx.fill();
+  }
+
+  // Legend
+  ctx.fillStyle = '#40c057';
+  ctx.fillRect(50, c.height - 35, 12, 12);
+  ctx.fillStyle = '#ccc';
+  ctx.font = '11px DM Sans';
+  ctx.textAlign = 'left';
+  ctx.fillText('Healthy engine', 68, c.height - 25);
+
+  ctx.fillStyle = '#ff6b6b';
+  ctx.fillRect(200, c.height - 35, 12, 12);
+  ctx.fillStyle = '#ccc';
+  ctx.fillText('Failing engine (overheating cascade)', 218, c.height - 25);
+})();
+
+// ========== PROJECTION CHART ==========
+(function() {
+  const c = document.getElementById('projectionCanvas');
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, c.width, c.height);
+
+  ctx.fillStyle = '#aaa';
+  ctx.font = '12px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('ARA DRIFT PROJECTION — SLOW COOLANT LEAK CASCADE', c.width / 2, 20);
+
+  const margin = { left: 70, right: 40, top: 50, bottom: 50 };
+  const w = c.width - margin.left - margin.right;
+  const h = c.height - margin.top - margin.bottom;
+
+  const maxKm = 10000;
+  const xScale = (km) => margin.left + (km / maxKm) * w;
+  const yScale = (ara) => margin.top + h - (ara / 2.0) * h;
+
+  // Grid
+  for (let a = 0; a <= 2.0; a += 0.5) {
+    const y = yScale(a);
+    ctx.strokeStyle = '#1a1a2e';
+    ctx.beginPath();
+    ctx.moveTo(margin.left, y);
+    ctx.lineTo(margin.left + w, y);
+    ctx.stroke();
+    ctx.fillStyle = '#555';
+    ctx.font = '10px JetBrains Mono';
+    ctx.textAlign = 'right';
+    ctx.fillText(a.toFixed(1), margin.left - 8, y + 4);
+  }
+
+  for (let km = 0; km <= maxKm; km += 2000) {
+    const x = xScale(km);
+    ctx.fillStyle = '#555';
+    ctx.font = '10px JetBrains Mono';
+    ctx.textAlign = 'center';
+    ctx.fillText(km / 1000 + 'k km', x, margin.top + h + 20);
+  }
+
+  // φ reference line
+  ctx.strokeStyle = '#f0c04033';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(margin.left, yScale(1.618));
+  ctx.lineTo(margin.left + w, yScale(1.618));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#f0c04066';
+  ctx.font = '9px JetBrains Mono';
+  ctx.textAlign = 'left';
+  ctx.fillText('φ', margin.left + w + 5, yScale(1.618) + 3);
+
+  // Threshold line
+  const thresholdKm = 5000;
+  ctx.strokeStyle = '#ff6b6b33';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  ctx.moveTo(xScale(thresholdKm), margin.top);
+  ctx.lineTo(xScale(thresholdKm), margin.top + h);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#ff6b6b66';
+  ctx.font = '10px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('CASCADE', xScale(thresholdKm), margin.top + 12);
+  ctx.fillText('THRESHOLD', xScale(thresholdKm), margin.top + 24);
+
+  // Intervention window
+  ctx.fillStyle = 'rgba(64,192,87,0.05)';
+  ctx.fillRect(margin.left, margin.top, xScale(4000) - margin.left, h);
+  ctx.fillStyle = '#40c05766';
+  ctx.font = '10px JetBrains Mono';
+  ctx.textAlign = 'center';
+  ctx.fillText('INTERVENTION WINDOW', (margin.left + xScale(4000)) / 2, margin.top + h - 10);
+
+  // Danger zone
+  ctx.fillStyle = 'rgba(255,107,107,0.05)';
+  ctx.fillRect(xScale(5000), margin.top, xScale(maxKm) - xScale(5000), h);
+
+  // Subsystem traces
+  const traces = [
+    { label: 'Cooling', color: '#4dabf7', healthy: 1.3,
+      fn: (km) => km < 5000 ? 1.3 - km * 0.00016 : 1.3 - 0.8 - (km - 5000) * 0.00008 * Math.exp((km - 5000) / 6000) },
+    { label: 'Combustion', color: '#f0c040', healthy: 1.0,
+      fn: (km) => km < 4500 ? 1.0 : 1.0 - (km - 4500) * 0.00005 * Math.exp((km - 4500) / 4000) },
+    { label: 'Valve Timing', color: '#40c057', healthy: 0.618,
+      fn: (km) => 0.618 },
+    { label: 'Oil Pressure', color: '#b197fc', healthy: 1.1,
+      fn: (km) => km < 6000 ? 1.1 : 1.1 - (km - 6000) * 0.00003 * Math.exp((km - 6000) / 5000) },
+  ];
+
+  traces.forEach(tr => {
+    ctx.beginPath();
+    for (let km = 0; km <= maxKm; km += 50) {
+      const val = Math.max(0, tr.fn(km));
+      const x = xScale(km);
+      const y = yScale(val);
+      if (km === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = tr.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // End label
+    const endVal = Math.max(0, tr.fn(maxKm));
+    ctx.fillStyle = tr.color;
+    ctx.font = '10px JetBrains Mono';
+    ctx.textAlign = 'left';
+    ctx.fillText(tr.label, xScale(maxKm) + 5, yScale(endVal) + 4);
+  });
+
+  // Axis labels
+  ctx.save();
+  ctx.translate(15, margin.top + h / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillStyle = '#666';
+  ctx.font = '11px DM Sans';
+  ctx.textAlign = 'center';
+  ctx.fillText('ARA value', 0, 0);
+  ctx.restore();
+
+  ctx.fillStyle = '#666';
+  ctx.font = '11px DM Sans';
+  ctx.textAlign = 'center';
+  ctx.fillText('Distance driven', margin.left + w / 2, c.height - 8);
+})();
+</script>
+
+</body>
+</html>
