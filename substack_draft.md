@@ -64,13 +64,33 @@ The full significance test script is in the GitHub repo alongside everything els
 
 I'm an independent systems thinker, not an academic. My background is in complex systems — the invisible mathematics that keeps things balanced between stagnation and chaos. Living with ME/CFS has given me a daily, visceral lens on what happens when biological energy accumulation and release breaks down. That experience shaped the question, even if the data has to stand on its own.
 
+## But *why* phi? The temporal friction argument
+
+Saying "these ratios cluster near phi" is a pattern. Explaining *why* is a theory. Here's the short version.
+
+You know how sunflower seeds spiral on the flower head? They use the golden angle (137.5°) because it's the most efficient way to pack seeds without any two landing on top of each other. Phi is the *most irrational* number — its continued fraction converges more slowly than any other number's — which means phi-spaced seeds never overlap, no matter how many you add.
+
+Now replace space with time. A heart, a geyser, an ocean oscillation — these are cyclical systems, and each cycle leaves behind thermodynamic "exhaust" (residual heat, momentum, stress). If the accumulation/release ratio is a neat rational fraction (2:1, 3:2), the echoes of past cycles will periodically stack up in perfect alignment with future ones. That's constructive interference. That's a resonant blowout. That's what destroyed the Tacoma Narrows Bridge.
+
+If the ratio is phi, the echoes *never* align. The energy is packed into time the same way seeds are packed into space — maximally spread, zero overlap, no resonance. This isn't mysticism. It's the KAM theorem (Kolmogorov-Arnold-Moser, 1954-63), one of the landmark results in dynamical systems theory: orbits with the most irrational frequency ratios are the most stable under perturbation. Phi is the most irrational number. So phi-ratio systems are the last ones standing.
+
+The evidence for this is observable. The Kirkwood gaps in the asteroid belt are literal empty zones where asteroids at rational orbital period ratios with Jupiter were ejected over billions of years — while asteroids at irrational ratios survived. Saturn's Cassini Division is the same phenomenon. The human heart, when it locks into rigid integer conduction ratios (2:1, 3:1 AV block), enters a pathological state. Engineers use prime-number gear tooth counts to prevent the same teeth meeting repeatedly — phyllotaxis for machines.
+
+And the ARA scale's endpoints tell the full story: at 0, a system dies of implosion (pure accumulation, no release — a black hole). At 2.0, it dies of resonant destruction (the Cepheid variable star, which literally lives in what astronomers call the "Instability Strip" and is actively shaking its own atmosphere off). At phi, neither failure mode can take hold. The system persists.
+
+The full theoretical argument, with visualisations and honest caveats, is here: [Temporal Friction — If This Is True](https://github.com/Dylanlafranky/ARA-GIT/blob/main/temporal_friction.html)
+
 ## What's next
 
 This is a heuristic framework, not settled science. I've open-sourced everything — all the analysis scripts, the datasets, the methodology — specifically so other people can break it. The strongest version of this idea is the one that survives independent replication, and the weakest is the one that hides from it.
 
 If you're a data scientist, a physiologist, a fluid dynamicist, or just someone who likes poking at patterns, I'd love to see what happens when you point these scripts at new domains.
 
-**The full framework document:** [The Geometry of Time — Full Framework](https://github.com/Dylanlafranky/ARA-GIT/blob/main/geometry-of-time/geometry_of_time_framework.html)
+**The full framework document:** [The Geometry of Time — Full Framework](https://github.com/Dylanlafranky/ARA-GIT/blob/main/geometry_of_time_framework.html)
+
+**Theoretical extrapolation (temporal friction):** [If This Is True](https://github.com/Dylanlafranky/ARA-GIT/blob/main/temporal_friction.html)
+
+**Preprint (Zenodo DOI):** [10.5281/zenodo.19653363](https://doi.org/10.5281/zenodo.19653363)
 
 **GitHub repository (all analysis scripts + data):** [github.com/Dylanlafranky/ARA-GIT](https://github.com/Dylanlafranky/ARA-GIT)
 

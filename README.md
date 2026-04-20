@@ -20,6 +20,9 @@ The framework is falsifiable, open-source, and actively invites replication.
 | [`old_faithful_analysis.html`](old_faithful_analysis.html) | Old Faithful geyser — surface miss, underground onset hypothesis, seismic validation |
 | [`sleep_cycle_analysis.html`](sleep_cycle_analysis.html) | Human sleep architecture — φ as dynamic crossover point in NREM/REM ratios |
 | [`enso_analysis.html`](enso_analysis.html) | ENSO (El Niño / La Niña) — accumulation/release timing from 75 years of NOAA data |
+| [`engine_ara_map.html`](engine_ara_map.html) | Multi-system ARA mapping — 4-stroke engine decomposed into 6 coupled subsystems |
+| [`pc_ara_map.html`](pc_ara_map.html) | Multi-system ARA mapping — PC decomposed into 6 coupled subsystems |
+| [`heart_ara_map.html`](heart_ara_map.html) | Multi-system ARA mapping — human heart (8 subsystems, blind prediction test: 8/8 hits) |
 | [`substack_draft.md`](substack_draft.md) | Plain-language overview for general audience |
 | `analysis/` | All Python analysis scripts — reproducible, documented |
 
