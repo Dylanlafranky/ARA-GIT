@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Coordinates 3D — 37 Systems: Shape, Scale, Weight</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif; overflow: hidden; }
+#ui {
+  position: absolute; top: 0; left: 0; right: 0; padding: 12px 20px; z-index: 10;
+  pointer-events: none;
+}
+h1 { font-family: 'JetBrains Mono', monospace; font-size: 17px; color: #fff; margin-bottom: 2px; }
+.subtitle { font-size: 11px; color: #bbb; margin-bottom: 8px; }
+.legend {
+  display: flex; gap: 8px; flex-wrap: wrap; font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; pointer-events: auto;
+}
+.legend-item { display: flex; align-items: center; gap: 3px; cursor: pointer; transition: opacity 0.2s; padding: 1px 5px; border-radius: 3px; }
+.legend-item:hover { background: rgba(255,255,255,0.05); }
+.legend-item.dimmed { opacity: 0.15; }
+.legend-dot { width: 7px; height: 7px; border-radius: 50%; }
+.controls {
+  position: absolute; bottom: 12px; left: 20px; z-index: 10;
+  display: flex; gap: 8px; align-items: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #bbb;
+}
+.controls button {
+  background: #12121a; color: #ccc; border: 1px solid #2a2a3e; border-radius: 4px;
+  padding: 4px 9px; font-family: 'JetBrains Mono', monospace; font-size: 10px; cursor: pointer;
+}
+.controls button:hover { background: #1e1e30; }
+.controls button.active { background: #2a2a4a; border-color: #f0c040; color: #f0c040; }
+#tooltip {
+  position: absolute; background: rgba(10,10,20,0.97); border: 1px solid #555;
+  border-radius: 7px; padding: 10px 14px; font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; pointer-events: none; display: none; z-index: 20;
+  max-width: 300px; line-height: 1.6; box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+}
+#tooltip .name { color: #fff; font-weight: bold; font-size: 12px; }
+#tooltip .sys { color: #bbb; font-size: 10px; }
+#tooltip .val { color: #f0c040; }
+.footer {
+  position: absolute; bottom: 12px; right: 20px; font-size: 9px; color: #555;
+  font-family: 'JetBrains Mono', monospace; z-index: 10;
+}
+</style>
+</head>
+<body>
+
+<div id="ui">
+  <h1>Temporal Coordinates 3D — 37 Systems</h1>
+  <p class="subtitle">X: Period (scale) · Y: ARA (shape) · Z: Action/π (weight) · θ: circle tilt angle · Drag to rotate, scroll to zoom · 140+ subsystems across 22 orders of magnitude</p>
+  <div class="legend" id="legend"></div>
+</div>
+
+<div class="controls">
+  <button id="btnCouplings" class="active">Couplings</button>
+  <button id="btnLabels" class="active">Labels</button>
+  <button id="btnGrid" class="active">Grid</button>
+  <button id="btnSpin">Auto-spin</button>
+  <button id="btnCircles">3 Circles</button>
+  <span style="color:#555">| Click legend to toggle · Hover to isolate</span>
+</div>
+
+<div id="tooltip"></div>
+<div class="footer">The Geometry of Time — Dylan La Franchi & Claude · April 2026 · 37 Systems</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const PI = Math.PI;
+
+// ============================================================
+// SYSTEM DEFINITIONS
+// ============================================================
+const systemColors = {
+  engine:0xff8787, pc:0x4dabf7, heart:0xb197fc, hydrogen:0xffd43b,
+  neuron_old:0x69db7c, thunderstorm:0xe599f7, predprey:0xff922b, earth:0x20c997,
+  energygrid:0xffa94d, rbconvect:0x74c0fc, honeybee:0xffe066,
+  slimemold:0xa9e34b, biofilm:0x66d9e8, starling:0xf783ac,
+  galaxy:0xda77f2, dna:0xff6b6b, pulsar:0x38d9a9, laser:0xe8590c,
+  brain_eeg:0xfb923c, tides:0x38bdf8, three_deck:0xf87171,
+  immune:0xf472b6, mechanical:0x6ee7b7, forced:0x94a3b8,
+  ventilator:0xf472b6, quantum:0xa78bfa, planetary:0xc084fc,
+  action_pot:0xfb923c, electronic:0xfbbf24, fluid:0x34d399,
+  colony:0xfcd34d
+};
+const sysColorsHex = {};
+Object.entries(systemColors).forEach(([k,v]) => { sysColorsHex[k] = '#' + v.toString(16).padStart(6,'0'); });
+
+const sysNames = {
+  engine:'Engine', pc:'PC', heart:'Heart', hydrogen:'Hydrogen',
+  neuron_old:'Neuron (orig)', thunderstorm:'Thunderstorm', predprey:'Predator-Prey', earth:'Earth',
+  energygrid:'Energy Grid', rbconvect:'RB Convection', honeybee:'Honeybee',
+  slimemold:'Slime Mold', biofilm:'Biofilm', starling:'Starling',
+  galaxy:'Spiral Galaxy', dna:'DNA', pulsar:'Pulsar', laser:'Laser',
+  brain_eeg:'Brain EEG', tides:'Ocean Tides', three_deck:'Three-Deck',
+  immune:'Immune', mechanical:'Mechanical', forced:'Forced Osc.',
+  ventilator:'Ventilator', quantum:'Quantum', planetary:'Planetary',
+  action_pot:'Action Potential', electronic:'Electronic', fluid:'Fluid Dynamics',
+  colony:'Human/Ant Colony'
+};
+
+// ============================================================
+// ALL DATA — id, name, system, period(s), energy(J), ARA
+// ============================================================
+const nodes = [
+  // ORIGINAL 8 SYSTEMS
+  // Engine
+  {id:'eng_combustion',name:'Combustion Cycle',sys:'engine',T:0.04,E:2700,ara:1.00},
+  {id:'eng_valve',name:'Valve Timing',sys:'engine',T:0.04,E:2700,ara:0.618},
+  {id:'eng_ignition',name:'Ignition Pulse',sys:'engine',T:0.0053,E:0.05,ara:0.0001},
+  {id:'eng_cooling',name:'Cooling Cycle',sys:'engine',T:30,E:5000,ara:1.60},
+  // PC
+  {id:'pc_clock',name:'CPU Clock',sys:'pc',T:3e-10,E:2.9e-8,ara:1.00},
+  {id:'pc_boost',name:'CPU Boost/Idle',sys:'pc',T:3.2,E:320,ara:0.60},
+  {id:'pc_ram',name:'RAM Refresh',sys:'pc',T:0.064,E:6.2e-3,ara:0.0047},
+  {id:'pc_thermal',name:'Thermal/Cooling',sys:'pc',T:23,E:2300,ara:1.30},
+  // Heart
+  {id:'hr_sa',name:'SA Node',sys:'heart',T:0.830,E:1.3,ara:0.043},
+  {id:'hr_av',name:'AV Node',sys:'heart',T:0.135,E:0.02,ara:0.27},
+  {id:'hr_pump',name:'Ventricular Pump',sys:'heart',T:0.830,E:1.3,ara:1.60},
+  {id:'hr_myocyte',name:'Myocyte',sys:'heart',T:0.830,E:1.3,ara:1.73},
+  {id:'hr_vap',name:'Ventricular AP',sys:'heart',T:0.830,E:0.001,ara:1.35},
+  {id:'hr_rsa',name:'RSA (Breathing)',sys:'heart',T:4.7,E:7,ara:1.61},
+  // Hydrogen
+  {id:'h_orbital',name:'Ground Orbital',sys:'hydrogen',T:1.52e-16,E:2.18e-18,ara:1.00},
+  {id:'h_lyman',name:'Lyman-alpha',sys:'hydrogen',T:1.596e-9,E:2.18e-18,ara:2.54e-7},
+  {id:'h_metastable',name:'2s Metastable',sys:'hydrogen',T:0.122,E:2.18e-18,ara:3.32e-15},
+  {id:'h_balmer',name:'Balmer Cascade',sys:'hydrogen',T:6.96e-9,E:2.18e-18,ara:0.298},
+  {id:'h_21cm',name:'21-cm Hyperfine',sys:'hydrogen',T:3.47e14,E:9.43e-25,ara:2.03e-24},
+  // Neuron (original)
+  {id:'n_spike',name:'Integration→Spike',sys:'neuron_old',T:0.0265,E:5e-12,ara:0.060},
+  {id:'n_depol',name:'Depol/Repol',sys:'neuron_old',T:0.0011,E:5e-13,ara:2.14},
+  {id:'n_refrac',name:'Refractory',sys:'neuron_old',T:0.0052,E:1e-12,ara:3.33},
+  {id:'n_vesicle',name:'Synaptic Vesicle',sys:'neuron_old',T:0.050,E:1e-12,ara:0.003},
+  // Thunderstorm
+  {id:'ts_lifecycle',name:'Storm Lifecycle',sys:'thunderstorm',T:3300,E:1e12,ara:2.24},
+  {id:'ts_lightning',name:'Lightning',sys:'thunderstorm',T:600,E:1e9,ara:1.67e-7},
+  {id:'ts_precip',name:'Precipitation',sys:'thunderstorm',T:2100,E:5e11,ara:0.75},
+  {id:'ts_gust',name:'Gust Front',sys:'thunderstorm',T:1140,E:1e11,ara:0.58},
+  // Predator-prey
+  {id:'pp_hare',name:'Hare (Prey)',sys:'predprey',T:9.5*365.25*86400,E:1e15,ara:0.46},
+  {id:'pp_lynx',name:'Lynx (Predator)',sys:'predprey',T:9.5*365.25*86400,E:5e14,ara:0.73},
+  {id:'pp_veg',name:'Vegetation',sys:'predprey',T:4*365.25*86400,E:1e14,ara:0.60},
+  // Earth
+  {id:'e_diurnal',name:'Diurnal Thermal',sys:'earth',T:86400,E:1.5e22,ara:1.667},
+  {id:'e_tidal',name:'Tidal Cycle',sys:'earth',T:43920,E:3.7e18,ara:1.44},
+  {id:'e_water',name:'Water Cycle',sys:'earth',T:820800,E:1.3e21,ara:0.056},
+  {id:'e_season',name:'Seasonal',sys:'earth',T:365.25*86400,E:5.5e24,ara:1.017},
+  {id:'e_enso',name:'ENSO',sys:'earth',T:4*365.25*86400,E:1e21,ara:0.60},
+  {id:'e_milanko',name:'Milankovitch',sys:'earth',T:1e5*365.25*86400,E:1e28,ara:0.111},
+
+  // BLIND TEST (10 systems)
+  {id:'eg_ac',name:'AC Waveform',sys:'energygrid',T:0.02,E:2e7,ara:1.00},
+  {id:'eg_daily',name:'Daily Load',sys:'energygrid',T:86400,E:8.64e14,ara:1.40},
+  {id:'rb_lab',name:'Lab Cell',sys:'rbconvect',T:30,E:0.02,ara:1.00},
+  {id:'rb_hadley',name:'Hadley Cell',sys:'rbconvect',T:30*86400,E:1e18,ara:1.00},
+  {id:'bee_annual',name:'Annual Colony',sys:'honeybee',T:365.25*86400,E:3.8e8,ara:1.40},
+  {id:'bee_forage',name:'Daily Foraging',sys:'honeybee',T:86400,E:1e6,ara:0.20},
+  {id:'bee_thermo',name:'Thermoreg.',sys:'honeybee',T:390,E:2000,ara:1.60},
+  {id:'sm_stream',name:'Shuttle Streaming',sys:'slimemold',T:120,E:5e-7,ara:1.18},
+  {id:'sm_network',name:'Network Opt.',sys:'slimemold',T:21600,E:0.2,ara:2.00},
+  {id:'bf_metab',name:'Metabolic Osc.',sys:'biofilm',T:18000,E:1.3,ara:1.50},
+  {id:'bf_kwave',name:'K+ Wave',sys:'biofilm',T:3600,E:0.01,ara:0.50},
+  {id:'st_wing',name:'Wing Beat',sys:'starling',T:1/13.5,E:0.1,ara:1.38},
+  {id:'st_turn',name:'Flock Turn',sys:'starling',T:9,E:500,ara:2.00},
+  {id:'gx_orbit',name:'Stellar Orbit',sys:'galaxy',T:225e6*365.25*86400,E:4.84e37,ara:1.00},
+  {id:'gx_arm',name:'Arm Passage',sys:'galaxy',T:110e6*365.25*86400,E:1e38,ara:2.67},
+  {id:'dna_breath',name:'Breathing Bubble',sys:'dna',T:80e-6,E:5e-19,ara:4.33},
+  {id:'dna_cell',name:'Cell Cycle',sys:'dna',T:84600,E:3e-7,ara:14.7},
+  {id:'psr_crab',name:'Crab Rotation',sys:'pulsar',T:0.0335,E:1.76e49,ara:1.00},
+  {id:'psr_typical',name:'Typical Pulsar',sys:'pulsar',T:0.71,E:7.1e25,ara:1.00},
+  {id:'las_cw',name:'CW Round-trip',sys:'laser',T:2e-9,E:2e-10,ara:1.00},
+  {id:'las_relax',name:'Relaxation Osc.',sys:'laser',T:1e-9,E:1e-12,ara:1.50},
+  {id:'las_qswitch',name:'Q-switched',sys:'laser',T:200e-6,E:0.1,ara:20000},
+  {id:'las_modelock',name:'Mode-locked',sys:'laser',T:12.5e-9,E:1.25e-8,ara:125000},
+
+  // SYSTEM 24: BRAIN EEG
+  {id:'eeg_gamma',name:'Gamma 40Hz',sys:'brain_eeg',T:0.025,E:1e-11,ara:3.000},
+  {id:'eeg_beta',name:'Beta 20Hz',sys:'brain_eeg',T:0.050,E:5e-12,ara:2.571},
+  {id:'eeg_alpha',name:'Alpha 10Hz',sys:'brain_eeg',T:0.100,E:2e-12,ara:2.571},
+  {id:'eeg_theta',name:'Theta 6Hz',sys:'brain_eeg',T:0.167,E:1e-12,ara:2.976},
+  {id:'eeg_delta',name:'Delta 2Hz',sys:'brain_eeg',T:0.500,E:5e-13,ara:2.333},
+
+  // SYSTEM 25: TIDES
+  {id:'tide_m2',name:'Semi-diurnal M2',sys:'tides',T:44640,E:3.7e18,ara:1.138},
+  {id:'tide_spring',name:'Spring-Neap',sys:'tides',T:1276140,E:1e19,ara:1.182},
+
+  // SYSTEM 26: THREE-DECK
+  {id:'td_cardiac',name:'Cardiac (SA)',sys:'three_deck',T:0.8,E:1.3,ara:1.667},
+  {id:'td_resp',name:'Respiratory',sys:'three_deck',T:4.0,E:3,ara:1.500},
+  {id:'td_mayer',name:'Mayer Wave',sys:'three_deck',T:10,E:0.5,ara:2.333},
+  {id:'td_gastric',name:'Gastric Wave',sys:'three_deck',T:20,E:0.3,ara:2.333},
+  {id:'td_cortisol',name:'Cortisol',sys:'three_deck',T:86400,E:500,ara:2.000},
+  {id:'td_saccade',name:'Saccade/Fix',sys:'three_deck',T:0.31,E:1e-4,ara:7.857},
+  {id:'td_blink',name:'Blink Cycle',sys:'three_deck',T:4.0,E:0.01,ara:9.000},
+  {id:'td_sleep',name:'Sleep-Wake',sys:'three_deck',T:86400,E:8e6,ara:2.000},
+
+  // SYSTEM 28: IMMUNE
+  {id:'imm_complement',name:'Complement',sys:'immune',T:0.285,E:1e-10,ara:5.333},
+  {id:'imm_neutro',name:'Neutrophil',sys:'immune',T:30600,E:1e-6,ara:4.667},
+  {id:'imm_inflam',name:'Inflammation',sys:'immune',T:432000,E:100,ara:1.500},
+  {id:'imm_adaptive',name:'Adaptive',sys:'immune',T:1382400,E:1000,ara:3.000},
+  {id:'imm_memory',name:'Memory',sys:'immune',T:3801600,E:50,ara:21.000},
+  {id:'imm_circadian',name:'Circadian',sys:'immune',T:86400,E:10,ara:0.846},
+
+  // SYSTEM 29: MECHANICAL
+  {id:'mech_pend',name:'Ideal Pendulum',sys:'mechanical',T:2.006,E:0.01,ara:1.000},
+  {id:'mech_spring',name:'Spring-Mass',sys:'mechanical',T:0.628,E:0.5,ara:1.000},
+  {id:'mech_fork',name:'Tuning Fork',sys:'mechanical',T:2.27e-3,E:1e-5,ara:1.000},
+  {id:'mech_foucault',name:'Foucault',sys:'mechanical',T:16.4,E:50,ara:1.016},
+
+  // SYSTEM 30: FORCED
+  {id:'fo_driven',name:'Driven Pendulum',sys:'forced',T:60000,E:0.1,ara:1.000},
+  {id:'fo_seismic',name:'Seismic Osc.',sys:'forced',T:53.8,E:1e15,ara:1.000},
+  {id:'fo_vdp',name:'Van der Pol',sys:'forced',T:10.0,E:0.01,ara:1.857},
+  {id:'fo_geyser',name:'Old Faithful',sys:'forced',T:5340,E:1e9,ara:21.250},
+
+  // SYSTEM 31: VENTILATOR
+  {id:'vent_natural',name:'Natural Breath',sys:'ventilator',T:4.0,E:3,ara:1.500},
+  {id:'vent_vc',name:'VC 1:2',sys:'ventilator',T:4.0,E:3,ara:0.498},
+  {id:'vent_nava',name:'NAVA',sys:'ventilator',T:3.8,E:3,ara:1.235},
+  {id:'vent_aprv',name:'APRV',sys:'ventilator',T:5.0,E:4,ara:9.000},
+  {id:'vent_hfov',name:'HFOV',sys:'ventilator',T:0.034,E:0.1,ara:1.000},
+
+  // SYSTEM 32: QUANTUM
+  {id:'q_qho',name:'QHO Ground',sys:'quantum',T:1e-13,E:1.05e-34/1e-13,ara:1.000},
+  {id:'q_rabi',name:'Rabi Osc.',sys:'quantum',T:1e-8,E:1.05e-34/1e-8,ara:1.000},
+  {id:'q_cs',name:'Caesium Clock',sys:'quantum',T:1.09e-10,E:1.05e-34/1.09e-10,ara:1.000},
+  {id:'q_phonon',name:'Phonon',sys:'quantum',T:1e-13,E:1.05e-34/1e-13,ara:1.000},
+  {id:'q_lyman',name:'H Lyman-alpha',sys:'quantum',T:1.596e-9,E:2.18e-18,ara:2.36e6},
+  {id:'q_na',name:'Na Fluorescence',sys:'quantum',T:1.624e-8,E:3.37e-19,ara:4.78e7},
+  {id:'q_alpha',name:'U-238 Alpha',sys:'quantum',T:1.41e17,E:6.8e-13,ara:1.41e38},
+
+  // SYSTEM 33: PLANETARY
+  {id:'pl_earth',name:'Earth Orbit',sys:'planetary',T:3.156e7,E:2.65e33,ara:1.011},
+  {id:'pl_mercury',name:'Mercury Orbit',sys:'planetary',T:7.6e6,E:1.6e32,ara:1.149},
+  {id:'pl_halley',name:"Halley's Comet",sys:'planetary',T:2.38e9,E:1e28,ara:4.556},
+  {id:'pl_jupiter',name:'Jupiter Orbit',sys:'planetary',T:3.74e8,E:4.2e35,ara:1.031},
+  {id:'pl_msp',name:'MS Pulsar',sys:'planetary',T:1.56e-3,E:1e44,ara:1.000},
+  {id:'pl_crab',name:'Crab Emission',sys:'planetary',T:0.0335,E:1.76e49,ara:7.375},
+  {id:'pl_sunspot',name:'Sunspot Cycle',sys:'planetary',T:3.47e8,E:1e25,ara:1.558},
+  {id:'pl_cepheid',name:'δ Cephei',sys:'planetary',T:4.64e5,E:1.5e30,ara:2.333},
+
+  // SYSTEM 34: ACTION POTENTIAL
+  {id:'ap_hh',name:'HH Spike',sys:'action_pot',T:0.002,E:5e-13,ara:3.000},
+  {id:'ap_pyramidal',name:'Pyramidal 10Hz',sys:'action_pot',T:0.100,E:5e-12,ara:49.000},
+  {id:'ap_fs',name:'FS Interneuron',sys:'action_pot',T:0.025,E:3e-12,ara:30.250},
+  {id:'ap_thal',name:'Thalamic Burst',sys:'action_pot',T:0.215,E:1e-11,ara:13.333},
+  {id:'ap_epsp',name:'AMPA EPSP',sys:'action_pot',T:0.009,E:1e-14,ara:8.000},
+  {id:'ap_ipsp',name:'GABA IPSP',sys:'action_pot',T:0.032,E:5e-14,ara:15.000},
+  {id:'ap_ca',name:'Ca²⁺ Spike',sys:'action_pot',T:0.105,E:1e-11,ara:20.000},
+
+  // SYSTEM 35: ELECTRONIC
+  {id:'el_lc',name:'LC Tank',sys:'electronic',T:1.99e-4,E:5e-6,ara:1.000},
+  {id:'el_555a',name:'555 (R1=R2)',sys:'electronic',T:0.139,E:0.01,ara:2.000},
+  {id:'el_555b',name:'555 (R1=2R2)',sys:'electronic',T:0.208,E:0.01,ara:3.000},
+  {id:'el_cmos',name:'CMOS Ring',sys:'electronic',T:1.68e-9,E:1e-12,ara:1.500},
+  {id:'el_colpitts',name:'Colpitts',sys:'electronic',T:1e-6,E:1e-7,ara:1.041},
+  {id:'el_crystal',name:'Crystal 32kHz',sys:'electronic',T:3.05e-5,E:1e-9,ara:1.000},
+  {id:'el_opamp',name:'Op-amp Relax',sys:'electronic',T:0.069,E:0.005,ara:2.000},
+
+  // SYSTEM 36: FLUID
+  {id:'fl_hammer',name:'Water Hammer',sys:'fluid',T:0.134,E:1e4,ara:1.000},
+  {id:'fl_wave',name:'Deep Water Wave',sys:'fluid',T:10.0,E:1e6,ara:1.062},
+  {id:'fl_drip',name:'Dripping Faucet',sys:'fluid',T:0.333,E:1e-4,ara:9.091},
+  {id:'fl_cavit',name:'Cavitation',sys:'fluid',T:5.5e-4,E:1e3,ara:10.000},
+  {id:'fl_rb',name:'Rayleigh-Bénard',sys:'fluid',T:1.0,E:0.1,ara:1.222},
+  {id:'fl_vk200',name:'Von Kármán 200',sys:'fluid',T:0.037,E:1e-3,ara:1.176},
+
+  // SYSTEM 37: COLONY
+  {id:'col_ant_forage',name:'Ant Foraging',sys:'colony',T:3600,E:0.1,ara:3.000},
+  {id:'col_ant_tandem',name:'Ant Tandem',sys:'colony',T:4.0,E:1e-4,ara:3.000},
+  {id:'col_ant_active',name:'Ant Activity',sys:'colony',T:1680,E:0.05,ara:2.500},
+  {id:'col_army',name:'Army Raid',sys:'colony',T:3.02e6,E:1e6,ara:1.333},
+  {id:'col_brood',name:'Brood Wave',sys:'colony',T:3.46e6,E:1e5,ara:19.000},
+  {id:'col_workweek',name:'Work Week',sys:'colony',T:6.05e5,E:5e8,ara:2.500},
+  {id:'col_annual',name:'Annual Cycle',sys:'colony',T:3.15e7,E:1e10,ara:12.000},
+];
+
+// Compute derived values
+nodes.forEach(n => {
+  n.action_pi = (n.T * n.E) / PI;
+  n.logT = Math.log10(n.T);
+  n.logARA = Math.log10(Math.max(n.ara, 1e-25));
+  n.logAction = Math.log10(Math.max(n.action_pi, 1e-40));
+  // Compute θ (circle orientation angle) from ARA
+  // ARA(θ) = [π + 2·arcsin(cos θ)] / [π - 2·arcsin(cos θ)]
+  // Inverse: arcsin(c) = π·(ARA-1)/(2·(1+ARA)), then θ = arccos(c)
+  if (n.ara > 0 && n.ara < 1e6) {
+    const val = PI * (n.ara - 1) / (2 * (1 + n.ara));
+    if (Math.abs(val) <= PI/2) {
+      const c = Math.sin(val);
+      n.theta_deg = Math.acos(Math.min(1, Math.max(-1, c))) * 180 / PI;
+    } else {
+      n.theta_deg = 0.1; // near-parallel snap
+    }
+  } else if (n.ara >= 1e6) {
+    n.theta_deg = 0.01;
+  } else {
+    n.theta_deg = 120; // ARA < 1 maps to > 90°
+  }
+  // Archetype from θ
+  n.archetype = n.theta_deg > 78 ? 'clock' : (n.theta_deg > 55 ? 'engine' : 'snap');
+});
+
+// Couplings
+const couplings = [
+  {from:'eng_ignition',to:'eng_combustion',type:1},{from:'eng_valve',to:'eng_combustion',type:1},
+  {from:'eng_combustion',to:'eng_cooling',type:1},
+  {from:'hr_sa',to:'hr_av',type:1},{from:'hr_av',to:'hr_vap',type:1},
+  {from:'hr_vap',to:'hr_myocyte',type:1},{from:'hr_myocyte',to:'hr_pump',type:1},
+  {from:'ts_lifecycle',to:'ts_precip',type:2},{from:'ts_precip',to:'ts_gust',type:1},
+  {from:'ts_lifecycle',to:'ts_lightning',type:2},
+  {from:'n_spike',to:'n_depol',type:1},{from:'n_depol',to:'n_refrac',type:1},
+  {from:'pp_veg',to:'pp_hare',type:2},{from:'pp_hare',to:'pp_lynx',type:2},
+  {from:'pp_lynx',to:'pp_hare',type:3},
+  {from:'e_diurnal',to:'e_tidal',type:1},{from:'e_diurnal',to:'e_season',type:2},
+  {from:'e_season',to:'e_enso',type:2},
+  {from:'bee_thermo',to:'bee_forage',type:2},{from:'bee_forage',to:'bee_annual',type:2},
+  {from:'sm_stream',to:'sm_network',type:2},
+  {from:'bf_metab',to:'bf_kwave',type:1},
+  {from:'st_wing',to:'st_turn',type:2},
+  {from:'psr_crab',to:'psr_typical',type:1},
+  {from:'las_cw',to:'las_relax',type:1},{from:'las_qswitch',to:'las_cw',type:3},
+  {from:'td_cardiac',to:'td_resp',type:2},{from:'td_resp',to:'td_mayer',type:2},
+  {from:'imm_complement',to:'imm_neutro',type:1},{from:'imm_neutro',to:'imm_inflam',type:1},
+  {from:'imm_inflam',to:'imm_adaptive',type:2},{from:'imm_adaptive',to:'imm_memory',type:2},
+  {from:'vent_vc',to:'vent_nava',type:2},{from:'vent_nava',to:'vent_natural',type:2},
+  {from:'ap_epsp',to:'ap_hh',type:1},{from:'ap_hh',to:'ap_ipsp',type:2},
+  {from:'eeg_gamma',to:'eeg_beta',type:2},{from:'eeg_beta',to:'eeg_alpha',type:2},
+  {from:'eeg_alpha',to:'eeg_theta',type:2},{from:'eeg_theta',to:'eeg_delta',type:2},
+  {from:'el_lc',to:'el_colpitts',type:1},{from:'el_555a',to:'el_555b',type:1},
+  {from:'fl_vk200',to:'fl_rb',type:2},
+  {from:'col_ant_forage',to:'col_ant_active',type:1},{from:'col_ant_active',to:'col_army',type:2},
+];
+
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
+// ============================================================
+// THREE.JS SCENE
+// ============================================================
+const W = window.innerWidth, H = window.innerHeight;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0a0f);
+scene.fog = new THREE.FogExp2(0x0a0a0f, 0.006);
+
+const camera = new THREE.PerspectiveCamera(50, W/H, 0.1, 500);
+camera.position.set(40, 28, 50);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(W, H);
+renderer.setPixelRatio(window.devicePixelRatio);
+document.body.appendChild(renderer.domElement);
+
+// Coordinate mapping
+const allLogT = nodes.map(n => n.logT);
+const allLogARA = nodes.map(n => n.logARA);
+const allLogAct = nodes.map(n => n.logAction);
+const range = arr => ({ min: Math.min(...arr), max: Math.max(...arr) });
+const rT = range(allLogT), rA = range(allLogARA), rAct = range(allLogAct);
+const SCALE = 20;
+
+function toScene(n) {
+  return new THREE.Vector3(
+    ((n.logT - rT.min) / (rT.max - rT.min) - 0.5) * 2 * SCALE,
+    ((n.logARA - rA.min) / (rA.max - rA.min) - 0.5) * 2 * SCALE,
+    ((n.logAction - rAct.min) / (rAct.max - rAct.min) - 0.5) * 2 * SCALE
+  );
+}
+
+nodes.forEach(n => { n.pos = toScene(n); });
+
+// ============================================================
+// GRID
+// ============================================================
+const gridGroup = new THREE.Group();
+scene.add(gridGroup);
+
+function addAxisLine(from, to, color) {
+  const g = new THREE.BufferGeometry().setFromPoints([from, to]);
+  const m = new THREE.LineBasicMaterial({ color, opacity: 0.4, transparent: true });
+  gridGroup.add(new THREE.Line(g, m));
+}
+
+addAxisLine(new THREE.Vector3(-SCALE,-SCALE,-SCALE), new THREE.Vector3(SCALE,-SCALE,-SCALE), 0x888888);
+addAxisLine(new THREE.Vector3(-SCALE,-SCALE,-SCALE), new THREE.Vector3(-SCALE,SCALE,-SCALE), 0x888888);
+addAxisLine(new THREE.Vector3(-SCALE,-SCALE,-SCALE), new THREE.Vector3(-SCALE,-SCALE,SCALE), 0x888888);
+
+for (let i = -SCALE; i <= SCALE; i += 8) {
+  addAxisLine(new THREE.Vector3(i,-SCALE,-SCALE), new THREE.Vector3(i,-SCALE,SCALE), 0x141428);
+  addAxisLine(new THREE.Vector3(-SCALE,-SCALE,i), new THREE.Vector3(SCALE,-SCALE,i), 0x141428);
+  addAxisLine(new THREE.Vector3(i,-SCALE,-SCALE), new THREE.Vector3(i,SCALE,-SCALE), 0x0e0e1a);
+  addAxisLine(new THREE.Vector3(-SCALE,i,-SCALE), new THREE.Vector3(SCALE,i,-SCALE), 0x0e0e1a);
+}
+
+// φ reference plane
+const phiY = ((Math.log10(1.618) - rA.min) / (rA.max - rA.min) - 0.5) * 2 * SCALE;
+const phiGeom = new THREE.PlaneGeometry(SCALE*2, SCALE*2);
+const phiMat = new THREE.MeshBasicMaterial({ color: 0xb197fc, opacity: 0.025, transparent: true, side: THREE.DoubleSide });
+const phiPlane = new THREE.Mesh(phiGeom, phiMat);
+phiPlane.rotation.x = PI/2;
+phiPlane.position.y = phiY;
+gridGroup.add(phiPlane);
+
+// ============================================================
+// NODES
+// ============================================================
+const spheres = [];
+const spriteGroup = new THREE.Group();
+scene.add(spriteGroup);
+
+nodes.forEach(n => {
+  const geom = new THREE.SphereGeometry(0.4, 12, 12);
+  const mat = new THREE.MeshBasicMaterial({ color: systemColors[n.sys] || 0x888888 });
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.position.copy(n.pos);
+  mesh.userData = n;
+  scene.add(mesh);
+  spheres.push(mesh);
+
+  const sMat = new THREE.SpriteMaterial({ color: systemColors[n.sys] || 0x888888, transparent: true, opacity: 0.12 });
+  const sprite = new THREE.Sprite(sMat);
+  sprite.position.copy(n.pos);
+  sprite.scale.set(2.5, 2.5, 1);
+  spriteGroup.add(sprite);
+  n.mesh = mesh; n.sprite = sprite;
+});
+
+// ============================================================
+// COUPLING LINES
+// ============================================================
+const couplingGroup = new THREE.Group();
+scene.add(couplingGroup);
+const coupColors = { 1: 0x69db7c, 2: 0x4dabf7, 3: 0xff6b6b };
+
+couplings.forEach(cp => {
+  const from = nodeMap[cp.from], to = nodeMap[cp.to];
+  if (!from || !to) return;
+  const g = new THREE.BufferGeometry().setFromPoints([from.pos, to.pos]);
+  const m = new THREE.LineBasicMaterial({ color: coupColors[cp.type]||0x444, opacity: cp.type===3?0.35:0.18, transparent: true });
+  const line = new THREE.Line(g, m);
+  line.userData = { from: from.sys, to: to.sys, baseOp: m.opacity };
+  couplingGroup.add(line);
+});
+
+// ============================================================
+// THREE CIRCLES — DISCOVERED BY CURVATURE ANALYSIS (Script 79b)
+// ============================================================
+// NOT hand-classified. Curvature analysis along the spine found
+// transition points at logT = 0.6 and logT = 1.4, dividing the
+// data into 3 segments. Each segment fits a 3D circle with
+// distinct plane orientation. F-test: p = 1.11e-16.
+// ============================================================
+const circleGroup = new THREE.Group();
+circleGroup.visible = false;
+scene.add(circleGroup);
+let showCircles = false;
+
+// Curvature-derived segment boundaries (from Script 79b)
+const SEG_BOUNDARY_1 = 0.6;   // logT where curvature peaks (κ=8.24)
+const SEG_BOUNDARY_2 = 1.4;   // logT where curvature peaks (κ=3.36)
+
+// Segment assignment — purely by logT, no category labels
+function getSegment(n) {
+  if (n.logT < SEG_BOUNDARY_1) return 0;  // small-T circle
+  if (n.logT < SEG_BOUNDARY_2) return 1;  // transition circle
+  return 2;                                 // large-T circle
+}
+
+// Gather scene positions per segment
+const segPts = [[], [], []];
+const segNodes = [[], [], []];
+nodes.forEach(n => {
+  const s = getSegment(n);
+  segPts[s].push(n.pos.clone());
+  segNodes[s].push(n);
+});
+
+// Circle fitting via covariance eigenvectors + algebraic 2D circle fit
+function fitCircle3D(points) {
+  if (points.length < 4) return null;
+  const N = points.length;
+
+  // Centroid
+  const cx = points.reduce((s,p) => s+p.x, 0) / N;
+  const cy = points.reduce((s,p) => s+p.y, 0) / N;
+  const cz = points.reduce((s,p) => s+p.z, 0) / N;
+  const centroid = new THREE.Vector3(cx, cy, cz);
+
+  // Covariance matrix
+  let cov = [[0,0,0],[0,0,0],[0,0,0]];
+  points.forEach(p => {
+    const dx = p.x-cx, dy = p.y-cy, dz = p.z-cz;
+    cov[0][0]+=dx*dx; cov[0][1]+=dx*dy; cov[0][2]+=dx*dz;
+    cov[1][0]+=dy*dx; cov[1][1]+=dy*dy; cov[1][2]+=dy*dz;
+    cov[2][0]+=dz*dx; cov[2][1]+=dz*dy; cov[2][2]+=dz*dz;
+  });
+
+  // Power iteration for eigenvectors
+  function powerIter(mat, seed, iters) {
+    let v = seed.clone().normalize();
+    for (let i = 0; i < iters; i++) {
+      const nv = new THREE.Vector3(
+        mat[0][0]*v.x + mat[0][1]*v.y + mat[0][2]*v.z,
+        mat[1][0]*v.x + mat[1][1]*v.y + mat[1][2]*v.z,
+        mat[2][0]*v.x + mat[2][1]*v.y + mat[2][2]*v.z
+      );
+      const len = nv.length();
+      if (len < 1e-12) return { vec: v, val: 0 };
+      v = nv.divideScalar(len);
+    }
+    const val = v.x*(mat[0][0]*v.x+mat[0][1]*v.y+mat[0][2]*v.z) +
+                v.y*(mat[1][0]*v.x+mat[1][1]*v.y+mat[1][2]*v.z) +
+                v.z*(mat[2][0]*v.x+mat[2][1]*v.y+mat[2][2]*v.z);
+    return { vec: v, val };
+  }
+
+  // First eigenvector (largest variance)
+  const e1 = powerIter(cov, new THREE.Vector3(1, 0.5, 0.3), 80);
+  const v1 = e1.vec;
+
+  // Deflate
+  const va = v1.toArray();
+  const cov2 = cov.map((r,i) => r.map((c,j) => c - e1.val * va[i] * va[j]));
+
+  // Second eigenvector
+  const e2 = powerIter(cov2, new THREE.Vector3(0.3, 1, 0.5), 80);
+  const v2 = e2.vec;
+
+  // Normal = cross(v1, v2)
+  const normal = new THREE.Vector3().crossVectors(v1, v2).normalize();
+
+  // Project points onto the v1-v2 plane and do algebraic circle fit (Kasa)
+  const projX = [], projY = [];
+  points.forEach(p => {
+    const d = p.clone().sub(centroid);
+    projX.push(d.dot(v1));
+    projY.push(d.dot(v2));
+  });
+
+  // Solve: [px py 1] * [a b c]^T = px^2 + py^2
+  // Using normal equations: A^T A x = A^T b
+  let ATA = [[0,0,0],[0,0,0],[0,0,0]], ATb = [0,0,0];
+  for (let i = 0; i < N; i++) {
+    const x = projX[i], y = projY[i], rhs = x*x + y*y;
+    ATA[0][0] += x*x; ATA[0][1] += x*y; ATA[0][2] += x;
+    ATA[1][0] += y*x; ATA[1][1] += y*y; ATA[1][2] += y;
+    ATA[2][0] += x;   ATA[2][1] += y;   ATA[2][2] += 1;
+    ATb[0] += x*rhs; ATb[1] += y*rhs; ATb[2] += rhs;
+  }
+
+  // Solve 3x3 system via Cramer's rule
+  function det3(m) {
+    return m[0][0]*(m[1][1]*m[2][2]-m[1][2]*m[2][1])
+         - m[0][1]*(m[1][0]*m[2][2]-m[1][2]*m[2][0])
+         + m[0][2]*(m[1][0]*m[2][1]-m[1][1]*m[2][0]);
+  }
+  function replCol(m, col, v) {
+    return m.map((r,i) => r.map((c,j) => j===col ? v[i] : c));
+  }
+
+  const D = det3(ATA);
+  if (Math.abs(D) < 1e-12) {
+    // Fallback: use centroid + average radius
+    const dists = points.map(p => p.clone().sub(centroid).length());
+    const avgR = dists.reduce((s,d) => s+d, 0) / N;
+    return { center: centroid, normal, radius: avgR, v1, v2 };
+  }
+
+  const a = det3(replCol(ATA, 0, ATb)) / D;
+  const b = det3(replCol(ATA, 1, ATb)) / D;
+  const c = det3(replCol(ATA, 2, ATb)) / D;
+
+  const cx2d = a / 2;
+  const cy2d = b / 2;
+  const rSq = c + cx2d*cx2d + cy2d*cy2d;
+  const radius = rSq > 0 ? Math.sqrt(rSq) : 1;
+
+  // Circle center in 3D
+  const center = centroid.clone()
+    .add(v1.clone().multiplyScalar(cx2d))
+    .add(v2.clone().multiplyScalar(cy2d));
+
+  return { center, normal, radius, v1, v2 };
+}
+
+// Generate circle points in 3D
+function circlePointsFromFit(fit, nSegs) {
+  const pts = [];
+  for (let i = 0; i <= nSegs; i++) {
+    const a = (i / nSegs) * 2 * PI;
+    const p = fit.center.clone()
+      .add(fit.v1.clone().multiplyScalar(Math.cos(a) * fit.radius))
+      .add(fit.v2.clone().multiplyScalar(Math.sin(a) * fit.radius));
+    pts.push(p);
+  }
+  return pts;
+}
+
+// Colors and labels for the 3 discovered circles
+const segColors = [0x4dabf7, 0xf0c040, 0xb197fc]; // blue, gold, purple
+const segLabelsText = ['Circle 1 (small-T)', 'Circle 2 (human)', 'Circle 3 (large-T)'];
+const segFits = [];
+
+segPts.forEach((pts, idx) => {
+  if (pts.length < 4) return;
+  const fit = fitCircle3D(pts);
+  if (!fit) return;
+  segFits[idx] = fit;
+
+  // Draw the full extrapolated circle (128 segments)
+  const circlePts = circlePointsFromFit(fit, 128);
+  const geom = new THREE.BufferGeometry().setFromPoints(circlePts);
+  const mat = new THREE.LineBasicMaterial({
+    color: segColors[idx],
+    transparent: true,
+    opacity: 0.75,
+    linewidth: 2
+  });
+  const line = new THREE.Line(geom, mat);
+  circleGroup.add(line);
+
+  // Also draw the observed arc portion (thicker/brighter)
+  // Find angle range of actual data points on the circle
+  const angles = pts.map(p => {
+    const d = p.clone().sub(fit.center);
+    const px = d.dot(fit.v1), py = d.dot(fit.v2);
+    return Math.atan2(py, px);
+  }).sort((a,b) => a - b);
+
+  // Draw arc highlight
+  const arcPts = [];
+  if (angles.length > 2) {
+    const minA = angles[0] - 0.1, maxA = angles[angles.length-1] + 0.1;
+    for (let i = 0; i <= 64; i++) {
+      const a = minA + (i/64) * (maxA - minA);
+      const p = fit.center.clone()
+        .add(fit.v1.clone().multiplyScalar(Math.cos(a) * fit.radius))
+        .add(fit.v2.clone().multiplyScalar(Math.sin(a) * fit.radius));
+      arcPts.push(p);
+    }
+    const arcGeom = new THREE.BufferGeometry().setFromPoints(arcPts);
+    const arcMat = new THREE.LineBasicMaterial({
+      color: segColors[idx],
+      transparent: true,
+      opacity: 1.0,
+      linewidth: 3
+    });
+    const arcLine = new THREE.Line(arcGeom, arcMat);
+    circleGroup.add(arcLine);
+  }
+
+  // Label
+  const labelPos = fit.center.clone().add(fit.v1.clone().multiplyScalar(fit.radius * 1.12));
+  const lc = document.createElement('canvas');
+  const lctx = lc.getContext('2d');
+  lc.width = 512; lc.height = 80;
+  lctx.font = 'bold 24px DM Sans, sans-serif';
+  const hexCol = '#' + segColors[idx].toString(16).padStart(6, '0');
+  lctx.fillStyle = hexCol;
+  lctx.fillText(segLabelsText[idx], 4, 30);
+  lctx.font = '16px JetBrains Mono, monospace';
+  lctx.fillStyle = '#aaa';
+  lctx.fillText(pts.length + ' systems · r=' + fit.radius.toFixed(1), 4, 56);
+  const tex = new THREE.CanvasTexture(lc);
+  const sMat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.9 });
+  const sprite = new THREE.Sprite(sMat);
+  sprite.position.copy(labelPos);
+  sprite.scale.set(14, 3, 1);
+  circleGroup.add(sprite);
+});
+
+// ============================================================
+// LABELS
+// ============================================================
+const labelGroup = new THREE.Group();
+scene.add(labelGroup);
+
+function makeLabel(text, pos, color, size) {
+  const c = document.createElement('canvas');
+  const ctx = c.getContext('2d');
+  c.width = 512; c.height = 48;
+  ctx.font = `bold ${size||12}px JetBrains Mono, monospace`;
+  ctx.fillStyle = color || '#fff';
+  ctx.fillText(text, 4, 24);
+  const tex = new THREE.CanvasTexture(c);
+  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, opacity: 0.9 });
+  const s = new THREE.Sprite(mat);
+  s.position.copy(pos);
+  s.scale.set(8, 1.5, 1);
+  return s;
+}
+
+nodes.forEach(n => {
+  const lp = n.pos.clone().add(new THREE.Vector3(1, 0.6, 0));
+  const label = makeLabel(n.name, lp, sysColorsHex[n.sys], 11);
+  label.userData = { sys: n.sys };
+  labelGroup.add(label);
+  n.label = label;
+});
+
+// Axis labels
+const axX = makeLabel('PERIOD →', new THREE.Vector3(0,-SCALE-2.5,-SCALE), '#ccc', 13);
+axX.scale.set(10,1.5,1); scene.add(axX);
+const axY = makeLabel('ARA ↑', new THREE.Vector3(-SCALE-2.5,0,-SCALE), '#ccc', 13);
+axY.scale.set(8,1.5,1); scene.add(axY);
+const axZ = makeLabel('ACTION/π →', new THREE.Vector3(-SCALE,-SCALE-2.5,0), '#ccc', 13);
+axZ.scale.set(10,1.5,1); scene.add(axZ);
+
+const phiLbl = makeLabel('φ plane', new THREE.Vector3(SCALE+1,phiY,-SCALE), '#b197fc', 11);
+phiLbl.scale.set(6,1.2,1); scene.add(phiLbl);
+
+// ============================================================
+// ORBIT CONTROLS (manual)
+// ============================================================
+let isDragging = false, prevMouse = {x:0,y:0};
+let theta = 0.8, phi2 = 0.5, radius = 70;
+let autoSpin = false;
+let highlightedSys = null;
+const hiddenSystems = new Set();
+let showCouplings = true, showLabels = true, showGrid = true;
+
+function updateCamera() {
+  camera.position.x = radius*Math.sin(phi2)*Math.cos(theta);
+  camera.position.y = radius*Math.cos(phi2);
+  camera.position.z = radius*Math.sin(phi2)*Math.sin(theta);
+  camera.lookAt(0,0,0);
+}
+updateCamera();
+
+renderer.domElement.addEventListener('mousedown', e => { isDragging=true; prevMouse={x:e.clientX,y:e.clientY}; });
+renderer.domElement.addEventListener('mousemove', e => {
+  if (isDragging) {
+    theta += (e.clientX-prevMouse.x)*0.005;
+    phi2 = Math.max(0.1, Math.min(PI-0.1, phi2-(e.clientY-prevMouse.y)*0.005));
+    prevMouse = {x:e.clientX,y:e.clientY};
+    updateCamera();
+  }
+});
+renderer.domElement.addEventListener('mouseup', () => isDragging=false);
+renderer.domElement.addEventListener('wheel', e => {
+  radius = Math.max(15, Math.min(180, radius+e.deltaY*0.05));
+  updateCamera();
+});
+
+// ============================================================
+// HOVER
+// ============================================================
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+const tooltipEl = document.getElementById('tooltip');
+
+function fmtP(s) {
+  if (s<1e-15) return (s*1e18).toFixed(0)+' as';
+  if (s<1e-9) return (s*1e12).toFixed(1)+' ps';
+  if (s<1e-6) return (s*1e9).toFixed(1)+' ns';
+  if (s<1e-3) return (s*1e6).toFixed(1)+' µs';
+  if (s<1) return (s*1e3).toFixed(1)+' ms';
+  if (s<60) return s.toFixed(1)+' s';
+  if (s<3600) return (s/60).toFixed(1)+' min';
+  if (s<86400) return (s/3600).toFixed(1)+' hr';
+  if (s<365.25*86400) return (s/86400).toFixed(1)+' d';
+  if (s<1e6*365.25*86400) return (s/(365.25*86400)).toFixed(1)+' yr';
+  return (s/(365.25*86400*1e6)).toFixed(1)+' Myr';
+}
+
+renderer.domElement.addEventListener('mousemove', e => {
+  mouse.x = (e.clientX/W)*2-1;
+  mouse.y = -(e.clientY/H)*2+1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(spheres);
+  if (hits.length > 0 && !isDragging) {
+    const n = hits[0].object.userData;
+    const araStr = n.ara < 0.001 ? n.ara.toExponential(2) : n.ara >= 1000 ? n.ara.toExponential(2) : n.ara.toFixed(3);
+    const actStr = n.action_pi < 0.001 ? n.action_pi.toExponential(2) : n.action_pi.toExponential(3);
+    const thetaStr = n.theta_deg !== undefined ? n.theta_deg.toFixed(1) + '°' : '—';
+    const archStr = n.archetype || '—';
+    const archColor = n.archetype === 'clock' ? '#4dabf7' : (n.archetype === 'engine' ? '#f0c040' : '#ff6b6b');
+    tooltipEl.innerHTML = `
+      <div class="name" style="color:${sysColorsHex[n.sys]}">${n.name}</div>
+      <div class="sys">${sysNames[n.sys]}</div>
+      <div class="val">ARA: ${araStr}</div>
+      <div class="val">θ: ${thetaStr} <span style="color:${archColor}">(${archStr})</span></div>
+      <div class="val">Period: ${fmtP(n.T)}</div>
+      <div class="val">Energy: ${n.E.toExponential(2)} J</div>
+      <div class="val">Action/π: ${actStr} J·s</div>
+    `;
+    tooltipEl.style.display = 'block';
+    tooltipEl.style.left = (e.clientX+14)+'px';
+    tooltipEl.style.top = (e.clientY-10)+'px';
+  } else { tooltipEl.style.display = 'none'; }
+});
+
+// ============================================================
+// LEGEND
+// ============================================================
+const legendEl = document.getElementById('legend');
+const usedSys = new Set(nodes.map(n => n.sys));
+
+Object.entries(sysNames).forEach(([key,name]) => {
+  if (!usedSys.has(key)) return;
+  const item = document.createElement('div');
+  item.className = 'legend-item';
+  item.innerHTML = `<div class="legend-dot" style="background:${sysColorsHex[key]}"></div> ${name}`;
+  item.onclick = () => {
+    if (hiddenSystems.has(key)) hiddenSystems.delete(key); else hiddenSystems.add(key);
+    item.classList.toggle('dimmed', hiddenSystems.has(key));
+    updateVis();
+  };
+  item.onmouseenter = () => { highlightedSys = key; updateVis(); };
+  item.onmouseleave = () => { highlightedSys = null; updateVis(); };
+  legendEl.appendChild(item);
+});
+
+function updateVis() {
+  nodes.forEach(n => {
+    const hidden = hiddenSystems.has(n.sys);
+    const dimmed = highlightedSys && n.sys !== highlightedSys;
+    n.mesh.visible = !hidden;
+    n.sprite.visible = !hidden;
+    if (n.label) n.label.visible = !hidden && showLabels && !dimmed;
+    if (!hidden) {
+      n.mesh.material.opacity = dimmed ? 0.12 : 1.0;
+      n.mesh.material.transparent = dimmed;
+      n.sprite.material.opacity = dimmed ? 0.02 : 0.12;
+      const baseScale = showCircles ? 0.6 : 1.0;
+      n.mesh.scale.setScalar(dimmed ? 0.4 : baseScale);
+    }
+  });
+  couplingGroup.children.forEach(l => {
+    const hidden = hiddenSystems.has(l.userData.from) || hiddenSystems.has(l.userData.to);
+    const dimmed = highlightedSys && l.userData.from !== highlightedSys && l.userData.to !== highlightedSys;
+    l.visible = !hidden && showCouplings;
+    l.material.opacity = dimmed ? 0.02 : (l.userData.baseOp || 0.2);
+  });
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+document.getElementById('btnCouplings').onclick = function() {
+  showCouplings = !showCouplings; this.classList.toggle('active',showCouplings);
+  couplingGroup.visible = showCouplings;
+};
+document.getElementById('btnLabels').onclick = function() {
+  showLabels = !showLabels; this.classList.toggle('active',showLabels);
+  labelGroup.visible = showLabels;
+};
+document.getElementById('btnGrid').onclick = function() {
+  showGrid = !showGrid; this.classList.toggle('active',showGrid);
+  gridGroup.visible = showGrid;
+};
+document.getElementById('btnSpin').onclick = function() {
+  autoSpin = !autoSpin; this.classList.toggle('active',autoSpin);
+};
+document.getElementById('btnCircles').onclick = function() {
+  showCircles = !showCircles; this.classList.toggle('active',showCircles);
+  circleGroup.visible = showCircles;
+  // When circles are on, dim the spheres slightly so rings are visible
+  nodes.forEach(n => {
+    if (!hiddenSystems.has(n.sys)) {
+      n.mesh.scale.setScalar(showCircles ? 0.5 : 1.0);
+    }
+  });
+};
+
+// ============================================================
+// ANIMATE
+// ============================================================
+function animate() {
+  requestAnimationFrame(animate);
+  if (autoSpin && !isDragging) { theta += 0.002; updateCamera(); }
+  labelGroup.children.forEach(s => s.lookAt(camera.position));
+  axX.lookAt(camera.position); axY.lookAt(camera.position); axZ.lookAt(camera.position);
+  phiLbl.lookAt(camera.position);
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const w=window.innerWidth, h=window.innerHeight;
+  camera.aspect=w/h; camera.updateProjectionMatrix();
+  renderer.setSize(w,h);
+});
+</script>
+</body>
+</html>
