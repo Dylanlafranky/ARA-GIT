@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Cogs v3 — Meshing Pipeline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 24px; max-width: 1500px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 16px; line-height: 1.8; }
+  .rule-box {
+    background: #0d0d1a; border: 2px solid #f0c040; border-radius: 8px;
+    padding: 16px; margin: 20px 0; text-align: center;
+  }
+  .rule-box .rule { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: #f0c040; }
+  .rule-box .explain { font-size: 12px; color: #888; margin-top: 6px; }
+  .controls {
+    display: flex; gap: 14px; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 16px 0; padding: 10px;
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+  }
+  .controls label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .controls input[type=range] { width: 100px; accent-color: #f0c040; }
+  .controls .val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #f0c040; min-width: 28px; }
+  select { background: #111122; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+  button { background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px; padding: 5px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; cursor: pointer; }
+  button:hover { background: #2a2a3e; }
+  button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+  .canvas-wrap { background: #060610; border: 1px solid #1a1a2e; border-radius: 8px; padding: 4px; margin: 14px 0; }
+  canvas { display: block; margin: 0 auto; }
+  .legend { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; margin: 10px 0; font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .footer { font-size: 11px; color: #555; margin-top: 40px; padding-top: 14px; border-top: 1px solid #1a1a2e; }
+</style>
+</head>
+<body>
+
+<h1>Temporal Cogs v3 — The Meshing Pipeline</h1>
+<p class="subtitle">Subsystems touch. Amber teeth drive blue teeth. The pipeline is the topology.</p>
+
+<div class="rule-box">
+  <div class="rule">AMBER (release) teeth &harr; BLUE (accumulation) teeth</div>
+  <div class="explain">One system's release physically drives the next system's accumulation. They mesh like gears at the handoff point.</div>
+</div>
+
+<div class="controls">
+  <label>System:</label>
+  <select id="sysSel">
+    <option value="pair">Simple Pair</option>
+    <option value="chain3">Snap → Engine → Consumer</option>
+    <option value="thunderstorm" selected>Thunderstorm</option>
+    <option value="heart">Heart</option>
+    <option value="engine">Engine</option>
+  </select>
+  <label>Speed:</label>
+  <input type="range" id="spd" min="0" max="2" step="0.05" value="0.35">
+  <span class="val" id="spdV">0.35</span>
+  <label>Scale:</label>
+  <input type="range" id="scl" min="0.6" max="1.6" step="0.05" value="1.0">
+  <span class="val" id="sclV">1.0</span>
+  <button id="tbTeeth" class="active">Teeth</button>
+  <button id="tbLabel" class="active">Labels</button>
+  <button id="tbPause">Pause</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#4dabf7"></div> Accumulation</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0c040"></div> Release</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#69db7c"></div> Mesh handoff</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Destructive</div>
+</div>
+
+<div class="canvas-wrap">
+  <canvas id="c" width="1400" height="850"></canvas>
+</div>
+
+<div class="footer">
+  The Geometry of Time — Dylan La Franchi &bull; April 2026 &bull; CC-BY-4.0
+</div>
+
+<script>
+const c = document.getElementById('c');
+const X = c.getContext('2d');
+let T = 0, spd = 0.35, scl = 1.0, teeth = true, labels = true, paused = false, cur = 'thunderstorm';
+
+// ============================================================
+// SYSTEM DEFINITIONS
+// Each node has: id, name, ara, size (base radius), color
+// Positions are computed from the coupling graph so nodes TOUCH
+// ============================================================
+
+function buildSystem(def) {
+  // Compute positions: place first node, then place each connected node at touching distance
+  const nodes = {};
+  def.nodes.forEach(n => nodes[n.id] = { ...n, placed: false });
+
+  // Place the seed node
+  const seed = nodes[def.seed];
+  seed.x = def.seedX || 700;
+  seed.y = def.seedY || 400;
+  seed.placed = true;
+
+  // BFS placement along coupling graph
+  const queue = [seed.id];
+  const placed = new Set([seed.id]);
+
+  // Use placement order defined in the system
+  def.placement.forEach(({ from, to, angle }) => {
+    const f = nodes[from];
+    const t = nodes[to];
+    if (!f || !t) return;
+    if (!f.placed) return;
+
+    const touchDist = (f.size + t.size) * 1.02; // slight gap for visibility
+    t.x = f.x + touchDist * Math.cos(angle);
+    t.y = f.y + touchDist * Math.sin(angle);
+    t.placed = true;
+
+    // Orient: f's release should face toward t
+    // t's accumulation should face toward f
+    if (!f.orientRelease) f.orientRelease = angle;
+    // For 'to', accumulation should face back toward 'from'
+    t.orientAcc = angle + Math.PI; // face back
+  });
+
+  // Compute orientRelease for each node based on its primary outgoing coupling
+  def.couplings.forEach(cp => {
+    const f = nodes[cp.from];
+    const t = nodes[cp.to];
+    if (!f || !t || !f.placed || !t.placed) return;
+    if (!f.orientRelease) {
+      f.orientRelease = Math.atan2(t.y - f.y, t.x - f.x);
+    }
+  });
+
+  // Default orientation for any remaining
+  def.nodes.forEach(n => {
+    const node = nodes[n.id];
+    if (!node.orientRelease) node.orientRelease = 0;
+    if (!node.orientAcc) {
+      // Derive from orientRelease + shape geometry
+      const visARA = Math.max(node.ara, 0.04);
+      const accAng = (2 * Math.PI) / (1 + visARA);
+      const relAng = (2 * Math.PI) - accAng;
+      // Release mid = accAng + relAng/2 from start; Acc mid = accAng/2 from start
+      // We set orientRelease = direction of release mid
+      // So orientAcc = orientRelease - (accAng/2 + relAng/2) ≈ opposite-ish
+      node.orientAcc = node.orientRelease + Math.PI;
+    }
+  });
+
+  return { nodes: Object.values(nodes), couplings: def.couplings, name: def.name };
+}
+
+const defs = {
+  pair: {
+    name: "Simple Pair — Release Drives Accumulation",
+    seed: "a", seedX: 580, seedY: 420,
+    nodes: [
+      { id: "a", name: "System A (phi)", ara: 1.618, size: 70, color: "#b197fc" },
+      { id: "b", name: "System B (consumer)", ara: 0.65, size: 55, color: "#69db7c" },
+    ],
+    placement: [
+      { from: "a", to: "b", angle: 0 },
+    ],
+    couplings: [
+      { from: "a", to: "b", strength: 1.0, label: "A's amber → B's blue" },
+    ]
+  },
+  chain3: {
+    name: "Snap → Phi Engine → Consumer",
+    seed: "snap", seedX: 350, seedY: 420,
+    nodes: [
+      { id: "snap", name: "Trigger (snap)", ara: 0.008, size: 25, color: "#ff6b6b" },
+      { id: "phi", name: "Engine (phi)", ara: 1.618, size: 75, color: "#b197fc" },
+      { id: "cons", name: "Consumer", ara: 0.6, size: 55, color: "#69db7c" },
+    ],
+    placement: [
+      { from: "snap", to: "phi", angle: 0 },
+      { from: "phi", to: "cons", angle: 0 },
+    ],
+    couplings: [
+      { from: "snap", to: "phi", strength: 1.0, label: "Spark ignites" },
+      { from: "phi", to: "cons", strength: 1.0, label: "Engine feeds" },
+    ]
+  },
+  thunderstorm: {
+    name: "Thunderstorm — Interlocking Ring",
+    seed: "lifecycle", seedX: 700, seedY: 240,
+    nodes: [
+      { id: "lifecycle", name: "Storm Lifecycle", ara: 2.24, size: 72, color: "#e599f7" },
+      { id: "precip", name: "Precipitation", ara: 0.75, size: 52, color: "#69db7c" },
+      { id: "gust", name: "Gust Front", ara: 0.58, size: 48, color: "#69db7c" },
+      { id: "multicell", name: "Multicell Pulse", ara: 0.64, size: 50, color: "#69db7c" },
+      { id: "lightning", name: "Lightning", ara: 1.7e-7, size: 25, color: "#ff6b6b" },
+    ],
+    placement: [
+      { from: "lifecycle", to: "precip", angle: Math.PI * 0.35 },
+      { from: "precip", to: "gust", angle: Math.PI * 0.75 },
+      { from: "gust", to: "multicell", angle: Math.PI * 1.25 },
+      { from: "multicell", to: "lifecycle", angle: -Math.PI * 0.35 },
+      { from: "lifecycle", to: "lightning", angle: -Math.PI * 0.65 },
+    ],
+    couplings: [
+      { from: "lifecycle", to: "precip", strength: 1.0, label: "Updraft suspends" },
+      { from: "precip", to: "gust", strength: 1.0, label: "Evap → cold pool" },
+      { from: "gust", to: "multicell", strength: 1.0, label: "Triggers new cell" },
+      { from: "multicell", to: "lifecycle", strength: 1.0, label: "Pulse = lifecycle" },
+      { from: "lifecycle", to: "lightning", strength: 1.0, label: "Charge env" },
+      { from: "lightning", to: "precip", strength: 0.3, label: "Charge mod" },
+      { from: "gust", to: "lifecycle", strength: 0.9, label: "Kills updraft", destructive: true },
+    ]
+  },
+  heart: {
+    name: "Human Heart — Cascade Pipeline",
+    seed: "sa", seedX: 350, seedY: 160,
+    nodes: [
+      { id: "sa", name: "SA Node", ara: 0.043, size: 24, color: "#ff6b6b" },
+      { id: "av", name: "AV Node", ara: 0.27, size: 32, color: "#ff8787" },
+      { id: "atrial", name: "Atrial Mech", ara: 0.43, size: 38, color: "#69db7c" },
+      { id: "vap", name: "Ventricular AP", ara: 1.35, size: 50, color: "#4dabf7" },
+      { id: "myocyte", name: "Myocyte Ca²⁺", ara: 1.73, size: 55, color: "#ffd43b" },
+      { id: "pump", name: "Ventricular Pump", ara: 1.60, size: 65, color: "#b197fc" },
+      { id: "coronary", name: "Coronary Flow", ara: 1.22, size: 45, color: "#4dabf7" },
+      { id: "rsa", name: "RSA", ara: 1.67, size: 52, color: "#b197fc" },
+    ],
+    placement: [
+      { from: "sa", to: "av", angle: Math.PI * 0.15 },
+      { from: "sa", to: "atrial", angle: Math.PI * 0.7 },
+      { from: "av", to: "vap", angle: Math.PI * 0.4 },
+      { from: "vap", to: "myocyte", angle: Math.PI * 0.55 },
+      { from: "myocyte", to: "pump", angle: Math.PI * 0.85 },
+      { from: "pump", to: "coronary", angle: Math.PI * 0.2 },
+      { from: "coronary", to: "myocyte", angle: -Math.PI * 0.4 },
+      { from: "pump", to: "rsa", angle: Math.PI * 1.3 },
+    ],
+    couplings: [
+      { from: "sa", to: "av", strength: 1.0, label: "Trigger → gate" },
+      { from: "sa", to: "atrial", strength: 1.0, label: "Trigger → contraction" },
+      { from: "av", to: "vap", strength: 1.0, label: "Gate → activation" },
+      { from: "vap", to: "myocyte", strength: 1.0, label: "Elec → mech" },
+      { from: "myocyte", to: "pump", strength: 1.0, label: "Force → ejection" },
+      { from: "pump", to: "coronary", strength: 1.0, label: "Pressure → flow" },
+      { from: "coronary", to: "myocyte", strength: 0.8, label: "O₂ → viability" },
+      { from: "rsa", to: "sa", strength: 0.6, label: "Vagal → rate" },
+      { from: "atrial", to: "pump", strength: 0.5, label: "Kick → preload" },
+    ]
+  },
+  engine: {
+    name: "4-Stroke Engine — Combustion Ring",
+    seed: "intake", seedX: 450, seedY: 300,
+    nodes: [
+      { id: "intake", name: "Intake/Compress", ara: 0.50, size: 52, color: "#69db7c" },
+      { id: "combustion", name: "Combustion", ara: 0.0044, size: 30, color: "#ff6b6b" },
+      { id: "exhaust", name: "Exhaust", ara: 0.75, size: 50, color: "#69db7c" },
+      { id: "ignition", name: "Ignition", ara: 0.0001, size: 20, color: "#ff6b6b" },
+      { id: "cooling", name: "Cooling", ara: 1.60, size: 60, color: "#b197fc" },
+      { id: "lube", name: "Lubrication", ara: 1.50, size: 55, color: "#b197fc" },
+    ],
+    placement: [
+      { from: "intake", to: "combustion", angle: 0 },
+      { from: "combustion", to: "exhaust", angle: 0 },
+      { from: "combustion", to: "ignition", angle: Math.PI * 0.85 },
+      { from: "exhaust", to: "cooling", angle: Math.PI * 0.6 },
+      { from: "combustion", to: "lube", angle: Math.PI * 1.15 },
+    ],
+    couplings: [
+      { from: "intake", to: "combustion", strength: 1.0, label: "Charge → burn" },
+      { from: "ignition", to: "combustion", strength: 1.0, label: "Spark" },
+      { from: "combustion", to: "exhaust", strength: 1.0, label: "Gases out" },
+      { from: "combustion", to: "cooling", strength: 0.8, label: "Heat" },
+      { from: "lube", to: "combustion", strength: 0.5, label: "Oil film" },
+      { from: "exhaust", to: "intake", strength: 0.8, label: "Cycle restarts" },
+    ]
+  }
+};
+
+let sys = null;
+
+function loadSystem(name) {
+  cur = name;
+  sys = buildSystem(defs[name]);
+}
+
+// ============================================================
+// DRAWING
+// ============================================================
+
+function rotSpeed(ara) {
+  if (ara < 0.01) return 2.0;
+  if (ara < 0.1) return 1.4;
+  if (ara < 0.5) return 0.9;
+  if (ara < 1.0) return 0.6;
+  if (ara < 1.8) return 0.35;
+  return 0.4;
+}
+
+function drawShape(node) {
+  const r = node.size * scl;
+  const ara = Math.max(node.ara, 0.04);
+  const accAng = (2 * Math.PI) / (1 + ara);
+  const relAng = (2 * Math.PI) - accAng;
+
+  // Orient: release midpoint faces orientRelease direction
+  const relMid = accAng + relAng / 2;
+  const baseRot = (node.orientRelease || 0) - relMid;
+  const animRot = T * rotSpeed(node.ara);
+  const start = baseRot + animRot;
+
+  const steps = 140;
+  const aSteps = Math.max(4, Math.round(steps * (accAng / (2 * Math.PI))));
+  const rSteps = Math.max(4, steps - aSteps);
+  const toothN = 14;
+
+  const accPts = [], relPts = [];
+
+  for (let i = 0; i <= aSteps; i++) {
+    const t = i / aSteps;
+    const ang = start + t * accAng;
+    const e = t * t * (3 - 2 * t);
+    const br = r * (0.2 + 0.8 * e);
+    const th = teeth ? Math.max(0, Math.sin(ang * toothN)) * (3 + r * 0.05) : 0;
+    accPts.push({
+      x: node.x + (br + th) * Math.cos(ang),
+      y: node.y + (br + th) * Math.sin(ang),
+      bx: node.x + br * Math.cos(ang),
+      by: node.y + br * Math.sin(ang),
+      ang, br
+    });
+  }
+
+  for (let i = 0; i <= rSteps; i++) {
+    const t = i / rSteps;
+    const ang = start + accAng + t * relAng;
+    const e = 1 - (t * t * (3 - 2 * t));
+    const br = r * (0.2 + 0.8 * e);
+    const th = teeth ? Math.max(0, Math.sin(ang * toothN)) * (3 + r * 0.05) : 0;
+    relPts.push({
+      x: node.x + (br + th) * Math.cos(ang),
+      y: node.y + (br + th) * Math.sin(ang),
+      bx: node.x + br * Math.cos(ang),
+      by: node.y + br * Math.sin(ang),
+      ang, br
+    });
+  }
+
+  // Glow
+  const g = X.createRadialGradient(node.x, node.y, 0, node.x, node.y, r * 1.3);
+  g.addColorStop(0, node.color + '0b');
+  g.addColorStop(1, node.color + '00');
+  X.beginPath(); X.arc(node.x, node.y, r * 1.3, 0, Math.PI * 2);
+  X.fillStyle = g; X.fill();
+
+  // Fill
+  X.beginPath(); X.moveTo(node.x, node.y);
+  accPts.forEach(p => X.lineTo(p.x, p.y));
+  relPts.forEach(p => X.lineTo(p.x, p.y));
+  X.closePath(); X.fillStyle = node.color + '0c'; X.fill();
+
+  // Acc arc (blue)
+  X.beginPath();
+  accPts.forEach((p, i) => i === 0 ? X.moveTo(p.x, p.y) : X.lineTo(p.x, p.y));
+  X.strokeStyle = '#4dabf7'; X.lineWidth = 2.5; X.stroke();
+
+  // Rel arc (amber)
+  X.beginPath();
+  const pk = accPts[accPts.length - 1];
+  X.moveTo(pk.x, pk.y);
+  relPts.forEach(p => X.lineTo(p.x, p.y));
+  X.strokeStyle = '#f0c040'; X.lineWidth = 2.5; X.stroke();
+
+  // Hub
+  X.beginPath(); X.arc(node.x, node.y, 3, 0, Math.PI * 2);
+  X.fillStyle = '#fff'; X.fill();
+
+  // Peak
+  const pulse = 1 + 0.2 * Math.sin(T * 5);
+  X.beginPath(); X.arc(pk.x, pk.y, 3.5 * pulse, 0, Math.PI * 2);
+  X.fillStyle = '#fff'; X.fill();
+
+  return { accPts, relPts, peak: pk, r };
+}
+
+function drawMesh(fromNode, toNode, fromShape, toShape, coupling) {
+  // Find closest RELEASE point of 'from' to ACCUMULATION point of 'to'
+  let best = Infinity, bRel = null, bAcc = null;
+
+  // Sample every few points for performance
+  const step = 3;
+  for (let i = 0; i < fromShape.relPts.length; i += step) {
+    const rp = fromShape.relPts[i];
+    for (let j = 0; j < toShape.accPts.length; j += step) {
+      const ap = toShape.accPts[j];
+      const d = (rp.x - ap.x) ** 2 + (rp.y - ap.y) ** 2;
+      if (d < best) { best = d; bRel = rp; bAcc = ap; }
+    }
+  }
+  if (!bRel) return;
+
+  const dist = Math.sqrt(best);
+  const mx = (bRel.x + bAcc.x) / 2;
+  const my = (bRel.y + bAcc.y) / 2;
+  const maxD = (fromShape.r + toShape.r) * 0.7;
+  const prox = Math.max(0, Math.min(1, 1 - dist / maxD));
+  const str = prox * coupling.strength;
+
+  const col = coupling.destructive ? '#ff6b6b' : '#69db7c';
+
+  if (str > 0.05) {
+    // Mesh glow
+    const pulse = 1 + 0.3 * Math.sin(T * 7);
+    const gr = X.createRadialGradient(mx, my, 0, mx, my, 20 * pulse);
+    gr.addColorStop(0, col + Math.round(str * 100).toString(16).padStart(2, '0'));
+    gr.addColorStop(1, col + '00');
+    X.beginPath(); X.arc(mx, my, 20 * pulse, 0, Math.PI * 2); X.fillStyle = gr; X.fill();
+
+    // Handoff line
+    X.beginPath();
+    X.moveTo(bRel.x, bRel.y);
+    X.lineTo(bAcc.x, bAcc.y);
+    if (coupling.destructive) { X.setLineDash([3, 3]); }
+    X.strokeStyle = col + Math.round(str * 180).toString(16).padStart(2, '0');
+    X.lineWidth = 1.5 + coupling.strength * 1.5;
+    X.stroke();
+    X.setLineDash([]);
+
+    // Amber dot → Blue dot
+    X.beginPath(); X.arc(bRel.x, bRel.y, 3, 0, Math.PI * 2);
+    X.fillStyle = '#f0c040' + Math.round(str * 220).toString(16).padStart(2, '0'); X.fill();
+    X.beginPath(); X.arc(bAcc.x, bAcc.y, 3, 0, Math.PI * 2);
+    X.fillStyle = '#4dabf7' + Math.round(str * 220).toString(16).padStart(2, '0'); X.fill();
+
+    // Transfer particles (amber → blue gradient)
+    for (let i = 0; i < 3; i++) {
+      const pt = ((T * 1.5 + i / 3) % 1);
+      const px = bRel.x + (bAcc.x - bRel.x) * pt;
+      const py = bRel.y + (bAcc.y - bRel.y) * pt;
+      const a = Math.sin(pt * Math.PI) * str * 0.9;
+      const cr = Math.round(240 * (1 - pt) + 77 * pt);
+      const cg = Math.round(192 * (1 - pt) + 171 * pt);
+      const cb = Math.round(64 * (1 - pt) + 247 * pt);
+      X.beginPath(); X.arc(px, py, 2, 0, Math.PI * 2);
+      X.fillStyle = `rgba(${cr},${cg},${cb},${a})`; X.fill();
+    }
+  } else {
+    // Far apart — thin connecting thread
+    X.beginPath();
+    X.moveTo(fromNode.x, fromNode.y);
+    X.lineTo(toNode.x, toNode.y);
+    X.strokeStyle = col + '12';
+    X.lineWidth = 1; X.setLineDash([3, 6]); X.stroke(); X.setLineDash([]);
+  }
+
+  // Label at mesh point
+  if (labels && coupling.label && str > 0.1) {
+    X.font = "9px 'JetBrains Mono'";
+    X.textAlign = 'center';
+    X.fillStyle = col + '66';
+    X.fillText(coupling.label, mx, my - 14);
+    X.textAlign = 'left';
+  }
+}
+
+function render() {
+  if (!paused) T += 0.016 * spd;
+  X.clearRect(0, 0, c.width, c.height);
+
+  if (!sys) return requestAnimationFrame(render);
+
+  const nodeMap = {};
+  sys.nodes.forEach(n => nodeMap[n.id] = n);
+
+  // Draw shapes
+  const shapes = {};
+  sys.nodes.forEach(n => { shapes[n.id] = drawShape(n); });
+
+  // Draw mesh points
+  sys.couplings.forEach(cp => {
+    const fn = nodeMap[cp.from], tn = nodeMap[cp.to];
+    if (fn && tn && shapes[cp.from] && shapes[cp.to]) {
+      drawMesh(fn, tn, shapes[cp.from], shapes[cp.to], cp);
+    }
+  });
+
+  // Labels
+  if (labels) {
+    sys.nodes.forEach(n => {
+      const r = n.size * scl;
+      X.font = "bold 10px 'JetBrains Mono'";
+      X.textAlign = 'center'; X.fillStyle = '#fff';
+      X.fillText(n.name, n.x, n.y + r + 16);
+      X.font = "9px 'JetBrains Mono'";
+      X.fillStyle = n.color;
+      const as = n.ara < 0.001 ? n.ara.toExponential(1) : n.ara.toFixed(2);
+      X.fillText('ARA: ' + as, n.x, n.y + r + 28);
+      X.textAlign = 'left';
+    });
+  }
+
+  // Title
+  X.font = "12px 'JetBrains Mono'"; X.fillStyle = '#333'; X.textAlign = 'center';
+  X.fillText(sys.name, c.width / 2, c.height - 12);
+  X.textAlign = 'left';
+
+  requestAnimationFrame(render);
+}
+
+// Controls
+document.getElementById('sysSel').onchange = e => loadSystem(e.target.value);
+document.getElementById('spd').oninput = e => { spd = +e.target.value; document.getElementById('spdV').textContent = spd.toFixed(2); };
+document.getElementById('scl').oninput = e => { scl = +e.target.value; document.getElementById('sclV').textContent = scl.toFixed(1); };
+document.getElementById('tbTeeth').onclick = e => { teeth = !teeth; e.target.classList.toggle('active', teeth); };
+document.getElementById('tbLabel').onclick = e => { labels = !labels; e.target.classList.toggle('active', labels); };
+document.getElementById('tbPause').onclick = e => { paused = !paused; e.target.textContent = paused ? 'Play' : 'Pause'; e.target.classList.toggle('active', paused); };
+
+loadSystem('thunderstorm');
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporal Flow — Coupled Shape Topology</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f; color: #e0e0e0; font-family: 'DM Sans', sans-serif;
+    padding: 24px; max-width: 1500px; margin: 0 auto; line-height: 1.7;
+  }
+  h1 { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #fff; margin-bottom: 4px; }
+  h2 { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: #ddd; margin-bottom: 16px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 24px; }
+  .body-text { font-size: 14px; color: #ccc; margin-bottom: 16px; line-height: 1.8; }
+  .section-divider { border: none; border-top: 1px solid #1a1a2e; margin: 48px 0; }
+  .callout {
+    background: #111122; border-left: 3px solid #f0c040;
+    padding: 16px 20px; margin: 24px 0; font-size: 13px; line-height: 1.8; color: #ccc;
+  }
+  .callout strong { color: #f0c040; }
+  .controls {
+    display: flex; gap: 16px; align-items: center; justify-content: center;
+    flex-wrap: wrap; margin: 16px 0; padding: 12px;
+    background: #0d0d1a; border: 1px solid #1a1a2e; border-radius: 8px;
+  }
+  .controls label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #888;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .controls input[type=range] { width: 120px; accent-color: #f0c040; }
+  .controls .val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #f0c040; min-width: 30px; }
+  select {
+    background: #111122; color: #e0e0e0; border: 1px solid #333; border-radius: 4px;
+    padding: 4px 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  }
+  button {
+    background: #1a1a2e; color: #e0e0e0; border: 1px solid #333; border-radius: 4px;
+    padding: 6px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  button:hover { background: #2a2a3e; }
+  button.active { background: #3a3a1e; border-color: #f0c040; color: #f0c040; }
+  .canvas-container {
+    background: #060610; border: 1px solid #1a1a2e; border-radius: 8px;
+    padding: 8px; margin: 16px 0; position: relative; overflow: hidden;
+  }
+  canvas { display: block; margin: 0 auto; }
+  .legend {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    margin: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .footer { font-size: 11px; color: #555; margin-top: 48px; padding-top: 16px; border-top: 1px solid #1a1a2e; line-height: 1.8; }
+</style>
+</head>
+<body>
+
+<h1>Temporal Flow — Coupled Shape Topology</h1>
+<p class="subtitle">How subsystems' temporal shapes feed into each other — the Van Gogh view</p>
+
+<p class="body-text">
+  Each subsystem traces its own temporal shape. But systems don't exist in isolation — one subsystem's
+  release feeds another's accumulation. The <strong>release arc</strong> of the storm lifecycle pours
+  into the <strong>accumulation arc</strong> of the gust front. The gust front's release feeds the
+  multicell pulse. The shapes flow into each other like currents in a painting — each swirl has its
+  own centre, but the energy streams between them.
+</p>
+
+<div class="callout">
+  <strong>Reading the visualisation:</strong> Each swirl is a subsystem's temporal shape — blue arcs are
+  accumulation (energy building), amber arcs are release (energy discharging). The flowing streams between
+  shapes show coupling — energy flowing from one subsystem's release into another's accumulation. Thicker
+  streams = stronger coupling. The particle flow shows the direction and rate of energy transfer.
+  Red dashed streams = destructive feedback (the system fighting itself).
+</div>
+
+<div class="controls">
+  <label>System:</label>
+  <select id="systemSelect">
+    <option value="thunderstorm">Thunderstorm (5 subsystems)</option>
+    <option value="heart">Heart (8 subsystems)</option>
+    <option value="engine">Engine (6 subsystems)</option>
+  </select>
+  <label>Flow speed:</label>
+  <input type="range" id="flowSpeed" min="0.1" max="3" step="0.1" value="1">
+  <span class="val" id="flowSpeedVal">1.0x</span>
+  <label>Shape size:</label>
+  <input type="range" id="shapeSize" min="30" max="80" step="5" value="50">
+  <span class="val" id="shapeSizeVal">50</span>
+  <button id="toggleParticles" class="active">Particles</button>
+  <button id="toggleLabels" class="active">Labels</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#4dabf7"></div> Accumulation</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f0c040"></div> Release</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#69db7c"></div> Energy flow (strong)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#69db7c55"></div> Energy flow (weak)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff6b6b"></div> Destructive feedback</div>
+</div>
+
+<div class="canvas-container">
+  <canvas id="flowCanvas" width="1400" height="800"></canvas>
+</div>
+
+<hr class="section-divider">
+
+<div class="footer">
+  The Geometry of Time &mdash; Temporal Flow Visualisation<br>
+  Dylan La Franchi &bull; April 2026 &bull; CC-BY-4.0<br>
+  <a href="https://github.com/Dylanlafranky/ARA-GIT" style="color:#4dabf7">github.com/Dylanlafranky/ARA-GIT</a>
+</div>
+
+<script>
+// ============================================================
+// SYSTEM DEFINITIONS
+// ============================================================
+
+const systemData = {
+  thunderstorm: {
+    name: "Thunderstorm Lifecycle",
+    subsystems: [
+      { id: "lifecycle", name: "Storm Lifecycle", ara: 2.24, x: 700, y: 200, color: "#e599f7", category: "Beyond scale" },
+      { id: "lightning", name: "Lightning", ara: 0.000000167, x: 400, y: 150, color: "#ff6b6b", category: "Ultra-extreme snap" },
+      { id: "precip", name: "Precipitation", ara: 0.75, x: 1000, y: 200, color: "#69db7c", category: "Consumer" },
+      { id: "gust", name: "Gust Front", ara: 0.58, x: 900, y: 500, color: "#69db7c", category: "Consumer" },
+      { id: "multicell", name: "Multicell Pulse", ara: 0.64, x: 500, y: 500, color: "#69db7c", category: "Consumer" },
+    ],
+    couplings: [
+      { from: "lifecycle", to: "lightning", label: "Charge separation environment", strength: 1.0 },
+      { from: "lifecycle", to: "precip", label: "Updraft grows hydrometeors", strength: 1.0 },
+      { from: "precip", to: "gust", label: "Evaporating precip → cold pool", strength: 1.0 },
+      { from: "gust", to: "multicell", label: "Gust front triggers new cell", strength: 1.0 },
+      { from: "multicell", to: "lifecycle", label: "Each pulse = new lifecycle", strength: 1.0 },
+      { from: "lightning", to: "precip", label: "Charge on hydrometeors", strength: 0.3 },
+      { from: "gust", to: "lifecycle", label: "Undercuts updraft (self-limiting)", strength: 1.0, destructive: true },
+    ]
+  },
+  heart: {
+    name: "Human Heart",
+    subsystems: [
+      { id: "sa", name: "SA Node", ara: 0.043, x: 350, y: 100, color: "#ff6b6b", category: "Extreme snap" },
+      { id: "av", name: "AV Node", ara: 0.27, x: 650, y: 100, color: "#69db7c", category: "Consumer snap" },
+      { id: "atrial", name: "Atrial Mech", ara: 0.43, x: 200, y: 300, color: "#69db7c", category: "Consumer" },
+      { id: "vap", name: "Ventricular AP", ara: 1.35, x: 900, y: 300, color: "#4dabf7", category: "Shock absorber" },
+      { id: "myocyte", name: "Myocyte Ca²⁺", ara: 1.73, x: 1100, y: 400, color: "#ffd43b", category: "Exothermic" },
+      { id: "pump", name: "Ventricular Pump", ara: 1.60, x: 700, y: 450, color: "#b197fc", category: "Phi zone" },
+      { id: "coronary", name: "Coronary Flow", ara: 1.22, x: 1000, y: 600, color: "#4dabf7", category: "Shock absorber" },
+      { id: "rsa", name: "RSA", ara: 1.67, x: 350, y: 550, color: "#b197fc", category: "Phi zone" },
+    ],
+    couplings: [
+      { from: "sa", to: "av", label: "Electrical trigger → gate", strength: 1.0 },
+      { from: "sa", to: "atrial", label: "Trigger → atrial contraction", strength: 1.0 },
+      { from: "av", to: "vap", label: "Gate → ventricular activation", strength: 1.0 },
+      { from: "av", to: "pump", label: "Gate → pump timing", strength: 0.8 },
+      { from: "vap", to: "myocyte", label: "Electrical → mechanical", strength: 1.0 },
+      { from: "myocyte", to: "pump", label: "Muscle force → ejection", strength: 1.0 },
+      { from: "pump", to: "coronary", label: "Pump pressure → coronary", strength: 1.0 },
+      { from: "coronary", to: "myocyte", label: "O₂ → muscle viability", strength: 0.9 },
+      { from: "rsa", to: "sa", label: "Vagal modulation → rate", strength: 0.6 },
+      { from: "atrial", to: "pump", label: "Atrial kick → preload", strength: 0.6 },
+    ]
+  },
+  engine: {
+    name: "4-Stroke Engine",
+    subsystems: [
+      { id: "combustion", name: "Combustion", ara: 0.0044, x: 700, y: 200, color: "#ff6b6b", category: "Ultra-extreme snap" },
+      { id: "intake", name: "Intake/Compression", ara: 0.50, x: 350, y: 200, color: "#69db7c", category: "Consumer" },
+      { id: "exhaust", name: "Exhaust", ara: 0.75, x: 1050, y: 200, color: "#69db7c", category: "Consumer" },
+      { id: "ignition", name: "Ignition Pulse", ara: 0.0001, x: 500, y: 450, color: "#ff6b6b", category: "Ultra-extreme snap" },
+      { id: "cooling", name: "Cooling System", ara: 1.60, x: 900, y: 450, color: "#b197fc", category: "Phi zone" },
+      { id: "lubrication", name: "Lubrication", ara: 1.50, x: 700, y: 600, color: "#b197fc", category: "Phi zone" },
+    ],
+    couplings: [
+      { from: "intake", to: "combustion", label: "Fuel-air charge → burn", strength: 1.0 },
+      { from: "ignition", to: "combustion", label: "Spark triggers detonation", strength: 1.0 },
+      { from: "combustion", to: "exhaust", label: "Burnt gases expelled", strength: 1.0 },
+      { from: "combustion", to: "cooling", label: "Heat → coolant absorption", strength: 0.8 },
+      { from: "lubrication", to: "combustion", label: "Oil film protects surfaces", strength: 0.5 },
+      { from: "exhaust", to: "intake", label: "Cycle restarts", strength: 0.8 },
+      { from: "cooling", to: "combustion", label: "Thermal regulation", strength: 0.6 },
+    ]
+  }
+};
+
+// ============================================================
+// DRAWING ENGINE
+// ============================================================
+
+const canvas = document.getElementById('flowCanvas');
+const ctx = canvas.getContext('2d');
+
+let showParticles = true;
+let showLabels = true;
+let flowSpeed = 1.0;
+let shapeRadius = 50;
+let currentSystem = 'thunderstorm';
+let animFrame;
+let time = 0;
+
+// Particles for flow streams
+let particles = [];
+
+function initParticles() {
+  particles = [];
+  const sys = systemData[currentSystem];
+  const subsysMap = {};
+  sys.subsystems.forEach(s => subsysMap[s.id] = s);
+
+  sys.couplings.forEach(coupling => {
+    const from = subsysMap[coupling.from];
+    const to = subsysMap[coupling.to];
+    if (!from || !to) return;
+
+    const count = Math.ceil(coupling.strength * 12);
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        coupling,
+        from, to,
+        t: Math.random(),
+        speed: (0.002 + Math.random() * 0.003) * coupling.strength,
+        offset: (Math.random() - 0.5) * 12,
+      });
+    }
+  });
+}
+
+function drawTemporalShape(ctx, cx, cy, radius, ara, color, alpha = 1.0, rotation = 0) {
+  const visualARA = Math.max(ara, 0.03);
+  const accAngle = (2 * Math.PI) / (1 + visualARA);
+  const relAngle = (2 * Math.PI) - accAngle;
+
+  const steps = 100;
+  const startAngle = -Math.PI / 2 + rotation;
+  const accSteps = Math.round(steps * (accAngle / (2 * Math.PI)));
+  const relSteps = steps - accSteps;
+
+  const points = [];
+
+  // Accumulation — expanding
+  for (let i = 0; i <= accSteps; i++) {
+    const t = i / accSteps;
+    const angle = startAngle + t * accAngle;
+    const easedT = t * t * (3 - 2 * t);
+    const r = radius * (0.15 + 0.85 * easedT);
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), phase: 'acc' });
+  }
+
+  // Release — contracting
+  for (let i = 1; i <= relSteps; i++) {
+    const t = i / relSteps;
+    const angle = startAngle + accAngle + t * relAngle;
+    const easedT = 1 - (t * t * (3 - 2 * t));
+    const r = radius * (0.15 + 0.85 * easedT);
+    points.push({ x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle), phase: 'rel' });
+  }
+
+  // Glow effect
+  const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 1.3);
+  gradient.addColorStop(0, color + '15');
+  gradient.addColorStop(1, color + '00');
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius * 1.3, 0, Math.PI * 2);
+  ctx.fillStyle = gradient;
+  ctx.fill();
+
+  // Fill shape
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  points.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.closePath();
+  ctx.fillStyle = color + '12';
+  ctx.fill();
+
+  // Accumulation arc
+  ctx.beginPath();
+  const accPts = points.filter(p => p.phase === 'acc');
+  accPts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = `rgba(77, 171, 247, ${alpha})`;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Release arc
+  ctx.beginPath();
+  const relPts = points.filter(p => p.phase === 'rel');
+  const lastAcc = accPts[accPts.length - 1];
+  ctx.moveTo(lastAcc.x, lastAcc.y);
+  relPts.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.strokeStyle = `rgba(240, 192, 64, ${alpha})`;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Peak dot with pulse
+  const pulse = 1 + 0.15 * Math.sin(time * 3);
+  ctx.beginPath();
+  ctx.arc(lastAcc.x, lastAcc.y, 3 * pulse, 0, Math.PI * 2);
+  ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+  ctx.fill();
+
+  // Return peak and start for coupling connections
+  return {
+    peak: lastAcc,
+    start: points[0],
+    accMid: accPts[Math.floor(accPts.length * 0.5)],
+    relMid: relPts.length > 0 ? relPts[Math.floor(relPts.length * 0.5)] : lastAcc,
+  };
+}
+
+function getCurvePoint(from, to, t, offset) {
+  // Cubic bezier with control points offset perpendicular to the line
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  const nx = -dy / dist;
+  const ny = dx / dist;
+
+  const curvature = dist * 0.3;
+  const cp1x = from.x + dx * 0.33 + nx * (curvature + offset);
+  const cp1y = from.y + dy * 0.33 + ny * (curvature + offset);
+  const cp2x = from.x + dx * 0.66 + nx * (curvature + offset);
+  const cp2y = from.y + dy * 0.66 + ny * (curvature + offset);
+
+  const u = 1 - t;
+  const x = u*u*u*from.x + 3*u*u*t*cp1x + 3*u*t*t*cp2x + t*t*t*to.x;
+  const y = u*u*u*from.y + 3*u*u*t*cp1y + 3*u*t*t*cp2y + t*t*t*to.y;
+  return { x, y, cp1x, cp1y, cp2x, cp2y };
+}
+
+function drawFlowStream(ctx, fromPos, toPos, coupling, alpha = 1.0) {
+  const { strength, destructive } = coupling;
+  const dx = toPos.x - fromPos.x;
+  const dy = toPos.y - fromPos.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  const nx = -dy / dist;
+  const ny = dx / dist;
+  const curvature = dist * 0.3;
+
+  const cp1x = fromPos.x + dx * 0.33 + nx * curvature;
+  const cp1y = fromPos.y + dy * 0.33 + ny * curvature;
+  const cp2x = fromPos.x + dx * 0.66 + nx * curvature;
+  const cp2y = fromPos.y + dy * 0.66 + ny * curvature;
+
+  ctx.beginPath();
+  ctx.moveTo(fromPos.x, fromPos.y);
+  ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, toPos.x, toPos.y);
+
+  if (destructive) {
+    ctx.strokeStyle = `rgba(255, 107, 107, ${0.25 * strength * alpha})`;
+    ctx.setLineDash([6, 6]);
+  } else {
+    ctx.strokeStyle = `rgba(105, 219, 124, ${0.2 * strength * alpha})`;
+    ctx.setLineDash([]);
+  }
+  ctx.lineWidth = 1 + strength * 2;
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawParticles(ctx, time) {
+  particles.forEach(p => {
+    p.t += p.speed * flowSpeed;
+    if (p.t > 1) p.t -= 1;
+
+    const fromPos = { x: p.from.x, y: p.from.y };
+    const toPos = { x: p.to.x, y: p.to.y };
+    const pos = getCurvePoint(fromPos, toPos, p.t, p.offset);
+
+    const size = 2 + p.coupling.strength;
+    const alpha = Math.sin(p.t * Math.PI) * 0.8;
+
+    if (p.coupling.destructive) {
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 107, 107, ${alpha})`;
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(105, 219, 124, ${alpha})`;
+      ctx.fill();
+
+      // Subtle trail
+      ctx.beginPath();
+      ctx.arc(pos.x, pos.y, size * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(105, 219, 124, ${alpha * 0.1})`;
+      ctx.fill();
+    }
+  });
+}
+
+function render() {
+  time += 0.016;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const sys = systemData[currentSystem];
+  const subsysMap = {};
+  sys.subsystems.forEach(s => subsysMap[s.id] = s);
+
+  // Draw flow streams (behind shapes)
+  sys.couplings.forEach(coupling => {
+    const from = subsysMap[coupling.from];
+    const to = subsysMap[coupling.to];
+    if (!from || !to) return;
+    drawFlowStream(ctx, { x: from.x, y: from.y }, { x: to.x, y: to.y }, coupling);
+  });
+
+  // Draw particles
+  if (showParticles) {
+    drawParticles(ctx, time);
+  }
+
+  // Draw shapes (on top)
+  const shapeData = {};
+  sys.subsystems.forEach(s => {
+    const rotation = time * 0.2; // gentle rotation
+    shapeData[s.id] = drawTemporalShape(ctx, s.x, s.y, shapeRadius, s.ara, s.color, 1.0, rotation);
+  });
+
+  // Labels
+  if (showLabels) {
+    sys.subsystems.forEach(s => {
+      ctx.font = "bold 11px 'JetBrains Mono'";
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#fff';
+      ctx.fillText(s.name, s.x, s.y + shapeRadius + 18);
+
+      ctx.font = "10px 'JetBrains Mono'";
+      ctx.fillStyle = s.color;
+      const araStr = s.ara < 0.001 ? s.ara.toExponential(1) : s.ara.toFixed(2);
+      ctx.fillText(`ARA: ${araStr}`, s.x, s.y + shapeRadius + 32);
+
+      ctx.fillStyle = '#666';
+      ctx.fillText(s.category, s.x, s.y + shapeRadius + 44);
+      ctx.textAlign = 'left';
+    });
+
+    // Coupling labels on hover — draw faintly
+    sys.couplings.forEach(coupling => {
+      const from = subsysMap[coupling.from];
+      const to = subsysMap[coupling.to];
+      if (!from || !to) return;
+
+      const mx = (from.x + to.x) / 2;
+      const my = (from.y + to.y) / 2;
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const nx = -dy / dist;
+      const ny = dx / dist;
+      const offset = dist * 0.15;
+
+      ctx.font = "9px 'JetBrains Mono'";
+      ctx.textAlign = 'center';
+      ctx.fillStyle = coupling.destructive ? '#ff6b6b55' : '#69db7c44';
+      ctx.fillText(coupling.label, mx + nx * offset, my + ny * offset);
+      ctx.textAlign = 'left';
+    });
+  }
+
+  // System title
+  ctx.font = "bold 14px 'JetBrains Mono'";
+  ctx.fillStyle = '#555';
+  ctx.textAlign = 'center';
+  ctx.fillText(sys.name + ' — Coupled Temporal Shapes', canvas.width / 2, canvas.height - 20);
+  ctx.textAlign = 'left';
+
+  animFrame = requestAnimationFrame(render);
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+
+document.getElementById('systemSelect').addEventListener('change', (e) => {
+  currentSystem = e.target.value;
+  initParticles();
+});
+
+document.getElementById('flowSpeed').addEventListener('input', (e) => {
+  flowSpeed = parseFloat(e.target.value);
+  document.getElementById('flowSpeedVal').textContent = flowSpeed.toFixed(1) + 'x';
+});
+
+document.getElementById('shapeSize').addEventListener('input', (e) => {
+  shapeRadius = parseInt(e.target.value);
+  document.getElementById('shapeSizeVal').textContent = shapeRadius;
+});
+
+document.getElementById('toggleParticles').addEventListener('click', (e) => {
+  showParticles = !showParticles;
+  e.target.classList.toggle('active', showParticles);
+});
+
+document.getElementById('toggleLabels').addEventListener('click', (e) => {
+  showLabels = !showLabels;
+  e.target.classList.toggle('active', showLabels);
+});
+
+// ============================================================
+// START
+// ============================================================
+
+initParticles();
+render();
+</script>
+
+</body>
+</html>

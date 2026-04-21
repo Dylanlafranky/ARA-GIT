@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Geometry of Time — A Heuristic Framework for Non-Equilibrium Phase Ratios</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0a0e14;
+    --surface: #111820;
+    --surface-2: #161d27;
+    --border: #1e2a3a;
+    --text: #c8d1db;
+    --text-muted: #6b7d93;
+    --text-bright: #e8edf3;
+    --accent-gold: #d4a843;
+    --accent-gold-dim: #8a7030;
+    --accent-blue: #4a9eff;
+    --accent-green: #3ddc84;
+    --accent-red: #f44747;
+    --accent-purple: #b07aff;
+    --accent-orange: #e8873a;
+    --phi: 1.618;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Crimson Pro', Georgia, serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.72;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* --- Layout --- */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 60px 32px 120px;
+  }
+
+  /* --- Header --- */
+  header {
+    text-align: center;
+    padding: 80px 0 60px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 60px;
+  }
+
+  header h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 2.6em;
+    color: var(--text-bright);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  header h1 em {
+    font-style: normal;
+    color: var(--accent-gold);
+  }
+
+  .subtitle {
+    font-size: 1.1em;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 640px;
+    margin: 0 auto 24px;
+    line-height: 1.6;
+  }
+
+  .byline {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 24px;
+  }
+
+  .byline a {
+    color: var(--accent-blue);
+    text-decoration: none;
+  }
+
+  .status-badge {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7em;
+    padding: 4px 12px;
+    border: 1px solid var(--accent-orange);
+    color: var(--accent-orange);
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  /* --- Sections --- */
+  section {
+    margin-bottom: 56px;
+  }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.4em;
+    color: var(--text-bright);
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: var(--accent-gold);
+    margin: 32px 0 12px;
+  }
+
+  p { margin-bottom: 16px; }
+
+  strong { color: var(--text-bright); font-weight: 600; }
+
+  /* --- Abstract box --- */
+  .abstract {
+    background: var(--surface);
+    border-left: 3px solid var(--accent-gold);
+    padding: 28px 32px;
+    margin: 0 0 48px 0;
+    border-radius: 0 6px 6px 0;
+  }
+
+  .abstract p {
+    font-size: 1.05em;
+    color: var(--text);
+    margin-bottom: 0;
+  }
+
+  .abstract-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+  }
+
+  /* --- Equation --- */
+  .equation-block {
+    text-align: center;
+    padding: 24px 0;
+    margin: 24px 0;
+  }
+
+  .equation {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2em;
+    color: var(--accent-gold);
+    letter-spacing: 0.02em;
+  }
+
+  .equation-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* --- ARA Scale --- */
+  .ara-scale {
+    margin: 40px 0;
+  }
+
+  .ara-tier {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+    align-items: start;
+  }
+
+  .ara-tier:last-child { border-bottom: none; }
+
+  .ara-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.05em;
+    font-weight: 500;
+    padding-top: 2px;
+  }
+
+  .ara-content {}
+
+  .ara-name {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95em;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .ara-desc {
+    font-size: 0.92em;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-bottom: 4px;
+  }
+
+  .ara-examples {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78em;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .ara-examples span {
+    color: var(--accent-blue);
+    font-style: normal;
+  }
+
+  /* --- Data Table --- */
+  .data-table-wrap {
+    overflow-x: auto;
+    margin: 28px 0;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82em;
+  }
+
+  thead {
+    background: var(--surface-2);
+  }
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95em;
+  }
+
+  .hit { color: var(--accent-green); }
+  .near { color: var(--accent-gold); }
+  .miss { color: var(--text-muted); }
+  .negative { color: var(--accent-blue); }
+
+  .table-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75em;
+    color: var(--text-muted);
+    padding: 10px 16px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+
+  /* --- Callout --- */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin: 28px 0;
+  }
+
+  .callout-warn {
+    border-color: var(--accent-orange);
+    border-left-width: 3px;
+  }
+
+  .callout-key {
+    border-color: var(--accent-gold);
+    border-left-width: 3px;
+  }
+
+  .callout-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .callout-warn .callout-label { color: var(--accent-orange); }
+  .callout-key .callout-label { color: var(--accent-gold); }
+
+  /* --- Inline phi --- */
+  .phi {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-gold);
+    font-weight: 500;
+  }
+
+  /* --- Blockquote --- */
+  blockquote {
+    border-left: 2px solid var(--border);
+    padding-left: 20px;
+    margin: 20px 0;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* --- Footnotes --- */
+  .footnotes {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+
+  .footnotes h3 {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+
+  .footnotes p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .ref-num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent-blue);
+    font-size: 0.85em;
+  }
+
+  /* --- Figures --- */
+  .figure {
+    margin: 36px 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .figure img {
+    width: 100%;
+    display: block;
+  }
+
+  .figure-caption {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    padding: 12px 16px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  .figure-caption strong {
+    color: var(--text);
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 640px) {
+    .container { padding: 32px 18px 80px; }
+    header h1 { font-size: 1.8em; }
+    .ara-tier { grid-template-columns: 72px 1fr; }
+    table { font-size: 0.75em; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <h1>The Geometry of <em>Time</em></h1>
+  <p class="subtitle">
+    A heuristic framework for classifying non-equilibrium thermodynamic systems
+    by their accumulation–release phase ratio
+  </p>
+  <p class="subtitle" style="font-size: 0.92em; color: #5a6b7d;">
+    How river basins, human biomechanics, and dying stars
+    reveal a universal 0-to-2 phase-ratio scale for complex systems
+  </p>
+  <div class="byline">Dylan La Franchi</div>
+  <div class="status-badge">Heuristic Framework — Open for Falsification</div>
+</header>
+
+<!-- ================================================================ -->
+<!-- ABSTRACT -->
+<!-- ================================================================ -->
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    Cyclical systems in nature — from river basins to human lungs to stellar dynamos — operate
+    as relaxation oscillators, spending measurable time accumulating energy and measurable time
+    releasing it. By computing a single dimensionless metric, the <strong>Accumulation–Release
+    Asymmetry (ARA) ratio</strong>, across publicly available datasets in biology, earth science,
+    and astrophysics, a consistent taxonomy emerges. Systems cluster into discrete bands on a
+    0-to-2 scale, with the golden ratio (<span class="phi">φ ≈ 1.618</span>) marking the
+    attractor for unforced, self-organising engines. Deviation from this ratio correlates with
+    external forcing, managed intervention, or pathological degradation. This paper presents the
+    heuristic framework, the supporting data, an honest account of its limitations, and an
+    invitation to falsification.
+  </p>
+</div>
+
+<!-- ================================================================ -->
+<!-- 1. INTRODUCTION -->
+<!-- ================================================================ -->
+<section>
+  <h2>1. Introduction: The Problem with Symmetry</h2>
+
+  <p>
+    In idealised physics, we often look for perfect symmetry. But in the physical universe — driven
+    by the tension between gravitational accumulation and entropic dissipation — natural systems
+    almost never operate at a 1:1 ratio. The heart spends longer in diastole than systole. Rivers
+    rise faster than they fall. Stars brighten more sharply than they dim.
+  </p>
+  <p>
+    Whether examining a cardiac cycle, a storm hydrograph, or a solar dynamo, cyclical systems
+    behave as <strong>relaxation oscillators</strong>: they accumulate energy (tension, pressure,
+    charge) over some duration <em>T<sub>accumulation</sub></em>, then release it over a distinct
+    duration <em>T<sub>release</sub></em>. These two durations are almost never equal.
+  </p>
+  <p>
+    The core observation of this framework is that the ratio between these durations is not
+    arbitrary. Across multiple independent domains, a single dimensionless number appears to
+    govern where self-organising systems settle:
+  </p>
+
+  <div class="equation-block">
+    <div class="equation">ARA = T<sub>release</sub> / T<sub>accumulation</sub></div>
+    <div class="equation-caption">The Accumulation–Release Asymmetry ratio</div>
+  </div>
+
+  <p>
+    What emerges is not a mystical invocation of the golden ratio, but a falsifiable observation:
+    <strong>free-running thermodynamic systems converge on <span class="phi">φ ≈ 1.618</span>,
+    and measurable deviation from this value diagnoses the degree of external forcing, constraint,
+    or pathology acting on the system.</strong>
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 2. WHY PHI -->
+<!-- ================================================================ -->
+<section>
+  <h2>2. Why φ? A Mathematical, Not Mystical, Argument</h2>
+
+  <p>
+    The golden ratio carries significant cultural baggage. It has been over-claimed in art,
+    architecture, and popular science to the point where invoking it in a serious framework risks
+    immediate dismissal. This concern is legitimate, and it is one of the primary reasons this
+    work is being released for open review rather than presented as settled science.
+  </p>
+  <p>
+    However, <span class="phi">φ</span> has a specific, well-established mathematical property
+    that makes it uniquely relevant to oscillating systems: <strong>it is the most irrational
+    number</strong>. Its continued fraction expansion is [1; 1, 1, 1, ...] — the slowest-converging
+    of all irrational numbers. This means it is the number <em>least expressible</em> as a ratio
+    of integers.
+  </p>
+  <p>
+    In physical systems, this property has a direct consequence: <strong><span class="phi">φ</span>-spacing
+    prevents destructive resonance</strong>. When recursive cycles pack at a ratio of
+    <span class="phi">φ</span>, no cycle ever perfectly overlaps a previous one. Energy cannot
+    accumulate at a single harmonic. This is not speculation — it is the same principle behind
+    <span class="phi">φ</span>-phyllotaxis in botany, where sunflower seeds and leaf arrangements
+    use <span class="phi">φ</span>-packing to maximise spatial distribution with minimum overlap.
+  </p>
+  <p>
+    The proposal here is that what biology does with <span class="phi">φ</span> in
+    <em>space</em> — optimal packing — free-running thermodynamic engines do with
+    <span class="phi">φ</span> in <em>time</em>: optimal distribution of energy between
+    accumulation and release phases, preventing bottlenecks and destructive interference between
+    successive cycles.
+  </p>
+
+  <div class="callout callout-warn">
+    <div class="callout-label">Honest Limitation</div>
+    <p>
+      The human brain is a pattern-matching engine. Given enough systems and enough ratios,
+      it is statistically possible to find <span class="phi">φ</span> by coincidence. The
+      critical question is whether <span class="phi">φ</span> appears <em>preferentially</em>
+      in free-running self-organising systems and is <em>absent</em> in forced or managed
+      systems — and whether that distinction is predictable in advance. The data presented
+      below attempts to address this by including both positive results and deliberate negative
+      controls.
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 3. THE ARA SCALE -->
+<!-- ================================================================ -->
+<section>
+  <h2>3. The ARA Scale: A Thermodynamic Phase Spectrum</h2>
+
+  <p>
+    By processing open-source, population-level datasets across biology, earth science, and
+    astrophysics, a consistent taxonomy of temporal asymmetry emerges. Systems cluster into
+    discrete bands on a scale from 0 to 2:
+  </p>
+
+  <div class="ara-scale">
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: #555;">0.0</div>
+      <div class="ara-content">
+        <div class="ara-name">The Singularity</div>
+        <div class="ara-desc">
+          Pure accumulation, zero release. Complete domination by gravity.
+          T<sub>release</sub> = 0, T<sub>accumulation</sub> → ∞.
+        </div>
+        <div class="ara-examples"><span>Black holes</span> (ignoring Hawking radiation timescales)</div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: var(--accent-red);">< 0.2</div>
+      <div class="ara-content">
+        <div class="ara-name">The Violent Snaps</div>
+        <div class="ara-desc">
+          Near-instantaneous reactive removal. Massive tension builds over long periods,
+          followed by catastrophic release with zero dampening. Highly asymmetric in the
+          opposite direction from sustained engines.
+        </div>
+        <div class="ara-examples"><span>Earthquakes, lightning, wildfire</span> (50 years of forest growth consumed in hours)</div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: var(--accent-blue);">~1.0</div>
+      <div class="ara-content">
+        <div class="ara-name">The Pacemakers (Forced Symmetry)</div>
+        <div class="ara-desc">
+          The 1:1 limit. The system is not free-running — it is forced to march to an
+          external or central clock. Maintaining symmetry requires constant external
+          intervention or a biological pacemaker.
+        </div>
+        <div class="ara-examples">
+          <span>EEG delta waves</span> (thalamic pacemaker, median 1.05) ·
+          <span>EEG beta waves</span> (median 1.00) ·
+          <span>Arctic sea ice</span> (orbital forcing, median 0.91)
+        </div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: #7aa2c9;">1.2–1.35</div>
+      <div class="ara-content">
+        <div class="ara-name">The Shock Absorbers (Overdamped Clearing)</div>
+        <div class="ara-desc">
+          The system receives a payload and works to clear it. It does not sustain
+          graceful cycling — it forces a return to baseline. Includes chemically regulated
+          homeostatic responses and metronomically constrained biomechanical cycles.
+        </div>
+        <div class="ara-examples">
+          <span>Blood glucose clearance</span> (~1.2) ·
+          <span>Cryptocurrency micro-cycles</span> (median 1.19) ·
+          <span>Healthy walking gait</span> (CPG-constrained, median 1.355)
+        </div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: var(--accent-gold);">~1.618</div>
+      <div class="ara-content">
+        <div class="ara-name">The Sustained Engines (The φ Valley)</div>
+        <div class="ara-desc">
+          Free-running thermodynamic systems. They balance accumulation and dissipation
+          at maximum efficiency with minimum frictional loss, sustaining the cycle
+          indefinitely. No external clock. No chemical forcing. The system finds
+          this ratio on its own.
+        </div>
+        <div class="ara-examples">
+          <span>Resting human breath</span> (median 1.61, n=93) ·
+          <span>SCS unit hydrograph</span> (1.67, derived from thousands of natural US watersheds) ·
+          <span>Preferred human walking speed</span> (stance/swing = φ at ~1.27 m/s)
+        </div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: var(--accent-orange);">~1.73</div>
+      <div class="ara-content">
+        <div class="ara-name">The Exothermic Sources</div>
+        <div class="ara-desc">
+          Systems with massive internal energy generation that actively accelerate the
+          cycle, pushing the ratio above <span class="phi">φ</span>. The internal
+          furnace overpowers the natural dissipation rate.
+        </div>
+        <div class="ara-examples">
+          <span>Solar dynamo*</span> (sunspot cycle T<sub>fall</sub>/T<sub>rise</sub>,
+          270-year median 1.73, n=24 complete cycles — but see Section 4.6: if sunspots
+          are a consumer process, the Sun belongs in the Consumer tier instead)
+        </div>
+      </div>
+    </div>
+
+    <div class="ara-tier">
+      <div class="ara-value" style="color: var(--accent-purple);">2.0</div>
+      <div class="ara-content">
+        <div class="ara-name">The Pure Harmonics</div>
+        <div class="ara-desc">
+          Systems isolated in a vacuum, unbound by physical friction, locked into
+          perfect integer resonance. The gravitational constraint is so strong that
+          the oscillation snaps to the nearest rational harmonic rather than settling
+          at the irrational <span class="phi">φ</span>.
+        </div>
+        <div class="ara-examples">
+          <span>Cepheid variable star V1154 Cyg</span> (median 2.00, n=432 pulsation cycles,
+          Kepler mission data)
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 4. THE DATA -->
+<!-- ================================================================ -->
+<section>
+  <h2>4. Empirical Results</h2>
+
+  <p>
+    All results below were computed algorithmically using Python (SciPy, NumPy) on publicly
+    available datasets. Peak/trough detection used <code>scipy.signal.find_peaks</code> with
+    domain-appropriate distance and prominence thresholds. The primary statistic reported is
+    the <strong>median</strong>, which is robust to outliers. No results were excluded after
+    computation.
+  </p>
+
+  <h3>4.1 Summary of All Tested Systems</h3>
+
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Data Source</th>
+          <th>n</th>
+          <th>Median</th>
+          <th>|Dev| from φ</th>
+          <th>ARA Zone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Resting human breath</td>
+          <td>NeuroKit2 (5 min, 100 Hz)</td>
+          <td class="mono">93</td>
+          <td class="mono hit">1.61</td>
+          <td class="mono hit">0.5%</td>
+          <td>Sustained Engine</td>
+        </tr>
+        <tr>
+          <td>SCS unit hydrograph</td>
+          <td>USDA standard (thousands of watersheds)</td>
+          <td class="mono">—</td>
+          <td class="mono hit">1.67</td>
+          <td class="mono hit">3.2%</td>
+          <td>Sustained Engine</td>
+        </tr>
+        <tr>
+          <td>Preferred walking speed</td>
+          <td>Biomechanics literature [1–8]</td>
+          <td class="mono">—</td>
+          <td class="mono hit">φ at 1.27 m/s</td>
+          <td class="mono hit">exact</td>
+          <td>Sustained Engine</td>
+        </tr>
+        <tr>
+          <td>Watershed V2 (managed river)</td>
+          <td>USGS 15-min + Lyne-Hollick filter</td>
+          <td class="mono">457</td>
+          <td class="mono near">1.57</td>
+          <td class="mono near">3.0%</td>
+          <td>Sustained Engine</td>
+        </tr>
+        <tr>
+          <td>Solar dynamo (sunspot cycles)*</td>
+          <td>SILSO monthly data (1749–present)</td>
+          <td class="mono">24</td>
+          <td class="mono near">1.73</td>
+          <td class="mono near">6.9%</td>
+          <td>Exothermic Source <em>or</em> Consumer†</td>
+        </tr>
+        <tr>
+          <td>Healthy walking gait</td>
+          <td>PhysioNet gaitndd (16 subjects)</td>
+          <td class="mono">8,591</td>
+          <td class="mono">1.355</td>
+          <td class="mono">16.3%</td>
+          <td>Shock Absorber</td>
+        </tr>
+        <tr>
+          <td>Blood glucose clearance</td>
+          <td>CGM data</td>
+          <td class="mono">—</td>
+          <td class="mono">~1.2</td>
+          <td class="mono">25.9%</td>
+          <td>Shock Absorber</td>
+        </tr>
+        <tr>
+          <td>Cryptocurrency (BTC-USD)</td>
+          <td>yfinance (730 days hourly)</td>
+          <td class="mono">71</td>
+          <td class="mono miss">1.19</td>
+          <td class="mono miss">26.5%</td>
+          <td>Shock Absorber</td>
+        </tr>
+        <tr>
+          <td>EEG delta waves</td>
+          <td>NeuroKit2 MNE sample (200 Hz)</td>
+          <td class="mono">150</td>
+          <td class="mono negative">1.05</td>
+          <td class="mono negative">35.1%</td>
+          <td>Pacemaker</td>
+        </tr>
+        <tr>
+          <td>EEG beta waves</td>
+          <td>NeuroKit2 MNE sample (200 Hz)</td>
+          <td class="mono">1,335</td>
+          <td class="mono negative">1.00</td>
+          <td class="mono negative">38.2%</td>
+          <td>Pacemaker</td>
+        </tr>
+        <tr>
+          <td>Arctic sea ice</td>
+          <td>NSIDC daily (1978–present)</td>
+          <td class="mono">41</td>
+          <td class="mono negative">0.91</td>
+          <td class="mono negative">43.8%</td>
+          <td>Pacemaker</td>
+        </tr>
+        <tr>
+          <td>Cepheid star V1154 Cyg</td>
+          <td>Kepler mission (lightkurve)</td>
+          <td class="mono">432</td>
+          <td class="mono">2.00</td>
+          <td class="mono">23.6%</td>
+          <td>Pure Harmonic</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-note">
+      φ = 1.618034... · |Dev| = |median − φ| / φ × 100 ·
+      <span class="hit">Green</span> = within 5% ·
+      <span class="near">Gold</span> = within 7% ·
+      <span class="negative">Blue</span> = deliberate negative control ·
+      Grey = predicted miss
+      <br>* Phase assignment is interpretation-dependent — see Section 4.6 and Section 6.4.
+      † If sunspots are a consumer process (clearing magnetic tension), the inverted ratio ≈ 0.58
+      places the system in the Consumer zone instead.
+    </div>
+  </div>
+
+  <!-- ---- BREATH ---- -->
+  <h3>4.2 Resting Human Breath (Exhalation / Inhalation)</h3>
+  <p>
+    Using the NeuroKit2 resting physiological dataset (5 minutes at 100 Hz), respiratory
+    phase durations were extracted after standard bandpass cleaning (0.05–0.35 Hz). The
+    exhalation/inhalation duration ratio across 93 complete breath cycles yielded a median
+    of <strong class="hit">1.61</strong> — within 0.5% of <span class="phi">φ</span>.
+  </p>
+  <p>
+    Resting breath is governed by chemoreceptor thresholds, not a central clock. The diaphragm
+    fires when CO<sub>2</sub> partial pressure exceeds a chemical tipping point, making it a
+    genuinely free-running thermodynamic oscillator. The proximity to <span class="phi">φ</span>
+    is consistent with a system that has found its own optimal accumulation–release balance.
+  </p>
+
+  <!-- ---- WATERSHED ---- -->
+  <h3>4.3 Natural Watershed Hydrographs</h3>
+  <p>
+    The USDA Soil Conservation Service Dimensionless Unit Hydrograph — a standard derived from
+    aggregating thousands of natural US watershed responses — has a recession-to-peak ratio of
+    <strong class="hit">1.67</strong>, within 3.2% of <span class="phi">φ</span>, and a
+    volume split of 62.5% / 37.5%.
+  </p>
+  <p>
+    Direct analysis of USGS 15-minute streamflow data using Lyne-Hollick baseflow separation
+    confirmed this pattern. An important methodological note: initial analysis using daily data
+    <em>without</em> baseflow separation produced a median of 3.0 — appearing to falsify the
+    prediction. This was resolved by isolating the direct storm runoff signal from the slow
+    groundwater drainage tail, yielding a mean of <strong>1.554</strong> (3.9% from
+    <span class="phi">φ</span>). The lesson: measurement boundaries matter. The system boundary
+    must match the physical process being measured.
+  </p>
+
+  <!-- ---- GAIT ---- -->
+  <h3>4.4 Human Gait: The Full Locomotion Arc</h3>
+  <p>
+    Analysis of the PhysioNet gaitndd database (300 Hz foot-force sensors, 16 healthy controls,
+    8,591 strides) yielded a walking stance/swing median of <strong>1.355</strong>. This initially
+    appeared to miss <span class="phi">φ</span> by 16.3%.
+  </p>
+  <p>
+    However, walking gait is not a free-running system — it is constrained by spinal central
+    pattern generators (biological pacemakers) and gravity. The framework predicts that
+    constrained systems sit below <span class="phi">φ</span> on the ARA scale, proportional
+    to their degree of constraint. A median of 1.355 is consistent with this prediction.
+  </p>
+  <p>
+    The critical insight emerged from mapping stance/swing ratios across the full range of human
+    locomotion speeds, using peer-reviewed biomechanics data from eight independent sources.
+    The resulting curve reveals three structurally significant thresholds:
+  </p>
+
+  <div class="callout callout-key">
+    <div class="callout-label">Key Finding — The Locomotion Arc</div>
+    <p>
+      <strong>Ratio = <span class="phi">φ</span> within the preferred walking speed range.</strong>
+      Interpolating from the literature data, the stance/swing ratio crosses through
+      <span class="phi">φ ≈ 1.618</span> at approximately 1.25–1.30 m/s. This falls within
+      the published range for self-selected preferred walking speed (1.2–1.4 m/s; Bohannon 1997).
+      At 1.25 m/s the ratio is 1.621 (0.2% from <span class="phi">φ</span>); at 1.30 m/s
+      it is 1.597 (1.3% from <span class="phi">φ</span>). The exact crossing depends on
+      interpolation between literature data points and should be treated as approximate, but
+      it consistently falls within the preferred speed window across reasonable variations
+      in the source data.
+    </p>
+    <p style="margin-top: 12px;">
+      <strong>Ratio = 1.0 at 2.20 m/s</strong> — this directly matches the published walk-run
+      transition speed (no interpolation required: the literature reports 50%/50% stance/swing
+      at this speed). The point where stance and swing become equal is where humans instinctively
+      switch gait modes. On the ARA scale, this is the sustainability threshold: above this speed,
+      the system becomes net-consumptive.
+    </p>
+    <p style="margin-top: 12px;">
+      <strong>Ratio = 1/<span class="phi">φ</span> at ~3.8 m/s</strong> — this approximates
+      the anaerobic threshold. The inverse of <span class="phi">φ</span> may mark the boundary
+      of sustainable aerobic locomotion.
+    </p>
+  </div>
+
+  <p>
+    <em>A note on the measured baseline:</em> The PhysioNet gaitndd controls (median ratio 1.355)
+    were recorded during overground hallway walking at self-selected speed using force-sensitive
+    insoles (Hausdorff et al., 1998). The dataset records stride timing but not speed directly,
+    so the walking speed of ~1.1 m/s is estimated. The literature curve predicts a ratio of 1.355
+    at approximately 1.7 m/s (a brisk walk), suggesting the gaitndd controls may have been
+    walking faster than initially estimated — plausible for healthy adults covering a 77-metre
+    hallway. The literature speed-ratio curve and the measured gaitndd baseline are consistent
+    if the actual walking speed was in the 1.5–1.7 m/s range.
+  </p>
+
+  <div class="figure">
+    <img src="figure1_locomotion_arc.png"
+         alt="Full locomotion arc: stance/swing ratio vs speed from very slow walk to elite sprinting">
+    <div class="figure-caption">
+      <strong>Figure 1. The full locomotion arc.</strong> Stance/swing phase ratio plotted
+      against locomotion speed from very slow walking (0.3 m/s) to elite sprinting (12.4 m/s).
+      Top panel: full range showing the walking, running, and sprinting zones with φ, 1.0, and
+      1/φ reference lines. The measured gaitndd baseline (purple star) sits below the literature
+      curve at the estimated speed — see text for discussion. Bottom panel: zoomed walking and
+      jogging zone showing individual data points with ratios labelled. Literature sources: [1–8].
+    </div>
+  </div>
+
+  <div class="figure">
+    <img src="figure2_ara_curve.png"
+         alt="ARA locomotion curve showing accumulation zone, phi band, and consumer zone">
+    <div class="figure-caption">
+      <strong>Figure 2. The ARA locomotion curve.</strong> The same speed-ratio data reframed
+      as the ARA thermodynamic interpretation. Green region (ratio > 1): accumulation zone —
+      stance exceeds swing, the system is self-organising and sustainable. Red region (ratio < 1):
+      consumer zone — swing exceeds stance, the system is net-consumptive and unsustainable
+      without external energy input. The φ band marks the region of maximum thermodynamic
+      balance, corresponding to the published preferred walking speed range. Key thresholds:
+      φ ≈ 1.25–1.30 m/s (preferred walk), 1.0 at 2.20 m/s (walk-run transition),
+      1/φ ≈ 3.8 m/s (approximate anaerobic threshold).
+    </div>
+  </div>
+
+  <p>
+    Furthermore, comparison with neurological disease cohorts (same database) showed significant
+    disruption of the baseline gait ratio:
+  </p>
+
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>Subjects</th>
+          <th>Strides</th>
+          <th>Median</th>
+          <th>Mean</th>
+          <th>|Dev| from φ</th>
+          <th>p vs Control</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Healthy Control</td>
+          <td class="mono">16</td>
+          <td class="mono">8,591</td>
+          <td class="mono">1.355</td>
+          <td class="mono">1.353</td>
+          <td class="mono">16.3%</td>
+          <td class="mono">—</td>
+        </tr>
+        <tr>
+          <td>Parkinson's Disease</td>
+          <td class="mono">15</td>
+          <td class="mono">7,593</td>
+          <td class="mono">1.441</td>
+          <td class="mono">1.456</td>
+          <td class="mono">10.9%</td>
+          <td class="mono">< 0.001</td>
+        </tr>
+        <tr>
+          <td>ALS</td>
+          <td class="mono">13</td>
+          <td class="mono">5,193</td>
+          <td class="mono">1.465</td>
+          <td class="mono">1.472</td>
+          <td class="mono">9.5%</td>
+          <td class="mono">< 0.001</td>
+        </tr>
+        <tr>
+          <td>Huntington's Disease</td>
+          <td class="mono">20</td>
+          <td class="mono">10,148</td>
+          <td class="mono">1.362</td>
+          <td class="mono">1.380</td>
+          <td class="mono">15.9%</td>
+          <td class="mono">< 0.001</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-note">
+      All between-group differences vs control: p < 0.001 (Mann-Whitney U).
+      Parkinson's and ALS patients show ratios <em>closer</em> to φ —
+      see Section 5 for interpretation.
+    </div>
+  </div>
+
+  <!-- ---- NEGATIVE CONTROLS ---- -->
+  <h3>4.5 Negative Controls: Where φ Correctly Does Not Appear</h3>
+  <p>
+    A framework that finds <span class="phi">φ</span> everywhere is unfalsifiable and therefore
+    unscientific. The following systems were tested specifically because they are
+    <em>not</em> free-running self-organising oscillators. The prediction was that they
+    would <em>not</em> converge on <span class="phi">φ</span>.
+  </p>
+  <p>
+    <strong>Arctic sea ice</strong> (median 0.91, n=41 annual cycles): The freeze/melt cycle
+    is externally forced by Earth's axial tilt and orbital mechanics. The system has no freedom
+    to find its own balance point. Result: near-symmetric, as predicted.
+  </p>
+  <p>
+    <strong>EEG delta waves</strong> (median 1.05, n=150) and <strong>beta waves</strong>
+    (median 1.00, n=1,335): Brain oscillations in these bands are driven by thalamic pacemaker
+    neurons — biological clocks that impose symmetric timing. Result: ratio ≈ 1.0, as predicted.
+  </p>
+  <p>
+    <strong>Cryptocurrency markets</strong> (BTC-USD, median 1.19, n=71): Among the most
+    heavily manipulated, bot-driven, and sentiment-whiplashed systems measurable. No stable
+    self-organisation. Result: noisy, structureless distribution.
+  </p>
+  <p>
+    <strong>Blood glucose clearance</strong> (~1.2): A chemically forced homeostatic response,
+    not a self-sustaining cycle. The insulin response is a managed clearing mechanism. Result:
+    overdamped, as predicted.
+  </p>
+
+  <!-- ---- SOLAR ---- -->
+  <h3>4.6 Solar Dynamo and Stellar Pulsation</h3>
+  <p>
+    <strong>Solar sunspot cycles</strong> (SILSO data, 1749–present): The well-known Waldmeier
+    effect — solar cycles rise faster than they decline — produces a T<sub>fall</sub>/T<sub>rise</sub>
+    median of <strong class="near">1.73</strong> across 24 complete cycles.
+  </p>
+  <p>
+    <strong>An important caveat:</strong> this ratio assumes sunspot activity represents the
+    Sun's generative output — the productive phase of the solar dynamo. But there is a
+    plausible alternative: sunspots may be better understood as a <em>consumer</em> process —
+    the clearing of accumulated magnetic tension at the solar surface. Under this interpretation,
+    what we observe in the 11-year sunspot cycle is not the engine itself but the exhaust:
+    magnetic flux rises slowly (accumulation of subsurface tension), then erupts rapidly as
+    sunspots, flares, and coronal mass ejections clear it (release as consumption/destruction).
+  </p>
+  <p>
+    If sunspots are consumers, the phase labels should reverse: the "rise" phase becomes the
+    release (magnetic tension discharging through surface activity), and the "fall" phase
+    becomes accumulation (the quiet Sun rebuilding magnetic structure). This would invert the
+    ratio to T<sub>rise</sub>/T<sub>fall</sub> ≈ 0.58 — placing it in the Consumer zone of
+    the ARA scale, alongside fire and avalanches. The sunspot cycle would then be the Sun's
+    way of periodically clearing magnetic debris, not its productive output.
+  </p>
+  <p>
+    To measure the Sun <em>as a generator</em>, we would likely need to map the full
+    magnetic dynamo — the 22-year Hale cycle that includes polarity reversal — or the
+    deeper convective processes that drive it. The 11-year sunspot cycle may be only the
+    surface symptom. This remains an open question, and the solar ARA placement should be
+    treated as <strong>interpretation-dependent</strong> (see Section 6.4).
+  </p>
+  <p>
+    <strong>Cepheid variable star V1154 Cyg</strong> (Kepler mission, 432 pulsation cycles):
+    The decline/rise ratio is locked at <strong>2.00</strong> with remarkably low variance.
+    Cepheid pulsation occurs in a deep gravitational potential well — the oscillation is a
+    standing wave with rigid boundary conditions. Under such extreme constraint, the system
+    snaps to the nearest integer harmonic rather than the irrational <span class="phi">φ</span>.
+    This is consistent with known wave physics: resonant cavities with fixed boundaries
+    select integer modes.
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5. INTERPRETATION -->
+<!-- ================================================================ -->
+<section>
+  <h2>5. Interpretation: What the Scale Measures</h2>
+
+  <p>
+    The ARA scale does not measure "health" or "quality" on a simple gradient. It measures
+    <strong>the degree of freedom a system has to self-organise its own temporal rhythm</strong>.
+  </p>
+  <p>
+    Systems with maximum freedom (no external clock, no chemical forcing, no rigid boundary
+    conditions) converge on <span class="phi">φ</span>. Systems with increasing constraint
+    are displaced from <span class="phi">φ</span> — either downward toward 1.0 (pacemaker
+    forcing, symmetric oscillation) or upward toward 2.0 (gravitational/resonant constraint,
+    integer locking).
+  </p>
+  <p>
+    This explains the paradoxical gait result, where Parkinson's and ALS patients show ratios
+    <em>closer</em> to <span class="phi">φ</span> than healthy controls. Healthy walking
+    gait is constrained by spinal central pattern generators — a biological metronome that
+    enables efficient, repetitive locomotion at a ratio of ~1.35. When neurodegenerative
+    disease degrades the CPG, the body suppresses the failing metronome and defaults to a
+    slower, self-balancing gait — the characteristic Parkinsonian shuffle. This compensatory
+    mode, freed from the broken clock, drifts toward <span class="phi">φ</span> because
+    <span class="phi">φ</span> is the attractor that sits underneath when the pacemaker
+    stops working.
+  </p>
+  <p>
+    Disease, in this framework, is not a simple displacement away from <span class="phi">φ</span>.
+    It is a displacement away from wherever the system's healthy baseline sits on the ARA
+    scale — sometimes toward <span class="phi">φ</span> (when constraint is removed),
+    sometimes away from it (when constraint is added).
+  </p>
+
+  <h3>5.1 The Scale as a Loop, Not a Line</h3>
+  <p>
+    An important structural observation: the ARA scale is not unbounded. Both extremes —
+    0 and 2 — represent system failure. At 0, the system accumulates infinitely and releases
+    nothing (gravitational collapse). At 2.0, the system is locked into rigid integer resonance
+    with no thermodynamic flexibility. Push beyond 2.0 and the cycle cannot sustain coherence;
+    the system enters a definitive disruption state (an E event, in the language of this
+    framework) and either resets to a new baseline or dissolves entirely.
+  </p>
+  <p>
+    This suggests the scale is better understood as a <strong>closed loop</strong> than a
+    linear axis. Both ends curve toward the same outcome: system death. The singularity at 0
+    is implosive death (pure gravity). The stall beyond 2.0 is resonant death (pure rigidity).
+    <span class="phi">φ</span> sits at the apex of the loop — the point of maximum distance
+    from both failure modes, where the system has the greatest capacity to sustain itself
+    against both gravitational collapse and harmonic lock-in.
+  </p>
+  <p>
+    If this interpretation is correct, the ARA scale is not merely a diagnostic ruler but a
+    description of the viable operating range for non-equilibrium systems. Systems that drift
+    toward either boundary accumulate displacement from their sustainable baseline, and the
+    magnitude of the eventual corrective disruption scales with that accumulated displacement.
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 6. COUNTERARGUMENTS -->
+<!-- ================================================================ -->
+<section>
+  <h2>6. Known Weaknesses and Counterarguments</h2>
+
+  <h3>6.1 Pattern Matching and Confirmation Bias</h3>
+  <p>
+    The most serious critique of any <span class="phi">φ</span>-based framework is that the
+    golden ratio is being projected onto data rather than discovered within it. This risk is
+    real. The human brain, and large language models alike, are prone to finding patterns in
+    noise. The following mitigations have been applied, but the reader should evaluate their
+    sufficiency independently:
+  </p>
+  <p>
+    All phase ratios were computed algorithmically using standard signal-processing tools
+    (peak detection, Otsu thresholding, baseflow separation). No manual adjustment was applied
+    to bring results closer to <span class="phi">φ</span>. Results that missed
+    <span class="phi">φ</span> (sea ice, EEG, cryptocurrency, blood glucose, Cepheids) are
+    reported alongside hits. The framework makes falsifiable predictions about <em>which</em>
+    systems should and should not converge on <span class="phi">φ</span>, and the negative
+    controls are consistent with those predictions.
+  </p>
+
+  <h3>6.2 Small Sample Sizes</h3>
+  <p>
+    The solar cycle result (n=24) is the most vulnerable to small-sample criticism. While
+    the Waldmeier effect itself is well-established, 24 complete cycles provide limited
+    statistical power for pinpointing a specific ratio. The breath result (n=93) is stronger
+    but still modest. The gait results (n=8,591+ strides across 16 subjects) are the most
+    statistically robust.
+  </p>
+
+  <h3>6.3 The Distribution Question</h3>
+  <p>
+    Is <span class="phi">φ</span> a sharp attractor (a peak in the distribution) or merely
+    the centre of a broad 1.4–1.8 range? The breath data shows a reasonably sharp peak near
+    <span class="phi">φ</span>, but several other results show broader distributions where
+    the median happens to land near <span class="phi">φ</span> without a sharp mode. This
+    distinction matters: a sharp peak suggests a genuine attractor, while a broad distribution
+    centred on <span class="phi">φ</span> might be coincidental. More data across more
+    systems is needed to resolve this.
+  </p>
+
+  <h3>6.4 Ratio Direction and Phase Identification (The "Texas Sharpshooter" Problem)</h3>
+  <p>
+    This is the single most important methodological vulnerability in the framework, and it
+    must be addressed head-on rather than papered over.
+  </p>
+  <p>
+    The ARA ratio requires identifying which phase is "accumulation" and which is "release."
+    If the analyst is free to choose post-hoc — computing the ratio both ways and selecting
+    whichever lands closer to <span class="phi">φ</span> — the entire framework becomes
+    unfalsifiable. Any ratio R can be flipped to 1/R or mapped to 2−R, and with enough
+    flexibility, nearly any measurement can be massaged into the 1.0–2.0 range. This is a
+    textbook Texas Sharpshooter fallacy: drawing the target around the bullet hole.
+  </p>
+  <p>
+    <strong>The defence must therefore be structural, not statistical.</strong> Phase assignment
+    must be locked in by physical definition <em>before</em> the ratio is computed, and the
+    definition must be independently justifiable — not chosen to produce a convenient number.
+    The tested systems fall into three categories of phase-assignment rigour:
+  </p>
+  <p>
+    <strong>Unambiguous assignment</strong> — systems where the physical phases are defined by
+    the measurement itself, with no analyst discretion:
+  </p>
+  <ul>
+    <li><strong>Breath:</strong> Inhalation vs exhalation. Airflow direction is binary and
+    measured directly. No alternative interpretation exists.</li>
+    <li><strong>Watershed:</strong> Hydrograph rising limb vs falling limb. Water level goes
+    up, then comes down. The measurement defines the phases.</li>
+    <li><strong>Sea ice:</strong> Freeze season vs melt season. Ice extent increases, then
+    decreases. Satellite measurement defines the crossover.</li>
+    <li><strong>Gait (speed curve):</strong> Stance phase vs swing phase, defined by
+    foot-ground contact. A force sensor is either loaded or unloaded.</li>
+    <li><strong>Blood glucose:</strong> Post-meal spike vs clearance. Glucose rises above
+    baseline, then returns. The CGM trace defines the inflection.</li>
+  </ul>
+  <p>
+    <strong>Physically motivated but arguable assignment</strong> — systems where the phase
+    labels follow a standard convention, but an alternative physical interpretation would
+    change the ratio:
+  </p>
+  <ul>
+    <li><strong>Solar (sunspot cycles):</strong> Conventionally measured as T<sub>fall</sub>/T<sub>rise</sub>
+    (the Waldmeier effect). But this assumes sunspot activity is the <em>generator</em> — the
+    productive output of the solar dynamo. If sunspots are instead a <em>consumer</em> process
+    (clearing accumulated magnetic tension), the phase labels should be reversed. See Section 4.6
+    for extended discussion.</li>
+    <li><strong>Cepheid pulsation:</strong> Measured as decline/rise. The convention follows
+    the light curve shape, but the underlying energy transfer (compression vs expansion of the
+    stellar envelope) could be framed differently.</li>
+  </ul>
+  <p>
+    <strong>The honest position:</strong> For systems with unambiguous assignment (breath,
+    watershed, sea ice, gait, glucose), the ARA ratio is fully constrained by the physics and
+    cannot be manipulated. These are the framework's strongest results. For systems with
+    arguable assignment (solar, stellar), the ARA placement depends on which physical
+    interpretation is chosen, and the framework must acknowledge this openly rather than
+    claiming a self-correcting geometric rule. Where phase assignment is debatable, the debate
+    itself is informative — it reveals something about whether the system is functioning as a
+    generator or a consumer, which is itself a prediction the framework makes.
+  </p>
+
+  <h3>6.5 The Cepheid Population Question</h3>
+  <p>
+    The Cepheid test used a single star (V1154 Cyg). Different Cepheids at different periods
+    have different asymmetries. The proper test would examine the decline/rise ratio across
+    <em>many</em> Cepheids as a function of period, testing whether the population-level
+    mean converges on <span class="phi">φ</span> as gravitational constraint decreases.
+    This test has not yet been performed.
+  </p>
+
+  <h3>6.6 Statistical Significance: Monte Carlo Clustering Test</h3>
+  <p>
+    A natural objection is that finding several ratios near <span class="phi">φ</span> could be
+    coincidence — the law of large numbers applied to a convenient target. To test this directly,
+    we ran a Monte Carlo simulation: draw 12 random ratios from a null distribution (no structure,
+    no <span class="phi">φ</span> attractor), repeat 10 million times, and count how often the
+    result matches or exceeds what we observed.
+  </p>
+  <p>
+    <strong>What we observed:</strong> 4 of 12 tested systems fell within 5% of
+    <span class="phi">φ</span> (breath, SCS hydrograph, watershed V2, preferred walking speed).
+    5 of 12 fell within 7% (adding solar).
+  </p>
+
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Null Distribution</th>
+          <th>P(≥4 within 5% of φ)</th>
+          <th>P(≥5 within 7% of φ)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Uniform [0, 2]</td>
+          <td class="mono">0.0125</td>
+          <td class="mono">0.0074</td>
+        </tr>
+        <tr>
+          <td>Uniform [0.5, 2.5]</td>
+          <td class="mono">0.0126</td>
+          <td class="mono">0.0074</td>
+        </tr>
+        <tr>
+          <td>Log-normal (μ=0.2, σ=0.4)</td>
+          <td class="mono">0.0110</td>
+          <td class="mono">0.0064</td>
+        </tr>
+        <tr>
+          <td>Normal (μ=1.3, σ=0.4)</td>
+          <td class="mono">0.0433</td>
+          <td class="mono">0.0340</td>
+        </tr>
+        <tr>
+          <td>Beta(2,2) × 2</td>
+          <td class="mono">0.0095</td>
+          <td class="mono">0.0052</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-note">
+      10,000,000 simulations per null distribution. 5% window = [1.537, 1.699]; 7% window = [1.505, 1.731].
+      Even the most generous null (Normal, centered near <span class="phi">φ</span>) produces p &lt; 0.05.
+    </div>
+  </div>
+
+  <p>
+    Across all five null distributions, the clustering is statistically significant at
+    p &lt; 0.05, with most nulls producing p ≈ 0.01. This holds regardless of whether we
+    assume ratios are uniformly distributed, right-skewed, or bell-curved.
+  </p>
+
+  <p>
+    <strong>The predictive structure test.</strong> Clustering alone could reflect post-hoc
+    target selection. The stronger test is whether the hits fall where the framework
+    <em>predicted</em> they would. Of the 12 tested systems, 5 were pre-classified as
+    "predicted hits" (free-running engines: breath, SCS hydrograph, watershed, walking speed,
+    solar) and 7 as "predicted misses" (forced, managed, or constrained systems). All 4 of the
+    5%-hits came from the 5-member predicted-hit group. The probability of this occurring by
+    chance is:
+  </p>
+  <div class="equation-block">
+    <div class="equation">P = C(5,4) × C(7,0) / C(12,4) = 5/495 ≈ 0.01</div>
+    <div class="equation-caption">Hypergeometric probability: 1 in 99</div>
+  </div>
+  <p>
+    <strong>Combined significance:</strong> The joint probability of observing both the clustering
+    <em>and</em> the predictive structure by chance is the product of these independent
+    probabilities — ranging from approximately <strong>1 in 2,300</strong> (most generous null)
+    to <strong>1 in 10,500</strong> (tightest null). The framework is not just finding
+    <span class="phi">φ</span> — it is finding it where it predicted it would be and
+    <em>not</em> finding it where it predicted it wouldn't be.
+  </p>
+  <p>
+    <strong>Honest caveat:</strong> The 12 systems were not drawn randomly from nature — they
+    were selected by a researcher with a hypothesis. And 12 is a small number. The "predicted hit"
+    classifications could be accused of being defined after early results were seen. These concerns
+    are legitimate, and the proper remedy is independent replication on systems chosen by other
+    researchers. The Monte Carlo test establishes that the pattern is unlikely to be pure noise;
+    it does not establish that the selection process was unbiased.
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 7. METHODOLOGY -->
+<!-- ================================================================ -->
+<section>
+  <h2>7. Methodology Summary</h2>
+
+  <p>
+    All analyses were performed in Python 3.x using the following open-source libraries and
+    publicly available datasets:
+  </p>
+
+  <div class="data-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>System</th>
+          <th>Dataset</th>
+          <th>Tools</th>
+          <th>Key Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Breath</td>
+          <td>NeuroKit2 bio_resting_5min_100hz</td>
+          <td>neurokit2, scipy</td>
+          <td>Bandpass cleaning (0.05–0.35 Hz), peak/trough detection</td>
+        </tr>
+        <tr>
+          <td>Watershed</td>
+          <td>USGS 15-min streamflow</td>
+          <td>scipy, numpy</td>
+          <td>Lyne-Hollick digital filter (baseflow separation)</td>
+        </tr>
+        <tr>
+          <td>Gait</td>
+          <td>PhysioNet gaitndd (300 Hz)</td>
+          <td>wfdb, scipy</td>
+          <td>Per-subject Otsu thresholding, stance/swing phase detection</td>
+        </tr>
+        <tr>
+          <td>Gait (speed curve)</td>
+          <td>Peer-reviewed biomechanics [1–8]</td>
+          <td>scipy (interpolation)</td>
+          <td>Literature stance-% values, cubic interpolation</td>
+        </tr>
+        <tr>
+          <td>Solar</td>
+          <td>SILSO monthly sunspot (1749–)</td>
+          <td>scipy</td>
+          <td>13-month smoothed rolling mean, peak detection</td>
+        </tr>
+        <tr>
+          <td>Stellar</td>
+          <td>Kepler mission (lightkurve)</td>
+          <td>lightkurve, scipy</td>
+          <td>Peak/trough detection on detrended light curve</td>
+        </tr>
+        <tr>
+          <td>Sea Ice</td>
+          <td>NSIDC daily Arctic extent</td>
+          <td>scipy</td>
+          <td>14-day rolling mean, annual peak/trough detection</td>
+        </tr>
+        <tr>
+          <td>EEG</td>
+          <td>MNE sample (NeuroKit2)</td>
+          <td>neurokit2, scipy</td>
+          <td>Butterworth bandpass, peak/trough detection per band</td>
+        </tr>
+        <tr>
+          <td>Crypto</td>
+          <td>yfinance BTC-USD (730 days)</td>
+          <td>yfinance, scipy</td>
+          <td>Savitzky-Golay smoothing, peak/trough detection</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-note">
+      All scripts are open-sourced and available for independent replication.
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 8. CONCLUSION -->
+<!-- ================================================================ -->
+<section>
+  <h2>8. Conclusion and Invitation</h2>
+
+  <p>
+    What began as a cross-disciplinary observation has converged on a simple, falsifiable
+    proposition: <strong>the temporal asymmetry of a non-equilibrium system is not random,
+    and the ratio T<sub>release</sub> / T<sub>accumulation</sub> encodes the system's
+    thermodynamic architecture on a continuous 0-to-2 scale.</strong>
+  </p>
+  <p>
+    The golden ratio appears at the centre of this scale not as a mystical constant, but as a
+    mathematical consequence of optimal packing in recursive systems — the temporal equivalent
+    of <span class="phi">φ</span>-phyllotaxis. Systems free to self-organise converge there.
+    Systems under external forcing, chemical management, or gravitational constraint are displaced
+    from it in predictable directions.
+  </p>
+  <p>
+    I am an independent systems thinker. My background is in complex systems — the invisible
+    mathematics that keeps systems balanced between overdamped stagnation and chaotic instability.
+    Living with ME/CFS, a condition defined by the breakdown of biological energy accumulation
+    and release, has provided a daily, visceral lens through which to observe these mechanics.
+  </p>
+  <p>
+    I am releasing this heuristic framework publicly because a theory is only as good as its
+    ability to survive falsification. I have open-sourced the methodology and the conceptual
+    framework. If you are a data scientist, a fluid dynamicist, a biomechanics researcher, or a
+    complexity scientist, I invite you to test it. Apply these scripts to new datasets. Test
+    the boundaries. Break it if you can.
+  </p>
+  <p>
+    The geometry of time appears to be written across substrates. I look forward to seeing where
+    else it can be found — and where it fails.
+  </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- REFERENCES -->
+<!-- ================================================================ -->
+<div class="footnotes">
+  <h3>References — Biomechanics Literature</h3>
+  <p><span class="ref-num">[1]</span> Novacheck TF (1998). "The biomechanics of running." <em>Gait & Posture</em> 7:77–95.</p>
+  <p><span class="ref-num">[2]</span> Weyand PG, Sternlight DB, Bellizzi MJ, Wright S (2000). "Faster top running speeds are achieved with greater ground forces not more rapid leg movements." <em>J Appl Physiol</em> 89(5):1991–2000.</p>
+  <p><span class="ref-num">[3]</span> Riley PO, Dicharry J, Franz J, et al. (2008). "A kinematics and kinetic comparison of overground and treadmill running." <em>Med Sci Sports Exerc</em> 40(6):1093–1100.</p>
+  <p><span class="ref-num">[4]</span> Mann RA, Hagy J (1980). "Biomechanics of walking, running, and sprinting." <em>Am J Sports Med</em> 8(5):345–350.</p>
+  <p><span class="ref-num">[5]</span> Schache AG, Dorn TW, Blanch PD, et al. (2012). "Mechanics of the human hamstring muscles during sprinting." <em>Med Sci Sports Exerc</em> 44(4):647–658.</p>
+  <p><span class="ref-num">[6]</span> Kram R, Taylor CR (1990). "Energetics of running: a new perspective." <em>Nature</em> 346(6281):265–267.</p>
+  <p><span class="ref-num">[7]</span> Keller TS, Weisberger AM, Ray JL, et al. (1996). "Relationship between vertical ground reaction force and speed during walking, slow jogging, and running." <em>Clin Biomech</em> 11(5):253–259.</p>
+  <p><span class="ref-num">[8]</span> Orendurff MS et al. (2008). "Gait efficiency using a roll-over shape paradigm." <em>Prosthet Orthot Int</em> 32(1):128–135.</p>
+
+  <h3 style="margin-top: 24px;">Additional References</h3>
+  <p><span class="ref-num">[9]</span> Bohannon RW (1997). "Comfortable and maximum walking speed of adults aged 20–79 years: reference values and determinants." <em>Age and Ageing</em> 26(1):15–19.</p>
+  <p><span class="ref-num">[10]</span> Hausdorff JM, Ladin Z, Wei JY (1995). "Footswitch system for measurement of the temporal parameters of gait." <em>J Biomech</em> 28(3):347–351.</p>
+  <p><span class="ref-num">[11]</span> Hausdorff JM, Cudkowicz ME, Firtion R, Wei JY, Goldberger AL (1998). "Gait variability and basal ganglia disorders: stride-to-stride variations of gait cycle timing in Parkinson's disease and Huntington's disease." <em>Mov Disord</em> 13(3):428–437.</p>
+
+  <h3 style="margin-top: 24px;">Data Sources</h3>
+  <p><span class="ref-num">•</span> PhysioNet gaitndd: Hausdorff JM et al. [10, 11]. "Gait in Neurodegenerative Disease Database." physionet.org/content/gaitndd</p>
+  <p><span class="ref-num">•</span> SILSO: Royal Observatory of Belgium. Sunspot Index and Long-term Solar Observations. sidc.be/silso</p>
+  <p><span class="ref-num">•</span> NSIDC: National Snow and Ice Data Center. Sea Ice Index. nsidc.org</p>
+  <p><span class="ref-num">•</span> USGS: United States Geological Survey. National Water Information System. waterdata.usgs.gov</p>
+  <p><span class="ref-num">•</span> NASA Kepler Mission: lightkurve Python package. docs.lightkurve.org</p>
+  <p><span class="ref-num">•</span> NeuroKit2: Makowski D et al. (2021). "NeuroKit2." <em>Behavior Research Methods</em>.</p>
+  <p><span class="ref-num">•</span> USDA SCS: Soil Conservation Service Dimensionless Unit Hydrograph. NEH Part 630.</p>
+</div>
+
+</div>
+</body>
+</html>
