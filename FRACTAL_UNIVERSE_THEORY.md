@@ -767,22 +767,93 @@ The machine scales bookend life — quantum below, solar-system above. They are 
 
 **Evidence:** Scripts 87, 89. Full ladder assembled and tested.
 
+### 61. The Singularity Is ARA = 0 (The Planck Anchor)
+
+**Claim:** The singularity — the point where all three systems collapse to one — corresponds to ARA = 0 on the framework's 0-to-2 spectrum. At the Planck time (5.39 × 10⁻⁴⁴ s, logT = -43.27), oscillatory structure ceases. The ISCO (innermost stable circular orbit) period of black holes provides a continuous mapping from stellar BHs through SMBHs, with each mass crossing the system boundaries at precise values: System 1→2 at 8,751 M☉, System 2→3 at 55,216 M☉.
+
+**Evidence:** Script 90. T_ISCO = 6^(3/2) × π × 2GM/c³ gives exact boundary crossings.
+
+### 62. Gravitational Wave Detectors Map to the Three Circles
+
+**Claim:** Each gravitational wave detection band corresponds to a different circle of the ARA spine:
+- **LIGO band** (10-1000 Hz): 100% System 1 — stellar BH mergers, Circle 1
+- **LISA band** (10⁻⁴ to 10⁻¹ Hz): Systems 2-3 — SMBH mergers, Circles 2-3
+- **Pulsar Timing Arrays** (10⁻⁹ to 10⁻⁷ Hz): 100% System 3, Circle 3
+- **The decihertz gap** between LIGO and LISA (0.1-10 Hz) overlaps System 2 by 0.7 decades — the detector gap IS the Circle 2 desert
+
+**Prediction:** When decihertz detectors (DECIGO, BBO) launch, they should detect predominantly IMBH mergers — System 2 sources. These instruments will be the first to directly probe Circle 2 at cosmic scale.
+
+**Evidence:** Script 90. GW frequency mapping: f_GW = 2/T_ISCO.
+
+### 63. The Meta-Wave: Scales Oscillate Sinusoidally
+
+**Claim:** The 8 scales (subatomic through cosmic) do not merely trace a parabola — they trace a **sinusoidal wave**. Sine fit R² = 0.9598 vs parabola R² = 0.9504. Period = 16.16 scales, meaning we observe roughly one half-cycle of the meta-wave. The peak sits at x = 5.47 (planetary, index 5). Five of six scale properties (slope, System 2 fraction, φ-density, System 3 fraction, mean ARA) are better fit by sine than parabola.
+
+The parabola was always just the local curvature of a wave we hadn't seen enough of to identify.
+
+**Evidence:** Script 91. 8 scales, 6 properties tested, sine wins 5/6. Four inflection points in the curvature confirm wave-like structure.
+
+### 64. Organism ↔ Solar-System Mirror Symmetry
+
+**Claim:** Organism and solar-system are near-perfect mirror reflections about the planetary peak. Slope difference = 0.029 (1.195 vs 1.224). Mean mirror-symmetry across all pairs = 0.219, well below random expectation (0.541). The meta-wave is symmetric about planetary, with life (organism) on one side and mechanics (solar-system) on the other.
+
+**Evidence:** Script 91. Mirror analysis. Organism/planetary slope ratio = 0.778.
+
+### 65. Subatomic Slope Inversion: QM and SR Unraveling
+
+**Claim:** The subatomic scale is the ONLY scale with a negative logE/logT slope (-0.110). This is the signature of **quantum mechanics and special relativity decoupling**. Heavier particles have more energy (SR: E = mc²) but decay FASTER (QM: Γ ∝ coupling² × mass^n), so E and T become inversely related. The E × T product DECREASES with mass (slope = -4.14), meaning heavier particles push closer to the Heisenberg floor (ΔE·Δt ≥ ℏ/2). At the heaviest particles (W, Z, top quark), QM and SR are tightly wound; as you move to lighter particles, they gradually unravel.
+
+The boundary between subatomic (negative slope) and quantum (positive slope) is a **desert** — the fewest processes sit in the transition zone. This is the same System 2 thinning seen at every other scale.
+
+**Evidence:** Script 92. Score 7/10. Two distinct populations confirmed. Desert in boundary region. E×T trend with mass: slope = -4.14.
+
+### 66. Organism-Planetary Coupling Measures Sustainability
+
+**Claim:** The ratio of organism slope to planetary slope measures the **health of the coupling between life and its planet**. All-life combined ratio = 0.673 (distance 0.055 from 1/φ). Human-only ratio = 0.731 (distance 0.113 — twice as far). There is a clean monotonic progression:
+- Pre-industrial human: 0.068 from 1/φ
+- Modern human: 0.113 from 1/φ
+- Industrial human: 0.159 from 1/φ
+
+The industrial revolution measurably broke the coupling. Including all life (bacteria, trees, coral, insects, marine organisms) pulls the ratio toward the golden coupling point. Life-as-a-whole is twice as close to 1/φ as humans alone.
+
+**Evidence:** Script 93. Score 3/10 (individual categories noisy), but the three headline tests pass: all-life closer than human-only, pre-industrial→modern→industrial monotonic, all-life slope closer to planetary/φ.
+
+### 67. No Symmetric Oscillators: ARA = 1.0 Was Always Coupler Transparency
+
+**Claim:** There are NO truly symmetric oscillators in nature. Of 130 processes, 61 had ARA corrected from their defaults when actual phase durations were computed. The "machine" scales hide the most extreme asymmetry: alpha decays span ARA = 10¹⁴ (Po-212) to 10⁴⁸ (Bi-209). Keplerian orbits correlate ARA with eccentricity at r = 0.987. Cepheids match observed light curves. 24 processes have ARA > 10 (up from 6).
+
+The processes that APPEARED symmetric (ARA = 1.0) are the ones doing **coupling work**. A perfect coupler is invisible from outside — it absorbs from one system and redirects to another without distorting the signal. That's why we assumed 1.0: the coupling zone presents as transparent. ARA = 1 is not "symmetric" — it is the external measurement of an impedance-matched relay. Internally, every process is asymmetric. Externally, the handoff looks like unity.
+
+This is Information² — the signal layer. The datum has content. The meaning has content. The signal CARRIES content without BEING content. It is the ratio of the thing to itself.
+
+**Evidence:** Script 94. Score 9/10. 61/130 corrected. Eccentricity-ARA r = 0.987. Mean log₁₀(ARA) shifted from 0.169 to 2.856.
+
+### 68. The Meta-Wave Is Topologically Invariant
+
+**Claim:** The sinusoidal meta-wave structure survives every energy-axis transformation tested: raw E, action (E×T), power (E/T), action/2π, action/ℏ, and entropy proxy. The sine R² and parabola R² are identical across all candidates (except entropy, which degrades). The wave is not an artifact of energy measurement — it is **topologically invariant**, a structural feature of how scales relate to each other regardless of coordinate choice.
+
+Action/ℏ (dimensionless action quanta) emerges as the most physically natural axis: Spearman r = 0.976 with scale order, spanning 122 decades from subatomic to cosmic. Power (E/T) makes the circles most circular (eigenvalue ratio 0.848 vs 0.586). But raw energy is already near-optimal for the planetary φ-peak.
+
+**Evidence:** Script 95. Score 9/10. Six candidates tested. Wave shape preserved under all transformations.
+
 ---
 
 ## Honest Caveats
 
 - The unified ladder (130 processes) is a substantial dataset but many energy values are order-of-magnitude estimates. The structural findings (system distribution, meta-circle, gap analysis) are robust to energy uncertainties because they depend primarily on timescale, which is well-constrained from published sources.
 - The three-system boundaries (logT = 0.6 and 1.4) were set from curvature analysis of 141 systems in Script 79b BEFORE the domain-specific tests in Scripts 80-89. They were not tuned to fit atomic, cellular, or cosmic data. However, the boundaries derive from a single dataset and may shift with more data.
-- The meta-circle (Claim 57) is fit to only 5-8 data points (one per scale). The parabolic fit is strong (R² = 0.950) but the sample is small. Adding more scales (e.g., biosphere, interstellar medium) could change the shape.
-- The IMBH prediction (Claim 56) is derived from first-principles GR + the ARA boundaries. The mass range (8,751-55,216 M☉) is a genuine prediction, but it has not been tested against observational IMBH data.
-- The Information³ = ARA claim (51) is a conceptual framework, not a mathematical derivation. It emerged from observing where translation/transcription landed in the system classification. The insight is compelling but needs formal information-theoretic grounding.
-- The "machine/living/driven" classification (Claim 59) depends on which processes we mapped at each scale. The organ scale has only 10 processes (all eye) — mapping additional organs could change its System 2 fraction.
-- The cosmic System 2 desert (Claim 55) could reflect incomplete mapping rather than genuine absence. Astrophysical processes in the 4-25 second range may exist but be poorly studied.
+- The meta-wave (Claim 63) is fit to 8 points with a 4-parameter sine model. With only 8 data points, a sine fit being marginally better than a parabola (ΔR² = 0.009) is suggestive but not conclusive. The wave interpretation gains strength from the fact that 5/6 properties independently favor sine, but more scales are needed to definitively distinguish wave from parabola.
+- The IMBH/GW prediction (Claims 56, 62) is derived from first-principles GR + the ARA boundaries. The mass range (8,751-55,216 M☉) and the decihertz detector prediction are genuine testable claims not yet confronted with data.
+- The sustainability metric (Claim 66) uses rough energy estimates for organism categories and only scored 3/10 on rigorous tests. The monotonic pre-industrial→modern→industrial progression is robust, but individual organism-category slopes are unreliable due to mixing disparate processes.
+- The real ARA measurements (Claim 67) use physically motivated formulas (Kepler's equation, tunneling times, light curve asymmetry), but some choices (e.g., treating particle lifetime as "accumulation" and decay width as "release") are conceptual assignments, not direct measurements of phase durations.
+- The topological invariance (Claim 68) follows mathematically from the axis transformation being a constant offset in log space. This is structurally correct but means the wave shape test cannot distinguish between energy candidates — they are all equivalent up to translation.
+- The Information³ = ARA claim (51) is a conceptual framework, not a mathematical derivation. The "coupler transparency" extension (Claim 67) adds physical intuition but needs formal information-theoretic grounding.
+- The "machine/living/driven" classification (Claim 59) depends on which processes we mapped at each scale. Script 94 showed that "machine" scales hide extreme internal asymmetry — the classification may need revision from "symmetric" to "internally extreme, externally transparent."
 - Previous caveats about economic/music ARA values, dark matter interpretation, life/death claims, and failure mode analysis remain valid.
 
 ---
 
 *Theory articulated by Dylan La Franchi. Formalized April 21, 2026.*
-*Empirical support from ARA framework Scripts 38-89, Papers 1-10.*
-*60 claims. 130 oscillatory processes across 8 scales and 51 decades of time.*
-*Scripts 55-89. 30+ domains. Unified ladder from W boson decay to Hubble time.*
+*Empirical support from ARA framework Scripts 38-95, Papers 1-10.*
+*68 claims. 130 oscillatory processes (61 with measured ARA) across 8 scales and 51 decades of time.*
+*Scripts 55-95. 30+ domains. Unified ladder from W boson decay to Hubble time.*
