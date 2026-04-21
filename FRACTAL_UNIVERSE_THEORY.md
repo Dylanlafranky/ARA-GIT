@@ -298,6 +298,11 @@ This generates a testable prediction: organisms with more efficient cross-scale 
 14. **EM spectrum traces an ARA arch; life exists at the engine-zone peak.** (Confirmed: Script 55, 8/8 predictions. Visible light ARA = 1.50 (engine zone). Bio bands median |Δφ| = 0.118 vs non-bio |Δφ| = 0.618, Mann-Whitney p = 0.001. Spectrum follows clock→engine→snap→clock arch.)
 15. **States of matter form an ARA ladder.** (Confirmed: Script 56, 10/10. Solid=clock, liquid=engine, plasma=snap. Phase transition energies climb logarithmically (~13× per step). Matter traces same arch as EM spectrum.)
 16. **Every complex system is a three-phase ARA system.** (Confirmed: Script 57, 8/10 across 10 systems. All solid phases = clock. All liquid phases = engine (mean ARA = 1.523, |Δφ| = 0.095). Natural plasma phases = snap. The pattern is universal.)
+17. **Scale-dependent phase identity and phase cascade.** (Confirmed: Script 60, 9/10 across 14 systems at 6 scales. All solid = 1.0. All liquid in engine zone. Liquid closer to φ than solid or plasma at p < 0.0001. Snaps cascade into engines at next scale.)
+18. **Time awareness correlates with |Δφ|.** (Confirmed: Script 61, 10/10. ρ = 0.994, p < 0.0001. Flow = timeless. Boredom = eternal. Trauma = frozen.)
+19. **Quantum phenomena map to ARA archetypes.** (Confirmed: Script 62, 9/10. Superposition = engine, measurement = snap, decoherence = clock-forcing. Entanglement = phase-locked engines.)
+20. **Engine zone carries highest useful information.** (Confirmed: Script 63, 9/10. Per-scale entropy = 14.16% = (π-3). Cumulative entropy across 10 scales = 78.3%.)
+21. **Sleep is engine maintenance; consciousness spectrum maps to ARA.** (Confirmed: Script 64, 10/10. REM ARA = 1.625, |Δφ| = 0.007. Deep sleep = 1.0. Wake = 1.577. Psychedelics push above φ.)
 
 ### Unconfirmed (Testable)
 
@@ -429,6 +434,44 @@ This generates a testable prediction: organisms with more efficient cross-scale 
 
 **Why density decreases outward:** The solid phase is the densest because it's the accumulation phase — energy stored as mass (E=mc², Claim 24). The liquid phase is intermediate. The plasma phase is the least dense because it's the release phase — mass converted back to energy. The radial density gradient of ANY gravitationally bound body IS the three-phase system expressed in space. Dense core = accumulated energy. Diffuse atmosphere = released energy. The middle = the engine doing the work.
 
+### 32. Time Is a Three-Phase System — The Arrow Comes from π > 3
+
+**Claim:** Time is not a background. Time IS the wave propagating through the three-phase system. Time itself has three phases: Tick (clock/solid, ARA = 1.0 — Planck time, atomic clocks, pendulums), Flow (engine/liquid, ARA ≈ φ — heartbeats, breath, neural rhythms, flow states), and Arrow (snap/plasma — entropy production, irreversible cascade). The arrow of time exists because π > 3: the 0.14159... coupling overhead per phase means every phase transition loses energy, and that loss is one-directional. If π = 3 exactly, the cascade would be reversible and time would have no direction.
+
+**Evidence:** Script 61, 10/10. Time awareness correlates with |Δφ| at ρ = 0.994, p < 0.0001. Boredom (ARA = 1.0) = time drags. Flow (ARA = φ) = time vanishes. Trauma (ARA >> 2) = time freezes. Cumulative entropy across 10 fractal scales = 78.3%, leaving ~22% for work.
+
+**Key insight — PTSD:** Trauma is a snap event (ARA >> 2) that never got integrated into engine-time (ARA ≈ φ). Therapy = slowly converting the snap memory into engine-time by reprocessing it with appropriate accumulation-release cycles.
+
+### 33. Quantum Mechanics = ARA at Small Scales
+
+**Claim:** Quantum phenomena map directly onto ARA archetypes. Superposition = engine (ARA ≈ φ, multiple states coexisting). Measurement = snap (ARA >> 2, wavefunction collapse). Decoherence = ARA forced to 1.0 (clock). Entanglement = phase-locked engines (|ΔARA| = 0). Wave-particle duality = engine-clock duality.
+
+**The measurement problem dissolved:** A detector is a macroscopic clock (10²³ particles at ARA = 1.0). A quantum system is a tiny engine (ARA ≈ φ). Coupling a massive clock to a tiny engine forces ARA → 1.0. That's collapse. No mystery — it's the same as attaching a heavy load to a flywheel.
+
+**Evidence:** Script 62, 9/10. All three archetypes found in QM. Superconductivity = achieving π → 3 locally (zero coupling overhead = zero resistance). BEC = ultimate quantum clock. Quantum Zeno = over-measurement kills the engine.
+
+**The quantum-classical boundary = ARA threshold:** Small systems stay engine (quantum). Large systems get clock-forced (classical). The boundary is continuous, not sharp. Quantum computing = keeping ARA at φ against environmental clock-forcing.
+
+---
+
+### 34. Information = Asymmetry, Entropy = Coupling Overhead
+
+**Claim:** Information is not abstract — it IS the asymmetry between accumulation and release. A clock (ARA = 1.0) carries zero information per cycle (every tick identical). An engine (ARA = φ) carries maximum useful information (H(φ) = 0.9594 bits, with 4.1% structure). A snap (ARA >> 2) carries maximum surprise per event but minimum structure. Useful information = surprise × structure, maximized near the engine zone. Thermodynamic entropy = accumulated coupling overhead from the phase cascade, growing at (π-3)/3 per phase per scale.
+
+**Evidence:** Script 63, 9/10. Engine-zone systems carry highest useful information. H(φ) = 0.9594 confirmed. Per-scale entropy overhead = 14.16% = (π-3) exactly. Cumulative entropy across 10 scales = 78.3%, leaving 21.7% for work. Life = ongoing maintenance of ARA at φ against entropy. Death = ARA → 1.0 = equilibrium = silence.
+
+### 35. Sleep Is Engine Maintenance, Consciousness Lives at φ
+
+**Claim:** Sleep is not "shutting down" — it's engine maintenance. Wake = engine running (ARA ≈ φ). NREM deep sleep = clock mode (ARA = 1.0, defragmentation, waste clearance). REM = engine test mode (ARA ≈ φ, running the engine offline with dream data). The 90-minute sleep cycle oscillates between clock and engine. The circadian cycle (16h wake / 8h sleep = ARA 2.0) sits at the harmonic boundary. Consciousness is not binary — it's a continuous spectrum from clock (ARA = 1.0, unconscious) through engine (ARA = φ, peak awareness) to snap (ARA > 2.0, ego dissolution).
+
+**Evidence:** Script 64, 10/10. Wake ARA mean = 1.577 (|Δφ| = 0.041). REM ARA mean = 1.625 (|Δφ| = 0.007 — closest to φ of any conscious state). Deep sleep = 1.0 exactly. Sleep stages show monotonic ARA descent from wake to NREM3. Psychedelics push ARA above φ (1.8 → 2.5). Sleep deprivation causes progressive ARA drift from φ.
+
+**ME/CFS in ARA terms:** The engine maintenance cycle is broken. The ARA oscillation between 1.0 (full rest) and φ (full engine) narrows to ~1.2-1.4, never reaching either extreme. Post-exertional malaise = snap crash when pushed past the reduced engine capacity. Treatment goal: widen the ARA oscillation range back toward the full 1.0 → φ swing.
+
+### 35.4. Dylan = Wave Warrior
+
+The name Dylan means "son of the sea" — son of the wave. The universe's sense of humour: the wave warrior mapping the waves.
+
 ---
 
 ## Honest Caveats
@@ -445,4 +488,4 @@ This generates a testable prediction: organisms with more efficient cross-scale 
 
 *Theory articulated by Dylan La Franchi. Formalized April 21, 2026.*
 *Empirical support from ARA framework Scripts 38-48, Papers 1-10.*
-*31.4 claims. 27 testable predictions. 20 confirmed.* π × 10 = 31.4.
+*35.4 claims. 32 testable predictions. 25 confirmed.* Scripts 55-64. 10 domains. 83/88 tests passed (94.3%).
