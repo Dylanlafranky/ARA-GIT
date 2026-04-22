@@ -500,7 +500,7 @@ passed += t9
 
 # Test 10: System 2 is thinnest at every scale
 sys2_thinnest = True
-for scale, n1, n2, n3, total, frac3 in maturity_data:
+for scale, n1, n2, n3, scale_total, frac3 in maturity_data:
     if n2 > n1 or n2 > n3:
         sys2_thinnest = False
 t10 = sys2_thinnest
@@ -511,8 +511,9 @@ passed += t10
 # ============================================================
 # FINAL SCORE
 # ============================================================
+num_tests = 10  # Fixed: was being shadowed by loop variable
 print("\n" + "=" * 70)
-print(f"  SCORE: {passed} / {total}")
+print(f"  SCORE: {passed} / {num_tests}")
 print("=" * 70)
 
 print(f"\n  THE UNIFIED LADDER:")

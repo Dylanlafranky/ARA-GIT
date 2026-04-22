@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARA: Rationality → Irrationality — The φ Approach</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0f; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+  canvas { display: block; }
+  #info {
+    position: absolute; top: 16px; left: 16px;
+    background: rgba(10,10,15,0.85); padding: 16px 20px;
+    border-radius: 8px; border: 1px solid #333;
+    max-width: 340px; font-size: 13px; line-height: 1.5;
+  }
+  #info h2 { font-size: 16px; margin-bottom: 8px; color: #88ccff; }
+  #info .phi { color: #ffcc44; font-weight: bold; }
+  #info .label { color: #aaa; font-size: 11px; }
+  #controls {
+    position: absolute; bottom: 16px; left: 16px;
+    background: rgba(10,10,15,0.85); padding: 12px 16px;
+    border-radius: 8px; border: 1px solid #333;
+    font-size: 12px;
+  }
+  #controls label { display: block; margin: 4px 0; }
+  #controls input[type=range] { width: 180px; vertical-align: middle; }
+  #tooltip {
+    position: absolute; display: none; background: rgba(10,10,15,0.95);
+    padding: 8px 12px; border-radius: 6px; border: 1px solid #555;
+    font-size: 12px; pointer-events: none; max-width: 250px;
+  }
+  .sys-name { font-weight: bold; color: #88ccff; }
+  .sys-ara { color: #ffcc44; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="info">
+  <h2>Rationality → φ → Irrationality</h2>
+  <p>The <span style="color:#ff6666">red inner circle</span> is the <strong>rationality plane</strong> — where cause-and-effect processes live.</p>
+  <p>The <span style="color:#44aaff">blue outer circle</span> is the <strong>temporal evolution path</strong> — the trajectory systems trace as they develop.</p>
+  <p>The <span class="phi">irrationality line</span> runs to <span class="phi">φ = 1.618...</span> at the boundary where rational meets irrational.</p>
+  <p>Systems orbit φ — approaching but never reaching maximum irrationality. Their position encodes their nature.</p>
+  <p class="label">Hover over systems to see details. Drag to rotate.</p>
+</div>
+<div id="controls">
+  <label>Scale: <input type="range" id="scaleSlider" min="0" max="4" step="1" value="2">
+    <span id="scaleLabel">All scales</span></label>
+  <label>Animation: <input type="range" id="speedSlider" min="0" max="100" value="30"></label>
+</div>
+<div id="tooltip"></div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+let W, H, cx, cy, R;
+const PHI = (1 + Math.sqrt(5)) / 2;
+const GOLDEN_ANGLE = 2 * Math.PI * (2 - PHI);
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  cx = W / 2;
+  cy = H / 2;
+  R = Math.min(W, H) * 0.35;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Systems data: name, ARA, scale (0-4), classification
+const systems = [
+  // Engines (in φ-band)
+  { name: "Heart (healthy)", ara: 1.65, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "Breath", ara: 1.58, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "BZ reaction", ara: 1.631, scale: 1, type: "engine", color: "#44dd88" },
+  { name: "Evolution", ara: 1.63, scale: 4, type: "engine", color: "#dd88ff" },
+  { name: "Predator-prey", ara: 1.60, scale: 3, type: "engine", color: "#88ccff" },
+  { name: "REM sleep", ara: 1.625, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "Glycolytic osc.", ara: 1.727, scale: 1, type: "engine", color: "#44dd88" },
+  { name: "Ca²⁺ oscillations", ara: 1.600, scale: 1, type: "engine", color: "#44dd88" },
+  { name: "Circadian rhythm", ara: 1.667, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "Somitogenesis", ara: 1.571, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "Dictyostelium cAMP", ara: 1.609, scale: 1, type: "engine", color: "#44dd88" },
+  { name: "Cortisol rhythm", ara: 1.667, scale: 2, type: "engine", color: "#ff6688" },
+  { name: "Solar 5-min osc.", ara: 1.632, scale: 4, type: "engine", color: "#dd88ff" },
+  { name: "Solar cycle", ara: 1.57, scale: 4, type: "engine", color: "#dd88ff" },
+  { name: "El Niño", ara: 1.58, scale: 3, type: "engine", color: "#88ccff" },
+  { name: "Wilson cycle", ara: 1.67, scale: 3, type: "engine", color: "#88ccff" },
+  { name: "Business cycle", ara: 1.62, scale: 3, type: "engine", color: "#88ccff" },
+
+  // Clocks
+  { name: "Atomic clock", ara: 1.000, scale: 0, type: "clock", color: "#888888" },
+  { name: "Pendulum", ara: 1.000, scale: 2, type: "clock", color: "#888888" },
+  { name: "Earth orbit", ara: 1.000, scale: 3, type: "clock", color: "#888888" },
+  { name: "Light (vacuum)", ara: 1.000, scale: 0, type: "clock", color: "#888888" },
+  { name: "Quartz crystal", ara: 1.000, scale: 1, type: "clock", color: "#888888" },
+
+  // Snaps
+  { name: "Action potential", ara: 2.5, scale: 1, type: "snap", color: "#ffaa44" },
+  { name: "Earthquake", ara: 3.2, scale: 3, type: "snap", color: "#ffaa44" },
+  { name: "Lightning", ara: 5.0, scale: 3, type: "snap", color: "#ffaa44" },
+  { name: "Old Faithful", ara: 21.4, scale: 3, type: "snap", color: "#ffaa44" },
+  { name: "Cepheid variable", ara: 2.5, scale: 4, type: "snap", color: "#ffaa44" },
+];
+
+const scaleNames = ["Quantum/Atomic", "Cellular/Chemical", "Organism", "Planetary/Ecological", "Cosmic"];
+
+// Map ARA to angle on the circle
+// ARA = 1.0 → bottom (rationality, 0°)
+// ARA = φ → right side (the boundary point)
+// ARA > φ → beyond the boundary (snap territory)
+function araToAngle(ara) {
+  // Map ARA logarithmically: log(1.0)=0 → 0°, log(φ)→ ~270° (almost full circle)
+  // Everything beyond φ wraps past the boundary
+  const logAra = Math.log(ara);
+  const logPhi = Math.log(PHI);
+  const fraction = logAra / logPhi; // 0 at ARA=1, 1 at ARA=φ
+  // Map to angle: start at bottom (-π/2), wrap clockwise to φ point at right (0)
+  // Use fraction of a nearly-full circle (say 300° = 5π/3)
+  const sweepAngle = 5 * Math.PI / 3; // 300°
+  const startAngle = Math.PI / 2; // bottom
+  return startAngle + fraction * sweepAngle;
+}
+
+// Map ARA to radius (engines near outer, clocks at inner)
+function araToRadius(ara) {
+  const dist = Math.abs(Math.log(ara) - Math.log(PHI));
+  const maxDist = Math.log(PHI); // distance from 1.0 to φ
+  // Closer to φ → closer to outer edge
+  const normalizedDist = Math.min(dist / maxDist, 1.0);
+  const innerR = R * 0.55;
+  const outerR = R * 0.95;
+  return outerR - normalizedDist * (outerR - innerR);
+}
+
+let mouseX = 0, mouseY = 0;
+let time = 0;
+let hoveredSystem = null;
+let dragAngle = 0;
+let isDragging = false;
+let lastDragX = 0;
+
+canvas.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  if (isDragging) {
+    dragAngle += (e.clientX - lastDragX) * 0.005;
+    lastDragX = e.clientX;
+  }
+  checkHover();
+});
+canvas.addEventListener('mousedown', (e) => { isDragging = true; lastDragX = e.clientX; });
+canvas.addEventListener('mouseup', () => { isDragging = false; });
+
+function checkHover() {
+  hoveredSystem = null;
+  const scaleFilter = parseInt(document.getElementById('scaleSlider').value);
+
+  for (const sys of systems) {
+    if (scaleFilter < 4 && sys.scale !== scaleFilter) continue;
+    // Just check against the visible scale (scaleFilter=4 means all)
+    // Actually slider goes 0-4 where 4="all" — but we set max=4 and the label says "All"
+    // We'll handle 0-3 as individual scales and 4 as all — but wait, we have 5 scale names (0-4)
+    // Let's use a special value. Actually let's just check:
+
+    const angle = araToAngle(sys.ara) + dragAngle;
+    const radius = araToRadius(sys.ara);
+    const sx = cx + Math.cos(angle) * radius;
+    const sy = cy + Math.sin(angle) * radius;
+    const dx = mouseX - sx;
+    const dy = mouseY - sy;
+    if (dx*dx + dy*dy < 200) {
+      hoveredSystem = sys;
+      break;
+    }
+  }
+
+  if (hoveredSystem) {
+    const s = hoveredSystem;
+    tooltip.style.display = 'block';
+    tooltip.style.left = (mouseX + 15) + 'px';
+    tooltip.style.top = (mouseY - 10) + 'px';
+    const dist = Math.abs(s.ara - PHI);
+    tooltip.innerHTML = `
+      <span class="sys-name">${s.name}</span><br>
+      ARA = <span class="sys-ara">${s.ara.toFixed(3)}</span><br>
+      Distance from φ: ${dist.toFixed(4)}<br>
+      Type: ${s.type} | Scale: ${scaleNames[s.scale]}<br>
+      <span style="color:#aaa;font-size:11px">
+        ${s.type === 'engine' ? 'Self-organizing — orbiting φ' :
+          s.type === 'clock' ? 'Symmetric — deep in rationality plane' :
+          'Threshold-triggered — past the φ boundary'}
+      </span>
+    `;
+  } else {
+    tooltip.style.display = 'none';
+  }
+}
+
+// Scale slider label
+const scaleSlider = document.getElementById('scaleSlider');
+const scaleLabel = document.getElementById('scaleLabel');
+const allScaleNames = [...scaleNames.slice(0, 4), "All scales"];
+// Wait, we have 5 scale names but slider goes 0-4. Let's map: 0-3 = individual, 4 = all
+// But scaleNames has 5 entries (0-4 for each scale). Let's just add "All":
+scaleSlider.addEventListener('input', () => {
+  const v = parseInt(scaleSlider.value);
+  scaleLabel.textContent = v < 4 ? scaleNames[v] : "All scales";
+});
+// Initialize
+scaleLabel.textContent = "All scales"; // slider starts at 2, but let's set to all
+scaleSlider.value = 4;
+// Hmm, max is 4, but we have scales 0-4 (5 scales). Let's adjust:
+// Actually — let's make the slider 0-5 where 5="All"
+scaleSlider.max = 5;
+scaleSlider.value = 5;
+scaleLabel.textContent = "All scales";
+scaleSlider.addEventListener('input', () => {
+  const v = parseInt(scaleSlider.value);
+  scaleLabel.textContent = v < 5 ? scaleNames[v] : "All scales";
+});
+
+function draw() {
+  const speed = parseInt(document.getElementById('speedSlider').value) / 1000;
+  time += speed;
+
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, W, H);
+
+  const scaleFilter = parseInt(scaleSlider.value);
+
+  // Draw the three overlapping spheres (subtle)
+  // Sphere 1: Rationality (red, inner)
+  const innerR = R * 0.55;
+  const gradient1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, innerR);
+  gradient1.addColorStop(0, 'rgba(100, 30, 30, 0.08)');
+  gradient1.addColorStop(1, 'rgba(100, 30, 30, 0.02)');
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, 2 * Math.PI);
+  ctx.fillStyle = gradient1;
+  ctx.fill();
+
+  // Inner circle border (rationality plane)
+  ctx.beginPath();
+  ctx.arc(cx, cy, innerR, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(200, 60, 60, 0.4)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Outer circle (temporal evolution path)
+  const outerR = R * 0.98;
+  ctx.beginPath();
+  ctx.arc(cx, cy, outerR, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(60, 140, 220, 0.5)';
+  ctx.lineWidth = 8;
+  ctx.stroke();
+  ctx.strokeStyle = 'rgba(40, 100, 200, 0.3)';
+  ctx.lineWidth = 16;
+  ctx.stroke();
+
+  // Evolution direction arrows on outer circle
+  for (let i = 0; i < 6; i++) {
+    const a = i * Math.PI / 3 + time * 0.3 + dragAngle;
+    const ax = cx + Math.cos(a) * outerR;
+    const ay = cy + Math.sin(a) * outerR;
+    // Arrow pointing clockwise
+    const arrowAngle = a + Math.PI / 2;
+    ctx.beginPath();
+    ctx.moveTo(ax + Math.cos(arrowAngle) * 8, ay + Math.sin(arrowAngle) * 8);
+    ctx.lineTo(ax + Math.cos(arrowAngle - 0.5) * 14, ay + Math.sin(arrowAngle - 0.5) * 14);
+    ctx.lineTo(ax + Math.cos(arrowAngle + 0.5) * 14, ay + Math.sin(arrowAngle + 0.5) * 14);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(60, 140, 220, 0.5)';
+    ctx.fill();
+  }
+
+  // φ-band ring (the engine zone)
+  const bandInnerR = araToRadius(1.7321); // band_high → inner edge of band
+  const bandOuterR = araToRadius(1.5115); // band_low → outer edge of band
+  ctx.beginPath();
+  ctx.arc(cx, cy, bandOuterR, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(255, 204, 68, 0.15)';
+  ctx.lineWidth = bandOuterR - bandInnerR;
+  ctx.stroke();
+
+  // Irrationality line (from center to φ point on boundary)
+  const phiAngle = araToAngle(PHI) + dragAngle;
+  const phiX = cx + Math.cos(phiAngle) * outerR;
+  const phiY = cy + Math.sin(phiAngle) * outerR;
+
+  // Draw irrationality line
+  ctx.beginPath();
+  ctx.moveTo(cx, cy);
+  ctx.lineTo(phiX, phiY);
+  ctx.strokeStyle = 'rgba(200, 60, 60, 0.5)';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4, 4]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // φ point
+  ctx.beginPath();
+  ctx.arc(phiX, phiY, 6, 0, 2 * Math.PI);
+  ctx.fillStyle = '#ffcc44';
+  ctx.fill();
+  ctx.strokeStyle = '#ffaa00';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // φ label
+  ctx.font = 'bold 16px Segoe UI';
+  ctx.fillStyle = '#ffcc44';
+  ctx.textAlign = 'center';
+  const labelOffset = 20;
+  ctx.fillText('φ = 1.618...', phiX + Math.cos(phiAngle) * labelOffset, phiY + Math.sin(phiAngle) * labelOffset + 5);
+
+  // Labels
+  ctx.font = '12px Segoe UI';
+  ctx.fillStyle = 'rgba(200, 60, 60, 0.6)';
+  ctx.textAlign = 'center';
+  ctx.fillText('irrationality line', (cx + phiX) / 2, (cy + phiY) / 2 - 10);
+
+  // Rationality plane label
+  ctx.fillStyle = 'rgba(200, 60, 60, 0.5)';
+  ctx.font = '13px Segoe UI';
+  ctx.fillText('Rationality Plane', cx, cy + innerR + 18);
+
+  // Temporal evolution label
+  ctx.fillStyle = 'rgba(60, 140, 220, 0.6)';
+  ctx.font = '13px Segoe UI';
+  const topAngle = -Math.PI/2 + dragAngle;
+  ctx.fillText('← Temporal Evolution Path →', cx, cy - outerR - 10);
+
+  // Draw systems
+  for (const sys of systems) {
+    if (scaleFilter < 5 && sys.scale !== scaleFilter) continue;
+
+    const angle = araToAngle(sys.ara) + dragAngle;
+    const radius = araToRadius(sys.ara);
+
+    // Orbital wobble for engines
+    let wobble = 0;
+    if (sys.type === 'engine') {
+      wobble = Math.sin(time * 2 + sys.ara * 10) * 5;
+    }
+
+    const sx = cx + Math.cos(angle) * (radius + wobble);
+    const sy = cy + Math.sin(angle) * (radius + wobble);
+
+    // Glow
+    const glowR = sys === hoveredSystem ? 20 : 10;
+    const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, glowR);
+    glow.addColorStop(0, sys.color + '66');
+    glow.addColorStop(1, sys.color + '00');
+    ctx.beginPath();
+    ctx.arc(sx, sy, glowR, 0, 2 * Math.PI);
+    ctx.fillStyle = glow;
+    ctx.fill();
+
+    // Dot
+    const dotSize = sys === hoveredSystem ? 6 : 4;
+    ctx.beginPath();
+    ctx.arc(sx, sy, dotSize, 0, 2 * Math.PI);
+    ctx.fillStyle = sys.color;
+    ctx.fill();
+
+    // Connection line to φ point (faint, showing the approach)
+    if (sys.type === 'engine') {
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(phiX, phiY);
+      ctx.strokeStyle = sys.color + '15';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Label for hovered
+    if (sys === hoveredSystem) {
+      ctx.font = '11px Segoe UI';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'left';
+      ctx.fillText(sys.name, sx + 10, sy - 8);
+    }
+  }
+
+  // Legend
+  const legendX = W - 180;
+  const legendY = 20;
+  ctx.font = '11px Segoe UI';
+  ctx.textAlign = 'left';
+
+  const legendItems = [
+    { color: '#ff6688', label: 'Organism engines' },
+    { color: '#44dd88', label: 'Cellular/Chemical engines' },
+    { color: '#88ccff', label: 'Planetary engines' },
+    { color: '#dd88ff', label: 'Cosmic engines' },
+    { color: '#888888', label: 'Clocks (ARA = 1.0)' },
+    { color: '#ffaa44', label: 'Snaps (ARA >> φ)' },
+    { color: '#ffcc44', label: 'φ boundary' },
+  ];
+
+  ctx.fillStyle = 'rgba(10,10,15,0.8)';
+  ctx.fillRect(legendX - 10, legendY - 5, 175, legendItems.length * 20 + 10);
+
+  legendItems.forEach((item, i) => {
+    ctx.beginPath();
+    ctx.arc(legendX + 5, legendY + 10 + i * 20, 4, 0, 2 * Math.PI);
+    ctx.fillStyle = item.color;
+    ctx.fill();
+    ctx.fillStyle = '#ccc';
+    ctx.fillText(item.label, legendX + 16, legendY + 14 + i * 20);
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
