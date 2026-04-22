@@ -76,38 +76,19 @@ This is physically unambiguous. Blood fills, then ejects. You cannot coherently 
 
 ## STEP 4: Compute the ARA Ratio
 
-**ARA = T_release / T_accumulation**
+**ARA = T_accumulation / T_release**
 
 ### Worked example: Heart (ventricular pump)
 
-ARA = 333 ms / 500 ms = **0.667**
+The cardiac cycle at rest (72 bpm, ~833 ms total):
+- **Accumulation** = diastole (relaxation + filling) ≈ 530 ms
+- **Release** = systole (contraction + ejection) ≈ 300 ms
 
-Wait — Papers 1-3 report the heart's ARA as 1.6, not 0.667. What's going on?
+**ARA = T_accumulation / T_release = 530 / 300 ≈ 1.77**
 
-**The inversion:** ARA as published uses the longer phase as numerator (diastole/systole = 500/333 = 1.5, then with more precise clinical values: ~1.6). The convention is T_longer / T_shorter when the "accumulation" is the longer phase.
+Clinical literature gives diastole:systole ≈ 1.6:1 for resting adults, so:
 
-Let me be precise. The cardiac cycle at rest:
-- Systole (contraction + ejection) ≈ 300-330 ms
-- Diastole (relaxation + filling) ≈ 500-530 ms
-- Total cycle ≈ 833 ms (72 bpm)
-
-**ARA = T_accumulation / T_release = 530 / 300 = 1.767?**
-
-No. Let's be rigorous. The definition is:
-
-**ARA = T_release / T_accumulation**
-
-- Accumulation = diastole (filling) = 530 ms
-- Release = systole (ejection) = 300 ms
-- ARA = 300 / 530 = 0.566
-
-But the published heart ARA is 1.6. This uses the INVERSE convention where accumulation is numerator:
-
-**Published ARA = T_accumulation / T_release = 530 / 300 = 1.767**
-
-The exact value depends on precise clinical measurements. Published cardiac literature gives diastole:systole ≈ 1.6:1 for resting adults, making:
-
-**ARA = 1.6** (using T_diastole / T_systole)
+**ARA ≈ 1.6**
 
 ### The convention (important!)
 

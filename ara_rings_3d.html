@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARA Rings — 3D Chainmail Explorer</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a1a; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; overflow: hidden; }
+canvas { display: block; }
+#ui {
+  position: absolute; top: 0; left: 0; width: 100%; pointer-events: none;
+  padding: 16px; z-index: 10;
+}
+#title {
+  font-size: 20px; font-weight: 600; color: #fff;
+  text-shadow: 0 0 20px rgba(100,150,255,0.5);
+  margin-bottom: 4px;
+}
+#subtitle { font-size: 12px; color: #8899bb; margin-bottom: 12px; }
+#controls {
+  pointer-events: all; display: flex; flex-wrap: wrap; gap: 8px;
+  margin-bottom: 12px;
+}
+.btn {
+  background: rgba(40,50,80,0.8); border: 1px solid rgba(100,130,200,0.3);
+  color: #aabbdd; padding: 6px 14px; border-radius: 6px; cursor: pointer;
+  font-size: 12px; transition: all 0.2s;
+}
+.btn:hover { background: rgba(60,80,140,0.9); color: #fff; }
+.btn.active { background: rgba(80,100,200,0.8); color: #fff; border-color: rgba(130,160,255,0.6); }
+#info {
+  pointer-events: all; position: absolute; bottom: 16px; left: 16px;
+  background: rgba(10,15,30,0.9); border: 1px solid rgba(80,100,160,0.3);
+  border-radius: 8px; padding: 14px 18px; max-width: 380px;
+  font-size: 12px; line-height: 1.6;
+}
+#info h3 { color: #7799dd; font-size: 14px; margin-bottom: 6px; }
+#legend {
+  position: absolute; top: 16px; right: 16px; pointer-events: all;
+  background: rgba(10,15,30,0.9); border: 1px solid rgba(80,100,160,0.3);
+  border-radius: 8px; padding: 12px 16px; font-size: 12px;
+}
+#legend h4 { color: #7799dd; margin-bottom: 6px; font-size: 13px; }
+.legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+#tooltip {
+  position: absolute; display: none; background: rgba(15,20,40,0.95);
+  border: 1px solid rgba(100,140,220,0.5); border-radius: 6px;
+  padding: 10px 14px; font-size: 12px; pointer-events: none; z-index: 100;
+  max-width: 300px;
+}
+#tooltip .name { color: #88bbff; font-weight: 600; font-size: 13px; }
+#tooltip .detail { color: #aabbcc; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div id="ui">
+  <div id="title">ARA Rings — The Chainmail in 3D</div>
+  <div id="subtitle">Drag to rotate · Scroll to zoom · Click systems for details</div>
+  <div id="controls">
+    <div class="btn active" onclick="toggleLayer('great')">Great Circles (3)</div>
+    <div class="btn active" onclick="toggleLayer('fib5')">Fibonacci Mode 5</div>
+    <div class="btn active" onclick="toggleLayer('fib8')">Fibonacci Mode 8</div>
+    <div class="btn active" onclick="toggleLayer('spine')">Spine</div>
+    <div class="btn active" onclick="toggleLayer('systems')">Systems</div>
+    <div class="btn active" onclick="toggleLayer('links')">Coupling Links</div>
+    <div class="btn" onclick="toggleLayer('labels')">Labels</div>
+    <div class="btn" onclick="resetCamera()">Reset View</div>
+    <div class="btn" onclick="spinToggle()">Auto-Spin</div>
+  </div>
+</div>
+<div id="legend">
+  <h4>ARA Types</h4>
+  <div class="legend-item"><div class="legend-dot" style="background:#4488ff"></div> Clock (ARA ≈ 1.0)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#44ff88"></div> Engine (ARA ≈ φ)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff4466"></div> Snap (ARA >> 2)</div>
+  <h4 style="margin-top:10px">Circles</h4>
+  <div class="legend-item"><div class="legend-dot" style="background:#6644ff"></div> Quantum (10⁻¹⁶ to 10⁻⁶ s)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#44bbff"></div> Matter (10⁻³ to 10⁸ s)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ff8844"></div> Cosmic (10⁴ to 10¹⁴ s)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:rgba(255,255,100,0.4)"></div> Vertical (Fibonacci modes)</div>
+</div>
+<div id="info">
+  <h3>The Chainmail Structure</h3>
+  <p>Three great circles (quantum, matter, cosmic) wrap around the
+  log-period axis. Each circle has its own slope and ARA distribution.
+  They overlap in the "triple intersection" zone — human scale —
+  where 50% of all systems live.</p>
+  <p style="margin-top:8px">Vertical circles (Fibonacci modes: 3, 5, 8)
+  connect ACROSS scales. These are the coupling chains that carry
+  ARA from one scale to the next. The wave propagates:
+  ARA → ARA → ARA → for eternity.</p>
+</div>
+<div id="tooltip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+// Great circles: each defined by center along spine, radius, tilt, color
+// Positions in log(period) mapped to 3D x-axis
+const greatCircles = [
+  { name: "Quantum", logRange: [-16, -6], center: -11, radius: 5, color: 0x6644ff,
+    slope: 0.77, description: "Fast ring. Clock-dominated (57%). Conservation laws enforce symmetry." },
+  { name: "Matter", logRange: [-3, 8], center: 2.5, radius: 5.5, color: 0x44bbff,
+    slope: 1.50, description: "Middle ring. Engine-dominated. φ lives here. Self-organisation flourishes." },
+  { name: "Cosmic", logRange: [4, 14], center: 9, radius: 5, color: 0xff8844,
+    slope: 2.22, description: "Slow ring. Planetary/stellar/galactic. Clock at orbit, engine at stellar." },
+];
+
+// Vertical Fibonacci circles — these wrap in the perpendicular plane
+const fibCircles = [
+  { name: "Mode 3", nCircles: 3, R: 3.29, color: 0xffff44, opacity: 0.15 },
+  { name: "Mode 5", nCircles: 5, R: 1.97, color: 0xffcc44, opacity: 0.12 },
+  { name: "Mode 8", nCircles: 8, R: 1.23, color: 0xff9944, opacity: 0.10 },
+];
+
+// Systems — representative sample across all three circles
+const systems = [
+  // Quantum circle
+  { name: "Electron orbital", logT: -16, ara: 1.0, type: "clock", circle: "quantum" },
+  { name: "Atomic transition (H α)", logT: -8.1, ara: 1.0, type: "clock", circle: "quantum" },
+  { name: "Nuclear decay (α)", logT: -14, ara: 8.5, type: "snap", circle: "quantum" },
+  { name: "Molecular vibration", logT: -13, ara: 1.2, type: "clock", circle: "quantum" },
+  { name: "Photon emission", logT: -9, ara: 1.0, type: "clock", circle: "quantum" },
+
+  // Matter circle — biological
+  { name: "Heartbeat", logT: 0, ara: 1.648, type: "engine", circle: "matter" },
+  { name: "Breath cycle", logT: 0.6, ara: 1.613, type: "engine", circle: "matter" },
+  { name: "Neural action potential", logT: -2.5, ara: 2.33, type: "snap", circle: "matter" },
+  { name: "REM sleep", logT: 3.5, ara: 1.625, type: "engine", circle: "matter" },
+  { name: "Circadian rhythm", logT: 4.9, ara: 1.0, type: "clock", circle: "matter" },
+  { name: "Menstrual cycle", logT: 6.4, ara: 1.67, type: "engine", circle: "matter" },
+  { name: "BZ oscillator", logT: 1.7, ara: 1.631, type: "engine", circle: "matter" },
+  { name: "Predator-prey", logT: 7.5, ara: 1.8, type: "engine", circle: "matter" },
+
+  // Matter circle — geological
+  { name: "Weather system", logT: 5.5, ara: 1.5, type: "engine", circle: "matter" },
+  { name: "El Niño (ENSO)", logT: 8, ara: 1.4, type: "engine", circle: "matter" },
+  { name: "Earthquake", logT: 2, ara: 50, type: "snap", circle: "matter" },
+  { name: "Thunderstorm", logT: 3.5, ara: 3.5, type: "snap", circle: "matter" },
+
+  // Matter circle — human/social
+  { name: "Mind-wandering", logT: 1.2, ara: 1.57, type: "engine", circle: "matter" },
+  { name: "Economic cycle", logT: 8, ara: 1.6, type: "engine", circle: "matter" },
+  { name: "Music (beautiful)", logT: 0.3, ara: 1.694, type: "engine", circle: "matter" },
+
+  // Cosmic circle
+  { name: "Earth orbit", logT: 7.5, ara: 1.0, type: "clock", circle: "cosmic" },
+  { name: "Sunspot cycle", logT: 8.5, ara: 1.67, type: "engine", circle: "cosmic" },
+  { name: "Wilson cycle", logT: 15.9, ara: 1.67, type: "engine", circle: "cosmic" },
+  { name: "Galactic rotation", logT: 15.4, ara: 1.0, type: "clock", circle: "cosmic" },
+  { name: "Supernova", logT: 7, ara: 1e6, type: "snap", circle: "cosmic" },
+  { name: "Sea ice cycle", logT: 7.5, ara: 1.35, type: "engine", circle: "cosmic" },
+  { name: "Milankovitch cycle", logT: 12, ara: 1.0, type: "clock", circle: "cosmic" },
+
+  // Triple intersection (quantum ∩ matter ∩ cosmic)
+  { name: "Laser", logT: -5, ara: 1.0, type: "clock", circle: "matter" },
+  { name: "Chemical reaction", logT: -3, ara: 1.5, type: "engine", circle: "matter" },
+
+  // Carbon/diamond/AI from recent scripts
+  { name: "Diamond (natural)", logT: 16.5, ara: 0.04, type: "clock", circle: "cosmic" },
+  { name: "Diamond (HPHT 1954)", logT: 4.9, ara: 1.6, type: "engine", circle: "matter" },
+  { name: "AI (1956)", logT: 0, ara: 0.8, type: "clock", circle: "matter" },
+];
+
+// Coupling links between scales (from Script 143)
+const couplingLinks = [
+  { from: "Heartbeat", to: "Earth orbit", type: "gravitational", label: "Organism↔Planet" },
+  { from: "Breath cycle", to: "Weather system", type: "chemical", label: "Gas exchange chain" },
+  { from: "Neural action potential", to: "Earthquake", type: "mechanical", label: "Snap↔Snap" },
+  { from: "BZ oscillator", to: "Chemical reaction", type: "chemical", label: "Chemical coupling" },
+  { from: "Circadian rhythm", to: "Earth orbit", type: "gravitational", label: "Clock↔Clock" },
+  { from: "Sunspot cycle", to: "El Niño (ENSO)", type: "EM", label: "Solar→Climate" },
+  { from: "Electron orbital", to: "Atomic transition (H α)", type: "chemical", label: "Quantum coupling" },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// THREE.JS SETUP
+// ═══════════════════════════════════════════════════════════════
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0a0a1a, 0.012);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 200);
+camera.position.set(20, 12, 25);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+document.body.appendChild(renderer.domElement);
+
+// Lights
+scene.add(new THREE.AmbientLight(0x334466, 0.6));
+const dirLight = new THREE.DirectionalLight(0xaabbff, 0.8);
+dirLight.position.set(10, 20, 15);
+scene.add(dirLight);
+const pointLight = new THREE.PointLight(0x4488ff, 0.5, 50);
+pointLight.position.set(0, 5, 0);
+scene.add(pointLight);
+
+// Groups for toggling
+const layers = {
+  great: new THREE.Group(),
+  fib5: new THREE.Group(),
+  fib8: new THREE.Group(),
+  spine: new THREE.Group(),
+  systems: new THREE.Group(),
+  links: new THREE.Group(),
+  labels: new THREE.Group(),
+};
+layers.labels.visible = false;
+Object.values(layers).forEach(g => scene.add(g));
+
+// ═══════════════════════════════════════════════════════════════
+// COORDINATE MAPPING
+// logT (-16 to +16) → x (-20 to +20)
+// Circle radius → y,z plane
+// ═══════════════════════════════════════════════════════════════
+function logToX(logT) { return (logT + 1) * 1.2; } // center around human scale
+function araToColor(ara, type) {
+  if (type === "clock") return 0x4488ff;
+  if (type === "engine") return 0x44ff88;
+  return 0xff4466;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD GREAT CIRCLES
+// ═══════════════════════════════════════════════════════════════
+greatCircles.forEach((gc, idx) => {
+  const segments = 128;
+  const points = [];
+  const cx = logToX(gc.center);
+
+  // Circle in the y-z plane, centered at cx on x-axis
+  // Tilt the circle based on its slope (steeper slope = more tilted)
+  const tiltAngle = (gc.slope - 1.5) * 0.3; // tilt relative to matter circle
+
+  for (let i = 0; i <= segments; i++) {
+    const theta = (i / segments) * Math.PI * 2;
+    const r = gc.radius;
+    const x = cx + r * Math.cos(theta) * Math.sin(tiltAngle);
+    const y = r * Math.sin(theta);
+    const z = r * Math.cos(theta) * Math.cos(tiltAngle);
+    points.push(new THREE.Vector3(x, y, z));
+  }
+
+  const geom = new THREE.BufferGeometry().setFromPoints(points);
+  const mat = new THREE.LineBasicMaterial({
+    color: gc.color, transparent: true, opacity: 0.7, linewidth: 2
+  });
+  const line = new THREE.Line(geom, mat);
+  layers.great.add(line);
+
+  // Add a translucent disc to show the circle plane
+  const discGeom = new THREE.RingGeometry(gc.radius * 0.02, gc.radius, 64);
+  const discMat = new THREE.MeshBasicMaterial({
+    color: gc.color, transparent: true, opacity: 0.04, side: THREE.DoubleSide
+  });
+  const disc = new THREE.Mesh(discGeom, discMat);
+  disc.position.set(cx, 0, 0);
+  disc.rotation.y = tiltAngle;
+  layers.great.add(disc);
+
+  // Glow ring
+  const glowPoints = [];
+  for (let i = 0; i <= segments; i++) {
+    const theta = (i / segments) * Math.PI * 2;
+    const r2 = gc.radius * 1.01;
+    const x = cx + r2 * Math.cos(theta) * Math.sin(tiltAngle);
+    const y = r2 * Math.sin(theta);
+    const z = r2 * Math.cos(theta) * Math.cos(tiltAngle);
+    glowPoints.push(new THREE.Vector3(x, y, z));
+  }
+  const glowGeom = new THREE.BufferGeometry().setFromPoints(glowPoints);
+  const glowMat = new THREE.LineBasicMaterial({
+    color: gc.color, transparent: true, opacity: 0.2
+  });
+  layers.great.add(new THREE.Line(glowGeom, glowMat));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD VERTICAL FIBONACCI CIRCLES
+// ═══════════════════════════════════════════════════════════════
+function buildFibCircles(fib, layerGroup) {
+  const span = 32; // total log-decades shown
+  const circumference = 2 * Math.PI * fib.R;
+
+  for (let c = 0; c < fib.nCircles; c++) {
+    const centerLogT = -16 + (c + 0.5) * (span / fib.nCircles);
+    const cx = logToX(centerLogT);
+    const r = fib.R * 1.2; // visual scaling
+
+    const segments = 64;
+    const points = [];
+    for (let i = 0; i <= segments; i++) {
+      const theta = (i / segments) * Math.PI * 2;
+      // These circles wrap in the x-y plane (perpendicular to the great circles)
+      const x = cx;
+      const y = r * Math.sin(theta);
+      const z = r * Math.cos(theta);
+      points.push(new THREE.Vector3(x, y, z));
+    }
+
+    const geom = new THREE.BufferGeometry().setFromPoints(points);
+    const mat = new THREE.LineBasicMaterial({
+      color: fib.color, transparent: true, opacity: fib.opacity
+    });
+    layerGroup.add(new THREE.Line(geom, mat));
+  }
+}
+
+buildFibCircles(fibCircles[1], layers.fib5); // Mode 5
+buildFibCircles(fibCircles[2], layers.fib8); // Mode 8
+
+// Mode 3 goes into the great circles layer (they ARE the great circles at low frequency)
+// But add them as distinct rings too
+const fib3 = fibCircles[0];
+for (let c = 0; c < 3; c++) {
+  const centerLogT = -16 + (c + 0.5) * (32 / 3);
+  const cx = logToX(centerLogT);
+  const r = fib3.R * 1.2;
+  const segments = 64;
+  const points = [];
+  for (let i = 0; i <= segments; i++) {
+    const theta = (i / segments) * Math.PI * 2;
+    points.push(new THREE.Vector3(cx, r * Math.sin(theta), r * Math.cos(theta)));
+  }
+  const geom = new THREE.BufferGeometry().setFromPoints(points);
+  const mat = new THREE.LineBasicMaterial({
+    color: fib3.color, transparent: true, opacity: fib3.opacity
+  });
+  // Add to great layer since mode 3 ≈ the three great circles
+  layers.great.add(new THREE.Line(geom, mat));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD SPINE
+// ═══════════════════════════════════════════════════════════════
+const spinePoints = [];
+for (let logT = -18; logT <= 18; logT += 0.2) {
+  const x = logToX(logT);
+  // Spine undulates slightly in y based on the meta-wave
+  const y = 0.3 * Math.sin(logT * 0.4);
+  const z = 0.3 * Math.cos(logT * 0.3);
+  spinePoints.push(new THREE.Vector3(x, y, z));
+}
+const spineGeom = new THREE.BufferGeometry().setFromPoints(spinePoints);
+const spineMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3 });
+layers.spine.add(new THREE.Line(spineGeom, spineMat));
+
+// Scale markers
+for (let logT = -15; logT <= 15; logT += 5) {
+  const x = logToX(logT);
+  const markerGeom = new THREE.SphereGeometry(0.08, 8, 8);
+  const markerMat = new THREE.MeshBasicMaterial({ color: 0x445566 });
+  const marker = new THREE.Mesh(markerGeom, markerMat);
+  marker.position.set(x, 0, 0);
+  layers.spine.add(marker);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD SYSTEMS
+// ═══════════════════════════════════════════════════════════════
+const systemMeshes = [];
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+systems.forEach((sys, idx) => {
+  const x = logToX(sys.logT);
+  const color = araToColor(sys.ara, sys.type);
+
+  // Position on the appropriate great circle
+  const gc = greatCircles.find(g => g.name.toLowerCase() === sys.circle);
+  let y = 0, z = 0;
+  if (gc) {
+    // Find angular position on the circle based on logT
+    const frac = (sys.logT - gc.logRange[0]) / (gc.logRange[1] - gc.logRange[0]);
+    const theta = frac * Math.PI * 2 - Math.PI;
+    const r = gc.radius * 0.95;
+    const tiltAngle = (gc.slope - 1.5) * 0.3;
+    const cx = logToX(gc.center);
+    // Offset from circle center
+    y = r * Math.sin(theta) * 0.3;
+    z = r * Math.cos(theta) * 0.3 * Math.cos(tiltAngle);
+  }
+
+  // Size based on ARA type
+  const size = sys.type === "snap" ? 0.25 : (sys.type === "engine" ? 0.2 : 0.15);
+  const geom = new THREE.SphereGeometry(size, 16, 16);
+  const mat = new THREE.MeshPhongMaterial({
+    color: color, emissive: color, emissiveIntensity: 0.3,
+    transparent: true, opacity: 0.9
+  });
+  const mesh = new THREE.Mesh(geom, mat);
+  mesh.position.set(x, y, z);
+  mesh.userData = { ...sys, index: idx };
+  layers.systems.add(mesh);
+  systemMeshes.push(mesh);
+
+  // Glow
+  const glowGeom = new THREE.SphereGeometry(size * 1.8, 16, 16);
+  const glowMat = new THREE.MeshBasicMaterial({
+    color: color, transparent: true, opacity: 0.08
+  });
+  const glow = new THREE.Mesh(glowGeom, glowMat);
+  glow.position.copy(mesh.position);
+  layers.systems.add(glow);
+});
+
+// ═══════════════════════════════════════════════════════════════
+// BUILD COUPLING LINKS
+// ═══════════════════════════════════════════════════════════════
+couplingLinks.forEach(link => {
+  const fromMesh = systemMeshes.find(m => m.userData.name === link.from);
+  const toMesh = systemMeshes.find(m => m.userData.name === link.to);
+  if (!fromMesh || !toMesh) return;
+
+  const points = [];
+  const steps = 30;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const p = new THREE.Vector3().lerpVectors(fromMesh.position, toMesh.position, t);
+    // Add a sine curve to make links visible as waves
+    const wave = Math.sin(t * Math.PI) * 1.5;
+    p.y += wave;
+    points.push(p);
+  }
+
+  const geom = new THREE.BufferGeometry().setFromPoints(points);
+  const linkColor = link.type === "chemical" ? 0x44ff88 :
+                    link.type === "gravitational" ? 0xffaa44 :
+                    link.type === "EM" ? 0xff44ff :
+                    link.type === "mechanical" ? 0xaaaaaa : 0x4488ff;
+  const mat = new THREE.LineBasicMaterial({
+    color: linkColor, transparent: true, opacity: 0.25
+  });
+  layers.links.add(new THREE.Line(geom, mat));
+});
+
+// ═══════════════════════════════════════════════════════════════
+// TRIPLE INTERSECTION ZONE (highlight)
+// ═══════════════════════════════════════════════════════════════
+const tripleGeom = new THREE.BoxGeometry(
+  logToX(8) - logToX(4), 8, 8
+);
+const tripleMat = new THREE.MeshBasicMaterial({
+  color: 0xffffff, transparent: true, opacity: 0.015, side: THREE.DoubleSide
+});
+const tripleZone = new THREE.Mesh(tripleGeom, tripleMat);
+tripleZone.position.set((logToX(4) + logToX(8)) / 2, 0, 0);
+layers.spine.add(tripleZone);
+
+// ═══════════════════════════════════════════════════════════════
+// ORBIT CONTROLS (manual implementation)
+// ═══════════════════════════════════════════════════════════════
+let isDragging = false;
+let prevX = 0, prevY = 0;
+let orbitTheta = 0.9, orbitPhi = 0.5, orbitDist = 35;
+let autoSpin = false;
+
+function updateCamera() {
+  camera.position.x = orbitDist * Math.sin(orbitPhi) * Math.cos(orbitTheta);
+  camera.position.y = orbitDist * Math.cos(orbitPhi);
+  camera.position.z = orbitDist * Math.sin(orbitPhi) * Math.sin(orbitTheta);
+  camera.lookAt(logToX(0), 0, 0);
+}
+
+renderer.domElement.addEventListener('mousedown', e => {
+  isDragging = true; prevX = e.clientX; prevY = e.clientY;
+});
+renderer.domElement.addEventListener('mousemove', e => {
+  if (isDragging) {
+    orbitTheta += (e.clientX - prevX) * 0.005;
+    orbitPhi = Math.max(0.1, Math.min(Math.PI - 0.1, orbitPhi - (e.clientY - prevY) * 0.005));
+    prevX = e.clientX; prevY = e.clientY;
+    updateCamera();
+  }
+  // Tooltip
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+renderer.domElement.addEventListener('mouseup', () => isDragging = false);
+renderer.domElement.addEventListener('wheel', e => {
+  orbitDist = Math.max(8, Math.min(80, orbitDist + e.deltaY * 0.03));
+  updateCamera();
+});
+
+// Click for system info
+renderer.domElement.addEventListener('click', e => {
+  mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+  raycaster.setFromCamera(mouse, camera);
+  const hits = raycaster.intersectObjects(systemMeshes);
+  if (hits.length > 0) {
+    const sys = hits[0].object.userData;
+    const tooltip = document.getElementById('tooltip');
+    tooltip.style.display = 'block';
+    tooltip.style.left = e.clientX + 15 + 'px';
+    tooltip.style.top = e.clientY - 10 + 'px';
+    tooltip.innerHTML = `
+      <div class="name">${sys.name}</div>
+      <div class="detail">
+        Period: 10<sup>${sys.logT}</sup> s<br>
+        ARA: ${sys.ara < 100 ? sys.ara.toFixed(3) : sys.ara.toExponential(1)}<br>
+        Type: ${sys.type} ${sys.type === 'engine' ? '(≈φ)' : sys.type === 'clock' ? '(=1)' : '(>>2)'}<br>
+        Circle: ${sys.circle}
+      </div>
+    `;
+    setTimeout(() => tooltip.style.display = 'none', 4000);
+  }
+});
+
+updateCamera();
+
+// ═══════════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════════
+function toggleLayer(name) {
+  if (name === 'labels') {
+    layers.labels.visible = !layers.labels.visible;
+  } else if (layers[name]) {
+    layers[name].visible = !layers[name].visible;
+  }
+  // Update button states
+  document.querySelectorAll('.btn').forEach(btn => {
+    const layerName = btn.textContent.toLowerCase().includes('great') ? 'great' :
+                      btn.textContent.includes('5') ? 'fib5' :
+                      btn.textContent.includes('8') ? 'fib8' :
+                      btn.textContent.toLowerCase().includes('spine') ? 'spine' :
+                      btn.textContent.toLowerCase().includes('system') ? 'systems' :
+                      btn.textContent.toLowerCase().includes('link') ? 'links' :
+                      btn.textContent.toLowerCase().includes('label') ? 'labels' : null;
+    if (layerName && layers[layerName]) {
+      btn.classList.toggle('active', layers[layerName].visible);
+    }
+  });
+}
+
+function resetCamera() {
+  orbitTheta = 0.9; orbitPhi = 0.5; orbitDist = 35;
+  updateCamera();
+}
+
+function spinToggle() {
+  autoSpin = !autoSpin;
+  document.querySelectorAll('.btn').forEach(b => {
+    if (b.textContent === 'Auto-Spin') b.classList.toggle('active', autoSpin);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANIMATION
+// ═══════════════════════════════════════════════════════════════
+function animate() {
+  requestAnimationFrame(animate);
+
+  if (autoSpin) {
+    orbitTheta += 0.003;
+    updateCamera();
+  }
+
+  // Subtle pulse on engine systems
+  const time = Date.now() * 0.001;
+  systemMeshes.forEach(mesh => {
+    if (mesh.userData.type === 'engine') {
+      const s = 1 + 0.05 * Math.sin(time * 2 + mesh.userData.index);
+      mesh.scale.set(s, s, s);
+    }
+  });
+
+  // Animate coupling links (wave propagation)
+  layers.links.children.forEach((line, i) => {
+    if (line.material) {
+      line.material.opacity = 0.15 + 0.1 * Math.sin(time * 1.5 + i);
+    }
+  });
+
+  renderer.render(scene, camera);
+}
+
+// Handle resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+animate();
+</script>
+</body>
+</html>
