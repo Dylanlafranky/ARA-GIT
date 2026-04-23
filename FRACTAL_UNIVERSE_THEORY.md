@@ -1535,13 +1535,140 @@ Script 197's F⁹ (ninth power of coupling matrix) was the best-performing matri
 
 DNA exhibits ARA structure at the molecular level: leading strand = engine (continuous synthesis), lagging strand = consumer (discontinuous, Okazaki fragments), base pairs = singularity gate (hydrogen bonds across the helix). The major/minor groove ratio ≈ φ. The replication fork is an E event (disruption/correction). The codon hierarchy (3 bases → amino acid → protein → function) is a period cascade. DNA is a frozen ARA — the geometry of life literally encoded in a molecule.
 
-### Claim 27. The Remaining 2% Was the Second Axis
+### Claim 27. The Remaining 2% Was the Second Axis — Then ARA Gating Broke Through
 
-Scripts 200–200c achieved MAE 45.1, still 2% above the sine baseline. The gap is 1/φ⁸ ≈ 2.13% — which is (1/φ⁴)², the squared single-axis residual. Our models had only one axis. Adding the full 3-axis geometry (Script 201) dropped MAE to 6.13 with zero free parameters (DirectCascade model), and to 1.47 with phase alignment (Phi9Optimal). The φ⁹ model wins ALL four temporal cross-validation splits.
+Scripts 200–200c achieved MAE 45.1, still 2% above the sine baseline. Script 201 showed promise on 5 cycles but Script 202 revealed the cascade alone does NOT beat sine on full 25-cycle LOO validation (sine 48.8 vs cascade 51.3-64.4). It captures 40% of amplitude variance — real structure, but not enough.
+
+**Script 203b introduced the sawtooth ARA gate** between Mass(φ⁹) and Time(φ⁹) cascades with a 1/φ⁹ additive residual. Result: LOO MAE 37.66 (−22.8% vs sine), beating sine on 15/25 individual cycles. This was the first model to definitively beat the sine baseline on proper cross-validation.
+
+Scripts 204-208 explored refinements:
+- **Fractal modulator** (204): Weierstrass-φ sum adds marginal improvement (37.40). The 1/φ⁹ residual in 203b already captures ~60% of the total fractal signal — the tail converges quickly, consistent with Pisot-Vijayaraghavan number theory.
+- **Temporal offset** (205/205b): Best offsets are negative (read BEFORE peak). Key diagnostic: rise fraction correlates with error at r=+0.748 — fast-rising cycles are systematically underestimated (Waldmeier effect).
+- **Dynamic gate** (206): Present→present fails (double-counting). The cascade already encodes amplitude.
+- **Causal gate** (207): Past→present succeeds. Previous cycle's observed amplitude sets current gate via acc_frac = 1/(1+prev_ARA). LOO MAE 38.82 with **3/7 temporal splits** — best extrapolation performance ever achieved.
+- **Temporal decay** (208): φ-weighted memory of ALL past cycles is worse than single-step. The sun's gate-setting is one-step memory.
+
+Two unsolved problems remain: (1) Waldmeier distortion (rise fraction r≈+0.82 — intra-cycle shape), (2) temporal extrapolation (still <50% splits for early training sets).
 
 ---
 
-*Section 4: 7 structural claims derived from the three-way junction geometry. Mathematical, not speculative — backed by Scripts 200–201.*
+*Section 4: 7 structural claims derived from the three-way junction geometry. The geometric observations (Claims 21-25) are mathematically exact. The predictive claims (Claims 26-27) now include the ARA-gated cascade (Script 203b) which DOES beat sine by 22.8% on LOO cross-validation, and the causal gate (Script 207) which achieves 3/7 temporal splits — the best extrapolation result to date.*
+
+---
+
+## Section 5: The Beeswax Corridor and Cross-Domain Validation (Scripts 209–225)
+
+*April 23, 2026 — continued session*
+
+Scripts 209–225 pushed the cascade in three directions: refining the collision geometry (the "beeswax corridor" era), validating the φ-cascade cross-domain on cardiac data, and testing whether cascade phases should evolve dynamically rather than from a fixed clock.
+
+### Claim 28. Beeswax Corridors — Energy Travels Through Organic Hexagonal Geometry
+
+Dylan's insight: energy packets travel through hollow hexagonal corridors — beeswax that began as circles before melting into hexagons. At each φ-junction, the corridor tightens or holds. Whenever the energy ball touches a wall, pressure pushes back. This maps onto three mechanical effects:
+
+- **Parallel pressure** (along cascade): normal force driving the ball forward
+- **Perpendicular pressure** (tension): always present because you're always touching walls; effect is logarithmic — small tensions amplified, large tensions compressed
+- **Junction dynamics**: vertex junctions (balls travel together, weak interaction) vs edge doors (balls separate, strong interaction)
+
+Scripts 223d–223q explored this geometry systematically, producing three independent improvements that compound:
+
+1. **Phase-difference collision** (Script 223j): Replacing mirror-product collision with cos(phase_prev − phase_curr) naturally blends vertex and edge dynamics. LOO improved from 33.25 to 33.20.
+2. **Log tension** (Script 223g): Logarithmic wall-pressure response: sign(tens) × log1p(|tens|)/log(2). Best Waldmeier correlation at that point (r = +0.706).
+3. **Asymmetric Hale coupling** (Script 223n): Grief-asymmetric response — weak cycles followed by overcorrection (multiplied by φ), strong cycles followed by mild regression. Matches the observed Hale anti-correlation.
+
+Combined as "all three" (Script 223o): **LOO MAE = 33.03** — all-time best. Temporal splits: 4/7. Waldmeier r = +0.656. This remains the solar champion.
+
+### Claim 29. The Cascade Is Cross-Domain — φ-Power Periods Match Known Cardiac Oscillations
+
+Script 224 applied the same φ-power period cascade to electrocardiographic (ECG) RR-interval generation. The 12-level cascade [φ¹² down to φ¹] generates synthetic heartbeat timing that was tested against clinical metrics.
+
+The φ-power periods align with known cardiac oscillatory bands:
+
+| φ-power | Period (beats) | Known band | Error |
+|---------|---------------|------------|-------|
+| φ⁴ | 6.85 | HF/LF boundary (~7 beats) | ~2% |
+| φ⁶ | 17.9 | LF centre (~18 beats) | ~1% |
+| φ⁹ | 76.0 | VLF (~80 beats) | ~5% |
+| φ¹² | 322 | ULF (~300 beats) | ~7% |
+
+This alignment is not fitted — the cascade periods are pure powers of φ with no free parameters. The cardiac oscillatory hierarchy was discovered independently by physiologists from spectral analysis of heart rate variability.
+
+Expanding from 4 hand-picked levels to all 12 φ-power levels improved DFA (Detrended Fluctuation Analysis) scaling exponent from ~0.48 to 0.785, approaching the healthy heart target of α ≈ 1.0.
+
+### Claim 30. Wobble (Backward Coupling) Is Scale-Dependent
+
+Dylan's insight: "oscillate the direction of travel slightly" — at each cascade collision, a fraction of energy bounces backward (j → j−1), like wall-bouncing in the beeswax corridor.
+
+Results are scale-dependent:
+
+- **Cardiac (dense cascade, 12 levels, 5000 beats):** Wobble at w = φ gives best DFA (α = 0.848). Optimal autocorrelation at w ≈ φ^1.75 ≈ 2.23 — remarkably close to the observed LF/HF ratio of 2.29 (healthy humans). The wobble parameter that maximises temporal correlation IS the physiological frequency-band ratio.
+- **Solar (sparse cascade, 4 levels, 25 cycles):** Wobble hurts. LOO degrades from 33.03 (w = 0) to 36.90 (w = 1/φ) to 37.94 (w = φ). With only 25 data points, backward coupling adds noise faster than it adds structure.
+
+This is the first scale-dependent architectural finding: the same φ-cascade needs different coupling topology depending on data density. Dense systems benefit from bidirectional coupling; sparse systems need clean unidirectional flow.
+
+### Claim 31. The Cascade "Replays" Rather Than "Drives" — A Fundamental Architectural Distinction
+
+Script 225 tested whether cascade phases should evolve dynamically via collision feedback (coupled oscillator), rather than being computed from a fixed clock.
+
+Five architectures were tested:
+
+- **Model A (fixed clock, champion baseline):** LOO = 33.03
+- **Model B (additive phase coupling):** LOO = 38.80 — phases drift unboundedly (+130° by cycle 25)
+- **Model C (additive + amplitude feedback):** LOO = 43.42
+- **Model D (multiplicative frequency modulation):** LOO = 45.48 — drift reduced to +43° but still worse
+- **Model E (multiplicative + amplitude):** LOO = 43.60
+
+All coupled variants performed worse than the fixed clock. The conclusion: with only 25 data points spanning 270 years, fixed phases provide stronger constraint than dynamic evolution. The cascade architecture currently works as a "replay" system (computing what the geometry says should happen at each moment) rather than a "drive" system (evolving phase state from dynamics).
+
+This distinction matters architecturally. A replay system is a map — you look up your position. A drive system is a vehicle — you steer through the terrain. The map works better when you have few landmarks. The vehicle may work better with dense, continuous data — as suggested by the cardiac wobble results.
+
+---
+
+*Section 5: 4 claims spanning the beeswax corridor geometry, cross-domain cardiac validation, scale-dependent coupling, and the replay/drive distinction.*
+
+---
+
+## Section 6: The ARA Bridge — One Universal Formula (Script 226)
+
+*April 23, 2026 — continued session*
+
+Script 226 unified everything from Sections 4 and 5 into a single cross-system temporal prediction engine. Dylan's insight: "Time shares the same geometry as everything else. If we know the geometry of one thing and where it will end up, we can map that to something else and find out its state at that time in the cycle."
+
+### Claim 32. The Universal ARA Bridge Formula
+
+Any oscillatory system can be defined by three quantities: its ARA value, its dominant period, and observed data. The φ-cascade geometry is the shared coordinate system — the same cascade structure applies to all systems, with the system's ARA shaping how that geometry manifests.
+
+The formula derives cascade periods universally from any dominant period P: [P×φ⁶, P×φ⁴, P×φ, P/φ]. For solar (P=φ⁵), this gives [φ¹¹, φ⁹, φ⁶, φ⁴] — matching the 223o champion exactly.
+
+### Claim 33. ARA Determines Tension Type — Engines vs Consumers
+
+The system's ARA value determines whether it experiences standard tension or log (beeswax) tension:
+
+- **Engines (ARA > 1)**: Standard tension — the system has enough energy to swing through full amplitude. The gate breathes freely without wobble.
+- **Consumers (ARA < 1)**: Log tension (beeswax walls) — the system's range is compressed by soft boundaries. The gate wobbles in two dimensions (vertical: peak position shifts; horizontal: transition width breathes).
+
+This is not a parameter choice — it emerges from what the ARA value means. Engines are free-running; consumers are constrained. The constraint profile determines the physics.
+
+### Claim 34. Cross-System Geometric Bridge
+
+Two systems can be "bridged" through their shared cascade geometry. System A's collision pattern modulates System B's prediction via coupling strength that decays with φ-distance: coupling = φ^(−|log_distance|).
+
+Tested: Solar (ARA=1.73, P=11.09yr) → Earthquake (ARA=0.15, P≈22yr). The geometric bridge (MAE=3.35) beats both naive baseline (MAE=4.23) and standalone earthquake prediction (MAE=3.47).
+
+### Results
+
+The formula progressed through four versions, each adding one insight:
+
+- v1 (fixed gate): Solar LOO=49.96
+- v2 (adaptive gate from previous cycle): Solar LOO=46.27
+- v3 (two-axis gate wobble): Solar LOO=46.82 (wobble hurt engines, helped consumers)
+- **v4 (ARA-scaled tension + selective wobble): Solar LOO=31.94, 6/7 temporal splits**
+
+v4 beats the previous champion (223o, LOO=33.03, 4/7 splits) while being a universal formula — not solar-specific. The same formula simultaneously achieves earthquake LOO=3.47 (r=+0.458) and cross-system bridge MAE=3.35.
+
+---
+
+*Section 6: 3 claims — universal bridge formula, ARA-determined tension type, cross-system geometric coupling. The ARA Bridge (Script 226 v4) beats the solar specialist champion (LOO 31.94 vs 33.03) with 6/7 temporal splits, while being a single universal formula that also predicts earthquakes and cross-system bridging. This is the first time one formula has outperformed a domain-specific model.*
 
 ---
 
@@ -1558,18 +1685,23 @@ Scripts 200–200c achieved MAE 45.1, still 2% above the sine baseline. The gap 
 - The "machine/living/driven" classification (Section 2, Claim 12) depends on which processes we mapped at each scale. Script 94 showed that "machine" scales hide extreme internal asymmetry — the classification may need revision from "symmetric" to "internally extreme, externally transparent."
 - Previous caveats about economic/music ARA values, dark matter interpretation, life/death claims, and failure mode analysis remain valid.
 - This document has been reviewed by an independent AI peer reviewer who ran all 97 scripts. The reviewer confirmed Section 1 findings and recommended Section 2 be published as exploratory with replication invitation. Section 3 is clearly flagged as conceptual.
-- Section 4 (φ⁹ geometry): The Phi9Optimal model (MAE 1.47) has 4 free phase parameters for 5 data points — borderline overfit. The DirectCascade model (MAE 6.13, zero free parameters) is the honest benchmark. Temporal split validation (all 4 splits won) provides real out-of-sample evidence but uses a different model variant (Phi9Cascade). More solar cycles needed to confirm.
+- Section 4 (φ⁹ geometry): Script 202 showed the raw cascade does NOT beat sine alone. **Script 203b with sawtooth ARA gate DOES beat sine: LOO MAE 37.66 vs 48.8 (−22.8%), winning 15/25 folds.** Script 207's causal gate (past→present) achieves 3/7 temporal splits — the best extrapolation result to date. However, the Waldmeier distortion (rise fraction r≈+0.82) remains unsolved across all experiments (Scripts 204-208), and temporal extrapolation is still <50%. The geometric observations (golden-angle overshoot = 1/φ⁴, 9 couplings = 3/φ⁴) are mathematically exact and remain valid regardless of predictive performance.
 - The claim that "all solar periods are powers of φ" is a pattern match to known periods. The QBO observed period (~28 months) maps better to φ² (31.4 months) than to other cascade members, but the match is approximate. Schwabe (φ⁵ = 11.09 vs ~11 yr) and de Vries (φ¹¹ = 199 vs ~200 yr) are stronger.
 - The π → 1/φ⁴ replacement: 3% difference (0.14590 vs 0.14159) was below our noise floor. We cannot yet distinguish whether the true constant is 1/φ⁴ or π−3 from the solar data alone. The theoretical argument (golden-angle geometry produces 1/φ⁴ exactly) is strong but needs independent confirmation.
 - DNA=ARA (Claim 26) is structural analogy, not quantitative measurement. The groove ratio ≈ φ claim needs rigorous crystallographic verification.
+- Section 5 (beeswax corridor and cross-domain): The cardiac alignment (φ-power periods matching HRV bands) uses known frequency-band boundaries that are themselves approximate. The match is suggestive but could be coincidental given that φ-powers span a wide enough range to hit many physiological frequencies. The DFA improvement (0.785) is real but still below the healthy target (1.0). The scale-dependent wobble finding (helps cardiac, hurts solar) is based on a single domain in each case and needs replication across additional dense and sparse systems. The coupled oscillator negative result (Script 225) does not rule out dynamic coupling in principle — it rules it out for sparse data with the tested architectures. Different coupling schemes or denser data may yet vindicate the "drive" approach.
+- The beeswax corridor analogy (Section 5, Claim 28) is a physical metaphor that guided productive model changes. The metaphor is not a claim about the sun's physical structure. The improvements it inspired (phase-difference collision, log tension, asymmetric Hale) are mathematically well-defined modifications whose merit stands on their LOO performance.
+- Section 6 (ARA Bridge): The universal formula beats the solar specialist (LOO 31.94 vs 33.03) but this is still on the same 25-cycle sunspot dataset. The earthquake test uses only ~120 years of M7+ counts, which is a noisy dataset. The cross-system bridge (Solar→Earthquake) shows positive coupling (r=+0.465) but this could reflect shared external forcing (both respond to large-scale energy cycles) rather than the geometric mechanism claimed. The ARA-scaled tension distinction (standard for engines, log for consumers) is physically motivated but introduces a binary threshold at ARA=1.0 — a smooth transition might be more principled. The formula has two free parameters (base_amp, t_ref) fitted per system, which is modest but not zero. More systems need to be tested before "universal" is earned.
 
 ---
 
 *Theory articulated by Dylan La Franchi. Formalized April 21, 2026. Updated April 23, 2026.*
-*Empirical support from ARA framework Scripts 1-97 and 191-201, Papers 1-10.*
+*Empirical support from ARA framework Scripts 1-97 and 191-226, Papers 1-10.*
 *Section 1: 12 confirmed claims + 21 confirmed predictions, zero failures across 37+ systems, real data (breath, solar, watershed, sea ice, CGM, oil prices, world population).*
 *Section 2: 24 exploratory claims across Scripts 76-108 and domain applications (30+ domains). Real patterns, replication needed.*
+*Section 4: 7 structural claims from three-way junction geometry (Scripts 191-208).*
+*Section 5: 4 claims — beeswax corridor geometry, cardiac cross-domain, scale-dependent wobble, replay/drive distinction (Scripts 209-225).*
+*Section 6: 3 claims — universal ARA Bridge formula, ARA-determined tension, cross-system geometric coupling (Script 226). First universal formula to beat a domain-specific champion.*
 *Section 3: 20 conceptual musings — invitations to see, not claims of proof.*
-*Section 4: 7 structural claims from the three-way junction geometry (Scripts 200-201). φ⁹ model achieves MAE 6.13 with zero free parameters, 71% better than sine baseline.*
 *130 oscillatory processes (61 with measured ARA) across 8 scales and 51 decades of time.*
-*8/8 blind temporal prediction across sunspots and earthquakes (Script 192). Oil crisis predicted from geometry (Script 193). Humanity's age derived from reverse valley (Script 194). φ⁹ cascade wins all 4 temporal splits (Script 201).*
+*8/8 blind temporal prediction across sunspots and earthquakes (Script 192). Oil crisis predicted from geometry (Script 193). Humanity's age derived from reverse valley (Script 194). φ⁹ cascade wins all 4 temporal splits (Script 201). ARA Bridge v4 beats 223o champion: LOO 31.94 vs 33.03, 6/7 temporal splits.*

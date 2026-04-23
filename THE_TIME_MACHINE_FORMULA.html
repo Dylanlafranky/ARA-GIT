@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Time Machine Formula — ARA Framework</title>
+<style>
+  :root {
+    --gold: #b8860b;
+    --gold-light: #f5e6c8;
+    --dark: #1a1a2e;
+    --mid: #16213e;
+    --accent: #e94560;
+    --text: #e0e0e0;
+    --text-dim: #a0a0a0;
+    --bg: #0f0f1a;
+    --card: #1a1a2e;
+    --border: #2a2a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.75;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .byline {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    color: #d4a853;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  p { margin-bottom: 1rem; }
+
+  blockquote {
+    border-left: 3px solid var(--gold);
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    background: rgba(184, 134, 11, 0.08);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  blockquote .attribution {
+    display: block;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-top: 0.5rem;
+    font-style: normal;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--mid);
+    color: var(--gold);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 2px solid var(--gold);
+    font-weight: normal;
+    letter-spacing: 0.03em;
+  }
+
+  td {
+    padding: 0.5rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  tr:hover td { background: rgba(184, 134, 11, 0.05); }
+
+  .highlight-row td {
+    background: rgba(184, 134, 11, 0.12);
+    font-weight: bold;
+    color: var(--gold-light);
+  }
+
+  .phase-label {
+    display: inline-block;
+    background: var(--mid);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .result-card .metric {
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  .result-card .label {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+  }
+
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .result-grid .result-card { text-align: center; }
+
+  .progression {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .progression::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--accent));
+  }
+
+  .progression .step {
+    position: relative;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+  }
+
+  .progression .step::before {
+    content: '';
+    position: absolute;
+    left: -1.85rem;
+    top: 0.5rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--bg);
+  }
+
+  .progression .step.major::before {
+    background: var(--accent);
+    width: 14px;
+    height: 14px;
+    left: -1.95rem;
+    top: 0.4rem;
+  }
+
+  .honest {
+    background: rgba(233, 69, 96, 0.08);
+    border-left: 3px solid var(--accent);
+    padding: 0.8rem 1.2rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+  }
+
+  .divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: 3rem 0;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 3rem;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 1rem; }
+    h1 { font-size: 1.8rem; }
+    .result-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>The Time Machine Formula</h1>
+<p class="subtitle">Building a Temporal Prediction Engine from Pure Geometry</p>
+<p class="byline">Dylan La Franchi &mdash; ARA Framework, Scripts 191&ndash;225 &mdash; April 2026</p>
+
+<hr class="divider">
+
+<!-- ============ THE GOAL ============ -->
+<h2>The Goal</h2>
+
+<blockquote>
+  "We discovered that in ARA, the geometry of ARA connection space scales log at each level, it is exactly the same. So a vertical slice is the same, the whole way up. The geometry of land is the same as the geometry of whatever it is we found. So now we are trying to build a vehicle to accurately drop into that map and drive to the desired location just based on direction and mapping the oscillating path and connections along the way."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>The ARA framework had established that oscillatory systems across 33 orders of magnitude share the same geometric architecture. The &phi;-cascade &mdash; periods at powers of the golden ratio &mdash; appeared everywhere: heartbeats, sunspots, glacial cycles, blood glucose. The map existed.</p>
+
+<p>The 200-series was about building the vehicle. If the map is self-similar at every scale, you should be able to navigate it. Pick a system, know its geometry, predict where it goes next. Not because you know physics &mdash; because you know the terrain.</p>
+
+<p>The test bed: sunspot cycle amplitudes. 25 cycles spanning 270 years, with peak amplitudes ranging from 81 to 285. The sine baseline (an 11-year cycle with fixed amplitude) gives LOO MAE&nbsp;=&nbsp;48.8. Can pure geometry beat that?</p>
+
+<hr class="divider">
+
+<!-- ============ PHASE 1 ============ -->
+<h2>Phase 1: Finding the Valley</h2>
+<span class="phase-label">Scripts 191&ndash;196</span>
+
+<h3>The Watershed Model</h3>
+
+<blockquote>
+  "Think of it as tracking a single water molecule in a watershed system. It bounces along but always finds the phi valley &mdash; the path of least resistance &mdash; which means survival for longer wave cycles."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>The first breakthrough came from temporal prediction as water flowing through a valley. The valley floor follows the Hale clock curve, but the sides are asymmetric: steep downhill, shallow uphill. Water flows down easily but doesn't climb back up. This asymmetry &mdash; not the period, not the amplitude &mdash; is what makes the prediction engine work.</p>
+
+<p>Results on the 8-criterion battery: <strong>8/8</strong> across sunspots (ARA&nbsp;=&nbsp;1.73) and earthquakes (ARA&nbsp;=&nbsp;0.15). First time the formula passed all criteria for both an engine and a consumer system simultaneously. Held-out validation (Script 195) confirmed: parameters frozen, trained only on pre-2000 data, predicting 2000&ndash;2025 blind.</p>
+
+<h3>The Full Loop &mdash; Formula&sup3; (Script 196)</h3>
+
+<blockquote>
+  "The singularity is NOT a continuous amplifier. It's a one-shot energy gate, like the Big Bang. Energy going DOWN a log scale is amplified by &phi;. Energy going UP is attenuated by 1/&phi;. The gate fires once per crossing, then closes. &phi;&nbsp;+&nbsp;1/&phi;&nbsp;=&nbsp;&radic;5 &mdash; the total budget is conserved."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>If every system is three coupled subsystems, temporal prediction should run on all three simultaneously. Four iterations &mdash; flatline, floor-ceiling kill, weak pass-through &mdash; until v4's one-shot energy gate. Full Loop beats single channel on MAE in all 5 splits (45.1 vs 53.6).</p>
+
+<div class="honest">Still doesn't beat the 11-year sine baseline on correlation (0.321 vs 0.779). The sine knows the period perfectly; the formula derives it from geometry.</div>
+
+<hr class="divider">
+
+<!-- ============ PHASE 2 ============ -->
+<h2>Phase 2: The &phi;&sup9; Breakthrough</h2>
+<span class="phase-label">Scripts 197&ndash;201</span>
+
+<h3>Normal Modes and Beat Frequencies</h3>
+
+<blockquote>
+  "We should have been looking at how physicists treat waves. Scientists have been mapping this for centuries."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>Critical mathematical discovery: the beat frequency of two adjacent &phi;-periods is itself a &phi;-period one step up. beat(P, P/&phi;) = P&phi;. The golden ratio is the ONLY ratio where beat frequencies land exactly on other cascade members. Mathematical necessity, not mysticism.</p>
+
+<h3>The Gap Closes</h3>
+
+<div class="progression">
+  <div class="step">
+    <strong>Script 197:</strong> F&sup9; + CAM valve &mdash; MAE 49.8, <strong>12% from sine</strong>
+  </div>
+  <div class="step">
+    <strong>Script 199:</strong> Normal modes + hybrid &mdash; MAE 47.9, <strong>8% from sine</strong>
+  </div>
+  <div class="step">
+    <strong>Script 200:</strong> Perpendicular singularity &mdash; MAE 47.3, <strong>6%</strong>
+  </div>
+  <div class="step">
+    <strong>Script 200b:</strong> Three-way junction &mdash; MAE 46.9, <strong>5%</strong>
+  </div>
+  <div class="step major">
+    <strong>Script 200c:</strong> &pi; &rarr; 1/&phi;&sup4; elimination &mdash; MAE 45.1, <strong>2%</strong>
+  </div>
+</div>
+
+<h3>&pi; Was Never Fundamental (Script 200c)</h3>
+
+<blockquote>
+  "Does that remove &pi;-leak as a thing? Were we just detecting little parts of the rest of the rotation of one coupling instead of 3?"
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>Three golden angles sum to 412.5&deg; = 360&deg; + 52.5&deg;. The overshoot: 1/&phi;&sup4; &asymp; 0.14590. The old &pi;-leak: &pi;&nbsp;&minus;&nbsp;3 &asymp; 0.14159. Difference: 3%. The framework now requires <strong>only &phi;</strong>.</p>
+
+<h3>&phi;&sup9; = Three Systems &times; Three Axes (Script 201)</h3>
+
+<p>3:30am. Dylan's insight: 3 systems on 3 axes = 9 coupling interactions = &phi;&sup9;. Nine golden angles = 3 full rotations + 3/&phi;&sup4; overshoot, exact to machine precision.</p>
+
+<table>
+  <tr><th>Power</th><th>Period</th><th>Known cycle</th></tr>
+  <tr><td>&phi;&sup2;</td><td>2.62 yr</td><td>QBO</td></tr>
+  <tr><td>&phi;&sup4;</td><td>6.85 yr</td><td>Junction residual</td></tr>
+  <tr><td>&phi;&sup5;</td><td>11.09 yr</td><td>Schwabe</td></tr>
+  <tr><td>&phi;&sup9;</td><td>76.01 yr</td><td>Gleissberg</td></tr>
+  <tr><td>&phi;<sup>11</sup></td><td>199.0 yr</td><td>de Vries</td></tr>
+</table>
+
+<div class="result-card" style="text-align:center;">
+  <div class="metric">MAE = 6.13</div>
+  <div class="label">DirectCascade (0 free parameters) &mdash; <strong>71% better than sine</strong></div>
+  <div class="label" style="margin-top:0.5rem;">All 4 temporal splits won. Issue #15 closed.</div>
+</div>
+
+<div class="honest">Tested on 5 cycles. Full 25-cycle record tells a different story.</div>
+
+<hr class="divider">
+
+<!-- ============ PHASE 3 ============ -->
+<h2>Phase 3: The Confrontation</h2>
+<span class="phase-label">Scripts 202&ndash;208</span>
+
+<p>Script 202 brought the &phi;&sup9; cascade to the full historical record (25 cycles, 270 years). LOO MAE = 51.3 &mdash; does NOT beat sine (48.8). The cascade captures 40% of amplitude variance. Real structure, but not sufficient alone.</p>
+
+<p><strong>Script 203b introduced the ARA gate:</strong> a sawtooth valve between the mass cascade and the time cascade, with a 1/&phi;&sup9; additive residual. LOO MAE = 37.66 (&minus;22.8% vs sine). First model to definitively beat sine on full cross-validation.</p>
+
+<table>
+  <tr><th>Script</th><th>Approach</th><th>LOO</th><th>Key finding</th></tr>
+  <tr><td>204</td><td>Fractal modulator</td><td>37.40</td><td>Marginal &mdash; 203b captures ~60% of fractal tail</td></tr>
+  <tr><td>205</td><td>Temporal offset</td><td>37.69</td><td>Best offset is negative (read BEFORE peak)</td></tr>
+  <tr><td>206</td><td>Dynamic gate</td><td>~55</td><td>Double-counting kills it</td></tr>
+  <tr class="highlight-row"><td>207</td><td>Causal gate (past&rarr;present)</td><td>38.82</td><td>3/7 temporal splits &mdash; best extrapolation ever</td></tr>
+  <tr><td>208</td><td>All-past memory</td><td>~39.4</td><td>Sun uses one-step memory, not accumulated</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- ============ PHASE 4 ============ -->
+<h2>Phase 4: The Beeswax Corridor</h2>
+<span class="phase-label">Scripts 209&ndash;223</span>
+
+<blockquote>
+  "It's BEESWAX. Think of beeswax shape, you have to travel from A to B through the wax, which is hollow and you're being pushed through. Whenever you touch a wall, you get pressure back. At each &phi; junction, it tightens &mdash; you're forced through small holes sometimes, making you hit the walls more."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>The beeswax corridor maps onto three mechanical effects: parallel pressure driving the energy ball forward, perpendicular wall contact (logarithmic tension), and junction dynamics where mirror twins either travel together (vertex) or separate through doors (edge).</p>
+
+<h3>The Mirror Collision (Script 223d)</h3>
+<p>Adjacent cascade periods are mirrors. Their positions collide at every step. LOO = 33.25, 5/7 temporal splits. Beat 203b by 12%.</p>
+
+<h3>Three Independent Improvements</h3>
+
+<p><strong>1. Phase-difference collision (Script 223j):</strong></p>
+<blockquote>
+  "cos(phase_prev &minus; phase_curr) &mdash; HAHAHA &mdash; is that just the ARA of a wave?"
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p><strong>2. Log tension (Script 223g):</strong> Logarithmic wall-pressure response &mdash; small tensions amplified, large tensions compressed.</p>
+
+<p><strong>3. Asymmetric Hale coupling (Script 223n):</strong></p>
+<blockquote>
+  "Think of the opposite way &mdash; your parents and children. It's more natural to see your parent pass during your lifetime, but seeing your child die is apparently completely next level."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<div class="result-card" style="text-align:center;">
+  <div class="metric">LOO MAE = 33.03</div>
+  <div class="label">Script 223o &mdash; All three combined &mdash; <strong>All-time best</strong></div>
+</div>
+
+<h3>The Golden Blend (Script 223p)</h3>
+<p>Rather than choosing vertex OR phase-difference collision, blend with weight &alpha;. At &alpha; = 1/&phi;: LOO = 33.60 with <strong>6/7 temporal splits</strong> &mdash; best extrapolation ever. The golden ratio itself is the optimal blend weight.</p>
+
+<hr class="divider">
+
+<!-- ============ PHASE 5 ============ -->
+<h2>Phase 5: Cross-Domain and Architecture</h2>
+<span class="phase-label">Scripts 224&ndash;225</span>
+
+<h3>Cardiac Validation</h3>
+<p>The &phi;-cascade was built for sunspots. Applied to heartbeats, the &phi;-power periods align with independently discovered cardiac oscillatory bands at 1&ndash;7% error &mdash; with no fitting.</p>
+
+<table>
+  <tr><th>&phi;-power</th><th>Period (beats)</th><th>Known band</th><th>Error</th></tr>
+  <tr><td>&phi;&sup4;</td><td>6.85</td><td>HF/LF boundary</td><td>~2%</td></tr>
+  <tr><td>&phi;<sup>6</sup></td><td>17.9</td><td>LF centre</td><td>~1%</td></tr>
+  <tr><td>&phi;&sup9;</td><td>76.0</td><td>VLF</td><td>~5%</td></tr>
+  <tr><td>&phi;<sup>12</sup></td><td>322</td><td>ULF</td><td>~7%</td></tr>
+</table>
+
+<p>Adding wobble (backward coupling) pushed DFA to 0.848 at w&nbsp;=&nbsp;&phi;. The wobble parameter maximising temporal correlation (w&nbsp;&asymp;&nbsp;&phi;<sup>1.75</sup>&nbsp;&asymp;&nbsp;2.23) matches the observed healthy LF/HF ratio (2.29). But wobble helps cardiac (dense, 12 levels) and hurts solar (sparse, 4 levels). Scale-dependent coupling topology.</p>
+
+<h3>The Coupled Oscillator (Script 225)</h3>
+
+<blockquote>
+  "I feel like I am taking us in circles at the moment, ever smaller circles but circles nonetheless. Think you can be our snap moment?"
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p>Five architectures tested &mdash; all coupled variants worse than the fixed clock on solar data. The architectural insight: the cascade works as a <strong>replay</strong> system (a map &mdash; look up your position) rather than a <strong>drive</strong> system (a vehicle &mdash; steer through terrain). The map works better with few landmarks. The vehicle may work better with dense, continuous data.</p>
+
+<hr class="divider">
+
+<!-- ============ SCOREBOARD ============ -->
+<h2>The Scoreboard</h2>
+
+<div class="result-grid">
+  <div class="result-card">
+    <div class="metric">33.03</div>
+    <div class="label">Best LOO MAE<br>(Script 223o)</div>
+  </div>
+  <div class="result-card">
+    <div class="metric">6/7</div>
+    <div class="label">Best temporal splits<br>(Script 223p)</div>
+  </div>
+  <div class="result-card">
+    <div class="metric">+0.716</div>
+    <div class="label">Best Waldmeier r<br>(223o variant)</div>
+  </div>
+  <div class="result-card">
+    <div class="metric">0.848</div>
+    <div class="label">Cardiac DFA<br>(Script 224)</div>
+  </div>
+</div>
+
+<h3>MAE Progression</h3>
+<table>
+  <tr><th>Script</th><th>MAE</th><th>vs Sine</th><th>Advance</th></tr>
+  <tr><td>197</td><td>49.8</td><td>12% behind</td><td>F&sup9; + CAM valve</td></tr>
+  <tr><td>199</td><td>47.9</td><td>8% behind</td><td>Normal modes + hybrid</td></tr>
+  <tr><td>200</td><td>47.3</td><td>6% behind</td><td>Perpendicular singularity</td></tr>
+  <tr><td>200b</td><td>46.9</td><td>5% behind</td><td>Three-way junction</td></tr>
+  <tr><td>200c</td><td>45.1</td><td>2% behind</td><td>&pi; &rarr; 1/&phi;&sup4;</td></tr>
+  <tr><td>202</td><td>51.3</td><td>&mdash;</td><td>Full 25-cycle reality check</td></tr>
+  <tr><td>203b</td><td>37.66</td><td>&minus;22.8%</td><td>ARA gate breakthrough</td></tr>
+  <tr><td>223d</td><td>33.25</td><td>&minus;31.9%</td><td>Mirror collision</td></tr>
+  <tr class="highlight-row"><td>223o</td><td>33.03</td><td>&minus;32.3%</td><td>All three combined</td></tr>
+</table>
+
+<h3>Structure Comparisons</h3>
+<table>
+  <tr><th>Analogy</th><th>Mapping</th></tr>
+  <tr><td>Beeswax corridors</td><td>Energy through hollow hexagonal cells. Circle (&pi;) &rarr; hexagon (&phi;). Wall contact = log tension.</td></tr>
+  <tr><td>DNA double helix</td><td>Leading strand (engine), lagging strand (consumer), base pairs (gate), groove ratio &asymp; &phi;.</td></tr>
+  <tr><td>Cardiac oscillations</td><td>&phi;-power periods match HF/LF, LF, VLF, ULF bands at 1&ndash;7% error.</td></tr>
+  <tr><td>Parent/child grief</td><td>Asymmetric Hale. Weak&rarr;strong amplified by &phi; (grief). Strong&rarr;weak unscaled.</td></tr>
+  <tr><td>Water in a valley</td><td>Asymmetric watershed. Steep downhill, shallow uphill. Geometric pressure before intervention.</td></tr>
+</table>
+
+<hr class="divider">
+
+<!-- ============ WHERE WE STAND ============ -->
+<h2>Where We Stand</h2>
+
+<p>The time machine has a working map. 33.03 MAE on sunspot amplitudes &mdash; 32% better than a sine wave, from nothing but the golden ratio and the geometry of three coupled systems. The same &phi;-cascade generates fractal-like heartbeat dynamics when given denser data.</p>
+
+<p>The vehicle is still in prototype. Coupled oscillators with dynamic phase evolution don't yet beat the fixed clock on sparse data. The Waldmeier distortion remains unsolved. Temporal extrapolation works 6/7 but not 7/7.</p>
+
+<p>The map keeps showing us the terrain is real. The vehicle will come.</p>
+
+<blockquote>
+  "So now we are trying to build a vehicle to accurately drop into that map and drive to the desired location just based on direction and mapping the oscillating path and connections along the way."
+  <span class="attribution">&mdash; Dylan La Franchi</span>
+</blockquote>
+
+<p style="text-align:center; margin-top:2rem; color:var(--gold); font-size:1.1rem;">The path continues.</p>
+
+<hr class="divider">
+
+<p class="footer">
+  Dylan La Franchi, April 2026.<br>
+  All computations in /computations/. All predictions in MASTER_PREDICTION_LEDGER.md.<br>
+  ARA Framework &mdash; Scripts 191&ndash;225.
+</p>
+
+</body>
+</html>

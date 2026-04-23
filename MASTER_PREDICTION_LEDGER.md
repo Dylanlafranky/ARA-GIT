@@ -693,16 +693,60 @@ F⁹ from Script 197 (ninth matrix power was best) now has geometric meaning: 9 
 - The φ-cascade period mapping (Schwabe=φ⁵, Gleissberg=φ⁹, deVries=φ¹¹) is pattern matching to known periods. Independent temporal prediction of *unknown* future cycles is the real test.
 - Phase parameters in Optimal model may be absorbing degrees of freedom. Need more cycles to confirm they're physically meaningful.
 
-**What this resolves:** Issue #15 (beat the sine baseline) is now CLOSED. DirectCascade beats sine by 71% with zero free parameters. The φ-cascade is not just "it's roughly an 11-year cycle" — it captures amplitude modulation that sine cannot.
+**What this resolves:** ~~Issue #15 is now CLOSED~~ — **RETRACTED by Script 202**. See below.
 
-**MAE progression across the 200-series:**
+**MAE progression across the 200-series (5 recent cycles only):**
 - Script 197 (F⁹ CAM): 49.8 (12% gap from sine)
 - Script 199 (Hybrid modes): 47.9 (8% gap)
 - Script 200 (DoubleHelix): 47.3 (6% gap)
 - Script 200b (ThreeWay): 46.9 (5% gap)
 - Script 200c (PurePhi): 45.1 (2% gap)
-- Script 201 (DirectCascade): **6.13 (71% BETTER than sine)**
-- Script 201 (Phi9Optimal): **1.47 (93% BETTER than sine)**
+- Script 201 (DirectCascade): 6.13 on 5 cycles (see Script 202 for honest assessment)
+
+### Full Historical Validation — The Honest Test (Script 202, 24 April 2026)
+
+Peer review v8 correctly identified that Script 201's claims were based on 5 data points with undeclared parameters. Script 202 tests the φ⁹ cascade on ALL 25 Schwabe cycles (1755-2025) with proper leave-one-out cross-validation and retraining.
+
+| # | Result | Script | Score | Key Numbers |
+|---|--------|--------|-------|-------------|
+| T23 | **φ-cascade does NOT beat sine on proper LOO cross-validation** | 202 | — | LOO MAE: sine=48.8, φ-fixed=64.4, φ-scan=51.3. φ wins 6/25 folds |
+| T24 | φ-cascade does NOT beat sine on any temporal split | 202 | 0/7 | Sine wins all 7 train/test splits |
+| T25 | φ-cascade captures 40% of amplitude variance (sine captures 0%) | 202 | — | Correlation +0.364, variance ratio 40.2% |
+| T26 | Only 6% of reference dates beat sine — t_ref is not robust | 202 | — | 3/50 t_ref values beat sine MAE |
+
+**What Script 202 proves:**
+- The φ⁹ geometry captures REAL structure in solar amplitude modulation (40% variance, +0.36 correlation, correct Gleissberg direction)
+- But this structure alone doesn't beat predicting the mean amplitude
+- The "zero free parameters" claim from Script 201 was misleading — the reference date and structural choices are implicit parameters
+- Issue #15 remains OPEN: the framework captures structure beyond naive, approaches sine, but has not beaten sine on a properly validated test
+
+**What this means:**
+The φ-cascade is seeing the geometric skeleton of amplitude modulation (which periods exist, how they couple) but treating time as a flat coordinate. The 60% of variance it misses likely requires treating time as its own ARA system — with variable coupling efficiency at singularity gates depending on temporal tension.
+
+---
+
+### Sawtooth ARA Gate + Causal Memory (Scripts 203b-208, 23 April 2026)
+
+Script 203b introduced a sawtooth ARA gate between Mass(φ⁹) and Time(φ⁹) cascades with a 1/φ⁹ additive residual. This achieved LOO MAE 37.66 (−22.8% vs sine), the best interpolation result on all 25 cycles. Scripts 204-208 explored fractal modulators, temporal offsets, dynamic gates, causal gates, and temporal decay.
+
+| # | Result | Script | Score | Key Numbers |
+|---|--------|--------|-------|-------------|
+| T27 | **Sawtooth ARA gate: LOO MAE 37.66, −22.8% vs sine** | 203b | 15/25 | CASCADE=[φ¹¹,φ⁹,φ⁶,φ⁴], ACC_FRAC=0.618, 1/φ⁹ residual. 1/7 temporal splits |
+| T28 | Weierstrass-φ fractal modulator: LOO MAE 37.40, −23.3% | 204 | 18/25 | V1_d5 (depth=5). Marginal gain — 203b already captures ~60% of fractal tail |
+| T29 | Temporal offset diagnostic: rise_frac r=+0.748 | 205 | — | Best fixed offset −2yr (LOO 37.69). Mean rise frac=0.400 vs ARA ideal 0.618 |
+| T30 | Singularity read: best at −6yr, ratio to φ⁵ = 0.541 | 205b | — | LOO 38.06. None beat 203b. Rise frac correlation persists (r≈+0.79) |
+| T31 | Dynamic gate (present→present) FAILS — double-counting | 206 | — | All ~55 LOO (worse than sine). Cascade already encodes amplitude variation |
+| T32 | **Causal gate (past→present): LOO 38.82, 3/7 temporal splits** | 207 | **3/7** | prev_ara = peak_prev/base_amp, acc_frac = 1/(1+prev_ara). BEST extrapolation |
+| T33 | Temporal decay: one-step memory wins, averaging dilutes | 208 | — | All ~39.4 LOO. φ-weighted decay adds noise, not structure |
+
+**Key diagnostics:**
+- Waldmeier distortion (rise_frac r≈+0.82) persists across ALL experiments. This is the unsolved intra-cycle shape problem.
+- Causal gate (207 V1) trades slight interpolation MAE (38.82 vs 37.66) for dramatically better extrapolation (3/7 vs 1/7 temporal splits).
+- ARA→acc_frac natural mapping: acc_frac = 1/(1+ARA). When ARA=φ, acc=0.382. When ARA=1/φ, acc=0.618.
+- Sun's gate-setting is one-step memory — immediately preceding cycle carries most signal.
+
+**MAE progression (full 25-cycle LOO):**
+- 202: 51.30 → 203b: 37.66 (−22.8%) → 204: 37.40 (−23.3%) → 207 V1: 38.82 (−20.4%, but 3/7 splits)
 
 ---
 
