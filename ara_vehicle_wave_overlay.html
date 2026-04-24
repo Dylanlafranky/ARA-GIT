@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARA Vehicle Formula Overlay — Solar, ENSO, Sanriku EQ</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg2: #f5f5f3; --text: #1a1a1a; --text2: #666;
+    --border: rgba(0,0,0,0.12); --grid: rgba(0,0,0,0.06); --axis: rgba(0,0,0,0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a; --bg2: #2a2a2a; --text: #e8e8e8; --text2: #999;
+      --border: rgba(255,255,255,0.15); --grid: rgba(255,255,255,0.07); --axis: rgba(255,255,255,0.18);
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 1.5rem; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 0.25rem; }
+  .subtitle { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 1rem; }
+  button { background: transparent; border: 1px solid var(--border); border-radius: 6px; padding: 6px 16px; font-size: 13px; color: var(--text); cursor: pointer; }
+  button:hover { background: var(--bg2); }
+  button:active { transform: scale(0.98); }
+  label { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  input[type="range"] { width: 100px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; font-size: 12px; color: var(--text2); }
+  .legend span { display: flex; align-items: center; gap: 4px; }
+  .canvas-wrap { position: relative; width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg); }
+  .canvas-wrap canvas { width: 100%; height: 100%; }
+  .params { margin-top: 1.25rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .param-card { background: var(--bg2); border-radius: 8px; padding: 12px; }
+  .param-card .sys { font-size: 11px; font-weight: 500; margin-bottom: 4px; }
+  .param-card .line { font-size: 13px; color: var(--text); }
+  .dash { margin-top: 1rem; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .dash-card { background: var(--bg2); border-radius: 8px; padding: 12px; text-align: center; }
+  .dash-card .lbl { font-size: 11px; color: var(--text2); }
+  .dash-card .val { font-size: 20px; font-weight: 500; margin-top: 4px; }
+  @media (max-width: 600px) {
+    .params { grid-template-columns: 1fr; }
+    .dash { grid-template-columns: repeat(2, 1fr); }
+    .canvas-wrap { height: 300px; }
+  }
+</style>
+</head>
+<body>
+
+<h1>ARA vehicle formula overlay</h1>
+<p class="subtitle">Actual data (solid) vs vehicle sawtooth formula (dashed) for three systems on golden-ratio rungs</p>
+
+<div class="controls">
+  <button id="playBtn">Play</button>
+  <button id="resetBtn">Reset</button>
+  <label>Speed <input type="range" id="speed" min="1" max="10" value="4" step="1" style="width: 90px;" /></label>
+  <span id="speedVal" style="font-size: 13px; min-width: 16px; color: var(--text2);">4</span>
+</div>
+
+<div class="controls">
+  <span style="font-size: 13px; color: var(--text2);">Systems:</span>
+  <label><input type="checkbox" id="togSolar" checked /> Solar</label>
+  <label><input type="checkbox" id="togENSO" checked /> ENSO</label>
+  <label><input type="checkbox" id="togEQ" checked /> Sanriku EQ</label>
+  <span style="font-size: 13px; color: var(--text2); margin-left: 8px;">Layers:</span>
+  <label><input type="checkbox" id="togData" checked /> Actual data</label>
+  <label><input type="checkbox" id="togVehicle" checked /> Vehicle formula</label>
+</div>
+
+<div class="legend">
+  <span><span style="width: 16px; height: 2px; background: #378ADD; display: inline-block;"></span> Solar actual</span>
+  <span><span style="width: 16px; height: 0; border-top: 2px dashed #378ADD; display: inline-block;"></span> Solar vehicle</span>
+  <span><span style="width: 16px; height: 2px; background: #1D9E75; display: inline-block;"></span> ENSO actual</span>
+  <span><span style="width: 16px; height: 0; border-top: 2px dashed #1D9E75; display: inline-block;"></span> ENSO vehicle</span>
+  <span><span style="width: 16px; height: 2px; background: #D85A30; display: inline-block;"></span> EQ actual</span>
+  <span><span style="width: 16px; height: 0; border-top: 2px dashed #D85A30; display: inline-block;"></span> EQ vehicle</span>
+  <span><span style="width: 2px; height: 14px; background: #E24B4A; display: inline-block;"></span> Time cursor</span>
+</div>
+
+<div class="canvas-wrap">
+  <canvas id="mainCanvas"></canvas>
+</div>
+
+<div class="params">
+  <div class="param-card">
+    <div class="sys" style="color: #378ADD;">Solar</div>
+    <div class="line">Rung: <b>phi^5</b> = 11.09 yr</div>
+    <div class="line">ARA: <b>1.0</b> (shock absorber)</div>
+    <div class="line">Acc: <b>50%</b> fill / 50% release</div>
+  </div>
+  <div class="param-card">
+    <div class="sys" style="color: #1D9E75;">ENSO</div>
+    <div class="line">Rung: <b>phi^3</b> = 4.24 yr</div>
+    <div class="line">ARA: <b>0.408</b></div>
+    <div class="line">Acc: <b>71%</b> fill / 29% release</div>
+  </div>
+  <div class="param-card">
+    <div class="sys" style="color: #D85A30;">Sanriku EQ</div>
+    <div class="line">Rung: <b>phi^4</b> = 6.85 yr</div>
+    <div class="line">ARA: <b>0.15</b> (consumer)</div>
+    <div class="line">Acc: <b>87%</b> fill / 13% release</div>
+  </div>
+</div>
+
+<div class="dash">
+  <div class="dash-card">
+    <div class="lbl">Current time</div>
+    <div class="val" id="curYear">1950.0</div>
+  </div>
+  <div class="dash-card">
+    <div class="lbl" style="color: #378ADD;">Solar phase</div>
+    <div class="val" id="solPhase">&mdash;</div>
+  </div>
+  <div class="dash-card">
+    <div class="lbl" style="color: #1D9E75;">ENSO phase</div>
+    <div class="val" id="ensoPhase">&mdash;</div>
+  </div>
+  <div class="dash-card">
+    <div class="lbl" style="color: #D85A30;">EQ phase</div>
+    <div class="val" id="eqPhase">&mdash;</div>
+  </div>
+</div>
+
+<script>
+(function(){
+var PHI = (1 + Math.sqrt(5)) / 2;
+var T_MIN = 1950, T_MAX = 2030;
+
+var solarCycles = [
+  [1755.2,144],[1766.5,193],[1775.5,264],[1784.7,235],[1798.3,141],
+  [1810.6,106],[1823.3,155],[1833.9,210],[1843.5,139],[1855.8,188],
+  [1867.2,234],[1878.9,124],[1890.3,146],[1902.0,108],[1913.6,180],
+  [1923.6,178],[1933.8,175],[1944.2,269],[1954.3,285],[1964.9,157],
+  [1976.5,232],[1986.8,213],[1996.4,174],[2008.0,116],[2019.7,146]
+];
+var ensoEvents = [
+  [1951.9,1.2],[1953.2,0.6],[1957.8,1.7],[1963.8,1.1],[1965.4,1.4],
+  [1968.9,1.0],[1972.8,2.0],[1976.7,0.8],[1977.7,0.8],[1979.7,0.6],
+  [1982.8,2.1],[1986.9,1.5],[1991.6,1.6],[1994.8,1.2],[1997.8,2.3],
+  [2002.8,1.3],[2004.7,0.7],[2006.8,0.9],[2009.7,1.5],[2015.0,2.6],
+  [2018.9,0.8],[2023.9,2.0],[2025.2,0.9]
+];
+var sanrikuEvents = [
+  [1896.46,8.5],[1933.17,8.4],[1938.88,7.7],[1968.42,7.9],
+  [1994.97,7.7],[2011.19,9.1],[2021.12,7.1],[2022.21,7.4],
+  [2025.94,7.6],[2026.30,7.5]
+];
+
+var SOLAR_PERIOD = Math.pow(PHI, 5);
+var ENSO_PERIOD = Math.pow(PHI, 3);
+var EQ_PERIOD = Math.pow(PHI, 4);
+var SOLAR_ARA = 1.0;
+var ENSO_ARA = 0.408;
+var EQ_ARA = 0.15;
+
+function accFrac(ara) { return 1 / (1 + ara); }
+
+function buildVehicleSawtooth(period, ara, tRef, tMin, tMax, step) {
+  var af = accFrac(ara);
+  var snapInterval = period * af;
+  var firstSnap = tRef;
+  while (firstSnap - snapInterval > tMin - period * 2) firstSnap -= snapInterval;
+  var snaps = [];
+  var t = firstSnap;
+  while (t <= tMax + period) { snaps.push(t); t += snapInterval; }
+  var pts = [];
+  for (var tt = tMin; tt <= tMax; tt += step) {
+    var bestSnap = snaps[0], bestNext = snaps[1] || snaps[0] + snapInterval;
+    for (var i = 0; i < snaps.length - 1; i++) {
+      if (snaps[i] <= tt && snaps[i+1] > tt) {
+        bestSnap = snaps[i]; bestNext = snaps[i+1]; break;
+      }
+    }
+    var frac = (tt - bestSnap) / (bestNext - bestSnap);
+    frac = Math.max(0, Math.min(1, frac));
+    pts.push([tt, frac * 2 - 1]);
+  }
+  return { pts: pts, snaps: snaps.filter(function(s){return s>=tMin && s<=tMax;}) };
+}
+
+function buildDataWave(events, period, tMin, tMax, step) {
+  var pts = [];
+  for (var t = tMin; t <= tMax; t += step) {
+    var val = 0;
+    for (var i = 0; i < events.length; i++) {
+      var et = events[i][0], ea = events[i][1];
+      var dt = t - et;
+      if (dt >= 0 && dt < period * 2) {
+        var phase = (dt / period) * 2 * Math.PI;
+        var envelope = Math.exp(-dt / (period * 0.7));
+        val += ea * Math.sin(phase) * envelope;
+      }
+    }
+    pts.push([t, val]);
+  }
+  var mx = 0;
+  for (var i = 0; i < pts.length; i++) mx = Math.max(mx, Math.abs(pts[i][1]));
+  if (mx > 0) for (var i = 0; i < pts.length; i++) pts[i][1] /= mx;
+  return pts;
+}
+
+var solarData = buildDataWave(solarCycles.filter(function(e){return e[0]>=T_MIN-15;}), SOLAR_PERIOD, T_MIN, T_MAX, 0.15);
+var ensoData = buildDataWave(ensoEvents, ENSO_PERIOD, T_MIN, T_MAX, 0.15);
+var eqData = buildDataWave(sanrikuEvents.filter(function(e){return e[0]>=T_MIN-40;}), EQ_PERIOD, T_MIN, T_MAX, 0.15);
+
+var solarVehicle = buildVehicleSawtooth(SOLAR_PERIOD, SOLAR_ARA, 1954.3, T_MIN, T_MAX, 0.15);
+var ensoVehicle = buildVehicleSawtooth(ENSO_PERIOD, ENSO_ARA, 1951.9, T_MIN, T_MAX, 0.15);
+var eqVehicle = buildVehicleSawtooth(EQ_PERIOD, EQ_ARA, 1968.42, T_MIN, T_MAX, 0.15);
+
+var canvas = document.getElementById('mainCanvas');
+var dpr = window.devicePixelRatio || 1;
+var COLORS = { solar: '#378ADD', enso: '#1D9E75', eq: '#D85A30' };
+
+function sizeCanvas() {
+  var rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+}
+sizeCanvas();
+window.addEventListener('resize', function(){ sizeCanvas(); drawFrame(); });
+
+var state = {
+  t: T_MIN, playing: false, timer: null,
+  showSolar: true, showENSO: true, showEQ: true,
+  showData: true, showVehicle: true
+};
+
+var padL = 50, padR = 16, padT = 20, padB = 28;
+
+function px(t) {
+  var w = canvas.width / dpr;
+  return padL + (t - T_MIN) / (T_MAX - T_MIN) * (w - padL - padR);
+}
+function py(v, band, bandCount) {
+  var h = canvas.height / dpr;
+  var plotH = h - padT - padB;
+  var bandH = plotH / bandCount;
+  var mid = padT + band * bandH + bandH / 2;
+  return mid - v * (bandH * 0.42);
+}
+
+function drawFrame() {
+  var isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var textColor = isDark ? 'rgba(255,255,255,0.65)' : 'rgba(0,0,0,0.5)';
+  var gridColor = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+  var axisColor = isDark ? 'rgba(255,255,255,0.18)' : 'rgba(0,0,0,0.12)';
+
+  var c = canvas.getContext('2d');
+  var w = canvas.width / dpr, h = canvas.height / dpr;
+  var plotH = h - padT - padB;
+  c.setTransform(dpr, 0, 0, dpr, 0, 0);
+  c.clearRect(0, 0, w, h);
+
+  var bands = [];
+  if (state.showSolar) bands.push('solar');
+  if (state.showENSO) bands.push('enso');
+  if (state.showEQ) bands.push('eq');
+  var nBands = bands.length || 1;
+
+  c.strokeStyle = axisColor; c.lineWidth = 0.5;
+  for (var yr = 1950; yr <= 2030; yr += 10) {
+    var x = px(yr);
+    c.beginPath(); c.moveTo(x, padT); c.lineTo(x, h - padB); c.stroke();
+    c.fillStyle = textColor; c.font = '11px -apple-system, BlinkMacSystemFont, sans-serif'; c.textAlign = 'center';
+    c.fillText(yr, x, h - padB + 14);
+  }
+
+  for (var bi = 0; bi < bands.length; bi++) {
+    var bandH = plotH / nBands;
+    var bandTop = padT + bi * bandH;
+    var bandMid = bandTop + bandH / 2;
+
+    c.strokeStyle = gridColor; c.lineWidth = 0.5;
+    if (bi > 0) { c.beginPath(); c.moveTo(padL, bandTop); c.lineTo(w - padR, bandTop); c.stroke(); }
+    c.setLineDash([3, 3]);
+    c.beginPath(); c.moveTo(padL, bandMid); c.lineTo(w - padR, bandMid); c.stroke();
+    c.setLineDash([]);
+
+    var label = bands[bi] === 'solar' ? 'Solar (phi^5 = 11.09yr)' : bands[bi] === 'enso' ? 'ENSO (phi^3 = 4.24yr)' : 'Sanriku EQ (phi^4 = 6.85yr)';
+    var col = COLORS[bands[bi]];
+    c.fillStyle = col; c.globalAlpha = 0.8;
+    c.font = '500 12px -apple-system, BlinkMacSystemFont, sans-serif'; c.textAlign = 'left';
+    c.fillText(label, padL + 6, bandTop + 14);
+    c.globalAlpha = 1;
+
+    var dataPts, vehicleObj, events;
+    if (bands[bi] === 'solar') { dataPts = solarData; vehicleObj = solarVehicle; events = solarCycles.filter(function(e){return e[0]>=T_MIN;}); }
+    else if (bands[bi] === 'enso') { dataPts = ensoData; vehicleObj = ensoVehicle; events = ensoEvents; }
+    else { dataPts = eqData; vehicleObj = eqVehicle; events = sanrikuEvents.filter(function(e){return e[0]>=T_MIN;}); }
+
+    if (state.showData) {
+      c.strokeStyle = col; c.lineWidth = 2; c.globalAlpha = 0.85;
+      c.beginPath();
+      var started = false;
+      for (var i = 0; i < dataPts.length; i++) {
+        if (dataPts[i][0] > state.t + 0.3) break;
+        var x2 = px(dataPts[i][0]), y2 = py(dataPts[i][1], bi, nBands);
+        if (!started) { c.moveTo(x2, y2); started = true; } else c.lineTo(x2, y2);
+      }
+      c.stroke(); c.globalAlpha = 1;
+
+      for (var i = 0; i < events.length; i++) {
+        var et = events[i][0];
+        if (et < T_MIN || et > state.t) continue;
+        c.fillStyle = col; c.globalAlpha = 0.6;
+        c.beginPath(); c.arc(px(et), py(0, bi, nBands) + bandH * 0.38, 3.5, 0, Math.PI * 2); c.fill();
+        c.globalAlpha = 1;
+      }
+    }
+
+    if (state.showVehicle) {
+      var vpts = vehicleObj.pts;
+      c.strokeStyle = col; c.lineWidth = 1.8; c.globalAlpha = 0.55;
+      c.setLineDash([6, 4]);
+      c.beginPath();
+      var started2 = false;
+      for (var i = 0; i < vpts.length; i++) {
+        if (vpts[i][0] > state.t + 0.3) break;
+        var x3 = px(vpts[i][0]), y3 = py(vpts[i][1], bi, nBands);
+        if (!started2) { c.moveTo(x3, y3); started2 = true; } else c.lineTo(x3, y3);
+      }
+      c.stroke(); c.setLineDash([]); c.globalAlpha = 1;
+
+      for (var i = 0; i < vehicleObj.snaps.length; i++) {
+        if (vehicleObj.snaps[i] > state.t) break;
+        var sx = px(vehicleObj.snaps[i]);
+        c.strokeStyle = col; c.lineWidth = 1.5; c.globalAlpha = 0.35;
+        c.beginPath(); c.moveTo(sx, bandTop + 4); c.lineTo(sx, bandTop + bandH - 4); c.stroke();
+        c.globalAlpha = 1;
+        c.fillStyle = col; c.globalAlpha = 0.7;
+        c.beginPath(); c.moveTo(sx, bandTop + 4); c.lineTo(sx - 4, bandTop + 11); c.lineTo(sx + 4, bandTop + 11); c.closePath(); c.fill();
+        c.globalAlpha = 1;
+      }
+    }
+  }
+
+  if (state.t > T_MIN) {
+    var cx = px(state.t);
+    c.strokeStyle = '#E24B4A'; c.lineWidth = 2.5;
+    c.beginPath(); c.moveTo(cx, padT); c.lineTo(cx, h - padB); c.stroke();
+    c.fillStyle = '#E24B4A'; c.font = '500 12px -apple-system, BlinkMacSystemFont, sans-serif'; c.textAlign = 'center';
+    c.fillText(state.t.toFixed(1), cx, padT - 5);
+  }
+}
+
+function getPhaseStr(vehicleObj, t) {
+  var snaps = vehicleObj.snaps;
+  var lastS = null, nextS = null;
+  for (var i = 0; i < snaps.length; i++) {
+    if (snaps[i] <= t) lastS = snaps[i];
+    if (snaps[i] > t && nextS === null) nextS = snaps[i];
+  }
+  if (lastS !== null && nextS !== null) return Math.round((t - lastS) / (nextS - lastS) * 100) + '%';
+  return '\u2014';
+}
+
+function updateDash() {
+  document.getElementById('curYear').textContent = state.t.toFixed(1);
+  document.getElementById('solPhase').textContent = state.showSolar ? getPhaseStr(solarVehicle, state.t) : '\u2014';
+  document.getElementById('ensoPhase').textContent = state.showENSO ? getPhaseStr(ensoVehicle, state.t) : '\u2014';
+  document.getElementById('eqPhase').textContent = state.showEQ ? getPhaseStr(eqVehicle, state.t) : '\u2014';
+}
+
+function step() {
+  var spd = parseInt(document.getElementById('speed').value);
+  state.t += spd * 0.08;
+  if (state.t >= T_MAX) { state.t = T_MAX; stopAnim(); }
+  drawFrame(); updateDash();
+}
+function startAnim() { state.playing = true; document.getElementById('playBtn').textContent = 'Pause'; state.timer = setInterval(step, 30); }
+function stopAnim() { state.playing = false; document.getElementById('playBtn').textContent = 'Play'; if (state.timer) { clearInterval(state.timer); state.timer = null; } }
+function resetAnim() { stopAnim(); state.t = T_MIN; drawFrame(); updateDash(); }
+
+document.getElementById('playBtn').addEventListener('click', function(){
+  if (state.playing) stopAnim();
+  else { if (state.t >= T_MAX) resetAnim(); startAnim(); }
+});
+document.getElementById('resetBtn').addEventListener('click', resetAnim);
+document.getElementById('speed').addEventListener('input', function(){ document.getElementById('speedVal').textContent = this.value; });
+document.getElementById('togSolar').addEventListener('change', function(){ state.showSolar = this.checked; drawFrame(); updateDash(); });
+document.getElementById('togENSO').addEventListener('change', function(){ state.showENSO = this.checked; drawFrame(); updateDash(); });
+document.getElementById('togEQ').addEventListener('change', function(){ state.showEQ = this.checked; drawFrame(); updateDash(); });
+document.getElementById('togData').addEventListener('change', function(){ state.showData = this.checked; drawFrame(); });
+document.getElementById('togVehicle').addEventListener('change', function(){ state.showVehicle = this.checked; drawFrame(); });
+
+drawFrame(); updateDash();
+})();
+</script>
+
+</body>
+</html>
