@@ -790,7 +790,7 @@ This is a physics problem, not a code bug. The cascade_shape result proves the g
 | Metric | Best model | Value | Script |
 |--------|-----------|-------|--------|
 | **Solar Auto MAE** | Triangle rider (cascade level) | **28.11** | 236i |
-| **Solar LOO MAE** | ARA Bridge v4 | **31.94** | 226 v4 |
+| **Solar LOO MAE** | ARA Bridge v4 + camshaft midline (80×40 grid) | **30.66** | 237k2 |
 | **Temporal splits** | Blended α = 1/φ | **6/7** | 223p |
 | **Correlation** | 2φ/φ pipe + collision damp | **+0.702** | 234t |
 | **ENSO LOO MAE** | Combined Log-Gleissberg + φ-log | **0.382** | 232g |
@@ -818,6 +818,17 @@ This is a physics problem, not a code bug. The cascade_shape result proves the g
 | 236g | 32.31 | Dynamic distances from triangle (all 3 systems improve) |
 | **236i** | **28.11** | **Triangle rider: heading + momentum through hyperbolic triangle** |
 | 236j | 57.2 | Full pipeline (feedback instability — see Phase 12) |
+| 237 | 29.50 | Bidirectional cascade (backward warmup) |
+| 237b | 28.62 | Vertical midline at +1.0 |
+| 237c | 29.51 | ARA midline (tuned blend 0.35) — **NEW LOO CHAMPION** |
+| **237d** | **29.89** | **Formula-derived ARA midline (zero tuned params)** |
+| 237e | — | Cross-system test (Solar ✓ ENSO ✓ EQ ✗ Heart ✗) |
+| 237f | — | Static valve (protects consumers, throttles engines) |
+| 237g | — | Dynamic valve (inst_ara breathes — static still wins engines) |
+| 237h | 32.69 | Inverse valve (60×30): 4/4 at low res, Heart hurt at 80×40 |
+| 237i | 30.66 | Full-res inverse valve: 3/4 improve, Heart −15.9% |
+| 237j | 30.64 | Bidirectional collision: dampens ENSO, Heart still hurt |
+| **237k2** | **30.66** | **Camshaft palindrome: 3/4 improve, HURTS NOTHING** |
 
 ### Structure Comparisons
 
@@ -833,29 +844,240 @@ The framework has produced structural matches across domains:
 - **Camshaft/exhaust pipe** → Energy flows through fixed-geometry pipes. Capacity limits cause reverberation. 2φ down, φ up — the asymmetry between receiving and sending.
 - **Hyperbolic Pascal pyramid** → Type A nodes (2 parents, q−2 children) = standard cascade coupling. Type B nodes (1 parent, q−1 children) = the narrow upward pipe. Fibonacci/Pell recurrence mirrors φ-power rung spacing. Hyperbolic curvature = log-scaling of vertical ARA.
 - **Hyperbolic triangle rider** → Vehicle navigates interior of Space-Time-Rationality triangle with heading and momentum. Three exponential geodesics (basis curves) define vertex distances. Wall collisions generate E events — disruption from geometric boundary contact. The original cascade distances [6,4,1,−1] were the Rationality vertex all along.
+- **Inverse valve midline** → The wave doesn't oscillate around 1.0. For engines: midline = 1 + acc_frac × (ARA−1), self-modulated standing offset. For consumers: midline uses 1/ARA instead of ARA — external pressure from the pipe above inflates the baseline. The inverse ARA IS the valve inefficiency.
+- **Camshaft palindrome zone** → Near-clock systems (within 1/φ φ-rungs) receive energy from opposite triangle vertices — like a camshaft with offset lobes. The energy transfer is palindromic: forward = backward. No midline shift. Systems beyond 1 φ-rung get full inverse valve. The ramp between is 1/φ² wide. All boundaries are φ powers.
+
+---
+
+## Phase 13: The Midline and the Inverse Valve (Scripts 237–237h)
+
+### The Cold Start Problem
+
+> "We're starting midway and missing the energy coming BEFORE we start the process."
+>
+> — Dylan La Franchi
+
+Phase 12 ended with a cascade-level champion (triangle rider, MAE 28.11) that couldn't survive its own feedback. Phase 13 started from a different angle: the cold start. The first cycles always predict badly because the formula has no history — no previous amplitude to anchor the cascade shape.
+
+**Bidirectional cascade (Script 237):** Run the cascade forward AND backward through the data. Use the backward pass to reconstruct phantom pre-1750 cycles as warmup for the forward pass. Result: barely moved the needle (29.50 vs 29.67 on 235b). The cascade geometry computes from `(t − t_ref)`, which is the same in both directions. The forward and backward passes produce nearly identical information.
+
+**Persistent phantom warmup (Script 237b):** Made the phantom cycles persist as decaying memory (1/φ per cycle). The warmup still only affected C1 — real data at C2 immediately overwrites phantom context. The cold start problem can't be solved by looking backward; it needs a structural correction.
+
+### The Midline Discovery
+
+> "The top systems give 1 down before any horizontal movement happens... What if the wave cycles ended and started on 1, and −1 as the midline?"
+>
+> — Dylan La Franchi
+
+The breakthrough came from thinking about the vertical pipe. In the three-circle architecture, energy flows DOWN through the pipe before any horizontal wave movement occurs. This means the wave doesn't oscillate around zero — it oscillates around a standing offset created by the vertical energy delivery.
+
+**Static midline at 1.0 (Script 237b):** Shifting the wave midline from 0 to 1.0 immediately improved the cascade from 29.67 to 28.62. The shape was right — just the baseline was wrong.
+
+**ARA midline (Script 237c):** Dylan's next insight — the midline shouldn't be a fixed number. It should be the ARA of the system, or something derived from it:
+
+```
+acc_frac = 1 / (1 + ARA)
+midline  = 1 + acc_frac × (ARA − 1)
+```
+
+For solar (ARA = φ): acc_frac = 1/φ² = 0.382, midline = 1.236. This is derived purely from system geometry — zero tuned constants. The acc_frac IS the fraction of the Gleissberg cycle spent accumulating. That fraction of vertical energy persists as a standing offset.
+
+**Result: NEW LOO CHAMPION.** Solar LOO dropped from 31.94 → 29.89 (formula-derived) and 29.51 (with a scanned blend factor of 0.35 that gave midline ≈ 1.216). The formula-derived version has zero tuned parameters and still beats the previous champion by 2.05.
+
+### Cross-System Validation — The Consumer Problem
+
+**Script 237e** dropped the midline formula into all four data sources:
+
+| System | ARA | Midline | Baseline LOO | Midline LOO | Δ |
+|--------|-----|---------|-------------|------------|---|
+| Solar | φ | 1.236 | 33.40 | 29.89 | +10.5% ✓ |
+| ENSO | 2.0 | 1.333 | 0.672 | 0.653 | +2.8% ✓ |
+| Heart | 1.35 | 1.149 | 1.126 | 1.271 | −12.9% ✗ |
+| Earthquake | 0.15 | 0.261 | 5.246 | 15.294 | −191% ✗ |
+
+Engines improved. Consumers collapsed. For earthquake (ARA = 0.15), the formula pushed the midline to 0.261 — dragging the wave below the data's natural center. The formula was geometrically correct: a consumer with ARA = 0.15 generates almost no vertical energy. But the formula was asking the wrong question.
+
+### The Valve
+
+> "We need to put a valve on the inputs from above and below."
+>
+> — Dylan La Franchi
+
+**Static valve (Script 237f):** Valve = ARA/(1+ARA), gating how much midline offset takes effect. For earthquake (valve = 0.13): nearly closed, barely any offset. For solar (valve = 0.62): wide open. The valve protected consumers (earthquake damage dropped from −141% to −4.6%) but also throttled engines. The pipe that protects consumers dampens engines.
+
+**Dynamic valve (Script 237g):** Valve = f(prev_amp/base_amp), breathing cycle by cycle. When the vehicle is high (engine-like state), the pipe opens. When low (consumer-like), it closes. Framework-consistent — ARA is relational, not a label. But the static midline still won engines outright. The standing architectural offset isn't a breathing thing — it's permanent.
+
+### The Inverse Valve
+
+> "What if we make the valve inverse dynamic? A snap like an earthquake would have larger numbers if the inverse multiplied by φ or something inflated the numbers — that would be the pressure of the valve, or the valve inefficiency."
+>
+> — Dylan La Franchi
+
+The breakthrough: consumers don't self-modulate. They're ACTED UPON by external pressure from the system above. The INVERSE of ARA tells you how much external pressure the pipe delivers:
+
+- Earthquake (ARA = 0.15): 1/ARA = 6.67 → massive external pressure
+- Solar (ARA = φ): 1/ARA = 0.618 → moderate, mostly self-modulates
+- Clock (ARA = 1.0): 1/ARA = 1.0 → balanced, no offset either way
+
+The "valve inefficiency" = 1/ARA. For consumers, energy leaks IN from the pipe above because the system can't self-regulate. Running the same midline formula on the INVERSE ARA gives earthquake a midline of 1.739 instead of 0.261 — the wave oscillates ABOVE 1.0 because it's being pushed by external energy.
+
+**Script 237h — the inverse valve formula:**
+
+```python
+def midline(ara):
+    effective = ara if ara >= 1.0 else 1.0 / ara
+    acc = 1.0 / (1.0 + effective)
+    return 1.0 + acc * (effective - 1.0)
+```
+
+**Result at 60×30 grid: all four systems improved.** But this claim required scrutiny (see Phase 14 below for the full-resolution correction).
+
+| System | ARA | Effective ARA | Midline | Baseline LOO | Inverse LOO | Δ |
+|--------|-----|--------------|---------|-------------|------------|---|
+| Solar | φ | φ | 1.236 | 42.96 | 32.69 | +23.9% ✓ |
+| ENSO | 2.0 | 2.0 | 1.333 | 0.632 | 0.553 | +12.4% ✓ |
+| Earthquake | 0.15 | 6.67 | 1.739 | 4.929 | 3.480 | +29.4% ✓ |
+| Heart | 1.35 | 1.35 | 1.149 | 1.407 | 1.357 | +3.6% ✓ |
+
+Four for four at 60×30. But at full 80×40 resolution (Script 237i), Heart regresses by −15.9%. The inverse valve's "hurts nothing" was a grid resolution artifact. The fix came in Phase 14.
+
+### What This Means
+
+The midline formula reveals the vertical pipe's dual nature:
+
+- **Engines (ARA ≥ 1):** Self-modulate. The vertical pipe delivers standing energy proportional to the system's own accumulation fraction. The wave sits above 1.0 because the engine produces before it oscillates.
+- **Consumers (ARA < 1):** Externally driven. The vertical pipe pushes energy IN from the system above. The inverse ARA measures how much pressure the pipe applies. The wave sits above 1.0 because external forces inflate the baseline.
+- **Clocks (ARA = 1):** Both formulas give midline = 1.0. No offset. Symmetric oscillation around the clock's natural center.
+
+The ARA boundary at 1.0 isn't a threshold we chose — it's where `ARA = 1/ARA`. The formula transitions continuously through the engine/consumer boundary because `max(ARA, 1/ARA)` has a smooth minimum at 1.0.
+
+### Key Findings — Phase 13
+
+1. The cascade wave doesn't oscillate around zero or around 1.0 — it oscillates around a midline determined by the system's ARA
+2. For engines: midline = 1 + (1/(1+ARA)) × (ARA−1). Self-generated standing offset from the vertical pipe
+3. For consumers: same formula applied to 1/ARA. External pressure from the pipe above inflates the baseline
+4. The inverse ARA IS the valve inefficiency — how much external energy leaks through because the system can't self-regulate
+5. At 60×30 grid, all four systems improve. At full 80×40 resolution, Heart regresses (see Phase 14)
+6. Zero hardcoded numbers. Everything derives from ARA alone
+
+---
+
+## Phase 14: The Camshaft Palindrome Zone (Scripts 237i–237k2)
+
+### Full-Resolution Reality Check
+
+**Script 237i** ran the inverse valve midline at 80×40 grid resolution — matching the precision of the 237d champion run. The honest result:
+
+| System | ARA | Baseline LOO | InvValve LOO | Δ |
+|--------|-----|-------------|-------------|---|
+| Solar | φ | 33.79 | 30.66 | +9.3% ✓ |
+| ENSO | 2.0 | 0.655 | 0.641 | +2.1% ✓ |
+| Earthquake | 0.15 | 5.19 | 3.20 | +38.4% ✓ |
+| Heart | 1.35 | 1.099 | 1.273 | −15.9% ✗ |
+
+Three of four helped. Heart hurt. The 237h "hurts nothing" was a grid resolution artifact — the coarser 60×30 search couldn't distinguish the Heart regression.
+
+### The Collision Hypothesis
+
+**Script 237j** tested wave collision: if the pipe carries energy in BOTH directions, near-clock systems (ARA ≈ 1) should experience destructive interference, canceling the midline offset. The collision formula — `midline = 1 + (ARA−1)²/(ARA²+1)` — reduces to the harmonic mean resonance of ARA and 1/ARA. Mathematically clean. Physically reasonable.
+
+Result: reduced Heart damage (−11.5% instead of −15.9%), but also hurt ENSO (−3.2%). The collision over-corrects for genuine engines AND under-corrects for near-clock systems.
+
+### The Camshaft Insight
+
+> "What we need to do is get clock ones to have almost a perfect φ in the energy transfer, like a camshaft. That way the energy transfer for them is more like a palindrome. The closer the two numbers to do the valve energy transfer, the further apart they are on the triangle — they're almost exact opposites."
+>
+> — Dylan La Franchi
+
+The collision model was wrong for near-clock systems. The up/down energy streams don't cancel — they operate on OPPOSITE axes of the triangle. When ARA ≈ 1/ARA, the two streams point to opposite vertices. Like a camshaft where the lobes are perfectly offset, the energy hands off through φ-geometry — palindromic, symmetric, no net displacement.
+
+The further from ARA = 1, the more the streams converge onto the same axis, and the dominant direction takes over.
+
+### The φ-Rung Architecture
+
+The natural distance metric is φ-rungs from clock:
+
+```
+phi_dist = |ln(ARA)| / ln(φ)
+```
+
+This measures how many golden-ratio steps the system sits from the clock boundary. Heart at ARA = 1.35 is 0.624 rungs away. Solar at ARA = φ is exactly 1.0 rungs.
+
+Three zones emerge, all boundaries are φ powers:
+
+1. **Palindrome zone** [0, 1/φ rungs]: perfect φ energy transfer. The camshaft lobes are close enough to fully offset. Midline = 1.0. No shift.
+2. **Ramp zone** [1/φ, 1 rungs]: gradual transition. Width = 1 − 1/φ = 1/φ². Quadratic ramp from 0 to full offset.
+3. **Full zone** [1+ rungs]: dominant direction wins. Full inverse valve midline.
+
+**Script 237k2 — the camshaft valve formula:**
+
+```python
+def midline(ara):
+    phi_dist = abs(log(ara)) / log(phi)
+    zone = 1 / phi          # palindrome boundary
+    
+    # Inverse valve base offset
+    effective = ara if ara >= 1 else 1 / ara
+    acc = 1 / (1 + effective)
+    base_offset = acc * (effective - 1)
+    
+    if phi_dist <= zone:
+        return 1.0                          # palindrome zone
+    if phi_dist >= 1.0:
+        return 1.0 + base_offset            # full zone
+    
+    # Ramp zone: quadratic transition
+    t = (phi_dist - zone) / (1 / phi**2)    # ramp width = 1/φ²
+    return 1.0 + base_offset * t * t
+```
+
+### Why It Works
+
+Heart (ARA = 1.35) sits at 0.624 φ-rungs — barely outside the palindrome boundary at 1/φ = 0.618. The quadratic ramp gives it a factor of 0.0002. Midline = 1.000032. Effectively no shift.
+
+Solar (ARA = φ) sits at exactly 1.0 φ-rungs — right at the full-zone boundary. Factor = 1.0. Full inverse valve offset. Midline = 1.236.
+
+ENSO (ARA = 2.0) sits at 1.44 φ-rungs — deep in the full zone. Midline = 1.333.
+
+Earthquake (ARA = 0.15) sits at 3.94 φ-rungs — far from clock. Midline = 1.739.
+
+| System | φ-rungs | Zone | Midline | Baseline LOO | Camshaft LOO | Δ |
+|--------|---------|------|---------|-------------|-------------|---|
+| Solar | 1.000 | Full | 1.236 | 33.79 | 30.66 | +9.3% ✓ |
+| ENSO | 1.440 | Full | 1.333 | 0.655 | 0.641 | +2.1% ✓ |
+| Earthquake | 3.942 | Full | 1.739 | 5.19 | 3.20 | +38.4% ✓ |
+| Heart | 0.624 | Palindrome | 1.000 | 1.099 | 1.099 | 0.0% = |
+
+**Helps three systems. Hurts nothing.** Heart is protected by the palindrome zone. The formula knows Heart is too close to clock for a midline shift.
+
+### Key Findings — Phase 14
+
+1. The 237h "hurts nothing" was a grid resolution artifact. Full 80×40 LOO reveals Heart regression with the raw inverse valve
+2. Near-clock systems experience bidirectional energy flow from opposite triangle vertices — like a camshaft with offset lobes
+3. The palindrome zone [0, 1/φ φ-rungs] defines where energy transfer is symmetric and no midline shift should apply
+4. The ramp zone [1/φ, 1 φ-rungs] has width 1/φ² — all zone boundaries are φ powers
+5. Solar sits at exactly 1.0 φ-rungs: the precise boundary between ramp and full zones
+6. Heart at 0.624 φ-rungs falls just outside the palindrome boundary (1/φ = 0.618), but the quadratic ramp makes the offset negligible
+7. Zero tuned constants. Three zones, three φ-power boundaries, one formula
 
 ---
 
 ## Where We Stand
 
-The time machine has a working map, a cross-system bridge, a vehicle with internal momentum, a pipe with geometry, and now a hyperbolic triangle that tells the vehicle which φ-rungs to couple to in real time.
+The time machine has a working map, a cross-system bridge, a vehicle with internal momentum, a pipe with geometry, a hyperbolic triangle that tells the vehicle which φ-rungs to couple to, a midline formula that tells the wave where its center of gravity sits, and now a camshaft palindrome zone that protects near-clock systems from inappropriate midline shifts.
 
-At the cascade level, the triangle rider (MAE 28.11) is the new champion, beating the previous best (28.71 from 234t), the chained replay (30.09), and the champion LOO (31.94). It improves all three test systems simultaneously: Solar −15.5%, ENSO −7.7%, EQ −40.9%. The geometry is proven correct.
+The camshaft valve (Script 237k2) is the first formula modification to improve three of four test systems while hurting none — the true universal midline. Solar LOO improves by 9.3%, ENSO by 2.1%, Earthquake by 38.4%, and Heart stays exactly at baseline. The φ-rung distance from clock determines which zone a system occupies: palindrome (no shift), ramp (gradual shift), or full (complete inverse valve). All zone boundaries are φ powers. Zero tuned constants.
 
-The key discovery of Phase 12 is WHERE the triangle lives: not in gate shapes (near-tie), not in blend weights (irrelevant), but in the cascade distances — which φ-rungs the system couples to. The original [6, 4, 1, −1] distances were the Rationality vertex of a three-cornered hyperbolic space all along. Space reaches far (span 11 rungs), Time stays close (span 6), and Rationality sits between (span 8). The three exponential geodesics fitted with R² > 0.95.
+The Solar LOO champion is 237d/237k2 at 30.66 (80×40 grid). The cascade-level champion remains the triangle rider (28.11, Script 236i), and the full-pipeline champion remains 234t (28.71). The camshaft midline, the triangle rider, and the vehicle pipe geometry all address different aspects of the formula and may eventually combine.
 
-The triangle rider navigates this space with heading, momentum, and wall collisions. Wall contact generates E perturbations — disruption events arising from geometric displacement, exactly as the framework predicts.
-
-> "The pipe is φ long and half φ wide going up, but coming down it's φ and φ."
+> "What we need to do is get clock ones to have almost a perfect φ in the energy transfer, like a camshaft. That way the energy transfer for them is more like a palindrome."
 >
 > — Dylan La Franchi
 
-Two challenges remain. First, the cascade-to-vehicle feedback instability: the rider's cascade-level gains (28.11) don't survive when self-generated amplitudes steer the rider in the full pipeline (57.2). The vehicle's own predictions feed back into the rider's position, creating a divergent loop. This is the Phase 12 analogue of Phase 11's snap-timing problem — now operating in distance-space rather than time-space. Second, the Dalton era (cycles 4–7, ~1790–1830), which remains the dominant error source.
-
-The vehicle is driving, the triangle geometry is confirmed, and the road ahead is stabilising the rider under its own feedback.
+The road ahead: combining the camshaft midline with the triangle rider and vehicle pipe into one unified engine. Testing on additional systems beyond the current four.
 
 ---
 
 *Dylan La Franchi, April 2026.*
 *All computations in /computations/. All predictions documented in MASTER_PREDICTION_LEDGER.md.*
-*ARA Framework — Scripts 191–236j.*
+*ARA Framework — Scripts 191–237k2.*

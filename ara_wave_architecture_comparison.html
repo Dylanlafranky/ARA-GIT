@@ -1,0 +1,120 @@
+<h2 class="sr-only">Interactive comparison of 226 v4 and 235b ARA wave architectures against solar sunspot data from 1750 to 2030</h2>
+<div style="padding: 1rem 0;">
+<div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1rem;">
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; flex: 1; min-width: 140px;">
+    <div style="font-size: 13px; color: var(--color-text-secondary);">226 v4 MAE</div>
+    <div style="font-size: 24px; font-weight: 500;">27.17</div>
+  </div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; flex: 1; min-width: 140px;">
+    <div style="font-size: 13px; color: var(--color-text-secondary);">235b MAE</div>
+    <div style="font-size: 24px; font-weight: 500;">29.67</div>
+  </div>
+  <div style="background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; flex: 1; min-width: 140px;">
+    <div style="font-size: 13px; color: var(--color-text-secondary);">Shared t_ref</div>
+    <div style="font-size: 24px; font-weight: 500;">1777.6</div>
+  </div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 12px; font-size: 13px; color: var(--color-text-secondary); align-items: center;">
+  <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+    <input type="checkbox" id="chk226" checked> <span style="width: 10px; height: 10px; border-radius: 2px; background: #534AB7; display: inline-block;"></span> 226 v4 wave
+  </label>
+  <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+    <input type="checkbox" id="chk235" checked> <span style="width: 10px; height: 10px; border-radius: 2px; background: #1D9E75; display: inline-block;"></span> 235b wave
+  </label>
+  <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+    <input type="checkbox" id="chkSolar" checked> <span style="width: 10px; height: 3px; background: #E24B4A; display: inline-block;"></span><span style="width: 8px; height: 8px; border-radius: 50%; background: #E24B4A; display: inline-block;"></span> Solar peaks
+  </label>
+  <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+    <input type="checkbox" id="chkPred226"> <span style="width: 8px; height: 8px; border: 2px solid #534AB7; display: inline-block;"></span> 226 predictions
+  </label>
+  <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+    <input type="checkbox" id="chkPred235"> <span style="width: 8px; height: 8px; border: 2px solid #1D9E75; display: inline-block; transform: rotate(45deg);"></span> 235b predictions
+  </label>
+</div>
+
+<div style="position: relative; width: 100%; height: 360px;">
+  <canvas id="waveChart" role="img" aria-label="Wave comparison chart showing 226 v4 and 235b architecture predictions versus actual solar sunspot peaks from 1750 to 2030">Wave comparison of two ARA architectures against solar data.</canvas>
+</div>
+
+<div style="margin-top: 1.5rem;">
+  <div style="font-size: 14px; font-weight: 500; margin-bottom: 8px; color: var(--color-text-primary);">Gate values at peak times</div>
+  <div style="position: relative; width: 100%; height: 200px;">
+    <canvas id="gateChart" role="img" aria-label="Gate values for both architectures at each solar cycle peak">Gate values comparison between 226 v4 and 235b at each solar cycle.</canvas>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const T=[1750.0,1751.4,1752.8,1754.2,1755.61,1757.01,1758.41,1759.81,1761.21,1762.61,1764.01,1765.42,1766.82,1768.22,1769.62,1771.02,1772.42,1773.82,1775.23,1776.63,1778.03,1779.43,1780.83,1782.23,1783.63,1785.04,1786.44,1787.84,1789.24,1790.64,1792.04,1793.44,1794.84,1796.25,1797.65,1799.05,1800.45,1801.85,1803.25,1804.65,1806.06,1807.46,1808.86,1810.26,1811.66,1813.06,1814.46,1815.87,1817.27,1818.67,1820.07,1821.47,1822.87,1824.27,1825.68,1827.08,1828.48,1829.88,1831.28,1832.68,1834.08,1835.49,1836.89,1838.29,1839.69,1841.09,1842.49,1843.89,1845.3,1846.7,1848.1,1849.5,1850.9,1852.3,1853.7,1855.11,1856.51,1857.91,1859.31,1860.71,1862.11,1863.51,1864.91,1866.32,1867.72,1869.12,1870.52,1871.92,1873.32,1874.72,1876.13,1877.53,1878.93,1880.33,1881.73,1883.13,1884.53,1885.94,1887.34,1888.74,1890.14,1891.54,1892.94,1894.34,1895.75,1897.15,1898.55,1899.95,1901.35,1902.75,1904.15,1905.56,1906.96,1908.36,1909.76,1911.16,1912.56,1913.96,1915.37,1916.77,1918.17,1919.57,1920.97,1922.37,1923.77,1925.18,1926.58,1927.98,1929.38,1930.78,1932.18,1933.58,1934.98,1936.39,1937.79,1939.19,1940.59,1941.99,1943.39,1944.79,1946.2,1947.6,1949.0,1950.4,1951.8,1953.2,1954.6,1956.01,1957.41,1958.81,1960.21,1961.61,1963.01,1964.41,1965.82,1967.22,1968.62,1970.02,1971.42,1972.82,1974.22,1975.63,1977.03,1978.43,1979.83,1981.23,1982.63,1984.03,1985.44,1986.84,1988.24,1989.64,1991.04,1992.44,1993.84,1995.25,1996.65,1998.05,1999.45,2000.85,2002.25,2003.65,2005.06,2006.46,2007.86,2009.26,2010.66,2012.06,2013.46,2014.86,2016.27,2017.67,2019.07,2020.47,2021.87,2023.27,2024.67,2026.08,2027.48,2028.88];
+const W226=[124.37,116.95,110.22,122.26,170.88,181.06,167.74,129.3,117.04,168.26,170.16,145.71,149.38,127.55,128.55,136.39,127.99,123.17,139.08,152.08,150.0,136.7,119.4,110.98,121.4,125.31,122.4,121.28,145.31,146.44,144.74,127.9,112.08,134.63,153.86,142.77,149.18,117.05,108.88,125.02,113.39,102.65,113.01,137.86,170.24,150.87,108.81,80.11,107.93,115.56,100.39,93.09,106.57,104.91,109.21,92.88,76.93,102.25,149.71,153.37,156.29,115.17,93.54,116.32,117.51,109.98,117.23,133.34,162.51,151.27,125.54,105.88,124.9,147.12,128.94,129.75,138.43,119.82,112.44,111.67,112.85,121.57,135.14,160.39,142.63,113.88,84.12,101.52,115.62,102.63,91.84,107.46,100.89,105.15,97.49,76.71,98.27,128.76,122.67,128.11,97.15,73.19,93.51,95.82,78.24,74.44,93.29,137.58,139.7,113.28,76.92,94.38,132.2,114.52,99.18,111.92,104.49,122.46,122.21,105.91,107.56,137.75,150.69,166.18,139.61,110.78,119.72,130.7,123.32,130.7,132.8,151.24,139.98,127.79,115.03,116.73,138.78,145.05,140.4,146.86,121.25,121.2,118.68,103.43,104.95,135.47,165.3,182.18,141.22,78.68,79.34,123.21,110.98,95.0,89.3,102.32,108.42,103.97,84.53,82.15,132.45,156.4,165.08,132.05,91.8,98.96,125.22,118.23,114.59,128.28,169.11,171.87,154.65,122.96,116.17,156.99,160.13,142.39,148.73,125.99,122.48,125.61,119.97,119.84,128.37,135.1,155.64,138.4,116.32,109.12,124.9,125.6,117.93,113.69,134.17,135.4,135.97,118.04,100.58,127.47];
+const W235=[137.17,123.25,100.49,100.49,171.95,198.89,170.2,118.93,105.74,172.44,181.15,146.38,139.81,122.06,135.11,141.76,127.85,118.4,131.48,157.14,146.52,133.52,115.59,107.6,121.72,126.34,120.59,114.73,140.63,151.47,146.92,124.03,105.44,130.65,162.04,148.57,141.03,104.14,106.92,133.56,115.69,98.45,100.78,138.0,186.67,155.16,101.61,73.61,112.37,124.88,103.53,85.45,97.09,110.69,116.45,93.25,69.33,88.37,157.21,170.89,153.43,101.34,86.94,122.4,123.79,109.6,107.82,126.62,171.01,154.78,122.05,100.6,120.72,150.59,125.77,126.37,133.94,117.44,112.98,111.01,109.49,115.21,133.35,165.7,142.69,108.22,78.84,102.44,120.57,104.56,86.1,98.12,104.27,113.72,101.2,71.41,89.73,135.36,136.84,128.03,86.93,68.79,102.05,103.84,77.71,64.9,85.08,151.5,150.9,110.74,69.35,87.69,138.68,121.72,94.83,98.97,102.0,131.17,124.89,99.58,97.09,134.75,161.64,168.32,131.9,104.31,118.83,133.51,124.72,127.34,128.52,148.17,138.95,125.65,110.49,110.56,138.14,149.23,138.35,136.78,115.43,126.96,123.32,101.77,96.24,123.57,181.22,199.44,139.02,68.19,71.9,133.41,123.53,94.22,76.13,100.92,125.27,113.36,81.47,72.93,132.51,179.2,174.76,123.05,83.02,98.61,131.8,122.31,109.2,112.07,168.96,183.6,154.82,114.08,106.22,158.48,167.32,141.23,139.21,120.66,126.86,128.52,118.34,116.59,124.4,133.58,154.96,135.08,110.89,104.35,125.49,127.09,115.06,104.95,128.54,140.22,137.95,112.46,91.74,122.73];
+const PT=[1755.5,1766.0,1775.5,1784.5,1805.0,1816.0,1829.5,1837.0,1848.0,1860.0,1870.5,1883.5,1894.0,1906.0,1917.5,1928.5,1937.5,1947.5,1958.0,1968.5,1979.5,1989.5,2000.5,2014.0,2024.5];
+const PV=[86.5,115.8,158.5,141.2,49.2,48.7,71.7,146.9,131.9,97.9,140.5,74.6,87.9,64.2,105.4,78.1,119.2,151.8,201.3,110.6,164.5,158.5,120.8,113.3,144.0];
+const P226=[140.88,138.16,143.6,125.1,122.13,80.52,89.36,94.73,126.73,110.54,91.04,73.98,100.44,110.88,102.99,127.55,119.11,121.2,116.6,106.47,99.77,171.96,129.72,109.9,135.99];
+const P235=[144.3,134.66,138.44,125.85,128.99,73.63,73.79,88.53,123.91,110.49,86.11,68.48,107.87,111.21,95.97,131.02,115.0,125.0,106.92,121.14,87.81,184.4,121.92,105.15,137.71];
+const G226=[0.9751,0.8847,0.6047,0.2999,1.1223,1.025,1.3817,1.0807,0.6721,0.2567,0.5824,1.2268,1.2416,1.2134,0.9608,0.5755,0.2531,0.681,1.2208,1.2504,1.1935,0.8773,0.6524,0.3306,0.7056];
+const G235=[1.2361,0.88,0.6041,0.304,1.1372,1.0323,1.3914,1.0726,0.6708,0.2599,0.5888,1.2429,1.2532,1.2042,0.9544,0.5752,0.2556,0.6893,1.2374,1.244,1.1854,0.8739,0.6514,0.3347,0.714];
+
+const isDark=matchMedia('(prefers-color-scheme:dark)').matches;
+const gridC=isDark?'rgba(255,255,255,0.08)':'rgba(0,0,0,0.06)';
+const tickC=isDark?'rgba(255,255,255,0.5)':'rgba(0,0,0,0.5)';
+
+const solarScatter=PT.map((t,i)=>({x:t,y:PV[i]}));
+const pred226Scatter=PT.map((t,i)=>({x:t,y:P226[i]}));
+const pred235Scatter=PT.map((t,i)=>({x:t,y:P235[i]}));
+
+const waveChart=new Chart(document.getElementById('waveChart'),{
+  type:'line',
+  data:{
+    labels:T,
+    datasets:[
+      {label:'226 v4',data:W226,borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,0.08)',borderWidth:2,pointRadius:0,fill:false,tension:0.3,order:2},
+      {label:'235b',data:W235,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.08)',borderWidth:2,pointRadius:0,fill:false,tension:0.3,order:3},
+      {label:'Solar peaks',type:'scatter',data:solarScatter,borderColor:'#E24B4A',backgroundColor:'#E24B4A',pointRadius:5,pointStyle:'circle',showLine:true,borderWidth:1,order:1,
+        segment:{borderColor:'rgba(226,75,74,0.3)',borderWidth:1,borderDash:[4,4]}},
+      {label:'226 pred',type:'scatter',data:pred226Scatter,borderColor:'#534AB7',backgroundColor:'rgba(83,74,183,0.15)',pointRadius:4,pointStyle:'rectRot',borderWidth:2,showLine:false,order:0,hidden:true},
+      {label:'235b pred',type:'scatter',data:pred235Scatter,borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.15)',pointRadius:4,pointStyle:'triangle',borderWidth:2,showLine:false,order:0,hidden:true}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    animation:{duration:0},
+    plugins:{legend:{display:false},tooltip:{
+      callbacks:{label:function(ctx){return ctx.dataset.label+': '+Math.round(ctx.parsed.y)+' SSN'}}
+    }},
+    scales:{
+      x:{type:'linear',min:1750,max:2030,grid:{color:gridC},ticks:{color:tickC,stepSize:25,
+        callback:v=>Math.round(v)}},
+      y:{min:40,max:220,grid:{color:gridC},ticks:{color:tickC},title:{display:true,text:'SSN',color:tickC}}
+    }
+  }
+});
+
+document.getElementById('chk226').onchange=function(){waveChart.data.datasets[0].hidden=!this.checked;waveChart.update()};
+document.getElementById('chk235').onchange=function(){waveChart.data.datasets[1].hidden=!this.checked;waveChart.update()};
+document.getElementById('chkSolar').onchange=function(){waveChart.data.datasets[2].hidden=!this.checked;waveChart.update()};
+document.getElementById('chkPred226').onchange=function(){waveChart.data.datasets[3].hidden=!this.checked;waveChart.update()};
+document.getElementById('chkPred235').onchange=function(){waveChart.data.datasets[4].hidden=!this.checked;waveChart.update()};
+
+const gateChart=new Chart(document.getElementById('gateChart'),{
+  type:'bar',
+  data:{
+    labels:PT.map(t=>'C'+(PT.indexOf(t)+1)),
+    datasets:[
+      {label:'226 gate',data:G226,backgroundColor:'rgba(83,74,183,0.6)',borderColor:'#534AB7',borderWidth:1},
+      {label:'235b gate',data:G235,backgroundColor:'rgba(29,158,117,0.6)',borderColor:'#1D9E75',borderWidth:1}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    animation:{duration:0},
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{display:false},ticks:{color:tickC,font:{size:10},maxRotation:45}},
+      y:{min:0,max:1.5,grid:{color:gridC},ticks:{color:tickC},title:{display:true,text:'Gate',color:tickC}}
+    }
+  }
+});
+</script>
