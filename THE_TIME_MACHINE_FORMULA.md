@@ -2,7 +2,7 @@
 
 ## A Report on Building a Temporal Prediction Engine from Pure Geometry
 
-### Dylan La Franchi — ARA Framework, Scripts 191–243BF
+### Dylan La Franchi — ARA Framework, Scripts 191–243BJ
 ### April 2026
 
 ---
@@ -1080,9 +1080,11 @@ The road ahead: combining the camshaft midline with the triangle rider and vehic
 
 ## Phase 15 — The Peer-Review Ablation (Scripts 243AB-C through 243AG)
 
+> **DATASET CHANGE:** From Phase 15 onward, all scripts use **peak monthly SSN** (mean ~178, sine LOO 48.78). Phases 1-14 used **yearly-smoothed peak SSN** (mean ~115, sine LOO 32.98). The 1.55x difference means raw MAE cannot be compared across these phases. Use LOO/Sine ratio for cross-phase comparison: e.g. 226 v4 LOO 31.94 / sine 32.98 = 0.968 vs 243BF LOO 38.37 / sine 48.78 = 0.787.
+
 ### The Question
 
-The φ⁹ atom architecture (Script 243) evolved far from the 226 v4 champion that held the Solar LOO record (31.94). A peer reviewer identified four features present in 226 v4 but missing from the 243 line. Do any of them transfer?
+The φ⁹ atom architecture (Script 243) evolved far from the 226 v4 champion that held the Solar LOO record (31.94, on the earlier yearly-smoothed dataset). A peer reviewer identified four features present in 226 v4 but missing from the 243 line. Do any of them transfer?
 
 ### The Four Candidate Fixes
 
@@ -1273,19 +1275,47 @@ The stretch mostly helps near-mean cycles (C6 improved by 8.2, C7 by 4.6, C12 by
 
 ---
 
+## Phase 19 — Architecture Hardening (Scripts 243BG–243BJ)
+
+Peer review v15 flagged two breakthroughs from different sessions: the Phase 13 camshaft midline (inverse valve + palindrome zone) and the Phase 17 path×teleport blend. This phase tested whether they combine, and explored several approaches to the extreme-cycle compression problem.
+
+### Gate Inertia (243BG) — REJECTED
+
+Gemini suggested giving the Rationality cog "mass" — a lagged gate_ara that chases inst_ara with maximum slew rate per cycle. All variants made predictions worse. Best (rate=1/φ⁴): teleport LOO 48.13 (+4.07 vs baseline). Blend: 39.26 raw, 38.93 stretched. The lag makes the gate sluggish, so the cascade runs at wrong accessibility.
+
+### Midline + Blend Combo (243BH) — No-op for Solar
+
+The camshaft-E midline (inverse valve, palindrome zone, quadratic ramp) was tested through the full blend pipeline. Result: identical Solar LOO 44.05 for all variants. Solar ARA=φ sits exactly 1 rung from clock — engine, beyond the ramp zone — so all midline variants produce the same value (1.236). The midline upgrade helps consumer/near-clock systems only.
+
+### Cascade-Level Dynamic Range (243BI) — REJECTED
+
+Three cascade-modification approaches to expanding dynamic range. Best variant LOO 47.83, but error correlation between path and teleport jumped from ~0.0 to +0.551 — destroying blend independence. Confirmed the Phase 18 lesson: any cascade modification correlates errors and breaks the blend.
+
+### ARA-Circle Post-Blend Stretch (243BJ) — Framework geometry explains champion
+
+Tested 10+ post-blend stretch formulations using ARA-circle geometry. Key finding: ALL formulations producing stretch factor ≈ 1.09 tie the champion at LOO 38.37. For Solar (ARA=φ), the ARA-circle formula 1 + (ARA/φ) × 1/φ⁵ gives ARA/φ = 1.0, which equals the constant 1/φ⁵. The framework geometry naturally produces the right stretch factor. Adaptive variants (stretching extremes more) were worse — the extreme cycles need cascade-level resolution, not post-hoc correction.
+
+### Architecture Wiring
+
+The camshaft-E midline was wired into 243AZ_wave_combo.py as the standard midline function (replacing the basic version). The `ara_circle_stretch()` function was added as the standard post-blend method. For Solar, the constant and geometric formulations are identical; for other systems, ARA position will scale the stretch factor automatically.
+
+---
+
 ## Where We Stand
 
-The time machine's best Solar prediction is **LOO 38.37** (LOO/Sine = 0.786) via the post-blend stretch pipeline: wave combo cascade (mode coupling + standing wave) → path + teleport LOO at 1/φ² blend → 1/φ⁵ dynamic range stretch. Correlation +0.457 (highest ever).
+The time machine's best Solar prediction is **LOO 38.37** (LOO/Sine = 0.787) via the post-blend stretch pipeline: wave combo cascade (mode coupling + standing wave) → path + teleport LOO at 1/φ² blend → ARA-circle stretch (which equals 1/φ⁵ for Solar). Correlation +0.457 (highest ever).
 
-The formula now has three layers that each address a different aspect of the prediction problem:
+The formula now has three layers that each address a different aspect of the prediction problem, plus a universal midline:
+
 1. **The cascade** — geometric wave physics (mode coupling, standing wave, grief, wall energy)
-2. **The blend** — coupling Space-perspective (teleport) with Time-perspective (path) at 1/φ²
-3. **The stretch** — expanding the geometric mean compression at 1/φ⁵
+2. **The midline** — camshaft-E valve: inverse symmetry for consumers, palindrome zone for near-clock, quadratic ramp transition
+3. **The blend** — coupling Space-perspective (teleport) with Time-perspective (path) at 1/φ²
+4. **The stretch** — ARA-circle geometry expands the blend's dynamic range; equals 1/φ⁵ for Solar
 
-The dominant remaining error source is extreme cycles (C3: −96, C5: +78, C9: +79, C19: −126, C24: +95) where the cascade product compresses too aggressively for any post-hoc stretch to fix. The next frontier is likely architectural: either letting the cascade product itself respond nonlinearly to constructive/destructive interference, or finding the right sub-Schwabe coupling ("reverse from below") that feeds energy into the extremes.
+The dominant remaining error source is five extreme cycles (C3, C5, C9, C19, C24 with 78-126 point errors) where the cascade product compresses too aggressively for any post-hoc stretch to fix. Cascade modifications break path/teleport independence (proven in 243BI). The next frontier is likely improving phase precision for dominant periods during constructive-interference windows — getting the peak height right without modifying the cascade structure.
 
 ---
 
 *Dylan La Franchi, April 2026.*
 *All computations in /computations/. All predictions documented in MASTER_PREDICTION_LEDGER.md.*
-*ARA Framework — Scripts 191–243BF.*
+*ARA Framework — Scripts 191–243BJ.*

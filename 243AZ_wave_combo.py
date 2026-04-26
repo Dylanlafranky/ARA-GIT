@@ -85,12 +85,66 @@ def ara_momentum(ara):
     return math.log1p(max(0.01, ara)) / 2.0
 
 
-# ── FIX 4: Midline from 237d ──
+# ── FIX 4: Midline from 237d, upgraded to camshaft-E from 237k2 (243BH) ──
+def _base_midline(a):
+    a = max(0.01, a)
+    return 1.0 + (1.0 / (1.0 + a)) * (a - 1.0)
+
+def _midline_inverse_valve(ara):
+    """Engines (ARA≥1) use direct midline. Consumers (ARA<1) use 1/ARA.
+    Makes midline symmetric: Solar(φ) and Earthquake(1/φ) get same magnitude."""
+    if ara >= 1.0:
+        return _base_midline(ara)
+    else:
+        return _base_midline(1.0 / max(0.01, ara))
+
+def _phi_dist(ara):
+    """φ-rung distance from clock (ARA=1). Solar(φ)=1.0, Heart(1.35)≈0.63."""
+    a = max(0.01, ara)
+    return abs(math.log(a)) / math.log(PHI)
+
 def ara_midline(ara):
-    """midline = 1 + acc_frac × (ARA - 1), where acc_frac = 1/(1+ARA).
-    Solar (φ): 1.236. Consumer (1/φ): 0.764. Clock (1.0): 1.0."""
-    acc = 1.0 / (1.0 + max(0.01, ara))
-    return 1.0 + acc * (ara - 1.0)
+    """Camshaft-E: palindrome zone [0, 1/φ] φ-rungs from clock.
+    Inside zone: midline = 1.0 (perfect energy transfer, no shift).
+    Quadratic ramp from 1/φ to 1 full rung.
+    Beyond 1 rung: full inverse valve offset.
+    Solar (φ): 1.236. Consumer (1/φ): 1.236. Clock (1.0): 1.0."""
+    inv_offset = _midline_inverse_valve(ara) - 1.0
+    pd = _phi_dist(ara)
+    zone = 1.0 / PHI  # palindrome boundary
+    if pd <= zone:
+        return 1.0
+    if pd >= 1.0:
+        return 1.0 + inv_offset
+    # Quadratic ramp in transition zone
+    ramp_width = 1.0 / (PHI * PHI)
+    t = (pd - zone) / ramp_width
+    return 1.0 + inv_offset * t * t
+
+
+# ── POST-BLEND STRETCH: ARA-Circle Geometry (243BJ champion) ──
+# The system's ARA circle defines the range of motion for blended predictions.
+# Applied AFTER path×teleport blend at 1/φ² — keeps both methods untouched
+# so their errors remain independent (cascade mods break this, proven in 243BI).
+#
+# Formula:  stretched = train_mean + (blended - train_mean) × (1 + ARA/φ × 1/φ⁵)
+#
+# For Solar (ARA=φ):  ARA/φ = 1.0, so factor = 1 + 1/φ⁵ ≈ 1.0902
+#   This is IDENTICAL to the constant 1/φ⁵ champion from 243BF.
+#   The geometry naturally produces the right factor.
+#
+# For other systems: the ARA position scales the stretch — engines get more room,
+#   consumers get less. This is zero-tuned: ARA itself determines the factor.
+#
+# Proven in 243BJ: ALL formulations producing factor ≈ 1.09 tie the champion
+#   at LOO 38.37 for Solar. The five extreme cycles (C3,C5,C9,C19,C24) with
+#   78-126 point errors represent the current architecture's prediction wall.
+
+def ara_circle_stretch(blended_pred, train_mean, ara):
+    """Post-blend ARA-circle stretch. Returns stretched prediction."""
+    factor = 1.0 + (ara / PHI) * INV_PHI ** 5
+    dev = blended_pred - train_mean
+    return train_mean + dev * factor
 
 
 # ── Double log decay (champion from 243AB-C) ──

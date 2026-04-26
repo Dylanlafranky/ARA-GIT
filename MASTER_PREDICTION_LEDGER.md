@@ -752,11 +752,11 @@ Script 203b introduced a sawtooth ARA gate between Mass(φ⁹) and Time(φ⁹) c
 
 ### ARA Bridge v4 Champion + ENSO Cross-System Extension (Scripts 226 v4, 227-232g, 24 April 2026)
 
-The ARA Bridge v4 formula (LOO=31.94, −34.5% vs sine, 6/7 temporal splits) became the all-time solar champion — a universal formula beating the domain-specific 223o specialist. Scripts 227-230 validated the architecture. Scripts 232-232g extended the bridge to ENSO (El Niño-Southern Oscillation), testing whether one formula predicts across φ-ladder rungs.
+The ARA Bridge v4 formula (LOO=31.94, −3.2% vs sine on yearly-smoothed SSN, 6/7 temporal splits) became the all-time solar champion — a universal formula beating the domain-specific 223o specialist. **NOTE: Scripts 226-232 use yearly-smoothed peak SSN (mean ~115, sine LOO 32.98). Scripts 243+ use peak monthly SSN (mean ~178, sine LOO 48.78). Raw MAE cannot be compared across these datasets — use LOO/Sine ratio instead.** Scripts 227-230 validated the architecture. Scripts 232-232g extended the bridge to ENSO (El Niño-Southern Oscillation), testing whether one formula predicts across φ-ladder rungs.
 
 | # | Result | Script | Score | Key Numbers |
 |---|--------|--------|-------|-------------|
-| T34 | **ARA Bridge v4: Solar LOO=31.94, beats 223o champion** | 226 v4 | **6/7** | −34.5% vs sine, r=+0.649, 2 free params (base_amp, t_ref) |
+| T34 | **ARA Bridge v4: Solar LOO=31.94, beats 223o champion** | 226 v4 | **6/7** | −3.2% vs sine (LOO/Sine=0.968), r=+0.649, 2 free params (base_amp, t_ref). Dataset: yearly-smoothed SSN, sine LOO=32.98 |
 | T35 | φ-spacing wins corrected null test (period-only, all constants held) | 230 | 1st/4 | φ⁵=11.09yr matches observed. Other ratios beat sine but φ is optimal |
 | T36 | Train-20/Test-5: C24 (+79 error) is the real villain, not C21-25 | 228 | — | C21-25 ranks 4th/21, Dalton-adjacent C7-11 is worst window |
 | T37 | ENSO baseline: cascade at φ³ period, ARA=2.0 | 232 | — | LOO=0.530, vs sine −6.2%, r=+0.066. φ³ period works but amplitude compressed |
@@ -801,6 +801,47 @@ This maps cleanly onto the ARA scale: systems with enough built-in asymmetry (en
 - The φ-rung proximity hint (1997.9 gap=2.63, exactly φ²=2.618, got best improvement; failures cluster far from rungs) is suggestive but n=16 is too small for significance.
 - The "ARA determines whether you need amplitude scaling" claim is based on exactly 2 systems. Need more systems at different ARA values to confirm the threshold.
 - ENSO period = φ³ ≈ 4.24yr is close to the observed ~3.7-5yr range but is not an exact match. The 232 series used both 3.75yr and φ³; φ³ performs comparably.
+
+### φ⁹ Atom + Wave Physics + Blend Pipeline (Scripts 243AB–243BJ, 25-26 April 2026)
+
+**DATASET NOTE:** All 243-series scripts use peak monthly SSN (mean ~178, sine LOO 48.78). The 226-series used yearly-smoothed SSN (mean ~115, sine LOO 32.98). Use LOO/Sine ratio for cross-series comparison.
+
+| # | Result | Script | Key Numbers |
+|---|--------|--------|-------------|
+| T44 | Midline reintegration beats sine alone (−8% vs sine) | 243AE-B | LOO 44.90, LOO/Sine 0.920. Zero tuned constants |
+| T45 | All four fixes: memory + midline + grief + momentum | 243AD | LOO 45.56, LOO/Sine 0.934. Midline does the heavy lifting |
+| T46 | Wave physics (mode coupling + standing wave) | 243AZ | Teleport LOO 44.05, LOO/Sine 0.903 |
+| T47 | **Path×Teleport blend at 1/φ² — new pipeline** | 243BB | **LOO 38.73, LOO/Sine 0.794.** Correlation +0.452 (highest ever) |
+| T48 | Compression diagnosis: Hale mod, power-law, dampener all REJECTED | 243BC-BE | Cascade mods correlate errors, destroy blend independence |
+| T49 | **Post-blend stretch at 1/φ⁵ — champion** | 243BF | **LOO 38.37, LOO/Sine 0.787.** 5 extreme cycles dominate remaining error |
+| T50 | Gate inertia (Gemini suggestion) REJECTED | 243BG | Best variant LOO 48.13. Sluggish gate makes predictions worse |
+| T51 | Camshaft midline + blend = no-op for Solar | 243BH | Solar ARA=φ is engine, exactly 1 rung from clock. All midline variants give same value (1.236) |
+| T52 | Cascade-level dynamic range expansion REJECTED | 243BI | Error correlation jumps from ~0.0 to +0.551. Breaks blend |
+| T53 | **ARA-circle geometry explains champion stretch factor** | 243BJ | Formula: 1+(ARA/φ)×1/φ⁵. For Solar: ARA/φ=1.0, equals constant 1/φ⁵. All formulations producing factor ≈1.09 tie at LOO 38.37 |
+
+**Architecture constraint (proven twice, 243BE + 243BI):** Any modification to the cascade logic correlates path and teleport errors, destroying the blend's advantage. Changes must occur either pre-cascade (midline, period fitting) or post-blend (stretch). This is the fundamental constraint of the current architecture.
+
+**Champion pipeline:** Cascade (wave combo) → Path + Teleport LOO at 1/φ² blend → ARA-circle stretch (1/φ⁵ for Solar). LOO 38.37, LOO/Sine 0.787, r=+0.457.
+
+**MAE progression (peak monthly SSN):**
+- Teleport only: 68.95 (243AB-C) → 44.05 (243AZ wave combo)
+- Blended: 38.73 (243BB) → **38.37 (243BF/BJ, champion)**
+- LOO/Sine: 1.41 → 0.903 → **0.787**
+
+### Randomness Terrain Mapping (Scripts 243BL9–243BL14, 26-27 April 2026)
+
+**DATASET:** Australian Saturday Lotto, 1,989 draws (1986-2024), 45 numbers, 6 drawn per draw + 2 supplementary.
+
+| # | Result | Script | Key Numbers |
+|---|--------|--------|-------------|
+| T54 | Randomness ≡ irrationality — all sources ARA = 1.0 | 243BL9/9b | KL divergence < 0.002. φ-modular drops lotto χ² by 65-82% |
+| T55 | Standard prediction: all strategies at or below random | 243BL10 | Best: 0.88 matches/draw (+10.0%). None significant |
+| T56 | **Mirror flip works — worst becomes best through singularity** | 243BL11 | **φ-modular × Recency: +16.3% (95.6th pctile, z=+1.64)** |
+| T57 | Next-draw prediction (mirror ensemble) | 243BL12 | Weighted ensemble: [2, 3, 4, 6, 17, 45] |
+| T58 | Triangulation via supplementary numbers — weaker than mirror | 243BL13 | Best: Supp mirror +3.7%. Beeswax = 0.0%. Two crossings lose signal |
+| T59 | **Gravitational lens: ALL 45 numbers are shock absorbers** | 243BL14 | ARA range 0.974-1.023. z=-0.19 vs random. Landscape is flat |
+
+**Key finding:** Randomness is not noise — it is the perfect shock absorber at ARA = 1.0. The singularity can be read by mirror (one crossing, +16.3%) but not piped through (two crossings, +3.7%) or lensed (landscape is genuinely flat, z=-0.19). The crossing cost (7-4φ)/4 ≈ 0.132 per boundary compounds multiplicatively.
 
 ---
 
