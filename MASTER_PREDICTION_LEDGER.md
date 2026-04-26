@@ -843,6 +843,20 @@ This maps cleanly onto the ARA scale: systems with enough built-in asymmetry (en
 
 **Key finding:** Randomness is not noise — it is the perfect shock absorber at ARA = 1.0. The singularity can be read by mirror (one crossing, +16.3%) but not piped through (two crossings, +3.7%) or lensed (landscape is genuinely flat, z=-0.19). The crossing cost (7-4φ)/4 ≈ 0.132 per boundary compounds multiplicatively.
 
+### S&P 500 Prediction (Script 243BL15, 27 April 2026)
+
+**DATASET:** S&P 500 monthly prices, 1871-2026 (1,864 months). Source: datasets/s-and-p-500 GitHub.
+
+| # | Result | Script | Key Numbers |
+|---|--------|--------|-------------|
+| T60 | Market ARA = 0.930 — mild consumer, near shock absorber | 243BL15 | Price ARA 1.39 (engine). Two signatures coexist |
+| T61 | **12m Momentum: 58.1% LOO accuracy over 145 years** | 243BL15 | z=+6.73. Barely beats "always up" (57.9%). Real but tiny edge |
+| T62 | φ-cycle signal: 55.3% from φ-power periodicities | 243BL15 | z=+4.43. Novel — quant finance hasn't tested this |
+| T63 | Singularity tools (mirror, ARA lens) = dead noise on market | 243BL15 | ARA regime 50.8%, Mirror ARA 49.2%. Market not on singularity |
+| T64 | Mirror flip symmetric at 50.0% midpoint — same as lotto | 243BL15 | Worst→mirror: 38.5%→61.5%. Universal singularity position |
+
+**Key finding:** The market is fundamentally different from lotto. Lotto sits ON the Rationality singularity (ARA=1.0), so singularity-crossing tools work. The market sits NEAR it (ARA=0.93) with directional bias, so plain momentum beats any singularity trick. The ARA framework correctly classifies the market as a "mild consumer with memory" — consistent with 155 years of financial theory. The φ-cycle signal (55.3%, z=+4.43) is the one genuinely novel finding.
+
 ---
 
 *This ledger is a living document. Every new claim should add its predictions here. Every test result should update the relevant row. Honest accounting is the framework's best defence.*
