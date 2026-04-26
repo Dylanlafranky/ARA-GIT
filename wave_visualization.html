@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARA Wave Visualization — Breathing Gear (243O)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0e17;
+    color: #c8d0e0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  header {
+    padding: 12px 24px;
+    background: #111827;
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e2e8f0;
+    letter-spacing: 0.5px;
+  }
+  header .subtitle {
+    font-size: 12px;
+    color: #64748b;
+    margin-left: auto;
+  }
+
+  .main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── Left: Controls ── */
+  .controls-panel {
+    width: 260px;
+    min-width: 260px;
+    background: #111827;
+    border-right: 1px solid #1e293b;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+  }
+  .panel-section h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #64748b;
+    margin-bottom: 10px;
+  }
+
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .toggle-row:hover { background: #1e293b; }
+
+  .toggle-swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .toggle-check {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #475569;
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .toggle-check.active {
+    border-color: currentColor;
+    background: currentColor;
+  }
+  .toggle-check.active::after {
+    content: '✓';
+    font-size: 11px;
+    color: #0a0e17;
+    font-weight: 700;
+  }
+  .toggle-label {
+    font-size: 13px;
+    flex: 1;
+  }
+  .toggle-mae {
+    font-size: 11px;
+    color: #64748b;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .layer-toggles {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .layer-btn {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 11px;
+    text-align: center;
+    border: 1px solid #334155;
+    border-radius: 4px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .layer-btn.active {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: #475569;
+  }
+
+  /* ── Right: ARA Sidebar ── */
+  .ara-sidebar {
+    width: 200px;
+    min-width: 200px;
+    background: #111827;
+    border-left: 1px solid #1e293b;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .ara-scale-container {
+    position: relative;
+    flex: 1;
+    min-height: 300px;
+  }
+  .ara-scale-track {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    bottom: 20px;
+    width: 4px;
+    background: linear-gradient(to bottom, #7c3aed, #3b82f6, #10b981, #f59e0b, #ef4444);
+    border-radius: 2px;
+    transform: translateX(-50%);
+  }
+  .ara-marker {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .ara-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #0a0e17;
+  }
+  .ara-label-left {
+    position: absolute;
+    right: calc(50% + 16px);
+    font-size: 11px;
+    color: #94a3b8;
+    text-align: right;
+  }
+  .ara-label-right {
+    position: absolute;
+    left: calc(50% + 16px);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .zone-band {
+    position: absolute;
+    left: calc(50% - 20px);
+    width: 40px;
+    border-radius: 4px;
+    opacity: 0.15;
+  }
+
+  .midline-info {
+    font-size: 12px;
+    line-height: 1.6;
+    padding: 10px;
+    background: #1e293b;
+    border-radius: 6px;
+  }
+  .midline-info .val {
+    color: #e2e8f0;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Center: Chart ── */
+  .chart-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .chart-tabs {
+    display: flex;
+    padding: 8px 16px 0;
+    gap: 4px;
+  }
+  .chart-tab {
+    padding: 8px 16px;
+    font-size: 13px;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .chart-tab.active {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: #334155;
+  }
+  .chart-tab:hover:not(.active) {
+    color: #94a3b8;
+  }
+
+  canvas {
+    flex: 1;
+    width: 100%;
+  }
+
+  .chart-footer {
+    padding: 8px 24px;
+    font-size: 11px;
+    color: #475569;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* Legend in chart */
+  .chart-legend {
+    position: absolute;
+    top: 52px;
+    right: 16px;
+    background: rgba(17,24,39,0.92);
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11px;
+    pointer-events: none;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 0;
+  }
+  .legend-line {
+    width: 20px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  .legend-dot-sample {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin: 0 6.5px;
+  }
+
+  /* tooltip */
+  .tooltip {
+    display: none;
+    position: absolute;
+    background: rgba(17,24,39,0.95);
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 10;
+    max-width: 220px;
+  }
+  .tooltip .tt-title {
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+  }
+  .tooltip .tt-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 1px 0;
+  }
+  .tooltip .tt-label { color: #94a3b8; }
+  .tooltip .tt-val { color: #e2e8f0; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>ARA Wave Visualization</h1>
+  <span class="subtitle">Breathing Gear — Triangle as Formula (243O) · LOO Grid 80×40</span>
+</header>
+
+<div class="main-container">
+  <!-- Left Controls -->
+  <div class="controls-panel">
+    <div class="panel-section">
+      <h3>Systems</h3>
+      <div id="system-toggles"></div>
+    </div>
+
+    <div class="panel-section">
+      <h3>Layers</h3>
+      <div class="layer-toggles">
+        <button class="layer-btn active" data-layer="data" onclick="toggleLayer(this)">Data</button>
+        <button class="layer-btn active" data-layer="baseline" onclick="toggleLayer(this)">Baseline</button>
+        <button class="layer-btn active" data-layer="camshaft" onclick="toggleLayer(this)">Breathing</button>
+      </div>
+      <div style="margin-top:10px">
+        <div class="toggle-row" onclick="toggleSine()">
+          <div class="toggle-check" id="sine-check"><span></span></div>
+          <div class="toggle-swatch" style="background:#6b7280"></div>
+          <span class="toggle-label">Sine baseline</span>
+        </div>
+        <div class="toggle-row" onclick="toggleMidlines()">
+          <div class="toggle-check active" id="midline-check" style="color:#a78bfa"><span></span></div>
+          <div class="toggle-swatch" style="background:#a78bfa"></div>
+          <span class="toggle-label">Midlines</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <h3>View</h3>
+      <div class="toggle-row" onclick="toggleNormalize()">
+        <div class="toggle-check" id="norm-check"><span></span></div>
+        <span class="toggle-label" style="font-size:12px">Normalize amplitudes</span>
+      </div>
+      <p style="font-size:10px; color:#475569; margin-top:4px; padding:0 8px;">
+        When on, each system is scaled 0–1 so wave shapes can be compared directly.
+      </p>
+    </div>
+
+    <div class="panel-section" id="info-panel" style="margin-top:auto">
+      <h3>Selected System</h3>
+      <div class="midline-info" id="system-info">
+        Click a system toggle to see details.
+      </div>
+    </div>
+  </div>
+
+  <!-- Center Chart -->
+  <div class="chart-area">
+    <div class="chart-tabs" id="chart-tabs"></div>
+    <canvas id="waveCanvas"></canvas>
+    <div class="tooltip" id="tooltip"></div>
+    <div class="chart-footer">
+      <span>Breathing Gear: send ∝ (1-acc), receive ∝ acc · acc = 1/(1+ARA) · Triangle as Formula (243O-C)</span>
+      <span id="mouse-pos"></span>
+    </div>
+  </div>
+
+  <!-- Right ARA Sidebar -->
+  <div class="ara-sidebar">
+    <div class="panel-section">
+      <h3>ARA Scale</h3>
+    </div>
+    <div class="ara-scale-container" id="ara-scale"></div>
+    <div class="panel-section">
+      <h3>φ-Rung Zones</h3>
+      <div class="midline-info" style="font-size:11px; line-height:1.7">
+        <div><span style="color:#10b981">■</span> Palindrome: 0 – 1/φ</div>
+        <div><span style="color:#f59e0b">■</span> Ramp: 1/φ – 1.0</div>
+        <div><span style="color:#ef4444">■</span> Full offset: 1.0+</div>
+        <div style="margin-top:6px; color:#64748b">
+          φ_dist = |ln(ARA)| / ln(φ)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Data ──
+const DATA = {"Solar": {"times": [1761.5, 1769.7, 1778.4, 1788.1, 1805.2, 1816.4, 1829.9, 1837.2, 1848.1, 1860.1, 1870.6, 1883.9, 1894.1, 1906.2, 1917.6, 1928.4, 1937.4, 1947.5, 1957.9, 1968.9, 1979.9, 1989.6, 2001.9, 2014.3, 2024.5], "peaks": [144.1, 193.0, 264.3, 235.3, 82.0, 81.2, 119.2, 244.9, 219.9, 186.2, 234.0, 124.4, 146.5, 107.1, 175.7, 130.2, 198.6, 218.7, 285.0, 156.6, 232.9, 212.5, 180.3, 116.4, 173.0], "baseline_preds": [146.08, 166.93, 212.69, 152.87, 125.52, 166.31, 140.64, 161.08, 219.51, 170.49, 194.64, 146.87, 143.03, 205.5, 143.85, 213.9, 166.86, 171.93, 115.2, 149.31, 132.92, 169.43, 205.68, 140.04, 154.58], "camshaft_preds": [220.3, 220.3, 221.4, 159.5, 216.6, 158.8, 167.8, 193.4, 239.8, 147.5, 207.8, 120.2, 120.2, 131.5, 191.1, 192.3, 192.3, 178.3, 190.4, 212.1, 146.0, 85.7, 201.9, 139.0, 177.7], "baseline_mae": 46.3, "camshaft_mae": 48.45, "sine_mean": 178.7, "ara": 1.618, "period": 11.07, "midline": 1.2361, "phi_dist": 1.0}, "ENSO": {"times": [1951.9, 1953.2, 1957.8, 1963.8, 1965.4, 1968.9, 1972.8, 1976.7, 1977.7, 1979.7, 1982.8, 1986.9, 1991.6, 1994.8, 1997.8, 2002.8, 2004.7, 2006.8, 2009.7, 2015.0, 2018.9, 2023.9, 2025.2], "peaks": [1.2, 0.6, 1.7, 1.1, 1.4, 1.0, 2.0, 0.8, 0.8, 0.6, 2.1, 1.5, 1.6, 1.2, 2.3, 1.3, 0.7, 0.9, 1.5, 2.6, 0.8, 2.0, 0.9], "baseline_preds": [1.17, 1.02, 1.27, 1.33, 1.33, 1.09, 1.18, 1.11, 1.11, 0.83, 1.04, 0.95, 1.02, 0.8, 1.07, 0.59, 0.59, 0.99, 1.0, 1.66, 1.11, 1.38, 0.9], "camshaft_preds": [1.17, 1.02, 1.27, 1.33, 1.33, 1.09, 1.18, 1.11, 1.11, 0.83, 1.04, 0.95, 1.02, 0.8, 1.07, 0.59, 0.59, 0.99, 1.0, 1.66, 1.11, 1.38, 0.9], "baseline_mae": 0.44, "camshaft_mae": 0.41, "sine_mean": 1.30, "ara": 2.0, "period": 4.24, "midline": 1.3333, "phi_dist": 1.44}, "Earthquake": {"times": [1896.46, 1933.17, 1938.88, 1968.42, 1994.97, 2011.19, 2021.12, 2022.21, 2025.94, 2026.30], "peaks": [8.5, 8.4, 7.7, 7.9, 7.7, 9.1, 7.1, 7.4, 7.6, 7.5], "baseline_preds": [7.85, 6.98, 6.86, 7.11, 7.96, 9.36, 10.36, 10.36, 8.28, 8.28], "camshaft_preds": [7.85, 6.98, 6.86, 7.11, 7.96, 9.36, 10.36, 10.36, 8.28, 8.28], "baseline_mae": 1.19, "camshaft_mae": 1.07, "sine_mean": 7.99, "ara": 0.15, "period": 6.85, "midline": 1.7391, "phi_dist": 3.942}, "Heart": {"times": [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300], "peaks": [5.2, 7.1, 8.3, 6.5, 4.8, 3.9, 5.5, 7.8, 9.1, 7.2, 5.6, 4.1, 5.8, 8.0, 6.9, 5.3, 6.4, 8.7, 7.6, 5.1, 3.8, 5.9, 7.5, 8.8, 6.3, 4.5, 5.7, 7.3, 6.1, 4.9], "baseline_preds": [5.34, 6.43, 6.27, 5.89, 4.70, 5.29, 6.54, 5.74, 7.41, 6.33, 6.85, 7.12, 4.60, 4.97, 6.64, 6.28, 6.46, 5.81, 5.42, 5.49, 3.58, 5.90, 6.55, 6.25, 6.25, 4.85, 5.64, 7.10, 6.44, 7.42], "camshaft_preds": [5.34, 6.43, 6.27, 5.89, 4.70, 5.29, 6.54, 5.74, 7.41, 6.33, 6.85, 7.12, 4.60, 4.97, 6.64, 6.28, 6.47, 5.81, 5.42, 5.49, 3.58, 5.90, 6.55, 6.25, 6.25, 4.85, 5.64, 7.10, 6.44, 7.42], "baseline_mae": 1.1, "camshaft_mae": 1.1, "sine_mean": 6.32, "ara": 1.35, "period": 10.0, "midline": 1.0, "phi_dist": 0.624}, "Hare": {"times": [1848.0, 1862.0, 1870.0, 1882.0, 1890.0, 1900.0, 1908.0, 1916.0, 1925.0], "peaks": [83.4, 75.6, 64.0, 149.0, 60.0, 80.0, 75.0, 46.0, 75.0], "baseline_preds": [82.3, 74.55, 67.46, 96.28, 69.95, 93.32, 72.16, 65.38, 64.62], "camshaft_preds": [82.3, 74.55, 67.46, 96.28, 69.95, 93.32, 72.16, 65.38, 64.62], "baseline_mae": 12.69, "camshaft_mae": 12.69, "sine_mean": 78.67, "ara": 1.0, "period": 9.6, "midline": 1.0, "phi_dist": 0.0}, "Lynx": {"times": [1855.0, 1862.0, 1872.0, 1882.0, 1892.0, 1901.0, 1910.0, 1921.0, 1931.0], "peaks": [34.9, 65.0, 52.0, 70.0, 62.0, 43.0, 34.0, 44.0, 56.0], "baseline_preds": [41.24, 64.08, 56.06, 62.71, 61.57, 43.67, 45.0, 59.35, 44.4], "camshaft_preds": [41.24, 64.08, 56.06, 62.71, 61.57, 43.67, 45.0, 59.35, 44.4], "baseline_mae": 6.41, "camshaft_mae": 6.41, "sine_mean": 51.21, "ara": 1.0, "period": 9.5, "midline": 1.0, "phi_dist": 0.0}, "Unemployment": {"times": [1949.8, 1954.2, 1958.5, 1961.4, 1970.9, 1975.4, 1982.9, 1992.5, 2003.5, 2009.8, 2020.3], "peaks": [7.9, 5.9, 7.5, 7.1, 6.1, 9.0, 10.8, 7.8, 6.3, 10.0, 14.7], "baseline_preds": [7.2, 7.24, 6.17, 6.71, 7.92, 10.11, 9.95, 8.04, 6.25, 10.36, 8.69], "camshaft_preds": [7.2, 7.24, 6.17, 6.71, 7.92, 10.11, 9.95, 8.04, 6.25, 10.36, 8.69], "baseline_mae": 1.29, "camshaft_mae": 1.29, "sine_mean": 8.46, "ara": 0.75, "period": 7.0, "midline": 1.0, "phi_dist": 0.598}, "GDP_Growth": {"times": [1950.0, 1951.0, 1955.0, 1959.0, 1962.0, 1966.0, 1968.0, 1973.0, 1978.0, 1984.0, 1988.0, 1994.0, 1998.0, 2000.0, 2004.0, 2006.0, 2015.0, 2018.0, 2021.0], "peaks": [2.795, 2.259, 1.964, 2.292, 1.844, 2.762, 1.250, 2.369, 2.623, 4.676, 1.874, 1.926, 2.568, 2.232, 2.048, 1.000, 1.396, 1.549, 4.497], "baseline_preds": [2.642, 2.636, 1.963, 1.836, 1.792, 2.778, 2.117, 2.402, 2.536, 1.531, 1.360, 1.900, 2.484, 2.187, 2.522, 2.176, 1.667, 1.591, 3.215], "camshaft_preds": [2.642, 2.636, 1.963, 1.836, 1.792, 2.778, 2.117, 2.402, 2.536, 1.531, 1.360, 1.900, 2.484, 2.187, 2.522, 2.176, 1.667, 1.591, 3.215], "baseline_mae": 0.53, "camshaft_mae": 0.53, "sine_mean": 2.31, "ara": 1.0, "period": 3.9, "midline": 1.0, "phi_dist": 0.0}, "CO2_Amplitude": {"times": [1962, 1967, 1975, 1983, 1992, 1998, 2005, 2015], "peaks": [5.81, 5.68, 5.84, 6.09, 6.58, 5.98, 6.10, 6.47], "baseline_preds": [6.44, 6.13, 5.78, 5.92, 6.65, 6.12, 5.76, 6.56], "camshaft_preds": [6.44, 6.13, 5.78, 5.92, 6.65, 6.12, 5.76, 6.56], "baseline_mae": 0.61, "camshaft_mae": 0.61, "sine_mean": 6.07, "ara": 0.15, "period": 7.6, "midline": 1.7391, "phi_dist": 3.942}, "Nile": {"times": [1874, 1879, 1887, 1895, 1903, 1909, 1916, 1923, 1929, 1935, 1946, 1954, 1964], "peaks": [1210, 1370, 1180, 1260, 940, 1050, 1120, 864, 1040, 984, 1040, 1050, 1170], "baseline_preds": [1109.52, 1419.97, 1087.07, 1369.71, 1501.42, 868.19, 1284.88, 1036.48, 1038.10, 1020.96, 817.83, 1024.04, 1147.10], "camshaft_preds": [1191.13, 1324.22, 1094.35, 934.74, 1269.98, 1078.34, 1212.17, 953.56, 986.76, 1009.01, 906.15, 1027.65, 1188.97], "baseline_mae": 134.12, "camshaft_mae": 97.62, "sine_mean": 1098.31, "ara": 0.15, "period": 7.5, "midline": 1.7391, "phi_dist": 3.942}};
+
+const COLORS = {
+  Solar:      { main: '#f59e0b', light: '#fbbf24', dim: 'rgba(245,158,11,0.3)' },
+  ENSO:       { main: '#3b82f6', light: '#60a5fa', dim: 'rgba(59,130,246,0.3)' },
+  Earthquake: { main: '#ef4444', light: '#f87171', dim: 'rgba(239,68,68,0.3)' },
+  Heart:      { main: '#10b981', light: '#34d399', dim: 'rgba(16,185,129,0.3)' },
+  Hare:       { main: '#c084fc', light: '#d8b4fe', dim: 'rgba(192,132,252,0.3)' },
+  Lynx:       { main: '#fb923c', light: '#fdba74', dim: 'rgba(251,146,60,0.3)' },
+  Unemployment:{ main: '#f472b6', light: '#f9a8d4', dim: 'rgba(244,114,182,0.3)' },
+  GDP_Growth: { main: '#38bdf8', light: '#7dd3fc', dim: 'rgba(56,189,248,0.3)' },
+  CO2_Amplitude: { main: '#a3e635', light: '#d9f99d', dim: 'rgba(163,230,53,0.3)' },
+  Nile: { main: '#2dd4bf', light: '#5eead4', dim: 'rgba(45,212,191,0.3)' }
+};
+
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+// ── State ──
+let activeSystem = 'Solar';
+let systemVisible = { Solar: true, ENSO: false, Earthquake: false, Heart: false, Hare: false, Lynx: false, Unemployment: false, GDP_Growth: false, CO2_Amplitude: false, Nile: false };
+let layers = { data: true, baseline: true, camshaft: true };
+let showSine = false;
+let showMidlines = true;
+let normalize = false;
+
+// ── Init ──
+function init() {
+  buildSystemToggles();
+  buildTabs();
+  buildARAScale();
+  updateInfoPanel();
+  requestAnimationFrame(render);
+  window.addEventListener('resize', render);
+
+  const canvas = document.getElementById('waveCanvas');
+  canvas.addEventListener('mousemove', onMouseMove);
+  canvas.addEventListener('mouseleave', () => {
+    document.getElementById('tooltip').style.display = 'none';
+    document.getElementById('mouse-pos').textContent = '';
+  });
+}
+
+function buildSystemToggles() {
+  const container = document.getElementById('system-toggles');
+  container.innerHTML = '';
+  for (const [name, d] of Object.entries(DATA)) {
+    const c = COLORS[name];
+    const active = systemVisible[name];
+    const isSel = name === activeSystem;
+    const row = document.createElement('div');
+    row.className = 'toggle-row';
+    row.style.border = isSel ? `1px solid ${c.main}44` : '1px solid transparent';
+    row.innerHTML = `
+      <div class="toggle-check ${active ? 'active' : ''}" style="color:${c.main}" id="chk-${name}"></div>
+      <div class="toggle-swatch" style="background:${c.main}"></div>
+      <span class="toggle-label">${name}</span>
+      <span class="toggle-mae">MAE ${d.camshaft_mae}</span>
+    `;
+    row.addEventListener('click', (e) => {
+      if (e.shiftKey) {
+        // shift-click toggles visibility without switching active
+        systemVisible[name] = !systemVisible[name];
+      } else {
+        if (name === activeSystem && systemVisible[name]) {
+          // clicking the active system toggles it off (if others are visible)
+          const othersOn = Object.entries(systemVisible).some(([k, v]) => k !== name && v);
+          if (othersOn) {
+            systemVisible[name] = false;
+            // move active to first visible system
+            activeSystem = Object.keys(systemVisible).find(k => systemVisible[k]);
+          }
+        } else {
+          systemVisible[name] = true;
+          activeSystem = name;
+        }
+      }
+      buildSystemToggles();
+      buildTabs();
+      buildARAScale();
+      updateInfoPanel();
+      render();
+    });
+    container.appendChild(row);
+  }
+}
+
+function buildTabs() {
+  const tabs = document.getElementById('chart-tabs');
+  tabs.innerHTML = '';
+  for (const name of Object.keys(DATA)) {
+    const tab = document.createElement('button');
+    tab.className = 'chart-tab' + (name === activeSystem ? ' active' : '');
+    tab.textContent = name;
+    tab.addEventListener('click', () => {
+      activeSystem = name;
+      systemVisible[name] = true;
+      buildSystemToggles();
+      buildTabs();
+      buildARAScale();
+      updateInfoPanel();
+      render();
+    });
+    tabs.appendChild(tab);
+  }
+  // "All" tab
+  const allTab = document.createElement('button');
+  allTab.className = 'chart-tab';
+  allTab.textContent = 'All (normalized)';
+  allTab.addEventListener('click', () => {
+    normalize = true;
+    document.getElementById('norm-check').classList.add('active');
+    for (const k of Object.keys(systemVisible)) systemVisible[k] = true;
+    buildSystemToggles();
+    buildTabs();
+    render();
+  });
+  tabs.appendChild(allTab);
+}
+
+function toggleLayer(btn) {
+  const layer = btn.dataset.layer;
+  layers[layer] = !layers[layer];
+  btn.classList.toggle('active');
+  render();
+}
+
+function toggleSine() {
+  showSine = !showSine;
+  document.getElementById('sine-check').classList.toggle('active');
+  render();
+}
+
+function toggleMidlines() {
+  showMidlines = !showMidlines;
+  document.getElementById('midline-check').classList.toggle('active');
+  render();
+}
+
+function toggleNormalize() {
+  normalize = !normalize;
+  document.getElementById('norm-check').classList.toggle('active');
+  render();
+}
+
+function updateInfoPanel() {
+  const d = DATA[activeSystem];
+  const c = COLORS[activeSystem];
+  const zoneLabel = d.phi_dist <= 1/PHI ? 'Palindrome' : d.phi_dist >= 1.0 ? 'Full offset' : 'Ramp';
+  const improve = d.baseline_mae - d.camshaft_mae;
+  const pct = d.baseline_mae > 0 ? ((improve / d.baseline_mae) * 100).toFixed(1) : '0.0';
+  const sign = improve >= 0 ? '+' : '';
+
+  document.getElementById('system-info').innerHTML = `
+    <div style="color:${c.main}; font-weight:600; margin-bottom:6px">${activeSystem}</div>
+    <div>ARA: <span class="val">${d.ara}</span></div>
+    <div>Period: <span class="val">${d.period}</span></div>
+    <div>Midline: <span class="val">${d.midline.toFixed(4)}</span></div>
+    <div>φ-rungs: <span class="val">${d.phi_dist.toFixed(3)}</span></div>
+    <div>Zone: <span class="val">${zoneLabel}</span></div>
+    <hr style="border:none; border-top:1px solid #334155; margin:6px 0">
+    <div>Baseline MAE: <span class="val">${d.baseline_mae}</span></div>
+    <div>Breathing MAE: <span class="val">${d.camshaft_mae}</span></div>
+    <div>Change: <span class="val" style="color:${improve >= 0 ? '#10b981' : '#ef4444'}">${sign}${pct}%</span></div>
+  `;
+}
+
+// ── ARA Scale ──
+function buildARAScale() {
+  const container = document.getElementById('ara-scale');
+  container.innerHTML = '';
+
+  // Track
+  const track = document.createElement('div');
+  track.className = 'ara-scale-track';
+  container.appendChild(track);
+
+  // Zone bands
+  const h = container.clientHeight || 300;
+  const araToY = (ara) => {
+    const t = Math.min(Math.max((ara - 0) / 2.2, 0), 1);
+    return 20 + (1 - t) * (h - 40);
+  };
+
+  // Reference lines
+  const refs = [
+    { ara: 0, label: '0 (singularity)', side: 'left' },
+    { ara: 1/PHI, label: '1/φ = 0.618', side: 'left' },
+    { ara: 1.0, label: '1.0 (clock)', side: 'left' },
+    { ara: PHI, label: 'φ = 1.618', side: 'left' },
+    { ara: 2.0, label: '2.0 (harmonics)', side: 'left' },
+  ];
+  for (const r of refs) {
+    const y = araToY(r.ara);
+    const lbl = document.createElement('div');
+    lbl.className = 'ara-label-left';
+    lbl.style.top = y + 'px';
+    lbl.style.transform = 'translateY(-50%)';
+    lbl.textContent = r.label;
+    lbl.style.fontSize = '10px';
+    lbl.style.color = '#475569';
+    container.appendChild(lbl);
+
+    // tick
+    const tick = document.createElement('div');
+    tick.style.cssText = `position:absolute; left:calc(50% - 10px); width:20px; height:1px; background:#334155; top:${y}px;`;
+    container.appendChild(tick);
+  }
+
+  // System markers
+  for (const [name, d] of Object.entries(DATA)) {
+    if (!systemVisible[name]) continue;
+    const c = COLORS[name];
+    const y = araToY(d.ara);
+
+    const dot = document.createElement('div');
+    dot.style.cssText = `position:absolute; left:50%; top:${y}px; transform:translate(-50%,-50%); width:12px; height:12px; border-radius:50%; background:${c.main}; border:2px solid #0a0e17; z-index:2;`;
+    container.appendChild(dot);
+
+    const lbl = document.createElement('div');
+    lbl.className = 'ara-label-right';
+    lbl.style.top = y + 'px';
+    lbl.style.transform = 'translateY(-50%)';
+    lbl.style.color = c.main;
+    lbl.textContent = `${name} (${d.ara})`;
+    container.appendChild(lbl);
+  }
+
+  // Zone highlights
+  const zones = [
+    { from: 1/PHI, to: PHI, color: '#10b981', label: 'Palindrome' },
+  ];
+}
+
+// ── Chart Rendering ──
+function render() {
+  const canvas = document.getElementById('waveCanvas');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  const W = rect.width;
+  const H = rect.height;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0a0e17';
+  ctx.fillRect(0, 0, W, H);
+
+  const pad = { top: 30, right: 30, bottom: 50, left: 60 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  // Determine what to draw
+  const toDraw = Object.entries(DATA).filter(([k]) => systemVisible[k]);
+  if (toDraw.length === 0) {
+    ctx.fillStyle = '#475569';
+    ctx.font = '14px system-ui';
+    ctx.textAlign = 'center';
+    ctx.fillText('Enable a system to see its wave', W/2, H/2);
+    return;
+  }
+
+  // Compute global range for active systems
+  let allTimes = [], allVals = [];
+  for (const [name, d] of toDraw) {
+    allTimes.push(...d.times);
+    allVals.push(...d.peaks);
+    if (layers.baseline) allVals.push(...d.baseline_preds);
+    if (layers.camshaft) allVals.push(...d.camshaft_preds);
+  }
+
+  let tMin, tMax, vMin, vMax;
+
+  if (normalize) {
+    // Each system individually normalized
+    tMin = Math.min(...allTimes);
+    tMax = Math.max(...allTimes);
+    vMin = 0;
+    vMax = 1;
+  } else if (toDraw.length === 1) {
+    const [, d] = toDraw[0];
+    tMin = Math.min(...d.times) - (d.times[1] - d.times[0]) * 0.5;
+    tMax = Math.max(...d.times) + (d.times[1] - d.times[0]) * 0.5;
+    const vals = [...d.peaks];
+    if (layers.baseline) vals.push(...d.baseline_preds);
+    if (layers.camshaft) vals.push(...d.camshaft_preds);
+    vMin = Math.min(...vals);
+    vMax = Math.max(...vals);
+    const vPad = (vMax - vMin) * 0.12;
+    vMin -= vPad;
+    vMax += vPad;
+  } else {
+    tMin = Math.min(...allTimes);
+    tMax = Math.max(...allTimes);
+    vMin = Math.min(...allVals);
+    vMax = Math.max(...allVals);
+    const vPad = (vMax - vMin) * 0.1;
+    vMin -= vPad;
+    vMax += vPad;
+  }
+
+  const xOf = (t) => pad.left + (t - tMin) / (tMax - tMin) * cw;
+  const yOf = (v) => pad.top + (1 - (v - vMin) / (vMax - vMin)) * ch;
+
+  const normYOf = (v, d) => {
+    const lo = Math.min(...d.peaks);
+    const hi = Math.max(...d.peaks);
+    const nv = hi > lo ? (v - lo) / (hi - lo) : 0.5;
+    return pad.top + (1 - nv) * ch;
+  };
+
+  // Grid
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 1;
+  const nGridX = 8, nGridY = 6;
+  for (let i = 0; i <= nGridX; i++) {
+    const x = pad.left + (i / nGridX) * cw;
+    ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, pad.top + ch); ctx.stroke();
+    ctx.fillStyle = '#475569'; ctx.font = '10px system-ui'; ctx.textAlign = 'center';
+    const tv = tMin + (i / nGridX) * (tMax - tMin);
+    ctx.fillText(toDraw[0][1].times[0] > 1000 ? Math.round(tv).toString() : tv.toFixed(0), x, pad.top + ch + 16);
+  }
+  for (let i = 0; i <= nGridY; i++) {
+    const y = pad.top + (i / nGridY) * ch;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+    if (!normalize) {
+      ctx.fillStyle = '#475569'; ctx.font = '10px system-ui'; ctx.textAlign = 'right';
+      const vv = vMax - (i / nGridY) * (vMax - vMin);
+      ctx.fillText(vv < 10 ? vv.toFixed(2) : Math.round(vv).toString(), pad.left - 8, y + 3);
+    }
+  }
+
+  // Draw each system
+  for (const [name, d] of toDraw) {
+    const col = COLORS[name];
+    const getY = normalize ? (v) => normYOf(v, d) : yOf;
+
+    // Sine baseline
+    if (showSine) {
+      ctx.strokeStyle = '#6b728044';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      const sineY = getY(d.sine_mean);
+      ctx.moveTo(pad.left, sineY);
+      ctx.lineTo(pad.left + cw, sineY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Midline
+    if (showMidlines && d.midline !== 1.0) {
+      const midVal = d.sine_mean * d.midline;
+      const my = getY(midVal);
+      ctx.strokeStyle = '#a78bfa66';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 3]);
+      ctx.beginPath();
+      if (toDraw.length === 1) {
+        ctx.moveTo(pad.left, my);
+        ctx.lineTo(pad.left + cw, my);
+      } else {
+        // just a short mark near the data
+        const xStart = xOf(Math.min(...d.times));
+        const xEnd = xOf(Math.max(...d.times));
+        ctx.moveTo(xStart, my);
+        ctx.lineTo(xEnd, my);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // label
+      ctx.fillStyle = '#a78bfa';
+      ctx.font = '10px system-ui';
+      ctx.textAlign = 'left';
+      const labelX = toDraw.length === 1 ? pad.left + cw + 4 : xOf(Math.max(...d.times)) + 4;
+      ctx.fillText(`mid=${d.midline.toFixed(3)}`, Math.min(labelX, W - 80), my - 4);
+    }
+
+    // Baseline predictions (line)
+    if (layers.baseline) {
+      ctx.strokeStyle = col.dim;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([3, 3]);
+      ctx.beginPath();
+      for (let i = 0; i < d.times.length; i++) {
+        const x = xOf(d.times[i]), y = getY(d.baseline_preds[i]);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    // Breathing predictions (line)
+    if (layers.camshaft) {
+      ctx.strokeStyle = col.main;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let i = 0; i < d.times.length; i++) {
+        const x = xOf(d.times[i]), y = getY(d.camshaft_preds[i]);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    // Data points
+    if (layers.data) {
+      for (let i = 0; i < d.times.length; i++) {
+        const x = xOf(d.times[i]), y = getY(d.peaks[i]);
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fillStyle = col.light;
+        ctx.fill();
+        ctx.strokeStyle = '#0a0e17';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+
+    // Residual bars (camshaft)
+    if (layers.data && layers.camshaft && toDraw.length === 1) {
+      ctx.strokeStyle = col.dim;
+      ctx.lineWidth = 1;
+      for (let i = 0; i < d.times.length; i++) {
+        const x = xOf(d.times[i]);
+        const y1 = getY(d.peaks[i]);
+        const y2 = getY(d.camshaft_preds[i]);
+        ctx.beginPath();
+        ctx.moveTo(x, y1);
+        ctx.lineTo(x, y2);
+        ctx.stroke();
+      }
+    }
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#64748b';
+  ctx.font = '11px system-ui';
+  ctx.textAlign = 'center';
+  const xLabel = toDraw[0][1].times[0] > 1000 ? 'Year' : 'Time (ms)';
+  ctx.fillText(xLabel, pad.left + cw / 2, H - 8);
+
+  ctx.save();
+  ctx.translate(14, pad.top + ch / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText(normalize ? 'Normalized amplitude' : 'Amplitude', 0, 0);
+  ctx.restore();
+
+  // In-chart legend
+  drawLegend(ctx, W, pad);
+}
+
+function drawLegend(ctx, W, pad) {
+  const x = W - pad.right - 160;
+  let y = pad.top + 10;
+
+  ctx.fillStyle = 'rgba(17,24,39,0.88)';
+  ctx.strokeStyle = '#1e293b';
+  ctx.lineWidth = 1;
+
+  const items = [];
+  if (layers.data) items.push({ type: 'dot', label: 'Observed data', color: '#94a3b8' });
+  if (layers.camshaft) items.push({ type: 'line', label: 'Breathing (243O)', color: '#e2e8f0', dash: false });
+  if (layers.baseline) items.push({ type: 'line', label: 'Baseline (226)', color: '#64748b', dash: true });
+  if (showSine) items.push({ type: 'line', label: 'Sine mean', color: '#6b7280', dash: true });
+  if (showMidlines) items.push({ type: 'line', label: 'ARA midline', color: '#a78bfa', dash: true });
+
+  if (items.length === 0) return;
+
+  const boxH = items.length * 18 + 12;
+  const boxW = 148;
+
+  // background
+  ctx.beginPath();
+  ctx.roundRect(x, y, boxW, boxH, 4);
+  ctx.fill();
+  ctx.stroke();
+
+  y += 12;
+  for (const item of items) {
+    if (item.type === 'dot') {
+      ctx.beginPath();
+      ctx.arc(x + 12, y, 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = item.color;
+      ctx.fill();
+    } else {
+      ctx.strokeStyle = item.color;
+      ctx.lineWidth = 2;
+      if (item.dash) ctx.setLineDash([4, 3]);
+      ctx.beginPath();
+      ctx.moveTo(x + 6, y);
+      ctx.lineTo(x + 20, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.fillStyle = '#c8d0e0';
+    ctx.font = '10px system-ui';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.label, x + 26, y + 3);
+    y += 18;
+  }
+}
+
+// ── Tooltip ──
+function onMouseMove(e) {
+  const canvas = document.getElementById('waveCanvas');
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  const pad = { top: 30, right: 30, bottom: 50, left: 60 };
+  const cw = rect.width - pad.left - pad.right;
+  const ch = rect.height - pad.top - pad.bottom;
+
+  if (mx < pad.left || mx > pad.left + cw || my < pad.top || my > pad.top + ch) {
+    document.getElementById('tooltip').style.display = 'none';
+    return;
+  }
+
+  // Find nearest data point across visible systems
+  let best = null, bestDist = Infinity;
+  for (const [name, d] of Object.entries(DATA)) {
+    if (!systemVisible[name]) continue;
+
+    const tMin = Math.min(...d.times) - (d.times.length > 1 ? (d.times[1] - d.times[0]) * 0.5 : 5);
+    const tMax = Math.max(...d.times) + (d.times.length > 1 ? (d.times[1] - d.times[0]) * 0.5 : 5);
+
+    for (let i = 0; i < d.times.length; i++) {
+      // approximate x position
+      const allVisible = Object.entries(DATA).filter(([k]) => systemVisible[k]);
+      let gTMin = Infinity, gTMax = -Infinity;
+      for (const [, dd] of allVisible) {
+        gTMin = Math.min(gTMin, ...dd.times);
+        gTMax = Math.max(gTMax, ...dd.times);
+      }
+      if (allVisible.length === 1) {
+        const dd = allVisible[0][1];
+        const step = dd.times.length > 1 ? dd.times[1] - dd.times[0] : 10;
+        gTMin = Math.min(...dd.times) - step * 0.5;
+        gTMax = Math.max(...dd.times) + step * 0.5;
+      }
+
+      const px = pad.left + (d.times[i] - gTMin) / (gTMax - gTMin) * cw;
+      const dist = Math.abs(px - mx);
+      if (dist < bestDist && dist < 30) {
+        bestDist = dist;
+        best = { name, idx: i };
+      }
+    }
+  }
+
+  if (!best) {
+    document.getElementById('tooltip').style.display = 'none';
+    return;
+  }
+
+  const d = DATA[best.name];
+  const i = best.idx;
+  const tt = document.getElementById('tooltip');
+  const timeLabel = d.times[0] > 1000 ? d.times[i].toFixed(1) : d.times[i];
+  const residual = Math.abs(d.peaks[i] - d.camshaft_preds[i]);
+
+  tt.innerHTML = `
+    <div class="tt-title" style="color:${COLORS[best.name].main}">${best.name} — ${timeLabel}</div>
+    <div class="tt-row"><span class="tt-label">Observed</span><span class="tt-val">${d.peaks[i].toFixed(2)}</span></div>
+    <div class="tt-row"><span class="tt-label">Breathing</span><span class="tt-val">${d.camshaft_preds[i].toFixed(2)}</span></div>
+    <div class="tt-row"><span class="tt-label">Baseline</span><span class="tt-val">${d.baseline_preds[i].toFixed(2)}</span></div>
+    <div class="tt-row"><span class="tt-label">Residual</span><span class="tt-val">${residual.toFixed(2)}</span></div>
+  `;
+
+  tt.style.display = 'block';
+  const ttLeft = e.clientX - rect.left + 16;
+  const ttTop = e.clientY - rect.top - 20;
+  tt.style.left = Math.min(ttLeft, rect.width - 230) + 'px';
+  tt.style.top = Math.max(ttTop, 0) + 'px';
+
+  // mouse position readout
+  const allVisible = Object.entries(DATA).filter(([k]) => systemVisible[k]);
+  let gTMin = Infinity, gTMax = -Infinity;
+  for (const [, dd] of allVisible) {
+    gTMin = Math.min(gTMin, ...dd.times);
+    gTMax = Math.max(gTMax, ...dd.times);
+  }
+  const mouseT = gTMin + (mx - pad.left) / cw * (gTMax - gTMin);
+  document.getElementById('mouse-pos').textContent = `t = ${mouseT.toFixed(1)}`;
+}
+
+// ── roundRect polyfill ──
+if (!CanvasRenderingContext2D.prototype.roundRect) {
+  CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+    r = Math.min(r, w/2, h/2);
+    this.moveTo(x + r, y);
+    this.arcTo(x + w, y, x + w, y + h, r);
+    this.arcTo(x + w, y + h, x, y + h, r);
+    this.arcTo(x, y + h, x, y, r);
+    this.arcTo(x, y, x + w, y, r);
+    this.closePath();
+  };
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
