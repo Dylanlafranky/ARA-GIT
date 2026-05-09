@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ECG nsr001 — Framework Predictions vs Truth</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="ecg_horizon_full_data.js"></script>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --dim: #8b949e;
+  --gold: #d4a843;
+  --truth: #e6edf3;
+  --base: #f87171;
+  --corr: #39d2c0;
+  --pers: #8b949e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--gold);
+}
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.85rem;
+}
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-swatch {
+  width: 24px; height: 3px; border-radius: 2px;
+}
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.panel-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.panel-title { font-size: 1.1rem; font-weight: 600; }
+.panel-stats {
+  font-size: 0.85rem;
+  color: var(--dim);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+.panel-stats .lift { color: var(--corr); font-weight: 500; }
+.panel-stats .base-num { color: var(--base); }
+.chart-container { position: relative; height: 280px; }
+.controls {
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.controls label { color: var(--dim); cursor: pointer; }
+.controls input[type=range] { width: 200px; }
+.note {
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  padding: 0.8rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+.note strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<h1>ECG nsr001 — Framework Predictions vs Reality</h1>
+<p class="subtitle">22.5 hours of heartbeats, 730 forecast origins per horizon, strict-causal rolling vehicle.<br>
+The formula sees only training data up to each cutoff, then projects forward blind. Truth values are read separately for scoring.</p>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:#e6edf3"></span><span>Truth (actual RR)</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#f87171"></span><span>Framework — base prediction</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#39d2c0"></span><span>Framework + lag-h corrector (γ ≈ 1/φ)</span></div>
+  <div class="legend-item"><span class="legend-swatch" style="background:#8b949e"></span><span>Persistence baseline</span></div>
+</div>
+
+<div class="controls">
+  <label>Show window: <span id="window-label">all 730 forecasts</span></label>
+  <input type="range" id="window-slider" min="50" max="730" step="20" value="730">
+  <label><input type="checkbox" id="show-pers" checked> show persistence</label>
+  <label><input type="checkbox" id="show-base" checked> show base</label>
+  <label><input type="checkbox" id="show-corr" checked> show corrected</label>
+</div>
+
+<div class="note">
+<strong>What you're looking at:</strong> each panel is one forecast horizon (1 min, 5 min, 30 min, 1 h, 2 h ahead).
+The white line is what actually happened. Coral dots are the framework's prediction without the corrector;
+teal dots are the same prediction after applying the lag-h corrector with γ ≈ 1/φ.
+The gap between coral and white is the framework's bias; the corrector pulls it close to the truth.
+</div>
+
+<div id="panels"></div>
+
+<script>
+const data = window.ECG_FULL;
+const HORIZONS = ['1min', '5min', '30min', '1h', '2h'];
+const charts = {};
+const colors = {
+  truth: '#e6edf3',
+  base: '#f87171',
+  corr: '#39d2c0',
+  pers: '#8b949e'
+};
+
+function buildPanel(label) {
+  const d = data[label];
+  const panel = document.createElement('div');
+  panel.className = 'panel';
+  const dMaePct = ((d.mae_base - d.mae_corr) / d.mae_base * 100);
+  const dMaePctStr = (dMaePct >= 0 ? '−' : '+') + Math.abs(dMaePct).toFixed(1) + '%';
+  panel.innerHTML = `
+    <div class="panel-header">
+      <div class="panel-title">${label} ahead</div>
+      <div class="panel-stats">
+        BASE: <span class="base-num">corr ${d.corr_base >= 0 ? '+' : ''}${d.corr_base.toFixed(3)}, MAE ${d.mae_base.toFixed(0)} ms, R²p ${d.r2p_base >= 0 ? '+' : ''}${d.r2p_base.toFixed(2)}</span>
+        &nbsp;→&nbsp;
+        CORR: <span style="color:${colors.corr}">corr ${d.corr_corr >= 0 ? '+' : ''}${d.corr_corr.toFixed(3)}, MAE ${d.mae_corr.toFixed(0)} ms, R²p ${d.r2p_corr >= 0 ? '+' : ''}${d.r2p_corr.toFixed(2)}</span>
+        &nbsp;<span class="lift">(MAE ${dMaePctStr}, γ_corr=${d.gamma_corr.toFixed(3)})</span>
+      </div>
+    </div>
+    <div class="chart-container"><canvas id="chart-${label}"></canvas></div>
+  `;
+  document.getElementById('panels').appendChild(panel);
+
+  const ctx = document.getElementById('chart-' + label).getContext('2d');
+  charts[label] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: d.target_time_h,
+      datasets: [
+        { label: 'Truth',          data: d.truth,         borderColor: colors.truth, borderWidth: 1.2, pointRadius: 0, fill: false, tension: 0.0 },
+        { label: 'Persistence',    data: d.persistence,   borderColor: colors.pers,  borderWidth: 0.7, pointRadius: 0, fill: false, tension: 0.0, hidden: false, borderDash:[3,3] },
+        { label: 'Base prediction',data: d.base_pred,     borderColor: colors.base,  borderWidth: 0.0, pointRadius: 1.5, pointBackgroundColor: colors.base, fill: false, showLine: false },
+        { label: 'Corrected',      data: d.corrected_pred,borderColor: colors.corr,  borderWidth: 0.0, pointRadius: 1.5, pointBackgroundColor: colors.corr, fill: false, showLine: false },
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0d1117',
+          titleColor: '#e6edf3',
+          bodyColor: '#e6edf3',
+          borderColor: '#30363d',
+          borderWidth: 1,
+          callbacks: {
+            title: (items) => `t = ${parseFloat(items[0].label).toFixed(2)} h`,
+            label: (item) => `${item.dataset.label}: ${item.parsed.y.toFixed(0)} ms`,
+          }
+        }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          title: { display: true, text: 'time (hours since start of recording)', color: colors.pers },
+          ticks: { color: colors.pers, maxTicksLimit: 8 },
+          grid: { color: 'rgba(139,148,158,0.08)' }
+        },
+        y: {
+          title: { display: true, text: 'RR interval (ms)', color: colors.pers },
+          ticks: { color: colors.pers },
+          grid: { color: 'rgba(139,148,158,0.08)' }
+        }
+      }
+    }
+  });
+}
+
+HORIZONS.forEach(buildPanel);
+
+// Window slider
+const slider = document.getElementById('window-slider');
+const windowLabel = document.getElementById('window-label');
+slider.addEventListener('input', () => {
+  const w = parseInt(slider.value);
+  windowLabel.textContent = w === 730 ? 'all 730 forecasts' : `last ${w} forecasts`;
+  HORIZONS.forEach(label => {
+    const d = data[label];
+    const start = Math.max(0, d.truth.length - w);
+    charts[label].data.labels        = d.target_time_h.slice(start);
+    charts[label].data.datasets[0].data = d.truth.slice(start);
+    charts[label].data.datasets[1].data = d.persistence.slice(start);
+    charts[label].data.datasets[2].data = d.base_pred.slice(start);
+    charts[label].data.datasets[3].data = d.corrected_pred.slice(start);
+    charts[label].update('none');
+  });
+});
+
+// Toggles
+document.getElementById('show-pers').addEventListener('change', (e) => {
+  HORIZONS.forEach(l => { charts[l].data.datasets[1].hidden = !e.target.checked; charts[l].update('none'); });
+});
+document.getElementById('show-base').addEventListener('change', (e) => {
+  HORIZONS.forEach(l => { charts[l].data.datasets[2].hidden = !e.target.checked; charts[l].update('none'); });
+});
+document.getElementById('show-corr').addEventListener('change', (e) => {
+  HORIZONS.forEach(l => { charts[l].data.datasets[3].hidden = !e.target.checked; charts[l].update('none'); });
+});
+</script>
+
+</body>
+</html>

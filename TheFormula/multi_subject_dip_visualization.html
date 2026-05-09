@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multi-subject dip pattern — intruder waves rolling through</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="multi_subject_dip_data.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --surface2: #1c2333;
+  --border: #30363d; --text: #e6edf3; --dim: #8b949e;
+  --gold: #d4a843; --good: #39d2c0; --bad: #f87171;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif; font-weight: 300;
+  padding: 1.5rem; line-height: 1.55; max-width: 1100px; margin: 0 auto;
+}
+h1 { font-size: 1.7rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--gold); }
+h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.7rem; }
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.panel { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+.chart-container { position: relative; height: 420px; margin-top: 0.5rem; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; font-family: 'JetBrains Mono', 'Courier New', monospace; }
+th, td { padding: 0.5rem 0.7rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--dim); font-size: 0.78rem; text-transform: uppercase; }
+.dip-row { background: rgba(248,113,113,0.08); }
+.note { background: var(--surface); border-left: 3px solid var(--gold); padding: 0.7rem 1rem; border-radius: 0 8px 8px 0; margin: 1rem 0; font-size: 0.88rem; color: var(--dim); }
+.note strong { color: var(--text); }
+.headline { background: linear-gradient(135deg, rgba(57,210,192,0.14), rgba(212,168,67,0.08)); border: 1px solid rgba(57,210,192,0.4); padding: 1rem 1.25rem; border-radius: 10px; margin: 1rem 0 1.5rem; font-size: 1rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.5rem; font-size: 0.78rem; }
+.legend-dot { width: 14px; height: 3px; display: inline-block; vertical-align: middle; margin-right: 0.3rem; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<h1>Multi-subject dip pattern — intruder waves rolling through</h1>
+<p class="subtitle">11 PhysioNet NSR subjects, actual-values delta-integration architecture. Each subject's correlation plotted vs forecast horizon (in beats ahead). Look for shared dips — those are signatures of physiological systems whose waves pass through our measurement at consistent timescales.</p>
+
+<div class="headline">
+  <strong>Main finding:</strong> mean correlation drops from +0.87 (1-3 beats) down to <strong>+0.44 at ~600 beats (~8 min)</strong> — a consistent dip across 8 of 11 subjects. Recovery at 1000 beats, then a second dip at ~5000 beats (~1 hour). The 8-min dip lines up with mid-frequency autonomic shifts; the 1-hour dip lines up with the BRAC sleep-stage envelope.
+</div>
+
+<h2>1 · Per-subject correlation curves + mean</h2>
+<div class="panel">
+  <div class="legend" id="legend"></div>
+  <div class="chart-container"><canvas id="chart-curves"></canvas></div>
+  <div class="note">
+    Each thin line is one subject. The thick gold line is the mean across all 11 subjects. The two coral bands mark the consistent dip regions.
+    Subjects who dip at 600 beats also recover at 1000 — that's the autonomic-transition signature passing through.
+  </div>
+</div>
+
+<h2>2 · Mean correlation by horizon — the spine of the result</h2>
+<div class="panel">
+  <table id="mean-table"></table>
+</div>
+
+<h2>3 · Per-subject dip locations</h2>
+<div class="panel">
+  <table id="dip-table"></table>
+  <div class="note">
+    Most subjects dip at 100-600 beats (1.5-7 min) — the mid-frequency autonomic band.
+    A few subjects (nsr005, nsr040, nsr050) instead show their main dip at 2000 beats (~25 min) —
+    these may be recordings during deeper sleep where the faster intruder was quiet but the slower BRAC envelope was active.
+  </div>
+</div>
+
+<h2>4 · What the dip is telling us</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.7rem;">
+    The actual-values architecture predicts cleanly at both very short lead (1-3 beats, mean corr +0.87) and partial recovery
+    around 1000 beats (+0.61). In between, we hit a consistent corrupting band at ~600 beats. That's not noise — that's
+    <strong>another system's wave passing through our measurement axis</strong>.
+  </p>
+  <p style="margin-bottom: 0.7rem;">
+    At ~8 minutes of clock time, the most likely intruder is mid-frequency autonomic activity — slow baroreflex-style envelopes,
+    Mayer-wave bursts, micro-arousal transitions during sleep. These are well-documented physiological systems. They're not in
+    our rung ladder because we're working in beat-units, and the mid-frequency band sits at φ⁹–φ¹¹ in beats — rungs we did include —
+    but their state is <em>transient</em> rather than steady, so the steady-state amp+phase representation doesn't capture them well.
+  </p>
+  <p>
+    The fix would be to add a <strong>transient-event detector</strong> to the architecture: when residuals at 100-1000 beats
+    deviate beyond a threshold, model them explicitly as a passing intruder wave with its own state. Same idea as how the SOI
+    matched-rung partner closed the ENSO mid-horizon dip.
+  </p>
+</div>
+
+<script>
+const D = window.MULTI_DIP;
+const subjects = D.subjects;
+const horizons = D.horizons;
+
+// === Chart 1: per-subject curves ===
+const palette = ['#58a6ff','#f87171','#fb923c','#d4a843','#3fb950','#39d2c0','#a78bfa','#bc8cff','#f472b6','#fb7185','#94a3b8'];
+const subjectDatasets = subjects.map((s, i) => {
+  const data = horizons.map(h => D.results[s].metrics[h] ? D.results[s].metrics[h].corr : null);
+  return {
+    label: s,
+    data: data,
+    borderColor: palette[i % palette.length],
+    backgroundColor: palette[i % palette.length] + '20',
+    borderWidth: 1.2,
+    pointRadius: 2,
+    pointBackgroundColor: palette[i % palette.length],
+    fill: false,
+    tension: 0.3,
+    spanGaps: false,
+  };
+});
+
+// Mean dataset
+const meanData = horizons.map(h => D.mean_corr_by_h[h] !== undefined ? D.mean_corr_by_h[h] : null);
+subjectDatasets.push({
+  label: 'mean',
+  data: meanData,
+  borderColor: '#d4a843',
+  backgroundColor: 'rgba(212,168,67,0.15)',
+  borderWidth: 3.5,
+  pointRadius: 5,
+  pointBackgroundColor: '#d4a843',
+  pointBorderColor: '#fff',
+  pointBorderWidth: 1,
+  fill: false,
+  tension: 0.3,
+});
+
+// Render legend
+const legend = document.getElementById('legend');
+subjects.forEach((s, i) => {
+  const span = document.createElement('span');
+  span.innerHTML = `<span class="legend-dot" style="background:${palette[i % palette.length]}"></span>${s}`;
+  legend.appendChild(span);
+});
+const meanSpan = document.createElement('span');
+meanSpan.innerHTML = `<span class="legend-dot" style="background:#d4a843;height:5px"></span><strong style="color:#d4a843">mean (11 subjects)</strong>`;
+legend.appendChild(meanSpan);
+
+const ctx = document.getElementById('chart-curves').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: { labels: horizons, datasets: subjectDatasets },
+  options: {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0d1117', titleColor: '#e6edf3', bodyColor: '#e6edf3', callbacks: { title: (items) => `${items[0].label} beats ahead` }} },
+    scales: {
+      x: { type: 'logarithmic', title: { display: true, text: 'horizon (beats ahead, log scale)', color: '#8b949e' },
+           ticks: { color: '#8b949e', callback: v => Number(v).toString() }, grid: { color: 'rgba(139,148,158,0.06)' } },
+      y: { title: { display: true, text: 'correlation with truth', color: '#8b949e' },
+           ticks: { color: '#8b949e' }, grid: { color: 'rgba(139,148,158,0.08)' }, min: -1, max: 1 }
+    }
+  },
+  plugins: [{
+    id: 'dipBands',
+    beforeDraw: (chart) => {
+      const ctx = chart.ctx;
+      const xAxis = chart.scales.x;
+      // Dip band 1: 300-1000 beats
+      const x1 = xAxis.getPixelForValue(300);
+      const x2 = xAxis.getPixelForValue(1000);
+      ctx.save();
+      ctx.fillStyle = 'rgba(248,113,113,0.06)';
+      ctx.fillRect(x1, chart.chartArea.top, x2 - x1, chart.chartArea.bottom - chart.chartArea.top);
+      // Dip band 2: 2000-5000 beats
+      const x3 = xAxis.getPixelForValue(2000);
+      const x4 = xAxis.getPixelForValue(5000);
+      ctx.fillStyle = 'rgba(248,113,113,0.04)';
+      ctx.fillRect(x3, chart.chartArea.top, x4 - x3, chart.chartArea.bottom - chart.chartArea.top);
+      ctx.restore();
+    }
+  }]
+});
+
+// === Mean table ===
+const meanTbl = document.getElementById('mean-table');
+let html = '<thead><tr><th>horizon (beats)</th><th>clock-time (typical)</th><th>mean corr</th><th></th></tr></thead><tbody>';
+horizons.forEach(h => {
+  const c = D.mean_corr_by_h[h];
+  if (c === undefined) return;
+  const ms = h * 760; // typical 760ms beat
+  let timeStr;
+  if (ms < 60000) timeStr = (ms/1000).toFixed(0) + ' s';
+  else if (ms < 3600000) timeStr = (ms/60000).toFixed(1) + ' min';
+  else timeStr = (ms/3600000).toFixed(2) + ' h';
+  const isDip = (h >= 300 && h <= 1000) || (h >= 2000 && h <= 5000);
+  const cls = isDip ? 'dip-row' : '';
+  let bar = '';
+  const barWidth = Math.max(0, Math.round(c * 100));
+  if (c >= 0) bar = `<div style="background:linear-gradient(90deg,#39d2c0,#39d2c0);width:${barWidth}px;height:8px;border-radius:2px;"></div>`;
+  else bar = `<div style="background:#f87171;width:${Math.abs(barWidth)}px;height:8px;border-radius:2px;"></div>`;
+  html += `<tr class="${cls}"><td>${h}</td><td>${timeStr}</td><td>${c >= 0 ? '+' : ''}${c.toFixed(3)}</td><td>${bar}</td></tr>`;
+});
+html += '</tbody>';
+meanTbl.innerHTML = html;
+
+// === Dip table ===
+const dipTbl = document.getElementById('dip-table');
+let dipHtml = '<thead><tr><th>subject</th><th>dip horizon (beats)</th><th>dip clock-time</th><th>dip corr</th><th>recovery horizon</th><th>pre-dip corr</th></tr></thead><tbody>';
+Object.entries(D.dip_patterns).forEach(([subj, p]) => {
+  const dip_ms = p.dip_h * 760;
+  let timeStr;
+  if (dip_ms < 60000) timeStr = (dip_ms/1000).toFixed(0) + 's';
+  else if (dip_ms < 3600000) timeStr = (dip_ms/60000).toFixed(1) + 'min';
+  else timeStr = (dip_ms/3600000).toFixed(2) + 'h';
+  dipHtml += `<tr><td>${subj}</td><td>${p.dip_h}</td><td>${timeStr}</td><td>${p.dip_corr >= 0 ? '+' : ''}${p.dip_corr.toFixed(3)}</td><td>${p.recovery_h || '—'}</td><td>${p.pre_dip_corr ? (p.pre_dip_corr >= 0 ? '+' : '') + p.pre_dip_corr.toFixed(3) : '—'}</td></tr>`;
+});
+dipHtml += '</tbody>';
+dipTbl.innerHTML = dipHtml;
+</script>
+
+</body>
+</html>

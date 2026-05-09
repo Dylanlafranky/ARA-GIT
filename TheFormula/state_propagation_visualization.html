@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>State Propagation vs Averaged Amplitude — ECG comparison</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="state_propagation_data.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --surface2: #1c2333;
+  --border: #30363d; --text: #e6edf3; --dim: #8b949e;
+  --gold: #d4a843; --truth: #e6edf3; --old: #f87171; --new: #39d2c0; --pers: #8b949e;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif; font-weight: 300;
+  padding: 1.5rem; line-height: 1.55; max-width: 1100px; margin: 0 auto;
+}
+h1 { font-size: 1.7rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--gold); }
+h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.7rem; }
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;
+}
+.chart-container { position: relative; height: 380px; margin-top: 0.5rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 0.5rem; font-size: 0.85rem; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-family: 'JetBrains Mono', 'Courier New', monospace; }
+th, td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--dim); font-size: 0.78rem; text-transform: uppercase; }
+.delta-up   { color: var(--new); }
+.delta-down { color: var(--old); }
+.note {
+  background: var(--surface); border-left: 3px solid var(--gold);
+  padding: 0.7rem 1rem; border-radius: 0 8px 8px 0;
+  margin: 1rem 0; font-size: 0.88rem; color: var(--dim);
+}
+.note strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<h1>State propagation vs averaged amplitude — ECG comparison</h1>
+<p class="subtitle">Same data, same anchor (14 h into nsr001), same rungs. The two methods differ only in how they read the rung's current amplitude and project forward.</p>
+
+<h2>The two methods, side by side</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.5rem;">
+    <strong style="color: var(--old);">OLD (averaged-amplitude + cosine):</strong>
+    amp = std of last 50 bandpass samples × √2. ARA = mean over all peak-pairs in training. Cosine forward.
+  </p>
+  <p>
+    <strong style="color: var(--new);">NEW (state propagation):</strong>
+    amp = peak in the most recent cycle only. ARA = measured on the most recent 1-2 cycles only. ARA-shaped piecewise wave forward (asymmetric build vs release).
+  </p>
+</div>
+
+<h2>1 · Forward prediction at the 14 h anchor (4 h forward)</h2>
+<div class="panel">
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--truth)"></span>Truth</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--old)"></span>OLD method</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--new)"></span>NEW method</div>
+  </div>
+  <div class="chart-container"><canvas id="chart-time"></canvas></div>
+  <div class="note">
+    Both methods predict close to the mean (~660-740 ms). Truth swings between ~570 ms and ~990 ms.
+    The <strong>fundamental issue is visible here</strong>: neither method captures the amplitude of real fluctuations.
+    The flat-looking traces aren't a viewer bug — that's actually what the framework is predicting.
+  </div>
+</div>
+
+<h2>2 · Per-horizon metrics across 16 anchors (12 h → 20 h every 30 min)</h2>
+<div class="panel">
+  <table id="metrics-table"></table>
+  <div class="note">
+    The state-propagation approach <strong>flips the sign of correlation at 30 min</strong> (−0.136 → +0.049) and gives
+    small MAE improvements at most horizons. But R²(pers) is strongly negative across the board for both methods —
+    persistence wins everywhere here, which means the predictions are flatter than the actual data.
+  </div>
+</div>
+
+<h2>3 · What this is telling us</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.5rem;">
+    Your intuition was right: averaging amplitude over the whole training window is too sluggish. State-propagation does
+    pick up some lift, especially at mid-horizon. But the deeper issue isn't fixed — both methods are <em>too damped</em>
+    against an ECG that's actually quite spiky in places.
+  </p>
+  <p style="margin-bottom: 0.5rem;">
+    The likely deeper fix isn't single-step vs averaging — it's <strong>not summing across rungs at long lead</strong>.
+    When we add up bandpass components from 12 different rungs each with small amplitude, the sum lives near the mean.
+    What we probably want at any moment is <em>only the dominant rung</em>'s contribution plus the last observed value
+    as the anchor.
+  </p>
+  <p>
+    A clean version of your idea would: pick the rung that's currently carrying the most energy, use its state
+    (v_now, delta, amp_local, ARA_local), step forward with an ARA-shaped wave starting from v_now itself, ignore
+    the smaller rungs unless you specifically want their decoration.
+  </p>
+</div>
+
+<script>
+const D = window.STATE_PROP;
+
+// === Metrics table ===
+const horizons = ['1min', '5min', '15min', '30min', '1h', '2h'];
+const tbl = document.getElementById('metrics-table');
+let html = `<thead><tr><th>horizon</th>`;
+['OLD corr','NEW corr','Δ corr','OLD MAE','NEW MAE','Δ MAE','OLD R²p','NEW R²p'].forEach(c => html += `<th>${c}</th>`);
+html += `</tr></thead><tbody>`;
+horizons.forEach(h => {
+  const o = D.metrics[h+'_OLD'], n = D.metrics[h+'_NEW'];
+  if (!o || !n) return;
+  const dC = n.corr - o.corr;
+  const dM = n.mae - o.mae;
+  const cls_c = dC >= 0 ? 'delta-up' : 'delta-down';
+  const cls_m = dM <= 0 ? 'delta-up' : 'delta-down';
+  html += `<tr>
+    <td>${h}</td>
+    <td>${o.corr >= 0 ? '+' : ''}${o.corr.toFixed(3)}</td>
+    <td>${n.corr >= 0 ? '+' : ''}${n.corr.toFixed(3)}</td>
+    <td class="${cls_c}">${dC >= 0 ? '+' : ''}${dC.toFixed(3)}</td>
+    <td>${o.mae.toFixed(1)}</td>
+    <td>${n.mae.toFixed(1)}</td>
+    <td class="${cls_m}">${dM >= 0 ? '+' : ''}${dM.toFixed(1)}</td>
+    <td>${o.r2p >= 0 ? '+' : ''}${o.r2p.toFixed(2)}</td>
+    <td>${n.r2p >= 0 ? '+' : ''}${n.r2p.toFixed(2)}</td>
+  </tr>`;
+});
+html += `</tbody>`;
+tbl.innerHTML = html;
+
+// === Chart ===
+const histT = D.history.t_h;
+const histTr = D.history.truth;
+const fwdT  = D.dense.t_h;
+const fwdOld = D.dense.old;
+const fwdNew = D.dense.new;
+const fwdTr = D.dense.truth;
+const allT = [...histT, D.anchor_t_h, ...fwdT];
+const truthSeries = [...histTr, null, ...fwdTr];
+const oldSeries = [...histT.map(_ => null), null, ...fwdOld];
+const newSeries = [...histT.map(_ => null), null, ...fwdNew];
+
+const ctx = document.getElementById('chart-time').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: allT,
+    datasets: [
+      { label: 'Truth', data: truthSeries, borderColor: '#e6edf3', borderWidth: 1.0, pointRadius: 0, fill: false, tension: 0 },
+      { label: 'OLD',   data: oldSeries,   borderColor: '#f87171', borderWidth: 2.0, pointRadius: 1.5, pointBackgroundColor: '#f87171', fill: false, tension: 0.25 },
+      { label: 'NEW',   data: newSeries,   borderColor: '#39d2c0', borderWidth: 2.0, pointRadius: 1.5, pointBackgroundColor: '#39d2c0', fill: false, tension: 0.25 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { labels: { color: '#e6edf3' } }, tooltip: { backgroundColor: '#0d1117', titleColor: '#e6edf3', bodyColor: '#e6edf3' } },
+    scales: {
+      x: { type: 'linear', title: { display: true, text: 'time (hours since recording start)', color: '#8b949e' },
+           ticks: { color: '#8b949e' }, grid: { color: 'rgba(139,148,158,0.06)' } },
+      y: { title: { display: true, text: 'RR interval (ms)', color: '#8b949e' },
+           ticks: { color: '#8b949e' }, grid: { color: 'rgba(139,148,158,0.08)' } }
+    }
+  },
+  plugins: [{
+    id: 'anchorLine',
+    afterDraw: (chart) => {
+      const ctx = chart.ctx;
+      const xPos = chart.scales.x.getPixelForValue(D.anchor_t_h);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(212,168,67,0.6)';
+      ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      ctx.moveTo(xPos, chart.chartArea.top);
+      ctx.lineTo(xPos, chart.chartArea.bottom);
+      ctx.stroke();
+      ctx.fillStyle = '#d4a843'; ctx.font = '11px Inter';
+      ctx.fillText('anchor', xPos + 4, chart.chartArea.top + 14);
+      ctx.restore();
+    }
+  }]
+});
+</script>
+
+</body>
+</html>

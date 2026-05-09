@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drain architecture vs averaged amplitude — ECG comparison</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="drain_architecture_data.js"></script>
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --surface2: #1c2333;
+  --border: #30363d; --text: #e6edf3; --dim: #8b949e;
+  --gold: #d4a843; --truth: #e6edf3; --old: #f87171; --drain: #39d2c0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif; font-weight: 300;
+  padding: 1.5rem; line-height: 1.55; max-width: 1100px; margin: 0 auto;
+}
+h1 { font-size: 1.7rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--gold); }
+h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.7rem; }
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem;
+}
+.chart-container { position: relative; height: 380px; margin-top: 0.5rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-bottom: 0.5rem; font-size: 0.85rem; }
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-family: 'JetBrains Mono', 'Courier New', monospace; }
+th, td { padding: 0.55rem 0.7rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--dim); font-size: 0.78rem; text-transform: uppercase; }
+.win   { color: var(--drain); font-weight: 600; }
+.loss  { color: var(--old); }
+.neutral { color: var(--dim); }
+.note {
+  background: var(--surface); border-left: 3px solid var(--gold);
+  padding: 0.7rem 1rem; border-radius: 0 8px 8px 0;
+  margin: 1rem 0; font-size: 0.88rem; color: var(--dim);
+}
+.note strong { color: var(--text); }
+.headline {
+  background: linear-gradient(135deg, rgba(57,210,192,0.14), rgba(212,168,67,0.08));
+  border: 1px solid rgba(57,210,192,0.4);
+  padding: 1rem 1.25rem; border-radius: 10px;
+  margin: 1rem 0 1.5rem; font-size: 1rem;
+}
+.headline strong { color: var(--drain); }
+</style>
+</head>
+<body>
+
+<h1>Drain architecture vs averaged amplitude — ECG nsr001</h1>
+<p class="subtitle">Anchor at 14 h. Comparison of two forward-projection architectures over 16 rolling anchors and 6 horizons (1 min → 2 h).</p>
+
+<div class="headline">
+  <strong>Headline at 1 min lead:</strong> the drain architecture cuts MAE from 219.2 ms → 149.1 ms (a 32% drop) and lifts R²(pers) from −2.21 to −0.53. At 5 min, correlation rises from +0.284 to +0.359. The lift converges out at longer horizons.
+</div>
+
+<h2>The two architectures, side by side</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.7rem;">
+    <strong style="color: var(--old);">OLD (averaged amplitude + cosine):</strong>
+    Each rung's amplitude = std of last 50 bandpass samples × √2. Forward = ARA-driven cosine decay.
+    Final prediction = mean_train + Σ rung_weight × cosine. Ignores v_now entirely.
+  </p>
+  <p>
+    <strong style="color: var(--drain);">DRAIN (Dylan's architecture):</strong>
+    Anchor at v_now (the last observed value). Step forward sample by sample, drain rate
+    <code>(1/φ + (π−3)/π) / period_home ≈ 0.0014</code> per step pulls v gently toward
+    <code>mean_train + log-weighted rung sum</code>. Log-weights by distance from data-home rung k=8.
+    All rungs contribute their full instantaneous amplitude (no kappa decay).
+  </p>
+</div>
+
+<h2>1 · Forward prediction at 14 h anchor (4 h forward)</h2>
+<div class="panel">
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--truth)"></span>Truth</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--old)"></span>OLD method</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--drain)"></span>DRAIN architecture</div>
+  </div>
+  <div class="chart-container"><canvas id="chart-time"></canvas></div>
+  <div class="note">
+    Watch the teal (drain) line at the start: it begins at v_now (the last observed value, ~750 ms) and drains toward
+    the structured target. The coral line jumps directly to the structured prediction near the mean and stays there.
+    At longer horizons both end up in the same neighbourhood.
+  </div>
+</div>
+
+<h2>2 · Per-horizon metrics across 16 anchors</h2>
+<div class="panel">
+  <table id="metrics-table"></table>
+  <div class="note">
+    The drain architecture is a clean win at 1 min and 5 min. At 15 min and beyond, the prediction has had time to
+    relax toward the structured target — at that point both methods are doing roughly the same thing.
+  </div>
+</div>
+
+<h2>3 · Why this works at short lead</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.7rem;">
+    Heart-rate is sticky in the short term. If the last beat was 750 ms, the next is much more likely to be near 750 ms
+    than to be 660 ms (the mean). The OLD method ignores this and starts every prediction from the mean.
+    The DRAIN architecture starts at v_now, then bleeds toward the mean at a φ + π-leak rate.
+  </p>
+  <p style="margin-bottom: 0.7rem;">
+    For the first ~30 min, that anchoring captures real autoregressive structure. The MAE drops ~30% at 1 min.
+    Past that, the drain has had enough steps to fully relax v to the structured target, and the two methods converge.
+  </p>
+  <p>
+    To extend the lift to longer horizons we'd need to <em>let more energy through</em> at the rung level — bigger
+    structured-target swings rather than the small bandpass amplitudes we currently get. That's the next step.
+  </p>
+</div>
+
+<script>
+const D = window.DRAIN_ARCH;
+
+// === Metrics table ===
+const horizons = ['1min', '5min', '15min', '30min', '1h', '2h'];
+const tbl = document.getElementById('metrics-table');
+let html = `<thead><tr><th>horizon</th>`;
+['OLD corr','DRAIN corr','Δ corr','OLD MAE','DRAIN MAE','Δ MAE','OLD R²p','DRAIN R²p','Δ R²p'].forEach(c => html += `<th>${c}</th>`);
+html += `</tr></thead><tbody>`;
+horizons.forEach(h => {
+  const o = D.metrics[h+'_OLD'], n = D.metrics[h+'_DRAIN'];
+  if (!o || !n) return;
+  const dC = n.corr - o.corr;
+  const dM = n.mae - o.mae;
+  const dR = n.r2p - o.r2p;
+  const cls = (val, dir) => {
+    if (Math.abs(val) < 0.02) return 'neutral';
+    return (dir === 'up' ? val > 0 : val < 0) ? 'win' : 'loss';
+  };
+  html += `<tr>
+    <td>${h}</td>
+    <td>${o.corr >= 0 ? '+' : ''}${o.corr.toFixed(3)}</td>
+    <td>${n.corr >= 0 ? '+' : ''}${n.corr.toFixed(3)}</td>
+    <td class="${cls(dC, 'up')}">${dC >= 0 ? '+' : ''}${dC.toFixed(3)}</td>
+    <td>${o.mae.toFixed(1)}</td>
+    <td>${n.mae.toFixed(1)}</td>
+    <td class="${cls(dM, 'down')}">${dM >= 0 ? '+' : ''}${dM.toFixed(1)}</td>
+    <td>${o.r2p >= 0 ? '+' : ''}${o.r2p.toFixed(2)}</td>
+    <td>${n.r2p >= 0 ? '+' : ''}${n.r2p.toFixed(2)}</td>
+    <td class="${cls(dR, 'up')}">${dR >= 0 ? '+' : ''}${dR.toFixed(2)}</td>
+  </tr>`;
+});
+html += `</tbody>`;
+tbl.innerHTML = html;
+
+// === Chart ===
+const histT = D.history.t_h;
+const histTr = D.history.truth;
+const fwdT  = D.dense.t_h;
+const fwdOld = D.dense.old;
+const fwdDrain = D.dense.drain;
+const fwdTr = D.dense.truth;
+const allT = [...histT, D.anchor_t_h, ...fwdT];
+const truthSeries = [...histTr, null, ...fwdTr];
+const oldSeries = [...histT.map(_ => null), null, ...fwdOld];
+const drainSeries = [...histT.map(_ => null), null, ...fwdDrain];
+
+const ctx = document.getElementById('chart-time').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: allT,
+    datasets: [
+      { label: 'Truth', data: truthSeries, borderColor: '#e6edf3', borderWidth: 1.0, pointRadius: 0, fill: false, tension: 0 },
+      { label: 'OLD', data: oldSeries, borderColor: '#f87171', borderWidth: 2.0, pointRadius: 1.5, pointBackgroundColor: '#f87171', fill: false, tension: 0.25 },
+      { label: 'DRAIN', data: drainSeries, borderColor: '#39d2c0', borderWidth: 2.0, pointRadius: 1.5, pointBackgroundColor: '#39d2c0', fill: false, tension: 0.25 },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { labels: { color: '#e6edf3' } }, tooltip: { backgroundColor: '#0d1117', titleColor: '#e6edf3', bodyColor: '#e6edf3' } },
+    scales: {
+      x: { type: 'linear', title: { display: true, text: 'time (hours since recording start)', color: '#8b949e' },
+           ticks: { color: '#8b949e' }, grid: { color: 'rgba(139,148,158,0.06)' } },
+      y: { title: { display: true, text: 'RR interval (ms)', color: '#8b949e' },
+           ticks: { color: '#8b949e' }, grid: { color: 'rgba(139,148,158,0.08)' } }
+    }
+  },
+  plugins: [{
+    id: 'anchorLine',
+    afterDraw: (chart) => {
+      const ctx = chart.ctx;
+      const xPos = chart.scales.x.getPixelForValue(D.anchor_t_h);
+      ctx.save();
+      ctx.strokeStyle = 'rgba(212,168,67,0.6)';
+      ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      ctx.moveTo(xPos, chart.chartArea.top);
+      ctx.lineTo(xPos, chart.chartArea.bottom);
+      ctx.stroke();
+      ctx.fillStyle = '#d4a843'; ctx.font = '11px Inter';
+      ctx.fillText('anchor', xPos + 4, chart.chartArea.top + 14);
+      ctx.restore();
+    }
+  }]
+});
+</script>
+
+</body>
+</html>

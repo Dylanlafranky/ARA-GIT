@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vertical-ARA across mammals — local cycle shape match</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="multispecies_vertical_ara_data.js"></script>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1c2333;
+  --border: #30363d;
+  --text: #e6edf3;
+  --dim: #8b949e;
+  --gold: #d4a843;
+  --mouse: #f87171;
+  --rabbit: #fb923c;
+  --dog: #d4a843;
+  --human: #39d2c0;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  padding: 1.5rem;
+  line-height: 1.55;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+h1 { font-size: 1.7rem; font-weight: 600; margin-bottom: 0.4rem; color: var(--gold); }
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+h2 { font-size: 1.15rem; font-weight: 600; margin: 1.5rem 0 0.7rem; color: var(--text); }
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.chart-container { position: relative; height: 380px; margin-top: 0.5rem; }
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.7rem;
+  margin: 0.7rem 0 1rem;
+}
+.species-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  border-left: 4px solid var(--mouse);
+}
+.species-card.mouse  { border-left-color: var(--mouse);  }
+.species-card.rabbit { border-left-color: var(--rabbit); }
+.species-card.dog    { border-left-color: var(--dog);    }
+.species-card.human  { border-left-color: var(--human);  }
+.species-card .name { font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
+.species-card .stat { font-size: 0.85rem; color: var(--dim); font-family: 'JetBrains Mono', monospace; }
+.legend {
+  display: flex; flex-wrap: wrap; gap: 1.2rem; margin: 0.5rem 0 0.5rem;
+  font-size: 0.85rem;
+}
+.legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+table {
+  width: 100%; border-collapse: collapse; font-size: 0.9rem;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+th, td { padding: 0.5rem 0.7rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--dim); font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.corr-good { color: var(--human); font-weight: 600; }
+.corr-mid  { color: var(--gold); }
+.corr-low  { color: var(--mouse); }
+.note {
+  background: var(--surface);
+  border-left: 3px solid var(--gold);
+  padding: 0.8rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+.note strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<h1>Vertical-ARA across mammals — does local cycle shape match?</h1>
+<p class="subtitle">PhysioZoo mouse + rabbit + dog (PhysioNet) plus our nsr001 human, 4 species spanning a 6.6× heart-period range.<br>
+Each species' RR-interval signal bandpassed at φ-rungs around its own heart period. Profiles compared after time-rescaling and peak alignment. Strict-causal SOS Butterworth.</p>
+
+<h2>Species — what we measured</h2>
+<div class="species-grid" id="species-grid"></div>
+
+<h2>1 · Per-species amplitude profile across φ-rungs</h2>
+<div class="panel">
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--mouse)"></span>Mouse (521 bpm, 178 min)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--rabbit)"></span>Rabbit (236 bpm, 45 min)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--dog)"></span>Dog (119 bpm, 50 min)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--human)"></span>Human (79 bpm, 22.5 h)</div>
+  </div>
+  <div class="chart-container"><canvas id="chart-raw"></canvas></div>
+  <p class="note" style="margin-top:1rem;">
+    <strong>X-axis:</strong> φ-rungs above each species' heart period (rel_rung 0 = heartbeat itself, +5 ≈ 5 s envelope, +10 ≈ 1 min, +19 ≈ 2.6 h).<br>
+    <strong>Y-axis:</strong> RMS bandpass amplitude, normalised so each species' peak = 1.<br>
+    Each species' peak sits at a different rel-rung (mouse +7, rabbit +9, dog +7, human +19) — driven mainly by recording length, not biology. The longer the recording, the slower an envelope you can pin.
+  </p>
+</div>
+
+<h2>2 · Peak-aligned overlay — the framework's actual prediction</h2>
+<div class="panel">
+  <div class="chart-container"><canvas id="chart-aligned"></canvas></div>
+  <p class="note" style="margin-top:1rem;">
+    <strong>X-axis:</strong> rungs <em>relative to each species' detected peak</em> (so 0 = peak for everyone). <strong>Y-axis:</strong> normalised amplitude (peak=1).<br>
+    The framework predicts that after this peak-alignment, the curves should overlap closely within ±2 rungs. They do.
+  </p>
+</div>
+
+<h2>3 · Pairwise correlation matrix</h2>
+<div class="panel">
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot corr-good">●</span> ≥ 0.90 (strong match)</div>
+    <div class="legend-item"><span class="legend-dot corr-mid">●</span> 0.70 – 0.90 (acceptable)</div>
+    <div class="legend-item"><span class="legend-dot corr-low">●</span> &lt; 0.70 (fails framework prediction)</div>
+  </div>
+  <table id="corr-table"></table>
+  <p class="note" style="margin-top:1rem;">
+    Framework prediction: profile correlation > +0.70 within ±2 rungs of peak. <strong>All six pairs cleared this — every entry is above +0.89 within ±2 rungs.</strong>
+  </p>
+</div>
+
+<h2>4 · The takeaway</h2>
+<div class="panel">
+  <p style="margin-bottom: 0.7rem;">
+    Four mammals at different metabolic scales — mouse (521 bpm) up to human (79 bpm) — all show <strong>the same local cycle shape after time-rescaling by their own heart period</strong>.
+  </p>
+  <p style="margin-bottom: 0.7rem;">
+    Mean correlation across all six species pairs within ±2 rungs of peak: <strong>+0.955</strong>. Within ±5 rungs: <strong>+0.93</strong>. The framework's vertical-ARA prediction held without tuning, on independently collected datasets, with strict-causal filtering.
+  </p>
+  <p>
+    This extends the prior cross-domain result (ECG ↔ ENSO match across 38 orders of φ in time) <em>into</em> biology. Mammalian physiology shares a single shape across the part of the φ-ladder we tested. Next step: corvids and parrots, when we can get clean continuous HRV recordings.
+  </p>
+</div>
+
+<script>
+const data = window.MULTISPECIES;
+const SP_INFO = {
+  Mouse:  { color: '#f87171', bpm: 521, dur_min: 178.8, peak_offset: -7, heart_ms: 115.1 },
+  Rabbit: { color: '#fb923c', bpm: 236, dur_min: 45.0,  peak_offset: -9, heart_ms: 254.4 },
+  Dog:    { color: '#d4a843', bpm: 119, dur_min: 50.4,  peak_offset: -7, heart_ms: 503.2 },
+  Human:  { color: '#39d2c0', bpm: 79,  dur_min: 1347.9,peak_offset: -19,heart_ms: 759.7 },
+};
+
+// === Species cards ===
+const grid = document.getElementById('species-grid');
+['Mouse', 'Rabbit', 'Dog', 'Human'].forEach(sp => {
+  const i = SP_INFO[sp];
+  const peak = data.peaks[sp];
+  const card = document.createElement('div');
+  card.className = `species-card ${sp.toLowerCase()}`;
+  card.innerHTML = `
+    <div class="name">${sp}</div>
+    <div class="stat">heart period: ${i.heart_ms.toFixed(0)} ms (${i.bpm} bpm)</div>
+    <div class="stat">recording: ${i.dur_min.toFixed(0)} min</div>
+    <div class="stat">peak rung: <span style="color:${i.color}">+${peak}</span> above heart</div>
+  `;
+  grid.appendChild(card);
+});
+
+// === Chart 1: raw profiles ===
+const rawCtx = document.getElementById('chart-raw').getContext('2d');
+function rawDataset(sp) {
+  const profile = data.profiles[sp];
+  const peak = data.peaks[sp];
+  // normalise by peak
+  const peak_amp = profile[data.rel_rungs.indexOf(peak)];
+  const normed = profile.map(v => v == null ? null : v / peak_amp);
+  return {
+    label: sp,
+    data: normed,
+    borderColor: SP_INFO[sp].color,
+    backgroundColor: SP_INFO[sp].color + '22',
+    borderWidth: 2,
+    pointRadius: 3,
+    pointBackgroundColor: SP_INFO[sp].color,
+    fill: false,
+    tension: 0.25,
+    spanGaps: false,
+  };
+}
+
+new Chart(rawCtx, {
+  type: 'line',
+  data: {
+    labels: data.rel_rungs,
+    datasets: ['Mouse','Rabbit','Dog','Human'].map(rawDataset),
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    plugins: {
+      legend: { labels: { color: '#e6edf3' } },
+      tooltip: {
+        backgroundColor: '#0d1117', titleColor: '#e6edf3', bodyColor: '#e6edf3',
+        callbacks: {
+          title: (items) => `rel_rung ${items[0].label} above heart period`,
+          label: (item) => `${item.dataset.label}: ${item.parsed.y == null ? '—' : item.parsed.y.toFixed(2)}`,
+        }
+      }
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'φ-rungs above each species\' heart period', color: '#8b949e' },
+        ticks: { color: '#8b949e' },
+        grid:  { color: 'rgba(139,148,158,0.08)' }
+      },
+      y: {
+        title: { display: true, text: 'normalised amplitude (peak = 1)', color: '#8b949e' },
+        ticks: { color: '#8b949e' },
+        grid:  { color: 'rgba(139,148,158,0.08)' },
+        min: 0, max: 1.1
+      }
+    }
+  }
+});
+
+// === Chart 2: peak-aligned ===
+const alignCtx = document.getElementById('chart-aligned').getContext('2d');
+const aligned_offsets = [];
+['Mouse','Rabbit','Dog','Human'].forEach(sp => {
+  const o = data.profiles_aligned[sp].offsets;
+  o.forEach(off => { if (!aligned_offsets.includes(off)) aligned_offsets.push(off); });
+});
+aligned_offsets.sort((a,b)=>a-b);
+
+function alignedDataset(sp) {
+  const offsets = data.profiles_aligned[sp].offsets;
+  const values  = data.profiles_aligned[sp].values;
+  const map = {}; offsets.forEach((o, i) => { map[o] = values[i]; });
+  const aligned = aligned_offsets.map(o => o in map ? map[o] : null);
+  return {
+    label: sp,
+    data: aligned,
+    borderColor: SP_INFO[sp].color,
+    backgroundColor: SP_INFO[sp].color + '22',
+    borderWidth: 2.5,
+    pointRadius: 4,
+    pointBackgroundColor: SP_INFO[sp].color,
+    fill: false,
+    tension: 0.25,
+    spanGaps: false,
+  };
+}
+
+new Chart(alignCtx, {
+  type: 'line',
+  data: {
+    labels: aligned_offsets,
+    datasets: ['Mouse','Rabbit','Dog','Human'].map(alignedDataset),
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false, animation: false,
+    plugins: {
+      legend: { labels: { color: '#e6edf3' } },
+      tooltip: {
+        backgroundColor: '#0d1117', titleColor: '#e6edf3', bodyColor: '#e6edf3',
+        callbacks: {
+          title: (items) => `${items[0].label} rungs from peak`,
+          label: (item) => `${item.dataset.label}: ${item.parsed.y == null ? '—' : item.parsed.y.toFixed(2)}`,
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'rungs above (or below) each species\' detected peak', color: '#8b949e' },
+        ticks: { color: '#8b949e' },
+        grid:  { color: 'rgba(139,148,158,0.08)' }
+      },
+      y: {
+        title: { display: true, text: 'normalised amplitude (peak = 1)', color: '#8b949e' },
+        ticks: { color: '#8b949e' },
+        grid:  { color: 'rgba(139,148,158,0.08)' },
+        min: 0, max: 1.1
+      }
+    }
+  }
+});
+
+// === Correlation table ===
+function renderCorrTable() {
+  const table = document.getElementById('corr-table');
+  const species = ['Mouse','Rabbit','Dog','Human'];
+  const ranges = [['±2', data.pairs_pm2], ['±3', data.pairs_pm3], ['±5', data.pairs_pm5]];
+  let html = `<thead><tr><th>Pair</th><th>n</th>`;
+  ranges.forEach(([lbl,_]) => html += `<th>corr (${lbl})</th><th>mean |Δ|</th>`);
+  html += `</tr></thead><tbody>`;
+  // pull pairs from pairs_pm2 (full set), align metadata across the three ranges
+  const pairsList = data.pairs_pm2.map(p => [p[0], p[1]]);
+  pairsList.forEach(([sp1, sp2]) => {
+    html += `<tr><td>${sp1} vs ${sp2}</td>`;
+    let n_first = null;
+    ranges.forEach(([lbl, plist], idx) => {
+      const found = plist.find(p => p[0] === sp1 && p[1] === sp2);
+      if (!found) { html += `<td>—</td><td>—</td>`; return; }
+      const [, , n, corr, mdiff] = found;
+      if (idx === 0) { html += `<td>${n}</td>`; n_first = n; }
+      let cls = 'corr-low';
+      if (corr >= 0.9) cls = 'corr-good';
+      else if (corr >= 0.7) cls = 'corr-mid';
+      html += `<td class="${cls}">${corr >= 0 ? '+' : ''}${corr.toFixed(3)}</td><td>${mdiff.toFixed(3)}</td>`;
+    });
+    html += `</tr>`;
+  });
+  html += `</tbody>`;
+  table.innerHTML = html;
+}
+renderCorrTable();
+</script>
+
+</body>
+</html>

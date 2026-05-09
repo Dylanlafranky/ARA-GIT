@@ -1,0 +1,1 @@
+window.ELASTIC_WALLS = {"method": "Elastic-wall compass: bounce at \u00b1W\u00b7\u03c3 with elasticity 1/\u03c6", "walls_tested": ["None", "2.5", "2.0", "1.5", "1.0"], "bounce_counts": {"None": 0, "2.5": 217, "2.0": 447, "1.5": 1190, "1.0": 2381}};
