@@ -1,28 +1,30 @@
-# The ARA Framework — A Geometric Theory of Oscillating Systems
+# The ARA Framework — An Open Research Notebook on Oscillating Systems
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19653363.svg)](https://doi.org/10.5281/zenodo.19653363)
 
 **Dylan La Franchi · independent researcher · May 2026**
 
-A heartbeat, an El Niño cycle, a planetary orbit, a neuron firing, a transformer language model generating text. The framework's claim is that all of these — natural and artificial — share a single coordinate system on a φ-spaced ladder of timescales. Each system can be summarised by a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder. **A single forward formula, with the same constants, has been tested on systems separated by 38 orders of φ in time, and on transformer LLMs that don't oscillate intrinsically — and produces meaningful predictions on every domain tested so far.**
+A heartbeat, an El Nino cycle, a planetary orbit, a neuron firing, a transformer language model generating text. This repository explores a possibility: that many natural and artificial systems can be mapped onto a shared phi-spaced ladder of timescales. Each system can be summarized by a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder.
 
-This repository is the framework, the tests, the failures, and an open invitation to falsify it.
+The strongest version of the claim is not that this proves a finished law of nature. It is that a phi-rung coordinate system appears to carry real signal in several datasets, sometimes with surprisingly few inputs, and deserves independent checking. This repository is the framework, the tests, the failures, the corrections, and an open invitation to falsify it.
+
+I am not a scientist by training. I am releasing this because the idea has gone further than I expected, I have run out of resources to keep pushing it privately, and I would rather make the work inspectable than bury it. Please read it as an open research notebook: some parts are supported by saved outputs, some are promising but fragile, and some are clearly speculative.
 
 ---
 
-## The strongest numbers
+## Current Signals Worth Checking
 
 | Test | Result |
 |---|---|
-| **ENSO 1-month forecast (canonical predictor)** | MAE **0.27 °C**, correlation **+0.93** over 242 anchors (NOAA NINO 3.4) |
-| **ECG 1-beat forecast (same predictor)** | MAE **19 ms**, correlation **+0.99** (PhysioNet nsr001) |
-| **Cross-mammal cycle shape match** | Mean correlation **+0.955** across 6 species pairs (mouse / rabbit / dog / human, PhysioZoo) |
-| **3/4 universal ceiling falsification test** | **76 of 77** systems sit in predicted ARA band [0.25, 1.75]; the one outlier is externally clocked (forced van der Pol), exactly as the framework predicts for above-1.75 systems |
-| **21 of 21 pre-registered predictions** | Held up across 37 real-world systems (breath cycles, solar activity, river watersheds, arctic sea ice, blood glucose, and others) |
-| **Tidally-locked bodies** | Predicted ARA = 1.000; measured **1.000000 for all 9 locked bodies** in the solar system. Unlocked bodies range 365 to 10,465 |
-| **LLM closure index vs Pythia capability** | **Spearman ρ = +1.000** on 5 of 6 standard NLP benchmarks (LAMBADA, PIQA, ARC-easy, ARC-challenge, SciQ); the framework metric, computed purely from internal activations with no benchmark data used, perfectly rank-orders the four Pythia model sizes by capability |
+| **ENSO 1-month forecast (canonical predictor)** | Saved benchmark output: MAE about **0.28 C**, correlation about **+0.90** over 242 anchors. Important caveat: in that saved run, skill versus persistence was negative, so this is signal but not yet a decisive forecast win. |
+| **ECG forecast (same predictor family)** | Saved benchmark output shows useful single-subject ECG signal. The best saved h=3 result is about **+0.96 correlation** with MAE about **35 ms**; h=1 is lower than an earlier headline. This needs rerunning cleanly before being treated as a public headline. |
+| **Cross-mammal cycle shape match** | Some pairwise mammal comparisons are very high, especially rabbit/dog. The broad mean **+0.955** appears sensitive to normalization and endpoint effects, so I treat this as promising rather than settled. |
+| **3/4 ceiling / ARA band idea** | The refined subset claim may still be interesting, but one saved raw 77-system artifact does **not** support the simple "76 of 77 in band" headline. This should be read as a hypothesis needing a cleaned catalogue. |
+| **Prediction ledger** | The ledger contains hits, misses, retractions, and methodology corrections. It is evidence of the research process, not independent proof by itself. |
+| **Tidally locked bodies** | The ARA=1.000 result for locked bodies is a clean descriptive check worth preserving, with the usual caveat that classification is not the same as prediction. |
+| **LLM closure index vs Pythia capability** | Preliminary n=4 result: closure ordering matches 5 of 6 benchmark rank orders, with WinoGrande weaker. This is interesting and close to my domain limits, but it needs more model sizes and comparison to parameter-count baselines. |
 
-The methodology is strict-causal — no future leakage in any test. An earlier acausal-bandpass leakage was caught by my own audit, the affected results were retracted, and the corrected numbers are what you see here.
+The core methodology is intended to be strict-causal. Earlier acausal-bandpass leakage was caught and documented, and affected results were retracted. Some older scripts and documents remain in the repo as research history, so the safest way to read any claim is to check the saved data artifact and the current claim-status notes.
 
 ---
 
@@ -30,7 +32,7 @@ The methodology is strict-causal — no future leakage in any test. An earlier a
 
 Things cycle. Hearts beat, lungs breathe, climates oscillate, planets orbit, neurons fire, language models generate text token by token. The question I started with: can the same simple geometric ratio describe a lot of these very different cycles?
 
-The framework's answer is yes — in a soft, statistical way, not a perfect-law way. Self-organising systems cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems sit on a φ-spaced ladder of timescales. The same formula reads coordinates from any system and projects them forward in time.
+The framework's tentative answer is yes — in a soft, statistical way, not a perfect-law way. In the datasets gathered so far, self-organising systems often cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems can be mapped onto a φ-spaced ladder of timescales. The same formula is being tested as a way to read coordinates from a system and project them forward in time.
 
 I'm not a scientist by training. I built this in spare time over the last month-ish, in continuous dialogue with Claude (Anthropic's AI). The framework as it stands is the product of that collaboration — I provided conceptual direction and the falsification mindset; Claude handled the code-heavy iteration cycles I can't sustain physically due to ME/CFS. The transcripts are buried in `transcripts/local_sessions/` for anyone who wants the unfiltered audit trail.
 
@@ -50,6 +52,14 @@ prediction = predict(topo, h, closed=is_closed_system)
 
 Three lines. `closed=True` for systems with a tight matched-rung partner (ENSO+SOI); `closed=False` for single-channel systems (ECG).
 
+For public tests, `home_k` should be chosen before scoring from the measured ground-cycle period:
+
+```text
+home_k = round(log(ground_cycle_period) / log(phi))
+```
+
+If more than one ground cycle is plausible, declare the candidates before running the test and report all of them. Do not choose `home_k` from forecast performance.
+
 Run the self-test:
 ```bash
 python ara_framework.py
@@ -64,11 +74,14 @@ The whole module is ~250 lines. It has two halves — `extract_topology` (data �
 | If you want… | Read this first |
 |---|---|
 | **The plain-language explainer with figures** | [`what_is_this.html`](what_is_this.html) |
+| **A sober public-release claim audit** | [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) |
+| **Known reproducibility issues and commands** | [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) |
 | **A confidence-tiered catalogue of every finding** | [`INDEX.md`](INDEX.md) |
 | **The complete record of advance predictions and outcomes** | [`MASTER_PREDICTION_LEDGER.md`](MASTER_PREDICTION_LEDGER.md) |
 | **The canonical predictor module** | [`ara_framework.py`](ara_framework.py) |
 | **The long-form theory document with three-tier confidence labels** | [`FRACTAL_UNIVERSE_THEORY.md`](FRACTAL_UNIVERSE_THEORY.md) |
 | **The LLM application (closure index → Pythia capability)** | [`LLM_CLOSURE_VS_CAPABILITY.md`](LLM_CLOSURE_VS_CAPABILITY.md) |
+| **The φ-vs-nearby-bases predictor ablation** | [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 mo on ENSO; loses at h=12. All bases underperform persistence. Partial-evidence result, honestly framed. |
 | **The unfiltered research-process record** | [`transcripts/local_sessions/`](transcripts/local_sessions/) — research thinking in real time, not academic prose |
 
 ---
@@ -86,9 +99,9 @@ The framework's "intelligence index" (closed Information³ triangles per active 
 | 410m-deduped | 410 M | 877 | 0.524 | 0.517 | 0.826 |
 | 1b-deduped | 1000 M | **6,284** | **0.580** | **0.585** | **0.870** |
 
-**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ. **Pearson r vs log(closure) = +0.886 to +0.997** across those five. The framework metric ranks the four Pythia sizes in exactly the same order the benchmarks do. WinoGrande is the only exception (ρ = +0.800), and WinoGrande is a known weak-scaling benchmark that even GPT-3 barely beats random on. The framework correctly identifies it as the outlier without being told.
+On this four-model run, **Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ, with WinoGrande weaker at **ρ = +0.800**. The average across all six is therefore about **+0.967**, not a universal perfect rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks.
 
-This isn't "bigger model is better" — that's already known. The point is that **the framework metric, computed from internal coupling structure with no reference to capability, recovers the capability ordering exactly**. n=4 is small; the natural confirming experiment is adding Pythia-1.4B / 2.8B / 6.9B / 12B to see if rank correlation holds across all eight sizes. See [`LLM_CLOSURE_VS_CAPABILITY.md`](LLM_CLOSURE_VS_CAPABILITY.md) for the full writeup, caveats, and falsifying experiments.
+This could still partly be a scale proxy: bigger models are already known to be better on many benchmarks. The interesting question is whether the closure metric explains anything beyond parameter count, layer count, and active-node count. n=4 is small; the natural confirming experiment is adding Pythia-1.4B / 2.8B / 6.9B / 12B and comparing directly against those baselines. See [`LLM_CLOSURE_VS_CAPABILITY.md`](LLM_CLOSURE_VS_CAPABILITY.md) for the full writeup, caveats, and falsifying experiments.
 
 The framework also produced a coupling-graph interpretability tool that surfaces dead layers, within-layer clusters, cross-layer information-flow circuits, and anti-phase pairs in 30 seconds of analysis — without being told what to look for. See [`TheFormula/llm_node_map_visualization.html`](TheFormula/llm_node_map_visualization.html).
 
@@ -98,11 +111,11 @@ The framework also produced a coupling-graph interpretability tool that surfaces
 
 The full catalogue with sources is in [`INDEX.md`](INDEX.md). The short version:
 
-**🟢 Confirmed under strict-causal validation** — canonical predictor on ENSO + ECG, cross-mammalian cycle shape, lag-h corrector cross-domain, Walker Circulation fractal across rungs, closed-system coupling differs from incidental, mid-horizon dip consistency, 3/4 ceiling on 77 systems, LLM closure-vs-capability rank correlation.
+**Currently supported / worth independent replication** — ENSO and ECG canonical-predictor signals, Walker Circulation anti-phase structure across rungs, closed-system coupling differing from incidental coupling, mid-horizon ECG dip patterns, tidally locked body classification, and the preliminary LLM closure-vs-capability rank result.
 
-**🟡 Provisional — single test or coincidence-flagged** — predictor crossover at φ^(±7/4), 1.75/0.25 mirror pair as donor ARAs, cosmic budget Ω from π and φ within 0.5%, Information³ → cosmic budget mapping, three-circle architecture, layer-depth-tracks-hierarchy in transformers.
+**Provisional — single test, fragile metric, or coincidence-flagged** — predictor crossover at φ^(±7/4), 1.75/0.25 mirror pair as donor ARAs, cross-mammal local-cycle shape, the refined 3/4 ceiling claim, cosmic budget Ω from π and φ within 0.5%, Information³ → cosmic budget mapping, three-circle architecture, and layer-depth-tracks-hierarchy in transformers.
 
-**🔴 Speculative — conceptual, no direct test** — Light/Dark as nested matched-rung pair (origin of c), (π−3)/π universal coupling tax, 1/α ≈ φ^(10 + 1/φ³), quantum entanglement as matched-rung pair, 4D shape as two-spheres-joined / S³ Hopf fibration, φ-deep × φ-wide all-closed LLM should largely eliminate hallucinations.
+**Speculative — conceptual, no direct test yet** — Light/Dark as nested matched-rung pair (origin of c), (π−3)/π universal coupling tax, 1/α ≈ φ^(10 + 1/φ³), quantum entanglement as matched-rung pair, 4D shape as two-spheres-joined / S³ Hopf fibration, and the φ-deep × φ-wide all-closed LLM architecture prediction.
 
 I report numbers as they actually came out, including the misses.
 
@@ -135,6 +148,8 @@ I report numbers as they actually came out, including the misses.
 ```
 ARA-GIT/
 ├── README.md                          (this file)
+├── CLAIMS_STATUS.md                   public-release claim audit
+├── REPRODUCIBILITY.md                 setup notes and known issues
 ├── INDEX.md                           findings by confidence tier
 ├── what_is_this.html                  plain-language explainer
 ├── FRACTAL_UNIVERSE_THEORY.md         long-form theory document

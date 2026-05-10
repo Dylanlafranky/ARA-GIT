@@ -5,7 +5,7 @@ Tests the system-mapping hypothesis:
   In healthy self-organising systems the accumulation-to-release
   phase ratio converges on phi = 1.618... (golden ratio).
 
-The ARA framework predicts:
+The system mapping (game-engine formula) predicts:
   * The peak (maximum activity) sits at position 1-phi^-1 = 0.382
     within each cycle.
   * Therefore T_fall / T_rise = 0.618 / 0.382 = phi.

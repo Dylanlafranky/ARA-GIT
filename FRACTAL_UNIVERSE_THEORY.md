@@ -1,4 +1,6 @@
 # The Fractal Universe Theory
+
+> **Public-release note, May 2026:** This is the most speculative document in the repository. It mixes saved empirical results, exploratory mathematical pattern-finding, personal interpretation, and large theoretical extrapolation. The framework may contain useful signal even if much of this document is wrong. Please read the empirical claims through `CLAIMS_STATUS.md` and the reproducibility caveats in `REPRODUCIBILITY.md`.
 ## A Framework Extension — Dylan La Franchi, April 2026
 
 ---

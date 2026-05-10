@@ -15,12 +15,17 @@ import torch
 from scipy.signal import butter, sosfilt, find_peaks
 from scipy.ndimage import gaussian_filter1d
 
-sys.path.insert(0, '/sessions/amazing-cool-archimedes/venv')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
+sys.path.insert(0, os.environ.get('ARA_VENV', ''))
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
 
 PHI = 1.6180339887498949
-HF_CACHE = '/sessions/amazing-cool-archimedes/hf-cache'
-OUT_PATH = '/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/llm_ara_dynamic_data.js'
+HF_CACHE = os.environ.get('HF_HOME', os.path.expanduser('~/.cache/huggingface'))
+OUT_PATH = os.path.join(REPO_ROOT, 'TheFormula/llm_ara_dynamic_data.js')
 MODEL_NAME = 'EleutherAI/pythia-70m-deduped'
 
 def causal_bandpass(arr, period, bw=0.85, order=2):

@@ -14,15 +14,21 @@ For each subject:
 
 Then aggregate dip-shape across subjects.
 """
+import os
 import json, os, time
 import numpy as np
 import wfdb
 from scipy.signal import butter, sosfilt
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
 PHI = 1.6180339887498949
 
-DATA_DIR = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/normal-sinus-rhythm-rr-interval-database-1.0.0"
-OUT      = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/multi_subject_dip_data.js"
+DATA_DIR = os.path.join(REPO_ROOT, "normal-sinus-rhythm-rr-interval-database-1.0.0")
+OUT      = os.path.join(REPO_ROOT, "TheFormula/multi_subject_dip_data.js")
 
 SUBJECTS = ['nsr001','nsr005','nsr010','nsr015','nsr020','nsr025','nsr030','nsr035','nsr040','nsr045','nsr050']
 

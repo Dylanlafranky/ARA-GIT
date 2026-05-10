@@ -10,19 +10,24 @@ import os, sys, json, time
 import numpy as np
 import torch
 
-sys.path.insert(0, '/sessions/amazing-cool-archimedes/venv')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
+sys.path.insert(0, os.environ.get('ARA_VENV', ''))
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
 
-HF_CACHE = '/sessions/amazing-cool-archimedes/hf-cache'
-OUT_PATH = '/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/llm_size_series_data.js'
+HF_CACHE = os.environ.get('HF_HOME', os.path.expanduser('~/.cache/huggingface'))
+OUT_PATH = os.path.join(REPO_ROOT, 'TheFormula/llm_size_series_data.js')
 
 # Models to try, in size order
 MODEL_CONFIGS = [
     # (label, hf_name_or_path, params_M)
     ('70M',   'EleutherAI/pythia-70m-deduped',    70),
-    ('160M',  '/sessions/amazing-cool-archimedes/hf-cache/models--EleutherAI--pythia-160m-deduped/manual',  160),
-    ('410M',  '/sessions/amazing-cool-archimedes/hf-cache/models--EleutherAI--pythia-410m-deduped/manual',  410),
-    ('1B',    '/sessions/amazing-cool-archimedes/hf-cache/models--EleutherAI--pythia-1b-deduped/manual',    1000),
+    ('160M',  'EleutherAI/pythia-160m-deduped',  160),
+    ('410M',  'EleutherAI/pythia-410m-deduped',  410),
+    ('1B',    'EleutherAI/pythia-1b-deduped',    1000),
 ]
 
 PROMPT = "The framework proposes that natural oscillating systems"

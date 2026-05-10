@@ -21,17 +21,23 @@ Bands:
 Run the same predictor under each ablation, sweep horizons, find crossover,
 compare to predicted E.
 """
+import os
 import json, os, time, sys
-sys.path.insert(0, '/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
+sys.path.insert(0, REPO_ROOT)
 from ara_framework import extract_topology, _predict_act, _predict_old, PHI
 import numpy as np, pandas as pd
 import wfdb
 
-OUT = '/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/neighbour_ablation_data.js'
+OUT = os.path.join(REPO_ROOT, 'TheFormula/neighbour_ablation_data.js')
 
 # === Load ENSO ===
 print("Loading NINO 3.4 + SOI...")
-df = pd.read_csv('/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/Nino34/nino34.long.anom.csv',
+df = pd.read_csv(os.path.join(REPO_ROOT, 'Nino34/nino34.long.anom.csv'),
                  skiprows=1, header=None, names=['date','val'])
 df['date'] = pd.to_datetime(df['date'].str.strip())
 df = df[df['val'] > -90].copy()
@@ -40,7 +46,7 @@ nino.index = pd.to_datetime(nino.index).to_period('M').to_timestamp()
 nino = nino.groupby(nino.index).first()
 
 soi_rows=[]
-with open('/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/SOI_NOAA/soi.data') as f:
+with open(os.path.join(REPO_ROOT, 'SOI_NOAA/soi.data')) as f:
     next(f)
     for ln in f:
         parts = ln.split()
@@ -63,7 +69,7 @@ N_ENSO = len(NINO)
 
 # === Load ECG ===
 print("Loading ECG nsr001...")
-ann = wfdb.rdann('/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/normal-sinus-rhythm-rr-interval-database-1.0.0/nsr001', 'ecg')
+ann = wfdb.rdann(os.path.join(REPO_ROOT, 'normal-sinus-rhythm-rr-interval-database-1.0.0/nsr001'), 'ecg')
 RR = (np.diff(ann.sample) / ann.fs * 1000).astype(float)
 N_ECG = len(RR)
 print(f"  ENSO: {N_ENSO} months   ECG: {N_ECG} beats")

@@ -1,6 +1,8 @@
 # HOW TO: Map Any System Onto Temporal Spacetime
 ## Complete Method — Worked Example: The Human Heart
 
+> **Public-release note, May 2026:** This is an operational guide for trying the framework. It should not be read as a guarantee that every mapped system validates the theory. Domain expertise is still needed to choose physical phases, source durations, and avoid convenient after-the-fact decompositions.
+
 ---
 
 ## What You'll Produce
@@ -21,7 +23,7 @@ You need two things for your system:
 - **Timing data**: how long each phase lasts (from published sources or measurement)
 - **Energy data**: how much energy oscillates per cycle (from published sources or measurement)
 
-That's it. No domain expertise required.
+That's enough to start. For public claims, domain expertise is still needed to verify that the chosen phases and durations are physically meaningful.
 
 ---
 

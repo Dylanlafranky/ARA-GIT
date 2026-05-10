@@ -1,8 +1,10 @@
 # Closure index predicts Pythia capability — preliminary scaling test
 
+> **Public-release note, May 2026:** This is one of the more interesting results because it is close to current AI interpretability work, but it is still a small-n exploratory result. The closure metric should be compared directly against parameter count, layer count, active-node count, and prompt/seed variation before treating it as a capability proxy.
+
 **Date:** 2026-05-10
 **Question:** Does the framework's "closed Information³ structure" metric correlate with how well language models actually perform on standard NLP benchmarks?
-**Result:** Yes — strongly. Pearson r against log(closure) is +0.88 to +0.99 across five of six benchmarks. Spearman rank correlation is **perfect (ρ = 1.000)** on five of six benchmarks.
+**Result:** Preliminary yes. Pearson r against log(closure) is +0.88 to +0.99 across five of six benchmarks. Spearman rank correlation is **perfect (ρ = 1.000)** on five of six benchmarks, with WinoGrande weaker at ρ = 0.800.
 
 ## The numbers
 
@@ -25,9 +27,9 @@ Closure index from `llm_size_series_data.js`. Benchmark scores from `evals/pythi
 | ARC-challenge | +0.997 | **+1.000** |
 | SciQ | +0.933 | **+1.000** |
 | WinoGrande | +0.729 | +0.800 |
-| **average across 6 benchmarks** | **+0.931** | **+1.000** |
+| **average across 6 benchmarks** | **+0.931** | **+0.967** |
 
-**The closure index ranks the four Pythia sizes in exactly the same order the benchmarks do**, on every benchmark except WinoGrande. WinoGrande is a known weak-scaling benchmark — even GPT-3-sized models barely beat random on it — so the field expects flat scaling there. The framework's metric correctly identifies WinoGrande as the outlier without being told.
+**The closure index ranks the four Pythia sizes in exactly the same order the benchmarks do**, on every benchmark except WinoGrande. WinoGrande is a known weak-scaling benchmark — even GPT-3-sized models barely beat random on it — so it is a plausible outlier. This is interesting, but it does not yet prove closure is causal or better than scale-based baselines.
 
 ## What the closure index actually measures
 
@@ -39,7 +41,7 @@ For each model:
 5. Count **loose threads**: components with 0 or 1 strong correlations.
 6. Closure index = (triangles per active component) ÷ (loose-thread fraction).
 
-The metric uses **no benchmark data, no behavioural test, no human evaluation**. It's computed from how the model's internals couple to each other during generation. The framework predicts that closure (three Rs forming a closed loop, per the Information³ memory) is what makes information stable. The data shows that metric perfectly rank-orders the Pythia sizes on capability.
+The metric uses **no benchmark data, no behavioural test, no human evaluation**. It's computed from how the model's internals couple to each other during generation. The framework predicts that closure (three Rs forming a closed loop, per the Information³ memory) is what makes information stable. The data shows that this metric rank-orders the Pythia sizes on most tested benchmarks; the next question is whether it adds information beyond size and depth.
 
 ## Why this matters
 
@@ -75,6 +77,6 @@ If the pattern holds with more model sizes and more benchmarks:
 
 This is the strongest single result from the LLM angle of the framework. If you lead the tech-subreddit post with one finding, this is it:
 
-> "I built a framework metric (closed Information³ triangles per active component, divided by loose-thread fraction) computed purely from internal activations during generation. Tested it on the Pythia size series — 70M, 160M, 410M, 1B. It perfectly rank-orders them on 5 of 6 standard NLP benchmarks (Spearman ρ=1.000 on LAMBADA, PIQA, ARC-easy, ARC-challenge, SciQ; ρ=0.800 on WinoGrande, which is known not to scale anyway). Pearson r vs log(closure index) is +0.93 averaged across the six benchmarks. n=4 is small but the rank correlations are perfect. Code in repo, predictions falsifiable, real research direction."
+> "I built a framework metric (closed Information³ triangles per active component, divided by loose-thread fraction) computed purely from internal activations during generation. Tested it on the Pythia size series — 70M, 160M, 410M, 1B. It rank-orders them on 5 of 6 standard NLP benchmarks (Spearman ρ=1.000 on LAMBADA, PIQA, ARC-easy, ARC-challenge, SciQ; ρ=0.800 on WinoGrande). Pearson r vs log(closure index) is +0.93 averaged across the six benchmarks. n=4 is small, and the required follow-up is to compare against parameter-count/depth baselines across more model sizes. Code in repo, predictions falsifiable, real research direction."
 
-That's a defensible claim with no overclaim. It admits the small-n limitation, names the one benchmark where the pattern weakens, and points at the natural follow-up (more model sizes).
+That's a defensible claim with no overclaim. It admits the small-n limitation, names the benchmark where the pattern weakens, and points at the natural follow-up: more model sizes plus direct baseline comparisons.

@@ -13,22 +13,28 @@ Outputs:
   - crossover horizon (where ACT corr drops below OLD corr)
   - that horizon expressed in multiples of home period and in φ-powers
 """
+import os
 import json, os, time
 import numpy as np, pandas as pd
 import wfdb
 from scipy.signal import butter, sosfilt
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
 PHI = 1.6180339887498949
 HOME_K = 8
 
 def _resolve(p):
-    p_lin = p.replace("F:\\SystemFormulaFolder", "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder").replace("\\","/")
-    return p_lin if os.path.isdir("/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder") else p
+    p_lin = p.replace("F:\\SystemFormulaFolder", REPO_ROOT).replace("\\","/")
+    return p_lin if os.path.isdir(REPO_ROOT) else p
 
-NINO_PATH = _resolve(r"F:\SystemFormulaFolder\Nino34\nino34.long.anom.csv")
-SOI_PATH  = _resolve(r"F:\SystemFormulaFolder\SOI_NOAA\soi.data")
-ECG_DIR   = _resolve(r"F:\SystemFormulaFolder\normal-sinus-rhythm-rr-interval-database-1.0.0")
-OUT       = _resolve(r"F:\SystemFormulaFolder\TheFormula\crossover_horizon_data.js")
+NINO_PATH = _resolve(r"<repo>/Nino34\nino34.long.anom.csv")
+SOI_PATH  = _resolve(r"<repo>/SOI_NOAA\soi.data")
+ECG_DIR   = _resolve(r"<repo>/normal-sinus-rhythm-rr-interval-database-1.0.0")
+OUT       = _resolve(r"<repo>/TheFormula\crossover_horizon_data.js")
 
 def causal_bandpass(arr, period_units, bw=0.4, order=2):
     n = len(arr); f_c = 1.0/period_units; nyq = 0.5

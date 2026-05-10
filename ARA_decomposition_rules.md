@@ -1,4 +1,7 @@
 # ARA Decomposition Rules
+
+> **Public-release note (May 2026):** This document predates the May 2026 claim-status audit. For the current public-release wording of any claim made here, see [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md). Several headline numbers in older docs are stronger than the saved artifacts support; CLAIMS_STATUS.md lists the safer wording.
+
 **How to break a system into subsystems for ARA mapping**
 
 ---

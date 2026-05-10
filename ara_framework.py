@@ -72,6 +72,12 @@ from typing import Sequence
 import numpy as np
 from scipy.signal import butter, sosfilt
 
+import os
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
 # === Framework constants ===
 PHI = 1.6180339887498949
 INV_PHI = 1.0 / PHI
@@ -157,10 +163,11 @@ def extract_topology(data: Sequence[float],
         data: full time series (any units — beats, months, samples, etc.)
         t: anchor index. The formula sees only data[:t].
         rungs_k: which φ-rung indices to attempt (period = φ^k in data units)
-        home_k: the rung where the system naturally lives. For ECG-like
-                systems home_k = 8 corresponds to ~47 beats (autonomic envelope);
-                for ENSO home_k = 8 corresponds to ~47 months (ENSO period).
-                Pick this from physical knowledge of the system.
+        home_k: the rung where the system naturally lives. For public benchmarks,
+                choose this before scoring from the measured ground-cycle period:
+                home_k = round(log(period) / log(PHI)), using the data's time unit.
+                If multiple ground cycles are plausible, declare all candidates
+                before running the test and report all candidate results.
         pin_factor: a rung is included only if pin_factor × period ≤ t
                     (default 4 — keeps filters numerically stable).
 
@@ -328,7 +335,7 @@ def _self_test():
               f"{c['prediction']:>+7.3f}  {truth:>+7.3f}  {c['weight_act']:>.3f}")
 
     print("\n  Self-test complete. For full benchmark across many anchors,")
-    print("  see F:/SystemFormulaFolder/TheFormula/canonical_benchmark.py")
+    print("  see <repo>/TheFormula/canonical_benchmark.py")
 
 
 if __name__ == "__main__":

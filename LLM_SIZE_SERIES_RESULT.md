@@ -1,5 +1,7 @@
 # Pythia size-series coupling-graph result (preliminary)
 
+> **Public-release note, May 2026:** This is an exploratory coupling-graph analysis on four Pythia sizes with one prompt/seed setup. It is useful for generating hypotheses about depth, hierarchy, and closure, but it should not be read as a settled architecture law.
+
 **Date:** 2026-05-10
 **Question:** Does coupling-graph structure phase-transition at specific model sizes?
 **Models tested:** Pythia-70M / 160M / 410M / 1B (deduped). Same prompt, same seed.

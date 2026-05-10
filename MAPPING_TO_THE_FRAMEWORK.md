@@ -1,5 +1,7 @@
 # Mapping to the Framework
 
+> **Public-release note, May 2026:** This file is best read as a guide to the mapping vocabulary and testable ideas, not as proof that every mapped domain obeys the theory. The strongest public use is to make preregistered, reproducible mappings that can be checked by domain experts.
+
 **The Framework method: how to take a real system, decompose it into ARA subsystems, and produce both descriptive and predictive output using only framework-derived constants.**
 
 *Last updated: 2026-04-30*

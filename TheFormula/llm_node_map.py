@@ -19,11 +19,16 @@ import os, sys, json, time
 import numpy as np
 import torch
 
-sys.path.insert(0, '/sessions/amazing-cool-archimedes/venv')
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
+sys.path.insert(0, os.environ.get('ARA_VENV', ''))
 from transformers import GPTNeoXForCausalLM, AutoTokenizer
 
-HF_CACHE = '/sessions/amazing-cool-archimedes/hf-cache'
-OUT_PATH = '/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/llm_node_map_data.js'
+HF_CACHE = os.environ.get('HF_HOME', os.path.expanduser('~/.cache/huggingface'))
+OUT_PATH = os.path.join(REPO_ROOT, 'TheFormula/llm_node_map_data.js')
 MODEL_NAME = 'EleutherAI/pythia-70m-deduped'
 N_STEPS = 250
 SEED = 42

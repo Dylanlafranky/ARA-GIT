@@ -12,20 +12,26 @@ Port of the actual-values delta-integration architecture to ENSO:
 
 Compare to the prior best vehicle (mean + averaged amp + cosine + weighted average).
 """
+import os
 import json, os, time
 import numpy as np, pandas as pd
 from scipy.signal import butter, sosfilt
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
 
 PHI = 1.6180339887498949
 INV_PHI3 = 1.0 / PHI**3
 
 def _resolve(p):
-    p_lin = p.replace("F:\\SystemFormulaFolder", "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder").replace("\\","/")
-    return p_lin if os.path.isdir("/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder") else p
+    p_lin = p.replace("F:\\SystemFormulaFolder", REPO_ROOT).replace("\\","/")
+    return p_lin if os.path.isdir(REPO_ROOT) else p
 
-NINO_PATH = _resolve(r"F:\SystemFormulaFolder\Nino34\nino34.long.anom.csv")
-SOI_PATH  = _resolve(r"F:\SystemFormulaFolder\SOI_NOAA\soi.data")
-OUT       = _resolve(r"F:\SystemFormulaFolder\TheFormula\actual_values_enso_data.js")
+NINO_PATH = _resolve(r"<repo>/Nino34\nino34.long.anom.csv")
+SOI_PATH  = _resolve(r"<repo>/SOI_NOAA\soi.data")
+OUT       = _resolve(r"<repo>/TheFormula\actual_values_enso_data.js")
 
 print("Loading NINO + SOI...")
 def load_nino():

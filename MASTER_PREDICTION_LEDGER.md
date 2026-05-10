@@ -1,6 +1,8 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+> **Public-release note, May 2026:** This ledger is a research audit trail. It contains hits, misses, partial confirmations, methodology corrections, and older claims whose wording may be stronger than the latest saved artifacts support. Please treat it as evidence of the research process, not as a single peer-reviewed result. The safest current summary is in `CLAIMS_STATUS.md`.
+
 This document tracks every prediction the ARA framework has made, its current status, and the evidence for or against it. Predictions are categorized by strength and type.
 
 **Status key:**
@@ -1624,37 +1626,38 @@ We're operationally above operational forecasts and below state-of-the-art ML �
 
 ## LLM application (10 May 2026 session)
 
+> **Public-release note:** All LLM entries below are preliminary at n=4 model sizes. Read alongside [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) — none of these have been independently replicated, and none have been tested against parameter-count / depth / active-node baselines. Treat as "interesting signal, needs scrutiny," not as confirmation.
+
 The framework's coupling-graph / Information³ closure tools applied to Pythia language-model size series. Pythia is open and benchmarked extensively; clean test bed.
 
-### Confirmed under preliminary test
+### Preliminary signals worth checking
 
 | ID | Test | Outcome |
 |----|------|---------|
-| T222 | **Closure index rank-orders Pythia by capability on 5 of 6 standard NLP benchmarks** | Spearman ρ = +1.000 on LAMBADA, PIQA, ARC-easy, ARC-challenge, SciQ. Pearson r vs log(closure) = +0.886 to +0.997. WinoGrande the only weaker (ρ = +0.800), and WinoGrande is a known weak-scaling benchmark — even GPT-3 barely beats random. n=4 model sizes (70M / 160M / 410M / 1B). **CONFIRMED at this n; needs replication to 8-size series.** |
-| T223 | **Coupling-graph approach surfaces interpretable LLM structure without supervision** | On Pythia-70M, the framework's coupling matrix + spectral embedding identifies: dead layers (4-6 zero variance), within-layer head clusters (L2 H0/H1/H2/H5/H6 corr ≥0.95), cross-layer info-flow circuits (L0H6 ↔ L2H3 corr +0.986), anti-phase pairs (layer-norm L3 ↔ L2H5 corr -0.974). Within-layer correlation 2.2× across-layer. **CONFIRMED — interpretability tool produces named-circuit-style findings without circuit analysis.** |
-| T224 | **Per-content ARA signature distinguishes cognitive content type during generation** | Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures on Pythia-70M. Code most engine-like (1.57). Emotion+dialogue closest to balance (1.255). Multi-sentence content peaks at long-range rungs; sentence-organised content peaks at sentence-scale. Framework picked up the sentence-vs-multi-sentence distinction without being told. **CONFIRMED on small model; needs replication.** |
+| T222 | **Closure index rank-orders Pythia by capability on 5 of 6 standard NLP benchmarks** | Spearman ρ = +1.000 on LAMBADA, PIQA, ARC-easy, ARC-challenge, SciQ. Pearson r vs log(closure) = +0.886 to +0.997. WinoGrande the only weaker (ρ = +0.800), and WinoGrande is a known weak-scaling benchmark. n=4 model sizes (70M / 160M / 410M / 1B). **PRELIMINARY SIGNAL — n is small, has not been controlled against parameter-count or layer-count baselines, single seed, single prompt. Needs Pythia-1.4B / 2.8B / 6.9B / 12B + baseline comparisons before being treated as confirmed.** |
+| T223 | **Coupling-graph approach surfaces interpretable LLM structure without supervision** | On Pythia-70M, the framework's coupling matrix + spectral embedding identifies: dead layers (4-6 zero variance), within-layer head clusters (L2 H0/H1/H2/H5/H6 corr ≥0.95), cross-layer info-flow circuits (L0H6 ↔ L2H3 corr +0.986), anti-phase pairs (layer-norm L3 ↔ L2H5 corr -0.974). Within-layer correlation 2.2× across-layer. **PRELIMINARY — single model, single prompt, single seed. The structures look interpretable but no causal validation against existing mechanistic interpretability tools.** |
+| T224 | **Per-content ARA signature distinguishes cognitive content type during generation** | Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures on Pythia-70M. Code most engine-like (1.57). Emotion+dialogue closest to balance (1.255). Multi-sentence content peaks at long-range rungs; sentence-organised content peaks at sentence-scale. **PRELIMINARY — could be a tokenisation/distribution artifact, single prompt per type, n=8 prompt-types only. Needs multi-prompt averaging and tokenisation-controlled baseline.** |
 
 ### Provisional / mixed signal
 
 | ID | Claim | Status |
 |----|-------|--------|
-| T225 | **Layer depth (not parameter count) drives hierarchical organisation in transformers** | Within/across-layer correlation ratio peaks at Pythia-410M (24 layers, ratio 1.51), drops to baseline at Pythia-1B (16 layers, 1.07) despite 2.4× more parameters. Spectral decay shows same pattern. Framework interpretation: depth gives the network usable φ-rungs for hierarchy. **PROVISIONAL — needs Pythia-1.4B (24 layers) to test prediction directly.** |
+| T225 | **Layer depth (not parameter count) drives hierarchical organisation in transformers** | Within/across-layer correlation ratio peaks at Pythia-410M (24 layers, ratio 1.51), drops to baseline at Pythia-1B (16 layers, 1.07) despite 2.4× more parameters. Spectral decay shows same pattern. Framework interpretation: depth gives the network usable φ-rungs for hierarchy. **PROVISIONAL — single observation; needs Pythia-1.4B (24 layers) to test prediction directly. Could also be N_STEPS or seed sensitivity.** |
 | T226 | **Per-content peak rung tracks content's intrinsic timescale** | Code peaks at k=7 (~29 tokens, paragraph scale). Story/math/poetry peak at k=8 (~47 tokens, multi-sentence). Emotion/factual/dialogue/abstract peak at k=6 (~18 tokens, sentence). Interpretable but underpowered (single seed, single prompt per type). **PROVISIONAL — needs replication with seeds and multi-prompt averaging.** |
 
 ### Conceptual extension (untested)
 
 | ID | Claim | Status |
 |----|-------|--------|
-| C227 | **A φ-deep × φ-wide LLM with all closed Information³ triangles would substantially eliminate hallucinations on within-knowledge information** | Framework's closure logic: open dyads sustain indeterminacy; closed triads force consistency. Universal closure would constrain generation to surface only what's encoded; out-of-knowledge content would manifest as honest uncertainty rather than confident fiction. Cost: reduced creative generation flexibility. Falsifiable in principle by training models with different aspect ratios at fixed parameter count. **CONCEPTUAL prediction; testable but expensive (full-scale training experiments).** |
+| C227 | **A φ-deep × φ-wide LLM with all closed Information³ triangles would substantially reduce hallucinations on within-knowledge information** | Framework's closure logic: open dyads sustain indeterminacy; closed triads force consistency. Universal closure would constrain generation to surface only what's encoded; out-of-knowledge content would manifest as honest uncertainty rather than confident fiction. Cost: reduced creative generation flexibility. **CONCEPTUAL prediction; testable in principle but expensive (full-scale training experiments). Not validated.** |
 
-**Headlines from this session:**
+**Honest framing of this session's LLM work:**
 
-- Closure index (closed-triangles per active component / loose-thread fraction) computed purely from internal activations during 200-step generation. **Spearman rank correlation = +1.000 against five published Pythia benchmarks at four sizes.** Pearson r vs log(closure) = +0.93 averaged across benchmarks. n=4 limits confidence but rank correlation is exact.
-- Two distinct intelligence signatures separable on the same data: hierarchical organisation (within/across, peaks at deepest model) and closure density (triangles per node, peaks at largest model). Framework predicts both matter for capability.
-- Pythia size steps are spaced at ≈φ² (matched-rung pair distance); the qualitative transition we observe between 160M and 410M is one φ²-rung step, suggesting rung-crossings produce phase changes when accumulated past a depth threshold.
-- LLM application doesn't break framework's universality claim — strengthens it. Same closure metric that distinguishes a heart from a random walk distinguishes Pythia-70M from Pythia-1B.
+- Closure index (closed-triangles per active component / loose-thread fraction) computed purely from internal activations during 200-step generation. Across the four Pythia sizes tested, the index rank-orders the models in the same order as 5 of 6 standard NLP benchmarks (Spearman ρ = +1.000 on LAMBADA / PIQA / ARC-easy / ARC-challenge / SciQ; ρ = +0.800 on WinoGrande). Average Pearson r vs log(closure) is +0.931. n=4 is small; rank correlation is exact at this n but easy to dismiss until reproduced at larger n with baseline controls.
+- Two structural signatures emerge on the same data: a within/across-layer ratio that peaks at the deepest model (Pythia-410M, 24 layers), and a closure density that peaks at the widest model (Pythia-1B). Framework interprets these as separable axes of hierarchical organisation vs closed-coupling density. The interpretation is consistent with the data but unconfirmed.
+- The size-series spacing is approximately φ² between consecutive Pythia models, which makes the framework's "matched-rung-pair distance" framing fit naturally — but that geometric framing is descriptive, not derived from independent grounds.
+- The LLM application does not break the framework's universality claim. It also does not establish it. The right read is that the framework's metrics produced interesting structure on a new domain, and the next experiments are obvious: bigger Pythia, multiple seeds, baseline comparisons against parameter count / layer count / active-node count.
 
 **Framework principle this session formulated:**
 
 > *Intelligence-as-internal-structure = closed Information³ triangles per active component, divided by loose-thread fraction. The metric is computable without behavioural testing, predicts capability across the Pythia size series, and has a mechanistic story (closed triads force consistency where open dyads allow indeterminacy). Width gives density of closure; depth gives the rungs to organise it on. Both matter.*
-

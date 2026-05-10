@@ -6,9 +6,11 @@
 
 ## What this is, in one paragraph
 
-This is a geometric claim about how natural systems oscillate. A heartbeat, a climate cycle, a planetary orbit, the firing of a neuron — the framework's claim is that they share a single coordinate system on a φ-spaced ladder of timescales. Each system can be read as a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder. A single forward formula — anchored at the most recent observed value, integrating contributions across rungs — predicts behaviour from those coordinates alone. **The same formula, with the same constants, has been tested on systems separated by 38 orders of φ in time (heartbeats and climate cycles), and produces meaningful predictions on both.** Existing physics provides the language — bandpass decomposition, coupled oscillators, scaling laws, time-as-primary (Noether). This work uses that language to articulate and test a unifying claim that crosses fields normally studied separately. **The framework is the contribution. Each field is a witness.**
+This is an open research notebook about a geometric hypothesis for oscillating systems. A heartbeat, a climate cycle, a planetary orbit, the firing of a neuron — the framework asks whether they can be mapped onto a shared φ-spaced ladder of timescales. Each system can be read as a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder. A single forward formula — anchored at the most recent observed value, integrating contributions across rungs — is being tested as a way to track or forecast behaviour from those coordinates. Existing physics provides the language: bandpass decomposition, coupled oscillators, scaling laws, and time-as-primary. The big interpretation is speculative; the useful question for reviewers is whether the φ-rung coordinate system carries real signal beyond simpler baselines.
 
 I'm not a scientist by training. I built this in spare time, with significant help from AI collaborators. I report what I find — including the misses — and invite people in the relevant fields to check, improve, or knock down what I have wrong.
+
+For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 
 ---
 
@@ -35,27 +37,27 @@ I'm not a scientist by training. I built this in spare time, with significant he
 - Short lead: anchor at v_now, integrate δ-contributions across rungs
 - Long lead: structured wave from training mean, weighted by rung distance from home
 
-The predictor is one Python file: [`release_2026-05/core/ara_framework.py`](release_2026-05/core/ara_framework.py).
+The predictor is one Python file: [`ara_framework.py`](ara_framework.py).
 
 ---
 
 ## Findings by confidence
 
-### 🟢 Confirmed under strict-causal validation
+### Supported So Far / Needs Independent Replication
 
-These are the findings that survived a rebuilt strict-causal protocol after an earlier acausal-bandpass leakage was caught and corrected. All numbers are from real public datasets (NOAA, PhysioNet, PhysioZoo, JPL Horizons), not synthetic data.
+These are the findings that survived at least one stricter check after an earlier acausal-bandpass leakage was caught and corrected. They should be read as promising saved results, not as independent confirmations.
 
 | Finding | Headline number | Source |
 |---|---|---|
-| **Canonical predictor: ENSO 1-month forecast** | MAE **0.27 °C**, corr +0.93 (242 anchors) | `release_2026-05/benchmarks/canonical_benchmark.py` |
-| **Canonical predictor: ECG 1-beat forecast** | MAE **19 ms**, corr +0.99 | `release_2026-05/benchmarks/canonical_benchmark.py` |
-| **Cross-mammalian local cycle shape match** | Mean +0.955 across 6 species pairs (mouse/rabbit/dog/human) | `release_2026-05/benchmarks/multispecies_vertical_ara_test.py` |
+| **Canonical predictor: ENSO 1-month forecast** | Saved output: MAE about **0.28 C**, corr about **+0.90**; persistence skill caveat | `TheFormula/canonical_benchmark_data.js` |
+| **Canonical predictor: ECG short-horizon forecast** | Saved output shows useful single-subject signal; best h=3 near corr **+0.96**, MAE about **35 ms** | `TheFormula/canonical_benchmark_data.js` |
+| **Cross-mammalian local cycle shape match** | Some high pairwise matches; broad mean is sensitive to normalization and should be rerun | `TheFormula/multispecies_vertical_ara_data.js` |
 | **ECG ↔ ENSO local profile match** | corr +0.695 across 38 orders of φ in time | (prior work, this repo) |
 | **Walker Circulation is fractal across rungs** | SOI mirrors NINO anti-phase from φ⁵ to φ¹¹ with \|corr\| ≥ 0.85 | (memory: dynamic_rung_assignment) |
 | **Lag-h corrector ports cross-domain** | γ ≈ +1/φ. 37% MAE drop at 1-min ECG, 17% at 24-month ENSO | (memory: corrector_cross_domain) |
 | **Closed-system coupling differs from incidental** | SOI as matched-rung pair lifts ENSO; same SOI as feeder does nothing | (memory: closed_system_validated) |
 | **AR feedback constant is 1/φ³** | "One full ARA orbit" of momentum carrying between cycles | (memory: aa_boundary_ar_feedback) |
-| **Mid-horizon dip is consistent across 11 humans** | At ~600 beats (~8 min) — signature of an autonomic intruder system | `release_2026-05/benchmarks/multi_subject_dip_test.py` |
+| **Mid-horizon dip is consistent across 11 humans** | Recurring but heterogeneous dip structure; possible autonomic intruder wave | `TheFormula/multi_subject_dip_data.js` |
 
 ### 🟡 Provisional — single test, suggestive numerical match, or coincidence-flagged
 
@@ -79,11 +81,11 @@ These are the findings that survived a rebuilt strict-causal protocol after an e
 
 ---
 
-## Earlier results (still standing, lighter validation)
+## Earlier results (historical / lighter validation)
 
 | Finding | Source |
 |---|---|
-| 21 of 21 advance predictions held up across 37 systems | `MASTER_PREDICTION_LEDGER.md`, prior sessions |
+| 21 of 21 advance predictions held up across 37 systems | Historical ledger claim; useful audit trail, but not independent confirmation by itself |
 | Three-type classification (clock/engine/snap) at every scale window | Script 42 (143 systems, 7 scale windows) |
 | φ as biological health attractor (slope 1.613 vs φ = 1.618) | Script 40 (143 systems) |
 | Framework beat matched-parameter Fourier on cardiac data | nsr050 decisive test, Session 2026-04-30 |
@@ -104,7 +106,7 @@ The framework's coupling-graph and Information³ closure tools were applied to t
 | 410m-deduped | 877 | 0.524 | 0.517 | 0.826 |
 | 1b-deduped | **6,284** | **0.580** | **0.585** | **0.870** |
 
-**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ. **Pearson r vs log(closure) = +0.886 to +0.997** across those five benchmarks. WinoGrande is the only exception (ρ = +0.800), and WinoGrande is a known weak-scaling benchmark — even GPT-3 barely beats random on it. Source: `LLM_CLOSURE_VS_CAPABILITY.md`, `TheFormula/llm_closure_vs_capability.html`, raw evals from EleutherAI/pythia at step 143000.
+**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ in this n=4 run. WinoGrande is weaker at **ρ = +0.800**, so the average across all six is about **+0.967** rather than a universal perfect-rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks. Source: `LLM_CLOSURE_VS_CAPABILITY.md`, `TheFormula/llm_closure_vs_capability.html`, raw evals from EleutherAI/pythia at step 143000.
 
 ### 🟢 Coupling-graph approach surfaces interpretable LLM structure
 
@@ -131,4 +133,4 @@ The framework's prediction for the optimal LLM architecture: layer depth and wid
 
 ### Honest framing
 
-n=4 model sizes is small. The Spearman rank-correlation = 1.000 result is striking but limited by sample size. Adding Pythia-1.4B / 2.8B / 6.9B / 12B is the natural confirming experiment — if rank correlation holds across 
+n=4 model sizes is small. The rank result is striking but limited by sample size and confounded by scale. Adding Pythia-1.4B / 2.8B / 6.9B / 12B is the natural confirming experiment, with closure compared directly against parameter count, layer count, and active-node count.

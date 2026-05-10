@@ -11,19 +11,25 @@ Per Dylan's request: no averages, no means. Use actual values throughout.
 
 Compares to OLD method (mean + averaged amp + cosine + averaged sum).
 """
+import os
 import json, os, time
 import numpy as np, pandas as pd
 from scipy.signal import butter, sosfilt, find_peaks
 from scipy.ndimage import gaussian_filter1d
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
 PHI = 1.6180339887498949
 
 def _resolve(p):
-    p_lin = p.replace("F:\\SystemFormulaFolder", "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder").replace("\\","/")
-    return p_lin if os.path.isdir("/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder") else p
+    p_lin = p.replace("F:\\SystemFormulaFolder", REPO_ROOT).replace("\\","/")
+    return p_lin if os.path.isdir(REPO_ROOT) else p
 
-ECG_PATH = _resolve(r"F:\SystemFormulaFolder\TheFormula\nsr001_rr.csv")
-OUT      = _resolve(r"F:\SystemFormulaFolder\TheFormula\actual_values_delta_data.js")
+ECG_PATH = _resolve(r"<repo>/TheFormula\nsr001_rr.csv")
+OUT      = _resolve(r"<repo>/TheFormula\actual_values_delta_data.js")
 
 print("Loading ECG nsr001 (per-beat RR — no resampling)...")
 df = pd.read_csv(ECG_PATH)

@@ -1,8 +1,10 @@
 # Information³ closure across Pythia sizes — Dylan's prediction tested
 
+> **Public-release note, May 2026:** Preliminary n=4 scaling result. Treat "intelligence index" as a working name for an internal coupling metric, not as a validated measure of intelligence.
+
 **Date:** 2026-05-10
 **Prediction (Dylan):** intelligence tracks closed coupling structure — the more closed Information³ triangles (3-cliques where all three pairs are correlated) and the fewer loose threads (uncoupled components), the more "actual intelligence."
-**Result:** **Strongly supported.** The closure metric scales monotonically with model size where the within/across ratio did not, and reveals 1B as having the densest closed coupling structure despite its weaker hierarchical signature.
+**Result:** **Preliminarily supported in this small run.** The closure metric scales monotonically with model size where the within/across ratio did not, and reveals 1B as having the densest closed coupling structure despite its weaker hierarchical signature.
 
 ## Headline numbers
 

@@ -1,4 +1,6 @@
 # The Framework Formulation
+
+> **Public-release note, May 2026:** This document describes the working formulation of the framework. Some language below is aspirational and reflects the discovery process. For public review, treat the core method as a testable mapping/tracking framework first, and the broader "geometry of time" interpretation as a hypothesis.
 ## Wave Shape from Geometry + Energy from Log-Slider
 
 *Articulated 2026-04-30 by Dylan La Franchi*

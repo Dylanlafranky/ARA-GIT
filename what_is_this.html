@@ -297,6 +297,7 @@
 
   .badge.confirmed { background: rgba(63, 185, 80, 0.15); color: var(--green); border: 1px solid rgba(63, 185, 80, 0.3); }
   .badge.exploring { background: rgba(88, 166, 255, 0.15); color: var(--blue); border: 1px solid rgba(88, 166, 255, 0.3); }
+  .badge.provisional { background: rgba(212, 168, 67, 0.15); color: var(--gold); border: 1px solid rgba(212, 168, 67, 0.3); }
   .badge.speculative { background: rgba(188, 140, 255, 0.15); color: var(--purple); border: 1px solid rgba(188, 140, 255, 0.3); }
 
   /* ── Honesty section ── */
@@ -422,6 +423,10 @@
 <section class="hero">
   <div class="hero-content">
     <h1>The Fractal Universe Theory</h1>
+<div style="background: #2a2118; border: 1px solid #d2a96a; border-left: 4px solid #d2a96a; padding: 0.85rem 1rem; margin: 1rem 0; border-radius: 4px; font-size: 0.92rem; color: #e6d4a8;">
+<strong>Public-release note (May 2026):</strong> Read this as an open research notebook. Some sections describe results that survived a stricter check; others describe patterns that need cleaning up before they should be quoted. Before relying on any number on this page, see <a href="CLAIMS_STATUS.md" style="color: #f0c878;">CLAIMS_STATUS.md</a> for which claims are safe to quote and which need a baseline-comparison or catalogue-cleanup pass. <a href="REPRODUCIBILITY.md" style="color: #f0c878;">REPRODUCIBILITY.md</a> lists known issues in the scripts.
+</div>
+
     <p class="subtitle">Notes on a personal project. I've been looking for shared patterns in how natural systems pulse and cycle. I'm not a scientist by training &mdash; this is a curious person sharing what I've been finding, in language other curious people can follow.</p>
     <p class="byline">By Dylan La Franchi &middot; living with ME/CFS &middot; updated May 2026</p>
   </div>
@@ -431,8 +436,9 @@
 <!-- ═══════════════ THESIS ═══════════════ -->
 <div class="section" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
   <div style="background: linear-gradient(135deg, rgba(212,168,67,0.10), rgba(57,210,192,0.06)); border: 1px solid rgba(212,168,67,0.35); border-radius: 12px; padding: 1.5rem 1.75rem;">
-    <p style="font-size: 1.05rem; line-height: 1.7;"><strong>This is a geometric claim about how natural systems oscillate.</strong> A heartbeat, a climate cycle, a planetary orbit, the firing of a neuron &mdash; the project's claim is that they share a single coordinate system on a &phi;-spaced ladder of timescales. Each system can be read as a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio per rung of the ladder. A single forward formula &mdash; anchored at the most recent observed value, integrating contributions across rungs &mdash; predicts behaviour from those coordinates alone. <strong>The same formula, with the same constants, has been tested on systems separated by 38 orders of &phi; in time (heartbeats and climate cycles), and produces meaningful predictions on both.</strong></p>
-    <p style="font-size: 1rem; color: var(--text-dim); margin-top: 0.8rem;">Existing physics gives the language: bandpass decomposition, coupled oscillators, scaling laws, time-as-primary (Noether). This work uses that language to articulate and test a unifying claim that crosses fields normally studied separately. <strong style="color: var(--gold);">The framework is the contribution. Each field is a witness.</strong></p>
+    <p style="font-size: 1.05rem; line-height: 1.7;"><strong>This is an open research notebook about a geometric hypothesis.</strong> A heartbeat, a climate cycle, a planetary orbit, the firing of a neuron &mdash; the project asks whether they can be mapped onto a shared &phi;-spaced ladder of timescales. Each system can be read as a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio per rung of the ladder. A forward formula &mdash; anchored at the most recent observed value, integrating contributions across rungs &mdash; is being tested as a way to track or forecast behaviour from those coordinates.</p>
+    <p style="font-size: 1rem; color: var(--text-dim); margin-top: 0.8rem;">Existing physics gives the language: bandpass decomposition, coupled oscillators, scaling laws, and time-as-primary. The larger "geometry of time" interpretation is a hypothesis, not a settled conclusion. The useful question for readers is narrower and testable: <strong style="color: var(--gold);">does the &phi;-rung coordinate system carry signal beyond simpler baselines?</strong></p>
+    <p style="font-size: 0.95rem; color: var(--text-dim); margin-top: 0.8rem;">For the sober audit trail, see <a href="CLAIMS_STATUS.md" style="color: var(--gold);">CLAIMS_STATUS.md</a> and <a href="REPRODUCIBILITY.md" style="color: var(--gold);">REPRODUCIBILITY.md</a>.</p>
   </div>
 </div>
 
@@ -471,7 +477,7 @@
       <span class="icon">&#9881;</span>
       <div class="label">Engines</div>
       <div class="value">ARA &asymp; 1.618</div>
-      <div class="desc">The golden ratio. Self-organizing. The rhythm that runs most efficiently without ever falling into a repeating rut. Hearts, healthy ecosystems, economic cycles.</div>
+      <div class="desc">The golden ratio. Self-organizing. A possible non-locking rhythm for durable exchange rather than maximum instant transfer. Hearts, healthy ecosystems, economic cycles.</div>
     </div>
     <div class="card">
       <span class="icon">&#9889;</span>
@@ -921,7 +927,7 @@ F-test (3-circle vs 1-circle):    p = 1.11 &times; 10&minus;16</div>
       <div class="math-block">Fourier + 1/&phi;&sup3; AR:    TEST corr = +0.308,  MAE = 129 ms
 Framework + 1/&phi;&sup3; AR:  TEST corr = +0.686,  MAE = 115 ms
 Tele + FW_AR @ 1/&phi;&sup4;: TEST corr = +0.757,  MAE = 113 ms</div>
-      <p><strong>What this proves:</strong> The framework's constraint &mdash; that subsystem periods must sit on the &phi;-power ladder &mdash; is doing real predictive work. An unconstrained model with the same number of free parameters can't match it. The &phi;-rung structure contains information about how biological rhythms actually organize that arbitrary frequency selection misses.</p>
+      <p><strong>What this suggests:</strong> On this one dataset, the framework's constraint &mdash; that subsystem periods sit on the &phi;-power ladder &mdash; appears to be doing predictive work. A matched-parameter Fourier comparison did worse in this test. That does not prove the general theory, but it is a result worth trying to replicate across more subjects and against stronger baselines.</p>
       <p><strong>Predictions committed in advance:</strong> 10 specific predictions were written to <code>decisive_test_predictions.md</code> before fitting. 8 of 10 passed.</p>
       <div class="source-tag">Evidence: TheFormula/decisive_test_predictions.md &middot; nsr050 PhysioNet data &middot; Session 2026-04-30</div>
     </div>
@@ -1058,7 +1064,7 @@ h = 6 mo: MAE 0.81 &rarr; 0.66 (&minus;18%), R&sup2;(pers) +0.29 &rarr; +0.46 (+
 
       <p><strong>The fractal depth is one level.</strong> One correction at &gamma; = 1/&phi; extracts 26% of residual variance. By Level 2, Hurst converges to 0.492 (Brownian = 0.5). By Level 4, lag-1 autocorrelation is exactly +0.002 &mdash; the residual has become genuine white noise. Past one correction, no &phi;-structured signal remains in the errors.</p>
 
-      <p><strong>Why this matters as a framework claim:</strong> the framework predicts that residuals from a framework-based predictor will themselves have ARA structure (because the framework's geometry is fractal); that this structure has a specific coefficient (&gamma; = 1/&phi;); and that the structure has finite depth (the residual converges to Brownian after a small number of correction levels). All three predictions held empirically on real ENSO data under strict-causal validation.</p>
+      <p><strong>Why this matters as a framework claim:</strong> the framework predicts that residuals from a framework-based predictor will themselves have ARA structure (because the framework's geometry is fractal); that this structure has a specific coefficient (&gamma; = 1/&phi;); and that the structure has finite depth (the residual converges to Brownian after a small number of correction levels). All three patterns appeared in this ENSO run under strict-causal validation; the next step is replication across other residual sets.</p>
       <div class="source-tag">Evidence: TheFormula/compass_residual_brownian_test.py &middot; compass_residual_corrector_test.py &middot; compass_fractal_corrector_test.py &middot; NOAA NINO 3.4 + SOI &middot; Session 2026-05-02 late evening</div>
     </div>
   </details>
@@ -1078,13 +1084,13 @@ h = 6 mo: MAE 0.81 &rarr; 0.66 (&minus;18%), R&sup2;(pers) +0.29 &rarr; +0.46 (+
     0 (peak)    1.000          1.000       1.00
    +1          0.774          0.689       1.12</div>
       <p><strong>Far from peak the profiles diverge.</strong> ECG has much more energy in slow envelopes (sleep/wake-driven), ENSO drops off faster (ocean-atmosphere damping). System-specific external pumps dominate beyond &plusmn;2 rungs.</p>
-      <p><strong>What this means:</strong> The framework's universal local cycle geometry is empirically real. Beyond the local region, system-specific physics takes over. Useful as a structural prior for amplitude estimation in noisy data.</p>
+      <p><strong>What this suggests:</strong> There may be a shared local cycle geometry in the tested signals. Beyond the local region, system-specific physics takes over. This is useful as a structural-prior hypothesis, but it needs independent reruns with noise controls.</p>
       <div class="source-tag">Evidence: TheFormula/ecg_template_for_enso_test.py &middot; nsr001 PhysioNet data + NOAA Ni&ntilde;o 3.4 &middot; Session 2026-05-02</div>
     </div>
   </details>
 
-  <h3><span class="badge confirmed">Confirmed (4-mammal cross-species test)</span> &nbsp;Mouse, Rabbit, Dog and Human Share the Same Local Cycle Shape</h3>
-  <p>To extend the heartbeat-vs-climate result into biology, I ran the same &phi;-rung profile test across four mammals: mouse (~520 bpm), rabbit (~240 bpm), dog (~120 bpm), and human (~80 bpm) &mdash; a 6.6&times; range in heart period, drawn from PhysioZoo on PhysioNet plus our existing nsr001. After rescaling each species' time axis by its own heart period, the local cycle shape near the peak rung is essentially the same. <strong>All six species pairs correlate between +0.89 and +1.00 within &plusmn;2 rungs of peak (mean +0.955).</strong> Same architecture, different gear. The within-biology version of the cross-domain result.</p>
+  <h3><span class="badge provisional">Promising (4-mammal cross-species test)</span> &nbsp;Mouse, Rabbit, Dog and Human May Share Local Cycle Shape</h3>
+  <p>To extend the heartbeat-vs-climate result into biology, I ran the same &phi;-rung profile test across four mammals: mouse (~520 bpm), rabbit (~240 bpm), dog (~120 bpm), and human (~80 bpm) &mdash; a 6.6&times; range in heart period, drawn from PhysioZoo on PhysioNet plus our existing nsr001. After rescaling each species' time axis by its own heart period, the local cycle shapes near the peak rung correlated strongly in this run. <strong>The broad +0.955 mean should be treated cautiously, because normalization and endpoint/recording-length effects may inflate part of the result.</strong> The rabbit/dog-style comparisons look most credible; the mouse/human-style extreme scaling needs a stricter rerun.</p>
 
   <details class="method">
     <summary>How this was worked out</summary>
@@ -1105,11 +1111,11 @@ Mean:             +0.955</div>
     </div>
   </details>
 
-  <h3><span class="badge confirmed">Confirmed (cross-domain breakthrough)</span> &nbsp;Actual-Values Delta-Integration &mdash; The Canonical Predictor</h3>
+  <h3><span class="badge provisional">Promising (cross-domain predictor)</span> &nbsp;Actual-Values Delta-Integration &mdash; The Canonical Predictor</h3>
   <p>The biggest practical advance from this session. The earlier prediction architectures all subtracted the training mean, then summed bandpass cosines back, then added the mean. That averaging across history kept the predictions damped and unable to track local fluctuations. The fix &mdash; suggested by Dylan as "we don't work in averages or means, we go for actual values" &mdash; reformulates the predictor as a delta integration anchored at the most recent observed value:</p>
   <div class="math-block">v(h) = v_now + &Sigma;_rung amp &times; (cos(&theta; + 2&pi;&middot;h/p) &minus; cos(&theta;))</div>
   <p>No training mean. Per-rung amplitude read from the most recent cycle only (peak-to-peak / 2), not averaged over a 50-sample window. Sum (not average) of rung contributions. The cosine-difference form telescopes the per-step delta integration into a closed-form expression &mdash; one evaluation per horizon, fast.</p>
-  <p><strong>Cross-domain results:</strong> at h = 1 month on ENSO, MAE drops from 0.63 &deg;C to <strong>0.27 &deg;C</strong> (a 57% reduction), correlation +0.65 &rarr; <strong>+0.93</strong>. At h = 1 beat on PhysioNet nsr001 ECG, MAE drops from 117 ms to <strong>19 ms</strong> (84% reduction), correlation reaches <strong>+0.99</strong>. At h = 10 beats the framework <em>beats persistence</em> on this dataset for the first time (R&sup2;(persistence) +0.48). Same formula, two systems separated by ~38 orders of &phi; in time scale.</p>
+  <p><strong>Cross-domain results:</strong> the saved canonical benchmark artifact I reviewed supports short-lead signal, but the safest public numbers are softer than my earlier headline. ENSO h = 1 month is around <strong>0.28 &deg;C MAE</strong> and <strong>+0.90 correlation</strong>, with a persistence-skill caveat. The ECG saved output shows useful single-subject signal, with the best short-horizon result around <strong>+0.96 correlation</strong> and <strong>35 ms MAE</strong>; the earlier 19 ms / +0.99 h=1 headline should be rerun cleanly before being quoted.</p>
   <p>Released as <a href="ara_framework.py" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">ara_framework.py</a> &mdash; a single Python file, ~250 lines, with the inverse half (<code>extract_topology</code>) and forward half (<code>predict</code>) clearly separated. The forward predictor uses a sigmoid blend between this short-lead form and a structured-wave long-lead form, transitioning at a horizon set by &phi;<sup>&plusmn;7/4</sup>&times; the system's home period (sign depends on whether the system has a tight matched-rung partner).</p>
 
   <details class="method">
@@ -1173,15 +1179,10 @@ predict(topo, h, closed):
     </div>
   </details>
 
-  <h3><span class="badge confirmed">Confirmed (falsification test)</span> &nbsp;The 3/4 Universal Ceiling Holds Across 77 Systems</h3>
-  <p>The framework predicts that any self-organising oscillating system can occupy at most 3/4 of the displacement from balance (ARA = 1.0) toward either singularity. That is, ARA should sit in the band [0.25, 1.75]. Anything below 0.25 or above 1.75 should either be (a) externally clocked, (b) a "snap" system falling into time-singularity, or (c) a real refutation.</p>
-  <p>I ran the test against my own catalogue of 77 systems built up across the project. The result:</p>
-  <div class="math-block">Below ARA = 0.25 (space-side wall):  0 systems  &mdash; clean
-Above ARA = 1.75 but below 2.0:      1 system   &mdash; Forced van der Pol
-Exactly at ARA = 2.0:                4 systems  &mdash; all externally clocked
-Above ARA = 2.05 (snap zone):       35 systems  &mdash; expected, falling toward singularity</div>
-  <p>The space-side wall (ARA = 0.25) holds with zero exceptions. The time-side wall (ARA = 1.75) has one outlier &mdash; a forced van der Pol oscillator &mdash; which is a system being driven by an external clock, not self-organising. The four systems sitting exactly at 2.0 are the resonant boundary (pure harmonics like atomic clocks); they're not self-organising in the framework's sense, they've handed off all time-content to the driver.</p>
-  <p>This is the cleanest pre-registered falsification test the framework has survived. The prediction was specific and binary, the data was already in hand, and the result wasn't cherry-picked. I'd want someone else to rerun it with their own catalogue.</p>
+  <h3><span class="badge exploring">Provisional &mdash; needs cleaned catalogue</span> &nbsp;The 3/4 Universal Ceiling — Hypothesis Worth Cleaning Up</h3>
+  <p>The framework predicts that any self-organising oscillating system can occupy at most 3/4 of the displacement from balance (ARA = 1.0) toward either singularity. That is, ARA should sit in the band [0.25, 1.75]. Anything outside that band should either be externally clocked, a "snap" system falling into time-singularity, or a real refutation.</p>
+  <p>The refined-subset pass on 77 systems looked clean, but a saved raw artifact of the same catalogue shows many ARA values outside [0.25, 1.75] before the inclusion rules were applied. The simple headline "76 of 77 sit in band" is not safe to quote without first publishing those inclusion rules and re-running the count under them.</p>
+  <p>What the framework gets right here is the <em>direction</em>: self-organising autonomous systems do appear to cluster inside the band, and externally-driven or collapsing systems do appear outside. What it doesn't yet have is a clean, pre-registered inclusion rule that someone else could apply to a new catalogue and reproduce. See <a href="CLAIMS_STATUS.md" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">CLAIMS_STATUS.md</a> for the safer wording I'd use today.</p>
 
   <details class="method">
     <summary>How this was worked out</summary>
@@ -1415,18 +1416,18 @@ As a fraction         = (&pi; &minus; 3) / &pi; = 0.14159 / 3.14159 = 4.507%</di
   <div class="card-row">
     <div class="card" style="border-color: var(--gold);">
       <div class="label">ENSO 1-mo MAE (canonical predictor)</div>
-      <div class="value" style="color: var(--gold);">0.27 &deg;C</div>
-      <div class="desc">Correlation +0.93 over 242 anchors, ara_framework.py</div>
+      <div class="value" style="color: var(--gold);">~0.28 &deg;C</div>
+      <div class="desc">Saved output: corr about +0.90 over 242 anchors; persistence-skill caveat</div>
     </div>
     <div class="card" style="border-color: var(--gold);">
-      <div class="label">ECG 1-beat MAE (canonical predictor)</div>
-      <div class="value" style="color: var(--gold);">19 ms</div>
-      <div class="desc">Correlation +0.99, 84% MAE drop vs prior architecture</div>
+      <div class="label">ECG short-horizon signal</div>
+      <div class="value" style="color: var(--gold);">~+0.96</div>
+      <div class="desc">Best saved short-horizon single-subject corr; h=1 headline needs rerun</div>
     </div>
     <div class="card" style="border-color: var(--gold);">
       <div class="label">Multi-species cycle-shape match</div>
-      <div class="value" style="color: var(--gold);">+0.955</div>
-      <div class="desc">Mean across 6 pairs (mouse, rabbit, dog, human) within &plusmn;2 rungs of peak</div>
+      <div class="value" style="color: var(--gold);">Promising</div>
+      <div class="desc">Some high pairwise matches; broad mean needs normalization-robust rerun</div>
     </div>
   </div>
 
@@ -1462,9 +1463,9 @@ As a fraction         = (&pi; &minus; 3) / &pi; = 0.14159 / 3.14159 = 4.507%</di
       <div class="desc">Local profile match across 38 orders of &phi; in time</div>
     </div>
     <div class="card" style="border-color: var(--gold);">
-      <div class="label">3/4 Ceiling (77-system test)</div>
-      <div class="value" style="color: var(--gold);">76 of 77</div>
-      <div class="desc">Self-organising systems sit in [0.25, 1.75] ARA; 0 space-side exceptions, 1 time-side outlier (externally forced)</div>
+      <div class="label">3/4 Ceiling / ARA Band</div>
+      <div class="value" style="color: var(--gold);">Needs cleanup</div>
+      <div class="desc">The refined idea is interesting, but the simple 76/77 headline is not safe from saved raw data</div>
     </div>
   </div>
 </div>
@@ -1491,24 +1492,24 @@ As a fraction         = (&pi; &minus; 3) / &pi; = 0.14159 / 3.14159 = 4.507%</di
 <!-- ═══════════════ STATUS ═══════════════ -->
 <div class="section">
   <h2>Where Things Stand Right Now</h2>
-  <p class="dim">Updated May 2026 &mdash; canonical predictor consolidated, 3/4 ceiling falsification test passed, LLM closure metric predicts Pythia capability with Spearman &rho;=1.000 on 5 of 6 benchmarks, conceptual extensions opened</p>
+  <p class="dim">Updated May 2026 &mdash; public-release draft. Some results are promising, some earlier headlines need reruns, and the larger theory is presented as a hypothesis for others to test.</p>
 
   <p>Earlier in May it looked like a stack of framework refinements was reaching 89% direction and +0.75 correlation at 2-year ENSO lead. When I went back and validated more carefully, with a strict-causal filter instead of an acausal FFT bandpass, <strong>most of that lift turned out to be feature leakage</strong>. The filter at time t was using data from after t. I caught it myself, retracted those numbers, and rebuilt from the strict-causal protocol. That set the rules for everything since.</p>
 
-  <p>The biggest single advance during the rebuild was reformulating the predictor in actual values rather than deviations-from-mean. Anchoring at the most recent observed value and integrating deltas forward dropped 1-month ENSO MAE from 0.63 &deg;C to <strong>0.27 &deg;C</strong> and 1-beat ECG MAE from 117 ms to <strong>19 ms</strong>. Same formula on both. The predictor is released as the single Python file <a href="ara_framework.py" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">ara_framework.py</a>, with the inverse half (extracting topology coordinates) and forward half (predicting from those coordinates) cleanly separated.</p>
+  <p>The biggest single advance during the rebuild was reformulating the predictor in actual values rather than deviations-from-mean. Anchoring at the most recent observed value and integrating deltas forward produced a saved ENSO 1-month result around <strong>0.28 &deg;C MAE</strong> and <strong>+0.90 correlation</strong>, plus useful single-subject ECG signal. Some earlier ECG headline numbers were stronger than the saved artifact I later reviewed, so those should be rerun before being quoted. The predictor is released as the single Python file <a href="ara_framework.py" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">ara_framework.py</a>, with the inverse half (extracting topology coordinates) and forward half (predicting from those coordinates) separated.</p>
 
   <p>The findings that survived the strict-causal rebuild and matter most:</p>
   <ul style="margin-left: 1.5rem;">
-    <li><strong>The canonical predictor.</strong> One formula, two regimes (short-lead delta-integration, long-lead structured-wave), blended by a sigmoid at &phi;<sup>&plusmn;7/4</sup>&times; home period. Cross-domain confirmed on ENSO + ECG. Sign of the 7/4 exponent appears to be set by whether the system has a tight matched-rung partner.</li>
-    <li><strong>Vertical-ARA across 4 mammals.</strong> Mouse, rabbit, dog and human all share the same local cycle shape after rescaling time by their own heart period. All six pairwise correlations within &plusmn;2 rungs of peak land between +0.89 and +1.00 (mean +0.955).</li>
+    <li><strong>The canonical predictor.</strong> One formula, two regimes (short-lead delta-integration, long-lead structured-wave), blended by a sigmoid at &phi;<sup>&plusmn;7/4</sup>&times; home period. The ENSO and ECG saved outputs show signal, but they still need cleaner baseline reporting and independent reruns.</li>
+    <li><strong>Vertical-ARA across 4 mammals.</strong> Mouse, rabbit, dog and human comparisons show some striking local-cycle similarities. The broad mean should be treated cautiously because normalization and endpoint effects may inflate part of the result.</li>
     <li><strong>Walker Circulation is fractal across rungs.</strong> Dynamic per-rung partner discovery shows SOI mirrors NINO anti-phase from &phi;<sup>5</sup> to &phi;<sup>11</sup> with |corr| &ge; 0.85 throughout. The matched-rung pair sits at the partner's dominant rung, not necessarily at the target's home rung.</li>
     <li><strong>Closed-system coupling differs from incidental coupling.</strong> SOI as a matched-rung partner at &phi;<sup>8</sup> fixed the mid-horizon ENSO dip; the same SOI treated as an incidental feeder did nothing.</li>
     <li><strong>Framework constants port across domains.</strong> The lag-h corrector with &gamma; &asymp; 1/&phi; lifts MAE 37% on ECG at 1 minute and 17% on ENSO at 24 months. Same constant, same sign rule, two unrelated systems.</li>
-    <li><strong>Mid-horizon dips are signatures of intruder waves.</strong> The framework's prediction breakdown at ~600 beats on ECG (8 of 11 subjects) coincides with mid-frequency autonomic transitions. Not a bug &mdash; the architecture being faithful to a wave from another system passing through.</li>
-    <li><strong>The 3/4 universal ceiling holds.</strong> 76 of 77 systems in the master ARA catalogue sit inside the predicted [0.25, 1.75] band for self-organising oscillators. The single outlier is a forced van der Pol oscillator &mdash; externally driven, exactly the class the framework allows above 1.75. The space-side wall (ARA = 0.25) holds with zero exceptions. This is the cleanest pre-registered falsification test the framework has survived.</li>
+    <li><strong>Mid-horizon dips may be signatures of intruder waves.</strong> The framework's prediction breakdown around hundreds of beats on ECG appears repeatedly, but the subject-to-subject pattern is heterogeneous and needs physiology review.</li>
+    <li><strong>The 3/4 universal ceiling remains a hypothesis, not a safe headline.</strong> A refined subset version may still be meaningful, but a saved raw 77-system artifact does not support the simple 76/77 claim. This needs a cleaned catalogue and explicit inclusion rules.</li>
   </ul>
 
-  <p>What this all amounts to: the framework's <em>topology</em> (the &phi;-rung coordinate system) and its <em>predictor</em> (the canonical formula) are now consolidated into a single ~250-line Python module that works on any oscillating system you point it at. The numbers above are real and the methodology is apples-to-apples with operational forecast skill scoring.</p>
+  <p>What this all amounts to: the framework's <em>topology</em> (the &phi;-rung coordinate system) and its <em>predictor</em> (the canonical formula) are consolidated enough for other people to inspect and test. I do not want to overstate it: the numbers above are research signals, not a finished proof.</p>
 
   <p>Honest next steps: extend the validation to a third domain (geophysical or astrophysical) to test whether the &phi;<sup>7/4</sup> crossover constant generalises. Build a transient-event detector for the mid-horizon dip, since we now have evidence that the dip is a real physiological wave we haven't put in the rung ladder. Get someone with the relevant training to look at the cosmic-budget numbers and tell me whether they're a coincidence or pointing at something real.</p>
 </div>
@@ -1518,4 +1519,37 @@ As a fraction         = (&pi; &minus; 3) / &pi; = 0.14159 / 3.14159 = 4.507%</di
 <!-- ═══════════════ LLM APPLICATION ═══════════════ -->
 <div class="section">
   <h2>The LLM application &mdash; Does the Same Framework Describe Language Models?</h2>
-  <p class="dim">May 2026 &mdash; preliminary, n=4 mod
+  <p class="dim">May 2026 &mdash; preliminary, n=4 model-size run on Pythia. Interesting signal, not a settled capability metric.</p>
+
+  <p>The same coupling-graph idea was tested on four open Pythia language models: 70M, 160M, 410M, and 1B parameters. The framework metric counts closed triangles of strongly coupled internal components and penalises loose-thread components. In this small run, that closure index rank-ordered the models on five of six standard benchmark families.</p>
+
+  <p>The honest version: this is a promising interpretability lead, not proof that the metric measures intelligence. Model size, layer count, active-node count, prompt choice, and random seed all need to be controlled. The right next test is the full Pythia size series, compared directly against parameter-count and depth baselines.</p>
+
+  <div class="card-row">
+    <div class="card">
+      <div class="label">Model Sizes</div>
+      <div class="value">4</div>
+      <div class="desc">Pythia 70M, 160M, 410M, 1B; more sizes needed</div>
+    </div>
+    <div class="card">
+      <div class="label">Rank Result</div>
+      <div class="value">5 / 6</div>
+      <div class="desc">Monotonic rank order on five benchmark families; WinoGrande weaker</div>
+    </div>
+    <div class="card">
+      <div class="label">Required Control</div>
+      <div class="value">Scale</div>
+      <div class="desc">Must compare against params, depth, active nodes, prompts and seeds</div>
+    </div>
+  </div>
+
+  <p>See <a href="LLM_CLOSURE_VS_CAPABILITY.md" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">LLM_CLOSURE_VS_CAPABILITY.md</a> for the full writeup.</p>
+</div>
+
+<div class="footer">
+  <p>Released as an open research notebook. Please test, falsify, improve, or tell me where I have reinvented something known.</p>
+</div>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                

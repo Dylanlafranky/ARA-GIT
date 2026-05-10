@@ -1,5 +1,7 @@
 # LLM ARA pilot — result summary (revised after dynamic test)
 
+> **Public-release note, May 2026:** This is a pilot result, not a general claim about all language models. The useful part is the distinction between static token position and generation-step dynamics; the generality needs more models, prompts, and seeds.
+
 **Date:** 2026-05-10
 **Question:** Does the ARA framework, which characterises natural oscillating systems by a single dynamical number, also produce LLM-specific signal when applied to transformer activations?
 **Model tested:** EleutherAI/pythia-70m-deduped (6 layers × 8 heads × 512 dim)

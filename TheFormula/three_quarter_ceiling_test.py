@@ -13,18 +13,24 @@ Falsifiable test of the framework's "3/4 universal ceiling" claim:
     (c) a genuine refutation of the framework's universal ceiling claim
 
 Method:
-  - Parse the master ARA catalog (F:\SystemFormulaFolder\master_ara_visualization.html)
+  - Parse the master ARA catalog (<repo>/master_ara_visualization.html)
   - Extract every (name, system, domain, ARA) tuple
   - Tabulate the distribution
   - Identify systems outside [0.25, 1.75]
   - Classify each outsider: snap-class (>2), or genuine outlier
   - Report whether the prediction holds
 """
+import os
 import re, json, os
 from collections import Counter, defaultdict
 
-VIS_PATH = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/master_ara_visualization.html"
-OUT      = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/three_quarter_ceiling_data.js"
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
+VIS_PATH = os.path.join(REPO_ROOT, "master_ara_visualization.html")
+OUT      = os.path.join(REPO_ROOT, "TheFormula/three_quarter_ceiling_data.js")
 
 # Parse the JS data array from the HTML
 with open(VIS_PATH) as f:

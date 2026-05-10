@@ -17,11 +17,16 @@ import os, glob, json
 import numpy as np, pandas as pd
 from scipy.signal import butter, sosfilt
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+_PARENT = os.path.dirname(_HERE)
+# Repo root: parent dir if this script is in TheFormula/, else current dir
+REPO_ROOT = _PARENT if os.path.basename(_HERE) == "TheFormula" else _HERE
+
 PHI = 1.6180339887498949
 
-DATA_DIR = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/PhysioZoo"
-HUMAN_RR = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/nsr001_rr.csv"
-OUT      = "/sessions/amazing-cool-archimedes/mnt/SystemFormulaFolder/TheFormula/multispecies_vertical_ara_data.js"
+DATA_DIR = os.path.join(REPO_ROOT, "PhysioZoo")
+HUMAN_RR = os.path.join(REPO_ROOT, "TheFormula/nsr001_rr.csv")
+OUT      = os.path.join(REPO_ROOT, "TheFormula/multispecies_vertical_ara_data.js")
 
 # --- load PhysioZoo peak files ---
 def parse_peaks_file(path):

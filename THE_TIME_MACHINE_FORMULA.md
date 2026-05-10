@@ -1,5 +1,7 @@
 # The Time Machine Formula
 
+> **Public-release note, May 2026:** This is a development notebook for the formula, not a final settled derivation. It includes attempts, reversals, and language that can sound stronger than the latest audit supports. The strongest current reading is that the formula may be a useful causal tracker/mapping tool; blind generation and universal-law claims require more testing.
+
 ## A Report on Building a Temporal Prediction Engine from Pure Geometry
 
 ### Dylan La Franchi — ARA Framework, Scripts 191–243BJ
