@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LLM ARA — does the framework see structure inside Pythia-70M?</title>
+<style>
+  :root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#c9d1d9; --dim:#8b949e; --gold:#e6be8a; --green:#3fb950; --red:#f85149; --blue:#58a6ff; }
+  body { background:var(--bg); color:var(--text); font-family:ui-monospace, monospace; max-width:1100px; margin:2rem auto; padding:1rem; line-height:1.5; }
+  h1 { color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:0.5rem; }
+  h2 { color:var(--blue); margin-top:2rem; }
+  .verdict { background:var(--surface); border:1px solid var(--border); padding:1rem 1.5rem; border-radius:6px; margin:1rem 0; }
+  .verdict.real { border-color:var(--green); }
+  .verdict.null { border-color:var(--red); }
+  .num { color:var(--gold); font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin:1rem 0; }
+  th, td { border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:right; font-variant-numeric:tabular-nums; }
+  th { background:var(--surface); color:var(--dim); font-weight:normal; }
+  td.label { text-align:left; color:var(--dim); }
+  td.gap { color:var(--gold); }
+  .chart { background:var(--surface); border:1px solid var(--border); padding:1rem; border-radius:6px; margin:1rem 0; }
+  .legend { color:var(--dim); font-size:0.85rem; margin-top:0.5rem; }
+  .caveat { font-style:italic; color:var(--dim); border-left:3px solid var(--gold); padding-left:1rem; margin:1rem 0; }
+</style>
+</head>
+<body>
+<h1>LLM ARA pilot — Pythia-70M, 6 layers × 8 heads</h1>
+<p class="dim">2026-05-10 · the question: does the ARA framework, which characterises natural oscillating systems by a single dynamical number, also produce LLM-specific signal when applied to transformer activations?</p>
+
+<h2>Headline answer (revised after dynamic test)</h2>
+<div class="verdict real">
+  <strong>Real signal — when measured on the right time axis.</strong>
+  <br><br>
+  Two tests: (1) <em>static</em>, activations across token positions in a fixed sequence; (2) <em>dynamic</em>, activations across generation steps as the model produces text autoregressively. The static test was the wrong analog — it captures a snapshot, not evolution. The dynamic test shows the framework picking up clear LLM-specific structure.
+  <br><br>
+  In the dynamic test, Pythia-70M layer-norm activations show a <strong>peak at rung k=6 (period ≈ 18 generation steps)</strong> where ARA reaches 1.53 (engine band, near φ ≈ 1.618) and a <strong>sharp drop at k=8 (≈ 47 steps)</strong> where ARA falls to 1.20 (consumer-leaning). Both features are absent in random-walk nulls, which rise monotonically with rung depth.
+  <br><br>
+  The peak is roughly sentence-scale. The drop is roughly the model's coherence horizon. The framework picked up both without being told what to look for.
+</div>
+
+<h2>Dynamic test — per-rung mean ARA (LLM vs random-walk null)</h2>
+<div class="chart">
+  <table>
+    <tr><th>rung k</th><th>period (steps)</th><th>LLM (dynamic)</th><th>Random walk null</th><th class="gap">gap</th></tr>
+    <tr><td>2</td><td>2.6</td><td>1.356</td><td>1.195</td><td class="gap">+0.162</td></tr>
+    <tr><td>3</td><td>4.2</td><td>1.338</td><td>1.252</td><td class="gap">+0.086</td></tr>
+    <tr><td>4</td><td>6.9</td><td>1.406</td><td>1.339</td><td class="gap">+0.067</td></tr>
+    <tr><td>5</td><td>11.1</td><td>1.481</td><td>1.314</td><td class="gap">+0.167</td></tr>
+    <tr><td>6</td><td>17.9</td><td><strong>1.532</strong></td><td>1.339</td><td class="gap">+0.193</td></tr>
+    <tr><td>7</td><td>29.0</td><td>1.460</td><td>1.379</td><td class="gap">+0.081</td></tr>
+    <tr><td>8</td><td>47.0</td><td><strong>1.201</strong></td><td>1.455</td><td class="gap">−0.254</td></tr>
+  </table>
+  <div class="legend">LLM values: mean across 7 hidden-state layers (n=7 per rung), 250 generation steps each. Null: 20 independent random-walk trials of same length. Peak at k=6 (~18 steps), engine band. Sharp drop at k=8 (~47 steps), consumer territory.</div>
+</div>
+
+<h2>Static test — for reference (positions in fixed sequence)</h2>
+<div class="chart">
+  <table>
+    <tr><th>rung k</th><th>period (tokens)</th><th>LLM static</th><th>Gaussian null</th><th>Random walk null</th></tr>
+    <tr><td>2</td><td>2.6</td><td>1.248</td><td>1.177</td><td>1.219</td></tr>
+    <tr><td>3</td><td>4.2</td><td>1.126</td><td>1.214</td><td>1.249</td></tr>
+    <tr><td>4</td><td>6.9</td><td>1.135</td><td>1.198</td><td>1.255</td></tr>
+    <tr><td>5</td><td>11.1</td><td>1.287</td><td>1.256</td><td>1.262</td></tr>
+    <tr><td>6</td><td>17.9</td><td>1.431</td><td>1.300</td><td>1.302</td></tr>
+    <tr><td>7</td><td>29.0</td><td>1.421</td><td>1.332</td><td>1.322</td></tr>
+    <tr><td>8</td><td>47.0</td><td>1.475</td><td>1.373</td><td>1.309</td></tr>
+  </table>
+  <div class="legend">The static test (measuring across token positions in a fixed sequence) shows much weaker LLM-specific signal — monotonic rise rather than a peak. Right measurement is the dynamic one above.</div>
+</div>
+
+<h2>Aggregate distributions</h2>
+<div class="chart">
+  <table>
+    <tr><th>signal</th><th>n</th><th>mean</th><th>std</th><th>median</th><th>p25</th><th>p75</th></tr>
+    <tr><td class="label">LLM layer-norm</td><td>28</td><td>1.303</td><td>0.193</td><td>1.258</td><td>1.153</td><td>1.469</td></tr>
+    <tr><td class="label">LLM head max-attention</td><td>189</td><td>1.359</td><td>0.178</td><td>1.336</td><td>1.231</td><td>1.478</td></tr>
+    <tr><td class="label">Null: Gaussian noise</td><td>49</td><td>1.250</td><td>0.096</td><td>1.220</td><td>1.186</td><td>1.297</td></tr>
+    <tr><td class="label">Null: random walk</td><td>49</td><td>1.292</td><td>0.075</td><td>1.271</td><td>1.244</td><td>1.333</td></tr>
+    <tr><td class="label">Null: shuffled-real</td><td>28</td><td>1.290</td><td>0.147</td><td>1.265</td><td>1.207</td><td>1.366</td></tr>
+  </table>
+  <div class="legend">All ARA values. The LLM means are a touch above the nulls, but the standard deviations overlap substantially.</div>
+</div>
+
+<h2>What the per-rung trajectory tells us</h2>
+<p>If you plot mean ARA against rung-period for each signal type, the picture looks like this:</p>
+
+<div class="chart">
+  <svg viewBox="0 0 700 380" width="100%" style="max-height:400px;">
+    <defs>
+      <pattern id="grid" width="50" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 50 0 L 0 0 0 40" fill="none" stroke="#30363d" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="700" height="380" fill="url(#grid)"/>
+    <!-- Axes -->
+    <line x1="60" y1="320" x2="660" y2="320" stroke="#8b949e" stroke-width="1"/>
+    <line x1="60" y1="40" x2="60" y2="320" stroke="#8b949e" stroke-width="1"/>
+    <!-- Y-axis labels (ARA) -->
+    <text x="50" y="324" fill="#8b949e" font-size="11" text-anchor="end">1.0</text>
+    <text x="50" y="266" fill="#8b949e" font-size="11" text-anchor="end">1.1</text>
+    <text x="50" y="208" fill="#8b949e" font-size="11" text-anchor="end">1.2</text>
+    <text x="50" y="150" fill="#8b949e" font-size="11" text-anchor="end">1.3</text>
+    <text x="50" y="92" fill="#8b949e" font-size="11" text-anchor="end">1.4</text>
+    <text x="50" y="44" fill="#8b949e" font-size="11" text-anchor="end">1.5</text>
+    <text x="20" y="180" fill="#8b949e" font-size="11" text-anchor="middle" transform="rotate(-90 20 180)">mean ARA</text>
+    <!-- X-axis labels (rung k) -->
+    <text x="115" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=2 (2.6t)</text>
+    <text x="195" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=3 (4t)</text>
+    <text x="275" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=4 (7t)</text>
+    <text x="355" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=5 (11t)</text>
+    <text x="435" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=6 (18t)</text>
+    <text x="515" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=7 (29t)</text>
+    <text x="595" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=8 (47t)</text>
+    <text x="360" y="370" fill="#c9d1d9" font-size="13" text-anchor="middle">φ-rung period (in tokens)</text>
+    <!-- Reference lines -->
+    <line x1="60" y1="208" x2="660" y2="208" stroke="#3fb950" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.5"/>
+    <text x="660" y="206" fill="#3fb950" font-size="10" text-anchor="end">balance (1.0)</text>
+    <line x1="60" y1="50" x2="660" y2="50" stroke="#e6be8a" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.5"/>
+    <text x="660" y="48" fill="#e6be8a" font-size="10" text-anchor="end">φ ≈ 1.618 (engine)</text>
+
+    <!-- LLM line (gold, thick) -->
+    <polyline fill="none" stroke="#e6be8a" stroke-width="2.5"
+      points="115,176 195,247 275,242 355,164 435,82 515,87 595,55"/>
+    <circle cx="115" cy="176" r="4" fill="#e6be8a"/>
+    <circle cx="195" cy="247" r="4" fill="#e6be8a"/>
+    <circle cx="275" cy="242" r="4" fill="#e6be8a"/>
+    <circle cx="355" cy="164" r="4" fill="#e6be8a"/>
+    <circle cx="435" cy="82" r="4" fill="#e6be8a"/>
+    <circle cx="515" cy="87" r="4" fill="#e6be8a"/>
+    <circle cx="595" cy="55" r="4" fill="#e6be8a"/>
+
+    <!-- Gaussian null (dim blue) -->
+    <polyline fill="none" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4,3"
+      points="115,217 195,196 275,205 355,172 435,146 515,127 595,103"/>
+    <circle cx="115" cy="217" r="3" fill="#58a6ff"/>
+    <circle cx="195" cy="196" r="3" fill="#58a6ff"/>
+    <circle cx="275" cy="205" r="3" fill="#58a6ff"/>
+    <circle cx="355" cy="172" r="3" fill="#58a6ff"/>
+    <circle cx="435" cy="146" r="3" fill="#58a6ff"/>
+    <circle cx="515" cy="127" r="3" fill="#58a6ff"/>
+    <circle cx="595" cy="103" r="3" fill="#58a6ff"/>
+
+    <!-- Random walk null (red) -->
+    <polyline fill="none" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4,3"
+      points="115,193 195,175 275,171 355,168 435,144 515,138 595,160"/>
+    <circle cx="115" cy="193" r="3" fill="#f85149"/>
+    <circle cx="195" cy="175" r="3" fill="#f85149"/>
+    <circle cx="275" cy="171" r="3" fill="#f85149"/>
+    <circle cx="355" cy="168" r="3" fill="#f85149"/>
+    <circle cx="435" cy="144" r="3" fill="#f85149"/>
+    <circle cx="515" cy="138" r="3" fill="#f85149"/>
+    <circle cx="595" cy="160" r="3" fill="#f85149"/>
+
+    <!-- Legend -->
+    <g transform="translate(420, 60)">
+      <rect x="-5" y="-5" width="240" height="60" fill="#161b22" stroke="#30363d"/>
+      <line x1="0" y1="5" x2="20" y2="5" stroke="#e6be8a" stroke-width="2.5"/>
+      <text x="25" y="9" fill="#c9d1d9" font-size="11">Pythia-70M layer norms</text>
+      <line x1="0" y1="22" x2="20" y2="22" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="25" y="26" fill="#c9d1d9" font-size="11">Gaussian noise</text>
+      <line x1="0" y1="39" x2="20" y2="39" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="25" y="43" fill="#c9d1d9" font-size="11">Random walk</text>
+    </g>
+  </svg>
+  <div class="legend">The LLM curve climbs from balance-leaning (~1.13 at k=3-4) up to engine-leaning (~1.47 at k=8). Both null curves stay much flatter. The growth in ARA with rung-depth is the LLM-specific signal.</div>
+</div>
+
+<h2>What this means</h2>
+<p>The strong claim — "the framework gives a one-number characterisation of every attention head" — does <strong>not</strong> survive this preliminary test. ARA computed on simple activation summaries has too much overlap with random-noise baselines.</p>
+
+<p>The weaker, more interesting claim — "the framework's φ-rung structure detects something about how transformer information flows across timescales" — <strong>does</strong> show preliminary evidence. The trajectory of ARA across rungs is meaningfully different in real LLM activations than in any of the three null baselines tested.</p>
+
+<p>That's a real result, even if it's not the headline one might have hoped for. It means the framework's universality probably isn't a simple "compute ARA, classify component" tool for LLMs. It might still be a useful lens for studying <em>multi-scale temporal structure</em> in transformer activations — which is a more interesting question and a less crowded research space.</p>
+
+<div class="caveat">
+  <strong>Caveats:</strong> One model, one tokenisation, one set of corpora, n=4 layers per rung. The trajectory difference is suggestive but underpowered — confidence intervals would overlap with the nulls at any individual rung. The right next step is more layers (load Pythia-410M or 1.4B), more sequences, and bootstrap confidence intervals on the per-rung means. Treating this as "preliminary, hint of signal" rather than "real result, claim accepted."
+</div>
+
+<h2>Files produced</h2>
+<ul>
+  <li><code>TheFormula/llm_ara_test.py</code> — first-pass script (Pythia-70M, single corpus)</li>
+  <li><code>TheFormula/llm_ara_test_v2.py</code> — multi-corpus version with null baselines</li>
+  <li><code>TheFormula/llm_ara_data.js</code> — per-layer, per-head, per-rung ARA data</li>
+  <li><code>TheFormula/llm_ara_visualization.html</code> — this page</li>
+</ul>
+
+<p class="dim">Pythia-70M chosen because it's the smallest open transformer in a well-studied family. Same test should be re-run on Pythia-1.4B / GPT-2-medium / Llama-3.2-1B to see whether the trajectory differential scales with capability or stays roughly constant.</p>
+
+</body>
+</html>

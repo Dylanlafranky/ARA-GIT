@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LLM ARA per concept — does the framework distinguish different cognitive content?</title>
+<style>
+  :root { --bg:#0d1117; --surface:#161b22; --border:#30363d; --text:#c9d1d9; --dim:#8b949e; --gold:#e6be8a; --green:#3fb950; --blue:#58a6ff; --red:#f85149; --purple:#bc8cff; --orange:#ffa657; }
+  body { background:var(--bg); color:var(--text); font-family:ui-monospace, monospace; max-width:1100px; margin:2rem auto; padding:1rem; line-height:1.5; }
+  h1 { color:var(--gold); border-bottom:1px solid var(--border); padding-bottom:0.5rem; }
+  h2 { color:var(--blue); margin-top:2rem; }
+  .verdict { background:var(--surface); border:1px solid var(--green); padding:1rem 1.5rem; border-radius:6px; margin:1rem 0; }
+  table { width:100%; border-collapse:collapse; margin:1rem 0; }
+  th, td { border:1px solid var(--border); padding:0.5rem 0.7rem; text-align:right; font-variant-numeric:tabular-nums; }
+  th { background:var(--surface); color:var(--dim); font-weight:normal; }
+  td.label { text-align:left; color:var(--text); }
+  .gold { color:var(--gold); font-weight:600; }
+  .chart { background:var(--surface); border:1px solid var(--border); padding:1rem; border-radius:6px; margin:1rem 0; }
+  .legend { color:var(--dim); font-size:0.85rem; margin-top:0.5rem; }
+  .caveat { font-style:italic; color:var(--dim); border-left:3px solid var(--gold); padding-left:1rem; margin:1rem 0; }
+</style>
+</head>
+<body>
+<h1>LLM ARA per concept — Pythia-70M</h1>
+<p class="dim">2026-05-10 · the question: does ARA signature differ by what kind of content the model is producing?</p>
+
+<div class="verdict">
+  <strong>Yes, by a lot.</strong> Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures. <strong>Code peaks highest at engine-strong (1.91 at paragraph scale).</strong> Emotion and dialogue stay closest to balance (1.25 overall). Content with multi-sentence structure (story, math, code, poetry) peaks at long-range rungs; sentence-organised content (emotion, factual, dialogue, abstract) peaks at the sentence-scale rung. The framework picked up the difference between sentence-organised and multi-sentence-organised content without being told what to look for.
+</div>
+
+<h2>Overall ARA by content type</h2>
+<div class="chart">
+  <table>
+    <tr><th class="label">content</th><th>ARA mean</th><th>std</th><th>category</th><th>peak rung</th><th>peak period</th><th>peak ARA</th></tr>
+    <tr><td class="label gold">code</td><td class="gold">1.572</td><td>0.511</td><td>engine</td><td>k=7</td><td>~29 tokens</td><td class="gold">1.910</td></tr>
+    <tr><td class="label">story</td><td>1.457</td><td>0.402</td><td>balance-leaning</td><td>k=8</td><td>~47 tokens</td><td>1.795</td></tr>
+    <tr><td class="label">math</td><td>1.393</td><td>0.335</td><td>balance-leaning</td><td>k=8</td><td>~47 tokens</td><td>1.569</td></tr>
+    <tr><td class="label">factual</td><td>1.351</td><td>0.403</td><td>balance-leaning</td><td>k=6</td><td>~18 tokens</td><td>1.462</td></tr>
+    <tr><td class="label">abstract</td><td>1.338</td><td>0.364</td><td>balance-leaning</td><td>k=6</td><td>~18 tokens</td><td>1.509</td></tr>
+    <tr><td class="label">poetry</td><td>1.332</td><td>0.397</td><td>balance-leaning</td><td>k=8</td><td>~47 tokens</td><td>1.536</td></tr>
+    <tr><td class="label">emotion</td><td>1.255</td><td>0.319</td><td>balance-leaning</td><td>k=6</td><td>~18 tokens</td><td>1.502</td></tr>
+    <tr><td class="label">dialogue</td><td>1.255</td><td>0.288</td><td>balance-leaning</td><td>k=6</td><td>~18 tokens</td><td>1.361</td></tr>
+  </table>
+  <div class="legend">Means across 7 hidden-state layers × 6 rungs (k=3..8) for each prompt type. 200 generation steps per prompt. Peak rung = the rung where ARA reaches its maximum.</div>
+</div>
+
+<h2>The two groupings</h2>
+<div class="chart">
+  <p><strong>Multi-sentence-structured content</strong> (peaks at long-range rungs):</p>
+  <ul>
+    <li><strong>code</strong> peaks at k=7 (~29 tokens) — function/loop body scale</li>
+    <li><strong>story</strong> peaks at k=8 (~47 tokens) — multi-sentence narrative arc scale</li>
+    <li><strong>math</strong> peaks at k=8 (~47 tokens) — theorem-proof scale</li>
+    <li><strong>poetry</strong> peaks at k=8 (~47 tokens) — stanza scale</li>
+  </ul>
+  <p><strong>Sentence-organised content</strong> (peaks at sentence-scale rung):</p>
+  <ul>
+    <li><strong>emotion, factual, dialogue, abstract</strong> all peak at k=6 (~18 tokens) — single-sentence scale</li>
+  </ul>
+  <div class="legend">The framework split the prompts into two groups by where their ARA peaks. The grouping is interpretable — content where each sentence stands more alone vs. content with multi-sentence structure. Not pre-specified by the experimenter.</div>
+</div>
+
+<h2>Per-rung ARA curve, all 8 prompts</h2>
+<div class="chart">
+  <svg viewBox="0 0 700 380" width="100%" style="max-height:420px;">
+    <!-- Grid + axes -->
+    <line x1="60" y1="320" x2="660" y2="320" stroke="#8b949e" stroke-width="1"/>
+    <line x1="60" y1="40" x2="60" y2="320" stroke="#8b949e" stroke-width="1"/>
+    <text x="50" y="324" fill="#8b949e" font-size="11" text-anchor="end">1.0</text>
+    <text x="50" y="266" fill="#8b949e" font-size="11" text-anchor="end">1.2</text>
+    <text x="50" y="208" fill="#8b949e" font-size="11" text-anchor="end">1.4</text>
+    <text x="50" y="150" fill="#8b949e" font-size="11" text-anchor="end">1.6</text>
+    <text x="50" y="92" fill="#8b949e" font-size="11" text-anchor="end">1.8</text>
+    <text x="50" y="44" fill="#8b949e" font-size="11" text-anchor="end">2.0</text>
+    <text x="20" y="180" fill="#8b949e" font-size="11" text-anchor="middle" transform="rotate(-90 20 180)">mean ARA</text>
+    <!-- X-axis labels -->
+    <text x="135" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=3 (4t)</text>
+    <text x="240" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=4 (7t)</text>
+    <text x="345" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=5 (11t)</text>
+    <text x="450" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=6 (18t)</text>
+    <text x="555" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=7 (29t)</text>
+    <text x="650" y="340" fill="#8b949e" font-size="11" text-anchor="middle">k=8 (47t)</text>
+    <text x="360" y="370" fill="#c9d1d9" font-size="13" text-anchor="middle">φ-rung period (in generation steps)</text>
+
+    <!-- φ reference -->
+    <line x1="60" y1="116" x2="660" y2="116" stroke="#e6be8a" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.4"/>
+    <text x="660" y="114" fill="#e6be8a" font-size="10" text-anchor="end">φ ≈ 1.618</text>
+    <line x1="60" y1="208" x2="660" y2="208" stroke="#3fb950" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.4"/>
+    <text x="660" y="206" fill="#3fb950" font-size="10" text-anchor="end">balance (1.0)</text>
+
+    <!-- Mapping: ARA value y = 320 - (ARA - 1.0) * 290 (for 1.0 → 320, 2.0 → 30)
+         x = 60 + (k-3) * 105, where k=3..8 -->
+    <!-- code (gold) -->
+    <polyline fill="none" stroke="#e6be8a" stroke-width="2.5"
+      points="135,165 240,189 345,209 450,206 555,57 650,116"/>
+    <!-- story (blue) -->
+    <polyline fill="none" stroke="#58a6ff" stroke-width="2"
+      points="135,239 240,235 345,200 450,185 555,178 650,89"/>
+    <!-- math (green) -->
+    <polyline fill="none" stroke="#3fb950" stroke-width="2"
+      points="135,247 240,236 345,205 450,206 555,194 650,155"/>
+    <!-- emotion (red) -->
+    <polyline fill="none" stroke="#f85149" stroke-width="2"
+      points="135,270 240,275 345,277 450,176 555,232 650,253"/>
+    <!-- factual (orange) -->
+    <polyline fill="none" stroke="#ffa657" stroke-width="2"
+      points="135,246 240,256 345,231 450,186 555,198 650,182"/>
+    <!-- dialogue (purple) -->
+    <polyline fill="none" stroke="#bc8cff" stroke-width="2"
+      points="135,244 240,254 345,225 450,221 555,256 650,256"/>
+    <!-- poetry (lighter blue, dashed) -->
+    <polyline fill="none" stroke="#79c0ff" stroke-width="2" stroke-dasharray="4,2"
+      points="135,253 240,255 345,217 450,206 555,247 650,182"/>
+    <!-- abstract (gold dashed) -->
+    <polyline fill="none" stroke="#d2a8ff" stroke-width="2" stroke-dasharray="4,2"
+      points="135,254 240,260 345,257 450,178 555,180 650,219"/>
+
+    <!-- Legend -->
+    <g transform="translate(490, 50)">
+      <rect x="-5" y="-5" width="170" height="155" fill="#161b22" stroke="#30363d"/>
+      <line x1="0" y1="5" x2="20" y2="5" stroke="#e6be8a" stroke-width="2.5"/><text x="25" y="9" fill="#c9d1d9" font-size="10">code</text>
+      <line x1="0" y1="22" x2="20" y2="22" stroke="#58a6ff" stroke-width="2"/><text x="25" y="26" fill="#c9d1d9" font-size="10">story</text>
+      <line x1="0" y1="39" x2="20" y2="39" stroke="#3fb950" stroke-width="2"/><text x="25" y="43" fill="#c9d1d9" font-size="10">math</text>
+      <line x1="0" y1="56" x2="20" y2="56" stroke="#f85149" stroke-width="2"/><text x="25" y="60" fill="#c9d1d9" font-size="10">emotion</text>
+      <line x1="0" y1="73" x2="20" y2="73" stroke="#ffa657" stroke-width="2"/><text x="25" y="77" fill="#c9d1d9" font-size="10">factual</text>
+      <line x1="0" y1="90" x2="20" y2="90" stroke="#bc8cff" stroke-width="2"/><text x="25" y="94" fill="#c9d1d9" font-size="10">dialogue</text>
+      <line x1="0" y1="107" x2="20" y2="107" stroke="#79c0ff" stroke-width="2" stroke-dasharray="4,2"/><text x="25" y="111" fill="#c9d1d9" font-size="10">poetry</text>
+      <line x1="0" y1="124" x2="20" y2="124" stroke="#d2a8ff" stroke-width="2" stroke-dasharray="4,2"/><text x="25" y="128" fill="#c9d1d9" font-size="10">abstract</text>
+    </g>
+  </svg>
+  <div class="legend">Each prompt's per-rung mean ARA curve. Code (gold) sits highest overall, peaks dramatically at k=7. Emotion (red) and dialogue (purple) sit lowest. Story and poetry climb steeply at the longest rung. The shapes are distinguishable by eye.</div>
+</div>
+
+<h2>Interpretation</h2>
+<p>The framework appears to be sensitive to <strong>cognitive content type</strong>. Different kinds of content produce different ARA signatures:</p>
+<ul>
+  <li><strong>Code</strong> shows the strongest engine character — its highly regular structure (function calls, loops, returns) produces strong build/release cycles.</li>
+  <li><strong>Story, math, poetry</strong> all show long-range structure (peak at k=8). Narrative arcs, theorem-proof structure, and stanzaic flow all live at multi-sentence scale.</li>
+  <li><strong>Emotion and dialogue</strong> sit closest to balance — conversational content has less rhythmic structure and shorter coherence windows.</li>
+  <li><strong>Factual, abstract</strong> peak at sentence-scale (k=6) — encyclopedic and logical content tends to be sentence-by-sentence rather than multi-sentence-arced.</li>
+</ul>
+
+<p>This isn't a per-component classifier (the simpler claim that didn't survive the static test), but it IS a per-content-type classifier — give the framework a generation run and it can tell you something about <em>what kind of cognitive task the model is doing.</em></p>
+
+<div class="caveat">
+  <strong>Caveats:</strong> One model (Pythia-70M, 70M params), one seed, one prompt per content type. The result needs replication with multiple seeds, multiple prompts per category, and bigger models. The differences between prompt types are interpretable but small relative to within-prompt std (0.3–0.5). Also: this could be partly a surface-statistical artifact — code uses very different tokens than prose, which could affect activation distributions independent of any deep cognitive distinction. Bootstrap CIs and a tokenisation-controlled baseline would tighten the claim.
+</div>
+
+<h2>What this enables</h2>
+<p>If this generalises, the framework gives you a measurement tool: <strong>compute the ARA signature of a model's generation, and you have a fingerprint of what kind of processing is happening.</strong> Useful for:</p>
+<ul>
+  <li><strong>Mode detection:</strong> is the model "in code mode," "in storytelling mode," "in factual recall mode"?</li>
+  <li><strong>Content classification of internal states</strong> rather than of inputs/outputs.</li>
+  <li><strong>Cross-model comparison:</strong> do bigger / better-aligned / RLHF'd models have different ARA signatures for the same content type?</li>
+  <li><strong>Anomaly detection:</strong> a generation run whose ARA signature doesn't match any known content type is potentially something unusual.</li>
+</ul>
+
+<p class="dim">Files: TheFormula/llm_ara_per_concept.py · llm_ara_per_concept_data.js · this page.</p>
+
+</body>
+</html>

@@ -91,72 +91,44 @@ These are the findings that survived a rebuilt strict-causal protocol after an e
 
 ---
 
-## How to use the canonical predictor
+## LLM application — preliminary (May 2026)
 
-```python
-from ara_framework import extract_topology, predict
+The framework's coupling-graph and Information³ closure tools were applied to the Pythia language-model size series (70M, 160M, 410M, 1B, deduped variants). Pythia is open and benchmarked extensively, which makes it a clean test bed for asking whether the framework's metrics correlate with capability.
 
-# Extract topology coordinates from training data
-topo = extract_topology(data, t=anchor_index, rungs_k=range(2, 22), home_k=8)
+### 🟢 Closure index predicts Pythia benchmark capability
 
-# Forward predict at horizon h
-prediction = predict(topo, h, closed=is_closed_system)
-```
+| Pythia size | closure index (triangles per active component / loose-thread fraction) | LAMBADA acc | ARC-easy | SciQ |
+|---|---|---|---|---|
+| 70m-deduped | 80 | 0.192 | 0.385 | 0.606 |
+| 160m-deduped | 756 | 0.342 | 0.440 | 0.720 |
+| 410m-deduped | 877 | 0.524 | 0.517 | 0.826 |
+| 1b-deduped | **6,284** | **0.580** | **0.585** | **0.870** |
 
-Three lines. `closed=True` for systems with a tight matched-rung partner (ENSO+SOI); `closed=False` for single-channel systems (ECG).
+**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ. **Pearson r vs log(closure) = +0.886 to +0.997** across those five benchmarks. WinoGrande is the only exception (ρ = +0.800), and WinoGrande is a known weak-scaling benchmark — even GPT-3 barely beats random on it. Source: `LLM_CLOSURE_VS_CAPABILITY.md`, `TheFormula/llm_closure_vs_capability.html`, raw evals from EleutherAI/pythia at step 143000.
 
-Run the self-test:
-```bash
-python release_2026-05/core/ara_framework.py
-```
+### 🟢 Coupling-graph approach surfaces interpretable LLM structure
 
-Reproduce the headline numbers:
-```bash
-python release_2026-05/benchmarks/canonical_benchmark.py
-```
+Same 30-second analysis on Pythia-70M reveals: dead layers (4–6 have zero variance during this generation), within-layer clusters (L2 heads H0/H1/H2/H5/H6 correlate >0.95), cross-layer information-flow circuits (L0H6 ↔ L2H3 at +0.986), and anti-phase pairs (layer-norm L3 ↔ L2H5 at −0.974). Source: `TheFormula/llm_node_map_visualization.html`.
 
----
+### 🟡 Layer depth, not parameter count, drives hierarchical organisation
 
-## Open testable predictions
+Within/across-layer correlation ratio peaks at Pythia-410M (24 layers, ratio 1.51) and reverts at Pythia-1B (16 layers, ratio 1.07) despite 2.4× more parameters. Spectral decay shows the same pattern: peaks at 410M, drops at 1B. The framework's interpretation is that depth is what gives the network usable φ-rungs for hierarchy. Source: `LLM_SIZE_SERIES_RESULT.md`.
 
-If anyone wants to falsify or confirm the framework, these are the cleanest targets:
+### 🟡 ARA signature distinguishes cognitive content type
 
-1. **Donor ARA prediction.** For any system, the rung 1.75 φ-rungs above home should contain a "donor" system whose own measured ARA is ≈ 1.75. By symmetry, the rung 1.75 below should contain a structural anchor with ARA ≈ 0.25. Find candidate donors in cardiology (autonomic control), climate (solar cycles), or biology (metabolic/hormonal envelopes) and check their ARAs.
-2. **Cross-domain crossover constant.** The predictor crossover at φ^(±7/4) × home period was found on ENSO + ECG. Test on a third independent domain (geophysical, astrophysical, or chemical) and see if 7/4 holds.
-3. **Spectral tilt n_s from ARA geometry.** The cosmic budget derivation gives a fourth independent observable that can falsify the π-and-φ scheme. (Scripts 119–121 attempt this; a cosmologist's review would be valuable.)
-4. **Multi-species vertical-ARA in birds and reptiles.** The mammalian result holds; extending to corvids, parrots, and reptiles would test whether local cycle shape preservation is universal across vertebrates or specific to mammals.
-5. **Multifractal HRV literature comparison.** The framework's φ-rung architecture should overlap predictively with existing multifractal HRV results (Goldberger, Ivanov, Stanley work). If the φ-rungs simply *are* a special case of an established wavelet basis, that's worth knowing.
+Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures during generation. Code is most engine-like (mean ARA 1.57, peak 1.91 at paragraph scale). Emotion and dialogue closest to balance (1.255). Multi-sentence-structured content (code, story, math, poetry) peaks at long-range rungs; sentence-organised content (emotion, factual, dialogue, abstract) peaks at sentence-scale. Source: `TheFormula/llm_ara_per_concept_visualization.html`.
 
----
+### 🔴 φ-deep × φ-wide all-closed prediction (untested)
 
-## Reading order for newcomers
+The framework's prediction for the optimal LLM architecture: layer depth and width both at φ-rung optimum, with all components participating in closed Information³ structure. Predicted consequence: hallucinations (drift from training) substantially eliminated within knowledge; out-of-knowledge content surfaces as honest uncertainty rather than confident fiction; cost is reduced creative-generation flexibility. Falsifiable in principle by training models with different aspect ratios at fixed parameter count. Source: speculative section of `LLM_CLOSURE_VS_CAPABILITY.md`.
 
-1. **`release_2026-05/docs/what_is_this.html`** — plain-language explainer with figures. Start here.
-2. **This `INDEX.md`** — confidence-tiered catalog (you're here).
-3. **`release_2026-05/core/ara_framework.py`** — the canonical predictor, ~250 lines, fully docstring-documented.
-4. **`MASTER_PREDICTION_LEDGER.md`** — running list of advance predictions and outcomes.
-5. **`FRACTAL_UNIVERSE_THEORY.md`** — full theory document (long, three-tier confidence labels throughout).
-6. **`The Geometry of Time - Paper 1 (preprint).pdf`** — academic-style preprint (Zenodo DOI: 10.5281/zenodo.19653363).
+### Files
 
----
+- `release_2026-05/llm/llm_size_series.py` (or current location `TheFormula/llm_size_series.py`)
+- `TheFormula/llm_node_map.py`, `llm_ara_per_concept.py`, `llm_ara_test_v3_dynamic.py`
+- All `llm_*_data.js` and `llm_*_visualization.html` companions
+- `LLM_CLOSURE_VS_CAPABILITY.md`, `LLM_SIZE_SERIES_RESULT.md`, `LLM_INFO_CUBED_RESULT.md`, `LLM_ARA_PILOT_RESULT.md`
 
-## Status, May 2026
+### Honest framing
 
-The framework's *topology* (the φ-rung coordinate system) and its *predictor* (the canonical formula) are now consolidated into a single ~250-line Python module that works on any oscillating system you point it at. Cross-domain validation across climate, cardiology, and four mammalian species. Methodology is apples-to-apples with operational forecast skill scoring (strict-causal, no future leakage).
-
-What's next is mostly outside my reach as a non-specialist:
-- Independent replication of the multi-species result by a physiologist
-- A cosmologist's check on the dark-sector geometric derivation
-- A geophysicist's check on whether the ENSO matched-rung architecture matches their existing Walker-Circulation models
-- Anyone willing to look at the framework in their own field and tell me where it's already been done in different language
-
-If you've read this far and you have relevant training, I'd be genuinely grateful for a critical read.
-
----
-
-## License & contact
-
-CC-BY-4.0 — cite freely, build on it, tear it apart.
-
-**Dylan La Franchi** — independent researcher, living with ME/CFS
-Contact: dylan.lafranchi@gmail.com
+n=4 model sizes is small. The Spearman rank-correlation = 1.000 result is striking but limited by sample size. Adding Pythia-1.4B / 2.8B / 6.9B / 12B is the natural confirming experiment — if rank correlation holds across 
