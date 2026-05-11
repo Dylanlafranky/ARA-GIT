@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARA Framework Viewer</title>
+<style>
+:root {
+  --bg: #0e1014;
+  --panel: #181c24;
+  --panel-2: #20252f;
+  --text: #e6e7e9;
+  --dim: #9aa0aa;
+  --gold: #d4a843;
+  --teal: #39d2c0;
+  --red: #e25b5b;
+  --green: #5be287;
+  --border: #2a2f3a;
+}
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  background: var(--bg); color: var(--text); margin: 0;
+  padding: 1.5rem; max-width: 1200px; margin: 0 auto;
+}
+h1 { color: var(--gold); margin: 0 0 0.5rem; font-weight: 600; }
+h2 { color: var(--teal); margin: 1.5rem 0 0.75rem; font-size: 1.1rem; font-weight: 500; }
+h3 { color: var(--dim); margin: 0.5rem 0; font-size: 0.95rem; font-weight: 500; }
+.subtitle { color: var(--dim); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.panel {
+  background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.25rem; margin-bottom: 1rem;
+}
+.upload-zone {
+  background: var(--panel-2); border: 1px dashed var(--border); border-radius: 8px;
+  padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s;
+}
+.upload-zone:hover, .upload-zone.dragover { border-color: var(--gold); background: var(--panel); }
+.upload-zone input { display: none; }
+.summary-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem; margin-top: 0.75rem;
+}
+.summary-card {
+  background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 0.85rem; text-align: center;
+}
+.summary-card .label { color: var(--dim); font-size: 0.78rem; text-transform: uppercase;
+                       letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.summary-card .value { color: var(--gold); font-size: 1.5rem; font-weight: 600; }
+.summary-card .note { color: var(--dim); font-size: 0.8rem; margin-top: 0.3rem; }
+table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; font-size: 0.92rem; }
+th, td { padding: 0.5rem 0.75rem; text-align: right; border-bottom: 1px solid var(--border); }
+th { color: var(--dim); font-weight: 500; text-align: right; text-transform: uppercase;
+     font-size: 0.75rem; letter-spacing: 0.05em; }
+th:first-child, td:first-child { text-align: left; }
+tr.home { background: rgba(212,168,67,0.08); }
+tr.home td:first-child::after { content: ' ← home'; color: var(--gold); font-weight: 500; }
+.class-pill {
+  display: inline-block; padding: 0.25rem 0.6rem; border-radius: 12px;
+  font-size: 0.8rem; font-weight: 500; background: var(--panel-2);
+  border: 1px solid var(--border);
+}
+.class-pill.engine { color: var(--gold); border-color: var(--gold); }
+.class-pill.clock, .class-pill.shock_absorber { color: var(--teal); border-color: var(--teal); }
+.class-pill.consumer, .class-pill.absorber { color: var(--dim); }
+.class-pill.snap, .class-pill.exothermic { color: var(--red); border-color: var(--red); }
+.class-pill.harmonic_or_pair { color: var(--green); border-color: var(--green); }
+.ara-scale {
+  position: relative; height: 56px; margin: 1rem 0;
+  background: linear-gradient(to right,
+    #000 0%, #444 12.5%, #888 50%, var(--gold) 80.9%, var(--red) 95%, #000 100%);
+  border-radius: 6px;
+}
+.ara-marker {
+  position: absolute; top: -8px; width: 3px; height: 72px;
+  background: var(--text); transform: translateX(-50%);
+}
+.ara-marker::after {
+  content: attr(data-label); position: absolute; bottom: -22px; left: 50%;
+  transform: translateX(-50%); white-space: nowrap; font-size: 0.78rem;
+  color: var(--text); font-weight: 500;
+}
+.ara-label {
+  position: absolute; top: 62px; font-size: 0.7rem; color: var(--dim);
+  transform: translateX(-50%);
+}
+canvas { max-width: 100%; }
+.mono { font-family: "SF Mono", Monaco, Consolas, monospace; font-size: 0.88rem; }
+.error { color: var(--red); padding: 1rem; background: rgba(226,91,91,0.1);
+         border-radius: 6px; border: 1px solid var(--red); }
+.muted { color: var(--dim); font-size: 0.85rem; }
+ul { padding-left: 1.2rem; }
+li { margin: 0.3rem 0; color: var(--text); font-size: 0.92rem; }
+</style>
+</head>
+<body>
+
+<h1>ARA Framework Viewer</h1>
+<p class="subtitle">Drop in a mapper or predictor JSON output. Visualises your system's ARA class, φ-rung breakdown, matched-rung partners, and (if loaded) predictions.</p>
+
+<div class="panel">
+  <label class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" accept=".json" multiple>
+    <strong>Drop JSON file here</strong> or click to browse<br>
+    <span class="muted">Accepts <span class="mono">*_ara.json</span> (mapping) and <span class="mono">*_predictions.json</span> (predictions)</span>
+  </label>
+</div>
+
+<div id="results" style="display:none">
+  <div class="panel" id="summaryPanel">
+    <h2>System summary</h2>
+    <div id="systemSummary" class="summary-grid"></div>
+    <div id="araScalePanel" style="margin-top: 1.5rem">
+      <h3>Where this system sits on the 0–2 ARA scale</h3>
+      <div class="ara-scale" id="araScale"></div>
+      <div style="position:relative; height:32px; margin-top:8px">
+        <div class="ara-label" style="left:0%">0 — singularity</div>
+        <div class="ara-label" style="left:12.5%">0.25 wall</div>
+        <div class="ara-label" style="left:50%">1.0 absorber</div>
+        <div class="ara-label" style="left:80.9%">φ engine</div>
+        <div class="ara-label" style="left:87.5%">1.75 wall</div>
+        <div class="ara-label" style="left:100%">2.0 harmonic</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="rungPanel">
+    <h2>φ-rung breakdown</h2>
+    <p class="muted">Each rung k corresponds to period φ<sup>k</sup>. Amplitude shows how much energy lives at each rung; ARA shows that rung's local engine/clock/snap character.</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0">
+      <div><canvas id="ampChart" height="220"></canvas></div>
+      <div><canvas id="araChart" height="220"></canvas></div>
+    </div>
+    <table id="rungTable"></table>
+  </div>
+
+  <div class="panel" id="partnersPanel" style="display:none">
+    <h2>Candidate matched-rung partners</h2>
+    <p class="muted">Rungs with similar ARA values (within 0.15) at ≥3 rungs apart — candidates for anti-phase coupled pairs.</p>
+    <ul id="partnersList"></ul>
+  </div>
+
+  <div class="panel" id="predictionsPanel" style="display:none">
+    <h2>Predictions</h2>
+    <p class="muted">ACT (short-range, anchored at v_now) and OLD (long-range, structured wave from training mean) blended through a sigmoid centered at the crossover horizon h_cross = home_period × φ<sup>±7/4</sup>.</p>
+    <div style="margin: 1rem 0"><canvas id="predChart" height="240"></canvas></div>
+    <table id="predTable"></table>
+  </div>
+</div>
+
+<div id="errorPanel" style="display:none" class="panel">
+  <div class="error" id="errorMessage"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+<script>
+const PHI = 1.6180339887498949;
+let mapping = null, predictions = null;
+
+// File handling
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+uploadZone.addEventListener('click', () => fileInput.click());
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault(); uploadZone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+fileInput.addEventListener('change', e => handleFiles(e.target.files));
+
+function handleFiles(files) {
+  for (const f of files) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (data.rung_breakdown) { mapping = data; }
+        else if (data.predictions) { predictions = data; }
+        else { showError('Unrecognised JSON format'); return; }
+        renderAll();
+      } catch (err) { showError('Parse error: ' + err.message); }
+    };
+    reader.readAsText(f);
+  }
+}
+
+function showError(msg) {
+  document.getElementById('errorPanel').style.display = 'block';
+  document.getElementById('errorMessage').textContent = msg;
+}
+
+function renderAll() {
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('errorPanel').style.display = 'none';
+  if (mapping) {
+    renderSummary(mapping);
+    renderRungs(mapping);
+    renderPartners(mapping);
+    placeAraMarker(mapping.system_mean_ara);
+  }
+  if (predictions) renderPredictions(predictions);
+}
+
+function renderSummary(m) {
+  const s = document.getElementById('systemSummary');
+  const ara = m.system_mean_ara != null ? m.system_mean_ara.toFixed(3) : 'n/a';
+  const aoa = m.ara_of_ara != null ? m.ara_of_ara.toFixed(3) : 'n/a';
+  s.innerHTML = `
+    <div class="summary-card">
+      <div class="label">System mean ARA</div>
+      <div class="value">${ara}</div>
+      <div class="note">${m.system_classification_note || ''}</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Class</div>
+      <div class="value"><span class="class-pill ${m.system_class}">${m.system_class}</span></div>
+    </div>
+    <div class="summary-card">
+      <div class="label">ARA-of-ARA</div>
+      <div class="value">${aoa}</div>
+      <div class="note">next-level class: ${m.ara_of_ara_class}</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Home rung k</div>
+      <div class="value">${m.home_k}</div>
+      <div class="note">period ${m.dominant_period_samples?.toFixed(1)} samples</div>
+    </div>
+    <div class="summary-card">
+      <div class="label">Samples</div>
+      <div class="value">${m.n_samples}</div>
+    </div>
+  `;
+}
+
+function placeAraMarker(value) {
+  const scale = document.getElementById('araScale');
+  scale.innerHTML = '';
+  if (value == null || !isFinite(value)) return;
+  const pct = Math.max(0, Math.min(100, value/2*100));
+  const phiPct = PHI/2*100;
+  const araOfAra = mapping.ara_of_ara;
+  // Phi marker (reference)
+  const phiMarker = document.createElement('div');
+  phiMarker.className = 'ara-marker';
+  phiMarker.style.left = phiPct + '%';
+  phiMarker.style.background = '#d4a843';
+  phiMarker.style.opacity = '0.5';
+  phiMarker.dataset.label = 'φ';
+  scale.appendChild(phiMarker);
+  // System marker
+  const m = document.createElement('div');
+  m.className = 'ara-marker';
+  m.style.left = pct + '%';
+  m.dataset.label = `your system (${value.toFixed(2)})`;
+  scale.appendChild(m);
+  // ARA-of-ARA marker (system's class at next fractal level)
+  if (araOfAra != null && isFinite(araOfAra)) {
+    const aoaPct = Math.max(0, Math.min(100, araOfAra/2*100));
+    const aoaMarker = document.createElement('div');
+    aoaMarker.className = 'ara-marker';
+    aoaMarker.style.left = aoaPct + '%';
+    aoaMarker.style.background = '#39d2c0';
+    aoaMarker.style.opacity = '0.7';
+    aoaMarker.dataset.label = `ARA-of-ARA (${araOfAra.toFixed(2)})`;
+    scale.appendChild(aoaMarker);
+  }
+}
+
+function renderRungs(m) {
+  const validRungs = m.rung_breakdown.filter(r => r.valid);
+  const labels = validRungs.map(r => 'k=' + r.k);
+  const amps = validRungs.map(r => r.amp != null ? r.amp : 0);
+  const aras = validRungs.map(r => r.ara);
+  const homeColor = validRungs.map(r => r.k === m.home_k ? '#d4a843' : '#39d2c0');
+
+  // Amp chart
+  const ampCtx = document.getElementById('ampChart');
+  if (window.ampChartObj) window.ampChartObj.destroy();
+  window.ampChartObj = new Chart(ampCtx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{ label: 'Amplitude', data: amps, backgroundColor: homeColor }]
+    },
+    options: {
+      plugins: { title: { display: true, text: 'Per-rung amplitude', color: '#e6e7e9' },
+                 legend: { display: false } },
+      scales: { x: { ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } },
+                y: { ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } } }
+    }
+  });
+
+  // ARA chart
+  const araCtx = document.getElementById('araChart');
+  if (window.araChartObj) window.araChartObj.destroy();
+  window.araChartObj = new Chart(araCtx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'ARA per rung', data: aras,
+        borderColor: '#d4a843', backgroundColor: 'rgba(212,168,67,0.15)',
+        tension: 0.25, pointBackgroundColor: homeColor
+      }]
+    },
+    options: {
+      plugins: { title: { display: true, text: 'ARA per rung (φ=1.618 ref)', color: '#e6e7e9' },
+                 legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } },
+        y: { min: 0, max: 2, ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } }
+      }
+    }
+  });
+
+  // Table
+  const t = document.getElementById('rungTable');
+  let h = '<tr><th>k</th><th>period</th><th>amp</th><th>ARA</th><th>class</th></tr>';
+  for (const r of m.rung_breakdown) {
+    const home = r.k === m.home_k ? 'home' : '';
+    h += `<tr class="${home}"><td>k=${r.k}</td>` +
+         `<td class="mono">${r.period_time?.toFixed(3) || r.period_samples?.toFixed(1)}</td>` +
+         `<td class="mono">${r.amp != null ? r.amp.toFixed(3) : '—'}</td>` +
+         `<td class="mono">${r.ara != null ? r.ara.toFixed(3) : '—'}</td>` +
+         `<td><span class="class-pill ${r.classification || ''}">${r.classification || '—'}</span></td>` +
+         `</tr>`;
+  }
+  t.innerHTML = h;
+}
+
+function renderPartners(m) {
+  const ps = m.matched_partner_candidates;
+  if (!ps || ps.length === 0) {
+    document.getElementById('partnersPanel').style.display = 'none';
+    return;
+  }
+  document.getElementById('partnersPanel').style.display = 'block';
+  const list = document.getElementById('partnersList');
+  list.innerHTML = ps.map(p =>
+    `<li>Rung <strong>k=${p.rung_a}</strong> (ARA ${p.ara_a.toFixed(3)}) ↔ ` +
+    `Rung <strong>k=${p.rung_b}</strong> (ARA ${p.ara_b.toFixed(3)}) — ` +
+    `<span class="muted">${p.gap_rungs} rungs apart, time ratio ${p.gap_time.toFixed(2)}×</span></li>`
+  ).join('');
+}
+
+function renderPredictions(p) {
+  document.getElementById('predictionsPanel').style.display = 'block';
+  const horizons = p.predictions.map(x => x.horizon);
+  const blend = p.predictions.map(x => x.prediction);
+  const act = p.predictions.map(x => x.act);
+  const old_ = p.predictions.map(x => x.old);
+
+  const ctx = document.getElementById('predChart');
+  if (window.predChartObj) window.predChartObj.destroy();
+  window.predChartObj = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['anchor'].concat(horizons),
+      datasets: [
+        { label: 'Anchor (v_now)', data: [p.v_now].concat(Array(horizons.length).fill(null)),
+          borderColor: '#e6e7e9', pointBackgroundColor: '#e6e7e9' },
+        { label: 'ACT (short-range)', data: [p.v_now].concat(act),
+          borderColor: '#39d2c0', backgroundColor: 'rgba(57,210,192,0.1)', tension: 0.15, borderDash: [5,5] },
+        { label: 'OLD (long-range)', data: [p.v_now].concat(old_),
+          borderColor: '#d4a843', backgroundColor: 'rgba(212,168,67,0.1)', tension: 0.15, borderDash: [3,3] },
+        { label: 'Blended prediction', data: [p.v_now].concat(blend),
+          borderColor: '#5be287', backgroundColor: 'rgba(91,226,135,0.15)', tension: 0.15, borderWidth: 2.5 }
+      ]
+    },
+    options: {
+      plugins: { title: { display: true, text: 'Predictions at horizons (samples ahead)', color: '#e6e7e9' },
+                 legend: { labels: { color: '#9aa0aa' } } },
+      scales: { x: { ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } },
+                y: { ticks: { color: '#9aa0aa' }, grid: { color: '#2a2f3a' } } }
+    }
+  });
+
+  const t = document.getElementById('predTable');
+  let h = '<tr><th>horizon</th><th>ACT</th><th>OLD</th><th>blend</th><th>w_act</th></tr>';
+  for (const r of p.predictions) {
+    h += `<tr><td class="mono">${r.horizon}</td>` +
+         `<td class="mono">${r.act.toFixed(3)}</td>` +
+         `<td class="mono">${r.old.toFixed(3)}</td>` +
+         `<td class="mono"><strong>${r.prediction.toFixed(3)}</strong></td>` +
+         `<td class="mono">${r.weight_act.toFixed(3)}</td></tr>`;
+  }
+  t.innerHTML = h;
+}
+</script>
+
+</body>
+</html>

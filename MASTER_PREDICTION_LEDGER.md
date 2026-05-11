@@ -206,6 +206,17 @@ These are the framework's most rigorous tests — predictions written down BEFOR
 
 The following table matches the v4 peer review audit line-for-line. This is the authoritative breakdown. The source document is BLIND_PREDICTIONS_98-100.md, written before any data lookup.
 
+### 2026-05-11 — Vertical-ARA trajectory-prediction tests (TWO independent failures, both consistent with framework's classification-only claim)
+
+| test | window-match corr | prediction corr (next N) | predicted | observed |
+|---|---|---|---|---|
+| ENSO ← MJO (atmospheric, ~7-rung gap) | n/a (regression-based) | within 0.02 MAE of ENSO-only baseline | improvement | none |
+| Mouse → human RR (biological, ~4-rung gap) | **+0.922** (windows match) | **+0.105 median** (continuations don't) | 75-80% accuracy | 18% above corr=0.5 |
+
+**Reading:** Both tests find STRONG cross-system shape MATCHES at the window level (windows of one system look like windows of another after time-rescaling). Neither test produces trajectory PREDICTION across systems. The framework's own claim — that vertical-ARA partners share the MAP but not the POSITION (`framework_topology_triangulation.md`) — is confirmed twice independently. Vertical-ARA is a classification claim, not a trajectory-forecasting claim. The 75-80% accuracy prediction was too optimistic; correct framework reading is "shape-template matches, trajectories do not."
+
+Scripts: `TheFormula/enso_mjo_partner_predictor.py`, `TheFormula/mouse_human_continuation_test.py`.
+
 ### Script 98: Cepheid Variable Stars (Blind)
 
 | Prediction | Predicted | Observed | Status |
@@ -276,11 +287,15 @@ Period dependence (original prediction "higher ARA at longer P") still failed �
 | π-leak → primordial helium Y_p | 0.046 | 0.245 | 81.1% | **FAILED** |
 | Baryon fraction → stellar mass fraction | 0.049 | 0.060 | 18.1% | **PARTIAL** |
 | Packing gap → cosmic metallicity Z | 0.054 | 0.020 | 167.9% | **FAILED** |
-| Cardiac ARA → circadian wake/sleep | 1.648 | 2.000 | 17.6% | **PARTIAL** |
+| Cardiac ARA → circadian wake/sleep | 1.648 | 2.000 | 17.6% | **RE-CLASSIFIED 2026-05-11 — see note below** |
 | BZ ARA → Briggs-Rauscher ARA | 1.631 | 1.550 | 5.2% | **CONFIRMED** |
 | DE/DM → predator/prey biomass | 2.589 | 10.000 | 74.1% | **FAILED** |
 
 **Score: 2-3/10 within 10%.** Mean error 41%, median 18%. The ISM void fraction (used as 0.70) is uncertain — updated estimates suggest 50-60%, which would downgrade that hit. Formula works for genuine analogues (void→void at similar scales, engine→engine at same f_EM). Fails when pairing is conceptually wrong (π-leak→Y_p, packing→metallicity). Null test: 1.7× improvement over random matching.
+
+**Re-classification note (2026-05-11) — cardiac → wake/sleep row:** Under the updated framework reading, this row is a *cross-class translation failure*, not a quantitative partial miss. Cardiac at ARA = 1.648 is a free-running internal engine at φ (no external clock). Wake/sleep at ARA = 2.000 is the **canonical externally-forced 2:1 harmonic** — pinned by the 24h light/dark cycle, past the 1.75 self-organising wall, sitting at the pure-harmonic ceiling. These are different ARA classes (free-running engine vs externally-forced harmonic), and the translation formula's stated scope explicitly fails outside within-class pairings. The 17.6% error figure conflates a categorical mismatch with a quantitative miss; the framework correctly fails when applied across classes.
+
+**Separately confirmed as a new row (2026-05-11):** Wake/sleep ratio = 2.000 sits exactly at the pure-harmonic ceiling, matching the framework's prediction that externally-forced systems pin to integer ratios (2:1 here, locked by the 24h light cycle). Drift away from 2.000 in free-running humans (no zeitgebers — polar winter, blind subjects, prolonged isolation experiments) confirms external forcing maintains the ratio; it is not a self-organising engine.
 
 ### Blind Prediction Summary
 

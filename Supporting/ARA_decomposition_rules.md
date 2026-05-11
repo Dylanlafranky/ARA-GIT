@@ -1,4 +1,7 @@
 # ARA Decomposition Rules
+
+> **Public-release note (May 2026):** This document predates the May 2026 claim-status audit. For the current public-release wording of any claim made here, see [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md). Several headline numbers in older docs are stronger than the saved artifacts support; CLAIMS_STATUS.md lists the safer wording.
+
 **How to break a system into subsystems for ARA mapping**
 
 ---
@@ -104,6 +107,27 @@ In whole-system maps (Mode B), the strings go hub-and-spoke through the ground c
 
 **The rule:** ARA numbers classify. Relational position within a system predicts. Don't confuse the two.
 
+### Update (May 2026): Relational predictions are measurement-conditional.
+
+The ARA number and the relational claims built on it depend on three measurement choices that the framework does not prescribe but that materially affect what you measure:
+
+**1. Which signal you take from the system.**
+The same physical system can produce different ARA values depending on which observable you measure. A human heart read at the ECG waveform level (per-beat PQRST shape) gives ARA ≈ φ (engine class). The same heart read at the RR-interval level (heart-rate variability over many beats) gives ARA ≈ 0.84 (absorber class). Both are correct — they are reading different cycles in the same organ. State explicitly which signal you measured before stating an ARA.
+
+**2. Which filter isolates each rung.**
+The framework's per-rung breakdown depends on the bandpass filter used to separate the signal into rung-specific components. A narrow-band Butterworth filter (sharp band edges) and a Gaussian-enveloped Morlet wavelet give the SAME signal:
+- Per-rung amplitudes that differ by factors of 3–10×
+- ARA values that mostly agree but occasionally cross class boundaries (e.g., shock_absorber under one filter, absorber under the other)
+
+Butterworth suppresses broadband transient energy (snaps) outside its narrow band; Morlet's Gaussian envelope captures more of a transient's spectral spread. The framework's claim "energy at rung k" is therefore filter-dependent. **For snap-sensitive analyses, prefer Morlet. For continuous-oscillator analyses, Butterworth is the standard default.** Always report which filter was used.
+
+**3. What you call a "cycle."**
+ARA can be measured cycle-by-cycle (peak-to-peak segmentation) or as a single number from full-period folding. These give different values for the same signal because they aggregate the cycle's structure differently. Choose one and report which.
+
+**The conditioned rule:** ARA numbers classify a measured signal under a specified filter. Relational claims hold under the same measurement conditions. Comparing ARA values across systems requires matching all three measurement choices — same signal type, same filter, same cycle definition — or the comparison crosses class boundaries for measurement-method reasons, not framework reasons.
+
+Reviewers will catch this. State the measurement conditions explicitly.
+
 ---
 
 ## Rule 8: Coupling has types — amber-to-blue is not the only pattern.
@@ -185,39 +209,4 @@ The coupling channel's ARA bridges levels 1 and 3. If you want to predict where 
    - T_acc: time the phase difference is growing (nodes drifting apart)
    - T_rel: time the phase difference is shrinking (coupling pulling nodes together)
 4. ARA_coupling = T_acc / T_rel
-5. This ratio predicts the emergent sync ARA of the coupled system
-
-**The Freeze Test for coupling:** Decouple the nodes (lift one metronome off the platform, block the gap junction, cut the wire). If the phase correction stops, you've confirmed the coupling channel was driving the release phase. What remains (the uncorrected drift) is the accumulation.
-
----
-
-## Validation against existing systems
-
-These rules were tested against all 20 mapped systems (April 2026):
-
-| System | Mode | Ground Cycle | All Rules Followed? |
-|--------|------|-------------|-------------------|
-| Engine | A (peer) | Combustion cycle | Yes — clean |
-| PC | B (whole) | CPU clock cycle | Yes — whole-system map justifies scale span |
-| Heart | B (whole) | Ventricular pump cycle | Yes — RSA at breathing timescale is part of the whole cardiac system |
-| Earth | B (whole) | Diurnal thermal cycle | Yes — whole-system map of planetary energy architecture |
-| Hydrogen | B (whole) | Ground orbital | Yes — whole-system map of atomic temporal structure |
-| Neuron | A (peer) | Subthreshold-to-spike | Yes — clean, all subsystems within ms timescale |
-| Thunderstorm | A (peer) | Storm lifecycle | Yes — clean, all subsystems within minutes timescale |
-| Predator-prey | A (peer) | Hare population cycle | Yes — L-V theoretical control flagged as reference |
-| Energy grid | A (peer) | AC cycle / daily load | Yes — clean |
-| RB convection | A (peer) | Convection roll | Yes — clean |
-| Honeybee | B (whole) | Thermoregulation cycle | Yes — whole-system, annual to foraging scales |
-| Slime mold | A (peer) | Contraction cycle | Yes — clean |
-| Bacterial biofilm | A (peer) | Growth-dispersal cycle | Yes — clean |
-| Starling murmuration | A (peer) | Wing beat | Yes — clean |
-| Spiral galaxy | A (peer) | Orbital rotation | Yes — clean |
-| DNA | A (peer) | Breathing bubble | Yes — qualified: only breathing mode is oscillatory |
-| Pulsar | B (whole) | Rotation period | Yes — rotation is the physics; beam is geometry |
-| Laser | B (whole) | CW / relaxation / Q-switch / mode-lock | Yes — single system spanning 4 ARA regimes |
-| BZ reaction | A (peer) | Redox oscillation | Yes — naked vs contained Type 3 distinction (Rule 8) |
-| Coupled metronomes | B (whole) | Individual tick / phase lock / sync envelope | Yes — coupling channel ARA tested (Rule 9) |
-
----
-
-*Version 1.3 — Dylan La Franchi, April 2026*
+5. This ratio predicts the emergent sync ARA of the coupl

@@ -107,6 +107,44 @@ In whole-system maps (Mode B), the strings go hub-and-spoke through the ground c
 
 **The rule:** ARA numbers classify. Relational position within a system predicts. Don't confuse the two.
 
+### Update (May 2026): Relational predictions are measurement-conditional.
+
+The ARA number and the relational claims built on it depend on three measurement choices that the framework does not prescribe but that materially affect what you measure:
+
+**1. Which signal you take from the system.**
+The same physical system can produce different ARA values depending on which observable you measure. A human heart read at the ECG waveform level (per-beat PQRST shape) gives ARA ≈ φ (engine class). The same heart read at the RR-interval level (heart-rate variability over many beats) gives ARA ≈ 0.84 (absorber class). Both are correct — they are reading different cycles in the same organ. State explicitly which signal you measured before stating an ARA.
+
+**2. Which filter isolates each rung.**
+The framework's per-rung breakdown depends on the bandpass filter used to separate the signal into rung-specific components. A narrow-band Butterworth filter (sharp band edges) and a Gaussian-enveloped Morlet wavelet give the SAME signal:
+- Per-rung amplitudes that differ by factors of 3–10×
+- ARA values that mostly agree but occasionally cross class boundaries (e.g., shock_absorber under one filter, absorber under the other)
+
+Butterworth suppresses broadband transient energy (snaps) outside its narrow band; Morlet's Gaussian envelope captures more of a transient's spectral spread. The framework's claim "energy at rung k" is therefore filter-dependent. **For snap-sensitive analyses, prefer Morlet. For continuous-oscillator analyses, Butterworth is the standard default.** Always report which filter was used.
+
+**3. What you call a "cycle."**
+ARA can be measured cycle-by-cycle (peak-to-peak segmentation) or as a single number from full-period folding. These give different values for the same signal because they aggregate the cycle's structure differently. Choose one and report which.
+
+**The conditioned rule:** ARA numbers classify a measured signal under a specified filter. Relational claims hold under the same measurement conditions. Comparing ARA values across systems requires matching all three measurement choices — same signal type, same filter, same cycle definition — or the comparison crosses class boundaries for measurement-method reasons, not framework reasons.
+
+Reviewers will catch this. State the measurement conditions explicitly.
+
+### Practical guidance (May 2026 — empirical refinement)
+
+After running the same datasets through three different ARA measurement methods (bandpass-with-peak-detection, raw-peak-detection, phase-folded-averaged-cycle), the methods give meaningfully different numbers on the same signal, and each method has a usability range:
+
+**Default: bandpass + peak detection (SOS Butterworth).** This is the framework's standard method because it generalises across signal types — works on smooth oscillators, noisy data, and multi-feature waveforms with reasonable behaviour across the board. Caveat: smooths cycle asymmetry, so on sharp single-feature cycles (solar's 11-year cycle, lightning, hydrographs) it under-counts the actual asymmetry and can produce wrong framework-class readings. Solar's true ~1.75 (exothermic) reads as ~0.9 (clock) under default bandpass.
+
+**Raw-peak (no bandpass).** Peak-detect on the lightly-smoothed raw signal. Recovers cycle asymmetry directly. Recommended for single-feature asymmetric cycles where you trust the dominant cycle is the dominant signal (solar, watershed, breath, single-mode oscillators). Fails on multi-feature waveforms (ECG PQRST, multi-peak chemical oscillators) — gives chaotic ratios because it finds sub-peaks within each cycle.
+
+**Phase-folded averaged-cycle.** Used in the original Cepheid coupled-pair test. Fold the signal at the known period, find peak phase and trough phase on the averaged cycle, ARA = T_fall/T_rise from those phases. Works for single-asymmetric-feature cycles. Breaks on multi-feature waveforms for the same reason as raw-peak. Captures the "average cycle composite" reading that gave Cepheid 2.605 ≈ φ².
+
+**Decision tree for which method to choose:**
+- Multi-feature waveform (ECG, EEG bursts, BZ chemical, complex bio rhythms) → default bandpass
+- Single-feature asymmetric cycle (solar, hydrograph, breath, simple oscillator) → consider raw-peak
+- Want averaged cycle profile (Cepheid-style coupled-pair signature) → use phase-fold separately
+
+**Cross-domain comparison rule:** numerical matches between ARA values from DIFFERENT methods on DIFFERENT cycle-topology classes are coincidence, not framework evidence. To claim "system X has the same ARA as system Y," use the same method on signals of compatible cycle topology — otherwise the comparison is meaningless.
+
 ---
 
 ## Rule 8: Coupling has types — amber-to-blue is not the only pattern.
