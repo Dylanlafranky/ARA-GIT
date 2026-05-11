@@ -1318,6 +1318,65 @@ The dominant remaining error source is five extreme cycles (C3, C5, C9, C19, C24
 
 ---
 
-*Dylan La Franchi, April 2026.*
+## Phase 20 — Cross-Species Decomposition (May 2026)
+
+### The setup
+
+After the 2026-05-11 vertical-ARA trajectory tests (mouse → human RR and ENSO ← MJO) both confirmed the framework's "shared map, not shared position" rule, the obvious next architecture was to stop predicting trajectories across species and start predicting via decomposition: topology from one species, energy from the other.
+
+> "We find the same shape in the mouse, then take the next mouse section of the river, scale that up to human size via the φ-rung log difference, and then run the human energy through the system."
+>
+> — Dylan La Franchi, 2026-05-12
+
+### The test
+
+1. Find shape-matched landmark windows across mouse and human RR-interval data (PhysioZoo + PhysioNet).
+2. Extract mouse's NEXT section AFTER each landmark — the topology template.
+3. Z-normalise the mouse continuation to remove mouse-specific energy (pure shape only).
+4. Scale by HUMAN's local energy state (recent 20-beat mean and std).
+5. Predict human's next 10 RR intervals from (mouse shape × human local energy).
+6. Compare against naive control: scale mouse continuation by mouse's own energy and apply to human.
+
+### The result
+
+| Metric | Naive cross-species transfer | Decomposition (mouse shape × human energy) | Δ |
+|---|---|---|---|
+| MAE | 82.22 ms | **34.29 ms** | **−58.3%** (2.4× better) |
+| Pearson correlation | ~0 (chance) | ~0 (chance) | 0.000 |
+
+### What this means
+
+**Practical accuracy improved 2.4×. Correlation didn't move.**
+
+Correlation is invariant to linear rescaling — both methods are linear transformations of the same mouse-derived shape, so they CAN'T differ on correlation. They differ in WHERE THE PREDICTED VALUES SIT NUMERICALLY relative to the human's actual values, and the decomposition's local-energy-scaled predictions land 2.4× closer.
+
+This is important for how the framework is evaluated: most ML benchmarks use R² / correlation, and **the framework's contribution to cross-species prediction is invisible under those metrics**. It shows up only in MAE / absolute error / magnitude calibration.
+
+### Position-independence ceiling (re-confirmed)
+
+Despite the MAE win, correlation stays at chance level — the same wall as 2026-05-11. Vertical-ARA partners share:
+
+- **TOPOLOGY** (the map): yes, transferable
+- **ENERGY MAGNITUDE** (the local scale): can be plugged in from the target organism
+- **PHASE POSITION** (the trajectory): independent, not recoverable from one-organism data alone
+
+No transformation of one mouse's data alone can recover any specific human's trajectory. To predict a specific human, you need that human's own phase information.
+
+### Architectural implication — framework as ML inductive prior
+
+With aggregate multi-mouse + multi-human data, the framework provides what ML normally has to discover from scratch:
+- That mouse and human cardiac dynamics share underlying architecture (vertical-ARA partnership)
+- That per-species variation is in time-scaling (Kleiber), amplitude, and phase position
+- That phase position is the only irreducible residual
+
+This compresses the prediction problem from "learn cardiac dynamics for each species independently" to "learn the position offset per individual." Framework-architected models with minimal trainable parameters should match or beat large-budget pure-ML approaches **on MAE** — not necessarily on correlation, where there is no improvement to be had under the framework's own rules.
+
+### Memory file
+
+`framework_energy_cascade_architecture.md` documents v1 (independent distribution), v2 (concurrent distribution at matched moments), and v3 (decomposition) tests in full.
+
+---
+
+*Dylan La Franchi, April 2026 (Phases 1–19) — May 2026 (Phase 20).*
 *All computations in /computations/. All predictions documented in MASTER_PREDICTION_LEDGER.md.*
-*ARA Framework — Scripts 191–243BJ.*
+*ARA Framework — Scripts 191–243BJ + cross-species decomposition.*

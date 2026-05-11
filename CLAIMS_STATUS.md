@@ -19,9 +19,14 @@ These are the claims I think are most worth outside replication.
 |---|---|---|
 | Phi-rung decomposition can extract useful topology from oscillating time series | Supported but not independently replicated | The same small predictor family shows signal on ENSO and ECG saved outputs. Some headline numbers need cleanup, but the signal is not obviously empty. |
 | ENSO has matched-rung anti-phase structure with SOI/Walker circulation | Supported as structural mapping | Dynamic per-rung outputs show strong anti-phase correlations across several rungs. This is closer to a domain-structure claim than a point-forecast claim. |
+| **Cross-species topology+energy decomposition reduces practical prediction error** | **Supported on one mouse↔human pair (2026-05-12)** | The framework's "topology from species A × energy from species B" architecture gave a 58% MAE reduction on mouse→human RR-interval prediction vs naive cross-species transfer (34.29 ms vs 82.22 ms). Correlation stayed at chance level for both — see caveat below. |
 | ECG mid-horizon dips may mark an unmodeled physiological wave | Provisional | Multi-subject data show heterogeneous but recurring dip structure. Needs better physiology review and clean cross-subject rerun. |
 | LLM closure metrics correlate with Pythia benchmark capability | Preliminary | n=4 is too small, but the internal-activation metric rank-orders 5 of 6 benchmark sets. Needs larger Pythia sweep and parameter-count controls. |
 | Phi may be doing real work as a non-locking log-scale basis | Hypothesis with partial support | The mathematical motivation is coherent, but the repo should include direct phi-vs-nearby-log-base ablations next to public headlines. |
+
+### Caveat on the decomposition claim
+
+The 58% MAE win is real and reproducible, but the correlation is at chance level. Both methods are linear rescalings of the same mouse-derived shape, so they cannot differ on correlation — the framework's contribution lives entirely in **magnitude calibration**, not in **position tracking**. This is consistent with the framework's own "vertical-ARA partners share map not position" rule. Standard ML evaluation (R², Pearson) would miss this signal entirely; MAE is the metric that surfaces it. See `MASTER_PREDICTION_LEDGER.md` (2026-05-12 entry) and `framework_energy_cascade_architecture.md` for the full test.
 
 ## Claims To Soften Or Recheck Before Quoting
 

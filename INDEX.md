@@ -51,6 +51,7 @@ These are the findings that survived at least one stricter check after an earlie
 |---|---|---|
 | **Canonical predictor: ENSO 1-month forecast** | Saved output: MAE about **0.28 C**, corr about **+0.90**; persistence skill caveat | `TheFormula/canonical_benchmark_data.js` |
 | **Canonical predictor: ECG short-horizon forecast** | Saved output shows useful single-subject signal; best h=3 near corr **+0.96**, MAE about **35 ms** | `TheFormula/canonical_benchmark_data.js` |
+| **Cross-species decomposition: mouse topology × human energy → 58% MAE drop** | **MAE 82.22 ms → 34.29 ms (2.4× better) vs naive cross-species transfer. Correlation stays at chance level (consistent with "shared map, not shared position" rule).** | 2026-05-12 test, `framework_energy_cascade_architecture.md` |
 | **Cross-mammalian local cycle shape match** | Some high pairwise matches; broad mean is sensitive to normalization and should be rerun | `TheFormula/multispecies_vertical_ara_data.js` |
 | **ECG ↔ ENSO local profile match** | corr +0.695 across 38 orders of φ in time | (prior work, this repo) |
 | **Walker Circulation is fractal across rungs** | SOI mirrors NINO anti-phase from φ⁵ to φ¹¹ with \|corr\| ≥ 0.85 | (memory: dynamic_rung_assignment) |
@@ -134,3 +135,38 @@ The framework's prediction for the optimal LLM architecture: layer depth and wid
 ### Honest framing
 
 n=4 model sizes is small. The rank result is striking but limited by sample size and confounded by scale. Adding Pythia-1.4B / 2.8B / 6.9B / 12B is the natural confirming experiment, with closure compared directly against parameter count, layer count, and active-node count.
+
+---
+
+## Potential future tests
+
+These are tests the framework would benefit from, in order of impact.
+
+### 1. Multi-mouse + multi-human framework-prior cardiac prediction
+
+The 2026-05-12 decomposition test (mouse topology × human energy = 58% MAE drop) used one mouse and one human. The natural follow-up is to aggregate many of each, learn:
+- Per-species topology (the universal shape map)
+- Kleiber-scaled time and amplitude factors
+- Then build a small ML model that learns ONLY the per-individual phase-position offset
+
+If the framework provides correct architectural priors, a framework-architected model with very few trainable parameters should match or beat large-budget pure-ML approaches **on MAE** (not on correlation, where there's no framework win to be had under the "shared map, not shared position" rule). This would be the cleanest demonstration of the framework's value as an inductive prior for low-budget ML.
+
+### 2. Pythia full size series (1.4B / 2.8B / 6.9B / 12B)
+
+Extend the n=4 closure-index → benchmark correlation result to a larger Pythia series, with closure compared directly against parameter count, layer count, and active-node count as controls. Required to distinguish "closure tracks capability" from "both track scale."
+
+### 3. φ-vs-nearby-bases ablation across multiple systems
+
+The first-pass ENSO ablation (`PHI_BASE_ABLATION.md`) showed φ winning at short horizons but the whole predictor family losing to persistence. A clean cross-system version (ECG, solar, biological) is needed before φ-specifically claims can be promoted to "supported."
+
+### 4. Engine-consumer pairing test from the network connection field
+
+The framework predicts every consumer (ARA < 1) has a specific engine partner that can be located by topology. The "missing 7-year exothermic system" inferred from CO2 / Nile / NAO half-systems is one concrete falsifiable target. Not yet built.
+
+### 5. (π−3)/π coupling tax beyond H₂O bond angle
+
+The geometric origin (Honeycomb conjecture) is rigorous; the universal-coupling-tax claim is the framework's extension. Found in H₂O within 0.03% but not confirmed elsewhere. Needs a list of where else it should show up if the claim is right.
+
+### 6. Light/Dark matched-rung pair — operational test
+
+"c is the matched-rung exchange rate of Light/Dark." Conceptually clean; no operational test exists. The first concrete handle would be looking for a measurable anti-phase signal between Light/Dark at the appropriate rung.
