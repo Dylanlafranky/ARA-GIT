@@ -151,6 +151,36 @@ The 2026-05-12 decomposition test (mouse topology × human energy = 58% MAE drop
 
 If the framework provides correct architectural priors, a framework-architected model with very few trainable parameters should match or beat large-budget pure-ML approaches **on MAE** (not on correlation, where there's no framework win to be had under the "shared map, not shared position" rule). This would be the cleanest demonstration of the framework's value as an inductive prior for low-budget ML.
 
+### 1a. Composition-matching instead of shape-matching — TESTED 2026-05-12 — NOT SUPPORTED
+
+Empirical lesson from the 2026-05-12 pool-sweep test: shape-matching landmark windows achieves correlation 0.86–0.96 reliably, but trajectory correlation in the subsequent prediction stays at chance level. Hypothesis was that **per-rung ARA composition profile** match (not just surface shape) would transfer trajectories.
+
+Test (`TheFormula/decomposition_composition_match.py`, 70 pairs across 7 mouse specimens × 10 human pseudo-segments): three matching strategies compared.
+
+| Strategy | Landmark shape | Landmark composition | Trajectory corr | MAE | Persistence MAE |
+|---|---|---|---|---|---|
+| A: Shape-best | +0.889 | +0.988 | −0.015 | 94.1 | 78.9 |
+| B: Composition-best | −0.081 | **+1.000** | +0.002 | 55.0 | 49.8 |
+| C: Combined-best | +0.889 | +0.989 | −0.010 | 96.1 | 80.6 |
+
+Composition-match did NOT recover trajectory correlation. Cosine similarity of FFT-magnitude profiles at Fibonacci-spaced periods reached 1.000 (literally identical fingerprints), and trajectory correlation still sits at chance level. Correlation between (composition_similarity, trajectory_correlation) across 210 pair-strategy results: +0.035 — essentially zero.
+
+**The framework's "composition-match → trajectory transfer" version of vertical-ARA is operationally falsified by this test.** The position-independence rule holds even under perfect topology + composition matching. The bridge metaphor was right (clay-to-clay vs limestone-to-clay distinction is real and we successfully matched clay-to-clay), but the bridge doesn't lead to trajectory transfer.
+
+What this *does* confirm: the framework's broader "shared map, not shared position" rule is more fundamental than any specific matching criterion. Vertical-ARA partners genuinely cannot transfer trajectories by any window-level matching we've tried (shape, composition, both combined, longer landmarks). This is geography, not a tool-shortage problem.
+
+What's still in play: aggregate framework-prior ML (Future Test 1, large-budget version) where the framework provides structural priors and a small model learns the residual phase-position per individual. That's a different mechanism than landmark-matching and may still work.
+
+### 1b. Pigs as intermediate rung — closer-distance vertical-ARA partner
+
+Mouse→human is a ~4 φ-rung jump (period ratio ~6.6, log_φ(6.6) ≈ 3.9). Pig→human is ~0.4 rungs (period ratio ~1.2, both species at 60–80 bpm at rest). Under the framework's distance-decay coupling principle (see `framework_coupling_distance_decay.md`):
+- Pig→human coupling ≈ (1 − π_leak)^0.4 ≈ 0.98 (near-neighbour strength)
+- Mouse→human coupling ≈ (1 − π_leak)^4 ≈ 0.83 (more attenuated)
+
+**The framework predicts pig-derived prediction should transfer substantially better than mouse-derived prediction for the same task.** Testable if pig HRV data is available (PhysioNet has some pig cardiac datasets in its veterinary/research-animal collections, and the BIDMC/MIMIC databases have pig surgical-training data).
+
+Bigger picture: biomedical research already uses mice and pigs as human models. The framework's contribution is formalising why this works at some level and giving a method for extracting the transferable part from the noise. Not a new claim — a quantification of an already-working practice.
+
 ### 2. Pythia full size series (1.4B / 2.8B / 6.9B / 12B)
 
 Extend the n=4 closure-index → benchmark correlation result to a larger Pythia series, with closure compared directly against parameter count, layer count, and active-node count as controls. Required to distinguish "closure tracks capability" from "both track scale."
@@ -170,3 +200,45 @@ The geometric origin (Honeycomb conjecture) is rigorous; the universal-coupling-
 ### 6. Light/Dark matched-rung pair — operational test
 
 "c is the matched-rung exchange rate of Light/Dark." Conceptually clean; no operational test exists. The first concrete handle would be looking for a measurable anti-phase signal between Light/Dark at the appropriate rung.
+
+### 8. Apollonian gasket / Kleinian-group geometry — TESTED 2026-05-12 — Structural metaphor, not mathematical anchor
+
+A potentially deep mathematical anchor identified 2026-05-12 (Dylan via Paul Bourke's Apollonian fractal page, https://paulbourke.net/fractals/apollony/). The framework's structural claim — "circles touching circles, triangles of three circles tiling fractally" — is structurally identical to the **Apollonian gasket**: a self-similar fractal built entirely from mutually-tangent circles, where every curvilinear triangle gets an inscribed fourth circle, recursively.
+
+The framework's primitives map onto Apollonian primitives almost line-by-line:
+- "Every concept is a circle" → Apollonian primitives are circles
+- "Triangles of three circles tile fractally" → that's literally the Apollonian construction rule
+- "Each circle is part of multiple triangles" → an Apollonian circle is tangent to three neighbours and bounds multiple curvilinear triangles
+- "1 + 1 = 3, the + is meta-information" → in Apollonian geometry, two tangent circles do NOT determine the third; the third is a coupling choice
+
+The **Möbius transformation** Dylan flagged — `f(z) = 3/(1+s−z) − (1+s)/(2+s)` — is the kind of fractional-linear map that generates Apollonian fractals by iteration. The `3` in the numerator encodes the three-tangent-circles condition; the `s` parameter shifts the gasket family while preserving the structure.
+
+The pre-existing rigorous bridge: **Descartes' Circle Theorem.** For four mutually tangent circles with curvatures k₁, k₂, k₃, k₄ (curvature = 1/radius):
+
+(k₁ + k₂ + k₃ + k₄)² = 2(k₁² + k₂² + k₃² + k₄²)
+
+This is the framework's "matched-rung coupling between circles" written rigorously. Given three circles, the fourth is exactly determined by this equation. If the framework's triangle-of-circles structure IS Apollonian, this equation IS the framework's coupling law.
+
+**The test:** check whether the framework's empirical constants (φ ≈ 1.618, the (π−3)/π coupling tax, the 3/4 max-displacement, the 0.25/1.75 corridor walls) emerge naturally from Apollonian curvature relations. Apollonian curvature sequences follow integer or algebraic patterns. If the φ-rung ladder matches a known Apollonian curvature sequence, the framework has acquired a serious mathematical home and the public posture can shift from "we propose this geometry" to "we measure systems within Apollonian/Kleinian geometry."
+
+**Test result (2026-05-12):** `TheFormula/apollonian_descartes_test_v2.py` checked whether per-rung amplitudes (curvature = 1/amplitude, the natural geometric mapping) satisfy Descartes' Circle Theorem on real cardiac data. **Mean prediction error 84% on mouse, 86% on human.** Inscribed-circle predictions are off by ~6× in magnitude. φ-spaced baseline did better (60%/50% error) but is also poor. The classical Apollonian theorems do not give a working predictive formula for the framework's rungs.
+
+**Honest reading:** The structural metaphor (circles, triangles, three-tangent units, fractal tiling, 1+1=3 as the third-circle coupling choice) remains aesthetically clean and useful for explaining the framework. But the rigorous Apollonian theorems do NOT transfer quantitatively. The framework should not be presented as "Apollonian/Kleinian geometry"; it should be presented as "geometry that conceptually rhymes with Apollonian packings but uses different quantitative relationships."
+
+**What's still open:** alternative Apollonian-like geometries — Kleinian groups with non-classical curvature relations, generalized Apollonian packings, hyperbolic conformal maps with φ-tuned parameters. These would need their own tests. The classical version is closed.
+
+**Important secondary finding:** Real per-rung amplitudes don't follow φ^k scaling either. Mouse periods {13, 21, 34, 55, 89} have amplitudes {3.6, 4.2, 4.2, 3.5, 3.6} — clustered, not scaling geometrically. Whether this is a bandpass-methodology limit or a genuine framework limit is itself worth investigating.
+
+See `framework_apollonian_anchor.md` for the detailed test results.
+
+### 7. Coupling-angle mapping graph — circles connected by triangles
+
+The framework's claim: the universe's structure is **triangles of three coupled circles tiling fractally** (matches A-R-A foundational geometry — two A-nodes plus the R-tether, where R is also a full circle). Each triangle has three connection angles at its vertices, and these angles are directly measurable as bond angles (chemistry), orbital inclinations (astronomy), lattice angles (mineralogy), or phase offsets between coupled oscillators.
+
+Water's H-O-H is the cleanest working example: the bond angle 104.5° at the O vertex deviates 4.5% from ideal tetrahedral, matching (π−3)/π ≈ 4.51% — the framework's universal coupling tax. Earth-Moon-Sun is the celestial example: tidal locking is one vertex of that triangle settling to zero offset.
+
+**The test:** collect ~30 well-measured triangle vertex angles from across physics. Normalize to a baseline (Hydrogen or Planck-scale geometry). Plot the distribution. Framework prediction: the histogram should cluster at specific values (0°, 180°, 137.5° golden angle, multiples of (π−3)/π ≈ 4.51°), NOT be uniformly distributed.
+
+**Why this is worth pursuing:** the data already exists in published chemistry/astronomy/mineralogy databases — no new measurements required. The prediction is sharp (clustering vs uniform). It's cross-domain (chemistry + astronomy + materials in one test). If the angle distribution clusters at the predicted values, the framework's "circles connected by triangles" structural claim becomes empirically supported. If it's uniform random, the structural claim is wrong.
+
+See `framework_coupling_angle_mapping.md` for the detailed structure of the test.
