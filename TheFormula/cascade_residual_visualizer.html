@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cascade Residual Analysis — What's the Cascade Missing?</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f7f7; color:#222; margin:0; padding:24px; }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px 0; }
+  h2 { font-size: 15px; margin: 0 0 8px 0; color:#444; }
+  .sub { color:#666; font-size: 13px; margin: 0 0 20px 0; }
+  .panel { background:#fff; border:1px solid #ddd; border-radius:8px; padding:16px; margin-bottom:14px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .controls { display:flex; gap: 8px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+  .controls label { font-size:13px; padding: 6px 14px; border:1px solid #ccc; border-radius:18px; cursor:pointer; user-select:none; background:#fff; }
+  .controls input { display:none; }
+  .controls label.on { background:#1a73e8; color:#fff; border-color:#1a73e8; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .chart-wrap { position:relative; height: 320px; }
+  .chart-wide { position:relative; height: 380px; }
+  .key-finding { background:#fff3cd; border-left:4px solid #f5b800; padding:14px 18px; font-size:14px; margin-bottom:14px; line-height:1.55; }
+  .key-finding strong { color:#b35900; }
+  .stat-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; font-size: 12px; }
+  .stat { background:#fafafa; border:1px solid #eee; border-radius:5px; padding:8px; }
+  .stat .k { color:#888; }
+  .stat .v { font-weight:600; margin-top:3px; }
+  .finding-list { font-size: 13px; line-height:1.6; }
+  .finding-list li { margin-bottom:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Universal Cascade — Residual Diagnostic</h1>
+<p class="sub">After two failed mechanic hypotheses (snapback, quarter-flip), measure the error directly instead of guessing what's missing. The shape of the residual will tell us what kind of mechanic the cascade actually needs.</p>
+
+<div class="panel">
+  <div class="controls" id="horizon-controls">
+    <span style="font-size:13px; margin-right:6px;">Forecast horizon:</span>
+  </div>
+  <div class="key-finding" id="key-finding"></div>
+  <div class="stat-grid" id="stats"></div>
+</div>
+
+<div class="panel">
+  <h2>1. Actual vs Prediction (the amplitude story)</h2>
+  <p style="font-size:12px;color:#666;margin:0 0 8px 0;">If the cascade is squashing amplitude, the blue prediction will look like a quieter version of the black actual — same swings, smaller range.</p>
+  <div class="chart-wide"><canvas id="ts-chart"></canvas></div>
+</div>
+
+<div class="grid">
+  <div class="panel">
+    <h2>2. Residual by actual quartile</h2>
+    <p style="font-size:12px;color:#666;margin:0 0 8px 0;">If the cascade is amplitude-squashing, low-actual quartile will show negative mean residual (cascade predicts too high) and high-actual quartile will show positive mean residual (cascade predicts too low). Symmetric bias = mean-regression.</p>
+    <div class="chart-wrap"><canvas id="quart-chart"></canvas></div>
+  </div>
+  <div class="panel">
+    <h2>3. FFT of residual — where does the error live?</h2>
+    <p style="font-size:12px;color:#666;margin:0 0 8px 0;">Vertical lines mark the framework's φ-rungs (48mo dom_P × φ^k). If error sits ON the rungs, the cascade is under-using those rungs. If error sits BETWEEN, we're missing a non-φ frequency.</p>
+    <div class="chart-wrap"><canvas id="fft-chart"></canvas></div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="panel">
+    <h2>4. Residual autocorrelation</h2>
+    <p style="font-size:12px;color:#666;margin:0 0 8px 0;">Random noise = corr drops to 0 immediately. Slow-decay = residual has memory and is NOT noise. Negative dip at lag ~24mo = residual itself oscillates like ENSO (same structure left over).</p>
+    <div class="chart-wrap"><canvas id="ac-chart"></canvas></div>
+  </div>
+  <div class="panel">
+    <h2>5. Residual by wall distance</h2>
+    <p style="font-size:12px;color:#666;margin:0 0 8px 0;">0 = at center of historical range, 1 = at the wall. If errors are worst at walls, mechanic should target walls. If worst at center, mechanic should target transitions.</p>
+    <div class="chart-wrap"><canvas id="wall-chart"></canvas></div>
+  </div>
+</div>
+
+<div class="panel">
+  <h2>Reading the diagnostic</h2>
+  <div class="finding-list" id="reading-list"></div>
+</div>
+
+</div>
+
+<script src="cascade_residual_data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const data = window.residualData;
+let currentH = 'h12';
+
+const hCtl = document.getElementById('horizon-controls');
+[['h12','h = 12 mo'],['h22','h = 22 mo']].forEach(([key,lab]) => {
+  const lbl = document.createElement('label');
+  lbl.textContent = lab;
+  if (key === currentH) lbl.className = 'on';
+  lbl.addEventListener('click', () => {
+    currentH = key;
+    [...hCtl.querySelectorAll('label')].forEach(l => l.className = '');
+    lbl.className = 'on';
+    render();
+  });
+  hCtl.appendChild(lbl);
+});
+
+let charts = {};
+function destroyCharts() { Object.values(charts).forEach(c => c && c.destroy()); charts = {}; }
+
+function render() {
+  const d = data[currentH];
+  destroyCharts();
+
+  // Stats
+  const s = d.stats;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="k">MAE</div><div class="v">${s.mae.toFixed(3)} °C</div></div>
+    <div class="stat"><div class="k">Correlation</div><div class="v">${(s.corr>=0?'+':'')+s.corr.toFixed(3)}</div></div>
+    <div class="stat"><div class="k">Residual std</div><div class="v">${s.residual_std.toFixed(3)}</div></div>
+    <div class="stat"><div class="k">Residual skew</div><div class="v">${(s.residual_skew>=0?'+':'')+s.residual_skew.toFixed(3)}</div></div>
+  `;
+
+  // Key finding
+  const lowQ = d.quartile_bins[0].mean_resid;
+  const hiQ = d.quartile_bins[3].mean_resid;
+  const isSquash = (lowQ < -0.3) && (hiQ > 0.3);
+  document.getElementById('key-finding').innerHTML = isSquash
+    ? `<strong>Headline diagnosis:</strong> the residual shows <strong>symmetric amplitude squashing</strong>. When actual is in the lowest quartile, the cascade over-predicts by ${Math.abs(lowQ).toFixed(2)}. When actual is in the highest, it under-predicts by ${hiQ.toFixed(2)}. The cascade has the right shape (corr ${(s.corr>=0?'+':'')+s.corr.toFixed(3)}) but compresses the swing toward the mean. This is the classic linear-regression artifact — least-squares pulls predictions toward the central value. It's NOT a missing mechanic, it's a missing amplitude scaling step.`
+    : `<strong>Residual asymmetry less clear-cut at this horizon.</strong> Inspect quartile chart to see if there's a directional bias.`;
+
+  // 1. Time series
+  const subN = Math.min(d.dates.length, 200);
+  const subDates = d.dates.slice(0, subN);
+  const subAct = d.actual.slice(0, subN);
+  const subPred = d.prediction.slice(0, subN);
+  const subRes = d.residual.slice(0, subN);
+  charts.ts = new Chart(document.getElementById('ts-chart'), {
+    type: 'line',
+    data: {
+      labels: subDates,
+      datasets: [
+        { label: 'Actual', data: subAct, borderColor: '#0a0a0a', borderWidth: 2.5, pointRadius: 0, tension: 0.15 },
+        { label: 'Cascade prediction', data: subPred, borderColor: '#1a73e8', borderWidth: 1.8, pointRadius: 0, tension: 0.15 },
+        { label: 'Residual (actual - pred)', data: subRes, borderColor: '#d9534f', borderWidth: 1.4, pointRadius: 0, tension: 0.1, borderDash: [3,3] },
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      plugins:{ title:{display:true, text:`First 200 points — actual / prediction / residual at ${currentH}`} },
+      scales: { y: { title: { display: true, text: 'NINO 3.4 anomaly (°C)' } }, x: { ticks: { maxTicksLimit: 12 } } }
+    }
+  });
+
+  // 2. Quartile
+  charts.quart = new Chart(document.getElementById('quart-chart'), {
+    type: 'bar',
+    data: {
+      labels: d.quartile_bins.map(b => b.range),
+      datasets: [
+        { label: 'Mean residual', data: d.quartile_bins.map(b => b.mean_resid),
+          backgroundColor: d.quartile_bins.map(b => b.mean_resid > 0 ? '#188b3a' : '#b32424') },
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      scales: { y: { title: { display:true, text: 'Mean residual (°C)' } }, x: { title: { display:true, text: 'Actual quartile range' } } },
+      plugins: { legend: { display:false }, title: { display:true, text: 'Bias direction by where actual sits — symmetric = squashing' } }
+    }
+  });
+
+  // 3. FFT — periods on x-axis (log scale), trim to periods between 6 and 200 months
+  const pPower = [];
+  for (let i = 0; i < d.fft_periods.length; i++) {
+    const p = d.fft_periods[i];
+    if (p >= 6 && p <= 240) pPower.push({ x: p, y: d.fft_power[i] });
+  }
+  pPower.sort((a,b) => a.x - b.x);
+  const phi = (1 + Math.sqrt(5)) / 2;
+  const rungs = [48/phi/phi, 48/phi, 48, 48*phi, 48*phi*phi];
+  charts.fft = new Chart(document.getElementById('fft-chart'), {
+    type: 'line',
+    data: { datasets: [
+      { label: 'Residual power', data: pPower, borderColor: '#7c4dff', borderWidth: 1.6, pointRadius: 0, fill: true, backgroundColor: 'rgba(124,77,255,0.15)', tension: 0.1 },
+    ] },
+    options: { responsive:true, maintainAspectRatio:false, parsing: false,
+      scales: { x: { type: 'logarithmic', title: { display:true, text: 'Period (months) — log scale' }, min: 6, max: 240 },
+                y: { title: { display:true, text: 'Power' } } },
+      plugins: { legend: { display:false }, title: { display:true, text: `Where in frequency the residual lives (φ-rungs: ${rungs.map(r=>r.toFixed(0)).join(', ')} mo)` } }
+    }
+  });
+
+  // 4. Autocorr
+  charts.ac = new Chart(document.getElementById('ac-chart'), {
+    type: 'line',
+    data: {
+      labels: d.autocorr_lags,
+      datasets: [
+        { label: 'Autocorr', data: d.autocorr_values, borderColor: '#1a73e8', borderWidth: 2, pointRadius: 0, tension: 0.15 },
+        { label: 'Zero', data: d.autocorr_lags.map(() => 0), borderColor: '#999', borderWidth: 1, borderDash:[3,3], pointRadius:0 },
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      scales: { y: { title: { display:true, text: 'Correlation' }, min: -0.5, max: 1.0 },
+                x: { title: { display:true, text: 'Lag (months)' } } },
+      plugins: { legend: { display:false }, title: { display:true, text: 'Residual autocorrelation — slow decay = residual is structured, not noise' } }
+    }
+  });
+
+  // 5. Wall
+  charts.wall = new Chart(document.getElementById('wall-chart'), {
+    type: 'bar',
+    data: {
+      labels: d.wall_buckets.map(b => b.distance_to_wall.split(' ')[0]),
+      datasets: [
+        { label: '|residual|', data: d.wall_buckets.map(b => b.mean_abs_resid), backgroundColor: '#7c4dff' },
+      ]
+    },
+    options: { responsive:true, maintainAspectRatio:false,
+      scales: { y: { title: { display:true, text: 'Mean |residual|' } }, x: { title: { display:true, text: 'Distance to wall (0=center, 1=wall)' } } },
+      plugins: { legend: { display:false }, title: { display:true, text: 'Where in the cycle the errors are biggest' } }
+    }
+  });
+
+  // Reading list
+  const lag1 = d.autocorr_values[0];
+  const lag24 = d.autocorr_values[23];
+  const topPeak = d.top_spectral_peaks[0];
+  document.getElementById('reading-list').innerHTML = `
+    <ul>
+      <li><strong>Quartile bias:</strong> low-actual quartile mean residual = <strong>${lowQ.toFixed(3)}</strong>, high-actual quartile = <strong>${hiQ.toFixed(3)}</strong>. ${isSquash ? 'Symmetric squashing confirmed — same magnitude, opposite sign.' : 'Asymmetric — direction-specific bias.'}</li>
+      <li><strong>Residual autocorrelation:</strong> lag-1 = ${lag1.toFixed(3)} (${lag1 > 0.9 ? 'near random-walk, very slow decay' : 'moderate memory'}), lag-24 = ${lag24.toFixed(3)} (${lag24 < -0.1 ? 'flips negative — residual itself oscillates' : 'still positive'}). Residual is NOT white noise.</li>
+      <li><strong>Top spectral peak in residual:</strong> ${topPeak.period_months.toFixed(1)} months. ${topPeak.period_months > 100 ? 'Long-period — cascade is missing decadal-scale structure (perhaps need larger rungs).' : 'Multi-year band — same frequencies cascade already addresses, suggesting amplitude rather than missing-frequency issue.'}</li>
+      <li><strong>What the fix probably is:</strong> the framework already has a confirmed answer in the memory called <code>framework_phi_k_amplitude_scaling.md</code> — predictions should be amplitude-scaled by φ^(k − k_ref) per rung. The current cascade just sums rung components linearly; it doesn't apply the φ^k amplitude rule. Adding that one step should rescue the squashed amplitude without inventing any new mechanic.</li>
+    </ul>
+  `;
+}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ECG Universal Cascade + Quarter-Flip — Visualizer</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f7f7; color:#222; margin:0; padding:24px; }
+  .wrap { max-width: 1300px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px 0; }
+  .sub { color:#666; font-size: 13px; margin: 0 0 20px 0; }
+  .panel { background:#fff; border:1px solid #ddd; border-radius:8px; padding:18px; margin-bottom:18px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .controls { display:flex; gap: 8px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+  .controls label { font-size:13px; padding: 6px 14px; border:1px solid #ccc; border-radius:18px; cursor:pointer; user-select:none; background:#fff; }
+  .controls input { display:none; }
+  .controls label.on { background:#1a73e8; color:#fff; border-color:#1a73e8; }
+  .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
+  .stat { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:10px; font-size: 12px; }
+  .stat .lbl { color:#888; font-weight:600; }
+  .stat .row { display:flex; justify-content:space-between; margin-top:4px; }
+  .stat .row .k { color:#666; }
+  .stat .row .v { font-weight:600; }
+  .stat .v.win { color:#188b3a; }
+  .chart-wrap { position:relative; height: 460px; }
+  .toggles { display:flex; gap:8px; flex-wrap:wrap; margin: 14px 0 10px 0; }
+  .toggles label { font-size:12px; padding:4px 12px; border:1px solid #ddd; border-radius:14px; cursor:pointer; background:#fff; user-select:none; }
+  .toggles label.on { background:#222; color:#fff; border-color:#222; }
+  .toggles input { display:none; }
+  .swatch { display:inline-block; width:10px; height:10px; vertical-align:middle; margin-right:5px; border-radius:2px; }
+  .note { background:#fef9e7; border-left:3px solid #f5b800; padding:10px 14px; font-size:13px; margin-top:14px; line-height:1.5; }
+  .note.win { background:#effaf0; border-left-color:#2eb872; }
+  .note.lose { background:#fcebea; border-left-color:#d9534f; }
+  .quarter-note { background:#f3eef8; border-left:3px solid #7c4dff; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:10px; }
+  .quarter-note strong { color:#5c2eb0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>ECG: Universal Cascade + Quarter-Flip Coupler</h1>
+<p class="sub">nsr001 RR intervals (1500 beats, train first 60%, test last 40%). Testing Dylan's quarter-turn coupler hypothesis: at every dom_P/4 (1.25 beats), an underlying coupler engages briefly and flips direction by −0.8 × recent_momentum during the first 1/φ³ of each quarter.</p>
+
+<div class="panel">
+  <div class="controls" id="horizon-controls"><span style="font-size:13px; margin-right:6px;">Forecast horizon:</span></div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toggles" id="series-toggles"></div>
+
+  <div class="chart-wrap"><canvas id="chart"></canvas></div>
+
+  <div class="note" id="reading"></div>
+
+  <div class="quarter-note">
+    <strong>Quarter-flip mechanic (Dylan 2026-05-18):</strong> 'Every 1/4 gear turn, the coupler-size system underneath connects, flips direction, then reverts.' Implementation — quarter period Q = dom_P/4, engagement window = 1/φ³ of each quarter (~23.6%), counter-current magnitude = 0.8 × momentum over last beat. Honest sweep result: helps only at h=10 (+0.056 corr), neutral/hurts at h=1–5. The base UC is also losing to persistence on this window, so this is a relative test of whether the flip *adds anything* on top of the cascade, not an absolute beat-persistence test.
+  </div>
+</div>
+
+</div>
+
+<script src="ecg_quarter_flip_viz_data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const data = window.ecgVizData;
+const HORIZONS = data.horizons;
+
+const COL = {
+  actual: '#0a0a0a',
+  universal_cascade: '#1a73e8',
+  universal_cascade_flip: '#7c4dff',
+  persistence: '#d9534f',
+};
+
+let currentHorizon = 10;
+let visible = { actual: true, universal_cascade: true, universal_cascade_flip: true, persistence: true };
+
+const hCtl = document.getElementById('horizon-controls');
+HORIZONS.forEach(h => {
+  const lbl = document.createElement('label');
+  lbl.textContent = `h = ${h} beat${h===1?'':'s'}`;
+  if (h === currentHorizon) lbl.className = 'on';
+  lbl.addEventListener('click', () => {
+    currentHorizon = h;
+    [...hCtl.querySelectorAll('label')].forEach(l => l.className = '');
+    lbl.className = 'on';
+    render();
+  });
+  hCtl.appendChild(lbl);
+});
+
+const SERIES = [
+  {key:'actual', label:'Actual RR (ms)', width:2.5},
+  {key:'universal_cascade', label:'Universal Cascade (base)', width:1.8},
+  {key:'universal_cascade_flip', label:'Universal Cascade + Quarter-Flip', width:1.8, dash:[2,3]},
+  {key:'persistence', label:'Persistence', width:1.5, dash:[5,4]},
+];
+const tWrap = document.getElementById('series-toggles');
+SERIES.forEach(s => {
+  const lbl = document.createElement('label'); lbl.className = 'on';
+  const inp = document.createElement('input'); inp.type='checkbox'; inp.checked=true;
+  inp.addEventListener('change', () => {
+    visible[s.key] = inp.checked;
+    lbl.className = inp.checked ? 'on' : '';
+    render();
+  });
+  lbl.appendChild(inp);
+  const sw = document.createElement('span'); sw.className='swatch'; sw.style.background=COL[s.key];
+  lbl.appendChild(sw);
+  lbl.appendChild(document.createTextNode(s.label));
+  tWrap.appendChild(lbl);
+});
+
+function fmt(v, dp=3, sign=false) {
+  const s = v.toFixed(dp);
+  return sign && v >= 0 ? '+' + s : s;
+}
+
+let chart;
+function render() {
+  const d = data.predictions[String(currentHorizon)];
+  const labels = d.beat_idx;
+  const datasets = [];
+  SERIES.forEach(s => {
+    if (visible[s.key]) {
+      datasets.push({
+        label: s.label,
+        data: d[s.key],
+        borderColor: COL[s.key],
+        backgroundColor: COL[s.key],
+        borderWidth: s.width,
+        pointRadius: 0,
+        tension: 0.1,
+        borderDash: s.dash || [],
+      });
+    }
+  });
+
+  const corrs = [d.uc_corr, d.ucf_corr, d.pers_corr];
+  const maes  = [d.uc_mae,  d.ucf_mae,  d.pers_mae];
+  const bestCorr = Math.max(...corrs);
+  const bestMae  = Math.min(...maes);
+  document.getElementById('stats').innerHTML = `
+    <div class="stat">
+      <div class="lbl" style="color:#1a73e8;">Universal Cascade (base)</div>
+      <div class="row"><span class="k">MAE</span><span class="${d.uc_mae===bestMae?'v win':'v'}">${fmt(d.uc_mae,2)} ms</span></div>
+      <div class="row"><span class="k">corr</span><span class="${d.uc_corr===bestCorr?'v win':'v'}">${fmt(d.uc_corr,3,true)}</span></div>
+    </div>
+    <div class="stat">
+      <div class="lbl" style="color:#7c4dff;">UC + Quarter-Flip</div>
+      <div class="row"><span class="k">MAE</span><span class="${d.ucf_mae===bestMae?'v win':'v'}">${fmt(d.ucf_mae,2)} ms</span></div>
+      <div class="row"><span class="k">corr</span><span class="${d.ucf_corr===bestCorr?'v win':'v'}">${fmt(d.ucf_corr,3,true)}</span></div>
+    </div>
+    <div class="stat">
+      <div class="lbl" style="color:#d9534f;">Persistence</div>
+      <div class="row"><span class="k">MAE</span><span class="${d.pers_mae===bestMae?'v win':'v'}">${fmt(d.pers_mae,2)} ms</span></div>
+      <div class="row"><span class="k">corr</span><span class="${d.pers_corr===bestCorr?'v win':'v'}">${fmt(d.pers_corr,3,true)}</span></div>
+    </div>
+  `;
+
+  const flipDelta = d.ucf_corr - d.uc_corr;
+  const reading = document.getElementById('reading');
+  if (flipDelta > 0.01) {
+    reading.className = 'note win';
+    reading.innerHTML = `<strong>At h=${currentHorizon} beats, the quarter-flip adds ${fmt(flipDelta,3,true)} correlation on top of the base cascade</strong> (purple dashed vs blue solid). This is the regime where Dylan's mechanic shows real signal — short bursts of counter-current at quarter intervals. Both still lose to persistence (red dashed), so this is a relative gain inside the cascade family, not an absolute forecast win.`;
+  } else if (Math.abs(flipDelta) < 0.01) {
+    reading.className = 'note';
+    reading.innerHTML = `<strong>At h=${currentHorizon} beats, quarter-flip ≈ base.</strong> The mechanic is neither helping nor hurting at this horizon. Persistence still wins.`;
+  } else {
+    reading.className = 'note lose';
+    reading.innerHTML = `<strong>At h=${currentHorizon} beats, quarter-flip subtracts ${fmt(Math.abs(flipDelta),3)} correlation vs base</strong> — the flip is over-correcting at short horizons where the bandpass already captures the swing. Persistence wins both.`;
+  }
+
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('chart').getContext('2d'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        y: { title: { display: true, text: 'RR interval (ms)' } },
+        x: { title: { display: true, text: 'Beat index' }, ticks: { maxTicksLimit: 14 } },
+      },
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: `h = ${currentHorizon} beat${currentHorizon===1?'':'s'} — ${data.system}`, font: { size: 13 } }
+      }
+    }
+  });
+}
+render();
+</script>
+</body>
+</html>

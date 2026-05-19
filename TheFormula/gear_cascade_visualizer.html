@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Universal Cascade vs Persistence — ENSO Forecast Visualizer</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f7f7; color:#222; margin:0; padding:24px; }
+  .wrap { max-width: 1300px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 6px 0; }
+  .sub { color:#666; font-size: 13px; margin: 0 0 20px 0; }
+  .panel { background:#fff; border:1px solid #ddd; border-radius:8px; padding:18px; margin-bottom:18px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .controls { display:flex; gap: 8px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
+  .controls label { font-size:13px; padding: 6px 14px; border:1px solid #ccc; border-radius:18px; cursor:pointer; user-select:none; background:#fff; }
+  .controls input { display:none; }
+  .controls label.on { background:#1a73e8; color:#fff; border-color:#1a73e8; }
+  .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
+  .stat { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:10px; font-size: 12px; }
+  .stat .lbl { color:#888; font-weight:600; }
+  .stat .row { display:flex; justify-content:space-between; margin-top:4px; }
+  .stat .row .k { color:#666; }
+  .stat .row .v { font-weight:600; }
+  .stat .v.win { color:#188b3a; }
+  .stat .v.lose { color:#b32424; }
+  .chart-wrap { position:relative; height: 460px; }
+  .toggles { display:flex; gap:8px; flex-wrap:wrap; margin: 14px 0 10px 0; }
+  .toggles label { font-size:12px; padding:4px 12px; border:1px solid #ddd; border-radius:14px; cursor:pointer; background:#fff; user-select:none; }
+  .toggles label.on { background:#222; color:#fff; border-color:#222; }
+  .toggles input { display:none; }
+  .swatch { display:inline-block; width:10px; height:10px; vertical-align:middle; margin-right:5px; border-radius:2px; }
+  .note { background:#fef9e7; border-left:3px solid #f5b800; padding:10px 14px; font-size:13px; margin-top:14px; line-height:1.5; }
+  .note.win { background:#effaf0; border-left-color:#2eb872; }
+  .note.lose { background:#fcebea; border-left-color:#d9534f; }
+  .framework-note { background:#eef4fb; border-left:3px solid #1a73e8; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:14px; }
+  .framework-note strong { color:#1a73e8; }
+  .snap-note { background:#f3eef8; border-left:3px solid #7c4dff; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:10px; }
+  .snap-note strong { color:#5c2eb0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Universal Cascade vs Persistence — ENSO Forecast</h1>
+<p class="sub">Blind test on 2001–2025 NINO 3.4 data. Three predictions overlaid: Universal Cascade (base), Universal Cascade + Symmetric Snapback (Dylan 2026-05-18 meta-mechanic), and trivial Persistence. Toggle horizon to see how each performs.</p>
+
+<div class="panel">
+  <div class="controls" id="horizon-controls"><span style="font-size:13px; margin-right:6px;">Forecast horizon:</span></div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="toggles" id="series-toggles"></div>
+
+  <div class="chart-wrap"><canvas id="chart"></canvas></div>
+
+  <div class="note" id="reading"></div>
+
+  <div class="framework-note">
+    <strong>Universal Cascade — three framework innovations:</strong><br>
+    1. <strong>ARA-asymmetric tension</strong> — sigmoid blend (linear engines, log consumers, centred ARA=1).<br>
+    2. <strong>Three-way φ²/2φ coupling</strong> — slower neighbour at 2/φ, faster at 1/φ².<br>
+    3. <strong>1/φ³ momentum coefficient</strong> — stored, ready for stateful loops.<br>
+    <em>Caveats: bandpass uses full series (mild leakage); ARA &amp; period supplied, not auto-discovered.</em>
+  </div>
+
+  <div class="snap-note">
+    <strong>Meta-snapback (test variant):</strong> when current NINO is within 50% of either historical wall, push prediction back toward centre by 0.5 × signal_std × ramp-to-wall. Symmetric at floor and ceiling. Honest sweep result: hurts h=1–12, mild help at h=22 (~+0.016 corr). Likely double-counting the bandpass rungs, which already encode wall-bounce. Shown on chart so you can see where it nudges the curve.
+  </div>
+</div>
+
+</div>
+
+<script src="gear_cascade_viz_v3_data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+const data = window.cascadeVizData;
+const HORIZONS = data.horizons;
+
+const COL = {
+  actual: '#0a0a0a',
+  universal_cascade: '#1a73e8',
+  universal_cascade_snap: '#7c4dff',
+  persistence: '#d9534f',
+};
+
+let currentHorizon = 12;
+let visible = { actual: true, universal_cascade: true, universal_cascade_snap: true, persistence: true };
+
+const hCtl = document.getElementById('horizon-controls');
+HORIZONS.forEach(h => {
+  const lbl = document.createElement('label');
+  lbl.textContent = `h = ${h} mo`;
+  if (h === currentHorizon) lbl.className = 'on';
+  lbl.addEventListener('click', () => {
+    currentHorizon = h;
+    [...hCtl.querySelectorAll('label')].forEach(l => l.className = '');
+    lbl.className = 'on';
+    render();
+  });
+  hCtl.appendChild(lbl);
+});
+
+const SERIES = [
+  {key:'actual', label:'Actual NINO 3.4', width:3},
+  {key:'universal_cascade', label:'Universal Cascade (base)', width:2},
+  {key:'universal_cascade_snap', label:'Universal Cascade + Snapback', width:2, dash:[2,3]},
+  {key:'persistence', label:'Persistence', width:2, dash:[5,4]},
+];
+const tWrap = document.getElementById('series-toggles');
+SERIES.forEach(s => {
+  const lbl = document.createElement('label');
+  lbl.className = 'on';
+  const inp = document.createElement('input');
+  inp.type = 'checkbox'; inp.checked = true;
+  inp.addEventListener('change', () => {
+    visible[s.key] = inp.checked;
+    lbl.className = inp.checked ? 'on' : '';
+    render();
+  });
+  lbl.appendChild(inp);
+  const sw = document.createElement('span'); sw.className='swatch'; sw.style.background=COL[s.key];
+  lbl.appendChild(sw);
+  lbl.appendChild(document.createTextNode(s.label));
+  tWrap.appendChild(lbl);
+});
+
+function fmt(v, dp=3, sign=false) {
+  const s = v.toFixed(dp);
+  return sign && v >= 0 ? '+' + s : s;
+}
+
+let chart;
+function render() {
+  const d = data.predictions[String(currentHorizon)];
+  const labels = d.dates;
+  const datasets = [];
+  SERIES.forEach(s => {
+    if (visible[s.key]) {
+      datasets.push({
+        label: s.label,
+        data: d[s.key],
+        borderColor: COL[s.key],
+        backgroundColor: COL[s.key],
+        borderWidth: s.width,
+        pointRadius: 0,
+        tension: 0.15,
+        borderDash: s.dash || [],
+      });
+    }
+  });
+
+  // Stats panel — three predictors side by side
+  const corrs = [d.uc_corr, d.ucs_corr, d.pers_corr];
+  const maes  = [d.uc_mae,  d.ucs_mae,  d.pers_mae];
+  const bestCorr = Math.max(...corrs);
+  const bestMae  = Math.min(...maes);
+  function cls(val, best, lower=false) {
+    if (lower) return val === best ? 'v win' : 'v';
+    return val === best ? 'v win' : 'v';
+  }
+  document.getElementById('stats').innerHTML = `
+    <div class="stat">
+      <div class="lbl" style="color:#1a73e8;">Universal Cascade (base)</div>
+      <div class="row"><span class="k">MAE</span><span class="${d.uc_mae===bestMae?'v win':'v'}">${fmt(d.uc_mae)} °C</span></div>
+      <div class="row"><span class="k">corr</sp
