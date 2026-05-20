@@ -183,4 +183,29 @@ function render() {
     reading.innerHTML = `<strong>At h=${currentHorizon}mo, HONEST champion wins MAE</strong> (${fmt(d.honest_champion_mae)} vs persistence ${fmt(d.persistence_mae)}) but persistence still has higher correlation. Cascade is closer on average.`;
   } else {
     reading.className = 'note';
-    reading.innerHTML = `<strong>At h=${currentHorizon}mo, persistence still wins MAE.</strong> Champion ${fmt(d.honest_champion_mae)}, persistence ${fmt(d.persistence_mae)}. NINO barely moves at this hor
+    reading.innerHTML = `<strong>At h=${currentHorizon}mo, persistence still wins MAE.</strong> Champion ${fmt(d.honest_champion_mae)}, persistence ${fmt(d.persistence_mae)}. NINO barely moves at this horizon — trivial baseline is hard to beat on absolute error even when correlation favours cascade.`;
+  }
+
+  if (chart) chart.destroy();
+  chart = new Chart(document.getElementById('chart').getContext('2d'), {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        y: { title: { display: true, text: 'NINO 3.4 anomaly (°C)' } },
+        x: { title: { display: true, text: 'Date (predicted-for month)' }, ticks: { maxTicksLimit: 16 } },
+      },
+      plugins: {
+        legend: { display: false },
+        title: { display: true, text: `Forecast horizon: h = ${currentHorizon} month${currentHorizon===1?'':'s'} (blind test on 2001-2025, ARA=${data.ara}, dom_P=${data.period})`, font: { size: 14 } }
+      }
+    }
+  });
+}
+render();
+</script>
+</body>
+</html>
