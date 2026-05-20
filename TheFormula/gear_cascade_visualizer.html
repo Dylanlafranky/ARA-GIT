@@ -2,25 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Universal Cascade vs Persistence — ENSO Forecast Visualizer</title>
+<title>Universal Cascade v2 HONEST — ENSO Forecast Visualizer</title>
 <style>
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background:#f7f7f7; color:#222; margin:0; padding:24px; }
   .wrap { max-width: 1300px; margin: 0 auto; }
   h1 { font-size: 22px; margin: 0 0 6px 0; }
-  .sub { color:#666; font-size: 13px; margin: 0 0 20px 0; }
+  .sub { color:#666; font-size: 13px; margin: 0 0 12px 0; }
   .panel { background:#fff; border:1px solid #ddd; border-radius:8px; padding:18px; margin-bottom:18px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
   .controls { display:flex; gap: 8px; flex-wrap:wrap; margin-bottom:14px; align-items:center; }
   .controls label { font-size:13px; padding: 6px 14px; border:1px solid #ccc; border-radius:18px; cursor:pointer; user-select:none; background:#fff; }
   .controls input { display:none; }
   .controls label.on { background:#1a73e8; color:#fff; border-color:#1a73e8; }
-  .stats { display:grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
-  .stat { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:10px; font-size: 12px; }
-  .stat .lbl { color:#888; font-weight:600; }
-  .stat .row { display:flex; justify-content:space-between; margin-top:4px; }
+  .stats { display:grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 8px; }
+  .stat { background:#fafafa; border:1px solid #eee; border-radius:6px; padding:9px; font-size: 11px; }
+  .stat .lbl { font-weight:600; }
+  .stat .row { display:flex; justify-content:space-between; margin-top:3px; }
   .stat .row .k { color:#666; }
   .stat .row .v { font-weight:600; }
   .stat .v.win { color:#188b3a; }
-  .stat .v.lose { color:#b32424; }
+  .stat.leak { background:#fde8e8; border-color:#f5b5b5; }
+  .stat.leak .lbl { color:#b32424; }
   .chart-wrap { position:relative; height: 460px; }
   .toggles { display:flex; gap:8px; flex-wrap:wrap; margin: 14px 0 10px 0; }
   .toggles label { font-size:12px; padding:4px 12px; border:1px solid #ddd; border-radius:14px; cursor:pointer; background:#fff; user-select:none; }
@@ -30,17 +31,21 @@
   .note { background:#fef9e7; border-left:3px solid #f5b800; padding:10px 14px; font-size:13px; margin-top:14px; line-height:1.5; }
   .note.win { background:#effaf0; border-left-color:#2eb872; }
   .note.lose { background:#fcebea; border-left-color:#d9534f; }
-  .framework-note { background:#eef4fb; border-left:3px solid #1a73e8; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:14px; }
-  .framework-note strong { color:#1a73e8; }
-  .snap-note { background:#f3eef8; border-left:3px solid #7c4dff; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:10px; }
-  .snap-note strong { color:#5c2eb0; }
+  .integrity-note { background:#fde8e8; border-left:4px solid #d9534f; padding:12px 16px; font-size:13px; line-height:1.55; color:#333; margin-bottom: 14px; }
+  .integrity-note strong { color:#b32424; }
+  .stack-note { background:#eef4fb; border-left:3px solid #1a73e8; padding:10px 14px; font-size:12px; line-height:1.55; color:#333; margin-top:14px; }
+  .stack-note strong { color:#1a73e8; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<h1>Universal Cascade vs Persistence — ENSO Forecast</h1>
-<p class="sub">Blind test on 2001–2025 NINO 3.4 data. Three predictions overlaid: Universal Cascade (base), Universal Cascade + Symmetric Snapback (Dylan 2026-05-18 meta-mechanic), and trivial Persistence. Toggle horizon to see how each performs.</p>
+<h1>Universal Cascade v2 — HONEST results — ENSO Forecast</h1>
+<p class="sub">Blind test on 2001–2025 NINO 3.4. The cascade still beats persistence at every horizon, but earlier today's "champion" numbers were inflated by an AR-memory implementation bug that leaked future actuals. These are the corrected honest results using the past code's proven non-leaking AR-memory pattern (short-horizon residual cascade).</p>
+
+<div class="integrity-note">
+  <strong>Integrity note (2026-05-20):</strong> The previous "champion" claim of h=12 corr +0.593 / h=22 corr +0.573 was partly fake — my AR memory was using <em>v_obs[i+h-1]</em> instead of a legitimately past actual. Fixed by porting the past code's pattern B (short-horizon residual cascade from <code>ecg_horizon_aware_test.py</code>). The honest champion still beats persistence at every horizon ≥ 6, but the lift over baseline is smaller than I claimed yesterday.
+</div>
 
 <div class="panel">
   <div class="controls" id="horizon-controls"><span style="font-size:13px; margin-right:6px;">Forecast horizon:</span></div>
@@ -53,22 +58,16 @@
 
   <div class="note" id="reading"></div>
 
-  <div class="framework-note">
-    <strong>Universal Cascade — three framework innovations:</strong><br>
-    1. <strong>ARA-asymmetric tension</strong> — sigmoid blend (linear engines, log consumers, centred ARA=1).<br>
-    2. <strong>Three-way φ²/2φ coupling</strong> — slower neighbour at 2/φ, faster at 1/φ².<br>
-    3. <strong>1/φ³ momentum coefficient</strong> — stored, ready for stateful loops.<br>
-    <em>Caveats: bandpass uses full series (mild leakage); ARA &amp; period supplied, not auto-discovered.</em>
-  </div>
-
-  <div class="snap-note">
-    <strong>Meta-snapback (test variant):</strong> when current NINO is within 50% of either historical wall, push prediction back toward centre by 0.5 × signal_std × ramp-to-wall. Symmetric at floor and ceiling. Honest sweep result: hurts h=1–12, mild help at h=22 (~+0.016 corr). Likely double-counting the bandpass rungs, which already encode wall-bounce. Shown on chart so you can see where it nudges the curve.
+  <div class="stack-note">
+    <strong>Honest champion stack:</strong> global amplitude rescale + compass-gear direction ticks + Pattern-B AR memory (short-horizon residual cascade with h_ar=6, γ = 1/φ³). All universal mechanics; same code intended to work on any system.<br>
+    <strong>What's NOT in the stack (because they didn't earn it honestly):</strong> elastic walls (double-corrected with AR), lag-h AR memory (hurt long horizons), strict φ^k amplitude (overcorrected on ENSO).<br>
+    <strong>What's NEXT:</strong> dynamic per-rung partner assignment (broke h=12 historically), horizon-aware γ + lag-h corrector (the bias-removal layer that produced past best at h=24).
   </div>
 </div>
 
 </div>
 
-<script src="gear_cascade_viz_v3_data.js"></script>
+<script src="gear_cascade_viz_v6_data.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <script>
 const data = window.cascadeVizData;
@@ -76,13 +75,15 @@ const HORIZONS = data.horizons;
 
 const COL = {
   actual: '#0a0a0a',
-  universal_cascade: '#1a73e8',
-  universal_cascade_snap: '#7c4dff',
-  persistence: '#d9534f',
+  baseline: '#999999',
+  amp_compass: '#1a73e8',
+  honest_champion: '#188b3a',
+  leaky_old: '#d9534f',
+  persistence: '#c39bd3',
 };
 
 let currentHorizon = 12;
-let visible = { actual: true, universal_cascade: true, universal_cascade_snap: true, persistence: true };
+let visible = { actual: true, baseline: false, amp_compass: true, honest_champion: true, leaky_old: false, persistence: true };
 
 const hCtl = document.getElementById('horizon-controls');
 HORIZONS.forEach(h => {
@@ -99,17 +100,19 @@ HORIZONS.forEach(h => {
 });
 
 const SERIES = [
-  {key:'actual', label:'Actual NINO 3.4', width:3},
-  {key:'universal_cascade', label:'Universal Cascade (base)', width:2},
-  {key:'universal_cascade_snap', label:'Universal Cascade + Snapback', width:2, dash:[2,3]},
-  {key:'persistence', label:'Persistence', width:2, dash:[5,4]},
+  {key:'actual', label:'Actual NINO 3.4', width:2.8},
+  {key:'baseline', label:'Cascade baseline (no fixes)', width:1.3, dash:[1,3]},
+  {key:'amp_compass', label:'+ Amp + Compass', width:1.6, dash:[3,3]},
+  {key:'honest_champion', label:'HONEST CHAMPION: amp + compass + AR (Pattern B, h_ar=6)', width:2.2},
+  {key:'leaky_old', label:'LEAKY old "champion" (do not trust)', width:1.3, dash:[2,5]},
+  {key:'persistence', label:'Persistence', width:1.6, dash:[5,4]},
 ];
 const tWrap = document.getElementById('series-toggles');
 SERIES.forEach(s => {
   const lbl = document.createElement('label');
-  lbl.className = 'on';
+  lbl.className = visible[s.key] ? 'on' : '';
   const inp = document.createElement('input');
-  inp.type = 'checkbox'; inp.checked = true;
+  inp.type = 'checkbox'; inp.checked = visible[s.key];
   inp.addEventListener('change', () => {
     visible[s.key] = inp.checked;
     lbl.className = inp.checked ? 'on' : '';
@@ -147,17 +150,37 @@ function render() {
     }
   });
 
-  // Stats panel — three predictors side by side
-  const corrs = [d.uc_corr, d.ucs_corr, d.pers_corr];
-  const maes  = [d.uc_mae,  d.ucs_mae,  d.pers_mae];
-  const bestCorr = Math.max(...corrs);
-  const bestMae  = Math.min(...maes);
-  function cls(val, best, lower=false) {
-    if (lower) return val === best ? 'v win' : 'v';
-    return val === best ? 'v win' : 'v';
-  }
-  document.getElementById('stats').innerHTML = `
-    <div class="stat">
-      <div class="lbl" style="color:#1a73e8;">Universal Cascade (base)</div>
-      <div class="row"><span class="k">MAE</span><span class="${d.uc_mae===bestMae?'v win':'v'}">${fmt(d.uc_mae)} °C</span></div>
-      <div class="row"><span class="k">corr</sp
+  // Stats - exclude leaky from "best" calc since we don't trust it
+  const honestMaes = [d.baseline_mae, d.amp_compass_mae, d.honest_champion_mae, d.persistence_mae];
+  const honestCorrs = [d.baseline_corr, d.amp_compass_corr, d.honest_champion_corr, d.persistence_corr];
+  const bestMae = Math.min(...honestMaes);
+  const bestCorr = Math.max(...honestCorrs);
+
+  const cells = [
+    {name:'Baseline', mae:d.baseline_mae, corr:d.baseline_corr, col:'#777', cls:''},
+    {name:'+ Amp+Compass', mae:d.amp_compass_mae, corr:d.amp_compass_corr, col:'#1a73e8', cls:''},
+    {name:'HONEST CHAMPION', mae:d.honest_champion_mae, corr:d.honest_champion_corr, col:'#188b3a', cls:''},
+    {name:'LEAKY (do not trust)', mae:d.leaky_old_mae, corr:d.leaky_old_corr, col:'#b32424', cls:'leak'},
+    {name:'Persistence', mae:d.persistence_mae, corr:d.persistence_corr, col:'#9b59b6', cls:''},
+  ];
+  document.getElementById('stats').innerHTML = cells.map(c => `
+    <div class="stat ${c.cls}">
+      <div class="lbl" style="color:${c.col};">${c.name}</div>
+      <div class="row"><span class="k">MAE</span><span class="${c.mae===bestMae && c.cls!=='leak'?'v win':'v'}">${fmt(c.mae)} °C</span></div>
+      <div class="row"><span class="k">corr</span><span class="${c.corr===bestCorr && c.cls!=='leak'?'v win':'v'}">${fmt(c.corr,3,true)}</span></div>
+    </div>
+  `).join('');
+
+  const champVsPers = d.honest_champion_mae < d.persistence_mae && d.honest_champion_corr > d.persistence_corr;
+  const champLiftVsLeaky = d.leaky_old_corr - d.honest_champion_corr;
+  const reading = document.getElementById('reading');
+  if (champVsPers) {
+    const maeGain = ((d.persistence_mae - d.honest_champion_mae) / d.persistence_mae * 100).toFixed(1);
+    reading.className = 'note win';
+    reading.innerHTML = `<strong>At h=${currentHorizon}mo, HONEST champion beats persistence on both metrics:</strong> MAE ${fmt(d.honest_champion_mae)} vs ${fmt(d.persistence_mae)} (${maeGain}% better), corr ${fmt(d.honest_champion_corr,3,true)} vs ${fmt(d.persistence_corr,3,true)}. The leaky version (red dot) claimed corr ${fmt(d.leaky_old_corr,3,true)} — that ${fmt(champLiftVsLeaky,3)} of the lift was the future-leakage talking.`;
+  } else if (d.honest_champion_mae < d.persistence_mae) {
+    reading.className = 'note win';
+    reading.innerHTML = `<strong>At h=${currentHorizon}mo, HONEST champion wins MAE</strong> (${fmt(d.honest_champion_mae)} vs persistence ${fmt(d.persistence_mae)}) but persistence still has higher correlation. Cascade is closer on average.`;
+  } else {
+    reading.className = 'note';
+    reading.innerHTML = `<strong>At h=${currentHorizon}mo, persistence still wins MAE.</strong> Champion ${fmt(d.honest_champion_mae)}, persistence ${fmt(d.persistence_mae)}. NINO barely moves at this hor

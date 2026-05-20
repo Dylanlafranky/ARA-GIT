@@ -206,82 +206,16 @@ These are the framework's most rigorous tests — predictions written down BEFOR
 
 The following table matches the v4 peer review audit line-for-line. This is the authoritative breakdown. The source document is BLIND_PREDICTIONS_98-100.md, written before any data lookup.
 
-### 2026-05-11 — Vertical-ARA trajectory-prediction tests (TWO independent failures, both consistent with framework's classification-only claim)
-
-| test | window-match corr | prediction corr (next N) | predicted | observed |
-|---|---|---|---|---|
-| ENSO ← MJO (atmospheric, ~7-rung gap) | n/a (regression-based) | within 0.02 MAE of ENSO-only baseline | improvement | none |
-| Mouse → human RR (biological, ~4-rung gap) | **+0.922** (windows match) | **+0.105 median** (continuations don't) | 75-80% accuracy | 18% above corr=0.5 |
-
-**Reading:** Both tests find STRONG cross-system shape MATCHES at the window level (windows of one system look like windows of another after time-rescaling). Neither test produces trajectory PREDICTION across systems. The framework's own claim — that vertical-ARA partners share the MAP but not the POSITION (`framework_topology_triangulation.md`) — is confirmed twice independently. Vertical-ARA is a classification claim, not a trajectory-forecasting claim. The 75-80% accuracy prediction was too optimistic; correct framework reading is "shape-template matches, trajectories do not."
-
-Scripts: `TheFormula/enso_mjo_partner_predictor.py`, `TheFormula/mouse_human_continuation_test.py`.
-
-### 2026-05-12 — Cross-species decomposition test (mouse topology × human energy) — **58% MAE improvement**
-
-After the trajectory-prediction failures above, the obvious next architecture: rather than asking "can mouse trajectory predict human trajectory?" (which fails because vertical-ARA partners share the map not the position), ask "can the framework's TOPOLOGY-vs-ENERGY decomposition predict better than naive cross-species transfer?"
-
-**Test design (decomposition v3):**
-1. Find shape-matched landmark windows across mouse and human RR-interval data.
-2. Extract mouse's NEXT section AFTER each landmark — this is the topology template.
-3. Z-normalise the mouse continuation to remove mouse-specific energy (pure shape only).
-4. Scale that shape by HUMAN's local energy state (recent 20-beat mean and std).
-5. Predict human's next 10 RR intervals from (mouse shape × human local energy).
-6. Compare against naive control: scale mouse continuation by mouse's own energy and apply to human.
-
-| Metric | Naive cross-species transfer | Decomposition (mouse shape × human energy) | Δ |
-|---|---|---|---|
-| MAE (ms) | 82.22 | **34.29** | **−58.3%** (2.4× better) |
-| Pearson correlation | ~0 (chance) | ~0 (chance) | 0.000 |
-
-**What this means:**
-- The framework's decomposition gives **2.4× better practical accuracy** on cross-species prediction.
-- Improvement is **invisible to correlation/R²** because both predictions are linear rescalings of the same mouse-derived shape — correlation is invariant to linear scale.
-- Improvement lives entirely in **MAE / absolute error / magnitude calibration** — i.e. WHERE THE PREDICTED VALUES SIT NUMERICALLY relative to human's actual values.
-- Most ML evaluation focuses on correlation/R². **The framework's contribution here is invisible by that metric** and only shows up in practical prediction error.
-
-**Position-independence ceiling (re-confirmed):**
-Despite the 58% MAE improvement, correlation stays at chance level. This is the same wall as the 2026-05-11 tests — vertical-ARA partners share TOPOLOGY (map) and benefit from cross-species ENERGY calibration, but phase-POSITION between organisms is independent and not recoverable from one-organism data alone.
-
-**Architectural implication (Dylan's framing 2026-05-12):**
-With multi-mouse + multi-human aggregate datasets, the framework provides what ML normally has to discover from scratch: that mouse and human cardiac dynamics share underlying architecture, and per-species variation is in time-scaling, amplitude, and phase position. This compresses the prediction problem from "learn cardiac dynamics for each species independently" to "learn the residual position offset per individual." Framework-architected models with minimal trainable parameters should match or beat large-budget pure-ML approaches on MAE.
-
-**Status:** **CONFIRMED for MAE / magnitude calibration.** **CHANCE-LEVEL for correlation / position-tracking** (consistent with framework's "same map, not same position" rule).
-
-Scripts: `TheFormula/mouse_human_kleiber_test.py` (Kleiber scaling probe — shows it doesn't help raw RR timing), `TheFormula/energy_cascade_simulation_v1.py` (v1 distribution comparison, +0.608 shape corr), v2/v3 decomposition test (inline). Memory file: `framework_energy_cascade_architecture.md`.
-
 ### Script 98: Cepheid Variable Stars (Blind)
 
 | Prediction | Predicted | Observed | Status |
 |-----------|-----------|----------|--------|
 | Phase identification (fast rise, slow fall) | Yes | Confirmed | **CONFIRMED** |
-| ARA value (re-interpreted as φ² coupled-pair, 2026-05-11) | φ² ≈ 2.618 | F-only Cepheids: mean 2.605 (n=8, OGLE-IV) | **CONFIRMED** (0.5% from φ²) |
-| 1O-only Cepheids are single engines at φ | ARA ≈ 1.618 | 1O-only mean 1.566 (n=8) | **CONFIRMED** (3.2% from φ) |
-| Isolated 1O component of beat Cepheid still at φ | ARA ≈ 1.618 | 1.582 (n=8, Fourier-isolated) | **CONFIRMED** (2.2% from φ) |
-| Period dependence (originally: higher ARA at longer P) | Yes | Disrupted by resonance | **FAILED** (Hertzsprung bump physics) |
+| ARA value | ~1.7 (engine) | ~2.5 (snap) | **FAILED** |
+| Period dependence (higher ARA at longer P) | Yes | Disrupted by resonance | **FAILED** |
+| Spine position (engine zone) | Engine zone | Relaxation snap zone | **FAILED** |
 
-**Score: 4/5 after coupled-pair re-interpretation** (was originally scored 1/4 under the "snap" reading).
-
-**Re-classification note (2026-05-11):** The original "snap" label on ARA = 2.5 was geometrically inconsistent with the framework's own ARA scale (snaps live at the *low* end, < 0.2; 2.5 sits *above* the pure-harmonics ceiling at 2.0 on the opposite side). Dylan flagged this 2026-05-11, and `TheFormula/cepheid_coupled_pair_test.py` ran the empirical test the same day on the OGLE-IV Galactic Disk Cepheid catalog (public, plain-text, n=8 per type).
-
-**Test result:** F-mode Cepheids cluster at **mean ARA = 2.605, only 0.5% from φ² = 2.618** — the cleanest cross-domain confirmation of the framework's "coupled-pair signature gives φ² composite" rule. The 2.5 reading the original Script 98 found isn't a snap and isn't an outlier; it's the predicted φ² composite signature of two coupled engine subsystems at φ each.
-
-**Important refinement from the test:** The two coupled subsystems are NOT F-mode + 1O-mode (cross-mode coupling), as the initial Dylan-hypothesis assumed. They appear to be *within-mode* — most likely the mechanical (radial pulsation) and thermal (photospheric response) subsystems that are inherently coupled inside a single Cepheid's F-mode oscillation. Evidence:
-- F-only Cepheids (no second mode active) hit φ² cleanly (0.5% off, n=8).
-- 1O-only Cepheids show clean single-engine φ signature (3.2% off).
-- F/1O double-mode beat Cepheids' composite light curve sits *lower* (1.56, 40% off φ²) because the two simultaneously-active modes partly destructively interfere. Cross-mode coupling reduces asymmetry rather than amplifying it.
-- Fourier-isolated 1O component of beat Cepheids matches 1O-only mean within noise (1.582 vs 1.566).
-
-**Updated framework rule:** ARA > 2 is a φ² coupled-pair signature *when one of the coupled subsystems is internal/hidden* (driving the observable mode but not directly observable on its own). This now generalises to DE/DM (2.589, mirror-domain internal coupling), trophic reduction (2.62, internal metabolic transfer), and innovation acceleration (2.62, internal civilisational coupling) — all of which show the same φ² signature for the same reason.
-
-Period dependence (original prediction "higher ARA at longer P") still failed — disrupted by the Hertzsprung bump physics (2:1 resonance between fundamental and second overtone in P=7–12 day Cepheids). This is one missed sub-prediction in an otherwise confirmed test.
-
-**Files:**
-- `TheFormula/cepheid_coupled_pair_test.py` — the test script
-- `TheFormula/cepheid_coupled_pair_data.js` — full per-star results
-- `framework_above_2_coupled_pair.md` (memory) — the durable rule with the Cepheid result annotated
-
-**Score recovery for the public-release blind hit-rate:** Script 98 moves from 1/4 (one-hit, three-miss) to 4/5 (four-hit, one-miss). The combined blind hit rate across Scripts 98–100, 136 moves accordingly. Update `Blind Prediction Summary` table below.
+**Score: 1/4.** The ARA value, period dependence, and classification all missed — Cepheids are snaps, not engines. The one hit (phase asymmetry direction) is real but the weakest kind of prediction. The miss was productive: it revealed multi-mode ARA (systems have different ARA values for different oscillation modes).
 
 ### Script 99: Briggs-Rauscher Chemical Oscillator (Blind)
 
@@ -320,15 +254,11 @@ Period dependence (original prediction "higher ARA at longer P") still failed �
 | π-leak → primordial helium Y_p | 0.046 | 0.245 | 81.1% | **FAILED** |
 | Baryon fraction → stellar mass fraction | 0.049 | 0.060 | 18.1% | **PARTIAL** |
 | Packing gap → cosmic metallicity Z | 0.054 | 0.020 | 167.9% | **FAILED** |
-| Cardiac ARA → circadian wake/sleep | 1.648 | 2.000 | 17.6% | **RE-CLASSIFIED 2026-05-11 — see note below** |
+| Cardiac ARA → circadian wake/sleep | 1.648 | 2.000 | 17.6% | **PARTIAL** |
 | BZ ARA → Briggs-Rauscher ARA | 1.631 | 1.550 | 5.2% | **CONFIRMED** |
 | DE/DM → predator/prey biomass | 2.589 | 10.000 | 74.1% | **FAILED** |
 
 **Score: 2-3/10 within 10%.** Mean error 41%, median 18%. The ISM void fraction (used as 0.70) is uncertain — updated estimates suggest 50-60%, which would downgrade that hit. Formula works for genuine analogues (void→void at similar scales, engine→engine at same f_EM). Fails when pairing is conceptually wrong (π-leak→Y_p, packing→metallicity). Null test: 1.7× improvement over random matching.
-
-**Re-classification note (2026-05-11) — cardiac → wake/sleep row:** Under the updated framework reading, this row is a *cross-class translation failure*, not a quantitative partial miss. Cardiac at ARA = 1.648 is a free-running internal engine at φ (no external clock). Wake/sleep at ARA = 2.000 is the **canonical externally-forced 2:1 harmonic** — pinned by the 24h light/dark cycle, past the 1.75 self-organising wall, sitting at the pure-harmonic ceiling. These are different ARA classes (free-running engine vs externally-forced harmonic), and the translation formula's stated scope explicitly fails outside within-class pairings. The 17.6% error figure conflates a categorical mismatch with a quantitative miss; the framework correctly fails when applied across classes.
-
-**Separately confirmed as a new row (2026-05-11):** Wake/sleep ratio = 2.000 sits exactly at the pure-harmonic ceiling, matching the framework's prediction that externally-forced systems pin to integer ratios (2:1 here, locked by the 24h light cycle). Drift away from 2.000 in free-running humans (no zeitgebers — polar winter, blind subjects, prolonged isolation experiments) confirms external forcing maintains the ratio; it is not a self-organising engine.
 
 ### Blind Prediction Summary
 
@@ -714,7 +644,7 @@ Things that would break the framework if observed:
 - Intraday markets: ARA = 1.600, |Δφ| = 0.018 (close, self-organizing)
 - Wilson cycle: ARA = 1.67, |Δφ| = 0.052 (geological engine)
 - BZ reaction: ARA = 1.631, |Δφ| = 0.013 (chemical engine)
-- Cepheid (light curve, naive single-mode fit): ARA = 2.5, |Δφ| = 0.88 — re-flagged 2026-05-11 as a coupled-pair composite (fundamental + first overtone), not a single-system snap. 2.5 ≈ φ² = 2.618. Needs Fourier-decomposed re-run; see Script 98 row above.
+- Cepheid (light curve): ARA = 2.5, |Δφ| = 0.88 (NOT near φ — snap, not engine)
 - Cardiac arrest: ARA = 10⁸ (extreme snap — system has collapsed)
 
 **Needed:** A mathematical derivation of where the boundary lies, not just empirical examples. The boundary should emerge from the framework's own geometry.
@@ -1724,10 +1654,73 @@ The framework's coupling-graph / Information³ closure tools applied to Pythia l
 **Honest framing of this session's LLM work:**
 
 - Closure index (closed-triangles per active component / loose-thread fraction) computed purely from internal activations during 200-step generation. Across the four Pythia sizes tested, the index rank-orders the models in the same order as 5 of 6 standard NLP benchmarks (Spearman ρ = +1.000 on LAMBADA / PIQA / ARC-easy / ARC-challenge / SciQ; ρ = +0.800 on WinoGrande). Average Pearson r vs log(closure) is +0.931. n=4 is small; rank correlation is exact at this n but easy to dismiss until reproduced at larger n with baseline controls.
-- Two structural signatures emerge on the same data: a within/across-layer ratio that peaks at the deepest model (Pythia-410M, 24 layers), and a closure density that peaks at the widest model (Pythia-1B). Framework interprets these as separable axes of hierarchical organisation vs closed-coupling density. The interpretation is consistent with the data but unconfirmed.
-- The size-series spacing is approximately φ² between consecutive Pythia models, which makes the framework's "matched-rung-pair distance" framing fit naturally — but that geometric framing is descriptive, not derived from independent grounds.
-- The LLM application does not break the framework's universality claim. It also does not establish it. The right read is that the framework's metrics produced interesting structure on a new domain, and the next experiments are obvious: bigger Pythia, multiple seeds, baseline comparisons against parameter count / layer count / active-node count.
+- Two structural signatures emerge on the same data: a within/across-layer ratio that peaks at the deepest model (Pythia-410M, 24 layers), and a closure density that peaks at the widest model (Pythia-1B). Framework interprets these as separable axes of hierarchical organisation vs closed-coupling density. The interpretation is consistent with the data but
 
-**Framework principle this session formulated:**
 
-> *Intelligence-as-internal-structure = closed Information³ triangles per active component, divided by loose-thread fraction. The metric is computable without behavioural testing, predicts capability across the Pythia size series, and has a mechanistic story (closed triads force consistency where open dyads allow indeterminacy). Width gives density of closure; depth gives the rungs to organise it on. Both matter.*
+---
+
+## Honest Universal Cascade v2 — current framework champion (20 May 2026)
+
+After re-auditing today's session work for the same kind of feature leakage that hit the May 2 Combined Stack, the current honest framework best at long-horizon ENSO is **UC v2 with global amplitude rescale + compass-gear ticks + Pattern B AR memory**.
+
+### Audit context (20 May 2026)
+
+Two earlier-today claims were inflated by AR-memory bugs that used future-aware indexing:
+- **v2 cascade with leaky AR memory** at h=12 claimed corr +0.593, h=22 corr +0.573. Honest with Pattern A (lag-h lookback): h=12 +0.442, h=22 +0.435. Honest with Pattern B (short-horizon residual cascade): h=12 +0.532, h=22 +0.419.
+- I also re-audited `combined_amplitude_test.py` (the source of the original +0.75 at h=24 claim from May 2). Running it with causal lfilter + causal phase + train-only detrend gave h=24 **corr −0.199** (collapses negative — the +0.75 was entirely the FFT bandpass features knowing the future).
+
+The May 2 ledger correction (T195) reported +0.063 at h=24 for the same audit; my run is harsher but agrees the +0.75 is fake.
+
+### Honest UC v2 results (ENSO blind 2001-2025)
+
+| horizon | UC corr | UC MAE | Persistence corr | Pers MAE | Δcorr vs pers |
+|---|---|---|---|---|---|
+| h=1 mo | +0.936 | 0.261 | +0.950 | 0.207 | −0.014 |
+| h=3 mo | +0.727 | 0.495 | +0.744 | 0.474 | −0.017 |
+| h=6 mo | **+0.516** | 0.599 | +0.341 | 0.744 | **+0.175** |
+| h=12 mo | **+0.532** | 0.675 | −0.082 | 0.928 | **+0.614** |
+| h=22 mo | **+0.419** | 0.792 | −0.224 | 1.027 | **+0.643** |
+
+### Honest comparison to past framework methods
+
+| h | Today's UC (honest) | May 2 strict-causal best (T201/T202) | Past ORIGINAL LEAKY |
+|---|---|---|---|
+| 12 | **+0.532** | +0.05 | +0.86 (LEAKY) |
+| 22/24 | **+0.419** | +0.19 | +0.75 (LEAKY) |
+
+Today's UC beats the previous strict-causal best by **+0.48 at h=12** and **+0.23 at h=22/24** correlation. New honest framework long-horizon champion.
+
+### Comparison to climatology (UNCHANGED conclusion)
+
+- Above operational dynamical models (CFSv2, ECMWF SEAS5) at h≥12
+- Below state-of-the-art ML (Ham 2019 CNN, transformer models)
+- Framework position: mid-tier ENSO forecaster — competitive with operational, behind frontier ML, using only 3 time series (NINO+SOI+PDO)
+
+### What's in the stack
+
+Universal, system-agnostic, all framework-grounded:
+
+1. 5 φ-rungs around system's dominant period (no per-system tuning beyond ARA + dom_P)
+2. ARA-asymmetric tension (sigmoid blend, log/linear based on system's ARA)
+3. 3-way φ²/2φ coupling between adjacent rungs (Three-Circles geometry)
+4. Global amplitude rescale (single scalar, fit train-only)
+5. Compass-gear direction ticks (per-rung Δ regression)
+6. Pattern B AR memory: γ = 1/φ³ × (truth at observable past − prediction made for that past)
+7. All bandpass via causal Butterworth lfilter
+
+### Two procedural rules locked into memory today
+
+Today's audit produced two persistent memory rules to prevent reverting:
+
+1. **CORRELATION > MAE for prediction reporting** (`feedback_correlation_over_mae.md`)
+2. **STRICTLY CAUSAL protocol with 7-point checklist BEFORE reporting results** (`feedback_strict_causal_protocol.md`)
+
+Both indexed at the top of MEMORY.md to load every session.
+
+### Files
+
+- `TheFormula/universal_cascade_v2_honest_patternB.py` — the champion implementation
+- `TheFormula/combined_amplitude_test_honest.py` — the audit script that collapsed the +0.75 claim
+- `TheFormula/cascade_residual_visualizer.html` — the residual diagnostic that motivated today's work
+- `TheFormula/gear_cascade_visualizer.html` — the headline ENSO visualizer (honest v6 data)
+
