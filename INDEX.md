@@ -12,6 +12,8 @@ I'm not a scientist by training. I built this in spare time, with significant he
 
 For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 
+The first ARA state-geometry and transport test is recorded in [`ARA_GEOMETRY_TRANSPORT_RESULT.md`](ARA_GEOMETRY_TRANSPORT_RESULT.md). Short version: the geometry map carries ENSO signal over persistence, especially around 6-24 months, but direct value-transport still loses to a simple causal lag baseline.
+
 ---
 
 ## The framework in 30 seconds
@@ -56,6 +58,7 @@ These are the findings that survived at least one stricter check after an earlie
 | **ECG ↔ ENSO local profile match** | corr +0.695 across 38 orders of φ in time | (prior work, this repo) |
 | **Walker Circulation is fractal across rungs** | SOI mirrors NINO anti-phase from φ⁵ to φ¹¹ with \|corr\| ≥ 0.85 | (memory: dynamic_rung_assignment) |
 | **Lag-h corrector ports cross-domain** | γ ≈ +1/φ. 37% MAE drop at 1-min ECG, 17% at 24-month ENSO | (memory: corrector_cross_domain) |
+| **ARA state geometry maps ENSO subsystem structure** | 2026-05-21 snapshot: NINO/SOI center distance **0.116** in ARA-position space; PDO is about one rung away. Geometry-only transport beats persistence at 3-24 months but does not beat causal lag ridge. | `ARA_GEOMETRY_TRANSPORT_RESULT.md`, `TheFormula/ara_state_geometry_data.js`, `TheFormula/ara_geometry_transport_data.js` |
 | **Closed-system coupling differs from incidental** | SOI as matched-rung pair lifts ENSO; same SOI as feeder does nothing | (memory: closed_system_validated) |
 | **AR feedback constant is 1/φ³** | "One full ARA orbit" of momentum carrying between cycles | (memory: aa_boundary_ar_feedback) |
 | **Mid-horizon dip is consistent across 11 humans** | Recurring but heterogeneous dip structure; possible autonomic intruder wave | `TheFormula/multi_subject_dip_data.js` |

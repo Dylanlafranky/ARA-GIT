@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raw MIT ECG ARA Shape Overlay</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111315;
+      --panel: #181b1f;
+      --line: #2b3036;
+      --text: #eef2f4;
+      --muted: #9ba7ad;
+      --actual: #e8eef2;
+      --pred: #ffbf5b;
+      --pers: #57c7d4;
+      --accent: #7be495;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 24px auto;
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.15;
+      margin: 0 0 6px;
+      letter-spacing: 0;
+      font-weight: 720;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    select {
+      min-width: 240px;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid #343a42;
+      border-radius: 7px;
+      padding: 9px 11px;
+      font: inherit;
+      font-size: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid #252a30;
+      border-radius: 8px;
+      padding: 11px 12px;
+      min-height: 62px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .chart-wrap {
+      position: relative;
+      background: #0e1012;
+      border: 1px solid #252a30;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: min(62vh, 610px);
+      min-height: 420px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 26px;
+      height: 3px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    .actual { color: var(--actual); }
+    .pred { color: var(--pred); }
+    .pers { color: var(--pers); }
+
+    @media (max-width: 760px) {
+      main { width: min(100vw - 20px, 1180px); margin-top: 14px; }
+      header { align-items: stretch; flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      canvas { min-height: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Raw MIT ECG ARA Shape Overlay</h1>
+        <div class="meta" id="meta"></div>
+      </div>
+      <div class="controls">
+        <label for="horizon">Horizon</label>
+        <select id="horizon"></select>
+      </div>
+    </header>
+
+    <section class="stats" aria-label="selected horizon statistics">
+      <div class="stat"><span>ARA shape MAE</span><strong id="maePred">-</strong></div>
+      <div class="stat"><span>Persistence MAE</span><strong id="maePers">-</strong></div>
+      <div class="stat"><span>Shape cycles</span><strong id="cycles">-</strong></div>
+      <div class="stat"><span>Forecast lead</span><strong id="lead">-</strong></div>
+    </section>
+
+    <section class="chart-wrap">
+      <canvas id="chart"></canvas>
+      <div class="legend">
+        <span class="legend-item actual"><span class="swatch"></span>Actual ECG</span>
+        <span class="legend-item pred"><span class="swatch"></span>ARA ACT-shape prediction</span>
+        <span class="legend-item pers"><span class="swatch"></span>Persistence forecast</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="ara_shape_kernel_raw_mit_ecg_viz_data.js"></script>
+  <script>
+    const data = window.ARA_RAW_ECG_VIZ;
+    const select = document.getElementById('horizon');
+    const canvas = document.getElementById('chart');
+    const ctx = canvas.getContext('2d');
+
+    const colors = {
+      actual: getCss('--actual'),
+      pred: getCss('--pred'),
+      pers: getCss('--pers'),
+      grid: getCss('--line'),
+      text: getCss('--muted'),
+      accent: getCss('--accent')
+    };
+
+    function getCss(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function fmt(value, digits = 2) {
+      return Number.isFinite(value) ? value.toFixed(digits) : '-';
+    }
+
+    function init() {
+      const keys = Object.keys(data.horizons);
+      for (const key of keys) {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = data.horizons[key].label;
+        select.appendChild(option);
+      }
+      select.value = keys.includes('500ms') ? '500ms' : keys[0];
+      select.addEventListener('change', render);
+      window.addEventListener('resize', render);
+
+      document.getElementById('meta').textContent =
+        `Record ${data.record}, channel ${data.channel}, ${data.fs.toFixed(0)} Hz. ` +
+        `Window ${data.window.start_s.toFixed(1)}s-${data.window.end_s.toFixed(1)}s. ` +
+        `Estimated beat ${data.heart_period_ms.toFixed(1)} ms. ${data.prediction_type || ''}`;
+      render();
+    }
+
+    function render() {
+      const horizon = data.horizons[select.value];
+      document.getElementById('maePred').textContent = `${fmt(horizon.mae_pred, 1)} ADC`;
+      document.getElementById('maePers').textContent = `${fmt(horizon.mae_persistence, 1)} ADC`;
+      document.getElementById('cycles').textContent = fmt(horizon.shape_cycles_mean, 1);
+      document.getElementById('lead').textContent = `${fmt(horizon.h_ms, 0)} ms`;
+
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const width = rect.width;
+      const height = rect.height;
+      const margin = { left: 58, right: 18, top: 22, bottom: 42 };
+      const plotW = width - margin.left - margin.right;
+      const plotH = height - margin.top - margin.bottom;
+
+      const actual = data.actual_trace.t.map((t, i) => ({ t, y: data.actual_trace.y[i] }));
+      const points = horizon.points;
+      const ys = [
+        ...actual.map(d => d.y),
+        ...points.map(d => d.pred),
+        ...points.map(d => d.persistence)
+      ];
+      const xs = [
+        ...actual.map(d => d.t),
+        ...points.map(d => d.t)
+      ];
+      const xMin = Math.min(...xs);
+      const xMax = Math.max(...xs);
+      const yMinRaw = Math.min(...ys);
+      const yMaxRaw = Math.max(...ys);
+      const yPad = Math.max(20, (yMaxRaw - yMinRaw) * 0.12);
+      const yMin = yMinRaw - yPad;
+      const yMax = yMaxRaw + yPad;
+
+      const sx = t => margin.left + ((t - xMin) / (xMax - xMin)) * plotW;
+      const sy = y => margin.top + (1 - ((y - yMin) / (yMax - yMin))) * plotH;
+
+      ctx.clearRect(0, 0, width, height);
+      drawGrid(width, height, margin, plotW, plotH, xMin, xMax, yMin, yMax, sx, sy);
+      drawLine(actual, sx, sy, colors.actual, 1.55);
+      drawLine(points.map(d => ({ t: d.t, y: d.persistence })), sx, sy, colors.pers, 1.8);
+      drawLine(points.map(d => ({ t: d.t, y: d.pred })), sx, sy, colors.pred, 2.2);
+      drawPoints(points.map(d => ({ t: d.t, y: d.pred })), sx, sy, colors.pred);
+    }
+
+    function drawGrid(width, height, margin, plotW, plotH, xMin, xMax, yMin, yMax, sx, sy) {
+      ctx.save();
+      ctx.strokeStyle = colors.grid;
+      ctx.fillStyle = colors.text;
+      ctx.lineWidth = 1;
+      ctx.font = '12px Inter, system-ui, sans-serif';
+      ctx.textBaseline = 'middle';
+
+      for (let i = 0; i <= 5; i++) {
+        const y = yMin + (i / 5) * (yMax - yMin);
+        const py = sy(y);
+        ctx.globalAlpha = 0.65;
+        line(margin.left, py, margin.left + plotW, py);
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'right';
+        ctx.fillText(y.toFixed(0), margin.left - 10, py);
+      }
+
+      ctx.textBaseline = 'top';
+      for (let i = 0; i <= 6; i++) {
+        const t = xMin + (i / 6) * (xMax - xMin);
+        const px = sx(t);
+        ctx.globalAlpha = 0.55;
+        line(px, margin.top, px, margin.top + plotH);
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'center';
+        ctx.fillText((t - xMin).toFixed(1) + 's', px, margin.top + plotH + 13);
+      }
+
+      ctx.strokeStyle = '#3a4149';
+      ctx.globalAlpha = 1;
+      ctx.strokeRect(margin.left, margin.top, plotW, plotH);
+      ctx.restore();
+    }
+
+    function drawLine(points, sx, sy, color, width) {
+      if (points.length < 2) return;
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(sx(points[0].t), sy(points[0].y));
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(sx(points[i].t), sy(points[i].y));
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawPoints(points, sx, sy, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      for (let i = 0; i < points.length; i += 2) {
+        ctx.beginPath();
+        ctx.arc(sx(points[i].t), sy(points[i].y), 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function line(x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+
+    init();
+  </script>
+</body>
+</html>

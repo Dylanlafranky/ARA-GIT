@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ENSO and Solar ARA Shape Overlay</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111315;
+      --panel: #181b1f;
+      --line: #2d333a;
+      --text: #edf2f4;
+      --muted: #9eabb2;
+      --actual: #e8eef2;
+      --pred: #ffbf5b;
+      --pers: #57c7d4;
+      --accent: #7be495;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(1220px, calc(100vw - 32px));
+      margin: 24px auto;
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      line-height: 1.15;
+      font-weight: 720;
+      letter-spacing: 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 720px;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    select {
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid #343a42;
+      border-radius: 7px;
+      padding: 9px 11px;
+      font: inherit;
+      font-size: 14px;
+    }
+
+    #model { min-width: 260px; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid #252a30;
+      border-radius: 8px;
+      min-height: 62px;
+      padding: 11px 12px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .chart-wrap {
+      background: #0e1012;
+      border: 1px solid #252a30;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: min(62vh, 620px);
+      min-height: 440px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 26px;
+      height: 3px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    .actual { color: var(--actual); }
+    .pred { color: var(--pred); }
+    .pers { color: var(--pers); }
+
+    @media (max-width: 860px) {
+      main { width: min(100vw - 20px, 1220px); margin-top: 14px; }
+      header { align-items: stretch; flex-direction: column; }
+      .controls { justify-content: flex-start; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      canvas { min-height: 370px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>ENSO and Solar ARA Shape Overlay</h1>
+        <div class="meta" id="meta"></div>
+      </div>
+      <div class="controls">
+        <label for="system">System</label>
+        <select id="system"></select>
+        <label for="horizon">Horizon</label>
+        <select id="horizon"></select>
+        <label for="model">Model</label>
+        <select id="model"></select>
+        <label for="scale">Scale</label>
+        <select id="scale">
+          <option value="raw">Native</option>
+          <option value="enso02">ENSO 0-2</option>
+        </select>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat"><span>ARA shape MAE</span><strong id="maePred">-</strong></div>
+      <div class="stat"><span>Persistence MAE</span><strong id="maePers">-</strong></div>
+      <div class="stat"><span>ARA corr</span><strong id="corrPred">-</strong></div>
+      <div class="stat"><span>Persistence corr</span><strong id="corrPers">-</strong></div>
+      <div class="stat"><span>Shape cycles</span><strong id="cycles">-</strong></div>
+    </section>
+
+    <section class="chart-wrap">
+      <canvas id="chart"></canvas>
+      <div class="legend">
+        <span class="legend-item actual"><span class="swatch"></span>Actual series</span>
+        <span class="legend-item pred"><span class="swatch"></span>ARA shape/cosine forecast</span>
+        <span class="legend-item pers"><span class="swatch"></span>Persistence forecast</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="ara_shape_kernel_climate_viz_data.js"></script>
+  <script>
+    const data = window.ARA_SHAPE_CLIMATE_VIZ;
+    const systemSel = document.getElementById('system');
+    const horizonSel = document.getElementById('horizon');
+    const modelSel = document.getElementById('model');
+    const scaleSel = document.getElementById('scale');
+    const canvas = document.getElementById('chart');
+    const ctx = canvas.getContext('2d');
+
+    const colors = {
+      actual: css('--actual'),
+      pred: css('--pred'),
+      pers: css('--pers'),
+      grid: css('--line'),
+      text: css('--muted')
+    };
+
+    function css(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function fmt(v, d = 2) {
+      return Number.isFinite(v) ? v.toFixed(d) : '-';
+    }
+
+    function init() {
+      for (const key of Object.keys(data.systems)) {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = key;
+        systemSel.appendChild(opt);
+      }
+      systemSel.value = 'ENSO';
+      systemSel.addEventListener('change', () => {
+        fillSystemControls();
+        render();
+      });
+      horizonSel.addEventListener('change', render);
+      modelSel.addEventListener('change', render);
+      scaleSel.addEventListener('change', render);
+      window.addEventListener('resize', render);
+      fillSystemControls();
+      render();
+    }
+
+    function fillSystemControls() {
+      const sys = data.systems[systemSel.value];
+      horizonSel.innerHTML = '';
+      for (const h of sys.horizons) {
+        const opt = document.createElement('option');
+        opt.value = String(h);
+        opt.textContent = horizonLabel(h);
+        horizonSel.appendChild(opt);
+      }
+      horizonSel.value = sys.default_horizon;
+
+      modelSel.innerHTML = '';
+      for (const model of sys.models) {
+        const opt = document.createElement('option');
+        opt.value = model;
+        opt.textContent = model;
+        modelSel.appendChild(opt);
+      }
+      modelSel.value = sys.default_model;
+      scaleSel.value = systemSel.value === 'ENSO' ? scaleSel.value : 'raw';
+      scaleSel.disabled = systemSel.value !== 'ENSO';
+    }
+
+    function horizonLabel(h) {
+      const n = Number(h);
+      if (n === 1) return '1 month';
+      if (n < 24) return `${n} months`;
+      const years = n / 12;
+      return Number.isInteger(years) ? `${years} years` : `${n} months`;
+    }
+
+    function selectedScenario() {
+      const sys = data.systems[systemSel.value];
+      return sys.scenarios[`${horizonSel.value}|${modelSel.value}`];
+    }
+
+    function render() {
+      const sys = data.systems[systemSel.value];
+      const scenario = selectedScenario();
+      if (!scenario) return;
+
+      const scale = makeScale(sys);
+      const score = scaledScore(scenario.points, scale);
+      const rawScore = scenario.score;
+      const statDigits = scale.active ? 3 : (systemSel.value === 'Solar' ? 1 : 3);
+      document.getElementById('maePred').textContent = fmt(score.mae_pred, statDigits);
+      document.getElementById('maePers').textContent = fmt(score.mae_persistence, statDigits);
+      document.getElementById('corrPred').textContent = fmt(rawScore.corr_pred, 3);
+      document.getElementById('corrPers').textContent = fmt(rawScore.corr_persistence, 3);
+      document.getElementById('cycles').textContent = fmt(scenario.shape_cycles_mean, 1);
+      document.getElementById('meta').textContent =
+        `${sys.name}: home period ${sys.home_period.toFixed(1)} months, ` +
+        `system ARA ${sys.sys_ara.toFixed(3)} +/- ${sys.sys_ara_std.toFixed(3)}. ` +
+        `${scale.active ? 'ENSO shown on shared 0-2 affine scale. ' : ''}${data.note}`;
+
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.round(rect.width * dpr));
+      canvas.height = Math.max(1, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const width = rect.width;
+      const height = rect.height;
+      const margin = { left: 62, right: 22, top: 22, bottom: 46 };
+      const plotW = width - margin.left - margin.right;
+      const plotH = height - margin.top - margin.bottom;
+
+      const points = scenario.points.map(p => ({
+        ...p,
+        tx: Date.parse(p.date),
+        ox: Date.parse(p.origin_date)
+      }));
+      const minT = Math.min(...points.map(p => p.tx));
+      const maxT = Math.max(...points.map(p => p.tx));
+      const padT = (maxT - minT) * 0.05;
+      const xMin = minT - padT;
+      const xMax = maxT + padT;
+      const actual = sys.series
+        .map(d => ({ tx: Date.parse(d.date), y: scale.y(d.value) }))
+        .filter(d => d.tx >= xMin && d.tx <= xMax);
+
+      const ys = [
+        ...actual.map(d => d.y),
+        ...points.map(d => scale.y(d.actual)),
+        ...points.map(d => scale.y(d.pred)),
+        ...points.map(d => scale.y(d.persistence))
+      ];
+      const yMinRaw = Math.min(...ys);
+      const yMaxRaw = Math.max(...ys);
+      const yPad = Math.max((yMaxRaw - yMinRaw) * 0.12, systemSel.value === 'Solar' ? 8 : 0.08);
+      const yMin = scale.active ? 0 : yMinRaw - yPad;
+      const yMax = scale.active ? 2 : yMaxRaw + yPad;
+
+      const sx = t => margin.left + ((t - xMin) / (xMax - xMin)) * plotW;
+      const sy = y => margin.top + (1 - ((y - yMin) / (yMax - yMin))) * plotH;
+
+      ctx.clearRect(0, 0, width, height);
+      drawGrid(width, height, margin, plotW, plotH, xMin, xMax, yMin, yMax, sx, sy);
+      drawLine(actual, d => sx(d.tx), d => sy(d.y), colors.actual, 1.45);
+      drawLine(points, d => sx(d.tx), d => sy(scale.y(d.persistence)), colors.pers, 1.9);
+      drawLine(points, d => sx(d.tx), d => sy(scale.y(d.pred)), colors.pred, 2.2);
+      drawPoints(points, d => sx(d.tx), d => sy(scale.y(d.pred)), colors.pred);
+    }
+
+    function makeScale(sys) {
+      const useEns02 = systemSel.value === 'ENSO' && scaleSel.value === 'enso02';
+      if (!useEns02) return { active: false, y: v => v };
+      const values = sys.series.map(d => d.value);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const span = max - min || 1;
+      return {
+        active: true,
+        y: v => 2 * ((v - min) / span)
+      };
+    }
+
+    function scaledScore(points, scale) {
+      const pred = points.map(p => scale.y(p.pred));
+      const pers = points.map(p => scale.y(p.persistence));
+      const truth = points.map(p => scale.y(p.actual));
+      return {
+        mae_pred: meanAbsDiff(pred, truth),
+        mae_persistence: meanAbsDiff(pers, truth)
+      };
+    }
+
+    function meanAbsDiff(a, b) {
+      if (!a.length) return NaN;
+      let total = 0;
+      for (let i = 0; i < a.length; i++) total += Math.abs(a[i] - b[i]);
+      return total / a.length;
+    }
+
+    function drawGrid(width, height, margin, plotW, plotH, xMin, xMax, yMin, yMax, sx, sy) {
+      ctx.save();
+      ctx.strokeStyle = colors.grid;
+      ctx.fillStyle = colors.text;
+      ctx.lineWidth = 1;
+      ctx.font = '12px Inter, system-ui, sans-serif';
+      ctx.textBaseline = 'middle';
+
+      for (let i = 0; i <= 5; i++) {
+        const y = yMin + (i / 5) * (yMax - yMin);
+        const py = sy(y);
+        ctx.globalAlpha = 0.65;
+        line(margin.left, py, margin.left + plotW, py);
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'right';
+        ctx.fillText(y.toFixed(systemSel.value === 'Solar' ? 0 : 1), margin.left - 10, py);
+      }
+
+      ctx.textBaseline = 'top';
+      for (let i = 0; i <= 6; i++) {
+        const t = xMin + (i / 6) * (xMax - xMin);
+        const px = sx(t);
+        ctx.globalAlpha = 0.55;
+        line(px, margin.top, px, margin.top + plotH);
+        ctx.globalAlpha = 1;
+        ctx.textAlign = 'center';
+        ctx.fillText(formatDate(t), px, margin.top + plotH + 13);
+      }
+
+      ctx.strokeStyle = '#3a4149';
+      ctx.globalAlpha = 1;
+      ctx.strokeRect(margin.left, margin.top, plotW, plotH);
+      ctx.restore();
+    }
+
+    function formatDate(ms) {
+      const d = new Date(ms);
+      return `${d.getUTCFullYear()}`;
+    }
+
+    function drawLine(points, xFn, yFn, color, width) {
+      if (points.length < 2) return;
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(xFn(points[0]), yFn(points[0]));
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(xFn(points[i]), yFn(points[i]));
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawPoints(points, xFn, yFn, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      for (const p of points) {
+        ctx.beginPath();
+        ctx.arc(xFn(p), yFn(p), 2.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+
+    function line(x1, y1, x2, y2) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+    }
+
+    init();
+  </script>
+</body>
+</html>

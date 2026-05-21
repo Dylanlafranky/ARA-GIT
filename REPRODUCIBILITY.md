@@ -61,3 +61,23 @@ The repo would be much stronger with one command that:
 6. Separates descriptive classification, tracking, and blind forecasting.
 
 Until that exists, please treat the repository as an inspectable research record rather than a turnkey benchmark package.
+
+## Recent Runnable Geometry Tests
+
+The 2026-05-21 ARA state-geometry and ENSO transport tests were run locally with the scientific Python stack available and repo-local data already present.
+
+Useful entry points:
+
+```bash
+python TheFormula/ara_state_geometry.py
+python TheFormula/ara_geometry_transport_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_state_geometry_data.js`
+- `TheFormula/ara_state_geometry_viz.html`
+- `TheFormula/ara_geometry_transport_data.js`
+- `ARA_GEOMETRY_TRANSPORT_RESULT.md`
+
+Important interpretation guard: `ara_state_geometry.py` is a state-map extractor, not a forecast test. `ara_geometry_transport_test.py` is strict-causal for ENSO: at origin `t`, ridge training uses only anchors `s` where `s + horizon < t`. The result shows geometry-only lift over persistence at several horizons, but causal lag ridge remains stronger.

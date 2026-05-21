@@ -1724,3 +1724,33 @@ Both indexed at the top of MEMORY.md to load every session.
 - `TheFormula/cascade_residual_visualizer.html` — the residual diagnostic that motivated today's work
 - `TheFormula/gear_cascade_visualizer.html` — the headline ENSO visualizer (honest v6 data)
 
+
+---
+
+## ⚠️ Same-day correction (20 May 2026 PM) — sosfiltfilt leakage in "honest" cascade
+
+After locking in the strict-causal protocol memory this morning, the very next test variant I built (`universal_cascade_v2_honest_patternB.py`) was found to use `scipy.signal.sosfiltfilt` — which applies the filter twice (forward + backward) and is NOT causal. The "honest UC v2 champion" numbers claimed earlier today (h=12 corr +0.532, h=22 +0.419) were inflated by this leak.
+
+**Truly-causal lfilter results (`universal_cascade_v2_half_phi.py`):**
+
+| h | UC (no AR) | UC + half-system AR (h_ar=24) | UC + half-per-rung AR | Persistence |
+|---|---|---|---|---|
+| 1 | +0.945 / 0.218 | +0.929 / 0.299 | +0.945 / 0.264 | +0.950 / 0.207 |
+| 3 | +0.693 / 0.561 | +0.703 / 0.625 | +0.711 / 0.609 | +0.744 / 0.474 |
+| 6 | +0.363 / 1.054 | +0.365 / 1.137 | +0.366 / 1.123 | +0.341 / 0.744 |
+| 12 | **+0.035 / 1.413** | +0.016 / 1.532 | +0.008 / 1.502 | −0.082 / 0.928 |
+| 22 | **+0.080 / 1.981** | +0.060 / 2.114 | +0.053 / 2.091 | −0.224 / 1.027 |
+
+**Audit chain on the same long-horizon claim, all corrections downward:**
+
+| Date | h=22/24 corr | Source of leak |
+|---|---|---|
+| Original Combined Stack | +0.75 | FFT bandpass + Hilbert + full-signal detrend |
+| 2 May 2026 (T195/T201) | +0.19 | (clean lfilter) — different stack |
+| 20 May 2026 AM (my "honest" Pattern B) | +0.42 | sosfiltfilt — non-causal |
+| **20 May 2026 PM (truly causal lfilter)** | **+0.08** | None found |
+
+The framework cascade still beats persistence on correlation at long horizons (h=12 Δcorr +0.117, h=22 Δcorr +0.304), but the lift is modest. Half-rotation AR memory (Dylan's request) is correctly causal but doesn't extract signal beyond what causal lfilter bandpass already captures.
+
+**Procedural lesson:** the strict-causal protocol memory works only if Step 1 of the checklist ("is `bandpass` causal? `filtfilt`/`sosfiltfilt` are NOT") is literally run. I missed it on my own next script. The bigger correction (+0.42 → +0.08) came from the protocol catching its own miss the same day.
+

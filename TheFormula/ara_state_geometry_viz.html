@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA State Geometry</title>
+  <script src="ara_state_geometry_data.js"></script>
+  <style>
+    :root {
+      --bg: #f6f7f8;
+      --ink: #14171a;
+      --muted: #626a73;
+      --line: #d7dbe0;
+      --panel: #ffffff;
+      --release: #d95f43;
+      --accumulate: #197b7a;
+      --neutral: #7c6bb0;
+      --strong: #2c2f33;
+      --axis: #8d959f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 14px/1.45 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    select {
+      appearance: none;
+      min-width: 150px;
+      height: 34px;
+      padding: 0 34px 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      background:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%) right 13px top 14px / 6px 6px no-repeat,
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%) right 7px top 14px / 6px 6px no-repeat,
+        var(--panel);
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(360px, .7fr);
+      gap: 18px;
+      padding: 18px 24px 28px;
+    }
+
+    section {
+      min-width: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    #map {
+      display: block;
+      width: 100%;
+      height: min(62vh, 620px);
+      min-height: 360px;
+      background: #fbfcfc;
+    }
+
+    .legend {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      display: inline-block;
+      margin-right: 6px;
+      vertical-align: -1px;
+    }
+
+    .release { background: var(--release); }
+    .accumulate { background: var(--accumulate); }
+    .neutral { background: var(--neutral); }
+
+    .side {
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 700;
+      background: #fafafa;
+    }
+
+    td.num,
+    th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .notes {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .notes p {
+      margin: 0 0 8px;
+    }
+
+    .notes p:last-child {
+      margin-bottom: 0;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #eef0f2;
+      color: var(--strong);
+      font-size: 11px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .axis-label,
+    .row-label,
+    .rung-label {
+      fill: var(--muted);
+      font-size: 12px;
+    }
+
+    .row-label {
+      font-weight: 700;
+      fill: var(--strong);
+    }
+
+    .grid-line {
+      stroke: #e2e5e8;
+      stroke-width: 1;
+    }
+
+    .axis-line {
+      stroke: var(--axis);
+      stroke-width: 1.2;
+    }
+
+    .coupling-line {
+      fill: none;
+      stroke: var(--neutral);
+      stroke-linecap: round;
+      opacity: .42;
+    }
+
+    .rung-dot {
+      stroke: #fff;
+      stroke-width: 1.5;
+      cursor: default;
+    }
+
+    .home-line {
+      stroke: var(--strong);
+      stroke-width: 1.5;
+      stroke-dasharray: 5 5;
+      opacity: .45;
+    }
+
+    @media (max-width: 980px) {
+      header {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ARA State Geometry</h1>
+    <div class="controls">
+      <label for="systemSelect">System</label>
+      <select id="systemSelect"></select>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="section-head">
+        <h2 id="mapTitle">State Map</h2>
+        <div class="meta" id="mapMeta"></div>
+      </div>
+      <svg id="map" role="img" aria-label="ARA rung state map"></svg>
+      <div class="legend">
+        <span><i class="swatch release"></i>release</span>
+        <span><i class="swatch accumulate"></i>accumulate</span>
+        <span><i class="swatch neutral"></i>coupling candidate</span>
+      </div>
+    </section>
+
+    <div class="side">
+      <section>
+        <div class="section-head">
+          <h2>Top Rungs</h2>
+          <div class="meta">by occupancy</div>
+        </div>
+        <table id="rungTable"></table>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Distances</h2>
+          <div class="meta">centers</div>
+        </div>
+        <table id="distanceTable"></table>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Couplings</h2>
+          <div class="meta">strongest candidates</div>
+        </div>
+        <table id="couplingTable"></table>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>Notes</h2>
+          <div class="meta" id="dateMeta"></div>
+        </div>
+        <div class="notes" id="notes"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const DATA = window.ARA_STATE_GEOMETRY;
+    const systems = DATA.systems;
+    const select = document.getElementById('systemSelect');
+
+    function fmt(value, digits = 3) {
+      if (value === null || value === undefined || Number.isNaN(Number(value))) return '-';
+      return Number(value).toFixed(digits);
+    }
+
+    function esc(value) {
+      return String(value ?? '').replace(/[&<>"']/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[c]));
+    }
+
+    function stateColor(state) {
+      if (state === 'release') return getComputedStyle(document.documentElement).getPropertyValue('--release').trim();
+      if (state === 'accumulate') return getComputedStyle(document.documentElement).getPropertyValue('--accumulate').trim();
+      return getComputedStyle(document.documentElement).getPropertyValue('--neutral').trim();
+    }
+
+    function allRungs(system) {
+      return system.subsystems.flatMap(sub => sub.rungs.map(r => ({ ...r, subsystem: sub.name })));
+    }
+
+    function drawMap(system) {
+      const svg = document.getElementById('map');
+      const width = svg.clientWidth || 900;
+      const height = svg.clientHeight || 480;
+      svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+      svg.innerHTML = '';
+
+      const margin = { left: 92, right: 32, top: 36, bottom: 42 };
+      const rungs = allRungs(system);
+      if (!rungs.length) return;
+
+      const minPos = Math.min(...rungs.map(r => Number(r.position))) - 0.55;
+      const maxPos = Math.max(...rungs.map(r => Number(r.position))) + 0.55;
+      const span = Math.max(1e-6, maxPos - minPos);
+      const x = pos => margin.left + ((Number(pos) - minPos) / span) * (width - margin.left - margin.right);
+      const rowGap = (height - margin.top - margin.bottom) / Math.max(1, system.subsystems.length);
+      const yFor = index => margin.top + rowGap * (index + 0.5);
+
+      const add = (tag, attrs, parent = svg) => {
+        const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+        parent.appendChild(el);
+        return el;
+      };
+
+      const tickStart = Math.floor(minPos);
+      const tickEnd = Math.ceil(maxPos);
+      for (let t = tickStart; t <= tickEnd; t += 1) {
+        const tx = x(t);
+        add('line', { x1: tx, y1: margin.top - 12, x2: tx, y2: height - margin.bottom + 6, class: 'grid-line' });
+        add('text', { x: tx, y: height - 18, class: 'axis-label', 'text-anchor': 'middle' }).textContent = t;
+      }
+      add('line', { x1: margin.left, y1: height - margin.bottom, x2: width - margin.right, y2: height - margin.bottom, class: 'axis-line' });
+      add('text', { x: width - margin.right, y: height - 8, class: 'axis-label', 'text-anchor': 'end' }).textContent = 'position = coordinate + ARA/2';
+
+      const rowByName = new Map();
+      system.subsystems.forEach((sub, i) => {
+        const y = yFor(i);
+        rowByName.set(sub.name, y);
+        add('line', { x1: margin.left, y1: y, x2: width - margin.right, y2: y, class: 'axis-line', opacity: .28 });
+        add('text', { x: 16, y: y + 4, class: 'row-label' }).textContent = sub.name;
+        const homeX = x(sub.home_position);
+        add('line', { x1: homeX, y1: y - rowGap * .32, x2: homeX, y2: y + rowGap * .32, class: 'home-line' });
+      });
+
+      const rungByKey = new Map();
+      system.subsystems.forEach(sub => {
+        sub.rungs.forEach(r => {
+          rungByKey.set(`${sub.name}:${r.label}`, { ...r, y: rowByName.get(sub.name), x: x(r.position) });
+        });
+      });
+
+      (system.cross_subsystem_couplings || []).slice(0, 10).forEach(c => {
+        const left = rungByKey.get(`${c.left_subsystem}:${c.left_rung}`);
+        const right = rungByKey.get(`${c.right_subsystem}:${c.right_rung}`);
+        if (!left || !right) return;
+        const sw = 1 + Math.max(0, Number(c.path_score || 0)) * 12;
+        const midY = (left.y + right.y) / 2;
+        add('path', {
+          d: `M ${left.x} ${left.y} C ${left.x} ${midY}, ${right.x} ${midY}, ${right.x} ${right.y}`,
+          class: 'coupling-line',
+          'stroke-width': Math.min(8, sw)
+        });
+      });
+
+      system.subsystems.forEach(sub => {
+        sub.rungs.forEach(r => {
+          const cx = x(r.position);
+          const cy = rowByName.get(sub.name);
+          const rad = 4 + Math.sqrt(Math.max(0, Number(r.occupancy || 0))) * 20;
+          const dot = add('circle', {
+            cx,
+            cy,
+            r: Math.max(4, Math.min(22, rad)),
+            fill: stateColor(r.state),
+            class: 'rung-dot',
+            opacity: .88
+          });
+          dot.appendChild(add('title', {}));
+          dot.querySelector('title').textContent = `${sub.name} ${r.label}\nperiod ${fmt(r.period, 2)}\nARA ${fmt(r.ara)}\nposition ${fmt(r.position)}\noccupancy ${fmt(r.occupancy)}`;
+          if (Number(r.occupancy || 0) > 0.12) {
+            add('text', { x: cx, y: cy - Math.max(12, rad + 5), class: 'rung-label', 'text-anchor': 'middle' }).textContent = r.label;
+          }
+        });
+      });
+    }
+
+    function table(el, headers, rows) {
+      el.innerHTML = [
+        `<thead><tr>${headers.map(h => `<th class="${h.num ? 'num' : ''}">${esc(h.label)}</th>`).join('')}</tr></thead>`,
+        `<tbody>${rows.map(row => `<tr>${headers.map(h => `<td class="${h.num ? 'num' : ''}">${row[h.key] ?? '-'}</td>`).join('')}</tr>`).join('')}</tbody>`
+      ].join('');
+    }
+
+    function renderTables(system) {
+      const rungRows = [];
+      system.subsystems.forEach(sub => {
+        sub.top_rungs.forEach(r => {
+          rungRows.push({
+            subsystem: esc(sub.name),
+            rung: esc(r.label),
+            period: fmt(r.period, 2),
+            ara: fmt(r.ara),
+            pos: fmt(r.position),
+            occ: fmt(r.occupancy),
+            state: `<span class="pill">${esc(r.state)}</span>`
+          });
+        });
+      });
+      table(document.getElementById('rungTable'), [
+        { key: 'subsystem', label: 'Sub' },
+        { key: 'rung', label: 'Rung' },
+        { key: 'period', label: 'P', num: true },
+        { key: 'ara', label: 'ARA', num: true },
+        { key: 'pos', label: 'Pos', num: true },
+        { key: 'occ', label: 'Occ', num: true },
+        { key: 'state', label: 'State' }
+      ], rungRows);
+
+      table(document.getElementById('distanceTable'), [
+        { key: 'pair', label: 'Pair' },
+        { key: 'distance', label: 'Distance', num: true },
+        { key: 'ara', label: 'ARA Gap', num: true },
+        { key: 'phase', label: 'Phase Gap', num: true }
+      ], (system.subsystem_distances || []).map(d => ({
+        pair: `${esc(d.left)} <-> ${esc(d.right)}`,
+        distance: fmt(d.center_distance),
+        ara: fmt(d.center_ara_gap),
+        phase: fmt(d.center_phase_gap)
+      })));
+
+      table(document.getElementById('couplingTable'), [
+        { key: 'pair', label: 'Candidate' },
+        { key: 'kind', label: 'Kind' },
+        { key: 'score', label: 'Score', num: true },
+        { key: 'dist', label: 'Dist', num: true },
+        { key: 'phase', label: 'Align', num: true }
+      ], (system.cross_subsystem_couplings || []).slice(0, 8).map(c => ({
+        pair: `${esc(c.left_subsystem)} ${esc(c.left_rung)} <-> ${esc(c.right_subsystem)} ${esc(c.right_rung)}`,
+        kind: `<span class="pill">${esc(c.kind.replaceAll('_', ' '))}</span>`,
+        score: fmt(c.path_score, 4),
+        dist: fmt(c.distance),
+        phase: fmt(c.phase_alignment)
+      })));
+    }
+
+    function render(systemName) {
+      const system = systems[systemName];
+      const measurement = system.measurement;
+      document.getElementById('mapTitle').textContent = `${system.name} State Map`;
+      document.getElementById('mapMeta').textContent = `base ${measurement.substrate_base ?? '-'} | ${measurement.anchor_date ?? measurement.anchor_seconds ?? '-'}`;
+      document.getElementById('dateMeta').textContent = DATA.date;
+      document.getElementById('notes').innerHTML = [
+        `<p>${esc(system.family)}</p>`,
+        ...(system.notes || []).map(n => `<p>${esc(n)}</p>`),
+        `<p>${esc(DATA.strict_causal_note)}</p>`
+      ].join('');
+      drawMap(system);
+      renderTables(system);
+    }
+
+    Object.keys(systems).forEach(name => {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      select.appendChild(opt);
+    });
+    select.addEventListener('change', () => render(select.value));
+    window.addEventListener('resize', () => render(select.value));
+    render(Object.keys(systems)[0]);
+  </script>
+</body>
+</html>
