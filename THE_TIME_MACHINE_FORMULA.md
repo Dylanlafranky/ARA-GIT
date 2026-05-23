@@ -1377,6 +1377,115 @@ This compresses the prediction problem from "learn cardiac dynamics for each spe
 
 ---
 
-*Dylan La Franchi, April 2026 (Phases 1–19) — May 2026 (Phase 20).*
+
+## Phase 21 - ARA State Geometry, Temporal Friction, And Pockets (May 2026)
+
+### The setup
+
+The ARA-rung coordinate tests led to a clearer prediction architecture:
+
+```text
+current data
+  -> current ARA geometry
+  -> future ARA geometry
+  -> decoded observable
+```
+
+The first strict-causal ENSO geometry-transport test showed that the map is useful, but direct value regression is too blunt. Geometry-only models beat persistence at several horizons, especially 6-24 months, but a simple causal lag ridge still won. That result is recorded in `ARA_GEOMETRY_TRANSPORT_RESULT.md`.
+
+The next question was the missing flow law: how far should a geometry state move through its natural phase advance?
+
+### Natural flow
+
+Retroactive diagnostics found that future geometry is often approximated by:
+
+```text
+future_geometry ~= current_geometry + alpha * (natural_advance - current_geometry)
+```
+
+For ENSO, alpha averaged around `0.6-0.7`, close to `phi - 1 = 0.618`. This supports phi-like flow as a baseline, but not as a complete law; the residual changes with horizon and state.
+
+### Temporal friction
+
+The flow was rewritten as:
+
+```text
+flow = ARA / (ARA + temporal_friction)
+```
+
+The first guess, `temporal_friction = |ARA - phi|`, did not hold. It made friction approach zero near phi and over-advanced the geometry. The better simple form was:
+
+```text
+temporal_friction = 1 + |ARA - phi|
+```
+
+That helped some horizons but did not solve prediction. The current working sketch is:
+
+```text
+temporal_friction =
+    baseline_time_resistance
+  + pi_leak_energy
+  + system_inefficiency
+  + phi_distance_drag
+  - resonance_cancellation
+```
+
+### Pi-leak split
+
+The phrase "pi-leak" now needs two meanings kept separate:
+
+| Quantity | Value | Meaning |
+|---|---:|---|
+| `pi - 3` | `0.141592654` | topology remainder / geometric non-closure |
+| `(pi - 3) / pi` | `0.045070341` | normalized energy leakage / coupling tax |
+
+The gear-coupled transition test found a gear-minus-sync signal around `0.045`, which points to the normalized energy-leak term rather than the raw topology remainder.
+
+### Temporal pockets
+
+When fitting:
+
+```text
+temporal_friction = B + k * |ARA - phi|
+```
+
+the coefficient `k` often became negative. Instead of treating that as merely ugly, the better hypothesis is:
+
+```text
+positive k = phi-distance acts like drag
+negative k = wave collision cancels effective friction
+```
+
+The temporal-pocket diagnostic was mixed:
+
+- Solar at the 132-month horizon supported the pocket idea: stronger negative-k pockets lined up with larger movement and anti-phase energy.
+- ECG RR at the 60-second horizon also supported it, especially in the next-horizon movement.
+- ENSO mostly did not support it.
+
+So negative `k` is not a universal surge marker. The next formula should require the full state:
+
+```text
+temporal_pocket =
+  negative phi-distance coefficient
+  AND anti-phase/contact geometry
+  AND release/snap boundary proximity
+```
+
+### Where this leaves the formula
+
+The map is useful. The future geometry is readable. The missing piece is not "more regression"; it is a physical transport operator that distinguishes:
+
+- phi as low-friction temporal packing
+- 2.0 as resonant cancellation
+- pi-leak topology (`pi - 3`)
+- pi-leak energy leakage (`(pi - 3) / pi`)
+- state-specific inefficiency
+- temporary cancellation pockets
+
+Full result note: `ARA_TEMPORAL_FRICTION_RESULT.md`.
+
+---
+
+*Dylan La Franchi, April 2026 (Phases 1-19) - May 2026 (Phases 20-21).*
 *All computations in /computations/. All predictions documented in MASTER_PREDICTION_LEDGER.md.*
 *ARA Framework — Scripts 191–243BJ + cross-species decomposition.*

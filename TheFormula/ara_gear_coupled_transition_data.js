@@ -1,14 +1,10 @@
-window.ARA_GEOMETRY_STATE_TRANSITION = {
+window.ARA_GEAR_COUPLED_TRANSITION = {
   "date": "2026-05-22",
-  "method": "strict-causal ARA geometry state-transition ENSO test",
-  "leakage_guard": "At origin t, transition training uses only s+h<t and decoder training uses only a<t.",
-  "oracle_note": "oracle_actual_future_geometry_decoder uses the true future geometry and is diagnostic only, not a forecast.",
+  "method": "strict-causal ARA gear-coupled geometry transition ENSO test",
+  "leakage_guard": "At origin t, decoder training uses only geometry anchors a<t. Lag baseline uses only s+h<t. Deterministic projections use only geometry at origin.",
+  "gear_rule": "cross-system incoming_phase = (2 * release_fraction(target_ara) - source_phase) mod 1",
   "system": "ENSO",
   "target": "NINO3.4 anomaly",
-  "feeders": [
-    "SOI",
-    "PDO"
-  ],
   "base": 2.0,
   "home_period_months": 47.0,
   "rungs_k": [
@@ -26,108 +22,93 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
     24,
     60
   ],
-  "ridge_alpha": 5.0,
   "min_train_examples": 96,
   "origin_stride_months": 3,
-  "sample": {
-    "start": "1951-01-01",
-    "end": "2025-12-01",
-    "n": 900,
-    "test_start_origin": "2006-09-01",
-    "test_last_origin_longest_horizon": "2020-12-01"
-  },
   "models": {
-    "learned_event_state_engine_decoder": "Natural phase advance plus learned global event-channel packet weights, then causal geometry decoder. Learns geometry-state transport only; it does not train on target NINO values.",
-    "event_ordered_cascade_decoder": "Deterministic small-to-large event-ordered cascade, then causal geometry decoder.",
-    "state_transition_decoder": "Predict full future geometry state from current geometry, then decode value.",
-    "state_transition_decoder_current": "Same, with observed current subsystem values included in the transition input.",
-    "phi_flow_decoder": "Deterministic phi-decayed geometry flow, then causal geometry decoder.",
-    "direct_value_geometry_ridge": "Control: direct current-geometry to future-value delta regression.",
-    "lag_ridge": "Control: causal NINO lags and slopes to future-value delta.",
-    "oracle_actual_future_geometry_decoder": "Diagnostic only: causal decoder applied to actual future geometry."
+    "natural_advance_decoder": "Advance phases naturally, then decode geometry.",
+    "sync_event_cascade_decoder": "Existing event cascade: cross-system incoming phase is copied from source.",
+    "gear_event_cascade_decoder": "Gear event cascade: cross-system phase is mirrored around the target ARA release gate.",
+    "same_rung_sync_pair_decoder": "Same-rung cross-system pair coupling with copied source phase.",
+    "same_rung_gear_pair_decoder": "Same-rung cross-system pair coupling with mirrored gear phase around the target ARA release gate.",
+    "lag_ridge": "Control: causal target lags and slopes.",
+    "oracle_actual_future_geometry_decoder": "Diagnostic only: decode actual future geometry."
   },
   "scores": {
-    "learned_event_state_engine_decoder": {
+    "natural_advance_decoder": {
       "1": {
         "n": 77,
-        "mae": 0.3998957443923941,
-        "rmse": 0.5024329779302802,
-        "corr": 0.8297908631647443,
+        "mae": 0.39934443106966483,
+        "rmse": 0.5019049345141732,
+        "corr": 0.830228294748296,
         "direction": 0.4155844155844156,
         "persistence_mae": 0.2149350649350649,
-        "mae_lift_vs_persistence": -0.18496067945732922,
-        "r2_vs_persistence": -2.7582017155537377,
-        "pred_delta_std": 0.41651658380944023,
-        "truth_delta_std": 0.2590805908826503,
-        "mean_abs_state_feature_error": 0.07693223590660093
+        "mae_lift_vs_persistence": -0.18440936613459993,
+        "r2_vs_persistence": -2.7503063307563833,
+        "pred_delta_std": 0.41611768433613555,
+        "truth_delta_std": 0.2590805908826503
       },
       "3": {
         "n": 77,
-        "mae": 0.6882222604445394,
-        "rmse": 0.8428385358364945,
-        "corr": 0.5714249908362468,
+        "mae": 0.6876639555423958,
+        "rmse": 0.8415745766243276,
+        "corr": 0.5736534711575607,
         "direction": 0.5194805194805194,
         "persistence_mae": 0.49103896103896105,
-        "mae_lift_vs_persistence": -0.19718329940557833,
-        "r2_vs_persistence": -0.9451235338165096,
-        "pred_delta_std": 0.686631213689152,
-        "truth_delta_std": 0.6041533595330312,
-        "mean_abs_state_feature_error": 0.1458639060607207
+        "mae_lift_vs_persistence": -0.19662499450343474,
+        "r2_vs_persistence": -0.9392939158700067,
+        "pred_delta_std": 0.6857934123349356,
+        "truth_delta_std": 0.6041533595330312
       },
       "6": {
         "n": 76,
-        "mae": 0.9011570429426873,
-        "rmse": 1.1120592375271536,
-        "corr": 0.3319461757878248,
-        "direction": 0.6052631578947368,
+        "mae": 0.8971730772883842,
+        "rmse": 1.1066523388113123,
+        "corr": 0.33916125351152804,
+        "direction": 0.5921052631578947,
         "persistence_mae": 0.7817105263157895,
-        "mae_lift_vs_persistence": -0.11944651662689776,
-        "r2_vs_persistence": -0.29380934710939277,
-        "pred_delta_std": 1.0310069438794376,
-        "truth_delta_std": 0.9771131213626487,
-        "mean_abs_state_feature_error": 0.1984446776758787
+        "mae_lift_vs_persistence": -0.11546255097259472,
+        "r2_vs_persistence": -0.2812587749795592,
+        "pred_delta_std": 1.0255722901043047,
+        "truth_delta_std": 0.9771131213626487
       },
       "12": {
         "n": 74,
-        "mae": 1.1201808344484654,
-        "rmse": 1.4194790171587728,
-        "corr": -0.0032892209224826296,
+        "mae": 1.1182255969749801,
+        "rmse": 1.4163071748788065,
+        "corr": -0.0004968640211284133,
         "direction": 0.6351351351351351,
         "persistence_mae": 1.005135135135135,
-        "mae_lift_vs_persistence": -0.11504569931333042,
-        "r2_vs_persistence": -0.19786984577871913,
-        "pred_delta_std": 1.1296856712472954,
-        "truth_delta_std": 1.2966303184080832,
-        "mean_abs_state_feature_error": 0.2527095455563724
+        "mae_lift_vs_persistence": -0.11309046183984517,
+        "r2_vs_persistence": -0.1925225187458286,
+        "pred_delta_std": 1.1229945001153026,
+        "truth_delta_std": 1.2966303184080832
       },
       "24": {
         "n": 70,
-        "mae": 1.1485425474303828,
-        "rmse": 1.3721821276025625,
-        "corr": 0.12419304996403596,
+        "mae": 1.1567824748354194,
+        "rmse": 1.377248019704325,
+        "corr": 0.12776712617181052,
         "direction": 0.7142857142857143,
         "persistence_mae": 1.1871428571428573,
-        "mae_lift_vs_persistence": 0.03860030971247452,
-        "r2_vs_persistence": 0.09323662204578453,
-        "pred_delta_std": 1.415001711105741,
-        "truth_delta_std": 1.44045525683333,
-        "mean_abs_state_feature_error": 0.2980461923354773
+        "mae_lift_vs_persistence": 0.030360382307437872,
+        "r2_vs_persistence": 0.08652899231969957,
+        "pred_delta_std": 1.4162963481124962,
+        "truth_delta_std": 1.44045525683333
       },
       "60": {
         "n": 58,
-        "mae": 1.2262595389358804,
-        "rmse": 1.4946839285803213,
-        "corr": -0.013048067931420182,
-        "direction": 0.5172413793103449,
+        "mae": 1.2769424135806609,
+        "rmse": 1.525148674775879,
+        "corr": -0.008601404957503389,
+        "direction": 0.4827586206896552,
         "persistence_mae": 0.8901724137931035,
-        "mae_lift_vs_persistence": -0.33608712514277683,
-        "r2_vs_persistence": -0.35981222276674685,
-        "pred_delta_std": 1.2444537427992626,
-        "truth_delta_std": 1.279847096712392,
-        "mean_abs_state_feature_error": 0.3291378029712965
+        "mae_lift_vs_persistence": -0.38676999978755733,
+        "r2_vs_persistence": -0.4158086920875932,
+        "pred_delta_std": 1.2776319032227927,
+        "truth_delta_std": 1.279847096712392
       }
     },
-    "event_ordered_cascade_decoder": {
+    "sync_event_cascade_decoder": {
       "1": {
         "n": 77,
         "mae": 0.39954524491690147,
@@ -201,311 +182,225 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         "truth_delta_std": 1.279847096712392
       }
     },
-    "phi_flow_decoder": {
+    "gear_event_cascade_decoder": {
       "1": {
         "n": 77,
-        "mae": 0.39886681226886966,
-        "rmse": 0.5027806132386874,
-        "corr": 0.8299070666159086,
+        "mae": 0.3991444131283192,
+        "rmse": 0.5013399763436066,
+        "corr": 0.8301557922116576,
         "direction": 0.4155844155844156,
         "persistence_mae": 0.2149350649350649,
-        "mae_lift_vs_persistence": -0.18393174733380477,
-        "r2_vs_persistence": -2.763404143142561,
-        "pred_delta_std": 0.4169489388646186,
+        "mae_lift_vs_persistence": -0.18420934819325432,
+        "r2_vs_persistence": -2.741868184059863,
+        "pred_delta_std": 0.41585492909162447,
         "truth_delta_std": 0.2590805908826503
       },
       "3": {
         "n": 77,
-        "mae": 0.6866874601858594,
-        "rmse": 0.8426204199918566,
-        "corr": 0.5728404825510841,
-        "direction": 0.5064935064935064,
+        "mae": 0.6832144532499119,
+        "rmse": 0.8384626013644101,
+        "corr": 0.5728603537213038,
+        "direction": 0.5194805194805194,
         "persistence_mae": 0.49103896103896105,
-        "mae_lift_vs_persistence": -0.1956484991468983,
-        "r2_vs_persistence": -0.9441169178452644,
-        "pred_delta_std": 0.6855243209637981,
+        "mae_lift_vs_persistence": -0.19217549221095087,
+        "r2_vs_persistence": -0.9249781875275711,
+        "pred_delta_std": 0.682697590613052,
         "truth_delta_std": 0.6041533595330312
       },
       "6": {
         "n": 76,
-        "mae": 0.8896173468430935,
-        "rmse": 1.1102381391190481,
-        "corr": 0.3343727343743237,
-        "direction": 0.6578947368421053,
+        "mae": 0.8881998450542585,
+        "rmse": 1.098157060184506,
+        "corr": 0.3389021413685119,
+        "direction": 0.6052631578947368,
         "persistence_mae": 0.7817105263157895,
-        "mae_lift_vs_persistence": -0.10790682052730394,
-        "r2_vs_persistence": -0.2895753551522431,
-        "pred_delta_std": 1.0246719183763477,
+        "mae_lift_vs_persistence": -0.10648931873846901,
+        "r2_vs_persistence": -0.2616629695172459,
+        "pred_delta_std": 1.023876842881376,
         "truth_delta_std": 0.9771131213626487
       },
       "12": {
         "n": 74,
-        "mae": 1.1029787973726155,
-        "rmse": 1.437745197812135,
-        "corr": 0.02080942666481199,
-        "direction": 0.6486486486486487,
+        "mae": 1.1136993564230573,
+        "rmse": 1.4143489230165331,
+        "corr": 0.014421420566222535,
+        "direction": 0.6351351351351351,
         "persistence_mae": 1.005135135135135,
-        "mae_lift_vs_persistence": -0.09784366223748053,
-        "r2_vs_persistence": -0.22889712891612435,
-        "pred_delta_std": 1.1603661044624622,
+        "mae_lift_vs_persistence": -0.10856422128792231,
+        "r2_vs_persistence": -0.18922712482899318,
+        "pred_delta_std": 1.1502541547890193,
         "truth_delta_std": 1.2966303184080832
       },
       "24": {
         "n": 70,
-        "mae": 1.1787910382161972,
-        "rmse": 1.4055175664026314,
-        "corr": 0.1363264642088023,
-        "direction": 0.7,
+        "mae": 1.1627999909455575,
+        "rmse": 1.3723563676779744,
+        "corr": 0.14684622065935918,
+        "direction": 0.7142857142857143,
         "persistence_mae": 1.1871428571428573,
-        "mae_lift_vs_persistence": 0.008351818926660037,
-        "r2_vs_persistence": 0.04864411167584948,
-        "pred_delta_std": 1.4651741412808064,
+        "mae_lift_vs_persistence": 0.02434286619729975,
+        "r2_vs_persistence": 0.0930063252837563,
+        "pred_delta_std": 1.4449475446240612,
         "truth_delta_std": 1.44045525683333
       },
       "60": {
         "n": 58,
-        "mae": 1.300009198815236,
-        "rmse": 1.5909103497593664,
-        "corr": -0.06623605441755792,
+        "mae": 1.1489554040339418,
+        "rmse": 1.441971780096998,
+        "corr": 0.002650014176386378,
         "direction": 0.5344827586206896,
         "persistence_mae": 0.8901724137931035,
-        "mae_lift_vs_persistence": -0.4098367850221325,
-        "r2_vs_persistence": -0.5405351970072991,
-        "pred_delta_std": 1.3548408457589438,
+        "mae_lift_vs_persistence": -0.2587829902408383,
+        "r2_vs_persistence": -0.26559203575790247,
+        "pred_delta_std": 1.2024659980788377,
         "truth_delta_std": 1.279847096712392
       }
     },
-    "state_transition_decoder": {
+    "same_rung_sync_pair_decoder": {
       "1": {
         "n": 77,
-        "mae": 0.41066449205248085,
-        "rmse": 0.4947567523859977,
-        "corr": 0.8274746393867893,
-        "direction": 0.42857142857142855,
+        "mae": 0.3998624718084092,
+        "rmse": 0.5022871078167902,
+        "corr": 0.829780806295937,
+        "direction": 0.4155844155844156,
         "persistence_mae": 0.2149350649350649,
-        "mae_lift_vs_persistence": -0.19572942711741595,
-        "r2_vs_persistence": -2.6442425301963497,
-        "pred_delta_std": 0.401334737911239,
-        "truth_delta_std": 0.2590805908826503,
-        "mean_abs_state_feature_error": 0.12734576456575597
-      },
-      "3": {
-        "n": 77,
-        "mae": 0.6163950416449947,
-        "rmse": 0.7723053508180473,
-        "corr": 0.5530488486266679,
-        "direction": 0.6103896103896104,
-        "persistence_mae": 0.49103896103896105,
-        "mae_lift_vs_persistence": -0.12535608060603365,
-        "r2_vs_persistence": -0.6331892325502346,
-        "pred_delta_std": 0.6957427170903802,
-        "truth_delta_std": 0.6041533595330312,
-        "mean_abs_state_feature_error": 0.20482925019106107
-      },
-      "6": {
-        "n": 76,
-        "mae": 0.7886162426511136,
-        "rmse": 0.9715500168195821,
-        "corr": 0.3221342932385934,
-        "direction": 0.5921052631578947,
-        "persistence_mae": 0.7817105263157895,
-        "mae_lift_vs_persistence": -0.006905716335324108,
-        "r2_vs_persistence": 0.012482574946528269,
-        "pred_delta_std": 0.8107970012549112,
-        "truth_delta_std": 0.9771131213626487,
-        "mean_abs_state_feature_error": 0.26996565793386346
-      },
-      "12": {
-        "n": 74,
-        "mae": 1.1009761966307856,
-        "rmse": 1.3567124596906088,
-        "corr": -0.25050414776337393,
-        "direction": 0.581081081081081,
-        "persistence_mae": 1.005135135135135,
-        "mae_lift_vs_persistence": -0.09584106149565064,
-        "r2_vs_persistence": -0.09427708567143855,
-        "pred_delta_std": 1.2682132525487657,
-        "truth_delta_std": 1.2966303184080832,
-        "mean_abs_state_feature_error": 0.340120999188294
-      },
-      "24": {
-        "n": 70,
-        "mae": 0.9270061699240565,
-        "rmse": 1.1838757577148842,
-        "corr": 0.03926200359612943,
-        "direction": 0.7571428571428571,
-        "persistence_mae": 1.1871428571428573,
-        "mae_lift_vs_persistence": 0.2601366872188008,
-        "r2_vs_persistence": 0.32503273603824745,
-        "pred_delta_std": 0.9638667440934839,
-        "truth_delta_std": 1.44045525683333,
-        "mean_abs_state_feature_error": 0.4052483876158092
-      },
-      "60": {
-        "n": 58,
-        "mae": 1.1560787364348195,
-        "rmse": 1.4038159946479003,
-        "corr": -0.03620031164599335,
-        "direction": 0.6551724137931034,
-        "persistence_mae": 0.8901724137931035,
-        "mae_lift_vs_persistence": -0.265906322641716,
-        "r2_vs_persistence": -0.19950091474453147,
-        "pred_delta_std": 1.034966972439001,
-        "truth_delta_std": 1.279847096712392,
-        "mean_abs_state_feature_error": 0.432194562820479
-      }
-    },
-    "state_transition_decoder_current": {
-      "1": {
-        "n": 77,
-        "mae": 0.3298324326095133,
-        "rmse": 0.39919704820902424,
-        "corr": 0.8894596630181336,
-        "direction": 0.45454545454545453,
-        "persistence_mae": 0.2149350649350649,
-        "mae_lift_vs_persistence": -0.11489736767444839,
-        "r2_vs_persistence": -1.3724575731342106,
-        "pred_delta_std": 0.29863839369273043,
-        "truth_delta_std": 0.2590805908826503,
-        "mean_abs_state_feature_error": 0.1250423301306658
-      },
-      "3": {
-        "n": 77,
-        "mae": 0.571867640343585,
-        "rmse": 0.7348804166212047,
-        "corr": 0.6024972645946451,
-        "direction": 0.6233766233766234,
-        "persistence_mae": 0.49103896103896105,
-        "mae_lift_vs_persistence": -0.0808286793046239,
-        "r2_vs_persistence": -0.478739823778884,
-        "pred_delta_std": 0.6455075489237962,
-        "truth_delta_std": 0.6041533595330312,
-        "mean_abs_state_feature_error": 0.20216782607932332
-      },
-      "6": {
-        "n": 76,
-        "mae": 0.804937136406286,
-        "rmse": 0.9997607314276724,
-        "corr": 0.2859488596339902,
-        "direction": 0.6052631578947368,
-        "persistence_mae": 0.7817105263157895,
-        "mae_lift_vs_persistence": -0.023226610090496425,
-        "r2_vs_persistence": -0.045698751415664374,
-        "pred_delta_std": 0.8517720881455586,
-        "truth_delta_std": 0.9771131213626487,
-        "mean_abs_state_feature_error": 0.2664315400898083
-      },
-      "12": {
-        "n": 74,
-        "mae": 1.111281298845164,
-        "rmse": 1.3710059830593984,
-        "corr": -0.24087023398386623,
-        "direction": 0.6216216216216216,
-        "persistence_mae": 1.005135135135135,
-        "mae_lift_vs_persistence": -0.10614616371002894,
-        "r2_vs_persistence": -0.11745586251683382,
-        "pred_delta_std": 1.3226805504998986,
-        "truth_delta_std": 1.2966303184080832,
-        "mean_abs_state_feature_error": 0.33689620358643096
-      },
-      "24": {
-        "n": 70,
-        "mae": 0.8914556421563201,
-        "rmse": 1.1343708870269558,
-        "corr": 0.06000640326916171,
-        "direction": 0.7857142857142857,
-        "persistence_mae": 1.1871428571428573,
-        "mae_lift_vs_persistence": 0.29568721498653716,
-        "r2_vs_persistence": 0.380301280228555,
-        "pred_delta_std": 0.9624850051706937,
-        "truth_delta_std": 1.44045525683333,
-        "mean_abs_state_feature_error": 0.4043614064639673
-      },
-      "60": {
-        "n": 58,
-        "mae": 1.1318198237342472,
-        "rmse": 1.3772151886356871,
-        "corr": -0.017920542041052076,
-        "direction": 0.6206896551724138,
-        "persistence_mae": 0.8901724137931035,
-        "mae_lift_vs_persistence": -0.24164740994114364,
-        "r2_vs_persistence": -0.15447310053103336,
-        "pred_delta_std": 1.0242123381759964,
-        "truth_delta_std": 1.279847096712392,
-        "mean_abs_state_feature_error": 0.4293756308856313
-      }
-    },
-    "direct_value_geometry_ridge": {
-      "1": {
-        "n": 77,
-        "mae": 0.2551078800147956,
-        "rmse": 0.33153121970736643,
-        "corr": 0.9312856856745914,
-        "direction": 0.5584415584415584,
-        "persistence_mae": 0.2149350649350649,
-        "mae_lift_vs_persistence": -0.04017281507973072,
-        "r2_vs_persistence": -0.6363367147445649,
-        "pred_delta_std": 0.25381289158275866,
+        "mae_lift_vs_persistence": -0.18492740687334433,
+        "r2_vs_persistence": -2.7560198136694187,
+        "pred_delta_std": 0.4164876943593628,
         "truth_delta_std": 0.2590805908826503
       },
       "3": {
         "n": 77,
-        "mae": 0.5943282971689404,
-        "rmse": 0.7647642761828631,
-        "corr": 0.6885327438029913,
-        "direction": 0.6363636363636364,
+        "mae": 0.686624626700267,
+        "rmse": 0.841250095803076,
+        "corr": 0.5718667108980656,
+        "direction": 0.5194805194805194,
         "persistence_mae": 0.49103896103896105,
-        "mae_lift_vs_persistence": -0.10328933612997937,
-        "r2_vs_persistence": -0.6014508200484117,
-        "pred_delta_std": 0.6165959804579136,
+        "mae_lift_vs_persistence": -0.19558566566130597,
+        "r2_vs_persistence": -0.9377987605046998,
+        "pred_delta_std": 0.6854381396981619,
         "truth_delta_std": 0.6041533595330312
       },
       "6": {
         "n": 76,
-        "mae": 0.8774363947946856,
-        "rmse": 1.121348466973872,
-        "corr": 0.41371340304437676,
-        "direction": 0.631578947368421,
+        "mae": 0.9033897031832772,
+        "rmse": 1.1110916471592849,
+        "corr": 0.33061357528223945,
+        "direction": 0.6052631578947368,
         "persistence_mae": 0.7817105263157895,
-        "mae_lift_vs_persistence": -0.09572586847889608,
-        "r2_vs_persistence": -0.31551446457629106,
-        "pred_delta_std": 0.8010338852758238,
+        "mae_lift_vs_persistence": -0.12167917686748764,
+        "r2_vs_persistence": -0.2915588683622723,
+        "pred_delta_std": 1.0265157361046704,
         "truth_delta_std": 0.9771131213626487
       },
       "12": {
         "n": 74,
-        "mae": 1.3498086163030927,
-        "rmse": 1.6791731263769256,
-        "corr": -0.17823443060660177,
-        "direction": 0.4189189189189189,
+        "mae": 1.1149399205732369,
+        "rmse": 1.4187714892229777,
+        "corr": -0.006771163593163022,
+        "direction": 0.6351351351351351,
         "persistence_mae": 1.005135135135135,
-        "mae_lift_vs_persistence": -0.3446734811679577,
-        "r2_vs_persistence": -0.6762648121833721,
-        "pred_delta_std": 1.2435292081785057,
+        "mae_lift_vs_persistence": -0.1098047854381019,
+        "r2_vs_persistence": -0.1966760061407562,
+        "pred_delta_std": 1.1276064865753777,
         "truth_delta_std": 1.2966303184080832
       },
       "24": {
         "n": 70,
-        "mae": 1.388976016500387,
-        "rmse": 1.905791461656532,
-        "corr": -0.06329866220849385,
-        "direction": 0.6,
+        "mae": 1.1508749188513039,
+        "rmse": 1.368329582335897,
+        "corr": 0.1308095508403899,
+        "direction": 0.7285714285714285,
         "persistence_mae": 1.1871428571428573,
-        "mae_lift_vs_persistence": -0.20183315935752977,
-        "r2_vs_persistence": -0.749126455737817,
-        "pred_delta_std": 1.3280086485185685,
+        "mae_lift_vs_persistence": 0.03626793829155339,
+        "r2_vs_persistence": 0.09832114095989575,
+        "pred_delta_std": 1.4212912155802224,
         "truth_delta_std": 1.44045525683333
       },
       "60": {
         "n": 58,
-        "mae": 1.3962713526444246,
-        "rmse": 1.8223375757713915,
-        "corr": 0.004499431834883541,
-        "direction": 0.6206896551724138,
+        "mae": 1.2359150969437822,
+        "rmse": 1.5064649605775888,
+        "corr": -0.004450500287515782,
+        "direction": 0.5,
         "persistence_mae": 0.8901724137931035,
-        "mae_lift_vs_persistence": -0.5060989388513211,
-        "r2_vs_persistence": -1.0213330233042512,
-        "pred_delta_std": 1.4739243498704344,
+        "mae_lift_vs_persistence": -0.3457426831506787,
+        "r2_vs_persistence": -0.381332659866934,
+        "pred_delta_std": 1.291678164858839,
+        "truth_delta_std": 1.279847096712392
+      }
+    },
+    "same_rung_gear_pair_decoder": {
+      "1": {
+        "n": 77,
+        "mae": 0.3995420409735446,
+        "rmse": 0.502560576953704,
+        "corr": 0.8296974340979935,
+        "direction": 0.4155844155844156,
+        "persistence_mae": 0.2149350649350649,
+        "mae_lift_vs_persistence": -0.18460697603847973,
+        "r2_vs_persistence": -2.7601108408807002,
+        "pred_delta_std": 0.41626714176730556,
+        "truth_delta_std": 0.2590805908826503
+      },
+      "3": {
+        "n": 77,
+        "mae": 0.6881170459542072,
+        "rmse": 0.8433705271477114,
+        "corr": 0.569970329947726,
+        "direction": 0.5064935064935064,
+        "persistence_mae": 0.49103896103896105,
+        "mae_lift_vs_persistence": -0.19707808491524614,
+        "r2_vs_persistence": -0.9475797940595665,
+        "pred_delta_std": 0.6877661555759074,
+        "truth_delta_std": 0.6041533595330312
+      },
+      "6": {
+        "n": 76,
+        "mae": 0.8957296746114153,
+        "rmse": 1.1118455449295022,
+        "corr": 0.3285698441343856,
+        "direction": 0.6052631578947368,
+        "persistence_mae": 0.7817105263157895,
+        "mae_lift_vs_persistence": -0.11401914829562576,
+        "r2_vs_persistence": -0.29331215971675806,
+        "pred_delta_std": 1.0260185259205992,
+        "truth_delta_std": 0.9771131213626487
+      },
+      "12": {
+        "n": 74,
+        "mae": 1.1224425880770987,
+        "rmse": 1.4243325347219709,
+        "corr": -0.01985058034761224,
+        "direction": 0.6216216216216216,
+        "persistence_mae": 1.005135135135135,
+        "mae_lift_vs_persistence": -0.11730745294196376,
+        "r2_vs_persistence": -0.20607542226028852,
+        "pred_delta_std": 1.1222455802853826,
+        "truth_delta_std": 1.2966303184080832
+      },
+      "24": {
+        "n": 70,
+        "mae": 1.166947309256296,
+        "rmse": 1.3728108101888208,
+        "corr": 0.10145487132909534,
+        "direction": 0.7285714285714285,
+        "persistence_mae": 1.1871428571428573,
+        "mae_lift_vs_persistence": 0.020195547886561194,
+        "r2_vs_persistence": 0.0924055414980095,
+        "pred_delta_std": 1.3749537025332634,
+        "truth_delta_std": 1.44045525683333
+      },
+      "60": {
+        "n": 58,
+        "mae": 1.183532209188175,
+        "rmse": 1.4609031387168072,
+        "corr": 0.0066720287967871285,
+        "direction": 0.5,
+        "persistence_mae": 0.8901724137931035,
+        "mae_lift_vs_persistence": -0.2933597953950715,
+        "r2_vs_persistence": -0.299041588594533,
+        "pred_delta_std": 1.278980867866625,
         "truth_delta_std": 1.279847096712392
       }
     },
@@ -666,711 +561,545 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
     "24": "lag_ridge",
     "60": "lag_ridge"
   },
-  "event_engine_channels": [
-    "release_same",
-    "release_cross",
-    "wrap_same",
-    "wrap_cross",
-    "winding_same",
-    "winding_cross"
-  ],
-  "event_engine_weight_summary": {
-    "1": {
-      "release_same": {
-        "mean": -0.18449003872836015,
-        "std": 0.08186373187448731
-      },
-      "release_cross": {
-        "mean": -0.10938811385681765,
-        "std": 0.07579467359866127
-      },
-      "wrap_same": {
-        "mean": -0.15808967687641914,
-        "std": 0.041838443210607985
-      },
-      "wrap_cross": {
-        "mean": -0.11944171927661139,
-        "std": 0.03363678479303604
-      },
-      "winding_same": {
-        "mean": -0.05792166949796371,
-        "std": 0.023440905521972442
-      },
-      "winding_cross": {
-        "mean": 0.4654171194108489,
-        "std": 0.02949664556416946
-      }
-    },
-    "3": {
-      "release_same": {
-        "mean": -0.27365222312996257,
-        "std": 0.0338654135564962
-      },
-      "release_cross": {
-        "mean": 0.07997240395945701,
-        "std": 0.017511669252143
-      },
-      "wrap_same": {
-        "mean": -0.2925880703882242,
-        "std": 0.047621935926783876
-      },
-      "wrap_cross": {
-        "mean": -0.04596929288574908,
-        "std": 0.01156611933936338
-      },
-      "winding_same": {
-        "mean": -0.07835161541893461,
-        "std": 0.0211364543423089
-      },
-      "winding_cross": {
-        "mean": 0.6477275123257751,
-        "std": 0.04772560279862505
-      }
-    },
-    "6": {
-      "release_same": {
-        "mean": -0.04579074734842807,
-        "std": 0.021671025401884023
-      },
-      "release_cross": {
-        "mean": 0.07328525662948013,
-        "std": 0.018271611853849453
-      },
-      "wrap_same": {
-        "mean": -0.23024880836256495,
-        "std": 0.044943319370405306
-      },
-      "wrap_cross": {
-        "mean": 0.06327961837110858,
-        "std": 0.03354508708116219
-      },
-      "winding_same": {
-        "mean": -0.08263114383411183,
-        "std": 0.026605270678644894
-      },
-      "winding_cross": {
-        "mean": 0.591496382927222,
-        "std": 0.06340256080921051
-      }
-    },
-    "12": {
-      "release_same": {
-        "mean": 0.04152230970925302,
-        "std": 0.018830161484435132
-      },
-      "release_cross": {
-        "mean": 0.051333036888863426,
-        "std": 0.02174527030813775
-      },
-      "wrap_same": {
-        "mean": -0.1586298639814482,
-        "std": 0.025081454669752982
-      },
-      "wrap_cross": {
-        "mean": 0.1578912030399456,
-        "std": 0.04943664720747983
-      },
-      "winding_same": {
-        "mean": -0.042594380254334215,
-        "std": 0.019863047173007742
-      },
-      "winding_cross": {
-        "mean": 0.4438748010366531,
-        "std": 0.06941160298899494
-      }
-    },
-    "24": {
-      "release_same": {
-        "mean": 0.07517680188888702,
-        "std": 0.0450596244472688
-      },
-      "release_cross": {
-        "mean": 0.12691122141969352,
-        "std": 0.03714092428916159
-      },
-      "wrap_same": {
-        "mean": -0.055585925434999406,
-        "std": 0.048010268110569326
-      },
-      "wrap_cross": {
-        "mean": 0.28646784894810917,
-        "std": 0.07559982903711786
-      },
-      "winding_same": {
-        "mean": 0.03223816701888288,
-        "std": 0.07239077568247645
-      },
-      "winding_cross": {
-        "mean": -0.04584599813022466,
-        "std": 0.1255409115191777
-      }
-    },
-    "60": {
-      "release_same": {
-        "mean": 0.14270132246064077,
-        "std": 0.10071427581250625
-      },
-      "release_cross": {
-        "mean": 0.09147273025405016,
-        "std": 0.08935497942151295
-      },
-      "wrap_same": {
-        "mean": 0.17739833177816194,
-        "std": 0.08279070683006727
-      },
-      "wrap_cross": {
-        "mean": 0.41394627689817665,
-        "std": 0.05100287157373919
-      },
-      "winding_same": {
-        "mean": -0.20306297157036363,
-        "std": 0.19713203562861373
-      },
-      "winding_cross": {
-        "mean": -0.3780745531572681,
-        "std": 0.15420857431228063
-      }
-    }
-  },
   "points": {
-    "learned_event_state_engine_decoder": {
+    "natural_advance_decoder": {
       "1": [
         {
           "origin": "2006-09-01",
           "date": "2006-10-01",
-          "pred": 0.48228039741508977,
+          "pred": 0.48542007626870975,
           "actual": 0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-01-01",
-          "pred": 1.2291603540354556,
+          "pred": 1.2251740218959606,
           "actual": 0.59,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-04-01",
-          "pred": 0.39483291053010056,
+          "pred": 0.38797591090544825,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-07-01",
-          "pred": -0.11989706228471705,
+          "pred": -0.12732877864102368,
           "actual": -0.37,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-10-01",
-          "pred": -0.3961563540460003,
+          "pred": -0.4000318362314258,
           "actual": -1.41,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-01-01",
-          "pred": -0.6001415292480473,
+          "pred": -0.6054636912114995,
           "actual": -1.79,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-04-01",
-          "pred": -0.9821276000765461,
+          "pred": -0.9801465354724512,
           "actual": -0.89,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-07-01",
-          "pred": -0.9228866363569164,
+          "pred": -0.9226158384108236,
           "actual": -0.04,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-10-01",
-          "pred": -0.36256592443475844,
+          "pred": -0.36389522744168135,
           "actual": -0.3,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-01-01",
-          "pred": -0.004591887689741565,
+          "pred": -0.002942624826745073,
           "actual": -1.0,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-04-01",
-          "pred": -0.8096620090620732,
+          "pred": -0.811753034726048,
           "actual": -0.25,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-07-01",
-          "pred": 0.6628410931566494,
+          "pred": 0.6638634289713209,
           "actual": 0.69,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-10-01",
-          "pred": 1.113186108635402,
+          "pred": 1.112275098392798,
           "actual": 0.96,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-01-01",
-          "pred": 1.8450232194583847,
+          "pred": 1.8487993034945005,
           "actual": 1.43,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-04-01",
-          "pred": 0.11518252686258576,
+          "pred": 0.11535552975694413,
           "actual": 0.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-07-01",
-          "pred": -0.5822860902923891,
+          "pred": -0.5841748211598838,
           "actual": -0.89,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-10-01",
-          "pred": -1.3359460062089175,
+          "pred": -1.3388438705968606,
           "actual": -1.65,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-01-01",
-          "pred": -1.094410199592581,
+          "pred": -1.0956981725219002,
           "actual": -1.7,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-04-01",
-          "pred": -1.2618016566138184,
+          "pred": -1.2612840472385183,
           "actual": -0.74,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-07-01",
-          "pred": -0.9470083193278094,
+          "pred": -0.9467871156686491,
           "actual": -0.23,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-10-01",
-          "pred": -0.5819244241190015,
+          "pred": -0.580965503574453,
           "actual": -0.93,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-01-01",
-          "pred": -1.3043334866520984,
+          "pred": -1.3057764360143755,
           "actual": -0.93,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-04-01",
-          "pred": -0.8717093889922418,
+          "pred": -0.8698799261063046,
           "actual": -0.29,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-07-01",
-          "pred": 0.29755338692110717,
+          "pred": 0.2906210194430536,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-10-01",
-          "pred": 0.8553793500619853,
+          "pred": 0.8526962355538226,
           "actual": 0.23,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-01-01",
-          "pred": -0.042215612956530854,
+          "pred": -0.04468828898004003,
           "actual": -0.42,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-04-01",
-          "pred": -0.7389210626134226,
+          "pred": -0.7377215621402824,
           "actual": -0.08,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-07-01",
-          "pred": -0.5621148284475386,
+          "pred": -0.5603718659751841,
           "actual": -0.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-10-01",
-          "pred": -0.26522715869669233,
+          "pred": -0.26584686554035425,
           "actual": -0.24,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-01-01",
-          "pred": -0.2875961245817894,
+          "pred": -0.29036713218159005,
           "actual": -0.42,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-04-01",
-          "pred": -0.19883151504909646,
+          "pred": -0.19822116615144988,
           "actual": 0.28,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-07-01",
-          "pred": 0.9480496301178806,
+          "pred": 0.951390488074913,
           "actual": 0.13,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-10-01",
-          "pred": 0.5942710053716491,
+          "pred": 0.5931372714315486,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-01-01",
-          "pred": 1.0931350770889998,
+          "pred": 1.0937194591353845,
           "actual": 0.59,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-04-01",
-          "pred": 0.4713402025949222,
+          "pred": 0.47269455413778344,
           "actual": 0.9,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-07-01",
-          "pred": 0.6213294347675817,
+          "pred": 0.6201873197816035,
           "actual": 1.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-10-01",
-          "pred": 2.1999758604629798,
+          "pred": 2.2014021061061944,
           "actual": 2.21,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-01-01",
-          "pred": 2.5099656612776755,
+          "pred": 2.5104180234364017,
           "actual": 2.56,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-04-01",
-          "pred": 1.9033811208566065,
+          "pred": 1.9048420010292073,
           "actual": 1.05,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-07-01",
-          "pred": 0.3918625594929122,
+          "pred": 0.3924917859962549,
           "actual": -0.25,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-10-01",
-          "pred": -1.2767745666453767,
+          "pred": -1.2761852714733972,
           "actual": -0.75,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-01-01",
-          "pred": -0.18865367613007208,
+          "pred": -0.18543836046226075,
           "actual": -0.34,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-04-01",
-          "pred": 0.05358039240081411,
+          "pred": 0.05195568958134647,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-07-01",
-          "pred": -0.014797563291544746,
+          "pred": -0.012443128796518554,
           "actual": 0.22,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-10-01",
-          "pred": -0.5111278299721929,
+          "pred": -0.5088309932236416,
           "actual": -0.52,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-01-01",
-          "pred": -0.6585658849943827,
+          "pred": -0.6584978948957855,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-04-01",
-          "pred": 0.21199641169534184,
+          "pred": 0.21512829679809437,
           "actual": -0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-07-01",
-          "pred": 0.2382230150479962,
+          "pred": 0.2415442093682506,
           "actual": 0.27,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-10-01",
-          "pred": 0.24834587446227913,
+          "pred": 0.2528200229604778,
           "actual": 0.84,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-01-01",
-          "pred": 1.0516343808794255,
+          "pred": 1.054390946317232,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-04-01",
-          "pred": -0.17197331692025591,
+          "pred": -0.1686464980113656,
           "actual": 0.67,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-07-01",
-          "pred": 0.3849012483055529,
+          "pred": 0.386688606200105,
           "actual": 0.41,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-10-01",
-          "pred": 0.19271571592594972,
+          "pred": 0.1950526716149838,
           "actual": 0.55,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-01-01",
-          "pred": 0.5594469917738848,
+          "pred": 0.5633495837133107,
           "actual": 0.64,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-04-01",
-          "pred": 0.5260520392058639,
+          "pred": 0.5270458065513497,
           "actual": 0.49,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-07-01",
-          "pred": -0.07464985183870622,
+          "pred": -0.07225044908766114,
           "actual": -0.04,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-10-01",
-          "pred": -0.530220730433631,
+          "pred": -0.5309405397058068,
           "actual": -1.19,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-01-01",
-          "pred": -0.8047094269454448,
+          "pred": -0.8034771589769829,
           "actual": -1.04,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-04-01",
-          "pred": -0.010908515440485173,
+          "pred": -0.011541241040331583,
           "actual": -0.55,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-07-01",
-          "pred": -0.3751351766524068,
+          "pred": -0.37529210970823546,
           "actual": -0.2,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-10-01",
-          "pred": -0.05592602292403062,
+          "pred": -0.058057101281209125,
           "actual": -0.78,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-01-01",
-          "pred": -0.41916226772241155,
+          "pred": -0.4171193039612353,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-04-01",
-          "pred": -0.5985287925584875,
+          "pred": -0.5976565975811351,
           "actual": -0.9,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-07-01",
-          "pred": -0.5029550237731615,
+          "pred": -0.5028167294388881,
           "actual": -0.56,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-10-01",
-          "pred": -0.5754838309527099,
+          "pred": -0.5758840188569669,
           "actual": -0.99,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-01-01",
-          "pred": -0.8080497967947978,
+          "pred": -0.806957948040015,
           "actual": -0.78,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-04-01",
-          "pred": -0.5053639615846216,
+          "pred": -0.5042713804133818,
           "actual": 0.24,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-07-01",
-          "pred": 0.6575297694574982,
+          "pred": 0.657931723389972,
           "actual": 1.2,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-10-01",
-          "pred": 1.2996164729691304,
+          "pred": 1.2999314461852887,
           "actual": 1.59,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-01-01",
-          "pred": 1.7214178301575762,
+          "pred": 1.7231613928046279,
           "actual": 1.71,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-04-01",
-          "pred": 1.165584600534566,
+          "pred": 1.1647002285526282,
           "actual": 0.93,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-07-01",
-          "pred": -0.028921104658914797,
+          "pred": -0.030219614506470496,
           "actual": 0.2,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-10-01",
-          "pred": -0.07672952570042592,
+          "pred": -0.0759711476246322,
           "actual": -0.24,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-01-01",
-          "pred": 0.5954445040179976,
+          "pred": 0.5968378302825097,
           "actual": -0.76,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-04-01",
-          "pred": 0.43511819394595996,
+          "pred": 0.43738651436214715,
           "actual": -0.08,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-07-01",
-          "pred": 0.0696579348868502,
+          "pred": 0.07036445808785864,
           "actual": -0.03,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-10-01",
-          "pred": -0.8068950249005981,
+          "pred": -0.8034099396647769,
           "actual": -0.5,
           "persistence": -0.3
         }
@@ -1379,539 +1108,539 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2006-12-01",
-          "pred": 0.39957931830617094,
+          "pred": 0.39347330162473015,
           "actual": 1.1,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-03-01",
-          "pred": 1.429491937445616,
+          "pred": 1.4132848317702245,
           "actual": -0.15,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-06-01",
-          "pred": 0.4950140060296371,
+          "pred": 0.4682063890263452,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-09-01",
-          "pred": 0.2507525698046942,
+          "pred": 0.2316896510900121,
           "actual": -1.04,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-12-01",
-          "pred": -0.23400706769540153,
+          "pred": -0.25203266663523394,
           "actual": -1.61,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-03-01",
-          "pred": 0.03632429128063636,
+          "pred": 0.020729211365853494,
           "actual": -1.17,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-06-01",
-          "pred": -0.9700102660278824,
+          "pred": -0.972978801507712,
           "actual": -0.44,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-09-01",
-          "pred": -1.3890859532124624,
+          "pred": -1.3866666823738858,
           "actual": -0.28,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-12-01",
-          "pred": -0.05710348482843116,
+          "pred": -0.05355160977333074,
           "actual": -0.9,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-03-01",
-          "pred": -0.0765730655846669,
+          "pred": -0.06914431718474648,
           "actual": -0.72,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-06-01",
-          "pred": -1.1968903707167304,
+          "pred": -1.1961271173565742,
           "actual": 0.49,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-09-01",
-          "pred": 0.7703805753595424,
+          "pred": 0.776190837486317,
           "actual": 0.68,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-12-01",
-          "pred": 1.8676478776650522,
+          "pred": 1.875721592895761,
           "actual": 1.81,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-03-01",
-          "pred": 0.6339542772246118,
+          "pred": 0.6429418652108297,
           "actual": 1.07,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-06-01",
-          "pred": -0.2693088506498408,
+          "pred": -0.27105293590426105,
           "actual": -0.62,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-09-01",
-          "pred": -0.05278474821681724,
+          "pred": -0.04584504132311318,
           "actual": -1.56,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-12-01",
-          "pred": -1.217140593923765,
+          "pred": -1.2180246334249458,
           "actual": -1.63,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-03-01",
-          "pred": -0.6012080343662956,
+          "pred": -0.6044140263165086,
           "actual": -0.98,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-06-01",
-          "pred": -0.9373328164147275,
+          "pred": -0.9422173855676976,
           "actual": -0.25,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-09-01",
-          "pred": -1.5947508094979295,
+          "pred": -1.6001201898126998,
           "actual": -0.76,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-12-01",
-          "pred": -0.8402673557671642,
+          "pred": -0.8413164646356699,
           "actual": -1.05,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-03-01",
-          "pred": -1.2844684148015804,
+          "pred": -1.2887540577216599,
           "actual": -0.48,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-06-01",
-          "pred": -0.7973514461743514,
+          "pred": -0.7863529831005258,
           "actual": 0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-09-01",
-          "pred": 1.2312227847033084,
+          "pred": 1.2123112205627908,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-12-01",
-          "pred": 0.8983444253224417,
+          "pred": 0.8880489591159204,
           "actual": -0.13,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-03-01",
-          "pred": -0.5479878366677313,
+          "pred": -0.5619172707327837,
           "actual": -0.14,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-06-01",
-          "pred": -1.237009143284793,
+          "pred": -1.2326859182858245,
           "actual": -0.33,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-09-01",
-          "pred": -0.763579880278483,
+          "pred": -0.7628336945268073,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-12-01",
-          "pred": -0.30641293756962595,
+          "pred": -0.30861491048276835,
           "actual": -0.09,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-03-01",
-          "pred": -0.1681545600068916,
+          "pred": -0.1807830615767978,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-06-01",
-          "pred": 0.14872608075148114,
+          "pred": 0.152373858977135,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-09-01",
-          "pred": 1.076728411541398,
+          "pred": 1.086863290803254,
           "actual": 0.37,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-12-01",
-          "pred": 0.8115258890392449,
+          "pred": 0.8127452255175975,
           "actual": 0.77,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-03-01",
-          "pred": 0.9998078516018423,
+          "pred": 0.999236070897326,
           "actual": 0.48,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-06-01",
-          "pred": 0.8103216803510145,
+          "pred": 0.8220596799698707,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-09-01",
-          "pred": 0.17813803013605725,
+          "pred": 0.17199444672367545,
           "actual": 2.01,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-12-01",
-          "pred": 2.083640931815348,
+          "pred": 2.091970501061861,
           "actual": 2.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-03-01",
-          "pred": 2.584938038097629,
+          "pred": 2.5969441863101363,
           "actual": 1.6,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-06-01",
-          "pred": 1.7628772563415664,
+          "pred": 1.7643636076541824,
           "actual": 0.06,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-09-01",
-          "pred": 0.8123272955483752,
+          "pred": 0.8203412682843741,
           "actual": -0.46,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-12-01",
-          "pred": -1.5527178559650145,
+          "pred": -1.5537788198078066,
           "actual": -0.51,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-03-01",
-          "pred": 0.1458783353584914,
+          "pred": 0.1589072356510588,
           "actual": -0.09,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-06-01",
-          "pred": -0.2518248793188898,
+          "pred": -0.24976793947797138,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-09-01",
-          "pred": -0.35602167491289766,
+          "pred": -0.3481936155399883,
           "actual": -0.56,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-12-01",
-          "pred": -0.7113004127359898,
+          "pred": -0.7099427011808285,
           "actual": -0.85,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-03-01",
-          "pred": -1.0318956612173373,
+          "pred": -1.0371693838175506,
           "actual": -0.73,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-06-01",
-          "pred": 0.6784531392749582,
+          "pred": 0.6885593213627491,
           "actual": 0.12,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-09-01",
-          "pred": 0.4253358390537243,
+          "pred": 0.4388106479026749,
           "actual": 0.3,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-12-01",
-          "pred": 0.6423705054636053,
+          "pred": 0.6660327543293905,
           "actual": 0.97,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-03-01",
-          "pred": 0.2601164448807185,
+          "pred": 0.2766208100678212,
           "actual": 0.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-06-01",
-          "pred": -0.6761249480975393,
+          "pred": -0.6643008761215549,
           "actual": 0.66,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-09-01",
-          "pred": -0.35171378490902944,
+          "pred": -0.3457381043200181,
           "actual": 0.11,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-12-01",
-          "pred": 0.30255239876897,
+          "pred": 0.31301367725876017,
           "actual": 0.51,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-03-01",
-          "pred": 0.37974524382675967,
+          "pred": 0.39122844793897116,
           "actual": 0.36,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-06-01",
-          "pred": 1.1227708634036735,
+          "pred": 1.1398024286218729,
           "actual": -0.21,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-09-01",
-          "pred": -0.007210023871528599,
+          "pred": 0.008963316999819785,
           "actual": -0.66,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-12-01",
-          "pred": -0.38399361195543813,
+          "pred": -0.38971471563096727,
           "actual": -0.98,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-03-01",
-          "pred": -0.919253504614903,
+          "pred": -0.9150381993541067,
           "actual": -0.72,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-06-01",
-          "pred": -0.12964096071863046,
+          "pred": -0.1312301006599751,
           "actual": -0.06,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-09-01",
-          "pred": -0.8503159703939223,
+          "pred": -0.8524841514794359,
           "actual": -0.5,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-12-01",
-          "pred": 0.3646376689119476,
+          "pred": 0.37264839090731544,
           "actual": -1.07,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-03-01",
-          "pred": -0.3071185491690015,
+          "pred": -0.29630360278635476,
           "actual": -0.84,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-06-01",
-          "pred": -0.6966451152725559,
+          "pred": -0.6891376940312076,
           "actual": -0.77,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-09-01",
-          "pred": -0.4110503808774756,
+          "pred": -0.4123279511458144,
           "actual": -1.06,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-12-01",
-          "pred": -0.8181820071675739,
+          "pred": -0.8177682527784207,
           "actual": -0.86,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-03-01",
-          "pred": -1.3519900232143145,
+          "pred": -1.3487603010971079,
           "actual": -0.13,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-06-01",
-          "pred": -0.8347034531113019,
+          "pred": -0.8254157772639802,
           "actual": 0.95,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-09-01",
-          "pred": 0.30606770380290904,
+          "pred": 0.3093916787670229,
           "actual": 1.65,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-12-01",
-          "pred": 1.6608658956461944,
+          "pred": 1.6662951348709714,
           "actual": 1.81,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-03-01",
-          "pred": 1.998678913890552,
+          "pred": 2.009053809724828,
           "actual": 1.1,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-06-01",
-          "pred": 1.5849879909427855,
+          "pred": 1.5813548627356486,
           "actual": 0.25,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-09-01",
-          "pred": 0.4252877312924629,
+          "pred": 0.41930110916665325,
           "actual": -0.11,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-12-01",
-          "pred": 0.3192494207970786,
+          "pred": 0.32107960566487975,
           "actual": -0.58,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-03-01",
-          "pred": 1.2662129379595766,
+          "pred": 1.2679453491590165,
           "actual": 0.05,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-06-01",
-          "pred": 0.46806965735116907,
+          "pred": 0.4666230934321297,
           "actual": 0.01,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-09-01",
-          "pred": -0.454130465586133,
+          "pred": -0.4442314779884562,
           "actual": -0.3,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-12-01",
-          "pred": -0.7853254047270886,
+          "pred": -0.7861413474365241,
           "actual": -0.49,
           "persistence": -0.3
         }
@@ -1920,532 +1649,532 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-03-01",
-          "pred": 0.3565814008315993,
+          "pred": 0.34760188831352795,
           "actual": -0.15,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-06-01",
-          "pred": 0.5855840063352966,
+          "pred": 0.5354705071812935,
           "actual": -0.16,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-09-01",
-          "pred": 0.8839358078240073,
+          "pred": 0.8257823076970462,
           "actual": -1.04,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-12-01",
-          "pred": 0.818472259157447,
+          "pred": 0.7648528741788297,
           "actual": -1.61,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-03-01",
-          "pred": 0.9318781528683937,
+          "pred": 0.9030458068768006,
           "actual": -1.17,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-06-01",
-          "pred": -0.3295403326030404,
+          "pred": -0.33481872088846576,
           "actual": -0.44,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-09-01",
-          "pred": -1.1409631807682947,
+          "pred": -1.1387554056519424,
           "actual": -0.28,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-12-01",
-          "pred": -1.5310527503214622,
+          "pred": -1.5211386779584328,
           "actual": -0.9,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-03-01",
-          "pred": -0.9201379943733894,
+          "pred": -0.9074561468438725,
           "actual": -0.72,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-06-01",
-          "pred": -0.8926111312154265,
+          "pred": -0.9033054087150579,
           "actual": 0.49,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-09-01",
-          "pred": 0.08828145737949764,
+          "pred": 0.07826918220423826,
           "actual": 0.68,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-12-01",
-          "pred": 1.8391847751721735,
+          "pred": 1.8545806901343211,
           "actual": 1.81,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-03-01",
-          "pred": 0.6184574134750982,
+          "pred": 0.657710585365866,
           "actual": 1.07,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-06-01",
-          "pred": -1.0909213806053264,
+          "pred": -1.0552269580732112,
           "actual": -0.62,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-09-01",
-          "pred": -0.3710265647860491,
+          "pred": -0.31614965701374353,
           "actual": -1.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-12-01",
-          "pred": 0.29381162743850464,
+          "pred": 0.2466843150705751,
           "actual": -1.63,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-03-01",
-          "pred": 0.022396107925664818,
+          "pred": -0.017761833058854926,
           "actual": -0.98,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-06-01",
-          "pred": 0.7163009767385058,
+          "pred": 0.7251671203344865,
           "actual": -0.25,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-09-01",
-          "pred": -1.319583281895145,
+          "pred": -1.331121874835686,
           "actual": -0.76,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-12-01",
-          "pred": -1.8248796792141233,
+          "pred": -1.8286369983593511,
           "actual": -1.05,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-03-01",
-          "pred": -1.5526117922218663,
+          "pred": -1.5601321391228224,
           "actual": -0.48,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-06-01",
-          "pred": -1.177967821760365,
+          "pred": -1.148869919470206,
           "actual": 0.14,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-09-01",
-          "pred": 0.80396855489964,
+          "pred": 0.8016542581035264,
           "actual": 0.44,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-12-01",
-          "pred": 1.9131074298000892,
+          "pred": 1.8220671631030785,
           "actual": -0.13,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-03-01",
-          "pred": 0.2560440862833202,
+          "pred": 0.24210225643990607,
           "actual": -0.14,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-06-01",
-          "pred": -1.260456411841551,
+          "pred": -1.2863197729575508,
           "actual": -0.33,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-09-01",
-          "pred": -1.19975277343772,
+          "pred": -1.1918967540483698,
           "actual": -0.09,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-12-01",
-          "pred": -0.42486642876841424,
+          "pred": -0.422968985631143,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-03-01",
-          "pred": -0.25995981960652476,
+          "pred": -0.2361488190845314,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-06-01",
-          "pred": -0.5204127447061845,
+          "pred": -0.534512575849092,
           "actual": 0.48,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-09-01",
-          "pred": 0.5141325432398642,
+          "pred": 0.518032520997605,
           "actual": 0.37,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-12-01",
-          "pred": 1.391755335846295,
+          "pred": 1.4271155920621856,
           "actual": 0.77,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-03-01",
-          "pred": 0.929126825954697,
+          "pred": 0.9391235011781072,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-06-01",
-          "pred": 1.1845307485346879,
+          "pred": 1.2011986479358687,
           "actual": 1.28,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-09-01",
-          "pred": 1.6572011146116818,
+          "pred": 1.6762033938631304,
           "actual": 2.01,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-12-01",
-          "pred": 0.8838621747744024,
+          "pred": 0.8715810065978971,
           "actual": 2.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-03-01",
-          "pred": 2.117112869170891,
+          "pred": 2.1464205837319,
           "actual": 1.6,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-06-01",
-          "pred": 2.0473453374383586,
+          "pred": 2.0703886084795142,
           "actual": 0.06,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-09-01",
-          "pred": 0.9597843394996854,
+          "pred": 0.9525272786890959,
           "actual": -0.46,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-12-01",
-          "pred": 0.6340886476567705,
+          "pred": 0.6555745029200183,
           "actual": -0.51,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-03-01",
-          "pred": 0.012760317965701313,
+          "pred": 0.01838262313550488,
           "actual": -0.09,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-06-01",
-          "pred": 1.2915693843504965,
+          "pred": 1.3117332276913223,
           "actual": 0.22,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-09-01",
-          "pred": -0.8356138778319897,
+          "pred": -0.8171906678838836,
           "actual": -0.56,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-12-01",
-          "pred": -1.071957959096643,
+          "pred": -1.068007331468313,
           "actual": -0.85,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-03-01",
-          "pred": -0.4869033956202439,
+          "pred": -0.4930660563954796,
           "actual": -0.73,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-06-01",
-          "pred": 0.07716138541791874,
+          "pred": 0.07985147835848401,
           "actual": 0.12,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-09-01",
-          "pred": 1.5393467583864142,
+          "pred": 1.5478556171464333,
           "actual": 0.3,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-12-01",
-          "pred": 0.6287992161978144,
+          "pred": 0.661106133412963,
           "actual": 0.97,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-03-01",
-          "pred": -0.20013403987753114,
+          "pred": -0.1599667292279029,
           "actual": 0.81,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-06-01",
-          "pred": -0.8388673818552143,
+          "pred": -0.8322629686837674,
           "actual": 0.66,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-09-01",
-          "pred": -1.0108478543920136,
+          "pred": -0.9924185907407692,
           "actual": 0.11,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-12-01",
-          "pred": -0.3548421243976081,
+          "pred": -0.33061962333321543,
           "actual": 0.51,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-03-01",
-          "pred": 0.31704086796785486,
+          "pred": 0.3325247240263758,
           "actual": 0.36,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-06-01",
-          "pred": 0.6631560103589732,
+          "pred": 0.6936989344670973,
           "actual": -0.21,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-09-01",
-          "pred": 1.057939646417952,
+          "pred": 1.075268401244313,
           "actual": -0.66,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-12-01",
-          "pred": -0.1782235931269431,
+          "pred": -0.16350776771487593,
           "actual": -0.98,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-03-01",
-          "pred": 0.009268349893000974,
+          "pred": 0.02712404229434657,
           "actual": -0.72,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-06-01",
-          "pred": -0.40795180236995904,
+          "pred": -0.4032683716717248,
           "actual": -0.06,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-09-01",
-          "pred": -0.0239257189160146,
+          "pred": -0.017101089911816702,
           "actual": -0.5,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-12-01",
-          "pred": -0.674480971411169,
+          "pred": -0.6743340353558085,
           "actual": -1.07,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-03-01",
-          "pred": -0.41737238256991877,
+          "pred": -0.4192214424091877,
           "actual": -0.84,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-06-01",
-          "pred": -0.4093292643724821,
+          "pred": -0.42270011535168417,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-09-01",
-          "pred": 0.19709976397205553,
+          "pred": 0.19702029731426418,
           "actual": -1.06,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-12-01",
-          "pred": -0.4173700982430497,
+          "pred": -0.40819052155715896,
           "actual": -0.86,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-03-01",
-          "pred": -0.8687494532552931,
+          "pred": -0.8574801878129461,
           "actual": -0.13,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-06-01",
-          "pred": -1.870597388142642,
+          "pred": -1.869008945782032,
           "actual": 0.95,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-09-01",
-          "pred": -0.8252444336990522,
+          "pred": -0.8134074046201218,
           "actual": 1.65,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-12-01",
-          "pred": 0.4872305966705384,
+          "pred": 0.4891094017098448,
           "actual": 1.81,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-03-01",
-          "pred": 1.5391019365067622,
+          "pred": 1.5469531318375842,
           "actual": 1.1,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-06-01",
-          "pred": 1.6833917237635265,
+          "pred": 1.7120726389255585,
           "actual": 0.25,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-09-01",
-          "pred": 1.9055004003758673,
+          "pred": 1.8999123990560514,
           "actual": -0.11,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-12-01",
-          "pred": 0.6634764186651583,
+          "pred": 0.6591598276663977,
           "actual": -0.58,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-03-01",
-          "pred": 1.5844944415246618,
+          "pred": 1.5859393771345642,
           "actual": 0.05,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-06-01",
-          "pred": 1.7162648800663185,
+          "pred": 1.7222570341911327,
           "actual": 0.01,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-09-01",
-          "pred": -0.6213288771390529,
+          "pred": -0.6419987977312942,
           "actual": -0.3,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-12-01",
-          "pred": -1.0083790612017556,
+          "pred": -1.041870283895321,
           "actual": -0.49,
           "persistence": 0.01
         }
@@ -2454,518 +2183,518 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-09-01",
-          "pred": 1.3589503104305425,
+          "pred": 1.3206745458359743,
           "actual": -1.04,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-12-01",
-          "pred": 1.9697054482180456,
+          "pred": 1.9428212412703143,
           "actual": -1.61,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2008-03-01",
-          "pred": 1.2132197422552087,
+          "pred": 1.1915125174864525,
           "actual": -1.17,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2008-06-01",
-          "pred": -0.3027317832841833,
+          "pred": -0.3439310642090955,
           "actual": -0.44,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-09-01",
-          "pred": -0.7613678650710763,
+          "pred": -0.8043202358129581,
           "actual": -0.28,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-12-01",
-          "pred": -0.6646133060144513,
+          "pred": -0.6909987167866734,
           "actual": -0.9,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2009-03-01",
-          "pred": -0.8095329895084116,
+          "pred": -0.7681752424107832,
           "actual": -0.72,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2009-06-01",
-          "pred": -1.5589839467704187,
+          "pred": -1.5741587810501538,
           "actual": 0.49,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-09-01",
-          "pred": -0.40310335855640234,
+          "pred": -0.41192911959706013,
           "actual": 0.68,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-12-01",
-          "pred": 1.1827766683411696,
+          "pred": 1.112493800046979,
           "actual": 1.81,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2010-03-01",
-          "pred": -0.5594367112469791,
+          "pred": -0.5918118263207103,
           "actual": 1.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2010-06-01",
-          "pred": -1.0240849643333656,
+          "pred": -0.9901595502002489,
           "actual": -0.62,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-09-01",
-          "pred": -1.150122723079735,
+          "pred": -1.090343238798629,
           "actual": -1.56,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-12-01",
-          "pred": 0.61150286519754,
+          "pred": 0.6028871672367888,
           "actual": -1.63,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2011-03-01",
-          "pred": 0.8142651093746336,
+          "pred": 0.8330720815993334,
           "actual": -0.98,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2011-06-01",
-          "pred": 0.21043661889272308,
+          "pred": 0.23664213229998032,
           "actual": -0.25,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-09-01",
-          "pred": 0.08183126729273318,
+          "pred": 0.0316434973907109,
           "actual": -0.76,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-12-01",
-          "pred": -0.39718519907122246,
+          "pred": -0.3722818403569776,
           "actual": -1.05,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2012-03-01",
-          "pred": -0.9682169586156145,
+          "pred": -0.9311955837549009,
           "actual": -0.48,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2012-06-01",
-          "pred": -0.5863748445694831,
+          "pred": -0.5860294345285921,
           "actual": 0.14,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-09-01",
-          "pred": 0.6939867358446855,
+          "pred": 0.636487001672397,
           "actual": 0.44,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-12-01",
-          "pred": 1.01040979331797,
+          "pred": 0.973170983968968,
           "actual": -0.13,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2013-03-01",
-          "pred": -0.28655222147576553,
+          "pred": -0.34276736412994235,
           "actual": -0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2013-06-01",
-          "pred": -1.7451856215973753,
+          "pred": -1.795077941141815,
           "actual": -0.33,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-09-01",
-          "pred": -1.6752858085080908,
+          "pred": -1.6879654880602235,
           "actual": -0.09,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-12-01",
-          "pred": 0.018433152892512114,
+          "pred": -0.09428359754566538,
           "actual": -0.09,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2014-03-01",
-          "pred": -0.8148648954269748,
+          "pred": -0.81925431749605,
           "actual": -0.07,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2014-06-01",
-          "pred": -1.0347727559740487,
+          "pred": -1.0141372995146072,
           "actual": 0.48,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-09-01",
-          "pred": 0.037883613189333046,
+          "pred": 0.0766957022887348,
           "actual": 0.37,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-12-01",
-          "pred": 0.8571133506889181,
+          "pred": 0.8868829648496582,
           "actual": 0.77,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2015-03-01",
-          "pred": 1.962768394700594,
+          "pred": 1.9939051417752771,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2015-06-01",
-          "pred": 1.1594672122002017,
+          "pred": 1.2247628325684277,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-09-01",
-          "pred": 1.8368507322141505,
+          "pred": 1.8706036262124275,
           "actual": 2.01,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-12-01",
-          "pred": 1.68942514325367,
+          "pred": 1.7013056781975069,
           "actual": 2.56,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2016-03-01",
-          "pred": 1.639989131828089,
+          "pred": 1.664441967967102,
           "actual": 1.6,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2016-06-01",
-          "pred": -0.4845776896516872,
+          "pred": -0.48716661007412815,
           "actual": 0.06,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-09-01",
-          "pred": 1.0252763556075855,
+          "pred": 1.0495641779175544,
           "actual": -0.46,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-12-01",
-          "pred": 1.5700413280367036,
+          "pred": 1.6136118444744723,
           "actual": -0.51,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2017-03-01",
-          "pred": 1.459730736361307,
+          "pred": 1.4406361603234463,
           "actual": -0.09,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2017-06-01",
-          "pred": 0.4001392333938688,
+          "pred": 0.43296383914315356,
           "actual": 0.22,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-09-01",
-          "pred": -0.42439295677536787,
+          "pred": -0.4003417578210511,
           "actual": -0.56,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-12-01",
-          "pred": -0.11330314496688096,
+          "pred": -0.0843978081841544,
           "actual": -0.85,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2018-03-01",
-          "pred": 0.13272502448216245,
+          "pred": 0.14006113231448603,
           "actual": -0.73,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2018-06-01",
-          "pred": 0.9435816800233842,
+          "pred": 0.9631181494672685,
           "actual": 0.12,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-09-01",
-          "pred": 2.096523068067257,
+          "pred": 2.0995147444730535,
           "actual": 0.3,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-12-01",
-          "pred": 0.8092257186323392,
+          "pred": 0.8649395116710743,
           "actual": 0.97,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2019-03-01",
-          "pred": -1.2255157919911674,
+          "pred": -1.2029063005942813,
           "actual": 0.81,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2019-06-01",
-          "pred": -1.968825290237676,
+          "pred": -1.959228863660559,
           "actual": 0.66,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-09-01",
-          "pred": -1.946872841723687,
+          "pred": -1.8995186241404538,
           "actual": 0.11,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-12-01",
-          "pred": 0.2517710337350599,
+          "pred": 0.26029841182385777,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2020-03-01",
-          "pred": 0.025853617358883463,
+          "pred": 0.0590464628737118,
           "actual": 0.36,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2020-06-01",
-          "pred": -0.15148248353243046,
+          "pred": -0.0912063558395747,
           "actual": -0.21,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-09-01",
-          "pred": -0.3731428607514735,
+          "pred": -0.32882931970373197,
           "actual": -0.66,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-12-01",
-          "pred": -0.01644757501948517,
+          "pred": -0.013279673855684947,
           "actual": -0.98,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2021-03-01",
-          "pred": 1.1566501773305016,
+          "pred": 1.1640030237325425,
           "actual": -0.72,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2021-06-01",
-          "pred": 1.5665336480290162,
+          "pred": 1.5513871099659957,
           "actual": -0.06,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-09-01",
-          "pred": 1.4250482309810382,
+          "pred": 1.427530568530075,
           "actual": -0.5,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-12-01",
-          "pred": 0.4708519444443427,
+          "pred": 0.49176872023379214,
           "actual": -1.07,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2022-03-01",
-          "pred": -0.063141719559126,
+          "pred": -0.0397652633286454,
           "actual": -0.84,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2022-06-01",
-          "pred": 0.21540666711550005,
+          "pred": 0.19880007514597028,
           "actual": -0.77,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-09-01",
-          "pred": 0.2858100008264067,
+          "pred": 0.32787221418045503,
           "actual": -1.06,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-12-01",
-          "pred": 0.35465716683006715,
+          "pred": 0.36781277537028306,
           "actual": -0.86,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2023-03-01",
-          "pred": -1.0607607962367278,
+          "pred": -1.0114599177326788,
           "actual": -0.13,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2023-06-01",
-          "pred": -2.3702240374340384,
+          "pred": -2.3004770017190643,
           "actual": 0.95,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-09-01",
-          "pred": -1.963926159180093,
+          "pred": -1.9333856188250425,
           "actual": 1.65,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-12-01",
-          "pred": 0.0389883550852879,
+          "pred": 0.05054750188406162,
           "actual": 1.81,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2024-03-01",
-          "pred": -0.522480858287444,
+          "pred": -0.5054661691310076,
           "actual": 1.1,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2024-06-01",
-          "pred": 0.6109032151088344,
+          "pred": 0.5951464205853435,
           "actual": 0.25,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-09-01",
-          "pred": 1.7524575748614324,
+          "pred": 1.8065550500983625,
           "actual": -0.11,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-12-01",
-          "pred": 1.9896791435196226,
+          "pred": 1.9726736448417994,
           "actual": -0.58,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2025-03-01",
-          "pred": 0.7110851009301223,
+          "pred": 0.7377228909545793,
           "actual": 0.05,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2025-06-01",
-          "pred": 0.3832069342766155,
+          "pred": 0.3875842096119179,
           "actual": 0.01,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-09-01",
-          "pred": 1.2083423264246853,
+          "pred": 1.202854970837357,
           "actual": -0.3,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-12-01",
-          "pred": 0.8099797112697128,
+          "pred": 0.8085648896037444,
           "actual": -0.49,
           "persistence": -0.58
         }
@@ -2974,490 +2703,490 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2008-09-01",
-          "pred": -0.19826307742140453,
+          "pred": -0.21429153338879875,
           "actual": -0.28,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2008-12-01",
-          "pred": -0.3087951995167091,
+          "pred": -0.3455363995457943,
           "actual": -0.9,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2009-03-01",
-          "pred": 1.297917516796275,
+          "pred": 1.1983664225148167,
           "actual": -0.72,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2009-06-01",
-          "pred": 1.6951977555020006,
+          "pred": 1.6226160022652696,
           "actual": 0.49,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2009-09-01",
-          "pred": 1.5735550757168442,
+          "pred": 1.447713878334624,
           "actual": 0.68,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2009-12-01",
-          "pred": -0.017539984025977902,
+          "pred": -0.12116608553707087,
           "actual": 1.81,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2010-03-01",
-          "pred": -0.6491492360140582,
+          "pred": -0.62245912579478,
           "actual": 1.07,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2010-06-01",
-          "pred": -1.5256783609236855,
+          "pred": -1.523376492496262,
           "actual": -0.62,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2010-09-01",
-          "pred": -2.662516297466572,
+          "pred": -2.660978093403851,
           "actual": -1.56,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2010-12-01",
-          "pred": -1.7960281279550403,
+          "pred": -1.8548281760570087,
           "actual": -1.63,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2011-03-01",
-          "pred": 0.6094485446201451,
+          "pred": 0.5928097119780246,
           "actual": -0.98,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2011-06-01",
-          "pred": 0.9603977025782644,
+          "pred": 1.0182605737918942,
           "actual": -0.25,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2011-09-01",
-          "pred": -0.2681628301852064,
+          "pred": -0.27812791261599407,
           "actual": -0.76,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2011-12-01",
-          "pred": 0.6157472374158746,
+          "pred": 0.6485266437085028,
           "actual": -1.05,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2012-03-01",
-          "pred": 0.8579127846721561,
+          "pred": 0.8780100785878111,
           "actual": -0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2012-06-01",
-          "pred": 1.9118616331223046,
+          "pred": 1.902831786318208,
           "actual": 0.14,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2012-09-01",
-          "pred": 1.6700451389986175,
+          "pred": 1.6834928994736502,
           "actual": 0.44,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2012-12-01",
-          "pred": 0.46056563074622453,
+          "pred": 0.545654613073765,
           "actual": -0.13,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2013-03-01",
-          "pred": -1.7783521767921486,
+          "pred": -1.8591873814389799,
           "actual": -0.14,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2013-06-01",
-          "pred": -2.114236921271777,
+          "pred": -2.187926817634184,
           "actual": -0.33,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2013-09-01",
-          "pred": -2.634112009504475,
+          "pred": -2.6977073211647062,
           "actual": -0.09,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2013-12-01",
-          "pred": -1.4566750053888946,
+          "pred": -1.4901517189870446,
           "actual": -0.09,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2014-03-01",
-          "pred": 0.4181275247029723,
+          "pred": 0.46050319259544426,
           "actual": -0.07,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2014-06-01",
-          "pred": -0.5404628117388537,
+          "pred": -0.551730588945485,
           "actual": 0.48,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2014-09-01",
-          "pred": 0.3622093906545821,
+          "pred": 0.36702798408427667,
           "actual": 0.37,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2014-12-01",
-          "pred": 0.8870289835416972,
+          "pred": 0.8325986393817674,
           "actual": 0.77,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2015-03-01",
-          "pred": 1.9372650315736517,
+          "pred": 1.9223463441757915,
           "actual": 0.48,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2015-06-01",
-          "pred": 2.0462813098470836,
+          "pred": 2.0574855335187947,
           "actual": 1.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2015-09-01",
-          "pred": 1.5262433317978297,
+          "pred": 1.5934383107704346,
           "actual": 2.01,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2015-12-01",
-          "pred": 0.5013923411575905,
+          "pred": 0.6138063294695211,
           "actual": 2.56,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2016-03-01",
-          "pred": -0.42263568748266456,
+          "pred": -0.453536494146002,
           "actual": 1.6,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2016-06-01",
-          "pred": -0.1508318257376976,
+          "pred": -0.18564656097812948,
           "actual": 0.06,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2016-09-01",
-          "pred": -0.8169008182605821,
+          "pred": -0.7820592983645442,
           "actual": -0.46,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2016-12-01",
-          "pred": -0.49786046391231514,
+          "pred": -0.45298281569476545,
           "actual": -0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2017-03-01",
-          "pred": -0.45965471044118583,
+          "pred": -0.4384866589384948,
           "actual": -0.09,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2017-06-01",
-          "pred": 2.05241901134795,
+          "pred": 2.119917111386483,
           "actual": 0.22,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2017-09-01",
-          "pred": -0.01162812219652784,
+          "pred": 0.06345975780874952,
           "actual": -0.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2017-12-01",
-          "pred": -0.26494168906901827,
+          "pred": -0.20650321895891727,
           "actual": -0.85,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2018-03-01",
-          "pred": 0.9581571160739555,
+          "pred": 0.977217273279715,
           "actual": -0.73,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2018-06-01",
-          "pred": 1.5719110322239729,
+          "pred": 1.6182240849193186,
           "actual": 0.12,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2018-09-01",
-          "pred": 1.4729285124380687,
+          "pred": 1.5315355979419787,
           "actual": 0.3,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2018-12-01",
-          "pred": 1.0584832638000774,
+          "pred": 1.1084849608010654,
           "actual": 0.97,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2019-03-01",
-          "pred": -0.9968951651036589,
+          "pred": -0.9988512443693037,
           "actual": 0.81,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2019-06-01",
-          "pred": -1.4442656324038192,
+          "pred": -1.4367322241893017,
           "actual": 0.66,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2019-09-01",
-          "pred": -1.324827322231467,
+          "pred": -1.2988129007604958,
           "actual": 0.11,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2019-12-01",
-          "pred": -0.35050938805502646,
+          "pred": -0.2882302460175712,
           "actual": 0.51,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2020-03-01",
-          "pred": 0.09859435171465994,
+          "pred": 0.18834512680287183,
           "actual": 0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2020-06-01",
-          "pred": -1.6037752055099048,
+          "pred": -1.5807887535856184,
           "actual": -0.21,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2020-09-01",
-          "pred": -0.8840917586368471,
+          "pred": -0.9066241406106057,
           "actual": -0.66,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2020-12-01",
-          "pred": -0.8449075729735825,
+          "pred": -0.7663906280825489,
           "actual": -0.98,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2021-03-01",
-          "pred": 0.7946014824663925,
+          "pred": 0.878967212261957,
           "actual": -0.72,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2021-06-01",
-          "pred": 1.5470312972917433,
+          "pred": 1.541502195549201,
           "actual": -0.06,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2021-09-01",
-          "pred": 1.7031454516918023,
+          "pred": 1.7395405353052633,
           "actual": -0.5,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2021-12-01",
-          "pred": 1.5436922718384902,
+          "pred": 1.5881203973645581,
           "actual": -1.07,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2022-03-01",
-          "pred": 0.3794884719950343,
+          "pred": 0.3560295628480266,
           "actual": -0.84,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2022-06-01",
-          "pred": 0.3767196807262064,
+          "pred": 0.3563876392439649,
           "actual": -0.77,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2022-09-01",
-          "pred": 0.4472312324505544,
+          "pred": 0.48562080975507405,
           "actual": -1.06,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2022-12-01",
-          "pred": 0.11797651191859139,
+          "pred": 0.2153048251691823,
           "actual": -0.86,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2023-03-01",
-          "pred": -0.018523931580066755,
+          "pred": 0.05990226706904832,
           "actual": -0.13,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2023-06-01",
-          "pred": -1.2739691355010108,
+          "pred": -1.190906266336622,
           "actual": 0.95,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2023-09-01",
-          "pred": -1.5213136162955387,
+          "pred": -1.4608133775861276,
           "actual": 1.65,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2023-12-01",
-          "pred": -0.6431374596056857,
+          "pred": -0.5704128967909412,
           "actual": 1.81,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2024-03-01",
-          "pred": 0.2700985461199813,
+          "pred": 0.32840072547682647,
           "actual": 1.1,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2024-06-01",
-          "pred": 0.3031773167464839,
+          "pred": 0.3814869699155662,
           "actual": 0.25,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2024-09-01",
-          "pred": 0.6417674185667911,
+          "pred": 0.6932269912270667,
           "actual": -0.11,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2024-12-01",
-          "pred": 1.102412323359665,
+          "pred": 1.0873337533240035,
           "actual": -0.58,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2025-03-01",
-          "pred": 1.5783076639719344,
+          "pred": 1.6203780155405942,
           "actual": 0.05,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2025-06-01",
-          "pred": -0.37997059073957656,
+          "pred": -0.3670196909977075,
           "actual": 0.01,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2025-09-01",
-          "pred": -0.3590284061749825,
+          "pred": -0.3409891254368262,
           "actual": -0.3,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2025-12-01",
-          "pred": 1.1722395864233144,
+          "pred": 1.2263462623732684,
           "actual": -0.49,
           "persistence": 1.81
         }
@@ -3466,412 +3195,412 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2011-09-01",
-          "pred": -0.7396032830665081,
+          "pred": -1.2255855214926579,
           "actual": -0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2011-12-01",
-          "pred": -0.2318966803189334,
+          "pred": -0.4257327894416311,
           "actual": -1.05,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2012-03-01",
-          "pred": 0.8453690903533748,
+          "pred": 0.674398942279046,
           "actual": -0.48,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2012-06-01",
-          "pred": -0.2686873099216882,
+          "pred": -0.3986401347913413,
           "actual": 0.14,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2012-09-01",
-          "pred": -0.5671437822438798,
+          "pred": -0.5727496509127954,
           "actual": 0.44,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2012-12-01",
-          "pred": -0.8878563639340245,
+          "pred": -0.8856100991520895,
           "actual": -0.13,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2013-03-01",
-          "pred": -1.1436674698504048,
+          "pred": -1.148972182310781,
           "actual": -0.14,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2013-06-01",
-          "pred": -1.8640503502134524,
+          "pred": -1.9461648571752423,
           "actual": -0.33,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2013-09-01",
-          "pred": -0.4500182558420942,
+          "pred": -0.5650093500832157,
           "actual": -0.09,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2013-12-01",
-          "pred": 1.5902418265236506,
+          "pred": 1.5526428365513305,
           "actual": -0.09,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2014-03-01",
-          "pred": 0.44267857813375777,
+          "pred": 0.35878885369403635,
           "actual": -0.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2014-06-01",
-          "pred": -0.18698061525179593,
+          "pred": -0.12450553719456915,
           "actual": 0.48,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2014-09-01",
-          "pred": 0.7435222549621219,
+          "pred": 0.8216682508027371,
           "actual": 0.37,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2014-12-01",
-          "pred": 2.231271395552168,
+          "pred": 2.2861357511869027,
           "actual": 0.77,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2015-03-01",
-          "pred": 2.8817802685229803,
+          "pred": 2.946613319591557,
           "actual": 0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2015-06-01",
-          "pred": 1.9078293851670836,
+          "pred": 1.9728703357531705,
           "actual": 1.28,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2015-09-01",
-          "pred": 0.1608883457342708,
+          "pred": 0.13349454182601872,
           "actual": 2.01,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2015-12-01",
-          "pred": -1.4261318351553964,
+          "pred": -1.2881358686519022,
           "actual": 2.56,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2016-03-01",
-          "pred": -1.8389723567233152,
+          "pred": -1.9031221873922242,
           "actual": 1.6,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2016-06-01",
-          "pred": -1.6362251426943444,
+          "pred": -1.765734516819227,
           "actual": 0.06,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2016-09-01",
-          "pred": -0.6906745711530526,
+          "pred": -0.8588524516414909,
           "actual": -0.46,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2016-12-01",
-          "pred": 0.5127990959536698,
+          "pred": 0.45779566961024887,
           "actual": -0.51,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2017-03-01",
-          "pred": -0.30367295311941683,
+          "pred": -0.39250102534049136,
           "actual": -0.09,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2017-06-01",
-          "pred": -1.456202551260793,
+          "pred": -1.5491173250944659,
           "actual": 0.22,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2017-09-01",
-          "pred": 0.24116809941577372,
+          "pred": 0.1300221114107532,
           "actual": -0.56,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2017-12-01",
-          "pred": 1.8147711882655455,
+          "pred": 1.7635460710729631,
           "actual": -0.85,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2018-03-01",
-          "pred": 0.580439213639433,
+          "pred": 0.4812102895102142,
           "actual": -0.73,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2018-06-01",
-          "pred": -0.5734674958540021,
+          "pred": -0.6187025960824487,
           "actual": 0.12,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2018-09-01",
-          "pred": 0.1324884791528223,
+          "pred": -0.16103123310400064,
           "actual": 0.3,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2018-12-01",
-          "pred": -0.4967876759936588,
+          "pred": -0.7791777586198082,
           "actual": 0.97,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2019-03-01",
-          "pred": -0.7338260761942275,
+          "pred": -0.9254647946411774,
           "actual": 0.81,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2019-06-01",
-          "pred": -1.3655673893372828,
+          "pred": -1.5341773831292116,
           "actual": 0.66,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2019-09-01",
-          "pred": 0.04054641016305059,
+          "pred": -0.18248630111817182,
           "actual": 0.11,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2019-12-01",
-          "pred": -0.2436935512996528,
+          "pred": -0.34161718565494664,
           "actual": 0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2020-03-01",
-          "pred": -0.05845927754896072,
+          "pred": -0.1833222954147529,
           "actual": 0.36,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2020-06-01",
-          "pred": 0.31464839316779547,
+          "pred": 0.20293730197154047,
           "actual": -0.21,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2020-09-01",
-          "pred": -0.517592668777007,
+          "pred": -0.32932022865072896,
           "actual": -0.66,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2020-12-01",
-          "pred": 0.7078999704085281,
+          "pred": 0.7834431526112763,
           "actual": -0.98,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2021-03-01",
-          "pred": 2.0157210479034404,
+          "pred": 1.98364330338181,
           "actual": -0.72,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2021-06-01",
-          "pred": 0.657222358102001,
+          "pred": 0.6910523476502465,
           "actual": -0.06,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2021-09-01",
-          "pred": -1.494121349465495,
+          "pred": -1.5648858516315507,
           "actual": -0.5,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2021-12-01",
-          "pred": -1.791004669159164,
+          "pred": -1.6957842486608357,
           "actual": -1.07,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2022-03-01",
-          "pred": -2.048111755891763,
+          "pred": -2.0820664652295666,
           "actual": -0.84,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2022-06-01",
-          "pred": -1.5620157864359605,
+          "pred": -1.5493618939787452,
           "actual": -0.77,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2022-09-01",
-          "pred": -0.47643476030071397,
+          "pred": -0.35777401241724605,
           "actual": -1.06,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2022-12-01",
-          "pred": -0.5549766632278729,
+          "pred": -0.47221291559632056,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2023-03-01",
-          "pred": -1.9022103148503047,
+          "pred": -1.932264180879714,
           "actual": -0.13,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2023-06-01",
-          "pred": -2.329973571476712,
+          "pred": -2.440898560099628,
           "actual": 0.95,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2023-09-01",
-          "pred": -0.8781153720542798,
+          "pred": -0.8832770550095839,
           "actual": 1.65,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2023-12-01",
-          "pred": 0.41673317187235626,
+          "pred": 0.3693908380160166,
           "actual": 1.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2024-03-01",
-          "pred": 2.0680040905801147,
+          "pred": 2.0978718135182244,
           "actual": 1.1,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2024-06-01",
-          "pred": 1.9724170768550622,
+          "pred": 2.0729312620964153,
           "actual": 0.25,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2024-09-01",
-          "pred": 1.48203705022247,
+          "pred": 1.6032044069594085,
           "actual": -0.11,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2024-12-01",
-          "pred": 1.1944315981979694,
+          "pred": 1.2286916785778772,
           "actual": -0.58,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2025-03-01",
-          "pred": 0.972324643693278,
+          "pred": 1.002291939902519,
           "actual": 0.05,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2025-06-01",
-          "pred": 1.410241084353032,
+          "pred": 1.4601900593673613,
           "actual": 0.01,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2025-09-01",
-          "pred": 0.8355611192800566,
+          "pred": 0.8609671352349062,
           "actual": -0.3,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2025-12-01",
-          "pred": 0.7441970487161758,
+          "pred": 0.7084499695850989,
           "actual": -0.49,
           "persistence": -0.98
         }
       ]
     },
-    "event_ordered_cascade_decoder": {
+    "sync_event_cascade_decoder": {
       "1": [
         {
           "origin": "2006-09-01",
@@ -6909,544 +6638,544 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         }
       ]
     },
-    "phi_flow_decoder": {
+    "gear_event_cascade_decoder": {
       "1": [
         {
           "origin": "2006-09-01",
           "date": "2006-10-01",
-          "pred": 0.5048251423418392,
+          "pred": 0.4854512991748387,
           "actual": 0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-01-01",
-          "pred": 1.2566708786464473,
+          "pred": 1.2188073440181637,
           "actual": 0.59,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-04-01",
-          "pred": 0.4202516613790309,
+          "pred": 0.3871734331775279,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-07-01",
-          "pred": -0.08859932536382972,
+          "pred": -0.12376821025515686,
           "actual": -0.37,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-10-01",
-          "pred": -0.37668247660982995,
+          "pred": -0.39997503352482705,
           "actual": -1.41,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-01-01",
-          "pred": -0.5862974608811357,
+          "pred": -0.6082922713692139,
           "actual": -1.79,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-04-01",
-          "pred": -0.9675357329699321,
+          "pred": -0.9846911091862272,
           "actual": -0.89,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-07-01",
-          "pred": -0.9091796326538785,
+          "pred": -0.9257062627699042,
           "actual": -0.04,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-10-01",
-          "pred": -0.3510773656951216,
+          "pred": -0.36264113681508714,
           "actual": -0.3,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-01-01",
-          "pred": 0.010532176376812072,
+          "pred": -0.003176463782711171,
           "actual": -1.0,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-04-01",
-          "pred": -0.7944851234806066,
+          "pred": -0.8118620543056932,
           "actual": -0.25,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-07-01",
-          "pred": 0.6629490597596018,
+          "pred": 0.6566435660041966,
           "actual": 0.69,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-10-01",
-          "pred": 1.1372808652127986,
+          "pred": 1.1033964111312669,
           "actual": 0.96,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-01-01",
-          "pred": 1.8457948250761718,
+          "pred": 1.8434919509448753,
           "actual": 1.43,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-04-01",
-          "pred": 0.10350814867434699,
+          "pred": 0.10953096737513887,
           "actual": 0.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-07-01",
-          "pred": -0.5869835417553504,
+          "pred": -0.588723485457938,
           "actual": -0.89,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-10-01",
-          "pred": -1.3451511227522484,
+          "pred": -1.3472579669045395,
           "actual": -1.65,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-01-01",
-          "pred": -1.0969166689466803,
+          "pred": -1.103378163904343,
           "actual": -1.7,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-04-01",
-          "pred": -1.2607315921430142,
+          "pred": -1.2593534465172254,
           "actual": -0.74,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-07-01",
-          "pred": -0.9442563862354013,
+          "pred": -0.9453942890664734,
           "actual": -0.23,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-10-01",
-          "pred": -0.5911065675001997,
+          "pred": -0.5793322118786213,
           "actual": -0.93,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-01-01",
-          "pred": -1.2974577890086931,
+          "pred": -1.3067638627227085,
           "actual": -0.93,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-04-01",
-          "pred": -0.866044839545922,
+          "pred": -0.8703651327893906,
           "actual": -0.29,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-07-01",
-          "pred": 0.2946807904392342,
+          "pred": 0.2845094218997359,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-10-01",
-          "pred": 0.8546637056227329,
+          "pred": 0.8480451895619563,
           "actual": 0.23,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-01-01",
-          "pred": -0.041456007302567696,
+          "pred": -0.04579798091022565,
           "actual": -0.42,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-04-01",
-          "pred": -0.7325453012720797,
+          "pred": -0.742007861063736,
           "actual": -0.08,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-07-01",
-          "pred": -0.5522243445542268,
+          "pred": -0.5643443313972188,
           "actual": -0.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-10-01",
-          "pred": -0.2563544625488971,
+          "pred": -0.26834850860312337,
           "actual": -0.24,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-01-01",
-          "pred": -0.2712006459359483,
+          "pred": -0.2843343250150798,
           "actual": -0.42,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-04-01",
-          "pred": -0.1896238615249155,
+          "pred": -0.1935914802742356,
           "actual": 0.28,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-07-01",
-          "pred": 0.95491106892593,
+          "pred": 0.9558135812447349,
           "actual": 0.13,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-10-01",
-          "pred": 0.5874065275944191,
+          "pred": 0.5850688058585294,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-01-01",
-          "pred": 1.095727764704082,
+          "pred": 1.0879721810913399,
           "actual": 0.59,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-04-01",
-          "pred": 0.4703486913227854,
+          "pred": 0.4706531571074581,
           "actual": 0.9,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-07-01",
-          "pred": 0.6121178426383589,
+          "pred": 0.6116631119787577,
           "actual": 1.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-10-01",
-          "pred": 2.210903765743047,
+          "pred": 2.1938793784658572,
           "actual": 2.21,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-01-01",
-          "pred": 2.5175674917886126,
+          "pred": 2.5045385127624153,
           "actual": 2.56,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-04-01",
-          "pred": 1.90628589730575,
+          "pred": 1.8983655121194465,
           "actual": 1.05,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-07-01",
-          "pred": 0.38616339674092687,
+          "pred": 0.3855800701363858,
           "actual": -0.25,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-10-01",
-          "pred": -1.2853596865394739,
+          "pred": -1.2852558326396326,
           "actual": -0.75,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-01-01",
-          "pred": -0.19120648843345422,
+          "pred": -0.19481982067035553,
           "actual": -0.34,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-04-01",
-          "pred": 0.054638822083876694,
+          "pred": 0.039271049629776164,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-07-01",
-          "pred": -0.016348032063403267,
+          "pred": -0.02047170580664663,
           "actual": 0.22,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-10-01",
-          "pred": -0.5133018548199489,
+          "pred": -0.5129170049948417,
           "actual": -0.52,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-01-01",
-          "pred": -0.649545725839813,
+          "pred": -0.6622227949943077,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-04-01",
-          "pred": 0.2220060617404511,
+          "pred": 0.21013577503939582,
           "actual": -0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-07-01",
-          "pred": 0.2440623526093348,
+          "pred": 0.23525422571258314,
           "actual": 0.27,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-10-01",
-          "pred": 0.24760926242884124,
+          "pred": 0.24614708856071493,
           "actual": 0.84,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-01-01",
-          "pred": 1.0595826989147472,
+          "pred": 1.0470711444307788,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-04-01",
-          "pred": -0.16799627810223872,
+          "pred": -0.17542737603812134,
           "actual": 0.67,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-07-01",
-          "pred": 0.3926752125345231,
+          "pred": 0.37855648529852964,
           "actual": 0.41,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-10-01",
-          "pred": 0.18843234816305915,
+          "pred": 0.18374700143605333,
           "actual": 0.55,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-01-01",
-          "pred": 0.5520046397097558,
+          "pred": 0.5543672109270382,
           "actual": 0.64,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-04-01",
-          "pred": 0.5098838312522952,
+          "pred": 0.5163907171322151,
           "actual": 0.49,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-07-01",
-          "pred": -0.08865646677900428,
+          "pred": -0.08635921226128541,
           "actual": -0.04,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-10-01",
-          "pred": -0.5456733180242145,
+          "pred": -0.545036699861233,
           "actual": -1.19,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-01-01",
-          "pred": -0.8138499349448457,
+          "pred": -0.8073285834085637,
           "actual": -1.04,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-04-01",
-          "pred": -0.02499567337023981,
+          "pred": -0.012841532617012461,
           "actual": -0.55,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-07-01",
-          "pred": -0.3933967447833581,
+          "pred": -0.376407655827678,
           "actual": -0.2,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-10-01",
-          "pred": -0.07752867001840787,
+          "pred": -0.05711313900275146,
           "actual": -0.78,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-01-01",
-          "pred": -0.4298425338116874,
+          "pred": -0.422687876111558,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-04-01",
-          "pred": -0.6162782441076391,
+          "pred": -0.5997753682379349,
           "actual": -0.9,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-07-01",
-          "pred": -0.5310185228509887,
+          "pred": -0.504046518855157,
           "actual": -0.56,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-10-01",
-          "pred": -0.5851016893647942,
+          "pred": -0.5772838099464205,
           "actual": -0.99,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-01-01",
-          "pred": -0.807388800930826,
+          "pred": -0.8056854210535863,
           "actual": -0.78,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-04-01",
-          "pred": -0.503091058753841,
+          "pred": -0.5035790453138747,
           "actual": 0.24,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-07-01",
-          "pred": 0.6608723747826548,
+          "pred": 0.6585256749893783,
           "actual": 1.2,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-10-01",
-          "pred": 1.294530612656122,
+          "pred": 1.301267451895672,
           "actual": 1.59,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-01-01",
-          "pred": 1.721907207676077,
+          "pred": 1.7204356633347253,
           "actual": 1.71,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-04-01",
-          "pred": 1.159631002672971,
+          "pred": 1.1684743087683518,
           "actual": 0.93,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-07-01",
-          "pred": -0.028343360727056562,
+          "pred": -0.024196357904573206,
           "actual": 0.2,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-10-01",
-          "pred": -0.08878137341144515,
+          "pred": -0.07994255898583595,
           "actual": -0.24,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-01-01",
-          "pred": 0.5832172133784592,
+          "pred": 0.595307067878285,
           "actual": -0.76,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-04-01",
-          "pred": 0.43994963691561334,
+          "pred": 0.43116716266208754,
           "actual": -0.08,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-07-01",
-          "pred": 0.0651870730775789,
+          "pred": 0.06179300265391359,
           "actual": -0.03,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-10-01",
-          "pred": -0.8150310634129436,
+          "pred": -0.801235831246948,
           "actual": -0.5,
           "persistence": -0.3
         }
@@ -7455,539 +7184,539 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2006-12-01",
-          "pred": 0.45525604472945946,
+          "pred": 0.38549215522115016,
           "actual": 1.1,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-03-01",
-          "pred": 1.5020490663195207,
+          "pred": 1.416475298136546,
           "actual": -0.15,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-06-01",
-          "pred": 0.5764637250755968,
+          "pred": 0.47101066435609334,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-09-01",
-          "pred": 0.3391451823295632,
+          "pred": 0.24578158223201876,
           "actual": -1.04,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-12-01",
-          "pred": -0.19585289902406033,
+          "pred": -0.2591166264902596,
           "actual": -1.61,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-03-01",
-          "pred": 0.09289565018270768,
+          "pred": 0.025217579740389223,
           "actual": -1.17,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-06-01",
-          "pred": -0.9466809444143144,
+          "pred": -0.977053123305421,
           "actual": -0.44,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-09-01",
-          "pred": -1.3505622958123225,
+          "pred": -1.3944638938753537,
           "actual": -0.28,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-12-01",
-          "pred": -0.009357014727731282,
+          "pred": -0.056756162679651015,
           "actual": -0.9,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-03-01",
-          "pred": -0.018175720005345515,
+          "pred": -0.11348048245799541,
           "actual": -0.72,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-06-01",
-          "pred": -1.1516985533867354,
+          "pred": -1.1970622740358206,
           "actual": 0.49,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-09-01",
-          "pred": 0.7745605101278646,
+          "pred": 0.7494952707558195,
           "actual": 0.68,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-12-01",
-          "pred": 1.8726079587041742,
+          "pred": 1.8150817866909288,
           "actual": 1.81,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-03-01",
-          "pred": 0.6467730517710786,
+          "pred": 0.6188662633425539,
           "actual": 1.07,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-06-01",
-          "pred": -0.3017341387399798,
+          "pred": -0.294802263091293,
           "actual": -0.62,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-09-01",
-          "pred": -0.03753952302739959,
+          "pred": -0.05735520899088736,
           "actual": -1.56,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-12-01",
-          "pred": -1.2361301273374794,
+          "pred": -1.203713774731066,
           "actual": -1.63,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-03-01",
-          "pred": -0.6103188320951449,
+          "pred": -0.6289820794411172,
           "actual": -0.98,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-06-01",
-          "pred": -0.9528009398106301,
+          "pred": -0.9659428742138112,
           "actual": -0.25,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-09-01",
-          "pred": -1.5949342954608428,
+          "pred": -1.5866122534952942,
           "actual": -0.76,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-12-01",
-          "pred": -0.8044717541688922,
+          "pred": -0.8381492882115679,
           "actual": -1.05,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-03-01",
-          "pred": -1.212867281145806,
+          "pred": -1.2977490051742,
           "actual": -0.48,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-06-01",
-          "pred": -0.7872788691768184,
+          "pred": -0.7906075952043423,
           "actual": 0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-09-01",
-          "pred": 1.1473806965318791,
+          "pred": 1.1239881418384092,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-12-01",
-          "pred": 0.8587747838927138,
+          "pred": 0.8710681594344098,
           "actual": -0.13,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-03-01",
-          "pred": -0.5370735723710244,
+          "pred": -0.5821279693748644,
           "actual": -0.14,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-06-01",
-          "pred": -1.223667330967767,
+          "pred": -1.2403867535042987,
           "actual": -0.33,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-09-01",
-          "pred": -0.7319799448992519,
+          "pred": -0.7652441927850114,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-12-01",
-          "pred": -0.2723095922027674,
+          "pred": -0.30206566289690157,
           "actual": -0.09,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-03-01",
-          "pred": -0.14814482840225612,
+          "pred": -0.16053505030334894,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-06-01",
-          "pred": 0.19528564122527103,
+          "pred": 0.1389280469599836,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-09-01",
-          "pred": 1.089188034567084,
+          "pred": 1.0824243361081227,
           "actual": 0.37,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-12-01",
-          "pred": 0.8056397766845793,
+          "pred": 0.7970079016094903,
           "actual": 0.77,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-03-01",
-          "pred": 1.053385961026234,
+          "pred": 0.9831083356828674,
           "actual": 0.48,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-06-01",
-          "pred": 0.8038642266118847,
+          "pred": 0.8087302204760568,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-09-01",
-          "pred": 0.1438958818785398,
+          "pred": 0.16913445862276483,
           "actual": 2.01,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-12-01",
-          "pred": 2.119465519934184,
+          "pred": 2.0649102332333835,
           "actual": 2.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-03-01",
-          "pred": 2.6278565076495797,
+          "pred": 2.572728267801452,
           "actual": 1.6,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-06-01",
-          "pred": 1.7711941647556066,
+          "pred": 1.738359850631373,
           "actual": 0.06,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-09-01",
-          "pred": 0.8234359791529432,
+          "pred": 0.8078047027257461,
           "actual": -0.46,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-12-01",
-          "pred": -1.5658913346749617,
+          "pred": -1.5669030538062354,
           "actual": -0.51,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-03-01",
-          "pred": 0.13921919514040182,
+          "pred": 0.13258760675298698,
           "actual": -0.09,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-06-01",
-          "pred": -0.23721767426936036,
+          "pred": -0.2695274976634279,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-09-01",
-          "pred": -0.3628672359085914,
+          "pred": -0.36819191860030376,
           "actual": -0.56,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-12-01",
-          "pred": -0.6866941730521607,
+          "pred": -0.7269577050870957,
           "actual": -0.85,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-03-01",
-          "pred": -1.0116077564888721,
+          "pred": -1.0451875957469818,
           "actual": -0.73,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-06-01",
-          "pred": 0.698224475894184,
+          "pred": 0.6726008700230222,
           "actual": 0.12,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-09-01",
-          "pred": 0.432139638328225,
+          "pred": 0.4217755795786548,
           "actual": 0.3,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-12-01",
-          "pred": 0.6422908699888041,
+          "pred": 0.6528871462132297,
           "actual": 0.97,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-03-01",
-          "pred": 0.28659161198350336,
+          "pred": 0.2452752622152431,
           "actual": 0.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-06-01",
-          "pred": -0.6404496016877532,
+          "pred": -0.6843264251585188,
           "actual": 0.66,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-09-01",
-          "pred": -0.35250434458696966,
+          "pred": -0.36939630544670715,
           "actual": 0.11,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-12-01",
-          "pred": 0.21924170287858946,
+          "pred": 0.2814615734507205,
           "actual": 0.51,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-03-01",
-          "pred": 0.3508324676289542,
+          "pred": 0.3711897476050505,
           "actual": 0.36,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-06-01",
-          "pred": 1.1068326164824906,
+          "pred": 1.1169901506279578,
           "actual": -0.21,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-09-01",
-          "pred": -0.008262482612852718,
+          "pred": -0.026749365406407617,
           "actual": -0.66,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-12-01",
-          "pred": -0.4423384658596541,
+          "pred": -0.4220668662904953,
           "actual": -0.98,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-03-01",
-          "pred": -0.9597910025065522,
+          "pred": -0.9284165114686791,
           "actual": -0.72,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-06-01",
-          "pred": -0.190365188005288,
+          "pred": -0.13715567444648896,
           "actual": -0.06,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-09-01",
-          "pred": -0.9211264893792518,
+          "pred": -0.8661113389005389,
           "actual": -0.5,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-12-01",
-          "pred": 0.31893212615748856,
+          "pred": 0.372287975358965,
           "actual": -1.07,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-03-01",
-          "pred": -0.31348096454887425,
+          "pred": -0.32954097205008515,
           "actual": -0.84,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-06-01",
-          "pred": -0.756120863727057,
+          "pred": -0.7037947219506988,
           "actual": -0.77,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-09-01",
-          "pred": -0.48848235041104887,
+          "pred": -0.42163763064063836,
           "actual": -1.06,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-12-01",
-          "pred": -0.8428403555255501,
+          "pred": -0.817729213064856,
           "actual": -0.86,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-03-01",
-          "pred": -1.3345542701732873,
+          "pred": -1.3486539137428268,
           "actual": -0.13,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-06-01",
-          "pred": -0.8409141506500261,
+          "pred": -0.819923714387689,
           "actual": 0.95,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-09-01",
-          "pred": 0.32597586246839527,
+          "pred": 0.31223177889524517,
           "actual": 1.65,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-12-01",
-          "pred": 1.638383049615205,
+          "pred": 1.6606877231326405,
           "actual": 1.81,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-03-01",
-          "pred": 1.9959789203922562,
+          "pred": 1.9931487031532678,
           "actual": 1.1,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-06-01",
-          "pred": 1.5767313753249086,
+          "pred": 1.583994317444857,
           "actual": 0.25,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-09-01",
-          "pred": 0.43535713762718037,
+          "pred": 0.42608741915497594,
           "actual": -0.11,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-12-01",
-          "pred": 0.26108635358784005,
+          "pred": 0.3091835967776421,
           "actual": -0.58,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-03-01",
-          "pred": 1.222637429331992,
+          "pred": 1.2577921448668545,
           "actual": 0.05,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-06-01",
-          "pred": 0.4731592876564629,
+          "pred": 0.44835695510362966,
           "actual": 0.01,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-09-01",
-          "pred": -0.4602664395540926,
+          "pred": -0.45258722460039613,
           "actual": -0.3,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-12-01",
-          "pred": -0.8078940128464381,
+          "pred": -0.791555193461916,
           "actual": -0.49,
           "persistence": -0.3
         }
@@ -7996,532 +7725,532 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-03-01",
-          "pred": 0.5291322531556879,
+          "pred": 0.3859177886364858,
           "actual": -0.15,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-06-01",
-          "pred": 0.702046660066225,
+          "pred": 0.55607706504784,
           "actual": -0.16,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-09-01",
-          "pred": 1.077498253400389,
+          "pred": 0.8820032501083125,
           "actual": -1.04,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-12-01",
-          "pred": 0.9585332144979412,
+          "pred": 0.7797883286272907,
           "actual": -1.61,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-03-01",
-          "pred": 1.0280283600023115,
+          "pred": 0.9316730879516913,
           "actual": -1.17,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-06-01",
-          "pred": -0.22062613195253478,
+          "pred": -0.31649102371010096,
           "actual": -0.44,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-09-01",
-          "pred": -1.06034857648838,
+          "pred": -1.1598407289326786,
           "actual": -0.28,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-12-01",
-          "pred": -1.4144592503538689,
+          "pred": -1.5067229215668976,
           "actual": -0.9,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-03-01",
-          "pred": -0.8280468854910846,
+          "pred": -0.9107869277341506,
           "actual": -0.72,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-06-01",
-          "pred": -0.8382694112465793,
+          "pred": -0.9073911471653109,
           "actual": 0.49,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-09-01",
-          "pred": 0.14218527088702057,
+          "pred": 0.08106097569668572,
           "actual": 0.68,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-12-01",
-          "pred": 1.897281852588224,
+          "pred": 1.7676470253518144,
           "actual": 1.81,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-03-01",
-          "pred": 0.6810639119120152,
+          "pred": 0.5924204108557559,
           "actual": 1.07,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-06-01",
-          "pred": -1.0544978698890963,
+          "pred": -1.113579876686109,
           "actual": -0.62,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-09-01",
-          "pred": -0.33501964263921424,
+          "pred": -0.35281475400757556,
           "actual": -1.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-12-01",
-          "pred": 0.2660390960483045,
+          "pred": 0.29930585103397944,
           "actual": -1.63,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-03-01",
-          "pred": -0.07162444483625349,
+          "pred": -0.02251559074740146,
           "actual": -0.98,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-06-01",
-          "pred": 0.7717224036586318,
+          "pred": 0.6727840335905054,
           "actual": -0.25,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-09-01",
-          "pred": -1.2818523788751854,
+          "pred": -1.3689684197245706,
           "actual": -0.76,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-12-01",
-          "pred": -1.787702283556679,
+          "pred": -1.7923875909659208,
           "actual": -1.05,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-03-01",
-          "pred": -1.4683800955006543,
+          "pred": -1.5670217258462185,
           "actual": -0.48,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-06-01",
-          "pred": -1.1716829778978832,
+          "pred": -1.1083072291671208,
           "actual": 0.14,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-09-01",
-          "pred": 0.8226216012875727,
+          "pred": 0.8035195192154387,
           "actual": 0.44,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-12-01",
-          "pred": 1.8422184140141338,
+          "pred": 1.7448296143507065,
           "actual": -0.13,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-03-01",
-          "pred": 0.25069208045825514,
+          "pred": 0.1947208608581858,
           "actual": -0.14,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-06-01",
-          "pred": -1.2775745888959655,
+          "pred": -1.2826372561833104,
           "actual": -0.33,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-09-01",
-          "pred": -1.2087004772619048,
+          "pred": -1.1810229690860592,
           "actual": -0.09,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-12-01",
-          "pred": -0.31041639967222845,
+          "pred": -0.40255295980157485,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-03-01",
-          "pred": -0.12270361419008503,
+          "pred": -0.1567816600757474,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-06-01",
-          "pred": -0.49048211105563855,
+          "pred": -0.45994243079934755,
           "actual": 0.48,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-09-01",
-          "pred": 0.5528070169349464,
+          "pred": 0.5084159170953496,
           "actual": 0.37,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-12-01",
-          "pred": 1.4401858134056034,
+          "pred": 1.4250849769884866,
           "actual": 0.77,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-03-01",
-          "pred": 0.9170388288924627,
+          "pred": 0.9304347399909343,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-06-01",
-          "pred": 1.1936557879874758,
+          "pred": 1.1834882991672002,
           "actual": 1.28,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-09-01",
-          "pred": 1.6201722478998193,
+          "pred": 1.73193509946171,
           "actual": 2.01,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-12-01",
-          "pred": 0.830856427464364,
+          "pred": 0.8676799011673115,
           "actual": 2.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-03-01",
-          "pred": 2.161224867964969,
+          "pred": 2.108464959461385,
           "actual": 1.6,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-06-01",
-          "pred": 2.114560687259419,
+          "pred": 2.025977792940335,
           "actual": 0.06,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-09-01",
-          "pred": 0.9493914959660534,
+          "pred": 0.9017642661742318,
           "actual": -0.46,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-12-01",
-          "pred": 0.6901218222841724,
+          "pred": 0.6261003857737638,
           "actual": -0.51,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-03-01",
-          "pred": 0.00882385656033747,
+          "pred": 0.00044101317442911576,
           "actual": -0.09,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-06-01",
-          "pred": 1.2941974803529195,
+          "pred": 1.2579375757872164,
           "actual": 0.22,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-09-01",
-          "pred": -0.7498539071409,
+          "pred": -0.803690411269634,
           "actual": -0.56,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-12-01",
-          "pred": -1.085388128880248,
+          "pred": -1.107813839902648,
           "actual": -0.85,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-03-01",
-          "pred": -0.45460018272575914,
+          "pred": -0.4947508933849918,
           "actual": -0.73,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-06-01",
-          "pred": 0.07067063246021225,
+          "pred": 0.06292079606278991,
           "actual": 0.12,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-09-01",
-          "pred": 1.6015009743490551,
+          "pred": 1.4691312578820162,
           "actual": 0.3,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-12-01",
-          "pred": 0.6738638460798823,
+          "pred": 0.589454137169122,
           "actual": 0.97,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-03-01",
-          "pred": -0.21069997514472533,
+          "pred": -0.20902281808342923,
           "actual": 0.81,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-06-01",
-          "pred": -0.8657075078554861,
+          "pred": -0.8734744877013485,
           "actual": 0.66,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-09-01",
-          "pred": -0.9905449553309311,
+          "pred": -1.0348077421646091,
           "actual": 0.11,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-12-01",
-          "pred": -0.3663764611166872,
+          "pred": -0.3712668064991823,
           "actual": 0.51,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-03-01",
-          "pred": 0.33999836448077053,
+          "pred": 0.2979854288991595,
           "actual": 0.36,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-06-01",
-          "pred": 0.655723133906462,
+          "pred": 0.6121277963951745,
           "actual": -0.21,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-09-01",
-          "pred": 0.8993235751890889,
+          "pred": 1.0488202477260176,
           "actual": -0.66,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-12-01",
-          "pred": -0.2830590901181855,
+          "pred": -0.2528717668205043,
           "actual": -0.98,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-03-01",
-          "pred": -0.11495681930014776,
+          "pred": -0.01292693481581779,
           "actual": -0.72,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-06-01",
-          "pred": -0.5606767475736751,
+          "pred": -0.4334460025006574,
           "actual": -0.06,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-09-01",
-          "pred": -0.1429045144990556,
+          "pred": -0.04508344209734409,
           "actual": -0.5,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-12-01",
-          "pred": -0.7792793349846897,
+          "pred": -0.707153798091255,
           "actual": -1.07,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-03-01",
-          "pred": -0.5178614252770587,
+          "pred": -0.46601325935690263,
           "actual": -0.84,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-06-01",
-          "pred": -0.5158049207159102,
+          "pred": -0.44250249739873565,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-09-01",
-          "pred": 0.060160928286677746,
+          "pred": 0.18954631763028085,
           "actual": -1.06,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-12-01",
-          "pred": -0.4167952276983905,
+          "pred": -0.4208169933718396,
           "actual": -0.86,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-03-01",
-          "pred": -0.89776187069622,
+          "pred": -0.8533491640560366,
           "actual": -0.13,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-06-01",
-          "pred": -1.9032559479511262,
+          "pred": -1.8568219165475843,
           "actual": 0.95,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-09-01",
-          "pred": -0.7841591968351171,
+          "pred": -0.8208768637249992,
           "actual": 1.65,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-12-01",
-          "pred": 0.507998248958906,
+          "pred": 0.5063784463730793,
           "actual": 1.81,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-03-01",
-          "pred": 1.5015479265070129,
+          "pred": 1.5123568784033778,
           "actual": 1.1,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-06-01",
-          "pred": 1.6693441314164017,
+          "pred": 1.6333547684036362,
           "actual": 0.25,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-09-01",
-          "pred": 1.8929971412527444,
+          "pred": 1.8998121738964175,
           "actual": -0.11,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-12-01",
-          "pred": 0.6153293597408552,
+          "pred": 0.6493559028012965,
           "actual": -0.58,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-03-01",
-          "pred": 1.4098217268354007,
+          "pred": 1.546758188998967,
           "actual": 0.05,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-06-01",
-          "pred": 1.6899826268720748,
+          "pred": 1.7014623588967877,
           "actual": 0.01,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-09-01",
-          "pred": -0.70007748557012,
+          "pred": -0.6658079915174897,
           "actual": -0.3,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-12-01",
-          "pred": -0.9943981453279706,
+          "pred": -1.0218108925875657,
           "actual": -0.49,
           "persistence": 0.01
         }
@@ -8530,518 +8259,518 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-09-01",
-          "pred": 1.603326589703757,
+          "pred": 1.4413082585299053,
           "actual": -1.04,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-12-01",
-          "pred": 2.377322945037828,
+          "pred": 2.040353316085164,
           "actual": -1.61,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2008-03-01",
-          "pred": 1.6747671790785208,
+          "pred": 1.3134233278393779,
           "actual": -1.17,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2008-06-01",
-          "pred": 0.09167011108450013,
+          "pred": -0.22974747953284105,
           "actual": -0.44,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-09-01",
-          "pred": -0.4301152684243054,
+          "pred": -0.7819913166106726,
           "actual": -0.28,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-12-01",
-          "pred": -0.4051999914163045,
+          "pred": -0.5904833855643914,
           "actual": -0.9,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2009-03-01",
-          "pred": -0.609483867906656,
+          "pred": -0.799766871379584,
           "actual": -0.72,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2009-06-01",
-          "pred": -1.375328056657576,
+          "pred": -1.5611822551729402,
           "actual": 0.49,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-09-01",
-          "pred": -0.20868207271369682,
+          "pred": -0.4076295700778163,
           "actual": 0.68,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-12-01",
-          "pred": 1.5515367818727044,
+          "pred": 1.1863394502279774,
           "actual": 1.81,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2010-03-01",
-          "pred": -0.4030981172479712,
+          "pred": -0.6645239990940119,
           "actual": 1.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2010-06-01",
-          "pred": -1.10340910572608,
+          "pred": -1.0968312498377901,
           "actual": -0.62,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-09-01",
-          "pred": -1.0289302401486338,
+          "pred": -1.1648144281085464,
           "actual": -1.56,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-12-01",
-          "pred": 0.5699282716120375,
+          "pred": 0.49763361062862044,
           "actual": -1.63,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2011-03-01",
-          "pred": 0.6707268254963669,
+          "pred": 0.6805908426216086,
           "actual": -0.98,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2011-06-01",
-          "pred": 0.29634543882536496,
+          "pred": 0.14539053985253203,
           "actual": -0.25,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-09-01",
-          "pred": 0.06915591468956839,
+          "pred": 0.0793381164457368,
           "actual": -0.76,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-12-01",
-          "pred": -0.5851637618255616,
+          "pred": -0.24414779156071448,
           "actual": -1.05,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2012-03-01",
-          "pred": -0.9632027693300866,
+          "pred": -0.8640192089974787,
           "actual": -0.48,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2012-06-01",
-          "pred": -0.6548319499481597,
+          "pred": -0.5072276841451433,
           "actual": 0.14,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-09-01",
-          "pred": 0.7482226256330152,
+          "pred": 0.7692561632284273,
           "actual": 0.44,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-12-01",
-          "pred": 1.2071184005978093,
+          "pred": 0.9864341834586461,
           "actual": -0.13,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2013-03-01",
-          "pred": -0.29788115016120437,
+          "pred": -0.40041833550165196,
           "actual": -0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2013-06-01",
-          "pred": -1.7492462449675341,
+          "pred": -1.7267284437786588,
           "actual": -0.33,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-09-01",
-          "pred": -1.5665386928181406,
+          "pred": -1.657252144475968,
           "actual": -0.09,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-12-01",
-          "pred": 0.21353107451131986,
+          "pred": 0.18998934861008782,
           "actual": -0.09,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2014-03-01",
-          "pred": -0.7268996674739203,
+          "pred": -0.7042280824082818,
           "actual": -0.07,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2014-06-01",
-          "pred": -0.9165926311856766,
+          "pred": -0.9424384008007295,
           "actual": 0.48,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-09-01",
-          "pred": 0.2516893146709158,
+          "pred": 0.21604064034892306,
           "actual": 0.37,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-12-01",
-          "pred": 0.9393745586393767,
+          "pred": 1.0997941678038705,
           "actual": 0.77,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2015-03-01",
-          "pred": 2.136902219186393,
+          "pred": 2.0518449035190667,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2015-06-01",
-          "pred": 1.2314434790204758,
+          "pred": 1.3143132869701972,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-09-01",
-          "pred": 2.031158394396596,
+          "pred": 2.1027435266769565,
           "actual": 2.01,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-12-01",
-          "pred": 1.6588259323531802,
+          "pred": 1.6980074105944243,
           "actual": 2.56,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2016-03-01",
-          "pred": 1.6523805200950505,
+          "pred": 1.6424077236417036,
           "actual": 1.6,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2016-06-01",
-          "pred": -0.5866985048563693,
+          "pred": -0.5228378131422896,
           "actual": 0.06,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-09-01",
-          "pred": 1.172775025210523,
+          "pred": 0.95059643223105,
           "actual": -0.46,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-12-01",
-          "pred": 1.6325313519327367,
+          "pred": 1.4837908686496988,
           "actual": -0.51,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2017-03-01",
-          "pred": 1.4366333662083377,
+          "pred": 1.4998596133524502,
           "actual": -0.09,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2017-06-01",
-          "pred": 0.2091254475616387,
+          "pred": 0.35593846465162216,
           "actual": 0.22,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-09-01",
-          "pred": -0.41001597472669593,
+          "pred": -0.3964488496909801,
           "actual": -0.56,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-12-01",
-          "pred": -0.14693969607620025,
+          "pred": -0.13409673268306987,
           "actual": -0.85,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2018-03-01",
-          "pred": 0.13049220756273883,
+          "pred": 0.0406547520595962,
           "actual": -0.73,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2018-06-01",
-          "pred": 0.9844437248466579,
+          "pred": 0.9165552427089907,
           "actual": 0.12,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-09-01",
-          "pred": 2.2393191074200693,
+          "pred": 2.069864810656871,
           "actual": 0.3,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-12-01",
-          "pred": 1.0624496837731083,
+          "pred": 0.8359824275447905,
           "actual": 0.97,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2019-03-01",
-          "pred": -1.226587906630999,
+          "pred": -1.2885800316378275,
           "actual": 0.81,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2019-06-01",
-          "pred": -2.0209068022837706,
+          "pred": -2.06134683362713,
           "actual": 0.66,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-09-01",
-          "pred": -1.9938116876318086,
+          "pred": -1.9811891590955824,
           "actual": 0.11,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-12-01",
-          "pred": 0.320814266862672,
+          "pred": 0.2207803202461086,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2020-03-01",
-          "pred": 0.12300830737250497,
+          "pred": -0.019068767151765847,
           "actual": 0.36,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2020-06-01",
-          "pred": -0.1999486929980262,
+          "pred": -0.17542820747833573,
           "actual": -0.21,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-09-01",
-          "pred": -0.4181519044356209,
+          "pred": -0.4383875847564419,
           "actual": -0.66,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-12-01",
-          "pred": -0.2002426678927457,
+          "pred": -0.05702854207424634,
           "actual": -0.98,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2021-03-01",
-          "pred": 1.0287221507135347,
+          "pred": 1.073412481239901,
           "actual": -0.72,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2021-06-01",
-          "pred": 1.4917519498706742,
+          "pred": 1.5086796740526358,
           "actual": -0.06,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-09-01",
-          "pred": 1.2162932907911523,
+          "pred": 1.4055958441918892,
           "actual": -0.5,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-12-01",
-          "pred": 0.20179864870441677,
+          "pred": 0.44935860851582693,
           "actual": -1.07,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2022-03-01",
-          "pred": -0.543175025832468,
+          "pred": -0.12218130657587738,
           "actual": -0.84,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2022-06-01",
-          "pred": -0.2783233034999175,
+          "pred": 0.16272046566411547,
           "actual": -0.77,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-09-01",
-          "pred": -0.019961397810982648,
+          "pred": 0.2098571039564193,
           "actual": -1.06,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-12-01",
-          "pred": 0.17682841021758217,
+          "pred": 0.2253983744570942,
           "actual": -0.86,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2023-03-01",
-          "pred": -1.2206676136535877,
+          "pred": -1.0753573906765426,
           "actual": -0.13,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2023-06-01",
-          "pred": -2.4523026982213025,
+          "pred": -2.3794691942774016,
           "actual": 0.95,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-09-01",
-          "pred": -2.176224621776089,
+          "pred": -1.9811338703892656,
           "actual": 1.65,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-12-01",
-          "pred": 0.007980336536424736,
+          "pred": 0.02749738549535167,
           "actual": 1.81,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2024-03-01",
-          "pred": -0.5336951304181365,
+          "pred": -0.543356959123138,
           "actual": 1.1,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2024-06-01",
-          "pred": 0.7236268158723507,
+          "pred": 0.6081781776397306,
           "actual": 0.25,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-09-01",
-          "pred": 1.7625962680145237,
+          "pred": 1.686296648136797,
           "actual": -0.11,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-12-01",
-          "pred": 2.0285992026960686,
+          "pred": 1.8817118354430775,
           "actual": -0.58,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2025-03-01",
-          "pred": 0.7755369573743395,
+          "pred": 0.7176566515368067,
           "actual": 0.05,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2025-06-01",
-          "pred": 0.40785786653639966,
+          "pred": 0.3879175012452817,
           "actual": 0.01,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-09-01",
-          "pred": 1.0954039330344927,
+          "pred": 1.1618892869350674,
           "actual": -0.3,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-12-01",
-          "pred": 0.6440796749002455,
+          "pred": 0.813832583150767,
           "actual": -0.49,
           "persistence": -0.58
         }
@@ -9050,490 +8779,490 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2008-09-01",
-          "pred": 0.28109039552245707,
+          "pred": 0.07197455854424113,
           "actual": -0.28,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2008-12-01",
-          "pred": 0.4351452962516622,
+          "pred": -0.14453125822527235,
           "actual": -0.9,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2009-03-01",
-          "pred": 2.139871427171658,
+          "pred": 1.5125028946523555,
           "actual": -0.72,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2009-06-01",
-          "pred": 2.256766410736135,
+          "pred": 1.7749678794875086,
           "actual": 0.49,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2009-09-01",
-          "pred": 1.9148198589712897,
+          "pred": 1.6372697020372302,
           "actual": 0.68,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2009-12-01",
-          "pred": 0.3206135343303228,
+          "pred": -0.007639235873169648,
           "actual": 1.81,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2010-03-01",
-          "pred": -0.19914237472734464,
+          "pred": -0.46656956301256775,
           "actual": 1.07,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2010-06-01",
-          "pred": -1.2486910851100863,
+          "pred": -1.506607987962254,
           "actual": -0.62,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2010-09-01",
-          "pred": -2.1992901411587016,
+          "pred": -2.682209985859902,
           "actual": -1.56,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2010-12-01",
-          "pred": -1.5360244950638842,
+          "pred": -1.8336140008749724,
           "actual": -1.63,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2011-03-01",
-          "pred": 0.6912819612396353,
+          "pred": 0.6899363312217669,
           "actual": -0.98,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2011-06-01",
-          "pred": 1.2086553995445877,
+          "pred": 0.6655683964434597,
           "actual": -0.25,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2011-09-01",
-          "pred": -0.2020639576055857,
+          "pred": -0.20932585646677315,
           "actual": -0.76,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2011-12-01",
-          "pred": 0.6237776324126089,
+          "pred": 0.5489987145456339,
           "actual": -1.05,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2012-03-01",
-          "pred": 0.5790983276147874,
+          "pred": 0.8156887522670973,
           "actual": -0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2012-06-01",
-          "pred": 1.8293528817276232,
+          "pred": 1.8014063263789994,
           "actual": 0.14,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2012-09-01",
-          "pred": 1.8844744279279704,
+          "pred": 1.6508261558979276,
           "actual": 0.44,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2012-12-01",
-          "pred": 0.6726109760531073,
+          "pred": 0.5437422914605226,
           "actual": -0.13,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2013-03-01",
-          "pred": -1.838841381401984,
+          "pred": -1.9410079909899856,
           "actual": -0.14,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2013-06-01",
-          "pred": -2.257900942852086,
+          "pred": -2.211262573846025,
           "actual": -0.33,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2013-09-01",
-          "pred": -2.4870040144405388,
+          "pred": -2.57510553519222,
           "actual": -0.09,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2013-12-01",
-          "pred": -1.3977916020659944,
+          "pred": -1.3752806221080949,
           "actual": -0.09,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2014-03-01",
-          "pred": 0.6939991823101697,
+          "pred": 0.5835887049412671,
           "actual": -0.07,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2014-06-01",
-          "pred": -0.6759187048653983,
+          "pred": -0.4376406367675334,
           "actual": 0.48,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2014-09-01",
-          "pred": 0.4902057851537995,
+          "pred": 0.5982603764503736,
           "actual": 0.37,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2014-12-01",
-          "pred": 1.0841704677643704,
+          "pred": 1.0382831088678541,
           "actual": 0.77,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2015-03-01",
-          "pred": 2.0884578245686902,
+          "pred": 2.0505083358753504,
           "actual": 0.48,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2015-06-01",
-          "pred": 2.4094636491309362,
+          "pred": 2.2389478220083365,
           "actual": 1.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2015-09-01",
-          "pred": 2.0071375662935242,
+          "pred": 1.7107371256474737,
           "actual": 2.01,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2015-12-01",
-          "pred": 0.8140360964130282,
+          "pred": 0.6284194770546618,
           "actual": 2.56,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2016-03-01",
-          "pred": -0.0568930289858581,
+          "pred": -0.3728141024355566,
           "actual": 1.6,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2016-06-01",
-          "pred": -0.14324668610469937,
+          "pred": -0.14393628292254596,
           "actual": 0.06,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2016-09-01",
-          "pred": -1.0035141937525587,
+          "pred": -1.0355685413461477,
           "actual": -0.46,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2016-12-01",
-          "pred": -0.35200621232185136,
+          "pred": -0.5321814950094009,
           "actual": -0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2017-03-01",
-          "pred": -0.4852703824307037,
+          "pred": -0.5194890022581812,
           "actual": -0.09,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2017-06-01",
-          "pred": 2.0408113693702923,
+          "pred": 2.0611630261935323,
           "actual": 0.22,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2017-09-01",
-          "pred": -0.237587160022206,
+          "pred": -0.06663552990037253,
           "actual": -0.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2017-12-01",
-          "pred": -0.3318509944659342,
+          "pred": -0.21658533245114614,
           "actual": -0.85,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2018-03-01",
-          "pred": 1.0413597959329537,
+          "pred": 0.7346581957586156,
           "actual": -0.73,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2018-06-01",
-          "pred": 1.5999147223403127,
+          "pred": 1.6019135517612264,
           "actual": 0.12,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2018-09-01",
-          "pred": 1.279104516455811,
+          "pred": 1.5279351292852414,
           "actual": 0.3,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2018-12-01",
-          "pred": 1.0337730730370693,
+          "pred": 1.1099164332189861,
           "actual": 0.97,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2019-03-01",
-          "pred": -0.9114974461670362,
+          "pred": -1.1350949350771953,
           "actual": 0.81,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2019-06-01",
-          "pred": -1.3605213835555285,
+          "pred": -1.7316464566297287,
           "actual": 0.66,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2019-09-01",
-          "pred": -1.1241172166786038,
+          "pred": -1.4403921072998744,
           "actual": 0.11,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2019-12-01",
-          "pred": -0.15738592642262628,
+          "pred": -0.2619213157718368,
           "actual": 0.51,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2020-03-01",
-          "pred": 0.301710392460476,
+          "pred": -0.04422076596584335,
           "actual": 0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2020-06-01",
-          "pred": -1.7270869360950276,
+          "pred": -1.760747459822666,
           "actual": -0.21,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2020-09-01",
-          "pred": -0.5256644285722722,
+          "pred": -0.5627262755440261,
           "actual": -0.66,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2020-12-01",
-          "pred": -0.5823654567403526,
+          "pred": -0.5922833668488768,
           "actual": -0.98,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2021-03-01",
-          "pred": 0.8505288044863786,
+          "pred": 0.5857416423631586,
           "actual": -0.72,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2021-06-01",
-          "pred": 1.5955447279264716,
+          "pred": 1.4893652905846715,
           "actual": -0.06,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2021-09-01",
-          "pred": 1.5886529285986535,
+          "pred": 1.5902122750934617,
           "actual": -0.5,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2021-12-01",
-          "pred": 1.5228935839074125,
+          "pred": 1.49967784450738,
           "actual": -1.07,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2022-03-01",
-          "pred": 0.437046622903553,
+          "pred": 0.30176606732262146,
           "actual": -0.84,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2022-06-01",
-          "pred": 0.10571015190333238,
+          "pred": 0.30717644927457355,
           "actual": -0.77,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2022-09-01",
-          "pred": -0.018877760174315264,
+          "pred": 0.18810444446859867,
           "actual": -1.06,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2022-12-01",
-          "pred": -0.12078052200789868,
+          "pred": 0.0395097831039188,
           "actual": -0.86,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2023-03-01",
-          "pred": -0.3897227719095592,
+          "pred": -0.03180655415677036,
           "actual": -0.13,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2023-06-01",
-          "pred": -1.5197221994827077,
+          "pred": -1.3800170989024396,
           "actual": 0.95,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2023-09-01",
-          "pred": -1.8808535713745027,
+          "pred": -1.6074474423913405,
           "actual": 1.65,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2023-12-01",
-          "pred": -0.8340769749879453,
+          "pred": -0.5791810082109217,
           "actual": 1.81,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2024-03-01",
-          "pred": 0.02282484733278467,
+          "pred": 0.3395543535394874,
           "actual": 1.1,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2024-06-01",
-          "pred": -0.0456530230422985,
+          "pred": 0.1798538984458387,
           "actual": 0.25,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2024-09-01",
-          "pred": 0.39780318571747514,
+          "pred": 0.5271728255205551,
           "actual": -0.11,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2024-12-01",
-          "pred": 1.1835177845251685,
+          "pred": 1.0894593901229552,
           "actual": -0.58,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2025-03-01",
-          "pred": 1.730955017735006,
+          "pred": 1.5833174010143707,
           "actual": 0.05,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2025-06-01",
-          "pred": -0.396263234411535,
+          "pred": -0.43109830294713397,
           "actual": 0.01,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2025-09-01",
-          "pred": -0.6710895913485797,
+          "pred": -0.5758719716480172,
           "actual": -0.3,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2025-12-01",
-          "pred": 1.1065630966249613,
+          "pred": 0.970331872670396,
           "actual": -0.49,
           "persistence": 1.81
         }
@@ -9542,949 +9271,949 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2011-09-01",
-          "pred": 0.04779307329246858,
+          "pred": 0.13928896127152499,
           "actual": -0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2011-12-01",
-          "pred": 1.0620988498084207,
+          "pred": 0.375937799146089,
           "actual": -1.05,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2012-03-01",
-          "pred": 2.423222274702946,
+          "pred": 1.529926510755196,
           "actual": -0.48,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2012-06-01",
-          "pred": 1.5979254863645318,
+          "pred": 0.6124151335963297,
           "actual": 0.14,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2012-09-01",
-          "pred": 0.591107030148504,
+          "pred": -0.0076478892508723625,
           "actual": 0.44,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2012-12-01",
-          "pred": 0.6829054883395462,
+          "pred": 0.0735331991247333,
           "actual": -0.13,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2013-03-01",
-          "pred": -0.1992470573157005,
+          "pred": -1.0260752739325387,
           "actual": -0.14,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2013-06-01",
-          "pred": 0.14548115473691808,
+          "pred": -0.77922258655097,
           "actual": -0.33,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2013-09-01",
-          "pred": 0.34245279415681196,
+          "pred": -0.24352902640361818,
           "actual": -0.09,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2013-12-01",
-          "pred": 2.7323499283794934,
+          "pred": 1.0310346866310902,
           "actual": -0.09,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2014-03-01",
-          "pred": 1.552289077195574,
+          "pred": 0.7730320353726133,
           "actual": -0.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2014-06-01",
-          "pred": 0.5943434111622864,
+          "pred": -0.46558753521875434,
           "actual": 0.48,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2014-09-01",
-          "pred": 1.5965363488021231,
+          "pred": 0.38736923656941835,
           "actual": 0.37,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2014-12-01",
-          "pred": 2.6767126023294603,
+          "pred": 2.127140075945825,
           "actual": 0.77,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2015-03-01",
-          "pred": 2.752435951560306,
+          "pred": 2.3618326677662393,
           "actual": 0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2015-06-01",
-          "pred": 1.741638995676072,
+          "pred": 1.525721564185344,
           "actual": 1.28,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2015-09-01",
-          "pred": 0.05526493009796529,
+          "pred": -0.06567290177210823,
           "actual": 2.01,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2015-12-01",
-          "pred": -1.0710097297848649,
+          "pred": -1.4756011989630182,
           "actual": 2.56,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2016-03-01",
-          "pred": -1.4344096410462914,
+          "pred": -1.8743121991209268,
           "actual": 1.6,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2016-06-01",
-          "pred": -0.9308335874168044,
+          "pred": -1.5966990068337843,
           "actual": 0.06,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2016-09-01",
-          "pred": -0.2699842025803677,
+          "pred": -0.1865699557894694,
           "actual": -0.46,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2016-12-01",
-          "pred": 0.9532965863956946,
+          "pred": 0.27898535845053773,
           "actual": -0.51,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2017-03-01",
-          "pred": -0.20212280082209821,
+          "pred": -0.5839225384699636,
           "actual": -0.09,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2017-06-01",
-          "pred": -0.889630272485386,
+          "pred": -0.7340170973788344,
           "actual": 0.22,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2017-09-01",
-          "pred": 0.8429984726213382,
+          "pred": 0.8597290073757944,
           "actual": -0.56,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2017-12-01",
-          "pred": 2.318205537085882,
+          "pred": 1.6759693233868858,
           "actual": -0.85,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2018-03-01",
-          "pred": 0.5218305826193714,
+          "pred": 0.6880786073347356,
           "actual": -0.73,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2018-06-01",
-          "pred": -0.5338139394337483,
+          "pred": -0.5405840623428797,
           "actual": 0.12,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2018-09-01",
-          "pred": 0.7132806841507976,
+          "pred": 0.6375612768015246,
           "actual": 0.3,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2018-12-01",
-          "pred": 1.0388881766534224,
+          "pred": 0.5120154521165471,
           "actual": 0.97,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2019-03-01",
-          "pred": -0.3506653657266673,
+          "pred": 0.3017930983621906,
           "actual": 0.81,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2019-06-01",
-          "pred": -1.3109354240261286,
+          "pred": -0.16107562588529006,
           "actual": 0.66,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2019-09-01",
-          "pred": 0.5930502780513408,
+          "pred": 0.9595003206867314,
           "actual": 0.11,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2019-12-01",
-          "pred": -0.09692027726476105,
+          "pred": 0.7974045245288792,
           "actual": 0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2020-03-01",
-          "pred": 0.3952945709596683,
+          "pred": 0.7493522576842018,
           "actual": 0.36,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2020-06-01",
-          "pred": 0.5690004220946396,
+          "pred": 0.7149521023517322,
           "actual": -0.21,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2020-09-01",
-          "pred": -0.8083301327043685,
+          "pred": -0.4762127493521455,
           "actual": -0.66,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2020-12-01",
-          "pred": 0.6953333652938883,
+          "pred": 0.15207810797906068,
           "actual": -0.98,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2021-03-01",
-          "pred": 2.1004717514344993,
+          "pred": 1.7252108756866658,
           "actual": -0.72,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2021-06-01",
-          "pred": 1.4137150145729847,
+          "pred": 0.3640516717326226,
           "actual": -0.06,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2021-09-01",
-          "pred": -1.115516517648132,
+          "pred": -1.1160771548166295,
           "actual": -0.5,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2021-12-01",
-          "pred": -1.636512986536806,
+          "pred": -2.093832658485256,
           "actual": -1.07,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2022-03-01",
-          "pred": -1.671559025133907,
+          "pred": -2.518600042919652,
           "actual": -0.84,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2022-06-01",
-          "pred": -1.0723638957643724,
+          "pred": -1.4438564701534868,
           "actual": -0.77,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2022-09-01",
-          "pred": 0.3378036615688866,
+          "pred": -0.25311702603142455,
           "actual": -1.06,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2022-12-01",
-          "pred": -0.49039816865597524,
+          "pred": -0.9837353046757691,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2023-03-01",
-          "pred": -1.5630865774438376,
+          "pred": -2.472903697240171,
           "actual": -0.13,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2023-06-01",
-          "pred": -2.2641801896409848,
+          "pred": -2.6466471393923046,
           "actual": 0.95,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2023-09-01",
-          "pred": -0.5655602423497135,
+          "pred": -0.7551868711610159,
           "actual": 1.65,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2023-12-01",
-          "pred": 0.5455040512209958,
+          "pred": 0.6880092884041722,
           "actual": 1.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2024-03-01",
-          "pred": 2.244094040814618,
+          "pred": 1.9108871261450886,
           "actual": 1.1,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2024-06-01",
-          "pred": 2.2556585638224362,
+          "pred": 2.004894192815297,
           "actual": 0.25,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2024-09-01",
-          "pred": 2.285325570811145,
+          "pred": 1.5547962511768896,
           "actual": -0.11,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2024-12-01",
-          "pred": 0.8290483286953091,
+          "pred": 0.993855138570822,
           "actual": -0.58,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2025-03-01",
-          "pred": 1.1723720439765208,
+          "pred": 0.7688693928776495,
           "actual": 0.05,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2025-06-01",
-          "pred": 1.5855988226630207,
+          "pred": 1.4784051541601169,
           "actual": 0.01,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2025-09-01",
-          "pred": 1.303240613182152,
+          "pred": 0.9492416026083889,
           "actual": -0.3,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2025-12-01",
-          "pred": 1.2071876671713382,
+          "pred": 0.6212905603386993,
           "actual": -0.49,
           "persistence": -0.98
         }
       ]
     },
-    "state_transition_decoder": {
+    "same_rung_sync_pair_decoder": {
       "1": [
         {
           "origin": "2006-09-01",
           "date": "2006-10-01",
-          "pred": -0.29232649047934545,
+          "pred": 0.4939085199637434,
           "actual": 0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-01-01",
-          "pred": 1.1540302876040096,
+          "pred": 1.2333294714938707,
           "actual": 0.59,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-04-01",
-          "pred": 0.18304189670310095,
+          "pred": 0.39210489314277486,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-07-01",
-          "pred": -0.2386215605095758,
+          "pred": -0.12111133216411299,
           "actual": -0.37,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-10-01",
-          "pred": -0.5979855880430331,
+          "pred": -0.39565930272824074,
           "actual": -1.41,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-01-01",
-          "pred": -1.024624602289004,
+          "pred": -0.603698892588963,
           "actual": -1.79,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-04-01",
-          "pred": -0.628520269432815,
+          "pred": -0.9835476674980299,
           "actual": -0.89,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-07-01",
-          "pred": -0.465007484385881,
+          "pred": -0.9221555063588652,
           "actual": -0.04,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-10-01",
-          "pred": -0.4680587277523708,
+          "pred": -0.3637407444017132,
           "actual": -0.3,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-01-01",
-          "pred": -0.14699412814163842,
+          "pred": -0.0018669895571466408,
           "actual": -1.0,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-04-01",
-          "pred": -0.9660169295811053,
+          "pred": -0.8124228222044909,
           "actual": -0.25,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-07-01",
-          "pred": 0.10879306867363041,
+          "pred": 0.6623318201324485,
           "actual": 0.69,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-10-01",
-          "pred": 0.6429544745741608,
+          "pred": 1.1108883127164821,
           "actual": 0.96,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-01-01",
-          "pred": 1.9186888846790096,
+          "pred": 1.8484043511648205,
           "actual": 1.43,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-04-01",
-          "pred": 0.6997328522229422,
+          "pred": 0.11208707361489545,
           "actual": 0.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-07-01",
-          "pred": -0.6822422063985378,
+          "pred": -0.5830794244003824,
           "actual": -0.89,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-10-01",
-          "pred": -1.259494878623503,
+          "pred": -1.3364356464953329,
           "actual": -1.65,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-01-01",
-          "pred": -1.0012707649976247,
+          "pred": -1.0952709742655968,
           "actual": -1.7,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-04-01",
-          "pred": -1.122867971593352,
+          "pred": -1.2610162118257533,
           "actual": -0.74,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-07-01",
-          "pred": -0.5826206561356189,
+          "pred": -0.9470157694984359,
           "actual": -0.23,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-10-01",
-          "pred": -0.08803534873517714,
+          "pred": -0.5834961447366573,
           "actual": -0.93,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-01-01",
-          "pred": -1.4389138216157866,
+          "pred": -1.3070845048658322,
           "actual": -0.93,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-04-01",
-          "pred": -0.4130174335805644,
+          "pred": -0.8704679377113826,
           "actual": -0.29,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-07-01",
-          "pred": 0.11955436175456165,
+          "pred": 0.2902135363387413,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-10-01",
-          "pred": 1.3185654428045228,
+          "pred": 0.8494609615939297,
           "actual": 0.23,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-01-01",
-          "pred": 0.2454544874147278,
+          "pred": -0.04606644135332942,
           "actual": -0.42,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-04-01",
-          "pred": -0.48807547853780003,
+          "pred": -0.7403241846978941,
           "actual": -0.08,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-07-01",
-          "pred": -0.19422531441040525,
+          "pred": -0.5628090576107496,
           "actual": -0.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-10-01",
-          "pred": -0.31161538027135255,
+          "pred": -0.26430131713151944,
           "actual": -0.24,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-01-01",
-          "pred": -0.141374213160077,
+          "pred": -0.28874892563774507,
           "actual": -0.42,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-04-01",
-          "pred": 0.04249807474424852,
+          "pred": -0.20333938821018888,
           "actual": 0.28,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-07-01",
-          "pred": 0.9395037268807395,
+          "pred": 0.9521445307596391,
           "actual": 0.13,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-10-01",
-          "pred": 0.40948157262627544,
+          "pred": 0.5941764465659543,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-01-01",
-          "pred": 1.0111096743037211,
+          "pred": 1.094775313260871,
           "actual": 0.59,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-04-01",
-          "pred": 0.18924906886863418,
+          "pred": 0.47241076356240613,
           "actual": 0.9,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-07-01",
-          "pred": 0.9669297896875317,
+          "pred": 0.6176746175802867,
           "actual": 1.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-10-01",
-          "pred": 1.9150531762457947,
+          "pred": 2.197494218631465,
           "actual": 2.21,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-01-01",
-          "pred": 2.4254907890837867,
+          "pred": 2.5055099424977345,
           "actual": 2.56,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-04-01",
-          "pred": 1.936004464910464,
+          "pred": 1.8990750445529516,
           "actual": 1.05,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-07-01",
-          "pred": 0.13794257516619451,
+          "pred": 0.39062172478115265,
           "actual": -0.25,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-10-01",
-          "pred": -0.7137245895691373,
+          "pred": -1.2786009592235088,
           "actual": -0.75,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-01-01",
-          "pred": -0.03580645823301744,
+          "pred": -0.1834865348549154,
           "actual": -0.34,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-04-01",
-          "pred": -0.18218098005681008,
+          "pred": 0.05144887565388233,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-07-01",
-          "pred": -0.1311871075389013,
+          "pred": -0.014729202390732644,
           "actual": 0.22,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-10-01",
-          "pred": -0.4981790411414901,
+          "pred": -0.5076474434430966,
           "actual": -0.52,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-01-01",
-          "pred": -0.8746791919098028,
+          "pred": -0.6591350923340258,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-04-01",
-          "pred": -0.08591614010345303,
+          "pred": 0.21331599877278953,
           "actual": -0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-07-01",
-          "pred": 0.4014903537017227,
+          "pred": 0.23475435304126008,
           "actual": 0.27,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-10-01",
-          "pred": 0.29056197914623627,
+          "pred": 0.24831489190195044,
           "actual": 0.84,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-01-01",
-          "pred": 0.8679858563503626,
+          "pred": 1.0479799883253171,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-04-01",
-          "pred": -0.2630086867411965,
+          "pred": -0.17493299775458462,
           "actual": 0.67,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-07-01",
-          "pred": 0.39474538264894016,
+          "pred": 0.38282218477350044,
           "actual": 0.41,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-10-01",
-          "pred": 0.03369501426787943,
+          "pred": 0.18990117679870477,
           "actual": 0.55,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-01-01",
-          "pred": 0.736453201667162,
+          "pred": 0.5615828561603243,
           "actual": 0.64,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-04-01",
-          "pred": 0.7028719271261025,
+          "pred": 0.5257086024155848,
           "actual": 0.49,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-07-01",
-          "pred": -0.033276210453589916,
+          "pred": -0.07138878771442099,
           "actual": -0.04,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-10-01",
-          "pred": -0.596632433020601,
+          "pred": -0.5325433338600175,
           "actual": -1.19,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-01-01",
-          "pred": -0.8469800265748443,
+          "pred": -0.8037275348749765,
           "actual": -1.04,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-04-01",
-          "pred": -0.22231923742112064,
+          "pred": -0.011391368916714713,
           "actual": -0.55,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-07-01",
-          "pred": -0.0344759605015639,
+          "pred": -0.3754979863111625,
           "actual": -0.2,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-10-01",
-          "pred": -0.23296740429909252,
+          "pred": -0.05976230717108902,
           "actual": -0.78,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-01-01",
-          "pred": -0.26438484263343637,
+          "pred": -0.42121002662654855,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-04-01",
-          "pred": -0.3575999796808015,
+          "pred": -0.6004238728291271,
           "actual": -0.9,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-07-01",
-          "pred": -0.38574941630168724,
+          "pred": -0.5056813240991662,
           "actual": -0.56,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-10-01",
-          "pred": -0.20462147391153085,
+          "pred": -0.5803647726505611,
           "actual": -0.99,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-01-01",
-          "pred": -0.7126052411594079,
+          "pred": -0.8085109869722424,
           "actual": -0.78,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-04-01",
-          "pred": -0.2480698952106334,
+          "pred": -0.5057887679247491,
           "actual": 0.24,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-07-01",
-          "pred": 0.5525425501878442,
+          "pred": 0.6562932916653177,
           "actual": 1.2,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-10-01",
-          "pred": 1.0735576204625452,
+          "pred": 1.2968240548488497,
           "actual": 1.59,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-01-01",
-          "pred": 1.5019007142714118,
+          "pred": 1.7207771964679315,
           "actual": 1.71,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-04-01",
-          "pred": 0.5989531480238646,
+          "pred": 1.160603203997266,
           "actual": 0.93,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-07-01",
-          "pred": -0.24289083091118438,
+          "pred": -0.0310111261997585,
           "actual": 0.2,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-10-01",
-          "pred": 0.011855450508506348,
+          "pred": -0.07798271480716976,
           "actual": -0.24,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-01-01",
-          "pred": 0.4028070111572013,
+          "pred": 0.5933007221246251,
           "actual": -0.76,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-04-01",
-          "pred": 0.2831679788419707,
+          "pred": 0.4375996365901809,
           "actual": -0.08,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-07-01",
-          "pred": 0.058792580418428025,
+          "pred": 0.06870578187098289,
           "actual": -0.03,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-10-01",
-          "pred": -0.9057182842919406,
+          "pred": -0.8001147997047923,
           "actual": -0.5,
           "persistence": -0.3
         }
@@ -10493,539 +10222,539 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2006-12-01",
-          "pred": -0.47451463830811286,
+          "pred": 0.41568229208701263,
           "actual": 1.1,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-03-01",
-          "pred": 0.7607219356441411,
+          "pred": 1.4345844614343157,
           "actual": -0.15,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-06-01",
-          "pred": 0.38136305767671425,
+          "pred": 0.4815186776255829,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-09-01",
-          "pred": -0.15402090472253765,
+          "pred": 0.2525927530116269,
           "actual": -1.04,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-12-01",
-          "pred": 0.08074667568858392,
+          "pred": -0.23488870356758546,
           "actual": -1.61,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-03-01",
-          "pred": -1.3525823245925355,
+          "pred": 0.028156367481772606,
           "actual": -1.17,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-06-01",
-          "pred": -0.14740918368879258,
+          "pred": -0.9813188797350442,
           "actual": -0.44,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-09-01",
-          "pred": 0.08246752281957656,
+          "pred": -1.3861122089165252,
           "actual": -0.28,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-12-01",
-          "pred": -0.9894194851344699,
+          "pred": -0.04914211112934094,
           "actual": -0.9,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-03-01",
-          "pred": -0.6697726796773041,
+          "pred": -0.06722106150716253,
           "actual": -0.72,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-06-01",
-          "pred": -1.0924186867948,
+          "pred": -1.200660619360338,
           "actual": 0.49,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-09-01",
-          "pred": -0.43416314585555255,
+          "pred": 0.77062760691456,
           "actual": 0.68,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-12-01",
-          "pred": 0.2923884119703338,
+          "pred": 1.8689573771632062,
           "actual": 1.81,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-03-01",
-          "pred": 0.5908928992413963,
+          "pred": 0.6472962815092099,
           "actual": 1.07,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-06-01",
-          "pred": 0.1346028169434239,
+          "pred": -0.2794556194897072,
           "actual": -0.62,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-09-01",
-          "pred": -0.04674042412742052,
+          "pred": -0.04355856922923759,
           "actual": -1.56,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-12-01",
-          "pred": -0.8718807967507137,
+          "pred": -1.2116343934595535,
           "actual": -1.63,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-03-01",
-          "pred": 0.16777786614272272,
+          "pred": -0.6058325319009532,
           "actual": -0.98,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-06-01",
-          "pred": -0.30253802430546534,
+          "pred": -0.9401082104593679,
           "actual": -0.25,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-09-01",
-          "pred": -0.9831103275115275,
+          "pred": -1.599770207735499,
           "actual": -0.76,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-12-01",
-          "pred": -0.4166496729943599,
+          "pred": -0.8422324289709546,
           "actual": -1.05,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-03-01",
-          "pred": -1.1583339762262084,
+          "pred": -1.245530726352359,
           "actual": -0.48,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-06-01",
-          "pred": -0.7019285991686651,
+          "pred": -0.7842226529885509,
           "actual": 0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-09-01",
-          "pred": 0.04065145934824073,
+          "pred": 1.1402324562434947,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-12-01",
-          "pred": -0.32043606599324886,
+          "pred": 0.8802531422057651,
           "actual": -0.13,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-03-01",
-          "pred": -0.5907178090765229,
+          "pred": -0.5625976294866287,
           "actual": -0.14,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-06-01",
-          "pred": -0.897460427861853,
+          "pred": -1.2385650547436553,
           "actual": -0.33,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-09-01",
-          "pred": -0.48287367575590595,
+          "pred": -0.7707377926816309,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-12-01",
-          "pred": -0.20902004843185695,
+          "pred": -0.3050847828645897,
           "actual": -0.09,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-03-01",
-          "pred": 0.13854821095473868,
+          "pred": -0.18415352781939293,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-06-01",
-          "pred": 0.6046336023023651,
+          "pred": 0.1385410316722145,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-09-01",
-          "pred": 0.8444686205001449,
+          "pred": 1.0884361888717589,
           "actual": 0.37,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-12-01",
-          "pred": 0.5634112570713274,
+          "pred": 0.8151407156311241,
           "actual": 0.77,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-03-01",
-          "pred": 1.3729529284681228,
+          "pred": 0.9987913443736014,
           "actual": 0.48,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-06-01",
-          "pred": 0.5245693153047231,
+          "pred": 0.8210494219190098,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-09-01",
-          "pred": 0.5074183078637384,
+          "pred": 0.16364039763409946,
           "actual": 2.01,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-12-01",
-          "pred": 1.8965964567362412,
+          "pred": 2.076416112345117,
           "actual": 2.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-03-01",
-          "pred": 2.3782910617224964,
+          "pred": 2.58255506735547,
           "actual": 1.6,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-06-01",
-          "pred": 2.159234565664237,
+          "pred": 1.747495441574412,
           "actual": 0.06,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-09-01",
-          "pred": 0.38400466471142414,
+          "pred": 0.8156196260046747,
           "actual": -0.46,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-12-01",
-          "pred": -0.7521012050030808,
+          "pred": -1.5610390300410368,
           "actual": -0.51,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-03-01",
-          "pred": -0.24626791990586816,
+          "pred": 0.1622705835733281,
           "actual": -0.09,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-06-01",
-          "pred": -0.0708246567105423,
+          "pred": -0.24595615082817718,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-09-01",
-          "pred": -1.0228007105245467,
+          "pred": -0.3543813383188026,
           "actual": -0.56,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-12-01",
-          "pred": -1.041941260176173,
+          "pred": -0.7074611354908806,
           "actual": -0.85,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-03-01",
-          "pred": -0.6512199974408204,
+          "pred": -1.0439312539347196,
           "actual": -0.73,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-06-01",
-          "pred": 0.7547167043285092,
+          "pred": 0.686004624640252,
           "actual": 0.12,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-09-01",
-          "pred": 0.7827981543327373,
+          "pred": 0.42202132719533897,
           "actual": 0.3,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-12-01",
-          "pred": 0.6714328908235833,
+          "pred": 0.6531121438767746,
           "actual": 0.97,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-03-01",
-          "pred": 1.273313988767915,
+          "pred": 0.25401876250209104,
           "actual": 0.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-06-01",
-          "pred": 0.0774370052716804,
+          "pred": -0.6832745836443821,
           "actual": 0.66,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-09-01",
-          "pred": -0.032817857861469076,
+          "pred": -0.35925359250484895,
           "actual": 0.11,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-12-01",
-          "pred": 0.36537385437989395,
+          "pred": 0.3007268415539282,
           "actual": 0.51,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-03-01",
-          "pred": 0.3875094608222172,
+          "pred": 0.3858285342120916,
           "actual": 0.36,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-06-01",
-          "pred": 0.46480230914592646,
+          "pred": 1.1331543040134673,
           "actual": -0.21,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-09-01",
-          "pred": 0.030096887233402994,
+          "pred": 0.013122960258694482,
           "actual": -0.66,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-12-01",
-          "pred": -0.5944252911564046,
+          "pred": -0.3931599439478468,
           "actual": -0.98,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-03-01",
-          "pred": -0.2624296187794704,
+          "pred": -0.9156251281441345,
           "actual": -0.72,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-06-01",
-          "pred": -0.44653332900353576,
+          "pred": -0.13010355746084112,
           "actual": -0.06,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-09-01",
-          "pred": -0.5220296516457252,
+          "pred": -0.8526473453891492,
           "actual": -0.5,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-12-01",
-          "pred": -0.6249139235344595,
+          "pred": 0.36174439086472887,
           "actual": -1.07,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-03-01",
-          "pred": -0.28858392342531103,
+          "pred": -0.304467226058229,
           "actual": -0.84,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-06-01",
-          "pred": -0.04191644185501653,
+          "pred": -0.6982014576431681,
           "actual": -0.77,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-09-01",
-          "pred": 0.541384893885495,
+          "pred": -0.4212685824475167,
           "actual": -1.06,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-12-01",
-          "pred": -0.40780117543516786,
+          "pred": -0.8285873294647783,
           "actual": -0.86,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-03-01",
-          "pred": -0.3534150553201626,
+          "pred": -1.3527009031167512,
           "actual": -0.13,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-06-01",
-          "pred": -0.24934787779744283,
+          "pred": -0.8309540658905615,
           "actual": 0.95,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-09-01",
-          "pred": 0.6998204544995636,
+          "pred": 0.30693011813716625,
           "actual": 1.65,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-12-01",
-          "pred": 0.7867575669363647,
+          "pred": 1.6567500944931932,
           "actual": 1.81,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-03-01",
-          "pred": 0.8019820636506197,
+          "pred": 2.001795374590561,
           "actual": 1.1,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-06-01",
-          "pred": -0.8955413226892766,
+          "pred": 1.569573451766543,
           "actual": 0.25,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-09-01",
-          "pred": -0.7909949341325043,
+          "pred": 0.41033878286724407,
           "actual": -0.11,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-12-01",
-          "pred": 0.7491007064769188,
+          "pred": 0.3098289027466586,
           "actual": -0.58,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-03-01",
-          "pred": 0.6070288581008719,
+          "pred": 1.25690419089253,
           "actual": 0.05,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-06-01",
-          "pred": -0.2931896691335772,
+          "pred": 0.4662981269842995,
           "actual": 0.01,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-09-01",
-          "pred": -0.23592540109453697,
+          "pred": -0.4392982059316462,
           "actual": -0.3,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-12-01",
-          "pred": -1.0369514071912909,
+          "pred": -0.7782592957491614,
           "actual": -0.49,
           "persistence": -0.3
         }
@@ -11034,532 +10763,532 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-03-01",
-          "pred": 0.04902506059578898,
+          "pred": 0.40128915128081755,
           "actual": -0.15,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-06-01",
-          "pred": 0.1292863270567892,
+          "pred": 0.5633368342990143,
           "actual": -0.16,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-09-01",
-          "pred": -0.0061292490234833505,
+          "pred": 0.8605662090976,
           "actual": -1.04,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-12-01",
-          "pred": 0.24942799979031274,
+          "pred": 0.8043601331589203,
           "actual": -1.61,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-03-01",
-          "pred": -0.04845883071949712,
+          "pred": 0.9369211401780128,
           "actual": -1.17,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-06-01",
-          "pred": -0.7042874909505952,
+          "pred": -0.32209893594276606,
           "actual": -0.44,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-09-01",
-          "pred": -1.369313788139684,
+          "pred": -1.1461372698609198,
           "actual": -0.28,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-12-01",
-          "pred": -0.5979293799538618,
+          "pred": -1.5240760452203508,
           "actual": -0.9,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-03-01",
-          "pred": -0.14426311512112142,
+          "pred": -0.8963546589028034,
           "actual": -0.72,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-06-01",
-          "pred": -1.3647843486220073,
+          "pred": -0.8999589237395831,
           "actual": 0.49,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-09-01",
-          "pred": -0.6454623848544566,
+          "pred": 0.06267358328253445,
           "actual": 0.68,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-12-01",
-          "pred": 0.12765694451957182,
+          "pred": 1.8386293935638591,
           "actual": 1.81,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-03-01",
-          "pred": -0.12800331869401557,
+          "pred": 0.6509386559573911,
           "actual": 1.07,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-06-01",
-          "pred": -0.40196239612318435,
+          "pred": -1.0480752257536463,
           "actual": -0.62,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-09-01",
-          "pred": 0.24195790282217625,
+          "pred": -0.3240337677265692,
           "actual": -1.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-12-01",
-          "pred": 0.26789512345100064,
+          "pred": 0.261241316505428,
           "actual": -1.63,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-03-01",
-          "pred": 0.04596335868144297,
+          "pred": -0.015275634137683158,
           "actual": -0.98,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-06-01",
-          "pred": -0.481263106389756,
+          "pred": 0.7233111274693602,
           "actual": -0.25,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-09-01",
-          "pred": -0.8977204076623664,
+          "pred": -1.3277833159036283,
           "actual": -0.76,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-12-01",
-          "pred": -1.0216322636114892,
+          "pred": -1.8322538219087439,
           "actual": -1.05,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-03-01",
-          "pred": -0.8911435697362153,
+          "pred": -1.5414283837277836,
           "actual": -0.48,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-06-01",
-          "pred": -0.723772984668785,
+          "pred": -1.1409981396551514,
           "actual": 0.14,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-09-01",
-          "pred": -0.6088569414768333,
+          "pred": 0.8169079459329021,
           "actual": 0.44,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-12-01",
-          "pred": -0.9294215767124142,
+          "pred": 1.7974395302565631,
           "actual": -0.13,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-03-01",
-          "pred": -1.6069676156930222,
+          "pred": 0.23065785179332782,
           "actual": -0.14,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-06-01",
-          "pred": -1.6198099336428105,
+          "pred": -1.2904203703568733,
           "actual": -0.33,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-09-01",
-          "pred": -0.692349974195654,
+          "pred": -1.2139613634432902,
           "actual": -0.09,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-12-01",
-          "pred": -0.5585371419561999,
+          "pred": -0.43734626772420665,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-03-01",
-          "pred": -0.7775625350995949,
+          "pred": -0.24627186851162247,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-06-01",
-          "pred": -0.346703029356765,
+          "pred": -0.5459844637546942,
           "actual": 0.48,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-09-01",
-          "pred": 0.6252950717140215,
+          "pred": 0.49923051472008273,
           "actual": 0.37,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-12-01",
-          "pred": 1.1217314428809044,
+          "pred": 1.4179163673013973,
           "actual": 0.77,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-03-01",
-          "pred": 0.23240713786061235,
+          "pred": 0.9425340639709938,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-06-01",
-          "pred": 0.7634852232504183,
+          "pred": 1.2050788988549102,
           "actual": 1.28,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-09-01",
-          "pred": 0.6563801058566459,
+          "pred": 1.6760164479028932,
           "actual": 2.01,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-12-01",
-          "pred": 1.1724015663915321,
+          "pred": 0.8596740048688263,
           "actual": 2.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-03-01",
-          "pred": 2.021279380805736,
+          "pred": 2.116146897644652,
           "actual": 1.6,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-06-01",
-          "pred": 2.360360314958574,
+          "pred": 2.0541024205517657,
           "actual": 0.06,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-09-01",
-          "pred": 1.6842298252440158,
+          "pred": 0.9271231893223125,
           "actual": -0.46,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-12-01",
-          "pred": 0.5868293696898054,
+          "pred": 0.6531011907750403,
           "actual": -0.51,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-03-01",
-          "pred": 0.10801767823067178,
+          "pred": 0.005680828829780682,
           "actual": -0.09,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-06-01",
-          "pred": 1.081112983768656,
+          "pred": 1.3233209425221204,
           "actual": 0.22,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-09-01",
-          "pred": 0.4036166442475258,
+          "pred": -0.808999608709106,
           "actual": -0.56,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-12-01",
-          "pred": -0.351073985256154,
+          "pred": -1.0691226330485908,
           "actual": -0.85,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-03-01",
-          "pred": -0.4744958217078862,
+          "pred": -0.5018051331559917,
           "actual": -0.73,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-06-01",
-          "pred": -0.12886593026975102,
+          "pred": 0.06340367254822765,
           "actual": 0.12,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-09-01",
-          "pred": 0.6586720158730223,
+          "pred": 1.5391707567245674,
           "actual": 0.3,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-12-01",
-          "pred": 0.7944996085203493,
+          "pred": 0.6303624472252508,
           "actual": 0.97,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-03-01",
-          "pred": 0.2358460468421443,
+          "pred": -0.1870135411785576,
           "actual": 0.81,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-06-01",
-          "pred": 1.1506703252232608,
+          "pred": -0.8697814967103289,
           "actual": 0.66,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-09-01",
-          "pred": -0.09461189925271647,
+          "pred": -1.0317275880240913,
           "actual": 0.11,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-12-01",
-          "pred": -0.22135005621576154,
+          "pred": -0.3644085159493168,
           "actual": 0.51,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-03-01",
-          "pred": 0.18510976453795783,
+          "pred": 0.3018171699401915,
           "actual": 0.36,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-06-01",
-          "pred": 0.4137942698182253,
+          "pred": 0.6839509226767985,
           "actual": -0.21,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-09-01",
-          "pred": 0.45182412898191576,
+          "pred": 1.0729997676190977,
           "actual": -0.66,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-12-01",
-          "pred": -0.4761844426172463,
+          "pred": -0.13450559700701595,
           "actual": -0.98,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-03-01",
-          "pred": -1.0720177210982533,
+          "pred": 0.03891758232734818,
           "actual": -0.72,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-06-01",
-          "pred": -0.10532914278535563,
+          "pred": -0.4183603728200792,
           "actual": -0.06,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-09-01",
-          "pred": 0.680918664297481,
+          "pred": -0.015336530341048791,
           "actual": -0.5,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-12-01",
-          "pred": -0.1396312813067179,
+          "pred": -0.5645072019678083,
           "actual": -1.07,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-03-01",
-          "pred": -0.2655512246925894,
+          "pred": -0.3136499141890931,
           "actual": -0.84,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-06-01",
-          "pred": 0.2583602362789267,
+          "pred": -0.43893049705483234,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-09-01",
-          "pred": -0.24461980174268363,
+          "pred": 0.18039456352466027,
           "actual": -1.06,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-12-01",
-          "pred": -0.6978403274303365,
+          "pred": -0.42530076049378307,
           "actual": -0.86,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-03-01",
-          "pred": -1.7809802960503263,
+          "pred": -0.8846215542100763,
           "actual": -0.13,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-06-01",
-          "pred": -0.8146468712893894,
+          "pred": -1.8695865384123915,
           "actual": 0.95,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-09-01",
-          "pred": -0.394088331521273,
+          "pred": -0.8079538538920261,
           "actual": 1.65,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-12-01",
-          "pred": 0.9821109183573732,
+          "pred": 0.48713830809239794,
           "actual": 1.81,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-03-01",
-          "pred": 0.5715376796303113,
+          "pred": 1.5365237069464905,
           "actual": 1.1,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-06-01",
-          "pred": 0.3313710590882088,
+          "pred": 1.6861763796210798,
           "actual": 0.25,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-09-01",
-          "pred": -0.8418784788824043,
+          "pred": 1.8785464959255778,
           "actual": -0.11,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-12-01",
-          "pred": -0.24198712047313606,
+          "pred": 0.7088572936087995,
           "actual": -0.58,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-03-01",
-          "pred": 0.7486580807496013,
+          "pred": 1.5526757869708054,
           "actual": 0.05,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-06-01",
-          "pred": 0.8371436598672728,
+          "pred": 1.7139011582323926,
           "actual": 0.01,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-09-01",
-          "pred": -0.8336851555744543,
+          "pred": -0.619653315327147,
           "actual": -0.3,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-12-01",
-          "pred": -0.6371737221247346,
+          "pred": -1.0319540025216853,
           "actual": -0.49,
           "persistence": 0.01
         }
@@ -11568,518 +11297,518 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-09-01",
-          "pred": 1.1206592526512569,
+          "pred": 1.4278311582081142,
           "actual": -1.04,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-12-01",
-          "pred": 1.1587981594770407,
+          "pred": 2.03883852619175,
           "actual": -1.61,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2008-03-01",
-          "pred": 0.2612094885641851,
+          "pred": 1.2716526947700897,
           "actual": -1.17,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2008-06-01",
-          "pred": 0.4069645676293327,
+          "pred": -0.2577386694383834,
           "actual": -0.44,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-09-01",
-          "pred": 1.277124660376843,
+          "pred": -0.7023567946531689,
           "actual": -0.28,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-12-01",
-          "pred": 0.4212131044305959,
+          "pred": -0.650914665073355,
           "actual": -0.9,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2009-03-01",
-          "pred": 0.18012977983672115,
+          "pred": -0.8183917647109977,
           "actual": -0.72,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2009-06-01",
-          "pred": 0.30799770505719576,
+          "pred": -1.5583563181457931,
           "actual": 0.49,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-09-01",
-          "pred": 0.0010776365454111675,
+          "pred": -0.4427041962190873,
           "actual": 0.68,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-12-01",
-          "pred": -0.37244831188652755,
+          "pred": 1.1346796178437506,
           "actual": 1.81,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2010-03-01",
-          "pred": -0.3805374147128807,
+          "pred": -0.5960717141593962,
           "actual": 1.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2010-06-01",
-          "pred": -0.4798306800828581,
+          "pred": -0.9972860972881824,
           "actual": -0.62,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-09-01",
-          "pred": -0.15756850223743035,
+          "pred": -1.088198681242682,
           "actual": -1.56,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-12-01",
-          "pred": 0.09460056632301221,
+          "pred": 0.6116929847766519,
           "actual": -1.63,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2011-03-01",
-          "pred": 0.1382578209778043,
+          "pred": 0.8214997816463137,
           "actual": -0.98,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2011-06-01",
-          "pred": -0.20314950404286436,
+          "pred": 0.23064655171761173,
           "actual": -0.25,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-09-01",
-          "pred": -0.6496223839608768,
+          "pred": 0.034956944917806945,
           "actual": -0.76,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-12-01",
-          "pred": -1.049641150695413,
+          "pred": -0.38016101485196124,
           "actual": -1.05,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2012-03-01",
-          "pred": -1.2692524739252153,
+          "pred": -0.9067117073547961,
           "actual": -0.48,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2012-06-01",
-          "pred": -1.2715781581535612,
+          "pred": -0.5738381135800853,
           "actual": 0.14,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-09-01",
-          "pred": -1.5304241155299056,
+          "pred": 0.6302585104363947,
           "actual": 0.44,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-12-01",
-          "pred": -0.9786441273832944,
+          "pred": 0.9930512855266156,
           "actual": -0.13,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2013-03-01",
-          "pred": -0.5456600197211094,
+          "pred": -0.306666812555747,
           "actual": -0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2013-06-01",
-          "pred": -0.5114002028936743,
+          "pred": -1.8092536587039723,
           "actual": -0.33,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-09-01",
-          "pred": -0.9920428113821225,
+          "pred": -1.73015718933952,
           "actual": -0.09,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-12-01",
-          "pred": -1.3122923437786491,
+          "pred": -0.11117647601577084,
           "actual": -0.09,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2014-03-01",
-          "pred": -1.0818189794407083,
+          "pred": -0.8620238625097034,
           "actual": -0.07,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2014-06-01",
-          "pred": -1.118160262747296,
+          "pred": -1.0359111127553784,
           "actual": 0.48,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-09-01",
-          "pred": -0.29546087181765324,
+          "pred": 0.05912635025943526,
           "actual": 0.37,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-12-01",
-          "pred": -0.40179147737678766,
+          "pred": 0.8182383864531274,
           "actual": 0.77,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2015-03-01",
-          "pred": -0.30772018167791104,
+          "pred": 1.9432543280961232,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2015-06-01",
-          "pred": -1.2311026007833137,
+          "pred": 1.192433002448701,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-09-01",
-          "pred": -0.5027347125064775,
+          "pred": 1.8589269666009274,
           "actual": 2.01,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-12-01",
-          "pred": -0.8281620927194149,
+          "pred": 1.6896251033244505,
           "actual": 2.56,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2016-03-01",
-          "pred": -0.7251604410491133,
+          "pred": 1.6592139034024522,
           "actual": 1.6,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2016-06-01",
-          "pred": -0.38266358995250765,
+          "pred": -0.4880710749996855,
           "actual": 0.06,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-09-01",
-          "pred": 0.27539172517356225,
+          "pred": 1.0355883366976297,
           "actual": -0.46,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-12-01",
-          "pred": -0.45135481436313546,
+          "pred": 1.5782320570069273,
           "actual": -0.51,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2017-03-01",
-          "pred": -0.5585273619860144,
+          "pred": 1.3584490660554533,
           "actual": -0.09,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2017-06-01",
-          "pred": -0.5201853861457233,
+          "pred": 0.4252152766282296,
           "actual": 0.22,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-09-01",
-          "pred": -0.8599149432472092,
+          "pred": -0.418289868571829,
           "actual": -0.56,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-12-01",
-          "pred": -0.3942887619695682,
+          "pred": -0.08725280792225196,
           "actual": -0.85,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2018-03-01",
-          "pred": 0.012114751876175594,
+          "pred": 0.11743953564248368,
           "actual": -0.73,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2018-06-01",
-          "pred": 1.0984171802488738,
+          "pred": 0.9019758752847795,
           "actual": 0.12,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-09-01",
-          "pred": 1.9229368146829207,
+          "pred": 2.0774396482709085,
           "actual": 0.3,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-12-01",
-          "pred": 1.3413767650932082,
+          "pred": 0.829932828469897,
           "actual": 0.97,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2019-03-01",
-          "pred": 1.2512184725907314,
+          "pred": -1.2604237536670901,
           "actual": 0.81,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2019-06-01",
-          "pred": 1.8930461289383627,
+          "pred": -2.017347806281532,
           "actual": 0.66,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-09-01",
-          "pred": 0.3877104602488138,
+          "pred": -1.9228634645431515,
           "actual": 0.11,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-12-01",
-          "pred": 0.23263471526424806,
+          "pred": 0.21076355962893506,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2020-03-01",
-          "pred": -0.09834311685344063,
+          "pred": -0.0010815630005369479,
           "actual": 0.36,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2020-06-01",
-          "pred": 0.8250691355142494,
+          "pred": -0.14425581693308961,
           "actual": -0.21,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-09-01",
-          "pred": 0.16400987986734392,
+          "pred": -0.38857638387898036,
           "actual": -0.66,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-12-01",
-          "pred": -0.5489940022092354,
+          "pred": -0.13483541649244618,
           "actual": -0.98,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2021-03-01",
-          "pred": 0.33378298086839553,
+          "pred": 1.1032906227287353,
           "actual": -0.72,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2021-06-01",
-          "pred": 0.9645142224077335,
+          "pred": 1.5162717568362818,
           "actual": -0.06,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-09-01",
-          "pred": 1.6339912145071351,
+          "pred": 1.3704056691212867,
           "actual": -0.5,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-12-01",
-          "pred": 1.0186068284634167,
+          "pred": 0.45728501520711606,
           "actual": -1.07,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2022-03-01",
-          "pred": 1.3331404553905695,
+          "pred": -0.05552351864224994,
           "actual": -0.84,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2022-06-01",
-          "pred": 1.244173222529087,
+          "pred": 0.17897515158502122,
           "actual": -0.77,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-09-01",
-          "pred": 1.1282240622327135,
+          "pred": 0.2922202372462199,
           "actual": -1.06,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-12-01",
-          "pred": 0.33036815076508425,
+          "pred": 0.2834232703185197,
           "actual": -0.86,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2023-03-01",
-          "pred": 0.013345405428784055,
+          "pred": -1.0370007794598741,
           "actual": -0.13,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2023-06-01",
-          "pred": -0.4946665179734554,
+          "pred": -2.32553777139185,
           "actual": 0.95,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-09-01",
-          "pred": -0.10010361416726334,
+          "pred": -1.9772758369349233,
           "actual": 1.65,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-12-01",
-          "pred": -0.7659403145915243,
+          "pred": 0.026887253058148784,
           "actual": 1.81,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2024-03-01",
-          "pred": -1.3718278974124356,
+          "pred": -0.5169543562280791,
           "actual": 1.1,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2024-06-01",
-          "pred": -1.125529965099143,
+          "pred": 0.5952132532063662,
           "actual": 0.25,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-09-01",
-          "pred": -1.0292042569807083,
+          "pred": 1.7780308595806078,
           "actual": -0.11,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-12-01",
-          "pred": -0.3629780003048181,
+          "pred": 1.923658007603646,
           "actual": -0.58,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2025-03-01",
-          "pred": -0.4387387313773947,
+          "pred": 0.7035387625273508,
           "actual": 0.05,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2025-06-01",
-          "pred": 0.4370334203405858,
+          "pred": 0.3736543428792703,
           "actual": 0.01,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-09-01",
-          "pred": -0.18967720355975734,
+          "pred": 1.1783713363111736,
           "actual": -0.3,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-12-01",
-          "pred": -0.5515876382639767,
+          "pred": 0.7664002857216312,
           "actual": -0.49,
           "persistence": -0.58
         }
@@ -12088,490 +11817,490 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2008-09-01",
-          "pred": 1.0165587913071357,
+          "pred": -0.003106588092932637,
           "actual": -0.28,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2008-12-01",
-          "pred": 1.0813205439557072,
+          "pred": -0.14468050688892295,
           "actual": -0.9,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2009-03-01",
-          "pred": 0.45188621387644873,
+          "pred": 1.346805602057099,
           "actual": -0.72,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2009-06-01",
-          "pred": -0.31992578762381235,
+          "pred": 1.7105587071231494,
           "actual": 0.49,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2009-09-01",
-          "pred": -0.473616478076259,
+          "pred": 1.5446488002693146,
           "actual": 0.68,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2009-12-01",
-          "pred": -0.9326161607096938,
+          "pred": -0.10617178629253277,
           "actual": 1.81,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2010-03-01",
-          "pred": -1.991346056197876,
+          "pred": -0.6865624452937136,
           "actual": 1.07,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2010-06-01",
-          "pred": -1.9056144661780638,
+          "pred": -1.5354475372396115,
           "actual": -0.62,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2010-09-01",
-          "pred": -0.8632840485945634,
+          "pred": -2.6270059504698087,
           "actual": -1.56,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2010-12-01",
-          "pred": -1.2546474130060783,
+          "pred": -1.8748759721451316,
           "actual": -1.63,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2011-03-01",
-          "pred": -2.131250764593041,
+          "pred": 0.38859933506576605,
           "actual": -0.98,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2011-06-01",
-          "pred": -0.21426696727418432,
+          "pred": 0.9792598804503052,
           "actual": -0.25,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2011-09-01",
-          "pred": 0.18123709378783476,
+          "pred": -0.26729532181187204,
           "actual": -0.76,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2011-12-01",
-          "pred": 0.8313881440371582,
+          "pred": 0.7706197741466645,
           "actual": -1.05,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2012-03-01",
-          "pred": -0.11137854726765868,
+          "pred": 0.8908006863617385,
           "actual": -0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2012-06-01",
-          "pred": 0.8307630756138,
+          "pred": 1.8819211697871163,
           "actual": 0.14,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2012-09-01",
-          "pred": 0.5195147091311738,
+          "pred": 1.8136044414448718,
           "actual": 0.44,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2012-12-01",
-          "pred": 0.6438963903521552,
+          "pred": 0.6492553170221381,
           "actual": -0.13,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2013-03-01",
-          "pred": -0.12733164839149305,
+          "pred": -1.829319691333626,
           "actual": -0.14,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2013-06-01",
-          "pred": -1.476038399395457,
+          "pred": -2.243321891483424,
           "actual": -0.33,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2013-09-01",
-          "pred": -0.8901047118347233,
+          "pred": -2.6132391104367123,
           "actual": -0.09,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2013-12-01",
-          "pred": -0.8641695988259607,
+          "pred": -1.4538057399277422,
           "actual": -0.09,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2014-03-01",
-          "pred": -0.31163842040153,
+          "pred": 0.496778343008232,
           "actual": -0.07,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2014-06-01",
-          "pred": -1.0784328187311119,
+          "pred": -0.64473382371581,
           "actual": 0.48,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2014-09-01",
-          "pred": 0.14734969652949387,
+          "pred": 0.27758693669983553,
           "actual": 0.37,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2014-12-01",
-          "pred": 0.4259705675932116,
+          "pred": 0.7352617860880771,
           "actual": 0.77,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2015-03-01",
-          "pred": 0.436874851951448,
+          "pred": 1.8303833864717929,
           "actual": 0.48,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2015-06-01",
-          "pred": 1.3194589485251533,
+          "pred": 2.0208090019361973,
           "actual": 1.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2015-09-01",
-          "pred": 0.34153832200886414,
+          "pred": 1.6359161343771964,
           "actual": 2.01,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2015-12-01",
-          "pred": 0.9392897512287615,
+          "pred": 0.49529745059656555,
           "actual": 2.56,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2016-03-01",
-          "pred": 0.3783547498734932,
+          "pred": -0.4895940745244579,
           "actual": 1.6,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2016-06-01",
-          "pred": 0.641490876005692,
+          "pred": -0.2990995647002923,
           "actual": 0.06,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2016-09-01",
-          "pred": -0.7156966914422885,
+          "pred": -0.8139458078814429,
           "actual": -0.46,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2016-12-01",
-          "pred": -0.013501071665082867,
+          "pred": -0.4327894570219471,
           "actual": -0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2017-03-01",
-          "pred": -0.45231043570108953,
+          "pred": -0.43475697941116176,
           "actual": -0.09,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2017-06-01",
-          "pred": -0.3629834375559021,
+          "pred": 2.067600735075398,
           "actual": 0.22,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2017-09-01",
-          "pred": -0.5066368871077923,
+          "pred": -0.011544099934772713,
           "actual": -0.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2017-12-01",
-          "pred": 0.5286186112540818,
+          "pred": -0.32459073109582304,
           "actual": -0.85,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2018-03-01",
-          "pred": 0.6160709126685809,
+          "pred": 0.8180481264163424,
           "actual": -0.73,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2018-06-01",
-          "pred": 0.2308077767939958,
+          "pred": 1.5794566526707357,
           "actual": 0.12,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2018-09-01",
-          "pred": 0.9477506886614365,
+          "pred": 1.4177776140423688,
           "actual": 0.3,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2018-12-01",
-          "pred": -0.2512640330855348,
+          "pred": 1.153650032664626,
           "actual": 0.97,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2019-03-01",
-          "pred": 0.30084183451023044,
+          "pred": -1.045195558350984,
           "actual": 0.81,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2019-06-01",
-          "pred": 0.14276571346502293,
+          "pred": -1.528907823890634,
           "actual": 0.66,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2019-09-01",
-          "pred": 0.43750012579325787,
+          "pred": -1.3352961287145142,
           "actual": 0.11,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2019-12-01",
-          "pred": 0.33007349170370204,
+          "pred": -0.31831088282663456,
           "actual": 0.51,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2020-03-01",
-          "pred": 0.5334578879581896,
+          "pred": 0.14180277121052295,
           "actual": 0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2020-06-01",
-          "pred": 0.6427731164599927,
+          "pred": -1.7133502633376319,
           "actual": -0.21,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2020-09-01",
-          "pred": 0.06510607293527967,
+          "pred": -0.7439998912388375,
           "actual": -0.66,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2020-12-01",
-          "pred": 0.2921663917693004,
+          "pred": -0.8476943092344907,
           "actual": -0.98,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2021-03-01",
-          "pred": -0.2603776621798544,
+          "pred": 0.569406167759463,
           "actual": -0.72,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2021-06-01",
-          "pred": 0.47077397286551265,
+          "pred": 1.4296610541320913,
           "actual": -0.06,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2021-09-01",
-          "pred": 0.9322953692148134,
+          "pred": 1.5781975206330678,
           "actual": -0.5,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2021-12-01",
-          "pred": -0.29313373618954636,
+          "pred": 1.4367653610760642,
           "actual": -1.07,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2022-03-01",
-          "pred": -1.421152378157963,
+          "pred": 0.2540037423692183,
           "actual": -0.84,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2022-06-01",
-          "pred": -1.1668523550808705,
+          "pred": 0.20123030884193507,
           "actual": -0.77,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2022-09-01",
-          "pred": -0.263906466654213,
+          "pred": 0.31971475664164395,
           "actual": -1.06,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2022-12-01",
-          "pred": -0.7529585430512048,
+          "pred": 0.15214874830709246,
           "actual": -0.86,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2023-03-01",
-          "pred": -0.5487998398754687,
+          "pred": 0.0017374172333823844,
           "actual": -0.13,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2023-06-01",
-          "pred": -0.7465624247621403,
+          "pred": -1.2304109832399528,
           "actual": 0.95,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2023-09-01",
-          "pred": -0.8518484693182193,
+          "pred": -1.6191587752193757,
           "actual": 1.65,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2023-12-01",
-          "pred": -1.6362914458666442,
+          "pred": -0.5592862794263481,
           "actual": 1.81,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2024-03-01",
-          "pred": -1.2523154136650698,
+          "pred": 0.2942720455631812,
           "actual": 1.1,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2024-06-01",
-          "pred": -1.010960621875355,
+          "pred": 0.31833809364539944,
           "actual": 0.25,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2024-09-01",
-          "pred": -0.863390632209888,
+          "pred": 0.5395231084838579,
           "actual": -0.11,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2024-12-01",
-          "pred": 0.5071944718912953,
+          "pred": 1.0406837789912267,
           "actual": -0.58,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2025-03-01",
-          "pred": 0.4096300646614069,
+          "pred": 1.6351697890668189,
           "actual": 0.05,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2025-06-01",
-          "pred": 1.2257831461539432,
+          "pred": -0.3827475728353342,
           "actual": 0.01,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2025-09-01",
-          "pred": 1.5528341462717208,
+          "pred": -0.5054901858614613,
           "actual": -0.3,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2025-12-01",
-          "pred": 0.58945448182083,
+          "pred": 1.161890285215119,
           "actual": -0.49,
           "persistence": 1.81
         }
@@ -12580,949 +12309,949 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2011-09-01",
-          "pred": -0.5830379028520672,
+          "pred": -0.8027785455755435,
           "actual": -0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2011-12-01",
-          "pred": -0.17316099655614714,
+          "pred": -0.05713685256352012,
           "actual": -1.05,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2012-03-01",
-          "pred": -0.07300996912037584,
+          "pred": 0.9706288376603052,
           "actual": -0.48,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2012-06-01",
-          "pred": -0.7343074601388901,
+          "pred": -0.09015437810006471,
           "actual": 0.14,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2012-09-01",
-          "pred": -0.3166910319873067,
+          "pred": -0.28432933291239043,
           "actual": 0.44,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2012-12-01",
-          "pred": -0.9698029487839,
+          "pred": -0.7606262194645522,
           "actual": -0.13,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2013-03-01",
-          "pred": -0.8741295822875967,
+          "pred": -1.2927920150149073,
           "actual": -0.14,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2013-06-01",
-          "pred": -0.17932528464112957,
+          "pred": -1.7297718007465361,
           "actual": -0.33,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2013-09-01",
-          "pred": -1.0297196899593977,
+          "pred": -0.5177599751322876,
           "actual": -0.09,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2013-12-01",
-          "pred": -0.3995509939939524,
+          "pred": 1.652316377892827,
           "actual": -0.09,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2014-03-01",
-          "pred": -0.4597361835488446,
+          "pred": 0.3875482574260538,
           "actual": -0.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2014-06-01",
-          "pred": -0.40553305404746576,
+          "pred": 0.028142009748801475,
           "actual": 0.48,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2014-09-01",
-          "pred": 0.12344893095021298,
+          "pred": 0.8792189237243048,
           "actual": 0.37,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2014-12-01",
-          "pred": 1.0432116925638377,
+          "pred": 2.365560724728093,
           "actual": 0.77,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2015-03-01",
-          "pred": 1.0133673768262699,
+          "pred": 2.8800256486805464,
           "actual": 0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2015-06-01",
-          "pred": 0.39898912367411643,
+          "pred": 2.011180877315654,
           "actual": 1.28,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2015-09-01",
-          "pred": -0.3947615691833059,
+          "pred": 0.30365544258088645,
           "actual": 2.01,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2015-12-01",
-          "pred": -0.2906123983572994,
+          "pred": -1.0707233508043832,
           "actual": 2.56,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2016-03-01",
-          "pred": 0.47307053905068874,
+          "pred": -1.8252311948275535,
           "actual": 1.6,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2016-06-01",
-          "pred": 0.47681285253367095,
+          "pred": -1.6602060641120886,
           "actual": 0.06,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2016-09-01",
-          "pred": 1.4426001237114712,
+          "pred": -0.8074301138109732,
           "actual": -0.46,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2016-12-01",
-          "pred": 0.9604308335707306,
+          "pred": 0.4498435954913911,
           "actual": -0.51,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2017-03-01",
-          "pred": 1.23926539313117,
+          "pred": -0.41023111845164595,
           "actual": -0.09,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2017-06-01",
-          "pred": 1.2353453474638678,
+          "pred": -1.7125118267057884,
           "actual": 0.22,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2017-09-01",
-          "pred": 1.1327730482933736,
+          "pred": -0.02651986596813455,
           "actual": -0.56,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2017-12-01",
-          "pred": 0.013186179696099101,
+          "pred": 1.7367775960304945,
           "actual": -0.85,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2018-03-01",
-          "pred": -0.18326418899241187,
+          "pred": 0.3005702774054974,
           "actual": -0.73,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2018-06-01",
-          "pred": -0.14530259983827187,
+          "pred": -0.7574981782022824,
           "actual": 0.12,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2018-09-01",
-          "pred": 0.079372425624833,
+          "pred": 0.011695663461826378,
           "actual": 0.3,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2018-12-01",
-          "pred": 0.1367658541266601,
+          "pred": -0.7313901646277668,
           "actual": 0.97,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2019-03-01",
-          "pred": -0.330938919690796,
+          "pred": -1.0734824855931802,
           "actual": 0.81,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2019-06-01",
-          "pred": 0.267762650765191,
+          "pred": -1.6374684803068522,
           "actual": 0.66,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2019-09-01",
-          "pred": 0.8427207780014111,
+          "pred": -0.06736490804240974,
           "actual": 0.11,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2019-12-01",
-          "pred": 0.8851914343078987,
+          "pred": -0.32118291403272853,
           "actual": 0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2020-03-01",
-          "pred": 0.7587455599154036,
+          "pred": -0.13965527515527257,
           "actual": 0.36,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2020-06-01",
-          "pred": 1.3464947105672713,
+          "pred": 0.14773164817548465,
           "actual": -0.21,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2020-09-01",
-          "pred": 1.3702584005548133,
+          "pred": -0.49751607763217887,
           "actual": -0.66,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2020-12-01",
-          "pred": 1.5013457421634389,
+          "pred": 0.5003498714143206,
           "actual": -0.98,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2021-03-01",
-          "pred": 1.5322070766080242,
+          "pred": 1.7915945325267746,
           "actual": -0.72,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2021-06-01",
-          "pred": 2.057898144972913,
+          "pred": 0.6065983270940566,
           "actual": -0.06,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2021-09-01",
-          "pred": 1.8613756423564165,
+          "pred": -1.64527854056017,
           "actual": -0.5,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2021-12-01",
-          "pred": 0.9362325312845184,
+          "pred": -1.7455973830743012,
           "actual": -1.07,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2022-03-01",
-          "pred": -0.1966713628083299,
+          "pred": -2.161608980377599,
           "actual": -0.84,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2022-06-01",
-          "pred": -0.2112813947626578,
+          "pred": -1.8152709768968243,
           "actual": -0.77,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2022-09-01",
-          "pred": -0.037681744899876295,
+          "pred": -0.41858693445429035,
           "actual": -1.06,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2022-12-01",
-          "pred": 0.5251139007416179,
+          "pred": -0.5614201229634084,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2023-03-01",
-          "pred": 0.8247558861263462,
+          "pred": -2.027605717213501,
           "actual": -0.13,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2023-06-01",
-          "pred": 1.5051789109251916,
+          "pred": -2.6745931062104416,
           "actual": 0.95,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2023-09-01",
-          "pred": 1.4340827503936135,
+          "pred": -1.1639955761024876,
           "actual": 1.65,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2023-12-01",
-          "pred": 1.4511366658906701,
+          "pred": 0.06226849972921364,
           "actual": 1.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2024-03-01",
-          "pred": 2.1287703171284,
+          "pred": 1.7592231499531261,
           "actual": 1.1,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2024-06-01",
-          "pred": 2.023284348128439,
+          "pred": 1.8420634495701864,
           "actual": 0.25,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2024-09-01",
-          "pred": 2.163344634340829,
+          "pred": 1.3505043193671404,
           "actual": -0.11,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2024-12-01",
-          "pred": 2.3270273023811616,
+          "pred": 1.0177171750779244,
           "actual": -0.58,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2025-03-01",
-          "pred": 2.1379712925577397,
+          "pred": 0.8742319114527672,
           "actual": 0.05,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2025-06-01",
-          "pred": 2.1314033180324956,
+          "pred": 1.2762237530713945,
           "actual": 0.01,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2025-09-01",
-          "pred": 2.2152014636258675,
+          "pred": 0.7374231959057378,
           "actual": -0.3,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2025-12-01",
-          "pred": 2.102027824000795,
+          "pred": 0.6761460198230379,
           "actual": -0.49,
           "persistence": -0.98
         }
       ]
     },
-    "state_transition_decoder_current": {
+    "same_rung_gear_pair_decoder": {
       "1": [
         {
           "origin": "2006-09-01",
           "date": "2006-10-01",
-          "pred": -0.16060512421983886,
+          "pred": 0.5003343547587141,
           "actual": 0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-01-01",
-          "pred": 1.2360920785007308,
+          "pred": 1.2413064338042137,
           "actual": 0.59,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-04-01",
-          "pred": 0.12865158269014193,
+          "pred": 0.4024390543011697,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-07-01",
-          "pred": -0.3820380518670958,
+          "pred": -0.11097535793120972,
           "actual": -0.37,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-10-01",
-          "pred": -0.896552498209445,
+          "pred": -0.3844789913649103,
           "actual": -1.41,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-01-01",
-          "pred": -1.1997692975161056,
+          "pred": -0.596926007585543,
           "actual": -1.79,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-04-01",
-          "pred": -0.8177670357448843,
+          "pred": -0.96934006766867,
           "actual": -0.89,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-07-01",
-          "pred": -0.34655028467292776,
+          "pred": -0.9093351945864407,
           "actual": -0.04,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-10-01",
-          "pred": -0.42532649620676033,
+          "pred": -0.3569160377665954,
           "actual": -0.3,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-01-01",
-          "pred": -0.6679262997145337,
+          "pred": 0.005250648000650553,
           "actual": -1.0,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-04-01",
-          "pred": -1.0244983392321203,
+          "pred": -0.798609178694958,
           "actual": -0.25,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-07-01",
-          "pred": 0.19428990275581143,
+          "pred": 0.6630503373829669,
           "actual": 0.69,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-10-01",
-          "pred": 0.6578690558280941,
+          "pred": 1.1142095170941162,
           "actual": 0.96,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-01-01",
-          "pred": 1.786909353009101,
+          "pred": 1.844853611392378,
           "actual": 1.43,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-04-01",
-          "pred": 0.6090730152381554,
+          "pred": 0.11179089254772559,
           "actual": 0.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-07-01",
-          "pred": -0.6220439891766121,
+          "pred": -0.582447682560979,
           "actual": -0.89,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-10-01",
-          "pred": -1.3718244872559842,
+          "pred": -1.334223827778187,
           "actual": -1.65,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-01-01",
-          "pred": -1.0902146079183417,
+          "pred": -1.0881163244554362,
           "actual": -1.7,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-04-01",
-          "pred": -0.9894214739008347,
+          "pred": -1.2551871039724933,
           "actual": -0.74,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-07-01",
-          "pred": -0.3508557644600443,
+          "pred": -0.9383648631942587,
           "actual": -0.23,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-10-01",
-          "pred": -0.321028393656071,
+          "pred": -0.5764546287892403,
           "actual": -0.93,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-01-01",
-          "pred": -1.41147588716167,
+          "pred": -1.2996150026351574,
           "actual": -0.93,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-04-01",
-          "pred": -0.41172328444376405,
+          "pred": -0.8632769450928721,
           "actual": -0.29,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-07-01",
-          "pred": 0.2312924511277918,
+          "pred": 0.29887328489426207,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-10-01",
-          "pred": 1.020148091295141,
+          "pred": 0.860931523089713,
           "actual": 0.23,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-01-01",
-          "pred": 0.272830580132554,
+          "pred": -0.03455197671238171,
           "actual": -0.42,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-04-01",
-          "pred": -0.35291201564284064,
+          "pred": -0.7304580157844327,
           "actual": -0.08,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-07-01",
-          "pred": -0.1944110176518511,
+          "pred": -0.5478590053957422,
           "actual": -0.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-10-01",
-          "pred": -0.24734419439428895,
+          "pred": -0.2600545736268153,
           "actual": -0.24,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-01-01",
-          "pred": -0.040852343939983035,
+          "pred": -0.2792136420102543,
           "actual": -0.42,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-04-01",
-          "pred": 0.12114084144683451,
+          "pred": -0.1872362705663449,
           "actual": 0.28,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-07-01",
-          "pred": 0.8143568520299808,
+          "pred": 0.9580829527528117,
           "actual": 0.13,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-10-01",
-          "pred": 0.40122119706332143,
+          "pred": 0.5951787738171561,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-01-01",
-          "pred": 1.0288989671606343,
+          "pred": 1.0929553283633093,
           "actual": 0.59,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-04-01",
-          "pred": 0.25815448592109047,
+          "pred": 0.47207579992552734,
           "actual": 0.9,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-07-01",
-          "pred": 1.1169502955041173,
+          "pred": 0.6160274806973298,
           "actual": 1.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-10-01",
-          "pred": 2.0068316033285143,
+          "pred": 2.1941954914140167,
           "actual": 2.21,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-01-01",
-          "pred": 2.479344055582578,
+          "pred": 2.5045900748116767,
           "actual": 2.56,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-04-01",
-          "pred": 1.8052419207654358,
+          "pred": 1.9003061184668224,
           "actual": 1.05,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-07-01",
-          "pred": -0.005636534891865757,
+          "pred": 0.39205839850498636,
           "actual": -0.25,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-10-01",
-          "pred": -0.5986040030191102,
+          "pred": -1.278630672212601,
           "actual": -0.75,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-01-01",
-          "pred": -0.05658422508878891,
+          "pred": -0.19180728594655466,
           "actual": -0.34,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-04-01",
-          "pred": -0.1705940923941594,
+          "pred": 0.04894926496061634,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-07-01",
-          "pred": -0.036852357595608405,
+          "pred": -0.0146651465493947,
           "actual": 0.22,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-10-01",
-          "pred": -0.6765379420278385,
+          "pred": -0.5056364138004226,
           "actual": -0.52,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-01-01",
-          "pred": -0.8313411220949065,
+          "pred": -0.6577435128010873,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-04-01",
-          "pred": -0.41232712176626246,
+          "pred": 0.21305194696074614,
           "actual": -0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-07-01",
-          "pred": 0.5243465983637773,
+          "pred": 0.23967338301184943,
           "actual": 0.27,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-10-01",
-          "pred": 0.3441480318704327,
+          "pred": 0.2509589827138416,
           "actual": 0.84,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-01-01",
-          "pred": 0.8728420969047861,
+          "pred": 1.053851570573964,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-04-01",
-          "pred": 0.008309943575489072,
+          "pred": -0.17124194676034454,
           "actual": 0.67,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-07-01",
-          "pred": 0.42854603097999017,
+          "pred": 0.38513741541327084,
           "actual": 0.41,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-10-01",
-          "pred": 0.050684929488973754,
+          "pred": 0.19477075347568235,
           "actual": 0.55,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-01-01",
-          "pred": 0.4894792194241288,
+          "pred": 0.5666830058732217,
           "actual": 0.64,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-04-01",
-          "pred": 0.6490364574593123,
+          "pred": 0.5322155837140476,
           "actual": 0.49,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-07-01",
-          "pred": -0.10851301682873518,
+          "pred": -0.06869316155418052,
           "actual": -0.04,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-10-01",
-          "pred": -0.7618844403542023,
+          "pred": -0.5283604069268452,
           "actual": -1.19,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-01-01",
-          "pred": -0.8971169922562423,
+          "pred": -0.8071530974707003,
           "actual": -1.04,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-04-01",
-          "pred": -0.48948895079469007,
+          "pred": -0.018637516857561754,
           "actual": -0.55,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-07-01",
-          "pred": -0.05273496968895148,
+          "pred": -0.37948538771616247,
           "actual": -0.2,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-10-01",
-          "pred": -0.3018044814471249,
+          "pred": -0.06365442137955882,
           "actual": -0.78,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-01-01",
-          "pred": -0.4872024300829467,
+          "pred": -0.42261503487961244,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-04-01",
-          "pred": -0.48446327529571087,
+          "pred": -0.6021584329316082,
           "actual": -0.9,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-07-01",
-          "pred": -0.7281298438263156,
+          "pred": -0.5071792280738393,
           "actual": -0.56,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-10-01",
-          "pred": -0.517748574340107,
+          "pred": -0.5775231250765994,
           "actual": -0.99,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-01-01",
-          "pred": -0.5906174366263555,
+          "pred": -0.8087001292003355,
           "actual": -0.78,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-04-01",
-          "pred": -0.20187302761151948,
+          "pred": -0.5045993506638484,
           "actual": 0.24,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-07-01",
-          "pred": 0.6817816290226353,
+          "pred": 0.6531949059225216,
           "actual": 1.2,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-10-01",
-          "pred": 1.3919197181591643,
+          "pred": 1.2907402532411163,
           "actual": 1.59,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-01-01",
-          "pred": 1.488612515735839,
+          "pred": 1.7189951620418402,
           "actual": 1.71,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-04-01",
-          "pred": 0.6196195743059726,
+          "pred": 1.165921570754795,
           "actual": 0.93,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-07-01",
-          "pred": -0.166868986314685,
+          "pred": -0.025861687423013837,
           "actual": 0.2,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-10-01",
-          "pred": 0.1368626977362562,
+          "pred": -0.07302430486397232,
           "actual": -0.24,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-01-01",
-          "pred": 0.168856130785987,
+          "pred": 0.5969492171285442,
           "actual": -0.76,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-04-01",
-          "pred": 0.20817377116698346,
+          "pred": 0.4389608146481951,
           "actual": -0.08,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-07-01",
-          "pred": 0.0366521421036738,
+          "pred": 0.07478436825880519,
           "actual": -0.03,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-10-01",
-          "pred": -0.7143984969481696,
+          "pred": -0.7982317214708514,
           "actual": -0.5,
           "persistence": -0.3
         }
@@ -13531,539 +13260,539 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2006-12-01",
-          "pred": -0.5525055526987251,
+          "pred": 0.440552083913433,
           "actual": 1.1,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-03-01",
-          "pred": 0.8782807518783744,
+          "pred": 1.4586534168888023,
           "actual": -0.15,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-06-01",
-          "pred": 0.30456258977075223,
+          "pred": 0.5102507653201446,
           "actual": -0.16,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-09-01",
-          "pred": -0.08261805169746136,
+          "pred": 0.27425443919906833,
           "actual": -1.04,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2007-12-01",
-          "pred": -0.1401825910435311,
+          "pred": -0.21567224714209288,
           "actual": -1.61,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-03-01",
-          "pred": -1.3609325323486618,
+          "pred": 0.06290695425111245,
           "actual": -1.17,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-06-01",
-          "pred": -0.3163534999449776,
+          "pred": -0.9400904028513494,
           "actual": -0.44,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-09-01",
-          "pred": 0.08504329476523409,
+          "pred": -1.351893176697542,
           "actual": -0.28,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2008-12-01",
-          "pred": -0.887327321896941,
+          "pred": -0.04687507819899738,
           "actual": -0.9,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-03-01",
-          "pred": -0.807241010942922,
+          "pred": -0.046836502434924814,
           "actual": -0.72,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-06-01",
-          "pred": -1.0791441499145724,
+          "pred": -1.1585801947226306,
           "actual": 0.49,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-09-01",
-          "pred": -0.17536480054954803,
+          "pred": 0.7684103832336263,
           "actual": 0.68,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2009-12-01",
-          "pred": 0.3575597071098269,
+          "pred": 1.8614821675935793,
           "actual": 1.81,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-03-01",
-          "pred": 0.5671331335772636,
+          "pred": 0.6357481595842402,
           "actual": 1.07,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-06-01",
-          "pred": 0.2037000519029547,
+          "pred": -0.2814282870581649,
           "actual": -0.62,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-09-01",
-          "pred": 0.09520224119902039,
+          "pred": -0.03242993796067384,
           "actual": -1.56,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2010-12-01",
-          "pred": -1.0860762536428454,
+          "pred": -1.1982222396069067,
           "actual": -1.63,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-03-01",
-          "pred": -0.02230777639181128,
+          "pred": -0.5829092162704043,
           "actual": -0.98,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-06-01",
-          "pred": -0.33058122471094253,
+          "pred": -0.9160167488815127,
           "actual": -0.25,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-09-01",
-          "pred": -0.6279968129904476,
+          "pred": -1.5863901409870942,
           "actual": -0.76,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2011-12-01",
-          "pred": -0.5510374661151143,
+          "pred": -0.8305874735022377,
           "actual": -1.05,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-03-01",
-          "pred": -1.167120304785232,
+          "pred": -1.2778430244006411,
           "actual": -0.48,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-06-01",
-          "pred": -0.5998406403007102,
+          "pred": -0.7490028170673245,
           "actual": 0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-09-01",
-          "pred": 0.05896198241093191,
+          "pred": 1.264169200119228,
           "actual": 0.44,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2012-12-01",
-          "pred": -0.514449362844073,
+          "pred": 0.9107367948746532,
           "actual": -0.13,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-03-01",
-          "pred": -0.647861322794057,
+          "pred": -0.5322949922635822,
           "actual": -0.14,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-06-01",
-          "pred": -0.9547011741007758,
+          "pred": -1.2053592366577182,
           "actual": -0.33,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-09-01",
-          "pred": -0.48610462951004424,
+          "pred": -0.7494345608634607,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2013-12-01",
-          "pred": -0.19901383536424722,
+          "pred": -0.2948194976807427,
           "actual": -0.09,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-03-01",
-          "pred": 0.2547566221057662,
+          "pred": -0.15690065794562208,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-06-01",
-          "pred": 0.7617573247504776,
+          "pred": 0.17631220346004972,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-09-01",
-          "pred": 0.7292529654833203,
+          "pred": 1.1005120132651594,
           "actual": 0.37,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2014-12-01",
-          "pred": 0.4846129833724138,
+          "pred": 0.8105862385573787,
           "actual": 0.77,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-03-01",
-          "pred": 1.2897366811333848,
+          "pred": 0.9919011268474727,
           "actual": 0.48,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-06-01",
-          "pred": 0.5990782769599439,
+          "pred": 0.8097484788674614,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-09-01",
-          "pred": 0.6517420222715034,
+          "pred": 0.1628615963893246,
           "actual": 2.01,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2015-12-01",
-          "pred": 1.9715289507672231,
+          "pred": 2.0669326061020246,
           "actual": 2.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-03-01",
-          "pred": 2.352591925328432,
+          "pred": 2.5751004732458638,
           "actual": 1.6,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-06-01",
-          "pred": 2.140679374997753,
+          "pred": 1.7555795215719232,
           "actual": 0.06,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-09-01",
-          "pred": 0.22124598899088027,
+          "pred": 0.8174764335888894,
           "actual": -0.46,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2016-12-01",
-          "pred": -0.7542962933090821,
+          "pred": -1.5606058117112525,
           "actual": -0.51,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-03-01",
-          "pred": -0.054659827310163195,
+          "pred": 0.15189718551903758,
           "actual": -0.09,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-06-01",
-          "pred": -0.09345713378609578,
+          "pred": -0.26022863765624754,
           "actual": 0.22,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-09-01",
-          "pred": -0.8932334201337159,
+          "pred": -0.335828482034289,
           "actual": -0.56,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2017-12-01",
-          "pred": -1.1928374755211173,
+          "pred": -0.7130172830683105,
           "actual": -0.85,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-03-01",
-          "pred": -0.6488316215266968,
+          "pred": -1.0358291683483598,
           "actual": -0.73,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-06-01",
-          "pred": 0.47363945702147187,
+          "pred": 0.6899006653700579,
           "actual": 0.12,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-09-01",
-          "pred": 0.68735042865832,
+          "pred": 0.4335648470380302,
           "actual": 0.3,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2018-12-01",
-          "pred": 0.7548655151753024,
+          "pred": 0.6584338121041196,
           "actual": 0.97,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-03-01",
-          "pred": 1.4155577141475086,
+          "pred": 0.2689357019662506,
           "actual": 0.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-06-01",
-          "pred": 0.11639811900411826,
+          "pred": -0.6663315017125913,
           "actual": 0.66,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-09-01",
-          "pred": 0.09061704068765446,
+          "pred": -0.3448166159633459,
           "actual": 0.11,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2019-12-01",
-          "pred": 0.40006167895523964,
+          "pred": 0.3109032695801742,
           "actual": 0.51,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-03-01",
-          "pred": 0.4096253637402552,
+          "pred": 0.4031780044225787,
           "actual": 0.36,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-06-01",
-          "pred": 0.48181347774427474,
+          "pred": 1.144585749615925,
           "actual": -0.21,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-09-01",
-          "pred": -0.10713016543340745,
+          "pred": 0.01538198294295753,
           "actual": -0.66,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2020-12-01",
-          "pred": -0.7131137276532024,
+          "pred": -0.38354435198188586,
           "actual": -0.98,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-03-01",
-          "pred": -0.3786958306132875,
+          "pred": -0.9246375015204706,
           "actual": -0.72,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-06-01",
-          "pred": -0.5031509792274219,
+          "pred": -0.14761742889846358,
           "actual": -0.06,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-09-01",
-          "pred": -0.5429467920014253,
+          "pred": -0.8687252467380865,
           "actual": -0.5,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2021-12-01",
-          "pred": -0.6918846941981203,
+          "pred": 0.3437574089798876,
           "actual": -1.07,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-03-01",
-          "pred": -0.6491362963199317,
+          "pred": -0.31548703938709505,
           "actual": -0.84,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-06-01",
-          "pred": 0.02772612587727321,
+          "pred": -0.7064219224362412,
           "actual": -0.77,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-09-01",
-          "pred": 0.6783662410022143,
+          "pred": -0.4361095583739548,
           "actual": -1.06,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2022-12-01",
-          "pred": -0.7944081592963735,
+          "pred": -0.8192126194248749,
           "actual": -0.86,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-03-01",
-          "pred": -0.49670112655617193,
+          "pred": -1.3518441455505772,
           "actual": -0.13,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-06-01",
-          "pred": -0.0776645041126525,
+          "pred": -0.8273131312953131,
           "actual": 0.95,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-09-01",
-          "pred": 0.7594914030732864,
+          "pred": 0.2905379141407779,
           "actual": 1.65,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2023-12-01",
-          "pred": 1.1632477499651697,
+          "pred": 1.6405192650449398,
           "actual": 1.81,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-03-01",
-          "pred": 0.7697802158202139,
+          "pred": 2.000712895983869,
           "actual": 1.1,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-06-01",
-          "pred": -0.8779356558914232,
+          "pred": 1.5835883883915913,
           "actual": 0.25,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-09-01",
-          "pred": -0.8317891633496304,
+          "pred": 0.4315648252136191,
           "actual": -0.11,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2024-12-01",
-          "pred": 0.6739062973478998,
+          "pred": 0.3109304802636026,
           "actual": -0.58,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-03-01",
-          "pred": 0.31448434950131726,
+          "pred": 1.2791558366867641,
           "actual": 0.05,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-06-01",
-          "pred": -0.4640820379951247,
+          "pred": 0.4795429554077187,
           "actual": 0.01,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-09-01",
-          "pred": -0.3533181329862118,
+          "pred": -0.4178609152845535,
           "actual": -0.3,
           "persistence": 0.01
         },
         {
           "origin": "2025-09-01",
           "date": "2025-12-01",
-          "pred": -0.7650946585989745,
+          "pred": -0.7668631584167719,
           "actual": -0.49,
           "persistence": -0.3
         }
@@ -14072,532 +13801,532 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-03-01",
-          "pred": 0.10951943612158406,
+          "pred": 0.4422004442961418,
           "actual": -0.15,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-06-01",
-          "pred": 0.0479750496541541,
+          "pred": 0.6272346713592093,
           "actual": -0.16,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2007-09-01",
-          "pred": 0.0557211756750446,
+          "pred": 0.9066298551676386,
           "actual": -1.04,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2007-12-01",
-          "pred": 0.25934234313053656,
+          "pred": 0.8371459289923047,
           "actual": -1.61,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-03-01",
-          "pred": 0.03230137043202539,
+          "pred": 0.9896746918827708,
           "actual": -1.17,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-06-01",
-          "pred": -0.580342419923235,
+          "pred": -0.2689980242357046,
           "actual": -0.44,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2008-09-01",
-          "pred": -1.1742442946865623,
+          "pred": -1.0786009892724555,
           "actual": -0.28,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2008-12-01",
-          "pred": -0.675194667664624,
+          "pred": -1.4482198632430445,
           "actual": -0.9,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-03-01",
-          "pred": -0.30005515220709245,
+          "pred": -0.8808354531697943,
           "actual": -0.72,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-06-01",
-          "pred": -1.2766284125185123,
+          "pred": -0.8617967965434463,
           "actual": 0.49,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2009-09-01",
-          "pred": -0.5682361948037021,
+          "pred": 0.07980938295166723,
           "actual": 0.68,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2009-12-01",
-          "pred": -0.09612370052740066,
+          "pred": 1.8223740502051666,
           "actual": 1.81,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-03-01",
-          "pred": -0.3701297461098276,
+          "pred": 0.6164016021697418,
           "actual": 1.07,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-06-01",
-          "pred": -0.3595034450520015,
+          "pred": -1.0796709221357257,
           "actual": -0.62,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2010-09-01",
-          "pred": 0.26104846349712807,
+          "pred": -0.31128156908614,
           "actual": -1.56,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2010-12-01",
-          "pred": 0.4866199961617174,
+          "pred": 0.2558827865375956,
           "actual": -1.63,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-03-01",
-          "pred": 0.12473403343544745,
+          "pred": 0.03950631651589799,
           "actual": -0.98,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-06-01",
-          "pred": -0.4356137347189326,
+          "pred": 0.7688720119057416,
           "actual": -0.25,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2011-09-01",
-          "pred": -0.8385249399395791,
+          "pred": -1.2717399194636303,
           "actual": -0.76,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2011-12-01",
-          "pred": -1.072184319980264,
+          "pred": -1.767606255212137,
           "actual": -1.05,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-03-01",
-          "pred": -0.8807300749774151,
+          "pred": -1.53958281780291,
           "actual": -0.48,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-06-01",
-          "pred": -0.6908633785839908,
+          "pred": -1.061427276562146,
           "actual": 0.14,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2012-09-01",
-          "pred": -0.6700638164440331,
+          "pred": 0.8674249185602838,
           "actual": 0.44,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2012-12-01",
-          "pred": -0.965160703061759,
+          "pred": 1.876927078530539,
           "actual": -0.13,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-03-01",
-          "pred": -1.5838194704804944,
+          "pred": 0.2620046354755822,
           "actual": -0.14,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-06-01",
-          "pred": -1.6303623335978414,
+          "pred": -1.2125010121028175,
           "actual": -0.33,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2013-09-01",
-          "pred": -0.7981959349436767,
+          "pred": -1.1552688534500803,
           "actual": -0.09,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2013-12-01",
-          "pred": -0.4521349835494092,
+          "pred": -0.3987715035690202,
           "actual": -0.09,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-03-01",
-          "pred": -0.826683767624619,
+          "pred": -0.1845303905020519,
           "actual": -0.07,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-06-01",
-          "pred": -0.44720298448383644,
+          "pred": -0.49538066404252157,
           "actual": 0.48,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2014-09-01",
-          "pred": 0.5774352610436871,
+          "pred": 0.5354842158979245,
           "actual": 0.37,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2014-12-01",
-          "pred": 1.1596668157290062,
+          "pred": 1.4288063831342548,
           "actual": 0.77,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-03-01",
-          "pred": 0.201903552387727,
+          "pred": 0.9264229369513812,
           "actual": 0.48,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-06-01",
-          "pred": 0.8916200075366817,
+          "pred": 1.1783432638694034,
           "actual": 1.28,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2015-09-01",
-          "pred": 0.522471417072166,
+          "pred": 1.6590165064077005,
           "actual": 2.01,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2015-12-01",
-          "pred": 1.0860798932500346,
+          "pred": 0.847739505499195,
           "actual": 2.56,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-03-01",
-          "pred": 2.1758218543798584,
+          "pred": 2.098659365737673,
           "actual": 1.6,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-06-01",
-          "pred": 2.3483878239189004,
+          "pred": 2.0568147825859926,
           "actual": 0.06,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2016-09-01",
-          "pred": 1.6477547966682584,
+          "pred": 0.969761875100562,
           "actual": -0.46,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2016-12-01",
-          "pred": 0.554227441468575,
+          "pred": 0.6478486949366181,
           "actual": -0.51,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-03-01",
-          "pred": 0.08935395141955703,
+          "pred": 0.01111023866385793,
           "actual": -0.09,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-06-01",
-          "pred": 1.0802561441151155,
+          "pred": 1.302101242960179,
           "actual": 0.22,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2017-09-01",
-          "pred": 0.3849713857564699,
+          "pred": -0.7843923535505183,
           "actual": -0.56,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2017-12-01",
-          "pred": -0.3585211154048745,
+          "pred": -1.0457226448464694,
           "actual": -0.85,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-03-01",
-          "pred": -0.34862558568232455,
+          "pred": -0.4976313597160151,
           "actual": -0.73,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-06-01",
-          "pred": -0.07231280137077574,
+          "pred": 0.07629666351675049,
           "actual": 0.12,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2018-09-01",
-          "pred": 0.9806643738261057,
+          "pred": 1.546933758238573,
           "actual": 0.3,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2018-12-01",
-          "pred": 0.8448939743728391,
+          "pred": 0.6381398554501642,
           "actual": 0.97,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-03-01",
-          "pred": 0.24700647495375583,
+          "pred": -0.17419224016688664,
           "actual": 0.81,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-06-01",
-          "pred": 0.9434362578289194,
+          "pred": -0.8246511776288948,
           "actual": 0.66,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2019-09-01",
-          "pred": -0.031603132321387783,
+          "pred": -0.9804331054967761,
           "actual": 0.11,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2019-12-01",
-          "pred": -0.34567707622417193,
+          "pred": -0.3490530782675847,
           "actual": 0.51,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-03-01",
-          "pred": -0.06312423330730632,
+          "pred": 0.336679187503429,
           "actual": 0.36,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-06-01",
-          "pred": 0.26015956974691373,
+          "pred": 0.7051633996895905,
           "actual": -0.21,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2020-09-01",
-          "pred": 0.4142849774491166,
+          "pred": 1.0797679693356668,
           "actual": -0.66,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2020-12-01",
-          "pred": -0.437141131798168,
+          "pred": -0.1256147513851615,
           "actual": -0.98,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-03-01",
-          "pred": -1.1122822996859782,
+          "pred": 0.00679487153919163,
           "actual": -0.72,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-06-01",
-          "pred": -0.15256913872902128,
+          "pred": -0.42849648767559306,
           "actual": -0.06,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2021-09-01",
-          "pred": 0.7728821797035144,
+          "pred": -0.05065058775891462,
           "actual": -0.5,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2021-12-01",
-          "pred": -0.17801526465602657,
+          "pred": -0.7117707253327509,
           "actual": -1.07,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-03-01",
-          "pred": -0.11989795278941481,
+          "pred": -0.4583930241667716,
           "actual": -0.84,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-06-01",
-          "pred": 0.41118261869717,
+          "pred": -0.4893920497602174,
           "actual": -0.77,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2022-09-01",
-          "pred": -0.3533892513050113,
+          "pred": 0.13630917433606454,
           "actual": -1.06,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2022-12-01",
-          "pred": -0.484582345931402,
+          "pred": -0.43694562341379073,
           "actual": -0.86,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-03-01",
-          "pred": -1.959005820267509,
+          "pred": -0.8763574763248733,
           "actual": -0.13,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-06-01",
-          "pred": -0.8480647501845971,
+          "pred": -1.8826883213003713,
           "actual": 0.95,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2023-09-01",
-          "pred": -0.3879412323546767,
+          "pred": -0.8219645573034196,
           "actual": 1.65,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2023-12-01",
-          "pred": 0.9250114815676433,
+          "pred": 0.4675252299711273,
           "actual": 1.81,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-03-01",
-          "pred": 0.5215575624995687,
+          "pred": 1.515815887225983,
           "actual": 1.1,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-06-01",
-          "pred": 0.19425179110895402,
+          "pred": 1.716272283121835,
           "actual": 0.25,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2024-09-01",
-          "pred": -0.8777474513547734,
+          "pred": 1.8966231359861783,
           "actual": -0.11,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2024-12-01",
-          "pred": -0.5040434298200207,
+          "pred": 0.6661028940447792,
           "actual": -0.58,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-03-01",
-          "pred": 0.7023566478496609,
+          "pred": 1.5958014648205268,
           "actual": 0.05,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-06-01",
-          "pred": 0.8184618798454529,
+          "pred": 1.758798302358777,
           "actual": 0.01,
           "persistence": -0.58
         },
         {
           "origin": "2025-03-01",
           "date": "2025-09-01",
-          "pred": -0.8943767772695888,
+          "pred": -0.5804132894066474,
           "actual": -0.3,
           "persistence": 0.05
         },
         {
           "origin": "2025-06-01",
           "date": "2025-12-01",
-          "pred": -0.5384720923592754,
+          "pred": -1.0145164675278997,
           "actual": -0.49,
           "persistence": 0.01
         }
@@ -14606,518 +14335,518 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2007-09-01",
-          "pred": 1.1188590297274765,
+          "pred": 1.493823559664131,
           "actual": -1.04,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2007-12-01",
-          "pred": 1.1649551747146134,
+          "pred": 2.104108387053783,
           "actual": -1.61,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2008-03-01",
-          "pred": 0.2901706418608488,
+          "pred": 1.3910870020735038,
           "actual": -1.17,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2008-06-01",
-          "pred": 0.3892127487942177,
+          "pred": -0.10771729450212325,
           "actual": -0.44,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2008-09-01",
-          "pred": 1.361802205606848,
+          "pred": -0.5202578906028452,
           "actual": -0.28,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2008-12-01",
-          "pred": 0.6193296954166,
+          "pred": -0.5100035233639189,
           "actual": -0.9,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2009-03-01",
-          "pred": 0.38110580849789905,
+          "pred": -0.7426984196026486,
           "actual": -0.72,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2009-06-01",
-          "pred": 0.6386374686100366,
+          "pred": -1.5288711653332938,
           "actual": 0.49,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2009-09-01",
-          "pred": -0.008870381258276078,
+          "pred": -0.3933740439837815,
           "actual": 0.68,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2009-12-01",
-          "pred": -0.3302205881739072,
+          "pred": 1.1933021021412937,
           "actual": 1.81,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2010-03-01",
-          "pred": -0.4989879503881163,
+          "pred": -0.6229765823010908,
           "actual": 1.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2010-06-01",
-          "pred": -0.5273889482438232,
+          "pred": -0.9983133736506531,
           "actual": -0.62,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2010-09-01",
-          "pred": -0.11563432745596149,
+          "pred": -1.0931469902861672,
           "actual": -1.56,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2010-12-01",
-          "pred": -0.03786881605645939,
+          "pred": 0.603553874856112,
           "actual": -1.63,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2011-03-01",
-          "pred": 0.137160917433597,
+          "pred": 0.8186847843735229,
           "actual": -0.98,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2011-06-01",
-          "pred": -0.1876571042242416,
+          "pred": 0.35678845612534765,
           "actual": -0.25,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2011-09-01",
-          "pred": -0.5640012950459098,
+          "pred": 0.16509583378573142,
           "actual": -0.76,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2011-12-01",
-          "pred": -0.9134474549199331,
+          "pred": -0.2836366794355182,
           "actual": -1.05,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2012-03-01",
-          "pred": -1.1692787181760949,
+          "pred": -0.8084978495485025,
           "actual": -0.48,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2012-06-01",
-          "pred": -1.2819260636805572,
+          "pred": -0.5464882487667891,
           "actual": 0.14,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2012-09-01",
-          "pred": -1.4509326570114414,
+          "pred": 0.7304001743808768,
           "actual": 0.44,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2012-12-01",
-          "pred": -1.0605459063295006,
+          "pred": 1.0513102017510119,
           "actual": -0.13,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2013-03-01",
-          "pred": -0.6360525913221814,
+          "pred": -0.28436062864359274,
           "actual": -0.14,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2013-06-01",
-          "pred": -0.5669896708805066,
+          "pred": -1.688908111935813,
           "actual": -0.33,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2013-09-01",
-          "pred": -0.9541528557784372,
+          "pred": -1.6123400472274378,
           "actual": -0.09,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2013-12-01",
-          "pred": -1.3316847238385858,
+          "pred": 0.023769595269094376,
           "actual": -0.09,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2014-03-01",
-          "pred": -1.093443577898565,
+          "pred": -0.7299315510684148,
           "actual": -0.07,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2014-06-01",
-          "pred": -1.1733070126365737,
+          "pred": -0.8825290456828475,
           "actual": 0.48,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2014-09-01",
-          "pred": -0.3713866043785612,
+          "pred": 0.12900673141854324,
           "actual": 0.37,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2014-12-01",
-          "pred": -0.5343435699890444,
+          "pred": 0.7130428661499547,
           "actual": 0.77,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2015-03-01",
-          "pred": -0.2794362511778026,
+          "pred": 1.9570940628641265,
           "actual": 0.48,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2015-06-01",
-          "pred": -1.250057730253808,
+          "pred": 1.1838136385368414,
           "actual": 1.28,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2015-09-01",
-          "pred": -0.36386783438335585,
+          "pred": 1.813191280264116,
           "actual": 2.01,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2015-12-01",
-          "pred": -0.6988887640098227,
+          "pred": 1.6225132442192023,
           "actual": 2.56,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2016-03-01",
-          "pred": -0.5277683923127521,
+          "pred": 1.5872722045025032,
           "actual": 1.6,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2016-06-01",
-          "pred": -0.22353109858662978,
+          "pred": -0.5240736186876123,
           "actual": 0.06,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2016-09-01",
-          "pred": 0.4403585220775629,
+          "pred": 1.037322002293201,
           "actual": -0.46,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2016-12-01",
-          "pred": -0.4194200556445014,
+          "pred": 1.6864557499024122,
           "actual": -0.51,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2017-03-01",
-          "pred": -0.47213204841605844,
+          "pred": 1.4503882109062345,
           "actual": -0.09,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2017-06-01",
-          "pred": -0.3093601475545368,
+          "pred": 0.49249450707544323,
           "actual": 0.22,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2017-09-01",
-          "pred": -0.6832063601974062,
+          "pred": -0.3985196339086819,
           "actual": -0.56,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2017-12-01",
-          "pred": -0.4833010533961117,
+          "pred": -0.06590150444963566,
           "actual": -0.85,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2018-03-01",
-          "pred": 0.18431862711763244,
+          "pred": 0.09955986763863141,
           "actual": -0.73,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2018-06-01",
-          "pred": 1.1213698922476407,
+          "pred": 0.9204654142686893,
           "actual": 0.12,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2018-09-01",
-          "pred": 1.9919743424498968,
+          "pred": 2.099388068766684,
           "actual": 0.3,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2018-12-01",
-          "pred": 1.2704829939865894,
+          "pred": 0.8168184552834509,
           "actual": 0.97,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2019-03-01",
-          "pred": 1.342539686806441,
+          "pred": -1.2007629403271838,
           "actual": 0.81,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2019-06-01",
-          "pred": 1.789969068784437,
+          "pred": -1.9420049312639955,
           "actual": 0.66,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2019-09-01",
-          "pred": 0.2635764246586153,
+          "pred": -1.9025242050623528,
           "actual": 0.11,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2019-12-01",
-          "pred": 0.2972092411804754,
+          "pred": 0.24163557285424453,
           "actual": 0.51,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2020-03-01",
-          "pred": -0.17958144112245994,
+          "pred": 0.01566662656213391,
           "actual": 0.36,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2020-06-01",
-          "pred": 0.5977700073241146,
+          "pred": -0.11549109866195026,
           "actual": -0.21,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2020-09-01",
-          "pred": -0.01809466212252918,
+          "pred": -0.3421420903155213,
           "actual": -0.66,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2020-12-01",
-          "pred": -0.47669202828493834,
+          "pred": -0.013358502386157644,
           "actual": -0.98,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2021-03-01",
-          "pred": 0.25666530875007587,
+          "pred": 1.0610310975139259,
           "actual": -0.72,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2021-06-01",
-          "pred": 1.019488094643335,
+          "pred": 1.465211713830259,
           "actual": -0.06,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2021-09-01",
-          "pred": 1.7151322650653842,
+          "pred": 1.3206969155162267,
           "actual": -0.5,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2021-12-01",
-          "pred": 1.250216231396859,
+          "pred": 0.4019423221122999,
           "actual": -1.07,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2022-03-01",
-          "pred": 1.6315745750980908,
+          "pred": -0.14486117085483025,
           "actual": -0.84,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2022-06-01",
-          "pred": 1.372035128048836,
+          "pred": 0.12029382794447435,
           "actual": -0.77,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2022-09-01",
-          "pred": 1.1485078437726612,
+          "pred": 0.24324126968054904,
           "actual": -1.06,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2022-12-01",
-          "pred": 0.6990997468041478,
+          "pred": 0.32071890517574614,
           "actual": -0.86,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2023-03-01",
-          "pred": 0.15568020449435271,
+          "pred": -1.054362405853252,
           "actual": -0.13,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2023-06-01",
-          "pred": -0.32701050159093936,
+          "pred": -2.331219341005776,
           "actual": 0.95,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2023-09-01",
-          "pred": 0.1781132373061724,
+          "pred": -1.9676334091069323,
           "actual": 1.65,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2023-12-01",
-          "pred": -0.7453869317550169,
+          "pred": 0.05569043940429876,
           "actual": 1.81,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2024-03-01",
-          "pred": -1.4397920697463182,
+          "pred": -0.4692042313272241,
           "actual": 1.1,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2024-06-01",
-          "pred": -1.2126526330535545,
+          "pred": 0.6254502439023931,
           "actual": 0.25,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2024-09-01",
-          "pred": -1.3590760324252293,
+          "pred": 1.8189045170068106,
           "actual": -0.11,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2024-12-01",
-          "pred": -0.6742173055224009,
+          "pred": 2.0132857322790145,
           "actual": -0.58,
           "persistence": 1.81
         },
         {
           "origin": "2024-03-01",
           "date": "2025-03-01",
-          "pred": -0.5015270228726729,
+          "pred": 0.7473839675837347,
           "actual": 0.05,
           "persistence": 1.1
         },
         {
           "origin": "2024-06-01",
           "date": "2025-06-01",
-          "pred": 0.03884462625540868,
+          "pred": 0.415916927527941,
           "actual": 0.01,
           "persistence": 0.25
         },
         {
           "origin": "2024-09-01",
           "date": "2025-09-01",
-          "pred": -0.4228748310281673,
+          "pred": 1.2585316221274576,
           "actual": -0.3,
           "persistence": -0.11
         },
         {
           "origin": "2024-12-01",
           "date": "2025-12-01",
-          "pred": -0.18968320977033462,
+          "pred": 0.9217523109749823,
           "actual": -0.49,
           "persistence": -0.58
         }
@@ -15126,490 +14855,490 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2008-09-01",
-          "pred": 0.7985786345669212,
+          "pred": 0.12975917090958267,
           "actual": -0.28,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2008-12-01",
-          "pred": 1.0200914031623243,
+          "pred": 0.0063880162414540025,
           "actual": -0.9,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2009-03-01",
-          "pred": 0.35097807496920413,
+          "pred": 1.5052183972481203,
           "actual": -0.72,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2009-06-01",
-          "pred": -0.4326329970500832,
+          "pred": 1.8371278327254377,
           "actual": 0.49,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2009-09-01",
-          "pred": -0.5390022527161996,
+          "pred": 1.5718357464358284,
           "actual": 0.68,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2009-12-01",
-          "pred": -0.9098422935990241,
+          "pred": 0.005766304305640396,
           "actual": 1.81,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2010-03-01",
-          "pred": -1.8692034628691636,
+          "pred": -0.6805864483938534,
           "actual": 1.07,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2010-06-01",
-          "pred": -1.7700240097572189,
+          "pred": -1.410008659436367,
           "actual": -0.62,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2010-09-01",
-          "pred": -0.8504190347377323,
+          "pred": -2.6667084794836944,
           "actual": -1.56,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2010-12-01",
-          "pred": -1.2379611445140861,
+          "pred": -1.7491514697570159,
           "actual": -1.63,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2011-03-01",
-          "pred": -2.1428183123239655,
+          "pred": 0.759946751322199,
           "actual": -0.98,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2011-06-01",
-          "pred": -0.15784644247154073,
+          "pred": 1.136179592229091,
           "actual": -0.25,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2011-09-01",
-          "pred": 0.22747369040869897,
+          "pred": -0.205798777455309,
           "actual": -0.76,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2011-12-01",
-          "pred": 0.8534289886050996,
+          "pred": 0.6791110720748458,
           "actual": -1.05,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2012-03-01",
-          "pred": -0.056535315886384184,
+          "pred": 0.8681392878904997,
           "actual": -0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2012-06-01",
-          "pred": 0.8862482499235776,
+          "pred": 1.9642774101897043,
           "actual": 0.14,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2012-09-01",
-          "pred": 0.5617191998381204,
+          "pred": 1.8487379492668519,
           "actual": 0.44,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2012-12-01",
-          "pred": 0.6865363408437205,
+          "pred": 0.4800831500596829,
           "actual": -0.13,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2013-03-01",
-          "pred": 0.12496700259013793,
+          "pred": -1.7031101397238964,
           "actual": -0.14,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2013-06-01",
-          "pred": -1.3411172199304242,
+          "pred": -2.023331047419524,
           "actual": -0.33,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2013-09-01",
-          "pred": -0.5862636613417048,
+          "pred": -2.259552471992634,
           "actual": -0.09,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2013-12-01",
-          "pred": -0.6597687552074166,
+          "pred": -1.2980326613486466,
           "actual": -0.09,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2014-03-01",
-          "pred": -0.36706610934602035,
+          "pred": 0.6469291491820769,
           "actual": -0.07,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2014-06-01",
-          "pred": -1.1145487443010273,
+          "pred": -0.4460167995643269,
           "actual": 0.48,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2014-09-01",
-          "pred": 0.12748885586510106,
+          "pred": 0.29862242522265786,
           "actual": 0.37,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2014-12-01",
-          "pred": 0.3883255212411789,
+          "pred": 0.5820297970200955,
           "actual": 0.77,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2015-03-01",
-          "pred": 0.33135405471774276,
+          "pred": 1.7794753995613861,
           "actual": 0.48,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2015-06-01",
-          "pred": 1.1390448748618796,
+          "pred": 1.9563341852983676,
           "actual": 1.28,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2015-09-01",
-          "pred": 0.14046571787285517,
+          "pred": 1.5046879158675928,
           "actual": 2.01,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2015-12-01",
-          "pred": 0.950096086045557,
+          "pred": 0.5725758133645734,
           "actual": 2.56,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2016-03-01",
-          "pred": 0.33322169223248405,
+          "pred": -0.47942998696607914,
           "actual": 1.6,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2016-06-01",
-          "pred": 0.6438018149577865,
+          "pred": -0.17155715238452382,
           "actual": 0.06,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2016-09-01",
-          "pred": -0.45240795493864644,
+          "pred": -0.6906269697394967,
           "actual": -0.46,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2016-12-01",
-          "pred": 0.4044747151683021,
+          "pred": -0.30739738723786414,
           "actual": -0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2017-03-01",
-          "pred": -0.13479810277567802,
+          "pred": -0.27366055762079816,
           "actual": -0.09,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2017-06-01",
-          "pred": -0.16588887358316115,
+          "pred": 2.359516604250018,
           "actual": 0.22,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2017-09-01",
-          "pred": -0.4491134391692395,
+          "pred": 0.16920759604698551,
           "actual": -0.56,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2017-12-01",
-          "pred": 0.5388848263524008,
+          "pred": 0.12993585404884006,
           "actual": -0.85,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2018-03-01",
-          "pred": 0.9435055144859655,
+          "pred": 1.1950352630847065,
           "actual": -0.73,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2018-06-01",
-          "pred": 0.3920046186129755,
+          "pred": 1.7553526663109373,
           "actual": 0.12,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2018-09-01",
-          "pred": 1.0106990291268476,
+          "pred": 1.3676053720253523,
           "actual": 0.3,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2018-12-01",
-          "pred": -0.1607397024245382,
+          "pred": 1.084867556676485,
           "actual": 0.97,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2019-03-01",
-          "pred": 0.3932593144292759,
+          "pred": -1.017372072839232,
           "actual": 0.81,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2019-06-01",
-          "pred": 0.1486096947136139,
+          "pred": -1.3207343250574948,
           "actual": 0.66,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2019-09-01",
-          "pred": 0.48971313388219523,
+          "pred": -1.2610171577544738,
           "actual": 0.11,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2019-12-01",
-          "pred": 0.3723899127704467,
+          "pred": -0.33972668684321894,
           "actual": 0.51,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2020-03-01",
-          "pred": 0.8084436193522401,
+          "pred": 0.1444271036646654,
           "actual": 0.36,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2020-06-01",
-          "pred": 0.5995063659665181,
+          "pred": -1.6319368678403299,
           "actual": -0.21,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2020-09-01",
-          "pred": 0.010079277362165412,
+          "pred": -0.7578099858452214,
           "actual": -0.66,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2020-12-01",
-          "pred": 0.14721290661718037,
+          "pred": -0.6263615400131741,
           "actual": -0.98,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2021-03-01",
-          "pred": -0.5455627849429694,
+          "pred": 0.7877176942089205,
           "actual": -0.72,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2021-06-01",
-          "pred": 0.28869468546560534,
+          "pred": 1.3675254475760412,
           "actual": -0.06,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2021-09-01",
-          "pred": 0.7076710727760185,
+          "pred": 1.338270396525838,
           "actual": -0.5,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2021-12-01",
-          "pred": -0.3833667000502724,
+          "pred": 1.427833027911063,
           "actual": -1.07,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2022-03-01",
-          "pred": -1.6348350624249932,
+          "pred": 0.16272942447865388,
           "actual": -0.84,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2022-06-01",
-          "pred": -1.190365859570188,
+          "pred": 0.26259210447579034,
           "actual": -0.77,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2022-09-01",
-          "pred": -0.22582723041268327,
+          "pred": 0.39466077161150925,
           "actual": -1.06,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2022-12-01",
-          "pred": -0.7420129964073509,
+          "pred": 0.17571581916686552,
           "actual": -0.86,
           "persistence": -0.98
         },
         {
           "origin": "2021-03-01",
           "date": "2023-03-01",
-          "pred": -0.3802165378829712,
+          "pred": 0.05198890628756683,
           "actual": -0.13,
           "persistence": -0.72
         },
         {
           "origin": "2021-06-01",
           "date": "2023-06-01",
-          "pred": -0.5588354745718485,
+          "pred": -1.132992669281231,
           "actual": 0.95,
           "persistence": -0.06
         },
         {
           "origin": "2021-09-01",
           "date": "2023-09-01",
-          "pred": -0.7288679357771408,
+          "pred": -1.5781418727051935,
           "actual": 1.65,
           "persistence": -0.5
         },
         {
           "origin": "2021-12-01",
           "date": "2023-12-01",
-          "pred": -1.4209121003929563,
+          "pred": -0.6584721670989861,
           "actual": 1.81,
           "persistence": -1.07
         },
         {
           "origin": "2022-03-01",
           "date": "2024-03-01",
-          "pred": -0.9237438027117183,
+          "pred": 0.17166376556851237,
           "actual": 1.1,
           "persistence": -0.84
         },
         {
           "origin": "2022-06-01",
           "date": "2024-06-01",
-          "pred": -0.7884994021293174,
+          "pred": 0.3441102286026153,
           "actual": 0.25,
           "persistence": -0.77
         },
         {
           "origin": "2022-09-01",
           "date": "2024-09-01",
-          "pred": -0.5500553486264582,
+          "pred": 0.7689132103820444,
           "actual": -0.11,
           "persistence": -1.06
         },
         {
           "origin": "2022-12-01",
           "date": "2024-12-01",
-          "pred": 0.5691082871212041,
+          "pred": 1.1580452997902904,
           "actual": -0.58,
           "persistence": -0.86
         },
         {
           "origin": "2023-03-01",
           "date": "2025-03-01",
-          "pred": 0.4541824939603071,
+          "pred": 1.6310560885061527,
           "actual": 0.05,
           "persistence": -0.13
         },
         {
           "origin": "2023-06-01",
           "date": "2025-06-01",
-          "pred": 0.9390212601418096,
+          "pred": -0.45625225432083977,
           "actual": 0.01,
           "persistence": 0.95
         },
         {
           "origin": "2023-09-01",
           "date": "2025-09-01",
-          "pred": 1.2605156071713601,
+          "pred": -0.3454956481654794,
           "actual": -0.3,
           "persistence": 1.65
         },
         {
           "origin": "2023-12-01",
           "date": "2025-12-01",
-          "pred": 0.4196168844815541,
+          "pred": 1.1116954834764508,
           "actual": -0.49,
           "persistence": 1.81
         }
@@ -15618,3444 +15347,406 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
         {
           "origin": "2006-09-01",
           "date": "2011-09-01",
-          "pred": -0.7135652788960851,
+          "pred": -0.6543351794577947,
           "actual": -0.76,
           "persistence": 0.62
         },
         {
           "origin": "2006-12-01",
           "date": "2011-12-01",
-          "pred": -0.19642103284049198,
+          "pred": 0.2831920412110664,
           "actual": -1.05,
           "persistence": 1.1
         },
         {
           "origin": "2007-03-01",
           "date": "2012-03-01",
-          "pred": -0.07886998286476131,
+          "pred": 1.2996819822328889,
           "actual": -0.48,
           "persistence": -0.15
         },
         {
           "origin": "2007-06-01",
           "date": "2012-06-01",
-          "pred": -0.7362444289571163,
+          "pred": 0.4736201947015886,
           "actual": 0.14,
           "persistence": -0.16
         },
         {
           "origin": "2007-09-01",
           "date": "2012-09-01",
-          "pred": -0.5323570440061883,
+          "pred": 0.20308771163645334,
           "actual": 0.44,
           "persistence": -1.04
         },
         {
           "origin": "2007-12-01",
           "date": "2012-12-01",
-          "pred": -1.1215929804798668,
+          "pred": -0.15299855541756624,
           "actual": -0.13,
           "persistence": -1.61
         },
         {
           "origin": "2008-03-01",
           "date": "2013-03-01",
-          "pred": -0.9994408735302366,
+          "pred": -0.6945161549497708,
           "actual": -0.14,
           "persistence": -1.17
         },
         {
           "origin": "2008-06-01",
           "date": "2013-06-01",
-          "pred": -0.30658953246398335,
+          "pred": -1.4056399828265218,
           "actual": -0.33,
           "persistence": -0.44
         },
         {
           "origin": "2008-09-01",
           "date": "2013-09-01",
-          "pred": -1.1150511410585684,
+          "pred": -0.05386244633373076,
           "actual": -0.09,
           "persistence": -0.28
         },
         {
           "origin": "2008-12-01",
           "date": "2013-12-01",
-          "pred": -0.5681157166152396,
+          "pred": 1.9818978043304696,
           "actual": -0.09,
           "persistence": -0.9
         },
         {
           "origin": "2009-03-01",
           "date": "2014-03-01",
-          "pred": -0.4282504070279326,
+          "pred": 0.9064437811197625,
           "actual": -0.07,
           "persistence": -0.72
         },
         {
           "origin": "2009-06-01",
           "date": "2014-06-01",
-          "pred": -0.39020265356248235,
+          "pred": 0.318133179460612,
           "actual": 0.48,
           "persistence": 0.49
         },
         {
           "origin": "2009-09-01",
           "date": "2014-09-01",
-          "pred": 0.06942196170614542,
+          "pred": 1.158766464756174,
           "actual": 0.37,
           "persistence": 0.68
         },
         {
           "origin": "2009-12-01",
           "date": "2014-12-01",
-          "pred": 0.9176106031603509,
+          "pred": 2.5047329584778546,
           "actual": 0.77,
           "persistence": 1.81
         },
         {
           "origin": "2010-03-01",
           "date": "2015-03-01",
-          "pred": 1.1134489377850474,
+          "pred": 2.813192283564575,
           "actual": 0.48,
           "persistence": 1.07
         },
         {
           "origin": "2010-06-01",
           "date": "2015-06-01",
-          "pred": 0.34510316005184205,
+          "pred": 1.9313127004756094,
           "actual": 1.28,
           "persistence": -0.62
         },
         {
           "origin": "2010-09-01",
           "date": "2015-09-01",
-          "pred": -0.48633589367493313,
+          "pred": 0.07788594953524451,
           "actual": 2.01,
           "persistence": -1.56
         },
         {
           "origin": "2010-12-01",
           "date": "2015-12-01",
-          "pred": -0.2913430339849483,
+          "pred": -1.1351001519865478,
           "actual": 2.56,
           "persistence": -1.63
         },
         {
           "origin": "2011-03-01",
           "date": "2016-03-01",
-          "pred": 0.33351786158275143,
+          "pred": -1.5466485313304408,
           "actual": 1.6,
           "persistence": -0.98
         },
         {
           "origin": "2011-06-01",
           "date": "2016-06-01",
-          "pred": 0.43157917164414167,
+          "pred": -1.4259670830423579,
           "actual": 0.06,
           "persistence": -0.25
         },
         {
           "origin": "2011-09-01",
           "date": "2016-09-01",
-          "pred": 1.3107300394843004,
+          "pred": -0.8802641027600452,
           "actual": -0.46,
           "persistence": -0.76
         },
         {
           "origin": "2011-12-01",
           "date": "2016-12-01",
-          "pred": 0.6023138267011836,
+          "pred": 0.6362291087426374,
           "actual": -0.51,
           "persistence": -1.05
         },
         {
           "origin": "2012-03-01",
           "date": "2017-03-01",
-          "pred": 1.051059086485219,
+          "pred": -0.3774408881385707,
           "actual": -0.09,
           "persistence": -0.48
         },
         {
           "origin": "2012-06-01",
           "date": "2017-06-01",
-          "pred": 0.9363733432638646,
+          "pred": -1.6211737788930336,
           "actual": 0.22,
           "persistence": 0.14
         },
         {
           "origin": "2012-09-01",
           "date": "2017-09-01",
-          "pred": 0.8455429755211872,
+          "pred": 0.607101798706521,
           "actual": -0.56,
           "persistence": 0.44
         },
         {
           "origin": "2012-12-01",
           "date": "2017-12-01",
-          "pred": -0.09072005686903326,
+          "pred": 2.363969667860226,
           "actual": -0.85,
           "persistence": -0.13
         },
         {
           "origin": "2013-03-01",
           "date": "2018-03-01",
-          "pred": -0.13338565707064046,
+          "pred": 0.7627765923288152,
           "actual": -0.73,
           "persistence": -0.14
         },
         {
           "origin": "2013-06-01",
           "date": "2018-06-01",
-          "pred": -0.26056346151412796,
+          "pred": -0.2498395357861773,
           "actual": 0.12,
           "persistence": -0.33
         },
         {
           "origin": "2013-09-01",
           "date": "2018-09-01",
-          "pred": 0.09290041804475581,
+          "pred": 0.017547192341512585,
           "actual": 0.3,
           "persistence": -0.09
         },
         {
           "origin": "2013-12-01",
           "date": "2018-12-01",
-          "pred": 0.11649900273653639,
+          "pred": -0.1749585173535414,
           "actual": 0.97,
           "persistence": -0.09
         },
         {
           "origin": "2014-03-01",
           "date": "2019-03-01",
-          "pred": -0.30991965047494263,
+          "pred": -0.5451752305236626,
           "actual": 0.81,
           "persistence": -0.07
         },
         {
           "origin": "2014-06-01",
           "date": "2019-06-01",
-          "pred": 0.2748421526884781,
+          "pred": -1.1147096608128888,
           "actual": 0.66,
           "persistence": 0.48
         },
         {
           "origin": "2014-09-01",
           "date": "2019-09-01",
-          "pred": 0.8732137915161615,
+          "pred": 0.4469657885864368,
           "actual": 0.11,
           "persistence": 0.37
         },
         {
           "origin": "2014-12-01",
           "date": "2019-12-01",
-          "pred": 0.9516846907971954,
+          "pred": 0.1026264857452333,
           "actual": 0.51,
           "persistence": 0.77
         },
         {
           "origin": "2015-03-01",
           "date": "2020-03-01",
-          "pred": 0.8823948133570313,
+          "pred": 0.5039853245872816,
           "actual": 0.36,
           "persistence": 0.48
         },
         {
           "origin": "2015-06-01",
           "date": "2020-06-01",
-          "pred": 1.3555299634958913,
+          "pred": 0.35778481512137306,
           "actual": -0.21,
           "persistence": 1.28
         },
         {
           "origin": "2015-09-01",
           "date": "2020-09-01",
-          "pred": 1.3704797320137716,
+          "pred": -0.40602030206637085,
           "actual": -0.66,
           "persistence": 2.01
         },
         {
           "origin": "2015-12-01",
           "date": "2020-12-01",
-          "pred": 1.4707345608670748,
+          "pred": 0.3938932415047388,
           "actual": -0.98,
           "persistence": 2.56
         },
         {
           "origin": "2016-03-01",
           "date": "2021-03-01",
-          "pred": 1.2611978359842433,
+          "pred": 1.6291310213633827,
           "actual": -0.72,
           "persistence": 1.6
         },
         {
           "origin": "2016-06-01",
           "date": "2021-06-01",
-          "pred": 1.8966926471953156,
+          "pred": 0.48455073630650614,
           "actual": -0.06,
           "persistence": 0.06
         },
         {
           "origin": "2016-09-01",
           "date": "2021-09-01",
-          "pred": 1.8292470269167895,
+          "pred": -1.4431888789528255,
           "actual": -0.5,
           "persistence": -0.46
         },
         {
           "origin": "2016-12-01",
           "date": "2021-12-01",
-          "pred": 0.9034803062666567,
+          "pred": -1.75273513091387,
           "actual": -1.07,
           "persistence": -0.51
         },
         {
           "origin": "2017-03-01",
           "date": "2022-03-01",
-          "pred": -0.18624108974806214,
+          "pred": -2.0738148529098717,
           "actual": -0.84,
           "persistence": -0.09
         },
         {
           "origin": "2017-06-01",
           "date": "2022-06-01",
-          "pred": -0.20105306802373205,
+          "pred": -1.710465161055338,
           "actual": -0.77,
           "persistence": 0.22
         },
         {
           "origin": "2017-09-01",
           "date": "2022-09-01",
-          "pred": -0.036942618688895514,
+          "pred": -0.4431326020111692,
           "actual": -1.06,
           "persistence": -0.56
         },
         {
           "origin": "2017-12-01",
           "date": "2022-12-01",
-          "pred": 0.22039472974966115,
+          "pred": -0.64654498603791,
           "actual": -0.86,
           "persistence": -0.85
         },
         {
           "origin": "2018-03-01",
           "date": "2023-03-01",
-          "pred": 0.779350851674676,
+          "pred": -1.8545625891510298,
           "actual": -0.13,
           "persistence": -0.73
         },
         {
           "origin": "2018-06-01",
           "date": "2023-06-01",
-          "pred": 1.4943631908736528,
+          "pred": -2.217497500318665,
           "actual": 0.95,
           "persistence": 0.12
         },
         {
           "origin": "2018-09-01",
           "date": "2023-09-01",
-          "pred": 1.4451105783492573,
+          "pred": -0.7297495270540244,
           "actual": 1.65,
           "persistence": 0.3
         },
         {
           "origin": "2018-12-01",
           "date": "2023-12-01",
-          "pred": 1.5418141536398282,
+          "pred": 0.34254014263097976,
           "actual": 1.81,
           "persistence": 0.97
         },
         {
           "origin": "2019-03-01",
           "date": "2024-03-01",
-          "pred": 1.9106611995140261,
+          "pred": 1.93362243295689,
           "actual": 1.1,
           "persistence": 0.81
         },
         {
           "origin": "2019-06-01",
           "date": "2024-06-01",
-          "pred": 2.0102833310862938,
+          "pred": 1.9231082591071549,
           "actual": 0.25,
           "persistence": 0.66
         },
         {
           "origin": "2019-09-01",
           "date": "2024-09-01",
-          "pred": 2.092504790549027,
+          "pred": 1.3313298042020998,
           "actual": -0.11,
           "persistence": 0.11
         },
         {
           "origin": "2019-12-01",
           "date": "2024-12-01",
-          "pred": 2.3190225287568276,
+          "pred": 0.86335542760748,
           "actual": -0.58,
           "persistence": 0.51
         },
         {
           "origin": "2020-03-01",
           "date": "2025-03-01",
-          "pred": 2.2768836785967093,
+          "pred": 0.7949386756108527,
           "actual": 0.05,
           "persistence": 0.36
         },
         {
           "origin": "2020-06-01",
           "date": "2025-06-01",
-          "pred": 2.1722580066064427,
+          "pred": 1.4892716773193442,
           "actual": 0.01,
           "persistence": -0.21
         },
         {
           "origin": "2020-09-01",
           "date": "2025-09-01",
-          "pred": 2.214806609815779,
+          "pred": 1.006792374647867,
           "actual": -0.3,
           "persistence": -0.66
         },
         {
           "origin": "2020-12-01",
           "date": "2025-12-01",
-          "pred": 2.1052878282865013,
-          "actual": -0.49,
-          "persistence": -0.98
-        }
-      ]
-    },
-    "direct_value_geometry_ridge": {
-      "1": [
-        {
-          "origin": "2006-09-01",
-          "date": "2006-10-01",
-          "pred": 0.5030895955541572,
-          "actual": 0.76,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2007-01-01",
-          "pred": 1.3979412667546591,
-          "actual": 0.59,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2007-04-01",
-          "pred": -0.3239074945278139,
-          "actual": -0.16,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2007-07-01",
-          "pred": -0.515907310693099,
-          "actual": -0.37,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2007-10-01",
-          "pred": -1.3874749717930706,
-          "actual": -1.41,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2008-01-01",
-          "pred": -1.480722997920844,
-          "actual": -1.79,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2008-04-01",
-          "pred": -1.1306831480194168,
-          "actual": -0.89,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2008-07-01",
-          "pred": -0.2803781092119012,
-          "actual": -0.04,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2008-10-01",
-          "pred": -0.5371320725979103,
-          "actual": -0.3,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2009-01-01",
-          "pred": -1.1392387045790104,
-          "actual": -1.0,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2009-04-01",
-          "pred": -1.1048123159329197,
-          "actual": -0.25,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2009-07-01",
-          "pred": 0.6652142677594728,
-          "actual": 0.69,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2009-10-01",
-          "pred": 0.5396880389687131,
-          "actual": 0.96,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2010-01-01",
-          "pred": 1.684719213925132,
-          "actual": 1.43,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2010-04-01",
-          "pred": 0.7910532191149713,
-          "actual": 0.56,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2010-07-01",
-          "pred": -0.9379239051574585,
-          "actual": -0.89,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2010-10-01",
-          "pred": -1.6270049647830895,
-          "actual": -1.65,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2011-01-01",
-          "pred": -0.8133947856162317,
-          "actual": -1.7,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2011-04-01",
-          "pred": -0.8068684681435564,
-          "actual": -0.74,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2011-07-01",
-          "pred": -0.265446187515667,
-          "actual": -0.23,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2011-10-01",
-          "pred": -0.7520364138470181,
-          "actual": -0.93,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2012-01-01",
-          "pred": -1.166224831864118,
-          "actual": -0.93,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2012-04-01",
-          "pred": -0.30941001292576087,
-          "actual": -0.29,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2012-07-01",
-          "pred": 0.2786480286188873,
-          "actual": 0.44,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2012-10-01",
-          "pred": 0.7111140381448925,
-          "actual": 0.23,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2013-01-01",
-          "pred": -0.26025143517704885,
-          "actual": -0.42,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2013-04-01",
-          "pred": 0.034393999817264986,
-          "actual": -0.08,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2013-07-01",
-          "pred": -0.16226273091179202,
-          "actual": -0.28,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2013-10-01",
-          "pred": -0.022450434251601536,
-          "actual": -0.24,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2014-01-01",
-          "pred": 0.38699650273535424,
-          "actual": -0.42,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2014-04-01",
-          "pred": 0.13654043364684096,
-          "actual": 0.28,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2014-07-01",
-          "pred": 0.5424892036644983,
-          "actual": 0.13,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2014-10-01",
-          "pred": 0.7791037405665803,
-          "actual": 0.48,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2015-01-01",
-          "pred": 1.0878472945671271,
-          "actual": 0.59,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2015-04-01",
-          "pred": 0.5007180616907367,
-          "actual": 0.9,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2015-07-01",
-          "pred": 1.2449916708660198,
-          "actual": 1.56,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2015-10-01",
-          "pred": 2.006763549860692,
-          "actual": 2.21,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2016-01-01",
-          "pred": 3.001143168851633,
-          "actual": 2.56,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2016-04-01",
-          "pred": 1.2540011167607736,
-          "actual": 1.05,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2016-07-01",
-          "pred": -0.2636276005942008,
-          "actual": -0.25,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2016-10-01",
-          "pred": -0.9748558098181659,
-          "actual": -0.75,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2017-01-01",
-          "pred": -0.18927800380815096,
-          "actual": -0.34,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2017-04-01",
-          "pred": -0.12181110494410997,
-          "actual": 0.22,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2017-07-01",
-          "pred": 0.09749935538774859,
-          "actual": 0.22,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2017-10-01",
-          "pred": -0.9972261577246067,
-          "actual": -0.52,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2018-01-01",
-          "pred": -0.9581532511651889,
-          "actual": -0.86,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2018-04-01",
-          "pred": -0.41659424845190096,
-          "actual": -0.36,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2018-07-01",
-          "pred": 0.4481851389283526,
-          "actual": 0.27,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2018-10-01",
-          "pred": -0.07020001984066004,
-          "actual": 0.84,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2019-01-01",
-          "pred": 1.1455704432273683,
-          "actual": 0.51,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2019-04-01",
-          "pred": 0.5457567535460197,
-          "actual": 0.67,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2019-07-01",
-          "pred": 0.7447544827866356,
-          "actual": 0.41,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2019-10-01",
-          "pred": 0.060470266447115596,
-          "actual": 0.55,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2020-01-01",
-          "pred": 0.6604574286469606,
-          "actual": 0.64,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2020-04-01",
-          "pred": 0.6569646457298055,
-          "actual": 0.49,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2020-07-01",
-          "pred": -0.5324840494420383,
-          "actual": -0.04,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2020-10-01",
-          "pred": -0.8584523814128754,
-          "actual": -1.19,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2021-01-01",
-          "pred": -0.8767193229037078,
-          "actual": -1.04,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2021-03-01",
-          "date": "2021-04-01",
-          "pred": -0.9797306869684215,
-          "actual": -0.55,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2021-06-01",
-          "date": "2021-07-01",
-          "pred": -0.021825470495141157,
-          "actual": -0.2,
-          "persistence": -0.06
-        },
-        {
-          "origin": "2021-09-01",
-          "date": "2021-10-01",
-          "pred": -0.5859727300809054,
-          "actual": -0.78,
-          "persistence": -0.5
-        },
-        {
-          "origin": "2021-12-01",
-          "date": "2022-01-01",
-          "pred": -0.8543613238713181,
-          "actual": -0.77,
-          "persistence": -1.07
-        },
-        {
-          "origin": "2022-03-01",
-          "date": "2022-04-01",
-          "pred": -0.758834164624575,
-          "actual": -0.9,
-          "persistence": -0.84
-        },
-        {
-          "origin": "2022-06-01",
-          "date": "2022-07-01",
-          "pred": -0.623129827296419,
-          "actual": -0.56,
-          "persistence": -0.77
-        },
-        {
-          "origin": "2022-09-01",
-          "date": "2022-10-01",
-          "pred": -1.12919995609567,
-          "actual": -0.99,
-          "persistence": -1.06
-        },
-        {
-          "origin": "2022-12-01",
-          "date": "2023-01-01",
-          "pred": -0.4951005121707991,
-          "actual": -0.78,
-          "persistence": -0.86
-        },
-        {
-          "origin": "2023-03-01",
-          "date": "2023-04-01",
-          "pred": -0.02224647449403022,
-          "actual": 0.24,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2023-06-01",
-          "date": "2023-07-01",
-          "pred": 1.226725786040382,
-          "actual": 1.2,
-          "persistence": 0.95
-        },
-        {
-          "origin": "2023-09-01",
-          "date": "2023-10-01",
-          "pred": 1.9799087957394879,
-          "actual": 1.59,
-          "persistence": 1.65
-        },
-        {
-          "origin": "2023-12-01",
-          "date": "2024-01-01",
-          "pred": 1.715032143781484,
-          "actual": 1.71,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2024-03-01",
-          "date": "2024-04-01",
-          "pred": 0.5908375286289395,
-          "actual": 0.93,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2024-06-01",
-          "date": "2024-07-01",
-          "pred": 0.12102933709268685,
-          "actual": 0.2,
-          "persistence": 0.25
-        },
-        {
-          "origin": "2024-09-01",
-          "date": "2024-10-01",
-          "pred": 0.10669179342797659,
-          "actual": -0.24,
-          "persistence": -0.11
-        },
-        {
-          "origin": "2024-12-01",
-          "date": "2025-01-01",
-          "pred": -0.5817017531230904,
-          "actual": -0.76,
-          "persistence": -0.58
-        },
-        {
-          "origin": "2025-03-01",
-          "date": "2025-04-01",
-          "pred": -0.08648043387700356,
-          "actual": -0.08,
-          "persistence": 0.05
-        },
-        {
-          "origin": "2025-06-01",
-          "date": "2025-07-01",
-          "pred": 0.10484352985869962,
-          "actual": -0.03,
-          "persistence": 0.01
-        },
-        {
-          "origin": "2025-09-01",
-          "date": "2025-10-01",
-          "pred": -0.28993373669517236,
-          "actual": -0.5,
-          "persistence": -0.3
-        }
-      ],
-      "3": [
-        {
-          "origin": "2006-09-01",
-          "date": "2006-12-01",
-          "pred": 0.481880776379364,
-          "actual": 1.1,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2007-03-01",
-          "pred": 1.1647591525897996,
-          "actual": -0.15,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2007-06-01",
-          "pred": -0.37746004476119155,
-          "actual": -0.16,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2007-09-01",
-          "pred": -0.2873672466608052,
-          "actual": -1.04,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2007-12-01",
-          "pred": -1.2374058054839903,
-          "actual": -1.61,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2008-03-01",
-          "pred": -2.5743548557352476,
-          "actual": -1.17,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2008-06-01",
-          "pred": -1.306003121619689,
-          "actual": -0.44,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2008-09-01",
-          "pred": 0.4046915377415086,
-          "actual": -0.28,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2008-12-01",
-          "pred": 0.3213005927317343,
-          "actual": -0.9,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2009-03-01",
-          "pred": -2.6669584639215334,
-          "actual": -0.72,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2009-06-01",
-          "pred": -1.540106028041192,
-          "actual": 0.49,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2009-09-01",
-          "pred": 0.1737438856721496,
-          "actual": 0.68,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2009-12-01",
-          "pred": -0.2144308784838812,
-          "actual": 1.81,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2010-03-01",
-          "pred": 0.9784292889215724,
-          "actual": 1.07,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2010-06-01",
-          "pred": 0.5572391665229529,
-          "actual": -0.62,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2010-09-01",
-          "pred": -0.2676478797834858,
-          "actual": -1.56,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2010-12-01",
-          "pred": -1.3467457018322417,
-          "actual": -1.63,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2011-03-01",
-          "pred": -0.32023181906316367,
-          "actual": -0.98,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2011-06-01",
-          "pred": -0.38413329439349553,
-          "actual": -0.25,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2011-09-01",
-          "pred": -0.39458838302492083,
-          "actual": -0.76,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2011-12-01",
-          "pred": -1.1898458627140214,
-          "actual": -1.05,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2012-03-01",
-          "pred": -0.9797659452287986,
-          "actual": -0.48,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2012-06-01",
-          "pred": -0.2503061546740242,
-          "actual": 0.14,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2012-09-01",
-          "pred": 0.8646485342046695,
-          "actual": 0.44,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2012-12-01",
-          "pred": -0.24018857475353367,
-          "actual": -0.13,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2013-03-01",
-          "pred": -1.0366743889180081,
-          "actual": -0.14,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2013-06-01",
-          "pred": -0.830522371489678,
-          "actual": -0.33,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2013-09-01",
-          "pred": 0.20054432354293533,
-          "actual": -0.09,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2013-12-01",
-          "pred": -0.2935719207338346,
-          "actual": -0.09,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2014-03-01",
-          "pred": 0.6447083595959284,
-          "actual": -0.07,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2014-06-01",
-          "pred": 1.0455007343891471,
-          "actual": 0.48,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2014-09-01",
-          "pred": 1.1420848847535918,
-          "actual": 0.37,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2014-12-01",
-          "pred": 0.022364865996689187,
-          "actual": 0.77,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2015-03-01",
-          "pred": 1.4146985156736278,
-          "actual": 0.48,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2015-06-01",
-          "pred": 0.2490091621011377,
-          "actual": 1.28,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2015-09-01",
-          "pred": 1.183724022132301,
-          "actual": 2.01,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2015-12-01",
-          "pred": 2.3440120755503138,
-          "actual": 2.56,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2016-03-01",
-          "pred": 3.328946190327982,
-          "actual": 1.6,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2016-06-01",
-          "pred": 1.1917180028275707,
-          "actual": 0.06,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2016-09-01",
-          "pred": -0.41067503541519645,
-          "actual": -0.46,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2016-12-01",
-          "pred": -0.6502050919869948,
-          "actual": -0.51,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2017-03-01",
-          "pred": 0.08405260854378804,
-          "actual": -0.09,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2017-06-01",
-          "pred": 0.022043156422938442,
-          "actual": 0.22,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2017-09-01",
-          "pred": -0.5382906671742962,
-          "actual": -0.56,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2017-12-01",
-          "pred": -1.2327826606177965,
-          "actual": -0.85,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2018-03-01",
-          "pred": -0.991708257404091,
-          "actual": -0.73,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2018-06-01",
-          "pred": -0.16957064023203028,
-          "actual": 0.12,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2018-09-01",
-          "pred": 0.5552858288923146,
-          "actual": 0.3,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2018-12-01",
-          "pred": 0.44208242411489823,
-          "actual": 0.97,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2019-03-01",
-          "pred": 1.9563186571160984,
-          "actual": 0.81,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2019-06-01",
-          "pred": 0.5504481382139521,
-          "actual": 0.66,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2019-09-01",
-          "pred": 0.6759347312813159,
-          "actual": 0.11,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2019-12-01",
-          "pred": 0.3216697155079974,
-          "actual": 0.51,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2020-03-01",
-          "pred": 0.38641615042787103,
-          "actual": 0.36,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2020-06-01",
-          "pred": 0.2817076297841701,
-          "actual": -0.21,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2020-09-01",
-          "pred": -0.6146353900462233,
-          "actual": -0.66,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2020-12-01",
-          "pred": -0.4955363499379818,
-          "actual": -0.98,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2021-03-01",
-          "pred": -0.28484999896080065,
-          "actual": -0.72,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2021-03-01",
-          "date": "2021-06-01",
-          "pred": -0.866411982805654,
-          "actual": -0.06,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2021-06-01",
-          "date": "2021-09-01",
-          "pred": -0.7938591908319359,
-          "actual": -0.5,
-          "persistence": -0.06
-        },
-        {
-          "origin": "2021-09-01",
-          "date": "2021-12-01",
-          "pred": -0.6415781398962875,
-          "actual": -1.07,
-          "persistence": -0.5
-        },
-        {
-          "origin": "2021-12-01",
-          "date": "2022-03-01",
-          "pred": -1.0725625672536232,
-          "actual": -0.84,
-          "persistence": -1.07
-        },
-        {
-          "origin": "2022-03-01",
-          "date": "2022-06-01",
-          "pred": -0.7432099493191248,
-          "actual": -0.77,
-          "persistence": -0.84
-        },
-        {
-          "origin": "2022-06-01",
-          "date": "2022-09-01",
-          "pred": -0.22186612225509295,
-          "actual": -1.06,
-          "persistence": -0.77
-        },
-        {
-          "origin": "2022-09-01",
-          "date": "2022-12-01",
-          "pred": -1.4578936040733819,
-          "actual": -0.86,
-          "persistence": -1.06
-        },
-        {
-          "origin": "2022-12-01",
-          "date": "2023-03-01",
-          "pred": -0.7039527890440932,
-          "actual": -0.13,
-          "persistence": -0.86
-        },
-        {
-          "origin": "2023-03-01",
-          "date": "2023-06-01",
-          "pred": 0.20930903005396118,
-          "actual": 0.95,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2023-06-01",
-          "date": "2023-09-01",
-          "pred": 1.5794523301203205,
-          "actual": 1.65,
-          "persistence": 0.95
-        },
-        {
-          "origin": "2023-09-01",
-          "date": "2023-12-01",
-          "pred": 2.1745734188743073,
-          "actual": 1.81,
-          "persistence": 1.65
-        },
-        {
-          "origin": "2023-12-01",
-          "date": "2024-03-01",
-          "pred": 0.958443957799485,
-          "actual": 1.1,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2024-03-01",
-          "date": "2024-06-01",
-          "pred": -0.7123972824215483,
-          "actual": 0.25,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2024-06-01",
-          "date": "2024-09-01",
-          "pred": -0.5893638713888586,
-          "actual": -0.11,
-          "persistence": 0.25
-        },
-        {
-          "origin": "2024-09-01",
-          "date": "2024-12-01",
-          "pred": 0.419083511862147,
-          "actual": -0.58,
-          "persistence": -0.11
-        },
-        {
-          "origin": "2024-12-01",
-          "date": "2025-03-01",
-          "pred": -0.767152317838949,
-          "actual": 0.05,
-          "persistence": -0.58
-        },
-        {
-          "origin": "2025-03-01",
-          "date": "2025-06-01",
-          "pred": -1.3239569592528673,
-          "actual": 0.01,
-          "persistence": 0.05
-        },
-        {
-          "origin": "2025-06-01",
-          "date": "2025-09-01",
-          "pred": -0.4174926959871956,
-          "actual": -0.3,
-          "persistence": 0.01
-        },
-        {
-          "origin": "2025-09-01",
-          "date": "2025-12-01",
-          "pred": -0.4333241484414979,
-          "actual": -0.49,
-          "persistence": -0.3
-        }
-      ],
-      "6": [
-        {
-          "origin": "2006-09-01",
-          "date": "2007-03-01",
-          "pred": 0.9019720218840437,
-          "actual": -0.15,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2007-06-01",
-          "pred": 1.214449298775933,
-          "actual": -0.16,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2007-09-01",
-          "pred": -0.4714741484565229,
-          "actual": -1.04,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2007-12-01",
-          "pred": -0.2844579638848008,
-          "actual": -1.61,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2008-03-01",
-          "pred": -1.172142283758434,
-          "actual": -1.17,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2008-06-01",
-          "pred": -2.0946661366653085,
-          "actual": -0.44,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2008-09-01",
-          "pred": -3.0378253084152624,
-          "actual": -0.28,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2008-12-01",
-          "pred": -1.229038991824195,
-          "actual": -0.9,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2009-03-01",
-          "pred": 1.0529918094519068,
-          "actual": -0.72,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2009-06-01",
-          "pred": -0.9927105342862259,
-          "actual": 0.49,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2009-09-01",
-          "pred": -1.6029217683578776,
-          "actual": 0.68,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2009-12-01",
-          "pred": 0.03938154008645878,
-          "actual": 1.81,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2010-03-01",
-          "pred": -0.2753152127892896,
-          "actual": 1.07,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2010-06-01",
-          "pred": -0.5921749518148935,
-          "actual": -0.62,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2010-09-01",
-          "pred": 0.41868200452341353,
-          "actual": -1.56,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2010-12-01",
-          "pred": 0.03143023237097775,
-          "actual": -1.63,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2011-03-01",
-          "pred": -0.22805141431864406,
-          "actual": -0.98,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2011-06-01",
-          "pred": -1.046446789845647,
-          "actual": -0.25,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2011-09-01",
-          "pred": -1.204162807573729,
-          "actual": -0.76,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2011-12-01",
-          "pred": -0.8223169433905136,
-          "actual": -1.05,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2012-03-01",
-          "pred": -0.9743366819383529,
-          "actual": -0.48,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2012-06-01",
-          "pred": -0.7762066354295205,
-          "actual": 0.14,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2012-09-01",
-          "pred": -0.5882828555488117,
-          "actual": 0.44,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2012-12-01",
-          "pred": -0.6260159961599425,
-          "actual": -0.13,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2013-03-01",
-          "pred": -1.4519958352113618,
-          "actual": -0.14,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2013-06-01",
-          "pred": -1.515305190295102,
-          "actual": -0.33,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2013-09-01",
-          "pred": -0.9047115285135162,
-          "actual": -0.09,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2013-12-01",
-          "pred": -0.2647231168047985,
-          "actual": -0.09,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2014-03-01",
-          "pred": -0.3825706865925427,
-          "actual": -0.07,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2014-06-01",
-          "pred": 0.24837621164163956,
-          "actual": 0.48,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2014-09-01",
-          "pred": 0.7634117622266496,
-          "actual": 0.37,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2014-12-01",
-          "pred": 0.5688924214369502,
-          "actual": 0.77,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2015-03-01",
-          "pred": -0.46242022755712464,
-          "actual": 0.48,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2015-06-01",
-          "pred": 0.1722073998692215,
-          "actual": 1.28,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2015-09-01",
-          "pred": 0.6797707737375341,
-          "actual": 2.01,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2015-12-01",
-          "pred": 1.6133269603700877,
-          "actual": 2.56,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2016-03-01",
-          "pred": 2.846346573844933,
-          "actual": 1.6,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2016-06-01",
-          "pred": 3.1746783389179236,
-          "actual": 0.06,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2016-09-01",
-          "pred": 1.0326708919812568,
-          "actual": -0.46,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2016-12-01",
-          "pred": -0.3441131122834883,
-          "actual": -0.51,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2017-03-01",
-          "pred": -0.3555677387853162,
-          "actual": -0.09,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2017-06-01",
-          "pred": 0.6853765266345482,
-          "actual": 0.22,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2017-09-01",
-          "pred": 0.16381165467493589,
-          "actual": -0.56,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2017-12-01",
-          "pred": -0.05504268945013027,
-          "actual": -0.85,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2018-03-01",
-          "pred": -0.7149105567894317,
-          "actual": -0.73,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2018-06-01",
-          "pred": -0.4558211970646689,
-          "actual": 0.12,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2018-09-01",
-          "pred": -0.4956026850696623,
-          "actual": 0.3,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2018-12-01",
-          "pred": 0.6580332919542847,
-          "actual": 0.97,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2019-03-01",
-          "pred": 0.22942722463800239,
-          "actual": 0.81,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2019-06-01",
-          "pred": 1.9612131103789316,
-          "actual": 0.66,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2019-09-01",
-          "pred": 1.1561086559417761,
-          "actual": 0.11,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2019-12-01",
-          "pred": 0.6119060240408758,
-          "actual": 0.51,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2020-03-01",
-          "pred": 0.15699443782288683,
-          "actual": 0.36,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2020-06-01",
-          "pred": 0.22581836243779135,
-          "actual": -0.21,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2020-09-01",
-          "pred": 0.39088931751510864,
-          "actual": -0.66,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2020-12-01",
-          "pred": -1.3584468091363813,
-          "actual": -0.98,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2021-03-01",
-          "pred": -1.5045245760796995,
-          "actual": -0.72,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2021-06-01",
-          "pred": -0.0358507219866272,
-          "actual": -0.06,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2021-03-01",
-          "date": "2021-09-01",
-          "pred": -0.16527266823553832,
-          "actual": -0.5,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2021-06-01",
-          "date": "2021-12-01",
-          "pred": -0.5966541348185954,
-          "actual": -1.07,
-          "persistence": -0.06
-        },
-        {
-          "origin": "2021-09-01",
-          "date": "2022-03-01",
-          "pred": -0.8338386081192195,
-          "actual": -0.84,
-          "persistence": -0.5
-        },
-        {
-          "origin": "2021-12-01",
-          "date": "2022-06-01",
-          "pred": -0.5337354196379746,
-          "actual": -0.77,
-          "persistence": -1.07
-        },
-        {
-          "origin": "2022-03-01",
-          "date": "2022-09-01",
-          "pred": -1.3138487837486463,
-          "actual": -1.06,
-          "persistence": -0.84
-        },
-        {
-          "origin": "2022-06-01",
-          "date": "2022-12-01",
-          "pred": -1.4140905314329943,
-          "actual": -0.86,
-          "persistence": -0.77
-        },
-        {
-          "origin": "2022-09-01",
-          "date": "2023-03-01",
-          "pred": -3.112784245221447,
-          "actual": -0.13,
-          "persistence": -1.06
-        },
-        {
-          "origin": "2022-12-01",
-          "date": "2023-06-01",
-          "pred": -1.0509647005369265,
-          "actual": 0.95,
-          "persistence": -0.86
-        },
-        {
-          "origin": "2023-03-01",
-          "date": "2023-09-01",
-          "pred": -0.056912411829172685,
-          "actual": 1.65,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2023-06-01",
-          "date": "2023-12-01",
-          "pred": 1.3339470655907197,
-          "actual": 1.81,
-          "persistence": 0.95
-        },
-        {
-          "origin": "2023-09-01",
-          "date": "2024-03-01",
-          "pred": 1.715837190436804,
-          "actual": 1.1,
-          "persistence": 1.65
-        },
-        {
-          "origin": "2023-12-01",
-          "date": "2024-06-01",
-          "pred": 1.1768467226968216,
-          "actual": 0.25,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2024-03-01",
-          "date": "2024-09-01",
-          "pred": -0.8629126614726152,
-          "actual": -0.11,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2024-06-01",
-          "date": "2024-12-01",
-          "pred": -0.4898479566888778,
-          "actual": -0.58,
-          "persistence": 0.25
-        },
-        {
-          "origin": "2024-09-01",
-          "date": "2025-03-01",
-          "pred": 0.2312543719046533,
-          "actual": 0.05,
-          "persistence": -0.11
-        },
-        {
-          "origin": "2024-12-01",
-          "date": "2025-06-01",
-          "pred": -0.6588752638877861,
-          "actual": 0.01,
-          "persistence": -0.58
-        },
-        {
-          "origin": "2025-03-01",
-          "date": "2025-09-01",
-          "pred": -2.0097418026631795,
-          "actual": -0.3,
-          "persistence": 0.05
-        },
-        {
-          "origin": "2025-06-01",
-          "date": "2025-12-01",
-          "pred": -1.8356777562843294,
-          "actual": -0.49,
-          "persistence": 0.01
-        }
-      ],
-      "12": [
-        {
-          "origin": "2006-09-01",
-          "date": "2007-09-01",
-          "pred": 2.161209826163067,
-          "actual": -1.04,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2007-12-01",
-          "pred": 2.652659242055161,
-          "actual": -1.61,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2008-03-01",
-          "pred": 0.1734069489763467,
-          "actual": -1.17,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2008-06-01",
-          "pred": 0.5581473061450417,
-          "actual": -0.44,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2008-09-01",
-          "pred": -0.20937412578021508,
-          "actual": -0.28,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2008-12-01",
-          "pred": -1.6754360293545112,
-          "actual": -0.9,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2009-03-01",
-          "pred": -1.7502062719493052,
-          "actual": -0.72,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2009-06-01",
-          "pred": -0.7951791732913616,
-          "actual": 0.49,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2009-09-01",
-          "pred": 0.006225896721173463,
-          "actual": 0.68,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2009-12-01",
-          "pred": -0.9840192229438425,
-          "actual": 1.81,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2010-03-01",
-          "pred": -0.2857501338828201,
-          "actual": 1.07,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2010-06-01",
-          "pred": 0.2727007249601266,
-          "actual": -0.62,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2010-09-01",
-          "pred": -0.8574903931978891,
-          "actual": -1.56,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2010-12-01",
-          "pred": -0.4295164604227071,
-          "actual": -1.63,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2011-03-01",
-          "pred": -0.14550391904964433,
-          "actual": -0.98,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2011-06-01",
-          "pred": -1.547092623003487,
-          "actual": -0.25,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2011-09-01",
-          "pred": -1.7570377059962787,
-          "actual": -0.76,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2011-12-01",
-          "pred": -3.026575176854136,
-          "actual": -1.05,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2012-03-01",
-          "pred": -3.017778698760763,
-          "actual": -0.48,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2012-06-01",
-          "pred": -1.593335610550093,
-          "actual": 0.14,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2012-09-01",
-          "pred": -2.737337859239897,
-          "actual": 0.44,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2012-12-01",
-          "pred": -1.5086615291205445,
-          "actual": -0.13,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2013-03-01",
-          "pred": -0.3790887890346367,
-          "actual": -0.14,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2013-06-01",
-          "pred": -0.9934574211756521,
-          "actual": -0.33,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2013-09-01",
-          "pred": -1.6298888696933895,
-          "actual": -0.09,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2013-12-01",
-          "pred": -1.4875957555307666,
-          "actual": -0.09,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2014-03-01",
-          "pred": -2.0759482626621546,
-          "actual": -0.07,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2014-06-01",
-          "pred": -1.4680565274269513,
-          "actual": 0.48,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2014-09-01",
-          "pred": -0.3878099934926629,
-          "actual": 0.37,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2014-12-01",
-          "pred": 0.5681304537732956,
-          "actual": 0.77,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2015-03-01",
-          "pred": 0.38202911124442474,
-          "actual": 0.48,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2015-06-01",
-          "pred": -0.6710437043726387,
-          "actual": 1.28,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2015-09-01",
-          "pred": -1.2446721758790096,
-          "actual": 2.01,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2015-12-01",
-          "pred": -1.653085849010293,
-          "actual": 2.56,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2016-03-01",
-          "pred": -1.0863407255239674,
-          "actual": 1.6,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2016-06-01",
-          "pred": -0.404366290476756,
-          "actual": 0.06,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2016-09-01",
-          "pred": 0.6097212158765251,
-          "actual": -0.46,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2016-12-01",
-          "pred": 0.10702163416869448,
-          "actual": -0.51,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2017-03-01",
-          "pred": -0.36212527954885054,
-          "actual": -0.09,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2017-06-01",
-          "pred": -1.5557507724409507,
-          "actual": 0.22,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2017-09-01",
-          "pred": -1.5680852450179783,
-          "actual": -0.56,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2017-12-01",
-          "pred": -1.8966481803165014,
-          "actual": -0.85,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2018-03-01",
-          "pred": -0.4565719557847674,
-          "actual": -0.73,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2018-06-01",
-          "pred": 1.7987944683522064,
-          "actual": 0.12,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2018-09-01",
-          "pred": 1.9815534918881186,
-          "actual": 0.3,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2018-12-01",
-          "pred": 1.0230898078528297,
-          "actual": 0.97,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2019-03-01",
-          "pred": 0.7473772365014302,
-          "actual": 0.81,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2019-06-01",
-          "pred": 1.4262540836376019,
-          "actual": 0.66,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2019-09-01",
-          "pred": 0.36291020060450885,
-          "actual": 0.11,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2019-12-01",
-          "pred": 0.4700225826692664,
-          "actual": 0.51,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2020-03-01",
-          "pred": 0.9408266399111225,
-          "actual": 0.36,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2020-06-01",
-          "pred": 1.8852796721376017,
-          "actual": -0.21,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2020-09-01",
-          "pred": 0.9103991941500806,
-          "actual": -0.66,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2020-12-01",
-          "pred": 0.6044383265414269,
-          "actual": -0.98,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2021-03-01",
-          "pred": 1.4054507788363084,
-          "actual": -0.72,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2021-06-01",
-          "pred": 1.0444636081310203,
-          "actual": -0.06,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2021-09-01",
-          "pred": 1.7034105902885117,
-          "actual": -0.5,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2021-12-01",
-          "pred": 0.6062904858795441,
-          "actual": -1.07,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2021-03-01",
-          "date": "2022-03-01",
-          "pred": 0.11101062986242716,
-          "actual": -0.84,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2021-06-01",
-          "date": "2022-06-01",
-          "pred": 0.5469474764594129,
-          "actual": -0.77,
-          "persistence": -0.06
-        },
-        {
-          "origin": "2021-09-01",
-          "date": "2022-09-01",
-          "pred": 0.10898479431939545,
-          "actual": -1.06,
-          "persistence": -0.5
-        },
-        {
-          "origin": "2021-12-01",
-          "date": "2022-12-01",
-          "pred": -0.7940923974228993,
-          "actual": -0.86,
-          "persistence": -1.07
-        },
-        {
-          "origin": "2022-03-01",
-          "date": "2023-03-01",
-          "pred": -1.1806587229964918,
-          "actual": -0.13,
-          "persistence": -0.84
-        },
-        {
-          "origin": "2022-06-01",
-          "date": "2023-06-01",
-          "pred": -1.4245507860850584,
-          "actual": 0.95,
-          "persistence": -0.77
-        },
-        {
-          "origin": "2022-09-01",
-          "date": "2023-09-01",
-          "pred": -1.5178132204931352,
-          "actual": 1.65,
-          "persistence": -1.06
-        },
-        {
-          "origin": "2022-12-01",
-          "date": "2023-12-01",
-          "pred": -1.5023235400495845,
-          "actual": 1.81,
-          "persistence": -0.86
-        },
-        {
-          "origin": "2023-03-01",
-          "date": "2024-03-01",
-          "pred": -1.511132776439183,
-          "actual": 1.1,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2023-06-01",
-          "date": "2024-06-01",
-          "pred": -0.6650033630827943,
-          "actual": 0.25,
-          "persistence": 0.95
-        },
-        {
-          "origin": "2023-09-01",
-          "date": "2024-09-01",
-          "pred": -0.11803311994930477,
-          "actual": -0.11,
-          "persistence": 1.65
-        },
-        {
-          "origin": "2023-12-01",
-          "date": "2024-12-01",
-          "pred": -0.3050744911478853,
-          "actual": -0.58,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2024-03-01",
-          "date": "2025-03-01",
-          "pred": 0.309843457456362,
-          "actual": 0.05,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2024-06-01",
-          "date": "2025-06-01",
-          "pred": 1.6720743750268963,
-          "actual": 0.01,
-          "persistence": 0.25
-        },
-        {
-          "origin": "2024-09-01",
-          "date": "2025-09-01",
-          "pred": -0.013069305196065403,
-          "actual": -0.3,
-          "persistence": -0.11
-        },
-        {
-          "origin": "2024-12-01",
-          "date": "2025-12-01",
-          "pred": -1.4715375500144217,
-          "actual": -0.49,
-          "persistence": -0.58
-        }
-      ],
-      "24": [
-        {
-          "origin": "2006-09-01",
-          "date": "2008-09-01",
-          "pred": 2.0902143887772295,
-          "actual": -0.28,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2008-12-01",
-          "pred": 2.3466640574016404,
-          "actual": -0.9,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2009-03-01",
-          "pred": 0.19323345441128123,
-          "actual": -0.72,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2009-06-01",
-          "pred": 0.5078297872746851,
-          "actual": 0.49,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2009-09-01",
-          "pred": -0.6827145989634009,
-          "actual": 0.68,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2009-12-01",
-          "pred": -1.4456699005109084,
-          "actual": 1.81,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2010-03-01",
-          "pred": -3.225459445465871,
-          "actual": 1.07,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2010-06-01",
-          "pred": -2.9522730758216236,
-          "actual": -0.62,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2010-09-01",
-          "pred": -0.7877910801901183,
-          "actual": -1.56,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2010-12-01",
-          "pred": -2.5181905481187554,
-          "actual": -1.63,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2011-03-01",
-          "pred": -2.8413480045071804,
-          "actual": -0.98,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2011-06-01",
-          "pred": -0.7704511452174516,
-          "actual": -0.25,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2011-09-01",
-          "pred": -0.5930286744760666,
-          "actual": -0.76,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2011-12-01",
-          "pred": -0.09343770050494715,
-          "actual": -1.05,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2012-03-01",
-          "pred": -0.5196618653252822,
-          "actual": -0.48,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2012-06-01",
-          "pred": 0.8392446165838147,
-          "actual": 0.14,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2012-09-01",
-          "pred": -0.24749522993369233,
-          "actual": 0.44,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2012-12-01",
-          "pred": -0.3677621763682941,
-          "actual": -0.13,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2013-03-01",
-          "pred": -1.3524679918168787,
-          "actual": -0.14,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2013-06-01",
-          "pred": -1.8317552336314977,
-          "actual": -0.33,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2013-09-01",
-          "pred": -2.2634230320059983,
-          "actual": -0.09,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2013-12-01",
-          "pred": -1.3008990907853584,
-          "actual": -0.09,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2014-03-01",
-          "pred": -0.629128197552141,
-          "actual": -0.07,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2014-06-01",
-          "pred": -1.0819667636330017,
-          "actual": 0.48,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2014-09-01",
-          "pred": 0.20159789991305144,
-          "actual": 0.37,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2014-12-01",
-          "pred": 0.105902860645392,
-          "actual": 0.77,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2015-03-01",
-          "pred": 0.5467599498691724,
-          "actual": 0.48,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2015-06-01",
-          "pred": 1.534716452027113,
-          "actual": 1.28,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2015-09-01",
-          "pred": 0.6103322914505253,
-          "actual": 2.01,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2015-12-01",
-          "pred": 1.4761262876979486,
-          "actual": 2.56,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2016-03-01",
-          "pred": 0.38832424917832625,
-          "actual": 1.6,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2016-06-01",
-          "pred": 0.4668702036857697,
-          "actual": 0.06,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2016-09-01",
-          "pred": -1.8388914027835614,
-          "actual": -0.46,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2016-12-01",
-          "pred": -0.8773280494547531,
-          "actual": -0.51,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2017-03-01",
-          "pred": -1.1126407780557641,
-          "actual": -0.09,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2017-06-01",
-          "pred": -0.2098588257660141,
-          "actual": 0.22,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2017-09-01",
-          "pred": -0.6993278950246111,
-          "actual": -0.56,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2017-12-01",
-          "pred": 0.40678455284562887,
-          "actual": -0.85,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2018-03-01",
-          "pred": 0.28922166728170806,
-          "actual": -0.73,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2018-06-01",
-          "pred": 0.2009776304469666,
-          "actual": 0.12,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2018-09-01",
-          "pred": 0.9508054980555822,
-          "actual": 0.3,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2018-12-01",
-          "pred": -0.4289840642874399,
-          "actual": 0.97,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2019-03-01",
-          "pred": -0.2425407294215032,
-          "actual": 0.81,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2019-06-01",
-          "pred": -0.13805959557175182,
-          "actual": 0.66,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2019-09-01",
-          "pred": 0.06927322642041356,
-          "actual": 0.11,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2019-12-01",
-          "pred": 0.4833475426996737,
-          "actual": 0.51,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2020-03-01",
-          "pred": -0.5316151473872096,
-          "actual": 0.36,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2020-06-01",
-          "pred": 0.2627993540309783,
-          "actual": -0.21,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2020-09-01",
-          "pred": -0.07470110876651687,
-          "actual": -0.66,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2020-12-01",
-          "pred": 0.4825478915624081,
-          "actual": -0.98,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2021-03-01",
-          "pred": 0.9581857170318555,
-          "actual": -0.72,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2021-06-01",
-          "pred": 1.1402376744084939,
-          "actual": -0.06,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2021-09-01",
-          "pred": 1.2855104084294988,
-          "actual": -0.5,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2021-12-01",
-          "pred": 0.527347250089224,
-          "actual": -1.07,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2022-03-01",
-          "pred": -0.8598294012888016,
-          "actual": -0.84,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2022-06-01",
-          "pred": -1.3353869696127203,
-          "actual": -0.77,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2022-09-01",
-          "pred": -2.282533252436205,
-          "actual": -1.06,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2022-12-01",
-          "pred": -2.3880201935149774,
-          "actual": -0.86,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2021-03-01",
-          "date": "2023-03-01",
-          "pred": -2.794664971268314,
-          "actual": -0.13,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2021-06-01",
-          "date": "2023-06-01",
-          "pred": -2.7575463530167608,
-          "actual": 0.95,
-          "persistence": -0.06
-        },
-        {
-          "origin": "2021-09-01",
-          "date": "2023-09-01",
-          "pred": -3.166526700822493,
-          "actual": 1.65,
-          "persistence": -0.5
-        },
-        {
-          "origin": "2021-12-01",
-          "date": "2023-12-01",
-          "pred": -4.813569050797408,
-          "actual": 1.81,
-          "persistence": -1.07
-        },
-        {
-          "origin": "2022-03-01",
-          "date": "2024-03-01",
-          "pred": -3.7920459409527023,
-          "actual": 1.1,
-          "persistence": -0.84
-        },
-        {
-          "origin": "2022-06-01",
-          "date": "2024-06-01",
-          "pred": -2.8986688472393487,
-          "actual": 0.25,
-          "persistence": -0.77
-        },
-        {
-          "origin": "2022-09-01",
-          "date": "2024-09-01",
-          "pred": -2.951431691207256,
-          "actual": -0.11,
-          "persistence": -1.06
-        },
-        {
-          "origin": "2022-12-01",
-          "date": "2024-12-01",
-          "pred": -0.8640087742650471,
-          "actual": -0.58,
-          "persistence": -0.86
-        },
-        {
-          "origin": "2023-03-01",
-          "date": "2025-03-01",
-          "pred": -0.33178837497192554,
-          "actual": 0.05,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2023-06-01",
-          "date": "2025-06-01",
-          "pred": 1.832784711836255,
-          "actual": 0.01,
-          "persistence": 0.95
-        },
-        {
-          "origin": "2023-09-01",
-          "date": "2025-09-01",
-          "pred": 2.9962314599696667,
-          "actual": -0.3,
-          "persistence": 1.65
-        },
-        {
-          "origin": "2023-12-01",
-          "date": "2025-12-01",
-          "pred": 1.4872840421472069,
-          "actual": -0.49,
-          "persistence": 1.81
-        }
-      ],
-      "60": [
-        {
-          "origin": "2006-09-01",
-          "date": "2011-09-01",
-          "pred": -0.4227899214834113,
-          "actual": -0.76,
-          "persistence": 0.62
-        },
-        {
-          "origin": "2006-12-01",
-          "date": "2011-12-01",
-          "pred": -0.035160861602679505,
-          "actual": -1.05,
-          "persistence": 1.1
-        },
-        {
-          "origin": "2007-03-01",
-          "date": "2012-03-01",
-          "pred": -1.1274616641383994,
-          "actual": -0.48,
-          "persistence": -0.15
-        },
-        {
-          "origin": "2007-06-01",
-          "date": "2012-06-01",
-          "pred": -0.9550319882957176,
-          "actual": 0.14,
-          "persistence": -0.16
-        },
-        {
-          "origin": "2007-09-01",
-          "date": "2012-09-01",
-          "pred": -1.0709201466857996,
-          "actual": 0.44,
-          "persistence": -1.04
-        },
-        {
-          "origin": "2007-12-01",
-          "date": "2012-12-01",
-          "pred": -1.7866200574430995,
-          "actual": -0.13,
-          "persistence": -1.61
-        },
-        {
-          "origin": "2008-03-01",
-          "date": "2013-03-01",
-          "pred": -1.3223186276048433,
-          "actual": -0.14,
-          "persistence": -1.17
-        },
-        {
-          "origin": "2008-06-01",
-          "date": "2013-06-01",
-          "pred": -0.1250641567565165,
-          "actual": -0.33,
-          "persistence": -0.44
-        },
-        {
-          "origin": "2008-09-01",
-          "date": "2013-09-01",
-          "pred": -0.2083809026367006,
-          "actual": -0.09,
-          "persistence": -0.28
-        },
-        {
-          "origin": "2008-12-01",
-          "date": "2013-12-01",
-          "pred": -1.606379612903011,
-          "actual": -0.09,
-          "persistence": -0.9
-        },
-        {
-          "origin": "2009-03-01",
-          "date": "2014-03-01",
-          "pred": -0.3629524439530376,
-          "actual": -0.07,
-          "persistence": -0.72
-        },
-        {
-          "origin": "2009-06-01",
-          "date": "2014-06-01",
-          "pred": 0.9014780419944862,
-          "actual": 0.48,
-          "persistence": 0.49
-        },
-        {
-          "origin": "2009-09-01",
-          "date": "2014-09-01",
-          "pred": 0.30766637284493137,
-          "actual": 0.37,
-          "persistence": 0.68
-        },
-        {
-          "origin": "2009-12-01",
-          "date": "2014-12-01",
-          "pred": 1.7571297327501472,
-          "actual": 0.77,
-          "persistence": 1.81
-        },
-        {
-          "origin": "2010-03-01",
-          "date": "2015-03-01",
-          "pred": 1.1055913745490644,
-          "actual": 0.48,
-          "persistence": 1.07
-        },
-        {
-          "origin": "2010-06-01",
-          "date": "2015-06-01",
-          "pred": 0.018631631453349562,
-          "actual": 1.28,
-          "persistence": -0.62
-        },
-        {
-          "origin": "2010-09-01",
-          "date": "2015-09-01",
-          "pred": -0.4039739723322564,
-          "actual": 2.01,
-          "persistence": -1.56
-        },
-        {
-          "origin": "2010-12-01",
-          "date": "2015-12-01",
-          "pred": -0.712375039080267,
-          "actual": 2.56,
-          "persistence": -1.63
-        },
-        {
-          "origin": "2011-03-01",
-          "date": "2016-03-01",
-          "pred": -0.3664888157497481,
-          "actual": 1.6,
-          "persistence": -0.98
-        },
-        {
-          "origin": "2011-06-01",
-          "date": "2016-06-01",
-          "pred": 0.46293694521520745,
-          "actual": 0.06,
-          "persistence": -0.25
-        },
-        {
-          "origin": "2011-09-01",
-          "date": "2016-09-01",
-          "pred": -0.3762014707031196,
-          "actual": -0.46,
-          "persistence": -0.76
-        },
-        {
-          "origin": "2011-12-01",
-          "date": "2016-12-01",
-          "pred": 0.20291237247639526,
-          "actual": -0.51,
-          "persistence": -1.05
-        },
-        {
-          "origin": "2012-03-01",
-          "date": "2017-03-01",
-          "pred": 0.5470427060786966,
-          "actual": -0.09,
-          "persistence": -0.48
-        },
-        {
-          "origin": "2012-06-01",
-          "date": "2017-06-01",
-          "pred": 0.3792343129101599,
-          "actual": 0.22,
-          "persistence": 0.14
-        },
-        {
-          "origin": "2012-09-01",
-          "date": "2017-09-01",
-          "pred": -0.34844450736610194,
-          "actual": -0.56,
-          "persistence": 0.44
-        },
-        {
-          "origin": "2012-12-01",
-          "date": "2017-12-01",
-          "pred": -1.1406892650697342,
-          "actual": -0.85,
-          "persistence": -0.13
-        },
-        {
-          "origin": "2013-03-01",
-          "date": "2018-03-01",
-          "pred": -0.9352792228863661,
-          "actual": -0.73,
-          "persistence": -0.14
-        },
-        {
-          "origin": "2013-06-01",
-          "date": "2018-06-01",
-          "pred": -1.2453735411697693,
-          "actual": 0.12,
-          "persistence": -0.33
-        },
-        {
-          "origin": "2013-09-01",
-          "date": "2018-09-01",
-          "pred": -0.4120389574305009,
-          "actual": 0.3,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2013-12-01",
-          "date": "2018-12-01",
-          "pred": 0.07149455884217981,
-          "actual": 0.97,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2014-03-01",
-          "date": "2019-03-01",
-          "pred": -1.3627908642657685,
-          "actual": 0.81,
-          "persistence": -0.07
-        },
-        {
-          "origin": "2014-06-01",
-          "date": "2019-06-01",
-          "pred": -1.4080930150333524,
-          "actual": 0.66,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2014-09-01",
-          "date": "2019-09-01",
-          "pred": -0.6609774157505376,
-          "actual": 0.11,
-          "persistence": 0.37
-        },
-        {
-          "origin": "2014-12-01",
-          "date": "2019-12-01",
-          "pred": -0.37332222127176595,
-          "actual": 0.51,
-          "persistence": 0.77
-        },
-        {
-          "origin": "2015-03-01",
-          "date": "2020-03-01",
-          "pred": -0.465604994375036,
-          "actual": 0.36,
-          "persistence": 0.48
-        },
-        {
-          "origin": "2015-06-01",
-          "date": "2020-06-01",
-          "pred": 1.44061115821559,
-          "actual": -0.21,
-          "persistence": 1.28
-        },
-        {
-          "origin": "2015-09-01",
-          "date": "2020-09-01",
-          "pred": 1.5488377579788581,
-          "actual": -0.66,
-          "persistence": 2.01
-        },
-        {
-          "origin": "2015-12-01",
-          "date": "2020-12-01",
-          "pred": 1.492474184139491,
-          "actual": -0.98,
-          "persistence": 2.56
-        },
-        {
-          "origin": "2016-03-01",
-          "date": "2021-03-01",
-          "pred": 1.3579030221915378,
-          "actual": -0.72,
-          "persistence": 1.6
-        },
-        {
-          "origin": "2016-06-01",
-          "date": "2021-06-01",
-          "pred": 1.5977073826196249,
-          "actual": -0.06,
-          "persistence": 0.06
-        },
-        {
-          "origin": "2016-09-01",
-          "date": "2021-09-01",
-          "pred": 1.7090969203221005,
-          "actual": -0.5,
-          "persistence": -0.46
-        },
-        {
-          "origin": "2016-12-01",
-          "date": "2021-12-01",
-          "pred": 0.589694873538614,
-          "actual": -1.07,
-          "persistence": -0.51
-        },
-        {
-          "origin": "2017-03-01",
-          "date": "2022-03-01",
-          "pred": -1.3183681770295639,
-          "actual": -0.84,
-          "persistence": -0.09
-        },
-        {
-          "origin": "2017-06-01",
-          "date": "2022-06-01",
-          "pred": 0.2949747898743722,
-          "actual": -0.77,
-          "persistence": 0.22
-        },
-        {
-          "origin": "2017-09-01",
-          "date": "2022-09-01",
-          "pred": 0.12780761659098694,
-          "actual": -1.06,
-          "persistence": -0.56
-        },
-        {
-          "origin": "2017-12-01",
-          "date": "2022-12-01",
-          "pred": 0.4244019335047965,
-          "actual": -0.86,
-          "persistence": -0.85
-        },
-        {
-          "origin": "2018-03-01",
-          "date": "2023-03-01",
-          "pred": 0.3945368779773246,
-          "actual": -0.13,
-          "persistence": -0.73
-        },
-        {
-          "origin": "2018-06-01",
-          "date": "2023-06-01",
-          "pred": 1.4052503018736027,
-          "actual": 0.95,
-          "persistence": 0.12
-        },
-        {
-          "origin": "2018-09-01",
-          "date": "2023-09-01",
-          "pred": 1.4662990533402447,
-          "actual": 1.65,
-          "persistence": 0.3
-        },
-        {
-          "origin": "2018-12-01",
-          "date": "2023-12-01",
-          "pred": 2.258679138077864,
-          "actual": 1.81,
-          "persistence": 0.97
-        },
-        {
-          "origin": "2019-03-01",
-          "date": "2024-03-01",
-          "pred": 3.5996345177360674,
-          "actual": 1.1,
-          "persistence": 0.81
-        },
-        {
-          "origin": "2019-06-01",
-          "date": "2024-06-01",
-          "pred": 4.019662616946333,
-          "actual": 0.25,
-          "persistence": 0.66
-        },
-        {
-          "origin": "2019-09-01",
-          "date": "2024-09-01",
-          "pred": 4.302745022864346,
-          "actual": -0.11,
-          "persistence": 0.11
-        },
-        {
-          "origin": "2019-12-01",
-          "date": "2024-12-01",
-          "pred": 4.686830272311672,
-          "actual": -0.58,
-          "persistence": 0.51
-        },
-        {
-          "origin": "2020-03-01",
-          "date": "2025-03-01",
-          "pred": 4.27539894278656,
-          "actual": 0.05,
-          "persistence": 0.36
-        },
-        {
-          "origin": "2020-06-01",
-          "date": "2025-06-01",
-          "pred": 3.0356878462779586,
-          "actual": 0.01,
-          "persistence": -0.21
-        },
-        {
-          "origin": "2020-09-01",
-          "date": "2025-09-01",
-          "pred": 2.254484352040752,
-          "actual": -0.3,
-          "persistence": -0.66
-        },
-        {
-          "origin": "2020-12-01",
-          "date": "2025-12-01",
-          "pred": 2.1873050288212856,
+          "pred": 0.9324915385648298,
           "actual": -0.49,
           "persistence": -0.98
         }
@@ -25138,5 +21829,5 @@ window.ARA_GEOMETRY_STATE_TRANSITION = {
       ]
     }
   },
-  "elapsed_seconds": 537.267
+  "elapsed_seconds": 88.818
 };

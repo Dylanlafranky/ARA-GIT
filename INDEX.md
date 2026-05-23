@@ -14,6 +14,10 @@ For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) 
 
 The first ARA state-geometry and transport test is recorded in [`ARA_GEOMETRY_TRANSPORT_RESULT.md`](ARA_GEOMETRY_TRANSPORT_RESULT.md). Short version: the geometry map carries ENSO signal over persistence, especially around 6-24 months, but direct value-transport still loses to a simple causal lag baseline.
 
+The latest temporal-flow follow-up is recorded in [`ARA_TEMPORAL_FRICTION_RESULT.md`](ARA_TEMPORAL_FRICTION_RESULT.md). Short version: phi-distance is not temporal friction by itself; it appears to modulate a baseline friction floor, while negative coefficients may mark resonance-cancellation pockets only when anti-phase/contact geometry is also present.
+
+The interactive comparison surface for this latest formula branch is [`TheFormula/ara_temporal_interaction_formula_viz.html`](TheFormula/ara_temporal_interaction_formula_viz.html). It overlays truth, persistence, the strict-causal friction decoders, and an experimental integrated gate trace for ENSO, Solar, and ECG.
+
 ---
 
 ## The framework in 30 seconds
@@ -59,6 +63,7 @@ These are the findings that survived at least one stricter check after an earlie
 | **Walker Circulation is fractal across rungs** | SOI mirrors NINO anti-phase from φ⁵ to φ¹¹ with \|corr\| ≥ 0.85 | (memory: dynamic_rung_assignment) |
 | **Lag-h corrector ports cross-domain** | γ ≈ +1/φ. 37% MAE drop at 1-min ECG, 17% at 24-month ENSO | (memory: corrector_cross_domain) |
 | **ARA state geometry maps ENSO subsystem structure** | 2026-05-21 snapshot: NINO/SOI center distance **0.116** in ARA-position space; PDO is about one rung away. Geometry-only transport beats persistence at 3-24 months but does not beat causal lag ridge. | `ARA_GEOMETRY_TRANSPORT_RESULT.md`, `TheFormula/ara_state_geometry_data.js`, `TheFormula/ara_geometry_transport_data.js` |
+| **Temporal friction is baseline plus modulation, not simple phi-distance** | 2026-05-23 tests: pure `|ARA-phi|` friction failed; `1 + |ARA-phi|` helped some horizons; negative-k pocket markers were supported for Solar 132-month and ECG 60-second windows but not ENSO. | `ARA_TEMPORAL_FRICTION_RESULT.md`, `TheFormula/ara_phi_distance_bk_fit_data.js`, `TheFormula/ara_temporal_pocket_diagnostic_data.js` |
 | **Closed-system coupling differs from incidental** | SOI as matched-rung pair lifts ENSO; same SOI as feeder does nothing | (memory: closed_system_validated) |
 | **AR feedback constant is 1/φ³** | "One full ARA orbit" of momentum carrying between cycles | (memory: aa_boundary_ar_feedback) |
 | **Mid-horizon dip is consistent across 11 humans** | Recurring but heterogeneous dip structure; possible autonomic intruder wave | `TheFormula/multi_subject_dip_data.js` |

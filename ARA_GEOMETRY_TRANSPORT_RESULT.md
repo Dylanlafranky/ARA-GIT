@@ -203,3 +203,87 @@ That means predicting future:
 Then decode the future observable from the projected geometry.
 
 This is closer to the conceptual model: prediction is not merely reading the map; it is moving the system's energy through the map.
+
+---
+
+## Follow-Up: Temporal Friction And Pocket Tests - 2026-05-23
+
+The follow-up tests are recorded in [`ARA_TEMPORAL_FRICTION_RESULT.md`](ARA_TEMPORAL_FRICTION_RESULT.md).
+
+The main lesson is that the future geometry state is decodable, but the forward transport step still needs a better flow law. Retroactive natural-flow tests show that geometry often moves partway from current state toward natural phase advance:
+
+```text
+future_geometry ~= current_geometry + alpha * (natural_advance - current_geometry)
+```
+
+For ENSO, retroactive alpha averaged about `0.6-0.7`, near `phi - 1 = 0.618`, but it varied by horizon and state. So phi-like flow is a useful baseline, not a complete operator.
+
+### Temporal friction
+
+The working flow equation became:
+
+```text
+flow = ARA / (ARA + temporal_friction)
+```
+
+The literal test `temporal_friction = |ARA - phi|` was not supported. It makes friction approach zero near phi, which over-advances the state. The better simple version was:
+
+```text
+temporal_friction = 1 + |ARA - phi|
+```
+
+This improved some ENSO horizons but still did not beat lag or the future-geometry oracle.
+
+The current safer sketch is:
+
+```text
+temporal_friction =
+    baseline_time_resistance
+  + pi_leak_energy
+  + system_inefficiency
+  + phi_distance_drag
+  - resonance_cancellation
+```
+
+### Pi-leak split
+
+Earlier notes used "pi-leak" for two related quantities. They should now be separated:
+
+| Quantity | Value | Interpretation |
+|---|---:|---|
+| `pi - 3` | `0.141592654` | topology strand / geometric non-closure |
+| `(pi - 3) / pi` | `0.045070341` | normalized energy leakage through that strand |
+
+The gear-coupled transition diagnostic found a gear-minus-sync signal around `0.045` across horizons, which points to the normalized energy-leak version.
+
+### Temporal pockets
+
+A rolling causal fit of:
+
+```text
+temporal_friction = B + k * |ARA - phi|
+```
+
+often produced negative `k`. This should not automatically be treated as a bad coefficient. It may mean that phi-distance is being outweighed by resonance cancellation:
+
+```text
+positive k = phi-distance behaves like drag
+negative k = collision/resonance cancels effective friction
+```
+
+The diagnostic result is mixed:
+
+- Solar at the 132-month horizon supported the pocket interpretation: corr(pocket strength, absolute delta) `+0.355`, corr(pocket strength, anti-phase energy) `+0.333`, and strong-pocket movement was `3.41x` weak-pocket movement.
+- ECG RR at the 60-second horizon also supported it: corr(pocket strength, next-horizon movement) `+0.477`, and strong-pocket next-horizon movement was `2.71x` weak-pocket movement.
+- ENSO mostly did not support it; pocket strength was weakly or negatively related to future movement at most horizons.
+
+So the next operator should not use `k < 0` alone. It should require a compound state:
+
+```text
+temporal_pocket =
+  negative phi-distance coefficient
+  AND anti-phase/contact geometry
+  AND release/snap boundary proximity
+```
+
+This keeps the core idea alive while preventing the model from calling every negative coefficient a discovery.

@@ -81,3 +81,30 @@ Outputs:
 - `ARA_GEOMETRY_TRANSPORT_RESULT.md`
 
 Important interpretation guard: `ara_state_geometry.py` is a state-map extractor, not a forecast test. `ara_geometry_transport_test.py` is strict-causal for ENSO: at origin `t`, ridge training uses only anchors `s` where `s + horizon < t`. The result shows geometry-only lift over persistence at several horizons, but causal lag ridge remains stronger.
+
+## Recent Runnable Temporal-Friction Tests
+
+The 2026-05-23 temporal-flow follow-up was also run locally. These tests use repo-local ENSO, SILSO Solar, and ECG RR data where applicable.
+
+Useful entry points:
+
+```bash
+python TheFormula/ara_retroactive_flow_test.py
+python TheFormula/ara_temporal_friction_diagnostic.py
+python TheFormula/ara_phi_distance_friction_test.py
+python TheFormula/ara_phi_distance_bk_fit_test.py
+python TheFormula/ara_temporal_pocket_diagnostic_test.py
+python TheFormula/ara_enso_coupled_pocket_visibility_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_retroactive_flow_data.js`
+- `TheFormula/ara_temporal_friction_data.js`
+- `TheFormula/ara_phi_distance_friction_data.js`
+- `TheFormula/ara_phi_distance_bk_fit_data.js`
+- `TheFormula/ara_temporal_pocket_diagnostic_data.js`
+- `TheFormula/ara_enso_coupled_pocket_visibility_data.js`
+- `ARA_TEMPORAL_FRICTION_RESULT.md`
+
+Important interpretation guard: these tests do not prove that temporal friction is phi-distance. The strict result is narrower: pure `|ARA-phi|` friction fails, `1 + |ARA-phi|` is more useful, and negative `k` in `B + k*|ARA-phi|` is only a candidate temporal-pocket marker when paired with anti-phase/contact geometry.

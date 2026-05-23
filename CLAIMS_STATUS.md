@@ -41,6 +41,8 @@ These claims should not be used as strong public headlines until rerun cleanly.
 | "Cross-mammal mean +0.955 proves universal local-cycle shape" | Some comparisons appear inflated by normalization/endpoints, especially mouse/human scaling. | "Some mammal cycle-shape comparisons are high; the result needs a normalization-robust rerun." |
 | "LLM closure perfectly predicts capability" | n=4, WinoGrande is weaker, and parameter count is a major confound. | "Preliminary closure metric rank-orders several Pythia benchmark scores; needs scale controls." |
 | "ARA geometry transport solves ENSO prediction" | The 2026-05-21 strict-causal geometry transport test found signal over persistence, but causal lag ridge won every tested horizon and lag+geometry did not cleanly improve the lag baseline. | "ARA state geometry contains ENSO forecast signal, but direct value-transport is too blunt; next test should predict future geometry state before decoding values." |
+| "Temporal friction is just distance from phi" | The 2026-05-23 test found that pure `friction = |ARA - phi|` over-advances the system. `1 + |ARA - phi|` is more useful, but still not enough. | "Phi-distance appears to modulate temporal friction around a baseline floor; it is not the whole friction law." |
+| "Negative k proves temporal pockets" | The 2026-05-23 pocket diagnostic is mixed. Solar at 132 months and ECG RR at 60 seconds support the pocket/surge reading, but ENSO mostly does not. | "Negative k may be a temporal-pocket marker only when paired with anti-phase/contact geometry and release-boundary state." |
 | "Same formula works on every domain" | Some scripts fail, some outputs are exploratory, and several claims are trackers rather than blind generators. | "The same framework is being tested across domains, with mixed but interesting results." |
 
 ## Speculative Interpretation
@@ -91,3 +93,33 @@ The strict-causal transport test is more sobering. Geometry-only models beat per
 | 60 months | 0.9178 | 0.9050 | 0.6894 |
 
 So the careful claim is: **ARA geometry contains predictive information, but direct regression from geometry features to future value is not the right transport operator yet.** A simple causal lag model remains stronger in this test, and lag-plus-geometry did not give a clean residual improvement. The next appropriate test is `geometry(t) -> geometry(t+h) -> value(t+h)`: predict future phase, occupancy, ARA position, and coupling state first, then decode the observable.
+
+## Update - May 23 2026: Temporal friction, pi-leak, and pocket diagnostics
+
+The temporal-flow follow-up is now recorded in [`ARA_TEMPORAL_FRICTION_RESULT.md`](ARA_TEMPORAL_FRICTION_RESULT.md).
+
+Short version: the state map remains useful, but the missing forward operator is not a simple linear geometry-to-value transport. Retroactive natural flow is real and sits roughly around `0.6-0.7`, close to `phi - 1 = 0.618`, but state/horizon residuals matter.
+
+The literal claim "temporal friction equals `|ARA - phi|`" did not hold. Pure phi-distance friction makes friction approach zero near phi and over-advances the geometry. The better working form is:
+
+```text
+temporal_friction =
+    baseline_time_resistance
+  + pi_leak_energy
+  + system_inefficiency
+  + phi_distance_drag
+  - resonance_cancellation
+```
+
+The pi-leak language has also been split into two distinct quantities:
+
+| Quantity | Value | Safer interpretation |
+|---|---:|---|
+| `pi - 3` | `0.141592654` | topology remainder / geometric non-closure |
+| `(pi - 3) / pi` | `0.045070341` | normalized energy leakage / coupling tax |
+
+The gear-vs-sync diagnostic repeatedly found a difference near `0.045`, which supports the normalized energy-leak reading more than the raw topology-remainder reading.
+
+The negative-`k` "temporal pocket" idea is promising but not universal. Solar at the 132-month horizon and ECG RR at the 60-second horizon showed pocket-like behavior: stronger negative-`k` markers lined up with larger movement and anti-phase/contact geometry. ENSO mostly did not. The careful claim is therefore:
+
+> Negative `k` may mark a temporary low-friction pocket caused by resonance cancellation, but only when the geometry is also near an anti-phase/contact or release-boundary state.

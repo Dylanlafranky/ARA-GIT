@@ -61,6 +61,7 @@ from ara_shape_kernel_test import PHI, release_fraction, shape_value_at_phase
 
 
 MODEL_KEYS = [
+    "learned_event_state_engine_decoder",
     "event_ordered_cascade_decoder",
     "phi_flow_decoder",
     "state_transition_decoder",
@@ -70,6 +71,16 @@ MODEL_KEYS = [
 ]
 ORACLE_KEY = "oracle_actual_future_geometry_decoder"
 ORIGIN_STRIDE = 3
+EVENT_ENGINE_ALPHA = 10.0
+EVENT_ENGINE_CLIP = 3.0
+EVENT_CHANNELS = [
+    ("release_same", "release", "same"),
+    ("release_cross", "release", "cross"),
+    ("wrap_same", "wrap", "same"),
+    ("wrap_cross", "wrap", "cross"),
+    ("winding_same", "winding", "same"),
+    ("winding_cross", "winding", "cross"),
+]
 
 
 def finite(value, fallback=0.0):
@@ -610,6 +621,231 @@ def event_ordered_cascade_decode_features(snapshot, horizon):
     return decode_state_features(event_ordered_cascade_snapshot(snapshot, horizon))
 
 
+def finalize_projected_subsystem(subsystem, total_energy, home_ara=None):
+    """Recompute derived fields after rung-level geometry updates."""
+    center_position = 0.0
+    center_ara = 0.0
+    phase_x = 0.0
+    phase_y = 0.0
+    for rung in subsystem["rungs"]:
+        rung["position"] = float(rung["k"] + rung["ara"] / 2.0)
+        rung["amp"] = float(math.sqrt(max(rung["occupancy"] * total_energy, 0.0)))
+        rung["shape_now"] = float(shape_value_at_phase(rung["phase"], rung["ara"], rung["kernel"]))
+        rung["component"] = float(rung["amp"] * rung["shape_now"])
+        rung["release_fraction"] = float(release_fraction(rung["ara"]))
+        rung["is_release"] = 1.0 if rung["phase"] < rung["release_fraction"] else 0.0
+        center_position += rung["position"] * rung["occupancy"]
+        center_ara += rung["ara"] * rung["occupancy"]
+        angle = 2.0 * math.pi * rung["phase"]
+        phase_x += rung["occupancy"] * math.cos(angle)
+        phase_y += rung["occupancy"] * math.sin(angle)
+
+    subsystem["center_position"] = float(center_position)
+    subsystem["center_ara"] = float(center_ara)
+    subsystem["center_phase"] = circular_phase(phase_x, phase_y)
+    subsystem["home_ara"] = float(home_ara if home_ara is not None else center_ara)
+    subsystem["total_energy"] = float(total_energy)
+
+
+def natural_advance_snapshot(snapshot, horizon):
+    """Advance rung phases without inter-rung event transport."""
+    projected = {}
+    for name, subsystem in snapshot.items():
+        old_rungs = subsystem["rungs"]
+        projected_rungs = []
+        for rung in old_rungs:
+            projected_rung = dict(rung)
+            projected_rung["phase"] = float((rung["phase"] + horizon / rung["period"]) % 1.0)
+            projected_rungs.append(projected_rung)
+
+        projected_subsystem = dict(subsystem)
+        projected_subsystem["rungs"] = projected_rungs
+        finalize_projected_subsystem(
+            projected_subsystem,
+            max(subsystem["total_energy"], 1e-12),
+            home_ara=subsystem["home_ara"],
+        )
+        projected[name] = projected_subsystem
+    return projected
+
+
+def natural_advance_decode_features(snapshot, horizon):
+    return decode_state_features(natural_advance_snapshot(snapshot, horizon))
+
+
+def event_channel_packet(rung, horizon, kind):
+    delta = float(horizon) / max(float(rung["period"]), 1e-12)
+    if kind == "release":
+        event_count = boundary_crossings(rung["phase"], delta, release_fraction(rung["ara"]))
+    elif kind == "wrap":
+        event_count = boundary_crossings(rung["phase"], delta, 1.0) / PHI
+    elif kind == "winding":
+        event_count = delta / (PHI**2)
+    else:
+        event_count = 0.0
+    release_gate = 1.0 + float(rung["is_release"]) / PHI
+    return max(0.0, rung["occupancy"]) * max(0.0, rung["amp"]) * max(0.0, event_count) * release_gate
+
+
+def event_channel_snapshot(snapshot, horizon, kind, relation):
+    """Single event channel projection used as a basis for the learned engine."""
+    flow = 1.0 - PHI ** (-float(horizon) / HOME_PERIOD)
+    flow = max(0.0, min(0.75, flow))
+    projected = natural_advance_snapshot(snapshot, horizon)
+
+    records = []
+    for name, subsystem in snapshot.items():
+        for idx, rung in enumerate(subsystem["rungs"]):
+            natural = projected[name]["rungs"][idx]
+            records.append(
+                {
+                    "id": (name, idx),
+                    "name": name,
+                    "idx": idx,
+                    "old": rung,
+                    "period": float(rung["period"]),
+                    "position": float(rung["position"]),
+                    "phase": float(natural["phase"]),
+                    "ara": float(rung["ara"]),
+                }
+            )
+
+    incoming = {
+        record["id"]: {"strength": 0.0, "phase_x": 0.0, "phase_y": 0.0, "ara_num": 0.0}
+        for record in records
+    }
+
+    for source in sorted(records, key=lambda item: (item["period"], item["position"])):
+        packet = event_channel_packet(source["old"], horizon, kind)
+        if packet <= 1e-12:
+            continue
+        source_angle = 2.0 * math.pi * source["phase"]
+        for target in records:
+            if target["period"] <= source["period"] * (1.0 + 1e-12):
+                continue
+            same_system = source["name"] == target["name"]
+            if relation == "same" and not same_system:
+                continue
+            if relation == "cross" and same_system:
+                continue
+
+            distance = abs(target["position"] - source["position"])
+            scale_gap = max(0.0, math.log(target["period"] / source["period"], BASE))
+            phase_gate = 0.25 + 0.75 * max(0.0, (1.0 + phase_alignment(source["phase"], target["phase"])) / 2.0)
+            weight = packet * (PHI ** (-(distance + 0.5 * scale_gap))) * phase_gate
+            slot = incoming[target["id"]]
+            slot["strength"] += weight
+            slot["phase_x"] += weight * math.cos(source_angle)
+            slot["phase_y"] += weight * math.sin(source_angle)
+            slot["ara_num"] += weight * source["ara"]
+
+    for name, subsystem in projected.items():
+        old_rungs = snapshot[name]["rungs"]
+        if not old_rungs:
+            continue
+
+        incoming_values = np.asarray(
+            [incoming[(name, idx)]["strength"] for idx in range(len(old_rungs))],
+            dtype=float,
+        )
+        old_occ = np.asarray([max(r["occupancy"], 0.0) for r in old_rungs], dtype=float)
+        old_occ = old_occ / old_occ.sum() if old_occ.sum() > 1e-12 else np.ones(len(old_rungs)) / len(old_rungs)
+
+        if incoming_values.sum() > 1e-12:
+            desired_occ = old_occ + incoming_values / incoming_values.sum()
+            desired_occ = desired_occ / desired_occ.sum()
+        else:
+            desired_occ = old_occ
+        new_occ = (1.0 - flow) * old_occ + flow * desired_occ
+        new_occ = new_occ / new_occ.sum() if new_occ.sum() > 1e-12 else old_occ
+
+        total_energy = max(snapshot[name]["total_energy"], 1e-12)
+        for idx, rung in enumerate(subsystem["rungs"]):
+            old = old_rungs[idx]
+            slot = incoming[(name, idx)]
+            strength = slot["strength"]
+            natural_phase = float(rung["phase"])
+            if strength > 1e-12:
+                influence = flow * strength / (strength + old_occ[idx] + 1e-12)
+                influence = max(0.0, min(0.75, influence))
+                incoming_phase = circular_phase(slot["phase_x"], slot["phase_y"])
+                incoming_ara = slot["ara_num"] / strength
+            else:
+                influence = 0.0
+                incoming_phase = natural_phase
+                incoming_ara = old["ara"]
+
+            natural_angle = 2.0 * math.pi * natural_phase
+            incoming_angle = 2.0 * math.pi * incoming_phase
+            rung["phase"] = float(
+                circular_phase(
+                    (1.0 - influence) * math.cos(natural_angle) + influence * math.cos(incoming_angle),
+                    (1.0 - influence) * math.sin(natural_angle) + influence * math.sin(incoming_angle),
+                )
+            )
+            rung["ara"] = float(max(0.2, min(3.0, (1.0 - influence) * old["ara"] + influence * incoming_ara)))
+            rung["occupancy"] = float(new_occ[idx])
+
+        finalize_projected_subsystem(subsystem, total_energy, home_ara=None)
+        subsystem["home_ara"] = (1.0 - flow) * snapshot[name]["home_ara"] + flow * subsystem["center_ara"]
+
+    return projected
+
+
+def feature_delta(features, base_features, keys):
+    return {key: finite(features.get(key, 0.0)) - finite(base_features.get(key, 0.0)) for key in keys}
+
+
+def fit_event_engine_coefficients(train_anchors, horizon, natural_cache, event_basis_cache, decode_cache, target_keys):
+    channel_names = [channel[0] for channel in EVENT_CHANNELS]
+    rows = []
+    targets = []
+    scales = {}
+    for key in target_keys:
+        vals = [
+            finite(decode_cache[s + horizon].get(key, 0.0)) - finite(natural_cache[horizon][s].get(key, 0.0))
+            for s in train_anchors
+        ]
+        scale = float(np.std(vals))
+        scales[key] = scale if scale > 1e-9 else 1.0
+
+    for anchor in train_anchors:
+        base_features = natural_cache[horizon][anchor]
+        actual_features = decode_cache[anchor + horizon]
+        basis = event_basis_cache[horizon][anchor]
+        for key in target_keys:
+            scale = scales[key]
+            row = [finite(basis[channel_name].get(key, 0.0)) / scale for channel_name in channel_names]
+            target = (finite(actual_features.get(key, 0.0)) - finite(base_features.get(key, 0.0))) / scale
+            if any(abs(value) > 1e-12 for value in row) or abs(target) > 1e-12:
+                rows.append(row)
+                targets.append(target)
+
+    if not rows:
+        return {channel_name: 0.0 for channel_name in channel_names}
+
+    x = np.asarray(rows, dtype=float)
+    y = np.asarray(targets, dtype=float)
+    reg = EVENT_ENGINE_ALPHA * np.eye(x.shape[1])
+    try:
+        coeff = np.linalg.solve(x.T @ x + reg, x.T @ y)
+    except np.linalg.LinAlgError:
+        coeff, *_ = np.linalg.lstsq(x.T @ x + reg, x.T @ y, rcond=None)
+    coeff = np.clip(coeff, -EVENT_ENGINE_CLIP, EVENT_ENGINE_CLIP)
+    return {channel_name: float(value) for channel_name, value in zip(channel_names, coeff)}
+
+
+def apply_event_engine(base_features, basis_deltas, coefficients, target_keys):
+    out = {key: finite(base_features.get(key, 0.0)) for key in target_keys}
+    for channel_name, value in coefficients.items():
+        if abs(value) <= 1e-12:
+            continue
+        delta = basis_deltas[channel_name]
+        for key in target_keys:
+            out[key] += value * finite(delta.get(key, 0.0))
+    return sanitize_predicted_state_features(out)
+
+
 def state_error(predicted, actual):
     keys = sorted(set(predicted).intersection(actual))
     if not keys:
@@ -679,7 +915,10 @@ def run():
     print(flush=True)
 
     decode_cache = {anchor: decode_state_features(snapshots[anchor]) for anchor in all_anchors}
+    target_keys = sorted(decode_cache[min_anchor].keys())
     transition_cache = {h: {} for h in HORIZONS}
+    natural_cache = {h: {} for h in HORIZONS}
+    event_basis_cache = {h: {} for h in HORIZONS}
     for h in HORIZONS:
         for anchor in all_anchors:
             snap = snapshots[anchor]
@@ -688,13 +927,24 @@ def run():
                 "current": transition_features(snap, h, include_current=True),
                 "lags": transition_features(snap, h, include_current=True, include_lags=True, nino_values=nino, anchor=anchor),
             }
+            base_features = natural_advance_decode_features(snap, h)
+            natural_cache[h][anchor] = base_features
+            event_basis_cache[h][anchor] = {}
+            for channel_name, kind, relation in EVENT_CHANNELS:
+                channel_features = decode_state_features(event_channel_snapshot(snap, h, kind, relation))
+                event_basis_cache[h][anchor][channel_name] = feature_delta(channel_features, base_features, target_keys)
 
     all_points = {model: {h: [] for h in HORIZONS} for model in MODEL_KEYS + [ORACLE_KEY]}
-    state_errors = {model: {h: [] for h in HORIZONS} for model in MODEL_KEYS if model.startswith("state_transition")}
+    state_error_models = {
+        model
+        for model in MODEL_KEYS
+        if model.startswith("state_transition") or model == "learned_event_state_engine_decoder"
+    }
+    state_errors = {model: {h: [] for h in HORIZONS} for model in state_error_models}
+    event_engine_coefficients = {h: [] for h in HORIZONS}
 
     for h in HORIZONS:
         origins = list(range(test_start, n - h + 1, ORIGIN_STRIDE))
-        target_keys = sorted(decode_cache[min_anchor].keys())
         for origin in origins:
             if origin + h > n:
                 continue
@@ -713,6 +963,42 @@ def run():
             decoder_train_y = [float(nino[a - 1]) for a in train_decoder]
 
             decoder_model = fit_ridge_model(decoder_train_x, decoder_train_y)
+
+            # Learned event-state engine: natural phase advance plus learned event-channel packet weights.
+            event_coeffs = fit_event_engine_coefficients(
+                train_transition,
+                h,
+                natural_cache,
+                event_basis_cache,
+                decode_cache,
+                target_keys,
+            )
+            learned_geom = apply_event_engine(
+                natural_cache[h][origin],
+                event_basis_cache[h][origin],
+                event_coeffs,
+                target_keys,
+            )
+            learned_pred = float(predict_ridge_model(decoder_model, learned_geom)[0])
+            all_points["learned_event_state_engine_decoder"][h].append(
+                {
+                    "origin": origin_date,
+                    "date": target_date,
+                    "pred": learned_pred,
+                    "actual": actual,
+                    "persistence": persistence,
+                }
+            )
+            state_errors["learned_event_state_engine_decoder"][h].append(
+                state_error(learned_geom, decode_cache[target_anchor])
+            )
+            event_engine_coefficients[h].append(
+                {
+                    "origin": origin_date,
+                    "date": target_date,
+                    "coefficients": event_coeffs,
+                }
+            )
 
             # Event-ordered cascade: fast/small rungs fire into slower/larger rungs first.
             event_geom = event_ordered_cascade_decode_features(snapshots[origin], h)
@@ -819,8 +1105,18 @@ def run():
     for h in HORIZONS:
         winners[str(h)] = min(MODEL_KEYS, key=lambda m: scores[m][h].get("mae", float("inf")))
 
+    event_engine_weight_summary = {}
+    for h in HORIZONS:
+        event_engine_weight_summary[str(h)] = {}
+        for channel_name, _, _ in EVENT_CHANNELS:
+            vals = [record["coefficients"].get(channel_name, 0.0) for record in event_engine_coefficients[h]]
+            event_engine_weight_summary[str(h)][channel_name] = {
+                "mean": float(np.mean(vals)) if vals else None,
+                "std": float(np.std(vals)) if vals else None,
+            }
+
     out = {
-        "date": "2026-05-21",
+        "date": "2026-05-22",
         "method": "strict-causal ARA geometry state-transition ENSO test",
         "leakage_guard": "At origin t, transition training uses only s+h<t and decoder training uses only a<t.",
         "oracle_note": "oracle_actual_future_geometry_decoder uses the true future geometry and is diagnostic only, not a forecast.",
@@ -842,6 +1138,10 @@ def run():
             "test_last_origin_longest_horizon": dates[last_origin - 1].strftime("%Y-%m-%d"),
         },
         "models": {
+            "learned_event_state_engine_decoder": (
+                "Natural phase advance plus learned global event-channel packet weights, then causal geometry decoder. "
+                "Learns geometry-state transport only; it does not train on target NINO values."
+            ),
             "event_ordered_cascade_decoder": (
                 "Deterministic small-to-large event-ordered cascade, then causal geometry decoder."
             ),
@@ -854,6 +1154,8 @@ def run():
         },
         "scores": scores,
         "winners": winners,
+        "event_engine_channels": [channel[0] for channel in EVENT_CHANNELS],
+        "event_engine_weight_summary": event_engine_weight_summary,
         "points": all_points,
         "elapsed_seconds": round_float(time.time() - started, 3),
     }
