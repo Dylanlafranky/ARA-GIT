@@ -98,6 +98,7 @@ These are testable on existing datasets. I haven't done it.
 
 ## Honest caveats
 
+- **The gaitndd walk is controlled, not open-environment natural gait.** Subjects are walking in an instructed measurement setting rather than moving freely through a park, city, trail, or hike. That can bias cadence, turning rhythm, attention, and self-selected comfort speed. Use gaitndd for disease/control stride-shape comparison; use open-environment or literature speed curves for the natural walk-run crossover question.
 - **Speed is confounded with disease.** Diseased subjects walk slower than controls, which moves them along the literature curve toward higher ratios. Some of the apparent "drift toward 1.0" in the histograms could be speed effects rather than rung collapse. The diagnostic test that disambiguates this is normalising by individual subject speed first, then looking for residual bimodality. I haven't done that cleanly across all groups in this dataset.
 - **Sample sizes are modest.** 13–20 subjects per group is enough to see the bimodality structure but not enough to claim a precise diagnostic threshold.
 - **Otsu thresholding can fail on short or noisy recordings.** Per-subject medians are robust to this; pooled distributions may include some artefact strides.

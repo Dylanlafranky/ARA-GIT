@@ -324,7 +324,7 @@ button.active {
       <section class="title-block">
         <h1>ARA Mapping Atlas 3D</h1>
         <div class="axis-key">
-          <b>X</b> period phi-rung / <b>Y</b> ARA position, 0-2 clean and &gt;2 diagnostic / <b>Z</b> log10 weight: Action/pi, fitted amplitude, or state energy
+          <b>X</b> period phi-rung / <b>Y</b> fixed ARA position with quarter markers, phi, and &gt;2 pinned to diagnostic rail / <b>Z</b> log10 weight: Action/pi, fitted amplitude, or state energy
         </div>
         <div class="meta" id="summaryPills"></div>
       </section>
@@ -443,7 +443,8 @@ const classColors = {
 const layerColors = {
   catalog: "#6aa8ff",
   measured_fit: "#f2c14e",
-  state_geometry: "#35d0ba"
+  state_geometry: "#35d0ba",
+  mapped_extension: "#ffb86b"
 };
 const domainColors = {
   quantum_atomic: "#b79cff",
@@ -460,7 +461,17 @@ const relationColors = {
   counter_pair: "rgba(255,107,107,0.46)",
   same_rung_match: "rgba(242,193,78,0.20)",
   vertical_ara_match: "rgba(53,208,186,0.18)",
-  boundary_match: "rgba(183,156,255,0.18)"
+  boundary_match: "rgba(183,156,255,0.18)",
+  mapped_vertical_partner: "rgba(255,184,107,0.34)",
+  mapped_feeder: "rgba(106,168,255,0.34)",
+  mapped_forcing_gate: "rgba(183,156,255,0.34)",
+  mapped_counter_pair: "rgba(255,107,107,0.38)",
+  mapped_balance_gate: "rgba(53,208,186,0.30)",
+  mapped_rung_collapse: "rgba(248,81,73,0.42)",
+  mapped_arc_progression: "rgba(123,216,143,0.30)",
+  mapped_scale_ladder_step: "rgba(255,255,255,0.24)",
+  mapped_compound_decomposition: "rgba(255,184,107,0.44)",
+  mapped_coupled_subsystem_pair: "rgba(183,156,255,0.40)"
 };
 
 function fmt(value, digits = 3) {
@@ -509,8 +520,7 @@ function nodeColor(n) {
 function araView(ara) {
   if (ara === null || ara === undefined || !Number.isFinite(Number(ara))) return 1;
   const a = Number(ara);
-  if (a <= 2.4) return Math.max(0, a);
-  return 2.4 + Math.log10(1 + a - 2.4);
+  return Math.max(0, Math.min(2, a));
 }
 
 function makeOptions(selectId, values, labels, allLabel) {
@@ -606,7 +616,6 @@ function visibleTriangles(vNodes) {
 function ranges(vNodes) {
   const vals = (keyFn) => vNodes.map(keyFn).filter(v => Number.isFinite(v));
   const x = vals(n => n.period_phi_rung);
-  const y = vals(n => araView(n.ara));
   const z = vals(n => n.weight_log10);
   function padRange(arr, pad = 0.08) {
     let min = Math.min(...arr), max = Math.max(...arr);
@@ -615,7 +624,7 @@ function ranges(vNodes) {
     const p = (max - min) * pad;
     return [min - p, max + p];
   }
-  return { x: padRange(x), y: padRange(y, 0.14), z: padRange(z) };
+  return { x: padRange(x), y: [0, 2], z: padRange(z) };
 }
 
 function norm(value, range) {
@@ -691,6 +700,22 @@ function drawAxisLabel(text, point, color, align = "center") {
   ctx.restore();
 }
 
+function araMarkerStyle(marker) {
+  if (marker.kind === "phi" || marker.name === "phi") {
+    return { color: "rgba(242,193,78,0.52)", width: 2.2, font: 10 };
+  }
+  if (marker.kind === "balance" || marker.name === "balance") {
+    return { color: "rgba(53,208,186,0.46)", width: 1.8, font: 10 };
+  }
+  if (marker.name === "anti_phi_quarter" || marker.name === "lower_wall") {
+    return { color: "rgba(255,107,107,0.42)", width: 1.6, font: 10 };
+  }
+  if (marker.kind === "terminal") {
+    return { color: "rgba(233,237,243,0.24)", width: 1.3, font: 10 };
+  }
+  return { color: "rgba(183,156,255,0.22)", width: 1, font: 9 };
+}
+
 function drawGrid(r) {
   if (!showRings) return;
   const xMin = Math.ceil(r.x[0] / 10) * 10;
@@ -704,20 +729,23 @@ function drawGrid(r) {
       drawText(`phi^${k}`, p.x, p.y, "rgba(154,167,183,0.62)", 10);
     }
   }
-  DATA.ara_boundaries.forEach(b => {
+  const araMarkers = DATA.ara_axis_markers || DATA.ara_boundaries;
+  araMarkers.forEach(b => {
     const yVal = araView(b.value);
     if (yVal < r.y[0] || yVal > r.y[1]) return;
     const y = norm(yVal, r.y);
-    const color = b.name === "phi" ? "rgba(242,193,78,0.42)" : "rgba(233,237,243,0.15)";
-    drawLine3D({x:-1, y, z:-1}, {x:1, y, z:-1}, color, b.name === "phi" ? 2 : 1);
+    const style = araMarkerStyle(b);
+    drawLine3D({x:-1, y, z:-1}, {x:1, y, z:-1}, style.color, style.width);
     const p = project({x:-1.05, y, z:-1});
-    if (p.x > 20 && p.y > 20 && p.y < height - 20) drawText(b.name, p.x, p.y, color, 10, "right");
+    if (p.x > 20 && p.y > 20 && p.y < height - 20) {
+      drawText(b.label || b.name, p.x, p.y, style.color, style.font, "right");
+    }
   });
   drawLine3D({x:-1,y:-1,z:-1}, {x:1,y:-1,z:-1}, "rgba(233,237,243,0.26)", 1.5);
   drawLine3D({x:-1,y:-1,z:-1}, {x:-1,y:1,z:-1}, "rgba(233,237,243,0.26)", 1.5);
   drawLine3D({x:-1,y:-1,z:-1}, {x:-1,y:-1,z:1}, "rgba(233,237,243,0.26)", 1.5);
   drawAxisLabel("X: period phi-rung", {x:1.12,y:-1.08,z:-1}, "rgba(106,168,255,0.92)");
-  drawAxisLabel("Y: ARA position (0-2)", {x:-1.08,y:1.1,z:-1}, "rgba(242,193,78,0.92)", "right");
+  drawAxisLabel("Y: ARA position (0-2 full axis)", {x:-1.08,y:1.1,z:-1}, "rgba(242,193,78,0.92)", "right");
   drawAxisLabel("Z: log10 weight", {x:-1.08,y:-1.08,z:1.12}, "rgba(183,156,255,0.92)", "right");
 }
 
@@ -900,8 +928,12 @@ function renderDetails() {
     return;
   }
   const boundary = n.nearest_boundary || {};
+  const boundaryLabel = boundary.label || titleCase(boundary.name);
   const araCheck = n.ara_position_status && n.ara_position_status !== "bounded_position"
     ? kv("ARA check", n.ara_position_note || titleCase(n.ara_position_status))
+    : "";
+  const araDisplay = n.ara_position_status === "above_two_diagnostic"
+    ? kv("Display Y", "Pinned to 2.0 diagnostic rail")
     : "";
   el.innerHTML = `
     <div class="detail-name" style="color:${nodeColor(n)}">${n.name}</div>
@@ -909,11 +941,16 @@ function renderDetails() {
     ${kv("Period", fmtPeriod(n.period_seconds))}
     ${kv("Phi rung", fmt(n.period_phi_rung, 2))}
     ${kv("ARA", fmt(n.ara, 4))}
+    ${araDisplay}
     ${araCheck}
     ${kv("Class", titleCase(n.ara_class))}
-    ${kv("Boundary", `${titleCase(boundary.name)} (${fmt(boundary.distance, 4)})`)}
+    ${kv("Boundary", `${boundaryLabel} (${fmt(boundary.distance, 4)})`)}
     ${kv("Distance to phi", fmt(n.distance_to_phi, 4))}
     ${kv("Theta", n.theta_deg == null ? "n/a" : `${fmt(n.theta_deg, 2)} deg`)}
+    ${n.orientation ? kv("Orientation", n.orientation) : ""}
+    ${n.relation_class ? kv("Relation class", titleCase(n.relation_class)) : ""}
+    ${n.measurement_status ? kv("Measurement", titleCase(n.measurement_status)) : ""}
+    ${n.source_metric ? kv("Source metric", n.source_metric) : ""}
     ${kv(n.weight_label || "Weight", fmt(n.weight_value, 4))}
     ${kv("Scale", titleCase(n.scale_domain))}
     ${kv("Source", n.source)}

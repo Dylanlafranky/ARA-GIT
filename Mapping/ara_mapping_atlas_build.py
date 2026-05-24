@@ -25,6 +25,7 @@ FORMULA = ROOT / "TheFormula"
 OLD_HTML = ROOT / "archive" / "early_visualizations" / "temporal_coordinates_3d.html"
 SYSTEMS_V3 = FORMULA / "systems_map_v3_data.js"
 STATE_GEOMETRY = FORMULA / "ara_state_geometry_data.js"
+EXTENSIONS = HERE / "ara_mapping_extensions.json"
 OUT_JSON = HERE / "ara_mapping_atlas_data.json"
 OUT_JS = HERE / "ara_mapping_atlas_data.js"
 
@@ -35,12 +36,25 @@ SECONDS_PER_YEAR = 365.25 * SECONDS_PER_DAY
 EPS = 1e-30
 
 ARA_BOUNDARIES = [
-    {"name": "space", "value": 0.0},
-    {"name": "lower_wall", "value": 0.25},
-    {"name": "balance", "value": 1.0},
-    {"name": "phi", "value": PHI},
-    {"name": "upper_wall", "value": 1.75},
-    {"name": "time", "value": 2.0},
+    {"name": "space", "label": "0 space", "value": 0.0},
+    {"name": "lower_wall", "label": "1/4 anti-phi", "value": 0.25},
+    {"name": "balance", "label": "1 balance", "value": 1.0},
+    {"name": "phi", "label": "phi", "value": PHI},
+    {"name": "upper_wall", "label": "7/4 donor wall", "value": 1.75},
+    {"name": "time", "label": "2 time", "value": 2.0},
+]
+
+ARA_AXIS_MARKERS = [
+    {"name": "space", "label": "0", "value": 0.0, "kind": "terminal"},
+    {"name": "anti_phi_quarter", "label": "1/4 anti-phi", "value": 0.25, "kind": "quarter"},
+    {"name": "half", "label": "1/2", "value": 0.5, "kind": "quarter"},
+    {"name": "three_quarter", "label": "3/4", "value": 0.75, "kind": "quarter"},
+    {"name": "balance", "label": "1 balance", "value": 1.0, "kind": "balance"},
+    {"name": "five_quarter", "label": "5/4", "value": 1.25, "kind": "quarter"},
+    {"name": "three_half", "label": "3/2", "value": 1.5, "kind": "quarter"},
+    {"name": "phi", "label": "phi", "value": PHI, "kind": "phi"},
+    {"name": "seven_quarter", "label": "7/4", "value": 1.75, "kind": "quarter"},
+    {"name": "time", "label": "2", "value": 2.0, "kind": "terminal"},
 ]
 
 
@@ -193,6 +207,7 @@ def nearest_boundary(ara: float | None):
     nearest = min(ARA_BOUNDARIES, key=lambda b: abs(ara - b["value"]))
     return {
         "name": nearest["name"],
+        "label": nearest.get("label", nearest["name"]),
         "value": nearest["value"],
         "distance": abs(ara - nearest["value"]),
     }
@@ -438,6 +453,56 @@ def load_state_geometry_nodes():
                     )
                 )
     return nodes
+
+
+def load_extension_layer():
+    if not EXTENSIONS.exists():
+        return [], []
+    data = json.loads(EXTENSIONS.read_text(encoding="utf-8"))
+    nodes = []
+    for item in data.get("nodes", []):
+        extra = item.get("extra", {}).copy()
+        for key in [
+            "orientation",
+            "relation_class",
+            "measurement_status",
+            "source_metric",
+            "source_count",
+        ]:
+            if key in item:
+                extra[key] = item[key]
+        nodes.append(
+            base_node(
+                node_id=item["node_id"],
+                name=item["name"],
+                system=item["system"],
+                system_label=item["system_label"],
+                period_seconds=float(item["period_seconds"]),
+                ara=float(item["ara"]) if item.get("ara") is not None else None,
+                energy_j=float(item["energy_j"]) if item.get("energy_j") is not None else None,
+                weight_value=float(item["weight_value"]) if item.get("weight_value") is not None else None,
+                weight_label=item.get("weight_label", "Mapping weight"),
+                source=item.get("source", str(EXTENSIONS.relative_to(ROOT))),
+                layer=item.get("layer", "mapped_extension"),
+                notes=item.get("notes", ""),
+                extra=extra,
+            )
+        )
+
+    relations = []
+    for rel in data.get("relations", []):
+        relations.append(
+            {
+                "id": safe_slug(rel["id"]),
+                "from": safe_slug(rel["from"]),
+                "to": safe_slug(rel["to"]),
+                "type": rel.get("type", "mapped_relation"),
+                "source": rel.get("source", "mapping_extension"),
+                "score": float(rel.get("score", 1.0)),
+                "detail": rel.get("detail", {}),
+            }
+        )
+    return nodes, relations
 
 
 def candidate_relations(nodes):
@@ -705,18 +770,21 @@ def main():
     catalog_nodes, catalog_relations = load_original_catalogue()
     measured_nodes = load_systems_v3_nodes()
     state_nodes = load_state_geometry_nodes()
-    nodes = catalog_nodes + measured_nodes + state_nodes
-    relations = catalog_relations + candidate_relations(nodes)
+    extension_nodes, extension_relations = load_extension_layer()
+    nodes = catalog_nodes + measured_nodes + state_nodes + extension_nodes
+    relations = catalog_relations + extension_relations + candidate_relations(nodes)
     triangles = candidate_triangles(nodes)
     payload = {
         "date": "2026-05-24",
         "purpose": "Mapping-first ARA temporal coordinate atlas. No prediction scores are produced here.",
         "phi": PHI,
         "ara_boundaries": ARA_BOUNDARIES,
+        "ara_axis_markers": ARA_AXIS_MARKERS,
         "sources": [
             str(OLD_HTML.relative_to(ROOT)),
             str(SYSTEMS_V3.relative_to(ROOT)) if SYSTEMS_V3.exists() else None,
             str(STATE_GEOMETRY.relative_to(ROOT)) if STATE_GEOMETRY.exists() else None,
+            str(EXTENSIONS.relative_to(ROOT)) if EXTENSIONS.exists() else None,
         ],
         "summary": summarize(nodes, relations, triangles),
         "nodes": nodes,

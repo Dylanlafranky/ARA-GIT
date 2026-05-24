@@ -175,7 +175,11 @@ The 2026-05-24 mapping-first atlas rebuilds the old temporal-coordinate visualis
 Useful entry point:
 
 ```bash
+python Mapping/galactic_rotation_phi_test.py
+python Mapping/galactic_structure_time_phi_test.py
+python Mapping/build_mapping_extensions.py
 python Mapping/ara_mapping_atlas_build.py
+python Mapping/audit_over2_ara_nodes.py
 ```
 
 Outputs:
@@ -183,8 +187,37 @@ Outputs:
 - `Mapping/ara_mapping_atlas_data.json`
 - `Mapping/ara_mapping_atlas_data.js`
 - `Mapping/ara_mapping_atlas_3d.html`
+- `Mapping/ara_mapping_extensions.json`
+- `Mapping/galactic_rotation_phi_test_result.json`
+- `Mapping/galactic_structure_time_phi_test_result.json`
+- `Mapping/ara_over2_audit.json`
+- `Mapping/ARA_OVER2_AUDIT.md`
 - `ARA_MAPPING_ATLAS_RESULT.md`
 
 Important interpretation guard: this is a geometry diagnostic map, not a predictor. It combines hand-curated catalogue nodes, fitted subsystem nodes, and anchor-state geometry nodes, so filters should be used when comparing like with like.
 
+The mapping-extension build currently adds nostril dominance, tides, solar hemispheres, human gait, MJO/QBO, and a 10-system quantum-to-cosmic anchor ladder as a separate `mapped_extension` layer. Run the galactic rotation test first so the Milky Way node uses the measured rotation-curve correction instead of the older archived phi scaffold. Human gait was rerun from raw PhysioNet `gaitndd` records on 2026-05-24 using the local verification venv:
+
+```powershell
+F:\SystemFormulaFolder\.venv_ara_verify\Scripts\python.exe analysis\gait\analyze_running_phi.py
+F:\SystemFormulaFolder\.venv_ara_verify\Scripts\python.exe analysis\gait\analyze_gait_phi.py
+```
+
+The raw gait rerun requires network access to `physionet.org` plus `numpy`, `scipy`, `matplotlib`, `wfdb`, and `aiohttp` in that venv. Read the PhysioNet medians as controlled instructed-walk geometry; the natural locomotion crossover anchors are taken from `analysis\gait\analyze_running_phi.py`.
+
+The cross-scale anchor ladder is drawn mostly from older archive scripts (`archive\numbered_tests\92_subatomic_slope_inversion.py`, `archive\numbered_tests\94_real_ara_measurements.py`, `archive\numbered_tests\89_gap_filling_scales.py`, and `archive\numbered_tests\64_sleep_consciousness_ara.py`). Treat it as a mapping scaffold, not a new independent measurement pass. Exception: the Milky Way galactic-rotation node now uses `Mapping\galactic_rotation_phi_test_result.json`; that test supports the rough period anchor but rejects the archived phi ARA assignment, so the circular carrier is mapped at ARA `1.0`.
+
+The galactic structure-time follow-up uses `Mapping\galactic_structure_time_phi_test_result.json`. It does not change the carrier ARA. It records that a four-arm spiral crossing becomes `P_orb / phi` at `Omega_pattern = 16.61 km/s/kpc`, close to the slow density-wave `12..17 km/s/kpc` range, while bar-pattern central values remain sub-phi.
+
+ATP synthase is currently taken from the ATP-specific chemical-oscillator rerun:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+F:\SystemFormulaFolder\.venv_ara_verify\Scripts\python.exe archive\numbered_tests\50_chemical_oscillators_ara.py
+```
+
+That rerun maps ATP synthase at ARA `1.50`. The earlier hard-coded rotor/gradient child nodes have been removed. Testing that coupled-subsystem idea requires real single-molecule substep dwell-time data.
+
 The triangle overlay is included in the same build output. It detects low-ARA fitted event nodes near named state-rung clusters, plus K2/K4 endpoint faces that pass through K3 as a bridge/gate rung. Both are exposed behind the `Triangles` toggle in `ara_mapping_atlas_3d.html`.
+
+The above-2 audit is a guardrail pass for the bounded ARA convention. It currently reports `45` nodes over `2.0`, all in the older hand-curated `catalog` layer. No over-2 nodes are introduced by the newer measured-fit, state-geometry, or mapped-extension layers. Treat those older entries as diagnostic overflow until source-specific retests decide whether they are reversed orientation, rung mismatch, compound/coupled systems, or one-shot storage/release ratios.

@@ -1,0 +1,778 @@
+{
+  "date": "2026-05-24",
+  "purpose": "Mapping extension layer for diagnostic systems: nostril dominance, tides, solar hemispheres, human gait, MJO/QBO, and a 10-system quantum-to-cosmic cross-scale anchor ladder.",
+  "nodes": [
+    {
+      "node_id": "mapped_nasal_left_dominance_bank",
+      "name": "Nostril left/right dominance bank",
+      "system": "mapped_nostril_dominance",
+      "system_label": "Nostril Dominance",
+      "period_seconds": 5340.0,
+      "ara": 1.0,
+      "weight_value": 395.0,
+      "weight_label": "Dominance intervals",
+      "source": "TheFormula/ara_nasal_enso_coupled_geometry_result.json",
+      "layer": "mapped_extension",
+      "notes": "Median dominance half-cycle. Treated as balanced alternation between paired nostril banks.",
+      "relation_class": "paired_anti_phase",
+      "orientation": "left/right alternation",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_interval_minutes=89.0",
+      "source_count": 395
+    },
+    {
+      "node_id": "mapped_nasal_signed_full_cycle",
+      "name": "Nostril signed full cycle",
+      "system": "mapped_nostril_dominance",
+      "system_label": "Nostril Dominance",
+      "period_seconds": 11580.0,
+      "ara": 1.0842696629213484,
+      "weight_value": 316.0,
+      "weight_label": "Signed cycles",
+      "source": "TheFormula/ara_nasal_enso_coupled_geometry_result.json",
+      "layer": "mapped_extension",
+      "notes": "Two-dominance-interval cycle. ARA here is cycle symmetry ratio: signed_cycle / (2 * dominance_interval), not a raw left/right duration ratio.",
+      "relation_class": "paired_anti_phase",
+      "orientation": "full left-right-left or right-left-right cycle",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_signed_cycle_minutes=193.0",
+      "source_count": 316,
+      "extra": {
+        "interval_test_corr": 0.9922096174611574,
+        "signed_cycle_test_corr": 0.980176377454964
+      }
+    },
+    {
+      "node_id": "mapped_tide_m2_carrier",
+      "name": "Ocean tide M2 carrier",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 44714.16432,
+      "ara": 1.138,
+      "weight_value": 1.4040000000000001,
+      "weight_label": "Heldout low-gate range m",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Semi-diurnal M2 carrier. ARA uses the earlier open-ocean tide asymmetry estimate; current data confirms forced carrier plus spring-neap amplitude breathing.",
+      "relation_class": "forced_pair",
+      "orientation": "flood/ebb window",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "M2 open-ocean ARA estimate"
+    },
+    {
+      "node_id": "mapped_tide_spring_neap_envelope",
+      "name": "Spring-neap tide envelope",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 1275721.4016000002,
+      "ara": 1.182,
+      "weight_value": 0.9271462857490983,
+      "weight_label": "Fractional range change per cycle",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Spring-neap modulation. ARA uses prior spring-neap asymmetry estimate; amplitude breathing is measured in the 2024 NOAA station window.",
+      "relation_class": "forced_pair",
+      "orientation": "spring/neap envelope",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "spring-neap envelope ARA estimate"
+    },
+    {
+      "node_id": "mapped_tide_amplitude_breath_gate",
+      "name": "Tide amplitude breath gate",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 1275721.4016000002,
+      "ara": 1.603443165191557,
+      "weight_value": 0.852003501840711,
+      "weight_label": "High-low range difference m",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Measured heldout high-gate mean range divided by low-gate mean range. This maps the envelope breathing rather than the carrier tide itself.",
+      "relation_class": "amplitude_breathing_gate",
+      "orientation": "lunar-solar gate opening/closing",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "high_mean/low_mean=1.603"
+    },
+    {
+      "node_id": "mapped_solar_north_hemisphere",
+      "name": "Solar northern hemisphere cycle",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "ara": 1.6396153846153845,
+      "weight_value": 12.0,
+      "weight_label": "Detected cycles",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "SILSO hemispheric Catalogue B saved result. ARA is median cycle fall/rise ratio for the northern hemisphere.",
+      "relation_class": "stellar_coupled_pair",
+      "orientation": "rise/fall sunspot hemisphere",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_cycle_months=128.0",
+      "source_count": 12
+    },
+    {
+      "node_id": "mapped_solar_south_hemisphere",
+      "name": "Solar southern hemisphere cycle",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "ara": 1.2537890504175688,
+      "weight_value": 12.0,
+      "weight_label": "Detected cycles",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "SILSO hemispheric Catalogue B saved result. ARA is median cycle fall/rise ratio for the southern hemisphere.",
+      "relation_class": "stellar_coupled_pair",
+      "orientation": "rise/fall sunspot hemisphere",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_cycle_months=128.0",
+      "source_count": 12
+    },
+    {
+      "node_id": "mapped_solar_ns_relaxation_gate",
+      "name": "Solar N/S relaxation gate",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "ara": 1.6190407041059987,
+      "weight_value": 0.4094410361695658,
+      "weight_label": "Relative damping per cycle",
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Coupling-speed diagnostic: fractional movement toward hemisphere balance per cycle is near phi in the saved heldout test.",
+      "relation_class": "balance_relaxation_gate",
+      "orientation": "north/south balance relaxation",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "fractional_toward_balance_per_cycle"
+    },
+    {
+      "node_id": "mapped_gait_control",
+      "name": "Gait control median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "ara": 1.3548,
+      "weight_value": 8591.0,
+      "weight_label": "Stride count",
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: unimodal, narrow. Deviation from phi: 16.27%.",
+      "relation_class": "locomotion_stride_geometry",
+      "orientation": "stance/swing",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 8591
+    },
+    {
+      "node_id": "mapped_gait_parkinsons",
+      "name": "Gait Parkinson's median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "ara": 1.4414,
+      "weight_value": 7593.0,
+      "weight_label": "Stride count",
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: broader, slight bimodality. Deviation from phi: 10.92%.",
+      "relation_class": "locomotion_stride_geometry",
+      "orientation": "stance/swing",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 7593
+    },
+    {
+      "node_id": "mapped_gait_als",
+      "name": "Gait ALS median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "ara": 1.4651,
+      "weight_value": 5193.0,
+      "weight_label": "Stride count",
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: clear bimodal: walking peak plus secondary near 1.0-1.1. Deviation from phi: 9.45%.",
+      "relation_class": "locomotion_stride_geometry",
+      "orientation": "stance/swing",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 5193
+    },
+    {
+      "node_id": "mapped_gait_huntingtons",
+      "name": "Gait Huntington's median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "ara": 1.3615,
+      "weight_value": 10148.0,
+      "weight_label": "Stride count",
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: broad, asymmetric. Deviation from phi: 15.85%.",
+      "relation_class": "locomotion_stride_geometry",
+      "orientation": "stance/swing",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 10148
+    },
+    {
+      "node_id": "mapped_gait_preferred_phi_crossing",
+      "name": "Preferred walking phi crossing",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.0,
+      "ara": 1.618033988749895,
+      "weight_value": 1.27,
+      "weight_label": "Speed m/s",
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: preferred/energy-optimal walking crosses stance/swing = phi around 1.27 m/s.",
+      "relation_class": "locomotion_arc_anchor",
+      "orientation": "stance/swing",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_phi_mps=1.27"
+    },
+    {
+      "node_id": "mapped_gait_walk_run_transition",
+      "name": "Walk-run transition",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 0.75,
+      "ara": 1.0,
+      "weight_value": 2.2,
+      "weight_label": "Speed m/s",
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: stance and swing equalize at the walk-run transition.",
+      "relation_class": "locomotion_arc_boundary",
+      "orientation": "stance/swing",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_unity_mps=2.2"
+    },
+    {
+      "node_id": "mapped_gait_run_mirror_phi_crossing",
+      "name": "Sustainable running mirror-phi crossing",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 0.65,
+      "ara": 0.6180339887498948,
+      "weight_value": 3.85,
+      "weight_label": "Speed m/s",
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: the running-side mirror of preferred walking crosses stance/swing = 1/phi around 3.85 m/s. This marks the sustainable running branch, not the first moment the body should switch from walking to running.",
+      "relation_class": "locomotion_arc_anchor",
+      "orientation": "stance/swing",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_inverse_phi_mps=3.85"
+    },
+    {
+      "node_id": "mapped_gait_als_collapse_peak",
+      "name": "ALS secondary collapse peak",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "ara": 1.05,
+      "weight_value": 1.0,
+      "weight_label": "Collapse peak marker",
+      "source": "GAIT_LOCOMOTION_ARC.md",
+      "layer": "mapped_extension",
+      "notes": "Approximate secondary peak reported near 1.0-1.1 in ALS gait. This is mapped as a diagnostic rung-collapse marker, not a precise fitted coordinate.",
+      "relation_class": "rung_collapse_marker",
+      "orientation": "stance/swing",
+      "measurement_status": "approximate_from_saved_writeup",
+      "source_metric": "secondary peak near 1.0-1.1"
+    },
+    {
+      "node_id": "mapped_qbo_k7_feeder",
+      "name": "QBO k7 feeder",
+      "system": "mapped_climate_feeders",
+      "system_label": "MJO / QBO Climate Feeders",
+      "period_seconds": 76354775.18698817,
+      "ara": 0.9845814977973568,
+      "weight_value": 0.6899667991021781,
+      "weight_label": "QBO band power fraction",
+      "source": "TheFormula/qbo_annual_data.js",
+      "layer": "mapped_extension",
+      "notes": "NOAA QBO saved analysis. Power concentrates at phi^7 (~29 months); ARA shown is the k7 annual-fingerprint value from the saved test.",
+      "relation_class": "climate_feeder",
+      "orientation": "westerly/easterly phase",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "k7_power_fraction=0.690"
+    },
+    {
+      "node_id": "mapped_mjo_omi_50d_partner",
+      "name": "MJO OMI 50-day partner",
+      "system": "mapped_climate_feeders",
+      "system_label": "MJO / QBO Climate Feeders",
+      "period_seconds": 4320000.0,
+      "ara": 1.0,
+      "weight_value": 521.0,
+      "weight_label": "Aligned months",
+      "source": "TheFormula/enso_mjo_partner_data.js",
+      "layer": "mapped_extension",
+      "notes": "NOAA OMI MJO partner saved test. Period is the 50-day MJO envelope used in the vertical-ARA test. ARA was not directly measured in that artifact, so this is mapped as a balanced propagating envelope until raw cycle ARA is measured.",
+      "relation_class": "vertical_partner_candidate",
+      "orientation": "MJO phase envelope",
+      "measurement_status": "period_measured_ara_pending",
+      "source_metric": "enso_mjo_phi_gap=6.94",
+      "source_count": 521
+    },
+    {
+      "node_id": "mapped_scale_molecular_vibration",
+      "name": "Molecular vibration",
+      "system": "mapped_scale_molecular_vibration",
+      "system_label": "Molecular Vibration",
+      "period_seconds": 1e-14,
+      "ara": 1.0,
+      "weight_value": 1.602176634e-20,
+      "weight_label": "Energy J",
+      "source": "archive/numbered_tests/92_subatomic_slope_inversion.py",
+      "layer": "mapped_extension",
+      "notes": "Archive anchor: representative molecular vibrational period. ARA is treated as a balanced oscillator placeholder until bond-specific rise/fall asymmetry is measured.",
+      "relation_class": "quantum_molecular_anchor",
+      "orientation": "bond stretch/compress",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=1e-14s; energy~0.1eV"
+    },
+    {
+      "node_id": "mapped_scale_alpha_helix_formation",
+      "name": "Alpha-helix formation",
+      "system": "mapped_scale_alpha_helix",
+      "system_label": "Alpha-Helix",
+      "period_seconds": 1e-07,
+      "ara": 1.0,
+      "weight_value": 1.5848931924611108e-20,
+      "weight_label": "Archived energy proxy",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive cellular/molecular anchor. Kept as a conservative bounded position here; later archive correction discusses possible folding/unfolding overflow and should be tested separately.",
+      "relation_class": "protein_folding_anchor",
+      "orientation": "fold/unfold",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "archive period=100ns"
+    },
+    {
+      "node_id": "mapped_scale_atp_synthase_rotation",
+      "name": "ATP synthase rotation",
+      "system": "mapped_scale_atp_synthase",
+      "system_label": "ATP Synthase",
+      "period_seconds": 0.01,
+      "ara": 1.5,
+      "weight_value": 8.3e-20,
+      "weight_label": "Energy J",
+      "source": "archive/numbered_tests/50_chemical_oscillators_ara.py",
+      "layer": "mapped_extension",
+      "notes": "ATP-specific chemical-oscillator rerun maps ATP synthase as a three-phase rotary engine at ARA=1.50, near phi. This supersedes the broader archive ladder placeholder that had ARA=3.0. The coupled rotor/gradient idea remains testable, but it needs real substep dwell-time data rather than hard-coded child coordinates.",
+      "relation_class": "molecular_rotary_motor",
+      "orientation": "three-phase rotary catalysis",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=10ms; ARA=1.50 from chemical oscillator rerun"
+    },
+    {
+      "node_id": "mapped_scale_human_breathing",
+      "name": "Human breathing",
+      "system": "mapped_scale_human_breathing",
+      "system_label": "Human Breathing",
+      "period_seconds": 4.0,
+      "ara": 1.618033988749895,
+      "weight_value": 0.5,
+      "weight_label": "Breath energy proxy J",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive organism anchor: resting respiratory rhythm. This is useful as a middle-scale self-organising biological oscillator, not a fresh raw respiratory fit.",
+      "relation_class": "respiratory_self_organising_anchor",
+      "orientation": "inspiration/expiration",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=4s; archived ARA=phi"
+    },
+    {
+      "node_id": "mapped_scale_circadian_sleep_wake",
+      "name": "Circadian sleep-wake",
+      "system": "mapped_scale_circadian_sleep_wake",
+      "system_label": "Circadian Sleep-Wake",
+      "period_seconds": 86400.0,
+      "ara": 2.0,
+      "weight_value": 1.0,
+      "weight_label": "Behavioral cycle proxy",
+      "source": "archive/numbered_tests/64_sleep_consciousness_ara.py",
+      "layer": "mapped_extension",
+      "notes": "Archive sleep/consciousness anchor: 16h wake / 8h sleep gives ARA=2.0. This is a human behavioral convention, not a universal biological constant.",
+      "relation_class": "circadian_boundary_anchor",
+      "orientation": "wake/sleep",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "16h/8h=2.0"
+    },
+    {
+      "node_id": "mapped_scale_chandler_wobble",
+      "name": "Chandler wobble",
+      "system": "mapped_scale_chandler_wobble",
+      "system_label": "Chandler Wobble",
+      "period_seconds": 37411200.0,
+      "ara": 1.0,
+      "weight_value": 1e+20,
+      "weight_label": "Archived energy proxy",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive planetary rotational anchor. Marked balanced because the prior note treats the pole motion as symmetric circular motion.",
+      "relation_class": "planetary_rotational_anchor",
+      "orientation": "pole wobble cycle",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=433d"
+    },
+    {
+      "node_id": "mapped_scale_lunar_nodal_cycle",
+      "name": "Lunar nodal cycle",
+      "system": "mapped_scale_lunar_nodal",
+      "system_label": "Lunar Nodal Cycle",
+      "period_seconds": 587088000.0,
+      "ara": 1.0,
+      "weight_value": 5.011872336272714e+22,
+      "weight_label": "Archived energy proxy",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive orbital anchor: symmetric lunar nodal regression. This is separate from the semi-diurnal M2 tide and the spring-neap envelope.",
+      "relation_class": "orbital_regression_anchor",
+      "orientation": "node regression",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~18.6y"
+    },
+    {
+      "node_id": "mapped_scale_milankovitch_obliquity",
+      "name": "Milankovitch obliquity",
+      "system": "mapped_scale_milankovitch_obliquity",
+      "system_label": "Milankovitch Obliquity",
+      "period_seconds": 1293861600000.0,
+      "ara": 1.0,
+      "weight_value": 1.995262314968883e+26,
+      "weight_label": "Archived energy proxy",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive planetary orbital anchor: symmetric axial-tilt oscillation. Useful as the slow Earth-system end of the mapping ladder.",
+      "relation_class": "orbital_forcing_anchor",
+      "orientation": "tilt high/low",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~41kyr"
+    },
+    {
+      "node_id": "mapped_scale_spiral_arm_passage",
+      "name": "Spiral arm passage",
+      "system": "mapped_scale_spiral_arm_passage",
+      "system_label": "Spiral Arm Passage",
+      "period_seconds": 3786912000000000.0,
+      "ara": 1.2,
+      "weight_value": 1e+46,
+      "weight_label": "Archived energy proxy",
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive cosmic anchor. Later correction notes slight compression/expansion asymmetry, so this is mapped at ARA=1.2 rather than the initial balanced placeholder.",
+      "relation_class": "galactic_structure_anchor",
+      "orientation": "arm entry/exit",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~120Myr; corrected ARA=1.2"
+    },
+    {
+      "node_id": "mapped_scale_galactic_rotation_mw",
+      "name": "Galactic rotation MW",
+      "system": "mapped_scale_galactic_rotation",
+      "system_label": "Galactic Rotation",
+      "period_seconds": 6950590034762222.0,
+      "ara": 1.0,
+      "weight_value": 1e+48,
+      "weight_label": "Archived energy proxy",
+      "source": "Mapping/galactic_rotation_phi_test_result.json",
+      "layer": "mapped_extension",
+      "notes": "Gaia DR3 Cepheid rotation-curve diagnostic supports the rough galactic-year period near the solar radius but rejects the archived phi ARA assignment. The pure circular carrier has neutral ARA=1.0; the measured epicyclic coupling is closer to the flat-curve sqrt(2) geometry than to phi.",
+      "relation_class": "galactic_orbital_anchor",
+      "orientation": "galactic orbit",
+      "measurement_status": "measured_rotation_curve_phi_rejected",
+      "source_metric": "solar orbital period=220.25Myr; carrier ARA=1.00; median kappa/Omega=1.334; phi_supported=False",
+      "extra": {
+        "archived_prior_source": "archive/numbered_tests/89_gap_filling_scales.py",
+        "archived_prior_ara": 1.618033988749895,
+        "global_kappa_over_omega": 1.3845060478936353,
+        "median_kappa_over_omega": 1.333971775014667,
+        "atlas_230myr_period_error_fraction": 0.04238735921365298
+      }
+    }
+  ],
+  "relations": [
+    {
+      "id": "mapped_nasal_to_enso_coupled_geometry",
+      "from": "mapped_nasal_signed_full_cycle",
+      "to": "state_enso_nino_k6",
+      "type": "mapped_vertical_partner",
+      "source": "mapping_extension",
+      "score": 0.98,
+      "detail": {
+        "interpretation": "Nostril dominance and ENSO share paired anti-phase geometry; prediction use remains provisional.",
+        "signed_cycle_test_corr": 0.980176377454964,
+        "dominance_interval_test_corr": 0.9922096174611574
+      }
+    },
+    {
+      "id": "mapped_tide_carrier_to_envelope",
+      "from": "mapped_tide_m2_carrier",
+      "to": "mapped_tide_spring_neap_envelope",
+      "type": "mapped_forcing_gate",
+      "source": "mapping_extension",
+      "score": 0.93,
+      "detail": {
+        "interpretation": "M2 carrier is amplitude-modulated by the spring-neap lunar-solar envelope."
+      }
+    },
+    {
+      "id": "mapped_tide_envelope_to_breath_gate",
+      "from": "mapped_tide_spring_neap_envelope",
+      "to": "mapped_tide_amplitude_breath_gate",
+      "type": "mapped_forcing_gate",
+      "source": "mapping_extension",
+      "score": 0.95,
+      "detail": {
+        "interpretation": "Envelope gate produces measured amplitude breathing in tide range."
+      }
+    },
+    {
+      "id": "mapped_solar_north_south_pair",
+      "from": "mapped_solar_north_hemisphere",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "mapped_counter_pair",
+      "source": "mapping_extension",
+      "score": 0.92,
+      "detail": {
+        "interpretation": "Solar hemispheres form a coupled dynamo pair with different cycle ARA medians."
+      }
+    },
+    {
+      "id": "mapped_solar_pair_to_relaxation_gate",
+      "from": "mapped_solar_ns_relaxation_gate",
+      "to": "mapped_solar_north_hemisphere",
+      "type": "mapped_balance_gate",
+      "source": "mapping_extension",
+      "score": 0.91,
+      "detail": {
+        "fractional_toward_balance_per_cycle": 1.6190407041059987
+      }
+    },
+    {
+      "id": "mapped_solar_pair_to_relaxation_gate_south",
+      "from": "mapped_solar_ns_relaxation_gate",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "mapped_balance_gate",
+      "source": "mapping_extension",
+      "score": 0.91,
+      "detail": {
+        "fractional_toward_balance_per_cycle": 1.6190407041059987
+      }
+    },
+    {
+      "id": "mapped_gait_control_to_phi_crossing",
+      "from": "mapped_gait_control",
+      "to": "mapped_gait_preferred_phi_crossing",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.86,
+      "detail": {
+        "interpretation": "Control subjects were measured in a controlled instructed-walk setting slower than preferred natural speed, so median sits below phi on the locomotion arc."
+      }
+    },
+    {
+      "id": "mapped_gait_phi_crossing_to_walk_run_transition",
+      "from": "mapped_gait_preferred_phi_crossing",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.9,
+      "detail": {
+        "interpretation": "As speed rises from preferred walking, stance/swing moves from phi toward 1.0, the walk-run handoff boundary."
+      }
+    },
+    {
+      "id": "mapped_gait_transition_to_run_mirror_phi",
+      "from": "mapped_gait_walk_run_transition",
+      "to": "mapped_gait_run_mirror_phi_crossing",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.88,
+      "detail": {
+        "interpretation": "After the walk-run handoff, the consumer-side running branch approaches the mirror-phi sustainable running anchor."
+      }
+    },
+    {
+      "id": "mapped_gait_als_to_collapse_peak",
+      "from": "mapped_gait_als",
+      "to": "mapped_gait_als_collapse_peak",
+      "type": "mapped_rung_collapse",
+      "source": "mapping_extension",
+      "score": 0.9,
+      "detail": {
+        "interpretation": "ALS distribution is bimodal; secondary peak near 1.0 is mapped as candidate rung collapse."
+      }
+    },
+    {
+      "id": "mapped_mjo_to_enso_vertical_partner",
+      "from": "mapped_mjo_omi_50d_partner",
+      "to": "state_enso_nino_k5",
+      "type": "mapped_vertical_partner",
+      "source": "mapping_extension",
+      "score": 0.82,
+      "detail": {
+        "rung_gap_phi": 6.93940132815825,
+        "interpretation": "MJO is about 6.94 phi-rungs below ENSO's ~47-month home scale in the saved partner test."
+      }
+    },
+    {
+      "id": "mapped_qbo_to_enso_same_rung_feeder",
+      "from": "mapped_qbo_k7_feeder",
+      "to": "state_enso_nino_k5",
+      "type": "mapped_feeder",
+      "source": "mapping_extension",
+      "score": 0.84,
+      "detail": {
+        "interpretation": "QBO sits near the ENSO feeder/home period band and is mapped as a climate feeder layer.",
+        "qbo_power_k7": 0.6899667991021781
+      }
+    },
+    {
+      "id": "mapped_scale_molecular_vibration_to_mapped_scale_alpha_helix_formation",
+      "from": "mapped_scale_molecular_vibration",
+      "to": "mapped_scale_alpha_helix_formation",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1e-14,
+        "right_period_seconds": 1e-07
+      }
+    },
+    {
+      "id": "mapped_scale_alpha_helix_formation_to_mapped_scale_atp_synthase_rotation",
+      "from": "mapped_scale_alpha_helix_formation",
+      "to": "mapped_scale_atp_synthase_rotation",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1e-07,
+        "right_period_seconds": 0.01
+      }
+    },
+    {
+      "id": "mapped_scale_atp_synthase_rotation_to_mapped_scale_human_breathing",
+      "from": "mapped_scale_atp_synthase_rotation",
+      "to": "mapped_scale_human_breathing",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 0.01,
+        "right_period_seconds": 4.0
+      }
+    },
+    {
+      "id": "mapped_scale_human_breathing_to_mapped_scale_circadian_sleep_wake",
+      "from": "mapped_scale_human_breathing",
+      "to": "mapped_scale_circadian_sleep_wake",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 4.0,
+        "right_period_seconds": 86400.0
+      }
+    },
+    {
+      "id": "mapped_scale_circadian_sleep_wake_to_mapped_scale_chandler_wobble",
+      "from": "mapped_scale_circadian_sleep_wake",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 86400.0,
+        "right_period_seconds": 37411200.0
+      }
+    },
+    {
+      "id": "mapped_scale_chandler_wobble_to_mapped_scale_lunar_nodal_cycle",
+      "from": "mapped_scale_chandler_wobble",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 37411200.0,
+        "right_period_seconds": 587088000.0
+      }
+    },
+    {
+      "id": "mapped_scale_lunar_nodal_cycle_to_mapped_scale_milankovitch_obliquity",
+      "from": "mapped_scale_lunar_nodal_cycle",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 587088000.0,
+        "right_period_seconds": 1293861600000.0
+      }
+    },
+    {
+      "id": "mapped_scale_milankovitch_obliquity_to_mapped_scale_spiral_arm_passage",
+      "from": "mapped_scale_milankovitch_obliquity",
+      "to": "mapped_scale_spiral_arm_passage",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1293861600000.0,
+        "right_period_seconds": 3786912000000000.0
+      }
+    },
+    {
+      "id": "mapped_scale_spiral_arm_passage_to_mapped_scale_galactic_rotation_mw",
+      "from": "mapped_scale_spiral_arm_passage",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 3786912000000000.0,
+        "right_period_seconds": 6950590034762222.0
+      }
+    }
+  ],
+  "summary": {
+    "node_count": 28,
+    "relation_count": 21,
+    "systems": [
+      "mapped_climate_feeders",
+      "mapped_human_gait",
+      "mapped_nostril_dominance",
+      "mapped_scale_alpha_helix",
+      "mapped_scale_atp_synthase",
+      "mapped_scale_chandler_wobble",
+      "mapped_scale_circadian_sleep_wake",
+      "mapped_scale_galactic_rotation",
+      "mapped_scale_human_breathing",
+      "mapped_scale_lunar_nodal",
+      "mapped_scale_milankovitch_obliquity",
+      "mapped_scale_molecular_vibration",
+      "mapped_scale_spiral_arm_passage",
+      "mapped_solar_hemispheres",
+      "mapped_tides"
+    ]
+  }
+}

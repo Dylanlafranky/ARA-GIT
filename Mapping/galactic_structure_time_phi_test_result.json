@@ -1,0 +1,506 @@
+{
+  "date": "2026-05-24",
+  "question": "Is galactic time-through-structure phi-like while the rotation carrier remains ARA 1.0?",
+  "carrier": {
+    "radius_kpc": 8.48,
+    "velocity_km_s": 236.54,
+    "omega_sun_km_s_kpc": 27.8938679245283,
+    "orbital_period_myr": 220.25090738085981,
+    "carrier_ara": 1.0
+  },
+  "phi_targets": {
+    "bar_omega_for_phi_ratio_km_s_kpc": 45.13322637958728,
+    "four_arm_spiral_omega_for_crossing_1_over_phi_km_s_kpc": 16.61056132963148,
+    "four_arm_spiral_crossing_period_target_myr": 136.12254681437645,
+    "two_arm_spiral_omega_for_crossing_1_over_phi_km_s_kpc": 5.3272547347346615,
+    "two_arm_spiral_crossing_period_target_myr": 136.12254681437645
+  },
+  "summary": {
+    "best_measured_four_arm_spiral": {
+      "name": "slow_density_wave_broad_upper",
+      "omega_km_s_kpc": 17.0,
+      "crossing_period_myr": 140.98871409360407,
+      "crossing_over_orbit": 0.6401277332756007,
+      "distance_to_1_over_phi": 0.022093744525705894
+    },
+    "best_measured_bar": {
+      "name": "near_side_gaia_vvv",
+      "omega_km_s_kpc": 41.0,
+      "omega_over_solar": 1.4698571066204449,
+      "pattern_period_myr": 149.84511513998095,
+      "pattern_period_over_orbit": 0.6803382420616658,
+      "distance_to_phi_speed_ratio": 0.14817688212945002
+    },
+    "four_arm_spiral_phi_target_inside_literature_band": true,
+    "bar_phi_target_inside_broad_systematic_band": true,
+    "strict_central_values_support_phi": false
+  },
+  "interpretation": {
+    "short_read": "The structure layer is more phi-plausible than the circular carrier, but this is not a clean hit. A four-arm spiral crossing becomes exactly P_orb/phi if the spiral pattern speed is about 16.6 km/s/kpc; that sits near the slow-density-wave literature band. The measured bar central value is sub-phi, though its broad systematic range can overlap the phi target. The strict result is: carrier=1.0 confirmed; structure-time phi remains plausible but unproven.",
+    "leakage_guard": "The exact phi-target rows are included as derived targets only and are excluded from best-measured summaries."
+  },
+  "sources": [
+    {
+      "name": "Gaia DR3 Cepheid rotation curve",
+      "url": "https://academic.oup.com/mnras/article/546/2/stag011/8416425",
+      "used_for": "local circular carrier period and omega_sun"
+    },
+    {
+      "name": "Vallee 2021 low density-wave spiral pattern speed",
+      "url": "https://academic.oup.com/mnras/article/506/1/523/6296651",
+      "used_for": "slow spiral pattern speed estimates and arm passage framing"
+    },
+    {
+      "name": "Hunt et al. 2018 Gaia spiral arm crossings",
+      "url": "https://academic.oup.com/mnras/article/480/3/3132/5063587",
+      "used_for": "20 +/- 3 km/s/kpc inferred arm and local-arm near-LSR note"
+    },
+    {
+      "name": "Sanders et al. 2019 Milky Way bar pattern speed",
+      "url": "https://academic.oup.com/mnras/article/488/4/4552/5533338",
+      "used_for": "31 and 41 km/s/kpc bar pattern speed candidates"
+    },
+    {
+      "name": "Shen & Zheng 2020 bar and spiral review",
+      "url": "https://arxiv.org/abs/2012.10130",
+      "used_for": "35-40 km/s/kpc bar pattern speed review range"
+    }
+  ],
+  "spiral_four_arm": [
+    {
+      "name": "slow_density_wave_low",
+      "omega_km_s_kpc": 12.0,
+      "source": "Vallee 2021/2022 low density-wave estimate range",
+      "notes": "Low spiral-pattern-speed density-wave end.",
+      "arms": 4,
+      "pattern_period_myr": 511.9708100616016,
+      "crossing_period_myr": 96.63553500494987,
+      "crossing_over_orbit": 0.4387520403620715,
+      "orbit_over_crossing": 2.279191680054114,
+      "distance_crossing_over_orbit_to_inv_phi": 0.1792819483878233,
+      "distance_orbit_over_crossing_to_phi": 0.661157691304219,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.1792819483878233
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "2",
+        "target": 2.0,
+        "abs_error": 0.2791916800541139
+      }
+    },
+    {
+      "name": "slow_density_wave_upper",
+      "omega_km_s_kpc": 15.0,
+      "source": "Vallee 2021 MNRAS discussion",
+      "notes": "Text reports density-wave speed appears <=15 km/s/kpc.",
+      "arms": 4,
+      "pattern_period_myr": 409.57664804928123,
+      "crossing_period_myr": 119.11960314584914,
+      "crossing_over_orbit": 0.5408359246387415,
+      "orbit_over_crossing": 1.8489896000676418,
+      "distance_crossing_over_orbit_to_inv_phi": 0.07719806411115326,
+      "distance_orbit_over_crossing_to_phi": 0.2309556113177469,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.07719806411115326
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "2",
+        "target": 2.0,
+        "abs_error": 0.1510103999323582
+      }
+    },
+    {
+      "name": "slow_density_wave_broad_upper",
+      "omega_km_s_kpc": 17.0,
+      "source": "Vallee 2021/2022 abstracted range",
+      "notes": "Published abstract/range reports density-wave speed near 12-17 km/s/kpc.",
+      "arms": 4,
+      "pattern_period_myr": 361.39116004348347,
+      "crossing_period_myr": 140.98871409360407,
+      "crossing_over_orbit": 0.6401277332756007,
+      "orbit_over_crossing": 1.5621882134099943,
+      "distance_crossing_over_orbit_to_inv_phi": 0.022093744525705894,
+      "distance_orbit_over_crossing_to_phi": 0.05584577533990065,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.022093744525705894
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "phi",
+        "target": 1.618033988749895,
+        "abs_error": 0.05584577533990065
+      }
+    },
+    {
+      "name": "phi_target_four_arm",
+      "omega_km_s_kpc": 16.61056132963148,
+      "source": "derived from P_cross/P_orb = 1/phi for m=4",
+      "notes": "This is the exact four-arm phi-through-structure target, not a measurement.",
+      "arms": 4,
+      "pattern_period_myr": 369.8640641228421,
+      "crossing_period_myr": 136.12254681437642,
+      "crossing_over_orbit": 0.6180339887498947,
+      "orbit_over_crossing": 1.6180339887498951,
+      "distance_crossing_over_orbit_to_inv_phi": 1.1102230246251565e-16,
+      "distance_orbit_over_crossing_to_phi": 2.220446049250313e-16,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 1.1102230246251565e-16
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "phi",
+        "target": 1.618033988749895,
+        "abs_error": 2.220446049250313e-16
+      }
+    },
+    {
+      "name": "gaia_ridge_arm",
+      "omega_km_s_kpc": 20.0,
+      "sigma_km_s_kpc": 3.0,
+      "source": "Hunt et al. 2018 Gaia ridge spiral-arm crossing model",
+      "notes": "Estimated pattern speed for one inferred arm from Gaia velocity ridges.",
+      "arms": 4,
+      "pattern_period_myr": 307.18248603696094,
+      "crossing_period_myr": 194.57032279604337,
+      "crossing_over_orbit": 0.8834030475052285,
+      "orbit_over_crossing": 1.1319861334235226,
+      "distance_crossing_over_orbit_to_inv_phi": 0.2653690587553337,
+      "distance_orbit_over_crossing_to_phi": 0.4860478553263723,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.11659695249477153
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.1319861334235226
+      }
+    },
+    {
+      "name": "open_cluster_apogee",
+      "omega_km_s_kpc": 23.0,
+      "source": "Martinez-Barbosa et al. open-cluster/APOGEE estimate",
+      "notes": "Open-cluster/giant-star pattern-speed estimate.",
+      "arms": 4,
+      "pattern_period_myr": 267.11520524953124,
+      "crossing_period_myr": 313.8442748907746,
+      "crossing_over_orbit": 1.4249397590361448,
+      "orbit_over_crossing": 0.7017840534370507,
+      "distance_crossing_over_orbit_to_inv_phi": 0.80690577028625,
+      "distance_orbit_over_crossing_to_phi": 0.9162499353128442,
+      "nearest_for_crossing_over_orbit": {
+        "name": "sqrt2",
+        "target": 1.4142135623730951,
+        "abs_error": 0.010726196663049636
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.08375006468715596
+      }
+    },
+    {
+      "name": "local_arm_corotating",
+      "omega_km_s_kpc": 29.0,
+      "source": "Hunt et al. 2018 local-arm near-LSR pattern-speed note",
+      "notes": "Local-arm/spur-like structure with pattern speed similar to the local standard of rest.",
+      "arms": 4,
+      "pattern_period_myr": 211.8499903703179,
+      "crossing_period_myr": 1388.5434336851959,
+      "crossing_over_orbit": 6.304371002132192,
+      "orbit_over_crossing": 0.15862010653589254,
+      "distance_crossing_over_orbit_to_inv_phi": 5.686337013382297,
+      "distance_orbit_over_crossing_to_phi": 1.4594138822140024,
+      "nearest_for_crossing_over_orbit": {
+        "name": "2",
+        "target": 2.0,
+        "abs_error": 4.304371002132192
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.45941388221400226
+      }
+    }
+  ],
+  "spiral_two_arm": [
+    {
+      "name": "slow_density_wave_low",
+      "omega_km_s_kpc": 12.0,
+      "source": "Vallee 2021/2022 low density-wave estimate range",
+      "notes": "Low spiral-pattern-speed density-wave end.",
+      "arms": 2,
+      "pattern_period_myr": 511.9708100616016,
+      "crossing_period_myr": 193.27107000989974,
+      "crossing_over_orbit": 0.877504080724143,
+      "orbit_over_crossing": 1.139595840027057,
+      "distance_crossing_over_orbit_to_inv_phi": 0.2594700919742482,
+      "distance_orbit_over_crossing_to_phi": 0.47843814872283796,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.12249591927585701
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.13959584002705694
+      }
+    },
+    {
+      "name": "slow_density_wave_upper",
+      "omega_km_s_kpc": 15.0,
+      "source": "Vallee 2021 MNRAS discussion",
+      "notes": "Text reports density-wave speed appears <=15 km/s/kpc.",
+      "arms": 2,
+      "pattern_period_myr": 409.57664804928123,
+      "crossing_period_myr": 238.23920629169828,
+      "crossing_over_orbit": 1.081671849277483,
+      "orbit_over_crossing": 0.9244948000338209,
+      "distance_crossing_over_orbit_to_inv_phi": 0.46363786052758826,
+      "distance_orbit_over_crossing_to_phi": 0.693539188716074,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.08167184927748306
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.0755051999661791
+      }
+    },
+    {
+      "name": "slow_density_wave_broad_upper",
+      "omega_km_s_kpc": 17.0,
+      "source": "Vallee 2021/2022 abstracted range",
+      "notes": "Published abstract/range reports density-wave speed near 12-17 km/s/kpc.",
+      "arms": 2,
+      "pattern_period_myr": 361.39116004348347,
+      "crossing_period_myr": 281.97742818720815,
+      "crossing_over_orbit": 1.2802554665512014,
+      "orbit_over_crossing": 0.7810941067049971,
+      "distance_crossing_over_orbit_to_inv_phi": 0.6622214778013066,
+      "distance_orbit_over_crossing_to_phi": 0.8369398820448978,
+      "nearest_for_crossing_over_orbit": {
+        "name": "sqrt2",
+        "target": 1.4142135623730951,
+        "abs_error": 0.13395809582189377
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.16306011795510233
+      }
+    },
+    {
+      "name": "phi_target_four_arm",
+      "omega_km_s_kpc": 5.3272547347346615,
+      "source": "derived from P_cross/P_orb = 1/phi for m=4",
+      "notes": "This is the exact four-arm phi-through-structure target, not a measurement.",
+      "arms": 2,
+      "pattern_period_myr": 1153.2487231521923,
+      "crossing_period_myr": 136.12254681437645,
+      "crossing_over_orbit": 0.6180339887498949,
+      "orbit_over_crossing": 1.618033988749895,
+      "distance_crossing_over_orbit_to_inv_phi": 1.1102230246251565e-16,
+      "distance_orbit_over_crossing_to_phi": 0.0,
+      "nearest_for_crossing_over_orbit": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 1.1102230246251565e-16
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "phi",
+        "target": 1.618033988749895,
+        "abs_error": 0.0
+      }
+    },
+    {
+      "name": "gaia_ridge_arm",
+      "omega_km_s_kpc": 20.0,
+      "sigma_km_s_kpc": 3.0,
+      "source": "Hunt et al. 2018 Gaia ridge spiral-arm crossing model",
+      "notes": "Estimated pattern speed for one inferred arm from Gaia velocity ridges.",
+      "arms": 2,
+      "pattern_period_myr": 307.18248603696094,
+      "crossing_period_myr": 389.14064559208674,
+      "crossing_over_orbit": 1.766806095010457,
+      "orbit_over_crossing": 0.5659930667117613,
+      "distance_crossing_over_orbit_to_inv_phi": 1.1487721062605623,
+      "distance_orbit_over_crossing_to_phi": 1.0520409220381337,
+      "nearest_for_crossing_over_orbit": {
+        "name": "phi",
+        "target": 1.618033988749895,
+        "abs_error": 0.14877210626056203
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.052040922038133486
+      }
+    },
+    {
+      "name": "open_cluster_apogee",
+      "omega_km_s_kpc": 23.0,
+      "source": "Martinez-Barbosa et al. open-cluster/APOGEE estimate",
+      "notes": "Open-cluster/giant-star pattern-speed estimate.",
+      "arms": 2,
+      "pattern_period_myr": 267.11520524953124,
+      "crossing_period_myr": 627.6885497815492,
+      "crossing_over_orbit": 2.8498795180722896,
+      "orbit_over_crossing": 0.3508920267185254,
+      "distance_crossing_over_orbit_to_inv_phi": 2.2318455293223947,
+      "distance_orbit_over_crossing_to_phi": 1.2671419620313695,
+      "nearest_for_crossing_over_orbit": {
+        "name": "2",
+        "target": 2.0,
+        "abs_error": 0.8498795180722896
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.2671419620313694
+      }
+    },
+    {
+      "name": "local_arm_corotating",
+      "omega_km_s_kpc": 29.0,
+      "source": "Hunt et al. 2018 local-arm near-LSR pattern-speed note",
+      "notes": "Local-arm/spur-like structure with pattern speed similar to the local standard of rest.",
+      "arms": 2,
+      "pattern_period_myr": 211.8499903703179,
+      "crossing_period_myr": 2777.0868673703917,
+      "crossing_over_orbit": 12.608742004264384,
+      "orbit_over_crossing": 0.07931005326794627,
+      "distance_crossing_over_orbit_to_inv_phi": 11.990708015514489,
+      "distance_orbit_over_crossing_to_phi": 1.5387239354819486,
+      "nearest_for_crossing_over_orbit": {
+        "name": "2",
+        "target": 2.0,
+        "abs_error": 10.608742004264384
+      },
+      "nearest_for_orbit_over_crossing": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.5387239354819485
+      }
+    }
+  ],
+  "bar": [
+    {
+      "name": "far_side_all_bar",
+      "omega_km_s_kpc": 31.0,
+      "sigma_km_s_kpc": 1.0,
+      "source": "Sanders et al. 2019 all-region bar fit",
+      "notes": "Authors report this fit has an inconsistent Galactic-centre position/velocity.",
+      "pattern_period_myr": 198.18224905610384,
+      "omega_over_solar": 1.1113553732983852,
+      "pattern_period_over_orbit": 0.8998021911138161,
+      "distance_omega_ratio_to_phi": 0.5066786154515097,
+      "distance_period_ratio_to_inv_phi": 0.2817682023639213,
+      "nearest_for_omega_ratio": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.11135537329838519
+      },
+      "nearest_for_period_ratio": {
+        "name": "1",
+        "target": 1.0,
+        "abs_error": 0.1001978088861839
+      }
+    },
+    {
+      "name": "review_low",
+      "omega_km_s_kpc": 35.0,
+      "source": "Shen & Zheng 2020 review low end",
+      "notes": "Review range for bar pattern rotation speed.",
+      "pattern_period_myr": 175.5328491639777,
+      "omega_over_solar": 1.254756066627209,
+      "pattern_period_over_orbit": 0.7969676549865229,
+      "distance_omega_ratio_to_phi": 0.36327792212268584,
+      "distance_period_ratio_to_inv_phi": 0.1789336662366281,
+      "nearest_for_omega_ratio": {
+        "name": "sqrt2",
+        "target": 1.4142135623730951,
+        "abs_error": 0.15945749574588608
+      },
+      "nearest_for_period_ratio": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.1789336662366281
+      }
+    },
+    {
+      "name": "review_high",
+      "omega_km_s_kpc": 40.0,
+      "source": "Shen & Zheng 2020 review high end",
+      "notes": "Review range for bar pattern rotation speed.",
+      "pattern_period_myr": 153.59124301848047,
+      "omega_over_solar": 1.4340069332882388,
+      "pattern_period_over_orbit": 0.6973466981132075,
+      "distance_omega_ratio_to_phi": 0.1840270554616561,
+      "distance_period_ratio_to_inv_phi": 0.0793127093633127,
+      "nearest_for_omega_ratio": {
+        "name": "sqrt2",
+        "target": 1.4142135623730951,
+        "abs_error": 0.01979337091514366
+      },
+      "nearest_for_period_ratio": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.0793127093633127
+      }
+    },
+    {
+      "name": "near_side_gaia_vvv",
+      "omega_km_s_kpc": 41.0,
+      "sigma_km_s_kpc": 3.0,
+      "source": "Sanders et al. 2019 near-side Gaia DR2/VVV fit",
+      "notes": "More reliable near-side bar measurement in the paper; systematics dominate at about 5-10 km/s/kpc.",
+      "pattern_period_myr": 149.84511513998095,
+      "omega_over_solar": 1.4698571066204449,
+      "pattern_period_over_orbit": 0.6803382420616658,
+      "distance_omega_ratio_to_phi": 0.14817688212945002,
+      "distance_period_ratio_to_inv_phi": 0.06230425331177103,
+      "nearest_for_omega_ratio": {
+        "name": "sqrt2",
+        "target": 1.4142135623730951,
+        "abs_error": 0.05564354424734974
+      },
+      "nearest_for_period_ratio": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 0.06230425331177103
+      }
+    },
+    {
+      "name": "phi_target_bar",
+      "omega_km_s_kpc": 45.13322637958728,
+      "source": "derived from Omega_bar/Omega_sun = phi",
+      "notes": "Exact phi bar-speed target, not a measurement.",
+      "pattern_period_myr": 136.12254681437645,
+      "omega_over_solar": 1.618033988749895,
+      "pattern_period_over_orbit": 0.6180339887498949,
+      "distance_omega_ratio_to_phi": 0.0,
+      "distance_period_ratio_to_inv_phi": 1.1102230246251565e-16,
+      "nearest_for_omega_ratio": {
+        "name": "phi",
+        "target": 1.618033988749895,
+        "abs_error": 0.0
+      },
+      "nearest_for_period_ratio": {
+        "name": "1/phi",
+        "target": 0.6180339887498948,
+        "abs_error": 1.1102230246251565e-16
+      }
+    }
+  ]
+}

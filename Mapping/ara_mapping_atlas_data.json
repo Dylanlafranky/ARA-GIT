@@ -5,66 +5,136 @@
   "ara_boundaries": [
     {
       "name": "space",
+      "label": "0 space",
       "value": 0.0
     },
     {
       "name": "lower_wall",
+      "label": "1/4 anti-phi",
       "value": 0.25
     },
     {
       "name": "balance",
+      "label": "1 balance",
       "value": 1.0
     },
     {
       "name": "phi",
+      "label": "phi",
       "value": 1.618033988749895
     },
     {
       "name": "upper_wall",
+      "label": "7/4 donor wall",
       "value": 1.75
     },
     {
       "name": "time",
+      "label": "2 time",
       "value": 2.0
+    }
+  ],
+  "ara_axis_markers": [
+    {
+      "name": "space",
+      "label": "0",
+      "value": 0.0,
+      "kind": "terminal"
+    },
+    {
+      "name": "anti_phi_quarter",
+      "label": "1/4 anti-phi",
+      "value": 0.25,
+      "kind": "quarter"
+    },
+    {
+      "name": "half",
+      "label": "1/2",
+      "value": 0.5,
+      "kind": "quarter"
+    },
+    {
+      "name": "three_quarter",
+      "label": "3/4",
+      "value": 0.75,
+      "kind": "quarter"
+    },
+    {
+      "name": "balance",
+      "label": "1 balance",
+      "value": 1.0,
+      "kind": "balance"
+    },
+    {
+      "name": "five_quarter",
+      "label": "5/4",
+      "value": 1.25,
+      "kind": "quarter"
+    },
+    {
+      "name": "three_half",
+      "label": "3/2",
+      "value": 1.5,
+      "kind": "quarter"
+    },
+    {
+      "name": "phi",
+      "label": "phi",
+      "value": 1.618033988749895,
+      "kind": "phi"
+    },
+    {
+      "name": "seven_quarter",
+      "label": "7/4",
+      "value": 1.75,
+      "kind": "quarter"
+    },
+    {
+      "name": "time",
+      "label": "2",
+      "value": 2.0,
+      "kind": "terminal"
     }
   ],
   "sources": [
     "archive\\early_visualizations\\temporal_coordinates_3d.html",
     "TheFormula\\systems_map_v3_data.js",
-    "TheFormula\\ara_state_geometry_data.js"
+    "TheFormula\\ara_state_geometry_data.js",
+    "Mapping\\ara_mapping_extensions.json"
   ],
   "summary": {
-    "node_count": 206,
-    "relation_count": 235,
+    "node_count": 234,
+    "relation_count": 270,
     "triangle_count": 6,
     "layers": {
       "catalog": 135,
+      "mapped_extension": 28,
       "measured_fit": 16,
       "state_geometry": 55
     },
     "ara_classes": {
-      "balance_clock": 84,
-      "consumer": 15,
+      "balance_clock": 99,
+      "consumer": 16,
       "coupled_extreme": 21,
       "donor_wall": 3,
-      "engine_phi": 9,
+      "engine_phi": 14,
       "overflow": 23,
-      "resonant_pair": 9,
-      "shock_absorber": 23,
+      "resonant_pair": 10,
+      "shock_absorber": 29,
       "snap": 19
     },
     "scale_domains": {
-      "cosmic": 4,
-      "daily_biological": 17,
-      "earth_climate": 72,
-      "geological": 12,
-      "human_fast": 81,
-      "micro_fast": 15,
-      "quantum_atomic": 5
+      "cosmic": 6,
+      "daily_biological": 20,
+      "earth_climate": 82,
+      "geological": 13,
+      "human_fast": 91,
+      "micro_fast": 16,
+      "quantum_atomic": 6
     },
     "ara_position_statuses": {
       "above_two_diagnostic": 45,
-      "bounded_position": 161
+      "bounded_position": 189
     },
     "systems": {
       "catalog_action_pot": 7,
@@ -98,6 +168,21 @@
       "catalog_thunderstorm": 4,
       "catalog_tides": 2,
       "catalog_ventilator": 5,
+      "mapped_climate_feeders": 2,
+      "mapped_human_gait": 8,
+      "mapped_nostril_dominance": 2,
+      "mapped_scale_alpha_helix": 1,
+      "mapped_scale_atp_synthase": 1,
+      "mapped_scale_chandler_wobble": 1,
+      "mapped_scale_circadian_sleep_wake": 1,
+      "mapped_scale_galactic_rotation": 1,
+      "mapped_scale_human_breathing": 1,
+      "mapped_scale_lunar_nodal": 1,
+      "mapped_scale_milankovitch_obliquity": 1,
+      "mapped_scale_molecular_vibration": 1,
+      "mapped_scale_spiral_arm_passage": 1,
+      "mapped_solar_hemispheres": 3,
+      "mapped_tides": 3,
       "measured_ecg": 6,
       "measured_enso": 4,
       "measured_eq": 2,
@@ -137,6 +222,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -167,6 +253,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.368
       },
@@ -197,6 +284,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.0001
       },
@@ -227,6 +315,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.018033988749894814
       },
@@ -257,6 +346,7 @@
       "scale_domain": "quantum_atomic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -287,6 +377,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.35
       },
@@ -317,6 +408,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.0047
       },
@@ -347,6 +439,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.30000000000000004
       },
@@ -377,6 +470,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.043
       },
@@ -407,6 +501,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.020000000000000018
       },
@@ -437,6 +532,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.018033988749894814
       },
@@ -467,6 +563,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "upper_wall",
+        "label": "7/4 donor wall",
         "value": 1.75,
         "distance": 0.020000000000000018
       },
@@ -497,6 +594,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.2680339887498948
       },
@@ -527,6 +625,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.008033988749894805
       },
@@ -557,6 +656,7 @@
       "scale_domain": "quantum_atomic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -587,6 +687,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 2.54e-07
       },
@@ -617,6 +718,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 3.32e-15
       },
@@ -647,6 +749,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.04799999999999999
       },
@@ -677,6 +780,7 @@
       "scale_domain": "cosmic",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 2.03e-24
       },
@@ -707,6 +811,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.06
       },
@@ -737,6 +842,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.14000000000000012
       },
@@ -767,6 +873,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.33
       },
@@ -797,6 +904,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.003
       },
@@ -827,6 +935,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.2400000000000002
       },
@@ -857,6 +966,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 1.67e-07
       },
@@ -887,6 +997,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.25
       },
@@ -917,6 +1028,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.32999999999999996
       },
@@ -947,6 +1059,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.21000000000000002
       },
@@ -977,6 +1090,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.27
       },
@@ -1007,6 +1121,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.35
       },
@@ -1037,6 +1152,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.048966011250105135
       },
@@ -1067,6 +1183,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.17803398874989496
       },
@@ -1097,6 +1214,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.056
       },
@@ -1127,6 +1245,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.016999999999999904
       },
@@ -1157,6 +1276,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.35
       },
@@ -1187,6 +1307,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.111
       },
@@ -1217,6 +1338,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1247,6 +1369,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.218033988749895
       },
@@ -1277,6 +1400,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1307,6 +1431,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1337,6 +1462,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.218033988749895
       },
@@ -1367,6 +1493,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.04999999999999999
       },
@@ -1397,6 +1524,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.018033988749894814
       },
@@ -1427,6 +1555,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.17999999999999994
       },
@@ -1457,6 +1586,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -1487,6 +1617,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -1517,6 +1648,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.25
       },
@@ -1547,6 +1679,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.238033988749895
       },
@@ -1577,6 +1710,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -1607,6 +1741,7 @@
       "scale_domain": "cosmic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1637,6 +1772,7 @@
       "scale_domain": "cosmic",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.6699999999999999
       },
@@ -1667,6 +1803,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 2.33
       },
@@ -1697,6 +1834,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 12.7
       },
@@ -1727,6 +1865,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1757,6 +1896,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1787,6 +1927,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -1817,6 +1958,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -1847,6 +1989,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 19998.0
       },
@@ -1877,6 +2020,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 124998.0
       },
@@ -1907,6 +2051,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -1937,6 +2082,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.5710000000000002
       },
@@ -1967,6 +2113,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.5710000000000002
       },
@@ -1997,6 +2144,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.976
       },
@@ -2027,6 +2175,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.3330000000000002
       },
@@ -2057,6 +2206,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1379999999999999
       },
@@ -2087,6 +2237,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.18199999999999994
       },
@@ -2117,6 +2268,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.048966011250105135
       },
@@ -2147,6 +2299,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -2177,6 +2330,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.3330000000000002
       },
@@ -2207,6 +2361,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.3330000000000002
       },
@@ -2237,6 +2392,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -2267,6 +2423,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 5.857
       },
@@ -2297,6 +2454,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 7.0
       },
@@ -2327,6 +2485,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -2357,6 +2516,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 3.333
       },
@@ -2387,6 +2547,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 2.667
       },
@@ -2417,6 +2578,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -2447,6 +2609,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -2477,6 +2640,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 19.0
       },
@@ -2507,6 +2671,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.15400000000000003
       },
@@ -2537,6 +2702,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2567,6 +2733,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2597,6 +2764,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2627,6 +2795,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.016000000000000014
       },
@@ -2657,6 +2826,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2687,6 +2857,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2717,6 +2888,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "upper_wall",
+        "label": "7/4 donor wall",
         "value": 1.75,
         "distance": 0.10699999999999998
       },
@@ -2747,6 +2919,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 19.25
       },
@@ -2777,6 +2950,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -2807,6 +2981,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.248
       },
@@ -2837,6 +3012,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.2350000000000001
       },
@@ -2867,6 +3043,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 7.0
       },
@@ -2897,6 +3074,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2927,6 +3105,7 @@
       "scale_domain": "quantum_atomic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2957,6 +3136,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -2987,6 +3167,7 @@
       "scale_domain": "quantum_atomic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3017,6 +3198,7 @@
       "scale_domain": "quantum_atomic",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3047,6 +3229,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 2359998.0
       },
@@ -3077,6 +3260,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 47799998.0
       },
@@ -3107,6 +3291,7 @@
       "scale_domain": "cosmic",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 1.41e+38
       },
@@ -3137,6 +3322,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.010999999999999899
       },
@@ -3167,6 +3353,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.14900000000000002
       },
@@ -3197,6 +3384,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 2.556
       },
@@ -3227,6 +3415,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.030999999999999917
       },
@@ -3257,6 +3446,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3287,6 +3477,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 5.375
       },
@@ -3317,6 +3508,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.06003398874989485
       },
@@ -3347,6 +3539,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.3330000000000002
       },
@@ -3377,6 +3570,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -3407,6 +3601,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 47.0
       },
@@ -3437,6 +3632,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 28.25
       },
@@ -3467,6 +3663,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 11.333
       },
@@ -3497,6 +3694,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 6.0
       },
@@ -3527,6 +3725,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 13.0
       },
@@ -3557,6 +3756,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 18.0
       },
@@ -3587,6 +3787,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3617,6 +3818,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -3647,6 +3849,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -3677,6 +3880,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1180339887498949
       },
@@ -3707,6 +3911,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.040999999999999925
       },
@@ -3737,6 +3942,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3767,6 +3973,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -3797,6 +4004,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0
       },
@@ -3827,6 +4035,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.062000000000000055
       },
@@ -3857,6 +4066,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 7.090999999999999
       },
@@ -3887,6 +4097,7 @@
       "scale_domain": "micro_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 8.0
       },
@@ -3917,6 +4128,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.22199999999999998
       },
@@ -3947,6 +4159,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.17599999999999993
       },
@@ -3977,6 +4190,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -4007,6 +4221,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 1.0
       },
@@ -4037,6 +4252,7 @@
       "scale_domain": "daily_biological",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.5
       },
@@ -4067,6 +4283,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.28503398874989494
       },
@@ -4097,6 +4314,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 17.0
       },
@@ -4127,6 +4345,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.5
       },
@@ -4157,6 +4376,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 10.0
       },
@@ -4187,6 +4407,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "upper_wall",
+        "label": "7/4 donor wall",
         "value": 1.75,
         "distance": 0.050000000000000044
       },
@@ -4221,6 +4442,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4255,6 +4477,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.04999999999999999
       },
@@ -4289,6 +4512,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4323,6 +4547,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.04999999999999999
       },
@@ -4357,6 +4582,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4391,6 +4617,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4425,6 +4652,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4459,6 +4687,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.25
       },
@@ -4493,6 +4722,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4527,6 +4757,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.20000000000000007
       },
@@ -4561,6 +4792,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.10000000000000009
       },
@@ -4595,6 +4827,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4629,6 +4862,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.0
       },
@@ -4663,6 +4897,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "lower_wall",
+        "label": "1/4 anti-phi",
         "value": 0.25,
         "distance": 0.35
       },
@@ -4697,6 +4932,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "space",
+        "label": "0 space",
         "value": 0.0,
         "distance": 0.1
       },
@@ -4731,6 +4967,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.22849199999999992
       },
@@ -4771,6 +5008,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.151675
       },
@@ -4811,6 +5049,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.06172899999999992
       },
@@ -4851,6 +5090,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.026118000000000086
       },
@@ -4891,6 +5131,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.294756
       },
@@ -4931,6 +5172,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.06727799999999995
       },
@@ -4971,6 +5213,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.12467500000000009
       },
@@ -5011,6 +5254,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.16556799999999994
       },
@@ -5051,6 +5295,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.202866
       },
@@ -5091,6 +5336,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.14356999999999998
       },
@@ -5131,6 +5377,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1123559999999999
       },
@@ -5171,6 +5418,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0699860000000001
       },
@@ -5211,6 +5459,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.16850600000000004
       },
@@ -5251,6 +5500,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.13927099999999992
       },
@@ -5291,6 +5541,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.11371599999999993
       },
@@ -5331,6 +5582,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.11898000000000009
       },
@@ -5371,6 +5623,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.251922
       },
@@ -5411,6 +5664,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1300889999999999
       },
@@ -5451,6 +5705,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.0680940000000001
       },
@@ -5491,6 +5746,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1446719999999999
       },
@@ -5531,6 +5787,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.080538
       },
@@ -5571,6 +5828,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.10682999999999998
       },
@@ -5611,6 +5869,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.11850800000000006
       },
@@ -5651,6 +5910,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.05853100000000011
       },
@@ -5691,6 +5951,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.13271900000000003
       },
@@ -5731,6 +5992,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.13191299999999995
       },
@@ -5771,6 +6033,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.12622899999999992
       },
@@ -5811,6 +6074,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.12682799999999994
       },
@@ -5851,6 +6115,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.282346
       },
@@ -5891,6 +6156,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.3074379887498948
       },
@@ -5931,6 +6197,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.28044800000000003
       },
@@ -5971,6 +6238,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1515519999999999
       },
@@ -6011,6 +6279,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.3042879999999999
       },
@@ -6051,6 +6320,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.183187
       },
@@ -6091,6 +6361,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1668320000000001
       },
@@ -6131,6 +6402,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.104819
       },
@@ -6171,6 +6443,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.01535400000000009
       },
@@ -6211,6 +6484,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.025012000000000034
       },
@@ -6251,6 +6525,7 @@
       "scale_domain": "earth_climate",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.25807099999999994
       },
@@ -6291,6 +6566,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.01775900000000008
       },
@@ -6331,6 +6607,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.1653339887498948
       },
@@ -6371,6 +6648,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.12072100000000008
       },
@@ -6411,6 +6689,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.025868000000000002
       },
@@ -6451,6 +6730,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.1071089999999999
       },
@@ -6491,6 +6771,7 @@
       "scale_domain": "geological",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.22627700000000006
       },
@@ -6531,6 +6812,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.17537800000000003
       },
@@ -6571,6 +6853,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.14441400000000004
       },
@@ -6611,6 +6894,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.151524
       },
@@ -6651,6 +6935,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "time",
+        "label": "2 time",
         "value": 2.0,
         "distance": 0.110603
       },
@@ -6691,6 +6976,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.22012500000000002
       },
@@ -6731,6 +7017,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.2323519999999999
       },
@@ -6771,6 +7058,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.01163601125010505
       },
@@ -6811,6 +7099,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.08300998874989496
       },
@@ -6851,6 +7140,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "phi",
+        "label": "phi",
         "value": 1.618033988749895,
         "distance": 0.2380379887498949
       },
@@ -6891,6 +7181,7 @@
       "scale_domain": "human_fast",
       "nearest_boundary": {
         "name": "balance",
+        "label": "1 balance",
         "value": 1.0,
         "distance": 0.05509000000000008
       },
@@ -6911,6 +7202,974 @@
       "home_distance": 5.582846472915551,
       "amp": 0.080691,
       "energy": 0.006511015210807958
+    },
+    {
+      "id": "mapped_nasal_left_dominance_bank",
+      "name": "Nostril left/right dominance bank",
+      "system": "mapped_nostril_dominance",
+      "system_label": "Nostril Dominance",
+      "period_seconds": 5340.0,
+      "period_phi_rung": 17.836180419903734,
+      "period_log10": 3.727541257028556,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 395.0,
+      "weight_log10": 2.59659709562646,
+      "weight_label": "Dominance intervals",
+      "scale_domain": "daily_biological",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "TheFormula/ara_nasal_enso_coupled_geometry_result.json",
+      "layer": "mapped_extension",
+      "notes": "Median dominance half-cycle. Treated as balanced alternation between paired nostril banks.",
+      "orientation": "left/right alternation",
+      "relation_class": "paired_anti_phase",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_interval_minutes=89.0",
+      "source_count": 395
+    },
+    {
+      "id": "mapped_nasal_signed_full_cycle",
+      "name": "Nostril signed full cycle",
+      "system": "mapped_nostril_dominance",
+      "system_label": "Nostril Dominance",
+      "period_seconds": 11580.0,
+      "period_phi_rung": 19.44473153785864,
+      "period_log10": 4.063708559391418,
+      "ara": 1.0842696629213484,
+      "ara_class": "balance_clock",
+      "theta_deg": 86.3611859838275,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 316.0,
+      "weight_log10": 2.499687082618404,
+      "weight_label": "Signed cycles",
+      "scale_domain": "daily_biological",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.08426966292134841
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.5337643258285465,
+      "source": "TheFormula/ara_nasal_enso_coupled_geometry_result.json",
+      "layer": "mapped_extension",
+      "notes": "Two-dominance-interval cycle. ARA here is cycle symmetry ratio: signed_cycle / (2 * dominance_interval), not a raw left/right duration ratio.",
+      "interval_test_corr": 0.9922096174611574,
+      "signed_cycle_test_corr": 0.980176377454964,
+      "orientation": "full left-right-left or right-left-right cycle",
+      "relation_class": "paired_anti_phase",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_signed_cycle_minutes=193.0",
+      "source_count": 316
+    },
+    {
+      "id": "mapped_tide_m2_carrier",
+      "name": "Ocean tide M2 carrier",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 44714.16432,
+      "period_phi_rung": 22.25224952493385,
+      "period_log10": 4.650445118469636,
+      "ara": 1.138,
+      "ara_class": "balance_clock",
+      "theta_deg": 84.1908325537886,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.4040000000000001,
+      "weight_log10": 0.1473671077937865,
+      "weight_label": "Heldout low-gate range m",
+      "scale_domain": "daily_biological",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.1379999999999999
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.480033988749895,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Semi-diurnal M2 carrier. ARA uses the earlier open-ocean tide asymmetry estimate; current data confirms forced carrier plus spring-neap amplitude breathing.",
+      "orientation": "flood/ebb window",
+      "relation_class": "forced_pair",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "M2 open-ocean ARA estimate"
+    },
+    {
+      "id": "mapped_tide_spring_neap_envelope",
+      "name": "Spring-neap tide envelope",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 1275721.4016000002,
+      "period_phi_rung": 29.215870536852186,
+      "period_log10": 6.105755841345618,
+      "ara": 1.182,
+      "ara_class": "balance_clock",
+      "theta_deg": 82.49312557286893,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 0.9271462857490983,
+      "weight_log10": -0.03285173718089446,
+      "weight_label": "Fractional range change per cycle",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.18199999999999994
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.43603398874989496,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Spring-neap modulation. ARA uses prior spring-neap asymmetry estimate; amplitude breathing is measured in the 2024 NOAA station window.",
+      "orientation": "spring/neap envelope",
+      "relation_class": "forced_pair",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "spring-neap envelope ARA estimate"
+    },
+    {
+      "id": "mapped_tide_amplitude_breath_gate",
+      "name": "Tide amplitude breath gate",
+      "system": "mapped_tides",
+      "system_label": "Tides",
+      "period_seconds": 1275721.4016000002,
+      "period_phi_rung": 29.215870536852186,
+      "period_log10": 6.105755841345618,
+      "ara": 1.603443165191557,
+      "ara_class": "engine_phi",
+      "theta_deg": 69.1392085706453,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 0.852003501840711,
+      "weight_log10": -0.0695586202251169,
+      "weight_label": "High-low range difference m",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.014590823558337851
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.014590823558337851,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Measured heldout high-gate mean range divided by low-gate mean range. This maps the envelope breathing rather than the carrier tide itself.",
+      "orientation": "lunar-solar gate opening/closing",
+      "relation_class": "amplitude_breathing_gate",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "high_mean/low_mean=1.603"
+    },
+    {
+      "id": "mapped_solar_north_hemisphere",
+      "name": "Solar northern hemisphere cycle",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "period_phi_rung": 40.8020908819575,
+      "period_log10": 8.527132690685471,
+      "ara": 1.6396153846153845,
+      "ara_class": "engine_phi",
+      "theta_deg": 68.19175287775026,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 12.0,
+      "weight_log10": 1.0791812460476249,
+      "weight_label": "Detected cycles",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.021581395865489572
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.021581395865489572,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "SILSO hemispheric Catalogue B saved result. ARA is median cycle fall/rise ratio for the northern hemisphere.",
+      "orientation": "rise/fall sunspot hemisphere",
+      "relation_class": "stellar_coupled_pair",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_cycle_months=128.0",
+      "source_count": 12
+    },
+    {
+      "id": "mapped_solar_south_hemisphere",
+      "name": "Solar southern hemisphere cycle",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "period_phi_rung": 40.8020908819575,
+      "period_log10": 8.527132690685471,
+      "ara": 1.2537890504175688,
+      "ara_class": "shock_absorber",
+      "theta_deg": 79.86550470047348,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 12.0,
+      "weight_log10": 1.0791812460476249,
+      "weight_label": "Detected cycles",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.25378905041756883
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.3642449383323261,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "SILSO hemispheric Catalogue B saved result. ARA is median cycle fall/rise ratio for the southern hemisphere.",
+      "orientation": "rise/fall sunspot hemisphere",
+      "relation_class": "stellar_coupled_pair",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "median_cycle_months=128.0",
+      "source_count": 12
+    },
+    {
+      "id": "mapped_solar_ns_relaxation_gate",
+      "name": "Solar N/S relaxation gate",
+      "system": "mapped_solar_hemispheres",
+      "system_label": "Solar Hemispheres",
+      "period_seconds": 336614400.0,
+      "period_phi_rung": 40.8020908819575,
+      "period_log10": 8.527132690685471,
+      "ara": 1.6190407041059987,
+      "ara_class": "engine_phi",
+      "theta_deg": 68.72745418496366,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 0.4094410361695658,
+      "weight_log10": -0.38780863238949204,
+      "weight_label": "Relative damping per cycle",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.001006715356103749
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.001006715356103749,
+      "source": "TheFormula/ara_phi_coupling_candidate_results.json",
+      "layer": "mapped_extension",
+      "notes": "Coupling-speed diagnostic: fractional movement toward hemisphere balance per cycle is near phi in the saved heldout test.",
+      "orientation": "north/south balance relaxation",
+      "relation_class": "balance_relaxation_gate",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "fractional_toward_balance_per_cycle"
+    },
+    {
+      "id": "mapped_gait_control",
+      "name": "Gait control median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "period_phi_rung": 0.2168691829451961,
+      "period_log10": 0.045322978786657475,
+      "ara": 1.3548,
+      "ara_class": "shock_absorber",
+      "theta_deg": 76.4396127059623,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 8591.0,
+      "weight_log10": 3.9340437190355253,
+      "weight_label": "Stride count",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.2632339887498949
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.2632339887498949,
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: unimodal, narrow. Deviation from phi: 16.27%.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_stride_geometry",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 8591
+    },
+    {
+      "id": "mapped_gait_parkinsons",
+      "name": "Gait Parkinson's median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "period_phi_rung": 0.2168691829451961,
+      "period_log10": 0.045322978786657475,
+      "ara": 1.4414,
+      "ara_class": "shock_absorber",
+      "theta_deg": 73.72818874416319,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 7593.0,
+      "weight_log10": 3.880413399877917,
+      "weight_label": "Stride count",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.1766339887498949
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.1766339887498949,
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: broader, slight bimodality. Deviation from phi: 10.92%.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_stride_geometry",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 7593
+    },
+    {
+      "id": "mapped_gait_als",
+      "name": "Gait ALS median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "period_phi_rung": 0.2168691829451961,
+      "period_log10": 0.045322978786657475,
+      "ara": 1.4651,
+      "ara_class": "shock_absorber",
+      "theta_deg": 73.01935012778387,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 5193.0,
+      "weight_log10": 3.715418322595056,
+      "weight_label": "Stride count",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.15293398874989483
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.15293398874989483,
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: clear bimodal: walking peak plus secondary near 1.0-1.1. Deviation from phi: 9.45%.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_stride_geometry",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 5193
+    },
+    {
+      "id": "mapped_gait_huntingtons",
+      "name": "Gait Huntington's median",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "period_phi_rung": 0.2168691829451961,
+      "period_log10": 0.045322978786657475,
+      "ara": 1.3615,
+      "ara_class": "shock_absorber",
+      "theta_deg": 76.22273978403558,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 10148.0,
+      "weight_log10": 4.006380458549693,
+      "weight_label": "Stride count",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.25653398874989497
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.25653398874989497,
+      "source": "analysis/gait/analyze_gait_phi.py",
+      "layer": "mapped_extension",
+      "notes": "PhysioNet gaitndd raw rerun on 2026-05-24. Controlled instructed-walk data, not open-environment natural gait. Distribution shape: broad, asymmetric. Deviation from phi: 15.85%.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_stride_geometry",
+      "measurement_status": "raw_physionet_rerun_2026_05_24",
+      "source_metric": "median stance/swing",
+      "source_count": 10148
+    },
+    {
+      "id": "mapped_gait_preferred_phi_crossing",
+      "name": "Preferred walking phi crossing",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.0,
+      "period_phi_rung": 0.0,
+      "period_log10": 0.0,
+      "ara": 1.618033988749895,
+      "ara_class": "engine_phi",
+      "theta_deg": 68.75388202501894,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.27,
+      "weight_log10": 0.10380372095595687,
+      "weight_label": "Speed m/s",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.0,
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: preferred/energy-optimal walking crosses stance/swing = phi around 1.27 m/s.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_arc_anchor",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_phi_mps=1.27"
+    },
+    {
+      "id": "mapped_gait_walk_run_transition",
+      "name": "Walk-run transition",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 0.75,
+      "period_phi_rung": -0.5978283522358335,
+      "period_log10": -0.12493873660829995,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 2.2,
+      "weight_log10": 0.3424226808222063,
+      "weight_label": "Speed m/s",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: stance and swing equalize at the walk-run transition.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_arc_boundary",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_unity_mps=2.2"
+    },
+    {
+      "id": "mapped_gait_run_mirror_phi_crossing",
+      "name": "Sustainable running mirror-phi crossing",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 0.65,
+      "period_phi_rung": -0.8952043438232153,
+      "period_log10": -0.18708664335714442,
+      "ara": 0.6180339887498948,
+      "ara_class": "consumer",
+      "theta_deg": 111.24611797498108,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 3.85,
+      "weight_log10": 0.5854607295085007,
+      "weight_label": "Speed m/s",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "lower_wall",
+        "label": "1/4 anti-phi",
+        "value": 0.25,
+        "distance": 0.3680339887498948
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.0,
+      "source": "analysis/gait/analyze_running_phi.py",
+      "layer": "mapped_extension",
+      "notes": "Literature locomotion arc: the running-side mirror of preferred walking crosses stance/swing = 1/phi around 3.85 m/s. This marks the sustainable running branch, not the first moment the body should switch from walking to running.",
+      "orientation": "stance/swing",
+      "relation_class": "locomotion_arc_anchor",
+      "measurement_status": "literature_curve_saved_result",
+      "source_metric": "speed_at_inverse_phi_mps=3.85"
+    },
+    {
+      "id": "mapped_gait_als_collapse_peak",
+      "name": "ALS secondary collapse peak",
+      "system": "mapped_human_gait",
+      "system_label": "Human Gait",
+      "period_seconds": 1.11,
+      "period_phi_rung": 0.2168691829451961,
+      "period_log10": 0.045322978786657475,
+      "ara": 1.05,
+      "ara_class": "balance_clock",
+      "theta_deg": 87.80487804878048,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.0,
+      "weight_log10": 0.0,
+      "weight_label": "Collapse peak marker",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.050000000000000044
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.5680339887498949,
+      "source": "GAIT_LOCOMOTION_ARC.md",
+      "layer": "mapped_extension",
+      "notes": "Approximate secondary peak reported near 1.0-1.1 in ALS gait. This is mapped as a diagnostic rung-collapse marker, not a precise fitted coordinate.",
+      "orientation": "stance/swing",
+      "relation_class": "rung_collapse_marker",
+      "measurement_status": "approximate_from_saved_writeup",
+      "source_metric": "secondary peak near 1.0-1.1"
+    },
+    {
+      "id": "mapped_qbo_k7_feeder",
+      "name": "QBO k7 feeder",
+      "system": "mapped_climate_feeders",
+      "system_label": "MJO / QBO Climate Feeders",
+      "period_seconds": 76354775.18698817,
+      "period_phi_rung": 37.7191502490696,
+      "period_log10": 7.882836202787454,
+      "ara": 0.9845814977973568,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.6992230854606,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 0.6899667991021781,
+      "weight_log10": -0.16117180681873003,
+      "weight_label": "QBO band power fraction",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.01541850220264318
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6334524909525381,
+      "source": "TheFormula/qbo_annual_data.js",
+      "layer": "mapped_extension",
+      "notes": "NOAA QBO saved analysis. Power concentrates at phi^7 (~29 months); ARA shown is the k7 annual-fingerprint value from the saved test.",
+      "orientation": "westerly/easterly phase",
+      "relation_class": "climate_feeder",
+      "measurement_status": "measured_or_saved_result",
+      "source_metric": "k7_power_fraction=0.690"
+    },
+    {
+      "id": "mapped_mjo_omi_50d_partner",
+      "name": "MJO OMI 50-day partner",
+      "system": "mapped_climate_feeders",
+      "system_label": "MJO / QBO Climate Feeders",
+      "period_seconds": 4320000.0,
+      "period_phi_rung": 31.750603714544724,
+      "period_log10": 6.635483746814912,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 521.0,
+      "weight_log10": 2.7168377232995247,
+      "weight_label": "Aligned months",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "TheFormula/enso_mjo_partner_data.js",
+      "layer": "mapped_extension",
+      "notes": "NOAA OMI MJO partner saved test. Period is the 50-day MJO envelope used in the vertical-ARA test. ARA was not directly measured in that artifact, so this is mapped as a balanced propagating envelope until raw cycle ARA is measured.",
+      "orientation": "MJO phase envelope",
+      "relation_class": "vertical_partner_candidate",
+      "measurement_status": "period_measured_ara_pending",
+      "source_metric": "enso_mjo_phi_gap=6.94",
+      "source_count": 521
+    },
+    {
+      "id": "mapped_scale_molecular_vibration",
+      "name": "Molecular vibration",
+      "system": "mapped_scale_molecular_vibration",
+      "system_label": "Molecular Vibration",
+      "period_seconds": 1e-14,
+      "period_phi_rung": -66.98960753494332,
+      "period_log10": -14.0,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.602176634e-20,
+      "weight_log10": -19.795289606265015,
+      "weight_label": "Energy J",
+      "scale_domain": "quantum_atomic",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "archive/numbered_tests/92_subatomic_slope_inversion.py",
+      "layer": "mapped_extension",
+      "notes": "Archive anchor: representative molecular vibrational period. ARA is treated as a balanced oscillator placeholder until bond-specific rise/fall asymmetry is measured.",
+      "orientation": "bond stretch/compress",
+      "relation_class": "quantum_molecular_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=1e-14s; energy~0.1eV"
+    },
+    {
+      "id": "mapped_scale_alpha_helix_formation",
+      "name": "Alpha-helix formation",
+      "system": "mapped_scale_alpha_helix",
+      "system_label": "Alpha-Helix",
+      "period_seconds": 1e-07,
+      "period_phi_rung": -33.49480376747166,
+      "period_log10": -7.0,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.5848931924611108e-20,
+      "weight_log10": -19.8,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "micro_fast",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive cellular/molecular anchor. Kept as a conservative bounded position here; later archive correction discusses possible folding/unfolding overflow and should be tested separately.",
+      "orientation": "fold/unfold",
+      "relation_class": "protein_folding_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "archive period=100ns"
+    },
+    {
+      "id": "mapped_scale_atp_synthase_rotation",
+      "name": "ATP synthase rotation",
+      "system": "mapped_scale_atp_synthase",
+      "system_label": "ATP Synthase",
+      "period_seconds": 0.01,
+      "period_phi_rung": -9.56994393356333,
+      "period_log10": -2.0,
+      "ara": 1.5,
+      "ara_class": "shock_absorber",
+      "theta_deg": 72.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 8.3e-20,
+      "weight_log10": -19.080921907623924,
+      "weight_label": "Energy J",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.1180339887498949
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.1180339887498949,
+      "source": "archive/numbered_tests/50_chemical_oscillators_ara.py",
+      "layer": "mapped_extension",
+      "notes": "ATP-specific chemical-oscillator rerun maps ATP synthase as a three-phase rotary engine at ARA=1.50, near phi. This supersedes the broader archive ladder placeholder that had ARA=3.0. The coupled rotor/gradient idea remains testable, but it needs real substep dwell-time data rather than hard-coded child coordinates.",
+      "orientation": "three-phase rotary catalysis",
+      "relation_class": "molecular_rotary_motor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=10ms; ARA=1.50 from chemical oscillator rerun"
+    },
+    {
+      "id": "mapped_scale_human_breathing",
+      "name": "Human breathing",
+      "system": "mapped_scale_human_breathing",
+      "system_label": "Human Breathing",
+      "period_seconds": 4.0,
+      "period_phi_rung": 2.8808401808251127,
+      "period_log10": 0.6020599913279624,
+      "ara": 1.618033988749895,
+      "ara_class": "engine_phi",
+      "theta_deg": 68.75388202501894,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 0.5,
+      "weight_log10": -0.3010299956639812,
+      "weight_label": "Breath energy proxy J",
+      "scale_domain": "human_fast",
+      "nearest_boundary": {
+        "name": "phi",
+        "label": "phi",
+        "value": 1.618033988749895,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.0,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive organism anchor: resting respiratory rhythm. This is useful as a middle-scale self-organising biological oscillator, not a fresh raw respiratory fit.",
+      "orientation": "inspiration/expiration",
+      "relation_class": "respiratory_self_organising_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=4s; archived ARA=phi"
+    },
+    {
+      "id": "mapped_scale_circadian_sleep_wake",
+      "name": "Circadian sleep-wake",
+      "system": "mapped_scale_circadian_sleep_wake",
+      "system_label": "Circadian Sleep-Wake",
+      "period_seconds": 86400.0,
+      "period_phi_rung": 23.62107987139395,
+      "period_log10": 4.936513742478893,
+      "ara": 2.0,
+      "ara_class": "resonant_pair",
+      "theta_deg": 60.00000000000001,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.0,
+      "weight_log10": 0.0,
+      "weight_label": "Behavioral cycle proxy",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "time",
+        "label": "2 time",
+        "value": 2.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.3819660112501051,
+      "source": "archive/numbered_tests/64_sleep_consciousness_ara.py",
+      "layer": "mapped_extension",
+      "notes": "Archive sleep/consciousness anchor: 16h wake / 8h sleep gives ARA=2.0. This is a human behavioral convention, not a universal biological constant.",
+      "orientation": "wake/sleep",
+      "relation_class": "circadian_boundary_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "16h/8h=2.0"
+    },
+    {
+      "id": "mapped_scale_chandler_wobble",
+      "name": "Chandler wobble",
+      "system": "mapped_scale_chandler_wobble",
+      "system_label": "Chandler Wobble",
+      "period_seconds": 37411200.0,
+      "period_phi_rung": 36.23660054620397,
+      "period_log10": 7.573001638832259,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1e+20,
+      "weight_log10": 20.0,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive planetary rotational anchor. Marked balanced because the prior note treats the pole motion as symmetric circular motion.",
+      "orientation": "pole wobble cycle",
+      "relation_class": "planetary_rotational_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period=433d"
+    },
+    {
+      "id": "mapped_scale_lunar_nodal_cycle",
+      "name": "Lunar nodal cycle",
+      "system": "mapped_scale_lunar_nodal",
+      "system_label": "Lunar Nodal Cycle",
+      "period_seconds": 587088000.0,
+      "period_phi_rung": 41.95799901400293,
+      "period_log10": 8.768703203547407,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 5.011872336272714e+22,
+      "weight_log10": 22.7,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "earth_climate",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive orbital anchor: symmetric lunar nodal regression. This is separate from the semi-diurnal M2 tide and the spring-neap envelope.",
+      "orientation": "node regression",
+      "relation_class": "orbital_regression_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~18.6y"
+    },
+    {
+      "id": "mapped_scale_milankovitch_obliquity",
+      "name": "Milankovitch obliquity",
+      "system": "mapped_scale_milankovitch_obliquity",
+      "system_label": "Milankovitch Obliquity",
+      "period_seconds": 1293861600000.0,
+      "period_phi_rung": 57.95504370171094,
+      "period_log10": 12.111887823804963,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1.995262314968883e+26,
+      "weight_log10": 26.3,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "geological",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive planetary orbital anchor: symmetric axial-tilt oscillation. Useful as the slow Earth-system end of the mapping ladder.",
+      "orientation": "tilt high/low",
+      "relation_class": "orbital_forcing_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~41kyr"
+    },
+    {
+      "id": "mapped_scale_spiral_arm_passage",
+      "name": "Spiral arm passage",
+      "system": "mapped_scale_spiral_arm_passage",
+      "system_label": "Spiral Arm Passage",
+      "period_seconds": 3786912000000000.0,
+      "period_phi_rung": 74.54165803537003,
+      "period_log10": 15.578285213132853,
+      "ara": 1.2,
+      "ara_class": "balance_clock",
+      "theta_deg": 81.81818181818183,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1e+46,
+      "weight_log10": 46.0,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "cosmic",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.19999999999999996
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.41803398874989495,
+      "source": "archive/numbered_tests/94_real_ara_measurements.py",
+      "layer": "mapped_extension",
+      "notes": "Archive cosmic anchor. Later correction notes slight compression/expansion asymmetry, so this is mapped at ARA=1.2 rather than the initial balanced placeholder.",
+      "orientation": "arm entry/exit",
+      "relation_class": "galactic_structure_anchor",
+      "measurement_status": "archived_cross_scale_anchor",
+      "source_metric": "period~120Myr; corrected ARA=1.2"
+    },
+    {
+      "id": "mapped_scale_galactic_rotation_mw",
+      "name": "Galactic rotation MW",
+      "system": "mapped_scale_galactic_rotation",
+      "system_label": "Galactic Rotation",
+      "period_seconds": 6950590034762222.0,
+      "period_phi_rung": 75.80362960418474,
+      "period_log10": 15.842021673361998,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
+      "energy_j": null,
+      "action_pi": null,
+      "weight_value": 1e+48,
+      "weight_log10": 48.0,
+      "weight_label": "Archived energy proxy",
+      "scale_domain": "cosmic",
+      "nearest_boundary": {
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
+      },
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
+      "source": "Mapping/galactic_rotation_phi_test_result.json",
+      "layer": "mapped_extension",
+      "notes": "Gaia DR3 Cepheid rotation-curve diagnostic supports the rough galactic-year period near the solar radius but rejects the archived phi ARA assignment. The pure circular carrier has neutral ARA=1.0; the measured epicyclic coupling is closer to the flat-curve sqrt(2) geometry than to phi.",
+      "archived_prior_source": "archive/numbered_tests/89_gap_filling_scales.py",
+      "archived_prior_ara": 1.618033988749895,
+      "global_kappa_over_omega": 1.3845060478936353,
+      "median_kappa_over_omega": 1.333971775014667,
+      "atlas_230myr_period_error_fraction": 0.04238735921365298,
+      "orientation": "galactic orbit",
+      "relation_class": "galactic_orbital_anchor",
+      "measurement_status": "measured_rotation_curve_phi_rejected",
+      "source_metric": "solar orbital period=220.25Myr; carrier ARA=1.00; median kappa/Omega=1.334; phi_supported=False"
     }
   ],
   "relations": [
@@ -7275,6 +8534,259 @@
       "score": 1.0
     },
     {
+      "id": "mapped_nasal_to_enso_coupled_geometry",
+      "from": "mapped_nasal_signed_full_cycle",
+      "to": "state_enso_nino_k6",
+      "type": "mapped_vertical_partner",
+      "source": "mapping_extension",
+      "score": 0.98,
+      "detail": {
+        "interpretation": "Nostril dominance and ENSO share paired anti-phase geometry; prediction use remains provisional.",
+        "signed_cycle_test_corr": 0.980176377454964,
+        "dominance_interval_test_corr": 0.9922096174611574
+      }
+    },
+    {
+      "id": "mapped_tide_carrier_to_envelope",
+      "from": "mapped_tide_m2_carrier",
+      "to": "mapped_tide_spring_neap_envelope",
+      "type": "mapped_forcing_gate",
+      "source": "mapping_extension",
+      "score": 0.93,
+      "detail": {
+        "interpretation": "M2 carrier is amplitude-modulated by the spring-neap lunar-solar envelope."
+      }
+    },
+    {
+      "id": "mapped_tide_envelope_to_breath_gate",
+      "from": "mapped_tide_spring_neap_envelope",
+      "to": "mapped_tide_amplitude_breath_gate",
+      "type": "mapped_forcing_gate",
+      "source": "mapping_extension",
+      "score": 0.95,
+      "detail": {
+        "interpretation": "Envelope gate produces measured amplitude breathing in tide range."
+      }
+    },
+    {
+      "id": "mapped_solar_north_south_pair",
+      "from": "mapped_solar_north_hemisphere",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "mapped_counter_pair",
+      "source": "mapping_extension",
+      "score": 0.92,
+      "detail": {
+        "interpretation": "Solar hemispheres form a coupled dynamo pair with different cycle ARA medians."
+      }
+    },
+    {
+      "id": "mapped_solar_pair_to_relaxation_gate",
+      "from": "mapped_solar_ns_relaxation_gate",
+      "to": "mapped_solar_north_hemisphere",
+      "type": "mapped_balance_gate",
+      "source": "mapping_extension",
+      "score": 0.91,
+      "detail": {
+        "fractional_toward_balance_per_cycle": 1.6190407041059987
+      }
+    },
+    {
+      "id": "mapped_solar_pair_to_relaxation_gate_south",
+      "from": "mapped_solar_ns_relaxation_gate",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "mapped_balance_gate",
+      "source": "mapping_extension",
+      "score": 0.91,
+      "detail": {
+        "fractional_toward_balance_per_cycle": 1.6190407041059987
+      }
+    },
+    {
+      "id": "mapped_gait_control_to_phi_crossing",
+      "from": "mapped_gait_control",
+      "to": "mapped_gait_preferred_phi_crossing",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.86,
+      "detail": {
+        "interpretation": "Control subjects were measured in a controlled instructed-walk setting slower than preferred natural speed, so median sits below phi on the locomotion arc."
+      }
+    },
+    {
+      "id": "mapped_gait_phi_crossing_to_walk_run_transition",
+      "from": "mapped_gait_preferred_phi_crossing",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.9,
+      "detail": {
+        "interpretation": "As speed rises from preferred walking, stance/swing moves from phi toward 1.0, the walk-run handoff boundary."
+      }
+    },
+    {
+      "id": "mapped_gait_transition_to_run_mirror_phi",
+      "from": "mapped_gait_walk_run_transition",
+      "to": "mapped_gait_run_mirror_phi_crossing",
+      "type": "mapped_arc_progression",
+      "source": "mapping_extension",
+      "score": 0.88,
+      "detail": {
+        "interpretation": "After the walk-run handoff, the consumer-side running branch approaches the mirror-phi sustainable running anchor."
+      }
+    },
+    {
+      "id": "mapped_gait_als_to_collapse_peak",
+      "from": "mapped_gait_als",
+      "to": "mapped_gait_als_collapse_peak",
+      "type": "mapped_rung_collapse",
+      "source": "mapping_extension",
+      "score": 0.9,
+      "detail": {
+        "interpretation": "ALS distribution is bimodal; secondary peak near 1.0 is mapped as candidate rung collapse."
+      }
+    },
+    {
+      "id": "mapped_mjo_to_enso_vertical_partner",
+      "from": "mapped_mjo_omi_50d_partner",
+      "to": "state_enso_nino_k5",
+      "type": "mapped_vertical_partner",
+      "source": "mapping_extension",
+      "score": 0.82,
+      "detail": {
+        "rung_gap_phi": 6.93940132815825,
+        "interpretation": "MJO is about 6.94 phi-rungs below ENSO's ~47-month home scale in the saved partner test."
+      }
+    },
+    {
+      "id": "mapped_qbo_to_enso_same_rung_feeder",
+      "from": "mapped_qbo_k7_feeder",
+      "to": "state_enso_nino_k5",
+      "type": "mapped_feeder",
+      "source": "mapping_extension",
+      "score": 0.84,
+      "detail": {
+        "interpretation": "QBO sits near the ENSO feeder/home period band and is mapped as a climate feeder layer.",
+        "qbo_power_k7": 0.6899667991021781
+      }
+    },
+    {
+      "id": "mapped_scale_molecular_vibration_to_mapped_scale_alpha_helix_formation",
+      "from": "mapped_scale_molecular_vibration",
+      "to": "mapped_scale_alpha_helix_formation",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1e-14,
+        "right_period_seconds": 1e-07
+      }
+    },
+    {
+      "id": "mapped_scale_alpha_helix_formation_to_mapped_scale_atp_synthase_rotation",
+      "from": "mapped_scale_alpha_helix_formation",
+      "to": "mapped_scale_atp_synthase_rotation",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1e-07,
+        "right_period_seconds": 0.01
+      }
+    },
+    {
+      "id": "mapped_scale_atp_synthase_rotation_to_mapped_scale_human_breathing",
+      "from": "mapped_scale_atp_synthase_rotation",
+      "to": "mapped_scale_human_breathing",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 0.01,
+        "right_period_seconds": 4.0
+      }
+    },
+    {
+      "id": "mapped_scale_human_breathing_to_mapped_scale_circadian_sleep_wake",
+      "from": "mapped_scale_human_breathing",
+      "to": "mapped_scale_circadian_sleep_wake",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 4.0,
+        "right_period_seconds": 86400.0
+      }
+    },
+    {
+      "id": "mapped_scale_circadian_sleep_wake_to_mapped_scale_chandler_wobble",
+      "from": "mapped_scale_circadian_sleep_wake",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 86400.0,
+        "right_period_seconds": 37411200.0
+      }
+    },
+    {
+      "id": "mapped_scale_chandler_wobble_to_mapped_scale_lunar_nodal_cycle",
+      "from": "mapped_scale_chandler_wobble",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 37411200.0,
+        "right_period_seconds": 587088000.0
+      }
+    },
+    {
+      "id": "mapped_scale_lunar_nodal_cycle_to_mapped_scale_milankovitch_obliquity",
+      "from": "mapped_scale_lunar_nodal_cycle",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 587088000.0,
+        "right_period_seconds": 1293861600000.0
+      }
+    },
+    {
+      "id": "mapped_scale_milankovitch_obliquity_to_mapped_scale_spiral_arm_passage",
+      "from": "mapped_scale_milankovitch_obliquity",
+      "to": "mapped_scale_spiral_arm_passage",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 1293861600000.0,
+        "right_period_seconds": 3786912000000000.0
+      }
+    },
+    {
+      "id": "mapped_scale_spiral_arm_passage_to_mapped_scale_galactic_rotation_mw",
+      "from": "mapped_scale_spiral_arm_passage",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "mapped_scale_ladder_step",
+      "source": "mapping_extension",
+      "score": 0.72,
+      "detail": {
+        "interpretation": "Adjacent cross-scale mapping anchors. This is a visual scale ladder, not a causal transfer claim.",
+        "left_period_seconds": 3786912000000000.0,
+        "right_period_seconds": 6950590034762222.0
+      }
+    },
+    {
       "id": "same_rung_match_catalog_pp_veg_catalog_e_enso",
       "from": "catalog_pp_veg",
       "to": "catalog_e_enso",
@@ -7295,6 +8807,42 @@
       "score": 1.0,
       "detail": {
         "rung_gap": 0.0,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_td_cortisol_mapped_scale_circadian_sleep_wake",
+      "from": "catalog_td_cortisol",
+      "to": "mapped_scale_circadian_sleep_wake",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 0.0,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_td_sleep_mapped_scale_circadian_sleep_wake",
+      "from": "catalog_td_sleep",
+      "to": "mapped_scale_circadian_sleep_wake",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 0.0,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_tide_spring_mapped_tide_spring_neap_envelope",
+      "from": "catalog_tide_spring",
+      "to": "mapped_tide_spring_neap_envelope",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.9945754724232727,
+      "detail": {
+        "rung_gap": 0.0006817641957717058,
         "ara_gap": 0.0
       }
     },
@@ -7320,6 +8868,18 @@
       "detail": {
         "rung_gap": 0.0001580354327046507,
         "ara_gap": 0.006000000000000005
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_tide_m2_mapped_tide_m2_carrier",
+      "from": "catalog_tide_m2",
+      "to": "mapped_tide_m2_carrier",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.9731440123863198,
+      "detail": {
+        "rung_gap": 0.0034496419943828016,
+        "ara_gap": 0.0
       }
     },
     {
@@ -7455,6 +9015,18 @@
       }
     },
     {
+      "id": "same_rung_match_catalog_gx_orbit_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_gx_orbit",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.7381953778715552,
+      "detail": {
+        "rung_gap": 0.04433186490602736,
+        "ara_gap": 0.0
+      }
+    },
+    {
       "id": "same_rung_match_state_enso_soi_k4_state_enso_pdo_k4",
       "from": "state_enso_soi_k4",
       "to": "state_enso_pdo_k4",
@@ -7515,6 +9087,42 @@
       }
     },
     {
+      "id": "same_rung_match_catalog_td_resp_mapped_scale_human_breathing",
+      "from": "catalog_td_resp",
+      "to": "mapped_scale_human_breathing",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.6792850868181435,
+      "detail": {
+        "rung_gap": 0.0,
+        "ara_gap": 0.1180339887498949
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_vent_natural_mapped_scale_human_breathing",
+      "from": "catalog_vent_natural",
+      "to": "mapped_scale_human_breathing",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.6792850868181435,
+      "detail": {
+        "rung_gap": 0.0,
+        "ara_gap": 0.1180339887498949
+      }
+    },
+    {
+      "id": "same_rung_match_state_enso_pdo_k7_mapped_solar_south_hemisphere",
+      "from": "state_enso_pdo_k7",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.6689857272447578,
+      "detail": {
+        "rung_gap": 0.0,
+        "ara_gap": 0.12370005041756893
+      }
+    },
+    {
       "id": "same_rung_match_state_enso_soi_k6_state_enso_pdo_k6",
       "from": "state_enso_soi_k6",
       "to": "state_enso_pdo_k6",
@@ -7572,6 +9180,30 @@
       "detail": {
         "rung_gap": 0.0805590809624448,
         "ara_gap": 0.009531999999999874
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_pl_sunspot_mapped_solar_ns_relaxation_gate",
+      "from": "catalog_pl_sunspot",
+      "to": "mapped_solar_ns_relaxation_gate",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.5716465313031797,
+      "detail": {
+        "rung_gap": 0.06314624199601582,
+        "ara_gap": 0.0610407041059986
+      }
+    },
+    {
+      "id": "same_rung_match_catalog_pl_sunspot_mapped_solar_north_hemisphere",
+      "from": "catalog_pl_sunspot",
+      "to": "mapped_solar_north_hemisphere",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.5459613541044774,
+      "detail": {
+        "rung_gap": 0.06314624199601582,
+        "ara_gap": 0.08161538461538442
       }
     },
     {
@@ -7671,6 +9303,18 @@
       }
     },
     {
+      "id": "same_rung_match_catalog_psr_typical_mapped_gait_walk_run_transition",
+      "from": "catalog_psr_typical",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.5232396263976968,
+      "detail": {
+        "rung_gap": 0.11389627943620562,
+        "ara_gap": 0.0
+      }
+    },
+    {
       "id": "same_rung_match_state_enso_nino_k7_state_solar_sunspot_k79",
       "from": "state_enso_nino_k7",
       "to": "state_solar_sunspot_k79",
@@ -7731,6 +9375,30 @@
       }
     },
     {
+      "id": "same_rung_match_state_raw_mit_ecg_ecg_16265_ch0_offset_4_mapped_scale_human_breathing",
+      "from": "state_raw_mit_ecg_ecg_16265_ch0_offset_4",
+      "to": "mapped_scale_human_breathing",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.44198251814053996,
+      "detail": {
+        "rung_gap": 0.11631162137240425,
+        "ara_gap": 0.08300998874989496
+      }
+    },
+    {
+      "id": "same_rung_match_state_solar_sunspot_k79_mapped_solar_south_hemisphere",
+      "from": "state_solar_sunspot_k79",
+      "to": "mapped_solar_south_hemisphere",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.4235398791483844,
+      "detail": {
+        "rung_gap": 0.09564656960429119,
+        "ara_gap": 0.14897005041756883
+      }
+    },
+    {
       "id": "same_rung_match_catalog_e_season_state_solar_sunspot_k42",
       "from": "catalog_e_season",
       "to": "state_solar_sunspot_k42",
@@ -7752,6 +9420,18 @@
       "detail": {
         "rung_gap": 0.14569066065613612,
         "ara_gap": 0.12171900000000013
+      }
+    },
+    {
+      "id": "same_rung_match_state_solar_sunspot_k45_mapped_scale_chandler_wobble",
+      "from": "state_solar_sunspot_k45",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "same_rung_match",
+      "source": "derived_geometry_scan",
+      "score": 0.34485499547606807,
+      "detail": {
+        "rung_gap": 0.17151468829593597,
+        "ara_gap": 0.13191299999999995
       }
     },
     {
@@ -7871,6 +9551,102 @@
       "score": 1.0,
       "detail": {
         "rung_gap": 55.51553181542344,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_nasal_left_dominance_bank",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_nasal_left_dominance_bank",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 24.525284172641953,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_mjo_omi_50d_partner",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_mjo_omi_50d_partner",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 38.43970746728294,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_molecular_vibration",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_molecular_vibration",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 60.3005037822051,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_alpha_helix_formation",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_alpha_helix_formation",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 26.80570001473344,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_chandler_wobble",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 42.925704298942186,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 48.64710276674115,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 64.64414745444915,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_eng_combustion_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 82.49273335692295,
         "ara_gap": 0.0
       }
     },
@@ -8075,6 +9851,102 @@
       "score": 1.0,
       "detail": {
         "rung_gap": 41.38992876946475,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_nasal_left_dominance_bank",
+      "from": "catalog_pc_clock",
+      "to": "mapped_nasal_left_dominance_bank",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 63.40288825913111,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_gait_walk_run_transition",
+      "from": "catalog_pc_clock",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 44.96887948699154,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_mjo_omi_50d_partner",
+      "from": "catalog_pc_clock",
+      "to": "mapped_mjo_omi_50d_partner",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 77.3173115537721,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_scale_molecular_vibration",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_molecular_vibration",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 21.42289969571594,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_scale_chandler_wobble",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 81.80330838543134,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 87.5247068532303,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 103.52175154093831,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_pc_clock_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 121.37033744341211,
         "ara_gap": 0.0
       }
     },
@@ -8331,6 +10203,102 @@
       }
     },
     {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_nasal_left_dominance_bank",
+      "from": "catalog_h_orbital",
+      "to": "mapped_nasal_left_dominance_bank",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 93.52561541775566,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_gait_walk_run_transition",
+      "from": "catalog_h_orbital",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 75.09160664561608,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_mjo_omi_50d_partner",
+      "from": "catalog_h_orbital",
+      "to": "mapped_mjo_omi_50d_partner",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 107.44003871239664,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_scale_alpha_helix_formation",
+      "from": "catalog_h_orbital",
+      "to": "mapped_scale_alpha_helix_formation",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 42.19463123038026,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_scale_chandler_wobble",
+      "from": "catalog_h_orbital",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 111.92603554405588,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_h_orbital",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 117.64743401185484,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_h_orbital",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 133.64447869956285,
+        "ara_gap": 0.0
+      }
+    },
+    {
+      "id": "vertical_ara_match_catalog_h_orbital_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_h_orbital",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "vertical_ara_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 151.49306460203667,
+        "ara_gap": 0.0
+      }
+    },
+    {
       "id": "vertical_ara_match_catalog_pp_veg_measured_v3_ecg_r7_14",
       "from": "catalog_pp_veg",
       "to": "measured_v3_ecg_r7_14",
@@ -8463,374 +10431,86 @@
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_gx_orbit",
-      "from": "catalog_rb_lab",
-      "to": "catalog_gx_orbit",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_nasal_left_dominance_bank",
+      "from": "catalog_eg_ac",
+      "to": "mapped_nasal_left_dominance_bank",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 68.77997767371981,
+        "rung_gap": 25.96570426305451,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_las_cw",
-      "from": "catalog_rb_lab",
-      "to": "catalog_las_cw",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_mjo_omi_50d_partner",
+      "from": "catalog_eg_ac",
+      "to": "mapped_mjo_omi_50d_partner",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 48.69231140599338,
+        "rung_gap": 39.8801275576955,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_q_qho",
-      "from": "catalog_rb_lab",
-      "to": "catalog_q_qho",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_scale_molecular_vibration",
+      "from": "catalog_eg_ac",
+      "to": "mapped_scale_molecular_vibration",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 69.2726193635326,
+        "rung_gap": 58.86008369179254,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_q_rabi",
-      "from": "catalog_rb_lab",
-      "to": "catalog_q_rabi",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_scale_alpha_helix_formation",
+      "from": "catalog_eg_ac",
+      "to": "mapped_scale_alpha_helix_formation",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 45.34775952962427,
+        "rung_gap": 25.365279924320884,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_q_cs",
-      "from": "catalog_rb_lab",
-      "to": "catalog_q_cs",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_scale_chandler_wobble",
+      "from": "catalog_eg_ac",
+      "to": "mapped_scale_chandler_wobble",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 54.73861871972691,
+        "rung_gap": 44.36612438935474,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_q_phonon",
-      "from": "catalog_rb_lab",
-      "to": "catalog_q_phonon",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_eg_ac",
+      "to": "mapped_scale_lunar_nodal_cycle",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 69.2726193635326,
+        "rung_gap": 50.0875228571537,
         "ara_gap": 0.0
       }
     },
     {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_pl_msp",
-      "from": "catalog_rb_lab",
-      "to": "catalog_pl_msp",
+      "id": "vertical_ara_match_catalog_eg_ac_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_eg_ac",
+      "to": "mapped_scale_milankovitch_obliquity",
       "type": "vertical_ara_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 20.498803906493876,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_el_lc",
-      "from": "catalog_rb_lab",
-      "to": "catalog_el_lc",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 24.7778680696907,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_lab_catalog_el_crystal",
-      "from": "catalog_rb_lab",
-      "to": "catalog_el_crystal",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 28.675482474488042,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_gx_orbit",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_gx_orbit",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 45.15889780232587,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_psr_crab",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_psr_crab",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 37.74668291735263,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_psr_typical",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_psr_typical",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 31.400788298436932,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_las_cw",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_las_cw",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 72.31339127738732,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_mech_pend",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_mech_pend",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 29.242418648318978,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_mech_spring",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_mech_spring",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 31.655821107640993,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_mech_fork",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_mech_fork",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 43.340405820991386,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_fo_seismic",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_fo_seismic",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 22.407318997098645,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_vent_hfov",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_vent_hfov",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 37.71589588134556,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_q_qho",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_q_qho",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 92.89369923492654,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_q_rabi",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_q_rabi",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 68.96883940101822,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_q_cs",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_q_cs",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 78.35969859112086,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_q_phonon",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_q_phonon",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 92.89369923492654,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_pl_msp",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_pl_msp",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 44.11988377788782,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_el_lc",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_el_lc",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 48.39894794108465,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_el_crystal",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_el_crystal",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 52.296562345881995,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_rb_hadley_catalog_fl_hammer",
-      "from": "catalog_rb_hadley",
-      "to": "catalog_fl_hammer",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 34.86584273652752,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_bee_forage_measured_v3_solar_r9_2",
-      "from": "catalog_bee_forage",
-      "to": "measured_v3_solar_r9_2",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 21.26192238709005,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_sm_network_catalog_el_555a",
-      "from": "catalog_sm_network",
-      "to": "catalog_el_555a",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 24.840889847299778,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_sm_network_catalog_el_opamp",
-      "from": "catalog_sm_network",
-      "to": "catalog_el_opamp",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 26.296314240594114,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_bf_metab_catalog_las_relax",
-      "from": "catalog_bf_metab",
-      "to": "catalog_las_relax",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 63.4261073489711,
-        "ara_gap": 0.0
-      }
-    },
-    {
-      "id": "vertical_ara_match_catalog_bf_metab_catalog_el_cmos",
-      "from": "catalog_bf_metab",
-      "to": "catalog_el_cmos",
-      "type": "vertical_ara_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 62.34800875205714,
+        "rung_gap": 66.08456754486171,
         "ara_gap": 0.0
       }
     },
@@ -9071,6 +10751,114 @@
       "score": 1.0,
       "detail": {
         "rung_gap": 2.512324682975594,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_nasal_left_dominance_bank",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_nasal_left_dominance_bank",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 24.525284172641953,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_gait_walk_run_transition",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_gait_walk_run_transition",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 6.0912754005023855,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_mjo_omi_50d_partner",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_mjo_omi_50d_partner",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 38.43970746728294,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_molecular_vibration",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_molecular_vibration",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 60.3005037822051,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_alpha_helix_formation",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_alpha_helix_formation",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 26.80570001473344,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_chandler_wobble",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_chandler_wobble",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 42.925704298942186,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_lunar_nodal_cycle",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 48.64710276674115,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_milankovitch_obliquity",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 64.64414745444915,
+        "boundary": "balance"
+      }
+    },
+    {
+      "id": "boundary_match_catalog_eng_combustion_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_eng_combustion",
+      "to": "mapped_scale_galactic_rotation_mw",
+      "type": "boundary_match",
+      "source": "derived_geometry_scan",
+      "score": 1.0,
+      "detail": {
+        "rung_gap": 82.49273335692295,
         "boundary": "balance"
       }
     },
@@ -9339,218 +11127,110 @@
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_eg_ac",
-      "from": "catalog_h_orbital",
-      "to": "catalog_eg_ac",
+      "id": "boundary_match_catalog_pc_clock_mapped_nasal_left_dominance_bank",
+      "from": "catalog_pc_clock",
+      "to": "mapped_nasal_left_dominance_bank",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 67.55991115470114,
+        "rung_gap": 63.40288825913111,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_rb_lab",
-      "from": "catalog_h_orbital",
-      "to": "catalog_rb_lab",
+      "id": "boundary_match_catalog_pc_clock_mapped_gait_walk_run_transition",
+      "from": "catalog_pc_clock",
+      "to": "mapped_gait_walk_run_transition",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 82.75741879322287,
+        "rung_gap": 44.96887948699154,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_rb_hadley",
-      "from": "catalog_h_orbital",
-      "to": "catalog_rb_hadley",
+      "id": "boundary_match_catalog_pc_clock_mapped_mjo_omi_50d_partner",
+      "from": "catalog_pc_clock",
+      "to": "mapped_mjo_omi_50d_partner",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 106.37849866461681,
+        "rung_gap": 77.3173115537721,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_gx_orbit",
-      "from": "catalog_h_orbital",
-      "to": "catalog_gx_orbit",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_molecular_vibration",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_molecular_vibration",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 151.53739646694268,
+        "rung_gap": 21.42289969571594,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_psr_crab",
-      "from": "catalog_h_orbital",
-      "to": "catalog_psr_crab",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_alpha_helix_formation",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_alpha_helix_formation",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 68.63181574726418,
+        "rung_gap": 12.071904071755718,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_psr_typical",
-      "from": "catalog_h_orbital",
-      "to": "catalog_psr_typical",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_chandler_wobble",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_chandler_wobble",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 74.97771036617988,
+        "rung_gap": 81.80330838543134,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_las_cw",
-      "from": "catalog_h_orbital",
-      "to": "catalog_las_cw",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_lunar_nodal_cycle",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_lunar_nodal_cycle",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 34.06510738722948,
+        "rung_gap": 87.5247068532303,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_mech_pend",
-      "from": "catalog_h_orbital",
-      "to": "catalog_mech_pend",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_milankovitch_obliquity",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_milankovitch_obliquity",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 77.13608001629784,
+        "rung_gap": 103.52175154093831,
         "boundary": "balance"
       }
     },
     {
-      "id": "boundary_match_catalog_h_orbital_catalog_mech_spring",
-      "from": "catalog_h_orbital",
-      "to": "catalog_mech_spring",
+      "id": "boundary_match_catalog_pc_clock_mapped_scale_galactic_rotation_mw",
+      "from": "catalog_pc_clock",
+      "to": "mapped_scale_galactic_rotation_mw",
       "type": "boundary_match",
       "source": "derived_geometry_scan",
       "score": 1.0,
       "detail": {
-        "rung_gap": 74.72267755697582,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_mech_fork",
-      "from": "catalog_h_orbital",
-      "to": "catalog_mech_fork",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 63.03809284362543,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_fo_driven",
-      "from": "catalog_h_orbital",
-      "to": "catalog_fo_driven",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 98.55275478398042,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_fo_seismic",
-      "from": "catalog_h_orbital",
-      "to": "catalog_fo_seismic",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 83.97117966751817,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_vent_hfov",
-      "from": "catalog_h_orbital",
-      "to": "catalog_vent_hfov",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 68.66260278327125,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_q_qho",
-      "from": "catalog_h_orbital",
-      "to": "catalog_q_qho",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 13.484799429690263,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_q_rabi",
-      "from": "catalog_h_orbital",
-      "to": "catalog_q_rabi",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 37.40965926359859,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_q_cs",
-      "from": "catalog_h_orbital",
-      "to": "catalog_q_cs",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 28.018800073495953,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_q_phonon",
-      "from": "catalog_h_orbital",
-      "to": "catalog_q_phonon",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 13.484799429690263,
-        "boundary": "balance"
-      }
-    },
-    {
-      "id": "boundary_match_catalog_h_orbital_catalog_pl_msp",
-      "from": "catalog_h_orbital",
-      "to": "catalog_pl_msp",
-      "type": "boundary_match",
-      "source": "derived_geometry_scan",
-      "score": 1.0,
-      "detail": {
-        "rung_gap": 62.25861488672899,
+        "rung_gap": 121.37033744341211,
         "boundary": "balance"
       }
     }
