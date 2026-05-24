@@ -287,3 +287,50 @@ temporal_pocket =
 ```
 
 This keeps the core idea alive while preventing the model from calling every negative coefficient a discovery.
+
+---
+
+## Follow-Up: Tick Recursion And Direct Variables - 2026-05-23
+
+The tick-recursion follow-up is recorded in [`ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`](ARA_TICK_RECURSION_AND_COUPLING_RESULT.md).
+
+It tested the stricter version of the future-geometry idea:
+
+```text
+current variables -> future variables -> future value
+```
+
+The `direct_value_required_variables` visualizer line is a control, not the clean formula. It directly regresses future value deltas from current required variables, so it is useful for measuring information content but too teleporter-like to be the final operator.
+
+Main lesson: actual future variables decode observables strongly, and energy-aware tick recursion often beats persistence. But lag/direct controls still win several horizons, and the constrained formula tick only clearly helps Solar at 24 and 60 months. The missing part is still the lawful tick flow from current variables to future variables.
+
+---
+
+## Follow-Up: Cross-Scale Coupled Geometry Transfer - 2026-05-23
+
+The next follow-up is recorded in [`ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`](ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md).
+
+The key correction was to compare coupled systems with coupled systems. ENSO is a paired anti-phase system, so the natural cross-scale analog is not raw ECG or Solar alone, but another anti-phase pair. Nasal-cycle dominance provides that paired structure: right and left nostril airflow alternate dominance over time.
+
+Main results:
+
+| Test | Result | Interpretation |
+|---|---:|---|
+| ECG R-R envelope vs Solar | heldout shifted corr `+0.891` | strong shared one-peak accumulate/release shape, not specific against simple one-peak nulls |
+| Raw ECG beat waveform vs Solar | heldout shifted corr `+0.090` | raw PQRST waveform does not transfer |
+| Nasal dominance interval vs ENSO coupled interval | heldout shifted corr `+0.992`, null rank `1/9` | strong paired anti-phase relation-class match |
+| Nasal signed full cycle vs ENSO signed cycle | heldout shifted corr `+0.980`, null rank `1/9` | strong match, but less specific once sign alternation is preserved |
+| Nasal -> ENSO ARA/midpoint forecast | best at 12 months: MAE `0.739` vs persistence `0.946` | useful transition prior, not a universal point predictor |
+
+This narrows the forecast architecture:
+
+```text
+smaller coupled pair
+  -> match ARA, midpoint, sign, balance distance
+  -> transfer phase/transition prior
+  -> decode with local feeder/amplitude state
+```
+
+The ARA/midpoint match helped most at the 12-month transition window. Short horizons remain persistence-dominated, and longer horizons still need local ENSO/SOI state. So the framework claim should be:
+
+> Coupled-pair ARA geometry transfers as a phase/transition prior, but exact forward value prediction still needs local causal state.

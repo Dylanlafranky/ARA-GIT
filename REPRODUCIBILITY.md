@@ -108,3 +108,83 @@ Outputs:
 - `ARA_TEMPORAL_FRICTION_RESULT.md`
 
 Important interpretation guard: these tests do not prove that temporal friction is phi-distance. The strict result is narrower: pure `|ARA-phi|` friction fails, `1 + |ARA-phi|` is more useful, and negative `k` in `B + k*|ARA-phi|` is only a candidate temporal-pocket marker when paired with anti-phase/contact geometry.
+
+## Recent Runnable Tick-Recursion And Coupling Tests
+
+The 2026-05-23 tick-recursion and phi-coupling candidate tests were run locally with cached public data where required.
+
+Useful entry points:
+
+```bash
+python TheFormula/ara_formula_tick_engine_test.py
+python TheFormula/ara_tick_variable_recursion_test.py
+python TheFormula/ara_phi_coupling_candidate_tests.py
+python TheFormula/ara_enso_12m_geometry_state_predictor_test.py
+python TheFormula/ara_enso_12m_feeder_amplitude_test.py
+python TheFormula/ara_enso_12m_boundary_distance_transfer_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_formula_tick_engine_data.js`
+- `TheFormula/ara_formula_tick_engine_viz.html`
+- `TheFormula/ara_tick_variable_recursion_data.js`
+- `TheFormula/ara_phi_coupling_candidate_results.js`
+- `TheFormula/ara_phi_coupling_candidate_results.json`
+- `TheFormula/ara_enso_12m_geometry_state_predictor_result.js`
+- `TheFormula/ara_enso_12m_geometry_state_predictor_result.json`
+- `TheFormula/ara_enso_12m_feeder_amplitude_result.js`
+- `TheFormula/ara_enso_12m_feeder_amplitude_result.json`
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.js`
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.json`
+- `ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`
+
+Important interpretation guard: `direct_value_required_variables` is a strict-causal control, not the clean formula. It tests whether current required variables directly regress future value deltas. The cleaner framework test is variable recursion first, then decoding. Results show useful signal but not a solved universal tick operator.
+
+## Recent Runnable Coupled-Geometry Transfer Tests
+
+The 2026-05-23 cross-scale coupled-geometry tests were run locally using cached public data and train/test controls.
+
+Useful entry points:
+
+```bash
+python TheFormula/ara_ecg_solar_temporal_geometry_test.py
+python TheFormula/ara_nasal_enso_coupled_geometry_test.py
+python TheFormula/ara_nasal_to_enso_prediction_test.py
+python TheFormula/ara_enso_12m_boundary_distance_transfer_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_ecg_solar_temporal_geometry_result.js`
+- `TheFormula/ara_ecg_solar_temporal_geometry_result.json`
+- `TheFormula/ara_nasal_enso_coupled_geometry_result.js`
+- `TheFormula/ara_nasal_enso_coupled_geometry_result.json`
+- `TheFormula/ara_nasal_to_enso_prediction_result.js`
+- `TheFormula/ara_nasal_to_enso_prediction_result.json`
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.js`
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.json`
+- `ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`
+
+Important interpretation guard: the nasal/ENSO result supports shared paired anti-phase geometry and a partial transition prior. It does not prove direct causal prediction. Short-horizon ENSO remains persistence-dominated in the corrected forecast run, while the ARA/midpoint-matched transfer is strongest around the 12-month transition window. Boundary-distance transfer improves turn/transition information, but delayed feeder amplitude remains the strongest exact-value 12-month branch in this folder.
+
+## Recent Runnable Mapping Atlas
+
+The 2026-05-24 mapping-first atlas rebuilds the old temporal-coordinate visualiser as a reusable data export plus local HTML workbench.
+
+Useful entry point:
+
+```bash
+python Mapping/ara_mapping_atlas_build.py
+```
+
+Outputs:
+
+- `Mapping/ara_mapping_atlas_data.json`
+- `Mapping/ara_mapping_atlas_data.js`
+- `Mapping/ara_mapping_atlas_3d.html`
+- `ARA_MAPPING_ATLAS_RESULT.md`
+
+Important interpretation guard: this is a geometry diagnostic map, not a predictor. It combines hand-curated catalogue nodes, fitted subsystem nodes, and anchor-state geometry nodes, so filters should be used when comparing like with like.
+
+The triangle overlay is included in the same build output. It detects low-ARA fitted event nodes near named state-rung clusters, plus K2/K4 endpoint faces that pass through K3 as a bridge/gate rung. Both are exposed behind the `Triangles` toggle in `ara_mapping_atlas_3d.html`.

@@ -1,0 +1,495 @@
+{
+  "date": "2026-05-23",
+  "method": "Strict-causal 12-month ENSO below-rung feeder amplitude test. Lower/faster feeder states are sampled at scale-delay-aligned times before the forecast origin, then used to amplitude/sign-gate the ARA shape prior.",
+  "horizon_months": 12,
+  "home_period_months": 47.0,
+  "lower_periods_months": [
+    3.0,
+    4.0,
+    6.0,
+    8.0,
+    12.0,
+    16.0,
+    24.0
+  ],
+  "delay_rule": "delay = period * log(home_period / period) / log(base); feeder_sample = origin + horizon - delay; only sample<=origin is allowed.",
+  "leakage_guard": [
+    "NINO/SOI scaling and old ARA/midpoint shape carrier inherit train-only loader.",
+    "Feeder sample indices are never later than the forecast origin.",
+    "Causal bandpass features at a feeder sample use only data through that sample.",
+    "All model fitting uses pre-split origins only; heldout origins are after 2003-07-01."
+  ],
+  "split": {
+    "index": 630,
+    "date": "2003-07-01",
+    "train_origins": 498,
+    "test_origins": 258,
+    "test_end": "2025-12-01"
+  },
+  "baselines": {
+    "persistence": {
+      "n": 258,
+      "mae": 0.945665598430046,
+      "persistence_mae": 0.945665598430046,
+      "mae_lift_vs_persistence": 0.0,
+      "corr": -0.07713792987565732,
+      "persistence_corr": -0.07713792987565732,
+      "dominance_sign_accuracy": 0.4496124031007752,
+      "delta_direction_accuracy": 0.0,
+      "turn_event_accuracy": 0.4496124031007752,
+      "actual_turn_rate": 0.5503875968992248,
+      "pred_turn_rate": 0.0
+    },
+    "old_nasal_ara_matched_template": {
+      "n": 258,
+      "mae": 0.7388331399703318,
+      "persistence_mae": 0.945665598430046,
+      "mae_lift_vs_persistence": 0.2068324584597142,
+      "corr": 0.2005994182905673,
+      "persistence_corr": -0.07713792987565732,
+      "dominance_sign_accuracy": 0.46124031007751937,
+      "delta_direction_accuracy": 0.7510729613733905,
+      "turn_event_accuracy": 0.46124031007751937,
+      "actual_turn_rate": 0.5503875968992248,
+      "pred_turn_rate": 0.35271317829457366
+    },
+    "old_nasal_ara_matched_raw": {
+      "n": 258,
+      "mae": 0.8535368769905873,
+      "persistence_mae": 0.945665598430046,
+      "mae_lift_vs_persistence": 0.09212872143945872,
+      "corr": -0.1063506299112424,
+      "persistence_corr": -0.07713792987565732,
+      "dominance_sign_accuracy": 0.46511627906976744,
+      "delta_direction_accuracy": 0.7381974248927039,
+      "turn_event_accuracy": 0.46511627906976744,
+      "actual_turn_rate": 0.5503875968992248,
+      "pred_turn_rate": 0.5426356589147286
+    },
+    "lag_only_ridge": {
+      "n": 258,
+      "mae": 0.7967106658879678,
+      "persistence_mae": 0.945665598430046,
+      "mae_lift_vs_persistence": 0.14895493254207826,
+      "corr": 0.2053038053435667,
+      "persistence_corr": -0.07713792987565732,
+      "dominance_sign_accuracy": 0.5581395348837209,
+      "delta_direction_accuracy": 0.7467811158798283,
+      "turn_event_accuracy": 0.5581395348837209,
+      "actual_turn_rate": 0.5503875968992248,
+      "pred_turn_rate": 0.5736434108527132
+    }
+  },
+  "models": {
+    "feeder_direct_value_control": {
+      "label": "Direct ridge from shape carriers plus delayed below-rung feeder features to future value.",
+      "n_features": 787,
+      "score": {
+        "n": 258,
+        "mae": 1.0344502303105079,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": -0.08878463188046182,
+        "corr": 0.12687234143753182,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5426356589147286,
+        "delta_direction_accuracy": 0.721030042918455,
+        "turn_event_accuracy": 0.5426356589147286,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.6124031007751938
+      }
+    },
+    "feeder_sign_amp_factorized": {
+      "label": "Separate sign and amplitude models from delayed feeder energy; pred = sign_score * amplitude.",
+      "amp_features": 787,
+      "sign_features": 787,
+      "alpha": 8.0,
+      "score": {
+        "n": 258,
+        "mae": 0.8598276403745029,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.08583795805554317,
+        "corr": 0.08900143762472675,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5542635658914729,
+        "delta_direction_accuracy": 0.7081545064377682,
+        "turn_event_accuracy": 0.5542635658914729,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.5387596899224806
+      }
+    },
+    "shape_fixed_sign_feeder_amp": {
+      "label": "Use old shape sign only; feeder features predict amplitude.",
+      "amp_features": 787,
+      "alpha": 8.0,
+      "score": {
+        "n": 258,
+        "mae": 0.9895314698448002,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": -0.043865871414754176,
+        "corr": -0.031184978855926877,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.45348837209302323,
+        "delta_direction_accuracy": 0.6051502145922747,
+        "turn_event_accuracy": 0.45348837209302323,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.36046511627906974
+      }
+    },
+    "feeder_direct_value_aggregate_control": {
+      "label": "Direct ridge from shape carriers plus aggregate delayed feeder pressure/energy only.",
+      "n_features": 227,
+      "score": {
+        "n": 258,
+        "mae": 0.8520773889899591,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.09358820944008694,
+        "corr": 0.20710360026160865,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5387596899224806,
+        "delta_direction_accuracy": 0.7553648068669528,
+        "turn_event_accuracy": 0.5387596899224806,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.5465116279069767
+      }
+    },
+    "feeder_sign_amp_aggregate_factorized": {
+      "label": "Aggregate-only separate sign and amplitude models.",
+      "amp_features": 227,
+      "sign_features": 227,
+      "alpha": 8.0,
+      "score": {
+        "n": 258,
+        "mae": 0.7207439569528126,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.22492164147723348,
+        "corr": 0.2413558574906082,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5852713178294574,
+        "delta_direction_accuracy": 0.7424892703862661,
+        "turn_event_accuracy": 0.5852713178294574,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.5077519379844961
+      }
+    },
+    "shape_fixed_sign_aggregate_amp": {
+      "label": "Use old shape sign only; aggregate feeder features predict amplitude.",
+      "amp_features": 227,
+      "alpha": 8.0,
+      "score": {
+        "n": 258,
+        "mae": 0.9140448498384101,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.031620748591635994,
+        "corr": -0.031660120808073004,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.46124031007751937,
+        "delta_direction_accuracy": 0.6909871244635193,
+        "turn_event_accuracy": 0.46124031007751937,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.35271317829457366
+      }
+    },
+    "feeder_sign_amp_aggregate_alpha_mae_selected": {
+      "label": "Aggregate sign/amplitude model with ridge alpha selected on inner-train MAE only.",
+      "amp_features": 227,
+      "sign_features": 227,
+      "alpha": 100.0,
+      "inner_selected_alpha": 100.0,
+      "inner_selection_score": {
+        "n": 170,
+        "mae": 0.7766335777702359,
+        "persistence_mae": 0.7628262387907505,
+        "mae_lift_vs_persistence": -0.013807338979485384,
+        "corr": 0.3041480943250548,
+        "persistence_corr": 0.26795751814950985,
+        "dominance_sign_accuracy": 0.47058823529411764,
+        "delta_direction_accuracy": 0.6560509554140127,
+        "turn_event_accuracy": 0.47058823529411764,
+        "actual_turn_rate": 0.35294117647058826,
+        "pred_turn_rate": 0.5176470588235295
+      },
+      "inner_candidates": [
+        {
+          "alpha": 0.3,
+          "score": {
+            "n": 170,
+            "mae": 0.9279679862897651,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.16514174749901456,
+            "corr": 0.10810445463612459,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.5411764705882353,
+            "delta_direction_accuracy": 0.6624203821656051,
+            "turn_event_accuracy": 0.5470588235294118,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5705882352941176
+          }
+        },
+        {
+          "alpha": 1.0,
+          "score": {
+            "n": 170,
+            "mae": 0.9087329883503323,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.14590674955958183,
+            "corr": 0.10146962010830174,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.5352941176470588,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.5411764705882353,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5411764705882353
+          }
+        },
+        {
+          "alpha": 3.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8737922989253429,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.11096606013459243,
+            "corr": 0.13826216367455282,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.49411764705882355,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.49411764705882355,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5411764705882353
+          }
+        },
+        {
+          "alpha": 8.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8461272235194858,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.08330098472873526,
+            "corr": 0.18146358880640145,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.47058823529411764,
+            "delta_direction_accuracy": 0.6751592356687898,
+            "turn_event_accuracy": 0.47058823529411764,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5529411764705883
+          }
+        },
+        {
+          "alpha": 20.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8294146326127964,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.06658839382204584,
+            "corr": 0.21225728381158385,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.4823529411764706,
+            "delta_direction_accuracy": 0.6624203821656051,
+            "turn_event_accuracy": 0.4823529411764706,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5647058823529412
+          }
+        },
+        {
+          "alpha": 50.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8087056149606787,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.04587937616992821,
+            "corr": 0.2529062089005071,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.4647058823529412,
+            "delta_direction_accuracy": 0.6496815286624203,
+            "turn_event_accuracy": 0.4647058823529412,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5352941176470588
+          }
+        },
+        {
+          "alpha": 100.0,
+          "score": {
+            "n": 170,
+            "mae": 0.7766335777702359,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.013807338979485384,
+            "corr": 0.3041480943250548,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.47058823529411764,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.47058823529411764,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5176470588235295
+          }
+        }
+      ],
+      "score": {
+        "n": 258,
+        "mae": 0.6662439279558647,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.2794216704741813,
+        "corr": 0.3541573880488517,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5930232558139535,
+        "delta_direction_accuracy": 0.7811158798283262,
+        "turn_event_accuracy": 0.5930232558139535,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.5852713178294574
+      }
+    },
+    "feeder_sign_amp_aggregate_alpha_corr_selected": {
+      "label": "Aggregate sign/amplitude model with ridge alpha selected on inner-train correlation only.",
+      "amp_features": 227,
+      "sign_features": 227,
+      "alpha": 100.0,
+      "inner_selected_alpha": 100.0,
+      "inner_selection_score": {
+        "n": 170,
+        "mae": 0.7766335777702359,
+        "persistence_mae": 0.7628262387907505,
+        "mae_lift_vs_persistence": -0.013807338979485384,
+        "corr": 0.3041480943250548,
+        "persistence_corr": 0.26795751814950985,
+        "dominance_sign_accuracy": 0.47058823529411764,
+        "delta_direction_accuracy": 0.6560509554140127,
+        "turn_event_accuracy": 0.47058823529411764,
+        "actual_turn_rate": 0.35294117647058826,
+        "pred_turn_rate": 0.5176470588235295
+      },
+      "inner_candidates": [
+        {
+          "alpha": 0.3,
+          "score": {
+            "n": 170,
+            "mae": 0.9279679862897651,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.16514174749901456,
+            "corr": 0.10810445463612459,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.5411764705882353,
+            "delta_direction_accuracy": 0.6624203821656051,
+            "turn_event_accuracy": 0.5470588235294118,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5705882352941176
+          }
+        },
+        {
+          "alpha": 1.0,
+          "score": {
+            "n": 170,
+            "mae": 0.9087329883503323,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.14590674955958183,
+            "corr": 0.10146962010830174,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.5352941176470588,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.5411764705882353,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5411764705882353
+          }
+        },
+        {
+          "alpha": 3.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8737922989253429,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.11096606013459243,
+            "corr": 0.13826216367455282,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.49411764705882355,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.49411764705882355,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5411764705882353
+          }
+        },
+        {
+          "alpha": 8.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8461272235194858,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.08330098472873526,
+            "corr": 0.18146358880640145,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.47058823529411764,
+            "delta_direction_accuracy": 0.6751592356687898,
+            "turn_event_accuracy": 0.47058823529411764,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5529411764705883
+          }
+        },
+        {
+          "alpha": 20.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8294146326127964,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.06658839382204584,
+            "corr": 0.21225728381158385,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.4823529411764706,
+            "delta_direction_accuracy": 0.6624203821656051,
+            "turn_event_accuracy": 0.4823529411764706,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5647058823529412
+          }
+        },
+        {
+          "alpha": 50.0,
+          "score": {
+            "n": 170,
+            "mae": 0.8087056149606787,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.04587937616992821,
+            "corr": 0.2529062089005071,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.4647058823529412,
+            "delta_direction_accuracy": 0.6496815286624203,
+            "turn_event_accuracy": 0.4647058823529412,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5352941176470588
+          }
+        },
+        {
+          "alpha": 100.0,
+          "score": {
+            "n": 170,
+            "mae": 0.7766335777702359,
+            "persistence_mae": 0.7628262387907505,
+            "mae_lift_vs_persistence": -0.013807338979485384,
+            "corr": 0.3041480943250548,
+            "persistence_corr": 0.26795751814950985,
+            "dominance_sign_accuracy": 0.47058823529411764,
+            "delta_direction_accuracy": 0.6560509554140127,
+            "turn_event_accuracy": 0.47058823529411764,
+            "actual_turn_rate": 0.35294117647058826,
+            "pred_turn_rate": 0.5176470588235295
+          }
+        }
+      ],
+      "score": {
+        "n": 258,
+        "mae": 0.6662439279558647,
+        "persistence_mae": 0.945665598430046,
+        "mae_lift_vs_persistence": 0.2794216704741813,
+        "corr": 0.3541573880488517,
+        "persistence_corr": -0.07713792987565732,
+        "dominance_sign_accuracy": 0.5930232558139535,
+        "delta_direction_accuracy": 0.7811158798283262,
+        "turn_event_accuracy": 0.5930232558139535,
+        "actual_turn_rate": 0.5503875968992248,
+        "pred_turn_rate": 0.5852713178294574
+      }
+    }
+  },
+  "summary": {
+    "best_mae_model": "feeder_sign_amp_aggregate_alpha_mae_selected",
+    "best_mae": 0.6662439279558647,
+    "best_mae_corr": 0.3541573880488517,
+    "best_corr_model": "feeder_sign_amp_aggregate_alpha_mae_selected",
+    "best_corr": 0.3541573880488517,
+    "best_corr_mae": 0.6662439279558647
+  }
+}

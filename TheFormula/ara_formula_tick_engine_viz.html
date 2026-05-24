@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Formula Tick Engine Visualizer</title>
+  <script src="ara_formula_tick_engine_data.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f1113;
+      --surface: #171b1f;
+      --surface-2: #20262b;
+      --line: #303941;
+      --muted: #95a3ac;
+      --text: #edf3f6;
+      --truth: #f4d35e;
+      --persistence: #a0a8ad;
+      --learned: #00c2ff;
+      --fixed: #ff6f61;
+      --natural: #7bd88f;
+      --direct: #b388ff;
+      --lag: #ffb84d;
+      --oracle: #2de38f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .app {
+      min-height: 100vh;
+      padding: 18px;
+    }
+
+    header,
+    .controls,
+    .metrics,
+    main,
+    .readout {
+      max-width: 1500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .guard {
+      max-width: 680px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      color: #d8e0e5;
+      font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, max-content)) minmax(360px, 1fr);
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 14px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(23, 27, 31, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 680;
+      text-transform: uppercase;
+    }
+
+    select {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: var(--text);
+      padding: 0 10px;
+      font: inherit;
+      font-size: 13px;
+    }
+
+    .checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-2);
+      color: #dce4e8;
+      font-size: 12px;
+      font-weight: 620;
+      text-transform: none;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--learned);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+    }
+
+    .metric b {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 14px;
+    }
+
+    .panel {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .panel.wide {
+      grid-column: 1 / -1;
+    }
+
+    .panel-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 720;
+    }
+
+    .legend {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 3px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 360px;
+      background: #13171b;
+    }
+
+    #deltaChart,
+    #errorChart {
+      height: 260px;
+    }
+
+    .readout {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    th,
+    td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      background: #15191d;
+    }
+
+    .tooltip {
+      position: fixed;
+      z-index: 20;
+      display: none;
+      max-width: 310px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(15, 17, 19, 0.96);
+      color: var(--text);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      font-size: 12px;
+      pointer-events: none;
+    }
+
+    .tooltip b {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .empty {
+      padding: 24px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      header,
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        display: grid;
+      }
+
+      .controls,
+      .metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .panel.wide {
+        grid-column: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app {
+        padding: 12px;
+      }
+
+      .controls,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      canvas {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>ARA Formula Tick Engine</h1>
+        <div class="subtitle">Strict causal forecast overlays against truth, persistence, controls, and oracle geometry.</div>
+      </div>
+      <div class="guard" id="guard">Loading formula tick engine data...</div>
+    </header>
+
+    <section class="controls">
+      <label>
+        Dataset
+        <select id="datasetSelect"></select>
+      </label>
+      <label>
+        Horizon
+        <select id="horizonSelect"></select>
+      </label>
+      <label>
+        Focus Model
+        <select id="focusSelect"></select>
+      </label>
+      <div class="checks" id="checks"></div>
+    </section>
+
+    <section class="metrics" id="metrics"></section>
+
+    <main>
+      <section class="panel wide">
+        <div class="panel-head">
+          <h2>Value Overlay</h2>
+          <div class="legend" id="valueLegend"></div>
+        </div>
+        <canvas id="valueChart"></canvas>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Delta From Origin</h2>
+          <div class="legend" id="deltaLegend"></div>
+        </div>
+        <canvas id="deltaChart"></canvas>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Absolute Error</h2>
+          <div class="legend" id="errorLegend"></div>
+        </div>
+        <canvas id="errorChart"></canvas>
+      </section>
+    </main>
+
+    <section class="readout">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>MAE</th>
+            <th>Pers MAE</th>
+            <th>Lift</th>
+            <th>Corr</th>
+            <th>Dir</th>
+            <th>Geom Err</th>
+          </tr>
+        </thead>
+        <tbody id="scoreBody"></tbody>
+      </table>
+    </section>
+  </div>
+  <div class="tooltip" id="tooltip"></div>
+
+  <script>
+    const DATA = window.ARA_FORMULA_TICK_ENGINE;
+
+    const MODEL_LABELS = {
+      natural_phase_decoder: "Natural phase",
+      formula_tick_fixed_decoder: "Fixed formula",
+      formula_tick_learned_decoder: "Learned formula",
+      direct_value_required_variables: "Direct variables",
+      lag_ridge: "Lag ridge",
+      oracle_actual_future_geometry_decoder: "Oracle geometry",
+    };
+
+    const SERIES = [
+      { key: "actual", label: "Truth", color: "var(--truth)", width: 2.5, always: true },
+      { key: "persistence", label: "Persistence", color: "var(--persistence)", dash: [6, 5], width: 1.7 },
+      { key: "formula_tick_learned_decoder", label: MODEL_LABELS.formula_tick_learned_decoder, color: "var(--learned)", width: 2.3 },
+      { key: "formula_tick_fixed_decoder", label: MODEL_LABELS.formula_tick_fixed_decoder, color: "var(--fixed)", width: 1.8 },
+      { key: "natural_phase_decoder", label: MODEL_LABELS.natural_phase_decoder, color: "var(--natural)", width: 1.7 },
+      { key: "direct_value_required_variables", label: MODEL_LABELS.direct_value_required_variables, color: "var(--direct)", width: 1.9 },
+      { key: "lag_ridge", label: MODEL_LABELS.lag_ridge, color: "var(--lag)", width: 1.9 },
+      { key: "oracle_actual_future_geometry_decoder", label: MODEL_LABELS.oracle_actual_future_geometry_decoder, color: "var(--oracle)", dash: [3, 4], width: 1.8 },
+    ];
+
+    const DEFAULT_VISIBLE = new Set(["actual", "persistence", "formula_tick_learned_decoder", "direct_value_required_variables", "lag_ridge"]);
+    const state = {
+      dataset: null,
+      horizon: null,
+      focus: "formula_tick_learned_decoder",
+      visible: new Set(DEFAULT_VISIBLE),
+      hoverIndex: null,
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function cssColor(value) {
+      if (!value.startsWith("var(")) return value;
+      const name = value.slice(4, -1).trim();
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function fmt(value, digits = 3) {
+      if (value === null || value === undefined || !Number.isFinite(Number(value))) return "n/a";
+      const n = Number(value);
+      if (Math.abs(n) >= 100) return n.toFixed(1);
+      if (Math.abs(n) >= 10) return n.toFixed(2);
+      return n.toFixed(digits);
+    }
+
+    function modelPoints(dataset, model, horizon) {
+      return dataset?.points?.[model]?.[String(horizon)] || [];
+    }
+
+    function basePoints(dataset, horizon) {
+      const focus = modelPoints(dataset, state.focus, horizon);
+      if (focus.length) return focus;
+      for (const series of SERIES) {
+        if (series.key === "actual" || series.key === "persistence") continue;
+        const points = modelPoints(dataset, series.key, horizon);
+        if (points.length) return points;
+      }
+      return [];
+    }
+
+    function seriesPoints(dataset, key, horizon) {
+      if (key === "actual" || key === "persistence") {
+        return basePoints(dataset, horizon).map((p) => ({
+          origin: p.origin,
+          date: p.date,
+          value: Number(p[key]),
+          actual: Number(p.actual),
+          persistence: Number(p.persistence),
+        }));
+      }
+      return modelPoints(dataset, key, horizon).map((p) => ({
+        origin: p.origin,
+        date: p.date,
+        value: Number(p.pred),
+        actual: Number(p.actual),
+        persistence: Number(p.persistence),
+      }));
+    }
+
+    function visibleSeries() {
+      return SERIES.filter((series) => series.always || state.visible.has(series.key));
+    }
+
+    function buildControls() {
+      if (!DATA) {
+        $("guard").textContent = "Missing ara_formula_tick_engine_data.js";
+        return;
+      }
+
+      $("guard").textContent = DATA.leakage_guard;
+      const datasetNames = Object.keys(DATA.datasets);
+      state.dataset = state.dataset || (DATA.datasets.Solar_SILSO ? "Solar_SILSO" : datasetNames[0]);
+
+      $("datasetSelect").innerHTML = datasetNames
+        .map((name) => `<option value="${name}">${name}</option>`)
+        .join("");
+      $("datasetSelect").value = state.dataset;
+
+      $("focusSelect").innerHTML = Object.keys(DATA.models)
+        .filter((key) => key !== "oracle_actual_future_geometry_decoder")
+        .map((key) => `<option value="${key}">${MODEL_LABELS[key] || key}</option>`)
+        .join("");
+      $("focusSelect").value = state.focus;
+
+      $("checks").innerHTML = SERIES.filter((series) => !series.always).map((series) => {
+        const checked = state.visible.has(series.key) ? "checked" : "";
+        return `
+          <label class="check" title="${DATA.models[series.key] || series.label}">
+            <input type="checkbox" data-series="${series.key}" ${checked}>
+            <span style="color:${series.color}">${series.label}</span>
+          </label>
+        `;
+      }).join("");
+
+      $("datasetSelect").addEventListener("change", () => {
+        state.dataset = $("datasetSelect").value;
+        state.horizon = null;
+        updateHorizonOptions();
+        render();
+      });
+      $("horizonSelect").addEventListener("change", () => {
+        state.horizon = Number($("horizonSelect").value);
+        render();
+      });
+      $("focusSelect").addEventListener("change", () => {
+        state.focus = $("focusSelect").value;
+        if (!state.visible.has(state.focus)) state.visible.add(state.focus);
+        buildChecksOnly();
+        render();
+      });
+      $("checks").addEventListener("change", (event) => {
+        const key = event.target?.dataset?.series;
+        if (!key) return;
+        if (event.target.checked) state.visible.add(key);
+        else state.visible.delete(key);
+        render();
+      });
+
+      updateHorizonOptions();
+    }
+
+    function buildChecksOnly() {
+      for (const input of $("checks").querySelectorAll("input[data-series]")) {
+        input.checked = state.visible.has(input.dataset.series);
+      }
+    }
+
+    function updateHorizonOptions() {
+      const dataset = DATA.datasets[state.dataset];
+      const horizons = dataset.config.horizons;
+      const preferred = state.dataset === "Solar_SILSO" && horizons.includes(24) ? 24 : horizons[0];
+      state.horizon = state.horizon && horizons.includes(state.horizon) ? state.horizon : preferred;
+      $("horizonSelect").innerHTML = horizons
+        .map((h) => `<option value="${h}">${h} ${dataset.config.unit}</option>`)
+        .join("");
+      $("horizonSelect").value = String(state.horizon);
+    }
+
+    function metricsFor(dataset, horizon) {
+      const score = dataset.scores[state.focus]?.[String(horizon)] || {};
+      const formula = dataset.scores.formula_tick_learned_decoder?.[String(horizon)] || {};
+      const direct = dataset.scores.direct_value_required_variables?.[String(horizon)] || {};
+      const lag = dataset.scores.lag_ridge?.[String(horizon)] || {};
+      const winner = dataset.winners?.[String(horizon)] || "n/a";
+      return [
+        ["Focus MAE", fmt(score.mae)],
+        ["Formula MAE", fmt(formula.mae)],
+        ["Direct MAE", fmt(direct.mae)],
+        ["Lag MAE", fmt(lag.mae)],
+        ["Focus Corr", fmt(score.corr)],
+        ["Winner", MODEL_LABELS[winner] || winner],
+      ];
+    }
+
+    function renderMetrics(dataset, horizon) {
+      $("metrics").innerHTML = metricsFor(dataset, horizon)
+        .map(([label, value]) => `<div class="metric"><b>${label}</b><span>${value}</span></div>`)
+        .join("");
+    }
+
+    function renderScoreTable(dataset, horizon) {
+      const rows = Object.keys(DATA.models).map((model) => {
+        const s = dataset.scores[model]?.[String(horizon)] || {};
+        const winner = dataset.winners?.[String(horizon)] === model ? " data-winner=\"1\"" : "";
+        return `
+          <tr${winner}>
+            <td>${MODEL_LABELS[model] || model}</td>
+            <td>${fmt(s.mae)}</td>
+            <td>${fmt(s.persistence_mae)}</td>
+            <td>${fmt(s.mae_lift_vs_persistence)}</td>
+            <td>${fmt(s.corr)}</td>
+            <td>${fmt(s.direction)}</td>
+            <td>${fmt(s.mean_scaled_geometry_error)}</td>
+          </tr>
+        `;
+      });
+      $("scoreBody").innerHTML = rows.join("");
+      for (const row of $("scoreBody").querySelectorAll("[data-winner]")) {
+        row.style.color = "var(--oracle)";
+      }
+    }
+
+    function drawLegend(targetId, series) {
+      $(targetId).innerHTML = series.map((item) => `
+        <span class="legend-item" style="color:${item.color}">
+          <span class="swatch"></span>${item.label}
+        </span>
+      `).join("");
+    }
+
+    function getChartData(dataset, horizon, mode) {
+      const active = visibleSeries();
+      return active.map((series) => {
+        const points = seriesPoints(dataset, series.key, horizon);
+        const values = points.map((p) => {
+          if (mode === "delta") return p.value - p.persistence;
+          if (mode === "error") return Math.abs(p.value - p.actual);
+          return p.value;
+        });
+        return { ...series, points, values };
+      }).filter((series) => series.points.length && series.values.some(Number.isFinite));
+    }
+
+    function drawChart(canvas, seriesData, options = {}) {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      if (!seriesData.length) {
+        ctx.fillStyle = cssColor("var(--muted)");
+        ctx.font = "13px Inter, sans-serif";
+        ctx.fillText("No points for this horizon.", 20, 30);
+        return;
+      }
+
+      const pad = { left: 58, right: 18, top: 18, bottom: 38 };
+      const plotW = Math.max(1, w - pad.left - pad.right);
+      const plotH = Math.max(1, h - pad.top - pad.bottom);
+      const n = Math.max(...seriesData.map((s) => s.values.length));
+      let values = seriesData.flatMap((s) => s.values).filter(Number.isFinite);
+      if (options.zeroLine) values.push(0);
+      let minY = Math.min(...values);
+      let maxY = Math.max(...values);
+      if (Math.abs(maxY - minY) < 1e-9) {
+        minY -= 1;
+        maxY += 1;
+      }
+      const margin = (maxY - minY) * 0.08;
+      minY -= margin;
+      maxY += margin;
+
+      const x = (i) => pad.left + (n <= 1 ? 0 : (i / (n - 1)) * plotW);
+      const y = (value) => pad.top + (1 - (value - minY) / (maxY - minY)) * plotH;
+
+      ctx.strokeStyle = "#2b343b";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = cssColor("var(--muted)");
+      ctx.font = "11px Inter, sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      const ticks = 5;
+      for (let i = 0; i <= ticks; i++) {
+        const t = i / ticks;
+        const yy = pad.top + t * plotH;
+        const value = maxY - t * (maxY - minY);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, yy);
+        ctx.lineTo(w - pad.right, yy);
+        ctx.stroke();
+        ctx.fillText(fmt(value, 2), pad.left - 8, yy);
+      }
+
+      if (options.zeroLine && minY < 0 && maxY > 0) {
+        ctx.strokeStyle = "#5c6870";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(pad.left, y(0));
+        ctx.lineTo(w - pad.right, y(0));
+        ctx.stroke();
+      }
+
+      ctx.textBaseline = "top";
+      ctx.textAlign = "left";
+      ctx.fillText(seriesData[0].points[0]?.date || "", pad.left, h - 26);
+      ctx.textAlign = "right";
+      ctx.fillText(seriesData[0].points[n - 1]?.date || "", w - pad.right, h - 26);
+
+      for (const series of seriesData) {
+        ctx.strokeStyle = cssColor(series.color);
+        ctx.lineWidth = series.width || 1.8;
+        ctx.setLineDash(series.dash || []);
+        ctx.beginPath();
+        series.values.forEach((value, i) => {
+          if (!Number.isFinite(value)) return;
+          if (i === 0) ctx.moveTo(x(i), y(value));
+          else ctx.lineTo(x(i), y(value));
+        });
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      if (state.hoverIndex !== null && state.hoverIndex >= 0 && state.hoverIndex < n) {
+        const hx = x(state.hoverIndex);
+        ctx.strokeStyle = "#dce4e8";
+        ctx.lineWidth = 1;
+        ctx.setLineDash([3, 4]);
+        ctx.beginPath();
+        ctx.moveTo(hx, pad.top);
+        ctx.lineTo(hx, h - pad.bottom);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      canvas._chartMeta = { pad, plotW, plotH, n, minY, maxY, mode: options.mode };
+    }
+
+    function updateTooltip(event, canvas) {
+      const meta = canvas._chartMeta;
+      const tooltip = $("tooltip");
+      if (!meta || meta.n <= 1) {
+        tooltip.style.display = "none";
+        return;
+      }
+      const rect = canvas.getBoundingClientRect();
+      const localX = event.clientX - rect.left;
+      const index = Math.round(((localX - meta.pad.left) / meta.plotW) * (meta.n - 1));
+      state.hoverIndex = Math.max(0, Math.min(meta.n - 1, index));
+      renderChartsOnly();
+
+      const dataset = DATA.datasets[state.dataset];
+      const horizon = state.horizon;
+      const base = basePoints(dataset, horizon)[state.hoverIndex];
+      if (!base) {
+        tooltip.style.display = "none";
+        return;
+      }
+      const lines = visibleSeries().map((series) => {
+        const p = seriesPoints(dataset, series.key, horizon)[state.hoverIndex];
+        if (!p) return "";
+        const value = series.key === "actual" ? p.actual : series.key === "persistence" ? p.persistence : p.value;
+        return `<span style="color:${series.color}">${series.label}: ${fmt(value)}</span>`;
+      }).filter(Boolean);
+      tooltip.innerHTML = `<b>${base.date}</b><div>origin ${base.origin}</div>${lines.join("<br>")}`;
+      tooltip.style.left = `${Math.min(window.innerWidth - 330, event.clientX + 14)}px`;
+      tooltip.style.top = `${Math.min(window.innerHeight - 180, event.clientY + 14)}px`;
+      tooltip.style.display = "block";
+    }
+
+    function renderChartsOnly() {
+      const dataset = DATA.datasets[state.dataset];
+      const horizon = state.horizon;
+      const valueData = getChartData(dataset, horizon, "value");
+      const deltaData = getChartData(dataset, horizon, "delta");
+      const errorData = getChartData(dataset, horizon, "error").filter((series) => series.key !== "actual" && series.key !== "persistence");
+      drawLegend("valueLegend", valueData);
+      drawLegend("deltaLegend", deltaData);
+      drawLegend("errorLegend", errorData);
+      drawChart($("valueChart"), valueData, { mode: "value" });
+      drawChart($("deltaChart"), deltaData, { mode: "delta", zeroLine: true });
+      drawChart($("errorChart"), errorData, { mode: "error" });
+    }
+
+    function render() {
+      if (!DATA) return;
+      const dataset = DATA.datasets[state.dataset];
+      renderMetrics(dataset, state.horizon);
+      renderScoreTable(dataset, state.horizon);
+      renderChartsOnly();
+    }
+
+    for (const id of ["valueChart", "deltaChart", "errorChart"]) {
+      const canvas = $(id);
+      canvas.addEventListener("mousemove", (event) => updateTooltip(event, canvas));
+      canvas.addEventListener("mouseleave", () => {
+        state.hoverIndex = null;
+        $("tooltip").style.display = "none";
+        renderChartsOnly();
+      });
+    }
+
+    window.addEventListener("resize", renderChartsOnly);
+
+    buildControls();
+    render();
+  </script>
+</body>
+</html>

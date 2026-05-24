@@ -12,7 +12,7 @@
 
 The framework is making a claim about **what time is**, not about what oscillating systems happen to do.
 
-Time has geometric structure. That structure is shaped by ARA — the ratio T_acc/T_rel — and packed at irrational ratios optimised by φ. Energy moves through this time-geometry. **A wave is what energy looks like as it traverses time-geometry.**
+Time has geometric structure. That structure is shaped by ARA and packed at irrational ratios optimised by φ. In the current working formulation, ARA is best treated as a bounded temporal coordinate with orientation: the raw measured phase ratio tells us what the observer saw from inside time, the bounded ARA position says where the geometry sits, and orientation says which way the system is turning through accumulate/release. Energy moves through this time-geometry. **A wave is what energy looks like as it traverses time-geometry.**
 
 This means there are two separable components in any system's wave:
 
@@ -55,7 +55,7 @@ This means we don't need to fit subsystems separately at each rung. **The same g
 
 This formulation is the unification of several previously distinct claims from the project archive:
 
-1. **ARA = T_acc / T_rel = geometric proportion of time-packing** (core theory, GIT papers 1-3)
+1. **ARA = bounded accumulate/release coordinate plus orientation**; raw `T_acc/T_rel` or `T_rel/T_acc` is recorded as the observer's measured phase ratio (core theory, GIT papers 1-3, refined May 2026)
 2. **φ is the time-packing geometry** (Geometry of Time framework, Paper 2)
 3. **The framework might be a property of time itself, not systems** (extrapolation_musings.md, point 5)
 4. **Information³ = ARA, self-similar at every scale** (memory: framework_information_cubed)
@@ -89,7 +89,7 @@ In the new formulation, this is exactly what we'd expect: shape comes from geome
 
 ### For mapping a system
 
-1. Identify the system's ARA value (from physics / classification)
+1. Identify the system's bounded ARA position and orientation (from physics / classification)
 2. Identify the ground cycle (pump rung)
 3. Identify the energy log-slider value (from one observation, like data[0])
 4. The geometry generates the wave at all scales
@@ -283,6 +283,72 @@ What changes is the MAGNITUDE we cite for cross-domain shape transfer. It's a re
 Every wave we observe — in heart rate, in atmospheric CO2, in solar cycles, in atmospheric SST — is energy being shaped by the same time-geometry. The ARA varies (different systems sit at different geometric configurations), but the underlying time-packing principle is universal.
 
 This is the "ARA might be a property of time itself" claim from the extrapolation_musings finally taking concrete form.
+
+---
+
+## ADDENDUM 3 (May 23, 2026) - Coupled-pair geometry and transition priors
+
+The latest test refined the vertical-translation idea for coupled systems.
+
+Old operational mistake:
+
+```text
+compare a coupled system to any superficially similar oscillator
+```
+
+Better rule:
+
+```text
+compare a coupled anti-phase system to another coupled anti-phase system
+```
+
+ENSO is a paired anti-phase system: NINO and SOI / Walker circulation. The smaller-system analog tested here was nasal-cycle dominance: right and left nostril airflow alternating in anti-phase. The result supports shared ARA coupled geometry across scale, especially in dominance-interval form.
+
+The practical prediction rule also sharpened. The smaller system should not be used as a direct value teleporter. It should be used as a phase/transition prior:
+
+```text
+source coupled pair:
+  ARA of last completed cycle
+  midpoint fraction
+  sign / dominance side
+  distance from balance
+  elapsed time since crossing
+
+target coupled pair:
+  match those coordinates causally
+  transfer the likely transition shape
+  decode using local target amplitude, feeder energy, and coupling state
+```
+
+The tick-recursion tests say the same thing from the other direction. `direct_value_required_variables` is useful as a strict-causal control, but it bypasses the vehicle. The cleaner formula-shaped route is:
+
+```text
+current ARA/formula variables
+  -> future ARA/formula variables
+  -> decoded observable
+```
+
+In the corrected nasal -> ENSO test, this ARA/midpoint approach helped most at the 12-month transition window. It did not beat persistence at short horizons, and it did not solve exact value prediction by itself.
+
+So the refined framework wording is:
+
+> Vertical ARA transfer is not "same shape means same future value." It is "same relation-class gives a phase/transition prior; local state decides amplitude and observable value."
+
+The boundary-distance follow-up sharpened this again:
+
+```text
+subsystem architecture position
+  + rung distance
+  + singularity-boundary crossings
+  + pi-leak attenuation
+  + parity flip
+```
+
+does carry transition information. In the 12-month ENSO coupled-LI test, aggregate boundary transfer reached MAE `0.688`, corr `+0.263`, and turn accuracy `0.636`. That improves over the old external transition prior, but the earlier delayed feeder-amplitude branch remains better for exact value prediction at MAE `0.666`, corr `+0.354`.
+
+So the cleaner architecture wording is:
+
+> Boundary/rung coordinates help locate where the transition should go. Local feeder energy decides how far it actually moves.
 
 ---
 

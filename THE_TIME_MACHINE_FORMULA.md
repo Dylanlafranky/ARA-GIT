@@ -2,6 +2,8 @@
 
 > **Public-release note, May 2026:** This is a development notebook for the formula, not a final settled derivation. It includes attempts, reversals, and language that can sound stronger than the latest audit supports. The strongest current reading is that the formula may be a useful causal tracker/mapping tool; blind generation and universal-law claims require more testing.
 
+> **May 23 update:** The latest coupled-pair tests sharpen the old Vehicle/Teleporter distinction. Direct value teleport remains too blunt. The supported version is a transition prior: match ARA, midpoint, sign, balance distance, and coupling state from a smaller paired system, then decode with local target amplitude and feeder state. See `ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`.
+
 ## A Report on Building a Temporal Prediction Engine from Pure Geometry
 
 ### Dylan La Franchi — ARA Framework, Scripts 191–243BJ

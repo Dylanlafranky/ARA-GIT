@@ -52,6 +52,30 @@ Accumulation and release must be defined by physical direction **before** comput
 
 If the physical direction is genuinely ambiguous (e.g., the solar dynamo — is sunspot activity accumulation or release?), **flag it explicitly**. Do not force an assignment. The ambiguity itself is informative.
 
+### Update (May 2026): ARA is a bounded coordinate with orientation.
+
+The audit issue "which direction is the formula?" is real. ARA should not be treated as a single naked ratio that can be flipped after the result is known.
+
+Use three recorded fields:
+
+```text
+raw timing ratio     = the observer's measured phase ratio
+ARA position         = the bounded geometry coordinate, normally 0 <= ARA <= 2
+orientation          = which way the process is turning through accumulate/release
+```
+
+Because measurements are made from inside time, the same accumulate-release geometry can appear reversed depending on where the observer's phase window starts: buildup, release, return, or the coupled partner. That does not make the coordinate arbitrary. It means the measurement needs handedness.
+
+Operational rule:
+
+1. Define the physical phases before interpretation.
+2. Compute the candidate ratio from the observer's phase window.
+3. If the value sits in `0..2`, treat it as a candidate bounded ARA position and record the orientation.
+4. If a candidate value is above `2`, do not accept it as a clean ARA coordinate. Flag it as possible direction mismatch, wrong rung/window, or compound/coupled-system measurement.
+5. If both directions look plausible, mark the node direction-ambiguous and use neighbouring rungs, coupled partners, phase order, and domain physics before making claims.
+
+This is why hydrogen 21-cm hyperfine should stay near the zero/space edge rather than being inverted into an enormous value. The near-zero coordinate describes the geometry of a very long held state with a tiny release event; the orientation says how that physical process was observed.
+
 ---
 
 ## Rule 4: Decompose subsystems that serve the ground cycle.

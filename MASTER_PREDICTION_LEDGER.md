@@ -14,7 +14,32 @@ This document tracks every prediction the ARA framework has made, its current st
 - **OPEN** — testable but not yet tested
 - **FALSIFIED** — tested and definitively failed
 
-**Last updated:** 3 May 2026
+**Last updated:** 23 May 2026
+
+---
+
+## MAY 23 2026 CROSS-SCALE COUPLED GEOMETRY ADDITIONS
+
+Detailed records: `ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md` and `ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`.
+
+| # | Prediction / question | Test setup | Result | Status |
+|---|---|---|---|---|
+| CG-1 | ECG and Solar may share time-scaled temporal geometry | ECG R-R interval cycles versus SILSO Solar cycles, train/test split, train-only phase shift, null controls | Heldout shifted corr `+0.891`, but null specificity only `6.8%`; raw ECG PQRST versus Solar was weak at `+0.090` | **PARTIALLY CONFIRMED** - shared one-peak envelope, not specific fingerprint |
+| CG-2 | ENSO should be compared to another coupled anti-phase pair, not a single free oscillator | 33-subject nasal-cycle right/left airflow laterality versus ENSO NINO/SOI laterality | Dominance interval heldout corr `+0.992`, signed-cycle heldout corr `+0.980`, both null rank `1/9` | **SUPPORTED** as cross-scale coupled-pair geometry |
+| CG-3 | ARA and midpoint matching from a smaller coupled pair can help forecast a larger coupled pair's transition state | External nasal signed-cycle template used as ENSO prior with train-only decoders and corrected causal smoothing | ARA/midpoint version best at 12 months: MAE `0.739` versus persistence `0.946`; short horizons remain persistence-dominated | **PARTIALLY CONFIRMED** - useful transition prior, not exact value predictor |
+| CG-4 | Rung distance and singularity-boundary crossings should help scale lower-rung feeder state into a larger coupled system | Strict-causal 12-month ENSO boundary-distance transfer with parity flip and pi-leak attenuation | Aggregate boundary direct control reached MAE `0.688`, corr `+0.263`, turn accuracy `0.636`; useful but behind delayed feeder amplitude on MAE/corr | **PARTIALLY CONFIRMED** - boundary coordinates help transition, not exact amplitude |
+| TICK-1 | Future required variables should decode the observable if the geometry is real | Oracle diagnostic: actual future ARA/formula variables decoded with causal decoders | Very strong across ENSO, Solar, ECG; diagnostic only, not a forecast | **SUPPORTED AS DIAGNOSTIC** |
+| TICK-2 | A lawful tick recursion over required variables should forecast better than direct value transport | Strict-causal tick variable recursion and constrained formula tick on ENSO, Solar, ECG | Energy-aware variable recursion beats persistence across several horizons, but lag/direct controls still win many. Constrained formula tick helps Solar 24/60 months only. | **PARTIALLY CONFIRMED** |
+| COUP-1 | Two near-phi coupled systems may relax toward balance with phi-like speed | Solar hemispheres, heart/respiration, tides candidate tests | Solar north/south strongest: fractional toward-balance per cycle `1.619`; heart/resp weak; tides support amplitude breathing but not model lift | **MIXED / PROVISIONAL** |
+
+Framework clarification:
+
+```text
+shared relation-class geometry != direct causation
+external coupled geometry != direct value teleport
+```
+
+The current safe claim is that paired anti-phase geometry transfers as a phase/transition prior. Exact prediction still needs local phase clock, amplitude gate, feeder energy, and coupling state.
 
 ---
 
@@ -1754,3 +1779,44 @@ The framework cascade still beats persistence on correlation at long horizons (h
 
 **Procedural lesson:** the strict-causal protocol memory works only if Step 1 of the checklist ("is `bandpass` causal? `filtfilt`/`sosfiltfilt` are NOT") is literally run. I missed it on my own next script. The bigger correction (+0.42 → +0.08) came from the protocol catching its own miss the same day.
 
+---
+
+## Addendum (23 May 2026) - Boundary-distance transfer
+
+The latest 12-month ENSO coupled-LI test formalized Dylan's architecture-distance proposal:
+
+```text
+source lower-rung position
+  -> target home-rung position
+  -> number of boundary crossings
+  -> pi-leak attenuation and parity flip
+  -> future transition/value estimate
+```
+
+Script:
+
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_test.py`
+
+Outputs:
+
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.json`
+- `TheFormula/ara_enso_12m_boundary_distance_transfer_result.js`
+
+Best boundary-distance results:
+
+| Model | MAE | Corr | Turn accuracy |
+|---|---:|---:|---:|
+| aggregate boundary direct control | **0.688** | +0.263 | **0.636** |
+| aggregate boundary sign/amplitude | 0.705 | +0.271 | 0.601 |
+| detailed boundary direct control | 0.834 | **+0.286** | 0.605 |
+
+Comparison to the prior best in this branch:
+
+| Model | MAE | Corr | Turn accuracy |
+|---|---:|---:|---:|
+| delayed feeder aggregate sign/amplitude | **0.666** | **+0.354** | 0.593 |
+| boundary-distance aggregate direct control | 0.688 | +0.263 | **0.636** |
+
+Reading:
+
+> Boundary/rung distance carries useful transition information, but current boundary coordinates do not yet replace local feeder amplitude. The architecture idea is plausible as a coordinate system; the missing input is still better physical feeder state.

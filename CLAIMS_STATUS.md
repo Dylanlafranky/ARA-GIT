@@ -19,7 +19,9 @@ These are the claims I think are most worth outside replication.
 |---|---|---|
 | Phi-rung decomposition can extract useful topology from oscillating time series | Supported but not independently replicated | The same small predictor family shows signal on ENSO and ECG saved outputs. Some headline numbers need cleanup, but the signal is not obviously empty. |
 | ENSO has matched-rung anti-phase structure with SOI/Walker circulation | Supported as structural mapping | Dynamic per-rung outputs show strong anti-phase correlations across several rungs. This is closer to a domain-structure claim than a point-forecast claim. |
+| Paired anti-phase systems can share ARA coupled geometry across scale | Supported as a relation-class result; prediction use still provisional | The 2026-05-23 nasal-cycle versus ENSO test found strong dominance-interval and signed-cycle matches under train/test controls. Follow-up 12-month ENSO tests show partial transfer: delayed feeder amplitude is the best exact-value branch so far, while boundary-distance transfer improves turn/transition information. Best wording: this supports shared coupled-pair geometry, not a claim that nasal breathing causally predicts ENSO. See `ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`. |
 | ARA state geometry can expose useful subsystem structure | Supported as a state-map result; forecast use still provisional | The 2026-05-21 geometry map places NINO and SOI very close in ARA-position space and reads their strongest cross-candidate as mirror/destructive, while PDO sits about one rung-distance away. The first strict-causal transport test beats persistence at several horizons but remains weaker than a simple lag ridge baseline. See `ARA_GEOMETRY_TRANSPORT_RESULT.md`. |
+| Required ARA/formula variables carry causal forecast information | Provisional; forward operator still missing | The 2026-05-23 tick-recursion tests show energy-aware variable recursion beating persistence on multiple ENSO/Solar/short-ECG horizons, and actual future variables decode observables strongly. But strict formula tick does not yet beat simple controls consistently. See `ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`. |
 | **Cross-species topology+energy decomposition reduces practical prediction error** | **Supported on one mouse↔human pair (2026-05-12)** | The framework's "topology from species A × energy from species B" architecture gave a 58% MAE reduction on mouse→human RR-interval prediction vs naive cross-species transfer (34.29 ms vs 82.22 ms). Correlation stayed at chance level for both — see caveat below. |
 | ECG mid-horizon dips may mark an unmodeled physiological wave | Provisional | Multi-subject data show heterogeneous but recurring dip structure. Needs better physiology review and clean cross-subject rerun. |
 | LLM closure metrics correlate with Pythia benchmark capability | Preliminary | n=4 is too small, but the internal-activation metric rank-orders 5 of 6 benchmark sets. Needs larger Pythia sweep and parameter-count controls. |
@@ -43,6 +45,8 @@ These claims should not be used as strong public headlines until rerun cleanly.
 | "ARA geometry transport solves ENSO prediction" | The 2026-05-21 strict-causal geometry transport test found signal over persistence, but causal lag ridge won every tested horizon and lag+geometry did not cleanly improve the lag baseline. | "ARA state geometry contains ENSO forecast signal, but direct value-transport is too blunt; next test should predict future geometry state before decoding values." |
 | "Temporal friction is just distance from phi" | The 2026-05-23 test found that pure `friction = |ARA - phi|` over-advances the system. `1 + |ARA - phi|` is more useful, but still not enough. | "Phi-distance appears to modulate temporal friction around a baseline floor; it is not the whole friction law." |
 | "Negative k proves temporal pockets" | The 2026-05-23 pocket diagnostic is mixed. Solar at 132 months and ECG RR at 60 seconds support the pocket/surge reading, but ENSO mostly does not. | "Negative k may be a temporal-pocket marker only when paired with anti-phase/contact geometry and release-boundary state." |
+| "Nasal breathing predicts ENSO" | The 2026-05-23 nasal/ENSO test supports coupled-pair geometry and a transition prior, not direct point-prediction dominance. Short horizons are still persistence-dominated, and 18-24 month results need local ENSO/SOI state. The later delayed-feeder and boundary-distance tests improved the 12-month branch, but neither reaches high-correlation exact prediction. | "Nasal-cycle geometry is an external paired-system prior that partially transfers to ENSO, especially around the 12-month transition window." |
+| "The tick formula now solves prediction" | The strict formula tick helps Solar at 24 and 60 months but loses on ENSO and ECG in most horizons. Energy-aware variable recursion is better, but lag/direct controls still win several horizons. | "The required variables carry signal; the lawful tick operator is the current bottleneck." |
 | "Same formula works on every domain" | Some scripts fail, some outputs are exploratory, and several claims are trackers rather than blind generators. | "The same framework is being tested across domains, with mixed but interesting results." |
 
 ## Speculative Interpretation
@@ -123,3 +127,37 @@ The gear-vs-sync diagnostic repeatedly found a difference near `0.045`, which su
 The negative-`k` "temporal pocket" idea is promising but not universal. Solar at the 132-month horizon and ECG RR at the 60-second horizon showed pocket-like behavior: stronger negative-`k` markers lined up with larger movement and anti-phase/contact geometry. ENSO mostly did not. The careful claim is therefore:
 
 > Negative `k` may mark a temporary low-friction pocket caused by resonance cancellation, but only when the geometry is also near an anti-phase/contact or release-boundary state.
+
+## Update - May 23 2026: Tick recursion and coupling candidates
+
+The tick-recursion tests are recorded in [`ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`](ARA_TICK_RECURSION_AND_COUPLING_RESULT.md).
+
+Short version: the "direct variables" visualizer line is a strict-causal control, not the clean formula. It directly regresses future value deltas from current required variables, so it is closer to a teleporter than a vehicle.
+
+The cleaner framework-shaped test is:
+
+```text
+current variables -> future variables -> future value
+```
+
+Energy-aware tick variable recursion beats persistence across ENSO 1-60 months, Solar 6/24/60 months, and short ECG RR, but it does not consistently beat lag/direct controls. Actual future variables decode the observable very strongly as an oracle diagnostic, which means the missing piece is the lawful forward tick operator rather than the variable set itself.
+
+The phi-coupling candidate tests are mixed. Solar north/south is the cleanest candidate, with fractional toward-balance per cycle `1.619`; heart/respiration is weak; tides show amplitude breathing but the tested predictive model loses to the simpler baseline.
+
+## Update - May 23 2026: Cross-scale coupled geometry and nasal -> ENSO transfer
+
+The cross-scale coupled-pair test is recorded in [`ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`](ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md).
+
+Short version: ECG R-R envelopes and Solar cycles have a high time-scaled match, but the match is mostly a shared one-peak accumulate/release shape rather than a specific fingerprint. Raw ECG PQRST waveform does not transfer to Solar.
+
+The stronger relation-class result is nasal-cycle dominance versus ENSO NINO/SOI. Dominance-interval geometry scored heldout corr `+0.992`, signed full-cycle geometry scored heldout corr `+0.980`, and both ranked `1/9` against fixed null families. This supports the framework claim that paired anti-phase systems can share ARA coupled geometry across scale.
+
+The forecast result is more limited. External nasal geometry used as an ENSO prior is best around the 12-month transition window: the ARA/midpoint-matched template reaches MAE `0.739` versus persistence `0.946`. Short horizons are still persistence-dominated; 18-24 month horizons benefit from template/mean-reversion but still need local feeder and amplitude state.
+
+The direct follow-up test, `TheFormula/ara_enso_12m_geometry_state_predictor_test.py`, tried to raise 12-month correlation by predicting future geometry state first. It did not work: future-state decoders reached only `+0.174` to `+0.198` correlation, lag-only ridge narrowly won correlation at `+0.205`, and the old nasal ARA/midpoint template remained best on MAE. The missing piece is future dominance sign and magnitude, not just phase.
+
+The next follow-up, `TheFormula/ara_enso_12m_feeder_amplitude_test.py`, tested Dylan's delayed below-rung feeder idea. This did improve the result: aggregate feeder sign/amplitude gating reached MAE `0.666`, corr `+0.354`, and turn accuracy `0.593`. That is the strongest 12-month coupled-LI result in this branch so far, but still not close to a `+0.7` correlation forecast.
+
+Careful claim:
+
+> Shared ARA coupled geometry can transfer as a phase/transition prior, but exact value prediction still needs local state.
