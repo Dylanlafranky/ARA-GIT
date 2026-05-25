@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ARA Sphere Topology Direction</title>
+  <script src="ara_sphere_topology_direction_result.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #141a22;
+      --line: #2b3542;
+      --text: #e8f2ff;
+      --muted: #91a4b8;
+      --accent: #2ee7d0;
+      --truth: #f6f7fb;
+      --terrain: #8be348;
+      --wobble: #8f7cff;
+      --sphere: #2ee7d0;
+      --delta: #f6ad3c;
+      --bad: #ff5c6c;
+      --ready: #52d273;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    .app {
+      display: grid;
+      grid-template-rows: auto minmax(420px, 1fr) auto;
+      gap: 12px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    .bar, .cards, .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar, .card, .chart, .legend {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+    }
+    .bar {
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .label {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    button {
+      border: 1px solid #334050;
+      border-radius: 8px;
+      background: #1b2330;
+      color: var(--text);
+      padding: 8px 11px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button.active {
+      border-color: #9cff38;
+      color: #9cff38;
+      box-shadow: inset 0 0 0 1px rgba(156, 255, 56, .28);
+    }
+    .toggle {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      border: 1px solid #334050;
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: #1b2330;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle input { accent-color: #9cff38; }
+    .chart {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cards {
+      align-items: stretch;
+    }
+    .card {
+      min-width: 180px;
+      flex: 1;
+      padding: 12px;
+    }
+    .card .name {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .card .value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 850;
+      line-height: 1.05;
+    }
+    .card .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend {
+      padding: 10px 12px;
+    }
+    .item {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .swatch {
+      width: 14px;
+      height: 4px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <section class="bar">
+      <div class="group" id="horizonButtons">
+        <span class="label">Horizon</span>
+      </div>
+      <div class="group">
+        <label class="toggle"><input type="checkbox" data-model="terrain" checked> Terrain</label>
+        <label class="toggle"><input type="checkbox" data-model="wobble" checked> Wobble</label>
+        <label class="toggle"><input type="checkbox" data-model="nestedLevel" checked> Nested level</label>
+        <label class="toggle"><input type="checkbox" data-model="nestedDelta"> Nested delta</label>
+        <label class="toggle"><input type="checkbox" id="readyOnly"> Ready only</label>
+      </div>
+    </section>
+
+    <section class="chart">
+      <canvas id="chart"></canvas>
+    </section>
+
+    <section>
+      <div class="cards" id="cards"></div>
+      <div class="legend">
+        <span class="item" style="color: var(--truth)"><span class="swatch"></span> Truth</span>
+        <span class="item" style="color: var(--terrain)"><span class="swatch"></span> Terrain level</span>
+        <span class="item" style="color: var(--wobble)"><span class="swatch"></span> Wobble surface</span>
+        <span class="item" style="color: var(--sphere)"><span class="swatch"></span> Sphere nested level</span>
+        <span class="item" style="color: var(--delta)"><span class="swatch"></span> Sphere nested delta</span>
+        <span class="item" style="color: var(--ready)"><span class="swatch"></span> Ready memory window</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = window.ARA_SPHERE_TOPOLOGY_DIRECTION;
+    const horizons = DATA.horizons_months.map(String);
+    const state = {
+      horizon: horizons.includes("12") ? "12" : horizons[0],
+      readyOnly: false,
+      models: {
+        terrain: true,
+        wobble: true,
+        nestedLevel: true,
+        nestedDelta: false
+      }
+    };
+    const modelDefs = [
+      { key: "terrain", field: "terrain_level_analog", color: "#8be348" },
+      { key: "wobble", field: "wobble_surface_analog", color: "#8f7cff" },
+      { key: "nestedLevel", field: "sphere_nested2_level", color: "#2ee7d0" },
+      { key: "nestedDelta", field: "sphere_nested2_delta", color: "#f6ad3c" }
+    ];
+
+    const buttons = document.getElementById("horizonButtons");
+    for (const h of horizons) {
+      const button = document.createElement("button");
+      button.textContent = `${h}m`;
+      button.type = "button";
+      button.addEventListener("click", () => {
+        state.horizon = h;
+        render();
+      });
+      buttons.appendChild(button);
+    }
+    document.querySelectorAll("[data-model]").forEach((input) => {
+      input.addEventListener("change", () => {
+        state.models[input.dataset.model] = input.checked;
+        render();
+      });
+    });
+    document.getElementById("readyOnly").addEventListener("change", (event) => {
+      state.readyOnly = event.target.checked;
+      render();
+    });
+
+    function isReady(row) {
+      return row.sphere_nested3_mean_distance !== null && row.sphere_nested3_mean_distance !== undefined;
+    }
+
+    function metric(name, model, ready = false) {
+      const bag = ready ? DATA.ready_point_scores : DATA.point_scores;
+      return bag[model]?.[state.horizon]?.[name];
+    }
+
+    function direction(model, ready = false) {
+      const bag = ready ? DATA.ready_direction_scores : DATA.direction_scores;
+      return bag[model]?.[state.horizon]?.accuracy;
+    }
+
+    function fmt(value, digits = 3) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "n/a";
+    }
+
+    function rowsForView() {
+      const rows = DATA.viz_records[state.horizon] || [];
+      return state.readyOnly ? rows.filter(isReady) : rows;
+    }
+
+    function draw() {
+      const canvas = document.getElementById("chart");
+      const ctx = canvas.getContext("2d");
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(640, Math.round(rect.width * dpr));
+      canvas.height = Math.max(420, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#090d12";
+      ctx.fillRect(0, 0, w, h);
+
+      const rows = rowsForView();
+      if (!rows.length) return;
+      const activeModels = modelDefs.filter((def) => state.models[def.key]);
+      const values = rows.flatMap((row) => [
+        row.actual,
+        row.current,
+        ...activeModels.map((def) => row[def.field])
+      ]).filter(Number.isFinite);
+      let minY = Math.min(-2.2, ...values);
+      let maxY = Math.max(2.2, ...values);
+      const padY = (maxY - minY) * 0.08 || 1;
+      minY -= padY;
+      maxY += padY;
+      const margin = { left: 56, right: 22, top: 28, bottom: 50 };
+      const plotW = w - margin.left - margin.right;
+      const plotH = h - margin.top - margin.bottom;
+      const x = (i) => margin.left + (rows.length <= 1 ? 0 : i / (rows.length - 1)) * plotW;
+      const y = (v) => margin.top + (1 - (v - minY) / (maxY - minY)) * plotH;
+
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#25303b";
+      ctx.fillStyle = "#8ea3b8";
+      ctx.font = "12px ui-sans-serif, system-ui";
+      for (let tick = Math.ceil(minY); tick <= Math.floor(maxY); tick += 1) {
+        const yy = y(tick);
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yy);
+        ctx.lineTo(w - margin.right, yy);
+        ctx.stroke();
+        ctx.fillText(String(tick), 18, yy + 4);
+      }
+      for (const level of [-0.5, 0.5]) {
+        const yy = y(level);
+        ctx.save();
+        ctx.setLineDash([6, 8]);
+        ctx.strokeStyle = "#ff9f1c";
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yy);
+        ctx.lineTo(w - margin.right, yy);
+        ctx.stroke();
+        ctx.restore();
+      }
+      const zero = y(0);
+      ctx.strokeStyle = "#8792a0";
+      ctx.beginPath();
+      ctx.moveTo(margin.left, zero);
+      ctx.lineTo(w - margin.right, zero);
+      ctx.stroke();
+
+      const readySegments = [];
+      let start = null;
+      rows.forEach((row, index) => {
+        if (isReady(row) && start === null) start = index;
+        if ((!isReady(row) || index === rows.length - 1) && start !== null) {
+          const end = isReady(row) && index === rows.length - 1 ? index : index - 1;
+          readySegments.push([start, end]);
+          start = null;
+        }
+      });
+      ctx.save();
+      ctx.globalAlpha = 0.10;
+      ctx.fillStyle = "#52d273";
+      for (const [a, b] of readySegments) {
+        ctx.fillRect(x(a), margin.top, Math.max(2, x(b) - x(a)), plotH);
+      }
+      ctx.restore();
+
+      function path(field, color, width, dash) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (dash) ctx.setLineDash(dash);
+        ctx.beginPath();
+        rows.forEach((row, i) => {
+          const xx = x(i);
+          const yy = y(row[field]);
+          if (i === 0) ctx.moveTo(xx, yy);
+          else ctx.lineTo(xx, yy);
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
+      path("actual", "#f6f7fb", 2.3);
+      path("current", "#697381", 1.2, [4, 6]);
+      activeModels.forEach((def) => path(def.field, def.color, 1.8));
+
+      ctx.fillStyle = "#8ea3b8";
+      ctx.textAlign = "center";
+      const every = Math.max(1, Math.ceil(rows.length / 6));
+      rows.forEach((row, i) => {
+        if (i % every !== 0 && i !== rows.length - 1) return;
+        ctx.fillText(row.origin.slice(0, 4), x(i), h - 22);
+      });
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#9fd1ff";
+      ctx.font = "700 12px ui-sans-serif, system-ui";
+      ctx.fillText("NINO truth vs topology memory", margin.left, 18);
+    }
+
+    function renderCards() {
+      const cards = document.getElementById("cards");
+      const ready = state.readyOnly;
+      const items = [
+        ["Ready fraction", DATA.diagnostics[state.horizon]?.ready_fraction, "Historical sphere memory available", 3],
+        ["Wobble dir", direction("wobble_surface_analog", ready), "Current strongest terrain route", 3],
+        ["Nested level dir", direction("sphere_nested2_level", ready), "Same sphere spot / ARA-in-ARA level", 3],
+        ["Nested level MAE", metric("mae", "sphere_nested2_level", ready), "Native-unit error after lookup", 3],
+        ["Nested delta dir", direction("sphere_nested2_delta", ready), "Raw route-vector direction", 3]
+      ];
+      cards.innerHTML = "";
+      for (const [name, value, sub, digits] of items) {
+        const card = document.createElement("article");
+        card.className = "card";
+        card.innerHTML = `<div class="name">${name}</div><div class="value">${fmt(value, digits)}</div><div class="sub">${sub}</div>`;
+        cards.appendChild(card);
+      }
+    }
+
+    function render() {
+      document.querySelectorAll("#horizonButtons button").forEach((button) => {
+        button.classList.toggle("active", button.textContent === `${state.horizon}m`);
+      });
+      renderCards();
+      draw();
+    }
+    window.addEventListener("resize", render);
+    render();
+  </script>
+</body>
+</html>

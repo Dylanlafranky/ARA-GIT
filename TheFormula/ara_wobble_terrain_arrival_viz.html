@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Wobble Terrain Arrival</title>
+  <script src="./ara_wobble_terrain_arrival_result.js"></script>
+  <style>
+    :root {
+      --bg: #101214;
+      --panel: #171a1f;
+      --panel2: #20252d;
+      --text: #eef2f4;
+      --muted: #9da8b2;
+      --grid: rgba(255, 255, 255, 0.14);
+      --truth: #f3f4f6;
+      --terrain: #a3e635;
+      --wobble: #38bdf8;
+      --surface: #f59e0b;
+      --delta: #ef4444;
+      --persistence: #c084fc;
+      --accent: #a3e635;
+      --warning: #f97316;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1500px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 22px 0 28px;
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      color: var(--accent);
+      border: 1px solid rgba(163, 230, 53, 0.42);
+      background: rgba(163, 230, 53, 0.10);
+      border-radius: 8px;
+      padding: 9px 11px;
+      font-size: 12px;
+      font-weight: 760;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .band,
+    .summary,
+    .driver,
+    .surface {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+    }
+
+    .band {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    button,
+    label.toggle {
+      min-height: 36px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--panel2);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button.active {
+      border-color: rgba(163, 230, 53, 0.75);
+      box-shadow: inset 0 0 0 1px rgba(163, 230, 53, 0.22);
+      color: var(--accent);
+    }
+
+    .toggle input { margin: 0; accent-color: var(--accent); }
+    .swatch { width: 10px; height: 10px; border-radius: 999px; display: inline-block; }
+
+    .summary {
+      min-width: 300px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(70px, 1fr));
+      gap: 10px;
+      padding: 12px 14px;
+    }
+
+    .metric .name,
+    .driver .name {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .metric .value,
+    .driver .value {
+      margin-top: 5px;
+      font-size: 21px;
+      font-weight: 760;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .surface {
+      position: relative;
+      overflow: hidden;
+      background: #0b0d10;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 640px;
+    }
+
+    .tip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      min-width: 235px;
+      padding: 9px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(15, 18, 22, 0.94);
+      color: var(--text);
+      font-size: 12px;
+      z-index: 2;
+    }
+
+    .tip div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .drivers {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .driver { padding: 12px; }
+    .driver small { display: block; margin-top: 6px; color: var(--muted); line-height: 1.35; }
+
+    @media (max-width: 900px) {
+      main { width: min(100vw - 18px, 1500px); padding-top: 14px; }
+      header, .toolbar { display: grid; grid-template-columns: 1fr; }
+      .summary, .drivers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      canvas { height: 520px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>ARA Wobble Terrain Arrival</h1>
+        <div class="subhead">Forecast-valid 3-axis local terrain frame. No visual shift, decoder, lag ridge, or smoothed inputs.</div>
+      </div>
+      <div class="badge">Target Date</div>
+    </header>
+
+    <section class="toolbar">
+      <div class="band">
+        <span class="label">Horizon</span>
+        <button data-horizon="3">3m</button>
+        <button data-horizon="6">6m</button>
+        <button data-horizon="12" class="active">12m</button>
+        <button data-horizon="18">18m</button>
+        <button data-horizon="24">24m</button>
+        <span class="label">Overlay</span>
+        <label class="toggle"><input type="checkbox" data-model="wobble_surface_analog" checked><span class="swatch" style="background: var(--surface)"></span>Wobble surface</label>
+        <label class="toggle"><input type="checkbox" data-model="wobble_level_analog" checked><span class="swatch" style="background: var(--wobble)"></span>Wobble level</label>
+        <label class="toggle"><input type="checkbox" data-model="terrain_level_analog" checked><span class="swatch" style="background: var(--terrain)"></span>Terrain level</label>
+        <label class="toggle"><input type="checkbox" data-model="wobble_delta_analog"><span class="swatch" style="background: var(--delta)"></span>Wobble delta</label>
+        <label class="toggle"><input type="checkbox" data-model="persistence"><span class="swatch" style="background: var(--persistence)"></span>Persistence</label>
+      </div>
+      <div class="summary">
+        <div class="metric"><div class="name">MAE</div><div class="value" id="mae">--</div></div>
+        <div class="metric"><div class="name">Corr</div><div class="value" id="corr">--</div></div>
+        <div class="metric"><div class="name">Turn</div><div class="value" id="turn">--</div></div>
+        <div class="metric"><div class="name">Trans MAE</div><div class="value" id="trans">--</div></div>
+      </div>
+    </section>
+
+    <section class="surface">
+      <canvas id="chart"></canvas>
+      <div class="tip" id="tip"></div>
+    </section>
+
+    <section class="drivers">
+      <div class="driver"><div class="name">X Tilt</div><div class="value" id="axisX">--</div><small>Downstream topology-arrival tilt.</small></div>
+      <div class="driver"><div class="name">Y Tilt</div><div class="value" id="axisY">--</div><small>Lateral bank and ridge-channel tilt.</small></div>
+      <div class="driver"><div class="name">Z Tilt</div><div class="value" id="axisZ">--</div><small>Vertical sea/backpressure lift-sink tilt.</small></div>
+      <div class="driver"><div class="name">Torsion</div><div class="value" id="torsion">--</div><small>Coupled lower-spin and sea twist.</small></div>
+    </section>
+  </main>
+
+  <script>
+    const data = window.ARA_WOBBLE_TERRAIN_ARRIVAL;
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+    const tip = document.getElementById("tip");
+    const horizonButtons = [...document.querySelectorAll("[data-horizon]")];
+    const toggles = [...document.querySelectorAll("[data-model]")];
+    const metricEls = {
+      mae: document.getElementById("mae"),
+      corr: document.getElementById("corr"),
+      turn: document.getElementById("turn"),
+      trans: document.getElementById("trans"),
+    };
+    const driverEls = {
+      x: document.getElementById("axisX"),
+      y: document.getElementById("axisY"),
+      z: document.getElementById("axisZ"),
+      torsion: document.getElementById("torsion"),
+    };
+    const colors = {
+      truth: css("--truth"),
+      terrain_level_analog: css("--terrain"),
+      wobble_level_analog: css("--wobble"),
+      wobble_surface_analog: css("--surface"),
+      wobble_delta_analog: css("--delta"),
+      persistence: css("--persistence"),
+      grid: css("--grid"),
+      muted: css("--muted"),
+      warning: css("--warning"),
+    };
+    const labels = {
+      terrain_level_analog: "Terrain level",
+      wobble_level_analog: "Wobble level",
+      wobble_surface_analog: "Wobble surface",
+      wobble_delta_analog: "Wobble delta",
+      persistence: "Persistence",
+    };
+    let state = {
+      horizon: "12",
+      activeModels: new Set(["wobble_surface_analog", "wobble_level_analog", "terrain_level_analog"]),
+      hoverIndex: null,
+    };
+    const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3, minimumFractionDigits: 3 });
+    const monthFmt = new Intl.DateTimeFormat(undefined, { year: "numeric", month: "short" });
+
+    function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    function toTime(date) { return new Date(`${date}T00:00:00Z`).getTime(); }
+    function records() { return data.viz_records[state.horizon] || []; }
+    function active() { return [...state.activeModels]; }
+    function value(v) { return Number.isFinite(v) ? fmt.format(v) : "--"; }
+    function signed(v) { return Number.isFinite(v) ? `${v >= 0 ? "+" : ""}${fmt.format(v)}` : "--"; }
+    function pct(v) { return Number.isFinite(v) ? `${Math.round(v * 100)}%` : "--"; }
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = Math.max(320, Math.floor(rect.width));
+      const height = Math.max(360, Math.floor(rect.height));
+      if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      return { width, height };
+    }
+
+    function scaleFor(rows, width, height) {
+      const pad = { left: 66, right: 24, top: 26, bottom: 54 };
+      const times = rows.map(r => toTime(r.target));
+      const minT = Math.min(...times);
+      const maxT = Math.max(...times);
+      const start = new Date(minT);
+      const end = new Date(maxT);
+      start.setUTCMonth(start.getUTCMonth() - 8);
+      end.setUTCMonth(end.getUTCMonth() + 8);
+      const truth = data.observed_series
+        .map(d => ({ t: toTime(d.date), y: d.nino }))
+        .filter(d => d.t >= start.getTime() && d.t <= end.getTime());
+      const values = truth.map(d => d.y);
+      for (const r of rows) {
+        values.push(r.actual);
+        for (const model of active()) values.push(r[model]);
+      }
+      values.push(-0.5, 0, 0.5);
+      const minY = Math.min(...values);
+      const maxY = Math.max(...values);
+      const span = Math.max(1, maxY - minY);
+      const yMin = minY - span * 0.12;
+      const yMax = maxY + span * 0.12;
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const x = t => pad.left + ((t - start.getTime()) / (end.getTime() - start.getTime())) * plotW;
+      const y = v => pad.top + ((yMax - v) / (yMax - yMin)) * plotH;
+      return { pad, x, y, yMin, yMax, tMin: start.getTime(), tMax: end.getTime(), truth };
+    }
+
+    function ticks(min, max, count) {
+      const span = max - min;
+      const raw = span / Math.max(1, count - 1);
+      const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+      const err = raw / mag;
+      const step = err >= 7.5 ? 10 * mag : err >= 3.5 ? 5 * mag : err >= 1.5 ? 2 * mag : mag;
+      const out = [];
+      for (let v = Math.ceil(min / step) * step; v <= max + step * 0.5; v += step) out.push(v);
+      return out;
+    }
+
+    function grid(width, height, scale) {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#0b0d10";
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = "12px Inter, sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      for (const tick of ticks(scale.yMin, scale.yMax, 7)) {
+        const yy = scale.y(tick);
+        ctx.strokeStyle = colors.grid;
+        ctx.beginPath();
+        ctx.moveTo(scale.pad.left, yy);
+        ctx.lineTo(width - scale.pad.right, yy);
+        ctx.stroke();
+        ctx.fillStyle = colors.muted;
+        ctx.fillText(tick.toFixed(1), scale.pad.left - 10, yy);
+      }
+      threshold(scale.y(0.5), "+0.5", colors.warning, width, scale);
+      threshold(scale.y(-0.5), "-0.5", colors.warning, width, scale);
+      threshold(scale.y(0), "0", "rgba(255,255,255,0.42)", width, scale);
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      const startYear = new Date(scale.tMin).getUTCFullYear();
+      const endYear = new Date(scale.tMax).getUTCFullYear();
+      for (let year = Math.ceil(startYear / 5) * 5; year <= endYear; year += 5) {
+        const xx = scale.x(Date.UTC(year, 0, 1));
+        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+        ctx.beginPath();
+        ctx.moveTo(xx, scale.pad.top);
+        ctx.lineTo(xx, height - scale.pad.bottom);
+        ctx.stroke();
+        ctx.fillStyle = colors.muted;
+        ctx.fillText(String(year), xx, height - scale.pad.bottom + 14);
+      }
+    }
+
+    function threshold(y, label, color, width, scale) {
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = label === "0" ? 1.3 : 1;
+      ctx.setLineDash(label === "0" ? [] : [6, 7]);
+      ctx.beginPath();
+      ctx.moveTo(scale.pad.left, y);
+      ctx.lineTo(width - scale.pad.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = color;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(label, scale.pad.left + 6, y - 4);
+      ctx.restore();
+    }
+
+    function line(points, color, width = 2.4, dash = []) {
+      if (points.length < 2) return;
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      points.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function dots(points, color, radius = 2.8) {
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.strokeStyle = "#0b0d10";
+      ctx.lineWidth = 1.5;
+      for (const p of points) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function render() {
+      const { width, height } = resize();
+      const rows = records();
+      const scale = scaleFor(rows, width, height);
+      grid(width, height, scale);
+      line(scale.truth.map(d => ({ x: scale.x(d.t), y: scale.y(d.y) })), "rgba(243,244,246,0.50)", 2.2);
+      const truth = rows.map(r => ({ x: scale.x(toTime(r.target)), y: scale.y(r.actual), record: r }));
+      line(truth, colors.truth, 3);
+      dots(truth, colors.truth, 3.4);
+      for (const model of active()) {
+        const pts = rows.map(r => ({ x: scale.x(toTime(r.target)), y: scale.y(r[model]), record: r }));
+        line(pts, colors[model], model === "wobble_surface_analog" ? 3.2 : 2.4, model === "persistence" ? [7, 7] : []);
+        dots(pts, colors[model], model === "wobble_surface_analog" ? 3.6 : 2.8);
+      }
+      if (state.hoverIndex !== null && rows[state.hoverIndex]) {
+        const xx = scale.x(toTime(rows[state.hoverIndex].target));
+        ctx.strokeStyle = "rgba(255,255,255,0.44)";
+        ctx.beginPath();
+        ctx.moveTo(xx, scale.pad.top);
+        ctx.lineTo(xx, height - scale.pad.bottom);
+        ctx.stroke();
+      }
+      updateMetrics();
+      updateDrivers(rows[state.hoverIndex] || rows[Math.floor(rows.length * 0.62)]);
+    }
+
+    function preferred() {
+      if (state.activeModels.has("wobble_surface_analog")) return "wobble_surface_analog";
+      return active()[0] || "wobble_surface_analog";
+    }
+
+    function updateMetrics() {
+      const score = data.point_scores[preferred()]?.[state.horizon] || {};
+      metricEls.mae.textContent = value(score.mae);
+      metricEls.corr.textContent = signed(score.corr);
+      metricEls.turn.textContent = pct(score.turn_accuracy);
+      metricEls.trans.textContent = value(score.transition_mae);
+    }
+
+    function updateDrivers(row) {
+      if (!row) return;
+      driverEls.x.textContent = signed(row.x);
+      driverEls.y.textContent = signed(row.y);
+      driverEls.z.textContent = signed(row.z);
+      driverEls.torsion.textContent = signed(row.torsion);
+    }
+
+    function showTip(evt) {
+      const rows = records();
+      const { width, height } = resize();
+      const scale = scaleFor(rows, width, height);
+      const rect = canvas.getBoundingClientRect();
+      const mx = evt.clientX - rect.left;
+      let bestIndex = null;
+      let bestDist = Infinity;
+      rows.forEach((row, i) => {
+        const dist = Math.abs(scale.x(toTime(row.target)) - mx);
+        if (dist < bestDist) { bestDist = dist; bestIndex = i; }
+      });
+      if (bestDist > 28 || bestIndex === null) {
+        state.hoverIndex = null;
+        tip.style.display = "none";
+        render();
+        return;
+      }
+      state.hoverIndex = bestIndex;
+      const row = rows[bestIndex];
+      const lines = [
+        ["Target", monthFmt.format(new Date(`${row.target}T00:00:00Z`))],
+        ["Origin", monthFmt.format(new Date(`${row.origin}T00:00:00Z`))],
+        ["Truth", value(row.actual)],
+        ...active().map(model => [labels[model], value(row[model])]),
+        ["X/Y/Z", `${signed(row.x)} / ${signed(row.y)} / ${signed(row.z)}`],
+        ["Orient", pct(row.wobble_orientation_match)],
+      ];
+      tip.innerHTML = lines.map(([k, v]) => `<div><span>${k}</span><strong>${v}</strong></div>`).join("");
+      tip.style.display = "block";
+      tip.style.left = `${Math.min(rect.width - 255, Math.max(8, evt.clientX - rect.left + 14))}px`;
+      tip.style.top = `${Math.min(rect.height - 210, Math.max(8, evt.clientY - rect.top + 14))}px`;
+      render();
+    }
+
+    horizonButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        state.horizon = button.dataset.horizon;
+        horizonButtons.forEach(b => b.classList.toggle("active", b === button));
+        state.hoverIndex = null;
+        tip.style.display = "none";
+        render();
+      });
+    });
+
+    toggles.forEach(input => {
+      input.addEventListener("change", () => {
+        if (input.checked) state.activeModels.add(input.dataset.model);
+        else state.activeModels.delete(input.dataset.model);
+        render();
+      });
+    });
+
+    canvas.addEventListener("mousemove", showTip);
+    canvas.addEventListener("mouseleave", () => {
+      state.hoverIndex = null;
+      tip.style.display = "none";
+      render();
+    });
+    window.addEventListener("resize", render);
+    render();
+  </script>
+</body>
+</html>

@@ -1,0 +1,4230 @@
+{
+  "date": "2026-05-24",
+  "method": "strict-causal targeted future-geometry flow predictor",
+  "leakage_guard": [
+    "S(t), velocity, and acceleration features use only anchors <= t.",
+    "Transition models use only completed pairs s+h<t.",
+    "Decoders use only geometry anchors a<t.",
+    "Oracle phase/selected decoders use actual S(t+h) and are diagnostic only."
+  ],
+  "system": "ENSO",
+  "target": "NINO3.4 anomaly",
+  "base": 2.0,
+  "home_period_months": 47.0,
+  "rungs_k": [
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "horizons_months": [
+    1,
+    3,
+    6,
+    12,
+    24,
+    60
+  ],
+  "origin_stride_months": 3,
+  "velocity_lags_months": [
+    1,
+    3,
+    12
+  ],
+  "ridge_alpha_transition": 20.0,
+  "ridge_alpha_decoder": 5.0,
+  "target_sets": {
+    "phase_only": [
+      "nino_phase_sin",
+      "nino_phase_cos",
+      "soi_phase_sin",
+      "soi_phase_cos"
+    ],
+    "phase_energy": [
+      "nino_phase_sin",
+      "nino_phase_cos",
+      "soi_phase_sin",
+      "soi_phase_cos",
+      "nino_amplitude_energy_log",
+      "nino_rung_position",
+      "nino_weighted_k",
+      "nino_occupancy_entropy",
+      "nino_home_distance",
+      "nino_pdo_coupling_energy_log",
+      "nino_soi_coupling_energy_log",
+      "nino_orientation_release_balance"
+    ],
+    "selected": [
+      "nino_phase_sin",
+      "nino_phase_cos",
+      "soi_phase_sin",
+      "soi_phase_cos",
+      "nino_amplitude_energy_log",
+      "nino_rung_position",
+      "nino_weighted_k",
+      "nino_occupancy_entropy",
+      "nino_home_distance",
+      "nino_pdo_coupling_energy_log",
+      "nino_soi_coupling_energy_log",
+      "nino_orientation_release_balance",
+      "pdo_phase_sin",
+      "pdo_phase_cos",
+      "soi_amplitude_energy_log",
+      "nino_pdo_coupling_pressure",
+      "nino_pdo_rung_distance",
+      "nino_pdo_ara_gap",
+      "nino_soi_coupling_pressure",
+      "nino_soi_rung_distance",
+      "nino_soi_ara_gap",
+      "nino_regime_accumulate_side",
+      "nino_regime_balance_engine",
+      "nino_regime_release_donor",
+      "enso_feeder_pressure",
+      "enso_counterbalance_gate",
+      "enso_partner_gap"
+    ]
+  },
+  "sample": {
+    "start": "1951-01-01",
+    "end": "2025-12-01",
+    "n": 900,
+    "test_start_origin": "2008-09-01"
+  },
+  "models": {
+    "phase_only_ridge_flow_decoder": "Predict future NINO/SOI phase only, then decode.",
+    "phase_energy_ridge_flow_decoder": "Predict phase plus NINO energy/rung and coupling-energy context, then decode.",
+    "selected_ridge_flow_decoder": "Predict the broader ablation-selected future geometry target set, then decode.",
+    "selected_analog_flow_decoder": "Analog transition over selected future targets using current geometry plus velocity/acceleration neighbors.",
+    "selected_direct_geometry_control": "Control: current selected geometry/velocity directly regresses future raw value delta.",
+    "raw_analog_baseline": "Raw NINO/SOI/PDO lag analog baseline.",
+    "lag_ridge": "Causal NINO lag/slope ridge baseline.",
+    "oracle_phase_only_decoder": "Diagnostic only: decode actual future phase fields.",
+    "oracle_selected_decoder": "Diagnostic only: decode actual future selected geometry fields."
+  },
+  "scores": {
+    "persistence": {
+      "1": {
+        "n": 69,
+        "mae": 0.20942028985507247,
+        "rmse": 0.25368301571797847,
+        "corr": 0.9564641847507332,
+        "direction": 0.028985507246376812,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.482463768115942,
+        "rmse": 0.5955961573152531,
+        "corr": 0.7606034407739822,
+        "direction": 0.014492753623188406,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.7704411764705883,
+        "rmse": 0.9790398958403375,
+        "corr": 0.3563502876581542,
+        "direction": 0.0,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.997878787878788,
+        "rmse": 1.2974730685591758,
+        "corr": -0.10571418250416682,
+        "direction": 0.0,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 1.1519354838709677,
+        "rmse": 1.3917498848340113,
+        "corr": -0.2808758244845616,
+        "direction": 0.0,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.8674,
+        "rmse": 1.2892672337417095,
+        "corr": -0.1458849272141439,
+        "direction": 0.0,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": 0.0,
+        "r2_vs_persistence": 0.0,
+        "pred_delta_std": 0.0,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "phase_only_ridge_flow_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.5016588508321921,
+        "rmse": 0.6437701484330208,
+        "corr": 0.6772409245308788,
+        "direction": 0.5797101449275363,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.29223856097711964,
+        "r2_vs_persistence": -5.439896470426683,
+        "pred_delta_std": 0.640236601525768,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.5998942488565666,
+        "rmse": 0.7536217178936969,
+        "corr": 0.550002029934589,
+        "direction": 0.6521739130434783,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.11743048074062462,
+        "r2_vs_persistence": -0.6010431497706898,
+        "pred_delta_std": 0.717940034809029,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.7415247177408079,
+        "rmse": 0.93307203418715,
+        "corr": 0.2663400525092198,
+        "direction": 0.6617647058823529,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.028916458729780437,
+        "r2_vs_persistence": 0.09169947166069714,
+        "pred_delta_std": 0.9064992027589737,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.7607090471195715,
+        "rmse": 0.9896630902379795,
+        "corr": 0.20116925017443418,
+        "direction": 0.7575757575757576,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.23716974075921649,
+        "r2_vs_persistence": 0.4181942048205911,
+        "pred_delta_std": 1.099244477842163,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.738190476945764,
+        "rmse": 0.9815210705802012,
+        "corr": 0.19604059564243603,
+        "direction": 0.7258064516129032,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.41374500692520366,
+        "r2_vs_persistence": 0.5026331150821031,
+        "pred_delta_std": 1.107439282626063,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.9329808436599693,
+        "rmse": 1.1577845947597996,
+        "corr": -0.07315167767491701,
+        "direction": 0.56,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": -0.0655808436599693,
+        "r2_vs_persistence": 0.19356449073034487,
+        "pred_delta_std": 1.0997480454854807,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "phase_energy_ridge_flow_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.4622466760124045,
+        "rmse": 0.5684239196744626,
+        "corr": 0.7575288578408536,
+        "direction": 0.5072463768115942,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.252826386157332,
+        "r2_vs_persistence": -4.020672653892019,
+        "pred_delta_std": 0.543681970740148,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.6519061462460322,
+        "rmse": 0.8074986331537435,
+        "corr": 0.5228926876308981,
+        "direction": 0.4782608695652174,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.16944237813009017,
+        "r2_vs_persistence": -0.8381452130236644,
+        "pred_delta_std": 0.6634496629135901,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.8687756622106998,
+        "rmse": 1.095658572624226,
+        "corr": 0.07562459046231072,
+        "direction": 0.5588235294117647,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": -0.0983344857401115,
+        "r2_vs_persistence": -0.2524191595800669,
+        "pred_delta_std": 0.9677274951628068,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.9584972348395597,
+        "rmse": 1.1838809698912085,
+        "corr": -0.07296393977678801,
+        "direction": 0.6666666666666666,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.0393815530392283,
+        "r2_vs_persistence": 0.167432650769744,
+        "pred_delta_std": 1.0727353993040785,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.8692907457623217,
+        "rmse": 1.098714527650861,
+        "corr": 0.10433517340324576,
+        "direction": 0.7096774193548387,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.282644738108646,
+        "r2_vs_persistence": 0.37677144170464816,
+        "pred_delta_std": 1.1837377254792063,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 1.0363878742345358,
+        "rmse": 1.303578747476283,
+        "corr": -0.22337107924214572,
+        "direction": 0.56,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": -0.16898787423453587,
+        "r2_vs_persistence": -0.022324225502093453,
+        "pred_delta_std": 1.120971668601966,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "selected_ridge_flow_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.5046112656180106,
+        "rmse": 0.6045507994319361,
+        "corr": 0.769412721113736,
+        "direction": 0.4927536231884058,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.2951909757629382,
+        "r2_vs_persistence": -4.67914315222874,
+        "pred_delta_std": 0.5547908334183911,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.7454413722062724,
+        "rmse": 0.9159193060734637,
+        "corr": 0.46766749233856275,
+        "direction": 0.5217391304347826,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.2629776040903304,
+        "r2_vs_persistence": -1.36488840780941,
+        "pred_delta_std": 0.7501010070446232,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.9070605292714241,
+        "rmse": 1.1464668111263387,
+        "corr": 0.11456416896621252,
+        "direction": 0.6323529411764706,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": -0.1366193528008358,
+        "r2_vs_persistence": -0.37126753636454124,
+        "pred_delta_std": 0.9851403017985304,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.85742709877674,
+        "rmse": 1.0800732903379464,
+        "corr": 0.0992409385109697,
+        "direction": 0.7121212121212122,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.14045168910204808,
+        "r2_vs_persistence": 0.3070374754281926,
+        "pred_delta_std": 0.972851460492984,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.7620608546048011,
+        "rmse": 1.0143370889981806,
+        "corr": 0.24525055880488167,
+        "direction": 0.7741935483870968,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.38987462926616656,
+        "r2_vs_persistence": 0.4688193779163241,
+        "pred_delta_std": 1.2302150219747132,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 1.0444536054646039,
+        "rmse": 1.1935069481886045,
+        "corr": -0.08871480050041389,
+        "direction": 0.56,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": -0.1770536054646039,
+        "r2_vs_persistence": 0.1430331694704785,
+        "pred_delta_std": 1.111228375326798,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "selected_analog_flow_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.44693456824498895,
+        "rmse": 0.5560423257004559,
+        "corr": 0.8064803824045357,
+        "direction": 0.4927536231884058,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.23751427838991648,
+        "r2_vs_persistence": -3.8043309739794298,
+        "pred_delta_std": 0.49565506251585073,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.6456193703349108,
+        "rmse": 0.7972465739046791,
+        "corr": 0.5902312364890858,
+        "direction": 0.4782608695652174,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.1631556022189688,
+        "r2_vs_persistence": -0.7917670630677209,
+        "pred_delta_std": 0.5028854166923769,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.8835805553965068,
+        "rmse": 1.081235521611624,
+        "corr": 0.23462451296707781,
+        "direction": 0.47058823529411764,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": -0.11313937892591852,
+        "r2_vs_persistence": -0.2196629484705075,
+        "pred_delta_std": 0.5059354134476086,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.9716338395716907,
+        "rmse": 1.2564693984879574,
+        "corr": -0.046703518336271684,
+        "direction": 0.5757575757575758,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.026244948307097338,
+        "r2_vs_persistence": 0.062206696113815685,
+        "pred_delta_std": 0.5034388325026561,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 1.08349101953635,
+        "rmse": 1.3512624521724017,
+        "corr": -0.18519032285020662,
+        "direction": 0.5806451612903226,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.0684444643346176,
+        "r2_vs_persistence": 0.05733576501048954,
+        "pred_delta_std": 0.5723152429492963,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 1.0934776737422265,
+        "rmse": 1.4511535413589243,
+        "corr": -0.28614081128614194,
+        "direction": 0.44,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": -0.22607767374222654,
+        "r2_vs_persistence": -0.2668956392986126,
+        "pred_delta_std": 0.528034091359945,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "selected_direct_geometry_control": {
+      "1": {
+        "n": 69,
+        "mae": 0.27020938646145304,
+        "rmse": 0.3418382869322864,
+        "corr": 0.9259977054328757,
+        "direction": 0.5072463768115942,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.06078909660638057,
+        "r2_vs_persistence": -0.8157607464211716,
+        "pred_delta_std": 0.24048975296135167,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.6734645230550729,
+        "rmse": 0.812948087937954,
+        "corr": 0.6629179133661615,
+        "direction": 0.5652173913043478,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.19100075493913088,
+        "r2_vs_persistence": -0.8630386025917016,
+        "pred_delta_std": 0.6271125474550274,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 1.1207160219613046,
+        "rmse": 1.3319611473542863,
+        "corr": 0.2635877376742582,
+        "direction": 0.5294117647058824,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": -0.3502748454907163,
+        "r2_vs_persistence": -0.850897353426189,
+        "pred_delta_std": 1.0407983128600224,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 1.2606528181911294,
+        "rmse": 1.640223255312438,
+        "corr": -0.18256456298666235,
+        "direction": 0.6363636363636364,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": -0.26277403031234137,
+        "r2_vs_persistence": -0.5981194094301181,
+        "pred_delta_std": 1.2829385204021833,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 1.3360683058601917,
+        "rmse": 1.7393150073738874,
+        "corr": 0.04014712174013413,
+        "direction": 0.7096774193548387,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": -0.18413282198922398,
+        "r2_vs_persistence": -0.5618312217492725,
+        "pred_delta_std": 1.6441014004457573,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 1.3660855903952598,
+        "rmse": 1.7013465633744513,
+        "corr": -0.31093742956736653,
+        "direction": 0.46,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": -0.49868559039525984,
+        "r2_vs_persistence": -0.7414045931055979,
+        "pred_delta_std": 1.2626798631544247,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "raw_analog_baseline": {
+      "1": {
+        "n": 69,
+        "mae": 0.19849145806068527,
+        "rmse": 0.238775094872473,
+        "corr": 0.9623339709059249,
+        "direction": 0.5362318840579711,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": 0.010928831794387195,
+        "r2_vs_persistence": 0.11407844403474043,
+        "pred_delta_std": 0.07080850664747744,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.44970094728074833,
+        "rmse": 0.5640469640439745,
+        "corr": 0.7811030474329078,
+        "direction": 0.5797101449275363,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": 0.03276282083519366,
+        "r2_vs_persistence": 0.1031356572716704,
+        "pred_delta_std": 0.13839083932215374,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.7080764557232173,
+        "rmse": 0.884159430667767,
+        "corr": 0.3503592319362832,
+        "direction": 0.6764705882352942,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.06236472074737098,
+        "r2_vs_persistence": 0.18443160449659635,
+        "pred_delta_std": 0.2813781343162448,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.7836471494900024,
+        "rmse": 0.9965583324937811,
+        "corr": -0.0760566086027963,
+        "direction": 0.7272727272727273,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.21423163838878567,
+        "r2_vs_persistence": 0.41005877530318713,
+        "pred_delta_std": 0.5929511564487691,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.9591974995114431,
+        "rmse": 1.1549472316626015,
+        "corr": -0.39786980727651733,
+        "direction": 0.7096774193548387,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.1927379843595246,
+        "r2_vs_persistence": 0.31134469663793884,
+        "pred_delta_std": 0.509320724675558,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.7894736826234228,
+        "rmse": 1.1118603761913046,
+        "corr": -0.19113660967388468,
+        "direction": 0.72,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": 0.07792631737657718,
+        "r2_vs_persistence": 0.2562711714258311,
+        "pred_delta_std": 0.5444867940215878,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "lag_ridge": {
+      "1": {
+        "n": 69,
+        "mae": 0.17180780959823602,
+        "rmse": 0.22248241531304117,
+        "corr": 0.965936550100683,
+        "direction": 0.6811594202898551,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": 0.037612480256836445,
+        "r2_vs_persistence": 0.2308543331779771,
+        "pred_delta_std": 0.13410257964227526,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.3698929853261601,
+        "rmse": 0.48835753621271116,
+        "corr": 0.8242311313252668,
+        "direction": 0.6956521739130435,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": 0.11257078278978189,
+        "r2_vs_persistence": 0.3276862183575924,
+        "pred_delta_std": 0.34579159047613917,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.6021741585156446,
+        "rmse": 0.7595750831102865,
+        "corr": 0.4765991313993751,
+        "direction": 0.6911764705882353,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.1682670179549437,
+        "r2_vs_persistence": 0.3980774131054504,
+        "pred_delta_std": 0.6274950529739552,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.6491933746013963,
+        "rmse": 0.8566599187929916,
+        "corr": 0.2050243593439449,
+        "direction": 0.8181818181818182,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.3486854132773918,
+        "r2_vs_persistence": 0.5640665532012137,
+        "pred_delta_std": 0.9766093096303698,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.6171563267581481,
+        "rmse": 0.845516609291705,
+        "corr": 0.16699556749449762,
+        "direction": 0.7903225806451613,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.5347791571128195,
+        "r2_vs_persistence": 0.6309188216661826,
+        "pred_delta_std": 1.1157956811612313,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.7034572572349909,
+        "rmse": 0.9494586310355363,
+        "corr": -0.4594618147925984,
+        "direction": 0.72,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": 0.1639427427650091,
+        "r2_vs_persistence": 0.45766678575638786,
+        "pred_delta_std": 0.8935452769290528,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "oracle_phase_only_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.5017794677467373,
+        "rmse": 0.6288786478303311,
+        "corr": 0.685284879276984,
+        "direction": 0.6231884057971014,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.2923591778916649,
+        "r2_vs_persistence": -5.14541074317903,
+        "pred_delta_std": 0.6474877001800253,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.5073731591748332,
+        "rmse": 0.6273000746422702,
+        "corr": 0.6881021475432141,
+        "direction": 0.7246376811594203,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.024909391058891173,
+        "r2_vs_persistence": -0.10929461371784832,
+        "pred_delta_std": 0.7541997270245149,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.5184171806409634,
+        "rmse": 0.6406563248213023,
+        "corr": 0.6717585200236134,
+        "direction": 0.7941176470588235,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.25202399582962487,
+        "r2_vs_persistence": 0.5717972453788153,
+        "pred_delta_std": 1.0115434072271607,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.531297117675292,
+        "rmse": 0.6515382573155064,
+        "corr": 0.6635314177017544,
+        "direction": 0.8484848484848485,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.46658167020349606,
+        "r2_vs_persistence": 0.7478359681926041,
+        "pred_delta_std": 1.0768287116333446,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.5286995265272842,
+        "rmse": 0.6435765006428595,
+        "corr": 0.6553117941427472,
+        "direction": 0.8548387096774194,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.6232359573436834,
+        "r2_vs_persistence": 0.7861654052298077,
+        "pred_delta_std": 1.1487787017650364,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.5213271433848072,
+        "rmse": 0.6397591167277683,
+        "corr": 0.6731479612678755,
+        "direction": 0.72,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": 0.3460728566151927,
+        "r2_vs_persistence": 0.7537665352534912,
+        "pred_delta_std": 1.0546085598872845,
+        "truth_delta_std": 1.2873327619539556
+      }
+    },
+    "oracle_selected_decoder": {
+      "1": {
+        "n": 69,
+        "mae": 0.43943554429560017,
+        "rmse": 0.547924555960522,
+        "corr": 0.8098521205923105,
+        "direction": 0.5507246376811594,
+        "persistence_mae": 0.20942028985507247,
+        "mae_lift_vs_persistence": -0.2300152544405277,
+        "r2_vs_persistence": -3.665076233012708,
+        "pred_delta_std": 0.5209034995565289,
+        "truth_delta_std": 0.25368098720286664
+      },
+      "3": {
+        "n": 69,
+        "mae": 0.4935556989604589,
+        "rmse": 0.6307154185393349,
+        "corr": 0.7630632103675364,
+        "direction": 0.6956521739130435,
+        "persistence_mae": 0.482463768115942,
+        "mae_lift_vs_persistence": -0.011091930844516928,
+        "r2_vs_persistence": -0.12140663584732181,
+        "pred_delta_std": 0.6517107546328428,
+        "truth_delta_std": 0.5955883812237872
+      },
+      "6": {
+        "n": 68,
+        "mae": 0.5377496926193056,
+        "rmse": 0.689443897753183,
+        "corr": 0.718284878370274,
+        "direction": 0.8529411764705882,
+        "persistence_mae": 0.7704411764705883,
+        "mae_lift_vs_persistence": 0.2326914838512827,
+        "r2_vs_persistence": 0.504096601311476,
+        "pred_delta_std": 0.9476218602072176,
+        "truth_delta_std": 0.9790230967900823
+      },
+      "12": {
+        "n": 66,
+        "mae": 0.5479777774527487,
+        "rmse": 0.7040207870049626,
+        "corr": 0.7020527366911241,
+        "direction": 0.803030303030303,
+        "persistence_mae": 0.997878787878788,
+        "mae_lift_vs_persistence": 0.44990101042603936,
+        "r2_vs_persistence": 0.7055752868112867,
+        "pred_delta_std": 1.1300736658732422,
+        "truth_delta_std": 1.2974321605397867
+      },
+      "24": {
+        "n": 62,
+        "mae": 0.4816096983202233,
+        "rmse": 0.5751139245942992,
+        "corr": 0.7925025070427374,
+        "direction": 0.8225806451612904,
+        "persistence_mae": 1.1519354838709677,
+        "mae_lift_vs_persistence": 0.6703257855507443,
+        "r2_vs_persistence": 0.8292403021994807,
+        "pred_delta_std": 1.3119787130634946,
+        "truth_delta_std": 1.3915106068552385
+      },
+      "60": {
+        "n": 50,
+        "mae": 0.47584866398088016,
+        "rmse": 0.5593526513985582,
+        "corr": 0.7812737902748538,
+        "direction": 0.78,
+        "persistence_mae": 0.8674,
+        "mae_lift_vs_persistence": 0.3915513360191198,
+        "r2_vs_persistence": 0.8117714436644005,
+        "pred_delta_std": 1.1269473147209152,
+        "truth_delta_std": 1.2873327619539556
+      }
+    }
+  },
+  "winners": {
+    "1": "lag_ridge",
+    "3": "lag_ridge",
+    "6": "lag_ridge",
+    "12": "lag_ridge",
+    "24": "lag_ridge",
+    "60": "lag_ridge"
+  },
+  "points": {
+    "1": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.28,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.9,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -0.72,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.49,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.68,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 1.81,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": 0.13663288483932093,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.3450470976379105,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -1.037583889393639,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.21246092292726632,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 1.001611077604337,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 0.46363086438202006,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.34955962492993076,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.8301280346026186,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -0.7919935009340002,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": -0.10507701703236688,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.6958584251990982,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 0.3116763629353231,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": 0.012292705555904802,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.703300828627775,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -1.0737102062392607,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": -0.786279184798211,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.26589082818289883,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 0.2340610843122784,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.17198543573777858,
+          "actual": -0.3,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.3783769885928265,
+          "effective_neighbors": 31.952438332455667,
+          "neighbor_anchors": [
+            516,
+            512,
+            561,
+            515,
+            644,
+            513,
+            638,
+            517
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -1.1422341001307292,
+          "actual": -1.0,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.326859933747228,
+          "effective_neighbors": 31.969470092636744,
+          "neighbor_anchors": [
+            551,
+            512,
+            517,
+            681,
+            584,
+            585,
+            513,
+            518
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -1.2187045224837119,
+          "actual": -0.25,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.440248116844327,
+          "effective_neighbors": 31.975519593183254,
+          "neighbor_anchors": [
+            515,
+            689,
+            516,
+            512,
+            568,
+            643,
+            513,
+            664
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": -0.8138971014809273,
+          "actual": 0.69,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.2029248922394717,
+          "effective_neighbors": 31.910471466348262,
+          "neighbor_anchors": [
+            680,
+            517,
+            512,
+            513,
+            681,
+            514,
+            683,
+            679
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.2691925447471341,
+          "actual": 0.96,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.0661511746968695,
+          "effective_neighbors": 31.862487896727337,
+          "neighbor_anchors": [
+            512,
+            703,
+            513,
+            516,
+            683,
+            596,
+            517,
+            595
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 0.0019501221240369807,
+          "actual": 1.43,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.1271583547082167,
+          "effective_neighbors": 31.910035529432953,
+          "neighbor_anchors": [
+            512,
+            517,
+            513,
+            516,
+            563,
+            564,
+            518,
+            569
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.35358428761531,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.8667235110299665,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -1.0570543696780397,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.6787119458413376,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.9134065380301195,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 1.5369090122683304,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.3303042063527654,
+          "actual": -0.3,
+          "persistence": -0.28,
+          "q10": -1.0375184967153972,
+          "q50": -0.2945816749663873,
+          "q90": -0.003421030671133453,
+          "p_build": 0.25525575534992906,
+          "p_release": 0.42475000003574037,
+          "p_drift": 0.31999424461433057,
+          "mean_neighbor_distance": 0.9324657069506121,
+          "effective_neighbors": 31.822662529341496
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.9123428282148451,
+          "actual": -1.0,
+          "persistence": -0.9,
+          "q10": -1.5313448337970275,
+          "q50": -0.4227007337353303,
+          "q90": -0.15394204960240016,
+          "p_build": 0.33238095253316424,
+          "p_release": 0.406774044062221,
+          "p_drift": 0.26084500340461475,
+          "mean_neighbor_distance": 1.0113776632949651,
+          "effective_neighbors": 31.619183932250824
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -0.6486339085520464,
+          "actual": -0.25,
+          "persistence": -0.72,
+          "q10": -0.9724236910725017,
+          "q50": -0.30109232178612466,
+          "q90": 0.10916673838310308,
+          "p_build": 0.4646968355164731,
+          "p_release": 0.15362720403418045,
+          "p_drift": 0.38167596044934654,
+          "mean_neighbor_distance": 0.9227735435246444,
+          "effective_neighbors": 31.858922361977186
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.5807272333642126,
+          "actual": 0.69,
+          "persistence": 0.49,
+          "q10": -0.7870116582907714,
+          "q50": -0.04,
+          "q90": 0.8021644662223847,
+          "p_build": 0.5330517156369197,
+          "p_release": 0.24041568072455866,
+          "p_drift": 0.22653260363852173,
+          "mean_neighbor_distance": 0.9618775696705533,
+          "effective_neighbors": 31.842442185578957
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.667662396308878,
+          "actual": 0.96,
+          "persistence": 0.68,
+          "q10": -0.7593834204368938,
+          "q50": 0.5309449980495518,
+          "q90": 1.0994736831602974,
+          "p_build": 0.3522617938947886,
+          "p_release": 0.30583828666183027,
+          "p_drift": 0.341899919443381,
+          "mean_neighbor_distance": 0.9725931045456551,
+          "effective_neighbors": 31.754967610537015
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 1.931594407875485,
+          "actual": 1.43,
+          "persistence": 1.81,
+          "q10": 0.5761433081621343,
+          "q50": 0.9641842030730128,
+          "q90": 2.2699586629005957,
+          "p_build": 0.5984737447573313,
+          "p_release": 0.18498332413055116,
+          "p_drift": 0.2165429311121177,
+          "mean_neighbor_distance": 1.108719296110044,
+          "effective_neighbors": 31.84850928573543
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.29653055202785183,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -1.0437546765677492,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -0.6432146530374367,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.6780868118486121,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.6512006022505569,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 1.8925754579112315,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": 0.7258124529258104,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.5509594251433235,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -0.6595772152684202,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": 0.6695371652614643,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.9323524495277438,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": 0.7053682819749922,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-10-01",
+          "pred": -0.07643431887871563,
+          "actual": -0.3,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-01-01",
+          "pred": -0.8513873356562519,
+          "actual": -1.0,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-04-01",
+          "pred": -1.6001596464524968,
+          "actual": -0.25,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-07-01",
+          "pred": -0.3395387150114811,
+          "actual": 0.69,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-10-01",
+          "pred": 0.1707164815095717,
+          "actual": 0.96,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-01-01",
+          "pred": -0.07190896614053308,
+          "actual": 1.43,
+          "persistence": 1.81
+        }
+      ]
+    },
+    "3": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.28,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.9,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.72,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.49,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.68,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 1.81,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": 0.3102444358251393,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.35885983731566856,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -1.0597877155375575,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.8395381140885692,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.767666988958556,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": -0.05607596088791661,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.9323853914119148,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.6095911914765437,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.8794647595344707,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.10061481292280273,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.17743708242941697,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": -0.3382796064667116,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.026831500843256396,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.8482204979948141,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.5997644855632566,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": -0.3202034863040914,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": -0.18560059248381028,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": -0.511307434768358,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.20660562367490162,
+          "actual": -0.9,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.381514751678792,
+          "effective_neighbors": 31.949839308224814,
+          "neighbor_anchors": [
+            516,
+            512,
+            561,
+            515,
+            644,
+            513,
+            638,
+            517
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -1.2029843483805678,
+          "actual": -0.72,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.3306560292105347,
+          "effective_neighbors": 31.969780266145754,
+          "neighbor_anchors": [
+            551,
+            512,
+            517,
+            681,
+            584,
+            513,
+            585,
+            518
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -1.2375758646667732,
+          "actual": 0.49,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.4483595386197337,
+          "effective_neighbors": 31.976061798922032,
+          "neighbor_anchors": [
+            515,
+            516,
+            689,
+            512,
+            568,
+            643,
+            664,
+            659
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": -0.8499031939532096,
+          "actual": 0.68,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.2186546577851503,
+          "effective_neighbors": 31.907694758969086,
+          "neighbor_anchors": [
+            680,
+            517,
+            512,
+            513,
+            681,
+            514,
+            683,
+            679
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.3530809173276857,
+          "actual": 1.81,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.0777344621906129,
+          "effective_neighbors": 31.86726329183604,
+          "neighbor_anchors": [
+            512,
+            513,
+            516,
+            683,
+            596,
+            517,
+            595,
+            682
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": -0.008199759622346217,
+          "actual": 1.07,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.132483360703409,
+          "effective_neighbors": 31.90492523321015,
+          "neighbor_anchors": [
+            512,
+            517,
+            513,
+            516,
+            563,
+            564,
+            518,
+            683
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -1.0328935925874674,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.9842809920150574,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.6594303463770541,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.773127248536288,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 1.2391905723555507,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 1.4115321071580418,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.41219265331990496,
+          "actual": -0.9,
+          "persistence": -0.28,
+          "q10": -1.5379131977615224,
+          "q50": -0.43,
+          "q90": 0.2921403892477518,
+          "p_build": 0.30785482008031007,
+          "p_release": 0.5708973391339587,
+          "p_drift": 0.12124784078573138,
+          "mean_neighbor_distance": 0.9476146833164554,
+          "effective_neighbors": 31.896496520407485
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.8996984592541093,
+          "actual": -0.72,
+          "persistence": -0.9,
+          "q10": -1.569340068292101,
+          "q50": -0.5919749389710591,
+          "q90": 0.06063767588360699,
+          "p_build": 0.4312930162534693,
+          "p_release": 0.47690905267710654,
+          "p_drift": 0.09179793106942422,
+          "mean_neighbor_distance": 1.0358943369550464,
+          "effective_neighbors": 31.83782761205264
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.6281387270908153,
+          "actual": 0.49,
+          "persistence": -0.72,
+          "q10": -1.0231495429447164,
+          "q50": -0.29731109881926826,
+          "q90": 0.45667117828404036,
+          "p_build": 0.5290664655273107,
+          "p_release": 0.4412539208858148,
+          "p_drift": 0.029679613586874626,
+          "mean_neighbor_distance": 0.9360854946451092,
+          "effective_neighbors": 31.861592744225874
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.5778542171164236,
+          "actual": 0.68,
+          "persistence": 0.49,
+          "q10": -0.9869725831565785,
+          "q50": -0.2739280344863397,
+          "q90": 1.1156838565586475,
+          "p_build": 0.5404274465905472,
+          "p_release": 0.42937212368735367,
+          "p_drift": 0.030200429722099107,
+          "mean_neighbor_distance": 0.9699938144453724,
+          "effective_neighbors": 31.861510581642225
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.5746527318846337,
+          "actual": 1.81,
+          "persistence": 0.68,
+          "q10": -1.0111463223169879,
+          "q50": 0.3786588300417955,
+          "q90": 1.027701708850834,
+          "p_build": 0.4152361662468947,
+          "p_release": 0.49309933096725206,
+          "p_drift": 0.09166450278585335,
+          "mean_neighbor_distance": 0.9899709356756371,
+          "effective_neighbors": 31.820052333317967
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 1.861115890705773,
+          "actual": 1.07,
+          "persistence": 1.81,
+          "q10": 0.5166197616146186,
+          "q50": 0.9664116703968855,
+          "q90": 2.2900447437350655,
+          "p_build": 0.5967619105496098,
+          "p_release": 0.34209292601323943,
+          "p_drift": 0.06114516343715064,
+          "mean_neighbor_distance": 1.1258098732038055,
+          "effective_neighbors": 31.869496797827487
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.2673961262108612,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -1.0737535075891824,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -0.4618078298653445,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.7944760865367659,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.5012768713848965,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 1.7385422209007242,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -0.7059128173271727,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -0.8237806574464406,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": 0.2825604602629189,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": 0.9370979781328215,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": 0.6583537241120636,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 0.3113409107280947,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2008-12-01",
+          "pred": -1.3110240550293015,
+          "actual": -0.9,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-03-01",
+          "pred": -1.1767954420450182,
+          "actual": -0.72,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-06-01",
+          "pred": -1.3519603286968866,
+          "actual": 0.49,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-09-01",
+          "pred": -0.2194797152038972,
+          "actual": 0.68,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2009-12-01",
+          "pred": -0.25380814984504835,
+          "actual": 1.81,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-03-01",
+          "pred": 0.19500178788064265,
+          "actual": 1.07,
+          "persistence": 1.81
+        }
+      ]
+    },
+    "6": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.28,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.9,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.72,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.49,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.68,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": 1.81,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": 0.16605521035691587,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.1802940167740748,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.265825780195977,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 1.0834298489442469,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.6282683589213873,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": -0.9229667565834807,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -1.1192293950662442,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.15910976590815473,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.9639283822105522,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.33000920263575345,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.33161924781444396,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": -1.2729979781330614,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.7256065412221888,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.49223888433587987,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.6156882746722173,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.29368616270485176,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.09579394775753972,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": -1.2006826859223874,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.2642687067455792,
+          "actual": -0.72,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.3871872002428987,
+          "effective_neighbors": 31.947909249167715,
+          "neighbor_anchors": [
+            516,
+            512,
+            561,
+            515,
+            644,
+            513,
+            638,
+            517
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -1.1821709426216802,
+          "actual": 0.49,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.3347424478615597,
+          "effective_neighbors": 31.96887220994674,
+          "neighbor_anchors": [
+            551,
+            512,
+            681,
+            517,
+            584,
+            585,
+            513,
+            518
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -1.1559496329555934,
+          "actual": 0.68,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.459906632626096,
+          "effective_neighbors": 31.976583420241646,
+          "neighbor_anchors": [
+            515,
+            516,
+            689,
+            512,
+            568,
+            643,
+            664,
+            661
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": -0.9490487977288211,
+          "actual": 1.81,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.232876575836117,
+          "effective_neighbors": 31.906578643948066,
+          "neighbor_anchors": [
+            680,
+            517,
+            512,
+            681,
+            513,
+            514,
+            683,
+            679
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.4261686567662084,
+          "actual": 1.07,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.0899643571831596,
+          "effective_neighbors": 31.86308211486622,
+          "neighbor_anchors": [
+            512,
+            513,
+            516,
+            683,
+            596,
+            682,
+            595,
+            517
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": 0.012730977017858372,
+          "actual": -0.62,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.1357128833305925,
+          "effective_neighbors": 31.90500907753457,
+          "neighbor_anchors": [
+            512,
+            517,
+            513,
+            516,
+            563,
+            518,
+            564,
+            514
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -1.7643668438490403,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": 0.2067382832151411,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": 0.11989239167885268,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 1.0961886966940417,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 1.9933250846540935,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": 1.5592833382289277,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.20513901515985564,
+          "actual": -0.72,
+          "persistence": -0.28,
+          "q10": -1.6063215674041402,
+          "q50": -0.37852617447012815,
+          "q90": 1.098471377630617,
+          "p_build": 0.5032809858562736,
+          "p_release": 0.43460270903234455,
+          "p_drift": 0.062116305111381775,
+          "mean_neighbor_distance": 0.9481362045111816,
+          "effective_neighbors": 31.893506147560018
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.6619229017101,
+          "actual": 0.49,
+          "persistence": -0.9,
+          "q10": -1.6812965423753723,
+          "q50": -0.6069136419175918,
+          "q90": 1.063013913605642,
+          "p_build": 0.6220941992902483,
+          "p_release": 0.37790580070975166,
+          "p_drift": 0.0,
+          "mean_neighbor_distance": 1.0393391345109793,
+          "effective_neighbors": 31.823460740831433
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.6088174163719464,
+          "actual": 0.68,
+          "persistence": -0.72,
+          "q10": -1.5377158886069817,
+          "q50": -0.35548885994655083,
+          "q90": 0.9546511359141802,
+          "p_build": 0.433540265780005,
+          "p_release": 0.4357079624379865,
+          "p_drift": 0.13075177178200853,
+          "mean_neighbor_distance": 0.9537337708881134,
+          "effective_neighbors": 31.817794668449167
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.5059042203496947,
+          "actual": 1.81,
+          "persistence": 0.49,
+          "q10": -1.413828531485166,
+          "q50": -0.3732960988776817,
+          "q90": 1.3587456156669435,
+          "p_build": 0.40922249400164373,
+          "p_release": 0.4702271977981533,
+          "p_drift": 0.12055030820020307,
+          "mean_neighbor_distance": 0.969445033544501,
+          "effective_neighbors": 31.86087363270651
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.33915505164749116,
+          "actual": 1.07,
+          "persistence": 0.68,
+          "q10": -1.5741291270117308,
+          "q50": -0.009383540365673189,
+          "q90": 1.0838066156316652,
+          "p_build": 0.3720192912287846,
+          "p_release": 0.5929526103897069,
+          "p_drift": 0.03502809838150855,
+          "mean_neighbor_distance": 0.9880338660542061,
+          "effective_neighbors": 31.81952184539365
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": 1.2614084739631717,
+          "actual": -0.62,
+          "persistence": 1.81,
+          "q10": -0.49200667393091174,
+          "q50": 0.3127785338432772,
+          "q90": 1.9209265187520108,
+          "p_build": 0.31048718205633596,
+          "p_release": 0.6302680047404345,
+          "p_drift": 0.059244813203229454,
+          "mean_neighbor_distance": 1.1409552180224771,
+          "effective_neighbors": 31.868827673073074
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.17879216227906297,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -0.7723205270972249,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.14260708990550042,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.6257814168279321,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.18848221439605212,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": 1.1255239560438497,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -0.8229241251375341,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": 0.28842548614505054,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": 0.9389570713661037,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": 0.6598061104881917,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.3024101105866413,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": -0.6744679542324545,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-03-01",
+          "pred": -1.2692182765259847,
+          "actual": -0.72,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-06-01",
+          "pred": -1.4152158573041864,
+          "actual": 0.49,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2009-09-01",
+          "pred": -0.729696230483365,
+          "actual": 0.68,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2009-12-01",
+          "pred": -0.5854539429817948,
+          "actual": 1.81,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-03-01",
+          "pred": 0.08513879330630394,
+          "actual": 1.07,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-06-01",
+          "pred": -0.9450901277017884,
+          "actual": -0.62,
+          "persistence": 1.81
+        }
+      ]
+    },
+    "12": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -0.28,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": -0.9,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.72,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.49,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": 0.68,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": 1.81,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -0.10123149298369186,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": 0.9940088225516989,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.09668071228275099,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": -0.14618787750444073,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -0.98978504864183,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": -0.5341886151140371,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -1.3571268714179303,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": -0.4495650796972558,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": 0.0603608823368704,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.26570533693794446,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -0.6948896625674491,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": -0.9382833289718447,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -1.1273672782160227,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": 0.31857674690538273,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": 0.09234513458601445,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.3120768455903728,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -0.8584729488023819,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": -0.7877401675974326,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -0.2532771259137241,
+          "actual": 0.68,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.3966154578334535,
+          "effective_neighbors": 31.947122354726083,
+          "neighbor_anchors": [
+            516,
+            512,
+            561,
+            515,
+            644,
+            513,
+            638,
+            517
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": -1.0090254743959148,
+          "actual": 1.81,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.3456214676054012,
+          "effective_neighbors": 31.96938604265628,
+          "neighbor_anchors": [
+            551,
+            512,
+            681,
+            517,
+            584,
+            585,
+            513,
+            518
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.9696734779889488,
+          "actual": 1.07,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.4736981949094115,
+          "effective_neighbors": 31.97775546606925,
+          "neighbor_anchors": [
+            515,
+            516,
+            512,
+            568,
+            643,
+            664,
+            661,
+            556
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": -0.7233269084494084,
+          "actual": -0.62,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.2473477522918874,
+          "effective_neighbors": 31.9073574666957,
+          "neighbor_anchors": [
+            680,
+            517,
+            512,
+            681,
+            513,
+            514,
+            683,
+            679
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": 0.37316184978547107,
+          "actual": -1.56,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.1087204427527177,
+          "effective_neighbors": 31.860123227651915,
+          "neighbor_anchors": [
+            512,
+            513,
+            683,
+            516,
+            596,
+            682,
+            595,
+            517
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": 0.37658472445363367,
+          "actual": -1.63,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.1503983451428224,
+          "effective_neighbors": 31.906152427355316,
+          "neighbor_anchors": [
+            512,
+            517,
+            513,
+            516,
+            563,
+            518,
+            514,
+            564
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -2.0081240642916205,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": 0.08075596730616574,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.14786599321167126,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.8992767017719615,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": 1.899479202301018,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": 2.6134557572622477,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": 0.3126539684909604,
+          "actual": 0.68,
+          "persistence": -0.28,
+          "q10": -1.0813415520746534,
+          "q50": -0.2735364470071024,
+          "q90": 2.246467016594219,
+          "p_build": 0.7315830500728446,
+          "p_release": 0.23885356769739516,
+          "p_drift": 0.029563382229760238,
+          "mean_neighbor_distance": 0.9511405535737228,
+          "effective_neighbors": 31.891685143267775
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": -0.10766786746965773,
+          "actual": 1.81,
+          "persistence": -0.9,
+          "q10": -0.9242397817636381,
+          "q50": -0.36556552629812417,
+          "q90": 2.217910678216554,
+          "p_build": 0.8094401534264634,
+          "p_release": 0.19055984657353675,
+          "p_drift": 0.0,
+          "mean_neighbor_distance": 1.0435730795626852,
+          "effective_neighbors": 31.82705766715672
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.18474441124014085,
+          "actual": 1.07,
+          "persistence": -0.72,
+          "q10": -0.8,
+          "q50": -0.07271759501662864,
+          "q90": 1.3102010517155789,
+          "p_build": 0.7573463740811296,
+          "p_release": 0.15447028868017215,
+          "p_drift": 0.08818333723869817,
+          "mean_neighbor_distance": 0.9896134521799946,
+          "effective_neighbors": 31.74765103124542
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.2652592665085459,
+          "actual": -0.62,
+          "persistence": 0.49,
+          "q10": -1.3762025585794981,
+          "q50": -0.19360072888465785,
+          "q90": 0.6252156438981281,
+          "p_build": 0.4671001816727708,
+          "p_release": 0.5328998183272293,
+          "p_drift": 0.0,
+          "mean_neighbor_distance": 0.9897561077320762,
+          "effective_neighbors": 31.876294415637823
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": 0.10791316107530924,
+          "actual": -1.56,
+          "persistence": 0.68,
+          "q10": -1.2408254472919025,
+          "q50": -0.09673560109885676,
+          "q90": 0.40251449889932545,
+          "p_build": 0.23766309841779856,
+          "p_release": 0.7623369015822015,
+          "p_drift": 0.0,
+          "mean_neighbor_distance": 0.9873147568917339,
+          "effective_neighbors": 31.8072596326633
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": 0.09010670900466278,
+          "actual": -1.63,
+          "persistence": 1.81,
+          "q10": -1.5638992906267446,
+          "q50": -0.72,
+          "q90": 0.20883918891846925,
+          "p_build": 0.0,
+          "p_release": 0.9713263889246101,
+          "p_drift": 0.028673611075389824,
+          "mean_neighbor_distance": 1.1389845201563737,
+          "effective_neighbors": 31.868645637602885
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": 0.0481985553661588,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": 0.19043233962980277,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": 0.34374845757365535,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": 0.11484650020495357,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -0.12312461673930009,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": 0.1427433777277758,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": 0.9831583424944027,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": 0.6576265762932894,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": 0.3033366514482364,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": -0.6754977139423575,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -1.072339645146863,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": -0.5852052042494129,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2009-09-01",
+          "pred": -0.8642509720255002,
+          "actual": 0.68,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2009-12-01",
+          "pred": -1.0012826107694326,
+          "actual": 1.81,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2010-03-01",
+          "pred": -0.16430441191765566,
+          "actual": 1.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2010-06-01",
+          "pred": -0.8858306173372998,
+          "actual": -0.62,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2010-09-01",
+          "pred": -1.5145290587759084,
+          "actual": -1.56,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2010-12-01",
+          "pred": -1.5914347170048981,
+          "actual": -1.63,
+          "persistence": 1.81
+        }
+      ]
+    },
+    "24": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -0.28,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -0.9,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -0.72,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": 0.49,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.68,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 1.81,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -1.0281084873087063,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -0.34332283019127413,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -0.8600412454954073,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -0.9309652193325332,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": -0.7347870108252532,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": -0.2397159242610274,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -1.1787025139881935,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -0.8232667548590045,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -1.2256346573691355,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -1.691364106034552,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": -0.836523865516433,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 0.05455891162427692,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -1.5727002441306996,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -1.1205408885190997,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -1.6772528835779847,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -1.456979421920464,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.052274655293912155,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 0.7845896213451202,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -0.2381545032189392,
+          "actual": -1.56,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.4213205536639224,
+          "effective_neighbors": 31.945333776209747,
+          "neighbor_anchors": [
+            516,
+            512,
+            515,
+            561,
+            644,
+            638,
+            513,
+            565
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -1.1063447901114165,
+          "actual": -1.63,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.358749211867547,
+          "effective_neighbors": 31.96756289297988,
+          "neighbor_anchors": [
+            551,
+            512,
+            517,
+            584,
+            585,
+            513,
+            518,
+            657
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -1.2139619904579095,
+          "actual": -0.98,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.499785080044365,
+          "effective_neighbors": 31.97268321378761,
+          "neighbor_anchors": [
+            515,
+            516,
+            512,
+            643,
+            568,
+            664,
+            661,
+            659
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -0.9608467498043729,
+          "actual": -0.25,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.284228087057509,
+          "effective_neighbors": 31.939264171327927,
+          "neighbor_anchors": [
+            517,
+            512,
+            513,
+            514,
+            518,
+            646,
+            516,
+            537
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.09083430790872588,
+          "actual": -0.76,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.1281742585262902,
+          "effective_neighbors": 31.863938662078553,
+          "neighbor_anchors": [
+            512,
+            513,
+            516,
+            596,
+            517,
+            595,
+            556,
+            515
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 0.18436867759540765,
+          "actual": -1.05,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.1803471775816066,
+          "effective_neighbors": 31.911675677526627,
+          "neighbor_anchors": [
+            512,
+            517,
+            513,
+            516,
+            563,
+            564,
+            518,
+            683
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -3.8063207792565867,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -1.7686852294564437,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -3.6825146866752823,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -1.3991152357876333,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.17596533441077478,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 3.4286488005645,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": 0.040358782655165404,
+          "actual": -1.56,
+          "persistence": -0.28,
+          "q10": -1.388726264493549,
+          "q50": -0.10856682117813508,
+          "q90": 0.6546460965454147,
+          "p_build": 0.6249993797963145,
+          "p_release": 0.308471921765023,
+          "p_drift": 0.06652869843866241,
+          "mean_neighbor_distance": 0.9456536952329184,
+          "effective_neighbors": 31.84791128162624
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -0.3045937872944243,
+          "actual": -1.63,
+          "persistence": -0.9,
+          "q10": -1.4863833035523355,
+          "q50": -0.16683071466020938,
+          "q90": 1.305054788941823,
+          "p_build": 0.6655687530530506,
+          "p_release": 0.3044014759237034,
+          "p_drift": 0.030029771023245902,
+          "mean_neighbor_distance": 1.0656620810951116,
+          "effective_neighbors": 31.778401102939
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -0.4126132574899197,
+          "actual": -0.98,
+          "persistence": -0.72,
+          "q10": -0.7760563387122124,
+          "q50": -0.04,
+          "q90": 0.37652665525607476,
+          "p_build": 0.603149902730516,
+          "p_release": 0.2729941696714286,
+          "p_drift": 0.12385592759805528,
+          "mean_neighbor_distance": 0.9846709842160533,
+          "effective_neighbors": 31.715110951627977
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": 0.40336130145328475,
+          "actual": -0.25,
+          "persistence": 0.49,
+          "q10": -0.8730998681687273,
+          "q50": 0.017014431447737857,
+          "q90": 0.6680867917737694,
+          "p_build": 0.3119023289638813,
+          "p_release": 0.5297843287784415,
+          "p_drift": 0.15831334225767726,
+          "mean_neighbor_distance": 0.9990192451220281,
+          "effective_neighbors": 31.855363458180868
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.5206458280890581,
+          "actual": -0.76,
+          "persistence": 0.68,
+          "q10": -0.4168181838482698,
+          "q50": 0.04226589518944458,
+          "q90": 0.6834288828125996,
+          "p_build": 0.17896045778312575,
+          "p_release": 0.6310842665301497,
+          "p_drift": 0.18995527568672446,
+          "mean_neighbor_distance": 0.9894681388042006,
+          "effective_neighbors": 31.808538016595744
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": 0.43213669978188207,
+          "actual": -1.05,
+          "persistence": 1.81,
+          "q10": -1.355670639645782,
+          "q50": -0.3,
+          "q90": 0.62,
+          "p_build": 0.0,
+          "p_release": 0.8806670883690367,
+          "p_drift": 0.11933291163096343,
+          "mean_neighbor_distance": 1.1365346272135752,
+          "effective_neighbors": 31.86926173273551
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": 0.028319653365848962,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": 0.1689474884711032,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": 0.1490747888564199,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -0.09327870848218978,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": -0.28525682717076517,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": -0.4274316573781367,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -1.0612762790593349,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -0.5818639781181253,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -0.6107501833372054,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": 0.341496857134224,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": 0.6328319449814332,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": -0.904035699533025,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2010-09-01",
+          "pred": -1.585972872156914,
+          "actual": -1.56,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2010-12-01",
+          "pred": -1.6075720232320232,
+          "actual": -1.63,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2011-03-01",
+          "pred": -1.552682699596543,
+          "actual": -0.98,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2011-06-01",
+          "pred": -0.65388391667514,
+          "actual": -0.25,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2011-09-01",
+          "pred": -0.646220446570531,
+          "actual": -0.76,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2011-12-01",
+          "pred": -1.7528392185395272,
+          "actual": -1.05,
+          "persistence": 1.81
+        }
+      ]
+    },
+    "60": {
+      "persistence": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.28,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.9,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -0.72,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.49,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 0.68,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 1.81,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "phase_only_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.562339892042771,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": 0.6253725312407611,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": 0.49557105940383683,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.7811766674176652,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 1.0230603382749273,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": -0.5680719809043298,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "phase_energy_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.011570835040750974,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.023067443737410022,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": 0.3652687271779854,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 1.1581732642977323,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 0.8471499419895555,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 0.24102887205727258,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "selected_ridge_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": 0.9180740691902485,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": 0.1241671279720795,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -0.8687573481789089,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": -0.20662582056489104,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": -0.5608278709705666,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": -0.4765792743119588,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "selected_analog_flow_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.3158648031392053,
+          "actual": -0.09,
+          "persistence": -0.28,
+          "mean_neighbor_distance": 1.461526565300961,
+          "effective_neighbors": 31.94019025196742,
+          "neighbor_anchors": [
+            516,
+            515,
+            561,
+            512,
+            513,
+            565,
+            517,
+            585
+          ]
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -1.7820926401788273,
+          "actual": -0.09,
+          "persistence": -0.9,
+          "mean_neighbor_distance": 1.4146684169682366,
+          "effective_neighbors": 31.95502128036764,
+          "neighbor_anchors": [
+            551,
+            517,
+            512,
+            513,
+            585,
+            584,
+            534,
+            518
+          ]
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -1.5623391266580484,
+          "actual": -0.07,
+          "persistence": -0.72,
+          "mean_neighbor_distance": 1.5805500287556182,
+          "effective_neighbors": 31.965014687174556,
+          "neighbor_anchors": [
+            515,
+            516,
+            512,
+            535,
+            556,
+            513,
+            542,
+            568
+          ]
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": -1.0347202314525739,
+          "actual": 0.48,
+          "persistence": 0.49,
+          "mean_neighbor_distance": 1.3690464183337419,
+          "effective_neighbors": 31.931681956521214,
+          "neighbor_anchors": [
+            517,
+            513,
+            512,
+            514,
+            537,
+            518,
+            535,
+            516
+          ]
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": -0.11217045324489319,
+          "actual": 0.37,
+          "persistence": 0.68,
+          "mean_neighbor_distance": 1.1881471376783046,
+          "effective_neighbors": 31.861295259803054,
+          "neighbor_anchors": [
+            512,
+            516,
+            513,
+            596,
+            517,
+            595,
+            535,
+            556
+          ]
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 0.011063382451154208,
+          "actual": 0.77,
+          "persistence": 1.81,
+          "mean_neighbor_distance": 1.2343451271339934,
+          "effective_neighbors": 31.91816597515312,
+          "neighbor_anchors": [
+            512,
+            517,
+            516,
+            513,
+            518,
+            564,
+            563,
+            514
+          ]
+        }
+      ],
+      "selected_direct_geometry_control": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.04663862803213767,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": 0.19107991338847607,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -0.9885896910611226,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.8831548477616096,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 0.8010584441866471,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 1.5193641686793338,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "raw_analog_baseline": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": 0.3815720052790432,
+          "actual": -0.09,
+          "persistence": -0.28,
+          "q10": -0.38530789085797534,
+          "q50": 0.06155415079260914,
+          "q90": 0.7045199428937908,
+          "p_build": 0.721751087697927,
+          "p_release": 0.11572268366196795,
+          "p_drift": 0.16252622864010507,
+          "mean_neighbor_distance": 0.9210962867089237,
+          "effective_neighbors": 31.811961650041702
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.04668660562169691,
+          "actual": -0.09,
+          "persistence": -0.9,
+          "q10": -0.5948051525914849,
+          "q50": 0.12322321049327783,
+          "q90": 0.7047652105444266,
+          "p_build": 0.7601374562130638,
+          "p_release": 0.05869119495418754,
+          "p_drift": 0.18117134883274866,
+          "mean_neighbor_distance": 1.0331808113283307,
+          "effective_neighbors": 31.771239184907504
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -0.0772905246949438,
+          "actual": -0.07,
+          "persistence": -0.72,
+          "q10": -0.34479918025268386,
+          "q50": 0.10913387695889636,
+          "q90": 0.7211271965258383,
+          "p_build": 0.716518441337225,
+          "p_release": 0.15802987451244058,
+          "p_drift": 0.12545168415033442,
+          "mean_neighbor_distance": 0.9671665197814882,
+          "effective_neighbors": 31.634035760594386
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.6756146677927746,
+          "actual": 0.48,
+          "persistence": 0.49,
+          "q10": -0.5211561147562414,
+          "q50": -0.011751987466995056,
+          "q90": 0.6654051067597719,
+          "p_build": 0.5586467020056067,
+          "p_release": 0.32422297591051724,
+          "p_drift": 0.11713032208387601,
+          "mean_neighbor_distance": 1.0095113323383025,
+          "effective_neighbors": 31.809201129145542
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": -0.18281561682917946,
+          "actual": 0.37,
+          "persistence": 0.68,
+          "q10": -1.6000797339913788,
+          "q50": -0.41311315272693483,
+          "q90": 0.48703568967852595,
+          "p_build": 0.1770770619302701,
+          "p_release": 0.6684086974043087,
+          "p_drift": 0.15451424066542116,
+          "mean_neighbor_distance": 1.0095740083734182,
+          "effective_neighbors": 31.724058372488642
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 0.6986311198402206,
+          "actual": 0.77,
+          "persistence": 1.81,
+          "q10": -1.5116454480679735,
+          "q50": -0.1415534186857526,
+          "q90": 0.9850889614823753,
+          "p_build": 0.11461414729972325,
+          "p_release": 0.8209482693521186,
+          "p_drift": 0.06443758334815805,
+          "mean_neighbor_distance": 1.120580553894394,
+          "effective_neighbors": 31.823672443474997
+        }
+      ],
+      "lag_ridge": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.09152604245999377,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.1337717545312549,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": -0.06483306583358173,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": -0.0856083437390247,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": -0.24552589081319398,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": -0.07563781595033592,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_phase_only_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.9748512400946582,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.907205571160102,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": 0.08054912939780043,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.365213483417943,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 0.8132968959758267,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 0.9675741611084457,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ],
+      "oracle_selected_decoder": [
+        {
+          "origin": "2008-09-01",
+          "date": "2013-09-01",
+          "pred": -0.8674377286493996,
+          "actual": -0.09,
+          "persistence": -0.28
+        },
+        {
+          "origin": "2008-12-01",
+          "date": "2013-12-01",
+          "pred": -0.782545252637429,
+          "actual": -0.09,
+          "persistence": -0.9
+        },
+        {
+          "origin": "2009-03-01",
+          "date": "2014-03-01",
+          "pred": 0.6406788653407499,
+          "actual": -0.07,
+          "persistence": -0.72
+        },
+        {
+          "origin": "2009-06-01",
+          "date": "2014-06-01",
+          "pred": 0.6504613311543305,
+          "actual": 0.48,
+          "persistence": 0.49
+        },
+        {
+          "origin": "2009-09-01",
+          "date": "2014-09-01",
+          "pred": 0.6301004468184302,
+          "actual": 0.37,
+          "persistence": 0.68
+        },
+        {
+          "origin": "2009-12-01",
+          "date": "2014-12-01",
+          "pred": 1.0072736229123622,
+          "actual": 0.77,
+          "persistence": 1.81
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 123.255
+}

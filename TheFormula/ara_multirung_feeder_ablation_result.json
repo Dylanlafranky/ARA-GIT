@@ -1,0 +1,5439 @@
+{
+  "date": "2026-05-25",
+  "method": "strict-causal multi-rung feeder ablation",
+  "leakage_guard": [
+    "Every feature at anchor t uses only data[:t].",
+    "Training for origin t and horizon h uses only anchors s where s+h<t.",
+    "Shuffled lower features are drawn only from allowed training anchors.",
+    "No result selects periods or horizons from forecast performance."
+  ],
+  "system": "ENSO",
+  "target": "NINO3.4 anomaly",
+  "home_period_months": 47.0,
+  "home_period_definition": "fixed ENSO home period used in prior tests",
+  "lower_phi_periods_months": [
+    17.95240252875494,
+    29.04759747124506
+  ],
+  "upper_phi_periods_months": [
+    76.04759747124506,
+    123.04759747124506
+  ],
+  "lower_nonphi_base": 2.0,
+  "lower_nonphi_periods_months": [
+    11.75,
+    23.5
+  ],
+  "horizons_months": [
+    1,
+    3,
+    6,
+    12,
+    18,
+    24,
+    60
+  ],
+  "origin_stride_months": 3,
+  "ridge_alpha": 12.0,
+  "sample": {
+    "start": "1951-01-01",
+    "end": "2025-12-01",
+    "n": 900,
+    "test_start_origin": "2005-04-01",
+    "min_anchor": 495
+  },
+  "models": {
+    "lag_ridge": "Raw lag/inertia features only.",
+    "home_only": "Lag/inertia plus home-rung NINO/SOI/PDO geometry.",
+    "home_plus_lower": "Home plus phi-spaced lower/faster rungs.",
+    "home_plus_upper": "Home plus phi-spaced upper/slower envelope rungs.",
+    "home_plus_lower_upper": "Home plus both lower and upper phi rungs.",
+    "home_plus_shuffled_lower": "Home plus lower phi features mismatched from causal past training anchors.",
+    "home_plus_nonphi_lower": "Home plus base-2 lower/faster periods instead of phi lower rungs."
+  },
+  "scores": {
+    "lag_ridge": {
+      "1": {
+        "n": 83,
+        "mae": 0.18722830854044153,
+        "rmse": 0.24570338736517539,
+        "corr": 0.9582793980222467,
+        "direction": 0.7228915662650602,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.04168735411016086,
+        "r2_vs_persistence": 0.20941577331873185,
+        "pred_delta_std": 0.16513396782694217,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.7228915662650602,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 1.0,
+        "enso_class_accuracy": 0.8554216867469879,
+        "boundary_crossing_accuracy": 0.8554216867469879,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.24817214438765234,
+        "transition_corr": 0.8330053787102495
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.4339623439515056,
+        "rmse": 0.5290119526107696,
+        "corr": 0.7907891237725677,
+        "direction": 0.6341463414634146,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": 0.06579375360946993,
+        "r2_vs_persistence": 0.22778730928839708,
+        "pred_delta_std": 0.46542653225606173,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.6341463414634146,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.8717948717948718,
+        "enso_class_accuracy": 0.6829268292682927,
+        "boundary_crossing_accuracy": 0.6951219512195121,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.44274833591040136,
+        "transition_corr": 0.5658766832904983
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.7025856356605163,
+        "rmse": 0.8664350023335505,
+        "corr": 0.34689705228908835,
+        "direction": 0.6296296296296297,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": 0.09247609273454527,
+        "r2_vs_persistence": 0.22692268302683682,
+        "pred_delta_std": 0.8961633442068865,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.6296296296296297,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.6851851851851852,
+        "enso_class_accuracy": 0.3950617283950617,
+        "boundary_crossing_accuracy": 0.49382716049382713,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.704504601672218,
+        "transition_corr": 0.2313404507577903
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.7646526858047588,
+        "rmse": 0.9118845503899474,
+        "corr": 0.26823597994879506,
+        "direction": 0.7215189873417721,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.21471440280283627,
+        "r2_vs_persistence": 0.47985911366214906,
+        "pred_delta_std": 1.1469043815518594,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.7215189873417721,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.8235294117647058,
+        "enso_class_accuracy": 0.4177215189873418,
+        "boundary_crossing_accuracy": 0.6708860759493671,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.8364347758359121,
+        "transition_corr": 0.3218419700552841
+      },
+      "18": {
+        "n": 77,
+        "mae": 0.7982336006737093,
+        "rmse": 0.96152617745938,
+        "corr": 0.1250635289458296,
+        "direction": 0.7012987012987013,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.316831334391226,
+        "r2_vs_persistence": 0.46192038347604114,
+        "pred_delta_std": 1.0747738884426148,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.7012987012987013,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.7704918032786885,
+        "enso_class_accuracy": 0.35064935064935066,
+        "boundary_crossing_accuracy": 0.6233766233766234,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 0.825468911244519,
+        "transition_corr": 0.17110425779578473
+      },
+      "24": {
+        "n": 75,
+        "mae": 0.8785019267883845,
+        "rmse": 1.056995850016902,
+        "corr": 0.03249656169803866,
+        "direction": 0.7066666666666667,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": 0.25949807321161567,
+        "r2_vs_persistence": 0.4115001814003705,
+        "pred_delta_std": 1.1785482091060777,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.7066666666666667,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.7457627118644068,
+        "enso_class_accuracy": 0.4,
+        "boundary_crossing_accuracy": 0.6133333333333333,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 0.8654772841006109,
+        "transition_corr": 0.1850691165770585
+      },
+      "60": {
+        "n": 63,
+        "mae": 0.8034179761411162,
+        "rmse": 1.0256365897343729,
+        "corr": 0.11002243247977549,
+        "direction": 0.6666666666666666,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": 0.07531218258904226,
+        "r2_vs_persistence": 0.3512221817011022,
+        "pred_delta_std": 0.9424117456422805,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.6666666666666666,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.8108108108108109,
+        "enso_class_accuracy": 0.3968253968253968,
+        "boundary_crossing_accuracy": 0.47619047619047616,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 0.8600137219830506,
+        "transition_corr": 0.1713897220672755
+      }
+    },
+    "home_only": {
+      "1": {
+        "n": 83,
+        "mae": 0.19877832303999735,
+        "rmse": 0.2591735776279363,
+        "corr": 0.9548245046129142,
+        "direction": 0.6385542168674698,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.03013733961060505,
+        "r2_vs_persistence": 0.12035527023374792,
+        "pred_delta_std": 0.182874639986527,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.6385542168674698,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 1.0,
+        "enso_class_accuracy": 0.8433734939759037,
+        "boundary_crossing_accuracy": 0.8433734939759037,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.2568405332938664,
+        "transition_corr": 0.7969767638933484
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.4794413717106338,
+        "rmse": 0.6013640623773985,
+        "corr": 0.7344209168146488,
+        "direction": 0.6341463414634146,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": 0.020314725850341775,
+        "r2_vs_persistence": 0.0021140513722052168,
+        "pred_delta_std": 0.5574268805737851,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.6341463414634146,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.7692307692307693,
+        "enso_class_accuracy": 0.5853658536585366,
+        "boundary_crossing_accuracy": 0.6097560975609756,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.5181608115606697,
+        "transition_corr": 0.40754606436522356
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.8221923998975595,
+        "rmse": 1.0202246625437885,
+        "corr": 0.22529750368353255,
+        "direction": 0.7037037037037037,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.027130671502497927,
+        "r2_vs_persistence": -0.07187116785245151,
+        "pred_delta_std": 1.157706904108437,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.7037037037037037,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.7222222222222222,
+        "enso_class_accuracy": 0.32098765432098764,
+        "boundary_crossing_accuracy": 0.41975308641975306,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.753556662596837,
+        "transition_corr": 0.2482531187004369
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.8419415010129039,
+        "rmse": 1.0309634442974942,
+        "corr": 0.15204926675854696,
+        "direction": 0.6962025316455697,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.13742558759469115,
+        "r2_vs_persistence": 0.3351436657003375,
+        "pred_delta_std": 1.21449654436336,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.6962025316455697,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.7843137254901961,
+        "enso_class_accuracy": 0.43037974683544306,
+        "boundary_crossing_accuracy": 0.6708860759493671,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9410474292285562,
+        "transition_corr": 0.18794379107915218
+      },
+      "18": {
+        "n": 77,
+        "mae": 0.9881940977374196,
+        "rmse": 1.1869632118088944,
+        "corr": 0.00012671791395880684,
+        "direction": 0.6493506493506493,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.1268708373275157,
+        "r2_vs_persistence": 0.18002835711892629,
+        "pred_delta_std": 1.14590445878494,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.6493506493506493,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.7049180327868853,
+        "enso_class_accuracy": 0.3116883116883117,
+        "boundary_crossing_accuracy": 0.6493506493506493,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 1.0402682599414748,
+        "transition_corr": 0.018285148454001553
+      },
+      "24": {
+        "n": 75,
+        "mae": 1.1044869275877605,
+        "rmse": 1.3034106581801315,
+        "corr": -0.09187534847060151,
+        "direction": 0.64,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": 0.033513072412239664,
+        "r2_vs_persistence": 0.10512514536863826,
+        "pred_delta_std": 1.3013601388860245,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.64,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.6949152542372882,
+        "enso_class_accuracy": 0.32,
+        "boundary_crossing_accuracy": 0.5733333333333334,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 1.031071604528874,
+        "transition_corr": 0.050054438881217356
+      },
+      "60": {
+        "n": 63,
+        "mae": 0.8791171387672858,
+        "rmse": 1.130205557573214,
+        "corr": 0.16493875690682722,
+        "direction": 0.6031746031746031,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": -0.00038698003712733797,
+        "r2_vs_persistence": 0.21218570286689853,
+        "pred_delta_std": 0.8108887615093053,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.6031746031746031,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.6216216216216216,
+        "enso_class_accuracy": 0.3968253968253968,
+        "boundary_crossing_accuracy": 0.5079365079365079,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 0.9807488462177735,
+        "transition_corr": 0.10453553196704331
+      }
+    },
+    "home_plus_lower": {
+      "1": {
+        "n": 83,
+        "mae": 0.21096886604427956,
+        "rmse": 0.27077459474021714,
+        "corr": 0.9490137197307809,
+        "direction": 0.6506024096385542,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.01794679660632284,
+        "r2_vs_persistence": 0.039844251181998636,
+        "pred_delta_std": 0.18184459660558222,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.6506024096385542,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 1.0,
+        "enso_class_accuracy": 0.8554216867469879,
+        "boundary_crossing_accuracy": 0.8554216867469879,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.2731536611464852,
+        "transition_corr": 0.7941669595430976
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.5168379019005093,
+        "rmse": 0.6480105286861514,
+        "corr": 0.6698562765958561,
+        "direction": 0.6097560975609756,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": -0.017081804339533713,
+        "r2_vs_persistence": -0.15869755271777453,
+        "pred_delta_std": 0.5742155129925574,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.6097560975609756,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.717948717948718,
+        "enso_class_accuracy": 0.6585365853658537,
+        "boundary_crossing_accuracy": 0.6829268292682927,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.5453325494643814,
+        "transition_corr": 0.3490043277946353
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.8252556301581426,
+        "rmse": 1.0734950610710767,
+        "corr": 0.04565102421244929,
+        "direction": 0.6419753086419753,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.03019390176308101,
+        "r2_vs_persistence": -0.18672763230536327,
+        "pred_delta_std": 1.1788678576166691,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.6419753086419753,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.7037037037037037,
+        "enso_class_accuracy": 0.37037037037037035,
+        "boundary_crossing_accuracy": 0.49382716049382713,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.7302278281267555,
+        "transition_corr": 0.1311302611146216
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.8943205732749898,
+        "rmse": 1.0900843232639017,
+        "corr": 0.03538150535481177,
+        "direction": 0.6708860759493671,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.08504651533260521,
+        "r2_vs_persistence": 0.2567045643629966,
+        "pred_delta_std": 1.1435483413779224,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.6708860759493671,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.7254901960784313,
+        "enso_class_accuracy": 0.35443037974683544,
+        "boundary_crossing_accuracy": 0.5443037974683544,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 1.0011568236223147,
+        "transition_corr": 0.023783277674601092
+      },
+      "18": {
+        "n": 77,
+        "mae": 0.9515695308555279,
+        "rmse": 1.188976837789406,
+        "corr": 0.048871057386021946,
+        "direction": 0.6623376623376623,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.16349540420940745,
+        "r2_vs_persistence": 0.17724391240059456,
+        "pred_delta_std": 1.063934465709356,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.6623376623376623,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.7049180327868853,
+        "enso_class_accuracy": 0.2597402597402597,
+        "boundary_crossing_accuracy": 0.5584415584415584,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 1.0214688465689268,
+        "transition_corr": 0.04977711424475717
+      },
+      "24": {
+        "n": 75,
+        "mae": 1.1568318798955433,
+        "rmse": 1.3434614478880373,
+        "corr": -0.05714824507525053,
+        "direction": 0.6533333333333333,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": -0.018831879895543135,
+        "r2_vs_persistence": 0.04928535105319587,
+        "pred_delta_std": 1.2829497714625149,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.6533333333333333,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.6779661016949152,
+        "enso_class_accuracy": 0.22666666666666666,
+        "boundary_crossing_accuracy": 0.49333333333333335,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 1.133587145508097,
+        "transition_corr": 0.05401790058106401
+      },
+      "60": {
+        "n": 63,
+        "mae": 0.8206501434274602,
+        "rmse": 1.0555498121079412,
+        "corr": 0.14152366569389865,
+        "direction": 0.6507936507936508,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": 0.05808001530269824,
+        "r2_vs_persistence": 0.3128264312706813,
+        "pred_delta_std": 0.7860730906182012,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.6507936507936508,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.7837837837837838,
+        "enso_class_accuracy": 0.30158730158730157,
+        "boundary_crossing_accuracy": 0.3968253968253968,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 0.9458249222806068,
+        "transition_corr": -0.0007468359870717667
+      }
+    },
+    "home_plus_upper": {
+      "1": {
+        "n": 83,
+        "mae": 0.21962842699238405,
+        "rmse": 0.271724621890424,
+        "corr": 0.9501309112315033,
+        "direction": 0.6265060240963856,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.009287235658218346,
+        "r2_vs_persistence": 0.03309491610224169,
+        "pred_delta_std": 0.18389925883327982,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.6265060240963856,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 1.0,
+        "enso_class_accuracy": 0.8072289156626506,
+        "boundary_crossing_accuracy": 0.8072289156626506,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.2936660064314128,
+        "transition_corr": 0.7506010298770867
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.5680881088789421,
+        "rmse": 0.6819424016782561,
+        "corr": 0.6705967785290737,
+        "direction": 0.5975609756097561,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": -0.06833201131796657,
+        "r2_vs_persistence": -0.28322069424273,
+        "pred_delta_std": 0.5432295792506577,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.5975609756097561,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.7692307692307693,
+        "enso_class_accuracy": 0.573170731707317,
+        "boundary_crossing_accuracy": 0.6097560975609756,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.6554128089141883,
+        "transition_corr": 0.19211256846019692
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.9774556555728023,
+        "rmse": 1.1934344390717944,
+        "corr": -0.08194624505703249,
+        "direction": 0.654320987654321,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.18239392717774072,
+        "r2_vs_persistence": -0.4667229442152361,
+        "pred_delta_std": 1.1117831053280653,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.654320987654321,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.6851851851851852,
+        "enso_class_accuracy": 0.32098765432098764,
+        "boundary_crossing_accuracy": 0.4691358024691358,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9124161895741625,
+        "transition_corr": -0.11104659933530478
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.9015336323135954,
+        "rmse": 1.144379119475013,
+        "corr": 0.052307670024467366,
+        "direction": 0.6708860759493671,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.07783345629399963,
+        "r2_vs_persistence": 0.18081662871468207,
+        "pred_delta_std": 1.2193524077935214,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.6708860759493671,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.7450980392156863,
+        "enso_class_accuracy": 0.43037974683544306,
+        "boundary_crossing_accuracy": 0.6329113924050633,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9847079150540211,
+        "transition_corr": 0.022885119126751972
+      },
+      "18": {
+        "n": 77,
+        "mae": 1.110819188299173,
+        "rmse": 1.4315166957466636,
+        "corr": -0.2559858416143847,
+        "direction": 0.5714285714285714,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.004245746765762393,
+        "r2_vs_persistence": -0.19266136464687844,
+        "pred_delta_std": 1.0845726367718784,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.5714285714285714,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.6065573770491803,
+        "enso_class_accuracy": 0.2987012987012987,
+        "boundary_crossing_accuracy": 0.4935064935064935,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 1.1594851495220708,
+        "transition_corr": -0.25103415813477703
+      },
+      "24": {
+        "n": 75,
+        "mae": 1.1960100187989418,
+        "rmse": 1.4256066386209059,
+        "corr": -0.29690791514119497,
+        "direction": 0.5466666666666666,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": -0.05801001879894163,
+        "r2_vs_persistence": -0.07053085004575554,
+        "pred_delta_std": 0.9764164499787796,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.5466666666666666,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.576271186440678,
+        "enso_class_accuracy": 0.22666666666666666,
+        "boundary_crossing_accuracy": 0.37333333333333335,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 1.2108140541982904,
+        "transition_corr": -0.2805286358420907
+      },
+      "60": {
+        "n": 63,
+        "mae": 1.571127417313148,
+        "rmse": 1.9417416228415907,
+        "corr": 0.15339485027963118,
+        "direction": 0.5396825396825397,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": -0.6923972585829895,
+        "r2_vs_persistence": -1.3253689081978388,
+        "pred_delta_std": 1.6291089833997519,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.5396825396825397,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.5405405405405406,
+        "enso_class_accuracy": 0.38095238095238093,
+        "boundary_crossing_accuracy": 0.47619047619047616,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 1.7135008269912948,
+        "transition_corr": 0.15837360519295118
+      }
+    },
+    "home_plus_lower_upper": {
+      "1": {
+        "n": 83,
+        "mae": 0.2166660001276153,
+        "rmse": 0.2716723791315597,
+        "corr": 0.949486231063325,
+        "direction": 0.5903614457831325,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.012249662522987093,
+        "r2_vs_persistence": 0.03346668169940714,
+        "pred_delta_std": 0.18085600545588912,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.5903614457831325,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 0.8,
+        "enso_class_accuracy": 0.8313253012048193,
+        "boundary_crossing_accuracy": 0.8313253012048193,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.28833256238128563,
+        "transition_corr": 0.7583113208568784
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.5500718158431982,
+        "rmse": 0.679078968071923,
+        "corr": 0.6643777190428596,
+        "direction": 0.5609756097560976,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": -0.05031571828222264,
+        "r2_vs_persistence": -0.2724669915054405,
+        "pred_delta_std": 0.5590606745662403,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.5609756097560976,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.6153846153846154,
+        "enso_class_accuracy": 0.573170731707317,
+        "boundary_crossing_accuracy": 0.5975609756097561,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.5869598085922068,
+        "transition_corr": 0.2776635040105346
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.9933921948656073,
+        "rmse": 1.1775750477178448,
+        "corr": -0.08512301237026176,
+        "direction": 0.6419753086419753,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.19833046647054564,
+        "r2_vs_persistence": -0.42799978684026296,
+        "pred_delta_std": 1.1522399561396799,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.6419753086419753,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.6481481481481481,
+        "enso_class_accuracy": 0.25925925925925924,
+        "boundary_crossing_accuracy": 0.4444444444444444,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.8693664403473219,
+        "transition_corr": -0.08059291693288878
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.8479863358208433,
+        "rmse": 1.0793557876372049,
+        "corr": 0.06961491106121628,
+        "direction": 0.6835443037974683,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.13138075278675176,
+        "r2_vs_persistence": 0.2712634921270095,
+        "pred_delta_std": 1.0933526413363297,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.6835443037974683,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.7450980392156863,
+        "enso_class_accuracy": 0.4050632911392405,
+        "boundary_crossing_accuracy": 0.5949367088607594,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9284195962964081,
+        "transition_corr": 0.02663789588235843
+      },
+      "18": {
+        "n": 77,
+        "mae": 1.1486560003554425,
+        "rmse": 1.5319996902350752,
+        "corr": -0.18813667025583578,
+        "direction": 0.5974025974025974,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": -0.03359106529050715,
+        "r2_vs_persistence": -0.3659716022266346,
+        "pred_delta_std": 1.1568819229404126,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.5974025974025974,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.639344262295082,
+        "enso_class_accuracy": 0.36363636363636365,
+        "boundary_crossing_accuracy": 0.5324675324675324,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 1.2706364162306174,
+        "transition_corr": -0.22804188211398463
+      },
+      "24": {
+        "n": 75,
+        "mae": 0.9960612538225689,
+        "rmse": 1.2300301089554928,
+        "corr": 0.0010640861180009461,
+        "direction": 0.64,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": 0.14193874617743119,
+        "r2_vs_persistence": 0.2030496721875572,
+        "pred_delta_std": 0.8544560151004688,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.64,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.6440677966101694,
+        "enso_class_accuracy": 0.36,
+        "boundary_crossing_accuracy": 0.4666666666666667,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 1.0553729085002785,
+        "transition_corr": 0.013392110893625776
+      },
+      "60": {
+        "n": 63,
+        "mae": 1.3558120866298824,
+        "rmse": 1.7323823591653906,
+        "corr": 0.14484299494268016,
+        "direction": 0.5555555555555556,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": -0.4770819278997239,
+        "r2_vs_persistence": -0.8509576676275794,
+        "pred_delta_std": 1.3776322680075037,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.5555555555555556,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.5405405405405406,
+        "enso_class_accuracy": 0.3333333333333333,
+        "boundary_crossing_accuracy": 0.4444444444444444,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 1.5270635932749568,
+        "transition_corr": 0.09871208232953514
+      }
+    },
+    "home_plus_shuffled_lower": {
+      "1": {
+        "n": 83,
+        "mae": 0.18787754735327886,
+        "rmse": 0.24750436114632673,
+        "corr": 0.9582195927015562,
+        "direction": 0.6867469879518072,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.04103811529732354,
+        "r2_vs_persistence": 0.1977835390856011,
+        "pred_delta_std": 0.1923268870256686,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.6867469879518072,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 1.0,
+        "enso_class_accuracy": 0.8554216867469879,
+        "boundary_crossing_accuracy": 0.8554216867469879,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.2494890268892083,
+        "transition_corr": 0.786383273376083
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.49303027151794787,
+        "rmse": 0.6057606170234102,
+        "corr": 0.7316902103833811,
+        "direction": 0.6219512195121951,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": 0.006725826043027683,
+        "r2_vs_persistence": -0.012530314471073112,
+        "pred_delta_std": 0.5657613926643121,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.6219512195121951,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.7692307692307693,
+        "enso_class_accuracy": 0.5975609756097561,
+        "boundary_crossing_accuracy": 0.6219512195121951,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.5430584670976015,
+        "transition_corr": 0.40712434107862133
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.8110380336192187,
+        "rmse": 1.0054929812212927,
+        "corr": 0.2086008673391706,
+        "direction": 0.7037037037037037,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.01597630522415705,
+        "r2_vs_persistence": -0.041139779574299595,
+        "pred_delta_std": 1.1004411973241564,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.7037037037037037,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.7407407407407407,
+        "enso_class_accuracy": 0.3333333333333333,
+        "boundary_crossing_accuracy": 0.4444444444444444,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.7394219665823106,
+        "transition_corr": 0.2108838845732813
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.8576041100882176,
+        "rmse": 1.044616776554116,
+        "corr": 0.11929725879950197,
+        "direction": 0.7215189873417721,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.12176297851937745,
+        "r2_vs_persistence": 0.31741730997208384,
+        "pred_delta_std": 1.1759757501971329,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.7215189873417721,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.8235294117647058,
+        "enso_class_accuracy": 0.4177215189873418,
+        "boundary_crossing_accuracy": 0.6835443037974683,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9921530423703127,
+        "transition_corr": 0.12164383208638099
+      },
+      "18": {
+        "n": 77,
+        "mae": 0.9656408005603816,
+        "rmse": 1.1773258398081006,
+        "corr": 0.020086295508302418,
+        "direction": 0.6363636363636364,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.14942413450455372,
+        "r2_vs_persistence": 0.19328957803246838,
+        "pred_delta_std": 1.1184818441894862,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.6363636363636364,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.7049180327868853,
+        "enso_class_accuracy": 0.33766233766233766,
+        "boundary_crossing_accuracy": 0.6233766233766234,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 1.008776008719272,
+        "transition_corr": 0.03005206923531187
+      },
+      "24": {
+        "n": 75,
+        "mae": 1.1165670061988267,
+        "rmse": 1.2936084433759791,
+        "corr": -0.10294387388025228,
+        "direction": 0.64,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": 0.021432993801173472,
+        "r2_vs_persistence": 0.11853422988927975,
+        "pred_delta_std": 1.2435300297136849,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.64,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.6779661016949152,
+        "enso_class_accuracy": 0.30666666666666664,
+        "boundary_crossing_accuracy": 0.56,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 1.0846953899003482,
+        "transition_corr": 0.0012982009959862778
+      },
+      "60": {
+        "n": 63,
+        "mae": 0.8486284288665624,
+        "rmse": 1.1008873588965626,
+        "corr": 0.1871773051483845,
+        "direction": 0.6825396825396826,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": 0.03010172986359605,
+        "r2_vs_persistence": 0.2525283063696574,
+        "pred_delta_std": 0.8115864090107084,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.6825396825396826,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.7027027027027027,
+        "enso_class_accuracy": 0.42857142857142855,
+        "boundary_crossing_accuracy": 0.5396825396825397,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 0.9450357132700394,
+        "transition_corr": 0.12398888572342881
+      }
+    },
+    "home_plus_nonphi_lower": {
+      "1": {
+        "n": 83,
+        "mae": 0.21513051845769696,
+        "rmse": 0.2764228496228544,
+        "corr": 0.9482312177274752,
+        "direction": 0.6265060240963856,
+        "persistence_mae": 0.2289156626506024,
+        "mae_lift_vs_persistence": 0.01378514419290544,
+        "r2_vs_persistence": -0.0006305015573353501,
+        "pred_delta_std": 0.2121372040608279,
+        "truth_delta_std": 0.27633060031008355,
+        "turn_accuracy": 0.6265060240963856,
+        "large_event_n": 5,
+        "large_event_direction_accuracy": 0.8,
+        "enso_class_accuracy": 0.8192771084337349,
+        "boundary_crossing_accuracy": 0.8192771084337349,
+        "boundary_crossing_n": 11,
+        "transition_n": 11,
+        "transition_mae": 0.26022191308145715,
+        "transition_corr": 0.7975818450139202
+      },
+      "3": {
+        "n": 82,
+        "mae": 0.5469673906548607,
+        "rmse": 0.7055726476937275,
+        "corr": 0.6186449329423895,
+        "direction": 0.6463414634146342,
+        "persistence_mae": 0.49975609756097555,
+        "mae_lift_vs_persistence": -0.04721129309388511,
+        "r2_vs_persistence": -0.37369221919393536,
+        "pred_delta_std": 0.682032683481994,
+        "truth_delta_std": 0.6019255736324405,
+        "turn_accuracy": 0.6463414634146342,
+        "large_event_n": 39,
+        "large_event_direction_accuracy": 0.7948717948717948,
+        "enso_class_accuracy": 0.5487804878048781,
+        "boundary_crossing_accuracy": 0.5975609756097561,
+        "boundary_crossing_n": 32,
+        "transition_n": 32,
+        "transition_mae": 0.547623627888202,
+        "transition_corr": 0.310790229875585
+      },
+      "6": {
+        "n": 81,
+        "mae": 0.8636857972641603,
+        "rmse": 1.1396988305824483,
+        "corr": 0.0655776345793456,
+        "direction": 0.6666666666666666,
+        "persistence_mae": 0.7950617283950616,
+        "mae_lift_vs_persistence": -0.06862406886909866,
+        "r2_vs_persistence": -0.33761508763318715,
+        "pred_delta_std": 1.1891238524238699,
+        "truth_delta_std": 0.9853776537758964,
+        "turn_accuracy": 0.6666666666666666,
+        "large_event_n": 54,
+        "large_event_direction_accuracy": 0.7222222222222222,
+        "enso_class_accuracy": 0.3950617283950617,
+        "boundary_crossing_accuracy": 0.5308641975308642,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.7569402431145456,
+        "transition_corr": 0.1335181940868845
+      },
+      "12": {
+        "n": 79,
+        "mae": 0.8896826125755878,
+        "rmse": 1.1322713289635653,
+        "corr": 0.09872960812760113,
+        "direction": 0.6455696202531646,
+        "persistence_mae": 0.979367088607595,
+        "mae_lift_vs_persistence": 0.08968447603200724,
+        "r2_vs_persistence": 0.19805921989691955,
+        "pred_delta_std": 1.1900607026987513,
+        "truth_delta_std": 1.264368595085984,
+        "turn_accuracy": 0.6455696202531646,
+        "large_event_n": 51,
+        "large_event_direction_accuracy": 0.7647058823529411,
+        "enso_class_accuracy": 0.4177215189873418,
+        "boundary_crossing_accuracy": 0.6455696202531646,
+        "boundary_crossing_n": 46,
+        "transition_n": 46,
+        "transition_mae": 0.9806442882614385,
+        "transition_corr": 0.1011752197615207
+      },
+      "18": {
+        "n": 77,
+        "mae": 0.9019292890861574,
+        "rmse": 1.1162730461226555,
+        "corr": 0.07886834220587507,
+        "direction": 0.6753246753246753,
+        "persistence_mae": 1.1150649350649353,
+        "mae_lift_vs_persistence": 0.21313564597877788,
+        "r2_vs_persistence": 0.27478764841426206,
+        "pred_delta_std": 1.109661196231322,
+        "truth_delta_std": 1.3107992100498445,
+        "turn_accuracy": 0.6753246753246753,
+        "large_event_n": 61,
+        "large_event_direction_accuracy": 0.7377049180327869,
+        "enso_class_accuracy": 0.33766233766233766,
+        "boundary_crossing_accuracy": 0.6363636363636364,
+        "boundary_crossing_n": 62,
+        "transition_n": 62,
+        "transition_mae": 0.9673145603256625,
+        "transition_corr": 0.08750480388352153
+      },
+      "24": {
+        "n": 75,
+        "mae": 1.065304322739943,
+        "rmse": 1.3305496392778142,
+        "corr": -0.004444366532629462,
+        "direction": 0.68,
+        "persistence_mae": 1.1380000000000001,
+        "mae_lift_vs_persistence": 0.0726956772600571,
+        "r2_vs_persistence": 0.06747188981301899,
+        "pred_delta_std": 1.3549873261061338,
+        "truth_delta_std": 1.3777783985661685,
+        "turn_accuracy": 0.68,
+        "large_event_n": 59,
+        "large_event_direction_accuracy": 0.7288135593220338,
+        "enso_class_accuracy": 0.36,
+        "boundary_crossing_accuracy": 0.5733333333333334,
+        "boundary_crossing_n": 55,
+        "transition_n": 55,
+        "transition_mae": 0.96943916272837,
+        "transition_corr": 0.16829566217707104
+      },
+      "60": {
+        "n": 63,
+        "mae": 0.6929412408126439,
+        "rmse": 0.9580196684107027,
+        "corr": 0.4370099738173411,
+        "direction": 0.7777777777777778,
+        "persistence_mae": 0.8787301587301585,
+        "mae_lift_vs_persistence": 0.18578891791751462,
+        "r2_vs_persistence": 0.43394604165223905,
+        "pred_delta_std": 0.9862294924695376,
+        "truth_delta_std": 1.2733076893097477,
+        "turn_accuracy": 0.7777777777777778,
+        "large_event_n": 37,
+        "large_event_direction_accuracy": 0.7567567567567568,
+        "enso_class_accuracy": 0.5396825396825397,
+        "boundary_crossing_accuracy": 0.6507936507936508,
+        "boundary_crossing_n": 34,
+        "transition_n": 34,
+        "transition_mae": 0.819363793807482,
+        "transition_corr": 0.4201950627301469
+      }
+    }
+  },
+  "improvements_vs_home": {
+    "lag_ridge": {
+      "1": {
+        "mae_delta_vs_home": 0.01155001449955581,
+        "corr_delta_vs_home": 0.0034548934093324712,
+        "turn_delta_vs_home": 0.08433734939759041
+      },
+      "3": {
+        "mae_delta_vs_home": 0.045479027759128154,
+        "corr_delta_vs_home": 0.05636820695791889,
+        "turn_delta_vs_home": 0.0
+      },
+      "6": {
+        "mae_delta_vs_home": 0.1196067642370432,
+        "corr_delta_vs_home": 0.1215995486055558,
+        "turn_delta_vs_home": -0.07407407407407407
+      },
+      "12": {
+        "mae_delta_vs_home": 0.07728881520814512,
+        "corr_delta_vs_home": 0.11618671319024809,
+        "turn_delta_vs_home": 0.025316455696202445
+      },
+      "18": {
+        "mae_delta_vs_home": 0.18996049706371032,
+        "corr_delta_vs_home": 0.12493681103187078,
+        "turn_delta_vs_home": 0.051948051948051965
+      },
+      "24": {
+        "mae_delta_vs_home": 0.225985000799376,
+        "corr_delta_vs_home": 0.12437191016864017,
+        "turn_delta_vs_home": 0.06666666666666665
+      },
+      "60": {
+        "mae_delta_vs_home": 0.0756991626261696,
+        "corr_delta_vs_home": -0.05491632442705173,
+        "turn_delta_vs_home": 0.06349206349206349
+      }
+    },
+    "home_plus_lower": {
+      "1": {
+        "mae_delta_vs_home": -0.012190543004282212,
+        "corr_delta_vs_home": -0.00581078488213338,
+        "turn_delta_vs_home": 0.012048192771084376
+      },
+      "3": {
+        "mae_delta_vs_home": -0.03739653018987549,
+        "corr_delta_vs_home": -0.06456464021879271,
+        "turn_delta_vs_home": -0.024390243902439046
+      },
+      "6": {
+        "mae_delta_vs_home": -0.003063230260583083,
+        "corr_delta_vs_home": -0.17964647947108325,
+        "turn_delta_vs_home": -0.06172839506172845
+      },
+      "12": {
+        "mae_delta_vs_home": -0.052379072262085935,
+        "corr_delta_vs_home": -0.11666776140373519,
+        "turn_delta_vs_home": -0.025316455696202556
+      },
+      "18": {
+        "mae_delta_vs_home": 0.03662456688189175,
+        "corr_delta_vs_home": 0.048744339472063136,
+        "turn_delta_vs_home": 0.012987012987012991
+      },
+      "24": {
+        "mae_delta_vs_home": -0.0523449523077828,
+        "corr_delta_vs_home": 0.03472710339535098,
+        "turn_delta_vs_home": 0.013333333333333308
+      },
+      "60": {
+        "mae_delta_vs_home": 0.05846699533982558,
+        "corr_delta_vs_home": -0.023415091212928563,
+        "turn_delta_vs_home": 0.04761904761904767
+      }
+    },
+    "home_plus_upper": {
+      "1": {
+        "mae_delta_vs_home": -0.020850103952386706,
+        "corr_delta_vs_home": -0.004693593381410954,
+        "turn_delta_vs_home": -0.012048192771084265
+      },
+      "3": {
+        "mae_delta_vs_home": -0.08864673716830834,
+        "corr_delta_vs_home": -0.0638241382855751,
+        "turn_delta_vs_home": -0.03658536585365857
+      },
+      "6": {
+        "mae_delta_vs_home": -0.1552632556752428,
+        "corr_delta_vs_home": -0.30724374874056504,
+        "turn_delta_vs_home": -0.04938271604938271
+      },
+      "12": {
+        "mae_delta_vs_home": -0.05959213130069152,
+        "corr_delta_vs_home": -0.09974159673407959,
+        "turn_delta_vs_home": -0.025316455696202556
+      },
+      "18": {
+        "mae_delta_vs_home": -0.1226250905617533,
+        "corr_delta_vs_home": -0.2561125595283435,
+        "turn_delta_vs_home": -0.07792207792207795
+      },
+      "24": {
+        "mae_delta_vs_home": -0.0915230912111813,
+        "corr_delta_vs_home": -0.20503256667059344,
+        "turn_delta_vs_home": -0.09333333333333338
+      },
+      "60": {
+        "mae_delta_vs_home": -0.6920102785458622,
+        "corr_delta_vs_home": -0.011543906627196038,
+        "turn_delta_vs_home": -0.06349206349206349
+      }
+    },
+    "home_plus_lower_upper": {
+      "1": {
+        "mae_delta_vs_home": -0.01788767708761796,
+        "corr_delta_vs_home": -0.0053382735495892675,
+        "turn_delta_vs_home": -0.04819277108433728
+      },
+      "3": {
+        "mae_delta_vs_home": -0.07063044413256442,
+        "corr_delta_vs_home": -0.07004319777178925,
+        "turn_delta_vs_home": -0.07317073170731703
+      },
+      "6": {
+        "mae_delta_vs_home": -0.1711997949680477,
+        "corr_delta_vs_home": -0.3104205160537943,
+        "turn_delta_vs_home": -0.06172839506172845
+      },
+      "12": {
+        "mae_delta_vs_home": -0.006044834807939381,
+        "corr_delta_vs_home": -0.08243435569733068,
+        "turn_delta_vs_home": -0.012658227848101333
+      },
+      "18": {
+        "mae_delta_vs_home": -0.16046190261802284,
+        "corr_delta_vs_home": -0.18826338816979457,
+        "turn_delta_vs_home": -0.051948051948051965
+      },
+      "24": {
+        "mae_delta_vs_home": 0.10842567376519152,
+        "corr_delta_vs_home": 0.09293943458860246,
+        "turn_delta_vs_home": 0.0
+      },
+      "60": {
+        "mae_delta_vs_home": -0.4766949478625966,
+        "corr_delta_vs_home": -0.020095761964147058,
+        "turn_delta_vs_home": -0.04761904761904756
+      }
+    },
+    "home_plus_shuffled_lower": {
+      "1": {
+        "mae_delta_vs_home": 0.010900775686718489,
+        "corr_delta_vs_home": 0.003395088088641973,
+        "turn_delta_vs_home": 0.048192771084337394
+      },
+      "3": {
+        "mae_delta_vs_home": -0.013588899807314092,
+        "corr_delta_vs_home": -0.0027307064312677154,
+        "turn_delta_vs_home": -0.012195121951219523
+      },
+      "6": {
+        "mae_delta_vs_home": 0.011154366278340877,
+        "corr_delta_vs_home": -0.016696636344361943,
+        "turn_delta_vs_home": 0.0
+      },
+      "12": {
+        "mae_delta_vs_home": -0.015662609075313694,
+        "corr_delta_vs_home": -0.032752007959044996,
+        "turn_delta_vs_home": 0.025316455696202445
+      },
+      "18": {
+        "mae_delta_vs_home": 0.022553297177038023,
+        "corr_delta_vs_home": 0.01995957759434361,
+        "turn_delta_vs_home": -0.012987012987012991
+      },
+      "24": {
+        "mae_delta_vs_home": -0.012080078611066192,
+        "corr_delta_vs_home": -0.011068525409650767,
+        "turn_delta_vs_home": 0.0
+      },
+      "60": {
+        "mae_delta_vs_home": 0.030488709900723387,
+        "corr_delta_vs_home": 0.02223854824155727,
+        "turn_delta_vs_home": 0.07936507936507942
+      }
+    },
+    "home_plus_nonphi_lower": {
+      "1": {
+        "mae_delta_vs_home": -0.01635219541769961,
+        "corr_delta_vs_home": -0.006593286885439031,
+        "turn_delta_vs_home": -0.012048192771084265
+      },
+      "3": {
+        "mae_delta_vs_home": -0.06752601894422688,
+        "corr_delta_vs_home": -0.11577598387225929,
+        "turn_delta_vs_home": 0.012195121951219523
+      },
+      "6": {
+        "mae_delta_vs_home": -0.04149339736660074,
+        "corr_delta_vs_home": -0.15971986910418695,
+        "turn_delta_vs_home": -0.03703703703703709
+      },
+      "12": {
+        "mae_delta_vs_home": -0.0477411115626839,
+        "corr_delta_vs_home": -0.05331965863094583,
+        "turn_delta_vs_home": -0.05063291139240511
+      },
+      "18": {
+        "mae_delta_vs_home": 0.08626480865126218,
+        "corr_delta_vs_home": 0.07874162429191627,
+        "turn_delta_vs_home": 0.025974025974025983
+      },
+      "24": {
+        "mae_delta_vs_home": 0.03918260484781744,
+        "corr_delta_vs_home": 0.08743098193797205,
+        "turn_delta_vs_home": 0.040000000000000036
+      },
+      "60": {
+        "mae_delta_vs_home": 0.18617589795464196,
+        "corr_delta_vs_home": 0.27207121691051384,
+        "turn_delta_vs_home": 0.17460317460317465
+      }
+    }
+  },
+  "focus_6_12_24": {
+    "lag_ridge": {
+      "mae": 0.7819134160845532,
+      "corr": 0.215876531311974,
+      "turn_accuracy": 0.6859384278793561,
+      "enso_class_accuracy": 0.4042610824608011,
+      "transition_mae": 0.8021388872029136
+    },
+    "home_only": {
+      "mae": 0.922873609499408,
+      "corr": 0.09515714065715934,
+      "turn_accuracy": 0.6799687451164246,
+      "enso_class_accuracy": 0.35712246705214357,
+      "transition_mae": 0.9085585654514223
+    },
+    "home_plus_lower": {
+      "mae": 0.958802694442892,
+      "corr": 0.007961428164003512,
+      "turn_accuracy": 0.6553982393082253,
+      "enso_class_accuracy": 0.31715580559462414,
+      "transition_mae": 0.9549905990857224
+    },
+    "home_plus_upper": {
+      "mae": 1.0249997688951131,
+      "corr": -0.10884883005792002,
+      "turn_accuracy": 0.6239579100901183,
+      "enso_class_accuracy": 0.3260113559410324,
+      "transition_mae": 1.0359793862754914
+    },
+    "home_plus_lower_upper": {
+      "mae": 0.9458132615030065,
+      "corr": -0.004814671730348178,
+      "turn_accuracy": 0.6551732041464812,
+      "enso_class_accuracy": 0.34144085013283326,
+      "transition_mae": 0.9510529817146697
+    },
+    "home_plus_shuffled_lower": {
+      "mae": 0.9284030499687543,
+      "corr": 0.07498475075280676,
+      "turn_accuracy": 0.6884075636818253,
+      "enso_class_accuracy": 0.3525738396624472,
+      "transition_mae": 0.9387567996176571
+    },
+    "home_plus_nonphi_lower": {
+      "mae": 0.9395575775265637,
+      "corr": 0.05328762539143909,
+      "turn_accuracy": 0.6640787623066103,
+      "enso_class_accuracy": 0.3909277491274678,
+      "transition_mae": 0.902341231368118
+    }
+  },
+  "winners": {
+    "1": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "3": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "6": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "12": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "18": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "24": {
+      "mae": "lag_ridge",
+      "corr": "lag_ridge"
+    },
+    "60": {
+      "mae": "home_plus_nonphi_lower",
+      "corr": "home_plus_nonphi_lower"
+    }
+  },
+  "example_points": {
+    "lag_ridge": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.3684230373210339,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": 0.001986705672671174,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.4550602913387831,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.0383066891211419,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.2765500629449999,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.2212750438949188,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.9178890807327221,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.5867902794311914,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": 0.4921134394131132,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": 0.07474095148537656,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -0.9831664605107823,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -0.9652850979602543,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": -0.15561486523477935,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.3717869623795491,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 1.0410193311594298,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.5026767427473484,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": 0.4984388413436496,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": 0.13241613915037434,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.0027527437985349,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.508861716810745,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": -0.5536767918128369,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.39190220695951594,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 0.3502142415238731,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 0.07488315830932168,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": 0.5056772528463431,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": 0.6703606594240636,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": 0.39062551952817126,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": 0.12617933163875739,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.7173986038864384,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.4814760245829294,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": -0.11630909802388179,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": -0.2056582836830576,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": -0.6381501856408324,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": -0.26110921807692683,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.7204220661837802,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": 0.13822762667989763,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": -0.022247985388550884,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": -0.3154570547486376,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": -0.0596430382722305,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": -0.2917006100887941,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": -0.10777471586505222,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.4908706267909383,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": 0.2615304290239927,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": -0.05217126329548161,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": -0.3269200721229213,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": -0.036882499931521984,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 0.22923307174948515,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": -0.22893797094167057,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": 0.4534879366848929,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": 0.03960843937555543,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -0.5354006590091178,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -0.5551161657669019,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -0.2543408063518479,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": 0.4624930989107221,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": 1.281674580741301,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": 0.8235993839308181,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_only": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.14970099673644716,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": -0.1042533898047759,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.42758130338225875,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.0558122389197164,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.24768999636958924,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.1778536969937374,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.925841782814938,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.6181450656194126,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": -0.023732992044449563,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": -0.4322997161375374,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -0.9577019474658052,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -0.9312611894602347,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.08715738976054588,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.28548947061017815,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 0.9831386530070021,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.6880649675716114,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.5148265875003968,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -1.0473704613905577,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.3882966479679388,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.6985847777564937,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": -0.030274168819829916,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.4370670108451571,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 0.6160570998536496,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 0.6059102518635119,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": -0.017053860168327162,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": 0.04879930195775722,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": 0.2762106049490366,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": -0.07250898947349749,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.6118508873164814,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.5545035452485603,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 0.3969375969600563,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 0.6749106176263989,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": -1.058355385822571,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": -0.8834932242655231,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.2198110605391437,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": -0.0059475059752917,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 0.9664103120176386,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 0.21737036806255045,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 0.3979489906152414,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 0.3302011002683438,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": -0.022835309268561144,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.3776620551840677,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": -0.09499934841867373,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 0.6966645803764109,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 0.5738455715045649,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 1.1298542368779172,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 0.6863880911131327,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": 0.3019942692894242,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": 0.032973525394168535,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -0.15009494591625314,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -0.5794668251269254,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -1.4072803592944099,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -1.6643553092424175,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -1.0699422653288093,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -1.0022301201476826,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -1.3454137168760711,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_plus_lower": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.1564260012492063,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": -0.022903940792596573,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.27912287963251636,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.0816557308795953,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.2075464917491645,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.2913011572959221,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.8728424510429551,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.571835384753204,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": 0.15938201639198468,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": 0.07404931268640047,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -0.6641628375535523,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -0.9280256090160085,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.5707893958060344,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.5637298696579965,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 0.8525301329452643,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.5721740671145765,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.062125768025522554,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -0.7479257694559919,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -0.6692454595496772,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.3808195378320872,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": 0.9742925738070036,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.6305510852008243,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 0.6149704530537926,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 0.7647581141155961,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": -0.011258879946474176,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": 0.009889209637094906,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": -0.039467731366915546,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": -0.013029973500594427,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.7567984754766137,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.5551965024455663,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 0.5503900611927796,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 0.855536607244908,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": -0.8755174236929759,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": -0.5305045775795519,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": -0.030951614676304126,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": -0.38434738108704847,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 0.3920996548178178,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 0.4153610939269292,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 0.36115545149389344,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 0.33923775707213377,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": 0.025643812915081,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.3980484520140574,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": 0.41460687825537956,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 0.7896503475794436,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 0.7465027749502751,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 0.8957051451068627,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 0.8296718812769321,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": 0.46698454489864255,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": -0.3269133562294909,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -0.3049308878228439,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -0.3406344257719956,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -1.0551710918997728,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -1.1214017571360448,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -1.2268898194616822,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -0.7001463303393107,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -0.7726695874602815,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_plus_upper": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.028377202879320718,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": -0.12226384325865203,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.42151395440307904,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.1015742908335813,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.2827898749677166,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.1600340606672846,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.9758299745566613,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.6543877087658981,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": -0.15243995441399288,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": -0.4979449538956513,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -1.0387965927575908,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -0.9149670361073929,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.20116986608557436,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.3934390425032227,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 1.1742643408471727,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.9013235020311613,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.5405169318010653,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -0.9082210908198016,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.3762518514106223,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.3550837945765619,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": 0.25243797051183653,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.967193786131843,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 0.9982769103682074,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 1.0365781626349162,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": -0.2349709498178666,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": -0.16024071349548197,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": 0.09140446108655975,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": -0.19430442409385906,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.3726410639746231,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.7626179119106815,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 0.9975790101549836,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 1.4240318257796574,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": 0.1646723936533105,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": 0.08592810934994742,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.6132133289491541,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": 0.07884430950424792,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 0.8038526654839042,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 0.6829999483250888,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 1.343524256596495,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 1.7817895081064319,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": 0.5030995115908666,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.49939288479687416,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": -0.20971897748272827,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 0.45848638428962585,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 0.38723894023509725,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 1.3569607436903837,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 1.3136506797339977,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": 1.3606266819050719,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": -1.7577756232301744,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -1.945762762840183,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -2.0233916830166527,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -2.5003224694292565,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -2.256230515000636,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -1.7459366476831784,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -1.1574143369938314,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -1.2925419723820468,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_plus_lower_upper": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.035902778902259624,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": -0.08062795379519062,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.34515478143989364,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.1475307638326226,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.28678383789939166,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.31760122616538555,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.8612290314677354,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.566500733584745,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": -0.04759675610217701,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": -0.1637812009783881,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -0.9296391072823026,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -1.1813108552798048,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.40661208472081495,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.7106090205864357,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 0.9564686968058466,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.5870276148866652,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.49128886356900237,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -1.1468164781426935,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.0411940618175877,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.5653139003021002,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": 0.5919450534909154,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 1.0800066586140296,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 1.1023174407618535,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 1.0240360643178978,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": -0.3369664195136646,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": -0.32782114748555774,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": -0.41662521067435176,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": -0.31256415400827475,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.2485778245668237,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.7897382038263265,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 1.0039181537976438,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 1.306430855393502,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": 0.13685249332693558,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": 0.26040270405949284,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.4629520006183735,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": 0.17362182939821857,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 1.0066485120116746,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 1.4347418281413815,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 1.8095720933310597,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 1.9389463313812825,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": 0.3044819840782009,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.39716868008370215,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": 0.25781345726381455,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 0.5981624302630089,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 0.539671941955836,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 1.0614684349000396,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 1.159425292366541,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": 0.9678389784301279,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": -2.075503015591777,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -2.0579623627334387,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -1.7245201759480075,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -2.2024013033123784,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -1.9229723540286021,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -1.9627366773092614,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -1.2587230548092785,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -1.234761252554196,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_plus_shuffled_lower": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.17332746047355674,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": -0.18532040475595224,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.3252527726501534,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -1.0778535065414754,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.20843731020484058,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.10504795479964268,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.9444889899695534,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.6914264564708066,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": -0.08682646314521919,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": -0.484549230711482,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -0.9146294455858426,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -1.0727461980313253,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.22010215312172482,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 0.41267589016862694,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 1.0948021800841303,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.8059127969195137,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.5834947153092161,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -0.802217250012643,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.2532851954653834,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.5658438821615406,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": 0.2079623675268642,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.46271377984579987,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 0.7707818310719087,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 0.5834268704003114,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": -0.3638905740439615,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": 0.0015056012049011,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": 0.1482258835854082,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": -0.007524116802359759,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.5393231905407065,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.5525151526735754,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 0.4992297456693095,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 0.46249512820344874,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": -1.1364811562807844,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": -0.844434114997392,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.2165070913709042,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": 0.13982882900462723,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 1.0491776278301719,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 0.27952074266888205,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 0.2390281524401724,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 0.4007326045494052,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": -0.04648980689933008,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": -0.11922330174676059,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": -0.05377467278247555,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 0.48736677530597783,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 0.8354575619267017,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 1.3709178675743559,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": 0.9713639243822587,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": 0.25610503036948573,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": -0.30665404606479696,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -0.24875430412907584,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -0.5047204966369461,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -1.1084076197580555,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -1.3555517751974475,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -0.9118265931440692,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -0.7428081148985264,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -0.9168081013989041,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    },
+    "home_plus_nonphi_lower": {
+      "1": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-05-01",
+          "pred": 0.12149054717734575,
+          "actual": 0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 653,
+          "train_n": 156
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-08-01",
+          "pred": 0.003777281935684891,
+          "actual": -0.04,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 656,
+          "train_n": 159
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2005-11-01",
+          "pred": -0.4415551204129258,
+          "actual": -0.44,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 659,
+          "train_n": 162
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-02-01",
+          "pred": -0.9995911004013447,
+          "actual": -0.71,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 662,
+          "train_n": 165
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-05-01",
+          "pred": -0.14384078731690206,
+          "actual": -0.11,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 665,
+          "train_n": 168
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-08-01",
+          "pred": 0.30640615747644473,
+          "actual": 0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 668,
+          "train_n": 171
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2006-11-01",
+          "pred": 0.9368271518439968,
+          "actual": 0.98,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 671,
+          "train_n": 174
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-02-01",
+          "pred": 0.6094085358408445,
+          "actual": 0.12,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 674,
+          "train_n": 177
+        }
+      ],
+      "3": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-07-01",
+          "pred": 0.12739028734090588,
+          "actual": -0.01,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 655,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2005-10-01",
+          "pred": -0.13437676206378843,
+          "actual": -0.15,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 658,
+          "train_n": 157
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-01-01",
+          "pred": -1.202814830674188,
+          "actual": -0.98,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 661,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-04-01",
+          "pred": -0.6876264755505566,
+          "actual": -0.3,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 664,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-07-01",
+          "pred": 0.7914673797582517,
+          "actual": 0.03,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 667,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2006-10-01",
+          "pred": 1.11034428876594,
+          "actual": 0.76,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 670,
+          "train_n": 169
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-01-01",
+          "pred": 1.2433509936575768,
+          "actual": 0.59,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 673,
+          "train_n": 172
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-04-01",
+          "pred": 0.5919165003532026,
+          "actual": -0.16,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 676,
+          "train_n": 175
+        }
+      ],
+      "6": [
+        {
+          "origin": "2005-04-01",
+          "date": "2005-10-01",
+          "pred": -0.5260525563076996,
+          "actual": -0.15,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 658,
+          "train_n": 151
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-01-01",
+          "pred": -1.1145908826075872,
+          "actual": -0.98,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 661,
+          "train_n": 154
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-04-01",
+          "pred": -1.215027538795947,
+          "actual": -0.3,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 664,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2006-07-01",
+          "pred": -0.03587203514679771,
+          "actual": 0.03,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 667,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2006-10-01",
+          "pred": 0.6819273984470153,
+          "actual": 0.76,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 670,
+          "train_n": 163
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-01-01",
+          "pred": 0.6307471119920076,
+          "actual": 0.59,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 673,
+          "train_n": 166
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-04-01",
+          "pred": 1.0438699978114827,
+          "actual": -0.16,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 676,
+          "train_n": 169
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2007-07-01",
+          "pred": 0.45424211831758954,
+          "actual": -0.37,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 679,
+          "train_n": 172
+        }
+      ],
+      "12": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-04-01",
+          "pred": 0.435329041252833,
+          "actual": -0.3,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 664,
+          "train_n": 145
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2006-07-01",
+          "pred": -0.058499758858982405,
+          "actual": 0.03,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 667,
+          "train_n": 148
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2006-10-01",
+          "pred": 0.09772691404325112,
+          "actual": 0.76,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 670,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-01-01",
+          "pred": 0.250518813920962,
+          "actual": 0.59,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 673,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-04-01",
+          "pred": 0.6473033320952777,
+          "actual": -0.16,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 676,
+          "train_n": 157
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2007-07-01",
+          "pred": 0.2466261922408933,
+          "actual": -0.37,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 679,
+          "train_n": 160
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2007-10-01",
+          "pred": 0.28503196602576714,
+          "actual": -1.41,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 682,
+          "train_n": 163
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-01-01",
+          "pred": 0.3359257841192827,
+          "actual": -1.79,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 685,
+          "train_n": 166
+        }
+      ],
+      "18": [
+        {
+          "origin": "2005-04-01",
+          "date": "2006-10-01",
+          "pred": -0.9872805516947052,
+          "actual": 0.76,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 670,
+          "train_n": 139
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-01-01",
+          "pred": -0.6117122092359453,
+          "actual": 0.59,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 673,
+          "train_n": 142
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-04-01",
+          "pred": 0.022802599589709344,
+          "actual": -0.16,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 676,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2007-07-01",
+          "pred": -0.5593881811683437,
+          "actual": -0.37,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 679,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2007-10-01",
+          "pred": 0.45642081375926086,
+          "actual": -1.41,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 682,
+          "train_n": 151
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-01-01",
+          "pred": 0.6515231709618665,
+          "actual": -1.79,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 685,
+          "train_n": 154
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-04-01",
+          "pred": 0.443309645525376,
+          "actual": -0.89,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 688,
+          "train_n": 157
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2008-07-01",
+          "pred": 0.513126901018789,
+          "actual": -0.04,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 691,
+          "train_n": 160
+        }
+      ],
+      "24": [
+        {
+          "origin": "2005-04-01",
+          "date": "2007-04-01",
+          "pred": 0.22358393249505554,
+          "actual": -0.16,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 676,
+          "train_n": 133
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2007-07-01",
+          "pred": 0.6883567655631707,
+          "actual": -0.37,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 679,
+          "train_n": 136
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2007-10-01",
+          "pred": 0.47411365952516016,
+          "actual": -1.41,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 682,
+          "train_n": 139
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2008-01-01",
+          "pred": 1.2744432472029317,
+          "actual": -1.79,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 685,
+          "train_n": 142
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2008-04-01",
+          "pred": 1.2147086910300657,
+          "actual": -0.89,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 688,
+          "train_n": 145
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2008-07-01",
+          "pred": 0.9959729914123783,
+          "actual": -0.04,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 691,
+          "train_n": 148
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2008-10-01",
+          "pred": -0.102316336149052,
+          "actual": -0.3,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 694,
+          "train_n": 151
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2009-01-01",
+          "pred": -0.04695346770407294,
+          "actual": -1.0,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 697,
+          "train_n": 154
+        }
+      ],
+      "60": [
+        {
+          "origin": "2005-04-01",
+          "date": "2010-04-01",
+          "pred": -0.6792179223912285,
+          "actual": 0.56,
+          "persistence": 0.28,
+          "origin_anchor": 652,
+          "target_anchor": 712,
+          "train_n": 97
+        },
+        {
+          "origin": "2005-07-01",
+          "date": "2010-07-01",
+          "pred": -0.5134685990273437,
+          "actual": -0.89,
+          "persistence": -0.01,
+          "origin_anchor": 655,
+          "target_anchor": 715,
+          "train_n": 100
+        },
+        {
+          "origin": "2005-10-01",
+          "date": "2010-10-01",
+          "pred": -0.7156895040596974,
+          "actual": -1.65,
+          "persistence": -0.15,
+          "origin_anchor": 658,
+          "target_anchor": 718,
+          "train_n": 103
+        },
+        {
+          "origin": "2006-01-01",
+          "date": "2011-01-01",
+          "pred": -1.3523147144060372,
+          "actual": -1.7,
+          "persistence": -0.98,
+          "origin_anchor": 661,
+          "target_anchor": 721,
+          "train_n": 106
+        },
+        {
+          "origin": "2006-04-01",
+          "date": "2011-04-01",
+          "pred": -1.4065031960546266,
+          "actual": -0.74,
+          "persistence": -0.3,
+          "origin_anchor": 664,
+          "target_anchor": 724,
+          "train_n": 109
+        },
+        {
+          "origin": "2006-07-01",
+          "date": "2011-07-01",
+          "pred": -1.455346101655205,
+          "actual": -0.23,
+          "persistence": 0.03,
+          "origin_anchor": 667,
+          "target_anchor": 727,
+          "train_n": 112
+        },
+        {
+          "origin": "2006-10-01",
+          "date": "2011-10-01",
+          "pred": -1.3540708434860276,
+          "actual": -0.93,
+          "persistence": 0.76,
+          "origin_anchor": 670,
+          "target_anchor": 730,
+          "train_n": 115
+        },
+        {
+          "origin": "2007-01-01",
+          "date": "2012-01-01",
+          "pred": -0.9878364756085124,
+          "actual": -0.93,
+          "persistence": 0.59,
+          "origin_anchor": 673,
+          "target_anchor": 733,
+          "train_n": 118
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 255.447
+}

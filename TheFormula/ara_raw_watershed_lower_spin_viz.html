@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Raw Watershed Lower-Spin Wave</title>
+  <script src="./ara_raw_watershed_lower_spin_result.js"></script>
+  <script src="./ara_raw_watershed_phase_delay_result.js"></script>
+  <style>
+    :root {
+      --bg: #101214;
+      --panel: #171a1f;
+      --panel-2: #1f242b;
+      --text: #eef2f4;
+      --muted: #9da8b2;
+      --grid: rgba(255, 255, 255, 0.14);
+      --actual: #f3f4f6;
+      --formula: #2dd4bf;
+      --scaled: #f59e0b;
+      --decoder: #ef4444;
+      --persistence: #60a5fa;
+      --accent: #a3e635;
+      --warning: #f97316;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      width: min(1500px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 22px 0 28px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+
+    .control-band {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-right: 2px;
+    }
+
+    button,
+    label.toggle {
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 8px;
+      min-height: 36px;
+      padding: 8px 11px;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+
+    button.active {
+      border-color: rgba(163, 230, 53, 0.75);
+      box-shadow: inset 0 0 0 1px rgba(163, 230, 53, 0.22);
+      color: var(--accent);
+    }
+
+    .toggle input {
+      margin: 0;
+      accent-color: var(--accent);
+    }
+
+    .swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+      background: var(--actual);
+    }
+
+    .summary {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 14px;
+      min-width: 260px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(70px, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-width: 0;
+    }
+
+    .metric .name {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .metric .value {
+      margin-top: 3px;
+      font-size: 20px;
+      font-weight: 760;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .surface {
+      position: relative;
+      background: #0b0d10;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 640px;
+    }
+
+    .tip {
+      position: absolute;
+      display: none;
+      pointer-events: none;
+      background: rgba(15, 18, 22, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      padding: 9px 10px;
+      color: var(--text);
+      font-size: 12px;
+      min-width: 210px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+      z-index: 2;
+    }
+
+    .tip div {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .drivers {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .driver {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .driver .driver-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .driver .driver-value {
+      margin-top: 8px;
+      font-size: 24px;
+      font-weight: 760;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .driver small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        width: min(100vw - 18px, 1500px);
+        padding-top: 14px;
+      }
+
+      header,
+      .toolbar {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .summary,
+      .drivers {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      canvas {
+        height: 520px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>ARA Raw Watershed Lower-Spin Wave</h1>
+        <div class="subhead">Target-aligned generated wave over raw NINO3.4 truth. Data are held-out origins from the strict-causal run.</div>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <div class="control-band" id="controls">
+        <span class="label">Horizon</span>
+        <button data-horizon="3">3m</button>
+        <button data-horizon="6">6m</button>
+        <button data-horizon="12" class="active">12m</button>
+        <button data-horizon="18">18m</button>
+        <button data-horizon="24">24m</button>
+        <span class="label">Visual Shift</span>
+        <button data-shift="-24">-24m</button>
+        <button data-shift="-12">-12m</button>
+        <button data-shift="-6">-6m</button>
+        <button data-shift="0" class="active">0</button>
+        <button data-shift="6">+6m</button>
+        <button data-shift="auto">Best</button>
+        <span class="label">Overlay</span>
+        <label class="toggle"><input type="checkbox" data-model="lower_spin_formula" checked /><span class="swatch" style="background: var(--formula)"></span>Formula</label>
+        <label class="toggle"><input type="checkbox" data-model="lower_spin_scaled" /><span class="swatch" style="background: var(--scaled)"></span>Scaled</label>
+        <label class="toggle"><input type="checkbox" data-model="lower_spin_decoder" checked /><span class="swatch" style="background: var(--decoder)"></span>Decoder</label>
+        <label class="toggle"><input type="checkbox" data-model="persistence" /><span class="swatch" style="background: var(--persistence)"></span>Persistence</label>
+      </div>
+      <div class="summary">
+        <div class="metric"><div class="name">MAE</div><div class="value" id="metricMae">--</div></div>
+        <div class="metric"><div class="name">Corr</div><div class="value" id="metricCorr">--</div></div>
+        <div class="metric"><div class="name">Turn</div><div class="value" id="metricTurn">--</div></div>
+        <div class="metric"><div class="name">Trans MAE</div><div class="value" id="metricTrans">--</div></div>
+      </div>
+    </section>
+
+    <section class="surface">
+      <canvas id="chart"></canvas>
+      <div class="tip" id="tip"></div>
+    </section>
+
+    <section class="drivers">
+      <div class="driver">
+        <div class="driver-label">Lower Spin Torque</div>
+        <div class="driver-value" id="driverTorque">--</div>
+        <small>Fast tributary torque turning the current terrain.</small>
+      </div>
+      <div class="driver">
+        <div class="driver-label">Topology Arrival</div>
+        <div class="driver-value" id="driverArrival">--</div>
+        <small>Mostly lower-spin torque after alignment and inertia.</small>
+      </div>
+      <div class="driver">
+        <div class="driver-label">Sea Backpressure</div>
+        <div class="driver-value" id="driverSea">--</div>
+        <small>Upper-rung slow envelope/backpressure.</small>
+      </div>
+      <div class="driver">
+        <div class="driver-label">Boundary Gate</div>
+        <div class="driver-value" id="driverGate">--</div>
+        <small>Current ridge / boundary pressure gate.</small>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const data = window.ARA_RAW_WATERSHED_LOWER_SPIN;
+    const canvas = document.getElementById("chart");
+    const ctx = canvas.getContext("2d");
+    const tip = document.getElementById("tip");
+    const horizonButtons = [...document.querySelectorAll("[data-horizon]")];
+    const modelToggles = [...document.querySelectorAll("[data-model]")];
+    const metricEls = {
+      mae: document.getElementById("metricMae"),
+      corr: document.getElementById("metricCorr"),
+      turn: document.getElementById("metricTurn"),
+      trans: document.getElementById("metricTrans"),
+    };
+    const driverEls = {
+      torque: document.getElementById("driverTorque"),
+      arrival: document.getElementById("driverArrival"),
+      sea: document.getElementById("driverSea"),
+      gate: document.getElementById("driverGate"),
+    };
+
+    const colors = {
+      truth: getCss("--actual"),
+      lower_spin_formula: getCss("--formula"),
+      lower_spin_scaled: getCss("--scaled"),
+      lower_spin_decoder: getCss("--decoder"),
+      persistence: getCss("--persistence"),
+      grid: getCss("--grid"),
+      muted: getCss("--muted"),
+      accent: getCss("--accent"),
+      warning: getCss("--warning"),
+    };
+
+    const labels = {
+      lower_spin_formula: "Formula",
+      lower_spin_scaled: "Scaled",
+      lower_spin_decoder: "Decoder",
+      persistence: "Persistence",
+    };
+
+    let state = {
+      horizon: "12",
+      activeModels: new Set(["lower_spin_formula", "lower_spin_decoder"]),
+      hoverIndex: null,
+      visualShiftMonths: 0,
+    };
+
+    const fmt = new Intl.NumberFormat(undefined, { maximumFractionDigits: 3, minimumFractionDigits: 3 });
+    const monthFmt = new Intl.DateTimeFormat(undefined, { year: "numeric", month: "short" });
+    const yearFmt = new Intl.DateTimeFormat(undefined, { year: "numeric" });
+
+    function getCss(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function toTime(date) {
+      return new Date(`${date}T00:00:00Z`).getTime();
+    }
+
+    function addMonths(date, months) {
+      const d = new Date(`${date}T00:00:00Z`);
+      d.setUTCMonth(d.getUTCMonth() + Number(months || 0));
+      return d.getTime();
+    }
+
+    function currentRecords() {
+      return data.viz_records[state.horizon] || [];
+    }
+
+    function activeModels() {
+      return [...state.activeModels];
+    }
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const width = Math.max(320, Math.floor(rect.width));
+      const height = Math.max(360, Math.floor(rect.height));
+      if (canvas.width !== Math.floor(width * dpr) || canvas.height !== Math.floor(height * dpr)) {
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      return { width, height };
+    }
+
+    function getScale(records, width, height) {
+      const pad = { left: 66, right: 24, top: 26, bottom: 54 };
+      const times = records.flatMap(r => [toTime(r.target), addMonths(r.target, state.visualShiftMonths)]);
+      const minT = Math.min(...times);
+      const maxT = Math.max(...times);
+      const seriesStart = new Date(minT);
+      seriesStart.setUTCMonth(seriesStart.getUTCMonth() - 8);
+      const seriesEnd = new Date(maxT);
+      seriesEnd.setUTCMonth(seriesEnd.getUTCMonth() + 8);
+      const visibleTruth = data.observed_series
+        .map(d => ({ t: toTime(d.date), y: d.nino }))
+        .filter(d => d.t >= seriesStart.getTime() && d.t <= seriesEnd.getTime());
+      const values = visibleTruth.map(d => d.y);
+      for (const r of records) {
+        values.push(r.actual);
+        for (const model of activeModels()) values.push(r[model]);
+      }
+      values.push(-0.5, 0, 0.5);
+      const minY = Math.min(...values);
+      const maxY = Math.max(...values);
+      const span = Math.max(1, maxY - minY);
+      const yMin = minY - span * 0.12;
+      const yMax = maxY + span * 0.12;
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const x = t => pad.left + ((t - seriesStart.getTime()) / (seriesEnd.getTime() - seriesStart.getTime())) * plotW;
+      const y = v => pad.top + ((yMax - v) / (yMax - yMin)) * plotH;
+      return { pad, x, y, yMin, yMax, tMin: seriesStart.getTime(), tMax: seriesEnd.getTime(), visibleTruth };
+    }
+
+    function drawGrid(width, height, scale) {
+      ctx.save();
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#0b0d10";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.strokeStyle = colors.grid;
+      ctx.lineWidth = 1;
+      ctx.fillStyle = colors.muted;
+      ctx.font = "12px Inter, sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+
+      const yTicks = niceTicks(scale.yMin, scale.yMax, 7);
+      for (const tick of yTicks) {
+        const yy = scale.y(tick);
+        ctx.beginPath();
+        ctx.moveTo(scale.pad.left, yy);
+        ctx.lineTo(width - scale.pad.right, yy);
+        ctx.stroke();
+        ctx.fillText(tick.toFixed(1), scale.pad.left - 10, yy);
+      }
+
+      drawThreshold(scale.y(0.5), "+0.5", colors.warning, width, scale);
+      drawThreshold(scale.y(-0.5), "-0.5", colors.warning, width, scale);
+      drawThreshold(scale.y(0), "0", "rgba(255,255,255,0.42)", width, scale);
+
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      const startYear = new Date(scale.tMin).getUTCFullYear();
+      const endYear = new Date(scale.tMax).getUTCFullYear();
+      const firstTick = Math.ceil(startYear / 5) * 5;
+      for (let year = firstTick; year <= endYear; year += 5) {
+        const t = Date.UTC(year, 0, 1);
+        const xx = scale.x(t);
+        ctx.strokeStyle = "rgba(255,255,255,0.08)";
+        ctx.beginPath();
+        ctx.moveTo(xx, scale.pad.top);
+        ctx.lineTo(xx, height - scale.pad.bottom);
+        ctx.stroke();
+        ctx.fillStyle = colors.muted;
+        ctx.fillText(String(year), xx, height - scale.pad.bottom + 14);
+      }
+      ctx.restore();
+    }
+
+    function drawThreshold(y, label, color, width, scale) {
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = label === "0" ? 1.3 : 1;
+      ctx.setLineDash(label === "0" ? [] : [6, 7]);
+      ctx.beginPath();
+      ctx.moveTo(scale.pad.left, y);
+      ctx.lineTo(width - scale.pad.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = color;
+      ctx.font = "12px Inter, sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(label, scale.pad.left + 6, y - 4);
+      ctx.restore();
+    }
+
+    function niceTicks(min, max, count) {
+      const span = max - min;
+      const step0 = span / Math.max(1, count - 1);
+      const mag = Math.pow(10, Math.floor(Math.log10(step0)));
+      const err = step0 / mag;
+      const step = err >= 7.5 ? 10 * mag : err >= 3.5 ? 5 * mag : err >= 1.5 ? 2 * mag : mag;
+      const ticks = [];
+      let v = Math.ceil(min / step) * step;
+      while (v <= max + step * 0.5) {
+        ticks.push(v);
+        v += step;
+      }
+      return ticks;
+    }
+
+    function drawLine(points, color, width = 2, dash = []) {
+      if (points.length < 2) return;
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.lineJoin = "round";
+      ctx.lineCap = "round";
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawPoints(points, color, radius = 3) {
+      ctx.save();
+      ctx.fillStyle = color;
+      ctx.strokeStyle = "#0b0d10";
+      ctx.lineWidth = 1.5;
+      for (const p of points) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function render() {
+      const { width, height } = resizeCanvas();
+      const records = currentRecords();
+      const scale = getScale(records, width, height);
+      drawGrid(width, height, scale);
+
+      const truthLine = scale.visibleTruth.map(d => ({ x: scale.x(d.t), y: scale.y(d.y) }));
+      drawLine(truthLine, "rgba(243,244,246,0.52)", 2.2);
+
+      const targetTruth = records.map(r => ({ x: scale.x(toTime(r.target)), y: scale.y(r.actual), record: r }));
+      drawLine(targetTruth, colors.truth, 3);
+      drawPoints(targetTruth, colors.truth, 3.4);
+
+      for (const model of activeModels()) {
+        const pts = records.map(r => ({ x: scale.x(addMonths(r.target, state.visualShiftMonths)), y: scale.y(r[model]), record: r }));
+        const dash = model === "persistence" ? [7, 7] : [];
+        drawLine(pts, colors[model], model === "lower_spin_decoder" ? 3.2 : 2.4, dash);
+        drawPoints(pts, colors[model], model === "lower_spin_decoder" ? 3.6 : 2.8);
+      }
+
+      if (state.hoverIndex !== null && records[state.hoverIndex]) {
+        drawHover(records[state.hoverIndex], scale, height);
+      }
+
+      updateMetrics();
+      updateDrivers(records[state.hoverIndex] || records[Math.floor(records.length * 0.62)]);
+    }
+
+    function drawHover(record, scale, height) {
+      const xx = scale.x(toTime(record.target));
+      ctx.save();
+      ctx.strokeStyle = "rgba(255,255,255,0.44)";
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(xx, scale.pad.top);
+      ctx.lineTo(xx, height - scale.pad.bottom);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function updateMetrics() {
+      const preferred = state.activeModels.has("lower_spin_decoder")
+        ? "lower_spin_decoder"
+        : activeModels()[0] || "lower_spin_decoder";
+      const scores = data.point_scores[preferred]?.[state.horizon] || {};
+      metricEls.mae.textContent = value(scores.mae);
+      metricEls.corr.textContent = signed(scores.corr);
+      metricEls.turn.textContent = pct(scores.turn_accuracy);
+      metricEls.trans.textContent = value(scores.transition_mae);
+    }
+
+    function updateDrivers(record) {
+      if (!record) return;
+      driverEls.torque.textContent = signed(record.lower_spin_torque);
+      driverEls.arrival.textContent = signed(record.topology_arrival);
+      driverEls.sea.textContent = signed(record.sea_backpressure);
+      driverEls.gate.textContent = value(record.boundary_gate);
+    }
+
+    function bestShiftForCurrent() {
+      const delay = window.ARA_RAW_WATERSHED_PHASE_DELAY;
+      if (!delay) return 0;
+      const preferred = state.activeModels.has("lower_spin_decoder")
+        ? "lower_spin_decoder"
+        : activeModels()[0] || "lower_spin_decoder";
+      const row = delay.by_horizon?.[state.horizon]?.[preferred]?.best_corr_shift;
+      return Number.isFinite(row?.truth_shift_months) ? row.truth_shift_months : 0;
+    }
+
+    function setShift(value) {
+      state.visualShiftMonths = value === "auto" ? bestShiftForCurrent() : Number(value);
+      document.querySelectorAll("[data-shift]").forEach(button => {
+        const raw = button.dataset.shift;
+        const active = raw === "auto"
+          ? Number(state.visualShiftMonths) === bestShiftForCurrent()
+          : Number(raw) === Number(state.visualShiftMonths);
+        button.classList.toggle("active", active);
+      });
+      state.hoverIndex = null;
+      tip.style.display = "none";
+      render();
+    }
+
+    function value(v) {
+      return Number.isFinite(v) ? fmt.format(v) : "--";
+    }
+
+    function signed(v) {
+      return Number.isFinite(v) ? `${v >= 0 ? "+" : ""}${fmt.format(v)}` : "--";
+    }
+
+    function pct(v) {
+      return Number.isFinite(v) ? `${Math.round(v * 100)}%` : "--";
+    }
+
+    function showTip(evt) {
+      const records = currentRecords();
+      const { width, height } = resizeCanvas();
+      const scale = getScale(records, width, height);
+      const rect = canvas.getBoundingClientRect();
+      const mx = evt.clientX - rect.left;
+      let bestIndex = null;
+      let bestDist = Infinity;
+      for (let i = 0; i < records.length; i++) {
+        const xx = scale.x(toTime(records[i].target));
+        const d = Math.abs(xx - mx);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIndex = i;
+        }
+      }
+      if (bestDist > 28 || bestIndex === null) {
+        state.hoverIndex = null;
+        tip.style.display = "none";
+        render();
+        return;
+      }
+      state.hoverIndex = bestIndex;
+      const r = records[bestIndex];
+      const lines = [
+        ["Target", monthFmt.format(new Date(`${r.target}T00:00:00Z`))],
+        ["Origin", monthFmt.format(new Date(`${r.origin}T00:00:00Z`))],
+        ["Truth", value(r.actual)],
+        ...activeModels().map(m => [labels[m], value(r[m])]),
+        ["Torque", signed(r.lower_spin_torque)],
+        ["Arrival", signed(r.topology_arrival)],
+        ["Sea", signed(r.sea_backpressure)],
+      ];
+      tip.innerHTML = lines.map(([k, v]) => `<div><span>${k}</span><strong>${v}</strong></div>`).join("");
+      tip.style.display = "block";
+      const left = Math.min(rect.width - 230, Math.max(8, evt.clientX - rect.left + 14));
+      const top = Math.min(rect.height - 190, Math.max(8, evt.clientY - rect.top + 14));
+      tip.style.left = `${left}px`;
+      tip.style.top = `${top}px`;
+      render();
+    }
+
+    horizonButtons.forEach(button => {
+      button.addEventListener("click", () => {
+      state.horizon = button.dataset.horizon;
+      horizonButtons.forEach(b => b.classList.toggle("active", b === button));
+      state.hoverIndex = null;
+      tip.style.display = "none";
+      render();
+      });
+    });
+
+    modelToggles.forEach(input => {
+      input.addEventListener("change", () => {
+        const model = input.dataset.model;
+        if (input.checked) state.activeModels.add(model);
+        else state.activeModels.delete(model);
+        render();
+      });
+    });
+
+    document.querySelectorAll("[data-shift]").forEach(button => {
+      button.addEventListener("click", () => setShift(button.dataset.shift));
+    });
+
+    canvas.addEventListener("mousemove", showTip);
+    canvas.addEventListener("mouseleave", () => {
+      state.hoverIndex = null;
+      tip.style.display = "none";
+      render();
+    });
+    window.addEventListener("resize", render);
+
+    render();
+  </script>
+</body>
+</html>

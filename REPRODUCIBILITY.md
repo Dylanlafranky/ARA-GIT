@@ -168,6 +168,279 @@ Outputs:
 
 Important interpretation guard: the nasal/ENSO result supports shared paired anti-phase geometry and a partial transition prior. It does not prove direct causal prediction. Short-horizon ENSO remains persistence-dominated in the corrected forecast run, while the ARA/midpoint-matched transfer is strongest around the 12-month transition window. Boundary-distance transfer improves turn/transition information, but delayed feeder amplitude remains the strongest exact-value 12-month branch in this folder.
 
+## Recent Runnable Geometry Analog-Flow Test
+
+The 2026-05-24 analog-flow predictor test separates the flow operator from the decoder:
+
+```bash
+python TheFormula/ara_geometry_analog_flow_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_geometry_analog_flow_predictor_result.json`
+- `TheFormula/ara_geometry_analog_flow_predictor_result.js`
+- `ARA_GEOMETRY_ANALOG_FLOW_RESULT.md`
+
+Important interpretation guard: the oracle future-geometry decoder is diagnostic only. It uses the actual future geometry state and therefore is not a forecast. The strict forecast branch predicts future geometry by similar-state analog flow before decoding. In this run, the decoder ceiling is promising at 12 and 24 months, but the analog flow operator is not strong enough and lag ridge remains the best strict forecast.
+
+The oracle ablation identifies which future geometry fields carry that decoder signal:
+
+```bash
+python TheFormula/ara_oracle_geometry_ablation.py
+```
+
+Outputs:
+
+- `TheFormula/ara_oracle_geometry_ablation_result.json`
+- `TheFormula/ara_oracle_geometry_ablation_result.js`
+- `ARA_ORACLE_GEOMETRY_ABLATION_RESULT.md`
+
+Important interpretation guard: this is also diagnostic only. It uses actual future geometry `S(t+h)` to decide which fields are worth predicting in a later strict flow operator. In this run, future NINO phase and SOI phase are strongest alone, while NINO energy/rung context is the most damaging removal from the full decoder.
+
+The targeted strict follow-up predicts only those smaller future-geometry targets and adds geometry velocity/acceleration:
+
+```bash
+python TheFormula/ara_targeted_geometry_flow_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_targeted_geometry_flow_predictor_result.json`
+- `TheFormula/ara_targeted_geometry_flow_predictor_result.js`
+- `ARA_TARGETED_GEOMETRY_FLOW_RESULT.md`
+
+Important interpretation guard: this is a strict forecast test, unlike the oracle ablation. It shows partial improvement over whole-state analog flow, especially for future phase, but lag ridge still wins overall MAE.
+
+The focused phase-flow follow-up isolates three transport ideas:
+
+```bash
+python TheFormula/ara_phase_flow_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_phase_flow_predictor_result.json`
+- `TheFormula/ara_phase_flow_predictor_result.js`
+- `ARA_PHASE_FLOW_RESULT.md`
+
+Important interpretation guard: this is strict-causal. It finds horizon-specific phase-flow signal but does not beat lag ridge overall. The useful read is architectural: phase flow improves timing/shape, while lag/inertia still carries native-unit amplitude.
+
+The lag/phase hybrid follow-up tests whether the phase-flow branch can improve a lag amplitude prior:
+
+```bash
+python TheFormula/ara_lag_phase_hybrid_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_lag_phase_hybrid_predictor_result.json`
+- `TheFormula/ara_lag_phase_hybrid_predictor_result.js`
+- `ARA_LAG_PHASE_HYBRID_RESULT.md`
+
+Important interpretation guard: this is strict-causal, with inner past-only calibration for hybrid weights. The free hybrid does not beat lag ridge on MAE. At 24 months, lag plus regime-velocity phase improves correlation over lag alone, but still worsens MAE. The unconstrained coupling/energy gate overfits, so the next fair version should use a bounded ARA phase-turn correction rather than a free high-dimensional gate.
+
+The trust-gate diagnostic tests whether ARA phase-flow should be used as a confidence/regime warning rather than a value blend:
+
+```bash
+python TheFormula/ara_phase_trust_gate_diagnostic.py
+```
+
+Outputs:
+
+- `TheFormula/ara_phase_trust_gate_diagnostic_result.json`
+- `TheFormula/ara_phase_trust_gate_diagnostic_result.js`
+- `ARA_PHASE_TRUST_GATE_DIAGNOSTIC_RESULT.md`
+
+Important interpretation guard: this is strict-causal. The selector for origin `t` only uses previous records whose target is already in the past. In this run, ARA phase should not replace lag when they disagree. The useful signal is narrower: disagreement is a 24-month lag-risk warning, and ARA phase has slight transition turn/boundary skill while still losing on MAE.
+
+The energy/work decomposition diagnostic tests whether lag energy and ARA route geometry align cleanly:
+
+```bash
+python TheFormula/ara_energy_work_decomposition_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_energy_work_decomposition_result.json`
+- `TheFormula/ara_energy_work_decomposition_result.js`
+- `ARA_ENERGY_WORK_DECOMPOSITION_RESULT.md`
+
+Important interpretation guard: this is strict-causal for the base lag/phase forecasts, and the error selector only uses previous completed outcomes. The result supports alignment as a risk diagnostic, especially at 24 months, but does not improve the forecast. The first dissipation/turbulence proxy is not valid yet.
+
+The transition-risk and uncertainty model keeps lag as the central point forecast and predicts risk/interval quantities around it:
+
+```bash
+python TheFormula/ara_transition_risk_and_uncertainty_model.py
+```
+
+Outputs:
+
+- `TheFormula/ara_transition_risk_and_uncertainty_result.json`
+- `TheFormula/ara_transition_risk_and_uncertainty_result.js`
+- `ARA_TRANSITION_RISK_AND_UNCERTAINTY_RESULT.md`
+
+Important interpretation guard: this is strict-causal. For origin `t`, risk models train only on previous records whose targets are already known. The risk ranking has useful signal, especially high-error and boundary/event risk, but the first interval-width model undercovers and should not be used as an honest forecast interval yet.
+
+The multi-rung feeder ablation tests whether lower phi-rung information specifically explains medium-horizon lift:
+
+```bash
+python TheFormula/ara_multirung_feeder_ablation.py
+```
+
+Outputs:
+
+- `TheFormula/ara_multirung_feeder_ablation_result.json`
+- `TheFormula/ara_multirung_feeder_ablation_result.js`
+- `ARA_MULTIRUNG_FEEDER_ABLATION_RESULT.md`
+
+Important interpretation guard: this is strict-causal. All variants share the same lag/inertia base and home-rung features; only the added lower/upper block changes. In this run, the current lower-phi feeder block does not improve 6/12-month prediction, upper alone does not improve 24 months, and non-phi lower controls are competitive. Treat this as a negative result for the current direct-feature feeder construction.
+
+The cross-rung spin-transfer test checks the subtler version where lower rungs feed by phase/frequency pressure rather than direct amplitude:
+
+```bash
+python TheFormula/ara_cross_rung_spin_transfer_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_cross_rung_spin_transfer_result.json`
+- `TheFormula/ara_cross_rung_spin_transfer_result.js`
+- `ARA_CROSS_RUNG_SPIN_TRANSFER_RESULT.md`
+
+Important interpretation guard: this is strict-causal. The first run exposed a training-window bug and was discarded; the saved result is from the corrected run with pre-test records available for causal training and held-out scoring. It supports the faster-spin claim, but lower-spin features do not yet cleanly improve boundary-risk ranking.
+
+The topographic wavefront formula test turns the rough-terrain idea into a first explicit prediction/risk equation:
+
+```bash
+python TheFormula/ara_topographic_wavefront_formula_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_topographic_wavefront_formula_result.json`
+- `TheFormula/ara_topographic_wavefront_formula_result.js`
+- `ARA_TOPOGRAPHIC_WAVEFRONT_FORMULA_RESULT.md`
+
+Important interpretation guard: this is strict-causal. At origin `t`, the terrain surface, wavefront, lower-rung impulses, upper-rung reservoir, and residual correction all use only information available before the target. The first equation has direction/turn signal but is not yet a successful point predictor: it improves turn accuracy while worsening MAE, so the next version should use the terrain formula as a bounded risk/turn correction rather than a free amplitude decoder.
+
+The no-lag ARA energy-input test removes the lag/inertia predictor and asks whether lower-rung spin energy can move the home wavefront directly:
+
+```bash
+python TheFormula/ara_plain_energy_input_wavefront_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_plain_energy_input_wavefront_result.json`
+- `TheFormula/ara_plain_energy_input_wavefront_result.js`
+- `ARA_PLAIN_ENERGY_INPUT_WAVEFRONT_RESULT.md`
+
+Important interpretation guard: this is strict-causal and uses no lag-only/native lag feature block. The point forecast is still anchored at the current value, but all future deltas come from ARA terrain, lower-spin energy input, upper-reservoir gates, and past-only ARA calibration. In this run, ARA-only energy improves turn activity and boundary ranking, but it does not solve native-unit amplitude at 6/12/24 months.
+
+The raw watershed-slice test avoids smoothed terrain entirely:
+
+```bash
+python TheFormula/ara_raw_watershed_slice_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_raw_watershed_slice_result.json`
+- `TheFormula/ara_raw_watershed_slice_result.js`
+- `ARA_RAW_WATERSHED_SLICE_RESULT.md`
+
+Important interpretation guard: this is strict-causal and uses the raw ENSO dataframe directly. It avoids bandpass, z-score, rolling smoothing, and lag-ridge/native lag feature blocks. The fixed raw formula is still not enough by itself, but the past-only raw watershed decoder beats persistence across 3-24 months. The next required check is a control against generic raw finite-difference predictors.
+
+The corrected raw watershed lower-spin test demotes upper rungs to weak sea/backpressure and makes lower-rung spin torque the primary topology-arrival term:
+
+```bash
+python TheFormula/ara_raw_watershed_lower_spin_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_raw_watershed_lower_spin_result.json`
+- `TheFormula/ara_raw_watershed_lower_spin_result.js`
+- `TheFormula/ara_raw_watershed_lower_spin_viz.html`
+- `ARA_RAW_WATERSHED_LOWER_SPIN_RESULT.md`
+
+Important interpretation guard: this is strict-causal and raw-data only. It corrects the mechanism wording from the previous watershed test: lower rungs spin the current terrain, upper rungs provide slow sea/backpressure. The decoder preserves the raw-terrain lift, while the fixed symbolic formula still needs work.
+
+The phase-delay diagnostic for the lower-spin visualiser checks whether the generated wave is systematically late:
+
+```bash
+python TheFormula/ara_raw_watershed_phase_delay_diagnostic.py
+```
+
+Outputs:
+
+- `TheFormula/ara_raw_watershed_phase_delay_result.json`
+- `TheFormula/ara_raw_watershed_phase_delay_result.js`
+- `ARA_RAW_WATERSHED_PHASE_DELAY_RESULT.md`
+
+Important interpretation guard: this is diagnostic-only and compares already-generated held-out forecasts against shifted truth. It is not a causal prediction improvement. It confirms that the fixed lower-spin formula mostly matches truth when shifted earlier by the forecast horizon, meaning it carries the current slice forward instead of advancing the topology/contact state.
+
+The terrain-arrival predictor treats the lower-spin formula as a current terrain extractor, then searches older completed terrain signatures for the arriving future surface:
+
+```bash
+python TheFormula/ara_terrain_arrival_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_terrain_arrival_predictor_result.json`
+- `TheFormula/ara_terrain_arrival_predictor_result.js`
+- `TheFormula/ara_terrain_arrival_predictor_viz.html`
+- `ARA_TERRAIN_ARRIVAL_PREDICTOR_RESULT.md`
+
+Important interpretation guard: this is strict-causal and target-date aligned. Each analog neighbor is eligible only if its own target `s+h` is already before the current origin `t`; no decoder, lag ridge, shifted truth, smoothing, or future geometry oracle is used. The first run is promising, with `terrain_level_analog` beating persistence across the 6/12/24-month focus window, but it still needs controls against generic raw finite-difference and seasonal/ENSO analog recurrence.
+
+The wobble terrain-arrival follow-up adds a local 3-axis terrain frame, recent wobble velocity, curvature, and lower-subsystem spin:
+
+```bash
+python TheFormula/ara_wobble_terrain_arrival_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_wobble_terrain_arrival_result.json`
+- `TheFormula/ara_wobble_terrain_arrival_result.js`
+- `TheFormula/ara_wobble_terrain_arrival_viz.html`
+- `ARA_WOBBLE_TERRAIN_ARRIVAL_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no-decoder/no-lag-ridge. In the first run, wobble improves the transition/contact side more than broad correlation. Treat wobble as a bounded modifier around contact windows until a stronger distance metric is tested.
+
+The sphere atlas maps the wobble records onto a full ARA sphere:
+
+```bash
+python TheFormula/ara_sphere_atlas_from_wobble.py
+```
+
+Outputs:
+
+- `TheFormula/ara_sphere_atlas_data.json`
+- `TheFormula/ara_sphere_atlas_data.js`
+- `TheFormula/ara_sphere_atlas_viz.html`
+- `ARA_SPHERE_ATLAS_RESULT.md`
+
+Important interpretation guard: this is a mapping/export tool, not a forecast. It maps ARA as pole-to-pole latitude, phase/degrees as longitude, and local wobble as surface displacement. Use it to inspect where water-slice paths, prediction errors, and transition/contact regions sit on the sphere.
+
+The sphere topology direction test uses that atlas as a causal topology memory:
+
+```bash
+python TheFormula/ara_sphere_topology_direction_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_sphere_topology_direction_result.json`
+- `TheFormula/ara_sphere_topology_direction_result.js`
+- `TheFormula/ara_sphere_topology_direction_viz.html`
+- `ARA_SPHERE_TOPOLOGY_DIRECTION_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no-decoder/no-lag-ridge. Each sphere neighbour is eligible only when its target `s+h` is already before the current origin `t`; non-ready rows fall back to persistence. In this first pass the sphere atlas contains only held-out visual records, so ready coverage is limited. The useful result is ready-only: nested ARA-band level lookup helps future direction/turn, while raw sphere-delta transport is weaker.
+
 ## Recent Runnable Mapping Atlas
 
 The 2026-05-24 mapping-first atlas rebuilds the old temporal-coordinate visualiser as a reusable data export plus local HTML workbench.
