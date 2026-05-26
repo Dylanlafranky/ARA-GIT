@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ARA Rotating Terrain Slice</title>
+  <script src="ara_rotating_terrain_slice_result.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #141a22;
+      --line: #2b3542;
+      --text: #e8f2ff;
+      --muted: #91a4b8;
+      --truth: #f6f7fb;
+      --wobble: #8f7cff;
+      --sphere: #2ee7d0;
+      --surface: #52d273;
+      --arrival: #f6ad3c;
+      --delta: #ff5c6c;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-rows: auto minmax(440px, 1fr) auto;
+      gap: 12px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    .bar, .chart, .card, .legend {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .bar, .cards, .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar {
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .label {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    button, .toggle {
+      border: 1px solid #334050;
+      border-radius: 8px;
+      background: #1b2330;
+      color: var(--text);
+      padding: 8px 10px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    button.active {
+      border-color: #9cff38;
+      color: #9cff38;
+      box-shadow: inset 0 0 0 1px rgba(156, 255, 56, .28);
+    }
+    .toggle {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      user-select: none;
+    }
+    .toggle input { accent-color: #9cff38; }
+    .chart {
+      position: relative;
+      overflow: hidden;
+      min-height: 440px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cards { align-items: stretch; }
+    .card {
+      min-width: 170px;
+      flex: 1;
+      padding: 12px;
+    }
+    .name {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 850;
+      line-height: 1.05;
+    }
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend { padding: 10px 12px; }
+    .item {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .swatch {
+      width: 14px;
+      height: 4px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="bar">
+      <div class="group" id="horizonButtons"><span class="label">Horizon</span></div>
+      <div class="group">
+        <label class="toggle"><input type="checkbox" data-model="wobble" checked> Wobble</label>
+        <label class="toggle"><input type="checkbox" data-model="sphere" checked> Sphere</label>
+        <label class="toggle"><input type="checkbox" data-model="surface" checked> Surface parity</label>
+        <label class="toggle"><input type="checkbox" data-model="arrival"> Arrival parity</label>
+        <label class="toggle"><input type="checkbox" data-model="delta"> Arrival delta</label>
+        <label class="toggle"><input type="checkbox" id="readyOnly"> Ready only</label>
+      </div>
+    </section>
+
+    <section class="chart"><canvas id="chart"></canvas></section>
+
+    <section>
+      <div class="cards" id="cards"></div>
+      <div class="legend">
+        <span class="item" style="color: var(--truth)"><span class="swatch"></span> Truth</span>
+        <span class="item" style="color: var(--wobble)"><span class="swatch"></span> Wobble surface</span>
+        <span class="item" style="color: var(--sphere)"><span class="swatch"></span> Sphere nested level</span>
+        <span class="item" style="color: var(--surface)"><span class="swatch"></span> Surface parity</span>
+        <span class="item" style="color: var(--arrival)"><span class="swatch"></span> Arrival parity</span>
+        <span class="item" style="color: var(--delta)"><span class="swatch"></span> Arrival delta</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = window.ARA_ROTATING_TERRAIN_SLICE;
+    const horizons = DATA.horizons_months.map(String);
+    const state = {
+      horizon: horizons.includes("12") ? "12" : horizons[0],
+      readyOnly: false,
+      models: { wobble: true, sphere: true, surface: true, arrival: false, delta: false }
+    };
+    const modelDefs = [
+      { key: "wobble", field: "wobble_surface_analog", metric: "wobble_surface_analog", color: "#8f7cff" },
+      { key: "sphere", field: "sphere_nested2_level", metric: "sphere_nested2_level", color: "#2ee7d0" },
+      { key: "surface", field: "surface_wobble_level", metric: "surface_wobble_level", color: "#52d273" },
+      { key: "arrival", field: "arrival_parity_level", metric: "arrival_parity_level", color: "#f6ad3c" },
+      { key: "delta", field: "arrival_parity_delta", metric: "arrival_parity_delta", color: "#ff5c6c" }
+    ];
+    const buttons = document.getElementById("horizonButtons");
+    for (const h of horizons) {
+      const button = document.createElement("button");
+      button.textContent = `${h}m`;
+      button.type = "button";
+      button.addEventListener("click", () => {
+        state.horizon = h;
+        render();
+      });
+      buttons.appendChild(button);
+    }
+    document.querySelectorAll("[data-model]").forEach((input) => {
+      input.addEventListener("change", () => {
+        state.models[input.dataset.model] = input.checked;
+        render();
+      });
+    });
+    document.getElementById("readyOnly").addEventListener("change", (event) => {
+      state.readyOnly = event.target.checked;
+      render();
+    });
+    function isReady(row) {
+      return row.arrival_mean_distance !== null && row.arrival_mean_distance !== undefined;
+    }
+    function rowsForView() {
+      const rows = DATA.viz_records[state.horizon] || [];
+      return state.readyOnly ? rows.filter(isReady) : rows;
+    }
+    function metric(name, model) {
+      const bag = state.readyOnly ? DATA.ready_point_scores : DATA.point_scores;
+      return bag[model]?.[state.horizon]?.[name];
+    }
+    function direction(model) {
+      const bag = state.readyOnly ? DATA.ready_direction_scores : DATA.direction_scores;
+      return bag[model]?.[state.horizon]?.accuracy;
+    }
+    function fmt(value, digits = 3) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "n/a";
+    }
+    function renderCards() {
+      const cards = document.getElementById("cards");
+      const diag = DATA.diagnostics[state.horizon] || {};
+      const items = [
+        ["Ready", diag.ready_fraction, "Past terrain memory available", 3],
+        ["Wobble dir", direction("wobble_surface_analog"), "Current best route branch", 3],
+        ["Sphere dir", direction("sphere_nested2_level"), "Nested sphere level", 3],
+        ["Surface dir", direction("surface_wobble_level"), "Origin-surface terrain map", 3],
+        ["Arrival dir", direction("arrival_parity_level"), "Completed target-patch map", 3],
+        ["Arrival MAE", metric("mae", "arrival_parity_level"), "Native-unit error", 3]
+      ];
+      cards.innerHTML = "";
+      for (const [name, value, sub, digits] of items) {
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `<div class="name">${name}</div><div class="value">${fmt(value, digits)}</div><div class="sub">${sub}</div>`;
+        cards.appendChild(el);
+      }
+    }
+    function draw() {
+      const canvas = document.getElementById("chart");
+      const ctx = canvas.getContext("2d");
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = Math.max(640, Math.round(rect.width * dpr));
+      canvas.height = Math.max(440, Math.round(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#090d12";
+      ctx.fillRect(0, 0, w, h);
+      const rows = rowsForView();
+      if (!rows.length) return;
+      const active = modelDefs.filter((def) => state.models[def.key]);
+      const values = rows.flatMap((row) => [row.actual, row.current, ...active.map((def) => row[def.field])]).filter(Number.isFinite);
+      let minY = Math.min(-2.2, ...values);
+      let maxY = Math.max(2.2, ...values);
+      const padY = (maxY - minY) * 0.08 || 1;
+      minY -= padY;
+      maxY += padY;
+      const margin = { left: 56, right: 22, top: 28, bottom: 50 };
+      const plotW = w - margin.left - margin.right;
+      const plotH = h - margin.top - margin.bottom;
+      const x = (i) => margin.left + (rows.length <= 1 ? 0 : i / (rows.length - 1)) * plotW;
+      const y = (v) => margin.top + (1 - (v - minY) / (maxY - minY)) * plotH;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "#25303b";
+      ctx.fillStyle = "#8ea3b8";
+      ctx.font = "12px ui-sans-serif, system-ui";
+      for (let tick = Math.ceil(minY); tick <= Math.floor(maxY); tick += 1) {
+        const yy = y(tick);
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yy);
+        ctx.lineTo(w - margin.right, yy);
+        ctx.stroke();
+        ctx.fillText(String(tick), 18, yy + 4);
+      }
+      ctx.strokeStyle = "#8792a0";
+      ctx.beginPath();
+      ctx.moveTo(margin.left, y(0));
+      ctx.lineTo(w - margin.right, y(0));
+      ctx.stroke();
+      function path(field, color, width, dash) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (dash) ctx.setLineDash(dash);
+        ctx.beginPath();
+        rows.forEach((row, i) => {
+          const xx = x(i);
+          const yy = y(row[field]);
+          if (i === 0) ctx.moveTo(xx, yy);
+          else ctx.lineTo(xx, yy);
+        });
+        ctx.stroke();
+        ctx.restore();
+      }
+      path("actual", "#f6f7fb", 2.3);
+      path("current", "#697381", 1.1, [4, 6]);
+      active.forEach((def) => path(def.field, def.color, 1.8));
+      ctx.fillStyle = "#8ea3b8";
+      ctx.textAlign = "center";
+      const every = Math.max(1, Math.ceil(rows.length / 6));
+      rows.forEach((row, i) => {
+        if (i % every !== 0 && i !== rows.length - 1) return;
+        ctx.fillText(row.origin.slice(0, 4), x(i), h - 22);
+      });
+    }
+    function render() {
+      document.querySelectorAll("#horizonButtons button").forEach((button) => {
+        button.classList.toggle("active", button.textContent === `${state.horizon}m`);
+      });
+      renderCards();
+      draw();
+    }
+    window.addEventListener("resize", render);
+    render();
+  </script>
+</body>
+</html>

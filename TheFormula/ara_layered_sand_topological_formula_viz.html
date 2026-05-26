@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Layered Sand + Sphere Topology</title>
+  <script src="./ara_layered_sand_topological_formula_result.js"></script>
+  <style>
+    :root {
+      --bg:#080b10; --panel:#121821; --panel2:#17202b; --line:#2b3542;
+      --text:#eef4ff; --muted:#9fb0c4; --grid:rgba(160,176,196,.17);
+      --truth:#f4f7fb; --persist:#89919e; --legacy:#4fa3ff;
+      --topo:#c6ff33; --rotated:#35d0ba; --phi-wobble:#ff8fd4; --saturation:#ffcf5a; --manual:#ff6b6b; --wave:#b995ff;
+      --phi:#ff7a22; --anti:#a64bc4; --subphi:#ffd327; --subanti:#ff9ec1;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--text)}
+    button,select{font:inherit}
+    .app{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr)330px;grid-template-rows:auto minmax(520px,1fr) auto;gap:12px;padding:14px}
+    .top,.chart,.side,.metrics{border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+    .top{grid-column:1/-1;display:grid;grid-template-columns:minmax(320px,1fr)360px;gap:16px;padding:12px 14px;align-items:start}
+    h1{margin:0;font-size:19px;line-height:1.2;letter-spacing:0}
+    .sub{margin-top:5px;color:var(--muted);font-size:13px;line-height:1.35}
+    label{display:block;margin-bottom:5px;font-size:11px;color:#a9cdef;text-transform:uppercase;font-weight:800;letter-spacing:0}
+    select{width:100%;min-height:38px;border:1px solid #334154;border-radius:7px;background:var(--panel2);color:var(--text);padding:7px 9px}
+    .toggles{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    button{min-height:34px;border:1px solid #334154;border-radius:7px;padding:6px 10px;background:var(--panel2);color:var(--text);cursor:pointer;font-weight:750;white-space:nowrap}
+    button.active{border-color:rgba(198,255,51,.75);color:var(--topo);background:rgba(198,255,51,.08)}
+    .chart{min-width:0;min-height:520px;padding:12px}
+    canvas{width:100%;height:100%;min-height:500px;display:block}
+    .side{padding:12px;display:grid;grid-template-rows:auto auto minmax(0,1fr);gap:12px}
+    .panel{border:1px solid rgba(255,255,255,.08);border-radius:8px;background:rgba(255,255,255,.035);padding:10px}
+    .panel h2{margin:0 0 8px;font-size:12px;text-transform:uppercase;color:#a9cdef;letter-spacing:0}
+    .rule-svg{width:100%;aspect-ratio:1.35;display:block;background:#f7f7f4;border-radius:6px}
+    .legend{display:grid;gap:6px;font-size:12px;color:var(--muted);line-height:1.3}
+    .legend-row{display:grid;grid-template-columns:12px 1fr;gap:8px;align-items:center}
+    .swatch{width:11px;height:11px;border-radius:2px}
+    .metrics{grid-column:1/-1;padding:12px;display:grid;grid-template-columns:repeat(5,minmax(140px,1fr));gap:10px}
+    .metric{min-height:84px;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px;background:rgba(255,255,255,.035)}
+    .metric .name{font-size:11px;color:#a9cdef;text-transform:uppercase;font-weight:800;letter-spacing:0}
+    .metric .value{margin-top:5px;font-size:22px;font-weight:850;font-variant-numeric:tabular-nums}
+    .metric .note{margin-top:5px;color:var(--muted);font-size:12px;line-height:1.3}
+    @media(max-width:1050px){.app{grid-template-columns:1fr}.top,.metrics{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <div>
+      <h1>Layered Sand + Recursive Sphere Topology</h1>
+      <div class="sub">Layered sand remains the roll/arrival formula. The measured spheres now contain recursive ARA / sub-ARA / sub-sub-ARA terrain with phi valleys and anti-phi counterlines.</div>
+      <div class="toggles" id="toggles"></div>
+    </div>
+    <div>
+      <label for="horizonSelect">Horizon</label>
+      <select id="horizonSelect"></select>
+    </div>
+  </section>
+  <section class="chart"><canvas id="chart"></canvas></section>
+  <aside class="side">
+    <section class="panel">
+      <h2>Sphere Terrain</h2>
+      <svg class="rule-svg" viewBox="0 0 270 200" aria-label="Recursive ARA grid">
+        <rect width="270" height="200" fill="#f7f7f4"></rect>
+        <circle cx="135" cy="100" r="78" fill="none" stroke="#0b0b0b" stroke-width="2.4"></circle>
+        <line x1="22" y1="100" x2="248" y2="100" stroke="#0b0b0b" stroke-width="2.4"></line>
+        <line x1="135" y1="17" x2="135" y2="183" stroke="#0b0b0b" stroke-width="2.4"></line>
+        <line x1="54" y1="100" x2="54" y2="178" stroke="#0b0b0b" stroke-width="1.8"></line>
+        <line x1="216" y1="22" x2="216" y2="178" stroke="#0b0b0b" stroke-width="1.8"></line>
+        <line x1="28" y1="54" x2="242" y2="54" stroke="#ff7a22" stroke-width="2.2"></line>
+        <line x1="182" y1="17" x2="182" y2="183" stroke="#ff7a22" stroke-width="2.2"></line>
+        <line x1="88" y1="17" x2="88" y2="183" stroke="#a64bc4" stroke-width="2.2"></line>
+        <line x1="28" y1="69" x2="242" y2="69" stroke="#ffd327" stroke-width="2.2"></line>
+        <line x1="28" y1="130" x2="242" y2="130" stroke="#ffd327" stroke-width="2.2"></line>
+        <line x1="28" y1="85" x2="242" y2="85" stroke="#ff9ec1" stroke-width="2.2"></line>
+        <line x1="28" y1="146" x2="242" y2="146" stroke="#ff9ec1" stroke-width="2.2"></line>
+      </svg>
+    </section>
+    <section class="panel">
+      <h2>What Changed</h2>
+      <div class="legend">
+        <div>Kept: lower contacts, alternating roll, wobble, upper pressure.</div>
+        <div>Changed: terrain inside each sphere now uses recursive phi / anti-phi bands.</div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Diagnostics</h2>
+      <div class="legend" id="diagnostics"></div>
+    </section>
+  </aside>
+  <section class="metrics" id="metrics"></section>
+</main>
+
+<script>
+const DATA = window.ARA_LAYERED_SAND_TOPOLOGICAL_FORMULA;
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+const order = ["actual","persistence","legacy_layered_formula","topological_formula","topological_rotated","topological_phi_wobble","topological_saturation_gate","topological_wavecycle","topological_manual"];
+const labels = {
+  actual:"Truth", persistence:"Persistence", legacy_layered_formula:"Legacy layered",
+  topological_formula:"Topology now-read", topological_rotated:"True rotated topology", topological_phi_wobble:"Phi-time wobble",
+  topological_saturation_gate:"Saturation gate",
+  topological_manual:"Topology manual", topological_wavecycle:"Topology wavecycle"
+};
+const colors = {
+  actual:css("--truth"), persistence:css("--persist"), legacy_layered_formula:css("--legacy"),
+  topological_formula:css("--topo"), topological_rotated:css("--rotated"), topological_phi_wobble:css("--phi-wobble"),
+  topological_saturation_gate:css("--saturation"),
+  topological_manual:css("--manual"), topological_wavecycle:css("--wave")
+};
+let visible = {actual:true,persistence:true,legacy_layered_formula:false,topological_formula:false,topological_rotated:true,topological_phi_wobble:true,topological_saturation_gate:true,topological_wavecycle:false,topological_manual:false};
+function css(name){return getComputedStyle(document.documentElement).getPropertyValue(name).trim()}
+function fmt(v,d=3){return v===null||v===undefined||!Number.isFinite(Number(v))?"n/a":Number(v).toFixed(d)}
+function init(){
+  const sel=document.getElementById("horizonSelect");
+  Object.keys(DATA.records_by_horizon).forEach(h=>{const o=document.createElement("option");o.value=h;o.textContent=`${h} months`;if(h==="12")o.selected=true;sel.appendChild(o)});
+  const toggles=document.getElementById("toggles");
+  order.forEach(k=>{const b=document.createElement("button");b.textContent=labels[k];b.className=visible[k]?"active":"";b.onclick=()=>{visible[k]=!visible[k];b.classList.toggle("active",visible[k]);render()};toggles.appendChild(b)});
+  sel.addEventListener("input",render); window.addEventListener("resize",render); render();
+}
+function rows(){return DATA.records_by_horizon[document.getElementById("horizonSelect").value]||[]}
+function xDate(r){return new Date(r.target).getTime()}
+function drawGrid(plot,minY,maxY,minX,maxX){
+  ctx.strokeStyle=css("--grid");ctx.lineWidth=1;ctx.fillStyle="#a9b6c7";ctx.font="12px Inter, sans-serif";ctx.textAlign="right";ctx.textBaseline="middle";
+  for(let i=0;i<=6;i++){const t=i/6,y=plot.bottom-t*(plot.bottom-plot.top),v=minY+t*(maxY-minY);ctx.beginPath();ctx.moveTo(plot.left,y);ctx.lineTo(plot.right,y);ctx.stroke();ctx.fillText(fmt(v,1),plot.left-8,y)}
+  ctx.textAlign="center";ctx.textBaseline="top";const y0=new Date(minX).getFullYear(),y1=new Date(maxX).getFullYear(),step=y1-y0>16?4:2;
+  for(let y=y0;y<=y1;y+=step){const tx=new Date(`${y}-01-01T00:00:00`).getTime();if(tx<minX||tx>maxX)continue;const x=plot.left+((tx-minX)/(maxX-minX||1))*(plot.right-plot.left);ctx.beginPath();ctx.moveTo(x,plot.top);ctx.lineTo(x,plot.bottom);ctx.stroke();ctx.fillText(String(y),x,plot.bottom+9)}
+}
+function drawLine(dataRows,key,plot,minY,maxY,minX,maxX){
+  const pts=dataRows.filter(r=>r[key]!==null&&r[key]!==undefined&&Number.isFinite(Number(r[key]))).map(r=>({x:plot.left+((xDate(r)-minX)/(maxX-minX||1))*(plot.right-plot.left),y:plot.bottom-((Number(r[key])-minY)/(maxY-minY||1))*(plot.bottom-plot.top)}));
+  if(pts.length<2)return;ctx.save();ctx.strokeStyle=colors[key];ctx.lineWidth=key==="actual"?2.4:2;ctx.globalAlpha=key==="persistence"?.72:.96;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.stroke();
+  if(key==="actual"){ctx.fillStyle=colors[key];pts.forEach((p,i)=>{if(i%3)return;ctx.beginPath();ctx.arc(p.x,p.y,2.2,0,Math.PI*2);ctx.fill()})}ctx.restore();
+}
+function renderMetrics(){
+  const h=document.getElementById("horizonSelect").value,box=document.getElementById("metrics");box.innerHTML="";
+  order.filter(k=>k!=="actual").forEach(k=>{const s=DATA.scores[k][h]||{},d=document.createElement("div");d.className="metric";d.innerHTML=`<div class="name">${labels[k]}</div><div class="value">${fmt(s.corr)}</div><div class="note">corr | MAE ${fmt(s.mae)} | amp ${fmt(s.amp_ratio)}</div>`;box.appendChild(d)});
+  const dg=DATA.diagnostics[h];document.getElementById("diagnostics").innerHTML=`<div>Old scalar |dARA|: ${fmt(dg.mean_abs_topological_delta_ara)}</div><div>True rotated |ARA shift|: ${fmt(dg.mean_abs_rotated_arrival_shift_ara)}</div><div>Phi wobble |ARA shift|: ${fmt(dg.mean_abs_phi_wobble_arrival_shift_ara)}</div><div>Mean phi wobble phase: ${fmt(dg.mean_phi_wobble_phase_deg,1)} deg</div><div>Rotation angle: ${fmt(dg.mean_abs_rotated_angle_deg,1)} deg</div><div>Conflict rate: ${fmt(dg.rotation_conflict_rate)}</div><div>Wrong-dir rate: ${fmt(dg.rotated_wrong_direction_rate)}</div><div>Wrong age / correct age: ${fmt(dg.mean_basin_age_wrong_direction,1)} / ${fmt(dg.mean_basin_age_correct_direction,1)} mo</div><div>Saturation crossings: ${fmt(dg.saturation_crossing_rate)}</div><div>Mean saturation on crossing: ${fmt(dg.mean_saturation_when_crossing)}</div>`;
+}
+function render(){
+  const rect=canvas.parentElement.getBoundingClientRect(),dpr=window.devicePixelRatio||1;canvas.width=Math.max(600,Math.floor(rect.width*dpr));canvas.height=Math.max(500,Math.floor(rect.height*dpr));canvas.style.height=`${Math.max(500,Math.floor(rect.height))}px`;ctx.setTransform(dpr,0,0,dpr,0,0);
+  const w=canvas.width/dpr,h=canvas.height/dpr;ctx.clearRect(0,0,w,h);const dataRows=rows(),keys=order.filter(k=>visible[k]),vals=[];dataRows.forEach(r=>keys.forEach(k=>{if(r[k]!==null&&r[k]!==undefined&&Number.isFinite(Number(r[k])))vals.push(Number(r[k]))}));
+  const minY=Math.min(-2.2,Math.floor((Math.min(...vals)-.2)*10)/10),maxY=Math.max(2.6,Math.ceil((Math.max(...vals)+.2)*10)/10),minX=Math.min(...dataRows.map(xDate)),maxX=Math.max(...dataRows.map(xDate)),plot={left:58,right:w-22,top:22,bottom:h-48};
+  drawGrid(plot,minY,maxY,minX,maxX);keys.forEach(k=>drawLine(dataRows,k,plot,minY,maxY,minX,maxX));
+  ctx.fillStyle="#c4d1e0";ctx.font="12px Inter, sans-serif";ctx.textAlign="left";ctx.textBaseline="bottom";ctx.fillText("NINO / layered topology output",plot.left,plot.top-5);ctx.textAlign="center";ctx.fillText(`Target date, ${document.getElementById("horizonSelect").value}m horizon`,(plot.left+plot.right)/2,h-8);renderMetrics();
+}
+init();
+</script>
+</body>
+</html>

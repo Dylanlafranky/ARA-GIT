@@ -1,0 +1,5278 @@
+{
+  "date": "2026-05-26",
+  "method": "Formula_Adjustable parameter calibration",
+  "fit_warning": "The fitted constants see truth on train_focus_pre2017. Holdout scores are the first generalisation check.",
+  "train_cutoff": "2017-01-01",
+  "focus_horizons": [
+    6,
+    12,
+    24
+  ],
+  "parameter_order": [
+    "floor_drive",
+    "lower_speed",
+    "contact_transfer",
+    "second_contact",
+    "wobble",
+    "own_spin",
+    "terrain_pull",
+    "terrain_spill",
+    "roll_to_ara",
+    "roll_to_phase",
+    "phase_terrain",
+    "ara_terrain",
+    "upper_pressure",
+    "upper_grip",
+    "upper_brake",
+    "measured_roll"
+  ],
+  "bounds": {
+    "floor_drive": [
+      0.0,
+      4.0
+    ],
+    "lower_speed": [
+      0.0,
+      8.0
+    ],
+    "contact_transfer": [
+      0.0,
+      2.0
+    ],
+    "second_contact": [
+      0.0,
+      1.0
+    ],
+    "wobble": [
+      0.0,
+      3.0
+    ],
+    "own_spin": [
+      0.0,
+      1.0
+    ],
+    "terrain_pull": [
+      0.0,
+      4.0
+    ],
+    "terrain_spill": [
+      0.0,
+      2.0
+    ],
+    "roll_to_ara": [
+      0.0,
+      5.0
+    ],
+    "roll_to_phase": [
+      0.0,
+      360.0
+    ],
+    "phase_terrain": [
+      0.0,
+      4.0
+    ],
+    "ara_terrain": [
+      0.0,
+      4.0
+    ],
+    "upper_pressure": [
+      0.0,
+      4.0
+    ],
+    "upper_grip": [
+      0.0,
+      2.0
+    ],
+    "upper_brake": [
+      0.0,
+      2.0
+    ],
+    "measured_roll": [
+      0.0,
+      8.0
+    ]
+  },
+  "baseline_params": {
+    "floor_drive": 1.0,
+    "lower_speed": 1.0,
+    "contact_transfer": 0.34,
+    "second_contact": 0.46,
+    "wobble": 0.52,
+    "own_spin": 0.12,
+    "terrain_pull": 0.78,
+    "terrain_spill": 0.24,
+    "roll_to_ara": 0.34,
+    "roll_to_phase": 92.0,
+    "phase_terrain": 0.42,
+    "ara_terrain": 0.78,
+    "upper_pressure": 1.0,
+    "upper_grip": 0.22,
+    "upper_brake": 0.2,
+    "measured_roll": 1.0
+  },
+  "best_params": {
+    "floor_drive": 3.6065447601545237,
+    "lower_speed": 7.695839129718663,
+    "contact_transfer": 1.6102374247505211,
+    "second_contact": 0.7225031168500685,
+    "wobble": 0.4436718416775709,
+    "own_spin": 0.048800099124234775,
+    "terrain_pull": 0.6278977064622118,
+    "terrain_spill": 1.1320707813042572,
+    "roll_to_ara": 1.992628902391066,
+    "roll_to_phase": 56.18189396980749,
+    "phase_terrain": 1.4205264713909562,
+    "ara_terrain": 3.239170072167922,
+    "upper_pressure": 2.478783269846433,
+    "upper_grip": 0.6071520505699597,
+    "upper_brake": 0.8893673557251763,
+    "measured_roll": 5.417007585396029
+  },
+  "objective_value": 0.5346820815405755,
+  "evaluations": {
+    "train_focus_pre2017": {
+      "n": 192,
+      "mae": 0.6845650088484252,
+      "corr": 0.22881147856627562,
+      "direction": 0.7591623036649214,
+      "amp_ratio": 0.9849005425863598,
+      "mean_abs_delta_ara": 12.559403921855102,
+      "mean_delta_phase": 415.87304340141344,
+      "by_horizon": {
+        "6": {
+          "n": 64,
+          "mae": 0.7365364913408257,
+          "corr": 0.09392048260142172,
+          "direction": 0.734375,
+          "amp_ratio": 1.1454182952009524,
+          "mean_abs_delta_ara": 8.535656744552565,
+          "mean_delta_phase": 185.54409545083917
+        },
+        "12": {
+          "n": 64,
+          "mae": 0.7547305243552489,
+          "corr": 0.19411246341746166,
+          "direction": 0.765625,
+          "amp_ratio": 1.0551851580468,
+          "mean_abs_delta_ara": 12.071241531907614,
+          "mean_delta_phase": 359.49166589709426
+        },
+        "24": {
+          "n": 64,
+          "mae": 0.5624280108492012,
+          "corr": 0.5043395662695432,
+          "direction": 0.7777777777777778,
+          "amp_ratio": 0.8092304160254142,
+          "mean_abs_delta_ara": 17.07131348910513,
+          "mean_delta_phase": 702.583368856307
+        }
+      }
+    },
+    "holdout_focus_2017_on": {
+      "n": 94,
+      "mae": 0.7405061237649566,
+      "corr": 0.017802065107183684,
+      "direction": 0.7204301075268817,
+      "amp_ratio": 0.9045954048877437,
+      "mean_abs_delta_ara": 11.333260123851366,
+      "mean_delta_phase": 360.7915995803752,
+      "by_horizon": {
+        "6": {
+          "n": 34,
+          "mae": 0.6891018947920108,
+          "corr": -0.23594957027512503,
+          "direction": 0.6470588235294118,
+          "amp_ratio": 1.0436650839085608,
+          "mean_abs_delta_ara": 8.063512789948382,
+          "mean_delta_phase": 155.55991351978832
+        },
+        "12": {
+          "n": 32,
+          "mae": 0.7073812575753773,
+          "corr": 0.29155557233294305,
+          "direction": 0.75,
+          "amp_ratio": 0.9242150364942492,
+          "mean_abs_delta_ara": 11.651786645500808,
+          "mean_delta_phase": 310.84225298972
+        },
+        "24": {
+          "n": 28,
+          "mae": 0.8407825345916249,
+          "corr": -0.09050033680776509,
+          "direction": 0.7777777777777778,
+          "amp_ratio": 0.798174581595088,
+          "mean_abs_delta_ara": 14.939637290277057,
+          "mean_delta_phase": 667.0864716146938
+        }
+      }
+    },
+    "all_focus": {
+      "n": 286,
+      "mae": 0.7029512494153971,
+      "corr": 0.16393278572729866,
+      "direction": 0.7464788732394366,
+      "amp_ratio": 0.9622741130852153,
+      "mean_abs_delta_ara": 12.156405610623105,
+      "mean_delta_phase": 397.7693520756177,
+      "by_horizon": {
+        "6": {
+          "n": 98,
+          "mae": 0.7200795904973594,
+          "corr": 0.015880254714003818,
+          "direction": 0.7040816326530612,
+          "amp_ratio": 1.1184164485459576,
+          "mean_abs_delta_ara": 8.371851699077645,
+          "mean_delta_phase": 175.1414200870052
+        },
+        "12": {
+          "n": 96,
+          "mae": 0.7389474354286248,
+          "corr": 0.21615950540550438,
+          "direction": 0.7604166666666666,
+          "amp_ratio": 1.0157326493390373,
+          "mean_abs_delta_ara": 11.93142323643868,
+          "mean_delta_phase": 343.2751949279695
+        },
+        "24": {
+          "n": 92,
+          "mae": 0.6471446050316778,
+          "corr": 0.2553788560258369,
+          "direction": 0.7777777777777778,
+          "amp_ratio": 0.80981705437386,
+          "mean_abs_delta_ara": 16.422542472070496,
+          "mean_delta_phase": 691.7799653479899
+        }
+      }
+    },
+    "all_horizons": {
+      "n": 479,
+      "mae": 0.7316767610946785,
+      "corr": 0.0813800820008817,
+      "direction": 0.710691823899371,
+      "amp_ratio": 1.009042674271569,
+      "mean_abs_delta_ara": 11.28374241841041,
+      "mean_delta_phase": 358.07556444126374,
+      "by_horizon": {
+        "3": {
+          "n": 99,
+          "mae": 0.7815434461347484,
+          "corr": -0.12595523557573943,
+          "direction": 0.6262626262626263,
+          "amp_ratio": 1.7614619340748119,
+          "mean_abs_delta_ara": 5.869362044864433,
+          "mean_delta_phase": 90.07337738427643
+        },
+        "6": {
+          "n": 98,
+          "mae": 0.7200795904973594,
+          "corr": 0.015880254714003818,
+          "direction": 0.7040816326530612,
+          "amp_ratio": 1.1184164485459576,
+          "mean_abs_delta_ara": 8.371851699077645,
+          "mean_delta_phase": 175.1414200870052
+        },
+        "12": {
+          "n": 96,
+          "mae": 0.7389474354286248,
+          "corr": 0.21615950540550438,
+          "direction": 0.7604166666666666,
+          "amp_ratio": 1.0157326493390373,
+          "mean_abs_delta_ara": 11.93142323643868,
+          "mean_delta_phase": 343.2751949279695
+        },
+        "18": {
+          "n": 94,
+          "mae": 0.7665564900447589,
+          "corr": 0.01055299568458463,
+          "direction": 0.6914893617021277,
+          "amp_ratio": 0.8848315375132831,
+          "mean_abs_delta_ara": 14.33099756743405,
+          "mean_delta_phase": 519.5627267308012
+        },
+        "24": {
+          "n": 92,
+          "mae": 0.6471446050316778,
+          "corr": 0.2553788560258369,
+          "direction": 0.7777777777777778,
+          "amp_ratio": 0.80981705437386,
+          "mean_abs_delta_ara": 16.422542472070496,
+          "mean_delta_phase": 691.7799653479899
+        }
+      }
+    }
+  },
+  "baseline_evaluations": {
+    "train_focus_pre2017": {
+      "n": 192,
+      "mae": 0.8853104706515725,
+      "corr": 0.028725102282033687,
+      "direction": 0.5340314136125655,
+      "amp_ratio": 0.15824187592645564,
+      "mean_abs_delta_ara": 0.008406898712471208,
+      "mean_delta_phase": 105.31932003710752,
+      "by_horizon": {
+        "6": {
+          "n": 64,
+          "mae": 0.7478167072697994,
+          "corr": 0.34986174880649146,
+          "direction": 0.5625,
+          "amp_ratio": 0.18805444347405423,
+          "mean_abs_delta_ara": 0.005713519697459971,
+          "mean_delta_phase": 44.65615780944285
+        },
+        "12": {
+          "n": 64,
+          "mae": 0.9170959965914347,
+          "corr": -0.03390248513050306,
+          "direction": 0.578125,
+          "amp_ratio": 0.15318696247806027,
+          "mean_abs_delta_ara": 0.008080137045033714,
+          "mean_delta_phase": 90.07459306597269
+        },
+        "24": {
+          "n": 64,
+          "mae": 0.9910187080934839,
+          "corr": -0.23148989432734793,
+          "direction": 0.4603174603174603,
+          "amp_ratio": 0.1435370643924105,
+          "mean_abs_delta_ara": 0.011427039394919942,
+          "mean_delta_phase": 181.22720923590697
+        }
+      }
+    },
+    "holdout_focus_2017_on": {
+      "n": 94,
+      "mae": 0.8558712737318117,
+      "corr": -0.00542499869438389,
+      "direction": 0.5053763440860215,
+      "amp_ratio": 0.1433992121742706,
+      "mean_abs_delta_ara": 0.006766508736110249,
+      "mean_delta_phase": 101.77261070928027,
+      "by_horizon": {
+        "6": {
+          "n": 34,
+          "mae": 0.6398708870368708,
+          "corr": 0.4601726321527816,
+          "direction": 0.5588235294117647,
+          "amp_ratio": 0.1974739330360137,
+          "mean_abs_delta_ara": 0.004986685267013659,
+          "mean_delta_phase": 45.23584108084004
+        },
+        "12": {
+          "n": 32,
+          "mae": 0.8805067410058951,
+          "corr": -0.12348123856574701,
+          "direction": 0.46875,
+          "amp_ratio": 0.13708791914570692,
+          "mean_abs_delta_ara": 0.006599505988537206,
+          "mean_delta_phase": 90.85709568074085
+        },
+        "24": {
+          "n": 28,
+          "mae": 1.0900026378338594,
+          "corr": -0.406401127712629,
+          "direction": 0.48148148148148145,
+          "amp_ratio": 0.11684556889747737,
+          "mean_abs_delta_ara": 0.009118583231525297,
+          "mean_delta_phase": 182.89927671928854
+        }
+      }
+    },
+    "all_focus": {
+      "n": 286,
+      "mae": 0.8756346506849378,
+      "corr": 0.020129515552717695,
+      "direction": 0.5246478873239436,
+      "amp_ratio": 0.1538804774477845,
+      "mean_abs_delta_ara": 0.007867749559401524,
+      "mean_delta_phase": 104.15361836991953,
+      "by_horizon": {
+        "6": {
+          "n": 98,
+          "mae": 0.7103661165767425,
+          "corr": 0.3875133474467543,
+          "direction": 0.5612244897959183,
+          "amp_ratio": 0.19083421381286075,
+          "mean_abs_delta_ara": 0.005461352650162272,
+          "mean_delta_phase": 44.857272413805134
+        },
+        "12": {
+          "n": 96,
+          "mae": 0.9048995780629215,
+          "corr": -0.06097621847416253,
+          "direction": 0.5416666666666666,
+          "amp_ratio": 0.1481540574892153,
+          "mean_abs_delta_ara": 0.0075865933595348775,
+          "mean_delta_phase": 90.33542727089541
+        },
+        "24": {
+          "n": 92,
+          "mae": 1.0211442519275113,
+          "corr": -0.28096981329171195,
+          "direction": 0.4666666666666667,
+          "amp_ratio": 0.13574617997323857,
+          "mean_abs_delta_ara": 0.010724465779973748,
+          "mean_delta_phase": 181.7360993395448
+        }
+      }
+    },
+    "all_horizons": {
+      "n": 479,
+      "mae": 0.8117718493945802,
+      "corr": 0.13302637585537638,
+      "direction": 0.5408805031446541,
+      "amp_ratio": 0.16306828342288418,
+      "mean_abs_delta_ara": 0.007338448366122388,
+      "mean_delta_phase": 93.45638110250495,
+      "by_horizon": {
+        "3": {
+          "n": 99,
+          "mae": 0.46159854328115885,
+          "corr": 0.748775986725321,
+          "direction": 0.5656565656565656,
+          "amp_ratio": 0.2987069146144058,
+          "mean_abs_delta_ara": 0.003967314345652913,
+          "mean_delta_phase": 22.235902503587234
+        },
+        "6": {
+          "n": 98,
+          "mae": 0.7103661165767425,
+          "corr": 0.3875133474467543,
+          "direction": 0.5612244897959183,
+          "amp_ratio": 0.19083421381286075,
+          "mean_abs_delta_ara": 0.005461352650162272,
+          "mean_delta_phase": 44.857272413805134
+        },
+        "12": {
+          "n": 96,
+          "mae": 0.9048995780629215,
+          "corr": -0.06097621847416253,
+          "direction": 0.5416666666666666,
+          "amp_ratio": 0.1481540574892153,
+          "mean_abs_delta_ara": 0.0075865933595348775,
+          "mean_delta_phase": 90.33542727089541
+        },
+        "18": {
+          "n": 94,
+          "mae": 0.9862654253114579,
+          "corr": -0.15449798365175635,
+          "direction": 0.5638297872340425,
+          "amp_ratio": 0.1412588632616,
+          "mean_abs_delta_ara": 0.009278470991107974,
+          "mean_delta_phase": 135.91826964306117
+        },
+        "24": {
+          "n": 92,
+          "mae": 1.0211442519275113,
+          "corr": -0.28096981329171195,
+          "direction": 0.4666666666666667,
+          "amp_ratio": 0.13574617997323857,
+          "mean_abs_delta_ara": 0.010724465779973748,
+          "mean_delta_phase": 181.7360993395448
+        }
+      }
+    }
+  },
+  "viz_records": {
+    "3": [
+      {
+        "origin": "2001-02-01",
+        "target": "2001-05-01",
+        "current": -0.63,
+        "actual": -0.3,
+        "Formula": -0.599554,
+        "Formula_Fitted": 0.124363,
+        "delta_ara": -1.677284,
+        "delta_phase": 130.318733
+      },
+      {
+        "origin": "2001-05-01",
+        "target": "2001-08-01",
+        "current": -0.3,
+        "actual": -0.07,
+        "Formula": -0.39291,
+        "Formula_Fitted": -0.230177,
+        "delta_ara": 8.354582,
+        "delta_phase": 109.575522
+      },
+      {
+        "origin": "2001-08-01",
+        "target": "2001-11-01",
+        "current": -0.07,
+        "actual": -0.28,
+        "Formula": -0.298628,
+        "Formula_Fitted": -0.167366,
+        "delta_ara": 10.263471,
+        "delta_phase": 128.179691
+      },
+      {
+        "origin": "2001-11-01",
+        "target": "2002-02-01",
+        "current": -0.28,
+        "actual": 0.0,
+        "Formula": -0.366672,
+        "Formula_Fitted": 0.916978,
+        "delta_ara": 0.36646,
+        "delta_phase": 118.552553
+      },
+      {
+        "origin": "2002-02-01",
+        "target": "2002-05-01",
+        "current": 0.0,
+        "actual": 0.21,
+        "Formula": -0.254754,
+        "Formula_Fitted": 0.123445,
+        "delta_ara": -1.630539,
+        "delta_phase": 128.454372
+      },
+      {
+        "origin": "2002-05-01",
+        "target": "2002-08-01",
+        "current": 0.21,
+        "actual": 0.7,
+        "Formula": 0.360751,
+        "Formula_Fitted": -0.175548,
+        "delta_ara": 5.80168,
+        "delta_phase": 149.690685
+      },
+      {
+        "origin": "2002-08-01",
+        "target": "2002-11-01",
+        "current": 0.7,
+        "actual": 1.41,
+        "Formula": 0.611855,
+        "Formula_Fitted": -0.163249,
+        "delta_ara": 8.972579,
+        "delta_phase": 182.289562
+      },
+      {
+        "origin": "2002-11-01",
+        "target": "2003-02-01",
+        "current": 1.41,
+        "actual": 0.64,
+        "Formula": 1.205442,
+        "Formula_Fitted": -0.113081,
+        "delta_ara": 8.544513,
+        "delta_phase": 198.900851
+      },
+      {
+        "origin": "2003-02-01",
+        "target": "2003-05-01",
+        "current": 0.64,
+        "actual": -0.52,
+        "Formula": 0.605051,
+        "Formula_Fitted": -0.156877,
+        "delta_ara": 1.223664,
+        "delta_phase": 133.327495
+      },
+      {
+        "origin": "2003-05-01",
+        "target": "2003-08-01",
+        "current": -0.52,
+        "actual": 0.05,
+        "Formula": -0.550958,
+        "Formula_Fitted": 0.141723,
+        "delta_ara": -7.007284,
+        "delta_phase": -54.943458
+      },
+      {
+        "origin": "2003-08-01",
+        "target": "2003-11-01",
+        "current": 0.05,
+        "actual": 0.39,
+        "Formula": 0.271923,
+        "Formula_Fitted": 0.229611,
+        "delta_ara": -9.143196,
+        "delta_phase": -51.619404
+      },
+      {
+        "origin": "2003-11-01",
+        "target": "2004-02-01",
+        "current": 0.39,
+        "actual": 0.17,
+        "Formula": 0.402502,
+        "Formula_Fitted": 0.470345,
+        "delta_ara": 0.483544,
+        "delta_phase": 102.961165
+      },
+      {
+        "origin": "2004-02-01",
+        "target": "2004-05-01",
+        "current": 0.17,
+        "actual": 0.1,
+        "Formula": 0.311452,
+        "Formula_Fitted": 0.12198,
+        "delta_ara": -1.640987,
+        "delta_phase": 102.205149
+      },
+      {
+        "origin": "2004-05-01",
+        "target": "2004-08-01",
+        "current": 0.1,
+        "actual": 0.66,
+        "Formula": 0.311766,
+        "Formula_Fitted": 0.187237,
+        "delta_ara": -4.91182,
+        "delta_phase": 84.245903
+      },
+      {
+        "origin": "2004-08-01",
+        "target": "2004-11-01",
+        "current": 0.66,
+        "actual": 0.62,
+        "Formula": 0.586264,
+        "Formula_Fitted": -0.146279,
+        "delta_ara": 1.123249,
+        "delta_phase": 197.37432
+      },
+      {
+        "origin": "2004-11-01",
+        "target": "2005-02-01",
+        "current": 0.62,
+        "actual": 0.26,
+        "Formula": 0.587736,
+        "Formula_Fitted": 0.554266,
+        "delta_ara": 0.342989,
+        "delta_phase": 129.300415
+      },
+      {
+        "origin": "2005-02-01",
+        "target": "2005-05-01",
+        "current": 0.26,
+        "actual": 0.3,
+        "Formula": 0.377051,
+        "Formula_Fitted": -0.158042,
+        "delta_ara": 1.582649,
+        "delta_phase": 39.56152
+      },
+      {
+        "origin": "2005-05-01",
+        "target": "2005-08-01",
+        "current": 0.3,
+        "actual": -0.04,
+        "Formula": 0.398582,
+        "Formula_Fitted": -0.02282,
+        "delta_ara": -0.670566,
+        "delta_phase": 21.937471
+      },
+      {
+        "origin": "2005-08-01",
+        "target": "2005-11-01",
+        "current": -0.04,
+        "actual": -0.44,
+        "Formula": -0.275488,
+        "Formula_Fitted": -0.26041,
+        "delta_ara": -0.41182,
+        "delta_phase": -11.313997
+      },
+      {
+        "origin": "2005-11-01",
+        "target": "2006-02-01",
+        "current": -0.44,
+        "actual": -0.71,
+        "Formula": -0.531239,
+        "Formula_Fitted": 0.098889,
+        "delta_ara": -11.351052,
+        "delta_phase": -46.124261
+      },
+      {
+        "origin": "2006-02-01",
+        "target": "2006-05-01",
+        "current": -0.71,
+        "actual": -0.11,
+        "Formula": -0.61751,
+        "Formula_Fitted": 0.227539,
+        "delta_ara": -2.647692,
+        "delta_phase": -22.544548
+      },
+      {
+        "origin": "2006-05-01",
+        "target": "2006-08-01",
+        "current": -0.11,
+        "actual": 0.37,
+        "Formula": -0.292127,
+        "Formula_Fitted": -0.17512,
+        "delta_ara": 4.991625,
+        "delta_phase": 83.101957
+      },
+      {
+        "origin": "2006-08-01",
+        "target": "2006-11-01",
+        "current": 0.37,
+        "actual": 0.98,
+        "Formula": 0.392177,
+        "Formula_Fitted": -0.135108,
+        "delta_ara": 8.772617,
+        "delta_phase": 150.587124
+      },
+      {
+        "origin": "2006-11-01",
+        "target": "2007-02-01",
+        "current": 0.98,
+        "actual": 0.12,
+        "Formula": 1.039334,
+        "Formula_Fitted": -0.09347,
+        "delta_ara": 10.694282,
+        "delta_phase": 201.410514
+      },
+      {
+        "origin": "2007-02-01",
+        "target": "2007-05-01",
+        "current": 0.12,
+        "actual": -0.39,
+        "Formula": 0.314179,
+        "Formula_Fitted": -1.993132,
+        "delta_ara": -0.143697,
+        "delta_phase": 111.070472
+      },
+      {
+        "origin": "2007-05-01",
+        "target": "2007-08-01",
+        "current": -0.39,
+        "actual": -0.57,
+        "Formula": -0.489329,
+        "Formula_Fitted": 0.22412,
+        "delta_ara": -11.924665,
+        "delta_phase": -13.503023
+      },
+      {
+        "origin": "2007-08-01",
+        "target": "2007-11-01",
+        "current": -0.57,
+        "actual": -1.58,
+        "Formula": -0.54722,
+        "Formula_Fitted": 0.227936,
+        "delta_ara": -10.8345,
+        "delta_phase": 30.811667
+      },
+      {
+        "origin": "2007-11-01",
+        "target": "2008-02-01",
+        "current": -1.58,
+        "actual": -1.7,
+        "Formula": -1.432288,
+        "Formula_Fitted": 0.145182,
+        "delta_ara": -8.95756,
+        "delta_phase": -18.750299
+      },
+      {
+        "origin": "2008-02-01",
+        "target": "2008-05-01",
+        "current": -1.7,
+        "actual": -0.64,
+        "Formula": -1.468383,
+        "Formula_Fitted": 0.16252,
+        "delta_ara": -10.78827,
+        "delta_phase": -20.178993
+      },
+      {
+        "origin": "2008-05-01",
+        "target": "2008-08-01",
+        "current": -0.64,
+        "actual": -0.04,
+        "Formula": -0.615102,
+        "Formula_Fitted": -0.143172,
+        "delta_ara": 7.992337,
+        "delta_phase": 167.523013
+      },
+      {
+        "origin": "2008-08-01",
+        "target": "2008-11-01",
+        "current": -0.04,
+        "actual": -0.37,
+        "Formula": -0.281771,
+        "Formula_Fitted": -0.235549,
+        "delta_ara": 10.377871,
+        "delta_phase": 219.732959
+      },
+      {
+        "origin": "2008-11-01",
+        "target": "2009-02-01",
+        "current": -0.37,
+        "actual": -0.71,
+        "Formula": -0.405842,
+        "Formula_Fitted": -0.13802,
+        "delta_ara": 1.453029,
+        "delta_phase": 166.282776
+      },
+      {
+        "origin": "2009-02-01",
+        "target": "2009-05-01",
+        "current": -0.71,
+        "actual": 0.17,
+        "Formula": -0.618389,
+        "Formula_Fitted": 0.231723,
+        "delta_ara": -7.500626,
+        "delta_phase": 61.484484
+      },
+      {
+        "origin": "2009-05-01",
+        "target": "2009-08-01",
+        "current": 0.17,
+        "actual": 0.62,
+        "Formula": 0.327331,
+        "Formula_Fitted": -0.127162,
+        "delta_ara": 8.93061,
+        "delta_phase": 153.478755
+      },
+      {
+        "origin": "2009-08-01",
+        "target": "2009-11-01",
+        "current": 0.62,
+        "actual": 1.49,
+        "Formula": 0.595198,
+        "Formula_Fitted": -0.221137,
+        "delta_ara": 15.795167,
+        "delta_phase": 239.538262
+      },
+      {
+        "origin": "2009-11-01",
+        "target": "2010-02-01",
+        "current": 1.49,
+        "actual": 1.18,
+        "Formula": 1.417775,
+        "Formula_Fitted": -0.173864,
+        "delta_ara": 11.249643,
+        "delta_phase": 200.081256
+      },
+      {
+        "origin": "2010-02-01",
+        "target": "2010-05-01",
+        "current": 1.18,
+        "actual": -0.15,
+        "Formula": 1.161741,
+        "Formula_Fitted": -0.120253,
+        "delta_ara": 7.53437,
+        "delta_phase": 151.662618
+      },
+      {
+        "origin": "2010-05-01",
+        "target": "2010-08-01",
+        "current": -0.15,
+        "actual": -1.33,
+        "Formula": -0.319732,
+        "Formula_Fitted": 0.113066,
+        "delta_ara": -11.613006,
+        "delta_phase": 11.977652
+      },
+      {
+        "origin": "2010-08-01",
+        "target": "2010-11-01",
+        "current": -1.33,
+        "actual": -1.57,
+        "Formula": -1.192235,
+        "Formula_Fitted": 0.149404,
+        "delta_ara": -12.52095,
+        "delta_phase": -38.153532
+      },
+      {
+        "origin": "2010-11-01",
+        "target": "2011-02-01",
+        "current": -1.57,
+        "actual": -1.26,
+        "Formula": -1.459638,
+        "Formula_Fitted": 0.081446,
+        "delta_ara": -6.01911,
+        "delta_phase": -20.98636
+      },
+      {
+        "origin": "2011-02-01",
+        "target": "2011-05-01",
+        "current": -1.26,
+        "actual": -0.53,
+        "Formula": -1.159297,
+        "Formula_Fitted": 0.179833,
+        "delta_ara": -3.845523,
+        "delta_phase": 85.630023
+      },
+      {
+        "origin": "2011-05-01",
+        "target": "2011-08-01",
+        "current": -0.53,
+        "actual": -0.66,
+        "Formula": -0.558429,
+        "Formula_Fitted": -0.170064,
+        "delta_ara": 17.630207,
+        "delta_phase": 264.501202
+      },
+      {
+        "origin": "2011-08-01",
+        "target": "2011-11-01",
+        "current": -0.66,
+        "actual": -1.09,
+        "Formula": -0.597147,
+        "Formula_Fitted": -0.122061,
+        "delta_ara": 9.334748,
+        "delta_phase": 171.389718
+      },
+      {
+        "origin": "2011-11-01",
+        "target": "2012-02-01",
+        "current": -1.09,
+        "actual": -0.61,
+        "Formula": -1.09613,
+        "Formula_Fitted": -0.351413,
+        "delta_ara": -0.273838,
+        "delta_phase": 17.204933
+      },
+      {
+        "origin": "2012-02-01",
+        "target": "2012-05-01",
+        "current": -0.61,
+        "actual": -0.18,
+        "Formula": -0.570452,
+        "Formula_Fitted": 0.17369,
+        "delta_ara": -1.022722,
+        "delta_phase": -8.605182
+      },
+      {
+        "origin": "2012-05-01",
+        "target": "2012-08-01",
+        "current": -0.18,
+        "actual": 0.66,
+        "Formula": -0.330918,
+        "Formula_Fitted": -0.138076,
+        "delta_ara": 6.617237,
+        "delta_phase": 162.23945
+      },
+      {
+        "origin": "2012-08-01",
+        "target": "2012-11-01",
+        "current": 0.66,
+        "actual": 0.33,
+        "Formula": 0.618674,
+        "Formula_Fitted": -0.106414,
+        "delta_ara": 9.298191,
+        "delta_phase": 179.863441
+      },
+      {
+        "origin": "2012-11-01",
+        "target": "2013-02-01",
+        "current": 0.33,
+        "actual": -0.4,
+        "Formula": 0.406859,
+        "Formula_Fitted": 0.152692,
+        "delta_ara": 0.709094,
+        "delta_phase": 175.912094
+      },
+      {
+        "origin": "2013-02-01",
+        "target": "2013-05-01",
+        "current": -0.4,
+        "actual": -0.28,
+        "Formula": -0.492708,
+        "Formula_Fitted": 0.221684,
+        "delta_ara": -0.820178,
+        "delta_phase": -1.881715
+      },
+      {
+        "origin": "2013-05-01",
+        "target": "2013-08-01",
+        "current": -0.28,
+        "actual": -0.29,
+        "Formula": -0.391637,
+        "Formula_Fitted": 0.133961,
+        "delta_ara": -3.255405,
+        "delta_phase": 58.67803
+      },
+      {
+        "origin": "2013-08-01",
+        "target": "2013-11-01",
+        "current": -0.29,
+        "actual": -0.02,
+        "Formula": -0.372049,
+        "Formula_Fitted": -1.377581,
+        "delta_ara": 0.079687,
+        "delta_phase": 100.930666
+      },
+      {
+        "origin": "2013-11-01",
+        "target": "2014-02-01",
+        "current": -0.02,
+        "actual": -0.45,
+        "Formula": -0.257067,
+        "Formula_Fitted": 3.663993,
+        "delta_ara": 0.032565,
+        "delta_phase": 117.320911
+      },
+      {
+        "origin": "2014-02-01",
+        "target": "2014-05-01",
+        "current": -0.45,
+        "actual": 0.45,
+        "Formula": -0.520183,
+        "Formula_Fitted": 1.147057,
+        "delta_ara": 0.415938,
+        "delta_phase": 28.227053
+      },
+      {
+        "origin": "2014-05-01",
+        "target": "2014-08-01",
+        "current": 0.45,
+        "actual": 0.14,
+        "Formula": 0.513987,
+        "Formula_Fitted": -0.14247,
+        "delta_ara": 1.331637,
+        "delta_phase": 178.495133
+      },
+      {
+        "origin": "2014-08-01",
+        "target": "2014-11-01",
+        "current": 0.14,
+        "actual": 0.89,
+        "Formula": 0.308825,
+        "Formula_Fitted": -0.095068,
+        "delta_ara": 9.623693,
+        "delta_phase": 164.158261
+      },
+      {
+        "origin": "2014-11-01",
+        "target": "2015-02-01",
+        "current": 0.89,
+        "actual": 0.57,
+        "Formula": 1.045789,
+        "Formula_Fitted": -0.097193,
+        "delta_ara": 9.537393,
+        "delta_phase": 175.046683
+      },
+      {
+        "origin": "2015-02-01",
+        "target": "2015-05-01",
+        "current": 0.57,
+        "actual": 1.04,
+        "Formula": 0.562934,
+        "Formula_Fitted": -0.143896,
+        "delta_ara": 0.923972,
+        "delta_phase": 165.887164
+      },
+      {
+        "origin": "2015-05-01",
+        "target": "2015-08-01",
+        "current": 1.04,
+        "actual": 1.87,
+        "Formula": 1.089423,
+        "Formula_Fitted": -0.168189,
+        "delta_ara": 0.931538,
+        "delta_phase": 121.739127
+      },
+      {
+        "origin": "2015-08-01",
+        "target": "2015-11-01",
+        "current": 1.87,
+        "actual": 2.57,
+        "Formula": 1.508722,
+        "Formula_Fitted": -0.099445,
+        "delta_ara": 5.817819,
+        "delta_phase": 162.484716
+      },
+      {
+        "origin": "2015-11-01",
+        "target": "2016-02-01",
+        "current": 2.57,
+        "actual": 2.11,
+        "Formula": 1.651968,
+        "Formula_Fitted": -0.190689,
+        "delta_ara": 6.346875,
+        "delta_phase": 180.915633
+      },
+      {
+        "origin": "2016-02-01",
+        "target": "2016-05-01",
+        "current": 2.11,
+        "actual": 0.45,
+        "Formula": 1.619648,
+        "Formula_Fitted": -0.199424,
+        "delta_ara": 4.769136,
+        "delta_phase": 135.912503
+      },
+      {
+        "origin": "2016-05-01",
+        "target": "2016-08-01",
+        "current": 0.45,
+        "actual": -0.48,
+        "Formula": 0.503362,
+        "Formula_Fitted": 0.180237,
+        "delta_ara": -10.207839,
+        "delta_phase": 41.804788
+      },
+      {
+        "origin": "2016-08-01",
+        "target": "2016-11-01",
+        "current": -0.48,
+        "actual": -0.63,
+        "Formula": -0.525362,
+        "Formula_Fitted": 0.086467,
+        "delta_ara": -16.189154,
+        "delta_phase": -54.774155
+      },
+      {
+        "origin": "2016-11-01",
+        "target": "2017-02-01",
+        "current": -0.63,
+        "actual": -0.01,
+        "Formula": -0.57946,
+        "Formula_Fitted": 0.207095,
+        "delta_ara": -11.019787,
+        "delta_phase": -30.771054
+      },
+      {
+        "origin": "2017-02-01",
+        "target": "2017-05-01",
+        "current": -0.01,
+        "actual": 0.3,
+        "Formula": 0.276473,
+        "Formula_Fitted": 0.181809,
+        "delta_ara": 0.92946,
+        "delta_phase": 65.842771
+      },
+      {
+        "origin": "2017-05-01",
+        "target": "2017-08-01",
+        "current": 0.3,
+        "actual": -0.18,
+        "Formula": 0.393163,
+        "Formula_Fitted": -0.14476,
+        "delta_ara": 1.997012,
+        "delta_phase": 184.126062
+      },
+      {
+        "origin": "2017-08-01",
+        "target": "2017-11-01",
+        "current": -0.18,
+        "actual": -0.84,
+        "Formula": -0.315338,
+        "Formula_Fitted": 0.464212,
+        "delta_ara": 0.970855,
+        "delta_phase": 127.781264
+      },
+      {
+        "origin": "2017-11-01",
+        "target": "2018-02-01",
+        "current": -0.84,
+        "actual": -0.73,
+        "Formula": -1.022933,
+        "Formula_Fitted": 0.102322,
+        "delta_ara": -17.093503,
+        "delta_phase": -69.292215
+      },
+      {
+        "origin": "2018-02-01",
+        "target": "2018-05-01",
+        "current": -0.73,
+        "actual": -0.12,
+        "Formula": -0.624119,
+        "Formula_Fitted": -0.403373,
+        "delta_ara": -0.433983,
+        "delta_phase": -20.131119
+      },
+      {
+        "origin": "2018-05-01",
+        "target": "2018-08-01",
+        "current": -0.12,
+        "actual": 0.05,
+        "Formula": -0.318091,
+        "Formula_Fitted": -0.083488,
+        "delta_ara": 3.677458,
+        "delta_phase": 133.838449
+      },
+      {
+        "origin": "2018-08-01",
+        "target": "2018-11-01",
+        "current": 0.05,
+        "actual": 1.0,
+        "Formula": 0.282436,
+        "Formula_Fitted": -0.136324,
+        "delta_ara": 16.811081,
+        "delta_phase": 228.925205
+      },
+      {
+        "origin": "2018-11-01",
+        "target": "2019-02-01",
+        "current": 1.0,
+        "actual": 0.62,
+        "Formula": 1.093034,
+        "Formula_Fitted": -0.086754,
+        "delta_ara": 10.259193,
+        "delta_phase": 223.061278
+      },
+      {
+        "origin": "2019-02-01",
+        "target": "2019-05-01",
+        "current": 0.62,
+        "actual": 0.61,
+        "Formula": 0.606458,
+        "Formula_Fitted": -0.190248,
+        "delta_ara": 5.372902,
+        "delta_phase": 95.918228
+      },
+      {
+        "origin": "2019-05-01",
+        "target": "2019-08-01",
+        "current": 0.61,
+        "actual": 0.19,
+        "Formula": 0.577555,
+        "Formula_Fitted": 1.20759,
+        "delta_ara": -0.128532,
+        "delta_phase": 27.865759
+      },
+      {
+        "origin": "2019-08-01",
+        "target": "2019-11-01",
+        "current": 0.19,
+        "actual": 0.74,
+        "Formula": 0.311053,
+        "Formula_Fitted": 0.856293,
+        "delta_ara": 0.181243,
+        "delta_phase": 9.691598
+      },
+      {
+        "origin": "2019-11-01",
+        "target": "2020-02-01",
+        "current": 0.74,
+        "actual": 0.48,
+        "Formula": 0.607381,
+        "Formula_Fitted": -0.172906,
+        "delta_ara": 1.560021,
+        "delta_phase": 26.035698
+      },
+      {
+        "origin": "2020-02-01",
+        "target": "2020-05-01",
+        "current": 0.48,
+        "actual": -0.12,
+        "Formula": 0.53292,
+        "Formula_Fitted": -0.107379,
+        "delta_ara": -1.27035,
+        "delta_phase": 39.257884
+      },
+      {
+        "origin": "2020-05-01",
+        "target": "2020-08-01",
+        "current": -0.12,
+        "actual": -0.42,
+        "Formula": -0.303583,
+        "Formula_Fitted": 0.185449,
+        "delta_ara": -7.145603,
+        "delta_phase": 31.205083
+      },
+      {
+        "origin": "2020-08-01",
+        "target": "2020-11-01",
+        "current": -0.42,
+        "actual": -1.01,
+        "Formula": -0.505633,
+        "Formula_Fitted": 0.140465,
+        "delta_ara": -11.929723,
+        "delta_phase": -23.062094
+      },
+      {
+        "origin": "2020-11-01",
+        "target": "2021-02-01",
+        "current": -1.01,
+        "actual": -0.94,
+        "Formula": -1.092182,
+        "Formula_Fitted": 0.115389,
+        "delta_ara": -7.604113,
+        "delta_phase": -19.506617
+      },
+      {
+        "origin": "2021-02-01",
+        "target": "2021-05-01",
+        "current": -0.94,
+        "actual": -0.41,
+        "Formula": -1.061011,
+        "Formula_Fitted": 0.227205,
+        "delta_ara": -8.121414,
+        "delta_phase": 16.25013
+      },
+      {
+        "origin": "2021-05-01",
+        "target": "2021-08-01",
+        "current": -0.41,
+        "actual": -0.38,
+        "Formula": -0.514506,
+        "Formula_Fitted": 0.92603,
+        "delta_ara": 1.046745,
+        "delta_phase": 144.783113
+      },
+      {
+        "origin": "2021-08-01",
+        "target": "2021-11-01",
+        "current": -0.38,
+        "actual": -0.88,
+        "Formula": -0.412732,
+        "Formula_Fitted": -0.13442,
+        "delta_ara": 10.001523,
+        "delta_phase": 164.170146
+      },
+      {
+        "origin": "2021-11-01",
+        "target": "2022-02-01",
+        "current": -0.88,
+        "actual": -0.68,
+        "Formula": -1.017737,
+        "Formula_Fitted": 0.143746,
+        "delta_ara": -4.030403,
+        "delta_phase": 33.270002
+      },
+      {
+        "origin": "2022-02-01",
+        "target": "2022-05-01",
+        "current": -0.68,
+        "actual": -1.02,
+        "Formula": -0.622498,
+        "Formula_Fitted": -0.872412,
+        "delta_ara": -0.248415,
+        "delta_phase": 15.364623
+      },
+      {
+        "origin": "2022-05-01",
+        "target": "2022-08-01",
+        "current": -1.02,
+        "actual": -0.96,
+        "Formula": -1.0949,
+        "Formula_Fitted": 0.142312,
+        "delta_ara": -1.827902,
+        "delta_phase": 108.485467
+      },
+      {
+        "origin": "2022-08-01",
+        "target": "2022-11-01",
+        "current": -0.96,
+        "actual": -0.76,
+        "Formula": -1.049951,
+        "Formula_Fitted": 0.171408,
+        "delta_ara": -1.620372,
+        "delta_phase": 86.568929
+      },
+      {
+        "origin": "2022-11-01",
+        "target": "2023-02-01",
+        "current": -0.76,
+        "actual": -0.62,
+        "Formula": -0.64586,
+        "Formula_Fitted": -0.123387,
+        "delta_ara": 5.199995,
+        "delta_phase": 71.170108
+      },
+      {
+        "origin": "2023-02-01",
+        "target": "2023-05-01",
+        "current": -0.62,
+        "actual": 0.47,
+        "Formula": -0.607702,
+        "Formula_Fitted": -1.096695,
+        "delta_ara": 0.217273,
+        "delta_phase": 143.674004
+      },
+      {
+        "origin": "2023-05-01",
+        "target": "2023-08-01",
+        "current": 0.47,
+        "actual": 1.56,
+        "Formula": 0.52153,
+        "Formula_Fitted": -0.185033,
+        "delta_ara": 9.86635,
+        "delta_phase": 166.245623
+      },
+      {
+        "origin": "2023-08-01",
+        "target": "2023-11-01",
+        "current": 1.56,
+        "actual": 2.01,
+        "Formula": 1.404611,
+        "Formula_Fitted": -0.22004,
+        "delta_ara": 8.519422,
+        "delta_phase": 156.420301
+      },
+      {
+        "origin": "2023-11-01",
+        "target": "2024-02-01",
+        "current": 2.01,
+        "actual": 1.47,
+        "Formula": 1.508696,
+        "Formula_Fitted": -0.124311,
+        "delta_ara": 9.830018,
+        "delta_phase": 193.056041
+      },
+      {
+        "origin": "2024-02-01",
+        "target": "2024-05-01",
+        "current": 1.47,
+        "actual": 0.41,
+        "Formula": 1.397107,
+        "Formula_Fitted": -0.123322,
+        "delta_ara": 5.195837,
+        "delta_phase": 125.022903
+      },
+      {
+        "origin": "2024-05-01",
+        "target": "2024-08-01",
+        "current": 0.41,
+        "actual": 0.02,
+        "Formula": 0.493647,
+        "Formula_Fitted": 0.146647,
+        "delta_ara": -10.586465,
+        "delta_phase": -39.176374
+      },
+      {
+        "origin": "2024-08-01",
+        "target": "2024-11-01",
+        "current": 0.02,
+        "actual": -0.05,
+        "Formula": 0.278727,
+        "Formula_Fitted": 0.19739,
+        "delta_ara": -11.598654,
+        "delta_phase": -67.58375
+      },
+      {
+        "origin": "2024-11-01",
+        "target": "2025-02-01",
+        "current": -0.05,
+        "actual": -0.39,
+        "Formula": -0.272472,
+        "Formula_Fitted": 0.214899,
+        "delta_ara": -11.152767,
+        "delta_phase": -57.763877
+      },
+      {
+        "origin": "2025-02-01",
+        "target": "2025-05-01",
+        "current": -0.39,
+        "actual": -0.08,
+        "Formula": -0.497157,
+        "Formula_Fitted": 0.153878,
+        "delta_ara": -6.076642,
+        "delta_phase": 93.991031
+      },
+      {
+        "origin": "2025-05-01",
+        "target": "2025-08-01",
+        "current": -0.08,
+        "actual": -0.11,
+        "Formula": -0.289931,
+        "Formula_Fitted": -0.139623,
+        "delta_ara": 1.354767,
+        "delta_phase": 157.275028
+      },
+      {
+        "origin": "2025-08-01",
+        "target": "2025-11-01",
+        "current": -0.11,
+        "actual": -0.68,
+        "Formula": -0.289577,
+        "Formula_Fitted": 0.47957,
+        "delta_ara": 0.927118,
+        "delta_phase": 144.673217
+      }
+    ],
+    "6": [
+      {
+        "origin": "2001-02-01",
+        "target": "2001-08-01",
+        "current": -0.63,
+        "actual": -0.07,
+        "Formula": -0.602563,
+        "Formula_Fitted": 0.101186,
+        "delta_ara": -2.372038,
+        "delta_phase": 232.844864
+      },
+      {
+        "origin": "2001-05-01",
+        "target": "2001-11-01",
+        "current": -0.3,
+        "actual": -0.28,
+        "Formula": -0.386572,
+        "Formula_Fitted": -0.144672,
+        "delta_ara": 11.815163,
+        "delta_phase": 203.509534
+      },
+      {
+        "origin": "2001-08-01",
+        "target": "2002-02-01",
+        "current": -0.07,
+        "actual": 0.0,
+        "Formula": -0.294397,
+        "Formula_Fitted": -0.174503,
+        "delta_ara": 14.51474,
+        "delta_phase": 229.819802
+      },
+      {
+        "origin": "2001-11-01",
+        "target": "2002-05-01",
+        "current": -0.28,
+        "actual": 0.21,
+        "Formula": -0.395647,
+        "Formula_Fitted": 0.67808,
+        "delta_ara": 0.518253,
+        "delta_phase": 216.204973
+      },
+      {
+        "origin": "2002-02-01",
+        "target": "2002-08-01",
+        "current": 0.0,
+        "actual": 0.7,
+        "Formula": -0.251949,
+        "Formula_Fitted": 0.114287,
+        "delta_ara": -2.30593,
+        "delta_phase": 230.20826
+      },
+      {
+        "origin": "2002-05-01",
+        "target": "2002-11-01",
+        "current": 0.21,
+        "actual": 1.41,
+        "Formula": 0.362619,
+        "Formula_Fitted": -0.139944,
+        "delta_ara": 8.204815,
+        "delta_phase": 260.240942
+      },
+      {
+        "origin": "2002-08-01",
+        "target": "2003-02-01",
+        "current": 0.7,
+        "actual": 0.64,
+        "Formula": 0.612435,
+        "Formula_Fitted": -0.168791,
+        "delta_ara": 12.689143,
+        "delta_phase": 306.342715
+      },
+      {
+        "origin": "2002-11-01",
+        "target": "2003-05-01",
+        "current": 1.41,
+        "actual": -0.52,
+        "Formula": 1.219362,
+        "Formula_Fitted": -0.195745,
+        "delta_ara": 12.083766,
+        "delta_phase": 329.834626
+      },
+      {
+        "origin": "2003-02-01",
+        "target": "2003-08-01",
+        "current": 0.64,
+        "actual": 0.05,
+        "Formula": 0.61025,
+        "Formula_Fitted": -0.154442,
+        "delta_ara": 1.730522,
+        "delta_phase": 237.099897
+      },
+      {
+        "origin": "2003-05-01",
+        "target": "2003-11-01",
+        "current": -0.52,
+        "actual": 0.39,
+        "Formula": -0.52226,
+        "Formula_Fitted": 0.082004,
+        "delta_ara": -9.909796,
+        "delta_phase": -29.155438
+      },
+      {
+        "origin": "2003-08-01",
+        "target": "2004-02-01",
+        "current": 0.05,
+        "actual": 0.17,
+        "Formula": 0.26789,
+        "Formula_Fitted": 0.144029,
+        "delta_ara": -12.930432,
+        "delta_phase": -24.454516
+      },
+      {
+        "origin": "2003-11-01",
+        "target": "2004-05-01",
+        "current": 0.39,
+        "actual": 0.1,
+        "Formula": 0.40457,
+        "Formula_Fitted": 0.111288,
+        "delta_ara": 0.683834,
+        "delta_phase": 194.155421
+      },
+      {
+        "origin": "2004-02-01",
+        "target": "2004-08-01",
+        "current": 0.17,
+        "actual": 0.66,
+        "Formula": 0.309155,
+        "Formula_Fitted": 0.105975,
+        "delta_ara": -2.320706,
+        "delta_phase": 193.086252
+      },
+      {
+        "origin": "2004-05-01",
+        "target": "2004-11-01",
+        "current": 0.1,
+        "actual": 0.62,
+        "Formula": 0.305348,
+        "Formula_Fitted": 0.149992,
+        "delta_ara": -6.946362,
+        "delta_phase": 167.688043
+      },
+      {
+        "origin": "2004-08-01",
+        "target": "2005-02-01",
+        "current": 0.66,
+        "actual": 0.26,
+        "Formula": 0.618145,
+        "Formula_Fitted": -0.217688,
+        "delta_ara": 1.588513,
+        "delta_phase": 327.675785
+      },
+      {
+        "origin": "2004-11-01",
+        "target": "2005-05-01",
+        "current": 0.62,
+        "actual": 0.3,
+        "Formula": 0.588483,
+        "Formula_Fitted": 0.478438,
+        "delta_ara": 0.48506,
+        "delta_phase": 231.404745
+      },
+      {
+        "origin": "2005-02-01",
+        "target": "2005-08-01",
+        "current": 0.26,
+        "actual": -0.04,
+        "Formula": 0.370649,
+        "Formula_Fitted": -0.111309,
+        "delta_ara": 2.238204,
+        "delta_phase": 104.494783
+      },
+      {
+        "origin": "2005-05-01",
+        "target": "2005-11-01",
+        "current": 0.3,
+        "actual": -0.44,
+        "Formula": 0.3946,
+        "Formula_Fitted": -1.323111,
+        "delta_ara": -0.948323,
+        "delta_phase": 79.570614
+      },
+      {
+        "origin": "2005-08-01",
+        "target": "2006-02-01",
+        "current": -0.04,
+        "actual": -0.71,
+        "Formula": -0.274377,
+        "Formula_Fitted": -1.448133,
+        "delta_ara": -0.582401,
+        "delta_phase": 32.545937
+      },
+      {
+        "origin": "2005-11-01",
+        "target": "2006-05-01",
+        "current": -0.44,
+        "actual": -0.11,
+        "Formula": -0.516245,
+        "Formula_Fitted": 0.177386,
+        "delta_ara": -16.052812,
+        "delta_phase": -16.68321
+      },
+      {
+        "origin": "2006-02-01",
+        "target": "2006-08-01",
+        "current": -0.71,
+        "actual": 0.37,
+        "Formula": -0.623729,
+        "Formula_Fitted": 0.176004,
+        "delta_ara": -3.744402,
+        "delta_phase": 16.663539
+      },
+      {
+        "origin": "2006-05-01",
+        "target": "2006-11-01",
+        "current": -0.11,
+        "actual": 0.98,
+        "Formula": -0.294359,
+        "Formula_Fitted": -0.203792,
+        "delta_ara": 7.059224,
+        "delta_phase": 166.07026
+      },
+      {
+        "origin": "2006-08-01",
+        "target": "2007-02-01",
+        "current": 0.37,
+        "actual": 0.12,
+        "Formula": 0.395802,
+        "Formula_Fitted": -0.154747,
+        "delta_ara": 12.406354,
+        "delta_phase": 261.508698
+      },
+      {
+        "origin": "2006-11-01",
+        "target": "2007-05-01",
+        "current": 0.98,
+        "actual": -0.39,
+        "Formula": 1.042043,
+        "Formula_Fitted": -0.194988,
+        "delta_ara": 15.123998,
+        "delta_phase": 333.383826
+      },
+      {
+        "origin": "2007-02-01",
+        "target": "2007-08-01",
+        "current": 0.12,
+        "actual": -0.57,
+        "Formula": 0.314074,
+        "Formula_Fitted": -1.316369,
+        "delta_ara": -0.203218,
+        "delta_phase": 205.623713
+      },
+      {
+        "origin": "2007-05-01",
+        "target": "2007-11-01",
+        "current": -0.39,
+        "actual": -1.58,
+        "Formula": -0.487949,
+        "Formula_Fitted": 0.10439,
+        "delta_ara": -16.864024,
+        "delta_phase": 29.450186
+      },
+      {
+        "origin": "2007-08-01",
+        "target": "2008-02-01",
+        "current": -0.57,
+        "actual": -1.7,
+        "Formula": -0.547618,
+        "Formula_Fitted": 0.135199,
+        "delta_ara": -15.322296,
+        "delta_phase": 92.120623
+      },
+      {
+        "origin": "2007-11-01",
+        "target": "2008-05-01",
+        "current": -1.58,
+        "actual": -0.64,
+        "Formula": -1.434567,
+        "Formula_Fitted": 0.173758,
+        "delta_ara": -12.667902,
+        "delta_phase": 22.029417
+      },
+      {
+        "origin": "2008-02-01",
+        "target": "2008-08-01",
+        "current": -1.7,
+        "actual": -0.04,
+        "Formula": -1.451645,
+        "Formula_Fitted": 0.202042,
+        "delta_ara": -15.256918,
+        "delta_phase": 20.008939
+      },
+      {
+        "origin": "2008-05-01",
+        "target": "2008-11-01",
+        "current": -0.64,
+        "actual": -0.37,
+        "Formula": -0.59097,
+        "Formula_Fitted": -0.194036,
+        "delta_ara": 11.302871,
+        "delta_phase": 285.459662
+      },
+      {
+        "origin": "2008-08-01",
+        "target": "2009-02-01",
+        "current": -0.04,
+        "actual": -0.71,
+        "Formula": -0.283392,
+        "Formula_Fitted": -0.161444,
+        "delta_ara": 14.676525,
+        "delta_phase": 359.295675
+      },
+      {
+        "origin": "2008-11-01",
+        "target": "2009-05-01",
+        "current": -0.37,
+        "actual": 0.17,
+        "Formula": -0.405869,
+        "Formula_Fitted": -0.179427,
+        "delta_ara": 2.054893,
+        "delta_phase": 283.705702
+      },
+      {
+        "origin": "2009-02-01",
+        "target": "2009-08-01",
+        "current": -0.71,
+        "actual": 0.62,
+        "Formula": -0.619467,
+        "Formula_Fitted": 0.160831,
+        "delta_ara": -10.607487,
+        "delta_phase": 135.498537
+      },
+      {
+        "origin": "2009-05-01",
+        "target": "2009-11-01",
+        "current": 0.17,
+        "actual": 1.49,
+        "Formula": 0.361285,
+        "Formula_Fitted": -0.12024,
+        "delta_ara": 12.62979,
+        "delta_phase": 265.598082
+      },
+      {
+        "origin": "2009-08-01",
+        "target": "2010-02-01",
+        "current": 0.62,
+        "actual": 1.18,
+        "Formula": 0.599933,
+        "Formula_Fitted": -0.091839,
+        "delta_ara": 22.33774,
+        "delta_phase": 387.304603
+      },
+      {
+        "origin": "2009-11-01",
+        "target": "2010-05-01",
+        "current": 1.49,
+        "actual": -0.15,
+        "Formula": 1.426202,
+        "Formula_Fitted": -0.108675,
+        "delta_ara": 15.909397,
+        "delta_phase": 331.50397
+      },
+      {
+        "origin": "2010-02-01",
+        "target": "2010-08-01",
+        "current": 1.18,
+        "actual": -1.33,
+        "Formula": 1.168123,
+        "Formula_Fitted": -0.099682,
+        "delta_ara": 10.655209,
+        "delta_phase": 263.029676
+      },
+      {
+        "origin": "2010-05-01",
+        "target": "2010-11-01",
+        "current": -0.15,
+        "actual": -1.57,
+        "Formula": -0.320804,
+        "Formula_Fitted": 0.163016,
+        "delta_ara": -16.423271,
+        "delta_phase": 65.485303
+      },
+      {
+        "origin": "2010-08-01",
+        "target": "2011-02-01",
+        "current": -1.33,
+        "actual": -1.26,
+        "Formula": -1.202552,
+        "Formula_Fitted": 0.167801,
+        "delta_ara": -17.707298,
+        "delta_phase": -5.410898
+      },
+      {
+        "origin": "2010-11-01",
+        "target": "2011-05-01",
+        "current": -1.57,
+        "actual": -0.53,
+        "Formula": -1.463777,
+        "Formula_Fitted": 0.175101,
+        "delta_ara": -8.512307,
+        "delta_phase": 18.86715
+      },
+      {
+        "origin": "2011-02-01",
+        "target": "2011-08-01",
+        "current": -1.26,
+        "actual": -0.66,
+        "Formula": -1.164383,
+        "Formula_Fitted": 0.083972,
+        "delta_ara": -5.438391,
+        "delta_phase": 169.645485
+      },
+      {
+        "origin": "2011-05-01",
+        "target": "2011-11-01",
+        "current": -0.53,
+        "actual": -1.09,
+        "Formula": -0.524999,
+        "Formula_Fitted": -0.132671,
+        "delta_ara": 24.932878,
+        "delta_phase": 422.607531
+      },
+      {
+        "origin": "2011-08-01",
+        "target": "2012-02-01",
+        "current": -0.66,
+        "actual": -0.61,
+        "Formula": -0.601446,
+        "Formula_Fitted": -0.202154,
+        "delta_ara": 13.201327,
+        "delta_phase": 290.928008
+      },
+      {
+        "origin": "2011-11-01",
+        "target": "2012-05-01",
+        "current": -1.09,
+        "actual": -0.18,
+        "Formula": -1.111381,
+        "Formula_Fitted": 0.132551,
+        "delta_ara": -0.387265,
+        "delta_phase": 72.877794
+      },
+      {
+        "origin": "2012-02-01",
+        "target": "2012-08-01",
+        "current": -0.61,
+        "actual": 0.66,
+        "Formula": -0.567069,
+        "Formula_Fitted": 0.174021,
+        "delta_ara": -1.446348,
+        "delta_phase": 36.37678
+      },
+      {
+        "origin": "2012-05-01",
+        "target": "2012-11-01",
+        "current": -0.18,
+        "actual": 0.33,
+        "Formula": -0.327587,
+        "Formula_Fitted": -0.19748,
+        "delta_ara": 9.358186,
+        "delta_phase": 277.987575
+      },
+      {
+        "origin": "2012-08-01",
+        "target": "2013-02-01",
+        "current": 0.66,
+        "actual": -0.4,
+        "Formula": 0.619698,
+        "Formula_Fitted": -0.093683,
+        "delta_ara": 13.149627,
+        "delta_phase": 302.911662
+      },
+      {
+        "origin": "2012-11-01",
+        "target": "2013-05-01",
+        "current": 0.33,
+        "actual": -0.28,
+        "Formula": 0.408585,
+        "Formula_Fitted": -0.15707,
+        "delta_ara": 1.002811,
+        "delta_phase": 297.323614
+      },
+      {
+        "origin": "2013-02-01",
+        "target": "2013-08-01",
+        "current": -0.4,
+        "actual": -0.29,
+        "Formula": -0.492233,
+        "Formula_Fitted": 0.170849,
+        "delta_ara": -1.159907,
+        "delta_phase": 45.885199
+      },
+      {
+        "origin": "2013-05-01",
+        "target": "2013-11-01",
+        "current": -0.28,
+        "actual": -0.02,
+        "Formula": -0.385801,
+        "Formula_Fitted": 0.085011,
+        "delta_ara": -4.603838,
+        "delta_phase": 131.529611
+      },
+      {
+        "origin": "2013-08-01",
+        "target": "2014-02-01",
+        "current": -0.29,
+        "actual": -0.45,
+        "Formula": -0.402423,
+        "Formula_Fitted": -1.872069,
+        "delta_ara": 0.112694,
+        "delta_phase": 191.283861
+      },
+      {
+        "origin": "2013-11-01",
+        "target": "2014-05-01",
+        "current": -0.02,
+        "actual": 0.45,
+        "Formula": -0.284297,
+        "Formula_Fitted": 3.663993,
+        "delta_ara": 0.046054,
+        "delta_phase": 214.463169
+      },
+      {
+        "origin": "2014-02-01",
+        "target": "2014-08-01",
+        "current": -0.45,
+        "actual": 0.14,
+        "Formula": -0.522438,
+        "Formula_Fitted": 0.928455,
+        "delta_ara": 0.588226,
+        "delta_phase": 88.465426
+      },
+      {
+        "origin": "2014-05-01",
+        "target": "2014-11-01",
+        "current": 0.45,
+        "actual": 0.89,
+        "Formula": 0.513049,
+        "Formula_Fitted": -0.119385,
+        "delta_ara": 1.883219,
+        "delta_phase": 300.976582
+      },
+      {
+        "origin": "2014-08-01",
+        "target": "2015-02-01",
+        "current": 0.14,
+        "actual": 0.57,
+        "Formula": 0.309685,
+        "Formula_Fitted": -0.168662,
+        "delta_ara": 13.609957,
+        "delta_phase": 280.701183
+      },
+      {
+        "origin": "2014-11-01",
+        "target": "2015-05-01",
+        "current": 0.89,
+        "actual": 1.04,
+        "Formula": 1.049839,
+        "Formula_Fitted": -0.204823,
+        "delta_ara": 13.48791,
+        "delta_phase": 296.099738
+      },
+      {
+        "origin": "2015-02-01",
+        "target": "2015-08-01",
+        "current": 0.57,
+        "actual": 1.87,
+        "Formula": 0.534429,
+        "Formula_Fitted": -0.182333,
+        "delta_ara": 1.306693,
+        "delta_phase": 283.146223
+      },
+      {
+        "origin": "2015-05-01",
+        "target": "2015-11-01",
+        "current": 1.04,
+        "actual": 2.57,
+        "Formula": 1.092689,
+        "Formula_Fitted": -0.126654,
+        "delta_ara": 1.317394,
+        "delta_phase": 220.711469
+      },
+      {
+        "origin": "2015-08-01",
+        "target": "2016-02-01",
+        "current": 1.87,
+        "actual": 2.11,
+        "Formula": 1.51601,
+        "Formula_Fitted": -0.160403,
+        "delta_ara": 8.227639,
+        "delta_phase": 278.334434
+      },
+      {
+        "origin": "2015-11-01",
+        "target": "2016-05-01",
+        "current": 2.57,
+        "actual": 0.45,
+        "Formula": 1.647862,
+        "Formula_Fitted": -0.18581,
+        "delta_ara": 8.975836,
+        "delta_phase": 304.399686
+      },
+      {
+        "origin": "2016-02-01",
+        "target": "2016-08-01",
+        "current": 2.11,
+        "actual": -0.48,
+        "Formula": 1.600893,
+        "Formula_Fitted": -0.108126,
+        "delta_ara": 6.744577,
+        "delta_phase": 240.75565
+      },
+      {
+        "origin": "2016-05-01",
+        "target": "2016-11-01",
+        "current": 0.45,
+        "actual": -0.63,
+        "Formula": 0.497659,
+        "Formula_Fitted": 0.161608,
+        "delta_ara": -14.436064,
+        "delta_phase": 107.667243
+      },
+      {
+        "origin": "2016-08-01",
+        "target": "2017-02-01",
+        "current": -0.48,
+        "actual": -0.01,
+        "Formula": -0.534275,
+        "Formula_Fitted": 0.181819,
+        "delta_ara": -22.894921,
+        "delta_phase": -28.916008
+      },
+      {
+        "origin": "2016-11-01",
+        "target": "2017-05-01",
+        "current": -0.63,
+        "actual": 0.3,
+        "Formula": -0.58426,
+        "Formula_Fitted": 0.169474,
+        "delta_ara": -15.584332,
+        "delta_phase": 5.029503
+      },
+      {
+        "origin": "2017-02-01",
+        "target": "2017-08-01",
+        "current": -0.01,
+        "actual": -0.18,
+        "Formula": 0.273387,
+        "Formula_Fitted": -0.133858,
+        "delta_ara": 1.314455,
+        "delta_phase": 141.662085
+      },
+      {
+        "origin": "2017-05-01",
+        "target": "2017-11-01",
+        "current": 0.3,
+        "actual": -0.84,
+        "Formula": 0.387707,
+        "Formula_Fitted": -0.164177,
+        "delta_ara": 2.824202,
+        "delta_phase": 308.939919
+      },
+      {
+        "origin": "2017-08-01",
+        "target": "2018-02-01",
+        "current": -0.18,
+        "actual": -0.73,
+        "Formula": -0.320938,
+        "Formula_Fitted": -0.155869,
+        "delta_ara": 1.372997,
+        "delta_phase": 229.256341
+      },
+      {
+        "origin": "2017-11-01",
+        "target": "2018-05-01",
+        "current": -0.84,
+        "actual": -0.12,
+        "Formula": -1.036571,
+        "Formula_Fitted": 0.150624,
+        "delta_ara": -24.173864,
+        "delta_phase": -49.447646
+      },
+      {
+        "origin": "2018-02-01",
+        "target": "2018-08-01",
+        "current": -0.73,
+        "actual": 0.05,
+        "Formula": -0.619297,
+        "Formula_Fitted": 0.105088,
+        "delta_ara": -0.613744,
+        "delta_phase": 20.076643
+      },
+      {
+        "origin": "2018-05-01",
+        "target": "2018-11-01",
+        "current": -0.12,
+        "actual": 1.0,
+        "Formula": -0.31615,
+        "Formula_Fitted": -0.133126,
+        "delta_ara": 5.200711,
+        "delta_phase": 237.822495
+      },
+      {
+        "origin": "2018-08-01",
+        "target": "2019-02-01",
+        "current": 0.05,
+        "actual": 0.62,
+        "Formula": 0.279175,
+        "Formula_Fitted": -0.132247,
+        "delta_ara": 23.774458,
+        "delta_phase": 372.295475
+      },
+      {
+        "origin": "2018-11-01",
+        "target": "2019-05-01",
+        "current": 1.0,
+        "actual": 0.61,
+        "Formula": 1.091338,
+        "Formula_Fitted": -0.146458,
+        "delta_ara": 14.508689,
+        "delta_phase": 364.002629
+      },
+      {
+        "origin": "2019-02-01",
+        "target": "2019-08-01",
+        "current": 0.62,
+        "actual": 0.19,
+        "Formula": 0.608254,
+        "Formula_Fitted": -0.158707,
+        "delta_ara": 7.598431,
+        "delta_phase": 184.195204
+      },
+      {
+        "origin": "2019-05-01",
+        "target": "2019-11-01",
+        "current": 0.61,
+        "actual": 0.74,
+        "Formula": 0.584225,
+        "Formula_Fitted": 0.954046,
+        "delta_ara": -0.181772,
+        "delta_phase": 87.954479
+      },
+      {
+        "origin": "2019-08-01",
+        "target": "2020-02-01",
+        "current": 0.19,
+        "actual": 0.48,
+        "Formula": 0.317741,
+        "Formula_Fitted": 0.443713,
+        "delta_ara": 0.256316,
+        "delta_phase": 62.252334
+      },
+      {
+        "origin": "2019-11-01",
+        "target": "2020-05-01",
+        "current": 0.74,
+        "actual": -0.12,
+        "Formula": 0.613226,
+        "Formula_Fitted": -0.229555,
+        "delta_ara": 2.206203,
+        "delta_phase": 85.366383
+      },
+      {
+        "origin": "2020-02-01",
+        "target": "2020-08-01",
+        "current": 0.48,
+        "actual": -0.42,
+        "Formula": 0.536715,
+        "Formula_Fitted": 0.144761,
+        "delta_ara": -1.796546,
+        "delta_phase": 104.065377
+      },
+      {
+        "origin": "2020-05-01",
+        "target": "2020-11-01",
+        "current": -0.12,
+        "actual": -1.01,
+        "Formula": -0.306965,
+        "Formula_Fitted": 0.138559,
+        "delta_ara": -10.105409,
+        "delta_phase": 92.676997
+      },
+      {
+        "origin": "2020-08-01",
+        "target": "2021-02-01",
+        "current": -0.42,
+        "actual": -0.94,
+        "Formula": -0.507858,
+        "Formula_Fitted": 0.093439,
+        "delta_ara": -16.871175,
+        "delta_phase": 15.931619
+      },
+      {
+        "origin": "2020-11-01",
+        "target": "2021-05-01",
+        "current": -1.01,
+        "actual": -0.41,
+        "Formula": -1.099134,
+        "Formula_Fitted": 0.149568,
+        "delta_ara": -10.753839,
+        "delta_phase": 20.959822
+      },
+      {
+        "origin": "2021-02-01",
+        "target": "2021-08-01",
+        "current": -0.94,
+        "actual": -0.38,
+        "Formula": -1.065201,
+        "Formula_Fitted": 0.087941,
+        "delta_ara": -11.485414,
+        "delta_phase": 71.527499
+      },
+      {
+        "origin": "2021-05-01",
+        "target": "2021-11-01",
+        "current": -0.41,
+        "actual": -0.88,
+        "Formula": -0.518914,
+        "Formula_Fitted": -0.109908,
+        "delta_ara": 1.480321,
+        "delta_phase": 253.300587
+      },
+      {
+        "origin": "2021-08-01",
+        "target": "2022-02-01",
+        "current": -0.38,
+        "actual": -0.68,
+        "Formula": -0.510402,
+        "Formula_Fitted": -0.159803,
+        "delta_ara": 14.144289,
+        "delta_phase": 280.717991
+      },
+      {
+        "origin": "2021-11-01",
+        "target": "2022-05-01",
+        "current": -0.88,
+        "actual": -1.02,
+        "Formula": -1.027483,
+        "Formula_Fitted": 0.189769,
+        "delta_ara": -5.699851,
+        "delta_phase": 95.597233
+      },
+      {
+        "origin": "2022-02-01",
+        "target": "2022-08-01",
+        "current": -0.68,
+        "actual": -0.96,
+        "Formula": -0.590004,
+        "Formula_Fitted": -0.81924,
+        "delta_ara": -0.351312,
+        "delta_phase": 70.275203
+      },
+      {
+        "origin": "2022-05-01",
+        "target": "2022-11-01",
+        "current": -1.02,
+        "actual": -0.76,
+        "Formula": -1.093614,
+        "Formula_Fitted": 0.12726,
+        "delta_ara": -2.585044,
+        "delta_phase": 201.967964
+      },
+      {
+        "origin": "2022-08-01",
+        "target": "2023-02-01",
+        "current": -0.96,
+        "actual": -0.62,
+        "Formula": -1.056278,
+        "Formula_Fitted": 0.225441,
+        "delta_ara": -2.291553,
+        "delta_phase": 170.973299
+      },
+      {
+        "origin": "2022-11-01",
+        "target": "2023-05-01",
+        "current": -0.76,
+        "actual": 0.47,
+        "Formula": -0.647568,
+        "Formula_Fitted": -0.110232,
+        "delta_ara": 7.353904,
+        "delta_phase": 149.196077
+      },
+      {
+        "origin": "2023-02-01",
+        "target": "2023-08-01",
+        "current": -0.62,
+        "actual": 1.56,
+        "Formula": -0.608754,
+        "Formula_Fitted": -1.754457,
+        "delta_ara": 0.30727,
+        "delta_phase": 251.73207
+      },
+      {
+        "origin": "2023-05-01",
+        "target": "2023-11-01",
+        "current": 0.47,
+        "actual": 2.01,
+        "Formula": 0.527426,
+        "Formula_Fitted": -0.117761,
+        "delta_ara": 13.953127,
+        "delta_phase": 283.653159
+      },
+      {
+        "origin": "2023-08-01",
+        "target": "2024-02-01",
+        "current": 1.56,
+        "actual": 1.47,
+        "Formula": 1.405664,
+        "Formula_Fitted": -0.235521,
+        "delta_ara": 12.048282,
+        "delta_phase": 269.758056
+      },
+      {
+        "origin": "2023-11-01",
+        "target": "2024-05-01",
+        "current": 2.01,
+        "actual": 0.41,
+        "Formula": 1.514464,
+        "Formula_Fitted": -0.162714,
+        "delta_ara": 13.901745,
+        "delta_phase": 321.568817
+      },
+      {
+        "origin": "2024-02-01",
+        "target": "2024-08-01",
+        "current": 1.47,
+        "actual": 0.02,
+        "Formula": 1.233802,
+        "Formula_Fitted": -0.106655,
+        "delta_ara": 7.348023,
+        "delta_phase": 225.355429
+      },
+      {
+        "origin": "2024-05-01",
+        "target": "2024-11-01",
+        "current": 0.41,
+        "actual": -0.05,
+        "Formula": 0.497417,
+        "Formula_Fitted": 0.172785,
+        "delta_ara": -14.971522,
+        "delta_phase": -6.857415
+      },
+      {
+        "origin": "2024-08-01",
+        "target": "2025-02-01",
+        "current": 0.02,
+        "actual": -0.39,
+        "Formula": 0.278128,
+        "Formula_Fitted": 0.233298,
+        "delta_ara": -16.402973,
+        "delta_phase": -47.031511
+      },
+      {
+        "origin": "2024-11-01",
+        "target": "2025-05-01",
+        "current": -0.05,
+        "actual": -0.08,
+        "Formula": -0.27323,
+        "Formula_Fitted": 0.175961,
+        "delta_ara": -15.772395,
+        "delta_phase": -33.144113
+      },
+      {
+        "origin": "2025-02-01",
+        "target": "2025-08-01",
+        "current": -0.39,
+        "actual": -0.11,
+        "Formula": -0.498622,
+        "Formula_Fitted": 0.151424,
+        "delta_ara": -8.593669,
+        "delta_phase": 181.469736
+      },
+      {
+        "origin": "2025-05-01",
+        "target": "2025-11-01",
+        "current": -0.08,
+        "actual": -0.68,
+        "Formula": -0.301416,
+        "Formula_Fitted": -0.161364,
+        "delta_ara": 1.91593,
+        "delta_phase": 270.966822
+      }
+    ],
+    "12": [
+      {
+        "origin": "2001-02-01",
+        "target": "2002-02-01",
+        "current": -0.63,
+        "actual": 0.0,
+        "Formula": -0.592013,
+        "Formula_Fitted": 0.21637,
+        "delta_ara": -3.354568,
+        "delta_phase": 426.385054
+      },
+      {
+        "origin": "2001-05-01",
+        "target": "2002-05-01",
+        "current": -0.3,
+        "actual": 0.21,
+        "Formula": -0.388322,
+        "Formula_Fitted": -0.170036,
+        "delta_ara": 16.709163,
+        "delta_phase": 384.898632
+      },
+      {
+        "origin": "2001-08-01",
+        "target": "2002-08-01",
+        "current": -0.07,
+        "actual": 0.7,
+        "Formula": -0.289444,
+        "Formula_Fitted": -0.193518,
+        "delta_ara": 20.526942,
+        "delta_phase": 422.106971
+      },
+      {
+        "origin": "2001-11-01",
+        "target": "2002-11-01",
+        "current": -0.28,
+        "actual": 1.41,
+        "Formula": -0.391447,
+        "Formula_Fitted": 3.296368,
+        "delta_ara": 0.73292,
+        "delta_phase": 402.852694
+      },
+      {
+        "origin": "2002-02-01",
+        "target": "2003-02-01",
+        "current": 0.0,
+        "actual": 0.64,
+        "Formula": -0.280121,
+        "Formula_Fitted": 0.092547,
+        "delta_ara": -3.261078,
+        "delta_phase": 422.656333
+      },
+      {
+        "origin": "2002-05-01",
+        "target": "2003-05-01",
+        "current": 0.21,
+        "actual": -0.52,
+        "Formula": 0.364206,
+        "Formula_Fitted": -0.183577,
+        "delta_ara": 11.60336,
+        "delta_phase": 465.128959
+      },
+      {
+        "origin": "2002-08-01",
+        "target": "2003-08-01",
+        "current": 0.7,
+        "actual": 0.05,
+        "Formula": 0.612053,
+        "Formula_Fitted": -0.150234,
+        "delta_ara": 17.945158,
+        "delta_phase": 530.326712
+      },
+      {
+        "origin": "2002-11-01",
+        "target": "2003-11-01",
+        "current": 1.41,
+        "actual": 0.39,
+        "Formula": 1.220015,
+        "Formula_Fitted": -0.149346,
+        "delta_ara": 17.089026,
+        "delta_phase": 563.549291
+      },
+      {
+        "origin": "2003-02-01",
+        "target": "2004-02-01",
+        "current": 0.64,
+        "actual": 0.17,
+        "Formula": 0.579792,
+        "Formula_Fitted": -0.228848,
+        "delta_ara": 2.447328,
+        "delta_phase": 432.402579
+      },
+      {
+        "origin": "2003-05-01",
+        "target": "2004-05-01",
+        "current": -0.52,
+        "actual": 0.1,
+        "Formula": -0.531995,
+        "Formula_Fitted": 0.172688,
+        "delta_ara": -14.014568,
+        "delta_phase": 55.860673
+      },
+      {
+        "origin": "2003-08-01",
+        "target": "2004-08-01",
+        "current": 0.05,
+        "actual": 0.66,
+        "Formula": 0.292481,
+        "Formula_Fitted": 0.1996,
+        "delta_ara": -18.286393,
+        "delta_phase": 62.508782
+      },
+      {
+        "origin": "2003-11-01",
+        "target": "2004-11-01",
+        "current": 0.39,
+        "actual": 0.62,
+        "Formula": 0.406415,
+        "Formula_Fitted": -0.172831,
+        "delta_ara": 0.967087,
+        "delta_phase": 371.669919
+      },
+      {
+        "origin": "2004-02-01",
+        "target": "2005-02-01",
+        "current": 0.17,
+        "actual": 0.26,
+        "Formula": 0.304871,
+        "Formula_Fitted": 0.159281,
+        "delta_ara": -3.281974,
+        "delta_phase": 370.157887
+      },
+      {
+        "origin": "2004-05-01",
+        "target": "2005-05-01",
+        "current": 0.1,
+        "actual": 0.3,
+        "Formula": 0.304546,
+        "Formula_Fitted": 0.141659,
+        "delta_ara": -9.82364,
+        "delta_phase": 334.239395
+      },
+      {
+        "origin": "2004-08-01",
+        "target": "2005-08-01",
+        "current": 0.66,
+        "actual": -0.04,
+        "Formula": 0.61012,
+        "Formula_Fitted": -0.154783,
+        "delta_ara": 2.246497,
+        "delta_phase": 560.496228
+      },
+      {
+        "origin": "2004-11-01",
+        "target": "2005-11-01",
+        "current": 0.62,
+        "actual": -0.44,
+        "Formula": 0.588349,
+        "Formula_Fitted": -0.14258,
+        "delta_ara": 0.685979,
+        "delta_phase": 424.348418
+      },
+      {
+        "origin": "2005-02-01",
+        "target": "2006-02-01",
+        "current": 0.26,
+        "actual": -0.71,
+        "Formula": 0.370587,
+        "Formula_Fitted": -0.160843,
+        "delta_ara": 3.165298,
+        "delta_phase": 244.87063
+      },
+      {
+        "origin": "2005-05-01",
+        "target": "2006-05-01",
+        "current": 0.3,
+        "actual": -0.11,
+        "Formula": 0.387902,
+        "Formula_Fitted": 0.171011,
+        "delta_ara": -1.341132,
+        "delta_phase": 209.622531
+      },
+      {
+        "origin": "2005-08-01",
+        "target": "2006-08-01",
+        "current": -0.04,
+        "actual": 0.37,
+        "Formula": -0.255962,
+        "Formula_Fitted": -0.480413,
+        "delta_ara": -0.823639,
+        "delta_phase": 143.119595
+      },
+      {
+        "origin": "2005-11-01",
+        "target": "2006-11-01",
+        "current": -0.44,
+        "actual": 0.98,
+        "Formula": -0.499946,
+        "Formula_Fitted": 0.174049,
+        "delta_ara": -22.702104,
+        "delta_phase": 73.499068
+      },
+      {
+        "origin": "2006-02-01",
+        "target": "2007-02-01",
+        "current": -0.71,
+        "actual": 0.12,
+        "Formula": -0.622303,
+        "Formula_Fitted": 0.125923,
+        "delta_ara": -5.295385,
+        "delta_phase": 120.658492
+      },
+      {
+        "origin": "2006-05-01",
+        "target": "2007-05-01",
+        "current": -0.11,
+        "actual": -0.39,
+        "Formula": -0.298879,
+        "Formula_Fitted": -0.151249,
+        "delta_ara": 9.983251,
+        "delta_phase": 331.951503
+      },
+      {
+        "origin": "2006-08-01",
+        "target": "2007-08-01",
+        "current": 0.37,
+        "actual": -0.57,
+        "Formula": 0.399858,
+        "Formula_Fitted": -0.159446,
+        "delta_ara": 17.545234,
+        "delta_phase": 466.921837
+      },
+      {
+        "origin": "2006-11-01",
+        "target": "2007-11-01",
+        "current": 0.98,
+        "actual": -1.58,
+        "Formula": 1.04375,
+        "Formula_Fitted": -0.175455,
+        "delta_ara": 21.388564,
+        "delta_phase": 568.568618
+      },
+      {
+        "origin": "2007-02-01",
+        "target": "2008-02-01",
+        "current": 0.12,
+        "actual": -1.7,
+        "Formula": 0.31336,
+        "Formula_Fitted": -0.863478,
+        "delta_ara": -0.287394,
+        "delta_phase": 387.888533
+      },
+      {
+        "origin": "2007-05-01",
+        "target": "2008-05-01",
+        "current": -0.39,
+        "actual": -0.64,
+        "Formula": -0.487111,
+        "Formula_Fitted": 0.162805,
+        "delta_ara": -23.849331,
+        "delta_phase": 138.741543
+      },
+      {
+        "origin": "2007-08-01",
+        "target": "2008-08-01",
+        "current": -0.57,
+        "actual": -0.04,
+        "Formula": -0.549335,
+        "Formula_Fitted": 0.179123,
+        "delta_ara": -21.668999,
+        "delta_phase": 227.370924
+      },
+      {
+        "origin": "2007-11-01",
+        "target": "2008-11-01",
+        "current": -1.58,
+        "actual": -0.37,
+        "Formula": -1.440045,
+        "Formula_Fitted": 0.131571,
+        "delta_ara": -17.915119,
+        "delta_phase": 128.24699
+      },
+      {
+        "origin": "2008-02-01",
+        "target": "2009-02-01",
+        "current": -1.7,
+        "actual": -0.71,
+        "Formula": -1.46084,
+        "Formula_Fitted": 0.174982,
+        "delta_ara": -21.57654,
+        "delta_phase": 125.389603
+      },
+      {
+        "origin": "2008-05-01",
+        "target": "2009-05-01",
+        "current": -0.64,
+        "actual": 0.17,
+        "Formula": -0.598577,
+        "Formula_Fitted": -0.223199,
+        "delta_ara": 15.984674,
+        "delta_phase": 500.793615
+      },
+      {
+        "origin": "2008-08-01",
+        "target": "2009-08-01",
+        "current": -0.04,
+        "actual": 0.62,
+        "Formula": -0.277023,
+        "Formula_Fitted": -0.132595,
+        "delta_ara": 20.755741,
+        "delta_phase": 605.213506
+      },
+      {
+        "origin": "2008-11-01",
+        "target": "2009-11-01",
+        "current": -0.37,
+        "actual": 1.49,
+        "Formula": -0.406986,
+        "Formula_Fitted": -0.195155,
+        "delta_ara": 2.906057,
+        "delta_phase": 498.313141
+      },
+      {
+        "origin": "2009-02-01",
+        "target": "2010-02-01",
+        "current": -0.71,
+        "actual": 1.18,
+        "Formula": -0.622199,
+        "Formula_Fitted": 0.190606,
+        "delta_ara": -15.001252,
+        "delta_phase": 288.716558
+      },
+      {
+        "origin": "2009-05-01",
+        "target": "2010-05-01",
+        "current": 0.17,
+        "actual": -0.15,
+        "Formula": 0.337362,
+        "Formula_Fitted": -0.15578,
+        "delta_ara": 17.86122,
+        "delta_phase": 472.705099
+      },
+      {
+        "origin": "2009-08-01",
+        "target": "2010-08-01",
+        "current": 0.62,
+        "actual": -1.33,
+        "Formula": 0.605449,
+        "Formula_Fitted": -0.226415,
+        "delta_ara": 31.590335,
+        "delta_phase": 644.824112
+      },
+      {
+        "origin": "2009-11-01",
+        "target": "2010-11-01",
+        "current": 1.49,
+        "actual": -1.57,
+        "Formula": 1.436002,
+        "Formula_Fitted": -0.232232,
+        "delta_ara": 22.499285,
+        "delta_phase": 565.9101
+      },
+      {
+        "origin": "2010-02-01",
+        "target": "2011-02-01",
+        "current": 1.18,
+        "actual": -1.26,
+        "Formula": 1.175441,
+        "Formula_Fitted": -0.164176,
+        "delta_ara": 15.068741,
+        "delta_phase": 469.072825
+      },
+      {
+        "origin": "2010-05-01",
+        "target": "2011-05-01",
+        "current": -0.15,
+        "actual": -0.53,
+        "Formula": -0.350679,
+        "Formula_Fitted": 0.154477,
+        "delta_ara": -23.226012,
+        "delta_phase": 189.702894
+      },
+      {
+        "origin": "2010-08-01",
+        "target": "2011-08-01",
+        "current": -1.33,
+        "actual": -0.66,
+        "Formula": -1.219137,
+        "Formula_Fitted": 0.127759,
+        "delta_ara": -25.041901,
+        "delta_phase": 89.440525
+      },
+      {
+        "origin": "2010-11-01",
+        "target": "2011-11-01",
+        "current": -1.57,
+        "actual": -1.09,
+        "Formula": -1.403301,
+        "Formula_Fitted": 0.108441,
+        "delta_ara": -12.03822,
+        "delta_phase": 123.774869
+      },
+      {
+        "origin": "2011-02-01",
+        "target": "2012-02-01",
+        "current": -1.26,
+        "actual": -0.61,
+        "Formula": -1.173379,
+        "Formula_Fitted": 0.10914,
+        "delta_ara": -7.691046,
+        "delta_phase": 337.007635
+      },
+      {
+        "origin": "2011-05-01",
+        "target": "2012-05-01",
+        "current": -0.53,
+        "actual": -0.18,
+        "Formula": -0.528573,
+        "Formula_Fitted": -0.171765,
+        "delta_ara": 35.260414,
+        "delta_phase": 694.749992
+      },
+      {
+        "origin": "2011-08-01",
+        "target": "2012-08-01",
+        "current": -0.66,
+        "actual": 0.66,
+        "Formula": -0.600913,
+        "Formula_Fitted": -0.115469,
+        "delta_ara": 18.669496,
+        "delta_phase": 508.527024
+      },
+      {
+        "origin": "2011-11-01",
+        "target": "2012-11-01",
+        "current": -1.09,
+        "actual": 0.33,
+        "Formula": -1.083712,
+        "Formula_Fitted": 0.11666,
+        "delta_ara": -0.547675,
+        "delta_phase": 200.157455
+      },
+      {
+        "origin": "2012-02-01",
+        "target": "2013-02-01",
+        "current": -0.61,
+        "actual": -0.4,
+        "Formula": -0.563449,
+        "Formula_Fitted": 0.180239,
+        "delta_ara": -2.045445,
+        "delta_phase": 148.537225
+      },
+      {
+        "origin": "2012-05-01",
+        "target": "2013-05-01",
+        "current": -0.18,
+        "actual": -0.28,
+        "Formula": -0.324389,
+        "Formula_Fitted": -0.169779,
+        "delta_ara": 13.234474,
+        "delta_phase": 490.226488
+      },
+      {
+        "origin": "2012-08-01",
+        "target": "2013-08-01",
+        "current": 0.66,
+        "actual": -0.29,
+        "Formula": 0.619395,
+        "Formula_Fitted": -0.206042,
+        "delta_ara": 18.596381,
+        "delta_phase": 525.47447
+      },
+      {
+        "origin": "2012-11-01",
+        "target": "2013-11-01",
+        "current": 0.33,
+        "actual": -0.02,
+        "Formula": 0.377082,
+        "Formula_Fitted": -0.118892,
+        "delta_ara": 1.418189,
+        "delta_phase": 517.571777
+      },
+      {
+        "origin": "2013-02-01",
+        "target": "2014-02-01",
+        "current": -0.4,
+        "actual": -0.45,
+        "Formula": -0.398876,
+        "Formula_Fitted": 0.153615,
+        "delta_ara": -1.640356,
+        "delta_phase": 161.98416
+      },
+      {
+        "origin": "2013-05-01",
+        "target": "2014-05-01",
+        "current": -0.28,
+        "actual": 0.45,
+        "Formula": -0.388244,
+        "Formula_Fitted": 0.144423,
+        "delta_ara": -6.51081,
+        "delta_phase": 283.10365
+      },
+      {
+        "origin": "2013-08-01",
+        "target": "2014-08-01",
+        "current": -0.29,
+        "actual": 0.14,
+        "Formula": -0.400454,
+        "Formula_Fitted": -3.663993,
+        "delta_ara": 0.159374,
+        "delta_phase": 367.60892
+      },
+      {
+        "origin": "2013-11-01",
+        "target": "2014-11-01",
+        "current": -0.02,
+        "actual": 0.89,
+        "Formula": -0.279682,
+        "Formula_Fitted": 2.044481,
+        "delta_ara": 0.065131,
+        "delta_phase": 400.389412
+      },
+      {
+        "origin": "2014-02-01",
+        "target": "2015-02-01",
+        "current": -0.45,
+        "actual": 0.57,
+        "Formula": -0.516389,
+        "Formula_Fitted": 3.663993,
+        "delta_ara": 0.831877,
+        "delta_phase": 222.201695
+      },
+      {
+        "origin": "2014-05-01",
+        "target": "2015-05-01",
+        "current": 0.45,
+        "actual": 1.04,
+        "Formula": 0.521306,
+        "Formula_Fitted": -0.217361,
+        "delta_ara": 2.663274,
+        "delta_phase": 522.737855
+      },
+      {
+        "origin": "2014-08-01",
+        "target": "2015-08-01",
+        "current": 0.14,
+        "actual": 1.87,
+        "Formula": 0.309867,
+        "Formula_Fitted": -0.161587,
+        "delta_ara": 19.247385,
+        "delta_phase": 494.06411
+      },
+      {
+        "origin": "2014-11-01",
+        "target": "2015-11-01",
+        "current": 0.89,
+        "actual": 2.57,
+        "Formula": 1.053975,
+        "Formula_Fitted": -0.157122,
+        "delta_ara": 19.074785,
+        "delta_phase": 515.840956
+      },
+      {
+        "origin": "2015-02-01",
+        "target": "2016-02-01",
+        "current": 0.57,
+        "actual": 2.11,
+        "Formula": 0.54287,
+        "Formula_Fitted": -0.193812,
+        "delta_ara": 1.847943,
+        "delta_phase": 497.521918
+      },
+      {
+        "origin": "2015-05-01",
+        "target": "2016-05-01",
+        "current": 1.04,
+        "actual": 0.45,
+        "Formula": 1.095649,
+        "Formula_Fitted": -0.234039,
+        "delta_ara": 1.863076,
+        "delta_phase": 409.225843
+      },
+      {
+        "origin": "2015-08-01",
+        "target": "2016-08-01",
+        "current": 1.87,
+        "actual": -0.48,
+        "Formula": 1.518941,
+        "Formula_Fitted": -0.135467,
+        "delta_ara": 11.635639,
+        "delta_phase": 490.717021
+      },
+      {
+        "origin": "2015-11-01",
+        "target": "2016-11-01",
+        "current": 2.57,
+        "actual": -0.63,
+        "Formula": 1.639359,
+        "Formula_Fitted": -0.152505,
+        "delta_ara": 12.69375,
+        "delta_phase": 527.578855
+      },
+      {
+        "origin": "2016-02-01",
+        "target": "2017-02-01",
+        "current": 2.11,
+        "actual": -0.01,
+        "Formula": 1.607199,
+        "Formula_Fitted": -0.161131,
+        "delta_ara": 9.538272,
+        "delta_phase": 437.572595
+      },
+      {
+        "origin": "2016-05-01",
+        "target": "2017-05-01",
+        "current": 0.45,
+        "actual": 0.3,
+        "Formula": 0.491781,
+        "Formula_Fitted": 0.088232,
+        "delta_ara": -20.415678,
+        "delta_phase": 249.357164
+      },
+      {
+        "origin": "2016-08-01",
+        "target": "2017-08-01",
+        "current": -0.48,
+        "actual": -0.18,
+        "Formula": -0.537233,
+        "Formula_Fitted": 0.114161,
+        "delta_ara": -32.378308,
+        "delta_phase": 56.199279
+      },
+      {
+        "origin": "2016-11-01",
+        "target": "2017-11-01",
+        "current": -0.63,
+        "actual": -0.84,
+        "Formula": -0.591878,
+        "Formula_Fitted": 0.207527,
+        "delta_ara": -22.039573,
+        "delta_phase": 104.205481
+      },
+      {
+        "origin": "2017-02-01",
+        "target": "2018-02-01",
+        "current": -0.01,
+        "actual": -0.73,
+        "Formula": 0.267996,
+        "Formula_Fitted": -0.150747,
+        "delta_ara": 1.85892,
+        "delta_phase": 297.433131
+      },
+      {
+        "origin": "2017-05-01",
+        "target": "2018-05-01",
+        "current": 0.3,
+        "actual": -0.12,
+        "Formula": 0.389051,
+        "Formula_Fitted": -0.16527,
+        "delta_ara": 3.994025,
+        "delta_phase": 533.999713
+      },
+      {
+        "origin": "2017-08-01",
+        "target": "2018-08-01",
+        "current": -0.18,
+        "actual": 0.05,
+        "Formula": -0.320055,
+        "Formula_Fitted": -0.170557,
+        "delta_ara": 1.94171,
+        "delta_phase": 421.310116
+      },
+      {
+        "origin": "2017-11-01",
+        "target": "2018-11-01",
+        "current": -0.84,
+        "actual": 1.0,
+        "Formula": -1.009201,
+        "Formula_Fitted": 0.141206,
+        "delta_ara": -34.187006,
+        "delta_phase": 27.163158
+      },
+      {
+        "origin": "2018-02-01",
+        "target": "2019-02-01",
+        "current": -0.73,
+        "actual": 0.62,
+        "Formula": -0.629861,
+        "Formula_Fitted": 0.185967,
+        "delta_ara": -0.867966,
+        "delta_phase": 125.48535
+      },
+      {
+        "origin": "2018-05-01",
+        "target": "2019-05-01",
+        "current": -0.12,
+        "actual": 0.61,
+        "Formula": -0.314442,
+        "Formula_Fitted": -0.164062,
+        "delta_ara": 7.354915,
+        "delta_phase": 433.424488
+      },
+      {
+        "origin": "2018-08-01",
+        "target": "2019-08-01",
+        "current": 0.05,
+        "actual": 0.19,
+        "Formula": 0.283219,
+        "Formula_Fitted": -0.153146,
+        "delta_ara": 33.622162,
+        "delta_phase": 623.598
+      },
+      {
+        "origin": "2018-11-01",
+        "target": "2019-11-01",
+        "current": 1.0,
+        "actual": 0.74,
+        "Formula": 1.087283,
+        "Formula_Fitted": -0.153161,
+        "delta_ara": 20.518385,
+        "delta_phase": 611.870145
+      },
+      {
+        "origin": "2019-02-01",
+        "target": "2020-02-01",
+        "current": 0.62,
+        "actual": 0.48,
+        "Formula": 0.609593,
+        "Formula_Fitted": -0.086781,
+        "delta_ara": 10.745804,
+        "delta_phase": 357.584045
+      },
+      {
+        "origin": "2019-05-01",
+        "target": "2020-05-01",
+        "current": 0.61,
+        "actual": -0.12,
+        "Formula": 0.592501,
+        "Formula_Fitted": 1.393356,
+        "delta_ara": -0.257064,
+        "delta_phase": 221.479107
+      },
+      {
+        "origin": "2019-08-01",
+        "target": "2020-08-01",
+        "current": 0.19,
+        "actual": -0.42,
+        "Formula": 0.315989,
+        "Formula_Fitted": -0.17266,
+        "delta_ara": 0.362486,
+        "delta_phase": 185.130785
+      },
+      {
+        "origin": "2019-11-01",
+        "target": "2020-11-01",
+        "current": 0.74,
+        "actual": -1.01,
+        "Formula": 0.620327,
+        "Formula_Fitted": -0.182673,
+        "delta_ara": 3.120043,
+        "delta_phase": 217.818986
+      },
+      {
+        "origin": "2020-02-01",
+        "target": "2021-02-01",
+        "current": 0.48,
+        "actual": -0.94,
+        "Formula": 0.505792,
+        "Formula_Fitted": 0.206951,
+        "delta_ara": -2.540699,
+        "delta_phase": 244.263358
+      },
+      {
+        "origin": "2020-05-01",
+        "target": "2021-05-01",
+        "current": -0.12,
+        "actual": -0.41,
+        "Formula": -0.312788,
+        "Formula_Fitted": 0.129807,
+        "delta_ara": -14.291206,
+        "delta_phase": 228.157756
+      },
+      {
+        "origin": "2020-08-01",
+        "target": "2021-08-01",
+        "current": -0.42,
+        "actual": -0.38,
+        "Formula": -0.512137,
+        "Formula_Fitted": 0.205709,
+        "delta_ara": -23.859445,
+        "delta_phase": 119.623401
+      },
+      {
+        "origin": "2020-11-01",
+        "target": "2021-11-01",
+        "current": -1.01,
+        "actual": -0.88,
+        "Formula": -1.059912,
+        "Formula_Fitted": 0.115553,
+        "delta_ara": -15.208226,
+        "delta_phase": 126.734354
+      },
+      {
+        "origin": "2021-02-01",
+        "target": "2022-02-01",
+        "current": -0.94,
+        "actual": -0.68,
+        "Formula": -1.072787,
+        "Formula_Fitted": 0.190422,
+        "delta_ara": -16.242828,
+        "delta_phase": 198.247848
+      },
+      {
+        "origin": "2021-05-01",
+        "target": "2022-05-01",
+        "current": -0.41,
+        "actual": -1.02,
+        "Formula": -0.491797,
+        "Formula_Fitted": -0.101073,
+        "delta_ara": 2.093489,
+        "delta_phase": 455.313816
+      },
+      {
+        "origin": "2021-08-01",
+        "target": "2022-08-01",
+        "current": -0.38,
+        "actual": -0.96,
+        "Formula": -0.516267,
+        "Formula_Fitted": -0.152864,
+        "delta_ara": 20.003046,
+        "delta_phase": 494.08788
+      },
+      {
+        "origin": "2021-11-01",
+        "target": "2022-11-01",
+        "current": -0.88,
+        "actual": -0.76,
+        "Formula": -1.04299,
+        "Formula_Fitted": 0.158827,
+        "delta_ara": -8.060806,
+        "delta_phase": 232.287594
+      },
+      {
+        "origin": "2022-02-01",
+        "target": "2023-02-01",
+        "current": -0.68,
+        "actual": -0.62,
+        "Formula": -0.597696,
+        "Formula_Fitted": -0.187115,
+        "delta_ara": -0.49683,
+        "delta_phase": 196.476834
+      },
+      {
+        "origin": "2022-05-01",
+        "target": "2023-05-01",
+        "current": -1.02,
+        "actual": 0.47,
+        "Formula": -1.093465,
+        "Formula_Fitted": 0.113618,
+        "delta_ara": -3.655804,
+        "delta_phase": 382.718523
+      },
+      {
+        "origin": "2022-08-01",
+        "target": "2023-08-01",
+        "current": -0.96,
+        "actual": 1.56,
+        "Formula": -1.066911,
+        "Formula_Fitted": 0.083768,
+        "delta_ara": -3.240745,
+        "delta_phase": 338.885447
+      },
+      {
+        "origin": "2022-11-01",
+        "target": "2023-11-01",
+        "current": -0.76,
+        "actual": 2.01,
+        "Formula": -0.614044,
+        "Formula_Fitted": -0.135535,
+        "delta_ara": 10.399991,
+        "delta_phase": 308.087805
+      },
+      {
+        "origin": "2023-02-01",
+        "target": "2024-02-01",
+        "current": -0.62,
+        "actual": 1.47,
+        "Formula": -0.574898,
+        "Formula_Fitted": 3.347454,
+        "delta_ara": 0.434545,
+        "delta_phase": 453.095598
+      },
+      {
+        "origin": "2023-05-01",
+        "target": "2024-05-01",
+        "current": 0.47,
+        "actual": 0.41,
+        "Formula": 0.53271,
+        "Formula_Fitted": -0.132959,
+        "delta_ara": 19.732701,
+        "delta_phase": 498.238835
+      },
+      {
+        "origin": "2023-08-01",
+        "target": "2024-08-01",
+        "current": 1.56,
+        "actual": 0.02,
+        "Formula": 1.404983,
+        "Formula_Fitted": -0.145205,
+        "delta_ara": 17.038844,
+        "delta_phase": 478.588191
+      },
+      {
+        "origin": "2023-11-01",
+        "target": "2024-11-01",
+        "current": 2.01,
+        "actual": -0.05,
+        "Formula": 1.520262,
+        "Formula_Fitted": -0.102581,
+        "delta_ara": 19.660036,
+        "delta_phase": 551.859672
+      },
+      {
+        "origin": "2024-02-01",
+        "target": "2025-02-01",
+        "current": 1.47,
+        "actual": -0.39,
+        "Formula": 1.241787,
+        "Formula_Fitted": -0.091925,
+        "delta_ara": 10.391674,
+        "delta_phase": 415.793394
+      },
+      {
+        "origin": "2024-05-01",
+        "target": "2025-05-01",
+        "current": 0.41,
+        "actual": -0.08,
+        "Formula": 0.501637,
+        "Formula_Fitted": 0.095359,
+        "delta_ara": -21.172929,
+        "delta_phase": 87.394841
+      },
+      {
+        "origin": "2024-08-01",
+        "target": "2025-08-01",
+        "current": 0.02,
+        "actual": -0.11,
+        "Formula": 0.276255,
+        "Formula_Fitted": 0.096919,
+        "delta_ara": -23.197307,
+        "delta_phase": 30.580089
+      },
+      {
+        "origin": "2024-11-01",
+        "target": "2025-11-01",
+        "current": -0.05,
+        "actual": -0.68,
+        "Formula": -0.275323,
+        "Formula_Fitted": 0.140201,
+        "delta_ara": -22.305535,
+        "delta_phase": 50.219836
+      }
+    ],
+    "18": [
+      {
+        "origin": "2001-02-01",
+        "target": "2002-08-01",
+        "current": -0.63,
+        "actual": 0.7,
+        "Formula": -0.587364,
+        "Formula_Fitted": 0.135464,
+        "delta_ara": -4.10849,
+        "delta_phase": 613.458657
+      },
+      {
+        "origin": "2001-05-01",
+        "target": "2002-11-01",
+        "current": -0.3,
+        "actual": 1.41,
+        "Formula": -0.382744,
+        "Formula_Fitted": -0.12899,
+        "delta_ara": 20.464462,
+        "delta_phase": 562.648374
+      },
+      {
+        "origin": "2001-08-01",
+        "target": "2003-02-01",
+        "current": -0.07,
+        "actual": 0.64,
+        "Formula": -0.28646,
+        "Formula_Fitted": -0.148105,
+        "delta_ara": 25.140267,
+        "delta_phase": 608.219096
+      },
+      {
+        "origin": "2001-11-01",
+        "target": "2003-05-01",
+        "current": -0.28,
+        "actual": -0.52,
+        "Formula": -0.389076,
+        "Formula_Fitted": 0.706187,
+        "delta_ara": 0.89764,
+        "delta_phase": 584.637519
+      },
+      {
+        "origin": "2002-02-01",
+        "target": "2003-08-01",
+        "current": 0.0,
+        "actual": 0.05,
+        "Formula": -0.278651,
+        "Formula_Fitted": 0.135393,
+        "delta_ara": -3.993989,
+        "delta_phase": 608.891924
+      },
+      {
+        "origin": "2002-05-01",
+        "target": "2003-11-01",
+        "current": 0.21,
+        "actual": 0.39,
+        "Formula": 0.364585,
+        "Formula_Fitted": -0.109481,
+        "delta_ara": 14.211156,
+        "delta_phase": 660.910055
+      },
+      {
+        "origin": "2002-08-01",
+        "target": "2004-02-01",
+        "current": 0.7,
+        "actual": 0.17,
+        "Formula": 0.610806,
+        "Formula_Fitted": -0.138199,
+        "delta_ara": 21.978241,
+        "delta_phase": 740.760669
+      },
+      {
+        "origin": "2002-11-01",
+        "target": "2004-05-01",
+        "current": 1.41,
+        "actual": 0.1,
+        "Formula": 1.232442,
+        "Formula_Fitted": -0.225495,
+        "delta_ara": 20.929697,
+        "delta_phase": 781.449852
+      },
+      {
+        "origin": "2003-02-01",
+        "target": "2004-08-01",
+        "current": 0.64,
+        "actual": 0.66,
+        "Formula": 0.583509,
+        "Formula_Fitted": -0.176904,
+        "delta_ara": 2.997352,
+        "delta_phase": 620.828589
+      },
+      {
+        "origin": "2003-05-01",
+        "target": "2004-11-01",
+        "current": -0.52,
+        "actual": 0.62,
+        "Formula": -0.540683,
+        "Formula_Fitted": 0.126171,
+        "delta_ara": -17.16427,
+        "delta_phase": 159.660821
+      },
+      {
+        "origin": "2003-08-01",
+        "target": "2005-02-01",
+        "current": 0.05,
+        "actual": 0.26,
+        "Formula": 0.286482,
+        "Formula_Fitted": 0.174132,
+        "delta_ara": -22.396165,
+        "delta_phase": 167.803057
+      },
+      {
+        "origin": "2003-11-01",
+        "target": "2005-05-01",
+        "current": 0.39,
+        "actual": 0.3,
+        "Formula": 0.406971,
+        "Formula_Fitted": -0.125996,
+        "delta_ara": 1.184435,
+        "delta_phase": 546.446575
+      },
+      {
+        "origin": "2004-02-01",
+        "target": "2005-08-01",
+        "current": 0.17,
+        "actual": -0.04,
+        "Formula": 0.332609,
+        "Formula_Fitted": 0.212603,
+        "delta_ara": -4.019581,
+        "delta_phase": 544.594721
+      },
+      {
+        "origin": "2004-05-01",
+        "target": "2005-11-01",
+        "current": 0.1,
+        "actual": -0.44,
+        "Formula": 0.29561,
+        "Formula_Fitted": 0.185259,
+        "delta_ara": -12.031452,
+        "delta_phase": 500.603732
+      },
+      {
+        "origin": "2004-08-01",
+        "target": "2006-02-01",
+        "current": 0.66,
+        "actual": -0.71,
+        "Formula": 0.603033,
+        "Formula_Fitted": -0.218331,
+        "delta_ara": 2.751386,
+        "delta_phase": 777.710629
+      },
+      {
+        "origin": "2004-11-01",
+        "target": "2006-05-01",
+        "current": 0.62,
+        "actual": -0.11,
+        "Formula": 0.587301,
+        "Formula_Fitted": -0.106603,
+        "delta_ara": 0.840149,
+        "delta_phase": 610.964297
+      },
+      {
+        "origin": "2005-02-01",
+        "target": "2006-08-01",
+        "current": 0.26,
+        "actual": 0.37,
+        "Formula": 0.362003,
+        "Formula_Fitted": -0.161375,
+        "delta_ara": 3.876683,
+        "delta_phase": 391.149796
+      },
+      {
+        "origin": "2005-05-01",
+        "target": "2006-11-01",
+        "current": 0.3,
+        "actual": 0.98,
+        "Formula": 0.39205,
+        "Formula_Fitted": 0.109838,
+        "delta_ara": -1.642544,
+        "delta_phase": 347.979867
+      },
+      {
+        "origin": "2005-08-01",
+        "target": "2007-02-01",
+        "current": -0.04,
+        "actual": 0.12,
+        "Formula": -0.266775,
+        "Formula_Fitted": 0.150242,
+        "delta_ara": -1.008748,
+        "delta_phase": 266.530738
+      },
+      {
+        "origin": "2005-11-01",
+        "target": "2007-05-01",
+        "current": -0.44,
+        "actual": -0.39,
+        "Formula": -0.512333,
+        "Formula_Fitted": 0.212241,
+        "delta_ara": -27.804285,
+        "delta_phase": 181.263354
+      },
+      {
+        "origin": "2006-02-01",
+        "target": "2007-08-01",
+        "current": -0.71,
+        "actual": -0.57,
+        "Formula": -0.630963,
+        "Formula_Fitted": 0.175751,
+        "delta_ara": -6.485495,
+        "delta_phase": 239.021618
+      },
+      {
+        "origin": "2006-05-01",
+        "target": "2007-11-01",
+        "current": -0.11,
+        "actual": -1.58,
+        "Formula": -0.302917,
+        "Formula_Fitted": -0.146797,
+        "delta_ara": 12.226935,
+        "delta_phase": 497.801649
+      },
+      {
+        "origin": "2006-08-01",
+        "target": "2008-02-01",
+        "current": 0.37,
+        "actual": -1.7,
+        "Formula": 0.402119,
+        "Formula_Fitted": -0.092865,
+        "delta_ara": 21.488435,
+        "delta_phase": 663.105874
+      },
+      {
+        "origin": "2006-11-01",
+        "target": "2008-05-01",
+        "current": 0.98,
+        "actual": -0.64,
+        "Formula": 1.04417,
+        "Formula_Fitted": -0.115006,
+        "delta_ara": 26.195534,
+        "delta_phase": 787.597246
+      },
+      {
+        "origin": "2007-02-01",
+        "target": "2008-08-01",
+        "current": 0.12,
+        "actual": -0.04,
+        "Formula": 0.311992,
+        "Formula_Fitted": -1.083303,
+        "delta_ara": -0.351984,
+        "delta_phase": 566.310239
+      },
+      {
+        "origin": "2007-05-01",
+        "target": "2008-11-01",
+        "current": -0.39,
+        "actual": -0.37,
+        "Formula": -0.487354,
+        "Formula_Fitted": 0.138488,
+        "delta_ara": -29.209346,
+        "delta_phase": 261.168741
+      },
+      {
+        "origin": "2007-08-01",
+        "target": "2009-02-01",
+        "current": -0.57,
+        "actual": -0.71,
+        "Formula": -0.55157,
+        "Formula_Fitted": 0.202028,
+        "delta_ara": -26.538996,
+        "delta_phase": 369.717121
+      },
+      {
+        "origin": "2007-11-01",
+        "target": "2009-05-01",
+        "current": -1.58,
+        "actual": 0.17,
+        "Formula": -1.424879,
+        "Formula_Fitted": 0.150258,
+        "delta_ara": -21.94145,
+        "delta_phase": 248.315591
+      },
+      {
+        "origin": "2008-02-01",
+        "target": "2009-08-01",
+        "current": -1.7,
+        "actual": 0.62,
+        "Formula": -1.469786,
+        "Formula_Fitted": 0.20559,
+        "delta_ara": -26.425757,
+        "delta_phase": 244.816021
+      },
+      {
+        "origin": "2008-05-01",
+        "target": "2009-11-01",
+        "current": -0.64,
+        "actual": 1.49,
+        "Formula": -0.61412,
+        "Formula_Fitted": -0.08988,
+        "delta_ara": 19.577147,
+        "delta_phase": 704.590159
+      },
+      {
+        "origin": "2008-08-01",
+        "target": "2010-02-01",
+        "current": -0.04,
+        "actual": 1.18,
+        "Formula": -0.280371,
+        "Formula_Fitted": -0.173919,
+        "delta_ara": 25.420487,
+        "delta_phase": 832.477886
+      },
+      {
+        "origin": "2008-11-01",
+        "target": "2010-05-01",
+        "current": -0.37,
+        "actual": -0.15,
+        "Formula": -0.408702,
+        "Formula_Fitted": -0.208746,
+        "delta_ara": 3.559179,
+        "delta_phase": 701.552212
+      },
+      {
+        "origin": "2009-02-01",
+        "target": "2010-08-01",
+        "current": -0.71,
+        "actual": -1.33,
+        "Formula": -0.625259,
+        "Formula_Fitted": 0.215744,
+        "delta_ara": -18.372707,
+        "delta_phase": 444.849871
+      },
+      {
+        "origin": "2009-05-01",
+        "target": "2010-11-01",
+        "current": 0.17,
+        "actual": -1.57,
+        "Formula": 0.342835,
+        "Formula_Fitted": -0.112806,
+        "delta_ara": 21.875438,
+        "delta_phase": 670.188893
+      },
+      {
+        "origin": "2009-08-01",
+        "target": "2011-02-01",
+        "current": 0.62,
+        "actual": -1.26,
+        "Formula": 0.608737,
+        "Formula_Fitted": -0.224876,
+        "delta_ara": 38.690101,
+        "delta_phase": 880.990772
+      },
+      {
+        "origin": "2009-11-01",
+        "target": "2011-05-01",
+        "current": 1.49,
+        "actual": -0.53,
+        "Formula": 1.264776,
+        "Formula_Fitted": -0.160333,
+        "delta_ara": 27.555884,
+        "delta_phase": 784.341241
+      },
+      {
+        "origin": "2010-02-01",
+        "target": "2011-08-01",
+        "current": 1.18,
+        "actual": -0.66,
+        "Formula": 1.179677,
+        "Formula_Fitted": -0.214856,
+        "delta_ara": 18.455363,
+        "delta_phase": 665.740284
+      },
+      {
+        "origin": "2010-05-01",
+        "target": "2011-11-01",
+        "current": -0.15,
+        "actual": -1.09,
+        "Formula": -0.35349,
+        "Formula_Fitted": 0.17494,
+        "delta_ara": -28.445939,
+        "delta_phase": 323.583394
+      },
+      {
+        "origin": "2010-08-01",
+        "target": "2012-02-01",
+        "current": -1.33,
+        "actual": -0.61,
+        "Formula": -1.216065,
+        "Formula_Fitted": 0.148759,
+        "delta_ara": -30.669939,
+        "delta_phase": 200.787572
+      },
+      {
+        "origin": "2010-11-01",
+        "target": "2012-05-01",
+        "current": -1.57,
+        "actual": -0.18,
+        "Formula": -1.410953,
+        "Formula_Fitted": 0.14538,
+        "delta_ara": -14.743749,
+        "delta_phase": 242.838383
+      },
+      {
+        "origin": "2011-02-01",
+        "target": "2012-08-01",
+        "current": -1.26,
+        "actual": 0.66,
+        "Formula": -1.18174,
+        "Formula_Fitted": 0.141212,
+        "delta_ara": -9.419569,
+        "delta_phase": 503.994121
+      },
+      {
+        "origin": "2011-05-01",
+        "target": "2012-11-01",
+        "current": -0.53,
+        "actual": 0.33,
+        "Formula": -0.532227,
+        "Formula_Fitted": -0.169703,
+        "delta_ara": 43.185011,
+        "delta_phase": 942.137237
+      },
+      {
+        "origin": "2011-08-01",
+        "target": "2013-02-01",
+        "current": -0.66,
+        "actual": -0.4,
+        "Formula": -0.610176,
+        "Formula_Fitted": -0.170779,
+        "delta_ara": 22.86537,
+        "delta_phase": 714.061613
+      },
+      {
+        "origin": "2011-11-01",
+        "target": "2013-05-01",
+        "current": -1.09,
+        "actual": -0.28,
+        "Formula": -1.102944,
+        "Formula_Fitted": 0.094334,
+        "delta_ara": -0.670762,
+        "delta_phase": 336.387564
+      },
+      {
+        "origin": "2012-02-01",
+        "target": "2013-08-01",
+        "current": -0.61,
+        "actual": -0.29,
+        "Formula": -0.561219,
+        "Formula_Fitted": 0.164159,
+        "delta_ara": -2.505148,
+        "delta_phase": 273.165953
+      },
+      {
+        "origin": "2012-05-01",
+        "target": "2013-11-01",
+        "current": -0.18,
+        "actual": -0.02,
+        "Formula": -0.322759,
+        "Formula_Fitted": -0.150081,
+        "delta_ara": 16.208854,
+        "delta_phase": 691.648125
+      },
+      {
+        "origin": "2012-08-01",
+        "target": "2014-02-01",
+        "current": 0.66,
+        "actual": -0.45,
+        "Formula": 0.618206,
+        "Formula_Fitted": -0.173912,
+        "delta_ara": 22.775823,
+        "delta_phase": 734.81791
+      },
+      {
+        "origin": "2012-11-01",
+        "target": "2014-05-01",
+        "current": 0.33,
+        "actual": 0.45,
+        "Formula": 0.37727,
+        "Formula_Fitted": -0.162833,
+        "delta_ara": 1.736919,
+        "delta_phase": 725.139127
+      },
+      {
+        "origin": "2013-02-01",
+        "target": "2014-08-01",
+        "current": -0.4,
+        "actual": 0.14,
+        "Formula": -0.400074,
+        "Formula_Fitted": 0.082716,
+        "delta_ara": -2.009017,
+        "delta_phase": 289.635017
+      },
+      {
+        "origin": "2013-05-01",
+        "target": "2014-11-01",
+        "current": -0.28,
+        "actual": 0.89,
+        "Formula": -0.383187,
+        "Formula_Fitted": 0.192492,
+        "delta_ara": -7.974081,
+        "delta_phase": 437.975491
+      },
+      {
+        "origin": "2013-08-01",
+        "target": "2015-02-01",
+        "current": -0.29,
+        "actual": 0.57,
+        "Formula": -0.399527,
+        "Formula_Fitted": 3.663993,
+        "delta_ara": 0.195192,
+        "delta_phase": 541.472888
+      },
+      {
+        "origin": "2013-11-01",
+        "target": "2015-05-01",
+        "current": -0.02,
+        "actual": 1.04,
+        "Formula": -0.276953,
+        "Formula_Fitted": 2.662524,
+        "delta_ara": 0.079768,
+        "delta_phase": 581.620626
+      },
+      {
+        "origin": "2014-02-01",
+        "target": "2015-08-01",
+        "current": -0.45,
+        "actual": 1.87,
+        "Formula": -0.520601,
+        "Formula_Fitted": 0.566765,
+        "delta_ara": 1.018837,
+        "delta_phase": 363.386134
+      },
+      {
+        "origin": "2014-05-01",
+        "target": "2015-11-01",
+        "current": 0.45,
+        "actual": 2.57,
+        "Formula": 0.518514,
+        "Formula_Fitted": -0.173901,
+        "delta_ara": 3.261832,
+        "delta_phase": 731.466254
+      },
+      {
+        "origin": "2014-08-01",
+        "target": "2016-02-01",
+        "current": 0.14,
+        "actual": 2.11,
+        "Formula": 0.309184,
+        "Formula_Fitted": -0.157644,
+        "delta_ara": 23.573137,
+        "delta_phase": 696.348233
+      },
+      {
+        "origin": "2014-11-01",
+        "target": "2016-05-01",
+        "current": 0.89,
+        "actual": 0.45,
+        "Formula": 1.055875,
+        "Formula_Fitted": -0.194155,
+        "delta_ara": 23.361746,
+        "delta_phase": 723.019313
+      },
+      {
+        "origin": "2015-02-01",
+        "target": "2016-08-01",
+        "current": 0.57,
+        "actual": -0.48,
+        "Formula": 0.548452,
+        "Formula_Fitted": -0.204127,
+        "delta_ara": 2.263259,
+        "delta_phase": 700.583165
+      },
+      {
+        "origin": "2015-05-01",
+        "target": "2016-11-01",
+        "current": 1.04,
+        "actual": -0.63,
+        "Formula": 1.096593,
+        "Formula_Fitted": -0.135417,
+        "delta_ara": 2.281793,
+        "delta_phase": 592.443
+      },
+      {
+        "origin": "2015-08-01",
+        "target": "2017-02-01",
+        "current": 1.87,
+        "actual": -0.01,
+        "Formula": 1.523136,
+        "Formula_Fitted": -0.117858,
+        "delta_ara": 14.250689,
+        "delta_phase": 692.248902
+      },
+      {
+        "origin": "2015-11-01",
+        "target": "2017-05-01",
+        "current": 2.57,
+        "actual": 0.3,
+        "Formula": 1.630739,
+        "Formula_Fitted": -0.129223,
+        "delta_ara": 15.546605,
+        "delta_phase": 737.395244
+      },
+      {
+        "origin": "2016-02-01",
+        "target": "2017-08-01",
+        "current": 2.11,
+        "actual": -0.18,
+        "Formula": 1.609959,
+        "Formula_Fitted": -0.179309,
+        "delta_ara": 11.68195,
+        "delta_phase": 627.16054
+      },
+      {
+        "origin": "2016-05-01",
+        "target": "2017-11-01",
+        "current": 0.45,
+        "actual": -0.84,
+        "Formula": 0.520822,
+        "Formula_Fitted": 0.226304,
+        "delta_ara": -25.003997,
+        "delta_phase": 396.644656
+      },
+      {
+        "origin": "2016-08-01",
+        "target": "2018-02-01",
+        "current": -0.48,
+        "actual": -0.73,
+        "Formula": -0.548757,
+        "Formula_Fitted": 0.223357,
+        "delta_ara": -39.655166,
+        "delta_phase": 160.075526
+      },
+      {
+        "origin": "2016-11-01",
+        "target": "2018-05-01",
+        "current": -0.63,
+        "actual": -0.12,
+        "Formula": -0.587694,
+        "Formula_Fitted": 0.167803,
+        "delta_ara": -26.992854,
+        "delta_phase": 218.870876
+      },
+      {
+        "origin": "2017-02-01",
+        "target": "2018-08-01",
+        "current": -0.01,
+        "actual": 0.05,
+        "Formula": 0.273008,
+        "Formula_Fitted": -0.161561,
+        "delta_ara": 2.276702,
+        "delta_phase": 455.52545
+      },
+      {
+        "origin": "2017-05-01",
+        "target": "2018-11-01",
+        "current": 0.3,
+        "actual": 1.0,
+        "Formula": 0.381462,
+        "Formula_Fitted": -0.119881,
+        "delta_ara": 4.891662,
+        "delta_phase": 745.259158
+      },
+      {
+        "origin": "2017-08-01",
+        "target": "2019-02-01",
+        "current": -0.18,
+        "actual": 0.62,
+        "Formula": -0.327427,
+        "Formula_Fitted": -0.230817,
+        "delta_ara": 2.3781,
+        "delta_phase": 607.243152
+      },
+      {
+        "origin": "2017-11-01",
+        "target": "2019-05-01",
+        "current": -0.84,
+        "actual": 0.61,
+        "Formula": -1.026302,
+        "Formula_Fitted": 0.212626,
+        "delta_ara": -41.870361,
+        "delta_phase": 124.513687
+      },
+      {
+        "origin": "2018-02-01",
+        "target": "2019-08-01",
+        "current": -0.73,
+        "actual": 0.19,
+        "Formula": -0.638976,
+        "Formula_Fitted": 0.10769,
+        "delta_ara": -1.063036,
+        "delta_phase": 244.933287
+      },
+      {
+        "origin": "2018-05-01",
+        "target": "2019-11-01",
+        "current": -0.12,
+        "actual": 0.74,
+        "Formula": -0.313953,
+        "Formula_Fitted": -0.165185,
+        "delta_ara": 9.007895,
+        "delta_phase": 622.080166
+      },
+      {
+        "origin": "2018-08-01",
+        "target": "2020-02-01",
+        "current": 0.05,
+        "actual": 0.48,
+        "Formula": 0.278085,
+        "Formula_Fitted": -0.113134,
+        "delta_ara": 41.17857,
+        "delta_phase": 854.9942
+      },
+      {
+        "origin": "2018-11-01",
+        "target": "2020-05-01",
+        "current": 1.0,
+        "actual": -0.12,
+        "Formula": 1.082865,
+        "Formula_Fitted": -0.222153,
+        "delta_ara": 25.129787,
+        "delta_phase": 840.63057
+      },
+      {
+        "origin": "2019-02-01",
+        "target": "2020-08-01",
+        "current": 0.62,
+        "actual": -0.42,
+        "Formula": 0.609666,
+        "Formula_Fitted": -0.138746,
+        "delta_ara": 13.160868,
+        "delta_phase": 529.194974
+      },
+      {
+        "origin": "2019-05-01",
+        "target": "2020-11-01",
+        "current": 0.61,
+        "actual": -1.01,
+        "Formula": 0.597925,
+        "Formula_Fitted": 2.183295,
+        "delta_ara": -0.314838,
+        "delta_phase": 362.501148
+      },
+      {
+        "origin": "2019-08-01",
+        "target": "2021-02-01",
+        "current": 0.19,
+        "actual": -0.94,
+        "Formula": 0.321617,
+        "Formula_Fitted": 2.055126,
+        "delta_ara": 0.443953,
+        "delta_phase": 317.983728
+      },
+      {
+        "origin": "2019-11-01",
+        "target": "2021-05-01",
+        "current": 0.74,
+        "actual": -0.41,
+        "Formula": 0.61548,
+        "Formula_Fitted": -0.120726,
+        "delta_ara": 3.821256,
+        "delta_phase": 358.018434
+      },
+      {
+        "origin": "2020-02-01",
+        "target": "2021-08-01",
+        "current": 0.48,
+        "actual": -0.38,
+        "Formula": 0.508098,
+        "Formula_Fitted": 0.208927,
+        "delta_ara": -3.111708,
+        "delta_phase": 390.406042
+      },
+      {
+        "origin": "2020-05-01",
+        "target": "2021-11-01",
+        "current": -0.12,
+        "actual": -0.88,
+        "Formula": -0.320241,
+        "Formula_Fitted": 0.149321,
+        "delta_ara": -17.503081,
+        "delta_phase": 370.680789
+      },
+      {
+        "origin": "2020-08-01",
+        "target": "2022-02-01",
+        "current": -0.42,
+        "actual": -0.68,
+        "Formula": -0.516323,
+        "Formula_Fitted": 0.151217,
+        "delta_ara": -29.221733,
+        "delta_phase": 237.753894
+      },
+      {
+        "origin": "2020-11-01",
+        "target": "2022-05-01",
+        "current": -1.01,
+        "actual": -1.02,
+        "Formula": -1.069815,
+        "Formula_Fitted": 0.140395,
+        "delta_ara": -18.626196,
+        "delta_phase": 246.462998
+      },
+      {
+        "origin": "2021-02-01",
+        "target": "2022-08-01",
+        "current": -0.94,
+        "actual": -0.96,
+        "Formula": -1.079949,
+        "Formula_Fitted": 0.175741,
+        "delta_ara": -19.89332,
+        "delta_phase": 334.048783
+      },
+      {
+        "origin": "2021-05-01",
+        "target": "2022-11-01",
+        "current": -0.41,
+        "actual": -0.76,
+        "Formula": -0.498283,
+        "Formula_Fitted": -0.143348,
+        "delta_ara": 2.56399,
+        "delta_phase": 648.889009
+      },
+      {
+        "origin": "2021-08-01",
+        "target": "2023-02-01",
+        "current": -0.38,
+        "actual": -0.62,
+        "Formula": -0.487285,
+        "Formula_Fitted": -0.149023,
+        "delta_ara": 24.498628,
+        "delta_phase": 696.377345
+      },
+      {
+        "origin": "2021-11-01",
+        "target": "2023-05-01",
+        "current": -0.88,
+        "actual": 0.47,
+        "Formula": -1.041107,
+        "Formula_Fitted": 0.210146,
+        "delta_ara": -9.872431,
+        "delta_phase": 375.738787
+      },
+      {
+        "origin": "2022-02-01",
+        "target": "2023-08-01",
+        "current": -0.68,
+        "actual": 1.56,
+        "Formula": -0.604571,
+        "Formula_Fitted": 0.180395,
+        "delta_ara": -0.60849,
+        "delta_phase": 331.879743
+      },
+      {
+        "origin": "2022-05-01",
+        "target": "2023-11-01",
+        "current": -1.02,
+        "actual": 2.01,
+        "Formula": -1.094679,
+        "Formula_Fitted": 0.163533,
+        "delta_ara": -4.477427,
+        "delta_phase": 559.978296
+      },
+      {
+        "origin": "2022-08-01",
+        "target": "2024-02-01",
+        "current": -0.96,
+        "actual": 1.47,
+        "Formula": -1.06375,
+        "Formula_Fitted": 0.108095,
+        "delta_ara": -3.969086,
+        "delta_phase": 506.293962
+      },
+      {
+        "origin": "2022-11-01",
+        "target": "2024-05-01",
+        "current": -0.76,
+        "actual": 0.41,
+        "Formula": -0.617744,
+        "Formula_Fitted": -0.141567,
+        "delta_ara": 12.737336,
+        "delta_phase": 468.574707
+      },
+      {
+        "origin": "2023-02-01",
+        "target": "2024-08-01",
+        "current": -0.62,
+        "actual": 0.02,
+        "Formula": -0.577868,
+        "Formula_Fitted": 1.409585,
+        "delta_ara": 0.532207,
+        "delta_phase": 646.172257
+      },
+      {
+        "origin": "2023-05-01",
+        "target": "2024-11-01",
+        "current": 0.47,
+        "actual": -0.05,
+        "Formula": 0.537369,
+        "Formula_Fitted": -0.146118,
+        "delta_ara": 24.167524,
+        "delta_phase": 701.461205
+      },
+      {
+        "origin": "2023-08-01",
+        "target": "2025-02-01",
+        "current": 1.56,
+        "actual": -0.39,
+        "Formula": 1.402738,
+        "Formula_Fitted": -0.126301,
+        "delta_ara": 20.868237,
+        "delta_phase": 677.39418
+      },
+      {
+        "origin": "2023-11-01",
+        "target": "2025-05-01",
+        "current": 2.01,
+        "actual": -0.08,
+        "Formula": 1.522808,
+        "Formula_Fitted": -0.130259,
+        "delta_ara": 24.078529,
+        "delta_phase": 767.133051
+      },
+      {
+        "origin": "2024-02-01",
+        "target": "2025-08-01",
+        "current": 1.47,
+        "actual": -0.11,
+        "Formula": 1.246466,
+        "Formula_Fitted": -0.17739,
+        "delta_ara": 12.727149,
+        "delta_phase": 600.486575
+      },
+      {
+        "origin": "2024-05-01",
+        "target": "2025-11-01",
+        "current": 0.41,
+        "actual": -0.68,
+        "Formula": 0.503986,
+        "Formula_Fitted": 0.124642,
+        "delta_ara": -25.931436,
+        "delta_phase": 198.282131
+      }
+    ],
+    "24": [
+      {
+        "origin": "2001-02-01",
+        "target": "2003-02-01",
+        "current": -0.63,
+        "actual": 0.64,
+        "Formula": -0.618662,
+        "Formula_Fitted": 0.224676,
+        "delta_ara": -4.744076,
+        "delta_phase": 797.184906
+      },
+      {
+        "origin": "2001-05-01",
+        "target": "2003-05-01",
+        "current": -0.3,
+        "actual": -0.52,
+        "Formula": -0.378619,
+        "Formula_Fitted": -0.210593,
+        "delta_ara": 23.630325,
+        "delta_phase": 738.514245
+      },
+      {
+        "origin": "2001-08-01",
+        "target": "2003-08-01",
+        "current": -0.07,
+        "actual": 0.05,
+        "Formula": -0.284493,
+        "Formula_Fitted": -0.152846,
+        "delta_ara": 29.029479,
+        "delta_phase": 791.134783
+      },
+      {
+        "origin": "2001-11-01",
+        "target": "2003-11-01",
+        "current": -0.28,
+        "actual": 0.39,
+        "Formula": -0.38765,
+        "Formula_Fitted": 0.492402,
+        "delta_ara": 1.036505,
+        "delta_phase": 763.905123
+      },
+      {
+        "origin": "2002-02-01",
+        "target": "2004-02-01",
+        "current": 0.0,
+        "actual": 0.17,
+        "Formula": -0.277958,
+        "Formula_Fitted": 0.128768,
+        "delta_ara": -4.611861,
+        "delta_phase": 791.911698
+      },
+      {
+        "origin": "2002-05-01",
+        "target": "2004-05-01",
+        "current": 0.21,
+        "actual": 0.1,
+        "Formula": 0.364339,
+        "Formula_Fitted": -0.106159,
+        "delta_ara": 16.409629,
+        "delta_phase": 851.977062
+      },
+      {
+        "origin": "2002-08-01",
+        "target": "2004-08-01",
+        "current": 0.7,
+        "actual": 0.66,
+        "Formula": 0.609112,
+        "Formula_Fitted": -0.154972,
+        "delta_ara": 25.378286,
+        "delta_phase": 944.180608
+      },
+      {
+        "origin": "2002-11-01",
+        "target": "2004-11-01",
+        "current": 1.41,
+        "actual": 0.62,
+        "Formula": 1.242029,
+        "Formula_Fitted": -0.151446,
+        "delta_ara": 24.167532,
+        "delta_phase": 991.16443
+      },
+      {
+        "origin": "2003-02-01",
+        "target": "2005-02-01",
+        "current": 0.64,
+        "actual": 0.26,
+        "Formula": 0.586012,
+        "Formula_Fitted": -0.108956,
+        "delta_ara": 3.461044,
+        "delta_phase": 805.694971
+      },
+      {
+        "origin": "2003-05-01",
+        "target": "2005-05-01",
+        "current": -0.52,
+        "actual": 0.3,
+        "Formula": -0.537786,
+        "Formula_Fitted": 0.107575,
+        "delta_ara": -19.819592,
+        "delta_phase": 273.184301
+      },
+      {
+        "origin": "2003-08-01",
+        "target": "2005-08-01",
+        "current": 0.05,
+        "actual": -0.04,
+        "Formula": 0.280881,
+        "Formula_Fitted": 0.132465,
+        "delta_ara": -25.860864,
+        "delta_phase": 282.586146
+      },
+      {
+        "origin": "2003-11-01",
+        "target": "2005-11-01",
+        "current": 0.39,
+        "actual": -0.44,
+        "Formula": 0.40686,
+        "Formula_Fitted": -0.161606,
+        "delta_ara": 1.367668,
+        "delta_phase": 719.80602
+      },
+      {
+        "origin": "2004-02-01",
+        "target": "2006-02-01",
+        "current": 0.17,
+        "actual": -0.71,
+        "Formula": 0.328563,
+        "Formula_Fitted": 0.133471,
+        "delta_ara": -4.641412,
+        "delta_phase": 717.667683
+      },
+      {
+        "origin": "2004-05-01",
+        "target": "2006-05-01",
+        "current": 0.1,
+        "actual": -0.11,
+        "Formula": 0.319187,
+        "Formula_Fitted": 0.230964,
+        "delta_ara": -13.892724,
+        "delta_phase": 666.871264
+      },
+      {
+        "origin": "2004-08-01",
+        "target": "2006-08-01",
+        "current": 0.66,
+        "actual": 0.37,
+        "Formula": 0.607772,
+        "Formula_Fitted": -0.133831,
+        "delta_ara": 3.177027,
+        "delta_phase": 986.846747
+      },
+      {
+        "origin": "2004-11-01",
+        "target": "2006-11-01",
+        "current": 0.62,
+        "actual": 0.98,
+        "Formula": 0.585782,
+        "Formula_Fitted": -0.167442,
+        "delta_ara": 0.97012,
+        "delta_phase": 794.304668
+      },
+      {
+        "origin": "2005-02-01",
+        "target": "2007-02-01",
+        "current": 0.26,
+        "actual": 0.12,
+        "Formula": 0.354218,
+        "Formula_Fitted": -0.217991,
+        "delta_ara": 4.476407,
+        "delta_phase": 540.484745
+      },
+      {
+        "origin": "2005-05-01",
+        "target": "2007-05-01",
+        "current": 0.3,
+        "actual": -0.39,
+        "Formula": 0.388643,
+        "Formula_Fitted": 0.175333,
+        "delta_ara": -1.896646,
+        "delta_phase": 490.636405
+      },
+      {
+        "origin": "2005-08-01",
+        "target": "2007-08-01",
+        "current": -0.04,
+        "actual": -0.57,
+        "Formula": -0.266817,
+        "Formula_Fitted": 0.192104,
+        "delta_ara": -1.164802,
+        "delta_phase": 396.587052
+      },
+      {
+        "origin": "2005-11-01",
+        "target": "2007-11-01",
+        "current": -0.44,
+        "actual": -1.58,
+        "Formula": -0.497877,
+        "Formula_Fitted": 0.180831,
+        "delta_ara": -32.105623,
+        "delta_phase": 298.128758
+      },
+      {
+        "origin": "2006-02-01",
+        "target": "2008-02-01",
+        "current": -0.71,
+        "actual": -1.7,
+        "Formula": -0.638947,
+        "Formula_Fitted": 0.138308,
+        "delta_ara": -7.488805,
+        "delta_phase": 364.822256
+      },
+      {
+        "origin": "2006-05-01",
+        "target": "2008-05-01",
+        "current": -0.11,
+        "actual": -0.64,
+        "Formula": -0.306878,
+        "Formula_Fitted": -0.093791,
+        "delta_ara": 14.118449,
+        "delta_phase": 663.635697
+      },
+      {
+        "origin": "2006-08-01",
+        "target": "2008-08-01",
+        "current": 0.37,
+        "actual": -0.04,
+        "Formula": 0.403448,
+        "Formula_Fitted": -0.095706,
+        "delta_ara": 24.812708,
+        "delta_phase": 854.512574
+      },
+      {
+        "origin": "2006-11-01",
+        "target": "2008-11-01",
+        "current": 0.98,
+        "actual": -0.37,
+        "Formula": 1.043658,
+        "Formula_Fitted": -0.215762,
+        "delta_ara": 30.247997,
+        "delta_phase": 998.262829
+      },
+      {
+        "origin": "2007-02-01",
+        "target": "2009-02-01",
+        "current": 0.12,
+        "actual": -0.71,
+        "Formula": 0.310284,
+        "Formula_Fitted": -0.670636,
+        "delta_ara": -0.406437,
+        "delta_phase": 742.742604
+      },
+      {
+        "origin": "2007-05-01",
+        "target": "2009-05-01",
+        "current": -0.39,
+        "actual": 0.17,
+        "Formula": -0.488155,
+        "Formula_Fitted": 0.087247,
+        "delta_ara": -33.728047,
+        "delta_phase": 390.395551
+      },
+      {
+        "origin": "2007-08-01",
+        "target": "2009-08-01",
+        "current": -0.57,
+        "actual": 0.62,
+        "Formula": -0.584524,
+        "Formula_Fitted": 0.206272,
+        "delta_ara": -30.644593,
+        "delta_phase": 515.736424
+      },
+      {
+        "origin": "2007-11-01",
+        "target": "2009-11-01",
+        "current": -1.58,
+        "actual": 1.49,
+        "Formula": -1.431069,
+        "Formula_Fitted": 0.135084,
+        "delta_ara": -25.335805,
+        "delta_phase": 375.554012
+      },
+      {
+        "origin": "2008-02-01",
+        "target": "2010-02-01",
+        "current": -1.7,
+        "actual": 1.18,
+        "Formula": -1.478638,
+        "Formula_Fitted": 0.151604,
+        "delta_ara": -30.513835,
+        "delta_phase": 371.513057
+      },
+      {
+        "origin": "2008-05-01",
+        "target": "2010-05-01",
+        "current": -0.64,
+        "actual": -0.15,
+        "Formula": -0.591141,
+        "Formula_Fitted": -0.161158,
+        "delta_ara": 22.605742,
+        "delta_phase": 902.414501
+      },
+      {
+        "origin": "2008-08-01",
+        "target": "2010-08-01",
+        "current": -0.04,
+        "actual": -1.33,
+        "Formula": -0.283745,
+        "Formula_Fitted": -0.195975,
+        "delta_ara": 29.35305,
+        "delta_phase": 1050.086528
+      },
+      {
+        "origin": "2008-11-01",
+        "target": "2010-11-01",
+        "current": -0.37,
+        "actual": -1.57,
+        "Formula": -0.40051,
+        "Formula_Fitted": -0.163082,
+        "delta_ara": 4.109785,
+        "delta_phase": 898.906582
+      },
+      {
+        "origin": "2009-02-01",
+        "target": "2011-02-01",
+        "current": -0.71,
+        "actual": -1.26,
+        "Formula": -0.628491,
+        "Formula_Fitted": 0.213119,
+        "delta_ara": -21.214974,
+        "delta_phase": 602.492251
+      },
+      {
+        "origin": "2009-05-01",
+        "target": "2011-05-01",
+        "current": 0.17,
+        "actual": -0.53,
+        "Formula": 0.34723,
+        "Formula_Fitted": -0.13558,
+        "delta_ara": 25.25958,
+        "delta_phase": 862.691341
+      },
+      {
+        "origin": "2009-08-01",
+        "target": "2011-08-01",
+        "current": 0.62,
+        "actual": -0.66,
+        "Formula": 0.610868,
+        "Formula_Fitted": -0.226974,
+        "delta_ara": 44.67548,
+        "delta_phase": 1106.104384
+      },
+      {
+        "origin": "2009-11-01",
+        "target": "2011-11-01",
+        "current": 1.49,
+        "actual": -1.09,
+        "Formula": 1.210852,
+        "Formula_Fitted": -0.095052,
+        "delta_ara": 31.818794,
+        "delta_phase": 994.503119
+      },
+      {
+        "origin": "2010-02-01",
+        "target": "2012-02-01",
+        "current": 1.18,
+        "actual": -0.61,
+        "Formula": 1.182308,
+        "Formula_Fitted": -0.225267,
+        "delta_ara": 21.310417,
+        "delta_phase": 857.55453
+      },
+      {
+        "origin": "2010-05-01",
+        "target": "2012-05-01",
+        "current": -0.15,
+        "actual": -0.18,
+        "Formula": -0.356422,
+        "Formula_Fitted": 0.104204,
+        "delta_ara": -32.846541,
+        "delta_phase": 462.465784
+      },
+      {
+        "origin": "2010-08-01",
+        "target": "2012-08-01",
+        "current": -1.33,
+        "actual": 0.66,
+        "Formula": -1.229124,
+        "Formula_Fitted": 0.170832,
+        "delta_ara": -35.414595,
+        "delta_phase": 320.673383
+      },
+      {
+        "origin": "2010-11-01",
+        "target": "2012-11-01",
+        "current": -1.57,
+        "actual": 0.33,
+        "Formula": -1.418626,
+        "Formula_Fitted": 0.145648,
+        "delta_ara": -17.024614,
+        "delta_phase": 369.229477
+      },
+      {
+        "origin": "2011-02-01",
+        "target": "2013-02-01",
+        "current": -1.26,
+        "actual": -0.4,
+        "Formula": -1.189796,
+        "Formula_Fitted": 0.176974,
+        "delta_ara": -10.876782,
+        "delta_phase": 670.786148
+      },
+      {
+        "origin": "2011-05-01",
+        "target": "2013-05-01",
+        "current": -0.53,
+        "actual": -0.28,
+        "Formula": -0.535924,
+        "Formula_Fitted": -0.139094,
+        "delta_ara": 49.865756,
+        "delta_phase": 1176.710241
+      },
+      {
+        "origin": "2011-08-01",
+        "target": "2013-08-01",
+        "current": -0.66,
+        "actual": -0.29,
+        "Formula": -0.581996,
+        "Formula_Fitted": -0.112276,
+        "delta_ara": 26.402655,
+        "delta_phase": 913.351194
+      },
+      {
+        "origin": "2011-11-01",
+        "target": "2013-11-01",
+        "current": -1.09,
+        "actual": -0.02,
+        "Formula": -1.104232,
+        "Formula_Fitted": 0.143972,
+        "delta_ara": -0.77453,
+        "delta_phase": 477.250766
+      },
+      {
+        "origin": "2012-02-01",
+        "target": "2014-02-01",
+        "current": -0.61,
+        "actual": -0.45,
+        "Formula": -0.56027,
+        "Formula_Fitted": 0.079115,
+        "delta_ara": -2.892695,
+        "delta_phase": 404.248738
+      },
+      {
+        "origin": "2012-05-01",
+        "target": "2014-05-01",
+        "current": -0.18,
+        "actual": 0.45,
+        "Formula": -0.319785,
+        "Formula_Fitted": -0.234035,
+        "delta_ara": 18.716373,
+        "delta_phase": 887.470327
+      },
+      {
+        "origin": "2012-08-01",
+        "target": "2014-08-01",
+        "current": 0.66,
+        "actual": 0.14,
+        "Formula": 0.616559,
+        "Formula_Fitted": -0.173923,
+        "delta_ara": 26.299255,
+        "delta_phase": 937.318502
+      },
+      {
+        "origin": "2012-11-01",
+        "target": "2014-11-01",
+        "current": 0.33,
+        "actual": 0.89,
+        "Formula": 0.379071,
+        "Formula_Fitted": -0.135533,
+        "delta_ara": 2.005621,
+        "delta_phase": 926.142406
+      },
+      {
+        "origin": "2013-02-01",
+        "target": "2015-02-01",
+        "current": -0.4,
+        "actual": 0.57,
+        "Formula": -0.40166,
+        "Formula_Fitted": 0.107548,
+        "delta_ara": -2.319814,
+        "delta_phase": 423.265575
+      },
+      {
+        "origin": "2013-05-01",
+        "target": "2015-05-01",
+        "current": -0.28,
+        "actual": 1.04,
+        "Formula": -0.381709,
+        "Formula_Fitted": 0.209427,
+        "delta_ara": -9.207675,
+        "delta_phase": 594.5544
+      },
+      {
+        "origin": "2013-08-01",
+        "target": "2015-08-01",
+        "current": -0.29,
+        "actual": 1.87,
+        "Formula": -0.399319,
+        "Formula_Fitted": 2.982647,
+        "delta_ara": 0.225389,
+        "delta_phase": 714.0629
+      },
+      {
+        "origin": "2013-11-01",
+        "target": "2015-11-01",
+        "current": -0.02,
+        "actual": 2.57,
+        "Formula": -0.275198,
+        "Formula_Fitted": 1.679664,
+        "delta_ara": 0.092108,
+        "delta_phase": 760.421516
+      },
+      {
+        "origin": "2014-02-01",
+        "target": "2016-02-01",
+        "current": -0.45,
+        "actual": 2.11,
+        "Formula": -0.524768,
+        "Formula_Fitted": 0.430079,
+        "delta_ara": 1.176452,
+        "delta_phase": 508.42603
+      },
+      {
+        "origin": "2014-05-01",
+        "target": "2016-05-01",
+        "current": 0.45,
+        "actual": 0.45,
+        "Formula": 0.515557,
+        "Formula_Fitted": -0.164429,
+        "delta_ara": 3.766439,
+        "delta_phase": 933.448343
+      },
+      {
+        "origin": "2014-08-01",
+        "target": "2016-08-01",
+        "current": 0.14,
+        "actual": -0.48,
+        "Formula": 0.308055,
+        "Formula_Fitted": -0.206095,
+        "delta_ara": 27.219913,
+        "delta_phase": 892.897545
+      },
+      {
+        "origin": "2014-11-01",
+        "target": "2016-11-01",
+        "current": 0.89,
+        "actual": -0.63,
+        "Formula": 1.056613,
+        "Formula_Fitted": -0.160737,
+        "delta_ara": 26.97582,
+        "delta_phase": 923.694655
+      },
+      {
+        "origin": "2015-02-01",
+        "target": "2017-02-01",
+        "current": 0.57,
+        "actual": -0.01,
+        "Formula": 0.552549,
+        "Formula_Fitted": -0.15576,
+        "delta_ara": 2.613386,
+        "delta_phase": 897.787623
+      },
+      {
+        "origin": "2015-05-01",
+        "target": "2017-05-01",
+        "current": 1.04,
+        "actual": 0.3,
+        "Formula": 1.093021,
+        "Formula_Fitted": -0.144072,
+        "delta_ara": 2.634787,
+        "delta_phase": 772.918116
+      },
+      {
+        "origin": "2015-08-01",
+        "target": "2017-08-01",
+        "current": 1.87,
+        "actual": -0.18,
+        "Formula": 1.525381,
+        "Formula_Fitted": -0.154448,
+        "delta_ara": 16.455278,
+        "delta_phase": 888.164045
+      },
+      {
+        "origin": "2015-11-01",
+        "target": "2017-11-01",
+        "current": 2.57,
+        "actual": -0.84,
+        "Formula": 1.622097,
+        "Formula_Fitted": -0.136491,
+        "delta_ara": 17.951673,
+        "delta_phase": 940.294551
+      },
+      {
+        "origin": "2016-02-01",
+        "target": "2018-02-01",
+        "current": 2.11,
+        "actual": -0.73,
+        "Formula": 1.610869,
+        "Formula_Fitted": -0.080943,
+        "delta_ara": 13.489154,
+        "delta_phase": 813.006478
+      },
+      {
+        "origin": "2016-05-01",
+        "target": "2018-05-01",
+        "current": 0.45,
+        "actual": -0.12,
+        "Formula": 0.51561,
+        "Formula_Fitted": 0.154077,
+        "delta_ara": -28.872129,
+        "delta_phase": 546.829663
+      },
+      {
+        "origin": "2016-08-01",
+        "target": "2018-08-01",
+        "current": -0.48,
+        "actual": 0.05,
+        "Formula": -0.524363,
+        "Formula_Fitted": 0.203314,
+        "delta_ara": -45.789842,
+        "delta_phase": 273.663162
+      },
+      {
+        "origin": "2016-11-01",
+        "target": "2018-11-01",
+        "current": -0.63,
+        "actual": 1.0,
+        "Formula": -0.594314,
+        "Formula_Fitted": 0.187339,
+        "delta_ara": -31.168663,
+        "delta_phase": 341.554184
+      },
+      {
+        "origin": "2017-02-01",
+        "target": "2019-02-01",
+        "current": -0.01,
+        "actual": 0.62,
+        "Formula": 0.268278,
+        "Formula_Fitted": -0.145832,
+        "delta_ara": 2.628909,
+        "delta_phase": 614.819347
+      },
+      {
+        "origin": "2017-05-01",
+        "target": "2019-05-01",
+        "current": 0.3,
+        "actual": 0.61,
+        "Formula": 0.407338,
+        "Formula_Fitted": -0.149299,
+        "delta_ara": 5.648404,
+        "delta_phase": 949.375016
+      },
+      {
+        "origin": "2017-08-01",
+        "target": "2019-08-01",
+        "current": -0.18,
+        "actual": 0.19,
+        "Formula": -0.302664,
+        "Formula_Fitted": -0.124015,
+        "delta_ara": 2.745993,
+        "delta_phase": 790.00786
+      },
+      {
+        "origin": "2017-11-01",
+        "target": "2019-11-01",
+        "current": -0.84,
+        "actual": 0.74,
+        "Formula": -1.026751,
+        "Formula_Fitted": 0.136089,
+        "delta_ara": -48.347728,
+        "delta_phase": 232.599886
+      },
+      {
+        "origin": "2018-02-01",
+        "target": "2020-02-01",
+        "current": -0.73,
+        "actual": 0.48,
+        "Formula": -0.610227,
+        "Formula_Fitted": 0.210536,
+        "delta_ara": -1.227489,
+        "delta_phase": 371.648464
+      },
+      {
+        "origin": "2018-05-01",
+        "target": "2020-05-01",
+        "current": -0.12,
+        "actual": -0.12,
+        "Formula": -0.314096,
+        "Formula_Fitted": -0.209288,
+        "delta_ara": 10.401421,
+        "delta_phase": 807.140168
+      },
+      {
+        "origin": "2018-08-01",
+        "target": "2020-08-01",
+        "current": 0.05,
+        "actual": -0.42,
+        "Formula": 0.271098,
+        "Formula_Fitted": -0.198705,
+        "delta_ara": 47.548917,
+        "delta_phase": 1076.086128
+      },
+      {
+        "origin": "2018-11-01",
+        "target": "2020-11-01",
+        "current": 1.0,
+        "actual": -1.01,
+        "Formula": 1.078269,
+        "Formula_Fitted": -0.158383,
+        "delta_ara": 29.017379,
+        "delta_phase": 1059.500436
+      },
+      {
+        "origin": "2019-02-01",
+        "target": "2021-02-01",
+        "current": 0.62,
+        "actual": -0.94,
+        "Formula": 0.609083,
+        "Formula_Fitted": -0.174177,
+        "delta_ara": 15.196861,
+        "delta_phase": 699.885586
+      },
+      {
+        "origin": "2019-05-01",
+        "target": "2021-05-01",
+        "current": 0.61,
+        "actual": -0.41,
+        "Formula": 0.590557,
+        "Formula_Fitted": 3.663993,
+        "delta_ara": -0.363543,
+        "delta_phase": 507.404137
+      },
+      {
+        "origin": "2019-08-01",
+        "target": "2021-08-01",
+        "current": 0.19,
+        "actual": -0.38,
+        "Formula": 0.325804,
+        "Formula_Fitted": 1.189512,
+        "delta_ara": 0.512633,
+        "delta_phase": 455.999847
+      },
+      {
+        "origin": "2019-11-01",
+        "target": "2021-11-01",
+        "current": 0.74,
+        "actual": -0.88,
+        "Formula": 0.607243,
+        "Formula_Fitted": -0.083702,
+        "delta_ara": 4.412407,
+        "delta_phase": 502.227943
+      },
+      {
+        "origin": "2020-02-01",
+        "target": "2022-02-01",
+        "current": 0.48,
+        "actual": -0.68,
+        "Formula": 0.509437,
+        "Formula_Fitted": 0.154495,
+        "delta_ara": -3.593091,
+        "delta_phase": 539.625932
+      },
+      {
+        "origin": "2020-05-01",
+        "target": "2022-05-01",
+        "current": -0.12,
+        "actual": -1.02,
+        "Formula": -0.325274,
+        "Formula_Fitted": 0.15081,
+        "delta_ara": -20.210818,
+        "delta_phase": 516.849172
+      },
+      {
+        "origin": "2020-08-01",
+        "target": "2022-08-01",
+        "current": -0.42,
+        "actual": -0.96,
+        "Formula": -0.520465,
+        "Formula_Fitted": 0.117454,
+        "delta_ara": -33.742351,
+        "delta_phase": 363.358415
+      },
+      {
+        "origin": "2020-11-01",
+        "target": "2022-11-01",
+        "current": -1.01,
+        "actual": -0.76,
+        "Formula": -1.079108,
+        "Formula_Fitted": 0.130453,
+        "delta_ara": -21.507679,
+        "delta_phase": 373.414822
+      },
+      {
+        "origin": "2021-02-01",
+        "target": "2023-02-01",
+        "current": -0.94,
+        "actual": -0.62,
+        "Formula": -1.037124,
+        "Formula_Fitted": 0.12383,
+        "delta_ara": -22.970827,
+        "delta_phase": 474.550175
+      },
+      {
+        "origin": "2021-05-01",
+        "target": "2023-05-01",
+        "current": -0.41,
+        "actual": 0.47,
+        "Formula": -0.504367,
+        "Formula_Fitted": -0.1062,
+        "delta_ara": 2.960641,
+        "delta_phase": 838.096353
+      },
+      {
+        "origin": "2021-08-01",
+        "target": "2023-08-01",
+        "current": -0.38,
+        "actual": 1.56,
+        "Formula": -0.492385,
+        "Formula_Fitted": -0.089216,
+        "delta_ara": 28.288579,
+        "delta_phase": 892.93116
+      },
+      {
+        "origin": "2021-11-01",
+        "target": "2023-11-01",
+        "current": -0.88,
+        "actual": 2.01,
+        "Formula": -1.053163,
+        "Formula_Fitted": 0.197253,
+        "delta_ara": -11.399701,
+        "delta_phase": 522.689645
+      },
+      {
+        "origin": "2022-02-01",
+        "target": "2024-02-01",
+        "current": -0.68,
+        "actual": 1.47,
+        "Formula": -0.599682,
+        "Formula_Fitted": 0.134559,
+        "delta_ara": -0.702624,
+        "delta_phase": 472.045583
+      },
+      {
+        "origin": "2022-05-01",
+        "target": "2024-05-01",
+        "current": -1.02,
+        "actual": 0.41,
+        "Formula": -1.0966,
+        "Formula_Fitted": 0.198192,
+        "delta_ara": -5.170087,
+        "delta_phase": 735.431105
+      },
+      {
+        "origin": "2022-08-01",
+        "target": "2024-08-01",
+        "current": -0.96,
+        "actual": 0.02,
+        "Formula": -1.057208,
+        "Formula_Fitted": 0.137224,
+        "delta_ara": -4.583105,
+        "delta_phase": 673.441775
+      },
+      {
+        "origin": "2022-11-01",
+        "target": "2024-11-01",
+        "current": -0.76,
+        "actual": -0.05,
+        "Formula": -0.621514,
+        "Formula_Fitted": -0.211391,
+        "delta_ara": 14.707808,
+        "delta_phase": 629.887332
+      },
+      {
+        "origin": "2023-02-01",
+        "target": "2025-02-01",
+        "current": -0.62,
+        "actual": -0.39,
+        "Formula": -0.581009,
+        "Formula_Fitted": 0.795027,
+        "delta_ara": 0.61454,
+        "delta_phase": 834.959319
+      },
+      {
+        "origin": "2023-05-01",
+        "target": "2025-05-01",
+        "current": 0.47,
+        "actual": -0.08,
+        "Formula": 0.540691,
+        "Formula_Fitted": -0.209026,
+        "delta_ara": 27.906253,
+        "delta_phase": 898.801497
+      },
+      {
+        "origin": "2023-08-01",
+        "target": "2025-08-01",
+        "current": 1.56,
+        "actual": -0.11,
+        "Formula": 1.399691,
+        "Formula_Fitted": -0.16947,
+        "delta_ara": 24.096564,
+        "delta_phase": 871.011289
+      },
+      {
+        "origin": "2023-11-01",
+        "target": "2025-11-01",
+        "current": 2.01,
+        "actual": -0.68,
+        "Formula": 1.523659,
+        "Formula_Fitted": -0.173028,
+        "delta_ara": 27.80349,
+        "delta_phase": 974.632812
+      }
+    ]
+  }
+}

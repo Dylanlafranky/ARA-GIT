@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ARA Layered Sand Formula Adjustable</title>
+  <script src="ara_layered_sand_single_formula_result.js"></script>
+  <script src="ara_layered_sand_parameter_search_result.js"></script>
+  <script src="ara_layered_sand_advance_operator_result.js"></script>
+  <script src="ara_layered_sand_correlation_search_result.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #141a22;
+      --line: #2b3542;
+      --text: #e8f2ff;
+      --muted: #91a4b8;
+      --truth: #f6f7fb;
+      --formula: #ff6f59;
+      --adjust: #d7ff4f;
+      --base: #6f7b8a;
+      --legacy-a: #8f7cff;
+      --legacy-b: #23d7c8;
+      --advance-a: #41d98b;
+      --advance-b: #ffbd4a;
+      --advance-c: #ff7ad9;
+      --leak: #ff3f5f;
+      --wave: #4db6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-rows: auto auto minmax(460px, 1fr) auto;
+      gap: 12px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    .bar, .controls, .chart, .card, .legend {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .bar, .legend, .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar {
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .label, .name {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    button, .toggle {
+      border: 1px solid #334050;
+      border-radius: 8px;
+      background: #1b2330;
+      color: var(--text);
+      padding: 8px 10px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    button.active {
+      border-color: #9cff38;
+      color: #9cff38;
+      box-shadow: inset 0 0 0 1px rgba(156,255,56,.28);
+    }
+    .toggle {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      user-select: none;
+    }
+    .toggle input { accent-color: #9cff38; }
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .control {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    output {
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #9cff38;
+    }
+    .chart {
+      position: relative;
+      min-height: 460px;
+      overflow: hidden;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cards { align-items: stretch; }
+    .card {
+      min-width: 170px;
+      flex: 1;
+      padding: 12px;
+    }
+    .value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 850;
+      line-height: 1.05;
+    }
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend { padding: 10px 12px; }
+    .item {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 750;
+    }
+    .swatch {
+      width: 14px;
+      height: 4px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="bar">
+      <div class="group" id="horizonButtons"><span class="label">Horizon</span></div>
+      <div class="group">
+        <label class="toggle"><input type="checkbox" data-model="Formula" checked> Formula</label>
+        <label class="toggle"><input type="checkbox" data-model="Formula_Adjustable" checked> Formula_Adjustable</label>
+        <label class="toggle"><input type="checkbox" data-model="Advance_Phase_Read"> ADVANCE: Phase read</label>
+        <label class="toggle"><input type="checkbox" data-model="Advance_Layer_Roll"> ADVANCE: Layer roll</label>
+        <label class="toggle"><input type="checkbox" data-model="Advance_Layer_Roll_Fast"> ADVANCE: Fast roll</label>
+        <label class="toggle"><input type="checkbox" data-model="Advance_Lower_Terrain_Base"> ADVANCE: Lower terrain</label>
+        <label class="toggle"><input type="checkbox" data-model="baseline_persistence"> BASELINE: Persistence</label>
+        <label class="toggle"><input type="checkbox" data-model="legacy_wobble_surface"> LEGACY: Wobble</label>
+        <label class="toggle"><input type="checkbox" data-model="legacy_raw_address_top1"> LEGACY: Raw top-1</label>
+        <label class="toggle"><input type="checkbox" data-model="Wave_Causal_Prior_Shift"> WAVE: Causal prior shift</label>
+        <label class="toggle"><input type="checkbox" data-model="Wave_Future_Shift_Leak"> LEAKAGE DIAG: Adjustable future shift</label>
+        <label class="toggle"><input type="checkbox" data-model="future_origin_shift_oracle"> LEAKAGE DIAG: Future-origin shift</label>
+      </div>
+    </section>
+
+    <section class="controls" id="controls"></section>
+
+    <section class="chart"><canvas id="chart"></canvas></section>
+
+    <section>
+      <div class="cards" id="cards"></div>
+      <div class="legend">
+        <span class="item" style="color: var(--truth)"><span class="swatch"></span> Truth</span>
+        <span class="item" style="color: var(--formula)"><span class="swatch"></span> Formula</span>
+        <span class="item" style="color: var(--adjust)"><span class="swatch"></span> Formula_Adjustable</span>
+        <span class="item" style="color: var(--advance-a)"><span class="swatch"></span> ADVANCE: Phase read</span>
+        <span class="item" style="color: var(--advance-b)"><span class="swatch"></span> ADVANCE: Layer roll</span>
+        <span class="item" style="color: #ffd166"><span class="swatch"></span> ADVANCE: Fast roll</span>
+        <span class="item" style="color: var(--advance-c)"><span class="swatch"></span> ADVANCE: Lower terrain</span>
+        <span class="item" style="color: var(--base)"><span class="swatch"></span> BASELINE: Persistence only</span>
+        <span class="item" style="color: var(--legacy-a)"><span class="swatch"></span> LEGACY overlay: Wobble</span>
+        <span class="item" style="color: var(--legacy-b)"><span class="swatch"></span> LEGACY overlay: Raw top-1</span>
+        <span class="item" style="color: var(--wave)"><span class="swatch"></span> WAVE: Causal prior shift</span>
+        <span class="item" style="color: #ff8a9b"><span class="swatch"></span> LEAKAGE DIAG: Adjustable future shift</span>
+        <span class="item" style="color: var(--leak)"><span class="swatch"></span> LEAKAGE DIAG: Future-origin shift</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = window.ARA_LAYERED_SAND_SINGLE_FORMULA;
+    const FIT = window.ARA_LAYERED_SAND_PARAMETER_SEARCH || null;
+    const ADV = window.ARA_LAYERED_SAND_ADVANCE_OPERATOR || null;
+    const CORR = window.ARA_LAYERED_SAND_CORRELATION_SEARCH || null;
+    const PHI = (1 + Math.sqrt(5)) / 2;
+    const HOME = 12;
+    const horizons = DATA.horizons_months.map(String);
+    const baseParams = { ...DATA.formula_adjustable_defaults };
+    const advanceDefaults = {
+      phase_read_gain: 1.0,
+      layer_roll_gain: 1.0,
+      layer_roll_fast_gain: 2.0,
+      lower_terrain_base_mix: 1.0,
+      lower_terrain_roll_gain: 0.0
+    };
+    const manualScreenshotParams = {
+      floor_drive: 1.66,
+      lower_speed: 0.22,
+      contact_transfer: 0.95,
+      second_contact: 0.82,
+      wobble: 1.05,
+      own_spin: 0.68,
+      terrain_pull: 1.59,
+      terrain_spill: 0.06,
+      roll_to_ara: 1.99,
+      roll_to_phase: 234.0,
+      phase_terrain: 3.27,
+      ara_terrain: 1.40,
+      upper_pressure: 1.76,
+      upper_grip: 1.67,
+      upper_brake: 1.65,
+      measured_roll: 3.01
+    };
+    const wavecyclePresetParams = {
+      floor_drive: 1.08,
+      lower_speed: 2.58,
+      contact_transfer: 0.77,
+      second_contact: 0.60,
+      wobble: 0.42,
+      own_spin: 0.72,
+      terrain_pull: 0.90,
+      terrain_spill: 0.23,
+      roll_to_ara: 0.30,
+      roll_to_phase: 360.0,
+      phase_terrain: 1.14,
+      ara_terrain: 0.39,
+      upper_pressure: 2.86,
+      upper_grip: 0.24,
+      upper_brake: 0.74,
+      measured_roll: 1.0
+    };
+    const state = {
+      horizon: horizons.includes("12") ? "12" : horizons[0],
+      editAdvance: false,
+      models: {
+        Formula: true,
+        Formula_Adjustable: true,
+        Advance_Phase_Read: false,
+        Advance_Layer_Roll: false,
+        Advance_Layer_Roll_Fast: false,
+        Advance_Lower_Terrain_Base: false,
+        baseline_persistence: false,
+        legacy_wobble_surface: false,
+        legacy_raw_address_top1: false,
+        Wave_Causal_Prior_Shift: false,
+        Wave_Future_Shift_Leak: false,
+        future_origin_shift_oracle: false
+      },
+      params: { ...(FIT?.best_params || baseParams) },
+      advance: { ...advanceDefaults }
+    };
+    const sliderDefs = [
+      ["floor_drive", "Floor motion", 0, 4, 0.01],
+      ["lower_speed", "Lower speed", 0, 8, 0.01],
+      ["contact_transfer", "Contact transfer", 0, 2, 0.01],
+      ["second_contact", "Second contact", 0, 1, 0.01],
+      ["wobble", "Two-contact wobble", 0, 3, 0.01],
+      ["own_spin", "Own spin", 0, 1, 0.01],
+      ["terrain_pull", "ARA terrain pull", 0, 4, 0.01],
+      ["terrain_spill", "Ridge spill", 0, 2, 0.01],
+      ["roll_to_ara", "Roll to ARA", 0, 5, 0.01],
+      ["roll_to_phase", "Roll to phase", 0, 360, 1],
+      ["phase_terrain", "Phase terrain", 0, 4, 0.01],
+      ["ara_terrain", "ARA terrain", 0, 4, 0.01],
+      ["upper_pressure", "Upper pressure", 0, 4, 0.01],
+      ["upper_grip", "Upper grip", 0, 2, 0.01],
+      ["upper_brake", "Upper brake", 0, 2, 0.01],
+      ["measured_roll", "Measured roll", 0, 8, 0.01]
+    ];
+    const advanceSliderDefs = [
+      ["phase_read_gain", "Phase advance", 0, 3, 0.01],
+      ["layer_roll_gain", "Layer roll", 0, 4, 0.01],
+      ["layer_roll_fast_gain", "Fast roll", 0, 6, 0.01],
+      ["lower_terrain_base_mix", "Lower terrain base", 0, 1, 0.01],
+      ["lower_terrain_roll_gain", "Lower terrain roll", 0, 4, 0.01]
+    ];
+    const modelDefs = [
+      { key: "Formula", field: "Formula", color: "#ff6f59", width: 1.9 },
+      { key: "Formula_Adjustable", field: "Formula_Adjustable", color: "#d7ff4f", width: 2.3 },
+      { key: "Advance_Phase_Read", field: "Advance_Phase_Read", color: "#41d98b", width: 2.1 },
+      { key: "Advance_Layer_Roll", field: "Advance_Layer_Roll", color: "#ffbd4a", width: 1.8 },
+      { key: "Advance_Layer_Roll_Fast", field: "Advance_Layer_Roll_Fast", color: "#ffd166", width: 1.8 },
+      { key: "Advance_Lower_Terrain_Base", field: "Advance_Lower_Terrain_Base", color: "#ff7ad9", width: 1.8 },
+      { key: "baseline_persistence", field: "baseline_persistence", color: "#6f7b8a", width: 1.4, dash: [7, 6] },
+      { key: "legacy_wobble_surface", field: "legacy_wobble_surface", color: "#8f7cff", width: 1.7 },
+      { key: "legacy_raw_address_top1", field: "legacy_raw_address_top1", color: "#23d7c8", width: 1.7 },
+      { key: "Wave_Causal_Prior_Shift", field: "Wave_Causal_Prior_Shift", color: "#4db6ff", width: 2.0, dash: [8, 5] },
+      { key: "Wave_Future_Shift_Leak", field: "Wave_Future_Shift_Leak", color: "#ff8a9b", width: 1.8, dash: [2, 5] },
+      { key: "future_origin_shift_oracle", field: "future_origin_shift_oracle", color: "#ff3f5f", width: 1.6, dash: [3, 5] }
+    ];
+    function clamp(value, lo, hi) {
+      return Math.max(lo, Math.min(hi, Number(value)));
+    }
+    function sigmoid(value) {
+      return 1 / (1 + Math.exp(-clamp(value, -40, 40)));
+    }
+    function squash(value, scale = 1) {
+      return Math.tanh(Number(value) / Math.max(scale, 1e-9));
+    }
+    function araToValue(ara) {
+      const x = clamp(Number(ara) - 1, -0.985, 0.985);
+      return 1.5 * Math.atanh(x);
+    }
+    function localPhiSlope(x, depth = 5) {
+      let lo = 0;
+      let hi = 2;
+      const xx = clamp(x, 0, 2);
+      for (let i = 0; i < depth; i += 1) {
+        const mid = 0.5 * (lo + hi);
+        if (xx < mid) hi = mid;
+        else lo = mid;
+      }
+      const width = Math.max(hi - lo, 1e-9);
+      const p1 = hi - width / PHI;
+      const p2 = lo + width / PHI;
+      const target = Math.abs(xx - p1) <= Math.abs(xx - p2) ? p1 : p2;
+      return { target, slope: target - xx, ridgeDistance: Math.min(Math.abs(xx - lo), Math.abs(hi - xx)) / width };
+    }
+    function readFractalTerrain(arrivalAra, currentAra, contactPressure, lowerDrive, upperGate) {
+      const ara = clamp(arrivalAra, 0, 2);
+      const rollDelta = ara - clamp(currentAra, 0, 2);
+      const force = clamp(
+        0.72 * Math.abs(rollDelta) +
+        0.16 * Math.abs(contactPressure) +
+        0.10 * Math.abs(lowerDrive) +
+        0.05 * Math.abs(upperGate),
+        0,
+        1.2
+      );
+      function binaryBounds(value, depth) {
+        let lo = 0;
+        let hi = 2;
+        const address = [];
+        const x = clamp(value, 0, 2);
+        for (let i = 0; i < depth; i += 1) {
+          const mid = 0.5 * (lo + hi);
+          if (x < mid) {
+            hi = mid;
+            address.push(0);
+          } else {
+            lo = mid;
+            address.push(1);
+          }
+        }
+        return { lo, hi, address };
+      }
+      function phiPoints(lo, hi) {
+        const width = hi - lo;
+        return [hi - width / PHI, lo + width / PHI];
+      }
+      function choosePhi(value, lo, hi, orientation) {
+        const [lowerPhi, upperPhi] = phiPoints(lo, hi);
+        const lowerDist = Math.abs(value - lowerPhi);
+        const upperDist = Math.abs(value - upperPhi);
+        if (Math.abs(lowerDist - upperDist) <= 1e-8) return orientation >= 0 ? upperPhi : lowerPhi;
+        return lowerDist < upperDist ? lowerPhi : upperPhi;
+      }
+      function layerRead(depth) {
+        const bounds = binaryBounds(ara, depth);
+        const width = bounds.hi - bounds.lo;
+        const orientation = sign(rollDelta);
+        const target = choosePhi(ara, bounds.lo, bounds.hi, orientation);
+        const naturalSlope = target - ara;
+        const naturalSign = sign(naturalSlope) || orientation || 1;
+        const boundary = naturalSign > 0 ? bounds.hi : bounds.lo;
+        const ridgeDistance = Math.abs(boundary - ara);
+        const ridgeResistance = clamp(ridgeDistance / Math.max(width, 1e-9), 0, 1);
+        const forceScaled = Math.abs(force) / Math.max(width, 1e-9);
+        const spillover = sigmoid(3.2 * (forceScaled - ridgeResistance - 0.28));
+        const nextMid = clamp(ara + naturalSign * width, 0, 2);
+        const nextBounds = binaryBounds(nextMid, depth);
+        const nextTarget = choosePhi(clamp(nextMid, nextBounds.lo, nextBounds.hi), nextBounds.lo, nextBounds.hi, naturalSign);
+        const targetWithSpill = (1 - spillover) * target + spillover * nextTarget;
+        return {
+          target,
+          targetWithSpill: clamp(targetWithSpill, 0, 2),
+          spillover
+        };
+      }
+      const layers = [1, 2, 3, 4, 5, 6].map(layerRead);
+      const rawWeights = layers.map((_, index) => 1 / (PHI ** index));
+      const total = rawWeights.reduce((sum, value) => sum + value, 0);
+      const weights = rawWeights.map((value) => value / total);
+      const target = layers.reduce((sum, layer, i) => sum + weights[i] * layer.target, 0);
+      const targetWithSpill = layers.reduce((sum, layer, i) => sum + weights[i] * layer.targetWithSpill, 0);
+      const spillover = layers.reduce((sum, layer, i) => sum + weights[i] * layer.spillover, 0);
+      const weightedSlope = target - ara;
+      const weightedSlopeSpill = targetWithSpill - ara;
+      const forceGain = clamp(0.25 + 0.58 * force + 0.15 * spillover, 0.12, 1.05);
+      return { weightedSlope, weightedSlopeSpill, forceGain, force, spillover };
+    }
+    function readSphereTerrain(arrivalAra, currentAra, phaseDeg, contactPressure, lowerDrive, upperGate, params) {
+      const araTerrain = readFractalTerrain(arrivalAra, currentAra, contactPressure, lowerDrive, upperGate);
+      const phaseAra = 2 * (((phaseDeg % 360) + 360) % 360) / 360;
+      const phaseTerrain = localPhiSlope(phaseAra, 5);
+      const combinedSlope = params.ara_terrain * araTerrain.weightedSlope + params.phase_terrain * phaseTerrain.slope;
+      const forceGain = params.terrain_pull * araTerrain.forceGain + params.terrain_spill * araTerrain.spillover;
+      const forceAra = clamp(arrivalAra + combinedSlope * forceGain, 0, 2);
+      return { forceAra, combinedSlope, spillover: araTerrain.spillover };
+    }
+    function vec(stateLike) {
+      return [Number(stateLike.forward) || 0, Number(stateLike.lateral) || 0, Number(stateLike.twist) || 0];
+    }
+    function propagateLayer(lowerState, secondSpin, layerSpin, upper, layerIndex, params, phaseDeg) {
+      const lowerVec = vec(lowerState);
+      const secondVec = vec(secondSpin);
+      const ownVec = vec(layerSpin);
+      const lowerPressure = Math.abs(Number(lowerState.pressure) || 0);
+      const secondPressure = Math.abs(Number(secondSpin.pressure) || 0);
+      const totalPressure = lowerPressure + secondPressure + 1e-9;
+      const pressureMix = secondPressure / totalPressure;
+      const secondMix = clamp(params.second_contact * pressureMix, 0, 0.95);
+      const contact = lowerVec.map((v, i) => (1 - secondMix) * v + secondMix * secondVec[i]);
+      const wobbleVec = lowerVec.map((v, i) => v - secondVec[i]);
+      const parity = -1;
+      const speedRatio = Math.sqrt(Math.max(Number(layerSpin.period) / Math.max(Number(lowerState.period), 1e-9), 1e-9));
+      const normal = 1 + params.upper_pressure * params.upper_grip * Math.abs(upper.compression);
+      const brake = 1 + params.upper_pressure * params.upper_brake * Math.abs(upper.compression);
+      const contactDrive = Math.tanh(params.lower_speed * speedRatio * totalPressure / 3);
+      const transfer = params.contact_transfer * contactDrive * normal / brake;
+      const slip = sigmoid(params.wobble * (Math.abs(wobbleVec[1]) + 0.7 * Math.abs(wobbleVec[2])) - 0.65 * brake);
+      const out = [
+        parity * transfer * contact[0] + params.own_spin * ownVec[0] + 0.05 * upper.direction,
+        parity * transfer * contact[1] + params.own_spin * ownVec[1] + params.wobble * slip * wobbleVec[1] + 0.04 * upper.lateral,
+        parity * transfer * contact[2] + params.own_spin * ownVec[2] + params.wobble * slip * wobbleVec[2] + 0.04 * upper.twist
+      ];
+      const arrivalAra = clamp(Number(layerSpin.ara) + params.roll_to_ara * out[0], 0, 2);
+      const terrain = readSphereTerrain(
+        arrivalAra,
+        Number(layerSpin.ara),
+        phaseDeg + 31 * layerIndex,
+        totalPressure,
+        out[0],
+        upper.compression,
+        params
+      );
+      out[0] += terrain.combinedSlope * params.terrain_pull;
+      return {
+        name: layerSpin.name,
+        period: Number(layerSpin.period),
+        forward: out[0],
+        lateral: out[1],
+        twist: out[2],
+        pressure: totalPressure * (0.65 + 0.35 * normal),
+        ara: arrivalAra,
+        terrainForceAra: terrain.forceAra,
+        terrainSlope: terrain.combinedSlope
+      };
+    }
+    function formulaAdjustable(row, params) {
+      const spins = row.formula.spins;
+      const upper = row.formula.upper;
+      const floor = spins[0];
+      let stateLayer = {
+        name: "floor",
+        period: floor.period,
+        forward: floor.forward * params.floor_drive,
+        lateral: floor.lateral * params.floor_drive,
+        twist: floor.twist * params.floor_drive,
+        pressure: floor.pressure,
+        ara: floor.ara
+      };
+      const phaseDeg = Number(row.phase_clock_origin);
+      for (let i = 1; i < spins.length; i += 1) {
+        const secondSpin = spins[Math.max(0, i - 2)];
+        stateLayer = propagateLayer(stateLayer, secondSpin, spins[i], upper, i, params, phaseDeg);
+      }
+      const horizon = Number(state.horizon);
+      const horizonGain = Math.sqrt(Math.max(horizon, 1) / HOME);
+      const upperBrake = 1 + params.upper_pressure * params.upper_brake * Math.abs(upper.compression);
+      const measured = params.measured_roll * horizonGain / upperBrake;
+      const floorPhase = params.floor_drive * (horizon / HOME) * 360;
+      const deltaAra = measured * params.roll_to_ara * (stateLayer.forward + 0.18 * stateLayer.lateral);
+      const deltaPhase = floorPhase + measured * params.roll_to_phase * (
+        stateLayer.lateral + 0.45 * stateLayer.twist + 0.18 * stateLayer.forward
+      );
+      const arrivalAra = clamp(Number(row.ara_current) + deltaAra, 0, 2);
+      const arrivalPhase = phaseDeg + deltaPhase;
+      const terrain = readSphereTerrain(
+        arrivalAra,
+        Number(row.ara_current),
+        arrivalPhase,
+        stateLayer.pressure,
+        stateLayer.forward,
+        upper.compression,
+        params
+      );
+      return {
+        value: araToValue(terrain.forceAra),
+        deltaAra,
+        deltaPhase,
+        arrivalAra,
+        arrivalPhase
+      };
+    }
+    function rotate2(forward, lateral, angle) {
+      const c = Math.cos(angle);
+      const s = Math.sin(angle);
+      return [forward * c - lateral * s, forward * s + lateral * c];
+    }
+    function advanceSpin(spin, horizon, layerIndex, params, gain) {
+      const out = { ...spin };
+      const period = Math.max(Number(out.period), 1e-9);
+      const turns = Number(horizon) / period;
+      const parity = layerIndex % 2 ? -1 : 1;
+      const pressure = Math.tanh(Math.abs(Number(out.pressure) || 0) / 2);
+      const speedGate = Math.tanh(Number(params.lower_speed) / 3);
+      const angle = parity * Number(gain) * 2 * Math.PI * turns * (0.28 + 0.72 * pressure) * speedGate;
+      const originalLateral = Number(out.lateral) || 0;
+      const rotated = rotate2(Number(out.forward) || 0, originalLateral, angle);
+      out.forward = rotated[0];
+      out.lateral = rotated[1];
+      out.twist = (Number(out.twist) || 0) * Math.cos(0.5 * angle);
+      out.twist += parity * originalLateral * Math.sin(0.5 * angle) * Number(params.wobble);
+      const drive = out.forward + 0.22 * out.lateral + 0.12 * out.twist;
+      out.ara = clamp(Number(out.ara) + Number(gain) * Number(params.roll_to_ara) * turns * 0.18 * drive, 0, 2);
+      return out;
+    }
+    function cascadeFromSpins(row, params, spins, phaseExtra = 0) {
+      const upper = row.formula.upper;
+      const floor = spins[0];
+      let stateLayer = {
+        name: "floor",
+        period: floor.period,
+        forward: floor.forward * params.floor_drive,
+        lateral: floor.lateral * params.floor_drive,
+        twist: floor.twist * params.floor_drive,
+        pressure: floor.pressure,
+        ara: floor.ara,
+        terrainForceAra: floor.ara
+      };
+      const phaseDeg = Number(row.phase_clock_origin) + Number(phaseExtra);
+      for (let i = 1; i < spins.length; i += 1) {
+        const secondSpin = spins[Math.max(0, i - 2)];
+        stateLayer = propagateLayer(stateLayer, secondSpin, spins[i], upper, i, params, phaseDeg);
+      }
+      const horizon = Number(state.horizon);
+      const horizonGain = Math.sqrt(Math.max(horizon, 1) / HOME);
+      const upperBrake = 1 + params.upper_pressure * params.upper_brake * Math.abs(upper.compression);
+      const measured = params.measured_roll * horizonGain / upperBrake;
+      const floorPhase = params.floor_drive * (horizon / HOME) * 360;
+      const deltaAra = measured * params.roll_to_ara * (stateLayer.forward + 0.18 * stateLayer.lateral);
+      const deltaPhase = floorPhase + Number(phaseExtra) + measured * params.roll_to_phase * (
+        stateLayer.lateral + 0.45 * stateLayer.twist + 0.18 * stateLayer.forward
+      );
+      return { stateLayer, upper, deltaAra, deltaPhase };
+    }
+    function readAdvancedValue(row, params, cascade, baseAra) {
+      const arrivalAra = clamp(Number(baseAra) + cascade.deltaAra, 0, 2);
+      const arrivalPhase = Number(row.phase_clock_origin) + cascade.deltaPhase;
+      const terrain = readSphereTerrain(
+        arrivalAra,
+        Number(baseAra),
+        arrivalPhase,
+        cascade.stateLayer.pressure,
+        cascade.stateLayer.forward,
+        cascade.upper.compression,
+        params
+      );
+      return {
+        value: araToValue(terrain.forceAra),
+        deltaAra: cascade.deltaAra,
+        deltaPhase: cascade.deltaPhase,
+        arrivalAra,
+        arrivalPhase
+      };
+    }
+    function advanceAdjustable(row, params, advance, key) {
+      const horizon = Number(state.horizon);
+      let spins = row.formula.spins.map((spin) => ({ ...spin }));
+      let phaseExtra = 0;
+      let baseMix = 0;
+      if (key === "Advance_Phase_Read") {
+        phaseExtra = 360 * (horizon / HOME) * Number(advance.phase_read_gain);
+      } else if (key === "Advance_Layer_Roll") {
+        spins = spins.map((spin, index) => advanceSpin(spin, horizon, index, params, advance.layer_roll_gain));
+      } else if (key === "Advance_Layer_Roll_Fast") {
+        spins = spins.map((spin, index) => advanceSpin(spin, horizon, index, params, advance.layer_roll_fast_gain));
+      } else if (key === "Advance_Lower_Terrain_Base") {
+        if (Number(advance.lower_terrain_roll_gain) > 0) {
+          spins = spins.map((spin, index) => advanceSpin(spin, horizon, index, params, advance.lower_terrain_roll_gain));
+        }
+        baseMix = Number(advance.lower_terrain_base_mix);
+      }
+      const cascade = cascadeFromSpins(row, params, spins, phaseExtra);
+      const lowerBase = cascade.stateLayer.terrainForceAra ?? cascade.stateLayer.ara;
+      const baseAra = (1 - baseMix) * Number(row.ara_current) + baseMix * Number(lowerBase);
+      return readAdvancedValue(row, params, cascade, baseAra);
+    }
+    function rowsForView() {
+      const advanceRows = new Map((ADV?.viz_records?.[state.horizon] || []).map((row) => [`${row.origin}|${row.target}`, row]));
+      const rows = (DATA.viz_records[state.horizon] || []).map((row) => {
+        const adjustable = formulaAdjustable(row, state.params);
+        const advance = advanceRows.get(`${row.origin}|${row.target}`) || {};
+        const out = { ...row, ...advance, Formula_Adjustable: adjustable.value, adjustable };
+        ["Advance_Phase_Read", "Advance_Layer_Roll", "Advance_Layer_Roll_Fast", "Advance_Lower_Terrain_Base"].forEach((key) => {
+          const adv = advanceAdjustable(row, state.params, state.advance, key);
+          out[key] = adv.value;
+          out[`${key}_live`] = adv;
+        });
+        return out;
+      });
+      const waveSteps = Math.round(Number(state.horizon) / 3);
+      rows.forEach((row, index) => {
+        row.Wave_Causal_Prior_Shift = rows[index - waveSteps]?.Formula_Adjustable ?? null;
+        row.Wave_Future_Shift_Leak = rows[index + waveSteps]?.Formula_Adjustable ?? null;
+      });
+      return rows;
+    }
+    function mean(values) {
+      return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : NaN;
+    }
+    function std(values) {
+      const m = mean(values);
+      return Math.sqrt(mean(values.map((value) => (value - m) ** 2)));
+    }
+    function corr(xs, ys) {
+      const mx = mean(xs);
+      const my = mean(ys);
+      const vx = xs.map((x) => x - mx);
+      const vy = ys.map((y) => y - my);
+      const denom = Math.sqrt(vx.reduce((s, x) => s + x * x, 0) * vy.reduce((s, y) => s + y * y, 0));
+      return denom > 1e-12 ? vx.reduce((s, x, i) => s + x * vy[i], 0) / denom : NaN;
+    }
+    function sign(value) {
+      return value > 1e-9 ? 1 : value < -1e-9 ? -1 : 0;
+    }
+    function metric(name, field = "Formula_Adjustable") {
+      const rows = rowsForView();
+      if (!rows.length) return NaN;
+      const usable = rows.filter((row) => Number.isFinite(row[field]));
+      if (!usable.length) return NaN;
+      if (name === "mae") return mean(usable.map((row) => Math.abs(row[field] - row.actual)));
+      if (name === "corr") return corr(usable.map((row) => row[field]), usable.map((row) => row.actual));
+      if (name === "turn") {
+        const turns = usable.filter((row) => sign(row.actual - row.current) !== 0);
+        return mean(turns.map((row) => sign(row[field] - row.current) === sign(row.actual - row.current) ? 1 : 0));
+      }
+      if (name === "amp") {
+        const pred = usable.map((row) => row[field] - row.current);
+        const truth = usable.map((row) => row.actual - row.current);
+        return std(pred) / Math.max(std(truth), 1e-12);
+      }
+      if (name === "dara") return mean(rows.map((row) => Math.abs(row.adjustable.deltaAra)));
+      if (name === "dphase") return mean(rows.map((row) => row.adjustable.deltaPhase));
+      return NaN;
+    }
+    function fmt(value, digits = 3) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "n/a";
+    }
+    function buildButtons() {
+      const buttons = document.getElementById("horizonButtons");
+      horizons.forEach((h) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = `${h}m`;
+        button.addEventListener("click", () => {
+          state.horizon = h;
+          render();
+        });
+        buttons.appendChild(button);
+      });
+    }
+    function buildControls() {
+      const controls = document.getElementById("controls");
+      const formulaControls = sliderDefs.map(([key, label, min, max, step]) => `
+        <label class="control">
+          <span class="control-row"><span>${label}</span><output data-out="${key}">${fmt(state.params[key], 2)}</output></span>
+          <input type="range" min="${min}" max="${max}" step="${step}" value="${state.params[key]}" data-param="${key}">
+        </label>
+      `).join("");
+      const advanceControls = state.editAdvance ? advanceSliderDefs.map(([key, label, min, max, step]) => `
+        <label class="control">
+          <span class="control-row"><span>${label}</span><output data-advance-out="${key}">${fmt(state.advance[key], 2)}</output></span>
+          <input type="range" min="${min}" max="${max}" step="${step}" value="${state.advance[key]}" data-advance-param="${key}">
+        </label>
+      `).join("") : "";
+      controls.innerHTML = formulaControls + `
+        <button type="button" id="toggleAdvanceEdit">${state.editAdvance ? "Hide advance edit" : "Edit advance controls"}</button>
+        <button type="button" id="resetAdvance">Reset advance</button>
+        <button type="button" id="loadCorrFit">Load best corr fit</button>
+        <button type="button" id="loadManualPreset">Load manual preset</button>
+        <button type="button" id="loadWavecyclePreset">Load wavecycle preset</button>
+        <button type="button" id="loadFitted">Load fitted constants</button>
+        <button type="button" id="resetParams">Reset base Formula</button>
+      ` + advanceControls;
+      controls.querySelectorAll("[data-param]").forEach((input) => {
+        input.addEventListener("input", () => {
+          state.params[input.dataset.param] = Number(input.value);
+          render();
+        });
+      });
+      controls.querySelectorAll("[data-advance-param]").forEach((input) => {
+        input.addEventListener("input", () => {
+          state.advance[input.dataset.advanceParam] = Number(input.value);
+          render();
+        });
+      });
+      document.getElementById("toggleAdvanceEdit").addEventListener("click", () => {
+        state.editAdvance = !state.editAdvance;
+        buildControls();
+        render();
+      });
+      document.getElementById("resetAdvance").addEventListener("click", () => {
+        state.advance = { ...advanceDefaults };
+        buildControls();
+        render();
+      });
+      document.getElementById("loadCorrFit").addEventListener("click", () => {
+        const family = CORR?.best_holdout_corr_family?.family;
+        const model = family ? CORR?.models?.[family] : null;
+        if (!model) return;
+        state.params = { ...model.params };
+        state.advance = { ...advanceDefaults, ...model.advance };
+        if (state.models[family] !== undefined) state.models[family] = true;
+        buildControls();
+        document.querySelectorAll("[data-model]").forEach((input) => {
+          if (input.dataset.model === family) input.checked = true;
+        });
+        render();
+      });
+      document.getElementById("loadManualPreset").addEventListener("click", () => {
+        state.params = { ...manualScreenshotParams };
+        buildControls();
+        render();
+      });
+      document.getElementById("loadWavecyclePreset").addEventListener("click", () => {
+        state.params = { ...wavecyclePresetParams };
+        state.models.Wave_Causal_Prior_Shift = true;
+        buildControls();
+        document.querySelectorAll("[data-model]").forEach((input) => {
+          if (input.dataset.model === "Wave_Causal_Prior_Shift") input.checked = true;
+        });
+        render();
+      });
+      document.getElementById("resetParams").addEventListener("click", () => {
+        state.params = { ...baseParams };
+        buildControls();
+        render();
+      });
+      document.getElementById("loadFitted").addEventListener("click", () => {
+        state.params = { ...(FIT?.best_params || baseParams) };
+        buildControls();
+        render();
+      });
+    }
+    function drawLine(ctx, rows, field, x, y, color, width, dash = []) {
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      let started = false;
+      rows.forEach((row, index) => {
+        if (!Number.isFinite(row[field])) {
+          started = false;
+          return;
+        }
+        const px = x(index);
+        const py = y(row[field]);
+        if (!started) {
+          ctx.moveTo(px, py);
+          started = true;
+        }
+        else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+      ctx.restore();
+    }
+    function drawPoints(ctx, rows, field, x, y, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      rows.forEach((row, index) => {
+        if (!Number.isFinite(row[field])) return;
+        ctx.beginPath();
+        ctx.arc(x(index), y(row[field]), 2.3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+    function drawChart() {
+      const canvas = document.getElementById("chart");
+      const rect = canvas.getBoundingClientRect();
+      const scale = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * scale));
+      canvas.height = Math.max(1, Math.floor(rect.height * scale));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      const width = rect.width;
+      const height = rect.height;
+      const pad = { left: 56, right: 24, top: 26, bottom: 52 };
+      const rows = rowsForView();
+      const activeFields = modelDefs.filter((m) => state.models[m.key]).map((m) => m.field);
+      const values = rows.flatMap((row) => ["actual", ...activeFields].map((field) => row[field]));
+      let minY = Math.min(-0.8, ...values.filter(Number.isFinite));
+      let maxY = Math.max(0.8, ...values.filter(Number.isFinite));
+      const span = Math.max(0.1, maxY - minY);
+      minY -= span * 0.08;
+      maxY += span * 0.08;
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const x = (index) => pad.left + (rows.length <= 1 ? 0 : (index / (rows.length - 1)) * plotW);
+      const y = (value) => pad.top + (maxY - value) / (maxY - minY) * plotH;
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#090d12";
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = "12px ui-sans-serif, system-ui";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.strokeStyle = "rgba(255,255,255,.12)";
+      ctx.fillStyle = "#91a4b8";
+      for (let i = 0; i <= 6; i += 1) {
+        const value = minY + (i / 6) * (maxY - minY);
+        const py = y(value);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, py);
+        ctx.lineTo(width - pad.right, py);
+        ctx.stroke();
+        ctx.fillText(value.toFixed(1), pad.left - 10, py);
+      }
+      ctx.strokeStyle = "rgba(255,255,255,.34)";
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y(0));
+      ctx.lineTo(width - pad.right, y(0));
+      ctx.stroke();
+      const yearStep = Math.max(1, Math.floor(rows.length / 6));
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      rows.forEach((row, index) => {
+        if (index % yearStep !== 0 && index !== rows.length - 1) return;
+        const px = x(index);
+        ctx.strokeStyle = "rgba(255,255,255,.06)";
+        ctx.beginPath();
+        ctx.moveTo(px, pad.top);
+        ctx.lineTo(px, height - pad.bottom);
+        ctx.stroke();
+        ctx.fillStyle = "#91a4b8";
+        ctx.fillText(row.origin.slice(0, 4), px, height - pad.bottom + 14);
+      });
+      drawLine(ctx, rows, "actual", x, y, "#f6f7fb", 2.4);
+      drawPoints(ctx, rows, "actual", x, y, "#f6f7fb");
+      modelDefs.forEach((model) => {
+        if (!state.models[model.key]) return;
+        drawLine(ctx, rows, model.field, x, y, model.color, model.width, model.dash || []);
+      });
+      ctx.save();
+      ctx.translate(18, pad.top + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = "#91a4b8";
+      ctx.font = "700 13px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText("NINO / formula output", 0, 0);
+      ctx.restore();
+      ctx.fillStyle = "#91a4b8";
+      ctx.textAlign = "center";
+      ctx.fillText(`Origin date, ${state.horizon}m forecast horizon`, pad.left + plotW / 2, height - 18);
+    }
+    function renderCards() {
+      document.querySelectorAll("[data-out]").forEach((out) => {
+        out.textContent = fmt(state.params[out.dataset.out], 2);
+      });
+      document.querySelectorAll("[data-advance-out]").forEach((out) => {
+        out.textContent = fmt(state.advance[out.dataset.advanceOut], 2);
+      });
+      const cards = document.getElementById("cards");
+      const fixed = DATA.point_scores.Formula?.[state.horizon] || {};
+      const amp = DATA.amplitude.Formula?.[state.horizon]?.std_ratio;
+      const activeAdvance = [
+        "Advance_Phase_Read",
+        "Advance_Layer_Roll",
+        "Advance_Layer_Roll_Fast",
+        "Advance_Lower_Terrain_Base",
+        "Wave_Causal_Prior_Shift",
+        "Wave_Future_Shift_Leak"
+      ].find((key) => state.models[key]);
+      const activeAdvanceLabel = {
+        Advance_Phase_Read: "Phase",
+        Advance_Layer_Roll: "Layer",
+        Advance_Layer_Roll_Fast: "Fast",
+        Advance_Lower_Terrain_Base: "Lower",
+        Wave_Causal_Prior_Shift: "Causal wave",
+        Wave_Future_Shift_Leak: "Leak wave"
+      }[activeAdvance] || "Advance";
+      const items = [
+        ["Adj MAE", metric("mae"), "Formula_Adjustable point error", 3],
+        ["Adj Corr", metric("corr"), "Formula_Adjustable correlation", 3],
+        ["Adj Turn", metric("turn"), "Formula_Adjustable direction", 3],
+        ["Adj Amp", metric("amp"), "Formula_Adjustable delta std / truth", 3],
+        ["Adj dARA", metric("dara"), "Mean absolute ARA roll", 3],
+        ["Adj dPhase", metric("dphase"), "Mean phase roll in degrees", 1],
+        ["Formula MAE", fixed.mae, "Fixed single formula", 3],
+        ["Formula Amp", amp, "Fixed formula amplitude ratio", 3]
+      ];
+      if (activeAdvance) {
+        items.splice(4, 0,
+          [`${activeAdvanceLabel} MAE`, metric("mae", activeAdvance), "Selected advance overlay", 3],
+          [`${activeAdvanceLabel} Corr`, metric("corr", activeAdvance), "Selected advance overlay", 3]
+        );
+      }
+      cards.innerHTML = items.map(([name, value, sub, digits]) => `
+        <article class="card">
+          <div class="name">${name}</div>
+          <div class="value">${fmt(value, digits)}</div>
+          <div class="sub">${sub}</div>
+        </article>
+      `).join("");
+    }
+    function render() {
+      document.querySelectorAll("#horizonButtons button").forEach((button) => {
+        button.classList.toggle("active", button.textContent === `${state.horizon}m`);
+      });
+      document.querySelectorAll("[data-model]").forEach((input) => {
+        state.models[input.dataset.model] = input.checked;
+      });
+      renderCards();
+      drawChart();
+    }
+    buildButtons();
+    buildControls();
+    document.querySelectorAll("[data-model]").forEach((input) => input.addEventListener("change", render));
+    window.addEventListener("resize", drawChart);
+    render();
+  </script>
+</body>
+</html>

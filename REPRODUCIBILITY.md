@@ -441,6 +441,257 @@ Outputs:
 
 Important interpretation guard: this is strict-causal and no-decoder/no-lag-ridge. Each sphere neighbour is eligible only when its target `s+h` is already before the current origin `t`; non-ready rows fall back to persistence. In this first pass the sphere atlas contains only held-out visual records, so ready coverage is limited. The useful result is ready-only: nested ARA-band level lookup helps future direction/turn, while raw sphere-delta transport is weaker.
 
+The contact-triangle roll test turns the filter / layered sand analogy into explicit contact features:
+
+```bash
+python TheFormula/ara_contact_triangle_roll_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_contact_triangle_roll_result.json`
+- `TheFormula/ara_contact_triangle_roll_result.js`
+- `TheFormula/ara_contact_triangle_roll_viz.html`
+- `ARA_CONTACT_TRIANGLE_ROLL_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no-decoder/no-lag-ridge. It uses current lower-to-home parity, home-to-upper parity, contact triangle compactness, handedness, and nested ARA depth 2, then looks up older completed contact states. The first result does not beat the simpler wobble/sphere terrain lookup, so contact triangles should currently be treated as a possible gate/constraint selector rather than the main forecast distance metric.
+
+The rotating-terrain slice test implements the fixed-slice / moving-terrain correction more directly:
+
+```bash
+python TheFormula/ara_rotating_terrain_slice_model.py
+```
+
+Outputs:
+
+- `TheFormula/ara_rotating_terrain_slice_result.json`
+- `TheFormula/ara_rotating_terrain_slice_result.js`
+- `TheFormula/ara_rotating_terrain_slice_viz.html`
+- `ARA_ROTATING_TERRAIN_SLICE_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no-decoder/no-lag-ridge. Current rows estimate the arriving terrain patch from current sphere/wobble/spin values and the known horizon, then match older origin-surface or completed-target patches. The first hand-built rotation operator preserves ready-row direction but does not beat the simpler wobble/sphere terrain lookup on MAE or correlation.
+
+The sphere-orientation roll predictor tests the same fixed-slice idea with explicit 3D pose and roll vectors:
+
+```bash
+python TheFormula/ara_sphere_orientation_roll_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_sphere_orientation_roll_result.json`
+- `TheFormula/ara_sphere_orientation_roll_result.js`
+- `TheFormula/ara_sphere_orientation_roll_viz.html`
+- `ARA_SPHERE_ORIENTATION_ROLL_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no native-value decoder is used. Hand-built roll branches use only current-origin pose/wobble/spin values. The learned orientation branch trains only on completed historical rows whose target is before current origin `t`, predicts a future surface vector, and then samples the fixed historical terrain surface. On ready rows it improves over the previous sphere nested-2 lookup but still trails direct wobble-terrain matching.
+
+The raw terrain-address lookup tests whether the averaged learned-roll branch was washing amplitude out:
+
+```bash
+python TheFormula/ara_raw_terrain_address_lookup.py
+```
+
+Outputs:
+
+- `TheFormula/ara_raw_terrain_address_lookup_result.json`
+- `TheFormula/ara_raw_terrain_address_lookup_result.js`
+- `TheFormula/ara_raw_terrain_address_lookup_viz.html`
+- `ARA_RAW_TERRAIN_ADDRESS_LOOKUP_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no native-value decoder is used. The learned future pose trains only on completed historical rows whose target is before current origin `t`; the raw top-1 address lookup reads only older origin-surface points. Top-3 median/weighted branches are smoothing controls, not the primary framework branch. The result supports the amplitude objection: top-1 raw address improves ready-row correlation and amplitude preservation versus averaged learned roll, though it does not yet beat direct wobble-terrain matching on MAE.
+
+The fractal sphere-terrain reader tests the filled recursive ARA-grid correction:
+
+```bash
+python TheFormula/ara_fractal_sphere_terrain_reader.py
+```
+
+Outputs:
+
+- `TheFormula/ara_fractal_sphere_terrain_reader_result.json`
+- `TheFormula/ara_fractal_sphere_terrain_reader_result.js`
+- `TheFormula/ara_fractal_sphere_terrain_reader_viz.html`
+- `ARA_FRACTAL_SPHERE_TERRAIN_READER_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no historical nearest-neighbour table is used as the terrain. Historical rows train only the future pose; the terrain read itself is deterministic: recursive ARA bounds, local in-bounds phi valleys, and ridge spillover under roll/contact force. The first result preserves amplitude but does not beat raw top-1 or wobble, so the active basin/depth selector is still missing.
+
+The roll-displacement mode predictor tests whether the remaining delay comes from insufficient terrain-address advancement:
+
+```bash
+python TheFormula/ara_roll_displacement_mode_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_roll_displacement_mode_predictor_result.json`
+- `TheFormula/ara_roll_displacement_mode_predictor_result.js`
+- `TheFormula/ara_roll_displacement_mode_viz.html`
+- `ARA_ROLL_DISPLACEMENT_MODE_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no direct future-coordinate ridge is used. Candidate roll displacements are eligible only when the candidate target is before current origin `t`. The script applies completed roll components inside a selected mode, then reads deterministic fractal terrain. It removes under-movement but performs poorly because the first coarse mode selector often chooses the wrong route.
+
+The lower-sphere roll selector tests whether roll mode should be selected from lower-spin patterns instead of broad state similarity:
+
+```bash
+python TheFormula/ara_lower_sphere_roll_selector.py
+```
+
+Outputs:
+
+- `TheFormula/ara_lower_sphere_roll_selector_result.json`
+- `TheFormula/ara_lower_sphere_roll_selector_result.js`
+- `TheFormula/ara_lower_sphere_roll_selector_viz.html`
+- `ARA_LOWER_SPHERE_ROLL_SELECTOR_RESULT.md`
+
+Important interpretation guard: this is strict-causal and no future-value decoder is used. Roll selection uses current-origin lower-sphere spin/torque features only; candidate roll displacements are eligible only when their targets are before current origin `t`. The result supports the lower-sphere correction versus broad mode selection, but the current lower contact map is still too crude to beat raw top-1 terrain lookup.
+
+The full layered-sand formula puts the user's whole moving-floor / rolling-grain topology into one deterministic cascade:
+
+```bash
+python TheFormula/ara_layered_sand_full_formula.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_full_formula_result.json`
+- `TheFormula/ara_layered_sand_full_formula_result.js`
+- `TheFormula/ara_layered_sand_full_formula_viz.html`
+- `ARA_LAYERED_SAND_FULL_FORMULA_RESULT.md`
+
+Important interpretation guard: this is strict-causal, no-lag-ridge, no native-value decoder, no historical nearest-neighbour terrain lookup, and no smoothing. The formula includes moving floor, fine/medium/coarse/measured layers, opposite-direction contact roll, two lower contacts per layer, recursive ARA terrain per layer, and upper downward compression. The first result does not solve forecasting because the measured sphere under-rolls: the 6/12/24 `layered_fractal` amplitude ratio is only **0.203**. Treat this as the first complete mechanical implementation and as evidence that the next missing law is contact-pressure-to-roll-distance.
+
+The cleaned single-formula pass separates the physical formula from labelled overlays and exposes an adjustable copy:
+
+```bash
+python TheFormula/ara_layered_sand_single_formula.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_single_formula_result.json`
+- `TheFormula/ara_layered_sand_single_formula_result.js`
+- `TheFormula/ara_layered_sand_formula_adjustable_viz.html`
+- `ARA_LAYERED_SAND_SINGLE_FORMULA_RESULT.md`
+
+Important interpretation guard: `Formula` is one deterministic cascade. `Formula_Adjustable` is the same cascade with exposed constants for visual inspection. `BASELINE: Persistence`, `LEGACY: Wobble`, and `LEGACY: Raw top-1` are display overlays only, not formula inputs. There is no current-carry/persistence blend in the formula, though the current ARA coordinate is still used as the present contact location.
+
+The first parameter calibration for `Formula_Adjustable` is:
+
+```bash
+python TheFormula/ara_layered_sand_parameter_search.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_parameter_search_result.json`
+- `TheFormula/ara_layered_sand_parameter_search_result.js`
+- `ARA_LAYERED_SAND_PARAMETER_SEARCH_RESULT.md`
+
+Important interpretation guard: the optimizer sees truth on pre-2017 ENSO focus rows, so the fitted constants are calibration results. The first generalisation check is 2017+ ENSO holdout. The fitted constants improve MAE, direction, and amplitude on holdout, but they are not universal until frozen and tested on other time splits and systems.
+
+The shape/timing diagnostic tests whether the fixed formula has correct terrain shape but wrong phase:
+
+```bash
+python TheFormula/ara_layered_sand_shape_timing_diagnostic.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_shape_timing_diagnostic_result.json`
+- `TheFormula/ara_layered_sand_shape_timing_diagnostic_result.js`
+- `ARA_LAYERED_SAND_SHAPE_TIMING_DIAGNOSTIC_RESULT.md`
+
+Important interpretation guard: best-lag and phase-correction diagnostics are not forecasts by themselves. They are used to distinguish "wrong shape" from "right shape, wrong timing." The fixed formula shows horizon-sized delay, but the later advance audit found it is also highly correlated with the current NINO state. Treat the shifted result as a terrain/current-state map diagnostic, not a forecast.
+
+The strict advance-operator follow-up tests whether origin-time lower-layer spins can advance that terrain state causally:
+
+```bash
+python TheFormula/ara_layered_sand_advance_operator_test.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_advance_operator_result.json`
+- `TheFormula/ara_layered_sand_advance_operator_result.js`
+- `ARA_LAYERED_SAND_ADVANCE_OPERATOR_RESULT.md`
+
+Important interpretation guard: `future_origin_shift_oracle` is labelled as a leakage diagnostic because it reads the later origin row. Strict variants use origin-time spin packets only. The best strict variant in this pass is `Advance_Phase_Read`, which improves fitted holdout MAE/correlation modestly. Layer-roll variants preserve amplitude but often choose the wrong direction, so the missing law is now more specifically lower-spin roll-direction selection.
+
+The correlation-only variable search asks how high correlation can be pushed without future-row leakage:
+
+```bash
+python TheFormula/ara_layered_sand_correlation_search.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_correlation_search_result.json`
+- `TheFormula/ara_layered_sand_correlation_search_result.js`
+- `ARA_LAYERED_SAND_CORRELATION_SEARCH_RESULT.md`
+
+Important interpretation guard: this is still calibration because the variables are fit against truth on pre-2017 rows. The no-leakage check is the 2017+ holdout score. The best holdout family in this run is `Advance_Phase_Read` with corr **+0.204**, still far below the future-origin leakage diagnostic.
+
+The closed cutoff run is the first autonomous version of this branch:
+
+```bash
+python TheFormula/ara_layered_sand_closed_cutoff_run.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_closed_cutoff_result.json`
+- `TheFormula/ara_layered_sand_closed_cutoff_result.js`
+- `TheFormula/ara_layered_sand_closed_cutoff_viz.html`
+- `ARA_LAYERED_SAND_CLOSED_CUTOFF_RESULT.md`
+
+Important interpretation guard: after each cutoff, future observed NINO/SOI/PDO are not read. NINO is generated by the formula one month at a time; SOI/PDO are generated by a pre-cutoff partner closure. This explicitly corrects the "past generator in the future" failure of the shifted-line visual diagnostic. The closed predictor does not yet reproduce the near-perfect shifted-terrain match.
+
+The fixed sphere-atlas rotation run tests the exact non-leaky atlas operation:
+
+```bash
+python TheFormula/ara_fixed_sphere_atlas_rotation_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_fixed_sphere_atlas_rotation_result.json`
+- `TheFormula/ara_fixed_sphere_atlas_rotation_result.js`
+- `TheFormula/ara_fixed_sphere_atlas_rotation_viz.html`
+- `ARA_FIXED_SPHERE_ATLAS_ROTATION_RESULT.md`
+
+Important interpretation guard: this script uses the existing sphere atlas as a fixed terrain memory, filters atlas samples to dates already known at prediction time, rotates the current/cutoff pose to a future address, and reads the raw top-1 nearest past atlas point. It does not average neighbours and does not read future-origin rows. The result shows the current atlas is a historical point-cloud, not yet the dense recursive ARA/sub-ARA globe required by the full theory.
+
+The recursive sphere-grid run removes the layered-sand formula from the prediction path and fills missing sphere terrain deterministically:
+
+```bash
+python TheFormula/ara_recursive_sphere_grid_predictor.py
+```
+
+Outputs:
+
+- `TheFormula/ara_recursive_sphere_grid_result.json`
+- `TheFormula/ara_recursive_sphere_grid_result.js`
+- `TheFormula/ara_recursive_sphere_grid_viz.html`
+- `ARA_RECURSIVE_SPHERE_GRID_RESULT.md`
+
+Important interpretation guard: this is the first measured-sphere-only version. It uses the current coordinate and deterministic rotation, reads a close raw past atlas coordinate when available, and otherwise reads a recursive ARA/sub-ARA/sub-sub-ARA grid with phi/anti-phi/midline terrain. It does not use the layered-sand `Formula` as a pose estimator. The result improves MAE over persistence at several horizons but does not yet solve future route correlation.
+
+The layered-sand topological formula run keeps the layered-sand roll mechanism and inserts the recursive grid inside the spheres:
+
+```bash
+python TheFormula/ara_layered_sand_topological_formula.py
+```
+
+Outputs:
+
+- `TheFormula/ara_layered_sand_topological_formula_result.json`
+- `TheFormula/ara_layered_sand_topological_formula_result.js`
+- `TheFormula/ara_layered_sand_topological_formula_viz.html`
+- `ARA_LAYERED_SAND_TOPOLOGICAL_FORMULA_RESULT.md`
+
+Important interpretation guard: this is not the sphere-only grid and not the old shifted nowcast. The lower/contact/upper layered-sand formula decides roll and arrival; the recursive ARA topology decides terrain inside each sphere. The scalar topology branch is still mostly current-like, with `corr_with_current` about +0.987. The `topological_rotated` branch is the stricter version: it rotates the current sphere point by the layered roll vector before reading topology. That branch is worse at short horizons but improves the 24-month result to MAE 0.785 and corr +0.197.
+
 ## Recent Runnable Mapping Atlas
 
 The 2026-05-24 mapping-first atlas rebuilds the old temporal-coordinate visualiser as a reusable data export plus local HTML workbench.

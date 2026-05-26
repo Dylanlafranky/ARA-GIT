@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ARA Layered Sand Full Formula</title>
+  <script src="ara_layered_sand_full_formula_result.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #141a22;
+      --line: #2b3542;
+      --text: #e8f2ff;
+      --muted: #91a4b8;
+      --truth: #f6f7fb;
+      --persistence: #6f7b8a;
+      --wobble: #8f7cff;
+      --raw: #23d7c8;
+      --lower: #52d273;
+      --arrival: #f7b955;
+      --fractal: #ff6f59;
+      --water: #4ea5ff;
+      --tuned: #d7ff4f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+    }
+    main {
+      display: grid;
+      grid-template-rows: auto auto minmax(470px, 1fr) auto;
+      gap: 12px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+    .bar, .chart, .card, .legend, .tuner {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .bar, .cards, .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar {
+      justify-content: space-between;
+      padding: 10px 12px;
+    }
+    .group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .label {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    button, .toggle {
+      border: 1px solid #334050;
+      border-radius: 8px;
+      background: #1b2330;
+      color: var(--text);
+      padding: 8px 10px;
+      font: inherit;
+      font-weight: 750;
+      cursor: pointer;
+    }
+    button.active {
+      border-color: #9cff38;
+      color: #9cff38;
+      box-shadow: inset 0 0 0 1px rgba(156, 255, 56, .28);
+    }
+    .toggle {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      user-select: none;
+    }
+    .toggle input { accent-color: #9cff38; }
+    .tuner {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+      padding: 10px 12px;
+    }
+    .control {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+    .control-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .control output {
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #9cff38;
+    }
+    .chart {
+      position: relative;
+      overflow: hidden;
+      min-height: 470px;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .cards { align-items: stretch; }
+    .card {
+      min-width: 180px;
+      flex: 1;
+      padding: 12px;
+    }
+    .name {
+      color: #9fd1ff;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .value {
+      margin-top: 6px;
+      font-size: 24px;
+      font-weight: 850;
+      line-height: 1.05;
+    }
+    .sub {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .legend { padding: 10px 12px; }
+    .item {
+      display: inline-flex;
+      gap: 7px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .swatch {
+      width: 14px;
+      height: 4px;
+      border-radius: 999px;
+      background: currentColor;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="bar">
+      <div class="group" id="horizonButtons"><span class="label">Horizon</span></div>
+      <div class="group">
+        <label class="toggle"><input type="checkbox" data-model="wobble" checked> Wobble</label>
+        <label class="toggle"><input type="checkbox" data-model="raw" checked> Raw top-1</label>
+        <label class="toggle"><input type="checkbox" data-model="lower"> Lower core</label>
+        <label class="toggle"><input type="checkbox" data-model="arrival"> Layered arrival</label>
+        <label class="toggle"><input type="checkbox" data-model="fractal" checked> Layered fractal</label>
+        <label class="toggle"><input type="checkbox" data-model="water"> Layered water</label>
+        <label class="toggle"><input type="checkbox" data-model="tuned" checked> Tuned formula</label>
+      </div>
+    </section>
+
+    <section class="tuner" id="tuner">
+      <label class="control">
+        <span class="control-row"><span>Roll amount</span><output data-out="roll">1.00</output></span>
+        <input type="range" min="-144" max="144" step="0.5" value="0" data-param="roll">
+      </label>
+      <label class="control">
+        <span class="control-row"><span>Lower speed</span><output data-out="lower">1.00</output></span>
+        <input type="range" min="0" max="8" step="0.05" value="1" data-param="lower">
+      </label>
+      <label class="control">
+        <span class="control-row"><span>Pressure to roll</span><output data-out="pressure">0.00</output></span>
+        <input type="range" min="-8" max="8" step="0.05" value="0" data-param="pressure">
+      </label>
+      <label class="control">
+        <span class="control-row"><span>Upper pressure</span><output data-out="upper">1.00</output></span>
+        <input type="range" min="0" max="4" step="0.05" value="1" data-param="upper">
+      </label>
+      <label class="control">
+        <span class="control-row"><span>Upper brake</span><output data-out="brake">1.00</output></span>
+        <input type="range" min="0" max="4" step="0.05" value="1" data-param="brake">
+      </label>
+      <label class="control">
+        <span class="control-row"><span>Terrain pull</span><output data-out="terrain">1.00</output></span>
+        <input type="range" min="0" max="4" step="0.05" value="1" data-param="terrain">
+      </label>
+      <button type="button" id="resetParams">Reset</button>
+    </section>
+
+    <section class="chart"><canvas id="chart"></canvas></section>
+
+    <section>
+      <div class="cards" id="cards"></div>
+      <div class="legend">
+        <span class="item" style="color: var(--truth)"><span class="swatch"></span> Truth</span>
+        <span class="item" style="color: var(--persistence)"><span class="swatch"></span> Current/persistence</span>
+        <span class="item" style="color: var(--wobble)"><span class="swatch"></span> Wobble analog</span>
+        <span class="item" style="color: var(--raw)"><span class="swatch"></span> Raw address top-1</span>
+        <span class="item" style="color: var(--lower)"><span class="swatch"></span> Lower core top-1</span>
+        <span class="item" style="color: var(--arrival)"><span class="swatch"></span> Layered arrival</span>
+        <span class="item" style="color: var(--fractal)"><span class="swatch"></span> Layered fractal</span>
+        <span class="item" style="color: var(--water)"><span class="swatch"></span> Layered water</span>
+        <span class="item" style="color: var(--tuned)"><span class="swatch"></span> Tuned formula</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const DATA = window.ARA_LAYERED_SAND_FULL_FORMULA;
+    const horizons = DATA.horizons_months.map(String);
+    const PHI = (1 + Math.sqrt(5)) / 2;
+    const state = {
+      horizon: horizons.includes("12") ? "12" : horizons[0],
+      models: { wobble: true, raw: true, lower: false, arrival: false, fractal: true, water: false, tuned: true },
+      params: { roll: 0, lower: 1, pressure: 0, upper: 1, brake: 1, terrain: 1 }
+    };
+    const modelDefs = [
+      { key: "wobble", field: "wobble_surface_analog", metric: "wobble_surface_analog", color: "#8f7cff", width: 1.8 },
+      { key: "raw", field: "raw_address_top1", metric: "raw_address_top1", color: "#23d7c8", width: 1.9 },
+      { key: "lower", field: "lower_core_top1", metric: "lower_core_top1", color: "#52d273", width: 1.8 },
+      { key: "arrival", field: "layered_arrival", metric: "layered_arrival", color: "#f7b955", width: 1.8 },
+      { key: "fractal", field: "layered_fractal", metric: "layered_fractal", color: "#ff6f59", width: 2.0 },
+      { key: "water", field: "layered_water", metric: "layered_water", color: "#4ea5ff", width: 1.8 },
+      { key: "tuned", field: "tuned_formula", metric: "tuned_formula", color: "#d7ff4f", width: 2.2 }
+    ];
+    const buttons = document.getElementById("horizonButtons");
+    for (const h of horizons) {
+      const button = document.createElement("button");
+      button.textContent = `${h}m`;
+      button.type = "button";
+      button.addEventListener("click", () => {
+        state.horizon = h;
+        render();
+      });
+      buttons.appendChild(button);
+    }
+    document.querySelectorAll("[data-model]").forEach((input) => {
+      input.addEventListener("change", () => {
+        state.models[input.dataset.model] = input.checked;
+        render();
+      });
+    });
+    document.querySelectorAll("[data-param]").forEach((input) => {
+      input.addEventListener("input", () => {
+        state.params[input.dataset.param] = Number(input.value);
+        render();
+      });
+    });
+    document.getElementById("resetParams").addEventListener("click", () => {
+      state.params = { roll: 0, lower: 1, pressure: 0, upper: 1, brake: 1, terrain: 1 };
+      document.querySelectorAll("[data-param]").forEach((input) => {
+        input.value = state.params[input.dataset.param];
+      });
+      render();
+    });
+    function clamp(value, lo, hi) {
+      return Math.max(lo, Math.min(hi, Number(value)));
+    }
+    function valueToAra(value) {
+      return clamp(1 + Math.tanh(Number(value) / 1.5), 0, 2);
+    }
+    function araToValue(ara) {
+      const x = clamp(Number(ara) - 1, -0.985, 0.985);
+      return 1.5 * Math.atanh(x);
+    }
+    function localPhiTargets(lo, hi) {
+      const width = hi - lo;
+      return [hi - width / PHI, lo + width / PHI];
+    }
+    function layerTerrain(ara, rollDelta, force, depth) {
+      let lo = 0;
+      let hi = 2;
+      for (let i = 0; i < depth; i += 1) {
+        const mid = 0.5 * (lo + hi);
+        if (ara < mid) hi = mid;
+        else lo = mid;
+      }
+      const [p1, p2] = localPhiTargets(lo, hi);
+      const target = Math.abs(ara - p1) <= Math.abs(ara - p2) ? p1 : p2;
+      const ridgeDist = Math.min(Math.abs(ara - lo), Math.abs(hi - ara));
+      const width = Math.max(hi - lo, 1e-6);
+      const ridgeResistance = ridgeDist / width;
+      const spillover = clamp(force - ridgeResistance, 0, 1);
+      const boundary = rollDelta >= 0 ? hi : lo;
+      const targetWithSpill = spillover > 0 ? boundary : target;
+      return { target, targetWithSpill, spillover, ridgeResistance, width };
+    }
+    function readTerrain(arrivalAra, currentAra, contactPressure, lowerDrive, upperGate) {
+      const ara = clamp(arrivalAra, 0, 2);
+      const rollDelta = ara - clamp(currentAra, 0, 2);
+      const force = clamp(
+        0.72 * Math.abs(rollDelta) +
+        0.16 * Math.abs(contactPressure) +
+        0.10 * Math.abs(lowerDrive) +
+        0.05 * Math.abs(upperGate),
+        0,
+        1.2
+      );
+      const layers = [1, 2, 3, 4, 5, 6].map((depth) => layerTerrain(ara, rollDelta, force, depth));
+      const rawWeights = layers.map((layer, index) => 1 / (PHI ** index));
+      const weightTotal = rawWeights.reduce((sum, value) => sum + value, 0);
+      const weights = rawWeights.map((value) => value / weightTotal);
+      const weightedTarget = layers.reduce((sum, layer, index) => sum + weights[index] * layer.target, 0);
+      const weightedTargetSpill = layers.reduce((sum, layer, index) => sum + weights[index] * layer.targetWithSpill, 0);
+      const spillover = layers.reduce((sum, layer, index) => sum + weights[index] * layer.spillover, 0);
+      const weightedWidth = layers.reduce((sum, layer, index) => sum + weights[index] * layer.width, 0);
+      const weightedSlope = weightedTargetSpill - ara;
+      const forceGain = clamp(0.25 + 0.58 * force + 0.15 * spillover, 0.12, 1.05);
+      return { weightedSlope, forceGain, force, spillover, weightedWidth };
+    }
+    function sampleField(rows, index, field) {
+      if (!rows.length) return NaN;
+      const clamped = clamp(index, 0, rows.length - 1);
+      const lo = Math.floor(clamped);
+      const hi = Math.ceil(clamped);
+      const frac = clamped - lo;
+      const a = Number(rows[lo]?.[field]);
+      const b = Number(rows[hi]?.[field]);
+      if (!Number.isFinite(a)) return Number.isFinite(b) ? b : NaN;
+      if (!Number.isFinite(b)) return a;
+      return a + (b - a) * frac;
+    }
+    function formulaTerrainValue(row) {
+      const layers = Array.isArray(row.layers) ? row.layers : [];
+      if (!layers.length) return row.layered_fractal;
+      let ara = valueToAra(row.current);
+      layers.forEach((layer, index) => {
+        const period = Math.max(Number(layer.period) || 12, 1e-6);
+        const speed = Math.sqrt(12 / period);
+        const parity = index % 2 === 0 ? 1 : -1;
+        const spin = Math.tanh(
+          0.58 * (Number(layer.forward) || 0) +
+          0.30 * (Number(layer.lateral) || 0) +
+          0.12 * (Number(layer.twist) || 0)
+        );
+        const pressure = Math.tanh((Number(layer.pressure) || 0) / 8);
+        const spill = Number(layer.terrain_spillover) || 0;
+        ara += parity * spin * pressure * speed * 0.045;
+        ara += parity * spill * 0.025 / (1 + index);
+      });
+      const measured = layers.find((layer) => layer.name === "measured") || layers[layers.length - 1];
+      if (measured && Number.isFinite(Number(measured.ara))) {
+        ara = 0.72 * ara + 0.28 * Number(measured.ara);
+      }
+      return araToValue(clamp(ara, 0, 2));
+    }
+    function sampleFormulaTerrain(rows, index) {
+      if (!rows.length) return NaN;
+      const clamped = clamp(index, 0, rows.length - 1);
+      const lo = Math.floor(clamped);
+      const hi = Math.ceil(clamped);
+      const frac = clamped - lo;
+      const a = formulaTerrainValue(rows[lo]);
+      const b = formulaTerrainValue(rows[hi]);
+      return a + (b - a) * frac;
+    }
+    function lowerLayerTorque(row) {
+      const layers = Array.isArray(row.layers) ? row.layers : [];
+      if (!layers.length) return 0;
+      return layers.reduce((sum, layer) => {
+        if (layer.name === "measured") return sum;
+        const period = Math.max(Number(layer.period) || 12, 1e-6);
+        const speed = Math.sqrt(12 / period);
+        const wobble = 0.62 * (Number(layer.forward) || 0) + 0.28 * (Number(layer.lateral) || 0) + 0.10 * (Number(layer.twist) || 0);
+        return sum + speed * wobble;
+      }, 0);
+    }
+    function tunedRow(row, index, sourceRows) {
+      const currentAra = valueToAra(row.current);
+      const pressureAxis = Math.tanh(
+        0.70 * (row.final_forward ?? 0) +
+        0.32 * (row.final_lateral ?? 0) +
+        0.22 * (row.final_twist ?? 0)
+      );
+      const horizon = Number(state.horizon);
+      const lowerShiftMonths = state.params.lower * Math.tanh(lowerLayerTorque(row)) * horizon * 0.85;
+      const pressureShiftMonths = state.params.pressure * pressureAxis * Math.sqrt(Math.max(row.final_pressure ?? 0, 0)) * 0.55;
+      const upper = Math.max(row.upper_compression ?? 0, 0) * state.params.upper;
+      const brake = 1 + state.params.brake * 0.42 * upper;
+      const totalShiftMonths = ((state.params.roll * 2.25) + lowerShiftMonths + pressureShiftMonths) / brake;
+      const sampleIndex = index + totalShiftMonths / 3;
+      const sampledTerrain = sampleFormulaTerrain(sourceRows, sampleIndex);
+      const sampledArrivalAra = sampleField(sourceRows, sampleIndex, "arrival_ara");
+      const arrivalAra = Number.isFinite(sampledArrivalAra) ? sampledArrivalAra : currentAra;
+      const terrain = readTerrain(
+        arrivalAra,
+        currentAra,
+        row.final_pressure ?? 0,
+        row.final_forward ?? 0,
+        upper
+      );
+      const sampledAra = Number.isFinite(sampledTerrain) ? valueToAra(sampledTerrain) : currentAra;
+      const forceAra = clamp(sampledAra + terrain.weightedSlope * terrain.forceGain * state.params.terrain, 0, 2);
+      const terrainValue = araToValue(forceAra);
+      return {
+        ...row,
+        tuned_formula: terrainValue,
+        tuned_arrival_ara: arrivalAra,
+        tuned_force_ara: forceAra,
+        tuned_shift_months: totalShiftMonths
+      };
+    }
+    function rowsForView() {
+      const rows = DATA.viz_records[state.horizon] || [];
+      return rows.map((row, index) => tunedRow(row, index, rows));
+    }
+    function metric(name, model) {
+      return DATA.point_scores[model]?.[state.horizon]?.[name];
+    }
+    function direction(model) {
+      return DATA.direction_scores[model]?.[state.horizon]?.accuracy;
+    }
+    function ampRatio(model) {
+      return DATA.amplitude[model]?.[state.horizon]?.std_ratio;
+    }
+    function diag(name) {
+      return DATA.diagnostics[state.horizon]?.[name];
+    }
+    function statRows() {
+      return rowsForView();
+    }
+    function sign(value) {
+      return value > 1e-9 ? 1 : value < -1e-9 ? -1 : 0;
+    }
+    function mean(values) {
+      return values.length ? values.reduce((sum, value) => sum + value, 0) / values.length : NaN;
+    }
+    function std(values) {
+      const m = mean(values);
+      return Math.sqrt(mean(values.map((value) => (value - m) ** 2)));
+    }
+    function corr(xs, ys) {
+      const mx = mean(xs);
+      const my = mean(ys);
+      const vx = xs.map((x) => x - mx);
+      const vy = ys.map((y) => y - my);
+      const denom = Math.sqrt(vx.reduce((s, x) => s + x * x, 0) * vy.reduce((s, y) => s + y * y, 0));
+      return denom > 1e-12 ? vx.reduce((s, x, i) => s + x * vy[i], 0) / denom : NaN;
+    }
+    function dynamicMetric(name) {
+      const rows = statRows();
+      if (!rows.length) return NaN;
+      if (name === "mae") return mean(rows.map((row) => Math.abs(row.tuned_formula - row.actual)));
+      if (name === "corr") return corr(rows.map((row) => row.tuned_formula), rows.map((row) => row.actual));
+      if (name === "turn") {
+        const turns = rows.filter((row) => sign(row.actual - row.current) !== 0);
+        return mean(turns.map((row) => sign(row.tuned_formula - row.current) === sign(row.actual - row.current) ? 1 : 0));
+      }
+      if (name === "amp") {
+        const pred = rows.map((row) => row.tuned_formula - row.current);
+        const truth = rows.map((row) => row.actual - row.current);
+        return std(pred) / Math.max(std(truth), 1e-12);
+      }
+      if (name === "meanRollAra") return mean(rows.map((row) => Math.abs(row.tuned_arrival_ara - valueToAra(row.current))));
+      if (name === "meanShift") return mean(rows.map((row) => row.tuned_shift_months));
+      return NaN;
+    }
+    function fmt(value, digits = 3) {
+      return Number.isFinite(value) ? value.toFixed(digits) : "n/a";
+    }
+    function renderCards() {
+      document.querySelectorAll("[data-out]").forEach((out) => {
+        out.textContent = fmt(state.params[out.dataset.out], 2);
+      });
+      const cards = document.getElementById("cards");
+      const items = [
+        ["Tuned MAE", dynamicMetric("mae"), "Live formula point error", 3],
+        ["Tuned corr", dynamicMetric("corr"), "Live formula correlation", 3],
+        ["Tuned turn", dynamicMetric("turn"), "Live direction versus current", 3],
+        ["Tuned amp", dynamicMetric("amp"), "Live delta std / truth delta std", 3],
+        ["Shift", dynamicMetric("meanShift"), "Mean terrain address shift in months", 2],
+        ["ARA roll", dynamicMetric("meanRollAra"), "Mean absolute sampled address movement", 3],
+        ["Pressure", diag("mean_final_pressure"), "Mean measured-sphere contact pressure", 2],
+        ["Base amp", ampRatio("layered_fractal"), "Original layered fractal amp ratio", 3]
+      ];
+      cards.innerHTML = items.map(([name, value, sub, digits]) => `
+        <article class="card">
+          <div class="name">${name}</div>
+          <div class="value">${fmt(value, digits)}</div>
+          <div class="sub">${sub}</div>
+        </article>
+      `).join("");
+    }
+    function drawLine(ctx, rows, field, x, y, color, width, dash = []) {
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = width;
+      ctx.setLineDash(dash);
+      ctx.beginPath();
+      rows.forEach((row, index) => {
+        const px = x(index);
+        const py = y(row[field]);
+        if (index === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      });
+      ctx.stroke();
+      ctx.restore();
+    }
+    function drawPoints(ctx, rows, field, x, y, color) {
+      ctx.save();
+      ctx.fillStyle = color;
+      rows.forEach((row, index) => {
+        ctx.beginPath();
+        ctx.arc(x(index), y(row[field]), 2.4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+    function drawChart() {
+      const canvas = document.getElementById("chart");
+      const rect = canvas.getBoundingClientRect();
+      const scale = window.devicePixelRatio || 1;
+      canvas.width = Math.max(1, Math.floor(rect.width * scale));
+      canvas.height = Math.max(1, Math.floor(rect.height * scale));
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(scale, 0, 0, scale, 0, 0);
+      const width = rect.width;
+      const height = rect.height;
+      const pad = { left: 56, right: 24, top: 26, bottom: 52 };
+      const rows = rowsForView();
+      const activeFields = modelDefs.filter((m) => state.models[m.key]).map((m) => m.field);
+      const values = rows.flatMap((row) => ["actual", "current", ...activeFields].map((field) => row[field]));
+      let minY = Math.min(-0.8, ...values.filter(Number.isFinite));
+      let maxY = Math.max(0.8, ...values.filter(Number.isFinite));
+      const span = Math.max(0.1, maxY - minY);
+      minY -= span * 0.08;
+      maxY += span * 0.08;
+      const plotW = width - pad.left - pad.right;
+      const plotH = height - pad.top - pad.bottom;
+      const x = (index) => pad.left + (rows.length <= 1 ? 0 : (index / (rows.length - 1)) * plotW);
+      const y = (value) => pad.top + (maxY - value) / (maxY - minY) * plotH;
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = "#090d12";
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = "12px ui-sans-serif, system-ui";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      ctx.strokeStyle = "rgba(255,255,255,.12)";
+      ctx.fillStyle = "#91a4b8";
+      const ticks = 6;
+      for (let i = 0; i <= ticks; i += 1) {
+        const value = minY + (i / ticks) * (maxY - minY);
+        const py = y(value);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, py);
+        ctx.lineTo(width - pad.right, py);
+        ctx.stroke();
+        ctx.fillText(value.toFixed(1), pad.left - 10, py);
+      }
+      ctx.strokeStyle = "rgba(255,255,255,.34)";
+      ctx.beginPath();
+      ctx.moveTo(pad.left, y(0));
+      ctx.lineTo(width - pad.right, y(0));
+      ctx.stroke();
+      const yearStep = Math.max(1, Math.floor(rows.length / 6));
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      rows.forEach((row, index) => {
+        if (index % yearStep !== 0 && index !== rows.length - 1) return;
+        const px = x(index);
+        ctx.strokeStyle = "rgba(255,255,255,.06)";
+        ctx.beginPath();
+        ctx.moveTo(px, pad.top);
+        ctx.lineTo(px, height - pad.bottom);
+        ctx.stroke();
+        ctx.fillStyle = "#91a4b8";
+        ctx.fillText(row.origin.slice(0, 4), px, height - pad.bottom + 14);
+      });
+      drawLine(ctx, rows, "current", x, y, "#6f7b8a", 1.4, [7, 6]);
+      drawLine(ctx, rows, "actual", x, y, "#f6f7fb", 2.5);
+      drawPoints(ctx, rows, "actual", x, y, "#f6f7fb");
+      for (const model of modelDefs) {
+        if (!state.models[model.key]) continue;
+        drawLine(ctx, rows, model.field, x, y, model.color, model.width);
+      }
+      ctx.save();
+      ctx.translate(18, pad.top + plotH / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillStyle = "#91a4b8";
+      ctx.font = "700 13px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText("NINO / formula output", 0, 0);
+      ctx.restore();
+      ctx.fillStyle = "#91a4b8";
+      ctx.font = "700 13px ui-sans-serif, system-ui";
+      ctx.textAlign = "center";
+      ctx.fillText(`Origin date, ${state.horizon}m forecast horizon`, pad.left + plotW / 2, height - 18);
+    }
+    function render() {
+      document.querySelectorAll("#horizonButtons button").forEach((button) => {
+        button.classList.toggle("active", button.textContent === `${state.horizon}m`);
+      });
+      renderCards();
+      drawChart();
+    }
+    window.addEventListener("resize", drawChart);
+    render();
+  </script>
+</body>
+</html>

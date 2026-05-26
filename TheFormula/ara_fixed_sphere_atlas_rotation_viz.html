@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Fixed Sphere Atlas Rotation</title>
+  <script src="./ara_fixed_sphere_atlas_rotation_result.js"></script>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #121821;
+      --panel2: #17202b;
+      --line: #2b3542;
+      --text: #eef4ff;
+      --muted: #9fb0c4;
+      --grid: rgba(160, 176, 196, 0.17);
+      --actual: #f4f7fb;
+      --persistence: #8b929c;
+      --clock-flat: #4fa3ff;
+      --clock-wobble: #6fe0d0;
+      --formula: #c6ff33;
+      --manual: #ffb052;
+      --wavecycle: #b995ff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button, select {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto auto minmax(460px, 1fr) auto;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .top,
+    .toolbar,
+    .chart-wrap,
+    .metrics {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .top {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 12px 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: 0;
+      line-height: 1.2;
+    }
+
+    .sub {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .badge {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 4px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(130px, 1fr));
+      gap: 10px;
+      align-items: end;
+    }
+
+    .control {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    label {
+      font-size: 11px;
+      color: #a9cdef;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #334154;
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--text);
+      padding: 7px 9px;
+    }
+
+    .toggles {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button {
+      min-height: 36px;
+      border: 1px solid #334154;
+      border-radius: 7px;
+      padding: 7px 11px;
+      background: var(--panel2);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    button.active {
+      border-color: rgba(198, 255, 51, 0.75);
+      color: var(--formula);
+      background: rgba(198, 255, 51, 0.08);
+    }
+
+    .chart-wrap {
+      min-height: 460px;
+      padding: 12px;
+      position: relative;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      display: block;
+    }
+
+    .metrics {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 88px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .metric .name {
+      font-size: 11px;
+      color: #a9cdef;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .metric .value {
+      margin-top: 5px;
+      font-size: 22px;
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric .note {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 980px) {
+      .top,
+      .toolbar,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .badges {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <div>
+      <h1>ARA Fixed Sphere Atlas Rotation</h1>
+      <div class="sub">Rotate to the future sphere address, then read a raw top-1 past atlas terrain point. This is the closed version of the terrain-sphere idea, not the shifted future-origin diagnostic.</div>
+    </div>
+    <div class="badges">
+      <span class="badge">Past-only atlas</span>
+      <span class="badge">No averaging</span>
+      <span class="badge">No future-origin reads</span>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="control">
+      <label for="modeSelect">Mode</label>
+      <select id="modeSelect">
+        <option value="rolling">Rolling origin</option>
+        <option value="cutoff">Closed cutoff</option>
+      </select>
+    </div>
+    <div class="control">
+      <label for="horizonSelect">Horizon</label>
+      <select id="horizonSelect"></select>
+    </div>
+    <div class="control">
+      <label for="cutoffSelect">Cutoff</label>
+      <select id="cutoffSelect"></select>
+    </div>
+    <div class="control">
+      <label for="windowSelect">Cutoff score</label>
+      <select id="windowSelect">
+        <option value="all">All leads</option>
+        <option value="lead_1_12">Lead 1-12m</option>
+        <option value="lead_13_36">Lead 13-36m</option>
+        <option value="lead_37_plus">Lead 37m+</option>
+      </select>
+    </div>
+    <div class="toggles" id="toggles"></div>
+  </section>
+
+  <section class="chart-wrap">
+    <canvas id="chart"></canvas>
+  </section>
+
+  <section class="metrics" id="metrics"></section>
+</main>
+
+<script>
+const DATA = window.ARA_FIXED_SPHERE_ATLAS_ROTATION;
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+const modelOrder = [
+  "actual",
+  "persistence",
+  "atlas_clock_flat_top1",
+  "atlas_clock_wobble_top1",
+  "atlas_formula_pose_top1",
+  "atlas_manual_pose_top1",
+  "atlas_wavecycle_pose_top1",
+];
+const labels = {
+  actual: "Truth",
+  persistence: "Persistence",
+  atlas_clock_flat_top1: "Atlas: clock flat",
+  atlas_clock_wobble_top1: "Atlas: clock wobble",
+  atlas_formula_pose_top1: "Atlas: formula pose",
+  atlas_manual_pose_top1: "Atlas: manual pose",
+  atlas_wavecycle_pose_top1: "Atlas: wavecycle pose",
+};
+const colors = {
+  actual: getCss("--actual"),
+  persistence: getCss("--persistence"),
+  atlas_clock_flat_top1: getCss("--clock-flat"),
+  atlas_clock_wobble_top1: getCss("--clock-wobble"),
+  atlas_formula_pose_top1: getCss("--formula"),
+  atlas_manual_pose_top1: getCss("--manual"),
+  atlas_wavecycle_pose_top1: getCss("--wavecycle"),
+};
+let visible = {
+  actual: true,
+  persistence: true,
+  atlas_clock_flat_top1: false,
+  atlas_clock_wobble_top1: false,
+  atlas_formula_pose_top1: true,
+  atlas_manual_pose_top1: false,
+  atlas_wavecycle_pose_top1: true,
+};
+
+function getCss(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function fmt(value, digits = 3) {
+  if (value === null || value === undefined || !Number.isFinite(Number(value))) return "n/a";
+  return Number(value).toFixed(digits);
+}
+
+function init() {
+  const horizonSelect = document.getElementById("horizonSelect");
+  Object.keys(DATA.rolling.records_by_horizon).forEach(h => {
+    const opt = document.createElement("option");
+    opt.value = h;
+    opt.textContent = `${h} months`;
+    if (h === "12") opt.selected = true;
+    horizonSelect.appendChild(opt);
+  });
+
+  const cutoffSelect = document.getElementById("cutoffSelect");
+  Object.keys(DATA.closed_cutoffs).forEach(cutoff => {
+    const opt = document.createElement("option");
+    opt.value = cutoff;
+    opt.textContent = cutoff;
+    if (cutoff === "2017-01-01") opt.selected = true;
+    cutoffSelect.appendChild(opt);
+  });
+
+  const toggles = document.getElementById("toggles");
+  modelOrder.forEach(key => {
+    const btn = document.createElement("button");
+    btn.textContent = labels[key];
+    btn.className = visible[key] ? "active" : "";
+    btn.onclick = () => {
+      visible[key] = !visible[key];
+      btn.classList.toggle("active", visible[key]);
+      render();
+    };
+    toggles.appendChild(btn);
+  });
+
+  ["modeSelect", "horizonSelect", "cutoffSelect", "windowSelect"].forEach(id => {
+    document.getElementById(id).addEventListener("input", render);
+  });
+
+  window.addEventListener("resize", render);
+  render();
+}
+
+function activeRows() {
+  const mode = document.getElementById("modeSelect").value;
+  if (mode === "rolling") {
+    return DATA.rolling.records_by_horizon[document.getElementById("horizonSelect").value] || [];
+  }
+  const cutoff = document.getElementById("cutoffSelect").value;
+  return DATA.closed_cutoffs[cutoff].records || [];
+}
+
+function activeScores() {
+  const mode = document.getElementById("modeSelect").value;
+  if (mode === "rolling") {
+    const horizon = document.getElementById("horizonSelect").value;
+    const out = {};
+    modelOrder.filter(k => k !== "actual").forEach(k => {
+      out[k] = DATA.rolling.scores[k][horizon];
+    });
+    return out;
+  }
+  const cutoff = document.getElementById("cutoffSelect").value;
+  const windowKey = document.getElementById("windowSelect").value;
+  return DATA.closed_cutoffs[cutoff].scores[windowKey];
+}
+
+function xDate(row) {
+  return new Date(row.target || row.date).getTime();
+}
+
+function drawGrid(plot, minY, maxY, minX, maxX) {
+  ctx.strokeStyle = getCss("--grid");
+  ctx.lineWidth = 1;
+  ctx.fillStyle = "#a9b6c7";
+  ctx.font = "12px Inter, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i <= 6; i++) {
+    const t = i / 6;
+    const y = plot.bottom - t * (plot.bottom - plot.top);
+    const value = minY + t * (maxY - minY);
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y);
+    ctx.lineTo(plot.right, y);
+    ctx.stroke();
+    ctx.fillText(fmt(value, 1), plot.left - 8, y);
+  }
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const yearMin = new Date(minX).getFullYear();
+  const yearMax = new Date(maxX).getFullYear();
+  const span = Math.max(1, yearMax - yearMin);
+  const step = span > 16 ? 4 : span > 8 ? 2 : 1;
+  for (let y = yearMin; y <= yearMax; y += step) {
+    const tx = new Date(`${y}-01-01T00:00:00`).getTime();
+    if (tx < minX || tx > maxX) continue;
+    const x = plot.left + ((tx - minX) / (maxX - minX || 1)) * (plot.right - plot.left);
+    ctx.beginPath();
+    ctx.moveTo(x, plot.top);
+    ctx.lineTo(x, plot.bottom);
+    ctx.stroke();
+    ctx.fillText(String(y), x, plot.bottom + 9);
+  }
+}
+
+function drawLine(rows, key, plot, minY, maxY, minX, maxX) {
+  const pts = rows
+    .filter(r => r[key] !== null && r[key] !== undefined && Number.isFinite(Number(r[key])))
+    .map(r => ({
+      x: plot.left + ((xDate(r) - minX) / (maxX - minX || 1)) * (plot.right - plot.left),
+      y: plot.bottom - ((Number(r[key]) - minY) / (maxY - minY || 1)) * (plot.bottom - plot.top),
+    }));
+  if (pts.length < 2) return;
+  ctx.save();
+  ctx.strokeStyle = colors[key];
+  ctx.lineWidth = key === "actual" ? 2.4 : 2.0;
+  ctx.globalAlpha = key === "persistence" ? 0.72 : 0.96;
+  ctx.beginPath();
+  pts.forEach((p, i) => {
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.stroke();
+  if (key === "actual") {
+    ctx.fillStyle = colors[key];
+    pts.forEach((p, i) => {
+      if (i % 3 !== 0) return;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+  ctx.restore();
+}
+
+function renderMetrics() {
+  const scores = activeScores();
+  const box = document.getElementById("metrics");
+  box.innerHTML = "";
+  modelOrder.filter(k => k !== "actual").forEach(key => {
+    const sc = scores[key] || {};
+    const div = document.createElement("div");
+    div.className = "metric";
+    div.innerHTML = `
+      <div class="name">${labels[key]}</div>
+      <div class="value">${fmt(sc.corr)}</div>
+      <div class="note">corr | MAE ${fmt(sc.mae)} | amp ${fmt(sc.amp_ratio)}</div>
+    `;
+    box.appendChild(div);
+  });
+}
+
+function render() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.max(600, Math.floor(rect.width * dpr));
+  canvas.height = Math.max(430, Math.floor(rect.height * dpr));
+  canvas.style.height = `${Math.max(430, Math.floor(rect.height))}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  ctx.clearRect(0, 0, w, h);
+
+  const rows = activeRows();
+  const activeKeys = modelOrder.filter(k => visible[k]);
+  const values = [];
+  rows.forEach(row => {
+    activeKeys.forEach(key => {
+      if (row[key] !== null && row[key] !== undefined && Number.isFinite(Number(row[key]))) {
+        values.push(Number(row[key]));
+      }
+    });
+  });
+  const minY = Math.min(-2.2, Math.floor((Math.min(...values) - 0.2) * 10) / 10);
+  const maxY = Math.max(2.6, Math.ceil((Math.max(...values) + 0.2) * 10) / 10);
+  const minX = Math.min(...rows.map(xDate));
+  const maxX = Math.max(...rows.map(xDate));
+  const plot = { left: 58, right: w - 22, top: 22, bottom: h - 48 };
+
+  drawGrid(plot, minY, maxY, minX, maxX);
+  activeKeys.forEach(key => drawLine(rows, key, plot, minY, maxY, minX, maxX));
+
+  ctx.fillStyle = "#c4d1e0";
+  ctx.font = "12px Inter, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "bottom";
+  ctx.fillText("NINO / atlas read", plot.left, plot.top - 5);
+
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(
+    document.getElementById("modeSelect").value === "rolling"
+      ? `Target date, ${document.getElementById("horizonSelect").value}m rolling-origin forecast`
+      : `Target date, closed cutoff ${document.getElementById("cutoffSelect").value}`,
+    (plot.left + plot.right) / 2,
+    h - 8
+  );
+
+  renderMetrics();
+}
+
+init();
+</script>
+</body>
+</html>

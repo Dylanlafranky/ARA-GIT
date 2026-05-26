@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA Recursive Sphere Grid</title>
+  <script src="./ara_recursive_sphere_grid_result.js"></script>
+  <style>
+    :root {
+      --bg: #080b10;
+      --panel: #121821;
+      --panel2: #17202b;
+      --line: #2b3542;
+      --text: #eef4ff;
+      --muted: #9fb0c4;
+      --grid: rgba(160, 176, 196, 0.17);
+      --truth: #f4f7fb;
+      --persist: #89919e;
+      --recorded: #4fa3ff;
+      --hybrid: #35d0ba;
+      --water: #c6ff33;
+      --valley: #ffb052;
+      --phi: #ff7a22;
+      --anti: #a64bc4;
+      --subphi: #ffd327;
+      --subanti: #ff9ec1;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button, select { font: inherit; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      grid-template-rows: auto minmax(520px, 1fr) auto;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .top,
+    .chart-wrap,
+    .side,
+    .metrics {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .top {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(320px, 1fr) auto;
+      gap: 16px;
+      padding: 12px 14px;
+      align-items: start;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .sub {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 160px 190px;
+      gap: 8px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 11px;
+      color: #a9cdef;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    select {
+      width: 100%;
+      min-height: 38px;
+      border: 1px solid #334154;
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--text);
+      padding: 7px 9px;
+    }
+
+    .toggles {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    button {
+      min-height: 34px;
+      border: 1px solid #334154;
+      border-radius: 7px;
+      padding: 6px 10px;
+      background: var(--panel2);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    button.active {
+      border-color: rgba(198,255,51,0.75);
+      color: var(--water);
+      background: rgba(198,255,51,0.08);
+    }
+
+    .chart-wrap {
+      min-width: 0;
+      min-height: 520px;
+      padding: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      display: block;
+    }
+
+    .side {
+      min-width: 0;
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .panel {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.035);
+      padding: 10px;
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #a9cdef;
+      letter-spacing: 0;
+    }
+
+    .rule-svg {
+      width: 100%;
+      aspect-ratio: 1.35;
+      display: block;
+      background: #f7f7f4;
+      border-radius: 6px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+
+    .legend-row {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+    }
+
+    .metrics {
+      grid-column: 1 / -1;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      min-height: 84px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255,255,255,0.035);
+    }
+
+    .metric .name {
+      font-size: 11px;
+      color: #a9cdef;
+      text-transform: uppercase;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .metric .value {
+      margin-top: 5px;
+      font-size: 22px;
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric .note {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 1050px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+      .top,
+      .controls,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<main class="app">
+  <section class="top">
+    <div>
+      <h1>ARA Recursive Sphere Grid</h1>
+      <div class="sub">Measured sphere only: current coordinate rotates forward; close recorded terrain is read raw; missing terrain is filled by recursive ARA / sub-ARA / sub-sub-ARA phi valleys.</div>
+      <div class="toggles" id="toggles"></div>
+    </div>
+    <div class="controls">
+      <div>
+        <label for="horizonSelect">Horizon</label>
+        <select id="horizonSelect"></select>
+      </div>
+      <div>
+        <label for="viewSelect">Chart</label>
+        <select id="viewSelect">
+          <option value="value">Value overlay</option>
+          <option value="pull">Terrain pull</option>
+          <option value="address">ARA address</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <section class="chart-wrap">
+    <canvas id="chart"></canvas>
+  </section>
+
+  <aside class="side">
+    <section class="panel">
+      <h2>Grid Slice</h2>
+      <svg class="rule-svg" viewBox="0 0 270 200" aria-label="Recursive ARA grid">
+        <rect width="270" height="200" fill="#f7f7f4"></rect>
+        <circle cx="135" cy="100" r="78" fill="none" stroke="#0b0b0b" stroke-width="2.4"></circle>
+        <line x1="22" y1="100" x2="248" y2="100" stroke="#0b0b0b" stroke-width="2.4"></line>
+        <line x1="135" y1="17" x2="135" y2="183" stroke="#0b0b0b" stroke-width="2.4"></line>
+        <line x1="54" y1="100" x2="54" y2="178" stroke="#0b0b0b" stroke-width="1.8"></line>
+        <line x1="216" y1="22" x2="216" y2="178" stroke="#0b0b0b" stroke-width="1.8"></line>
+        <line x1="28" y1="54" x2="242" y2="54" stroke="#ff7a22" stroke-width="2.2"></line>
+        <line x1="182" y1="17" x2="182" y2="183" stroke="#ff7a22" stroke-width="2.2"></line>
+        <line x1="88" y1="17" x2="88" y2="183" stroke="#a64bc4" stroke-width="2.2"></line>
+        <line x1="28" y1="69" x2="242" y2="69" stroke="#ffd327" stroke-width="2.2"></line>
+        <line x1="28" y1="130" x2="242" y2="130" stroke="#ffd327" stroke-width="2.2"></line>
+        <line x1="28" y1="85" x2="242" y2="85" stroke="#ff9ec1" stroke-width="2.2"></line>
+        <line x1="28" y1="146" x2="242" y2="146" stroke="#ff9ec1" stroke-width="2.2"></line>
+      </svg>
+    </section>
+    <section class="panel">
+      <h2>Line Meaning</h2>
+      <div class="legend">
+        <div class="legend-row"><span class="swatch" style="background:#ff7a22"></span><span>Phi valley inside the active band</span></div>
+        <div class="legend-row"><span class="swatch" style="background:#a64bc4"></span><span>Anti-phi counterline</span></div>
+        <div class="legend-row"><span class="swatch" style="background:#0b0b0b"></span><span>Midlines and band boundaries</span></div>
+        <div class="legend-row"><span class="swatch" style="background:#ffd327"></span><span>Deeper local phi valleys</span></div>
+        <div class="legend-row"><span class="swatch" style="background:#ff9ec1"></span><span>Deeper anti-phi counterlines</span></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Current Horizon</h2>
+      <div class="legend" id="diagnostics"></div>
+    </section>
+  </aside>
+
+  <section class="metrics" id="metrics"></section>
+</main>
+
+<script>
+const DATA = window.ARA_RECURSIVE_SPHERE_GRID;
+const canvas = document.getElementById("chart");
+const ctx = canvas.getContext("2d");
+const order = [
+  "actual",
+  "persistence",
+  "recorded_top1_any",
+  "recorded_close_else_grid",
+  "grid_phi_water",
+  "grid_phi_valley",
+];
+const labels = {
+  actual: "Truth",
+  persistence: "Persistence",
+  recorded_top1_any: "Recorded top-1",
+  recorded_close_else_grid: "Recorded-or-grid",
+  grid_phi_water: "Grid water",
+  grid_phi_valley: "Grid phi valley",
+};
+const colors = {
+  actual: css("--truth"),
+  persistence: css("--persist"),
+  recorded_top1_any: css("--recorded"),
+  recorded_close_else_grid: css("--hybrid"),
+  grid_phi_water: css("--water"),
+  grid_phi_valley: css("--valley"),
+};
+let visible = {
+  actual: true,
+  persistence: true,
+  recorded_top1_any: false,
+  recorded_close_else_grid: true,
+  grid_phi_water: true,
+  grid_phi_valley: false,
+};
+
+function css(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
+function fmt(value, digits = 3) {
+  if (value === null || value === undefined || !Number.isFinite(Number(value))) return "n/a";
+  return Number(value).toFixed(digits);
+}
+
+function init() {
+  const horizon = document.getElementById("horizonSelect");
+  Object.keys(DATA.records_by_horizon).forEach(h => {
+    const opt = document.createElement("option");
+    opt.value = h;
+    opt.textContent = `${h} months`;
+    if (h === "12") opt.selected = true;
+    horizon.appendChild(opt);
+  });
+  const toggles = document.getElementById("toggles");
+  order.forEach(key => {
+    const button = document.createElement("button");
+    button.textContent = labels[key];
+    button.className = visible[key] ? "active" : "";
+    button.onclick = () => {
+      visible[key] = !visible[key];
+      button.classList.toggle("active", visible[key]);
+      render();
+    };
+    toggles.appendChild(button);
+  });
+  ["horizonSelect", "viewSelect"].forEach(id => document.getElementById(id).addEventListener("input", render));
+  window.addEventListener("resize", render);
+  render();
+}
+
+function rows() {
+  return DATA.records_by_horizon[document.getElementById("horizonSelect").value] || [];
+}
+
+function xDate(row) {
+  return new Date(row.target).getTime();
+}
+
+function yValue(row, key) {
+  const view = document.getElementById("viewSelect").value;
+  if (view === "value") return row[key];
+  if (view === "pull") {
+    if (key === "actual") return row.actual - row.current;
+    if (key === "persistence") return 0;
+    if (key === "grid_phi_water") return row.grid.vertical_pull;
+    if (key === "grid_phi_valley") return row.grid.phase_pull;
+    if (key === "recorded_close_else_grid") return row.grid.water_step;
+    return row.recorded_lookup ? row.recorded_lookup.distance : null;
+  }
+  if (key === "actual") return row.arrival_ara;
+  if (key === "persistence") return row.grid.valley_ara;
+  if (key === "grid_phi_water") return row.grid.water_ara;
+  if (key === "grid_phi_valley") return row.grid.valley_ara;
+  if (key === "recorded_close_else_grid") return row.used_recorded_close ? row.recorded_lookup.ara : row.grid.water_ara;
+  if (key === "recorded_top1_any") return row.recorded_lookup ? row.recorded_lookup.ara : null;
+  return row[key];
+}
+
+function drawGrid(plot, minY, maxY, minX, maxX) {
+  ctx.strokeStyle = css("--grid");
+  ctx.lineWidth = 1;
+  ctx.fillStyle = "#a9b6c7";
+  ctx.font = "12px Inter, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "middle";
+  for (let i = 0; i <= 6; i++) {
+    const t = i / 6;
+    const y = plot.bottom - t * (plot.bottom - plot.top);
+    const value = minY + t * (maxY - minY);
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y);
+    ctx.lineTo(plot.right, y);
+    ctx.stroke();
+    ctx.fillText(fmt(value, 1), plot.left - 8, y);
+  }
+  ctx.textAlign = "center";
+  ctx.textBaseline = "top";
+  const yearMin = new Date(minX).getFullYear();
+  const yearMax = new Date(maxX).getFullYear();
+  const step = yearMax - yearMin > 16 ? 4 : 2;
+  for (let year = yearMin; year <= yearMax; year += step) {
+    const tx = new Date(`${year}-01-01T00:00:00`).getTime();
+    if (tx < minX || tx > maxX) continue;
+    const x = plot.left + ((tx - minX) / (maxX - minX || 1)) * (plot.right - plot.left);
+    ctx.beginPath();
+    ctx.moveTo(x, plot.top);
+    ctx.lineTo(x, plot.bottom);
+    ctx.stroke();
+    ctx.fillText(String(year), x, plot.bottom + 9);
+  }
+}
+
+function drawLine(dataRows, key, plot, minY, maxY, minX, maxX) {
+  const pts = dataRows
+    .map(row => ({ row, value: yValue(row, key) }))
+    .filter(item => item.value !== null && item.value !== undefined && Number.isFinite(Number(item.value)))
+    .map(item => ({
+      x: plot.left + ((xDate(item.row) - minX) / (maxX - minX || 1)) * (plot.right - plot.left),
+      y: plot.bottom - ((Number(item.value) - minY) / (maxY - minY || 1)) * (plot.bottom - plot.top),
+    }));
+  if (pts.length < 2) return;
+  ctx.save();
+  ctx.strokeStyle = colors[key];
+  ctx.lineWidth = key === "actual" ? 2.4 : 2;
+  ctx.globalAlpha = key === "persistence" ? 0.72 : 0.96;
+  ctx.beginPath();
+  pts.forEach((p, i) => {
+    if (i === 0) ctx.moveTo(p.x, p.y);
+    else ctx.lineTo(p.x, p.y);
+  });
+  ctx.stroke();
+  if (key === "actual") {
+    ctx.fillStyle = colors[key];
+    pts.forEach((p, i) => {
+      if (i % 3 !== 0) return;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+  ctx.restore();
+}
+
+function renderMetrics() {
+  const h = document.getElementById("horizonSelect").value;
+  const box = document.getElementById("metrics");
+  box.innerHTML = "";
+  order.filter(k => k !== "actual").forEach(key => {
+    const score = DATA.scores[key][h] || {};
+    const div = document.createElement("div");
+    div.className = "metric";
+    div.innerHTML = `<div class="name">${labels[key]}</div><div class="value">${fmt(score.corr)}</div><div class="note">corr | MAE ${fmt(score.mae)} | amp ${fmt(score.amp_ratio)}</div>`;
+    box.appendChild(div);
+  });
+  const diag = DATA.diagnostics[h];
+  document.getElementById("diagnostics").innerHTML = `
+    <div>Recorded close rate: ${fmt(diag.recorded_close_rate)}</div>
+    <div>Mean top-1 distance: ${fmt(diag.mean_top1_distance)}</div>
+    <div>Mean vertical pull: ${fmt(diag.mean_abs_vertical_pull)}</div>
+    <div>Mean phase pull: ${fmt(diag.mean_abs_phase_pull)}</div>
+    <div>Mean water step: ${fmt(diag.mean_water_step)}</div>
+  `;
+}
+
+function render() {
+  const wrap = canvas.parentElement.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = Math.max(600, Math.floor(wrap.width * dpr));
+  canvas.height = Math.max(500, Math.floor(wrap.height * dpr));
+  canvas.style.height = `${Math.max(500, Math.floor(wrap.height))}px`;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const w = canvas.width / dpr;
+  const h = canvas.height / dpr;
+  ctx.clearRect(0, 0, w, h);
+
+  const dataRows = rows();
+  const keys = order.filter(k => visible[k]);
+  const vals = [];
+  dataRows.forEach(row => keys.forEach(key => {
+    const value = yValue(row, key);
+    if (value !== null && value !== undefined && Number.isFinite(Number(value))) vals.push(Number(value));
+  }));
+  const view = document.getElementById("viewSelect").value;
+  const minY = view === "address" ? 0 : Math.min(-2.2, Math.floor((Math.min(...vals) - 0.2) * 10) / 10);
+  const maxY = view === "address" ? 2 : Math.max(2.6, Math.ceil((Math.max(...vals) + 0.2) * 10) / 10);
+  const minX = Math.min(...dataRows.map(xDate));
+  const maxX = Math.max(...dataRows.map(xDate));
+  const plot = { left: 58, right: w - 22, top: 22, bottom: h - 48 };
+  drawGrid(plot, minY, maxY, minX, maxX);
+  keys.forEach(key => drawLine(dataRows, key, plot, minY, maxY, minX, maxX));
+
+  ctx.fillStyle = "#c4d1e0";
+  ctx.font = "12px Inter, sans-serif";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(view === "address" ? "ARA terrain address" : view === "pull" ? "Terrain pull / distance" : "NINO / sphere read", plot.left, plot.top - 5);
+  ctx.textAlign = "center";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(`Target date, ${document.getElementById("horizonSelect").value}m measured-sphere rotation`, (plot.left + plot.right) / 2, h - 8);
+  renderMetrics();
+}
+
+init();
+</script>
+</body>
+</html>
