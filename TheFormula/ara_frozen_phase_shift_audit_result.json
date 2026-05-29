@@ -1,0 +1,323 @@
+{
+  "date": "2026-05-27",
+  "method": "Frozen topology + phi-period phase shift leakage audit",
+  "description": "Tests whether the layered-sand topology extraction at origin time, combined with forward phase shifting by fixed phi-rung periods, constitutes legitimate causal forecasting.",
+  "critical_finding": "Periods are NOT measured from data. They are fixed geometric constants (HOME/PHI^k = 47/1.618^k months). This eliminates period-estimation leakage as a concern entirely.",
+  "train_cutoff": "2017-01-01",
+  "focus_horizons": [
+    6,
+    12,
+    24
+  ],
+  "phi_rung_periods": {
+    "floor": 6.857207586264825,
+    "fine": 11.095194942490116,
+    "medium": 17.95240252875494,
+    "coarse": 29.04759747124506,
+    "measured": 47.0
+  },
+  "predictors": {
+    "Frozen_Phase_Shift": "Origin-time spin packets advanced by advance_spin(gain=1.0) at each rung, plus phase_extra = 360*(h/HOME) for the measured sphere. Reconstructed via run_cascade_from_spins + read_value.",
+    "Persistence": "Current value carried forward (trivial baseline).",
+    "Repeat_Last_Cycle": "Look back by N*HOME months from origin+horizon (N chosen so lookback < origin). Read the raw NINO value at that point.",
+    "Shuffled_Period": "Same as Frozen_Phase_Shift but with phi-rung periods randomly permuted across rungs before computing phase shifts."
+  },
+  "parameters_used": "best_params from ara_layered_sand_parameter_search_result.json (fitted on train only)",
+  "parameters_tuned_for_this_test": "NONE \u2014 zero tuning, pure forward projection",
+  "results": {
+    "train_focus_pre2017": {
+      "Persistence": {
+        "overall": {
+          "n": 192,
+          "mae": 0.9088541666666666,
+          "corr": 0.020562552640956928,
+          "direction": 0.0
+        },
+        "by_horizon": {
+          "6": {
+            "n": 64,
+            "mae": 0.78,
+            "corr": 0.3154574172368676,
+            "direction": 0.0
+          },
+          "12": {
+            "n": 64,
+            "mae": 0.94859375,
+            "corr": -0.030696645682076636,
+            "direction": 0.0
+          },
+          "24": {
+            "n": 64,
+            "mae": 0.9979687500000001,
+            "corr": -0.22295747501722943,
+            "direction": 0.0
+          }
+        }
+      },
+      "Frozen_Phase_Shift": {
+        "overall": {
+          "n": 192,
+          "mae": 0.8080494455185523,
+          "corr": -0.08967611537371756,
+          "direction": 0.7329842931937173
+        },
+        "by_horizon": {
+          "6": {
+            "n": 64,
+            "mae": 0.7722762186251533,
+            "corr": -0.16080548360946081,
+            "direction": 0.640625
+          },
+          "12": {
+            "n": 64,
+            "mae": 0.8367204933081219,
+            "corr": 0.013374227055339145,
+            "direction": 0.75
+          },
+          "24": {
+            "n": 64,
+            "mae": 0.8151516246223818,
+            "corr": -0.1692283403260127,
+            "direction": 0.8095238095238095
+          }
+        }
+      },
+      "Repeat_Last_Cycle": {
+        "overall": {
+          "n": 192,
+          "mae": 1.0784375,
+          "corr": -0.29453823838445264,
+          "direction": 0.5706806282722513
+        },
+        "by_horizon": {
+          "6": {
+            "n": 64,
+            "mae": 1.14375,
+            "corr": -0.30464458221228374,
+            "direction": 0.5625
+          },
+          "12": {
+            "n": 64,
+            "mae": 1.08265625,
+            "corr": -0.3197567477083041,
+            "direction": 0.53125
+          },
+          "24": {
+            "n": 64,
+            "mae": 1.0089062500000001,
+            "corr": -0.25979944825218426,
+            "direction": 0.6190476190476191
+          }
+        }
+      },
+      "Shuffled_Period": {
+        "overall": {
+          "n": 192,
+          "mae": 0.7666848605770317,
+          "corr": 0.0011417020987417135,
+          "direction": 0.7382198952879581
+        },
+        "by_horizon": {
+          "6": {
+            "n": 64,
+            "mae": 0.7890895275253177,
+            "corr": -0.026554660527311653,
+            "direction": 0.671875
+          },
+          "12": {
+            "n": 64,
+            "mae": 0.7853056109259886,
+            "corr": 0.04041554572319098,
+            "direction": 0.78125
+          },
+          "24": {
+            "n": 64,
+            "mae": 0.7256594432797888,
+            "corr": -0.027292012815094188,
+            "direction": 0.7619047619047619
+          }
+        }
+      }
+    },
+    "holdout_focus_2017_on": {
+      "Persistence": {
+        "overall": {
+          "n": 94,
+          "mae": 0.861595744680851,
+          "corr": -0.030087879533309842,
+          "direction": 0.0
+        },
+        "by_horizon": {
+          "6": {
+            "n": 34,
+            "mae": 0.6552941176470588,
+            "corr": 0.4268535447791485,
+            "direction": 0.0
+          },
+          "12": {
+            "n": 32,
+            "mae": 0.8771875,
+            "corr": -0.15277116918695505,
+            "direction": 0.0
+          },
+          "24": {
+            "n": 28,
+            "mae": 1.0942857142857143,
+            "corr": -0.4140236913902269,
+            "direction": 0.0
+          }
+        }
+      },
+      "Frozen_Phase_Shift": {
+        "overall": {
+          "n": 94,
+          "mae": 0.7746441272575458,
+          "corr": -0.09860333365367226,
+          "direction": 0.6774193548387096
+        },
+        "by_horizon": {
+          "6": {
+            "n": 34,
+            "mae": 0.8340951736429931,
+            "corr": -0.19660721712764218,
+            "direction": 0.5588235294117647
+          },
+          "12": {
+            "n": 32,
+            "mae": 0.778611213239718,
+            "corr": 0.03283340811083085,
+            "direction": 0.78125
+          },
+          "24": {
+            "n": 28,
+            "mae": 0.6979197583813065,
+            "corr": -0.2885284527564313,
+            "direction": 0.7037037037037037
+          }
+        }
+      },
+      "Repeat_Last_Cycle": {
+        "overall": {
+          "n": 94,
+          "mae": 0.7240425531914896,
+          "corr": 0.4061706929044545,
+          "direction": 0.8064516129032258
+        },
+        "by_horizon": {
+          "6": {
+            "n": 34,
+            "mae": 0.7014705882352942,
+            "corr": 0.4138861959267994,
+            "direction": 0.7941176470588235
+          },
+          "12": {
+            "n": 32,
+            "mae": 0.7190624999999999,
+            "corr": 0.4099389179785093,
+            "direction": 0.78125
+          },
+          "24": {
+            "n": 28,
+            "mae": 0.7571428571428571,
+            "corr": 0.39404382066988897,
+            "direction": 0.8518518518518519
+          }
+        }
+      },
+      "Shuffled_Period": {
+        "overall": {
+          "n": 94,
+          "mae": 0.8748809941960294,
+          "corr": -0.06053906040878645,
+          "direction": 0.7311827956989247
+        },
+        "by_horizon": {
+          "6": {
+            "n": 34,
+            "mae": 0.9475062903728971,
+            "corr": -0.2087303942395074,
+            "direction": 0.5882352941176471
+          },
+          "12": {
+            "n": 32,
+            "mae": 0.9028469867268838,
+            "corr": -0.0938593931630676,
+            "direction": 0.71875
+          },
+          "24": {
+            "n": 28,
+            "mae": 0.7547320002317138,
+            "corr": 0.17900527915025582,
+            "direction": 0.9259259259259259
+          }
+        }
+      }
+    }
+  },
+  "verdict": {
+    "Q1_beats_persistence": {
+      "answer": false,
+      "frozen_phase_shift_holdout_corr": -0.09860333365367226,
+      "persistence_holdout_corr": -0.030087879533309842,
+      "delta": -0.06851545412036242,
+      "interpretation": "NO \u2014 frozen phase shift does NOT beat persistence on holdout."
+    },
+    "Q2_beats_repeat_last_cycle": {
+      "answer": false,
+      "frozen_phase_shift_holdout_corr": -0.09860333365367226,
+      "repeat_last_cycle_holdout_corr": 0.4061706929044545,
+      "delta": -0.5047740265581268,
+      "interpretation": "NO \u2014 raw cycle repetition matches or beats the topology extraction."
+    },
+    "Q3_shuffled_periods_collapse": {
+      "answer": false,
+      "frozen_phase_shift_holdout_corr": -0.09860333365367226,
+      "shuffled_period_holdout_corr": -0.06053906040878645,
+      "delta": -0.03806427324488581,
+      "interpretation": "NO \u2014 shuffling periods does NOT collapse the score. The correlation comes from the shape capture, not the period assignment."
+    },
+    "Q4_future_data_contamination": {
+      "period_estimation": "CLEAN \u2014 Periods are fixed phi-rung constants (HOME/PHI^k). They are deterministic geometric values that never touch any data.",
+      "spin_packet_extraction": "CLEAN \u2014 raw_spin() reads NINO/SOI/PDO finite differences at the origin anchor index only. No future data.",
+      "read_value_mechanism": "CLEAN \u2014 read_value() uses ara_current (origin-time NINO mapped to ARA coordinate), phase_clock_origin, and cascaded spin state. No future data.",
+      "advance_spin_function": "CLEAN \u2014 advance_spin() uses horizon/period (both known at origin) to rotate the spin vector. The rotation angle is purely geometric.",
+      "overall": "NO future data contamination found in any component."
+    },
+    "per_horizon_holdout": {
+      "6": {
+        "Frozen_Phase_Shift": -0.19660721712764218,
+        "Persistence": 0.4268535447791485,
+        "Repeat_Last_Cycle": 0.4138861959267994,
+        "Shuffled_Period": -0.2087303942395074,
+        "beats_persistence": false,
+        "beats_repeat_last_cycle": false
+      },
+      "12": {
+        "Frozen_Phase_Shift": 0.03283340811083085,
+        "Persistence": -0.15277116918695505,
+        "Repeat_Last_Cycle": 0.4099389179785093,
+        "Shuffled_Period": -0.0938593931630676,
+        "beats_persistence": true,
+        "beats_repeat_last_cycle": false
+      },
+      "24": {
+        "Frozen_Phase_Shift": -0.2885284527564313,
+        "Persistence": -0.4140236913902269,
+        "Repeat_Last_Cycle": 0.39404382066988897,
+        "Shuffled_Period": 0.17900527915025582,
+        "beats_persistence": true,
+        "beats_repeat_last_cycle": false
+      }
+    },
+    "overall_verdict": "PARTIAL/FAIL \u2014 Predictor does not pass all four tests. See individual results."
+  },
+  "leakage_audit_detail": {
+    "period_source": "Fixed phi-rung constants, never touches data",
+    "spin_extraction": "raw_spin() at origin anchor only",
+    "advance_operator": "advance_spin() uses horizon/period ratio, both known at origin",
+    "cascade": "run_cascade_from_spins() processes origin-time spins only",
+    "read_value": "Uses ara_current and phase_clock_origin (both origin-time)",
+    "parameters": "Fitted on pre-2017 train set, frozen for this test",
+    "contamination_paths_found": 0
+  }
+}

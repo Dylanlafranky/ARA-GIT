@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Terrain Stand-in vs Actual</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0e1a; color: #c8cdd8; }
+.header { padding: 16px 28px; border-bottom: 1px solid #1e2d50; }
+.header h1 { font-size: 18px; color: #e8ecf4; }
+.header .sub { font-size: 12px; color: #6882a8; margin-top: 3px; }
+.controls { display: flex; gap: 16px; padding: 10px 28px; align-items: center; border-bottom: 1px solid #1a2540; }
+.controls label { font-size: 12px; color: #6882a8; }
+.controls select { background: #111828; border: 1px solid #1e2d50; color: #c8cdd8; border-radius: 4px; padding: 4px 8px; font-size: 12px; }
+canvas { display: block; margin: 12px auto 0; }
+.legend { display: flex; gap: 24px; justify-content: center; padding: 8px 0 4px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #8899b0; }
+.legend-swatch { width: 20px; height: 3px; border-radius: 1px; }
+.tooltip {
+  position: fixed; background: #1a2440; border: 1px solid #2a3d60; border-radius: 6px;
+  padding: 10px 14px; font-size: 12px; pointer-events: none; z-index: 100; display: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.tt-row { display: flex; justify-content: space-between; gap: 20px; }
+.tt-label { color: #6882a8; }
+.tt-val { color: #e0e6f0; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Actual vs Terrain Stand-in — Layered Sand Formula</h1>
+  <div class="sub">Same formula cascade, spin derived from terrain ARA instead of raw data</div>
+</div>
+<div class="controls">
+  <label>Horizon:</label>
+  <select id="horizonSelect">
+    <option value="3">3 months</option>
+    <option value="6" selected>6 months</option>
+    <option value="12">12 months</option>
+    <option value="18">18 months</option>
+    <option value="24">24 months</option>
+  </select>
+  <label>Mode:</label>
+  <select id="modeSelect">
+    <option value="all">All modes</option>
+    <option value="original">Original formula only</option>
+    <option value="terrain_same_ara">Terrain (same ARA) only</option>
+    <option value="terrain_cascaded">Terrain (cascaded ARA) only</option>
+    <option value="hybrid">Hybrid (20-step cal + free-run) only</option>
+  </select>
+</div>
+<div class="legend" id="legend"></div>
+<canvas id="chart"></canvas>
+<div class="tooltip" id="tooltip"></div>
+
+<script src="ara_terrain_spin_standin_viz_data.js"></script>
+<script>
+const D = window.TERRAIN_STANDIN_DATA;
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+const PAD = { l: 56, r: 24, t: 24, b: 36 };
+
+function resize() {
+  const w = Math.min(window.innerWidth - 40, 1400);
+  const h = 500;
+  canvas.width = w * devicePixelRatio;
+  canvas.height = h * devicePixelRatio;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+
+function parseDate(s) { return new Date(s); }
+
+function draw() {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  ctx.clearRect(0, 0, w, h);
+
+  const horizon = document.getElementById('horizonSelect').value;
+  const mode = document.getElementById('modeSelect').value;
+  const recs = D.records[horizon];
+  if (!recs || !recs.length) return;
+
+  const d0 = parseDate(recs[0].origin).getTime();
+  const d1 = parseDate(recs[recs.length - 1].origin).getTime();
+  function dateToX(s) { return PAD.l + (parseDate(s).getTime() - d0) / (d1 - d0) * (w - PAD.l - PAD.r); }
+
+  // Value range
+  const allVals = recs.flatMap(r => [r.actual, r.original, r.terrain_same_ara, r.terrain_cascaded, r.hybrid]);
+  const vMin = Math.min(-3, Math.min(...allVals)) - 0.3;
+  const vMax = Math.max(3, Math.max(...allVals)) + 0.3;
+  function valToY(v) { return PAD.t + (vMax - v) / (vMax - vMin) * (h - PAD.t - PAD.b); }
+
+  // Grid
+  ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+  ctx.fillStyle = '#4a5a78'; ctx.font = '11px system-ui';
+  for (let v = Math.ceil(vMin); v <= vMax; v++) {
+    const y = valToY(v);
+    ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
+    ctx.fillText(v.toFixed(0), PAD.l - 22, y + 4);
+  }
+  // Zero line
+  ctx.strokeStyle = '#2a3d60'; ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(PAD.l, valToY(0)); ctx.lineTo(w - PAD.r, valToY(0)); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Year labels
+  const y0year = parseDate(recs[0].origin).getFullYear();
+  const y1year = parseDate(recs[recs.length-1].origin).getFullYear();
+  for (let yr = y0year; yr <= y1year; yr += 2) {
+    const x = dateToX(yr + '-01-01');
+    ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(x, PAD.t); ctx.lineTo(x, h - PAD.b); ctx.stroke();
+    ctx.fillStyle = '#4a5a78';
+    ctx.fillText(yr.toString(), x - 12, h - PAD.b + 14);
+  }
+
+  // Calibration band for hybrid
+  if (mode === 'all' || mode === 'hybrid') {
+    const calRecs = recs.filter(r => r.calibrated);
+    if (calRecs.length) {
+      const x0 = dateToX(calRecs[0].origin);
+      const x1 = dateToX(calRecs[calRecs.length-1].origin);
+      ctx.fillStyle = 'rgba(59, 130, 246, 0.04)';
+      ctx.fillRect(x0, PAD.t, x1 - x0, h - PAD.t - PAD.b);
+      ctx.fillStyle = '#3b82f650';
+      ctx.font = '10px system-ui';
+      ctx.fillText('CAL', x0 + 4, PAD.t + 12);
+    }
+  }
+
+  // Define series
+  const series = [
+    { key: 'actual', color: '#e0e6f0', width: 2.5, alpha: 0.9, label: 'Actual NINO 3.4' },
+    { key: 'original', color: '#f97316', width: 1.8, alpha: 0.7, label: 'Original formula (data-fed)' },
+    { key: 'terrain_same_ara', color: '#22c55e', width: 1.8, alpha: 0.7, label: 'Terrain spin (same ARA from data)' },
+    { key: 'terrain_cascaded', color: '#3b82f6', width: 1.8, alpha: 0.7, label: 'Terrain spin (cascaded ARA)' },
+    { key: 'hybrid', color: '#a855f7', width: 2, alpha: 0.8, label: 'Hybrid (20-step cal → free-run)' },
+  ];
+
+  let visibleSeries;
+  if (mode === 'all') {
+    visibleSeries = series;
+  } else {
+    visibleSeries = [series[0]]; // always show actual
+    const match = series.find(s => s.key === mode);
+    if (match) visibleSeries.push(match);
+  }
+
+  // Draw lines
+  for (const s of visibleSeries) {
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = s.width;
+    ctx.globalAlpha = s.alpha;
+    ctx.beginPath();
+    recs.forEach((r, i) => {
+      const x = dateToX(r.origin);
+      const y = valToY(r[s.key]);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  // Dots on actual
+  recs.forEach(r => {
+    const x = dateToX(r.origin);
+    const y = valToY(r.actual);
+    ctx.fillStyle = 'rgba(224, 230, 240, 0.4)';
+    ctx.beginPath(); ctx.arc(x, y, 2, 0, Math.PI * 2); ctx.fill();
+  });
+
+  // Legend
+  document.getElementById('legend').innerHTML = visibleSeries.map(s =>
+    `<div class="legend-item"><div class="legend-swatch" style="background:${s.color}"></div>${s.label}</div>`
+  ).join('');
+
+  // Store for tooltip
+  canvas._recs = recs;
+  canvas._dateToX = dateToX;
+  canvas._valToY = valToY;
+  canvas._visibleSeries = visibleSeries;
+}
+
+resize();
+draw();
+window.addEventListener('resize', () => { resize(); draw(); });
+document.getElementById('horizonSelect').addEventListener('change', draw);
+document.getElementById('modeSelect').addEventListener('change', draw);
+
+canvas.addEventListener('mousemove', function(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const recs = canvas._recs;
+  if (!recs) return;
+
+  let nearest = null, minDist = Infinity;
+  for (const r of recs) {
+    const x = canvas._dateToX(r.origin);
+    const dist = Math.abs(x - mx);
+    if (dist < minDist) { minDist = dist; nearest = r; }
+  }
+  if (!nearest || minDist > 25) { tooltip.style.display = 'none'; return; }
+
+  const rows = [
+    `<div class="tt-row"><span class="tt-label">Date:</span><span class="tt-val">${nearest.origin}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Actual:</span><span class="tt-val">${nearest.actual.toFixed(3)}</span></div>`,
+  ];
+  for (const s of canvas._visibleSeries) {
+    if (s.key === 'actual') continue;
+    const err = Math.abs(nearest[s.key] - nearest.actual);
+    rows.push(`<div class="tt-row"><span class="tt-label">${s.label.split('(')[0].trim()}:</span><span class="tt-val" style="color:${s.color}">${nearest[s.key].toFixed(3)} <span style="font-size:10px;color:#5a7090">err ${err.toFixed(2)}</span></span></div>`);
+  }
+  if (nearest.calibrated !== undefined) {
+    rows.push(`<div class="tt-row"><span class="tt-label">Mode:</span><span class="tt-val">${nearest.calibrated ? 'Calibrated' : 'Free-run'}</span></div>`);
+  }
+
+  tooltip.innerHTML = rows.join('');
+  tooltip.style.display = 'block';
+  tooltip.style.left = Math.min(e.clientX + 14, window.innerWidth - 280) + 'px';
+  tooltip.style.top = (e.clientY - 100) + 'px';
+});
+canvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+</script>
+</body>
+</html>

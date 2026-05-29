@@ -1,0 +1,76 @@
+window.HEART_THIRDLEG = {
+ "horizons_beats": [
+  5,
+  10,
+  20,
+  40,
+  80
+ ],
+ "persistence": [
+  0.187,
+  -0.012,
+  0.063,
+  -0.023,
+  0.067
+ ],
+ "models": {
+  "heart": [
+   0.172,
+   0.057,
+   0.118,
+   0.052,
+   0.023
+  ],
+  "+breath": [
+   0.184,
+   0.082,
+   0.111,
+   -0.008,
+   0.018
+  ],
+  "+BP": [
+   0.281,
+   0.128,
+   0.167,
+   0.057,
+   0.041
+  ],
+  "+brain(EEG)": [
+   0.162,
+   0.072,
+   0.107,
+   0.002,
+   -0.074
+  ]
+ },
+ "lift_over_heart": {
+  "+breath": [
+   0.013,
+   0.025,
+   -0.007,
+   -0.061,
+   -0.005
+  ],
+  "+BP": [
+   0.109,
+   0.071,
+   0.049,
+   0.005,
+   0.018
+  ],
+  "+brain(EEG)": [
+   -0.009,
+   0.014,
+   -0.011,
+   -0.051,
+   -0.097
+  ]
+ },
+ "ladder": {
+  "RR_bands_beats": "~few beats",
+  "breath_fantasia_beats": 3,
+  "oxygen_apnea_min": 0.9,
+  "note": "horizon set by slowest measurable driver"
+ },
+ "source": "PhysioNet MIT-BIH Polysomnographic (slpdb) slp01a/02a/03/04, 40min, strict-causal backward-window, n=4"
+};

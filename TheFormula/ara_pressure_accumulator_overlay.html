@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pressure Accumulator vs Actual NINO</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0e1a; color: #c8cdd8; }
+.header { padding: 18px 28px; border-bottom: 1px solid #1e2d50; }
+.header h1 { font-size: 18px; color: #e8ecf4; }
+.header .sub { font-size: 12px; color: #6882a8; margin-top: 3px; }
+canvas { display: block; margin: 20px auto; }
+.legend { display: flex; gap: 24px; justify-content: center; padding: 8px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #8899b0; }
+.legend-swatch { width: 20px; height: 3px; border-radius: 1px; }
+.tooltip {
+  position: fixed; background: #1a2440; border: 1px solid #2a3d60;
+  border-radius: 6px; padding: 10px 14px; font-size: 12px;
+  pointer-events: none; z-index: 100; display: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.tt-row { display: flex; justify-content: space-between; gap: 20px; }
+.tt-label { color: #6882a8; }
+.tt-val { color: #e0e6f0; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Actual NINO vs Pressure Accumulator Output</h1>
+  <div class="sub">Blue = calibrated (data-fed), purple = free-run (no external data). Orange = original Layered Sand formula.</div>
+</div>
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#e0e6f0"></div>Actual NINO 3.4</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f97316"></div>Layered Sand Formula</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#3b82f6"></div>Accumulator (calibrated)</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#a855f7"></div>Accumulator (free-run)</div>
+</div>
+<canvas id="chart"></canvas>
+<div class="tooltip" id="tooltip"></div>
+
+<script src="ara_overlay_viz_data.js"></script>
+<script>
+const D = window.OVERLAY_DATA;
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+const PAD = { l: 56, r: 24, t: 24, b: 36 };
+
+function resize() {
+  const w = Math.min(window.innerWidth - 40, 1400);
+  const h = 480;
+  canvas.width = w * devicePixelRatio;
+  canvas.height = h * devicePixelRatio;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+
+function parseDate(s) { return new Date(s); }
+function dateToX(d) {
+  const w = canvas.width / devicePixelRatio;
+  const d0 = parseDate(D[0].origin).getTime();
+  const d1 = parseDate(D[D.length - 1].origin).getTime();
+  return PAD.l + (d.getTime() - d0) / (d1 - d0) * (w - PAD.l - PAD.r);
+}
+function valToY(v) {
+  const h = canvas.height / devicePixelRatio;
+  const vMin = -3.5, vMax = 4;
+  return PAD.t + (vMax - v) / (vMax - vMin) * (h - PAD.t - PAD.b);
+}
+
+function draw() {
+  const w = canvas.width / devicePixelRatio;
+  const h = canvas.height / devicePixelRatio;
+  ctx.clearRect(0, 0, w, h);
+
+  const vMin = -3.5, vMax = 4;
+
+  // Y grid
+  ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+  ctx.fillStyle = '#4a5a78'; ctx.font = '11px system-ui';
+  for (let v = -3; v <= 4; v++) {
+    const y = valToY(v);
+    ctx.beginPath(); ctx.moveTo(PAD.l, y); ctx.lineTo(w - PAD.r, y); ctx.stroke();
+    ctx.fillText(v.toFixed(0), PAD.l - 22, y + 4);
+  }
+
+  // Zero line
+  const y0 = valToY(0);
+  ctx.strokeStyle = '#2a3d60'; ctx.lineWidth = 1;
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(PAD.l, y0); ctx.lineTo(w - PAD.r, y0); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // X grid — years
+  const d0 = parseDate(D[0].origin);
+  const d1 = parseDate(D[D.length - 1].origin);
+  const y0year = d0.getFullYear();
+  const y1year = d1.getFullYear();
+  ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+  for (let yr = y0year; yr <= y1year; yr += 2) {
+    const x = dateToX(new Date(yr, 0, 1));
+    ctx.beginPath(); ctx.moveTo(x, PAD.t); ctx.lineTo(x, h - PAD.b); ctx.stroke();
+    ctx.fillStyle = '#4a5a78';
+    ctx.fillText(yr.toString(), x - 12, h - PAD.b + 14);
+  }
+
+  // Calibration band
+  const calEnd = D.filter(d => d.cal);
+  if (calEnd.length) {
+    const x0 = dateToX(parseDate(calEnd[0].origin));
+    const x1 = dateToX(parseDate(calEnd[calEnd.length - 1].origin));
+    ctx.fillStyle = 'rgba(59, 130, 246, 0.05)';
+    ctx.fillRect(x0, PAD.t, x1 - x0, h - PAD.t - PAD.b);
+  }
+
+  // --- Actual NINO ---
+  ctx.strokeStyle = '#e0e6f0'; ctx.lineWidth = 2.5; ctx.globalAlpha = 0.9;
+  ctx.beginPath();
+  D.forEach((d, i) => {
+    const x = dateToX(parseDate(d.origin));
+    const y = valToY(d.actual);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // --- Original formula ---
+  ctx.strokeStyle = '#f97316'; ctx.lineWidth = 1.8; ctx.globalAlpha = 0.7;
+  ctx.beginPath();
+  D.forEach((d, i) => {
+    const x = dateToX(parseDate(d.origin));
+    const y = valToY(d.formula_orig);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+
+  // --- Accumulator output ---
+  // Calibrated portion
+  const calData = D.filter(d => d.cal);
+  const freeData = D.filter(d => !d.cal);
+
+  if (calData.length) {
+    ctx.strokeStyle = '#3b82f6'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    calData.forEach((d, i) => {
+      const x = dateToX(parseDate(d.origin));
+      const y = valToY(d.accum);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+
+  // Free-run portion
+  if (freeData.length) {
+    ctx.strokeStyle = '#a855f7'; ctx.lineWidth = 2;
+    ctx.beginPath();
+    // Connect from last cal point
+    if (calData.length) {
+      const last = calData[calData.length - 1];
+      ctx.moveTo(dateToX(parseDate(last.origin)), valToY(last.accum));
+    }
+    freeData.forEach((d, i) => {
+      const x = dateToX(parseDate(d.origin));
+      const y = valToY(d.accum);
+      (i === 0 && !calData.length) ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+  }
+
+  // Dots on actual
+  D.forEach(d => {
+    const x = dateToX(parseDate(d.origin));
+    const y = valToY(d.actual);
+    ctx.fillStyle = 'rgba(224, 230, 240, 0.5)';
+    ctx.beginPath(); ctx.arc(x, y, 2.5, 0, Math.PI * 2); ctx.fill();
+  });
+}
+
+resize();
+draw();
+window.addEventListener('resize', () => { resize(); draw(); });
+
+// Tooltip
+canvas.addEventListener('mousemove', function(e) {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+
+  let nearest = null, minDist = Infinity;
+  for (const d of D) {
+    const x = dateToX(parseDate(d.origin));
+    const dist = Math.abs(x - mx);
+    if (dist < minDist) { minDist = dist; nearest = d; }
+  }
+  if (!nearest || minDist > 30) { tooltip.style.display = 'none'; return; }
+
+  tooltip.innerHTML = [
+    `<div class="tt-row"><span class="tt-label">Date:</span><span class="tt-val">${nearest.origin}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Actual:</span><span class="tt-val">${nearest.actual.toFixed(3)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Formula:</span><span class="tt-val" style="color:#f97316">${nearest.formula_orig.toFixed(3)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Accumulator:</span><span class="tt-val" style="color:${nearest.cal ? '#3b82f6' : '#a855f7'}">${nearest.accum.toFixed(3)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Mode:</span><span class="tt-val">${nearest.cal ? 'Calibrated' : 'Free-run'}</span></div>`,
+  ].join('');
+  tooltip.style.display = 'block';
+  tooltip.style.left = Math.min(e.clientX + 14, window.innerWidth - 240) + 'px';
+  tooltip.style.top = (e.clientY - 80) + 'px';
+});
+canvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+</script>
+</body>
+</html>

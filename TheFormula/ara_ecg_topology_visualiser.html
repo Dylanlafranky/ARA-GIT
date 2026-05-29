@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ECG Topology Self-Consistency Visualiser</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0a0e17; color: #c8d0e0; font-family: 'Segoe UI', system-ui, sans-serif; padding: 16px; }
+h1 { font-size: 20px; color: #e8ecf4; margin-bottom: 4px; }
+.subtitle { color: #6b7a94; font-size: 13px; margin-bottom: 16px; }
+
+.top-bar { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; }
+.stat-card { background: #141a28; border: 1px solid #1e2a3e; border-radius: 8px; padding: 12px 16px; min-width: 160px; }
+.stat-card .label { font-size: 11px; color: #5a6a82; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-card .value { font-size: 22px; font-weight: 600; color: #e8ecf4; margin-top: 2px; }
+.stat-card .note { font-size: 11px; color: #4a5a72; margin-top: 2px; }
+.stat-card.highlight .value { color: #f59e0b; }
+.stat-card.good .value { color: #10b981; }
+.stat-card.bad .value { color: #ef4444; }
+
+.controls { display: flex; gap: 12px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; }
+.controls label { font-size: 12px; color: #6b7a94; }
+.controls select { background: #141a28; color: #c8d0e0; border: 1px solid #2a3a52; border-radius: 4px; padding: 6px 10px; font-size: 13px; }
+.toggle-group { display: flex; gap: 2px; }
+.toggle-btn { background: #141a28; border: 1px solid #2a3a52; color: #6b7a94; padding: 5px 10px; font-size: 11px; cursor: pointer; border-radius: 4px; }
+.toggle-btn.active { background: #1e3a5f; border-color: #3b82f6; color: #93c5fd; }
+
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.panel { background: #141a28; border: 1px solid #1e2a3e; border-radius: 8px; padding: 12px; }
+.panel-title { font-size: 12px; color: #5a6a82; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.panel-full { grid-column: 1 / -1; }
+
+canvas { width: 100%; display: block; border-radius: 4px; }
+
+.subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; max-height: 200px; overflow-y: auto; }
+.subject-chip { background: #0f1520; border: 1px solid #1e2a3e; border-radius: 4px; padding: 6px 8px; font-size: 11px; cursor: pointer; display: flex; justify-content: space-between; }
+.subject-chip:hover { border-color: #3b82f6; }
+.subject-chip.selected { background: #1e3a5f; border-color: #3b82f6; }
+.subject-chip .id { color: #93c5fd; }
+.subject-chip .score { color: #6b7a94; }
+
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 6px; }
+.legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: #6b7a94; }
+.legend-dot { width: 10px; height: 3px; border-radius: 1px; }
+
+.rung-bars { display: flex; gap: 4px; align-items: flex-end; height: 60px; margin-top: 8px; }
+.rung-bar { flex: 1; background: #3b82f6; border-radius: 2px 2px 0 0; position: relative; min-width: 20px; }
+.rung-bar .rung-label { position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #5a6a82; white-space: nowrap; }
+.rung-bar .rung-val { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); font-size: 9px; color: #93c5fd; }
+
+.verdict-box { background: #141a28; border: 1px solid #1e2a3e; border-radius: 8px; padding: 16px; margin-top: 12px; }
+.verdict-box h3 { font-size: 14px; color: #f59e0b; margin-bottom: 8px; }
+.verdict-box p { font-size: 13px; line-height: 1.5; color: #8a96aa; }
+</style>
+</head>
+<body>
+
+<h1>ECG Phi-Rung Topology Self-Consistency Test</h1>
+<p class="subtitle">Cross-domain validation: does the same decomposition that reconstructs ENSO also work on cardiac RR intervals?</p>
+
+<div class="top-bar" id="topBar"></div>
+
+<div class="controls">
+  <label>Subject:</label>
+  <select id="subjectSelect"></select>
+  <div class="toggle-group" id="viewToggles">
+    <button class="toggle-btn active" data-view="reconstruction">Reconstruction</button>
+    <button class="toggle-btn" data-view="components">Rung Components</button>
+    <button class="toggle-btn" data-view="holdout">Forward Prediction</button>
+    <button class="toggle-btn" data-view="shiftback">Shift-Back Corr</button>
+  </div>
+</div>
+
+<div class="panels">
+  <div class="panel panel-full">
+    <div class="panel-title" id="mainPanelTitle">Train: Original vs Reconstruction</div>
+    <canvas id="mainCanvas" height="280"></canvas>
+    <div class="legend" id="mainLegend"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">Rung Variance Fractions</div>
+    <div class="rung-bars" id="rungBars"></div>
+    <div style="margin-top:20px; font-size:11px; color:#5a6a82;" id="rungInfo"></div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">Subject Details</div>
+    <div id="subjectDetails" style="font-size:12px; line-height:1.8;"></div>
+  </div>
+</div>
+
+<div class="panel panel-full" style="margin-bottom:12px;">
+  <div class="panel-title">All Subjects — Reconstruction Correlation</div>
+  <div class="subject-grid" id="subjectGrid"></div>
+</div>
+
+<div class="verdict-box" id="verdictBox"></div>
+
+<script src="ara_ecg_topology_viz_data.js"></script>
+<script>
+const DATA = window.ECG_TOPOLOGY_VIZ;
+const subjects = DATA.subjects;
+const agg = DATA.aggregate;
+let currentSubject = 0;
+let currentView = 'reconstruction';
+
+// Rung colors
+const RUNG_COLORS = ['#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
+const RUNG_NAMES = ['HOME', 'HOME/φ', 'HOME/φ²', 'HOME/φ³', 'HOME/φ⁴'];
+
+// Top bar stats
+function renderTopBar() {
+  const el = document.getElementById('topBar');
+  const topo_beats = agg.topo_beats_pers_mae;
+  el.innerHTML = `
+    <div class="stat-card highlight">
+      <div class="label">Subjects</div>
+      <div class="value">${agg.n}</div>
+      <div class="note">PhysioNet NSR database</div>
+    </div>
+    <div class="stat-card ${agg.mean_recon_corr > 0.5 ? 'good' : ''}">
+      <div class="label">Mean Recon Corr</div>
+      <div class="value">${agg.mean_recon_corr > 0 ? '+' : ''}${agg.mean_recon_corr.toFixed(3)}</div>
+      <div class="note">ENSO was +0.977</div>
+    </div>
+    <div class="stat-card ${agg.mean_topo_corr > 0.05 ? '' : 'bad'}">
+      <div class="label">Mean Fwd Topo Corr</div>
+      <div class="value">${agg.mean_topo_corr > 0 ? '+' : ''}${agg.mean_topo_corr.toFixed(3)}</div>
+      <div class="note">Holdout prediction</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Topo Beats Persistence</div>
+      <div class="value">${topo_beats}/${agg.n}</div>
+      <div class="note">By MAE on holdout</div>
+    </div>
+  `;
+}
+
+// Subject selector
+function renderSubjectSelect() {
+  const sel = document.getElementById('subjectSelect');
+  subjects.forEach((s, i) => {
+    const opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = `${s.id} (recon=${s.recon_corr > 0 ? '+' : ''}${s.recon_corr.toFixed(3)}, ${s.bpm} bpm)`;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => { currentSubject = +sel.value; render(); });
+}
+
+// Subject grid
+function renderSubjectGrid() {
+  const grid = document.getElementById('subjectGrid');
+  subjects.forEach((s, i) => {
+    const chip = document.createElement('div');
+    chip.className = 'subject-chip' + (i === currentSubject ? ' selected' : '');
+    chip.innerHTML = `<span class="id">${s.id}</span><span class="score">${s.recon_corr > 0 ? '+' : ''}${s.recon_corr.toFixed(2)}</span>`;
+    chip.onclick = () => {
+      currentSubject = i;
+      document.getElementById('subjectSelect').value = i;
+      render();
+    };
+    grid.appendChild(chip);
+  });
+}
+
+function updateSubjectGrid() {
+  const chips = document.querySelectorAll('.subject-chip');
+  chips.forEach((c, i) => c.classList.toggle('selected', i === currentSubject));
+}
+
+// Canvas drawing helpers
+function drawLine(ctx, points, color, lineWidth = 1.5, dash = []) {
+  if (!points.length) return;
+  ctx.beginPath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = lineWidth;
+  ctx.setLineDash(dash);
+  ctx.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawAxes(ctx, w, h, pad, yMin, yMax, xLen, xLabel, yLabel) {
+  ctx.strokeStyle = '#1e2a3e';
+  ctx.lineWidth = 1;
+  // Horizontal grid lines
+  const nGrid = 5;
+  for (let i = 0; i <= nGrid; i++) {
+    const y = pad.top + (h - pad.top - pad.bottom) * i / nGrid;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(w - pad.right, y);
+    ctx.stroke();
+    const val = yMax - (yMax - yMin) * i / nGrid;
+    ctx.fillStyle = '#4a5a72';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(val.toFixed(1), pad.left - 4, y + 3);
+  }
+  // Y axis label
+  if (yLabel) {
+    ctx.save();
+    ctx.translate(12, (pad.top + h - pad.bottom) / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillStyle = '#5a6a82';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(yLabel, 0, 0);
+    ctx.restore();
+  }
+  // Vertical split line for train/holdout
+  if (xLabel === 'split') {
+    const splitX = pad.left + (w - pad.left - pad.right) * 0.7;
+    ctx.strokeStyle = '#f59e0b33';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(splitX, pad.top); ctx.lineTo(splitX, h - pad.bottom); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#f59e0b88';
+    ctx.font = '10px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('train | holdout', splitX, pad.top - 4);
+  }
+}
+
+function mapPoints(data, w, h, pad, yMin, yMax) {
+  const plotW = w - pad.left - pad.right;
+  const plotH = h - pad.top - pad.bottom;
+  return data.map((v, i) => [
+    pad.left + (i / (data.length - 1)) * plotW,
+    pad.top + (1 - (v - yMin) / (yMax - yMin)) * plotH
+  ]);
+}
+
+// Main render
+function render() {
+  const s = subjects[currentSubject];
+  const canvas = document.getElementById('mainCanvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = 280 * dpr;
+  ctx.scale(dpr, dpr);
+  const w = rect.width, h = 280;
+  ctx.clearRect(0, 0, w, h);
+  const pad = { top: 24, right: 16, bottom: 20, left: 50 };
+
+  const titleEl = document.getElementById('mainPanelTitle');
+  const legendEl = document.getElementById('mainLegend');
+
+  if (currentView === 'reconstruction') {
+    titleEl.textContent = `Train: Original Signal vs Phi-Rung Reconstruction (${s.id})`;
+    const sig = s.train_signal;
+    const rec = s.train_recon;
+    const all = [...sig, ...rec];
+    const yMin = Math.min(...all) - 2;
+    const yMax = Math.max(...all) + 2;
+    drawAxes(ctx, w, h, pad, yMin, yMax, sig.length, '', 'RR deviation (ms)');
+    drawLine(ctx, mapPoints(sig, w, h, pad, yMin, yMax), '#ffffff', 1);
+    drawLine(ctx, mapPoints(rec, w, h, pad, yMin, yMax), '#3b82f6', 1.5);
+    // Corr annotation
+    ctx.fillStyle = '#93c5fd';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(`corr = ${s.recon_corr > 0 ? '+' : ''}${s.recon_corr.toFixed(3)}`, w - pad.right - 8, pad.top + 16);
+    legendEl.innerHTML = `
+      <div class="legend-item"><div class="legend-dot" style="background:#fff"></div>Original</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Reconstruction (5 rungs)</div>
+    `;
+  }
+  else if (currentView === 'components') {
+    titleEl.textContent = `Phi-Rung Components (${s.id}, HOME=${s.HOME} beats)`;
+    const nComps = s.train_components.length;
+    const compH = (h - pad.top - pad.bottom) / nComps;
+    legendEl.innerHTML = RUNG_NAMES.map((name, k) =>
+      `<div class="legend-item"><div class="legend-dot" style="background:${RUNG_COLORS[k]}"></div>${name} (T=${s.rung_periods[k]})</div>`
+    ).join('');
+    for (let k = 0; k < nComps; k++) {
+      const comp = s.train_components[k];
+      const cMin = Math.min(...comp);
+      const cMax = Math.max(...comp);
+      const range = Math.max(cMax - cMin, 0.1);
+      const subPad = { top: pad.top + k * compH + 2, right: pad.right, bottom: h - (pad.top + (k + 1) * compH) + 2, left: pad.left };
+      // Label
+      ctx.fillStyle = RUNG_COLORS[k];
+      ctx.font = '10px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`${RUNG_NAMES[k]} (${s.rung_periods[k].toFixed(0)} beats)`, pad.left + 4, subPad.top + 10);
+      // Separator
+      ctx.strokeStyle = '#1e2a3e';
+      ctx.beginPath(); ctx.moveTo(pad.left, subPad.top); ctx.lineTo(w - pad.right, subPad.top); ctx.stroke();
+      drawLine(ctx, mapPoints(comp, w, h, subPad, cMin - range * 0.1, cMax + range * 0.1), RUNG_COLORS[k], 1.2);
+    }
+  }
+  else if (currentView === 'holdout') {
+    titleEl.textContent = `Forward Prediction: Holdout (${s.id})`;
+    const actual = s.holdout_actual;
+    const topo = s.holdout_topo;
+    const repeat = s.holdout_repeat;
+    const persVal = s.holdout_pers;
+    const pers = actual.map(() => persVal);
+    const all = [...actual, ...topo, ...repeat, ...pers];
+    const yMin = Math.min(...all) - 2;
+    const yMax = Math.max(...all) + 2;
+    drawAxes(ctx, w, h, pad, yMin, yMax, actual.length, '', 'RR deviation (ms)');
+    drawLine(ctx, mapPoints(actual, w, h, pad, yMin, yMax), '#ffffff', 1.2);
+    drawLine(ctx, mapPoints(topo, w, h, pad, yMin, yMax), '#3b82f6', 1.5);
+    drawLine(ctx, mapPoints(repeat, w, h, pad, yMin, yMax), '#10b981', 1, [4, 3]);
+    drawLine(ctx, mapPoints(pers, w, h, pad, yMin, yMax), '#f59e0b', 1, [2, 4]);
+    // Scores
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'right';
+    const sc = s.scores;
+    ctx.fillStyle = '#f59e0b'; ctx.fillText(`Persistence MAE: ${sc.persistence_mae.toFixed(1)} ms`, w - pad.right - 8, pad.top + 14);
+    ctx.fillStyle = '#3b82f6'; ctx.fillText(`Topology MAE: ${sc.topology_mae.toFixed(1)} ms  corr: ${sc.topology_corr > 0 ? '+' : ''}${sc.topology_corr.toFixed(3)}`, w - pad.right - 8, pad.top + 28);
+    ctx.fillStyle = '#10b981'; ctx.fillText(`Repeat MAE: ${sc.repeat_mae.toFixed(1)} ms  corr: ${sc.repeat_corr > 0 ? '+' : ''}${sc.repeat_corr.toFixed(3)}`, w - pad.right - 8, pad.top + 42);
+    legendEl.innerHTML = `
+      <div class="legend-item"><div class="legend-dot" style="background:#fff"></div>Actual</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Topology Phase Shift</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>Repeat Last Cycle</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>Persistence</div>
+    `;
+  }
+  else if (currentView === 'shiftback') {
+    titleEl.textContent = `Shift-Back Correlation Curve (aggregate across all ${agg.n} subjects)`;
+    const sbc = DATA.aggregate_shift || computeAggShiftBack();
+    const lags = Object.keys(sbc).map(Number).sort((a, b) => a - b);
+    const vals = lags.map(l => sbc[String(l)]);
+    const yMin = Math.min(0, ...vals) - 0.05;
+    const yMax = Math.max(...vals) + 0.05;
+    drawAxes(ctx, w, h, pad, yMin, yMax, lags.length, '', 'Correlation');
+    const pts = mapPoints(vals, w, h, pad, yMin, yMax);
+    drawLine(ctx, pts, '#3b82f6', 2);
+    // Zero line
+    const zeroY = pad.top + (1 - (0 - yMin) / (yMax - yMin)) * (h - pad.top - pad.bottom);
+    ctx.strokeStyle = '#ffffff22';
+    ctx.beginPath(); ctx.moveTo(pad.left, zeroY); ctx.lineTo(w - pad.right, zeroY); ctx.stroke();
+    // Peak marker
+    const peakIdx = vals.indexOf(Math.max(...vals));
+    ctx.fillStyle = '#f59e0b';
+    ctx.beginPath();
+    ctx.arc(pts[peakIdx][0], pts[peakIdx][1], 5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(`peak: lag=${lags[peakIdx]}, corr=${vals[peakIdx].toFixed(3)}`, pts[peakIdx][0], pts[peakIdx][1] - 12);
+    // X axis labels
+    ctx.fillStyle = '#5a6a82';
+    ctx.font = '10px sans-serif';
+    lags.forEach((l, i) => {
+      if (l % 5 === 0) {
+        ctx.textAlign = 'center';
+        ctx.fillText(String(l), pts[i][0], h - 4);
+      }
+    });
+    ctx.textAlign = 'center';
+    ctx.fillText('Lag (beats)', w / 2, h - pad.bottom + 16);
+    legendEl.innerHTML = `
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Mean shift-back correlation (all subjects)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b; border-radius:50%; width:8px; height:8px;"></div>Peak</div>
+    `;
+  }
+
+  // Rung bars
+  renderRungBars(s);
+  // Subject details
+  renderDetails(s);
+  updateSubjectGrid();
+}
+
+function computeAggShiftBack() {
+  // Use the aggregate from the JSON
+  const sbc = DATA.aggregate.mean_shift_back_corrs;
+  DATA.aggregate_shift = sbc;
+  return sbc;
+}
+
+function renderRungBars(s) {
+  const el = document.getElementById('rungBars');
+  const info = document.getElementById('rungInfo');
+  const maxFrac = Math.max(...s.rung_var_frac, 0.01);
+  el.innerHTML = s.rung_var_frac.map((f, k) => {
+    const pct = (f / maxFrac) * 100;
+    return `<div class="rung-bar" style="height:${Math.max(pct, 4)}%; background:${RUNG_COLORS[k]}">
+      <div class="rung-val">${(f * 100).toFixed(1)}%</div>
+      <div class="rung-label">${RUNG_NAMES[k]}</div>
+    </div>`;
+  }).join('');
+  info.innerHTML = `Total variance captured: <b style="color:#93c5fd">${(s.var_captured * 100).toFixed(1)}%</b>
+    &nbsp;|&nbsp; HOME = ${s.HOME} beats (${(s.HOME * s.mean_rr / 1000).toFixed(0)}s)`;
+}
+
+function renderDetails(s) {
+  const el = document.getElementById('subjectDetails');
+  const sc = s.scores;
+  const topoBetter = sc.topology_mae < sc.persistence_mae;
+  el.innerHTML = `
+    <div><span style="color:#5a6a82">Subject:</span> <b>${s.id}</b></div>
+    <div><span style="color:#5a6a82">Heart rate:</span> ${s.bpm} bpm (${s.mean_rr.toFixed(0)} ms)</div>
+    <div><span style="color:#5a6a82">HOME period:</span> ${s.HOME} beats (${(s.HOME * s.mean_rr / 1000).toFixed(0)} sec)</div>
+    <div><span style="color:#5a6a82">Recon corr:</span> <b style="color:${s.recon_corr > 0.6 ? '#10b981' : '#f59e0b'}">${s.recon_corr > 0 ? '+' : ''}${s.recon_corr.toFixed(3)}</b></div>
+    <div style="margin-top:6px; border-top:1px solid #1e2a3e; padding-top:6px;">
+      <div><span style="color:#5a6a82">Holdout MAE:</span></div>
+      <div>&nbsp; Persistence: <b>${sc.persistence_mae.toFixed(1)}</b> ms</div>
+      <div>&nbsp; Topology: <b style="color:${topoBetter ? '#10b981' : '#ef4444'}">${sc.topology_mae.toFixed(1)}</b> ms</div>
+      <div>&nbsp; Repeat: <b>${sc.repeat_mae.toFixed(1)}</b> ms</div>
+    </div>
+  `;
+}
+
+function renderVerdict() {
+  const el = document.getElementById('verdictBox');
+  el.innerHTML = `
+    <h3>Cross-Domain Verdict</h3>
+    <p>
+      <b>ENSO:</b> Reconstruction corr = +0.977 (near-identity). Forward phase shift = -0.099 (fails).
+      The topology reads the present perfectly but doesn't forecast.
+    </p>
+    <p style="margin-top:8px;">
+      <b>ECG (${agg.n} subjects):</b> Reconstruction corr = ${agg.mean_recon_corr > 0 ? '+' : ''}${agg.mean_recon_corr.toFixed(3)} (partial capture).
+      Forward phase shift corr = ${agg.mean_topo_corr > 0 ? '+' : ''}${agg.mean_topo_corr.toFixed(3)}.
+      Topology beats persistence on MAE in ${agg.topo_beats_pers_mae}/${agg.n} subjects.
+    </p>
+    <p style="margin-top:8px;">
+      <b>Key difference:</b> ENSO's phi-rung decomposition is nearly lossless (0.977) &mdash; the signal lives almost entirely in the phi rungs.
+      ECG is only 0.640 &mdash; cardiac variability has significant power outside the phi-rung bands.
+      In both domains, the topology reads the present but doesn't forecast: "persistence gained through topology is still persistence."
+    </p>
+  `;
+}
+
+// View toggles
+document.getElementById('viewToggles').addEventListener('click', (e) => {
+  if (!e.target.dataset.view) return;
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  currentView = e.target.dataset.view;
+  render();
+});
+
+// Init
+renderTopBar();
+renderSubjectSelect();
+renderSubjectGrid();
+renderVerdict();
+render();
+window.addEventListener('resize', render);
+</script>
+</body>
+</html>

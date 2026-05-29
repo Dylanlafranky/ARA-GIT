@@ -138,8 +138,20 @@ Conceptual synthesis. Not directly tested as a single hypothesis, but every comp
 
 The framework's broader claim — that φ and 2 are coupled doing different jobs in the same geometry — is the layer being articulated here. Everything below it is already in place; this is the unifying language.
 
+## Update — 2026-05-29: the rungs themselves are octave (×2), φ is the relational handover *through time*
+
+The two-band ECG cross-system test (54 PhysioNet hearts; see `TWOBAND_ECG_HORIZON_LADDER_RESULT.md`) sharpens the picture above and partly corrects it. When each heart's spectrum is allowed to pick its own two strongest peaks (no fixed HRV windows), the band ratios fall on an **octave ladder (×2)**, with √2 as the geometric half-rung — and **φ does not appear in the rung spacing at all.** An earlier apparent "ratio ≈ 5" was a measurement artifact of forcing peaks into fixed HF/LF windows.
+
+What *did* transfer from ENSO with φ in it is the **handover duty**: the fraction of time each band dominates is green 0.39 / brown 0.61 = 1/φ² : 1/φ, dead-on across all 54 hearts. So the refined reading is:
+
+- **The rung positions are octave (×2)** — same base as the operating ruler. Where the subsystems sit in time is a doubling ladder, not a φ ladder.
+- **φ is the *relational* constant — the timing of the handover from one rung to the next through time** (the camshaft duty), not the spacing of the rungs.
+
+This nudges the "two rulers" reading toward a cleaner split: **2 sets *where* (both rung spacing and operating distance), and φ sets *when* the handover happens** — φ is relational-through-time rather than positional. The earlier "φ = time-spacing constant" claim (above) should be read as provisional; on the systems measured edge-free, the spacing is octave and φ's confirmed home is the handover timing. This is one cross-system line of evidence (ECG + ENSO) and needs confirmation on more systems before the positional-φ language is retired.
+
 ## Files
 
+- `TWOBAND_ECG_HORIZON_LADDER_RESULT.md` — the octave-rung / φ-handover cross-system result (2026-05-29)
 - `MASTER_PREDICTION_LEDGER.md` — Script 98 (Cepheid) row reflects the φ² coupled-pair confirmation
 - `PHI_BASE_ABLATION.md` — the ablation result that started this thread
 - `SUBSTRATE_VS_OPERATING_ARA.md` — the substrate/operating split with the dual-role recovery

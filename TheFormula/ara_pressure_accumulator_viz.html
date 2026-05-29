@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARA Pressure Accumulator — Terrain-Driven Oscillation</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0e1a; color: #c8cdd8; }
+
+.header {
+  background: linear-gradient(135deg, #0f1628 0%, #162040 100%);
+  border-bottom: 1px solid #1e2d50;
+  padding: 18px 28px;
+}
+.header h1 { font-size: 20px; color: #e8ecf4; font-weight: 600; }
+.header .sub { font-size: 13px; color: #6882a8; margin-top: 4px; }
+
+.stats-row {
+  display: flex; gap: 12px; padding: 14px 28px;
+  background: #0d1220; border-bottom: 1px solid #1a2540;
+}
+.stat-card {
+  background: #111828; border: 1px solid #1e2d50; border-radius: 8px;
+  padding: 10px 16px; flex: 1; min-width: 120px;
+}
+.stat-card .label { font-size: 10px; text-transform: uppercase; color: #5a7090; letter-spacing: 0.5px; }
+.stat-card .value { font-size: 22px; font-weight: 700; color: #e0e6f0; margin-top: 2px; }
+.stat-card .unit { font-size: 11px; color: #5a7090; }
+.stat-card.good .value { color: #4ade80; }
+.stat-card.warn .value { color: #fbbf24; }
+.stat-card.bad .value { color: #f87171; }
+
+.controls {
+  display: flex; gap: 12px; padding: 12px 28px; align-items: center;
+  background: #0d1220; border-bottom: 1px solid #1a2540;
+}
+.controls label { font-size: 12px; color: #6882a8; }
+.controls select, .controls input[type=range] {
+  background: #111828; border: 1px solid #1e2d50; color: #c8cdd8;
+  border-radius: 4px; padding: 4px 8px; font-size: 12px;
+}
+.controls input[type=range] { width: 160px; }
+.range-val { font-size: 11px; color: #4a90d9; min-width: 40px; }
+
+.panels { display: flex; flex-direction: column; gap: 0; }
+.panel {
+  border-bottom: 1px solid #1a2540; padding: 10px 28px 6px;
+  background: #0d1220;
+}
+.panel-title {
+  font-size: 12px; font-weight: 600; color: #4a90d9;
+  text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px;
+}
+canvas { width: 100%; display: block; }
+
+.legend {
+  display: flex; gap: 16px; padding: 4px 0 2px; flex-wrap: wrap;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: #8899b0;
+}
+.legend-swatch {
+  width: 14px; height: 3px; border-radius: 1px;
+}
+
+.tooltip {
+  position: fixed; background: #1a2440; border: 1px solid #2a3d60;
+  border-radius: 6px; padding: 10px 14px; font-size: 12px;
+  pointer-events: none; z-index: 100; display: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.tooltip .tt-row { display: flex; justify-content: space-between; gap: 16px; }
+.tooltip .tt-label { color: #6882a8; }
+.tooltip .tt-val { color: #e0e6f0; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Pressure Accumulator — Terrain-Driven Oscillation</h1>
+  <div class="sub">Free-run ARA dynamics with pressure buildup at ridges and spillover release. Phi valleys = max spin, ridges = max friction.</div>
+</div>
+
+<div class="stats-row" id="stats"></div>
+
+<div class="controls">
+  <label>View:</label>
+  <select id="viewSelect">
+    <option value="signal">Output Signal (Value vs Time)</option>
+    <option value="ara">ARA Trajectories (All Layers)</option>
+    <option value="pressure">Pressure Traces (All Layers)</option>
+    <option value="terrain">Terrain Profile (Friction vs ARA)</option>
+    <option value="phase">Phase Portrait (Value vs Velocity)</option>
+  </select>
+
+  <label style="margin-left:20px">Time window:</label>
+  <input type="range" id="windowStart" min="0" max="100" value="0">
+  <span class="range-val" id="windowLabel">All</span>
+
+  <label style="margin-left:20px">
+    <input type="checkbox" id="showCalibrated" checked> Show calibrated
+  </label>
+  <label style="margin-left:8px">
+    <input type="checkbox" id="showSpills" checked> Spillover markers
+  </label>
+</div>
+
+<div class="panels">
+  <div class="panel">
+    <div class="panel-title" id="panelTitle">Output Signal</div>
+    <div class="legend" id="legend"></div>
+    <canvas id="mainCanvas" height="340"></canvas>
+  </div>
+  <div class="panel">
+    <div class="panel-title">Measured Layer Pressure & Spillover Events</div>
+    <div class="legend" id="legend2"></div>
+    <canvas id="pressureCanvas" height="160"></canvas>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script src="ara_pressure_accumulator_viz_data.js"></script>
+<script>
+const D = window.PRESSURE_ACC_DATA;
+const H = D.history;
+const SPILLS = D.spills;
+const TERRAIN = D.terrain;
+const LAYERS = ['floor','fine','medium','coarse','measured'];
+const LAYER_COLORS = ['#f97316','#eab308','#22c55e','#3b82f6','#a855f7'];
+const CAL_STEPS = D.cal_steps;
+
+// Stats
+function buildStats() {
+  const free = H.filter(h => !h.cal);
+  const vals = free.map(h => h.val);
+  const std = Math.sqrt(vals.reduce((s,v) => s + (v - vals.reduce((a,b)=>a+b,0)/vals.length)**2, 0) / vals.length);
+  let crossings = 0;
+  for (let i = 1; i < vals.length; i++) if (vals[i]*vals[i-1] < 0) crossings++;
+  const period = vals.length * D.dt / Math.max(crossings/2, 0.5);
+  const freeSpills = SPILLS.filter(s => s.t >= CAL_STEPS * D.dt);
+
+  const statsEl = document.getElementById('stats');
+  const cards = [
+    { label: 'Free-run Std', value: std.toFixed(3), cls: std > 0.1 ? 'good' : 'bad' },
+    { label: 'Zero Crossings', value: crossings, cls: crossings > 5 ? 'good' : crossings > 0 ? 'warn' : 'bad' },
+    { label: 'Oscillation Period', value: period.toFixed(0), unit: 'months', cls: period > 18 && period < 96 ? 'good' : 'warn' },
+    { label: 'Spillover Events', value: freeSpills.length, unit: 'free-run', cls: freeSpills.length > 10 ? 'good' : 'warn' },
+    { label: 'Value Range', value: `${Math.min(...vals).toFixed(1)} → ${Math.max(...vals).toFixed(1)}`, cls: 'good' },
+    { label: 'Status', value: std > 0.1 ? 'SUSTAINED' : 'COLLAPSED', cls: std > 0.1 ? 'good' : 'bad' },
+  ];
+  statsEl.innerHTML = cards.map(c =>
+    `<div class="stat-card ${c.cls}"><div class="label">${c.label}</div><div class="value">${c.value}</div>${c.unit ? `<div class="unit">${c.unit}</div>` : ''}</div>`
+  ).join('');
+}
+buildStats();
+
+// Canvas drawing
+const mainCanvas = document.getElementById('mainCanvas');
+const pressCanvas = document.getElementById('pressureCanvas');
+const mainCtx = mainCanvas.getContext('2d');
+const pressCtx = pressCanvas.getContext('2d');
+const tooltip = document.getElementById('tooltip');
+
+function resize() {
+  const w = mainCanvas.parentElement.clientWidth - 56;
+  mainCanvas.width = w * devicePixelRatio;
+  mainCanvas.height = 340 * devicePixelRatio;
+  mainCanvas.style.width = w + 'px';
+  mainCtx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+
+  pressCanvas.width = w * devicePixelRatio;
+  pressCanvas.height = 160 * devicePixelRatio;
+  pressCanvas.style.width = w + 'px';
+  pressCtx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+}
+resize();
+window.addEventListener('resize', () => { resize(); draw(); });
+
+function getViewData() {
+  const showCal = document.getElementById('showCalibrated').checked;
+  const winStart = parseInt(document.getElementById('windowStart').value);
+  const totalSteps = H.length;
+  const winSize = Math.max(50, totalSteps - winStart);
+  let data = H.slice(winStart, winStart + winSize);
+  if (!showCal) data = data.filter(h => !h.cal);
+  return data;
+}
+
+function getTimeRange(data) {
+  if (!data.length) return { tMin: 0, tMax: 900 };
+  return { tMin: data[0].t, tMax: data[data.length-1].t };
+}
+
+function mapX(t, tMin, tMax, w, pad) {
+  return pad + (t - tMin) / (tMax - tMin) * (w - 2*pad);
+}
+function mapY(v, vMin, vMax, h, padTop, padBot) {
+  return padTop + (vMax - v) / (vMax - vMin) * (h - padTop - padBot);
+}
+
+function drawGrid(ctx, w, h, tMin, tMax, vMin, vMax, padL, padR, padT, padB) {
+  ctx.strokeStyle = '#1a2540';
+  ctx.lineWidth = 0.5;
+  ctx.fillStyle = '#4a5a78';
+  ctx.font = '10px system-ui';
+
+  // Y grid
+  const ySteps = 6;
+  const yRange = vMax - vMin;
+  const yStep = yRange / ySteps;
+  for (let i = 0; i <= ySteps; i++) {
+    const v = vMin + i * yStep;
+    const y = mapY(v, vMin, vMax, h, padT, padB);
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(w - padR, y); ctx.stroke();
+    ctx.fillText(v.toFixed(1), 2, y + 3);
+  }
+
+  // X grid - time
+  const tRange = tMax - tMin;
+  const tStep = tRange > 600 ? 120 : tRange > 300 ? 60 : 30;
+  for (let t = Math.ceil(tMin / tStep) * tStep; t <= tMax; t += tStep) {
+    const x = mapX(t, tMin, tMax, w, padL);
+    ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, h - padB); ctx.stroke();
+    ctx.fillText(t + 'mo', x - 10, h - 2);
+  }
+
+  // Zero line
+  if (vMin < 0 && vMax > 0) {
+    const y0 = mapY(0, vMin, vMax, h, padT, padB);
+    ctx.strokeStyle = '#2a3d60';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(padL, y0); ctx.lineTo(w - padR, y0); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function drawCalibrationBand(ctx, data, tMin, tMax, w, h, padL, padR, padT, padB) {
+  const calData = data.filter(d => d.cal);
+  if (!calData.length) return;
+  const x0 = mapX(calData[0].t, tMin, tMax, w, padL);
+  const x1 = mapX(calData[calData.length-1].t, tMin, tMax, w, padL);
+  ctx.fillStyle = 'rgba(59, 130, 246, 0.06)';
+  ctx.fillRect(x0, padT, x1 - x0, h - padT - padB);
+  ctx.fillStyle = '#3b82f6';
+  ctx.font = '10px system-ui';
+  ctx.fillText('CALIBRATED', x0 + 4, padT + 12);
+}
+
+function drawSignal(data) {
+  const w = mainCanvas.width / devicePixelRatio;
+  const h = 340;
+  const padL = 44, padR = 16, padT = 20, padB = 22;
+  mainCtx.clearRect(0, 0, w, h);
+
+  const { tMin, tMax } = getTimeRange(data);
+  const vals = data.map(d => d.val);
+  const vMax = Math.max(4, Math.max(...vals) * 1.1);
+  const vMin = Math.min(-4, Math.min(...vals) * 1.1);
+
+  drawGrid(mainCtx, w, h, tMin, tMax, vMin, vMax, padL, padR, padT, padB);
+  drawCalibrationBand(mainCtx, data, tMin, tMax, w, h, padL, padR, padT, padB);
+
+  // Spillover markers
+  if (document.getElementById('showSpills').checked) {
+    const relevantSpills = SPILLS.filter(s => s.layer === 4 && s.t >= tMin && s.t <= tMax);
+    mainCtx.fillStyle = 'rgba(248, 113, 113, 0.25)';
+    for (const s of relevantSpills) {
+      const x = mapX(s.t, tMin, tMax, w, padL);
+      mainCtx.fillRect(x - 1, padT, 2, h - padT - padB);
+    }
+  }
+
+  // Signal line
+  mainCtx.strokeStyle = '#a855f7';
+  mainCtx.lineWidth = 2;
+  mainCtx.beginPath();
+  data.forEach((d, i) => {
+    const x = mapX(d.t, tMin, tMax, w, padL);
+    const y = mapY(d.val, vMin, vMax, h, padT, padB);
+    i === 0 ? mainCtx.moveTo(x, y) : mainCtx.lineTo(x, y);
+  });
+  mainCtx.stroke();
+
+  // Dots for calibrated vs free
+  data.forEach(d => {
+    const x = mapX(d.t, tMin, tMax, w, padL);
+    const y = mapY(d.val, vMin, vMax, h, padT, padB);
+    mainCtx.fillStyle = d.cal ? '#3b82f6' : '#a855f7';
+    mainCtx.beginPath();
+    mainCtx.arc(x, y, 3, 0, Math.PI * 2);
+    mainCtx.fill();
+  });
+
+  // Legend
+  document.getElementById('legend').innerHTML = [
+    { color: '#a855f7', label: 'Free-run value' },
+    { color: '#3b82f6', label: 'Calibrated (data-fed)' },
+    { color: 'rgba(248,113,113,0.5)', label: 'Spillover event (measured layer)' },
+  ].map(l => `<div class="legend-item"><div class="legend-swatch" style="background:${l.color}"></div>${l.label}</div>`).join('');
+
+  document.getElementById('panelTitle').textContent = 'Output Signal — Measured Value vs Time';
+}
+
+function drawARA(data) {
+  const w = mainCanvas.width / devicePixelRatio;
+  const h = 340;
+  const padL = 44, padR = 16, padT = 20, padB = 22;
+  mainCtx.clearRect(0, 0, w, h);
+
+  const { tMin, tMax } = getTimeRange(data);
+  drawGrid(mainCtx, w, h, tMin, tMax, 0, 2, padL, padR, padT, padB);
+  drawCalibrationBand(mainCtx, data, tMin, tMax, w, h, padL, padR, padT, padB);
+
+  // Draw terrain bands as background shading
+  // Depth-1 bands: [0,1] and [1,2] with phi valleys marked
+  const phiValleys = [2 - 2/1.618034, 2/1.618034, 1 + (2-1)/1.618034 - (2-1), 1 + (2-1)/1.618034];
+  for (const pv of [2/1.618034, 2 - 2/1.618034, 1 + 1/1.618034, 2 - 1/1.618034]) {
+    const y = mapY(pv, 0, 2, h, padT, padB);
+    mainCtx.strokeStyle = 'rgba(34, 197, 94, 0.2)';
+    mainCtx.lineWidth = 1;
+    mainCtx.setLineDash([2, 4]);
+    mainCtx.beginPath(); mainCtx.moveTo(padL, y); mainCtx.lineTo(w - padR, y); mainCtx.stroke();
+    mainCtx.setLineDash([]);
+    mainCtx.fillStyle = 'rgba(34, 197, 94, 0.3)';
+    mainCtx.font = '9px system-ui';
+    mainCtx.fillText('φ', w - padR + 2, y + 3);
+  }
+
+  // Ridge at 1.0
+  const yRidge = mapY(1.0, 0, 2, h, padT, padB);
+  mainCtx.strokeStyle = 'rgba(248, 113, 113, 0.3)';
+  mainCtx.lineWidth = 1;
+  mainCtx.setLineDash([3, 3]);
+  mainCtx.beginPath(); mainCtx.moveTo(padL, yRidge); mainCtx.lineTo(w - padR, yRidge); mainCtx.stroke();
+  mainCtx.setLineDash([]);
+  mainCtx.fillStyle = 'rgba(248, 113, 113, 0.4)';
+  mainCtx.fillText('ridge', w - padR + 2, yRidge + 3);
+
+  // Layer ARA traces
+  for (let li = 0; li < 5; li++) {
+    mainCtx.strokeStyle = LAYER_COLORS[li];
+    mainCtx.lineWidth = li === 4 ? 2.5 : 1.2;
+    mainCtx.globalAlpha = li === 4 ? 1.0 : 0.5;
+    mainCtx.beginPath();
+    data.forEach((d, i) => {
+      const x = mapX(d.t, tMin, tMax, w, padL);
+      const y = mapY(d.aras[li], 0, 2, h, padT, padB);
+      i === 0 ? mainCtx.moveTo(x, y) : mainCtx.lineTo(x, y);
+    });
+    mainCtx.stroke();
+    mainCtx.globalAlpha = 1.0;
+  }
+
+  // Spillover markers on measured layer
+  if (document.getElementById('showSpills').checked) {
+    const relevantSpills = SPILLS.filter(s => s.layer === 4 && s.t >= tMin && s.t <= tMax);
+    for (const s of relevantSpills) {
+      const x = mapX(s.t, tMin, tMax, w, padL);
+      const y1 = mapY(s.from, 0, 2, h, padT, padB);
+      const y2 = mapY(s.to, 0, 2, h, padT, padB);
+      mainCtx.strokeStyle = 'rgba(248, 113, 113, 0.6)';
+      mainCtx.lineWidth = 1.5;
+      mainCtx.beginPath(); mainCtx.moveTo(x, y1); mainCtx.lineTo(x, y2); mainCtx.stroke();
+      // Arrow head
+      mainCtx.fillStyle = 'rgba(248, 113, 113, 0.6)';
+      mainCtx.beginPath();
+      mainCtx.arc(x, y2, 3, 0, Math.PI * 2);
+      mainCtx.fill();
+    }
+  }
+
+  document.getElementById('legend').innerHTML = LAYERS.map((name, i) =>
+    `<div class="legend-item"><div class="legend-swatch" style="background:${LAYER_COLORS[i]}"></div>${name}</div>`
+  ).concat([
+    `<div class="legend-item"><div class="legend-swatch" style="background:rgba(34,197,94,0.4)"></div>φ valley</div>`,
+    `<div class="legend-item"><div class="legend-swatch" style="background:rgba(248,113,113,0.4)"></div>ridge</div>`,
+  ]).join('');
+
+  document.getElementById('panelTitle').textContent = 'ARA Trajectories — All Layers';
+}
+
+function drawPressureView(data) {
+  const w = mainCanvas.width / devicePixelRatio;
+  const h = 340;
+  const padL = 44, padR = 16, padT = 20, padB = 22;
+  mainCtx.clearRect(0, 0, w, h);
+
+  const { tMin, tMax } = getTimeRange(data);
+  const allP = data.flatMap(d => d.p);
+  const pMax = Math.max(0.5, Math.max(...allP) * 1.15);
+
+  drawGrid(mainCtx, w, h, tMin, tMax, 0, pMax, padL, padR, padT, padB);
+  drawCalibrationBand(mainCtx, data, tMin, tMax, w, h, padL, padR, padT, padB);
+
+  // Ridge threshold line
+  const thresh = D.config.ridge_threshold;
+  const yThresh = mapY(thresh, 0, pMax, h, padT, padB);
+  if (yThresh > padT && yThresh < h - padB) {
+    mainCtx.strokeStyle = 'rgba(248, 113, 113, 0.5)';
+    mainCtx.lineWidth = 1;
+    mainCtx.setLineDash([4, 4]);
+    mainCtx.beginPath(); mainCtx.moveTo(padL, yThresh); mainCtx.lineTo(w - padR, yThresh); mainCtx.stroke();
+    mainCtx.setLineDash([]);
+    mainCtx.fillStyle = 'rgba(248, 113, 113, 0.5)';
+    mainCtx.font = '10px system-ui';
+    mainCtx.fillText('threshold', w - padR - 50, yThresh - 4);
+  }
+
+  // Pressure traces per layer
+  for (let li = 0; li < 5; li++) {
+    mainCtx.strokeStyle = LAYER_COLORS[li];
+    mainCtx.lineWidth = li === 4 ? 2.5 : 1.2;
+    mainCtx.globalAlpha = li === 4 ? 1.0 : 0.4;
+    mainCtx.beginPath();
+    data.forEach((d, i) => {
+      const x = mapX(d.t, tMin, tMax, w, padL);
+      const y = mapY(d.p[li], 0, pMax, h, padT, padB);
+      i === 0 ? mainCtx.moveTo(x, y) : mainCtx.lineTo(x, y);
+    });
+    mainCtx.stroke();
+    mainCtx.globalAlpha = 1.0;
+  }
+
+  // Mark spillover drops
+  if (document.getElementById('showSpills').checked) {
+    const relevantSpills = SPILLS.filter(s => s.t >= tMin && s.t <= tMax);
+    for (const s of relevantSpills) {
+      const x = mapX(s.t, tMin, tMax, w, padL);
+      mainCtx.fillStyle = LAYER_COLORS[s.layer] + '44';
+      mainCtx.beginPath();
+      mainCtx.arc(x, mapY(0, 0, pMax, h, padT, padB), 3, 0, Math.PI * 2);
+      mainCtx.fill();
+    }
+  }
+
+  document.getElementById('legend').innerHTML = LAYERS.map((name, i) =>
+    `<div class="legend-item"><div class="legend-swatch" style="background:${LAYER_COLORS[i]}"></div>${name} pressure</div>`
+  ).join('');
+
+  document.getElementById('panelTitle').textContent = 'Pressure Traces — All Layers (builds at ridges, resets on spillover)';
+}
+
+function drawTerrain() {
+  const w = mainCanvas.width / devicePixelRatio;
+  const h = 340;
+  const padL = 44, padR = 16, padT = 20, padB = 22;
+  mainCtx.clearRect(0, 0, w, h);
+
+  // Background: terrain friction profile
+  mainCtx.fillStyle = '#4a5a78';
+  mainCtx.font = '10px system-ui';
+
+  // Y axis: 0-1
+  for (let i = 0; i <= 5; i++) {
+    const v = i * 0.2;
+    const y = mapY(v, 0, 1.05, h, padT, padB);
+    mainCtx.strokeStyle = '#1a2540';
+    mainCtx.lineWidth = 0.5;
+    mainCtx.beginPath(); mainCtx.moveTo(padL, y); mainCtx.lineTo(w - padR, y); mainCtx.stroke();
+    mainCtx.fillText(v.toFixed(1), 2, y + 3);
+  }
+
+  // X axis: ARA 0-2
+  for (let a = 0; a <= 20; a += 2) {
+    const ara = a * 0.1;
+    const x = padL + (ara / 2) * (w - padL - padR);
+    mainCtx.strokeStyle = '#1a2540';
+    mainCtx.lineWidth = 0.5;
+    mainCtx.beginPath(); mainCtx.moveTo(x, padT); mainCtx.lineTo(x, h - padB); mainCtx.stroke();
+    mainCtx.fillText(ara.toFixed(1), x - 8, h - 2);
+  }
+
+  // Friction curve (red)
+  mainCtx.strokeStyle = '#f87171';
+  mainCtx.lineWidth = 2;
+  mainCtx.beginPath();
+  TERRAIN.forEach((t, i) => {
+    const x = padL + (t.ara / 2) * (w - padL - padR);
+    const y = mapY(t.fric, 0, 1.05, h, padT, padB);
+    i === 0 ? mainCtx.moveTo(x, y) : mainCtx.lineTo(x, y);
+  });
+  mainCtx.stroke();
+
+  // Spin speed curve (green)
+  mainCtx.strokeStyle = '#4ade80';
+  mainCtx.lineWidth = 2;
+  mainCtx.beginPath();
+  TERRAIN.forEach((t, i) => {
+    const x = padL + (t.ara / 2) * (w - padL - padR);
+    const y = mapY(t.spin, 0, 1.05, h, padT, padB);
+    i === 0 ? mainCtx.moveTo(x, y) : mainCtx.lineTo(x, y);
+  });
+  mainCtx.stroke();
+
+  // Fill under friction with light red
+  mainCtx.fillStyle = 'rgba(248, 113, 113, 0.08)';
+  mainCtx.beginPath();
+  mainCtx.moveTo(padL, mapY(0, 0, 1.05, h, padT, padB));
+  TERRAIN.forEach(t => {
+    const x = padL + (t.ara / 2) * (w - padL - padR);
+    mainCtx.lineTo(x, mapY(t.fric, 0, 1.05, h, padT, padB));
+  });
+  mainCtx.lineTo(w - padR, mapY(0, 0, 1.05, h, padT, padB));
+  mainCtx.fill();
+
+  // Mark phi valleys and ridges
+  const phiPoints = TERRAIN.filter(t => t.spin > 0.7);
+  const ridgePoints = TERRAIN.filter(t => t.fric > 0.85);
+
+  // Overlay: where the measured ARA has been (histogram)
+  const free = H.filter(h => !h.cal);
+  const bins = new Array(40).fill(0);
+  free.forEach(f => {
+    const bin = Math.min(39, Math.floor(f.ara * 20));
+    bins[bin]++;
+  });
+  const maxBin = Math.max(...bins);
+  mainCtx.fillStyle = 'rgba(168, 85, 247, 0.15)';
+  for (let i = 0; i < 40; i++) {
+    const x0 = padL + (i / 40) * 2 / 2 * (w - padL - padR);
+    const x1 = padL + ((i + 1) / 40) * 2 / 2 * (w - padL - padR);
+    const barH = (bins[i] / maxBin) * (h - padT - padB) * 0.3;
+    mainCtx.fillRect(x0, h - padB - barH, x1 - x0, barH);
+  }
+
+  document.getElementById('legend').innerHTML = [
+    { color: '#4ade80', label: 'Spin speed (high at φ valleys)' },
+    { color: '#f87171', label: 'Friction (high at ridges)' },
+    { color: 'rgba(168,85,247,0.3)', label: 'ARA occupancy (free-run)' },
+  ].map(l => `<div class="legend-item"><div class="legend-swatch" style="background:${l.color}"></div>${l.label}</div>`).join('');
+
+  document.getElementById('panelTitle').textContent = 'Terrain Profile — Friction & Spin vs ARA Coordinate';
+}
+
+function drawPhase(data) {
+  const w = mainCanvas.width / devicePixelRatio;
+  const h = 340;
+  const padL = 44, padR = 16, padT = 20, padB = 22;
+  mainCtx.clearRect(0, 0, w, h);
+
+  const free = data.filter(d => !d.cal);
+  if (free.length < 3) return;
+
+  // Phase portrait: value vs delta-value (velocity proxy)
+  const pts = [];
+  for (let i = 1; i < free.length; i++) {
+    pts.push({
+      val: free[i].val,
+      dval: free[i].val - free[i-1].val,
+      t: free[i].t,
+      spill: free[i].spills[4],
+    });
+  }
+
+  const vMin = Math.min(...pts.map(p => p.val)) * 1.1;
+  const vMax = Math.max(...pts.map(p => p.val)) * 1.1;
+  const dvMin = Math.min(...pts.map(p => p.dval)) * 1.1;
+  const dvMax = Math.max(...pts.map(p => p.dval)) * 1.1;
+
+  // Grid
+  mainCtx.fillStyle = '#4a5a78';
+  mainCtx.font = '10px system-ui';
+  mainCtx.fillText('Value →', w / 2, h - 2);
+  mainCtx.save();
+  mainCtx.translate(10, h / 2);
+  mainCtx.rotate(-Math.PI / 2);
+  mainCtx.fillText('ΔValue (velocity) →', 0, 0);
+  mainCtx.restore();
+
+  // Zero lines
+  const x0 = mapX(0, vMin, vMax, w, padL);
+  const y0 = mapY(0, dvMin, dvMax, h, padT, padB);
+  mainCtx.strokeStyle = '#2a3d60';
+  mainCtx.lineWidth = 1;
+  mainCtx.setLineDash([4, 4]);
+  mainCtx.beginPath(); mainCtx.moveTo(padL, y0); mainCtx.lineTo(w - padR, y0); mainCtx.stroke();
+  mainCtx.beginPath(); mainCtx.moveTo(x0, padT); mainCtx.lineTo(x0, h - padB); mainCtx.stroke();
+  mainCtx.setLineDash([]);
+
+  // Draw trajectory with color gradient (time)
+  for (let i = 1; i < pts.length; i++) {
+    const frac = i / pts.length;
+    const r = Math.round(168 + (59 - 168) * frac);
+    const g = Math.round(85 + (130 - 85) * frac);
+    const b = Math.round(247 + (246 - 247) * frac);
+    mainCtx.strokeStyle = `rgb(${r},${g},${b})`;
+    mainCtx.lineWidth = 1.5;
+    mainCtx.beginPath();
+    mainCtx.moveTo(
+      mapX(pts[i-1].val, vMin, vMax, w, padL),
+      mapY(pts[i-1].dval, dvMin, dvMax, h, padT, padB)
+    );
+    mainCtx.lineTo(
+      mapX(pts[i].val, vMin, vMax, w, padL),
+      mapY(pts[i].dval, dvMin, dvMax, h, padT, padB)
+    );
+    mainCtx.stroke();
+  }
+
+  // Mark spillover events
+  pts.filter(p => p.spill).forEach(p => {
+    const x = mapX(p.val, vMin, vMax, w, padL);
+    const y = mapY(p.dval, dvMin, dvMax, h, padT, padB);
+    mainCtx.fillStyle = 'rgba(248, 113, 113, 0.7)';
+    mainCtx.beginPath();
+    mainCtx.arc(x, y, 4, 0, Math.PI * 2);
+    mainCtx.fill();
+  });
+
+  document.getElementById('legend').innerHTML = [
+    { color: '#a855f7', label: 'Early time (purple)' },
+    { color: '#3b82f6', label: 'Late time (blue)' },
+    { color: 'rgba(248,113,113,0.7)', label: 'Spillover event' },
+  ].map(l => `<div class="legend-item"><div class="legend-swatch" style="background:${l.color}"></div>${l.label}</div>`).join('');
+
+  document.getElementById('panelTitle').textContent = 'Phase Portrait — Value vs Velocity (limit cycle = sustained oscillation)';
+}
+
+function drawPressureStrip(data) {
+  const w = pressCanvas.width / devicePixelRatio;
+  const h = 160;
+  const padL = 44, padR = 16, padT = 14, padB = 18;
+  pressCtx.clearRect(0, 0, w, h);
+
+  const { tMin, tMax } = getTimeRange(data);
+  const allP = data.map(d => d.p[4]);
+  const pMax = Math.max(0.3, Math.max(...allP) * 1.15);
+
+  // Grid
+  pressCtx.strokeStyle = '#1a2540';
+  pressCtx.lineWidth = 0.5;
+  pressCtx.fillStyle = '#4a5a78';
+  pressCtx.font = '10px system-ui';
+  for (let i = 0; i <= 3; i++) {
+    const v = i * pMax / 3;
+    const y = mapY(v, 0, pMax, h, padT, padB);
+    pressCtx.beginPath(); pressCtx.moveTo(padL, y); pressCtx.lineTo(w - padR, y); pressCtx.stroke();
+    pressCtx.fillText(v.toFixed(2), 2, y + 3);
+  }
+
+  // Pressure as area chart
+  pressCtx.fillStyle = 'rgba(168, 85, 247, 0.2)';
+  pressCtx.beginPath();
+  pressCtx.moveTo(mapX(data[0].t, tMin, tMax, w, padL), mapY(0, 0, pMax, h, padT, padB));
+  data.forEach(d => {
+    pressCtx.lineTo(mapX(d.t, tMin, tMax, w, padL), mapY(d.p[4], 0, pMax, h, padT, padB));
+  });
+  pressCtx.lineTo(mapX(data[data.length-1].t, tMin, tMax, w, padL), mapY(0, 0, pMax, h, padT, padB));
+  pressCtx.fill();
+
+  // Pressure line
+  pressCtx.strokeStyle = '#a855f7';
+  pressCtx.lineWidth = 1.5;
+  pressCtx.beginPath();
+  data.forEach((d, i) => {
+    const x = mapX(d.t, tMin, tMax, w, padL);
+    const y = mapY(d.p[4], 0, pMax, h, padT, padB);
+    i === 0 ? pressCtx.moveTo(x, y) : pressCtx.lineTo(x, y);
+  });
+  pressCtx.stroke();
+
+  // Spillover markers
+  const relevantSpills = SPILLS.filter(s => s.layer === 4 && s.t >= tMin && s.t <= tMax);
+  pressCtx.fillStyle = 'rgba(248, 113, 113, 0.7)';
+  for (const s of relevantSpills) {
+    const x = mapX(s.t, tMin, tMax, w, padL);
+    pressCtx.beginPath();
+    pressCtx.moveTo(x, padT); pressCtx.lineTo(x + 4, padT + 8); pressCtx.lineTo(x - 4, padT + 8);
+    pressCtx.fill();
+  }
+
+  // Floor forcing (subtle)
+  pressCtx.strokeStyle = 'rgba(249, 115, 22, 0.3)';
+  pressCtx.lineWidth = 1;
+  pressCtx.beginPath();
+  data.forEach((d, i) => {
+    const x = mapX(d.t, tMin, tMax, w, padL);
+    const normFloor = (d.floor + 1.3) / 2.6;  // normalise to 0-1ish
+    const y = mapY(normFloor * pMax * 0.4, 0, pMax, h, padT, padB);
+    i === 0 ? pressCtx.moveTo(x, y) : pressCtx.lineTo(x, y);
+  });
+  pressCtx.stroke();
+
+  document.getElementById('legend2').innerHTML = [
+    { color: '#a855f7', label: 'Measured pressure' },
+    { color: 'rgba(248,113,113,0.7)', label: 'Spillover ▼' },
+    { color: 'rgba(249,115,22,0.5)', label: 'Floor forcing' },
+  ].map(l => `<div class="legend-item"><div class="legend-swatch" style="background:${l.color}"></div>${l.label}</div>`).join('');
+}
+
+function draw() {
+  const view = document.getElementById('viewSelect').value;
+  const data = getViewData();
+  if (!data.length) return;
+
+  switch (view) {
+    case 'signal': drawSignal(data); break;
+    case 'ara': drawARA(data); break;
+    case 'pressure': drawPressureView(data); break;
+    case 'terrain': drawTerrain(); break;
+    case 'phase': drawPhase(data); break;
+  }
+  drawPressureStrip(data);
+}
+
+// Controls
+document.getElementById('viewSelect').addEventListener('change', draw);
+document.getElementById('showCalibrated').addEventListener('change', draw);
+document.getElementById('showSpills').addEventListener('change', draw);
+document.getElementById('windowStart').addEventListener('input', function() {
+  const v = parseInt(this.value);
+  const maxT = H[Math.min(v + 50, H.length - 1)].t;
+  document.getElementById('windowLabel').textContent =
+    v === 0 ? 'All' : `${H[v].t}–${H[H.length-1].t}mo`;
+  draw();
+});
+
+// Tooltip on main canvas
+mainCanvas.addEventListener('mousemove', function(e) {
+  const rect = mainCanvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const data = getViewData();
+  if (!data.length) return;
+
+  const { tMin, tMax } = getTimeRange(data);
+  const w = rect.width;
+  const padL = 44;
+  const t = tMin + (mx - padL) / (w - padL - 16) * (tMax - tMin);
+
+  // Find nearest step
+  let nearest = data[0];
+  let minDist = Infinity;
+  for (const d of data) {
+    const dist = Math.abs(d.t - t);
+    if (dist < minDist) { minDist = dist; nearest = d; }
+  }
+
+  if (minDist > (tMax - tMin) * 0.05) {
+    tooltip.style.display = 'none';
+    return;
+  }
+
+  const rows = [
+    `<div class="tt-row"><span class="tt-label">Time:</span><span class="tt-val">${nearest.t} months</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Mode:</span><span class="tt-val">${nearest.cal ? 'Calibrated' : 'Free-run'}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Value:</span><span class="tt-val">${nearest.val.toFixed(3)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Measured ARA:</span><span class="tt-val">${nearest.ara.toFixed(4)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Pressure:</span><span class="tt-val">${nearest.p[4].toFixed(4)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Floor force:</span><span class="tt-val">${nearest.floor.toFixed(4)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Spin speed:</span><span class="tt-val">${nearest.spin[4].toFixed(3)}</span></div>`,
+    `<div class="tt-row"><span class="tt-label">Friction:</span><span class="tt-val">${nearest.fric[4].toFixed(3)}</span></div>`,
+  ];
+  if (nearest.spills.some(s => s)) {
+    const spillLayers = nearest.spills.map((s, i) => s ? LAYERS[i] : null).filter(Boolean);
+    rows.push(`<div class="tt-row"><span class="tt-label">Spillover:</span><span class="tt-val" style="color:#f87171">${spillLayers.join(', ')}</span></div>`);
+  }
+
+  tooltip.innerHTML = rows.join('');
+  tooltip.style.display = 'block';
+  tooltip.style.left = Math.min(e.clientX + 12, window.innerWidth - 260) + 'px';
+  tooltip.style.top = (e.clientY - 100) + 'px';
+});
+
+mainCanvas.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+
+// Initial draw
+draw();
+</script>
+</body>
+</html>

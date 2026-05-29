@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heart horizon ladder &amp; the independent third leg</title>
+<style>
+  body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:920px;margin:24px auto;padding:0 16px;color:#1d2330;background:#fafbfc;line-height:1.5}
+  h1{font-size:1.45rem;margin-bottom:.2rem}
+  .sub{color:#667;margin-top:0}
+  .card{background:#fff;border:1px solid #e3e7ee;border-radius:10px;padding:18px 20px;margin:18px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .bar{height:22px;border-radius:4px;display:inline-block;vertical-align:middle}
+  .row{display:flex;align-items:center;gap:10px;margin:6px 0}
+  .lab{width:120px;text-align:right;font-size:.86rem;color:#445}
+  .val{font-variant-numeric:tabular-nums;font-size:.82rem;color:#334;width:54px}
+  table{border-collapse:collapse;width:100%;font-size:.84rem;margin-top:8px}
+  th,td{border:1px solid #e3e7ee;padding:5px 8px;text-align:center;font-variant-numeric:tabular-nums}
+  th{background:#f1f4f8}
+  .pos{color:#1a7a3c;font-weight:600}.neg{color:#b4413a}
+  .note{font-size:.82rem;color:#667;margin-top:10px}
+  .ladder span{display:inline-block;background:#eef3fb;border:1px solid #d3e0f3;border-radius:20px;padding:5px 12px;margin:4px 4px 4px 0;font-size:.85rem}
+  .caveat{background:#fff8ec;border:1px solid #f0dca8;border-radius:8px;padding:12px 16px;font-size:.85rem;color:#6b5618}
+</style>
+</head>
+<body>
+<h1>The heart's forecast horizon &amp; the independent third leg</h1>
+<p class="sub">Two-band ECG cross-system test · strict-causal · correlation-led · exploratory, small-n</p>
+
+<div class="card">
+  <h3 style="margin-top:0">1. Horizon ladder — how far ahead we can see depends on the slowest driver we measure</h3>
+  <div class="ladder">
+    <span><b>RR internal bands</b> → a few beats</span>
+    <span><b>Breath</b> (Fantasia) → ~3 beats / seconds</span>
+    <span><b>Oxygen</b> (apnea) → ~1 minute</span>
+  </div>
+  <p class="note">Each genuinely-slower real driver stretches the heart's forecast horizon to match its own timescale. The few-beats wall was never the heart's floor — it was just the slowest driver we had looked at. Direction is always <b>slow-gates-fast</b> (the slow band lends memory to the fast one); "fast accumulates into slow" has not appeared in any test.</p>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">2. Which third leg closes the lock? (slpdb, n=4, same subject: heart + breath + blood pressure + brain)</h3>
+  <p class="note">Lift in prediction correlation <b>over heart-alone</b>, averaged across 4 patients, at horizon = 5 beats (~4&nbsp;s). Positive = the driver adds real forecast skill.</p>
+  <div id="bars"></div>
+  <p class="note"><b>Blood pressure</b> (the autonomic / baroreflex signal) is the leg that tightens the lock — it is genuinely independent of the breathing cycle. Raw <b>brain</b> (EEG band-power) and <b>breath</b> add little. The reading: by the time the nervous system's command reaches the heart it has already become a blood-pressure change, so the heart listens to the pressure, not the raw brain waves.</p>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">3. Full horizon sweep — lift over heart-alone (correlation)</h3>
+  <table id="tbl"></table>
+  <p class="note">Persistence baseline shown for reference. BP stays positive across the sweep; everything fades past ~20 beats in these non-apneic sleepers.</p>
+</div>
+
+<div class="caveat">
+  <b>Honest scope.</b> This is one cross-system line of evidence (n=4 sleepers, plus the earlier apnea and breath tests). Lifts are real but modest (+0.05 to +0.11 correlation) and these calm sleepers have no big slow oxygen swings, so the horizon does not extend dramatically here. The principle that landed: an <i>independent</i> upstream leg (blood pressure) helps, while the anti-phase mirror (CO₂) did not — exactly what the triangulation idea predicts. Needs confirmation on a dataset that has big oxygen swings <i>and</i> blood pressure on the same person.
+</div>
+
+<script src="heart_bp_eeg_thirdleg_result.js"></script>
+<script>
+const D = window.HEART_THIRDLEG;
+const order = ['+BP','+breath','+brain(EEG)'];
+const colors = {'+BP':'#2f6fd0','+breath':'#7aa0c8','+brain(EEG)':'#c2a13a'};
+const h0 = 0; // first horizon = 5 beats
+const bars = document.getElementById('bars');
+const scale = 600; // px per unit corr
+order.forEach(m=>{
+  const v = D.lift_over_heart[m][h0];
+  const row = document.createElement('div'); row.className='row';
+  const w = Math.max(2, Math.abs(v)*scale);
+  row.innerHTML = `<div class="lab">${m}</div>`+
+    `<div class="bar" style="width:${w}px;background:${v>=0?colors[m]:'#b4413a'}"></div>`+
+    `<div class="val">${v>=0?'+':''}${v.toFixed(3)}</div>`;
+  bars.appendChild(row);
+});
+// table
+const tbl = document.getElementById('tbl');
+let head = '<tr><th>horizon (beats)</th>'+D.horizons_beats.map(h=>`<th>${h}</th>`).join('')+'</tr>';
+let rows = '<tr><td>persistence</td>'+D.persistence.map(v=>`<td>${v.toFixed(3)}</td>`).join('')+'</tr>';
+['+BP','+breath','+brain(EEG)'].forEach(m=>{
+  rows += `<tr><td>${m} lift</td>`+D.lift_over_heart[m].map(v=>`<td class="${v>=0?'pos':'neg'}">${v>=0?'+':''}${v.toFixed(3)}</td>`).join('')+'</tr>';
+});
+tbl.innerHTML = head+rows;
+</script>
+</body>
+</html>

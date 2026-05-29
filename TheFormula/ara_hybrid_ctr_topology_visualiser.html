@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARA Hybrid: CTR + Layered Sand Topology</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background:#0a0e17; color:#c8cdd5; overflow-x:hidden; }
+.header { background:linear-gradient(135deg,#0d1520,#152238); padding:24px 32px; border-bottom:1px solid #1e3050; }
+.header h1 { font-size:22px; color:#e0e4ea; margin-bottom:4px; }
+.header .sub { font-size:13px; color:#7a8aa0; }
+.controls { display:flex; gap:16px; padding:16px 32px; background:#0d1520; border-bottom:1px solid #1a2540; flex-wrap:wrap; align-items:center; }
+.controls label { font-size:12px; color:#6a7a90; text-transform:uppercase; letter-spacing:0.5px; }
+.controls select, .controls button { background:#152238; border:1px solid #1e3050; color:#c8cdd5; padding:6px 12px; border-radius:4px; font-size:13px; cursor:pointer; }
+.controls select:hover, .controls button:hover { border-color:#3a6090; }
+.controls button.active { background:#1a4070; border-color:#3a80d0; color:#e0e8f0; }
+.toggle-group { display:flex; gap:4px; }
+.toggle-group button { border-radius:3px; font-size:11px; padding:4px 10px; }
+.chart-container { padding:20px 32px; }
+.chart-box { background:#0d1520; border:1px solid #1a2540; border-radius:8px; margin-bottom:20px; overflow:hidden; }
+.chart-title { padding:12px 16px; font-size:14px; font-weight:600; color:#a0b0c8; border-bottom:1px solid #1a2540; display:flex; justify-content:space-between; align-items:center; }
+.chart-title .stats { font-size:11px; color:#5a7090; font-weight:400; }
+canvas { display:block; width:100%; }
+.score-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; padding:20px 32px; }
+.score-card { background:#0d1520; border:1px solid #1a2540; border-radius:8px; padding:16px; }
+.score-card h3 { font-size:13px; color:#7a8aa0; margin-bottom:10px; text-transform:uppercase; letter-spacing:0.5px; }
+.score-row { display:flex; justify-content:space-between; padding:4px 0; font-size:13px; border-bottom:1px solid #0f1a2a; }
+.score-row .label { color:#8a9ab0; }
+.score-row .val { font-family:'Fira Code',monospace; }
+.score-row .val.good { color:#4ae08a; }
+.score-row .val.bad { color:#e05a5a; }
+.score-row .val.neutral { color:#a0b0c8; }
+.legend { display:flex; gap:16px; padding:8px 16px; flex-wrap:wrap; }
+.legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:#7a8aa0; cursor:pointer; user-select:none; }
+.legend-item.disabled { opacity:0.35; }
+.legend-swatch { width:14px; height:3px; border-radius:2px; }
+.cutoff-label { font-size:10px; color:#e05a5a80; padding:0 16px 8px; }
+.view-tabs { display:flex; gap:2px; }
+.view-tabs button { background:#0a0e17; border:1px solid #1a2540; color:#6a7a90; padding:6px 14px; font-size:12px; cursor:pointer; border-radius:4px 4px 0 0; }
+.view-tabs button.active { background:#0d1520; border-bottom-color:#0d1520; color:#c8cdd5; }
+.residual-bar { display:inline-block; height:8px; border-radius:2px; vertical-align:middle; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>ARA Hybrid Predictor: Contact Triangle Roll + Layered Sand Topology</h1>
+  <div class="sub">CTR predicts next value → topology maps to sphere coordinate | Train: pre-2017 | Holdout: 2017+</div>
+</div>
+
+<div class="controls">
+  <div>
+    <label>Horizon</label><br>
+    <select id="horizon-select">
+      <option value="3">3 months</option>
+      <option value="6" selected>6 months</option>
+      <option value="12">12 months</option>
+      <option value="18">18 months</option>
+      <option value="24">24 months</option>
+    </select>
+  </div>
+  <div>
+    <label>View</label><br>
+    <div class="view-tabs" id="view-tabs">
+      <button class="active" data-view="wave">Waveform</button>
+      <button data-view="scatter">Scatter</button>
+      <button data-view="residual">Residuals</button>
+      <button data-view="bars">Score Bars</button>
+    </div>
+  </div>
+  <div>
+    <label>Show</label><br>
+    <div class="toggle-group" id="series-toggles"></div>
+  </div>
+</div>
+
+<div class="chart-container">
+  <div class="chart-box">
+    <div class="chart-title">
+      <span id="chart-label">Waveform — h=6 months</span>
+      <span class="stats" id="chart-stats"></span>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="cutoff-label">Red dashed line = train/holdout cutoff (2017-01)</div>
+    <canvas id="main-canvas" height="400"></canvas>
+  </div>
+  <div class="chart-box" id="error-box">
+    <div class="chart-title">
+      <span>Prediction Error (pred − actual)</span>
+      <span class="stats" id="error-stats"></span>
+    </div>
+    <canvas id="error-canvas" height="200"></canvas>
+  </div>
+</div>
+
+<div class="score-grid" id="score-grid"></div>
+
+<script src="ara_hybrid_viz_data.js"></script>
+<script>
+const SERIES = [
+  { key:'actual',           label:'Actual NINO',        color:'#e0e4ea', width:2.5, dash:[] },
+  { key:'current',          label:'Current (origin)',   color:'#4a5a70', width:1,   dash:[4,4] },
+  { key:'formula',          label:'Layered Sand',       color:'#e0a030', width:1.8, dash:[] },
+  { key:'ctr_filtered',     label:'CTR Filtered (K=42)',color:'#40c8e0', width:2,   dash:[] },
+  { key:'ctr_roll_filtered',label:'CTR Roll Filtered',  color:'#30e090', width:1.8, dash:[6,3] },
+  { key:'hybrid_filtered',  label:'Hybrid Filtered',    color:'#e060a0', width:2,   dash:[] },
+  { key:'hybrid_unfiltered',label:'Hybrid Unfiltered',  color:'#a060e0', width:1.5, dash:[4,4] },
+];
+
+let activeSeries = new Set(SERIES.map(s=>s.key));
+let currentView = 'wave';
+let currentHorizon = '6';
+
+function init() {
+  // Build series toggles
+  const tg = document.getElementById('series-toggles');
+  SERIES.forEach(s => {
+    const btn = document.createElement('button');
+    btn.textContent = s.label;
+    btn.className = 'active';
+    btn.style.borderLeftColor = s.color;
+    btn.style.borderLeftWidth = '3px';
+    btn.onclick = () => {
+      if (activeSeries.has(s.key)) { activeSeries.delete(s.key); btn.className=''; }
+      else { activeSeries.add(s.key); btn.className='active'; }
+      render();
+    };
+    tg.appendChild(btn);
+  });
+
+  // Build legend
+  const leg = document.getElementById('legend');
+  SERIES.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<span class="legend-swatch" style="background:${s.color}"></span>${s.label}`;
+    item.onclick = () => {
+      if (activeSeries.has(s.key)) { activeSeries.delete(s.key); item.classList.add('disabled'); }
+      else { activeSeries.add(s.key); item.classList.remove('disabled'); }
+      render();
+    };
+    leg.appendChild(item);
+  });
+
+  document.getElementById('horizon-select').onchange = e => { currentHorizon = e.target.value; render(); };
+  document.querySelectorAll('#view-tabs button').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('#view-tabs button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      currentView = btn.dataset.view;
+      render();
+    };
+  });
+
+  render();
+}
+
+function getRows() {
+  return VIZ_DATA.records[currentHorizon] || [];
+}
+
+function computeCorr(xs, ys) {
+  const n = xs.length;
+  if (n < 3) return null;
+  const mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+  let sxx=0,syy=0,sxy=0;
+  for (let i=0;i<n;i++) { sxx+=(xs[i]-mx)**2; syy+=(ys[i]-my)**2; sxy+=(xs[i]-mx)*(ys[i]-my); }
+  if (sxx<1e-12||syy<1e-12) return null;
+  return sxy/Math.sqrt(sxx*syy);
+}
+
+function computeMAE(pred, actual) {
+  if (!pred.length) return null;
+  return pred.reduce((s,v,i) => s + Math.abs(v - actual[i]), 0) / pred.length;
+}
+
+function render() {
+  const rows = getRows();
+  const cutoffIdx = rows.findIndex(r => r.origin >= VIZ_DATA.train_cutoff);
+  document.getElementById('chart-label').textContent =
+    `${currentView === 'wave' ? 'Waveform' : currentView === 'scatter' ? 'Scatter' : currentView === 'residual' ? 'Residuals' : 'Score Comparison'} — h=${currentHorizon} months`;
+
+  if (currentView === 'wave') renderWave(rows, cutoffIdx);
+  else if (currentView === 'scatter') renderScatter(rows, cutoffIdx);
+  else if (currentView === 'residual') renderResidual(rows, cutoffIdx);
+  else renderBars();
+
+  renderScoreCards();
+  document.getElementById('error-box').style.display = currentView === 'wave' ? 'block' : 'none';
+}
+
+function renderWave(rows, cutoffIdx) {
+  const canvas = document.getElementById('main-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 400;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { top:20, right:20, bottom:40, left:55 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  // Find y range
+  let ymin = Infinity, ymax = -Infinity;
+  rows.forEach(r => {
+    SERIES.forEach(s => {
+      if (activeSeries.has(s.key) && r[s.key] != null) {
+        ymin = Math.min(ymin, r[s.key]);
+        ymax = Math.max(ymax, r[s.key]);
+      }
+    });
+  });
+  ymin = Math.floor(ymin - 0.3); ymax = Math.ceil(ymax + 0.3);
+
+  const xScale = i => pad.left + (i / (rows.length - 1)) * cw;
+  const yScale = v => pad.top + ch - ((v - ymin) / (ymax - ymin)) * ch;
+
+  // Grid
+  ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+  for (let y = Math.ceil(ymin); y <= ymax; y++) {
+    ctx.beginPath(); ctx.moveTo(pad.left, yScale(y)); ctx.lineTo(W - pad.right, yScale(y)); ctx.stroke();
+    ctx.fillStyle = '#4a5a70'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+    ctx.fillText(y.toFixed(0), pad.left - 6, yScale(y) + 3);
+  }
+
+  // Zero line
+  ctx.strokeStyle = '#2a3a50'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.left, yScale(0)); ctx.lineTo(W - pad.right, yScale(0)); ctx.stroke();
+
+  // X labels
+  ctx.fillStyle = '#4a5a70'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+  const step = Math.max(1, Math.floor(rows.length / 12));
+  for (let i = 0; i < rows.length; i += step) {
+    ctx.fillText(rows[i].target.slice(0,7), xScale(i), H - pad.bottom + 18);
+  }
+
+  // Cutoff line
+  if (cutoffIdx > 0) {
+    ctx.strokeStyle = '#e05a5a60'; ctx.lineWidth = 1; ctx.setLineDash([6,4]);
+    ctx.beginPath(); ctx.moveTo(xScale(cutoffIdx), pad.top); ctx.lineTo(xScale(cutoffIdx), H - pad.bottom); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = '#e05a5a80'; ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+    ctx.fillText('holdout →', xScale(cutoffIdx) + 4, pad.top + 12);
+  }
+
+  // Draw series
+  SERIES.forEach(s => {
+    if (!activeSeries.has(s.key)) return;
+    ctx.strokeStyle = s.color; ctx.lineWidth = s.width; ctx.setLineDash(s.dash);
+    ctx.beginPath();
+    let started = false;
+    rows.forEach((r, i) => {
+      if (r[s.key] == null) return;
+      const x = xScale(i), y = yScale(r[s.key]);
+      if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Stats
+  const holdout = rows.filter(r => r.origin >= VIZ_DATA.train_cutoff);
+  const stats = [];
+  ['ctr_filtered','formula','hybrid_filtered'].forEach(key => {
+    const pred = holdout.map(r=>r[key]).filter(v=>v!=null);
+    const act = holdout.filter(r=>r[key]!=null).map(r=>r.actual);
+    const c = computeCorr(pred, act);
+    const label = key === 'ctr_filtered' ? 'CTR' : key === 'formula' ? 'LS' : 'Hybrid';
+    if (c != null) stats.push(`${label} corr=${c>=0?'+':''}${c.toFixed(3)}`);
+  });
+  document.getElementById('chart-stats').textContent = 'Holdout: ' + stats.join(' | ');
+
+  // Error chart
+  renderErrorChart(rows, cutoffIdx);
+}
+
+function renderErrorChart(rows, cutoffIdx) {
+  const canvas = document.getElementById('error-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 200;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { top:10, right:20, bottom:30, left:55 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  let emin = -3, emax = 3;
+  const xScale = i => pad.left + (i / (rows.length - 1)) * cw;
+  const yScale = v => pad.top + ch - ((v - emin) / (emax - emin)) * ch;
+
+  // Zero line
+  ctx.strokeStyle = '#2a3a50'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.left, yScale(0)); ctx.lineTo(W - pad.right, yScale(0)); ctx.stroke();
+
+  // Cutoff
+  if (cutoffIdx > 0) {
+    ctx.strokeStyle = '#e05a5a40'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+    ctx.beginPath(); ctx.moveTo(xScale(cutoffIdx), pad.top); ctx.lineTo(xScale(cutoffIdx), H - pad.bottom); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  // Error lines for active prediction series
+  const predKeys = SERIES.filter(s => s.key !== 'actual' && s.key !== 'current' && activeSeries.has(s.key));
+  predKeys.forEach(s => {
+    ctx.strokeStyle = s.color + '90'; ctx.lineWidth = 1.2; ctx.setLineDash(s.dash);
+    ctx.beginPath();
+    let started = false;
+    rows.forEach((r, i) => {
+      if (r[s.key] == null) return;
+      const err = r[s.key] - r.actual;
+      const x = xScale(i), y = yScale(Math.max(emin, Math.min(emax, err)));
+      if (!started) { ctx.moveTo(x, y); started = true; } else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Y labels
+  ctx.fillStyle = '#4a5a70'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+  for (let y = -2; y <= 2; y++) {
+    ctx.fillText(y.toFixed(0), pad.left - 6, yScale(y) + 3);
+  }
+}
+
+function renderScatter(rows, cutoffIdx) {
+  const canvas = document.getElementById('main-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 400;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const pad = { top:20, right:20, bottom:40, left:55 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  let lo = -3.5, hi = 3.5;
+  const s = v => pad.top + ch - ((v - lo) / (hi - lo)) * ch;
+  const sx = v => pad.left + ((v - lo) / (hi - lo)) * cw;
+
+  // Grid
+  ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+  for (let v = -3; v <= 3; v++) {
+    ctx.beginPath(); ctx.moveTo(pad.left, s(v)); ctx.lineTo(W-pad.right, s(v)); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx(v), pad.top); ctx.lineTo(sx(v), H-pad.bottom); ctx.stroke();
+  }
+
+  // Perfect line
+  ctx.strokeStyle = '#3a5070'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(sx(lo), s(lo)); ctx.lineTo(sx(hi), s(hi)); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Labels
+  ctx.fillStyle = '#5a7090'; ctx.font = '11px sans-serif';
+  ctx.textAlign = 'center'; ctx.fillText('Actual NINO', pad.left + cw/2, H - 6);
+  ctx.save(); ctx.translate(12, pad.top + ch/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText('Predicted', 0, 0); ctx.restore();
+
+  const predKeys = SERIES.filter(s => s.key !== 'actual' && s.key !== 'current' && activeSeries.has(s.key));
+  const holdout = rows.filter(r => r.origin >= VIZ_DATA.train_cutoff);
+
+  predKeys.forEach(ser => {
+    ctx.fillStyle = ser.color + '80';
+    holdout.forEach(r => {
+      if (r[ser.key] == null) return;
+      ctx.beginPath();
+      ctx.arc(sx(r.actual), s(r[ser.key]), 3, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  });
+}
+
+function renderResidual(rows, cutoffIdx) {
+  const canvas = document.getElementById('main-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 400;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const holdout = rows.filter(r => r.origin >= VIZ_DATA.train_cutoff);
+  const predKeys = SERIES.filter(s => s.key !== 'actual' && s.key !== 'current' && activeSeries.has(s.key));
+  if (!predKeys.length || !holdout.length) return;
+
+  const pad = { top:30, right:20, bottom:40, left:120 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+  const barH = Math.min(20, ch / (predKeys.length * holdout.length + predKeys.length));
+
+  // Box plot style: show MAE distribution per model
+  const boxW = cw * 0.7;
+  const modelH = ch / predKeys.length;
+
+  predKeys.forEach((ser, mi) => {
+    const errors = holdout.map(r => r[ser.key] != null ? r[ser.key] - r.actual : null).filter(e => e != null);
+    const absErrors = errors.map(Math.abs);
+    absErrors.sort((a,b) => a - b);
+    const mae = absErrors.reduce((s,v)=>s+v,0) / absErrors.length;
+    const median = absErrors[Math.floor(absErrors.length/2)];
+    const q1 = absErrors[Math.floor(absErrors.length * 0.25)];
+    const q3 = absErrors[Math.floor(absErrors.length * 0.75)];
+    const maxE = absErrors[absErrors.length - 1];
+
+    const y = pad.top + mi * modelH + modelH / 2;
+    const scale = v => pad.left + (v / 3.0) * boxW;
+
+    // Label
+    ctx.fillStyle = ser.color; ctx.font = '12px sans-serif'; ctx.textAlign = 'right';
+    ctx.fillText(ser.label, pad.left - 10, y + 4);
+
+    // Box
+    ctx.fillStyle = ser.color + '30';
+    ctx.fillRect(scale(q1), y - 8, scale(q3) - scale(q1), 16);
+    ctx.strokeStyle = ser.color; ctx.lineWidth = 1;
+    ctx.strokeRect(scale(q1), y - 8, scale(q3) - scale(q1), 16);
+
+    // Whiskers
+    ctx.beginPath(); ctx.moveTo(scale(0), y); ctx.lineTo(scale(q1), y); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(scale(q3), y); ctx.lineTo(scale(Math.min(maxE, 3)), y); ctx.stroke();
+
+    // Median line
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(scale(median), y - 8); ctx.lineTo(scale(median), y + 8); ctx.stroke();
+
+    // MAE marker
+    ctx.fillStyle = '#e0e4ea'; ctx.font = '10px monospace';
+    ctx.textAlign = 'left';
+    ctx.fillText(`MAE=${mae.toFixed(3)}`, scale(Math.min(maxE, 3)) + 8, y + 4);
+  });
+
+  // X axis
+  ctx.fillStyle = '#4a5a70'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+  for (let v = 0; v <= 3; v += 0.5) {
+    const x = pad.left + (v / 3.0) * boxW;
+    ctx.fillText(v.toFixed(1), x, H - pad.bottom + 16);
+    ctx.strokeStyle = '#1a2540'; ctx.lineWidth = 0.5;
+    ctx.beginPath(); ctx.moveTo(x, pad.top); ctx.lineTo(x, H - pad.bottom); ctx.stroke();
+  }
+  ctx.fillStyle = '#5a7090'; ctx.font = '11px sans-serif';
+  ctx.fillText('Absolute Error (holdout)', pad.left + boxW/2, H - 6);
+}
+
+function renderBars() {
+  const canvas = document.getElementById('main-canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.parentElement.clientWidth - 32;
+  const H = 400;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, W, H);
+
+  const h = currentHorizon;
+  const models = [
+    { key:'persistence', label:'Persistence', color:'#4a5a70' },
+    { key:'formula_standalone', label:'Layered Sand', color:'#e0a030' },
+    { key:'ctr_filtered', label:'CTR K=42', color:'#40c8e0' },
+    { key:'ctr_roll_filtered', label:'CTR Roll', color:'#30e090' },
+    { key:'hybrid_filtered', label:'Hybrid Filt', color:'#e060a0' },
+    { key:'hybrid_unfiltered', label:'Hybrid Unfilt', color:'#a060e0' },
+  ];
+
+  const pad = { top:30, right:20, bottom:60, left:55 };
+  const cw = W - pad.left - pad.right;
+  const ch = H - pad.top - pad.bottom;
+
+  // Get holdout scores
+  const scores = VIZ_DATA.point_scores_holdout;
+  const metrics = ['mae','corr','direction'];
+  const metricLabels = { mae:'MAE (lower=better)', corr:'Correlation (higher=better)', direction:'Direction Acc (higher=better)' };
+  const groupW = cw / 3;
+  const barW = groupW / (models.length + 1);
+
+  metrics.forEach((metric, gi) => {
+    const gx = pad.left + gi * groupW;
+    ctx.fillStyle = '#5a7090'; ctx.font = '11px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(metricLabels[metric], gx + groupW/2, H - 10);
+
+    models.forEach((m, mi) => {
+      const val = scores[m.key]?.[h]?.[metric];
+      if (val == null) return;
+      const x = gx + (mi + 0.5) * barW;
+
+      let barH, barY;
+      if (metric === 'mae') {
+        barH = (val / 1.5) * ch;
+        barY = pad.top + ch - barH;
+      } else if (metric === 'corr') {
+        const normalized = (val + 1) / 2; // -1..1 → 0..1
+        barH = normalized * ch;
+        barY = pad.top + ch - barH;
+      } else {
+        barH = val * ch;
+        barY = pad.top + ch - barH;
+      }
+
+      ctx.fillStyle = m.color + '80';
+      ctx.fillRect(x, barY, barW * 0.8, barH);
+      ctx.strokeStyle = m.color;
+      ctx.strokeRect(x, barY, barW * 0.8, barH);
+
+      // Value label
+      ctx.fillStyle = '#c8cdd5'; ctx.font = '9px monospace'; ctx.textAlign = 'center';
+      ctx.fillText(val >= 0 ? '+' + val.toFixed(3) : val.toFixed(3), x + barW * 0.4, barY - 4);
+
+      // Model label (rotated)
+      if (gi === 0) {
+        ctx.save();
+        ctx.translate(x + barW * 0.4, H - pad.bottom + 4);
+        ctx.rotate(Math.PI / 4);
+        ctx.fillStyle = m.color; ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+        ctx.fillText(m.label, 0, 0);
+        ctx.restore();
+      }
+    });
+  });
+}
+
+function renderScoreCards() {
+  const grid = document.getElementById('score-grid');
+  grid.innerHTML = '';
+
+  const sections = [
+    { title: `Holdout (2017+) — h=${currentHorizon}m`, src: VIZ_DATA.point_scores_holdout },
+    { title: `Train (pre-2017) — h=${currentHorizon}m`, src: VIZ_DATA.point_scores_train },
+  ];
+
+  const modelOrder = [
+    { key:'persistence', label:'Persistence' },
+    { key:'formula_standalone', label:'Layered Sand Formula' },
+    { key:'ctr_filtered', label:'CTR Filtered (K=42)' },
+    { key:'ctr_unfiltered', label:'CTR Unfiltered (K=1)' },
+    { key:'ctr_roll_filtered', label:'CTR Roll Filtered' },
+    { key:'ctr_roll_unfiltered', label:'CTR Roll Unfiltered' },
+    { key:'hybrid_filtered', label:'Hybrid Filtered' },
+    { key:'hybrid_unfiltered', label:'Hybrid Unfiltered' },
+  ];
+
+  sections.forEach(sec => {
+    const card = document.createElement('div');
+    card.className = 'score-card';
+    let html = `<h3>${sec.title}</h3>`;
+    const h = currentHorizon;
+
+    modelOrder.forEach(m => {
+      const s = sec.src[m.key]?.[h];
+      if (!s) return;
+      const mae = s.mae != null ? s.mae.toFixed(3) : '—';
+      const c = s.corr != null ? (s.corr >= 0 ? '+' : '') + s.corr.toFixed(3) : '—';
+      const d = s.direction != null ? (s.direction * 100).toFixed(1) + '%' : '—';
+      const corrClass = s.corr != null ? (s.corr > 0.1 ? 'good' : s.corr < -0.1 ? 'bad' : 'neutral') : 'neutral';
+      html += `<div class="score-row">
+        <span class="label">${m.label}</span>
+        <span class="val ${corrClass}">MAE ${mae} | r=${c} | dir ${d}</span>
+      </div>`;
+    });
+    card.innerHTML = html;
+    grid.appendChild(card);
+  });
+}
+
+window.addEventListener('resize', render);
+init();
+</script>
+</body>
+</html>

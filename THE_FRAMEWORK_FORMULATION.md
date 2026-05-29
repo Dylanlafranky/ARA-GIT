@@ -49,6 +49,8 @@ The φ-rung ladder isn't a list of separate subsystems waiting to be discovered.
 
 This means we don't need to fit subsystems separately at each rung. **The same generator at one scale produces the wave at every scale.** Choose your time-ruler to match the resolution you want.
 
+> **Update 2026-05-29 — rung spacing is octave (×2), φ is the relational handover.** When band ratios are measured edge-free (each system's spectrum picks its own peaks, no fixed windows), the rungs fall on an **octave ladder (×2)**, with √2 as the half-rung — not a φ ladder. φ's confirmed home is the **handover timing between rungs through time** (the camshaft duty 0.39/0.61 = 1/φ²:1/φ, dead-on across 54 hearts and matching ENSO), not the spacing of the rungs themselves. Read the "φ-power ruler" language above as provisional: the *spacing* is a doubling ladder; **φ is relational-through-time**, setting *when* one rung hands to the next, not *where* the rungs sit. One cross-system line (ECG + ENSO) — needs confirmation on more systems. See `TWOBAND_ECG_HORIZON_LADDER_RESULT.md` and `TWO_RULERS_PHI_AND_TWO.md`.
+
 ---
 
 ## How this connects to existing framework claims
