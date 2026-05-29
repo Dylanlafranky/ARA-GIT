@@ -11,21 +11,25 @@ The safest way to read any claim here is:
 3. Compare against simple baselines such as persistence, Fourier/AR models, parameter count, or a non-phi log ladder.
 4. Treat the larger "geometry of time" interpretation as a hypothesis, not as established fact.
 
+> **Ladder correction (30 May 2026):** earlier versions described the rung *spacing* as phi. On re-checking against the data (54-heart two-band ECG, solar flywheel), the rung **spacing is octave (x2)** — system geometry sits at ARA = 2.0, the harmonic ceiling. **Phi is kept where it belongs: in the coupling/handover relations** between rungs (golden duty 0.39/0.61, the 1/phi^3 and 1/phi^4 constants). The earlier shared "phi-power" placements (sun = phi^5, etc.) are superseded; each system now carries its own octave ladder anchored at its observed pump. Where claims below say "phi-rung", read it as "octave-rung with phi-timed coupling". Octaves build the tower; phi is the breathing gap between the steps.
+
 ## Strongest Current Claims
 
 These are the claims I think are most worth outside replication.
 
 | Claim | Current Status | Why it is worth checking |
 |---|---|---|
-| Phi-rung decomposition can extract useful topology from oscillating time series | Supported but not independently replicated | The same small predictor family shows signal on ENSO and ECG saved outputs. Some headline numbers need cleanup, but the signal is not obviously empty. |
-| ENSO has matched-rung anti-phase structure with SOI/Walker circulation | Supported as structural mapping | Dynamic per-rung outputs show strong anti-phase correlations across several rungs. This is closer to a domain-structure claim than a point-forecast claim. |
+| **Solar self-forecast beats persistence out to ~a decade** | **Strong, recent (2026-05-29), strict-causal** | On real SILSO monthly sunspots, the flywheel self-forecast holds correlation ~`+0.85` at 1 year and is still `+0.67` at 11 years, beating persistence the whole way. Skill wall sits at ~11 years (one home period); total dissolution near 44 years ≈ phi^3. Same engine fingerprint: octave rungs (10.7 / 85.3 / 170.7 yr = x8, x16) and Waldmeier golden duty (rise `0.394` / fall `0.606`). This is a genuine forecasting win, not mean-tracking. Caveats: one series ~25 cycles; a separate predictor-base test found base 2.0, not phi, wins as the predictor base on sunspots (that is predictor tuning, not structure). See `SOLAR_FLYWHEEL_RESULT.md`. |
+| Octave-rung decomposition (with phi-timed coupling) can extract useful topology from oscillating time series | Supported but not independently replicated | The same small predictor family shows signal on ENSO and ECG saved outputs. Some headline numbers need cleanup, but the signal is not obviously empty. |
+| **ENSO is two coupled interannual bands (not one mode), and the geometry forecasts it to ~6 months over climatology** | **Strong, walk-forward-validated, strict-causal (2026-05-29)** | The framework's "layered-sand" picture predicted that a grain cannot forecast itself — its future lives in the layer below. On real NOAA NINO 3.4 + WWV, that held: temperature-alone forecasts ≈ climatology, but adding the warm-water recharge driver-below lifts 6-month skill to +0.25 over climatology (walk-forward, refit-on-past). The decomposition also split ENSO's interannual power into two genuine bands of comparable power — quasi-biennial ~28 mo ("green") and low-frequency ~42–67 mo ("brown") — and a bispectrum confirmed they are *phase-coupled* (bicoherence ~0.34 vs ~0.06 floor), feeding a combination tone near 15–20 mo. The single-mode view fits their ~38 mo average, which is *why* single-mode models keep mistiming. The amplitude is its own slower meta-wave (Hilbert envelope ~2× slower). A **pre-registered** prediction was confirmed: forecast skill recurs non-monotonically, peaking near 27 mo locked to the quasi-biennial band, decaying ~×0.27 per ring. See `TheFormula/Claude4.8/README.md` and `GREEN_BROWN_TWO_BAND_METAWAVE.md`. |
 | Paired anti-phase systems can share ARA coupled geometry across scale | Supported as a relation-class result; prediction use still provisional | The 2026-05-23 nasal-cycle versus ENSO test found strong dominance-interval and signed-cycle matches under train/test controls. Follow-up 12-month ENSO tests show partial transfer: delayed feeder amplitude is the best exact-value branch so far, while boundary-distance transfer improves turn/transition information. Best wording: this supports shared coupled-pair geometry, not a claim that nasal breathing causally predicts ENSO. See `ARA_COUPLED_GEOMETRY_TRANSFER_RESULT.md`. |
 | ARA state geometry can expose useful subsystem structure | Supported as a state-map result; forecast use still provisional | The 2026-05-21 geometry map places NINO and SOI very close in ARA-position space and reads their strongest cross-candidate as mirror/destructive, while PDO sits about one rung-distance away. The first strict-causal transport test beats persistence at several horizons but remains weaker than a simple lag ridge baseline. See `ARA_GEOMETRY_TRANSPORT_RESULT.md`. |
 | Required ARA/formula variables carry causal forecast information | Provisional; forward operator still missing | The 2026-05-23 tick-recursion tests show energy-aware variable recursion beating persistence on multiple ENSO/Solar/short-ECG horizons, and actual future variables decode observables strongly. But strict formula tick does not yet beat simple controls consistently. See `ARA_TICK_RECURSION_AND_COUPLING_RESULT.md`. |
+| **The heart's forecast horizon is set by the slowest body-system driver acting on it (energy-pulse ladder), not by the heart itself** | **Supported across two independent datasets (2026-05-29), strict-causal** | Mapping ECG to broader body systems: a per-beat "driver ladder" (RR self-memory → breath → blood pressure → oxygen → sleep-stage) shows the heart has *no internal clock and so no internal forecast wall* — unlike ENSO/solar. Its horizon is borrowed from whichever slow driver is moving. **Blood pressure / baroreflex is the one independent leg that consistently tightens the heart forecast** (mid-horizon lift +0.07 to +0.14 corr), confirmed on sleepers (slpdb) *and* ICU patients (mimicdb). Oxygen only extends the horizon when it actually swings (apnea), not when medically managed. Sleeping heart stays forecastable to ~4–8 min, dead by ~17 min; awake heart ~2× less (an octave, matching octave-rung correction). See `HEART_TIME_SINGULARITY_CEILING_RESULT.md`, `MIMIC_COMBINED_LOCK_RESULT.md`. Caveat: small-n (2–4 records per arm), modest lifts, single cross-checks. |
 | **Cross-species topology+energy decomposition reduces practical prediction error** | **Supported on one mouse↔human pair (2026-05-12)** | The framework's "topology from species A × energy from species B" architecture gave a 58% MAE reduction on mouse→human RR-interval prediction vs naive cross-species transfer (34.29 ms vs 82.22 ms). Correlation stayed at chance level for both — see caveat below. |
 | ECG mid-horizon dips may mark an unmodeled physiological wave | Provisional | Multi-subject data show heterogeneous but recurring dip structure. Needs better physiology review and clean cross-subject rerun. |
-| LLM closure metrics correlate with Pythia benchmark capability | Preliminary | n=4 is too small, but the internal-activation metric rank-orders 5 of 6 benchmark sets. Needs larger Pythia sweep and parameter-count controls. |
-| Phi may be doing real work as a non-locking log-scale basis | Hypothesis with partial support | The mathematical motivation is coherent, but the repo should include direct phi-vs-nearby-log-base ablations next to public headlines. |
+| LLM closure metrics correlate with Pythia benchmark capability | Preliminary; confound test built, awaiting external run | n=4 is too small, but the internal-activation metric rank-orders 5 of 6 benchmark sets. A self-fetching parameter-count-confound test (`TheFormula/llm_closure_vs_paramcount.py`) is now built and unit-tested — frozen-size checkpoint sweep (params fixed) plus partial-correlation controlling for log(params). Could not run in-sandbox (no room for torch); a collaborator will run it on real hardware. |
+| Phi may be doing real work as the non-locking coupling/handover constant between octave rungs | Hypothesis with partial support | Phi is the most irrational ratio, so it never phase-locks — the right role for a handover, not for rung spacing (which is octave). The mathematical motivation is coherent, but the repo should include direct phi-vs-nearby-ratio ablations on the coupling constants next to public headlines. |
 
 ### Caveat on the decomposition claim
 
@@ -39,7 +43,7 @@ These claims should not be used as strong public headlines until rerun cleanly.
 |---|---|---|
 | "ENSO corr +0.93 and MAE 0.27 prove forecast skill" | Saved output supports about corr +0.90 and MAE about 0.28, but persistence skill is negative in the saved h=1 artifact. | "The canonical predictor shows short-lead ENSO signal, but needs stronger baseline comparison." |
 | "ECG 1-beat corr +0.99 and MAE 19 ms" | Saved canonical artifact I reviewed showed h=1 lower than this; h=3 looked stronger. | "Single-subject ECG results show useful signal, with best saved short-horizon correlation near +0.96." |
-| "76 of 77 systems sit in the 3/4 ceiling band" | A saved raw 77-system artifact shows many values outside [0.25, 1.75]. The refined subset may be different, but the simple headline is not safe. | "A refined ARA-band hypothesis remains interesting, but the catalogue needs cleaning and explicit inclusion rules." |
+| "76 of 77 systems sit in the 3/4 ceiling band" | Superseded by the larger mapping atlas (see update below). The raw catalogue still has out-of-band values. | "A refined ARA-band hypothesis remains interesting; use the 234-node mapping atlas with its explicit over-2 audit, not the old 77-system headline." |
 | "Cross-mammal mean +0.955 proves universal local-cycle shape" | Some comparisons appear inflated by normalization/endpoints, especially mouse/human scaling. | "Some mammal cycle-shape comparisons are high; the result needs a normalization-robust rerun." |
 | "LLM closure perfectly predicts capability" | n=4, WinoGrande is weaker, and parameter count is a major confound. | "Preliminary closure metric rank-orders several Pythia benchmark scores; needs scale controls." |
 | "ARA geometry transport solves ENSO prediction" | The 2026-05-21 strict-causal geometry transport test found signal over persistence, but causal lag ridge won every tested horizon and lag+geometry did not cleanly improve the lag baseline. | "ARA state geometry contains ENSO forecast signal, but direct value-transport is too blunt; next test should predict future geometry state before decoding values." |
@@ -67,7 +71,7 @@ The framework becomes much less plausible if:
 
 - A clean phi-vs-nearby-log-bases sweep shows phi is ordinary or worse. **(First-pass test run, see below.)**
 - A preregistered `home_k` rule removes the predictive signal.
-- Persistence/AR/Fourier baselines beat the canonical predictor across most tested systems. **(They currently do on ENSO at h=1; see below.)**
+- Persistence/AR/Fourier baselines beat the canonical predictor across most tested systems. **(Mixed: they currently do on ENSO point-forecast at h=1; but the solar self-forecast beats persistence out to ~11 years — see the 2026-05-29 update below.)**
 - The LLM closure metric adds nothing beyond parameter count and layer count on a larger model series.
 - The ARA catalogue no longer clusters meaningfully after independent duration sourcing and fixed inclusion rules.
 
@@ -161,3 +165,57 @@ The next follow-up, `TheFormula/ara_enso_12m_feeder_amplitude_test.py`, tested D
 Careful claim:
 
 > Shared ARA coupled geometry can transfer as a phase/transition prior, but exact value prediction still needs local state.
+
+## Update - May 29 2026: Solar flywheel is a genuine forecasting win
+
+The solar flywheel result is recorded in [`SOLAR_FLYWHEEL_RESULT.md`](SOLAR_FLYWHEEL_RESULT.md). This corrects the earlier framing in this file that "forecasting mostly loses to baselines" — that was true for the older ENSO/ECG point-forecasts, but it is not true for the newer solar work.
+
+On real SILSO monthly sunspot numbers, a strict-causal self-forecast (the system forecasting its own future from its own past, no external feeders) holds up far better than persistence:
+
+| Horizon | Self-forecast corr |
+|---:|---:|
+| 1 year | +0.853 |
+| 2 years | +0.788 |
+| 4 years | +0.743 |
+| 8 years | +0.752 |
+| 11 years | +0.674 |
+| 15 years | +0.536 |
+| 22 years | +0.352 |
+| 44 years | -0.030 |
+
+The forecast beats persistence broadly; it beats the cycle-ago floor (+0.69) only sub-cycle (~8 yr). A skill wall appears at ~11 years (one home period); total dissolution arrives near 44 years ≈ phi^3. The same engine fingerprint shows: octave rungs at 10.7 / 85.3 / 170.7 yr (x8, x16) and the Waldmeier golden duty (rise `0.394` / fall `0.606`).
+
+Honest caveats: this is one series of ~25 cycles; the golden-duty pairing was reinterpreted as within-cycle after a between-band version failed; and a separate predictor-base test found base 2.0, not phi, wins as the predictor *base* on sunspots (that is predictor tuning, not the structure claim). With those caveats, this is still the cleanest single-system forecasting result in the repo and a third independent system (after heart and orbital work) showing the octave + golden-duty engine.
+
+## Update - May 29 2026: ENSO two-band coupled pair + walk-forward forecast (Claude4.8 chain)
+
+The full documented chain is in [`TheFormula/Claude4.8/README.md`](TheFormula/Claude4.8/README.md), with the band/meta-wave detail in [`TheFormula/Claude4.8/GREEN_BROWN_TWO_BAND_METAWAVE.md`](TheFormula/Claude4.8/GREEN_BROWN_TWO_BAND_METAWAVE.md). This is the cleanest ENSO work in the repo and supersedes the older leakage-inflated ENSO headlines (the "+0.756 at h=24" numbers used acausal bandpass — see `MASTER_PREDICTION_LEDGER.md` T192–T198).
+
+What is solid:
+
+- **Driver-below carries the skill.** Walk-forward (refit on strictly-past data, ~210 origins 2008–2025): grain-alone 6-mo skill +0.12; adding the warm-water-recharge driver-below lifts it to **+0.25 over climatology**. Confirms the geometry's core prediction that a grain forecasts via the layer below it, not itself.
+- **Two coupled bands, not one mode.** NINO 3.4 interannual power splits into quasi-biennial (~28 mo) and low-frequency (~42–67 mo) bands of near-equal power; a segmented bispectrum confirms they phase-couple (bicoherence ~0.34 vs ~0.06 floor). The standard single-mode ~38 mo fit is just their average — which explains chronic single-mode mistiming. Note: QB and LF bands are individually known in the ENSO literature; the framework's contribution is treating them as a *coupled pair* with a combination tone and a skill-recurrence signature.
+- **Pre-registered prediction confirmed.** Skill is non-monotonic: troughs at 12–19 mo, re-emerges near 27 mo, faint third ring near 53 mo, decaying ~×0.27 per ring. The 27-mo recurrence and the decay ratio were called in advance; the recurrence locks to the quasi-biennial band.
+- **Emergent (not inserted) oscillation.** The three-body coupled-rate fit (a linear inverse model) produced an intrinsic damped 38-month oscillation on its own, matching ENSO's period, and restored forecast amplitude at 6 mo.
+
+The honest limits (kept explicit so this is not over-sold):
+
+- **The horizon is ~6 months.** 12-month skill does *not* survive walk-forward (goes negative). An earlier +0.19 at 12 mo was inflated by one window containing one big El Niño.
+- **The recurrence is describable, not bankable.** The quasi-biennial phase wanders (2–2.5 yr), so the 27-mo skill re-emergence drifts and cannot be reliably calibrated to.
+- **The pinning clock was hunted and not found.** Four external clocks were tested and *rejected* (4 for 4): SOI and clouds are contemporaneous surface partners, TNA has no clean lead, and QBO — despite matching the period almost exactly (28.4 vs ~28 mo) — phase-locks at only 0.14 vs a 0.30 surrogate threshold (p=0.54): same period, independent phase, not coupled. So the triad that would pin the wandering band is still open.
+- **One ocean record, one system.** Generality untested.
+- **One scheme was caught leaking and rejected**: a complex-demodulation loop scored +0.55 non-causally and collapsed below climatology once made causal (filter-endpoint future-peeking). Recorded as a rejected branch.
+
+Careful claim: the ARA geometry produces a genuine, honestly-validated 6-month ENSO forecast and a correct two-band coupled-pair description with a confirmed pre-registered skill-recurrence signature; it does not currently beat the ~6-month physical predictability wall, and the long-lead recurrence is real but not bankable.
+
+## Update - May 24 2026: Mapping atlas — 234 systems placed, with an explicit over-2 audit
+
+The `Mapping/` folder now holds a geometry-first atlas that places **234 systems** on the ARA scale, spanning quantum, molecular, biological, planetary, and cosmic scales (see `Mapping/README.md`, `ara_mapping_atlas_3d.html`, and `ARA_OVER2_AUDIT.md`).
+
+What is honest about it:
+
+- **189 of 234 nodes sit inside the clean `0..2` ARA band.** The remaining `45` are flagged as over-2 diagnostics — and every one of those 45 comes from the *older hand-curated catalogue layer*, not from any newly measured node. The three current layers (`measured_fit`, `state_geometry`, `mapped_extension`) introduce **zero** over-2 nodes.
+- The over-2 nodes are not quietly dropped or rescaled to look tidy. They are listed in `ARA_OVER2_AUDIT.md` with a recommendation for each (remeasure from source, invert for orientation, move to a better rung, or split into subsystems). Three have already been fixed by re-measuring from physics rather than from mismatched periods — e.g. U-238 alpha decay was using the 4.47-Gyr half-life as the "period"; recomputed from the actual nuclear oscillation it lands at ARA `0.99` with action/pi ~ ℏ.
+- The atlas X axis is a log-base-phi *display ruler* for laying out nodes, not a claim that physical spacing is phi. Physical rung spacing is octave (x2); phi lives in the couplings (e.g. galactic structure-time `P_cross/P_orb = 0.640`, within `0.022` of `1/phi`).
+
+Careful claim: the catalogue is now large, self-similar across ~40 orders of scale, and audited rather than cherry-picked. It is a mapping/orientation tool, not a forecast. The over-2 audit is the honesty check — read it alongside any "everything sits in the band" statement.

@@ -4,6 +4,8 @@ This folder is for geometry-first diagnostic workbenches and map-building assets
 
 The files here are not the forward formula itself. They are for locating systems, rungs, ARA positions, orientations, boundaries, and relation candidates before deciding whether a prediction test makes sense.
 
+> **Ladder correction (30 May 2026):** the atlas X axis is labelled `period phi-rung` — a log-base-phi *display coordinate* for laying nodes out, not a claim that physical rung spacing is phi. On re-checking against the data (54-heart two-band ECG, solar flywheel), the physical rung **spacing is octave (x2)** — system geometry sits at ARA = 2.0, the harmonic ceiling. Phi is kept where it belongs: in the **coupling/handover relations** (e.g. the `1/phi` structure-time and `P_cross/P_orb` ratios below are couplings, correctly phi). The display axis was left as-is to avoid regenerating the atlas data; read it as a coordinate ruler, not a spacing law.
+
 The atlas visualiser uses a fixed `0..2` Y axis for bounded ARA position. Above-2 diagnostic values are pinned to the top rail so overflow readings do not compress the clean geometry band. The Y axis draws quarter markers at `0`, `1/4 anti-phi`, `1/2`, `3/4`, `1 balance`, `5/4`, `3/2`, `phi`, `7/4`, and `2`.
 
 Current contents:

@@ -4,9 +4,11 @@
 
 **Dylan La Franchi · independent researcher · May 2026**
 
-A heartbeat, an El Nino cycle, a planetary orbit, a neuron firing, a transformer language model generating text. This repository explores a possibility: that many natural and artificial systems can be mapped onto a shared phi-spaced ladder of timescales. Each system can be summarized by a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder.
+A heartbeat, an El Nino cycle, a planetary orbit, a neuron firing, a transformer language model generating text. This repository explores a possibility: that many natural and artificial systems can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart), with phi as the coupling/handover constant between rungs rather than the spacing of the rungs. Each system can be summarized by a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder.
 
-The strongest version of the claim is not that this proves a finished law of nature. It is that a phi-rung coordinate system appears to carry real signal in several datasets, sometimes with surprisingly few inputs, and deserves independent checking. This repository is the framework, the tests, the failures, the corrections, and an open invitation to falsify it.
+> **Ladder correction (30 May 2026):** earlier versions described this as a *phi-spaced* ladder. Read edge-free (each system's own strongest cycles, no fixed windows), the rung *spacing* comes out octave (×2), not phi — consistent with system geometry sitting at ARA = 2.0 and nested cycles locking 2:1. Phi is retained where it earns its place: in the *coupling relations* — the handover timing between rungs and the feedback/blend constants (1/phi³, 1/phi⁴). The older shared phi-power placements are superseded; see `TWO_RULERS_PHI_AND_TWO.md` and `TWOBAND_ECG_HORIZON_LADDER_RESULT.md`.
+
+The strongest version of the claim is not that this proves a finished law of nature. It is that an octave-rung coordinate system (with phi-timed coupling) appears to carry real signal in several datasets, sometimes with surprisingly few inputs, and deserves independent checking. This repository is the framework, the tests, the failures, the corrections, and an open invitation to falsify it.
 
 I am not a scientist by training. I am releasing this because the idea has gone further than I expected, I have run out of resources to keep pushing it privately, and I would rather make the work inspectable than bury it. Please read it as an open research notebook: some parts are supported by saved outputs, some are promising but fragile, and some are clearly speculative.
 
@@ -33,7 +35,7 @@ The core methodology is intended to be strict-causal. Earlier acausal-bandpass l
 
 Things cycle. Hearts beat, lungs breathe, climates oscillate, planets orbit, neurons fire, language models generate text token by token. The question I started with: can the same simple geometric ratio describe a lot of these very different cycles?
 
-The framework's tentative answer is yes — in a soft, statistical way, not a perfect-law way. In the datasets gathered so far, self-organising systems often cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems can be mapped onto a φ-spaced ladder of timescales. The same formula is being tested as a way to read coordinates from a system and project them forward in time.
+The framework's tentative answer is yes — in a soft, statistical way, not a perfect-law way. In the datasets gathered so far, self-organising systems often cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart), with φ as the coupling/handover timing between rungs rather than the spacing (see the ladder correction above). The same formula is being tested as a way to read coordinates from a system and project them forward in time.
 
 I'm not a scientist by training. I built this in spare time over the last month-ish, in continuous dialogue with Claude (Anthropic's AI). The framework as it stands is the product of that collaboration — I provided conceptual direction and the falsification mindset; Claude handled the code-heavy iteration cycles I can't sustain physically due to ME/CFS. The transcripts are buried in `transcripts/local_sessions/` for anyone who wants the unfiltered audit trail.
 

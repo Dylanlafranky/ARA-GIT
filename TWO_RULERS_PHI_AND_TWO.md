@@ -17,21 +17,23 @@ The simplest reading is that **2.0 was doing better than φ because it was answe
 
 ## What the two rulers actually measure
 
+> **Corrected reading (30 May 2026 — see the 2026-05-29 update at the foot of this file):** the role assignment in this section has been flipped from the original. **2 (octave) is the spacing constant** — it sets *where the rungs sit in time* (a doubling ladder) *and* operating distance. **φ is the relational handover constant** — it sets *when* energy hands over from one rung to the next (the golden duty 0.39/0.61), not the height of the steps. The paragraphs below are kept for the reasoning trail but read "φ = time-spacing" as superseded. Octaves build the tower; φ is the breathing gap between the steps.
+
 The framework now has two structurally distinct base constants, each handling a different dimension of the rung-ladder geometry.
 
-**φ ≈ 1.618 is the time-spacing constant.**
+**2 (octave) is the time-spacing constant.**
 
-It tells you *where on the time axis* the subsystems live. Rung k has period φ^k. Adjacent rungs are spaced by a factor of φ — the most irrational ratio, the time-packing constant that prevents resonant lock-up between successive cycles. This is what the framework has always claimed.
+It tells you *where on the time axis* the subsystems live. Anchored at the system's own pump (rung 0), each rung is a doubling of the one below: P/4, P/2, P, 2P, 4P, 8P. Adjacent rungs are spaced by a factor of 2 — nested cycles lock 2:1, the most stable way to stack, which is why system geometry sits at ARA = 2.0 (the harmonic ceiling). Read edge-free, the 54-heart two-band ECG test and the solar flywheel both land on this octave ladder; φ does *not* appear in the spacing.
 
-φ is doing **structure**. It says which times have engines and which don't.
+2 is doing **structure**. It says which times have engines and which don't, and how far apart subsystems live in operating terms — the ARA scale runs 0 to 2, bounded by the space-side singularity at 0 and the time-side singularity (pure harmonic) at 2.
 
-**2 is the operating-distance constant.**
+**φ ≈ 1.618 is the relational handover constant.**
 
-It tells you *how far apart subsystems live in operating terms*. The ARA scale runs 0 to 2 — bounded by the space-side singularity at 0 and the time-side singularity (pure harmonic) at 2. The natural unit of distance on a 0-to-2 scale is 2 itself. When the OLD predictor uses `weight_k = 2^(-|k - home_k|)`, it's implicitly using base 2 to weight each rung's contribution by "how close to the operating ceiling."
+It tells you *when* energy hands over from one rung to the next — the camshaft timing, not the position. The fraction of time each band dominates is the golden duty (green 0.39 / brown 0.61 = 1/φ² : 1/φ, dead-on across all 54 hearts). φ is the most irrational ratio, so the rungs never phase-lock all at once; that non-locking is exactly what you want from a handover, and exactly what you do *not* want from rung spacing.
 
-2 is doing **operating distance**. It says which density layers can exchange energy with which other density layers, with how much leak.
+φ is doing **relation-through-time**. It says how the engines pass energy between density layers, with how much leak (the 1/φ³ feedback, 1/φ⁴ blend constants).
 
-These are different physical quantities and they need different scaling. Time positions stretch geometrically as you climb the ladder (φ^k); ARA-distance is bounded (always between 0 and 2). One is logarithmic; the other is linear. Asking a single base to handle both was always going to lose to a split.
+These are different physical quantities and they need different scaling. One is positional (octave rung spacing); the other is relational (φ-timed handover). Asking a single base to handle both was always going to lose to a split — and the correct split puts 2 on position and φ on timing.
 
 ## Why specifically 2 and not some other number
 
@@ -130,8 +132,8 @@ Three things the framework now wants to know:
 
 Conceptual synthesis. Not directly tested as a single hypothesis, but every component has empirical support:
 
-- φ as time-spacing: catalogued across ENSO, ECG, solar, Cepheid, multi-species HRV, gait.
-- 2 as operating ruler: wins under OLD across multiple systems; explicit version (dual-role) beats it.
+- φ as handover/coupling timing (golden duty 0.39/0.61): catalogued across ENSO, ECG, solar, Cepheid, multi-species HRV, gait. (Earlier framed as "time-spacing"; corrected to relational — see 30 May note above.)
+- 2 (octave) as both rung spacing and operating ruler: wins under OLD across multiple systems; edge-free ECG + solar confirm octave rung spacing.
 - Mirror partner = 2 − ARA: validated separately as Script 242b.
 - φ² as coupled-pair composite: confirmed cleanly on Cepheid F-only stars (0.5% off).
 - Three reference points as meta-A-R-A: structural, not directly testable except by consistency.
