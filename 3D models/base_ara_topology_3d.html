@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Base ARA Topology — two octave spheres, sheared 36°</title>
+<style>
+  html,body{margin:0;height:100%;background:#0a0e16;color:#cdd6e0;font-family:system-ui,Segoe UI,Arial,sans-serif;overflow:hidden}
+  #c{position:fixed;inset:0}
+  #legend{position:fixed;top:14px;left:14px;max-width:340px;background:rgba(12,18,28,.72);border:1px solid #2a3a52;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.5}
+  #legend h1{font-size:14px;margin:0 0 6px;color:#f0c878}
+  .sw{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:middle;margin-right:5px}
+  .muted{opacity:.7}
+  #hud{position:fixed;bottom:12px;left:14px;font-size:12px;opacity:.8}
+  b.gold{color:#f0c878}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div id="legend">
+  <h1>Base ARA Topology</h1>
+  <div><span class="sw" style="background:#5aa0ff"></span><b>Space</b> octave — head-on (ARA axis vertical)</div>
+  <div><span class="sw" style="background:#f0c878"></span><b>Time</b> octave — same sphere <b>sheared 36°</b> (= π/5)</div>
+  <div style="margin-top:6px">The two topographic surfaces weave through each other and <b>oscillate</b> across the shared equator. Pole-to-pole = the <b>base ARA span, 0 → 2</b>.</div>
+  <div style="margin-top:6px" class="muted">Markers on the axis: <b>0</b> (south), <b>1.0</b> balance (equator, where they cross), <b class="gold">φ=1.618</b> engine, <b>2.0</b> (north).</div>
+  <div style="margin-top:6px" class="muted">φ = 2·cos(36°) — the shear that turns the space octave into the time reading. Drag to rotate · scroll to zoom.</div>
+  <div style="margin-top:6px;font-size:11px;opacity:.6">Geometric realization of the stated structure; cosmic identification is conjecture (see OPEN_CONJECTURE_spacetime_mixing.md).</div>
+</div>
+<div id="hud">space↔time axes: 36° apart · coupling bisector 18° off each · base span 2.0</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const PHI=(1+Math.sqrt(5))/2, SHEAR=Math.PI/5; // 36°
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,100); cam.position.set(0,0.7,4.2);
+const rnd=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
+rnd.setSize(innerWidth,innerHeight); rnd.setPixelRatio(Math.min(devicePixelRatio,2));
+scene.add(new THREE.AmbientLight(0xffffff,.55));
+const dl=new THREE.DirectionalLight(0xffffff,.8); dl.position.set(3,4,5); scene.add(dl);
+const pivot=new THREE.Group(); scene.add(pivot);
+
+// ---- octave topographic sphere ----
+const SEG=64, RING=44, RUNGS=3, AMP=0.16;
+function makeSphere(color){
+  const g=new THREE.SphereGeometry(1,SEG,RING);
+  g.userData.base=g.attributes.position.array.slice();
+  const m=new THREE.MeshPhongMaterial({color,transparent:true,opacity:0.5,shininess:40,side:THREE.DoubleSide,wireframe:false});
+  const mesh=new THREE.Mesh(g,m);
+  const wf=new THREE.Mesh(g,new THREE.MeshBasicMaterial({color,wireframe:true,transparent:true,opacity:0.18}));
+  mesh.add(wf);
+  return mesh;
+}
+function displace(mesh,amp){
+  const pos=mesh.geometry.attributes.position, base=mesh.geometry.userData.base;
+  for(let i=0;i<pos.count;i++){
+    let x=base[i*3],y=base[i*3+1],z=base[i*3+2];
+    const theta=Math.acos(Math.max(-1,Math.min(1,z)));      // colatitude
+    const d=amp*Math.cos(RUNGS*2*Math.PI*(theta/Math.PI));   // octave rung bands
+    const r=1+d;
+    pos.array[i*3]=x*r; pos.array[i*3+1]=y*r; pos.array[i*3+2]=z*r;
+  }
+  pos.needsUpdate=true; mesh.geometry.computeVertexNormals();
+}
+const space=makeSphere(0x5aa0ff); pivot.add(space);
+const time =makeSphere(0xf0c878); time.rotation.x=SHEAR; pivot.add(time); // sheared twin
+
+// ---- ARA axis 0..2 (z from -1..+1), markers ----
+const axisMat=new THREE.LineBasicMaterial({color:0x8fa6c0});
+const axisGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0,-1.45),new THREE.Vector3(0,0,1.45)]);
+pivot.add(new THREE.Line(axisGeo,axisMat));
+function marker(z,color,s){const m=new THREE.Mesh(new THREE.SphereGeometry(s,16,16),new THREE.MeshBasicMaterial({color}));m.position.set(0,0,z);pivot.add(m);}
+marker(-1,0x8fa6c0,0.04);            // ARA 0
+marker(0,0xffffff,0.05);             // ARA 1.0 balance
+marker(PHI-1,0xf0c878,0.055);        // ARA phi (z=0.618)
+marker(1,0x8fa6c0,0.04);             // ARA 2
+// equator ring (the shared crossover / balance 1.0)
+const eg=new THREE.BufferGeometry().setFromPoints(
+  Array.from({length:97},(_,i)=>{const a=i/96*2*Math.PI;return new THREE.Vector3(Math.cos(a),Math.sin(a),0);}));
+pivot.add(new THREE.LineLoop(eg,new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:0.5})));
+
+// ---- interaction: drag orbit + wheel zoom ----
+let rx=0.3,ry=0.5,down=false,px=0,py=0;
+addEventListener('mousedown',e=>{down=true;px=e.clientX;py=e.clientY});
+addEventListener('mouseup',()=>down=false);
+addEventListener('mousemove',e=>{if(!down)return;ry+=(e.clientX-px)*.008;rx+=(e.clientY-py)*.008;px=e.clientX;py=e.clientY});
+addEventListener('wheel',e=>{cam.position.z=Math.max(2.2,Math.min(8,cam.position.z+e.deltaY*.002))});
+addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();rnd.setSize(innerWidth,innerHeight)});
+
+let t=0;
+function loop(){
+  requestAnimationFrame(loop);
+  t+=0.012;
+  // counter-oscillation: the two terrains breathe in antiphase, so the surfaces weave/cross
+  displace(space, AMP*Math.sin(t));
+  displace(time,  AMP*Math.sin(t+Math.PI));
+  pivot.rotation.x=rx; pivot.rotation.y=ry+t*0.05;
+  rnd.render(scene,cam);
+}
+loop();
+</script>
+</body></html>

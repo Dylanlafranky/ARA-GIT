@@ -1,0 +1,59 @@
+{
+  "shear_deg": 36.0,
+  "phi_check_2cos36": 1.618033988749895,
+  "phi": 1.618033988749895,
+  "ara_axis": "z; ARA = z+1, south z=-1 -> ARA0, north z=+1 -> ARA2, equator z=0 -> ARA1.0(balance)",
+  "base_ARA_span": 2.0,
+  "rotation_matrix_space_to_time": [
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.8090169943749475,
+      -0.5877852522924731
+    ],
+    [
+      0.0,
+      0.5877852522924731,
+      0.8090169943749475
+    ]
+  ],
+  "poles": {
+    "space_ARA0_southpole": [
+      0,
+      0,
+      -1.0
+    ],
+    "space_ARA2_northpole": [
+      0,
+      0,
+      1.0
+    ],
+    "time_ARA0_southpole": [
+      0.0,
+      0.5877852522924731,
+      -0.8090169943749475
+    ],
+    "time_ARA2_northpole": [
+      0.0,
+      -0.5877852522924731,
+      0.8090169943749475
+    ],
+    "balance_equator_ARA1.0": "z=0 ring (both spheres share it)"
+  },
+  "coupling_bisector_axis": [
+    0.0,
+    -0.30901699437494745,
+    0.9510565162951536
+  ],
+  "each_octave_off_coupling_deg": 18.0,
+  "terrain": {
+    "type": "octave cos in colatitude",
+    "amplitude": 0.18,
+    "rungs": 3
+  },
+  "notes": "Geometric realization of the stated structure. Conventions: ARA on z (0..2); SPACE head-on, TIME sheared 36deg about x; terrain = octave rung bands; the two terrain surfaces cross (oscillate) around the shared equator. phi=2cos36 sets the shear. Exact-geometry where stated; cosmic identification is conjecture (see OPEN_CONJECTURE_spacetime_mixing.md)."
+}

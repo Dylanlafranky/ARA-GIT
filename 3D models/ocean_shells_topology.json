@@ -1,0 +1,99 @@
+{
+  "ara_axis": "z; ARA=z+1; equator(z=0)=1.0 balance; phi at z=0.618; span 0..2",
+  "shell_spacing": "linear in rung index = octave (x2) in real period",
+  "shells": [
+    {
+      "rung": -1,
+      "radius": 0.8,
+      "label": "WWV subsurface (faster recharge battery)"
+    },
+    {
+      "rung": 0,
+      "radius": 1.2,
+      "label": "ENSO pump shell (NINO / SOI)"
+    },
+    {
+      "rung": 1,
+      "radius": 1.7,
+      "label": "PDO slow modulation"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "NINO",
+      "label": "NINO 3.4 (surface temp)",
+      "rung": 0,
+      "ara": 0.82,
+      "lon": 0,
+      "xyz": [
+        1.1804,
+        0.0,
+        -0.216
+      ]
+    },
+    {
+      "id": "SOI",
+      "label": "SOI (Walker / atmosphere)",
+      "rung": 0,
+      "ara": 0.82,
+      "lon": 180,
+      "xyz": [
+        -1.1804,
+        0.0,
+        -0.216
+      ]
+    },
+    {
+      "id": "WWV",
+      "label": "WWV (subsurface warm water)",
+      "rung": -1,
+      "ara": 1.0,
+      "lon": 90,
+      "xyz": [
+        0.0,
+        0.8,
+        0.0
+      ]
+    },
+    {
+      "id": "PDO",
+      "label": "PDO (decadal modulation)",
+      "rung": 1,
+      "ara": 0.9,
+      "lon": 45,
+      "xyz": [
+        1.1961,
+        1.1961,
+        -0.17
+      ]
+    }
+  ],
+  "couplings": [
+    {
+      "from": "NINO",
+      "to": "SOI",
+      "kind": "closed-resonant",
+      "type": "matched-rung anti-phase",
+      "note": "same shell, 180 deg apart; Walker circulation; CONFIRMED |corr|~0.72"
+    },
+    {
+      "from": "WWV",
+      "to": "NINO",
+      "kind": "open-feeder",
+      "type": "handoff (driver-below)",
+      "note": "subsurface recharge leads surface ~quarter cycle; CONFIRMED lift"
+    },
+    {
+      "from": "PDO",
+      "to": "NINO",
+      "kind": "open-feeder",
+      "type": "overflow (slow modulation)",
+      "note": "decadal background sets the rate; matched-rung at phi^10"
+    }
+  ],
+  "legend": {
+    "closed-resonant": "two nodes, same shell, anti-phase (matched-rung pair)",
+    "open-feeder": "node linked across shells (handoff / overflow / driver-below)"
+  },
+  "notes": "Illustrative ENSO wiring on the nested-shell ocean layer; structure (closed pairs on a shell, open feeders across shells) is the framework claim; ARA values approximate. Sits around the base two-octave-sphere core (base_ara_topology.json)."
+}

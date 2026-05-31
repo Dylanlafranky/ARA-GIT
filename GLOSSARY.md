@@ -65,6 +65,7 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **`Mapping/`** — *where* systems sit on the ARA scale (the atlas).
 - **`TheFormula/`** — *forecasting* (predictor scripts, benchmarks, LLM work).
 - **`EnergyRatio/`** — *how leanly* a system moves energy per cycle (leanness, recycling, the bedrock, the open conjectures).
+- **`3D models/`** — interactive 3D viewers of the topology (base ARA, ocean layer, system explorer, scalable lattice).
 
 ---
 
