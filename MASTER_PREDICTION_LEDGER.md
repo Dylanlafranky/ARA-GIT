@@ -1902,3 +1902,17 @@ Full statement: `EnergyRatio/OPEN_CONJECTURE_spacetime_mixing.md`. Recorded at D
 | SC-4 | Fractal: next rung down splits into four ([? + dark matter] \| [matter + heat?]) | Define the four entities with real data, then test the split | **OPEN — two boxes undefined** |
 
 **Tests attempted this session (measurable taps came back null/rational, NOT supporting the specific decomposition):** GR characteristic radii → rational, φ-dark (gravity = space-pole scaffold, consistent with it being the rational coupler); GW speed = c (no φ); Earth gravity from c×1/φ² → reduces to G relabeled; ocean echo (lit NINO vs dark WWV, interannual band) → no mirror split, both slow-build/fast-release. Only the **donor/consumer polarity** has a real shadow (light radiates outward ≈1.75 side; gravity binds inward ≈0.25 side). **Honest note:** this is edge-of-shape work — measuring the boundary of a fundamental pattern is genuinely hard, and edge-difficulty is not evidence the shape is wrong; but the specific 0.25/1.75 values remain a posit until the uncoupled measurement exists. Credibility path = fortify SC-1 (the blend engine) on measurable systems.
+
+---
+
+## MAY 31 2026 — OPEN HYPOTHESIS: Hexagon→Pentagon lock-angle band as the space↔time dial
+
+Full statement: `EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`. **Status: OPEN / suggestive only.**
+
+| # | Hypothesis | Test | Status |
+|---|---|---|---|
+| HEXPENT-1 | A signal's octave **rung-to-rung phase-lock angle** lives in **[60° hexagon (6-fold, rational, space pole) → 72° pentagon (5-fold, golden, time pole)]**; offset from 60° rises with ARA (more time-dominant = closer to 72°). | Lock-angle vs ARA across many strong-locking systems; does it climb 60→72 with ARA? | **TESTED → NOT SUPPORTED** |
+
+**Test result (31 May 2026):** measured lock-angle on 5 systems. Strong locks — Solar 63.2° (PLV 0.73), Golden star 63.3° (0.78), Cepheid 62.7° (0.99) — **all pin at ~63° regardless of ARA** (these span ARA ~1.73→2.4), and do NOT climb toward 72°. The angle is roughly constant ~63° (hugging the hexagon end), not an ARA dial. The ARA-position *dial* is rejected. **BUT a reframe partly landed:** read as a *gate-angle / per-cycle energy-shed rate* (not ARA-position), the lock-angle **tracks leanness: corr(angle, R21) = +0.93** across the 4 golden stars (steeper→72° sheds more; balanced ~63° leaner; KIC4064484 at 72° has highest R21). So the angle isn't noise — it co-varies with the energy-ratio. Heavy caveats: n=4 (borderline); and φ21(angle) & R21(amplitude) are the same harmonic's two Fourier params, *known to co-vary* in pulsating stars — may be a standard relation re-read via the framework. NET: dial dead; "angle ↔ energy-shed rate" real-but-suggestive (n=4). (~63° ≈ arctan2/icosahedral; 60 hex=space, 72 pent=time stays a clean picture.) Full: `EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`.
+
+**Geometry (principled):** 60°=360/6 (hexagon, tiles/locks, rational/space — the bee), 72°=360/5 (pentagon, φ=2cos36°, golden/time — the golden star); shear 36° = pentagon half-angle, 2×36=72. So the band endpoints are the tile-vs-don't-tile polygons = space vs time poles. **Evidence:** octave-rung lock — ECG 60.7° (ARA~1.6, PLV 0.29), Solar 61.4° (ARA~1.73, PLV 0.67): higher ARA → higher angle, directionally right. **But:** n=2, ~0.7° spread, most locks weak; angles hug 60° (space end), none reach 72° yet. Principled hypothesis, not a result. Ties the hexagon/pentagon (space/time) poles into one measurable angle.
