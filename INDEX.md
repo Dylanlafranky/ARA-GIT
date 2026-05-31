@@ -12,6 +12,8 @@ I'm not a scientist by training. I built this in spare time, with significant he
 
 The repository has three working folders, one per question the framework asks of any cycling system: **`Mapping/`** — *where* a system sits on the ARA scale (what kind of cycle it is); **`TheFormula/`** — can it be *forecast* from a few geometric constants; **`EnergyRatio/`** — how *efficiently* it moves energy/information per cycle (the leanness / entropy-budget side, e.g. the golden-star result below).
 
+**New to the vocabulary?** Start with [`GLOSSARY.md`](GLOSSARY.md) — a plain-language key to every term (ARA, octave, φ, the walls, rungs, matched-rung pairs, recycling, leanness, the bedrock), with the common confusions flagged directly (e.g. "Primes" ≠ prime numbers; the space/time pole labels are a flip-symmetric choice; rung-spacing is a different axis from the 0–2 position).
+
 For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 
 The first ARA state-geometry and transport test is recorded in [`ARA_GEOMETRY_TRANSPORT_RESULT.md`](ARA_GEOMETRY_TRANSPORT_RESULT.md). Short version: the geometry map carries ENSO signal over persistence, especially around 6-24 months, but direct value-transport still loses to a simple causal lag baseline.
