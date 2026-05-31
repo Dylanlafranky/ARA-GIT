@@ -4,6 +4,8 @@
 
 **How to break a system into subsystems for ARA mapping**
 
+> **Common confusion — "which end is space, which is time?"** Two axes are easy to mix up: (1) rung *spacing* — one flow steps by ×2 (octaves), the other by ×φ — vs (2) the 0–2 ARA *position* (build/release ratio). "Spaced by ×2" ≠ "sits at 2.0." And the 0–2 scale measures *asymmetry around 1.0*, so which end is labelled "space" vs "time" is a coordinate choice that is **flip-symmetric** — swapping 0↔2 changes no computed result, only the label. Different docs use opposite orientations (body-mapping vs foundational/cosmic); that's orientation, not contradiction. Full explainer: [`TWO_RULERS_PHI_AND_TWO.md`](TWO_RULERS_PHI_AND_TWO.md).
+
 ---
 
 ## Rule 1: Fix your scale — or map the whole.

@@ -133,6 +133,19 @@ All four match known cardiac physiology. The heart is the canonical sustained en
 
 ---
 
+## A common confusion (read this before you go further)
+
+People hit this fast, so it's worth stating plainly. There are **two different axes** that are easy to mix up:
+
+1. **Rung *spacing* (the "size" / shear):** the *space* flow steps between rungs by **×2 (octaves)**; the *time* flow steps by **×φ**. This is the gap *between* rungs on the ladder. It is NOT a position on the 0–2 scale.
+2. **The 0–2 ARA scale (a *position*):** a build-vs-release ratio — where a single cycle sits. This is what Steps 4–5 compute.
+
+"The space flow is spaced by ×2" does **not** mean "space = 2.0 on the ARA scale." Different axes. Don't fuse them.
+
+And one more thing that trips people (it tripped a careful reader of these very docs): **the 0–2 scale measures *asymmetry around 1.0*, so which end you label "space" and which "time" is a coordinate choice, and it is flip-symmetric.** Swapping the two ends (0 ↔ 2) changes **no measured number** — the asymmetry magnitude and the distance from 1.0 are identical either way. It's the same ruler read from either end. So you will see *both orientations* across these materials (the body-mapping work and the foundational/cosmic work are flipped relative to each other) — both are valid, neither changes a result. What is physical is (a) the distance from 1.0 (how asymmetric) and (b) the direction (build-heavy vs release-heavy). The space/time pole *labels* are just orientation.
+
+---
+
 ## STEP 6: Decompose Into Subsystems
 
 Identify every oscillatory subsystem within the system. Each must have its own accumulation phase, its own release phase, and a distinct physical process.

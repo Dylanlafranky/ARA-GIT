@@ -14,7 +14,39 @@ This document tracks every prediction the ARA framework has made, its current st
 - **OPEN** — testable but not yet tested
 - **FALSIFIED** — tested and definitively failed
 
-**Last updated:** 23 May 2026
+**Last updated:** 31 May 2026
+
+---
+
+## ON THE AUTHOR'S PRIOR KNOWLEDGE (why these count as blind)
+
+The author (Dylan La Franchi) has no formal training in the physics, mathematics, or engineering domains these predictions touch. Predictions are made by following *relational shape* — accumulate / hand-over / release, which subsystem sits between which, where the gap falls — without knowing the established result the shape would later be checked against.
+
+At the outset he did not know: KAM theory; action quantization (that a hydrogen atom's classical action collapses to Planck's constant ℏ); the internal subsystem structure of the Sun; that the dark sector is split into multiple separately-measured categories; camshaft / mechanical-timing concepts; and many of the other systems later tested. He knew of the golden ratio φ only loosely — as a number that comes up in nature — and did **not** know why it was important, where it appears, or that it is the "most irrational" number governing stability.
+
+Why this matters: because the shapes were followed *blind to the named physics*, a later match cannot be retrofitting — he could not have worked backwards from an answer he did not hold. That is the foundation under the blind-prediction record in Part B.
+
+**Honest caveat:** data sourcing and physics identification were done by AI research assistants (Claude, ChatGPT and Gemini — Claude most, then ChatGPT and Gemini), so "blind" applies to the human author, not to the human–AI pair. The documented-before-lookup discipline is what controls for the assistants' knowledge.
+
+---
+
+## HYDROGEN ATOM — BLIND PREDICTION TEST (with negative control)
+
+Source: `analysis/hydrogen/hydrogen_ara_analysis.py`, `analysis/hydrogen/hydrogen_ara_results.json`. Author classified 7 hydrogen subsystems by ARA and predicted each one's failure mode from the *generic* ARA rules (same rules used for engines, hearts, Earth), before validation against atomic physics. Data sourced by AI assistant from NIST Atomic Spectra Database v5.11, Bethe & Salpeter (1957).
+
+| # | Subsystem (ARA) | Blind prediction | Validates against | Status |
+|---|---|---|---|---|
+| H-1 | Ground orbital n=1 (ARA 1.0) | Pacemaker; perturbing orbital timing shifts energy level → spectral shift | Stark effect, Zeeman effect | **CONFIRMED** |
+| H-2 | Lyman-α 2p→1s (ARA ~2.5e-4) | Extreme snap; pump faster than emission → population stacks (inversion) | Population inversion / how lasers work | **CONFIRMED** |
+| H-3 | 2s metastable two-photon (ARA ~3.3e-15) | Most extreme snap; energy enters 2s and gets trapped → bottleneck | Peebles (1968) cosmological recombination bottleneck | **CONFIRMED** |
+| H-4 | Balmer cascade 3→2 (ARA ~0.30) | Consumer snap; cascade accelerates downward | Higher-n longer lifetimes → cascade does accelerate | **CONFIRMED** |
+| H-5 | Hyperfine 21-cm (ARA ~2e-24) | Most extreme snap in nature; individually undetectable, only statistical | Ewen & Purcell (1951) 21-cm from ~10^57 atoms | **CONFIRMED** |
+| H-6 | Angular-momentum gating s vs p (ARA ~0.034) | Extreme snap; s-states are population traps ~30× slower | 3s (158 ns) vs 3p (5.36 ns); known plasma/astro traps | **CONFIRMED** |
+| H-7 | Ionisation / recombination (ARA ~1e-12) | Ultra-extreme snap; dynamic creation≈destruction equilibrium | Strömgren sphere equilibrium | **CONFIRMED** |
+
+**Score: 7/7 qualitative matches against named, established results.**
+
+**NEGATIVE CONTROL (the important part):** the author predicted φ should be **absent** in hydrogen — a fully quantised system has no self-optimisation freedom, so there is no channel through which φ-balance can emerge. Result: **0 subsystems in the φ-zone; φ absent.** A framework that correctly predicts *where φ should not appear* (here, and in the random-number nulls, Scripts 158–160) is far harder to dismiss as φ-hunting than one that only finds φ everywhere. Note: a separate, later test (`243BL18`, T78 below) decomposes hydrogen *energy gaps* and finds the gap-ratio sequence sweeping through φ at shell 6→7 — that is the atom's internal *rhythm* (a coupling/handover ratio), consistent with "φ in coupling, not in the quantised level spacing."
 
 ---
 
@@ -173,6 +205,26 @@ These are predictions Dylan made BEFORE seeing any test result, then tested on r
 | BP-6 | "Solar Schwabe will sit on a clean φ-rung" (vertical ARA cross-system test) | Decompose SILSO sunspot data into framework rungs | **70.8% of solar variance concentrates in φ¹⁰ (123 months ≈ 10.3 yr)** | **BLIND CONFIRMED** — different system (the Sun) cleanly lands on framework rung |
 | BP-7 | "Heart isn't a closed system — point prediction will fail" | Pure-blind multi-step on ECG nsr001 | corr ~0 (failed); but cycle counts ±10%, mean durations ±5-15%, φ-spacing ±10-13% | **BLIND CONFIRMED** — point prediction failed exactly as predicted; structural prediction held |
 | BP-8 | "Topology+flow with measured upstream feeders enables open-system point prediction" | ENSO + AMO + TNA framework forecast | Local ENSO-only: −0.078; with AMO+TNA feeders: **+0.218** (+0.296 corr lift) | **BLIND CONFIRMED** |
+| BP-9 | "There is a spring pump that supplies the energy for the ENSO system" (Dylan, 2026-05-30) | Seasonal phase test on real WWV/NINO: amplitude-by-month, surface build-rate, WWV discharge-rate, WWV→NINO lead | Amplitude loudest Dec (0.99) / quietest Jun (0.56); surface builds fastest **April**; WWV discharges fastest **March**; WWV leads NINO — the documented recharge–discharge oscillator (Jin 1997) | **CONFIRMED** — intuition maps onto established ENSO physics (`SPRING_PUMP_RESULT.md`) |
+| BP-10 | "Mix the two systems (ocean + atmosphere) for a stronger prediction across the spring barrier" | Strict-causal NINO(t+h) from WWV+SOI+mix vs single-system, train-only standardize | h=12mo (across the barrier where the surface goes amnesiac): WWV+SOI+mix **+0.218** vs persistence −0.045 vs WWV-alone +0.185 vs SOI-alone +0.034 | **CONFIRMED** — two systems beat one; mixing term adds a small further lift (`GATE_MIX_PREDICT_RESULT.md`) |
+| BP-11 | "Add the spring handoff to the capstone forecaster as the heartbeat, see how it performs" | Spring handoff as a **regime switch** (separate spring/rest seasonal maps; ocean×atmosphere mix drives only in the spring map) vs always-on mix feature vs baseline, walk-forward strict-causal | Regime switch: **best 6-mo forecast of all four (corr +0.725** vs base +0.709), wins again at 18–21mo; always-on version **redundant** (seasonal map's month-dependent cross-terms already encode it) | **PARTIALLY CONFIRMED** — real, physics-placed gains but small (~+0.01 corr); no new horizon (`SPRING_REGIME_SWITCH_RESULT.md`) |
+| BP-12 | "The 6-mo wall (corr +0.725) is below the true ceiling 0.764 = 1−1/φ³; finer/faster feeders ride in to fill the 0.039 gap" (Dylan, 2026-05-30) | Add real intraseasonal MJO (BoM RMM, monthly amplitude) + stratospheric QBO (CPC 30/50 hPa) to the spring-switch, strict-causal | **Wall did NOT move:** h=6 stayed +0.725 (+0.724 with MJO — a pure passenger). QBO *hurt* the surface (−0.03) but *lifted long horizons* (+0.055 @ h18). 0.764 not reached. | **NOT CONFIRMED via finer feeders** — but the *deeper* claim held: finest feeder rides on the big packet adding nothing; the monthly target IS the packet size, so finer inputs can't lift it without a finer target (`FINER_FEEDERS_WALL_RESULT.md`) |
+| BP-13 | TWO separate channels (Dylan, refined 2026-05-30): (a) the smooth 0.725→0.764 gap is filled by **depth/finer** (a finer TARGET, not finer feeders — original instinct holds); (b) the **leaf-fall from the brown band above is the cross-cycle turbulence**, an intermittent **E-event (disruption)**, NOT a gap-filler | (a) finer-target test (weekly OISST/daily NINO); (b) brown-band shed as E-event series vs forecast-breakdown cycles | Not yet run — both proposed in `FINER_FEEDERS_WALL_RESULT.md`. Gap and turbulence have different sources; conflating them ("leaf-fall fills the gap") was corrected. | **OPEN** |
+| BP-14 | "The missing piece is R = how information moves between ENSO and its systems. Measure it as transfer entropy (A1=map, R=info-exchange, A2=predict)." (Dylan, 2026-05-30) | Strict transfer entropy TE(feeder→ENSO) vs TE(ENSO→feeder), best lead-lag, phase-scramble null z, on real NOAA WWV/SOI/PDO/IOD (`enso_info_exchange_R.py`) | **IOD = real net info donor ~11mo ahead (z +3.2)** — never used before; WWV donor ~8mo (z +2.1); SOI simultaneous lag-0 (no lead); **PDO = tightest phase-lock but LOWEST info transfer (z +1.0) — a clock, not a message** | **CONFIRMED diagnostic** — separates the lock (PDO) from the message (IOD); Information³ in action (a lock shares a clock, a donor shares a message) |
+| BP-15 | "Fold the info-donor (IOD) into the forecast — it should lift the long horizons the lock can't reach" (Dylan, 2026-05-30) | Strict-causal feeder test, base vs +PDO vs +IOD, held from 2016 (`enso_iod_feeder_test.py`) | **IOD lifts short/mid:** h=6 +0.728→**+0.738**, h=12 +0.401→+0.418, h=9/15 up. **PDO lifts long:** h=24 +0.462→+0.473. They are **complementary** — donor short, lock long | **CONFIRMED** — R picked the right tool; each feeder works where its information lives |
+| BP-16 | "Follow the energy pulse UP the rung: stitch IOD (short/mid) + PDO (long) into one horizon-aware forecaster" (Dylan, 2026-05-30) | Strict-causal stitch: combined = +IOD for h≤15, +PDO for h≥18; also tested +IOD+PDO stacked (`enso_combined_horizon_feeder.py`) | **Stitch wins:** h=6 **+0.738**, h=12 +0.418, h=24 **+0.473** — lifts at nearly every horizon, holds +0.47 at 2yr. **Stacking both in one model LOSES** (h=6 0.731, h=24 0.461 — each feeder waters the other down) | **CONFIRMED** — the two channels are independent (no PDO↔IOD information chain), so stitch beats stack; Dylan predicted this |
+
+### Heart: same R→stitch logic applied cross-domain (Dylan, 2026-05-30)
+
+| ID | Claim & test | Outcome | Verdict |
+|----|------|---------|---------|
+| HR-1 | Apply the ENSO R-map to the HEART: transfer entropy from BP/EEG/Resp into the next RR beat, phase-scramble null, on real slp01a (`heart_info_exchange_R.py`) | **Resp (breath) leads ~4 beats, net info INTO heart (z +19); BP = tightest grip but simultaneous/downstream heart→BP (z +27); EEG cortex quiet (z +1.5).** Recovers known cardiology (RSA, the heart drives BP). Dylan: EEG is the wrong probe — heart is run by the **autonomic nervous system**, not cortex | **CONFIRMED diagnostic** — R-map recovers real physiology, same shape as ENSO |
+| HR-2 | Naive stitch (breath short / BP long) like ENSO | **Stitch FAILS on heart:** breath *hurts* short (h=3 +0.648→+0.618), BP *lifts* mid (+0.675). Backwards from ENSO | **NOT CONFIRMED as naive stitch** — donor's lead already encoded in heart's own RR memory (RSA), so contemporaneous breath is redundant |
+| HR-3 | Dylan reframe: breath went negative because it's the **counterspin** (slow accumulation-release clock); the donor we want is the **fast forward spin**. Split each channel into FAST (forward) vs SLOW (counterspin) bands, causal trailing smoother (`heart_fast_forwardspin.py`) | **CONFIRMED both predictions:** **BP FAST lifts every horizon — h=5 +0.488→+0.582 (+0.094), h=8 +0.433→+0.519 (+0.087)** = the forward-spin donor. **breath SLOW reads negative, crashes to −0.214 @ h=8** = the counterspin clock signature. Cleanest fast/slow forward/counter split on any system | **CONFIRMED** — forward-spin donor = the FAST band; slow band of any feeder = its counterspin and reads negative |
+
+| HR-4 | Dylan: the autonomic NS is itself a **"3"** (a whole resonance-locked system) with TWO internal nodes — a **FAST clock fed by breath** and a **SLOW state/tick fed by the brain (EEG)**. Reconstruct the NS hub from its OWN feeders (breath-fast pass-through + EEG-slow tanked, leak 1/φ), not from BP (BP = heart's own downstream output). Add the BP-fast forward-spin donor on top (`heart_ns_three_node.py`) | **CONFIRMED — new champion:** NS-3 hub alone lifts +0.012@h5/+0.061@h8; **NS-3 hub + BP-fast donor = +0.108@h5, +0.133@h8** (beats old BP/breath hub +0.089/+0.085 and raw feeders). The EEG channel that read "quiet" at beat resolution DOES contribute — but only as the slow tonic NS state when tanked, never as a fast donor. 1D single-tank still FAILS (−0.283@h8, smears the fast donor). | **CONFIRMED** — NS reconstructs as fast-clock(breath) + slow-tick(brain), the A-R-A hub shape; strict-causal, held-out, corr-led |
+
+**Structural note (Dylan, 2026-05-30):** these measured channels are still **secondary** to the real controller. Causal chain: *breath intake → deep autonomic nervous-system tick → heart rate*, and *sensory input (eyes/sound) → brain → autonomic nervous system → heart rate*. The autonomic nervous system is the hidden hub / proximate A-node (never measured directly here — EEG cortex was the wrong probe). Breath, BP, sensory are all **feeders into the hub**; the forecast lift from BP FAST is a proxy for the hub's fast correction. This is why lifts feel "halved" — the information passes through the unmeasured nervous-system node. Reverse-inference target: reconstruct the hub tick from its feeders.
 
 ### Cross-system matched-rung empirical confirmations (today)
 
@@ -302,7 +354,7 @@ Clean failures (Cepheid classification, n ≈ ARA) were killed honestly and led 
 
 ### Scripts 148-155: Cross-Scale Blind Prediction Campaign
 
-Dylan proposed system pairs at different scales; Claude built pre-registered predictions using the unified formula Δlog = G + R·sin(G_phase/R). No post-hoc tuning. 55 predictions total.
+Dylan proposed system pairs at different scales; the AI assistants (Claude, ChatGPT and Gemini) built pre-registered predictions using the unified formula Δlog = G + R·sin(G_phase/R). No post-hoc tuning. 55 predictions total.
 
 **Unified formula components:**
 - G = dimensional gap (0 for intensive quantities, G_LENGTH/G_AREA/G_VOLUME for extensive)
@@ -1820,3 +1872,33 @@ Comparison to the prior best in this branch:
 Reading:
 
 > Boundary/rung distance carries useful transition information, but current boundary coordinates do not yet replace local feeder amplitude. The architecture idea is plausible as a coordinate system; the missing input is still better physical feeder state.
+
+---
+
+## MAY 31 2026 — PULSATING STARS: φ → LEANER ENERGY BUDGET
+
+Detailed record: `EnergyRatio/GOLDEN_STARS_LEAN_RESULT.md`. Data: real Kepler light curves (lightkurve/MAST), OGLE-IV double-mode catalogs and Netzel & Smolec 2019 RR0.61 census (`J/MNRAS/487/5584`), cross-matched to OGLE bulge `RRc.dat`. All frequencies measured by us (Lomb–Scargle + iterative prewhitening). Supersedes Script 98 (which used hand-typed literature rise fractions). Leanness proxy = R21 = Fourier harmonic-spray A(2f)/A(f₁); **lower R21 = leaner** (less energy lost to shocky harmonic distortion).
+
+| # | Prediction / question | Test setup | Result | Status |
+|---|---|---|---|---|
+| GS-1 | Plain single-mode pulsator is harmonic/integer, φ absent | Classical Cepheid V1154 Cyg (Kepler) frequency analysis | Integer harmonics only (1×,2×,3×,4× exact), no independent mode; R21=0.28 (fattest) | **CONFIRMED** (φ dark, space pole) |
+| GS-2 | Ordinary double-mode pulsators sit at near-rational ratios, not φ | 433 OGLE RRd + Cep F+1O, frequency ratios | Tight cluster 1.34–1.42 (Petersen ratio); none reach φ; R21 0.16 / 0.19 | **CONFIRMED** (space-leaning crowd) |
+| GS-3 | The rare near-φ pulsators (golden stars) exist and run LEANER | 4 Kepler RRc strange-nonchaotic stars (KIC 5520878/4064484/8832417/9453114) | 2nd-mode/f₁ within ~2% of φ (3 within 1%); all R21≈0.11 — leanest of all classes | **CONFIRMED** (re-finds Lindner 2015; leanness is our measurement) |
+| GS-4 | Closer to φ → leaner (dose-response gradient at population scale) | 949 OGLE RR0.61 stars vs 18,318 ordinary RRc; within-club gradient | Club 3.6% leaner than same-type controls (p=0.016); **within club corr(\|Px/P1O − 1/φ\|, R21) = −0.347 (n=949)** — nearer exact 1/φ = leaner | **CONFIRMED** (modest class gap, strong within-club gradient) |
+
+**Reading:** the closer a pulsator's mode ratio sits to φ, the less energy it spills into harmonic waste — a leaner engine. Mechanism is consistent with KAM theory (φ is the most-irrational ratio, so no harmonic can lock and grow → energy stays in clean modes; rational ratios let overtones reinforce → waste). The framework's contribution is the **measured entropy-leanness gradient** and the cross-domain framing (same φ-leanness implied in ECG/ENSO φ-rung entropy decay, `TheFormula/Claude4.8/PHI_RUNG_ENTROPY_DECAY_RESULT.md`). **Honest hedges:** n=4 Kepler club is a known related class (not independent discoveries); R21 is one (clean, physical) leanness proxy; against *same-type* RRc the gap is modest (3.6%) — the within-club gradient toward exact φ is the backbone of the claim. "φ resists locking / most-irrational stability" is established math; the empirical leanness gradient and cross-domain synthesis are the new part. Scripts: `EnergyRatio/` (run `fetch_data.py` first).
+
+---
+
+## MAY 31 2026 — OPEN CONJECTURE: Space/Time mixing → Light/Gravity (uncoupled values)
+
+Full statement: `EnergyRatio/OPEN_CONJECTURE_spacetime_mixing.md`. Recorded at Dylan's request for a future where light and gravity might be measured *uncoupled*. **Status: OPEN / UNFALSIFIABLE TODAY** — logged as a foundational conjecture at the edge of the framework's shape, explicitly not a result.
+
+| # | Conjecture | How it would be tested | Status |
+|---|---|---|---|
+| SC-1 | Wave **mixing produces the next rung's identity** (why the octave works); the framework's "next-rung = blend of two below" applied as the generative engine | Strengthen "rung k = blend of k−1, k−2" across many measured systems (now N≈3, a hint) | **OPEN — load-bearing, testable now on data** |
+| SC-2 | **Space/Time mix → Light/Gravity** as the level-1 pair; they were not auto-coupled and couple afterward | Requires measuring light or gravity *uncoupled* — no instrument today | **OPEN — unmeasurable now** |
+| SC-3 | Measured gravity ARA ≈ 1.0 is the **coupled midpoint**; **uncoupled gravity ≈ 0.25, light ≈ 1.75** (exact mirrors about 1.0) | Read either single identity outside the coupling; uncoupled gravity→0.25 / light→1.75 would support | **OPEN — unmeasurable now; specific decomposition has NO measured support yet** |
+| SC-4 | Fractal: next rung down splits into four ([? + dark matter] \| [matter + heat?]) | Define the four entities with real data, then test the split | **OPEN — two boxes undefined** |
+
+**Tests attempted this session (measurable taps came back null/rational, NOT supporting the specific decomposition):** GR characteristic radii → rational, φ-dark (gravity = space-pole scaffold, consistent with it being the rational coupler); GW speed = c (no φ); Earth gravity from c×1/φ² → reduces to G relabeled; ocean echo (lit NINO vs dark WWV, interannual band) → no mirror split, both slow-build/fast-release. Only the **donor/consumer polarity** has a real shadow (light radiates outward ≈1.75 side; gravity binds inward ≈0.25 side). **Honest note:** this is edge-of-shape work — measuring the boundary of a fundamental pattern is genuinely hard, and edge-difficulty is not evidence the shape is wrong; but the specific 0.25/1.75 values remain a posit until the uncoupled measurement exists. Credibility path = fortify SC-1 (the blend engine) on measurable systems.

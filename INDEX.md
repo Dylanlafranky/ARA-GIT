@@ -10,6 +10,8 @@ This is an open research notebook about a geometric hypothesis for oscillating s
 
 I'm not a scientist by training. I built this in spare time, with significant help from AI collaborators. I report what I find — including the misses — and invite people in the relevant fields to check, improve, or knock down what I have wrong.
 
+The repository has three working folders, one per question the framework asks of any cycling system: **`Mapping/`** — *where* a system sits on the ARA scale (what kind of cycle it is); **`TheFormula/`** — can it be *forecast* from a few geometric constants; **`EnergyRatio/`** — how *efficiently* it moves energy/information per cycle (the leanness / entropy-budget side, e.g. the golden-star result below).
+
 For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 
 The first ARA state-geometry and transport test is recorded in [`ARA_GEOMETRY_TRANSPORT_RESULT.md`](ARA_GEOMETRY_TRANSPORT_RESULT.md). Short version: the geometry map carries ENSO signal over persistence, especially around 6-24 months, but direct value-transport still loses to a simple causal lag baseline.
@@ -184,6 +186,7 @@ These are the findings that survived at least one stricter check after an earlie
 | **Closed-system coupling differs from incidental** | SOI as matched-rung pair lifts ENSO; same SOI as feeder does nothing | (memory: closed_system_validated) |
 | **AR feedback constant is 1/φ³** | "One full ARA orbit" of momentum carrying between cycles | (memory: aa_boundary_ar_feedback) |
 | **Mid-horizon dip is consistent across 11 humans** | Recurring but heterogeneous dip structure; possible autonomic intruder wave | `TheFormula/multi_subject_dip_data.js` |
+| **Pulsating stars closer to φ run leaner (lower harmonic waste)** | Real Kepler + OGLE photometry. Single-mode Cepheid R21≈0.28 (fattest) → ordinary double-mode 0.16–0.19 → 4 near-φ "golden" stars ≈0.11 (leanest). Population: 949 RR0.61 stars 3.6% leaner than 18,318 ordinary RRc (p=0.016); within-club corr(\|Px/P1O−1/φ\|, R21) = **−0.347** (n=949) — closer to exact 1/φ = leaner. Consistent with KAM (φ resists harmonic locking); the measured leanness gradient is new. | `EnergyRatio/GOLDEN_STARS_LEAN_RESULT.md` |
 
 ### 🟡 Provisional — single test, suggestive numerical match, or coincidence-flagged
 

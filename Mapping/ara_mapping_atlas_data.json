@@ -831,9 +831,9 @@
       "period_seconds": 0.0011,
       "period_phi_rung": -14.15685306223307,
       "period_log10": -2.958607314841775,
-      "ara": 2.14,
-      "ara_class": "resonant_pair",
-      "theta_deg": 57.324840764331206,
+      "ara": 0.01707,
+      "ara_class": "snap",
+      "theta_deg": 176.97896899918396,
       "energy_j": 5e-13,
       "action_pi": 1.750704374010849e-16,
       "weight_value": 1.750704374010849e-16,
@@ -841,18 +841,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 0.14000000000000012
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.01707
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 0.5219660112501052,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.600963988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "n_depol"
+      "original_id": "n_depol",
+      "ara_original": 2.14,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_n_refrac",
@@ -862,9 +868,9 @@
       "period_seconds": 0.0052,
       "period_phi_rung": -10.928859972930544,
       "period_log10": -2.283996656365201,
-      "ara": 3.33,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 41.57043879907621,
+      "ara": 0.02488,
+      "ara_class": "snap",
+      "theta_deg": 175.63031769573024,
       "energy_j": 1e-12,
       "action_pi": 1.6552114081557113e-15,
       "weight_value": 1.6552114081557113e-15,
@@ -872,18 +878,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 1.33
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.02488
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 1.7119660112501052,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.593153988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "n_refrac"
+      "original_id": "n_refrac",
+      "ara_original": 3.33,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_n_vesicle",
@@ -1978,9 +1990,9 @@
       "period_seconds": 0.0002,
       "period_phi_rung": -17.69946777671411,
       "period_log10": -3.6989700043360187,
-      "ara": 20000.0,
-      "ara_class": "overflow",
-      "theta_deg": 0.008999550015377535,
+      "ara": 0.000442,
+      "ara_class": "snap",
+      "theta_deg": 179.92047514998373,
       "energy_j": 0.1,
       "action_pi": 6.366197723675814e-06,
       "weight_value": 6.366197723675814e-06,
@@ -1988,18 +2000,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "micro_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 19998.0
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.000442
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 19998.38196601125,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.6175919887498948,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "las_qswitch"
+      "original_id": "las_qswitch",
+      "ara_original": 20000.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/quantum_laser_ara_test.py",
+        "reason": "Recomputed from laser rate equations; old value was build/release ratio stored inverted. Pulsed laser is a deep snap (slow gain storage, ultrafast pulse dump)."
+      }
     },
     {
       "id": "catalog_las_modelock",
@@ -2009,9 +2027,9 @@
       "period_seconds": 1.25e-08,
       "period_phi_rung": -37.81606403870933,
       "period_log10": -7.903089986991944,
-      "ara": 125000.0,
-      "ara_class": "overflow",
-      "theta_deg": 0.0014399884107738565,
+      "ara": 8e-06,
+      "ara_class": "snap",
+      "theta_deg": 179.99856001158923,
       "energy_j": 1.25e-08,
       "action_pi": 4.973591971621729e-17,
       "weight_value": 4.973591971621729e-17,
@@ -2019,18 +2037,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "micro_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 124998.0
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 8e-06
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 124998.38196601125,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.618025988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "las_modelock"
+      "original_id": "las_modelock",
+      "ara_original": 125000.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/quantum_laser_ara_test.py",
+        "reason": "Recomputed from laser rate equations; old value was build/release ratio stored inverted. Pulsed laser is a deep snap (slow gain storage, ultrafast pulse dump)."
+      }
     },
     {
       "id": "catalog_eeg_gamma",
@@ -2040,9 +2064,9 @@
       "period_seconds": 0.025,
       "period_phi_rung": -7.665812147606778,
       "period_log10": -1.6020599913279623,
-      "ara": 3.0,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 45.0,
+      "ara": 0.8,
+      "ara_class": "balance_clock",
+      "theta_deg": 100.0,
       "energy_j": 1e-11,
       "action_pi": 7.957747154594767e-14,
       "weight_value": 7.957747154594767e-14,
@@ -2050,18 +2074,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 1.0
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.19999999999999996
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 1.381966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.8180339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "eeg_gamma"
+      "original_id": "eeg_gamma",
+      "ara_original": 3.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/eeg_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_eeg_beta",
@@ -2071,9 +2101,9 @@
       "period_seconds": 0.05,
       "period_phi_rung": -6.225392057194222,
       "period_log10": -1.3010299956639813,
-      "ara": 2.571,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 50.40604872584711,
+      "ara": 0.8889,
+      "ara_class": "balance_clock",
+      "theta_deg": 95.29355709672296,
       "energy_j": 5e-12,
       "action_pi": 7.957747154594767e-14,
       "weight_value": 7.957747154594767e-14,
@@ -2081,18 +2111,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 0.5710000000000002
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.11109999999999998
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 0.9529660112501053,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.7291339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "eeg_beta"
+      "original_id": "eeg_beta",
+      "ara_original": 2.571,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/eeg_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_eeg_alpha",
@@ -2102,9 +2138,9 @@
       "period_seconds": 0.1,
       "period_phi_rung": -4.784971966781665,
       "period_log10": -1.0,
-      "ara": 2.571,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 50.40604872584711,
+      "ara": 0.9286,
+      "ara_class": "balance_clock",
+      "theta_deg": 93.33195063776833,
       "energy_j": 2e-12,
       "action_pi": 6.366197723675814e-14,
       "weight_value": 6.366197723675814e-14,
@@ -2112,18 +2148,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 0.5710000000000002
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.07140000000000002
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 0.9529660112501053,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6894339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "eeg_alpha"
+      "original_id": "eeg_alpha",
+      "ara_original": 2.571,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/eeg_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_eeg_theta",
@@ -2133,9 +2175,9 @@
       "period_seconds": 0.167,
       "period_phi_rung": -3.719279895799942,
       "period_log10": -0.7772835288524167,
-      "ara": 2.976,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 45.27162977867203,
+      "ara": 0.8182,
+      "ara_class": "balance_clock",
+      "theta_deg": 98.9990100098999,
       "energy_j": 1e-12,
       "action_pi": 5.3157750992693045e-14,
       "weight_value": 5.3157750992693045e-14,
@@ -2143,18 +2185,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 0.976
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.18179999999999996
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 1.357966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.7998339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "eeg_theta"
+      "original_id": "eeg_theta",
+      "ara_original": 2.976,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/eeg_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_eeg_delta",
@@ -2164,9 +2212,9 @@
       "period_seconds": 0.5,
       "period_phi_rung": -1.4404200904125564,
       "period_log10": -0.3010299956639812,
-      "ara": 2.333,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 54.005400540054005,
+      "ara": 0.9746,
+      "ara_class": "balance_clock",
+      "theta_deg": 91.15770282588879,
       "energy_j": 5e-13,
       "action_pi": 7.957747154594767e-14,
       "weight_value": 7.957747154594767e-14,
@@ -2174,18 +2222,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 0.3330000000000002
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.025399999999999978
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 0.7149660112501053,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6434339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "eeg_delta"
+      "original_id": "eeg_delta",
+      "ara_original": 2.333,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/eeg_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_tide_m2",
@@ -3218,9 +3272,9 @@
       "period_seconds": 1.596e-09,
       "period_phi_rung": -42.09324102833485,
       "period_log10": -8.796967112985289,
-      "ara": 2360000.0,
-      "ara_class": "overflow",
-      "theta_deg": 0.01,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
       "energy_j": 2.18e-18,
       "action_pi": 1.1074892208015393e-27,
       "weight_value": 1.1074892208015393e-27,
@@ -3228,18 +3282,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "micro_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 2359998.0
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 2359998.381966011,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "q_lyman"
+      "original_id": "q_lyman",
+      "ara_original": 2360000.0,
+      "ara_correction": {
+        "fixed": "2026-05-24",
+        "script": "Mapping/quantum_fluorescence_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_q_na",
@@ -3249,9 +3309,9 @@
       "period_seconds": 1.624e-08,
       "period_phi_rung": -37.272127508486165,
       "period_log10": -7.789413975094844,
-      "ara": 47800000.0,
-      "ara_class": "overflow",
-      "theta_deg": 0.01,
+      "ara": 1.0,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.0,
       "energy_j": 3.37e-19,
       "action_pi": 1.7420718098975444e-27,
       "weight_value": 1.7420718098975444e-27,
@@ -3259,18 +3319,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "micro_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 47799998.0
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.0
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 47799998.38196601,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6180339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "q_na"
+      "original_id": "q_na",
+      "ara_original": 47800000.0,
+      "ara_correction": {
+        "fixed": "2026-05-24",
+        "script": "Mapping/quantum_fluorescence_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_q_alpha",
@@ -3280,9 +3346,9 @@
       "period_seconds": 1.41e+17,
       "period_phi_rung": 82.05853270625235,
       "period_log10": 17.14921911265538,
-      "ara": 1.41e+38,
-      "ara_class": "overflow",
-      "theta_deg": 0.01,
+      "ara": 0.9901,
+      "ara_class": "balance_clock",
+      "theta_deg": 90.44771619516607,
       "energy_j": 6.8e-13,
       "action_pi": 30519.551887301852,
       "weight_value": 30519.551887301852,
@@ -3290,18 +3356,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "cosmic",
       "nearest_boundary": {
-        "name": "space",
-        "label": "0 space",
-        "value": 0.0,
-        "distance": 1.41e+38
+        "name": "balance",
+        "label": "1 balance",
+        "value": 1.0,
+        "distance": 0.00990000000000002
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 1.41e+38,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 0.6279339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "q_alpha"
+      "original_id": "q_alpha",
+      "ara_original": 1.41e+38,
+      "ara_correction": {
+        "fixed": "2026-05-24",
+        "script": "Mapping/quantum_u238_alpha_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_pl_earth",
@@ -3559,9 +3631,9 @@
       "period_seconds": 0.002,
       "period_phi_rung": -12.91449580993244,
       "period_log10": -2.6989700043360187,
-      "ara": 3.0,
-      "ara_class": "coupled_extreme",
-      "theta_deg": 45.0,
+      "ara": 0.01707,
+      "ara_class": "snap",
+      "theta_deg": 176.97896899918396,
       "energy_j": 5e-13,
       "action_pi": 3.183098861837907e-16,
       "weight_value": 3.183098861837907e-16,
@@ -3569,18 +3641,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 1.0
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.01707
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 1.381966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.600963988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_hh"
+      "original_id": "ap_hh",
+      "ara_original": 3.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_pyramidal",
@@ -3590,9 +3668,9 @@
       "period_seconds": 0.1,
       "period_phi_rung": -4.784971966781665,
       "period_log10": -1.0,
-      "ara": 49.0,
-      "ara_class": "overflow",
-      "theta_deg": 3.6000000000000028,
+      "ara": 0.0101,
+      "ara_class": "snap",
+      "theta_deg": 178.20017820017813,
       "energy_j": 5e-12,
       "action_pi": 1.5915494309189534e-13,
       "weight_value": 1.5915494309189534e-13,
@@ -3600,18 +3678,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 47.0
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.0101
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 47.38196601125011,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.607933988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_pyramidal"
+      "original_id": "ap_pyramidal",
+      "ara_original": 49.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_fs",
@@ -3621,9 +3705,9 @@
       "period_seconds": 0.025,
       "period_phi_rung": -7.665812147606778,
       "period_log10": -1.6020599913279623,
-      "ara": 30.25,
-      "ara_class": "overflow",
-      "theta_deg": 5.759999999999991,
+      "ara": 0.06383,
+      "ara_class": "snap",
+      "theta_deg": 169.19996616000677,
       "energy_j": 3e-12,
       "action_pi": 2.3873241463784305e-14,
       "weight_value": 2.3873241463784305e-14,
@@ -3631,18 +3715,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 28.25
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.06383
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 28.631966011250107,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.5542039887498948,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_fs"
+      "original_id": "ap_fs",
+      "ara_original": 30.25,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_thal",
@@ -3652,9 +3742,9 @@
       "period_seconds": 0.215,
       "period_phi_rung": -3.1942632554054238,
       "period_log10": -0.6675615400843947,
-      "ara": 13.333,
-      "ara_class": "overflow",
-      "theta_deg": 12.558431591432377,
+      "ara": 0.025,
+      "ara_class": "snap",
+      "theta_deg": 175.60975609756096,
       "energy_j": 1e-11,
       "action_pi": 6.843662552951499e-13,
       "weight_value": 6.843662552951499e-13,
@@ -3662,18 +3752,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 11.333
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.025
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 11.714966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.593033988749895,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_thal"
+      "original_id": "ap_thal",
+      "ara_original": 13.333,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_epsp",
@@ -3683,9 +3779,9 @@
       "period_seconds": 0.009,
       "period_phi_rung": -9.788892243166439,
       "period_log10": -2.0457574905606752,
-      "ara": 8.0,
-      "ara_class": "overflow",
-      "theta_deg": 20.00000000000001,
+      "ara": 0.16667,
+      "ara_class": "snap",
+      "theta_deg": 154.2852734706472,
       "energy_j": 1e-14,
       "action_pi": 2.864788975654116e-17,
       "weight_value": 2.864788975654116e-17,
@@ -3693,18 +3789,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 6.0
+        "name": "lower_wall",
+        "label": "1/4 anti-phi",
+        "value": 0.25,
+        "distance": 0.08332999999999999
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 6.381966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.4513639887498948,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_epsp"
+      "original_id": "ap_epsp",
+      "ara_original": 8.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_ipsp",
@@ -3714,9 +3816,9 @@
       "period_seconds": 0.032,
       "period_phi_rung": -7.152815448282214,
       "period_log10": -1.494850021680094,
-      "ara": 15.0,
-      "ara_class": "overflow",
-      "theta_deg": 11.250000000000007,
+      "ara": 0.16667,
+      "ara_class": "snap",
+      "theta_deg": 154.2852734706472,
       "energy_j": 5e-14,
       "action_pi": 5.092958178940652e-16,
       "weight_value": 5.092958178940652e-16,
@@ -3724,18 +3826,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 13.0
+        "name": "lower_wall",
+        "label": "1/4 anti-phi",
+        "value": 0.25,
+        "distance": 0.08332999999999999
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 13.381966011250105,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.4513639887498948,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_ipsp"
+      "original_id": "ap_ipsp",
+      "ara_original": 15.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_ap_ca",
@@ -3745,9 +3853,9 @@
       "period_seconds": 0.105,
       "period_phi_rung": -4.683581764736259,
       "period_log10": -0.978810700930062,
-      "ara": 20.0,
-      "ara_class": "overflow",
-      "theta_deg": 8.57142857142858,
+      "ara": 0.02,
+      "ara_class": "snap",
+      "theta_deg": 176.47058823529414,
       "energy_j": 1e-11,
       "action_pi": 3.342253804929802e-13,
       "weight_value": 3.342253804929802e-13,
@@ -3755,18 +3863,24 @@
       "weight_label": "Action/pi",
       "scale_domain": "human_fast",
       "nearest_boundary": {
-        "name": "time",
-        "label": "2 time",
-        "value": 2.0,
-        "distance": 18.0
+        "name": "space",
+        "label": "0 space",
+        "value": 0.0,
+        "distance": 0.02
       },
-      "ara_position_status": "above_two_diagnostic",
-      "ara_position_note": "ARA is above 2. Treat this as a compound-system or rung-mismatch candidate, not a clean bounded position.",
-      "distance_to_phi": 18.381966011250107,
+      "ara_position_status": "bounded_position",
+      "ara_position_note": "ARA sits inside the clean 0-2 geometry band.",
+      "distance_to_phi": 1.5980339887498949,
       "source": "archive/early_visualizations/temporal_coordinates_3d.html",
       "layer": "catalog",
       "notes": "Original hand-curated temporal coordinate catalogue.",
-      "original_id": "ap_ca"
+      "original_id": "ap_ca",
+      "ara_original": 20.0,
+      "ara_correction": {
+        "fixed": "2026-05-30",
+        "script": "Mapping/neural_ara_test.py",
+        "reason": "Recomputed from first-principles physics; old value was orientation/rung mismatch."
+      }
     },
     {
       "id": "catalog_el_lc",

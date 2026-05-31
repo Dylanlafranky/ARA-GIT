@@ -14,6 +14,8 @@ The framework is making a claim about **what time is**, not about what oscillati
 
 Time has geometric structure. That structure is shaped by ARA and packed at irrational ratios optimised by φ. In the current working formulation, ARA is best treated as a bounded temporal coordinate with orientation: the raw measured phase ratio tells us what the observer saw from inside time, the bounded ARA position says where the geometry sits, and orientation says which way the system is turning through accumulate/release. Energy moves through this time-geometry. **A wave is what energy looks like as it traverses time-geometry.**
 
+> **On "orientation" (a common confusion worth stating plainly):** the 0–2 ARA scale measures the *asymmetry of two opposing flows around 1.0*, so **which end is labelled "space" and which "time" is a coordinate choice — and it is flip-symmetric.** Swapping 0↔2 changes no computed quantity (the asymmetry, the distance from 1.0, the mirror-partner geometry are all invariant); it only relabels the poles. So opposite orientations appear across these documents (the body-mapping work and the foundational/cosmic work are flipped relative to each other) — that is orientation, not contradiction. Separately, do not confuse this 0–2 *position* axis with the rung-*spacing* axis (one flow steps ×2 in octaves, the other ×φ): "spaced by ×2" is not "sits at 2.0." Full explainer in [`TWO_RULERS_PHI_AND_TWO.md`](TWO_RULERS_PHI_AND_TWO.md).
+
 This means there are two separable components in any system's wave:
 
 | Component | What it sets | How it's specified |

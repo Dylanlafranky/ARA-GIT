@@ -37,7 +37,7 @@ Things cycle. Hearts beat, lungs breathe, climates oscillate, planets orbit, neu
 
 The framework's tentative answer is yes — in a soft, statistical way, not a perfect-law way. In the datasets gathered so far, self-organising systems often cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart), with φ as the coupling/handover timing between rungs rather than the spacing (see the ladder correction above). The same formula is being tested as a way to read coordinates from a system and project them forward in time.
 
-I'm not a scientist by training. I built this in spare time over the last month-ish, in continuous dialogue with Claude (Anthropic's AI). The framework as it stands is the product of that collaboration — I provided conceptual direction and the falsification mindset; Claude handled the code-heavy iteration cycles I can't sustain physically due to ME/CFS. The transcripts are buried in `transcripts/local_sessions/` for anyone who wants the unfiltered audit trail.
+I'm not a scientist by training. I built this in spare time over the last month-ish, in continuous dialogue with AI — Claude (Anthropic) most of all, then ChatGPT (OpenAI) and Gemini (Google). The framework as it stands is the product of that collaboration — I provided conceptual direction and the falsification mindset; the AI models handled the code-heavy iteration cycles I can't sustain physically due to ME/CFS. The transcripts are buried in `transcripts/local_sessions/` for anyone who wants the unfiltered audit trail.
 
 ---
 
@@ -167,7 +167,7 @@ ARA-GIT/
 ├── ARA_decomposition_rules.md         per-rung mapping rules
 ├── MAPPING_TO_THE_FRAMEWORK.md        cross-domain mapping
 ├── THE_FRAMEWORK_FORMULATION.md       formal statement
-├── TheFormula/                        all benchmark + LLM scripts
+├── TheFormula/                        all benchmark + LLM scripts (forecasting)
 │   ├── canonical_benchmark.py
 │   ├── three_quarter_ceiling_test.py
 │   ├── multispecies_vertical_ara_test.py
@@ -178,8 +178,16 @@ ARA-GIT/
 │   ├── llm_ara_per_concept.py
 │   ├── llm_closure_vs_capability.html
 │   └── … (full set of test scripts and visualisations)
+├── Mapping/                           where systems sit on the ARA scale (atlas)
+├── EnergyRatio/                       how leanly a system moves energy per cycle
+│   ├── README.md
+│   ├── fetch_data.py                  pulls all real data from source
+│   ├── GOLDEN_STARS_LEAN_RESULT.md    φ → leaner pulsating stars (first result)
+│   └── … (leanness test scripts)
 └── transcripts/local_sessions/        unfiltered research-process record
 ```
+
+The three working folders correspond to three questions the framework asks of any cycling system: **`Mapping/`** — *where* does it sit on the ARA scale (what kind of cycle is it)? **`TheFormula/`** — can we *forecast* it from a few geometric constants? **`EnergyRatio/`** — how *efficiently* does it move energy/information per cycle (the leanness / entropy-budget side)? The first `EnergyRatio` result is that pulsating stars whose mode ratio sits near φ run measurably leaner than off-φ stars, consistent with KAM theory and the framework's φ-rung entropy-decay finding.
 
 ---
 

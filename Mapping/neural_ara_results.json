@@ -1,0 +1,56 @@
+{
+  "date": "2026-05-30",
+  "convention": "ARA = T_release/T_accumulation (build=slow rebuild, release=fast discharge)",
+  "finding": "All 9 neural over-2 catalogue nodes are SNAP class (ARA<1) once computed from membrane biophysics. Old >2 values were orientation/rung mismatches.",
+  "hh_from_scratch": [
+    "HH Spike",
+    "Depol/Repol",
+    "Refractory"
+  ],
+  "literature_kinetics": [
+    "Pyramidal 10Hz",
+    "FS Interneuron",
+    "AMPA EPSP",
+    "GABA IPSP",
+    "Ca2+ Spike",
+    "Thalamic Burst"
+  ],
+  "nodes": {
+    "HH Spike": {
+      "ARA": 0.01707,
+      "method": "HH 1952 integration, I=10 uA/cm^2 sustained, velocity-Verlet-free explicit Euler dt=5us"
+    },
+    "Depol/Repol": {
+      "ARA": 0.01707,
+      "method": "Same HH spike; ARA = depolarisation/repolarisation+recovery"
+    },
+    "Refractory": {
+      "ARA": 0.02488,
+      "method": "Single HH spike; release=thr->peak, accumulation=Na inactivation h-gate recovery to 0.9*rest"
+    },
+    "Pyramidal 10Hz": {
+      "ARA": 0.0101,
+      "method": "Cited: AP half-width ~1 ms (Bean 2007); ISI=100 ms at 10 Hz; release/recharge"
+    },
+    "FS Interneuron": {
+      "ARA": 0.06383,
+      "method": "Cited: PV+ FS half-width ~0.3 ms (Bean 2007), ~200 Hz; release/recharge"
+    },
+    "AMPA EPSP": {
+      "ARA": 0.16667,
+      "method": "Biexponential AMPA: rise=build (0.5 ms), decay=release (3 ms); ARA=rise/decay"
+    },
+    "GABA IPSP": {
+      "ARA": 0.16667,
+      "method": "Biexponential GABA_A: rise=build (1 ms), decay=release (6 ms); ARA=rise/decay"
+    },
+    "Ca2+ Spike": {
+      "ARA": 0.02,
+      "method": "L-type Ca2+ plateau ~100 ms (cardiac/dendritic), upstroke ~2 ms; release/plateau"
+    },
+    "Thalamic Burst": {
+      "ARA": 0.025,
+      "method": "T-type LTS envelope ~40 ms, crowning Na spikelet ~1 ms; release/LTS"
+    }
+  }
+}

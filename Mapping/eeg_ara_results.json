@@ -1,0 +1,35 @@
+{
+  "date": "2026-05-30",
+  "data": "PhysioNet slpdb slp01a, EEG (C4-A1), fs=250 Hz, 10-min segment (samples 600-1200 s)",
+  "convention": "ARA = T_release/T_accumulation = median(decay)/median(rise) per base cycle; symmetric sine => 1.0 (ridge/pacemaker)",
+  "method": "bycycle discipline (Cole & Voytek 2017): narrowband Butterworth bandpass LOCATES cycle boundaries (zero crossings); rise (trough->peak) and decay (peak->trough) measured on RAW signal between raw-refined extrema.",
+  "finding": "All 5 EEG bands collapse from old >2 catalogue values to the ARA~1 ridge: order-unity, near-symmetric oscillators (point estimates 0.80-0.98, mild build-skew).",
+  "honesty_caveat": "Sub-cycle asymmetry is METHOD-SENSITIVE. A harmonic-preserving variant pushes some bands slightly ABOVE 1 instead of below. What is ROBUST across methods: every band is order-unity and bounded (~1), definitively NOT >2. The precise side of the ridge (mild snap vs mild engine) is not robustly resolved from one record. Dylan correct: a rhythm DOES have build/release in its base cycle \u2014 here it is near-balanced.",
+  "nodes": {
+    "Delta 2Hz": {
+      "rise_ms": 236.0,
+      "decay_ms": 230.0,
+      "ARA": 0.9746
+    },
+    "Theta 6Hz": {
+      "rise_ms": 88.0,
+      "decay_ms": 72.0,
+      "ARA": 0.8182
+    },
+    "Alpha 10Hz": {
+      "rise_ms": 56.0,
+      "decay_ms": 52.0,
+      "ARA": 0.9286
+    },
+    "Beta 20Hz": {
+      "rise_ms": 36.0,
+      "decay_ms": 32.0,
+      "ARA": 0.8889
+    },
+    "Gamma 40Hz": {
+      "rise_ms": 20.0,
+      "decay_ms": 16.0,
+      "ARA": 0.8
+    }
+  }
+}

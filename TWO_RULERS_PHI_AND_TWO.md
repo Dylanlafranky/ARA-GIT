@@ -6,6 +6,31 @@
 
 This is a structural reading of what we learned this week. The framework has *two distinct* base constants doing *two distinct jobs*, plus a third "floor" reference point that closes the picture. All three live in different parts of the same A-R-A geometry.
 
+## Why are they even *different*? Maybe they aren't — it's perspective (31 May 2026)
+
+Before going further, the deepest reading of this whole document, added last: **2 and φ may not be two different rulers at all. They may be one ruler — an octave — seen from two angles.**
+
+Here is the exact mathematics, no fudge:
+
+$$\varphi = 2\cos(36°) = 2\cos(\pi/5)$$
+
+φ/2 = 0.809017… = cos(36°), to machine precision. So **φ is literally what a ×2 octave becomes when you view it sheared by 36°** (the pentagon / five-fold angle). Read the identity as a projection:
+
+- the **2** is the octave (the space ruler, head-on),
+- the **cos** is the projection — the act of *viewing at an angle*,
+- the **36° (π/5)** is the shear.
+
+So the picture is: there is **one octave structure**. Looked at *straight on*, it reads ×2 — that is the **space** ruler. Looked at *sheared through the pentagon angle* — which is the direction we travel *through time* — the same octave reads ×φ. **The "φ ladder" is the "2 ladder" seen edge-on.** Space and time are not running on two different number systems; they are the *same* octave measured along two axes, and our perspective (moving through time, at an angle to space) is what makes them look different.
+
+This collapses the "two rulers" framing into **one ruler at two angles**, and it unifies the whole π/φ thread: π (the circle / the cosine projection) scaled by 2 (the octave) and sheared through the pentagon angle *is* φ. "Why does time use φ and space use 2?" → because time is space's octave, viewed sheared.
+
+**Honest fences (so this stays a wall, not a wish):**
+- The **identity is exact, real mathematics**: φ = 2cos(36°). "An octave sheared 36° = φ" is airtight. This part is a wall.
+- That **physical time *is* space's octave sheared by exactly the pentagon angle** is an elegant, self-consistent **conjecture**, not a measured result. It makes a prediction worth chasing: the space↔time rung relationship should be a *fixed five-fold (36°) shear*, not an arbitrary angle.
+- There is a **real relativistic shadow**: in special relativity, moving through spacetime literally *shears the time axis relative to space* (a Lorentz boost is a rotation mixing the t and x axes). So "time is sheared by our direction of travel" echoes real physics — **but** the relativistic shear is *hyperbolic* (built on rapidity, cosh/sinh), not a fixed 36° *circular* rotation. So the SR connection is suggestive, not identical; do not claim the boost angle is 36°.
+
+The sections below treat 2 and φ as two rulers doing two jobs — which is the correct *operational* reading. This section says that *underneath* that, they may be one octave at two viewing angles. Both readings are kept: the operational one for building predictors, the perspective one for understanding why the two constants are related at all.
+
 ## The thing we were getting wrong
 
 For a long time we asked one number — the "base" of the rung ladder — to do two jobs at once. The φ-base ablation on ENSO and solar made this conflation visible. We measured:
@@ -83,6 +108,9 @@ Two rulers, three reference points. The framework's full geometry uses:
 - **2** = single-system time-side singularity (pure harmonic, the matched-rung ceiling)
 
 All three are bounds, not operating points. Self-organising systems live *between* them, never at them. Walls (the 3/4 displacement limits) sit at 0.25 on the space side and 1.75 on the time side, leaving the working zone roughly [0.25, 1.75] for sustainable engines.
+
+> **Which end is "space" and which is "time"? — orientation is a free choice (read this; it's a common confusion).**
+> This document uses the **body-mapping orientation**: 0 = space-side, 2 = time-side. The **foundational / cosmic** work uses the **opposite orientation**: 0 = time-side (fast, short-lived, quantum/cellular — barely feels the space waves), 2 = space-side (slow, vast, barely changes — planetary). **Both are correct.** The 0–2 scale measures the *asymmetry of two opposing flows around 1.0*, and that measurement is **invariant under swapping the two ends** — flipping 0 ↔ 2 changes *no* computed number (same asymmetry magnitude, same distance from 1.0, same mirror-partner geometry); it only relabels which pole is called which. It is the same ruler read from either end. So if you see "0 = space" in one document and "0 = time" in another, that is not a contradiction — it is the same structure in the opposite coordinate. What is physical is the distance from 1.0 (how asymmetric) and the direction (accumulation-heavy vs release-heavy); the space/time pole names are orientation only. **Do not confuse this 0–2 *position* axis with the separate *spacing* axis** (space flow steps by ×2 octaves, time flow by ×φ) — "spaced by ×2" is not the same as "sits at 2.0."
 
 These three reference points are themselves a coupled triplet — the ARA framework showing its own A-R-A architecture at the meta-level:
 
