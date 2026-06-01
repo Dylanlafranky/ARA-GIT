@@ -4,6 +4,25 @@ Tests of **how efficiently a system moves energy/information per cycle** — the
 
 Core idea: φ is the framework's efficient/balance ratio. A system whose internal mode ratio sits near φ should run **leaner** — spilling less energy into wasteful harmonic distortion per cycle — than systems at off-φ (especially near-rational) ratios. This ties to the φ-rung **entropy-decay** result (φ = most-irrational packing = least entropy leaked per cycle; see `../TheFormula/Claude4.8/PHI_RUNG_ENTROPY_DECAY_RESULT.md`).
 
+## Bedrock landmark, not a universal constant
+
+`2 − φ = 1/φ² ≈ 0.382` is used as the **one-pass bedrock shed landmark**: the
+idealized amount diverted during one handoff before recycling is counted. It is not
+the measured net loss that every real system must display. Systems recycle by
+different amounts and carry additional system-specific inefficiencies.
+
+A first same-junction recycling shortcut was tested:
+
+```text
+B = 2 - φ
+effective_loss = B * (1 - rho) / (1 - rho * B)
+```
+
+where `rho` was treated as the fraction of shed energy returned for another pass.
+That shortcut did not improve held-out future-pose forecasts. The corrected framework
+architecture routes recyclable energy through smaller, faster lower rungs before some
+works upward again. See `ARA_CROSS_RUNG_RECYCLING_MODEL.md`.
+
 ## First result — Golden stars run leaner (31 May 2026)
 
 Full writeup: **`GOLDEN_STARS_LEAN_RESULT.md`**. Real Kepler + OGLE photometry. Leanness = **R21 = A(2f)/A(f₁)** (harmonic spray; lower = leaner).

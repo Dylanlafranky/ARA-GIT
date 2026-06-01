@@ -1,0 +1,716 @@
+{
+  "constants": {
+    "phi": 1.618033988749895,
+    "gap_share_normalized": 0.19098300562505255,
+    "one_rung_density": 2.0,
+    "two_rung_density": 4.0,
+    "release_when_gate_open": 0.38196601125010515,
+    "irrecoverable_loss_proxy_per_tick": 0.03647450843757885,
+    "leaf_null_lag_months": 30
+  },
+  "formula_visibility": {
+    "sees_at_origin_or_earlier": [
+      "NINO",
+      "SOI",
+      "WWV west",
+      "WWV east",
+      "IOD",
+      "PDO",
+      "stored recursive-gate reservoir state",
+      "past-only raw-NINO causal leaf pulse"
+    ],
+    "does_not_see": [
+      "future NINO",
+      "full-series FFT bands",
+      "Hilbert envelopes",
+      "future-origin features",
+      "held-out tuning scores during formula construction"
+    ],
+    "direct_formula": "upper leaf enters selected lower store; surface changes only after the selected store releases through its existing causal gate",
+    "var_plus_diagnostic": "train-only ridge readout; not the physical formula"
+  },
+  "horizons": {
+    "1": {
+      "persistence": {
+        "n": 217,
+        "corr": 0.9550282875200768,
+        "mae": 0.21912442396313364,
+        "turn": 0.018433179723502304
+      },
+      "raw_topology_var": {
+        "n": 217,
+        "corr": 0.9638085812508024,
+        "mae": 0.2028923968357658,
+        "turn": 0.7096774193548387
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 217,
+        "corr": 0.9542071713969147,
+        "mae": 0.28823594327365437,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 217,
+        "corr": 0.9393654431930009,
+        "mae": 0.2563729094304676,
+        "turn": 0.6728110599078341
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 217,
+        "corr": 0.9542104656927102,
+        "mae": 0.2882707162514135,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 217,
+        "corr": 0.9411148760125088,
+        "mae": 0.2529039871665347,
+        "turn": 0.6728110599078341
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 217,
+        "corr": 0.9542066645642423,
+        "mae": 0.2882339957502034,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 217,
+        "corr": 0.9376041937016246,
+        "mae": 0.25928239220327876,
+        "turn": 0.663594470046083
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 217,
+        "corr": 0.9542063882834162,
+        "mae": 0.2882354636533899,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 217,
+        "corr": 0.9377895356387381,
+        "mae": 0.25904864665731486,
+        "turn": 0.6728110599078341
+      }
+    },
+    "3": {
+      "persistence": {
+        "n": 215,
+        "corr": 0.766334225249955,
+        "mae": 0.5014883720930233,
+        "turn": 0.013953488372093023
+      },
+      "raw_topology_var": {
+        "n": 215,
+        "corr": 0.7726594682550618,
+        "mae": 0.468511767023911,
+        "turn": 0.7162790697674418
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 215,
+        "corr": 0.7507570476901774,
+        "mae": 0.7090746763784092,
+        "turn": 0.4232558139534884
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 215,
+        "corr": 0.7453846688521499,
+        "mae": 0.4842698164251062,
+        "turn": 0.6976744186046512
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 215,
+        "corr": 0.7507671056027359,
+        "mae": 0.7091093606140796,
+        "turn": 0.4232558139534884
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 215,
+        "corr": 0.7491754304815811,
+        "mae": 0.4811086964154573,
+        "turn": 0.6930232558139535
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 215,
+        "corr": 0.750754752755516,
+        "mae": 0.7090709278263431,
+        "turn": 0.4232558139534884
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 215,
+        "corr": 0.7449931623242966,
+        "mae": 0.48536350994693034,
+        "turn": 0.6976744186046512
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 215,
+        "corr": 0.7507556999001193,
+        "mae": 0.7090716471376384,
+        "turn": 0.4232558139534884
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 215,
+        "corr": 0.7389304093225465,
+        "mae": 0.4907575760380863,
+        "turn": 0.6976744186046512
+      }
+    },
+    "6": {
+      "persistence": {
+        "n": 212,
+        "corr": 0.3783337253301831,
+        "mae": 0.798254716981132,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 212,
+        "corr": 0.3771281748930452,
+        "mae": 0.8312760052430858,
+        "turn": 0.7075471698113207
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 212,
+        "corr": 0.35370433335973656,
+        "mae": 1.2312064676352872,
+        "turn": 0.3915094339622642
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 212,
+        "corr": 0.3640739479104141,
+        "mae": 0.8494231501117457,
+        "turn": 0.7169811320754716
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 212,
+        "corr": 0.35378531486710707,
+        "mae": 1.2311557829874642,
+        "turn": 0.3915094339622642
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 212,
+        "corr": 0.36521416906725956,
+        "mae": 0.8492588743659083,
+        "turn": 0.7122641509433962
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 212,
+        "corr": 0.3536782543450438,
+        "mae": 1.231222695393908,
+        "turn": 0.3915094339622642
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 212,
+        "corr": 0.3625923397349061,
+        "mae": 0.8549878888852323,
+        "turn": 0.7122641509433962
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 212,
+        "corr": 0.353689266978011,
+        "mae": 1.2312159365436866,
+        "turn": 0.3915094339622642
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 212,
+        "corr": 0.3621723425251323,
+        "mae": 0.8489263188365832,
+        "turn": 0.7075471698113207
+      }
+    },
+    "9": {
+      "persistence": {
+        "n": 209,
+        "corr": 0.07126852172636731,
+        "mae": 0.9424401913875596,
+        "turn": 0.004784688995215311
+      },
+      "raw_topology_var": {
+        "n": 209,
+        "corr": 0.37098741288729264,
+        "mae": 0.8139862351552266,
+        "turn": 0.722488038277512
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 209,
+        "corr": 0.062151014779549985,
+        "mae": 1.5867633625300348,
+        "turn": 0.3444976076555024
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 209,
+        "corr": 0.3680814508541787,
+        "mae": 0.9453342555243832,
+        "turn": 0.7272727272727273
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 209,
+        "corr": 0.06239062577019046,
+        "mae": 1.5866739270540058,
+        "turn": 0.3444976076555024
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 209,
+        "corr": 0.35919758510222627,
+        "mae": 0.9407929009490331,
+        "turn": 0.722488038277512
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 209,
+        "corr": 0.062096589701120634,
+        "mae": 1.5867710011124005,
+        "turn": 0.3444976076555024
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 209,
+        "corr": 0.37264191090194443,
+        "mae": 0.9606319891654691,
+        "turn": 0.722488038277512
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 209,
+        "corr": 0.0621247014522339,
+        "mae": 1.586766115482264,
+        "turn": 0.3444976076555024
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 209,
+        "corr": 0.3600763404623751,
+        "mae": 0.9587685343813572,
+        "turn": 0.722488038277512
+      }
+    },
+    "12": {
+      "persistence": {
+        "n": 206,
+        "corr": -0.040224471113590274,
+        "mae": 0.9973300970873786,
+        "turn": 0.0048543689320388345
+      },
+      "raw_topology_var": {
+        "n": 206,
+        "corr": 0.4006600206494736,
+        "mae": 0.6951521596163686,
+        "turn": 0.8009708737864077
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 206,
+        "corr": -0.06159813975886596,
+        "mae": 1.79222957632997,
+        "turn": 0.22815533980582525
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 206,
+        "corr": 0.31460686299269464,
+        "mae": 0.81864038044765,
+        "turn": 0.8106796116504854
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 206,
+        "corr": -0.06123640236878514,
+        "mae": 1.7921935222626375,
+        "turn": 0.22815533980582525
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 206,
+        "corr": 0.2931251847109213,
+        "mae": 0.8162093601880271,
+        "turn": 0.8203883495145631
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 206,
+        "corr": -0.06166100832070999,
+        "mae": 1.7922095626854648,
+        "turn": 0.22815533980582525
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 206,
+        "corr": 0.3330456305410481,
+        "mae": 0.8211726900252275,
+        "turn": 0.8058252427184466
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 206,
+        "corr": -0.06161386803267272,
+        "mae": 1.7921921843707163,
+        "turn": 0.22815533980582525
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 206,
+        "corr": 0.3119850116959897,
+        "mae": 0.826513783503289,
+        "turn": 0.8106796116504854
+      }
+    },
+    "18": {
+      "persistence": {
+        "n": 200,
+        "corr": -0.1437817126172069,
+        "mae": 1.1172,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 200,
+        "corr": -0.0796809386836992,
+        "mae": 0.976664780314922,
+        "turn": 0.735
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 200,
+        "corr": -0.14581523512954492,
+        "mae": 1.9542084503486314,
+        "turn": 0.225
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 200,
+        "corr": -0.1355239518844648,
+        "mae": 1.2704687353209372,
+        "turn": 0.645
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 200,
+        "corr": -0.14565887751109802,
+        "mae": 1.9542597248869185,
+        "turn": 0.225
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 200,
+        "corr": -0.13744919993512797,
+        "mae": 1.2728886138732969,
+        "turn": 0.635
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 200,
+        "corr": -0.14584290530932356,
+        "mae": 1.9541999260574487,
+        "turn": 0.225
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 200,
+        "corr": -0.11728836587319974,
+        "mae": 1.2423830742471405,
+        "turn": 0.65
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 200,
+        "corr": -0.14581200639841338,
+        "mae": 1.9541811721776485,
+        "turn": 0.225
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 200,
+        "corr": -0.13989785771456242,
+        "mae": 1.2787434750684357,
+        "turn": 0.64
+      }
+    },
+    "24": {
+      "persistence": {
+        "n": 194,
+        "corr": -0.33824403115806695,
+        "mae": 1.1680412371134021,
+        "turn": 0.010309278350515464
+      },
+      "raw_topology_var": {
+        "n": 194,
+        "corr": 0.06147893656886728,
+        "mae": 0.9213795566131229,
+        "turn": 0.7164948453608248
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 194,
+        "corr": -0.3343434127197688,
+        "mae": 1.9798398704756655,
+        "turn": 0.17525773195876287
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 194,
+        "corr": -0.05039134052735828,
+        "mae": 1.0762052079285458,
+        "turn": 0.6701030927835051
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 194,
+        "corr": -0.3341953420172622,
+        "mae": 1.979810944142164,
+        "turn": 0.17525773195876287
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 194,
+        "corr": -0.045493037848764004,
+        "mae": 1.0686642978905017,
+        "turn": 0.6597938144329897
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 194,
+        "corr": -0.3343722659228125,
+        "mae": 1.9798516822506587,
+        "turn": 0.17525773195876287
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 194,
+        "corr": -0.04909136351081687,
+        "mae": 1.0675009175597252,
+        "turn": 0.6649484536082474
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 194,
+        "corr": -0.3343799056805665,
+        "mae": 1.979877022390261,
+        "turn": 0.17525773195876287
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 194,
+        "corr": -0.06071980600498009,
+        "mae": 1.092752652246774,
+        "turn": 0.6597938144329897
+      }
+    },
+    "30": {
+      "persistence": {
+        "n": 188,
+        "corr": -0.09879293274254913,
+        "mae": 1.1152659574468085,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 188,
+        "corr": 0.053319474347630985,
+        "mae": 0.9946769629717787,
+        "turn": 0.6595744680851063
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 188,
+        "corr": -0.14334756147336034,
+        "mae": 1.9134514547087664,
+        "turn": 0.18085106382978725
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 188,
+        "corr": 0.21246157696607276,
+        "mae": 0.982545087055002,
+        "turn": 0.7127659574468085
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 188,
+        "corr": -0.1432413365688572,
+        "mae": 1.9133737870537746,
+        "turn": 0.18085106382978725
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 188,
+        "corr": 0.23468987690488372,
+        "mae": 0.9659843688209958,
+        "turn": 0.7393617021276596
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 188,
+        "corr": -0.1433695561543559,
+        "mae": 1.9134891867282313,
+        "turn": 0.18085106382978725
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 188,
+        "corr": 0.20103486853872005,
+        "mae": 0.9969401394775906,
+        "turn": 0.7180851063829787
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 188,
+        "corr": -0.14339142240806843,
+        "mae": 1.9135118367411708,
+        "turn": 0.18085106382978725
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 188,
+        "corr": 0.23121065416299214,
+        "mae": 0.9722524236181447,
+        "turn": 0.7393617021276596
+      }
+    },
+    "36": {
+      "persistence": {
+        "n": 182,
+        "corr": 0.11558305479325524,
+        "mae": 0.9245054945054945,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 182,
+        "corr": 0.12021074810832841,
+        "mae": 0.9647713745250167,
+        "turn": 0.7142857142857143
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 182,
+        "corr": 0.069982253971594,
+        "mae": 1.6887502183675158,
+        "turn": 0.23076923076923078
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 182,
+        "corr": 0.16348719379939367,
+        "mae": 1.056642563391189,
+        "turn": 0.7307692307692307
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 182,
+        "corr": 0.06990175125474479,
+        "mae": 1.6887216074343083,
+        "turn": 0.23076923076923078
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 182,
+        "corr": 0.17658491983666033,
+        "mae": 1.0161762561638819,
+        "turn": 0.7362637362637363
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 182,
+        "corr": 0.06996733531727409,
+        "mae": 1.6887400751448631,
+        "turn": 0.23076923076923078
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 182,
+        "corr": 0.15011583270759776,
+        "mae": 1.0895630995142742,
+        "turn": 0.7362637362637363
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 182,
+        "corr": 0.06991022319009219,
+        "mae": 1.6888041546619699,
+        "turn": 0.23076923076923078
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 182,
+        "corr": 0.19444522833600394,
+        "mae": 1.0514666322119524,
+        "turn": 0.7417582417582418
+      }
+    },
+    "48": {
+      "persistence": {
+        "n": 170,
+        "corr": 0.10467359696267647,
+        "mae": 0.8818823529411766,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 170,
+        "corr": 0.11680032436718972,
+        "mae": 0.819455343369325,
+        "turn": 0.7
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 170,
+        "corr": 0.1335822332923419,
+        "mae": 1.4822481550217927,
+        "turn": 0.3176470588235294
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 170,
+        "corr": 0.06804046760433761,
+        "mae": 0.8607334341759801,
+        "turn": 0.7294117647058823
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 170,
+        "corr": 0.13334561098423073,
+        "mae": 1.4825239627982127,
+        "turn": 0.3176470588235294
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 170,
+        "corr": 0.08329460324109106,
+        "mae": 0.8492342568661851,
+        "turn": 0.7352941176470589
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 170,
+        "corr": 0.13362782690908948,
+        "mae": 1.4821411273261362,
+        "turn": 0.3176470588235294
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 170,
+        "corr": 0.06516569976087866,
+        "mae": 0.8632377417787229,
+        "turn": 0.7352941176470589
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 170,
+        "corr": 0.13361834438440523,
+        "mae": 1.4821898357302292,
+        "turn": 0.3176470588235294
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 170,
+        "corr": 0.06335182362746532,
+        "mae": 0.8649031801995269,
+        "turn": 0.7352941176470589
+      }
+    },
+    "60": {
+      "persistence": {
+        "n": 158,
+        "corr": -0.16169977942110136,
+        "mae": 0.9016455696202534,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 158,
+        "corr": -0.2680756026102686,
+        "mae": 0.7597672578061292,
+        "turn": 0.6772151898734177
+      },
+      "direct_ordinary_recursive_gate": {
+        "n": 158,
+        "corr": -0.1513159773121528,
+        "mae": 1.330411310440573,
+        "turn": 0.3037974683544304
+      },
+      "var_plus_ordinary_recursive_gate": {
+        "n": 158,
+        "corr": -0.14375684880726297,
+        "mae": 0.9716739792571512,
+        "turn": 0.6139240506329114
+      },
+      "direct_leaf_one_rung_opposite": {
+        "n": 158,
+        "corr": -0.1509749614934875,
+        "mae": 1.3303271729656043,
+        "turn": 0.3037974683544304
+      },
+      "var_plus_leaf_one_rung_opposite": {
+        "n": 158,
+        "corr": -0.1533456749088822,
+        "mae": 0.9755842936195347,
+        "turn": 0.620253164556962
+      },
+      "direct_leaf_two_rung_same": {
+        "n": 158,
+        "corr": -0.1513477619907059,
+        "mae": 1.3304214661023168,
+        "turn": 0.3037974683544304
+      },
+      "var_plus_leaf_two_rung_same": {
+        "n": 158,
+        "corr": -0.13728302497715938,
+        "mae": 0.9649362278755903,
+        "turn": 0.6265822784810127
+      },
+      "direct_leaf_two_rung_same_null": {
+        "n": 158,
+        "corr": -0.15126260789255477,
+        "mae": 1.3303946947260827,
+        "turn": 0.3037974683544304
+      },
+      "var_plus_leaf_two_rung_same_null": {
+        "n": 158,
+        "corr": -0.14507790039960713,
+        "mae": 0.9747097627210024,
+        "turn": 0.6139240506329114
+      }
+    }
+  }
+}

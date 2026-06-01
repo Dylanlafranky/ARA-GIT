@@ -1,0 +1,136 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARA coordinate sphere</title>
+<style>
+ html,body{margin:0;height:100%;background:#070b12;color:#cdd6e0;font-family:system-ui,Segoe UI,Arial,sans-serif;overflow:hidden}
+ #c{position:fixed;inset:0}
+ #info{position:fixed;top:12px;left:12px;background:rgba(10,16,26,.8);border:1px solid #2a3a52;border-radius:10px;padding:11px 14px;max-width:330px;font-size:12px;line-height:1.55}
+ #info h1{font-size:14px;margin:0 0 6px;color:#f0c878}
+ #info b.s{color:#5aa0ff}#info b.t{color:#f0c878}
+ .key{margin-top:7px;font-size:11px;opacity:.85}
+ label.tog{display:block;margin-top:9px;font-size:12px;cursor:pointer}
+ #hint{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:11px;opacity:.5}
+</style></head>
+<body>
+<canvas id="c"></canvas>
+<div id="info">
+<h1>ARA coordinate sphere</h1>
+Everything is a sphere sitting inside the sphere at its coordinate. It's all ARA.
+<div class="key">
+<b>X — Mapping / ARA</b> (φ-line): <b class="s">0 space</b> · 1 · <b class="t">2 time</b><br>
+<b>Y — Rungs</b> (each rung carries its own 0–2 sub-scale)<br>
+<b>Z — mix / coupling</b> <i>(provisional — placeholder)</i>: <b class="s">connections</b> ↔ <b class="t">info traversal</b><br>
+<b class="t">φ-line</b> and its mirror <b>anti-φ (1/φ)</b> both lie in the X–Y plane
+</div>
+<label class="tog"><input type="checkbox" id="axTog" checked> show axes &amp; scale</label>
+<button id="reset" style="margin-top:8px;background:#16263c;color:#cdd6e0;border:1px solid #2a3a52;border-radius:7px;padding:5px 10px;cursor:pointer;font-size:12px">reset view (level)</button>
+<div class="key" style="opacity:.7">Orientation is my reading of your spec — tell me what to flip.</div>
+</div>
+<div id="hint">drag to rotate · scroll to zoom</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const scene=new THREE.Scene();
+const cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,2000); cam.position.set(0,0,13);
+const rnd=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
+rnd.setSize(innerWidth,innerHeight); rnd.setPixelRatio(devicePixelRatio);
+scene.add(new THREE.AmbientLight(0xffffff,.7));
+const dl=new THREE.DirectionalLight(0xffffff,.6); dl.position.set(5,8,10); scene.add(dl);
+const pivot=new THREE.Group(); scene.add(pivot);
+const R=4, EXT=60, V=THREE.Vector3;   // EXT = axes run far past the sphere ("indefinite")
+
+// container sphere
+pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),
+  new THREE.MeshBasicMaterial({color:0x2a3a52,wireframe:true,transparent:true,opacity:.16})));
+pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),
+  new THREE.MeshPhongMaterial({color:0x0e1828,transparent:true,opacity:.10})));
+
+const axesGroup=new THREE.Group(); pivot.add(axesGroup);   // <-- toggled
+
+function label(txt,color,scale){
+  const c=document.createElement('canvas'),s=256; c.width=s*2;c.height=s/1.4;
+  const x=c.getContext('2d'); x.fillStyle=color;x.font='bold 54px system-ui';x.textAlign='center';x.textBaseline='middle';
+  x.fillText(txt,c.width/2,c.height/2);
+  const t=new THREE.Texture(c);t.needsUpdate=true;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,transparent:true,depthTest:false}));
+  sp.scale.set((scale||1)*2.2,(scale||1)*0.8,1); return sp;
+}
+function line(a,b,col,op,grp){const g=new THREE.BufferGeometry().setFromPoints([a,b]);
+  (grp||axesGroup).add(new THREE.Line(g,new THREE.LineBasicMaterial({color:col,transparent:true,opacity:op==null?.85:op})));}
+function lab(txt,col,sc,x,y,z,grp){const l=label(txt,col,sc);l.position.set(x,y,z);(grp||axesGroup).add(l);}
+
+// map ARA value 0..2 -> world coord -R..R
+const m=v=>(v-1)*R;
+
+// ---- X axis : Mapping / ARA (the phi line) — runs indefinitely ----
+line(new V(-EXT,0,0),new V(EXT,0,0),0x6ca8ff);
+[0,1,2].forEach(v=>{const x=m(v); line(new V(x,-0.18,0),new V(x,0.18,0),0x6ca8ff,.9); lab(String(v),'#6ca8ff',.5,x,-0.5,0);});
+lab('space','#6ca8ff',.9,-R-1.6,0.6,0); lab('time','#f0c878',.9,R+1.5,0.6,0);
+lab('X · Mapping / ARA','#9fb0c4',.7,R+5.5,-0.1,0);
+
+// ---- Z axis : anti-phi mix (connections <-> info traversal), 0..2 — runs indefinitely ----
+line(new V(0,0,-EXT),new V(0,0,EXT),0xc89bf0);
+[0,1,2].forEach(v=>{const z=m(v); line(new V(-0.18,0,z),new V(0.18,0,z),0xc89bf0,.9); lab(String(v),'#c89bf0',.5,0.0,-0.5,z);});
+lab('connections','#c89bf0',.85,0,0.6,-R-1.6); lab('info traversal','#c89bf0',.85,0,0.6,R+1.8);
+lab('Z · mix / coupling (provisional)','#9fb0c4',.7,0,-0.1,R+5.5);
+
+// ---- Y axis : Rungs, each rung subdivided 0..2 — runs indefinitely ----
+line(new V(0,-EXT,0),new V(0,EXT,0),0x88e0a0);
+const NR=4, h=2*R/NR;            // 4 rungs across the diameter
+for(let r=0;r<NR;r++){
+  const base=-R+r*h;
+  // major rung boundary + number
+  line(new V(-0.32,base,0),new V(0.32,base,0),0x88e0a0,.95);
+  lab('rung '+r,'#88e0a0',.6,1.05,base,0);
+  // sub-scale 0..2 within the rung as little lines
+  [0,1,2].forEach(sv=>{const y=base+(sv/2)*h; line(new V(-0.14,y,0),new V(0.14,y,0),0x88e0a0,.45);});
+}
+line(new V(-0.32,R,0),new V(0.32,R,0),0x88e0a0,.95); lab('rung '+NR,'#88e0a0',.6,1.05,R,0);
+lab('Y · Rungs','#9fb0c4',.7,0,R+5.5,0);
+
+// ---- phi-line diagonal (the ARA backbone through the volume) ----
+const pg=new THREE.BufferGeometry().setFromPoints([new V(-EXT*0.831,-EXT*0.557,0),new V(EXT*0.831,EXT*0.557,0)]);
+const pl=new THREE.Line(pg,new THREE.LineDashedMaterial({color:0xf0c878,dashSize:.25,gapSize:.18,transparent:true,opacity:.8}));
+pl.computeLineDistances(); axesGroup.add(pl);
+lab('φ line','#f0c878',.6,R*0.82+0.7,R*0.55+0.5,0);
+
+// anti-φ = 1/φ : the MIRROR of the φ-line across the space axis (same plane), runs indefinitely
+const ag=new THREE.BufferGeometry().setFromPoints([new V(-EXT*0.831,EXT*0.557,0),new V(EXT*0.831,-EXT*0.557,0)]);
+const al=new THREE.Line(ag,new THREE.LineDashedMaterial({color:0x6fd0c8,dashSize:.25,gapSize:.18,transparent:true,opacity:.7}));
+al.computeLineDistances(); axesGroup.add(al);
+lab('anti-φ (1/φ)','#6fd0c8',.6,R*0.82+1.0,-R*0.55-0.5,0);
+
+// quadrant labels (X-Y face) — pushed outside the sphere, for the orientation check
+lab('hi-dim space / lo time','#9fb0c4',.6,-R-2.2, R+1.4,0);
+lab('lo-dim space / hi time','#9fb0c4',.6,-R-2.2,-R-1.4,0);
+lab('hi time / lo space','#9fb0c4',.6, R+2.2, R+1.4,0);
+lab('lo time / hi space','#9fb0c4',.6, R+2.2,-R-1.4,0);
+
+// ---- example mapped systems (on pivot, not toggled): [name, ARA, rung 0..NR, mix 0..2] ----
+const items=[
+ ['Oak tree',0.0,3.6,0.2],['Blue whale',0.05,3.7,0.3],['Galápagos tortoise',0.12,3.3,0.4],
+ ['Human',0.18,2.6,0.8],['Cat',0.34,2.3,1.1],['Hummingbird',0.56,1.7,1.2],
+ ['Honeybee',0.76,1.4,1.0],['Fruit fly',0.92,1.3,1.4],['Copepod',0.94,1.3,1.4],
+ ['Tardigrade',1.03,1.1,1.5],['Yeast cell',1.69,0.5,1.7],['Influenza',1.83,0.4,1.85],
+ ['Bacteriophage',2.0,0.2,1.9],['ENSO',0.82,3.1,1.5],['Solar cycle',1.73,3.4,1.3],['Heart (RR)',1.5,2.0,1.6],
+];
+const cS=new THREE.Color(0x5aa0ff),cT=new THREE.Color(0xf0c878),tmp=new THREE.Color();
+items.forEach(([n,ara,rung,mix])=>{
+  const x=m(ara), y=-R+(rung/NR)*2*R, z=m(mix);
+  tmp.copy(cS).lerp(cT,ara/2);
+  const me=new THREE.Mesh(new THREE.SphereGeometry(0.16,18,14),
+     new THREE.MeshPhongMaterial({color:tmp.getHex(),emissive:tmp.getHex(),emissiveIntensity:.25}));
+  me.position.set(x,y,z); pivot.add(me);
+  const l=label(n,'#cdd6e0',.5); l.position.set(x,y+0.32,z); pivot.add(l);
+});
+
+document.getElementById('axTog').addEventListener('change',e=>{axesGroup.visible=e.target.checked;});
+document.getElementById('reset').addEventListener('click',()=>{rx=0;ry=0;cam.position.set(0,0,13);});
+
+// manual orbit
+let dragging=false,px=0,py=0,rx=0,ry=0;
+addEventListener('mousedown',e=>{if(e.target.closest('#info'))return;dragging=true;px=e.clientX;py=e.clientY});
+addEventListener('mouseup',()=>dragging=false);
+addEventListener('mousemove',e=>{if(!dragging)return;ry+=(e.clientX-px)*0.008;rx+=(e.clientY-py)*0.008;px=e.clientX;py=e.clientY});
+addEventListener('wheel',e=>{cam.position.multiplyScalar(1+e.deltaY*0.0009)},{passive:true});
+addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();rnd.setSize(innerWidth,innerHeight)});
+(function loop(){requestAnimationFrame(loop);pivot.rotation.x=rx;pivot.rotation.y=ry;cam.lookAt(0,0,0);rnd.render(scene,cam);})();
+</script></body></html>

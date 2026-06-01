@@ -1,0 +1,288 @@
+{
+  "test": "frozen release-gate concentration and native WWV-motion ratio",
+  "status": "diagnostic association test; not a predictor and not causal proof",
+  "strict_causal_checklist": {
+    "windows_frozen_before_scoring": {
+      "possible_lower_upflow_months": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "possible_recycled_return_months": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    "release_gates": "current and previous raw measured channel values only",
+    "native_wwv_motion": "raw monthly WWV source-volume motion; no smoothing",
+    "synthetic_energy_injection": false,
+    "formula_modified": false,
+    "future_value_used_to_construct_marker": false,
+    "fft_or_hilbert": false,
+    "smoothing": false
+  },
+  "measurement_limits": {
+    "wwv_is_energy_joules": false,
+    "wwv_ratio_meaning": "relative measured warm-water-volume motion, not an energy fraction",
+    "direct_measured_rung_beneath_wwv_available": false,
+    "mjo_role": "finer/faster activity candidate only",
+    "iod_role": "lateral feeder comparison only"
+  },
+  "gate_definitions": {
+    "IOD_lateral_magnitude_release": {
+      "rule": "abs(previous_z) >= train_median_abs_z and abs(current_z) < abs(previous_z)",
+      "training_threshold": 0.6190576207184055
+    },
+    "MJO_candidate_burst_release": {
+      "rule": "previous_z >= train_median_z and current_z < previous_z",
+      "training_threshold": -0.08876002559188573
+    },
+    "WWV_battery_discharge": {
+      "rule": "previous_battery >= train_median_battery and current_battery < previous_battery",
+      "training_threshold": 0.3710292500000001
+    }
+  },
+  "periods": {
+    "visible_pre_cutoff_after_marker_warmup": {
+      "possible_lower_upflow_12_18m": {
+        "native_wwv_motion": {
+          "complete_origin_n": 134,
+          "window_months": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "marker_weighted_total_abs_battery_motion": 2.6356922608679043,
+          "marker_weighted_mean_monthly_abs_battery_motion": 0.376527465838272,
+          "plain_total_abs_battery_motion": 2.4534096410149253,
+          "plain_mean_monthly_abs_battery_motion": 0.3504870915735608,
+          "marker_weighted_total_signed_battery_motion": -0.8884209010172351,
+          "marker_weighted_total_abs_orientation_motion": 4.122670428503236,
+          "native_unit_note": "WWV source values are scaled by loader to source_volume / 1e14"
+        },
+        "release_gate_concentration": {
+          "IOD_lateral_magnitude_release": {
+            "response_cell_n": 938,
+            "plain_gate_open_fraction": 0.3390191897654584,
+            "marker_weighted_gate_open_fraction": 0.3162700792179691,
+            "marker_weighted_gate_concentration_lift": 0.9328972776932548,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.43795499839299346,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.34811318997182283,
+            "gate_open_to_closed_native_motion_ratio": 1.2580821727221616,
+            "marker_weighted_battery_abnormality_gate_open": 0.1645008022958564,
+            "marker_weighted_battery_abnormality_gate_closed": 0.13339726221210296
+          },
+          "MJO_candidate_burst_release": {
+            "response_cell_n": 938,
+            "plain_gate_open_fraction": 0.3784648187633262,
+            "marker_weighted_gate_open_fraction": 0.3829989329319051,
+            "marker_weighted_gate_concentration_lift": 1.0119802791271184,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.3296660357897302,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.40561635832518533,
+            "gate_open_to_closed_native_motion_ratio": 0.812753304997218,
+            "marker_weighted_battery_abnormality_gate_open": 0.14352826283477718,
+            "marker_weighted_battery_abnormality_gate_closed": 0.14305195646820518
+          },
+          "WWV_battery_discharge": {
+            "response_cell_n": 938,
+            "plain_gate_open_fraction": 0.27292110874200426,
+            "marker_weighted_gate_open_fraction": 0.46729299429253157,
+            "marker_weighted_gate_concentration_lift": 1.712190736899979,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.42016115095625695,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.33825179994249155,
+            "gate_open_to_closed_native_motion_ratio": 1.2421549597893975,
+            "marker_weighted_battery_abnormality_gate_open": 0.13413093714496876,
+            "marker_weighted_battery_abnormality_gate_closed": 0.1512199636752135
+          }
+        }
+      },
+      "possible_recycled_return_30_34m": {
+        "native_wwv_motion": {
+          "complete_origin_n": 134,
+          "window_months": [
+            30,
+            31,
+            32,
+            33,
+            34
+          ],
+          "marker_weighted_total_abs_battery_motion": 1.717433381528438,
+          "marker_weighted_mean_monthly_abs_battery_motion": 0.3434866763056876,
+          "plain_total_abs_battery_motion": 1.5995727882089552,
+          "plain_mean_monthly_abs_battery_motion": 0.31991455764179105,
+          "marker_weighted_total_signed_battery_motion": 0.426408856645446,
+          "marker_weighted_total_abs_orientation_motion": 2.5163534646709844,
+          "native_unit_note": "WWV source values are scaled by loader to source_volume / 1e14"
+        },
+        "release_gate_concentration": {
+          "IOD_lateral_magnitude_release": {
+            "response_cell_n": 670,
+            "plain_gate_open_fraction": 0.3417910447761194,
+            "marker_weighted_gate_open_fraction": 0.33705185897573775,
+            "marker_weighted_gate_concentration_lift": 0.9861342598853463,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.39779187060303683,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.3158771763202425,
+            "gate_open_to_closed_native_motion_ratio": 1.2593245109920435,
+            "marker_weighted_battery_abnormality_gate_open": 0.08206925711387564,
+            "marker_weighted_battery_abnormality_gate_closed": 0.1071449675462203
+          },
+          "MJO_candidate_burst_release": {
+            "response_cell_n": 670,
+            "plain_gate_open_fraction": 0.40746268656716417,
+            "marker_weighted_gate_open_fraction": 0.4265045425093847,
+            "marker_weighted_gate_concentration_lift": 1.046732760004717,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.37072483724810656,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.3232298473808769,
+            "gate_open_to_closed_native_motion_ratio": 1.1469387504034059,
+            "marker_weighted_battery_abnormality_gate_open": 0.1102115351745106,
+            "marker_weighted_battery_abnormality_gate_closed": 0.09012701263086369
+          },
+          "WWV_battery_discharge": {
+            "response_cell_n": 670,
+            "plain_gate_open_fraction": 0.27611940298507465,
+            "marker_weighted_gate_open_fraction": 0.24977072220881796,
+            "marker_weighted_gate_concentration_lift": 0.9045750479995028,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.36050342046446965,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.33782136224237164,
+            "gate_open_to_closed_native_motion_ratio": 1.0671421667106553,
+            "marker_weighted_battery_abnormality_gate_open": 0.11630763662038562,
+            "marker_weighted_battery_abnormality_gate_closed": 0.09282883565651923
+          }
+        }
+      },
+      "native_motion_comparison": {
+        "early_to_late_total_abs_battery_motion_ratio": 1.534669285700187,
+        "early_to_late_mean_monthly_abs_battery_motion_ratio": 1.096192346928705,
+        "early_to_late_total_abs_orientation_motion_ratio": 1.638351084767926
+      }
+    },
+    "heldout": {
+      "possible_lower_upflow_12_18m": {
+        "native_wwv_motion": {
+          "complete_origin_n": 200,
+          "window_months": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "marker_weighted_total_abs_battery_motion": 2.151533467268277,
+          "marker_weighted_mean_monthly_abs_battery_motion": 0.3073619238954682,
+          "plain_total_abs_battery_motion": 2.21133023784,
+          "plain_mean_monthly_abs_battery_motion": 0.31590431969142857,
+          "marker_weighted_total_signed_battery_motion": 0.1327971048584354,
+          "marker_weighted_total_abs_orientation_motion": 3.8921814160646924,
+          "native_unit_note": "WWV source values are scaled by loader to source_volume / 1e14"
+        },
+        "release_gate_concentration": {
+          "IOD_lateral_magnitude_release": {
+            "response_cell_n": 1400,
+            "plain_gate_open_fraction": 0.3692857142857143,
+            "marker_weighted_gate_open_fraction": 0.39965583620290335,
+            "marker_weighted_gate_concentration_lift": 1.0822401754043804,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.2863234095323669,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.32136749862625497,
+            "gate_open_to_closed_native_motion_ratio": 0.8909532256880658,
+            "marker_weighted_battery_abnormality_gate_open": 0.08910869465137704,
+            "marker_weighted_battery_abnormality_gate_closed": 0.1038165337422949
+          },
+          "MJO_candidate_burst_release": {
+            "response_cell_n": 1400,
+            "plain_gate_open_fraction": 0.4057142857142857,
+            "marker_weighted_gate_open_fraction": 0.3696448484382144,
+            "marker_weighted_gate_concentration_lift": 0.911096457418134,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.3090494574436462,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.3063723419413822,
+            "gate_open_to_closed_native_motion_ratio": 1.008738110905508,
+            "marker_weighted_battery_abnormality_gate_open": 0.09362003621595191,
+            "marker_weighted_battery_abnormality_gate_closed": 0.10047081515386494
+          },
+          "WWV_battery_discharge": {
+            "response_cell_n": 1400,
+            "plain_gate_open_fraction": 0.3007142857142857,
+            "marker_weighted_gate_open_fraction": 0.23959480658027155,
+            "marker_weighted_gate_concentration_lift": 0.7967523259201429,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.30242756791583086,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.30891668190707844,
+            "gate_open_to_closed_native_motion_ratio": 0.9789939670749167,
+            "marker_weighted_battery_abnormality_gate_open": 0.081242751888134,
+            "marker_weighted_battery_abnormality_gate_closed": 0.10319908289168447
+          }
+        }
+      },
+      "possible_recycled_return_30_34m": {
+        "native_wwv_motion": {
+          "complete_origin_n": 184,
+          "window_months": [
+            30,
+            31,
+            32,
+            33,
+            34
+          ],
+          "marker_weighted_total_abs_battery_motion": 1.6812738278320973,
+          "marker_weighted_mean_monthly_abs_battery_motion": 0.3362547655664195,
+          "plain_total_abs_battery_motion": 1.5683323510326088,
+          "plain_mean_monthly_abs_battery_motion": 0.3136664702065218,
+          "marker_weighted_total_signed_battery_motion": 0.25995762593785104,
+          "marker_weighted_total_abs_orientation_motion": 3.2001193303556246,
+          "native_unit_note": "WWV source values are scaled by loader to source_volume / 1e14"
+        },
+        "release_gate_concentration": {
+          "IOD_lateral_magnitude_release": {
+            "response_cell_n": 920,
+            "plain_gate_open_fraction": 0.3695652173913043,
+            "marker_weighted_gate_open_fraction": 0.27429035043097383,
+            "marker_weighted_gate_concentration_lift": 0.7421974188132233,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.3376144170274522,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.33574086958070093,
+            "gate_open_to_closed_native_motion_ratio": 1.0055803377440795,
+            "marker_weighted_battery_abnormality_gate_open": 0.10943347765107504,
+            "marker_weighted_battery_abnormality_gate_closed": 0.12873739965623943
+          },
+          "MJO_candidate_burst_release": {
+            "response_cell_n": 920,
+            "plain_gate_open_fraction": 0.39891304347826084,
+            "marker_weighted_gate_open_fraction": 0.45546056728924605,
+            "marker_weighted_gate_concentration_lift": 1.1417540106433417,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.3415100124444205,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.33185920193866875,
+            "gate_open_to_closed_native_motion_ratio": 1.0290810393364813,
+            "marker_weighted_battery_abnormality_gate_open": 0.12636379932600075,
+            "marker_weighted_battery_abnormality_gate_closed": 0.12099912043266937
+          },
+          "WWV_battery_discharge": {
+            "response_cell_n": 920,
+            "plain_gate_open_fraction": 0.29347826086956524,
+            "marker_weighted_gate_open_fraction": 0.28742481444994833,
+            "marker_weighted_gate_concentration_lift": 0.9793734418294535,
+            "marker_weighted_native_abs_battery_motion_gate_open": 0.3387520635723404,
+            "marker_weighted_native_abs_battery_motion_gate_closed": 0.33524745373388065,
+            "gate_open_to_closed_native_motion_ratio": 1.010453800019736,
+            "marker_weighted_battery_abnormality_gate_open": 0.10607016409279017,
+            "marker_weighted_battery_abnormality_gate_closed": 0.13044984554149294
+          }
+        }
+      },
+      "native_motion_comparison": {
+        "early_to_late_total_abs_battery_motion_ratio": 1.2797043715612653,
+        "early_to_late_mean_monthly_abs_battery_motion_ratio": 0.9140745511151895,
+        "early_to_late_total_abs_orientation_motion_ratio": 1.216261337239621
+      }
+    }
+  }
+}

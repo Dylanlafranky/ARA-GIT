@@ -1,0 +1,383 @@
+{
+  "constants": {
+    "phi": 1.618033988749895,
+    "time_projection_identity": "2*cos(36 degrees)=phi",
+    "gap_share_normalized": 0.19098300562505255,
+    "release_when_gate_open": 0.38196601125010515,
+    "irrecoverable_loss_proxy_per_tick": 0.03647450843757885,
+    "home_period_months": 48.0,
+    "one_rung_period_months": 24.0,
+    "two_rung_period_months": 12.0,
+    "terrain_depth": 5
+  },
+  "formula_visibility": {
+    "sees_at_origin_or_earlier": [
+      "NINO",
+      "SOI",
+      "WWV west",
+      "WWV east",
+      "IOD",
+      "PDO"
+    ],
+    "does_not_see": [
+      "future NINO",
+      "future-origin features",
+      "smoothed future envelopes",
+      "held-out tuning scores during formula construction"
+    ],
+    "direct_formula": "dimensionless pressure converted with training-only scale",
+    "var_plus_diagnostic": "train-only ridge readout; not the physical formula"
+  },
+  "horizons": {
+    "1": {
+      "persistence": {
+        "n": 217,
+        "corr": 0.9550282875200768,
+        "mae": 0.21912442396313364,
+        "turn": 0.018433179723502304
+      },
+      "raw_topology_var": {
+        "n": 217,
+        "corr": 0.9711591269099772,
+        "mae": 0.17159260252535066,
+        "turn": 0.7142857142857143
+      },
+      "direct_fixed_release": {
+        "n": 217,
+        "corr": 0.9537821063204842,
+        "mae": 0.28840182834335815,
+        "turn": 0.4976958525345622
+      },
+      "var_plus_fixed_release": {
+        "n": 217,
+        "corr": 0.9698002678516656,
+        "mae": 0.17636583842573567,
+        "turn": 0.6912442396313364
+      },
+      "direct_recursive_gate": {
+        "n": 217,
+        "corr": 0.9541961897194341,
+        "mae": 0.2886751351600344,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_recursive_gate": {
+        "n": 217,
+        "corr": 0.9697434474044508,
+        "mae": 0.17920193393898964,
+        "turn": 0.695852534562212
+      },
+      "direct_recursive_gate_null": {
+        "n": 217,
+        "corr": 0.9528390347595456,
+        "mae": 0.29227365159880236,
+        "turn": 0.5023041474654378
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 217,
+        "corr": 0.9625663816165227,
+        "mae": 0.19348347086220133,
+        "turn": 0.7004608294930875
+      }
+    },
+    "3": {
+      "persistence": {
+        "n": 215,
+        "corr": 0.766334225249955,
+        "mae": 0.5014883720930233,
+        "turn": 0.013953488372093023
+      },
+      "raw_topology_var": {
+        "n": 215,
+        "corr": 0.8536189764296838,
+        "mae": 0.3667324119260845,
+        "turn": 0.7116279069767442
+      },
+      "direct_fixed_release": {
+        "n": 215,
+        "corr": 0.7467049985570193,
+        "mae": 0.7012925888463177,
+        "turn": 0.40930232558139534
+      },
+      "var_plus_fixed_release": {
+        "n": 215,
+        "corr": 0.8494121352764873,
+        "mae": 0.3714581040222111,
+        "turn": 0.7116279069767442
+      },
+      "direct_recursive_gate": {
+        "n": 215,
+        "corr": 0.7512429876220739,
+        "mae": 0.7001960280179741,
+        "turn": 0.4232558139534884
+      },
+      "var_plus_recursive_gate": {
+        "n": 215,
+        "corr": 0.8435142141031514,
+        "mae": 0.3814316265567381,
+        "turn": 0.7209302325581395
+      },
+      "direct_recursive_gate_null": {
+        "n": 215,
+        "corr": 0.745793966320168,
+        "mae": 0.7067887088055288,
+        "turn": 0.40930232558139534
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 215,
+        "corr": 0.820167763746872,
+        "mae": 0.40723597428045477,
+        "turn": 0.7488372093023256
+      }
+    },
+    "6": {
+      "persistence": {
+        "n": 212,
+        "corr": 0.3783337253301831,
+        "mae": 0.798254716981132,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 212,
+        "corr": 0.6009504918614874,
+        "mae": 0.5660124901645447,
+        "turn": 0.6933962264150944
+      },
+      "direct_fixed_release": {
+        "n": 212,
+        "corr": 0.3454582052881138,
+        "mae": 1.217428170715028,
+        "turn": 0.37735849056603776
+      },
+      "var_plus_fixed_release": {
+        "n": 212,
+        "corr": 0.5885315453240285,
+        "mae": 0.5799294285620519,
+        "turn": 0.7169811320754716
+      },
+      "direct_recursive_gate": {
+        "n": 212,
+        "corr": 0.3545176756223376,
+        "mae": 1.207668288638695,
+        "turn": 0.3915094339622642
+      },
+      "var_plus_recursive_gate": {
+        "n": 212,
+        "corr": 0.5809315585390112,
+        "mae": 0.581169739282593,
+        "turn": 0.7264150943396226
+      },
+      "direct_recursive_gate_null": {
+        "n": 212,
+        "corr": 0.3452657902408168,
+        "mae": 1.2162313327518086,
+        "turn": 0.37735849056603776
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 212,
+        "corr": 0.5330549260418252,
+        "mae": 0.6330689931359538,
+        "turn": 0.7311320754716981
+      }
+    },
+    "9": {
+      "persistence": {
+        "n": 209,
+        "corr": 0.07126852172636731,
+        "mae": 0.9424401913875596,
+        "turn": 0.004784688995215311
+      },
+      "raw_topology_var": {
+        "n": 209,
+        "corr": 0.4489533572596335,
+        "mae": 0.6384093907118537,
+        "turn": 0.7511961722488039
+      },
+      "direct_fixed_release": {
+        "n": 209,
+        "corr": 0.055849576231058365,
+        "mae": 1.5656541901601624,
+        "turn": 0.3397129186602871
+      },
+      "var_plus_fixed_release": {
+        "n": 209,
+        "corr": 0.42540808217263587,
+        "mae": 0.6492841144314466,
+        "turn": 0.7464114832535885
+      },
+      "direct_recursive_gate": {
+        "n": 209,
+        "corr": 0.0623302727746297,
+        "mae": 1.5623545845756497,
+        "turn": 0.3444976076555024
+      },
+      "var_plus_recursive_gate": {
+        "n": 209,
+        "corr": 0.4238086277595004,
+        "mae": 0.6303826056306736,
+        "turn": 0.7894736842105263
+      },
+      "direct_recursive_gate_null": {
+        "n": 209,
+        "corr": 0.05875388152134084,
+        "mae": 1.5718420027863156,
+        "turn": 0.3397129186602871
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 209,
+        "corr": 0.3830813525670318,
+        "mae": 0.6867656822935368,
+        "turn": 0.8038277511961722
+      }
+    },
+    "12": {
+      "persistence": {
+        "n": 206,
+        "corr": -0.040224471113590274,
+        "mae": 0.9973300970873786,
+        "turn": 0.0048543689320388345
+      },
+      "raw_topology_var": {
+        "n": 206,
+        "corr": 0.4440241672859049,
+        "mae": 0.6315962418928517,
+        "turn": 0.8009708737864077
+      },
+      "direct_fixed_release": {
+        "n": 206,
+        "corr": -0.06644265602015388,
+        "mae": 1.7696666993723191,
+        "turn": 0.23786407766990292
+      },
+      "var_plus_fixed_release": {
+        "n": 206,
+        "corr": 0.44398462503490627,
+        "mae": 0.6310476107681798,
+        "turn": 0.8058252427184466
+      },
+      "direct_recursive_gate": {
+        "n": 206,
+        "corr": -0.06131486134185525,
+        "mae": 1.7669955355499163,
+        "turn": 0.22815533980582525
+      },
+      "var_plus_recursive_gate": {
+        "n": 206,
+        "corr": 0.3889469459609341,
+        "mae": 0.6561723370294571,
+        "turn": 0.8009708737864077
+      },
+      "direct_recursive_gate_null": {
+        "n": 206,
+        "corr": -0.05941945533271999,
+        "mae": 1.7733801335932216,
+        "turn": 0.23300970873786409
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 206,
+        "corr": 0.37925125385045694,
+        "mae": 0.6633627000439158,
+        "turn": 0.8349514563106796
+      }
+    },
+    "18": {
+      "persistence": {
+        "n": 200,
+        "corr": -0.1437817126172069,
+        "mae": 1.1172,
+        "turn": 0.0
+      },
+      "raw_topology_var": {
+        "n": 200,
+        "corr": 0.407065316685561,
+        "mae": 0.6888769786488506,
+        "turn": 0.78
+      },
+      "direct_fixed_release": {
+        "n": 200,
+        "corr": -0.15061174627758703,
+        "mae": 1.9497060886825763,
+        "turn": 0.235
+      },
+      "var_plus_fixed_release": {
+        "n": 200,
+        "corr": 0.3896758475679122,
+        "mae": 0.6920246327162297,
+        "turn": 0.8
+      },
+      "direct_recursive_gate": {
+        "n": 200,
+        "corr": -0.1458181747709509,
+        "mae": 1.9502805996133414,
+        "turn": 0.225
+      },
+      "var_plus_recursive_gate": {
+        "n": 200,
+        "corr": 0.3086513095962218,
+        "mae": 0.7497035166226743,
+        "turn": 0.805
+      },
+      "direct_recursive_gate_null": {
+        "n": 200,
+        "corr": -0.14289093990836868,
+        "mae": 1.9610913259773246,
+        "turn": 0.24
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 200,
+        "corr": 0.3715104002635951,
+        "mae": 0.724424346533919,
+        "turn": 0.835
+      }
+    },
+    "24": {
+      "persistence": {
+        "n": 194,
+        "corr": -0.33824403115806695,
+        "mae": 1.1680412371134021,
+        "turn": 0.010309278350515464
+      },
+      "raw_topology_var": {
+        "n": 194,
+        "corr": 0.28906994046668366,
+        "mae": 0.7212790287797666,
+        "turn": 0.8144329896907216
+      },
+      "direct_fixed_release": {
+        "n": 194,
+        "corr": -0.32258426809564,
+        "mae": 2.0252448604992526,
+        "turn": 0.18556701030927836
+      },
+      "var_plus_fixed_release": {
+        "n": 194,
+        "corr": 0.32810277465514437,
+        "mae": 0.7360614744293622,
+        "turn": 0.7989690721649485
+      },
+      "direct_recursive_gate": {
+        "n": 194,
+        "corr": -0.334010515595082,
+        "mae": 2.0345756327111655,
+        "turn": 0.17525773195876287
+      },
+      "var_plus_recursive_gate": {
+        "n": 194,
+        "corr": 0.18944975456366756,
+        "mae": 0.8356109625544459,
+        "turn": 0.7268041237113402
+      },
+      "direct_recursive_gate_null": {
+        "n": 194,
+        "corr": -0.3208695067669755,
+        "mae": 2.04180477744319,
+        "turn": 0.18041237113402062
+      },
+      "var_plus_recursive_gate_null": {
+        "n": 194,
+        "corr": 0.2980759148102972,
+        "mae": 0.7849629604883887,
+        "turn": 0.7835051546391752
+      }
+    }
+  }
+}

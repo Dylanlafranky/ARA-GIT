@@ -1,0 +1,275 @@
+{
+  "test": "descriptive ENSO leaf-peak spacing and raw temporal-shape-loss diagnostic",
+  "status": "exploratory; too few leaf peaks for a validated rare-event law",
+  "strict_causal_checklist": {
+    "leaf_marker": "existing causal brown/green reader using NINO at or before each month",
+    "shape_loss": "raw recent NINO segment compared with an earlier raw segment only",
+    "soil_outcome": "future measured WWV abnormality used only as scored outcome",
+    "smoothing": false,
+    "fft_or_hilbert": false,
+    "synthetic_energy_injection": false,
+    "formula_modified": false
+  },
+  "interpretation_limits": {
+    "one_cycle_spacing_independent_proof": false,
+    "reason": "the causal marker contains a declared 48-month brown geometry",
+    "three_cycle_law_testable_with_current_event_count": false,
+    "completed_soil_outcome_event_n": 7
+  },
+  "constants": {
+    "declared_brown_period_months": 48,
+    "three_cycle_period_months": 144,
+    "shape_widths_months": [
+      6,
+      12,
+      18,
+      24
+    ],
+    "future_soil_window_months": [
+      30,
+      31,
+      32,
+      33,
+      34
+    ]
+  },
+  "leaf_peak_spacing": {
+    "event_n": 8,
+    "train_event_n": 3,
+    "heldout_event_n": 5,
+    "gaps_months": [
+      38,
+      54,
+      46,
+      45,
+      45,
+      48,
+      55
+    ],
+    "mean_gap_months": 47.285714285714285,
+    "std_gap_months": 5.390846361175202
+  },
+  "one_cycle_raw_shape_loss_panel": {
+    "48m_width_6m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.3963779128236448,
+      "shape_loss_to_future_soil_dump_corr": -0.6948314806927066
+    },
+    "48m_width_12m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.572684766420513,
+      "shape_loss_to_future_soil_dump_corr": 0.0037580567907268543
+    },
+    "48m_width_18m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.6370568543900291,
+      "shape_loss_to_future_soil_dump_corr": 0.00902630151185567
+    },
+    "48m_width_24m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.6496622312873387,
+      "shape_loss_to_future_soil_dump_corr": 0.05506431091236691
+    }
+  },
+  "three_cycle_raw_shape_loss_panel": {
+    "144m_width_6m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": -0.026261636728409046,
+      "shape_loss_to_future_soil_dump_corr": 0.4132620001396879
+    },
+    "144m_width_12m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": -0.16790795532110364,
+      "shape_loss_to_future_soil_dump_corr": 0.284814499772461
+    },
+    "144m_width_18m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.049484516779229035,
+      "shape_loss_to_future_soil_dump_corr": -0.059344312437323105
+    },
+    "144m_width_24m": {
+      "n": 7,
+      "shape_loss_to_visible_leaf_size_corr": 0.04849332838227765,
+      "shape_loss_to_future_soil_dump_corr": -0.0917737953213015
+    }
+  },
+  "leaf_size_to_future_soil_dump_corr": -0.4176758668068373,
+  "events": [
+    {
+      "month_index": 197,
+      "month": "199606",
+      "split": "train",
+      "leaf_marker_size": 0.08791285080931507,
+      "months_since_previous_leaf_peak": null,
+      "future_soil_battery_abnormality": 0.0787290711918598,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.8815301300973393,
+          "12": 1.4449608004359538,
+          "18": 1.6673455759152658,
+          "24": 1.7195432461162228
+        },
+        "144": {
+          "6": 0.43949488354439614,
+          "12": 0.11605427016381265,
+          "18": 0.028437029567481065,
+          "24": 0.02903056519077929
+        }
+      }
+    },
+    {
+      "month_index": 235,
+      "month": "199908",
+      "split": "train",
+      "leaf_marker_size": 0.058809107310915924,
+      "months_since_previous_leaf_peak": 38,
+      "future_soil_battery_abnormality": 0.10152667526977548,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.840021935833788,
+          "12": 1.8655965629591118,
+          "18": 1.704153407675678,
+          "24": 1.5832075676802404
+        },
+        "144": {
+          "6": 1.205660608475081,
+          "12": 1.3314408629058816,
+          "18": 1.8764068589313079,
+          "24": 1.9075485336005702
+        }
+      }
+    },
+    {
+      "month_index": 289,
+      "month": "200402",
+      "split": "train",
+      "leaf_marker_size": 0.059746853699845746,
+      "months_since_previous_leaf_peak": 54,
+      "future_soil_battery_abnormality": 0.11825198900093711,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.3359422213784442,
+          "12": 1.479560899157965,
+          "18": 1.3927935647363678,
+          "24": 1.3756874884500947
+        },
+        "144": {
+          "6": 0.45357615276045926,
+          "12": 0.8097340499099526,
+          "18": 1.3019893722492735,
+          "24": 1.2442746633206094
+        }
+      }
+    },
+    {
+      "month_index": 335,
+      "month": "200712",
+      "split": "heldout",
+      "leaf_marker_size": 0.04350465261789617,
+      "months_since_previous_leaf_peak": 46,
+      "future_soil_battery_abnormality": 0.05257177848905672,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.904777440339601,
+          "12": 0.5013615255878973,
+          "18": 0.3309809552135916,
+          "24": 0.28900838154775077
+        },
+        "144": {
+          "6": 0.03803683075009279,
+          "12": 0.039645496963400695,
+          "18": 0.05667663605865403,
+          "24": 0.08274466680260062
+        }
+      }
+    },
+    {
+      "month_index": 380,
+      "month": "201109",
+      "split": "heldout",
+      "leaf_marker_size": 0.05322257651210768,
+      "months_since_previous_leaf_peak": 45,
+      "future_soil_battery_abnormality": 0.16982268067075518,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.174172220209225,
+          "12": 1.8877963604462478,
+          "18": 1.832126072145948,
+          "24": 1.8247199147817805
+        },
+        "144": {
+          "6": 0.9422437576760218,
+          "12": 0.3168700056467808,
+          "18": 0.13503523290780028,
+          "24": 0.05742758387643787
+        }
+      }
+    },
+    {
+      "month_index": 425,
+      "month": "201506",
+      "split": "heldout",
+      "leaf_marker_size": 0.051946333327000195,
+      "months_since_previous_leaf_peak": 45,
+      "future_soil_battery_abnormality": 0.1323101684226345,
+      "raw_shape_loss": {
+        "48": {
+          "6": 0.4252334222708142,
+          "12": 0.845605459090297,
+          "18": 1.723380227687108,
+          "24": 1.7690332658368488
+        },
+        "144": {
+          "6": 1.6066168638669298,
+          "12": 1.2414435025752035,
+          "18": 0.6296884831650764,
+          "24": 0.4776585577471558
+        }
+      }
+    },
+    {
+      "month_index": 473,
+      "month": "201906",
+      "split": "heldout",
+      "leaf_marker_size": 0.0370085243989067,
+      "months_since_previous_leaf_peak": 48,
+      "future_soil_battery_abnormality": 0.18201141871279036,
+      "raw_shape_loss": {
+        "48": {
+          "6": 1.0578966530584555,
+          "12": 0.3384341596438951,
+          "18": 0.13478223979504167,
+          "24": 0.22843258116822618
+        },
+        "144": {
+          "6": 0.5663894284973433,
+          "12": 0.655017707945778,
+          "18": 0.2029834546223226,
+          "24": 0.22647637249476738
+        }
+      }
+    },
+    {
+      "month_index": 528,
+      "month": "202401",
+      "split": "heldout",
+      "leaf_marker_size": 0.042841203070821884,
+      "months_since_previous_leaf_peak": 55,
+      "future_soil_battery_abnormality": NaN,
+      "raw_shape_loss": {
+        "48": {
+          "6": 0.539777075254462,
+          "12": 1.383277687134635,
+          "18": 1.2022184260975228,
+          "24": 0.7246846546923695
+        },
+        "144": {
+          "6": 1.9349350304894393,
+          "12": 0.5779357428756142,
+          "18": 0.33038950948390855,
+          "24": 1.0754197958159044
+        }
+      }
+    }
+  ]
+}

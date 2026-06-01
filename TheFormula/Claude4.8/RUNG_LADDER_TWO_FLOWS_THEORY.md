@@ -162,3 +162,138 @@ snaps-leakiest, the downward recycling current, the friction-lag law — is **st
 theory and not yet established.** The first single-number law (rent = 2 − ARA) failed, and
 that failure is what taught us the rent is two flows, not one. The next round uses raw data
 to separate them.
+
+---
+
+## 8. ENSO two-flow diagnostic update (2026-06-01)
+
+The first frozen-window ENSO diagnostic is recorded in:
+
+```text
+ARA_ENSO_TWO_FLOW_WINDOW_RESULT.md
+```
+
+It did not inject a synthetic leaf packet. It measured unusual raw-monthly WWV
+motion after subtracting ordinary WWV history.
+
+Two distinguishable WWV shapes appear:
+
+```text
+visible pre-cutoff: 12 to 18 month directional pulse with feeder-like alignment
+held-out:           30 to 34 month battery disturbance without that alignment
+```
+
+This is compatible with separate upward feeder and slower recycling channels.
+It is not yet proof. The direct rung beneath WWV is not independently measured,
+and the brown marker remains inferred from NINO.
+
+### Release-gate follow-up (2026-06-01)
+
+The first release-gate diagnostic is recorded in:
+
+```text
+ARA_ENSO_RELEASE_GATE_ENERGY_RATIO_RESULT.md
+```
+
+In the visible pre-cutoff era, the `12 to 18 month` response is a sustained WWV
+discharge episode. The simple WWV discharge gate is concentrated `1.712x`
+around that marker-weighted pulse. This is compatible with an upward handoff.
+
+The same gate signature does not repeat in held-out time. WWV is also a volume
+proxy, not an energy measurement. The present result does not establish a
+universal logarithmic split between the part passed upward and the part
+retained as substrate.
+
+### Raw bedrock versus packet-flow follow-up (2026-06-01)
+
+The next diagnostic is recorded in:
+
+```text
+ARA_ENSO_WWV_BEDROCK_PACKET_RESULT.md
+```
+
+It used one real train-only WWV medoid event as the geometric bedrock, rather
+than averaging waveforms together. The raw medoid contains four falling months
+followed by recovery.
+
+Held-out WWV discharge episodes reproduce the first `3 to 5` months of that
+falling front more closely than season-and-level-matched ordinary months. The
+recovery tail varies more.
+
+This is compatible with a recurring gap geometry carrying differently sized
+packets:
+
+```text
+response = bedrock geometry x packet size x available gap x gate state
+```
+
+Packet-size scaling remains suggestive rather than established. WWV measures
+volume motion, not energy in joules.
+
+### Forward packet-clock follow-up (2026-06-01)
+
+The retrospective transit candidate was converted into a strict-causal
+forward ablation:
+
+```text
+ARA_ENSO_LEAF_TRANSIT_FORWARD_RESULT.md
+```
+
+The visible leaf marker does not yet generalize as a fixed WWV-soil amplitude
+forecast. The soil association changes sign across eras.
+
+A narrower result survives: a packet-due-now state, calculated only from leaf
+markers observed `30 to 34 months` earlier, improves the ordinary ENSO state's
+shape correlation around a localized `29 to 31 month` downstream ridge. At
+the `30 month` horizon, correlation changes from `-0.223` to `+0.062`.
+
+This is a candidate route/timing correction, not an amplitude solution. The
+transit window came from the same historical record, so it remains
+exploratory until tested on an independent physical channel or new data.
+
+### Rare-drop and shape-loss follow-up (2026-06-01)
+
+The next descriptive diagnostic is recorded in:
+
+```text
+ARA_ENSO_LARGE_LEAF_SHAPE_LOSS_RESULT.md
+```
+
+The inferred ENSO marker exposes shedding opportunities roughly once per
+declared brown cycle (`47.3 +/- 5.4 months`). A separate raw reader gives a
+moderate hint that visible marker size rises when the current trajectory has
+lost resemblance to the previous cycle over `12 to 24 month` segments.
+
+That raw loss does not yet predict the later WWV soil amount. The three-cycle
+rare-dump rule remains open: the record has only seven completed soil outcomes.
+
+A January 2024 inferred drop is now preserved prospectively. Its frozen WWV
+soil observation window is July through November 2026.
+
+### Gross packet versus usable return (2026-06-01)
+
+The prospective refinement distinguishes the gross fallen packet from the
+smaller amount that may return coherently through a same-spin rung:
+
+```text
+gross shed
+    -> adjacent anti-phase use / cancellation / dissipation
+    -> surviving same-spin deposit
+    -> gated recycled return
+```
+
+This is compatible with the earlier two-rung same-spin route. It means a later
+WWV proxy should not be expected to equal the `2 - phi` landmark exactly.
+
+### Historical two-stage proxy boundary (2026-06-01)
+
+The completed-history monthly-WWV test is recorded in:
+
+```text
+ARA_ENSO_INTERMEDIATE_TO_SAME_SPIN_SEQUENCE_RESULT.md
+```
+
+WWV does not isolate a reliable earlier-orientation then smaller-later-battery
+sequence. This is a measurement boundary: do not use WWV as both the adjacent
+anti-phase layer and the lower-lower same-spin reservoir. The proposed route
+requires a distinct finer or deeper observed coordinate.

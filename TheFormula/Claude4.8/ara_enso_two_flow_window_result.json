@@ -1,0 +1,1488 @@
+{
+  "test": "frozen early-versus-late ENSO WWV pulse comparison",
+  "status": "diagnostic association test; not a predictor and not causal proof",
+  "strict_causal_checklist": {
+    "frozen_windows_before_scoring": {
+      "possible_lower_upflow_months": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "possible_recycled_return_months": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    "leaf_marker": "existing causal harmonic marker from NINO values at or before origin",
+    "wwv_abnormality": "raw monthly WWV residual magnitude after training-only WWV-history AR",
+    "mjo_candidate": "maximum raw daily RMM amplitude in each month; secondary diagnostic only",
+    "synthetic_energy_injection": false,
+    "formula_modified": false,
+    "smoothing": false,
+    "fft_or_hilbert": false,
+    "future_value_used_to_construct_marker": false
+  },
+  "data_limits": {
+    "observed_rung_directly_below_wwv_available": false,
+    "mjo_role": "measured finer/faster candidate activity proxy, not a proven direct WWV-below rung",
+    "iod_role": "measured lateral feeder comparison",
+    "qbo_role": "measured slower timing control, not a direct WWV-below rung",
+    "overlapping_months": 544,
+    "training_cutoff_month_index": 326
+  },
+  "windows": {
+    "visible_pre_cutoff_after_marker_warmup": {
+      "origin_n": 134,
+      "possible_lower_upflow_12_18m": {
+        "complete_origin_n": 134,
+        "wwv_pulses": {
+          "orientation_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": 0.14650139078776006,
+            "window_mean_corr": 0.33030548141020355,
+            "marker_weighted_window_mean": 0.4410759044751433,
+            "plain_window_mean": 0.3760348493128461,
+            "marker_weighted_excess": 0.06504105516229719,
+            "peak": {
+              "delay_months": 15,
+              "n": 134,
+              "corr": 0.18785348921611647,
+              "marker_weighted_mean": 0.46278029073231,
+              "plain_mean": 0.3786346752661922
+            },
+            "positive_delay_count": 7,
+            "half_peak_delay_count": 6,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 134,
+                "corr": 0.15768875374157476,
+                "marker_weighted_mean": 0.45439936128547603,
+                "plain_mean": 0.38307333164859786
+              },
+              {
+                "delay_months": 13,
+                "n": 134,
+                "corr": 0.18103384417596238,
+                "marker_weighted_mean": 0.46518206518174393,
+                "plain_mean": 0.38332525788592325
+              },
+              {
+                "delay_months": 14,
+                "n": 134,
+                "corr": 0.17593132507193235,
+                "marker_weighted_mean": 0.45883667086252405,
+                "plain_mean": 0.3799214339847778
+              },
+              {
+                "delay_months": 15,
+                "n": 134,
+                "corr": 0.18785348921611647,
+                "marker_weighted_mean": 0.46278029073231,
+                "plain_mean": 0.3786346752661922
+              },
+              {
+                "delay_months": 16,
+                "n": 134,
+                "corr": 0.14167186307250665,
+                "marker_weighted_mean": 0.43211347799277705,
+                "plain_mean": 0.37117027405635256
+              },
+              {
+                "delay_months": 17,
+                "n": 134,
+                "corr": 0.10521538539180078,
+                "marker_weighted_mean": 0.41267159724310615,
+                "plain_mean": 0.36738119895785887
+              },
+              {
+                "delay_months": 18,
+                "n": 134,
+                "corr": 0.07611507484442707,
+                "marker_weighted_mean": 0.401547868028066,
+                "plain_mean": 0.36873777339021996
+              }
+            ]
+          },
+          "battery_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": 0.18929569354703915,
+            "window_mean_corr": 0.42419181291320684,
+            "marker_weighted_window_mean": 0.14323438129835092,
+            "plain_window_mean": 0.1180235500947905,
+            "marker_weighted_excess": 0.02521083120356042,
+            "peak": {
+              "delay_months": 15,
+              "n": 134,
+              "corr": 0.21141023328953584,
+              "marker_weighted_mean": 0.14771206814593937,
+              "plain_mean": 0.11908441654582325
+            },
+            "positive_delay_count": 7,
+            "half_peak_delay_count": 7,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 134,
+                "corr": 0.172057446919835,
+                "marker_weighted_mean": 0.14080954345908614,
+                "plain_mean": 0.11794567992733211
+              },
+              {
+                "delay_months": 13,
+                "n": 134,
+                "corr": 0.1873997037127993,
+                "marker_weighted_mean": 0.1439784390946665,
+                "plain_mean": 0.11864597725136916
+              },
+              {
+                "delay_months": 14,
+                "n": 134,
+                "corr": 0.18329377208303024,
+                "marker_weighted_mean": 0.14275206352464523,
+                "plain_mean": 0.11787023197489098
+              },
+              {
+                "delay_months": 15,
+                "n": 134,
+                "corr": 0.21141023328953584,
+                "marker_weighted_mean": 0.14771206814593937,
+                "plain_mean": 0.11908441654582325
+              },
+              {
+                "delay_months": 16,
+                "n": 134,
+                "corr": 0.1809581995682883,
+                "marker_weighted_mean": 0.14126242346755835,
+                "plain_mean": 0.11755836311046945
+              },
+              {
+                "delay_months": 17,
+                "n": 134,
+                "corr": 0.1966309079453762,
+                "marker_weighted_mean": 0.14341715982672232,
+                "plain_mean": 0.11764459484966794
+              },
+              {
+                "delay_months": 18,
+                "n": 134,
+                "corr": 0.1933195913104094,
+                "marker_weighted_mean": 0.1427089715698386,
+                "plain_mean": 0.11741558700398072
+              }
+            ]
+          },
+          "vector_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": 0.1732477830860472,
+            "window_mean_corr": 0.36166576882928625,
+            "marker_weighted_window_mean": 0.27647416142651454,
+            "plain_window_mean": 0.2379150462605493,
+            "marker_weighted_excess": 0.038559115165965246,
+            "peak": {
+              "delay_months": 15,
+              "n": 134,
+              "corr": 0.21325887590309256,
+              "marker_weighted_mean": 0.28768122562629544,
+              "plain_mean": 0.23941239859548485
+            },
+            "positive_delay_count": 7,
+            "half_peak_delay_count": 6,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 134,
+                "corr": 0.18986366416340525,
+                "marker_weighted_mean": 0.28415783369605013,
+                "plain_mean": 0.24095990300822037
+              },
+              {
+                "delay_months": 13,
+                "n": 134,
+                "corr": 0.20964918668032786,
+                "marker_weighted_mean": 0.2890982536649193,
+                "plain_mean": 0.2413467902620685
+              },
+              {
+                "delay_months": 14,
+                "n": 134,
+                "corr": 0.19808631395648288,
+                "marker_weighted_mean": 0.2843227182645364,
+                "plain_mean": 0.23948447991238994
+              },
+              {
+                "delay_months": 15,
+                "n": 134,
+                "corr": 0.21325887590309256,
+                "marker_weighted_mean": 0.28768122562629544,
+                "plain_mean": 0.23941239859548485
+              },
+              {
+                "delay_months": 16,
+                "n": 134,
+                "corr": 0.1629563606747409,
+                "marker_weighted_mean": 0.2701830741182582,
+                "plain_mean": 0.2353245449199122
+              },
+              {
+                "delay_months": 17,
+                "n": 134,
+                "corr": 0.135719503361062,
+                "marker_weighted_mean": 0.26334368644364775,
+                "plain_mean": 0.23437890089752114
+              },
+              {
+                "delay_months": 18,
+                "n": 134,
+                "corr": 0.10320057686321893,
+                "marker_weighted_mean": 0.2565323381718946,
+                "plain_mean": 0.23449830622824794
+              }
+            ]
+          }
+        },
+        "wwv_signed_response": {
+          "orientation_residual": {
+            "marker_weighted_mean": 0.08295835630123845,
+            "plain_mean": -0.04896002116632538,
+            "marker_weighted_shift": 0.13191837746756382,
+            "corr": 0.4591237723193785
+          },
+          "battery_residual": {
+            "marker_weighted_mean": -0.00655138417454357,
+            "plain_mean": 0.002384578613999168,
+            "marker_weighted_shift": -0.008935962788542738,
+            "corr": -0.09442981873821836
+          }
+        },
+        "candidate_feeder_alignment_to_wwv_battery": {
+          "MJO_monthly_max_daily_amp_candidate_finer_feeder": {
+            "fixed_contemporaneous_corr": 0.2772976063498802,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": 0.2772976063498802,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.2772976063498802,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.27640142725102707,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": 0.2466015045567936,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": 0.256295976545706,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": 0.2725541979025884,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.25418554779998653,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.22801477860242095,
+                "n": 134
+              }
+            ]
+          },
+          "IOD_lateral_feeder_comparison": {
+            "fixed_contemporaneous_corr": 0.5726224437693649,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": 0.5726224437693649,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.5726224437693649,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.5430618209109451,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": 0.49498633023864425,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": 0.4433626691065355,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": 0.37584238218622906,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.31303395630518166,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.27021301158389865,
+                "n": 134
+              }
+            ]
+          },
+          "QBO_vector_slower_clock_control": {
+            "fixed_contemporaneous_corr": 0.09566801427550659,
+            "peak_exploratory": {
+              "feeder_lead_months": 3,
+              "corr": 0.12563083134522987,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.09566801427550659,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.09288052617672526,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": 0.09495784938362659,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": 0.12563083134522987,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": 0.12473564563335222,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.1014694649117897,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.08998168112342274,
+                "n": 134
+              }
+            ]
+          }
+        }
+      },
+      "possible_recycled_return_30_34m": {
+        "complete_origin_n": 134,
+        "wwv_pulses": {
+          "orientation_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": -0.08373573749408739,
+            "window_mean_corr": -0.1661058047045094,
+            "marker_weighted_window_mean": 0.3308754514924641,
+            "plain_window_mean": 0.3659211404020395,
+            "marker_weighted_excess": -0.03504568890957538,
+            "peak": {
+              "delay_months": 34,
+              "n": 134,
+              "corr": -0.021105171062030748,
+              "marker_weighted_mean": 0.3606077071564176,
+              "plain_mean": 0.36973038554115045
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 134,
+                "corr": -0.15263645829326924,
+                "marker_weighted_mean": 0.2991423504092778,
+                "plain_mean": 0.36272112546626645
+              },
+              {
+                "delay_months": 31,
+                "n": 134,
+                "corr": -0.11975548161031843,
+                "marker_weighted_mean": 0.31320944297146014,
+                "plain_mean": 0.3630328635507425
+              },
+              {
+                "delay_months": 32,
+                "n": 134,
+                "corr": -0.08377700567011857,
+                "marker_weighted_mean": 0.32812756306874147,
+                "plain_mean": 0.3629871641834909
+              },
+              {
+                "delay_months": 33,
+                "n": 134,
+                "corr": -0.04140457083469991,
+                "marker_weighted_mean": 0.35329019385642363,
+                "plain_mean": 0.37113416326854715
+              },
+              {
+                "delay_months": 34,
+                "n": 134,
+                "corr": -0.021105171062030748,
+                "marker_weighted_mean": 0.3606077071564176,
+                "plain_mean": 0.36973038554115045
+              }
+            ]
+          },
+          "battery_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": -0.06390697309591635,
+            "window_mean_corr": -0.15068280550178706,
+            "marker_weighted_window_mean": 0.09869315272986125,
+            "plain_window_mean": 0.10661024171885035,
+            "marker_weighted_excess": -0.007917088988989102,
+            "peak": {
+              "delay_months": 34,
+              "n": 134,
+              "corr": -0.02444205062517662,
+              "marker_weighted_mean": 0.10347150171782722,
+              "plain_mean": 0.10648817983095357
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 134,
+                "corr": -0.09907645727782949,
+                "marker_weighted_mean": 0.09447925615835301,
+                "plain_mean": 0.10674147190956369
+              },
+              {
+                "delay_months": 31,
+                "n": 134,
+                "corr": -0.09605004350301363,
+                "marker_weighted_mean": 0.09440397508343469,
+                "plain_mean": 0.1063158477510357
+              },
+              {
+                "delay_months": 32,
+                "n": 134,
+                "corr": -0.06959193032798026,
+                "marker_weighted_mean": 0.09784914257780351,
+                "plain_mean": 0.10647947736193261
+              },
+              {
+                "delay_months": 33,
+                "n": 134,
+                "corr": -0.030374383745581768,
+                "marker_weighted_mean": 0.10326188811188781,
+                "plain_mean": 0.10702623174076624
+              },
+              {
+                "delay_months": 34,
+                "n": 134,
+                "corr": -0.02444205062517662,
+                "marker_weighted_mean": 0.10347150171782722,
+                "plain_mean": 0.10648817983095357
+              }
+            ]
+          },
+          "vector_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": -0.08706401574703417,
+            "window_mean_corr": -0.16396964501921965,
+            "marker_weighted_window_mean": 0.2101059356964112,
+            "plain_window_mean": 0.22804876252052725,
+            "marker_weighted_excess": -0.017942826824116048,
+            "peak": {
+              "delay_months": 34,
+              "n": 134,
+              "corr": -0.013016994228612726,
+              "marker_weighted_mean": 0.22685997064790814,
+              "plain_mean": 0.22962569538398514
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 134,
+                "corr": -0.16315127134764007,
+                "marker_weighted_mean": 0.19365689030682492,
+                "plain_mean": 0.22707391817545
+              },
+              {
+                "delay_months": 31,
+                "n": 134,
+                "corr": -0.13338449523457463,
+                "marker_weighted_mean": 0.19908834801806907,
+                "plain_mean": 0.22652188510103546
+              },
+              {
+                "delay_months": 32,
+                "n": 134,
+                "corr": -0.09412159811683389,
+                "marker_weighted_mean": 0.20685835931740826,
+                "plain_mean": 0.22624162352694746
+              },
+              {
+                "delay_months": 33,
+                "n": 134,
+                "corr": -0.031645719807509486,
+                "marker_weighted_mean": 0.2240661101918457,
+                "plain_mean": 0.23078069041521843
+              },
+              {
+                "delay_months": 34,
+                "n": 134,
+                "corr": -0.013016994228612726,
+                "marker_weighted_mean": 0.22685997064790814,
+                "plain_mean": 0.22962569538398514
+              }
+            ]
+          }
+        },
+        "wwv_signed_response": {
+          "orientation_residual": {
+            "marker_weighted_mean": -0.043387546267696815,
+            "plain_mean": -0.07853530371484885,
+            "marker_weighted_shift": 0.03514775744715203,
+            "corr": 0.11815496939711077
+          },
+          "battery_residual": {
+            "marker_weighted_mean": 0.005167012834062479,
+            "plain_mean": 0.016783005955177222,
+            "marker_weighted_shift": -0.011615993121114743,
+            "corr": -0.1290735693188756
+          }
+        },
+        "candidate_feeder_alignment_to_wwv_battery": {
+          "MJO_monthly_max_daily_amp_candidate_finer_feeder": {
+            "fixed_contemporaneous_corr": 0.21003165201286736,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": 0.21003165201286736,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.21003165201286736,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.20460168545642748,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": 0.08225619732186093,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": 0.06319277448697132,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": 0.09471228740928592,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.042953729739359466,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": -0.014480829155541636,
+                "n": 134
+              }
+            ]
+          },
+          "IOD_lateral_feeder_comparison": {
+            "fixed_contemporaneous_corr": 0.2887690478817597,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": 0.2887690478817597,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.2887690478817597,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.28154473686814724,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": 0.271869673668096,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": 0.18244689590377025,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": 0.0786745869683095,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.006711819745997743,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.01649865143646277,
+                "n": 134
+              }
+            ]
+          },
+          "QBO_vector_slower_clock_control": {
+            "fixed_contemporaneous_corr": 0.044187756154294766,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": 0.044187756154294766,
+              "n": 134
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.044187756154294766,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": 0.01519656653119581,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.04816405970013758,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.04799064983296044,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.07327167070538208,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.05698550151966487,
+                "n": 134
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": -0.0981431084815548,
+                "n": 134
+              }
+            ]
+          }
+        }
+      }
+    },
+    "heldout": {
+      "origin_n": 218,
+      "possible_lower_upflow_12_18m": {
+        "complete_origin_n": 200,
+        "wwv_pulses": {
+          "orientation_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": -0.09087015811958561,
+            "window_mean_corr": -0.2142677948503621,
+            "marker_weighted_window_mean": 0.3811651804824096,
+            "plain_window_mean": 0.4163947622655191,
+            "marker_weighted_excess": -0.035229581783109476,
+            "peak": {
+              "delay_months": 16,
+              "n": 200,
+              "corr": -0.06534043455649272,
+              "marker_weighted_mean": 0.3930692037459602,
+              "plain_mean": 0.41852325472974683
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 200,
+                "corr": -0.12596765428939702,
+                "marker_weighted_mean": 0.3648850494143003,
+                "plain_mean": 0.4135746820302221
+              },
+              {
+                "delay_months": 13,
+                "n": 200,
+                "corr": -0.11840056854995289,
+                "marker_weighted_mean": 0.36798226815457774,
+                "plain_mean": 0.4137368783273166
+              },
+              {
+                "delay_months": 14,
+                "n": 200,
+                "corr": -0.0998465339643452,
+                "marker_weighted_mean": 0.3759830141258073,
+                "plain_mean": 0.4145854250701392
+              },
+              {
+                "delay_months": 15,
+                "n": 200,
+                "corr": -0.07206853884875383,
+                "marker_weighted_mean": 0.38913587349259154,
+                "plain_mean": 0.41717548842140517
+              },
+              {
+                "delay_months": 16,
+                "n": 200,
+                "corr": -0.06534043455649272,
+                "marker_weighted_mean": 0.3930692037459602,
+                "plain_mean": 0.41852325472974683
+              },
+              {
+                "delay_months": 17,
+                "n": 200,
+                "corr": -0.0708373078396059,
+                "marker_weighted_mean": 0.391818660827651,
+                "plain_mean": 0.4193594521171618
+              },
+              {
+                "delay_months": 18,
+                "n": 200,
+                "corr": -0.08363006878855171,
+                "marker_weighted_mean": 0.3852821936159796,
+                "plain_mean": 0.41780815516264225
+              }
+            ]
+          },
+          "battery_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": -0.10094283813084484,
+            "window_mean_corr": -0.2547469673334407,
+            "marker_weighted_window_mean": 0.09793846001167639,
+            "plain_window_mean": 0.1084657736625765,
+            "marker_weighted_excess": -0.010527313650900108,
+            "peak": {
+              "delay_months": 12,
+              "n": 200,
+              "corr": -0.04957686682278827,
+              "marker_weighted_mean": 0.10422560320620378,
+              "plain_mean": 0.10952326904444884
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 200,
+                "corr": -0.04957686682278827,
+                "marker_weighted_mean": 0.10422560320620378,
+                "plain_mean": 0.10952326904444884
+              },
+              {
+                "delay_months": 13,
+                "n": 200,
+                "corr": -0.08822628689297467,
+                "marker_weighted_mean": 0.0989372177167147,
+                "plain_mean": 0.10813786575215754
+              },
+              {
+                "delay_months": 14,
+                "n": 200,
+                "corr": -0.09126327115225931,
+                "marker_weighted_mean": 0.09962343936141349,
+                "plain_mean": 0.10915681764422004
+              },
+              {
+                "delay_months": 15,
+                "n": 200,
+                "corr": -0.1035866047855233,
+                "marker_weighted_mean": 0.09809531098882578,
+                "plain_mean": 0.108897587389575
+              },
+              {
+                "delay_months": 16,
+                "n": 200,
+                "corr": -0.11770482756010203,
+                "marker_weighted_mean": 0.09614034382476137,
+                "plain_mean": 0.10837844356832267
+              },
+              {
+                "delay_months": 17,
+                "n": 200,
+                "corr": -0.12875565802865002,
+                "marker_weighted_mean": 0.09429994749302359,
+                "plain_mean": 0.10768270652718152
+              },
+              {
+                "delay_months": 18,
+                "n": 200,
+                "corr": -0.12748635167361633,
+                "marker_weighted_mean": 0.09424735749079206,
+                "plain_mean": 0.10748372571212979
+              }
+            ]
+          },
+          "vector_abnormality": {
+            "delays_months": [
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18
+            ],
+            "mean_corr_across_delays": -0.10868643749703184,
+            "window_mean_corr": -0.24958022492105095,
+            "marker_weighted_window_mean": 0.22913762720046343,
+            "plain_window_mean": 0.2493345212291682,
+            "marker_weighted_excess": -0.020196894028704754,
+            "peak": {
+              "delay_months": 15,
+              "n": 200,
+              "corr": -0.0918570572963683,
+              "marker_weighted_mean": 0.23298690428064034,
+              "plain_mean": 0.25009228512903653
+            },
+            "positive_delay_count": 0,
+            "half_peak_delay_count": 0,
+            "profile": [
+              {
+                "delay_months": 12,
+                "n": 200,
+                "corr": -0.11819646031806608,
+                "marker_weighted_mean": 0.22704191426240053,
+                "plain_mean": 0.24891893133359097
+              },
+              {
+                "delay_months": 13,
+                "n": 200,
+                "corr": -0.12610049699877365,
+                "marker_weighted_mean": 0.22487356505985867,
+                "plain_mean": 0.2482011073317416
+              },
+              {
+                "delay_months": 14,
+                "n": 200,
+                "corr": -0.11250917418683186,
+                "marker_weighted_mean": 0.22822184578892568,
+                "plain_mean": 0.2490637905230792
+              },
+              {
+                "delay_months": 15,
+                "n": 200,
+                "corr": -0.0918570572963683,
+                "marker_weighted_mean": 0.23298690428064034,
+                "plain_mean": 0.25009228512903653
+              },
+              {
+                "delay_months": 16,
+                "n": 200,
+                "corr": -0.09221364870767014,
+                "marker_weighted_mean": 0.23309879820780544,
+                "plain_mean": 0.2502780203999497
+              },
+              {
+                "delay_months": 17,
+                "n": 200,
+                "corr": -0.10478335435267122,
+                "marker_weighted_mean": 0.23018400822055057,
+                "plain_mean": 0.24974099927722282
+              },
+              {
+                "delay_months": 18,
+                "n": 200,
+                "corr": -0.11514487061884164,
+                "marker_weighted_mean": 0.2275563545830626,
+                "plain_mean": 0.24904651460955654
+              }
+            ]
+          }
+        },
+        "wwv_signed_response": {
+          "orientation_residual": {
+            "marker_weighted_mean": -0.11256780150829397,
+            "plain_mean": -0.07929142180524992,
+            "marker_weighted_shift": -0.03327637970304405,
+            "corr": -0.1466186604807766
+          },
+          "battery_residual": {
+            "marker_weighted_mean": 0.007659604999345229,
+            "plain_mean": 0.013225216582125235,
+            "marker_weighted_shift": -0.0055656115827800055,
+            "corr": -0.08152616249107743
+          }
+        },
+        "candidate_feeder_alignment_to_wwv_battery": {
+          "MJO_monthly_max_daily_amp_candidate_finer_feeder": {
+            "fixed_contemporaneous_corr": -0.053646505647810254,
+            "peak_exploratory": {
+              "feeder_lead_months": 6,
+              "corr": 0.015455151283822752,
+              "n": 200
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": -0.053646505647810254,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.07535987400863095,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.09246400032804523,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.07118556932661348,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.020656731289109404,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.004460611947029426,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.015455151283822752,
+                "n": 200
+              }
+            ]
+          },
+          "IOD_lateral_feeder_comparison": {
+            "fixed_contemporaneous_corr": -0.22111394761249736,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": -0.22111394761249736,
+              "n": 200
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": -0.22111394761249736,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.26643744900204624,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.32266687270563954,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.3161059352589334,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.2949732756481072,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.29237751599636774,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": -0.27814697222433854,
+                "n": 200
+              }
+            ]
+          },
+          "QBO_vector_slower_clock_control": {
+            "fixed_contemporaneous_corr": 0.00908958458224102,
+            "peak_exploratory": {
+              "feeder_lead_months": 6,
+              "corr": 0.06857937756308423,
+              "n": 200
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": 0.00908958458224102,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.05429379022003522,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.1055741639650151,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.09842131506990912,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.07055101971536631,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": 0.0033253695993397834,
+                "n": 200
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.06857937756308423,
+                "n": 200
+              }
+            ]
+          }
+        }
+      },
+      "possible_recycled_return_30_34m": {
+        "complete_origin_n": 184,
+        "wwv_pulses": {
+          "orientation_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": 0.12562407022775213,
+            "window_mean_corr": 0.2527939091693111,
+            "marker_weighted_window_mean": 0.46567954340869944,
+            "plain_window_mean": 0.41739565434987824,
+            "marker_weighted_excess": 0.048283889058821194,
+            "peak": {
+              "delay_months": 31,
+              "n": 184,
+              "corr": 0.1386868405426255,
+              "marker_weighted_mean": 0.47240281946517065,
+              "plain_mean": 0.4186175373482513
+            },
+            "positive_delay_count": 5,
+            "half_peak_delay_count": 5,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 184,
+                "corr": 0.13502981313330542,
+                "marker_weighted_mean": 0.46618847263951885,
+                "plain_mean": 0.4140052261661179
+              },
+              {
+                "delay_months": 31,
+                "n": 184,
+                "corr": 0.1386868405426255,
+                "marker_weighted_mean": 0.47240281946517065,
+                "plain_mean": 0.4186175373482513
+              },
+              {
+                "delay_months": 32,
+                "n": 184,
+                "corr": 0.13338334885367711,
+                "marker_weighted_mean": 0.47318836525979846,
+                "plain_mean": 0.4215233709904188
+              },
+              {
+                "delay_months": 33,
+                "n": 184,
+                "corr": 0.1126330681076594,
+                "marker_weighted_mean": 0.4587428453848254,
+                "plain_mean": 0.41599826630763875
+              },
+              {
+                "delay_months": 34,
+                "n": 184,
+                "corr": 0.10838728050149328,
+                "marker_weighted_mean": 0.45787521429418354,
+                "plain_mean": 0.41683387093696445
+              }
+            ]
+          },
+          "battery_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": 0.13664564075590493,
+            "window_mean_corr": 0.29615639597780824,
+            "marker_weighted_window_mean": 0.12344252012475072,
+            "plain_window_mean": 0.10921854982762887,
+            "marker_weighted_excess": 0.014223970297121857,
+            "peak": {
+              "delay_months": 33,
+              "n": 184,
+              "corr": 0.1428020139311766,
+              "marker_weighted_mean": 0.12384545169983725,
+              "plain_mean": 0.10897132834846189
+            },
+            "positive_delay_count": 5,
+            "half_peak_delay_count": 5,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 184,
+                "corr": 0.12152290724261613,
+                "marker_weighted_mean": 0.12175927468562386,
+                "plain_mean": 0.10910164226814024
+              },
+              {
+                "delay_months": 31,
+                "n": 184,
+                "corr": 0.13942541381774828,
+                "marker_weighted_mean": 0.12407575427305348,
+                "plain_mean": 0.10957564613196583
+              },
+              {
+                "delay_months": 32,
+                "n": 184,
+                "corr": 0.1416379230064957,
+                "marker_weighted_mean": 0.1242060433514386,
+                "plain_mean": 0.10947524719257457
+              },
+              {
+                "delay_months": 33,
+                "n": 184,
+                "corr": 0.1428020139311766,
+                "marker_weighted_mean": 0.12384545169983725,
+                "plain_mean": 0.10897132834846189
+              },
+              {
+                "delay_months": 34,
+                "n": 184,
+                "corr": 0.13783994578148798,
+                "marker_weighted_mean": 0.12332607661380048,
+                "plain_mean": 0.10896888519700183
+              }
+            ]
+          },
+          "vector_abnormality": {
+            "delays_months": [
+              30,
+              31,
+              32,
+              33,
+              34
+            ],
+            "mean_corr_across_delays": 0.133221164765505,
+            "window_mean_corr": 0.26141881473050416,
+            "marker_weighted_window_mean": 0.2743797064803045,
+            "plain_window_mean": 0.2498552763047486,
+            "marker_weighted_excess": 0.024524430175555917,
+            "peak": {
+              "delay_months": 31,
+              "n": 184,
+              "corr": 0.1433093936407835,
+              "marker_weighted_mean": 0.27739414392063566,
+              "plain_mean": 0.25078672815790065
+            },
+            "positive_delay_count": 5,
+            "half_peak_delay_count": 5,
+            "profile": [
+              {
+                "delay_months": 30,
+                "n": 184,
+                "corr": 0.1329846878801248,
+                "marker_weighted_mean": 0.2731361712993926,
+                "plain_mean": 0.24845359525897753
+              },
+              {
+                "delay_months": 31,
+                "n": 184,
+                "corr": 0.1433093936407835,
+                "marker_weighted_mean": 0.27739414392063566,
+                "plain_mean": 0.25078672815790065
+              },
+              {
+                "delay_months": 32,
+                "n": 184,
+                "corr": 0.1413446072290084,
+                "marker_weighted_mean": 0.27811535739057797,
+                "plain_mean": 0.2519167339084165
+              },
+              {
+                "delay_months": 33,
+                "n": 184,
+                "corr": 0.12534063847921345,
+                "marker_weighted_mean": 0.27169561262668085,
+                "plain_mean": 0.24891325349646418
+              },
+              {
+                "delay_months": 34,
+                "n": 184,
+                "corr": 0.12312649659839488,
+                "marker_weighted_mean": 0.27155724716423557,
+                "plain_mean": 0.24920607070198408
+              }
+            ]
+          }
+        },
+        "wwv_signed_response": {
+          "orientation_residual": {
+            "marker_weighted_mean": -0.09608062003500327,
+            "plain_mean": -0.081945322476364,
+            "marker_weighted_shift": -0.014135297558639265,
+            "corr": -0.05099344962127707
+          },
+          "battery_residual": {
+            "marker_weighted_mean": 0.03801147528369004,
+            "plain_mean": 0.01281990559422178,
+            "marker_weighted_shift": 0.025191569689468257,
+            "corr": 0.30962347736420043
+          }
+        },
+        "candidate_feeder_alignment_to_wwv_battery": {
+          "MJO_monthly_max_daily_amp_candidate_finer_feeder": {
+            "fixed_contemporaneous_corr": -0.07000987311444797,
+            "peak_exploratory": {
+              "feeder_lead_months": 6,
+              "corr": -0.0149087118038474,
+              "n": 184
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": -0.07000987311444797,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.11602198018374077,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.13424754266975245,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.11061675400126807,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.07754717102220834,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.05769096083801693,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": -0.0149087118038474,
+                "n": 184
+              }
+            ]
+          },
+          "IOD_lateral_feeder_comparison": {
+            "fixed_contemporaneous_corr": -0.24586317589932347,
+            "peak_exploratory": {
+              "feeder_lead_months": 0,
+              "corr": -0.24586317589932347,
+              "n": 184
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": -0.24586317589932347,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.2807347233092847,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.3394869588712714,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.3412917498834598,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.3074106790168026,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.29388275913730455,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": -0.28111793582175887,
+                "n": 184
+              }
+            ]
+          },
+          "QBO_vector_slower_clock_control": {
+            "fixed_contemporaneous_corr": -0.060159401637992736,
+            "peak_exploratory": {
+              "feeder_lead_months": 6,
+              "corr": 0.08171443363878003,
+              "n": 184
+            },
+            "lead_scan": [
+              {
+                "feeder_lead_months": 0,
+                "corr": -0.060159401637992736,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 1,
+                "corr": -0.15970557265342092,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 2,
+                "corr": -0.2035390132066872,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 3,
+                "corr": -0.17314190309588282,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 4,
+                "corr": -0.1312635706509093,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 5,
+                "corr": -0.03708895471364137,
+                "n": 184
+              },
+              {
+                "feeder_lead_months": 6,
+                "corr": 0.08171443363878003,
+                "n": 184
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

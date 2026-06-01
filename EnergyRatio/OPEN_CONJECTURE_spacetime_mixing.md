@@ -37,6 +37,36 @@ at the edge of the framework's shape — explicitly not a result. The mechanism 
 7. **This is the first distortion/blending in the universe** — the foundational event. If it can be
    worked out, it's foundational physics. That's why it's worth recording even though it's unreachable now.
 
+## Refinement (1 June 2026) — wave-launch from poles, blend settles at the walls; matter & pace; turtle–hare
+
+Dylan's geometric account of *how* the walls get populated (resolves an earlier "is light the floor or the
+blend?" question — answer: neither, it's the geometry):
+
+- The **pure waves launch from the poles** (space from 0, time from 2 — flip-symmetric, doesn't matter
+  which), each carrying just enough energy to cross to the other side.
+- They run toward each other and **blend**; the blend builds the pyramids/triangles (the next-rung=blend
+  engine). The two source identities are *maintained*, but the blend *creates*.
+- The blended identities do **not** sit at the poles — they **settle at the walls, 0.25 and 1.75**
+  (mirror about 1.0). So: **floor = where the raw wave comes from; wall = where the blended identity
+  crystallizes.** Light/matter are waves-from-a-floor that *become* identities at a wall.
+- **One wall = matter** = a **space-heavy, time-light** blend (more space, less time): heavy, locked into
+  lattice connections, slow. **The other wall = the time-heavy, space-light** blend: fast, less matter.
+  (Numeric label of which wall is which follows the pole-convention note below and is flip-symmetric.)
+
+**Turtle–hare illustration (Dylan):** the trade-off made physical. A turtle spends itself on **space** —
+shell, lattice, structure — so it's matter-heavy (near the space-leaning wall) and *pays by being slow in
+time*. A hare spends on **time** — speed, pace — so it's lighter, less matter (near the time-leaning wall).
+**More space ⇒ less time, and back.** This is the same φ/anti-φ diagonal as the two-knob quadrant
+(`memory: project_two_knobs_quadrant`): high space-knob (shape/lattice) = matter-like & slow; high
+time-knob (self-pacing) = hare-like & fast. Light = the extreme low-time corner (c fixed, no self-pacing,
+frozen clock); matter = the extreme low-space corner (one localized form).
+
+**Testable echo (NOT yet run):** "more matter ⇒ slower time" is a known real biological law — larger,
+heavier animals have slower heart rates and longer lifespans (allometric / "rate-of-living" scaling,
+Kleiber). The geometry predicts that slope. So the turtle–hare is not pure metaphor: body-mass ↔ pace
+(heart rate / lifespan) across species is a measurable check of the space↔time (matter↔pace) trade-off.
+Still interpretive until run; the turtle–hare itself is an illustration, not data.
+
 ## Pole convention (corrected 2026-05-31) — and why the flip doesn't change any result
 
 Two distinct axes, do not conflate:
@@ -114,3 +144,22 @@ Any independent way to measure **gravity's properties without light, or light's 
 read either single identity outside their coupling — would test points 3–4 directly. If uncoupled
 gravity reads near 0.25 and uncoupled light near 1.75 (mirrors about the measured coupled 1.0), the
 conjecture is supported. Until such a measurement exists, this stays an open conjecture on the record.
+
+## Earth surface-ratio test — golden number NOT supported (1 June 2026)
+
+Dylan's lead: Earth's living skin leans fluid/time over a space anchor; surface water/land ≈ φ². TESTED:
+ocean:land surface area = 70.8:29.2 = **2.42**. φ² = 2.618 → **~8% off**, and it sits in a crowded
+neighbourhood (12/5 = 2.40 is 1% off; 5/2 = 2.50 is 3% off; eight simple fractions within 7.5%). So the
+φ² match does NOT survive a null — it's the "near some golden power" effect, not a real hit.
+
+**KEEP (structural, real):** complex/adaptable life lives in the thin **fluid-dominant time-skin**
+(atmosphere+ocean) anchored on a **dense space-lattice** body — an engine sitting at the blend (enough
+time-flow to move/adapt, enough space underneath to stay stable). This is true regardless of the number.
+Also a rung lesson: measure OUR layer (the biosphere skin), not the whole planet (mantle/core = a different,
+space-dominated rung).
+
+**DROP (do not re-import as fact):** "Earth surface = φ²" / "= φ". The static area ratio is ~2.4, closer to
+simple fractions than to any golden power. If a φ lives in Earth it would be in a *dynamic* measure
+(a frequency, a duty cycle, a depth/volume ratio of the active layer) — untested, only chase with a null.
+Honest-broker note: this is the 3rd loose Earth golden-number (70/30≠φ, surface≠φ²); the qualitative
+space/time-skin picture is the durable part.

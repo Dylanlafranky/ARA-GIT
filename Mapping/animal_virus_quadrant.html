@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Animal–Virus two-knob quadrant</title>
+<style>
+ html,body{margin:0;background:#0a0e16;color:#cdd6e0;font-family:system-ui,Segoe UI,Arial,sans-serif}
+ .wrap{max-width:1000px;margin:0 auto;padding:16px}
+ h1{font-size:17px;color:#f0c878;margin:4px 0} .muted{opacity:.72;font-size:12.5px;line-height:1.6}
+ canvas{background:rgba(12,18,28,.5);border:1px solid #2a3a52;border-radius:10px;margin-top:10px}
+ .leg{font-size:11.5px;opacity:.8;margin-top:8px} .sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 12px;vertical-align:middle}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script></head>
+<body><div class="wrap">
+<h1>The space↔time quadrant — virus to whale</h1>
+<div class="muted">Each dot = one organism placed by its <b>whole-life</b> wave. <b>X = TIME knob</b> (log life-pace, 1/lifecycle — right = faster). <b>Y = SPACE knob</b> (log body mass — up = more structure/lattice). Dot brightness = adaptation rate (log substitutions/site/yr; brighter = faster-evolving). Real published values (order-of-magnitude); axes are mass &amp; life-pace — ARA per species is <i>not</i> fabricated.</div>
+<canvas id="q" height="520"></canvas>
+<div class="leg" id="leg"></div>
+<div class="muted" style="margin-top:10px"><b>What to look for:</b> the dots fall on a tight anti-diagonal (mass↔pace corr −0.95) — the trade-off. <b>Time corner</b> (bottom-right, small+fast): viruses, microbes, insects — brightest = fastest-adapting. <b>Space corner</b> (top-left, big+slow): whale, elephant, oak, tortoise — dim = slow-adapting. Note: this is the mass×pace frame; your “(1.0,1.0) balance” prediction lives on the separate ARA×complexity frame we haven’t numbered yet.</div>
+</div>
+<script>
+const pts=[{"x": -4.334, "y": -19.0, "evo": -2.4, "n": "Influenza(RNA virus)", "k": "virus", "s": "burst", "c": "#ff6b6b"}, {"x": -4.937, "y": -19.0, "evo": -2.3, "n": "HIV(RNA virus)", "k": "virus", "s": "sustained", "c": "#ff6b6b"}, {"x": -3.255, "y": -19.0, "evo": -2.7, "n": "Bacteriophage", "k": "virus", "s": "burst", "c": "#ff6b6b"}, {"x": -3.079, "y": -15.0, "evo": -8.3, "n": "E.coli(bacterium)", "k": "microbe", "s": "sustained", "c": "#ffa94d"}, {"x": -3.732, "y": -13.301, "evo": -8.52, "n": "Yeast(cell)", "k": "microbe", "s": "sustained", "c": "#ffa94d"}, {"x": -4.937, "y": -11.523, "evo": -9.0, "n": "Human somatic cell", "k": "microbe", "s": "sustained", "c": "#ffa94d"}, {"x": -7.8, "y": -2.699, "evo": -8.4, "n": "Etruscan shrew", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.101, "y": -2.398, "evo": -8.4, "n": "Hummingbird", "k": "bird", "s": "burst", "c": "#74c0fc"}, {"x": -7.976, "y": -1.699, "evo": -8.4, "n": "Mouse", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.043, "y": -0.523, "evo": -8.46, "n": "Rat", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.453, "y": 0.301, "evo": -8.52, "n": "Rabbit", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.675, "y": 0.602, "evo": -8.52, "n": "Cat", "k": "mammal", "s": "burst", "c": "#5aa0ff"}, {"x": -8.613, "y": 1.301, "evo": -8.52, "n": "Dog", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -9.374, "y": 1.845, "evo": -8.7, "n": "Human", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.946, "y": 2.699, "evo": -8.7, "n": "Horse", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -9.312, "y": 3.699, "evo": -8.82, "n": "Elephant", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -9.429, "y": 5.079, "evo": -8.92, "n": "Blue whale", "k": "mammal", "s": "sustained", "c": "#5aa0ff"}, {"x": -8.402, "y": -1.301, "evo": -8.92, "n": "Green lizard", "k": "reptile", "s": "burst", "c": "#69db7c"}, {"x": -9.675, "y": 2.301, "evo": -9.0, "n": "Galapagos tortoise", "k": "reptile", "s": "sustained", "c": "#69db7c"}, {"x": -9.344, "y": 2.602, "evo": -9.0, "n": "Crocodile", "k": "reptile", "s": "burst", "c": "#69db7c"}, {"x": -8.675, "y": 2.301, "evo": -8.82, "n": "Saltwater fish(tuna)", "k": "fish", "s": "burst", "c": "#3bc9db"}, {"x": -6.703, "y": -6.0, "evo": -7.82, "n": "Fruit fly", "k": "insect", "s": "burst", "c": "#ffd43b"}, {"x": -6.897, "y": -7.0, "evo": -8.0, "n": "Copepod(plankton)", "k": "invertebrate", "s": "sustained", "c": "#da77f2"}, {"x": -6.8, "y": -9.0, "evo": -8.0, "n": "Tardigrade", "k": "invertebrate", "s": "burst", "c": "#da77f2"}, {"x": -7.499, "y": 0.301, "evo": -8.82, "n": "Jellyfish", "k": "invertebrate", "s": "sustained", "c": "#da77f2"}, {"x": -7.198, "y": -4.0, "evo": -8.0, "n": "Honeybee", "k": "insect", "s": "burst", "c": "#ffd43b"}, {"x": -9.976, "y": 4.0, "evo": -9.1, "n": "Oak tree", "k": "plant", "s": "sustained", "c": "#82c91e"}];
+const byk={}; pts.forEach(p=>{(byk[p.k]=byk[p.k]||[]).push(p)});
+const sets=Object.keys(byk).map(k=>({label:k,data:byk[k].map(p=>({x:p.x,y:p.y,n:p.n,evo:p.evo,s:p.s})),
+  backgroundColor:byk[k][0].c,pointStyle:byk[k].map(p=>p.s==='burst'?'triangle':'circle'),
+  pointRadius:7,pointHoverRadius:10,borderColor:'#0a0e16',borderWidth:1}));
+new Chart(document.getElementById('q'),{type:'scatter',data:{datasets:sets},
+ options:{responsive:true,plugins:{legend:{labels:{color:'#cdd6e0',usePointStyle:true,font:{size:11}}},
+   tooltip:{callbacks:{label:c=>`${c.raw.n} [${c.dataset.label}/${c.raw.s}]  time=${c.raw.x}  space=${c.raw.y}  adapt=${c.raw.evo}`}}},
+   scales:{x:{title:{display:true,text:'◀ slower    TIME knob  (log life-pace)    faster ▶',color:'#9 db'},ticks:{color:'#7c8aa0'},grid:{color:'#1a2434'}},
+           y:{title:{display:true,text:'◀ less structure    SPACE knob (log mass)    more ▶',color:'#9db'},ticks:{color:'#7c8aa0'},grid:{color:'#1a2434'}}}}});
+document.getElementById('leg').innerHTML='△ = burst strategy &nbsp; ● = sustained &nbsp; | &nbsp;'+
+ Object.entries({virus:'#ff6b6b',microbe:'#ffa94d',insect:'#ffd43b',invertebrate:'#da77f2',fish:'#3bc9db',reptile:'#69db7c',mammal:'#5aa0ff',bird:'#74c0fc',plant:'#82c91e'})
+ .map(([k,c])=>`<span class="sw" style="background:${c}"></span>${k}`).join('');
+</script></body></html>

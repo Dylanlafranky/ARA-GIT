@@ -1,0 +1,352 @@
+{
+  "test": "historical intermediate-disturbance then later-deposit ENSO route signature",
+  "status": "descriptive proxy test; not a predictor and not causal proof",
+  "strict_causal_checklist": {
+    "leaf_marker": "existing causal harmonic marker from NINO values at or before origin",
+    "event_rule": "local causal leaf-marker peaks after fixed marker warmup",
+    "frozen_windows": {
+      "candidate_intermediate_orientation_disturbance_months": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "candidate_later_same_spin_deposit_proxy_months": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    "wwv_history_baseline": "training-only AR using prior WWV values at lags 1,2,3,6",
+    "matched_controls": "same-era ordinary origins matched by calendar month then prior raw WWV battery level",
+    "future_outcomes": "used only after event and control origins are declared",
+    "smoothing": false,
+    "fft_or_hilbert": false,
+    "synthetic_energy_injection": false,
+    "formula_modified": false,
+    "january_2024_outcome_used": false
+  },
+  "measurement_limits": {
+    "direct_lower_lower_same_spin_coordinate_available": false,
+    "intermediate_proxy": "12-18m WWV east-west orientation disturbance",
+    "later_deposit_proxy": "30-34m WWV battery disturbance",
+    "wwv_is_energy_joules": false,
+    "ratio_meaning": "relative native WWV volume motion per month, not an energy fraction"
+  },
+  "data": {
+    "overlapping_months": 544,
+    "training_cutoff_index": 326,
+    "completed_leaf_peak_event_n": 7,
+    "matched_control_n": 7,
+    "excluded_prospective_event": "2024-01"
+  },
+  "summary": {
+    "event_n": 7,
+    "matched_control_n": 7,
+    "paired_early_orientation_disturbance": {
+      "pair_n": 7,
+      "event_mean": 0.4316014664106641,
+      "matched_control_mean": 0.4393581229877354,
+      "event_minus_control": -0.007756656577071237,
+      "event_greater_than_control_fraction": 0.5714285714285714
+    },
+    "paired_early_native_battery_motion": {
+      "pair_n": 7,
+      "event_mean": 0.3342136291836734,
+      "matched_control_mean": 0.33526646436734703,
+      "event_minus_control": -0.0010528351836734911,
+      "event_greater_than_control_fraction": 0.42857142857142855
+    },
+    "paired_late_candidate_deposit": {
+      "pair_n": 7,
+      "event_mean": 0.11931768310825842,
+      "matched_control_mean": 0.11070994602107417,
+      "event_minus_control": 0.008607737087184273,
+      "event_greater_than_control_fraction": 0.5714285714285714
+    },
+    "paired_late_native_battery_motion": {
+      "pair_n": 7,
+      "event_mean": 0.3729342956571428,
+      "matched_control_mean": 0.3655431297142858,
+      "event_minus_control": 0.007391165942857083,
+      "event_greater_than_control_fraction": 0.5714285714285714
+    },
+    "early_disturbance_to_late_deposit_corr": -0.3800026155324201,
+    "leaf_size_to_early_disturbance_corr": 0.4109266395259926,
+    "leaf_size_to_late_deposit_corr": -0.4176758668068373,
+    "early_signed_orientation_motion": {
+      "mean": -0.28668138428571416,
+      "positive_fraction": 0.2857142857142857,
+      "negative_fraction": 0.7142857142857143,
+      "note": "mixed sign would mean the monthly proxy does not isolate one stable observed polarity"
+    },
+    "late_to_early_native_battery_motion_ratio": {
+      "event_mean": 1.2509474787419015,
+      "matched_control_mean": 1.136728179903711,
+      "event_fraction_below_one": 0.2857142857142857,
+      "interpretation": "below one means later per-month WWV battery motion is smaller than earlier per-month WWV battery motion"
+    },
+    "paired_sequence_hit_fraction": 0.2857142857142857
+  },
+  "events": [
+    {
+      "origin_index": 197,
+      "origin_month": "199606",
+      "split": "train",
+      "leaf_marker_size": 0.08791285080931507,
+      "prior_native_wwv_battery": 0.28439329999999996,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 5.687667600000002,
+        "signed_native_orientation_motion": 5.210574,
+        "mean_abs_orientation_abnormality": 0.5917425496208326,
+        "mean_abs_native_battery_motion": 0.6635236571428571
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.0787290711918598,
+        "mean_abs_native_battery_motion": 0.47609051999999996
+      },
+      "late_to_early_native_battery_motion_ratio": 0.7175185313663915
+    },
+    {
+      "origin_index": 235,
+      "origin_month": "199908",
+      "split": "train",
+      "leaf_marker_size": 0.058809107310915924,
+      "prior_native_wwv_battery": -0.765543,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 2.384497900000001,
+        "signed_native_orientation_motion": -1.2917684999999999,
+        "mean_abs_orientation_abnormality": 0.33160904354873494,
+        "mean_abs_native_battery_motion": 0.23988041428571433
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.10152667526977548,
+        "mean_abs_native_battery_motion": 0.32071889760000005
+      },
+      "late_to_early_native_battery_motion_ratio": 1.3369949295568644
+    },
+    {
+      "origin_index": 289,
+      "origin_month": "200402",
+      "split": "train",
+      "leaf_marker_size": 0.059746853699845746,
+      "prior_native_wwv_battery": 0.18159519999999998,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 3.2007819800000004,
+        "signed_native_orientation_motion": -1.1873585000000002,
+        "mean_abs_orientation_abnormality": 0.4321284151906647,
+        "mean_abs_native_battery_motion": 0.22311498571428576
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.11825198900093711,
+        "mean_abs_native_battery_motion": 0.27604767999999996
+      },
+      "late_to_early_native_battery_motion_ratio": 1.2372440117200294
+    },
+    {
+      "origin_index": 335,
+      "origin_month": "200712",
+      "split": "heldout",
+      "leaf_marker_size": 0.04350465261789617,
+      "prior_native_wwv_battery": -0.43998700000000013,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 6.282665899999999,
+        "signed_native_orientation_motion": 1.0998001000000002,
+        "mean_abs_orientation_abnormality": 0.5502490771016829,
+        "mean_abs_native_battery_motion": 0.3113835285714286
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.05257177848905672,
+        "mean_abs_native_battery_motion": 0.1624541600000001
+      },
+      "late_to_early_native_battery_motion_ratio": 0.5217172557113424
+    },
+    {
+      "origin_index": 380,
+      "origin_month": "201109",
+      "split": "heldout",
+      "leaf_marker_size": 0.05322257651210768,
+      "prior_native_wwv_battery": 0.48529979999999995,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 4.8999589,
+        "signed_native_orientation_motion": -1.1563561,
+        "mean_abs_orientation_abnormality": 0.5551705912326584,
+        "mean_abs_native_battery_motion": 0.21033604285714283
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.16982268067075518,
+        "mean_abs_native_battery_motion": 0.48053551999999994
+      },
+      "late_to_early_native_battery_motion_ratio": 2.284608541040076
+    },
+    {
+      "origin_index": 425,
+      "origin_month": "201506",
+      "split": "heldout",
+      "leaf_marker_size": 0.051946333327000195,
+      "prior_native_wwv_battery": 1.2540765999999999,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 3.1926791999999997,
+        "signed_native_orientation_motion": -2.5563203999999997,
+        "mean_abs_orientation_abnormality": 0.2208832689262777,
+        "mean_abs_native_battery_motion": 0.3919468771428572
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.1323101684226345,
+        "mean_abs_native_battery_motion": 0.41871326
+      },
+      "late_to_early_native_battery_motion_ratio": 1.0682908435251723
+    },
+    {
+      "origin_index": 473,
+      "origin_month": "201906",
+      "split": "heldout",
+      "leaf_marker_size": 0.0370085243989067,
+      "prior_native_wwv_battery": -0.4047805,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 3.20254629,
+        "signed_native_orientation_motion": -2.12534029,
+        "mean_abs_orientation_abnormality": 0.33942731925379777,
+        "mean_abs_native_battery_motion": 0.2993098985714285
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.18201141871279036,
+        "mean_abs_native_battery_motion": 0.475980032
+      },
+      "late_to_early_native_battery_motion_ratio": 1.5902582382734338
+    }
+  ],
+  "matched_controls": [
+    {
+      "origin_index": 257,
+      "origin_month": "200106",
+      "split": "train",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": 0.1759366,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 4.043421626000001,
+        "signed_native_orientation_motion": 2.6942276259999995,
+        "mean_abs_orientation_abnormality": 0.4350895470785778,
+        "mean_abs_native_battery_motion": 0.5157143562857144
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.10141442039657655,
+        "mean_abs_native_battery_motion": 0.32928976800000004
+      },
+      "late_to_early_native_battery_motion_ratio": 0.6385119281371489
+    },
+    {
+      "origin_index": 307,
+      "origin_month": "200508",
+      "split": "train",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": 0.30504598,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 6.23903824,
+        "signed_native_orientation_motion": -0.6266198999999997,
+        "mean_abs_orientation_abnormality": 0.6120497606187101,
+        "mean_abs_native_battery_motion": 0.43427567142857143
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.17791962313371396,
+        "mean_abs_native_battery_motion": 0.55077118
+      },
+      "late_to_early_native_battery_motion_ratio": 1.2682524401797846
+    },
+    {
+      "origin_index": 313,
+      "origin_month": "200602",
+      "split": "train",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": 0.12061800000000011,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 3.3599056999999997,
+        "signed_native_orientation_motion": -2.1690099,
+        "mean_abs_orientation_abnormality": 0.32445691045836156,
+        "mean_abs_native_battery_motion": 0.24233584285714288
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.09559861403512422,
+        "mean_abs_native_battery_motion": 0.42266785999999995
+      },
+      "late_to_early_native_battery_motion_ratio": 1.744140920372076
+    },
+    {
+      "origin_index": 347,
+      "origin_month": "200812",
+      "split": "heldout",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": -0.3176095,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 4.322698559999999,
+        "signed_native_orientation_motion": -2.50060184,
+        "mean_abs_orientation_abnormality": 0.36171030662784587,
+        "mean_abs_native_battery_motion": 0.38910745142857145
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.09635821447285343,
+        "mean_abs_native_battery_motion": 0.46366858000000005
+      },
+      "late_to_early_native_battery_motion_ratio": 1.1916209219270524
+    },
+    {
+      "origin_index": 500,
+      "origin_month": "202109",
+      "split": "heldout",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": 0.3330841,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 4.1558989,
+        "signed_native_orientation_motion": 1.0083159000000004,
+        "mean_abs_orientation_abnormality": 0.3839277020083883,
+        "mean_abs_native_battery_motion": 0.2603332714285715
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.13570771466347634,
+        "mean_abs_native_battery_motion": 0.33771026
+      },
+      "late_to_early_native_battery_motion_ratio": 1.2972228180701777
+    },
+    {
+      "origin_index": 413,
+      "origin_month": "201406",
+      "split": "heldout",
+      "leaf_marker_size": 0.0,
+      "prior_native_wwv_battery": 1.3295186,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 2.7001982,
+        "signed_native_orientation_motion": 1.1300065999999998,
+        "mean_abs_orientation_abnormality": 0.3691542955129064,
+        "mean_abs_native_battery_motion": 0.2674679428571428
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.05462120027661086,
+        "mean_abs_native_battery_motion": 0.20471178000000007
+      },
+      "late_to_early_native_battery_motion_ratio": 0.7653694039488634
+    },
+    {
+      "origin_index": 485,
+      "origin_month": "202006",
+      "split": "heldout",
+      "leaf_marker_size": 0.022609359832082898,
+      "prior_native_wwv_battery": -0.84000769,
+      "early_intermediate_12_18m": {
+        "total_abs_native_orientation_motion": 3.9310299999999994,
+        "signed_native_orientation_motion": -3.558016,
+        "mean_abs_orientation_abnormality": 0.5891183386093577,
+        "mean_abs_native_battery_motion": 0.23763071428571428
+      },
+      "late_candidate_deposit_30_34m": {
+        "mean_abs_battery_abnormality": 0.11334983516916389,
+        "mean_abs_native_battery_motion": 0.2499824800000002
+      },
+      "late_to_early_native_battery_motion_ratio": 1.0519788266908747
+    }
+  ]
+}

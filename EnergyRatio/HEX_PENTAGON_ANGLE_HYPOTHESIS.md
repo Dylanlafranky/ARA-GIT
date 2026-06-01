@@ -38,6 +38,29 @@ is still a clean framing, and because honest negatives are part of the value.
 > polyhedral angles) tested → not supported on this evidence. Curiosities kept: a golden star on 72°
 > (pentagon), a loose cluster near the icosahedral 63.4°. Script: `/tmp/poly_test.py`.
 
+## Side-note — both polygons appear in the 3D lattice viewer (1 June 2026)
+
+Dylan, looking at `3D models/ara_lattice_3d.html` (ARA≈1.75, spacing≈3, ~30 cells, handover≈17): from
+below at ~36° he sees a **pentagon**; from the opposite side a **hexagon**. Checked the build:
+
+- **Hexagon = the stacking.** Cells sit on a cube/integer grid; any cubic grid viewed corner-on (111
+  body-diagonal) lines up into a hexagon (close-packing 6-fold) = the **octave/rational/space** pole.
+- **Pentagon = the cell.** A repeating lattice can't show 5-fold (crystallographically forbidden), so the
+  pentagon isn't the arrangement — it's the **icosahedral cell**, which is the canonical **φ-solid**
+  (vertices built from φ); down its 5-fold axis it shows a pentagon = the **φ/time** pole.
+
+Dylan's reframe (fair): not two arbitrary choices — the foundation bakes in BOTH the octave (×2) and φ
+(36° shear = 2cos36°), so hexagon and pentagon are the two foundational ingredients each casting a shadow.
+Caveat: φ is genuinely *in* the foundation, but it shows as a *literal* pentagon only because the unit is
+drawn as the φ-solid (a sphere cell would carry φ in its shear but draw no pentagon).
+
+**Three readings, undecided (logged either way):** (1) *happy accident* — icosahedron picked for looks,
+happens to be the φ-solid; (2) *a more fundamental rule* — a faithful 3D ARA unit IS a φ-solid, so the
+pentagon is forced, as the octave stacking forces the hexagon; (2.5) clean diagnostic not yet run: swap
+cell → sphere; pentagon should vanish, hexagon stay; (3) *pattern-matching/pareidolia* — a faceted blob
+field invites the eye to find polygons. NOT a confirmed prediction. See memory
+`project_lattice_pentagon_hexagon.md`.
+
 ## The claim
 
 When a real signal is split into octave rungs and you measure the **phase at which one rung locks to
@@ -108,6 +131,58 @@ definitional, so a "surface" on 4 such points would over-fit. **Proper test:** m
 with ARA, gate-angle, and loss measured *as independently as possible*; check whether they collapse onto
 a 2-D surface (constrained trade-off → triangle real) or fill 3-D (independent → no triangle). Falsify =
 3-D scatter / no constraint. **Status: OPEN — logged for a future wider-dataset test.**
+
+### Why it's a triangle, not three knobs — the gate *makes its own ARA* (Dylan, 31 May 2026)
+
+The three corners aren't independent because **they are the three parts of one A–R–A engine, one level
+up.** The picture: the **Space octave pipe** pours into the **Time octave pipe** *at an angle*, and that
+junction is itself an oscillator with its own ARA:
+
+| triangle corner | role in the engine | A–R–A part |
+|---|---|---|
+| **Energy system 1** = the Space octave pipe | accumulator (builds, stores) | **A**ccumulate |
+| **Gate / control / clock** = the coupling angle | the hand-over where the two pipes meet | **R**elate |
+| **Energy system 2** = the Time octave pipe | releaser (expends into the next frame) | **A**ccumulate (its own) |
+
+Because the second pipe receives the first's flow **at an angle**, the hand-off is asymmetric — build on
+one side, release on the other — so **the coupling itself has an accumulation/release ratio: it makes a
+new ARA.** This is ARA being *fractal*: every gate between two pipes is a little engine with its own
+number, and that number is what the triangle's corners trade against each other. So:
+
+- **ARA** = the water that gets through (the junction engine's own ratio)
+- **Angle** = the gate tilt (how time-favoured the pour is)
+- **Loss / R21** = the spill into the time pipe (transfer from time's side; "loss" only from our frame)
+
+That's *why* they should lie on a 2-D surface rather than filling a 3-D cloud — they'd not be three free
+parameters, but the build / relate / release of a single engine, which by definition trade off.
+Same "two energy systems joined by a gate = always-three" structure that recurs at every scale. Ties to
+[[framework-next-rung-is-blend]] (next rung = the two below it blended) and the BEESWAX (π−3)/π gate.
+
+### TEST RESULT — surface NOT supported (31 May 2026)
+
+Ran the clean test Dylan asked for: 11 distinct real oscillators (ENSO, SOI, sunspots, QBO30/50, MJO,
+WWV W/E, 3 heart-RR records) with the three corners measured by **three genuinely independent
+operations** — ARA = rise/fall asymmetry of the fundamental cycle (time-domain), Angle = octave 1:2
+Hilbert lock phase (phase-domain), Loss = 1 − cycle-ago envelope recycling (memory-domain). Standardized,
+then PCA + a shuffle null (independently permute each column → fills 3-D).
+
+**Verdict: the three fill 3-D like independent noise — no 2-D surface.** 3rd-PC variance fraction = 0.166
+vs null mean 0.173 (**p(surface) = 0.46**); plane fit loss~ARA+angle **R² = 0.25**. The clean strong-lock
+subset (PLV≥0.40, n=7) was *worse*: 3rd-PC 0.209 vs null 0.128 (**p = 0.87**), R² = 0.15. Pairwise:
+ARA–angle +0.01, **ARA–loss +0.50**, angle–loss **−0.06**.
+
+**The +0.93 angle↔loss edge collapsed to −0.06.** This confirms the caveat flagged when it was first seen:
+on the 4 golden stars, "angle" (φ21 phase) and "loss" (R21 amplitude) were two Fourier readouts of the
+*same* 2nd harmonic — so the +0.93 was definitional, not a physical trade-off. Once angle and loss are
+measured by independent operations the link is gone.
+
+**What survives:** one modest real edge, **ARA ↔ Loss = +0.50** — more asymmetric build/release goes with
+leakier (less self-reproducing) cycles, which is physically sensible. But one edge is not a constraint
+surface. So the "iron triangle / engine-one-level-up" picture is **elegant but not borne out**: across
+heterogeneous real systems these three measured quantities are closer to *independent* than constrained.
+The conceptual framing (gate between two pipes makes its own ARA) stays a clean idea; it just does not
+show up as a 2-D collapse in these three measurables. Script: `/tmp/triangle_test.py`, `/tmp` PCA inline.
+Honest negative — logged per strict-causal protocol.
 
 See `MASTER_PREDICTION_LEDGER.md` (HEXPENT row), memory `project_hex_pentagon_angle.md`,
 `ARA_REDERIVED_PRINCIPLES.md` (φ = 2cos36° / pentagon), and the bee-hexagon foil note.

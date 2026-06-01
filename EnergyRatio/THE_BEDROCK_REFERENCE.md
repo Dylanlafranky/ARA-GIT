@@ -12,13 +12,103 @@ At the foundation, treat the handoff between the two poles as:
 - **Space pole = 2** — the uncompressed octave potential (the "full packet").
 - **Time pole = φ ≈ 1.618** — what survives the compression into the next frame (the part
   that transfers, carries identity forward).
-- **Intrinsic loss = 2 − φ = 1/φ² = 0.381966…** — the fraction shed in a *perfect* handoff.
-  This is the floor: even the ideal, leanest transfer loses this much. Real, off-ideal
-  transfers lose *more*.
+- **One-pass bedrock shed = 2 − φ = 1/φ² = 0.381966…** — the posited fraction
+  diverted during an idealized *single handoff before recycling is counted*.
+  This is a landmark for reading efficiency, not a universal observed loss constant.
+  A real system may recycle some of the diverted energy into later passes, or add
+  system-specific inefficiencies, so its measured net loss can sit below or above it.
 
-Read it as the lossless-limit reference: φ is the best any system can do at carrying itself
-into the next cycle; 2−φ is the unavoidable rent. A system sitting *at* φ is at the bedrock
-(minimum loss); a system at a rational ratio sits *above* the floor (more loss).
+Read it as a one-pass reference: φ is the candidate efficient handoff geometry and
+`2−φ` marks its first-pass shed. The observed system-level loss is a different quantity:
+it depends on recycling and any additional inefficiency in the actual system.
+
+### Superseded shortcut: same-junction recycling
+
+Let:
+
+```text
+B   = 2 - φ                     # one-pass bedrock shed landmark
+rho = recycled fraction of the shed energy returned for another pass
+```
+
+An initial shortcut assumed that diverted energy encountered the same handoff repeatedly.
+That gave the geometric-series candidate:
+
+```text
+effective_loss = B * (1 - rho) / (1 - rho * B)
+```
+
+This was a **shortcut equation to test**, not an established law. It has the intended
+boundary behavior:
+
+- `rho = 0` → `effective_loss = B`: one pass, no recycling.
+- `rho → 1` → `effective_loss → 0`: increasingly effective recycling.
+- additional turbulence or system-specific inefficiency may raise measured loss above
+  the idealized curve.
+
+It still illustrates one important point: a recycler can measure below `2−φ` without
+invalidating `2−φ` as the one-pass landmark.
+
+### Corrected architecture: recycling through lower rungs
+
+The shortcut above is mechanically incomplete. The framework claim is not primarily
+same-junction recirculation:
+
+1. A Space pipe of width `2` attempts to hand flow into a Time pipe of width `φ`.
+2. The width mismatch is `G = 2−φ`.
+3. Some diverted energy is irrecoverably lost, depending on the real system.
+4. Some falls into one or more smaller, faster systems below.
+5. Relative to the lower system's capacity, the falling packet is energy-dense.
+6. The lower systems process it and some works upward again after a delay.
+7. A two-rung-down route may be required when same-spin matching matters.
+
+This needs a cross-rung reservoir model rather than one scalar `rho`. Full working
+equations and the next test design are recorded in:
+
+```text
+EnergyRatio/ARA_CROSS_RUNG_RECYCLING_MODEL.md
+```
+
+Keep the axis readings distinct without inventing two unrelated ladders:
+
+```text
+intrinsic octave ladder: x2, x4, x8, ...
+Space-axis reading:      2
+Time-axis reading:       2 cos(36 deg) = phi
+```
+
+The gap appears where one octave read head-on hands flow into the same octave
+read through the framework's proposed `36 degree` Time-axis shear. The identity
+`phi = 2 cos(36 deg)` is exact mathematics; the physical shear interpretation
+remains a conjecture.
+
+For multiple Time stages, distinguish a one-off projection from recursive
+handoff:
+
+```text
+4 cos(36 deg) != phi^2
+(2 cos(36 deg))^2 = phi^2
+```
+
+Using `phi^n` means the shear is applied again at each handoff. That recursive
+step is part of the framework conjecture, not implied by the single identity.
+
+### First predictor ablation of the recycling refinement
+
+The candidate equation was tested as a strict-causal future-pose ablation on Solar,
+ENSO, and ECG data:
+
+```text
+TheFormula/Claude4.8/ara_recycling_landmark_ablation.py
+```
+
+Result: interpreting local trailing cycle-correlation directly as `rho` did **not**
+improve the direct future-pose forecast. It was nearly neutral at short horizons and
+usually worse on longer paths. Keep the one-pass landmark and keep testing recycling,
+but do not inject this specific same-junction proxy-to-`rho` shortcut into the main
+predictor. The failure is informative: the hierarchy cannot be compressed into one
+local autocorrelation knob. Trailing autocorrelation and returned shed-energy fraction
+may be related without being numerically identical, and the return path itself matters.
 
 ## Why this is a reference, not a claim
 
@@ -93,8 +183,8 @@ across systems (solar recycles, ENSO/heart don't) AND within stars (golden lose 
 Cepheid loses 0.31). Prediction confirmed: pulsating stars are *all* flywheels (floor 0.8–0.96) vs
 incoherent ENSO/heart (floor ~0).
 
-**What does NOT hold (honest):** 2−φ is **not** a universal loss floor. Golden stars beat it ~10× (loss
-0.02–0.05 ≪ 0.382); solar and the Cepheid land *near* it (0.37, 0.31); ENSO/heart sit far above at
+**What does NOT hold (honest):** 2−φ is **not** a universal observed-loss constant. Golden stars sit below it ~10× (loss
+0.02−0.05 ≪ 0.382); solar and the Cepheid land *near* it (0.37, 0.31); ENSO/heart sit far above at
 their dominant period. So 2−φ stays a **reference**, not a constant every recycler hits — systems
 scatter widely around it, exactly as a reference frame should be used. Caveats: per-cycle-loss metric
 saturates for ultra-coherent signals (stars), so star losses are upper-bounds; n is small; one true
