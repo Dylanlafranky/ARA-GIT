@@ -38,6 +38,74 @@ is still a clean framing, and because honest negatives are part of the value.
 > polyhedral angles) tested → not supported on this evidence. Curiosities kept: a golden star on 72°
 > (pentagon), a loose cluster near the icosahedral 63.4°. Script: `/tmp/poly_test.py`.
 
+## Triangle-assembly: hexagon vs pentagon = ONE lost triangle = the shed = curvature into the next dimension (1 June 2026)
+
+This is the cleanest geometric grounding of the hexagon↔pentagon split — and it's hard geometry (real
+theorems), with the framework reading sitting honestly on top.
+
+Polygons are built from equilateral triangles ("pyramids") meeting at a vertex:
+
+| triangles at a vertex | total angle | angular defect | result |
+|---|---|---|---|
+| **6** | 360° | **0°** | FLAT — tiles the plane — **hexagon = SPACE / rational** |
+| **5** | 300° | **60°** | CURVES into 3D — **icosahedral vertex = pentagon = TIME / golden (φ)** |
+| 4 | 240° | 120° | curves harder (octahedral) |
+
+**The difference between space's hexagon and time's pentagon is exactly ONE triangle (60°).** And that one
+lost triangle is the *same object* as three things treated separately elsewhere:
+- the **shed / the lost edge** (the 6→5 connection that doesn't carry across the space→time exchange),
+- the **curvature** — removing the triangle is literally what *bends* the flat sheet,
+- the **dimension-climb** — the 60° angular deficit IS the bend into the next dimension, which is why
+  5-fold is "frustrated in 3D and resolves up a dimension" (the icosahedron → 600-cell, see
+  `3D models/` lattice note). Lose the triangle → open the deficit → curve up a dimension.
+
+So **space → time = remove one triangle = open a 60° deficit = curve into the next dimension.** The shed and
+the dimension-climb are one geometric act, not two ideas.
+
+**Descartes' angular-defect theorem** makes it exact: the total angular defect over any convex polyhedron =
+720°. The **icosahedron — the φ-solid — is 12 vertices × 60° = 720°** (every vertex is a 5-triangle /
+pentagon vertex). So the golden/time solid is built from twelve "lost-triangle" curvatures; a flat hexagonal
+tiling has zero defect. Time/φ = curvature; space/rational = flatness.
+
+**Honest fences:** the triangle counts, the 60° deficit, and Descartes' 720° are **hard geometry, not
+interpretation.** "Flat = space / curved = time" is the framework reading laid on top (consistent with the
+whole framework, but not proven by the angles alone). **Open:** the ARA⁹ link — 9 = 3×3 couplings is the
+framework's coupling count, but the bridge from "9 couplings" to "6-vs-5 triangles" is not yet pinned.
+
+**Related edge result (same session):** the singularity walls at 0.25/1.75, drawn as two rings on the ARA
+sphere (connect 0.25→0.25, 1.75→1.75), cut the sphere's *surface* into exactly **3/4 band : 1/4 caps** by
+Archimedes' hat-box theorem — exact only because it's a sphere (a flat disk gives a messy 0.856/0.144). So
+the wall name ("3/4 displacement limit") and the wall geometry are the same number, and the sphere is the
+shape that makes 0.25/1.75 clean. A single-axis cut yields only a band/circle (fractal continuation), not a
+polygon — the polygons live in the triangle-assembly/coupling region above, not in the wall-cut.
+
+## REAL-MATTER REALIZATION — carbon cages / fullerenes / viral capsids (1 June 2026)
+
+The triangle-assembly picture above shows up in real structural chemistry — this is the cleanest physical
+realization, and it's hard fact (Euler's theorem), not analogy. Dylan's framing: the polygons emerge in the
+**coupling** (bonds/triangles assembling), not in a node's identity — so the right test subject is carbon
+cages, not e.g. DNA bases (whose rings are fixed identities).
+
+Build any closed cage from pentagons (P) + hexagons (H) with **3 bonds per vertex** (carbon sp² trigonal
+coupling). Euler (V−E+F=2) forces **P = 12 exactly, independent of H**:
+- **Graphene:** P=0, H=∞ → FLAT sheet, zero curvature = pure **space / 2D**.
+- **C60 buckyball:** 12 pentagons + 20 hexagons → truncated icosahedron (closes to 3D).
+- **Nanotube:** hexagon tube + 6 pentagons/cap = 12.
+- **Viral capsid:** icosahedral, **12 pentamers** + hexamers (Caspar–Klug).
+
+**12 pentagons × 60° angular defect = 720° = Descartes' total** — the exact curvature dose to close a flat
+hexagon sheet into a sphere. So: **flat hexagons = space; the 12 pentagons = the curvature that lifts it into
+3D = time/closure.** This is the SAME 720° derived from the icosahedron in the triangle-assembly section,
+now realized in real bonded matter.
+
+**Honest fences:** Euler, the 12-pentagon rule, fullerenes, Caspar–Klug = hard fact. "Hexagon=space /
+pentagon=time-curvature" is the framework reading on top — *realized in* real matter (like lipogenesis was),
+not number-fitting. Time-pole tie (viruses wearing the 12-pentagon icosahedral shell) is consistent, held
+lightly, not proven. Note on DNA/RNA (the wrong-level attempt): nucleic acids physically contain hexagons
+(pyrimidines) + pentagons (sugars / purine 5-ring), but DNA→RNA is NOT a hex→pent shift — same rings; the
+difference is one 2′-OH (RNA, the time-like/transient/messenger molecule, has the EXTRA group). DNA=storage/
+space vs RNA=transfer/time is the defensible reading, set by the 2′-OH, not by ring shape.
+
 ## Side-note — both polygons appear in the 3D lattice viewer (1 June 2026)
 
 Dylan, looking at `3D models/ara_lattice_3d.html` (ARA≈1.75, spacing≈3, ~30 cells, handover≈17): from

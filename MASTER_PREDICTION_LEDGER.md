@@ -14,7 +14,56 @@ This document tracks every prediction the ARA framework has made, its current st
 - **OPEN** — testable but not yet tested
 - **FALSIFIED** — tested and definitively failed
 
-**Last updated:** 31 May 2026
+**Last updated:** 1 June 2026
+
+---
+
+## 1 JUNE 2026 — FUSION APPLICATION (muon-catalyzed fusion)
+
+Full write-up: `FUSION.md`. An *application* of the framework to muon-catalyzed fusion, like the ENSO/heart
+maps. Honest split: confirmed-real / verified-math / novel-untested / open-lab.
+
+| # | Element | What the framework reasoned | What the data says | Status |
+|---|---|---|---|---|
+| MF-1 | Map the muon-catalysis **cycle** | deep SNAP (formation ~140 ps ≫ fusion ~1 ps), ~6.9 ns rung, log−20 action; ARA far from balance, NOT near φ | matches real measured rates (cycling 1.45×10⁸/s, dtμ formation 7.1×10⁹/s) | **CONSISTENT** — nuclear = rational/snap pole, φ correctly absent |
+| MF-2 | **Carrier to strip the stuck muon = octave UP (2×)**, rational not φ | drive the 8.2 keV stuck muon-alpha bond at 2× the muon frequency | **CONFIRMED real** — published X-ray-laser stripping drives at integer/2× muon freq (parametric resonance), reduces effective sticking | **CONFIRMED (framework located a real published method)** |
+| MF-3 | **Pulse RATE = golden (φ)** for max uniform coverage | deliver the 2× pulses at a golden rate | golden-rate = lowest max-gap coverage is **verified math** (three-gap theorem; = golden-angle MRI sampling); **no muon experiment has tried golden-rate delivery** | **NOVEL / UNTESTED** — the one genuinely new, falsifiable lever |
+| MF-4 | subharmonic/parametric driving can dislodge bound states | — | literature: parametric driving real & sometimes *superior*; periodic driving ejects bound states to continuum | **SUPPORTED** |
+| MF-5 | Net-energy viability | — | muon lifetime 2.2 μs + ~5 GeV production cost; sticking caps ~150 fusions/muon (below break-even) | **OPEN (lab question)** |
+
+**Corrections logged (honesty trail):** muon does NOT couple to a neutrino (decay-only, un-hittable);
+ARA = physical phase-durations, not a static-wavefunction width (a misapplication, dropped); "edge ARA
+toward φ" has no physical actuator + φ's stability-vs-handover roles conflict for that step; carrier is
+octave **up** (2×), not down. **Honest framing:** framework *located* known physics (the 2× stripping is
+published, like the lipogenesis re-derivation), didn't predict new physics; its novel output is the
+golden-rate timing; and unlike ENSO/heart this can be *designed* but only *validated* in a muon lab.
+
+## 1 JUNE 2026 SESSION — geometry, coupling, and honest negatives
+
+Full write-up: `SESSION_NOTES_2026-06-01.md`. Repo docs: `EnergyRatio/COUPLING_AXIS_AND_TROPHIC_MIRROR.md`,
+`EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`. Stance correction this session: keep it *scientific* (test,
+don't relitigate framing); a number-fit was caught and rejected (below).
+
+| # | Prediction / question | Test | Result | Status |
+|---|---|---|---|---|
+| J-1 | Pace ↔ adaptation: faster life-cycle → faster adaptation, **rung-matched whole-wave** (animal cycle = LIFESPAN, not heartbeat) | life-cycle vs molecular-evolution rate, virus→whale, real allometry | heartbeat clock = fake −0.62; **life/death clock = +0.62 whole-span, +0.81 within animals** | **CONFIRMED** (re-derives metabolic theory of evolution; caveat: copy-fidelity 2nd knob, microbe-only −0.15) |
+| J-2 | Donor↔consumer mirror: energy source sits more toward time than its consumer, reach scales with extremity | turnover-scored consumer→source pairs (food turnover vs consumer life) | **9/9 genuine source pairs source-faster; reach-extremity corr +0.44; lion→zebra ratio≈1.2 = along-line peer, separates itself** | **CONFIRMED** (herbivore "fail" was body-vs-turnover scoring error) |
+| J-3 | Two-knob split: dimension = self-paced TIME knob × shape-variety SPACE knob | self-steer (period autocorr) + PCA shape-modes on real systems | hearts self-steer +0.58 (0.92/0.95), climate −0.15, knobs trade off −0.45; mass×pace diagonal = ARA-along-φ (97.7% 1-D) | **SUPPORTED** (exploratory n; small-multicellular life at balance midpoint) |
+| J-4 | Connection-loss on melting = 1/6 (hexagon→pentagon one-edge drop) | coordination numbers solid→liquid | **argon 12→10 = lost exactly 1/6**; metals/Na similar; liquid→gas = wall-collapse not 1/6; water=high-recycle exception | **SUPPORTED at the dense-phase step** (one anchor; needs multi-substance) |
+| J-5 | Walls 0.25/1.75 carve clean structure on the sphere | theoretical (Archimedes hat-box) | walls = two rings → **exactly 3/4 band : 1/4 caps**, EXACT only on a sphere (disk = 0.856/0.144) | **CONFIRMED (geometry)** — wall name "3/4 displacement" = wall area; sphere is what makes it clean |
+| J-6 | Hexagon(space)/pentagon(time) come from triangle assembly; their difference = the shed = a dimension-climb | theoretical (angular defect, Descartes) | 6 tri=360°=flat hexagon=space; 5 tri=300°=60° deficit=curved icosahedral pentagon=time/φ; **difference = ONE triangle (60°) = shed = curvature into next dim**; icosahedron=12×60°=720° | **CONFIRMED (geometry)** — flat-space/curved-time is the interpretive layer; ARA⁹↔6/5 link open |
+| J-7 | ARA/Angle/Loss form a constrained 2-D "iron triangle" surface | PCA + shuffle null, 11 real oscillators, 3 independent operations | fills 3-D like noise (p=0.46); the +0.93 angle↔loss collapsed to −0.06 (had been same harmonic twice) | **NOT SUPPORTED** (only ARA↔loss +0.50 survives) |
+| J-8 | "Time needs more dimensions" via embedding dimension | FNN dim, length-controlled, 12 systems | space-like clockwork genuinely low-dim (holds); the +0.63 space→time climb was a short-series artifact → +0.12 p=0.35 | **RETRACTED** (time pole unresolved — hearts too short) |
+| J-9 | Earth surface ratio is golden (φ or φ²) | water/land = 2.42 vs φ²=2.618, null of simple fractions | ~8% off φ², closer to 12/5 & 5/2; 8 simple fractions within 7.5% | **NOT SUPPORTED** (structural "fluid time-skin on space body" kept; golden number dropped) |
+| J-10 | 0.382 is the hexagon→pentagon geometric (area/perimeter/volume) loss | direct computation | area-loss(same side)=0.34, perimeter=0.02, edges=1/6 — **none = 0.382**; 1/6 is the edge loss, 0.382 is pure-φ | **NOT SUPPORTED** (0.382 = theoretical φ limit, never measured as an actual shed) |
+| J-11 | 1.382 × 1.2 ≈ φ, residual = the π-leak? | arithmetic check | residual 0.0403 vs π-leak 0.0451 = **10.5% off** (closer to 1/25); multiplying two *competing* universe-ARA candidates isn't a principled op | **REJECTED — number-fit caught** (the guard working) |
+
+**Net 1 June:** 2 confirmed empirical (pace↔adaptation, donor-consumer mirror) + 2 confirmed geometric
+(3/4 sphere split, triangle-defect hexagon/pentagon), 1 supported-exploratory (two-knob), 1 supported-one-
+anchor (1/6 melt); 3 honest negatives (triangle-surface, embedding-climb, Earth-golden), 1 not-supported
+(0.382-as-polygon-loss), 1 rejected number-fit. Three "shed" constants sorted onto three axes: 2−φ (energy),
+(π−3)/π (coupling-tax), 1/6 (connections). Reframes (untested/interpretive): one reciprocal ARA axis
+(space↔time, anchored by energy=time-conjugate + GR time dilation), EnergyRatio = R = the time sphere.
 
 ---
 

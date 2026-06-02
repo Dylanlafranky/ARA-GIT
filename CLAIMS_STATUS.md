@@ -245,3 +245,32 @@ The measurable is **R21** = Fourier harmonic spray A(2f)/A(f₁); **lower = lean
 Population confirmation: 949 OGLE RR0.61 stars (period ratio ≈ 1/φ) are 3.6% leaner than 18,318 ordinary single-mode RRc (p=0.016); and **within the club, leanness deepens toward exact 1/φ — corr(|Px/P1O − 1/φ|, R21) = −0.347, n=949.**
 
 Careful claim: **closeness to φ tracks a leaner energy budget — confirmed on real stellar photometry.** The mechanism is consistent with established KAM theory (φ is the most-irrational ratio, so harmonics cannot lock and grow → energy stays in clean modes; rational ratios let overtones reinforce → waste). What is novel here is the *measured entropy-leanness gradient* and its consistency with the framework's φ-rung entropy-decay result in ECG/ENSO (`TheFormula/Claude4.8/PHI_RUNG_ENTROPY_DECAY_RESULT.md`) — same φ-leanness principle, new domain. Honest hedges: n=4 Kepler club is a known related class (re-found, not discovered); R21 is one (clean, physical) leanness proxy; against *same-type* RRc the class gap is modest (3.6%) and the within-club gradient toward exact φ is the backbone; golden-star secondary modes may be non-radial vs the crowd's radial overtones. "φ resists locking" is textbook math; the empirical leanness gradient and cross-domain framing are the new part.
+
+## Update — 1 June 2026: Fusion application (muon-catalyzed fusion)
+
+Full record: [`FUSION.md`](FUSION.md). The framework was applied to muon-catalyzed fusion as a worked
+*application* (like ENSO/heart), and — like the lipogenesis re-derivation — reasoning from ARA **located a
+real, published method**, with one genuinely novel untested addition.
+
+What is **solid / confirmed**:
+- The muon-catalysis **cycle maps as a deep snap** on the rational pole (formation ~140 ps ≫ fusion ~1 ps;
+  ~6.9 ns rung), and φ is correctly **absent** — a nuclear event is the integer/rational/snap regime, like
+  fission (U-235 fragment ratio ≈ 3/2, shell-driven). The framework finding "no φ here" is the *right* answer.
+- **Carrier to strip the stuck muon = octave-up (2×) the muon frequency, rational not φ** — this matches the
+  **published X-ray-laser / parametric-resonance stripping method** (drives at integer/2× the muon freq,
+  reduces effective alpha-sticking). The framework located a real method.
+- **Golden-rate pulse delivery gives maximally uniform phase coverage** — verified math (three-gap theorem;
+  = golden-angle MRI sampling). Subharmonic/parametric driving is a real, sometimes-superior mode (lit.).
+
+What is **novel & UNTESTED**: delivering the 2× stripping pulses at a **golden rate** specifically — no muon
+experiment has reported this. The framework's one distinctive, falsifiable contribution here.
+
+What is **open**: net-energy viability — the muon lifetime (2.2 μs) + ~5 GeV production cost; sticking caps
+~150 fusions/muon (below break-even). This can be *designed/reasoned* but only *validated* in a muon-fusion
+lab — unlike ENSO/heart, not testable against existing data here.
+
+Corrections logged: muon does **not** couple to a neutrino (decay-only, un-hittable); ARA = physical
+phase-durations, not a static-wavefunction width (misapplication, dropped); "edge ARA toward φ" has no
+physical actuator and φ's stability-vs-handover roles conflict for that step; carrier is octave **up** (2×),
+not down. Honest framing: framework *navigated to* known physics, didn't predict new physics; golden-rate
+timing is the novel piece; viability is a lab question.

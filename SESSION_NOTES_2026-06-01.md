@@ -119,6 +119,64 @@ number-fit honestly — the guard working as intended.)
 
 ---
 
+## 5b. Edge / singularity geometry (theoretical, clean — added end of session)
+
+- **Walls 0.25/1.75 cut the SPHERE into exactly 3/4 band : 1/4 caps.** Connect 0.25→0.25 and 1.75→1.75 =
+  two rings about the 1.0 equator. Archimedes' hat-box (zone area ∝ height, sphere-only): walls at ±0.75
+  radius = the "3/4 displacement limit" → 3/4 of surface in the band, 1/4 in the two singular caps. EXACT,
+  and only clean on a sphere (flat disk = messy 0.856/0.144). The sphere is what makes 0.25/1.75 land on the
+  framework's own 3/4. Single-axis cut gives a band/circle only (fractal continuation), not a polygon. Wall
+  angle 41.4° is not a special constant.
+- **Hexagon/pentagon come from TRIANGLE assembly, not the wall-cut (hard geometry, unifies threads).**
+  6 triangles/vertex = 360° = flat hexagon = tiles = SPACE; 5 triangles = 300° = 60° deficit = curves into
+  3D = icosahedral vertex = pentagon = TIME/φ. **The difference = exactly ONE triangle (60°)**, and that lost
+  triangle is the SHED, the lost 6→5 edge, AND the curvature that bends flat → next-dimension — one act, not
+  three. Descartes: total polyhedron defect = 720°; icosahedron (φ-solid) = 12×60° = 720°. Solid = the
+  triangle/defect geometry; interpretive = flat-space/curved-time; open = the ARA⁹ (9=3×3) ↔ 6/5 link.
+
+## 5c. Two "ups": octave-repeat vs dimensional cap (end of session)
+
+- **Regular polytope classification (hard math):** 2D = ∞ polygons, 3D = 5 Platonic, 4D = 6, **5D+ = only 3
+  (simplex, hypercube, cross-polytope).** The **golden / 5-fold shapes exist ONLY in dims 2–4** (pentagon →
+  icosahedron/dodecahedron → 600-cell/120-cell); **none in 5D+.** So the time/golden ladder is FINITE and
+  **caps at 4D (the 600-cell)**; above that, rational/space only (hypercube tilings). Tantalizing but
+  interpretive: φ-symmetry ending exactly at 4D, where space+time (3+1) lives.
+- **Octagon/heptagon idea — CLOSED, right reason.** Only 3/4/6 tile the plane (hexagon = the ceiling of the
+  space/tiling family); 7 isn't golden, 8 doesn't tile. So no "6→8 space / 5→7 time" rung. Dylan's
+  self-correction: ARA is shape **repetition**, not shape **progression** — the octave stamps the SAME 6/5
+  structure at each rung (self-similar, unbounded), it doesn't grow new polygons. Two different "ups":
+  octave rungs (repeat, unbounded) vs spatial dimensions (golden caps at 4D). And on a rung-step,
+  **connections and freedom TRADE** (space = denser/more-connected/less-free; time = freer/fewer-connected),
+  never both at once — same shape, only the density/freedom dial moves.
+
+## 5d. Real-matter realization — carbon cages (end of session)
+
+The triangle-assembly hexagon/pentagon picture shows up in real bonded matter (hard fact, Euler's theorem):
+build any closed cage of pentagons+hexagons with 3 bonds/vertex (carbon sp²) and **Euler forces exactly 12
+pentagons, independent of hexagon count.** Graphene = all hexagons = flat = space; C60 = 20 hex + **12 pent**
+= truncated icosahedron; nanotube caps = 12; **viral capsids = icosahedral, 12 pentamers (Caspar–Klug).**
+**12 × 60° = 720° = Descartes** — the pentagons ARE the curvature that closes the flat hexagon sheet into 3D
+(= the same 720° from the triangle-assembly section, now in real matter). Flat hexagon = space; the 12
+pentagons = time/curvature/closure. Hard fact = Euler/fullerenes/Caspar–Klug; interpretive = space/time
+labels. DNA/RNA was the wrong level (fixed-identity rings; DNA→RNA difference is the 2′-OH, not a hex→pent
+shift) — the right level is the COUPLING (bonds assembling), i.e. carbon cages.
+
+## 5e. Fission mapped (end of session)
+
+- **Fission = a SNAP** — heavy nucleus stable, then sudden violent split; long accumulation → fast release.
+- **Sheds toward iron:** binding-energy curve peaks at Fe-56 (most stable). Fusion climbs up to Fe from the
+  light side, fission falls down to Fe from the heavy side; both release the excess. **Fe-56 = the balance
+  attractor** both relax toward.
+- **Criticality k = the balance dial (clean):** k<1 dies (consumer) | **k=1 = self-sustaining reactor =
+  balance/1.0 (the engine)** | k>1 runaway (snap/bomb). A reactor literally *is* a system held at 1.0.
+- **Asymmetric split is NOT golden:** U-235 fragments light~95 / heavy~139, ratio **1.46 — closer to 3/2
+  (off 2.5%) than φ (off 9.6%)**. Driven by INTEGER magic-number shell closures (heavy fragment ~ doubly-magic
+  Sn-132, N=82/Z=50). So fission sits on the **rational/space/integer side** — and the framework correctly
+  finds NO φ where there's none (becomes more symmetric at higher excitation as liquid-drop smooths shells).
+- Honest: snap / toward-Fe / k=balance are framework readings on solid physics (binding-energy curve, shell
+  model, k-factor); the "3/2 shell-driven, not φ" is the informative result — fission is an integer/rational
+  phenomenon. Superconductivity doc neighbour; full mapping recorded here.
+
 ## 6. Open threads / next builds
 - **The R atlas** — the time-sphere counterpart to the 234-node space atlas (transfer-entropy maps, sheds,
   couplings, handovers all in one structured map). Not yet built.
