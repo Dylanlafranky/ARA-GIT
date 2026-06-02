@@ -1,14 +1,45 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ARA coordinate sphere</title>
+<title>ARA coordinate sphere — library</title>
 <style>
  html,body{margin:0;height:100%;background:#070b12;color:#cdd6e0;font-family:system-ui,Segoe UI,Arial,sans-serif;overflow:hidden}
  #c{position:fixed;inset:0}
- #info{position:fixed;top:12px;left:12px;background:rgba(10,16,26,.8);border:1px solid #2a3a52;border-radius:10px;padding:11px 14px;max-width:330px;font-size:12px;line-height:1.55}
+ #info{position:fixed;top:12px;left:12px;background:rgba(10,16,26,.82);border:1px solid #2a3a52;border-radius:10px;padding:11px 14px;max-width:300px;font-size:12px;line-height:1.5;z-index:5}
  #info h1{font-size:14px;margin:0 0 6px;color:#f0c878}
  #info b.s{color:#5aa0ff}#info b.t{color:#f0c878}
  .key{margin-top:7px;font-size:11px;opacity:.85}
  label.tog{display:block;margin-top:9px;font-size:12px;cursor:pointer}
- #hint{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:11px;opacity:.5}
+ #hint{position:fixed;bottom:10px;left:0;right:0;text-align:center;font-size:11px;opacity:.5;z-index:5}
+ #lib{position:fixed;top:0;right:0;height:100%;width:340px;background:rgba(8,13,22,.93);border-left:1px solid #2a3a52;z-index:6;display:flex;flex-direction:column;font-size:12px}
+ #lib.collapsed{transform:translateX(322px)}
+ #lib h2{font-size:13px;margin:0;padding:12px 14px 8px;color:#f0c878;border-bottom:1px solid #1d2b40}
+ #libToggle{position:absolute;left:-30px;top:14px;width:30px;height:38px;background:rgba(8,13,22,.93);border:1px solid #2a3a52;border-right:none;border-radius:8px 0 0 8px;color:#cdd6e0;cursor:pointer;font-size:15px}
+ #libBody{overflow-y:auto;padding:10px 14px 30px;flex:1}
+ #lib input[type=text]{width:100%;box-sizing:border-box;background:#0d1626;border:1px solid #2a3a52;color:#cdd6e0;border-radius:6px;padding:7px 9px;font-size:12px;margin-bottom:8px}
+ .sec{margin:12px 0 4px;color:#9fb0c4;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+ .cat{display:inline-block;margin:2px 4px 2px 0;padding:3px 8px;border-radius:12px;border:1px solid #2a3a52;cursor:pointer;font-size:11px;user-select:none}
+ .cat.on{background:#16263c;border-color:#5aa0ff;color:#cfe2ff}
+ .rng{margin:10px 0}
+ .rng .lab{display:flex;justify-content:space-between;font-size:11px;color:#9fb0c4;margin-bottom:3px}
+ .rng input[type=range]{width:100%;margin:0}
+ .rng .two{display:flex;gap:6px}
+ .rng .two input{width:50%}
+ .rng .nums{display:flex;gap:6px;margin-bottom:4px}
+ .rng .nums input{width:50%;box-sizing:border-box;background:#0d1626;border:1px solid #2a3a52;color:#cdd6e0;border-radius:5px;padding:3px 6px;font-size:11px}
+ .rng .nums input:focus{outline:none;border-color:#5aa0ff}
+ #count{font-size:11px;color:#7f93ab;margin:8px 0 4px}
+ #list{list-style:none;margin:0;padding:0}
+ #list li{padding:7px 9px;border:1px solid #1d2b40;border-radius:7px;margin-bottom:5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+ #list li.sel{border-color:#f0c878;background:#1a1f2e}
+ #list li .nm{font-weight:600}
+ #list li .ct{font-size:10px;color:#7f93ab}
+ #list li .av{font-size:10px;color:#9fb0c4;white-space:nowrap}
+ #detail{border-top:1px solid #1d2b40;padding:10px 14px;font-size:12px;min-height:20px}
+ #detail .dn{font-size:13px;font-weight:700;color:#f0c878}
+ #detail table{width:100%;border-collapse:collapse;margin-top:6px}
+ #detail td{padding:2px 0;font-size:11px}
+ #detail td:first-child{color:#9fb0c4;width:46%}
+ #detail .note{margin-top:7px;color:#b9c6d6;font-size:11px;line-height:1.45}
+ button.mini{background:#16263c;color:#cdd6e0;border:1px solid #2a3a52;border-radius:6px;padding:4px 9px;cursor:pointer;font-size:11px}
 </style></head>
 <body>
 <canvas id="c"></canvas>
@@ -16,122 +47,238 @@
 <h1>ARA coordinate sphere</h1>
 Everything is a sphere sitting inside the sphere at its coordinate. It's all ARA.
 <div class="key">
-<b>X — Mapping / ARA</b> (φ-line): <b class="s">0 space</b> · 1 · <b class="t">2 time</b><br>
-<b>Y — Rungs</b> (each rung carries its own 0–2 sub-scale)<br>
-<b>Z — mix / coupling</b> <i>(provisional — placeholder)</i>: <b class="s">connections</b> ↔ <b class="t">info traversal</b><br>
-<b class="t">φ-line</b> and its mirror <b>anti-φ (1/φ)</b> both lie in the X–Y plane
+<b>X &mdash; Mapping / ARA</b> (phi-line): <b class="s">0 space</b> &middot; 1 &middot; <b class="t">2 time</b><br>
+<b>Y &mdash; Rungs</b> (each rung carries its own 0&ndash;2 sub-scale)<br>
+<b>Z &mdash; mix / coupling</b>: <b class="s">connections</b> &harr; <b class="t">info traversal</b><br>
+<b class="t">phi-line</b> + mirror <b>anti-phi (1/phi)</b> lie in the X&ndash;Y plane
 </div>
 <label class="tog"><input type="checkbox" id="axTog" checked> show axes &amp; scale</label>
 <button id="reset" style="margin-top:8px;background:#16263c;color:#cdd6e0;border:1px solid #2a3a52;border-radius:7px;padding:5px 10px;cursor:pointer;font-size:12px">reset view (level)</button>
-<div class="key" style="opacity:.7">Orientation is my reading of your spec — tell me what to flip.</div>
 </div>
-<div id="hint">drag to rotate · scroll to zoom</div>
+
+<div id="lib">
+ <button id="libToggle" title="show/hide library">&#9776;</button>
+ <h2>ARA library &amp; lookup</h2>
+ <div id="libBody">
+  <input type="text" id="q" placeholder="search name / note..." autocomplete="off">
+  <div class="sec">Categories</div>
+  <div id="cats"></div>
+  <div class="sec">Filter by ARA variables</div>
+  <div class="rng" data-k="ara"><div class="lab"><span>X &middot; Mapping ARA</span><span class="v"></span></div><div class="nums"><input type="number" class="nmn" min="0" max="2" step="0.01"><input type="number" class="nmx" min="0" max="2" step="0.01"></div><div class="two"><input type="range" min="0" max="2" step="0.01" class="mn"><input type="range" min="0" max="2" step="0.01" class="mx"></div></div>
+  <div class="rng" data-k="rung"><div class="lab"><span>Y &middot; Rung</span><span class="v"></span></div><div class="nums"><input type="number" class="nmn" min="0" max="4" step="0.05"><input type="number" class="nmx" min="0" max="4" step="0.05"></div><div class="two"><input type="range" min="0" max="4" step="0.05" class="mn"><input type="range" min="0" max="4" step="0.05" class="mx"></div></div>
+  <div class="rng" data-k="rungAra"><div class="lab"><span>Rung sub-ARA (0&ndash;2)</span><span class="v"></span></div><div class="nums"><input type="number" class="nmn" min="0" max="2" step="0.01"><input type="number" class="nmx" min="0" max="2" step="0.01"></div><div class="two"><input type="range" min="0" max="2" step="0.01" class="mn"><input type="range" min="0" max="2" step="0.01" class="mx"></div></div>
+  <div class="rng" data-k="z"><div class="lab"><span>Z &middot; coupling ARA</span><span class="v"></span></div><div class="nums"><input type="number" class="nmn" min="0" max="2" step="0.01"><input type="number" class="nmx" min="0" max="2" step="0.01"></div><div class="two"><input type="range" min="0" max="2" step="0.01" class="mn"><input type="range" min="0" max="2" step="0.01" class="mx"></div></div>
+  <div class="rng" data-k="phi"><div class="lab"><span>phi-line proximity (0 = on it)</span><span class="v"></span></div><div class="nums"><input type="number" class="nmn" min="0" max="4" step="0.02"><input type="number" class="nmx" min="0" max="4" step="0.02"></div><div class="two"><input type="range" min="0" max="4" step="0.02" class="mn"><input type="range" min="0" max="4" step="0.02" class="mx"></div></div>
+  <button class="mini" id="clearF" style="margin-top:6px">reset filters</button>
+  <div id="count"></div>
+  <ul id="list"></ul>
+ </div>
+ <div id="detail"><span style="color:#7f93ab">Click an item to inspect its ARA coordinates.</span></div>
+</div>
+
+<div id="hint">drag to rotate &middot; scroll to zoom &middot; &#9776; toggles the library</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const scene=new THREE.Scene();
-const cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,2000); cam.position.set(0,0,13);
-const rnd=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
-rnd.setSize(innerWidth,innerHeight); rnd.setPixelRatio(devicePixelRatio);
+var scene=new THREE.Scene();
+var cam=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,0.1,2000); cam.position.set(0,0,13);
+var rnd=new THREE.WebGLRenderer({canvas:document.getElementById('c'),antialias:true});
+function fit(){cam.aspect=innerWidth/innerHeight; cam.updateProjectionMatrix(); rnd.setSize(innerWidth,innerHeight);}
+rnd.setPixelRatio(devicePixelRatio); fit();
 scene.add(new THREE.AmbientLight(0xffffff,.7));
-const dl=new THREE.DirectionalLight(0xffffff,.6); dl.position.set(5,8,10); scene.add(dl);
-const pivot=new THREE.Group(); scene.add(pivot);
-const R=4, EXT=60, V=THREE.Vector3;   // EXT = axes run far past the sphere ("indefinite")
+var dl=new THREE.DirectionalLight(0xffffff,.6); dl.position.set(5,8,10); scene.add(dl);
+var pivot=new THREE.Group(); scene.add(pivot);
+var R=4, EXT=60, NR=4, V=THREE.Vector3;
+var PD={x:0.831,y:0.557};
 
-// container sphere
-pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),
-  new THREE.MeshBasicMaterial({color:0x2a3a52,wireframe:true,transparent:true,opacity:.16})));
-pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),
-  new THREE.MeshPhongMaterial({color:0x0e1828,transparent:true,opacity:.10})));
-
-const axesGroup=new THREE.Group(); pivot.add(axesGroup);   // <-- toggled
+pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),new THREE.MeshBasicMaterial({color:0x2a3a52,wireframe:true,transparent:true,opacity:.16})));
+pivot.add(new THREE.Mesh(new THREE.SphereGeometry(R,40,28),new THREE.MeshPhongMaterial({color:0x0e1828,transparent:true,opacity:.10})));
+var axesGroup=new THREE.Group(); pivot.add(axesGroup);
 
 function label(txt,color,scale){
-  const c=document.createElement('canvas'),s=256; c.width=s*2;c.height=s/1.4;
-  const x=c.getContext('2d'); x.fillStyle=color;x.font='bold 54px system-ui';x.textAlign='center';x.textBaseline='middle';
+  var c=document.createElement('canvas'),s=256; c.width=s*2;c.height=s/1.4;
+  var x=c.getContext('2d'); x.fillStyle=color;x.font='bold 54px system-ui';x.textAlign='center';x.textBaseline='middle';
   x.fillText(txt,c.width/2,c.height/2);
-  const t=new THREE.Texture(c);t.needsUpdate=true;
-  const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,transparent:true,depthTest:false}));
+  var t=new THREE.Texture(c);t.needsUpdate=true;
+  var sp=new THREE.Sprite(new THREE.SpriteMaterial({map:t,transparent:true,depthTest:false}));
   sp.scale.set((scale||1)*2.2,(scale||1)*0.8,1); return sp;
 }
-function line(a,b,col,op,grp){const g=new THREE.BufferGeometry().setFromPoints([a,b]);
+function line(a,b,col,op,grp){var g=new THREE.BufferGeometry().setFromPoints([a,b]);
   (grp||axesGroup).add(new THREE.Line(g,new THREE.LineBasicMaterial({color:col,transparent:true,opacity:op==null?.85:op})));}
-function lab(txt,col,sc,x,y,z,grp){const l=label(txt,col,sc);l.position.set(x,y,z);(grp||axesGroup).add(l);}
+function lab(txt,col,sc,x,y,z,grp){var l=label(txt,col,sc);l.position.set(x,y,z);(grp||axesGroup).add(l);}
+function m(v){return (v-1)*R;}
 
-// map ARA value 0..2 -> world coord -R..R
-const m=v=>(v-1)*R;
-
-// ---- X axis : Mapping / ARA (the phi line) — runs indefinitely ----
 line(new V(-EXT,0,0),new V(EXT,0,0),0x6ca8ff);
-[0,1,2].forEach(v=>{const x=m(v); line(new V(x,-0.18,0),new V(x,0.18,0),0x6ca8ff,.9); lab(String(v),'#6ca8ff',.5,x,-0.5,0);});
+[0,1,2].forEach(function(v){var x=m(v); line(new V(x,-0.18,0),new V(x,0.18,0),0x6ca8ff,.9); lab(String(v),'#6ca8ff',.5,x,-0.5,0);});
 lab('space','#6ca8ff',.9,-R-1.6,0.6,0); lab('time','#f0c878',.9,R+1.5,0.6,0);
-lab('X · Mapping / ARA','#9fb0c4',.7,R+5.5,-0.1,0);
-
-// ---- Z axis : anti-phi mix (connections <-> info traversal), 0..2 — runs indefinitely ----
+lab('X . Mapping / ARA','#9fb0c4',.7,R+5.5,-0.1,0);
 line(new V(0,0,-EXT),new V(0,0,EXT),0xc89bf0);
-[0,1,2].forEach(v=>{const z=m(v); line(new V(-0.18,0,z),new V(0.18,0,z),0xc89bf0,.9); lab(String(v),'#c89bf0',.5,0.0,-0.5,z);});
+[0,1,2].forEach(function(v){var z=m(v); line(new V(-0.18,0,z),new V(0.18,0,z),0xc89bf0,.9); lab(String(v),'#c89bf0',.5,0.0,-0.5,z);});
 lab('connections','#c89bf0',.85,0,0.6,-R-1.6); lab('info traversal','#c89bf0',.85,0,0.6,R+1.8);
-lab('Z · mix / coupling (provisional)','#9fb0c4',.7,0,-0.1,R+5.5);
-
-// ---- Y axis : Rungs, each rung subdivided 0..2 — runs indefinitely ----
+lab('Z . mix / coupling','#9fb0c4',.7,0,-0.1,R+5.5);
 line(new V(0,-EXT,0),new V(0,EXT,0),0x88e0a0);
-const NR=4, h=2*R/NR;            // 4 rungs across the diameter
-for(let r=0;r<NR;r++){
-  const base=-R+r*h;
-  // major rung boundary + number
-  line(new V(-0.32,base,0),new V(0.32,base,0),0x88e0a0,.95);
-  lab('rung '+r,'#88e0a0',.6,1.05,base,0);
-  // sub-scale 0..2 within the rung as little lines
-  [0,1,2].forEach(sv=>{const y=base+(sv/2)*h; line(new V(-0.14,y,0),new V(0.14,y,0),0x88e0a0,.45);});
-}
+var h=2*R/NR;
+for(var r=0;r<NR;r++){var base=-R+r*h; line(new V(-0.32,base,0),new V(0.32,base,0),0x88e0a0,.95); lab('rung '+r,'#88e0a0',.6,1.05,base,0);
+  [0,1,2].forEach(function(sv){var y=base+(sv/2)*h; line(new V(-0.14,y,0),new V(0.14,y,0),0x88e0a0,.45);});}
 line(new V(-0.32,R,0),new V(0.32,R,0),0x88e0a0,.95); lab('rung '+NR,'#88e0a0',.6,1.05,R,0);
-lab('Y · Rungs','#9fb0c4',.7,0,R+5.5,0);
-
-// ---- phi-line diagonal (the ARA backbone through the volume) ----
-const pg=new THREE.BufferGeometry().setFromPoints([new V(-EXT*0.831,-EXT*0.557,0),new V(EXT*0.831,EXT*0.557,0)]);
-const pl=new THREE.Line(pg,new THREE.LineDashedMaterial({color:0xf0c878,dashSize:.25,gapSize:.18,transparent:true,opacity:.8}));
-pl.computeLineDistances(); axesGroup.add(pl);
-lab('φ line','#f0c878',.6,R*0.82+0.7,R*0.55+0.5,0);
-
-// anti-φ = 1/φ : the MIRROR of the φ-line across the space axis (same plane), runs indefinitely
-const ag=new THREE.BufferGeometry().setFromPoints([new V(-EXT*0.831,EXT*0.557,0),new V(EXT*0.831,-EXT*0.557,0)]);
-const al=new THREE.Line(ag,new THREE.LineDashedMaterial({color:0x6fd0c8,dashSize:.25,gapSize:.18,transparent:true,opacity:.7}));
-al.computeLineDistances(); axesGroup.add(al);
-lab('anti-φ (1/φ)','#6fd0c8',.6,R*0.82+1.0,-R*0.55-0.5,0);
-
-// quadrant labels (X-Y face) — pushed outside the sphere, for the orientation check
+lab('Y . Rungs','#9fb0c4',.7,0,R+5.5,0);
+var pg=new THREE.BufferGeometry().setFromPoints([new V(-EXT*PD.x,-EXT*PD.y,0),new V(EXT*PD.x,EXT*PD.y,0)]);
+var pl=new THREE.Line(pg,new THREE.LineDashedMaterial({color:0xf0c878,dashSize:.25,gapSize:.18,transparent:true,opacity:.8})); pl.computeLineDistances(); axesGroup.add(pl);
+lab('phi line','#f0c878',.6,R*0.82+0.7,R*0.55+0.5,0);
+var ag=new THREE.BufferGeometry().setFromPoints([new V(-EXT*PD.x,EXT*PD.y,0),new V(EXT*PD.x,-EXT*PD.y,0)]);
+var al=new THREE.Line(ag,new THREE.LineDashedMaterial({color:0x6fd0c8,dashSize:.25,gapSize:.18,transparent:true,opacity:.7})); al.computeLineDistances(); axesGroup.add(al);
+lab('anti-phi (1/phi)','#6fd0c8',.6,R*0.82+1.0,-R*0.55-0.5,0);
 lab('hi-dim space / lo time','#9fb0c4',.6,-R-2.2, R+1.4,0);
 lab('lo-dim space / hi time','#9fb0c4',.6,-R-2.2,-R-1.4,0);
 lab('hi time / lo space','#9fb0c4',.6, R+2.2, R+1.4,0);
 lab('lo time / hi space','#9fb0c4',.6, R+2.2,-R-1.4,0);
 
-// ---- example mapped systems (on pivot, not toggled): [name, ARA, rung 0..NR, mix 0..2] ----
-const items=[
- ['Oak tree',0.0,3.6,0.2],['Blue whale',0.05,3.7,0.3],['Galápagos tortoise',0.12,3.3,0.4],
- ['Human',0.18,2.6,0.8],['Cat',0.34,2.3,1.1],['Hummingbird',0.56,1.7,1.2],
- ['Honeybee',0.76,1.4,1.0],['Fruit fly',0.92,1.3,1.4],['Copepod',0.94,1.3,1.4],
- ['Tardigrade',1.03,1.1,1.5],['Yeast cell',1.69,0.5,1.7],['Influenza',1.83,0.4,1.85],
- ['Bacteriophage',2.0,0.2,1.9],['ENSO',0.82,3.1,1.5],['Solar cycle',1.73,3.4,1.3],['Heart (RR)',1.5,2.0,1.6],
- ['Muon fusion cycle',0.10,0.3,1.75],   // deep snap (formation≫fusion), ~ns rung, time/fast side — see FUSION.md
+// ---- DATA LIBRARY: {name, cat, ara(X 0-2), rung(0-4), z(0-2), period, note} ----
+// To add an entry: copy a row, fill the four coordinates + category + note. The panel reads it live.
+var DATA=[
+ {name:'Oak tree',cat:'Organism',ara:0.0,rung:3.6,z:0.2,period:'~century',note:'Slow builder, deep space pole - long accumulate, rare release.'},
+ {name:'Blue whale',cat:'Organism',ara:0.05,rung:3.7,z:0.3,period:'~80 yr',note:'Large, slow life-cycle; space-leaning consumer.'},
+ {name:'Galapagos tortoise',cat:'Organism',ara:0.12,rung:3.3,z:0.4,period:'~150 yr',note:'Very slow tempo; long-lived clockwork.'},
+ {name:'Human',cat:'Organism',ara:0.18,rung:2.6,z:0.8,period:'~80 yr',note:'Mid-tempo; the reference rung for "our level".'},
+ {name:'Cat',cat:'Organism',ara:0.34,rung:2.3,z:1.1,period:'~15 yr',note:'Faster mammal tempo.'},
+ {name:'Hummingbird',cat:'Organism',ara:0.56,rung:1.7,z:1.2,period:'~5 yr',note:'High metabolic rate, fast life-cycle.'},
+ {name:'Honeybee',cat:'Organism',ara:0.76,rung:1.4,z:1.0,period:'~weeks',note:'Fast, hexagon/space builder.'},
+ {name:'Fruit fly',cat:'Organism',ara:0.92,rung:1.3,z:1.4,period:'~50 d',note:'Near balance; fast turnover.'},
+ {name:'Copepod',cat:'Organism',ara:0.94,rung:1.3,z:1.4,period:'~weeks',note:'Fast aquatic micro-grazer.'},
+ {name:'Tardigrade',cat:'Organism',ara:1.03,rung:1.1,z:1.5,period:'cryptobiotic',note:'Sits near 1.0; can pause its clock entirely.'},
+ {name:'Yeast cell',cat:'Organism',ara:1.69,rung:0.5,z:1.7,period:'~90 min',note:'Time-pole engine; rapid divide.'},
+ {name:'Influenza',cat:'Organism',ara:1.83,rung:0.4,z:1.85,period:'~hours',note:'Near the time pole; fast copy, low structure.'},
+ {name:'Bacteriophage',cat:'Organism',ara:2.0,rung:0.2,z:1.9,period:'~20 min',note:'Pure time pole - inject & replicate, near-zero own structure.'},
+ {name:'ENSO',cat:'Climate',ara:0.82,rung:3.1,z:1.5,period:'~2-7 yr',note:'Climate oscillator; slow-build / fast-release. Best forecast ~6-mo wall.'},
+ {name:'Solar cycle',cat:'Astro',ara:1.73,rung:3.4,z:1.3,period:'~11 yr',note:'Flywheel/storer; golden duty 0.39/0.61; dies ~44 yr ~ phi^3.'},
+ {name:'Heart (RR)',cat:'Physiology',ara:1.5,rung:2.0,z:1.6,period:'~0.8 s',note:'Nervous-system hub; breath donor ~4 beats up the ladder.'},
+ {name:'Muon fusion cycle',cat:'Nuclear',ara:0.10,rung:0.3,z:1.75,period:'~6.9 ns',note:'Deep snap (formation >> fusion). Drive stuck bond at 2x carrier, golden-rate pulses. See ARA_Fusion_Theory.md.'},
+ {name:'Electron transport chain',cat:'Storage',ara:1.6,rung:0.8,z:1.7,period:'~ms/hop',note:'APPROX. Nature efficient cascade: ~10 equal-mV hops, the phi-handover staircase done right.'},
+ {name:'Iron-air battery',cat:'Storage',ara:1.35,rung:2.7,z:1.4,period:'~days',note:'APPROX. Solid Fe (high-connection) <-> O2 (free): maximally opposed but still reversible. Fills the long-duration grid rung.'},
+ {name:'Supercapacitor',cat:'Storage',ara:1.1,rung:0.6,z:1.6,period:'~seconds',note:'APPROX. Fast access, low duration - the bottom rung of the grid duration ladder.'},
+ {name:'Ideal phi-cascade store (target)',cat:'Storage',ara:1.618,rung:2.83,z:1.0,period:'design target',note:'ON the phi-line at the engine sweet spot (ARA = phi). Where ARA Battery Theory says the optimal reversible cascade store sits. Real devices sit OFF the line; their distance from it = headroom toward the golden / electron-transport-chain optimum.'},
+ {name:'Ti-Cr-Mn-Fe (AB2 hydride)',cat:'Storage',ara:0.42,rung:1.22,z:1.37,period:'~min-hr',note:'APPROX (rung est.). Laves-phase metal hydride (Ames-type). Broad FLAT plateau + only modest hysteresis = the tight-braid ideal; sits essentially ON the phi-line, space-golden side. Best shape match. See ARA_Battery_Theory.md sec10.'},
+ {name:'LaNi5 (AB5 hydride)',cat:'Storage',ara:0.45,rung:1.30,z:1.21,period:'~min-hr',note:'APPROX (rung est.). Metal hydride; the NiMH electrode. Narrow PCT loop (0.3/0.2 MPa) = low hysteresis = tight braid. Near the space-golden duty, basically on the phi-line. Proven baseline.'},
+ {name:'TiFe (AB hydride)',cat:'Storage',ara:0.60,rung:1.40,z:1.26,period:'~min-hr',note:'APPROX (rung est.). Cheapest/most abundant (Ti+Fe). Wider, sloped PCT loop (1.0/0.7 MPa) = more hysteresis/loss, so sits slightly OFF the phi-line. Cheap but fussier to activate.'},
+ {name:'High-entropy AB2 (TiZrCrMnFeNi)',cat:'Storage',ara:0.43,rung:1.24,z:1.33,period:'~min-hr',note:'APPROX (rung est.). High-entropy Laves phase. Low hysteresis, room-temp, fast, air-resistant, tunable. Sits on the phi-line, space-golden side. Newer variant. See ARA_Battery_Theory.md sec11.'},
+ {name:'MmNi5 (mischmetal AB5)',cat:'Storage',ara:0.46,rung:1.31,z:1.39,period:'~min-hr',note:'APPROX (rung est.). Mischmetal AB5 - cheaper than LaNi5 (mischmetal vs pure La), similar modest hysteresis. ~1.3-1.4 wt%. Near the phi-line.'},
+ {name:'Zr-substituted AB2 (ZrMn2-type)',cat:'Storage',ara:0.50,rung:1.30,z:1.08,period:'~min-hr',note:'APPROX (rung est.). Zr lowers plateau pressure; sloped plateau = modest hysteresis. ~1.77 wt% at 10C. Slightly off the line; pressure-tunable.'},
+ {name:'TiFe + Mn/Ni (AB)',cat:'Storage',ara:0.55,rung:1.38,z:1.24,period:'~min-hr',note:'APPROX (rung est.). Mn/Ni substitution SPECIFICALLY cuts TiFe hysteresis - pulls it back toward the phi-line. Cheap. The taming of TiFe.'},
+ {name:'Mg2Ni / MgH2 (A2B)',cat:'Storage',ara:0.30,rung:0.80,z:0.48,period:'~slow',note:'APPROX. OFF the spot: high capacity (3.6/7.6 wt%) but needs ~300C - a deep locked bond (high connections, low z), a WALL not the golden spot. Like carbon/CO2 one scale up: lots of energy, hard to release.'},
+ {name:'BCC Ti-V-Cr solid solution',cat:'Storage',ara:0.72,rung:1.55,z:1.08,period:'~min-hr',note:'APPROX. OFF the spot: high capacity (~2-3 wt%) but only PARTLY reverses at room-temp = a snap, not a clean loop. High energy, won\'t cleanly come back.'}
 ];
-const cS=new THREE.Color(0x5aa0ff),cT=new THREE.Color(0xf0c878),tmp=new THREE.Color();
-items.forEach(([n,ara,rung,mix])=>{
-  const x=m(ara), y=-R+(rung/NR)*2*R, z=m(mix);
-  tmp.copy(cS).lerp(cT,ara/2);
-  const me=new THREE.Mesh(new THREE.SphereGeometry(0.16,18,14),
+
+function rungAra(rung){return (rung-Math.floor(rung))*2;}
+function worldXY(d){return {x:m(d.ara), y:-R+(d.rung/NR)*2*R};}
+function phiDist(d){var p=worldXY(d); return Math.abs(p.x*PD.y - p.y*PD.x);}
+
+var cS=new THREE.Color(0x5aa0ff),cT=new THREE.Color(0xf0c878),tmp=new THREE.Color();
+var NODES=[];
+DATA.forEach(function(d){
+  var x=m(d.ara), y=-R+(d.rung/NR)*2*R, z=m(d.z);
+  tmp.copy(cS).lerp(cT,d.ara/2);
+  var me=new THREE.Mesh(new THREE.SphereGeometry(0.16,18,14),
      new THREE.MeshPhongMaterial({color:tmp.getHex(),emissive:tmp.getHex(),emissiveIntensity:.25}));
   me.position.set(x,y,z); pivot.add(me);
-  const l=label(n,'#cdd6e0',.5); l.position.set(x,y+0.32,z); pivot.add(l);
+  var l=label(d.name,'#cdd6e0',.5); l.position.set(x,y+0.32,z); pivot.add(l);
+  NODES.push({d:d,mesh:me,label:l});
 });
 
-document.getElementById('axTog').addEventListener('change',e=>{axesGroup.visible=e.target.checked;});
-document.getElementById('reset').addEventListener('click',()=>{rx=0;ry=0;cam.position.set(0,0,13);});
+// ---------- LIBRARY PANEL (state + functions defined before any use) ----------
+var DEF={ara:[0,2],rung:[0,4],rungAra:[0,2],z:[0,2],phi:[0,4]};
+var F={ara:[0,2],rung:[0,4],rungAra:[0,2],z:[0,2],phi:[0,4]};
+var cats=Array.from(new Set(DATA.map(function(d){return d.cat;}))).sort();
+var catState={}; cats.forEach(function(c){catState[c]=true;});
+var selected=null;
+var listEl=document.getElementById('list'), countEl=document.getElementById('count');
 
-// manual orbit
-let dragging=false,px=0,py=0,rx=0,ry=0;
-addEventListener('mousedown',e=>{if(e.target.closest('#info'))return;dragging=true;px=e.clientX;py=e.clientY});
-addEventListener('mouseup',()=>dragging=false);
-addEventListener('mousemove',e=>{if(!dragging)return;ry+=(e.clientX-px)*0.008;rx+=(e.clientY-py)*0.008;px=e.clientX;py=e.clientY});
-addEventListener('wheel',e=>{cam.position.multiplyScalar(1+e.deltaY*0.0009)},{passive:true});
-addEventListener('resize',()=>{cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();rnd.setSize(innerWidth,innerHeight)});
+function passes(d){
+  var q=document.getElementById('q').value.trim().toLowerCase();
+  if(q && !(d.name.toLowerCase().indexOf(q)>-1||d.note.toLowerCase().indexOf(q)>-1||d.cat.toLowerCase().indexOf(q)>-1)) return false;
+  if(!catState[d.cat]) return false;
+  var ra=rungAra(d.rung), ph=phiDist(d);
+  if(d.ara<F.ara[0]||d.ara>F.ara[1]) return false;
+  if(d.rung<F.rung[0]||d.rung>F.rung[1]) return false;
+  if(ra<F.rungAra[0]||ra>F.rungAra[1]) return false;
+  if(d.z<F.z[0]||d.z>F.z[1]) return false;
+  if(ph<F.phi[0]||ph>F.phi[1]) return false;
+  return true;
+}
+function applyFilter(){
+  var n=0;
+  NODES.forEach(function(o){var ok=passes(o.d); o.mesh.visible=ok; o.label.visible=ok; if(ok)n++;});
+  listEl.innerHTML='';
+  NODES.filter(function(o){return passes(o.d);}).sort(function(a,b){return a.d.ara-b.d.ara;}).forEach(function(o){
+    var li=document.createElement('li'); if(selected===o)li.className='sel';
+    li.innerHTML='<span><span class="nm">'+o.d.name+'</span> <span class="ct">'+o.d.cat+'</span></span><span class="av">X'+o.d.ara.toFixed(2)+' . R'+o.d.rung.toFixed(1)+'</span>';
+    li.onclick=function(){select(o);}; listEl.appendChild(li);
+  });
+  countEl.textContent=n+' of '+DATA.length+' shown';
+}
+function select(o){
+  if(selected){selected.mesh.scale.set(1,1,1);selected.mesh.material.emissiveIntensity=.25;}
+  selected=o; o.mesh.scale.set(2.1,2.1,2.1); o.mesh.material.emissiveIntensity=.9;
+  var d=o.d, ra=rungAra(d.rung), ph=phiDist(d);
+  var xtag=d.ara<0.95?'space':(d.ara>1.05?'time':'balance');
+  var ptag=ph<0.6?'near-golden':(ph<1.5?'mid':'off-line');
+  document.getElementById('detail').innerHTML=
+   '<div class="dn">'+d.name+'</div><div class="ct" style="color:#7f93ab">'+d.cat+' . '+(d.period||'')+'</div>'+
+   '<table>'+
+   '<tr><td>X . Mapping ARA</td><td>'+d.ara.toFixed(2)+' <span style="color:#7f93ab">('+xtag+')</span></td></tr>'+
+   '<tr><td>Y . Rung</td><td>'+d.rung.toFixed(2)+'</td></tr>'+
+   '<tr><td>Rung sub-ARA</td><td>'+ra.toFixed(2)+'</td></tr>'+
+   '<tr><td>Z . coupling ARA</td><td>'+d.z.toFixed(2)+'</td></tr>'+
+   '<tr><td>phi-line proximity</td><td>'+ph.toFixed(2)+' <span style="color:#7f93ab">('+ptag+')</span></td></tr>'+
+   '</table><div class="note">'+d.note+'</div>';
+  applyFilter();
+}
+
+// wire up controls
+var catBox=document.getElementById('cats');
+cats.forEach(function(c){var s=document.createElement('span');s.className='cat on';s.textContent=c;
+  s.onclick=function(){catState[c]=!catState[c];s.classList.toggle('on',catState[c]);applyFilter();};catBox.appendChild(s);});
+
+var RNGS=[];
+Array.prototype.forEach.call(document.querySelectorAll('.rng'),function(div){
+  var k=div.getAttribute('data-k'),
+      mn=div.querySelector('.mn'), mx=div.querySelector('.mx'),
+      nmn=div.querySelector('.nmn'), nmx=div.querySelector('.nmx'), vlab=div.querySelector('.v');
+  function setUI(){mn.value=F[k][0];mx.value=F[k][1];nmn.value=F[k][0];nmx.value=F[k][1];vlab.textContent=F[k][0]+' - '+F[k][1];}
+  function commit(a,b){a=+a;b=+b; if(isNaN(a))a=DEF[k][0]; if(isNaN(b))b=DEF[k][1]; if(a>b){var t=a;a=b;b=t;}
+    F[k]=[Math.round(a*100)/100,Math.round(b*100)/100]; setUI(); applyFilter();}
+  mn.addEventListener('input',function(){commit(mn.value,mx.value);});
+  mx.addEventListener('input',function(){commit(mn.value,mx.value);});
+  nmn.addEventListener('change',function(){commit(nmn.value,nmx.value);});
+  nmx.addEventListener('change',function(){commit(nmn.value,nmx.value);});
+  setUI(); RNGS.push({setUI:setUI});
+});
+document.getElementById('clearF').onclick=function(){
+  Object.keys(DEF).forEach(function(k){F[k]=DEF[k].slice();});
+  RNGS.forEach(function(rr){rr.setUI();}); document.getElementById('q').value=''; applyFilter();
+};
+document.getElementById('q').addEventListener('input',applyFilter);
+
+var lib=document.getElementById('lib');
+document.getElementById('libToggle').onclick=function(){lib.classList.toggle('collapsed');};
+document.getElementById('axTog').addEventListener('change',function(e){axesGroup.visible=e.target.checked;});
+document.getElementById('reset').addEventListener('click',function(){rx=0;ry=0;cam.position.set(0,0,13);});
+
+var ray=new THREE.Raycaster(), mouse=new THREE.Vector2();
+addEventListener('click',function(e){
+  if(e.target.closest('#lib')||e.target.closest('#info'))return;
+  mouse.x=(e.clientX/innerWidth)*2-1; mouse.y=-(e.clientY/innerHeight)*2+1;
+  ray.setFromCamera(mouse,cam);
+  var vis=NODES.filter(function(o){return o.mesh.visible;}).map(function(o){return o.mesh;});
+  var hit=ray.intersectObjects(vis);
+  if(hit.length){var o=NODES.filter(function(o){return o.mesh===hit[0].object;})[0]; if(o)select(o);}
+});
+
+var dragging=false,px=0,py=0,rx=0,ry=0;
+addEventListener('mousedown',function(e){if(e.target.closest('#info')||e.target.closest('#lib'))return;dragging=true;px=e.clientX;py=e.clientY;});
+addEventListener('mouseup',function(){dragging=false;});
+addEventListener('mousemove',function(e){if(!dragging)return;ry+=(e.clientX-px)*0.008;rx+=(e.clientY-py)*0.008;px=e.clientX;py=e.clientY;});
+addEventListener('wheel',function(e){cam.position.multiplyScalar(1+e.deltaY*0.0009);},{passive:true});
+addEventListener('resize',fit);
+
+applyFilter();
 (function loop(){requestAnimationFrame(loop);pivot.rotation.x=rx;pivot.rotation.y=ry;cam.lookAt(0,0,0);rnd.render(scene,cam);})();
 </script></body></html>
