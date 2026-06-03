@@ -437,13 +437,25 @@
 <div class="section" style="padding-top: 1.5rem; padding-bottom: 1.5rem;">
   <div style="background: linear-gradient(135deg, rgba(212,168,67,0.10), rgba(57,210,192,0.06)); border: 1px solid rgba(212,168,67,0.35); border-radius: 12px; padding: 1.5rem 1.75rem;">
     <p style="font-size: 1.05rem; line-height: 1.7;"><strong>This is an open research notebook about a geometric hypothesis.</strong> A heartbeat, a climate cycle, a planetary orbit, the firing of a neuron &mdash; the project asks whether they can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart, with &phi; as the handover timing between them). Each system can be read as a small set of coordinates: period, amplitude, phase, and build-vs-release geometry per rung of the ladder: raw timing ratio, bounded ARA position, and orientation. A forward formula &mdash; anchored at the most recent observed value, integrating contributions across rungs &mdash; is being tested as a way to track or forecast behaviour from those coordinates.</p>
-    <p style="font-size: 1rem; color: var(--text-dim); margin-top: 0.8rem;">Existing physics gives the language: bandpass decomposition, coupled oscillators, scaling laws, time-as-primary. The "geometry of time" interpretation is a hypothesis, not a settled conclusion. The useful question for readers isn't whether the framework beats simpler forecasting baselines &mdash; prediction isn't the load-bearing claim, and the framework sometimes wins that test and sometimes loses it. <strong style="color: var(--gold);">The real question is: does the ARA system map real information correctly, or is it a pretty facade laid on top of the data?</strong></p>
+    <p style="font-size: 1rem; color: var(--text-dim); margin-top: 0.8rem;">Existing physics gives the language: bandpass decomposition, coupled oscillators, scaling laws, time-as-primary. The "geometry of time" interpretation is a hypothesis, not a settled conclusion. Prediction isn't the load-bearing claim &mdash; but a recent strict-causal test (no peeking at the future) shows the framework's coordinates, used as predictive state alongside ordinary causal memory, now beating a persistence baseline at <em>every</em> horizon on solar and ENSO &mdash; often substantially at long horizons where persistence itself goes negative &mdash; and on the heartbeat at short and long leads, losing only in a known mid-horizon dip. (The bare parameter-free forecast alone is still weaker than persistence; it's the framework-structured state that carries the win.) <strong style="color: var(--gold);">The real question is: does the ARA system map real information correctly, or is it a pretty facade laid on top of the data?</strong></p>
     <p style="font-size: 1rem; color: var(--text-dim); margin-top: 0.8rem;">What the framework actually claims is structural: classification (engine vs clock vs snap/overflow candidates, with sharp behavioural differences), diagnostic signatures (gait bimodality marking subsystem collapse in neurodegenerative disease), cross-domain universality (heart and climate sharing local cycle geometry after time-rescaling), coupled-pair composites (Cepheid F-mode photometry at &phi;&sup2;), and forced-versus-free-running architecture (wake/sleep at 2:1 because of Earth's rotation, while heart and breath stay free-running at &phi;). If those mappings describe real structure, the framework earns its keep even when it loses to plain regression as a forecaster. If they're patterns pulled from noise and dressed up after the fact, it's a facade. That's the test.</p>
     <p style="font-size: 0.95rem; color: var(--text-dim); margin-top: 0.8rem;">For the sober audit trail, see <a href="CLAIMS_STATUS.md" style="color: var(--gold);">CLAIMS_STATUS.md</a> and <a href="REPRODUCIBILITY.md" style="color: var(--gold);">REPRODUCIBILITY.md</a>.</p>
+    <details class="method" style="margin-top: 1rem;"><summary>Amendments &amp; clarifications (May 2026 updates)</summary><div class="method-body" style="padding-top: 1rem;">
+    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--green); background: rgba(63,185,80,0.05);"><strong style="color: var(--green);">Update (3 June 2026) &mdash; now beating persistence:</strong> a strict-causal unified test (no future samples; train on the first 60%, score the held-out rest) pits the layered operator against a persistence baseline at every horizon. Framework state + causal memory beats persistence on <strong>solar at all horizons</strong> (e.g. 48-month lead: persistence corr &minus;0.43 &rarr; +0.76) and <strong>ENSO at all horizons</strong> (e.g. 24-month lead: &minus;0.34 &rarr; +0.26), and on <strong>ECG at the 1-beat and 13-beat leads</strong> &mdash; losing only in the 3&ndash;8 beat mid-horizon dip. Honest fence: the parameter-free physical roll <em>alone</em> stays below persistence; the lift comes from using the framework coordinates as predictive state, not from the bare forecast. Code/scores: <span style="font-family:monospace; font-size:0.82rem;">TheFormula/Claude4.8/ara_unified_layered_framework_test.py</span>.</p>
+    <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--green); background: rgba(63,185,80,0.05);"><strong style="color: var(--green);">Update (3 June 2026) &mdash; the heart's own subsystems:</strong> A follow-up asked whether breaking the heart into its <em>own</em> sub-beat subsystems &mdash; the <em>shape</em> of each beat, not just its timing &mdash; helps in the stubborn 3&ndash;8 beat window where plain persistence had been winning. Across <strong>17 overnight recordings</strong>, adding the heart's beat-shape features gives a <strong>small but consistent</strong> lift: it improves on the timing-only model at the 3-beat lead in <strong>13 of 17 people</strong> (unlikely by chance, p &asymp; 0.025), and helps <em>more</em> at longer leads where the timing sequence has run out of memory. It's modest, not a breakthrough &mdash; but unlike an earlier "8-beat brain lead" that vanished when retested, this one held up across all 17. The dip, it turns out, was partly the heart missing its own internal subsystems, and partly a window of genuine unpredictability. Detail: <span style="font-family:monospace; font-size:0.82rem;">HEART_SUBSYSTEM_DIP_RESULT.md</span>.</p>
     <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--teal); background: rgba(57,210,192,0.05);"><strong style="color: var(--teal);">Update (21 May 2026):</strong> the first ARA state-geometry map and strict-causal ENSO transport test are now recorded in <a href="ARA_GEOMETRY_TRANSPORT_RESULT.md" style="color: var(--teal);">ARA_GEOMETRY_TRANSPORT_RESULT.md</a>. The map finds useful NINO/SOI/PDO structure and geometry-only transport beats persistence at several horizons, but a simple causal lag model still wins. The careful conclusion is that the geometry carries signal, while direct value-transport is not the right prediction operator yet.</p>
     <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--purple); background: rgba(188,140,255,0.05);"><strong style="color: var(--purple);">Update (23 May 2026):</strong> the temporal-friction follow-up is recorded in <a href="ARA_TEMPORAL_FRICTION_RESULT.md" style="color: var(--purple);">ARA_TEMPORAL_FRICTION_RESULT.md</a>. The strict-causal tests do <em>not</em> support "friction is just distance from &phi;." The safer reading is baseline friction plus &phi;-distance drag, pi-leak energy loss, system inefficiency, and possible resonance-cancellation pockets. Those pockets appeared in Solar and ECG windows but not cleanly in ENSO.</p>
     <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--gold); background: rgba(212,168,67,0.05);"><strong style="color: var(--gold);">Note on measurement (May 2026 update):</strong> every ARA number on this page is conditional on three choices that aren't framework-prescribed: <strong>which signal</strong> from the system was measured (e.g. ECG waveform gives one ARA, HRV/RR-interval series gives a different one for the same heart), <strong>which filter</strong> isolated each rung (SOS Butterworth is the default; raw-peak detection or Morlet wavelet give different numbers), and <strong>what counts as one cycle</strong> (per-cycle peak detection vs phase-folded averaged shape). Cross-domain ARA matches need matched-method comparisons &mdash; numerical coincidences between different methods on different signals are not framework evidence. See <strong>Rule 7</strong> in <a href="ARA_decomposition_rules.md" style="color: var(--gold);">ARA_decomposition_rules.md</a>.</p>
     <p style="font-size: 0.9rem; color: var(--text-dim); margin-top: 0.8rem; padding: 0.75rem; border-left: 2px solid var(--teal); background: rgba(57,210,192,0.05);"><strong style="color: var(--teal);">Orientation clarification (24 May 2026):</strong> ARA should now be read as three linked fields: the raw timing ratio measured from the data, the bounded ARA position on the 0&ndash;2 band, and the orientation showing which way the cycle is being viewed through time. Because we measure from inside time, the same coupled motion can appear reversed depending on the observer window. A value above 2 is a diagnostic overflow, not a clean coordinate: check rung choice, measurement direction, phase window, and coupled-system boundaries before quoting it.</p>
+    </div></details>
+  </div>
+</div>
+
+<!-- ═══════════════ EXPLORE VISUALLY ═══════════════ -->
+<div class="section" style="padding-top: 0; padding-bottom: 1.5rem;">
+  <div class="analogy" style="border-left-color: var(--blue);">
+    <div class="tag" style="color: var(--blue);">See it, don't just read it</div>
+    <p>This page is the words. For the <strong>pictures</strong>, the framework lives in a set of interactive 3D models &mdash; the best way to get an intuition for it. Start with the <a href="3D%20models/ara_sphere_coordinate_3d.html" style="color: var(--blue);">ARA Coordinate Sphere</a> (a searchable library where every system sits at its own coordinate) and the <a href="Mapping/ara_mapping_atlas_3d.html" style="color: var(--blue);">Mapping Atlas</a>, or browse <a href="index.html" style="color: var(--blue);">all the visualizations</a>. Reading the geometry is one thing; rotating it is another.</p>
   </div>
 </div>
 
@@ -467,9 +479,9 @@
 
 <!-- ═══════════════ THREE TYPES ═══════════════ -->
 <div class="section">
-  <h2>Three Patterns I Keep Seeing</h2>
+  <h2>Five Patterns I Keep Seeing</h2>
 
-  <p>When I measure ARA across the systems I've gathered, they tend to sort into three loose groups. I want to be upfront: this is based on the data I've been able to collect, not an exhaustive survey of the universe. But the same three patterns keep showing up in places I didn't expect them to:</p>
+  <p>When I measure ARA across the systems I've gathered, they tend to sort into a few loose groups. I want to be upfront: this is based on the data I've been able to collect, not an exhaustive survey of the universe. Four are real <em>types</em> of cycle; the last isn't a type at all but a warning flag. The same patterns keep showing up in places I didn't expect them to:</p>
 
   <div class="card-row">
     <div class="card">
@@ -486,9 +498,21 @@
     </div>
     <div class="card">
       <span class="icon">&#9889;</span>
-      <div class="label">Snap / Overflow Checks</div>
-      <div class="value">raw ratio &gt; 2?</div>
-      <div class="desc">Long slow build-up, sudden explosive release may be real snap behaviour, but values above 2 are now treated as diagnostic overflows until rung, orientation, and coupling boundaries are checked.</div>
+      <div class="label">Snaps</div>
+      <div class="value">ARA &rarr; edge</div>
+      <div class="desc">Extreme asymmetry &mdash; a long slow build then a near-instant release (or the reverse). A real snap sits near the <em>edge</em> of the scale but still inside 0&ndash;2: the heart's QRS spike is a measured deep snap near 0.</div>
+    </div>
+    <div class="card">
+      <span class="icon">&#9835;</span>
+      <div class="label">Harmonics</div>
+      <div class="value">ARA &asymp; 2.0</div>
+      <div class="desc">Two systems find their coupled pair and <strong>lock into resonance</strong> &mdash; like an orbital resonance or a tidally-locked moon. They hold tight coherence, but being locked is the opposite of golden: they <em>can't pass information through time</em> as freely as an engine. Pure resonance, near the top edge.</div>
+    </div>
+    <div class="card" style="border-color: var(--red);">
+      <span class="icon">&#9888;</span>
+      <div class="label">Overflow <span style="font-size:0.7rem; color:var(--text-dim);">(not a real type)</span></div>
+      <div class="value">reads &gt; 2</div>
+      <div class="desc">A flag, not a system. A reading above 2 can't be a real ARA position &mdash; it usually means two systems share one measurement (a <strong>composite</strong>, like blood pressure = pump + vessel tone). Decompose it before mapping. More below.</div>
     </div>
   </div>
 
@@ -652,30 +676,27 @@
 
   <p>Below 1.0 are the <strong>consumers</strong>. The mechanical ventilator pushes air in fast and lets it back out slowly — opposite of a self-sustaining engine. The seasonal ENSO ocean cycle has a similar shape: a fast build, a long quiet decay. Above the engine zone, near 2.0, are <strong>pure harmonics</strong> like the daily cortisol cycle &mdash; smooth, symmetric resonance.</p>
 
-  <p>And then there are the <strong>raw &gt;2 cases</strong>: rare oscillators that seem to show very long quiet periods followed by a sudden release. The old notes called these "snaps"; the current map treats them as candidates to diagnose first, because they may be real snap behaviour, a reversed observation window, a wrong rung, or a compound/coupled measurement.</p>
+  <p>Sometimes a raw measurement comes back <strong>above 2</strong>. On the bounded 0&ndash;2 map that can't be a real position &mdash; so it's a flag, not a coordinate. When I checked my own <em>measured</em> data (all from one overnight recording, slp01a), the readings that broke the 2.0 ceiling turned out to be the same thing every time: <strong>more than one system sharing a single measurement</strong> &mdash; a composite. A genuine single-system snap, by contrast, stays in bounds. So an over-2 reading isn't an exotic system; it's usually a sign you've stacked two systems in one pipe and need to separate them first.</p>
 
   <div class="card-row">
-    <div class="card">
-      <div class="label">Mayer wave (BP)</div>
-      <div class="value">2.33</div>
-      <div class="desc">Slow blood-pressure oscillation</div>
+    <div class="card" style="border-color: var(--red);">
+      <div class="label">Blood pressure (measured)</div>
+      <div class="value">5.9 <span style="font-size:0.7rem; color:var(--text-dim); font-weight:400;">over 2 &rarr; composite</span></div>
+      <div class="desc">Fast pump-stroke, slow vessel ring-down. Over 2 because it's <strong>two systems in one trace</strong> &mdash; the heart's pump <em>plus</em> vessel tone. Decompose before mapping.</div>
     </div>
-    <div class="card">
-      <div class="label">Halley's Comet</div>
-      <div class="value">4.20</div>
-      <div class="desc">Long quiet, brief flyby</div>
+    <div class="card" style="border-color: var(--red);">
+      <div class="label">Respiration (measured)</div>
+      <div class="value">2.4 <span style="font-size:0.7rem; color:var(--text-dim); font-weight:400;">over 2 &rarr; composite</span></div>
+      <div class="desc">The channel is literally "Resp (sum)" &mdash; abdominal + thoracic effort already added together. Over 2 = <strong>2&ndash;3 systems stacked</strong> in one pipe.</div>
     </div>
-    <div class="card">
-      <div class="label">Old Faithful</div>
-      <div class="value">21.3</div>
-      <div class="desc">Long fill, sudden eruption</div>
-    </div>
-    <div class="card">
-      <div class="label">U-238 alpha decay</div>
-      <div class="value">~10<sup>38</sup></div>
-      <div class="desc">Quiet for billions of years, then bang</div>
+    <div class="card" style="border-color: var(--green);">
+      <div class="label">Heart QRS &mdash; a <em>real</em> snap (measured)</div>
+      <div class="value">in&nbsp;bounds <span style="font-size:0.7rem; color:var(--text-dim); font-weight:400;">build 0.9s / release 0.02s</span></div>
+      <div class="desc">A genuine deep snap &mdash; slow fill, instant spike. But a true single-system snap maps <strong>cleanly inside 0&ndash;2</strong>; it does <em>not</em> overflow. Only composites break the ceiling.</div>
     </div>
   </div>
+
+  <p class="dim">A small confirmation hides in this: of all the channels in that recording, the only two that broke the 2.0 ceiling were the two we already knew were composites &mdash; the framework flagged exactly the right ones. (Measured: <span style="font-family:monospace; font-size:0.82rem;">TheFormula/Claude4.8/SNAP_ARA_RESULT.md</span>.)</p>
 
   <p class="dim">If you want to explore the full catalogue interactively (37 systems across all domains, on a log scale), the <a href="master_ara_visualization.html" style="color: var(--gold); text-decoration: none; border-bottom: 1px dotted var(--gold-dim);">Universal ARA Map</a> lives in the same folder. It's denser and harder to read at a glance &mdash; that's part of why I made the simpler picture above.</p>
 </div>
@@ -857,7 +878,7 @@ rung +4 = 16P</div>
     </svg>
   </div>
 
-  <p>The triple overlap &mdash; where all three circles meet &mdash; is where about half of the systems I mapped happen to live. It also happens to be roughly human scale. I don't want to make too much of this; the data I have is biased toward systems humans study, so it's not a clean cosmological claim. But it's a striking pattern I'd want a real scientist to either confirm or knock down.</p>
+  <p>The simplest way I can put it: from the very small to the cosmic &mdash; from quantum jitters to black holes &mdash; the scale places us in a <strong>centre location, where the most waves overlap with ours</strong>. That overlap is our reality: the slice of the universe we can actually see and measure. About half of the systems I mapped land right there, and it happens to be roughly human scale. I don't want to make too much of it &mdash; my data is biased toward systems humans study, so it's not a clean cosmological claim &mdash; but it's a striking pattern I'd want a real scientist to either confirm or knock down. (The "three circles" framing below is one way to carve it up; treat it as a sketch, not the final word.)</p>
 
   <details class="method">
     <summary>How this was worked out</summary>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can we see glucose 15 minutes ahead?</title>
+<style>
+ *{box-sizing:border-box} body{margin:0;background:#fbfcfd;color:#1d2733;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+ .wrap{max-width:720px;margin:0 auto;padding:28px 20px 60px}
+ h1{font-size:1.7rem;margin:.2rem 0 .4rem;letter-spacing:-.01em}
+ .sub{color:#5b6b7b;font-size:1.05rem;margin:0 0 1.6rem}
+ .card{background:#fff;border:1px solid #e6e9ee;border-radius:14px;padding:18px 20px;margin:18px 0}
+ h2{font-size:1.15rem;margin:.2rem 0 .6rem} p{margin:.5rem 0;color:#2b3744}
+ .muted{color:#5b6b7b;font-size:.95rem}
+ .stat{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}
+ .pill{flex:1;min-width:150px;background:#f5f8fb;border-radius:10px;padding:12px 14px}
+ .pill .lab{font-size:.8rem;color:#5b6b7b;text-transform:uppercase;letter-spacing:.04em}
+ .pill .val{font-size:1.5rem;font-weight:700;margin-top:2px}
+ .good{color:#2e9e6f}.warn{color:#d98a2b}
+ .note{background:#fff8ec;border:1px solid #f0dcb4;border-radius:12px;padding:14px 16px;font-size:.92rem;color:#6a5526;margin:18px 0}
+ .foot{color:#8a97a4;font-size:.82rem;margin-top:26px;text-align:center} canvas{max-width:100%}
+</style></head><body><div class="wrap">
+<h1>Can we see glucose 15 minutes ahead?</h1>
+<p class="sub">A small experiment on real (anonymised) type-1 CGM data &mdash; what the recent trend can and can&rsquo;t tell you.</p>
+<div class="card">
+ <h2>The last few readings have momentum</h2>
+ <p>Glucose drifts rather than jumping at random, so from just the recent trace the next <b>~15&ndash;30 minutes</b> are fairly predictable. Grey line = the real glucose (this stretch swings from a low through to a high). Blue dots = where a simple model, <b>given no meal or insulin information at all</b>, predicted it would be 15 minutes earlier.</p>
+ <div style="position:relative;height:290px"><canvas id="trace" role="img" aria-label="Real glucose line swinging from low to high with 15-minute-ahead predictions tracking it">Glucose with 15-minute-ahead predictions.</canvas></div>
+ <p class="muted">Shaded band = a common in-range zone (3.9&ndash;10 mmol/L). Values in mmol/L (&times;18 &asymp; mg/dL).</p>
+</div>
+<div class="card">
+ <h2>How close was it?</h2>
+ <p>Average miss, versus simply assuming &ldquo;it stays where it is now&rdquo;:</p>
+ <div class="stat">
+  <div class="pill"><div class="lab">15 min ahead</div><div class="val good">&plusmn;0.38</div><div class="muted">vs &plusmn;0.81 for &ldquo;no change&rdquo; &mdash; about half the error</div></div>
+  <div class="pill"><div class="lab">30 min ahead</div><div class="val good">&plusmn;1.21</div><div class="muted">vs &plusmn;1.57 &mdash; still better</div></div>
+  <div class="pill"><div class="lab">60 min ahead</div><div class="val warn">&plusmn;3.28</div><div class="muted">vs &plusmn;2.96 &mdash; now it&rsquo;s <b>worse</b></div></div>
+ </div>
+ <p class="muted">Error in mmol/L, averaged over the test period.</p>
+</div>
+<div class="card">
+ <h2>Why it gives up at an hour</h2>
+ <p>Past about 30 minutes the trend alone stops helping &mdash; and that&rsquo;s the interesting bit. By an hour out, glucose isn&rsquo;t really being steered by its recent drift anymore. It&rsquo;s being steered by <b>what you ate and the insulin on board</b>. The model can&rsquo;t see those, so it can&rsquo;t see past the wall.</p>
+ <p>So the maths quietly points back at the thing every person with diabetes already knows runs the show: <b>food and insulin</b>. The next version would feed those in to reach further ahead.</p>
+</div>
+<div class="note">
+ <b>Please read this part.</b> This is a curiosity-driven research demo on a handful of anonymised recordings &mdash; <b>not a medical device, not advice, and not anything to base dosing or treatment on.</b> The short-horizon idea here is already built, properly and safely, into real insulin pumps (predictive low-glucose suspend). Always go by your own CGM, your pump, and your care team.
+</div>
+<p class="foot">Built from real type-1 CGM data using the ARA framework &middot; a curious side-project, shared in good faith.</p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const G=[15.6, 15.4, 15.2, 14.9, 14.6, 14.3, 14.1, 13.9, 13.9, 14.0, 14.2, 14.2, 14.1, 13.7, 12.9, 11.9, 10.7, 9.4, 8.2, 7.0, 6.1, 5.2, 4.5, 3.9, 3.3, 2.8, 2.4, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.6, 3.3, 4.3, 5.5, 6.9, 8.4, 9.8, 11.0, 12.0, 12.9, 13.7, 14.3, 14.9, 15.3, 15.6, 15.8, 15.9, 15.9, 15.7, 15.4, 15.2, 14.8, 14.4, 14.0, 13.7, 13.4, 13.2, 13.0, 12.9, 13.0, 13.2, 13.5, 13.9, 14.4, 14.9, 15.2, 15.4, 15.3, 15.0, 14.6, 14.2, 13.6, 13.0, 12.4, 11.8, 11.2, 10.5, 9.9, 9.4, 8.9, 8.5, 8.2, 7.9, 7.8, 7.7, 7.5, 7.5, 7.5, 7.4, 7.4, 7.3, 7.3, 7.2, 7.2, 7.1, 7.0, 7.0, 6.9, 6.9, 6.8, 6.8, 6.7, 6.6, 6.5, 6.4, 6.2, 6.1, 6.0, 5.9],P=[14.8, 14.6, 14.5, 13.9, 13.6, 13.4, 13.6, 13.4, 14.0, 14.3, 14.7, 13.9, 13.4, 12.1, 10.1, 8.7, 7.3, 5.9, 5.5, 4.5, 4.7, 3.7, 3.6, 3.2, 2.4, 2.1, 2.0, 2.3, 2.9, 2.8, 2.6, 2.6, 2.5, 2.5, 2.6, 2.6, 2.6, 2.7, 2.7, 2.7, 2.7, 4.4, 6.2, 7.7, 9.2, 10.8, 12.3, 13.2, 13.4, 13.8, 14.4, 15.1, 15.2, 16.0, 15.9, 15.9, 15.9, 15.8, 15.5, 14.8, 14.2, 14.5, 13.5, 13.2, 12.9, 13.0, 12.6, 12.8, 12.5, 12.7, 13.4, 13.8, 14.2, 14.8, 15.5, 15.9, 15.4, 15.3, 14.2, 13.4, 13.0, 12.9, 11.8, 11.4, 10.9, 10.4, 9.8, 8.8, 8.5, 8.4, 7.9, 7.8, 7.8, 7.4, 7.9, 7.7, 7.0, 7.7, 7.7, 7.1, 7.5, 7.1, 7.4, 7.0, 7.3, 6.9, 6.8, 7.2, 6.8, 7.1, 6.6, 6.9, 6.5, 6.4, 6.3, 6.3, 5.7, 6.0, 5.9, 5.8],labels=G.map((_,i)=>i*5);
+const band={id:'band',beforeDatasetsDraw(c){const{ctx,chartArea:a,scales:{y}}=c;ctx.save();ctx.fillStyle='rgba(46,158,111,0.08)';
+ const y1=y.getPixelForValue(10),y2=y.getPixelForValue(3.9);ctx.fillRect(a.left,y1,a.right-a.left,y2-y1);ctx.restore();}};
+new Chart(document.getElementById('trace'),{type:'line',
+ data:{labels,datasets:[
+  {label:'Real glucose',data:G,borderColor:'#7a8794',borderWidth:2,pointRadius:0,tension:.3},
+  {label:'Predicted 15 min earlier',data:P,borderColor:'#3b7ddd',backgroundColor:'#3b7ddd',borderWidth:0,pointRadius:2.2,showLine:false}]},
+ options:{responsive:true,maintainAspectRatio:false,
+  scales:{y:{title:{display:true,text:'glucose (mmol/L)'},min:0,max:17,grid:{color:'#eef1f5'}},
+   x:{title:{display:true,text:'minutes'},grid:{display:false},ticks:{maxTicksLimit:8}}},
+  plugins:{legend:{labels:{usePointStyle:true,boxWidth:8}}}},plugins:[band]});
+</script></body></html>

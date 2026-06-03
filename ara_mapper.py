@@ -14,11 +14,16 @@ Output: JSON containing:
     - system_class: framework classification (singularity / consumer / absorber /
                     clock / engine / exothermic / harmonic)
     - dominant_period_samples: detected fundamental cycle length
-    - home_k: φ-rung index at which the dominant period sits
+    - home_k: octave-rung index at which the dominant period sits (period = 2^k samples)
     - per_rung_breakdown: list of (k, period, amp, ara, classification) for each rung
     - matched_partners: pairs of rungs that are anti-phase coupled
 
-Author: Dylan La Franchi (with help from Claude). Public release, May 2026.
+Ladder note (current standard, 30 May 2026): rung SPACING is octave (x2); the golden
+ratio phi lives in the coupling/handover between rungs, not in the spacing. ARA is a
+bounded 0-2 coordinate; a raw reading above 2 is a diagnostic overflow (often a composite
+of two systems in one channel), not a real position.
+
+Author: Dylan La Franchi (with help from Claude). Public release, May 2026; updated June 2026.
 """
 import os, sys, json, math, argparse
 import numpy as np
@@ -216,15 +221,17 @@ def map_system(data, sample_rate=1.0, time_unit='samples',
     if dom_period is None:
         return dict(error='No dominant cycle detected — signal may be aperiodic')
 
-    # 2. Map dominant period onto a φ-rung index
-    home_k = int(round(math.log(dom_period) / math.log(PHI)))
+    # 2. Map dominant period onto an OCTAVE-rung index.
+    #    Ladder correction (30 May 2026): rung SPACING is octave (x2), not phi.
+    #    phi lives in the coupling/handover between rungs, not in the spacing.
+    home_k = int(round(math.log2(dom_period)))
 
-    # 3. Build rung ladder around home_k
+    # 3. Build octave-rung ladder around home_k (period = 2^k samples)
     rung_ks = list(range(home_k - rungs_below, home_k + rungs_above + 1))
     rung_breakdown = []
     rung_aras = []
     for k in rung_ks:
-        period = PHI ** k
+        period = 2.0 ** k
         if period < 2 or 4 * period > len(arr):
             rung_breakdown.append(dict(k=k, period_samples=float(period),
                                         period_time=float(period/sample_rate),
@@ -264,7 +271,7 @@ def map_system(data, sample_rate=1.0, time_unit='samples',
                     partners.append(dict(rung_a=int(k1), rung_b=int(k2),
                                           ara_a=a1, ara_b=a2,
                                           gap_rungs=int(abs(k1-k2)),
-                                          gap_time=float(PHI**abs(k1-k2))))
+                                          gap_time=float(2**abs(k1-k2))))
 
     # 6. ARA-of-ARA (engine-of-engines): mean ARA across all valid rungs
     if rung_aras:
@@ -349,7 +356,7 @@ def main():
     print(f"  ARA-of-ARA: {result['ara_of_ara']:.3f}" if result['ara_of_ara'] else "  ARA-of-ARA: undefined")
     print(f"    — Next-level class: {result['ara_of_ara_class']}")
     print()
-    print(f"  φ-rung breakdown (valid rungs only):")
+    print(f"  octave-rung breakdown (valid rungs only):")
     print(f"  {'k':>4}  {'period':>12}  {'amp':>8}  {'ARA':>7}  {'class':<20}")
     for r in result['rung_breakdown']:
         if not r['valid']: continue
