@@ -98,3 +98,83 @@ output becomes glucose's future. The near term is glucose's own; the far term be
 - **Data needed to run it:** a CGM record with candidate driver channels logged on the same clock
   (carbs / insulin / activity) — e.g. OhioT1DM (DUA), full D1namo (CGM + food + accelerometer), or a
   Tidepool/Nightscout export. Our current CGM folders lack any driver channel.
+
+---
+
+## Seasonal influenza (3 June 2026) — disease outbreak cycle
+
+Real CDC ILINet national weekly %ILI, 2010w40–2024w20 (711 weeks, via Delphi Epidata API). Strict-causal
+self-forecast, golden split, annual cycle P=52 weeks. **Strong win, 5/5 horizons — same phase-capture signature
+as sea ice / QBO:**
+
+| ahead | persistence | framework |
+|---|---|---|
+| 2 wk | +0.908 | +0.911 |
+| 1 mo (4 wk) | +0.768 | +0.805 |
+| 2 mo (8 wk) | +0.443 | **+0.587** |
+| 3 mo (13 wk) | +0.097 | **+0.431** |
+| **6 mo (26 wk)** | **−0.329** | **+0.405** |
+
+At 6 months persistence is anti-correlated (winter-peak → summer-trough) while the framework holds +0.41 — the
+season's phase, captured. **Robust through the 2020–22 COVID flu collapse** (a large real anomaly in the series).
+This is the 3–6 month window where vaccine distribution and hospital staffing are decided.
+
+**Honest fences:** predicts seasonal *timing/shape*, NOT *strain dominance* (a different antigenic problem) nor
+fully the *year-to-year amplitude* (bad vs mild season). National aggregate, self-forecast (no climate/school
+drivers). The driver-below for flu would be temperature/humidity/school-term — adding them is the next step.
+
+**Data note for the other two of Dylan's three picks:** *Dengue/malaria* are seasonal and partly fetchable
+(WHO/PAHO, country surveillance) but messier than flu; *retail/holiday consumption* is cleanly fetchable (US
+Census / FRED non-seasonally-adjusted retail sales has a strong December cycle); *locust/pest* records are
+sparse and irregular (FAO + satellite) — the hardest to get as a clean series. Flu run first as the flagship.
+
+---
+
+## Retail / holiday consumption cycle (3 June 2026)
+
+Real US Advance Retail Sales, NOT seasonally adjusted (FRED `RSXFSN`, 1992–2024, 396 months). Two readings:
+
+- **Raw sales: trend-dominated, weak test (2/5).** Sales grew 127k→691k, so persistence is already ~0.86–0.96
+  at every horizon (same "trivial" issue as CO₂). The framework wins only at h=1–2.
+- **The holiday CYCLE itself: clean 5/5 win.** Removing the growth trend *causally* (seasonal index =
+  value ÷ trailing-12-month mean — uses only past, no leakage) isolates the holiday oscillation (Dec spike ~1.29,
+  Jan trough ~0.81). Forecasting that:
+
+| ahead | persistence | framework |
+|---|---|---|
+| 1 mo | +0.100 | **+0.481** |
+| 2 mo | **−0.185** | **+0.442** |
+| 3 mo | −0.036 | +0.196 |
+| **6 mo** | **−0.045** | **+0.777** |
+| 12 mo | +0.765 | +0.825 |
+
+Phase-capture again: at 6 months persistence is ~0 (June↔December) while the framework holds +0.78. **The
+consumption cycle is strongly predictable once separated from the growth trend** — which is the honest framing:
+the framework reads the *cycle*; the trend is a separate slow component you isolate first (causally).
+
+---
+
+## Dengue (3 June 2026) — partial / weaker
+
+Real PAHO dengue incidence, Brazil, 2014–2023 (Delphi Epidata `paho_dengue`, latest-issue per epiweek, 322 wk).
+Self-forecast, P=52 wk. **1/4 horizons — annual phase only:** h=26 wk (6 mo) persistence +0.072 → framework
+**+0.608**; but h=4/8/13 the framework is *worse* (0.37/0.23/0.20 vs 0.85/0.69/0.49). Dengue incidence spans
+~600× (1.7→1065), with epidemic onset/magnitude driven by rainfall, serotype switches, and waning immunity —
+irregular external drivers the self-forecast can't see. So the framework reads the **annual season** but not the
+**epidemic dynamics.** Contrast flu (one regular driver, 5/5) vs dengue (many irregular drivers, 1/4) — the gap
+is itself informative: more driver-dependent + spikier = harder for a self-forecast, needs the drivers fed in.
+
+## Cancer-timing direction — data scope (3 June 2026)
+
+The "framework reads the timing/dynamics, biologists supply the cause" bridge (chronotherapy + adaptive therapy)
+needs real time-series. Scoped candidates and fetchability:
+- **Cell cycle as an oscillator** (prerequisite: does it have a measurable ARA?) → cleanest source is
+  **synchronized cell-cycle expression time-series** (Spellman/Cho yeast cell cycle, on GEO) — findable but not
+  a one-call API like FRED/Epidata.
+- **Tumor growth curves** (xenograft caliper series over time) → exist as paper supplementary data; need assembly.
+- **Drug-resistance evolution** (to test our pace↔adaptation result: fast cycle + low copy-fidelity → fastest
+  resistance) → cell-line evolution experiments / GDSC-adjacent; need locating.
+- None are trivially fetchable in-sandbox; this is the clear *data* next-step. First honest test = cell-cycle
+  ARA on a synchronized-cell expression series (demonstrate the cycle is measurable before any therapy-timing claim).
+- HARD FENCE: any cancer work here is exploratory dynamics-mapping and hypothesis generation — never clinical,
+  never advice, never a prediction about a person. Not medical advice.
