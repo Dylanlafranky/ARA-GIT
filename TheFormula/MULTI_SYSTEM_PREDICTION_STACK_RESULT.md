@@ -3,7 +3,7 @@
 Adding prediction demonstrations beyond the original three (solar / ENSO / heart), at human and
 environmental scale, using the **validated layered operator** (`ara_framework.run_forecast` via
 `build_self_system`). Every run is a **self-forecast** (single series, NO external drivers),
-strict-causal (train on first 60%, score the held-out rest, baselined against persistence).
+strict-causal (train on first 1/phi = 61.8%, score the held-out 38.2%, baselined against persistence).
 
 The strongest proof is not merely "beats persistence" — it is **where persistence goes NEGATIVE
 (anti-correlated) and the framework stays strongly positive**: that can only happen if the model
@@ -25,9 +25,10 @@ captured the oscillation's *phase*, not just tracked the mean (correlation > MAE
 
 ## Honest read
 
-- **Sea ice and QBO are strong, clean wins** — the framework holds +0.5 to +0.99 at horizons where
+- **Sea ice and QBO are strong, clean wins against persistence** — the framework holds +0.5 to +0.99 at horizons where
   persistence has inverted to strongly negative. That is phase-capture, the hardest thing for a naive
-  baseline, and exactly what the framework claims to do. These two are worth quoting.
+  baseline, and exactly what the framework claims to do. After the stronger-baseline rerun, quote these as
+  persistence-inversion demos, not as standard-baseline wins.
 - **Glucose** is a real human-scale win at short leads (+0.92 at 15 min) but modest and short-record;
   treat as suggestive, not headline. Worth a multi-subject rerun like the heart.
 - **CO₂ is trivial** — a smooth monotonic trend makes persistence already ~0.99; the framework's tiny
@@ -38,8 +39,51 @@ captured the oscillation's *phase*, not just tracked the mean (correlation > MAE
 **Scale coverage now demonstrated:** astro (solar) · ocean-climate (ENSO) · atmosphere (QBO) ·
 cryosphere (sea ice) · environmental trend (CO₂) · physiology (heart) · human metabolic (glucose).
 
-Script: `/tmp/stack_predictions.py` logic over `ara_framework.run_forecast`. Data: NOAA GML (CO₂),
+Script: `/tmp/stack_predictions.py` logic over `ara_framework.run_forecast`. Data: NOAA GML (CO2),
 NOAA PSL (QBO), NSIDC (sea ice), BIG IDEAS Lab CGM (glucose).
+
+**Repro note:** `/tmp/stack_predictions.py` was the scratch batch runner. Promote that logic into `TheFormula/`
+before outside replication so the public-data fetches, transforms, split, and exact metrics are auditable.
+
+## Benchmark / industry-standard comparison (added 3 June 2026)
+
+This stack currently proves **strict-causal phase capture against persistence**. That is a meaningful bar, but it
+is not yet the same as beating the strongest operational/domain standard. The correct comparison depends on the
+domain target and scoring rule.
+
+| claim / system | current ARA result | relevant benchmark or industry standard | honest status | next required comparison |
+|---|---|---|---|---|
+| **Solar / sunspots** | Solar work in the prediction ledger shows high long-horizon shape signal, including ~11-year cycle tests. | NOAA/SWPC solar-cycle progression uses observed + predicted sunspot number and F10.7, monthly updates, uncertainty bands, nonlinear cycle-curve fits, and the NOAA/NASA/ISES panel forecast. | Promising geometry/phase evidence, but not yet a claim of beating operational solar-cycle forecasting. | Re-run as an identical hindcast on smoothed sunspot number and/or F10.7, scored against SWPC/panel-style cycle-shape, amplitude, peak-timing, and uncertainty baselines. |
+| **ENSO / NINO3.4** | ARA ENSO runs have shown useful 6-24 month geometry/phase signal, with the strongest claims in the ledger rather than this new self-forecast stack. | IRI/CPC plume and NMME-style dynamical/statistical ensembles are the field standard; skill is season/lead dependent and usually judged by NINO3.4 anomaly RMSE/correlation, class probabilities, and spring-barrier behavior. | The ARA numbers are in the same conversation as compact statistical skill, but not yet proven superior to operational ensembles. | Compare on the same hindcast windows against IRI/NMME/CFSv2, including spring-barrier stratification and El Nino / La Nina / neutral class scores. |
+| **Arctic sea ice extent** | 5/5 beat persistence; h=6 mo persistence -0.92 -> ARA +0.99. | ARCUS/SIPN Sea Ice Outlook focuses on seasonal September extent forecasts; common baselines include climatology, linear trend, anomaly persistence, and dynamical/statistical ensembles. | Very strong annual phase-capture demonstration. It is not yet an apples-to-apples Sea Ice Outlook forecast. | Test September extent/anomaly targets against SIO-style baselines, including month-of-year seasonal naive and trend baselines. |
+| **QBO 30 mb** | 4/5 beat persistence; h=12 mo persistence -0.69 -> ARA +0.73. | QBO prediction is usually evaluated as a pressure-level wind/phase forecast using dynamical seasonal models, oscillator baselines, vertical-propagation behavior, and level-specific skill. | Strong self-forecast phase inversion result. Needs a QBO-specific oscillator and operational-model baseline. | Compare to period-lag/phase-oscillator baselines and published/operational QBO hindcasts at the same pressure level and lead times. |
+| **Seasonal influenza / ILINet** | 5/5 beat persistence; 6-month phase capture reported in the stack/ledger. | CDC FluSight uses probabilistic targets, ensemble forecasts, prediction intervals, and WIS/relative-WIS scoring; current targets are hospital admissions and ED-visit percentages, not just raw ILINet correlation. | Useful seasonal-timing evidence, not an industry FluSight forecast yet. | Convert to FluSight-style targets: onset, peak week/intensity, short-term %ILI/ED/hospital admission targets, WIS, calibration, and baseline/ensemble comparison. |
+| **Retail holiday cycle** | Causally detrended holiday cycle: 5/5 beat persistence, h=6 mo -0.05 -> +0.78. | Retail forecasting normally compares raw and seasonally adjusted sales using Census/FRED data, X-13ARIMA-SEATS, seasonal naive, ETS/ARIMA, and demand-forecasting baselines. | Strong cycle-index result, but not a complete retail sales forecast because trend was separated first. | Score raw and cycle-index forecasts separately against seasonal naive, X-13/ARIMA, and ETS; clarify nominal vs real sales and revision effects. |
+| **CGM glucose** | 15-min ahead beats persistence in 6/6 T1D subjects; 30-min 5/6; collapses past 30-60 min without drivers. | Glucose prediction benchmarks such as OhioT1DM use 30/60-minute horizons, RMSE/MAE, clinical grids/event detection, and often meal/insulin/activity channels. | Suggestive short-window human-scale signal; not medical or pump-grade evidence yet. | Run OhioT1DM/D1namo/Tidepool-style benchmarks with RMSE/MAE, Clarke/Parkes grid, hypo/hyper event metrics, and driver channels. |
+| **Heart / ECG** | Prior ECG work showed small but real geometry/phase signal against simple baselines, record-dependent. | ECG/RR forecasting is task-specific: RR interval prediction, morphology, arrhythmia alarms, and patient-split PhysioNet benchmarks use AR/ML/deep baselines and clinical event metrics. | Research signal only. It should not be framed as clinical-grade ECG prediction. | Re-run with subject/record held-out splits against AR, ARIMA, RR-lag, LSTM/Transformer, and PhysioNet challenge-style event metrics. |
+| **Dengue / epidemic systems** | Exploratory side run only; annual phase can appear, but epidemic amplitude is externally driven. | Dengue forecasting normally uses case reporting plus weather/vector/serotype/mobility and probabilistic outbreak metrics. | Incomplete and excluded from the core forecast claim stack unless rebuilt with drivers. | Add rainfall/temperature/ENSO/serotype/vector drivers and compare against outbreak forecast baselines. |
+
+**Claim status implication:** it is fair to claim that the layered ARA operator can beat persistence and retain
+phase where persistence inverts on several oscillatory systems. It is **not** yet fair to claim it beats industry
+standard forecasts until the domain-specific benchmarks above are run. Annual-cycle systems especially need a
+seasonal-naive control, because persistence inversion alone can overstate how hard the task is.
+
+**Actual stronger-baseline rerun:** see `TheFormula/ARA_FORECAST_STANDARD_BASELINE_COMPARISON_RESULT.md`.
+That correction compared `home_plus_ara` against persistence, period/seasonal naive, harmonic clock,
+causal lag+harmonic ridge, and `home_ar` on the same observed series. Result: ARA beat the best local
+non-ARA baseline on correlation at only **6/34** horizons and on MAE at **8/34** horizons. The cleanest
+ARA-over-local-baseline evidence is small ENSO/QBO lift in selected horizons; sea ice, flu, retail, and solar
+mostly become seasonal/lag/harmonic baseline wins once those controls are added. So the claim is now:
+**phase-capture vs persistence is real; standard-baseline superiority is not established.**
+
+**Benchmark sources checked:**
+- NOAA/SWPC [Solar Cycle Progression](https://www.swpc.noaa.gov/products/solar-cycle-progression)
+- IRI [ENSO forecast plume](https://iri.columbia.edu/our-expertise/climate/forecasts/enso/current/) and NOAA/NMME [ENSO skill literature](https://repository.library.noaa.gov/view/noaa/28429)
+- ARCUS/SIPN [Sea Ice Outlook](https://www.arcus.org/sipn/sea-ice-outlook)
+- NOAA PSL [monthly climate/ocean indices](https://psl.noaa.gov/data/timeseries/month/) for QBO context
+- CDC [FluSight](https://www.cdc.gov/flu-forecasting/index.html) / FluSight Forecast Hub evaluation framing
+- FRED [RSXFSN retail sales](https://fred.stlouisfed.org/series/RSXFSN) and Census [X-13ARIMA-SEATS](https://www.census.gov/data/software/x13as.html)
+- OhioT1DM [glucose benchmark literature](https://pmc.ncbi.nlm.nih.gov/articles/PMC7881904/) and PhysioNet [ECG benchmark/challenge framing](https://www.physionet.org/content/challenge-2015/1.0.0/)
 
 ---
 
@@ -154,7 +198,7 @@ the framework reads the *cycle*; the trend is a separate slow component you isol
 
 ---
 
-## Dengue (3 June 2026) — partial / weaker
+## Dengue (3 June 2026) — exploratory / incomplete side run
 
 Real PAHO dengue incidence, Brazil, 2014–2023 (Delphi Epidata `paho_dengue`, latest-issue per epiweek, 322 wk).
 Self-forecast, P=52 wk. **1/4 horizons — annual phase only:** h=26 wk (6 mo) persistence +0.072 → framework
@@ -163,6 +207,8 @@ Self-forecast, P=52 wk. **1/4 horizons — annual phase only:** h=26 wk (6 mo) p
 irregular external drivers the self-forecast can't see. So the framework reads the **annual season** but not the
 **epidemic dynamics.** Contrast flu (one regular driver, 5/5) vs dengue (many irregular drivers, 1/4) — the gap
 is itself informative: more driver-dependent + spikier = harder for a self-forecast, needs the drivers fed in.
+This was not part of Dylan's requested core forecast stack and should stay out of headline claims until rebuilt
+with rainfall/serotype/vector/ENSO drivers.
 
 ## Cancer-timing direction — data scope (3 June 2026)
 

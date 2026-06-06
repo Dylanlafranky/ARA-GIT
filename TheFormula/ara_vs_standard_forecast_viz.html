@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ARA vs Truth vs Standard Proxy</title>
+  <script src="ara_vs_standard_forecast_viz_data.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0e13;
+      --panel: #111821;
+      --panel-2: #151f2a;
+      --line: #263646;
+      --text: #ecf4ff;
+      --muted: #9db0c3;
+      --truth: #f4f7fb;
+      --ara: #9cff3a;
+      --standard: #ff9d2e;
+      --persist: #5ea0ff;
+      --bad: #ff5d6c;
+      --good: #5ff0be;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+    }
+
+    header, .toolbar, .chart-panel, .metrics, .cost-panel {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 8px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 14px 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(20px, 2.5vw, 32px);
+      line-height: 1.1;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 13px;
+      max-width: 920px;
+    }
+
+    .badge {
+      border: 1px solid #3a4e63;
+      background: #0d141d;
+      color: #bfe4ff;
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(180px, 0.7fr) minmax(210px, 0.8fr);
+      gap: 12px;
+      align-items: end;
+      padding: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      color: #b9d4ec;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    select {
+      width: 100%;
+      background: #0d141d;
+      color: var(--text);
+      border: 1px solid #32455a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
+    .horizon-row, .toggle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button, .toggle {
+      border: 1px solid #33495e;
+      background: #172231;
+      color: var(--text);
+      border-radius: 6px;
+      padding: 9px 12px;
+      font-weight: 800;
+      cursor: pointer;
+      min-height: 38px;
+    }
+
+    button.active {
+      border-color: var(--ara);
+      color: var(--ara);
+      background: #10200f;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      user-select: none;
+      font-size: 13px;
+    }
+
+    .toggle input { accent-color: var(--ara); }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 12px;
+      min-height: 540px;
+    }
+
+    .chart-panel {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 540px;
+      overflow: hidden;
+    }
+
+    .chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chart-title {
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .chart-wrap {
+      min-height: 430px;
+      padding: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      display: block;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      background: var(--line);
+    }
+
+    .metric {
+      background: var(--panel);
+      padding: 12px;
+      min-height: 90px;
+    }
+
+    .metric .k {
+      font-size: 11px;
+      color: #b9d4ec;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .metric .v {
+      font-size: 24px;
+      font-weight: 950;
+      margin-top: 8px;
+    }
+
+    .metric .s {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .cost-panel {
+      padding: 14px;
+    }
+
+    .cost-panel h2 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .cost-card {
+      border: 1px solid #2e4256;
+      background: #0d141d;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .cost-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .cost-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 12px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    th, td {
+      border-top: 1px solid #263646;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #cbe7ff;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .all-costs {
+      margin-top: 12px;
+      max-height: 300px;
+      overflow: auto;
+      border: 1px solid #263646;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 980px) {
+      header, .toolbar, .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <h1>ARA vs Truth vs Standard Proxy</h1>
+        <div class="sub">Strict-causal held-out forecasts. The orange line is the strongest local non-ARA standard/proxy baseline available in this run; operational archive standards are listed as pending.</div>
+      </div>
+      <div class="badge">local proxy benchmark · not operational archive</div>
+    </header>
+
+    <section class="toolbar">
+      <div>
+        <label for="systemSelect">System</label>
+        <select id="systemSelect"></select>
+      </div>
+      <div>
+        <label>Horizon</label>
+        <div id="horizonRow" class="horizon-row"></div>
+      </div>
+      <div>
+        <label for="standardSelect">Standard line</label>
+        <select id="standardSelect">
+          <option value="best_corr">Best local standard by corr</option>
+          <option value="best_mae">Best local standard by MAE</option>
+          <option value="persistence">Persistence</option>
+          <option value="seasonal_naive">Period / seasonal naive</option>
+          <option value="harmonic_clock">Harmonic clock</option>
+          <option value="lag_harmonic_ridge">Lag + harmonic ridge</option>
+          <option value="home_ar">Causal home AR</option>
+        </select>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="toggle-row">
+        <label class="toggle"><input id="showTruth" type="checkbox" checked><span class="dot" style="background:var(--truth)"></span>Truth</label>
+        <label class="toggle"><input id="showAra" type="checkbox" checked><span class="dot" style="background:var(--ara)"></span>ARA + Home Memory</label>
+        <label class="toggle"><input id="showStd" type="checkbox" checked><span class="dot" style="background:var(--standard)"></span>Standard proxy</label>
+        <label class="toggle"><input id="showPers" type="checkbox"><span class="dot" style="background:var(--persist)"></span>Persistence</label>
+      </div>
+      <div></div>
+      <div class="badge" id="statusBadge"></div>
+    </div>
+
+    <main class="main-grid">
+      <section class="chart-panel">
+        <div class="chart-head">
+          <div class="chart-title" id="chartTitle"></div>
+          <div class="legend" id="legend"></div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="chart" width="1200" height="560"></canvas>
+        </div>
+      </section>
+
+      <aside class="metrics" id="metrics"></aside>
+    </main>
+
+    <section class="cost-panel">
+      <h2>Input Requirements & Cost</h2>
+      <div id="selectedCost" class="cost-card"></div>
+      <div class="all-costs">
+        <table>
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>ARA Inputs</th>
+              <th>Standard Method</th>
+              <th>Input Count</th>
+              <th>Standard Inputs</th>
+              <th>Compute / Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="costTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const DATA = window.ARA_VS_STANDARD_DATA;
+    const systems = DATA.results || [];
+    const modelLabels = {
+      persistence: "Persistence",
+      seasonal_naive: "Period / seasonal naive",
+      harmonic_clock: "Harmonic clock",
+      lag_harmonic_ridge: "Lag + harmonic ridge",
+      home_ar: "Causal home AR",
+      ara_roll_readout: "ARA roll readout",
+      ara_fixed_roll: "ARA fixed roll",
+      home_plus_ara: "ARA + Home Memory"
+    };
+    const colors = {
+      truth: getCss("--truth"),
+      ara: getCss("--ara"),
+      standard: getCss("--standard"),
+      persistence: getCss("--persist"),
+      grid: "rgba(157,176,195,.18)",
+      text: getCss("--muted")
+    };
+
+    const state = {
+      systemIndex: 0,
+      horizon: null,
+      standardMode: "best_corr"
+    };
+
+    function getCss(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function fmt(v, digits = 3, signed = true) {
+      if (v === null || v === undefined || Number.isNaN(v)) return "n/a";
+      const n = Number(v);
+      const prefix = signed && n > 0 ? "+" : "";
+      return prefix + n.toFixed(digits);
+    }
+
+    function metricValue(row, model, key) {
+      const m = row.models[model];
+      return m ? m[key] : null;
+    }
+
+    function currentSystem() {
+      return systems[state.systemIndex];
+    }
+
+    function currentHorizonRow() {
+      const sys = currentSystem();
+      if (!state.horizon) state.horizon = Object.keys(sys.horizons)[0];
+      return sys.horizons[state.horizon];
+    }
+
+    function standardModel(row) {
+      if (state.standardMode === "best_corr") return row.best_non_ara_corr.model;
+      if (state.standardMode === "best_mae") return row.best_non_ara_mae.model;
+      return state.standardMode;
+    }
+
+    function setupControls() {
+      const systemSelect = document.getElementById("systemSelect");
+      systemSelect.innerHTML = systems.map((s, i) => `<option value="${i}">${s.name}</option>`).join("");
+      systemSelect.addEventListener("change", () => {
+        state.systemIndex = Number(systemSelect.value);
+        state.horizon = Object.keys(currentSystem().horizons)[0];
+        renderHorizonButtons();
+        render();
+      });
+
+      document.getElementById("standardSelect").addEventListener("change", (event) => {
+        state.standardMode = event.target.value;
+        render();
+      });
+
+      for (const id of ["showTruth", "showAra", "showStd", "showPers"]) {
+        document.getElementById(id).addEventListener("change", render);
+      }
+
+      renderHorizonButtons();
+    }
+
+    function renderHorizonButtons() {
+      const row = document.getElementById("horizonRow");
+      const sys = currentSystem();
+      const keys = Object.keys(sys.horizons);
+      if (!state.horizon || !sys.horizons[state.horizon]) state.horizon = keys[0];
+      row.innerHTML = "";
+      keys.forEach((h) => {
+        const btn = document.createElement("button");
+        btn.textContent = `${h}${sys.period >= 40 && sys.name.includes("flu") ? "w" : ""}`;
+        btn.className = h === state.horizon ? "active" : "";
+        btn.addEventListener("click", () => {
+          state.horizon = h;
+          renderHorizonButtons();
+          render();
+        });
+        row.appendChild(btn);
+      });
+    }
+
+    function renderMetrics() {
+      const sys = currentSystem();
+      const row = currentHorizonRow();
+      const std = standardModel(row);
+      const lift = row.home_plus_ara_corr_lift_vs_best_non_ara;
+      const maeDelta = row.home_plus_ara_mae_delta_vs_best_non_ara;
+      const araCorr = metricValue(row, "home_plus_ara", "corr");
+      const stdCorr = metricValue(row, std, "corr");
+      const araMae = metricValue(row, "home_plus_ara", "mae");
+      const stdMae = metricValue(row, std, "mae");
+      const verdict = lift > 0 ? "ARA beats best local standard on corr" : "standard proxy leads on corr";
+      document.getElementById("statusBadge").textContent = `${verdict} · ${sys.notes}`;
+      const cards = [
+        ["ARA+Home Corr", fmt(araCorr), "home_plus_ara"],
+        ["Standard Corr", fmt(stdCorr), modelLabels[std] || std],
+        ["Corr Lift", fmt(araCorr - stdCorr), "ARA+Home minus selected standard"],
+        ["ARA+Home MAE", araMae == null ? "n/a" : araMae.toFixed(3), "point error"],
+        ["Standard MAE", stdMae == null ? "n/a" : stdMae.toFixed(3), modelLabels[std] || std],
+        ["MAE Delta", (araMae - stdMae).toFixed(3), "negative is better for ARA"],
+        ["Best Corr Baseline", row.best_non_ara_corr.model, fmt(row.best_non_ara_corr.corr)],
+        ["Best MAE Baseline", row.best_non_ara_mae.model, row.best_non_ara_mae.mae.toFixed(3)]
+      ];
+      document.getElementById("metrics").innerHTML = cards.map(([k, v, s]) => `
+        <div class="metric">
+          <div class="k">${k}</div>
+          <div class="v">${v}</div>
+          <div class="s">${s}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderChart() {
+      const sys = currentSystem();
+      const row = currentHorizonRow();
+      const series = row.series;
+      const std = standardModel(row);
+      document.getElementById("chartTitle").textContent = `${sys.name} · horizon ${state.horizon} · standard: ${modelLabels[std] || std}`;
+      const lines = [];
+      if (document.getElementById("showTruth").checked) lines.push({ label: "Truth", values: series.truth, color: colors.truth, width: 2.3 });
+      if (document.getElementById("showAra").checked) lines.push({ label: "ARA + Home Memory", values: series.models.home_plus_ara, color: colors.ara, width: 2.2 });
+      if (document.getElementById("showStd").checked) lines.push({ label: modelLabels[std] || std, values: series.models[std], color: colors.standard, width: 2 });
+      if (document.getElementById("showPers").checked) lines.push({ label: "Persistence", values: series.models.persistence, color: colors.persistence, width: 1.6 });
+      document.getElementById("legend").innerHTML = lines.map(line => `
+        <span><span class="dot" style="background:${line.color}"></span> ${line.label}</span>
+      `).join("");
+
+      const canvas = document.getElementById("chart");
+      const ctx = canvas.getContext("2d");
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = Math.max(600, Math.floor(rect.width * dpr));
+      canvas.height = Math.max(360, Math.floor(rect.height * dpr));
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const w = rect.width;
+      const h = rect.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const pad = { left: 58, right: 22, top: 22, bottom: 42 };
+      const all = [];
+      lines.forEach(line => line.values.forEach(v => { if (Number.isFinite(v)) all.push(v); }));
+      if (!all.length) return;
+      let ymin = Math.min(...all), ymax = Math.max(...all);
+      const span = ymax - ymin || 1;
+      ymin -= span * 0.12;
+      ymax += span * 0.12;
+      const n = series.truth.length;
+      const x = i => pad.left + (n <= 1 ? 0 : i / (n - 1)) * (w - pad.left - pad.right);
+      const y = v => pad.top + (1 - (v - ymin) / (ymax - ymin)) * (h - pad.top - pad.bottom);
+
+      ctx.strokeStyle = colors.grid;
+      ctx.lineWidth = 1;
+      ctx.font = "12px Inter, system-ui, sans-serif";
+      ctx.fillStyle = colors.text;
+      for (let i = 0; i <= 5; i++) {
+        const yy = pad.top + i / 5 * (h - pad.top - pad.bottom);
+        ctx.beginPath();
+        ctx.moveTo(pad.left, yy);
+        ctx.lineTo(w - pad.right, yy);
+        ctx.stroke();
+        const val = ymax - i / 5 * (ymax - ymin);
+        ctx.fillText(val.toFixed(2), 8, yy + 4);
+      }
+      for (let i = 0; i <= 4; i++) {
+        const xx = pad.left + i / 4 * (w - pad.left - pad.right);
+        ctx.beginPath();
+        ctx.moveTo(xx, pad.top);
+        ctx.lineTo(xx, h - pad.bottom);
+        ctx.stroke();
+        const idx = Math.min(n - 1, Math.round(i / 4 * (n - 1)));
+        ctx.fillText(String(series.origin_index[idx]), xx - 14, h - 14);
+      }
+
+      lines.forEach(line => {
+        ctx.strokeStyle = line.color;
+        ctx.lineWidth = line.width;
+        ctx.beginPath();
+        let open = false;
+        line.values.forEach((v, i) => {
+          if (!Number.isFinite(v)) {
+            open = false;
+            return;
+          }
+          const xx = x(i), yy = y(v);
+          if (!open) {
+            ctx.moveTo(xx, yy);
+            open = true;
+          } else {
+            ctx.lineTo(xx, yy);
+          }
+        });
+        ctx.stroke();
+      });
+    }
+
+    function costKey(name) {
+      if (name.includes("solar")) return "Solar / sunspots";
+      if (name.includes("enso")) return "ENSO / NINO3.4";
+      if (name.includes("qbo")) return "QBO 30mb";
+      if (name.includes("retail")) return "Retail holiday cycle";
+      if (name.includes("sea_ice")) return "Arctic sea ice";
+      if (name.includes("flu")) return "Influenza / ILINet";
+      return "";
+    }
+
+    function renderCost() {
+      const key = costKey(currentSystem().name);
+      const row = DATA.input_cost_comparison.find(item => item.system === key) || DATA.input_cost_comparison[0];
+      document.getElementById("selectedCost").innerHTML = `
+        <h3>${row.system}</h3>
+        <p><strong>ARA:</strong> ${row.ara_inputs} <span class="muted">(${row.ara_input_count || ""})</span></p>
+        <p><strong>Standard method:</strong> ${row.standard_method || ""}</p>
+        <p><strong>Standard inputs:</strong> ${row.standard_inputs}</p>
+        <p><strong>Input count:</strong> ${row.standard_input_count || ""}</p>
+        <p><strong>Compute:</strong> ${row.standard_compute || ""}</p>
+        <p><strong>Cost:</strong> ${row.standard_cost}</p>
+        <p><strong>Status:</strong> ${row.comparison_status}</p>
+      `;
+      document.getElementById("costTable").innerHTML = DATA.input_cost_comparison.map(item => `
+        <tr>
+          <td>${item.system}</td>
+          <td>${item.ara_inputs}<br><span class="muted">${item.ara_input_count || ""}</span></td>
+          <td>${item.standard_method || ""}</td>
+          <td>${item.standard_input_count || ""}</td>
+          <td>${item.standard_inputs}</td>
+          <td><strong>Compute:</strong> ${item.standard_compute || ""}<br><strong>Cost:</strong> ${item.standard_cost}</td>
+          <td>${item.comparison_status}</td>
+        </tr>
+      `).join("");
+    }
+
+    function render() {
+      renderMetrics();
+      renderChart();
+      renderCost();
+    }
+
+    window.addEventListener("resize", renderChart);
+    setupControls();
+    render();
+  </script>
+</body>
+</html>
