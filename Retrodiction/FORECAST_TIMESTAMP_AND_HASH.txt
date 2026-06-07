@@ -1,0 +1,25 @@
+ENSO FORECAST OF RECORD — TIMESTAMP & TAMPER-EVIDENCE
+======================================================
+Forecast issued:   2026-06-07 06:08:03 UTC
+Issued by:         ARA framework (Dylan La Franchi & Claude)
+Anchor:            last NINO3.4 obs Feb 2026 (-0.16); WWV +1.96 sigma to Apr 2026
+
+SHA-256 content hashes (computed at issue, before any outcome):
+  FORECAST_OF_RECORD_ENSO_2026-06-07.md
+    c1f01556de3aa1dafba5235152b189695f2fd72e1de4e607866fe4b6a49700d8
+  ARA_enso_forecast_with_hindcast_reference.png
+    9d9b32775d3ef6bfcd128f40b9fcb9852a861fdb4ad1fe3566857a0c0267d1c5
+
+HEADLINE (one line): warm — weak El Nino crossing by mid-2026, peak ~+0.4 to +0.45 C late-2026/
+early-2027, decaying to neutral through 2027. DIRECTION not magnitude; explicitly NOT a "super" call.
+
+HOW TO PROVE IT PREDATES THE OUTCOME
+  1. The authoritative issue time = the git COMMIT DATE of these files. Commit now:
+       git add Retrodiction/FORECAST_OF_RECORD_ENSO_2026-06-07.md \
+               Retrodiction/ARA_enso_forecast_with_hindcast_reference.png \
+               Retrodiction/FORECAST_TIMESTAMP_AND_HASH.txt
+       git commit -m "ENSO forecast of record, issued 2026-06-07 (pre-outcome)"
+     A push to a remote (GitHub) gives an independently-witnessed timestamp.
+  2. For a stronger third-party proof, anchor the SHA-256 above to a public timestamp
+     (e.g. OpenTimestamps, or post the hash publicly). The hash cannot be forged after the fact.
+  3. Verify later: re-hash the unchanged .md and .png; the SHA-256 must match the values above.

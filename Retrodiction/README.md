@@ -34,6 +34,16 @@ to estimate prior states, fill gaps in a record, or infer a system's history bef
 - So the promising retrodiction targets are: short gaps, cross-scale (a slower neighbour pins a faster
   system's past), and genuinely under-measured variables with a strong measured partner.
 
+## Results in this folder (7 June 2026)
+- `RETRODICTION_REVERSE_ENGINE_CLOCK_RESULT.md` — retrodiction = forward predictor on reversed time;
+  reverse ≈ forward, small gap = arrow of time.
+- `RANDOMNESS_ENVELOPE_CONFIDENCE_RESULT.md` — residual = ARA 1.0 barrier; energy predicts its envelope
+  (+0.25) → trust score (hi-conf +0.37 vs lo +0.16); envelope as amplitude addition (+0.017 @24mo).
+- `ENERGY_GEOMETRY_UNIFIED_RESULT.md` — energy & geometry are one measurement; energy→direction short,
+  geometry→long; surface valley filled by subsurface; unified 3-output forecaster; 2−ARA energy input.
+- Figures: `ARA_unified_three_output_forecaster.png`, `ARA_prediction_geometry_energy_split.png`.
+- Scripts: `plot_unified_forecaster.py`, `plot_geometry_energy_split.py`.
+
 ## Next steps (when we pick this up)
 1. Implement the reverse engine-clock (wind phase backward, reverse φ-handover) as the mirror of the
    forward predictor.
