@@ -82,7 +82,21 @@ Forward 2026 ENSO run was NOT done credibly: the NINO data file is stale (ends D
 uncertain** (<37% any category). Our model gives direction, not magnitude, so cannot call a "super" event.
 To do a real current-anchored run: refresh NINO3.4 + feeders through mid-2026.
 
+## 9. Magnitude, the lag, and shape×magnitude (afternoon) — `Retrodiction/MAGNITUDE_LAG_AND_DECOMPOSITION_RESULT.md`
+Dylan corrected the "can't do magnitude" claim and was right. The reservoir at the crossing predicts the
+next peak's SIZE (+0.34–0.40 OOS, validated 64 onsets 1870+); the ARA asymmetry (skew) is a 2nd-order term
+(+0.20 of the residual). Decompose & recombine — geometry=shape (amp 0.66), reservoir+ARA=magnitude
+(restores amp 1.03), honest combined +0.51 vs persistence +0.41. The ~4-month lag is the TRAINING's MMSE
+hedge (not leakage, not the filter), the shadow of the ARA-1.0 barrier; it's genuine skill not persistence
+(change-corr +0.46 vs 0). It can't be shifted away (shift = future-leak or lead-shortening; rolling the data
+forward IS the legitimate shift). Blending to fix timing fails (both parts lag the same way; mash cancels
+only OPPOSITE errors); timing needs a genuinely LEADING input (the subsurface). Also: a dated forecast-of-
+record was committed (FORECAST_OF_RECORD_ENSO_2026-06-07.md) — warming to weak/moderate El Niño through 2026,
+direction not magnitude. what_is_this.html given a "Major update (7 June 2026)" amendment block (file had
+been truncated; restored from HEAD + the new content).
+
 ## Open threads
+- Generalize the predictor into a reusable ARA prediction formula across systems (in progress 7 Jun).
 - Gap-fill retrodiction (reconstruct an interior window from BOTH sides at once — should beat one-directional).
 - Refresh data for a current-anchored forward direction run.
 - Test the engine-poles/clock-middle residence inversion as a law on more systems.
