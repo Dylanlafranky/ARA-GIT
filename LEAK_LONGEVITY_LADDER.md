@@ -72,6 +72,25 @@ geometry under it: φ is π/5's cosine, doubled.
 - The atoms' and water's ARA-*shape* values are NOT yet assigned and are NOT fabricated here (per the curated-
   atlas honesty rule). Only the leak-longevity numbers are added, because those we measured.
 
+## Predictability window = golden-split (9 June 2026) — re-applying the EnergyRatio bedrock to the horizon
+The forecast horizon is golden-split: trust through **0.618** of the coherence window, decohere the **0.382**
+shed tail. **ENSO (clean):** spring barrier **18 mo ≈ 0.618 × decoherence (30 mo)**; remaining 12 mo = 0.382
+tail to full decoherence. The two numbers are semi-independent (30 mo from our value-corr dying; 18 mo the
+known spring barrier). The *pump* itself is separately confirmed (SPRING_PUMP_RESULT.md: subsurface WWV
+battery discharges in spring, re-seeds the surface; WWV has no spring barrier).
+
+**Cross-system status (honest):** the golden split (0.382/0.618) is robustly confirmed across systems in the
+**handover DUTY** — solar 0.394/0.606 (Waldmeier), ENSO 0.40/0.60, ECG 0.39/0.61 (54 records), all 1/φ²:1/φ.
+The *predictability-window* framing of it is **ENSO-clean only**: solar is a flat-floor flywheel (skill ~flat
+to ~44 yr = φ³, no clean barrier — and redundant, the duty already confirms it); ECG is stochastic/broadband
+(`TWOBAND_ECG`: deterministic forecast window does NOT transfer, only the duty). So window-framing rests on
+the confirmed duty for cross-system backing.
+
+**OPEN next test (Dylan's idea):** split the ECG **beat into rise (accumulation) / fall (release)** — the ARA
+decomposition isolates the deterministic skeleton under the broadband RR. Forecast each half, find its
+decoherence window + barrier, test barrier ≈ 0.618 × decoherence. If the golden split appears in the heart's
+rise/fall windows, that's the second clean predictability-window confirmation. Fresh-session-sized analysis.
+
 ## Honest status
 - Leak numbers are **exact** for atoms/ions (first principles), **measured** for water (liquid v=1) and solar
   (bedrock), **rough** for ENSO (metric saturates), and a **known round fact** for life (~1 Gbeats).

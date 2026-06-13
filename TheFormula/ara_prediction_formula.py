@@ -103,9 +103,21 @@ def ara_forecast(series, period=None, horizon=6, leading=None, train_frac=1/PHI)
     res_tr = ni[tr+h] - (ni[tr] + _ridge(feat(tr,use_lead), d, feat(tr,use_lead)))
     cf = lambda idx: np.column_stack([Ago[idx], rz[idx], araskew[idx]])
     confidence = np.clip(_ridge(cf(tr), np.abs(res_tr), cf(te)), 0.05, None)
+    # ENERGY-REMAINING -> direction certainty (from the leading reservoir's active discharge):
+    # high = energy still flowing, the current direction should CONTINUE (trust it);
+    # low  = energy spent, a TURN is loading (hedge the direction). 0..1.
+    if use_lead:
+        lzf = (np.asarray(leading,float)-np.nanmean(leading))/(np.nanstd(leading)+1e-9)
+        kk = max(2, int(round(P/12)))
+        discharge = np.abs(lzf - np.concatenate([lzf[:kk], lzf[:-kk]]))   # causal |dReservoir/dt|
+        er = discharge[te]; elo, ehi = np.nanpercentile(er,5), np.nanpercentile(er,95)
+        energy_certainty = np.clip((er-elo)/(ehi-elo+1e-9), 0.0, 1.0)
+    else:
+        energy_certainty = np.full(len(te), np.nan)
     return {
         "period": P, "horizon": h, "n_test": len(te),
         "prediction": pred, "truth": truth, "warning": warning, "confidence": confidence,
+        "energy_certainty": energy_certainty,
         "test_index": te,
         "skill_on_change": _corr(pred-cur, truth-cur),
         "direction_hit": float(np.mean(np.sign(pred-cur)[truth!=cur]==np.sign(truth-cur)[truth!=cur])),

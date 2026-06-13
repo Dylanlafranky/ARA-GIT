@@ -1488,6 +1488,36 @@ Full result note: `ARA_TEMPORAL_FRICTION_RESULT.md`.
 
 ---
 
-*Dylan La Franchi, April 2026 (Phases 1-19) - May 2026 (Phases 20-21).*
+---
+
+## Phase 22 — Current Status Capstone (June 2026): the universal forecaster
+
+**The architecture changed.** Phases 1–21 (above) were the *cascade / vehicle* line — predicting **sunspot-cycle amplitudes** on an **MAE** scoreboard (best autonomous ~28 MAE). June moved to a single, simpler, strict-causal **universal forecaster of the time series itself**, scored on **correlation**: `TheFormula/ara_prediction_formula.py` — `ara_forecast(series, period, horizon, leading)`. Three named parts (**geometry** = engine-phase shape; **energy** = reservoir/skew sizing; **training** = ridge on home-lags + a leading reservoir) and four outputs: **value**, full-amplitude **warning**, value **confidence**, and **energy_certainty** (turn-warning from the reservoir's discharge, added 10 Jun).
+
+### Best version per system (correlation, strict-causal, real public data)
+| System | Best result | Notes |
+|---|---|---|
+| **ENSO** | value **+0.74 @6mo, +0.47 @24mo** (IOD+PDO+WWV feeder stitch); direction **0.84 @24mo** (engine-phase + multi-feeder topology) | value plateaus ~0.74 (≈ operational, below SOTA DL); direction is the more callable target. Universal-stack h=12 = **+0.39, amplitude fixed to 1.00** |
+| **Heart / ECG** | blind corr **+0.89** (φ^k amplitude scaling); **+0.38 over matched-parameter Fourier** | cleanest "beats a fair baseline" result; small operational payoff (open, brain-driven system) |
+| **Solar / sunspots** | flywheel/storer: flat **~0.69** "cycle-ago" floor out to ~44 yr (≈φ³) | direction holds for decades; it's a clock |
+| **QBO** | clean two-system clock; rise/fall handover at φ (**0.407**) | confirms framework geometry; not a forecasting target |
+
+### June additions (this era)
+- **ENSO amplitude fix** (recoil spring β≈−1/φ + energy-sizing + φ-cycle turn): h=12 amplitude ratio **1.46 → 1.00**, corr +0.278→**+0.394**. Recoil spring SIGN confirmed (restoring/opposite), but ≈1/φ not 1/φ³.
+- **Energy-budget two-system predictor**: external reservoir (WWV) leads value ~6mo; **swing strength from loaded energy +0.90**; turns pre-warned ~5mo; direction 0.79@3mo (short-mid edge).
+- **New output `energy_certainty`** folded into the core (turn-warning).
+
+### Lever vs lens (critical honesty distinction)
+- **Levers (genuinely improve the forecast):** engine-phase geometry, the WWV energy pump, the recoil-spring/φ-turn amplitude fix, φ^k amplitude scaling (ECG).
+- **Lenses (true but diagnostic only — don't improve the number):** the singularity-flip, the octave/φ coherence split, energy-budget direction-certainty, the spin / "climate-control" read (slow spin → big swing building). These explain *why* a system is about to act, not how to forecast it better.
+
+### The governing meta-rule and the ceiling
+The framework **wins** on **spread, coupled, low-concentration** systems (ENSO) and merely **ties baselines** on **concentrated clocks** (QBO, solar). It reads **what kind** of behaviour and **how much to trust it** better than the **exact value**. The ceiling is real — the **ARA-1.0 random core / ~2-year decoherence wall** — and the June discipline has been to **stop mistaking data leaks for breakthroughs** (several apparent wins this era collapsed to modest/null when re-run strictly causal; the honest numbers are the ones above).
+
+Full detail: `RECOIL_ENERGY_PHITURN_STACK_RESULT.md`, `project_energy_budget_two_system`, `SINGULARITY_FLIP_CONJECTURE.md`, and the 9–10 June MASTER_PREDICTION_LEDGER entries.
+
+---
+
+*Dylan La Franchi, April 2026 (Phases 1-19) - May 2026 (Phases 20-21) - June 2026 (Phase 22 status capstone).*
 *All computations in /computations/. All predictions documented in MASTER_PREDICTION_LEDGER.md.*
-*ARA Framework — Scripts 191–243BJ + cross-species decomposition.*
+*ARA Framework — Scripts 191–243BJ + cross-species decomposition + the June universal `ara_prediction_formula.py`.*

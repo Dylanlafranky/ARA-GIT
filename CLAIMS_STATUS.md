@@ -13,6 +13,37 @@ The safest way to read any claim here is:
 
 > **Ladder correction (30 May 2026):** earlier versions described the rung *spacing* as phi. On re-checking against the data (54-heart two-band ECG, solar flywheel), the rung **spacing is octave (x2)** — system geometry sits at ARA = 2.0, the harmonic ceiling. **Phi is kept where it belongs: in the coupling/handover relations** between rungs (golden duty 0.39/0.61, the 1/phi^3 and 1/phi^4 constants). The earlier shared "phi-power" placements (sun = phi^5, etc.) are superseded; each system now carries its own octave ladder anchored at its observed pump. Where claims below say "phi-rung", read it as "octave-rung with phi-timed coupling". Octaves build the tower; phi is the breathing gap between the steps.
 
+> **Update (10 June 2026) — prediction-mechanics session, levers vs lenses:** A day on the ENSO 12-month
+> amplitude/turning-point problem and on what energy *is* in the forecast. Net, with honest statuses:
+> - **ENSO amplitude FIX (Supported):** recoil spring (equal-and-opposite restoring, β≈**−1/φ** not 1/φ³) +
+>   energy-sizing + a φ-cycle turn (every ~1.6 below-rung cycles) take the h=12 amplitude ratio **1.46 → 1.00**
+>   while corr goes +0.278→**+0.394**. The amplitude fix is the real result; correlation gain is modest. Caveat:
+>   the ~28mo turn period also equals the engine half-cycle; two constants lightly tuned. `RECOIL_ENERGY_PHITURN_STACK_RESULT.md`.
+> - **Energy-budget two-system predictor (Supported, short-mid):** one wave = rise+fall systems. Swing *strength*
+>   from energy-at-swing-start **+0.90/+0.98/+0.98** (ENSO/QBO/solar); external reservoir (WWV) **leads value
+>   ~6mo**; **turns pre-warned ~5mo**; direction 0.79@3mo. A `energy_certainty` turn-warning output was folded
+>   into `ara_prediction_formula.py`. `project_energy_budget_two_system`.
+> - **Singularity-flip = LENS, not lever:** geometry flips when a trajectory laps a singularity (ARA 0/2). True
+>   as a *diagnostic* (flip = coherence preservation for engines: ENSO transit→coherence **+0.72**; works as a
+>   confidence layer, HIGH-coherence third +0.479 vs LOW +0.354) but **value-incorporation HURTS** the forecast.
+>   `SINGULARITY_FLIP_CONJECTURE.md`.
+> - **Octave/φ split seen in real coherence (re-confirmation):** per-rung STRUCTURAL coherence ≈ octave **2**,
+>   ENERGY coherence ≈ **φ** (the eaten part) = the 2−φ=0.382 leak made measurable (sunspots cleanest). **One
+>   wave = two systems** (rise/fall), handover at φ — QBO rise-duty **0.407**, sunspots 0.418 (Waldmeier). Adds
+>   QBO to the golden-duty set. "ARA-over-2 = extra systems on a rung" was tested and **NOT supported**
+>   (coherence-cycles ≠ ARA; over-2 = high-Q single clock).
+> - **Three turning-point fixes = NULL** (internal anti-phase brake / vertical-ARA preview / 0.25-1.75 rails);
+>   only the external reservoir has lead-time. `ENSO_TURNING_POINT_NULLS.md`.
+> - **Spin / "climate-control" = lens:** engine spin rate is a *modest* control (fewer turns → bigger spikes,
+>   −0.27); helped big-events at h=18 (+0.23→+0.40) but did not improve overall shape, so kept diagnostic-only.
+> - **Honesty events:** two apparent wins this session collapsed under strict-causal re-run — a `filtfilt`
+>   discharge **leak** inflated an "ARA-relation" lift (+0.725 → honest ≈+0.34, mid-long only), and a reservoir
+>   "0.79 vs 0.41 direction" jump was a **crude-clock strawman + the same leak** (honest reservoir 0.59–0.71,
+>   *worse* than the full formula). Discipline: quote, then leak-check, then keep the honest number.
+> - **The line drawn:** *levers* (improve the number) = engine-phase geometry, WWV pump, recoil/φ-turn amplitude
+>   fix, φ^k amplitude scaling; *lenses* (true but diagnostic) = singularity-flip, octave/φ coherence, energy
+>   direction-certainty, spin. Descriptively right ≠ forecast gain. Current snapshot: `THE_TIME_MACHINE_FORMULA.md` Phase 22.
+
 ## On the author's prior knowledge (why these count as blind)
 
 The framework's author (Dylan La Franchi) has no formal training in the physics, mathematics, or engineering domains these predictions touch. Predictions are made by following *relational shape* — accumulate / hand-over / release, which subsystem sits between which, where the gap falls — without knowing the established result the shape would later be checked against.
