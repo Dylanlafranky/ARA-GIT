@@ -44,6 +44,21 @@ The safest way to read any claim here is:
 >   fix, φ^k amplitude scaling; *lenses* (true but diagnostic) = singularity-flip, octave/φ coherence, energy
 >   direction-certainty, spin. Descriptively right ≠ forecast gain. Current snapshot: `THE_TIME_MACHINE_FORMULA.md` Phase 22.
 
+> **Update (13 June 2026) — frozen-sphere "mold-then-roll" = honest negative on value:** Tested the
+> epiphany that *the wave IS the topography* — mold each system's sphere ONCE on the first 63% (golden
+> split), freeze the shape, let its designed motion (spin from the rung below + wobble) roll the forecast.
+> Strict-causal, correlation-led. **Test 1 (nested NINO3.4 ← WWV):** driver-fed beats AR at long horizons
+> (+0.39@12 / +0.32@24 vs AR +0.10/+0.13) — but a plain **linear recharge regression** (NINO+WWV+WWV[t-6])
+> matches/beats it (+0.42/+0.28), so the long-horizon win is the **feeder, not the geometry**; the sphere only
+> *ties* the linear model, at lower parameter cost. **Test 2 (self-contained octave sub-waves, no external
+> feeder):** loses to AR at every horizon; the φ-handover coupling came out near-inert (flagged, not tuned).
+> Structural reason: long-horizon skill lives in the slow rungs that persist = what AR already models. **Net:
+> re-confirms the framework's value-ceiling ("same map, not same position"); from a signal's own past the
+> geometry does not beat AR/LR on value. The vehicle is leak-free and the below-driven spin works; the right
+> next target is direction + φ-thalweg confidence, not value.** Full record + runnable scripts:
+> `TheFormula/FROZEN_SPHERE_MOLD_THEN_ROLL_RESULT.md` (`frozen_sphere_nested_predictor.py`,
+> `frozen_sphere_fractal_selfcontained_predictor.py`).
+
 ## On the author's prior knowledge (why these count as blind)
 
 The framework's author (Dylan La Franchi) has no formal training in the physics, mathematics, or engineering domains these predictions touch. Predictions are made by following *relational shape* — accumulate / hand-over / release, which subsystem sits between which, where the gap falls — without knowing the established result the shape would later be checked against.
@@ -288,21 +303,4 @@ What is **solid / confirmed**:
 - The muon-catalysis **cycle maps as a deep snap** on the rational pole (formation ~140 ps ≫ fusion ~1 ps;
   ~6.9 ns rung), and φ is correctly **absent** — a nuclear event is the integer/rational/snap regime, like
   fission (U-235 fragment ratio ≈ 3/2, shell-driven). The framework finding "no φ here" is the *right* answer.
-- **Carrier to strip the stuck muon = octave-up (2×) the muon frequency, rational not φ** — this matches the
-  **published X-ray-laser / parametric-resonance stripping method** (drives at integer/2× the muon freq,
-  reduces effective alpha-sticking). The framework located a real method.
-- **Golden-rate pulse delivery gives maximally uniform phase coverage** — verified math (three-gap theorem;
-  = golden-angle MRI sampling). Subharmonic/parametric driving is a real, sometimes-superior mode (lit.).
-
-What is **novel & UNTESTED**: delivering the 2× stripping pulses at a **golden rate** specifically — no muon
-experiment has reported this. The framework's one distinctive, falsifiable contribution here.
-
-What is **open**: net-energy viability — the muon lifetime (2.2 μs) + ~5 GeV production cost; sticking caps
-~150 fusions/muon (below break-even). This can be *designed/reasoned* but only *validated* in a muon-fusion
-lab — unlike ENSO/heart, not testable against existing data here.
-
-Corrections logged: muon does **not** couple to a neutrino (decay-only, un-hittable); ARA = physical
-phase-durations, not a static-wavefunction width (misapplication, dropped); "edge ARA toward φ" has no
-physical actuator and φ's stability-vs-handover roles conflict for that step; carrier is octave **up** (2×),
-not down. Honest framing: framework *navigated to* known physics, didn't predict new physics; golden-rate
-timing is the novel piece; viability is a lab question.
+- **Carrier to strip the stuck muon = octave-up (2×

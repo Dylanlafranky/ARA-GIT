@@ -47,10 +47,10 @@
 <h1>ARA coordinate sphere</h1>
 Everything is a sphere sitting inside the sphere at its coordinate. It's all ARA.
 <div class="key">
-<b>X &mdash; Mapping / ARA</b> (phi-line): <b class="s">0 space</b> &middot; 1 &middot; <b class="t">2 time</b><br>
+<b>X &mdash; Mapping / ARA</b>: <b class="s">0 space</b> &middot; 1 = cancellation ridge &middot; <b class="t">2 time</b><br>
 <b>Y &mdash; Rungs</b> (each rung carries its own 0&ndash;2 sub-scale)<br>
 <b>Z &mdash; mix / coupling</b>: <b class="s">connections</b> &harr; <b class="t">info traversal</b><br>
-<b class="t">phi-line</b> + mirror <b>anti-phi (1/phi)</b> lie in the X&ndash;Y plane
+engines mirror about 1.0: <b class="s">2&minus;phi = 0.382</b> (space) &harr; <b class="t">phi = 1.618</b> (time)
 </div>
 <label class="tog"><input type="checkbox" id="axTog" checked> show axes &amp; scale</label>
 <button id="reset" style="margin-top:8px;background:#16263c;color:#cdd6e0;border:1px solid #2a3a52;border-radius:7px;padding:5px 10px;cursor:pointer;font-size:12px">reset view (level)</button>
@@ -109,6 +109,8 @@ function m(v){return (v-1)*R;}
 
 line(new V(-EXT,0,0),new V(EXT,0,0),0x6ca8ff);
 [0,1,2].forEach(function(v){var x=m(v); line(new V(x,-0.18,0),new V(x,0.18,0),0x6ca8ff,.9); lab(String(v),'#6ca8ff',.5,x,-0.5,0);});
+[[0.382,'2-phi (space engine)'],[1.618,'phi (time engine)']].forEach(function(p){var x=m(p[0]); line(new V(x,-0.28,0),new V(x,0.28,0),0xf0c878,.95); lab(p[1],'#f0c878',.45,x,0.62,0);});
+line(new V(0,-0.30,0),new V(0,0.30,0),0x9fb0c4,.7); lab('ridge','#9fb0c4',.4,0,0.62,0);
 lab('space','#6ca8ff',.9,-R-1.6,0.6,0); lab('time','#f0c878',.9,R+1.5,0.6,0);
 lab('X . Mapping / ARA','#9fb0c4',.7,R+5.5,-0.1,0);
 line(new V(0,0,-EXT),new V(0,0,EXT),0xc89bf0);
@@ -126,7 +128,7 @@ var pl=new THREE.Line(pg,new THREE.LineDashedMaterial({color:0xf0c878,dashSize:.
 lab('phi line','#f0c878',.6,R*0.82+0.7,R*0.55+0.5,0);
 var ag=new THREE.BufferGeometry().setFromPoints([new V(-EXT*PD.x,EXT*PD.y,0),new V(EXT*PD.x,-EXT*PD.y,0)]);
 var al=new THREE.Line(ag,new THREE.LineDashedMaterial({color:0x6fd0c8,dashSize:.25,gapSize:.18,transparent:true,opacity:.7})); al.computeLineDistances(); axesGroup.add(al);
-lab('anti-phi (1/phi)','#6fd0c8',.6,R*0.82+1.0,-R*0.55-0.5,0);
+lab('anti-phi (2-phi=0.382)','#6fd0c8',.6,R*0.82+1.0,-R*0.55-0.5,0);
 lab('hi-dim space / lo time','#9fb0c4',.6,-R-2.2, R+1.4,0);
 lab('lo-dim space / hi time','#9fb0c4',.6,-R-2.2,-R-1.4,0);
 lab('hi time / lo space','#9fb0c4',.6, R+2.2, R+1.4,0);
@@ -218,7 +220,7 @@ function select(o){
   if(selected){selected.mesh.scale.set(1,1,1);selected.mesh.material.emissiveIntensity=.25;}
   selected=o; o.mesh.scale.set(2.1,2.1,2.1); o.mesh.material.emissiveIntensity=.9;
   var d=o.d, ra=rungAra(d.rung), ph=phiDist(d);
-  var xtag=d.ara<0.95?'space':(d.ara>1.05?'time':'balance');
+  var xtag=d.ara<0.95?'space':(d.ara>1.05?'time':'ridge (cancellation)');
   var ptag=ph<0.6?'near-golden':(ph<1.5?'mid':'off-line');
   document.getElementById('detail').innerHTML=
    '<div class="dn">'+d.name+'</div><div class="ct" style="color:#7f93ab">'+d.cat+' . '+(d.period||'')+'</div>'+

@@ -5,7 +5,7 @@
 > that ARA-on-energy produced a concrete falsifiable prediction (constant leak per cycle) that hydrogen
 > confirmed from first principles — universality earning its keep on a new substrate, not relabeling.
 
-Framework-level (NOT LLM-specific; the width=energy-per-cycle idea in LLM_COGNITIVE_QUADRANT.md is one
+Framework-level (NOT LLM-specific; the width=energy-per-cycle idea in LLM/LLM_COGNITIVE_QUADRANT.md is one
 downstream application, pinned for later). Logic + formula are Dylan's; confirmed with him 9 June.
 
 ## CORRECTED FORMULA (9 June 2026 — the leak is a CONSTANT per cycle, not a vanishing ^rung term)
@@ -149,4 +149,4 @@ Chaining the per-molecule leak up to the solution: **20 × (φ × 3.5) = 113 cyc
 - NEXT (needs Dylan to pin, to avoid fishing for a quantity that fits): what is the INVARIANT "energy budget
   per cycle" to test against φ^rung — the principled non-circular candidate is **action per cycle (E×period)**;
   or test the universal-budget claim across MULTIPLE systems at matched rungs. Dylan picks + predicts.
-- Downstream WIDTH-axis use (LLM_COGNITIVE_QUADRANT.md) still pinned.
+- Downstream WIDTH-axis use (LLM/LLM_COGNITIVE_QUADRANT.md) still pinned.

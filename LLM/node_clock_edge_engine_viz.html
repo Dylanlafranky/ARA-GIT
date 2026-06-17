@@ -1,0 +1,50 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pythia: scaling-law line vs the ARA machine</title>
+<style>
+ body{margin:0;background:#0e1116;color:#e6edf3;font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+ .wrap{max-width:820px;margin:0 auto;padding:2rem 1.2rem 4rem}
+ h1{font-size:1.5rem;font-weight:500;margin:.2rem 0 .3rem}
+ .sub{color:#9aa7b5;font-size:.9rem;margin:0 0 1.6rem}
+ .lab{font-size:13px;color:#9aa7b5;margin:1.4rem 0 4px}
+ .leg{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 6px;font-size:12px;color:#9aa7b5}
+ .leg span{display:flex;align-items:center;gap:5px}
+ .sw{width:14px;height:3px} .dot{width:10px;height:10px;border-radius:2px}
+ .card{position:relative;width:100%;height:260px}
+ .note{color:#9aa7b5;font-size:.82rem;margin:1.6rem 0 0;border-top:1px solid #262d36;padding-top:1rem}
+</style></head><body><div class="wrap">
+<h1>The scaling law is a line — underneath it, a clock-and-engine machine</h1>
+<p class="sub">Pythia-deduped, lambada / internal coupling, across training. Dylan La Franchi &amp; Claude, June 2026.</p>
+
+<div class="lab">Loss (bits) vs training step — the neural scaling law (Kaplan / Chinchilla)</div>
+<div class="leg"><span><span class="sw" style="background:#888780"></span>70M</span><span><span class="sw" style="background:#1D9E75"></span>160M</span><span><span class="sw" style="background:#378ADD"></span>410M</span></div>
+<div class="card"><canvas id="cLoss"></canvas></div>
+
+<div class="lab">Underneath the line — ARA of nodes vs coupling (Pythia-410M)</div>
+<div class="leg"><span><span class="dot" style="background:#378ADD"></span>node-ARA (the units)</span><span><span class="dot" style="background:#D85A30"></span>edge-ARA (the coupling)</span><span><span class="sw" style="background:#BA7517"></span>φ = 1.618</span></div>
+<div class="card"><canvas id="cAra"></canvas></div>
+
+<p class="note">Nodes lock to the clock pole (1.0) the whole trained run; the coupling between them runs hotter, engine-side near φ, but wanders (0.6–1.6). Both null-checked (synthetic clocks give 1.0; phase-scramble destroys the edges). The scaling law measures the surface; ARA measures the machine.</p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const steps=[1,2,8,64,512,1000,3000,13000,33000,63000,93000,143000];
+const pt=ys=>steps.map((s,i)=>({x:s,y:ys[i]})).filter(p=>p.y!=null);
+const loss={'70m':[21.81,21.81,21.80,21.15,16.75,11.59,8.00,6.78,6.62,6.71,6.92,7.11],'160m':[21.76,21.76,21.73,21.26,16.60,11.43,7.06,5.77,5.01,4.77,4.59,5.01],'410m':[21.79,21.79,21.75,21.50,17.41,12.13,6.45,4.55,3.95,3.66,3.33,3.40]};
+const node410=[1.307,1.307,1.327,1.357,1.065,1.015,0.995,1.005,1.035,1.015,1.005,1.005];
+const edge410=[1.508,1.508,1.508,1.508,1.477,1.286,1.477,1.452,1.025,0.613,0.995,1.578];
+const ref=y=>[{x:1,y},{x:143000,y}];
+const gx=v=>[1,64,1000,13000,143000].includes(v)?v:null;
+const xc={type:'logarithmic',min:1,max:143000,title:{display:true,text:'training step',color:'#9aa7b5',font:{size:11}},ticks:{color:'#9aa7b5',font:{size:10},callback:gx},grid:{display:false}};
+new Chart(cLoss,{type:'line',data:{datasets:[
+ {data:pt(loss['70m']),borderColor:'#888780',tension:.3,pointRadius:2,borderWidth:2},
+ {data:pt(loss['160m']),borderColor:'#1D9E75',tension:.3,pointRadius:2,borderWidth:2},
+ {data:pt(loss['410m']),borderColor:'#378ADD',tension:.3,pointRadius:2,borderWidth:2}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:xc,y:{title:{display:true,text:'loss (bits)',color:'#9aa7b5',font:{size:11}},ticks:{color:'#9aa7b5',font:{size:10}},grid:{color:'rgba(150,150,150,.12)'}}}}});
+new Chart(cAra,{type:'line',data:{datasets:[
+ {data:ref(1.618),borderColor:'#BA7517',borderDash:[5,4],borderWidth:1.5,pointRadius:0},
+ {data:ref(2.0),borderColor:'#E24B4A',borderDash:[3,4],borderWidth:1,pointRadius:0},
+ {data:ref(1.0),borderColor:'#888780',borderDash:[3,4],borderWidth:1,pointRadius:0},
+ {data:pt(node410),borderColor:'#378ADD',tension:.2,pointRadius:3,borderWidth:2},
+ {data:pt(edge410),borderColor:'#D85A30',tension:.2,pointRadius:3,borderWidth:2}]},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:xc,y:{min:0,max:2,title:{display:true,text:'ARA (0 to 2)',color:'#9aa7b5',font:{size:11}},ticks:{color:'#9aa7b5',font:{size:10},stepSize:0.5},grid:{color:'rgba(150,150,150,.12)'}}}}});
+</script></body></html>

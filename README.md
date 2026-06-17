@@ -83,7 +83,7 @@ The whole module is ~250 lines. It has two halves — `extract_topology` (data �
 | **The complete record of advance predictions and outcomes** | [`MASTER_PREDICTION_LEDGER.md`](MASTER_PREDICTION_LEDGER.md) |
 | **The canonical predictor module** | [`ara_framework.py`](ara_framework.py) |
 | **The long-form theory document with three-tier confidence labels** | [`FRACTAL_UNIVERSE_THEORY.md`](FRACTAL_UNIVERSE_THEORY.md) |
-| **The LLM application (closure index → Pythia capability)** | [`LLM_CLOSURE_VS_CAPABILITY.md`](LLM_CLOSURE_VS_CAPABILITY.md) |
+| **The LLM application (closure index → Pythia capability)** | [`LLM/LLM_CLOSURE_VS_CAPABILITY.md`](LLM/LLM_CLOSURE_VS_CAPABILITY.md) |
 | **The φ-vs-nearby-bases predictor ablation** | [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 mo on ENSO; loses at h=12. All bases underperform persistence. Partial-evidence result, honestly framed. |
 | **The unfiltered research-process record** | [`transcripts/local_sessions/`](transcripts/local_sessions/) — research thinking in real time, not academic prose |
 
@@ -104,9 +104,9 @@ The framework's "intelligence index" (closed Information³ triangles per active 
 
 On this four-model run, **Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ, with WinoGrande weaker at **ρ = +0.800**. The average across all six is therefore about **+0.967**, not a universal perfect rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks.
 
-This could still partly be a scale proxy: bigger models are already known to be better on many benchmarks. The interesting question is whether the closure metric explains anything beyond parameter count, layer count, and active-node count. n=4 is small; the natural confirming experiment is adding Pythia-1.4B / 2.8B / 6.9B / 12B and comparing directly against those baselines. See [`LLM_CLOSURE_VS_CAPABILITY.md`](LLM_CLOSURE_VS_CAPABILITY.md) for the full writeup, caveats, and falsifying experiments.
+This could still partly be a scale proxy: bigger models are already known to be better on many benchmarks. The interesting question is whether the closure metric explains anything beyond parameter count, layer count, and active-node count. n=4 is small; the natural confirming experiment is adding Pythia-1.4B / 2.8B / 6.9B / 12B and comparing directly against those baselines. See [`LLM/LLM_CLOSURE_VS_CAPABILITY.md`](LLM/LLM_CLOSURE_VS_CAPABILITY.md) for the full writeup, caveats, and falsifying experiments.
 
-The framework also produced a coupling-graph interpretability tool that surfaces dead layers, within-layer clusters, cross-layer information-flow circuits, and anti-phase pairs in 30 seconds of analysis — without being told what to look for. See [`TheFormula/llm_node_map_visualization.html`](TheFormula/llm_node_map_visualization.html).
+The framework also produced a coupling-graph interpretability tool that surfaces dead layers, within-layer clusters, cross-layer information-flow circuits, and anti-phase pairs in 30 seconds of analysis — without being told what to look for. See [`LLM/llm_node_map_visualization.html`](LLM/llm_node_map_visualization.html).
 
 ---
 
@@ -158,10 +158,10 @@ ARA-GIT/
 ├── FRACTAL_UNIVERSE_THEORY.md         long-form theory document
 ├── MASTER_PREDICTION_LEDGER.md        every prediction and outcome
 ├── ara_framework.py                   canonical predictor (~250 lines)
-├── LLM_CLOSURE_VS_CAPABILITY.md       LLM application headline
-├── LLM_SIZE_SERIES_RESULT.md          depth-vs-width finding
-├── LLM_INFO_CUBED_RESULT.md           closure scaling across Pythia
-├── LLM_ARA_PILOT_RESULT.md            dynamic vs static methodology
+├── LLM/LLM_CLOSURE_VS_CAPABILITY.md       LLM application headline
+├── LLM/LLM_SIZE_SERIES_RESULT.md          depth-vs-width finding
+├── LLM/LLM_INFO_CUBED_RESULT.md           closure scaling across Pythia
+├── LLM/LLM_ARA_PILOT_RESULT.md            dynamic vs static methodology
 ├── BEESWAX_GEOMETRY_WRITEUP.md        (π−3)/π coupling tax
 ├── HOW_TO_map_a_system.md             practical guide
 ├── ARA_decomposition_rules.md         per-rung mapping rules

@@ -237,30 +237,30 @@ The framework's coupling-graph and Information³ closure tools were applied to t
 | 410m-deduped | 877 | 0.524 | 0.517 | 0.826 |
 | 1b-deduped | **6,284** | **0.580** | **0.585** | **0.870** |
 
-**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ in this n=4 run. WinoGrande is weaker at **ρ = +0.800**, so the average across all six is about **+0.967** rather than a universal perfect-rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks. Source: `LLM_CLOSURE_VS_CAPABILITY.md`, `TheFormula/llm_closure_vs_capability.html`, raw evals from EleutherAI/pythia at step 143000.
+**Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ in this n=4 run. WinoGrande is weaker at **ρ = +0.800**, so the average across all six is about **+0.967** rather than a universal perfect-rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks. Source: `LLM/LLM_CLOSURE_VS_CAPABILITY.md`, `LLM/llm_closure_vs_capability.html`, raw evals from EleutherAI/pythia at step 143000.
 
 ### 🟢 Coupling-graph approach surfaces interpretable LLM structure
 
-Same 30-second analysis on Pythia-70M reveals: dead layers (4–6 have zero variance during this generation), within-layer clusters (L2 heads H0/H1/H2/H5/H6 correlate >0.95), cross-layer information-flow circuits (L0H6 ↔ L2H3 at +0.986), and anti-phase pairs (layer-norm L3 ↔ L2H5 at −0.974). Source: `TheFormula/llm_node_map_visualization.html`.
+Same 30-second analysis on Pythia-70M reveals: dead layers (4–6 have zero variance during this generation), within-layer clusters (L2 heads H0/H1/H2/H5/H6 correlate >0.95), cross-layer information-flow circuits (L0H6 ↔ L2H3 at +0.986), and anti-phase pairs (layer-norm L3 ↔ L2H5 at −0.974). Source: `LLM/llm_node_map_visualization.html`.
 
 ### 🟡 Layer depth, not parameter count, drives hierarchical organisation
 
-Within/across-layer correlation ratio peaks at Pythia-410M (24 layers, ratio 1.51) and reverts at Pythia-1B (16 layers, ratio 1.07) despite 2.4× more parameters. Spectral decay shows the same pattern: peaks at 410M, drops at 1B. The framework's interpretation is that depth is what gives the network usable φ-rungs for hierarchy. Source: `LLM_SIZE_SERIES_RESULT.md`.
+Within/across-layer correlation ratio peaks at Pythia-410M (24 layers, ratio 1.51) and reverts at Pythia-1B (16 layers, ratio 1.07) despite 2.4× more parameters. Spectral decay shows the same pattern: peaks at 410M, drops at 1B. The framework's interpretation is that depth is what gives the network usable φ-rungs for hierarchy. Source: `LLM/LLM_SIZE_SERIES_RESULT.md`.
 
 ### 🟡 ARA signature distinguishes cognitive content type
 
-Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures during generation. Code is most engine-like (mean ARA 1.57, peak 1.91 at paragraph scale). Emotion and dialogue closest to balance (1.255). Multi-sentence-structured content (code, story, math, poetry) peaks at long-range rungs; sentence-organised content (emotion, factual, dialogue, abstract) peaks at sentence-scale. Source: `TheFormula/llm_ara_per_concept_visualization.html`.
+Eight prompt types (story, code, math, emotion, factual, dialogue, poetry, abstract) produce eight distinguishable ARA signatures during generation. Code is most engine-like (mean ARA 1.57, peak 1.91 at paragraph scale). Emotion and dialogue closest to balance (1.255). Multi-sentence-structured content (code, story, math, poetry) peaks at long-range rungs; sentence-organised content (emotion, factual, dialogue, abstract) peaks at sentence-scale. Source: `LLM/llm_ara_per_concept_visualization.html`.
 
 ### 🔴 φ-deep × φ-wide all-closed prediction (untested)
 
-The framework's prediction for the optimal LLM architecture: layer depth and width both at φ-rung optimum, with all components participating in closed Information³ structure. Predicted consequence: hallucinations (drift from training) substantially eliminated within knowledge; out-of-knowledge content surfaces as honest uncertainty rather than confident fiction; cost is reduced creative-generation flexibility. Falsifiable in principle by training models with different aspect ratios at fixed parameter count. Source: speculative section of `LLM_CLOSURE_VS_CAPABILITY.md`.
+The framework's prediction for the optimal LLM architecture: layer depth and width both at φ-rung optimum, with all components participating in closed Information³ structure. Predicted consequence: hallucinations (drift from training) substantially eliminated within knowledge; out-of-knowledge content surfaces as honest uncertainty rather than confident fiction; cost is reduced creative-generation flexibility. Falsifiable in principle by training models with different aspect ratios at fixed parameter count. Source: speculative section of `LLM/LLM_CLOSURE_VS_CAPABILITY.md`.
 
 ### Files
 
-- `release_2026-05/llm/llm_size_series.py` (or current location `TheFormula/llm_size_series.py`)
-- `TheFormula/llm_node_map.py`, `llm_ara_per_concept.py`, `llm_ara_test_v3_dynamic.py`
+- `release_2026-05/llm/llm_size_series.py` (or current location `LLM/llm_size_series.py`)
+- `LLM/llm_node_map.py`, `llm_ara_per_concept.py`, `llm_ara_test_v3_dynamic.py`
 - All `llm_*_data.js` and `llm_*_visualization.html` companions
-- `LLM_CLOSURE_VS_CAPABILITY.md`, `LLM_SIZE_SERIES_RESULT.md`, `LLM_INFO_CUBED_RESULT.md`, `LLM_ARA_PILOT_RESULT.md`
+- `LLM/LLM_CLOSURE_VS_CAPABILITY.md`, `LLM/LLM_SIZE_SERIES_RESULT.md`, `LLM/LLM_INFO_CUBED_RESULT.md`, `LLM/LLM_ARA_PILOT_RESULT.md`
 
 ### Honest framing
 
