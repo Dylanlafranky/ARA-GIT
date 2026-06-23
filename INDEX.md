@@ -1,6 +1,6 @@
 # ARA Framework — Index
 
-**Last updated: May 2026**
+**Last updated: June 2026**
 
 ---
 
@@ -11,6 +11,8 @@ This is an open research notebook about a geometric hypothesis for oscillating s
 I'm not a scientist by training. I built this in spare time, with significant help from AI collaborators. I report what I find — including the misses — and invite people in the relevant fields to check, improve, or knock down what I have wrong.
 
 The repository has three working folders, one per question the framework asks of any cycling system: **`Mapping/`** — *where* a system sits on the ARA scale (what kind of cycle it is); **`TheFormula/`** — can it be *forecast* from a few geometric constants; **`EnergyRatio/`** — how *efficiently* it moves energy/information per cycle (the leanness / entropy-budget side, e.g. the golden-star result below).
+
+> **June 2026 updates.** **`TheFormula/` has been reorganised into 20 dated thread subfolders**, each with its own README — start at [`TheFormula/00 - INDEX.md`](TheFormula/00%20-%20INDEX.md). The result-doc and visualiser links further down this page that point into `TheFormula/<file>` now live **inside the relevant dated thread folder** — use the TheFormula index to locate them. Two more: the **over-2 atlas audit is complete** (all 45 over-2 entries resolved — a snap stored upside-down, or a non-oscillation off the cyclic axis; see [`Mapping/ARA_OVER2_AUDIT.md`](Mapping/ARA_OVER2_AUDIT.md)), and the **ARA scale is now read as a folded symmetric circle** (`0`/`2` = opposing space/time singularities, `1.0` = cancellation ridge, φ mirrored at `1.618`/`0.382`) — see [`what_is_this.html`](what_is_this.html).
 
 **New to the vocabulary?** Start with [`GLOSSARY.md`](GLOSSARY.md) — a plain-language key to every term (ARA, octave, φ, the walls, rungs, matched-rung pairs, recycling, leanness, the bedrock), with the common confusions flagged directly (e.g. "Primes" ≠ prime numbers; the space/time pole labels are a flip-symmetric choice; rung-spacing is a different axis from the 0–2 position).
 

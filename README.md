@@ -8,6 +8,8 @@ A heartbeat, an El Nino cycle, a planetary orbit, a neuron firing, a transformer
 
 > **Ladder correction (30 May 2026):** earlier versions described this as a *phi-spaced* ladder. Read edge-free (each system's own strongest cycles, no fixed windows), the rung *spacing* comes out octave (×2), not phi — consistent with system geometry sitting at ARA = 2.0 and nested cycles locking 2:1. Phi is retained where it earns its place: in the *coupling relations* — the handover timing between rungs and the feedback/blend constants (1/phi³, 1/phi⁴). The older shared phi-power placements are superseded; see `TWO_RULERS_PHI_AND_TWO.md` and `TWOBAND_ECG_HORIZON_LADDER_RESULT.md`.
 
+> **June 2026 updates:** (1) the ARA scale is now read as a *folded symmetric circle* — `0` and `2` are opposing space/time singularities (the same rim folded), `1.0` is a cancellation ridge, and φ is mirrored at `1.618` / `0.382` (= 2−φ); see [`what_is_this.html`](what_is_this.html). (2) The over-2 atlas audit is **complete** — all 45 over-2 catalogue entries resolved (a snap stored upside-down, or a non-oscillation that never belonged on the cyclic axis); see [`Mapping/ARA_OVER2_AUDIT.md`](Mapping/ARA_OVER2_AUDIT.md). (3) [`TheFormula/`](TheFormula/) has been reorganised into **20 dated thread subfolders**, each with its own README — start at `TheFormula/00 - INDEX.md`.
+
 The strongest version of the claim is not that this proves a finished law of nature. It is that an octave-rung coordinate system (with phi-timed coupling) appears to carry real signal in several datasets, sometimes with surprisingly few inputs, and deserves independent checking. This repository is the framework, the tests, the failures, the corrections, and an open invitation to falsify it.
 
 I am not a scientist by training. I am releasing this because the idea has gone further than I expected, I have run out of resources to keep pushing it privately, and I would rather make the work inspectable than bury it. Please read it as an open research notebook: some parts are supported by saved outputs, some are promising but fragile, and some are clearly speculative.
@@ -167,17 +169,14 @@ ARA-GIT/
 ├── ARA_decomposition_rules.md         per-rung mapping rules
 ├── MAPPING_TO_THE_FRAMEWORK.md        cross-domain mapping
 ├── THE_FRAMEWORK_FORMULATION.md       formal statement
-├── TheFormula/                        all benchmark + LLM scripts (forecasting)
-│   ├── canonical_benchmark.py
-│   ├── three_quarter_ceiling_test.py
-│   ├── multispecies_vertical_ara_test.py
-│   ├── multi_subject_dip_test.py
-│   ├── crossover_horizon_test.py
-│   ├── llm_size_series.py
-│   ├── llm_node_map.py
-│   ├── llm_ara_per_concept.py
-│   ├── llm_closure_vs_capability.html
-│   └── … (full set of test scripts and visualisations)
+├── TheFormula/                        forecasting experiments — reorganised June 2026 into
+│   │                                  20 dated thread subfolders, each with a README
+│   ├── 00 - INDEX.md                  master index of all 20 threads (start here)
+│   ├── 01 - Compass & Vehicle predictors (20-05-26)/
+│   ├── 02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/
+│   ├── …                              (cascades, shape-kernel, sphere/terrain, heart/solar,
+│   │                                  energy-pipe, recoil, frozen-sphere, …)
+│   └── 20 - Shaped-circle octave, golden-tree walk & orbit-clock (21-06-26)/
 ├── Mapping/                           where systems sit on the ARA scale (atlas)
 ├── EnergyRatio/                       how leanly a system moves energy per cycle
 │   ├── README.md

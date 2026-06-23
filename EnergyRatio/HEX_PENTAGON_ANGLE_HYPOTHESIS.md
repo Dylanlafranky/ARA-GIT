@@ -79,6 +79,54 @@ the wall name ("3/4 displacement limit") and the wall geometry are the same numb
 shape that makes 0.25/1.75 clean. A single-axis cut yields only a band/circle (fractal continuation), not a
 polygon — the polygons live in the triangle-assembly/coupling region above, not in the wall-cut.
 
+## Alternative derivation — why not 8? The octave's name is a false friend; the real counts are 5 and 6/12 (crystallographic restriction) (22 June 2026)
+
+A second, independent route to the same **hexagon = space / pentagon = time** split — coming in from the
+*octave* side instead of the triangle-assembly side. Dylan's entry question: if a rung is an "octave," does
+it hold **8** micro-rungs the way a musical octave seems to?
+
+**The 8 is a naming artifact, not a structure.** A musical octave is *only* a 2:1 frequency doubling. It is
+*called* "octave" (eighth) because the diatonic scale lands on 8 named notes counting both endpoints
+(do…do) — but that's inclusive counting: it's really **7 steps**, or **12 equal semitones**, spanning **one
+doubling**. The word names the *ratio* (×2), not eight inner rungs. So "octave → 8 sub-rungs"
+reverse-engineers structure from a counting quirk.
+
+**Where the real counts come from — a hard theorem.** The **crystallographic restriction theorem**: a
+periodic lattice can carry only **2-, 3-, 4-, or 6-fold** rotational symmetry. 5-fold — and 8-fold — are
+*forbidden*. That splits the two poles exactly:
+
+- **Hexagon (6) = the allowed, locking, rational, SPACE pole.** Six-fold close-packs the plane perfectly
+  (honeycomb). Its natural **double is 12** — the 3-D *kissing number* (twelve spheres touch a central one
+  in the densest packing, FCC/HCP) *and* the 12 semitones of the chromatic octave. So 6 and 12 are the
+  **same hexagonal/space/octave ruler, once and then doubled** — which is exactly why "6 or 12" both feel
+  right. The octave lives on this side.
+- **Pentagon (5) = the forbidden, non-locking, golden, TIME pole.** Five-fold *cannot* tile a lattice; it
+  appears only in **quasicrystals** — aperiodic, never-repeating, golden. The pentagon's diagonal ÷ side
+  **is φ** exactly, and the φ-solids (icosahedron, dodecahedron) are the 5-fold ones. "5-fold can't settle
+  into a lattice" *is* the geometric face of "φ never resonates itself shut."
+
+**And the 8 resolves at a deeper level than just "wrong count."** 8-fold is *also* lattice-forbidden — but
+8-fold (octagonal) quasicrystals belong to the **silver ratio, 1 + √2 ≈ 2.414**, not the golden one. So
+forcing an "8" into the octave doesn't merely miscount; it points at the **wrong constant** — it leaves the
+φ-family entirely for the silver family. (Worth noting: √2 already appears in the repo as the heart's
+geometric half-rung — the silver family does poke through, just not here.) So the octave's 8 is a false
+friend twice over: inclusive note-counting, *and* the symmetry it would imply isn't golden.
+
+**Net of the two derivations.** The triangle-assembly section above reaches hexagon = space / pentagon =
+time via the **angular defect** (6 triangles = flat = space; 5 triangles = 60° deficit = curve into time).
+This route reaches the *same* split via **lattice symmetry** (6 allowed/locks = space; 5
+forbidden/quasicrystal/φ = time). Two independent hard-geometry arguments converging on the same two poles
+— the kind of double-grounding the framework treats as a real signal rather than a coincidence.
+
+**Honest fences.** The crystallographic restriction, the 12 kissing number, pentagon-diagonal = φ, and the
+metallic-ratio assignments of quasicrystal symmetries are **hard mathematics / fact.** "6/12 = space, 5 =
+time" is the framework reading laid on top — *consistent* with the rest of the framework, not *proven* by
+the symmetry counts alone. And the **empirical** question is still open and currently *unsupported*: when
+this was tested as the octave lock-angle **climbing** 60° → 72° with ARA, it did **not** climb (see Test
+Result at the top — strong locks park near the hexagon/~63° end, not a dial). So treat **5 / 6 / 12 as the
+principled prediction of where sub-structure *should* fall, not as a measured fact** — the count-geometry is
+clean; whether real systems honour it on the time side remains to be shown.
+
 ## REAL-MATTER REALIZATION — carbon cages / fullerenes / viral capsids (1 June 2026)
 
 The triangle-assembly picture above shows up in real structural chemistry — this is the cleanest physical
