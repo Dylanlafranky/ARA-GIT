@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Triple-Pendulum — an ARA Reading (interactive)</title>
+<script>__PLOTLY_JS__</script>
+<style>
+  :root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#30363d;
+        --a1:#74c0fc;--a2:#ffa94d;--a3:#ff6b6b;--ridge:#3fb950;--phi:#b197fc;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  header{padding:28px 22px 10px;max-width:1180px;margin:0 auto}
+  h1{font-size:25px;margin:0 0 4px} h2{font-size:18px;margin:0 0 2px}
+  .sub{color:var(--mut);font-size:13.5px}
+  main{max-width:1180px;margin:0 auto;padding:8px 16px 60px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:16px 18px;margin:16px 0}
+  .desc{color:var(--mut);font-size:13.5px;margin:2px 0 12px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+  .plot{width:100%;height:300px}
+  .tall{height:360px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:6px}
+  th,td{border:1px solid var(--line);padding:6px 9px;text-align:center}
+  th{background:#1c232c;color:var(--mut);font-weight:600}
+  .tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:20px;margin-left:6px;vertical-align:middle}
+  .held{background:#10331c;color:#5ad17e;border:1px solid #1f6b39}
+  .moved{background:#3a2a10;color:#ffc078;border:1px solid #7a5212}
+  .a1{color:var(--a1)}.a2{color:var(--a2)}.a3{color:var(--a3)}.rg{color:var(--ridge)}.ph{color:var(--phi)}
+  .ctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 10px}
+  button{background:#21303f;color:var(--ink);border:1px solid var(--line);border-radius:8px;
+         padding:6px 14px;cursor:pointer;font-size:13.5px} button:hover{background:#2b3f54}
+  input[type=range]{flex:1;min-width:140px}
+  canvas{background:#0b0e12;border:1px solid var(--line);border-radius:10px;display:block;margin:auto}
+  .note{font-size:12.5px;color:var(--mut);border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:10px 0}
+  .legend{font-size:12.5px;color:var(--mut);margin-top:4px}
+  code{background:#1c232c;padding:1px 5px;border-radius:5px;font-size:12.5px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Triple-Pendulum — an ARA Reading</h1>
+  <div class="sub">Interactive rebuild of every analysis panel from the real dynamicslab MultiArm-Pendulum data
+  (Zenodo 10.5281/zenodo.6633719). Verified re-run, 27 Jun 2026. Colours: <span class="a1">arm-1 (top)</span>,
+  <span class="a2">arm-2 (mid)</span>, <span class="a3">arm-3 (bottom)</span>, <span class="rg">1.0 ridge</span>.</div>
+</header>
+<main>
+
+<div class="card">
+  <h2>Re-run audit — what held, what moved</h2>
+  <div class="desc">After the ARA-framework audit, scripts were re-run on real data. Six of seven reproduced their original numbers; one (leadership) exposed two artifacts under a stricter turn-detector.</div>
+  <table id="audit"></table>
+</div>
+
+<div class="card">
+  <h2>The system itself — reconstructed from the real angles <span class="tag moved">schematic: equal arm lengths</span></h2>
+  <div class="desc">The triple pendulum animated from the actual measured joint angles (run 1, first 30&nbsp;s, 50&nbsp;Hz). Arm lengths aren't in the dataset, so they're drawn equal — angles are real, proportions are not.</div>
+  <div class="ctrl">
+    <button id="playBtn">▶ Play</button>
+    <button id="trailBtn">Trail: on</button>
+    <input type="range" id="scrub" min="0" value="0" step="1"/>
+    <span id="clock" class="legend">t = 0.0 s</span>
+  </div>
+  <canvas id="pend" width="420" height="420"></canvas>
+</div>
+
+<div class="card">
+  <h2>ARA position over time — orbiting the 1.0 ridge</h2>
+  <div class="desc">Each arm's angle mapped to the folded 0–2 ARA axis: <code>1.0 = rest ridge</code>, <code>0 = 2 = straight-up singularity</code>. All arms orbit the ridge; the lower the arm the wider the excursion; no arm reaches a pole (free-swing run).</div>
+  <div id="araPos" class="plot tall"></div>
+</div>
+
+<div class="card">
+  <h2>ARA folded-axis occupancy <span class="tag held">added view</span></h2>
+  <div class="desc">Where each arm <em>lives</em> on the 0–2 axis (density). The framework coordinate read directly: every arm piles up on the <span class="rg">1.0 ridge</span>; arm-3 spreads widest toward (but never reaching) the poles.</div>
+  <div id="occ" class="plot"></div>
+</div>
+
+<div class="card">
+  <h2>Element 1 — each arm's own geometry</h2>
+  <div class="desc">Phase portraits (angle vs angular velocity, colour = time) and spectra. All three share one dominant period (1.333&nbsp;s); the rung ladder is in <em>amplitude</em>, not frequency.</div>
+  <div class="grid3" id="portraits"></div>
+  <div id="spectra" class="plot" style="margin-top:12px"></div>
+  <table id="geomTab"></table>
+  <div class="note">Amplitude ratios A2/A1, A3/A2, A3/A1 reported raw. No directional handover is defined here, so φ is <b>not</b> invoked — these are not a φ claim.</div>
+</div>
+
+<div class="card">
+  <h2>Element 3 — relational ARA between arms (the bends)</h2>
+  <div class="desc">Each joint read as a relation: <code>bend = 1 + wrap(θ_lower − θ_upper)/π</code> on rest-relative angles, so inline = the 1.0 ridge. Upper joint hugs the ridge; the lower joint swings far wider.</div>
+  <div class="grid2">
+    <div id="bendTs" class="plot"></div>
+    <div id="bendHist" class="plot"></div>
+  </div>
+  <div id="bendPort" class="plot" style="margin-top:12px"></div>
+</div>
+
+<div class="card">
+  <h2>Leadership &amp; rung dominance <span class="tag held">claim held 3/3</span> <span class="tag moved">upper-two structure demoted</span></h2>
+  <div class="desc">Who turns first on each big swing (prominence-filtered turns). The bottom rung (arm-3) leads most often and holds the longest single block in <b>every run</b>. The earlier "upper two split evenly" did not survive — arm-2/arm-1 are erratic.</div>
+  <div class="grid2">
+    <div id="leadShare" class="plot"></div>
+    <div id="leadBlk" class="plot"></div>
+  </div>
+  <div id="leadScatter" class="plot" style="margin-top:12px"></div>
+  <table id="leadTab"></table>
+</div>
+
+<div class="card">
+  <h2>Coupling — arm-2 is the shared carrier (the clock is the common mode)</h2>
+  <div class="desc">All pairs are phase-locked (PLV). Raw corr(arm1,arm3) is positive, but partial correlation holding arm-2 fixed flips negative in 2/3 runs: arm-2 <b>carries</b> the shared common mode the ends both ride — it is the carrier, not a proven causal mediator.</div>
+  <div class="grid2">
+    <div id="plv" class="plot"></div>
+    <div id="partial" class="plot"></div>
+  </div>
+  <div class="note">A partial-corr sign-flip identifies a common carrier, not mediation. The clock is the shared ~1.333&nbsp;s common mode; no single arm is the timekeeper (arm-2 isn't even reliably the steadiest).</div>
+</div>
+
+<div class="card">
+  <h2>Element 4 — reconstruction (SVD / data modes) <span class="tag moved">ARA-inspired reading of a standard POD</span></h2>
+  <div class="desc">The 3-arm motion compresses to two modes (≈99.4% of variance): a common mode (all same sign, weights = the amplitude ladder) and a 1-vs-3 anti-phase mode.</div>
+  <div class="grid3">
+    <div id="svdVar" class="plot"></div>
+    <div id="svdShape" class="plot"></div>
+    <div id="svdCoeff" class="plot"></div>
+  </div>
+  <div class="ctrl" style="margin-top:10px">
+    <span class="legend">true vs 2-mode reconstruction:</span>
+    <button class="reconBtn" data-arm="1">arm-1</button>
+    <button class="reconBtn" data-arm="2">arm-2</button>
+    <button class="reconBtn" data-arm="3">arm-3</button>
+  </div>
+  <div id="svdRecon" class="plot"></div>
+  <table id="fidTab"></table>
+</div>
+
+<div class="card">
+  <h2>Element 5a — strictly-causal forecast (and the honest baseline)</h2>
+  <div class="desc">Train half fits modes + weights; test half held out. Skill looks high, but the <span class="ph">one-period-ago baseline</span> is flat ~0.98 and ties/beats the model — this is a quasi-periodic clock, not forecasting chaos. Persistence (last value) is useless, confirming period-ago is the right yardstick.</div>
+  <div class="grid2">
+    <div id="fcSkill" class="plot"></div>
+    <div id="fcVt" class="plot"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Element 5b — predict the deepest arm from the calm ones</h2>
+  <div class="desc">Hold arm-3 out entirely and predict it, strictly causally, from <b>only</b> arms 1–2's past. It reaches corr 0.99 and beats arm-3's own self-AR at 2&nbsp;s — the deepest arm is slaved to the shallower structure ("look up, not down").</div>
+  <div class="grid2">
+    <div id="plCorr" class="plot"></div>
+    <div id="plNow" class="plot"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>The two waves — fast carrier &amp; slow decay envelope <span class="tag held">added — your catch</span></h2>
+  <div class="desc">The 1.333&nbsp;s swing (carrier) rides inside a slowly shrinking amplitude envelope. The whole 60&nbsp;s run is one accumulation→release arc settling back toward the 1.0 rest ridge — the slow wave is monotonic decay (friction), not a second oscillation. Pick an arm; arm-3 (bottom) sheds amplitude fastest.</div>
+  <div class="ctrl">
+    <span class="legend">carrier + envelope for:</span>
+    <button class="envBtn" data-arm="1">arm-1</button>
+    <button class="envBtn" data-arm="2">arm-2</button>
+    <button class="envBtn" data-arm="3">arm-3</button>
+  </div>
+  <div id="envMain" class="plot tall"></div>
+  <div class="grid2" style="margin-top:12px">
+    <div id="envAll" class="plot"></div>
+    <div id="envDecay" class="plot"></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="note">
+    Provenance: every number recomputed from the real triple-pendulum runs (3 free-swing recordings, decimated for display). Forecast panels are strictly causal (train-only fit, held-out test, no acausal filters). The pendulum animation uses equal arm lengths (not in the dataset) — a schematic of real angles. φ is quarantined throughout: it appears nowhere as a fitted constant. Standard techniques (POD, phase-locking, ridge regression) are used as instruments; the ARA contribution is the organising coordinate (ridge / rung / carrier / handover), which called the structure in advance.
+  </div>
+</div>
+
+</main>
+<script>
+const DATA = __DATA_JSON__;
+const C={a1:'#74c0fc',a2:'#ffa94d',a3:'#ff6b6b',ridge:'#3fb950',phi:'#b197fc',mut:'#9aa7b4'};
+const ARMC=[C.a1,C.a2,C.a3];
+function lay(title,xt,yt,extra){return Object.assign({
+  title:{text:title,font:{size:13,color:'#e6edf3'}},
+  paper_bgcolor:'#161b22',plot_bgcolor:'#0e1116',
+  font:{color:'#9aa7b4',size:11},margin:{l:48,r:14,t:34,b:40},
+  xaxis:{title:{text:xt||'',font:{size:11}},gridcolor:'#222a33',zerolinecolor:'#2a323c'},
+  yaxis:{title:{text:yt||'',font:{size:11}},gridcolor:'#222a33',zerolinecolor:'#2a323c'},
+  showlegend:true,legend:{font:{size:10},orientation:'h',y:1.14,x:0}
+},extra||{});}
+const CFG={responsive:true,displayModeBar:false};
+const P=(id,tr,l)=>Plotly.newPlot(id,tr,l,CFG);
+
+// ---------- audit table ----------
+(function(){try{
+  const rows=[
+    ['Element 1 — per-arm geometry','held','period 1.333 s · amp ladder 0.31/0.43/0.78 · clocklike arm2&gt;arm1&gt;arm3'],
+    ['Element 3 — relational bends','held','upper joint std 0.038 (98% on ridge); lower joint ~3× wider'],
+    ['Leadership — rung dominance','moved','arm-3 leads most + longest block 3/3 (held); swing count ~halved (213→~96) &amp; even upper-two split was a detector artifact'],
+    ['Coupling — partial corr','held','sign-flip −0.36/+0.20/−0.50 → −0.362/+0.197/−0.502 (carrier, not mediator)'],
+    ['Element 4 — SVD reconstruction','held','2 modes = 99.4% variance; recon 0.984/0.994/1.000'],
+    ['Element 5a — causal forecast','held','period-ago baseline flat ~0.98 ties/beats model (quasi-periodic clock)'],
+    ['Element 5b — predict last arm','held','arm-3 from arms 1–2 beats self-AR at 2 s (0.988 vs 0.959)'],
+  ];
+  let h='<tr><th style="text-align:left">Panel</th><th>Status</th><th style="text-align:left">Result</th></tr>';
+  for(const [p,s,r] of rows){
+    const tag=s==='held'?'<span class="tag held">held</span>':'<span class="tag moved">moved</span>';
+    h+=`<tr><td style="text-align:left">${p}</td><td>${tag}</td><td style="text-align:left">${r}</td></tr>`;
+  }
+  document.getElementById('audit').innerHTML=h;
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- ARA position ----------
+(function(){try{
+  const tr=[1,2,3].map(i=>({x:DATA.t5,y:DATA.ara_pos[i],type:'scatter',mode:'lines',
+    name:'arm'+i,line:{color:ARMC[i-1],width:1}}));
+  const L=lay('ARA position vs time (run 1)','time (s)','ARA (0–2)',{
+    shapes:[1,0,2].map(y=>({type:'line',x0:0,x1:DATA.t5[DATA.t5.length-1],y0:y,y1:y,
+      line:{color:y===1?C.ridge:'#5a6470',width:y===1?1.4:0.8,dash:y===1?'dash':'dot'}})),
+    yaxis:{range:[0,2],gridcolor:'#222a33'}});
+  P('araPos',tr,L);
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- occupancy ----------
+(function(){try{
+  const tr=[1,2,3].map(i=>({x:DATA.occ.centers,y:DATA.occ.dens[i],type:'scatter',mode:'lines',
+    fill:'tozeroy',name:'arm'+i,line:{color:ARMC[i-1],width:1.3},opacity:0.55}));
+  const L=lay('Density on the 0–2 ARA axis','ARA position','density',{
+    shapes:[{type:'line',x0:1,x1:1,y0:0,y1:1,yref:'paper',line:{color:C.ridge,width:1.4,dash:'dash'}},
+            {type:'line',x0:0,x1:0,y0:0,y1:1,yref:'paper',line:{color:'#5a6470',width:0.8,dash:'dot'}},
+            {type:'line',x0:2,x1:2,y0:0,y1:1,yref:'paper',line:{color:'#5a6470',width:0.8,dash:'dot'}}],
+    xaxis:{range:[0,2],gridcolor:'#222a33'}});
+  P('occ',tr,L);
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- portraits + spectra ----------
+(function(){try{
+  const host=document.getElementById('portraits');
+  [1,2,3].forEach(i=>{const d=document.createElement('div');d.id='port'+i;d.className='plot';host.appendChild(d);});
+  [1,2,3].forEach(i=>{
+    const g=DATA.geom.portrait[i];
+    P('port'+i,[{x:g.x,y:g.v,type:'scatter',mode:'markers',
+      marker:{size:2,color:g.t,colorscale:'Turbo',opacity:0.5}}],
+      lay('arm'+i+' phase portrait','angle from rest','ang. vel',{showlegend:false}));
+  });
+  const sp=[1,2,3].map(i=>({x:DATA.geom.spectrum[i].f,y:DATA.geom.spectrum[i].P,type:'scatter',
+    mode:'lines',name:'arm'+i,line:{color:ARMC[i-1],width:1}}));
+  P('spectra',sp,lay('Spectra (log power)','frequency (Hz)','log₁₀ power'));
+  let h='<tr><th>arm</th><th>amp (rad)</th><th>dom period (s)</th><th>clock-likeness</th></tr>';
+  [1,2,3].forEach(i=>{const a=DATA.geom.arms[i];
+    h+=`<tr><td class="a${i}">arm${i}</td><td>${a.amp}</td><td>${a.domP}</td><td>${a.clk}</td></tr>`;});
+  const r=DATA.geom.ampratios;
+  h+=`<tr><td colspan=4 style="color:#9aa7b4">amplitude ratios — A2/A1 ${r.A2A1} · A3/A2 ${r.A3A2} · A3/A1 ${r.A3A1} (raw; not a φ claim)</td></tr>`;
+  document.getElementById('geomTab').innerHTML=h;
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- bends ----------
+(function(){try{
+  const col={'12':C.a1,'23':C.a3,'13':C.phi};
+  const ts=['12','23','13'].map(k=>({x:DATA.t5,y:DATA.bends.series[k],type:'scatter',mode:'lines',
+    name:'bend '+k,line:{color:col[k],width:1}}));
+  P('bendTs',ts,lay('Relational ARA vs time','time (s)','bend (0–2)',{
+    shapes:[{type:'line',x0:0,x1:DATA.t5[DATA.t5.length-1],y0:1,y1:1,line:{color:C.ridge,width:1.2,dash:'dash'}}]}));
+  const hs=['12','23','13'].map(k=>({x:DATA.bends.histx,y:DATA.bends.hist[k],type:'scatter',mode:'lines',
+    fill:'tozeroy',name:'bend '+k,line:{color:col[k],width:1.2},opacity:0.5}));
+  P('bendHist',hs,lay('Where each relation sits','bend (0–2)','density',{
+    shapes:[{type:'line',x0:1,x1:1,y0:0,y1:1,yref:'paper',line:{color:C.ridge,width:1.2,dash:'dash'}}]}));
+  P('bendPort',[{x:DATA.bends.series['12'],y:DATA.bends.series['23'],type:'scatter',mode:'markers',
+    marker:{size:2.5,color:DATA.t5,colorscale:'Turbo',opacity:0.5}}],
+    lay('Relational phase portrait (colour = time)','bend 1–2 (upper joint)','bend 2–3 (lower joint)',{showlegend:false}));
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- leadership ----------
+(function(){try{
+  const runs=DATA.runs;
+  const share=[1,2,3].map(a=>({x:runs,y:runs.map(r=>DATA.lead.share[r][a]),type:'bar',
+    name:'arm'+a,marker:{color:ARMC[a-1]}}));
+  P('leadShare',share,lay('Leadership share % (per run)','run','% of swings led',{barmode:'group'}));
+  const blk=[1,2,3].map(a=>({x:runs,y:runs.map(r=>DATA.lead.maxblk[r][a]),type:'bar',
+    name:'arm'+a,marker:{color:ARMC[a-1]}}));
+  P('leadBlk',blk,lay('Longest dominance block (swings)','run','max block',{barmode:'group'}));
+  const sc=DATA.lead.scatter;
+  P('leadScatter',[{x:sc.t,y:sc.L,type:'scatter',mode:'markers',
+    marker:{size:7,color:sc.L.map(l=>ARMC[l-1])}}],
+    lay('Who leads each big swing — run 1','time (s)','leader',{showlegend:false,
+      yaxis:{tickvals:[1,2,3],ticktext:['arm1','arm2','arm3'],gridcolor:'#222a33'}}));
+  let h='<tr><th>run</th><th class="a1">arm1 %</th><th class="a2">arm2 %</th><th class="a3">arm3 %</th><th>swings</th><th>switches</th></tr>';
+  runs.forEach(r=>{const s=DATA.lead.share[r];
+    h+=`<tr><td>${r}</td><td>${s[1]}</td><td>${s[2]}</td><td><b>${s[3]}</b></td><td>${DATA.lead.swings[r]}</td><td>${DATA.lead.switches[r]}</td></tr>`;});
+  document.getElementById('leadTab').innerHTML=h;
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- coupling ----------
+(function(){try{
+  const runs=DATA.runs;
+  // PLV heatmap for run1 (3x3 symmetric)
+  const p=DATA.coup.plv['run1'];
+  const M=[[1,p['12'],p['13']],[p['12'],1,p['23']],[p['13'],p['23'],1]];
+  P('plv',[{z:M,x:['arm1','arm2','arm3'],y:['arm1','arm2','arm3'],type:'heatmap',
+    colorscale:'Viridis',zmin:0.9,zmax:1,colorbar:{thickness:10}}],
+    lay('Phase-locking value (run 1)','','',{margin:{l:48,r:14,t:34,b:30}}));
+  const raw={x:runs,y:runs.map(r=>DATA.coup.rawcorr[r]),type:'bar',name:'raw corr(1,3)',marker:{color:C.a1}};
+  const par={x:runs,y:runs.map(r=>DATA.coup.partial[r]),type:'bar',name:'partial(1,3 | 2)',marker:{color:C.a3}};
+  P('partial',[raw,par],lay('Raw vs partial corr(arm1,arm3) — the carrier sign-flip','run','correlation',{barmode:'group',
+    shapes:[{type:'line',x0:-0.5,x1:2.5,y0:0,y1:0,line:{color:'#5a6470',width:1}}]}));
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- SVD ----------
+(function(){try{
+  const v=DATA.recon.var;
+  P('svdVar',[{x:['mode1','mode2','mode3'],y:v.map(x=>x*100),type:'bar',
+    marker:{color:[C.ridge,C.phi,'#5a6470']}}],lay('Variance explained (%)','','%',{showlegend:false}));
+  const ms=DATA.recon.modeshape;
+  const shape=[0,1,2].map(k=>({x:['arm1','arm2','arm3'],y:ms[k],type:'bar',name:'mode'+(k+1),
+    marker:{color:[C.ridge,C.phi,'#5a6470'][k]}}));
+  P('svdShape',shape,lay('Mode shapes (arm participation)','','weight',{barmode:'group',
+    shapes:[{type:'line',x0:-0.5,x1:2.5,y0:0,y1:0,line:{color:'#5a6470',width:1}}]}));
+  P('svdCoeff',[{x:DATA.recon.tw,y:DATA.recon.coeff.m1,type:'scatter',mode:'lines',name:'mode1 (clock)',line:{color:C.ridge,width:1}},
+                {x:DATA.recon.tw,y:DATA.recon.coeff.m2,type:'scatter',mode:'lines',name:'mode2 (1v3)',line:{color:C.phi,width:1}}],
+    lay('Mode time-coefficients','time (s)','coeff'));
+  function recon(arm){
+    P('svdRecon',[
+      {x:DATA.recon.tw,y:DATA.recon.true[arm],type:'scatter',mode:'lines',name:'arm'+arm+' true',line:{color:ARMC[arm-1],width:1.6}},
+      {x:DATA.recon.tw,y:DATA.recon.recon2[arm],type:'scatter',mode:'lines',name:'2-mode reconstruction',line:{color:'#ffffff',width:1,dash:'dash'}}],
+      lay('True vs 2-mode reconstruction — arm'+arm+'  (corr '+DATA.recon.fidelity[2][arm-1]+')','time (s)','angle (rad)'));
+  }
+  recon(3);
+  document.querySelectorAll('.reconBtn').forEach(b=>b.onclick=()=>recon(+b.dataset.arm));
+  let h='<tr><th>modes kept</th><th class="a1">arm1</th><th class="a2">arm2</th><th class="a3">arm3</th></tr>';
+  [1,2,3].forEach(k=>{const f=DATA.recon.fidelity[k];
+    h+=`<tr><td>top-${k}</td><td>${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td></tr>`;});
+  document.getElementById('fidTab').innerHTML=h;
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- forecast ----------
+(function(){try{
+  const h=DATA.fc.h.map(String);
+  const tr=[
+    {x:h,y:DATA.fc.mode1,type:'scatter',mode:'lines+markers',name:'mode1',line:{color:C.a1}},
+    {x:h,y:DATA.fc.mode2,type:'scatter',mode:'lines+markers',name:'mode2',line:{color:C.a2}},
+    {x:h,y:DATA.fc.mode3,type:'scatter',mode:'lines+markers',name:'mode3',line:{color:C.a3}},
+    {x:h,y:DATA.fc.periodAgo,type:'scatter',mode:'lines+markers',name:'period-ago baseline',line:{color:C.phi,dash:'dash'}},
+    {x:h,y:DATA.fc.persist,type:'scatter',mode:'lines+markers',name:'persistence',line:{color:'#5a6470',dash:'dot'}},
+  ];
+  P('fcSkill',tr,lay('Forecast skill vs horizon (corr)','horizon (s)','correlation',{yaxis:{range:[-1,1.02],gridcolor:'#222a33'}}));
+  const f=DATA.fc.fvt;
+  P('fcVt',[
+    {x:f.t,y:f.truth,type:'scatter',mode:'lines',name:'arm3 truth',line:{color:C.a3,width:1.5}},
+    {x:f.t,y:f.pred,type:'scatter',mode:'lines',name:'causal forecast (2 s)',line:{color:'#fff',width:1,dash:'dash'}},
+    {x:f.t,y:f.periodago,type:'scatter',mode:'lines',name:'period-ago',line:{color:C.phi,width:0.9,dash:'dot'}},
+  ],lay('Forecast vs truth — arm3, 2 s ahead (held-out test)','time (s)','angle (rad)'));
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- predict last arm ----------
+(function(){try{
+  const h=DATA.predlast.h.map(x=>x===0?'now':String(x));
+  P('plCorr',[
+    {x:h,y:DATA.predlast.from12,type:'scatter',mode:'lines+markers',name:'from arms 1–2',line:{color:C.ridge}},
+    {x:h,y:DATA.predlast.self,type:'scatter',mode:'lines+markers',name:'arm-3 self-AR',line:{color:C.a3,dash:'dash'}},
+  ],lay('Predict arm-3: from calm arms vs from itself','horizon (s)','correlation',{yaxis:{range:[0.9,1.005],gridcolor:'#222a33'}}));
+  const n=DATA.predlast.nowcast;
+  P('plNow',[
+    {x:n.t,y:n.truth,type:'scatter',mode:'lines',name:'arm3 truth',line:{color:C.a3,width:1.5}},
+    {x:n.t,y:n.pred,type:'scatter',mode:'lines',name:'inferred from arms 1–2 only',line:{color:'#fff',width:1,dash:'dash'}},
+  ],lay('Arm-3 inferred from arms 1–2 only (held-out test)','time (s)','angle (rad)'));
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- carrier + decay envelope (the two waves) ----------
+(function(){try{
+  const E=DATA.env;
+  function show(arm){
+    const en=E.env[arm], neg=en.map(v=>-v);
+    P('envMain',[
+      {x:E.t,y:E.carrier[arm],type:'scatter',mode:'lines',name:'carrier (1.333 s swing)',line:{color:ARMC[arm-1],width:0.7}},
+      {x:E.t,y:en,type:'scatter',mode:'lines',name:'+ envelope',line:{color:C.ridge,width:1.8}},
+      {x:E.t,y:neg,type:'scatter',mode:'lines',name:'− envelope',line:{color:C.ridge,width:1.8},showlegend:false},
+    ],lay('Carrier inside its decay envelope — arm'+arm+' (run 1)','time (s)','angle (rad)'));
+  }
+  show(3);
+  document.querySelectorAll('.envBtn').forEach(b=>b.onclick=()=>show(+b.dataset.arm));
+  P('envAll',[1,2,3].map(i=>({x:E.t,y:E.env[i],type:'scatter',mode:'lines',name:'arm'+i,line:{color:ARMC[i-1],width:1.4}})),
+    lay('Decay envelopes — all arms (run 1)','time (s)','swing amplitude (rad)'));
+  const runs=DATA.runs;
+  P('envDecay',[1,2,3].map(a=>({x:runs,y:runs.map(r=>E.decay[r][a]),type:'bar',name:'arm'+a,marker:{color:ARMC[a-1]}})),
+    lay('Amplitude falloff over the run (start ÷ end)','run','× decay',{barmode:'group'}));
+}catch(e){console.error('panel error:',e);}})();
+
+// ---------- pendulum animation ----------
+(function(){try{
+  const cv=document.getElementById('pend'),cx=cv.getContext('2d');
+  const A=DATA.anim,n=A.t.length;
+  const scrub=document.getElementById('scrub');scrub.max=n-1;
+  const clock=document.getElementById('clock'),playBtn=document.getElementById('playBtn'),trailBtn=document.getElementById('trailBtn');
+  const W=cv.width,H=cv.height,cxp=W/2,cyp=70,SC=95; // world->px
+  let f=0,playing=false,trail=true;const tx=[],ty=[];
+  function pt(x,y){return [cxp+x*SC, cyp-y*SC];}
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    // ridge guide (rest = straight down)
+    cx.strokeStyle='#222a33';cx.lineWidth=1;cx.beginPath();cx.moveTo(cxp,cyp);cx.lineTo(cxp,cyp+3*SC);cx.stroke();
+    const p0=pt(0,0),p1=pt(A.x[0][f],A.y[0][f]),p2=pt(A.x[1][f],A.y[1][f]),p3=pt(A.x[2][f],A.y[2][f]);
+    if(trail){tx.push(p3[0]);ty.push(p3[1]);if(tx.length>180){tx.shift();ty.shift();}
+      for(let i=1;i<tx.length;i++){cx.strokeStyle='rgba(255,107,107,'+(i/tx.length*0.5)+')';cx.lineWidth=1.5;
+        cx.beginPath();cx.moveTo(tx[i-1],ty[i-1]);cx.lineTo(tx[i],ty[i]);cx.stroke();}}
+    const seg=[[p0,p1,C.a1],[p1,p2,C.a2],[p2,p3,C.a3]];
+    cx.lineWidth=3;for(const [a,b,c] of seg){cx.strokeStyle=c;cx.beginPath();cx.moveTo(a[0],a[1]);cx.lineTo(b[0],b[1]);cx.stroke();}
+    const bobs=[[p0,'#cbd5e1',4],[p1,C.a1,7],[p2,C.a2,8],[p3,C.a3,9]];
+    for(const [p,c,rr] of bobs){cx.fillStyle=c;cx.beginPath();cx.arc(p[0],p[1],rr,0,7);cx.fill();}
+    clock.textContent='t = '+A.t[f].toFixed(1)+' s';scrub.value=f;
+  }
+  function step(){if(!playing)return;f=(f+1)%n;if(f===0){tx.length=0;ty.length=0;}draw();setTimeout(()=>requestAnimationFrame(step),33);}
+  playBtn.onclick=()=>{playing=!playing;playBtn.textContent=playing?'❚❚ Pause':'▶ Play';if(playing)step();};
+  trailBtn.onclick=()=>{trail=!trail;trailBtn.textContent='Trail: '+(trail?'on':'off');if(!trail){tx.length=0;ty.length=0;}draw();};
+  scrub.oninput=()=>{f=+scrub.value;tx.length=0;ty.length=0;draw();};
+  draw();
+}catch(e){console.error('panel error:',e);}})();
+</script>
+</body>
+</html>

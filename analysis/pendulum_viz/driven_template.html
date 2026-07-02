@@ -1,0 +1,193 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Driven Triple-Pendulum — ARA Reading</title>
+<script>__PLOTLY_JS__</script>
+<style>
+ :root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--mut:#9aa7b4;--line:#30363d;
+  --a1:#74c0fc;--a2:#ffa94d;--a3:#ff6b6b;--ridge:#3fb950;--phi:#b197fc;--drive:#ffd43b;}
+ *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+ header{padding:28px 22px 8px;max-width:1180px;margin:0 auto} h1{font-size:25px;margin:0 0 4px}
+ h2{font-size:18px;margin:0 0 2px} .sub{color:var(--mut);font-size:13.5px}
+ main{max-width:1180px;margin:0 auto;padding:8px 16px 60px}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+ .desc{color:var(--mut);font-size:13.5px;margin:2px 0 12px}
+ .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+ .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+ @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+ .plot{width:100%;height:300px}.tall{height:340px}
+ table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:6px}
+ th,td{border:1px solid var(--line);padding:6px 9px;text-align:center}
+ th{background:#1c232c;color:var(--mut);font-weight:600}
+ .a1{color:var(--a1)}.a2{color:var(--a2)}.a3{color:var(--a3)}.rg{color:var(--ridge)}.dv{color:var(--drive)}
+ .ctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 10px}
+ button{background:#21303f;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 14px;cursor:pointer;font-size:13.5px}
+ button:hover{background:#2b3f54}
+ .note{font-size:12.5px;color:var(--mut);border-left:3px solid var(--line);padding:4px 0 4px 12px;margin:10px 0}
+ .up{color:#5ad17e;font-weight:600}.dn{color:#ff8787;font-weight:600}
+ code{background:#1c232c;padding:1px 5px;border-radius:5px;font-size:12.5px}
+</style></head><body>
+<header>
+ <h1>Driven Triple-Pendulum — an ARA Reading</h1>
+ <div class="sub">The cart is driven back-and-forth. We have no cart channel in the triple file, so the <b>undriven free-swing is the control</b>: we run the same battery and read the <b>deviations</b> — those are the drive's fingerprint, recovered from the arms alone. <span class="a1">arm-1 (top)</span> · <span class="a2">arm-2</span> · <span class="a3">arm-3 (bottom)</span> · <span class="rg">driven</span> vs <span style="color:#9aa7b4">undriven</span>.</div>
+</header>
+<main>
+
+<div class="card"><h2>What the drive did — undriven (control) vs driven</h2>
+ <div class="desc">Every row recovered from the arm angles only, no cart channel. Read these as the drive's signature.</div>
+ <table id="summary"></table></div>
+
+<div class="card"><h2>1 · Entrainment — the drive overrides the natural clock</h2>
+ <div class="desc">Free, every arm runs at the natural <b>1.33 s</b> common mode (gray). Driven, every arm locks to a new shared <b>1.56 s</b> — the cart's imposed clock (colour). The external clock controls the system's timing, all the way down the chain.</div>
+ <div class="grid3" id="spec"></div></div>
+
+<div class="card"><h2>2 · Kept alive — sustained vs decaying envelope</h2>
+ <div class="desc">The driven-vs-undriven payoff. Free, the swing amplitude decays ~2.5× and the system settles toward the ridge (it dies). Driven, the envelope is nearly flat (~1.2×) — energy in keeps it handing over instead of running down. Pick an arm.</div>
+ <div class="ctrl"><span class="desc" style="margin:0">arm:</span>
+  <button class="envBtn" data-arm="1">arm-1</button><button class="envBtn" data-arm="2">arm-2</button><button class="envBtn" data-arm="3">arm-3</button></div>
+ <div id="envMain" class="plot tall"></div>
+ <div id="decayBar" class="plot" style="margin-top:12px"></div></div>
+
+<div class="card"><h2>3 · Order propagates down — the chaos is regularized</h2>
+ <div class="desc">Clock-likeness per arm. Free, the bottom arm is broadband/chaotic (0.77); driven, the cart's rhythm reaches all the way down and arm-3 becomes clock-like (~0.95).</div>
+ <div id="clkBar" class="plot"></div></div>
+
+<div class="card"><h2>4 · Synchronized — and the carrier backbone strengthens</h2>
+ <div class="desc">The shared external clock pulls the whole chain together: arm1–arm3 correlation jumps 0.67→0.99. And the undriven structural finding survives driving — partial corr(1,3|2) flips <em>more</em> negative (−0.36→−0.61): arm-2 is still the shared carrier, the ends still anti-phase once it's removed.</div>
+ <div id="syncBar" class="plot"></div>
+ <div class="note">A partial-corr sign-flip identifies a common carrier, not a proven mediator — robust to driving here.</div></div>
+
+<div class="card"><h2>5 · Leadership migrates UP toward the drive entry</h2>
+ <div class="desc">Who turns first each swing. Free, the bottom rung co-dominates (arm-3 ties arm-1). Driven, the drive enters at the top, so leadership shifts up: arm-1 leads more, arm-3 less — partially reversing the free bottom-rung dominance.</div>
+ <div id="leadBar" class="plot"></div></div>
+
+<div class="card"><h2>6 · Down the chain — gain, lag &amp; irreversibility</h2>
+ <div class="desc">Per-rung amplitude gain and lead-lag (arm1→arm2→arm3), and the time-irreversibility (derivative skew; 0 = reversible) per arm. The drive's energy throughput shows most as irreversibility at the <b>bottom</b> arm.</div>
+ <div class="grid2"><div id="gainBar" class="plot"></div><div id="irrBar" class="plot"></div></div></div>
+
+<div class="card"><h2>7 · The cart is one more rung — transfer functions</h2>
+ <div class="desc">Each rung's transfer (input = upper, output = lower) on a normalized frequency axis (f / drive fundamental). The three steps — <span class="dv">cart→arm1</span> (real cart, ground truth), <span class="a1">arm1→arm2</span>, <span class="a3">arm2→arm3</span> — collapse onto each other at the fundamental (f/f₀=1: gain ~1.1–1.3, phase ~0°, coherence 1.0) and fan apart in the harmonic tail. Fundamental = "same ladder"; tail = "which rung."</div>
+ <div class="grid3"><div id="tfGain" class="plot"></div><div id="tfPhase" class="plot"></div><div id="tfCoh" class="plot"></div></div>
+ <div id="tfHarm" class="plot" style="margin-top:12px"></div></div>
+
+<div class="card"><h2>8 · The real drive (the one file that recorded the cart)</h2>
+ <div class="desc">Only the single-pendulum driven file carries the actual cart channel. It confirms the drive directly: a slightly-asymmetric ~2.1 s cart oscillation (rise/fall 0.92, not a pure sinusoid) that the arm entrains to — the ground truth behind the back-out above.</div>
+ <div id="drivePlot" class="plot"></div></div>
+
+<div class="card"><div class="note">Reverse-inference method: the undriven free-swing is the control; deviations in the same battery on the driven run are the drive's fingerprint, recovered from the arms without the cart channel. Driven run = <code>TripleDataWithControl_1</code> (n=1); cart trace from <code>SingleDataWithControl_1</code>. φ not invoked anywhere — purely ARA structural decomposition (entrainment, ridge/rung, carrier, handover down the chain).</div></div>
+</main>
+<script>
+const DATA=__DATA_JSON__;
+const U=DATA.undriven,V=DATA.driven,DR=DATA.drive;
+const C={a1:'#74c0fc',a2:'#ffa94d',a3:'#ff6b6b',rg:'#3fb950',mut:'#9aa7b4',dv:'#ffd43b'};
+const ARMC=[C.a1,C.a2,C.a3];const CFG={responsive:true,displayModeBar:false};
+function lay(t,xt,yt,extra){return Object.assign({title:{text:t,font:{size:13,color:'#e6edf3'}},
+ paper_bgcolor:'#161b22',plot_bgcolor:'#0e1116',font:{color:'#9aa7b4',size:11},
+ margin:{l:50,r:14,t:34,b:40},xaxis:{title:{text:xt||'',font:{size:11}},gridcolor:'#222a33'},
+ yaxis:{title:{text:yt||'',font:{size:11}},gridcolor:'#222a33'},showlegend:true,
+ legend:{font:{size:10},orientation:'h',y:1.16,x:0}},extra||{});}
+const P=(id,tr,l)=>Plotly.newPlot(id,tr,l,CFG);
+
+(function(){try{
+ const fmt=(x)=>(x>0?'+':'')+x;
+ const rows=[
+  ['Dominant period (every arm)',U.geom[1].domP+' s',V.geom[1].domP+' s','drive imposes a new shared clock'],
+  ['Bottom-arm clock-likeness',U.geom[3].clk,V.geom[3].clk,'chaos regularized by the drive'],
+  ['Envelope decay (start÷end)','~'+U.decay[3]+'×','~'+V.decay[3]+'×','sustained — kept alive vs settling/dying'],
+  ['corr(arm1, arm3)',U.coup.corr13,V.coup.corr13,'chain synchronized'],
+  ['partial corr(1,3 | 2)',U.coup.partial13,V.coup.partial13,'arm-2 carrier backbone strengthens'],
+  ['Leadership: arm1 / arm3',U.share[1]+'% / '+U.share[3]+'%',V.share[1]+'% / '+V.share[3]+'%','leads shift UP toward the drive'],
+ ];
+ let h='<tr><th style="text-align:left">measure</th><th>undriven (control)</th><th class="rg">driven</th><th style="text-align:left">reading</th></tr>';
+ for(const [m,u,v,rd] of rows) h+=`<tr><td style="text-align:left">${m}</td><td>${u}</td><td class="rg">${v}</td><td style="text-align:left">${rd}</td></tr>`;
+ document.getElementById('summary').innerHTML=h;
+}catch(e){console.error(e);}})();
+
+(function(){try{ // entrainment spectra per arm
+ const host=document.getElementById('spec');
+ [1,2,3].forEach(i=>{const d=document.createElement('div');d.id='spec'+i;d.className='plot';host.appendChild(d);});
+ [1,2,3].forEach(i=>{
+  P('spec'+i,[
+   {x:U.spec[i].f,y:U.spec[i].P,type:'scatter',mode:'lines',name:'undriven',line:{color:C.mut,width:1,dash:'dot'}},
+   {x:V.spec[i].f,y:V.spec[i].P,type:'scatter',mode:'lines',name:'driven',line:{color:ARMC[i-1],width:1.3}},
+  ],lay('arm'+i+' spectrum','freq (Hz)','log power',{xaxis:{range:[0,3],gridcolor:'#222a33'},
+   shapes:[{type:'line',x0:1/1.33,x1:1/1.33,y0:0,y1:1,yref:'paper',line:{color:C.mut,width:0.8,dash:'dot'}},
+           {type:'line',x0:1/1.56,x1:1/1.56,y0:0,y1:1,yref:'paper',line:{color:ARMC[i-1],width:1,dash:'dash'}}]}));
+ });
+}catch(e){console.error(e);}})();
+
+(function(){try{ // sustain vs decay envelope
+ function show(arm){
+  P('envMain',[
+   {x:U.t,y:U.env[arm],type:'scatter',mode:'lines',name:'undriven envelope (decays)',line:{color:C.mut,width:1.6,dash:'dot'}},
+   {x:V.t,y:V.env[arm],type:'scatter',mode:'lines',name:'driven envelope (sustained)',line:{color:C.rg,width:2}},
+   {x:V.t,y:V.carr[arm],type:'scatter',mode:'lines',name:'driven carrier',line:{color:ARMC[arm-1],width:0.5},opacity:0.6},
+  ],lay('Swing envelope — arm'+arm+': undriven '+U.decay[arm]+'× vs driven '+V.decay[arm]+'×','time (s)','amplitude (rad)'));
+ }
+ show(3);
+ document.querySelectorAll('.envBtn').forEach(b=>b.onclick=()=>show(+b.dataset.arm));
+ P('decayBar',[
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>U.decay[i]),type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>V.decay[i]),type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Amplitude falloff over the run (× ; 1 = perfectly sustained)','','× decay',{barmode:'group'}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // clock-likeness regularization
+ P('clkBar',[
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>U.geom[i].clk),type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>V.geom[i].clk),type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Clock-likeness per arm (1 = pure clock)','','clock-likeness',{barmode:'group',yaxis:{range:[0,1.05],gridcolor:'#222a33'}}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // sync + carrier
+ const labels=['corr(1,3)','PLV(1,3)','|partial(1,3|2)|'];
+ const u=[U.coup.corr13,U.coup.plv13,Math.abs(U.coup.partial13)];
+ const v=[V.coup.corr13,V.coup.plv13,Math.abs(V.coup.partial13)];
+ P('syncBar',[
+  {x:labels,y:u,type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:labels,y:v,type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Synchronization & carrier strength','','value',{barmode:'group',yaxis:{range:[0,1.05],gridcolor:'#222a33'}}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // leadership
+ P('leadBar',[
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>U.share[i]),type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>V.share[i]),type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Leadership share % (who turns first)','','% of swings led',{barmode:'group'}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // chain transfer + irreversibility
+ P('gainBar',[
+  {x:['arm1→arm2','arm2→arm3'],y:[U.chain.gain12,U.chain.gain23],type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:['arm1→arm2','arm2→arm3'],y:[V.chain.gain12,V.chain.gain23],type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Amplitude gain down the chain (×)','','gain',{barmode:'group'}));
+ P('irrBar',[
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>U.irr[i]),type:'bar',name:'undriven',marker:{color:C.mut}},
+  {x:['arm1','arm2','arm3'],y:[1,2,3].map(i=>V.irr[i]),type:'bar',name:'driven',marker:{color:C.rg}},
+ ],lay('Time-irreversibility (derivative skew; 0 = reversible)','','skew',{barmode:'group',
+   shapes:[{type:'line',x0:-0.5,x1:2.5,y0:0,y1:0,line:{color:'#5a6470',width:1}}]}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // transfer functions: cart is one more rung
+ const T=DATA.transfer,g=T.grid;
+ const steps=[['cart_arm1','cart→arm1',C.dv],['arm1_arm2','arm1→arm2',C.a1],['arm2_arm3','arm2→arm3',C.a3]];
+ const vline={type:'line',x0:1,x1:1,y0:0,y1:1,yref:'paper',line:{color:C.mut,width:1,dash:'dash'}};
+ P('tfGain',steps.map(([k,n,c])=>({x:g,y:T[k].gain,type:'scatter',mode:'lines',name:n,line:{color:c,width:1.4}})),
+   lay('Gain per rung','f / f0','gain',{yaxis:{type:'log',gridcolor:'#222a33'},shapes:[vline]}));
+ P('tfPhase',steps.map(([k,n,c])=>({x:g,y:T[k].phase,type:'scatter',mode:'lines',name:n,line:{color:c,width:1.4}})),
+   lay('Phase per rung','f / f0','phase (deg)',{shapes:[vline,{type:'line',x0:0.4,x1:4,y0:0,y1:0,line:{color:'#5a6470',width:1}}]}));
+ P('tfCoh',steps.map(([k,n,c])=>({x:g,y:T[k].coh,type:'scatter',mode:'lines',name:n,line:{color:c,width:1.4}})),
+   lay('Coherence per rung','f / f0','coherence',{yaxis:{range:[0,1.05],gridcolor:'#222a33'},shapes:[vline]}));
+ const H=['1x f0','2x f0','3x f0'];
+ P('tfHarm',steps.map(([k,n,c])=>({x:H,y:[T[k].h1[1],T[k].h2[1],T[k].h3[1]],type:'bar',name:n,marker:{color:c}})),
+   lay('Phase at fundamental & harmonics — collapse at 1x, fan out after','','phase (deg)',{barmode:'group'}));
+}catch(e){console.error(e);}})();
+
+(function(){try{ // the real drive (normalized overlay)
+ const nz=a=>{const m=a.reduce((s,x)=>s+x,0)/a.length;const sd=Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/a.length);return a.map(x=>(x-m)/sd);};
+ P('drivePlot',[
+  {x:DR.t,y:nz(DR.dist),type:'scatter',mode:'lines',name:'cart drive (Distance)',line:{color:C.dv,width:1.4}},
+  {x:DR.t,y:nz(DR.th1),type:'scatter',mode:'lines',name:'arm-1 response',line:{color:C.a1,width:1}},
+ ],lay('Real cart drive vs arm-1 — period '+DR.period+' s, rise/fall '+DR.risefall+' (single-pendulum file)','time (s)','normalized'));
+}catch(e){console.error(e);}})();
+</script></body></html>
