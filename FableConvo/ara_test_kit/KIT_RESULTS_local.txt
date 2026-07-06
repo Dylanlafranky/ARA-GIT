@@ -1,0 +1,136 @@
+  built solar       n=3328   fs=12.0  class=A
+  built enso        n=1872   fs=12.0  class=A
+  built pdo         n=2076   fs=12.0  class=A
+  built qbo         n=948    fs=12.0  class=B
+  built pend_arm2   n=3001   fs=50.0  class=B
+  built pend_arm3   n=3001   fs=50.0  class=B
+  built noise_ctrl  n=3000   fs=1.0   class=bath
+
+==============================================================================
+TEST 1 - golden-duty two-column table
+==============================================================================
+  computed solar: duty=0.4169 (n=26 cycles)
+  computed enso: duty=0.5110 (n=54 cycles)
+  computed pdo: duty=0.4089 (n=5 cycles)
+  computed qbo: duty=0.4342 (n=38 cycles)
+  computed pend_arm2: duty=0.4990 (n=44 cycles)
+  computed pend_arm3: duty=0.5071 (n=44 cycles)
+
+Column A: n=3  mean=0.4382  sd=0.0360
+  KDE peak = 0.4130  (bootstrap 95% CI 0.4090..0.4890)
+  constant                           value  |peak-c|  inside CI?
+  1/e (no geometry)                 0.3679    0.0451       False
+  3/8 (Fib convergent)              0.3750    0.0380       False
+  1/phi^2 (anti-phi)                0.3820    0.0310       False
+  2/5 (Fib convergent/pentagram)    0.4000    0.0130       False
+  symmetric 0.5 distance: 0.0870
+
+Column B: n=3  mean=0.4754  sd=0.0292
+  KDE peak = 0.4960  (bootstrap 95% CI 0.4340..0.4990)
+  constant                           value  |peak-c|  inside CI?
+  1/e (no geometry)                 0.3679    0.1281       False
+  3/8 (Fib convergent)              0.3750    0.1210       False
+  1/phi^2 (anti-phi)                0.3820    0.1140       False
+  2/5 (Fib convergent/pentagram)    0.4000    0.0960       False
+  symmetric 0.5 distance: 0.0040
+
+VERDICT RULE: the winning constant must be inside the CI while its
+rivals are outside; if several are inside, the sample cannot
+discriminate (crowded neighborhood) -> report as such, do NOT pick phi.
+
+==============================================================================
+TEST 2 - lag shape (structure vs leak)
+==============================================================================
+series      floors k=1..5                              ln-slope    curv               verdict
+solar       0.558 0.352 0.252 0.174 0.094                -0.426  -0.024   LOG-LINEAR (e-null)  (curv CI -0.325..0.187)
+enso        0.146 0.080 0.041                            -0.639  -0.037   LOG-LINEAR (e-null)  (curv CI -2.031..0.074)
+pdo         0.091 0.099 0.097                             0.033  -0.060 bent DOWN (super-exp)  (curv CI nan..nan)
+
+Note: per-cycle loss = 1 - floor(k+1)/floor(k); report loss alongside
+BOTH constants (1/e=0.368, 2-phi=0.382) if quoting values at all.
+
+==============================================================================
+TEST 3 - modal angle race (SIGNED_HORSE = 17, pre-registered)
+==============================================================================
+SIGNED_HORSE = 17
+series      class          angle(deg)floors used                   
+solar       engine               3.50  [0.56 0.35 0.25 0.17]
+enso        engine               0.00  [0.00 0.15 0.08]
+pdo         engine               0.00  [0.09 0.10 0.10]
+qbo         clock                0.00  [0.15 0.18]
+pend_arm2   conservative         0.10  [0.97 0.97 0.96 0.94]
+noise       bath                 0.00  [0.01 0.03]
+
+Distribution: n=6 median=0.0 IQR=0.0..0.1
+  median distance to circle-fight (~0-1)   : 0.5 deg
+  median distance to golden pitch (17)     : 17.0 deg
+  median distance to pentagon (36)         : 36.0 deg
+  ENGINE class median: 0.0 deg (framework's engines-hug-the-axis reading predicts small)
+
+Caveat: angle assumes light damping + a single dominant mode; for
+multi-band systems decompose first (canon: measure the angle before
+trusting any position taken in the borderlands).
+
+==============================================================================
+TEST 7 - lottery-to-star FDT line
+==============================================================================
+series        floor1  floor2    shed    bath
+solar          0.558   0.352   0.369   0.143
+enso           0.004  -0.021   1.000   0.108
+pdo            0.091   0.099   0.000   0.146
+qbo            0.146   0.181   0.000   0.150
+pend_arm2      0.969   0.972   0.000   0.000
+pend_arm3      0.940   0.804   0.145   0.000
+noise_ctrl     0.006  -0.011   1.000   1.021
+
+Spearman(shed, bath) = +0.112  (p = 0.8106, n = 7)
+PREDICTION ON RECORD: rho > 0 (big shed <-> big jitter).
+Golden stars should be the quietest point; lottery the loudest.
+
+Caveat: 'temperature' differs across systems, so this is a RANK
+prediction only; scatter is expected, monotonicity is the claim.
+
+==============================================================================
+BRIDGE - handover phase-step per cycle
+==============================================================================
+series          f_slow    f_fast  cycles  step(deg)  nearest
+solar        too few slow cycles (-0.1)
+qbo          too few slow cycles (-0.1)
+enso            0.1090    0.2756    15.9      174.5  anti-phase lock (5.5 off)
+pdo          too few slow cycles (1.9)
+
+median step = 174.5 deg  (golden 137.5 | pentagram 144 | anti-phase 180)
+Report the duty of the SAME systems alongside (test1) — the bridge
+claim is the CONJUNCTION: golden step AND golden duty, together.
+
+Caveat: step is sensitive to band selection; run with your canonical
+decomposition as well and report both. If the two disagree, the band
+split (not phi) is the live issue.
+
+==============================================================================
+TEST 8 - cascade optimum (pure engineering; placeholder params)
+==============================================================================
+span 12.0->200.0 bar, family AB2 (ln Pa/Pd = 0.13), thermal tax 0.03/stage
+ n stages |  equal-log     golden
+        1 |     0.9675     0.9675
+        2 |     0.9314     0.9308
+        3 |     0.8920     0.8886
+        4 |     0.8498     0.8385
+        5 |     0.8055     0.7768
+        6 |     0.7596     0.6983
+        7 |     0.7126     0.5969
+        8 |     0.6650     0.4675
+        9 |     0.6173     0.3121
+       10 |     0.5701     0.1501
+       11 |     0.5236     0.0269
+       12 |     0.4785     0.0013
+
+optima: equal-log n*=1 eff=0.9675 | golden n*=1 eff=0.9675
+status quo benchmark: n=3 equal-log = 0.8920
+
+HONEST FENCES: placeholder hysteresis values MUST be replaced with
+sourced ln(Pa/Pd) per alloy; thermal tax is a guess; the hysteresis/
+work model is first-order. The COMPARISON between rules is the claim,
+not the absolute efficiencies. If golden != equal-log by less than
+the parameter uncertainty, report 'indistinguishable' — that is the
+crowded-neighborhood rule applied to engineering.

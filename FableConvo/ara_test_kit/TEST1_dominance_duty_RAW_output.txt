@@ -1,0 +1,71 @@
+TEST 1 (re-emit) — DOMINANCE DUTY via RAW-PEAK on the canonical dominant rung
+METHOD = measure_rung_ara_raw_peak (NOT bandpass). Raw-peak is ~unbiased:
+  calibration check earlier: true 0.382 -> 0.375, true 0.30 -> 0.30, 0.45 -> 0.45.
+==================================================================================
+system      class  gen_duty   dom_RAW  calib_bias  dom_corr
+solar           A    0.4169    0.3960     +0.0300    0.3651
+enso            A    0.4890    0.4681     +0.0279    0.4417
+pdo             A    0.4089    0.4916     -0.0034    0.2800
+qbo             B    0.4342    0.3809     +0.0567    0.3395
+pend_arm2       B    0.4990    0.4968     +0.0284    0.4800
+pend_arm3       B    0.4929    0.4769     +0.0284    0.4689
+
+constants: 1/e=0.3679  3/8=0.3750  1/phi^2=0.3820  2/5=0.4000  (folded golden target 0.382)
+
+===== GENERIC duty (duty_fraction) — original column, for comparison =====
+Column A: n=3 mean=0.4382 sd=0.0360
+  KDE peak = 0.4130  (bootstrap 95% CI 0.4090..0.4890)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.0451  False
+  3/8 (Fib convergent)        0.3750    0.0380  False
+  1/phi^2 (anti-phi)          0.3820    0.0310  False
+  2/5 (Fib convergent/pentagram)  0.4000    0.0130  False
+  symmetric 0.5 distance: 0.0870
+Column B: n=3 mean=0.4754 sd=0.0292
+  KDE peak = 0.4960  (bootstrap 95% CI 0.4340..0.4990)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.1281  False
+  3/8 (Fib convergent)        0.3750    0.1210  False
+  1/phi^2 (anti-phi)          0.3820    0.1140  False
+  2/5 (Fib convergent/pentagram)  0.4000    0.0960  False
+  symmetric 0.5 distance: 0.0040
+
+===== DOMINANCE duty RAW-PEAK (canonical dominant rung) — new column =====
+Column A: n=3 mean=0.4519 sd=0.0407
+  KDE peak = 0.4800  (bootstrap 95% CI 0.3960..0.4915)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.1121  False
+  3/8 (Fib convergent)        0.3750    0.1050  False
+  1/phi^2 (anti-phi)          0.3820    0.0980  False
+  2/5 (Fib convergent/pentagram)  0.4000    0.0800   True
+  symmetric 0.5 distance: 0.0200
+Column B: n=3 mean=0.4516 sd=0.0506
+  KDE peak = 0.4870  (bootstrap 95% CI 0.3810..0.4970)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.1191  False
+  3/8 (Fib convergent)        0.3750    0.1120  False
+  1/phi^2 (anti-phi)          0.3820    0.1050   True
+  2/5 (Fib convergent/pentagram)  0.4000    0.0870   True
+  symmetric 0.5 distance: 0.0130
+
+===== DOMINANCE duty RAW-PEAK, calibration-corrected — new column =====
+Column A: n=3 mean=0.3623 sd=0.0660
+  KDE peak = 0.2800  (bootstrap 95% CI 0.2800..0.4415)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.0879   True
+  3/8 (Fib convergent)        0.3750    0.0950   True
+  1/phi^2 (anti-phi)          0.3820    0.1020   True
+  2/5 (Fib convergent/pentagram)  0.4000    0.1200   True
+  symmetric 0.5 distance: 0.2200
+Column B: n=3 mean=0.4295 sd=0.0638
+  KDE peak = 0.4745  (bootstrap 95% CI 0.3395..0.4800)
+  constant                     value  |peak-c|  inCI?
+  1/e (no geometry)           0.3679    0.1066   True
+  3/8 (Fib convergent)        0.3750    0.0995   True
+  1/phi^2 (anti-phi)          0.3820    0.0925   True
+  2/5 (Fib convergent/pentagram)  0.4000    0.0745   True
+  symmetric 0.5 distance: 0.0255
+
+VERDICT RULE (unchanged): the winning constant must be inside the CI while its
+rivals are outside; if several are inside, the sample cannot discriminate
+(crowded neighborhood) -> report as such, do NOT pick phi.

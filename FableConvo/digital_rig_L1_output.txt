@@ -1,0 +1,32 @@
+P2 - PULLING TEST (detune by +/-0.004; does W snap or track?)
+drive Omega       W measured  W*360 fold  verdict
+3/5 = 0.600 -0.004     0.60000       144.0  LOCKED (snapped)
+3/5 = 0.600 +0.000     0.60712       141.4  on target
+3/5 = 0.600 +0.004     0.61244       139.5  tracking (no lock)
+
+1/phi = 0.6180 -0.004     0.62500       135.0  tracking (no lock)
+1/phi = 0.6180 +0.000     0.63002       133.2  on target
+1/phi = 0.6180 +0.004     0.63526       131.3  tracking (no lock)
+
+5/8 = 0.625 -0.004     0.63389       131.8  tracking (no lock)
+5/8 = 0.625 +0.000     0.63906       129.9  on target
+5/8 = 0.625 +0.004     0.64448       128.0  tracking (no lock)
+
+8/13 = 0.6154 -0.004     0.62190       136.1  tracking (no lock)
+8/13 = 0.6154 +0.000     0.62643       134.5  on target
+8/13 = 0.6154 +0.004     0.63177       132.6  tracking (no lock)
+
+2/3 = 0.6667 -0.004     0.66947       119.0  tracking (no lock)
+2/3 = 0.6667 +0.000     0.67944       115.4  on target
+2/3 = 0.6667 +0.004     0.68578       113.1  tracking (no lock)
+
+P1/P3 - PLATEAU SCAN (fine sweep; plateau = many Omegas, same W)
+  locked W  tongue width  nearest landmark
+    0.6667        0.0228  2/3 (MATCH)
+    0.6000        0.0060  3/5 (MATCH)
+    0.6250        0.0016  5/8 (MATCH)
+
+1/phi drive: W = 0.63002 (Omega = 0.61803) -> tracks Omega, NO lock: the open channel
+fold check: W*360 folded = 133.2 deg (golden angle 137.5)
+
+FOLD AMBIGUITY NOTE: 5/8 lock folds to 135.0 deg - only ~2.5 deg from golden 137.5!
