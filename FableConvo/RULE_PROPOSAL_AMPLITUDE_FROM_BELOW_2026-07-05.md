@@ -13,6 +13,18 @@ forecasts its own AMPLITUDE. Amplitude is forecastable only from the state of
 the coupled reservoir one rung below, read at the crossing/handoff. Feeding a
 system's own history into its amplitude forecast injects noise and hurts.**
 
+**Mechanism (added 7 Jul — found already written in
+ARA_AS_TRIANGULATION_IN_TIME.md, 1 Jul, §4–5):** prediction is triangulation;
+a fix needs parallax; "motion is where the parallax is" — direction and shape
+are forecastable because they ARE bearings. Amplitude is the carrier's
+radius, and "your own carrier moves with you, gives zero parallax, and can't
+be triangulated from inside" — own-amplitude forecasting is structurally
+impossible, not empirically unlucky. The reservoir-read is the doc's own
+"fractal rescue": the rung below is the moving proxy for the still thing you
+are inside (worked example there: heart via blood pressure — the same pair
+that later evidenced this rule). The rule is therefore a THEOREM of the
+triangulation frame, registered before the rule was observed.
+
 Anchor (established mechanics — the "everything is there" landing): in linear
 dynamics every mode is residue × e^(st). The pole s (frequency, damping, phase
 evolution) is the system's intrinsic geometry; the residue (amplitude) is set

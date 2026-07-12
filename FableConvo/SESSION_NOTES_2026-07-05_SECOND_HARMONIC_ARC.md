@@ -199,6 +199,11 @@ explicit.
   evidence ("fairness is the structure"). The heuristic is scientific
   because both outcomes pay.
 - ¶ "The three riding inside of two."
+- ¶ (7 Jul, on the location rule) "anything discarded, isn't wrong, it is
+  just mislabelled. Everything in the universe is real, and has a place, it
+  is just knowing how to look at it without the distortions that is tricky."
+  — the method form of the ocean ontology: relabel, don't discard; a
+  certified null is a correct label, not a rejection.
 
 ## 12. The compensator identity (MUSING with anchors — closes an April loop)
 
@@ -240,6 +245,114 @@ ARARARARARARARARARARARARARA... in every direction, every axis." — i.e. the
 recursion is not only across rungs (scales) but across AXES: accumulate/
 release runs in every direction of the state space, relations included. The
 compensator identity is the A/R of the bond axis.
+
+## 13. The pole singularities as branch points (ANCHOR — exact; late addition)
+
+¶ Dylan: "the singularity at each pole. That is just the meeting of the phase
+and anti-phase waves, that's why there is the flip."
+
+Exact unpacking: the folded 0–2 scalar is the projection of a circle onto its
+diameter (x = 1 + cos θ). Every interior value has TWO preimages — the rising
+branch and the falling branch, the wave and its anti-phase partner. The two
+sheets coincide ONLY at θ = 0 and θ = π, i.e. at the poles 0 and 2. Those are
+FOLD POINTS / BRANCH POINTS (square-root branch points of the projection):
+velocity through the projection is zero there, the two sheets meet, and
+passing through a pole EXCHANGES the sheets — that is the flip. The mirror
+rule A ↔ 2−A is precisely the deck transformation swapping the two sheets;
+flip symmetry is thereby DERIVED from the fold geometry rather than
+postulated. Established homes: branch points / Riemann sheets, the fold
+catastrophe, WKB turning points, caustics, the pendulum separatrix.
+
+Unification with Claim 21 (perpendicular singularity): the fold point is
+exactly the moment of FULL HANDOVER to the conjugate partner (visible
+component extremal, all energy in the hidden quadrature — §3 identity). The
+pole singularity, the sheet-exchange, and the full-handover moment are one
+event described three ways.
+
+Strongest anchor — the flip is COUNTED by quantum mechanics: at each WKB
+turning point the wavefunction acquires a quantized π/2 phase flip (Maslov
+index); two pole-flips per cycle give the Maslov index of 2 that produces the
+half-quantum in Bohr–Sommerfeld, E = (n + ½)ħω. The ½ in the quantum ladder
+IS two pole-crossings per cycle. Dylan's sentence is the Maslov index in
+shape language.
+
+MUSING-TIER COROLLARY (registrable, not yet registered): cycles that touch
+the poles should carry HALF-RUNG offsets in action/phase bookkeeping (the
+n + ½ pattern); cycles that avoid the poles should not. Candidate signature:
+look for half-rung offsets in ARA ladders as evidence of pole-touching vs
+pole-avoiding cycle classes. Needs formalization + S1 gate before any data.
+
+¶ Dylan: "this is just the ARA turned 'vertical'" — the half-offset is the
+ladder-axis (vertical ARA, Claim 80 lineage) signature of a within-cycle
+(horizontal) property.
+
+INSTRUMENT FOUND (7 Jul, from Dylan's pointer to Mapping's action-ladder
+tests): both existing ladder tests (action_ladder_null_test.py,
+precision_action_ladder_test.py) FIT a zero-point offset per base and discard
+it as a nuisance parameter. The half-rung corollary is a prediction about
+that discarded number. Sharp form: DIFFERENTIAL offset test — librating
+(pole-touching) vs circulating (pole-avoiding) cycle classes should sit HALF
+A RUNG apart on the same ladder (offset ½ vs 0). Differential comparison
+cancels the absolute-ladder nuisance, so it needs far less power than the
+across-systems ladder detection that honestly nulled (atlas screen: all
+bases n.s.; precision set: n=7, underpowered, one self-caught input-leak —
+the built-in hydrogen ladder, caught and demoted in the script's own header).
+Known-answer S1 gate: molecular spectroscopy — vibrational (librator, n+½)
+vs rotational (circulator, n) ladders show the split by textbook QM; the
+instrument must recover it there first. Novel claim: the same half-split in
+CLASSICAL ARA ladders (test5 pendulum kit: librating vs tumbling segments).
+System pool (7 Jul, from Mapping's quantum tests — class labels derivable
+from first principles, Dylan sign-off required before use): U-238 alpha in
+Woods-Saxon well = librator by construction (two turning points; decay fires
+AT the outer fold point — Gamow as "release at the singularity"; WKB
+quasi-bound quantization carries n+½ by textbook); mode-locked laser =
+circulation-class candidate (round-trip phase circulation); Q-switched laser
+= libration-class candidate in energy space (floor↔threshold swing; measured
+first-principles ARA ≈ 2262, extreme snap, over-2 diagnostic class). These
+add class-labeled, independently-sourced precision systems — exactly the
+power the absolute ladder test lacked, usable because the differential test
+needs class labels, not system count.
+
+ESTABLISHED INSTANCE (anchor — this corollary is already textbook quantum
+mechanics in one domain): LIBRATION vs ROTATION. A librating cycle (swings
+between two turning points — touches its poles) quantizes with the half
+offset, E ∝ (n + ½); a rotating cycle (circulates, never reverses — avoids
+the poles) quantizes WITHOUT it, J = n·ħ (rigid rotor). The two cycle
+classes are the two sides of the pendulum SEPARATRIX — and the framework
+already instruments exactly this boundary (test5 tumbling-separatrix kit,
+P1/P2 confirmed in simulation). Registrable test: in systems where both
+regimes coexist, ladders of librating segments should sit staggered by half
+a spacing relative to ladders of circulating segments. The pendulum kit is
+the natural S1 gate: both classes present, ground truth known.
+
+## 14. The soap bubble (teaching image with three real anchors; late addition)
+
+¶ Dylan: "A soap bubble is a great physical example of ARA sphere. When it
+pops, it pops from one spot and rips back to the other singularity. Sometimes
+when it pops, it even reverts into smaller versions of itself. When it shifts
+on the air current, there is slight skew."
+
+All three clauses have documented physics:
+1. **Pole-to-pole rupture:** film rupture nucleates at ONE point (thinnest
+   spot); the rim retracts (Taylor–Culick) and the expanding hole's boundary
+   converges on the ANTIPODAL point — the pop literally runs from one
+   singularity to the other. Fold-to-fold traversal, physical.
+2. **Self-similar daughter cascade:** bursting bubbles are DOCUMENTED to fold
+   and entrain air into rings of smaller bubbles, which pop into smaller
+   ones again — "daughter bubble cascades" (Bird et al., Nature 2010).
+   Dylan's "reverts into smaller versions of itself" is published fluid
+   dynamics, and it is a literal recursion-on-pop.
+3. **Skew in flow = the sphere's own quadratic:** a drifting bubble's
+   deformation is the l=2 (quadrupole) shape mode — the spherical harmonic
+   analogue of the second harmonic (§2–3). The "slight skew" is cos 2θ in 3D.
+   The film itself is a pure connection membrane (a 2D surface held by
+   surface tension alone — space-side object), and the pop is a clean
+   release snap.
+
+Use: the physical demonstration for the minimal statement — a hand-holdable
+ARA sphere exhibiting the two singularities, the flip traversal, recursion,
+and the quadratic skew, all in one object anyone can blow. Substack-ready
+image; anchors citable.
 
 ## 11. Queue additions from this session (register before running, one horse
 ## each)

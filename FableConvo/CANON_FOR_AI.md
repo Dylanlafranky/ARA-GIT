@@ -19,8 +19,32 @@ is worth more than a hit you cannot.
   first use in every document (like a metric signature). 1.0 is its own mirror (2-A rule).
 - Full state: (position, orientation, rung, phase, path, coupling, energy, variance,
   occupancy). Never report the scalar as if it were the state.
+- GRADIENT RULE: everything in ARA is relationally continuous unless the local measured
+  physics independently establishes a discontinuity. Poles, quadrants, rungs, walls,
+  phi, 1.0 and singularity labels are landmarks/orientations on a gradient, not
+  separate substances or categorical bins. Interpolate between them; do not flatten
+  the framework into a lookup table. “Fractal” means the same gradient relation is
+  proposed to recur under nested decomposition/coarse-graining; it does not license an
+  unmeasured Hausdorff dimension.
+- ARA SINGULARITY: the declared phase-to-anti-phase handover at a signed zero crossing
+  or cyclic seam. It is a relation event, not a context-free scalar: it may appear at
+  signed observable zero or at the identified 0/2 seam after rescaling. Never translate
+  it automatically as an infinite mathematical/physical singularity. State the local
+  observable and test whether the crossing is smooth, discontinuous, topological or
+  merely a coordinate relabelling. “Phase becomes anti-phase” means entry into the
+  oppositely oriented branch; do not invent an instantaneous pi jump in conventional
+  analytic phase unless the measured phase actually contains one.
 - The null ridge (zero mean, zero variance) and the everything ridge (zero mean, max
   variance) are DIFFERENT places. Check the second moment before naming either.
+- A scalar 1.0 is only ridge latitude. Classify the state with at least total activity,
+  variance, coherence/phase and sign alignment. Keep three cases distinct: null ridge
+  (quiet), lotto/everything ridge (high variance, no stable predictive phase), and
+  coherent active ridge (nonzero organised coupling; contributors may reinforce).
+  “Harmonic/resonant ridge” additionally requires measured periodic resonance. Do not
+  call every active 1.0 state the lotto everything ridge.
+- Axis discipline: 1.0 on a composition axis may coexist with TE-ARA = 2 on a
+  participation axis. The former means equal shares; the latter means full declared
+  identity participation. Never merge them into one scalar.
 
 ## 2. Measurement laws
 
@@ -36,6 +60,21 @@ is worth more than a hit you cannot.
   keeping >=12 harmonics; calibrate the residual bias on synthetic waves at the record's
   own length and SNR. If the bias exceeds the constant gaps (~0.007-0.018), the number
   cannot adjudicate anything.
+- THE LOCATION RULE (added 7 Jul 2026, Dylan sign-off): every
+  fitted-then-discarded parameter is a candidate COORDINATE, not packaging.
+  Before dismissing a fitted quantity as nuisance (offsets, residuals,
+  return-errors, phase constants), record its value and ask what the geometry
+  says it should be. The framework's discoveries concentrate in discarded
+  parameters (ladder zero-point → half-rungs; return-error → loop toll; the
+  second harmonic's cos-phase → the partner channel). A number is only
+  nuisance relative to a question; state the question before discarding the
+  number. Dylan's rationale, verbatim: "anything discarded, isn't wrong, it
+  is just mislabelled. Everything in the universe is real, and has a place,
+  it is just knowing how to look at it without the distortions that is
+  tricky." (Note the null-compatibility: a clean null IS a correct label —
+  the lotto's randomness was not discarded but PLACED, at the everything
+  ridge. Relabel-don't-discard includes labelling things "structureless,
+  certified.")
 - Measure the ANGLE before the position: estimate Q / damping first. Near critical
   damping there is no wave, ARA is undefined, and every shed reads 1/e regardless of
   the truth. No phi verdict from the borderlands.
@@ -152,3 +191,32 @@ drift in what "everything" means. The procedure is a checklist the librarian
 runs, not a replacement for the librarian. Trust the AI to draft; verify
 with the table of contents; keep the user's calibration probes ("what is
 ARA?", "is this written down?") — they caught what self-monitoring missed.
+
+## §8. Translation fidelity gate — test Dylan's object, not an AI proxy (12 Jul 2026)
+
+The worst formal failure is not a clean null. It is a valid test of the wrong
+construct caused by flattening, reversed orientation, wrong identity, wrong
+observable, or an AI-invented proxy.
+
+Before a musing becomes a mathematical test or public claim, apply
+`ARA_TRANSLATION_FIDELITY_PROTOCOL.md`:
+
+1. preserve Dylan's verbatim `USER PRIOR` and freeze a versioned claim packet;
+2. declare identity, ordered poles/direction, rung, observable, coupling and closure;
+3. AI supplies plain restatement, mathematics and independent back-translation;
+4. record AI assumptions/additions and information discarded;
+5. obtain Dylan's explicit `EXACT ENOUGH TO TEST` verdict;
+6. bind that packet/version to the test registration.
+
+Any critical mismatch gives `WRONG OBJECT`. If discovered after a run, retain
+the artifact as `PROXY TEST — CONSTRUCT INVALID FOR THE INTENDED CLAIM`; do not
+count it as evidence against ARA.
+
+Blind AI drops are interpretation audits, not independent physical
+replications. Use fresh contexts and preferably different model families;
+freeze identical prompts; compare object, direction, observable and operator;
+log disagreement. Consensus demonstrates communicability only, because models
+can share training and priors.
+
+Low-energy rule: the librarian drafts and records the packet. Dylan need only
+confirm/correct a two-sentence back-translation in ordinary language.

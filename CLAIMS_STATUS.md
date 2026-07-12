@@ -13,6 +13,19 @@ The safest way to read any claim here is:
 
 > **Ladder correction (30 May 2026):** earlier versions described the rung *spacing* as phi. On re-checking against the data (54-heart two-band ECG, solar flywheel), the rung **spacing is octave (x2)** — system geometry sits at ARA = 2.0, the harmonic ceiling. **Phi is kept where it belongs: in the coupling/handover relations** between rungs (golden duty 0.39/0.61, the 1/phi^3 and 1/phi^4 constants). The earlier shared "phi-power" placements (sun = phi^5, etc.) are superseded; each system now carries its own octave ladder anchored at its observed pump. Where claims below say "phi-rung", read it as "octave-rung with phi-timed coupling". Octaves build the tower; phi is the breathing gap between the steps.
 
+> **Cardiac forecast correction (11 July 2026):** the historical `nsr050` ARA-versus-Fourier result (`+0.686` versus `+0.308`) reproduces exactly, but it was online one-beat prediction using the true previous test beat, not a six-hour cold forecast. The table also confused 7 selected ARA subsystems with 7 parameters; the recovered code counts 22 ARA parameters versus 21 Fourier coefficients. On a frozen `nsr051`–`nsr054` replication set, ARA beat Fourier on both metrics in 1/4 records, lost on average, and was decisively beaten by one-step persistence throughout. With test updates removed, ARA cold correlation was negative on all four. See `TheFormula/02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/POST_LEAK_CARDIAC_REPLICATION_2026-07-11.md`.
+
+> **TE-ARA / MX1 status (12 July 2026):** TE-ARA is now defined as the 0–2 **main-identity participation**
+> coordinate \(2E_{id}/E_{total}\), not absolute energy, capacity fill or source magnitude. In the development-only
+> Alves/OSIRIS plasma test, the declared harmonic identity transferred from electric field to independent particle
+> source at \(r=0.9991\); the source-participation TE-ARA analogue transferred at \(r=0.7987\), MAE 0.0911 on 0–2;
+> local pair ARA transferred at \(r=0.7706\). However, on the same 75 clean held-late slices, scalar ARA + TE-ARA
+> did not beat the ordinary \(k_0E_{\rm rms}\) magnitude scale. Careful claim: **development support for an
+> identity-participation crosswalk; no support yet for the tested scalar magnitude law.** The independent Tang
+> confirmation arrays remain unopened under a frozen protocol. ENSO and LLM use as mixed/distributed participation
+> ledgers is proposed, not tested. Full synthesis:
+> `Analysis/TE_ARA_PARTICIPATION_LEDGER_SYNTHESIS_2026-07-12.md`.
+
 > **Update (10 June 2026) — prediction-mechanics session, levers vs lenses:** A day on the ENSO 12-month
 > amplitude/turning-point problem and on what energy *is* in the forecast. Net, with honest statuses:
 > - **ENSO amplitude FIX (Supported):** recoil spring (equal-and-opposite restoring, β≈**−1/φ** not 1/φ³) +

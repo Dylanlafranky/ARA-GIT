@@ -1,6 +1,6 @@
 # 3D Models
 
-Interactive 3D viewers of the ARA topology. Open the `.html` files in any browser (no server needed). The `.py` files generate the coordinate data (`.json`) and print the key numbers; the viewers run standalone.
+Interactive 3D viewers of the ARA topology. Open the `.html` files in any browser (no server needed). **Three.js (r128) is embedded in each file, so they render fully offline** — no internet/CDN required. (`ara_sphere_coordinate_3d.html`'s φ-line uses the exact 36° shear, φ = 2·cos36°.) The `.py` files generate the coordinate data (`.json`) and print the key numbers; the viewers run standalone.
 
 ## Viewers (open these)
 - **`base_ara_topology_3d.html`** — the **base ARA**: two octave topographic spheres, Space head-on + Time **sheared 36°** (φ = 2cos36°), weaving/oscillating across the 0→2 ARA axis (markers at 1.0 balance and φ).

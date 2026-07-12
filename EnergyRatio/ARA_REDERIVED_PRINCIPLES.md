@@ -23,9 +23,11 @@ framework is generative; it does not self-validate; the echo does.
 ARA chain: light is the rung between space and time, anti-phase to both. Real physics:
 - Light travels on the **null interval, ds² = 0** — the exact boundary between spacelike (ds² > 0) and
   timelike (ds² < 0). It is literally the seam where space and time meet.
-- An electromagnetic wave **is** two fields (electric, magnetic) regenerating each other 90° out of phase
-  (Maxwell). Light is a two-wave blend in its construction.
-- A photon is massless, travels at c, and experiences **zero proper time** — the timeless space-crossing channel.
+- A plane electromagnetic wave has electric and magnetic components that are **spatially orthogonal and
+  temporally in phase at a fixed point**; Maxwell's curl equations couple their spatial and temporal changes.
+  They are components of one electromagnetic field, not two independent waves in temporal anti-phase.
+- A photon is massless and follows a null worldline at `c`; the proper-time interval along a null worldline is
+  zero, but there is no valid photon rest frame in which to describe what the photon “experiences.”
 
 **2. Matter = the uncancelled excess of an up/down cancellation, with light as the medium.**
 ARA chain: up-flow and down-flow clash; matter forms as the leftover excess; light is what's produced.

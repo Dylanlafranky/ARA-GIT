@@ -1,6 +1,6 @@
 # ARA Framework — Index
 
-**Last updated: June 2026**
+**Last updated: July 2026**
 
 ---
 
@@ -15,6 +15,8 @@ The repository has three working folders, one per question the framework asks of
 > **June 2026 updates.** **`TheFormula/` has been reorganised into 20 dated thread subfolders**, each with its own README — start at [`TheFormula/00 - INDEX.md`](TheFormula/00%20-%20INDEX.md). The result-doc and visualiser links further down this page that point into `TheFormula/<file>` now live **inside the relevant dated thread folder** — use the TheFormula index to locate them. Two more: the **over-2 atlas audit is complete** (all 45 over-2 entries resolved — a snap stored upside-down, or a non-oscillation off the cyclic axis; see [`Mapping/ARA_OVER2_AUDIT.md`](Mapping/ARA_OVER2_AUDIT.md)), and the **ARA scale is now read as a folded symmetric circle** (`0`/`2` = opposing space/time singularities, `1.0` = cancellation ridge, φ mirrored at `1.618`/`0.382`) — see [`what_is_this.html`](what_is_this.html).
 
 **New to the vocabulary?** Start with [`GLOSSARY.md`](GLOSSARY.md) — a plain-language key to every term (ARA, octave, φ, the walls, rungs, matched-rung pairs, recycling, leanness, the bedrock), with the common confusions flagged directly (e.g. "Primes" ≠ prime numbers; the space/time pole labels are a flip-symmetric choice; rung-spacing is a different axis from the 0–2 position).
+
+**Mapping ARA against established physics?** Read [`ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md`](ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md) for the calibrated foundations and [`ARA_PHYSICAL_LAWS_CROSSWALK.md`](ARA_PHYSICAL_LAWS_CROSSWALK.md) for the living law atlas. The crosswalk currently covers the canonical families across mechanics, transport, electromagnetism, thermodynamics, relativity, and quantum/particle physics, and labels exact identities separately from structural matches and open ARA proposals.
 
 For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 

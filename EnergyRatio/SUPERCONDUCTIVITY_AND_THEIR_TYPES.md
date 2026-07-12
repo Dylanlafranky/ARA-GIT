@@ -95,3 +95,18 @@ Superconductivity = lossless (zero-shed, time-ideal) transport on a space-lattic
 different glues** — **phonon (space-lattice breathing), golden-incommensurate (φ non-locking / KAM
 frictionless), or magnetic spin-fluctuation (anti-phase / mirror)** — matter tiles (hexagon/square); the
 energy rides whichever route the material affords.
+
+## 12 July 2026 Faraday-curl correction
+
+The Maxwell/Faraday analysis adds a general superconducting bridge that does **not** require a golden path:
+
+- London/Meissner screening currents circulate around magnetic flux;
+- the condensate phase is connection-rigid and winds by integer \(2\pi n\);
+- superconducting flux is quantised in units \(h/2e\);
+- type-II vortex cores and phase slips permit changes of winding sector.
+
+Faraday curl and flux quantisation work for loops of arbitrary shape. Therefore the “golden-incommensurate” row above
+must be read only as a proposed special-material route, not as one of three established general superconducting
+pairing mechanisms. Incommensurability, charge-density-wave sliding and quasicrystalline superconductivity are real
+topics, but their coexistence does not establish that golden/KAM non-locking causes superconductivity. The general
+connection/circulation anchor is condensate phase rigidity plus integer winding.

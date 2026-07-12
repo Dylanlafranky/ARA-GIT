@@ -23,6 +23,33 @@ That shortcut did not improve held-out future-pose forecasts. The corrected fram
 architecture routes recyclable energy through smaller, faster lower rungs before some
 works upward again. See `ARA_CROSS_RUNG_RECYCLING_MODEL.md`.
 
+## Four quantities that must not be called one “universal leak”
+
+The current geometry contains four related but non-identical candidates:
+
+| Quantity | Value/form | Meaning | Current status |
+|---|---:|---|---|
+| ARA-width mismatch | `G = 2-φ ≈ 0.381966` | difference between the head-on octave reading `2` and proposed Time-sheared reading `φ` | exact arithmetic; physical pipe/shear reading proposed |
+| normalized diverted share | `g = (2-φ)/2 ≈ 0.190983` | share of a width-`2` incoming packet not sent through the direct `φ/2` channel | framework normalization, not measured universal loss |
+| local irrecoverable loss | `λ_k g Q_k` | part of the diverted packet actually dissipated rather than stored/recycled | must be measured per system and rung |
+| singularity-crossing tax | `κ ≈ (7-4φ)/4 ≈ 0.132` in the old mirror/lottery tests | model-specific loss of usable signal per inferred crossing | empirical lead from one test family; not yet universal |
+
+The hexagon→pentagon construction adds an exact **60° angular defect**: six equilateral triangles close flat;
+five leave one triangle's angle missing and generate curvature when assembled. That defect has angular units, not
+energy units. Calling it the mechanism beneath `G`, `g`, `λ`, or `κ` requires a conversion law and test.
+
+Competing readings to keep separate:
+
+1. **same-toll hypothesis:** angular defect, width mismatch and crossing tax are different coordinates of one cost;
+2. **serial-cost hypothesis:** the width mismatch diverts a packet and a later singularity crossing taxes what
+   remains;
+3. **branch-and-recycle hypothesis:** the mismatch is not loss at all—only `λ_k` determines permanent loss;
+4. **holonomy hypothesis:** apparent shed is unreturned orientation accumulated around a curved/gated loop.
+
+Do not combine the percentages until one of these models supplies a dimensionally valid transformation. The
+registered staircase/holonomy idea in `FableConvo/MUSING_GEOMETRIC_PHASE_HOLONOMY_2026-07-07.md` is one possible
+discriminator; it has not yet been run.
+
 ## First result — Golden stars run leaner (31 May 2026)
 
 Full writeup: **`GOLDEN_STARS_LEAN_RESULT.md`**. Real Kepler + OGLE photometry. Leanness = **R21 = A(2f)/A(f₁)** (harmonic spray; lower = leaner).
@@ -59,6 +86,9 @@ python club_pop.py          # RR0.61 cross-match: club vs crowd leanness + withi
 
 ## Caveats
 n=4 Kepler club is a known related class (re-found, not discovered); R21 is one (clean, physical) leanness proxy; against same-type RRc the class gap is modest (3.6%) — the within-club gradient toward exact φ is the backbone; golden-star 2nd modes may be non-radial vs the crowd's radial overtones.
+
+The early `275°` racing-cam example is an analogy/prospective test, not independent confirmation that racing or
+Formula 1 valve timing universally optimizes to `φ`; see `CAMSHAFT_PHI_PROVENANCE_AUDIT.md`.
 
 ## Next
 RR0.68 group; LMC/SMC RR0.61; a 2nd leanness proxy (R31, light-curve skew); whether the φ-club is also more transient (strange-nonchaotic / shorter stable lifetime).

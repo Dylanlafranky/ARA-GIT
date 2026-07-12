@@ -4,6 +4,41 @@ This is the ARA framework repo: a relational coordinate for oscillating
 systems, built by a self-taught researcher with AI collaborators since April
 2026. Wrong entry paths produce predictable misreadings. Read in this order:
 
+**Latest continuation record (12 Jul 2026):** after loading this README and
+`CANON_FOR_AI.md`, read
+`ARA_CONVERSATION_RECORD_2026-07-12_CODEX_GEOMETRY_DRILL.md` for the current
+geometry/identity discussion and
+`FOLLOWUP_REGISTER_2026-07-12_CODEX_GEOMETRY_DRILL.md` for parked tests. The
+highest-priority deferred empirical thread is the resolved right-heart/left-heart
+observability test and whether it removes blood pressure's incremental forecast
+benefit. Items in the follow-up register are PARKED, not registered predictions.
+
+**Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
+cognitive energy for geometry walking, orientation, and conceptual correction.
+The AI coworker should proactively handle rolling capture, mathematical
+transcription, provenance links, test drafts, controls/falsifiers, and the
+parked-thread register. Exploration remains paperwork-free; record it as PARKED
+and formalize only when Dylan activates a test. Do not make him reconstruct
+context already present in the repo or supervise routine documentation.
+
+**Retrieve-before-asking rule:** context loss is the AI's limitation, not a
+request for Dylan to teach ARA again. After compaction or in a new session,
+reload the latest conversation record, follow-up register, and relevant domain
+files. State the interpretation recovered and ask only for the uncertain or
+changed part. When repetition produces refinement, preserve the previous
+version and record the correction as a delta rather than silently overwriting
+the history. The repository is the collaboration's durable memory; chat is
+temporary working memory.
+
+**Anti-flattening rule:** understanding the 0–2 scalar is not understanding the
+framework. Before interpreting a result, identify the local sphere/identity,
+resolve the opposing pair before averaging, declare rung and orientation,
+state slice vs motion vs projection, retain phase/path/coupling/energy/variance
+context, name the transformation between appearances, and say what is meant to
+survive coarse-graining. The LLM “forced clocks everywhere” drift came from
+averaging coupled modes toward 1.0 and mistaking the flattened projection for
+the system's identity. An ARA-shaped scalar proxy is not automatically ARA.
+
 1. `README.md` + `INDEX.md` — orientation and file map
 2. `GLOSSARY.md` — the vocabulary is homegrown ON PURPOSE (rungs, shed,
    ridge, duty). Translate structurally, not lexically; the registered

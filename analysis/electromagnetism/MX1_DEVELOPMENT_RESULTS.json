@@ -1,0 +1,358 @@
+{
+  "claim_id": "MX1-v2",
+  "tier": "DEVELOPMENT / EXPLORATORY / NOT CONFIRMATORY",
+  "confirmation_arrays_opened": false,
+  "fidelity_verdict": "EXACT ENOUGH TO TEST",
+  "hashes": {
+    "field_md5": "b4f645e3876e3ae6b432b0de211ded8c",
+    "field_sha256": "0b368655fe61b33a3193d7d01180623d4f1df4be068b68fb4d453cd8e6d62907",
+    "phase_md5": "e73debf0cf66d6c5af5d7cd1f62490c1",
+    "phase_sha256": "1cef8ab44720f60ab6559d04333fa60e8a9415963ff26356a177128181b8770f"
+  },
+  "rules": {
+    "initial_noise": 0.00020092557233992227,
+    "amplitude_gate": "E_rms >= 10 * median(first 10 E_rms)",
+    "coherence_gate": "reference fundamental power fraction >= 0.25",
+    "reference_mode_index": 5,
+    "reference_k_physical": 3.141592653589793,
+    "identity_harmonic_modes": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      60
+    ],
+    "te_label": "signal-power TE-ARA analogue; not complete physical joule energy",
+    "ara_orientation": "increasing spatial phase; raw left-zero-to-extremum / extremum-to-right-zero",
+    "bounded_ara_acceptance": "0 < raw ratio <= 2; larger values retained but flagged compound/undefined",
+    "development_split": "first 70% versus final 30% of eligible slices"
+  },
+  "eligible": {
+    "n": 299,
+    "first_index": 160,
+    "first_time": 15.960000038146973,
+    "last_time": 38.608001708984375
+  },
+  "level0": {
+    "spectral_derivative": {
+      "n": 76544,
+      "correlation": 0.9971017705032933,
+      "mae": 0.004144295814837539,
+      "nrmse_by_std": 0.0767044571624113,
+      "r2": 0.9941164262514198
+    },
+    "central_difference": {
+      "n": 76544,
+      "correlation": 0.996219879109109,
+      "mae": 0.006111057944960072,
+      "nrmse_by_std": 0.08903862410248757,
+      "r2": 0.9920721234179359
+    },
+    "spectral_slope_through_origin": 1.0076992598454337,
+    "particle_source_mean_offset": 0.0010375080552017344
+  },
+  "level1": {
+    "identity_gauss_vs_identity_particle": {
+      "n": 76544,
+      "correlation": 0.9990590088650202,
+      "mae": 0.0027727029091024163,
+      "nrmse_by_std": 0.04337174471115955,
+      "r2": 0.99811889176071
+    },
+    "identity_gauss_vs_full_particle": {
+      "n": 76544,
+      "correlation": 0.6746869015005623,
+      "mae": 0.0839183337609993,
+      "nrmse_by_std": 0.738129437360663,
+      "r2": 0.4551649337016308
+    }
+  },
+  "geometry": {
+    "te_source_g_vs_f_correlation": 0.7986639494569704,
+    "te_source_g_vs_f_mae": 0.09105756021833199,
+    "te_field_vs_source_f_correlation": 0.775982243608093,
+    "source_activity_g_vs_f": {
+      "n": 299,
+      "correlation": 0.9999507711357156,
+      "mae": 0.0014442691831490582,
+      "nrmse_by_std": 0.02168638431402734,
+      "r2": 0.9995297007353843
+    },
+    "pair_xq_g_vs_f": {
+      "n": 299,
+      "correlation": 0.010674805182961138,
+      "mae": 0.023883298693206514,
+      "nrmse_by_std": 1.275178004801973,
+      "r2": -0.6260789439307408
+    },
+    "pair_xq_f_median": 1.0074231848819604,
+    "pair_xq_f_max_abs_from_ridge": 0.12658913867335353,
+    "te_ara_medians": {
+      "field": 1.1340688121036488,
+      "gauss_source": 0.9244271998694991,
+      "particle_source": 0.8891173961732514
+    },
+    "te_ara_ranges": {
+      "field": [
+        0.6260996253964763,
+        1.4327426708387734
+      ],
+      "gauss_source": [
+        0.5330171189895389,
+        1.0743762651529205
+      ],
+      "particle_source": [
+        0.3415167935424083,
+        1.053553495699222
+      ]
+    },
+    "clean_bounded_ara_fraction": {
+      "ara_e_positive_raw": 1.0,
+      "ara_e_negative_raw": 0.7391304347826086,
+      "ara_rho_f_positive_raw": 0.9431438127090301,
+      "ara_rho_f_negative_raw": 0.725752508361204
+    },
+    "cell_pair_xq_g_vs_f": {
+      "n": 1495,
+      "correlation": 0.7705620911812122,
+      "mae": 0.03747182872848543,
+      "nrmse_by_std": 0.6835203873372923,
+      "r2": 0.5327998800942781
+    },
+    "cell_total_source_g_vs_f": {
+      "n": 1495,
+      "correlation": 0.9996594284757002,
+      "mae": 0.003650496039284958,
+      "nrmse_by_std": 0.03052595425250802,
+      "r2": 0.9990681661169738
+    },
+    "cell_qnet_g_vs_f": {
+      "n": 1495,
+      "correlation": 0.9953087375255805,
+      "mae": 0.002305675361084353,
+      "nrmse_by_std": 0.11868469172567904,
+      "r2": 0.9859139439499806
+    },
+    "cell_boundary_gauss_vs_particle_qnet": {
+      "n": 1495,
+      "correlation": 0.9952702892962597,
+      "mae": 0.002313212321422932,
+      "nrmse_by_std": 0.11901964304699494,
+      "r2": 0.9858343245689659
+    },
+    "cell_pair_xq_f_range": [
+      0.7895775330226612,
+      1.491210086849774
+    ]
+  },
+  "compressed_models": {
+    "scale_only": {
+      "features": [],
+      "train_n": 146,
+      "test_n": 75,
+      "shape_factor_metrics": {
+        "n": 75,
+        "correlation": null,
+        "mae": 0.030058927468945083,
+        "nrmse_by_std": 1.378638759105973,
+        "r2": -0.9006448281092572
+      },
+      "source_activity_metrics": {
+        "n": 75,
+        "correlation": 0.9916473169791273,
+        "mae": 0.005000429685627486,
+        "nrmse_by_std": 0.5685447511083677,
+        "r2": 0.6767568659871244
+      },
+      "fit": {
+        "intercept_standardised": 1.0248645574902449,
+        "coefficients_standardised": []
+      }
+    },
+    "te_only": {
+      "features": [
+        "te_ara_e_analogue"
+      ],
+      "train_n": 146,
+      "test_n": 75,
+      "shape_factor_metrics": {
+        "n": 75,
+        "correlation": -0.7795327692784071,
+        "mae": 0.03080809377926861,
+        "nrmse_by_std": 1.4176009587087186,
+        "r2": -1.0095924781318786
+      },
+      "source_activity_metrics": {
+        "n": 75,
+        "correlation": 0.9903864548451824,
+        "mae": 0.005134830640804518,
+        "nrmse_by_std": 0.5853327148161774,
+        "r2": 0.6573856129659237
+      },
+      "fit": {
+        "intercept_standardised": 1.0248645574902449,
+        "coefficients_standardised": [
+          0.0011287389920310175
+        ],
+        "feature_mean": [
+          1.1242206269364785
+        ],
+        "feature_std": [
+          0.12861137234119313
+        ]
+      }
+    },
+    "ara_only": {
+      "features": [
+        "ara_e_mean_centered_clean",
+        "ara_e_contrast_clean"
+      ],
+      "train_n": 146,
+      "test_n": 75,
+      "shape_factor_metrics": {
+        "n": 75,
+        "correlation": 0.9080482077533738,
+        "mae": 0.03573637146943478,
+        "nrmse_by_std": 1.988357769095226,
+        "r2": -2.9535666179213456
+      },
+      "source_activity_metrics": {
+        "n": 75,
+        "correlation": 0.8236152459058647,
+        "mae": 0.005836748141619789,
+        "nrmse_by_std": 0.807394154886332,
+        "r2": 0.3481146786553857
+      },
+      "fit": {
+        "intercept_standardised": 1.0248645574902449,
+        "coefficients_standardised": [
+          0.029741007734207472,
+          0.01888012134596915
+        ],
+        "feature_mean": [
+          0.15440160739041983,
+          -0.3650316518937417
+        ],
+        "feature_std": [
+          0.09073193010929494,
+          0.107003475600151
+        ]
+      }
+    },
+    "ara_plus_te": {
+      "features": [
+        "te_ara_e_analogue",
+        "ara_e_mean_centered_clean",
+        "ara_e_contrast_clean",
+        "ara_te_interaction_clean"
+      ],
+      "train_n": 146,
+      "test_n": 75,
+      "shape_factor_metrics": {
+        "n": 75,
+        "correlation": -0.41377394660562206,
+        "mae": 0.06440422663937256,
+        "nrmse_by_std": 3.813763986729583,
+        "r2": -13.544795746475529
+      },
+      "source_activity_metrics": {
+        "n": 75,
+        "correlation": 0.8056855815180274,
+        "mae": 0.010484722138206413,
+        "nrmse_by_std": 1.539446780293316,
+        "r2": -1.3698963893554574
+      },
+      "fit": {
+        "intercept_standardised": 1.0248645574902449,
+        "coefficients_standardised": [
+          0.036971663486748116,
+          0.2745022472265905,
+          0.01892617584662362,
+          -0.2669929797961609
+        ],
+        "feature_mean": [
+          1.1242206269364783,
+          0.15440160739041983,
+          -0.3650316518937417,
+          0.08987854132209586
+        ],
+        "feature_std": [
+          0.12861137234119313,
+          0.09073193010929494,
+          0.107003475600151,
+          0.06420935804726485
+        ]
+      }
+    },
+    "matched_generic": {
+      "features": [
+        "te_ara_e_analogue",
+        "spectral_entropy_e",
+        "skew_e",
+        "crest_e"
+      ],
+      "train_n": 146,
+      "test_n": 75,
+      "shape_factor_metrics": {
+        "n": 75,
+        "correlation": 0.762072245075501,
+        "mae": 0.12682255133127807,
+        "nrmse_by_std": 7.868480716391138,
+        "r2": -60.91298878421922
+      },
+      "source_activity_metrics": {
+        "n": 75,
+        "correlation": -0.20602052918975788,
+        "mae": 0.021006564654510035,
+        "nrmse_by_std": 3.1936436785824025,
+        "r2": -9.199359945749338
+      },
+      "fit": {
+        "intercept_standardised": 1.0248645574902449,
+        "coefficients_standardised": [
+          0.00769930772668925,
+          0.05148449623400748,
+          0.06340578239042269,
+          -0.008431927044586687
+        ],
+        "feature_mean": [
+          1.1242206269364783,
+          0.23596625317970119,
+          0.02489685890714658,
+          2.0045880060886647
+        ],
+        "feature_std": [
+          0.12861137234119313,
+          0.02621377695617124,
+          0.03345239518830623,
+          0.07326649520821851
+        ]
+      }
+    }
+  },
+  "scale_only_full_coverage_diagnostic": {
+    "train_n": 209,
+    "test_n": 90,
+    "shape_factor_metrics": {
+      "n": 90,
+      "correlation": 6.525829208068439e-15,
+      "mae": 0.027599984426880553,
+      "nrmse_by_std": 1.042679193818119,
+      "r2": -0.08717990122120267
+    },
+    "source_activity_metrics": {
+      "n": 90,
+      "correlation": 0.9917324136942997,
+      "mae": 0.0047771334142022726,
+      "nrmse_by_std": 0.4905356350461043,
+      "r2": 0.7593747907499152
+    }
+  }
+}

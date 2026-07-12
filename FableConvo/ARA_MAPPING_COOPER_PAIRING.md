@@ -160,3 +160,30 @@ ordering, which this doc has nothing to match). What this doc adds to June's:
 the down-rung retardation mechanism + isotope fingerprint, the h/2e and
 2eV/h receipts, the Josephson forced-column star, meta-axis placement, and
 the 7b/7c jurisdiction discipline. Read together.
+
+## 11. Faraday-curl and winding refinement (12 Jul 2026, Codex)
+
+The later Maxwell walk supplies a stronger spatial bridge than the broad “golden path” language:
+
+\[
+\nabla\times\mathbf E=-\partial_t\mathbf B,
+\qquad
+\nabla\times\mathbf J_s=-\frac{\mathbf B}{\mu_0\lambda_L^2}.
+\]
+
+A changing magnetic-flux axis generates electric circulation; a superconducting condensate supports screening
+supercurrent circulation around magnetic flux. The condensate's gauge-invariant phase winding gives
+
+\[
+\oint\nabla\theta\cdot d\boldsymbol\ell=2\pi n,
+\qquad
+\Phi_0=\frac{h}{2e}.
+\]
+
+This is the strongest ARA geometry here: coherent connection, an axial flux, circulation around it, integer winding,
+and vortex/phase-slip events where the order-parameter amplitude can vanish and the winding sector can change.
+
+**Correction:** neither Faraday curl nor superconducting flux quantisation selects a golden-ratio route. The loop can
+have arbitrary shape; the established closure is integer \(2\pi n\) winding. Golden/incommensurate effects, if
+examined, belong to specially structured materials or driven vortex/pinning problems and require separate evidence.
+They are not a general mechanism of superconductivity.

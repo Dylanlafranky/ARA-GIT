@@ -1,6 +1,6 @@
 # TheFormula — index of prediction-model threads
 
-This folder holds the ARA framework's prediction-model experiments, organized into **20 numbered
+This folder holds the ARA framework's prediction-model experiments, organized into **21 numbered
 thread subfolders**, one per method/logic family, in roughly chronological order. Each subfolder has
 its own `README.md` (model logic, systems, what was tested, key results, what wasn't tested, key files).
 The date in each folder name is the **last script method modified within that folder** (DD-MM-YY).
@@ -39,6 +39,7 @@ The date in each folder name is the **last script method modified within that fo
 | 18 | Recoil, phi-rung pump & singularity-flip stack | 11-06 | φ-rung pump + recoil-spring + φ-turn stack: ENSO h=12 to +0.394, real win is the **amplitude fix** (1.46→1.00). Recoil = restoring spring ≈1/φ. Turning-point fixes NULL (only external WWV leads). |
 | 19 | Frozen-sphere mold-then-roll | 14-06 | **Honest negative.** Leak-free vehicle, but on VALUE it rides the feeder, not the geometry — plain linear recharge regression matches the nested sphere; φ-handover near-inert. Edge is direction + confidence. |
 | 20 | Shaped-circle octave, golden-tree walk & orbit-clock | 21-06 | ARA-shape helps asymmetric ENSO (+0.08–0.10 over Fourier); size-weight hurts. Golden-tree walk validated as a *map*, NULL as a predictor. ENSO's stable clock = the annual orbit (Dec peaks, p~1e-5). |
+| 21 | Double-helix relation & closure-defect predictor | 11-07 | First hash-locked test of the new two-strand math. Formal FAIL: 0/6 matched wins on nsr047 but 5/6 on nsr053; relation channel helps replication long-horizon MAE, does not generalize, and raw AR remains stronger. |
 
 ## The throughline
 

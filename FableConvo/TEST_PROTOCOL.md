@@ -13,6 +13,13 @@ before the run and ten after, the template is wrong, not you.
 
 ## The loop (five steps)
 
+STEP -1 - TRANSLATION FIDELITY (when a Dylan musing or ontology is being
+operationalised). Apply `ARA_TRANSLATION_FIDELITY_PROTOCOL.md`. Freeze the
+verbatim source, mathematical object, back-translation, forbidden proxies and
+Dylan's explicit fidelity verdict. No `EXACT ENOUGH TO TEST`, no ARA test.
+Previously run wrong-object instruments are retained as `PROXY TEST`, not
+negative ARA evidence.
+
 STEP 0 - REGISTER FIRST (before any code runs on real data).
 Add an entry to MASTER_PREDICTION_LEDGER.md:
 

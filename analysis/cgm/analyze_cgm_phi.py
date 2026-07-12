@@ -1,3 +1,14 @@
+# ============================================================================
+# QUARANTINED 27 Jun 2026 — DO NOT USE AS A φ CLAIM.
+# This script tests phi WITHOUT the required discipline (phi itself is a legit
+# no declared handover, affirms-the-null ("PASS within 5%"), pools cycles
+# (pseudoreplication) and skips the ARA map. Audited as framework-unfaithful.
+# Superseded by cgm_ara_run.py + CGM_ARA_RESULT.md (honest redo): φ NULLs
+# (healthy ratio ~1.405, CI excludes φ, nearest 1.5); the homeostatic-RIDGE
+# read (CV / time-in-range) is what diagnoses healthy vs T1D (Cliff's δ ±1.0).
+# Kept for the record only. Operating rule: φ is the time-handover, allowed in
+# time-octave element); the issue is the missing scaffold. DECLARE the handover
+# ============================================================================
 """
 Blood Glucose CGM phi Analysis
 =================================

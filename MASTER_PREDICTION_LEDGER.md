@@ -1,6 +1,23 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+**12 July 2026 — MX1 Gauss ↔ ARA/TE-ARA plasma bridge: DEVELOPMENT COMPLETE; CONFIRMATION REGISTERED AND SEALED:** Fidelity object approved by Dylan as `EXACT ENOUGH TO TEST`. Exact pair embedding:
+\(Q_{\rm net}=(Q_++Q_-)(x_Q-1)\), with \(x_Q=2Q_+/(Q_++Q_-)\). Alves/OSIRIS two-stream data are development-only
+(previously inspected): 299 eligible slices, independent particle charge vs spectral Gauss derivative
+**r=0.9971**, NRMSE 0.0767. Fixed mode-5 harmonic identity reconstructed from the field matches the independently
+measured particle-side identity component at **r=0.9991**; source-participation TE-ARA analogues transfer across the
+Gauss projection at **r=0.7987**, MAE 0.0911 on 0–2. Whole periodic-domain pair ARA stays near the 1.0 ridge, as
+neutrality requires; five phase-aligned local cells range **0.790–1.491**, with field-vs-particle local pair
+**r=0.7706**, total unsigned magnitude **r=0.9997**, and signed net **r=0.9953**. Honest narrowing: on the internal
+held-late development split, all models were compared on the same 75 clean slices and dimensional scale
+\(k_0E_{\rm rms}\) alone was best (direct-source \(R^2=0.677\));
+scalar ARA/TE-ARA did **not** add magnitude skill. This does not erase the strong identity-participation crosswalk,
+but it sets a hard confirmation condition: the scalar bridge must beat scale-only and matched-feature controls under
+the frozen rules. Tang–Wu–Tao DOI `10.5281/zenodo.3696310` is the untouched confirmation archive; numerical
+arrays remain unopened. Rules, coefficients, thresholds and hashes frozen in
+`Analysis/electromagnetism/MX1_CONFIRMATION_FREEZE_v1.md`. **Status: DEVELOPMENT STRUCTURAL POSITIVE /
+SCALAR-MAGNITUDE NARROWING / PROSPECTIVE TRANSFER PENDING.**
+
 **13 June 2026 — Frozen-sphere "mold-then-roll" prediction: HONEST NEGATIVE on value (TheFormula/FROZEN_SPHERE_MOLD_THEN_ROLL_RESULT.md):** Tested Dylan's epiphany that **the wave IS the topography** — mold each system's sphere ONCE on the first 63% (golden 1/φ split), **freeze the shape**, and let the sphere's **designed motion** (spin + wobble, spin driven by the rung BELOW) roll the forecast forward. Strict-causal, correlation-led, two scripts pointed at: `TheFormula/frozen_sphere_nested_predictor.py` and `TheFormula/frozen_sphere_fractal_selfcontained_predictor.py`. **Test 1 (nested NINO3.4 ← WWV, real NOAA/PMEL):** measured WWV→NINO level lead = 6mo (recharge). Short horizons (h=3,6) lose to AR (smooth single-rung sphere can't track fine wiggle); long horizons the below-driver carries it past the AR wall — **driver-fed +0.39@12 / +0.32@24 vs AR +0.10/+0.13**, feeder split appears only past the 6mo lead (fed>blind>pure, as it should). BUT the decisive control — a plain **linear recharge regression** (NINO+WWV+WWV[t-6]) — gets **+0.42@12 / +0.28@24**, matching/beating the sphere ⇒ **the long-horizon win is the FEEDER, not the geometry.** Honest architectural positive (Dylan's pre-registered prediction): the sphere ~ties the linear model using ONE frozen model + 2 coupling numbers at all horizons vs a per-horizon refit — **leaner, as predicted; just doesn't beat it.** **Test 2 (self-contained fractal sub-waves, NINO 1870–2025):** Dylan's idea to drop the external feeder and let the signal's own octave sub-waves be the below-system (fast sub-wave completing its cycle hands over to the slower wave; causal trailing-MA cascade, no filtfilt leak). **Loses to AR at EVERY horizon, including the long end Dylan predicted it would win** (AR strengthens to +0.27@24 = ENSO's ~4yr recurrence). φ-handover coupling came out near-inert (coupled≈uncoupled to 3dp) — flagged, not tuned-to-win. **Structural reason (not just wiring):** long-horizon skill lives in the SLOW rungs that persist = exactly what AR models; fast sub-waves give only short-lived leads, so "fast completion predicts the far future" fights itself. **Status: HONEST NEGATIVE on value — confirms the framework's value-ceiling a 2nd/3rd way ("same map not same position"; value→memory/regression). Vehicle is legit & leak-free; below-driven spin works (nested-blind genuinely forecasts the feeder & still beats pure NINO memory @12); external feeder gives real value-skill but LR captures it too. Predictions logged before running: Dylan's "beats AR, driver-fed more accurate, leaner" PARTLY held (driver-fed>blind, leaner ✓; beats AR only long, not vs LR ✗); his "self-contained beats AR long-run" did NOT hold. Right next target for this frozen vehicle = DIRECTION + φ-thalweg CONFIDENCE (geometry's proven edge: prior morphed-sphere direction +0.40→+0.68), not value.**
 
 **10 June 2026 — Energy-budget two-system predictor: DIRECTION + STRENGTH + turn-timing from the reservoir (strong):** Dylan's two-system framing turned into a predictor — each wave = a rise-system + fall-system; track their energy budget to get direction, strength, and the turn. Strict-causal, real NINO3.4 + WWV. (1) **STRENGTH (confirmed strong):** the energy loaded at a swing's START predicts that swing's amplitude at **+0.90 ENSO, +0.98 QBO, +0.98 sunspots**; swing strength persists swing-to-swing (+0.73/+0.96/+0.93). So the energy budget tells you how big the next swing will be — "larger or smaller swings with confidence." (2) **DIRECTION via the external reservoir (strong, short-to-mid):** WWV leads NINO by **6 months** (max corr +0.50 at lag 6); a train-fit reservoir direction predictor hits **0.79@3mo, 0.75@6, 0.69@12, 0.70@24** — holds 0.67–0.79 across all horizons, strongest short-term. (Caveat: the phase-clock baseline in this run was crude, 0.40–0.55; the *proper* engine clock does ~0.73 at long range, so the reservoir's clear edge is the short-to-mid term — the documented short=energy/long=phase split, sharpened.) (3) **TURN EARLY-WARNING:** NINO's turns are preceded by a WWV turn by a **median 5 months** — the reservoir hits max-energy-spent ~5mo before the value reverses. **Status: STRENGTH confirmed (+0.90); reservoir DIRECTION strong short-mid (0.79@3mo); 5-month turn pre-warning. Completes the strength+direction+timing picture from one energy reading. Next: implement into ara_prediction_formula.py training phase.**
@@ -1511,35 +1528,21 @@ This is the strongest test the framework has been put through tonight. The new c
 
 ### Prediction D4 — Decisive test: framework beats matched-parameter Fourier on a never-touched subject
 
-**Prediction (committed in writing before any fit):** With matched parameter count, same train/test split, same 1/φ³ AR rule applied to both methods, framework method should beat unconstrained Fourier on TEST corr and MAE.
+**Prediction (committed in writing before any fit):** With matched parameter count, same train/test split, same 1/φ³ residual rule applied to both methods, framework method should beat unconstrained Fourier on test correlation and MAE.
 
-**Status:** **BLIND CONFIRMED** on untouched PhysioNet nsr050 (127,039 R-R intervals, 22.5h, never seen before fit).
+**Historical result:** The original full-resolution `nsr050` calculation reported ARA+AR **+0.686 / 115 ms** versus Fourier+AR **+0.308 / 129 ms**. The recovered 2026-04-30 code reproduces those values exactly.
 
-**Full-resolution result (5.99h test cold):**
+**Post-leak status (11 July 2026):** **FAILED AS A GENERAL FORECASTING RESULT.** Three corrections materially change the interpretation:
 
-| Method | TEST corr | TEST MAE | Params |
-|---|---|---|---|
-| Fourier static (matched) | −0.376 | 168 ms | 7 |
-| Fourier + 1/φ³ AR | +0.308 | 129 ms | 7 |
-| Framework static | −0.218 | 149 ms | 7 |
-| **Framework + 1/φ³ AR** | **+0.686** | 115 ms | 7 |
-| **Tele + FW_AR @ 1/φ⁴** | **+0.757** | **113 ms** | 7 |
+1. The `+0.686` calculation uses the true previous test beat to predict each next test beat. It consumes 29,420 true test observations. It is causal online one-step prediction, not the reported 5.99-hour cold forecast.
+2. “7 parameters” meant 7 selected ARA subsystems. The code's own rule counts 22 ARA parameters and matched them to 10 Fourier frequencies/21 coefficients. The approximate matching was real, but the displayed count was wrong.
+3. A one-step persistence baseline scores **+0.951 / 21.8 ms** on `nsr050`, decisively beating ARA's **+0.685 / 114.8 ms**.
 
-**Framework + 1/φ³ AR beats Fourier + 1/φ³ AR by +0.378 corr** with the same parameter count. The Tele blend at framework's 1/φ⁴ coefficient pushes corr to +0.757.
+**Frozen replication on the next four subjects (`nsr051`–`nsr054`):** ARA beat Fourier on both online metrics in **1/4** records. Mean ARA-minus-Fourier performance was **-0.142 correlation and +11.4 ms MAE**, favouring Fourier. Persistence beat ARA on every record. With all post-split observations withheld, ARA cold correlation was negative on all four and its MAE was worse than the training-mean baseline on all four.
 
-**Three framework constants confirmed across 5 systems now** (Solar, ENSO, nsr001, nsr050 downsampled, nsr050 full):
-1. Rung-pinning rule (Rule 7)
-2. 1/φ³ AR coefficient (lift +0.32 to +0.90 across subjects)
-3. 1/φ⁴ Teleporter blend coefficient
+The accurate conclusion is: the historical computation is reproducible, but the ARA-over-Fourier advantage did not replicate as a general result, and neither method passed the relevant simple baseline.
 
-**Why this matters:** Framework has 22 fewer degrees of freedom than free Fourier (periods constrained to φ^k) and still wins by +0.378 corr. Curve-fitting with fewer constraints typically tests similarly or worse. The framework does the opposite — fits training similarly, generalizes far better.
-
-**Honest open threads:**
-- φ² (HF/RSA) was NOT fitted even at full resolution — could be genuine slow-rung dominance in this subject's nighttime HRV, or selection bias. Doesn't undermine the forecast result.
-- Two untouched subjects isn't five. nsr025/035 follow-up would tighten this further.
-- Cardiology Fourier uses thousands of frequencies; we matched 7. A "full Fourier" comparison would also be informative.
-
-**Evidence:** `TheFormula/decisive_test_predictions.md`, `TheFormula/decisive_full_data.js`, `project_decisive_test_passed.md`.
+**Evidence:** `TheFormula/02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/POST_LEAK_CARDIAC_REPLICATION_2026-07-11.md`, `post_leak_cardiac_replication.py`, `post_leak_cardiac_replication_results.json`, plus the historical `decisive_full_data.js` and transcript.
 
 ### Prediction D5 — Cross-domain validation on Mauna Loa CO2
 
