@@ -44,6 +44,27 @@ and their interactions jointly form one identity, such as ENSO and LLM represent
 TE-ARA cannot create absolute magnitude from a fraction. A dimensionally valid magnitude bridge must retain an
 independent scale. In the MX1 plasma development test this was \(k_0E_{\mathrm{rms}}\).
 
+### 13 July ridge/freeze clarification
+
+For a closed two-branch identity at equal composition,
+
+\[
+p_A=p_B=\frac12,
+\qquad
+\mathrm{TE}_A=1,
+\qquad
+\mathrm{TE}_B=1,
+\qquad
+\mathrm{TE}_{A+B}=2,
+\qquad
+x_{A/B}=1.
+\]
+
+This is the normalized full-account signature \((x,\mathrm{TE})=(1,2)\), not a statement that the system has twice
+the physical energy. It is compatible with a static equal pair, a coherent resonant/standing mode, or incoherent
+cancellation. TE-ARA records participation, not motion. A timing-based ARA is undefined without a resolved cycle;
+activity/flux, time variation and phase coherence must be retained as separate coordinates.
+
 ## Participation across several contributors
 
 For a mixed identity with contributors \(i\), pair/intersection terms \(ij\), and unresolved Other, use one declared
@@ -127,9 +148,9 @@ participation, local component shape and transferable compression.
 | Reading | Result | Interpretation |
 |---|---:|---|
 | Eligible time slices | 299 | coherent mode-5 development region |
-| Full Gauss source vs independent particle source | \(r=0.9971\), NRMSE 0.0767 | established instrument/crosswalk check passes |
-| Identity-only Gauss vs identity-only particle component | \(r=0.9991\) | declared harmonic identity survives the Gauss transformation |
-| Gauss-source vs particle-source TE-ARA analogue | \(r=0.7987\), MAE 0.0911 on 0–2 | identity participation transfers imperfectly but materially |
+| Full Gauss source vs particle source | \(r=0.9971\), NRMSE 0.0767 | simulator/solver consistency and adapter check; not independent ARA evidence |
+| Identity-only Gauss vs identity-only particle component | \(r=0.9991\) | declared segmentation is numerically consistent across solver-coupled views; not independent ARA evidence |
+| Gauss-source vs particle-source TE-ARA analogue | \(r=0.7987\), MAE 0.0911 on 0–2 | primary non-tautological ARA-specific development result: participation transfers imperfectly but materially |
 | Whole periodic-ring pair ARA | median 1.007 | complete neutral cycles coarse-grain near the ridge |
 | Five local-cell pair ARA range | 0.790–1.491 | local geometry moves despite global cancellation |
 | Local field/particle pair ARA | \(r=0.7706\) | useful local relational agreement |
@@ -158,7 +179,8 @@ Raw component ARA values above 2 occurred when a lobe became compound. They are 
 segmentation lost the correct local identity or one scalar ceased to be sufficient; they were not forced back onto
 the bounded coordinate.
 
-**MX1 status:** `DEVELOPMENT STRUCTURAL POSITIVE / SCALAR-MAGNITUDE NARROWING / CONFIRMATION REGISTERED AND SEALED`.
+**MX1 status:** `DEVELOPMENT PARTICIPATION-CROSSWALK POSITIVE / SOLVER IDENTITIES DEMOTED TO INSTRUMENT CHECKS /
+SCALAR-MAGNITUDE NARROWING / CONFIRMATION REGISTERED AND SEALED`.
 
 ---
 
@@ -545,6 +567,11 @@ TE correlation 0.9991. Six of eight strict gates pass. This is development suppo
 harmonic daughter with a separate participation state, while circular-shift locality, particle-threshold, noise/seed
 transfer and universal/fractal interpretation remain open. See
 `Analysis/electromagnetism/MX3D_DAUGHTER_ECHO_REPORT.md`.
+
+**Exploratory-chain disclosure (13 July audit):** MX1 through MX3g are one adaptive development chain on the same
+already inspected Alves/OSIRIS archive. Later questions were informed by earlier plots, results and conversation.
+Their gates and nulls make the chain auditable, but the stages are not independent confirmations and must not be
+counted as separate replications. Independent noise/seed, resolution and archive transfer remain necessary.
 
 MX3e extends the same construction one generation: \(k=10+k=10\rightarrow20\). The k20 field/particle mode follows
 k10 by 63/57 slices, has phase inheritance 0.8481 with random-phase \(p=0.0010\), persists 199 slices at mean field

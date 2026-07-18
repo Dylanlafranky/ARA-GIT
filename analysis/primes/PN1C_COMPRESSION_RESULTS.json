@@ -1,0 +1,344 @@
+{
+  "test_id": "T228 / PN1C/v1",
+  "generated_at_utc": "2026-07-17T04:34:48.370806+00:00",
+  "orientation": "up = larger primorial period / later sieve rung",
+  "protocol_path": "analysis/primes/PN1C_COMPRESSION_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256_expected": "7DAA061BA790B12461ED60136FD9C50F3A36C10BED472819CFCC08B4B3462DBF",
+  "protocol_sha256_observed": "7DAA061BA790B12461ED60136FD9C50F3A36C10BED472819CFCC08B4B3462DBF",
+  "post_open_implementation_repair": "2026-07-17: serialization-only repair after the first complete target run; pandas converted the zero-slot Uniform reference's undefined gain-per-slot from None to NaN, which strict JSON rejects. No counts, predictions, scores, model definitions, budgets, or pass criteria changed.",
+  "holdout_transition": "19->23",
+  "target": {
+    "fine_bins": 24,
+    "child_period": 223092870,
+    "child_slots": 36495360,
+    "gap_count": 36495360,
+    "gap_sum": 223092870,
+    "min_gap": 2,
+    "max_gap": 40,
+    "gap_sha256": "F68A8E707D9836C03C8FE5A84AD3FD3CA397F1736562CC2279094B631585923C"
+  },
+  "budget": {
+    "unit": "declared scalar slots",
+    "primary_ceiling": 36,
+    "learned_boundary_bins": [
+      9,
+      10,
+      15,
+      17
+    ],
+    "parent_gap_alphabet_size": 16
+  },
+  "scores": [
+    {
+      "model": "Exact parent relation",
+      "slots": 575,
+      "eligible_primary": false,
+      "jsd_bits": 0.0037930695115881794,
+      "pair_jsd_mean_bits": 0.0008204595204662471,
+      "gain_over_uniform_bits": 0.6003968461021332,
+      "gain_over_uniform_per_slot": 0.0010441684280037098,
+      "orientation_reversal_abs_error": 2.6020852139652106e-18
+    },
+    {
+      "model": "Gap-Markov",
+      "slots": 271,
+      "eligible_primary": false,
+      "jsd_bits": 0.06345567842102473,
+      "pair_jsd_mean_bits": 0.0008204595204662511,
+      "gain_over_uniform_bits": 0.5407342371926966,
+      "gain_over_uniform_per_slot": 0.001995329288533936,
+      "orientation_reversal_abs_error": 1.3877787807814457e-17
+    },
+    {
+      "model": "Gap-IID",
+      "slots": 31,
+      "eligible_primary": true,
+      "jsd_bits": 0.23099934979499787,
+      "pair_jsd_mean_bits": 0.05983137386147026,
+      "gain_over_uniform_bits": 0.3731905658187235,
+      "gain_over_uniform_per_slot": 0.012038405348991081,
+      "orientation_reversal_abs_error": 0.0
+    },
+    {
+      "model": "Top-9 constellations",
+      "slots": 36,
+      "eligible_primary": true,
+      "jsd_bits": 0.4199318361691291,
+      "pair_jsd_mean_bits": 0.1250813187351269,
+      "gain_over_uniform_bits": 0.18425807944459227,
+      "gain_over_uniform_per_slot": 0.005118279984572007,
+      "orientation_reversal_abs_error": 5.551115123125783e-17
+    },
+    {
+      "model": "DCT-6",
+      "slots": 36,
+      "eligible_primary": true,
+      "jsd_bits": 0.42896459685808475,
+      "pair_jsd_mean_bits": 0.13452980302507145,
+      "gain_over_uniform_bits": 0.17522531875563663,
+      "gain_over_uniform_per_slot": 0.00486736996543435,
+      "orientation_reversal_abs_error": 5.551115123125783e-17
+    },
+    {
+      "model": "Log-ratio-6",
+      "slots": 35,
+      "eligible_primary": true,
+      "jsd_bits": 0.45430226914689714,
+      "pair_jsd_mean_bits": 0.1394455857779096,
+      "gain_over_uniform_bits": 0.14988764646682423,
+      "gain_over_uniform_per_slot": 0.0042825041847664065,
+      "orientation_reversal_abs_error": 0.0
+    },
+    {
+      "model": "ARA-linear-6",
+      "slots": 35,
+      "eligible_primary": true,
+      "jsd_bits": 0.47028037930107197,
+      "pair_jsd_mean_bits": 0.15946390052412057,
+      "gain_over_uniform_bits": 0.1339095363126494,
+      "gain_over_uniform_per_slot": 0.003825986751789983,
+      "orientation_reversal_abs_error": 5.551115123125783e-17
+    },
+    {
+      "model": "Learned-quantile-5",
+      "slots": 28,
+      "eligible_primary": true,
+      "jsd_bits": 0.4961823352542068,
+      "pair_jsd_mean_bits": 0.17774739818254479,
+      "gain_over_uniform_bits": 0.10800758035951458,
+      "gain_over_uniform_per_slot": 0.0038574135842683777,
+      "orientation_reversal_abs_error": 0.0
+    },
+    {
+      "model": "Uniform",
+      "slots": 0,
+      "eligible_primary": false,
+      "jsd_bits": 0.6041899156137214,
+      "pair_jsd_mean_bits": 0.22250782801430605,
+      "gain_over_uniform_bits": 0.0,
+      "gain_over_uniform_per_slot": null,
+      "orientation_reversal_abs_error": 0.0
+    }
+  ],
+  "frontier": [
+    {
+      "family": "ARA-linear",
+      "retained_side": 4,
+      "slots": 15,
+      "jsd_bits": 0.503901939364331
+    },
+    {
+      "family": "Log-ratio",
+      "retained_side": 4,
+      "slots": 15,
+      "jsd_bits": 0.5016248037937608
+    },
+    {
+      "family": "DCT",
+      "retained_side": 4,
+      "slots": 16,
+      "jsd_bits": 0.47390025359268656
+    },
+    {
+      "family": "ARA-linear",
+      "retained_side": 6,
+      "slots": 35,
+      "jsd_bits": 0.47028037930107197
+    },
+    {
+      "family": "Log-ratio",
+      "retained_side": 6,
+      "slots": 35,
+      "jsd_bits": 0.45430226914689714
+    },
+    {
+      "family": "DCT",
+      "retained_side": 6,
+      "slots": 36,
+      "jsd_bits": 0.42896459685808475
+    },
+    {
+      "family": "ARA-linear",
+      "retained_side": 8,
+      "slots": 63,
+      "jsd_bits": 0.41786616983247116
+    },
+    {
+      "family": "Log-ratio",
+      "retained_side": 8,
+      "slots": 63,
+      "jsd_bits": 0.4291672942900142
+    },
+    {
+      "family": "DCT",
+      "retained_side": 8,
+      "slots": 64,
+      "jsd_bits": 0.4304385351376109
+    }
+  ],
+  "split_half": [
+    {
+      "half": 1,
+      "target_triples": 18247680,
+      "ara_jsd_bits": 0.4702919848759679,
+      "gap_iid_jsd_bits": 0.23099701004362963,
+      "ara_beats_gap_iid": false
+    },
+    {
+      "half": 2,
+      "target_triples": 18247680,
+      "ara_jsd_bits": 0.4702707210365244,
+      "gap_iid_jsd_bits": 0.231003223733918,
+      "ara_beats_gap_iid": false
+    }
+  ],
+  "top_constellations": [
+    {
+      "g1": 4,
+      "g2": 2,
+      "g3": 4,
+      "parent_probability": 0.04443359375,
+      "row_bin": 8,
+      "column_bin": 16
+    },
+    {
+      "g1": 2,
+      "g2": 4,
+      "g3": 6,
+      "parent_probability": 0.03471137152777778,
+      "row_bin": 16,
+      "column_bin": 14
+    },
+    {
+      "g1": 2,
+      "g2": 6,
+      "g3": 4,
+      "parent_probability": 0.03471137152777778,
+      "row_bin": 18,
+      "column_bin": 9
+    },
+    {
+      "g1": 4,
+      "g2": 6,
+      "g3": 2,
+      "parent_probability": 0.03471137152777778,
+      "row_bin": 14,
+      "column_bin": 6
+    },
+    {
+      "g1": 6,
+      "g2": 4,
+      "g3": 2,
+      "parent_probability": 0.03471137152777778,
+      "row_bin": 9,
+      "column_bin": 8
+    },
+    {
+      "g1": 6,
+      "g2": 4,
+      "g3": 6,
+      "parent_probability": 0.03077859760802469,
+      "row_bin": 9,
+      "column_bin": 14
+    },
+    {
+      "g1": 2,
+      "g2": 10,
+      "g3": 2,
+      "parent_probability": 0.030078125,
+      "row_bin": 20,
+      "column_bin": 4
+    },
+    {
+      "g1": 6,
+      "g2": 2,
+      "g3": 6,
+      "parent_probability": 0.029622395833333332,
+      "row_bin": 6,
+      "column_bin": 18
+    },
+    {
+      "g1": 2,
+      "g2": 4,
+      "g3": 2,
+      "parent_probability": 0.022216796875,
+      "row_bin": 16,
+      "column_bin": 8
+    }
+  ],
+  "calibration": [
+    {
+      "check": "protocol_hash_matches",
+      "passes": true
+    },
+    {
+      "check": "parent_gap_count_exact",
+      "passes": true
+    },
+    {
+      "check": "parent_gap_sum_exact",
+      "passes": true
+    },
+    {
+      "check": "child_survivor_count_exact",
+      "passes": true
+    },
+    {
+      "check": "child_gap_count_exact",
+      "passes": true
+    },
+    {
+      "check": "child_gap_sum_exact",
+      "passes": true
+    },
+    {
+      "check": "child_gaps_positive",
+      "passes": true
+    },
+    {
+      "check": "child_gaps_even",
+      "passes": true
+    },
+    {
+      "check": "child_survivor_multiplier_exact",
+      "passes": true
+    },
+    {
+      "check": "independent_target_counts_equal",
+      "passes": true
+    },
+    {
+      "check": "independent_half_counts_equal",
+      "passes": true
+    },
+    {
+      "check": "independent_gap_hash_equal",
+      "passes": true
+    },
+    {
+      "check": "all_predictions_valid",
+      "passes": true
+    },
+    {
+      "check": "orientation_reversal_all_invariant",
+      "passes": true
+    }
+  ],
+  "summary": {
+    "all_exact_checks_pass": true,
+    "primary_claim_pass": false,
+    "ara_jsd_bits": 0.47028037930107197,
+    "best_rival": "Gap-IID",
+    "best_rival_jsd_bits": 0.23099934979499787,
+    "ara_relative_margin_vs_best_rival": -1.0358515282334166,
+    "split_robustness_pass": false,
+    "rating": "NOT SUPPORTED [pre-registered compression advantage]",
+    "evidence_ceiling": "One finite deterministic arithmetic transition; compression slots are a parameter-count proxy, not literal bytes. No RH or physical inference."
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  }
+}

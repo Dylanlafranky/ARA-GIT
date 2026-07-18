@@ -1,0 +1,393 @@
+{
+  "test_id": "T227 / PN1/v1",
+  "generated_at_utc": "2026-07-17T03:49:09.715278+00:00",
+  "orientation": "up = larger primorial period / later sieve rung",
+  "protocol_path": "analysis/primes/PN1_SIEVE_RUNG_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256_expected": "EE14829EEA0D2BAAE05C37FAE2AA558F015EFC649FBFA54F0A563A7CE277DF9D",
+  "protocol_sha256_observed": "EE14829EEA0D2BAAE05C37FAE2AA558F015EFC649FBFA54F0A563A7CE277DF9D",
+  "seed": 20260717,
+  "n_shuffles": 200,
+  "holdout_transitions": [
+    "13->17",
+    "17->19"
+  ],
+  "wheel_inventory": [
+    {
+      "max_prime": 2,
+      "period": 2,
+      "slots": 1,
+      "mean_gap": 2.0,
+      "max_gap": 2,
+      "gap_sum": 2
+    },
+    {
+      "max_prime": 3,
+      "period": 6,
+      "slots": 2,
+      "mean_gap": 3.0,
+      "max_gap": 4,
+      "gap_sum": 6
+    },
+    {
+      "max_prime": 5,
+      "period": 30,
+      "slots": 8,
+      "mean_gap": 3.75,
+      "max_gap": 6,
+      "gap_sum": 30
+    },
+    {
+      "max_prime": 7,
+      "period": 210,
+      "slots": 48,
+      "mean_gap": 4.375,
+      "max_gap": 10,
+      "gap_sum": 210
+    },
+    {
+      "max_prime": 11,
+      "period": 2310,
+      "slots": 480,
+      "mean_gap": 4.8125,
+      "max_gap": 14,
+      "gap_sum": 2310
+    },
+    {
+      "max_prime": 13,
+      "period": 30030,
+      "slots": 5760,
+      "mean_gap": 5.213541666666667,
+      "max_gap": 22,
+      "gap_sum": 30030
+    },
+    {
+      "max_prime": 17,
+      "period": 510510,
+      "slots": 92160,
+      "mean_gap": 5.539388020833333,
+      "max_gap": 26,
+      "gap_sum": 510510
+    },
+    {
+      "max_prime": 19,
+      "period": 9699690,
+      "slots": 1658880,
+      "mean_gap": 5.847131799768518,
+      "max_gap": 34,
+      "gap_sum": 9699690
+    }
+  ],
+  "calibration": [
+    {
+      "transition": "13->17",
+      "parent_period": 30030,
+      "child_period": 510510,
+      "parent_slots": 5760,
+      "lifted_slots": 97920,
+      "survivor_slots": 92160,
+      "shed_slots": 5760,
+      "release_fraction_measured": 0.058823529411764705,
+      "release_fraction_exact": 0.058823529411764705,
+      "release_count_exact": true,
+      "survivor_shed_disjoint": true,
+      "reconstructs_lifted_parent": true,
+      "survivors_match_child": true,
+      "phase_rule_exact": true,
+      "geometry_context_exactly_one_release": true,
+      "geometry_conditional_max_error": 0.0,
+      "geometry_mutual_information_bits": 0.0,
+      "all_exact_checks_pass": true
+    },
+    {
+      "transition": "17->19",
+      "parent_period": 510510,
+      "child_period": 9699690,
+      "parent_slots": 92160,
+      "lifted_slots": 1751040,
+      "survivor_slots": 1658880,
+      "shed_slots": 92160,
+      "release_fraction_measured": 0.05263157894736842,
+      "release_fraction_exact": 0.05263157894736842,
+      "release_count_exact": true,
+      "survivor_shed_disjoint": true,
+      "reconstructs_lifted_parent": true,
+      "survivors_match_child": true,
+      "phase_rule_exact": true,
+      "geometry_context_exactly_one_release": true,
+      "geometry_conditional_max_error": 0.0,
+      "geometry_mutual_information_bits": 0.0,
+      "all_exact_checks_pass": true
+    }
+  ],
+  "primary": [
+    {
+      "transition": "13->17",
+      "observable": "pair_x",
+      "bins": 64,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.004715455721214826,
+      "shuffle_median_jsd_bits": 0.10900650159372591,
+      "shuffle_q05_jsd_bits": 0.10411153910432401,
+      "shuffle_q95_jsd_bits": 0.11385187222118213,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": true,
+      "coordinate_rival_log_ratio_jsd_bits": 0.004715455721214826,
+      "coordinate_rival_abs_difference": 0.0
+    },
+    {
+      "transition": "13->17",
+      "observable": "triple_xx",
+      "bins": 24,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.01240881611655745,
+      "shuffle_median_jsd_bits": 0.28251326641626295,
+      "shuffle_q05_jsd_bits": 0.27230211599424897,
+      "shuffle_q95_jsd_bits": 0.2915095321126537,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": true,
+      "coordinate_rival_log_ratio_jsd_bits": null,
+      "coordinate_rival_abs_difference": null
+    },
+    {
+      "transition": "17->19",
+      "observable": "pair_x",
+      "bins": 64,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.002795755395259159,
+      "shuffle_median_jsd_bits": 0.10192785907381186,
+      "shuffle_q05_jsd_bits": 0.10056074209871108,
+      "shuffle_q95_jsd_bits": 0.10336517955142568,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": true,
+      "coordinate_rival_log_ratio_jsd_bits": 0.002795755395259159,
+      "coordinate_rival_abs_difference": 0.0
+    },
+    {
+      "transition": "17->19",
+      "observable": "triple_xx",
+      "bins": 24,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.006889118460857404,
+      "shuffle_median_jsd_bits": 0.2518110602866811,
+      "shuffle_q05_jsd_bits": 0.24939486075070788,
+      "shuffle_q95_jsd_bits": 0.25412719154642627,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": true,
+      "coordinate_rival_log_ratio_jsd_bits": null,
+      "coordinate_rival_abs_difference": null
+    }
+  ],
+  "sensitivity": [
+    {
+      "transition": "13->17",
+      "observable": "pair_x",
+      "bins": 32,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.0033854478057744816,
+      "shuffle_median_jsd_bits": 0.09521687977730381,
+      "shuffle_q05_jsd_bits": 0.09020663747587505,
+      "shuffle_q95_jsd_bits": 0.09982646453593183,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "13->17",
+      "observable": "pair_x",
+      "bins": 128,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.004800168167480181,
+      "shuffle_median_jsd_bits": 0.11221058963586496,
+      "shuffle_q05_jsd_bits": 0.1068240956451279,
+      "shuffle_q95_jsd_bits": 0.11673492207404408,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "13->17",
+      "observable": "triple_xx",
+      "bins": 12,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.007619445279820788,
+      "shuffle_median_jsd_bits": 0.17003063577476407,
+      "shuffle_q05_jsd_bits": 0.16184322477302984,
+      "shuffle_q95_jsd_bits": 0.17849853187492545,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "13->17",
+      "observable": "triple_xx",
+      "bins": 36,
+      "parent_slots": 5760,
+      "child_slots": 92160,
+      "ordered_jsd_bits": 0.013692359468695509,
+      "shuffle_median_jsd_bits": 0.31967517612483276,
+      "shuffle_q05_jsd_bits": 0.30971527988468855,
+      "shuffle_q95_jsd_bits": 0.329915344391282,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "17->19",
+      "observable": "pair_x",
+      "bins": 32,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.0020168659534447815,
+      "shuffle_median_jsd_bits": 0.08473883172583407,
+      "shuffle_q05_jsd_bits": 0.08340869688524469,
+      "shuffle_q95_jsd_bits": 0.08612115901771372,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "17->19",
+      "observable": "pair_x",
+      "bins": 128,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.002990127114511863,
+      "shuffle_median_jsd_bits": 0.10620306019074832,
+      "shuffle_q05_jsd_bits": 0.10468101208558472,
+      "shuffle_q95_jsd_bits": 0.10763056961464479,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "17->19",
+      "observable": "triple_xx",
+      "bins": 12,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.004323741340395671,
+      "shuffle_median_jsd_bits": 0.14000366988099303,
+      "shuffle_q05_jsd_bits": 0.13820165189886854,
+      "shuffle_q95_jsd_bits": 0.14168035724985584,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    },
+    {
+      "transition": "17->19",
+      "observable": "triple_xx",
+      "bins": 36,
+      "parent_slots": 92160,
+      "child_slots": 1658880,
+      "ordered_jsd_bits": 0.00770873779683653,
+      "shuffle_median_jsd_bits": 0.2931655572783477,
+      "shuffle_q05_jsd_bits": 0.2903410369145639,
+      "shuffle_q95_jsd_bits": 0.29585163259540154,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "ordered_beats_shuffle_median": true,
+      "passes_frozen_primary": null
+    }
+  ],
+  "split_half": [
+    {
+      "transition": "13->17",
+      "observable": "pair",
+      "half": 1,
+      "ordered_jsd_bits": 0.005278041866693317,
+      "shuffle_median_jsd_bits": 0.11148575476081263,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "13->17",
+      "observable": "triple",
+      "half": 1,
+      "ordered_jsd_bits": 0.014917499683041712,
+      "shuffle_median_jsd_bits": 0.28934006139930235,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "13->17",
+      "observable": "pair",
+      "half": 2,
+      "ordered_jsd_bits": 0.005083554967852235,
+      "shuffle_median_jsd_bits": 0.1099987260671207,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "13->17",
+      "observable": "triple",
+      "half": 2,
+      "ordered_jsd_bits": 0.016334831741318726,
+      "shuffle_median_jsd_bits": 0.2869840604105648,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "17->19",
+      "observable": "pair",
+      "half": 1,
+      "ordered_jsd_bits": 0.002855052995009413,
+      "shuffle_median_jsd_bits": 0.10210046915196619,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "17->19",
+      "observable": "triple",
+      "half": 1,
+      "ordered_jsd_bits": 0.007173301780617154,
+      "shuffle_median_jsd_bits": 0.2524122093769492,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "17->19",
+      "observable": "pair",
+      "half": 2,
+      "ordered_jsd_bits": 0.0028425262206967974,
+      "shuffle_median_jsd_bits": 0.10193166022620789,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    },
+    {
+      "transition": "17->19",
+      "observable": "triple",
+      "half": 2,
+      "ordered_jsd_bits": 0.007241737014119027,
+      "shuffle_median_jsd_bits": 0.2519815470911063,
+      "permutation_p_one_sided": 0.004975124378109453,
+      "passes_same_direction": true
+    }
+  ],
+  "summary": {
+    "all_exact_checks_pass": true,
+    "primary_comparisons_passed": 4,
+    "primary_comparisons_total": 4,
+    "primary_claim_pass": true,
+    "split_half_checks_passed": 8,
+    "split_half_checks_total": 8,
+    "coordinate_rival_max_abs_jsd_difference": 0.0,
+    "rating": "SUPPORTED [pre-registered, arithmetic, unreplicated]",
+    "evidence_ceiling": "Finite deterministic arithmetic relation; exact checks are reconstruction. No Riemann-Hypothesis or physical-universality inference."
+  },
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 15:01:35) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.3.5",
+    "pandas": "3.0.1"
+  }
+}

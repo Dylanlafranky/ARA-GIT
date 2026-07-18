@@ -1,0 +1,139 @@
+{
+  "test_id": "T228 / PN1C/v1 independent validation",
+  "method": "Standalone repeated-modulus residue filtering; materialized child gap cycle; indexed circular chunk counts; standalone model and metric reconstruction.",
+  "protocol_sha256": "7DAA061BA790B12461ED60136FD9C50F3A36C10BED472819CFCC08B4B3462DBF",
+  "target_gap_sha256": "F68A8E707D9836C03C8FE5A84AD3FD3CA397F1736562CC2279094B631585923C",
+  "checks": {
+    "protocol_hash_matches": true,
+    "parent_period_exact": true,
+    "parent_residue_count_exact": true,
+    "parent_gap_sum_exact": true,
+    "child_gap_count_exact": true,
+    "child_gap_sum_exact": true,
+    "child_gaps_positive_even": true,
+    "target_counts_equal_archive": true,
+    "half_counts_equal_archive": true,
+    "parent_counts_equal_archive": true,
+    "all_predictions_reconstructed": true,
+    "all_metrics_recomputed": true,
+    "gap_hash_matches_results": true,
+    "primary_winner_recovered": true,
+    "primary_failure_recovered": true
+  },
+  "all_checks_pass": true,
+  "max_prediction_abs_error": 0.0,
+  "prediction_abs_errors": {
+    "ARA-linear-6": 0.0,
+    "Log-ratio-6": 0.0,
+    "DCT-6": 0.0,
+    "Learned-quantile-5": 0.0,
+    "Gap-IID": 0.0,
+    "Top-9 constellations": 0.0,
+    "Uniform": 0.0,
+    "Gap-Markov": 0.0,
+    "Exact parent relation": 0.0
+  },
+  "max_metric_abs_error": 8.326672684688674e-17,
+  "metric_abs_errors": {
+    "Exact parent relation": {
+      "jsd_bits": 7.936359902593892e-17,
+      "pair_jsd_mean_bits": 4.705437428587089e-17
+    },
+    "Gap-Markov": {
+      "jsd_bits": 2.7755575615628914e-17,
+      "pair_jsd_mean_bits": 5.106592232406726e-17
+    },
+    "Gap-IID": {
+      "jsd_bits": 5.551115123125783e-17,
+      "pair_jsd_mean_bits": 6.245004513516506e-17
+    },
+    "Top-9 constellations": {
+      "jsd_bits": 0.0,
+      "pair_jsd_mean_bits": 0.0
+    },
+    "DCT-6": {
+      "jsd_bits": 5.551115123125783e-17,
+      "pair_jsd_mean_bits": 5.551115123125783e-17
+    },
+    "Log-ratio-6": {
+      "jsd_bits": 5.551115123125783e-17,
+      "pair_jsd_mean_bits": 0.0
+    },
+    "ARA-linear-6": {
+      "jsd_bits": 5.551115123125783e-17,
+      "pair_jsd_mean_bits": 8.326672684688674e-17
+    },
+    "Learned-quantile-5": {
+      "jsd_bits": 0.0,
+      "pair_jsd_mean_bits": 8.326672684688674e-17
+    },
+    "Uniform": {
+      "jsd_bits": 0.0,
+      "pair_jsd_mean_bits": 5.551115123125783e-17
+    }
+  },
+  "learned_boundary_bins": [
+    9,
+    10,
+    15,
+    17
+  ],
+  "top_constellations": [
+    [
+      4,
+      2,
+      4,
+      0.04443359375
+    ],
+    [
+      2,
+      4,
+      6,
+      0.03471137152777778
+    ],
+    [
+      2,
+      6,
+      4,
+      0.03471137152777778
+    ],
+    [
+      4,
+      6,
+      2,
+      0.03471137152777778
+    ],
+    [
+      6,
+      4,
+      2,
+      0.03471137152777778
+    ],
+    [
+      6,
+      4,
+      6,
+      0.03077859760802469
+    ],
+    [
+      2,
+      10,
+      2,
+      0.030078125
+    ],
+    [
+      6,
+      2,
+      6,
+      0.029622395833333332
+    ],
+    [
+      2,
+      4,
+      2,
+      0.022216796875
+    ]
+  ],
+  "independent_primary_winner": "Gap-IID",
+  "script_sha256": "24B0E75FBC1D115C39A16CE222912D95CA22B2759A50C68A8ED241006C111DDA"
+}

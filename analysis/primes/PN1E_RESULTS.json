@@ -1,0 +1,107 @@
+{
+  "protocol": "PN1E/DEV/v1",
+  "protocol_sha256": "484B45190DCDC3823CDF6B2F644FCC87FCD925DA22B45321D2C334E56B8C77EB",
+  "data": {
+    "prime": 23,
+    "gap_count": 36495360,
+    "gap_period": 223092870,
+    "gap_sha256": "F68A8E707D9836C03C8FE5A84AD3FD3CA397F1736562CC2279094B631585923C",
+    "prime29_opened": false
+  },
+  "primary_effectiveness": {
+    "classification": "STRONG PRACTICAL EFFECT",
+    "scale": "bits per next 12-bin ARA reading",
+    "markov1_cross_entropy_bits": 2.556497454238907,
+    "markov2_cross_entropy_bits": 2.082283007411661,
+    "gain_bits_per_reading": 0.4742144468272462,
+    "relative_logloss_reduction": 0.18549380756900627,
+    "perplexity_reduction": 0.2801413500221145,
+    "markov1_top1_accuracy": 0.31697498717371053,
+    "markov2_top1_accuracy": 0.4170699691215507,
+    "markov1_top3_accuracy": 0.6946482177074804,
+    "markov2_top3_accuracy": 0.838994281902607,
+    "markov1_brier": 0.7895919235138439,
+    "markov2_brier": 0.7030503267837246,
+    "direction_gains_bits": [
+      0.4741271557341391,
+      0.4743017379203538
+    ]
+  },
+  "control_scale": {
+    "Empirical p23": {
+      "one_neighbor_entropy_bits": 2.5564954578886283,
+      "two_neighbor_entropy_bits": 2.0822464758983656,
+      "memory_gain_bits": 0.47424898199026266,
+      "one_neighbor_uncertainty_removed_fraction": 0.18550746121095707,
+      "perplexity_reduction_fraction": 0.28015858253337067
+    },
+    "IID-gap overlap": {
+      "one_neighbor_entropy_bits": 2.7943447380703845,
+      "two_neighbor_entropy_bits": 2.6575689744689033,
+      "memory_gain_bits": 0.13677576360148125,
+      "one_neighbor_uncertainty_removed_fraction": 0.04894734774061228,
+      "perplexity_reduction_fraction": 0.09045038895568436
+    },
+    "First-order gap Markov": {
+      "one_neighbor_entropy_bits": 2.6089852903008786,
+      "two_neighbor_entropy_bits": 2.3352159835325663,
+      "memory_gain_bits": 0.27376930676831224,
+      "one_neighbor_uncertainty_removed_fraction": 0.10493325040431335,
+      "perplexity_reduction_fraction": 0.17284437633790783
+    }
+  },
+  "attribution": {
+    "top_5_share": 0.2252769814036467,
+    "top_10_share": 0.3684750898989491,
+    "top_20_share": 0.5782884305085132,
+    "active_ara_contexts": 112,
+    "active_gap_quadruples": 4636,
+    "positive_quadruple_contribution_bits": 0.6258292924608302,
+    "negative_quadruple_contribution_bits": -0.15158031047056733,
+    "net_quadruple_contribution_bits": 0.4742489819902629,
+    "top_context": {
+      "rank": 1,
+      "first_context_bin": 4,
+      "second_context_bin": 4,
+      "first_context_center": 0.75,
+      "second_context_center": 0.75,
+      "context_probability": 0.05352052973309484,
+      "contribution_bits_per_reading": 0.028940290360496973,
+      "dominant_next_bin_markov2": 8,
+      "dominant_next_center_markov2": 1.4166666666666667,
+      "dominant_next_bin_markov1": 8,
+      "dominant_next_center_markov1": 1.4166666666666667,
+      "top_prediction_changes": false
+    },
+    "top_gap_quadruple": {
+      "rank": 1,
+      "gap_0": 2,
+      "gap_1": 4,
+      "gap_2": 8,
+      "gap_3": 6,
+      "ara_0_bin": 8,
+      "ara_1_bin": 8,
+      "ara_2_bin": 5,
+      "ara_0_center": 1.4166666666666667,
+      "ara_1_center": 1.4166666666666667,
+      "ara_2_center": 0.9166666666666666,
+      "count": 325353,
+      "probability": 0.008914914115109428,
+      "local_information_bits": 2.271307202369525,
+      "signed_contribution_bits_per_reading": 0.020248508638153785,
+      "top_prediction_changes": true
+    }
+  },
+  "exact_checks": {
+    "protocol_hash_matches": true,
+    "gap_count_exact": true,
+    "gap_period_exact": true,
+    "gap_hash_exact": true,
+    "gaps_positive_even": true,
+    "empirical_tensor_matches_pn1d": true,
+    "context_contributions_sum_to_cmi": true,
+    "quadruple_contributions_sum_to_cmi": true
+  },
+  "all_exact_checks_pass": true,
+  "evidence_boundary": "Development evidence for predictive value and attribution on p23. Not evidence of exactly three waves, a physical third wave, or transfer to p29."
+}

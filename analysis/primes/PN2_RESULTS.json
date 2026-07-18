@@ -1,0 +1,93 @@
+{
+  "test_id": "PN2/PRIME-SURVIVAL/v1",
+  "status": "TARGET_COMPLETE",
+  "protocol_sha256": "2F70766D0335C34C01ADCDABE512540415CAF37E6A176C546B16E955806DA664",
+  "target_config_sha256": "A31F256EE160529A1F5BC1B53E3EB5EA0321BBB0A063A10B03068F5B81DFA13F",
+  "analysis_script_sha256": "9466687B920091DF0C962752B3F5160B8B906F21378F3A7F93C837CDFACC4BD7",
+  "development_model_sha256": "28B1649B78D84E16C34A9DE52D0510673F482A26068462C6F3D9CD0FF8C52333",
+  "development_interval": [
+    10000000,
+    20000000
+  ],
+  "target_interval": [
+    100000000,
+    110000000
+  ],
+  "sieve_budget_max_prime": 29,
+  "pn1h_p31_wheel_accessed": false,
+  "candidate_events": 1579479,
+  "candidate_primes": 541854,
+  "candidate_survival_rate": 0.343058692138357,
+  "edge_events": 1579478,
+  "edge_survivors": 184913,
+  "edge_survival_rate": 0.1170722225950599,
+  "primary_candidate_endpoint": {
+    "observed_delta_bits": -0.0001609725889273263,
+    "bootstrap_lower_95_bits": -0.00019108274980260696,
+    "bootstrap_upper_95_bits": -0.00012991811127640682,
+    "positive_block_share": 0.05,
+    "baseline_model": "candidate_pnt29",
+    "ara_model": "ara_i3_b12_l64",
+    "support": false
+  },
+  "primary_edge_endpoint": {
+    "observed_delta_bits": -3.67246432446444e-05,
+    "bootstrap_lower_95_bits": -5.0887348336825675e-05,
+    "bootstrap_upper_95_bits": -2.2377259495247524e-05,
+    "positive_block_share": 0.15,
+    "baseline_model": "edge_hl29",
+    "ara_model": "ara_edge_b12_l64",
+    "support": false
+  },
+  "gap_class_frequency": {
+    "eligible_gap_classes": 12,
+    "hl29": {
+      "poisson_deviance": 20.71434714836209,
+      "weighted_absolute_relative_error": 0.007356362539107945
+    },
+    "raw_edge": {
+      "poisson_deviance": 36.21408405919499,
+      "weighted_absolute_relative_error": 0.00959169841400268
+    },
+    "ara_edge": {
+      "poisson_deviance": 36.118842375797286,
+      "weighted_absolute_relative_error": 0.010115650738462696
+    },
+    "ara_edge_decompressed": {
+      "poisson_deviance": 36.3849412700731,
+      "weighted_absolute_relative_error": 0.009666130976078418
+    }
+  },
+  "location_calibration": {
+    "pnt29": {
+      "mean_absolute_percentage_error": 0.0020876377679138725,
+      "signed_calibration_error_share": -0.0007481070999185722
+    },
+    "raw_stencil": {
+      "mean_absolute_percentage_error": 0.0021579812069315958,
+      "signed_calibration_error_share": -0.0005468079045635097
+    },
+    "ara_i3": {
+      "mean_absolute_percentage_error": 0.0021127137124149066,
+      "signed_calibration_error_share": -0.0006540019374715926
+    },
+    "ara_decompressed": {
+      "mean_absolute_percentage_error": 0.0021319525072257656,
+      "signed_calibration_error_share": -0.0005671824839858522
+    }
+  },
+  "exact_checks": {
+    "candidate_logratio_prediction_max_abs_error": 0.0,
+    "edge_logratio_prediction_max_abs_error": 0.0
+  },
+  "allowed_interpretation": "fixed-budget probabilistic survival forecasting only",
+  "outputs": {
+    "scores": "PN2_MODEL_SCORES.csv",
+    "blocks": "PN2_BLOCK_SCORES.csv",
+    "gap_classes": "PN2_GAP_CLASS_SURVIVAL.csv",
+    "locations": "PN2_LOCATION_CALIBRATION.csv",
+    "target_packet": "PN2_TARGET_PACKET.npz",
+    "model_figure": "PN2_SURVIVAL_MODEL_COMPARISON.png",
+    "gap_figure": "PN2_GAP_CLASS_CALIBRATION.png"
+  }
+}

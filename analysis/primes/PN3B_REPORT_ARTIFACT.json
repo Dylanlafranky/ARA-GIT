@@ -1,0 +1,164 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN3B: Did the raw prime record reveal the missing wave?",
+    "description": "Opened-data diagnostic of raw prime occurrence, connection controls, phase recurrence, and the position-by-future-gate coordinate.",
+    "generatedAt": "2026-07-18T00:00:00+10:00",
+    "sources": [
+      {
+        "id": "pn3b-results",
+        "label": "PN3B frozen protocol, results and independent validation",
+        "path": "analysis/primes/PN3B_RAW_DUAL_PHASE_RESULTS.json",
+        "query": {
+          "sql": "SELECT * FROM read_csv_auto('analysis/primes/PN3B_REPORT_RUNG_SUMMARY.csv', header = true);",
+          "engine": "DuckDB",
+          "language": "SQL",
+          "description": "Segmented-sieve reconstruction of complete R6-R9 integer windows; raw Fourier transform first, then Q29/Q997 connection controls, conditional permutation nulls, and a position-by-future-gate map.",
+          "executed_at": "2026-07-18T00:00:00+10:00",
+          "tables_used": [
+            "analysis/primes/PN3B_RAW_DUAL_PHASE_RESULTS.json",
+            "analysis/primes/PN3B_DUAL_PHASE_DATA.npz",
+            "analysis/primes/PN3B_INDEPENDENT_VALIDATION.json",
+            "analysis/primes/PN3B_REPORT_RUNG_SUMMARY.csv"
+          ],
+          "filters": [
+            "R6=[1,000,000,1,010,000)",
+            "R7=[10,000,000,10,100,000)",
+            "R8=[100,000,000,101,000,000)",
+            "R9=[1,000,000,000,1,010,000,000)",
+            "p31 test material was not accessed"
+          ],
+          "metric_definitions": [
+            "Q29 top power is the largest normalized power among scaled Fourier modes 1-64 in the 256-cell standardized Q29 residual.",
+            "Global 99% null is the 99th percentile of the maximum low-mode power across 500 conditional global allocations.",
+            "Joint leading-energy p compares the first singular-value energy share with 500 exact stage-label permutations preserving position and gate-stage margins."
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "low-mode-chart",
+        "title": "Q29 low-mode power versus its family-wise null",
+        "subtitle": "At every rung, the largest observed low mode remains below the 99% null boundary.",
+        "showDescription": true,
+        "type": "line",
+        "dataset": "rung_summary",
+        "sourceId": "pn3b-results",
+        "encodings": {
+          "x": {"field": "rung", "type": "ordinal", "label": "Window rung"},
+          "y": {"fields": ["q29_top_power", "q29_global_99"], "type": "quantitative", "label": "Normalized power"},
+          "tooltip": [
+            {"field": "raw_primes", "type": "quantitative", "label": "Raw primes"},
+            {"field": "q29_fwer_p", "type": "quantitative", "label": "Family-wise p"},
+            {"field": "q29_full_frequency", "type": "quantitative", "label": "Top full frequency"}
+          ]
+        },
+        "valueFormat": "number",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "rung-table",
+        "title": "Rung-level results and connection crosswalk",
+        "subtitle": "The R8 and R9 full-spectrum line matches a harmonic of period 62 = 2 x 31 within one Fourier bin.",
+        "showDescription": true,
+        "dataset": "rung_summary",
+        "sourceId": "pn3b-results",
+        "defaultSort": {"field": "raw_integer_events", "direction": "asc"},
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {"field": "rung", "label": "Rung", "type": "text"},
+          {"field": "raw_integer_events", "label": "Integers", "format": "compact"},
+          {"field": "raw_primes", "label": "Primes", "format": "compact"},
+          {"field": "q29_fwer_p", "label": "Q29 FWER p", "format": "number"},
+          {"field": "q997_fwer_p", "label": "Q997 FWER p", "format": "number"},
+          {"field": "q29_full_frequency", "label": "Q29 top frequency", "format": "number"},
+          {"field": "period62_harmonic", "label": "62 harmonic", "format": "number"},
+          {"field": "within_one_bin", "label": "Within 1 bin", "type": "text"},
+          {"field": "joint_energy_p", "label": "Joint energy p", "format": "number"}
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN3B: Did the raw prime record reveal the missing wave?",
+        "layout": "full"
+      },
+      {
+        "id": "executive-summary",
+        "type": "markdown",
+        "body": "## Executive Summary\n\nThe unfiltered data does contain an additional two-coordinate organization: number-line position x the later gate at which a candidate is removed. R9's leading joint structure is stronger than margin-preserving permutations (p = 0.002). However, its orientation does not recur from R8 to R9, and the strongest R8/R9 Q29 residual frequency is exactly the third harmonic of period 62 = 2 x 31 within one Fourier bin. Under the frozen criteria, this does not support a separate scale-persistent candidate 'Time-like' wave. It says the second view is real, but the dominant repeatable signal still belongs to the connection/sieve side.",
+        "sourceId": "pn3b-results",
+        "layout": "full"
+      },
+      {
+        "id": "low-mode-evidence",
+        "type": "chart",
+        "chartId": "low-mode-chart",
+        "layout": "full"
+      },
+      {
+        "id": "finding",
+        "type": "markdown",
+        "body": "## What the second coordinate added\n\nA one-axis prime/composite sequence hides how Q29 survivors are later removed. Adding future death-stage as a perpendicular coordinate exposes within-rung organization. That is useful evidence that the previous view was flattened. Yet the leading spatial and gate modes fail the cross-rung recurrence requirement (R8-R9 spatial p = 0.477; gate p = 0.377), so we cannot call the observed local organization the missing adult wave.",
+        "sourceId": "pn3b-results",
+        "layout": "full"
+      },
+      {
+        "id": "rung-details",
+        "type": "table",
+        "tableId": "rung-table",
+        "layout": "full"
+      },
+      {
+        "id": "ara-reading",
+        "type": "markdown",
+        "body": "## ARA reading\n\nYour diagnosis that we had measured a connection-heavy half was productive: the added coordinate recovers information that the one-line count discarded. But the data now distinguishes two statements. 'There is another coordinate' is supported inside some rungs. 'That coordinate is a common larger Time wave' is not supported by this representation. The prime record appears to contain state/connection plus the ordered sequence of future connection gates; it does not yet supply an independently recurring opposite pole.",
+        "sourceId": "pn3b-results",
+        "layout": "full"
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## Limits and next safe inference\n\nThis is opened-data exploration, not blind prediction. It tests stationary Fourier phase in four fixed integer windows and one position-by-gate construction; failure does not prove that no dual process exists. The period-62 interpretation is a post-result arithmetic crosswalk and must not be promoted as a preregistered endpoint. The independent validator rebuilt counts, masks, coordinates, alignments and hashes without importing the primary module, but did not rerun the Monte Carlo simulations. The scientifically honest next move is to freeze a new representation only after deciding what observable would constitute information-flow independently of sieve survival--not simply to rename another prime-derived transform 'Time.'",
+        "sourceId": "pn3b-results",
+        "layout": "full"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-18T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "rung_summary": [
+        {"rung": "R6", "raw_integer_events": 10000, "raw_primes": 753, "q29_candidates": 1578, "q997_candidates": 753, "q29_top_power": 0.02646464276034823, "q29_global_99": 0.059089727903247014, "q29_fwer_p": 0.9161676646706587, "q997_fwer_p": 1.0, "q29_full_frequency": 0.187, "period62_harmonic": 12, "within_one_bin": false, "joint_energy_p": 0.6626746506986028},
+        {"rung": "R7", "raw_integer_events": 100000, "raw_primes": 6241, "q29_candidates": 15801, "q997_candidates": 7971, "q29_top_power": 0.02950208701295501, "q29_global_99": 0.06262564470739924, "q29_fwer_p": 0.812375249500998, "q997_fwer_p": 0.35129740518962077, "q29_full_frequency": 0.14516, "period62_harmonic": 9, "within_one_bin": true, "joint_energy_p": 0.005988023952095809},
+        {"rung": "R8", "raw_integer_events": 1000000, "raw_primes": 54208, "q29_candidates": 157949, "q997_candidates": 81602, "q29_top_power": 0.027422521818402632, "q29_global_99": 0.06612182398770776, "q29_fwer_p": 0.8702594810379242, "q997_fwer_p": 0.93812375249501, "q29_full_frequency": 0.048387, "period62_harmonic": 3, "within_one_bin": true, "joint_energy_p": 0.05189620758483034},
+        {"rung": "R9", "raw_integer_events": 10000000, "raw_primes": 482449, "q29_candidates": 1579467, "q997_candidates": 813663, "q29_top_power": 0.03438151530550934, "q29_global_99": 0.06610954437647897, "q29_fwer_p": 0.5708582834331337, "q997_fwer_p": 0.2754491017964072, "q29_full_frequency": 0.0483871, "period62_harmonic": 3, "within_one_bin": true, "joint_energy_p": 0.001996007984031936}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "pn3b-results",
+      "label": "PN3B frozen protocol, results and independent validation",
+      "path": "analysis/primes/PN3B_RAW_DUAL_PHASE_RESULTS.json",
+      "query": {
+        "sql": "SELECT * FROM read_csv_auto('analysis/primes/PN3B_REPORT_RUNG_SUMMARY.csv', header = true);",
+        "engine": "DuckDB",
+        "language": "SQL",
+        "description": "Segmented-sieve reconstruction of complete R6-R9 integer windows; raw transform, Q29/Q997 connection controls, conditional nulls and a joint gate map.",
+        "executed_at": "2026-07-18T00:00:00+10:00",
+        "tables_used": ["analysis/primes/PN3B_RAW_DUAL_PHASE_RESULTS.json", "analysis/primes/PN3B_DUAL_PHASE_DATA.npz", "analysis/primes/PN3B_INDEPENDENT_VALIDATION.json", "analysis/primes/PN3B_REPORT_RUNG_SUMMARY.csv"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1035 @@
+{
+  "test_id": "PN3B/RAW-DUAL-PHASE/OPENED-DEVELOPMENT-v1",
+  "evidence_class": "opened-data exploratory diagnostic; not blind confirmation",
+  "protocol_sha256": "CA60DA56EDBFDAE671F0712668FAD66AC4E1DA3D3DFB451E5D103B3FBF5D6D45",
+  "pn3_packet_sha256": "129832B150360C005DFF676A8F0140145BEB1E9DFCBF074BB4FC44ABDDDE1C6A",
+  "p31_accessed": false,
+  "parameters": {
+    "windows": {
+      "r6": [
+        1000000,
+        1010000
+      ],
+      "r7": [
+        10000000,
+        10100000
+      ],
+      "r8": [
+        100000000,
+        101000000
+      ],
+      "r9": [
+        1000000000,
+        1010000000
+      ]
+    },
+    "sieve_budgets": [
+      1,
+      2,
+      3,
+      5,
+      7,
+      11,
+      29,
+      97,
+      313,
+      997
+    ],
+    "primary_blocks": 256,
+    "block_sensitivities": [
+      128,
+      512
+    ],
+    "low_modes": 64,
+    "spectrum_bins": 512,
+    "joint_blocks": 128,
+    "joint_stages": 32,
+    "permutations": 500,
+    "seed": 20260718
+  },
+  "rung_summaries": {
+    "r6": {
+      "interval": [
+        1000000,
+        1010000
+      ],
+      "raw_integer_events": 10000,
+      "raw_prime_events": 753,
+      "raw_prime_rate": 0.0753,
+      "p29_candidate_events": 1578,
+      "p29_conditional_prime_rate": 0.47718631178707227,
+      "q997_candidate_events": 753,
+      "q997_conditional_prime_rate": 1.0,
+      "checks": {
+        "raw_prime_subset_p29": true,
+        "development_candidate_count": true,
+        "development_prime_count": true
+      },
+      "spectrum": {
+        "raw_prime_indicator": {
+          "variance": 0.06962990999999999,
+          "spectral_entropy": 0.8060095338920706,
+          "top_global_mode": 5000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 49,
+          "top_low_power_fraction": 1417.3824893488613
+        },
+        "p29_connection_mask": {
+          "variance": 0.13289916000000002,
+          "spectral_entropy": 0.560044462734424,
+          "top_global_mode": 5000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 58,
+          "top_low_power_fraction": 671.7619402746487
+        },
+        "p29_connection_residual": {
+          "variance": 0.039367870722433466,
+          "spectral_entropy": 0.9500134429937578,
+          "top_global_mode": 1870,
+          "top_global_frequency": 0.187,
+          "top_low_mode": 22,
+          "top_low_power_fraction": 1426.3712187576193
+        },
+        "q997_connection_residual": {
+          "variance": 0.0,
+          "spectral_entropy": 0.0,
+          "top_global_mode": 1,
+          "top_global_frequency": 0.0001,
+          "top_low_mode": 1,
+          "top_low_power_fraction": 0.0
+        }
+      },
+      "post_result_connection_line_crosswalk": {
+        "q29_residual_top_frequency": 0.187,
+        "period_62_harmonic": 12,
+        "period_62_frequency": 0.1935483870967742,
+        "absolute_frequency_error": 0.006548387096774189,
+        "within_one_fourier_bin": false,
+        "interpretation": "post-result arithmetic crosswalk to 2 x 31; not a registered endpoint"
+      },
+      "connection_ladder": {
+        "1": {
+          "rung": "r6",
+          "budget": 1,
+          "surviving_mask_events": 10000,
+          "conditional_prime_rate": 0.0753,
+          "variance_explained": 0.0,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.02715320604956155,
+          "block_phase_entropy": 0.914446480098592
+        },
+        "2": {
+          "rung": "r6",
+          "budget": 2,
+          "surviving_mask_events": 5000,
+          "conditional_prime_rate": 0.1506,
+          "variance_explained": 0.0814318157240187,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.027267737567014876,
+          "block_phase_entropy": 0.9154326871236597
+        },
+        "3": {
+          "rung": "r6",
+          "budget": 3,
+          "surviving_mask_events": 3334,
+          "conditional_prime_rate": 0.22585482903419316,
+          "variance_explained": 0.16281478212846656,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.02682988051722584,
+          "block_phase_entropy": 0.9169245038693149
+        },
+        "5": {
+          "rung": "r6",
+          "budget": 5,
+          "surviving_mask_events": 2668,
+          "conditional_prime_rate": 0.28223388305847075,
+          "variance_explained": 0.22378488489074355,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.02826141009585824,
+          "block_phase_entropy": 0.9228725102832882
+        },
+        "7": {
+          "rung": "r6",
+          "budget": 7,
+          "surviving_mask_events": 2287,
+          "conditional_prime_rate": 0.32925229558373414,
+          "variance_explained": 0.2746320921204001,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.02731923609664239,
+          "block_phase_entropy": 0.9228402122690252
+        },
+        "11": {
+          "rung": "r6",
+          "budget": 11,
+          "surviving_mask_events": 2078,
+          "conditional_prime_rate": 0.36236766121270453,
+          "variance_explained": 0.31044410210090234,
+          "top_low_mode": 44,
+          "top_low_power_fraction": 0.02415294254858629,
+          "block_phase_entropy": 0.9265134988466188
+        },
+        "29": {
+          "rung": "r6",
+          "budget": 29,
+          "surviving_mask_events": 1578,
+          "conditional_prime_rate": 0.47718631178707227,
+          "variance_explained": 0.43461264387052245,
+          "top_low_mode": 31,
+          "top_low_power_fraction": 0.02646464276034823,
+          "block_phase_entropy": 0.9235376863385365
+        },
+        "97": {
+          "rung": "r6",
+          "budget": 97,
+          "surviving_mask_events": 1212,
+          "conditional_prime_rate": 0.6212871287128713,
+          "variance_explained": 0.5904478519659038,
+          "top_low_mode": 22,
+          "top_low_power_fraction": 0.03237527250944605,
+          "block_phase_entropy": 0.9263399951534425
+        },
+        "313": {
+          "rung": "r6",
+          "budget": 313,
+          "surviving_mask_events": 975,
+          "conditional_prime_rate": 0.7723076923076924,
+          "variance_explained": 0.7537662942659158,
+          "top_low_mode": 22,
+          "top_low_power_fraction": 0.0408950700272855,
+          "block_phase_entropy": 0.9161278798132236
+        },
+        "997": {
+          "rung": "r6",
+          "budget": 997,
+          "surviving_mask_events": 753,
+          "conditional_prime_rate": 1.0,
+          "variance_explained": 1.0,
+          "top_low_mode": 1,
+          "top_low_power_fraction": 0.0,
+          "block_phase_entropy": 0.0
+        }
+      },
+      "block_phase": {
+        "29": {
+          "top_mode": 31,
+          "top_power": 0.02646464276034823,
+          "global_familywise_p": 0.9161676646706587,
+          "macro_familywise_p": 0.9161676646706587,
+          "global_99_max": 0.059089727903247014,
+          "macro_99_max": 0.07054316595973362
+        },
+        "997": {
+          "top_mode": 1,
+          "top_power": 0.0,
+          "global_familywise_p": 1.0,
+          "macro_familywise_p": 1.0,
+          "global_99_max": 0.0,
+          "macro_99_max": 0.0
+        }
+      },
+      "block_sensitivity": {
+        "128": {
+          "top_mode": 22,
+          "top_power": 0.0707608628327725,
+          "entropy": 0.8820506751043053
+        },
+        "512": {
+          "top_mode": 31,
+          "top_power": 0.018041723743060466,
+          "entropy": 0.9243486134889239
+        }
+      },
+      "joint_gate": {
+        "mutual_information_bits": 1.2100566004653839,
+        "leading_energy_fraction": 0.06323724589224901,
+        "mi_p": 1.0,
+        "leading_energy_p": 0.6626746506986028,
+        "candidate_count": 1578,
+        "prime_count": 753
+      }
+    },
+    "r7": {
+      "interval": [
+        10000000,
+        10100000
+      ],
+      "raw_integer_events": 100000,
+      "raw_prime_events": 6241,
+      "raw_prime_rate": 0.06241,
+      "p29_candidate_events": 15801,
+      "p29_conditional_prime_rate": 0.39497500158217835,
+      "q997_candidate_events": 7971,
+      "q997_conditional_prime_rate": 0.7829632417513487,
+      "checks": {
+        "raw_prime_subset_p29": true,
+        "development_candidate_count": true,
+        "development_prime_count": true
+      },
+      "spectrum": {
+        "raw_prime_indicator": {
+          "variance": 0.05851499190000001,
+          "spectral_entropy": 0.8100116965176711,
+          "top_global_mode": 50000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 59,
+          "top_low_power_fraction": 16650.96854917854
+        },
+        "p29_connection_mask": {
+          "variance": 0.13304283990000004,
+          "spectral_entropy": 0.46827239415725697,
+          "top_global_mode": 50000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 52,
+          "top_low_power_fraction": 3185.7194305634857
+        },
+        "p29_connection_residual": {
+          "variance": 0.03775961015125625,
+          "spectral_entropy": 0.9583754113313452,
+          "top_global_mode": 14516,
+          "top_global_frequency": 0.14516,
+          "top_low_mode": 59,
+          "top_low_power_fraction": 17543.528552907723
+        },
+        "q997_connection_residual": {
+          "variance": 0.013545264082298333,
+          "spectral_entropy": 0.9613383997755539,
+          "top_global_mode": 7844,
+          "top_global_frequency": 0.07844,
+          "top_low_mode": 63,
+          "top_low_power_fraction": 5881.729376968858
+        }
+      },
+      "post_result_connection_line_crosswalk": {
+        "q29_residual_top_frequency": 0.14516,
+        "period_62_harmonic": 9,
+        "period_62_frequency": 0.14516129032258066,
+        "absolute_frequency_error": 1.2903225806437657e-06,
+        "within_one_fourier_bin": true,
+        "interpretation": "post-result arithmetic crosswalk to 2 x 31; not a registered endpoint"
+      },
+      "connection_ladder": {
+        "1": {
+          "rung": "r7",
+          "budget": 1,
+          "surviving_mask_events": 100000,
+          "conditional_prime_rate": 0.06241,
+          "variance_explained": 0.0,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.031211695111848802,
+          "block_phase_entropy": 0.9054332345369925
+        },
+        "2": {
+          "rung": "r7",
+          "budget": 2,
+          "surviving_mask_events": 50000,
+          "conditional_prime_rate": 0.12482,
+          "variance_explained": 0.06656427649612306,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.031227079687066606,
+          "block_phase_entropy": 0.9052550333584379
+        },
+        "3": {
+          "rung": "r7",
+          "budget": 3,
+          "surviving_mask_events": 33334,
+          "conditional_prime_rate": 0.1872262554748905,
+          "variance_explained": 0.1331245592155318,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.02925642358768993,
+          "block_phase_entropy": 0.9055207474681971
+        },
+        "5": {
+          "rung": "r7",
+          "budget": 5,
+          "surviving_mask_events": 26668,
+          "conditional_prime_rate": 0.2340257987100645,
+          "variance_explained": 0.18303928018650428,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.029338407763381463,
+          "block_phase_entropy": 0.9054029742408185
+        },
+        "7": {
+          "rung": "r7",
+          "budget": 7,
+          "surviving_mask_events": 22859,
+          "conditional_prime_rate": 0.27302156699768143,
+          "variance_explained": 0.2246307735765971,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.029268471550516123,
+          "block_phase_entropy": 0.9056837894610972
+        },
+        "11": {
+          "rung": "r7",
+          "budget": 11,
+          "surviving_mask_events": 20780,
+          "conditional_prime_rate": 0.3003368623676612,
+          "variance_explained": 0.25376429182015736,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.029140599792504093,
+          "block_phase_entropy": 0.9047759425173598
+        },
+        "29": {
+          "rung": "r7",
+          "budget": 29,
+          "surviving_mask_events": 15801,
+          "conditional_prime_rate": 0.39497500158217835,
+          "variance_explained": 0.35470195030042817,
+          "top_low_mode": 27,
+          "top_low_power_fraction": 0.02950208701295501,
+          "block_phase_entropy": 0.9079187205280059
+        },
+        "97": {
+          "rung": "r7",
+          "budget": 97,
+          "surviving_mask_events": 12015,
+          "conditional_prime_rate": 0.5194340407823554,
+          "variance_explained": 0.48744551539836756,
+          "top_low_mode": 63,
+          "top_low_power_fraction": 0.03305075184696567,
+          "block_phase_entropy": 0.8960647735984247
+        },
+        "313": {
+          "rung": "r7",
+          "budget": 313,
+          "surviving_mask_events": 9749,
+          "conditional_prime_rate": 0.6401682223817827,
+          "variance_explained": 0.6162162804443123,
+          "top_low_mode": 63,
+          "top_low_power_fraction": 0.03261948831184307,
+          "block_phase_entropy": 0.9126805806457208
+        },
+        "997": {
+          "rung": "r7",
+          "budget": 997,
+          "surviving_mask_events": 7971,
+          "conditional_prime_rate": 0.7829632417513487,
+          "variance_explained": 0.7685163469654632,
+          "top_low_mode": 63,
+          "top_low_power_fraction": 0.03852436254731119,
+          "block_phase_entropy": 0.9200495080974694
+        }
+      },
+      "block_phase": {
+        "29": {
+          "top_mode": 27,
+          "top_power": 0.02950208701295501,
+          "global_familywise_p": 0.812375249500998,
+          "macro_familywise_p": 0.8163672654690619,
+          "global_99_max": 0.06262564470739924,
+          "macro_99_max": 0.07021234353698884
+        },
+        "997": {
+          "top_mode": 63,
+          "top_power": 0.03852436254731119,
+          "global_familywise_p": 0.35129740518962077,
+          "macro_familywise_p": 0.3473053892215569,
+          "global_99_max": 0.0658532379168618,
+          "macro_99_max": 0.06793194260398248
+        }
+      },
+      "block_sensitivity": {
+        "128": {
+          "top_mode": 57,
+          "top_power": 0.08672368564530242,
+          "entropy": 0.8905011602461098
+        },
+        "512": {
+          "top_mode": 59,
+          "top_power": 0.020758040421779752,
+          "entropy": 0.9202334982385596
+        }
+      },
+      "joint_gate": {
+        "mutual_information_bits": 0.16551616999141233,
+        "leading_energy_fraction": 0.07502982404983062,
+        "mi_p": 1.0,
+        "leading_energy_p": 0.005988023952095809,
+        "candidate_count": 15801,
+        "prime_count": 6241
+      }
+    },
+    "r8": {
+      "interval": [
+        100000000,
+        101000000
+      ],
+      "raw_integer_events": 1000000,
+      "raw_prime_events": 54208,
+      "raw_prime_rate": 0.054208,
+      "p29_candidate_events": 157949,
+      "p29_conditional_prime_rate": 0.34319938714395154,
+      "q997_candidate_events": 81602,
+      "q997_conditional_prime_rate": 0.6642974436901057,
+      "checks": {
+        "raw_prime_subset_p29": true,
+        "development_candidate_count": true,
+        "development_prime_count": true
+      },
+      "spectrum": {
+        "raw_prime_indicator": {
+          "variance": 0.05126949273600001,
+          "spectral_entropy": 0.8076739078109284,
+          "top_global_mode": 500000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 47,
+          "top_low_power_fraction": 130179.89360447673
+        },
+        "p29_connection_mask": {
+          "variance": 0.13300111339899998,
+          "spectral_entropy": 0.39433489602317523,
+          "top_global_mode": 500000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 61,
+          "top_low_power_fraction": 11616.78237776529
+        },
+        "p29_connection_residual": {
+          "variance": 0.03560384762170068,
+          "spectral_entropy": 0.9595653989162658,
+          "top_global_mode": 48387,
+          "top_global_frequency": 0.048387,
+          "top_low_mode": 47,
+          "top_low_power_fraction": 138042.42021915442
+        },
+        "q997_connection_residual": {
+          "variance": 0.018197764172446753,
+          "spectral_entropy": 0.9677452296970985,
+          "top_global_mode": 196071,
+          "top_global_frequency": 0.196071,
+          "top_low_mode": 47,
+          "top_low_power_fraction": 79932.92107699413
+        }
+      },
+      "post_result_connection_line_crosswalk": {
+        "q29_residual_top_frequency": 0.048387,
+        "period_62_harmonic": 3,
+        "period_62_frequency": 0.04838709677419355,
+        "absolute_frequency_error": 9.677419354758854e-08,
+        "within_one_fourier_bin": true,
+        "interpretation": "post-result arithmetic crosswalk to 2 x 31; not a registered endpoint"
+      },
+      "connection_ladder": {
+        "1": {
+          "rung": "r8",
+          "budget": 1,
+          "surviving_mask_events": 1000000,
+          "conditional_prime_rate": 0.054208,
+          "variance_explained": 0.0,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.02472675288659339,
+          "block_phase_entropy": 0.9156240821269263
+        },
+        "2": {
+          "rung": "r8",
+          "budget": 2,
+          "surviving_mask_events": 500000,
+          "conditional_prime_rate": 0.108416,
+          "variance_explained": 0.05731492759507362,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.02472362040089011,
+          "block_phase_entropy": 0.9156299092706336
+        },
+        "3": {
+          "rung": "r8",
+          "budget": 3,
+          "surviving_mask_events": 333334,
+          "conditional_prime_rate": 0.1626236747526505,
+          "variance_explained": 0.11462951130126997,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.024722213964640635,
+          "block_phase_entropy": 0.9157640520746843
+        },
+        "5": {
+          "rung": "r8",
+          "budget": 5,
+          "surviving_mask_events": 266668,
+          "conditional_prime_rate": 0.20327898360508198,
+          "variance_explained": 0.15761497623693377,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.024723538210579776,
+          "block_phase_entropy": 0.9158103007909949
+        },
+        "7": {
+          "rung": "r8",
+          "budget": 7,
+          "surviving_mask_events": 228573,
+          "conditional_prime_rate": 0.23715836953620945,
+          "variance_explained": 0.19343615671966918,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.024736959768268306,
+          "block_phase_entropy": 0.9157500384003602
+        },
+        "11": {
+          "rung": "r8",
+          "budget": 11,
+          "surviving_mask_events": 207792,
+          "conditional_prime_rate": 0.26087626087626087,
+          "variance_explained": 0.21851343728458383,
+          "top_low_mode": 29,
+          "top_low_power_fraction": 0.02500074490155621,
+          "block_phase_entropy": 0.915602171747712
+        },
+        "29": {
+          "rung": "r8",
+          "budget": 29,
+          "surviving_mask_events": 157949,
+          "conditional_prime_rate": 0.34319938714395154,
+          "variance_explained": 0.3055549075737072,
+          "top_low_mode": 43,
+          "top_low_power_fraction": 0.027422521818402632,
+          "block_phase_entropy": 0.9141896719141107
+        },
+        "97": {
+          "rung": "r8",
+          "budget": 97,
+          "surviving_mask_events": 120328,
+          "conditional_prime_rate": 0.45050196130576425,
+          "variance_explained": 0.4190075210043691,
+          "top_low_mode": 36,
+          "top_low_power_fraction": 0.024286333494725105,
+          "block_phase_entropy": 0.9144367825884415
+        },
+        "313": {
+          "rung": "r8",
+          "budget": 313,
+          "surviving_mask_events": 96575,
+          "conditional_prime_rate": 0.561304685477608,
+          "variance_explained": 0.5361608952894592,
+          "top_low_mode": 26,
+          "top_low_power_fraction": 0.026251392798929418,
+          "block_phase_entropy": 0.9237825101105316
+        },
+        "997": {
+          "rung": "r8",
+          "budget": 997,
+          "surviving_mask_events": 81602,
+          "conditional_prime_rate": 0.6642974436901057,
+          "variance_explained": 0.6450566759817229,
+          "top_low_mode": 47,
+          "top_low_power_fraction": 0.025525868726865613,
+          "block_phase_entropy": 0.9246497450164336
+        }
+      },
+      "block_phase": {
+        "29": {
+          "top_mode": 43,
+          "top_power": 0.027422521818402632,
+          "global_familywise_p": 0.8702594810379242,
+          "macro_familywise_p": 0.8762475049900199,
+          "global_99_max": 0.06612182398770776,
+          "macro_99_max": 0.06417709248782072
+        },
+        "997": {
+          "top_mode": 47,
+          "top_power": 0.025525868726865613,
+          "global_familywise_p": 0.93812375249501,
+          "macro_familywise_p": 0.9141716566866267,
+          "global_99_max": 0.06618896896372677,
+          "macro_99_max": 0.06234438082059767
+        }
+      },
+      "block_sensitivity": {
+        "128": {
+          "top_mode": 36,
+          "top_power": 0.06937410318593966,
+          "entropy": 0.9023338481583534
+        },
+        "512": {
+          "top_mode": 47,
+          "top_power": 0.014747071122828165,
+          "entropy": 0.9198266802356202
+        }
+      },
+      "joint_gate": {
+        "mutual_information_bits": 0.010706554276390489,
+        "leading_energy_fraction": 0.07172853650255644,
+        "mi_p": 1.0,
+        "leading_energy_p": 0.05189620758483034,
+        "candidate_count": 157949,
+        "prime_count": 54208
+      }
+    },
+    "r9": {
+      "interval": [
+        1000000000,
+        1010000000
+      ],
+      "raw_integer_events": 10000000,
+      "raw_prime_events": 482449,
+      "raw_prime_rate": 0.0482449,
+      "p29_candidate_events": 1579467,
+      "p29_conditional_prime_rate": 0.30545050957063363,
+      "q997_candidate_events": 813663,
+      "q997_conditional_prime_rate": 0.5929346670550338,
+      "checks": {
+        "raw_prime_subset_p29": true,
+        "r9_candidate_numbers": true,
+        "r9_candidate_labels": true
+      },
+      "spectrum": {
+        "raw_prime_indicator": {
+          "variance": 0.04591732962398999,
+          "spectral_entropy": 0.8040132661669334,
+          "top_global_mode": 5000000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 64,
+          "top_low_power_fraction": 1583487.7628872634
+        },
+        "p29_connection_mask": {
+          "variance": 0.13299953995911004,
+          "spectral_entropy": 0.337516080869453,
+          "top_global_mode": 5000000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 59,
+          "top_low_power_fraction": 4818.323775061081
+        },
+        "p29_connection_residual": {
+          "variance": 0.03350847071081573,
+          "spectral_entropy": 0.9555434451607414,
+          "top_global_mode": 483871,
+          "top_global_frequency": 0.0483871,
+          "top_low_mode": 64,
+          "top_low_power_fraction": 1563648.503808351
+        },
+        "q997_connection_residual": {
+          "variance": 0.019638826281396595,
+          "spectral_entropy": 0.9724971708624103,
+          "top_global_mode": 1729007,
+          "top_global_frequency": 0.1729007,
+          "top_low_mode": 64,
+          "top_low_power_fraction": 1236767.3587141542
+        },
+        "raw_prime_indicator_hann": {
+          "variance": 0.01723240375183236,
+          "spectral_entropy": 0.8184734606259941,
+          "top_global_mode": 5000000,
+          "top_global_frequency": 0.5,
+          "top_low_mode": 64,
+          "top_low_power_fraction": 693508.9948568564
+        },
+        "p29_connection_residual_hann": {
+          "variance": 0.01257144694110588,
+          "spectral_entropy": 0.9569627307279623,
+          "top_global_mode": 483871,
+          "top_global_frequency": 0.0483871,
+          "top_low_mode": 64,
+          "top_low_power_fraction": 687906.2002402133
+        }
+      },
+      "post_result_connection_line_crosswalk": {
+        "q29_residual_top_frequency": 0.0483871,
+        "period_62_harmonic": 3,
+        "period_62_frequency": 0.04838709677419355,
+        "absolute_frequency_error": 3.225806455287028e-09,
+        "within_one_fourier_bin": true,
+        "interpretation": "post-result arithmetic crosswalk to 2 x 31; not a registered endpoint"
+      },
+      "connection_ladder": {
+        "1": {
+          "rung": "r9",
+          "budget": 1,
+          "surviving_mask_events": 10000000,
+          "conditional_prime_rate": 0.0482449,
+          "variance_explained": 0.0,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03439515834025777,
+          "block_phase_entropy": 0.9173981449641754
+        },
+        "2": {
+          "rung": "r9",
+          "budget": 2,
+          "surviving_mask_events": 5000000,
+          "conditional_prime_rate": 0.0964898,
+          "variance_explained": 0.05069045597969435,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.034385206075354294,
+          "block_phase_entropy": 0.9173384659873918
+        },
+        "3": {
+          "rung": "r9",
+          "budget": 3,
+          "surviving_mask_events": 3333334,
+          "conditional_prime_rate": 0.14473467105306578,
+          "variance_explained": 0.10138088154512204,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03439270185862328,
+          "block_phase_entropy": 0.9173120467860849
+        },
+        "5": {
+          "rung": "r9",
+          "budget": 5,
+          "surviving_mask_events": 2666668,
+          "conditional_prime_rate": 0.18091828454085773,
+          "variance_explained": 0.1393986588996028,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03439219348698384,
+          "block_phase_entropy": 0.917182551796475
+        },
+        "7": {
+          "rung": "r9",
+          "budget": 7,
+          "surviving_mask_events": 2285715,
+          "conditional_prime_rate": 0.2110713715401964,
+          "variance_explained": 0.17108021962813358,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.034399324650740845,
+          "block_phase_entropy": 0.9171761809788802
+        },
+        "11": {
+          "rung": "r9",
+          "budget": 11,
+          "surviving_mask_events": 2077923,
+          "conditional_prime_rate": 0.2321784782208003,
+          "variance_explained": 0.1932572551707893,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.034476518345561334,
+          "block_phase_entropy": 0.9174480128455136
+        },
+        "29": {
+          "rung": "r9",
+          "budget": 29,
+          "surviving_mask_events": 1579467,
+          "conditional_prime_rate": 0.30545050957063363,
+          "variance_explained": 0.27024347920030445,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03438151530550934,
+          "block_phase_entropy": 0.9165493149404517
+        },
+        "97": {
+          "rung": "r9",
+          "budget": 97,
+          "surviving_mask_events": 1203198,
+          "conditional_prime_rate": 0.4009722423075836,
+          "variance_explained": 0.3706072521256608,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03709174550996092,
+          "block_phase_entropy": 0.919787712673675
+        },
+        "313": {
+          "rung": "r9",
+          "budget": 313,
+          "surviving_mask_events": 964337,
+          "conditional_prime_rate": 0.5002908734187322,
+          "variance_explained": 0.4749603899351127,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.03574669384334196,
+          "block_phase_entropy": 0.9189163863095059
+        },
+        "997": {
+          "rung": "r9",
+          "budget": 997,
+          "surviving_mask_events": 813663,
+          "conditional_prime_rate": 0.5929346670550338,
+          "variance_explained": 0.5723003397145272,
+          "top_low_mode": 53,
+          "top_low_power_fraction": 0.04041630671875305,
+          "block_phase_entropy": 0.9173815470927271
+        }
+      },
+      "block_phase": {
+        "29": {
+          "top_mode": 53,
+          "top_power": 0.03438151530550934,
+          "global_familywise_p": 0.5708582834331337,
+          "macro_familywise_p": 0.5528942115768463,
+          "global_99_max": 0.06610954437647897,
+          "macro_99_max": 0.06673500925692864
+        },
+        "997": {
+          "top_mode": 53,
+          "top_power": 0.04041630671875305,
+          "global_familywise_p": 0.2754491017964072,
+          "macro_familywise_p": 0.3033932135728543,
+          "global_99_max": 0.07015022524263406,
+          "macro_99_max": 0.0614120213174893
+        }
+      },
+      "block_sensitivity": {
+        "128": {
+          "top_mode": 53,
+          "top_power": 0.0565682956565953,
+          "entropy": 0.8887221321723772
+        },
+        "512": {
+          "top_mode": 64,
+          "top_power": 0.024782682344152634,
+          "entropy": 0.9259751332666997
+        }
+      },
+      "joint_gate": {
+        "mutual_information_bits": 0.0008620926097834666,
+        "leading_energy_fraction": 0.08073345506031152,
+        "mi_p": 1.0,
+        "leading_energy_p": 0.001996007984031936,
+        "candidate_count": 1579467,
+        "prime_count": 482449
+      }
+    }
+  },
+  "cross_rung": {
+    "r6_to_r7__q29__global": {
+      "position_signed_correlation": 0.007540611620144386,
+      "position_absolute_correlation": 0.007540611620144386,
+      "position_p": 0.9101796407185628,
+      "power_log_correlation": 0.17182657456345973,
+      "power_p": 0.07984031936127745,
+      "phase_coherence": 0.04331866377404709,
+      "phase_p": 0.8762475049900199,
+      "phase_null_99": 0.2538809621797079
+    },
+    "r6_to_r7__q29__macro": {
+      "position_signed_correlation": 0.007540611620144386,
+      "position_absolute_correlation": 0.007540611620144386,
+      "position_p": 0.8922155688622755,
+      "power_log_correlation": 0.17182657456345973,
+      "power_p": 0.10179640718562874,
+      "phase_coherence": 0.04331866377404709,
+      "phase_p": 0.8922155688622755,
+      "phase_null_99": 0.2523410476996655
+    },
+    "r6_to_r7__q997__global": {
+      "position_signed_correlation": null,
+      "position_absolute_correlation": null,
+      "position_p": 1.0,
+      "power_log_correlation": null,
+      "power_p": 1.0,
+      "phase_coherence": null,
+      "phase_p": 1.0,
+      "phase_null_99": 0.0
+    },
+    "r6_to_r7__q997__macro": {
+      "position_signed_correlation": null,
+      "position_absolute_correlation": null,
+      "position_p": 1.0,
+      "power_log_correlation": null,
+      "power_p": 1.0,
+      "phase_coherence": null,
+      "phase_p": 1.0,
+      "phase_null_99": 0.0
+    },
+    "r6_to_r7__joint_gate": {
+      "spatial_alignment": 0.04351438066975212,
+      "spatial_p": 0.6227544910179641,
+      "spatial_null_99": 0.19559355259911104,
+      "gate_alignment": 0.08074978112846616,
+      "gate_p": 0.654690618762475,
+      "gate_null_99": 0.3748466692078573
+    },
+    "r7_to_r8__q29__global": {
+      "position_signed_correlation": -0.0014433350466044681,
+      "position_absolute_correlation": 0.0014433350466044681,
+      "position_p": 0.9900199600798403,
+      "power_log_correlation": -0.032505318554314114,
+      "power_p": 0.5988023952095808,
+      "phase_coherence": 0.06654959467235268,
+      "phase_p": 0.7744510978043913,
+      "phase_null_99": 0.2711236971940799
+    },
+    "r7_to_r8__q29__macro": {
+      "position_signed_correlation": -0.0014433350466044681,
+      "position_absolute_correlation": 0.0014433350466044681,
+      "position_p": 0.9840319361277445,
+      "power_log_correlation": -0.032505318554314114,
+      "power_p": 0.6926147704590818,
+      "phase_coherence": 0.06654959467235268,
+      "phase_p": 0.7764471057884231,
+      "phase_null_99": 0.2600642749936687
+    },
+    "r7_to_r8__q997__global": {
+      "position_signed_correlation": -0.08233867543416218,
+      "position_absolute_correlation": 0.08233867543416218,
+      "position_p": 0.2055888223552894,
+      "power_log_correlation": -0.11851389204975978,
+      "power_p": 0.8363273453093812,
+      "phase_coherence": 0.049655568460265524,
+      "phase_p": 0.872255489021956,
+      "phase_null_99": 0.26868674373216384
+    },
+    "r7_to_r8__q997__macro": {
+      "position_signed_correlation": -0.08233867543416218,
+      "position_absolute_correlation": 0.08233867543416218,
+      "position_p": 0.20758483033932135,
+      "power_log_correlation": -0.11851389204975978,
+      "power_p": 0.782435129740519,
+      "phase_coherence": 0.049655568460265524,
+      "phase_p": 0.8582834331337326,
+      "phase_null_99": 0.25881249009121515
+    },
+    "r7_to_r8__joint_gate": {
+      "spatial_alignment": 0.015897696368064554,
+      "spatial_p": 0.8702594810379242,
+      "spatial_null_99": 0.22223984040460554,
+      "gate_alignment": 0.04491212123623084,
+      "gate_p": 0.7864271457085829,
+      "gate_null_99": 0.42622182331579184
+    },
+    "r8_to_r9__q29__global": {
+      "position_signed_correlation": 0.011506786512704231,
+      "position_absolute_correlation": 0.011506786512704231,
+      "position_p": 0.8423153692614771,
+      "power_log_correlation": 0.09144126433276573,
+      "power_p": 0.25748502994011974,
+      "phase_coherence": 0.07593335831989143,
+      "phase_p": 0.7005988023952096,
+      "phase_null_99": 0.2633934120914476
+    },
+    "r8_to_r9__q29__macro": {
+      "position_signed_correlation": 0.011506786512704231,
+      "position_absolute_correlation": 0.011506786512704231,
+      "position_p": 0.8662674650698603,
+      "power_log_correlation": 0.09144126433276573,
+      "power_p": 0.20758483033932135,
+      "phase_coherence": 0.07593335831989143,
+      "phase_p": 0.7285429141716567,
+      "phase_null_99": 0.2512727565718716
+    },
+    "r8_to_r9__q997__global": {
+      "position_signed_correlation": -0.09245766630840938,
+      "position_absolute_correlation": 0.09245766630840938,
+      "position_p": 0.14770459081836326,
+      "power_log_correlation": 0.16271623398754262,
+      "power_p": 0.10179640718562874,
+      "phase_coherence": 0.1269695165826085,
+      "phase_p": 0.37924151696606784,
+      "phase_null_99": 0.27496301643521054
+    },
+    "r8_to_r9__q997__macro": {
+      "position_signed_correlation": -0.09245766630840938,
+      "position_absolute_correlation": 0.09245766630840938,
+      "position_p": 0.12974051896207583,
+      "power_log_correlation": 0.16271623398754262,
+      "power_p": 0.14770459081836326,
+      "phase_coherence": 0.1269695165826085,
+      "phase_p": 0.3413173652694611,
+      "phase_null_99": 0.2549330113295574
+    },
+    "r8_to_r9__joint_gate": {
+      "spatial_alignment": 0.06295895474775078,
+      "spatial_p": 0.47704590818363274,
+      "spatial_null_99": 0.23569571204675127,
+      "gate_alignment": 0.15707127276212887,
+      "gate_p": 0.3772455089820359,
+      "gate_null_99": 0.450622495804278
+    }
+  },
+  "candidate_time_like_phase_coordinate_supported": false,
+  "outputs": {
+    "spectrum_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_DUAL_SPECTRUM.csv",
+    "ladder_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_CONNECTION_LADDER.csv",
+    "block_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_BLOCK_PHASE.csv",
+    "gate_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_POSITION_GATE_MAP.csv",
+    "cross_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_CROSS_RUNG_PHASE.csv",
+    "data_npz": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_DUAL_PHASE_DATA.npz",
+    "spectrum_figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_RAW_DUAL_SPECTRUM.png",
+    "gate_figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3B_PHASE_GATE_MAP.png"
+  },
+  "output_hashes": {
+    "PN3B_DUAL_SPECTRUM.csv": "D3AFB3219348CBC9903CDD723D6C595E47D3DB94D32DFBFCB0FDC831A88B2486",
+    "PN3B_CONNECTION_LADDER.csv": "EAD885EC109C10E15CA75F913EAABB7FD50066D3AE1ECF5D71039162FC8F3936",
+    "PN3B_BLOCK_PHASE.csv": "C6E9C99332FA209B45D0B2BE8F6B15920ED471E8B69D5EA7E1717CADEC2567FC",
+    "PN3B_POSITION_GATE_MAP.csv": "1F651AF916D72024301064C73346FBDDDB6E7C3B70C62A40A62A9B1F10710EFC",
+    "PN3B_CROSS_RUNG_PHASE.csv": "267719A59ED6F33A100850A53E6603D179CAF4D7F67A1D057D9A39A815FED9B3",
+    "PN3B_DUAL_PHASE_DATA.npz": "0D7F0EE234F0EDCC0240C892AE2285D1A4D50A2A2E43117418D56A006493A894",
+    "PN3B_RAW_DUAL_SPECTRUM.png": "425A8C086BE8DF603261D0FCCDBA6403BBFB575634B1388FB01432278C0B48D7",
+    "PN3B_PHASE_GATE_MAP.png": "019127A8647E5305B1C272C2A142A4C1228F49EDA58C214C06D1FD6CD58CECDA"
+  }
+}

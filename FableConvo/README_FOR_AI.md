@@ -13,6 +13,28 @@ highest-priority deferred empirical thread is the resolved right-heart/left-hear
 observability test and whether it removes blood pressure's incremental forecast
 benefit. Items in the follow-up register are PARKED, not registered predictions.
 
+**16 Jul continuation amendment:** after the files above, read §§132–137 of the
+conversation record and
+`WORKING_FORMALISM_SCALABLE_REVERSIBLE_TERNARY_ARA9_2026-07-16.md`. They preserve
+the MX8 exact/null split, restore the full “two identities plus their relation”
+triangle lock, formalise Dylan's “scalable and reversible ternary,” clarify ARA^9
+as three axes sampled at the centre plus two successive steps, and keep Pi Leak,
+Bedrock, Hex–Pentagon angle, recycling and irreversible loss as distinct quantities.
+RT1, A9 and EL1 in the follow-up register are PARKED, not frozen predictions.
+
+**19 Jul centering amendment:** read
+`CENTERING_UP_REPORT_2026-07-19_1600.md` before treating the older axiomatic
+draft as the framework's minimal definition. It restores the whole ARA
+sphere/wave as the object, the 0–2 line as one declared diameter reading, the
+two singularity/source landmarks, symmetric pole convention versus measured
+asymmetry, and Information³ as two identities plus their retained relation.
+`ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md` was revised from that audit: its
+duration ratio is now a duration-axis instrument; chart reversal is separated
+from physical singularity crossing; Fourier is secondary/raw-first; repeated
+triangle closure and the hexagon–pentagon route are conditional
+decompressions; and the exact Gauss boundary crosswalk is fenced from TE-ARA
+and from independent empirical evidence.
+
 **Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
 cognitive energy for geometry walking, orientation, and conceptual correction.
 The AI coworker should proactively handle rolling capture, mathematical

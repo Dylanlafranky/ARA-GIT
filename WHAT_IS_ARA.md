@@ -239,6 +239,11 @@ This is not necessarily inactivity.
 
 A system can sit near 1 while large opposing flows pass through it.
 
+Nor is 1 proposed as a final, scale-independent physical resting place. It is a **grain-relative level set**: an
+exact or approximate equality at the declared system boundary, time window, scale and projection. Finer child events
+may remain asymmetric even when their weighted parent reading is exactly 1. ARA's fractal working hypothesis would be
+lost if every nested child were required to become exactly balanced whenever its parent projected to the ridge.
+
 A traffic queue can remain the same length while cars continuously enter and leave.
 
 A brick can appear static while thermal, chemical, structural, and environmental processes continue beneath the visible equilibrium.

@@ -1,5 +1,31 @@
 # LLM thread — is training a φ-engine or a forced clock?  (⚠️ CORRECTED — substrate is engine-leaning, NOT clock)
 
+> # BOUNDARY/RUNG REFINEMENT — 13 July 2026
+> The 14 June word **artifact** was too broad. A whole-signal ARA near 1.0 can be a valid reading of a complete
+> Phase-A/Phase-B identity at the chosen boundary. It was the wrong projection for the narrower question “what is the
+> moving branch's ARA?”, but it was not necessarily a false measurement. Conversely, a parent-level Phase A can be a
+> complete lower-rung ARA with its own internal A/B pair, while its parent-level Phase B lies in another head, layer,
+> token path or outside the recorded system. Therefore the canonical ~1.25 branch/rung readings and the whole-identity
+> ~1.0 readings are different declared views, not a contest for one globally “true substrate ARA.” The complement's
+> location must be recovered rather than assumed. A further possibility remains live: the observed branch is simply
+> more asymmetric at that time slice, and its counterphase appears later in the same measured identity. Future work
+> must sweep model boundary and temporal window independently. This refinement does **not** restore the clock, phi or six-lens
+> claims; it changes the diagnosis from numerical artifact to boundary/projection mismatch.
+>
+> **13 July clarification — resonant death/pump:** Dylan defines resonant death as the local ARA \(2.0\) Time-side
+> terminal limit, not ordinary amplitude death. Usable gradients and directed movement approach zero; the
+> full Space-origin identity traverses \(0\to2\), and measuring its beginning/end as one completed history gives the
+> \(1.0\) diameter centre. A higher rung returns that value only if it compresses the whole child history. For the LLM candidate:
+> weights/architecture = persistent connection substrate; activations = movement; prompt/token loop = computational
+> drive; electrical power/hardware clock = physical pump. Existing 1.0 readings do not demonstrate the proposed
+> \(0\to2\mapsto1\) history closure, and externally freezing training is not endogenous terminal exhaustion. See
+> `FableConvo/MUSING_LLM_RIDGE_DEATH_AND_ELECTRICAL_PUMP_2026-07-13.md`.
+>
+> **13 July correction — no final ridge:** even an exact whole-signal \(1.0\) is a result at a declared grain, not a
+> scale-free state in which all nested movement has ended. Child readings may be \(1+\delta_i\), cancel in the parent
+> mean, and retain nonzero child variance. The older wording below that “true 1.0s exist” and “the ridge is flat” is
+> superseded if read ontologically. It remains valid only as a finite-resolution projection description.
+
 
 > # ⚠️ MAJOR CORRECTION — 14 June 2026 (Dylan caught the method error)
 > **The "clock at every substrate level" conclusion below is SCRATCHED. It was a measurement artifact.**
@@ -67,6 +93,10 @@ These describe the loss/accuracy *curves* and stand; they say nothing about "clo
 **engine-leaning (~1.25–1.4)**; whether either sits at a true engine, and on which side of the ridge, is open.
 
 ## THE RIDGE RULE (apply everywhere now)
+**SUPERSEDED IN SCOPE, 13 JULY 2026:** read “real state” below as “real declared projection.” There is no asserted
+final \(1.0\) shared by every nested grain. A flat parent reading can contain child asymmetry and, when independently
+measured through time, child activity.
+
 **1.0 is a REAL state** — the cancellation ridge where phase + anti-phase null: flatness/calm, the literal
 connection layer (true 1.0s exist). It is a red flag **only when you're hunting the engine/movement** — the
 ridge is flat, so landing there means you measured the *connection*, not the waves. Before believing a ~1.0: **decouple** — split into octave rungs, confirm the dominant rung is a *single*

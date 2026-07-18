@@ -1,0 +1,41 @@
+{
+  "protocol": "PN1D/DEV/v1",
+  "independent_route": "standalone p23 reconstruction; exact tensors and strata; held-out truncated-SVD spatial cross-check",
+  "prime29_opened": false,
+  "checks": {
+    "protocol_hash_exact": true,
+    "prime29_remains_unopened": true,
+    "child_count_exact": true,
+    "child_period_exact": true,
+    "gap_hash_exact": true,
+    "empirical_tensor_exact": true,
+    "iid_tensor_exact": true,
+    "markov_tensor_exact": true,
+    "scale_boundaries_exact": true,
+    "scale_strata_exact": true,
+    "empirical_cmi_exact": true,
+    "iid_cmi_exact": true,
+    "markov_cmi_exact": true,
+    "excess_over_markov_positive": true,
+    "svd_rank3_improves_both_directions": true
+  },
+  "all_checks_pass": true,
+  "third_step_metrics": {
+    "empirical_cmi_bits": 0.4742489819902628,
+    "iid_overlap_cmi_bits": 0.1367757636014795,
+    "markov_overlap_cmi_bits": 0.273769306768312,
+    "empirical_excess_over_iid_bits": 0.3374732183887833,
+    "empirical_excess_over_markov_bits": 0.20047967522195076,
+    "empirical_jsd_from_iid_bits": 0.26429242793776064,
+    "empirical_jsd_from_markov_bits": 0.10543615970935774,
+    "half1_cmi_bits": 0.47434208872269334,
+    "half2_cmi_bits": 0.474167848392427
+  },
+  "independent_svd": {
+    "rank3_improves_both_directions": true,
+    "rank2_mean_heldout_jsd_bits": 0.18194260313214244,
+    "rank3_mean_heldout_jsd_bits": 0.1199079834521716,
+    "rank2_to_rank3_gain_bits": 0.06203461967997084
+  },
+  "interpretive_limit": "Validates a stable third representational component and residual third-step dependence on p23 development data. It does not establish that the data contain exactly three modes or three physical waves."
+}

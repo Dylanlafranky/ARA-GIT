@@ -246,13 +246,17 @@ Across 299 eligible time slices:
 
 | Test | Development result | Evidential meaning |
 |---|---:|---|
-| Full Gauss source versus particle source | \(r=0.9971\), NRMSE \(=0.0767\) | established field/particle instrument agreement passes |
-| Declared harmonic identity: Gauss versus particle component | \(r=0.9991\) | the identity family survives the field-to-source transformation |
-| Gauss-source versus particle-source TE-ARA participation | \(r=0.7987\), MAE \(=0.0911\) on 0–2 | material but imperfect participation transfer |
+| Full Gauss source versus particle source | \(r=0.9971\), NRMSE \(=0.0767\) | simulator/solver consistency and adapter check; not independent ARA evidence |
+| Declared harmonic identity: Gauss versus particle component | \(r=0.9991\) | segmentation is consistent across solver-coupled views; not independent ARA evidence |
+| Gauss-source versus particle-source TE-ARA participation | \(r=0.7987\), MAE \(=0.0911\) on 0–2 | primary non-tautological ARA-specific development result: material but imperfect participation transfer |
 | Scalar ARA+TE-ARA prediction beyond scale | no improvement over the scale-only baseline | compressed scalars do not replace the full field relation |
 
 The untouched Tang confirmation transfer remains frozen and sealed. Therefore these are development results, not an
 independent replication.
+
+The \(0.0911\) MAE is an average coordinate distance on the normalized 0–2 scale: 4.55% of that scale's full width.
+It is not 4.6% of charge or energy “missing.” The correlation \(0.7987\) is likewise a time-series association, not
+an 80% recovery fraction.
 
 ### 5.3 Energy handover and identity closure
 
@@ -308,6 +312,99 @@ separated matched-amplitude states (\(d_z=-0.8276\)), but its spatial phase fail
 daughter should follow the parent collision rather than lead it. The pressure magnitude remains a state marker; the
 pressure-phase steering law is rejected for this dataset.
 
+#### 5.4.1 Grain-relative ridge and retained child asymmetry
+
+Dylan's 13 July refinement removes a possible overstatement: ARA does not require a physically final, scale-free
+\(1.0\) state. The simplest linear coarse-graining model makes the distinction explicit. For a declared measurement
+grain \(g=(\Omega,\tau,k,\Pi)\), let child readings be
+
+\[
+x_{g,i}=1+\delta_i,
+\qquad
+w_i\ge0,
+\qquad
+\sum_iw_i=1.
+\]
+
+The parent projection can lie exactly on the ridge,
+
+\[
+\underbrace{x_g}_{\substack{\text{parent/coarse reading}\\
+\text{ARA ridge latitude}}}
+=
+\sum_iw_ix_{g,i}
+=1
+\quad\Longleftrightarrow\quad
+\sum_iw_i\delta_i=0,
+\]
+
+while its unresolved child asymmetry remains nonzero,
+
+\[
+\underbrace{V_g^{\mathrm{child}}}_{\substack{\text{retained child spread}\\
+\text{ARA: decompressed asymmetry}}}
+=
+\sum_iw_i\delta_i^2
+>0.
+\]
+
+Plainly: equal and opposite child departures can close the parent mean at \(1\) without either child being at \(1\).
+For example, equally weighted \(0.8\) and \(1.2\) children give a parent reading of \(1\) while retaining child
+variance. Changing the boundary, time window, rung or decision to count those child events changes the projection.
+Nonzero \(V_g^{\mathrm{child}}\) proves unresolved child spread, not temporal movement by itself; movement additionally
+requires time variation, directed flux/activity or phase-dynamical evidence.
+
+This does **not** weaken exact results such as the closed magnetic-flux ridge or the ideal-capacitor equality. Those
+remain exact statements at their declared surface or handover projection. It prevents the further inference that
+exact aggregate equality means every finer field, current or event has stopped. Conversely, observing
+\(V_g^{\mathrm{child}}=0\) at finite resolution does not prove that every unmeasured finer grain also has zero
+asymmetry.
+
+The weighted formula above is a candidate local aggregation law, not yet ARA's universal nonlinear
+coarse-graining operator. The stronger claim that some child asymmetry always persists or reappears under unlimited
+decomposition is the ARA fractal hypothesis, not a consequence of Maxwell's equations or established mechanics.
+
+#### 5.4.2 Full TE-ARA closure does not identify the dynamics
+
+The relation Dylan identified has a precise form under the existing TE-ARA participation definition. If two declared
+branches exhaust the account,
+
+\[
+p_A+p_B=1,
+\qquad
+\mathrm{TE}_i=2p_i.
+\]
+
+At the equal-composition ridge,
+
+\[
+\underbrace{p_A=p_B=\frac12}_{\substack{\text{equal Phase-A/Phase-B shares}\\
+\text{ARA composition }x=1}}
+\quad\Longrightarrow\quad
+\underbrace{\mathrm{TE}_A=1}_{\text{A participation}}
+,
+\qquad
+\underbrace{\mathrm{TE}_B=1}_{\text{B participation}}
+,
+\qquad
+\underbrace{\mathrm{TE}_{A+B}=2}_{\text{full declared identity participation}}.
+\]
+
+This gives the joint coordinate \((x,\mathrm{TE})=(1,2)\). The 2 is not “twice the energy” of the 1 because the axes
+answer different questions: \(x\) measures composition and TE-ARA measures accounted participation. Nor does the
+joint coordinate decide whether the identity moves. At least three cases can share it:
+
+| State at the declared grain | ARA composition | TE-ARA | Activity/phase evidence |
+|---|---:|---:|---|
+| Frozen/static equal pair | 1 | 2 | no resolved time variation or flux; timing ARA undefined |
+| Coherent resonance or standing mode | 1 | 2 | nonzero oscillatory activity and stable phase; net boundary transport may be zero |
+| Incoherent cancellation | 1 | 2 | nonzero component activity, weak/unstable phase relation |
+
+Therefore a child/daughter event is useful evidence of dynamics but is not the only admissible evidence. Direct
+time-resolved oscillation, flux, changing phase or energy exchange can also distinguish resonance from frozen closure.
+In ordinary physics, resonance is not literally motionless: a standing resonant pattern can have zero net transport
+through the parent boundary while retaining local oscillatory energy exchange.
+
 ### 5.5 Nonlinear harmonic rungs and identity inheritance
 
 With parent spatial mode \(k_0=5\), the natural in-system rung coordinate is
@@ -338,6 +435,10 @@ The development sequence was:
 | MX3g: \(20\rightarrow40\) | next fine identity should appear | \(k=40\) jointly detectable, delayed and persistent; 6/8 gates, but exact \(20+20\) route weak |
 | MX3g: \(40\rightarrow80\) | next rung may become only a trace near the floor | field threshold only; no particle identity; 3.2 grid cells per wavelength |
 | next: \(80\rightarrow160\) | possible continuation/flip | \(k=160\) exceeds Nyquist and cannot be tested in this archive |
+
+These stages form one adaptive exploratory chain on the same inspected archive. They are not independent
+confirmations: each later question was informed by earlier results. Their value is hypothesis refinement and
+instrument development; replication requires new seeds/noise levels, higher resolution and an untouched system.
 
 For routes \(a+b=K\), the explicit ARA composition coordinate is
 
@@ -802,6 +903,1076 @@ near-to-far radiation also remain incomplete or untested.
 
 The detailed evidence table, weak-connection list and recommended order are recorded in
 `Analysis/electromagnetism/MAXWELL_ARA_COMPLETENESS_AUDIT_2026-07-12.md`.
+
+### 5.14 Charge continuity as a rung-relative accumulation/release law
+
+Maxwell's equations require local conservation of electric charge:
+
+\[
+\underbrace{\frac{\partial\rho}{\partial t}}_{\substack{\text{local charge accumulation}\\\text{or depletion}}}
++
+\underbrace{\nabla\!\cdot\mathbf J}_{\substack{\text{net outward charge flow}\\\text{through the local boundary}}}
+=0.
+\]
+
+Dylan's scale correction is essential: “accumulation” and “release” are not absolute labels on one object. They are
+read relative to the chosen identity/control volume and therefore to the declared rung. For a rung-\(k\) region
+\(V_k\),
+
+\[
+\underbrace{Q_k}_{\substack{\text{charge stored in}\\\text{the rung-}k\text{ identity}}}
+=
+\int_{V_k}\rho\,dV,
+\qquad
+\underbrace{\frac{dQ_k}{dt}}_{\text{accumulation at rung }k}
+=-
+\underbrace{\oint_{\partial V_k}\mathbf J\cdot d\mathbf A}_{\text{release through the rung boundary}}.
+\]
+
+A flux leaving one child volume enters its neighbour. It is release in the first child's account and accumulation in
+the second child's account. If both children are enclosed inside one parent volume, that same handover becomes an
+**internal exchange** and cancels from the parent's external flux account. With charge-conserving interface
+accounting and \(V_{k+1}=\bigcup_i V_{k,i}\),
+
+\[
+\underbrace{Q_{k+1}}_{\text{parent stored account}}
+=\sum_i Q_{k,i},
+\qquad
+\underbrace{\frac{dQ_{k+1}}{dt}}_{\text{parent accumulation}}
+=-
+\underbrace{\oint_{\partial V_{k+1}}\mathbf J\cdot d\mathbf A}_{\text{parent release}},
+\]
+
+because the outward normals on every shared child interface are opposite. The internal flux pair therefore adds as
+\(\Phi_{i\to j}+\Phi_{j\to i}=0\) in the parent boundary account, even though the transfer remains dynamically real
+inside the parent.
+
+This supplies a precise conservation-based coarse-graining operator for conserved quantities:
+
+\[
+\underbrace{\mathcal R_{\rm cons}}_{\substack{\text{change rung}\\\text{without losing conservation}}}
+\left(\{Q_{k,i}\},\{\Phi_{ij}\}\right)
+=
+\left(
+\underbrace{\sum_iQ_{k,i}}_{\text{parent stored identity}},
+\underbrace{\sum_{\partial V_{k+1}}\Phi}_{\text{parent external handover}}
+\right).
+\]
+
+In ARA language, the child accumulation/release cycles are daughter-scale geometry; the parent is their coarse
+envelope. The same transfer can change role when the boundary/rung changes. This is exact conservation mathematics,
+not yet evidence that the same operator governs non-conserved or cross-domain ARA identities.
+
+Setting an ARA composition to \(x=1\) from the two equal sides of continuity is tautological and cannot validate ARA.
+A useful ARA test must predict unresolved child-channel organisation, parent-level behaviour or a transferable
+compression not already guaranteed by conservation.
+
+#### 5.14.1 Whole-identity ridge versus an external counterphase
+
+Dylan connected this rung rule to the main failure mode in the LLM tests. Phase A and Phase B are **relational roles
+at a declared rung**, not permanently elementary objects. A parent-level branch may already be a complete identity
+formed from its own lower-rung pair:
+
+\[
+\underbrace{P^{A}_{k+1}}_{\substack{\text{Phase A at the parent rung}\\\text{a complete child identity}}}
+=
+\underbrace{\mathcal C_k}_{\text{lower-rung closure}}
+\left(
+\underbrace{P^{A|A}_{k}}_{\text{child's internal Phase A}},
+\underbrace{P^{B|A}_{k}}_{\text{child's internal Phase B}},
+\underbrace{J^{\rm int}_{A,k}}_{\text{their relation}}
+\right).
+\]
+
+The parent identity then couples that complete branch to its parent-level complement:
+
+\[
+\underbrace{I_{k+1}}_{\text{parent identity}}
+=
+\underbrace{\mathcal C_{k+1}}_{\text{parent closure}}
+\left(
+\underbrace{P^A_{k+1}}_{\text{measured parent branch}},
+\underbrace{P^B_{k+1}}_{\substack{\text{parent counterphase}\\\text{possibly outside the measurement}}},
+\underbrace{J^{\rm parent}_{k+1}}_{\text{cross-boundary relation}}
+\right).
+\]
+
+Consequently, an internal coordinate \(x^{\rm int}_{A,k}\approx1\) can be a correct whole-child ridge while saying
+nothing decisive about the unmeasured parent composition \(x^{\rm parent}_{A/B,k+1}\). Likewise, measuring the
+complete parent pair near 1.0 is a valid whole-identity reading, but cannot be substituted for either branch's
+movement. If the parent complement lies outside the chosen boundary, label the measurement **open ARA** and retain a
+boundary/Other term.
+
+An off-ridge branch does not by itself prove that its counterphase lies outside the boundary. It may simply be more
+asymmetric at the measured moment. Define the reading with both a boundary and a time window,
+
+\[
+\underbrace{x_{\Omega,\tau}}_{\substack{\text{ARA reading for boundary }\Omega\\\text{and time window }\tau}}
+=
+\frac{2A_{\Omega,\tau}}{A_{\Omega,\tau}+B_{\Omega,\tau}}.
+\]
+
+Then perform two independent closure sweeps:
+
+1. enlarge \(\Omega\) while holding \(\tau\) fixed; return toward the ridge supports an external/spatial
+   counterphase;
+2. enlarge \(\tau\) through the relevant cycle while holding \(\Omega\) fixed; return toward the ridge supports
+   genuine momentary asymmetry within one temporally complete identity;
+3. persistence away from the ridge under both sweeps indicates a stable bias, a changing/nonstationary identity or
+   an incorrect two-branch model—not automatically a hidden partner.
+
+This corrects the language of the LLM thread. The earlier whole-signal 1.0 readings were not necessarily numerical
+artifacts; they were boundary/projection mismatches for a branch-level question. The later ~1.25 readings are a
+different rung/branch projection, not automatically the single globally true value of “the LLM.” Neither reading
+establishes phi, clock behaviour or fractal universality without locating the complementary branch and testing the
+cross-boundary relation.
+
+#### 5.14.2 ARA terminal persistence requires a cross-rung stability condition
+
+Dylan's refined resonant-death proposal has two simultaneous but distinct coordinates. The local motion/history axis
+approaches the Time-side terminal, while a strong Connection-side relation on a holding/confinement axis preserves the
+identity. Without the holding relation, cessation may simply be decay or unravelling into neighbouring identities.
+
+A compact candidate definition is
+
+\[
+\underbrace{\mathrm{RD}_k}_{\substack{\text{persistent resonant-death candidate}\\
+\text{at rung }k}}
+:
+\quad
+\underbrace{x_k\to2^-}_{\text{last-cycle Time-side orientation}},
+\qquad
+\underbrace{\mathcal X_k\to0}_{\text{usable exergy exhausted}},
+\qquad
+\underbrace{\nu_k\to0}_{\text{directed cycles stop}},
+\qquad
+\underbrace{C_k>C_{k,\mathrm{hold}}}_{\text{identity remains connection-held}},
+\qquad
+\underbrace{R_k^-<R_{k,\mathrm{unlock}}}_{\substack{\text{adjacent-rung anti-phase response}\\
+\text{does not reopen the identity}}}.
+\]
+
+Here \(R_k^-\) must be operationally defined from the measured response induced by rungs \(k-1\) and \(k+1\), not
+inferred from their invisibility. If the declared identity exhausts its energy/participation account, TE-ARA may remain
+at \(2\):
+
+\[
+\mathrm{TE}_k=2\frac{E_{\mathrm{id},k}}{E_{\mathrm{total},k}}=2.
+\]
+
+That equation means full surviving identity participation. It does not mean the energy was consumed. “Spent” belongs
+to \(\mathcal X_k\), the usable gradient/exergy. If energy or signal participation leaves the identity, then
+\(E_{\mathrm{id},k}/E_{\mathrm{total},k}\) falls and `Other` rises; that is an unravelling signature rather than a
+full-TE terminal state.
+
+This creates three different frozen-looking appearances:
+
+| ARA interpretation | Limiting position | Required discriminator |
+|---|---:|---|
+| Space/Connection lock | extreme Space-side asymmetry, near the declared 0 pole | high constraint/holding coupling |
+| Frozen ridge projection | composition \(x=1\), but no timed cycle | zero resolved activity; timing ARA undefined |
+| Time-side resonant death | last-cycle \(x\to2^-\) with \(\mathcal X,\nu\to0\) | identity remains held and adjacent-rung anti-phase response stays subthreshold |
+
+This is a testable ARA classification, not a result derived from Maxwell's equations. In established dynamical-systems
+language, nearby modes can destabilise or reactivate an equilibrium, and confinement/restoring coupling can preserve
+a state. ARA's specific 0/1/2 placement and cross-rung interpretation remain to be tested.
+
+Dylan's controlling clarification is that Maxwell does not uniquely supply the state discriminators. The ARA formula
+itself can classify incoming/outgoing, activity, closure and cross-rung response once boundary, rung and time window
+are declared and the necessary observations exist. Maxwell's \(\rho,\mathbf J,\mathbf E,\mathbf B\), derivatives and
+fluxes are the electromagnetic domain's native instruments for evaluating those ARA questions. The extreme
+Space-lock, frozen-ridge and Time-terminal cases above were introduced to audit possible degeneracies of the same
+scale-relative formula, not to add three independent mechanisms.
+
+### 5.15 Poynting energy continuity as boundary flow × matter-handover quadrants
+
+Poynting's theorem is the exact local electromagnetic energy account:
+
+\[
+\underbrace{\frac{\partial u_{EM}}{\partial t}}_{\substack{\text{local field-energy change}\\
+\text{stored identity rises or falls}}}
++
+\underbrace{\nabla\cdot\mathbf S}_{\substack{\text{net electromagnetic energy}\\
+\text{flowing outward through the boundary}}}
+=
+-
+\underbrace{\mathbf J\cdot\mathbf E}_{\substack{\text{field-to-matter handover}\\
+\text{positive when the field does work}}}.
+\]
+
+Equivalently, define
+
+\[
+b:=\nabla\cdot\mathbf S,
+\qquad
+m:=\mathbf J\cdot\mathbf E,
+\qquad
+\dot u_{EM}=-(b+m).
+\]
+
+Dylan's first ARA reading assigns the signs of \(b\) to opposing boundary-flow phases: \(b>0\) is outward/release
+dominance at the declared boundary and \(b<0\) is inward/supply dominance. This is valid if the pole orientation is
+declared. It does not by itself determine whether stored field energy rises, because the matter-handover term can
+oppose and exceed the boundary term.
+
+The two signs give four exact energy-account quadrants:
+
+| Boundary term \(b\) | Matter term \(m\) | Established physical reading | Sign of \(\dot u_{EM}\) |
+|---:|---:|---|---|
+| \(>0\) | \(>0\) | energy leaves the boundary and the field does work on matter | definitely negative |
+| \(<0\) | \(<0\) | energy enters the boundary and matter also energises the field | definitely positive |
+| \(>0\) | \(<0\) | outward field flow competes with matter-to-field supply | depends on \(|b|\) versus \(|m|\) |
+| \(<0\) | \(>0\) | inward field flow competes with field-to-matter work | depends on \(|b|\) versus \(|m|\) |
+
+This can be compressed into nonnegative accumulation/release channels:
+
+\[
+\underbrace{P_{\mathrm{in}}}_{\substack{\text{field-energy accumulation channels}\\
+\text{boundary supply + matter supply}}}
+=
+[-b]_+ + [-m]_+,
+\qquad
+\underbrace{P_{\mathrm{out}}}_{\substack{\text{field-energy release channels}\\
+\text{boundary escape + work on matter}}}
+=
+[b]_+ + [m]_+,
+\]
+
+where \([z]_+=\max(z,0)\). Then
+
+\[
+\dot u_{EM}=P_{\mathrm{in}}-P_{\mathrm{out}},
+\qquad
+\underbrace{x_P}_{\substack{\text{candidate Poynting ARA}\\
+0=\text{in/accumulation},\ 2=\text{out/release}}}
+=
+\frac{2P_{\mathrm{out}}}{P_{\mathrm{in}}+P_{\mathrm{out}}}
+\]
+
+when total activity is nonzero. Thus \(x_P<1\) means field-energy accumulation dominates, \(x_P>1\) means release
+dominates, and \(x_P=1\) means equal total input/output so \(\dot u_{EM}=0\) while throughput may remain active. This
+normalisation is an exact reparameterisation of Poynting's account once the channels and boundary are declared; it is
+not independent evidence for ARA universality.
+
+One correction to the proposed ontology is required at the Maxwell measurement level. \(\mathbf J\) is the current
+density of charged matter, so \(\mathbf J\cdot\mathbf E\) is already the local measurable field–matter coupling term.
+ARA may interpret \(\mathbf J\) as the matter-side electromagnetic interface or anti-phase handover channel, but it
+should not say the field is “not coupled to matter” without proposing and measuring an additional mechanism. Also,
+\(m<0\) proves matter-to-field energy transfer, not necessarily completion of a full quadrant cycle; loop closure
+requires a later return path in time-resolved data.
+
+### 5.16 Light, the invariant speed and the active full-pair ridge
+
+The recent Fable formulation is recoverable in calibrated form. A travelling vacuum plane wave contains coupled
+electric and magnetic components satisfying
+
+\[
+\mathbf B=\frac{1}{c}\hat{\mathbf k}\times\mathbf E,
+\qquad
+u_E=\frac{\varepsilon_0E^2}{2},
+\qquad
+u_B=\frac{B^2}{2\mu_0}=u_E,
+\qquad
+\mathbf S=u_{EM}c\,\hat{\mathbf k}.
+\]
+
+They are not two independent temporal anti-phase waves: they are mutually constrained components of one
+electromagnetic field mode, spatially perpendicular and temporally in phase in this projection. Nevertheless, they
+give a precise instance of the newly separated ARA coordinates. Define
+
+\[
+\underbrace{x_{E/B}}_{\substack{\text{electric/magnetic energy composition}\\
+\text{declared orientation}}}
+=
+\frac{2u_B}{u_E+u_B}.
+\]
+
+For the plane wave, \(x_{E/B}=1\). If those components exhaust the declared wave identity, TE-ARA is \(2\), while
+\(|\mathbf S|>0\) and stable phase show that the state is an **active coherent full-pair ridge**, not frozen balance.
+This is an exact within-projection reconstruction, not new evidence for ARA universality.
+
+There are also two distinct “twos” that must not be flattened together:
+
+1. the coupled \(E/B\) components of a specified propagating mode;
+2. the photon's two physical transverse polarisation/helicity states.
+
+The second pair is organised by the Poincaré sphere and is not automatically the same ARA decomposition as the first.
+
+The closest established home for Dylan's “\(c\) may be a time slice” intuition is Lorentzian null geometry:
+
+\[
+\underbrace{ds^2}_{\text{invariant spacetime interval}}
+=
+\underbrace{c^2dt^2}_{\text{temporal separation in length units}}
+-
+\underbrace{d\mathbf x^2}_{\text{spatial separation}},
+\qquad
+ds^2=0
+\Longrightarrow
+\left|\frac{d\mathbf x}{dt}\right|=c.
+\]
+
+Thus \(c\) is more fundamentally the invariant conversion scale and null-cone slope relating spatial and temporal
+coordinates. Light reveals it because massless electromagnetic excitations follow null trajectories. Lorentz
+transformations mix space and time while preserving \(ds^2\) and the same \(c\). A null path has zero proper-time
+interval, but there is no valid photon rest frame and therefore no physical “photon viewpoint.”
+
+Three fences are required:
+
+- Light is not the established physical opposite of matter. Matter/antimatter is the charge-conjugate pair; photons
+  are electromagnetic field excitations that exchange energy and momentum with matter through absorption, emission,
+  scattering and pair processes. The most coherent ARA complement remains source-bound/reactive electromagnetism
+  versus freely radiative electromagnetism.
+- Light transports energy, momentum and physically encodable information; it is not “strictly information” as a
+  substance. Free vacuum radiation is traversal-heavy, but it retains phase, polarisation, coherence and correlations.
+- \(c\) is not the speed of the Big Bang. The Big Bang is metric expansion rather than an explosion through prior
+  space and has no single expansion velocity. Local causal influence remains bounded by \(c\). Photon energy can
+  change through redshift or interaction, and propagation through matter can be delayed; vacuum \(c\) remains fixed
+  because it is spacetime's invariant causal speed, not because photons never couple or lose energy.
+
+The apparent one-wayness of ordinary outgoing light is also not fundamental to source-free Maxwell dynamics, which
+admits time-reversed propagation. The observed radiation arrow depends on source/boundary and thermodynamic
+conditions. Reflection, absorption and re-emission provide return paths. ARA may test radiative one-wayness as a
+declared open-boundary condition, but should not build it into light's universal identity without further evidence.
+
+#### 5.16.1 The Light child's wave speed versus its larger parent pair
+
+Dylan's correction restores the nested geometry. In the current top-down convention, the proposed rows are
+
+\[
+\begin{array}{c|c}
+\text{Phase A / Space-oriented} & \text{Phase B / Time-oriented}\\ \hline
+\text{Space} & \text{Time}\\
+\text{Connection} & \text{Information}\\
+\text{Dark} & \text{Light}\\
+\text{Matter} & \text{Quantum}
+\end{array}
+\]
+
+as successive proposed child manifestations of the same Phase-A/Phase-B relation. The ordering and physical identity
+of these rows remain ARA hypotheses; quantum behaviour is not an established substance opposite matter, and “Dark”
+must be operationally specified before testing.
+
+At the Light child's own electromagnetic rung, \(c\) is indeed its vacuum wave speed. Source-free Maxwell equations
+give
+
+\[
+\underbrace{\frac{\partial^2\mathbf E}{\partial t^2}-c^2\nabla^2\mathbf E}_{\substack{\text{electric-component wave equation}\\
+\text{propagation speed }c}}=0,
+\qquad
+\underbrace{\frac{\partial^2\mathbf B}{\partial t^2}-c^2\nabla^2\mathbf B}_{\substack{\text{magnetic-component wave equation}\\
+\text{propagation speed }c}}=0.
+\]
+
+This is compatible with the higher-rung statement that \(c\) is the Lorentzian null-cone conversion scale. The same
+constant appears as the local electromagnetic wave speed and the observer-invariant causal speed. That identity is
+established physics, not by itself evidence for ARA fractality.
+
+The larger ARA question is different. Let the Light-containing parent be
+
+\[
+\underbrace{\mathcal I_{k+1}}_{\substack{\text{larger identity containing Light}\\
+\text{parent-scale closure}}}
+=
+\mathcal C_{k+1}
+\left(
+\underbrace{P^A_{k+1}}_{\substack{\text{declared coarse Phase A}\\
+\text{Light's counterpart}}},
+\underbrace{P^B_{k+1}}_{\substack{\text{declared coarse Phase B}\\
+\text{Light/radiative sector}}},
+\underbrace{J^{AB}_{k+1}}_{\text{their coupling}}
+\right).
+\]
+
+Here \(c\) is a dynamical parameter of the Light branch, not the parent's ARA position. A parent composition requires
+commensurable measured weights,
+
+\[
+x_{A/B,k+1}=\frac{2W^B_{k+1}}{W^A_{k+1}+W^B_{k+1}},
+\]
+
+plus phase, flux, activity and boundary metadata.
+
+The phrase “large, second-degree unfiltered waves” is best translated mathematically as **latent parent basis modes
+before observer projection/coarse-graining**. A physical test cannot assume access to them directly; it must recover
+them through a fixed decomposition of measured data.
+
+Two candidate counterparts must remain separate:
+
+1. **Established electromagnetic test:** source-bound/reactive field energy as Phase A versus freely radiative
+   Poynting transfer as Phase B. Both obey causal changes limited by \(c\); they differ in storage/return versus net
+   outward transport, not in a simple “stationary versus speed-\(c\)” contrast.
+2. **Cosmic ARA hypothesis:** Dark versus Light as a larger anti-phase pair. This is not established by Maxwell and
+   requires a specific Dark observable, common accounting units and a measured coupling law before an ARA coordinate
+   can be evaluated.
+
+Thus the corrected hierarchy does not ask Light alone to reveal its own parent pole. It first measures the Light child
+at its local rung, then reconstructs the larger pair in which the complete Light sector is one branch.
+
+#### 5.16.2 A perpendicular Dark branch could be indirect rather than directly visible
+
+Dylan's refinement is that the proposed Dark branch may be perpendicular to the observer's Light/wave projection,
+somewhat like a hidden flip-side axis rather than a second signal available to the same detector. "Perpendicular"
+must be typed carefully. It could mean (a) an ordinary spatial direction, (b) orthogonality in a state/mode space, or
+(c) absence from a particular observation channel. The latter two are the relevant possibilities here.
+
+Let \(L\) denote the Light-accessible branch, \(D\) the proposed hidden Dark branch and \(\Pi_L\) the observer's
+Light-coupled measurement projection. The minimal hidden-sector statement is
+
+\[
+\underbrace{\Pi_L D}_{\substack{\text{Dark signal in the direct}\\
+\text{Light-coupled observation channel}}}=0,
+\qquad
+\underbrace{K_{DL}}_{\substack{\text{coupling from Dark to}\\
+\text{an accessible response}}}\ne0.
+\]
+
+Plainly: Dark need not be directly seen in the Light channel, but it must affect something that can be measured. Its
+weight can then be inferred through the shared interface quantity -- for example gravitational potential, lensing,
+dynamical acceleration or a declared energy-density account -- rather than by converting Dark into brightness. A
+common unit is required at that interface, not necessarily in the original sensory channels.
+
+Ordinary human darkness supplies Dylan's concrete analogy. When visible-light input falls below the visual system's
+useful range, an object can satisfy \(\Pi_{vision}X\approx0\) while remaining available through other couplings:
+
+\[
+\underbrace{\Pi_{vision}X}_{\substack{\text{object through}\
+\text{visible-light coupling}}}\approx0,
+\qquad
+\underbrace{(\Pi_{sound}X,\Pi_{touch}X,\Pi_{thermal}X,\ldots)}_{\substack{\text{same identity through}\
+\text{other sensory couplings}}}\ne\mathbf0.
+\]
+
+The identity is channel-hidden, not absent. This clarifies the ARA proposal: a Dark branch could be inaccessible to
+the Light-coupled channel yet inferable from another wave or interaction channel. Ordinary darkness itself is not
+evidence for a distinct Dark field -- physically it is insufficient visible light -- but it is a precise model of
+observer-relative coupling and multi-channel reconstruction.
+
+If both \(\Pi_LD=0\) and \(K_{DL}=0\), the proposed branch has no observable consequence and cannot be distinguished
+from absence. A testable ARA Dark/Light claim therefore must predict a back-reaction, conservation residual,
+cross-correlation, phase effect or other accessible consequence before inspecting the data.
+
+The electromagnetic analogy has a limit. In a travelling plane wave, \(\mathbf E\), \(\mathbf B\) and propagation
+direction \(\mathbf k\) are spatially perpendicular, but \(\mathbf E\) and \(\mathbf B\) are both measurable, are
+in phase in that projection and are components of one electromagnetic field. Standard dark matter is not known to
+be a missing spatially perpendicular electromagnetic component. The defensible analogy is therefore an orthogonal
+or hidden **observation/state-space channel**, not a literal fourth direction copied from the \(E/B/k\) triad.
+
+#### 5.16.3 Alternating Space-Time coupling and the proposed double helix
+
+Dylan's next refinement is a selection rule. Humans are proposed as Space-oriented identities whose lived experience
+is assembled through the opposing Time/Information child: a Space-side node does not directly perceive the next
+Space-side node beneath it, but reaches it through the intervening Time-side transfer. With the direction and rung
+index declared, this is an **alternating bipartite coupling ladder**:
+
+\[
+\underbrace{\binom{S_{k+1}}{T_{k+1}}}_{\substack{\text{next-rung Space and Time}\\
+\text{components}}}
+=
+\underbrace{\begin{pmatrix}0&K_{T\to S}\\K_{S\to T}&0\end{pmatrix}}_{\substack{\text{off-diagonal coupling only}\\
+\text{ARA: each phase reaches its anti-phase child}}}
+\underbrace{\binom{S_k}{T_k}}_{\substack{\text{current-rung Space and Time}\\
+\text{components}}}.
+\]
+
+The zero diagonal states the strong hypothesis: no immediate \(S\to S\) or \(T\to T\) transfer at the selected
+adjacent rung. Two applications return to the original class through the opposite mediator:
+
+\[
+M^2=\begin{pmatrix}K_{T\to S}K_{S\to T}&0\\0&K_{S\to T}K_{T\to S}\end{pmatrix}.
+\]
+
+Thus a same-side influence can exist, but it appears as a two-step \(S\to T\to S\) or \(T\to S\to T\) path. This
+captures Dylan's claim that systems maintain themselves by repeated phase/anti-phase handover.
+
+Alternation alone produces a back-and-forth oscillation or zigzag. It becomes a double helix only when the coupled
+pair also progresses along a third coordinate -- time, rung, path length or scale -- while its transverse phase
+rotates. One compact representation is
+
+\[
+\gamma_S(\theta)=(R\cos\theta,R\sin\theta,p\theta),
+\qquad
+\gamma_T(\theta)=(-R\cos\theta,-R\sin\theta,p\theta).
+\]
+
+The third coordinate here is not necessarily a third independent substance. It can be the accumulated relation or
+progression of the two poles, matching the proposed "three hiding in two" interpretation.
+
+Established physics supports the narrower statement that human perception is mediated by interactions and arrives
+with finite signal-processing delay; it does not establish humans as Space waves, experience as a Time wave or a
+universal prohibition on adjacent same-class coupling. The proposed selection rule is testable: after variables are
+classified before analysis, an ARA system should be better predicted by an off-diagonal/bipartite model than by an
+unrestricted coupling model, and same-class effects should appear predominantly at two-step lags through the declared
+opposite class.
+
+#### 5.16.4 Phase of matter as Connection-motion competition; catalysis as pathway handover
+
+Dylan proposed solids as Space/Connection-oriented, gases and plasmas as Time/motion-oriented, and liquids near the
+mixing ridge. The established anchor is the competition between cohesive/interaction energy and thermal kinetic
+energy. A candidate ARA composition is
+
+\[
+\underbrace{x_{motion/connection}}_{\substack{\text{ARA phase-state coordinate}\\
+\text{0 = connection; 2 = motion}}}
+=
+\frac{2\underbrace{E_{motion}}_{\substack{\text{thermal/translational}\\
+\text{motion scale}}}}
+{\underbrace{E_{connection}}_{\substack{\text{cohesive/binding}\\
+\text{interaction scale}}}+E_{motion}}.
+\]
+
+This gives the qualitative ordering Dylan saw: connection-dominant states are solid-like; comparable motion and
+cohesion can be liquid-like; motion-dominant states are gas-like. It is not a universal phase classifier by itself.
+Density, pressure, entropy, molecular shape and crystalline order also matter, and a phase boundary need not occur at
+exactly \(x=1\). The proposed liquid ridge is therefore a testable regional tendency, not an identity.
+
+Plasma needs a second qualification. Ionisation often accompanies high temperature and large traversal, but plasmas
+also support long-range collective electromagnetic organisation. Their Coulomb coupling parameter is approximately
+
+\[
+\Gamma_p=\frac{q^2/(4\pi\varepsilon_0 a)}{k_BT},
+\]
+
+the ratio of characteristic electrostatic interaction energy to thermal energy. Weakly coupled plasma
+\((\Gamma_p\ll1)\) is motion-dominant and gas-like; strongly coupled plasma can behave liquid-like or even
+solid-like. Thus "plasma is Time-side" may describe one regime, not the complete phase.
+
+Catalysis gives a particularly clean ARA handover mapping. A catalyst supplies an alternative reaction pathway with
+a smaller activation free-energy barrier:
+
+\[
+\underbrace{A+B+C}_{\substack{\text{reactants plus catalyst}\\
+\text{approach/accumulation}}}
+\longrightarrow
+\underbrace{[A\cdots C\cdots B]^\ddagger}_{\substack{\text{temporary coupled complex}\\
+\text{transition-state handover}}}
+\longrightarrow
+\underbrace{P+C}_{\substack{\text{product release}\\
+\text{catalyst recovered}}},
+\qquad
+\Delta G^\ddagger_{cat}<\Delta G^\ddagger_{uncat}.
+\]
+
+A solid catalyst receiving mobile gas reactants is a literal example of Dylan's proposed Space node mediating two
+Time-oriented streams: adsorption accumulates the reactants, surface connection reorganises their bonds, and
+desorption releases the product. This is not universal because homogeneous and enzyme catalysts need not be solid.
+The broader rule is that the catalyst introduces a temporary coupling/pathway, not necessarily a Space-class object.
+
+The Sabatier principle supplies an established ridge-like constraint: catalytic intermediates should bind neither too
+weakly to accumulate nor too strongly to release. The optimum is system-specific and is not evidence for a universal
+ARA value of exactly \(1\) or \(\phi\). Catalysts accelerate both forward and reverse approaches to equilibrium and
+normally do not change the equilibrium position or inject the reaction's net energy.
+
+#### 5.16.5 Two-step same-side consumption, logarithmic rungs and non-overlapping loops
+
+Dylan corrected the preceding selection rule: a Space-oriented wave may consume or close with another Space-oriented
+wave, but the same-side event requires a double passage through the opposite child. The zero diagonal in the one-step
+model therefore means **no immediate same-class coupling at the declared grain**, not no same-class interaction at
+all. With \(M\) the off-diagonal Space-Time coupling operator,
+
+\[
+\underbrace{S_{n+2}}_{\substack{\text{same-side result}\\
+\text{after one complete loop}}}
+=
+\underbrace{K_{T\to S}K_{S\to T}}_{\substack{\text{two opposite-child handovers}\\
+\text{effective second-order coupling}}}
+\underbrace{S_n}_{\text{starting Space-side identity}}.
+\]
+
+"Consume" must be operationally typed before testing: absorption, binding, merger, phase locking, dominance and
+coarse-grained enclosure have different conservation laws. If the relevant extensive quantity is energy and two
+equal-energy identities close into one parent with \(E_{new}=2E_k\), an energy-octave coordinate gives
+
+\[
+\underbrace{\Delta k}_{\text{logarithmic rung jump}}
+=
+\log_2\!\left(\frac{E_{new}}{E_k}\right)=1.
+\]
+
+This exact one-rung result depends on declaring energy and base two. Doubling wave amplitude is different: in a
+linear mode energy or intensity is normally proportional to amplitude squared, so a coherent amplitude doubling can
+produce four times the intensity. Frequency doubling, energy doubling and amplitude doubling must not be conflated.
+
+For two coherent scalar contributions in the same measured mode, their phase-dependent intensity is
+
+\[
+\underbrace{I_{12}}_{\text{observed combined mode}}
+=I_1+I_2+2\sqrt{I_1I_2}\cos\delta,
+\]
+
+where \(\delta\) is their relative phase. For equal inputs, the phase term determines whether the measured mode
+exceeds, reaches or falls below the simple \(2I\) sum. Spatially orthogonal vector modes have a zero interference
+dot-product; temporal quadrature \((\delta=\pi/2)\) also makes the scalar cross term zero; anti-phase
+\((\delta=\pi)\) cancels the ideal same detected field mode. Such cancellation does not annihilate globally conserved
+energy: it can redistribute energy into space, standing-wave structure, sources or other channels.
+
+Dylan's two circular actions with a non-repeating Phi handover can be represented by a rotation map
+
+\[
+\theta_{j+1}=\theta_j+2\pi\alpha\pmod{2\pi}.
+\]
+
+Any irrational \(\alpha\) prevents exact periodic overlap in the ideal map. A golden rotation is exceptionally
+resistant to rational approximation and is a legitimate KAM-related candidate for distributing successive handovers,
+but ARA must declare whether its \(0.38/1.62\) landmark represents phase fraction, ARA position or another coordinate.
+The data must choose it against other irrational and rational offsets; non-overlap alone does not uniquely imply
+\(\phi\).
+
+The proposed geometry now has four typed elements: two-step same-class closure, logarithmic rung change, a relative
+phase/rotation controlling overlap, and identity-dependent drift between perpendicular, quadrature and anti-phase
+limits. A double helix appears when the two rotating loops are plotted along the accumulated rung/path coordinate.
+
+#### 5.16.6 Light as an information-bearing matter-to-matter channel; Dark outside the optical projection
+
+Dylan's next proposal locates human perception in the Light-to-matter handover. A material source or object changes a
+light field through emission, reflection, scattering or absorption; retinal matter absorbs part of that field; neural
+dynamics reconstruct an experienced identity:
+
+\[
+\underbrace{M_{object}}_{\substack{\text{matter identity}\\
+\text{Space-oriented in ARA}}}
+\xrightarrow{\text{emission/scattering}}
+\underbrace{L}_{\substack{\text{electromagnetic carrier}\\
+\text{Time/Information-oriented in ARA}}}
+\xrightarrow{\text{absorption}}
+\underbrace{M_{retina/brain}}_{\substack{\text{matter receiver}\\
+\text{updated physical state}}}
+\longrightarrow
+\underbrace{Y}_{\text{neural percept}}.
+\]
+
+This is a strong example of the proposed \(S\to T\to S\) handover. The physics wording must remain "light carries
+information," not "light is information." Photons also carry energy and momentum; information is the correlation or
+distinguishability encoded in their frequency, phase, polarisation, direction and arrival pattern.
+
+Light can reveal lower-scale degrees of freedom in matter, but only those to which the selected electromagnetic probe
+couples. Spectroscopy uses \(E_\gamma=h\nu=hc/\lambda\) to infer electronic, vibrational, rotational and other energy
+differences; scattering and imaging use wavelength and momentum transfer to determine accessible spatial structure.
+Shorter wavelengths can probe finer scales, while sufficiently energetic or intense probes alter, ionise or damage
+the identity being measured. "Rung underneath" should therefore mean a declared probe scale and response channel,
+not unrestricted access to the object's complete interior.
+
+Human vision and physical detectors also have finite dynamic range. A generic saturating response can be written
+
+\[
+\underbrace{R(F)}_{\substack{\text{retinal/detector response}\\
+\text{to photon flux }F}}
+=
+R_{max}\frac{F}{F+F_{1/2}},
+\]
+
+so additional light eventually adds little measured response. At still larger dose, photochemistry, heating or
+ionisation can deform or destroy the receiver. This shares an accumulation-capacity-collapse geometry with examples
+such as alcohol disrupting bacteria, but the common shape does not establish that Light is universally one rung below
+matter; dose, photon energy, absorption cross-section and repair dynamics determine the outcome.
+
+Three different uses of "dark" must not be collapsed:
+
+1. **Ordinary visual darkness:** too few visible photons reach the eye. Darkness is measured as a deficit relative to
+   an expected or useful optical signal.
+2. **Optically dark/absorbing matter:** an object can be inferred by the light it blocks, absorbs or re-emits.
+3. **Standard dark matter:** it is not primarily detected as an optical shadow. Its existence and distribution are
+   inferred from gravitational dynamics, lensing and structure; it is approximately absent from the electromagnetic
+   observation channel while remaining present in the gravitational channel.
+
+Thus "we see Dark by its absence" is exact for ordinary darkness and can apply to an absorber only when the expected
+unblocked signal is known. Absence alone is ambiguous. For the proposed cosmic branch the stronger operational form
+remains \(\Pi_{EM}D\approx0\) together with \(\Pi_{grav}D\ne0\): Dark is perpendicular or weakly coupled to the
+Light-to-matter transfer, but has a positive measurable consequence in another channel.
+
+#### 5.16.7 Dark parent candidate: gravitational convergence versus vacuum-like expansion
+
+Dylan proposed that Dark may itself contain Gravity and Vacuum as opposing ARA poles. The literal labels mix
+categories: gravity is a geometric interaction/dynamical effect, whereas vacuum describes a stress-energy condition
+or absence of ordinary matter. General relativity also permits gravity in vacuum: the exterior of a gravitating body
+and propagating gravitational waves can have nonzero spacetime curvature where local matter stress-energy is zero.
+
+The physically cleaner pair is therefore **gravitational convergence/binding** versus **vacuum-like
+expansion/dilution**. In homogeneous cosmology, these effects occur with opposing signs in the acceleration equation:
+
+\[
+\underbrace{\frac{\ddot a}{a}}_{\substack{\text{cosmic scale-factor acceleration}\\
+\text{positive = accelerating expansion}}}
+=
+-\underbrace{\frac{4\pi G}{3}\left(\rho+\frac{3p}{c^2}\right)}_{\substack{A_G:\ \text{matter/pressure gravitational term}\\
+\text{convergence or deceleration in the stated regime}}}
++\underbrace{\frac{\Lambda c^2}{3}}_{\substack{A_V:\ \text{vacuum-like cosmological term}\\
+\text{accelerating expansion for }\Lambda>0}}.
+\]
+
+When \(A_G,A_V\ge0\), the exact ARA normalisation is
+
+\[
+\underbrace{x_{V/G}}_{\substack{\text{0 = convergence dominated}\\
+\text{2 = vacuum-expansion dominated}}}
+=
+\frac{2A_V}{A_G+A_V}.
+\]
+
+At \(x_{V/G}=1\), the two contributions to \(\ddot a/a\) balance and cosmic expansion changes between deceleration
+and acceleration. This is a cancellation ridge for the declared acceleration account, not a state of zero density,
+zero expansion or no gravity. Because matter density dilutes as the universe expands while a cosmological constant
+remains constant, the same universe can traverse this coordinate through cosmic time.
+
+In the standard late-time interpretation, clustering dark matter contributes mainly to the convergence side while a
+cosmological-constant-like dark energy contributes to the expansion side. Calling both branches an internal
+"Dark-sector ARA" is a coherent proposed ontology. It is not established that dark energy is literally vacuum energy,
+nor that dark matter and dark energy are phase/anti-phase waves. Locally, the cosmological term is normally negligible
+and the pair is not an appropriate description of every gravitational system.
+
+This normalisation recovers a known general-relativistic balance and adds no new prediction by itself. It supplies a
+clean baseline for the ARA dark-sector work: any new Phi, diagonal-rung or \(3.5\) claim should predict an observable
+beyond the acceleration equation, such as a fixed transition, growth or lensing relation, before being fitted.
+
+Dylan identifies this convergence/expansion opposition as the geometric route by which he originally reached the ARA
+Dark Sector method, now expressed with clearer variables and hierarchy. That provenance should be retained: the broad
+direction was not invented from the acceleration equation after this conversation. The equation nevertheless grounds
+only the opposing convergence and expansion terms. It does not independently derive the method's numerical \(\phi\),
+\(2\) or diagonal \(3.5\) landmarks; those remain separate ARA hypotheses requiring frozen observational tests.
+
+#### 5.16.8 Dark as path geometry perpendicular to Light as traversal
+
+Dylan refined the parent pairing as Dark/Phase A versus Light/Phase B. The strongest established translation is not
+that gravity attracts literal nothingness, but that a gravitational field determines the spacetime geometry along
+which Light propagates. For a geometric-optics light ray with tangent \(k^\mu\),
+
+\[
+\underbrace{k^\nu\nabla_\nu k^\mu}_{\substack{\text{change of the Light ray direction}\\
+\text{under spacetime's geometric connection}}}=0.
+\]
+
+The ray follows a null geodesic. The covariant derivative contains the metric/connection determined by gravitational
+geometry. In the proposed ARA language, Light is the Information/transfer trajectory while Dark is the less directly
+visible path/constraint geometry. "Perpendicular" here describes different functional channels -- carrier versus
+geometry -- not a demonstrated right angle in ordinary space.
+
+This produces a measurable handover:
+
+\[
+\underbrace{D}_{\substack{\text{unseen mass-energy or}\\
+\text{gravitational geometry}}}
+\longrightarrow
+\underbrace{g_{\mu\nu}}_{\text{curved path structure}}
+\longrightarrow
+\underbrace{k^\mu}_{\text{Light trajectory}}
+\longrightarrow
+\underbrace{Y}_{\substack{\text{lensing, delay, redshift}\\
+\text{or image deformation}}}.
+\]
+
+Thus a Dark contribution need not absorb Light or create a black patch. Standard dark matter is approximately
+transparent electromagnetically; it is detected through the positive deformation of trajectories and dynamics.
+Missing light is evidence only when an unblocked source signal was independently expected. Otherwise the same absence
+can result from no source, ordinary absorption, occlusion, distance or detector limits.
+
+"Vacuum" must also be typed:
+
+1. A classical matter vacuum has local \(T_{\mu\nu}=0\), yet it may contain gravitational curvature determined by
+   distant sources or gravitational waves.
+2. Flat Minkowski vacuum is the special low-curvature geometry, not every vacuum region.
+3. Quantum vacuum is the ground state of fields, not literal absence of all physical structure.
+4. Vacuum-like energy represented by \(\Lambda\) gravitates and, for positive \(\Lambda\), drives accelerated
+   expansion rather than ordinary attraction.
+
+Consequently two possible ARA axes must remain distinct. Flat/open geometry versus strongly curved/bound geometry is a
+baseline-to-structure magnitude axis. Gravitational convergence versus vacuum-energy expansion is the signed opposing
+cosmological pair from Section 5.16.7. Calling both simply "Gravity versus Vacuum" would flatten these different
+relations.
+
+This geometric-channel crosswalk is established general relativity and not a novel ARA prediction. It does, however,
+supply operational observables for the proposed Dark/Light parent relation: lensing shear and convergence, Shapiro
+delay, gravitational redshift and trajectory deflection. A new ARA result must predict their organisation beyond the
+GR solution used to calculate them.
+
+#### 5.16.9 Curved phase quadrants and 2:1 triadic closure
+
+Dylan clarified that "perpendicular" is a shorthand projection of a curved quadrant: the phase landmarks lie around
+a circle, and in the full construction around a sphere. The appropriate local coordinate is therefore angular or
+geodesic separation, not an assertion that the complete identities are straight Euclidean vectors at exactly
+\(90^\circ\). For a circular section, write the relative phase as
+
+\[
+\underbrace{\Delta\theta_{ij}}_{\substack{\text{arc/phase separation}\\
+\text{between identities }i,j}}
+=
+\operatorname{wrap}(\theta_j-\theta_i),
+\qquad
+\underbrace{J_{ij}(\Delta\theta_{ij})}_{\substack{\text{coupling strength and sign}\\
+\text{across the curved gradient}}}.
+\]
+
+Perpendicular, quadrature and anti-phase become landmarks on this phase coordinate; drift and finer identity determine
+the intermediate coupling. A sphere requires the corresponding great-circle/geodesic relation plus the declared
+projection seen by the observer.
+
+Dylan also proposed that some closures use two Phase-B identities meeting one Phase-A identity, with water as the
+physical example. This cannot be represented completely by the earlier \(2\times2\) one-step matrix. It requires a
+multi-node coupling or **hyperedge**:
+
+\[
+\underbrace{I}_{\substack{\text{new closed identity}\\
+\text{ARA parent/child node}}}
+=
+\underbrace{\mathcal C_{1:2}}_{\substack{\text{one-A/two-B}\\
+\text{triadic closure operator}}}
+\left(
+\underbrace{A}_{\text{Phase-A node}},
+\underbrace{B_1,B_2}_{\text{two Phase-B nodes}},
+\underbrace{J_{AB_1},J_{AB_2},J_{B_1B_2}}_{\substack{\text{bond/coupling strengths}\\
+\text{and their relational geometry}}}
+\right).
+\]
+
+There are still only two **classes**, A and B, but three participating **nodes**. This is a precise version of "three
+hiding in two." The relation between \(B_1\) and \(B_2\), including their angle, is part of the resulting identity
+even when they do not possess a direct bond.
+
+Water provides an established vector-geometry example. In the standard molecular picture, one oxygen is bonded to two
+hydrogens with an H-O-H angle of about \(104.5^\circ\). The two O-H bond-dipole vectors combine as
+
+\[
+\underbrace{\mathbf p_{H_2O}}_{\text{water's resultant molecular dipole}}
+=
+\underbrace{\mathbf p_{OH,1}+\mathbf p_{OH,2}}_{\substack{\text{two similar bond contributions}\\
+\text{joined through the central oxygen}}},
+\qquad
+|\mathbf p_{H_2O}|=2p_{OH}\cos\!\left(\frac{\theta_{HOH}}{2}\right).
+\]
+
+If the equal bond contributions were linear and opposite \((\theta=180^\circ)\), their resultant dipole would cancel.
+Because water is bent, their relation produces a nonzero third/resultant identity. A simplified electron-domain model
+also assigns four regions around oxygen -- two bonding pairs and two lone pairs -- whose repulsion contributes to the
+bent geometry. This is a useful ARA analogy for a four-quadrant decompression, not evidence that molecular water was
+derived from ARA.
+
+Assigning oxygen to Phase A and the two hydrogens to Phase B is an ARA hypothesis unless the classification rule is
+declared independently, for example from charge density, electronegativity, electron accumulation/depletion or another
+measured pole. Stoichiometric \(1{:}2\) closure alone is common in chemistry and does not establish the universal ARA
+geometry. A discriminating test must predict bond angle, dipole or another molecular property beyond established
+valence and quantum-chemistry baselines.
+
+The archived lineage confirms that this is a decomposition of Dylan's earlier work. Test 115 already described
+water's two H nodes as equivalent constraints on one central O node along a 104.5-degree circle geometry; Tests 111,
+142, 143 and 163 separately introduced geodesic deviation, circular translation in log space, products of local rung
+links and great-circle ARA distances. The recovery strengthens provenance, not the historical scores. Several Test 115
+passes were hard-coded or textbook identities; Test 116's universal molecular-angle claim failed; Test 116b is a
+constructed packing model; and Test 117's claimed constant unequal-circle gap is false. Full audit:
+`analysis/water_atmosphere/WATER_GEODESIC_LOG_RUNG_RECOVERY_AUDIT_2026-07-13.md`.
+
+### 5.14 Lorentz force, ARA channel geometry and the failed naïve rung operator
+
+The Lorentz-force continuation was tested on 14 July 2026 using the official openPMD example repository's PIConGPU
+electromagnetic snapshot. At the particle rung,
+
+\[
+\mathbf f_E=q\mathbf E,
+\qquad
+\mathbf f_B=q(\mathbf v\times\mathbf B),
+\qquad
+x_F=\frac{2|\mathbf f_B|}{|\mathbf f_E|+|\mathbf f_B|}.
+\]
+
+Retaining (S_F=|\mathbf f_E|+|\mathbf f_B|) and (c_F=\cos\angle(\mathbf f_E,\mathbf f_B)) gives the exact
+reconstruction
+
+\[
+|\mathbf f|
+=\frac{S_F}{2}
+\sqrt{(2-x_F)^2+x_F^2+2x_F(2-x_F)c_F}.
+\]
+
+Across 225,449 electrons and 225,280 ions, the relative reconstruction error was approximately
+(1.34\times10^{-16}). The magnetic channel's work (\mathbf v\cdot\mathbf f_B) was numerically zero, and total
+power equalled electric-channel power. This is a faithful ARA coordinate embedding of established Lorentz geometry,
+not an independent derivation.
+
+The proposed simple rung-up operation did not survive. Particle-first force aggregation versus field-first
+(
+ho\mathbf E+\mathbf J\times\mathbf B) gave total correlation (0.477), NRMSE (0.888), and median angular error
+(61.7^\circ). A quadratic-deposition sensitivity recovered the stored charge densities almost exactly but still
+gave force correlation (0.405). The failure therefore identifies the standard subgrid terms
+
+\[
+\langle\rho'\mathbf E'\rangle,
+\qquad
+\langle\mathbf J'\times\mathbf B'\rangle,
+\]
+
+which record correlations discarded by separate parent averages. In ARA language, these relations are a precise
+candidate for `Other` at a scale crossing. Adding the complete covariance back is established closure bookkeeping;
+the open ARA test is whether a smaller frozen coordinate set predicts it on held-out data better than ordinary
+closures. See `analysis/electromagnetism/MX4_LORENTZ_ARA_DATA_REPORT.md`.
+
+#### 5.14.1 Child identities, TE-ARA force participation and a partial first-moment closure
+
+MX5 was frozen and run as a post-MX4 development follow-up on the same hash-locked PIConGPU snapshot. It separated
+three questions that must not be conflated. First, retaining each particle's ARA channel envelope, A/B coordinate and
+two vector directions before deposition reconstructed the child-first grid force at (3.99\times10^{-15}) relative
+error. Second, adding the exact `Other` defined by child minus flat parent reconstructed the target at
+(9.44\times10^{-17}). Both are identity checks rather than predictions.
+
+The TE-ARA-style diagnostic was explicitly typed as dimensionless force/activity participation rather than energy:
+
+\[
+T_g^F=\frac{2|\mathbf F_g^{\rm child}|}
+{V_g^{-1}\sum_i W_{ig}w_i(|\mathbf f_{E,i}|+|\mathbf f_{B,i}|)}.
+\]
+
+The combined median was only (0.0383). A post-freeze descriptive species drill (not an outcome gate) then found
+electron and ion internal medians of (1.2175) and (1.1449).
+After each species was first aggregated as an identity, their magnitude coordinate was (1.00023), their median
+angle was (177.55^\circ), and only (0.07184) of the normalised pair coherence survived. This makes the
+whole-versus-child ridge distinction concrete: two active species-level force identities are almost equal and
+opposite at the measured parent grain. That balance is established plasma behaviour; the contribution of TE-ARA is
+the transparent multiscale bookkeeping, not discovery of a new force.
+
+The exact Parent/Other coordinate
+
+\[
+x_O=\frac{2|\mathbf O|}{|\mathbf F^{\rm flat}|+|\mathbf O|}
+\]
+
+had median (1.3559), and `Other` exceeded the flat-parent magnitude in (78.99\%\) of active cells. This is a
+magnitude coordinate, not an energy fraction, because the vectors can oppose.
+
+The genuinely compressed version retained only charge/current first positional moments and local field gradients.
+Without fitting, it improved total force correlation from (0.4771) to (0.6045), NRMSE from (0.8878) to
+(0.8019), and median angular error from (61.68^\circ) to (48.47^\circ). Both spatial halves gave essentially
+the same correlation. It therefore passed the frozen `partial compact recovery` rule but failed the stronger gates
+(r\ge0.70), NRMSE (le0.70), angle (le45^\circ). The correction itself correlated only (0.4310) with exact
+`Other`, so the child web remains incompletely compressed.
+
+This result supports ARA/TE-ARA as useful typed multiscale bookkeeping and confirms that the omitted child relation is
+non-trivial. It does not establish an ARA-specific new law: the exact versions are identities and the compressed
+version is established first-order Taylor/moment closure written in ARA terms. Full packet:
+`analysis/electromagnetism/MX5_CHILD_ARA_TEARA_CLOSURE_REPORT.md`.
+
+The recursion is not restricted to the one displayed macro-particle/species/cell direction. At any resolved node,
+the children, their pairwise or higher-order couplings, and the current `Other` can each be opened as another ARA
+problem. Plasma permits several candidate decompositions -- species, velocity populations, phase-space structures,
+spatial regions, spectral modes, field/force channels and temporal descendants -- but only where the data define
+those identities. In this PIC file, the records are weighted macro-particles rather than individually resolved
+physical particles, and the single snapshot sets a hard observational floor. Recursion below that floor would be a
+model assumption, not a measured MX5 result. The present result therefore supports a branching, data-limited
+multiscale operator; mathematical fractality still requires a transferable scaling law across independently resolved
+grains.
+
+#### 5.14.2 Maxwell stress, paired sign reversal and the exact cross-relation axis
+
+MX6 froze and tested the E/B child-parent reading on all 32,768 vector-field cells of the same public PIConGPU
+snapshot. The Poynting vector and Maxwell stress tensor are
+
+\[
+\mathbf S=\frac1{\mu_0}\mathbf E\times\mathbf B,
+\qquad
+T_{ij}=\epsilon_0\left(E_iE_j-\frac12\delta_{ij}E^2\right)
++\frac1{\mu_0}\left(B_iB_j-\frac12\delta_{ij}B^2\right).
+\]
+
+Under the joint half-cycle intervention \((\mathbf E,\mathbf B)\to(-\mathbf E,-\mathbf B)\), both quantities were
+unchanged at reported relative L2 error `0.0`. Flipping E only or B only also preserved the separately quadratic
+stress, but reversed \(\mathbf S\), again at `0.0` error. This gives the ARA map a precise established form: the two
+signed child orientations must swap together for their directed cross-relation to persist.
+
+Let \(\mathbf n=\mathbf E\times\mathbf B\). Since \(\mathbf E\cdot\mathbf n=\mathbf B\cdot\mathbf n=0\),
+
+\[
+\mathbf T\mathbf n
+=-\left(\frac{\epsilon_0E^2}{2}+\frac{B^2}{2\mu_0}\right)\mathbf n
+=-u\mathbf n.
+\]
+
+Thus the informative third supplied by E crossed with B is exactly a Maxwell-stress eigen-direction wherever it is
+nonzero. The maximum numerical angular discrepancy over the public grid was `2.4148e-6 deg`. This identity is more
+general than a plane wave: E and B need not be perpendicular. At the primary frozen null-field rule, 686 cells
+(`2.0935%`) were near perpendicular and impedance balanced; the other cells retained the general stress/cross-product
+relation without occupying that special radiative sector.
+
+Median normalized off-diagonal stress content in the fixed lab axes was `0.68661` total, `0.73642` electric and
+`0.49774` magnetic. A fixed rotation preserved tensor covariance at `2.9508e-16` relative error and eigenvalues at
+`4.0388e-16`, preventing coordinate-dependent shear from being mistaken for a new invariant.
+
+These are established Maxwell identities numerically recovered on public data. They validate the implementation and
+show that the ARA child/relation/parent language can preserve a nontrivial tensor geometry; they do not independently
+confirm ARA. The source has one snapshot, so no actual temporal half-cycle was observed. Full packet:
+`analysis/electromagnetism/MX6_MAXWELL_STRESS_PHASE_FLIP_REPORT.md`.
+
+#### 5.14.3 Four phase routes, Information³ and the amplitude-conditioned pyramid
+
+MX7 followed Dylan's correction that a positive or negative resultant still flattens two distinct routes. For one
+electric component, let (s_q) be charge sign, (s_E) field sign, (r=s_qs_E), (m=|E|), and (Q) deposited
+absolute-charge activity. The exact particle-first target is
+
+\[
+F^{\rm child}=Q\langle mr\rangle.
+\]
+
+The four routes are `AA`, `AB`, `BA`, and `BB`, with resultant signs (+,-,-,+). MX7 froze three representations
+before calculation: two separate sign marginals, their joint four-route relation, and a route-conditioned amplitude
+ceiling. The joint sign model
+
+\[
+F^{\rm joint}=Q\langle m\rangle\langle s_qs_E\rangle
+\]
+
+did not pass its frozen gate. Against the separate-marginal model, correlation fell from `0.4455` to `0.3727` and
+NRMSE rose from `0.8993` to `1.2151`, although median angular error improved from `56.74°` to `53.10°`. The MX5
+first-moment model remained the strongest compact candidate (`0.5964`, `0.8077`, `48.59°`). Thus preserving phase
+routes is necessary bookkeeping but their occupancy alone is not a sufficient force closure.
+
+When each route retained its own conditional magnitude,
+
+\[
+F^{\rm pyramid}=Q\sum_{a,b}p_{ab}\bar m_{ab}s_as_b=Q\langle mr\rangle,
+\]
+
+the target closed at `3.58e-15` relative L2 error. This is an exact decomposition ceiling, not a prediction. It
+locates the remaining information in magnitude--relation dependence: which phase route is active and how strongly it
+is expressed cannot be independently compressed here. The project term `Information³` is retained for the two
+signed inputs plus their joint relation; it is not a literal cube of Shannon information. Measured sign mutual
+information was small (median `0.000277 bits`) but strongly associated with absolute phase correction (Spearman
+`0.8664`).
+
+The result therefore sharpens rather than confirms the proposed geometry. A flat triangle keeps two nodes and their
+relation; the pyramid adds route-conditioned magnitude needed to recover the resolved vector. Novelty now requires a
+frozen out-of-sample rule that predicts those magnitudes from independently available geometry and beats MX5 and
+standard closure baselines. Full packet:
+`analysis/electromagnetism/MX7_PHASE_FIRST_INFORMATION3_PYRAMID_REPORT.md`.
+
+#### 5.14.4 Exact parity tetrahedron and failed held-out relation-strength transfer
+
+MX8 separated the exact Information³ algebra from the unresolved predictive claim. For two binary phase coordinates
+
+\[
+x,y\in\{-1,+1\},\qquad r=xy,
+\]
+
+the four lifted states \((x,y,xy)\) have centroid zero, squared norm `3`, pairwise dot product `-1`, and all six
+edge lengths equal to \(2\sqrt2\). They therefore form a regular tetrahedron and obey the exact closure
+\(xyr=1\). The relation is a closing coordinate, not a third independent degree of freedom.
+
+Any four route strengths also have the exact Walsh--Hadamard decomposition
+
+\[
+h_{xy}=\mu+\alpha x+\beta y+\gamma xy,
+\]
+
+where \(\gamma=(h_{++}-h_{+-}-h_{-+}+h_{--})/4\) is the non-additive relation term. Three promoted identities
+permit six ordered pair relations; including three diagonal self-state slots yields a nine-slot matrix. These are
+exact geometric and counting statements, but the slots need not be statistically independent and recursion requires
+an additional promotion rule.
+
+A frozen temporal-transfer test then asked whether one \(xy\) coefficient learned from 14 early snapshots of a
+second public Warp plasma series improved prediction on ten later snapshots, with six intervening snapshots
+quarantined. It did not pass. Relative L2 changed from `0.1315276` to `0.1315179`, a favourable improvement of only
+`0.00736%`; the 95% snapshot-bootstrap interval (`-0.00140%` to `+0.01550%`) crossed zero, and direction metrics were
+slightly worse. A simple independent-marginal baseline was better at `0.123651` relative L2.
+
+Thus MX8 confirms the tetrahedral closure and four-term decomposition, but rejects the tested universal global
+relation-strength multiplier. Post-gate diagnostics found broad positive and negative local interaction coefficients
+centred near zero, sharpening the next question: which independently measured local geometry predicts \(\gamma\)?
+Full packet:
+`analysis/electromagnetism/MX8_INFORMATION3_TETRAHEDRON_TRANSFER_REPORT.md`.
 
 ## 6. What this cements — and what it does not (the honest line)
 - **Cemented:** the ARA rise/fall statistic is exactly `1` for the defined traversal of a bounded autonomous 1-D

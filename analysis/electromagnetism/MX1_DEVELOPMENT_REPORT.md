@@ -6,6 +6,12 @@
 
 ## Outcome
 
+**13 July audit calibration:** the full-source and identity-only Gauss agreements below are primarily
+simulator/solver consistency checks. OSIRIS uses charge-conserving particle deposition and evolves fields subject to
+Gauss consistency, so these correlations must not be presented as independent ARA evidence. The honest ARA-specific
+development result is the imperfect transfer of the separately defined TE-ARA participation coordinate
+\(r=0.798664\), together with the local pair-coordinate result \(r=0.7706\) and the scalar-magnitude null.
+
 The established Gauss instrument check passes on 299 eligible time slices. The spectral derivative
 of the electric field matches the independently deposited particle charge with correlation
 0.997102, NRMSE 0.0767, and
@@ -14,7 +20,7 @@ through-origin slope 1.007699.
 The identity family is spatial mode 5 plus its first 12 available multiples through
 mode 60. Field-side Gauss weighting and particle-side measurement give source-participation
 TE-ARA analogues with correlation 0.798664 and mean absolute difference 0.091058 on the 0–2 scale.
-The identity-only Gauss reconstruction matches the independently measured identity-only particle source with
+The identity-only Gauss reconstruction matches the separately read identity-only particle source with
 correlation 0.999059. Against the unfiltered full particle
 source, its correlation is 0.674687; the difference is the
 declared Other structure rather than discarded error.
@@ -49,7 +55,11 @@ cannot support the ARA claim until a frozen rule transfers to the sealed archive
 - The dimensional source scale is k0 × E_rms. The compressed models predict only the remaining dimensionless shape
   factor, because TE-ARA is a fraction and cannot create absolute magnitude by itself.
 
-## Frozen-development candidates, not yet registered
+## Frozen development choices — superseded by the registered freeze
+
+The list below was written before registration. It is retained as development history, but
+`MX1_CONFIRMATION_FREEZE_v1.md` now supersedes the phrase “not yet registered” and is the controlling transfer
+protocol.
 
 - Eligibility: E_rms at least ten times the first-ten-slice noise median and fundamental fraction at least 0.25.
 - Rung: fixed spatial mode 5.

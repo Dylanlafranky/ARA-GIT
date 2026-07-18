@@ -42,17 +42,66 @@ is worth more than a hit you cannot.
   coherent active ridge (nonzero organised coupling; contributors may reinforce).
   “Harmonic/resonant ridge” additionally requires measured periodic resonance. Do not
   call every active 1.0 state the lotto everything ridge.
+- NO FINAL RIDGE: `x=1` may be an exact equality for a declared aggregate, boundary or
+  projection, but it is not a scale-free terminal state. At one grain, child readings
+  `x_i=1+delta_i` may satisfy `sum(w_i delta_i)=0` while their retained asymmetry
+  `sum(w_i delta_i^2)>0`. Always state the spatial boundary, time window, rung/projection
+  and whether child events were included. A perfectly final `1.0` at every nested grain
+  would require every child deviation to vanish; ARA's fractal working hypothesis does
+  not assume such an ontological still point.
 - Axis discipline: 1.0 on a composition axis may coexist with TE-ARA = 2 on a
   participation axis. The former means equal shares; the latter means full declared
   identity participation. Never merge them into one scalar.
+- FULL PAIR ACCOUNT: if `p_A=p_B=1/2` and A+B exhaust the declared account, then
+  `TE_A=2p_A=1`, `TE_B=2p_B=1`, and `TE_(A+B)=2`, while the ARA composition is `x=1`.
+  This is normalized bookkeeping, not literally twice the physical energy of the ridge.
+  The joint signature `(x,TE)=(1,2)` is dynamically underdetermined: a static pair, an
+  active coherent resonance/standing mode, and incoherent cancellation can share it.
+  If there is no timed cycle, timing-based ARA is undefined even though a static
+  composition projection may equal 1. Resolve with activity/flux, time variation,
+  coherence/phase and, where relevant, child/daughter events.
 
 ## 2. Measurement laws
 
 - The canonical mapper (ara_mapper.py) is authoritative for duties and band splits.
   Generic extractors are first-pass only and must be labelled as such.
-- RIDGE RULE: never take ARA of a coupled pair measured as one signal (it averages to
-  ~1.0, like tides averaging to sea level). Decouple into rungs first; measure the
-  diverged branch.
+- RIDGE/BOUNDARY RULE: a coupled Phase-A/Phase-B pair measured as one complete identity
+  may validly read near the 1.0 ridge. That is the whole-identity relation, not an
+  automatic artifact or a reading of either branch's motion. If the question targets a
+  branch, decouple into declared rungs and measure that branch. A parent-level Phase A
+  may itself be a complete lower-rung ARA with its own A/B pair; its parent-level Phase B
+  may lie outside the measurement boundary. Mark that case `OPEN ARA`, retain total
+  activity, and place the unresolved complement in a boundary/Other account rather than
+  inventing an internal partner. Phase labels are relational roles indexed by boundary
+  and rung, not permanent intrinsic object types.
+- INCOMING/OUTGOING IS GRAIN-RELATIVE: apply the same ARA accumulation/release rule after
+  declaring boundary, rung and time window. One child's outgoing transfer can be its
+  neighbour's incoming transfer and can disappear into the parent's internal account when
+  both are enclosed. Maxwell/continuity variables provide one domain-native measurement
+  implementation; they do not own the ARA classification. Space-lock, frozen-ridge and
+  Time-terminal cases are edge-case checks on this same scale rule, not extra formulas.
+- OFF-RIDGE DIAGNOSTIC: an apparently one-sided measurement may instead be the same
+  identity at a genuinely asymmetric moment. Sweep the boundary and time window
+  separately. Balance recovered by enlarging the boundary indicates an external
+  counterphase; balance recovered by completing the time cycle indicates temporal
+  asymmetry; persistence under both indicates stable bias, changing identity or an
+  incomplete pair model. Do not force the first explanation.
+- RESONANT-DEATH TERM: Dylan uses this for the proposed local `2.0` Time-side
+  terminal/singularity limit, not as a synonym for established amplitude death. Require
+  usable gradient/exergy and directed throughput to approach zero; total energy may
+  remain. Since a stopped cycle cannot be timed, `2.0` is a limit of the last measurable
+  cycles. Dylan's corrected closure is `0 -> 2` over the complete Space-origin lifecycle,
+  whose equal-endpoint/diameter centre is `1.0`. A parent rung reads `1.0` only if it
+  compresses that whole child history. Do not confuse this span centre with a time-weighted
+  mean, which need not equal `1` for an asymmetric traversal. A scalar `1.0` alone is not
+  evidence.
+- RESONANT-DEATH STABILITY: do not say “TE-ARA spent.” If `TE=2`, the surviving declared
+  identity is fully accounted; the spent quantity is usable exergy/gradient. A persistent
+  Time-side terminal additionally requires strong connection/confinement and effective
+  adjacent-rung anti-phase response below a predeclared reopening/unravelling threshold.
+  If that response restarts transfer, flips orientation, or moves participation into Other,
+  classify reactivation/flip/unravelling rather than resonant death. This allows a local
+  motion axis near 2 to coexist with a strongly Space/Connection-leaning holding axis.
 - Never take ARA of a processed summary (a fitted line, an exponent, a double-log).
   Only of a wave.
 - Asymmetry lives in the HARMONICS: never measure duty on a narrowband-filtered signal
@@ -105,6 +154,23 @@ is worth more than a hit you cannot.
   other is a coin, not a coupling). Block-bootstrap CIs whenever n_effective is small.
 - Every new instrument gets a negative control (lotto-style: run it on designed
   randomness; it must return nothing).
+- A simulator-enforced identity is an instrument/adapter check, not evidence for
+  ARA. State what the solver guarantees, then headline only deviations,
+  participation structure or transfer that is not guaranteed by that machinery.
+- An adaptive chain on one inspected dataset is one exploratory chain, not a set
+  of independent confirmations. Preserve every stage and null, but require new
+  data/seeds/resolution for replication language.
+- BROAD-MAPPING POLICY: do not tell Dylan to stop mapping merely because many domains
+  have already been walked. A universal/fractal claim requires broad coverage to expose
+  where the relation survives, how it transforms, and where it fails. Instead classify
+  every walk: `(E)` exploratory geometry walk; `(R)` reconstruction of an already known
+  result; `(C)` constrained cross-domain recovery using a mapping fixed elsewhere; or
+  `(P)` prospective/held-out test. E and R demonstrate vocabulary, coverage and possible
+  compression, not independent confirmation. C and especially P can add evidential
+  weight when choices, baselines and failures are fully charged. Preserve negative maps.
+- REUSE IS THE BRIDGE: the strongest breadth result is not many individually tailored
+  similarities. It is one predeclared boundary/orientation/coarse-graining rule recovering
+  several domain facts, including failures, with fewer choices than matched alternatives.
 - Summary totals are GENERATED BY SCRIPT from the per-test records, never hand-edited
   (the Part G lesson: hand-kept scoreboards drift from their own tables).
 

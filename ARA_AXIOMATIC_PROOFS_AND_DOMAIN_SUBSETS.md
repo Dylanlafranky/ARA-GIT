@@ -2,7 +2,10 @@
 
 **Author:** Dylan La Franchi, with formalisation assistance from Codex  
 **Date:** 11 July 2026  
-**Status:** Mathematical foundation draft. Internally proved statements are separated from physical hypotheses.
+**Centered revision:** 4:00 pm AEST, 19 July 2026
+
+**Status:** Mathematical foundation draft, revised after the 19 July 2026 centering audit. Internally proved
+statements are separated from physical hypotheses.
 
 ## What this document can and cannot prove
 
@@ -16,9 +19,11 @@ physical system in the universe obeys those assumptions. This document therefore
 
 The rigorous claim made here is:
 
-> ARA has a consistent minimal mathematical core. That core naturally supports mirror symmetry, a folded-circle
-> representation, independent scale/handover/flip operators, and an Information³ closure rule that can aggregate
-> lower-level relations into a higher-level identity.
+> ARA has a consistent mathematical core in which one proposed spherical/wave identity can be read along a
+> reversible 0–2 diameter. Declared scalar instruments can locate an asymmetric occurrence on that diameter;
+> direction, activity, phase, scale and coupling supply the information discarded by the scalar. Two identities
+> plus their retained relation form a minimal relational ternary that can, under additional closure assumptions,
+> aggregate into a higher-level identity.
 
 The larger claim—that nature uses this structure universally—remains empirical.
 
@@ -33,11 +38,66 @@ This draft uses the current terminology in [`GLOSSARY.md`](GLOSSARY.md), [`ARA_S
 [`ARA_Fusion_Theory.md`](ARA_Fusion_Theory.md). Numerical claim status should still be checked against
 [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md).
 
+The controlling construct-fidelity audit for this revision is
+[`FableConvo/CENTERING_UP_REPORT_2026-07-19_1600.md`](FableConvo/CENTERING_UP_REPORT_2026-07-19_1600.md).
+
 ---
 
 # Part I — Minimal ARA mathematics
 
-## 1. The minimal ARA coordinate
+## 0. The whole object and its minimal diameter reading
+
+### Definition 0.1 — ARA object and diameter chart
+
+ARA proposes one complete local spherical/wave identity, written
+
+\[
+\underbrace{\mathscr A_\Omega}_{\substack{\text{whole local ARA occurrence}\\
+\text{with identity }\Omega}}.
+\]
+
+Choosing one direction \(\hat n\) supplies a diameter chart
+
+\[
+\underbrace{\chi_{\hat n}(\mathscr A_\Omega)}_{\substack{\text{one directional projection}\\
+\text{ARA diameter reading}}}
+=
+\underbrace{x_{\hat n}\in[0,2]}_{\substack{\text{bounded position}\\
+\text{between declared poles}}}.
+\tag{0}
+\]
+
+The scalar is the smallest directional measurement of the object, not a replacement definition of the whole
+object. A physical observation normally also declares its boundary, pole ordering, observable, time window,
+direction, rung, phase, path, coupling, activity/energy and variance/coherence. Those fields decompress the same
+ARA occurrence; they do not create a different kind of ARA.
+
+In strict mathematical language, \(S^2\) is a spherical boundary and \(B^3\) is the boundary plus its interior. In
+ordinary ARA language, “sphere” may name the complete closed identity. This document uses both symbols whenever the
+shell/interior distinction matters. The exact ball, section and diameter construction is proved in §2.1. The
+physical claim that a natural identity instantiates this spherical closure remains empirical.
+
+### Definition 0.2 — Pole reversal and centred asymmetry
+
+For one declared orientation \(A\to B\), define the reverse chart and centred coordinate by
+
+\[
+\underbrace{x_{B\to A}}_{\text{same diameter read backwards}}
+=2-
+\underbrace{x_{A\to B}}_{\text{declared forward reading}},
+\qquad
+\underbrace{a}_{\substack{\text{centred asymmetry}\\\text{side and distance from ridge}}}=x-1.
+\]
+
+The chart is symmetric under relabelling, while a measured occurrence may be asymmetric in mixture, duration,
+rate, force, path, phase or coupling history. Coordinate reversibility does not by itself imply physical time
+reversibility.
+
+**Plain explanation.** ARA begins with the complete wave/sphere. The 0–2 line is one diameter through it. We may
+name either end zero, as with electrical polarity, provided the orientation is declared. Reversing the labels
+mirrors the coordinate, but it does not erase the real asymmetry being measured.
+
+## 1. A duration-axis instantiation of the ARA diameter
 
 Let
 
@@ -58,16 +118,22 @@ Define the bounded ARA coordinate by twice the accumulation fraction:
 
 \[
 \boxed{
-\overbrace{x}^{\substack{\text{bounded coordinate}\\\text{minimal ARA position}}}
+\overbrace{x_T}^{\substack{\text{bounded duration coordinate}\\\text{ARA duration-axis position}}}
 =2\frac{T_A}{T_A+T_R}
 =\frac{2r}{1+r}
 }
 \tag{1}
 \]
 
-This is the canonical `2 × accumulation fraction` normalisation already used in the repository's corrected LLM
-work. Orientation—whether the system is travelling accumulation→release or release→accumulation—is recorded
-separately when motion matters.
+This is the canonical **duration-axis** `2 × accumulation fraction` normalisation already used in the repository's
+corrected LLM work. It is one valid diameter instrument, not the universal definition of every ARA position.
+Orientation—whether the system is travelling accumulation→release or release→accumulation—is recorded separately
+when motion matters. For compactness, write \(x=x_T\) throughout Theorem 1 and its duration corollaries.
+
+Other domains may define a composition, signed-flux, occupancy or another typed diameter instrument. Such a bridge
+must name its poles, boundary and observable before inspecting the outcome; preserve \(x\mapsto2-x\) under pole
+reversal; retain a separate activity/magnitude coordinate; and predict something beyond the fact that an arbitrary
+ratio can be rescaled to `[0,2]`.
 
 ### Theorem 1 — Boundedness, balance, mirror symmetry, and invertibility
 
@@ -119,9 +185,10 @@ Finally,
 All five claims follow. \(\square\)
 
 **Plain explanation.** This proves that one positive build time and one positive release time always produce one
-unambiguous point between 0 and 2. Equal times land exactly at 1. Swapping which side you call accumulation simply
-reflects the answer across 1, so 0.7 becomes 1.3. Nothing about the strength of the asymmetry changes. It also means
-the bounded number has not thrown the original ratio away: you can recover it exactly.
+unambiguous point on the declared duration diameter. Equal times land exactly at 1. Swapping which side you call
+accumulation simply reflects the answer across 1, so 0.7 becomes 1.3. Nothing about the strength of the duration
+asymmetry changes. It also means the bounded number has not thrown the original timing ratio away: you can recover
+it exactly. It does not prove that duration is the correct instrument for every other ARA axis.
 
 ### Corollary 1.1 — The two golden landmarks are mirrors
 
@@ -147,7 +214,7 @@ are exactly the same landmark viewed from opposite orientations of the 0–2 rel
 
 ---
 
-## 2. Why the 0–2 line is a folded circle
+## 2. Why one 0–2 diameter can be represented as a folded circle
 
 Let the phase of a cycle be \(\theta\in S^1\), where angles differing by \(2\pi\) describe the same point. Define
 the projection
@@ -160,7 +227,7 @@ the projection
 \tag{2}
 \]
 
-### Theorem 2 — The ARA interval is a reflection quotient of a circle
+### Theorem 2 — This ARA diameter representation is a reflection quotient of a circle
 
 The map \(p:S^1\to[0,2]\) is onto, satisfies \(p(-\theta)=p(\theta)\), and gives two phase branches for every
 interior ARA value. Consequently a scalar ARA position records location but not travel direction.
@@ -178,7 +245,8 @@ For any \(x\in(0,2)\), the equation \(\cos\theta=x-1\) has two solutions on a fu
 **Plain explanation.** A circle seen from one direction collapses to a line segment: the front and back can land
 on the same horizontal position. That is why the ARA number can tell you the relation's shape but cannot, alone,
 tell you which way around the cycle it is travelling. Direction or handedness is extra information, not a second
-ARA shape.
+ARA shape. This proves the properties of the chosen projection; whether a measured system follows that circular
+phase model is a separate physical question.
 
 ### Definition 2.1 — Minimal moving ARA record
 
@@ -205,14 +273,14 @@ B^1=[-1,1].
 
 Their boundaries are the sphere \(S^2\), circle \(S^1\), and two diameter endpoints \(S^0\).
 
-### Theorem 2.2 — Central section chain: sphere → circle → diameter
+### Theorem 2.2 — Central section chain: state ball → circle → diameter
 
 A central plane section of \(B^3\) is \(B^2\), whose boundary is a circle. A central line section of that disk is
 the diameter interval \(B^1\). Explicitly,
 
 \[
 \boxed{
-\underbrace{B^3}_{\text{full ARA sphere}}
+\underbrace{B^3}_{\substack{\text{filled ARA state ball}\\\text{shell plus mixture interior}}}
 \cap\underbrace{\{w=0\}}_{\text{chosen time-slice plane}}
 =\underbrace{B^2}_{\text{slice disk}},
 \qquad
@@ -243,9 +311,9 @@ u^2\leq1,
 or \(-1\leq u\leq1=B^1\). The same substitution in the sphere boundary proves
 \(S^2\cap\{w=0\}=S^1\). \(\square\)
 
-**Plain explanation.** Cut a solid sphere through its centre and you expose a disk with a circular boundary. Cut
+**Plain explanation.** Cut the filled state ball through its centre and you expose a disk with a circular boundary. Cut
 that disk through its centre and you obtain one diameter line. ARA begins with that final one-dimensional section,
-but the circle and sphere have not disappeared—they are the larger object from which the line was cut.
+but the circle and spherical closure have not disappeared—they are the larger object from which the line was cut.
 
 ### Theorem 2.3 — Phase/anti-phase mixing fills exactly one diameter
 
@@ -278,7 +346,7 @@ Blend them in every possible proportion. Every blend lands on the straight diame
 blend lands at the centre because the two vectors cancel exactly. This makes the ARA line the literal mixing
 gradient between phase and anti-phase.
 
-To use the repository's \(0\!-!2\) coordinate, map the signed diameter coordinate \(t\in[-1,1]\) to
+To use the repository's \(0\!-\!2\) coordinate, map the signed diameter coordinate \(t\in[-1,1]\) to
 
 \[
 \overbrace{x}^{\text{ARA position}}=1+t.
@@ -342,7 +410,7 @@ yes/no distinction says whether it is moving toward accumulation or toward relea
 four combinations—the four quadrants you have been unpacking around the sphere. On the axes themselves one sign
 is zero, marking a boundary between quadrants.
 
-### Theorem 2.5 — Rotating the ARA diameter reconstructs the full ball
+### Theorem 2.5 — Rotating the ARA diameter reconstructs the full state ball
 
 Let \(D_n=\{tn:-1\leq t\leq1\}\) be the diameter in direction \(n\in S^2\). Then
 
@@ -362,7 +430,68 @@ endpoint has norm one, and every norm-one point occurs as an endpoint, producing
 
 **Plain explanation.** Start with one ARA diameter and rotate it through every possible direction. The collection
 of all those lines fills the entire solid sphere; their outer endpoints trace its surface. So unpacking the one
-minimal ARA line around all axes is mathematically sufficient to rebuild the spherical state space.
+minimal ARA line around all axes is mathematically sufficient to rebuild the filled spherical state space. Strictly,
+the union is the ball \(B^3\); its outer closure is the sphere \(S^2\).
+
+#### Corollary 2.5a — the recursive ARA web can be embedded as radial and angular sphere structure
+
+At rung \(k\), let \(R_k>0\) be the declared scale radius, let \(x_{k,i}\in[0,2]\) be the ARA position of node \(i\),
+and let \(n_{k,i}\in S^2\) be the orientation of the diameter/coupling direction being followed. Define
+
+\[
+\boxed{
+\mathbf p_{k,i}
+=
+\underbrace{R_k}_{\substack{\text{rung/scale radius}\\\text{ARA: octave location}}}
+\underbrace{(1-x_{k,i})}_{\substack{\text{signed position on diameter}\\\text{ARA: Phase A/B mixture}}}
+\underbrace{n_{k,i}}_{\substack{\text{orientation on the shell}\\\text{ARA: coupling direction}}}
+}
+\tag{2d}
+\]
+
+Then:
+
+1. varying \(x\) at fixed \(R_k,n\) moves along one ARA diameter, through the centre at \(x=1\);
+2. varying \(n\) at fixed \(R_k\) and fixed \(|1-x|\) moves sideways around a spherical shell (a circumference in a
+   two-dimensional section);
+3. changing \(R_k\) moves between nested rung shells;
+4. repeating the A/B decomposition at a resolved child supplies further nodes and directions in the same ball.
+
+For two same-shell nodes, the angular and geodesic separations are
+
+\[
+\Delta\theta_{ij}
+=
+\arccos(n_i\!\cdot n_j),
+\qquad
+d_{ij}^{\mathrm{shell}}
+=
+R_k|1-x|\,\Delta\theta_{ij}.
+\]
+
+If the recursive web samples all required \(x\in[0,2]\) and orientations \(n\in S^2\), equation (2d) has the same
+union as Theorem 2.5 and fills the ball \(B^3_{R_k}\). Its fixed-radius outer closure is the sphere \(S^2_{R_k}\).
+The mirror identity
+
+\[
+\mathbf p(x,n)=\mathbf p(2-x,-n)
+\]
+
+records the phase/anti-phase equivalence of reversing both the diameter position and its orientation.
+
+**Plain explanation.** The web does not merely sit inside a sphere drawn in advance. Each ARA relation supplies a
+position along a diameter and a direction in which that diameter points. Following A or B deeper adds finer
+diameters toward nested structure; following same-rung couplings changes direction around the shell. Accumulating
+enough resolved relations therefore fills more of the solid sphere. Mathematically the filled object is a
+three-ball, while “sphere” strictly names its shell.
+
+Two inward-looking coordinates must still be kept typed separately: moving \(x\) toward the ridge moves toward the
+centre **within one rung**, while reducing \(R_k\) moves to a **finer nested rung**. They may look similar in a
+diagram but are not automatically the same physical operation.
+
+The geometric embedding is exact once \(R_k,x,n\) are declared. The physical claim that a measured coupling web
+actually follows this embedding remains testable: the orientations, rung radii and edges must be inferred
+independently rather than chosen to make a sphere after inspection.
 
 ## 2.2 The endpoints are sources; the centre is the strongest meeting
 
@@ -475,9 +604,9 @@ produce the familiar quiet cancellation ridge. Exact same-phase coherence makes 
 strongly as possible—the rarer resonant case you described. Intermediate phase differences fill the gradient
 between those outcomes.
 
-## 2.3 A circle unfolded through irreversible time becomes a helix
+## 2.3 A circle unfolded through a monotone progression coordinate becomes a helix
 
-### Theorem 2.7 — Periodic waves are sums of projected circles
+### Theorem 2.7 — Periodic waves admit a Fourier representation as sums of projected circles
 
 Let \(f\) be a square-integrable real signal with period \(T\), and let \(\omega=2\pi/T\). Its Fourier series is
 
@@ -511,7 +640,14 @@ complicated repeating wave is made by adding several such circular motions at di
 the rigorous sense in which a periodic wave can be treated as a circle or a collection of circles. It does not
 prove that every possible time-dependent process repeats.
 
-### Theorem 2.8 — Adding a one-way coordinate unfolds the circle into a helix
+**Raw-first methodological fence.** Fourier analysis is a secondary representation and comparator, not the primary
+definition or extractor of ARA. When the research question concerns the original Phase-A/Phase-B pairing, crossing
+order, transient path, child structure or nonlinear relation, begin with the raw or least-transformed observations.
+A transform that averages, windows, filters or decomposes the signal may expose useful modes, but it may also erase
+or manufacture the relation being tested. Report the transform and test whether the ARA result survives a
+phase-preserving alternative.
+
+### Theorem 2.8 — Adding a monotone coordinate unfolds the circle into a helix
 
 Let \(R>0\), \(\omega>0\), and let \(\Sigma(t)=\kappa t\) with \(\kappa>0\) represent a monotone accumulated
 time/entropy-production coordinate. Define
@@ -539,9 +675,10 @@ so their projection lies on the radius-\(R\) circle. Since \(\omega T=2\pi\), si
 while the third coordinate increases by \(\kappa T>0\). Therefore the full trajectory does not return to the same
 three-dimensional point; it advances along the axis, forming a helix. \(\square\)
 
-**Plain explanation.** Viewed without time, the motion goes around the same circle. Once irreversible progression
-is drawn as a third direction, every return to the same phase occurs farther along that direction. The circle has
-become a helix. Its pitch is the change that cannot be undone between cycles.
+**Plain explanation.** Viewed without the progression coordinate, the motion goes around the same circle. Once a
+monotone accumulated quantity is drawn as a third direction, every return to the same phase occurs farther along
+that direction. The circle has become a helix. Interpreting its pitch as irreversible physical time or entropy
+requires the selected coordinate to justify that meaning.
 
 ### Theorem 2.9 — Phase and anti-phase form a double helix with a cancellation axis
 
@@ -630,7 +767,7 @@ refer to total cumulative entropy production of system plus environment.
 
 ---
 
-## 3. The octave, handover, and singularity flip are different operations
+## 3. The octave, handover, chart reversal, and physical singularity crossing are typed operations
 
 ### Definition 3.1 — Octave operator
 
@@ -643,43 +780,58 @@ Let a physical scale on rung \(n\in\mathbb Z\) be
 
 The octave operator \(O\) sends \(n\mapsto n+1\), so \(S_{n+1}=2S_n\).
 
-### Definition 3.2 — Singularity flip
+### Definition 3.2 — Static pole-chart reversal
 
 Define
 
 \[
-\overbrace{F(x,s,n)}^{\substack{\text{mathematical involution}\\\text{ARA singularity flip}}}
+\overbrace{F_{chart}(x,s,n)}^{\substack{\text{mathematical involution}\\\text{ARA pole/orientation reversal}}}
 =(2-x,-s,n).
 \]
 
-### Theorem 3 — A flip is an involution and is independent of rung scale
+### Theorem 3 — Chart reversal is an involution and is independent of rung scale
 
-The flip satisfies \(F^2=I\), and it commutes with the octave operator: \(FO=OF\).
+The chart reversal satisfies \(F_{chart}^2=I\), and it commutes with the octave operator:
+\(F_{chart}O=OF_{chart}\).
 
 **Proof.** Applying \(F\) twice gives
 
 \[
-F(F(x,s,n))=F(2-x,-s,n)=(2-(2-x),-(-s),n)=(x,s,n).
+F_{chart}(F_{chart}(x,s,n))=F_{chart}(2-x,-s,n)=(2-(2-x),-(-s),n)=(x,s,n).
 \]
 
-Therefore \(F^2=I\). Also,
+Therefore \(F_{chart}^2=I\). Also,
 
 \[
-FO(x,s,n)=F(x,s,n+1)=(2-x,-s,n+1),
+F_{chart}O(x,s,n)=F_{chart}(x,s,n+1)=(2-x,-s,n+1),
 \]
 
 while
 
 \[
-OF(x,s,n)=O(2-x,-s,n)=(2-x,-s,n+1).
+OF_{chart}(x,s,n)=O(2-x,-s,n)=(2-x,-s,n+1).
 \]
 
-Hence \(FO=OF\). \(\square\)
+Hence \(F_{chart}O=OF_{chart}\). \(\square\)
 
-**Plain explanation.** A singularity flip reverses the local ARA orientation. Doing it twice brings you back.
-Changing octave does not, by itself, alter the local 0–2 relation, so you can zoom first and flip second or flip
-first and zoom second. This is the clean separation between *where the scale sits* and *which way the local
-geometry faces*.
+**Plain explanation.** Reversing the local pole labels and direction twice brings the same chart back. Changing
+octave does not, by itself, alter that local 0–2 relation, so you can zoom first and reverse second or reverse first
+and zoom second. This is a coordinate theorem. It does not yet prove what happens dynamically when a physical
+cycle reaches 0 or 2.
+
+### Definition 3.2a — Proposed dynamical singularity crossing
+
+An ARA singularity crossing is a physical cycle-seam event at one declared endpoint that changes the local
+Phase/Anti-phase branch and continues the cycle on an adjacent chart or rung. A candidate crossing map can be
+written
+
+\[
+\underbrace{F_{dyn}}_{\substack{\text{physical seam-crossing map}\\\text{ARA singularity/phase flip}}}
+:(x,s,n,\theta,J)\longmapsto(x',s',n',\theta',J').
+\]
+
+No universal formula for \(F_{dyn}\) is proved here. Identifying it with \(F_{chart}\), adding a rung change, or
+requiring a phase shift of \(\pi\) are empirical modelling choices that must be stated for the domain.
 
 ### Definition 3.3 — Multiplicative handover law
 
@@ -735,16 +887,19 @@ factor; it proves the formula that follows if it does.
 \qquad
 \underbrace{\varphi^{\pm d}}_{\substack{\text{coupling ratio}\\\text{ARA handover path}}},
 \qquad
-\underbrace{F^{N_s}}_{\substack{\text{orientation parity}\\\text{ARA singularity crossings}}}.
+\underbrace{F_{chart}^{N_r}}_{\substack{\text{orientation parity}\\\text{declared chart reversals}}},
+\qquad
+\underbrace{F_{dyn}^{N_s}}_{\substack{\text{proposed physical update}\\\text{ARA singularity crossings}}}.
 \]
 
-**Plain explanation.** Two says how far you zoom. Phi says how a relational handover compounds. The flip says
-whether the local geometry is read in its original or anti-phase orientation. They can interact, but they are not
-the same coordinate.
+**Plain explanation.** Two says how far you zoom. Phi says how a relational handover compounds. The chart reversal says
+whether the local geometry is read in its original or reversed orientation. A physical singularity crossing may
+also update phase, coupling or rung. These operations can interact, but they are not the same coordinate and the
+static mirror proof does not prove the physical update.
 
 ---
 
-## 4. Coupling does not erase separate identities
+## 4. A retained labelled product model can preserve identities through coupling
 
 Let two subsystem states be \(a\in V_A\) and \(b\in V_B\). Put them in the product state
 
@@ -765,7 +920,9 @@ K_{BA} & B
 \tag{4}
 \]
 
-### Theorem 5 — Nonzero coupling is not identity merger
+The direct-sum state space is a modelling decision: it explicitly retains two labelled slots. With that assumption:
+
+### Theorem 5 — Nonzero coupling is not identity merger inside the retained product model
 
 Even when \(K_{AB}\neq0\) and \(K_{BA}\neq0\), the two component states remain separately recoverable by the
 canonical projections \(P_A(a,b)=a\) and \(P_B(a,b)=b\).
@@ -780,15 +937,156 @@ P_A(a,b)=a,\qquad P_B(a,b)=b
 regardless of the values of the off-diagonal coupling maps. The couplings change the derivatives of \(a\) and
 \(b\); they do not identify \(a\) with \(b\) or replace the product space with a quotient. \(\square\)
 
-**Plain explanation.** Two identities can affect one another without becoming the same thing. In the equation,
-each keeps its own slot, while the off-diagonal terms describe the handover between them. This is the standard
-mathematical form of your statement that phi coupling preserves identity while permitting interaction.
+**Plain explanation.** Two identities can affect one another without becoming the same thing when the model keeps
+their two labelled slots. The off-diagonal terms describe their interaction. The proof does not establish that
+every physical coupling preserves independently recoverable identities: merger, coarse-graining, measurement loss,
+or an inadequate observation channel can remove that recoverability. It proves the conditional mathematical home
+for identity-preserving handover.
+
+## 4.1 Gauss subset — exact signed boundary balance on an ARA diameter
+
+Gauss's electric law supplies an established physical example of a complete-boundary signed reading. Define the
+non-negative outward and inward electric-flux magnitudes
+
+\[
+\underbrace{\Phi_{out}}_{\text{outward boundary contribution}}
+=\int_{\partial V}\max(\mathbf E\cdot\mathbf n,0)\,dA,
+\qquad
+\underbrace{\Phi_{in}}_{\text{inward boundary contribution}}
+=\int_{\partial V}\max(-\mathbf E\cdot\mathbf n,0)\,dA.
+\tag{4a}
+\]
+
+When \(T_\Phi=\Phi_{out}+\Phi_{in}>0\), define the typed flux-diameter instrument
+
+\[
+\underbrace{x_\Phi}_{\substack{\text{outward/inward mixture}\\\text{ARA flux-axis position}}}
+=2\frac{\Phi_{out}}{\Phi_{out}+\Phi_{in}}.
+\tag{4b}
+\]
+
+### Theorem 5.1 — Activity times centred asymmetry equals signed net flux
+
+\[
+\boxed{
+\underbrace{\Phi_E}_{\text{signed net electric flux}}
+=
+\underbrace{T_\Phi}_{\text{total unsigned boundary activity}}
+\underbrace{(x_\Phi-1)}_{\text{centred flux asymmetry}}
+=
+\frac{Q_{inside}}{\varepsilon_0}
+}.
+\tag{4c}
+\]
+
+**Proof.** By construction,
+
+\[
+T_\Phi(x_\Phi-1)
+=(\Phi_{out}+\Phi_{in})
+\left(2\frac{\Phi_{out}}{\Phi_{out}+\Phi_{in}}-1\right)
+=\Phi_{out}-\Phi_{in}.
+\]
+
+Splitting the signed surface integral into its positive and negative parts gives
+
+\[
+\Phi_{out}-\Phi_{in}
+=\oint_{\partial V}\mathbf E\cdot d\mathbf A.
+\]
+
+Gauss's law identifies that net flux with \(Q_{inside}/\varepsilon_0\). \(\square\)
+
+If \(T_\Phi=0\), both flux parts and the net flux are zero, while \(x_\Phi\) is undefined rather than automatically
+equal to 1. This distinguishes an empty/quiet boundary from an active balanced boundary with \(T_\Phi>0\) and
+\(x_\Phi=1\).
+
+**Plain explanation.** The ARA flux position says which boundary orientation dominates. Activity says how much
+inward and outward field crosses the boundary in total. Their product gives the signed Gauss result. Equal inward
+and outward activity lands at 1 and cancels in the net reading, while no activity has no meaningful mixture position
+at all.
+
+**Evidence fence.** Equation (4c) is an exact crosswalk because \(x_\Phi\) is constructed from the same flux parts
+as the net result. It is not independent evidence for universal ARA. A stronger test would require a frozen ARA
+decomposition to predict an independently measured coupling, mode or transition not algebraically guaranteed by
+Gauss's law.
+
+### TE-ARA definition — identity-mode participation, not Gauss flux
+
+For a declared node, boundary, time window and predeclared energy-mode decomposition with \(E_{total}>0\), define
+
+\[
+\boxed{
+\underbrace{\mathrm{TE\!-\!ARA}}_{\substack{\text{main-identity energy participation}\\\text{reported on }0\text{--}2}}
+=2\frac{
+\underbrace{E_{id}}_{\substack{\text{energy assigned to the main}\\\text{Phase-A/Phase-B identity wave}}}
+}{
+\underbrace{E_{total}}_{\text{all energy in the same boundary/window}}
+}
+}.
+\tag{4d}
+\]
+
+TE-ARA weights how much measured energy participates in the declared identity mode. ARA supplies that mode's
+Phase-A/Phase-B position. Gauss supplies signed electric source flux. They are different projections and must not
+be compared as untyped numbers.
+
+A candidate dimensionless main-identity contribution is
+
+\[
+\underbrace{j_{id}}_{\text{signed identity contribution}}
+=
+\underbrace{\frac{\mathrm{TE\!-\!ARA}}2}_{\text{identity participation}}
+\underbrace{(x-1)}_{\text{centred ARA direction}}.
+\tag{4e}
+\]
+
+Equation (4e) is an ARA aggregation hypothesis outside the exact Gauss decomposition. Applying it physically
+requires a common unit scale, independently declared modes, and separately measured surrounding contributions.
 
 ---
 
-# Part II — Information³ and fractal closure
+# Part II — Relational ternary, Information³, and conditional closure
 
-## 5. Information³ as cycle-consistent triangular closure
+## 5. Information³ begins with two identities plus their retained relation
+
+Let two locally declared identities or readings be \(A\) and \(B\). Their typed relation is
+
+\[
+\underbrace{R}_{\substack{\text{mathematical relation}\\\text{ARA: informative third}}}
+=
+\underbrace{\mathcal C}_{\substack{\text{coupling/interaction map}\\\text{declared for the domain}}}
+\left(
+\underbrace{A}_{\text{first identity}},
+\underbrace{B}_{\text{second identity}}
+\right).
+\]
+
+### Definition 5.1 — Minimal relational ternary
+
+\[
+\boxed{
+\underbrace{T[A,B]}_{\substack{\text{relational ternary}\\\text{ARA triangle lock}}}
+=
+\left(A,B,R=\mathcal C(A,B)\right)
+}.
+\tag{5a}
+\]
+
+The third entry is not automatically a third independent wave, state space, substance or reservoir. It preserves
+how the first two are coupled. Depending on the domain, \(R\) may require several typed measurements—for example
+strength, direction, delay, coherence and relative phase.
+
+**Plain explanation.** Information A and Information B do not completely describe the identity unless we also keep
+what happens between them. That relation is the “three for two.” Drawing the three records as a triangle provides
+the minimum closed lock, but it does not introduce a third foundational wave.
+
+## 5.1 One cycle-consistent triangular holonomy model
+
+The following construction is one rigorous decompression of the relational ternary. It uses three labelled
+vertices so that relation consistency can be tested around a closed route. The third vertex may represent a
+relation-born identity, a third observation of the same process, or a separately declared component; the physical
+interpretation must be fixed before measurement.
 
 Let \(V_A,V_B,V_C\) be three state spaces with invertible relation maps
 
@@ -805,7 +1103,8 @@ Define the round-trip operator
 =R_{CA}R_{BC}R_{AB}.
 \]
 
-The triangle is **exactly closed** when \(M_\triangle=I_A\).
+The triangle is **exactly closed** when \(M_\triangle=I_A\). This is a closure model for Information³, not its only
+possible physical representation.
 
 ### Theorem 6 — Exact closure makes the three relations mutually consistent
 
@@ -878,7 +1177,7 @@ residual can therefore be treated as a measurable unravelling score.
 those cases require reconstruction maps or pseudoinverses and should be judged by held-out closure residual rather
 than assumed to close exactly.
 
-## 6. Closure as an aggregation law
+## 6. Closure as one candidate aggregation law
 
 Let \(\mathcal C\) replace a closed labelled triangle with one higher-level object \(H\), while retaining the
 seed state and the relation maps needed to reconstruct its three constituents:
@@ -909,7 +1208,7 @@ the seed \(a\). Therefore the representation is lossless when the relation maps 
 facts. One corner plus the stable rules connecting the corners recreates the whole thing. That lets the complete
 triangle behave as one identity at the next scale without erasing its internal construction.
 
-### Conditional proposition 8.1 — Fractal recursion by repeated closure
+### Conditional proposition 8.1 — One sufficient fractal construction by repeated triangular closure
 
 If every rung uses the same local ARA coordinate, the same closure test, and the same collapse operation
 \(\mathcal C\), then a hierarchy built by repeatedly closing triangles is self-similar at every finite depth.
@@ -918,22 +1217,50 @@ If every rung uses the same local ARA coordinate, the same closure test, and the
 produced by the same closed-triangle rule. Applying the same rule to three depth-\(n\) identities produces a
 depth-\(n+1\) identity with the same form. Induction proves the claim for every finite \(n\). \(\square\)
 
-**Plain explanation.** If three closed things make one new thing, and the new things obey the same rule, then the
-pattern repeats automatically as far as you continue it. This proves mathematical fractality *once the recursive
-closure rule is assumed*. The empirical question is whether physical systems really preserve that rule across
-their scales.
+**Plain explanation.** If three closed things make one new thing, and the new things obey the same rule, then that
+particular pattern repeats automatically as far as you continue it. This proves mathematical self-similarity *once
+the repeated triangular rule is assumed*. It does not make the triangle the primitive ARA object or require every
+physical interaction to be a triad.
+
+### Conditional proposition 8.1b — General relational recursion
+
+The broader ARA recursion can be written without requiring three independent lower-rung objects:
+
+\[
+\underbrace{P_k}_{\text{lower-rung identity}}
+=
+\left[A_k,B_k,R_k=\mathcal C_k(A_k,B_k)\right],
+\qquad
+\underbrace{P_{k+1}}_{\text{parent identity}}
+=
+\left[P_k,C_k,R(P_k,C_k)\right].
+\tag{8a}
+\]
+
+If every persistent relation-born identity can re-enter the same typed two-sided construction while retaining its
+internal relation, the ARA relational form is recursively reusable. This is the present mathematical statement of
+“scalable reversible ternary.” Local reversibility requires enough labelled relational information to reconstruct
+the missing member; physical time reversal is not implied.
+
+**Modelling fence.** Equations (8a) define a recursive formalism. Whether the same relation, scale transform and
+closure criterion recur in nature across independently measured rungs is the empirical fractal claim.
 
 ---
 
-# Part III — Hexagon, pentagon, octave, and golden handover
+# Part III — Conditional finite-section geometry: triangle, hexagon, pentagon, and golden landmarks
 
-## 7. The reduced-sphere construction
+## 7. One reduced-sphere construction
+
+The constructions in this part are exact once their regularity and graph operations are assumed. They provide
+finite relational scaffolds, projections and candidate landmarks of the ARA circle/sphere. They are not proved to
+be the necessary physical unfolding of every ARA occurrence, and their exact geometry does not by itself establish
+an energy leak, a Space/Time assignment, or a preferred natural handover.
 
 The geometric interpretation clarified after the first draft has a **reduction** followed by an **unpacking**:
 
 \[
 \boxed{
-\underbrace{B^3}_{\text{full ARA sphere}}
+\underbrace{B^3}_{\substack{\text{filled ARA state ball}\\\text{shell plus mixture interior}}}
 \xrightarrow{\text{central time slice}}
 \underbrace{B^2}_{\substack{\text{slice disk}\\\partial B^2=S^1}}
 \xrightarrow{\text{central diameter}}
@@ -947,11 +1274,11 @@ The geometric interpretation clarified after the first draft has a **reduction**
 \underbrace{B^1}_{\text{ARA diameter}}
 \xrightarrow{\text{restore branch + gradient signs}}
 \underbrace{S^1_{4Q}}_{\substack{\text{circle/wave}\\\text{four quadrants}}}
-\xrightarrow{\text{minimum closed sampling}}
+\xrightarrow{\text{choose minimum closed sampling}}
 \underbrace{C_3}_{\text{triangle}}
-\xrightarrow{\text{phase + anti-phase}}
+\xrightarrow{\text{regular phase + anti-phase construction}}
 \underbrace{C_6}_{\text{hexagon}}
-\xrightarrow{\text{observer contraction/webbing}}
+\xrightarrow{\text{candidate observer contraction/webbing}}
 \underbrace{C_5}_{\text{visible pentagon}}
 }
 \tag{7b}
@@ -960,7 +1287,8 @@ The geometric interpretation clarified after the first draft has a **reduction**
 Here \(S^1_{4Q}\) means the circle equipped with the two sign coordinates from Corollary 2.4, and \(C_n\) denotes
 the cycle graph with \(n\) vertices and \(n\) edges. The last arrow is initially a topological projection claim:
 producing a *regular metric pentagon* additionally requires a geometric relaxation or projection rule that fixes
-its visible lengths and angles.
+its visible lengths and angles. Equation (7b) is one exact-when-constructed route through the representations; it
+does not state that every physical ARA must traverse those polygon orders.
 
 ### Theorem 8.2 — The triangle is the minimum closed map that determines a circle
 
@@ -1247,19 +1575,19 @@ own side of the geometry, while our light-based slice reveals only one edge of t
 
 ## 10. Light–Information and Dark–Matter as a flip-equivariant pair
 
-Define an involution on labels by
+Define a proposed involution on these domain labels by
 
 \[
-F(L)=D,
-\qquad F(D)=L,
-\qquad F(I)=M,
-\qquad F(M)=I.
+F_{LD}(L)=D,
+\qquad F_{LD}(D)=L,
+\qquad F_{LD}(I)=M,
+\qquad F_{LD}(M)=I.
 \]
 
 Assume a coupling operation \(C\) is flip-equivariant:
 
 \[
-F(C(a,b))=C(F(a),F(b)).
+F_{LD}(C(a,b))=C(F_{LD}(a),F_{LD}(b)).
 \tag{5}
 \]
 
@@ -1268,21 +1596,22 @@ F(C(a,b))=C(F(a),F(b)).
 Under (5),
 
 \[
-F(C(L,I))=C(D,M).
+F_{LD}(C(L,I))=C(D,M).
 \]
 
 **Proof.** Substitute \(a=L\) and \(b=I\) into (5):
 
 \[
-F(C(L,I))=C(F(L),F(I))=C(D,M).
+F_{LD}(C(L,I))=C(F_{LD}(L),F_{LD}(I))=C(D,M).
 \]
 
 \(\square\)
 
-**Plain explanation.** If the singularity flip reverses both Light↔Dark and Information↔Matter while preserving
+**Plain explanation.** If the proposed domain-label flip reverses both Light↔Dark and Information↔Matter while preserving
 the form of coupling, then the Dark–Matter combination is automatically the flipped partner of the
 Light–Information combination. This proves the symmetry inside the proposed model. It does not yet prove that
-physical quantum theory and cosmological dark matter instantiate those labels.
+physical quantum theory and cosmological dark matter instantiate those labels or that this label map equals the
+dynamical singularity-crossing map \(F_{dyn}\).
 
 **Physics fence.** Quantum mechanics also applies to massive and potentially dark systems. The defensible ARA
 claim is that Light–Information coupling provides the part of quantum behaviour directly accessible to an
@@ -1645,7 +1974,7 @@ P(N=n)=(1-p)^n p.
 Its standard expectation is \((1-p)/p=1/p-1\). Differentiating gives
 
 \[
-\frac{d}{dp}\mathbb E[N]=-rac1{p^2}<0.
+\frac{d}{dp}\mathbb E[N]=-\frac{1}{p^2}<0.
 \]
 
 \(\square\)
@@ -1694,22 +2023,26 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 
 ## Mathematically proved in this document
 
-1. The canonical duration normalisation produces a bounded, invertible, mirror-symmetric 0–2 coordinate.
-2. A circle projects to the folded 0–2 interval and necessarily loses direction unless handedness is retained.
-3. A central sphere section gives a circle/disk and a further central section gives the ARA diameter.
+1. The canonical duration-axis normalisation produces a bounded, invertible, mirror-symmetric 0–2 coordinate.
+2. The chosen cosine projection maps a circle to the folded 0–2 interval and necessarily loses direction unless
+   handedness is retained.
+3. A central section of the filled ball gives a disk/circle and a further central section gives a diameter.
 4. Linear mixtures of a phase vector and its anti-phase partner fill exactly that diameter, cancelling at its
    centre.
 5. Side and motion signs produce four circle quadrants, while rotating the diameter through every axis rebuilds
-   the complete ball.
+   the complete state ball and sweeps its spherical boundary.
 6. In a two-wave model, the endpoints contain only one source and have no interaction term, while the equal
    meeting at 1 maximises possible interaction; relative phase selects cancellation or resonance.
-7. Octave scaling, golden handover compounding, and singularity flips can be represented by distinct operators.
-8. Coupled identities remain distinct in a product state.
-9. Information³ cycle consistency makes a triangle reconstructible from one seed plus its relations.
+7. Octave scaling, golden handover compounding under the golden unit assumption, and static chart reversal can be
+   represented by distinct operators. The physical singularity-crossing map is not derived.
+8. Coupled identities remain separately projectable inside a model that retains their labelled product state.
+9. Two identities plus their relation define a relational ternary; in the invertible three-vertex holonomy model,
+   cycle consistency makes the triangle reconstructible from one seed plus its relation maps.
 10. Approximate closure gives a quantitative bound on unravelling.
-11. Repeated closure produces a mathematically self-similar hierarchy under the same rule.
-12. Three non-collinear points minimally determine a circle; a regular phase triangle plus its anti-phase copy
-   forms a regular hexagon; contracting one hexagonal edge produces a five-cycle.
+11. Repeated triangular closure produces a mathematically self-similar hierarchy when that same rule is assumed at
+    every rung. The broader scalable relational recursion is defined but not physically proved.
+12. Three non-collinear points minimally determine a circle; under the declared regular construction, a phase
+    triangle plus its anti-phase copy forms a regular hexagon; contracting one hexagonal edge produces a five-cycle.
 13. A deterministic many-to-one projection has a nonnegative hidden-information cost.
 14. Pentagon/phi, octave projection, and five-versus-six angular-defect identities are exact mathematics.
 15. A sector can be invisible to one measurement channel and visible to another.
@@ -1719,18 +2052,30 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 18. Quantum phase cycles can coexist with stationary probability densities.
 19. An ideal conservative pendulum has equal outward and return durations.
 20. Fusion recovery is a product of necessary stages, and reduced per-cycle loss raises expected cycle count.
+21. Splitting a nonzero electric-flux boundary into outward and inward activity gives the exact Gauss crosswalk
+    \(\Phi_E=T_\Phi(x_\Phi-1)=Q_{inside}/\varepsilon_0\); a zero-activity boundary leaves the mixture coordinate
+    undefined rather than proving an active ridge.
 
 ## ARA assumptions not proved by mathematics alone
 
-1. Every physical identity can be reduced to an accumulation–release relation at an appropriate scale.
-2. The golden ratio is the universal physical handover factor rather than one important dynamical landmark.
-3. Singularity crossings in nature implement the flip operator defined here.
-4. Physical Information³ closure is accurately represented by the proposed relation maps.
-5. Dark matter is a closed Space-side relational structure projected to us through one gravitational edge.
-6. The primitive dark-sector path weights are exactly \(2\) and \(3/2\).
-7. The present-day dark-sector ratio formula is generated by this geometry rather than selected after observing
+1. Every physical identity instantiates the proposed spherical/wave closure and can be read through meaningful
+   opposed diameter poles at an appropriate scale.
+2. The same Phase-A/Phase-B, relation-born identity and crossing/closure grammar recurs across independently
+   measured rungs and domains.
+3. The golden ratio is a preferred physical handover factor rather than one important mathematical/dynamical
+   landmark among nearby alternatives.
+4. Singularity crossings in nature implement a particular \(F_{dyn}\), and its relation to static chart reversal
+   can be derived for each domain.
+5. Physical Information³ closure is accurately represented by the proposed relational ternary, holonomy or another
+   declared relation-preserving transform.
+6. The triangle→hexagon→pentagon constructions describe physical closure, projection or leak in a selected domain.
+7. Dark matter is a closed Space-side relational structure projected to us through one gravitational edge.
+8. The primitive dark-sector path weights are exactly \(2\) and \(3/2\).
+9. The present-day dark-sector ratio formula is generated by this geometry rather than selected after observing
    the density ratios.
-8. Golden pulse progression improves muon recovery under a fixed experimental energy budget.
+10. Golden pulse progression improves muon recovery under a fixed experimental energy budget.
+11. The candidate aggregation \(j_{id}=(\mathrm{TE\!-\!ARA}/2)(x-1)\), with typed surrounding contributions,
+    transfers beyond the exact Gauss construction to independently measured domains.
 
 ## Highest-value next tests
 
@@ -1743,24 +2088,25 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 4. **Fusion:** compare pulse schedules under identical carrier, pulse count, bandwidth, and energy, scoring the
    complete recover-and-recycle probability.
 5. **Cross-scale ARA:** use matched signals, filters, cycle definitions, and independently fixed rung paths.
+6. **Representation fidelity:** identify Phase A and Phase B in raw or least-transformed observations, freeze two
+   representation maps, and test whether coupling then projection agrees with projection then coupling on held-out
+   data.
+7. **ARA × TE-ARA aggregation:** predeclare the identity modes, energy participation, direction coordinate, unit
+   scale and surrounding terms, then predict a signed held-out physical result not used to construct those inputs.
 
 ---
 
 ## One-paragraph summary
 
-ARA can be given a clean mathematical skeleton. A central sphere slice gives a circle, and its central diameter is
-the minimal ARA line. Linear mixtures of phase and anti-phase fill that line and cancel at its centre; restoring
-the side and direction signs unpacks it into four circle quadrants, while rotating the line through all axes
-reconstructs the full sphere. Two positive phase durations produce a unique mirrored 0–2 coordinate on that
-diameter, while direction must be carried separately. The endpoints are single-source relational singularities;
-the centre is the unique equal meeting where anti-phase can cancel the output to zero or in-phase coherence can
-produce maximal reinforcement.
-Octaves change scale by two, golden factors can describe multiplicative handover distance, and singularity flips
-reverse orientation. Information³ supplies the most important higher-level rule: when three directed relations
-close consistently, the triangle can be represented as one new identity and the operation can repeat fractally.
-The triangle is also the smallest closed connection that fixes a circle; pairing it with its anti-phase copy
-produces a regular hexagon, while contracting one hidden relation yields a visible five-cycle with a measurable
-hidden-information cost.
-The dark-sector, LLM, quantum, pendulum, and fusion sections show what follows when this skeleton is applied, while
-keeping the physical assumptions visible. The mathematics proves that the framework can be internally coherent
-and calculable; observation must decide how much of the universe actually uses it.
+ARA can be given a clean mathematical skeleton centred on one proposed spherical/wave identity and one reversible
+0–2 diameter reading through it. In the filled-state model, rotating the diameter through all axes reconstructs
+the ball and sweeps its spherical boundary. Exact phase/anti-phase mixtures fill one diameter; its centre is equal
+participation, while relative phase and total activity distinguish quiet cancellation from coherent reinforcement
+and other active ridges. Duration supplies one bounded, invertible diameter instrument, not the definition of every
+ARA axis. Static pole-chart reversal, octave scale change, candidate golden handover and physical singularity
+crossing are typed separately. Information³ begins with two identities plus their retained relation; triangular
+holonomy is one rigorous closure test, and repeated triangular closure is one sufficient self-similar construction
+rather than the primitive ARA object. Regular triangle, hexagon, pentagon, dark-sector, LLM, quantum, pendulum and
+fusion sections are exact or conditional decompressions with their assumptions visible. The mathematics proves
+internal coherence and calculability inside those declared models; raw-first observation and prospective tests must
+decide whether the same relational geometry recurs in nature.

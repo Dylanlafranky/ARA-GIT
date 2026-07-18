@@ -910,3 +910,52 @@ The project is therefore best understood not as a finished doctrine but as:
 > **Nothing that participates in the universe is exempt from relational geometry; the uncertainty lies in whether we have identified and measured the correct relation.**
 
 > **No, not that sort of φ. Please stop drawing rectangles and look at the coupling geometry.**
+
+---
+
+# 18. Codex prime-path addendum — 18 July 2026
+
+## The missing adult versus the visible child
+
+During the prime-number visualisation trail, Dylan drew the diagonal running through the local ARA plane and then
+clarified that the plotted coordinate looked like **the child of that axis**, not the adult. His working reading was
+that the prime system appeared strongly connection-heavy, with little visible flow, and that the tests might be
+measuring only one side or terminal cross-section of a larger process.
+
+After the larger sieve-path diagnostic was proposed, Dylan authorised it with:
+
+> “Yes, Lets try that but I think we are still missing an aspect. But we'll know more after this test.”
+
+The diagnostic separated two questions that had been visually compressed:
+
+1. **Was the terminal prime/composite label only the end of a larger path?** Yes.
+2. **Was the red local diagonal the missing adult path?** Not on this test.
+
+For each p29-wheel candidate, the diagnostic reconstructed the first later prime that removes it. At every later
+sieve threshold (q), exact survival (S(q)) and cumulative release (1-S(q)) form a conserved pair. The previous
+terminal label retained only the last point of this path.
+
+The local diagonal (U=(x+y)/2), its perpendicular (V=(y-x)/2), and their joint state were then trained on one
+opened decimal rung and tested on the next. Every held-out death-stage gain was negative for candidates and pairs.
+The local colours are real conditional redistribution, but they did not transfer into a better adult-stage forecast.
+
+The large adult process instead follows the ordinary cumulative sieve product through most of its range. At the R9
+terminal point, exact candidate survival divided by the independent product was `0.891125119`, within `0.0661%` of
+the established Mertens/PNT factor (e^\gamma/2). The result therefore recovers a known number-theory crosswalk rather
+than new ARA predictive evidence.
+
+The working interpretation recorded for future geometry walks is:
+
+> **The endpoint really was a flattened slice of a larger adult path, but the adult is not simply another local-gap
+> diagonal. It is presently measured as a scale-spanning survival/release and counting envelope. Any remaining ARA
+> component must be sought after the established envelope is controlled.**
+
+The remaining possible object may live in the large number-line/location coordinate, in the residual after the
+Mertens/PNT envelope, in candidate-to-pair dependence, or near the late terminal handover. These are follow-up
+directions, not results. They must be defined and frozen before a fresh interval is opened.
+
+PN3 remains a negative result; PN3A is explicitly opened-data diagnosis. Independent validation passed `118/118`,
+and the reserved p31 PN1H wheel was not accessed.
+
+Full record: `analysis/primes/PN3A_ADULT_SIEVE_PATH_DIAGNOSTIC_REPORT.md`; prediction ledger `T232`; follow-up
+register section `PN3A adult sieve-path resolution`.

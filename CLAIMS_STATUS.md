@@ -18,13 +18,25 @@ The safest way to read any claim here is:
 > **TE-ARA / MX1 status (12 July 2026):** TE-ARA is now defined as the 0–2 **main-identity participation**
 > coordinate \(2E_{id}/E_{total}\), not absolute energy, capacity fill or source magnitude. In the development-only
 > Alves/OSIRIS plasma test, the declared harmonic identity transferred from electric field to independent particle
-> source at \(r=0.9991\); the source-participation TE-ARA analogue transferred at \(r=0.7987\), MAE 0.0911 on 0–2;
+> source at \(r=0.9991\), but that and the full Gauss agreement are simulator/solver consistency checks rather than
+> independent ARA evidence. The source-participation TE-ARA analogue—the primary non-tautological ARA-specific
+> development result—transferred at \(r=0.7987\), MAE 0.0911 on 0–2;
 > local pair ARA transferred at \(r=0.7706\). However, on the same 75 clean held-late slices, scalar ARA + TE-ARA
 > did not beat the ordinary \(k_0E_{\rm rms}\) magnitude scale. Careful claim: **development support for an
 > identity-participation crosswalk; no support yet for the tested scalar magnitude law.** The independent Tang
 > confirmation arrays remain unopened under a frozen protocol. ENSO and LLM use as mixed/distributed participation
 > ledgers is proposed, not tested. Full synthesis:
 > `Analysis/TE_ARA_PARTICIPATION_LEDGER_SYNTHESIS_2026-07-12.md`.
+
+> **Prime sieve-rung status (17 July 2026):** the old raw prime-gap value near `1.000004` remains superseded as a
+> telescoping whole-signal ridge artifact. Its canonical replacement, PN1/T227, froze development through prime 13
+> and held out the exact primorial-wheel transitions `13 -> 17` and `17 -> 19`. The ordered local 0–2 pair relation
+> and overlapping triple relation beat a 200-member full-gap-marginal order shuffle in all `4/4` comparisons, each at
+> the permutation floor `p=1/201=0.004975`; all split-half, bin-sensitivity, exact-sieve and independent replay checks
+> passed. Status: **SUPPORTED `[pre-registered, arithmetic, unreplicated]`** for inherited cyclic relation only. The
+> ordinary log-gap ratio is an exact coordinate rival, the two rungs are not independent replications, and no RH,
+> phi, universal-leak or physical-universality inference is licensed. See
+> `analysis/primes/PN1_SIEVE_RUNG_RESULT.md`.
 
 > **Update (10 June 2026) — prediction-mechanics session, levers vs lenses:** A day on the ENSO 12-month
 > amplitude/turning-point problem and on what energy *is* in the forecast. Net, with honest statuses:

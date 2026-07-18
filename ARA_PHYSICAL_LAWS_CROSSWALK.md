@@ -54,6 +54,36 @@ This tuple is **measurement metadata**, not a replacement for the minimal ARA ob
 interaction can legitimately return different coordinates because they ask different physical questions. A value
 without these declarations is incomplete and should not be compared across domains.
 
+### 2.2 Law recovery as two-route convergence
+
+Recovering an established law can be a route-convergence test:
+
+\[
+\underbrace{\text{resolved children and couplings}}_{\text{bottom-up ARA route}}
+\xrightarrow{\ \mathcal C_{\rm ARA}\ }
+\underbrace{\text{parent observable}}_{\text{shared destination}}
+\xleftarrow{\ \mathcal L_{\rm established}\ }
+\underbrace{\text{field/continuum law}}_{\text{top-down physics route}}.
+\]
+
+The evidence strength depends on how independent the two routes are:
+
+1. **Algebraic translation:** the ARA route rearranges or re-labels the same law and inputs. This is E0 calibration,
+   not independent support.
+2. **Independent representation recovery:** child/particle/phase-space data and field/continuum data reach the same
+   observable through separately measured representations. This tests a real crosswalk, subject to shared-data
+   leakage and numerical dependencies.
+3. **Frozen bottom-up prediction:** an ARA aggregation rule is declared before the parent result is inspected and
+   predicts the established observable on held-out data without importing the law's answer. This is the strongest
+   within-domain ARA test.
+4. **Transferable route convergence:** the same frozen aggregation/scale-change rule succeeds across resolutions,
+   configurations or domains. This is required before route recovery supports the proposed universal/fractal claim.
+
+A failed convergence is informative: it identifies a missing child relation, projection or scale term. MX4's failed
+flat Lorentz aggregation and MX5's partial first-moment repair are examples. The exact local Lorentz ARA coordinate
+is tier 1; the particle-first versus field-first grid comparison is tier 2; a held-out transferable compressed
+closure would be tier 3 or 4.
+
 ## 3. The small set of established forms that recur
 
 ### 3.1 Local balance / continuity — the strongest general ARA-shaped foundation

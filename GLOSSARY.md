@@ -20,13 +20,23 @@ A plain-language key to the vocabulary used across this repository. Where a term
   separate substances or intrinsically discrete boxes. A hard jump may be claimed only when the measured system
   supplies an independently demonstrated discontinuity. This continuous rule is proposed to recur at nested scales;
   calling that recurrence fractal does not by itself establish a mathematical fractal dimension.
-- **1.0 (balance / shock absorber)** — symmetric build and release; externally clocked or fully cancelling. Atomic clocks, pendulums, even random draws land here.
-- **Ridge state / active ridge** — \(x=1\) fixes equal composition only; it does not identify the internal state.
+- **1.0 (balance / shock absorber)** — the centre/equality landmark at the declared measurement grain: symmetric
+  build and release, an externally clocked relation, or aggregate cancellation may project here. Atomic clocks,
+  pendulums and random draws can land here under specified measurements; this does not imply exact balance at every
+  nested scale.
+- **Ridge state / active ridge** — \(x=1\) fixes equal composition only at the declared boundary, window and
+  projection; it does not identify the internal state.
   Always retain total activity, variance, coherence/phase and sign alignment. The **null ridge** has negligible
   activity and variance. The lotto **everything ridge** has balanced aggregate output, high/maximal variance and no
   stable predictive phase. A **coherent active ridge** has nonzero activity and stable coupling/phase; aligned
   contributors may reinforce rather than cancel. Call it harmonic/resonant only when an actual periodic resonance is
   independently shown.
+- **Grain-relative ridge / no-final-1 rule** — a parent or coarse projection may equal \(1\) while its children remain
+  asymmetric. In the simplest weighted aggregation, \(x_i=1+\delta_i\) and \(\sum_iw_i\delta_i=0\), but
+  \(\sum_iw_i\delta_i^2>0\). Thus the parent mean closes at the ridge while the children retain asymmetric geometry.
+  This spread alone does not prove motion; temporal change, flux or phase evidence is also required. ARA does not
+  posit a physically final, scale-independent \(1.0\) at which every nested deviation vanishes.
+  Exact algebraic ridge equalities remain valid within their explicitly declared projections.
 - **Consumer (< 1)** — fast build held long, or fast release after long buildup, depending on convention; the "taking in" side.
 - **Engine (≈ φ ≈ 1.618)** — self-sustaining, self-timed, efficient. Hearts, breathing, the sustained-oscillator sweet spot.
 - **Exothermic / donor (≈ 1.75)** — energy-producing sources (e.g. the solar magnetic cycle).
@@ -50,6 +60,32 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **Pump / ground cycle** — the irreducible base oscillation that defines what the system *is* (rung 0). Remove it and the system stops.
 - **Matched-rung pair** — two systems at the same rung, coupled anti-phase (e.g. NINO ↔ SOI, atria ↔ ventricles). Couple at ratio ~1 (same coordinate), not φ apart.
 - **Anti-phase** — 180° offset; the two partners of a matched-rung pair.
+- **Rung-relative phase role** — Phase A and Phase B name complementary roles within one declared boundary and rung;
+  they are not permanent types of object. A parent-level Phase A may itself be a complete lower-rung identity with
+  its own internal Phase-A/Phase-B pair.
+- **Open ARA / external counterphase** — a measurement contains one parent-level branch while its complementary
+  branch crosses or lies beyond the chosen boundary. Measure the contained branch's internal ARA separately, retain
+  the external coupling as boundary/Other, and do not confuse an internal \(x\approx1\) ridge with closure of the
+  unmeasured parent pair.
+- **Momentary asymmetry** — an off-ridge reading can be a genuine position in the current time slice rather than a
+  missing external partner. Enlarge the boundary and the time window independently: spatial closure identifies an
+  external counterphase; temporal closure identifies an internally complete but currently asymmetric cycle.
+- **Resonant death (ARA musing)** — proposed local \(2.0\) Time-side terminal/singularity limit: usable gradients
+  and directed transfer approach zero although total energy may remain. Once cycles stop, timing ARA is undefined, so
+  \(2.0\) is the limit approached by the last measurable cycles. Dylan proposes that the complete Space-origin
+  lifecycle runs \(0\to2\); reading its beginning and end as one completed diameter/history gives the centre
+  \((0+2)/2=1\). A higher rung returns that ridge only if it compresses the full child history. This is
+  distinct from established amplitude death. Heat death is the proposed universe-scale analogy, understood as loss
+  of work-producing gradients rather than literal cessation of all microscopic motion or of time. A persistent
+  resonant-death identity is additionally proposed to require a strong Connection-side holding relation and no
+  effective anti-phase response from adjacent rungs large enough to reopen or unravel it. `TE-ARA = 2` would mean the
+  surviving identity remains fully represented in the declared account; it is usable exergy, not TE-ARA, that is
+  “spent.”
+- **Cross-rung reopening/unravelling condition (ARA musing)** — let \(R_k^-\) denote the effective anti-phase response
+  induced at rung \(k\) by neighbouring rungs \(k-1\) and \(k+1\). A persistent terminal candidate requires
+  \(R_k^-<R_{k,\mathrm{unlock}}\) over a declared observation window. Crossing the threshold must have an observable
+  consequence fixed in advance: resumed transfer, orientation flip, boundary loss, falling identity participation or
+  increased `Other`. Merely failing to observe a neighbour is not evidence that this condition holds.
 - **ARA singularity / singularity crossing** — the relational handover where a declared signed phase coordinate
   crosses zero or the cyclic seam and the orientation is relabelled phase \(\leftrightarrow\) anti-phase. The event is
   continuous unless the local physics proves otherwise. It is not automatically a mathematical divergence, infinite
@@ -76,6 +112,12 @@ A plain-language key to the vocabulary used across this repository. Where a term
   signal once as an individual contribution and again as an interaction. A weak share is descriptive until held-out
   stability or an intervention establishes that it matters. Defined within ARA; universal physical usefulness remains
   unvalidated.
+- **Full-pair TE-ARA closure** — if Phase A and Phase B exhaust the declared participation account and are equal,
+  \(p_A=p_B=1/2\), then \(\mathrm{TE}_A=1\), \(\mathrm{TE}_B=1\), and
+  \(\mathrm{TE}_{A+B}=2\), while the separate ARA composition coordinate is \(x=1\). This is a normalized
+  participation closure, not a claim of twice the physical energy. The signature \((x,\mathrm{TE})=(1,2)\) does not
+  distinguish a frozen static pair, coherent resonance/standing activity, or incoherent cancellation. Timing ARA is
+  undefined when no cycle can be observed; use time variation, flux/activity and phase coherence to classify the state.
 - **TE-ARA decomposition / Other recursion** — the decomposition-side counterpart of Information³ closure.
   Information³ asks how two identities plus their relation close into a new identity; TE-ARA begins with the observed
   identity, assigns participation to its primary two-wave ARA, and places remaining participation in `Other`. Each

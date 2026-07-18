@@ -1,0 +1,141 @@
+{
+  "test_id": "PN3/STANDALONE-ARA-PARENT-CHILD/v1",
+  "protocol_sha256": "DB6BE581908BA336A02F2481CEAB21FAACEF137F8773E9FC74CCF605E5E5A2EB",
+  "rung_rates": {
+    "r6": {
+      "candidate_events": 1578,
+      "candidate_positives": 753,
+      "candidate_rate": 0.47718631178707227,
+      "edge_events": 1577,
+      "edge_positives": 360,
+      "edge_rate": 0.22828154724159797
+    },
+    "r7": {
+      "candidate_events": 15801,
+      "candidate_positives": 6241,
+      "candidate_rate": 0.39497500158217835,
+      "edge_events": 15801,
+      "edge_positives": 2381,
+      "edge_rate": 0.15068666540092399
+    },
+    "r8": {
+      "candidate_events": 157949,
+      "candidate_positives": 54208,
+      "candidate_rate": 0.34319938714395154,
+      "edge_events": 157949,
+      "edge_positives": 18507,
+      "edge_rate": 0.11717073232499098
+    }
+  },
+  "candidate_parent_predictions": {
+    "ara": 0.2982108205941167,
+    "home": 0.34319938714395154,
+    "raw_additive": 0.2914237727057247,
+    "log_ols_3rung": 0.2887087123862994,
+    "ara_curvature": 0.3130535692894109
+  },
+  "edge_parent_predictions": {
+    "ara": 0.09110945867072391,
+    "home": 0.11717073232499098,
+    "raw_additive": 0.08365479924905797,
+    "log_ols_3rung": 0.08168392443378812,
+    "ara_curvature": 0.10732571078444056
+  },
+  "candidate_backtest": {
+    "actual_r8": 0.34319938714395154,
+    "ara_from_r6_r7": 0.32692734058233774,
+    "home_r7": 0.39497500158217835,
+    "raw_additive_r6_r7": 0.31276369137728444,
+    "ara_relative_rate_error": 0.04741280774720221,
+    "ara_cross_entropy_bits": 0.9287082920789465,
+    "home_cross_entropy_bits": 0.9360810700730599,
+    "raw_additive_cross_entropy_bits": 0.9309047797271965
+  },
+  "edge_backtest": {
+    "actual_r8": 0.11717073232499098,
+    "ara_from_r6_r7": 0.09946695825405023,
+    "home_r7": 0.15068666540092399,
+    "raw_additive_r6_r7": 0.07309178356025,
+    "ara_relative_rate_error": 0.15109382453833792,
+    "ara_cross_entropy_bits": 0.5235748782179,
+    "home_cross_entropy_bits": 0.5279423094871862,
+    "raw_additive_cross_entropy_bits": 0.5388907851699676
+  },
+  "child_model_names": [
+    "ara_plain_child",
+    "ara_i3_child",
+    "ara_decompressed_child",
+    "raw_pair_child",
+    "raw_stencil_child",
+    "ara_endpoints_child",
+    "ara_decompressed_edge_child",
+    "raw_edge_child"
+  ],
+  "child_diagnostics": {
+    "ara_plain_child": {
+      "states": 12,
+      "singleton_states": 0,
+      "minimum_count": 3429,
+      "median_count": 259000.5,
+      "maximum_count": 702990
+    },
+    "ara_i3_child": {
+      "states": 840,
+      "singleton_states": 38,
+      "minimum_count": 1,
+      "median_count": 548.5,
+      "maximum_count": 61900
+    },
+    "ara_decompressed_child": {
+      "states": 4543,
+      "singleton_states": 807,
+      "minimum_count": 1,
+      "median_count": 12.0,
+      "maximum_count": 37000
+    },
+    "raw_pair_child": {
+      "states": 179,
+      "singleton_states": 16,
+      "minimum_count": 1,
+      "median_count": 180.0,
+      "maximum_count": 237513
+    },
+    "raw_stencil_child": {
+      "states": 4543,
+      "singleton_states": 807,
+      "minimum_count": 1,
+      "median_count": 12.0,
+      "maximum_count": 37000
+    },
+    "ara_endpoints_child": {
+      "states": 115,
+      "singleton_states": 2,
+      "minimum_count": 1,
+      "median_count": 15571.0,
+      "maximum_count": 161231
+    },
+    "ara_decompressed_edge_child": {
+      "states": 445,
+      "singleton_states": 31,
+      "minimum_count": 1,
+      "median_count": 196.0,
+      "maximum_count": 126544
+    },
+    "raw_edge_child": {
+      "states": 1051,
+      "singleton_states": 132,
+      "minimum_count": 1,
+      "median_count": 43.0,
+      "maximum_count": 108180
+    }
+  },
+  "primary_bins": 12,
+  "shrinkage": 64.0,
+  "target_interval": [
+    1000000000,
+    1010000000
+  ],
+  "target_accessed": false,
+  "model_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3_STANDALONE_ARA_DEVELOPMENT_MODEL.npz",
+  "model_sha256": "A8AE6E69263B05FD2DEFB1D5917A0A8C64D0D3FE31099365173AADE316F82D4A"
+}

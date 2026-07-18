@@ -1,0 +1,176 @@
+{
+  "test_id": "PN3/STANDALONE-ARA-PARENT-CHILD/v1",
+  "protocol_sha256": "DB6BE581908BA336A02F2481CEAB21FAACEF137F8773E9FC74CCF605E5E5A2EB",
+  "target_config": {
+    "test_id": "PN3/STANDALONE-ARA-PARENT-CHILD/v1",
+    "frozen_date_local": "2026-07-17",
+    "protocol_sha256": "DB6BE581908BA336A02F2481CEAB21FAACEF137F8773E9FC74CCF605E5E5A2EB",
+    "standalone_script_sha256": "84C9E3188491B5BB72FA38C46F98374F274836569D62BB334DA1A5C0255DCF50",
+    "comparison_script_name": "pn3_established_comparison.py",
+    "comparison_script_sha256": "271AC4FF018EEA8D603B06491D5FFED147C4B7A0FF83DEEBF118CFF1D1CD8509",
+    "development_model_sha256": "A8AE6E69263B05FD2DEFB1D5917A0A8C64D0D3FE31099365173AADE316F82D4A",
+    "development_summary_sha256": "3F721EC7007D73E6C8B317E3E2E6407ACB931F3A5CAF1FADF91E649B12DE7956",
+    "target_low": 1000000000,
+    "target_high": 1010000000,
+    "target_previously_accessed_by_pn3": false,
+    "p31_target_status": "sealed_and_untouched",
+    "freeze_note": "No development rule was changed after observing the R8 parent backtest. The R9 target is opened only by the hashed standalone script."
+  },
+  "comparator_config": {
+    "test_id": "PN3/STANDALONE-ARA-PARENT-CHILD/v1",
+    "frozen_date_local": "2026-07-17",
+    "protocol_sha256": "DB6BE581908BA336A02F2481CEAB21FAACEF137F8773E9FC74CCF605E5E5A2EB",
+    "packet_sha256": "129832B150360C005DFF676A8F0140145BEB1E9DFCBF074BB4FC44ABDDDE1C6A",
+    "target_summary_sha256": "813409FD4E60CB0ABF1F7376DAC73A06772CAB19247D34354D18415FA380518E",
+    "target_config_sha256": "9508DCAAF6E1041EBEDB13736F2A2233DB0A5C8BBBA66D760B964C85B0737240",
+    "comparison_script_sha256": "271AC4FF018EEA8D603B06491D5FFED147C4B7A0FF83DEEBF118CFF1D1CD8509",
+    "target_low": 1000000000,
+    "target_high": 1010000000,
+    "bootstrap_blocks": 40,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260717,
+    "freeze_note": "The standalone packet was hashed before any established analytic comparator read its target labels. The comparison script may score but cannot alter the sealed predictions."
+  },
+  "packet_sha256_before": "129832B150360C005DFF676A8F0140145BEB1E9DFCBF074BB4FC44ABDDDE1C6A",
+  "packet_sha256_after": "129832B150360C005DFF676A8F0140145BEB1E9DFCBF074BB4FC44ABDDDE1C6A",
+  "packet_immutable_during_comparison": true,
+  "target_interval": [
+    1000000000,
+    1010000000
+  ],
+  "candidate_events": 1579467,
+  "candidate_positives": 482449,
+  "candidate_actual_rate": 0.30545050957063363,
+  "edge_events": 1579466,
+  "edge_positives": 146147,
+  "edge_actual_rate": 0.09252937385166886,
+  "parent_recovery": {
+    "candidate": {
+      "actual_rate": 0.30545050957063363,
+      "ara": 0.2982108205941167,
+      "ara_curvature": 0.3130535692894109,
+      "home": 0.34319938714395154,
+      "log_ols_3rung": 0.2887087123862994,
+      "raw_additive": 0.2914237727057247,
+      "ara_relative_rate_error": 0.02370167588423292,
+      "ara_log_loss_bits": 0.8880316922652892,
+      "home_log_loss_bits": 0.8924990740815061,
+      "raw_additive_log_loss_bits": 0.8885328670859194,
+      "passes_one_percent_rate_error": false,
+      "passes_parent_control_losses": true
+    },
+    "edge": {
+      "actual_rate": 0.09252937385166886,
+      "ara": 0.09110945867072391,
+      "ara_curvature": 0.10732571078444056,
+      "home": 0.11717073232499098,
+      "log_ols_3rung": 0.08168392443378812,
+      "raw_additive": 0.08365479924905797,
+      "ara_relative_rate_error": 0.015345561326516398,
+      "ara_log_loss_bits": 0.4448741385860039,
+      "home_log_loss_bits": 0.4493800218425146,
+      "raw_additive_log_loss_bits": 0.445575163251049,
+      "passes_one_percent_rate_error": false,
+      "passes_parent_control_losses": true
+    }
+  },
+  "criteria": {
+    "candidate_P1_parent_recovery": false,
+    "edge_P1_parent_recovery": false,
+    "candidate_P2_child_redistribution": false,
+    "edge_P2_child_redistribution": false,
+    "candidate_P3_full_standalone": false,
+    "edge_P3_full_standalone": false
+  },
+  "bootstrap_primary_comparisons": [
+    {
+      "task": "candidate",
+      "model": "ara_parent_ara_i3_child",
+      "comparator": "ara_parent_only",
+      "observed_gain_bits": -7.368936337375512e-05,
+      "bootstrap_mean_gain_bits": -7.370906648626947e-05,
+      "ci95_low_bits": -9.584237732765638e-05,
+      "ci95_high_bits": -5.029522187107073e-05,
+      "probability_gain_positive": 0.0,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    },
+    {
+      "task": "candidate",
+      "model": "ara_parent_ara_i3_child",
+      "comparator": "ara_parent_raw_stencil_child",
+      "observed_gain_bits": 9.007816992483909e-05,
+      "bootstrap_mean_gain_bits": 9.014115604380946e-05,
+      "ci95_low_bits": 6.284378044490699e-05,
+      "ci95_high_bits": 0.00011632684770258723,
+      "probability_gain_positive": 1.0,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    },
+    {
+      "task": "candidate",
+      "model": "ara_parent_ara_i3_child",
+      "comparator": "pnt29_reference",
+      "observed_gain_bits": -0.000253481317046392,
+      "bootstrap_mean_gain_bits": -0.0002535513439680017,
+      "ci95_low_bits": -0.0002899793367153694,
+      "ci95_high_bits": -0.00021751937496417928,
+      "probability_gain_positive": 0.0,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    },
+    {
+      "task": "edge",
+      "model": "ara_parent_ara_endpoints_child",
+      "comparator": "ara_parent_only",
+      "observed_gain_bits": -1.3901780281006587e-05,
+      "bootstrap_mean_gain_bits": -1.386595425666966e-05,
+      "ci95_low_bits": -2.2170733796312307e-05,
+      "ci95_high_bits": -5.3011511057281385e-06,
+      "probability_gain_positive": 0.001,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    },
+    {
+      "task": "edge",
+      "model": "ara_parent_ara_endpoints_child",
+      "comparator": "ara_parent_raw_edge_child",
+      "observed_gain_bits": 3.907217504549234e-05,
+      "bootstrap_mean_gain_bits": 3.9013506125116936e-05,
+      "ci95_low_bits": 2.1893591581608345e-05,
+      "ci95_high_bits": 5.606230116199563e-05,
+      "probability_gain_positive": 1.0,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    },
+    {
+      "task": "edge",
+      "model": "ara_parent_ara_endpoints_child",
+      "comparator": "hl29_reference",
+      "observed_gain_bits": -3.1266509306626145e-05,
+      "bootstrap_mean_gain_bits": -3.134880378813514e-05,
+      "ci95_low_bits": -4.589193761104327e-05,
+      "ci95_high_bits": -1.6122361052811447e-05,
+      "probability_gain_positive": 0.0,
+      "replicates": 10000,
+      "blocks": 40,
+      "seed": 20260717
+    }
+  ],
+  "established_reference_notes": {
+    "p29_wheel_factor": 0.15794722310195228,
+    "conditional_hl_unique_multipliers_on_target": [
+      39.784544672686
+    ],
+    "conditional_hl_multiplier_constant_across_target_gap_classes": true
+  },
+  "scores_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3_STANDALONE_ARA_MODEL_SCORES.csv",
+  "bootstrap_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3_STANDALONE_ARA_BOOTSTRAP.csv",
+  "blocks_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3_STANDALONE_ARA_BLOCK_CALIBRATION.csv",
+  "gap_classes_csv": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\primes\\PN3_STANDALONE_ARA_GAP_CLASSES.csv"
+}

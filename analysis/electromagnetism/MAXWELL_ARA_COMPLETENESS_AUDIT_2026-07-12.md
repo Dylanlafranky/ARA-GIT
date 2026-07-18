@@ -1,7 +1,7 @@
 # Maxwell ↔ ARA completeness audit
 
-**Date:** 12 July 2026  
-**Status:** `STRUCTURAL CROSSWALK SUBSTANTIALLY COMPLETE / EMPIRICAL VALIDATION PARTIAL / ENERGY–MOMENTUM CLOSURE MISSING`  
+**Date:** 12 July 2026; checkpoint updated 13 July 2026
+**Status:** `FIELD EQUATIONS + CHARGE + POYNTING STRUCTURALLY COMPLETE / LORENTZ FORCE + MAXWELL STRESS NEXT / EMPIRICAL VALIDATION PARTIAL`
 **Orientation:** every bounded 0–2 coordinate below declares its poles locally; reversing them changes labels, not
 the invariant result.
 
@@ -19,8 +19,10 @@ ARA electrodynamics. Only Gauss electric and its electrostatic plasma consequenc
 data-based development tests. Most later results are exact reparameterisations or structural correspondences, which
 establish translation fidelity rather than novel physical evidence.
 
-The most important missing equation is **Poynting's theorem**, because it is the exact local law of field-energy
-accumulation, boundary release and transfer into matter. Charge continuity should be handled immediately before it.
+Charge continuity is complete as a rung-relative child/parent conservation bridge. Poynting's theorem is now also
+structurally recovered as the exact local law of field-energy accumulation, boundary release and transfer into matter.
+The next unfinished layer is Lorentz force plus Maxwell stress: momentum stored in fields, transported through
+boundaries and handed to matter.
 
 ## Current coverage
 
@@ -32,10 +34,12 @@ accumulation, boundary release and transfer into matter. Charge continuity shoul
 | Faraday curl | changing-\(B\) axis ↔ circulating \(E\) | exact Maxwell/Stokes geometry | spatial sphere/fractal interpretation untested |
 | Ampère–Maxwell | \(\mathbf J_C+\mathbf J_D\), \(x_{D/C}=2D/(C+D)\) | exact channels; proposed normalisation | dielectric/material transfer test not run |
 | Capacitor | \(I_C=I_D\) across wire/gap | exact ideal continuity | coherent active ridge, not a singularity or lotto ridge |
+| Charge continuity | \(\dot Q_k=-\oint_{\partial V_k}\mathbf J\cdot d\mathbf A\); shared child interfaces cancel only in the parent external account | exact conservation and scale-relative coarse-graining | no ARA-specific prediction beyond conservation yet |
+| Poynting energy continuity | \(\dot u_{EM}=-(\nabla\cdot\mathbf S+\mathbf J\cdot\mathbf E)\); four boundary-flow × matter-handover quadrants and \(x_P=2P_{out}/(P_{in}+P_{out})\) | exact conservation/reparameterisation | full electromagnetic dataset test not run; no independent ARA prediction yet |
 | Vacuum plane wave | \(\mathbf B=c^{-1}\hat k\times\mathbf E\), \(\mathbf S=\mu_0^{-1}\mathbf E\times\mathbf B\) | exact declared projection | fails as universal geometry near sources/materials |
 | Superconductor | London screening, \(2\pi n\) winding, \(h/2e\), vortices/phase slips | strong established anchor | ARA singularity/rung interpretation untested; general \(\phi\) route unsupported |
 
-## Missing part 1 — charge continuity
+## Completed bridge — charge continuity
 
 Taking the divergence of Ampère–Maxwell and using Gauss electric gives
 
@@ -47,10 +51,24 @@ Taking the divergence of Ampère–Maxwell and using Gauss electric gives
 \]
 
 This is an exact accumulation–release law and explains why the capacitor's wire current can hand over to displacement
-current without breaking the global identity. It should be the next one-equation lesson. It is an established
-conservation identity, so mapping it cleanly does not by itself validate ARA universality.
+current without breaking the global identity. It is also an exact scale lesson: one interface flux is release from one
+child, accumulation into its neighbour, and an internal term absent from the enclosing parent's external flux sum.
+This is an established conservation identity, so mapping it cleanly does not by itself validate ARA universality.
 
-## Missing part 2 — Poynting theorem: highest priority
+### 13 July state and scale refinements
+
+- Incoming/outgoing roles are defined by boundary, rung and time window. Maxwell supplies electromagnetic measurement
+  variables; the scale-relative classification is also expressible inside ARA.
+- An exact parent \(x=1\) is a grain-relative closure, not a final scale-independent state. Child asymmetries may
+  cancel in the parent while remaining nonzero under decomposition.
+- If an equal two-branch identity exhausts the declared participation account, then
+  \(\mathrm{TE}_A=1\), \(\mathrm{TE}_B=1\), \(\mathrm{TE}_{A+B}=2\) while the ARA composition is \(x=1\).
+- The joint signature \((x,\mathrm{TE})=(1,2)\) does not distinguish frozen closure, coherent resonance or incoherent
+  cancellation. Time variation, flux/activity and phase coherence are required.
+- The proposed ARA resonant-death edge case additionally requires identity-holding connection and subthreshold
+  adjacent-rung anti-phase response. This is a registered musing, not a Maxwell result.
+
+## Completed bridge — Poynting theorem
 
 \[
 \underbrace{\frac{\partial u_{EM}}{\partial t}}_{\substack{\text{field-energy storage changing}\\
@@ -80,7 +98,14 @@ This is the missing aggregation and coupling law in its cleanest electromagnetic
 MX2 already verified the electrostatic \(J\cdot E\) exchange and particle-energy response, but the development archive
 has no full magnetic field/Poynting output. A full electromagnetic dataset is required.
 
-## Missing part 3 — force and momentum closure
+The completed ARA decompression sets \(b=\nabla\cdot\mathbf S\) and \(m=\mathbf J\cdot\mathbf E\). Their signs give
+four exact boundary-flow × matter-handover quadrants. With
+\(P_{in}=[-b]_++[-m]_+\) and \(P_{out}=[b]_++[m]_+\), the bounded coordinate
+\(x_P=2P_{out}/(P_{in}+P_{out})\) preserves
+\(\dot u_{EM}=P_{in}-P_{out}\). This completes the structural recovery; it remains an exact reparameterisation until a
+frozen ARA consequence adds held-out information beyond ordinary energy conservation.
+
+## Next part 1 — force and momentum closure
 
 Maxwell fields become mechanics through the Lorentz force density:
 
@@ -96,7 +121,7 @@ The Maxwell stress tensor and electromagnetic momentum conservation then account
 transported through boundaries and delivered to matter. Until this is mapped, ARA covers field geometry and energy
 incompletely but not the full emergence of mechanical force.
 
-## Missing part 4 — observer-safe electromagnetic invariants
+## Next part 2 — observer-safe electromagnetic invariants
 
 Electric and magnetic fields mix under Lorentz-frame changes. The invariant diagnostics are
 
@@ -113,7 +138,7 @@ A vacuum plane wave has \(\mathcal I_1=\mathcal I_2=0\). These invariants are es
 the field class. A candidate bounded \(E/B\) participation coordinate must retain \(\mathcal I_2\), phase and frame
 metadata rather than using energy magnitudes alone.
 
-## Missing part 5 — fields in matter and coarse-graining
+## Next part 3 — fields in matter and coarse-graining
 
 The vacuum equations are not enough for chemistry, bodies or engineering materials:
 
@@ -129,7 +154,7 @@ charges/currents become effective material fields and constitutive laws. The pro
 \(x_{D/C}(\omega)=2\omega\varepsilon/(\sigma+\omega\varepsilon)\) is a first measurable material-gradient test, but
 complex phase and frequency-dependent \(\varepsilon,\mu,\sigma\) must be retained.
 
-## Missing part 6 — gauge connection, path and holonomy
+## Next part 4 — gauge connection, path and holonomy
 
 \[
 \mathbf B=\nabla\times\mathbf A,
@@ -142,7 +167,7 @@ holonomy and superconducting phase work. But \(\mathbf A\) and \(\varphi\) conta
 must use gauge-invariant observables such as fields, flux, phase differences, Wilson loops or fluxoid winding.
 Otherwise a coordinate change could be mistaken for physical geometry.
 
-## Missing part 7 — polarisation and helicity: strongest unexamined sphere
+## Next part 5 — polarisation and helicity: strongest unexamined sphere
 
 Polarisation gives an established sphere—the Poincaré sphere:
 
@@ -156,7 +181,7 @@ field. The Stokes parameters provide measured coordinates, degree of polarisatio
 propagation through matter moves the state on the sphere. The exact map, and whether ARA predicts any additional
 landmark or dynamics beyond standard polarisation optics, remain unexamined.
 
-## Missing part 8 — wave generation, causality and near-to-far handover
+## Next part 6 — wave generation, causality and near-to-far handover
 
 The current plane-wave mapping begins after radiation already exists. It does not yet explain:
 
@@ -195,14 +220,14 @@ predeclared bound-to-radiative gradient transfers across geometries.
 
 ## Recommended order
 
-1. **Charge continuity** — finish the source/handover account.
-2. **Poynting theorem** — complete energy accumulation, release and matter handover.
-3. **Lorentz force + Maxwell stress** — connect field identity to mechanical force/momentum.
-4. **Electromagnetic invariants** — make all later pole/lens claims observer-safe.
-5. **Poincaré sphere/polarisation** — inspect the strongest established sphere and double-helicity geometry.
-6. **Fields in matter** — operationalise environment/Other and the conduction/displacement gradient.
-7. **Near-to-far radiation** — test bound Connection ↔ radiative Transfer.
-8. **Gauge/holonomy and superconducting phase slips** — advanced topological layer.
+1. **Charge continuity — COMPLETED:** source/handover and child/parent scale account.
+2. **Poynting theorem — STRUCTURAL RECOVERY COMPLETED:** energy accumulation, release and matter handover.
+3. **Lorentz force — LOCAL CROSSWALK COMPLETE / CHILD CLOSURE PARTIAL; Maxwell stress — NEXT:** connect field identity to mechanical momentum transport.
+4. **Electromagnetic invariants:** make all later pole/lens claims observer-safe.
+5. **Poincaré sphere/polarisation:** inspect the strongest established sphere and double-helicity geometry.
+6. **Fields in matter:** operationalise environment/Other and the conduction/displacement gradient.
+7. **Near-to-far radiation:** test bound Connection ↔ radiative Transfer.
+8. **Gauge/holonomy and superconducting phase slips:** advanced topological layer.
 
 ## Best empirical next test
 
@@ -218,3 +243,87 @@ particle or material energy. Predeclare:
 6. one frozen ARA compression tested on an independent seed/configuration.
 
 That would move the Maxwell branch from a strong structural crosswalk to a genuine empirical ARA test.
+
+## 14 July 2026 addendum — MX4 Lorentz-force data crosswalk
+
+The next force step was run on the official openPMD example repository's PIConGPU 0.5.0 electromagnetic snapshot.
+The source supplies a (32^3) Yee grid, all components of (mathbf E) and (mathbf B), and 225,449 electron plus
+225,280 ion position/momentum records. The protocol was frozen before calculating the force outcomes.
+
+At the particle rung, define
+
+\[
+\mathbf f_E=q\mathbf E,
+\qquad
+\mathbf f_B=q(\mathbf v\times\mathbf B),
+\qquad
+x_F=\frac{2|\mathbf f_B|}{|\mathbf f_E|+|\mathbf f_B|},
+\qquad
+c_F=\cos\angle(\mathbf f_E,\mathbf f_B).
+\]
+
+Together with (S_F=|\mathbf f_E|+|\mathbf f_B|), the tuple ((x_F,S_F,c_F)) reconstructed the Lorentz resultant
+with relative errors (1.34\times10^{-16}) for both species. Magnetic-work leakage and the identity
+(mathbf v\cdot\mathbf f=\mathbf v\cdot\mathbf f_E) were also at floating-point zero. This completes the local
+Lorentz translation, but it remains an exact reparameterisation of established physics rather than independent ARA
+evidence.
+
+The frozen particle-to-grid bridge failed. Calculating particle forces and then depositing them did not agree with
+depositing (ho,mathbf J) separately and then calculating (ho\mathbf E+mathbf J\times\mathbf B): total vector
+correlation (0.477), NRMSE (0.888), median direction error (61.7^\circ). A post-freeze quadratic-deposition
+sensitivity recovered the stored total charge density at (r=0.9999999996) but left the force bridge worse
+((r=0.405)). The failure is therefore not explained by incorrect charge deposition.
+
+The missing established terms are the subgrid relations
+
+\[
+\langle\rho\mathbf E\rangle
+=\langle\rho\rangle\langle\mathbf E\rangle+\langle\rho'\mathbf E'\rangle,
+\qquad
+\langle\mathbf J\times\mathbf B\rangle
+=\langle\mathbf J\rangle\times\langle\mathbf B\rangle+\langle\mathbf J'\times\mathbf B'\rangle.
+\]
+
+This rejects the naïve ARA aggregation operator that carries only separate parent averages. In ARA terms, the
+within-cell child relation is a measurable candidate for `Other`; a successful ARA rung law must predict or retain
+it. Merely adding the full covariance back is standard closure bookkeeping. A new ARA result would require a frozen
+compressed rule that predicts it on held-out data.
+
+Lorentz-force status is now:
+
+- `LOCAL PARTICLE-RUNG CROSSWALK COMPLETE`;
+- `NAIVE GRID-RUNG OPERATOR FAILED`;
+- `SUBGRID/COVARIANCE REQUIREMENT IDENTIFIED`;
+- `MOMENTUM-CONTINUITY/MAXWELL-STRESS TEST STILL OPEN`;
+- `FINITE-DIFFERENCE PARTICLE ACCELERATION CONFIRMATION NOT RUN — ONE SNAPSHOT`.
+
+Full packet: `analysis/electromagnetism/MX4_LORENTZ_ARA_DATA_REPORT.md`.
+
+## 14 July 2026 addendum — MX5 child identities and partial moment closure
+
+MX5 froze three versions after the MX4 parent-averaging failure. Exact child-ARA vector reassembly passed at
+(3.99\times10^{-15}) relative grid error, while flat parent plus exact `Other` passed at
+(9.44\times10^{-17}). These are identity checks, not independent ARA evidence.
+
+The useful Maxwell/plasma resolution came from a dimensionless force/activity TE-ARA analogue. A post-freeze
+descriptive species drill, not an outcome gate, found electron and ion internal coherence medians of (1.2175/2)
+and (1.1449/2), while their species-level forces had an almost exact
+ridge magnitude coordinate (1.00023), a median angle (177.55^\circ), and pair coherence only (0.07184/2).
+Thus a quiet whole can contain two active, nearly cancelling force identities. This is established plasma balance
+made visible by explicit grain-aware bookkeeping.
+
+Exact `Other` exceeded the flat-parent magnitude in (78.99\%) of active cells. An unfitted first
+position-moment/field-gradient approximation improved the total comparison from correlation (0.4771), NRMSE
+(0.8878), angle (61.68^\circ) to (0.6045), (0.8019), (48.47^\circ). Both spatial halves agreed. This is
+`PARTIAL COMPACT RECOVERY`; it misses the stronger frozen gates, and its correction correlates only (0.4310) with
+exact `Other`.
+
+Maxwell status is therefore refined to:
+
+- local Lorentz ARA crosswalk: complete as exact reparameterisation;
+- child/parent identity decomposition: demonstrated on one snapshot;
+- first compact subgrid moment: useful but incomplete;
+- Maxwell stress/momentum continuity: still open;
+- time-resolved acceleration and independent transfer: still open.
+
+Full packet: `analysis/electromagnetism/MX5_CHILD_ARA_TEARA_CLOSURE_REPORT.md`.
