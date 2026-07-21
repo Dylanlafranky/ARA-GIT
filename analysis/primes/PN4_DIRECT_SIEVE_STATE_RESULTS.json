@@ -1,0 +1,496 @@
+{
+  "test_id": "PN4/DIRECT-SIEVE-STATE/OPENED-DEVELOPMENT-v1",
+  "status": "OPENED-DATA RETROSPECTIVE TRANSFER",
+  "cells": 24,
+  "source_sha256": "E573A8C635626CE905700D24CA2E9420A8D720D2EFAB478765F7F8AC4DAB2606",
+  "protocol_sha256": "12C54F70F87E8AA0D168A07E0FD76E1A26077ACF75F2E2D0038E7214F2010363",
+  "script_sha256": "9E65F55D80CC20C07501EAFBFD886F33A8AC4DEE9BC4DA6C39A7A85E4E2DBBD2",
+  "rung_summaries": {
+    "r6": {
+      "qmax": 997,
+      "candidate_n0": 1578,
+      "edge_n0": 1577,
+      "candidate_terminal_survival": 0.47718631178707227,
+      "edge_terminal_survival": 0.22828154724159797,
+      "candidate_terminal_x": 1.0456273764258555,
+      "edge_terminal_x": 1.543436905516804,
+      "terminal_coupling_j": 0.002520991698969199
+    },
+    "r7": {
+      "qmax": 3169,
+      "candidate_n0": 15801,
+      "edge_n0": 15801,
+      "candidate_terminal_survival": 0.39497500158217835,
+      "edge_terminal_survival": 0.15068666540092399,
+      "candidate_terminal_x": 1.2100499968356433,
+      "edge_terminal_x": 1.698626669198152,
+      "terminal_coupling_j": -0.034687055229724255
+    },
+    "r8": {
+      "qmax": 10039,
+      "candidate_n0": 157949,
+      "edge_n0": 157949,
+      "candidate_terminal_survival": 0.34319938714395154,
+      "edge_terminal_survival": 0.11717073232499098,
+      "candidate_terminal_x": 1.3136012257120968,
+      "edge_terminal_x": 1.765658535350018,
+      "terminal_coupling_j": -0.005235763052956898
+    },
+    "r9": {
+      "qmax": 31771,
+      "candidate_n0": 1579467,
+      "edge_n0": 1579466,
+      "candidate_terminal_survival": 0.30545050957063363,
+      "edge_terminal_survival": 0.09252937385166886,
+      "candidate_terminal_x": 1.3890989808587326,
+      "edge_terminal_x": 1.8149412522966624,
+      "terminal_coupling_j": -0.00829410646907888
+    }
+  },
+  "transfers": {
+    "r6_to_r7": {
+      "target": "r7",
+      "source": "r6",
+      "prior": null,
+      "scores": {
+        "candidate": {
+          "independent_sieve": {
+            "log_loss_bits_per_at_risk_event": 0.236092284887794,
+            "survival_rmse": 0.015374214449749816,
+            "terminal_prediction": 0.4402449749017928,
+            "terminal_actual": 0.39497500158217835,
+            "terminal_absolute_relative_error": 0.11461478103240316
+          },
+          "ara_same_form_residual": {
+            "log_loss_bits_per_at_risk_event": 0.23512100714980938,
+            "survival_rmse": 0.006218734782394084,
+            "terminal_prediction": 0.40482168256444995,
+            "terminal_actual": 0.39497500158217835,
+            "terminal_absolute_relative_error": 0.024929884025135948
+          },
+          "raw_multiplicative_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.23513733672372555,
+            "survival_rmse": 0.007018039986994807,
+            "terminal_prediction": 0.40982235636223197,
+            "terminal_actual": 0.39497500158217835,
+            "terminal_absolute_relative_error": 0.037590618952031266
+          }
+        },
+        "edge": {
+          "independent_pair": {
+            "log_loss_bits_per_at_risk_event": 0.39671475603609596,
+            "survival_rmse": 0.016111099393928793,
+            "terminal_prediction": 0.19381563792628018,
+            "terminal_actual": 0.15068666540092399,
+            "terminal_absolute_relative_error": 0.2862162515216939
+          },
+          "ara_direct_edge_residual": {
+            "log_loss_bits_per_at_risk_event": 0.3954119174507257,
+            "survival_rmse": 0.011838780898337585,
+            "terminal_prediction": 0.15932857892728852,
+            "terminal_actual": 0.15068666540092399,
+            "terminal_absolute_relative_error": 0.057350220760220935
+          },
+          "ara_coupled_relation": {
+            "log_loss_bits_per_at_risk_event": 0.39535378135310634,
+            "survival_rmse": 0.011547610498396739,
+            "terminal_prediction": 0.16429425749429338,
+            "terminal_actual": 0.15068666540092399,
+            "terminal_absolute_relative_error": 0.09030389024247369
+          },
+          "raw_multiplicative_edge_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.39538088538340443,
+            "survival_rmse": 0.011892996743047368,
+            "terminal_prediction": 0.1683783094884573,
+            "terminal_actual": 0.15068666540092399,
+            "terminal_absolute_relative_error": 0.11740683251873751
+          }
+        }
+      },
+      "clipping_adjustments": {
+        "candidate__independent_sieve": 0,
+        "candidate__ara_same_form_residual": 0,
+        "candidate__raw_multiplicative_ratio": 0,
+        "edge__independent_pair": 0,
+        "edge__ara_direct_edge_residual": 0,
+        "edge__ara_coupled_relation": 0,
+        "edge__raw_multiplicative_edge_ratio": 0
+      }
+    },
+    "r7_to_r8": {
+      "target": "r8",
+      "source": "r7",
+      "prior": "r6",
+      "scores": {
+        "candidate": {
+          "independent_sieve": {
+            "log_loss_bits_per_at_risk_event": 0.2647142310228498,
+            "survival_rmse": 0.01396959917989799,
+            "terminal_prediction": 0.38532110188728924,
+            "terminal_actual": 0.34319938714395154,
+            "terminal_absolute_relative_error": 0.12273248823043548
+          },
+          "ara_same_form_residual": {
+            "log_loss_bits_per_at_risk_event": 0.2635702935471979,
+            "survival_rmse": 0.0018110166616990004,
+            "terminal_prediction": 0.3400511285676748,
+            "terminal_actual": 0.34319938714395154,
+            "terminal_absolute_relative_error": 0.009173263980673304
+          },
+          "raw_multiplicative_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.2635707837459556,
+            "survival_rmse": 0.001246497462333143,
+            "terminal_prediction": 0.34569889834978557,
+            "terminal_actual": 0.34319938714395154,
+            "terminal_absolute_relative_error": 0.007282971064239201
+          },
+          "ara_two_rung_residual": {
+            "log_loss_bits_per_at_risk_event": 0.26384905807858816,
+            "survival_rmse": 0.0072858056641375134,
+            "terminal_prediction": 0.33020444758540324,
+            "terminal_actual": 0.34319938714395154,
+            "terminal_absolute_relative_error": 0.03786411061712562
+          },
+          "raw_two_rung_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.2637613874916316,
+            "survival_rmse": 0.005905031388068114,
+            "terminal_prediction": 0.33317465678221164,
+            "terminal_actual": 0.34319938714395154,
+            "terminal_absolute_relative_error": 0.02920963946108425
+          }
+        },
+        "edge": {
+          "independent_pair": {
+            "log_loss_bits_per_at_risk_event": 0.44166428554848386,
+            "survival_rmse": 0.011302072746089598,
+            "terminal_prediction": 0.14847235155963473,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.26714537507390423
+          },
+          "ara_direct_edge_residual": {
+            "log_loss_bits_per_at_risk_event": 0.44052007085391526,
+            "survival_rmse": 0.005014936609848637,
+            "terminal_prediction": 0.10534337903427854,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.10094119116630135
+          },
+          "ara_coupled_relation": {
+            "log_loss_bits_per_at_risk_event": 0.44038046249917223,
+            "survival_rmse": 0.0028902507424599477,
+            "terminal_prediction": 0.11169250837614107,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.04675420081573965
+          },
+          "raw_multiplicative_edge_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.44034646571192154,
+            "survival_rmse": 0.0017984985715675142,
+            "terminal_prediction": 0.11543342838654105,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.014827115133421253
+          },
+          "ara_two_rung_edge_residual": {
+            "log_loss_bits_per_at_risk_event": 0.4415102226785699,
+            "survival_rmse": 0.01473784395045799,
+            "terminal_prediction": 0.09670146550791392,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.17469607307994295
+          },
+          "ara_coupled_relation_gradient": {
+            "log_loss_bits_per_at_risk_event": 0.44107292622863015,
+            "survival_rmse": 0.011028671004390514,
+            "terminal_prediction": 0.10147105855026498,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.13398972135106701
+          },
+          "raw_two_rung_edge_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.44092401537934495,
+            "survival_rmse": 0.009877693563372938,
+            "terminal_prediction": 0.10330474544024715,
+            "terminal_actual": 0.11717073232499098,
+            "terminal_absolute_relative_error": 0.11834002066560778
+          }
+        }
+      },
+      "clipping_adjustments": {
+        "candidate__independent_sieve": 0,
+        "candidate__ara_same_form_residual": 0,
+        "candidate__raw_multiplicative_ratio": 0,
+        "candidate__ara_two_rung_residual": 0,
+        "candidate__raw_two_rung_ratio": 0,
+        "edge__independent_pair": 0,
+        "edge__ara_direct_edge_residual": 0,
+        "edge__ara_coupled_relation": 0,
+        "edge__raw_multiplicative_edge_ratio": 0,
+        "edge__ara_two_rung_edge_residual": 0,
+        "edge__ara_coupled_relation_gradient": 0,
+        "edge__raw_two_rung_edge_ratio": 0
+      }
+    },
+    "r8_to_r9": {
+      "target": "r9",
+      "source": "r8",
+      "prior": "r7",
+      "scores": {
+        "candidate": {
+          "independent_sieve": {
+            "log_loss_bits_per_at_risk_event": 0.2884110329219647,
+            "survival_rmse": 0.012014983581819953,
+            "terminal_prediction": 0.34276949777225607,
+            "terminal_actual": 0.30545050957063363,
+            "terminal_absolute_relative_error": 0.12217687328163597
+          },
+          "ara_same_form_residual": {
+            "log_loss_bits_per_at_risk_event": 0.2873058508120703,
+            "survival_rmse": 0.0021808832614510394,
+            "terminal_prediction": 0.30064778302891837,
+            "terminal_actual": 0.30545050957063363,
+            "terminal_absolute_relative_error": 0.015723419641585704
+          },
+          "raw_multiplicative_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.28729859587286205,
+            "survival_rmse": 0.0010393618966258026,
+            "terminal_prediction": 0.3052993490127849,
+            "terminal_actual": 0.30545050957063363,
+            "terminal_absolute_relative_error": 0.0004948774125839057
+          },
+          "ara_two_rung_residual": {
+            "log_loss_bits_per_at_risk_event": 0.2873110611539242,
+            "survival_rmse": 0.0009862560321863994,
+            "terminal_prediction": 0.30379604160519513,
+            "terminal_actual": 0.30545050957063363,
+            "terminal_absolute_relative_error": 0.005416484548557984
+          },
+          "raw_two_rung_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.2873058862384004,
+            "survival_rmse": 0.0011354328040216256,
+            "terminal_prediction": 0.303091939189861,
+            "terminal_actual": 0.30545050957063363,
+            "terminal_absolute_relative_error": 0.0077216121986112924
+          }
+        },
+        "edge": {
+          "independent_pair": {
+            "log_loss_bits_per_at_risk_event": 0.48210599487994943,
+            "survival_rmse": 0.008858894428592978,
+            "terminal_prediction": 0.11749092860304466,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.26976897943123385
+          },
+          "ara_direct_edge_residual": {
+            "log_loss_bits_per_at_risk_event": 0.4809428890524484,
+            "survival_rmse": 0.002632829225537308,
+            "terminal_prediction": 0.08618930936840091,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.06851947894331932
+          },
+          "ara_coupled_relation": {
+            "log_loss_bits_per_at_risk_event": 0.4808891020387731,
+            "survival_rmse": 0.00146331509028481,
+            "terminal_prediction": 0.08991707035366515,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.02823215363146639
+          },
+          "raw_multiplicative_edge_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.4808818477438448,
+            "survival_rmse": 0.0008385915795904437,
+            "terminal_prediction": 0.09272095444943891,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.0020704841046170885
+          },
+          "ara_two_rung_edge_residual": {
+            "log_loss_bits_per_at_risk_event": 0.4810182176655508,
+            "survival_rmse": 0.002471166158776852,
+            "terminal_prediction": 0.09801666265911346,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.0593032091219067
+          },
+          "ara_coupled_relation_gradient": {
+            "log_loss_bits_per_at_risk_event": 0.4809374544102993,
+            "survival_rmse": 0.0012135114554545005,
+            "terminal_prediction": 0.09455421475241876,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.021883222769840296
+          },
+          "raw_two_rung_edge_ratio": {
+            "log_loss_bits_per_at_risk_event": 0.4809234997146138,
+            "survival_rmse": 0.0009731948983124844,
+            "terminal_prediction": 0.09411642958686997,
+            "terminal_actual": 0.09252937385166886,
+            "terminal_absolute_relative_error": 0.017151912621231773
+          }
+        }
+      },
+      "clipping_adjustments": {
+        "candidate__independent_sieve": 0,
+        "candidate__ara_same_form_residual": 0,
+        "candidate__raw_multiplicative_ratio": 0,
+        "candidate__ara_two_rung_residual": 0,
+        "candidate__raw_two_rung_ratio": 0,
+        "edge__independent_pair": 0,
+        "edge__ara_direct_edge_residual": 0,
+        "edge__ara_coupled_relation": 0,
+        "edge__raw_multiplicative_edge_ratio": 0,
+        "edge__ara_two_rung_edge_residual": 0,
+        "edge__ara_coupled_relation_gradient": 0,
+        "edge__raw_two_rung_edge_ratio": 0
+      }
+    }
+  },
+  "local_causal_probe": {
+    "r6": {
+      "candidate": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.18964183048274544,
+          "hazard_mae": 0.005322552050490466
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.19235808222325426,
+          "hazard_mae": 0.009026700162454606
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.19257448701314875,
+          "hazard_mae": 0.00926901486813879
+        }
+      },
+      "edge": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.3135676293809395,
+          "hazard_mae": 0.011254079402435951
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.31852208280053257,
+          "hazard_mae": 0.015486235531280777
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.3196321824040496,
+          "hazard_mae": 0.016463698272238106
+        }
+      }
+    },
+    "r7": {
+      "candidate": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.22716887378298356,
+          "hazard_mae": 0.005851308544282114
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.2268829344406705,
+          "hazard_mae": 0.005581106362167341
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.22699306687165086,
+          "hazard_mae": 0.005943185178414536
+        }
+      },
+      "edge": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.3781308180196891,
+          "hazard_mae": 0.012648465922264913
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.37829413013576874,
+          "hazard_mae": 0.011078993987159485
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.3790959195368634,
+          "hazard_mae": 0.012396915451565122
+        }
+      }
+    },
+    "r8": {
+      "candidate": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.2534825439495934,
+          "hazard_mae": 0.005950351391619071
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.2525720345859334,
+          "hazard_mae": 0.00335100879476098
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.25280897681830306,
+          "hazard_mae": 0.003618135279980593
+        }
+      },
+      "edge": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.41834095597928794,
+          "hazard_mae": 0.011428826197660986
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.4177667799330306,
+          "hazard_mae": 0.00650109518321495
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.4194950314284288,
+          "hazard_mae": 0.009978277146655147
+        }
+      }
+    },
+    "r9": {
+      "candidate": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.27463819516855464,
+          "hazard_mae": 0.005970240993289602
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.27455684672999486,
+          "hazard_mae": 0.004926380041483276
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.2748160865116376,
+          "hazard_mae": 0.005016662980135442
+        }
+      },
+      "edge": {
+        "independent_next_cell": {
+          "log_loss_bits_per_at_risk_event": 0.4537780284064289,
+          "hazard_mae": 0.011607929774531605
+        },
+        "home_last_hazard": {
+          "log_loss_bits_per_at_risk_event": 0.4553802053750562,
+          "hazard_mae": 0.009351524103456315
+        },
+        "ara_three_point_secant": {
+          "log_loss_bits_per_at_risk_event": 0.4573058800982329,
+          "hazard_mae": 0.012770117146965987
+        }
+      }
+    }
+  },
+  "terminal_established_comparators": {
+    "candidate": {
+      "actual": 0.30545050957063363,
+      "independent": 0.34276949777225607,
+      "mertens_pnt_factor_prediction": 0.30524864910525895,
+      "absolute_relative_errors": {
+        "independent": 0.12217687328163597,
+        "mertens_pnt_factor_prediction": 0.0006608614457983162
+      }
+    },
+    "edge": {
+      "actual": 0.09252937385166886,
+      "independent_squared": 0.11749092860304466,
+      "mertens_pnt_factor_squared_prediction": 0.09317673778058551,
+      "absolute_relative_errors": {
+        "independent_squared": 0.26976897943123385,
+        "mertens_pnt_factor_squared_prediction": 0.00699630724784132
+      }
+    }
+  },
+  "criteria": {
+    "C1_candidate_same_form_beats_independent_and_raw_ratio_r9": false,
+    "C2_coupled_edge_beats_independent_direct_and_raw_ratio_r9": false,
+    "C3_candidate_direction_repeats_r7_r8_and_r8_r9": true,
+    "C3_edge_direction_repeats_r7_r8_and_r8_r9": true,
+    "C4_candidate_same_form_terminal_error_below_1pct": false,
+    "C4_edge_coupled_terminal_error_below_1pct": false,
+    "C5_candidate_local_stencil_beats_home_and_independence_r9": false,
+    "C5_edge_local_stencil_beats_home_and_independence_r9": false
+  },
+  "calibration": {
+    "ara_same_form_equals_additive_raw_survival_residual": true,
+    "identity": "x=2(1-S), so additive x-residual transfer and additive S-residual transfer are affine-equivalent",
+    "information_ceiling": "No prediction contains information unavailable from exact prior-rung survivor paths and known sieve gates."
+  }
+}

@@ -95,6 +95,42 @@ Modifiers worth appending in brackets: [pre-registered] [replicated xN] [n=?]
 14. Weekly (or per-session): regenerate summary tables by script.
 15. Monthly-ish: one adversarial audit pass (self or AI) on the newest claims;
     audits are commissioned against your BEST results, not your weakest.
+16. Two-output reporting: never let a benchmark/status verdict replace the ARA
+    geometry disclosure. Record both even when one is NULL or NOT SUPPORTED.
+
+## RULE - two-output ARA reporting (added 20 Jul 2026)
+
+Every ARA test report must state two conclusions separately:
+
+1. **Claim or benchmark verdict.** Did the registered prediction beat its
+   control, pass its falsifier and satisfy the frozen status criteria?
+2. **Geometry verdict.** What actually appeared on the ARA coordinates,
+   including structure shared by the target and controls?
+
+The geometry verdict must expose, when the data permit:
+
+- the raw 0-2 coordinate definition and orientation;
+- population distributions, quantiles, range and sample count - not only means;
+- individual event examples as well as the population aggregation;
+- lead / at-event / lag traces around predeclared or post-hoc key events;
+- crests, troughs, ridges, crossings, flips, singularity-well occupancy and
+  relevant Phi-handover regions;
+- parent, current-rung and child readings without flattening them into one score;
+- the same geometry for controls or rival populations;
+- negative, absent and shared geometry;
+- an explicit label separating frozen confirmatory results from post-hoc
+  descriptive discoveries.
+
+A NULL predictive result does not mean "no geometry." A rich descriptive shape
+does not rescue a NULL prediction. Both statements can be true and must remain
+visible together. The short ledger entry may summarize them, but it must link to
+the full geometry table/CSV and at least one worked event when those artifacts
+exist.
+
+**Reporting failure condition:** a report is incomplete if it gives only the
+status/benchmark headline while omitting event-centred geometry already computed
+or available from the same run. Compression is acceptable only after the full
+record exists and is linked.
 
 ## Momentum rules (anti-red-tape, learned the hard way)
 

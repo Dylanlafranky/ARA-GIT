@@ -2,6 +2,10 @@
 
 **Assessment:** `SHARE WITH CAVEATS / PRIMARY ARA ENDPOINTS NOT SUPPORTED / RESULT RELIABLE`
 
+> **19 July 2026 centering correction:** the historical “Information^3” label in this completed
+> validation referred to a three-reading local feature vector. It is now called a **three-point ARA
+> stencil**. The audit numbers and decisions are unchanged.
+
 ## What was validated
 
 PN2 evaluated fixed-budget probabilistic survival after sieving through prime 29. Candidate and adjacent-edge outcomes
@@ -31,7 +35,7 @@ The independent checks cover:
 
 ## Findings safe to report
 
-- The primary ARA Information^3 candidate model lost to PNT29 by `0.000160973` bits/candidate; its 95% block interval
+- The primary ARA three-point-stencil candidate model lost to PNT29 by `0.000160973` bits/candidate; its 95% block interval
   was `[-0.000191083,-0.000129918]`.
 - The primary ARA edge model lost to conditional Hardy-Littlewood by `0.000036725` bits/edge; its 95% block interval
   was `[-0.000050887,-0.000022377]`.
@@ -64,4 +68,3 @@ The independent checks cover:
 - `PN2_INDEPENDENT_VALIDATION.json`
 - `PN2_NOTEBOOK_EXECUTION_VALIDATION.json`
 - `PN2_PRIME_SURVIVAL_BRIDGE_REPORT.md`
-

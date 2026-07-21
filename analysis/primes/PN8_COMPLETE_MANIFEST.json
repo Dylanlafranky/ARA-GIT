@@ -1,0 +1,139 @@
+{
+  "test_id": "PN8/POWER-OF-TEN-PUBLIC-REVEAL/PILOT-v1",
+  "status": "complete",
+  "date": "2026-07-19",
+  "result": "three_of_four_primary_conditions_pass_but_joint_gate_fails",
+  "primary_conditions": {
+    "Q1_top3_sharpness": "fail_1_of_5_required_2",
+    "Q2_m2_better_than_m1_log_loss": "pass",
+    "Q3_m2_better_than_iid_log_loss": "pass",
+    "Q4_m2_higher_target_probability_than_m1": "pass_4_of_5"
+  },
+  "validation": {
+    "independent_numerical": "164/164",
+    "prime_boundaries": "50/50",
+    "notebook_code_cells": "4/4",
+    "report_source_queries": "2/2",
+    "reader_artifact_schema": "pass",
+    "reader_artifact_render": "pass"
+  },
+  "public_sources": [
+    "https://oeis.org/A033873",
+    "https://oeis.org/A033873/b033873.txt",
+    "https://oeis.org/A003617"
+  ],
+  "artifacts": [
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_PROTOCOL.md",
+      "role": "pre_reveal_protocol",
+      "sha256": "E6FB6D621DB98298E9D14E167EDB6345EB114199BD06DA54258C6F4D38813AE9"
+    },
+    {
+      "path": "analysis/primes/pn8_build_below_boundary_inputs.js",
+      "role": "below_boundary_input_builder",
+      "sha256": "8B32D44F7629C9631FB25FADE02D9B626B96E3FDE06148EAE72B3FE72244591D"
+    },
+    {
+      "path": "analysis/primes/PN8_BELOW_BOUNDARY_INPUTS.json",
+      "role": "pre_reveal_inputs",
+      "sha256": "327E14D1CEF9EE4770889D565DEE2C36B41FF078204FFE3574166F887FFFD7FC"
+    },
+    {
+      "path": "analysis/primes/pn8_freeze_public_reveal_predictions.py",
+      "role": "prediction_builder",
+      "sha256": "125A0B97E6AC50F51C864C2F379B1F139C25D5DC47257DE050C6F695169F1B9E"
+    },
+    {
+      "path": "analysis/primes/PN8_PRE_REVEAL_PREDICTIONS.json",
+      "role": "frozen_prediction_packet",
+      "sha256": "AA26297D54D1BB52203A9A77B1F981977D893C6630D739C521E906459391A7BA"
+    },
+    {
+      "path": "analysis/primes/PN8_PUBLIC_REVEAL_SOURCE.json",
+      "role": "post_freeze_public_reveal",
+      "sha256": "E73183E4573D426CA2E8D874E1BD64054DDA5758335879EE68B3C39595C85004"
+    },
+    {
+      "path": "analysis/primes/pn8_score_public_reveal.py",
+      "role": "scorer",
+      "sha256": "582C2CE592C3194EBE33A7FD83DDF40DDB660ECE0A2742783EEF538680DFFB68"
+    },
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_RESULTS.json",
+      "role": "machine_readable_results",
+      "sha256": "CA82E944280B7138283B1924BE945ACF32D087226A79AED85FE1BE805164338B"
+    },
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_SCORES.csv",
+      "role": "score_table",
+      "sha256": "FF9104CB22705263F462E147C60B4D4695713F0B6EE7401D4874EC7E9CEF1160"
+    },
+    {
+      "path": "analysis/primes/pn8_validate_prime_boundaries.js",
+      "role": "prime_boundary_validator",
+      "sha256": "64AE8A338E1C3F6E3DC0CF5DCCF8C39D1836836C71A628ACCD279DC951101EE1"
+    },
+    {
+      "path": "analysis/primes/PN8_PRIME_BOUNDARY_VALIDATION.json",
+      "role": "prime_boundary_validation",
+      "sha256": "BB4BCE63A1632578090FEB8187092EA78DB712554316C65E0B37801D14209E22"
+    },
+    {
+      "path": "analysis/primes/pn8_validate_public_reveal.py",
+      "role": "independent_numerical_validator",
+      "sha256": "AA39BA955131AF5013E1306ED15B8D95E2F869D125D6EB154D958FA557A74F00"
+    },
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_VALIDATION.json",
+      "role": "independent_numerical_validation",
+      "sha256": "3254233DFF6E268383BAEE5131AE5A0C0C568059A7CD7F1D03766EEE5C8A5667"
+    },
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_REPORT.md",
+      "role": "technical_report",
+      "sha256": "1DA27C7CBB52ECB2B6CF5A1D6042AC53796B17C03507EE21E34CF776BC4793BD"
+    },
+    {
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL.ipynb",
+      "role": "executed_notebook",
+      "sha256": "616E291973D8D3EA062827EB338784DBF7B65CDE1B61976094C5A8C789537DE7"
+    },
+    {
+      "path": "analysis/primes/pn8_execute_notebook_fallback.py",
+      "role": "notebook_executor",
+      "sha256": "FA7A87F1E092922E70904BD62EB13CAABDA07AEF8B6849E6C19A148F945DB774"
+    },
+    {
+      "path": "analysis/primes/PN8_NOTEBOOK_EXECUTION_VALIDATION.json",
+      "role": "notebook_execution_validation",
+      "sha256": "AAEC45453710856EDEC4AA10704962ACC37FF89130A5064744CFEE27CCB36D74"
+    },
+    {
+      "path": "analysis/primes/pn8_report_model_metrics.sql",
+      "role": "reader_artifact_model_query",
+      "sha256": "0F6909E75333B4F344B606C5DD989B5BC9B1A0D814BBBC737439FF48125F7382"
+    },
+    {
+      "path": "analysis/primes/pn8_report_target_results.sql",
+      "role": "reader_artifact_target_query",
+      "sha256": "6A4CB6578AB0B74291C980F540C5A0F74271EF42F4D9736F85475BBA7C124452"
+    },
+    {
+      "path": "analysis/primes/pn8_validate_report_sources.py",
+      "role": "reader_artifact_source_validator",
+      "sha256": "8888CF155043B840458E6A3D853BA58D39C3CB61D8F00A80EC772623805AA1AB"
+    },
+    {
+      "path": "analysis/primes/PN8_REPORT_SOURCE_VALIDATION.json",
+      "role": "reader_artifact_source_validation",
+      "sha256": "6A69E07E773B5A8607110A9485DF72A0F9D7A7E54C8B5FED5BAD17F51EB95E1C"
+    },
+    {
+      "path": "analysis/primes/PN8_REPORT_ARTIFACT.json",
+      "role": "validated_reader_artifact",
+      "sha256": "38949260607B5B5B9742F6AD8539515853DD30348DE12F65B14234C05EADC511"
+    }
+  ],
+  "mapping_record": "FableConvo/ARA_MAPPING_PRIMES.md#23-pn8-power-of-ten-public-reveal-pilot-19-jul-2026",
+  "reader_artifact": "analysis/primes/PN8_REPORT_ARTIFACT.json"
+}

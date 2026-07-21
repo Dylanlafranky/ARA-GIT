@@ -220,16 +220,18 @@ The decomposition is algebraically exact because its ARA coordinate is construct
 It is therefore a crosswalk, not independent evidence for universal ARA. A stronger ARA result would prospectively
 recover or predict an independently measured decomposition, coupling, or transition not guaranteed by Gauss's law.
 
-TE-ARA remains separate:
+**Canonical correction, 21 July 2026:** TE-ARA remains separate, but its whole-identity total is fixed at 2. The
+variable quantity below was historically misnamed; it is the main-identity component allocation \(T_{id}\):
 
 \[
-\underbrace{\mathrm{TE\!-\!ARA}}_{\text{main-identity participation on 0--2}}
+\underbrace{T_{id}}_{\text{main-identity allocation inside the total-2 ledger}}
 =
 2\frac{\underbrace{E_{id}}_{\text{energy in the declared identity mode}}}
 {\underbrace{E_{total}}_{\text{all energy in the same boundary/window}}}.
 \]
 
-Gauss does not directly measure TE-ARA, energy capacity, or joules.
+The complete ledger is \(\mathrm{TE}(I)=t_A+t_B+\sum t_R+t_{Other}=2\). Gauss does not directly measure the
+TE-ARA partition, energy capacity, or joules. See `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
 
 ## 10. Axiomatic audit decisions
 

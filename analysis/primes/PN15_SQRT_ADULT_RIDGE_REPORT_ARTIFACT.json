@@ -1,0 +1,893 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN15: Full square-root child closure and adult-rung ridge",
+    "description": "Frozen scale-12 target report for the ARA prime-rung test.",
+    "generatedAt": "2026-07-21T00:00:00+10:00",
+    "cards": [
+      {
+        "id": "growth_card",
+        "description": "Fresh scale-11 to scale-12 adult-rung growth; registered reference is 10x.",
+        "dataset": "headline",
+        "sourceId": "pn15_frozen_outputs",
+        "metrics": [
+          {
+            "label": "Target adult growth",
+            "field": "target_growth",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "sum_card",
+        "description": "The two representative square-root child coordinates added together.",
+        "dataset": "headline",
+        "sourceId": "pn15_frozen_outputs",
+        "metrics": [
+          {
+            "label": "Child-coordinate sum",
+            "field": "adult_coordinate_sum",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "corr_card",
+        "description": "Correlation between the frozen development template and fresh target prime curve.",
+        "dataset": "headline",
+        "sourceId": "pn15_frozen_outputs",
+        "metrics": [
+          {
+            "label": "Phase transfer correlation",
+            "field": "phase_correlation",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "difference_card",
+        "description": "Largest sector-level separation between target prime and composite means.",
+        "dataset": "headline",
+        "sourceId": "pn15_frozen_outputs",
+        "metrics": [
+          {
+            "label": "Max prime-composite difference",
+            "field": "max_prime_composite_difference",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "phase_chart",
+        "title": "Relative-phase closure across sixteen sectors",
+        "subtitle": "Fresh scale-12 populations, frozen development template, and analytic reference",
+        "type": "line",
+        "intent": "trend",
+        "question": "Did the registered phase shape transfer to the untouched scale-12 target?",
+        "rationale": "Sixteen ordered phase sectors expose the full cycle and allow direct shape comparison.",
+        "comparisonContext": {
+          "grain": "one row per series per phase sector",
+          "unit": "centered closure value",
+          "baseline": "frozen development template"
+        },
+        "dataset": "phase_curve",
+        "sourceId": "pn15_frozen_outputs",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold-orange-olive-pink"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec",
+          "title": "Series"
+        },
+        "labels": {
+          "values": "none"
+        },
+        "encodings": {
+          "x": {
+            "field": "theta",
+            "type": "quantitative",
+            "label": "Relative phase \u03b8"
+          },
+          "y": {
+            "field": "mean_closure",
+            "type": "quantitative",
+            "label": "Mean centered closure"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Series"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Series"
+            },
+            {
+              "field": "sector",
+              "type": "quantitative",
+              "label": "Sector"
+            },
+            {
+              "field": "mean_closure",
+              "type": "quantitative",
+              "label": "Mean closure"
+            }
+          ]
+        }
+      },
+      {
+        "id": "growth_chart",
+        "title": "Adult-rung deviation from registered 10x growth",
+        "subtitle": "Absolute percentage deviation; the scale-12 target is the final bar",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "How closely does each adult rung follow the expected 10x step?",
+        "rationale": "Four discrete transitions are more honestly compared as bars than as a trend line.",
+        "comparisonContext": {
+          "grain": "one row per adjacent scale transition",
+          "unit": "absolute percent deviation from 10x",
+          "baseline": "registered adult growth of 10"
+        },
+        "dataset": "growth",
+        "sourceId": "pn15_frozen_outputs",
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "labels": {
+          "values": "all"
+        },
+        "encodings": {
+          "x": {
+            "field": "transition",
+            "type": "nominal",
+            "label": "Scale transition"
+          },
+          "y": {
+            "field": "absolute_deviation_percent",
+            "type": "quantitative",
+            "label": "Absolute deviation (%)"
+          },
+          "tooltip": [
+            {
+              "field": "growth",
+              "type": "quantitative",
+              "label": "Observed growth"
+            },
+            {
+              "field": "status",
+              "type": "nominal",
+              "label": "Status"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "scale_table",
+        "title": "Adult-rung audit table",
+        "subtitle": "Development scales 8-11 and the untouched scale-12 target",
+        "dataset": "scales",
+        "sourceId": "pn15_frozen_outputs",
+        "defaultSort": {
+          "field": "scale",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "scale",
+            "label": "Scale d",
+            "type": "number"
+          },
+          {
+            "field": "anchor",
+            "label": "Anchor N",
+            "type": "number"
+          },
+          {
+            "field": "median_joint_period",
+            "label": "Median child product J_d",
+            "type": "number"
+          },
+          {
+            "field": "adult_fill",
+            "label": "J_d / N_d",
+            "type": "number"
+          },
+          {
+            "field": "growth_to_next",
+            "label": "J_(d+1) / J_d",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "pn15_frozen_outputs",
+        "label": "PN15 frozen outputs and independent validation",
+        "path": "PN15_TARGET_RESULTS.json"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN15: Full square-root child closure and adult-rung ridge"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "pn15_frozen_outputs",
+        "body": "## The frozen target supports the registered cross-scale ARA mapping\n\nThe untouched scale-12 target passed every preregistered criterion. The adult product grew by **10.001728\u00d7** against a 10\u00d7 reference. Its representative square-root children read **0.999998518** and **0.999996244**, a ratio of **1.000002275** and a sum of **1.999994762**. In ARA language, this is an exceptionally tight 1.0/1.0 child ridge closing to a 2.0 adult coordinate.\n\nThe 16-sector target-prime phase curve also transferred from development with **r=0.999947** and **RMSE=0.001583**. However, primes and composites trace almost the same curve, so this phase result is a stable arithmetic crosswalk, not a prime predictor."
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "growth_card",
+          "sum_card",
+          "corr_card",
+          "difference_card"
+        ]
+      },
+      {
+        "id": "key_findings",
+        "type": "markdown",
+        "sourceId": "pn15_frozen_outputs",
+        "body": "## The adult ridge closes tightly, while the phase wave is population-general\n\nThe child and adult coordinates became tighter as the boundary moved to the full square root. At scale 12 the adult fill was **0.999907002** and the target growth missed 10\u00d7 by only **0.0173%**. This confirms that the earlier 8.07/7.96 near-ridge becomes a much cleaner 1.0/1.0 pair under the registered square-root coordinate.\n\nThe phase shape is equally stable, but its largest target prime-composite mean difference is only **0.001039**. The visual overlap therefore means the phase curve belongs to the chosen two-gate arithmetic geometry across the integer population; it does not uniquely identify primes."
+      },
+      {
+        "id": "phase_visual",
+        "type": "chart",
+        "chartId": "phase_chart"
+      },
+      {
+        "id": "phase_interpretation",
+        "type": "markdown",
+        "body": "The five lines nearly coincide. That is strong transfer of the registered phase geometry and a useful negative discriminator check at the same time: the curve survives scale change, but prime membership contributes almost no visible separation at this grain."
+      },
+      {
+        "id": "growth_visual",
+        "type": "chart",
+        "chartId": "growth_chart"
+      },
+      {
+        "id": "growth_interpretation",
+        "type": "markdown",
+        "body": "Every adult transition is close to 10\u00d7, and the sealed scale-12 target is the closest of the four. The bars show error from the registered reference rather than the approximately 10\u00d7 values themselves, so the remaining deviations stay visible without truncating a magnitude chart."
+      },
+      {
+        "id": "scale_audit",
+        "type": "table",
+        "tableId": "scale_table"
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "body": "## What was measured\n\nFor each anchor **N_d=4\u00d710^d**, PN15 selected the nine largest primes at or below **\u221aN_d** and formed eight adjacent pairs. Each child used the ARA factor coordinate **x_N(p)=2 log(p)/log(N)**. A child exactly at \u221aN reads 1.0; two such children add to 2.0 and multiply to N. The adult coordinate **J_d** is the median of the eight pair products. Development used only d=8\u202611; d=12 was hash-sealed before calculation.\n\nThe second arm divided one representative pair cycle into sixteen equal relative-phase sectors and compared mean centered closure for raw integers, exact primes, and exact composites."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "body": "## The target was frozen before scale 12 was opened\n\nDevelopment fixed the coordinate, gate selection, eight-pair median, sector count, block width, controls, thresholds, and target unlock. A SHA-256 manifest sealed both protocol and executable inputs. The primary run then opened only the scale-12 target. A separate validator used an independent bytearray sieve and recomputed the gates, pairs, all 16 sector counts and means, adult metrics, phase metrics, and a small analytic fixture. All validation checks passed."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "pn15_frozen_outputs",
+        "body": "## The precision is real, but much of it is construction-forced\n\nChoosing q and r immediately below \u221aN makes **x_N(q)\u2248x_N(r)\u22481**, **qr\u2248N**, and\u2014when N increases tenfold\u2014**qr** increase about tenfold. The target therefore validates the ARA translation, code path, preregistered transfer, and scale bookkeeping; it does **not** discover a new prime law or independently prove universal fractality.\n\nThe phase transfer is robust against a zero curve, a wrong coordinate, and a permutation control, but primes and composites overlap to within **0.001039** in sector means. This rules out treating the present phase curve as a prime classifier. Finally, a fixed pair-phase walk is local to the selected anchor; it is not the same object as a continuously moving \u221an boundary."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Next test: ask for information the square-root identity does not guarantee\n\nKeep PN15 as a successful crosswalk and calibration result. The next load-bearing prime test should freeze a quantity not algebraically forced by selecting children near \u221aN\u2014for example, whether child-wave residuals predict an untouched prime-survival frequency, location class, or gap class better than raw modular and sieve-informed controls. That would test added information rather than reconstruction of a known boundary identity."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Open questions\n\n- Does a residual measured before the \u221an boundary carries any out-of-sample information about the next survivor?\n- Can a moving-boundary ARA coordinate be defined without importing the sieve answer into the feature?\n- Is the stable phase curve useful as a calibration coordinate even though it is not prime-specific?\n- Which child statistic remains nontrivial after conditioning on standard modular and sieve structure?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-21T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "adult_coordinate_sum": 1.999994761630078,
+          "child_ratio": 1.000002274598975,
+          "max_prime_composite_difference": 0.001039473852609496,
+          "phase_correlation": 0.9999467505762785,
+          "phase_rmse": 0.0015826589228550864,
+          "target_growth": 10.001727629739584
+        }
+      ],
+      "phase_curve": [
+        {
+          "mean_closure": 0.2736433466333319,
+          "sector": 0,
+          "series": "Frozen development template",
+          "theta": 0.03125
+        },
+        {
+          "mean_closure": 0.16273135139865094,
+          "sector": 1,
+          "series": "Frozen development template",
+          "theta": 0.09375
+        },
+        {
+          "mean_closure": 0.07025531307773027,
+          "sector": 2,
+          "series": "Frozen development template",
+          "theta": 0.15625
+        },
+        {
+          "mean_closure": -0.006478603868659103,
+          "sector": 3,
+          "series": "Frozen development template",
+          "theta": 0.21875
+        },
+        {
+          "mean_closure": -0.07144275614759377,
+          "sector": 4,
+          "series": "Frozen development template",
+          "theta": 0.28125
+        },
+        {
+          "mean_closure": -0.11738035493944117,
+          "sector": 5,
+          "series": "Frozen development template",
+          "theta": 0.34375
+        },
+        {
+          "mean_closure": -0.150124699618579,
+          "sector": 6,
+          "series": "Frozen development template",
+          "theta": 0.40625
+        },
+        {
+          "mean_closure": -0.1646145697307514,
+          "sector": 7,
+          "series": "Frozen development template",
+          "theta": 0.46875
+        },
+        {
+          "mean_closure": -0.16488073059729225,
+          "sector": 8,
+          "series": "Frozen development template",
+          "theta": 0.53125
+        },
+        {
+          "mean_closure": -0.14949392798695363,
+          "sector": 9,
+          "series": "Frozen development template",
+          "theta": 0.59375
+        },
+        {
+          "mean_closure": -0.11781763087864791,
+          "sector": 10,
+          "series": "Frozen development template",
+          "theta": 0.65625
+        },
+        {
+          "mean_closure": -0.06855268981550519,
+          "sector": 11,
+          "series": "Frozen development template",
+          "theta": 0.71875
+        },
+        {
+          "mean_closure": -0.011012508396199154,
+          "sector": 12,
+          "series": "Frozen development template",
+          "theta": 0.78125
+        },
+        {
+          "mean_closure": 0.0679195988541006,
+          "sector": 13,
+          "series": "Frozen development template",
+          "theta": 0.84375
+        },
+        {
+          "mean_closure": 0.16219301399002597,
+          "sector": 14,
+          "series": "Frozen development template",
+          "theta": 0.90625
+        },
+        {
+          "mean_closure": 0.2704138135788483,
+          "sector": 15,
+          "series": "Frozen development template",
+          "theta": 0.96875
+        },
+        {
+          "mean_closure": 0.27378899324248285,
+          "sector": 0,
+          "series": "Target primes",
+          "theta": 0.03125
+        },
+        {
+          "mean_closure": 0.16250641142278804,
+          "sector": 1,
+          "series": "Target primes",
+          "theta": 0.09375
+        },
+        {
+          "mean_closure": 0.06868387516812463,
+          "sector": 2,
+          "series": "Target primes",
+          "theta": 0.15625
+        },
+        {
+          "mean_closure": -0.008316441220748184,
+          "sector": 3,
+          "series": "Target primes",
+          "theta": 0.21875
+        },
+        {
+          "mean_closure": -0.07079847738201879,
+          "sector": 4,
+          "series": "Target primes",
+          "theta": 0.28125
+        },
+        {
+          "mean_closure": -0.11849930931924216,
+          "sector": 5,
+          "series": "Target primes",
+          "theta": 0.34375
+        },
+        {
+          "mean_closure": -0.14892339225925433,
+          "sector": 6,
+          "series": "Target primes",
+          "theta": 0.40625
+        },
+        {
+          "mean_closure": -0.16470331502737529,
+          "sector": 7,
+          "series": "Target primes",
+          "theta": 0.46875
+        },
+        {
+          "mean_closure": -0.16479088929731037,
+          "sector": 8,
+          "series": "Target primes",
+          "theta": 0.53125
+        },
+        {
+          "mean_closure": -0.14859297470928456,
+          "sector": 9,
+          "series": "Target primes",
+          "theta": 0.59375
+        },
+        {
+          "mean_closure": -0.11805683743773222,
+          "sector": 10,
+          "series": "Target primes",
+          "theta": 0.65625
+        },
+        {
+          "mean_closure": -0.07174947209895127,
+          "sector": 11,
+          "series": "Target primes",
+          "theta": 0.71875
+        },
+        {
+          "mean_closure": -0.008488465324345313,
+          "sector": 12,
+          "series": "Target primes",
+          "theta": 0.78125
+        },
+        {
+          "mean_closure": 0.07057948057080864,
+          "sector": 13,
+          "series": "Target primes",
+          "theta": 0.84375
+        },
+        {
+          "mean_closure": 0.16335050151426678,
+          "sector": 14,
+          "series": "Target primes",
+          "theta": 0.90625
+        },
+        {
+          "mean_closure": 0.2726849230884949,
+          "sector": 15,
+          "series": "Target primes",
+          "theta": 0.96875
+        },
+        {
+          "mean_closure": 0.27274951938987335,
+          "sector": 0,
+          "series": "Target composites",
+          "theta": 0.03125
+        },
+        {
+          "mean_closure": 0.16343745376286586,
+          "sector": 1,
+          "series": "Target composites",
+          "theta": 0.09375
+        },
+        {
+          "mean_closure": 0.06969016772637436,
+          "sector": 2,
+          "series": "Target composites",
+          "theta": 0.15625
+        },
+        {
+          "mean_closure": -0.008469383752626349,
+          "sector": 3,
+          "series": "Target composites",
+          "theta": 0.21875
+        },
+        {
+          "mean_closure": -0.07097516537050264,
+          "sector": 4,
+          "series": "Target composites",
+          "theta": 0.28125
+        },
+        {
+          "mean_closure": -0.11782670111457383,
+          "sector": 5,
+          "series": "Target composites",
+          "theta": 0.34375
+        },
+        {
+          "mean_closure": -0.14909391330081295,
+          "sector": 6,
+          "series": "Target composites",
+          "theta": 0.40625
+        },
+        {
+          "mean_closure": -0.16471726688505373,
+          "sector": 7,
+          "series": "Target composites",
+          "theta": 0.46875
+        },
+        {
+          "mean_closure": -0.16471258699577618,
+          "sector": 8,
+          "series": "Target composites",
+          "theta": 0.53125
+        },
+        {
+          "mean_closure": -0.1491010454682226,
+          "sector": 9,
+          "series": "Target composites",
+          "theta": 0.59375
+        },
+        {
+          "mean_closure": -0.11782663410522187,
+          "sector": 10,
+          "series": "Target composites",
+          "theta": 0.65625
+        },
+        {
+          "mean_closure": -0.0709360238046567,
+          "sector": 11,
+          "series": "Target composites",
+          "theta": 0.71875
+        },
+        {
+          "mean_closure": -0.008462397959176781,
+          "sector": 12,
+          "series": "Target composites",
+          "theta": 0.78125
+        },
+        {
+          "mean_closure": 0.06963519544789287,
+          "sector": 13,
+          "series": "Target composites",
+          "theta": 0.84375
+        },
+        {
+          "mean_closure": 0.16343174409764058,
+          "sector": 14,
+          "series": "Target composites",
+          "theta": 0.90625
+        },
+        {
+          "mean_closure": 0.2728252466438357,
+          "sector": 15,
+          "series": "Target composites",
+          "theta": 0.96875
+        },
+        {
+          "mean_closure": 0.272785360430328,
+          "sector": 0,
+          "series": "Target raw integers",
+          "theta": 0.03125
+        },
+        {
+          "mean_closure": 0.16340529464429773,
+          "sector": 1,
+          "series": "Target raw integers",
+          "theta": 0.09375
+        },
+        {
+          "mean_closure": 0.06965547304058152,
+          "sector": 2,
+          "series": "Target raw integers",
+          "theta": 0.15625
+        },
+        {
+          "mean_closure": -0.008464104408360528,
+          "sector": 3,
+          "series": "Target raw integers",
+          "theta": 0.21875
+        },
+        {
+          "mean_closure": -0.07096908580517612,
+          "sector": 4,
+          "series": "Target raw integers",
+          "theta": 0.28125
+        },
+        {
+          "mean_closure": -0.11784990238686066,
+          "sector": 5,
+          "series": "Target raw integers",
+          "theta": 0.34375
+        },
+        {
+          "mean_closure": -0.1490880433302625,
+          "sector": 6,
+          "series": "Target raw integers",
+          "theta": 0.40625
+        },
+        {
+          "mean_closure": -0.16471678602057255,
+          "sector": 7,
+          "series": "Target raw integers",
+          "theta": 0.46875
+        },
+        {
+          "mean_closure": -0.16471528454781142,
+          "sector": 8,
+          "series": "Target raw integers",
+          "theta": 0.53125
+        },
+        {
+          "mean_closure": -0.14908353888311995,
+          "sector": 9,
+          "series": "Target raw integers",
+          "theta": 0.59375
+        },
+        {
+          "mean_closure": -0.11783455499470412,
+          "sector": 10,
+          "series": "Target raw integers",
+          "theta": 0.65625
+        },
+        {
+          "mean_closure": -0.07096404850736836,
+          "sector": 11,
+          "series": "Target raw integers",
+          "theta": 0.71875
+        },
+        {
+          "mean_closure": -0.008463297830261495,
+          "sector": 12,
+          "series": "Target raw integers",
+          "theta": 0.78125
+        },
+        {
+          "mean_closure": 0.06966769701605427,
+          "sector": 13,
+          "series": "Target raw integers",
+          "theta": 0.84375
+        },
+        {
+          "mean_closure": 0.16342893603024933,
+          "sector": 14,
+          "series": "Target raw integers",
+          "theta": 0.90625
+        },
+        {
+          "mean_closure": 0.2728204192355452,
+          "sector": 15,
+          "series": "Target raw integers",
+          "theta": 0.96875
+        },
+        {
+          "mean_closure": 0.2727864583333333,
+          "sector": 0,
+          "series": "Analytic phase curve",
+          "theta": 0.03125
+        },
+        {
+          "mean_closure": 0.16341145833333331,
+          "sector": 1,
+          "series": "Analytic phase curve",
+          "theta": 0.09375
+        },
+        {
+          "mean_closure": 0.06966145833333331,
+          "sector": 2,
+          "series": "Analytic phase curve",
+          "theta": 0.15625
+        },
+        {
+          "mean_closure": -0.008463541666666685,
+          "sector": 3,
+          "series": "Analytic phase curve",
+          "theta": 0.21875
+        },
+        {
+          "mean_closure": -0.07096354166666669,
+          "sector": 4,
+          "series": "Analytic phase curve",
+          "theta": 0.28125
+        },
+        {
+          "mean_closure": -0.11783854166666669,
+          "sector": 5,
+          "series": "Analytic phase curve",
+          "theta": 0.34375
+        },
+        {
+          "mean_closure": -0.14908854166666669,
+          "sector": 6,
+          "series": "Analytic phase curve",
+          "theta": 0.40625
+        },
+        {
+          "mean_closure": -0.16471354166666674,
+          "sector": 7,
+          "series": "Analytic phase curve",
+          "theta": 0.46875
+        },
+        {
+          "mean_closure": -0.16471354166666674,
+          "sector": 8,
+          "series": "Analytic phase curve",
+          "theta": 0.53125
+        },
+        {
+          "mean_closure": -0.14908854166666674,
+          "sector": 9,
+          "series": "Analytic phase curve",
+          "theta": 0.59375
+        },
+        {
+          "mean_closure": -0.11783854166666674,
+          "sector": 10,
+          "series": "Analytic phase curve",
+          "theta": 0.65625
+        },
+        {
+          "mean_closure": -0.07096354166666674,
+          "sector": 11,
+          "series": "Analytic phase curve",
+          "theta": 0.71875
+        },
+        {
+          "mean_closure": -0.00846354166666674,
+          "sector": 12,
+          "series": "Analytic phase curve",
+          "theta": 0.78125
+        },
+        {
+          "mean_closure": 0.06966145833333326,
+          "sector": 13,
+          "series": "Analytic phase curve",
+          "theta": 0.84375
+        },
+        {
+          "mean_closure": 0.16341145833333326,
+          "sector": 14,
+          "series": "Analytic phase curve",
+          "theta": 0.90625
+        },
+        {
+          "mean_closure": 0.27278645833333326,
+          "sector": 15,
+          "series": "Analytic phase curve",
+          "theta": 0.96875
+        }
+      ],
+      "growth": [
+        {
+          "absolute_deviation_percent": 0.060146718073417205,
+          "growth": 10.00601467180734,
+          "status": "Development",
+          "transition": "10^8 to 10^9"
+        },
+        {
+          "absolute_deviation_percent": 0.14916632360146842,
+          "growth": 10.014916632360148,
+          "status": "Development",
+          "transition": "10^9 to 10^10"
+        },
+        {
+          "absolute_deviation_percent": 0.04444746260139354,
+          "growth": 10.00444474626014,
+          "status": "Development",
+          "transition": "10^10 to 10^11"
+        },
+        {
+          "absolute_deviation_percent": 0.017276297395829587,
+          "growth": 10.001727629739584,
+          "status": "Target",
+          "transition": "10^11 to 10^12"
+        }
+      ],
+      "scales": [
+        {
+          "adult_fill": 0.9972019575,
+          "anchor": 400000000,
+          "growth_to_next": 10.00601467180734,
+          "median_joint_period": 398880783.0,
+          "scale": 8
+        },
+        {
+          "adult_fill": 0.99780174175,
+          "anchor": 4000000000,
+          "growth_to_next": 10.014916632360148,
+          "median_joint_period": 3991206967.0,
+          "scale": 9
+        },
+        {
+          "adult_fill": 0.999290125925,
+          "anchor": 40000000000,
+          "growth_to_next": 10.00444474626014,
+          "median_joint_period": 39971605037.0,
+          "scale": 10
+        },
+        {
+          "adult_fill": 0.99973428503,
+          "anchor": 400000000000,
+          "growth_to_next": 10.001727629739584,
+          "median_joint_period": 399893714012.0,
+          "scale": 11
+        },
+        {
+          "adult_fill": 0.99990700209825,
+          "anchor": 4000000000000,
+          "growth_to_next": null,
+          "median_joint_period": 3999628008393.0,
+          "scale": 12
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "pn15_frozen_outputs",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "sql": "SELECT dataset, row_index, row_json FROM pn15_artifact_rows ORDER BY dataset, row_index",
+        "description": "Selects the reviewed report rows after build_pn15_report_artifact.py materializes frozen PN15 development scales 8-11 and the hash-sealed scale-12 target into SQLite.",
+        "tables_used": [
+          "pn15_artifact_rows"
+        ],
+        "filters": [
+          "Development restricted to scales 8-11 before target freeze",
+          "Fresh target restricted to scale 12 at N=4e12",
+          "Sixteen equal relative-phase sectors"
+        ],
+        "metric_definitions": {
+          "factor_coordinate": "x_N(p)=2 log(p)/log(N)",
+          "adult_growth": "G_d=J_(d+1)/J_d, where J_d is the median adjacent-gate product",
+          "phase_curve": "Mean centered closure value within each of sixteen relative-phase sectors"
+        },
+        "executed_at": "2026-07-21T00:00:00+10:00"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://pn15-sqrt-adult-ridge"
+  }
+}

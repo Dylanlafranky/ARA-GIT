@@ -57,6 +57,13 @@ So the contribution is *sharper*, not smaller: not "new physics," but **a readin
 plus a falsifiable claim that the reading is universal.** That is a thing a geometer or a dynamicist can sit
 down with — it invites checking rather than dismissal.
 
+**Arithmetic audit, 21 July 2026:** the prime-sieve thread now supplies one exact non-physical domain subset of this
+distinction. Complementary factors close on a relative-log 0–2 diameter; wheel residues pair as `r↔M-r`; and the
+same anti-pair lift reconstructs every tested larger wheel with exact `2:1` lane compression. This is established
+factor/wheel/CRT mathematics expressed in ARA coordinates. It is a clean example of rule recurrence across declared
+rungs, but it is **not independent evidence for universal physical fractality** and it does not create a new
+three-operation prime algorithm. See `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
+
 ## 5. The bedrock — even Newton sits on the geometry
 The deepest expression of geometry-is-primary is the **principle of least action**: a trajectory is a
 **geodesic** — the straightest available path through the geometry — and **Newton's laws fall out of *that*.**

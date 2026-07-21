@@ -35,6 +35,13 @@ triangle closure and the hexagon–pentagon route are conditional
 decompressions; and the exact Gauss boundary crosswalk is fenced from TE-ARA
 and from independent empirical evidence.
 
+**21 Jul prime-thread closure amendment:** before discussing primes, read
+`analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`. PN1–PN23 recover exact factor/wheel/CRT geometry,
+three conceptual prime-location stages and lossless `2:1` anti-pair compression. They do **not** establish a
+three-cheap-operation next-prime algorithm, a speed improvement or a new theorem. The tested literal two-child
+summaries failed, the prime-specific thread is PARKED, and the protected 87-bit/p31 targets remain sealed. Do not ask
+Dylan to reconstruct this trail from chat.
+
 **Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
 cognitive energy for geometry walking, orientation, and conceptual correction.
 The AI coworker should proactively handle rolling capture, mathematical

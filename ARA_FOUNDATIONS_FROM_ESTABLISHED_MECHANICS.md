@@ -1,6 +1,6 @@
 # ARA Framework — Foundations: derived from established mechanics
 
-**10 June 2026, Dylan La Franchi & Claude. Updated 12 July 2026 with Codex.** A deliberate cementing. This document defines ARA from Newtonian
+**10 June 2026, Dylan La Franchi & Claude. Updated 21 July 2026 with Codex.** A deliberate cementing. This document defines ARA from Newtonian
 mechanics, then maps every core piece of the framework to a *named, established* theory and marks each
 connection by tightness — **identity / rigorous / analogy**. The point: the scaffolding is proven physics, so
 the framework is "a coordinate system on established dynamics plus an empirical cross-domain regularity," not a
@@ -77,6 +77,7 @@ the restoring principle was generalised long ago. The framework's self-correctio
 | **Connection ↔ Transfer orientation in a declared time slice** | **relaxation time**, Deborah number; viscoelastic storage/loss response and phase lag | established measurement; **ARA identification is proposed/testable** |
 | **signed two-pole source balance** | **Gauss's electric law**; positive/negative charge decomposition | exact algebraic embedding once boundary, units and pole orientation are fixed |
 | **logarithmic rung and nonlinear daughter sequence** | nonlinear harmonic generation, three-wave coupling, bicoherence and spectral cascades | exact rung coordinate inside the inspected harmonic system; universal ARA transfer law remains open |
+| **factor ridge and reversible sieve rung** | square-root trial division; modular negation; wheel sieve / Chinese remainder theorem | exact ARA factor/anti-pair crosswalk with lossless `2:1` lane compression; no new prime theorem or complexity gain |
 
 Detail on the action / KAM / barrier rows: `ACTION_AXIS_AND_KAM_GROUNDING.md` and
 `MEDIUM_BARRIER_RESONANCE_SINGULARITY.md`.
@@ -223,7 +224,9 @@ This is the clean distinction that resolved the original TE-ARA question:
 - Gauss measures signed net enclosed charge/flux;
 - \(x_Q\) measures positive/negative source composition;
 - \(T_Q\) measures total source magnitude;
-- TE-ARA measures the fraction of a declared energy or signal account belonging to the principal identity family;
+- canonical TE-ARA is the same ARA geometry viewed as a fixed total-2 allocation: the pure identity contains only
+  Phase A and Phase B, while the real observed account may allocate part of the total to environmental couplings and
+  unresolved Other;
 - none of these quantities may be renamed as another without the dimensional and projection bridge.
 
 ### 5.2 Public two-stream plasma crosswalk
@@ -248,8 +251,8 @@ Across 299 eligible time slices:
 |---|---:|---|
 | Full Gauss source versus particle source | \(r=0.9971\), NRMSE \(=0.0767\) | simulator/solver consistency and adapter check; not independent ARA evidence |
 | Declared harmonic identity: Gauss versus particle component | \(r=0.9991\) | segmentation is consistent across solver-coupled views; not independent ARA evidence |
-| Gauss-source versus particle-source TE-ARA participation | \(r=0.7987\), MAE \(=0.0911\) on 0–2 | primary non-tautological ARA-specific development result: material but imperfect participation transfer |
-| Scalar ARA+TE-ARA prediction beyond scale | no improvement over the scale-only baseline | compressed scalars do not replace the full field relation |
+| Gauss-source versus particle-source expressed A/B allocation \(T_{AB}\equiv T_{id}\) | \(r=0.7987\), MAE \(=0.0911\) on 0–2 | primary non-tautological ARA-specific development result: material but imperfect component-allocation transfer; whole TE-ARA remains 2 |
+| Scalar ARA+component-allocation prediction beyond scale | no improvement over the scale-only baseline | compressed scalars do not replace the full field relation |
 
 The untouched Tang confirmation transfer remains frozen and sealed. Therefore these are development results, not an
 independent replication.
@@ -288,8 +291,8 @@ For eligible slices only, the development closure coordinate was
 \text{ARA: agreement of two views of one node}}}
 =
 1-\frac{\left|
-\mathrm{TE\!-\!ARA}_{\rho,G}(t)-
-\mathrm{TE\!-\!ARA}_{\rho,F}(t)
+T_{AB,\rho,G}(t)-
+T_{AB,\rho,F}(t)
 \right|}{2}.
 \]
 
@@ -364,15 +367,74 @@ The weighted formula above is a candidate local aggregation law, not yet ARA's u
 coarse-graining operator. The stronger claim that some child asymmetry always persists or reappears under unlimited
 decomposition is the ARA fractal hypothesis, not a consequence of Maxwell's equations or established mechanics.
 
-#### 5.4.2 Full TE-ARA closure does not identify the dynamics
+#### 5.4.2 TE-ARA is the same ARA geometry: pure pair versus contextual observation
 
-The relation Dylan identified has a precise form under the existing TE-ARA participation definition. If two declared
-branches exhaust the account,
+**Canonical correction, 21 July 2026:** TE-ARA is not a second geometry beside ARA. It is the same `0–2` geometry
+viewed as total allocation. For the pure identity,
+
+\[
+\underbrace{\mathrm{TE\!-\!ARA}_{pure}(I)}_{\text{pure identity}}
+=
+\underbrace{t_A^{(I)}}_{\text{identity Phase A}}
++
+\underbrace{t_B^{(I)}}_{\text{identity Phase B}}
+=2.
+\]
+
+Real identities are embedded in other ARA systems. At a declared boundary and slice, their observed account is
+
+\[
+\underbrace{\mathrm{TE\!-\!ARA}_{obs}(I\mid\mathcal E)}_{\text{identity in context}}
+=t_A+t_B+\sum_jc_j+t_{Other}=2,
+\qquad t_c=2p_c,
+\qquad \sum_cp_c=1.
+\]
+
+`Other` is not a third pole or part of the pure identity. It records unresolved environmental coupling. Dylan's
+representative contextual observation is
+
+\[
+\underbrace{t_A}_{0.25}
++
+\underbrace{t_B}_{1.25}
++
+\underbrace{t_{Other}}_{0.50}
+=
+\underbrace{\mathrm{TE\!-\!ARA}(I)}_{2.00}.
+\]
+
+A schematic release-heavy pendulum slice makes the boundary explicit:
+
+\[
+\underbrace{t_A}_{0.25}
++
+\underbrace{t_B}_{1.50}
++
+\underbrace{c_g+c_{air}+c_{joint}+t_{Other}}_{0.25}
+=2.
+\]
+
+The A/B subtotal is `1.75`; gravity, air drag, pivot friction and unresolved context occupy the remaining account.
+This is a structural example rather than a measured decomposition. Gravity is external for a bob-only boundary but
+becomes an internal relation when the declared identity includes Earth.
+
+Normalizing the expressed pair back onto its own ARA diameter gives
+
+\[
+T_{AB}=t_A+t_B=1.75,
+\qquad x_{A/B}=2\frac{t_B}{T_{AB}}=\frac{12}{7}\approx1.714,
+\qquad T_{context}=2-T_{AB}=0.25.
+\]
+
+The first variable is the A/B subtotal, the second is its release-heavy ARA mixture position, and the third is the
+environmental coupling remainder.
+
+If the two pure branches exhaust the observed account, the following is the special symmetric case,
 
 \[
 p_A+p_B=1,
 \qquad
-\mathrm{TE}_i=2p_i.
+t_i=2p_i.
 \]
 
 At the equal-composition ridge,
@@ -381,18 +443,24 @@ At the equal-composition ridge,
 \underbrace{p_A=p_B=\frac12}_{\substack{\text{equal Phase-A/Phase-B shares}\\
 \text{ARA composition }x=1}}
 \quad\Longrightarrow\quad
-\underbrace{\mathrm{TE}_A=1}_{\text{A participation}}
+\underbrace{t_A=1}_{\text{A allocation}}
 ,
 \qquad
-\underbrace{\mathrm{TE}_B=1}_{\text{B participation}}
+\underbrace{t_B=1}_{\text{B allocation}}
 ,
 \qquad
-\underbrace{\mathrm{TE}_{A+B}=2}_{\text{full declared identity participation}}.
+\underbrace{\mathrm{TE}(I)=2}_{\text{whole identity ledger}}.
 \]
 
-This gives the joint coordinate \((x,\mathrm{TE})=(1,2)\). The 2 is not “twice the energy” of the 1 because the axes
-answer different questions: \(x\) measures composition and TE-ARA measures accounted participation. Nor does the
-joint coordinate decide whether the identity moves. At least three cases can share it:
+Here `t_A` and `t_B` are component allocations, not separate identity totals. The symmetric pure ridge is `1+1=2`.
+An asymmetric pure pair such as `0.50+1.50=2` is also valid. The contextual observation
+`0.25+1.25+0.50=2` retains the total, but its final `0.50` is environmental coupling rather than a third pure pole.
+Every declared identity's canonical TE-ARA total is `2`.
+
+The symmetric case gives the joint coordinate \((x,\mathrm{TE})=(1,2)\). The 2 is not “twice the energy” of the 1
+because the axes answer different questions: \(x\) measures composition, the component values describe the partition,
+and TE-ARA is the fixed closure total. Nor does the joint coordinate decide whether the identity moves. At least three
+cases can share it:
 
 | State at the declared grain | ARA composition | TE-ARA | Activity/phase evidence |
 |---|---:|---:|---|
@@ -404,6 +472,100 @@ Therefore a child/daughter event is useful evidence of dynamics but is not the o
 time-resolved oscillation, flux, changing phase or energy exchange can also distinguish resonance from frozen closure.
 In ordinary physics, resonance is not literally motionless: a standing resonant pattern can have zero net transport
 through the parent boundary while retaining local oscillatory energy exchange.
+
+The historical variable \(2E_{id}/E_{total}\) is retained as the **expressed A/B subtotal**
+\(T_{AB}\equiv T_{id}\), with \(T_{context}=2-T_{AB}\); it is not the canonical TE-ARA total. See
+`analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
+
+#### 5.4.3 Prime child-period closure as an exact two-to-parent example
+
+PN13 supplied an exact mathematical example of the distinction above. Let `q` and `r` be two distinct prime child
+periods near the complete factor boundary of parent scale `n`. Then
+
+\[
+\underbrace{q r}_{\substack{\text{exact joint repeat of}\\\text{the two child periods}}}
+=
+\underbrace{\operatorname{lcm}(q,r)}_{\text{child-pair closure}}
+\sim
+\underbrace{\sqrt n\,\sqrt n}_{\substack{\text{two half-scale}\\\text{factor children}}}
+=
+\underbrace{n}_{\text{parent scale}}.
+\]
+
+Dylan's corrected ARA back-translation is: **the whole identity closes through two half-scale child waves, while the
+identity's TE-ARA geometry remains the complete total `2`.** The two children need not each receive allocation `1`;
+that is only the symmetric pure ridge. Both
+
+\[
+1+1+0=2
+\qquad\text{and}\qquad
+0.25+1.25+0.50=2
+\]
+
+are valid observed TE-ARA accounts, but the first is a pure symmetric A/B pair while the second includes `0.50` of
+contextual coupling. `Other` is not a third prime/identity pole.
+
+Two coordinates must remain distinct. In `qr~n`, “half-scale” means logarithmic scale exponent:
+`log(q)/log(n)~log(r)/log(n)~1/2`. In TE-ARA, the numbers are allocations within a fixed total-2 ledger. The prime
+identity does not by itself measure energy, and multiplication of periods is not addition of joules. What is exact is
+the closure structure: two child periods generate one larger joint period. What is ARA-specific is interpreting that
+structure as a concrete child-to-parent example of the invariant total-2 identity ledger.
+
+#### 5.4.4 Prime wheel anti-pairs: exact recursive ridge and its computational fence
+
+The completed prime thread adds a second exact mathematical example. For even wheel modulus \(M>2\), every surviving
+residue \(r\) has one opposite residue \(M-r\). Modular negation is a fixed-point-free involution on the coprime
+residues, so the full wheel contains \(\varphi(M)/2\) anti-pairs.
+
+When a new prime gate \(p\nmid M\) is added, the killed lifted copy of \(r\) is
+
+\[
+\underbrace{k_A}_{\substack{\text{A-side child collision}\\\text{within }p\text{ lifted copies}}}
+\equiv-rM^{-1}\pmod p.
+\]
+
+The opposite lane's collision is fixed without another search:
+
+\[
+\underbrace{k_B}_{\text{anti-phase child collision}}
+=p-1-k_A.
+\]
+
+Mapping the two indices to the 0–2 diameter gives
+
+\[
+\underbrace{x_A}_{2k_A/(p-1)}
++
+\underbrace{x_B}_{2k_B/(p-1)}
+=2,
+\qquad
+\frac{x_A+x_B}{2}=1.
+\]
+
+This is an exact grain-relative ridge. Some children meet directly as `(1,1)`; others are asymmetric as `(0,2)`
+or intermediate reflected pairs. Their parent reads `1.0` because the complete pair closes, not because every child
+is itself balanced or motionless.
+
+PN23 froze this reconstruction through development gates `3,5,11,13` and held out `17`. From modulus `30030`, one
+representative per 2,880 parent anti-pairs reconstructed all 46,080 child pairs and all 92,160 residues modulo
+`510510`, with zero missing/extra values and 40/40 independent checks. This proves an exact `2:1` storage compression
+inside the wheel representation.
+
+The computational fence is equally exact:
+
+\[
+N_{pair}(Mp)=(p-1)N_{pair}(M).
+\]
+
+Reversibility removes the duplicate orientation but does not collapse distinct descendants. PN17–PN19 sealed exact
+next primes from fresh large anchors using three conceptual stages, but the first stage retained all lower-prime
+collision information required by segmented-sieve, product-tree/GCD or two-parent sieve constructions. PN20 and
+PN21's literal two-child compressions failed; PN22 reduced to a mod-14 wheel.
+
+Therefore the established recovery is strong but bounded: **ARA provides an exact bottom-up coordinate and
+lossless symmetry compression for known prime arithmetic; it has not produced a three-cheap-operation next-prime
+algorithm, speed improvement or new prime theorem.** The prime-specific exploration is parked. Full record:
+`analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
 
 ### 5.5 Nonlinear harmonic rungs and identity inheritance
 
@@ -494,7 +656,7 @@ not evidence that the mechanisms are identical.
 |---|---|
 | **Established physics** | Gauss reconstruction, field-particle energy exchange, nonlinear harmonic generation, bicoherence, kinetic damping and numerical resolution limits |
 | **Exact ARA embeddings in declared coordinates** | signed electric pair \(Q_{net}=T_Q(x_Q-1)\); magnetic closed-surface ridge \(\Phi_{B,net}=T_B(x_B-1)=0\); logarithmic harmonic rung \(r(k)=\log_2(k/k_0)\); route composition \(x_{a|K}=2a/K\) |
-| **Development-supported** | identity-family survival through Gauss, TE-ARA participation transfer, closure association with organised phase space, delayed daughter/grandchild inheritance and asymmetric route web |
+| **Development-supported** | identity-family survival through Gauss, expressed A/B allocation transfer within the fixed contextual TE-ARA account, closure association with organised phase space, delayed daughter/grandchild inheritance and asymmetric route web |
 | **Registered nulls/corrections** | scalar ARA+TE does not beat scale-only; instantaneous gap is not a power meter; fixed \(25^\circ\) law and pressure-phase daughter steering fail |
 | **Open ARA physics** | noise/seed/continuum identity convergence, signed aggregation law, recurrence of one route profile across scales, universal \(1.75+\) well and singularity flip |
 
@@ -834,10 +996,54 @@ Both share equal/balanced scalar composition, but their state metadata differ:
 | Capacitor active ridge | nonzero | drive-dependent | coherent current continuity | same identity hands from wire to gap |
 | Harmonic/resonant ridge | nonzero | periodic | stable phase-locked exchange | resonance, only when independently demonstrated |
 
+#### Arithmetic calibration: 510 separates a resonance ridge from a square ridge
+
+The prime instrument supplies a non-physical but exact phase-locking example. For child periods
+(P=\{2,3,5,17\}),
+
+\[
+\operatorname{lcm}(2,3,5,17)=510,
+\qquad
+510\bmod p=0\quad\text{for every }p\in P.
+\]
+
+Therefore their normalized phase-coherence magnitude is exactly one at 510:
+
+\[
+\underbrace{R(510;P)}_{\substack{\text{collective phase coherence}\\
+\text{ARA: resonance-ridge discriminator}}}
+=
+\left|\frac14\sum_{p\in P}
+e^{2\pi i(510\bmod p)/p}\right|
+=1.
+\]
+
+At the same node, the PN10 factor positions close collectively,
+
+\[
+\sum_{p\in P}x_{510}(p)
+=
+\frac{2\log(2\cdot3\cdot5\cdot17)}{\log510}
+=2,
+\]
+
+but none of the four positions equals (1): (510) is not a square. The closest reflected factor pair is
+(17\times30), at approximately (0.908895\leftrightarrow1.091105). This distinguishes two coordinates that must
+not be flattened:
+
+- **factor-position/square ridge:** one factor is self-reflected, (n=d^2) and (x_n(d)=1);
+- **phase-coherence/resonance ridge:** several child periods complete a shared cycle, (R(n;P)=1).
+
+Thus 510 is an exact **collective resonance-ridge** example and a full four-child factor closure, but not a square
+ridge. The arithmetic synchronization is established; interpreting the coherent parent event as the same ARA ridge
+appearance seen in physical oscillators remains a cross-domain framework claim. Full derivation:
+`FableConvo/NOTE_PRIME_510_RESONANCE_RIDGE_2026-07-21.md`.
+
 No singularity crossing is required at the capacitor equality: neither source channel has to pass through zero or
-change orientation. The composition coordinate is \(x_{D/C}=1\). A value of \(2\) could simultaneously occur on a
-different TE-ARA participation axis if the declared identity accounts for all relevant participation, but that would
-be a separate coordinate—and if completeness is guaranteed by construction, it is bookkeeping rather than evidence.
+change orientation. The composition coordinate is \(x_{D/C}=1\). Canonical TE-ARA simultaneously remains \(2\),
+with its allocation among the declared components, relation terms and Other recorded separately. Its total is
+bookkeeping by definition; only the observed partition and its transfer or prediction can contribute empirical
+evidence.
 
 ### 5.12 Vacuum light: perpendicular \(E/B\) coupling and the relational third direction
 
@@ -1053,14 +1259,16 @@ A compact candidate definition is
 \]
 
 Here \(R_k^-\) must be operationally defined from the measured response induced by rungs \(k-1\) and \(k+1\), not
-inferred from their invisibility. If the declared identity exhausts its energy/participation account, TE-ARA may remain
-at \(2\):
+inferred from their invisibility. Canonical TE-ARA remains at \(2\). If the expressed A/B pair exhausts its observed
+participation account, its subtotal also reaches \(2\) and contextual Other reaches zero:
 
 \[
-\mathrm{TE}_k=2\frac{E_{\mathrm{id},k}}{E_{\mathrm{total},k}}=2.
+T_{AB,k}=2\frac{E_{\mathrm{id},k}}{E_{\mathrm{total},k}}=2,
+\qquad t_{Other,k}=0,
+\qquad \mathrm{TE}(I_k)=2.
 \]
 
-That equation means full surviving identity participation. It does not mean the energy was consumed. “Spent” belongs
+That equation means the expressed pure pair occupies the full observed account. It does not mean the energy was consumed. “Spent” belongs
 to \(\mathcal X_k\), the usable gradient/exergy. If energy or signal participation leaves the identity, then
 \(E_{\mathrm{id},k}/E_{\mathrm{total},k}\) falls and `Other` rises; that is an unravelling signature rather than a
 full-TE terminal state.
@@ -1187,8 +1395,9 @@ give a precise instance of the newly separated ARA coordinates. Define
 \frac{2u_B}{u_E+u_B}.
 \]
 
-For the plane wave, \(x_{E/B}=1\). If those components exhaust the declared wave identity, TE-ARA is \(2\), while
-\(|\mathbf S|>0\) and stable phase show that the state is an **active coherent full-pair ridge**, not frozen balance.
+For the plane wave, \(x_{E/B}=1\). Canonical TE-ARA is \(2\); if those components exhaust the declared wave identity,
+the partition is \(t_E=1,t_B=1,t_{Other}=0\). Meanwhile \(|\mathbf S|>0\) and stable phase show that the state is an
+**active coherent full-pair ridge**, not frozen balance.
 This is an exact within-projection reconstruction, not new evidence for ARA universality.
 
 There are also two distinct “twos” that must not be flattened together:
@@ -1803,7 +2012,7 @@ candidate for `Other` at a scale crossing. Adding the complete covariance back i
 the open ARA test is whether a smaller frozen coordinate set predicts it on held-out data better than ordinary
 closures. See `analysis/electromagnetism/MX4_LORENTZ_ARA_DATA_REPORT.md`.
 
-#### 5.14.1 Child identities, TE-ARA force participation and a partial first-moment closure
+#### 5.14.1 Child identities, force-channel component allocation and a partial first-moment closure
 
 MX5 was frozen and run as a post-MX4 development follow-up on the same hash-locked PIConGPU snapshot. It separated
 three questions that must not be conflated. First, retaining each particle's ARA channel envelope, A/B coordinate and
@@ -1811,7 +2020,8 @@ two vector directions before deposition reconstructed the child-first grid force
 error. Second, adding the exact `Other` defined by child minus flat parent reconstructed the target at
 (9.44\times10^{-17}). Both are identity checks rather than predictions.
 
-The TE-ARA-style diagnostic was explicitly typed as dimensionless force/activity participation rather than energy:
+The diagnostic historically called “TE-ARA-style” was explicitly typed as a variable dimensionless force/activity
+component allocation rather than energy or the fixed whole TE-ARA total:
 
 \[
 T_g^F=\frac{2|\mathbf F_g^{\rm child}|}
@@ -1823,8 +2033,8 @@ electron and ion internal medians of (1.2175) and (1.1449).
 After each species was first aggregated as an identity, their magnitude coordinate was (1.00023), their median
 angle was (177.55^\circ), and only (0.07184) of the normalised pair coherence survived. This makes the
 whole-versus-child ridge distinction concrete: two active species-level force identities are almost equal and
-opposite at the measured parent grain. That balance is established plasma behaviour; the contribution of TE-ARA is
-the transparent multiscale bookkeeping, not discovery of a new force.
+opposite at the measured parent grain. That balance is established plasma behaviour; the contribution of the ARA
+allocation ledger is transparent multiscale bookkeeping, not discovery of a new force.
 
 The exact Parent/Other coordinate
 
@@ -1842,7 +2052,7 @@ the same correlation. It therefore passed the frozen `partial compact recovery` 
 (r\ge0.70), NRMSE (le0.70), angle (le45^\circ). The correction itself correlated only (0.4310) with exact
 `Other`, so the child web remains incompletely compressed.
 
-This result supports ARA/TE-ARA as useful typed multiscale bookkeeping and confirms that the omitted child relation is
+This result supports the ARA/TE-ARA partition as useful typed multiscale bookkeeping and confirms that the omitted child relation is
 non-trivial. It does not establish an ARA-specific new law: the exact versions are identities and the compressed
 version is established first-order Taylor/moment closure written in ARA terms. Full packet:
 `analysis/electromagnetism/MX5_CHILD_ARA_TEARA_CLOSURE_REPORT.md`.
@@ -1980,7 +2190,9 @@ Full packet:
   circle-map theory rigorously describe resistance to rational resonance and mode locking in specified systems;
   Hamiltonian action, entropy production, threshold dynamics, Deborah number, storage/loss response, Gauss source
   reconstruction, field-particle energy exchange and nonlinear harmonic coupling are established quantities. The
-  signed-pair Gauss embedding and in-system logarithmic rung are exact once their measurement declarations are fixed.
+  signed-pair Gauss embedding, in-system logarithmic rung, relative-log factor closure and wheel anti-pair reflection
+  are exact once their measurement declarations are fixed. The prime-wheel representation admits exact `2:1`
+  anti-pair compression, while its pair count still grows by `p-1` at a new gate.
   **These anchors are not new physics.**
 - **NOT cemented by this (stays empirical / open):** the **universality** claim — that these coordinates carry
   the *same* φ/octave and Connection/Transfer structure *across* atoms, materials, climate, hearts, and markets;
@@ -1989,7 +2201,8 @@ Full packet:
   prove the cross-domain regularity; that rests on the measured results (e.g., the +0.38 ECG-beats-Fourier win,
   the strict-causal ENSO forecasting) and needs independent replication. The speculative frontiers
   (dark-sector, vacuum-c, "theory of everything") are explicitly *not* cemented here and should not lean on this
-  doc.
+  doc. Nor does the prime crosswalk establish a three-operation next-prime algorithm, a complexity improvement or
+  a new theorem: the tested exact locators retained the full established child-factor information.
 
 ## 7. The reviewable claim that results
 > *ARA is a proposed relational coordinate framework built from measurable features already used in mechanics
@@ -1999,7 +2212,9 @@ Full packet:
 > circle-map theory motivate—without universally proving—the proposed φ/rational organisation. In a declared
 > electrostatic plasma, signed source balance and logarithmic harmonic rungs admit exact ARA coordinates; development
 > tests then support identity participation, delayed nonlinear descendants and an asymmetric coupling web while also
-> retaining important nulls. On top of these
+> retaining important nulls. In arithmetic, complementary factors and opposite wheel residues provide exact
+> child-to-parent and anti-pair examples, including lossless `2:1` symmetry compression, but no prime-specific
+> computational improvement. On top of these
 > established anchors sits the empirical ARA claim: that the same bounded Connection/Transfer, phase, scale, and
 > handover geometry recurs across domains. That universality remains open to predeclared independent tests.*
 

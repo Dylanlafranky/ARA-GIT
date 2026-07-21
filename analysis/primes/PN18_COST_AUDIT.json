@@ -1,0 +1,63 @@
+{
+  "test_id": "PN18/POST-TARGET-COST-AUDIT/v1",
+  "created_utc": "2026-07-21T07:48:49.377480+00:00",
+  "classification": "descriptive post-target implementation timing; not a frozen prediction endpoint",
+  "python": "3.14.2",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "iterations": 5,
+  "anchor": 700000000000,
+  "window": 65536,
+  "results": {
+    "segmented_sieve_from_scratch": {
+      "correction": 9,
+      "seconds": [
+        0.1099172000103863,
+        0.12445189998834394,
+        0.11531940000713803,
+        0.10168870000052266,
+        0.12098199999309145
+      ],
+      "median_seconds": 0.11531940000713803
+    },
+    "pn18_recursive_tree_from_scratch": {
+      "correction": 9,
+      "seconds": [
+        1.874034299995401,
+        1.795048100000713,
+        1.7981506999931298,
+        1.8569626000098651,
+        2.061631499993382
+      ],
+      "median_seconds": 1.8569626000098651
+    },
+    "sequential_root_gcd_with_prebuilt_root": {
+      "correction_and_p29_rank": [
+        9,
+        3
+      ],
+      "seconds": [
+        0.002893299999414012,
+        0.004051299998536706,
+        0.0016237999952863902,
+        0.001784299995051697,
+        0.00226910000492353
+      ],
+      "median_seconds": 0.00226910000492353
+    },
+    "p29_wheel_deterministic_miller_rabin": {
+      "correction_and_p29_rank": [
+        9,
+        3
+      ],
+      "seconds": [
+        0.00012930000957567245,
+        0.00014709999959450215,
+        8.880000677891076e-05,
+        8.119999256450683e-05,
+        8.120000711642206e-05
+      ],
+      "median_seconds": 8.880000677891076e-05
+    }
+  },
+  "interpretation_guardrail": "The prebuilt-root query excludes the cost of generating primes and multiplying the root. Wall times compare these Python implementations only and are not asymptotic benchmarks."
+}

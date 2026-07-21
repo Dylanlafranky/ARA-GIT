@@ -7,12 +7,18 @@
 **Protected target:** the separate p31 PN1H wheel remains unopened  
 **Frozen protocol SHA-256:** `DB6BE581908BA336A02F2481CEAB21FAACEF137F8773E9FC74CCF605E5E5A2EB`
 
+> **19 July centering correction:** the frozen protocol and all numerical results remain unchanged. Its
+> `Information³` candidate is now termed a **three-point ARA stencil**, because three consecutive readings do not
+> by themselves encode two identities plus their retained relation. Its `TE-ARA conservation` is now termed
+> **parent-budget conservation**, because it constrains forecast probability mass rather than physical
+> identity-mode energy participation. See `PN_CENTERING_TERMINOLOGY_CORRECTION_2026-07-19.md`.
+
 ## Answer first
 
 PN3 removed the concern that PN2's ARA models were merely corrections layered on top of prime-number-theorem or
 Hardy–Littlewood probabilities. The PN3 prediction path was genuinely standalone: it contained no analytic
 prime-density formula, learned only from opened data, transferred an empirical parent rate from earlier decimal
-rungs, and let local ARA states redistribute that fixed total under an exact TE-ARA conservation rule.
+rungs, and let local ARA states redistribute that fixed total under an exact parent-budget conservation rule.
 
 The registered result is negative.
 
@@ -70,11 +76,11 @@ For adjacent p29-wheel gaps `(g_L,g_R)`, the local ARA coordinate was
 \in(0,2).
 \]
 
-The primary candidate child was the ordered three-reading or Information³-style state
+The primary candidate child was the ordered three-point ARA stencil
 `(x_previous,x_current,x_next)`. The primary edge child used the two endpoint ARA readings. Raw local gaps and a raw
 four-gap stencil were retained as controls.
 
-### 3. TE-ARA conservation
+### 3. Parent-budget conservation
 
 Every child model was normalized without target labels so that
 
@@ -85,7 +91,8 @@ Every child model was normalized without target labels so that
 \]
 
 Plainly: a child state could say where survival was more or less likely, but it could not create or remove any of the
-parent's total predicted probability. This implemented the proposed TE-ARA distinction cleanly.
+parent's total predicted probability. This cleanly separated the frozen parent quantity from child redistribution.
+It did not measure TE-ARA, because no physical energy-mode participation was present.
 
 ### 4. Separation from established baselines
 
@@ -114,9 +121,9 @@ Log-loss gain is written as `comparator loss - ARA loss`, so positive values fav
 
 | Primary comparison | Observed gain (bits/event) | 95% block-bootstrap interval | Result |
 |---|---:|---:|---|
-| Candidate ARA Information³ vs parent only | `-0.000073689` | `[-0.000095842,-0.000050295]` | child hurts |
-| Candidate ARA Information³ vs raw stencil | `+0.000090078` | `[+0.000062844,+0.000116327]` | ARA child beats raw |
-| Candidate ARA Information³ vs PNT29 | `-0.000253481` | `[-0.000289979,-0.000217519]` | established reference wins |
+| Candidate three-point ARA stencil vs parent only | `-0.000073689` | `[-0.000095842,-0.000050295]` | child hurts |
+| Candidate three-point ARA stencil vs raw stencil | `+0.000090078` | `[+0.000062844,+0.000116327]` | ARA child beats raw |
+| Candidate three-point ARA stencil vs PNT29 | `-0.000253481` | `[-0.000289979,-0.000217519]` | established reference wins |
 | ARA edge endpoints vs parent only | `-0.000013902` | `[-0.000022171,-0.000005301]` | child hurts |
 | ARA edge endpoints vs raw edge | `+0.000039072` | `[+0.000021894,+0.000056062]` | ARA child beats raw |
 | ARA edge endpoints vs conditional HL29 | `-0.000031267` | `[-0.000045892,-0.000016122]` | established reference wins |
@@ -146,12 +153,13 @@ No primary criterion passed.
 1. A bottom-up empirical rung recurrence can recover much of the prime-density decline without receiving an analytic
    prime law. It was closer and better-scored than Home, although it was not accurate enough.
 2. Bounded ARA child states retained more transferable structure than the matched raw child states on both tasks.
-3. TE-ARA conservation worked exactly and is a useful way to separate parent quantity from child redistribution.
+3. Parent-budget conservation worked exactly and is a useful way to separate parent quantity from child
+   redistribution. It is a probability constraint, not TE-ARA.
 
 ### Not supported
 
 1. The frozen two-rung parent rule is not accurate to the registered standard.
-2. The local ARA Information³ state does not improve absolute prime survival on the fresh target.
+2. The local three-point ARA stencil does not improve absolute prime survival on the fresh target.
 3. PN3 does not beat or recover the established prime-density laws to parity.
 4. The data do not require a third local wave. The stronger evidence points to a missing or misspecified slow parent
    coordinate.
@@ -193,5 +201,5 @@ repurposed.
 
 The independent validator imported neither PN3 analysis script. It independently rebuilt the p29 candidate
 population and target prime labels, recomputed all model losses and all six block-bootstrap intervals, checked the
-analytic-reference quarantine, verified TE-ARA conservation, and confirmed the packet hash. All `118/118` checks
+analytic-reference quarantine, verified parent-budget conservation, and confirmed the packet hash. All `118/118` checks
 passed.

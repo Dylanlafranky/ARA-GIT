@@ -1,0 +1,184 @@
+{
+  "test_id": "PN16/ORDERED-WHOLE-WAVE-LIFT/v1",
+  "run_utc": "2026-07-21T06:39:56.208900+00:00",
+  "protocol_sha256": "281DAE4D278A6781D9CD42D0D07F7CF36E99DE397126137773719C2B5902373F",
+  "freeze_manifest_sha256": "2C71A7B01207C335168C29F7F42C129681F751C5ADE7E58E3B7F7AAA7D95D435",
+  "status": "ORDERED PATH RETAINED / COMPLETED AB=BA / REVERSED COPY IDEMPOTENT / QUIET-NODE RELATION LIFTS NEXT RUNG",
+  "materialized_rungs": [
+    {
+      "terminal_prime": 5,
+      "gates": [
+        2,
+        3,
+        5
+      ],
+      "gate_count": 3,
+      "period": 30,
+      "expected_totient": 8,
+      "forward_survivors": 8,
+      "reverse_survivors": 8,
+      "final_hamming_count": 0,
+      "forward_equals_reverse": true,
+      "forward_equals_direct_gcd": true,
+      "reverse_equals_direct_gcd": true,
+      "recombined_equals_parent": true,
+      "max_partial_hamming_fraction": 0.5,
+      "mean_partial_hamming_fraction": 0.41666666666666663,
+      "ordered_history_visible": true,
+      "first_quiet_node": 7
+    },
+    {
+      "terminal_prime": 7,
+      "gates": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "gate_count": 4,
+      "period": 210,
+      "expected_totient": 48,
+      "forward_survivors": 48,
+      "reverse_survivors": 48,
+      "final_hamming_count": 0,
+      "forward_equals_reverse": true,
+      "forward_equals_direct_gcd": true,
+      "reverse_equals_direct_gcd": true,
+      "recombined_equals_parent": true,
+      "max_partial_hamming_fraction": 0.5619047619047619,
+      "mean_partial_hamming_fraction": 0.44285714285714284,
+      "ordered_history_visible": true,
+      "first_quiet_node": 11
+    },
+    {
+      "terminal_prime": 11,
+      "gates": [
+        2,
+        3,
+        5,
+        7,
+        11
+      ],
+      "gate_count": 5,
+      "period": 2310,
+      "expected_totient": 480,
+      "forward_survivors": 480,
+      "reverse_survivors": 480,
+      "final_hamming_count": 0,
+      "forward_equals_reverse": true,
+      "forward_equals_direct_gcd": true,
+      "reverse_equals_direct_gcd": true,
+      "recombined_equals_parent": true,
+      "max_partial_hamming_fraction": 0.5930735930735931,
+      "mean_partial_hamming_fraction": 0.44902597402597405,
+      "ordered_history_visible": true,
+      "first_quiet_node": 13
+    },
+    {
+      "terminal_prime": 13,
+      "gates": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13
+      ],
+      "gate_count": 6,
+      "period": 30030,
+      "expected_totient": 5760,
+      "forward_survivors": 5760,
+      "reverse_survivors": 5760,
+      "final_hamming_count": 0,
+      "forward_equals_reverse": true,
+      "forward_equals_direct_gcd": true,
+      "reverse_equals_direct_gcd": true,
+      "recombined_equals_parent": true,
+      "max_partial_hamming_fraction": 0.6130536130536131,
+      "mean_partial_hamming_fraction": 0.4687112887112887,
+      "ordered_history_visible": true,
+      "first_quiet_node": 17
+    },
+    {
+      "terminal_prime": 17,
+      "gates": [
+        2,
+        3,
+        5,
+        7,
+        11,
+        13,
+        17
+      ],
+      "gate_count": 7,
+      "period": 510510,
+      "expected_totient": 92160,
+      "forward_survivors": 92160,
+      "reverse_survivors": 92160,
+      "final_hamming_count": 0,
+      "forward_equals_reverse": true,
+      "forward_equals_direct_gcd": true,
+      "reverse_equals_direct_gcd": true,
+      "recombined_equals_parent": true,
+      "max_partial_hamming_fraction": 0.6352392705333881,
+      "mean_partial_hamming_fraction": 0.4804636539930658,
+      "ordered_history_visible": true,
+      "first_quiet_node": 19
+    }
+  ],
+  "target_lift": {
+    "parent_terminal_prime": 17,
+    "recovered_quiet_node": 19,
+    "established_next_prime_control": 19,
+    "quiet_node_is_next_prime": true,
+    "parent_period": 510510,
+    "child_period": 9699690,
+    "parent_totient": 92160,
+    "tiled_parent_survivors": 1751040,
+    "expected_tiled_parent_survivors": 1751040,
+    "newly_released": 92160,
+    "expected_newly_released": 92160,
+    "child_survivors": 1658880,
+    "expected_child_survivors": 1658880,
+    "missing_relation_fraction_all_integers": 0.00950133457873396,
+    "expected_missing_relation_fraction_all_integers": 0.00950133457873396,
+    "missing_relation_fraction_given_parent_survival": 0.05263157894736842,
+    "expected_missing_relation_fraction_given_parent_survival": 0.05263157894736842,
+    "one_release_per_parent_residue": true,
+    "same_identity_recombination_equals_child": false,
+    "same_identity_recombination_missed_count": 92160,
+    "lifted_equals_direct_child": true
+  },
+  "theorem_scale_quiet_nodes": {
+    "ceiling": 997,
+    "pair_count": 168,
+    "all_pass": true,
+    "first": {
+      "terminal_prime": 2,
+      "recovered_next": 3,
+      "expected_next": 3,
+      "pass": true
+    },
+    "last": {
+      "terminal_prime": 997,
+      "recovered_next": 1009,
+      "expected_next": 1009,
+      "pass": true
+    },
+    "failures": []
+  },
+  "criteria": {
+    "P1_ordered_histories_visible": true,
+    "P2_completed_AB_equals_BA_and_direct_parent": true,
+    "P3_same_identity_recombination_is_idempotent_not_next_rung": true,
+    "P4_first_quiet_node_recovers_next_prime": true,
+    "P5_new_quiet_node_gate_lifts_next_rung_exactly": true,
+    "P6_no_prime_specific_predictive_promotion": true
+  },
+  "all_structural_criteria_pass": true,
+  "interpretation": {
+    "supported": "AB and BA retain different process histories before closure; the completed lower-rung web locates the next quiet-node prime; retaining that node as a new gate constructs the next rung exactly.",
+    "not_supported": "A completed whole and its simple reversal are not two independent poles in this sieve representation. Their direct recombination is idempotent and does not create the next rung.",
+    "information3_refinement": "The informative third is the new quiet-node/gate relation between the completed parent and its next survivor, not order reversal by itself."
+  }
+}

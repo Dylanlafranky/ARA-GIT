@@ -18,6 +18,12 @@ The repository has three working folders, one per question the framework asks of
 
 **Mapping ARA against established physics?** Read [`ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md`](ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md) for the calibrated foundations and [`ARA_PHYSICAL_LAWS_CROSSWALK.md`](ARA_PHYSICAL_LAWS_CROSSWALK.md) for the living law atlas. The crosswalk currently covers the canonical families across mechanics, transport, electromagnetism, thermodynamics, relativity, and quantum/particle physics, and labels exact identities separately from structural matches and open ARA proposals.
 
+**Looking for the completed prime-number exploration?** Read
+[`analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`](analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md).
+It consolidates PN1–PN23, including exact factor/wheel crosswalks, sealed large-anchor recoveries, failed compact
+shortcuts, PN23's lossless `2:1` anti-pair compression, and the final PARKED boundary. Do not infer a new
+three-operation prime algorithm from the three-stage representation.
+
 For the public-release audit, start with [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) and [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md). They list the claims I would quote carefully and the scripts that still need cleanup. The φ-vs-nearby-bases predictor ablation has now had a first-pass run; see [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 months among the eight tested bases on ENSO, but the whole predictor family underperforms persistence at every horizon, so the test is a partial-evidence result rather than a clean win for φ specifically.
 
 The first ARA state-geometry and transport test is recorded in [`ARA_GEOMETRY_TRANSPORT_RESULT.md`](ARA_GEOMETRY_TRANSPORT_RESULT.md). Short version: the geometry map carries ENSO signal over persistence, especially around 6-24 months, but direct value-transport still loses to a simple causal lag baseline.

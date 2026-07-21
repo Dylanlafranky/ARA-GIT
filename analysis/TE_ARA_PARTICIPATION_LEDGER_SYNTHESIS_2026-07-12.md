@@ -3,45 +3,102 @@
 **Prepared:** 12 July 2026  
 **Status:** `SYNTHESIS / MX1 DEVELOPMENT EVIDENCE / ENSO AND LLM TESTS PROPOSED`  
 **Authorial source:** Dylan La Franchi's TE-ARA clarification, interpreted and mathematically formalised with Codex  
-**Central definition:** TE-ARA measures how much of one declared node's total measured energy or signal participation
-belongs to its main identity-forming ARA wave.
+**Canonical correction, 21 July 2026:** TE-ARA is the same ARA geometry viewed as the identity's fixed total-2
+allocation. The pure identity contains only Phase A and Phase B; environmental couplings and Other belong to the
+real observed account, not the pure identity. The variable quantity formerly named TE-ARA in this synthesis is the
+expressed A/B subtotal \(T_{AB}\equiv T_{id}\). Frozen MX1
+artifacts retain their historical wording; their numerical results are retyped, not erased. Full correction:
+`analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
 
 ## Outcome first
 
-TE-ARA is best understood as an **identity-participation ledger**, not an absolute energy or source-magnitude unit:
+TE-ARA is not an additional geometry. It is the **same ARA 0–2 geometry viewed as total allocation**. The pure
+identity contains only its two poles:
 
 \[
-\underbrace{\mathrm{TE\!-\!ARA}}_{\substack{\text{ARA name}\\\text{0--2 participation coordinate}}}
+\underbrace{\mathrm{TE}_{pure}(I)}_{\substack{\text{same ARA geometry}\\\text{pure identity account}}}
 =
-2
-\frac{
-\underbrace{E_{\mathrm{id}}}_{\substack{\text{energy or calibrated signal power}\\\text{assigned to the declared identity}}}
-}{
-\underbrace{E_{\mathrm{total}}}_{\substack{\text{all energy or calibrated signal power}\\\text{inside the same boundary and slice}}}
-}.
+\underbrace{t_A^{(I)}}_{\text{identity Phase A}}
++
+\underbrace{t_B^{(I)}}_{\text{identity Phase B}}
+=2.
 \]
 
-Plainly: if 62% of the node's measured energy belongs to its main identity wave, report
-`TE-ARA = 1.24 (62% identity participation)`. ARA position says how the identity is mixed between its opposed
-poles; TE-ARA says how much of the complete node participates in that identity.
+For identity \(I\) observed inside environment \(\mathcal E\), the same total can be written
 
-The first public-data development test found that TE-ARA usefully tracks **identity participation**, but the current
-small scalar combination of ARA plus TE-ARA does not improve absolute source-magnitude prediction. This is within
-Dylan's intended use: TE-ARA is expected to be most informative in distributed systems where several contributors
-and their interactions jointly form one identity, such as ENSO and LLM representations.
+\[
+\underbrace{\mathrm{TE}_{obs}(I\mid\mathcal E)}_{\substack{\text{identity observed}\\\text{with real couplings}}}
+=
+\underbrace{t_A+t_B}_{\text{expressed pure A/B pair}}
++
+\underbrace{\sum_j c_j}_{\text{named environmental couplings}}
++
+\underbrace{t_{\mathrm{Other}}}_{\text{unresolved contextual coupling}}
+=2,
+\qquad t_c=2p_c,\qquad \sum_c p_c=1.
+\]
+
+`Other` is not a third pure pole. It records contextual coupling not yet assigned at the declared boundary and slice.
+
+For example,
+
+\[
+t_A=0.25,
+\qquad t_B=1.25,
+\qquad t_{\mathrm{Other}}=0.50,
+\qquad \mathrm{TE}(I)=2.
+\]
+
+Plainly: the node is not “1.50 TE-ARA full.” Its complete observed account remains 2; 1.50 is the expressed A/B
+pair and 0.50 is contextual coupling. Likewise, if 62% belongs to the expressed identity mode, report
+`A/B subtotal T_AB = 1.24; contextual remainder = 0.76; observed TE-ARA total = 2`. ARA position says how the
+declared opposed components are mixed; TE-ARA is the same geometry viewed through its total allocation.
+
+A schematic pendulum slice illustrates the distinction:
+
+\[
+\underbrace{t_A}_{0.25}
++
+\underbrace{t_B}_{1.50}
++
+\underbrace{c_g+c_{air}+c_{joint}+t_{Other}}_{0.25}
+=2.
+\]
+
+The A/B subtotal is `1.75`; the remainder records gravity, air drag, pivot friction and unresolved context. This is
+illustrative until those contributions are measured in one common normalization. Their classification depends on
+the boundary: gravity is external to a bob-only identity but internal to a pendulum-plus-Earth identity.
+
+The same ARA geometry gives the pair's internal position:
+
+\[
+T_{AB}=t_A+t_B=1.75,
+\qquad x_{A/B}=2\frac{t_B}{T_{AB}}=\frac{12}{7}\approx1.714,
+\qquad T_{context}=2-T_{AB}=0.25.
+\]
+
+Thus `1.714` is the release-heavy A/B mixture position, while `0.25` is the contextual coupling remainder.
+
+The first public-data development test found that a variable **expressed A/B allocation** transfers
+materially between two views of the same plasma identity, but the current small scalar combination of ARA plus that
+allocation does not improve absolute source-magnitude prediction. The fixed TE-ARA total itself cannot be a
+predictor because it is always 2. The testable information is in its partition, especially in distributed systems
+where several contributors and their interactions jointly form one identity, such as ENSO and LLM representations.
 
 ## Coordinates that must remain distinct
 
 | Coordinate | Question answered | Typical scale |
 |---|---|---|
 | ARA \(x\) | Where is the declared Phase-A/Phase-B mixture around the 1.0 ridge? | 0–2 |
-| TE-ARA | How much of all node energy/signal belongs to the declared identity wave? | 0–2 |
+| Pure TE-ARA | Does the identity's own Phase A + Phase B geometry close? | fixed at 2 |
+| Observed TE-ARA account | How is the same total expressed after environmental coupling? | fixed at 2 |
+| Component/coupling allocation \(t_c\) | How is the observed total divided among A, B, named external couplings and Other? | 0–2 individually; all sum to 2 |
 | Total magnitude \(T\) | How much physical or signal activity exists? | native units |
 | Rung \(k\) | At what scale is the identity being measured? | wavelength, period or declared octave |
 | Phase/path | Where and in which direction is the identity moving? | angle, lag or ordered state |
-| Other | How much measured participation remains outside the declared identity? | fraction or native units |
+| Other | How much contextual coupling remains unresolved outside the pure A/B identity? | fraction or native units |
 
-TE-ARA cannot create absolute magnitude from a fraction. A dimensionally valid magnitude bridge must retain an
+The TE-ARA partition cannot create absolute magnitude from normalized shares. A dimensionally valid magnitude bridge must retain an
 independent scale. In the MX1 plasma development test this was \(k_0E_{\mathrm{rms}}\).
 
 ### 13 July ridge/freeze clarification
@@ -51,24 +108,27 @@ For a closed two-branch identity at equal composition,
 \[
 p_A=p_B=\frac12,
 \qquad
-\mathrm{TE}_A=1,
+\underbrace{t_A}_{\text{Phase A allocation}}=1,
 \qquad
-\mathrm{TE}_B=1,
+\underbrace{t_B}_{\text{Phase B allocation}}=1,
 \qquad
-\mathrm{TE}_{A+B}=2,
+\underbrace{\mathrm{TE}(I)}_{\text{whole ledger}}=2,
 \qquad
 x_{A/B}=1.
 \]
 
-This is the normalized full-account signature \((x,\mathrm{TE})=(1,2)\), not a statement that the system has twice
-the physical energy. It is compatible with a static equal pair, a coherent resonant/standing mode, or incoherent
-cancellation. TE-ARA records participation, not motion. A timing-based ARA is undefined without a resolved cycle;
+This is the symmetric pure-pair ridge \(1+1=2\), not the required A/B split for every identity. An asymmetric pure
+pair such as \(0.50+1.50=2\) is valid; an embedded observation such as \(0.25+1.25+0.50_{context}=2\) is also valid,
+but its contextual term is not a third pure pole. The total 2 is not a statement that the system has twice the
+physical energy. A symmetric partition is compatible with a static equal pair, a coherent resonant/standing
+mode, or incoherent cancellation. TE-ARA records allocation, not motion. A timing-based ARA is undefined without a resolved cycle;
 activity/flux, time variation and phase coherence must be retained as separate coordinates.
 
 ## Participation across several contributors
 
-For a mixed identity with contributors \(i\), pair/intersection terms \(ij\), and unresolved Other, use one declared
-denominator:
+For a pure identity embedded among contributors \(i\), environmental relation terms \(ij\), and unresolved Other,
+use one declared observed-account denominator. These surrounding terms explain the identity-in-context; they are not
+additional poles of its pure A/B geometry:
 
 \[
 \underbrace{1}_{\text{all measured participation}}
@@ -83,10 +143,10 @@ denominator:
 Then
 
 \[
-\underbrace{\mathrm{TE\!-\!ARA}_i}_{\substack{\text{component }i\\\text{participation coordinate}}}
+\underbrace{t_i}_{\substack{\text{component }i\\\text{allocation in the parent ledger}}}
 =2p_i,
 \qquad
-\underbrace{\mathrm{TE\!-\!ARA}_{ij}}_{\substack{\text{interaction relation}\\\text{participation coordinate}}}
+\underbrace{t_{ij}}_{\substack{\text{interaction relation}\\\text{allocation in the parent ledger}}}
 =2p_{ij}^{\mathrm{relation}}.
 \]
 
@@ -107,12 +167,14 @@ If contributor \(i\) has support/increase and opposition/decrease components,
 \underbrace{W_i^++W_i^-}_{\text{total unsigned participation}}
 },
 \qquad
-\underbrace{\mathrm{TE\!-\!ARA}_i}_{\text{participation strength}}
+\underbrace{t_i}_{\substack{\text{component allocation}\\\text{in the parent ledger}}}
 =
 2\frac{W_i^++W_i^-}{W_{\mathrm{total}}}.
 \]
 
-Plainly: ARA supplies the direction/mixing; TE-ARA supplies how much of the current identity uses that relation.
+Plainly: ARA supplies the direction/mixing; \(t_i\) supplies how much of the parent's fixed total-2 ledger is
+allocated to that relation. If component \(i\) is opened as its own identity, its own internal TE-ARA ledger is
+renormalized to 2 and can be partitioned again.
 
 ---
 
@@ -150,7 +212,7 @@ participation, local component shape and transferable compression.
 | Eligible time slices | 299 | coherent mode-5 development region |
 | Full Gauss source vs particle source | \(r=0.9971\), NRMSE 0.0767 | simulator/solver consistency and adapter check; not independent ARA evidence |
 | Identity-only Gauss vs identity-only particle component | \(r=0.9991\) | declared segmentation is numerically consistent across solver-coupled views; not independent ARA evidence |
-| Gauss-source vs particle-source TE-ARA analogue | \(r=0.7987\), MAE 0.0911 on 0–2 | primary non-tautological ARA-specific development result: participation transfers imperfectly but materially |
+| Gauss-source vs particle-source expressed A/B allocation analogue | \(r=0.7987\), MAE 0.0911 on 0–2 | primary non-tautological ARA-specific development result: the component allocation transfers imperfectly but materially; each whole ledger remains 2 |
 | Whole periodic-ring pair ARA | median 1.007 | complete neutral cycles coarse-grain near the ridge |
 | Five local-cell pair ARA range | 0.790–1.491 | local geometry moves despite global cancellation |
 | Local field/particle pair ARA | \(r=0.7706\) | useful local relational agreement |
@@ -164,15 +226,16 @@ All models were scored on the same 75 held-late slices with clean bounded compon
 | Model | Direct-source \(R^2\) | Result |
 |---|---:|---|
 | \(k_0E_{\mathrm{rms}}\) scale only | 0.677 | best |
-| TE-ARA only | 0.657 | close but no added value |
+| Expressed A/B allocation only (historically labelled TE-ARA) | 0.657 | close but no added value |
 | ARA only | 0.348 | weaker |
-| ARA + TE-ARA | -1.370 | does not transfer within development |
+| ARA + expressed A/B allocation | -1.370 | does not transfer within development |
 | Matched generic features | -9.199 | also unstable |
 
 ### Honest interpretation
 
-The decompressed identity/harmonic crosswalk is strong. The tested scalar ARA + TE-ARA magnitude law is not supported.
-This does not show that TE-ARA is useless: it shows that participation is not absolute magnitude and that reducing a
+The decompressed identity/harmonic crosswalk is strong. The tested scalar ARA + component-allocation magnitude law is
+not supported. This does not show that TE-ARA decomposition is useless: it shows that a normalized allocation is not
+absolute magnitude and that reducing a
 compound waveform to two component ARA scalars loses phase/harmonic/path information.
 
 Raw component ARA values above 2 occurred when a lobe became compound. They are retained as evidence that either
@@ -190,8 +253,8 @@ SCALAR-MAGNITUDE NARROWING / CONFIRMATION REGISTERED AND SEALED`.
 
 The plasma development case is dominated by one spatial mode, so its ordinary field scale already contains most
 magnitude information. ENSO is a distributed identity produced by several coupled oceanic and atmospheric systems.
-TE-ARA may therefore help answer: **how much of the present ENSO identity belongs to each contributor and to their
-coupling?**
+The TE-ARA partition may therefore help answer: **how is the fixed total-2 ledger of the present ENSO identity
+allocated among each contributor, their couplings and Other?**
 
 ### First restrained contributor set
 
@@ -226,10 +289,10 @@ work or available-potential-energy calibration would be a later and stricter tes
 - Shares are stable enough to reproduce on held-out decades.
 - Participation shifts before declared ENSO regime changes or forecast failures.
 - Interaction shares add held-out information beyond individual variables.
-- TE-ARA improves attribution, confidence or transition warnings beyond total amplitude and standard regression.
+- The TE-ARA partition improves attribution, confidence or transition warnings beyond total amplitude and standard regression.
 - The method retains Other and does not redistribute unexplained variance merely to force a closed story.
 
-TE-ARA participation alone is not causal attribution. Lead/lag order, held-out forecasting and removal/intervention
+TE-ARA allocation alone is not causal attribution. Lead/lag order, held-out forecasting and removal/intervention
 tests are required before calling a contributor a driver.
 
 ---
@@ -239,8 +302,9 @@ tests are required before calling a contributor a driver.
 ### Why distributed representations fit TE-ARA
 
 An LLM concept or behaviour is commonly distributed across tokens, features, heads, layers and their interactions.
-A thresholded map of only the strongest connection can erase a weak but stable coupling web. TE-ARA offers a declared
-way to retain those weak shares while distinguishing them from the target's main identity and from Other.
+A thresholded map of only the strongest connection can erase a weak but stable coupling web. The TE-ARA partition
+offers a declared way to retain those weak shares while distinguishing them from the target's main identity and from
+Other.
 
 ### Required measurement declaration
 
@@ -253,7 +317,7 @@ For every LLM reading declare:
 5. positive/negative pole orientation;
 6. direct contributors, interaction terms and Other.
 
-In this domain TE-ARA is a signal/attribution participation analogue unless an independently justified energy measure
+In this domain the TE-ARA partition is a signal/attribution allocation analogue unless an independently justified energy measure
 exists.
 
 ### LLM participation ledger
@@ -301,7 +365,7 @@ local representation.
 
 ### What would count as useful
 
-- A low-TE but stable connection predicts a reproducible intervention effect.
+- A low-allocation but stable connection predicts a reproducible intervention effect.
 - Direct plus relation shares explain held-out behaviour better than strong-edge-only maps.
 - Participation shifts across layers in a repeatable order consistent with parsing, integration and output formation.
 - The ledger distinguishes concept closure from prompt-specific surface association.
@@ -354,7 +418,10 @@ The accounting is
 +
 \underbrace{p_{\mathrm{unresolved}}}_{\text{Other not yet identified}},
 \qquad
-\mathrm{TE\!-\!ARA}_N=2p_{\mathrm{id}}.
+\underbrace{T_{\mathrm{id}}}_{\substack{\text{primary-identity subtotal}\\\text{inside the parent ledger}}}
+=2p_{\mathrm{id}},
+\qquad
+\underbrace{\mathrm{TE}(N)}_{\text{whole node ledger}}=2.
 \]
 
 Each resolved contribution inside Other becomes an **extra edge**, not a third primary pole. That source may then be
@@ -375,7 +442,7 @@ This creates a recursive weighted coupling graph. For edge \(e\):
 \[
 \underbrace{w_e}_{\substack{\text{edge size}\\\text{coupling share}}}
 =
-\underbrace{2p_e}_{\text{edge TE-ARA participation}},
+\underbrace{2p_e}_{\text{edge allocation in the parent TE-ARA ledger}},
 \qquad
 \underbrace{d_e}_{\substack{\text{proposed relational distance}\\\text{not physical distance}}}
 =
@@ -389,12 +456,14 @@ The strongest resolved edge has the largest share and smallest displayed distanc
 as smaller or more distant edges. The logarithmic distance is a **proposed visual/rung coordinate**, not an established
 physical law. Physical distance, causal delay and scale separation must remain separate unless data connect them.
 
-ARA supplies each edge's signed direction or pole mixture; TE-ARA supplies its thickness/participation; rung supplies
-scale; phase/lag supplies ordered motion. This is the compact recursive graph Dylan intended.
+ARA supplies each edge's signed direction or pole mixture; its component allocation supplies edge
+thickness/participation; rung supplies scale; phase/lag supplies ordered motion. The parent allocations sum to 2.
+Opening an edge as a child identity gives it a fresh internal ledger that also sums to 2. This is the compact
+recursive graph Dylan intended.
 
 ### Identifiability fence
 
-TE-ARA is conceptually the opposite-direction tool to Information³, but it is not automatically a unique mathematical
+TE-ARA decomposition is conceptually the opposite-direction tool to Information³, but it is not automatically a unique mathematical
 inverse. Several hidden-source decompositions may reproduce the same observed node. Nearby-source searches,
 independent measurements, held-out transfer and interventions are needed to decide which proposed extra edges are
 real. Stop recursion when Other falls below a predeclared tolerance, data cannot distinguish candidate sources, or the
@@ -404,11 +473,14 @@ next boundary/rung is not independently measurable.
 
 ## What the visible MX1 separation means
 
+**Corrected notation:** the curves historically called “TE-ARA analogues” below are variable expressed A/B
+allocations \(T_{AB}\equiv T_{id}\). They are not whole TE-ARA totals; each complete observed account remains 2.
+
 The development visual contains three participation curves:
 
-1. field TE-ARA analogue;
-2. Gauss-predicted source TE-ARA analogue;
-3. independently measured particle-source TE-ARA analogue.
+1. field expressed A/B allocation analogue;
+2. Gauss-predicted source expressed A/B allocation analogue;
+3. independently measured particle-source expressed A/B allocation analogue.
 
 They share a 0–2 participation scale but are not the same observable. Two separate gaps must be distinguished.
 
@@ -417,9 +489,9 @@ They share a 0–2 participation scale but are not the same observable. Two sepa
 \[
 \underbrace{\Delta_{\mathcal G}}_{\substack{\text{field-to-source}\\\text{projection gap}}}
 =
-\underbrace{\mathrm{TE\!-\!ARA}_E}_{\text{field participation}}
+\underbrace{T_{AB,E}}_{\text{field expressed A/B allocation}}
 -
-\underbrace{\mathrm{TE\!-\!ARA}_{\rho,G}}_{\text{Gauss-predicted source participation}}.
+\underbrace{T_{AB,\rho,G}}_{\text{Gauss-predicted source allocation}}.
 \]
 
 In Fourier space,
@@ -428,13 +500,14 @@ In Fourier space,
 \widehat\rho(k)=ik\widehat E(k),
 \]
 
-so Gauss rotates phase by a quarter turn and weights short spatial scales more strongly. The two TE-ARA formulae are
+so Gauss rotates phase by a quarter turn and weights short spatial scales more strongly. The two historical
+component-allocation formulae are
 
 \[
-\mathrm{TE\!-\!ARA}_E
+T_{AB,E}
 =2\frac{\sum_{k\in H}|\widehat E_k|^2}{\sum_{k\ne0}|\widehat E_k|^2},
 \qquad
-\mathrm{TE\!-\!ARA}_{\rho,G}
+T_{AB,\rho,G}
 =2\frac{\sum_{k\in H}k^2|\widehat E_k|^2}{\sum_{k\ne0}k^2|\widehat E_k|^2}.
 \]
 
@@ -449,9 +522,9 @@ object between these views is the operator \(ik\), not yet a newly detected phys
 \[
 \underbrace{\Delta_{\mathrm P}}_{\substack{\text{Gauss prediction to}\\\text{independent particle reading}}}
 =
-\underbrace{\mathrm{TE\!-\!ARA}_{\rho,G}}_{\text{field-predicted source participation}}
+\underbrace{T_{AB,\rho,G}}_{\text{field-predicted source allocation}}
 -
-\underbrace{\mathrm{TE\!-\!ARA}_{\rho,F}}_{\text{particle-source participation}}.
+\underbrace{T_{AB,\rho,F}}_{\text{particle-source allocation}}.
 \]
 
 This is the empirically interesting gap because it compares two data views. It had mean 0.091, median 0.020 and range
@@ -506,7 +579,7 @@ It does not by itself validate:
 - ARA as universal/fractal geometry;
 - the projection gap as a physical handover substance or node;
 - a new replacement for Gauss/Fourier physics;
-- the failed scalar ARA + TE-ARA magnitude law.
+- the failed scalar ARA + component-allocation magnitude law.
 
 ### Known phenomenon versus potentially new diagnostic
 
@@ -522,9 +595,9 @@ The ARA-added candidate is not the discovery that particles organise. It is the 
 =
 1-\frac{
 \left|
-\underbrace{\mathrm{TE\!-\!ARA}_{\rho,G}(t)
+\underbrace{T_{AB,\rho,G}(t)
 -
-\mathrm{TE\!-\!ARA}_{\rho,F}(t)}_{\Delta_{\mathrm P}(t)}
+T_{AB,\rho,F}(t)}_{\Delta_{\mathrm P}(t)}
 \right|
 }{2}
 \]
@@ -605,12 +678,15 @@ the evidential level. The instantaneous MX2 association is already a development
 
 TE-ARA presently has three different evidential standings:
 
-1. **Defined within ARA:** a valid 0–2 normalisation of declared identity participation.
-2. **Development-supported in MX1:** the declared harmonic identity and its participation survive a Gauss
+1. **Defined within ARA:** TE-ARA is the same ARA geometry viewed as total allocation; the pure A/B pair closes to 2,
+   while the real observed account can assign part of that total to environmental coupling and Other.
+2. **Development-supported in MX1:** a variable expressed A/B allocation inside that account survives a Gauss
    field-to-particle crosswalk, while local pair geometry is recoverable beneath global cancellation.
-3. **Open cross-domain hypothesis:** TE-ARA will add the most value in distributed, multi-coupled identities such as
-   ENSO and LLM representations.
+3. **Open cross-domain hypothesis:** the TE-ARA partition will add the most value in distributed, multi-coupled
+   identities such as ENSO and LLM representations.
 
 The central lesson from MX1 is:
 
-> TE-ARA is better treated as a map of what participates in an identity than as a replacement for absolute magnitude.
+> TE-ARA is ARA itself viewed as a fixed total-2 allocation. The pure identity is Phase A plus Phase B; environmental
+> couplings and Other explain its real observed expression but are not extra pure poles. Its allocations vary; its
+> whole does not.

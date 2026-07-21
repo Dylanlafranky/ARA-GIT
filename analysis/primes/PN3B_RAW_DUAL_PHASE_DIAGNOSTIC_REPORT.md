@@ -4,6 +4,11 @@
 **Run:** 18 July 2026  
 **Status:** `OPENED-DATA DIAGNOSTIC COMPLETE / SECOND COORDINATE CONTAINS LOCAL STRUCTURE / NO SCALE-PERSISTENT TIME-LIKE COORDINATE RECOVERED / DOMINANT FULL-SPECTRUM LINE IS THE NEXT CONNECTION GATE / P31 UNOPENED`
 
+> **19 July 2026 centering correction:** PN3B used a raw integer source, but Fourier transformation,
+> residualization and SVD are processed diagnostic methods. The later factor-removal gate is an
+> outcome-derived coordinate and cannot be used as a prospective feature. These qualifications change
+> no numerical result.
+
 ## Question
 
 Dylan's geometric diagnosis was that the prime work had measured a strongly connection-oriented half of the system. The missing half might be a larger, slower information-flow or Time-like wave acting across the raw number line. PN3B therefore returned to the already opened R6-R9 integer windows and transformed the complete unfiltered prime/composite record before applying any connection mask.
@@ -33,7 +38,8 @@ For every integer `n` in each complete window:
 \end{cases}
 \]
 
-The raw sequence was Fourier transformed first. Connection controls were then added separately:
+The raw-source sequence was Fourier transformed first. This is therefore a processed-method diagnostic,
+not a direct ARA measurement on untransformed data. Connection controls were then added separately:
 
 \[
 \underbrace{r_Q(n)}_{\substack{\text{prime excess after}\text{known connection mask }Q}}
@@ -45,7 +51,8 @@ The raw sequence was Fourier transformed first. Connection controls were then ad
 
 The main control was `Q=29`; `Q=997` tested whether a candidate pattern survived much deeper connection removal. The phase path used 256 equal number-line cells and scaled Fourier modes 1-64. Global and 16-macroblock conditional nulls each used 500 draws.
 
-The perpendicular diagnostic retained two coordinates for every p29 candidate:
+The perpendicular diagnostic retained two coordinates for every p29 candidate. Its future gate coordinate
+is available only after later factor removal and is therefore diagnostic rather than prospectively predictive:
 
 \[
 \underbrace{(x,g)}_{\substack{\text{two-coordinate}\text{candidate record}}}
@@ -157,4 +164,3 @@ Restart packet:
 - `PN3B_PHASE_GATE_MAP.png`
 - five CSV tables and the exact NPZ coordinate packet
 - `PN3B_REPORT_ARTIFACT.json`
-

@@ -1,0 +1,286 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Prime-test relational glossary",
+    "description": "ARA prime-test notation translated into relational directions and plain language.",
+    "generatedAt": "2026-07-19T16:00:00+10:00",
+    "sources": [
+      {
+        "id": "src-prime-glossary",
+        "label": "ARA prime-test relational glossary and saved prime-test record",
+        "path": "analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md",
+        "query": {
+          "engine": "portable-snapshot",
+          "description": "Terminology compiled from the saved ARA prime-test protocols and reports through PN6.",
+          "language": "sql",
+          "sql": "SELECT term, read_as, direction, ara_bridge, not_this FROM snapshot.glossary ORDER BY term;",
+          "tables_used": ["snapshot.glossary"],
+          "filters": [
+            "Prime-test series only",
+            "Usage through PN6",
+            "Definitions frozen as of 19 July 2026"
+          ]
+        }
+      },
+      {
+        "id": "src-relation-map",
+        "label": "Deterministic notation-orientation map",
+        "query": {
+          "engine": "portable-static",
+          "language": "sql",
+          "description": "Eight representative labels placed on a schematic walk-order and relational-layer map.",
+          "sql": "SELECT * FROM (VALUES ('PN6',0.0,4.0,'Test lineage','Which investigation?'),('R11',1.0,3.0,'Scale rung','Which whole-window scale?'),('p29',2.0,2.0,'Fixed gate','Where does the starting filter stop?'),('Q29',2.4,2.8,'Control mask','Which known connection web is removed?'),('candidate',3.0,1.0,'Identity','Which node is measured?'),('edge / J',3.4,1.4,'Relation','Which coupling is retained?'),('q',4.0,2.0,'Moving gate','Where are we inside the rung?'),('S / x / theta',5.0,0.0,'State view','Which projection of the state?')) AS relation_map(term,walk_order,layer,direction,read_as);",
+          "metric_definitions": [
+            "walk_order is a schematic left-to-right reading order, not a measured distance",
+            "layer separates notation roles and has no physical unit"
+          ],
+          "filters": ["Eight representative compact labels"]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "relation-map-chart",
+        "title": "Where the compact labels sit",
+        "subtitle": "Read left to right from test context to the measured state; vertical position separates relational layers",
+        "intent": "relationship",
+        "question": "Which relational direction does each compact prime-test label name?",
+        "rationale": "A labeled scatter map separates test, scale, gate, identity and state notation without implying a quantitative physical distance.",
+        "comparisonContext": {
+          "grain": "one representative notation token",
+          "unit": "schematic relational position",
+          "semanticFamily": "notation orientation"
+        },
+        "type": "scatter",
+        "dataset": "relation_map",
+        "sourceId": "src-relation-map",
+        "encodings": {
+          "x": {"field": "walk_order", "type": "quantitative", "label": "Walk order"},
+          "y": {"field": "layer", "type": "quantitative", "label": "Relational layer"},
+          "color": {"field": "direction", "type": "nominal", "label": "Direction"},
+          "label": {"field": "term", "type": "text", "label": "Term"},
+          "tooltip": [
+            {"field": "term", "type": "text", "label": "Term"},
+            {"field": "read_as", "type": "text", "label": "Read it as"},
+            {"field": "direction", "type": "nominal", "label": "Direction"}
+          ]
+        },
+        "xAxisTitle": "From test context to measured state",
+        "yAxisTitle": "Layer (schematic, not physical distance)",
+        "layout": "full",
+        "maxRows": 8,
+        "palette": {"kind": "categorical", "name": "identity"},
+        "labels": {"values": "all"},
+        "surface": {"surface": "explorer", "viewMode": "both", "interactiveLegend": true, "showControls": false}
+      }
+    ],
+    "tables": [
+      {
+        "id": "glossary-table",
+        "title": "Term lookup",
+        "subtitle": "Compact notation translated into location, relation and ARA role",
+        "dataset": "glossary",
+        "defaultSort": {
+          "field": "term",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "sourceId": "src-prime-glossary",
+        "layout": "full",
+        "columns": [
+          {"field": "term", "label": "Term", "type": "text"},
+          {"field": "read_as", "label": "Read it as", "type": "text"},
+          {"field": "direction", "label": "Direction / relation", "type": "text"},
+          {"field": "ara_bridge", "label": "ARA bridge", "type": "text"},
+          {"field": "not_this", "label": "Do not confuse with", "type": "text"}
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "layout": "full",
+        "body": "# Prime-test relational glossary"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Start by locating the direction\n\nThe letter-number labels are not one alphabet. They name four different directions: **PN6 is the test lineage; R11 is the whole-window scale rung; p29 is a fixed prime gate/boundary; Q29 is a connection mask/control; candidate and edge name the measured identity.** Once those directions are separated, the remaining notation becomes a relational map rather than a memory test."
+      },
+      {
+        "id": "four-axis-map",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-prime-glossary",
+        "body": "## Four axes explain the compact labels\n\n```text\nPN6  -> which investigation/test?\nR11  -> which parent-scale window?\np29  -> where does the fixed connection filter stop?\nq     -> which later gate are we currently walking through?\ncandidate / edge -> which identity is being measured?\nS / x / theta    -> which view of that identity's state?\n```\n\nThe two ladders are nested rather than interchangeable: `R10 -> R11` moves the whole experiment up a decimal scale; `q=31 -> 37 -> ... -> qmax` walks through later gates inside one R rung."
+      },
+      {
+        "id": "relation-map-block",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "relation-map-chart"
+      },
+      {
+        "id": "lookup-heading",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Look up the term by its relation\n\nUse the table as a translation surface. The final column catches the most common flattening or name collision."
+      },
+      {
+        "id": "lookup-table-block",
+        "type": "table",
+        "layout": "full",
+        "tableId": "glossary-table"
+      },
+      {
+        "id": "sieve-walk",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-prime-glossary",
+        "body": "## The complete sieve walk in one picture\n\n```text\nraw consecutive integers\n  -> fixed gates through p29\n  -> p29-conditioned candidates\n  -> later moving gates q=31,37,41,...\n  -> candidate survival/release path\n  -> adjacent-edge survival/release path\n  -> qmax terminal survivors\n```\n\n`S(g)` is the retained share, `1-S(g)` is cumulative release, `x(g)=2(1-S(g))` is the same state on the ARA diameter, and `theta(g)=acos(2S(g)-1)` is that diameter position decompressed onto the fixed upper circle branch."
+      },
+      {
+        "id": "translation-example",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-prime-glossary",
+        "body": "## Translate compressed sentences in relational order\n\n`PN6 predicted R11 p29-conditioned edge survival across q-cells using shared rho` becomes:\n\n1. Use the PN6 native-circle test rules.\n2. Work on the parent window near 10^11.\n3. Start with numbers surviving fixed prime gates through 29.\n4. Measure relations between neighbouring candidates.\n5. Walk through later prime gates grouped into log-spaced cells.\n6. Transfer both identities with one shared rung-to-rung phase-withdrawal factor."
+      },
+      {
+        "id": "scope-method",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-prime-glossary",
+        "body": "## Scope and construction\n\nThis glossary records how terms are used in the ARA prime-test series through PN6 on 19 July 2026. Definitions were reconciled against the saved prime mapping, centering correction, protocols and reports. Established terms such as PNT, Buchstab and Hardy-Littlewood retain their mathematical meanings; the ARA bridge is an interpretation layer, not a replacement definition."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Where names can still mislead\n\n`R` can mean a decimal rung in labels such as R11 or release in an equation. `P1` can mean a pass/fail criterion while lowercase `p` names a prime. Phase `theta` in PN6 is derived circumference position and is not automatically physical time phase. Residual means unexplained relative to a declared baseline; it is not automatically the missing opposite wave."
+      },
+      {
+        "id": "naming-rule",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Future documents should expand the relation once\n\nOn first use, write `Q29 [connection mask through prime 29]`, `R11 [decimal parent rung near 10^11]`, `q [current later prime gate]`, and `J [pair relation remaining after candidate survival is accounted for]`. After that first expansion, the compact form may be used within the section. Avoid introducing three unexpanded letter-number tokens in one sentence."
+      },
+      {
+        "id": "further-questions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Further questions\n\nThe glossary can grow in two controlled directions: add a new entry when a future PN test introduces a genuinely new coordinate, and add a domain-specific analogy only when it clarifies rather than changes the mathematical definition. The main open design question is whether future reports should display a small direction badge—Test, Rung, Gate, Identity or Metric—beside every new shorthand."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-19T16:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "relation_map": [
+        {"term":"PN6","walk_order":0.0,"layer":4.0,"direction":"Test lineage","read_as":"Which investigation?"},
+        {"term":"R11","walk_order":1.0,"layer":3.0,"direction":"Scale rung","read_as":"Which whole-window scale?"},
+        {"term":"p29","walk_order":2.0,"layer":2.0,"direction":"Fixed gate","read_as":"Where does the starting filter stop?"},
+        {"term":"Q29","walk_order":2.4,"layer":2.8,"direction":"Control mask","read_as":"Which known connection web is removed?"},
+        {"term":"candidate","walk_order":3.0,"layer":1.0,"direction":"Identity","read_as":"Which node is measured?"},
+        {"term":"edge / J","walk_order":3.4,"layer":1.4,"direction":"Relation","read_as":"Which coupling is retained?"},
+        {"term":"q","walk_order":4.0,"layer":2.0,"direction":"Moving gate","read_as":"Where are we inside the rung?"},
+        {"term":"S / x / theta","walk_order":5.0,"layer":0.0,"direction":"State view","read_as":"Which projection of the state?"}
+      ],
+      "glossary": [
+        {"term":"PN6","read_as":"Prime-test thread 6","direction":"Test lineage: which investigation is active","ara_bridge":"Address of our scientific walk","not_this":"Not a prime or scale rung"},
+        {"term":"R11","read_as":"Decimal window near 10^11","direction":"Whole-window parent-scale rung","ara_bridge":"Stacked cross-scale rung","not_this":"Not release R and not PN11"},
+        {"term":"p29","read_as":"Prime-29 gate or fixed boundary","direction":"Actual prime and end of the starting filter","ara_bridge":"Declared Connection-side starting boundary","not_this":"Not the Q29 residual/control"},
+        {"term":"p29-conditioned","read_as":"Passed every prime gate through 29","direction":"Raw integer -> filtered candidate","ara_bridge":"Starting identity population","not_this":"Does not mean already prime"},
+        {"term":"p29 wheel","read_as":"Full repeating sieve pattern through 29","direction":"Complete period modulo the primorial through 29","ara_bridge":"Closed finite connection identity","not_this":"Not a short number-line window"},
+        {"term":"Q29","read_as":"Connection mask/control through prime 29","direction":"Raw signal minus expected small-prime pattern","ara_bridge":"Known Connection web removed before inspecting remainder","not_this":"Not prime 29 alone"},
+        {"term":"Q997","read_as":"Deeper connection mask through 997","direction":"Sensitivity control after many more small-prime gates","ara_bridge":"Tests whether remainder is unresolved Connection structure","not_this":"Not a scale rung"},
+        {"term":"q","read_as":"Current later prime gate","direction":"Moves through 31, 37, 41, ... inside one R rung","ara_bridge":"Within-rung release/process coordinate","not_this":"Not the whole R-rung jump"},
+        {"term":"q_end","read_as":"Last prime gate represented by one cell","direction":"Boundary of a grouped gate slice","ara_bridge":"Edge of one coarse process slice","not_this":"Not the final target gate unless last cell"},
+        {"term":"qmax","read_as":"Last gate needed to settle the interval","direction":"Terminal within-rung sieve boundary","ara_bridge":"Endpoint of this declared gate walk","not_this":"Not a universal singularity"},
+        {"term":"P1, P2, ...","read_as":"Predeclared pass/fail criteria","direction":"Prediction -> observed result -> evidence gate","ara_bridge":"Scientific constraint on interpretation","not_this":"Not lowercase p prime gates"},
+        {"term":"candidate","read_as":"One number surviving the fixed earlier gates","direction":"p29 filter -> possible prime","ara_bridge":"Measured identity/node","not_this":"Not necessarily prime yet"},
+        {"term":"candidate population","read_as":"All candidates in the target interval","direction":"Denominator for candidate survival","ara_bridge":"Parent identity being followed","not_this":"Not the raw integer population"},
+        {"term":"adjacent edge","read_as":"Relation between neighbouring candidates","direction":"Candidate i + candidate i+1","ara_bridge":"Explicit two-node coupling identity","not_this":"Not a physical line between integers"},
+        {"term":"gap class","read_as":"Edges grouped by equal spacing","direction":"Many adjacent pairs -> one spacing category","ara_bridge":"Child category inside pair identity","not_this":"Not automatically a wave phase"},
+        {"term":"prime gate","read_as":"One divisibility filter","direction":"Alive before gate -> removed or retained","ara_bridge":"Local release interaction","not_this":"Not a test criterion P1"},
+        {"term":"removal/death gate","read_as":"First later prime dividing a candidate","direction":"Candidate alive -> first removal","ara_bridge":"Location of release on gate path","not_this":"Not literal physical death"},
+        {"term":"terminal survivor","read_as":"Candidate still present after qmax","direction":"Candidate -> prime in the bounded interval","ara_bridge":"Identity retained at endpoint","not_this":"Not universal immortality or closure"},
+        {"term":"S(g)","read_as":"Surviving share after gate cell g","direction":"Current retained / starting candidate population","ara_bridge":"Accumulated or retained share","not_this":"Not an absolute count"},
+        {"term":"1-S(g)","read_as":"Cumulative released share","direction":"Starting population -> removed so far","ara_bridge":"Release side of exact accounting pair","not_this":"Not local hazard"},
+        {"term":"x(g)","read_as":"ARA diameter position 2(1-S)","direction":"Survival/release state -> 0-2 line","ara_bridge":"Minimal ARA reading","not_this":"Not circumference phase"},
+        {"term":"theta(g)","read_as":"Circle position acos(2S-1)","direction":"ARA diameter -> fixed upper circle branch","ara_bridge":"Circumference decompression","not_this":"Not automatically physical time phase"},
+        {"term":"gate cell","read_as":"Group of later q gates","direction":"Individual gates -> one log-spaced slice","ara_bridge":"Coarse process/time slice","not_this":"Not a decimal R rung"},
+        {"term":"log-gate progress","read_as":"Multiplicative distance from 31 to qmax","direction":"Within-rung location on logarithmic ruler","ara_bridge":"Process coordinate along adult path","not_this":"Not a fitted prime-density law"},
+        {"term":"delta","read_as":"Phase step between neighbouring R rungs","direction":"theta_r - theta_(r-1)","ara_bridge":"Cross-rung movement","not_this":"Not an error residual"},
+        {"term":"rho","read_as":"Withdrawal of one phase step into the next","direction":"Prior rung increment -> predicted next increment","ara_bridge":"Shared rung-transfer factor","not_this":"Not correlation coefficient here"},
+        {"term":"k","read_as":"Candidate deformation from independence","direction":"log(observed candidate survival / independent reference)","ara_bridge":"Parent-envelope correction","not_this":"Not the rung index in these files"},
+        {"term":"J","read_as":"Pair relation beyond candidate survival squared","direction":"log(edge survival / candidate survival^2)","ara_bridge":"Explicit coupling term","not_this":"Not joules"},
+        {"term":"residual","read_as":"What remains after a declared baseline","direction":"Observation minus expected, or a log ratio","ara_bridge":"Unexplained deformation","not_this":"Not automatically a new wave"},
+        {"term":"adult path","read_as":"Whole population unfolding through later gates","direction":"All child removals aggregated by q","ara_bridge":"Parent survival-release geometry","not_this":"Not a literal biological adult"},
+        {"term":"child path","read_as":"Finer conditional path inside the adult","direction":"Adult split by gap, position or gate class","ara_bridge":"Decompression inside parent identity","not_this":"Not necessarily weaker or later in time"},
+        {"term":"Home","read_as":"Copy the last opened rung unchanged","direction":"R10 path -> R11 prediction","ara_bridge":"Previous slice as next slice","not_this":"Not an ARA-specific transformation"},
+        {"term":"direct native log rung","read_as":"Continue multiplicative change on survival coordinate","direction":"S11 = S10^2 / S9","ara_bridge":"Vertical relation without circle decompression","not_this":"Not PNT or Buchstab"},
+        {"term":"circle secant rho=1","read_as":"Repeat the last circle step unchanged","direction":"Prior phase step -> same next phase step","ara_bridge":"Constant movement around circumference","not_this":"Not shared shrinking-step model"},
+        {"term":"circle + shared rho","read_as":"Continue both identities with one shrinking circle step","direction":"Candidate and edge share frozen rho","ara_bridge":"Primary PN6 native model","not_this":"Not fitted separately after target"},
+        {"term":"route closure","read_as":"Reach one identity through two declared paths","direction":"Direct pair circle vs candidate plus J","ara_bridge":"Relational triangulation","not_this":"Not proof of universal uniqueness"},
+        {"term":"frozen protocol","read_as":"Rules sealed before target access","direction":"Model definition -> hash -> target opening","ara_bridge":"Evidence boundary","not_this":"Not merely saving a file afterward"},
+        {"term":"fresh target","read_as":"Outcome unseen during construction","direction":"Frozen model -> untouched data","ara_bridge":"Prospective transfer test","not_this":"Not opened development data"},
+        {"term":"leakage","read_as":"Target information entered too early","direction":"Answer contaminates model choice or fitting","ara_bridge":"Collapsed scientific boundary","not_this":"Not ARA entropy leak"},
+        {"term":"hash","read_as":"Digital fingerprint of a file","direction":"Frozen packet before vs after target","ara_bridge":"Locks evidence identity","not_this":"Not a model score"},
+        {"term":"hazard","read_as":"Local fraction removed among those reaching a gate","direction":"Deaths in cell / alive before cell","ara_bridge":"Conditional local release rate","not_this":"Not cumulative 1-S"},
+        {"term":"log loss","read_as":"Probability penalty across gate events","direction":"Predicted hazard vs observed remove/retain outcomes","ara_bridge":"Model comparison ruler","not_this":"Not geometric distance"},
+        {"term":"RMSE","read_as":"Typical path distance","direction":"Predicted coordinate vs observed coordinate","ara_bridge":"Separation on declared ruler","not_this":"Not relative terminal error"},
+        {"term":"terminal relative error","read_as":"Percentage miss at final gate","direction":"Predicted endpoint vs observed endpoint","ara_bridge":"Endpoint accuracy","not_this":"Does not measure whole path"},
+        {"term":"PNT29","read_as":"Prime-density control conditioned through 29","direction":"Number-line scale -> expected prime share among candidates","ara_bridge":"Established slow parent envelope","not_this":"Not native ARA"},
+        {"term":"Mertens factor","read_as":"Correction linking sieve products to log density","direction":"Independent gate product -> finite-scale envelope","ara_bridge":"Established cross-scale deformation","not_this":"Not the ARA rho factor"},
+        {"term":"Buchstab","read_as":"Established rough-number survival path","direction":"Small-factor cutoff -> expected survivor curve","ara_bridge":"Established adult sieve-path control","not_this":"Arc shape alone does not prove ARA circle"},
+        {"term":"Hardy-Littlewood / HL29","read_as":"Established prime-pattern or pair-frequency control","direction":"Candidate density + spacing constraints -> pair expectation","ara_bridge":"Established pair-coupling ruler","not_this":"Not the native J route"},
+        {"term":"Fourier","read_as":"Frequency decomposition","direction":"Sequence -> sine/cosine components","ara_bridge":"External processed wave lens","not_this":"Not native unprocessed ARA"},
+        {"term":"SVD","read_as":"Strongest orthogonal directions in a matrix","direction":"Position-by-gate table -> ranked modes","ara_bridge":"Second-coordinate decompression aid","not_this":"Not a physical axis by itself"},
+        {"term":"NMF","read_as":"Additive non-negative component decomposition","direction":"Positive table -> positive parts + weights","ara_bridge":"Often connection-heavy visual decomposition","not_this":"Not a proven ARA Space pole"},
+        {"term":"Information^3 closure","read_as":"Two identities plus their retained relation","direction":"A + B + relation -> specified parent/third identity","ara_bridge":"Relational closure","not_this":"Not any calculation using three numbers"},
+        {"term":"TE-ARA","read_as":"Main-identity energy participation coordinate","direction":"Identity-mode energy / total energy in declared boundary","ara_bridge":"Participation rather than pole position","not_this":"Prime survival probability is not automatically energy"}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "src-prime-glossary",
+      "label": "ARA prime-test relational glossary and saved prime-test record",
+      "path": "analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md",
+      "query": {
+        "engine": "portable-snapshot",
+        "description": "Terminology compiled from the saved ARA prime-test protocols and reports through PN6.",
+        "language": "sql",
+        "sql": "SELECT term, read_as, direction, ara_bridge, not_this FROM snapshot.glossary ORDER BY term;",
+        "tables_used": ["snapshot.glossary"],
+        "filters": [
+          "Prime-test series only",
+          "Usage through PN6",
+          "Definitions frozen as of 19 July 2026"
+        ]
+      }
+    },
+    {
+      "id": "src-relation-map",
+      "label": "Deterministic notation-orientation map",
+      "query": {
+        "engine": "portable-static",
+        "language": "sql",
+        "description": "Eight representative labels placed on a schematic walk-order and relational-layer map.",
+        "sql": "SELECT * FROM (VALUES ('PN6',0.0,4.0,'Test lineage','Which investigation?'),('R11',1.0,3.0,'Scale rung','Which whole-window scale?'),('p29',2.0,2.0,'Fixed gate','Where does the starting filter stop?'),('Q29',2.4,2.8,'Control mask','Which known connection web is removed?'),('candidate',3.0,1.0,'Identity','Which node is measured?'),('edge / J',3.4,1.4,'Relation','Which coupling is retained?'),('q',4.0,2.0,'Moving gate','Where are we inside the rung?'),('S / x / theta',5.0,0.0,'State view','Which projection of the state?')) AS relation_map(term,walk_order,layer,direction,read_as);",
+        "metric_definitions": [
+          "walk_order is a schematic left-to-right reading order, not a measured distance",
+          "layer separates notation roles and has no physical unit"
+        ],
+        "filters": ["Eight representative compact labels"]
+      }
+    }
+  ]
+}

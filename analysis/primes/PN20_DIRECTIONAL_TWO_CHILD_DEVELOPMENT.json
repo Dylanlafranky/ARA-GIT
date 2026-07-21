@@ -1,0 +1,512 @@
+{
+  "test_id": "PN20/DIRECTIONAL-ONE-RUNG-TWO-CHILD/DEVELOPMENT-ONLY/v1",
+  "created_utc": "2026-07-21T09:30:08.156582+00:00",
+  "status": "development only; supplied 87-bit anchor remains unopened",
+  "extractor": "Inspect the nine largest PN10B paid gates q<=N^0.45; retain only the child with maximum A_q and the child with maximum B_q.",
+  "closure": "AB=(max A_q + max B_q)/2; BA=2-AB.",
+  "decoder": "Evaluate signed AB ridge distance at N and 2N; take their secant crossing with AB=1; round to nearest odd integer. A third state only confirms.",
+  "cost_disclosure": "The retained state has two children, but selecting them inspects nine immediate siblings and finding those gates has its own computation cost.",
+  "summary": {
+    "anchor_count": 7,
+    "forward_predictions": 4,
+    "exact_next_primes": 0,
+    "prime_predictions": 0,
+    "mean_absolute_integer_error": 1870051659823.1428
+  },
+  "rows": [
+    {
+      "anchor": 100000000,
+      "landmark_1": {
+        "anchor": 100000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 3967,
+          "remainder": 3831,
+          "phase_a": 1.9314343332493067,
+          "phase_b": 0.06856566675069331,
+          "signed_orientation": 0.9314343332493067
+        },
+        "phase_b_child": {
+          "gate": 3943,
+          "remainder": 1577,
+          "phase_a": 0.7998985544002029,
+          "phase_b": 1.2001014455997971,
+          "signed_orientation": -0.20010144559979715
+        },
+        "phase_ab": 1.565767889424552,
+        "phase_ba": 0.4342321105754481,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.5657678894245519
+      },
+      "landmark_2": {
+        "anchor": 200000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 5437,
+          "remainder": 5392,
+          "phase_a": 1.9834467537244804,
+          "phase_b": 0.016553246275519573,
+          "signed_orientation": 0.9834467537244804
+        },
+        "phase_b_child": {
+          "gate": 5413,
+          "remainder": 476,
+          "phase_a": 0.1758728985774986,
+          "phase_b": 1.8241271014225013,
+          "signed_orientation": -0.8241271014225013
+        },
+        "phase_ab": 1.9037869275734909,
+        "phase_ba": 0.09621307242650912,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.9037869275734909
+      },
+      "secant_raw_prediction": -67377521.84693858,
+      "predicted_integer": -67377521,
+      "prediction_is_forward_of_anchor": false,
+      "confirmation_state_at_prediction": null,
+      "true_next_prime": 100000007,
+      "true_gap": 7,
+      "predicted_gap": -167377521,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": null
+    },
+    {
+      "anchor": 1000000000,
+      "landmark_1": {
+        "anchor": 1000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 11159,
+          "remainder": 8533,
+          "phase_a": 1.5293485079308182,
+          "phase_b": 0.4706514920691818,
+          "signed_orientation": 0.5293485079308182
+        },
+        "phase_b_child": {
+          "gate": 11149,
+          "remainder": 1594,
+          "phase_a": 0.2859449277962149,
+          "phase_b": 1.714055072203785,
+          "signed_orientation": -0.7140550722037851
+        },
+        "phase_ab": 1.6217017900673016,
+        "phase_ba": 0.37829820993269836,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.6217017900673016
+      },
+      "landmark_2": {
+        "anchor": 2000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 15313,
+          "remainder": 15009,
+          "phase_a": 1.9602951740351335,
+          "phase_b": 0.039704825964866464,
+          "signed_orientation": 0.9602951740351335
+        },
+        "phase_b_child": {
+          "gate": 15289,
+          "remainder": 43,
+          "phase_a": 0.0056249591209366215,
+          "phase_b": 1.9943750408790635,
+          "signed_orientation": -0.9943750408790634
+        },
+        "phase_ab": 1.9773351074570984,
+        "phase_ba": 0.022664892542901605,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.9773351074570984
+      },
+      "secant_raw_prediction": -748153954.276103,
+      "predicted_integer": -748153955,
+      "prediction_is_forward_of_anchor": false,
+      "confirmation_state_at_prediction": null,
+      "true_next_prime": 1000000007,
+      "true_gap": 7,
+      "predicted_gap": -1748153955,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": null
+    },
+    {
+      "anchor": 10000000000,
+      "landmark_1": {
+        "anchor": 10000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 31601,
+          "remainder": 21555,
+          "phase_a": 1.3641973355273567,
+          "phase_b": 0.6358026644726433,
+          "signed_orientation": 0.36419733552735667
+        },
+        "phase_b_child": {
+          "gate": 31583,
+          "remainder": 1042,
+          "phase_a": 0.06598486527562296,
+          "phase_b": 1.934015134724377,
+          "signed_orientation": -0.934015134724377
+        },
+        "phase_ab": 1.649106235125867,
+        "phase_ba": 0.35089376487413304,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.649106235125867
+      },
+      "landmark_2": {
+        "anchor": 20000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 43189,
+          "remainder": 37880,
+          "phase_a": 1.7541503623607864,
+          "phase_b": 0.24584963763921364,
+          "signed_orientation": 0.7541503623607864
+        },
+        "phase_b_child": {
+          "gate": 43133,
+          "remainder": 4294,
+          "phase_a": 0.1991050935478636,
+          "phase_b": 1.8008949064521365,
+          "signed_orientation": -0.8008949064521365
+        },
+        "phase_ab": 1.7775226344064614,
+        "phase_ba": 0.2224773655935386,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7775226344064614
+      },
+      "secant_raw_prediction": -40546989228.96495,
+      "predicted_integer": -40546989229,
+      "prediction_is_forward_of_anchor": false,
+      "confirmation_state_at_prediction": null,
+      "true_next_prime": 10000000019,
+      "true_gap": 19,
+      "predicted_gap": -50546989229,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": null
+    },
+    {
+      "anchor": 100000000000,
+      "landmark_1": {
+        "anchor": 100000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 89071,
+          "remainder": 77371,
+          "phase_a": 1.737288230737277,
+          "phase_b": 0.262711769262723,
+          "signed_orientation": 0.737288230737277
+        },
+        "phase_b_child": {
+          "gate": 89069,
+          "remainder": 6975,
+          "phase_a": 0.15662014842425534,
+          "phase_b": 1.8433798515757447,
+          "signed_orientation": -0.8433798515757447
+        },
+        "phase_ab": 1.7903340411565107,
+        "phase_ba": 0.20966595884348926,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7903340411565107
+      },
+      "landmark_2": {
+        "anchor": 200000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 121687,
+          "remainder": 114280,
+          "phase_a": 1.8782614412385876,
+          "phase_b": 0.12173855876141237,
+          "signed_orientation": 0.8782614412385876
+        },
+        "phase_b_child": {
+          "gate": 121661,
+          "remainder": 22168,
+          "phase_a": 0.36442245255258465,
+          "phase_b": 1.6355775474474155,
+          "signed_orientation": -0.6355775474474153
+        },
+        "phase_ab": 1.7569194943430015,
+        "phase_ba": 0.24308050565699846,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7569194943430015
+      },
+      "secant_raw_prediction": 2465239443669.444,
+      "predicted_integer": 2465239443669,
+      "prediction_is_forward_of_anchor": true,
+      "confirmation_state_at_prediction": {
+        "anchor": 2465239443669,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 376933,
+          "remainder": 374955,
+          "phase_a": 1.989504766099015,
+          "phase_b": 0.010495233900984946,
+          "signed_orientation": 0.989504766099015
+        },
+        "phase_b_child": {
+          "gate": 376927,
+          "remainder": 39168,
+          "phase_a": 0.2078280409734511,
+          "phase_b": 1.792171959026549,
+          "signed_orientation": -0.7921719590265489
+        },
+        "phase_ab": 1.890838362562782,
+        "phase_ba": 0.10916163743721796,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.890838362562782
+      },
+      "true_next_prime": 100000000003,
+      "true_gap": 3,
+      "predicted_gap": 2365239443669,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": false
+    },
+    {
+      "anchor": 400000000000,
+      "landmark_1": {
+        "anchor": 400000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 166259,
+          "remainder": 132044,
+          "phase_a": 1.5884132588311008,
+          "phase_b": 0.41158674116889915,
+          "signed_orientation": 0.5884132588311008
+        },
+        "phase_b_child": {
+          "gate": 166297,
+          "remainder": 5505,
+          "phase_a": 0.06620684678617172,
+          "phase_b": 1.9337931532138284,
+          "signed_orientation": -0.9337931532138283
+        },
+        "phase_ab": 1.7611032060224647,
+        "phase_ba": 0.23889679397753527,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7611032060224647
+      },
+      "landmark_2": {
+        "anchor": 800000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 227111,
+          "remainder": 139834,
+          "phase_a": 1.2314154752521895,
+          "phase_b": 0.7685845247478105,
+          "signed_orientation": 0.23141547525218953
+        },
+        "phase_b_child": {
+          "gate": 227189,
+          "remainder": 55867,
+          "phase_a": 0.49181078309249127,
+          "phase_b": 1.5081892169075086,
+          "signed_orientation": -0.5081892169075087
+        },
+        "phase_ab": 1.3698023460798492,
+        "phase_ba": 0.6301976539201508,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.3698023460798492
+      },
+      "secant_raw_prediction": 1178023545498.0405,
+      "predicted_integer": 1178023545499,
+      "prediction_is_forward_of_anchor": true,
+      "confirmation_state_at_prediction": {
+        "anchor": 1178023545499,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 270323,
+          "remainder": 244471,
+          "phase_a": 1.8087325162860726,
+          "phase_b": 0.19126748371392743,
+          "signed_orientation": 0.8087325162860726
+        },
+        "phase_b_child": {
+          "gate": 270407,
+          "remainder": 46918,
+          "phase_a": 0.34701764377401473,
+          "phase_b": 1.6529823562259853,
+          "signed_orientation": -0.6529823562259853
+        },
+        "phase_ab": 1.730857436256029,
+        "phase_ba": 0.26914256374397105,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.730857436256029
+      },
+      "true_next_prime": 400000000019,
+      "true_gap": 19,
+      "predicted_gap": 778023545499,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": false
+    },
+    {
+      "anchor": 700000000000,
+      "landmark_1": {
+        "anchor": 700000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 213881,
+          "remainder": 210793,
+          "phase_a": 1.9711241297730981,
+          "phase_b": 0.028875870226901856,
+          "signed_orientation": 0.9711241297730981
+        },
+        "phase_b_child": {
+          "gate": 213887,
+          "remainder": 37428,
+          "phase_a": 0.349979194621459,
+          "phase_b": 1.650020805378541,
+          "signed_orientation": -0.650020805378541
+        },
+        "phase_ab": 1.8105724675758195,
+        "phase_ba": 0.18942753242418053,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.8105724675758195
+      },
+      "landmark_2": {
+        "anchor": 1400000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 292223,
+          "remainder": 225997,
+          "phase_a": 1.5467434117095507,
+          "phase_b": 0.45325658829044935,
+          "signed_orientation": 0.5467434117095507
+        },
+        "phase_b_child": {
+          "gate": 292157,
+          "remainder": 16792,
+          "phase_a": 0.11495189230448012,
+          "phase_b": 1.88504810769552,
+          "signed_orientation": -0.8850481076955199
+        },
+        "phase_ab": 1.7158957597025353,
+        "phase_ba": 0.2841042402974647,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7158957597025353
+      },
+      "secant_raw_prediction": 6693033978985.473,
+      "predicted_integer": 6693033978985,
+      "prediction_is_forward_of_anchor": true,
+      "confirmation_state_at_prediction": {
+        "anchor": 6693033978985,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 590797,
+          "remainder": 518648,
+          "phase_a": 1.7557570536072458,
+          "phase_b": 0.24424294639275423,
+          "signed_orientation": 0.7557570536072458
+        },
+        "phase_b_child": {
+          "gate": 590819,
+          "remainder": 19385,
+          "phase_a": 0.06562077387490924,
+          "phase_b": 1.9343792261250907,
+          "signed_orientation": -0.9343792261250907
+        },
+        "phase_ab": 1.8450681398661684,
+        "phase_ba": 0.15493186013383164,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.8450681398661684
+      },
+      "true_next_prime": 700000000009,
+      "true_gap": 9,
+      "predicted_gap": 5993033978985,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": false
+    },
+    {
+      "anchor": 900000000000,
+      "landmark_1": {
+        "anchor": 900000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 239539,
+          "remainder": 236576,
+          "phase_a": 1.9752608134792247,
+          "phase_b": 0.024739186520775336,
+          "signed_orientation": 0.9752608134792247
+        },
+        "phase_b_child": {
+          "gate": 239527,
+          "remainder": 52565,
+          "phase_a": 0.4389066785790328,
+          "phase_b": 1.5610933214209672,
+          "signed_orientation": -0.5610933214209672
+        },
+        "phase_ab": 1.7681770674500958,
+        "phase_ba": 0.23182293254990416,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7681770674500958
+      },
+      "landmark_2": {
+        "anchor": 1800000000000,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 327163,
+          "remainder": 211428,
+          "phase_a": 1.2924933442962683,
+          "phase_b": 0.7075066557037317,
+          "signed_orientation": 0.2924933442962683
+        },
+        "phase_b_child": {
+          "gate": 327203,
+          "remainder": 18084,
+          "phase_a": 0.11053688383052723,
+          "phase_b": 1.8894631161694728,
+          "signed_orientation": -0.8894631161694728
+        },
+        "phase_ab": 1.5909782302328705,
+        "phase_ba": 0.40902176976712945,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.5909782302328705
+      },
+      "secant_raw_prediction": 4801602129914.429,
+      "predicted_integer": 4801602129915,
+      "prediction_is_forward_of_anchor": true,
+      "confirmation_state_at_prediction": {
+        "anchor": 4801602129915,
+        "immediate_siblings_inspected": 9,
+        "retained_child_count": 2,
+        "phase_a_child": {
+          "gate": 508817,
+          "remainder": 408400,
+          "phase_a": 1.605292276004929,
+          "phase_b": 0.3947077239950709,
+          "signed_orientation": 0.6052922760049291
+        },
+        "phase_b_child": {
+          "gate": 508771,
+          "remainder": 10536,
+          "phase_a": 0.04141745500431432,
+          "phase_b": 1.9585825449956857,
+          "signed_orientation": -0.9585825449956857
+        },
+        "phase_ab": 1.7819374105003074,
+        "phase_ba": 0.2180625894996926,
+        "ab_plus_ba": 2.0,
+        "signed_ridge_distance": 0.7819374105003074
+      },
+      "true_next_prime": 900000000013,
+      "true_gap": 13,
+      "predicted_gap": 3901602129915,
+      "exact_next_prime": false,
+      "predicted_integer_is_prime": false
+    }
+  ]
+}

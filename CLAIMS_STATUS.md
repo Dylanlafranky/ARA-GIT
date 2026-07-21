@@ -15,28 +15,55 @@ The safest way to read any claim here is:
 
 > **Cardiac forecast correction (11 July 2026):** the historical `nsr050` ARA-versus-Fourier result (`+0.686` versus `+0.308`) reproduces exactly, but it was online one-beat prediction using the true previous test beat, not a six-hour cold forecast. The table also confused 7 selected ARA subsystems with 7 parameters; the recovered code counts 22 ARA parameters versus 21 Fourier coefficients. On a frozen `nsr051`–`nsr054` replication set, ARA beat Fourier on both metrics in 1/4 records, lost on average, and was decisively beaten by one-step persistence throughout. With test updates removed, ARA cold correlation was negative on all four. See `TheFormula/02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/POST_LEAK_CARDIAC_REPLICATION_2026-07-11.md`.
 
-> **TE-ARA / MX1 status (12 July 2026):** TE-ARA is now defined as the 0–2 **main-identity participation**
-> coordinate \(2E_{id}/E_{total}\), not absolute energy, capacity fill or source magnitude. In the development-only
+> **TE-ARA canonical correction (21 July 2026; supersedes the 12 July naming):** TE-ARA is not a separate geometry;
+> it is ARA's same fixed total-2 geometry viewed as identity allocation. The pure identity is
+> `Phase A + Phase B = 2`. In a real observation, named environmental couplings and unresolved Other may occupy part
+> of that same account, but they are not additional pure poles. The historical variable \(2E_{id}/E_{total}\) is now
+> the **expressed A/B subtotal** \(T_{AB}\equiv T_{id}\), not TE-ARA. A value such as `1.24` means
+> `T_AB=1.24`, `context/Other=0.76`, observed TE-ARA total `2`. In the development-only
 > Alves/OSIRIS plasma test, the declared harmonic identity transferred from electric field to independent particle
 > source at \(r=0.9991\), but that and the full Gauss agreement are simulator/solver consistency checks rather than
-> independent ARA evidence. The source-participation TE-ARA analogue—the primary non-tautological ARA-specific
-> development result—transferred at \(r=0.7987\), MAE 0.0911 on 0–2;
-> local pair ARA transferred at \(r=0.7706\). However, on the same 75 clean held-late slices, scalar ARA + TE-ARA
+> independent ARA evidence. The historical source-participation TE-ARA analogue is retained numerically but renamed
+> the variable expressed A/B allocation crosswalk; it transferred at \(r=0.7987\), MAE 0.0911 on 0–2;
+> local pair ARA transferred at \(r=0.7706\). However, on the same 75 clean held-late slices, scalar ARA + A/B subtotal
 > did not beat the ordinary \(k_0E_{\rm rms}\) magnitude scale. Careful claim: **development support for an
-> identity-participation crosswalk; no support yet for the tested scalar magnitude law.** The independent Tang
+> expressed-pair allocation crosswalk; no support for the tested scalar magnitude law.** Canonical TE-ARA's
+> fixed total is a closure normalisation, not an empirical result; the testable content is the frozen contextual account and
+> its component evolution. The independent Tang
 > confirmation arrays remain unopened under a frozen protocol. ENSO and LLM use as mixed/distributed participation
 > ledgers is proposed, not tested. Full synthesis:
-> `Analysis/TE_ARA_PARTICIPATION_LEDGER_SYNTHESIS_2026-07-12.md`.
+> `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md` and
+> `analysis/TE_ARA_PARTICIPATION_LEDGER_SYNTHESIS_2026-07-12.md`.
 
-> **Prime sieve-rung status (17 July 2026):** the old raw prime-gap value near `1.000004` remains superseded as a
-> telescoping whole-signal ridge artifact. Its canonical replacement, PN1/T227, froze development through prime 13
-> and held out the exact primorial-wheel transitions `13 -> 17` and `17 -> 19`. The ordered local 0–2 pair relation
-> and overlapping triple relation beat a 200-member full-gap-marginal order shuffle in all `4/4` comparisons, each at
-> the permutation floor `p=1/201=0.004975`; all split-half, bin-sensitivity, exact-sieve and independent replay checks
-> passed. Status: **SUPPORTED `[pre-registered, arithmetic, unreplicated]`** for inherited cyclic relation only. The
-> ordinary log-gap ratio is an exact coordinate rival, the two rungs are not independent replications, and no RH,
-> phi, universal-leak or physical-universality inference is licensed. See
-> `analysis/primes/PN1_SIEVE_RUNG_RESULT.md`.
+> **Prime-thread capstone status (21 July 2026; PN1–PN23; thread parked):** PN1's original narrow result remains
+> **SUPPORTED `[pre-registered, arithmetic, unreplicated]`**: ordered local 0–2 relations transferred across held-out
+> wheel transitions `13→17` and `17→19`, beating full-marginal order shuffles in `4/4` comparisons at
+> `p=1/201`. The larger thread then established exact ARA crosswalks to square-root factor closure, modular
+> child/adult periods, ordered wheel completion and CRT anti-pair symmetry. PN17, PN18 and PN19 each sealed the exact
+> first prime above fresh large anchors (`400,000,000,000→+19`, `700,000,000,000→+9`,
+> `900,000,000,000→+13`) before independent label checks, but each retained the complete lower-prime information used
+> by established segmented-sieve/product/GCD methods. Literal compact shortcuts failed: PN20's three two-child
+> definitions returned `0/7` exact; PN21 retained effectively `0%` parent variance with chance AUC; PN22 reduced
+> exactly to four mod-14 wheel lanes. PN23 proved the safe recursive compression: one `r↔M-r` representative
+> reconstructs its anti-phase and all child lanes, including held-out `p=17`, giving exact `2:1` storage compression
+> and `92,160/92,160` residues with zero errors (`40/40` independent checks). **Current claim:** three conceptual
+> information stages are available; a three-cheap-operation next-prime algorithm, speed improvement or new prime
+> theorem is **NOT SUPPORTED**. Phi carrier/leak claims in PN11–PN13 were also not supported. The protected 87-bit
+> anchor and p31 capstone remain sealed. Full two-output record:
+> `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
+
+> **Pre-test geometry probability calibration (21 July 2026):** the provisional provenance-ledger strict tally is
+> `15` A-tier clean hits and `31` misses/refutations (`15/46 = 0.32609`). An exact binomial sensitivity calculation
+> shows that this count is significant at 5% only if the unmeasured background chance of scoring a flexible
+> structural statement as a match is below `0.212919`. The ledger is self-scored and that background rate is not yet
+> known, so the repository does **not** currently have a valid global p-value or a probability that ARA is true.
+> Later Maxwell/plasma and prime recovery remain relevant because the 0–2 pair, ridge, orientation and recursive
+> child/parent geometry predate those walks; they are treated as two dependent domain families with internal passes,
+> nulls and failures, not as dozens of independent confirmations. A draft identifying test now specifies 12
+> independent domains, one real target plus nine matched decoys per domain, and a primary gate of at least 4 real
+> top ranks (`p=0.0256375` under the exchangeable decoy null). See
+> `ARA_PRETEST_CONSTRAINT_PROBABILITY_STUDY_RECORD_2026-07-21.md` and
+> `ARA_DECOY_CONTROLLED_REPETITION_TEST_PROTOCOL_v1_DRAFT.md`.
 
 > **Update (10 June 2026) — prediction-mechanics session, levers vs lenses:** A day on the ENSO 12-month
 > amplitude/turning-point problem and on what energy *is* in the forecast. Net, with honest statuses:
@@ -134,6 +161,7 @@ These claims should not be used as strong public headlines until rerun cleanly.
 | "Nasal breathing predicts ENSO" | The 2026-05-23 nasal/ENSO test supports coupled-pair geometry and a transition prior, not direct point-prediction dominance. Short horizons are still persistence-dominated, and 18-24 month results need local ENSO/SOI state. The later delayed-feeder and boundary-distance tests improved the 12-month branch, but neither reaches high-correlation exact prediction. | "Nasal-cycle geometry is an external paired-system prior that partially transfers to ENSO, especially around the 12-month transition window." |
 | "The tick formula now solves prediction" | The strict formula tick helps Solar at 24 and 60 months but loses on ENSO and ECG in most horizons. Energy-aware variable recursion is better, but lag/direct controls still win several horizons. | "The required variables carry signal; the lawful tick operator is the current bottleneck." |
 | "Same formula works on every domain" | Some scripts fail, some outputs are exploratory, and several claims are trackers rather than blind generators. | "The same framework is being tested across domains, with mixed but interesting results." |
+| "ARA predicts the next prime in three steps" | PN17–PN19 can be written as three conceptual stages and sealed exact fresh-anchor primes, but their first stage retains tens of thousands of lower-prime children. PN20/PN21's literal two-child compressions failed; PN23 proves only a lossless `2:1` anti-pair compression. | "ARA gives an exact three-stage representation of established sieve/factor methods; no three-cheap-operation next-prime algorithm or complexity improvement has been demonstrated." |
 
 ## Speculative Interpretation
 

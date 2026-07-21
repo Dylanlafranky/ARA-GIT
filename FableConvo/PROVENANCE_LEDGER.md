@@ -314,3 +314,27 @@ weakest — consistent with the 5 Jul repositioning (phi = topography, not found
   in journey/; locate forks/raw jsonl per INDEX.md, or the original chat client.
   Needed to enter the Jin 1997 rediscovery as provenance.
 - Independent re-score of all verdicts by a non-Anthropic model family (S2)
+
+---
+
+## 21 July 2026 addendum — probability calibration and later domain recoveries
+
+A reproducible statistical calibration has now been run on the provisional strict tally above. Using the 15 A-tier
+clean hits and 31 misses/refutations gives a strict observed hit fraction of `15/46 = 0.32609`. Under a binomial
+sensitivity model, this count rejects assumed background match rates only below approximately `0.212919` at the 5%
+level. Because this ledger does not yet empirically measure that background rate and is still self-scored, this is
+**not** a global p-value and is **not** a probability that ARA is true.
+
+The later Maxwell/plasma and prime-arithmetic walks are retained as important pre-domain constraint evidence. The
+reversible 0–2 relation, ridge, orientation and recursive child/parent geometry were recorded before those detailed
+walks. They are treated conservatively as two dependent domain families rather than one independent success per
+equation or protocol. Their exact crosswalks, held-out transfers, nulls and failed shortcuts are all preserved.
+
+The proposed identifying test is one real target hidden among nine matched decoys in each of 12 independent domain
+families. Four or more real-target top ranks has exact null probability `0.0256375` when decoys are exchangeable.
+
+Primary record: `ARA_PRETEST_CONSTRAINT_PROBABILITY_STUDY_RECORD_2026-07-21.md`
+
+Draft prospective protocol: `ARA_DECOY_CONTROLLED_REPETITION_TEST_PROTOCOL_v1_DRAFT.md`
+
+Reproducible outputs: `analysis/meta_evidence/`

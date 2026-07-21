@@ -1,0 +1,332 @@
+{
+  "validation_id": "PN23/ANTI-PAIR-FRACTAL-LIFT/INDEPENDENT-BRUTE-FORCE/v1",
+  "created_utc": "2026-07-21T11:02:02.098188+00:00",
+  "status": "PASS",
+  "method": "Re-enumerate every wheel residue by gcd, locate killed copies by direct trial rather than modular inverse, and reconstruct each next lower-half state using only surviving A-side copies.",
+  "checks_passed": 40,
+  "checks_total": 40,
+  "rungs": [
+    {
+      "phase": "development",
+      "parent_modulus": 14,
+      "gate": 3,
+      "new_modulus": 42,
+      "parent_pair_count": 3,
+      "child_pair_count": 6,
+      "direct_residue_count": 12,
+      "unique_collision_failures": 0,
+      "integer_ridge_failures": 0,
+      "direct_ridge_count": 1,
+      "missing_representatives": [],
+      "extra_representatives": [],
+      "pass": true
+    },
+    {
+      "phase": "development",
+      "parent_modulus": 42,
+      "gate": 5,
+      "new_modulus": 210,
+      "parent_pair_count": 6,
+      "child_pair_count": 24,
+      "direct_residue_count": 48,
+      "unique_collision_failures": 0,
+      "integer_ridge_failures": 0,
+      "direct_ridge_count": 2,
+      "missing_representatives": [],
+      "extra_representatives": [],
+      "pass": true
+    },
+    {
+      "phase": "development",
+      "parent_modulus": 210,
+      "gate": 11,
+      "new_modulus": 2310,
+      "parent_pair_count": 24,
+      "child_pair_count": 240,
+      "direct_residue_count": 480,
+      "unique_collision_failures": 0,
+      "integer_ridge_failures": 0,
+      "direct_ridge_count": 3,
+      "missing_representatives": [],
+      "extra_representatives": [],
+      "pass": true
+    },
+    {
+      "phase": "development",
+      "parent_modulus": 2310,
+      "gate": 13,
+      "new_modulus": 30030,
+      "parent_pair_count": 240,
+      "child_pair_count": 2880,
+      "direct_residue_count": 5760,
+      "unique_collision_failures": 0,
+      "integer_ridge_failures": 0,
+      "direct_ridge_count": 18,
+      "missing_representatives": [],
+      "extra_representatives": [],
+      "pass": true
+    },
+    {
+      "phase": "held_out",
+      "parent_modulus": 30030,
+      "gate": 17,
+      "new_modulus": 510510,
+      "parent_pair_count": 2880,
+      "child_pair_count": 46080,
+      "direct_residue_count": 92160,
+      "unique_collision_failures": 0,
+      "integer_ridge_failures": 0,
+      "direct_ridge_count": 170,
+      "missing_representatives": [],
+      "extra_representatives": [],
+      "pass": true
+    }
+  ],
+  "checks": [
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "parent_representatives_match_saved_count",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "unique_collisions",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "anti_collision_sum_exact",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "A_only_reconstruction_matches_direct_lower_half",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "reconstructed_full_count_matches_direct",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "child_pair_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "direct_ridge_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "14x3->42",
+      "phase": "development",
+      "check": "new_modulus_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "parent_representatives_match_saved_count",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "unique_collisions",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "anti_collision_sum_exact",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "A_only_reconstruction_matches_direct_lower_half",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "reconstructed_full_count_matches_direct",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "child_pair_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "direct_ridge_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "42x5->210",
+      "phase": "development",
+      "check": "new_modulus_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "parent_representatives_match_saved_count",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "unique_collisions",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "anti_collision_sum_exact",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "A_only_reconstruction_matches_direct_lower_half",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "reconstructed_full_count_matches_direct",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "child_pair_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "direct_ridge_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "210x11->2310",
+      "phase": "development",
+      "check": "new_modulus_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "parent_representatives_match_saved_count",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "unique_collisions",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "anti_collision_sum_exact",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "A_only_reconstruction_matches_direct_lower_half",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "reconstructed_full_count_matches_direct",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "child_pair_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "direct_ridge_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "2310x13->30030",
+      "phase": "development",
+      "check": "new_modulus_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "parent_representatives_match_saved_count",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "unique_collisions",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "anti_collision_sum_exact",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "A_only_reconstruction_matches_direct_lower_half",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "reconstructed_full_count_matches_direct",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "child_pair_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "direct_ridge_count_matches_saved",
+      "pass": true
+    },
+    {
+      "rung": "30030x17->510510",
+      "phase": "held_out",
+      "check": "new_modulus_matches_saved",
+      "pass": true
+    }
+  ],
+  "claim_assessment": {
+    "lossless_recursive_pair_compression": true,
+    "held_out_rung_pass": true,
+    "prime_locator": "not tested and not implied"
+  }
+}

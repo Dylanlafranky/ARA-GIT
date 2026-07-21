@@ -1,0 +1,38 @@
+{
+  "test_id": "PN6/NATIVE-ARA-CIRCUMFERENCE/FRESH-R11-v1",
+  "model": "canonical ARA circumference plus shared log-rung phase withdrawal",
+  "prediction_packet_sha256": "1077EF7BA101E8C8F4EAF47DC2E056ABFB5608DB98D30B16915A497563409A0C",
+  "frozen_rho_shared": 0.8342632892110983,
+  "candidate": {
+    "log_loss_bits_per_at_risk_event": 0.3293610168580851,
+    "survival_rmse": 0.004563722705814029,
+    "phase_rmse_radians": 0.013482727718366479,
+    "terminal_prediction": 0.25018320859942966,
+    "terminal_observed": 0.24992900318175276,
+    "terminal_absolute_relative_error": 0.0010171105171496954
+  },
+  "edge": {
+    "log_loss_bits_per_at_risk_event": 0.5528760931830661,
+    "survival_rmse": 0.007748475775381373,
+    "phase_rmse_radians": 0.01846412120584347,
+    "terminal_prediction": 0.061797854006680586,
+    "terminal_observed": 0.061996147345881075,
+    "terminal_absolute_relative_error": 0.0031984784166376686
+  },
+  "criteria": {
+    "P1_candidate_primary_beats_home_terminal_under_1pct_phase_under_0_015": false,
+    "P2_edge_primary_beats_home_terminal_under_1pct_phase_under_0_015": false,
+    "P3_candidate_primary_beats_direct_native_log": true,
+    "P4_edge_primary_beats_direct_native_log": true,
+    "P5_shared_withdrawal_recurs": true,
+    "P6_primary_paths_valid_monotone_unrepaired": true,
+    "P7_native_pair_routes_close": true
+  },
+  "summary_verdict": {
+    "criteria_passed": 5,
+    "criteria_total": 7,
+    "native_shared_circumference_log_rung_recurrence_supported": false,
+    "canonical_circle_adds_value_beyond_direct_native_log": true,
+    "native_pair_route_closure_supported": true
+  }
+}

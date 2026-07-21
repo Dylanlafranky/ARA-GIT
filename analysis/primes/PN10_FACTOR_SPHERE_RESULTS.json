@@ -1,0 +1,205 @@
+{
+  "test_id": "PN10/FACTOR-SPHERE/PRIME-RECOVERY-AND-EARLY-RIDGE-TRANSFER/v1",
+  "protocol_sha256": "A46FC79D82034CB827F907C531C4DF208B9E33E3AFCE8E9E00D60E637D8F4BEE",
+  "evidence_class": "registered exact crosswalk plus fresh cross-scale computational transfer",
+  "intervals": {
+    "development": {
+      "low": 1000000,
+      "high": 2000000,
+      "integers": 1000000,
+      "primes": 70435,
+      "composites": 929565
+    },
+    "evaluation": {
+      "low": 2000000000,
+      "high": 2001000000,
+      "integers": 1000000,
+      "primes": 46903,
+      "composites": 953097
+    }
+  },
+  "exact_recovery": {
+    "rule": "prime iff no divisor collision at or before x=1",
+    "standard_equivalence": "ordinary trial division through sqrt(n), expressed as x_n(q)=2 log(q)/log(n)",
+    "first_25_evaluation_primes": [
+      2000000011,
+      2000000033,
+      2000000063,
+      2000000087,
+      2000000089,
+      2000000099,
+      2000000137,
+      2000000141,
+      2000000143,
+      2000000153,
+      2000000203,
+      2000000227,
+      2000000239,
+      2000000243,
+      2000000269,
+      2000000273,
+      2000000279,
+      2000000293,
+      2000000323,
+      2000000333,
+      2000000357,
+      2000000381,
+      2000000393,
+      2000000407,
+      2000000413
+    ]
+  },
+  "primary_transfer_rows": [
+    {
+      "method": "ARA scaled",
+      "cutoff": 0.25,
+      "absolute_q": "",
+      "development_survivors": 266668,
+      "evaluation_survivors": 191810,
+      "development_purity": 0.26412992935035323,
+      "evaluation_purity": 0.24452843960168918,
+      "purity_transfer_error": 0.019601489748664047,
+      "evaluation_brier": 0.03550757952873637,
+      "evaluation_log_loss_bits": 0.15420368840947055,
+      "evaluation_remaining_composites": 144907
+    },
+    {
+      "method": "fixed Q",
+      "cutoff": 0.25,
+      "absolute_q": 5,
+      "development_survivors": 266668,
+      "evaluation_survivors": 266666,
+      "development_purity": 0.26412992935035323,
+      "evaluation_purity": 0.1758866897167243,
+      "purity_transfer_error": 0.08824323963362893,
+      "evaluation_brier": 0.04072987989191374,
+      "evaluation_log_loss_bits": 0.1873257494502823,
+      "evaluation_remaining_composites": 219763
+    },
+    {
+      "method": "ARA scaled",
+      "cutoff": 0.5,
+      "absolute_q": "",
+      "development_survivors": 152327,
+      "evaluation_survivors": 103394,
+      "development_purity": 0.46239340366448495,
+      "evaluation_purity": 0.45363367313383757,
+      "purity_transfer_error": 0.00875973053064738,
+      "evaluation_brier": 0.02563415354829179,
+      "evaluation_log_loss_bits": 0.1027747562689342,
+      "evaluation_remaining_composites": 56491
+    },
+    {
+      "method": "fixed Q",
+      "cutoff": 0.5,
+      "absolute_q": 34,
+      "development_survivors": 152847,
+      "evaluation_survivors": 152857,
+      "development_purity": 0.46082029742160463,
+      "evaluation_purity": 0.3068423428433111,
+      "purity_transfer_error": 0.15397795457829355,
+      "evaluation_brier": 0.03613529238242483,
+      "evaluation_log_loss_bits": 0.14684676962027454,
+      "evaluation_remaining_composites": 105954
+    },
+    {
+      "method": "ARA scaled",
+      "cutoff": 0.75,
+      "absolute_q": "",
+      "development_survivors": 104958,
+      "evaluation_survivors": 70565,
+      "development_purity": 0.6710779549915205,
+      "evaluation_purity": 0.6646779564940126,
+      "purity_transfer_error": 0.0063999984975078306,
+      "evaluation_brier": 0.015730500147604225,
+      "evaluation_log_loss_bits": 0.0649483886079438,
+      "evaluation_remaining_composites": 23662
+    },
+    {
+      "method": "fixed Q",
+      "cutoff": 0.75,
+      "absolute_q": 202,
+      "development_survivors": 104637,
+      "evaluation_survivors": 103887,
+      "development_purity": 0.6731366533826467,
+      "evaluation_purity": 0.4514809360170185,
+      "purity_transfer_error": 0.22165571736562822,
+      "evaluation_brier": 0.03083128855819878,
+      "evaluation_log_loss_bits": 0.11871185408735037,
+      "evaluation_remaining_composites": 56984
+    },
+    {
+      "method": "ARA scaled",
+      "cutoff": 0.9,
+      "absolute_q": "",
+      "development_survivors": 84117,
+      "evaluation_survivors": 56152,
+      "development_purity": 0.837345601959176,
+      "evaluation_purity": 0.8352863655791424,
+      "purity_transfer_error": 0.00205923638003358,
+      "evaluation_brier": 0.007725801705240823,
+      "evaluation_log_loss_bits": 0.036245561854206285,
+      "evaluation_remaining_composites": 9249
+    },
+    {
+      "method": "fixed Q",
+      "cutoff": 0.9,
+      "absolute_q": 585,
+      "development_survivors": 84719,
+      "evaluation_survivors": 87826,
+      "development_purity": 0.8313955547161793,
+      "evaluation_purity": 0.5340445881629585,
+      "purity_transfer_error": 0.2973509665532208,
+      "evaluation_brier": 0.029620070582752633,
+      "evaluation_log_loss_bits": 0.11759658210919877,
+      "evaluation_remaining_composites": 40923
+    }
+  ],
+  "criteria": {
+    "P1_exact_prime_recovery": {
+      "pass": true,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "accuracy": 1.0,
+      "note": "Primary labels are the no-LPF-through-sqrt rule; independent agreement is checked by the validator."
+    },
+    "P2_reversible_factor_pair_closure": {
+      "pass": true,
+      "max_abs_error": 4.440892098500626e-16
+    },
+    "P3_prime_square_ridge": {
+      "pass": true,
+      "max_abs_error": 0.0,
+      "squares_checked": 1229
+    },
+    "P4_accumulating_information": {
+      "pass": true
+    },
+    "P5_cross_scale_brier": {
+      "pass": true,
+      "ara_mean": 0.021149508732468306,
+      "fixed_q_mean": 0.03432913285382249
+    },
+    "P6_cross_scale_calibration": {
+      "pass": true,
+      "ara_mean": 0.00920511378921321,
+      "fixed_q_mean": 0.19030696953269288
+    },
+    "L1_early_exactness_limit": {
+      "all_primary_cutoffs_retain_composites": true,
+      "evaluation_remaining_composites": {
+        "0.25": 144907,
+        "0.5": 56491,
+        "0.75": 23662,
+        "0.9": 9249
+      }
+    }
+  },
+  "passed_support_criteria": 6,
+  "protected_material": {
+    "p31_primorial_wheel_constructed": false,
+    "r12_opened": false
+  },
+  "runtime_seconds": 0.9566621780395508,
+  "total_support_criteria": 6
+}

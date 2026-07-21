@@ -1,0 +1,16 @@
+{
+  "test_id": "PN18/RECURSIVE-TEARA-PRODUCT-TREE/VALIDATOR-AMENDMENT/v1.1",
+  "frozen_local_time": "2026-07-21T17:51:00+10:00",
+  "reason": "The pre-frozen v1 validator completed its checks but failed while JSON encoded the million-bit child-root integer in a check record. Python's 4,300-decimal-digit safety limit rejected that receipt. No v1 validation file was created.",
+  "scope_of_change": "Receipt serialization only. Very large integers are replaced by bit-length, byte-length and SHA-256 descriptors. The target, correction, primary calculation, mathematical checks and sealed prediction remain unchanged.",
+  "original_validator": "validate_pn18_recursive_teara_product_tree.py",
+  "original_validator_sha256": "643833BB4C22F00F97C0F2D0C6190FCBF36C654D3E6B75CFDD5BA56FA7C90E32",
+  "replacement_validator": "validate_pn18_recursive_teara_product_tree_v1_1.py",
+  "replacement_validator_sha256": "FCA7E0A48B34B23CBD044F61EDC7EC5433E42D35649E0B32EC99FC1335841385",
+  "sealed_prediction": 700000000009,
+  "sealed_correction": 9,
+  "sealed_prediction_sha256_before_amendment": "7A8C596BE0AC2624480A465CFC1B84B09437E0031BB56CA84A312F738B7A7BBA",
+  "child_root_sha256_before_amendment": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF",
+  "v1_validation_file_exists": false,
+  "prediction_changed": false
+}

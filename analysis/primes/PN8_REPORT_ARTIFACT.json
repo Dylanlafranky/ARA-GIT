@@ -1,0 +1,303 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN8 Power-of-Ten Public-Reveal Pilot",
+    "description": "Prospective five-target test of frozen ARA prime-gap state forecasts at 50-250 digit power-of-ten boundaries.",
+    "generatedAt": "2026-07-19T16:00:00+10:00",
+    "sources": [
+      {
+        "id": "pn8_results",
+        "label": "PN8 scored results",
+        "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_RESULTS.json"
+      },
+      {
+        "id": "pn8_protocol",
+        "label": "PN8 frozen protocol",
+        "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_PROTOCOL.md"
+      },
+      {
+        "id": "pn8_model_metrics_sql",
+        "label": "PN8 model-metric artifact query",
+        "path": "analysis/primes/pn8_report_model_metrics.sql"
+      },
+      {
+        "id": "pn8_target_results_sql",
+        "label": "PN8 target-result artifact query",
+        "path": "analysis/primes/pn8_report_target_results.sql"
+      },
+      {
+        "id": "oeis_offsets",
+        "label": "OEIS A033873",
+        "href": "https://oeis.org/A033873"
+      },
+      {
+        "id": "oeis_primes",
+        "label": "OEIS A003617",
+        "href": "https://oeis.org/A003617"
+      }
+    ],
+    "charts": [
+      {
+        "id": "model_log_loss",
+        "title": "Mean target-bin log loss",
+        "subtitle": "Five frozen power-of-ten targets; lower is better",
+        "type": "bar",
+        "dataset": "model_metrics",
+        "sourceId": "pn8_model_metrics_sql",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Forecast"
+          },
+          "y": {
+            "field": "mean_log_loss_bits",
+            "type": "quantitative",
+            "label": "Mean log loss",
+            "unit": "bits"
+          },
+          "tooltip": [
+            {
+              "field": "top1_hits",
+              "type": "quantitative",
+              "label": "Top-1 hits"
+            },
+            {
+              "field": "top3_hits",
+              "type": "quantitative",
+              "label": "Top-3 hits"
+            },
+            {
+              "field": "targets",
+              "type": "quantitative",
+              "label": "Targets"
+            }
+          ]
+        },
+        "xAxisTitle": "Forecast",
+        "yAxisTitle": "Mean log loss (bits)",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "target_results",
+        "title": "Power-of-ten target results",
+        "subtitle": "Exact public offsets and frozen ARA-M2 scoring",
+        "dataset": "target_results",
+        "sourceId": "pn8_target_results_sql",
+        "defaultSort": {
+          "field": "exponent",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "exponent",
+            "label": "Exponent",
+            "type": "number"
+          },
+          {
+            "field": "public_offset",
+            "label": "Offset above 10^n",
+            "type": "number"
+          },
+          {
+            "field": "crossing_gap",
+            "label": "Crossing gap",
+            "type": "number"
+          },
+          {
+            "field": "target_bin",
+            "label": "ARA bin",
+            "type": "number"
+          },
+          {
+            "field": "m2_rank",
+            "label": "ARA-M2 rank",
+            "type": "number"
+          },
+          {
+            "field": "m2_log_loss_bits",
+            "label": "ARA-M2 loss (bits)",
+            "type": "number"
+          },
+          {
+            "field": "top3_hit",
+            "label": "Top-3 hit",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN8 Power-of-Ten Public-Reveal Pilot\n\n**Status:** Probability transfer positive; registered sharpness gate failed."
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "pn8_results",
+        "body": "## Technical summary\n\nFrozen ARA-M2 achieved the best mean target-bin log loss at **4.076804 bits**, ahead of ARA-IID (4.487415), a uniform 24-bin forecast (4.584963), and ARA-M1 (4.643778). It assigned more probability to the revealed target than ARA-M1 in four of five cases. But it achieved only one top-three hit and no top-one hits, so the registered Q1 sharpness condition and the joint pilot gate failed. This is scale transfer of a weak probability signal, not effective or exact prime prediction."
+      },
+      {
+        "id": "model_chart",
+        "type": "chart",
+        "chartId": "model_log_loss",
+        "layout": "full"
+      },
+      {
+        "id": "target_table",
+        "type": "table",
+        "tableId": "target_results",
+        "layout": "full"
+      },
+      {
+        "id": "scope_method",
+        "type": "markdown",
+        "sourceId": "pn8_protocol",
+        "body": "## Scope and method\n\nThe targets were the first primes above 10^50, 10^100, 10^150, 10^200, and 10^250. Only four consecutive primes below each boundary were calculated. The resulting ARA distributions were serialized and hashed before the public offsets were retrieved. The target was one of 24 relational bins defined by x = 2 g_plus / (g_minus + g_plus), not an exact decimal prime."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and robustness\n\nFive targets are insufficient to estimate effectiveness. The better average log loss coexists with weak concentration. RawGap-M1 assigned zero probability to one out-of-support target and is therefore diagnostic rather than a fair extrapolation baseline. The independent numerical validator passed 164/164 checks, the prime-boundary validator passed 50/50, and the notebook executed 4/4 cells; these checks protect arithmetic and reveal order, not statistical power or formal primality certification."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next steps\n\nTest wider rather than merely larger: preserve ARA-M2 unchanged over at least 100 pre-registered targets, add a scale-capable raw-gap or established prime baseline, and keep probability calibration separate from top-three sharpness. Exact prime prediction would require an additional frozen within-bin location rule. The proposed slow adult coordinate belongs in a separate sequence-level experiment."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nDoes the log-loss gain replicate across 100+ untouched targets? Does it survive a log-N-normalized or Hardy-Littlewood-informed baseline? Can a separately frozen adult-scale coordinate improve concentration without harming calibration?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-19T16:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "model_metrics": [
+        {
+          "model": "ARA-M2",
+          "mean_log_loss_bits": 4.076804290911303,
+          "top1_hits": 0,
+          "top3_hits": 1,
+          "targets": 5,
+          "comparison_role": "primary"
+        },
+        {
+          "model": "ARA-IID",
+          "mean_log_loss_bits": 4.487415444268502,
+          "top1_hits": 1,
+          "top3_hits": 1,
+          "targets": 5,
+          "comparison_role": "ARA baseline"
+        },
+        {
+          "model": "Uniform 24-bin",
+          "mean_log_loss_bits": 4.584962500721156,
+          "top1_hits": null,
+          "top3_hits": null,
+          "targets": 5,
+          "comparison_role": "uniform baseline"
+        },
+        {
+          "model": "ARA-M1",
+          "mean_log_loss_bits": 4.643777806993624,
+          "top1_hits": 1,
+          "top3_hits": 1,
+          "targets": 5,
+          "comparison_role": "ARA baseline"
+        }
+      ],
+      "target_results": [
+        {
+          "exponent": 50,
+          "public_offset": 151,
+          "crossing_gap": 208,
+          "target_bin": 16,
+          "m2_rank": 8,
+          "m2_log_loss_bits": 4.247109216288599,
+          "top3_hit": "No"
+        },
+        {
+          "exponent": 100,
+          "public_offset": 267,
+          "crossing_gap": 1064,
+          "target_bin": 21,
+          "m2_rank": 2,
+          "m2_log_loss_bits": 3.1046904625665066,
+          "top3_hit": "Yes"
+        },
+        {
+          "exponent": 150,
+          "public_offset": 67,
+          "crossing_gap": 340,
+          "target_bin": 12,
+          "m2_rank": 8,
+          "m2_log_loss_bits": 4.2607651760274905,
+          "top3_hit": "No"
+        },
+        {
+          "exponent": 200,
+          "public_offset": 357,
+          "crossing_gap": 546,
+          "target_bin": 21,
+          "m2_rank": 5,
+          "m2_log_loss_bits": 3.925999418556223,
+          "top3_hit": "No"
+        },
+        {
+          "exponent": 250,
+          "public_offset": 1227,
+          "crossing_gap": 1260,
+          "target_bin": 15,
+          "m2_rank": 16,
+          "m2_log_loss_bits": 4.845457181117699,
+          "top3_hit": "No"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "pn8_results",
+      "label": "PN8 scored results",
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_RESULTS.json"
+    },
+    {
+      "id": "pn8_protocol",
+      "label": "PN8 frozen protocol",
+      "path": "analysis/primes/PN8_POWER_OF_TEN_PUBLIC_REVEAL_PROTOCOL.md"
+    },
+    {
+      "id": "pn8_model_metrics_sql",
+      "label": "PN8 model-metric artifact query",
+      "path": "analysis/primes/pn8_report_model_metrics.sql"
+    },
+    {
+      "id": "pn8_target_results_sql",
+      "label": "PN8 target-result artifact query",
+      "path": "analysis/primes/pn8_report_target_results.sql"
+    },
+    {
+      "id": "oeis_offsets",
+      "label": "OEIS A033873",
+      "href": "https://oeis.org/A033873"
+    },
+    {
+      "id": "oeis_primes",
+      "label": "OEIS A003617",
+      "href": "https://oeis.org/A003617"
+    }
+  ]
+}

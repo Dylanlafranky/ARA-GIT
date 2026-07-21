@@ -1,0 +1,253 @@
+{
+  "test_id": "PN21/RIDGE-STRADDLING-TWO-CHILD-RETENTION/v1",
+  "created_utc": "2026-07-21T09:58:11.213535+00:00",
+  "status": "DEVELOPMENT NULL \u2014 fresh target remains sealed",
+  "population": {
+    "low_inclusive": 4000000000,
+    "high_exclusive": 4001000000,
+    "odd_integer_count": 500000,
+    "prime_count": 45166,
+    "composite_count": 454834,
+    "training_count": 250000,
+    "test_count": 250000,
+    "full_parent_definition": "1 for prime; 2log(least prime factor)/log(n) for composite"
+  },
+  "child_definition": {
+    "phase_a": "2*(n mod q_minus)/q_minus; q_minus is last prime <= sqrt(n)",
+    "phase_b": "2-2*(n mod q_plus)/q_plus; q_plus is first prime > sqrt(n)",
+    "unique_q_minus": [
+      63241,
+      63247
+    ],
+    "unique_q_plus": [
+      63247,
+      63277
+    ],
+    "same_side_control_unique_second_minus": [
+      63211,
+      63241
+    ]
+  },
+  "frozen_threshold": {
+    "heldout_retained_r2_required": 0.9,
+    "must_exceed_same_side_control": true
+  },
+  "straddling_pair": {
+    "name": "ridge_straddling_q_minus_q_plus",
+    "phase_a_summary": {
+      "mean": 1.0011883862849895,
+      "minimum": 0.0,
+      "maximum": 1.99996837794678
+    },
+    "phase_b_summary": {
+      "mean": 0.9974727382554138,
+      "minimum": 3.1607061017346894e-05,
+      "maximum": 2.0
+    },
+    "closure_summary": {
+      "mean": 0.9993305622702018,
+      "standard_deviation": 0.09198476788282048,
+      "pearson_with_full_parent": 0.00039163725901819737
+    },
+    "retention": {
+      "grid_bins_per_axis": 32,
+      "occupied_training_cells": 96,
+      "training_global_parent_mean": 0.31558282026210066,
+      "test_mse": 0.08542115536257874,
+      "test_global_mean_baseline_mse": 0.08541866053724856,
+      "heldout_retained_r2": -2.9207029406563834e-05,
+      "heldout_retained_percent": -0.0029207029406563834
+    },
+    "prime_diagnostics": {
+      "population_prime_rate": 0.090332,
+      "joint_ridge_auc": 0.4996984112001532,
+      "closure_ridge_auc": 0.4991371963682423,
+      "joint_ridge_top_1pct_prime_rate": 0.0916,
+      "joint_ridge_top_1pct_lift": 1.0140371075587833,
+      "closure_ridge_top_1pct_prime_rate": 0.0894,
+      "closure_ridge_top_1pct_lift": 0.9896825045388123
+    },
+    "information": {
+      "parent_bins": 16,
+      "mutual_information_bits": 0.0013733657113419897,
+      "parent_entropy_bits": 3.010053041580774,
+      "normalized_by_parent_entropy": 0.00045625963807626005
+    },
+    "exact_ridge_counts": {
+      "phase_a_equals_1": 0,
+      "phase_b_equals_1": 0,
+      "closure_equals_1": 0
+    },
+    "worked_rows": [
+      {
+        "n": 4000000001,
+        "is_prime": false,
+        "parent": 0.34827898584823563,
+        "phase_a": 0.21350073528249078,
+        "phase_b": 1.7870887156703086,
+        "closure": 1.0002947254763996
+      },
+      {
+        "n": 4000000003,
+        "is_prime": false,
+        "parent": 0.9111607433929736,
+        "phase_a": 0.21356398538922536,
+        "phase_b": 1.7870254715638687,
+        "closure": 1.000294728476547
+      },
+      {
+        "n": 4000000005,
+        "is_prime": false,
+        "parent": 0.09937893642064236,
+        "phase_a": 0.2136272354959599,
+        "phase_b": 1.7869622274574288,
+        "closure": 1.0002947314766943
+      },
+      {
+        "n": 4000500001,
+        "is_prime": true,
+        "parent": 1.0,
+        "phase_a": 0.023937894287476086,
+        "phase_b": 1.952368159046731,
+        "closure": 0.9881530266671036
+      },
+      {
+        "n": 4000999995,
+        "is_prime": false,
+        "parent": 0.09937781287501132,
+        "phase_a": 1.834774771925941,
+        "phase_b": 0.1490272926971885,
+        "closure": 0.9919010323115648
+      },
+      {
+        "n": 4000999997,
+        "is_prime": false,
+        "parent": 0.256285632737262,
+        "phase_a": 1.834838016032381,
+        "phase_b": 0.1489640785751536,
+        "closure": 0.9919010473037673
+      },
+      {
+        "n": 4000999999,
+        "is_prime": false,
+        "parent": 0.43819345801373283,
+        "phase_a": 1.8349012601388208,
+        "phase_b": 0.1489008644531189,
+        "closure": 0.9919010622959699
+      }
+    ]
+  },
+  "same_side_control": {
+    "name": "same_side_q_minus_q_second_minus",
+    "phase_a_summary": {
+      "mean": 1.0011883862849895,
+      "minimum": 0.0,
+      "maximum": 1.99996837794678
+    },
+    "phase_b_summary": {
+      "mean": 0.9990155702802098,
+      "minimum": 3.1625053367179135e-05,
+      "maximum": 2.0
+    },
+    "closure_summary": {
+      "mean": 1.0001019782825997,
+      "standard_deviation": 0.0671798367853585,
+      "pearson_with_full_parent": -0.00023444843782039726
+    },
+    "retention": {
+      "grid_bins_per_axis": 32,
+      "occupied_training_cells": 64,
+      "training_global_parent_mean": 0.31558282026210066,
+      "test_mse": 0.08542062147423961,
+      "test_global_mean_baseline_mse": 0.08541866053724856,
+      "heldout_retained_r2": -2.2956775237670257e-05,
+      "heldout_retained_percent": -0.0022956775237670257
+    },
+    "prime_diagnostics": {
+      "population_prime_rate": 0.090332,
+      "joint_ridge_auc": 0.49968351150115137,
+      "closure_ridge_auc": 0.5006996063526248,
+      "joint_ridge_top_1pct_prime_rate": 0.0882,
+      "joint_ridge_top_1pct_lift": 0.9763981756188284,
+      "closure_ridge_top_1pct_prime_rate": 0.0926,
+      "closure_ridge_top_1pct_lift": 1.02510738165877
+    },
+    "information": {
+      "parent_bins": 16,
+      "mutual_information_bits": 0.0007861471188595608,
+      "parent_entropy_bits": 3.010053041580774,
+      "normalized_by_parent_entropy": 0.0002611738424538539
+    },
+    "exact_ridge_counts": {
+      "phase_a_equals_1": 0,
+      "phase_b_equals_1": 0,
+      "closure_equals_1": 0
+    },
+    "worked_rows": [
+      {
+        "n": 4000000001,
+        "is_prime": false,
+        "parent": 0.34827898584823563,
+        "phase_a": 0.21350073528249078,
+        "phase_b": 1.7493790637705462,
+        "closure": 0.9814398995265184
+      },
+      {
+        "n": 4000000003,
+        "is_prime": false,
+        "parent": 0.9111607433929736,
+        "phase_a": 0.21356398538922536,
+        "phase_b": 1.7493157836452515,
+        "closure": 0.9814398845172384
+      },
+      {
+        "n": 4000000005,
+        "is_prime": false,
+        "parent": 0.09937893642064236,
+        "phase_a": 0.2136272354959599,
+        "phase_b": 1.749252503519957,
+        "closure": 0.9814398695079585
+      },
+      {
+        "n": 4000500001,
+        "is_prime": true,
+        "parent": 1.0,
+        "phase_a": 0.023937894287476086,
+        "phase_b": 1.9739725810787305,
+        "closure": 0.9989552376831033
+      },
+      {
+        "n": 4000999995,
+        "is_prime": false,
+        "parent": 0.09937781287501132,
+        "phase_a": 1.834774771925941,
+        "phase_b": 0.1616356477601555,
+        "closure": 0.9982052098430483
+      },
+      {
+        "n": 4000999997,
+        "is_prime": false,
+        "parent": 0.256285632737262,
+        "phase_a": 1.834838016032381,
+        "phase_b": 0.16157239765342113,
+        "closure": 0.998205206842901
+      },
+      {
+        "n": 4000999999,
+        "is_prime": false,
+        "parent": 0.43819345801373283,
+        "phase_a": 1.8349012601388208,
+        "phase_b": 0.16150914754668655,
+        "closure": 0.9982052038427537
+      }
+    ]
+  },
+  "decision": {
+    "straddling_heldout_retained_r2": -2.9207029406563834e-05,
+    "same_side_heldout_retained_r2": -2.2956775237670257e-05,
+    "retention_threshold_pass": false,
+    "exceeds_same_side_control": false,
+    "blind_target_authorized": false,
+    "reason": "The ridge-straddling pair did not retain 90% of the full parent coordinate out of sample."
+  }
+}

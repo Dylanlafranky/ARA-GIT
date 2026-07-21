@@ -78,9 +78,9 @@ A plain-language key to the vocabulary used across this repository. Where a term
   distinct from established amplitude death. Heat death is the proposed universe-scale analogy, understood as loss
   of work-producing gradients rather than literal cessation of all microscopic motion or of time. A persistent
   resonant-death identity is additionally proposed to require a strong Connection-side holding relation and no
-  effective anti-phase response from adjacent rungs large enough to reopen or unravel it. `TE-ARA = 2` would mean the
-  surviving identity remains fully represented in the declared account; it is usable exergy, not TE-ARA, that is
-  “spent.”
+  effective anti-phase response from adjacent rungs large enough to reopen or unravel it. Canonical TE-ARA remains
+  `2`; an **expressed A/B subtotal of 2 with contextual Other at 0** would mean the pure pair occupies the complete
+  observed account. It is usable exergy, not TE-ARA, that is “spent.”
 - **Cross-rung reopening/unravelling condition (ARA musing)** — let \(R_k^-\) denote the effective anti-phase response
   induced at rung \(k\) by neighbouring rungs \(k-1\) and \(k+1\). A persistent terminal candidate requires
   \(R_k^-<R_{k,\mathrm{unlock}}\) over a declared observation window. Crossing the threshold must have an observable
@@ -100,30 +100,42 @@ A plain-language key to the vocabulary used across this repository. Where a term
 
 ## Dynamics, energy, identity
 
-- **TE-ARA (Total-Energy ARA; Tiarna mnemonic)** — the proposed 0–2 **main-identity energy-participation** coordinate
-  of one declared node: \(\mathrm{TE\!-\!ARA}=2E_{id}/E_{total}\). Here \(E_{id}\) is the energy assigned by a declared
-  decomposition to the node's main Phase-A/Phase-B ARA wave plus any included identity-forming interaction term;
-  \(E_{total}\) is all energy inside the same boundary and time slice. Full identity participation maps to 2. Always
-  report both forms, e.g. `TE-ARA = 1.24 (62% identity participation)`. ARA position describes the pole mixture;
-  TE-ARA describes how much total energy participates in that main identity mixture. Capacity, occupancy and regional
-  node-equivalent count are separate coordinates. In signal-only domains, spectral power fraction is an analogue, not
-  joules, unless an energy calibration exists. When TE-ARA is decomposed across several contributors, unique shares,
-  declared interaction/relation shares and `Other` must partition one common denominator; do not count the same shared
-  signal once as an individual contribution and again as an interaction. A weak share is descriptive until held-out
-  stability or an intervention establishes that it matters. Defined within ARA; universal physical usefulness remains
-  unvalidated.
-- **Full-pair TE-ARA closure** — if Phase A and Phase B exhaust the declared participation account and are equal,
-  \(p_A=p_B=1/2\), then \(\mathrm{TE}_A=1\), \(\mathrm{TE}_B=1\), and
-  \(\mathrm{TE}_{A+B}=2\), while the separate ARA composition coordinate is \(x=1\). This is a normalized
-  participation closure, not a claim of twice the physical energy. The signature \((x,\mathrm{TE})=(1,2)\) does not
-  distinguish a frozen static pair, coherent resonance/standing activity, or incoherent cancellation. Timing ARA is
-  undefined when no cycle can be observed; use time variation, flux/activity and phase coherence to classify the state.
+- **TE-ARA (Total-Energy ARA; Tiarna mnemonic)** — not a second geometry, but the same ARA `0–2` geometry used as
+  an identity's total-allocation view. The pure identity is only its two poles:
+  \(\mathrm{TE\!-\!ARA}_{pure}(I)=t_A^{(I)}+t_B^{(I)}=2\). Real measured identities are embedded in other ARA
+  systems, so the observed account can be \(t_A+t_B+\sum_jc_j+t_{Other}=2\), where \(c_j\) and `Other` describe
+  environmental coupling rather than additional pure poles. Example: `A=0.25, B=1.25, Other=0.50, observed
+  TE-ARA total=2`. TE-ARA is not joules, capacity or absolute magnitude. Earlier repository values such as
+  `TE-ARA=1.24` are corrected to
+  `expressed A/B allocation=1.24, context/Other=0.76, observed TE-ARA total=2`; see
+  `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
+- **TE-ARA component allocation / subtotal** — a variable part of the fixed account, such as `t_A`, `t_B`, a named
+  environmental coupling edge, the expressed A/B subtotal or `t_Other`. A named subtotal below 2 does not mean the
+  identity's total geometry is below 2; unresolved contextual participation is assigned to Other. Allocations must share one denominator and cannot double-count the
+  same signal as both an individual and interaction contribution. A weak share remains descriptive until it transfers
+  or predicts on held-out data.
+- **TE-ARA same-geometry bridge** — for the expressed pair subtotal \(T_{AB}=t_A+t_B>0\), orienting B toward 2 gives
+  \(x_{A/B}=2t_B/T_{AB}\) and contextual remainder \(T_{context}=2-T_{AB}\). If the identity is pure/context-free,
+  \(T_{AB}=2\), so \(x_{A/B}=t_B\) and \(t_A=2-x_{A/B}\). This is the explicit statement that TE-ARA is ARA
+  geometry, not another object.
+- **Pure/full-pair TE-ARA closure** — the pure A/B identity contains no Other. Its symmetric ridge partition is
+  \(t_A=1,t_B=1,t_{Other}=0\), total `2`, and the separate ARA composition may be \(x=1\). This is only one possible
+  pure partition: asymmetric pure cases also sum A+B to 2. Context-bearing observations such as
+  `0.25+1.25+0.50=2` retain the same total, but the `0.50` is environmental coupling rather than pure identity. The fixed total does not
+  distinguish a frozen pair, coherent resonance or incoherent cancellation; retain the partition and dynamics.
 - **TE-ARA decomposition / Other recursion** — the decomposition-side counterpart of Information³ closure.
   Information³ asks how two identities plus their relation close into a new identity; TE-ARA begins with the observed
-  identity, assigns participation to its primary two-wave ARA, and places remaining participation in `Other`. Each
-  independently resolved source within Other becomes an extra coupling edge and may be decomposed as its own ARA node.
-  Edge thickness represents participation share. Any conversion from weak share to large relational distance is a
+  identity's fixed total 2, reads its expressed primary two-wave ARA, and assigns deviations to named environmental
+  relations and `Other`. Other is not a third pure pole. Each independently
+  resolved source within Other becomes an extra coupling edge and may be decomposed as its own ARA node. A component's
+  parent-ledger allocation may be below 2; when opened as its own identity, its internal ledger renormalises to 2.
+  Edge thickness represents parent participation share. Any conversion from weak share to large relational distance is a
   proposed display coordinate, not literal physical distance or proof of causality.
+- **Other / contextual coupling residual** — the amount left after the expressed A/B pair and already named external
+  couplings are removed: \(t_{Other}=2-(t_A+t_B+\sum_jc_j)\). Its magnitude says how much remains unexplained;
+  changes across boundary/location, phase/lag and rung help locate where and how a missing coupling acts. It is not a
+  third pure pole. A proposed source is not promoted out of Other by correlation alone; require held-out transfer,
+  independent measurement or a predeclared intervention/removal response.
 - **Recycling / flywheel** — how much of its previous cycle a system stores and reuses (measured as the autocorrelation "cycle-ago floor"). High = flywheel (Sun); near zero = leaky (ENSO surface, heart at its dominant period).
 - **Leanness** — how little energy a cycle wastes into shocky harmonic distortion (measured as R21, the 2nd-harmonic Fourier ratio; lower = leaner). φ-near systems run leanest (see `EnergyRatio/`).
 - **Bedrock / 2−φ floor** — the posited ideal lossless handoff: space (2) compresses to time (φ), shedding the minimum 2−φ ≈ 0.382. A *reference frame*, not a measurement (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).
@@ -146,6 +158,12 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **`TheFormula/`** — *forecasting* (predictor scripts, benchmarks, LLM work).
 - **`EnergyRatio/`** — *how leanly* a system moves energy per cycle (leanness, recycling, the bedrock, the open conjectures).
 - **`3D models/`** — interactive 3D viewers of the topology (base ARA, ocean layer, system explorer, scalable lattice).
+
+## Domain glossaries
+
+- **Prime-test relational glossary** — `analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md` translates compact labels
+  such as `PN6`, `R11`, `p29`, `Q29`, `q`, `J`, PNT and Buchstab into their location in the test, relational chain
+  and ARA role. Use it before reading `FableConvo/ARA_MAPPING_PRIMES.md` if letter-number shorthand is hard to hold.
 
 ---
 

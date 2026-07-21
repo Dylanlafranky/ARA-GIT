@@ -1,0 +1,3237 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN10B Child-Phase Prime Ranking",
+    "description": "Registered test of whether already-paid factor-sphere child phases rank unresolved prime survivors.",
+    "generatedAt": "2026-07-20T15:30:00+10:00",
+    "sources": [
+      {
+        "id": "pn10b_results",
+        "label": "PN10B machine-readable results",
+        "path": "analysis/primes/PN10B_CHILD_PHASE_RESULTS.json"
+      },
+      {
+        "id": "pn10b_protocol",
+        "label": "PN10B frozen protocol",
+        "path": "analysis/primes/PN10B_CHILD_PHASE_PRIME_RANKING_PROTOCOL.md"
+      },
+      {
+        "id": "pn10b_validation",
+        "label": "PN10B independent validation",
+        "path": "analysis/primes/PN10B_CHILD_PHASE_VALIDATION.json"
+      },
+      {
+        "id": "pn10b_metrics_sql",
+        "label": "PN10B fresh model-score query",
+        "path": "analysis/primes/pn10b_report_metrics.sql",
+        "query": {
+          "sql": "SELECT\n  model,\n  feature_count,\n  log_loss_bits,\n  brier,\n  auc,\n  top_decile_lift,\n  calibration_error\nFROM pn10b_metrics\nWHERE stage = 'pooled_D_E_to_fresh_F'\nORDER BY log_loss_bits ASC;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_metrics"
+          ],
+          "description": "Select the reviewed fresh-target model scores in ascending log-loss order.",
+          "filters": [
+            "stage = pooled_D_E_to_fresh_F",
+            "parent cutoff c = 0.90"
+          ],
+          "metric_definitions": [
+            "log_loss_bits = mean binary logarithmic scoring loss per surviving integer",
+            "auc = probability that a randomly chosen prime receives a higher model score than a randomly chosen remaining composite, with ties averaged",
+            "top_decile_lift = prime rate in the highest predicted-probability decile divided by overall survivor prime rate"
+          ]
+        }
+      },
+      {
+        "id": "pn10b_comparisons_sql",
+        "label": "PN10B paired-comparison query",
+        "path": "analysis/primes/pn10b_report_comparisons.sql",
+        "query": {
+          "sql": "SELECT\n  comparison,\n  first_model,\n  second_model,\n  gain_bits_per_event,\n  ci95_low,\n  ci95_high,\n  positive_blocks,\n  blocks,\n  draws\nFROM pn10b_comparisons\nORDER BY comparison ASC;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_comparisons"
+          ],
+          "description": "Select paired fresh-target log-loss gains and registered contiguous-block bootstrap intervals.",
+          "filters": [
+            "fresh interval = [4000000000,4001000000)",
+            "100 contiguous blocks",
+            "2000 bootstrap draws",
+            "seed = 20260720"
+          ],
+          "metric_definitions": [
+            "gain_bits_per_event = second-model log loss minus first-model log loss; positive values favor the first named model",
+            "ci95_low and ci95_high = percentile 95% interval from resampling 100 contiguous target blocks"
+          ]
+        }
+      },
+      {
+        "id": "pn10b_geometry_results",
+        "label": "PN10B post-hoc geometry results",
+        "path": "analysis/primes/PN10B_EVENT_GEOMETRY_RESULTS.json"
+      },
+      {
+        "id": "pn10b_geometry_trace",
+        "label": "PN10B event-centred trace",
+        "path": "analysis/primes/PN10B_EVENT_CENTERED_TRACES.csv"
+      },
+      {
+        "id": "pn10b_geometry_examples",
+        "label": "PN10B worked prime child vectors",
+        "path": "analysis/primes/PN10B_PRIME_CHILD_EXAMPLES.csv"
+      },
+      {
+        "id": "pn10b_geometry_validation",
+        "label": "PN10B geometry validation",
+        "path": "analysis/primes/PN10B_EVENT_GEOMETRY_VALIDATION.json"
+      },
+      {
+        "id": "pn10b_geometry_trace_query",
+        "label": "PN10B event-trace query",
+        "path": "analysis/primes/pn10b_report_event_trace.sql",
+        "query": {
+          "sql": "SELECT\n    event,\n    offset,\n    center_count,\n    prime_rate,\n    survivor_rate,\n    parent_progress_mean,\n    parent_progress_median,\n    child_centroid_mean,\n    child_centroid_median,\n    child_dispersion_mean,\n    child_coupling_mean,\n    child_flip_count_mean\nFROM pn10b_event_trace\nORDER BY event, offset;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_event_trace"
+          ],
+          "description": "Select the complete post-hoc parent and child lead/at/lag traces around prime and late-composite events.",
+          "filters": [
+            "fresh interval = [4000000000,4001000000)",
+            "event offsets = -32 through +32",
+            "post-hoc descriptive only"
+          ],
+          "metric_definitions": [
+            "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites at each aligned offset",
+            "child_centroid_mean = mean over event centres of the within-node mean of nine paid-gate Phase A readings"
+          ]
+        }
+      },
+      {
+        "id": "pn10b_child_rank_query",
+        "label": "PN10B child-rank query",
+        "path": "analysis/primes/pn10b_report_child_rank.sql",
+        "query": {
+          "sql": "SELECT\n    gate_rank,\n    series,\n    phase_a,\n    median_a,\n    p10_a,\n    p90_a,\n    population\nFROM pn10b_child_rank_profile\nORDER BY series, gate_rank;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_child_rank_profile"
+          ],
+          "description": "Select the mean prime child-phase profile and the exact worked-prime profile by paid-gate rank.",
+          "filters": [
+            "nine largest already-paid gates q <= n^0.45",
+            "worked prime n = 4000000007",
+            "post-hoc descriptive only"
+          ],
+          "metric_definitions": [
+            "phase_a = 2*(n mod q)/q",
+            "mean-across-primes phase_a uses 45166 prime nodes"
+          ]
+        }
+      },
+      {
+        "id": "pn10b_geometry_population_query",
+        "label": "PN10B population-geometry query",
+        "path": "analysis/primes/pn10b_report_geometry_population.sql",
+        "query": {
+          "sql": "SELECT\n    metric,\n    prime_n,\n    prime_mean,\n    prime_median,\n    prime_min,\n    prime_max,\n    composite_n,\n    composite_mean,\n    composite_median,\n    standardized_difference\nFROM pn10b_geometry_population\nORDER BY metric;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_geometry_population"
+          ],
+          "description": "Select reviewed prime and late-composite child-geometry summaries and standardized contrasts.",
+          "filters": [
+            "c = 0.90 survivors",
+            "45166 primes",
+            "9109 survivor composites",
+            "post-hoc descriptive only"
+          ],
+          "metric_definitions": [
+            "standardized_difference = prime-minus-composite mean divided by the square root of the average population variance"
+          ]
+        }
+      },
+      {
+        "id": "pn10b_worked_prime_query",
+        "label": "PN10B worked-prime query",
+        "path": "analysis/primes/pn10b_report_worked_prime.sql",
+        "query": {
+          "sql": "SELECT\n    gate_rank,\n    gate_q,\n    remainder,\n    phase_a,\n    phase_b,\n    signed_orientation,\n    coupling_to_next_rank\nFROM pn10b_worked_prime_children\nORDER BY gate_rank;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10b_worked_prime_children"
+          ],
+          "description": "Select all nine exact paid-gate child coordinates for prime 4000000007.",
+          "filters": [
+            "n = 4000000007",
+            "nine largest already-paid gates q <= n^0.45"
+          ],
+          "metric_definitions": [
+            "phase_a = 2*remainder/q",
+            "phase_b = 2-phase_a",
+            "signed_orientation = phase_a-1"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "fresh_gains",
+        "title": "Fresh paired log-loss gain by registered comparison",
+        "subtitle": "Positive values favor the first named model; 54,275 survivors at c=0.90",
+        "type": "bar",
+        "dataset": "fresh_comparisons",
+        "sourceId": "pn10b_comparisons_sql",
+        "source": {
+          "label": "PN10B paired-comparison query",
+          "path": "analysis/primes/pn10b_report_comparisons.sql",
+          "query": {
+            "sql": "SELECT\n  comparison,\n  first_model,\n  second_model,\n  gain_bits_per_event,\n  ci95_low,\n  ci95_high,\n  positive_blocks,\n  blocks,\n  draws\nFROM pn10b_comparisons\nORDER BY comparison ASC;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_comparisons"
+            ],
+            "description": "Select paired fresh-target log-loss gains and registered contiguous-block bootstrap intervals.",
+            "filters": [
+              "fresh interval = [4000000000,4001000000)",
+              "100 contiguous blocks",
+              "2000 bootstrap draws",
+              "seed = 20260720"
+            ],
+            "metric_definitions": [
+              "gain_bits_per_event = second-model log loss minus first-model log loss; positive values favor the first named model",
+              "ci95_low and ci95_high = percentile 95% interval from resampling 100 contiguous target blocks"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "comparison",
+            "type": "nominal",
+            "label": "Registered comparison"
+          },
+          "y": {
+            "field": "gain_bits_per_event",
+            "type": "quantitative",
+            "label": "Log-loss gain (bits/event)"
+          },
+          "tooltip": [
+            {
+              "field": "ci95_low",
+              "type": "quantitative",
+              "label": "95% CI low"
+            },
+            {
+              "field": "ci95_high",
+              "type": "quantitative",
+              "label": "95% CI high"
+            },
+            {
+              "field": "positive_blocks",
+              "type": "quantitative",
+              "label": "Positive blocks"
+            }
+          ]
+        },
+        "layout": "full"
+      },
+      {
+        "id": "parent_event_trace",
+        "title": "Parent factor progress around prime and late-composite events",
+        "subtitle": "Raw-integer offsets -32 to +32; the prime-centred trace reaches the exact 1.0 ridge at zero",
+        "type": "line",
+        "dataset": "event_trace",
+        "sourceId": "pn10b_geometry_trace_query",
+        "source": {
+          "label": "PN10B event-trace query",
+          "path": "analysis/primes/pn10b_report_event_trace.sql",
+          "query": {
+            "sql": "SELECT\n    event,\n    offset,\n    center_count,\n    prime_rate,\n    survivor_rate,\n    parent_progress_mean,\n    parent_progress_median,\n    child_centroid_mean,\n    child_centroid_median,\n    child_dispersion_mean,\n    child_coupling_mean,\n    child_flip_count_mean\nFROM pn10b_event_trace\nORDER BY event, offset;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_event_trace"
+            ],
+            "description": "Select the complete post-hoc parent and child lead/at/lag traces around prime and late-composite events.",
+            "filters": [
+              "fresh interval = [4000000000,4001000000)",
+              "event offsets = -32 through +32",
+              "post-hoc descriptive only"
+            ],
+            "metric_definitions": [
+              "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites at each aligned offset",
+              "child_centroid_mean = mean over event centres of the within-node mean of nine paid-gate Phase A readings"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "offset",
+            "type": "quantitative",
+            "label": "Raw-integer offset"
+          },
+          "y": {
+            "field": "parent_progress_mean",
+            "type": "quantitative",
+            "label": "Mean parent factor progress"
+          },
+          "color": {
+            "field": "event",
+            "type": "nominal",
+            "label": "Centred event"
+          },
+          "tooltip": [
+            {
+              "field": "prime_rate",
+              "type": "quantitative",
+              "label": "Prime rate"
+            },
+            {
+              "field": "center_count",
+              "type": "quantitative",
+              "label": "Centres"
+            },
+            {
+              "field": "child_centroid_mean",
+              "type": "quantitative",
+              "label": "Mean child centroid"
+            }
+          ]
+        },
+        "layout": "full"
+      },
+      {
+        "id": "child_rank_trace",
+        "title": "Nine paid-gate child phases at prime nodes",
+        "subtitle": "Population means cancel near 1.0 while the worked prime carries strong local asymmetry",
+        "type": "line",
+        "dataset": "child_rank_profile",
+        "sourceId": "pn10b_child_rank_query",
+        "source": {
+          "label": "PN10B child-rank query",
+          "path": "analysis/primes/pn10b_report_child_rank.sql",
+          "query": {
+            "sql": "SELECT\n    gate_rank,\n    series,\n    phase_a,\n    median_a,\n    p10_a,\n    p90_a,\n    population\nFROM pn10b_child_rank_profile\nORDER BY series, gate_rank;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_child_rank_profile"
+            ],
+            "description": "Select the mean prime child-phase profile and the exact worked-prime profile by paid-gate rank.",
+            "filters": [
+              "nine largest already-paid gates q <= n^0.45",
+              "worked prime n = 4000000007",
+              "post-hoc descriptive only"
+            ],
+            "metric_definitions": [
+              "phase_a = 2*(n mod q)/q",
+              "mean-across-primes phase_a uses 45166 prime nodes"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "gate_rank",
+            "type": "quantitative",
+            "label": "Paid-gate child rank"
+          },
+          "y": {
+            "field": "phase_a",
+            "type": "quantitative",
+            "label": "Phase A on the 0-2 line"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Reading"
+          },
+          "tooltip": [
+            {
+              "field": "population",
+              "type": "nominal",
+              "label": "Population"
+            },
+            {
+              "field": "p10_a",
+              "type": "quantitative",
+              "label": "Prime p10"
+            },
+            {
+              "field": "p90_a",
+              "type": "quantitative",
+              "label": "Prime p90"
+            }
+          ]
+        },
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "fresh_metrics",
+        "title": "Fresh-target model scores",
+        "subtitle": "Untouched interval [4,000,000,000, 4,001,000,000); lower log loss and Brier are better",
+        "dataset": "fresh_metrics",
+        "sourceId": "pn10b_metrics_sql",
+        "source": {
+          "label": "PN10B fresh model-score query",
+          "path": "analysis/primes/pn10b_report_metrics.sql",
+          "query": {
+            "sql": "SELECT\n  model,\n  feature_count,\n  log_loss_bits,\n  brier,\n  auc,\n  top_decile_lift,\n  calibration_error\nFROM pn10b_metrics\nWHERE stage = 'pooled_D_E_to_fresh_F'\nORDER BY log_loss_bits ASC;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_metrics"
+            ],
+            "description": "Select the reviewed fresh-target model scores in ascending log-loss order.",
+            "filters": [
+              "stage = pooled_D_E_to_fresh_F",
+              "parent cutoff c = 0.90"
+            ],
+            "metric_definitions": [
+              "log_loss_bits = mean binary logarithmic scoring loss per surviving integer",
+              "auc = probability that a randomly chosen prime receives a higher model score than a randomly chosen remaining composite, with ties averaged",
+              "top_decile_lift = prime rate in the highest predicted-probability decile divided by overall survivor prime rate"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "log_loss_bits",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "model",
+            "label": "Model",
+            "type": "text"
+          },
+          {
+            "field": "feature_count",
+            "label": "Features",
+            "type": "number"
+          },
+          {
+            "field": "log_loss_bits",
+            "label": "Log loss (bits)",
+            "type": "number"
+          },
+          {
+            "field": "brier",
+            "label": "Brier",
+            "type": "number"
+          },
+          {
+            "field": "auc",
+            "label": "AUC",
+            "type": "number"
+          },
+          {
+            "field": "top_decile_lift",
+            "label": "Top-decile lift",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "fresh_comparison_table",
+        "title": "Paired fresh-target comparisons",
+        "subtitle": "Positive gain favors the first named model; intervals use 100 contiguous blocks and 2,000 resamples",
+        "dataset": "fresh_comparisons",
+        "sourceId": "pn10b_comparisons_sql",
+        "source": {
+          "label": "PN10B paired-comparison query",
+          "path": "analysis/primes/pn10b_report_comparisons.sql",
+          "query": {
+            "sql": "SELECT\n  comparison,\n  first_model,\n  second_model,\n  gain_bits_per_event,\n  ci95_low,\n  ci95_high,\n  positive_blocks,\n  blocks,\n  draws\nFROM pn10b_comparisons\nORDER BY comparison ASC;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_comparisons"
+            ],
+            "description": "Select paired fresh-target log-loss gains and registered contiguous-block bootstrap intervals.",
+            "filters": [
+              "fresh interval = [4000000000,4001000000)",
+              "100 contiguous blocks",
+              "2000 bootstrap draws",
+              "seed = 20260720"
+            ],
+            "metric_definitions": [
+              "gain_bits_per_event = second-model log loss minus first-model log loss; positive values favor the first named model",
+              "ci95_low and ci95_high = percentile 95% interval from resampling 100 contiguous target blocks"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "gain_bits_per_event",
+          "direction": "desc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "comparison",
+            "label": "Comparison",
+            "type": "text"
+          },
+          {
+            "field": "gain_bits_per_event",
+            "label": "Gain (bits/event)",
+            "type": "number",
+            "movement": true
+          },
+          {
+            "field": "ci95_low",
+            "label": "95% CI low",
+            "type": "number"
+          },
+          {
+            "field": "ci95_high",
+            "label": "95% CI high",
+            "type": "number"
+          },
+          {
+            "field": "positive_blocks",
+            "label": "Positive blocks",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "geometry_population_table",
+        "title": "Prime and late-composite child geometry",
+        "subtitle": "Post-hoc descriptive summaries; standardized differences near zero mean the paid-gate geometry is shared",
+        "dataset": "geometry_population",
+        "sourceId": "pn10b_geometry_population_query",
+        "source": {
+          "label": "PN10B population-geometry query",
+          "path": "analysis/primes/pn10b_report_geometry_population.sql",
+          "query": {
+            "sql": "SELECT\n    metric,\n    prime_n,\n    prime_mean,\n    prime_median,\n    prime_min,\n    prime_max,\n    composite_n,\n    composite_mean,\n    composite_median,\n    standardized_difference\nFROM pn10b_geometry_population\nORDER BY metric;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_geometry_population"
+            ],
+            "description": "Select reviewed prime and late-composite child-geometry summaries and standardized contrasts.",
+            "filters": [
+              "c = 0.90 survivors",
+              "45166 primes",
+              "9109 survivor composites",
+              "post-hoc descriptive only"
+            ],
+            "metric_definitions": [
+              "standardized_difference = prime-minus-composite mean divided by the square root of the average population variance"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "metric",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "metric",
+            "label": "Child summary",
+            "type": "text"
+          },
+          {
+            "field": "prime_mean",
+            "label": "Prime mean",
+            "type": "number"
+          },
+          {
+            "field": "prime_median",
+            "label": "Prime median",
+            "type": "number"
+          },
+          {
+            "field": "prime_min",
+            "label": "Prime minimum",
+            "type": "number"
+          },
+          {
+            "field": "prime_max",
+            "label": "Prime maximum",
+            "type": "number"
+          },
+          {
+            "field": "composite_mean",
+            "label": "Late-composite mean",
+            "type": "number"
+          },
+          {
+            "field": "standardized_difference",
+            "label": "Standardized difference",
+            "type": "number",
+            "movement": true
+          }
+        ]
+      },
+      {
+        "id": "worked_prime_children",
+        "title": "Exact children of prime 4,000,000,007",
+        "subtitle": "Nine already-paid gate readings; every Phase A plus Phase B closes to 2",
+        "dataset": "worked_prime_children",
+        "sourceId": "pn10b_worked_prime_query",
+        "source": {
+          "label": "PN10B worked-prime query",
+          "path": "analysis/primes/pn10b_report_worked_prime.sql",
+          "query": {
+            "sql": "SELECT\n    gate_rank,\n    gate_q,\n    remainder,\n    phase_a,\n    phase_b,\n    signed_orientation,\n    coupling_to_next_rank\nFROM pn10b_worked_prime_children\nORDER BY gate_rank;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10b_worked_prime_children"
+            ],
+            "description": "Select all nine exact paid-gate child coordinates for prime 4000000007.",
+            "filters": [
+              "n = 4000000007",
+              "nine largest already-paid gates q <= n^0.45"
+            ],
+            "metric_definitions": [
+              "phase_a = 2*remainder/q",
+              "phase_b = 2-phase_a",
+              "signed_orientation = phase_a-1"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "gate_rank",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "gate_rank",
+            "label": "Rank",
+            "type": "number"
+          },
+          {
+            "field": "gate_q",
+            "label": "Paid gate q",
+            "type": "number"
+          },
+          {
+            "field": "remainder",
+            "label": "Remainder",
+            "type": "number"
+          },
+          {
+            "field": "phase_a",
+            "label": "Phase A",
+            "type": "number"
+          },
+          {
+            "field": "phase_b",
+            "label": "Phase B",
+            "type": "number"
+          },
+          {
+            "field": "signed_orientation",
+            "label": "A - 1",
+            "type": "number",
+            "movement": true
+          },
+          {
+            "field": "coupling_to_next_rank",
+            "label": "Coupling to next",
+            "type": "number",
+            "movement": true
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN10B Child-Phase Prime Ranking"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "pn10b_results",
+        "body": "## The child geometry closed exactly, but prime ranking was null\n\nThe frozen 17-feature ARA child model scored **0.652923909 bits per survivor** on the untouched interval versus **0.652816910** for the empirical parent. Its paired gain was `-0.000106999` bits/event with a 95% interval of `[-0.000241111,+0.000034314]`, and AUC was `0.500307`. Only the closure/leakage criterion passed; the registered verdict is **NULL**."
+      },
+      {
+        "id": "geometry_reporting_correction",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_results",
+        "body": "## The benchmark verdict hid a separate event-geometry result\n\nThe NULL remains frozen, but it is not the whole result. At a prime, the parent factor-survival coordinate reaches an exact **1.0 crest**. Every odd raw offset falls to the parity trough near **0.062701**. Inside those prime nodes, paid-gate child A readings span almost the full 0-2 line and average **4.1286 side flips**, yet late composites carry nearly the same child distribution. The event crest is therefore real at the parent coordinate while the tested child coordinate is rich but non-discriminating."
+      },
+      {
+        "id": "parent_event_interpretation",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_trace",
+        "body": "## Prime events form a sharp parent crest inside a sieve sawtooth\n\nThe prime-centred trace reaches `1.0` only at offset zero. Odd offsets are even composites with least factor 2; even offsets form smaller shoulders according to their factor and prime-pair structure. This is an exact retrospective geometry map, not an advance prediction, because assigning the central `1.0` requires completing the factor search."
+      },
+      {
+        "id": "parent_event_trace_block",
+        "type": "chart",
+        "chartId": "parent_event_trace",
+        "layout": "full"
+      },
+      {
+        "id": "child_geometry_interpretation",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_results",
+        "body": "## Population cancellation hides the children inside each prime\n\nAcross **406,494 prime-child readings**, pooled Phase A is `0.9998605`, but individual readings span `0.0000955-1.9999044` and prime-node centroids span `0.4997889-1.4266385`. The worked prime at 4,000,000,007 has centroid `0.5913851` and four side flips. The population ridge is cancellation across locally asymmetric children, not nine quiet children."
+      },
+      {
+        "id": "child_rank_trace_block",
+        "type": "chart",
+        "chartId": "child_rank_trace",
+        "layout": "full"
+      },
+      {
+        "id": "population_control_interpretation",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_results",
+        "body": "## Late composites share the same paid-gate child geometry\n\nPrime and surviving-composite centroids, spreads, couplings and flip counts differ by less than `0.015` pooled standard deviations. That shared geometry explains the fresh AUC of `0.500307`: the child waves exist, but this proxy does not identify which survivor contains an unseen factor."
+      },
+      {
+        "id": "geometry_population_table_block",
+        "type": "table",
+        "tableId": "geometry_population_table",
+        "layout": "full"
+      },
+      {
+        "id": "worked_prime_interpretation",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_examples",
+        "body": "## One prime contains strong child asymmetry\n\nPrime 4,000,000,007 has six paid-gate children below the ridge, two above it, and four adjacent orientation changes. The exact row-level values below are the local geometry that a population mean near 1.0 conceals."
+      },
+      {
+        "id": "worked_prime_children_block",
+        "type": "table",
+        "tableId": "worked_prime_children",
+        "layout": "full"
+      },
+      {
+        "id": "key_finding",
+        "type": "markdown",
+        "sourceId": "pn10b_results",
+        "body": "## None of the registered child comparisons produced fresh prime information\n\nThe full ARA representation did not beat the parent, equal-budget raw residues, or the order-scrambled ARA control. The chart shows paired score differences around zero; intervals crossing zero mean the observed differences are not stable across contiguous parts of the fresh number line."
+      },
+      {
+        "id": "fresh_gain_chart",
+        "type": "chart",
+        "chartId": "fresh_gains",
+        "layout": "full"
+      },
+      {
+        "id": "model_table_reading",
+        "type": "markdown",
+        "sourceId": "pn10b_results",
+        "body": "## Established rough-number calibration remained the strongest parent description\n\nBuchstab's constant probability had the lowest fresh log loss (`0.652720245`) because it closely matched overall survivor purity. It is still a constant with AUC `0.5`, so it does not locate individual primes. Every learned model also remained effectively at chance ranking."
+      },
+      {
+        "id": "fresh_metrics_block",
+        "type": "table",
+        "tableId": "fresh_metrics",
+        "layout": "full"
+      },
+      {
+        "id": "scope_definitions",
+        "type": "markdown",
+        "sourceId": "pn10b_protocol",
+        "body": "## Scope, data and metric definitions\n\nPN10B retained only numbers surviving all prime gates `q<=n^0.45`. The fresh target contained 54,275 survivors: 45,166 primes and 9,109 composites. For the nine largest paid gates, `A=2(n mod q)/q`, `B=2-A`, signed orientation `s=A-1`, and adjacent coupling `h=s_j s_(j+1)`. Log loss in bits was primary; Brier, AUC, top-decile lift and calibration error were supporting metrics."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "pn10b_protocol",
+        "body": "## Frozen model and validation design\n\nThe protocol, source, intervals, nine-gate identity, features, `lambda=0.01` logistic model, controls and criteria were SHA-256 frozen before opening the fresh interval. Stage A trained on `[10^6,2x10^6)` and transferred to the PN10 interval near `2x10^9`; Stage B pooled both and scored the untouched interval near `4x10^9`. Paired uncertainty used 100 contiguous blocks and 2,000 fixed-seed bootstrap draws."
+      },
+      {
+        "id": "fresh_comparison_table_block",
+        "type": "table",
+        "tableId": "fresh_comparison_table",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "pn10b_validation",
+        "body": "## The null is specific to this child identity\n\nThe result does not say that ARA cannot be decomposed or that the broader fractal claim is false. It says that exact positions between nine already-tested divisor multiples do not expose a later unseen divisor at this grain. All features are deterministic functions of existing residues and cannot create Shannon information. Independent direct-multiple reconstruction passed **79/79 checks** with zero metric disagreement."
+      },
+      {
+        "id": "geometry_validation",
+        "type": "markdown",
+        "sourceId": "pn10b_geometry_validation",
+        "body": "## Geometry disclosure validation and boundary\n\nAn independent structural and arithmetic validator passed **12/12 checks**, including event-centre ridge identity, odd-offset parity, A+B closure, modular formulas, landmark totals, example boundaries and figure integrity. These diagnostics were selected after opening the PN10B target, so they cannot promote the registered NULL. They restore descriptive information only."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nClose this coordinate as a valid geometric decomposition but null prime-ranking instrument. A future registered prime test should change the arithmetic identity rather than tune gate count or model complexity on this target. The strongest options are to predict a rung-level population property, or to define a child relation whose information is not conditionally washed out by sieve survival."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nWhy did ARA compact beat raw compact while neither beat the parent? Is there a population-level child statistic that transfers without claiming individual-prime information? Can a theorem show that the paid nonzero residue positions are conditionally uniform enough to explain the null? Which alternative child identity can be frozen without inspecting new gates?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-20T15:30:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "fresh_metrics": [
+        {
+          "model": "buchstab_parent",
+          "feature_count": 0,
+          "log_loss_bits": 0.6527202449162731,
+          "brier": 0.13966390618534325,
+          "auc": 0.5,
+          "top_decile_lift": 0.994683196981602,
+          "calibration_error": 0.000698325630424268
+        },
+        {
+          "model": "parent_empirical",
+          "feature_count": 0,
+          "log_loss_bits": 0.652816909969681,
+          "brier": 0.139682356241211,
+          "auc": 0.5,
+          "top_decile_lift": 0.994683196981602,
+          "calibration_error": 0.004351748447911197
+        },
+        {
+          "model": "ara_order_scrambled",
+          "feature_count": 17,
+          "log_loss_bits": 0.6528410974671424,
+          "brier": 0.139686710225988,
+          "auc": 0.502502487171814,
+          "top_decile_lift": 1.0050882960820104,
+          "calibration_error": 0.0045791181062126984
+        },
+        {
+          "model": "ara_compact",
+          "feature_count": 4,
+          "log_loss_bits": 0.652846784357431,
+          "brier": 0.1396878047551514,
+          "auc": 0.5011930860607362,
+          "top_decile_lift": 0.9955687373305729,
+          "calibration_error": 0.004614620150662829
+        },
+        {
+          "model": "raw_compact",
+          "feature_count": 4,
+          "log_loss_bits": 0.6529026340409784,
+          "brier": 0.139698370482011,
+          "auc": 0.49725413694162157,
+          "top_decile_lift": 0.9991108987264566,
+          "calibration_error": 0.005005316207550181
+        },
+        {
+          "model": "raw_full",
+          "feature_count": 17,
+          "log_loss_bits": 0.6529238728560445,
+          "brier": 0.13970235230159647,
+          "auc": 0.49645124857160167,
+          "top_decile_lift": 0.9997750539881849,
+          "calibration_error": 0.004402317381735021
+        },
+        {
+          "model": "ara_full",
+          "feature_count": 17,
+          "log_loss_bits": 0.6529239087258831,
+          "brier": 0.1397024073779492,
+          "auc": 0.5003072235010245,
+          "top_decile_lift": 1.0123940039610206,
+          "calibration_error": 0.004868493522364736
+        }
+      ],
+      "fresh_comparisons": [
+        {
+          "comparison": "ara_compact_vs_parent_empirical",
+          "first_model": "ara_compact",
+          "second_model": "parent_empirical",
+          "gain_bits_per_event": -2.9874387750050962e-05,
+          "ci95_low": -0.00012575807404697828,
+          "ci95_high": 5.732895623646442e-05,
+          "positive_blocks": 50,
+          "blocks": 100,
+          "draws": 2000
+        },
+        {
+          "comparison": "ara_compact_vs_raw_compact",
+          "first_model": "ara_compact",
+          "second_model": "raw_compact",
+          "gain_bits_per_event": 5.5849683547335406e-05,
+          "ci95_low": 1.1362257266301885e-05,
+          "ci95_high": 0.0001036802476865385,
+          "positive_blocks": 59,
+          "blocks": 100,
+          "draws": 2000
+        },
+        {
+          "comparison": "ara_full_vs_ara_order_scrambled",
+          "first_model": "ara_full",
+          "second_model": "ara_order_scrambled",
+          "gain_bits_per_event": -8.281125874078406e-05,
+          "ci95_low": -0.0002081058219511054,
+          "ci95_high": 3.2615865294091416e-05,
+          "positive_blocks": 44,
+          "blocks": 100,
+          "draws": 2000
+        },
+        {
+          "comparison": "ara_full_vs_parent_empirical",
+          "first_model": "ara_full",
+          "second_model": "parent_empirical",
+          "gain_bits_per_event": -0.0001069987562022001,
+          "ci95_low": -0.00024111061063660706,
+          "ci95_high": 3.431445119186163e-05,
+          "positive_blocks": 40,
+          "blocks": 100,
+          "draws": 2000
+        },
+        {
+          "comparison": "ara_full_vs_raw_full",
+          "first_model": "ara_full",
+          "second_model": "raw_full",
+          "gain_bits_per_event": -3.586983874079444e-08,
+          "ci95_low": -7.417006028986256e-05,
+          "ci95_high": 7.062192326771242e-05,
+          "positive_blocks": 55,
+          "blocks": 100,
+          "draws": 2000
+        },
+        {
+          "comparison": "raw_full_vs_parent_empirical",
+          "first_model": "raw_full",
+          "second_model": "parent_empirical",
+          "gain_bits_per_event": -0.0001069628863634593,
+          "ci95_low": -0.00022014801285819967,
+          "ci95_high": 1.0932475344607242e-05,
+          "positive_blocks": 39,
+          "blocks": 100,
+          "draws": 2000
+        }
+      ],
+      "event_trace": [
+        {
+          "event": "Late-composite-centred",
+          "offset": -32,
+          "center_count": 9108,
+          "prime_rate": 0.059727711901624944,
+          "survivor_rate": 0.07158541941150637,
+          "parent_progress_mean": 0.24525969822347254,
+          "parent_progress_median": 0.09937893505870606,
+          "child_centroid_mean": 0.9988415767142916,
+          "child_centroid_median": 1.0341709672877004,
+          "child_dispersion_mean": 0.49971382445644685,
+          "child_coupling_mean": -0.014833760127867171,
+          "child_flip_count_mean": 4.14580588493632
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -31,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531920379,
+          "parent_progress_median": 0.06270077737532942,
+          "child_centroid_mean": 0.9988884845983738,
+          "child_centroid_median": 1.0342028062728401,
+          "child_dispersion_mean": 0.49971384932265733,
+          "child_coupling_mean": -0.014843103451168876,
+          "child_flip_count_mean": 4.146245059288537
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -30,
+          "center_count": 9108,
+          "prime_rate": 0.15963987703118138,
+          "survivor_rate": 0.19180939833113747,
+          "parent_progress_mean": 0.4763655289574201,
+          "parent_progress_median": 0.34827518902264554,
+          "child_centroid_mean": 0.9988621967570867,
+          "child_centroid_median": 1.0342196749675319,
+          "child_dispersion_mean": 0.4997138800197645,
+          "child_coupling_mean": -0.014875524263433065,
+          "child_flip_count_mean": 4.146684233640755
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -29,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531778599,
+          "parent_progress_median": 0.06270077737391164,
+          "child_centroid_mean": 0.9988115103406762,
+          "child_centroid_median": 1.0342474006586,
+          "child_dispersion_mean": 0.49971391305780194,
+          "child_coupling_mean": -0.014837274982155799,
+          "child_flip_count_mean": 4.147123407992973
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -28,
+          "center_count": 9108,
+          "prime_rate": 0.07202459376372419,
+          "survivor_rate": 0.08728590250329381,
+          "parent_progress_mean": 0.27125253939133503,
+          "parent_progress_median": 0.1455858681199353,
+          "child_centroid_mean": 0.9988340196496355,
+          "child_centroid_median": 1.0341200766513579,
+          "child_dispersion_mean": 0.4997139437632777,
+          "child_coupling_mean": -0.014795908997922595,
+          "child_flip_count_mean": 4.147342995169082
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -27,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531636822,
+          "parent_progress_median": 0.06270077737249388,
+          "child_centroid_mean": 0.9988809275337177,
+          "child_centroid_median": 1.0342157776588925,
+          "child_dispersion_mean": 0.4997139744742269,
+          "child_coupling_mean": -0.014850116627043256,
+          "child_flip_count_mean": 4.147013614404918
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -26,
+          "center_count": 9108,
+          "prime_rate": 0.06455862977602109,
+          "survivor_rate": 0.0785024154589372,
+          "parent_progress_mean": 0.25619582937882573,
+          "parent_progress_median": 0.0993789350519638,
+          "child_centroid_mean": 0.9989278354177998,
+          "child_centroid_median": 1.0343114786664271,
+          "child_dispersion_mean": 0.49971400518584097,
+          "child_coupling_mean": -0.01485955720322268,
+          "child_flip_count_mean": 4.147123407992973
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -25,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531495045,
+          "parent_progress_median": 0.0627007773710761,
+          "child_centroid_mean": 0.9989991418770054,
+          "child_centroid_median": 1.0343555165279943,
+          "child_dispersion_mean": 0.49971403939455833,
+          "child_coupling_mean": -0.014842756278521708,
+          "child_flip_count_mean": 4.14679402722881
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -24,
+          "center_count": 9108,
+          "prime_rate": 0.1111111111111111,
+          "survivor_rate": 0.13504611330698288,
+          "parent_progress_mean": 0.38836323677239676,
+          "parent_progress_median": 0.25628663958446846,
+          "child_centroid_mean": 0.9988996583103484,
+          "child_centroid_median": 1.0344140741734702,
+          "child_dispersion_mean": 0.49971408411695534,
+          "child_coupling_mean": -0.014805930863557736,
+          "child_flip_count_mean": 4.147233201581027
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -23,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531353269,
+          "parent_progress_median": 0.06270077736965832,
+          "child_centroid_mean": 0.9989465661944309,
+          "child_centroid_median": 1.0345097960433711,
+          "child_dispersion_mean": 0.4997141194968302,
+          "child_coupling_mean": -0.014826702008387488,
+          "child_flip_count_mean": 4.147562582345191
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -22,
+          "center_count": 9108,
+          "prime_rate": 0.06906016688625384,
+          "survivor_rate": 0.08091787439613526,
+          "parent_progress_mean": 0.2597005058565187,
+          "parent_progress_median": 0.14558586732997159,
+          "child_centroid_mean": 0.9989446769282669,
+          "child_centroid_median": 1.0345861979755226,
+          "child_dispersion_mean": 0.49971416188521406,
+          "child_coupling_mean": -0.014898831380242514,
+          "child_flip_count_mean": 4.1476723759332454
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -21,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531211492,
+          "parent_progress_median": 0.06270077736824056,
+          "child_centroid_mean": 0.9989671862372259,
+          "child_centroid_median": 1.0345536193230145,
+          "child_dispersion_mean": 0.4997142077771798,
+          "child_coupling_mean": -0.014857531907961474,
+          "child_flip_count_mean": 4.147342995169082
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -20,
+          "center_count": 9108,
+          "prime_rate": 0.0764163372859025,
+          "survivor_rate": 0.09178743961352658,
+          "parent_progress_mean": 0.28384830390135535,
+          "parent_progress_median": 0.09937893504522154,
+          "child_centroid_mean": 0.9988189055203226,
+          "child_centroid_median": 1.0344598535966156,
+          "child_dispersion_mean": 0.4997142548396258,
+          "child_coupling_mean": -0.014888573866155714,
+          "child_flip_count_mean": 4.148001756697409
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -19,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077531069713,
+          "parent_progress_median": 0.06270077736682278,
+          "child_centroid_mean": 0.9988414148292817,
+          "child_centroid_median": 1.0345555546041503,
+          "child_dispersion_mean": 0.49971428438536425,
+          "child_coupling_mean": -0.014923907474675806,
+          "child_flip_count_mean": 4.148331137461573
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -18,
+          "center_count": 9108,
+          "prime_rate": 0.11714975845410629,
+          "survivor_rate": 0.13954765041721565,
+          "parent_progress_mean": 0.39116889790183507,
+          "parent_progress_median": 0.25628667214285317,
+          "child_centroid_mean": 0.9988639241382408,
+          "child_centroid_median": 1.034481127414558,
+          "child_dispersion_mean": 0.49971431393143856,
+          "child_coupling_mean": -0.014930802824787169,
+          "child_flip_count_mean": 4.148440931049627
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -17,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530927938,
+          "parent_progress_median": 0.06270077736540501,
+          "child_centroid_mean": 0.9989108320223232,
+          "child_centroid_median": 1.0345768284220929,
+          "child_dispersion_mean": 0.4997143493095199,
+          "child_coupling_mean": -0.01498036960452366,
+          "child_flip_count_mean": 4.148550724637682
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -16,
+          "center_count": 9108,
+          "prime_rate": 0.057422046552481336,
+          "survivor_rate": 0.06927975406236275,
+          "parent_progress_mean": 0.24538052909492133,
+          "parent_progress_median": 0.14558587792043198,
+          "child_centroid_mean": 0.9988357470307895,
+          "child_centroid_median": 1.0345579111637195,
+          "child_dispersion_mean": 0.49971439170271975,
+          "child_coupling_mean": -0.015026606672383268,
+          "child_flip_count_mean": 4.148989898989899
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -15,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007753078616,
+          "parent_progress_median": 0.06270077736398723,
+          "child_centroid_mean": 0.9988582563397486,
+          "child_centroid_median": 1.0346153630377213,
+          "child_dispersion_mean": 0.499714424746471,
+          "child_coupling_mean": -0.01506638585639331,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -14,
+          "center_count": 9108,
+          "prime_rate": 0.06906016688625384,
+          "survivor_rate": 0.0836627140974967,
+          "parent_progress_mean": 0.2664529032289071,
+          "parent_progress_median": 0.09937893503847928,
+          "child_centroid_mean": 0.9988319684984612,
+          "child_centroid_median": 1.0346387792612322,
+          "child_dispersion_mean": 0.4997144601187659,
+          "child_coupling_mean": -0.015086749842455583,
+          "child_flip_count_mean": 4.149429073342117
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -13,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530644382,
+          "parent_progress_median": 0.06270077736256946,
+          "child_centroid_mean": 0.9988544778074205,
+          "child_centroid_median": 1.0346968578313562,
+          "child_dispersion_mean": 0.49971449082717406,
+          "child_coupling_mean": -0.015038105001884395,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -12,
+          "center_count": 9108,
+          "prime_rate": 0.12714097496706192,
+          "survivor_rate": 0.14888010540184454,
+          "parent_progress_mean": 0.39521569913052157,
+          "parent_progress_median": 0.2562871310740208,
+          "child_centroid_mean": 0.9987061970905172,
+          "child_centroid_median": 1.0346896242820283,
+          "child_dispersion_mean": 0.49971452153446494,
+          "child_coupling_mean": -0.014939623224293373,
+          "child_flip_count_mean": 4.1481115502854635
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -11,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530502606,
+          "parent_progress_median": 0.06270077736115168,
+          "child_centroid_mean": 0.9986067135238601,
+          "child_centroid_median": 1.0347409911646563,
+          "child_dispersion_mean": 0.49971454057974085,
+          "child_coupling_mean": -0.015017173157284696,
+          "child_flip_count_mean": 4.14877031181379
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -10,
+          "center_count": 9108,
+          "prime_rate": 0.0813570487483531,
+          "survivor_rate": 0.09617918313570488,
+          "parent_progress_mean": 0.2880973738266893,
+          "parent_progress_median": 0.1760223471995257,
+          "child_centroid_mean": 0.9986536214079424,
+          "child_centroid_median": 1.034836692172191,
+          "child_dispersion_mean": 0.499714556132717,
+          "child_coupling_mean": -0.015021432842047376,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -9,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530360829,
+          "parent_progress_median": 0.06270077735973392,
+          "child_centroid_mean": 0.9986517321417783,
+          "child_centroid_median": 1.034932393179726,
+          "child_dispersion_mean": 0.49971457985395945,
+          "child_coupling_mean": -0.015082914112369793,
+          "child_flip_count_mean": 4.149429073342117
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -8,
+          "center_count": 9108,
+          "prime_rate": 0.06477821695213,
+          "survivor_rate": 0.07729468599033816,
+          "parent_progress_mean": 0.25028058906029826,
+          "parent_progress_median": 0.09937893503173703,
+          "child_centroid_mean": 0.998747437176107,
+          "child_centroid_median": 1.0350280941872607,
+          "child_dispersion_mean": 0.49971460122934624,
+          "child_coupling_mean": -0.015083190562484507,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -7,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530219051,
+          "parent_progress_median": 0.06270077735831614,
+          "child_centroid_mean": 0.9985747578840805,
+          "child_centroid_median": 1.0346986965336147,
+          "child_dispersion_mean": 0.49971463194190346,
+          "child_coupling_mean": -0.015133170407701093,
+          "child_flip_count_mean": 4.150197628458498
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -6,
+          "center_count": 9108,
+          "prime_rate": 0.11220904699165568,
+          "survivor_rate": 0.13427755819060166,
+          "parent_progress_mean": 0.38888805250968184,
+          "parent_progress_median": 0.2562865718081762,
+          "child_centroid_mean": 0.99852407146767,
+          "child_centroid_median": 1.034697912333923,
+          "child_dispersion_mean": 0.4997146509846164,
+          "child_coupling_mean": -0.015221519340441438,
+          "child_flip_count_mean": 4.151075977162933
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -5,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077530077274,
+          "parent_progress_median": 0.06270077735689836,
+          "child_centroid_mean": 0.9985465807766291,
+          "child_centroid_median": 1.0347936133414577,
+          "child_dispersion_mean": 0.49971466535383147,
+          "child_coupling_mean": -0.015188346906936628,
+          "child_flip_count_mean": 4.151075977162933
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -4,
+          "center_count": 9108,
+          "prime_rate": 0.058959156785243744,
+          "survivor_rate": 0.06960913482652613,
+          "parent_progress_mean": 0.24565347863768977,
+          "parent_progress_median": 0.14558586839148532,
+          "child_centroid_mean": 0.9985934886607113,
+          "child_centroid_median": 1.0347537653025352,
+          "child_dispersion_mean": 0.49971467739896064,
+          "child_coupling_mean": -0.015169301706115782,
+          "child_flip_count_mean": 4.151075977162933
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -3,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529935497,
+          "parent_progress_median": 0.0627007773554806,
+          "child_centroid_mean": 0.9985672008194241,
+          "child_centroid_median": 1.0347871662551307,
+          "child_dispersion_mean": 0.4997146929420935,
+          "child_coupling_mean": -0.015180896611479219,
+          "child_flip_count_mean": 4.151075977162933
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -2,
+          "center_count": 9108,
+          "prime_rate": 0.05808080808080808,
+          "survivor_rate": 0.07169521299956083,
+          "parent_progress_mean": 0.24766830449975946,
+          "parent_progress_median": 0.09937893502499476,
+          "child_centroid_mean": 0.9985653115532601,
+          "child_centroid_median": 1.03487508563086,
+          "child_dispersion_mean": 0.49971470382456984,
+          "child_coupling_mean": -0.01521306497195645,
+          "child_flip_count_mean": 4.151295564339042
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": -1,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529793719,
+          "parent_progress_median": 0.06270077735406282,
+          "child_centroid_mean": 0.9985634222870958,
+          "child_centroid_median": 1.0348693750765283,
+          "child_dispersion_mean": 0.49971471120467914,
+          "child_coupling_mean": -0.015149377199836393,
+          "child_flip_count_mean": 4.150527009222661
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 0,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 1.0,
+          "parent_progress_mean": 0.9496931135124788,
+          "parent_progress_median": 0.949422476345408,
+          "child_centroid_mean": 0.9986591273214247,
+          "child_centroid_median": 1.0349650969464295,
+          "child_dispersion_mean": 0.4997147139226875,
+          "child_coupling_mean": -0.015149656792852776,
+          "child_flip_count_mean": 4.150307422046552
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 1,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529651942,
+          "parent_progress_median": 0.06270077735264505,
+          "child_centroid_mean": 0.998706035205507,
+          "child_centroid_median": 1.0350195733017666,
+          "child_dispersion_mean": 0.4997147224791867,
+          "child_coupling_mean": -0.015130931281824009,
+          "child_flip_count_mean": 4.149868247694335
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 2,
+          "center_count": 9108,
+          "prime_rate": 0.06049626701800615,
+          "survivor_rate": 0.0741106719367589,
+          "parent_progress_mean": 0.2495582021364204,
+          "parent_progress_median": 0.14558586807056256,
+          "child_centroid_mean": 0.9988017402398358,
+          "child_centroid_median": 1.0351152534469352,
+          "child_dispersion_mean": 0.4997147357050545,
+          "child_coupling_mean": -0.015131184740769034,
+          "child_flip_count_mean": 4.149978041282389
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 3,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529510165,
+          "parent_progress_median": 0.06270077735122728,
+          "child_centroid_mean": 0.9987754523985484,
+          "child_centroid_median": 1.035087531564164,
+          "child_dispersion_mean": 0.49971476060712494,
+          "child_coupling_mean": -0.015145073958378998,
+          "child_flip_count_mean": 4.150087834870444
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 4,
+          "center_count": 9108,
+          "prime_rate": 0.06203337725076855,
+          "survivor_rate": 0.07268335529205094,
+          "parent_progress_mean": 0.24758982170656035,
+          "parent_progress_median": 0.09937893501825251,
+          "child_centroid_mean": 0.9988223602826309,
+          "child_centroid_median": 1.0350259988279462,
+          "child_dispersion_mean": 0.4997147843530215,
+          "child_coupling_mean": -0.015127072781948673,
+          "child_flip_count_mean": 4.149538866930171
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 5,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529368388,
+          "parent_progress_median": 0.0627007773498095,
+          "child_centroid_mean": 0.9987960724413436,
+          "child_centroid_median": 1.035003247043894,
+          "child_dispersion_mean": 0.4997148092639171,
+          "child_coupling_mean": -0.015168746012620455,
+          "child_flip_count_mean": 4.149648660518226
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 6,
+          "center_count": 9108,
+          "prime_rate": 0.11275801493192797,
+          "survivor_rate": 0.13482652613087395,
+          "parent_progress_mean": 0.38899738632651265,
+          "parent_progress_median": 0.2562863735551539,
+          "child_centroid_mean": 0.9987453860249331,
+          "child_centroid_median": 1.0350223716106606,
+          "child_dispersion_mean": 0.4997148318342138,
+          "child_coupling_mean": -0.015187850686814417,
+          "child_flip_count_mean": 4.150417215634607
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 7,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529226611,
+          "parent_progress_median": 0.06270077734839172,
+          "child_centroid_mean": 0.9987922939090152,
+          "child_centroid_median": 1.0349458733435943,
+          "child_dispersion_mean": 0.49971485556202505,
+          "child_coupling_mean": -0.015170107420391286,
+          "child_flip_count_mean": 4.150197628458498
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 8,
+          "center_count": 9108,
+          "prime_rate": 0.058410188844971456,
+          "survivor_rate": 0.07092665788317962,
+          "parent_progress_mean": 0.24596043983102397,
+          "parent_progress_median": 0.14558586728059886,
+          "child_centroid_mean": 0.9987904046428514,
+          "child_centroid_median": 1.0346824851106124,
+          "child_dispersion_mean": 0.49971488512542434,
+          "child_coupling_mean": -0.0150931788494344,
+          "child_flip_count_mean": 4.149538866930171
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 9,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077529084835,
+          "parent_progress_median": 0.06270077734697396,
+          "child_centroid_mean": 0.9988373125269338,
+          "child_centroid_median": 1.0346128689137652,
+          "child_dispersion_mean": 0.49971491352650715,
+          "child_coupling_mean": -0.015059984085369453,
+          "child_flip_count_mean": 4.149538866930171
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 10,
+          "center_count": 9108,
+          "prime_rate": 0.07971014492753623,
+          "survivor_rate": 0.09453227931488802,
+          "parent_progress_mean": 0.2850873035512149,
+          "parent_progress_median": 0.09937893501151025,
+          "child_centroid_mean": 0.9988110246856463,
+          "child_centroid_median": 1.0344558647199977,
+          "child_dispersion_mean": 0.49971494543944245,
+          "child_coupling_mean": -0.015076803120775148,
+          "child_flip_count_mean": 4.14975845410628
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 11,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077528943056,
+          "parent_progress_median": 0.06270077734555618,
+          "child_centroid_mean": 0.9988091354194825,
+          "child_centroid_median": 1.034370778786863,
+          "child_dispersion_mean": 0.4997149715258329,
+          "child_coupling_mean": -0.015109179547085134,
+          "child_flip_count_mean": 4.149978041282389
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 12,
+          "center_count": 9108,
+          "prime_rate": 0.12121212121212122,
+          "survivor_rate": 0.1429512516469038,
+          "parent_progress_mean": 0.3935636474654547,
+          "parent_progress_median": 0.25628711989235675,
+          "child_centroid_mean": 0.9987340504279485,
+          "child_centroid_median": 1.0341651576973003,
+          "child_dispersion_mean": 0.4997149964512538,
+          "child_coupling_mean": -0.015005482238791074,
+          "child_flip_count_mean": 4.149538866930171
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 13,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007752880128,
+          "parent_progress_median": 0.0627007773441384,
+          "child_centroid_mean": 0.9987321611617848,
+          "child_centroid_median": 1.0341972300473814,
+          "child_dispersion_mean": 0.4997150120375026,
+          "child_coupling_mean": -0.015005811028284747,
+          "child_flip_count_mean": 4.149648660518226
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 14,
+          "center_count": 9108,
+          "prime_rate": 0.06884057971014493,
+          "survivor_rate": 0.08344312692138779,
+          "parent_progress_mean": 0.26824706349460653,
+          "parent_progress_median": 0.14558587787105914,
+          "child_centroid_mean": 0.9987790690458668,
+          "child_centroid_median": 1.0341908551917927,
+          "child_dispersion_mean": 0.4997150229590738,
+          "child_coupling_mean": -0.014990500305239325,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 15,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077528659503,
+          "parent_progress_median": 0.06270077734272064,
+          "child_centroid_mean": 0.9988747740801956,
+          "child_centroid_median": 1.0342865770616934,
+          "child_dispersion_mean": 0.49971503621800967,
+          "child_coupling_mean": -0.014990741495861526,
+          "child_flip_count_mean": 4.14877031181379
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 16,
+          "center_count": 9108,
+          "prime_rate": 0.06159420289855073,
+          "survivor_rate": 0.07345191040843214,
+          "parent_progress_mean": 0.24683721355123509,
+          "parent_progress_median": 0.099378935004768,
+          "child_centroid_mean": 0.998921681964278,
+          "child_centroid_median": 1.0342947197018484,
+          "child_dispersion_mean": 0.49971505765392066,
+          "child_coupling_mean": -0.014957226602518131,
+          "child_flip_count_mean": 4.14877031181379
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 17,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077528517726,
+          "parent_progress_median": 0.06270077734130286,
+          "child_centroid_mean": 0.9988953941229907,
+          "child_centroid_median": 1.0342197751565025,
+          "child_dispersion_mean": 0.4997150837703661,
+          "child_coupling_mean": -0.014937705852946596,
+          "child_flip_count_mean": 4.14877031181379
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 18,
+          "center_count": 9108,
+          "prime_rate": 0.11846728151075978,
+          "survivor_rate": 0.14086517347386912,
+          "parent_progress_mean": 0.39428482969031625,
+          "parent_progress_median": 0.2562876023894177,
+          "child_centroid_mean": 0.9989667005821963,
+          "child_centroid_median": 1.0342900966401165,
+          "child_dispersion_mean": 0.4997151040504512,
+          "child_coupling_mean": -0.01492085794528827,
+          "child_flip_count_mean": 4.148550724637682
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 19,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077528375947,
+          "parent_progress_median": 0.0627007773398851,
+          "child_centroid_mean": 0.9989404127409091,
+          "child_centroid_median": 1.0343125427131694,
+          "child_dispersion_mean": 0.4997151254951987,
+          "child_coupling_mean": -0.014931822745969214,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 20,
+          "center_count": 9108,
+          "prime_rate": 0.08234519104084322,
+          "survivor_rate": 0.09771629336846728,
+          "parent_progress_mean": 0.28989186273883344,
+          "parent_progress_median": 0.17602233449648375,
+          "child_centroid_mean": 0.998938523474745,
+          "child_centroid_median": 1.0343962782092184,
+          "child_dispersion_mean": 0.4997151446026919,
+          "child_coupling_mean": -0.01496428126631559,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 21,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007752823417,
+          "parent_progress_median": 0.06270077733846732,
+          "child_centroid_mean": 0.9990098299339504,
+          "child_centroid_median": 1.0344905724405364,
+          "child_dispersion_mean": 0.4997151637159902,
+          "child_coupling_mean": -0.014961189595581946,
+          "child_flip_count_mean": 4.149429073342117
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 22,
+          "center_count": 9108,
+          "prime_rate": 0.06796223100570926,
+          "survivor_rate": 0.07981993851559069,
+          "parent_progress_mean": 0.2561152745370549,
+          "parent_progress_median": 0.09937893499802575,
+          "child_centroid_mean": 0.9989103463672934,
+          "child_centroid_median": 1.0343182413605523,
+          "child_dispersion_mean": 0.4997151875033474,
+          "child_coupling_mean": -0.01495661867504361,
+          "child_flip_count_mean": 4.149538866930171
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 23,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077528092394,
+          "parent_progress_median": 0.06270077733704954,
+          "child_centroid_mean": 0.9988596599508829,
+          "child_centroid_median": 1.0342652615190184,
+          "child_dispersion_mean": 0.4997151996158324,
+          "child_coupling_mean": -0.014849638326400828,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 24,
+          "center_count": 9108,
+          "prime_rate": 0.12198067632850242,
+          "survivor_rate": 0.14591567852437418,
+          "parent_progress_mean": 0.39661001025421655,
+          "parent_progress_median": 0.256287461603428,
+          "child_centroid_mean": 0.9987845749593492,
+          "child_centroid_median": 1.0341341457927502,
+          "child_dispersion_mean": 0.4997152093985368,
+          "child_coupling_mean": -0.014820175524869427,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 25,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077527950615,
+          "parent_progress_median": 0.06270077733563177,
+          "child_centroid_mean": 0.998758287118062,
+          "child_centroid_median": 1.0339872270060018,
+          "child_dispersion_mean": 0.4997152145202562,
+          "child_coupling_mean": -0.014808001105098289,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 26,
+          "center_count": 9108,
+          "prime_rate": 0.06225296442687747,
+          "survivor_rate": 0.07619675010979358,
+          "parent_progress_mean": 0.254437699782425,
+          "parent_progress_median": 0.14558586834211262,
+          "child_centroid_mean": 0.9988051950021444,
+          "child_centroid_median": 1.0339925584723524,
+          "child_dispersion_mean": 0.4997152149682552,
+          "child_coupling_mean": -0.014770814454339452,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 27,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077527808839,
+          "parent_progress_median": 0.062700777334214,
+          "child_centroid_mean": 0.9987545085857338,
+          "child_centroid_median": 1.0340412792000149,
+          "child_dispersion_mean": 0.49971522008294295,
+          "child_coupling_mean": -0.014726287082226739,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 28,
+          "center_count": 9108,
+          "prime_rate": 0.06807202459376373,
+          "survivor_rate": 0.08333333333333333,
+          "parent_progress_mean": 0.2681416694240441,
+          "parent_progress_median": 0.09937893499128347,
+          "child_centroid_mean": 0.9988258150449394,
+          "child_centroid_median": 1.034137001069916,
+          "child_dispersion_mean": 0.4997152181894538,
+          "child_coupling_mean": -0.01471500238056807,
+          "child_flip_count_mean": 4.14877031181379
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 29,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077527667062,
+          "parent_progress_median": 0.06270077733279622,
+          "child_centroid_mean": 0.9988727229290215,
+          "child_centroid_median": 1.034232722939817,
+          "child_dispersion_mean": 0.4997152221382563,
+          "child_coupling_mean": -0.01472978533257954,
+          "child_flip_count_mean": 4.148550724637682
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 30,
+          "center_count": 9108,
+          "prime_rate": 0.15974967061923584,
+          "survivor_rate": 0.1919191919191919,
+          "parent_progress_mean": 0.475638477687244,
+          "parent_progress_median": 0.348275461407388,
+          "child_centroid_mean": 0.998919630813104,
+          "child_centroid_median": 1.0343284448097179,
+          "child_dispersion_mean": 0.4997152330920079,
+          "child_coupling_mean": -0.014731788314663591,
+          "child_flip_count_mean": 4.149099692577954
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 31,
+          "center_count": 9108,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077527525285,
+          "parent_progress_median": 0.06270077733137844,
+          "child_centroid_mean": 0.9989909372723096,
+          "child_centroid_median": 1.034424166679619,
+          "child_dispersion_mean": 0.49971525104657477,
+          "child_coupling_mean": -0.014758884654738466,
+          "child_flip_count_mean": 4.149209486166008
+        },
+        {
+          "event": "Late-composite-centred",
+          "offset": 32,
+          "center_count": 9108,
+          "prime_rate": 0.05764163372859025,
+          "survivor_rate": 0.06949934123847168,
+          "parent_progress_mean": 0.2471569814642409,
+          "parent_progress_median": 0.14558586802118983,
+          "child_centroid_mean": 0.9989890480061456,
+          "child_centroid_median": 1.0343829632328516,
+          "child_dispersion_mean": 0.49971527950810385,
+          "child_coupling_mean": -0.014718992360564537,
+          "child_flip_count_mean": 4.148880105401845
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -32,
+          "center_count": 45162,
+          "prime_rate": 0.058101944112306805,
+          "survivor_rate": 0.069726761436606,
+          "parent_progress_mean": 0.2458055971172057,
+          "parent_progress_median": 0.09937893375407937,
+          "child_centroid_mean": 0.9997166235267714,
+          "child_centroid_median": 1.0326797584426577,
+          "child_dispersion_mean": 0.49950819818566894,
+          "child_coupling_mean": -0.014135641896708363,
+          "child_flip_count_mean": 4.129577963774855
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -31,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077267432966,
+          "parent_progress_median": 0.06270077330419721,
+          "child_centroid_mean": 0.999728678878205,
+          "child_centroid_median": 1.0326974553708415,
+          "child_dispersion_mean": 0.49950816165013845,
+          "child_coupling_mean": -0.014120472468637018,
+          "child_flip_count_mean": 4.129356538682964
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -30,
+          "center_count": 45162,
+          "prime_rate": 0.1611088968601922,
+          "survivor_rate": 0.1933262477303928,
+          "parent_progress_mean": 0.477695577396863,
+          "parent_progress_median": 0.3482762737809968,
+          "child_centroid_mean": 0.9997456547872363,
+          "child_centroid_median": 1.0327276008860529,
+          "child_dispersion_mean": 0.4995081281751226,
+          "child_coupling_mean": -0.014125975095966527,
+          "child_flip_count_mean": 4.129290111155396
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -29,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077267291191,
+          "parent_progress_median": 0.06270077330277946,
+          "child_centroid_mean": 0.9997470993908466,
+          "child_centroid_median": 1.032698218708167,
+          "child_dispersion_mean": 0.49950849370142947,
+          "child_coupling_mean": -0.01410321186420971,
+          "child_flip_count_mean": 4.128957973517559
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -28,
+          "center_count": 45162,
+          "prime_rate": 0.07147601966254816,
+          "survivor_rate": 0.08520437535981577,
+          "parent_progress_mean": 0.26820465206728844,
+          "parent_progress_median": 0.14558587727858416,
+          "child_centroid_mean": 0.999729631395771,
+          "child_centroid_median": 1.0327181066122593,
+          "child_dispersion_mean": 0.499508460226594,
+          "child_coupling_mean": -0.014124639304644752,
+          "child_flip_count_mean": 4.12944510871972
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -27,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077267149413,
+          "parent_progress_median": 0.06270077330136167,
+          "child_centroid_mean": 0.9997121634006952,
+          "child_centroid_median": 1.0326437657539684,
+          "child_dispersion_mean": 0.4995084241633332,
+          "child_coupling_mean": -0.014111716531732387,
+          "child_flip_count_mean": 4.1292458261370175
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -26,
+          "center_count": 45162,
+          "prime_rate": 0.06390328151986183,
+          "survivor_rate": 0.07645808423010496,
+          "parent_progress_mean": 0.2541495009354838,
+          "parent_progress_median": 0.09937893374733711,
+          "child_centroid_mean": 0.9997586626543883,
+          "child_centroid_median": 1.032664293776579,
+          "child_dispersion_mean": 0.4995083873945034,
+          "child_coupling_mean": -0.014109159002668039,
+          "child_flip_count_mean": 4.129112971081883
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -25,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077267007636,
+          "parent_progress_median": 0.06270077329994392,
+          "child_centroid_mean": 0.9997313535441174,
+          "child_centroid_median": 1.0325826089341739,
+          "child_dispersion_mean": 0.49950835557521883,
+          "child_coupling_mean": -0.014098313530200593,
+          "child_flip_count_mean": 4.129068686063505
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -24,
+          "center_count": 45162,
+          "prime_rate": 0.1185509941986626,
+          "survivor_rate": 0.14315132190779858,
+          "parent_progress_mean": 0.39359045244312946,
+          "parent_progress_median": 0.2562870361041337,
+          "child_centroid_mean": 0.9997335677794319,
+          "child_centroid_median": 1.0325904114283455,
+          "child_dispersion_mean": 0.4995083218744495,
+          "child_coupling_mean": -0.0141135615251446,
+          "child_flip_count_mean": 4.129068686063505
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -23,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077266865857,
+          "parent_progress_median": 0.06270077329852614,
+          "child_centroid_mean": 0.999755464245137,
+          "child_centroid_median": 1.03256004237929,
+          "child_dispersion_mean": 0.4995082893519399,
+          "child_coupling_mean": -0.014089408034973303,
+          "child_flip_count_mean": 4.128802975953235
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -22,
+          "center_count": 45162,
+          "prime_rate": 0.06689252026039591,
+          "survivor_rate": 0.08059873344847437,
+          "parent_progress_mean": 0.2589645618201087,
+          "parent_progress_median": 0.14558587888320063,
+          "child_centroid_mean": 0.9997970429412323,
+          "child_centroid_median": 1.0326379897307016,
+          "child_dispersion_mean": 0.4995082572988772,
+          "child_coupling_mean": -0.01407894280479997,
+          "child_flip_count_mean": 4.1286701208981
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -21,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726672408,
+          "parent_progress_median": 0.06270077329710837,
+          "child_centroid_mean": 0.9997844955037543,
+          "child_centroid_median": 1.032590510464414,
+          "child_dispersion_mean": 0.499508229012031,
+          "child_coupling_mean": -0.014072831901773386,
+          "child_flip_count_mean": 4.128802975953235
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -20,
+          "center_count": 45162,
+          "prime_rate": 0.08011159824631327,
+          "survivor_rate": 0.09671848013816926,
+          "parent_progress_mean": 0.2882669497826816,
+          "parent_progress_median": 0.09937893374059487,
+          "child_centroid_mean": 0.9998113125270569,
+          "child_centroid_median": 1.032631393860207,
+          "child_dispersion_mean": 0.4995082002558472,
+          "child_coupling_mean": -0.014083759846624041,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -19,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077266582304,
+          "parent_progress_median": 0.0627007732956906,
+          "child_centroid_mean": 0.9997790828591884,
+          "child_centroid_median": 1.0326031611395234,
+          "child_dispersion_mean": 0.49950817338097003,
+          "child_coupling_mean": -0.014104163220939324,
+          "child_flip_count_mean": 4.1289801160267485
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -18,
+          "center_count": 45162,
+          "prime_rate": 0.12134095035649439,
+          "survivor_rate": 0.14523271777157787,
+          "parent_progress_mean": 0.3950335817180213,
+          "parent_progress_median": 0.2562871635846544,
+          "child_centroid_mean": 0.9998009793248934,
+          "child_centroid_median": 1.0325861285125968,
+          "child_dispersion_mean": 0.4995081432115586,
+          "child_coupling_mean": -0.014094091921246025,
+          "child_flip_count_mean": 4.129002258535937
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -17,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077266440527,
+          "parent_progress_median": 0.06270077329427283,
+          "child_centroid_mean": 0.9998228757905984,
+          "child_centroid_median": 1.0326534956829767,
+          "child_dispersion_mean": 0.49950811634116876,
+          "child_coupling_mean": -0.014092204182871841,
+          "child_flip_count_mean": 4.129046543554316
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -16,
+          "center_count": 45162,
+          "prime_rate": 0.05978477481068155,
+          "survivor_rate": 0.07220672246578982,
+          "parent_progress_mean": 0.24634852089873896,
+          "parent_progress_median": 0.14558587755013463,
+          "child_centroid_mean": 0.9998250900259131,
+          "child_centroid_median": 1.032698218708167,
+          "child_dispersion_mean": 0.49950809299988214,
+          "child_coupling_mean": -0.014071613165935113,
+          "child_flip_count_mean": 4.128847260971614
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -15,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726629875,
+          "parent_progress_median": 0.06270077329285506,
+          "child_centroid_mean": 0.9998273042612276,
+          "child_centroid_median": 1.032729320807634,
+          "child_dispersion_mean": 0.4995080694240958,
+          "child_coupling_mean": -0.014075501345030177,
+          "child_flip_count_mean": 4.128802975953235
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -14,
+          "center_count": 45162,
+          "prime_rate": 0.07114388202471104,
+          "survivor_rate": 0.08502723528630264,
+          "parent_progress_mean": 0.2680957195696557,
+          "parent_progress_median": 0.0993789337338526,
+          "child_centroid_mean": 0.99983443905414,
+          "child_centroid_median": 1.0327222245443144,
+          "child_dispersion_mean": 0.4995080463208489,
+          "child_coupling_mean": -0.014084341195977698,
+          "child_flip_count_mean": 4.128692263407289
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -13,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077266156973,
+          "parent_progress_median": 0.06270077329143728,
+          "child_centroid_mean": 0.9998169710590643,
+          "child_centroid_median": 1.0327164370964041,
+          "child_dispersion_mean": 0.4995080241557786,
+          "child_coupling_mean": -0.014074743403768745,
+          "child_flip_count_mean": 4.128559408352155
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -12,
+          "center_count": 45162,
+          "prime_rate": 0.11673530844515301,
+          "survivor_rate": 0.14118063858996502,
+          "parent_progress_mean": 0.39263304863077186,
+          "parent_progress_median": 0.25628708590410854,
+          "child_centroid_mean": 0.9998191852943791,
+          "child_centroid_median": 1.0327178734759832,
+          "child_dispersion_mean": 0.49950800010945073,
+          "child_coupling_mean": -0.014095892237870673,
+          "child_flip_count_mean": 4.1288694034808024
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -11,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077266015196,
+          "parent_progress_median": 0.06270077329001952,
+          "child_centroid_mean": 0.9998206298970652,
+          "child_centroid_median": 1.0327451706150876,
+          "child_dispersion_mean": 0.49950837364932077,
+          "child_coupling_mean": -0.01410570494937917,
+          "child_flip_count_mean": 4.12893583100837
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -10,
+          "center_count": 45162,
+          "prime_rate": 0.07763163721712944,
+          "survivor_rate": 0.09370709888844604,
+          "parent_progress_mean": 0.28679981977445945,
+          "parent_progress_median": 0.17602235685218087,
+          "child_centroid_mean": 0.999813003016261,
+          "child_centroid_median": 1.0326162180967522,
+          "child_dispersion_mean": 0.49950834913138686,
+          "child_coupling_mean": -0.014115129682635357,
+          "child_flip_count_mean": 4.129002258535937
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -9,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726587342,
+          "parent_progress_median": 0.06270077328860174,
+          "child_centroid_mean": 0.9997906144626637,
+          "child_centroid_median": 1.0325095312094623,
+          "child_dispersion_mean": 0.49950832696769987,
+          "child_coupling_mean": -0.014100458772757025,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -8,
+          "center_count": 45162,
+          "prime_rate": 0.05949692219122271,
+          "survivor_rate": 0.07127673707984589,
+          "parent_progress_mean": 0.24612126794985345,
+          "parent_progress_median": 0.09937893372711035,
+          "child_centroid_mean": 0.9997731464666642,
+          "child_centroid_median": 1.0324627162444322,
+          "child_dispersion_mean": 0.49950830574980304,
+          "child_coupling_mean": -0.014098013417358429,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -7,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077265731643,
+          "parent_progress_median": 0.06270077328718396,
+          "child_centroid_mean": 0.9997556784706646,
+          "child_centroid_median": 1.0324883147028558,
+          "child_dispersion_mean": 0.49950828217896515,
+          "child_coupling_mean": -0.014078722346275298,
+          "child_flip_count_mean": 4.128913688499181
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -6,
+          "center_count": 45162,
+          "prime_rate": 0.12107524024622471,
+          "survivor_rate": 0.14381559718347284,
+          "parent_progress_mean": 0.39339085241708455,
+          "parent_progress_median": 0.25628715284628245,
+          "child_centroid_mean": 0.9997578927050554,
+          "child_centroid_median": 1.0324301776652307,
+          "child_dispersion_mean": 0.49950825625054374,
+          "child_coupling_mean": -0.014067189012038999,
+          "child_flip_count_mean": 4.128625835879722
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -5,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077265589866,
+          "parent_progress_median": 0.0627007732857662,
+          "child_centroid_mean": 0.9997404247090557,
+          "child_centroid_median": 1.0324537913774816,
+          "child_dispersion_mean": 0.4995082307923848,
+          "child_coupling_mean": -0.01406548119900916,
+          "child_flip_count_mean": 4.128647978388911
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -4,
+          "center_count": 45162,
+          "prime_rate": 0.05951906470041185,
+          "survivor_rate": 0.07202958239227669,
+          "parent_progress_mean": 0.24766808056685397,
+          "parent_progress_median": 0.14558588145058787,
+          "child_centroid_mean": 0.9997475595010442,
+          "child_centroid_median": 1.0324756109983748,
+          "child_dispersion_mean": 0.4995082050967763,
+          "child_coupling_mean": -0.014086528185002898,
+          "child_flip_count_mean": 4.128780833444046
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -3,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077265448087,
+          "parent_progress_median": 0.06270077328434843,
+          "child_centroid_mean": 0.9997743765234229,
+          "child_centroid_median": 1.032471336823622,
+          "child_dispersion_mean": 0.49950818057848756,
+          "child_coupling_mean": -0.014078300026516706,
+          "child_flip_count_mean": 4.1287365484256675
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -2,
+          "center_count": 45162,
+          "prime_rate": 0.05947477968203357,
+          "survivor_rate": 0.07167530224525043,
+          "parent_progress_mean": 0.24665162578054567,
+          "parent_progress_median": 0.0993789337203681,
+          "child_centroid_mean": 0.9997962729882042,
+          "child_centroid_median": 1.0325461088468941,
+          "child_dispersion_mean": 0.4995081584128941,
+          "child_coupling_mean": -0.01408622701556168,
+          "child_flip_count_mean": 4.128647978388911
+        },
+        {
+          "event": "Prime-centred",
+          "offset": -1,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726530631,
+          "parent_progress_median": 0.06270077328293067,
+          "child_centroid_mean": 0.9997886461073997,
+          "child_centroid_median": 1.0325004991488447,
+          "child_dispersion_mean": 0.49950813860053495,
+          "child_coupling_mean": -0.014073416778345633,
+          "child_flip_count_mean": 4.128603693370533
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 0,
+          "center_count": 45162,
+          "prime_rate": 1.0,
+          "survivor_rate": 1.0,
+          "parent_progress_mean": 1.0,
+          "parent_progress_median": 1.0,
+          "child_centroid_mean": 0.9998843509361445,
+          "child_centroid_median": 1.0325962210187456,
+          "child_dispersion_mean": 0.4995081190211898,
+          "child_coupling_mean": -0.014073481070575829,
+          "child_flip_count_mean": 4.1286701208981
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 1,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077265164534,
+          "parent_progress_median": 0.06270077328151288,
+          "child_centroid_mean": 0.9998718034977426,
+          "child_centroid_median": 1.03263171858825,
+          "child_dispersion_mean": 0.49950810932926837,
+          "child_coupling_mean": -0.0140752812321698,
+          "child_flip_count_mean": 4.1286701208981
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 2,
+          "center_count": 45162,
+          "prime_rate": 0.05947477968203357,
+          "survivor_rate": 0.07118816704308932,
+          "parent_progress_mean": 0.24564011103231043,
+          "parent_progress_median": 0.14558587722921135,
+          "child_centroid_mean": 0.9998592560593406,
+          "child_centroid_median": 1.032615345585512,
+          "child_dispersion_mean": 0.49950809940136254,
+          "child_coupling_mean": -0.014076816933503895,
+          "child_flip_count_mean": 4.128515123333776
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 3,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077265022757,
+          "parent_progress_median": 0.06270077328009512,
+          "child_centroid_mean": 0.9998909936393168,
+          "child_centroid_median": 1.0326551539388968,
+          "child_dispersion_mean": 0.49950808947499276,
+          "child_coupling_mean": -0.01408219569181925,
+          "child_flip_count_mean": 4.128448695806209
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 4,
+          "center_count": 45162,
+          "prime_rate": 0.05951906470041185,
+          "survivor_rate": 0.07140959213498074,
+          "parent_progress_mean": 0.2456714107448913,
+          "parent_progress_median": 0.09937893371362583,
+          "child_centroid_mean": 0.9998882873161099,
+          "child_centroid_median": 1.032605352115432,
+          "child_dispersion_mean": 0.49950808143006326,
+          "child_coupling_mean": -0.01409321310118183,
+          "child_flip_count_mean": 4.128581550861344
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 5,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726488098,
+          "parent_progress_median": 0.06270077327867735,
+          "child_centroid_mean": 0.9999094141482628,
+          "child_centroid_median": 1.0326081083565293,
+          "child_dispersion_mean": 0.49950846955822875,
+          "child_coupling_mean": -0.014110538205056427,
+          "child_flip_count_mean": 4.128913688499181
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 6,
+          "center_count": 45162,
+          "prime_rate": 0.12107524024622471,
+          "survivor_rate": 0.14370488463752712,
+          "parent_progress_mean": 0.39446275433759853,
+          "parent_progress_median": 0.2562870199967732,
+          "child_centroid_mean": 0.999872263920949,
+          "child_centroid_median": 1.0326413112369879,
+          "child_dispersion_mean": 0.49950846339608995,
+          "child_coupling_mean": -0.014090601408544384,
+          "child_flip_count_mean": 4.128758690934856
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 7,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077264739203,
+          "parent_progress_median": 0.06270077327725956,
+          "child_centroid_mean": 0.9998646370392208,
+          "child_centroid_median": 1.0326804008028914,
+          "child_dispersion_mean": 0.49950845370572566,
+          "child_coupling_mean": -0.014093468023857199,
+          "child_flip_count_mean": 4.128913688499181
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 8,
+          "center_count": 45162,
+          "prime_rate": 0.05949692219122271,
+          "survivor_rate": 0.07256100261281609,
+          "parent_progress_mean": 0.2475686747831409,
+          "parent_progress_median": 0.1455858788338278,
+          "child_centroid_mean": 0.9998570101574924,
+          "child_centroid_median": 1.0325720501989046,
+          "child_dispersion_mean": 0.49950844095358354,
+          "child_coupling_mean": -0.014090760087861996,
+          "child_flip_count_mean": 4.129024401045126
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 9,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077264597426,
+          "parent_progress_median": 0.06270077327584181,
+          "child_centroid_mean": 0.9998493832757642,
+          "child_centroid_median": 1.0325903123922773,
+          "child_dispersion_mean": 0.49950842655440897,
+          "child_coupling_mean": -0.01407091969765921,
+          "child_flip_count_mean": 4.128714405916479
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 10,
+          "center_count": 45162,
+          "prime_rate": 0.07763163721712944,
+          "survivor_rate": 0.09403923652628315,
+          "parent_progress_mean": 0.28679114245349896,
+          "parent_progress_median": 0.09937893370688358,
+          "child_centroid_mean": 0.9998565180668286,
+          "child_centroid_median": 1.0325650110420588,
+          "child_dispersion_mean": 0.4995084130971955,
+          "child_coupling_mean": -0.014061811039308396,
+          "child_flip_count_mean": 4.128847260971614
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 11,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726445565,
+          "parent_progress_median": 0.06270077327442403,
+          "child_centroid_mean": 0.9998685734154907,
+          "child_centroid_median": 1.0326319207408845,
+          "child_dispersion_mean": 0.49950840317208367,
+          "child_coupling_mean": -0.014074286788741442,
+          "child_flip_count_mean": 4.129002258535937
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 12,
+          "center_count": 45162,
+          "prime_rate": 0.11673530844515301,
+          "survivor_rate": 0.14237633408617864,
+          "parent_progress_mean": 0.3934286868225643,
+          "parent_progress_median": 0.25628714870856406,
+          "child_centroid_mean": 0.9998560259761646,
+          "child_centroid_median": 1.0326179037544727,
+          "child_dispersion_mean": 0.4995083977219161,
+          "child_coupling_mean": -0.014081704451642927,
+          "child_flip_count_mean": 4.1288694034808024
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 13,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077264313871,
+          "parent_progress_median": 0.06270077327300627,
+          "child_centroid_mean": 0.9998533196520342,
+          "child_centroid_median": 1.0325615515719493,
+          "child_dispersion_mean": 0.49950839345023385,
+          "child_coupling_mean": -0.014060654225571899,
+          "child_flip_count_mean": 4.128802975953235
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 14,
+          "center_count": 45162,
+          "prime_rate": 0.07114388202471104,
+          "survivor_rate": 0.08507152030468093,
+          "parent_progress_mean": 0.2688486430163167,
+          "parent_progress_median": 0.1455858775007618,
+          "child_centroid_mean": 0.9998210899823178,
+          "child_centroid_median": 1.0326046878141746,
+          "child_dispersion_mean": 0.49950839082378906,
+          "child_coupling_mean": -0.014072040643597789,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 15,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077264172094,
+          "parent_progress_median": 0.06270077327158849,
+          "child_centroid_mean": 0.9998429864461751,
+          "child_centroid_median": 1.0326691136942805,
+          "child_dispersion_mean": 0.4995083865490902,
+          "child_coupling_mean": -0.01407012460330264,
+          "child_flip_count_mean": 4.1289801160267485
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 16,
+          "center_count": 45162,
+          "prime_rate": 0.05978477481068155,
+          "survivor_rate": 0.07136530711660245,
+          "parent_progress_mean": 0.24597603951142843,
+          "parent_progress_median": 0.09937893370014134,
+          "child_centroid_mean": 0.9998599623524346,
+          "child_centroid_median": 1.0327435069985464,
+          "child_dispersion_mean": 0.4995083841554942,
+          "child_coupling_mean": -0.014049439011347918,
+          "child_flip_count_mean": 4.1289801160267485
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 17,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077264030317,
+          "parent_progress_median": 0.06270077327017072,
+          "child_centroid_mean": 0.9998720177010967,
+          "child_centroid_median": 1.03274824438822,
+          "child_dispersion_mean": 0.499508381761133,
+          "child_coupling_mean": -0.014049018697684252,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 18,
+          "center_count": 45162,
+          "prime_rate": 0.12134095035649439,
+          "survivor_rate": 0.14496700766130818,
+          "parent_progress_mean": 0.3939316772414585,
+          "parent_progress_median": 0.25628708176641635,
+          "child_centroid_mean": 0.9998742319345637,
+          "child_centroid_median": 1.0327832828067305,
+          "child_dispersion_mean": 0.49950837819608285,
+          "child_coupling_mean": -0.014049961503768908,
+          "child_flip_count_mean": 4.128780833444046
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 19,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726388854,
+          "parent_progress_median": 0.06270077326875295,
+          "child_centroid_mean": 0.9999010489560185,
+          "child_centroid_median": 1.0328438171948608,
+          "child_dispersion_mean": 0.49950837369044965,
+          "child_coupling_mean": -0.014053127827647149,
+          "child_flip_count_mean": 4.1287365484256675
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 20,
+          "center_count": 45162,
+          "prime_rate": 0.08011159824631327,
+          "survivor_rate": 0.09552278464195563,
+          "parent_progress_mean": 0.28785125189207444,
+          "parent_progress_median": 0.17602236144868785,
+          "child_centroid_mean": 0.9999131043046805,
+          "child_centroid_median": 1.0328775770380485,
+          "child_dispersion_mean": 0.49950837059953895,
+          "child_coupling_mean": -0.014060078894045938,
+          "child_flip_count_mean": 4.128847260971614
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 21,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077263746764,
+          "parent_progress_median": 0.06270077326733518,
+          "child_centroid_mean": 0.9999153185381474,
+          "child_centroid_median": 1.0328980302073298,
+          "child_dispersion_mean": 0.4995083684487673,
+          "child_coupling_mean": -0.014066222072464385,
+          "child_flip_count_mean": 4.128891545989991
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 22,
+          "center_count": 45162,
+          "prime_rate": 0.06689252026039591,
+          "survivor_rate": 0.0808201585403658,
+          "parent_progress_mean": 0.25839597740730114,
+          "parent_progress_median": 0.09937893369339906,
+          "child_centroid_mean": 0.9999224533292117,
+          "child_centroid_median": 1.0329236375114559,
+          "child_dispersion_mean": 0.49950836606458254,
+          "child_coupling_mean": -0.014070972048815656,
+          "child_flip_count_mean": 4.12893583100837
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 23,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077263604987,
+          "parent_progress_median": 0.06270077326591741,
+          "child_centroid_mean": 0.9999197470050811,
+          "child_centroid_median": 1.032947135184337,
+          "child_dispersion_mean": 0.49950836250060865,
+          "child_coupling_mean": -0.014080647491594413,
+          "child_flip_count_mean": 4.128802975953235
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 24,
+          "center_count": 45162,
+          "prime_rate": 0.1185509941986626,
+          "survivor_rate": 0.1409592134980736,
+          "parent_progress_mean": 0.3911350864171612,
+          "parent_progress_median": 0.2562867266697544,
+          "child_centroid_mean": 0.9999268817961456,
+          "child_centroid_median": 1.0328257158199439,
+          "child_dispersion_mean": 0.4995083579931904,
+          "child_coupling_mean": -0.014046043404921537,
+          "child_flip_count_mean": 4.128492980824587
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 25,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.0627007726346321,
+          "parent_progress_median": 0.06270077326449963,
+          "child_centroid_mean": 0.9999143343568198,
+          "child_centroid_median": 1.0328073545905028,
+          "child_dispersion_mean": 0.4995083539572916,
+          "child_coupling_mean": -0.01404593722342434,
+          "child_flip_count_mean": 4.128448695806209
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 26,
+          "center_count": 45162,
+          "prime_rate": 0.06390328151986183,
+          "survivor_rate": 0.07692307692307693,
+          "parent_progress_mean": 0.2547363682189997,
+          "parent_progress_median": 0.14558588140121503,
+          "child_centroid_mean": 0.9999165485902867,
+          "child_centroid_median": 1.032870438845134,
+          "child_dispersion_mean": 0.4995083487440744,
+          "child_coupling_mean": -0.014062770352991966,
+          "child_flip_count_mean": 4.12842655329702
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 27,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077263321433,
+          "parent_progress_median": 0.06270077326308188,
+          "child_centroid_mean": 0.9998990805933631,
+          "child_centroid_median": 1.0328896624479689,
+          "child_dispersion_mean": 0.49950834352995527,
+          "child_coupling_mean": -0.014068003191657887,
+          "child_flip_count_mean": 4.128382268278641
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 28,
+          "center_count": 45162,
+          "prime_rate": 0.07147601966254816,
+          "survivor_rate": 0.08600150569062485,
+          "parent_progress_mean": 0.26922542333271976,
+          "parent_progress_median": 0.09937893368665682,
+          "child_centroid_mean": 0.9999209770572204,
+          "child_centroid_median": 1.0328969220810287,
+          "child_dispersion_mean": 0.4995083366701113,
+          "child_coupling_mean": -0.01408237319228372,
+          "child_flip_count_mean": 4.12840441078783
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 29,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077263179656,
+          "parent_progress_median": 0.0627007732616641,
+          "child_centroid_mean": 0.999897818870071,
+          "child_centroid_median": 1.0328392817207515,
+          "child_dispersion_mean": 0.4995087290479801,
+          "child_coupling_mean": -0.014095804781121594,
+          "child_flip_count_mean": 4.128470838315398
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 30,
+          "center_count": 45162,
+          "prime_rate": 0.1611088968601922,
+          "survivor_rate": 0.19330410522120367,
+          "parent_progress_mean": 0.4769404189308483,
+          "parent_progress_median": 0.3482758836879293,
+          "child_centroid_mean": 0.9998606686418333,
+          "child_centroid_median": 1.032801866891014,
+          "child_dispersion_mean": 0.4995087228989992,
+          "child_coupling_mean": -0.014083465022779459,
+          "child_flip_count_mean": 4.128470838315398
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 31,
+          "center_count": 45162,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "parent_progress_mean": 0.06270077263037879,
+          "parent_progress_median": 0.06270077326024631,
+          "child_centroid_mean": 0.9998424310113576,
+          "child_centroid_median": 1.0327769079511415,
+          "child_dispersion_mean": 0.4995091115130338,
+          "child_coupling_mean": -0.014063615122063677,
+          "child_flip_count_mean": 4.128448695806209
+        },
+        {
+          "event": "Prime-centred",
+          "offset": 32,
+          "center_count": 45162,
+          "prime_rate": 0.058101944112306805,
+          "survivor_rate": 0.07014746911119968,
+          "parent_progress_mean": 0.24530642827678406,
+          "parent_progress_median": 0.14558587717983856,
+          "child_centroid_mean": 0.9998692480309647,
+          "child_centroid_median": 1.0328491674137674,
+          "child_dispersion_mean": 0.49950910206980426,
+          "child_coupling_mean": -0.014067517029684302,
+          "child_flip_count_mean": 4.128492980824587
+        }
+      ],
+      "child_rank_profile": [
+        {
+          "gate_rank": 1,
+          "series": "Mean across primes",
+          "phase_a": 1.001838704664931,
+          "median_a": 1.0021973709648546,
+          "p10_a": 0.2025897080605858,
+          "p90_a": 1.7955479236423568,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 2,
+          "series": "Mean across primes",
+          "phase_a": 1.0024285023692103,
+          "median_a": 1.0060692953233357,
+          "p10_a": 0.19875746527207327,
+          "p90_a": 1.8002389413264317,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 3,
+          "series": "Mean across primes",
+          "phase_a": 0.9975063372293866,
+          "median_a": 0.9964628841833565,
+          "p10_a": 0.2009280964454863,
+          "p90_a": 1.7998851839448884,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 4,
+          "series": "Mean across primes",
+          "phase_a": 1.0065854084794557,
+          "median_a": 1.010000478491794,
+          "p10_a": 0.2020192353701134,
+          "p90_a": 1.7996554859084166,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 5,
+          "series": "Mean across primes",
+          "phase_a": 0.9910958749403936,
+          "median_a": 0.9853095989710519,
+          "p10_a": 0.19710019913771964,
+          "p90_a": 1.7958656326075162,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 6,
+          "series": "Mean across primes",
+          "phase_a": 1.0057376586284683,
+          "median_a": 1.0080892212176817,
+          "p10_a": 0.20203905812942746,
+          "p90_a": 1.7979130881116596,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 7,
+          "series": "Mean across primes",
+          "phase_a": 0.9921162027437757,
+          "median_a": 0.9849159597971082,
+          "p10_a": 0.19757698373692656,
+          "p90_a": 1.7954795783577668,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 8,
+          "series": "Mean across primes",
+          "phase_a": 1.0008429763282793,
+          "median_a": 1.0019639778140785,
+          "p10_a": 0.20403276018966426,
+          "p90_a": 1.798189297245175,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 9,
+          "series": "Mean across primes",
+          "phase_a": 1.0005932443972598,
+          "median_a": 1.0028767320324112,
+          "p10_a": 0.19945342091384188,
+          "p90_a": 1.7997794505441818,
+          "population": "45,166 primes"
+        },
+        {
+          "gate_rank": 1,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.7328587127908643,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 2,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.8997657855743033,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 3,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.18437544850021528,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 4,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 1.435762476673525,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 5,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.07197205340479494,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 6,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 1.3582611193565375,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 7,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.11370276354231525,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 8,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.25410817802903274,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        },
+        {
+          "gate_rank": 9,
+          "series": "Prime 4,000,000,007",
+          "phase_a": 0.2716593949273625,
+          "median_a": null,
+          "p10_a": null,
+          "p90_a": null,
+          "population": "one worked prime"
+        }
+      ],
+      "geometry_population": [
+        {
+          "metric": "Child Centroid",
+          "prime_n": 45166,
+          "prime_mean": 0.99986054553124,
+          "prime_median": 1.032589082825831,
+          "prime_min": 0.4997888890683717,
+          "prime_max": 1.4266385354119782,
+          "composite_n": 9109,
+          "composite_mean": 0.9986143741200683,
+          "composite_median": 1.034945972379663,
+          "standardized_difference": 0.006220659120499397
+        },
+        {
+          "metric": "Child Coupling",
+          "prime_n": 45166,
+          "prime_mean": -0.014075849208425485,
+          "prime_median": 0.011770683757064212,
+          "prime_min": -0.19355258801839126,
+          "prime_max": 0.25894451810015134,
+          "composite_n": 9109,
+          "composite_mean": -0.015149290546992144,
+          "composite_median": 0.00970303847432661,
+          "standardized_difference": 0.009042933013671853
+        },
+        {
+          "metric": "Child Dispersion",
+          "prime_n": 45166,
+          "prime_mean": 0.49951655739995016,
+          "prime_median": 0.49919952295368986,
+          "prime_min": 0.3348143357146818,
+          "prime_max": 0.6651698228625432,
+          "composite_n": 9109,
+          "composite_mean": 0.49972410711388643,
+          "composite_median": 0.4993827518283396,
+          "standardized_difference": -0.0022144959528748115
+        },
+        {
+          "metric": "Child Flip Count",
+          "prime_n": 45166,
+          "prime_mean": 4.128636585041845,
+          "prime_median": 4.0,
+          "prime_min": 1.0,
+          "prime_max": 6.0,
+          "composite_n": 9109,
+          "composite_mean": 4.150290921067077,
+          "composite_median": 4.0,
+          "standardized_difference": -0.014461278011469974
+        },
+        {
+          "metric": "Pooled Child Phase A",
+          "prime_n": 406494,
+          "prime_mean": 0.9998605455312402,
+          "prime_median": 0.9998563699909034,
+          "prime_min": 9.551554515497398e-05,
+          "prime_max": 1.9999044388169525,
+          "composite_n": 81981,
+          "composite_mean": 0.9986143741200683,
+          "composite_median": 0.999952201137613,
+          "standardized_difference": null
+        }
+      ],
+      "worked_prime_children": [
+        {
+          "gate_rank": 1,
+          "gate_q": 20929,
+          "remainder": 7669,
+          "phase_a": 0.7328587127908643,
+          "phase_b": 1.2671412872091357,
+          "signed_orientation": -0.26714128720913566,
+          "coupling_to_next_rank": 0.026776697064077128
+        },
+        {
+          "gate_rank": 2,
+          "gate_q": 20921,
+          "remainder": 9412,
+          "phase_a": 0.8997657855743033,
+          "phase_b": 1.1002342144256967,
+          "signed_orientation": -0.10023421442569669,
+          "coupling_to_next_rank": 0.08175348618589212
+        },
+        {
+          "gate_rank": 3,
+          "gate_q": 20903,
+          "remainder": 1927,
+          "phase_a": 0.18437544850021528,
+          "phase_b": 1.8156245514997846,
+          "signed_orientation": -0.8156245514997847,
+          "coupling_to_next_rank": -0.3554185745972793
+        },
+        {
+          "gate_rank": 4,
+          "gate_q": 20899,
+          "remainder": 15003,
+          "phase_a": 1.435762476673525,
+          "phase_b": 0.5642375233264749,
+          "signed_orientation": 0.4357624766735251,
+          "coupling_to_next_rank": -0.4043997564305724
+        },
+        {
+          "gate_rank": 5,
+          "gate_q": 20897,
+          "remainder": 752,
+          "phase_a": 0.07197205340479494,
+          "phase_b": 1.928027946595205,
+          "signed_orientation": -0.928027946595205,
+          "coupling_to_next_rank": -0.33247633094134715
+        },
+        {
+          "gate_rank": 6,
+          "gate_q": 20887,
+          "remainder": 14185,
+          "phase_a": 1.3582611193565375,
+          "phase_b": 0.6417388806434625,
+          "signed_orientation": 0.3582611193565375,
+          "coupling_to_next_rank": -0.3175258400159359
+        },
+        {
+          "gate_rank": 7,
+          "gate_q": 20879,
+          "remainder": 1187,
+          "phase_a": 0.11370276354231525,
+          "phase_b": 1.8862972364576847,
+          "signed_orientation": -0.8862972364576848,
+          "coupling_to_next_rank": 0.6610818605092557
+        },
+        {
+          "gate_rank": 8,
+          "gate_q": 20873,
+          "remainder": 2652,
+          "phase_a": 0.25410817802903274,
+          "phase_b": 1.7458918219709672,
+          "signed_orientation": -0.7458918219709673,
+          "coupling_to_next_rank": 0.5432633009330663
+        },
+        {
+          "gate_rank": 9,
+          "gate_q": 20857,
+          "remainder": 2833,
+          "phase_a": 0.2716593949273625,
+          "phase_b": 1.7283406050726375,
+          "signed_orientation": -0.7283406050726375,
+          "coupling_to_next_rank": null
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "pn10b_results",
+      "label": "PN10B machine-readable results",
+      "path": "analysis/primes/PN10B_CHILD_PHASE_RESULTS.json"
+    },
+    {
+      "id": "pn10b_protocol",
+      "label": "PN10B frozen protocol",
+      "path": "analysis/primes/PN10B_CHILD_PHASE_PRIME_RANKING_PROTOCOL.md"
+    },
+    {
+      "id": "pn10b_validation",
+      "label": "PN10B independent validation",
+      "path": "analysis/primes/PN10B_CHILD_PHASE_VALIDATION.json"
+    },
+    {
+      "id": "pn10b_metrics_sql",
+      "label": "PN10B fresh model-score query",
+      "path": "analysis/primes/pn10b_report_metrics.sql",
+      "query": {
+        "sql": "SELECT\n  model,\n  feature_count,\n  log_loss_bits,\n  brier,\n  auc,\n  top_decile_lift,\n  calibration_error\nFROM pn10b_metrics\nWHERE stage = 'pooled_D_E_to_fresh_F'\nORDER BY log_loss_bits ASC;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_metrics"
+        ],
+        "description": "Select the reviewed fresh-target model scores in ascending log-loss order.",
+        "filters": [
+          "stage = pooled_D_E_to_fresh_F",
+          "parent cutoff c = 0.90"
+        ],
+        "metric_definitions": [
+          "log_loss_bits = mean binary logarithmic scoring loss per surviving integer",
+          "auc = probability that a randomly chosen prime receives a higher model score than a randomly chosen remaining composite, with ties averaged",
+          "top_decile_lift = prime rate in the highest predicted-probability decile divided by overall survivor prime rate"
+        ]
+      }
+    },
+    {
+      "id": "pn10b_comparisons_sql",
+      "label": "PN10B paired-comparison query",
+      "path": "analysis/primes/pn10b_report_comparisons.sql",
+      "query": {
+        "sql": "SELECT\n  comparison,\n  first_model,\n  second_model,\n  gain_bits_per_event,\n  ci95_low,\n  ci95_high,\n  positive_blocks,\n  blocks,\n  draws\nFROM pn10b_comparisons\nORDER BY comparison ASC;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_comparisons"
+        ],
+        "description": "Select paired fresh-target log-loss gains and registered contiguous-block bootstrap intervals.",
+        "filters": [
+          "fresh interval = [4000000000,4001000000)",
+          "100 contiguous blocks",
+          "2000 bootstrap draws",
+          "seed = 20260720"
+        ],
+        "metric_definitions": [
+          "gain_bits_per_event = second-model log loss minus first-model log loss; positive values favor the first named model",
+          "ci95_low and ci95_high = percentile 95% interval from resampling 100 contiguous target blocks"
+        ]
+      }
+    },
+    {
+      "id": "pn10b_geometry_results",
+      "label": "PN10B post-hoc geometry results",
+      "path": "analysis/primes/PN10B_EVENT_GEOMETRY_RESULTS.json"
+    },
+    {
+      "id": "pn10b_geometry_trace",
+      "label": "PN10B event-centred trace",
+      "path": "analysis/primes/PN10B_EVENT_CENTERED_TRACES.csv"
+    },
+    {
+      "id": "pn10b_geometry_examples",
+      "label": "PN10B worked prime child vectors",
+      "path": "analysis/primes/PN10B_PRIME_CHILD_EXAMPLES.csv"
+    },
+    {
+      "id": "pn10b_geometry_validation",
+      "label": "PN10B geometry validation",
+      "path": "analysis/primes/PN10B_EVENT_GEOMETRY_VALIDATION.json"
+    },
+    {
+      "id": "pn10b_geometry_trace_query",
+      "label": "PN10B event-trace query",
+      "path": "analysis/primes/pn10b_report_event_trace.sql",
+      "query": {
+        "sql": "SELECT\n    event,\n    offset,\n    center_count,\n    prime_rate,\n    survivor_rate,\n    parent_progress_mean,\n    parent_progress_median,\n    child_centroid_mean,\n    child_centroid_median,\n    child_dispersion_mean,\n    child_coupling_mean,\n    child_flip_count_mean\nFROM pn10b_event_trace\nORDER BY event, offset;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_event_trace"
+        ],
+        "description": "Select the complete post-hoc parent and child lead/at/lag traces around prime and late-composite events.",
+        "filters": [
+          "fresh interval = [4000000000,4001000000)",
+          "event offsets = -32 through +32",
+          "post-hoc descriptive only"
+        ],
+        "metric_definitions": [
+          "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites at each aligned offset",
+          "child_centroid_mean = mean over event centres of the within-node mean of nine paid-gate Phase A readings"
+        ]
+      }
+    },
+    {
+      "id": "pn10b_child_rank_query",
+      "label": "PN10B child-rank query",
+      "path": "analysis/primes/pn10b_report_child_rank.sql",
+      "query": {
+        "sql": "SELECT\n    gate_rank,\n    series,\n    phase_a,\n    median_a,\n    p10_a,\n    p90_a,\n    population\nFROM pn10b_child_rank_profile\nORDER BY series, gate_rank;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_child_rank_profile"
+        ],
+        "description": "Select the mean prime child-phase profile and the exact worked-prime profile by paid-gate rank.",
+        "filters": [
+          "nine largest already-paid gates q <= n^0.45",
+          "worked prime n = 4000000007",
+          "post-hoc descriptive only"
+        ],
+        "metric_definitions": [
+          "phase_a = 2*(n mod q)/q",
+          "mean-across-primes phase_a uses 45166 prime nodes"
+        ]
+      }
+    },
+    {
+      "id": "pn10b_geometry_population_query",
+      "label": "PN10B population-geometry query",
+      "path": "analysis/primes/pn10b_report_geometry_population.sql",
+      "query": {
+        "sql": "SELECT\n    metric,\n    prime_n,\n    prime_mean,\n    prime_median,\n    prime_min,\n    prime_max,\n    composite_n,\n    composite_mean,\n    composite_median,\n    standardized_difference\nFROM pn10b_geometry_population\nORDER BY metric;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_geometry_population"
+        ],
+        "description": "Select reviewed prime and late-composite child-geometry summaries and standardized contrasts.",
+        "filters": [
+          "c = 0.90 survivors",
+          "45166 primes",
+          "9109 survivor composites",
+          "post-hoc descriptive only"
+        ],
+        "metric_definitions": [
+          "standardized_difference = prime-minus-composite mean divided by the square root of the average population variance"
+        ]
+      }
+    },
+    {
+      "id": "pn10b_worked_prime_query",
+      "label": "PN10B worked-prime query",
+      "path": "analysis/primes/pn10b_report_worked_prime.sql",
+      "query": {
+        "sql": "SELECT\n    gate_rank,\n    gate_q,\n    remainder,\n    phase_a,\n    phase_b,\n    signed_orientation,\n    coupling_to_next_rank\nFROM pn10b_worked_prime_children\nORDER BY gate_rank;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10b_worked_prime_children"
+        ],
+        "description": "Select all nine exact paid-gate child coordinates for prime 4000000007.",
+        "filters": [
+          "n = 4000000007",
+          "nine largest already-paid gates q <= n^0.45"
+        ],
+        "metric_definitions": [
+          "phase_a = 2*remainder/q",
+          "phase_b = 2-phase_a",
+          "signed_orientation = phase_a-1"
+        ]
+      }
+    }
+  ]
+}

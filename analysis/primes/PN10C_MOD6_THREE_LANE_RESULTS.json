@@ -1,0 +1,81 @@
+{
+  "status": "post_hoc_structural_diagnostic",
+  "registered_pn10b_verdict_unchanged": "NULL",
+  "scope": {
+    "low_inclusive": 4000000000,
+    "high_exclusive": 4001000000,
+    "window_each_side": 150,
+    "raw_integer_count": 1000000,
+    "interior_prime_count": 45156,
+    "prime_centers_mod6_1": 22532,
+    "prime_centers_mod6_5": 22624,
+    "matched_composite_centers": 45156,
+    "bootstrap_draws": 2000,
+    "bootstrap_blocks": 100,
+    "seed": 20260720
+  },
+  "definitions": {
+    "parent_progress": "1 for primes; 2*log(least_prime_factor)/log(n) for composites",
+    "red_blue_swap": "0.5*((M_1,4-M_1,2)+(M_5,2-M_5,4))",
+    "black_lane": "nonzero offsets k=0 mod 6",
+    "admissible_colour": "lane 4 for centre 1 mod6; lane 2 for centre 5 mod6",
+    "black_child": "m=(k/6) mod5 within black lane"
+  },
+  "headline_contrasts": {
+    "red_blue_swap": {
+      "estimate": 0.3237287389918873,
+      "bootstrap_mean": 0.32372881199809445,
+      "ci95_low": 0.323297830367902,
+      "ci95_high": 0.3241709052673416
+    },
+    "black_orientation_difference": {
+      "estimate": -0.00035792877118778765,
+      "bootstrap_mean": -0.0003554963246743932,
+      "ci95_low": -0.0012923231732842474,
+      "ci95_high": 0.0005203554637447102
+    },
+    "black_minus_admissible_colour": {
+      "estimate": -0.004060106990222162,
+      "bootstrap_mean": -0.004052682785248536,
+      "ci95_low": -0.004683891854192131,
+      "ci95_high": -0.003406881520792176,
+      "standardized_difference": -0.15291457636241768
+    },
+    "black_minus_pooled_red_blue": {
+      "estimate": 0.1578042625057215,
+      "bootstrap_mean": 0.15781172321379866,
+      "ci95_low": 0.15730708285304743,
+      "ci95_high": 0.158331963423964
+    },
+    "mod30_eligible_minus_suppressed": {
+      "estimate": 0.3418258555421912,
+      "bootstrap_mean": 0.34183378141547327,
+      "ci95_low": 0.3412938950712551,
+      "ci95_high": 0.3423674219978515
+    }
+  },
+  "reflection_test": {
+    "mean_absolute_error_reflected": 0.0005146416326118813,
+    "mean_absolute_error_direct": 0.10788204422603682,
+    "reflected_to_direct_ratio": 0.004770410463613323,
+    "reflected_is_better": true
+  },
+  "mechanism_checks": {
+    "mod3_identity_failures": 0,
+    "mod5_identity_failures": 0,
+    "expected_factor5_parent_progress": 0.14558668562885593,
+    "observed_suppressed_parent_progress": 0.14558668562885396,
+    "observed_eligible_parent_progress": 0.4874125411710452
+  },
+  "matched_composite_control": {
+    "red_blue_swap": 0.32399541435273194,
+    "black_minus_admissible_colour": 0.0010804814527259343,
+    "interpretation": "The same lane exchange occurs around non-prime centres coprime to 6, so the surrounding three-lane pattern is modular rather than prime-specific. The exact centre ridge remains prime-specific by definition."
+  },
+  "interpretation": {
+    "red_blue": "conditional anti-phase pair supported if swap CI excludes zero and reflection improves",
+    "black": "independent third lane only if it remains materially above the admissible coloured branch after conditioning",
+    "mod30": "black common lane contains a rotating factor-5 child trough",
+    "boundary": "mechanism is established modular arithmetic; ARA supplies a relational multiscale description, not a new prime law here"
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "study_id": "ARA-PRETEST-CONSTRAINT-PROBABILITY/PILOT/2026-07-21/v1",
+  "question": "How surprising is the provisional clean-hit count under assumed background match rates, and what prospective design would identify that background rate?",
+  "not_an_estimate_of": "P(ARA is true | repository)",
+  "sources": {
+    "provenance_ledger": {
+      "path": "FableConvo/PROVENANCE_LEDGER.md",
+      "sha256": "f7f865c105911e1312d5e58736139ed4cd119b26cc450b0e585e3aa58ebd2f79",
+      "ledger_as_of": "2026-07-05"
+    },
+    "master_prediction_ledger": {
+      "path": "MASTER_PREDICTION_LEDGER.md",
+      "sha256": "2a0f1d911b6a4e907a144d100e5bb2d209d5392e6bd5edca4dbd84f3588e0469",
+      "recent_numbered_T_entries": 23,
+      "recent_T_range": [
+        227,
+        249
+      ]
+    },
+    "pre_domain_geometry_record": {
+      "path": "ARA_CONVERSATION_RECORD_2026-06-25.md",
+      "sha256": "3df8fcdf8d530cf510e0e90fef3d927e5ac8e176ca3d7d249a37d36ff128be3d",
+      "record_date": "2026-06-25"
+    },
+    "axiomatic_record": {
+      "path": "ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md",
+      "sha256": "d75546940d1fca8101e662d70f508445c8174bc915dccb7f25ee6ebb99a286d4",
+      "initial_date": "2026-07-11",
+      "centered_revision": "2026-07-19"
+    },
+    "maxwell_recovery_audit": {
+      "path": "analysis/electromagnetism/MAXWELL_ARA_COMPLETENESS_AUDIT_2026-07-12.md",
+      "sha256": "b2151cec1f1ff8c803137517420e6b5238d0c4be73bf0de2d7823a884b8502b4",
+      "audit_date": "2026-07-12"
+    },
+    "prime_thread_capstone": {
+      "path": "analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md",
+      "sha256": "50598a514e9b15845e740e41e64e4c67546de447c626140a26cfa62e9089c763",
+      "capstone_date": "2026-07-21"
+    }
+  },
+  "ledger_profile": {
+    "clean_hits": 15,
+    "partial_or_consistency_tier": 16,
+    "misses_or_refutations": 31,
+    "excluded_as_contaminated": 3,
+    "strict_binary_total": 46,
+    "strict_observed_hit_rate": 0.32608695652173914,
+    "formal_frozen_protocols": {
+      "count": 23,
+      "by_domain": {
+        "electromagnetism": 5,
+        "primes": 18
+      },
+      "paths": [
+        "analysis/electromagnetism/MX4_LORENTZ_ARA_CROSSWALK_PROTOCOL_v1_FROZEN.md",
+        "analysis/electromagnetism/MX5_CHILD_ARA_TEARA_CLOSURE_PROTOCOL_v1_FROZEN.md",
+        "analysis/electromagnetism/MX6_MAXWELL_STRESS_PHASE_FLIP_PROTOCOL_v1_FROZEN.md",
+        "analysis/electromagnetism/MX7_PHASE_FIRST_INFORMATION3_PYRAMID_PROTOCOL_v1_FROZEN.md",
+        "analysis/electromagnetism/MX8_INFORMATION3_TETRAHEDRON_TRANSFER_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN11_PHI_VERTICAL_HANDOVER_PROTOCOL_v2_FROZEN.md",
+        "analysis/primes/PN12_PHI_CARRIER_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN13_DECIMAL_RUNG_LEAK_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN14_ADULT_WAVE_RIDGE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN15_SQRT_ADULT_RIDGE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN16_ORDERED_WHOLE_WAVE_LIFT_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN17_ONE_SHOT_LOCAL_RIDGE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN18_RECURSIVE_TEARA_PRODUCT_TREE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN19_TWO_PARENT_INFORMATION_LOCK_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN1_SIEVE_RUNG_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN1C_COMPRESSION_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN1G_PRIME29_TRANSFER_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN1H_PRIME31_CAPSTONE_TRANSFER_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN21_RIDGE_STRADDLING_TWO_CHILD_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN22_ODD_LATTICE_ARA_CANDIDATE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN23_ANTI_PAIR_FRACTAL_LIFT_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN2_PRIME_SURVIVAL_BRIDGE_PROTOCOL_v1_FROZEN.md",
+        "analysis/primes/PN3_STANDALONE_ARA_PARENT_CHILD_PROTOCOL_v1_FROZEN.md"
+      ]
+    }
+  },
+  "historical_sensitivity": {
+    "model": "X ~ Binomial(n=clean_hits+misses, p0=assumed background match rate)",
+    "tail": "P(X >= observed clean hits)",
+    "rows": [
+      {
+        "null_match_rate": 0.05,
+        "tail_probability": 3.542076701231807e-09,
+        "reject_at_0_05": true
+      },
+      {
+        "null_match_rate": 0.1,
+        "tail_probability": 2.472694423076681e-05,
+        "reject_at_0_05": true
+      },
+      {
+        "null_match_rate": 0.15,
+        "tail_probability": 0.0021640913772013777,
+        "reject_at_0_05": true
+      },
+      {
+        "null_match_rate": 0.2,
+        "tail_probability": 0.030409315949765627,
+        "reject_at_0_05": true
+      },
+      {
+        "null_match_rate": 0.21,
+        "tail_probability": 0.044928241747327465,
+        "reject_at_0_05": true
+      },
+      {
+        "null_match_rate": 0.22,
+        "tail_probability": 0.06401734174542595,
+        "reject_at_0_05": false
+      },
+      {
+        "null_match_rate": 0.23,
+        "tail_probability": 0.08824697092286397,
+        "reject_at_0_05": false
+      },
+      {
+        "null_match_rate": 0.25,
+        "tail_probability": 0.15347366742346574,
+        "reject_at_0_05": false
+      },
+      {
+        "null_match_rate": 0.3,
+        "tail_probability": 0.40309806880288557,
+        "reject_at_0_05": false
+      },
+      {
+        "null_match_rate": 0.333333333,
+        "tail_probability": 0.5962767079919797,
+        "reject_at_0_05": false
+      },
+      {
+        "null_match_rate": 0.5,
+        "tail_probability": 0.994324204281611,
+        "reject_at_0_05": false
+      }
+    ],
+    "critical_null_rate_at_alpha_0_05": 0.21291902844399502,
+    "interpretation": "The historical count rejects only null match rates below the critical value. Because the ledger does not empirically estimate p0 and is self-scored, these tail probabilities are sensitivity calculations rather than valid global evidence."
+  },
+  "declared_geometry_domain_recoveries": {
+    "why_included": "The reversible 0-2 pair, ridge, recursive child/parent structure and orientation were recorded before the Maxwell and prime walks. These later families therefore matter as generative, pre-domain constraint evidence.",
+    "independence_rule": "Physics and primes are treated as two dependent domain families, not as one independent vote per equation, protocol, algebraic identity or related subtest.",
+    "families": [
+      {
+        "domain": "electromagnetism/plasma",
+        "predeclared_core_carried_forward": "opposing oriented waves, a 1.0 balance ridge, orthogonal coupling, child-to-parent recursion and retained total activity",
+        "supported_results": [
+          "faithful ARA translations of all four Maxwell field equations",
+          "exact E/B/Poynting orthogonal triad for vacuum plane waves",
+          "MX3D nonlinear daughter identity: 6 of 8 strict development criteria",
+          "MX3E granddaughter harmonic: 8 of 8 development criteria"
+        ],
+        "failures_or_open_fences": [
+          "most field-law recoveries are exact reparameterisations, not novel predictions",
+          "the frozen particle-to-grid Lorentz bridge failed",
+          "the compact Lorentz closure remained partial",
+          "Maxwell stress and an independent held-out compression remain open"
+        ],
+        "meta_evidence_class": "pre-domain structural recovery with mixed empirical development"
+      },
+      {
+        "domain": "prime arithmetic",
+        "predeclared_core_carried_forward": "reversible 0-2 geometry, ridge closure, recursive rungs, ordered AB/BA paths and two-child-to-one-parent coarse-graining",
+        "supported_results": [
+          "held-out wheel transition relation with all four permutation tests at 1/201",
+          "PN1G passed 6 of 6 frozen prime-29 transfer checks",
+          "PN17-PN19 sealed exact next primes from fresh large anchors",
+          "PN14 and PN15 transferred near-1.0 paired/full-square-root ridge templates",
+          "exact 2:1 reversible anti-pair state compression"
+        ],
+        "failures_or_open_fences": [
+          "ARA endpoints were worse than conditioned PNT/Hardy-Littlewood in PN2",
+          "standalone ARA parent/child forecasting failed in PN3",
+          "PN10B later-survival ranking was chance-like",
+          "fixed Phi/36-degree/leak carriers failed",
+          "the largest-two-child three-operation prime shortcut failed"
+        ],
+        "meta_evidence_class": "pre-domain exact arithmetic crosswalk with real transfer and failed novelty tests"
+      }
+    ],
+    "statistical_use": "These families strengthen the case that one declared vocabulary can organize multiple domains, but they do not identify a chance probability because the space of admissible mappings and alternative frameworks was not sampled."
+  },
+  "prospective_decoy_design": {
+    "primary_endpoint": "The real target receives the highest preregistered ARA fit score among one real target and nine matched decoys.",
+    "unit": "one locked primary outcome per independent domain",
+    "rows": [
+      {
+        "independent_domains": 10,
+        "matched_decoys_per_domain": 9,
+        "null_top_rank_rate": 0.1,
+        "critical_top_rank_wins": 4,
+        "actual_alpha": 0.012795198400000004,
+        "power_if_true_rate_0_30": 0.3503892815999998,
+        "power_if_true_rate_0_40": 0.6177193984,
+        "power_if_true_rate_0_50": 0.828125
+      },
+      {
+        "independent_domains": 12,
+        "matched_decoys_per_domain": 9,
+        "null_top_rank_rate": 0.1,
+        "critical_top_rank_wins": 4,
+        "actual_alpha": 0.02563747016500001,
+        "power_if_true_rate_0_30": 0.5074842265649997,
+        "power_if_true_rate_0_40": 0.77466271744,
+        "power_if_true_rate_0_50": 0.927001953125
+      },
+      {
+        "independent_domains": 15,
+        "matched_decoys_per_domain": 9,
+        "null_top_rank_rate": 0.1,
+        "critical_top_rank_wins": 5,
+        "actual_alpha": 0.012720483641251007,
+        "power_if_true_rate_0_30": 0.48450894077315665,
+        "power_if_true_rate_0_40": 0.782722294349824,
+        "power_if_true_rate_0_50": 0.940765380859375
+      },
+      {
+        "independent_domains": 20,
+        "matched_decoys_per_domain": 9,
+        "null_top_rank_rate": 0.1,
+        "critical_top_rank_wins": 5,
+        "actual_alpha": 0.04317449528446341,
+        "power_if_true_rate_0_30": 0.7624922211223976,
+        "power_if_true_rate_0_40": 0.9490480468058334,
+        "power_if_true_rate_0_50": 0.9940910339355469
+      }
+    ],
+    "recommended_initial_battery": {
+      "independent_domains": 12,
+      "decoys_per_domain": 9,
+      "critical_top_rank_wins": 4,
+      "actual_alpha": 0.02563747016500001,
+      "power_if_true_top_rank_rate_0_40": 0.77466271744
+    }
+  },
+  "data_quality_findings": [
+    {
+      "severity": "critical",
+      "finding": "The background match rate is unmeasured.",
+      "impact": "No model-free historical probability can be calculated."
+    },
+    {
+      "severity": "high",
+      "finding": "The provenance tally is self-scored and awaits independent rescoring.",
+      "impact": "Verdict uncertainty and evaluator dependence are not represented."
+    },
+    {
+      "severity": "high",
+      "finding": "The ledgers mix exact identities, rediscoveries, exploratory probes, and predictions.",
+      "impact": "Pooling all positive labels would double-count non-surprising results."
+    },
+    {
+      "severity": "high",
+      "finding": "Tests within primes, ENSO, and plasma are dependent families.",
+      "impact": "Rows cannot be treated as independent replications."
+    },
+    {
+      "severity": "medium",
+      "finding": "Formal frozen protocols are concentrated in only a few domains.",
+      "impact": "Current seal strength is better than current cross-domain independence."
+    }
+  ],
+  "decision": {
+    "historical_global_probability_identified": false,
+    "historical_result": "SENSITIVITY ONLY",
+    "prospective_test_feasible": true,
+    "recommended_status": "DRAFT DECOY-CONTROLLED PROTOCOL BEFORE NEW MAPPINGS"
+  }
+}

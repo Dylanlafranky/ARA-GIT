@@ -1,0 +1,256 @@
+{
+  "test_id": "PN7C/ACTUAL-GAP-SEQUENTIAL-MEMORY/CODE-ISOLATED-R11-v1",
+  "hashes": {
+    "protocol": "7884D02A19A753DFD2582BEEDC6AFBE38B15E04E44DDD6F5B6B11116F518A67C",
+    "model_npz": "9141AA398C6A6694C3C5F3ECA954681D4AD8091C01310D13C6703DB30668F3A2",
+    "target_npz": "D60EEDFA2F3A5DF4C8FA45B45D2B478EDB39B6D54001302F84041989C8D0CF2F",
+    "scorer": "7932F446B56553ED1EBB7C8429ED92094C37CD03C15F98A868061AC3A6D4BAF9"
+  },
+  "target": {
+    "gap_count": 39475590,
+    "state_count": 39475589,
+    "scored_events": 39475587
+  },
+  "scores": {
+    "12": {
+      "ARA-IID": {
+        "events": 39475587,
+        "cross_entropy_bits": 3.5366831767899876,
+        "brier_score": 0.9117691229341671,
+        "top1_accuracy": 0.1097849159279126,
+        "top3_accuracy": 0.30883305167824354,
+        "perplexity": 11.605068850340928
+      },
+      "ARA-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 3.3034799636334653,
+        "brier_score": 0.8877445132222699,
+        "top1_accuracy": 0.1525389350131766,
+        "top3_accuracy": 0.41456523496408043,
+        "perplexity": 9.872941396015541
+      },
+      "ARA-M2": {
+        "events": 39475587,
+        "cross_entropy_bits": 3.2121816679060786,
+        "brier_score": 0.8782376801281538,
+        "top1_accuracy": 0.16673436673658584,
+        "top3_accuracy": 0.4478944163642202,
+        "perplexity": 9.267509364931092
+      },
+      "RawGap-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 2.862400443425033,
+        "brier_score": 0.8425272158694692,
+        "top1_accuracy": 0.22311067850618663,
+        "top3_accuracy": 0.5517074134958398,
+        "perplexity": 7.2722431806071315
+      }
+    },
+    "24": {
+      "ARA-IID": {
+        "events": 39475587,
+        "cross_entropy_bits": 4.496675650986012,
+        "brier_score": 0.9539775539033035,
+        "top1_accuracy": 0.0647514373883788,
+        "top3_accuracy": 0.17911016750681882,
+        "perplexity": 22.575337500363503
+      },
+      "ARA-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 4.230639231433916,
+        "brier_score": 0.9396983661391559,
+        "top1_accuracy": 0.0921802378771467,
+        "top3_accuracy": 0.25311073904993486,
+        "perplexity": 18.773675612862537
+      },
+      "ARA-M2": {
+        "events": 39475587,
+        "cross_entropy_bits": 4.112585101000682,
+        "brier_score": 0.9331517731371476,
+        "top1_accuracy": 0.10420817808231705,
+        "top3_accuracy": 0.27952306320359466,
+        "perplexity": 17.298620657962594
+      },
+      "RawGap-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 3.62187145769536,
+        "brier_score": 0.9071270195716651,
+        "top1_accuracy": 0.1440510054986643,
+        "top3_accuracy": 0.3631580449962657,
+        "perplexity": 12.310960821370974
+      }
+    },
+    "48": {
+      "ARA-IID": {
+        "events": 39475587,
+        "cross_entropy_bits": 5.431438660602676,
+        "brier_score": 0.9752381909853334,
+        "top1_accuracy": 0.04118965982697104,
+        "top3_accuracy": 0.11880109597863611,
+        "perplexity": 43.15448681714388
+      },
+      "ARA-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 5.081455855079941,
+        "brier_score": 0.9651191593476325,
+        "top1_accuracy": 0.0640987555169224,
+        "top3_accuracy": 0.17286833505477703,
+        "perplexity": 33.85872764581141
+      },
+      "ARA-M2": {
+        "events": 39475587,
+        "cross_entropy_bits": 4.8726462399051815,
+        "brier_score": 0.9578649670390348,
+        "top1_accuracy": 0.07912130603656381,
+        "top3_accuracy": 0.21101750811203895,
+        "perplexity": 29.29629340454606
+      },
+      "RawGap-M1": {
+        "events": 39475587,
+        "cross_entropy_bits": 4.162437421425891,
+        "brier_score": 0.9347057404311641,
+        "top1_accuracy": 0.10999458982079229,
+        "top3_accuracy": 0.2890602741385454,
+        "perplexity": 17.90682209598376
+      }
+    }
+  },
+  "predictive_m1_minus_m2_gain_bits": {
+    "12": 0.09129829572738668,
+    "24": 0.11805413043323387,
+    "48": 0.2088096151747596
+  },
+  "block_summary_24_bins": {
+    "seed": 2026071923,
+    "draws": 10000,
+    "positive_blocks": 100,
+    "mean_gain_bits": 0.11805413030156404,
+    "bootstrap_95_percentile_interval_bits": [
+      0.1178770150815411,
+      0.11823366211328187
+    ]
+  },
+  "empirical_target_memory": {
+    "12": {
+      "events": 39475587,
+      "h_next_given_current_bits": 3.30268937554264,
+      "h_next_given_previous_current_bits": 3.210688154287763,
+      "conditional_memory_gain_bits": 0.09200122125487686
+    },
+    "24": {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.228479115850888,
+      "h_next_given_previous_current_bits": 4.106579455848539,
+      "conditional_memory_gain_bits": 0.12189966000234875
+    },
+    "48": {
+      "events": 39475587,
+      "h_next_given_current_bits": 5.075865174989605,
+      "h_next_given_previous_current_bits": 4.846714725086031,
+      "conditional_memory_gain_bits": 0.22915044990357458
+    }
+  },
+  "exact_inventory_shuffles_24_bins": [
+    {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.238961123557182,
+      "h_next_given_previous_current_bits": 4.137765823789163,
+      "conditional_memory_gain_bits": 0.101195299768019,
+      "seed": 2026071901
+    },
+    {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.238907446445047,
+      "h_next_given_previous_current_bits": 4.137669556807213,
+      "conditional_memory_gain_bits": 0.10123788963783475,
+      "seed": 2026071902
+    },
+    {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.238999029383664,
+      "h_next_given_previous_current_bits": 4.137566716423163,
+      "conditional_memory_gain_bits": 0.10143231296050104,
+      "seed": 2026071903
+    },
+    {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.238791317072675,
+      "h_next_given_previous_current_bits": 4.1374766659972755,
+      "conditional_memory_gain_bits": 0.10131465107539928,
+      "seed": 2026071904
+    },
+    {
+      "events": 39475587,
+      "h_next_given_current_bits": 4.238958313980891,
+      "h_next_given_previous_current_bits": 4.137708959898502,
+      "conditional_memory_gain_bits": 0.10124935408238933,
+      "seed": 2026071905
+    }
+  ],
+  "raw_gap_markov_world_24_bins": {
+    "seed": 2026071917,
+    "independent_four_gap_paths": 10000000,
+    "h_next_given_current_bits": 4.199576034604369,
+    "h_next_given_previous_current_bits": 4.080727501776141,
+    "conditional_memory_gain_bits": 0.1188485328282276
+  },
+  "criteria": {
+    "P1": {
+      "passed": true,
+      "value_bits": 0.11805413043323387,
+      "threshold_bits": 0.01
+    },
+    "P2": {
+      "passed": true,
+      "positive_blocks": 100,
+      "bootstrap_interval_bits": [
+        0.1178770150815411,
+        0.11823366211328187
+      ]
+    },
+    "P3": {
+      "passed": true,
+      "gains_bits": {
+        "12": 0.09129829572738668,
+        "24": 0.11805413043323387,
+        "48": 0.2088096151747596
+      }
+    },
+    "P4": {
+      "passed": true,
+      "observed_bits": 0.12189966000234875,
+      "maximum_shuffle_bits": 0.10143231296050104,
+      "margin_bits": 0.020467347041847717,
+      "threshold_bits": 0.01
+    },
+    "P5": {
+      "passed": false,
+      "observed_bits": 0.12189966000234875,
+      "raw_markov_bits": 0.1188485328282276,
+      "margin_bits": 0.0030511271741211488,
+      "threshold_bits": 0.01
+    },
+    "P6": {
+      "passed": false,
+      "ara_m2_bits": 4.112585101000682,
+      "raw_gap_m1_bits": 3.62187145769536
+    },
+    "P7": {
+      "passed": true,
+      "ara_m1_brier": 0.9396983661391559,
+      "ara_m2_brier": 0.9331517731371476,
+      "ara_m1_top3": 0.25311073904993486,
+      "ara_m2_top3": 0.27952306320359466
+    }
+  },
+  "residual_ordered_memory_core_passed": false,
+  "all_seven_passed": false,
+  "boundaries": {
+    "exact_next_prime_location_prediction": false,
+    "physical_wave_cause_established": false,
+    "information_beyond_raw_gaps_created": false,
+    "blind_test": false,
+    "r12_opened": false,
+    "p31_wheel_opened": false
+  }
+}

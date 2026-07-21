@@ -1,6 +1,383 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T249 - PN23 reversible anti-pair fractal lift
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact arithmetic crosswalk; held-out p17; 40/40 independent checks]`  
+**Orientation:** one stored lane `r<M/2` is Phase A; `M-r` is its reconstructed anti-phase; upward adds a new prime gate `p`.  
+**USER PRIOR:** “We also only need to track the adult waves of the Phase A and Phase B pairs I think, so it reduces the number further.” “Yes. Can we test it. We abuse the fractal nature.”  
+**Claim/test:** from modulo 14, develop through gates `3,5,11,13`, hold out `17`, and require one representative per anti-pair to reconstruct every killed copy, survivor and direct `gcd` residue without error.  
+**Prediction/falsifier:** `k_B=p-1-k_A`, normalized pair mean exactly `1`; any missing/extra residue or collision mismatch fails.  
+**RUN:** all rungs passed. Held-out `30030×17→510510` reconstructed 46,080 child pairs/all 92,160 residues with zero error; independent validator passed 40/40.  
+**RATING:** **SUPPORTED** exact lossless `2:1` anti-pair compression. Pair count still grows by `p-1`; no constant-cost next-prime claim.  
+**Artifacts:** `analysis/primes/PN23_ANTI_PAIR_FRACTAL_LIFT_PROTOCOL_v1_FROZEN.md`, report, results, CSV paths, notebook and validation JSON.
+
+---
+
+### T248 - PN22 odd-lattice ARA candidate
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** NULL `[prime-specific enrichment]`; exact wheel crosswalk  
+**Orientation:** `A` is the local 0 endpoint, `2A` the local 2 endpoint; the construction projects upward onto the odd lattice.  
+**Claim/test:** test `T(A)=oddceil(7A/2+1)` for one million inputs against raw odds, coprime-to-14 and exact residue-matched controls.  
+**Prediction/falsifier:** prime lift must survive exact matched-lane controls; equality with those controls is a wheel crosswalk only.  
+**RUN:** prime rate `16.6740%`, a `16.65%` lift over raw odds, but outputs exactly equal lanes `{1,5,9,13} mod 14`; matched lift `1.000000`.  
+**RATING:** **NULL** for new prime-location information; exact mod-14 wheel recovery retained.  
+**Artifacts:** `analysis/primes/PN22_ODD_LATTICE_ARA_CANDIDATE_PROTOCOL_v1_FROZEN.md`, report, results, notebook and validation.
+
+---
+
+### T247 - PN21 ridge-straddling two-child retention
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** NULL `[development; protected 87-bit anchor sealed]`  
+**Orientation:** Phase A is the last prime gate below `sqrt(n)`; Phase B is the first above it.  
+**Claim/test:** the two raw residue phases retain at least 90% of the complete parent factor-progress coordinate and locate prime ridges on held-out development data.  
+**Prediction/falsifier:** held-out retained `R²≥0.90` plus non-chance ridge metrics; failure blocks the blind target.  
+**RUN:** retained `R²=-0.0000292`; ridge AUC `0.499698/0.499137`; effectively zero retained parent information.  
+**RATING:** **NULL** for this two-child definition. The protected target was not opened.  
+**Artifacts:** `analysis/primes/PN21_RIDGE_STRADDLING_TWO_CHILD_PROTOCOL_v1_FROZEN.md`, report, results, notebook and validation.
+
+---
+
+### T246 - PN20 literal one-rung two-child shortcut
+
+**REGISTERED:** 21 July 2026 in frozen development protocol | **STATUS:** NULL `[protected 87-bit anchor unopened]`  
+**Orientation:** retain only the proposed largest immediate Phase A and Phase B children, then close/reflect upward.  
+**Claim/test:** three operational definitions of the two children should locate the exact next prime on seven development anchors.  
+**Prediction/falsifier:** adequate development performance is required before the blind anchor; `0/7` exact is decisive failure.  
+**RUN:** numerical-largest, unrestricted strongest and branch-aware variants all gave `0/7` exact; branch-aware produced one prime-valued estimate by chance.  
+**RATING:** **NULL**. Literal two-small-child compression does not retain the prime location.  
+**Artifacts:** `analysis/primes/PN20_ONE_RUNG_TWO_CHILD_DEVELOPMENT_REPORT.md`, development JSONs, notebook and validation.
+
+---
+
+### T245 - PN19 two-parent Information³ lock
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact sieve crosswalk; +13 sealed; 38/38 checks]`  
+**Orientation:** lower prime children are log-balanced into complete Phase A and Phase B parents; their mask intersection is the retained relation.  
+**Claim/test:** from fresh anchor `900,000,000,000`, seal the first joint quiet offset before primality is opened.  
+**Prediction/falsifier:** the joint survivor is the exact first prime; any earlier prime or composite prediction fails.  
+**RUN:** sealed `+13`; `900,000,000,013` is the first prime and independent validation passed 38/38. Post-target 1,000-anchor audit found Phase A alone exact 93.2%.  
+**RATING:** **SUPPORTED** exact two-parent representation; 93.2% is exploratory. Construction still used 102,973 lower children and is not two-scalar compression.  
+**Artifacts:** `analysis/primes/PN19_TWO_PARENT_INFORMATION_LOCK_PROTOCOL_v1_FROZEN.md`, report, prediction, notebook, masks and validation.
+
+---
+
+### T244 - PN18 recursive TE-ARA product tree
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact recursive crosswalk; +9 sealed; 36/36 checks]`  
+**Orientation:** lower prime children multiply upward into one product parent; candidate branches form the opposing parent; GCD is their relation.  
+**Claim/test:** from fresh anchor `700,000,000,000`, recursively locate and seal the first quiet candidate.  
+**Prediction/falsifier:** sealed leaf must be the first prime; earlier offsets must all be composite.  
+**RUN:** sealed `+9`; exact first prime independently verified. Product-tree construction was about 16× slower than the tested segmented sieve from scratch.  
+**RATING:** **SUPPORTED** hierarchical `1+1=3→1` crosswalk; no information or speed compression.  
+**Artifacts:** `analysis/primes/PN18_RECURSIVE_TEARA_PRODUCT_TREE_PROTOCOL_v1_FROZEN.md`, report, cost audit, prediction, notebook and validations.
+
+---
+
+### T243 - PN17 one-shot local inverse ridge
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact segmented-sieve crosswalk; +19 sealed; 26/26 checks]`  
+**Orientation:** anchor is the local centre; every lower prime through the square-root boundary supplies a child collision phase; the first collision-free offset is the ridge.  
+**Claim/test:** build the child field at `400,000,000,000`, seal one correction, then reveal primality.  
+**Prediction/falsifier:** sealed candidate must be prime and every earlier positive offset composite.  
+**RUN:** sealed `+19`; `400,000,000,019` was the first prime and all 26 checks passed. Simple scalar A/B averages did not rank the prime ridge.  
+**RATING:** **SUPPORTED** exact local inverse geometry; operationally the standard segmented sieve with 51,526 child primes, not a low-dimensional shortcut.  
+**Artifacts:** `analysis/primes/PN17_ONE_SHOT_LOCAL_RIDGE_PROTOCOL_v1_FROZEN.md`, report, prediction, collision field, notebook and validation.
+
+---
+
+### T242 - PN16 ordered whole-wave lift
+
+**REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact arithmetic crosswalk]`  
+**Orientation:** AB and BA are forward/reverse ordered sieve paths while open; completion produces a parent wheel.  
+**Claim/test:** determine whether completed AB and BA remain distinct and whether their pairing generates the next rung.  
+**Prediction/falsifier:** compare partial and complete masks exactly; identify the actual missing input required for the next wheel.  
+**RUN:** open AB/BA differed by as much as 63.52%, but completed masks were identical. Reversal is idempotent; adding the first quiet new prime gate creates the next rung.  
+**RATING:** **SUPPORTED** ordered-path/closure refinement. The informative third is the completed parent plus the new gate relation, not a duplicate reversed whole.  
+**Artifacts:** `analysis/primes/PN16_ORDERED_WHOLE_WAVE_LIFT_PROTOCOL_v1_FROZEN.md`, report, paths, notebook, results and validation.
+
+---
+
+### T241 - PN15 full-square-root child closure and adult-rung ridge
+
+**REGISTERED:** 21 July 2026 | **STATUS:** RUN - BOTH FROZEN ARMS SUPPORTED; INDEPENDENT VALIDATION PASS  
+**Orientation:** up is a tenfold anchor-scale step; Phase A/B are adjacent prime residue children immediately below
+`sqrt(N)`; their coprime joint period is the adult.  
+**USER PRIOR:** "The whole of two half waves at 1.0." After PN14, Codex proposed the full-square-root test: two
+children near `n^0.5` predict adult growth near `10` and another precise ridge test. Dylan: "sure let's do that
+test."  
+**Claim:** square-root children occupy factor coordinates near `1.0+1.0`, their adult occupies nearly `2.0`, median
+adult size grows by factor `10` per decimal rung, consecutive growth steps form a near-`1.0` ridge, and equal relative
+phase transfers the signed child-product curve to scale 12.  
+**Test:** scales 8-11 form the development template; scale 12 is untouched. Use the nine largest primes below each
+anchor's square root, eight adjacent pairs, their median adult period, and one deterministic median-product pair for
+16 equal-phase sectors. Raw, prime and composite curves remain separate.  
+**Prediction:** target growth within 1% of `10`; fresh two-entry growth ridge within `[0.995,1.005]`; target child
+coordinates each `[0.995,1]`, sum `[1.99,2]`; adult fill at least `0.999`. Target prime phase curve correlation
+`>=0.95`, RMSE `<=0.025`, at least 60% better than zero, better than wrong-coordinate, minimum 1,000 primes/sector.  
+**Falsifier:** any clean Arm A miss; or adequate phase counts with any Arm B curve miss. Arms rated separately.  
+**Rivals:** constant, `sqrt(10)`, `10^0.9`, `10`; zero/mean, analytic sawtooth, wrong phase and fixed permutation.  
+**Fidelity:** `analysis/primes/PN15_SQRT_ADULT_RIDGE_FIDELITY_PACKET_v1.md`; Dylan verdict `EXACT ENOUGH TO TEST`.  
+**Protocol:** `analysis/primes/PN15_SQRT_ADULT_RIDGE_PROTOCOL_v1_FROZEN.md`; development template, source,
+dependency and validator sealed in `analysis/primes/PN15_TARGET_FREEZE_MANIFEST.json` before scale 12 was calculated.
+
+**RUN:** The untouched scale-12 target passed every registered check. Adult growth was `10.0017276297`; the
+representative square-root children were `0.9999985181` and `0.9999962435`, ratio `1.0000022746`, sum
+`1.9999947616`; median adult fill was `0.9999070021`. The frozen prime phase template transferred with
+`r=0.9999467506`, `RMSE=0.0015826589`, minimum `137,605` primes/sector, and beat zero, wrong-coordinate and
+permutation controls. Independent recomputation matched every frozen hash, gate, pair, all 16 population counts and
+means, adult metrics, phase metrics and analytic fixture.  
+**QUALIFICATION:** the square-root selection algebraically drives child coordinates toward `1+1`, products toward
+the anchor and tenfold adult growth; this is a strong preregistered ARA crosswalk/consistency result, not a new prime
+law. Prime and composite phase means differ by at most `0.0010394739`, so the stable phase curve is not prime-specific
+at this grain.  
+**Artifacts:** `analysis/primes/PN15_SQRT_ADULT_RIDGE_REPORT.md`, `analysis/primes/PN15_SQRT_ADULT_RIDGE_REPORT.html`,
+`analysis/primes/PN15_SQRT_ADULT_RIDGE.ipynb`, `analysis/primes/PN15_SQRT_ADULT_RIDGE.png`, and
+`analysis/primes/PN15_SQRT_ADULT_RIDGE_VALIDATION.json`.
+
+---
+
+### T240 - PN14 child-to-adult wave and adult-rung ridge
+
+**REGISTERED:** 21 July 2026 | **STATUS:** REGISTERED - SCALE-11 TARGET SEALED  
+**Orientation:** up is a tenfold raw-number scale step; child Phase A/B are the two fixed adjacent paid-gate residue
+cycles; their exact adult is the coprime joint period `q*r`.  
+**USER PRIOR:** "The ratios were 8.07 and 7.96... we found a phase a and phase B, and they're direct increases of
+the child wave below. And yes, we should run that test." **DYLAN CORRECTION:** "8.07/7.96 is just a 1.0 ridge or
+very close to it."  
+**Claim:** child periods near `N^0.45` generate an adult period near `N^0.90`; consecutive adult growth multipliers
+form a near-balanced ARA `1.0` ridge, and equal relative-phase coverage aligns the internal signed child-product
+curve across scales.  
+**Test:** retain PN10B's nine paid gates at anchors `4*10^d`. Arm A predicts the untouched scale-11 median adjacent
+joint period and its adult-growth ridge. Arm B samples 16 equal relative-phase sectors for a deterministic median-
+product adjacent pair, freezes a prime curve from open scales 8-10, then tests scale 11 while separately disclosing
+raw integers and paid-surviving composites.  
+**Prediction:** target adult growth is within 5% of `10^0.9`; its two-entry TE-ARA-normalised comparison with the
+preceding growth lies in `[0.98,1.02]`. The target prime phase curve correlates at least `0.90` with the frozen
+development curve, RMSE `<=0.075`, and beats zero and wrong-coordinate controls.  
+**Falsifier:** either Arm A criterion fails; or adequate target phase counts fail any Arm B curve criterion. Arms
+are rated separately.  
+**Rivals:** constant period, `10^0.45`, `10^1`, zero/mean curves, analytic sawtooth autocorrelation, wrong phase and
+fixed-seed phase permutation.  
+**Fidelity packet:** `analysis/primes/PN14_ADULT_WAVE_RIDGE_FIDELITY_PACKET_v1.md`; Dylan verdict `EXACT ENOUGH TO
+TEST` under explicit approval and correction before the run.  
+**Protocol:** `analysis/primes/PN14_ADULT_WAVE_RIDGE_PROTOCOL_v1_FROZEN.md`; source, validator and scales 8-10
+development template sealed in `analysis/primes/PN14_TARGET_FREEZE_MANIFEST.json` before scale 11 was calculated.
+
+**RUN:** 21 July 2026 | **STATUS:** `SUPPORTED [both arms; pre-registered frozen scale-11 target]`  
+**ARM A - ADULT SCALE RIDGE:** median joint periods on scales 8-11 were `54,096,009`, `436,601,021`,
+`3,477,342,957`, and fresh `27,646,876,802`. Growth factors were `8.070855`, `7.964578`, and fresh `7.950575`.
+The target factor was `+0.0918%` from frozen `10^0.9`; its comparison with the preceding factor gave the TE-ARA
+pair `1.000880 + 0.999120 = 2`, passing both Arm A gates.  
+**ARM B - EQUAL RELATIVE PHASE:** the frozen scales 8-10 prime template recovered the scale-11 prime child-product
+curve at `r=0.999910`, RMSE `0.002017`. Zero RMSE was `0.147689`; the wrong-coordinate RMSE to the template was
+`0.177442`; minimum target primes per sector were `49,516`. All five Arm B checks passed. Raw integers, primes and
+late composites shared the symmetric U-curve, so the geometry is modular rather than prime-specific.  
+**VALIDATION/IMPLEMENTATION:** the independent implementation exactly reproduced every scale-11 gate, pair, sector,
+count, mean and adult metric. Its auxiliary `101*103` finite-bin calibration narrowly missed its frozen threshold
+(`r=0.998941`, RMSE `0.006841`), leaving the full packet honestly `4/5`, `passed=false`. The frozen primary wrote its
+target JSON/CSV before an optional Matplotlib import failed; a post-target Pillow renderer created the figure without
+altering calculations.  
+**INTERPRETATION (Dylan correction tested):** `8.07/7.96` was correctly identified as a near-`1.0` ridge between
+adult growth steps; the fresh rung tightened that reading. The exact `q*r` adult and analytic sawtooth curve are
+established arithmetic crosswalks. PN14 supports ARA's child -> adult -> ridge bookkeeping inside this construction,
+not a new prime predictor or a universal physical law.  
+**ARTIFACTS:** `analysis/primes/PN14_ADULT_WAVE_RIDGE_REPORT.md`, notebook, frozen fidelity/protocol/manifest,
+development and target JSON/CSV, primary script, independent validation, post-target renderer and PNG; hashes in
+`analysis/primes/PN14_COMPLETE_MANIFEST.json`.
+
+---
+
+### T239 - PN13 decimal-rung leak law
+
+**REGISTERED:** 21 July 2026 | **STATUS:** REGISTERED — TARGETS SEALED  
+**Orientation:** up means a tenfold increase in the declared scale coordinate; the same signed residual must retain
+its sign/direction and lose one decimal place in magnitude.  
+**USER PRIOR:** “Is it just an extra digit for each rung?” After the proposed structural-rung versus `1/sqrt(N)`
+test was explained: “Yes, can we test that. It might be the rule we have been hunting.”  
+**Claim:** for the same observable and fixed aggregation size, one upward decimal-scale rung applies
+`L_(k+1)=L_k/10`.  
+**Test:** two separately rated readings. Arm A measures PN12's signed 4,000-step mean vector on untouched ladder
+windows beginning at `10,000` and `100,000`, against the open `1,000` anchor. Arm B measures PN10B's unchanged signed
+nine-child adjacent coupling on one-million-integer intervals beginning at `4*10^8`, `4*10^9` and untouched
+`4*10^10`. Sample/window sizes remain fixed.  
+**Prediction:** consecutive signed ratios are `0.1`, with stable direction/sign. Secondary fixed sequence:
+`-(pi-3)`, `-(pi-3)/10`, `-(pi-3)/100` on Arm B rungs 8–10.  
+**Falsifier:** ratio outside the frozen tolerance, direction/sign instability, target uncertainty incompatible with
+the rule, or a frozen constant/`1/sqrt(10)`/zero rival fitting the fresh target better.  
+**Rivals:** constant, `1/sqrt(10)`, zero, development-fitted power law; fixed Pi sequence rated separately.  
+**Fidelity packet:** `analysis/primes/PN13_DECIMAL_RUNG_LEAK_FIDELITY_PACKET_v1.md`; Dylan verdict
+`EXACT ENOUGH TO TEST` under explicit approval.  
+**Protocol:** `analysis/primes/PN13_DECIMAL_RUNG_LEAK_PROTOCOL_v1_FROZEN.md`.
+
+**RUN:** 21 July 2026 | **STATUS:** NOT SUPPORTED `[both registered arms; fixed-Pi sequence; 19/19 validation]`  
+**ARM A — FIXED-WINDOW LADDER HEIGHT:** signed 4,000-step resultant magnitudes at starts `1,000`, `10,000` and
+`100,000` were `0.014186`, `0.015127` and `0.003383`; consecutive ratios `1.0663` and `0.2236`, not `0.1`. Directions
+were `16.13°`, `101.79°` and `60.99°`, failing both 9° stability tests. All four criteria failed. Fixed-`N` uniform
+control mean `R=0.014071`; the original `0.01419` remains ordinary cancellation-scale magnitude.  
+**ARM B — SIGNED CHILD COUPLING:** prime means on fixed one-million-integer intervals at `4*10^8`, `4*10^9` and
+fresh `4*10^10` were `+0.008856`, `-0.014076` and `+0.168838`; ratios `-1.589` and `-11.995`. Fresh ratio bootstrap
+95% interval `[-32.377,-7.204]`. All five criteria failed. Late composites followed closely
+`+0.006870,-0.015149,+0.166687`, so the geometry is modular and not prime-specific.  
+**FIXED PI SEQUENCE:** the middle `-(pi-3)/10` value was close (`0.589%` error), but the lower and upper frozen rungs
+failed in sign and magnitude. `NOT SUPPORTED`.  
+**POST-HOC GEOMETRY:** ten shifted windows confirmed a slow adjacent-gate beat. Median exact joint-repeat lengths
+`qr` were `54,096,009`, `436,601,021`, `3,477,342,957`, ratios `8.07` and `7.96`. This follows directly from paid
+gates `q,r~n^0.45`, hence `qr~n^0.9` and factor `10^0.9=7.943` per decimal scale rung. At full square-root gates,
+`qr~n`, giving the approximate one-extra-digit **wavelength** rule. This post-hoc result concerns closure length, not
+leak amplitude, and does not rescue PN13.  
+**ARTIFACTS:** `analysis/primes/PN13_DECIMAL_RUNG_LEAK_REPORT.md`, frozen packet/protocol/manifest, development and
+target JSON, summary CSV, primary script, `PN13_DECIMAL_RUNG_VALIDATION.json`, and post-hoc window-phase artifacts.
+
+---
+
+### T238 - PN12 prime-ladder angular Phi carrier
+
+**REGISTERED:** 21 July 2026 | **STATUS:** REGISTERED  
+**Orientation:** up = add the next prime child; circular direction = increasing normalised next-child phase.  
+**USER PRIOR:** “picture like our spheres or circles doing their thing and building their ladder structure, while
+riding on an impossibly large Phi wave.” Additional pre-run landmark: “36 degrees might be worth testing?”  
+**Claim:** the natural next-child phase of successive primorial locks advances as a coherent larger carrier, with the
+signed primary step at the golden angle `137.507764°`; `36°` is a separately rated pre-registered alternative.  
+**Test:** for `B_m=product(p_1..p_m)` and `q_m=p_(m+1)`, measure
+`u_m=(B_m mod q_m)/q_m` and `delta_m=(u_(m+1)-u_m) mod 1`. Develop on rungs 30–999 and open the untouched target
+rungs 1000–5000 only after the packet, protocol and code are frozen. Test circular coherence, angle preference,
+permutation controls, split halves and synthetic instrument checks.  
+**Prediction:** the target increments form a coherent carrier and prefer `1/phi^2 = 137.507764°`. The separate 36°
+prediction must independently satisfy the same criteria and cannot rescue the primary.  
+**Falsifier:** weak/permutation-level coherence, a rival angle fitting better, mean direction outside tolerance, or a
+split-half failure.  
+**Rivals:** `36°, 60°, 72°, 90°, 120°, 135°, 1/e turn, 137.507764°, 144°, 180°, reverse golden, 0°`.  
+**Fidelity packet:** `analysis/primes/PN12_PHI_CARRIER_FIDELITY_PACKET_v1.md`; Dylan verdict `EXACT ENOUGH TO TEST`.  
+**Protocol:** `analysis/primes/PN12_PHI_CARRIER_PROTOCOL_v1_FROZEN.md`.
+
+**RUN:** 21 July 2026 | **STATUS:** NOT SUPPORTED `[primary golden and separate 36-degree claims; 22/22 validation checks]`  
+**FRESH TARGET:** 4,001 raw phases and 4,000 upward increments on rungs `1,000–5,000`. Every residue/phase identity
+passed, and all frozen file hashes matched before opening the target.  
+**CARRIER RESULT:** circular mean direction `16.134746°`; resultant coherence `R=0.014186`. The 500 order-scrambled
+controls had mean `R=0.013812`, 95th percentile `0.026210` and 99.5th percentile `0.034153`. Thus the ordered ladder
+was no more directionally coherent than its scrambled phase inventory.  
+**PRIMARY GOLDEN RESULT:** `137.507764°` ranked `9/12` by mean circular distance (`0.251530`) and failed coherence,
+location, direction and both-half stability. Best-rival-minus-golden bootstrap interval
+`[-0.011984,0.002851]`. `NOT SUPPORTED`.  
+**SEPARATE 36-DEGREE RESULT:** 36° ranked first (`0.246951`) but had only `0.000631` lower loss than 0°; its bootstrap
+interval `[-0.002229,0.003530]` crossed zero, the shared coherence failed and the half-directions shifted. This is the
+nearest label on an almost even circle, not a coherent 36° carrier. `NOT SUPPORTED`.  
+**GEOMETRY VERDICT:** the adjacent next-child phase is exact and spans almost the complete circle; its increments are
+broad with near-even quantiles. No fixed one-angle larger carrier appears in this projection. This rejects only the
+adjacent-child constant-step reading, not curved/nonconstant carriers, full-torus hypotheses, PN11's exact lock/echo
+geometry, or ARA's core recursion claim.  
+**POST-HOC ONE-THRUSTER PROBE:** Dylan proposed that `R=0.01419` might be a Pi-leak remainder propelling the circular
+pattern. A persistent thrust would require a signed mean vector with stable direction and nonzero asymptotic magnitude.
+Instead, `R=0.0141862` at `N=4,000` matches the random-direction finite-sample expectation
+`sqrt(pi)/(2sqrt(N))=0.0140125`; prefix magnitudes decay approximately as `1/sqrt(N)` and block directions wander.
+The registered Pi-leak quantities are `pi-3=0.141592654` and `(pi-3)/pi=0.045070341`; `(pi-3)/10=0.014159265`
+requires an unregistered post-hoc scaling. Verdict: `NOT SUPPORTED ON OPEN PN12 DATA`; retain the plateau-plus-stable-
+direction criterion for a possible fresh higher-rung test.  
+**ARTIFACTS:** `analysis/primes/PN12_PHI_CARRIER_REPORT.md`, frozen packet/protocol/manifest, development and target
+JSON/CSV, primary script, validator and `PN12_PHI_CARRIER_VALIDATION.json`.
+
+---
+
+### T237 - PN11 Phi vertical handover through prime resonance families
+
+**REGISTERED:** 21 July 2026 | **STATUS:** REGISTERED — TARGET SEALED  
+**Orientation:** `2` = existing distinct-child information lock; `0` = repeat/multiplicity echo. Increasing the
+integer multiplier moves upward/larger, decreasing the old-lock share until a new child expands and resets the lock.  
+**Claim:** the first new-child incorporation in a fundamental resonance family's harmonic-repeat path occurs
+preferentially near `(old lock,echo)=(phi,2-phi)`, more strongly than near fixed neighbouring landmarks.  
+**Test:** enumerate every eligible squarefree fundamental base in development `[5,000,1,000,000)` and, only after
+source freeze, target `[10,000,000,11,000,000)`. For smallest absent prime `q`, score the event coordinate
+`X_B=2 log(B)/log(qB)`, the full pre-event path, equal-width transition hazards, split halves and crowded-neighbourhood
+controls.  
+**Prediction:** Phi ranks first for mean event distance and `+-0.025` transition hazard on the fresh target; its
+paired block-bootstrap advantage over the best frozen rival is positive, and its direction repeats in both halves.  
+**Falsifier:** with adequate event counts and exact closure, Phi loses any registered event-location, hazard or
+split-half criterion.  
+**Rivals:** `1.5`, `1.6`, `13/8`, `5/3`, `1.75`, `1.8`, `2.0`, plus the target median disclosed only as an oracle.  
+**Fidelity packet:** `analysis/primes/PN11_PHI_VERTICAL_HANDOVER_FIDELITY_PACKET_v1.md`; Dylan verdict
+`EXACT ENOUGH TO TEST` under the low-energy explicit-approval rule.  
+**Protocol:** `analysis/primes/PN11_PHI_VERTICAL_HANDOVER_PROTOCOL.md`; hashes will be sealed in the freeze manifest
+before the development or target outcomes are calculated.
+**Development-only amendment:** v1's requirement that every rival hazard window contain 30 events proved impossible
+for out-of-support boundary landmarks. Before opening the unchanged target, v2 retained every coordinate, landmark,
+window and pass direction but restricted hazard ranking to windows with at least 30 events:
+`analysis/primes/PN11_PHI_VERTICAL_HANDOVER_PROTOCOL_v2_FROZEN.md`.
+**Final pre-target rating amendment:** v3 makes a clean P2/P4 failure decisive even if the secondary hazard window is
+underpopulated; missing P3 support cannot hide another adequate falsifier. No target, coordinate, landmark or pass
+direction changed: `analysis/primes/PN11_PHI_VERTICAL_HANDOVER_PROTOCOL_v3_TARGET_FREEZE.md`.
+
+**RUN:** 21 July 2026 | **STATUS:** NOT SUPPORTED `[P1 pass; P2 fail; P3 underpopulated at Phi; P4 fail; 26/26 independent checks]`  
+**FRESH TARGET:** `[10,000,000,11,000,000)` contained `45,768` eligible fundamental resonance families. Exact
+two-share closure held to `4.44e-16`; every pre-`q` multiplier preserved the old child set and every `qB` added exactly
+the first missing child. P1 passes.  
+**PRIMARY RESULT:** expansion position `X_B=2/(1+log(q)/log(B))` had mean `1.853770` and median `1.872585`. Phi's
+mean absolute distance was `0.235736` and ranked sixth of eight frozen landmarks; `9/5` ranked first at `0.056714`.
+Paired best-rival-minus-Phi difference `-0.179022`, 95% 100-block interval
+`[-0.179105,-0.178939]`. Both target halves were negative. P2 and P4 fail.  
+**PHI WINDOW:** no eligible target path reached Phi before its first child expansion; the frozen `phi+-0.025` window
+contained zero exposures and zero events. P3 is underpopulated, but under v3 it cannot hide the decisive P2/P4
+failures.  
+**ANALYTIC EXPLANATION:** exact Phi placement requires `q=B^(1/phi^3)`. Near `B=10^7`, this requires `q~44.9`; the
+observed first missing children were `3-17`, median `3`. With small `q` and increasing `B`, `X_B` tends to `2`.
+Including `q=2` families moved the result still closer to 2.  
+**GEOMETRY VERDICT:** the fundamental-lock -> harmonic-repeat path -> expanded-lock sequence and its reversible
+Phase-A/Phase-B shares are exact. The first expansion is relational to `log(q)/log(B)` rather than fixed at Phi. The
+510 path crosses Phi locally between repeats 4 and 5 but adds child 7 at repeat 7 (`X=1.524246`), so crossing and
+handover are different claims.  
+**RATING:** NOT SUPPORTED `[pre-registered fresh target]` for Phi as the universal first-expansion landmark. This does
+not reject alternative predeclared vertical observables or the retained exact resonance geometry.  
+**ARTIFACTS:** `analysis/primes/PN11_PHI_VERTICAL_HANDOVER_REPORT.md`, fidelity packet, v1-v3 protocols, target freeze,
+primary and sensitivity scripts, development/target/validation JSON, target event and landmark CSVs, and q-stratum
+table.
+
+### T236 - PN10C mod-6 three-lane coupling diagnostic
+
+**METHOD LOCKED:** 20 July 2026 | **RUN:** 20 July 2026 | **STATUS:** POST-HOC STRUCTURAL RECOVERY `[red/blue conditional pair supported; black common lane supported; independent stronger black wave not supported; 17/17 checks]`  
+**Orientation:** prime centres are separated into `1 mod 6` and `5 mod 6`; nonzero even offsets form lanes `0`, `2` and `4 mod 6`. Within lane 0, `m=(offset/6) mod 5` is the mod-30 child coordinate.  
+**Question:** Do the red, blue and black families marked in the PN10B event trace behave as two exchanging phase branches plus a directly coupled third branch, and does the black branch decompress recursively?  
+**Data boundary:** Already-open PN10B interval `[4,000,000,000,4,001,000,000)`; 45,156 interior prime centres; `+-150` offsets; 45,156 orientation-matched coprime-composite controls. The lane-conditioned questions were frozen before calculation, but the interval was already open, so this cannot be prospective confirmation.
+
+**RESULT:** Red and blue exchange roles by `+0.323728739`, 95% contiguous-block interval `[+0.323297830,+0.324170905]`. Reflecting the `1 mod 6` trace onto the `5 mod 6` trace reduces mean absolute mismatch from `0.107882044` to `0.000514642` (`99.52%`). The two marked coloured families are therefore a clean conditional orientation pair.  
+**BLACK DISCRIMINATOR:** Black is invariant across orientations: difference `-0.000357929`, interval `[-0.001292323,+0.000520355]`. Before conditioning it exceeds pooled red/blue by `+0.157804263`, explaining its larger appearance. After conditioning it is `-0.004060107` below the currently admissible coloured branch, interval `[-0.004683892,-0.003406882]` (`d=-0.153`). A stronger independent third black wave is not supported at this grain. Black is the common mod-6-admissible route that preserves either orientation.  
+**CHILD DECOMPRESSION:** Writing black offsets as `k=6m` exposes the mod-30 wheel. In each centre-`mod 5` row, the child satisfying `(p mod 5 + m mod 5) mod 5=0` rotates into an exact factor-5 trough. Suppressed progress is `0.145586686`, eligible progress `0.487412541`; contrast `+0.341825856`, interval `[+0.341293895,+0.342367422]`.  
+**CONTROL:** Matched coprime composites reproduce the red/blue swap (`+0.323995414`), proving the surrounding shoulder pattern is general modular structure rather than prime-specific emission. The exact central `1.0` parent ridge remains prime-specific by definition.  
+**INTERPRETATION (Dylan translation):** The marked three-line appearance was real. Its decompressed identity is two reversible coloured orientations plus one shared route, and that shared route contains its own rotating child trough. This supports ARA's insistence on conditioning direction and drilling parent-to-child without flattening. The mathematical mechanism is established wheel-sieve arithmetic, so this is a strong crosswalk rather than a new prime theorem or proof of universal fractality.  
+**RATING:** SUPPORTED POST-HOC STRUCTURAL CROSSWALK / INDEPENDENT-THIRD-WAVE REFINED AWAY. PN10B's registered `NULL` remains unchanged.  
+**VALIDATION:** Independent regeneration and arithmetic replay passed `17/17` checks, including every prime offset, all 222 worked-example rows and zero mod-3/mod-5 identity violations.  
+**ARTIFACTS:** `analysis/primes/PN10C_MOD6_THREE_LANE_COUPLING_REPORT.md`, frozen protocol, primary/validation/notebook/report-builder scripts, results/validation JSON, four CSVs, static figure, executed notebook and validated interactive report artifact.
+
+### T235 - PN10B child phase inside the pre-ridge factor sphere
+
+**METHOD LOCKED:** 20 July 2026 | **RUN:** 20 July 2026 | **STATUS:** NULL `[P1 pass; P2-P6 fail; 79/79 independent checks; p31 wheel/R12 protected]`  
+**Orientation:** `0` = previous tested multiple, `2` = next tested multiple; gates are ordered from the largest already-paid divisor gate downward. Parent cutoff is `c=0.90`.  
+**Question:** Do the Phase A/Phase B positions and adjacent couplings of the last nine already-tested divisor gates rank which pre-ridge survivors are prime, without testing any new divisor?  
+**Fresh target:** `[4,000,000,000,4,001,000,000)`; 54,275 survivors, 45,166 primes and 9,109 composites.  
+**Fidelity packet:** `analysis/primes/PN10B_CHILD_PHASE_PRIME_RANKING_PROTOCOL.md`, protocol SHA-256 `4B7763F2D6BCB2CA1F617BD55D36441E54482BB1A57948D3DC3901F9E1DF2D89`; primary source SHA-256 `7B3C784FFEA2B38C42EC1993C0831B62FD64303FCD999A3B1738FA0141B91B19`.
+
+**RESULT:** The child axes closed exactly (`max|A+B-2|=0`), every gate remained below `n^0.45`, and no paid remainder was zero. P1 passes. The primary ARA full model scored `0.652923909` bits per survivor versus `0.652816910` for the empirical parent. Its gain was `-0.000106999` bits/event with 95% block-bootstrap interval `[-0.000241111,+0.000034314]`; AUC was `0.500307`. P2 fails.  
+**CONTROLS:** ARA full was numerically tied with Raw full (gain `-0.000000036`, interval crossing zero) and did not beat the order-scrambled ARA control. The tiny D-to-E positive gain reversed on the untouched target. ARA compact beat Raw compact by `+0.000055850` bits/event, but both were worse than parent. The constant Buchstab rough-number probability had the best fresh log loss (`0.652720245`) while providing no individual ranking (`AUC=0.5`). P3-P6 fail.  
+**INTERPRETATION (Dylan translation):** The two factor-sphere directions can be decompressed into smaller A/B child axes, but these particular children do not reveal the hidden later factor. Their geometry is valid; their proposed individual-prime information is not found.  
+**RATING:** NULL `[pre-registered fresh interval; n=54,275 survivors; independently validated]`.  
+**LIMIT:** This is evidence against one nine-gate residue-phase child representation, not against all ARA decompression or the broader fractal claim. Exact prime identity still requires the remaining factor gates.  
+**VALIDATION:** Independent direct-multiple masks, feature reconstruction, fitted-gradient checks and metric replay passed `79/79`; maximum metric disagreement was `0`.  
+**POST-HOC GEOMETRY VERDICT (added 20 Jul 2026; frozen rating unchanged):** The parent factor-progress coordinate forms an exact `1.0` crest at each prime, with parity troughs near `0.062701` at every odd raw offset and sieve-period shoulders at even offsets. The nine paid-gate children inside individual primes are broad and frequently flipping: pooled prime child A spans `0.0000955-1.9999044`; individual prime centroids span `0.4997889-1.4266385`; the mean flip count is `4.1286`. Population aggregation cancels to `0.9998605`, but surviving composites show almost identical geometry (`0.9986144`; every standardized summary difference `<0.015`). Therefore the parent event ridge is recovered descriptively while a prime-specific child warning is absent. This explains the registered NULL and does not promote it.  
+**ARTIFACTS:** `analysis/primes/PN10B_CHILD_PHASE_PRIME_RANKING_REPORT.md`, `analysis/primes/PN10B_EVENT_CENTERED_GEOMETRY_REPORT.md`, protocol/freeze manifest, primary and post-hoc diagnostic scripts, results/validation JSON, score/metric/comparison/event-trace/landmark/example CSVs, executed notebooks, static figures and validated Data Analytics report artifact.
+
+### T234 - PN10 factor-sphere prime recovery and early-ridge transfer
+
+**METHOD LOCKED:** 20 July 2026 | **RUN:** 20 July 2026 | **STATUS:** SUPPORTED EXACT CROSSWALK + SUPPORTED FRESH SCALE TRANSFER `[P1-P6 pass; pre-ridge individual prediction remains incomplete; p31 wheel/R12 protected]`  
+**Orientation:** `0` = factor `1`; `1.0` = square-root factor ridge; `2` = whole integer `n`. The small-factor sieve walk and large-factor decomposition are reversible directions through the same ARA factor sphere, not independent evidence.  
+**Question:** Can `x_n(d)=2 log(d)/log(n)` recover primality exactly at the ridge and transfer partial survivor purity from a million-number interval near `10^6` to a fresh million-number interval near `2 x 10^9`?  
+**Development:** `[1,000,000,2,000,000)`. **Fresh target:** `[2,000,000,000,2,001,000,000)`. **Primary early cutoffs:** `0.25,0.50,0.75,0.90`. **Control:** the same development-calibrated probability after an unscaled fixed absolute divisor cutoff.  
+**Fidelity packet:** `analysis/primes/PN10_FACTOR_SPHERE_PRIME_RECOVERY_PROTOCOL.md`, SHA-256 `A46FC79D82034CB827F907C531C4DF208B9E33E3AFCE8E9E00D60E637D8F4BEE`.  
+
+**RESULT:** The ridge-complete rule recovered all `46,903` primes in the fresh one-million-integer interval with zero false positives and false negatives. Every composite factor pair satisfied `x(d)+x(n/d)=2` to maximum error `4.44e-16`. All `1,229` checked prime squares placed their root at the exact `1.0` ridge. Survivor purity rose monotonically to `100%` in both intervals.  
+**FRESH TRANSFER:** At cutoff `0.90`, development survivor purity was `83.7346%` and fresh purity was `83.5286%`, an absolute error of `0.206` percentage points; the fixed-Q control missed by `29.735` percentage points. Across all four cutoffs, ARA mean Brier was `0.021150` versus `0.034329`, and mean purity-transfer error was `0.009205` versus `0.190307`. P1-P6 pass.  
+**LIMIT:** At cutoff `0.90`, `9,249` composites remained among `56,152` survivors. The one-coordinate method therefore does not identify individual primes early. Complete recovery is algebraically ordinary trial division through `sqrt(n)` in the ARA coordinate. The transfer supports useful scale-normalisation but remains compatible with established relative-logarithmic factor/rough-number structure.  
+**VALIDATION:** An independent segmented prime mask plus direct per-cutoff multiple marking passed `64/64` checks. The executed notebook completed `5/5` code cells without errors. The interactive report artifact passed schema/source validation after its chart rows were materialised through recorded SQLite queries.  
+**ARTIFACTS:** `analysis/primes/PN10_FACTOR_SPHERE_PRIME_RECOVERY_REPORT.md`, protocol, primary and independent scripts, result/validation JSON, two CSV tables, static figure, executed notebook, relational glossary update and validated interactive report artifact.
+
 ### T233 - PN3B raw dual-phase / missing-wave diagnostic
 
 **METHOD LOCKED:** 18 July 2026 | **RUN:** 18 July 2026 | **STATUS:** OPEN-DATA DIAGNOSTIC `[second coordinate locally structured; registered Time-like candidate not supported; p31 unopened]`

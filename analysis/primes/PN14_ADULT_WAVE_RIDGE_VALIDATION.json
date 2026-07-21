@@ -1,0 +1,585 @@
+{
+  "checks": {
+    "adult_metrics_match": true,
+    "all_16_sector_counts_and_means_match": true,
+    "all_frozen_hashes_match": true,
+    "geometry_matches": true,
+    "small_cycle_recovers_analytic_curve": false
+  },
+  "geometry_checks": {
+    "all_lcm_equal_product": true,
+    "gates_match": true,
+    "median_match": true,
+    "pairs_match": true,
+    "representative_match": true
+  },
+  "hash_checks": {
+    "PN14_ADULT_WAVE_RIDGE_FIDELITY_PACKET_v1.md": {
+      "actual": "d70c94530a356fdbbabdbe076dff50355d30f5e63295a8db3d7ed7124cdae686",
+      "expected": "d70c94530a356fdbbabdbe076dff50355d30f5e63295a8db3d7ed7124cdae686",
+      "match": true
+    },
+    "PN14_ADULT_WAVE_RIDGE_PROTOCOL_v1_FROZEN.md": {
+      "actual": "db17a92f5bcb417e8784ba0542b82112063ffc9a8f5df2a4ae271527f13c626c",
+      "expected": "db17a92f5bcb417e8784ba0542b82112063ffc9a8f5df2a4ae271527f13c626c",
+      "match": true
+    },
+    "PN14_DEVELOPMENT_RESULTS.json": {
+      "actual": "fe8e65bf6b9fdf9f1e1d391fa4802e2b74adff1bc014d99436615641089f393c",
+      "expected": "fe8e65bf6b9fdf9f1e1d391fa4802e2b74adff1bc014d99436615641089f393c",
+      "match": true
+    },
+    "PN14_DEVELOPMENT_SECTORS.csv": {
+      "actual": "73300072be6630830988e9e652b0035a788598d6f38949a1f55728e8d899bca7",
+      "expected": "73300072be6630830988e9e652b0035a788598d6f38949a1f55728e8d899bca7",
+      "match": true
+    },
+    "PN14_DEVELOPMENT_TEMPLATE.json": {
+      "actual": "ccca11cb80f2167236eea64de70e49b71f23441c6be52678d14ba11dc95c51d0",
+      "expected": "ccca11cb80f2167236eea64de70e49b71f23441c6be52678d14ba11dc95c51d0",
+      "match": true
+    },
+    "pn14_adult_wave_ridge.py": {
+      "actual": "0f7ae5658026b86a7903152c106ce33304f4cfc823cd5518c2e614afa8181239",
+      "expected": "0f7ae5658026b86a7903152c106ce33304f4cfc823cd5518c2e614afa8181239",
+      "match": true
+    },
+    "validate_pn14_adult_wave_ridge.py": {
+      "actual": "4f5167e59cecceaf7a14e07bf63f93d18d5f0ecf736ac0149fd9ce5ec6190d69",
+      "expected": "4f5167e59cecceaf7a14e07bf63f93d18d5f0ecf736ac0149fd9ce5ec6190d69",
+      "match": true
+    }
+  },
+  "metric_checks": {
+    "G10_abs_error": 0.0,
+    "ridge_abs_error": 0.0
+  },
+  "passed": false,
+  "passed_count": 4,
+  "sector_checks": [
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9931,
+          "expected_mean": 0.27132322296183214,
+          "mean_abs_error": 0.0,
+          "measured_count": 9931,
+          "measured_mean": 0.27132322296183214
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49833,
+          "expected_mean": 0.2732834243879296,
+          "mean_abs_error": 0.0,
+          "measured_count": 49833,
+          "measured_mean": 0.2732834243879296
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.2727432044174866,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.2727432044174866
+        }
+      },
+      "sector": 0
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9879,
+          "expected_mean": 0.16474234291205092,
+          "mean_abs_error": 0.0,
+          "measured_count": 9879,
+          "measured_mean": 0.16474234291205092
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49666,
+          "expected_mean": 0.16404393229912165,
+          "mean_abs_error": 0.0,
+          "measured_count": 49666,
+          "measured_mean": 0.16404393229912165
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.16346292786084585,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.16346292786084585
+        }
+      },
+      "sector": 1
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 10051,
+          "expected_mean": 0.0765615186042126,
+          "mean_abs_error": 0.0,
+          "measured_count": 10051,
+          "measured_mean": 0.0765615186042126
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49716,
+          "expected_mean": 0.06911856952722395,
+          "mean_abs_error": 0.0,
+          "measured_count": 49716,
+          "measured_mean": 0.06911856952722395
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.06964552233134742,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.06964552233134742
+        }
+      },
+      "sector": 2
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 10023,
+          "expected_mean": -0.011970733407437565,
+          "mean_abs_error": 0.0,
+          "measured_count": 10023,
+          "measured_mean": -0.011970733407437565
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49902,
+          "expected_mean": -0.006276894491403564,
+          "mean_abs_error": 0.0,
+          "measured_count": 49902,
+          "measured_mean": -0.006276894491403564
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.008413489219295295,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.008413489219295295
+        }
+      },
+      "sector": 3
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 10071,
+          "expected_mean": -0.07028787784790745,
+          "mean_abs_error": 0.0,
+          "measured_count": 10071,
+          "measured_mean": -0.07028787784790745
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49899,
+          "expected_mean": -0.07072714706706054,
+          "mean_abs_error": 0.0,
+          "measured_count": 49899,
+          "measured_mean": -0.07072714706706054
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.07096495530330617,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.07096495530330617
+        }
+      },
+      "sector": 4
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9955,
+          "expected_mean": -0.11730419406690717,
+          "mean_abs_error": 0.0,
+          "measured_count": 9955,
+          "measured_mean": -0.11730419406690717
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49736,
+          "expected_mean": -0.11773807139883892,
+          "mean_abs_error": 0.0,
+          "measured_count": 49736,
+          "measured_mean": -0.11773807139883892
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.11786365979173304,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.11786365979173304
+        }
+      },
+      "sector": 5
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9956,
+          "expected_mean": -0.15185905185981313,
+          "mean_abs_error": 0.0,
+          "measured_count": 9956,
+          "measured_mean": -0.15185905185981313
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49823,
+          "expected_mean": -0.1487225661951302,
+          "mean_abs_error": 0.0,
+          "measured_count": 49823,
+          "measured_mean": -0.1487225661951302
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.14908822848647418,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.14908822848647418
+        }
+      },
+      "sector": 6
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9814,
+          "expected_mean": -0.16458163314438767,
+          "mean_abs_error": 0.0,
+          "measured_count": 9814,
+          "measured_mean": -0.16458163314438767
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49780,
+          "expected_mean": -0.16467987804899015,
+          "mean_abs_error": 0.0,
+          "measured_count": 49780,
+          "measured_mean": -0.16467987804899015
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.1647175873966101,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.1647175873966101
+        }
+      },
+      "sector": 7
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 10132,
+          "expected_mean": -0.16491309867383833,
+          "mean_abs_error": 0.0,
+          "measured_count": 10132,
+          "measured_mean": -0.16491309867383833
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49792,
+          "expected_mean": -0.1650980415162015,
+          "mean_abs_error": 0.0,
+          "measured_count": 49792,
+          "measured_mean": -0.1650980415162015
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.16471758616698273,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.16471758616698273
+        }
+      },
+      "sector": 8
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9918,
+          "expected_mean": -0.14938337169238963,
+          "mean_abs_error": 0.0,
+          "measured_count": 9918,
+          "measured_mean": -0.14938337169238963
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49739,
+          "expected_mean": -0.14841332020866246,
+          "mean_abs_error": 0.0,
+          "measured_count": 49739,
+          "measured_mean": -0.14841332020866246
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.14908822942677993,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.14908822942677993
+        }
+      },
+      "sector": 9
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9911,
+          "expected_mean": -0.11906939154141354,
+          "mean_abs_error": 0.0,
+          "measured_count": 9911,
+          "measured_mean": -0.11906939154141354
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49818,
+          "expected_mean": -0.11653423967469863,
+          "mean_abs_error": 0.0,
+          "measured_count": 49818,
+          "measured_mean": -0.11653423967469863
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.11786365827279799,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.11786365827279799
+        }
+      },
+      "sector": 10
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9968,
+          "expected_mean": -0.07067349466334982,
+          "mean_abs_error": 0.0,
+          "measured_count": 9968,
+          "measured_mean": -0.07067349466334982
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49655,
+          "expected_mean": -0.07036738803575938,
+          "mean_abs_error": 0.0,
+          "measured_count": 49655,
+          "measured_mean": -0.07036738803575938
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.0709649559543042,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.0709649559543042
+        }
+      },
+      "sector": 11
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 10040,
+          "expected_mean": -0.012193273033930972,
+          "mean_abs_error": 0.0,
+          "measured_count": 10040,
+          "measured_mean": -0.012193273033930972
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49516,
+          "expected_mean": -0.009556098726667272,
+          "mean_abs_error": 0.0,
+          "measured_count": 49516,
+          "measured_mean": -0.009556098726667272
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": -0.008413489725528106,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": -0.008413489725528106
+        }
+      },
+      "sector": 12
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9976,
+          "expected_mean": 0.07429449501458699,
+          "mean_abs_error": 0.0,
+          "measured_count": 9976,
+          "measured_mean": 0.07429449501458699
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49888,
+          "expected_mean": 0.06967481280683638,
+          "mean_abs_error": 0.0,
+          "measured_count": 49888,
+          "measured_mean": 0.06967481280683638
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.06964552196965712,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.06964552196965712
+        }
+      },
+      "sector": 13
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9987,
+          "expected_mean": 0.15609045602675128,
+          "mean_abs_error": 0.0,
+          "measured_count": 9987,
+          "measured_mean": 0.15609045602675128
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49861,
+          "expected_mean": 0.16656534976245804,
+          "mean_abs_error": 0.0,
+          "measured_count": 49861,
+          "measured_mean": 0.16656534976245804
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.16346292764392076,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.16346292764392076
+        }
+      },
+      "sector": 14
+    },
+    {
+      "center_match": true,
+      "high_match": true,
+      "low_match": true,
+      "populations": {
+        "late_composite": {
+          "count_match": true,
+          "expected_count": 9931,
+          "expected_mean": 0.27366844510284816,
+          "mean_abs_error": 0.0,
+          "measured_count": 9931,
+          "measured_mean": 0.27366844510284816
+        },
+        "prime": {
+          "count_match": true,
+          "expected_count": 49761,
+          "expected_mean": 0.2719805592160832,
+          "mean_abs_error": 0.0,
+          "measured_count": 49761,
+          "measured_mean": 0.2719805592160832
+        },
+        "raw": {
+          "count_match": true,
+          "expected_count": 1330313,
+          "expected_mean": 0.272743204345104,
+          "mean_abs_error": 0.0,
+          "measured_count": 1330313,
+          "measured_mean": 0.272743204345104
+        }
+      },
+      "sector": 15
+    }
+  ],
+  "small_cycle_fixture": {
+    "curve_correlation": 0.9989408785854283,
+    "curve_rmse": 0.006841040928373015,
+    "lcm": 10403,
+    "lcm_equals_product": true,
+    "product": 10403,
+    "q": 101,
+    "r": 103
+  },
+  "test_id": "PN14/CHILD-ADULT-RIDGE/v1",
+  "total_count": 5,
+  "validator": "independent bytearray prime sieve"
+}

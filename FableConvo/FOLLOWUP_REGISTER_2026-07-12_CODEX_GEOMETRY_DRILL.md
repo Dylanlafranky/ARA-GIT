@@ -1,10 +1,19 @@
 # ARA follow-up register — geometry drill with Codex/Sol
 
 **Captured:** 12 July 2026  
-**Last amended:** 18 July 2026 (PN3A adult sieve path and remaining large-scale prime coordinate added)
+**Last amended:** 21 July 2026 (TE-ARA canonical terminology correction added)
 **Purpose:** preserve promising threads without requiring Dylan to test them immediately.  
 **Orientation:** up = slower/larger; down = faster/smaller unless a test declares otherwise.  
 **Protocol status:** this is a planning register, not `MASTER_PREDICTION_LEDGER` registration. Every item remains `PARKED` until Dylan explicitly activates it and signs a Step-0 header under `TEST_PROTOCOL.md`.
+
+> **Canonical TE-ARA correction — 21 July 2026:** Later entries preserve their dated historical wording, but any
+> variable quantity called “TE-ARA,” `TE-ARA/2`, or `2E_id/E_total` must now be read as a **component allocation or
+> expressed A/B subtotal** inside the account. TE-ARA is the same ARA geometry viewed as total allocation. Its pure
+> identity is `Phase A + Phase B = 2`; real observed accounts may be
+> `Phase A + Phase B + environmental couplings + Other = 2`, but those contextual terms are not extra pure poles.
+> A component may be below 2 in its parent's account; opened as its own
+> identity, its internal ledger renormalises to 2. Authority:
+> `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
 
 ## Living-register governance — amended 13 July 2026
 

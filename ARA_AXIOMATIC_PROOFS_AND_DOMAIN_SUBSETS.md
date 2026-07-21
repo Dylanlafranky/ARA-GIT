@@ -3,6 +3,7 @@
 **Author:** Dylan La Franchi, with formalisation assistance from Codex  
 **Date:** 11 July 2026  
 **Centered revision:** 4:00 pm AEST, 19 July 2026
+**Prime-sieve subset closure:** 21 July 2026
 
 **Status:** Mathematical foundation draft, revised after the 19 July 2026 centering audit. Internally proved
 statements are separated from physical hypotheses.
@@ -1011,38 +1012,100 @@ as the net result. It is not independent evidence for universal ARA. A stronger 
 decomposition to predict an independently measured coupling, mode or transition not algebraically guaranteed by
 Gauss's law.
 
-### TE-ARA definition — identity-mode participation, not Gauss flux
+### TE-ARA definition — the same ARA geometry viewed as total allocation
 
-For a declared node, boundary, time window and predeclared energy-mode decomposition with \(E_{total}>0\), define
+**Canonical correction, 21 July 2026:** TE-ARA is not a second object beside ARA. It is the same `0–2` geometry read
+as the total allocation of a declared identity. TE-ARA always equals `2`; earlier versions incorrectly used its name
+for a variable expressed A/B subtotal.
+
+The pure identity contains only its Phase A and Phase B:
 
 \[
 \boxed{
-\underbrace{\mathrm{TE\!-\!ARA}}_{\substack{\text{main-identity energy participation}\\\text{reported on }0\text{--}2}}
-=2\frac{
-\underbrace{E_{id}}_{\substack{\text{energy assigned to the main}\\\text{Phase-A/Phase-B identity wave}}}
-}{
-\underbrace{E_{total}}_{\text{all energy in the same boundary/window}}
+\underbrace{\mathrm{TE\!-\!ARA}_{pure}(I)}_{\substack{\text{pure two-pole}\\\text{identity geometry}}}
+=
+\underbrace{t_A^{(I)}}_{\text{identity Phase A}}
++
+\underbrace{t_B^{(I)}}_{\text{identity Phase B}}
+=2.
 }
-}.
+\]
+
+For a real identity observed inside environment \(\mathcal E\), choose one non-overlapping account at a declared
+boundary and time window:
+
+\[
+\boxed{
+\underbrace{\mathrm{TE\!-\!ARA}_{obs}(I\mid\mathcal E)}_{\substack{\text{identity observed}\\\text{in context}}}
+=
+\underbrace{t_A+t_B}_{\text{expressed pure A/B pair}}
++
+\underbrace{\sum_jc_j}_{\text{named environmental couplings}}
++
+\underbrace{t_{Other}}_{\text{unresolved contextual coupling}}
+=2.
+}
 \tag{4d}
 \]
 
-TE-ARA weights how much measured energy participates in the declared identity mode. ARA supplies that mode's
-Phase-A/Phase-B position. Gauss supplies signed electric source flux. They are different projections and must not
-be compared as untyped numbers.
+Here `Other` is not a third pole or constituent of the pure identity. For the observed account,
 
-A candidate dimensionless main-identity contribution is
+\[
+p_c\ge0,
+\qquad \sum_c p_c=1,
+\qquad t_c=2p_c.
+\]
+
+The same-geometry bridge is explicit. Let \(T_{AB}=t_A+t_B>0\). With B oriented toward 2,
+
+\[
+\underbrace{x_{A/B}}_{\text{ARA mixture position}}
+=2\frac{t_B}{T_{AB}},
+\qquad
+\underbrace{T_{context}}_{\text{environmental remainder}}=2-T_{AB}.
+\]
+
+For a pure/context-free identity, \(T_{AB}=2\), hence \(x_{A/B}=t_B\) and \(t_A=2-x_{A/B}\). This is why TE-ARA
+is the same ARA geometry rather than an independent object.
+
+For an energy-backed partition, \(p_c=E_c/E_{total}\). Dylan's example is
+
+\[
+\underbrace{t_A}_{0.25}
++
+\underbrace{t_B}_{1.25}
++
+\underbrace{t_{Other}}_{0.50}
+=2.
+\]
+
+ARA supplies a declared A/B relation's pole-mixture position. TE-ARA is that same geometry's fixed total-allocation
+view. The observed component and environmental-coupling allocations supply the variable distribution. Gauss supplies signed electric source flux. They are
+different projections and must not be compared as untyped numbers.
+
+The historical variable previously called TE-ARA is now the expressed pure-pair subtotal
+
+\[
+\underbrace{T_{AB}\equiv T_{id}}_{\substack{\text{observed A/B-family}\\\text{subtotal}}}
+=2\frac{E_{id}}{E_{total}},
+\qquad
+\underbrace{T_{context}}_{\text{environmental remainder}}=2-T_{AB}.
+\]
+
+A candidate dimensionless expressed-pair contribution is therefore
 
 \[
 \underbrace{j_{id}}_{\text{signed identity contribution}}
 =
-\underbrace{\frac{\mathrm{TE\!-\!ARA}}2}_{\text{identity participation}}
+\underbrace{\frac{T_{AB}}2}_{\text{variable expressed-pair share}}
 \underbrace{(x-1)}_{\text{centred ARA direction}}.
 \tag{4e}
 \]
 
-Equation (4e) is an ARA aggregation hypothesis outside the exact Gauss decomposition. Applying it physically
-requires a common unit scale, independently declared modes, and separately measured surrounding contributions.
+Using canonical `TE-ARA/2` in (4e) would merely multiply by one because TE-ARA is fixed at 2. Equation (4e) remains
+an ARA aggregation hypothesis outside the exact Gauss decomposition. Applying it physically requires a common unit
+scale, independently declared modes and separately measured surrounding contributions. Full correction:
+`analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
 
 ---
 
@@ -2019,7 +2082,191 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 
 ---
 
-# Part IX — What is proved, assumed, and still testable
+# Part IX — Prime-factor and wheel-sieve subset
+
+## 18. Factor pairs form an exact reversible 0–2 diameter
+
+Let \(n>1\) and define the relative-log factor coordinate
+
+\[
+\underbrace{x_n(d)}_{\substack{\text{mathematical relative-log factor coordinate}\\\text{ARA: position from factor }1\text{ toward }n}}
+=
+2\frac{\log d}{\log n},
+\qquad 1\le d\le n.
+\]
+
+### Theorem 25 — Complementary factors close exactly to 2
+
+If \(d\mid n\), then
+
+\[
+\underbrace{x_n(d)}_{\text{one factor direction}}
++
+\underbrace{x_n(n/d)}_{\text{complementary factor direction}}
+=2.
+\]
+
+**Proof.**
+
+\[
+x_n(d)+x_n(n/d)
+=2\frac{\log d+\log(n/d)}{\log n}
+=2\frac{\log n}{\log n}=2.
+\]
+
+Thus \(d=\sqrt n\) is exactly the \(1.0\) ridge. Every composite \(n\) has at least one prime divisor
+\(q\le\sqrt n\); conversely, if no prime \(q\le\sqrt n\) divides \(n\), then \(n\) is prime. \(\square\)
+
+**Plain explanation.** A factor and its partner occupy opposite positions on one exact factor diameter. Walking every
+prime divisor gate up to the square-root ridge identifies primes perfectly. This is ordinary factorisation/trial
+division in ARA coordinates, not a faster prime theorem.
+
+## 19. Wheel residues admit exact anti-pair compression
+
+For an even integer \(M>2\), define its wheel residues
+
+\[
+U(M)=\{r:1\le r<M,\ \gcd(r,M)=1\}.
+\]
+
+### Theorem 26 — Wheel reversal is a fixed-point-free involution
+
+The map
+
+\[
+\underbrace{\iota_M(r)}_{\substack{\text{mathematical modular negation}\\\text{ARA: anti-phase residue}}}
+=M-r
+\]
+
+maps \(U(M)\) to itself, satisfies \(\iota_M(\iota_M(r))=r\), and has no fixed point. Consequently \(U(M)\)
+contains exactly \(\varphi(M)/2\) reversible pairs.
+
+**Proof.** \(\gcd(M-r,M)=\gcd(r,M)=1\), so the map remains inside \(U(M)\), and applying it twice returns \(r\).
+A fixed point would require \(r=M/2\), which is not coprime to even \(M>2\). Therefore the units split into
+two-element orbits. \(\square\)
+
+**Plain explanation.** Every surviving wheel lane has one exact opposite lane. We need store only one representative
+of each pair if the modulus and reflection rule are retained.
+
+### Theorem 27 — A new prime gate reflects the two killed child copies about the 1.0 ridge
+
+Let \(p\) be an odd prime with \(p\nmid M\). The \(p\) lifted copies of residue \(r\) are
+
+\[
+r+jM,\qquad j=0,1,\ldots,p-1.
+\]
+
+Exactly one copy is divisible by \(p\), at
+
+\[
+\underbrace{k_A}_{\substack{\text{A-side killed copy}\\\text{child collision index}}}
+\equiv-rM^{-1}\pmod p.
+\]
+
+For the anti-phase residue \(M-r\), the killed copy is
+
+\[
+\underbrace{k_B}_{\substack{\text{B-side killed copy}\\\text{reflected child collision}}}
+=p-1-k_A.
+\]
+
+Normalizing the copy indices to the ARA diameter,
+
+\[
+x_A=\frac{2k_A}{p-1},
+\qquad
+x_B=\frac{2k_B}{p-1},
+\]
+
+gives
+
+\[
+\boxed{x_B=2-x_A},
+\qquad
+\boxed{\frac{x_A+x_B}{2}=1}.
+\]
+
+**Proof.** Since \(M\) is invertible modulo \(p\), \(r+jM\equiv0\pmod p\) has exactly one solution \(k_A\).
+For \(k_B=p-1-k_A\),
+
+\[
+(M-r)+k_BM
+=pM-r-k_AM
+\equiv-r-k_AM
+\equiv0\pmod p.
+\]
+
+Uniqueness makes this the B-side killed copy. Substitution gives the two normalized identities. \(\square\)
+
+**Plain explanation.** An individual child pair can appear as `(1,1)`, `(0,2)`, `(0.5,1.5)` or any allowed
+reflection, but its complete adult mean is exactly `1.0`. This is a rigorous example of a parent ridge hiding child
+asymmetry. It does not imply the child motion is balanced or inactive.
+
+### Corollary 27.1 — One adult representative reconstructs the next rung, but child count still grows
+
+For each stored representative \(r<M/2\), retain every surviving A-side lift \(r+jM\), \(j\ne k_A\), and map it to
+
+\[
+\min(r+jM,Mp-r-jM).
+\]
+
+These values are exactly one representative of every anti-pair in \(U(Mp)\). Hence
+
+\[
+\underbrace{N_{pair}(Mp)}_{\text{next-rung stored pairs}}
+=
+\underbrace{(p-1)}_{\text{surviving child pairs per parent}}
+\underbrace{N_{pair}(M)}_{\text{current stored pairs}},
+\]
+
+while storing pairs rather than individual lanes gives exactly a \(2:1\) state compression.
+
+**Plain explanation.** The fractal rule really can be reused upward: one side reconstructs the other without loss.
+But the next rung still contains \(p-1\) distinct descendants for each current pair. Repeating geometry does not make
+the amount of information constant.
+
+## 20. Three conceptual stages are not three arithmetic operations
+
+The exact prime methods in PN17–PN19 can be written
+
+\[
+N
+\longrightarrow
+\underbrace{\mathcal C_N}_{\text{complete lower-child collision state}}
+\longrightarrow
+\underbrace{(A_N,B_N)}_{\text{two retained parent views}}
+\longrightarrow
+\underbrace{t_*}_{\text{first jointly quiet offset}}.
+\]
+
+This is a valid three-stage information decomposition. It does not establish constant computational cost. For
+example, if the lower children are packed into
+
+\[
+G_L=\prod_{q\le L}q,
+\]
+
+then the exact binary length of that apparently single parent is
+
+\[
+\lfloor\log_2G_L\rfloor+1
+=
+\left\lfloor\sum_{q\le L}\log_2q\right\rfloor+1.
+\]
+
+The child information remains inside the parent integer. Likewise Corollary 27.1 proves that wheel pair state grows
+by \(p-1\) at each gate even after the exact factor-two symmetry compression.
+
+**Empirical closure status.** PN20's three literal two-child definitions gave `0/7` exact next primes. PN21's
+ridge-straddling pair retained effectively zero parent variance and chance prime-ridge AUC. PN22 became an exact
+mod-14 wheel. PN23 passed the held-out `p=17` reconstruction with all `92,160` residues and 40/40 independent checks.
+Thus the exact \(2:1\) anti-pair compression is retained; a bounded two-scalar or three-cheap-operation next-prime
+algorithm is not supported and the prime thread is parked. Full record:
+`analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
+
+---
+
+# Part X — What is proved, assumed, and still testable
 
 ## Mathematically proved in this document
 
@@ -2055,6 +2302,14 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 21. Splitting a nonzero electric-flux boundary into outward and inward activity gives the exact Gauss crosswalk
     \(\Phi_E=T_\Phi(x_\Phi-1)=Q_{inside}/\varepsilon_0\); a zero-activity boundary leaves the mixture coordinate
     undefined rather than proving an active ridge.
+22. Complementary integer factors close exactly to 2 on the declared relative-log factor diameter, and the
+    square-root factor is its exact 1.0 ridge.
+23. For every even wheel modulus greater than 2, modular negation `r↔M-r` partitions the coprime residue lanes into
+    fixed-point-free anti-pairs.
+24. Adding a new prime gate reflects killed copy indices as `k_B=p-1-k_A`; their normalized ARA coordinates sum to
+    2 and average exactly 1.
+25. One representative per wheel anti-pair reconstructs the full next rung without loss, providing exact `2:1`
+    lane compression while the number of pair identities still grows by `p-1`.
 
 ## ARA assumptions not proved by mathematics alone
 
@@ -2074,8 +2329,9 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 9. The present-day dark-sector ratio formula is generated by this geometry rather than selected after observing
    the density ratios.
 10. Golden pulse progression improves muon recovery under a fixed experimental energy budget.
-11. The candidate aggregation \(j_{id}=(\mathrm{TE\!-\!ARA}/2)(x-1)\), with typed surrounding contributions,
-    transfers beyond the exact Gauss construction to independently measured domains.
+11. The candidate aggregation \(j_{id}=(T_{AB}/2)(x-1)\), where \(T_{AB}\) is the variable expressed A/B subtotal
+    inside the fixed contextual TE-ARA account, transfers beyond the exact Gauss construction to independently
+    measured domains with typed surrounding contributions.
 
 ## Highest-value next tests
 
@@ -2091,8 +2347,10 @@ golden phase progression improves the full product \(f_XP_X\eta_X\), not merely 
 6. **Representation fidelity:** identify Phase A and Phase B in raw or least-transformed observations, freeze two
    representation maps, and test whether coupling then projection agrees with projection then coupling on held-out
    data.
-7. **ARA × TE-ARA aggregation:** predeclare the identity modes, energy participation, direction coordinate, unit
-   scale and surrounding terms, then predict a signed held-out physical result not used to construct those inputs.
+7. **ARA × TE-ARA contextual aggregation:** predeclare the pure A/B identity, fixed-total-2 observed account,
+   variable A/B subtotal, named environmental couplings and unresolved Other, direction coordinate, native magnitude
+   scale and boundary, then predict a signed held-out
+   physical result not used to construct those inputs. Do not use the constant TE-ARA total as variable strength.
 
 ---
 
@@ -2107,6 +2365,8 @@ ARA axis. Static pole-chart reversal, octave scale change, candidate golden hand
 crossing are typed separately. Information³ begins with two identities plus their retained relation; triangular
 holonomy is one rigorous closure test, and repeated triangular closure is one sufficient self-similar construction
 rather than the primitive ARA object. Regular triangle, hexagon, pentagon, dark-sector, LLM, quantum, pendulum and
-fusion sections are exact or conditional decompressions with their assumptions visible. The mathematics proves
+fusion sections are exact or conditional decompressions with their assumptions visible. The prime subset adds exact
+factor-pair closure, wheel anti-pair reflection and lossless `2:1` recursive compression while explicitly rejecting
+the inference that three conceptual stages equal three cheap operations. The mathematics proves
 internal coherence and calculability inside those declared models; raw-first observation and prospective tests must
 decide whether the same relational geometry recurs in nature.

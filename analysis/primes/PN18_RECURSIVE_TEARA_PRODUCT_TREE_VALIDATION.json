@@ -1,0 +1,244 @@
+{
+  "test_id": "PN18/RECURSIVE-TEARA-PRODUCT-TREE/INDEPENDENT-VALIDATION/v1.1",
+  "amendment": "The pre-frozen v1 validator failed only while JSON-serializing the full child-root integer. v1.1 stores its bit length and SHA-256. The sealed prediction was not changed.",
+  "prediction_packet_sha256": "7A8C596BE0AC2624480A465CFC1B84B09437E0031BB56CA84A312F738B7A7BBA",
+  "child_root_sha256": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF",
+  "candidate": 700000000009,
+  "correction": 9,
+  "candidate_is_prime": true,
+  "candidate_is_first_prime_above_anchor": true,
+  "independent_direct_root_gcd_correction": 9,
+  "independent_segmented_sieve_correction": 9,
+  "method_classification": "established primorial/product-tree/batch-GCD primality crosswalk",
+  "check_count": 36,
+  "passed_count": 36,
+  "all_passed": true,
+  "checks": [
+    {
+      "label": "protocol hash",
+      "passed": true,
+      "observed": "5D989C96641C91676DFADD6277AE4DA06037ABAABA2018D3028DBD6EE3EA40FF",
+      "expected": "5D989C96641C91676DFADD6277AE4DA06037ABAABA2018D3028DBD6EE3EA40FF"
+    },
+    {
+      "label": "freeze protocol hash",
+      "passed": true,
+      "observed": "5D989C96641C91676DFADD6277AE4DA06037ABAABA2018D3028DBD6EE3EA40FF",
+      "expected": "5D989C96641C91676DFADD6277AE4DA06037ABAABA2018D3028DBD6EE3EA40FF"
+    },
+    {
+      "label": "frozen primary script hash",
+      "passed": true,
+      "observed": "275971D986E0DAF653EC082A141726AC19D1C4EC87F27AEA4C39A5E5BF079376",
+      "expected": "275971D986E0DAF653EC082A141726AC19D1C4EC87F27AEA4C39A5E5BF079376"
+    },
+    {
+      "label": "original frozen validator retained",
+      "passed": true,
+      "observed": "643833BB4C22F00F97C0F2D0C6190FCBF36C654D3E6B75CFDD5BA56FA7C90E32",
+      "expected": "643833BB4C22F00F97C0F2D0C6190FCBF36C654D3E6B75CFDD5BA56FA7C90E32"
+    },
+    {
+      "label": "v1.1 validator hash",
+      "passed": true,
+      "observed": "FCA7E0A48B34B23CBD044F61EDC7EC5433E42D35649E0B32EC99FC1335841385",
+      "expected": "FCA7E0A48B34B23CBD044F61EDC7EC5433E42D35649E0B32EC99FC1335841385"
+    },
+    {
+      "label": "sealed prediction hash",
+      "passed": true,
+      "observed": "7A8C596BE0AC2624480A465CFC1B84B09437E0031BB56CA84A312F738B7A7BBA",
+      "expected": "7A8C596BE0AC2624480A465CFC1B84B09437E0031BB56CA84A312F738B7A7BBA"
+    },
+    {
+      "label": "prediction child-root hash",
+      "passed": true,
+      "observed": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF",
+      "expected": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF"
+    },
+    {
+      "label": "fresh anchor remained frozen",
+      "passed": true,
+      "observed": 700000000000,
+      "expected": 700000000000
+    },
+    {
+      "label": "frozen window",
+      "passed": true,
+      "observed": 65536,
+      "expected": 65536
+    },
+    {
+      "label": "independent child count",
+      "passed": true,
+      "observed": 66650,
+      "expected": 66650
+    },
+    {
+      "label": "independent child ceiling",
+      "passed": true,
+      "observed": 836657,
+      "expected": 836657
+    },
+    {
+      "label": "independent child root equals stored root",
+      "passed": true,
+      "observed": {
+        "type": "large_integer_descriptor",
+        "bit_length": 1205845,
+        "byte_length": 150731,
+        "sha256_big_endian": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF"
+      },
+      "expected": {
+        "type": "large_integer_descriptor",
+        "bit_length": 1205845,
+        "byte_length": 150731,
+        "sha256_big_endian": "98ECD397C66F43A42BCC5BB6E72053A40F480D64DD7E4798A3DEF8663F7C48BF"
+      }
+    },
+    {
+      "label": "root bit length",
+      "passed": true,
+      "observed": 1205845,
+      "expected": 1205845
+    },
+    {
+      "label": "root byte length",
+      "passed": true,
+      "observed": 150731,
+      "expected": 150731
+    },
+    {
+      "label": "direct root-GCD correction",
+      "passed": true,
+      "observed": 9,
+      "expected": 9
+    },
+    {
+      "label": "direct p29 candidate rank",
+      "passed": true,
+      "observed": 3,
+      "expected": 3
+    },
+    {
+      "label": "independent segmented-sieve correction",
+      "passed": true,
+      "observed": 9,
+      "expected": 9
+    },
+    {
+      "label": "candidate reconstructed",
+      "passed": true,
+      "observed": 700000000009,
+      "expected": 700000000009
+    },
+    {
+      "label": "candidate has no lower-child collision",
+      "passed": true,
+      "observed": 0,
+      "expected": 0
+    },
+    {
+      "label": "all earlier offsets have a child collision",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "candidate deterministic Miller-Rabin",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "candidate full trial division",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "no earlier Miller-Rabin prime",
+      "passed": true,
+      "observed": [],
+      "expected": []
+    },
+    {
+      "label": "development 100000000 exact",
+      "passed": true,
+      "observed": 100000007,
+      "expected": 100000007
+    },
+    {
+      "label": "development 100000000 primality",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "development 1000000000 exact",
+      "passed": true,
+      "observed": 1000000007,
+      "expected": 1000000007
+    },
+    {
+      "label": "development 1000000000 primality",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "development 10000000000 exact",
+      "passed": true,
+      "observed": 10000000019,
+      "expected": 10000000019
+    },
+    {
+      "label": "development 10000000000 primality",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "development 100000000000 exact",
+      "passed": true,
+      "observed": 100000000003,
+      "expected": 100000000003
+    },
+    {
+      "label": "development 100000000000 primality",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "development 400000000000 exact",
+      "passed": true,
+      "observed": 400000000019,
+      "expected": 400000000019
+    },
+    {
+      "label": "development 400000000000 primality",
+      "passed": true,
+      "observed": true,
+      "expected": true
+    },
+    {
+      "label": "uint32 child-list bytes",
+      "passed": true,
+      "observed": 266600,
+      "expected": 266600
+    },
+    {
+      "label": "one-bit odd sieve bytes",
+      "passed": true,
+      "observed": 52292,
+      "expected": 52292
+    },
+    {
+      "label": "PN17 collision-field reference bytes",
+      "passed": true,
+      "observed": 131072,
+      "expected": 131072
+    }
+  ]
+}

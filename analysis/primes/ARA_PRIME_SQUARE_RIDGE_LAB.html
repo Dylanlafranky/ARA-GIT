@@ -1,0 +1,2052 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>ARA Prime Music-Box Resonance Lab</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="ARA Prime Music-Box Resonance Lab" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;ARA Prime Music-Box Resonance Lab&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;ara-prime-music-box-lab&quot;&gt;
+  &lt;div class=&quot;viz-controls&quot; aria-label=&quot;Prime scan controls&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; id=&quot;apsr-play&quot;&gt;Play&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;apsr-step&quot;&gt;Step&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-ghost&quot; id=&quot;apsr-reset&quot;&gt;Reset&lt;/button&gt;
+    &lt;label class=&quot;form-label apsr-field&quot; for=&quot;apsr-jump&quot;&gt;
+      Jump to
+      &lt;input class=&quot;form-control&quot; id=&quot;apsr-jump&quot; type=&quot;number&quot; min=&quot;2&quot; max=&quot;5000&quot; step=&quot;1&quot; value=&quot;510&quot;&gt;
+    &lt;/label&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; id=&quot;apsr-go&quot;&gt;Go&lt;/button&gt;
+    &lt;label class=&quot;form-label apsr-field&quot; for=&quot;apsr-speed&quot;&gt;
+      Tempo
+      &lt;select class=&quot;form-select&quot; id=&quot;apsr-speed&quot;&gt;
+        &lt;option value=&quot;700&quot;&gt;Slow&lt;/option&gt;
+        &lt;option value=&quot;260&quot; selected&gt;Medium&lt;/option&gt;
+        &lt;option value=&quot;70&quot;&gt;Fast&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/label&gt;
+    &lt;div class=&quot;form-check form-switch&quot;&gt;
+      &lt;input class=&quot;form-check-input&quot; id=&quot;apsr-sound&quot; type=&quot;checkbox&quot; checked&gt;
+      &lt;label class=&quot;form-check-label&quot; for=&quot;apsr-sound&quot;&gt;Music box&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;label class=&quot;form-label apsr-window-field&quot; for=&quot;apsr-window&quot;&gt;
+      Visible span: &lt;span id=&quot;apsr-window-value&quot;&gt;48&lt;/span&gt;
+      &lt;input class=&quot;form-range&quot; id=&quot;apsr-window&quot; type=&quot;range&quot; min=&quot;24&quot; max=&quot;84&quot; step=&quot;6&quot; value=&quot;48&quot;&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;viz-grid apsr-stats&quot; aria-live=&quot;polite&quot;&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;Current node&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot; id=&quot;apsr-current&quot;&gt;510&lt;/div&gt;
+      &lt;div id=&quot;apsr-status&quot;&gt;4-child fundamental resonance&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;Active child waves&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot; id=&quot;apsr-active&quot;&gt;8&lt;/div&gt;
+      &lt;div id=&quot;apsr-next-birth&quot;&gt;next square ridge: 23² = 529&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;card viz-stat&quot;&gt;
+      &lt;div class=&quot;text-muted&quot;&gt;Collision voices&lt;/div&gt;
+      &lt;div class=&quot;viz-stat-value&quot; id=&quot;apsr-voices&quot;&gt;4&lt;/div&gt;
+      &lt;div id=&quot;apsr-check&quot;&gt;exact check: 0 mismatches&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;apsr-section&quot;&gt;
+    &lt;div class=&quot;viz-row apsr-section-head&quot;&gt;
+      &lt;h3&gt;Number-line scan&lt;/h3&gt;
+      &lt;div class=&quot;apsr-legend text-small&quot; aria-label=&quot;Number-line legend&quot;&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-prime&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;quiet / prime&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-hit&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;child collision&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-square&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;square ridge&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-resonance&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;fundamental resonance&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-repeat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;harmonic repeat&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-primorial&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;primorial rung&lt;/span&gt;
+        &lt;span&gt;&lt;i class=&quot;apsr-swatch apsr-swatch-future&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;not scanned&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;apsr-number-grid&quot; class=&quot;apsr-number-grid&quot; aria-label=&quot;Selectable number-line window&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;apsr-section&quot;&gt;
+    &lt;div class=&quot;viz-row apsr-section-head&quot;&gt;
+      &lt;h3&gt;Fundamental resonance ladder&lt;/h3&gt;
+      &lt;div class=&quot;text-small text-muted&quot; id=&quot;apsr-ladder-caption&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;apsr-ladder-chart&quot; class=&quot;apsr-chart&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;apsr-section&quot;&gt;
+    &lt;div class=&quot;viz-row apsr-section-head&quot;&gt;
+      &lt;h3&gt;Prime child waves&lt;/h3&gt;
+      &lt;div class=&quot;text-small text-muted&quot; id=&quot;apsr-wave-caption&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;apsr-wave-chart&quot; class=&quot;apsr-chart&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;apsr-section&quot;&gt;
+    &lt;div class=&quot;viz-row apsr-section-head&quot;&gt;
+      &lt;h3&gt;Selected node factor diameter&lt;/h3&gt;
+      &lt;div class=&quot;text-small text-muted&quot; id=&quot;apsr-factor-caption&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;apsr-factor-chart&quot; class=&quot;apsr-chart&quot;&gt;&lt;/div&gt;
+    &lt;div id=&quot;apsr-detail&quot; class=&quot;apsr-detail&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;table-responsive&quot;&gt;
+      &lt;table class=&quot;table table-sm&quot; aria-label=&quot;Selected node child collision details&quot;&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th&gt;Child wave&lt;/th&gt;
+            &lt;th&gt;Note&lt;/th&gt;
+            &lt;th class=&quot;text-end&quot;&gt;First new strike&lt;/th&gt;
+            &lt;th class=&quot;text-end&quot;&gt;Wave step&lt;/th&gt;
+            &lt;th class=&quot;text-end&quot;&gt;ARA position&lt;/th&gt;
+            &lt;th&gt;Role at node&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody id=&quot;apsr-collision-table&quot;&gt;&lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+  #ara-prime-music-box-lab {
+    width: 100%;
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-field {
+    min-width: 108px;
+    flex: 0 1 130px;
+  }
+  #ara-prime-music-box-lab .apsr-window-field {
+    min-width: 180px;
+    flex: 1 1 220px;
+  }
+  #ara-prime-music-box-lab .apsr-stats {
+    margin-top: 12px;
+  }
+  #ara-prime-music-box-lab .apsr-section {
+    margin-top: 18px;
+  }
+  #ara-prime-music-box-lab .apsr-section-head {
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  #ara-prime-music-box-lab .apsr-section-head h3 {
+    margin: 0;
+  }
+  #ara-prime-music-box-lab .apsr-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    align-items: center;
+  }
+  #ara-prime-music-box-lab .apsr-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  #ara-prime-music-box-lab .apsr-swatch {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-prime {
+    background: var(--viz-series-1);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-hit {
+    background: var(--viz-series-2);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-square {
+    border-radius: 1px;
+    background: var(--viz-series-3);
+    transform: rotate(45deg);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-resonance {
+    background: var(--viz-series-4);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-repeat {
+    background: transparent;
+    border: 2px solid var(--viz-series-5);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-primorial {
+    border-radius: 2px;
+    background: var(--viz-series-6);
+  }
+  #ara-prime-music-box-lab .apsr-swatch-future {
+    background: var(--muted);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(44px, 1fr));
+    gap: 5px;
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .viz-tile {
+    min-width: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-prime {
+    background: color-mix(in srgb, var(--viz-series-1) 20%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-hit {
+    background: color-mix(in srgb, var(--viz-series-2) 18%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-square {
+    background: color-mix(in srgb, var(--viz-series-3) 28%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-resonance {
+    background: color-mix(in srgb, var(--viz-series-4) 30%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-repeat {
+    background: color-mix(in srgb, var(--viz-series-5) 18%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-primorial {
+    background: color-mix(in srgb, var(--viz-series-6) 38%, transparent);
+    color: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-number-grid .apsr-future {
+    background: color-mix(in srgb, var(--muted) 52%, transparent);
+    color: var(--muted-foreground);
+  }
+  #ara-prime-music-box-lab .apsr-chart {
+    width: 100%;
+    min-height: 120px;
+  }
+  #ara-prime-music-box-lab .apsr-chart svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+  }
+  #ara-prime-music-box-lab .apsr-axis,
+  #ara-prime-music-box-lab .apsr-grid-line,
+  #ara-prime-music-box-lab .apsr-wave-line {
+    stroke: var(--border);
+    fill: none;
+    stroke-width: 1;
+  }
+  #ara-prime-music-box-lab .apsr-ridge-line {
+    stroke: var(--foreground);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  #ara-prime-music-box-lab .apsr-now-line {
+    stroke: var(--foreground);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  #ara-prime-music-box-lab .apsr-tick-label,
+  #ara-prime-music-box-lab .apsr-lane-label,
+  #ara-prime-music-box-lab .apsr-axis-label {
+    fill: var(--muted-foreground);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+  }
+  #ara-prime-music-box-lab .apsr-prime-mark {
+    fill: var(--viz-series-1);
+  }
+  #ara-prime-music-box-lab .apsr-hit-mark {
+    fill: var(--viz-series-2);
+  }
+  #ara-prime-music-box-lab .apsr-square-mark {
+    fill: var(--viz-series-3);
+  }
+  #ara-prime-music-box-lab .apsr-resonance-mark {
+    fill: var(--viz-series-4);
+  }
+  #ara-prime-music-box-lab .apsr-repeat-mark {
+    fill: var(--background);
+    stroke: var(--viz-series-5);
+    stroke-width: 2;
+  }
+  #ara-prime-music-box-lab .apsr-primorial-mark {
+    fill: var(--viz-series-6);
+  }
+  #ara-prime-music-box-lab .apsr-resonance-line {
+    stroke: var(--viz-series-4);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  #ara-prime-music-box-lab .apsr-repeat-line {
+    stroke: var(--viz-series-5);
+    fill: none;
+    stroke-width: 1;
+  }
+  #ara-prime-music-box-lab .apsr-primorial-line {
+    stroke: var(--viz-series-6);
+    fill: none;
+    stroke-width: 2;
+  }
+  #ara-prime-music-box-lab .apsr-gate-mark {
+    fill: var(--muted-foreground);
+  }
+  #ara-prime-music-box-lab .apsr-endpoint-mark {
+    fill: var(--foreground);
+  }
+  #ara-prime-music-box-lab .apsr-selected-ring {
+    fill: none;
+    stroke: var(--ring);
+    stroke-width: 2;
+  }
+  #ara-prime-music-box-lab .apsr-detail {
+    margin: 8px 0;
+    min-height: 24px;
+  }
+  #ara-prime-music-box-lab .apsr-empty-row {
+    color: var(--muted-foreground);
+  }
+  @media (max-width: 520px) {
+    #ara-prime-music-box-lab .apsr-section-head {
+      align-items: flex-start;
+    }
+    #ara-prime-music-box-lab .apsr-number-grid {
+      grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    }
+  }
+&lt;/style&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;ara-prime-music-box-lab&#x27;);
+  if (!root) return;
+
+  const LIMIT = 5000;
+  const SVG_NS = &#x27;http://www.w3.org/2000/svg&#x27;;
+  const PRIMORIAL_RUNGS = [
+    { n: 30, order: 3, factors: &#x27;2·3·5&#x27; },
+    { n: 210, order: 4, factors: &#x27;2·3·5·7&#x27; },
+    { n: 2310, order: 5, factors: &#x27;2·3·5·7·11&#x27; },
+    { n: 30030, order: 6, factors: &#x27;2·3·5·7·11·13&#x27; }
+  ];
+  const state = {
+    current: 510,
+    selected: 510,
+    span: 48,
+    timer: null,
+    playing: false,
+    audio: null
+  };
+
+  const el = {
+    play: root.querySelector(&#x27;#apsr-play&#x27;),
+    step: root.querySelector(&#x27;#apsr-step&#x27;),
+    reset: root.querySelector(&#x27;#apsr-reset&#x27;),
+    jump: root.querySelector(&#x27;#apsr-jump&#x27;),
+    go: root.querySelector(&#x27;#apsr-go&#x27;),
+    speed: root.querySelector(&#x27;#apsr-speed&#x27;),
+    sound: root.querySelector(&#x27;#apsr-sound&#x27;),
+    window: root.querySelector(&#x27;#apsr-window&#x27;),
+    windowValue: root.querySelector(&#x27;#apsr-window-value&#x27;),
+    current: root.querySelector(&#x27;#apsr-current&#x27;),
+    status: root.querySelector(&#x27;#apsr-status&#x27;),
+    active: root.querySelector(&#x27;#apsr-active&#x27;),
+    nextBirth: root.querySelector(&#x27;#apsr-next-birth&#x27;),
+    voices: root.querySelector(&#x27;#apsr-voices&#x27;),
+    check: root.querySelector(&#x27;#apsr-check&#x27;),
+    grid: root.querySelector(&#x27;#apsr-number-grid&#x27;),
+    ladderChart: root.querySelector(&#x27;#apsr-ladder-chart&#x27;),
+    ladderCaption: root.querySelector(&#x27;#apsr-ladder-caption&#x27;),
+    waveChart: root.querySelector(&#x27;#apsr-wave-chart&#x27;),
+    waveCaption: root.querySelector(&#x27;#apsr-wave-caption&#x27;),
+    factorChart: root.querySelector(&#x27;#apsr-factor-chart&#x27;),
+    factorCaption: root.querySelector(&#x27;#apsr-factor-caption&#x27;),
+    detail: root.querySelector(&#x27;#apsr-detail&#x27;),
+    table: root.querySelector(&#x27;#apsr-collision-table&#x27;)
+  };
+
+  function addScheduled(schedule, n, p) {
+    if (n &gt; LIMIT) return;
+    if (!schedule.has(n)) schedule.set(n, []);
+    schedule.get(n).push(p);
+  }
+
+  function buildIncrementalSieve(limit) {
+    const schedule = new Map();
+    const events = new Array(limit + 1);
+    const primes = [];
+    for (let n = 2; n &lt;= limit; n += 1) {
+      const hits = schedule.get(n) ? [...new Set(schedule.get(n))].sort((a, b) =&gt; a - b) : [];
+      if (hits.length === 0) {
+        primes.push(n);
+        addScheduled(schedule, n * n, n);
+        events[n] = { n, isPrime: true, hits: [], squareHits: [], least: null };
+      } else {
+        schedule.delete(n);
+        hits.forEach((p) =&gt; addScheduled(schedule, n + p, p));
+        const squareHits = hits.filter((p) =&gt; p * p === n);
+        events[n] = { n, isPrime: false, hits, squareHits, least: hits[0] };
+      }
+    }
+    return { events, primes };
+  }
+
+  function simpleSieve(limit) {
+    const prime = new Uint8Array(limit + 1);
+    prime.fill(1, 2);
+    for (let p = 2; p * p &lt;= limit; p += 1) {
+      if (!prime[p]) continue;
+      for (let n = p * p; n &lt;= limit; n += p) prime[n] = 0;
+    }
+    return prime;
+  }
+
+  const data = buildIncrementalSieve(LIMIT);
+  const independent = simpleSieve(LIMIT);
+  const SCALE = [
+    { name: &#x27;C&#x27;, semitone: 0 },
+    { name: &#x27;D&#x27;, semitone: 2 },
+    { name: &#x27;E&#x27;, semitone: 4 },
+    { name: &#x27;F&#x27;, semitone: 5 },
+    { name: &#x27;G&#x27;, semitone: 7 },
+    { name: &#x27;A&#x27;, semitone: 9 },
+    { name: &#x27;B&#x27;, semitone: 11 }
+  ];
+  const primeRank = new Map(data.primes.map((p, index) =&gt; [p, index]));
+  const mismatchCount = data.events.reduce((sum, event, n) =&gt; {
+    if (n &lt; 2 || !event) return sum;
+    return sum + (event.isPrime !== Boolean(independent[n]) ? 1 : 0);
+  }, 0);
+
+  function eventAt(n) {
+    return data.events[Math.max(2, Math.min(LIMIT, n))];
+  }
+
+  function noteForPrime(p) {
+    const rank = primeRank.get(p) ?? 0;
+    const degree = SCALE[rank % SCALE.length];
+    const octaveShift = Math.floor(rank / SCALE.length);
+    const octave = 4 + octaveShift;
+    const midi = 60 + octaveShift * 12 + degree.semitone;
+    const frequency = 440 * (2 ** ((midi - 69) / 12));
+    return { name: `${degree.name}${octave}`, frequency, midi };
+  }
+
+  function eventNotes(event) {
+    return event.hits.map((p) =&gt; noteForPrime(p).name);
+  }
+
+  function primesThrough(limit) {
+    return data.primes.filter((p) =&gt; p &lt;= limit);
+  }
+
+  function araPosition(n, d) {
+    if (d === 1) return 0;
+    if (d === n) return 2;
+    return 2 * Math.log(d) / Math.log(n);
+  }
+
+  function factorPairs(n) {
+    const pairs = [];
+    for (let d = 2; d * d &lt;= n; d += 1) {
+      if (n % d === 0) pairs.push([d, n / d]);
+    }
+    return pairs;
+  }
+
+  function childProduct(event) {
+    return event.hits.reduce((value, p) =&gt; value * p, 1);
+  }
+
+  function nodeGeometry(n, event) {
+    const voices = event.hits.length;
+    const base = voices ? childProduct(event) : null;
+    const primorial = PRIMORIAL_RUNGS.find((rung) =&gt; rung.n === n) || null;
+    const fundamental = voices &gt;= 3 &amp;&amp; base === n;
+    const repeat = voices &gt;= 3 &amp;&amp; base &lt; n &amp;&amp; n % base === 0;
+    return { voices, base, primorial, fundamental, repeat };
+  }
+
+  function svgElement(name, attrs = {}) {
+    const node = document.createElementNS(SVG_NS, name);
+    Object.entries(attrs).forEach(([key, value]) =&gt; node.setAttribute(key, String(value)));
+    return node;
+  }
+
+  function addText(svg, x, y, textValue, className, anchor = &#x27;middle&#x27;) {
+    const textNode = svgElement(&#x27;text&#x27;, { x, y, class: className, &#x27;text-anchor&#x27;: anchor });
+    textNode.textContent = textValue;
+    svg.appendChild(textNode);
+    return textNode;
+  }
+
+  function windowBounds() {
+    const half = Math.floor(state.span / 2);
+    let start = Math.max(2, state.current - half);
+    let end = Math.min(LIMIT, start + state.span - 1);
+    start = Math.max(2, end - state.span + 1);
+    return { start, end };
+  }
+
+  function statusText(event) {
+    const geometry = nodeGeometry(event.n, event);
+    if (event.isPrime) return &#x27;quiet → prime&#x27;;
+    if (event.squareHits.length) return `square ridge → composite (${event.squareHits.join(&#x27;, &#x27;)})`;
+    if (geometry.primorial) return `primorial rung → ${geometry.voices}-child resonance`;
+    if (geometry.fundamental) return `${geometry.voices}-child fundamental resonance`;
+    if (geometry.repeat) return `${geometry.voices}-child harmonic repeat of ${geometry.base}`;
+    if (event.hits.length &gt; 1) return `${event.hits.length} child waves coincide`;
+    return `child p=${event.least} strikes → composite`;
+  }
+
+  function nextSquareAfter(n) {
+    for (const p of data.primes) {
+      if (p * p &gt; n) return { p, square: p * p };
+    }
+    return null;
+  }
+
+  function renderStats() {
+    const event = eventAt(state.current);
+    const active = primesThrough(Math.floor(Math.sqrt(state.current))).length;
+    const next = nextSquareAfter(state.current);
+    el.current.textContent = String(state.current);
+    const notes = eventNotes(event);
+    el.status.textContent = `${statusText(event)} · ${notes.length ? notes.join(&#x27; &#x27;) : &#x27;rest&#x27;}`;
+    el.active.textContent = String(active);
+    el.nextBirth.textContent = next &amp;&amp; next.square &lt;= LIMIT
+      ? `next square ridge: ${next.p}² = ${next.square}`
+      : &#x27;next square ridge: beyond range&#x27;;
+    el.voices.textContent = String(event.hits.length);
+    el.check.textContent = `exact check through ${LIMIT.toLocaleString()}: ${mismatchCount} mismatches`;
+  }
+
+  function tileClass(n, event) {
+    const geometry = nodeGeometry(n, event);
+    if (n &gt; state.current) return &#x27;apsr-future&#x27;;
+    if (event.squareHits.length) return &#x27;apsr-square&#x27;;
+    if (event.isPrime) return &#x27;apsr-prime&#x27;;
+    if (geometry.primorial) return &#x27;apsr-primorial&#x27;;
+    if (geometry.fundamental) return &#x27;apsr-resonance&#x27;;
+    if (geometry.repeat) return &#x27;apsr-repeat&#x27;;
+    return &#x27;apsr-hit&#x27;;
+  }
+
+  function tileLabel(n, event) {
+    const geometry = nodeGeometry(n, event);
+    if (n &gt; state.current) return `${n}, not yet scanned`;
+    if (event.isPrime) return `${n}, quiet across active child waves, prime`;
+    if (event.squareHits.length) return `${n}, prime-square ridge collision from ${event.squareHits.join(&#x27; and &#x27;)}, composite`;
+    if (geometry.primorial) return `${n}, primorial rung, fundamental ${geometry.voices}-child resonance, children ${event.hits.join(&#x27;, &#x27;)}`;
+    if (geometry.fundamental) return `${n}, fundamental ${geometry.voices}-child resonance, children ${event.hits.join(&#x27;, &#x27;)}`;
+    if (geometry.repeat) return `${n}, harmonic repeat of ${geometry.base}, ${geometry.voices} child phases aligned`;
+    return `${n}, composite, struck by prime child waves ${event.hits.join(&#x27;, &#x27;)}`;
+  }
+
+  function renderGrid() {
+    const { start, end } = windowBounds();
+    const fragment = document.createDocumentFragment();
+    for (let n = start; n &lt;= end; n += 1) {
+      const event = eventAt(n);
+      const button = document.createElement(&#x27;button&#x27;);
+      button.type = &#x27;button&#x27;;
+      button.className = `btn viz-tile ${tileClass(n, event)}${n === state.selected ? &#x27; is-selected&#x27; : &#x27;&#x27;}`;
+      button.setAttribute(&#x27;aria-label&#x27;, tileLabel(n, event));
+      button.setAttribute(&#x27;aria-pressed&#x27;, n === state.selected ? &#x27;true&#x27; : &#x27;false&#x27;);
+      button.dataset.n = String(n);
+      button.textContent = String(n);
+      fragment.appendChild(button);
+    }
+    el.grid.replaceChildren(fragment);
+  }
+
+  function renderLadder() {
+    const width = 900;
+    const height = 132;
+    const left = 70;
+    const right = 100;
+    const axisY = 58;
+    const minLog = Math.log(PRIMORIAL_RUNGS[0].n);
+    const maxLog = Math.log(PRIMORIAL_RUNGS[PRIMORIAL_RUNGS.length - 1].n);
+    const x = (n) =&gt; left + ((Math.log(n) - minLog) / (maxLog - minLog)) * (width - left - right);
+    const svg = svgElement(&#x27;svg&#x27;, {
+      viewBox: `0 0 ${width} ${height}`,
+      role: &#x27;img&#x27;,
+      &#x27;aria-label&#x27;: `Primorial resonance ladder with current scan at ${state.current}`
+    });
+    const title = svgElement(&#x27;title&#x27;);
+    title.textContent = &#x27;Fundamental primorial resonance ladder&#x27;;
+    svg.appendChild(title);
+    const desc = svgElement(&#x27;desc&#x27;);
+    desc.textContent = &#x27;Successive first full resonances occur at 30, 210, 2310 and 30030 as another prime child joins.&#x27;;
+    svg.appendChild(desc);
+    svg.appendChild(svgElement(&#x27;line&#x27;, { x1: left, y1: axisY, x2: width - right, y2: axisY, class: &#x27;apsr-axis&#x27; }));
+
+    PRIMORIAL_RUNGS.forEach((rung) =&gt; {
+      const px = x(rung.n);
+      const reached = rung.n &lt;= state.current;
+      const inRange = rung.n &lt;= LIMIT;
+      svg.appendChild(svgElement(&#x27;circle&#x27;, {
+        cx: px,
+        cy: axisY,
+        r: reached ? 8 : 6,
+        class: reached ? &#x27;apsr-primorial-mark&#x27; : &#x27;apsr-repeat-mark&#x27;
+      }));
+      addText(svg, px, 31, rung.n.toLocaleString(), &#x27;apsr-axis-label&#x27;);
+      addText(svg, px, 88, `${rung.order} children`, &#x27;apsr-axis-label&#x27;);
+      addText(svg, px, 110, inRange ? rung.factors : &#x27;next outside range&#x27;, &#x27;apsr-tick-label&#x27;);
+    });
+
+    if (state.current &gt;= PRIMORIAL_RUNGS[0].n) {
+      const clamped = Math.min(PRIMORIAL_RUNGS[PRIMORIAL_RUNGS.length - 1].n, state.current);
+      const nowX = x(clamped);
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: nowX, y1: 38, x2: nowX, y2: 76, class: &#x27;apsr-now-line&#x27; }));
+      addText(svg, nowX, 126, `scan ${state.current.toLocaleString()}`, &#x27;apsr-axis-label&#x27;);
+    }
+
+    el.ladderChart.replaceChildren(svg);
+    const completed = PRIMORIAL_RUNGS.filter((rung) =&gt; rung.n &lt;= state.current).length;
+    const next = PRIMORIAL_RUNGS.find((rung) =&gt; rung.n &gt; state.current);
+    el.ladderCaption.textContent = next
+      ? `${completed} rung${completed === 1 ? &#x27;&#x27; : &#x27;s&#x27;} reached · next ${next.order}-child closure at ${next.n.toLocaleString()}`
+      : `${completed} displayed rungs reached`;
+  }
+
+  function renderWaveChart() {
+    const { start, end } = windowBounds();
+    const lanePrimes = data.primes.filter((p) =&gt; p &lt;= state.current &amp;&amp; p * p &lt;= end);
+    const width = 900;
+    const left = 98;
+    const right = 18;
+    const top = 26;
+    const rowHeight = 22;
+    const bottom = 34;
+    const height = Math.max(128, top + lanePrimes.length * rowHeight + bottom);
+    const plotWidth = width - left - right;
+    const x = (n) =&gt; left + ((n - start) / Math.max(1, end - start)) * plotWidth;
+    const svg = svgElement(&#x27;svg&#x27;, {
+      viewBox: `0 0 ${width} ${height}`,
+      role: &#x27;img&#x27;,
+      &#x27;aria-label&#x27;: `Prime child-wave strikes from ${start} through ${end}; current scan node ${state.current}`
+    });
+    const title = svgElement(&#x27;title&#x27;);
+    title.textContent = `Prime child waves, ${start} to ${end}`;
+    svg.appendChild(title);
+    const desc = svgElement(&#x27;desc&#x27;);
+    desc.textContent = &#x27;Each lane is one prime period assigned to an ascending musical note. Diamonds are square activations, filled resonance marks are fundamental shared cycles, and rings are harmonic repeats.&#x27;;
+    svg.appendChild(desc);
+
+    const tickCount = Math.min(8, Math.max(3, Math.floor(state.span / 8)));
+    for (let i = 0; i &lt;= tickCount; i += 1) {
+      const value = Math.round(start + (i / tickCount) * (end - start));
+      const px = x(value);
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: px, y1: top - 8, x2: px, y2: height - bottom + 4, class: &#x27;apsr-grid-line&#x27; }));
+      addText(svg, px, height - 10, String(value), &#x27;apsr-tick-label&#x27;);
+    }
+
+    for (let n = start; n &lt;= Math.min(end, state.current); n += 1) {
+      const geometry = nodeGeometry(n, eventAt(n));
+      if (!geometry.fundamental) continue;
+      const px = x(n);
+      const lineClass = geometry.primorial ? &#x27;apsr-primorial-line&#x27; : &#x27;apsr-resonance-line&#x27;;
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: px, y1: top - 8, x2: px, y2: height - bottom + 4, class: lineClass }));
+      if (n !== state.current) {
+        addText(svg, px, top - 12, `${geometry.primorial ? &#x27;P&#x27; : &#x27;R&#x27;}${geometry.voices}`, &#x27;apsr-axis-label&#x27;);
+      }
+    }
+
+    lanePrimes.forEach((p, index) =&gt; {
+      const y = top + index * rowHeight;
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: left, y1: y, x2: width - right, y2: y, class: &#x27;apsr-wave-line&#x27; }));
+      addText(svg, left - 10, y + 4, `p=${p} · ${noteForPrime(p).name}`, &#x27;apsr-lane-label&#x27;, &#x27;end&#x27;);
+      let first = Math.max(p * p, Math.ceil(start / p) * p);
+      for (let n = first; n &lt;= end; n += p) {
+        const px = x(n);
+        const isSquare = n === p * p;
+        const geometry = nodeGeometry(n, eventAt(n));
+        const geometryKnown = eventAt(n).hits.every((q) =&gt; q &lt;= state.current);
+        if (isSquare) {
+          const diamond = svgElement(&#x27;rect&#x27;, {
+            x: px - 5,
+            y: y - 5,
+            width: 10,
+            height: 10,
+            class: &#x27;apsr-square-mark&#x27;,
+            transform: `rotate(45 ${px} ${y})`
+          });
+          svg.appendChild(diamond);
+        } else if (geometryKnown &amp;&amp; geometry.primorial) {
+          svg.appendChild(svgElement(&#x27;rect&#x27;, { x: px - 5, y: y - 5, width: 10, height: 10, class: &#x27;apsr-primorial-mark&#x27; }));
+        } else if (geometryKnown &amp;&amp; geometry.fundamental) {
+          svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: px, cy: y, r: 5, class: &#x27;apsr-resonance-mark&#x27; }));
+        } else if (geometryKnown &amp;&amp; geometry.repeat) {
+          svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: px, cy: y, r: 4.5, class: &#x27;apsr-repeat-mark&#x27; }));
+        } else {
+          svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: px, cy: y, r: 3.4, class: &#x27;apsr-hit-mark&#x27; }));
+        }
+        if (n === state.selected) {
+          svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: px, cy: y, r: 7, class: &#x27;apsr-selected-ring&#x27; }));
+        }
+      }
+    });
+
+    if (state.current &gt;= start &amp;&amp; state.current &lt;= end) {
+      const nowX = x(state.current);
+      const nowGeometry = nodeGeometry(state.current, eventAt(state.current));
+      const nowPrefix = nowGeometry.primorial
+        ? `P${nowGeometry.voices} · `
+        : nowGeometry.fundamental
+          ? `R${nowGeometry.voices} · `
+          : nowGeometry.repeat
+            ? `H${nowGeometry.voices} · `
+            : &#x27;&#x27;;
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: nowX, y1: top - 14, x2: nowX, y2: height - bottom + 5, class: &#x27;apsr-now-line&#x27; }));
+      addText(svg, nowX, 14, `${nowPrefix}now ${state.current}`, &#x27;apsr-axis-label&#x27;);
+    }
+    el.waveChart.replaceChildren(svg);
+    const latent = data.primes.filter((p) =&gt; p &lt;= state.current &amp;&amp; p * p &gt; state.current).length;
+    const firstNote = lanePrimes.length ? noteForPrime(lanePrimes[0]).name : &#x27;—&#x27;;
+    const lastNote = lanePrimes.length ? noteForPrime(lanePrimes[lanePrimes.length - 1]).name : &#x27;—&#x27;;
+    el.waveCaption.textContent = `${lanePrimes.length} visible periods · notes ${firstNote}–${lastNote} · ${latent} discovered children still latent above their p² boundary`;
+  }
+
+  function renderFactorChart() {
+    const n = state.selected;
+    const event = eventAt(n);
+    const geometry = nodeGeometry(n, event);
+    const pairs = factorPairs(n);
+    const gates = primesThrough(Math.floor(Math.sqrt(n)));
+    const width = 900;
+    const height = 150;
+    const left = 44;
+    const right = 44;
+    const axisY = 78;
+    const x = (value) =&gt; left + (value / 2) * (width - left - right);
+    const svg = svgElement(&#x27;svg&#x27;, {
+      viewBox: `0 0 ${width} ${height}`,
+      role: &#x27;img&#x27;,
+      &#x27;aria-label&#x27;: `ARA factor diameter for selected node ${n}`
+    });
+    const title = svgElement(&#x27;title&#x27;);
+    title.textContent = `Factor diameter for ${n}`;
+    svg.appendChild(title);
+    const desc = svgElement(&#x27;desc&#x27;);
+    desc.textContent = event.isPrime
+      ? &#x27;No tested prime gate collides before the factor ridge.&#x27;
+      : &#x27;Interior factor collisions appear with their reflected partners across the ridge.&#x27;;
+    svg.appendChild(desc);
+
+    svg.appendChild(svgElement(&#x27;line&#x27;, { x1: left, y1: axisY, x2: width - right, y2: axisY, class: &#x27;apsr-axis&#x27; }));
+    svg.appendChild(svgElement(&#x27;line&#x27;, { x1: x(1), y1: 25, x2: x(1), y2: 122, class: &#x27;apsr-ridge-line&#x27; }));
+    [0, 0.5, 1, 1.5, 2].forEach((value) =&gt; {
+      const px = x(value);
+      svg.appendChild(svgElement(&#x27;line&#x27;, { x1: px, y1: axisY - 5, x2: px, y2: axisY + 5, class: value === 1 ? &#x27;apsr-ridge-line&#x27; : &#x27;apsr-axis&#x27; }));
+      addText(svg, px, 137, value === 1 ? &#x27;1.0 ridge&#x27; : value.toFixed(1), &#x27;apsr-tick-label&#x27;);
+    });
+
+    svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: x(0), cy: axisY, r: 5, class: &#x27;apsr-endpoint-mark&#x27; }));
+    svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: x(2), cy: axisY, r: 5, class: &#x27;apsr-endpoint-mark&#x27; }));
+    addText(svg, x(0), 54, &#x27;1&#x27;, &#x27;apsr-axis-label&#x27;);
+    addText(svg, x(2), 54, String(n), &#x27;apsr-axis-label&#x27;);
+
+    gates.forEach((p, index) =&gt; {
+      const value = araPosition(n, p);
+      const px = x(value);
+      const divides = n % p === 0;
+      const cy = divides ? 78 : 92 + (index % 2) * 8;
+      let collisionClass = &#x27;apsr-hit-mark&#x27;;
+      if (p * p === n) collisionClass = &#x27;apsr-square-mark&#x27;;
+      else if (geometry.primorial) collisionClass = &#x27;apsr-primorial-mark&#x27;;
+      else if (geometry.fundamental) collisionClass = &#x27;apsr-resonance-mark&#x27;;
+      else if (geometry.repeat) collisionClass = &#x27;apsr-repeat-mark&#x27;;
+      svg.appendChild(svgElement(&#x27;circle&#x27;, {
+        cx: px,
+        cy,
+        r: divides ? 5.5 : 2.5,
+        class: divides ? collisionClass : &#x27;apsr-gate-mark&#x27;
+      }));
+      if (divides) {
+        const partner = n / p;
+        const partnerValue = araPosition(n, partner);
+        const partnerX = x(partnerValue);
+        svg.appendChild(svgElement(&#x27;line&#x27;, { x1: px, y1: 72, x2: partnerX, y2: 72, class: &#x27;apsr-axis&#x27; }));
+        if (partner !== p) svg.appendChild(svgElement(&#x27;circle&#x27;, { cx: partnerX, cy: 78, r: 5.5, class: collisionClass }));
+        addText(svg, px, 45, String(p), &#x27;apsr-axis-label&#x27;);
+        if (partner !== p) addText(svg, partnerX, 45, String(partner), &#x27;apsr-axis-label&#x27;);
+      }
+    });
+
+    el.factorChart.replaceChildren(svg);
+    const childSum = event.hits.reduce((sum, p) =&gt; sum + araPosition(n, p), 0);
+    if (event.isPrime) {
+      el.factorCaption.textContent = `${gates.length} prime gates tested through √${n}; no interior collision`;
+    } else if (geometry.primorial) {
+      el.factorCaption.textContent = `primorial ${geometry.voices}-child rung · collective ARA sum ${childSum.toFixed(6)}`;
+    } else if (geometry.fundamental) {
+      el.factorCaption.textContent = `fundamental ${geometry.voices}-child resonance · collective ARA sum ${childSum.toFixed(6)}`;
+    } else if (geometry.repeat) {
+      el.factorCaption.textContent = `harmonic repeat of ${geometry.base} · collective ARA sum ${childSum.toFixed(6)}`;
+    } else {
+      el.factorCaption.textContent = `${pairs.length} factor-pair${pairs.length === 1 ? &#x27;&#x27; : &#x27;s&#x27;} visible; least collision p=${event.least}`;
+    }
+  }
+
+  function renderDetail() {
+    const n = state.selected;
+    const event = eventAt(n);
+    const geometry = nodeGeometry(n, event);
+    const pairs = factorPairs(n);
+    if (event.isPrime) {
+      const square = n * n;
+      el.detail.textContent = `${n} is quiet across every active child wave. It becomes a new prime identity; its p=${n} child wave first becomes relevant at ${n}² = ${square.toLocaleString()}${square &gt; LIMIT ? &#x27; (outside this instrument’s range)&#x27; : &#x27;&#x27;}.`;
+    } else if (event.squareHits.length) {
+      const p = event.squareHits[0];
+      el.detail.textContent = `${n} is the first new strike of child p=${p}. Its factor and reflected partner meet exactly at the 1.0 square ridge.`;
+    } else if (geometry.primorial) {
+      el.detail.textContent = `${n} is the first ${geometry.voices}-child primorial resonance rung. Children ${event.hits.join(&#x27;, &#x27;)} phase-lock at one fundamental shared cycle and their ARA positions sum to 2.`;
+    } else if (geometry.fundamental) {
+      el.detail.textContent = `${n} is a fundamental ${geometry.voices}-child resonance. Children ${event.hits.join(&#x27;, &#x27;)} phase-lock for the first time as this exact set, and their ARA positions sum to 2.`;
+    } else if (geometry.repeat) {
+      const childSum = event.hits.reduce((sum, p) =&gt; sum + araPosition(n, p), 0);
+      el.detail.textContent = `${n} is a harmonic repeat of fundamental child product ${geometry.base}. The same ${geometry.voices} phases align again, while their parent-relative ARA sum has fallen to ${childSum.toFixed(6)}.`;
+    } else {
+      const factorText = pairs.map(([a, b]) =&gt; `${a}×${b}`).join(&#x27;, &#x27;);
+      el.detail.textContent = `${n} is struck by ${event.hits.length} active child wave${event.hits.length === 1 ? &#x27;&#x27; : &#x27;s&#x27;}: ${event.hits.join(&#x27;, &#x27;)}. Factor closure: ${factorText}.`;
+    }
+
+    const rows = [];
+    const relevant = event.isPrime ? [n] : event.hits;
+    relevant.forEach((p) =&gt; {
+      const tr = document.createElement(&#x27;tr&#x27;);
+      const first = p * p;
+      const step = event.isPrime ? &#x27;latent&#x27; : String((n - first) / p);
+      const position = event.isPrime ? &#x27;—&#x27; : araPosition(n, p).toFixed(6);
+      let role = &#x27;periodic child collision&#x27;;
+      if (event.isPrime) role = &#x27;new child; not active until p²&#x27;;
+      else if (p * p === n) role = &#x27;first strike / exact 1.0 ridge&#x27;;
+      else if (geometry.primorial) role = `primorial resonance voice / order ${geometry.voices}`;
+      else if (geometry.fundamental) role = `fundamental resonance voice / order ${geometry.voices}`;
+      else if (geometry.repeat) role = `harmonic repeat voice / base ${geometry.base}`;
+      [
+        { value: `p=${p}`, cls: &#x27;&#x27; },
+        { value: event.isPrime ? &#x27;latent&#x27; : noteForPrime(p).name, cls: &#x27;&#x27; },
+        { value: first.toLocaleString(), cls: &#x27;text-end&#x27; },
+        { value: step, cls: &#x27;text-end&#x27; },
+        { value: position, cls: &#x27;text-end&#x27; },
+        { value: role, cls: &#x27;&#x27; }
+      ].forEach(({ value, cls }) =&gt; {
+        const td = document.createElement(&#x27;td&#x27;);
+        if (cls) td.className = cls;
+        td.textContent = value;
+        tr.appendChild(td);
+      });
+      rows.push(tr);
+    });
+    if (rows.length === 0) {
+      const tr = document.createElement(&#x27;tr&#x27;);
+      const td = document.createElement(&#x27;td&#x27;);
+      td.colSpan = 6;
+      td.className = &#x27;apsr-empty-row&#x27;;
+      td.textContent = &#x27;No child-wave collision at this node.&#x27;;
+      tr.appendChild(td);
+      rows.push(tr);
+    }
+    el.table.replaceChildren(...rows);
+  }
+
+  function renderAll() {
+    renderStats();
+    renderGrid();
+    renderLadder();
+    renderWaveChart();
+    renderFactorChart();
+    renderDetail();
+  }
+
+  function ensureAudio() {
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    if (!AudioEngine) return null;
+    if (!state.audio) state.audio = new AudioEngine();
+    if (state.audio.state === &#x27;suspended&#x27;) state.audio.resume();
+    return state.audio;
+  }
+
+  function strikeMusicBoxNote(p, delaySeconds) {
+    const context = ensureAudio();
+    if (!context) return;
+    const note = noteForPrime(p);
+    const startAt = context.currentTime + delaySeconds;
+    const stopAt = startAt + 0.72;
+    const envelope = context.createGain();
+    const fundamental = context.createOscillator();
+    const overtone = context.createOscillator();
+    const overtoneGain = context.createGain();
+
+    fundamental.type = &#x27;sine&#x27;;
+    fundamental.frequency.setValueAtTime(note.frequency, startAt);
+    overtone.type = &#x27;sine&#x27;;
+    overtone.frequency.setValueAtTime(note.frequency * 2.01, startAt);
+    overtoneGain.gain.setValueAtTime(0.19, startAt);
+    envelope.gain.setValueAtTime(0.0001, startAt);
+    envelope.gain.exponentialRampToValueAtTime(0.105, startAt + 0.008);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, stopAt);
+
+    fundamental.connect(envelope);
+    overtone.connect(overtoneGain);
+    overtoneGain.connect(envelope);
+    envelope.connect(context.destination);
+    fundamental.start(startAt);
+    overtone.start(startAt);
+    fundamental.stop(stopAt);
+    overtone.stop(stopAt);
+  }
+
+  function playEventNotes(event) {
+    if (!el.sound.checked || !event || event.hits.length === 0) return;
+    ensureAudio();
+    const arpeggioStep = Number(el.speed.value) &lt;= 100 ? 0.018 : 0.045;
+    event.hits.forEach((p, index) =&gt; strikeMusicBoxNote(p, index * arpeggioStep));
+  }
+
+  function stop() {
+    if (state.timer) window.clearInterval(state.timer);
+    state.timer = null;
+    state.playing = false;
+    el.play.textContent = &#x27;Play&#x27;;
+    el.play.setAttribute(&#x27;aria-pressed&#x27;, &#x27;false&#x27;);
+  }
+
+  function advance() {
+    if (state.current &gt;= LIMIT) {
+      stop();
+      return;
+    }
+    state.current += 1;
+    state.selected = state.current;
+    el.jump.value = String(state.current);
+    renderAll();
+    playEventNotes(eventAt(state.current));
+  }
+
+  function start() {
+    stop();
+    ensureAudio();
+    playEventNotes(eventAt(state.current));
+    state.playing = true;
+    el.play.textContent = &#x27;Pause&#x27;;
+    el.play.setAttribute(&#x27;aria-pressed&#x27;, &#x27;true&#x27;);
+    state.timer = window.setInterval(advance, Number(el.speed.value));
+  }
+
+  function jumpToInput() {
+    const value = Math.max(2, Math.min(LIMIT, Math.round(Number(el.jump.value) || 2)));
+    stop();
+    state.current = value;
+    state.selected = value;
+    el.jump.value = String(value);
+    renderAll();
+    playEventNotes(eventAt(value));
+  }
+
+  el.play.addEventListener(&#x27;click&#x27;, () =&gt; {
+    if (state.playing) stop();
+    else start();
+  });
+  el.step.addEventListener(&#x27;click&#x27;, () =&gt; {
+    stop();
+    advance();
+  });
+  el.reset.addEventListener(&#x27;click&#x27;, () =&gt; {
+    stop();
+    state.current = 2;
+    state.selected = 2;
+    el.jump.value = &#x27;2&#x27;;
+    renderAll();
+  });
+  el.go.addEventListener(&#x27;click&#x27;, jumpToInput);
+  el.jump.addEventListener(&#x27;keydown&#x27;, (event) =&gt; {
+    if (event.key === &#x27;Enter&#x27;) jumpToInput();
+  });
+  el.speed.addEventListener(&#x27;change&#x27;, () =&gt; {
+    if (state.playing) start();
+  });
+  el.sound.addEventListener(&#x27;change&#x27;, () =&gt; {
+    if (el.sound.checked) playEventNotes(eventAt(state.selected));
+  });
+  el.window.addEventListener(&#x27;input&#x27;, () =&gt; {
+    state.span = Number(el.window.value);
+    el.windowValue.textContent = String(state.span);
+    renderGrid();
+    renderWaveChart();
+  });
+  el.grid.addEventListener(&#x27;click&#x27;, (event) =&gt; {
+    const button = event.target.closest(&#x27;button[data-n]&#x27;);
+    if (!button || !el.grid.contains(button)) return;
+    state.selected = Number(button.dataset.n);
+    renderGrid();
+    renderWaveChart();
+    renderFactorChart();
+    renderDetail();
+    playEventNotes(eventAt(state.selected));
+  });
+
+  window.__ARA_PRIME_SQUARE_RIDGE_LAB__ = {
+    limit: LIMIT,
+    mismatchCount,
+    primeCount: data.primes.length,
+    eventAt: (n) =&gt; ({ ...eventAt(n), hits: [...eventAt(n).hits], squareHits: [...eventAt(n).squareHits] }),
+    araPosition,
+    noteForPrime: (p) =&gt; ({ ...noteForPrime(p) })
+  };
+
+  renderAll();
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

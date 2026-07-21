@@ -4,6 +4,11 @@
 
 **Result:** `PRIMARY ARA ENDPOINTS NOT SUPPORTED / RELIABLE NEGATIVE RESULT`.
 
+> **19 July 2026 centering correction:** the historical label “Information^3 stencil” below meant a
+> three-reading local feature vector. Under the centred ARA canon, three readings alone are a
+> **three-point ARA stencil**, not Information^3 unless two identities and their retained relation are
+> explicitly represented. This terminology correction changes no calculation or result.
+
 PN2 asked the direct question that the earlier prime-wheel work had not answered: after ordinary sieving through
 prime 29, can local ARA geometry predict which remaining candidates are actually prime better than strong established
 baselines?
@@ -13,7 +18,7 @@ endpoints:
 
 | Endpoint | Best non-ARA baseline | Frozen ARA model | ARA gain (bits/event) | 95% block-bootstrap interval | Positive blocks |
 |---|---|---|---:|---:|---:|
-| Candidate survival | p29-conditioned PNT | ARA Information^3 stencil | -0.000160973 | [-0.000191083, -0.000129918] | 5% |
+| Candidate survival | p29-conditioned PNT | ARA three-point stencil | -0.000160973 | [-0.000191083, -0.000129918] | 5% |
 | Adjacent-edge survival | p29-conditioned Hardy-Littlewood | ARA edge endpoints | -0.000036725 | [-0.000050887, -0.000022377] | 15% |
 
 Positive gain was defined in advance as lower log loss for ARA. Both intervals are wholly negative. A separately
@@ -30,11 +35,11 @@ little worse. With more than 1.5 million events, that small difference is measur
 
 There were `1,579,479` p29-wheel candidates in the target; `541,854` were prime, a survival rate of `34.3059%`.
 The p29-conditioned prime-number-theorem baseline achieved `0.927715514` bits/candidate. The frozen ARA
-Information^3 model achieved `0.927876486`, a loss of `0.000160973` bits/candidate.
+three-point stencil model achieved `0.927876486`, a loss of `0.000160973` bits/candidate.
 
 The plain 12-bin ARA candidate model produced a microscopic exception: it beat PNT29 by `0.000000772`
 bits/candidate, about `1.2` total bits across all target candidates. The same plain representation lost with 8, 16
-and 24 bins, while the predeclared Information^3 endpoint lost. The isolated 12-bin value is therefore a
+and 24 bins, while the predeclared three-point-stencil endpoint lost. The isolated 12-bin value is therefore a
 non-robust sensitivity, not support.
 
 Plainly: one particular ruler divided the ARA line into just the right buckets to produce a hair-width improvement.
@@ -61,7 +66,7 @@ across the candidate-gap classes.
 ### 3. Location calibration
 
 Across 20 contiguous target blocks, PNT29 had the lowest mean absolute percentage error at `0.2088%`. The ARA
-Information^3 model scored `0.2113%`; raw stencil scored `0.2158%`; decompressed ARA scored `0.2132%`.
+three-point stencil model scored `0.2113%`; raw stencil scored `0.2158%`; decompressed ARA scored `0.2132%`.
 
 Plainly: when the question is "how many primes occur in this part of the interval?", the established analytic curve
 already answers very accurately and ARA did not sharpen it.
@@ -81,7 +86,7 @@ coordinates cannot beat that ratio unless an additional ARA relation is supplied
 - Untouched target interval: `[100,000,000,110,000,000)`.
 - Candidate event: an integer coprime to `29#`; label is prime or composite.
 - Edge event: two adjacent p29-wheel candidates; label is whether both endpoints are prime.
-- Primary ARA candidate: four-gap Information^3 stencil, 12 bins, shrinkage 64.
+- Primary ARA candidate: four-gap three-point ARA stencil, 12 bins, shrinkage 64.
 - Primary ARA edge: two-endpoint ARA representation, 12 bins, shrinkage 64.
 - Primary baselines: p29-conditioned PNT, raw local pair, raw four-gap stencil, conditional Hardy-Littlewood and raw
   edge pair as declared by endpoint.
@@ -176,4 +181,3 @@ not from inspecting PN2's mistakes.
 - `PN2_LOCATION_CALIBRATION.csv`
 - `PN2_INDEPENDENT_VALIDATION.json`
 - `PN2_NOTEBOOK_EXECUTION_VALIDATION.json`
-

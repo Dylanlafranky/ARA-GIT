@@ -1,0 +1,76 @@
+{
+  "validator": "independent structural and arithmetic spot-check",
+  "passed": true,
+  "checks_passed": 12,
+  "checks_total": 12,
+  "checks": [
+    {
+      "check": "raw interval row count",
+      "passed": true,
+      "detail": "{'low_inclusive': 4000000000, 'high_exclusive': 4001000000, 'raw_integer_count': 1000000, 'prime_count': 45166, 'c090_survivor_count': 54275, 'c090_survivor_composite_count': 9109, 'child_gate_count': 9, 'event_window_each_side': 32}"
+    },
+    {
+      "check": "known PN10B fresh counts",
+      "passed": true,
+      "detail": "{'low_inclusive': 4000000000, 'high_exclusive': 4001000000, 'raw_integer_count': 1000000, 'prime_count': 45166, 'c090_survivor_count': 54275, 'c090_survivor_composite_count': 9109, 'child_gate_count': 9, 'event_window_each_side': 32}"
+    },
+    {
+      "check": "two event profiles and 65 offsets",
+      "passed": true,
+      "detail": "rows=130"
+    },
+    {
+      "check": "prime event is exact parent ridge",
+      "passed": true,
+      "detail": "{'event': 'prime_center', 'offset': '0', 'center_count': '45162', 'prime_rate': '1.0', 'survivor_rate': '1.0', 'parent_progress_mean': '1.0', 'parent_progress_median': '1.0', 'parent_progress_p10': '1.0', 'parent_progress_p90': '1.0', 'child_centroid_mean': '0.9998843509361445', 'child_centroid_median': '1.0325962210187456', 'child_centroid_p10': '0.7084673622157938', 'child_centroid_p90': '1.2414877814240788', 'child_dispersion_mean': '0.4995081190211898', 'child_coupling_mean': '-0.014073481070575829', 'child_flip_count_mean': '4.1286701208981'}"
+    },
+    {
+      "check": "odd offsets around odd primes are composite",
+      "passed": true,
+      "detail": "rows=32"
+    },
+    {
+      "check": "example A+B closure and modular formula",
+      "passed": true,
+      "detail": "max_closure=0; max_formula=0"
+    },
+    {
+      "check": "five examples by nine gates",
+      "passed": true,
+      "detail": "rows=45"
+    },
+    {
+      "check": "example neighborhoods stay inside the interval and preserve signed offsets",
+      "passed": true,
+      "detail": "rows=156; signed_offsets_valid=True"
+    },
+    {
+      "check": "landmark bins exhaust both populations",
+      "passed": true,
+      "detail": "{'prime': 406494, 'survivor_composite': 81981}"
+    },
+    {
+      "check": "pooled A mean equals mean node centroid",
+      "passed": true,
+      "detail": "pooled=0.9998605455312402; centroid=0.99986054553124"
+    },
+    {
+      "check": "figure dimensions and mode",
+      "passed": true,
+      "detail": "size=(1660, 1220); mode=RGB"
+    },
+    {
+      "check": "frozen registered verdict preserved",
+      "passed": true,
+      "detail": "status=post_hoc_descriptive_only; verdict=NULL"
+    }
+  ],
+  "artifact_sha256": {
+    "PN10B_EVENT_GEOMETRY_RESULTS.json": "EA5EFC012218C71A6B1656A40442D815978A1B48FC7606B557F526CFCB19ECD8",
+    "PN10B_EVENT_CENTERED_TRACES.csv": "5B4CED96A05EE0F6D4C966E3E6DD16777B57DB1D994A390C55CE8E4E8A645D89",
+    "PN10B_CHILD_LANDMARK_COUNTS.csv": "3C38B75DDC06F7A01F50BAEE63AA6C52A4CC4F90AFBBEE11C990455C84BE5612",
+    "PN10B_PRIME_CHILD_EXAMPLES.csv": "38C116F2D030A4E8E79B472C1837A178C82969F3D7A7C628294D4609D5327163",
+    "PN10B_EXAMPLE_NEIGHBORHOODS.csv": "EBAC67BFE0C785CC656D9EB434BD78327AFEECC3E97199D77CD67FB6A9075CB0",
+    "PN10B_EVENT_GEOMETRY_FIGURE.png": "33F150A16518C45FAB3E24E897903A56E32EA864A51B6EBC8585AFA8B41CFF99"
+  }
+}

@@ -1,0 +1,2747 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN10C Three-Lane Prime Geometry",
+    "description": "Post-hoc diagnostic of the red, blue and black lane families marked in the PN10B parent trace.",
+    "generatedAt": "2026-07-20T20:00:00+10:00",
+    "sources": [
+      {
+        "id": "pn10c_protocol",
+        "label": "PN10C frozen diagnostic protocol",
+        "path": "analysis/primes/PN10C_MOD6_THREE_LANE_COUPLING_PROTOCOL.md"
+      },
+      {
+        "id": "pn10c_results",
+        "label": "PN10C machine-readable results",
+        "path": "analysis/primes/PN10C_MOD6_THREE_LANE_RESULTS.json"
+      },
+      {
+        "id": "pn10c_validation",
+        "label": "PN10C independent validation",
+        "path": "analysis/primes/PN10C_MOD6_THREE_LANE_VALIDATION.json"
+      },
+      {
+        "id": "pn10c_offset_query",
+        "label": "PN10C orientation-conditioned trace query",
+        "path": "analysis/primes/pn10c_report_offset_trace.sql",
+        "query": {
+          "sql": "SELECT\n  'Centre ' || center_mod6 || ' mod 6' AS center_orientation,\n  center_mod6,\n  offset,\n  offset_lane_mod6,\n  center_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_offset_profile\nWHERE center_group = 'prime'\n  AND offset BETWEEN -30 AND 30\nORDER BY center_mod6, offset;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10c_offset_profile"
+          ],
+          "description": "Select the orientation-conditioned prime event traces for the visible +-30 offset window.",
+          "filters": [
+            "integer interval = [4000000000,4001000000)",
+            "post-hoc structural diagnostic",
+            "prime centres reserve +-150 boundary"
+          ],
+          "metric_definitions": [
+            "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites",
+            "centre orientation = centre prime modulo 6"
+          ]
+        }
+      },
+      {
+        "id": "pn10c_lane_query",
+        "label": "PN10C mod-6 lane summary query",
+        "path": "analysis/primes/pn10c_report_lane_summary.sql",
+        "query": {
+          "sql": "SELECT\n  'Centre ' || center_mod6 || ', lane ' || offset_lane_mod6 AS lane_label,\n  center_mod6,\n  offset_lane_mod6,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_sd,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_lane_summary\nWHERE center_group = 'prime'\n  AND direction = 'all'\nORDER BY center_mod6, offset_lane_mod6;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10c_lane_summary"
+          ],
+          "description": "Select the six prime-centred mod-6 lane means after conditioning on centre orientation.",
+          "filters": [
+            "integer interval = [4000000000,4001000000)",
+            "post-hoc structural diagnostic",
+            "prime centres reserve +-150 boundary"
+          ],
+          "metric_definitions": [
+            "lane = nonzero even offset modulo 6",
+            "prime_rate = share of all aligned centre-offset observations that are prime"
+          ]
+        }
+      },
+      {
+        "id": "pn10c_matrix_query",
+        "label": "PN10C mod-30 child matrix query",
+        "path": "analysis/primes/pn10c_report_mod30_matrix.sql",
+        "query": {
+          "sql": "SELECT\n  center_mod5,\n  black_child_m_mod5,\n  offset_mod30,\n  predicted_factor5_collision,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_5_rate\nFROM pn10c_mod30_matrix\nWHERE center_group = 'prime'\nORDER BY center_mod5, black_child_m_mod5;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10c_mod30_matrix"
+          ],
+          "description": "Select the factor-5 child matrix inside nonzero offsets divisible by 6.",
+          "filters": [
+            "integer interval = [4000000000,4001000000)",
+            "post-hoc structural diagnostic",
+            "prime centres reserve +-150 boundary"
+          ],
+          "metric_definitions": [
+            "black child m = (offset/6) modulo 5",
+            "predicted collision = 1 when (centre mod5 + m mod5) mod5 = 0"
+          ]
+        }
+      },
+      {
+        "id": "pn10c_contrast_query",
+        "label": "PN10C frozen contrast query",
+        "path": "analysis/primes/pn10c_report_contrasts.sql",
+        "query": {
+          "sql": "SELECT\n  contrast,\n  estimate,\n  ci95_low,\n  ci95_high,\n  standardized_difference,\n  interpretation\nFROM pn10c_contrasts\nORDER BY display_order;\n",
+          "language": "SQL",
+          "engine": "SQLite",
+          "tables_used": [
+            "pn10c_contrasts"
+          ],
+          "description": "Select frozen PN10C contrasts and contiguous-block bootstrap intervals.",
+          "filters": [
+            "integer interval = [4000000000,4001000000)",
+            "post-hoc structural diagnostic",
+            "prime centres reserve +-150 boundary"
+          ],
+          "metric_definitions": [
+            "red/blue swap = half the sum of the two orientation-conditioned high-minus-low differences",
+            "intervals = percentile 95% intervals from 2000 resamples of 100 contiguous centre blocks"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "orientation_trace",
+        "title": "Parent factor progress around prime centres",
+        "subtitle": "Prime centres split by mod-6 orientation; raw offsets -30 to +30",
+        "type": "line",
+        "dataset": "orientation_trace",
+        "sourceId": "pn10c_offset_query",
+        "source": {
+          "label": "PN10C orientation-conditioned trace query",
+          "path": "analysis/primes/pn10c_report_offset_trace.sql",
+          "query": {
+            "sql": "SELECT\n  'Centre ' || center_mod6 || ' mod 6' AS center_orientation,\n  center_mod6,\n  offset,\n  offset_lane_mod6,\n  center_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_offset_profile\nWHERE center_group = 'prime'\n  AND offset BETWEEN -30 AND 30\nORDER BY center_mod6, offset;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_offset_profile"
+            ],
+            "description": "Select the orientation-conditioned prime event traces for the visible +-30 offset window.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites",
+              "centre orientation = centre prime modulo 6"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "offset",
+            "type": "quantitative",
+            "label": "Raw-integer offset"
+          },
+          "y": {
+            "field": "parent_progress_mean",
+            "type": "quantitative",
+            "label": "Mean parent factor progress"
+          },
+          "color": {
+            "field": "center_orientation",
+            "type": "nominal",
+            "label": "Centre orientation"
+          },
+          "tooltip": [
+            {
+              "field": "prime_rate",
+              "type": "quantitative",
+              "label": "Prime rate"
+            },
+            {
+              "field": "survivor_rate",
+              "type": "quantitative",
+              "label": "c=.90 survivor rate"
+            },
+            {
+              "field": "divisible_by_3_rate",
+              "type": "quantitative",
+              "label": "Divisible by 3"
+            },
+            {
+              "field": "center_count",
+              "type": "quantitative",
+              "label": "Centres"
+            }
+          ]
+        },
+        "layout": "full"
+      },
+      {
+        "id": "lane_means",
+        "title": "Mod-6 lane means after centre-orientation conditioning",
+        "subtitle": "Black is compared with the coloured branch that remains admissible in each orientation",
+        "type": "bar",
+        "dataset": "lane_summary",
+        "sourceId": "pn10c_lane_query",
+        "source": {
+          "label": "PN10C mod-6 lane summary query",
+          "path": "analysis/primes/pn10c_report_lane_summary.sql",
+          "query": {
+            "sql": "SELECT\n  'Centre ' || center_mod6 || ', lane ' || offset_lane_mod6 AS lane_label,\n  center_mod6,\n  offset_lane_mod6,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_sd,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_lane_summary\nWHERE center_group = 'prime'\n  AND direction = 'all'\nORDER BY center_mod6, offset_lane_mod6;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_lane_summary"
+            ],
+            "description": "Select the six prime-centred mod-6 lane means after conditioning on centre orientation.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "lane = nonzero even offset modulo 6",
+              "prime_rate = share of all aligned centre-offset observations that are prime"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "lane_label",
+            "type": "nominal",
+            "label": "Centre orientation and offset lane"
+          },
+          "y": {
+            "field": "parent_progress_mean",
+            "type": "quantitative",
+            "label": "Mean parent factor progress"
+          },
+          "tooltip": [
+            {
+              "field": "prime_rate",
+              "type": "quantitative",
+              "label": "Prime rate"
+            },
+            {
+              "field": "divisible_by_3_rate",
+              "type": "quantitative",
+              "label": "Divisible by 3"
+            },
+            {
+              "field": "observation_count",
+              "type": "quantitative",
+              "label": "Aligned observations"
+            }
+          ]
+        },
+        "layout": "full"
+      },
+      {
+        "id": "contrast_chart",
+        "title": "Frozen three-lane and child-decomposition contrasts",
+        "subtitle": "Positive and negative estimates retain their signed diagnostic meaning",
+        "type": "bar",
+        "dataset": "contrasts",
+        "sourceId": "pn10c_contrast_query",
+        "source": {
+          "label": "PN10C frozen contrast query",
+          "path": "analysis/primes/pn10c_report_contrasts.sql",
+          "query": {
+            "sql": "SELECT\n  contrast,\n  estimate,\n  ci95_low,\n  ci95_high,\n  standardized_difference,\n  interpretation\nFROM pn10c_contrasts\nORDER BY display_order;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_contrasts"
+            ],
+            "description": "Select frozen PN10C contrasts and contiguous-block bootstrap intervals.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "red/blue swap = half the sum of the two orientation-conditioned high-minus-low differences",
+              "intervals = percentile 95% intervals from 2000 resamples of 100 contiguous centre blocks"
+            ]
+          }
+        },
+        "encodings": {
+          "x": {
+            "field": "contrast",
+            "type": "nominal",
+            "label": "Frozen contrast"
+          },
+          "y": {
+            "field": "estimate",
+            "type": "quantitative",
+            "label": "Parent-progress contrast"
+          },
+          "tooltip": [
+            {
+              "field": "ci95_low",
+              "type": "quantitative",
+              "label": "95% CI low"
+            },
+            {
+              "field": "ci95_high",
+              "type": "quantitative",
+              "label": "95% CI high"
+            },
+            {
+              "field": "interpretation",
+              "type": "nominal",
+              "label": "Meaning"
+            }
+          ]
+        },
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "lane_table",
+        "title": "Prime-centred mod-6 lane detail",
+        "subtitle": "All nonzero offsets from -150 to +150, pooled within each residue lane",
+        "dataset": "lane_summary",
+        "sourceId": "pn10c_lane_query",
+        "source": {
+          "label": "PN10C mod-6 lane summary query",
+          "path": "analysis/primes/pn10c_report_lane_summary.sql",
+          "query": {
+            "sql": "SELECT\n  'Centre ' || center_mod6 || ', lane ' || offset_lane_mod6 AS lane_label,\n  center_mod6,\n  offset_lane_mod6,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_sd,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_lane_summary\nWHERE center_group = 'prime'\n  AND direction = 'all'\nORDER BY center_mod6, offset_lane_mod6;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_lane_summary"
+            ],
+            "description": "Select the six prime-centred mod-6 lane means after conditioning on centre orientation.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "lane = nonzero even offset modulo 6",
+              "prime_rate = share of all aligned centre-offset observations that are prime"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "lane_label",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "lane_label",
+            "label": "Centre and lane",
+            "type": "text"
+          },
+          {
+            "field": "parent_progress_mean",
+            "label": "Mean progress",
+            "type": "number"
+          },
+          {
+            "field": "prime_rate",
+            "label": "Prime rate",
+            "type": "number"
+          },
+          {
+            "field": "survivor_rate",
+            "label": "Survivor rate",
+            "type": "number"
+          },
+          {
+            "field": "divisible_by_3_rate",
+            "label": "Divisible by 3",
+            "type": "number"
+          },
+          {
+            "field": "divisible_by_5_rate",
+            "label": "Divisible by 5",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "matrix_table",
+        "title": "Black-lane mod-30 child matrix",
+        "subtitle": "One factor-5 collision rotates across each centre-mod-5 row",
+        "dataset": "mod30_matrix",
+        "sourceId": "pn10c_matrix_query",
+        "source": {
+          "label": "PN10C mod-30 child matrix query",
+          "path": "analysis/primes/pn10c_report_mod30_matrix.sql",
+          "query": {
+            "sql": "SELECT\n  center_mod5,\n  black_child_m_mod5,\n  offset_mod30,\n  predicted_factor5_collision,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_5_rate\nFROM pn10c_mod30_matrix\nWHERE center_group = 'prime'\nORDER BY center_mod5, black_child_m_mod5;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_mod30_matrix"
+            ],
+            "description": "Select the factor-5 child matrix inside nonzero offsets divisible by 6.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "black child m = (offset/6) modulo 5",
+              "predicted collision = 1 when (centre mod5 + m mod5) mod5 = 0"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "center_mod5",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "center_mod5",
+            "label": "Centre mod 5",
+            "type": "number"
+          },
+          {
+            "field": "black_child_m_mod5",
+            "label": "Child m mod 5",
+            "type": "number"
+          },
+          {
+            "field": "predicted_factor5_collision",
+            "label": "Factor-5 collision",
+            "type": "number"
+          },
+          {
+            "field": "parent_progress_mean",
+            "label": "Mean progress",
+            "type": "number"
+          },
+          {
+            "field": "prime_rate",
+            "label": "Prime rate",
+            "type": "number"
+          },
+          {
+            "field": "divisible_by_5_rate",
+            "label": "Divisible by 5",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "contrast_table",
+        "title": "Frozen diagnostic contrasts",
+        "subtitle": "95% intervals use 2,000 resamples of 100 contiguous centre blocks",
+        "dataset": "contrasts",
+        "sourceId": "pn10c_contrast_query",
+        "source": {
+          "label": "PN10C frozen contrast query",
+          "path": "analysis/primes/pn10c_report_contrasts.sql",
+          "query": {
+            "sql": "SELECT\n  contrast,\n  estimate,\n  ci95_low,\n  ci95_high,\n  standardized_difference,\n  interpretation\nFROM pn10c_contrasts\nORDER BY display_order;\n",
+            "language": "SQL",
+            "engine": "SQLite",
+            "tables_used": [
+              "pn10c_contrasts"
+            ],
+            "description": "Select frozen PN10C contrasts and contiguous-block bootstrap intervals.",
+            "filters": [
+              "integer interval = [4000000000,4001000000)",
+              "post-hoc structural diagnostic",
+              "prime centres reserve +-150 boundary"
+            ],
+            "metric_definitions": [
+              "red/blue swap = half the sum of the two orientation-conditioned high-minus-low differences",
+              "intervals = percentile 95% intervals from 2000 resamples of 100 contiguous centre blocks"
+            ]
+          }
+        },
+        "defaultSort": {
+          "field": "contrast",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "contrast",
+            "label": "Contrast",
+            "type": "text"
+          },
+          {
+            "field": "estimate",
+            "label": "Estimate",
+            "type": "number",
+            "movement": true
+          },
+          {
+            "field": "ci95_low",
+            "label": "95% CI low",
+            "type": "number"
+          },
+          {
+            "field": "ci95_high",
+            "label": "95% CI high",
+            "type": "number"
+          },
+          {
+            "field": "standardized_difference",
+            "label": "Std. difference",
+            "type": "number"
+          },
+          {
+            "field": "interpretation",
+            "label": "Diagnostic meaning",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN10C Three-Lane Prime Geometry"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## The marked lanes are real, but black is the common route\n\nRed and blue exchange roles by **+0.323729** (95% CI **[+0.323298,+0.324171]**), and reflecting one centre orientation onto the other cuts mismatch by **99.52%**. Black is invariant across orientations, but after conditioning it is **0.004060 lower** than the admissible coloured branch. Black is therefore the shared mod-6 route at this grain, not a stronger independent third wave. It then decomposes into a rotating factor-5 child trough at mod 30. PN10B remains **NULL**."
+      },
+      {
+        "id": "pair_result",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## Red and blue form a reversible conditional pair\n\nFor a centre `1 mod 6`, lane 2 lands entirely on multiples of 3 and falls to **0.099378**, while lane 4 remains admissible at **0.423268**. For a centre `5 mod 6`, the roles reverse: lane 2 is **0.422946** and lane 4 is **0.099378**. The reflected trace error is **0.000515** versus **0.107882** without reflection."
+      },
+      {
+        "id": "trace",
+        "type": "chart",
+        "chartId": "orientation_trace",
+        "layout": "full"
+      },
+      {
+        "id": "common_result",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## Black preserves either orientation instead of selecting one\n\nBlack offsets are multiples of 6, so they keep both prime-admissible centre classes clear of factors 2 and 3. Its orientation difference is **-0.000358**, with an interval containing zero. Its apparent aggregate height comes from remaining admissible in both orientations while each coloured lane is suppressed in one."
+      },
+      {
+        "id": "lanes",
+        "type": "chart",
+        "chartId": "lane_means",
+        "layout": "full"
+      },
+      {
+        "id": "lane_detail",
+        "type": "table",
+        "tableId": "lane_table",
+        "layout": "full"
+      },
+      {
+        "id": "child_result",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## The common route opens into a rotating mod-5 child trough\n\nWriting a black offset as `k=6m`, the child satisfying `(centre mod 5 + m mod 5) mod 5 = 0` is always divisible by 5. Its measured progress is **0.145586686**, exactly the factor-5 value, versus **0.487412541** for eligible children. The eligible-minus-suppressed contrast is **+0.341826**."
+      },
+      {
+        "id": "matrix",
+        "type": "table",
+        "tableId": "matrix_table",
+        "layout": "full"
+      },
+      {
+        "id": "control",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## Matched composites show that the surrounding geometry is modular\n\nComposite centres coprime to 6 reproduce the red/blue swap at **+0.323995**. The surrounding lanes are therefore a general modular lattice, not a signal unique to primes. The exact central **1.0 ridge** remains prime-specific by the parent-coordinate definition."
+      },
+      {
+        "id": "contrasts_reading",
+        "type": "markdown",
+        "sourceId": "pn10c_results",
+        "body": "## The frozen contrasts separate the supported and unsupported readings\n\nThe red/blue swap, reflection and mod-30 child split are strongly supported. Black-lane independence is not: its comparison with the admissible coloured branch has the opposite sign. The signed chart and exact table retain that distinction."
+      },
+      {
+        "id": "contrasts_chart",
+        "type": "chart",
+        "chartId": "contrast_chart",
+        "layout": "full"
+      },
+      {
+        "id": "contrasts_table",
+        "type": "table",
+        "tableId": "contrast_table",
+        "layout": "full"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "pn10c_protocol",
+        "body": "## Scope, data and metric definitions\n\nThe test used the already-open million-integer interval near four billion, **45,156** interior prime centres, a `+-150` window and **45,156** matched coprime-composite controls. Parent factor progress is `1` for primes and `2 log(LPF(n))/log(n)` for composites. The lane-conditioned predictions were frozen before their calculation; the interval itself was already open, so the evidence is post-hoc."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "pn10c_protocol",
+        "body": "## Frozen diagnostic and uncertainty design\n\nThe protocol fixed five questions: coloured-lane exchange, phase reflection, black invariance, black-versus-admissible-colour independence, and `6 -> 30` child decomposition. Uncertainty used 2,000 deterministic resamples over 100 contiguous centre blocks. Positive and negative offsets, exact divisibility identities, worked events and matched composites were retained as controls."
+      },
+      {
+        "id": "validation",
+        "type": "markdown",
+        "sourceId": "pn10c_validation",
+        "body": "## Independent validation passed 17 of 17 checks\n\nThe validator regenerated the interval, recomputed every prime-centred offset profile and headline contrast, traced all 222 worked-example rows, and found zero mod-3 or mod-5 identity violations. This verifies the arithmetic and artifacts, not a universal ARA ontology."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Established mechanism, bounded ARA inference\n\nThe result validates the decomposition of this plot, but the mechanism is established wheel-sieve arithmetic. It does not establish three independent waves, a new prime theorem, prospective predictive value, physical universality or the full fractal claim. Its value is that ARA led to the correct orientation, shared-route and child-hierarchy questions without flattening the aggregate trace."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nFreeze a `6 -> 30 -> 210` wheel-hierarchy transformation on a new unopened interval. Add one ARA statistic among the still-eligible children whose value or ordering is not automatically fixed by divisibility. That is the point at which the method could move beyond a clean crosswalk into an independently informative calculation."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nDoes the mod-7 orientation produce the predicted rotating child while preserving the common parent relation? Can ARA predeclare a continuous ordering among eligible children? Does the reflection persist at new numerical scales? Which prospective quantity distinguishes ARA from a relabelled wheel sieve?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-20T20:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "orientation_trace": [
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -30,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.47702442339181167,
+          "parent_progress_median": 0.3482762328836535,
+          "prime_rate": 0.15955086099769217,
+          "survivor_rate": 0.1921267530623114,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -29,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077184094293,
+          "parent_progress_median": 0.06270077172763651,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -28,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.099378372133044,
+          "parent_progress_median": 0.09937837195345758,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -27,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183952516,
+          "parent_progress_median": 0.06270077172621874,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -26,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.40954338083001474,
+          "parent_progress_median": 0.2663495898931424,
+          "prime_rate": 0.1280401207172022,
+          "survivor_rate": 0.15320433161725547,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -25,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.0627007718381074,
+          "parent_progress_median": 0.06270077172480097,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -24,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.3948328465474894,
+          "parent_progress_median": 0.25628717565302095,
+          "prime_rate": 0.11969643174152317,
+          "survivor_rate": 0.14419492277649565,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -23,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183668962,
+          "parent_progress_median": 0.0627007717233832,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -22,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837212630268,
+          "parent_progress_median": 0.09937837194671625,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -21,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183527185,
+          "parent_progress_median": 0.06270077172196543,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -20,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.4779625664850878,
+          "parent_progress_median": 0.34827620475522253,
+          "prime_rate": 0.16057163145748268,
+          "survivor_rate": 0.1938576247115214,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -19,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183385409,
+          "parent_progress_median": 0.06270077172054767,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -18,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.3950909609285131,
+          "parent_progress_median": 0.25628707339252144,
+          "prime_rate": 0.12129415941771703,
+          "survivor_rate": 0.14428368542517309,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -17,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183243632,
+          "parent_progress_median": 0.06270077171912988,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -16,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837211956135,
+          "parent_progress_median": 0.09937837193997492,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -15,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077183101855,
+          "parent_progress_median": 0.06270077171771213,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -14,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.43751232790582184,
+          "parent_progress_median": 0.31063095959091813,
+          "prime_rate": 0.1425971951003018,
+          "survivor_rate": 0.17042428546067814,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -13,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182960078,
+          "parent_progress_median": 0.06270077171629435,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -12,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39114563315459977,
+          "parent_progress_median": 0.2562869692119527,
+          "prime_rate": 0.11556896857802237,
+          "survivor_rate": 0.14033374755902717,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -11,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.062700771828183,
+          "parent_progress_median": 0.06270077171487659,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -10,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837211282002,
+          "parent_progress_median": 0.09937837193323358,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -9,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182676524,
+          "parent_progress_median": 0.06270077171345881,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -8,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.393445955165771,
+          "parent_progress_median": 0.2562872064397321,
+          "prime_rate": 0.11920823717379726,
+          "survivor_rate": 0.14281910172199538,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -7,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182534747,
+          "parent_progress_median": 0.06270077171204104,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -6,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39370282187244965,
+          "parent_progress_median": 0.2562870219670912,
+          "prime_rate": 0.12249245517486242,
+          "survivor_rate": 0.14472749866856027,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -5,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182392969,
+          "parent_progress_median": 0.06270077171062327,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -4,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837210607867,
+          "parent_progress_median": 0.09937837192649224,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -3,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182251192,
+          "parent_progress_median": 0.0627007717092055,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -2,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39455391071480983,
+          "parent_progress_median": 0.25628719506095315,
+          "prime_rate": 0.11920823717379726,
+          "survivor_rate": 0.14366234688443102,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": -1,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077182109415,
+          "parent_progress_median": 0.06270077170778773,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 0,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 1.0,
+          "parent_progress_median": 1.0,
+          "prime_rate": 1.0,
+          "survivor_rate": 1.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 1,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181967638,
+          "parent_progress_median": 0.06270077170636996,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 2,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837209933732,
+          "parent_progress_median": 0.09937837191975091,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 3,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181825862,
+          "parent_progress_median": 0.0627007717049522,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 4,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39257605910925375,
+          "parent_progress_median": 0.2562869265548615,
+          "prime_rate": 0.1192969998224747,
+          "survivor_rate": 0.1431297709923664,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 5,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181684085,
+          "parent_progress_median": 0.06270077170353441,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 6,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.394637540902464,
+          "parent_progress_median": 0.25628692015138643,
+          "prime_rate": 0.12249245517486242,
+          "survivor_rate": 0.14539321853364104,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 7,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181542308,
+          "parent_progress_median": 0.06270077170211666,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 8,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837209259599,
+          "parent_progress_median": 0.09937837191300958,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 9,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181400531,
+          "parent_progress_median": 0.06270077170069888,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 10,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.4749577437964156,
+          "parent_progress_median": 0.34023242708084467,
+          "prime_rate": 0.15560092313154625,
+          "survivor_rate": 0.1884874844665365,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 11,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181258753,
+          "parent_progress_median": 0.06270077169928112,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 12,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39323110906722214,
+          "parent_progress_median": 0.2562873389467556,
+          "prime_rate": 0.11556896857802237,
+          "survivor_rate": 0.1413988993431564,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 13,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077181116976,
+          "parent_progress_median": 0.06270077169786334,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 14,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837208585466,
+          "parent_progress_median": 0.09937837190626823,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 15,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180975199,
+          "parent_progress_median": 0.06270077169644558,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 16,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39315235889960115,
+          "parent_progress_median": 0.2562868805977012,
+          "prime_rate": 0.11982957571453932,
+          "survivor_rate": 0.14304100834368896,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 17,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180833422,
+          "parent_progress_median": 0.0627007716950278,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 18,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.3950132556125115,
+          "parent_progress_median": 0.2562871759485727,
+          "prime_rate": 0.12129415941771703,
+          "survivor_rate": 0.14685780223681874,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 19,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180691645,
+          "parent_progress_median": 0.06270077169361002,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 20,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.09937837207911333,
+          "parent_progress_median": 0.0993783718995269,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 21,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180549868,
+          "parent_progress_median": 0.06270077169219226,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 22,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.41807300066829145,
+          "parent_progress_median": 0.28363083506869086,
+          "prime_rate": 0.13407598082726788,
+          "survivor_rate": 0.16199183383632168,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 23,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180408092,
+          "parent_progress_median": 0.0627007716907745,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 24,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.39090468569101305,
+          "parent_progress_median": 0.25628674415585695,
+          "prime_rate": 0.11969643174152317,
+          "survivor_rate": 0.14122137404580154,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 25,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180266315,
+          "parent_progress_median": 0.06270077168935673,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 26,
+          "offset_lane_mod6": "2",
+          "center_count": 22532,
+          "parent_progress_mean": 0.099378372072372,
+          "parent_progress_median": 0.09937837189278556,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25230782886561337
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 27,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.06270077180124538,
+          "parent_progress_median": 0.06270077168793894,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2471152139179833
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 28,
+          "offset_lane_mod6": "4",
+          "center_count": 22532,
+          "parent_progress_mean": 0.43980013418055075,
+          "parent_progress_median": 0.3106312943471523,
+          "prime_rate": 0.14326291496538257,
+          "survivor_rate": 0.17237706373158174,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2485354162968223
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 29,
+          "offset_lane_mod6": "odd",
+          "center_count": 22532,
+          "parent_progress_mean": 0.0627007717998276,
+          "parent_progress_median": 0.06270077168652119,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25204154091958103
+        },
+        {
+          "center_orientation": "Centre 1 mod 6",
+          "center_mod6": 1,
+          "offset": 30,
+          "offset_lane_mod6": "0",
+          "center_count": 22532,
+          "parent_progress_mean": 0.47515145212169985,
+          "parent_progress_median": 0.34023250714462544,
+          "prime_rate": 0.15955086099769217,
+          "survivor_rate": 0.19123912657553702,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -30,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.47839438505950127,
+          "parent_progress_median": 0.34827629469235694,
+          "prime_rate": 0.16270332390381895,
+          "survivor_rate": 0.19457213578500707,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -29,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.0627007735326234,
+          "parent_progress_median": 0.06270077513383115,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -28,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.43636775232473674,
+          "parent_progress_median": 0.3106307369692261,
+          "prime_rate": 0.14268033946251768,
+          "survivor_rate": 0.17008486562942007,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -27,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077353120564,
+          "parent_progress_median": 0.06270077513241337,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -26,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837481204703,
+          "parent_progress_median": 0.09937837734990124,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -25,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352978788,
+          "parent_progress_median": 0.0627007751309956,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -24,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39237972813073924,
+          "parent_progress_median": 0.2562868805977012,
+          "prime_rate": 0.11744165487977369,
+          "survivor_rate": 0.14214992927864215,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -23,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352837009,
+          "parent_progress_median": 0.06270077512957783,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -22,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.41786578714227174,
+          "parent_progress_median": 0.2836307814497886,
+          "prime_rate": 0.13353076379066478,
+          "survivor_rate": 0.1608910891089109,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -21,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352695232,
+          "parent_progress_median": 0.06270077512816005,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -20,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837480530569,
+          "parent_progress_median": 0.09937837734315991,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -19,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352553455,
+          "parent_progress_median": 0.0627007751267423,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -18,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39496811852587543,
+          "parent_progress_median": 0.2562872328917457,
+          "prime_rate": 0.12137553041018388,
+          "survivor_rate": 0.14617220650636492,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -17,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352411678,
+          "parent_progress_median": 0.06270077512532451,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -16,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39273889768977743,
+          "parent_progress_median": 0.2562870385177768,
+          "prime_rate": 0.11934229137199434,
+          "survivor_rate": 0.1441389674681754,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -15,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352269901,
+          "parent_progress_median": 0.06270077512390675,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -14,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837479856435,
+          "parent_progress_median": 0.09937837733641855,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -13,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077352128124,
+          "parent_progress_median": 0.06270077512248898,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -12,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.3941630118232244,
+          "parent_progress_median": 0.25628722328625847,
+          "prime_rate": 0.11792786421499293,
+          "survivor_rate": 0.14206152758132956,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -11,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351986347,
+          "parent_progress_median": 0.0627007751210712,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -10,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.47348297560479985,
+          "parent_progress_median": 0.34023202428749943,
+          "prime_rate": 0.15496817538896746,
+          "survivor_rate": 0.18705799151343705,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -9,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.0627007735184457,
+          "parent_progress_median": 0.06270077511965344,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -8,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837479182299,
+          "parent_progress_median": 0.09937837732967722,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -7,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351702794,
+          "parent_progress_median": 0.06270077511823566,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -6,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.393119708558714,
+          "parent_progress_median": 0.25628726407269564,
+          "prime_rate": 0.1196958981612447,
+          "survivor_rate": 0.14294554455445543,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -5,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351561015,
+          "parent_progress_median": 0.06270077511681789,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -4,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39534070686815326,
+          "parent_progress_median": 0.25628733628674705,
+          "prime_rate": 0.1188118811881188,
+          "survivor_rate": 0.14374115983026875,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -3,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351419238,
+          "parent_progress_median": 0.06270077511540012,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -2,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837478508166,
+          "parent_progress_median": 0.09937837732293586,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": -1,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351277462,
+          "parent_progress_median": 0.06270077511398234,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 0,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 1.0,
+          "parent_progress_median": 1.0,
+          "prime_rate": 1.0,
+          "survivor_rate": 1.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 1,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077351135685,
+          "parent_progress_median": 0.06270077511256458,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 2,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.3913345761481462,
+          "parent_progress_median": 0.2562865739261782,
+          "prime_rate": 0.11872347949080622,
+          "survivor_rate": 0.14210572842998587,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 3,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350993908,
+          "parent_progress_median": 0.0627007751111468,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 4,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837477834033,
+          "parent_progress_median": 0.09937837731619452,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 5,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350852131,
+          "parent_progress_median": 0.06270077510972903,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 6,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.3943271076728091,
+          "parent_progress_median": 0.2562871227986035,
+          "prime_rate": 0.1196958981612447,
+          "survivor_rate": 0.14206152758132956,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 7,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350710354,
+          "parent_progress_median": 0.06270077510831126,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 8,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39512907341227854,
+          "parent_progress_median": 0.2562870800423783,
+          "prime_rate": 0.11872347949080622,
+          "survivor_rate": 0.1448019801980198,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 9,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350568577,
+          "parent_progress_median": 0.06270077510689348,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 10,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.099378374771599,
+          "parent_progress_median": 0.09937837730945318,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 11,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350426798,
+          "parent_progress_median": 0.06270077510547573,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 12,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39362885142435866,
+          "parent_progress_median": 0.25628697753650886,
+          "prime_rate": 0.11792786421499293,
+          "survivor_rate": 0.14338755304101838,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 13,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350285021,
+          "parent_progress_median": 0.06270077510405794,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 14,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.4376605383548871,
+          "parent_progress_median": 0.31063072749836745,
+          "prime_rate": 0.14201732673267325,
+          "survivor_rate": 0.16981966053748232,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 15,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350143245,
+          "parent_progress_median": 0.06270077510264017,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 16,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837476485763,
+          "parent_progress_median": 0.09937837730271183,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 17,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077350001467,
+          "parent_progress_median": 0.0627007751012224,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 18,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39286331220875104,
+          "parent_progress_median": 0.25628699970251956,
+          "prime_rate": 0.12137553041018388,
+          "survivor_rate": 0.14307814710042432,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 19,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.0627007734985969,
+          "parent_progress_median": 0.06270077509980462,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 20,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.4755711854674042,
+          "parent_progress_median": 0.34827537961740673,
+          "prime_rate": 0.1599186704384724,
+          "survivor_rate": 0.19068246110325318,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 21,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077349717913,
+          "parent_progress_median": 0.06270077509838685,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 22,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837475811628,
+          "parent_progress_median": 0.09937837729597049,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 23,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077349576136,
+          "parent_progress_median": 0.06270077509696909,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 24,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.39134669283329615,
+          "parent_progress_median": 0.2562867108091459,
+          "prime_rate": 0.1173974540311174,
+          "survivor_rate": 0.14069130127298443,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 25,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.0627007734943436,
+          "parent_progress_median": 0.0627007750955513,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 26,
+          "offset_lane_mod6": "2",
+          "center_count": 22624,
+          "parent_progress_mean": 0.40945502002366313,
+          "parent_progress_median": 0.28362949466939646,
+          "prime_rate": 0.12751944837340876,
+          "survivor_rate": 0.15350954738330977,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2492043847241867
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 27,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077349292583,
+          "parent_progress_median": 0.06270077509413355,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.25238684582743987
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 28,
+          "offset_lane_mod6": "4",
+          "center_count": 22624,
+          "parent_progress_mean": 0.09937837475137495,
+          "parent_progress_median": 0.09937837728922913,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.24752475247524752
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 29,
+          "offset_lane_mod6": "odd",
+          "center_count": 22624,
+          "parent_progress_mean": 0.06270077349150804,
+          "parent_progress_median": 0.06270077509271577,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2508840169731259
+        },
+        {
+          "center_orientation": "Centre 5 mod 6",
+          "center_mod6": 5,
+          "offset": 30,
+          "offset_lane_mod6": "0",
+          "center_count": 22624,
+          "parent_progress_mean": 0.4787083994263095,
+          "parent_progress_median": 0.3482772146370493,
+          "prime_rate": 0.16265912305516267,
+          "survivor_rate": 0.19536775106082035,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.0
+        }
+      ],
+      "lane_summary": [
+        {
+          "lane_label": "Centre 1, lane 0",
+          "center_mod6": 1,
+          "offset_lane_mod6": 0,
+          "center_count": 22532,
+          "offset_count_per_center": 50,
+          "observation_count": 1126600,
+          "parent_progress_mean": 0.41886804105828074,
+          "parent_progress_sd": 0.30325702524665854,
+          "parent_progress_median": 0.2836300537466788,
+          "prime_rate": 0.13213474170069234,
+          "survivor_rate": 0.15875821054500266,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2
+        },
+        {
+          "lane_label": "Centre 1, lane 2",
+          "center_mod6": 1,
+          "offset_lane_mod6": 2,
+          "center_count": 22532,
+          "offset_count_per_center": 50,
+          "observation_count": 1126600,
+          "parent_progress_mean": 0.09937837210270802,
+          "parent_progress_sd": 3.2392779608222616e-07,
+          "parent_progress_median": 0.09937837193660426,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2
+        },
+        {
+          "lane_label": "Centre 1, lane 4",
+          "center_mod6": 1,
+          "offset_lane_mod6": 4,
+          "center_count": 22532,
+          "offset_count_per_center": 50,
+          "observation_count": 1126600,
+          "parent_progress_mean": 0.4232681839683818,
+          "parent_progress_sd": 0.3050281931495777,
+          "parent_progress_median": 0.2836309718090652,
+          "prime_rate": 0.13566305698562045,
+          "survivor_rate": 0.16269838451979407,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2
+        },
+        {
+          "lane_label": "Centre 5, lane 0",
+          "center_mod6": 5,
+          "offset_lane_mod6": 0,
+          "center_count": 22624,
+          "offset_count_per_center": 50,
+          "observation_count": 1131200,
+          "parent_progress_mean": 0.4192259698294686,
+          "parent_progress_sd": 0.3035381445475744,
+          "parent_progress_median": 0.2836300695289584,
+          "prime_rate": 0.13278465346534654,
+          "survivor_rate": 0.15946870579915134,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2
+        },
+        {
+          "lane_label": "Centre 5, lane 2",
+          "center_mod6": 5,
+          "offset_lane_mod6": 2,
+          "center_count": 22624,
+          "offset_count_per_center": 50,
+          "observation_count": 1131200,
+          "parent_progress_mean": 0.4229460408998117,
+          "parent_progress_sd": 0.30483727265681787,
+          "parent_progress_median": 0.28363092062343126,
+          "prime_rate": 0.135112270155587,
+          "survivor_rate": 0.1620288189533239,
+          "divisible_by_3_rate": 0.0,
+          "divisible_by_5_rate": 0.2
+        },
+        {
+          "lane_label": "Centre 5, lane 4",
+          "center_mod6": 5,
+          "offset_lane_mod6": 4,
+          "center_count": 22624,
+          "offset_count_per_center": 50,
+          "observation_count": 1131200,
+          "parent_progress_mean": 0.09937837478171098,
+          "parent_progress_sd": 3.241975695767522e-07,
+          "parent_progress_median": 0.09937837728922913,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_3_rate": 1.0,
+          "divisible_by_5_rate": 0.2
+        }
+      ],
+      "mod30_matrix": [
+        {
+          "center_mod5": 1,
+          "black_child_m_mod5": 0,
+          "offset_mod30": 0,
+          "predicted_factor5_collision": 0,
+          "center_count": 11355,
+          "offset_count_per_center": 10,
+          "observation_count": 113550,
+          "parent_progress_mean": 0.475975477614343,
+          "parent_progress_median": 0.3482751262934533,
+          "prime_rate": 0.15908410391897843,
+          "survivor_rate": 0.19126376045794805,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 1,
+          "black_child_m_mod5": 1,
+          "offset_mod30": 6,
+          "predicted_factor5_collision": 0,
+          "center_count": 11355,
+          "offset_count_per_center": 10,
+          "observation_count": 113550,
+          "parent_progress_mean": 0.4916239275627335,
+          "parent_progress_median": 0.3688481245088739,
+          "prime_rate": 0.16650814619110524,
+          "survivor_rate": 0.20027300748568913,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 1,
+          "black_child_m_mod5": 2,
+          "offset_mod30": 12,
+          "predicted_factor5_collision": 0,
+          "center_count": 11355,
+          "offset_count_per_center": 10,
+          "observation_count": 113550,
+          "parent_progress_mean": 0.49019359699676274,
+          "parent_progress_median": 0.36884731398587844,
+          "prime_rate": 0.1678996036988111,
+          "survivor_rate": 0.20145310435931307,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 1,
+          "black_child_m_mod5": 3,
+          "offset_mod30": 18,
+          "predicted_factor5_collision": 0,
+          "center_count": 11355,
+          "offset_count_per_center": 10,
+          "observation_count": 113550,
+          "parent_progress_mean": 0.4895295462496604,
+          "parent_progress_median": 0.36884627714990637,
+          "prime_rate": 0.1658476442095993,
+          "survivor_rate": 0.20022016732716866,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 1,
+          "black_child_m_mod5": 4,
+          "offset_mod30": 24,
+          "predicted_factor5_collision": 1,
+          "center_count": 11355,
+          "offset_count_per_center": 10,
+          "observation_count": 113550,
+          "parent_progress_mean": 0.14558668512788417,
+          "parent_progress_median": 0.14558668958173493,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_5_rate": 1.0
+        },
+        {
+          "center_mod5": 2,
+          "black_child_m_mod5": 0,
+          "offset_mod30": 0,
+          "predicted_factor5_collision": 0,
+          "center_count": 11200,
+          "offset_count_per_center": 10,
+          "observation_count": 112000,
+          "parent_progress_mean": 0.47574744511681294,
+          "parent_progress_median": 0.3482756771723236,
+          "prime_rate": 0.15817857142857142,
+          "survivor_rate": 0.1903392857142857,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 2,
+          "black_child_m_mod5": 1,
+          "offset_mod30": 6,
+          "predicted_factor5_collision": 0,
+          "center_count": 11200,
+          "offset_count_per_center": 10,
+          "observation_count": 112000,
+          "parent_progress_mean": 0.4923310634056529,
+          "parent_progress_median": 0.36884824655855764,
+          "prime_rate": 0.16858928571428572,
+          "survivor_rate": 0.20201785714285714,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 2,
+          "black_child_m_mod5": 2,
+          "offset_mod30": 12,
+          "predicted_factor5_collision": 0,
+          "center_count": 11200,
+          "offset_count_per_center": 10,
+          "observation_count": 112000,
+          "parent_progress_mean": 0.4910003148869491,
+          "parent_progress_median": 0.36884697345107964,
+          "prime_rate": 0.1689375,
+          "survivor_rate": 0.20275,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 2,
+          "black_child_m_mod5": 3,
+          "offset_mod30": 18,
+          "predicted_factor5_collision": 1,
+          "center_count": 11200,
+          "offset_count_per_center": 10,
+          "observation_count": 112000,
+          "parent_progress_mean": 0.14558668382961373,
+          "parent_progress_median": 0.14558668447096407,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_5_rate": 1.0
+        },
+        {
+          "center_mod5": 2,
+          "black_child_m_mod5": 4,
+          "offset_mod30": 24,
+          "predicted_factor5_collision": 0,
+          "center_count": 11200,
+          "offset_count_per_center": 10,
+          "observation_count": 112000,
+          "parent_progress_mean": 0.4927561007472771,
+          "parent_progress_median": 0.36884827805540854,
+          "prime_rate": 0.16880357142857144,
+          "survivor_rate": 0.202875,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 3,
+          "black_child_m_mod5": 0,
+          "offset_mod30": 0,
+          "predicted_factor5_collision": 0,
+          "center_count": 11278,
+          "offset_count_per_center": 10,
+          "observation_count": 112780,
+          "parent_progress_mean": 0.4762999837444431,
+          "parent_progress_median": 0.3482755035978766,
+          "prime_rate": 0.1595761659868771,
+          "survivor_rate": 0.19212626352190104,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 3,
+          "black_child_m_mod5": 1,
+          "offset_mod30": 6,
+          "predicted_factor5_collision": 0,
+          "center_count": 11278,
+          "offset_count_per_center": 10,
+          "observation_count": 112780,
+          "parent_progress_mean": 0.4924362285573975,
+          "parent_progress_median": 0.36884783710539937,
+          "prime_rate": 0.16844298634509663,
+          "survivor_rate": 0.20220783826919667,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 3,
+          "black_child_m_mod5": 2,
+          "offset_mod30": 12,
+          "predicted_factor5_collision": 1,
+          "center_count": 11278,
+          "offset_count_per_center": 10,
+          "observation_count": 112780,
+          "parent_progress_mean": 0.1455866888215524,
+          "parent_progress_median": 0.14558669205070796,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_5_rate": 1.0
+        },
+        {
+          "center_mod5": 3,
+          "black_child_m_mod5": 3,
+          "offset_mod30": 18,
+          "predicted_factor5_collision": 0,
+          "center_count": 11278,
+          "offset_count_per_center": 10,
+          "observation_count": 112780,
+          "parent_progress_mean": 0.4908536319338391,
+          "parent_progress_median": 0.3688468841357655,
+          "prime_rate": 0.16904593012945557,
+          "survivor_rate": 0.20234084057456997,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 3,
+          "black_child_m_mod5": 4,
+          "offset_mod30": 24,
+          "predicted_factor5_collision": 0,
+          "center_count": 11278,
+          "offset_count_per_center": 10,
+          "observation_count": 112780,
+          "parent_progress_mean": 0.49260914265116545,
+          "parent_progress_median": 0.3718601985272514,
+          "prime_rate": 0.1674233020039014,
+          "survivor_rate": 0.20169356268841993,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 4,
+          "black_child_m_mod5": 0,
+          "offset_mod30": 0,
+          "predicted_factor5_collision": 0,
+          "center_count": 11323,
+          "offset_count_per_center": 10,
+          "observation_count": 113230,
+          "parent_progress_mean": 0.47646154773200056,
+          "parent_progress_median": 0.3482755196969116,
+          "prime_rate": 0.1597279872825223,
+          "survivor_rate": 0.19148635520621743,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 4,
+          "black_child_m_mod5": 1,
+          "offset_mod30": 6,
+          "predicted_factor5_collision": 1,
+          "center_count": 11323,
+          "offset_count_per_center": 10,
+          "observation_count": 113230,
+          "parent_progress_mean": 0.14558668473092504,
+          "parent_progress_median": 0.14558668136829206,
+          "prime_rate": 0.0,
+          "survivor_rate": 0.0,
+          "divisible_by_5_rate": 1.0
+        },
+        {
+          "center_mod5": 4,
+          "black_child_m_mod5": 2,
+          "offset_mod30": 12,
+          "predicted_factor5_collision": 0,
+          "center_count": 11323,
+          "offset_count_per_center": 10,
+          "observation_count": 113230,
+          "parent_progress_mean": 0.4891426203460151,
+          "parent_progress_median": 0.36884633423064744,
+          "prime_rate": 0.16631634725779387,
+          "survivor_rate": 0.1998410315287468,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 4,
+          "black_child_m_mod5": 3,
+          "offset_mod30": 18,
+          "predicted_factor5_collision": 0,
+          "center_count": 11323,
+          "offset_count_per_center": 10,
+          "observation_count": 113230,
+          "parent_progress_mean": 0.4900209985914496,
+          "parent_progress_median": 0.3688469139074788,
+          "prime_rate": 0.1671023580323236,
+          "survivor_rate": 0.20019429479819836,
+          "divisible_by_5_rate": 0.0
+        },
+        {
+          "center_mod5": 4,
+          "black_child_m_mod5": 4,
+          "offset_mod30": 24,
+          "predicted_factor5_collision": 0,
+          "center_count": 11323,
+          "offset_count_per_center": 10,
+          "observation_count": 113230,
+          "parent_progress_mean": 0.4916594729547716,
+          "parent_progress_median": 0.3688477396650361,
+          "prime_rate": 0.16776472666254527,
+          "survivor_rate": 0.20124525302481674,
+          "divisible_by_5_rate": 0.0
+        }
+      ],
+      "contrasts": [
+        {
+          "contrast": "Red Blue Swap",
+          "estimate": 0.3237287389918873,
+          "ci95_low": 0.323297830367902,
+          "ci95_high": 0.3241709052673416,
+          "standardized_difference": null,
+          "interpretation": "Positive means the two coloured lanes exchange high/low roles as frozen."
+        },
+        {
+          "contrast": "Black Orientation Difference",
+          "estimate": -0.00035792877118778765,
+          "ci95_low": -0.0012923231732842474,
+          "ci95_high": 0.0005203554637447102,
+          "standardized_difference": null,
+          "interpretation": "Near zero means black is invariant across the two centre orientations."
+        },
+        {
+          "contrast": "Black Minus Admissible Colour",
+          "estimate": -0.004060106990222162,
+          "ci95_low": -0.004683891854192131,
+          "ci95_high": -0.003406881520792176,
+          "standardized_difference": -0.15291457636241768,
+          "interpretation": "Positive would support a stronger independent black lane; the observed value is negative."
+        },
+        {
+          "contrast": "Black Minus Pooled Red Blue",
+          "estimate": 0.1578042625057215,
+          "ci95_low": 0.15730708285304743,
+          "ci95_high": 0.158331963423964,
+          "standardized_difference": null,
+          "interpretation": "Positive explains why black appears higher before orientation conditioning."
+        },
+        {
+          "contrast": "Mod30 Eligible Minus Suppressed",
+          "estimate": 0.3418258555421912,
+          "ci95_low": 0.3412938950712551,
+          "ci95_high": 0.3423674219978515,
+          "standardized_difference": null,
+          "interpretation": "Positive measures the rotating factor-5 child trough inside black."
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "pn10c_protocol",
+      "label": "PN10C frozen diagnostic protocol",
+      "path": "analysis/primes/PN10C_MOD6_THREE_LANE_COUPLING_PROTOCOL.md"
+    },
+    {
+      "id": "pn10c_results",
+      "label": "PN10C machine-readable results",
+      "path": "analysis/primes/PN10C_MOD6_THREE_LANE_RESULTS.json"
+    },
+    {
+      "id": "pn10c_validation",
+      "label": "PN10C independent validation",
+      "path": "analysis/primes/PN10C_MOD6_THREE_LANE_VALIDATION.json"
+    },
+    {
+      "id": "pn10c_offset_query",
+      "label": "PN10C orientation-conditioned trace query",
+      "path": "analysis/primes/pn10c_report_offset_trace.sql",
+      "query": {
+        "sql": "SELECT\n  'Centre ' || center_mod6 || ' mod 6' AS center_orientation,\n  center_mod6,\n  offset,\n  offset_lane_mod6,\n  center_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_offset_profile\nWHERE center_group = 'prime'\n  AND offset BETWEEN -30 AND 30\nORDER BY center_mod6, offset;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10c_offset_profile"
+        ],
+        "description": "Select the orientation-conditioned prime event traces for the visible +-30 offset window.",
+        "filters": [
+          "integer interval = [4000000000,4001000000)",
+          "post-hoc structural diagnostic",
+          "prime centres reserve +-150 boundary"
+        ],
+        "metric_definitions": [
+          "parent_progress_mean = mean of 1 for primes or 2*log(least_prime_factor)/log(n) for composites",
+          "centre orientation = centre prime modulo 6"
+        ]
+      }
+    },
+    {
+      "id": "pn10c_lane_query",
+      "label": "PN10C mod-6 lane summary query",
+      "path": "analysis/primes/pn10c_report_lane_summary.sql",
+      "query": {
+        "sql": "SELECT\n  'Centre ' || center_mod6 || ', lane ' || offset_lane_mod6 AS lane_label,\n  center_mod6,\n  offset_lane_mod6,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_sd,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_3_rate,\n  divisible_by_5_rate\nFROM pn10c_lane_summary\nWHERE center_group = 'prime'\n  AND direction = 'all'\nORDER BY center_mod6, offset_lane_mod6;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10c_lane_summary"
+        ],
+        "description": "Select the six prime-centred mod-6 lane means after conditioning on centre orientation.",
+        "filters": [
+          "integer interval = [4000000000,4001000000)",
+          "post-hoc structural diagnostic",
+          "prime centres reserve +-150 boundary"
+        ],
+        "metric_definitions": [
+          "lane = nonzero even offset modulo 6",
+          "prime_rate = share of all aligned centre-offset observations that are prime"
+        ]
+      }
+    },
+    {
+      "id": "pn10c_matrix_query",
+      "label": "PN10C mod-30 child matrix query",
+      "path": "analysis/primes/pn10c_report_mod30_matrix.sql",
+      "query": {
+        "sql": "SELECT\n  center_mod5,\n  black_child_m_mod5,\n  offset_mod30,\n  predicted_factor5_collision,\n  center_count,\n  offset_count_per_center,\n  observation_count,\n  parent_progress_mean,\n  parent_progress_median,\n  prime_rate,\n  survivor_rate,\n  divisible_by_5_rate\nFROM pn10c_mod30_matrix\nWHERE center_group = 'prime'\nORDER BY center_mod5, black_child_m_mod5;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10c_mod30_matrix"
+        ],
+        "description": "Select the factor-5 child matrix inside nonzero offsets divisible by 6.",
+        "filters": [
+          "integer interval = [4000000000,4001000000)",
+          "post-hoc structural diagnostic",
+          "prime centres reserve +-150 boundary"
+        ],
+        "metric_definitions": [
+          "black child m = (offset/6) modulo 5",
+          "predicted collision = 1 when (centre mod5 + m mod5) mod5 = 0"
+        ]
+      }
+    },
+    {
+      "id": "pn10c_contrast_query",
+      "label": "PN10C frozen contrast query",
+      "path": "analysis/primes/pn10c_report_contrasts.sql",
+      "query": {
+        "sql": "SELECT\n  contrast,\n  estimate,\n  ci95_low,\n  ci95_high,\n  standardized_difference,\n  interpretation\nFROM pn10c_contrasts\nORDER BY display_order;\n",
+        "language": "SQL",
+        "engine": "SQLite",
+        "tables_used": [
+          "pn10c_contrasts"
+        ],
+        "description": "Select frozen PN10C contrasts and contiguous-block bootstrap intervals.",
+        "filters": [
+          "integer interval = [4000000000,4001000000)",
+          "post-hoc structural diagnostic",
+          "prime centres reserve +-150 boundary"
+        ],
+        "metric_definitions": [
+          "red/blue swap = half the sum of the two orientation-conditioned high-minus-low differences",
+          "intervals = percentile 95% intervals from 2000 resamples of 100 contiguous centre blocks"
+        ]
+      }
+    }
+  ]
+}

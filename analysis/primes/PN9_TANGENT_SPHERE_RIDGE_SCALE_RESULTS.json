@@ -1,0 +1,386 @@
+{
+  "test_id": "PN9/TANGENT-SPHERE-RIDGE-SCALE/OPENED-R9-R11-v1",
+  "declared_date": "2026-07-19",
+  "evidence_class": "registered retrospective transfer/structural test on already-opened actual-prime gaps",
+  "protected_material": {
+    "R12_opened": false,
+    "p31_wheel_constructed": false
+  },
+  "hashes_verified": {
+    "PN9_TANGENT_SPHERE_RIDGE_SCALE_PROTOCOL.md": "EF0E28DCC5F447D5F13D0DC3DFAFFD91286A34E39BCC8277E711C34A88475C27",
+    "PN7C_DEVELOPMENT_GAPS.npz": "A791D771481523E8331EC241C2F762A1700526F32F663238C1A767D810E67230",
+    "PN7C_R11_TARGET_GAPS.npz": "D60EEDFA2F3A5DF4C8FA45B45D2B478EDB39B6D54001302F84041989C8D0CF2F"
+  },
+  "rungs": {
+    "R9": {
+      "interval": [
+        1000000000,
+        1010000000
+      ],
+      "first_prime": 1000000007,
+      "last_prime": 1009999999,
+      "prime_count": 482449,
+      "gap_count": 482448,
+      "gap_sum": 9999992,
+      "max_gap": 210,
+      "boundary_reconciled": true
+    },
+    "R10": {
+      "interval": [
+        10000000000,
+        10100000000
+      ],
+      "first_prime": 10000000019,
+      "last_prime": 10099999951,
+      "prime_count": 4341930,
+      "gap_count": 4341929,
+      "gap_sum": 99999932,
+      "max_gap": 300,
+      "boundary_reconciled": true
+    },
+    "R11": {
+      "interval": [
+        100000000000,
+        101000000000
+      ],
+      "first_prime": 100000000003,
+      "last_prime": 100999999999,
+      "prime_count": 39475591,
+      "gap_count": 39475590,
+      "gap_sum": 999999996,
+      "max_gap": 396,
+      "boundary_reconciled": true
+    }
+  },
+  "coordinate_definition": {
+    "x": "2*g_out/(g_in+g_out)",
+    "L": "(g_in+g_out)/2",
+    "home": "ln(p_i)",
+    "y": "2*L/(L+ln(p_i))",
+    "unbinned_inverse": "L=ln(p_i)*y/(2-y); g_out=x*L; g_in=(2-x)*L"
+  },
+  "coordinate_diagnostics": {
+    "R9": {
+      "x_min": 0.020202020202020204,
+      "x_max": 1.9791666666666667,
+      "y_min": 0.2528102603336136,
+      "y_max": 1.717408655538334,
+      "max_gap_reconstruction_error": 1.7053025658242404e-13,
+      "max_tangency_error": 0.0,
+      "states": 482447,
+      "x_mean": 0.9999853012139928,
+      "y_mean": 0.918614155863668
+    },
+    "R10": {
+      "x_min": 0.015503875968992248,
+      "x_max": 1.9858156028368794,
+      "y_min": 0.23045190560095127,
+      "y_max": 1.7817255358399766,
+      "max_gap_reconstruction_error": 2.8421709430404007e-13,
+      "max_tangency_error": 0.0,
+      "states": 4341928,
+      "x_mean": 0.9999742286431421,
+      "y_mean": 0.9161768125004884
+    },
+    "R11": {
+      "x_min": 0.011494252873563218,
+      "x_max": 1.9875,
+      "y_min": 0.21172694628392655,
+      "y_max": 1.8112051464126435,
+      "max_gap_reconstruction_error": 3.410605131648481e-13,
+      "max_tangency_error": 0.0,
+      "states": 39475589,
+      "x_mean": 1.0000022036269844,
+      "y_mean": 0.914345487170391
+    }
+  },
+  "scores": {
+    "R10": {
+      "12": {
+        "X-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 3.2037636577505118,
+          "brier_score": 0.8778115247074723,
+          "top1_accuracy": 0.16695977775761264,
+          "top3_accuracy": 0.4505518979365378,
+          "perplexity": 9.213591644905147
+        },
+        "XY-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 3.005997888515474,
+          "brier_score": 0.8555476073914299,
+          "top1_accuracy": 0.19456642052397946,
+          "top3_accuracy": 0.5174408776197476,
+          "perplexity": 8.033328588568105
+        },
+        "RawGap-M1": {
+          "events": 4341926,
+          "cross_entropy_bits": 2.837125167099317,
+          "brier_score": 0.840569797922994,
+          "top1_accuracy": 0.22377557793476904,
+          "top3_accuracy": 0.5609674140001465,
+          "perplexity": 7.145946768710547
+        }
+      },
+      "24": {
+        "X-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 4.09953420461011,
+          "brier_score": 0.9323207427164296,
+          "top1_accuracy": 0.10686801202968452,
+          "top3_accuracy": 0.28517597950771156,
+          "perplexity": 17.142839688143
+        },
+        "XY-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 4.259040231416847,
+          "brier_score": 0.9388934155374736,
+          "top1_accuracy": 0.08487408583195569,
+          "top3_accuracy": 0.26454826728967745,
+          "perplexity": 19.146917340796772
+        },
+        "RawGap-M1": {
+          "events": 4341926,
+          "cross_entropy_bits": 3.5728371696357084,
+          "brier_score": 0.9038864195555872,
+          "top1_accuracy": 0.14835029431639324,
+          "top3_accuracy": 0.3793417944018392,
+          "perplexity": 11.899566974200683
+        }
+      },
+      "48": {
+        "X-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 4.880050765726379,
+          "brier_score": 0.9568910408616599,
+          "top1_accuracy": 0.08310113990887914,
+          "top3_accuracy": 0.22100261496856463,
+          "perplexity": 29.44704098778062
+        },
+        "XY-M2": {
+          "events": 4341926,
+          "cross_entropy_bits": 5.5883398133889015,
+          "brier_score": 0.9804956810589484,
+          "top1_accuracy": 0.014632446522580072,
+          "top3_accuracy": 0.05904545586451727,
+          "perplexity": 48.112498414767416
+        },
+        "RawGap-M1": {
+          "events": 4341926,
+          "cross_entropy_bits": 4.082362877539461,
+          "brier_score": 0.930578757047135,
+          "top1_accuracy": 0.1172901150319006,
+          "top3_accuracy": 0.30492735251591113,
+          "perplexity": 16.940010661449072
+        }
+      }
+    },
+    "R11": {
+      "12": {
+        "X-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 3.2121816679060786,
+          "brier_score": 0.8782376801281538,
+          "top1_accuracy": 0.16673436673658584,
+          "top3_accuracy": 0.4478944163642202,
+          "perplexity": 9.267509364931092
+        },
+        "XY-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 3.02082551731252,
+          "brier_score": 0.8544342921143963,
+          "top1_accuracy": 0.19707985596262317,
+          "top3_accuracy": 0.5189785018269646,
+          "perplexity": 8.116318707984384
+        },
+        "RawGap-M1": {
+          "events": 39475587,
+          "cross_entropy_bits": 2.862400443425033,
+          "brier_score": 0.8425272158694692,
+          "top1_accuracy": 0.22311067850618663,
+          "top3_accuracy": 0.5517074134958398,
+          "perplexity": 7.2722431806071315
+        }
+      },
+      "24": {
+        "X-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 4.112585101000682,
+          "brier_score": 0.9331517731371476,
+          "top1_accuracy": 0.10420817808231705,
+          "top3_accuracy": 0.27952306320359466,
+          "perplexity": 17.298620657962594
+        },
+        "XY-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 4.171775720874248,
+          "brier_score": 0.9294184875997407,
+          "top1_accuracy": 0.10008517416093142,
+          "top3_accuracy": 0.28188893049266117,
+          "perplexity": 18.02310559421419
+        },
+        "RawGap-M1": {
+          "events": 39475587,
+          "cross_entropy_bits": 3.62187145769536,
+          "brier_score": 0.9071270195716651,
+          "top1_accuracy": 0.1440510054986643,
+          "top3_accuracy": 0.3631580449962657,
+          "perplexity": 12.310960821370974
+        }
+      },
+      "48": {
+        "X-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 4.8726462399051815,
+          "brier_score": 0.9578649670390348,
+          "top1_accuracy": 0.07912130603656381,
+          "top3_accuracy": 0.21101750811203895,
+          "perplexity": 29.29629340454606
+        },
+        "XY-M2": {
+          "events": 39475587,
+          "cross_entropy_bits": 5.634074321751121,
+          "brier_score": 0.98088580958588,
+          "top1_accuracy": 0.024082833777747243,
+          "top3_accuracy": 0.08626828019048836,
+          "perplexity": 49.662132997778365
+        },
+        "RawGap-M1": {
+          "events": 39475587,
+          "cross_entropy_bits": 4.162437421425891,
+          "brier_score": 0.9347057404311641,
+          "top1_accuracy": 0.10999458982079229,
+          "top3_accuracy": 0.2890602741385454,
+          "perplexity": 17.90682209598376
+        }
+      }
+    }
+  },
+  "cross_entropy_gains_bits": {
+    "R10": {
+      "12": 0.19776576923503786,
+      "24": -0.15950602680673676,
+      "48": -0.7082890476625225
+    },
+    "R11": {
+      "12": 0.19135615059355882,
+      "24": -0.059190619873565886,
+      "48": -0.7614280818459394
+    }
+  },
+  "scale_distribution_js": {
+    "R9_R10_bits": 0.025693706583668527,
+    "R10_R11_bits": 0.012103218675165294
+  },
+  "conditional_scale_information_controls": [
+    {
+      "label": "Observed R11",
+      "seed": null,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.106579455848539,
+      "h_next_given_previous_current_scale_bits": 3.6659802901728904,
+      "conditional_scale_information_bits": 0.44059916567564894
+    },
+    {
+      "label": "Shuffle 2026071941",
+      "seed": 2026071941,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.13762770434092,
+      "h_next_given_previous_current_scale_bits": 3.800439303726695,
+      "conditional_scale_information_bits": 0.33718840061422517
+    },
+    {
+      "label": "Shuffle 2026071942",
+      "seed": 2026071942,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.137540055806737,
+      "h_next_given_previous_current_scale_bits": 3.800446872689018,
+      "conditional_scale_information_bits": 0.33709318311771863
+    },
+    {
+      "label": "Shuffle 2026071943",
+      "seed": 2026071943,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.137572927984457,
+      "h_next_given_previous_current_scale_bits": 3.800356601469776,
+      "conditional_scale_information_bits": 0.3372163265146808
+    },
+    {
+      "label": "Shuffle 2026071944",
+      "seed": 2026071944,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.137383183929151,
+      "h_next_given_previous_current_scale_bits": 3.8002675814063394,
+      "conditional_scale_information_bits": 0.3371156025228115
+    },
+    {
+      "label": "Shuffle 2026071945",
+      "seed": 2026071945,
+      "events": 39475587,
+      "h_next_given_previous_current_bits": 4.137684444755024,
+      "h_next_given_previous_current_scale_bits": 3.800562986883435,
+      "conditional_scale_information_bits": 0.33712145787158887
+    }
+  ],
+  "block_summary": {
+    "seed": 2026071949,
+    "draws": 10000,
+    "positive_blocks": 0,
+    "mean_gain_bits": -0.05919061987707764,
+    "bootstrap_95_percentile_interval_bits": [
+      -0.059673552004842374,
+      -0.05871987933294334
+    ]
+  },
+  "criteria": {
+    "P1": {
+      "passed": false,
+      "value_bits": -0.059190619873565886,
+      "threshold_bits": 0.01
+    },
+    "P2": {
+      "passed": false,
+      "R10_gain_bits": -0.15950602680673676,
+      "R11_gain_bits": -0.059190619873565886
+    },
+    "P3": {
+      "passed": false,
+      "R11_gains_bits": {
+        "12": 0.19135615059355882,
+        "24": -0.059190619873565886,
+        "48": -0.7614280818459394
+      }
+    },
+    "P4": {
+      "passed": false,
+      "seed": 2026071949,
+      "draws": 10000,
+      "positive_blocks": 0,
+      "mean_gain_bits": -0.05919061987707764,
+      "bootstrap_95_percentile_interval_bits": [
+        -0.059673552004842374,
+        -0.05871987933294334
+      ]
+    },
+    "P5": {
+      "passed": false,
+      "R9_R10_bits": 0.025693706583668527,
+      "R10_R11_bits": 0.012103218675165294,
+      "threshold_bits": 0.005
+    },
+    "P6": {
+      "passed": true,
+      "observed_bits": 0.44059916567564894,
+      "maximum_shuffle_bits": 0.3372163265146808,
+      "residual_bits": 0.10338283916096813,
+      "threshold_bits": 0.01
+    },
+    "P7": {
+      "passed": false,
+      "XY_M2_cross_entropy_bits": 4.171775720874248,
+      "RawGap_M1_cross_entropy_bits": 3.62187145769536
+    }
+  },
+  "ridge_plus_scale_core_P1_P5": "FAIL",
+  "allowed_interpretation": "The registered ridge-plus-scale transfer core did not fully pass."
+}
