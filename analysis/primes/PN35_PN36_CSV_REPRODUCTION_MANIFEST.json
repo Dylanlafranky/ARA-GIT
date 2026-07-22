@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "purpose": "Compact hash anchors for deterministic reconstruction of the large PN35 and PN36 CSV products.",
+  "reference_runtime": {
+    "python": "3.12.13",
+    "numpy": "2.3.5"
+  },
+  "tests": {
+    "pn35": {
+      "test_id": "PN35/SAME-SCALE-GOLDEN-CROSS/v1",
+      "primary_script": "pn35_same_scale_golden_cross_primary.py",
+      "validator_script": "validate_pn35_same_scale_golden_cross.py",
+      "prediction": {
+        "name": "PN35_SAME_SCALE_GOLDEN_CROSS_PREDICTIONS.csv",
+        "sha256": "bde5ea82b8cd9332681c07d10b00b6c8adf418ba84b99d76958cab686517ed8d",
+        "bytes": 64037406,
+        "rows": 196608
+      },
+      "scored": {
+        "name": "PN35_SAME_SCALE_GOLDEN_CROSS_SCORED.csv",
+        "sha256": "80e40d23a16971c81a2a71c7ff60bb5bb67e2cec72ddcf59ce991b3b3bf295e3",
+        "bytes": 172565407,
+        "rows": 196608
+      },
+      "primary_receipt": {
+        "name": "PN35_SAME_SCALE_GOLDEN_CROSS_PRIMARY.json",
+        "sha256": "1c0bbc6a86150ebc1b73da2d61471792624cfa8567c7d09db8468efa3dfccc1f"
+      },
+      "results": {
+        "name": "PN35_SAME_SCALE_GOLDEN_CROSS_RESULTS.json",
+        "sha256": "92c447b952236daab33e8c8b2c27f7efa9a9f60499c4dfbb4fca6665e696fb1d"
+      },
+      "validation": {
+        "name": "PN35_SAME_SCALE_GOLDEN_CROSS_VALIDATION.json",
+        "sha256": "366bc761891d8419ab41b597c4cdcc362566f4da52db8005766c1fbbbc60b74b"
+      }
+    },
+    "pn36": {
+      "test_id": "PN36/PHI-TO-PENTAGON-CONVERSION/v1",
+      "primary_script": "pn36_phi_to_pentagon_conversion_primary.py",
+      "validator_script": "validate_pn36_phi_to_pentagon_conversion.py",
+      "prediction": {
+        "name": "PN36_PHI_TO_PENTAGON_CONVERSION_PREDICTIONS.csv",
+        "sha256": "14de46a903553fbd27b9172f4aa6ae588a76110da74e041c426b88f5fecab9dc",
+        "bytes": 80972626,
+        "rows": 196608
+      },
+      "scored": {
+        "name": "PN36_PHI_TO_PENTAGON_CONVERSION_SCORED.csv",
+        "sha256": "07d51468934a635bf7a170f71de366d14b4b6c3e78b928b3a17d20798e45f721",
+        "bytes": 167873685,
+        "rows": 196608
+      },
+      "primary_receipt": {
+        "name": "PN36_PHI_TO_PENTAGON_CONVERSION_PRIMARY.json",
+        "sha256": "d0d9e4d53507e2cec6ea58a4a49d04fe4b8fb13beca96b5ff58c86b41a53b5b7"
+      },
+      "results": {
+        "name": "PN36_PHI_TO_PENTAGON_CONVERSION_RESULTS.json",
+        "sha256": "728d5fc03e1e5810c03392843c1a31e06264cd8a39740fb62c17797fb03bb6f2"
+      },
+      "validation": {
+        "name": "PN36_PHI_TO_PENTAGON_CONVERSION_VALIDATION.json",
+        "sha256": "4ecff15741937824f6bf535f4fa06c8cb59a16adb471cc6f7f5cf99de0939d9e"
+      }
+    }
+  }
+}

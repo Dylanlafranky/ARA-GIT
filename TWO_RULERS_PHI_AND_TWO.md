@@ -31,6 +31,32 @@ This collapses the "two rulers" framing into **one ruler at two angles**, and it
 
 The sections below treat 2 and φ as two rulers doing two jobs — which is the correct *operational* reading. This section says that *underneath* that, they may be one octave at two viewing angles. Both readings are kept: the operational one for building predictors, the perspective one for understanding why the two constants are related at all.
 
+### 22 July 2026 clarification — continuous projection, not five-sector quantisation
+
+Parameterise one common traversal by $u \in [0,1]$. The head-on and pentagon-projected readings are
+
+\[
+S(u)=2u,
+\qquad
+P_+(u)=2u\cos36^\circ=\varphi u.
+\]
+
+Thus the same traversal ends at `2` on the structural ruler and at `Phi` on the projected ruler. In the reversed
+chart,
+
+\[
+P_-(u)=2-\varphi u,
+\qquad
+P_-(1)=2-\varphi\approx0.381966.
+\]
+
+This is a continuous projection. It must not be replaced by snapping the moving point to the nearest of five
+vertices. PN36 tested that separate AI-added quantizer and returned a null; it did not test the continuous relation
+above. Also, the exact cosine operation is technically an orthogonal projection of a length, not a shear transform.
+The broader “time is the projected ruler” interpretation remains conjectural.
+
+Full correction: `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`.
+
 ## The thing we were getting wrong
 
 For a long time we asked one number — the "base" of the rung ladder — to do two jobs at once. The φ-base ablation on ENSO and solar made this conflation visible. We measured:

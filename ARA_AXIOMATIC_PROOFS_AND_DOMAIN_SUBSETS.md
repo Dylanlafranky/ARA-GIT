@@ -4,6 +4,7 @@
 **Date:** 11 July 2026  
 **Centered revision:** 4:00 pm AEST, 19 July 2026
 **Prime-sieve subset closure:** 21 July 2026
+**Shared-ruler projection amendment:** 22 July 2026
 
 **Status:** Mathematical foundation draft, revised after the 19 July 2026 centering audit. Internally proved
 statements are separated from physical hypotheses.
@@ -212,6 +213,45 @@ Thus \(\varphi\) and \(2-\varphi\) are reflected around 1. \(\square\)
 
 **Plain explanation.** The two ARA golden positions, about 1.618 and 0.382, are not two unrelated constants. They
 are exactly the same landmark viewed from opposite orientations of the 0–2 relation.
+
+### Corollary 1.2 — One shared traversal can read 2 head-on and Phi by pentagonal projection
+
+Let $u \in [0,1]$ be one shared traversal coordinate. Define
+
+\[
+\underbrace{S(u)}_{\substack{\text{head-on structural ruler}\\\text{ARA }0\to2}}
+=2u
+\]
+
+and project the same length through the regular-pentagon half-angle:
+
+\[
+\underbrace{P_+(u)}_{\substack{\text{pentagonal projection}\\\text{ARA }0\to\varphi}}
+=2u\cos\left(\frac{\pi}{5}\right)
+=\varphi u.
+\]
+
+Then $S(1)=2$, $P_+(1)=\varphi$, and for $u>0$
+
+\[
+\frac{P_+(u)}{S(u)}=\cos36^\circ=\frac{\varphi}{2}.
+\]
+
+Under the reversed chart,
+
+\[
+P_-(u)=2-P_+(u),
+\qquad
+P_-(1)=2-\varphi=\varphi^{-2}.
+\]
+
+**Proof.** The regular-pentagon identity is $2\cos(\pi/5)=\varphi$. Multiplying by the common traversal $u$
+gives $P_+(u)=\varphi u$. The reverse endpoint follows from Corollary 1.1. \(\square\)
+
+**Plain explanation.** This is one ruler viewed from two directions, not a rule that rounds a moving point onto five
+vertices. Over the same progress, the structural reading reaches 2 and the pentagonal shadow reaches Phi. The exact
+identity proves the projection relation only. It does not prove that physical time uses this projection, that the
+two readings are dynamically independent waves, or that their crossings locate primes.
 
 ---
 
@@ -2485,6 +2525,15 @@ doubling map occupied only 27 rearrangement classes, an exact constrained arithm
 distinguish prime from unresolved-composite identity. Thus PN32 rejects this particular prime-specific hexagon
 projection and leaves PN31 unreplicated. Full record: `analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
 
+**Later scale and Phi diagnostics.** PN33's inverse survivor-density coordinate recovered the known Mertens/PNT
+spacing scale and passed its registered spacing-expression gate at the upper boundary, but improved log-MAE over PNT
+by only `0.62%`. PN34 prospectively calibrated the PN26 ranked depth at three scales, passing all magnitude/depth
+gates but failing the exact scale-order endpoint by a `0.20` percentage-point swap. PN35's constant same-scale golden
+crossing and PN36's nearest-fivefold quantizer both failed all registered prime-location gates. After PN36, Dylan
+clarified a distinct continuous projection: `S(u)=2u`, `P(u)=phi*u`. PN36 did not test that object. A post-hoc angled
+scan supplied no independent third wave. Full scope record:
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`.
+
 The prime thread is parked. Full record:
 `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
 
@@ -2544,6 +2593,8 @@ The prime thread is parked. Full record:
 29. Under Mertens' product theorem and the prime number theorem, PN33's inverse-density fill satisfies
     `R_b(p) ~ log(p)/log(b) = 2^(x_b/2)`; its relative prime-gap curve is therefore asymptotically PNT itself and
     completion `R_b=2` occurs near `p~b^2`.
+30. A common traversal of length 2 projected through 36 degrees has length `phi`: `S(u)=2u` and
+    `P(u)=2u cos(36 degrees)=phi*u`; reversing the chart mirrors the endpoint to `2-phi`.
 
 ## ARA assumptions not proved by mathematics alone
 

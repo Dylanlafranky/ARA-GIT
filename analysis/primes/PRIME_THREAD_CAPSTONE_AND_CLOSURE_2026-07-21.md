@@ -231,6 +231,31 @@ fivefold control (`0.503772`) exceeded the registered flipped form, with a wholl
 interval. The exact nearest-vertex conversion is therefore **NOT SUPPORTED** as a prime locator. See
 `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
 
+### Late PN36 geometry-scope correction
+
+After the frozen result and first visualization, Dylan clarified that his intended object was not nearest-fivefold
+quantisation. It was one common traversal read by a structural ruler `S(u)=2u` and its pentagonal projection
+`P(u)=2u cos(36 degrees)=phi*u`, so the same traversal reaches `2` head-on and `phi` through the pentagon angle.
+The reversed chart reaches the mirror landmark `2-phi`.
+
+PN36's arithmetic and verdict remain unchanged, but their scope is narrower: PN36 rejects the AI-added
+nearest-fivefold quantizer as a prime locator; it did not test the corrected continuous `2 -> phi` projection.
+An initial crossing calculation on the staircase visualization is likewise superseded for the corrected geometry.
+A post-hoc angle scan found only a tiny broad `39-48 degree` texture (selected-angle mean held-out AUC `0.501223`),
+not an independent third wave. Full correction and audit:
+`analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md` and
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`.
+
+### Independent 22 July audit actions
+
+The independent audit reproduced PN35/PN36's headline values. It also identified a likely mechanical confound in
+PN27: `N+29-a` automatically avoids divisibility by its selected nontrivial divisor `a`, while the uniform-offset
+control did not receive the same guarantee. PN27 must therefore remain audit-confounded until a matched
+coprimality/wheel null is run. The audit also found that the PN35/PN36 validators relied on large prediction CSVs
+that were not suitable for Git. This fresh-clone gap was closed on 23 July by
+`analysis/primes/reproduce_pn35_pn36_csvs.py`, which rebuilds both label-free and scored CSVs through the frozen
+scripts and verifies the recorded hashes. See `analysis/primes/PN35_PN36_CSV_REPRODUCTION.md`.
+
 ## Resume conditions
 
 The prime thread should remain parked unless one of these is supplied independently:
@@ -262,4 +287,7 @@ as evidence that ARA has improved prime computation.
 - `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`
 - `analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_REPORT_2026-07-22.md`
 - `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`
+- `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`
+- `analysis/primes/PN35_PN36_CSV_REPRODUCTION.md`
+- `FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`
 - `analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md`

@@ -150,6 +150,21 @@ The safest way to read any claim here is:
 > on these rungs. Verdict **NOT SUPPORTED `[pre-registered]`**. Report:
 > `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
 
+> **PN36 geometry-scope correction (22 July 2026; post-result):** Dylan later clarified that the intended relation
+> was the continuous shared-traversal projection `S(u)=2u`, `P(u)=2u cos(36 degrees)=phi*u`, not the AI-added
+> nearest-fivefold quantizer. Therefore PN36 remains a valid null for the quantizer it froze, but it did not test the
+> corrected `2 -> phi` ruler projection. The projection identity is exact mathematics and does not by itself locate
+> primes. A post-hoc angle scan found only a tiny broad diagonal texture (selected-angle mean held-out AUC
+> `0.501223`) and no independent third wave. Full amendment:
+> `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`.
+
+> **PN27 audit caution (22 July 2026):** an independent recheck found that `N+29-a` automatically avoids divisibility
+> by its selected nontrivial divisor `a`, while the reported uniform-offset control did not share that restriction.
+> The observed `+0.233` percentage-point lift is therefore not safe to cite as residual ARA signal until a matched
+> coprimality/wheel control is run. This narrows the original **PARTIAL** reading to **AUDIT-CONFOUNDED / RETEST
+> REQUIRED**. See `FableConvo/AUDIT_PRIME_THREAD_2026-07-22.md` and
+> `FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`.
+
 > **Pre-test geometry probability calibration (21 July 2026):** the provisional provenance-ledger strict tally is
 > `15` A-tier clean hits and `31` misses/refutations (`15/46 = 0.32609`). An exact binomial sensitivity calculation
 > shows that this count is significant at 5% only if the unmeasured background chance of scoring a flexible

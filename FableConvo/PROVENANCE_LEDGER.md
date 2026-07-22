@@ -355,3 +355,25 @@ and the intact cross-rung rearrangement was null (`p=0.9684`). This is a clean p
 prime-specific double lock, retained alongside the exact observation that the modular doubling map itself occupies
 a constrained set of 27 rearrangement classes. Primary record:
 `analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
+
+### 22 July 2026 Phi/pentagon correction chain
+
+The following order matters for provenance:
+
+1. After PN35, Dylan proposed that the visible Phi-time trace and pentagonal structure were related and approved a
+   frozen test.
+2. Sol supplied an explicit nearest-fivefold quantizer as an AI operational addition. PN36 froze and tested that
+   operator before prime labels; all five gates failed.
+3. After viewing the result, Dylan corrected the representation: the intended object was not a five-sector snap but
+   a shared traversal whose structural ruler reaches `2` while its pentagonal projection reaches `Phi`.
+4. The corrected mathematical statement is `S(u)=2u`, `P(u)=2u cos(36 degrees)=phi*u`; reversed orientation reaches
+   `2-phi`.
+5. Therefore the PN36 null is retained for the AI-added quantizer but is not evidence against the later clarified
+   continuous projection.
+6. A post-hoc scan for an additional angled axis produced only a broad, tiny near-chance texture and was rejected as
+   a third-wave candidate in this representation.
+
+This is a useful fidelity example: the user's prior motivated the test, the AI chose one precise bridge, the bridge
+failed, and a later user correction narrowed what the failed bridge can legitimately say. It is not a rescued
+prediction. Full record: `FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md` and
+`analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`.

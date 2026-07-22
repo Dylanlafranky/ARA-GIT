@@ -39,6 +39,24 @@ nearest-fivefold conversion bridge on these rungs; it does not reject every poss
 validation receipt and report under `analysis/primes/PN36_*`. Full report:
 `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
 
+**Post-result geometry-scope correction (22 July 2026):** Dylan later clarified that the intended geometry was not
+nearest-vertex quantisation. It was one common traversal read as `S(u)=2u` head-on and
+`P(u)=2u cos(36 degrees)=phi*u` through the pentagon angle, with the reversed chart reaching `2-phi`. PN36's frozen
+result remains unchanged but applies only to the AI-added `C5` operator. It did not test the corrected continuous
+projection. A post-hoc angle scan found a broad, tiny `39-48 degree` texture with selected-angle mean held-out AUC
+`0.501223`; this does not support an independent third wave. Amendment:
+`analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`.
+
+---
+
+### 22 July 2026 audit addendum — PN27 and PN35/PN36 reproducibility
+
+The PN35/PN36 headline numbers were independently reproduced. The audit also found that their validators require
+prediction CSVs not committed at audit time, so fresh-clone reproducibility needs either tracked CSVs or deterministic
+regeneration. Separately, PN27's `N+29-a` lift is likely confounded by automatic avoidance of the selected divisor
+`a`; do not cite it as residual predictive support before a matched coprimality/wheel control. Full daily record:
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`.
+
 ---
 
 ### T253 - PN35 same-scale golden crossing over eight structural children

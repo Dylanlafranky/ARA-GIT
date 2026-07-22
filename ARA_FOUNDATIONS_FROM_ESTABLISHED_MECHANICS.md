@@ -688,6 +688,35 @@ This is a strong preregistered recovery of the seed -> fill -> completion -> ret
 known prime asymptotics. It is not a new prime theorem, fixed-step prime generator, literal spatial hexagon or
 causal Phi result. Full record: `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
 
+#### 5.4.9 Rank-budget calibration, same-scale Phi nulls and the corrected projection scope
+
+PN34 combined PN26's complete lower-parent ranking with PN33's omitted-parent fill. On 6,000 fresh anchors, all nine
+calibration tolerances and all six top-two/top-three depth gates passed. Full support was blocked because the middle
+and high cohorts reversed the exact predicted order by `0.20` percentage points. The supported content is therefore
+a population rank-budget calibration, not an individual next-prime classifier.
+
+PN35 and PN36 then supplied two well-powered nulls on six fresh octave rungs each. PN35's constant same-scale golden
+crossing returned AUC `0.497180`; PN36's nearest-fivefold conversion returned `0.499851`. Both failed all five frozen
+gates. These results are evidence against their exact prime-location operators, not against the exact wheel closure
+underneath them.
+
+One late fidelity correction is essential. The AI-defined PN36 operator rounded a continuous Phi phase to the
+nearest of five sectors. Dylan's intended geometry was instead one common traversal with two continuous readings:
+
+\[
+\underbrace{S(u)}_{\text{structural}}=2u,
+\qquad
+\underbrace{P(u)}_{\text{pentagon projection}}
+=2u\cos36^\circ=\varphi u,
+\qquad 0\le u\le1.
+\]
+
+The exact identity `phi = 2 cos(36 degrees)` is established geometry. Its proposed role as a physical or arithmetic
+handover law is not established. PN36 remains a valid null for its nearest-sector quantizer but did not test this
+continuous projection. A later post-hoc angle scan was near chance and non-unique, so no third perpendicular prime
+wave is supported in the current two-dimensional representation. Full record:
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`.
+
 ### 5.5 Nonlinear harmonic rungs and identity inheritance
 
 With parent spatial mode \(k_0=5\), the natural in-system rung coordinate is

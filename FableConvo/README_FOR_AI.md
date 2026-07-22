@@ -68,6 +68,17 @@ registered spacing-expression rule. ARA beat PNT log-MAE by only `0.62%`, below 
 Read `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`; describe it as a strong preregistered
 crosswalk to known scale asymptotics, not new prime mathematics.
 
+**22 Jul late prime-geometry correction:** before citing PN27, PN35 or PN36, read
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`. PN27 has a likely unmatched-coprimality
+confound. PN36 tested the AI-added nearest-fivefold quantizer, not Dylan's later clarified continuous shared ruler
+`S(u)=2u`, `P(u)=phi*u`. The frozen PN36 null stands for its actual operator; it must not be generalized to the
+corrected `2 -> phi` projection. The exploratory angled trace did not support a third wave.
+
+**PN35/PN36 large-file reproduction:** the four prediction/scored CSVs are intentionally ignored by Git. Rebuild
+and verify them with `analysis/primes/reproduce_pn35_pn36_csvs.py`; read
+`analysis/primes/PN35_PN36_CSV_REPRODUCTION.md` for the exact fresh-clone path. Do not treat the absence of those
+derived CSVs from Git as missing primary evidence when the hash-verified rebuild succeeds.
+
 **Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
 cognitive energy for geometry walking, orientation, and conceptual correction.
 The AI coworker should proactively handle rolling capture, mathematical

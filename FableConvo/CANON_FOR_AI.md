@@ -271,6 +271,25 @@ improvement failed the frozen 5% ARA-specific gate. Preserve both verdicts: **SU
 crosswalk**, **NO distinct advantage over PNT**. It is not a prime generator, literal hexagon proof or Phi mechanism.
 Read `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
 
+PN34 then joined the PN26 ranked locator to the omitted-parent fill coordinate. All nine calibration tolerances and
+all six depth gates passed, but a `0.20` percentage-point middle/high swap failed the exact ordering endpoint. Keep
+the verdict **PARTIAL**: this is a population rank-budget crosswalk, not an individual miss classifier.
+
+PN35 and PN36 are two separate frozen Phi nulls. PN35 rejects its constant same-scale golden crossing; PN36 rejects
+its AI-added nearest-fivefold quantizer. After PN36, Dylan clarified the intended geometry as one shared traversal
+
+`S(u)=2u`, `P(u)=2u cos(36 degrees)=phi*u`,
+
+with the reversed chart reaching `2-phi`. Do not say PN36 tested or rejected this corrected continuous projection.
+Read `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md` and
+`FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`. A post-hoc `39-48 degree` texture was tiny and
+non-unique; no independent third wave is supported in the current 2D representation.
+
+The 22 July independent audit also demotes PN27's residual lift to **AUDIT-CONFOUNDED / RETEST REQUIRED**: its
+`N+29-a` candidate automatically avoids its selected divisor `a`, unlike the uniform-offset control. Use a matched
+coprimality/wheel null before citation. The same audit found a fresh-clone reproducibility gap for PN35/PN36 because
+their validators depend on locally present prediction CSVs that were not committed at audit time.
+
 ## 5. Language
 
 - Tier labels on every claim: CONFIRMED / SUPPORTED / SUGGESTIVE / INCONCLUSIVE /
