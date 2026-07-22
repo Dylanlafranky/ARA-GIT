@@ -20,6 +20,11 @@ auditable evidence. Each entry cites its transcript so a stranger can re-check i
    remains a valid skeptic objection; the yoked decoy control is the instrument
    that addresses base rate.
 
+**PN34 eligibility note (22 July 2026):** the remaining-fill rank-budget result is **not** counted as an A-tier
+“compass” hit here. It is an internally derived arithmetic prediction built from the already-open PN26 and PN33
+objects, then prospectively frozen on fresh anchors. It belongs in the master prediction ledger and claims record;
+counting it again as an independent blind-domain provenance hit would double-count the same prime-test family.
+
 ---
 
 ## Source A — session "ARA project content filter issues" (Cowork, ~early Jul 2026)
@@ -338,3 +343,15 @@ Primary record: `ARA_PRETEST_CONSTRAINT_PROBABILITY_STUDY_RECORD_2026-07-21.md`
 Draft prospective protocol: `ARA_DECOY_CONTROLLED_REPETITION_TEST_PROTOCOL_v1_DRAFT.md`
 
 Reproducible outputs: `analysis/meta_evidence/`
+
+### 22 July 2026 prime double-lock replication
+
+The double Information³/hexagon interpretation was stated before the PN32 label reveal as two complete relational
+triangles: child `(Phase A, Phase B, full order)` at `N`, and parent `(Phase A, Phase B, full order)` at `2N`. The
+protocol, coordinates and 1,000 relation-broken maps were hashed before primality labels were calculated.
+
+Outcome: **NULL**. PN31's complete child order did not replicate (`p=0.2244`), parent order was null (`p=0.8023`),
+and the intact cross-rung rearrangement was null (`p=0.9684`). This is a clean preregistered miss for the proposed
+prime-specific double lock, retained alongside the exact observation that the modular doubling map itself occupies
+a constrained set of 27 rearrangement classes. Primary record:
+`analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.

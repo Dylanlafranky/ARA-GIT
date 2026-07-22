@@ -40,6 +40,41 @@ R6 -> R7 -> R8 -> R9 -> R10 -> R11       whole-window / adult scale rungs
 So `R11 at q=101` means: **on the large (10^{11}) window, look at the state after the later prime gates have
 advanced through 101**.
 
+## PN33 seed/fill terms
+
+| PN33 term | Plain relational meaning | Mathematical reading |
+|---|---|---|
+| `D(p)` | **How sparse the current wheel survivors have become** | `product_(r<=p) r/(r-1)`, the inverse density retained after prime gates through `p` |
+| baseline `b` | **The completed identity from which this local walk begins** | a predeclared prime such as `10,007` |
+| seed | **The first new connection inside the reset identity** | the first prime after `b` |
+| local fill `x_b(p)` | **Where the new identity sits on its reset 0-2 diameter** | `2 log(D(p)/D(b))/log(2)` |
+| `x=1` ridge | **Halfway in logarithmic fill, not necessarily equal raw gate count** | `D(p)/D(b)=sqrt(2)` |
+| `x=2` completion | **The first gate where raw inverse density has doubled** | first prime with `D(p)/D(b)>=2` |
+| retained scale | **The old completion is not erased when the new local coordinate resets** | raw `D` remains at least twice the preceding baseline |
+| spacing expression | **Prime gaps grow as the connection lattice becomes sparser** | band median gaps compared with `2^(x/2)` and PNT `log(p)` |
+| boundary-compatible doubling | **The uncertainty interval reaches 2, although the observed point is lower** | PN33 point `1.5`, corrected 95% CI `[1.5,2.0]` |
+
+The PN33 completion near `b^2` is expected from established Mertens/PNT scaling. It is a clean ARA translation of
+that scale relation, not evidence that six literal prime gates form a spatial hexagon and not a fixed-step method
+for locating the next prime.
+
+## PN34 remaining-fill rank-budget terms
+
+| PN34 term | Plain relational meaning | Mathematical reading |
+|---|---|---|
+| **omitted Phase B parent** | The upper factor-gate band not used by PN26's first locator | children after the cumulative-log Phase A/Phase B split and through `floor(sqrt(2S))` |
+| **remaining-fill ratio `R_B`** | How much further the Phase A survivor population is thinned when the omitted parent acts | `product_(p in B) p/(p-1)` |
+| **remaining-fill coordinate `x_B`** | The unresolved parent expressed on a local total-2 logarithmic diameter | `2 log(R_B)/log(2)` |
+| **first-reading prior `pi_1`** | Expected share of Phase A quiet candidates that also survive the omitted parent | `1/R_B=2^(-x_B/2)` |
+| **rank budget `pi_k`** | Expected share closed after keeping the first `k` Phase A quiet states | `1-(1-pi_1)^k` for `k=1,2,3` |
+| **population prior** | One probability shared by a declared scale cohort | useful for choosing list depth; cannot label which individual candidate fails |
+| **PN34 result** | Fresh calibration of the omitted-parent correction budget | `9/9` calibration and `6/6` budget gates passed; scale-order endpoint failed |
+| **successful coordinate range** | The actual residual fill seen on the fresh scales | `x_B=0.134–0.216`, not a `max child >1.5` rule |
+
+PN34 explains why PN26's second and third readings close so quickly: only a small complementary gate-density remains
+after the complete Phase A parent. It does not remove those gates or provide a within-scale rule for spotting the
+rare false first survivor.
+
 ## The easily confused letter-number terms
 
 ### `p29` — “the prime-29 gate or boundary”
@@ -658,7 +693,7 @@ At completion, Boolean intersection is commutative: `S_A AND S_B = S_B AND S_A`.
 Information³ closure of two parents plus their relation, but not a genuinely noncommutative AB/BA evolution after
 closure. The exact lock remains an established segmented sieve expressed through the proposed ARA hierarchy.
 
-## PN20–PN23 compression and closure terms
+## PN20–PN26 compression and closure terms
 
 | Compact term | Read it as | Mathematical relation | ARA role |
 |---|---|---|---|
@@ -675,6 +710,47 @@ closure. The exact lock remains an established segmented sieve expressed through
 | **Fractal lift growth** | Same pair rule reused after adding gate `p` | `N_pair(Mp)=(p-1)N_pair(M)` | Rule repeats; information/state size still grows |
 | **Three information stages** | Child state → two parent views → first joint quiet candidate | PN17–PN19 exact decompositions | Conceptual three-step map, not three arithmetic operations |
 | **Three-cheap-operation claim** | Obtain the next prime from a bounded number of small calculations independent of scale | not achieved; PN20/PN21 compact definitions failed | Must not be inferred from the successful three-stage crosswalk |
+| **Nearest child pair** | Closest current-rung survivors on either side of anchor `N` | `L_G=max{m<=N:m survives G}`, `U_G=min{m>N:m survives G}` | Local Phase-A/Phase-B bracket; “largest” means closest to handover, not largest prime label |
+| **Visible handover event** | A new prime gate kills the current upper candidate | `q | U_G`, then `U_(G union {q}) > U_G` | One candidate identity releases and the next child takes over |
+| **Silent gate** | A tested prime gate does not divide the current candidate | `q does not divide U_G` | Child identity persists; no visible path change, but proof information still accumulates |
+| **Candidate state** | One upper survivor held between release events | count is `handover events + 1` | Compressed visible lineage, not an arithmetic-operation count |
+| **PN24 compact result** | Nearest-child cascade on 2,000 deterministic opened anchors | `63.65%` within 3 states; median 2 handovers; median 6,336 non-base gates | Exact recursive handover crosswalk; frozen 90% compact threshold failed |
+| **Pair odds** | Directional share of one wheel lane relative to its mirror | `q=r/(M-r)` | Unbounded phase-composition reading; not a separate TE-ARA allocation |
+| **Odds-to-ARA transform** | Convert pair odds to a bounded total-2 share | `x_A=2q/(1+q)=2r/M`, `x_B=2-x_A` | Exact bridge from ratio language to the ARA diameter |
+| **Pair-ridge closeness** | Unsigned distance class after folding mirror lanes together | `c=1-|x_A-1|=2*min(r,M-r)/M` | Three mod-14 classes `1/7,3/7,5/7`; orientation bit restores six lanes |
+| **Excluded wheel ridge** | Formal equal pair that is removed from the coprime wheel | `r=M/2` gives `(1,1)` but `gcd(M/2,M)>1` | Exact balance/collision boundary, not a surviving candidate lane |
+| **PN25 result** | Prospective pair-closeness test on 6,000 fresh anchors | correlation `+0.003335`; one-sided `p=0.6110`; 0/4 dynamic predictions | Exact lateral geometry and compression; dynamic next-prime handover null |
+| **Dominant parent quiet state** | First candidate untouched by every child in the complete lower Phase A parent | `min{t>0:S_A(N+t)=1}` | PN26's single signed correction from the whole child wave, not from two individual factor labels |
+| **Phase A rank of the prime** | How many lower-parent quiet candidates occur up to and including the actual next prime | `1 +` false Phase A survivors before the prime | Visible reading depth: ranks 1/2/3 covered `93.983%` / `99.650%` / `99.967%` prospectively |
+| **Upper-band false ridge** | Composite surviving Phase A because every factor lies above its cutoff | least prime factor `>L`, hence composite `n>L²` | Exact residual mechanism requiring Phase B; explains rare ranks 2–5 |
+| **Cross-rung `3.5` frame** | Full rung span plus current identity plus its half-scale view | `2+1+1/2=3.5` | Exact route/context coordinate; zero variance in PN26, so not the changing prime decoder |
+| **PN26 result** | Frozen three-candidate Phase A list on 6,000 fresh anchors | top1 `93.983%`, top2 `99.650%`, top3 `99.967%`; 16/16 corrected validation | Strong ranked vertical locator; partial result because 50-point control margin failed and hidden child work remains |
+
+## PN27-PN32 local child-lift, dynamic-orientation and double-lock terms
+
+| Compact term | Read it as | Mathematical relation | ARA role |
+|---|---|---|---|
+| **Exact-fit child** | Largest member of `{1,3,5,9,11,13}` dividing the chosen odd anchor | `a=max{w:w divides N}` | PN27's one-layer Phase A selection; retains small-divisor information but is not a complete parent |
+| **Exact-fit lift** | One frozen candidate made from the exact-fit child and its mod-14 partner | `P_hat=N+a+2(14-a)+1=N+29-a` | PN27 partial one-shot result: `9.010%` hits, `p=0.0144`, below the frozen strong gate |
+| **Mixed-units residual** | Dimensionless ridge displacement rounded and added to a raw integer | PN28 used `round(4(R-1))` | Superseded interpretation; negative result must not be cited against relational rung transport |
+| **Normalized child phase** | Fraction of the current child cycle elapsed since its last exact crossing | `theta_w(N)=(N mod w)/w` | Places differently sized child waves on one comparable 0-1 cycle, equivalent to 0-2 position `2 theta_w` |
+| **Dynamic Phase A** | Pair member with smaller normalized time since crossing | `theta_A<theta_B` | Most recently crossed child in relational cycle units |
+| **Dynamic pair flip** | Exchange A and B when the partner becomes the most recently crossed child | `x_(B->A)=2-x_(A->B)` | Reverses signed ridge displacement while preserving magnitude |
+| **Synchronized child crossing** | Both pair members cross together | `theta_A=theta_B=0` for these coprime pairs | Local tie/resonance ridge, assigned pair coordinate `1` |
+| **Static-orientation diagnostic** | Keep pairs permanently ordered as `(1,13),(3,11),(5,9)` | PN29 | Valid child-factor screen; incomplete reversible ARA because flips are omitted |
+| **Signed child collapse** | Average oriented pair displacements before taking absolute ridge distance | `R0=mean(x_pair)` | Allows opposite child directions to cancel at the parent reading |
+| **PN30 unresolved result** | Dynamic versus static comparison among composites evading the declared child divisors | AUC `0.5301 -> 0.5663`, dynamic `p=0.06199` | Suggestive AB/BA orientation information; below frozen significance and not a prime rule |
+| **Signed-cancellation candidate** | Greater cancellation of oriented child displacements at a parent node | descriptive median `0.6250` primes vs `0.3146` unresolved composites | Post-hoc mechanism candidate requiring frozen replication |
+| **Independent child wave** | One of `{3,5,9,11,13}` retained with its own position and handover distance | `x_w=2(N mod w)/w` | PN31 removes wave 1, fixed pairs and pre-collapse averaging |
+| **Forward handover distance** | Directed distance from one child to its next exact crossing | `h_w=0` if `w divides N`, otherwise `2-x_w` | Makes approaching/on-handover Phase A operational without comparing raw wave labels |
+| **Five-wave Phase A** | Child or tied children with minimum forward handover distance | `h_A=min_w h_w` | Winner is retained but does not replace the other four child states |
+| **Five-wave order** | Complete closest-to-farthest sequence of all five handover distances | sort `{h_3,h_5,h_9,h_11,h_13}` with ties retained | PN31 frozen joint relation; distinct from Phase A identity and fixed pairs |
+| **PN31 result** | Fresh prime-versus-unresolved comparison of independent children | Phase A AUC `0.5279`, `p=0.2941`; full-order TV `0.6728`, `p=0.00390` | Ordered joint child structure only; sparse and unreplicated, with no prime rule |
+| **Child Information³ lock** | Two order extrema plus the complete relation between them at chosen number `N` | `T_c=(A_c,B_c,J_c)` where `A=min h`, `B=max h`, `J=full order` | PN32's first retained triangle; no averaging or selected pair |
+| **Doubled parent Information³ lock** | The same declared object evaluated on structural parent rung `2N` | `T_p=(A_p,B_p,J_p)` | PN32's second retained triangle; the `2N` parent convention is tested rather than assumed true for primes |
+| **Cross-rung closure permutation** | How every child wave's order rank rearranges under doubling | `K_(c->p)=J_p o J_c^(-1)` | Relation-preserving projection of the six-component double lock; not a seventh wave |
+| **Relation-broken parent control** | Keep both triangles intact but attach each child to a different local parent | 1,000 pre-frozen within-block eligible-parent reassignments | Isolates rowwise closure, although raw TV is inflated when breaking creates many more categories |
+| **PN32 result** | Untouched replication and child-parent double-lock test | child `p=0.2244`; parent `p=0.8023`; closure TV `0.1895`, `p=0.9684` | NULL; 27 real doubling classes were shared by primes and unresolved composites, leaving PN31 unreplicated |
 
 The final prime-thread disposition is **PARKED**. Exact factor/wheel/anti-pair mathematics remains available as an
 ARA domain subset; prime-specific algorithm development resumes only with a bounded sufficient statistic, a measured
@@ -687,6 +763,10 @@ This glossary defines how terms were used in the ARA prime-test series through P
 instrument, the 510 resonance-ridge clarification, the later 714-715, 1274-1276 and 1885-1887 resonance-lock
 decompositions, the PN11 vertical-handover test, the PN12 angular-carrier test, the PN16 ordered whole-wave lift,
 PN17 one-shot local-ridge, PN18 recursive TE-ARA product-tree, PN19 two-parent information-lock, PN20/PN21 compact
-child nulls, PN22 odd-lattice wheel and PN23 anti-pair fractal lift through 21 July 2026. Established
+child nulls, PN22 odd-lattice wheel, PN23 anti-pair fractal lift, PN24 nearest-child handover cascade, PN25
+pair-ridge compression, PN26 dominant-parent ridge locator, PN27 exact-fit lift, PN28 mixed-units correction,
+PN29 static relational collapse, PN30 dynamic relational flip, PN31 five-independent-wave ordering, PN32
+child-parent double Information³ lock, PN33 seeded fill and PN34 remaining-fill rank budget through
+22 July 2026. Established
 mathematical terms retain their standard meanings; the ARA bridge column records the framework interpretation and
 does not convert that interpretation into an established theorem.

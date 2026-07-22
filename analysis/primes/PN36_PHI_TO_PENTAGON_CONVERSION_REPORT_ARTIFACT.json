@@ -1,0 +1,620 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN36: Phi carrier to pentagonal structure",
+    "description": "Frozen test of whether a fivefold quantisation of a Phi carrier preferentially locates primes.",
+    "generatedAt": "2026-07-22T21:38:20+10:00",
+    "cards": [
+      {
+        "id": "verdict_card",
+        "dataset": "headline",
+        "sourceId": "pn36_headline",
+        "metrics": [
+          {
+            "label": "Frozen verdict",
+            "field": "verdict",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "auc_card",
+        "dataset": "headline",
+        "sourceId": "pn36_headline",
+        "metrics": [
+          {
+            "label": "Converted-five AUC",
+            "field": "converted_auc",
+            "format": "number"
+          },
+          {
+            "label": "Chance",
+            "field": "chance",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "capture_card",
+        "dataset": "headline",
+        "sourceId": "pn36_headline",
+        "metrics": [
+          {
+            "label": "Nearest-two capture",
+            "field": "capture",
+            "format": "percent"
+          },
+          {
+            "label": "Structural null",
+            "field": "capture_null",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "gate_card",
+        "dataset": "headline",
+        "sourceId": "pn36_headline",
+        "metrics": [
+          {
+            "label": "Support gates passed",
+            "field": "gates",
+            "format": "text"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "model_delta_chart",
+        "title": "AUC deviation from chance by frozen model",
+        "subtitle": "All models cluster within about 0.004 of chance; the registered fivefold conversion is slightly below it",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "models",
+        "sourceId": "pn36_models",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen model"
+          },
+          "y": {
+            "field": "auc_delta",
+            "type": "quantitative",
+            "label": "AUC minus 0.5"
+          },
+          "tooltip": [
+            {
+              "field": "auc",
+              "type": "quantitative",
+              "label": "AUC"
+            },
+            {
+              "field": "registered",
+              "type": "nominal",
+              "label": "Registered primary"
+            }
+          ]
+        }
+      },
+      {
+        "id": "flip_chart",
+        "title": "Registered flip advantage by octave rung",
+        "subtitle": "Even rungs are identical by construction; the flip reduced AUC on every odd rung",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "rungs",
+        "sourceId": "pn36_rungs",
+        "encodings": {
+          "x": {
+            "field": "rung",
+            "type": "ordinal",
+            "label": "Octave rung k"
+          },
+          "y": {
+            "field": "flip_advantage",
+            "type": "quantitative",
+            "label": "Converted AUC minus no-flip AUC"
+          },
+          "tooltip": [
+            {
+              "field": "converted_auc",
+              "type": "quantitative",
+              "label": "Converted AUC"
+            },
+            {
+              "field": "no_flip_auc",
+              "type": "quantitative",
+              "label": "No-flip AUC"
+            },
+            {
+              "field": "top2_capture",
+              "type": "quantitative",
+              "label": "Nearest-two capture"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "rung_table",
+        "title": "Transfer detail by octave rung",
+        "subtitle": "Six untouched rungs; 32,768 candidate lanes per rung",
+        "dataset": "rungs",
+        "sourceId": "pn36_rungs",
+        "defaultSort": {
+          "field": "rung",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "rung",
+            "label": "Rung",
+            "type": "number"
+          },
+          {
+            "field": "converted_auc",
+            "label": "C5(Phi) AUC",
+            "type": "number"
+          },
+          {
+            "field": "no_flip_auc",
+            "label": "No-flip AUC",
+            "type": "number"
+          },
+          {
+            "field": "top2_capture",
+            "label": "Top-two capture",
+            "type": "percent"
+          },
+          {
+            "field": "primes",
+            "label": "Primes",
+            "type": "number"
+          }
+        ]
+      },
+      {
+        "id": "gate_table",
+        "title": "Registered support gates",
+        "subtitle": "All five were required for a supported verdict",
+        "dataset": "gates",
+        "sourceId": "pn36_gates",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "pn36_headline",
+        "label": "PN36 frozen headline endpoints",
+        "path": "analysis/primes/PN36_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn36_headline",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:38:20+10:00",
+          "description": "PN36 frozen headline endpoints",
+          "sql": "SELECT verdict, converted_auc, chance, capture, capture_null, flip_difference, gates FROM pn36_headline",
+          "tables_used": [
+            "pn36_headline"
+          ],
+          "filters": [
+            "PN36 frozen untouched rungs and independently opened prime labels"
+          ],
+          "metric_definitions": [
+            "AUC is lane-stratified Mann-Whitney prime/composite ordering.",
+            "Capture is the fraction of all primes in the two closest of eight lanes per cell."
+          ]
+        }
+      },
+      {
+        "id": "pn36_models",
+        "label": "PN36 frozen model comparison",
+        "path": "analysis/primes/PN36_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn36_models",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:38:20+10:00",
+          "description": "PN36 frozen model comparison",
+          "sql": "SELECT model, auc, auc_delta, chance, registered FROM pn36_models ORDER BY auc DESC",
+          "tables_used": [
+            "pn36_models"
+          ],
+          "filters": [
+            "PN36 frozen untouched rungs and independently opened prime labels"
+          ],
+          "metric_definitions": [
+            "AUC delta equals lane-stratified AUC minus chance 0.5."
+          ]
+        }
+      },
+      {
+        "id": "pn36_rungs",
+        "label": "PN36 octave-rung transfer",
+        "path": "analysis/primes/PN36_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn36_rungs",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:38:20+10:00",
+          "description": "PN36 octave-rung transfer",
+          "sql": "SELECT rung, converted_auc, no_flip_auc, flip_advantage, top2_capture, prime_rate, rows, primes FROM pn36_rungs ORDER BY rung",
+          "tables_used": [
+            "pn36_rungs"
+          ],
+          "filters": [
+            "PN36 frozen untouched rungs and independently opened prime labels"
+          ],
+          "metric_definitions": [
+            "Each rung contains 4,096 complete cells and eight candidates per cell.",
+            "Flip advantage is converted-five AUC minus no-flip AUC."
+          ]
+        }
+      },
+      {
+        "id": "pn36_gates",
+        "label": "PN36 registered gate verdicts",
+        "path": "analysis/primes/PN36_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn36_gates",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:38:20+10:00",
+          "description": "PN36 registered gate verdicts",
+          "sql": "SELECT gate_name AS gate, status FROM pn36_gates ORDER BY gate_name",
+          "tables_used": [
+            "pn36_gates"
+          ],
+          "filters": [
+            "PN36 frozen untouched rungs and independently opened prime labels"
+          ],
+          "metric_definitions": [
+            "All five frozen gates were required for support."
+          ]
+        }
+      },
+      {
+        "id": "pn36_boundaries",
+        "label": "PN36 descriptive boundary association",
+        "path": "analysis/primes/PN36_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn36_boundaries",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:38:20+10:00",
+          "description": "PN36 descriptive boundary association",
+          "sql": "SELECT rung, spearman FROM pn36_boundaries ORDER BY rung",
+          "tables_used": [
+            "pn36_boundaries"
+          ],
+          "filters": [
+            "PN36 frozen untouched rungs and independently opened prime labels"
+          ],
+          "metric_definitions": [
+            "Spearman association compares fivefold boundary proximity with prime count per complete cell; it was descriptive, not a support gate."
+          ]
+        }
+      },
+      {
+        "id": "pn36_results",
+        "label": "PN36 independently validated results",
+        "path": "analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_RESULTS.json"
+      },
+      {
+        "id": "pn36_protocol",
+        "label": "PN36 frozen protocol",
+        "path": "analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_PROTOCOL_v1_FROZEN.md"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN36: Phi carrier to pentagonal structure"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "pn36_results",
+        "body": "## The explicit conversion did not locate primes\n\nAcross **196,608** sealed candidates, the fivefold-converted Phi carrier returned **AUC 0.499851** and nearest-two capture **24.8858%**. Their uncertainty intervals include chance, circular shifts readily matched them, and all five frozen support gates failed. The result is **NOT SUPPORTED**."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "verdict_card",
+          "auc_card",
+          "capture_card",
+          "gate_card"
+        ]
+      },
+      {
+        "id": "models_intro",
+        "type": "markdown",
+        "body": "## The fivefold output did not beat its input, components or polygon controls\n\nThe registered conversion scored below raw Phi and direct pentagon. A fourfold conversion was the best frozen rival, but all point estimates remain close to 0.5 and inside the alignment-shift range. Rival ordering is therefore control evidence, not a new positive discovery."
+      },
+      {
+        "id": "models",
+        "type": "chart",
+        "chartId": "model_delta_chart"
+      },
+      {
+        "id": "flip_intro",
+        "type": "markdown",
+        "body": "## The registered octave flip made the odd rungs worse\n\nThe no-flip fivefold model scored **0.503772**, while the frozen flipped model scored **0.499851**. The 95% interval for flipped minus no-flip was wholly negative: **[-0.007411, -0.000566]**. This rejects the registered flip advantage, but the no-flip rival was not independently registered as a positive locator."
+      },
+      {
+        "id": "flip",
+        "type": "chart",
+        "chartId": "flip_chart"
+      },
+      {
+        "id": "transfer_intro",
+        "type": "markdown",
+        "body": "## The direction did not transfer across scales or sample halves\n\nOnly one of three adjacent-rung pairs, three of six individual rungs and one of two fixed halves exceeded chance. The pattern is inconsistent with a stable cross-scale prime preference."
+      },
+      {
+        "id": "transfer",
+        "type": "table",
+        "tableId": "rung_table"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "pn36_protocol",
+        "body": "## Scope and metric definitions\n\nThe eight exact modulo-30 survivor lanes were placed on one ARA circumference. A continuous `1/phi^2` carrier was snapped to its nearest one of five vertices; that vertex and its half-turn anti-phase were the crossings. AUC compares prime and composite ordering within each residue lane before pooling. Nearest-two capture asks what fraction of all primes fell in the two closest of eight lanes per cell."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "pn36_protocol",
+        "body": "## The conversion and targets were sealed before primality was opened\n\nSix untouched octave rungs supplied 24,576 complete cells. The fidelity note, protocol and both scripts were SHA-256 frozen; the label-free primary then sealed all 196,608 geometric scores. Only afterward did the independent validator calculate primality, reconstruct every distance, bootstrap whole cells and run within-rung circular shifts."
+      },
+      {
+        "id": "gates_intro",
+        "type": "markdown",
+        "body": "## Every registered support route failed\n\nThe null was not caused by a single borderline threshold: pooled preference, scale transfer, conversion specificity, singularity-flip advantage and nearest-two capture all failed."
+      },
+      {
+        "id": "gates",
+        "type": "table",
+        "tableId": "gate_table"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## This rejects one explicit bridge, not every possible ARA conversion\n\nNearest-fivefold quantisation was Sol's minimal mathematical translation of Dylan's visual observation. It genuinely produces a five-state sequence by definition, but primes did not prefer that sequence or its sector boundaries. A different map would be a new hypothesis and must come from independent geometry rather than tuning phase, origin, sectors or event type to these labels."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nRecord PN36 as a clean null and park this prime-conversion branch. Resume only if an independently specified observable changes the scientific question, rather than adjusting the same carrier after seeing the outcome."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Can a physical system expose a Phi-to-fivefold conversion observable independently of prime labels?\n- Is the ARA singularity flip meant to reverse carrier direction, structural orientation, or a different coordinate?\n- Which pre-existing ARA rule would uniquely select a conversion operator before data are viewed?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-22T21:38:20+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "verdict": "NOT SUPPORTED",
+          "converted_auc": 0.4998509924089136,
+          "chance": 0.5,
+          "capture": 0.2488579661255183,
+          "capture_null": 0.25,
+          "flip_difference": -0.003921425654181521,
+          "gates": "0 / 5"
+        }
+      ],
+      "models": [
+        {
+          "model": "C5(Phi), no flip",
+          "auc": 0.5037724180630951,
+          "auc_delta": 0.00377241806309514,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "C4(Phi)",
+          "auc": 0.5028849964136664,
+          "auc_delta": 0.002884996413666352,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "C8(Phi)",
+          "auc": 0.5013300432593645,
+          "auc_delta": 0.0013300432593644773,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "Direct pentagon",
+          "auc": 0.5011175978936422,
+          "auc_delta": 0.001117597893642186,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "Raw Phi",
+          "auc": 0.5010414280926851,
+          "auc_delta": 0.0010414280926851482,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "C7(Phi)",
+          "auc": 0.5001415109846884,
+          "auc_delta": 0.00014151098468839773,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "C5(Phi), frozen",
+          "auc": 0.4998509924089136,
+          "auc_delta": -0.00014900759108638084,
+          "chance": 0.5,
+          "registered": true
+        },
+        {
+          "model": "C6(Phi)",
+          "auc": 0.49977631891989377,
+          "auc_delta": -0.00022368108010623056,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "Direct 36 degrees",
+          "auc": 0.4995465756866209,
+          "auc_delta": -0.0004534243133790805,
+          "chance": 0.5,
+          "registered": false
+        },
+        {
+          "model": "C3(Phi)",
+          "auc": 0.49906757363432963,
+          "auc_delta": -0.0009324263656703691,
+          "chance": 0.5,
+          "registered": false
+        }
+      ],
+      "rungs": [
+        {
+          "rung": 28,
+          "converted_auc": 0.5009521876296599,
+          "no_flip_auc": 0.5009521876296599,
+          "flip_advantage": 0.0,
+          "top2_capture": 0.25125791267651354,
+          "prime_rate": 0.188018798828125,
+          "rows": 32768,
+          "primes": 6161
+        },
+        {
+          "rung": 29,
+          "converted_auc": 0.49354469841124143,
+          "no_flip_auc": 0.5046102870553899,
+          "flip_advantage": -0.011065588644148472,
+          "top2_capture": 0.2441426146010187,
+          "prime_rate": 0.17974853515625,
+          "rows": 32768,
+          "primes": 5890
+        },
+        {
+          "rung": 38,
+          "converted_auc": 0.5063099055759231,
+          "no_flip_auc": 0.5063099055759231,
+          "flip_advantage": 0.0,
+          "top2_capture": 0.25446527012127895,
+          "prime_rate": 0.138397216796875,
+          "rows": 32768,
+          "primes": 4535
+        },
+        {
+          "rung": 39,
+          "converted_auc": 0.49941685694511906,
+          "no_flip_auc": 0.5026223766467979,
+          "flip_advantage": -0.003205519701678816,
+          "top2_capture": 0.2492354740061162,
+          "prime_rate": 0.13970947265625,
+          "rows": 32768,
+          "primes": 4578
+        },
+        {
+          "rung": 48,
+          "converted_auc": 0.5004758302500504,
+          "no_flip_auc": 0.5004758302500504,
+          "flip_advantage": 0.0,
+          "top2_capture": 0.2423337856173677,
+          "prime_rate": 0.112457275390625,
+          "rows": 32768,
+          "primes": 3685
+        },
+        {
+          "rung": 49,
+          "converted_auc": 0.4991008916645548,
+          "no_flip_auc": 0.5080579115488774,
+          "flip_advantage": -0.00895701988432257,
+          "top2_capture": 0.25159323912441117,
+          "prime_rate": 0.110137939453125,
+          "rows": 32768,
+          "primes": 3609
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1 converted preference",
+          "status": "FAIL"
+        },
+        {
+          "gate": "G2 scale transfer",
+          "status": "FAIL"
+        },
+        {
+          "gate": "G3 conversion specificity",
+          "status": "FAIL"
+        },
+        {
+          "gate": "G4 singularity flip",
+          "status": "FAIL"
+        },
+        {
+          "gate": "G5 crossing capture",
+          "status": "FAIL"
+        }
+      ],
+      "boundaries": [
+        {
+          "rung": 28,
+          "spearman": -0.023475277000124275
+        },
+        {
+          "rung": 29,
+          "spearman": -0.02106370093722676
+        },
+        {
+          "rung": 38,
+          "spearman": 0.00822689077828861
+        },
+        {
+          "rung": 39,
+          "spearman": 0.01720045058687763
+        },
+        {
+          "rung": 48,
+          "spearman": -0.016037757799721532
+        },
+        {
+          "rung": 49,
+          "spearman": -0.011580646460059326
+        }
+      ]
+    }
+  }
+}

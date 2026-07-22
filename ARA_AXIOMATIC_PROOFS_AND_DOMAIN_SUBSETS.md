@@ -2225,6 +2225,175 @@ while storing pairs rather than individual lanes gives exactly a \(2:1\) state c
 But the next rung still contains \(p-1\) distinct descendants for each current pair. Repeating geometry does not make
 the amount of information constant.
 
+### Theorem 28 — Nearest-survivor handovers form an exact monotone path to the next prime
+
+Let (G_0=\{2,7\}), let (N) be an integer anchor, and define
+
+\[
+U_G(N)=\min\{m>N:\ p\nmid m\ \text{for every }p\in G\}.
+\]
+
+Introduce the other prime gates in increasing order. If the new gate (p) does not divide the current
+(U_G(N)), the nearest upper survivor is unchanged. If (p\mid U_G(N)), then the current child is removed and
+
+\[
+U_{G\cup\{p\}}(N)>U_G(N).
+\]
+
+Once (G) contains every prime through (\sqrt{U_G(N)}), the current upper survivor is the first prime greater
+than (N).
+
+**Proof.** Adding a gate can only remove survivors, so (U_G(N)) cannot move backwards. Every integer between
+(N) and the current upper survivor already failed an earlier gate and remains removed. Therefore a new gate
+changes the upper survivor exactly when it divides the current one; if so, the next surviving integer is strictly
+larger. At the terminal boundary, the current survivor has no prime divisor through its square root and is therefore
+prime. Any earlier prime above (N) would survive every gate, contradicting the definition of the nearest upper
+survivor. \(\square\)
+
+**Plain explanation.** Start with the nearest number that survives the current child filters. Most later gates do
+nothing visible. When one gate divides that candidate, it releases and the next surviving candidate takes over.
+Repeating must eventually reach the next prime. This proves the handover path, but not that the path can be found
+without checking the intervening gates.
+
+### Theorem 29 — Pair odds convert exactly to the bounded ARA wheel coordinate
+
+Let (M>2) be even and let (r\leftrightarrow M-r) be a reversible wheel pair. Define the directional odds
+
+\[
+q(r)=\frac{r}{M-r}.
+\]
+
+The total-2 odds transform is
+
+\[
+x_A=\frac{2q}{1+q}.
+\]
+
+Substitution gives
+
+\[
+x_A
+=
+\frac{2r/(M-r)}{1+r/(M-r)}
+=
+\frac{2r}{M},
+\qquad
+x_B
+=
+\frac{2(M-r)}{M}
+=2-x_A.
+\]
+
+Therefore
+
+\[
+x_A+x_B=2
+\]
+
+exactly. Mirror residues have equal unsigned ridge-closeness
+
+\[
+c(r)=1-|x_A-1|
+=
+\frac{2\min(r,M-r)}{M}
+\]
+
+and opposite orientation. The formal middle (r=M/2) gives `(1,1)`, but it is not coprime to even (M>2), so
+the exact ridge is excluded from the surviving wheel lanes. \(\square\)
+
+**Plain explanation.** A ratio such as `1/13`, `3/11` or `5/9` is an odds reading of one side against its partner.
+It is not another energy component to add. Converting the odds to ARA gives `(1/7,13/7)`, `(3/7,11/7)` and
+`(5/7,9/7)`: every pair is complete at total 2 while moving progressively nearer the missing `(1,1)` ridge.
+
+### Theorem 30 — A quiet lower parent fails only through omitted upper-band factors
+
+Let (A_L) be the complete set of prime children (p\le L), and define
+
+\[
+S_{A_L}(n)=1
+\quad\Longleftrightarrow\quad
+p\nmid n\text{ for every prime }p\le L.
+\]
+
+If (n>1) is composite and (S_{A_L}(n)=1), then every prime factor of (n) is greater than (L). In particular,
+writing (n=ab) with (1<a\le b) gives
+
+\[
+a>L,\qquad b>L,\qquad n=ab>L^2.
+\]
+
+Conversely, any composite whose least prime factor exceeds (L) survives the lower parent. Therefore, for a scale
+(S) and the PN19/PN26 log-half boundary (L\approx\sqrt{S/2}), a false quiet state near (S) must be built entirely
+from the omitted factor band
+
+\[
+\sqrt{S/2}<p\le\sqrt n.
+\]
+
+**Proof.** If a prime (p\le L) divided (n), the definition would give (S_{A_L}(n)=0). Thus every prime factor
+exceeds (L). A composite has at least two nontrivial factors, so their product exceeds (L^2). The converse follows
+directly from the same divisibility definition. (square)
+
+**Plain explanation.** The complete lower child wave removes almost every composite. The only false ridges left are
+numbers assembled wholly from the narrow band of larger children that Phase A did not include. That is why the first
+Phase A quiet state can be right very often without being universally exact, and why Phase B remains necessary for
+the rare corrections.
+
+### Theorem 31 — The PN33 fill curve is asymptotically the PNT gap-scale curve
+
+Define the PN33 inverse survivor density
+
+\[
+D(p)=\prod_{q\le p}\frac{q}{q-1}
+\]
+
+and, relative to baseline prime (b),
+
+\[
+R_b(p)=\frac{D(p)}{D(b)},
+\qquad
+x_b(p)=2\frac{\log R_b(p)}{\log 2}.
+\]
+
+Mertens' product theorem gives
+
+\[
+D(p)\sim e^\gamma\log p.
+\]
+
+Therefore
+
+\[
+R_b(p)\sim\frac{\log p}{\log b}
+=2^{x_b(p)/2}.
+\]
+
+The prime number theorem gives mean prime-gap scale (G(p)\sim\log p). Hence its relative scale is
+
+\[
+\frac{G(p)}{G(b)}
+\sim\frac{\log p}{\log b}
+\sim R_b(p)
+=2^{x_b(p)/2}.
+\]
+
+At PN33 completion (R_b(p)=2), this also gives
+
+\[
+\frac{\log p}{\log b}\sim2
+\quad\Longrightarrow\quad
+p\sim b^2.
+\]
+
+**Proof.** Substitute Mertens' asymptotic product into the definitions of (R_b) and (x_b), then substitute the
+prime-number-theorem gap scale. The completion relation follows by exponentiating
+(log p\sim2\log b). \(\square\)
+
+**Plain explanation.** The PN33 “fill” coordinate measures how sparse wheel survivors have become. Established
+number theory says this sparseness grows like (log p), and average prime gaps grow by the same scale. That is why
+the frozen ARA curve and PNT were almost identical, and why a generation starting near (b) completes near
+(b^2). This is an exact asymptotic crosswalk, not an independent ARA improvement over PNT.
+
 ## 20. Three conceptual stages are not three arithmetic operations
 
 The exact prime methods in PN17–PN19 can be written
@@ -2261,7 +2430,62 @@ by \(p-1\) at each gate even after the exact factor-two symmetry compression.
 ridge-straddling pair retained effectively zero parent variance and chance prime-ridge AUC. PN22 became an exact
 mod-14 wheel. PN23 passed the held-out `p=17` reconstruction with all `92,160` residues and 40/40 independent checks.
 Thus the exact \(2:1\) anti-pair compression is retained; a bounded two-scalar or three-cheap-operation next-prime
-algorithm is not supported and the prime thread is parked. Full record:
+algorithm is not supported. PN24 tested Theorem 28's nearest-child event compression on 2,000 deterministic opened
+anchors: median two visible handovers, `63.65%` exact within three candidate states and `83.85%` within three
+handover events, while the median proof crossed `6,336` non-base prime gates. Thus the event genealogy is often
+short, but the required factor information is not. PN25 then tested Theorem 29's mod-14 closeness as a prospective
+handover coordinate on 6,000 fresh anchors at three
+scales. The arithmetic and three-pair/six-lane compression fidelity passed, but all four dynamic predictions failed;
+pooled closeness-versus-handover correlation was `+0.003335` with one-sided `p=0.6110` for the predicted negative
+direction. Thus the pair coordinate is exact lateral wheel geometry, not a vertical next-prime completion clock.
+PN26 then represented that missing vertical state by the complete lower Phase A parent from PN19 and froze its first
+three quiet states on 6,000 new anchors. The exact next prime occurred at rank one on `93.983%`, by rank two on
+`99.650%`, and by rank three on `99.967%`; only two anchors required ranks four or five. This prospectively supports
+the dominant-parent ranked locator and Theorem 30's upper-band failure mechanism. It does not make the parent cheap:
+the three cohorts retained `780`, `17,045`, and `48,817` child gates, and the frozen 50-point advantage over the
+`p<=29` control failed (`37.60` points observed). The fixed `3.5` route had zero variance and was correctly retained
+as a scale frame rather than credited as the decoder.
+
+**Post-capstone orientation diagnostic.** PN29 later collapsed three fixed child-pair coordinates while remaining
+entirely inside dimensionless ARA units. It detected the finite child-factor web but failed against composites that
+evaded those child factors. The user then identified a fidelity error: the pair orientations had been held fixed
+despite ARA's declared singularity-crossing flip. PN30 defined each child's normalized phase as
+\(\theta_w(N)=(N\bmod w)/w\), assigned the most recently crossed child as Phase A, and reflected a reversed pair by
+\(x\mapsto2-x\). On a fresh odd interval, this raised unresolved-composite AUC from a same-interval static `0.5301`
+to dynamic `0.5663`, but the frozen one-sided result was `p=0.06199`. The individual pair magnitudes were nearly
+identical across the hard comparison; the post-hoc difference arose from signed orientation cancellation. Thus the
+AB/BA direction is a mathematically real retained coordinate and a candidate residual mechanism, while
+prime-specific separation remains suggestive, unreplicated and below the frozen threshold. Full record:
+`analysis/primes/PN30_DYNAMIC_RELATIONAL_FLIP_REPORT.md`.
+
+**Independent-child ordering diagnostic.** PN31 then removed the degenerate wave `1`, abandoned fixed pairs and
+retained five separate directed handover coordinates. On another fresh small interval, the closest child's distance,
+its identity, every individual child distance and the count of approaching waves were null against composites that
+evaded the same child divisors. The complete closest-to-farthest order of all five children nevertheless differed
+under the frozen total-variation permutation test (`TV=0.6728`, `p=0.00390`). A post-hoc ten-pair decomposition found
+no individually significant pair after Holm correction. This supports one fresh-sample **joint-order** effect, not a
+dominant child, permanent pair, parent-collapse law or prime algorithm. Sparse order categories make unchanged
+replication essential. Full record: `analysis/primes/PN31_FIVE_INDEPENDENT_HANDOVER_REPORT.md`.
+
+**Double Information³/hexagon replication.** PN32 translated the proposed full double lock without flattening it:
+
+\[
+T_c=(A_c,B_c,J_c),
+\qquad
+T_p=(A_p,B_p,J_p),
+\qquad
+K_{c\to p}=J_p\circ J_c^{-1},
+\]
+
+where `A/B` are the nearest/farthest handover endpoints and `J` is the entire five-wave order at child rung `N` or
+doubled parent rung `2N`. Coordinates and 1,000 relation-broken maps were frozen before direct trial-division labels.
+On the next untouched interval, child-order replication was null (`TV=0.6057`, `p=0.2244`), parent order was null
+(`p=0.8023`), and the cross-rung closure relation was null (`TV=0.1895`, null mean `0.2606`, `p=0.9684`). The exact
+doubling map occupied only 27 rearrangement classes, an exact constrained arithmetic relation, but it did not
+distinguish prime from unresolved-composite identity. Thus PN32 rejects this particular prime-specific hexagon
+projection and leaves PN31 unreplicated. Full record: `analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
+
+The prime thread is parked. Full record:
 `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
 
 ---
@@ -2310,6 +2534,16 @@ algorithm is not supported and the prime thread is parked. Full record:
     2 and average exactly 1.
 25. One representative per wheel anti-pair reconstructs the full next rung without loss, providing exact `2:1`
     lane compression while the number of pair identities still grows by `p-1`.
+26. Nearest upper survivors under a growing prime-gate set form a monotone handover cascade; after every gate through
+    the current candidate's square root is included, the survivor is exactly the next prime. This exact path theorem
+    does not bound the number of gates required.
+27. Directional odds `q=r/(M-r)` for a reversible wheel pair convert exactly to the bounded total-2 coordinate
+    `x_A=2q/(1+q)=2r/M`, `x_B=2-x_A`; the formal `(1,1)` middle is excluded from the coprime lanes of an even wheel.
+28. A composite quiet under every prime child through (L) must have all prime factors greater than (L), and hence
+    exceed (L^2); this exactly identifies the omitted upper-factor band responsible for false lower-parent ridges.
+29. Under Mertens' product theorem and the prime number theorem, PN33's inverse-density fill satisfies
+    `R_b(p) ~ log(p)/log(b) = 2^(x_b/2)`; its relative prime-gap curve is therefore asymptotically PNT itself and
+    completion `R_b=2` occurs near `p~b^2`.
 
 ## ARA assumptions not proved by mathematics alone
 

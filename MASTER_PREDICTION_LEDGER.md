@@ -1,6 +1,222 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T254 - PN36 Phi-carrier to pentagonal-structure conversion
+
+**REGISTERED:** 22 July 2026 before target cells/candidates/prime labels | **STATUS:** NOT SUPPORTED `[pre-registered]`
+
+**USER PRIOR:** after PN35, Dylan identified the raw Phi trace as a moving/time carrier and the higher 36-degree and
+pentagon estimates as its structured appearance: "You can see the Phi time wave and the structured pentagon, you
+can actually see the conversion." He approved an explicit conversion test: "Yes, please do that."
+
+**AI operational addition:** the exact conversion is frozen as nearest-vertex five-sector quantisation
+`C5(theta)=floor(5 theta + 1/2) mod 5 / 5`. This is one minimal testable translation, not a prior ARA axiom or the
+only possible conversion law.
+
+**Claim/test:** advance the unfitted `1/phi^2` carrier through complete modulo-30 cells on the same circumference,
+apply the five-sector conversion, add its anti-phase crossing and test whether the resulting proximity ranks prime
+incidence. Seal `196,608` candidates from six untouched rungs (`k=28,29,38,39,48,49`) before opening primality.
+
+**Prediction:** converted `C5(Phi)` exceeds chance, transfers across scales, beats raw Phi, direct pentagon,
+direct 36 degrees and matched `C3/C4/C6/C7/C8` quantisations, benefits from the octave singularity flip, and captures
+more than `25%` of primes in its nearest two of eight lanes.
+
+**Falsifier:** failure of pooled converted preference is `NOT SUPPORTED`. Failure to beat both raw and direct
+fivefold components prevents conversion-specific support. Exact wheel closure and known Phi/pentagon geometry
+cannot rescue a predictive null.
+
+**RESULT:** the fivefold conversion returned lane-stratified AUC `0.499851`, 95% whole-cell interval
+`[0.496091,0.503393]`, and nearest-two capture `24.8858%` versus `25%`. Shift p-values were `0.5953` and `0.7198`.
+Only one of three adjacent pairs, three of six rungs and one of two fixed halves exceeded chance. Best rival was the
+fourfold conversion at `0.502885`. The no-flip fivefold version scored `0.503772`; the registered flip-minus-no-flip
+interval `[-0.007411,-0.000566]` was wholly negative. All five gates failed.
+
+**Two-output reading:** the operator performs the defined continuous-Phi to five-state conversion, but that is a
+constructed geometric fact. Prime incidence did not prefer its outputs or sector handovers. This rejects the exact
+nearest-fivefold conversion bridge on these rungs; it does not reject every possible ARA conversion in every domain.
+
+**Artifacts:** frozen fidelity/protocol/manifest, label-free candidate seal, independently scored rows/results,
+validation receipt and report under `analysis/primes/PN36_*`. Full report:
+`analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
+
+---
+
+### T253 - PN35 same-scale golden crossing over eight structural children
+
+**REGISTERED:** 22 July 2026 before target cells/candidates/prime labels | **STATUS:** NOT SUPPORTED `[pre-registered]`
+
+**Orientation:** each complete structural cell is decompressed into eight child lanes on one `0–2` circumference.
+Adjacent octave rungs are `[2^k,2^(k+1))`; the upper endpoint is the actual parent singularity, followed by local
+`2 -> 0`, scale doubling and a phase/anti-phase orientation flip.
+
+**USER PRIOR / correction:** “Can we not now have a Hexagon wave/2 wave, and a pentagon or phi wave, going next to
+each other. Where the phi wave crosses the 2 wave, is where a prime is?” Dylan then corrected the PN33 reading:
+“you measured 8 distinctions ... These are the child waves of the larger scale. The full ARA is the 8 and it is
+actually 2. The double occurs at the singularity.” After the same-scale eight-child restatement he approved:
+“Yes please do that.”
+
+**Fidelity:** `analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_FIDELITY_PACKET_v1_DRAFT.md`; verdict
+`EXACT ENOUGH TO TEST` from Dylan's ordinary-language approval.
+
+**Claim/test:** place the exact eight modulo-30 survivor lanes `{1,7,11,13,17,19,23,29}` at structural positions
+`x_2=r/15`, advance an unfitted golden handover by `1/phi^2` turns per complete cell on the same circumference, use
+two anti-phase crossings, and reverse handover direction after every octave singularity. Seal `196,608` candidates
+from six fresh rungs (`k=26,27,36,37,46,47`) before opening primality. Test whether closer crossings preferentially
+contain primes after conditioning on residue lane.
+
+**Prediction:** pooled lane-stratified AUC and nearest-two prime capture exceed `0.5` and `25%` with frozen
+block-bootstrap and circular-shift support; direction transfers across all three rung pairs and both halves; Phi
+beats every registered constant rival; and the singularity-flip model beats the identical no-flip model.
+
+**Falsifier:** adequate data with no pooled prime preference at the registered golden crossings is `NOT SUPPORTED`.
+Failure against rival constants or the flip control prevents Phi/singularity-specific support. Exact wheel closure is
+reported separately and cannot rescue a predictive null.
+
+**Rivals:** `1/e`, `3/8`, `2/5`, `36°`, pentagon, hexagon, quadrant, triangle, anti-phase, silver conjugate,
+no-flip golden and 256 circular-shift nulls.
+
+**RESULT:** `196,608` sealed candidates across `24,576` complete cells produced golden lane-stratified AUC
+`0.497180`, 95% whole-cell interval `[0.493772,0.500420]`, and nearest-two capture `24.4753%` versus the structural
+`25%`. Circular-shift p-values were `0.9455` and `0.9883`. Both fixed halves and two of three rung pairs were below
+chance. The no-flip model scored `0.498390`; the best frozen rival was the 36-degree rule at `0.503130`, with the
+golden-minus-best interval wholly negative. All five registered gates failed.
+
+**Two-output reading:** the eight anti-paired wheel lanes still close exactly to parent total `2`, preserving the
+user's corrected child/parent singularity representation. The added constant same-scale Phi-crossing preference is
+**NOT SUPPORTED** and may not be rescued by phase or constant tuning. Full report:
+`analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_REPORT_2026-07-22.md`.
+
+**Post-hoc observation:** after the verdict, Dylan noticed that the 36-degree half-pentagon (`0.503130`) and pentagon
+(`0.501258`) ranked above the raw Phi carrier (`0.497180`). This motivates a separate Phi-carrier -> pentagonal
+structure conversion hypothesis, not a reinterpretation of PN35. Provenance note:
+`analysis/primes/PN35_POSTHOC_PHI_TO_PENTAGON_CONVERSION_NOTE_2026-07-22.md`.
+
+**Artifacts completed:** frozen fidelity/protocol/manifest, label-free candidates and hash receipt, independently
+scored rows/results, validation receipt, reproducibility notebook, figure and report artifact under
+`analysis/primes/PN35_*`.
+
+---
+
+### T252 - PN34 remaining-fill rank budget
+
+**REGISTERED:** frozen 22 July 2026 before fresh anchors/candidates/truth | **STATUS:** SUGGESTIVE `[pre-registered; protocol verdict PARTIAL]`
+
+**Recording note:** the SHA-256 protocol/implementation freeze was created before the primary run, but this compact
+ledger propagation was completed after the run. The frozen manifest is the preregistration authority; the delayed
+ledger entry is a process deviation and is disclosed rather than backdated silently.
+
+**Orientation:** PN26 Phase A supplies the ordered quiet-state candidates. PN33's inverse-density operator is applied
+to the omitted Phase B parent: larger remaining fill means more unresolved collision capacity and a deeper expected
+candidate rank budget.
+
+**USER PRIOR / approval:** after the earlier `max child > 1.5` shortcut was shown to reject primes and hard
+composites at similar rates, the proposed next route was to combine PN33's fill coordinate with PN26's complete
+lower-parent ranked locator. Dylan replied, “Can we try that please.” Fidelity and forbidden claims were frozen in
+`analysis/primes/PN34_FILL_RANK_BUDGET_FIDELITY_PACKET_v1_DRAFT.md`.
+
+**Claim/test:** for omitted upper parent `B`, freeze
+`R_B=product_(p in B) p/(p-1)`, `x_B=2 log(R_B)/log(2)`, first-reading prior
+`pi_1=1/R_B=2^(-x_B/2)`, and ranked coverage `pi_k=1-(1-pi_1)^k`. Seal three Phase A quiet candidates for 6,000
+fresh anchors across unused scales near 89 million, 89 billion and 8.9 trillion before opening primality.
+
+**Prediction/falsifier:** at every scale, top-1/top-2/top-3 absolute errors must be at most `1.5/0.5/0.15`
+percentage points; observed top-2/top-3 coverage must be at least `99%/99.9%`; and the predicted scale ordering of
+top-1 coverage must match the observed ordering. Any freeze/reconstruction mismatch is implementation failure.
+
+**RUN:** all `9/9` calibration tolerances passed. Predicted/observed top-1 were `92.791%/92.850%`,
+`94.659%/95.450%`, and `95.459%/95.250%`. Top-2 was `99.45%`, `99.70%`, `99.65%`; top-3 was `99.95%`,
+`100.00%`, `99.90%`. Rank counts were `(1857,132,10,>3:1)`, `(1909,85,6,0)`, and `(1905,88,5,2)`.
+All `6/6` rank-budget thresholds passed. The registered scale order failed: predicted `low<middle<high`, observed
+`low<high<middle`, with middle exceeding high by `0.20` percentage points.
+
+**RIVALS:** top-1 fill-prior log loss was `0.2114455`, versus `0.2127668` for the frozen pooled PN26 prior and
+`0.2465621` for the tested conditional-PNT approximation. The gain over the already strong flat prior was only
+`0.62%`. The coordinate is constant within each cohort and cannot label the individual first-candidate miss.
+
+**CLAIM VERDICT:** **PARTIAL** under the frozen test-specific rule; canonical rating **SUGGESTIVE** because one
+registered endpoint failed. The population rank budget replicated strongly, but no individual miss predictor was
+tested.
+
+**GEOMETRY VERDICT:** the successful residual coordinate was the complete omitted-parent fill `x_B=0.134–0.216`,
+not a largest-child `>1.5` threshold. The complementary parent explains how quickly ranked Phase A quiet states
+close, while retaining all underlying prime gates. This is a prospective ARA crosswalk to conditional sieve density,
+not a prime generator, new theorem or computational shortcut.
+
+**Artifacts:** frozen fidelity/protocol/manifests, sealed predictions, validated rows/results, SQLite-backed report
+source, executed notebook, figure and independent receipts in `analysis/primes/` under `PN34_FILL_RANK_BUDGET_*`.
+
+---
+
+### T251 - PN33 seeded-hexagon fill and rung doubling
+
+**REGISTERED:** 22 July 2026 before target coordinates or prime-gap summaries | **STATUS:** SUPPORTED SPACING EXPRESSION
+
+**Orientation:** completion of an old connection-spacing generation is local `2`; the following prime is the first
+small positive connection in a newly reset local `0-2` fill. Raw spacing remains doubled across the reset.
+
+**USER PRIOR:** "the NEW hexagon is not FILLED straight away, the prime is just the first connection inside of it. It
+then has to fill by going up the gradient, and when it fully fills, that is when it doubles again."
+
+**Fidelity:** Dylan approved the inverse-survivor-density translation as functionally correct; recorded
+`EXACT ENOUGH TO TEST` in `analysis/primes/PN33_SEEDED_HEXAGON_FILL_FIDELITY_PACKET_v1_DRAFT.md`.
+
+**Claim/test:** define raw connection spacing as
+`D(p)=product_(prime r<=p) r/(r-1)` and local fill as
+`x_b(p)=2 log(D(p)/D(b))/log(2)`. The first prime after baseline `b` is the seed; completion is the first gate with
+`D(p)/D(b)>=2`. Test whether raw consecutive-prime gap scale rises through eight frozen fill bands according to the
+no-fit curve `2^(x/2)`, retains the doubled absolute scale after local reset, and transfers across deterministic scale
+checks.
+
+**Prediction:** positive band-order association; final/first median-gap bootstrap interval contains `2` and excludes
+`1`; reset seed is below local `0.25` while absolute spacing retains at least the completed twofold baseline.
+
+**Falsifier:** adequate target bands show the opposite direction or a final/first interval excluding `2` in favour of
+a materially different value. A mathematically valid coordinate with no organization beyond controls is `NULL`.
+
+**Rivals:** prime-number-theorem `log(p)` scale, raw gate count, raw `p->2p`, fixed `6/12/24` gate counts and
+order-broken gate increments. Matching PNT is an established crosswalk, not new prime mathematics.
+
+**RUN:** the primary coordinate began at prime `10,007`, completed at `102,474,149`, and scored `5,894,554`
+consecutive-prime gaps. Eight frozen band medians were `8,8,10,10,10,12,12,12`, giving
+`Spearman rho=0.944911`. The endpoint point ratio was `12/8=1.5`; after correcting the scorer from a
+block-median bootstrap to the registered moving-block bootstrap, its 95% interval was `[1.5,2.0]`, containing the
+doubling target only at the upper boundary and excluding `1`. Both scale checks had positive direction
+(`rho=0.912871`, `0.975900`), and the local reset retained a doubled raw density baseline.
+
+**RIVALS/RESIDUAL:** ARA log-MAE was `0.082590`; PNT log-MAE was `0.083105`. The `0.62%` ARA improvement missed
+the frozen `5%` ARA-specific gate. Flat, equal-gate and 1,000 order-broken controls were materially worse, but that
+shows chronological scale ordering rather than an advantage over established PNT asymptotics.
+
+**RATING:** **SUPPORTED SPACING EXPRESSION** under the literal frozen rule; **NO ARA-SPECIFIC RESIDUAL SUPPORT**.
+This is a preregistered ARA crosswalk to known prime-density/gap scaling, not a prime generator, new theorem,
+literal spatial hexagon or causal Phi result. The point estimate is `1.5`, so “doubling” must be described as
+boundary-compatible rather than an exact observed point value.
+
+**Artifacts:** frozen protocol/manifest and coordinate firewall; validated result, corrected-bootstrap audit,
+independent full-prime validation, report, executed notebook and static figure in `analysis/primes/` under the
+`PN33_SEEDED_HEXAGON_FILL_*` names.
+
+---
+
+### T250 - PN32 child-parent double Information³ lock
+
+**REGISTERED:** 22 July 2026 in frozen protocol before labels | **STATUS:** NULL `[unchanged PN31 replication and N -> 2N closure]`
+
+**Orientation:** one child triangle `(Phase A, Phase B, complete order)` at `N`; one parent triangle of the same type at doubled rung `2N`; the closure coordinate retains how all five ranks rearrange.
+
+**USER PRIOR:** “I wonder if that is the hexagon closing. The full double information lock for phase A and Phase B of a parent and child wave.”
+
+**Claim/test:** replicate PN31 on untouched odd integers 3001-3999, then test whether the complete child-to-parent rearrangement distinguishes primes from composites that evade all five declared children.
+
+**Prediction/falsifier:** child order, intact closure, and a relation-broken control must each pass `p<0.01`; failure of unchanged child-order replication blocks full support.
+
+**RUN:** child order `TV=0.6057`, `p=0.2244`; parent order `p=0.8023`; closure `TV=0.1895`, permutation-null mean `0.2606`, `p=0.9684`. All 14 independent validation checks passed.
+
+**RATING:** **NULL** for prime-specific double closure. The exact doubling map used only 27 observed rearrangement classes, but primes and unresolved composites shared them. PN31 is unreplicated.
+**Artifacts:** `analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_PROTOCOL_v1_FROZEN.md`, report, frozen coordinates/maps, results, executed notebook and validation JSON.
+
+---
+
 ### T249 - PN23 reversible anti-pair fractal lift
 
 **REGISTERED:** 21 July 2026 in frozen protocol | **STATUS:** SUPPORTED `[exact arithmetic crosswalk; held-out p17; 40/40 independent checks]`  

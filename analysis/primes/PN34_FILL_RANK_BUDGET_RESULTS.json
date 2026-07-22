@@ -1,0 +1,184 @@
+{
+  "test_id": "PN34/FILL-RANK-BUDGET/v1",
+  "created_utc": "2026-07-22T10:08:54.619820+00:00",
+  "verdict": "PARTIAL OR NULL \u2014 SEE REGISTERED ENDPOINTS",
+  "cohorts": [
+    {
+      "cohort": "low",
+      "scale_anchor": 89000000,
+      "rows": 2000,
+      "phase_a_count": 865,
+      "phase_b_count": 720,
+      "remaining_fill_ratio": 1.0776898823587704,
+      "remaining_fill_x": 0.2158841714871255,
+      "predicted_top1": 0.9279107249399722,
+      "predicted_top2": 0.9948031364213197,
+      "predicted_top3": 0.9996253618720271,
+      "observed_top1": 0.9285,
+      "observed_top2": 0.9945,
+      "observed_top3": 0.9995,
+      "absolute_errors": [
+        0.0005892750600278163,
+        0.0003031364213196275,
+        0.00012536187202705218
+      ],
+      "wilson95": [
+        [
+          0.9163673453226996,
+          0.9389897451572665
+        ],
+        [
+          0.9901779372483848,
+          0.9969261029904561
+        ],
+        [
+          0.9971731374967338,
+          0.9999117322692944
+        ]
+      ],
+      "rank_counts_1_2_3_over3": [
+        1857,
+        132,
+        10,
+        1
+      ],
+      "conditional_pnt_top1": 0.8585574068938036,
+      "calibration_passes": [
+        true,
+        true,
+        true
+      ],
+      "budget_passes": [
+        true,
+        true
+      ]
+    },
+    {
+      "cohort": "middle",
+      "scale_anchor": 89000000000,
+      "rows": 2000,
+      "phase_a_count": 18882,
+      "phase_b_count": 16650,
+      "remaining_fill_ratio": 1.0564187171571742,
+      "remaining_fill_x": 0.15836353574687068,
+      "predicted_top1": 0.9465943605117135,
+      "predicted_top2": 0.9971478376708471,
+      "predicted_top3": 0.9998476784468872,
+      "observed_top1": 0.9545,
+      "observed_top2": 0.997,
+      "observed_top3": 1.0,
+      "absolute_errors": [
+        0.007905639488286487,
+        0.0001478376708471396,
+        0.00015232155311284412
+      ],
+      "wilson95": [
+        [
+          0.9444626753715425,
+          0.9627947286497985
+        ],
+        [
+          0.9934700849260646,
+          0.9986243700763698
+        ],
+        [
+          0.9980829527187469,
+          0.9999999999999998
+        ]
+      ],
+      "rank_counts_1_2_3_over3": [
+        1909,
+        85,
+        6,
+        0
+      ],
+      "conditional_pnt_top1": 0.8662222709970898,
+      "calibration_passes": [
+        true,
+        true,
+        true
+      ],
+      "budget_passes": [
+        true,
+        true
+      ]
+    },
+    {
+      "cohort": "high",
+      "scale_anchor": 8900000000000,
+      "rows": 2000,
+      "phase_a_count": 156495,
+      "phase_b_count": 141077,
+      "remaining_fill_ratio": 1.047568412142323,
+      "remaining_fill_x": 0.13408892629437405,
+      "predicted_top1": 0.954591593645857,
+      "predicted_top2": 0.997938076632377,
+      "predicted_top3": 0.9999063713458519,
+      "observed_top1": 0.9525,
+      "observed_top2": 0.9965,
+      "observed_top3": 0.999,
+      "absolute_errors": [
+        0.0020915936458569817,
+        0.001438076632376939,
+        0.0009063713458519196
+      ],
+      "wilson95": [
+        [
+          0.9422790928066445,
+          0.9609859794038216
+        ],
+        [
+          0.9927928037467583,
+          0.9983035683029576
+        ],
+        [
+          0.9963610657309615,
+          0.9997257210823479
+        ]
+      ],
+      "rank_counts_1_2_3_over3": [
+        1905,
+        88,
+        5,
+        2
+      ],
+      "conditional_pnt_top1": 0.8698894613342815,
+      "calibration_passes": [
+        true,
+        true,
+        true
+      ],
+      "budget_passes": [
+        true,
+        true
+      ]
+    }
+  ],
+  "predicted_scale_order": [
+    "low",
+    "middle",
+    "high"
+  ],
+  "observed_scale_order": [
+    "low",
+    "high",
+    "middle"
+  ],
+  "direction_pass": false,
+  "benchmark_top1": {
+    "fill_prior": {
+      "brier": 0.05170949038159817,
+      "log_loss": 0.2114454957743298
+    },
+    "flat_pn26_prior": {
+      "brier": 0.05185508333333333,
+      "log_loss": 0.21276675065985076
+    },
+    "conditional_pnt_prior": {
+      "brier": 0.058190224955656795,
+      "log_loss": 0.24656207109994785
+    }
+  },
+  "individual_candidate_classifier_tested": false,
+  "scientific_boundary": "The fill coordinate calibrates a population rank budget. Because it is constant inside each cohort, it supplies no within-cohort rule for identifying which first quiet candidate is composite."
+}

@@ -35,7 +35,7 @@ The safest way to read any claim here is:
 > `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md` and
 > `analysis/TE_ARA_PARTICIPATION_LEDGER_SYNTHESIS_2026-07-12.md`.
 
-> **Prime-thread capstone status (21 July 2026; PN1–PN23; thread parked):** PN1's original narrow result remains
+> **Prime-thread capstone status (22 July 2026; PN1–PN26; thread parked after bounded resumption):** PN1's original narrow result remains
 > **SUPPORTED `[pre-registered, arithmetic, unreplicated]`**: ordered local 0–2 relations transferred across held-out
 > wheel transitions `13→17` and `17→19`, beating full-marginal order shuffles in `4/4` comparisons at
 > `p=1/201`. The larger thread then established exact ARA crosswalks to square-root factor closure, modular
@@ -46,11 +46,109 @@ The safest way to read any claim here is:
 > definitions returned `0/7` exact; PN21 retained effectively `0%` parent variance with chance AUC; PN22 reduced
 > exactly to four mod-14 wheel lanes. PN23 proved the safe recursive compression: one `r↔M-r` representative
 > reconstructs its anti-phase and all child lanes, including held-out `p=17`, giving exact `2:1` storage compression
-> and `92,160/92,160` residues with zero errors (`40/40` independent checks). **Current claim:** three conceptual
-> information stages are available; a three-cheap-operation next-prime algorithm, speed improvement or new prime
-> theorem is **NOT SUPPORTED**. Phi carrier/leak claims in PN11–PN13 were also not supported. The protected 87-bit
+> and `92,160/92,160` residues with zero errors (`40/40` independent checks). PN24 then tested the user's nearest
+> child/handover proposal on 2,000 deterministic opened anchors. The exact event cascade recovered every next prime
+> and had a median two visible handovers, but only `63.65%` closed within three candidate states, below the frozen
+> `90%` compact threshold; the median proof still crossed `6,336` non-base prime gates. PN25 then prospectively
+> tested the corrected pair-ridge coordinate on 6,000 fresh anchors. The odds-to-ARA identity
+> `q=r/(14-r) -> x=2q/(1+q)=r/7` and total-2 mirror closure were exact, and three pair classes matched six raw lanes
+> within the frozen 2% fidelity bound. But all four dynamic predictions failed: pooled closeness-versus-handover
+> correlation was `+0.003335` (`p=0.6110` for the predicted negative direction), and neither pair nor lane models beat
+> the global outcome rate. The coordinate is an exact lateral wheel projection, not a next-prime handover clock.
+> PN26 then supplied the missing vertical state as one **complete** connection-heavy Phase A parent rather than two
+> individual factor labels. On 6,000 prospectively frozen fresh anchors, its first quiet state was the exact next
+> prime on `93.983%`; the first two contained it on `99.650%`, and the first three on `99.967%`. All three registered
+> ARA coverage thresholds transferred; the deliberately severe control margin failed because the three-state list
+> beat a `p<=29` wheel by `37.60`, not 50, percentage points. Corrected independent validation passed `16/16`; the
+> original validator-bound failure is preserved. Phase A still contained `780` to `48,817` lower children.
+> **Current claim:** a complete dominant child parent is a prospectively supported, strong ranked prime locator;
+> a universally exact three-state rule, three-cheap-operation algorithm, speed improvement or new prime theorem is
+> **NOT SUPPORTED**. Phi carrier/leak claims in PN11–PN13 were also not supported. The protected 87-bit
 > anchor and p31 capstone remain sealed. Full two-output record:
 > `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
+
+> **Prime post-capstone orientation amendment (22 July 2026; PN27-PN30):** PN27's frozen exact-fit child lift produced
+> `9.010%` one-shot prime hits and a small permutation advantage (`p=0.0144`) that missed its `p<0.01` strong gate.
+> PN28 mixed dimensionless ARA displacement with integer offsets and is retained as a negative result for that
+> superseded interpretation. PN29 correctly kept all calculations relational and found strong separation from all
+> composites (`AUC=0.8635`) but none beyond its declared child-factor screen (`AUC=0.4442` against unresolved
+> composites). It also held child-pair directions fixed, omitting the framework's singularity flips. PN30 corrected
+> that omission on a fresh 500-number interval using normalized phase `(N mod w)/w`: unresolved AUC improved from
+> the same-interval static value `0.5301` to `0.5663`, but the frozen one-sided test missed significance
+> (`p=0.06199`). Post-hoc, individual pair magnitudes were almost unchanged; the candidate gain came from stronger
+> signed AB/BA cancellation at prime nodes. **Current claim:** dynamic child orientation retains relational
+> information that static flattening discards, but prime-specific residual separation remains suggestive and
+> unreplicated; no prime generator, certification shortcut or new theorem is supported. Latest report:
+> `analysis/primes/PN30_DYNAMIC_RELATIONAL_FLIP_REPORT.md`.
+
+> **Five-independent-wave amendment (22 July 2026; PN31):** the user removed the degenerate wave `1` and rejected
+> fixed child pairs. PN31 froze the five separate handover coordinates `{3,5,9,11,13}` on a new 500-number odd
+> interval before direct trial-division labels. Against 96 composites evading all five child divisors, the nearest
+> child's distance was null (`AUC=0.5279`, `p=0.2941`), its identity was null (`p=0.8839`), every individual wave
+> was null after Holm correction, and approaching-wave count was null (`p=0.9525`). The complete closest-to-farthest
+> five-wave ordering differed at the frozen gate (`TV=0.6728`, `p=0.00390`). Post-hoc, no single pairwise ordering
+> survived correction. **Current claim:** one fresh interval supports ordered joint child structure, not a dominant
+> child or pair; the sparse high-dimensional order statistic requires unchanged replication and supplies no prime
+> generator or certification rule. Report: `analysis/primes/PN31_FIVE_INDEPENDENT_HANDOVER_REPORT.md`.
+
+> **Double Information³ lock replication (22 July 2026; PN32):** the proposed child/parent hexagon was translated
+> before labels as two retained triangles, `(A_c,B_c,J_c)` at `N` and `(A_p,B_p,J_p)` at the doubled rung `2N`.
+> On the next untouched 500-number interval, PN31's five-wave order did not replicate (`TV=0.6057`, `p=0.2244`),
+> parent order was null (`p=0.8023`), and the full child-to-parent order rearrangement was strongly null
+> (`TV=0.1895`, permutation-null mean `0.2606`, `p=0.9684`). The exact doubling map was constrained to 27 observed
+> rearrangement classes, but those classes were shared by primes and unresolved composites. **Current claim:** PN31
+> is unreplicated; `N -> 2N` supplies real modular closure but not a prime-specific double lock. Report:
+> `analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
+
+> **Seeded-fill spacing amendment (22 July 2026; PN33):** before target prime gaps were summarized, PN33 froze
+> `D(p)=product_{r<=p} r/(r-1)` and local `x_b(p)=2 log(D(p)/D(b))/log(2)` as the operational seed -> fill ->
+> completion -> reset coordinate. From primary baseline prime `10,007`, completion was the first gate at
+> `102,474,149`, scoring `5,894,554` gaps. Eight band medians rose `8,8,10,10,10,12,12,12`
+> (`rho=0.9449`); both scale checks had the same direction. The raw endpoint ratio was `1.5`, while the corrected
+> 10,000-sample 64-gap moving-block interval was `[1.5,2.0]`: it excludes flat `1` and contains the frozen target
+> `2` only at its upper boundary. This passes the registered **SUPPORTED SPACING EXPRESSION** rule. However, ARA
+> log-MAE `0.082590` beat PNT `0.083105` by only `0.62%`, missing the frozen `5%` ARA-specific threshold.
+> **Current claim:** PN33 is a strong preregistered crosswalk from ARA seed/fill/reset language to established
+> prime-density and prime-gap scaling; it is not new prime mathematics, a prime generator, literal hexagon proof or
+> Phi-causation result. The original invalid block-median bootstrap is preserved with a correction audit. Report:
+> `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
+
+> **Remaining-fill rank-budget amendment (22 July 2026; PN34):** PN34 prospectively joined PN26's complete Phase A
+> quiet-state list to the PN33-style inverse-density fill of its omitted Phase B parent. Before opening truth on
+> 6,000 fresh anchors at three unused scales, it froze `R_B=product p/(p-1)`,
+> `x_B=2 log(R_B)/log(2)`, `pi_1=1/R_B` and `pi_k=1-(1-pi_1)^k`. All nine scale-by-depth calibration tolerances
+> passed, and all six two-/three-reading coverage gates passed. Observed top-1 coverage was `92.85%`, `95.45%`,
+> `95.25%`; top-2 was `99.45%`, `99.70%`, `99.65%`; top-3 was `99.95%`, `100.00%`, `99.90%`. The exact predicted
+> scale ordering failed because middle and high swapped by `0.20` percentage points. Fill-prior log loss improved
+> only `0.62%` over the frozen pooled PN26 prior. **Current claim:** the omitted-parent fill is a prospectively useful
+> population rank-budget calibration and a clean ARA/sieve-density crosswalk. It is constant within a cohort, so it
+> does not identify the individual false survivor, eliminate the child gates, improve asymptotic complexity or create
+> a new prime theorem. Test verdict **PARTIAL**; canonical rating **SUGGESTIVE `[pre-registered]`**. Report:
+> `analysis/primes/PN34_FILL_RANK_BUDGET_REPORT_2026-07-22.md`.
+
+> **Same-scale golden-cross amendment (22 July 2026; PN35):** the user corrected the eight observed distinctions as
+> decompressed Phase A/Phase B children of one larger ARA whose full total is `2`; doubling is the actual parent
+> singularity and `2 -> 0` flip. PN35 preserved that geometry and prospectively placed an unfitted `1/phi^2`
+> handover on the same circumference across `196,608` sealed candidates in six fresh octave rungs. The registered
+> prime preference failed: lane-stratified AUC `0.497180`, 95% whole-cell interval `[0.493772,0.500420]`, nearest-two
+> capture `24.4753%` versus `25%`, and circular-shift p-values `0.9455`/`0.9883`. The no-flip model scored `0.498390`;
+> the best frozen rival was the 36-degree rule at `0.503130`. All five gates failed. **Current claim:** the exact
+> eight anti-pair lanes remain a valid total-2 arithmetic crosswalk, but the added constant same-scale Phi crossing
+> does not locate primes. Verdict **NOT SUPPORTED `[pre-registered]`**. Report:
+> `analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_REPORT_2026-07-22.md`. Post-hoc, Dylan identified the 36-degree and
+> pentagon controls above the raw Phi carrier as a possible Phi-time -> pentagonal-structure conversion signature.
+> PN35 did not test that operator and all three estimates lie inside the shift-null range; it is separately recorded
+> in `analysis/primes/PN35_POSTHOC_PHI_TO_PENTAGON_CONVERSION_NOTE_2026-07-22.md` for a future frozen test.
+
+> **Phi-to-pentagon conversion amendment (22 July 2026; PN36):** PN36 prospectively translated that post-PN35
+> observation into one explicit operator: the continuous `1/phi^2` carrier was snapped to its nearest fivefold
+> structural vertex, with its anti-phase crossing and the registered octave flip. Across `196,608` sealed candidates
+> in six untouched rungs, converted-five AUC was `0.499851`, 95% interval `[0.496091,0.503393]`, and nearest-two
+> capture was `24.8858%` versus `25%`. Shift p-values were `0.5953`/`0.7198`. It lost to raw Phi, direct pentagon,
+> the fourfold conversion and the no-flip fivefold model; all five gates failed. **Current claim:** nearest-vertex
+> fivefold quantisation is a clear mathematical rendering of the proposed conversion, but it does not locate primes
+> on these rungs. Verdict **NOT SUPPORTED `[pre-registered]`**. Report:
+> `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
 
 > **Pre-test geometry probability calibration (21 July 2026):** the provisional provenance-ledger strict tally is
 > `15` A-tier clean hits and `31` misses/refutations (`15/46 = 0.32609`). An exact binomial sensitivity calculation
@@ -161,7 +259,7 @@ These claims should not be used as strong public headlines until rerun cleanly.
 | "Nasal breathing predicts ENSO" | The 2026-05-23 nasal/ENSO test supports coupled-pair geometry and a transition prior, not direct point-prediction dominance. Short horizons are still persistence-dominated, and 18-24 month results need local ENSO/SOI state. The later delayed-feeder and boundary-distance tests improved the 12-month branch, but neither reaches high-correlation exact prediction. | "Nasal-cycle geometry is an external paired-system prior that partially transfers to ENSO, especially around the 12-month transition window." |
 | "The tick formula now solves prediction" | The strict formula tick helps Solar at 24 and 60 months but loses on ENSO and ECG in most horizons. Energy-aware variable recursion is better, but lag/direct controls still win several horizons. | "The required variables carry signal; the lawful tick operator is the current bottleneck." |
 | "Same formula works on every domain" | Some scripts fail, some outputs are exploratory, and several claims are trackers rather than blind generators. | "The same framework is being tested across domains, with mixed but interesting results." |
-| "ARA predicts the next prime in three steps" | PN17–PN19 can be written as three conceptual stages and sealed exact fresh-anchor primes, but their first stage retains tens of thousands of lower-prime children. PN20/PN21's literal two-child compressions failed; PN23 proves only a lossless `2:1` anti-pair compression. | "ARA gives an exact three-stage representation of established sieve/factor methods; no three-cheap-operation next-prime algorithm or complexity improvement has been demonstrated." |
+| "ARA predicts the next prime in three steps" | PN17–PN19 can be written as three conceptual stages and sealed exact fresh-anchor primes, but their first stage retains tens of thousands of lower-prime children. PN20/PN21's literal two-child compressions failed; PN23 proves a lossless `2:1` anti-pair compression. PN24's nearest-child cascade had a median two visible handovers but reached the exact prime within three candidate states on only `63.65%`; PN25's local pair-ridge coordinate had no dynamic signal. PN26 corrected the missing object to one complete lower parent: prospectively, its first/first-two/first-three quiet states contained the exact next prime on `93.983%` / `99.650%` / `99.967%` of 6,000 anchors, while retaining 780–48,817 child gates. PN34 then calibrated that ranked depth on 6,000 new anchors: all nine coverage tolerances passed, but three cases still lay beyond rank three and the coordinate was constant within each scale. | "ARA's complete dominant child parent is a strong prospective ranked next-prime locator, and omitted-parent fill calibrates how many readings to retain. It does not identify the individual winner, is not universally exact, and has not reduced the hidden sieve work to three arithmetic operations or improved asymptotic complexity." |
 
 ## Speculative Interpretation
 

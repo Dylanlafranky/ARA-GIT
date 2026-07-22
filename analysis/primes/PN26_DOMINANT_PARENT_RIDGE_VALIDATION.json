@@ -1,0 +1,241 @@
+{
+  "test_id": "PN26/DOMINANT-PARENT-RIDGE-LOCATOR/VALIDATION/v1",
+  "created_utc": "2026-07-21T23:58:42.889421+00:00",
+  "status": "IMPLEMENTATION FAILURE",
+  "source_hashes": {
+    "freeze_manifest_sha256": "6565f803510c5a9968e992145f8c05039ce930e3c76bf68258274a81096db793",
+    "prediction_csv_sha256": "e87db543fba85d9d891b144c0eb12f93b380594854015d9832bbe1cf8760607c",
+    "primary_json_sha256": "8fc5b210ffe71523403d22104883e4dee8b5baf6b79aeb55de37ca6f658b942b",
+    "validated_rows_sha256": "a39621f6e5e22b26309fbbd4f6baf66ccf1a4244e6996f520b4d68fa2eb1b19e"
+  },
+  "registered_predictions": {
+    "P1_top1_at_least_90_percent": true,
+    "P2_top2_at_least_99_percent": true,
+    "P3_top3_at_least_99_9_percent": true,
+    "P4_top3_beats_p29_by_50pp": false,
+    "P5_frame_exact_zero_variance": true,
+    "P6_reconstruction_and_truth_checks": false
+  },
+  "summaries": [
+    {
+      "cohort": "low",
+      "n": 2000,
+      "rank_counts": {
+        "1": 1848,
+        "2": 145,
+        "3": 6,
+        "5": 1
+      },
+      "phase_a_top1_successes": 1848,
+      "phase_a_top1_rate": 0.924,
+      "phase_a_top1_wilson95": [
+        0.9115560319521683,
+        0.9348183119533293
+      ],
+      "p29_top1_rate": 0.355,
+      "odd_top1_rate": 0.1245,
+      "phase_a_top2_successes": 1993,
+      "phase_a_top2_rate": 0.9965,
+      "phase_a_top2_wilson95": [
+        0.9927928037467583,
+        0.9983035683029576
+      ],
+      "p29_top2_rate": 0.5845,
+      "odd_top2_rate": 0.23,
+      "phase_a_top3_successes": 1999,
+      "phase_a_top3_rate": 0.9995,
+      "phase_a_top3_wilson95": [
+        0.9971731374967338,
+        0.9999117322692944
+      ],
+      "p29_top3_rate": 0.745,
+      "odd_top3_rate": 0.32,
+      "mean_phase_a_rank": 1.0805,
+      "max_phase_a_rank": 5
+    },
+    {
+      "cohort": "middle",
+      "n": 2000,
+      "rank_counts": {
+        "1": 1881,
+        "2": 111,
+        "3": 8
+      },
+      "phase_a_top1_successes": 1881,
+      "phase_a_top1_rate": 0.9405,
+      "phase_a_top1_wilson95": [
+        0.9292636881836284,
+        0.9500473931615877
+      ],
+      "p29_top1_rate": 0.236,
+      "odd_top1_rate": 0.0795,
+      "phase_a_top2_successes": 1992,
+      "phase_a_top2_rate": 0.996,
+      "phase_a_top2_wilson95": [
+        0.9921265357039621,
+        0.9979717533930348
+      ],
+      "p29_top2_rate": 0.431,
+      "odd_top2_rate": 0.149,
+      "phase_a_top3_successes": 2000,
+      "phase_a_top3_rate": 1.0,
+      "phase_a_top3_wilson95": [
+        0.9980829527187469,
+        0.9999999999999998
+      ],
+      "p29_top3_rate": 0.576,
+      "odd_top3_rate": 0.2225,
+      "mean_phase_a_rank": 1.0635,
+      "max_phase_a_rank": 3
+    },
+    {
+      "cohort": "high",
+      "n": 2000,
+      "rank_counts": {
+        "1": 1840,
+        "2": 140,
+        "3": 16,
+        "4": 4
+      },
+      "phase_a_top1_successes": 1840,
+      "phase_a_top1_rate": 0.92,
+      "phase_a_top1_wilson95": [
+        0.9072892548014819,
+        0.9311004254822657
+      ],
+      "p29_top1_rate": 0.234,
+      "odd_top1_rate": 0.0795,
+      "phase_a_top2_successes": 1980,
+      "phase_a_top2_rate": 0.99,
+      "phase_a_top2_wilson95": [
+        0.9846040615409247,
+        0.9935172321234472
+      ],
+      "p29_top2_rate": 0.4005,
+      "odd_top2_rate": 0.15,
+      "phase_a_top3_successes": 1996,
+      "phase_a_top3_rate": 0.998,
+      "phase_a_top3_wilson95": [
+        0.994868648214923,
+        0.9992219726929489
+      ],
+      "p29_top3_rate": 0.55,
+      "odd_top3_rate": 0.214,
+      "mean_phase_a_rank": 1.092,
+      "max_phase_a_rank": 4
+    },
+    {
+      "cohort": "pooled",
+      "n": 6000,
+      "rank_counts": {
+        "1": 5569,
+        "2": 396,
+        "3": 30,
+        "4": 4,
+        "5": 1
+      },
+      "phase_a_top1_successes": 5569,
+      "phase_a_top1_rate": 0.9281666666666667,
+      "phase_a_top1_wilson95": [
+        0.9213555203706376,
+        0.9344299022193241
+      ],
+      "p29_top1_rate": 0.275,
+      "odd_top1_rate": 0.0945,
+      "phase_a_top2_successes": 5965,
+      "phase_a_top2_rate": 0.9941666666666666,
+      "phase_a_top2_wilson95": [
+        0.9918984160810749,
+        0.9958025484884994
+      ],
+      "p29_top2_rate": 0.472,
+      "odd_top2_rate": 0.17633333333333334,
+      "phase_a_top3_successes": 5995,
+      "phase_a_top3_rate": 0.9991666666666666,
+      "phase_a_top3_wilson95": [
+        0.998050567298554,
+        0.9996439989361423
+      ],
+      "p29_top3_rate": 0.6236666666666667,
+      "odd_top3_rate": 0.25216666666666665,
+      "mean_phase_a_rank": 1.0786666666666667,
+      "max_phase_a_rank": 5
+    }
+  ],
+  "cross_rung_frame": {
+    "value": 3.5,
+    "variance": 0.0,
+    "exact_all_rows": true,
+    "interpretation": "scale/context coordinate only; it cannot rank targets because it is constant"
+  },
+  "checks": [
+    {
+      "name": "low: anchors reproduced",
+      "passed": true
+    },
+    {
+      "name": "low: primary predictions reconstructed",
+      "passed": true
+    },
+    {
+      "name": "low: actual primes pass Miller-Rabin",
+      "passed": true
+    },
+    {
+      "name": "low: TE-ARA closes to two",
+      "passed": true
+    },
+    {
+      "name": "middle: anchors reproduced",
+      "passed": true
+    },
+    {
+      "name": "middle: primary predictions reconstructed",
+      "passed": true
+    },
+    {
+      "name": "middle: actual primes pass Miller-Rabin",
+      "passed": true
+    },
+    {
+      "name": "middle: TE-ARA closes to two",
+      "passed": true
+    },
+    {
+      "name": "high: anchors reproduced",
+      "passed": true
+    },
+    {
+      "name": "high: primary predictions reconstructed",
+      "passed": false
+    },
+    {
+      "name": "high: actual primes pass Miller-Rabin",
+      "passed": true
+    },
+    {
+      "name": "high: TE-ARA closes to two",
+      "passed": true
+    },
+    {
+      "name": "all 6,000 rows validated",
+      "passed": true
+    },
+    {
+      "name": "all actual primes occur within frozen offset",
+      "passed": true
+    },
+    {
+      "name": "protected 87-bit anchor unused",
+      "passed": true
+    },
+    {
+      "name": "3.5 frame exact and constant",
+      "passed": true
+    }
+  ],
+  "checks_passed": 15,
+  "checks_total": 16,
+  "protected_87_bit_anchor_used": false,
+  "scientific_boundary": "Phase A is a strong partial sieve containing many prime children. Ranked visible states are not the same as arithmetic operation count, and exact primality still requires the omitted Phase B/full truth relation."
+}

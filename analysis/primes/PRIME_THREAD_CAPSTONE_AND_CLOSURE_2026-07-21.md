@@ -1,8 +1,28 @@
-# Prime thread capstone and closure — PN1 through PN23
+# Prime thread capstone and closure — PN1 through PN26
 
-**Closed/parked:** 21 July 2026  
+**Closed/parked:** 22 July 2026
 **Orientation:** factor/sieve connection grows upward through later prime gates; every A/B label is local to its declared modulus, factor boundary or gap pair.  
-**Thread disposition:** **PARKED** after recording; exact crosswalks retained, compact prime-prediction claim not supported.
+**Thread disposition:** **PARKED** after PN26 bounded resumption; dominant-parent ranked locator supported, exact cheap prime rule not supported.
+
+> **Post-capstone note, 22 July 2026:** PN27-PN30 preserve this closure fence. The latest fidelity correction restores
+> singularity-driven child-pair flips using normalized phase. It produced a suggestive but non-significant gain
+> against unresolved composites (`AUC 0.5301 -> 0.5663`, `p=0.06199`). Read
+> `PN30_DYNAMIC_RELATIONAL_FLIP_REPORT.md`. PN31 then removed wave `1` and all fixed pairs: the closest child was
+> null, while the complete five-child order passed one fresh frozen test (`p=0.00390`). Read
+> `PN31_FIVE_INDEPENDENT_HANDOVER_REPORT.md`. No prime generator, shortcut certification or new theorem was established.
+>
+> **PN32 replication correction:** the proposed hexagon was frozen as two complete Information³ triangles at `N`
+> and `2N`. PN31's order failed unchanged replication (`p=0.2244`), and the full child-to-parent rearrangement was
+> null (`p=0.9684`). The doubling map has constrained arithmetic closure but no prime-specific separation here. Read
+> `PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
+>
+> **PN33 seeded-fill crosswalk:** a new frozen test treated the first prime after a completed density generation as
+> a seed and followed inverse survivor density until it doubled. Primary gap medians rose
+> `8,8,10,10,10,12,12,12` (`rho=0.9449`); the point endpoint ratio was `1.5`, with corrected moving-block 95% CI
+> `[1.5,2.0]`. This passes the registered spacing-expression rule at its upper boundary. ARA and PNT log-MAE were
+> `0.082590` and `0.083105`, so the `0.62%` difference failed the 5% ARA-specific gate. PN33 therefore adds a strong
+> preregistered scale-law crosswalk, not a prime generator or new theorem. Read
+> `PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
 
 ## User framing preserved
 
@@ -16,7 +36,8 @@ The final tests separated three possible meanings of that proposal:
 
 1. **geometric recursion:** does the same reversible relation recur at larger sieve rungs? **Yes, exactly;**
 2. **state compression:** can one anti-pair representative reconstruct its opposite? **Yes, exactly, at 2:1;**
-3. **prime-location compression:** can two small child values locate the next prime in two or three cheap operations? **Not supported.**
+3. **prime-location compression:** two small child values do not work, but one complete lower parent is a strong
+   three-state ranked locator; exact recovery in three cheap operations remains **not supported.**
 
 ## Answer first
 
@@ -33,6 +54,12 @@ The decisive compact tests then failed: the largest two numerical children and t
 square-root boundary did not retain the full prime state. PN23 recovered the exact safe compression: one member of
 each reversible residue pair reconstructs the other, halving stored lanes, while each new prime gate still produces
 `p-1` distinct child pairs.
+
+PN26 then corrected “largest child” to mean the complete child parent rather than one factor label. On 6,000 fresh,
+prospectively frozen anchors, the first Phase A quiet state was exact on `93.983%`; the first two contained the prime
+on `99.650%`, and the first three on `99.967%`. That is strong ranked compression of the visible state. It still
+retained 780–48,817 lower children and missed two primes beyond rank three, so it is neither universally exact nor
+constant-cost.
 
 Therefore the honest endpoint is:
 
@@ -100,6 +127,11 @@ Therefore the honest endpoint is:
 | PN21 | Gates immediately below/above `sqrt(n)` retained effectively 0% parent variance and chance AUC. | Development **NULL**. |
 | PN22 | Proposed odd-lattice formula exactly enumerated four mod-14 lanes and lifted over raw odds, but equalled its residue-matched control. | Exact wheel crosswalk; not prime-specific. |
 | PN23 | One representative per `r↔M-r` pair reconstructed every child lane through held-out `p=17`: 92,160 residues, zero errors, 40/40 validation. | Exact lossless **2:1** anti-pair compression. |
+| PN24 | Nearest surviving lower/upper children were advanced only when a new factor gate killed the upper child. All 2,007 paths reached the exact next prime; 63.65% of the 2,000-anchor sample closed within three candidate states, with median 2 handovers but 6,336 non-base gates crossed. | **PARTIAL structural support**; exact event crosswalk, frozen 90% compact threshold failed. |
+| PN25 | Corrected pair odds mapped exactly to the total-2 ARA coordinate and three pair classes preserved six-lane scores, but 6,000 fresh anchors gave closeness/handover `r=+0.003335`, `p=0.6110`, non-monotone closure rates and 0/4 dynamic predictions. | **GEOMETRIC-ONLY SUPPORT / DYNAMIC NULL**; lateral wheel coordinate is not a vertical handover clock. |
+| PN26 | Replaced the missing vertical scalar with one complete lower Phase A parent. On 6,000 prospectively frozen anchors, its first/first-two/first-three quiet states contained the exact next prime on `93.983%` / `99.650%` / `99.967%`; only ranks 4 and 5 occurred once each. The frozen 50-point advantage over a `p<=29` wheel failed (37.60 points). | **PARTIAL DOMINANT-PARENT SUPPORT**; strong transferred ranked locator, still a child-heavy partial sieve. |
+| PN33 | Froze inverse survivor density as a local seed/fill/reset coordinate. Eight prime-gap medians increased `8,8,10,10,10,12,12,12`; the corrected endpoint interval `[1.5,2.0]` contained the doubling target, while ARA beat PNT log-MAE by only `0.62%`. | **SUPPORTED SPACING EXPRESSION**; established density/gap crosswalk, no ARA-specific residual support. |
+| PN34 | Applied the same inverse-density operator to PN26's omitted Phase B parent and froze rank-coverage priors on 6,000 new anchors. All `9/9` calibration and `6/6` budget gates passed; the exact scale-order endpoint failed when middle/high swapped by `0.20` points. | **PARTIAL / SUGGESTIVE**; population rank-budget explanation, not an individual miss classifier. |
 
 ## The three-stage statement
 
@@ -118,7 +150,17 @@ square-root boundary. Calling its output one parent number, mask or wave does no
 
 The missing mathematical object would be a bounded-size recursively computable sufficient statistic `Z(N)` such
 that the exact first quiet offset follows from `Z(N)` without reconstructing the full child web. PN20 and PN21 reject
-the two tested two-child definitions of `Z`; PN23 proves only the reversible factor-two compression.
+the two tested two-child definitions of `Z`; PN23 proves the reversible factor-two compression. PN24 proves that the
+visible release lineage is often short, but locating its release gates still carries the lower-factor work.
+PN26 proves prospectively that PN19's complete lower parent is an excellent **lossy ranked statistic**: one state is
+right about 94% of the time and three cover 99.967%. The remaining exact `Z(N)` problem is now sharply localized to
+the omitted upper-band composites; PN26 does not compress those residual gates away.
+
+PN34 now quantifies that residual at the population level. For omitted parent `B`,
+`R_B=product_(p in B)p/(p-1)` and `pi_k=1-(1-1/R_B)^k` prospectively calibrated how many PN26 states to retain.
+Because `R_B` is constant inside a scale cohort, it still does not identify which individual first state is false.
+The bounded sufficient-statistic problem therefore remains open: rank **depth** is calibrated, but rank **winner** is
+not compressed.
 
 ## Final spontaneous formula probes
 
@@ -165,6 +207,29 @@ These probes are retained as one miss/miss/hit sequence. The formula was not alt
    can close a decision, while arbitrary scalar averaging destroys location.
 5. **Fractal reuse is a rule-reuse claim, not a free-computation claim.** The same lift law can recur while the number
    of children grows.
+6. **A complete child is different from one child label.** PN20's two factor labels failed; PN26's whole lower parent
+   transferred at 93.983% first-state accuracy because it retained its descendants.
+7. **Frame and locator are separate coordinates.** The `3.5` cross-rung route remained exact but constant. The child
+   quiet-state pattern supplied the changing integer correction.
+
+## PN35 post-capstone same-scale correction
+
+The later correction that eight visible distinctions are decompressed children of one parent total `2`, with
+doubling at the actual `2 -> 0` singularity, is retained. PN35 tested an unfitted `1/phi^2` handover on that same
+circumference over `196,608` sealed candidates. Golden AUC was `0.497180` and nearest-two capture `24.4753%`; all
+five preregistered gates failed. Therefore the exact eight anti-pair closure remains a structural crosswalk, while
+the constant same-scale Phi prime locator is **NOT SUPPORTED**. See
+`analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_REPORT_2026-07-22.md`.
+
+## PN36 post-capstone conversion test
+
+PN36 then tested the post-PN35 idea that raw Phi is a moving/time carrier whose structured appearance is
+pentagonal. Before labels, the carrier was frozen through a nearest-fivefold-vertex conversion and compared with
+raw Phi, direct pentagon, direct 36 degrees and matched non-fivefold conversions on six untouched rungs. Converted
+fivefold AUC was `0.499851`, nearest-two capture `24.8858%`, and all five registered gates failed. The no-flip
+fivefold control (`0.503772`) exceeded the registered flipped form, with a wholly negative flip-minus-no-flip
+interval. The exact nearest-vertex conversion is therefore **NOT SUPPORTED** as a prime locator. See
+`analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`.
 
 ## Resume conditions
 
@@ -191,4 +256,10 @@ as evidence that ARA has improved prime computation.
 - `analysis/primes/PN21_RIDGE_STRADDLING_TWO_CHILD_REPORT.md`
 - `analysis/primes/PN22_ODD_LATTICE_ARA_CANDIDATE_REPORT.md`
 - `analysis/primes/PN23_ANTI_PAIR_FRACTAL_LIFT_REPORT.md`
+- `analysis/primes/PN24_NEAREST_HANDOVER_CASCADE_REPORT.md`
+- `analysis/primes/PN25_PAIR_RIDGE_COMPRESSION_REPORT.md`
+- `analysis/primes/PN26_DOMINANT_PARENT_RIDGE_LOCATOR_REPORT.md`
+- `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`
+- `analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_REPORT_2026-07-22.md`
+- `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`
 - `analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md`

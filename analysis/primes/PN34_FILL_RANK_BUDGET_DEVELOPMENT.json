@@ -1,0 +1,148 @@
+{
+  "test_id": "PN34/FILL-RANK-BUDGET/development",
+  "created_utc": "2026-07-22T10:04:45.536353+00:00",
+  "source": "PN26_DOMINANT_PARENT_RIDGE_VALIDATED_ROWS_V1_1.csv",
+  "source_status": "already opened PN26 development evidence",
+  "formula": {
+    "remaining_fill_ratio": "R_B=product_{p in B} p/(p-1)",
+    "remaining_fill_coordinate": "x_B=2 log(R_B)/log(2)",
+    "top1_prior": "pi_1=1/R_B=2^(-x_B/2)",
+    "rank_budget": "pi_k=1-(1-pi_1)^k"
+  },
+  "cohorts": [
+    {
+      "cohort": "low",
+      "scale_anchor": 71000000,
+      "rows": 2000,
+      "phase_a_count": 780,
+      "phase_b_count": 647,
+      "remaining_fill_ratio": 1.0786657807198503,
+      "remaining_fill_x": 0.21849584422028584,
+      "predicted_top1": 0.9270712187909099,
+      "predicted_top2": 0.9946813928713567,
+      "predicted_top3": 0.9996121204643781,
+      "observed_top1": 0.924,
+      "observed_top2": 0.9965,
+      "observed_top3": 0.9995,
+      "observed_wilson95": [
+        [
+          0.9115560319521683,
+          0.9348183119533293
+        ],
+        [
+          0.9927928037467583,
+          0.9983035683029576
+        ],
+        [
+          0.9971731374967338,
+          0.9999117322692944
+        ]
+      ],
+      "absolute_errors": [
+        0.00307121879090988,
+        0.0018186071286433458,
+        0.00011212046437802936
+      ],
+      "rank_counts_1_to_5": [
+        1848,
+        145,
+        6,
+        0,
+        1
+      ]
+    },
+    {
+      "cohort": "middle",
+      "scale_anchor": 71000000000,
+      "rows": 2000,
+      "phase_a_count": 17045,
+      "phase_b_count": 15010,
+      "remaining_fill_ratio": 1.0569355568476089,
+      "remaining_fill_x": 0.1597748316802821,
+      "predicted_top1": 0.9461314774786993,
+      "predicted_top2": 0.9970981822813721,
+      "predicted_top3": 0.9998436833668713,
+      "observed_top1": 0.9405,
+      "observed_top2": 0.996,
+      "observed_top3": 1.0,
+      "observed_wilson95": [
+        [
+          0.9292636881836284,
+          0.9500473931615877
+        ],
+        [
+          0.9921265357039621,
+          0.9979717533930348
+        ],
+        [
+          0.9980829527187469,
+          0.9999999999999998
+        ]
+      ],
+      "absolute_errors": [
+        0.005631477478699298,
+        0.001098182281372151,
+        0.0001563166331286503
+      ],
+      "rank_counts_1_to_5": [
+        1881,
+        111,
+        8,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "high",
+      "scale_anchor": 710000000000,
+      "rows": 2000,
+      "phase_a_count": 48817,
+      "phase_b_count": 43524,
+      "remaining_fill_ratio": 1.052056200477192,
+      "remaining_fill_x": 0.14642354991454717,
+      "predicted_top1": 0.950519563067467,
+      "predicted_top2": 0.9975516863609656,
+      "predicted_top3": 0.9998788563713927,
+      "observed_top1": 0.955,
+      "observed_top2": 0.997,
+      "observed_top3": 0.9995,
+      "observed_wilson95": [
+        [
+          0.9450093040187729,
+          0.9632461829552866
+        ],
+        [
+          0.9934700849260646,
+          0.9986243700763698
+        ],
+        [
+          0.9971731374967338,
+          0.9999117322692944
+        ]
+      ],
+      "absolute_errors": [
+        0.004480436932532972,
+        0.0005516863609655864,
+        0.00037885637139267736
+      ],
+      "rank_counts_1_to_5": [
+        1910,
+        84,
+        5,
+        1,
+        0
+      ]
+    }
+  ],
+  "pooled_observed": [
+    0.9398333333333333,
+    0.9965,
+    0.9996666666666667
+  ],
+  "maximum_absolute_error_by_depth": [
+    0.005631477478699298,
+    0.0018186071286433458,
+    0.00037885637139267736
+  ],
+  "interpretation": "The PN33-style inverse-density fill of PN26's omitted Phase B parent is a no-fit population prior for how many Phase A quiet candidates must be retained. It is not an individual candidate classifier."
+}

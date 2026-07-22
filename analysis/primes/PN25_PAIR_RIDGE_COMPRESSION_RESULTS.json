@@ -1,0 +1,426 @@
+{
+  "test_id": "PN25/PAIR-RIDGE-COMPRESSION/v1",
+  "created_utc": "2026-07-21T23:18:57.491854+00:00",
+  "protocol": "PN25_PAIR_RIDGE_COMPRESSION_PROTOCOL_v1_FROZEN.md",
+  "status": "GEOMETRIC-ONLY SUPPORT / DYNAMIC NULL",
+  "data": {
+    "development_source": "PN24_NEAREST_HANDOVER_CASCADE_ANCHORS.csv",
+    "development_n": 2000,
+    "target_ranges": [
+      {
+        "scale": "low",
+        "low": 61000000,
+        "high_exclusive": 61500000,
+        "seed": 25001,
+        "n": 2000
+      },
+      {
+        "scale": "middle",
+        "low": 61000000000,
+        "high_exclusive": 61000500000,
+        "seed": 25002,
+        "n": 2000
+      },
+      {
+        "scale": "high",
+        "low": 610000000000,
+        "high_exclusive": 610000500000,
+        "seed": 25003,
+        "n": 2000
+      }
+    ],
+    "target_n": 6000,
+    "target_distinct_next_prime_labels": 5536,
+    "protected_87_bit_anchor_used": false
+  },
+  "exact_coordinate_checks": [
+    {
+      "pair": [
+        1,
+        13
+      ],
+      "odds": "1/13",
+      "converted_A": "1/7",
+      "converted_B": "13/7",
+      "expected_A": "1/7",
+      "conversion_exact": true,
+      "te_ara_sum_exact": true,
+      "mirror_closeness_exact": true,
+      "mirror_orientation_opposite": true
+    },
+    {
+      "pair": [
+        3,
+        11
+      ],
+      "odds": "3/11",
+      "converted_A": "3/7",
+      "converted_B": "11/7",
+      "expected_A": "3/7",
+      "conversion_exact": true,
+      "te_ara_sum_exact": true,
+      "mirror_closeness_exact": true,
+      "mirror_orientation_opposite": true
+    },
+    {
+      "pair": [
+        5,
+        9
+      ],
+      "odds": "5/9",
+      "converted_A": "5/7",
+      "converted_B": "9/7",
+      "expected_A": "5/7",
+      "conversion_exact": true,
+      "te_ara_sum_exact": true,
+      "mirror_closeness_exact": true,
+      "mirror_orientation_opposite": true
+    },
+    {
+      "pair": [
+        7,
+        7
+      ],
+      "odds": "1",
+      "converted_A": "1",
+      "converted_B": "1",
+      "expected_A": "1",
+      "conversion_exact": true,
+      "te_ara_sum_exact": true,
+      "excluded_by_gate_7": true
+    }
+  ],
+  "exact_coordinate_pass": true,
+  "group_summaries": [
+    {
+      "scale": "low",
+      "pair_representative": 1,
+      "odds": "1/13",
+      "closeness": "1/7",
+      "n": 565,
+      "mean_handovers": 1.9256637168141593,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.1256637168141593,
+      "three_state_rate_Y3": 0.7026548672566372,
+      "mean_delta_closeness": 0.26245259165613144
+    },
+    {
+      "scale": "low",
+      "pair_representative": 3,
+      "odds": "3/11",
+      "closeness": "3/7",
+      "n": 591,
+      "mean_handovers": 2.0,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.1218274111675127,
+      "three_state_rate_Y3": 0.6751269035532995,
+      "mean_delta_closeness": 0.00145032632342277
+    },
+    {
+      "scale": "low",
+      "pair_representative": 5,
+      "odds": "5/9",
+      "closeness": "5/7",
+      "n": 844,
+      "mean_handovers": 1.9312796208530805,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.1338862559241706,
+      "three_state_rate_Y3": 0.6966824644549763,
+      "mean_delta_closeness": -0.2802979011509817
+    },
+    {
+      "scale": "middle",
+      "pair_representative": 1,
+      "odds": "1/13",
+      "closeness": "1/7",
+      "n": 580,
+      "mean_handovers": 2.2327586206896552,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.07758620689655173,
+      "three_state_rate_Y3": 0.6362068965517241,
+      "mean_delta_closeness": 0.2600985221674877
+    },
+    {
+      "scale": "middle",
+      "pair_representative": 3,
+      "odds": "3/11",
+      "closeness": "3/7",
+      "n": 575,
+      "mean_handovers": 2.196521739130435,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.10782608695652174,
+      "three_state_rate_Y3": 0.6295652173913043,
+      "mean_delta_closeness": 0.001987577639751553
+    },
+    {
+      "scale": "middle",
+      "pair_representative": 5,
+      "odds": "5/9",
+      "closeness": "5/7",
+      "n": 845,
+      "mean_handovers": 2.2650887573964495,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.07692307692307693,
+      "three_state_rate_Y3": 0.6189349112426036,
+      "mean_delta_closeness": -0.28605240912933216
+    },
+    {
+      "scale": "high",
+      "pair_representative": 1,
+      "odds": "1/13",
+      "closeness": "1/7",
+      "n": 565,
+      "mean_handovers": 2.3150442477876108,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.07964601769911504,
+      "three_state_rate_Y3": 0.5823008849557522,
+      "mean_delta_closeness": 0.26396965865992417
+    },
+    {
+      "scale": "high",
+      "pair_representative": 3,
+      "odds": "3/11",
+      "closeness": "3/7",
+      "n": 592,
+      "mean_handovers": 2.3783783783783785,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.09797297297297297,
+      "three_state_rate_Y3": 0.5692567567567568,
+      "mean_delta_closeness": 0.005791505791505791
+    },
+    {
+      "scale": "high",
+      "pair_representative": 5,
+      "odds": "5/9",
+      "closeness": "5/7",
+      "n": 843,
+      "mean_handovers": 2.3226571767497033,
+      "median_handovers": 2,
+      "base_prime_rate_Y0": 0.09727164887307237,
+      "three_state_rate_Y3": 0.5907473309608541,
+      "mean_delta_closeness": -0.2724961870869344
+    },
+    {
+      "scale": "pooled",
+      "pair_representative": 1,
+      "odds": "1/13",
+      "closeness": "1/7",
+      "n": 1710,
+      "mean_handovers": 2.1584795321637427,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.09415204678362574,
+      "three_state_rate_Y3": 0.6403508771929824,
+      "mean_delta_closeness": 0.2621553884711779
+    },
+    {
+      "scale": "pooled",
+      "pair_representative": 3,
+      "odds": "3/11",
+      "closeness": "3/7",
+      "n": 1758,
+      "mean_handovers": 2.1916951080773606,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.10921501706484642,
+      "three_state_rate_Y3": 0.6245733788395904,
+      "mean_delta_closeness": 0.0030879245896310737
+    },
+    {
+      "scale": "pooled",
+      "pair_representative": 5,
+      "odds": "5/9",
+      "closeness": "5/7",
+      "n": 2532,
+      "mean_handovers": 2.1729857819905214,
+      "median_handovers": 2.0,
+      "base_prime_rate_Y0": 0.10268562401263823,
+      "three_state_rate_Y3": 0.6354660347551343,
+      "mean_delta_closeness": -0.2796208530805687
+    }
+  ],
+  "ordering_checks": {
+    "low": {
+      "mean_handovers": [
+        1.9256637168141593,
+        2.0,
+        1.9312796208530805
+      ],
+      "Y0_rates": [
+        0.1256637168141593,
+        0.1218274111675127,
+        0.1338862559241706
+      ],
+      "Y3_rates": [
+        0.7026548672566372,
+        0.6751269035532995,
+        0.6966824644549763
+      ],
+      "P1_strict_decrease": false,
+      "P2_strict_increase": false,
+      "P3_strict_increase": false
+    },
+    "middle": {
+      "mean_handovers": [
+        2.2327586206896552,
+        2.196521739130435,
+        2.2650887573964495
+      ],
+      "Y0_rates": [
+        0.07758620689655173,
+        0.10782608695652174,
+        0.07692307692307693
+      ],
+      "Y3_rates": [
+        0.6362068965517241,
+        0.6295652173913043,
+        0.6189349112426036
+      ],
+      "P1_strict_decrease": false,
+      "P2_strict_increase": false,
+      "P3_strict_increase": false
+    },
+    "high": {
+      "mean_handovers": [
+        2.3150442477876108,
+        2.3783783783783785,
+        2.3226571767497033
+      ],
+      "Y0_rates": [
+        0.07964601769911504,
+        0.09797297297297297,
+        0.09727164887307237
+      ],
+      "Y3_rates": [
+        0.5823008849557522,
+        0.5692567567567568,
+        0.5907473309608541
+      ],
+      "P1_strict_decrease": false,
+      "P2_strict_increase": false,
+      "P3_strict_increase": false
+    },
+    "pooled": {
+      "mean_handovers": [
+        2.1584795321637427,
+        2.1916951080773606,
+        2.1729857819905214
+      ],
+      "Y0_rates": [
+        0.09415204678362574,
+        0.10921501706484642,
+        0.10268562401263823
+      ],
+      "Y3_rates": [
+        0.6403508771929824,
+        0.6245733788395904,
+        0.6354660347551343
+      ],
+      "P1_strict_decrease": false,
+      "P2_strict_increase": false,
+      "P3_strict_increase": false
+    }
+  },
+  "scale_correlations_c_vs_H": {
+    "low": -0.000919871093350331,
+    "middle": 0.011323499544581032,
+    "high": 0.0001263401464240898
+  },
+  "permutation_test": {
+    "observed_pearson_c_vs_H": 0.0033352855563471254,
+    "alternative": "negative",
+    "permutations": 10000,
+    "seed": 25100,
+    "null_at_or_below_observed": 6110,
+    "one_sided_p": 0.611038896110389
+  },
+  "path_progression": {
+    "mean_delta_closeness": -0.04238095238095238,
+    "positive_delta_count": 1611,
+    "negative_delta_count": 2189,
+    "zero_delta_count": 2200,
+    "positive_rate": 0.2685,
+    "negative_rate": 0.36483333333333334
+  },
+  "development_frozen_rates": {
+    "Y0": {
+      "global": {
+        "all": 0.116
+      },
+      "orientation": {
+        "right": 0.11022222222222222,
+        "left": 0.12342857142857143
+      },
+      "pair": {
+        "5": 0.1087216248506571,
+        "3": 0.11472602739726027,
+        "1": 0.12780656303972365
+      },
+      "lane": {
+        "9": 0.10488245931283906,
+        "3": 0.11666666666666667,
+        "13": 0.11805555555555555,
+        "11": 0.11267605633802817,
+        "1": 0.13745704467353953,
+        "5": 0.11619718309859155
+      }
+    },
+    "Y3": {
+      "global": {
+        "all": 0.6365
+      },
+      "orientation": {
+        "right": 0.6426666666666667,
+        "left": 0.6285714285714286
+      },
+      "pair": {
+        "5": 0.6511350059737157,
+        "3": 0.6215753424657534,
+        "1": 0.6303972366148531
+      },
+      "lane": {
+        "9": 0.6600361663652803,
+        "3": 0.62,
+        "13": 0.6284722222222222,
+        "11": 0.6232394366197183,
+        "1": 0.6323024054982818,
+        "5": 0.6338028169014085
+      }
+    }
+  },
+  "compression_scores": {
+    "Y0": {
+      "global_brier": 0.09192,
+      "orientation_brier": 0.09198958296128329,
+      "pair_brier": 0.09204273466071529,
+      "lane_brier": 0.09208748126657003,
+      "pair_relative_loss_vs_lane": -0.0004859141029735576,
+      "pair_within_2_percent_of_lane": true,
+      "pair_beats_global": false,
+      "lane_beats_global": false
+    },
+    "Y3": {
+      "global_brier": 0.23214124999999997,
+      "orientation_brier": 0.23209361441572185,
+      "pair_brier": 0.23222937287414352,
+      "lane_brier": 0.23223524856284425,
+      "pair_relative_loss_vs_lane": -2.530058954049717e-05,
+      "pair_within_2_percent_of_lane": true,
+      "pair_beats_global": false,
+      "lane_beats_global": false
+    }
+  },
+  "compression_fidelity_pass": true,
+  "predictions": {
+    "P1_ordered_handover": false,
+    "P2_immediate_ridge": false,
+    "P3_three_state_closure": false,
+    "P4_upward_path": false,
+    "dynamic_predictions_passed": 0
+  },
+  "decision": {
+    "exact_coordinate_supported": true,
+    "pair_compression_fidelity_supported": true,
+    "dynamic_ridge_prediction_supported": false,
+    "interpretation": "The pair odds and total-2 conversion are exact arithmetic. The prospective targets decide whether that coordinate orders future handover dynamics and whether discarding orientation preserves the limited outcome information present in the six raw mod-14 lanes.",
+    "new_prime_algorithm_supported": false
+  }
+}

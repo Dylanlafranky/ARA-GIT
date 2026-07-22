@@ -42,6 +42,32 @@ three-cheap-operation next-prime algorithm, a speed improvement or a new theorem
 summaries failed, the prime-specific thread is PARKED, and the protected 87-bit/p31 targets remain sealed. Do not ask
 Dylan to reconstruct this trail from chat.
 
+**22 Jul prime-orientation addendum:** the bounded PN27-PN30 continuation does not overturn the closure fence. Read
+`analysis/primes/PN29_DYNAMIC_FLIP_AMENDMENT_2026-07-22.md` and
+`analysis/primes/PN30_DYNAMIC_RELATIONAL_FLIP_REPORT.md` before discussing the latest child-pair method. PN30
+restores singularity-driven AB/BA flips using normalized phase `(N mod w)/w`. It improved unresolved-composite AUC
+from `0.5301` static to `0.5663` dynamic on a fresh small interval, but missed its frozen significance threshold
+(`p=0.06199`). Treat the signed-cancellation mechanism as SUGGESTIVE and unreplicated, not as a prime predictor.
+
+**22 Jul five-wave addendum:** PN31 removes wave `1` and keeps `{3,5,9,11,13}` as independent directed handover
+states. The nearest child's distance/identity and every single-wave distance were null, while the complete five-wave
+order passed its frozen distribution test (`p=0.00390`). Read
+`analysis/primes/PN31_FIVE_INDEPENDENT_HANDOVER_REPORT.md`. Treat this as one unreplicated joint-order result with
+sparse categories, not as a preferred pair, parent-collapse formula, prime locator or certification rule.
+
+**22 Jul replication correction:** PN32 represented the proposed hexagon as two full Information³ locks—child
+`(A,B,full order)` at `N` and parent `(A,B,full order)` at `2N`—and froze the next interval before labels. PN31's
+order did not replicate (`p=0.2244`); the child-to-parent rearrangement was null (`p=0.9684`). Read
+`analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`. Treat the `N -> 2N` map as constrained modular geometry
+shared by primes and unresolved composites, not as a prime-specific double lock.
+
+**22 Jul seeded-fill result:** PN33 froze inverse survivor density as a local 0-2 seed/fill/reset coordinate before
+scoring target gaps. Primary medians rose `8,8,10,10,10,12,12,12` (`rho=0.9449`). The endpoint point ratio was
+`1.5`; corrected moving-block 95% CI `[1.5,2.0]` contains doubling only at its upper boundary. This passes the
+registered spacing-expression rule. ARA beat PNT log-MAE by only `0.62%`, below the frozen 5% ARA-specific gate.
+Read `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`; describe it as a strong preregistered
+crosswalk to known scale asymptotics, not new prime mathematics.
+
 **Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
 cognitive energy for geometry walking, orientation, and conceptual correction.
 The AI coworker should proactively handle rolling capture, mathematical

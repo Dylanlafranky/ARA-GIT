@@ -1,0 +1,640 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN34: Remaining-fill rank budget",
+    "description": "Prospective technical report joining PN33 fill with PN26 ranked prime candidates.",
+    "generatedAt": "2026-07-22T20:09:00+10:00",
+    "cards": [
+      {
+        "id": "calibration_card",
+        "dataset": "headline",
+        "sourceId": "pn34_headline",
+        "metrics": [
+          {
+            "label": "Calibration cells passed",
+            "field": "calibration",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "budget_card",
+        "dataset": "headline",
+        "sourceId": "pn34_headline",
+        "metrics": [
+          {
+            "label": "Rank-budget thresholds passed",
+            "field": "budgets",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "direction_card",
+        "dataset": "headline",
+        "sourceId": "pn34_headline",
+        "metrics": [
+          {
+            "label": "Scale-order endpoint",
+            "field": "direction",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "benchmark_card",
+        "dataset": "headline",
+        "sourceId": "pn34_headline",
+        "metrics": [
+          {
+            "label": "Log-loss gain vs flat",
+            "field": "flat_gain_percent",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "coverage_chart",
+        "title": "Predicted and observed rank coverage",
+        "subtitle": "All nine calibration tolerances passed on 6,000 fresh anchors",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "coverage",
+        "sourceId": "pn34_coverage",
+        "legend": {
+          "position": "bottom",
+          "title": "Series"
+        },
+        "encodings": {
+          "x": {
+            "field": "cohort_depth",
+            "type": "nominal",
+            "label": "Scale / retained readings"
+          },
+          "y": {
+            "field": "coverage_percent",
+            "type": "quantitative",
+            "label": "Coverage (%)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Series"
+          },
+          "tooltip": [
+            {
+              "field": "cohort",
+              "type": "nominal",
+              "label": "Scale"
+            },
+            {
+              "field": "depth",
+              "type": "quantitative",
+              "label": "Readings"
+            },
+            {
+              "field": "coverage_percent",
+              "type": "quantitative",
+              "label": "Coverage (%)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "benchmark_chart",
+        "title": "Top-one probability log loss",
+        "subtitle": "The scale-aware fill prior improved only slightly on the strong frozen flat prior",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "benchmarks",
+        "sourceId": "pn34_benchmarks",
+        "encodings": {
+          "x": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Method"
+          },
+          "y": {
+            "field": "log_loss",
+            "type": "quantitative",
+            "label": "Log loss"
+          },
+          "tooltip": [
+            {
+              "field": "log_loss",
+              "type": "quantitative",
+              "label": "Log loss"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "rank_table",
+        "title": "Fresh candidate-rank counts",
+        "subtitle": "2,000 deterministic anchors at each previously unused scale",
+        "dataset": "cohorts",
+        "sourceId": "pn34_cohorts",
+        "defaultSort": {
+          "field": "phase_a_children",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "cohort",
+            "label": "Scale",
+            "type": "text"
+          },
+          {
+            "field": "fill_x",
+            "label": "Remaining fill x_B",
+            "type": "number"
+          },
+          {
+            "field": "phase_a_children",
+            "label": "Phase A children",
+            "type": "number"
+          },
+          {
+            "field": "phase_b_children",
+            "label": "Phase B children",
+            "type": "number"
+          },
+          {
+            "field": "rank1",
+            "label": "Rank 1",
+            "type": "number"
+          },
+          {
+            "field": "rank2",
+            "label": "Rank 2",
+            "type": "number"
+          },
+          {
+            "field": "rank3",
+            "label": "Rank 3",
+            "type": "number"
+          },
+          {
+            "field": "over3",
+            "label": "Beyond 3",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "pn34_headline",
+        "label": "PN34 headline endpoint summary",
+        "path": "analysis/primes/PN34_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn34_headline",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T20:13:00+10:00",
+          "description": "Return the frozen endpoint pass counts and benchmark gain.",
+          "sql": "SELECT calibration, budgets, direction, flat_gain_percent FROM pn34_summary",
+          "tables_used": [
+            "pn34_summary"
+          ],
+          "filters": [
+            "PN34 fresh cohorts only",
+            "2,000 deterministic anchors per scale"
+          ],
+          "metric_definitions": [
+            "Calibration cells passed: count of scale-by-depth cells within frozen absolute-error tolerances.",
+            "Flat gain: relative log-loss reduction versus the pooled PN26 development prior."
+          ]
+        }
+      },
+      {
+        "id": "pn34_coverage",
+        "label": "PN34 predicted and observed rank coverage",
+        "path": "analysis/primes/PN34_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn34_coverage",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T20:13:00+10:00",
+          "description": "Return tidy predicted/observed rank coverage for all fresh cohorts and depths.",
+          "sql": "SELECT cohort || ' / ' || depth AS cohort_depth, cohort, depth, series, coverage_percent, predicted, observed, sample_n FROM pn34_coverage ORDER BY CASE cohort WHEN 'Low' THEN 1 WHEN 'Middle' THEN 2 ELSE 3 END, depth, series DESC",
+          "tables_used": [
+            "pn34_coverage"
+          ],
+          "filters": [
+            "PN34 fresh cohorts only",
+            "2,000 deterministic anchors per scale"
+          ],
+          "metric_definitions": [
+            "Coverage: share of 2,000 anchors whose exact next prime is contained by the retained Phase A rank depth.",
+            "Predicted top-k: 1-(1-1/R_B)^k, with R_B the omitted Phase B inverse-density product."
+          ]
+        }
+      },
+      {
+        "id": "pn34_benchmarks",
+        "label": "PN34 top-one probability benchmarks",
+        "path": "analysis/primes/PN34_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn34_benchmarks",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T20:13:00+10:00",
+          "description": "Return Brier score and log loss for the three registered/descriptive top-one priors.",
+          "sql": "SELECT method, brier, log_loss FROM pn34_benchmarks ORDER BY log_loss ASC",
+          "tables_used": [
+            "pn34_benchmarks"
+          ],
+          "filters": [
+            "PN34 fresh cohorts only",
+            "2,000 deterministic anchors per scale"
+          ],
+          "metric_definitions": [
+            "Log loss and Brier use one binary row per anchor: actual next prime equals first Phase A quiet state."
+          ]
+        }
+      },
+      {
+        "id": "pn34_cohorts",
+        "label": "PN34 candidate-rank counts",
+        "path": "analysis/primes/PN34_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn34_cohorts",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T20:13:00+10:00",
+          "description": "Return exact rank counts and parent metadata for each fresh scale.",
+          "sql": "SELECT cohort, scale_anchor, fill_x, predicted_top1, observed_top1, phase_a_children, phase_b_children, rank1, rank2, rank3, over3, sample_n FROM pn34_cohorts ORDER BY scale_anchor ASC",
+          "tables_used": [
+            "pn34_cohorts"
+          ],
+          "filters": [
+            "PN34 fresh cohorts only",
+            "2,000 deterministic anchors per scale"
+          ],
+          "metric_definitions": [
+            "Beyond rank 3 counts anchors whose exact next prime was not in the three sealed Phase A quiet candidates."
+          ]
+        }
+      },
+      {
+        "id": "pn34_results",
+        "label": "PN34 independently scored result file",
+        "path": "analysis/primes/PN34_FILL_RANK_BUDGET_RESULTS.json"
+      },
+      {
+        "id": "pn34_protocol",
+        "label": "PN34 frozen protocol",
+        "path": "analysis/primes/PN34_FILL_RANK_BUDGET_PROTOCOL_v1_FROZEN.md"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN34: Remaining-fill rank budget"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "pn34_results",
+        "body": "## The fill coordinate calibrated rank depth, but not the individual miss\n\nOn 6,000 fresh anchors, all **9/9 calibration tolerances** and **6/6 rank-budget thresholds** passed. The fill prior predicted first-reading success within **0.06\u20130.79 percentage points** and correctly kept two readings above 99% and three at or above 99.9% in every cohort. One registered endpoint failed: middle and high first-reading order swapped by 0.20 points. Formal verdict: **partial support**."
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "calibration_card",
+          "budget_card",
+          "direction_card",
+          "benchmark_card"
+        ]
+      },
+      {
+        "id": "coverage_intro",
+        "type": "markdown",
+        "body": "## Predicted and observed coverage stayed close across all three depths\n\nThe chart pairs the frozen population prior with the opened coverage at each scale and rank depth. The near-overlap supports the budget interpretation: Phase B's remaining inverse density tells us how many Phase A quiet readings to retain. It does not reveal which particular first reading will fail."
+      },
+      {
+        "id": "coverage",
+        "type": "chart",
+        "chartId": "coverage_chart"
+      },
+      {
+        "id": "coverage_note",
+        "type": "markdown",
+        "body": "The high-scale top-three prediction was slightly above its observed Wilson interval because two of 2,000 anchors fell beyond rank three. The registered absolute-error tolerance still passed, but this tail miss reinforces the partial rather than exact reading."
+      },
+      {
+        "id": "rank_table_intro",
+        "type": "markdown",
+        "body": "## Three readings remained nearly complete, not universally complete\n\nOnly three of 6,000 fresh anchors required more than three Phase A quiet states. That is excellent ranked compression, but it directly falsifies any universal three-state claim."
+      },
+      {
+        "id": "rank_table",
+        "type": "table",
+        "tableId": "rank_table"
+      },
+      {
+        "id": "benchmark_intro",
+        "type": "markdown",
+        "body": "## The new calibration layer adds a small gain over PN26's flat prior\n\nMost predictive power comes from the complete Phase A parent. The fill coordinate reduced log loss by only **0.62%** versus the frozen pooled PN26 prior, although it materially beat the tested conditional PNT approximation. This is a coherent scale correction, not a new prime algorithm."
+      },
+      {
+        "id": "benchmark",
+        "type": "chart",
+        "chartId": "benchmark_chart"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## The metric is the omitted parent's unresolved fill\n\nFor Phase B, **R_B = product p/(p-1)** and **x_B = 2 log(R_B)/log 2**. The first-reading prior is **1/R_B = 2^(-x_B/2)**; top-k coverage is **1-(1-1/R_B)^k**. The successful fresh readings were x_B=0.134\u20130.216, so the earlier `max child > 1.5` cutoff is not this rule."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "pn34_protocol",
+        "body": "## Predictions were sealed before fresh truth was opened\n\nThe frozen primary builder sampled 2,000 anchors at each of three unused scales, reconstructed PN26's cumulative-log parent split, sealed three candidates, and attached the no-fit fill prior without a primality routine. The validator independently rebuilt the parent, segmented prime truth and deterministic Miller\u2013Rabin checks. Every freeze and reconstruction check passed."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## This calibrates search depth; it does not select the winner\n\nThe fill coordinate is constant inside each cohort. It therefore cannot distinguish a rank-1 hit from a rank-1 miss at the same scale. Constructing R_B also retains every omitted prime gate, so PN34 supplies neither constant-cost computation nor asymptotic speedup. Its number-theoretic content is a crosswalk to conditional sieve density."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Next test: require a varying pre-label residual inside one scale\n\nResume only if an anchor-varying statistic can be defined from the omitted parent before labels and can rank the rare first-state misses within a single cohort. Compare it against raw residues and upper-band sieve controls. Until then, retain PN34 as the population-budget explanation for PN26."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Open questions\n\n- Can the omitted parent be compressed into an anchor-varying residual without reconstructing all its gates?\n- Do the three beyond-rank-3 cases share a pre-label upper-band relation?\n- Does the small fill-versus-flat log-loss gain persist on another disjoint set of scales?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-22T20:09:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "calibration": "9 / 9",
+          "budgets": "6 / 6",
+          "direction": "FAIL",
+          "flat_gain_percent": 0.6209874810906146
+        }
+      ],
+      "coverage": [
+        {
+          "cohort_depth": "Low / 1",
+          "cohort": "Low",
+          "depth": 1,
+          "series": "Predicted",
+          "coverage_percent": 92.79107249399722,
+          "predicted": 0.9279107249399722,
+          "observed": 0.9285,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Low / 1",
+          "cohort": "Low",
+          "depth": 1,
+          "series": "Observed",
+          "coverage_percent": 92.85,
+          "predicted": 0.9279107249399722,
+          "observed": 0.9285,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Low / 2",
+          "cohort": "Low",
+          "depth": 2,
+          "series": "Predicted",
+          "coverage_percent": 99.48031364213196,
+          "predicted": 0.9948031364213197,
+          "observed": 0.9945,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Low / 2",
+          "cohort": "Low",
+          "depth": 2,
+          "series": "Observed",
+          "coverage_percent": 99.45,
+          "predicted": 0.9948031364213197,
+          "observed": 0.9945,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Low / 3",
+          "cohort": "Low",
+          "depth": 3,
+          "series": "Predicted",
+          "coverage_percent": 99.96253618720272,
+          "predicted": 0.9996253618720271,
+          "observed": 0.9995,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Low / 3",
+          "cohort": "Low",
+          "depth": 3,
+          "series": "Observed",
+          "coverage_percent": 99.95,
+          "predicted": 0.9996253618720271,
+          "observed": 0.9995,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 1",
+          "cohort": "Middle",
+          "depth": 1,
+          "series": "Predicted",
+          "coverage_percent": 94.65943605117135,
+          "predicted": 0.9465943605117135,
+          "observed": 0.9545,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 1",
+          "cohort": "Middle",
+          "depth": 1,
+          "series": "Observed",
+          "coverage_percent": 95.45,
+          "predicted": 0.9465943605117135,
+          "observed": 0.9545,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 2",
+          "cohort": "Middle",
+          "depth": 2,
+          "series": "Predicted",
+          "coverage_percent": 99.71478376708471,
+          "predicted": 0.9971478376708471,
+          "observed": 0.997,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 2",
+          "cohort": "Middle",
+          "depth": 2,
+          "series": "Observed",
+          "coverage_percent": 99.7,
+          "predicted": 0.9971478376708471,
+          "observed": 0.997,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 3",
+          "cohort": "Middle",
+          "depth": 3,
+          "series": "Predicted",
+          "coverage_percent": 99.98476784468872,
+          "predicted": 0.9998476784468872,
+          "observed": 1.0,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "Middle / 3",
+          "cohort": "Middle",
+          "depth": 3,
+          "series": "Observed",
+          "coverage_percent": 100.0,
+          "predicted": 0.9998476784468872,
+          "observed": 1.0,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 1",
+          "cohort": "High",
+          "depth": 1,
+          "series": "Predicted",
+          "coverage_percent": 95.4591593645857,
+          "predicted": 0.954591593645857,
+          "observed": 0.9525,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 1",
+          "cohort": "High",
+          "depth": 1,
+          "series": "Observed",
+          "coverage_percent": 95.25,
+          "predicted": 0.954591593645857,
+          "observed": 0.9525,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 2",
+          "cohort": "High",
+          "depth": 2,
+          "series": "Predicted",
+          "coverage_percent": 99.7938076632377,
+          "predicted": 0.997938076632377,
+          "observed": 0.9965,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 2",
+          "cohort": "High",
+          "depth": 2,
+          "series": "Observed",
+          "coverage_percent": 99.65,
+          "predicted": 0.997938076632377,
+          "observed": 0.9965,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 3",
+          "cohort": "High",
+          "depth": 3,
+          "series": "Predicted",
+          "coverage_percent": 99.99063713458519,
+          "predicted": 0.9999063713458519,
+          "observed": 0.999,
+          "sample_n": 2000
+        },
+        {
+          "cohort_depth": "High / 3",
+          "cohort": "High",
+          "depth": 3,
+          "series": "Observed",
+          "coverage_percent": 99.9,
+          "predicted": 0.9999063713458519,
+          "observed": 0.999,
+          "sample_n": 2000
+        }
+      ],
+      "benchmarks": [
+        {
+          "method": "Fill prior",
+          "brier": 0.05170949038159817,
+          "log_loss": 0.2114454957743298
+        },
+        {
+          "method": "Flat PN26 prior",
+          "brier": 0.05185508333333333,
+          "log_loss": 0.21276675065985076
+        },
+        {
+          "method": "Conditional PNT",
+          "brier": 0.058190224955656795,
+          "log_loss": 0.24656207109994785
+        }
+      ],
+      "cohorts": [
+        {
+          "cohort": "Low",
+          "scale_anchor": 89000000,
+          "fill_x": 0.2158841714871255,
+          "predicted_top1": 0.9279107249399722,
+          "observed_top1": 0.9285,
+          "phase_a_children": 865,
+          "phase_b_children": 720,
+          "rank1": 1857,
+          "rank2": 132,
+          "rank3": 10,
+          "over3": 1,
+          "sample_n": 2000
+        },
+        {
+          "cohort": "Middle",
+          "scale_anchor": 89000000000,
+          "fill_x": 0.15836353574687068,
+          "predicted_top1": 0.9465943605117135,
+          "observed_top1": 0.9545,
+          "phase_a_children": 18882,
+          "phase_b_children": 16650,
+          "rank1": 1909,
+          "rank2": 85,
+          "rank3": 6,
+          "over3": 0,
+          "sample_n": 2000
+        },
+        {
+          "cohort": "High",
+          "scale_anchor": 8900000000000,
+          "fill_x": 0.13408892629437405,
+          "predicted_top1": 0.954591593645857,
+          "observed_top1": 0.9525,
+          "phase_a_children": 156495,
+          "phase_b_children": 141077,
+          "rank1": 1905,
+          "rank2": 88,
+          "rank3": 5,
+          "over3": 2,
+          "sample_n": 2000
+        }
+      ]
+    }
+  }
+}

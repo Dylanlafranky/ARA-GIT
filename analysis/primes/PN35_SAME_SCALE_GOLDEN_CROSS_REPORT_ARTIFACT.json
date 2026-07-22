@@ -1,0 +1,632 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "PN35: Same-scale golden crossing",
+    "description": "Frozen test of whether primes prefer a Phi handover crossing over eight structural child lanes.",
+    "generatedAt": "2026-07-22T21:18:53+10:00",
+    "cards": [
+      {
+        "id": "verdict_card",
+        "dataset": "headline",
+        "sourceId": "pn35_headline",
+        "metrics": [
+          {
+            "label": "Frozen verdict",
+            "field": "verdict",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "auc_card",
+        "dataset": "headline",
+        "sourceId": "pn35_headline",
+        "metrics": [
+          {
+            "label": "Phi AUC",
+            "field": "golden_auc",
+            "format": "number"
+          },
+          {
+            "label": "Chance",
+            "field": "chance",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "capture_card",
+        "dataset": "headline",
+        "sourceId": "pn35_headline",
+        "metrics": [
+          {
+            "label": "Nearest-two capture",
+            "field": "capture",
+            "format": "percent"
+          },
+          {
+            "label": "Structural null",
+            "field": "capture_null",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "gate_card",
+        "dataset": "headline",
+        "sourceId": "pn35_headline",
+        "metrics": [
+          {
+            "label": "Support gates passed",
+            "field": "gates",
+            "format": "text"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "model_auc_chart",
+        "title": "Prime/composite AUC by frozen crossing rule",
+        "subtitle": "Phi scored below chance and below the 36-degree rival",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "models",
+        "sourceId": "pn35_models",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen rule"
+          },
+          "y": {
+            "field": "auc",
+            "type": "quantitative",
+            "label": "Lane-stratified AUC"
+          },
+          "tooltip": [
+            {
+              "field": "auc",
+              "type": "quantitative",
+              "label": "AUC"
+            },
+            {
+              "field": "chance",
+              "type": "quantitative",
+              "label": "Chance"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rung_chart",
+        "title": "Phi and no-flip AUC across octave rungs",
+        "subtitle": "Only two of six Phi rung readings exceeded chance",
+        "type": "line",
+        "intent": "trend",
+        "dataset": "rungs",
+        "sourceId": "pn35_rungs",
+        "encodings": {
+          "x": {
+            "field": "rung",
+            "type": "quantitative",
+            "label": "Octave rung k"
+          },
+          "y": {
+            "fields": [
+              "golden_auc",
+              "no_flip_auc"
+            ],
+            "type": "quantitative",
+            "label": "Lane-stratified AUC"
+          },
+          "tooltip": [
+            {
+              "field": "rows",
+              "type": "quantitative",
+              "label": "Rows"
+            }
+          ]
+        }
+      },
+      {
+        "id": "octile_chart",
+        "title": "Prime rate by distance-from-crossing octile",
+        "subtitle": "There is no monotone concentration toward the nearest crossings",
+        "type": "line",
+        "intent": "trend",
+        "dataset": "octiles",
+        "sourceId": "pn35_octiles",
+        "encodings": {
+          "x": {
+            "field": "octile",
+            "type": "ordinal",
+            "label": "Distance octile (1 = nearest)"
+          },
+          "y": {
+            "field": "prime_rate",
+            "type": "quantitative",
+            "label": "Prime rate"
+          },
+          "tooltip": [
+            {
+              "field": "distance_low",
+              "type": "quantitative",
+              "label": "Distance low"
+            },
+            {
+              "field": "distance_high",
+              "type": "quantitative",
+              "label": "Distance high"
+            },
+            {
+              "field": "rows",
+              "type": "quantitative",
+              "label": "Rows"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate_table",
+        "title": "Registered support gates",
+        "subtitle": "All five were required for support",
+        "dataset": "gates",
+        "sourceId": "pn35_gates",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "passed",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "pn35_headline",
+        "label": "PN35 frozen headline endpoints",
+        "path": "analysis/primes/PN35_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn35_headline",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:18:53+10:00",
+          "description": "PN35 frozen headline endpoints",
+          "sql": "SELECT verdict, golden_auc, chance, capture, capture_null, gates FROM pn35_headline",
+          "tables_used": [
+            "pn35_headline"
+          ],
+          "filters": [
+            "PN35 frozen targets and independently opened labels"
+          ],
+          "metric_definitions": [
+            "AUC is lane-stratified Mann\u2013Whitney prime/composite ordering.",
+            "Capture is the share of all primes in the two closest of eight lanes per cell."
+          ]
+        }
+      },
+      {
+        "id": "pn35_models",
+        "label": "PN35 frozen constant comparison",
+        "path": "analysis/primes/PN35_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn35_models",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:18:53+10:00",
+          "description": "PN35 frozen constant comparison",
+          "sql": "SELECT model, auc, chance, is_registered_phi FROM pn35_models ORDER BY auc DESC",
+          "tables_used": [
+            "pn35_models"
+          ],
+          "filters": [
+            "PN35 frozen targets and independently opened labels"
+          ],
+          "metric_definitions": [
+            "AUC conditions on each mod-30 residue lane before pooling."
+          ]
+        }
+      },
+      {
+        "id": "pn35_rungs",
+        "label": "PN35 octave-rung results",
+        "path": "analysis/primes/PN35_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn35_rungs",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:18:53+10:00",
+          "description": "PN35 octave-rung results",
+          "sql": "SELECT rung, golden_auc, no_flip_auc, top2_capture, prime_rate, rows FROM pn35_rungs ORDER BY rung",
+          "tables_used": [
+            "pn35_rungs"
+          ],
+          "filters": [
+            "PN35 frozen targets and independently opened labels"
+          ],
+          "metric_definitions": [
+            "Each rung contains 4,096 complete eight-candidate cells."
+          ]
+        }
+      },
+      {
+        "id": "pn35_octiles",
+        "label": "PN35 crossing-distance octiles",
+        "path": "analysis/primes/PN35_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn35_octiles",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:18:53+10:00",
+          "description": "PN35 crossing-distance octiles",
+          "sql": "SELECT octile, prime_rate, rows, distance_low, distance_high FROM pn35_octiles ORDER BY octile",
+          "tables_used": [
+            "pn35_octiles"
+          ],
+          "filters": [
+            "PN35 frozen targets and independently opened labels"
+          ],
+          "metric_definitions": [
+            "Octile 1 is nearest to the registered crossing; each octile contains 24,576 rows."
+          ]
+        }
+      },
+      {
+        "id": "pn35_gates",
+        "label": "PN35 registered gate verdicts",
+        "path": "analysis/primes/PN35_REPORT_SOURCE.sqlite",
+        "query": {
+          "id": "pn35_gates",
+          "engine": "sqlite",
+          "language": "sql",
+          "executed_at": "2026-07-22T21:18:53+10:00",
+          "description": "PN35 registered gate verdicts",
+          "sql": "SELECT gate_name AS gate, passed FROM pn35_gates ORDER BY gate_name",
+          "tables_used": [
+            "pn35_gates"
+          ],
+          "filters": [
+            "PN35 frozen targets and independently opened labels"
+          ],
+          "metric_definitions": [
+            "All five gates were required for a supported verdict."
+          ]
+        }
+      },
+      {
+        "id": "pn35_results",
+        "label": "PN35 independently validated results",
+        "path": "analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_RESULTS.json"
+      },
+      {
+        "id": "pn35_protocol",
+        "label": "PN35 frozen protocol",
+        "path": "analysis/primes/PN35_SAME_SCALE_GOLDEN_CROSS_PROTOCOL_v1_FROZEN.md"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# PN35: Same-scale golden crossing"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "pn35_results",
+        "body": "## The registered Phi crossing did not locate primes\n\nAcross **196,608** sealed candidates, the same-scale golden crossing returned **AUC 0.4972** and nearest-two capture **24.48%**. Both are below their chance/structural baselines, all five support gates failed, and the frozen verdict is **NOT SUPPORTED**."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "verdict_card",
+          "auc_card",
+          "capture_card",
+          "gate_card"
+        ]
+      },
+      {
+        "id": "comparison_intro",
+        "type": "markdown",
+        "body": "## Phi was not specific and the small rival differences are not discoveries\n\nThe registered golden rule lost to the 36-degree rival (0.5031) and its bootstrap difference from that best rival was wholly negative. The rival effect is tiny and was not itself a registered positive claim, so it is retained as a control result rather than promoted."
+      },
+      {
+        "id": "comparison",
+        "type": "chart",
+        "chartId": "model_auc_chart"
+      },
+      {
+        "id": "scale_intro",
+        "type": "markdown",
+        "body": "## The predicted direction did not transfer across rungs or halves\n\nOnly two of six rungs exceeded 0.5. Both fixed halves were below 0.5. Reversing the handover at the singularity did not beat the identical no-flip construction."
+      },
+      {
+        "id": "scale",
+        "type": "chart",
+        "chartId": "rung_chart"
+      },
+      {
+        "id": "distance_intro",
+        "type": "markdown",
+        "body": "## Prime incidence did not accumulate near the crossings\n\nThe nearest two channels captured fewer primes than the structural 2/8 expectation, and circular shifts routinely matched or exceeded the registered alignment. Distance octiles show no monotone crossing concentration."
+      },
+      {
+        "id": "distance",
+        "type": "chart",
+        "chartId": "octile_chart"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "sourceId": "pn35_protocol",
+        "body": "## What was tested\n\nEach exact mod-30 survivor cell was decompressed into eight structural positions on one length-two circumference. A fixed `1/phi^2` handover advanced on that same scale, produced two anti-phase crossings, and reversed direction at each doubled octave singularity. Prime labels were opened only after all positions and scores were hashed."
+      },
+      {
+        "id": "gates_intro",
+        "type": "markdown",
+        "body": "## Every registered route to support failed\n\nFailure was not limited to one threshold: pooled preference, scale stability, Phi specificity, singularity flip, and nearest-two capture all failed together."
+      },
+      {
+        "id": "gates",
+        "type": "table",
+        "tableId": "gate_table"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## The null is about this bridge, not every possible ARA or Phi object\n\nThe exact eight-lane anti-pair closure remains an arithmetic construction: opposite residues sum to parent total 2. PN35 rejects the added claim that this particular linear, unfitted same-scale Phi rotation marks primes. It does not test a curved Phi path, PN33's continuous fill bands, or a different independently frozen observable."
+      },
+      {
+        "id": "posthoc",
+        "type": "markdown",
+        "body": "## A post-hoc Phi-to-pentagon conversion hypothesis is now recorded\n\nAfter the verdict, Dylan noticed that the raw Phi carrier was below chance while the 36-degree half-pentagon (0.50313) and pentagon (0.50126) were above it. That is descriptively compatible with Phi as a moving/time carrier whose structured appearance is pentagonal. PN35 did not test such a conversion operator, and both point estimates lie inside its circular-shift range, so this is preserved as a new hypothesis rather than a rescue."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nClose PN35 v1 without phase tuning. If the prime thread is resumed, require a genuinely new pre-label object and untouched rungs under a v2 protocol; do not rescue this null by shifting the origin, changing the irrational step, or reclassifying the small 36-degree control result."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Is the second same-scale object meant to be PN33's changing fill field rather than a constant rotation?\n- Can a non-prime physical system expose the same eight-child-to-parent singularity without modular arithmetic?\n- Does an independently declared curved handover have an observable that differs from post-hoc phase fitting?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-22T21:18:53+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "verdict": "NOT SUPPORTED",
+          "golden_auc": 0.4971797792959144,
+          "chance": 0.5,
+          "capture": 0.2447529224229543,
+          "capture_null": 0.25,
+          "gates": "0 / 5"
+        }
+      ],
+      "models": [
+        {
+          "model": "shear 36deg",
+          "auc": 0.5031301569166771,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "pentagon",
+          "auc": 0.5012577848083702,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "rational 3 8",
+          "auc": 0.5012159889145136,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "triangle",
+          "auc": 0.5011654554894714,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "anti phase",
+          "auc": 0.5002156943868666,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "rational 2 5",
+          "auc": 0.4999590131515842,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "hexagon",
+          "auc": 0.4998233815504735,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "silver conjugate",
+          "auc": 0.4994325719109349,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "quadrant",
+          "auc": 0.4993601687269852,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "golden no flip",
+          "auc": 0.498390001168568,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "exponential",
+          "auc": 0.4983474808040405,
+          "chance": 0.5,
+          "is_registered_phi": false
+        },
+        {
+          "model": "golden",
+          "auc": 0.4971797792959144,
+          "chance": 0.5,
+          "is_registered_phi": true
+        }
+      ],
+      "rungs": [
+        {
+          "rung": 26,
+          "golden_auc": 0.4988370584080013,
+          "no_flip_auc": 0.4988370584080013,
+          "top2_capture": 0.24570912375790424,
+          "prime_rate": 0.20269775390625,
+          "rows": 32768
+        },
+        {
+          "rung": 27,
+          "golden_auc": 0.49433842156227836,
+          "no_flip_auc": 0.4996131891258447,
+          "top2_capture": 0.24349061069906897,
+          "prime_rate": 0.193389892578125,
+          "rows": 32768
+        },
+        {
+          "rung": 36,
+          "golden_auc": 0.4899098473364895,
+          "no_flip_auc": 0.4899098473364895,
+          "top2_capture": 0.23978201634877383,
+          "prime_rate": 0.145599365234375,
+          "rows": 32768
+        },
+        {
+          "rung": 37,
+          "golden_auc": 0.5006364124464635,
+          "no_flip_auc": 0.4964539426395608,
+          "top2_capture": 0.2467365717954205,
+          "prime_rate": 0.142608642578125,
+          "rows": 32768
+        },
+        {
+          "rung": 46,
+          "golden_auc": 0.49865998430031205,
+          "no_flip_auc": 0.49865998430031205,
+          "top2_capture": 0.24600962756523942,
+          "prime_rate": 0.120452880859375,
+          "rows": 32768
+        },
+        {
+          "rung": 47,
+          "golden_auc": 0.5019122766303087,
+          "no_flip_auc": 0.5082546313179871,
+          "top2_capture": 0.24772848743987172,
+          "prime_rate": 0.11419677734375,
+          "rows": 32768
+        }
+      ],
+      "octiles": [
+        {
+          "octile": 1,
+          "prime_rate": 0.15079752604166666,
+          "rows": 24576,
+          "distance_low": 1.2814842416556868e-05,
+          "distance_high": 0.062211792592100655
+        },
+        {
+          "octile": 2,
+          "prime_rate": 0.15034993489583334,
+          "rows": 24576,
+          "distance_low": 0.062211792592100655,
+          "distance_high": 0.12527973101683731
+        },
+        {
+          "octile": 3,
+          "prime_rate": 0.15157063802083334,
+          "rows": 24576,
+          "distance_low": 0.12527973101683731,
+          "distance_high": 0.18754007630483102
+        },
+        {
+          "octile": 4,
+          "prime_rate": 0.15629069010416666,
+          "rows": 24576,
+          "distance_low": 0.18754007630483102,
+          "distance_high": 0.25039339423570517
+        },
+        {
+          "octile": 5,
+          "prime_rate": 0.15360514322916666,
+          "rows": 24576,
+          "distance_low": 0.25039339423570517,
+          "distance_high": 0.31294671349266523
+        },
+        {
+          "octile": 6,
+          "prime_rate": 0.15559895833333334,
+          "rows": 24576,
+          "distance_low": 0.31294671349266523,
+          "distance_high": 0.375052773418316
+        },
+        {
+          "octile": 7,
+          "prime_rate": 0.154052734375,
+          "rows": 24576,
+          "distance_low": 0.375052773418316,
+          "distance_high": 0.43743244665941305
+        },
+        {
+          "octile": 8,
+          "prime_rate": 0.15299479166666666,
+          "rows": 24576,
+          "distance_low": 0.43743244665941305,
+          "distance_high": 0.49999542744825815
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1 pooled preference",
+          "passed": "FAIL"
+        },
+        {
+          "gate": "G2 scale stability",
+          "passed": "FAIL"
+        },
+        {
+          "gate": "G3 phi specificity",
+          "passed": "FAIL"
+        },
+        {
+          "gate": "G4 singularity flip",
+          "passed": "FAIL"
+        },
+        {
+          "gate": "G5 crossing capture",
+          "passed": "FAIL"
+        }
+      ]
+    }
+  }
+}

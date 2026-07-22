@@ -77,7 +77,7 @@ the restoring principle was generalised long ago. The framework's self-correctio
 | **Connection ↔ Transfer orientation in a declared time slice** | **relaxation time**, Deborah number; viscoelastic storage/loss response and phase lag | established measurement; **ARA identification is proposed/testable** |
 | **signed two-pole source balance** | **Gauss's electric law**; positive/negative charge decomposition | exact algebraic embedding once boundary, units and pole orientation are fixed |
 | **logarithmic rung and nonlinear daughter sequence** | nonlinear harmonic generation, three-wave coupling, bicoherence and spectral cascades | exact rung coordinate inside the inspected harmonic system; universal ARA transfer law remains open |
-| **factor ridge and reversible sieve rung** | square-root trial division; modular negation; wheel sieve / Chinese remainder theorem | exact ARA factor/anti-pair crosswalk with lossless `2:1` lane compression; no new prime theorem or complexity gain |
+| **factor ridge, reversible sieve rung and seeded spacing fill** | square-root trial division; modular negation; wheel sieve / Chinese remainder theorem; Mertens product / PNT | exact ARA factor/anti-pair crosswalk with lossless `2:1` lane compression; PN33 preregistered spacing crosswalk is asymptotically PNT; no new prime theorem or complexity gain |
 
 Detail on the action / KAM / barrier rows: `ACTION_AXIS_AND_KAM_GROUNDING.md` and
 `MEDIUM_BARRIER_RESONANCE_SINGULARITY.md`.
@@ -566,6 +566,127 @@ Therefore the established recovery is strong but bounded: **ARA provides an exac
 lossless symmetry compression for known prime arithmetic; it has not produced a three-cheap-operation next-prime
 algorithm, speed improvement or new prime theorem.** The prime-specific exploration is parked. Full record:
 `analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`.
+
+#### 5.4.5 Nearest-child handovers: short visible lineage, long proof path
+
+PN24 resumed the parked thread for one bounded statistic. At a declared wheel rung with processed prime gates (G),
+define the nearest surviving children around anchor (N):
+
+\[
+L_G(N)=\max\{m\le N:\gcd(m,\prod_{p\in G}p)=1\},
+\qquad
+U_G(N)=\min\{m>N:\gcd(m,\prod_{p\in G}p)=1\}.
+\]
+
+The upper child (U_G) remains in place across every new gate that does not divide it. At the first gate (q) with
+(q\mid U_G), it releases and the next upper survivor becomes the new child. This produces a monotone cascade
+
+\[
+U_0\xrightarrow{q_1}U_1\xrightarrow{q_2}\cdots\xrightarrow{}P_{next}.
+\]
+
+The construction is exact: after every prime gate through the current candidate's square root has acted, the first
+survivor is the next prime. PN24 recovered all 2,007 checked next primes and passed 12/12 independent checks.
+
+The distinction between compressed appearance and decompressed work is decisive. In the 2,000-anchor development
+sample, the median visible lineage had two handovers and three candidate states, but only `63.65%` closed within
+three states. The median proof crossed `6,336` non-base prime gates, about `6,334` of which were silent. Thus ARA
+cleanly separates **identity-changing release gates** from **identity-preserving quiet gates**, while standard
+factor information remains necessary to know which is which. This is a useful recursive crosswalk, not a bounded-cost
+prime locator.
+
+#### 5.4.6 Pair odds are a lateral wheel coordinate, not a handover clock
+
+For any reversible residue pair (r\leftrightarrow M-r), the directional odds
+
+\[
+q=\frac{r}{M-r}
+\]
+
+map exactly to the total-2 ARA coordinate
+
+\[
+x_A=\frac{2q}{1+q}=\frac{2r}{M},
+\qquad
+x_B=2-x_A.
+\]
+
+For the mod-14 wheel this turns `1/13`, `3/11`, and `5/9` into `(1/7,13/7)`, `(3/7,11/7)`, and
+`(5/7,9/7)`. The missing `7/7` gives `(1,1)` but is removed by the factor gate 7. This exactly separates **whole
+identity** from **balanced composition**: every surviving pair totals 2 even though none occupies the ridge.
+
+PN25 prospectively tested whether this lateral closeness also measured vertical progress toward next-prime closure.
+Across 6,000 fresh anchors at three scales, all four frozen dynamic predictions failed. The pooled correlation between
+closeness and remaining handovers was `+0.003335` (`p=0.6110` for a negative relation); target rates were non-monotone,
+and terminal paths moved away from the local ridge more often than toward it. Three pair classes retained the six
+raw lanes' outcome scores within the frozen 2% fidelity tolerance, but neither representation beat a global constant.
+
+The established lesson is precise: the pair odds provide an exact ARA coordinate and safe symmetry compression for
+this projection. Higher factor gates constitute a separate vertical state; they cannot be inferred from local
+mod-14 ridge distance.
+
+#### 5.4.7 A complete lower parent is a strong ranked locator, not an exact cheap sieve
+
+PN26 supplied PN25's missing vertical state using PN19's complete lower Phase A parent. For scale anchor (S), the
+children through (sqrt{2S}) were divided at cumulative-log half; Phase A retained the smaller children through a
+boundary near
+
+\[
+L\approx\sqrt{S/2}.
+\]
+
+The first three Phase A quiet candidates were sealed before target primality was opened on 6,000 fresh anchors.
+The exact next prime occurred at the first candidate on `93.983%`, within two on `99.650%`, and within three on
+`99.967%`. Corrected independent reconstruction passed `16/16` checks. The original validator failure—caused by
+building its child table only through (sqrt S) while reconstructing a declared (sqrt{2S}) parent—remains preserved
+in the provenance.
+
+The established factor explanation is exact. If a composite survives every prime child through (L), then all of
+its prime factors exceed (L). The rare false Phase A ridges are therefore composites made entirely from the omitted
+upper band (L<p\le\sqrt n). Phase B catches that residual band.
+
+This supports a precise ARA statement: one complete child parent can carry most of the visible location information,
+and two or three quiet states provide an extremely strong ranked lock. It does not support universal exactness or
+constant cost. Phase A contained `780` to `48,817` children here. The fixed cross-rung route
+(2+1+1/2=3.5) had zero variance; it names the scale relation but does not determine the changing offset.
+
+#### 5.4.8 Seeded prime fill is an ARA crosswalk to Mertens/PNT scaling
+
+PN33 froze a different question before scoring target gaps: after one completed prime-density generation, does the
+next prime act as the first seed of a gradually filling identity whose spacing scale rises toward a doubled
+completion? Its raw coordinate was
+
+\[
+D(p)=\prod_{q\le p}\frac{q}{q-1},
+\qquad
+x_b(p)=2\frac{\log(D(p)/D(b))}{\log2}.
+\]
+
+From baseline prime `10,007`, the first `x>=2` gate was `102,474,149`. Across `5,894,554` frozen primary gaps,
+eight band medians rose `8,8,10,10,10,12,12,12` (`rho=0.9449`). The raw endpoint ratio was `1.5`; its corrected
+64-gap moving-block 95% interval was `[1.5,2.0]`, so the registered spacing-expression rule passed with `2` only
+at the upper boundary. The next seed reset to local `x=2.82e-8` while retaining a raw density ratio just above 2.
+
+This result has a direct established explanation. Mertens' product theorem gives
+
+\[
+D(p)\sim e^\gamma\log p,
+\]
+
+so
+
+\[
+\frac{D(p)}{D(b)}\sim\frac{\log p}{\log b}=2^{x_b(p)/2}.
+\]
+
+PNT gives mean prime-gap scale (G(p)\sim\log p), making the frozen no-fit ARA curve asymptotically the PNT
+relative gap curve. Accordingly, ARA and PNT log-MAE were `0.082590` and `0.083105`; ARA's `0.62%` advantage missed
+the frozen `5%` ARA-specific gate. Completion `D(p)/D(b)=2` also implies (p\sim b^2), explaining the observed
+completion scale.
+
+This is a strong preregistered recovery of the seed -> fill -> completion -> retained-scale reset grammar inside
+known prime asymptotics. It is not a new prime theorem, fixed-step prime generator, literal spatial hexagon or
+causal Phi result. Full record: `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
 
 ### 5.5 Nonlinear harmonic rungs and identity inheritance
 

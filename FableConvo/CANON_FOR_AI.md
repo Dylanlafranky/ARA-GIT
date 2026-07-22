@@ -244,6 +244,33 @@ Before reopening prime-number work, read
 Do not restart the sequence from “prime is a 1.0 ridge” without this distinction. A complete quiet factor ridge is
 exact; an early scalar ridge is not sufficient to locate a prime.
 
+The later bounded PN27-PN30 continuation adds one required fidelity correction without removing this fence. PN29's
+fixed child-pair directions omitted the declared singularity flip. PN30 assigns Phase A by the smaller normalized
+cycle progress `(N mod w)/w` and reflects AB/BA around the ridge. Its fresh unresolved-composite AUC improved from
+`0.5301` static to `0.5663` dynamic, but `p=0.06199` missed the frozen threshold. The post-hoc signed-cancellation
+pattern is SUGGESTIVE and must be replicated; it is not a prime generator or certification rule. Read
+`analysis/primes/PN30_DYNAMIC_RELATIONAL_FLIP_REPORT.md`.
+
+PN31 then removes wave `1` entirely and retains `{3,5,9,11,13}` as five independent handover states. The nearest
+child, its identity, every individual child distance and the number approaching were null; only the complete
+five-wave order passed (`p=0.00390`). This is an unreplicated sparse-category joint-order result. Do not flatten it
+into one winning child or promote it to a prime algorithm. Read
+`analysis/primes/PN31_FIVE_INDEPENDENT_HANDOVER_REPORT.md`.
+
+PN32 supplies the required unchanged replication and double-lock test. It represented child and doubled-parent
+rungs as two retained `(Phase A, Phase B, full relation)` triangles. The PN31 order result did not replicate
+(`p=0.2244`), and the intact `N -> 2N` order rearrangement was null (`p=0.9684`). The doubling map is arithmetically
+constrained but not prime-specific in this representation. PN31 must therefore be described as unreplicated. Read
+`analysis/primes/PN32_DOUBLE_INFORMATION_LOCK_REPORT.md`.
+
+PN33 separately tested the user's seed -> gradual fill -> completion -> reset account as a frozen scale coordinate,
+not as a local prime classifier. Median gaps rose strongly across the frozen fill bands (`rho=0.9449`); the endpoint
+point ratio was `1.5` and its corrected moving-block 95% interval `[1.5,2.0]`, so the registered spacing-expression
+rule passed only at the doubling boundary. ARA and PNT log-MAE were `0.082590` and `0.083105`; the `0.62%` ARA
+improvement failed the frozen 5% ARA-specific gate. Preserve both verdicts: **SUPPORTED spacing-expression
+crosswalk**, **NO distinct advantage over PNT**. It is not a prime generator, literal hexagon proof or Phi mechanism.
+Read `analysis/primes/PN33_SEEDED_HEXAGON_FILL_REPORT_2026-07-22.md`.
+
 ## 5. Language
 
 - Tier labels on every claim: CONFIRMED / SUPPORTED / SUGGESTIVE / INCONCLUSIVE /
