@@ -1,0 +1,63 @@
+{
+  "assessment": "ready to share",
+  "passed": 10,
+  "total": 10,
+  "tolerance": 1e-11,
+  "checks": [
+    {
+      "name": "expected row count",
+      "passed": true,
+      "detail": "rows=17"
+    },
+    {
+      "name": "Hamiltonian reconstruction",
+      "passed": true,
+      "detail": "max_abs_error=0.000e+00"
+    },
+    {
+      "name": "normalized circle",
+      "passed": true,
+      "detail": "max_abs_error=7.105e-15"
+    },
+    {
+      "name": "fixed total-2 allocation",
+      "passed": true,
+      "detail": "max_abs_error=8.882e-16"
+    },
+    {
+      "name": "ARA coordinate equals kinetic-energy allocation",
+      "passed": true,
+      "detail": "max_abs_error=6.661e-16"
+    },
+    {
+      "name": "configuration pole x=0",
+      "passed": true,
+      "detail": "0.0"
+    },
+    {
+      "name": "equal-energy ridge x=1",
+      "passed": true,
+      "detail": "1.0000000000000002"
+    },
+    {
+      "name": "traversal pole x=2",
+      "passed": true,
+      "detail": "2.0000000000000004"
+    },
+    {
+      "name": "diameter projection is many-to-one",
+      "passed": true,
+      "detail": "equal x_H values occur in distinct signed quadrants"
+    },
+    {
+      "name": "10,000 randomized property trials",
+      "passed": true,
+      "detail": "failures=0; max_relative_or_absolute_error=8.851e-16"
+    }
+  ],
+  "required_caveats": [
+    "The total-2 result follows from the declared normalization.",
+    "The equal-energy ridge is not a force-cancellation result.",
+    "The crosswalk does not test universal ARA recurrence across domains."
+  ]
+}

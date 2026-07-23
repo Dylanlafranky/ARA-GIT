@@ -1,0 +1,32 @@
+{
+  "analysis": "Exact two-level Bloch-state to ARA diameter crosswalk",
+  "status": {
+    "selected_axis_crosswalk": "exact",
+    "rabi_cycle_crosswalk": "exact under the ideal resonant two-level model",
+    "universal_ara_sphere": "not established by this reparameterization",
+    "gr_quantum_unification": "not established"
+  },
+  "definitions": {
+    "state": "|psi> = alpha|A> + beta|B>",
+    "normalization": "|alpha|^2 + |beta|^2 = 1",
+    "bloch_z": "r_z = |alpha|^2 - |beta|^2",
+    "ara_coordinate": "x_Q = 2|beta|^2 = 1 - r_z",
+    "centered_relation": "x_Q - 1 = -r_z",
+    "arbitrary_axis": "x_n = 1 - r dot n",
+    "rabi": "x_Q(t) = 1 - cos(Omega t)",
+    "density_matrix": "rho = (I + r dot sigma)/2; |r| <= 1"
+  },
+  "landmarks": {
+    "ara_0": "north pole / pure A / r_z=+1",
+    "ara_1": "equal A/B populations / r_z=0 plane",
+    "ara_2": "south pole / pure B / r_z=-1"
+  },
+  "important_limits": [
+    "ARA 1 is the full r_z=0 plane, not only the Bloch-ball centre.",
+    "Population ARA alone loses relative phase and purity.",
+    "TE-ARA is only the secondary total-allocation perspective here; the primary result is plain ARA.",
+    "The mapping is an affine reparameterization of the standard Bloch coordinate."
+  ],
+  "example_count": 7,
+  "csv": "BLOCH_ARA_EXAMPLE_STATES.csv"
+}

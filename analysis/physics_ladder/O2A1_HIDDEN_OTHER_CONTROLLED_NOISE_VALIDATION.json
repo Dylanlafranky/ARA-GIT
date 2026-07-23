@@ -1,0 +1,201 @@
+{
+  "status": "passed",
+  "checks_passed": 11,
+  "checks_total": 11,
+  "protocol_sha256": "d16485a828d4396e3ced05ce04fd7ca784a7e662fb9f6f46e078b83cb12add49",
+  "artifact_sha256": {
+    "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_RESULTS.json": "50b62af43e87c28126b3a436a79c88516563661c3cfb3edc379dbf08df95ccc0",
+    "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_DEVELOPMENT.csv": "d8fbb9caf8b81e790ff4b2584259fc96f19eee7d2646d0c177b7b949ab79b01a",
+    "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_TRIALS.csv.gz": "d439d1af183a8482216e91baf508c7f86b4bcfab057ed76b63190051654af19c",
+    "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_AGGREGATES.csv": "fc7908fa385b1fb579a25f9b5cc306b3b28b806fb8336e17243c6d2358ff3a00",
+    "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_WAVEFORMS.csv": "ef1dbfe44e2854a0b86ab5ac882d3a8027be5b33f4c2ac1f2f4db0399951203b"
+  },
+  "primary_location_counts": {
+    "capacitor 1": 16,
+    "quantum state 2": 16
+  },
+  "checks": [
+    {
+      "check": "frozen protocol hash",
+      "passed": true,
+      "observed": "d16485a828d4396e3ced05ce04fd7ca784a7e662fb9f6f46e078b83cb12add49"
+    },
+    {
+      "check": "result embeds protocol hash",
+      "passed": true,
+      "observed": "d16485a828d4396e3ced05ce04fd7ca784a7e662fb9f6f46e078b83cb12add49"
+    },
+    {
+      "check": "local_poly development minimum selected",
+      "passed": true,
+      "observed": [
+        {
+          "method": "local_poly",
+          "window_fraction": "0.08",
+          "window_samples": "289",
+          "replicates": "8",
+          "median_nrmse": "0.25037939264380893",
+          "median_inactive_rms_fraction": "0.27245948665544006",
+          "selection_objective": "0.5229212705578183",
+          "selected": "1"
+        }
+      ]
+    },
+    {
+      "check": "moving_average_fd development minimum selected",
+      "passed": true,
+      "observed": [
+        {
+          "method": "moving_average_fd",
+          "window_fraction": "0.04",
+          "window_samples": "145",
+          "replicates": "8",
+          "median_nrmse": "0.4743898815068532",
+          "median_inactive_rms_fraction": "0.4120129920328448",
+          "selection_objective": "0.8830704676114783",
+          "selected": "1"
+        }
+      ]
+    },
+    {
+      "check": "causal_local_linear development minimum selected",
+      "passed": true,
+      "observed": [
+        {
+          "method": "causal_local_linear",
+          "window_fraction": "0.02",
+          "window_samples": "73",
+          "replicates": "8",
+          "median_nrmse": "0.5297632660659972",
+          "median_inactive_rms_fraction": "0.6411927418637197",
+          "selection_objective": "1.1676612467138014",
+          "selected": "1"
+        }
+      ]
+    },
+    {
+      "check": "trial row count",
+      "passed": true,
+      "observed": 16140
+    },
+    {
+      "check": "aggregate row count",
+      "passed": true,
+      "observed": 1020
+    },
+    {
+      "check": "bounded waveform row count",
+      "passed": true,
+      "observed": 362
+    },
+    {
+      "check": "primary metrics independently recomputed from trial rows",
+      "passed": true,
+      "observed": {
+        "target_runs": 32,
+        "location_accuracy": 0.5,
+        "median_sign_accuracy": 0.7619656558275485,
+        "median_correlation": 0.4599102899299763,
+        "median_nrmse": 0.3139139613364823,
+        "median_integrated_error": 0.007871897511986291,
+        "median_inactive_rms_fraction": 0.367465650096251,
+        "raw_fd_median_nrmse": 47.72643339576017,
+        "zero_other_median_nrmse": 0.22119807630867516
+      },
+      "per_metric": {
+        "target_runs": true,
+        "location_accuracy": true,
+        "median_sign_accuracy": true,
+        "median_correlation": true,
+        "median_nrmse": true,
+        "median_integrated_error": true,
+        "median_inactive_rms_fraction": true,
+        "raw_fd_median_nrmse": true,
+        "zero_other_median_nrmse": true
+      }
+    },
+    {
+      "check": "primary gates and verdict independently recomputed",
+      "passed": true,
+      "observed": {
+        "location": false,
+        "sign": false,
+        "correlation": false,
+        "nrmse": true,
+        "integrated_error": true,
+        "inactive_spill": true,
+        "beats_raw_fd": true,
+        "beats_zero_other": false
+      }
+    },
+    {
+      "check": "direct non-FFT clean local-polynomial reproduction",
+      "passed": true,
+      "observed": [
+        {
+          "model": "Damped coupled oscillators",
+          "passed": true,
+          "comparisons": {
+            "location_accuracy": true,
+            "sign_accuracy": true,
+            "correlation": true,
+            "nrmse": true,
+            "integrated_error": true,
+            "inactive_rms_fraction": true
+          },
+          "independent_metrics": {
+            "window_samples": 481,
+            "location_accuracy": 1.0,
+            "sign_accuracy": 0.9200898587933247,
+            "correlation": 0.8435681445806753,
+            "nrmse": 0.1312477901086428,
+            "integrated_error": 0.019745272577230504,
+            "inactive_rms_fraction": 0.21935266616497648
+          }
+        },
+        {
+          "model": "Resistive capacitor coupling",
+          "passed": true,
+          "comparisons": {
+            "location_accuracy": true,
+            "sign_accuracy": true,
+            "correlation": true,
+            "nrmse": true,
+            "integrated_error": true,
+            "inactive_rms_fraction": true
+          },
+          "independent_metrics": {
+            "window_samples": 401,
+            "location_accuracy": 1.0,
+            "sign_accuracy": 1.0,
+            "correlation": 1.0,
+            "nrmse": 2.096316087257518e-17,
+            "integrated_error": 0.0,
+            "inactive_rms_fraction": 0.005665467794341871
+          }
+        },
+        {
+          "model": "Open two-level probability",
+          "passed": true,
+          "comparisons": {
+            "location_accuracy": true,
+            "sign_accuracy": true,
+            "correlation": true,
+            "nrmse": true,
+            "integrated_error": true,
+            "inactive_rms_fraction": true
+          },
+          "independent_metrics": {
+            "window_samples": 641,
+            "location_accuracy": 1.0,
+            "sign_accuracy": 1.0,
+            "correlation": 0.9989914579165573,
+            "nrmse": 0.01138467451632349,
+            "integrated_error": 0.0021968757852374593,
+            "inactive_rms_fraction": 0.011446911073953802
+          }
+        }
+      ]
+    }
+  ]
+}

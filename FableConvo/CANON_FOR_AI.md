@@ -53,6 +53,15 @@ is worth more than a hit you cannot.
   `0–2` ARA geometry read as one identity's total-allocation view. ARA `1.0` is a position
   on a declared A/B composition axis; TE-ARA `2` is the fixed closure total. Never merge
   position, total, component allocations or native physical magnitude into one scalar.
+- PERSPECTIVE-UNASSIGNED TE-ARA: before a diameter is selected, only the normalized closure
+  `TE-ARA=2` is assigned. After declaring perspective
+  `P=(boundary, observable, time slice, projection, rung, orientation)`, instantiate
+  `t^(P)=(t_A,t_B,t_J1,...,t_Other)` with `sum(t^(P))=2`. A perspective transformation can
+  change every component while preserving the normalized closure. This is the sphere-before-diameter
+  reading, not a claim that every physical identity contains the same native energy.
+- PHYSICAL MAGNITUDE IS SEPARATE: always retain the native amount or activity scale
+  (joules, flux, momentum, total variation, etc.). TE-ARA may remain normalized to 2 while
+  the native parent grows, shrinks or leaks.
 - PURE TE-ARA: the ideal identity contains only its own two poles:
   `TE-ARA_pure(I)=t_A^(I)+t_B^(I)=2`. `Other` is not a third pole or constituent of that
   pure identity.
@@ -82,6 +91,80 @@ is worth more than a hit you cannot.
   If there is no timed cycle, timing-based ARA is undefined even though a static
   composition projection may equal 1. Resolve with activity/flux, time variation,
   coherence/phase and, where relevant, child/daughter events.
+- SHARED-COUPLING ACCOUNTING: record an interaction once in the parent ledger or split it
+  between children by a predeclared rule. Never assign the same full joint energy or signal
+  independently to both children.
+- INFORMATION³ VERSUS COHERENCE TRIANGLE: `(A,B,J_AB)` is two identities plus their
+  retained relation, not automatically three independent stateful nodes. A dynamical triangle
+  is one possible decompression only if `J_AB` has measurable state, memory and dynamics.
+  Keep the equivalence unconfirmed otherwise.
+- ODD/EVEN COHERENCE: for strict anti-phase alternation, an odd triangle is geometrically
+  frustrated while a square admits an unfrustrated `A-B-A-B` loop. This is exact graph
+  structure; the wider claim that squares universally carry coherence better is testable,
+  not canon.
+- QUANTUM/BLOCH IS PRIMARY PLAIN ARA: for a declared two-outcome basis,
+  `x_Q=2*|beta|^2=1-r_z`; equivalently `x_Q-1=-r_z`. Quantum mechanics centres the
+  same selected diameter on zero and reads it from the opposite pole. For any axis `n`,
+  `x_n=1-r·n`. Mention TE-ARA only as the secondary closure perspective, not the primary
+  result.
+- QUANTUM RIDGE IS A PLANE: `x_n=1` fixes only `r·n=0`. Pure coherent equatorial states
+  and the maximally mixed centre can share this ARA value. Never infer coherence, phase,
+  resonance or purity from the diameter reading alone.
+- LANDAU-ZENER HAS TWO ARA COORDINATES: structural
+  `x_path=1+vt/sqrt((vt)^2+4g^2)` and final outcome
+  `x_handover=2*(1-exp(-2*pi*g^2/(hbar*abs(v))))`. Do not merge their `1.0` ridges.
+  The first is equal instantaneous bare-state mixing at `t=0`; the second is equal final
+  stay/handover probability at `gamma=ln(2)/(2*pi)`.
+- LANDAU-ZENER FENCE: `g` is a coupling energy, not an ARA ratio. The dimensionless
+  Connection-versus-Traversal control is `gamma=g^2/(hbar*abs(v))`. The structural path
+  is an instantaneous eigenstate and is followed dynamically only in the adiabatic limit.
+- VIRIAL RIDGE IS WEIGHTED: for bound `V proportional to -1/r`, use
+  `C=abs(<V>)`, `R=2<T>`, and `x_vir=2R/(C+R)=1`. Do not compare raw `<T>` and
+  `abs(<V>)` as equal; the factor of two is supplied by established physics.
+- VIRIAL ARA AND RAW TE-ARA ARE DIFFERENT READINGS: the virial coordinate is `1.0`;
+  the raw normalized energy allocation is `t_Traversal=2/3`,
+  `t_Connection=4/3`, total `2`. Component amounts are not additional positions on
+  the virial diameter.
+- A PARENT RIDGE NEED NOT BE STILL: in an elliptical conservative orbit, instantaneous
+  child readings move around `1.0` while the coordinate formed from completed mean
+  channels reaches `1.0`. Say that the measurement converges; do not say the orbit
+  physically settles unless dissipation is independently present.
+- COSMIC-TO-QUANTUM LADDER IS TYPED: do not write Einstein -> quantum as one derivation.
+  Einstein -> Newton is an exact weak-field limit; Newton -> Hamilton is an exact
+  reformulation; Noether/virial are theorem consequences; Maxwell closes the field
+  branch; classical charged Hamiltonian -> Schrödinger is a quantisation/model
+  transition; gravitational and Coulomb `1/r` are sibling forms, not the same force.
+- CONTINUITY IS THE STRONGEST CROSS-LAW SPINE: `partial_t q + div(J) = s` recurs in
+  stress-energy, charge, electromagnetic energy and quantum probability accounts.
+  Preserve the native meaning, units, boundary and source term in every use.
+- DO NOT FLATTEN LAW RIDGES: Newton cancellation, Hamilton equal energy, weighted
+  virial equality, Gauss closure, plane-wave E/B equality, Poynting throughput and
+  Bloch equal probability can all map to `1.0`; they are not the same physical state.
+- CHILD-TO-PARENT BOUNDARY OPERATOR IS EXACT FOR ADJACENT CONTINUITY ACCOUNTS:
+  with `x_i=2R_i/(A_i+R_i)` and shared interface magnitude `I`,
+  `x_parent=2*(sum R_i-I)/(sum(A_i+R_i)-2I)`. The interface is boundary flow at
+  child grain and internal relation at parent grain. Remove it once from accumulation
+  and once from release.
+- AGGREGATION FENCE: the frozen operator passed classical energy, EM power and quantum
+  probability-current reconstructions to numerical precision. This is finite-volume
+  conservation expressed in ARA coordinates, not new dynamics. A stored relation,
+  source, sink or leak requires an explicit `Other` account and a prospective residual
+  test.
+- HIDDEN-OTHER RESIDUAL IS NOW TESTED: with child/relation storage `q_i` and declared
+  net internal transfer `g_i`, use `s_hat_i=dq_i/dt-g_i`. The frozen test localized
+  concealed sinks correctly in mechanics, an electromagnetic relation and an open
+  quantum holdout (`3/3`; `18,991` scored samples; maximum source NRMSE `1.0554e-9`).
+  Keep the claim at controlled inverse diagnosis. The result does not derive the native
+  loss law or predict an unseen waveform; that requires a separate forward holdout.
+- COMPUTING `OTHER` IS REVERSIBLE BUT NOT AUTOMATICALLY SMALL OR SECRET: the integer
+  pair transform `m=b+floor((a-b)/2)`, `d=a-b` reconstructs with
+  `b=m-floor(d/2)`, `a=b+d`. Frozen testing restored `20/20` streams and every byte
+  pair. Compression was data-dependent: smooth telemetry improved, while record
+  memory, text, code and random controls grew; simple delta also beat the fixed ARA
+  transform on the smooth case. The public residual stream was inverted exactly.
+  Therefore keep restoration, compression, confidentiality, authentication and
+  public-key replacement as separate claims. Standard authenticated encryption may
+  wrap the residual, but its security is not supplied by ARA.
 
 ## 2. Measurement laws
 

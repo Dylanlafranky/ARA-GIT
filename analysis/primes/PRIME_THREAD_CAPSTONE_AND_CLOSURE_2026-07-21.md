@@ -256,6 +256,59 @@ that were not suitable for Git. This fresh-clone gap was closed on 23 July by
 `analysis/primes/reproduce_pn35_pn36_csvs.py`, which rebuilds both label-free and scored CSVs through the frozen
 scripts and verifies the recorded hashes. See `analysis/primes/PN35_PN36_CSV_REPRODUCTION.md`.
 
+### 23 July PN7B exact adjacent-prime decompression
+
+The exact PN7B gap-pair inventories were combined across all five complete windows, covering `44,360,409` internal
+prime nodes. The population mean ARA is `0.9999986966`, but only `2.1178%` of individual nodes have equal incoming
+and outgoing gaps. The near-1 whole is produced by almost perfectly mirrored asymmetric children: exact gap-pair
+transpose cosine is `0.9999918763`. This is the lateral spacing ARA after primes are known; it is distinct from the
+factor-survival non-closure that defines primality. Full note and compact exact inventories:
+`analysis/primes/PN7B_ALL_MEASURED_PRIME_ARA_NOTE_2026-07-23.md`.
+
+### 23 July PN37 complete factor-child decompression
+
+PN37 tested Dylan's correction that the near-1 parent/population reading may conceal asymmetric lower children.
+Every one of the `45,166` primes in the complete PN10B target interval was opened against every lower prime gate
+through its square root: `286,253,917` child relations across `6,338` gate identities. Pooled Phase A was
+`1.0000472387`, while mean individual distance from the ridge was `0.4997970` and the children spanned almost the
+entire 0-2 line. The only `45,166` exact 1.0 children were the parity gate `q=2`; every odd-gate child was
+asymmetric. This confirms a parent-cancellation/coarse-graining result, while established nonzero-residue balance
+supplies the number-theoretic explanation.
+
+A method-locked post-hoc child-level Phi comparison did not pass. Phi occupancy lift was only `1.0000550`; quarter
+was stronger on distance and third was stronger on occupancy. Read
+`analysis/primes/PN37_FULL_CHILD_ARA_PHI_REPORT_2026-07-23.md`. This does not rule out Phi in another operator, but
+it does rule against promoting Phi from this complete factor-gate child field.
+
+### 23 July PN41 prime-thalweg and Phi handover
+
+The later river/valley proposal was converted into an exact nearest-survivor path through natural factor gates. At
+each visible handover, the killed candidate's folded position inside the newly opened survivor interval was frozen
+as the Phi-testing coordinate. Two fresh million-integer targets, with 1,000 deterministic anchors each, rejected
+the mirrored golden landmark in this coordinate. Both targets instead had median split exactly `1/3`, unrestricted
+optimum `0.334`, and mean folded split near `0.330`. Phi was significantly farther away than the one-third control
+in both paired-anchor bootstraps. All frozen Phi gates failed.
+
+The thalweg itself is an exact and useful ARA-style representation of incremental sieve arithmetic. The replicated
+one-third structure is a candidate triangular / `Information^3` crosswalk, but ordinary rational survivor-gap
+geometry remains a sufficient possible explanation. This is not a new prime algorithm and does not rule out a
+different, independently frozen Phi role such as whole-path curvature. Full report:
+`analysis/primes/PN41_PRIME_THALWEG_PHI_REPORT_2026-07-23.md`.
+
+### Post-PN41 prime-singularity clarification
+
+Dylan then corrected the scale reading: a prime need not be only a `1.0` ridge. The same boundary may read as the
+parent's lateral contact ridge and, vertically, as the `2 -> 0` singularity of a completed multiplicative TE-ARA
+sphere. After crossing, the prime becomes a new `0`-source factor gate for later numbers. This reconciles the
+near-`1.0` coarse parent with asymmetric children and the prime's role as a new ruler.
+
+The corresponding forward hypothesis is `p-hat = N + (2-a(N))/v(N)`. It remains untested because the label-free
+number phase `a(N)`, local ARA rate `v(N)`, and rule selecting only the dominant Phase-A and Phase-B children are not
+yet defined. If those coordinates require complete factor checks, the statement remains a geometric crosswalk; if
+they can be computed independently and more cheaply, it becomes a genuinely new prime-location proposal. Preserve
+this distinction when the thread resumes. Full note:
+`analysis/primes/PN42_PRIME_AS_TEARA_SINGULARITY_NOTE_2026-07-23.md`.
+
 ## Resume conditions
 
 The prime thread should remain parked unless one of these is supplied independently:
@@ -289,5 +342,10 @@ as evidence that ARA has improved prime computation.
 - `analysis/primes/PN36_PHI_TO_PENTAGON_CONVERSION_REPORT_2026-07-22.md`
 - `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`
 - `analysis/primes/PN35_PN36_CSV_REPRODUCTION.md`
+- `analysis/primes/PN7B_ALL_MEASURED_PRIME_ARA_NOTE_2026-07-23.md`
+- `analysis/primes/PN37_FULL_CHILD_ARA_PHI_REPORT_2026-07-23.md`
+- `analysis/primes/PN41_PRIME_THALWEG_PHI_REPORT_2026-07-23.md`
+- `analysis/primes/PN42_PRIME_AS_TEARA_SINGULARITY_NOTE_2026-07-23.md`
+- `FableConvo/SESSION_RECORD_2026-07-23_PRIME_FULL_CHILD_ARA_AND_PHI.md`
 - `FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md`
 - `analysis/primes/PRIME_TEST_RELATIONAL_GLOSSARY.md`

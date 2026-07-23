@@ -1,0 +1,40 @@
+{
+  "analysis": "Landau-Zener structural-path and final-handover ARA crosswalk",
+  "hamiltonian_convention": "H=[[vt/2,g],[g,-vt/2]]",
+  "worked_parameters": {
+    "hbar": 1.0,
+    "coupling_g": 0.5,
+    "sweep_v": 1.0,
+    "gamma": 0.25,
+    "minimum_gap_2g": 1.0,
+    "gamma_g2_over_hbar_v": 0.25,
+    "probability_stay_diabatic": 0.20787957635076193,
+    "probability_handover_adiabatic": 0.7921204236492381,
+    "ara_handover_outcome": 1.5842408472984761
+  },
+  "definitions": {
+    "detuning": "Delta(t)=v*t",
+    "instantaneous_gap": "sqrt((v*t)^2+4*g^2)",
+    "structural_ara": "x_path=1+(v*t)/sqrt((v*t)^2+4*g^2)",
+    "connection_time_control": "gamma=g^2/(hbar*|v|)",
+    "stay_probability": "P_D=exp(-2*pi*gamma)",
+    "handover_probability": "P_H=1-P_D",
+    "outcome_ara": "x_handover=2*(1-exp(-2*pi*gamma))",
+    "outcome_ridge_gamma": "ln(2)/(2*pi)"
+  },
+  "status": {
+    "structural_path": "exact instantaneous lower-eigenstate coordinate",
+    "outcome_probability": "exact Landau-Zener asymptotic result under its ideal assumptions",
+    "ara_interpretation": "exact reparameterization plus proposed Connection/Traversal language",
+    "universal_handover_law": "not established"
+  },
+  "important_limits": [
+    "x_path describes an instantaneous eigenstate; the actual evolving state follows it only in the adiabatic limit.",
+    "t=0 is the equal bare-energy ridge, while nonzero g keeps the coupled eigenvalues separated.",
+    "g is a coupling energy, not itself an ARA ratio; gamma is the dimensionless competition.",
+    "At g=0 the gap closes and the x_path formula is undefined exactly at t=0.",
+    "TE-ARA is only the secondary closure perspective; both moving coordinates are primarily plain ARA."
+  ],
+  "path_csv": "LANDAU_ZENER_ARA_PATH.csv",
+  "outcome_csv": "LANDAU_ZENER_ARA_OUTCOMES.csv"
+}

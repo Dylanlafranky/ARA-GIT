@@ -1,0 +1,860 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "The virial ARA ladder: planetary motion to quantum hydrogen",
+    "description": "An exact cross-scale comparison of inverse-distance bound systems using established virial physics and declared ARA coordinates.",
+    "generatedAt": "2026-07-23T00:00:00+10:00",
+    "sources": [
+      {
+        "id": "src-virial-ladder",
+        "label": "Deterministic virial cross-scale ladder",
+        "path": "analysis/virial/virial_cross_scale_ladder.py",
+        "query": {
+          "engine": "portable-snapshot",
+          "language": "sql",
+          "description": "Deterministic calculations from the inverse-distance virial theorem using NASA orbital inputs and NIST 2022 CODATA constants.",
+          "sql": "SELECT * FROM snapshot.virial_ladder ORDER BY physics_equation; SELECT * FROM snapshot.virial_markers ORDER BY rung_order, ara_coordinate; SELECT * FROM snapshot.virial_ridge ORDER BY rung_order; SELECT * FROM snapshot.earth_orbit_curve ORDER BY phase_fraction, series;",
+          "tables_used": [
+            "snapshot.virial_ladder",
+            "snapshot.virial_markers",
+            "snapshot.virial_ridge",
+            "snapshot.earth_orbit_curve"
+          ],
+          "filters": [
+            "Bound inverse-distance systems only",
+            "Ideal Newtonian gravity, ideal classical Coulomb, and ideal nonrelativistic hydrogen",
+            "Audit Earth orbit sampled at 180 equal-time mean-anomaly positions",
+            "Report visual deterministically downsampled to 18 equal-time positions plus closure"
+          ],
+          "metric_definitions": [
+            "Connection channel C = absolute mean potential energy |<V>|",
+            "Traversal channel R = twice mean kinetic energy 2<T>",
+            "Virial ARA x_vir = 2R/(C+R)",
+            "Raw TE-ARA allocations t_T=2<T>/(<T>+|<V>|), t_C=2|<V>|/(<T>+|<V>|)"
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "cross-scale-ara-position",
+        "title": "Virial ARA coordinate across four bound-system rungs",
+        "subtitle": "The physical scale changes by more than 21 orders of magnitude; every declared virial comparison remains at the 1.0 ridge",
+        "intent": "comparison",
+        "question": "Where does each inverse-distance bound system sit on the 0\u20132 virial ARA diameter?",
+        "rationale": "A single-series rung line shows the same declared coordinate without flattening TE-ARA component allocations into positions.",
+        "comparisonContext": {
+          "grain": "one ARA reading per physical rung",
+          "unit": "dimensionless ARA coordinate",
+          "semanticFamily": "cross-scale normalized position"
+        },
+        "type": "line",
+        "dataset": "virial_ridge",
+        "sourceId": "src-virial-ladder",
+        "encodings": {
+          "x": {
+            "field": "rung",
+            "type": "nominal",
+            "label": "Scale rung"
+          },
+          "y": {
+            "field": "ara_coordinate",
+            "type": "quantitative",
+            "label": "ARA coordinate"
+          },
+          "tooltip": [
+            {
+              "field": "rung",
+              "type": "text",
+              "label": "Rung"
+            },
+            {
+              "field": "ara_coordinate",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "log10_scale_m",
+              "type": "quantitative",
+              "label": "log10 scale (m)"
+            },
+            {
+              "field": "domain",
+              "type": "text",
+              "label": "Physics"
+            }
+          ]
+        },
+        "xAxisTitle": "Planetary \u2192 satellite \u2192 classical Coulomb \u2192 quantum",
+        "yAxisTitle": "ARA coordinate on 0\u20132",
+        "layout": "full",
+        "maxRows": 4,
+        "referenceLines": [
+          {
+            "value": 1.0,
+            "label": "1.0 virial ridge",
+            "axis": "y"
+          }
+        ],
+        "surface": {
+          "surface": "explorer",
+          "viewMode": "both",
+          "interactiveLegend": true,
+          "showControls": false
+        }
+      },
+      {
+        "id": "earth-orbit-approach",
+        "title": "Earth\u2013Sun virial ARA over one orbit",
+        "subtitle": "The instantaneous child reading moves around the ridge; the completed channel account returns to 1.0",
+        "intent": "trend",
+        "question": "How does a time-resolved Kepler orbit produce a stable parent virial ridge?",
+        "rationale": "An ordered line chart separates the instantaneous child reading from the cumulative channel account over one complete cycle.",
+        "comparisonContext": {
+          "grain": "equal-time orbital phase sample",
+          "unit": "dimensionless ARA coordinate",
+          "semanticFamily": "instantaneous versus accumulated relation"
+        },
+        "type": "line",
+        "dataset": "earth_orbit_curve",
+        "sourceId": "src-virial-ladder",
+        "encodings": {
+          "x": {
+            "field": "phase_fraction",
+            "type": "quantitative",
+            "label": "Fraction of orbit"
+          },
+          "y": {
+            "field": "ara_coordinate",
+            "type": "quantitative",
+            "label": "ARA coordinate"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Measurement"
+          },
+          "tooltip": [
+            {
+              "field": "phase_fraction",
+              "type": "quantitative",
+              "label": "Orbit fraction"
+            },
+            {
+              "field": "series",
+              "type": "text",
+              "label": "Measurement"
+            },
+            {
+              "field": "ara_coordinate",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "radius_au",
+              "type": "quantitative",
+              "label": "Radius / a"
+            }
+          ]
+        },
+        "xAxisTitle": "Fraction of one Earth orbit",
+        "yAxisTitle": "Virial ARA coordinate",
+        "layout": "full",
+        "maxRows": 38,
+        "palette": {
+          "kind": "categorical",
+          "name": "identity"
+        },
+        "referenceLines": [
+          {
+            "value": 1.0,
+            "label": "1.0 parent ridge",
+            "axis": "y"
+          }
+        ],
+        "surface": {
+          "surface": "explorer",
+          "viewMode": "both",
+          "interactiveLegend": true,
+          "showControls": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "two-column-ladder",
+        "title": "Established physics and its ARA reading",
+        "subtitle": "The force identity changes; the declared normalized relation remains fixed",
+        "dataset": "virial_ladder",
+        "defaultSort": {
+          "field": "physics_equation",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "sourceId": "src-virial-ladder",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "physics_equation",
+            "label": "Established physics equation",
+            "type": "text"
+          },
+          {
+            "field": "ara_equation",
+            "label": "ARA math and plain-language version",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "layout": "full",
+        "body": "# The virial ARA ladder: planetary motion to quantum hydrogen"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## One inverse-distance relation survives the entire ladder\n\nFor four ideal bound systems, established physics gives `2<T> = |<V>|`. After declaring **Connection** as `C=|<V>|` and **Traversal** as `R=2<T>`, the exact ARA coordinate `x_vir=2R/(C+R)` is `1.0` on every rung. This is substantial evidence that the same *declared coordinate* can remain scale-consistent. It is not a new virial theorem and does not prove that all systems share one universal physical sphere."
+      },
+      {
+        "id": "visual-reading",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## The same ridge appears without flattening the raw asymmetry\n\nRead the chart vertically on the plain-ARA `0\u20132` scale: every rung lands at the virial `1.0` ridge. Separately, the raw energy account remains asymmetric at `2/3` Traversal and `4/3` Connection, summing to TE-ARA `2`; those are component amounts, not extra positions on the plotted diameter. The virial comparison weights kinetic energy by the theorem's physical factor of two, placing `R` and `C` at their `1.0` relational ridge."
+      },
+      {
+        "id": "cross-scale-chart-block",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "cross-scale-ara-position"
+      },
+      {
+        "id": "two-column-heading",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## The two-column crosswalk keeps physics and interpretation side by side\n\nThe left column states the established equation. The right column shows the declared ARA transformation and its plain-language meaning. The quantum row uses expectation values and must not be read as a classical electron orbit."
+      },
+      {
+        "id": "two-column-table-block",
+        "type": "table",
+        "layout": "full",
+        "tableId": "two-column-ladder"
+      },
+      {
+        "id": "scope-definitions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## The ridge belongs to a weighted relation and a declared boundary\n\n**Physics scope:** bound systems governed by an ideal inverse-distance potential `V\u221d-1/r`. **Connection channel:** `C=|<V>|`. **Traversal channel:** `R=2<T>`. **Virial ARA:** `x_vir=2R/(C+R)`. **Raw TE-ARA:** `t_T=2<T>/(<T>+|<V>|)` and `t_C=2|<V>|/(<T>+|<V>|)`. These are different observables on the same normalized geometry."
+      },
+      {
+        "id": "approach-heading",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## A moving child can produce a stable parent ridge\n\nEarth's slightly elliptical orbit supplies the visual version of the original rock insight. Its instantaneous relation moves slightly to either side of `1.0`, while the account formed from increasingly complete orbital channels converges on the parent ridge. In a conservative orbit the planet does not settle or stop; the measurement settles as it covers the cycle."
+      },
+      {
+        "id": "earth-orbit-chart-block",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "earth-orbit-approach"
+      },
+      {
+        "id": "method-validation",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-virial-ladder",
+        "body": "## Calculation and validation\n\nThe planetary row uses the Newtonian two-body mean-energy relation at one astronomical unit. The satellite row uses a declared circular `7000 km` geocentric reference. The classical Coulomb row is a comparison model at the Bohr radius. The quantum row uses ideal nonrelativistic hydrogen expectation values. All four rows are recomputed from saved inputs; no ARA landmark was fitted to the result."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## What this establishes\u2014and what it does not\n\nThis establishes an exact, scale-invariant **crosswalk** for a family already unified by the inverse-distance potential and virial theorem. The common result is therefore expected in established physics. It does not prove universal ARA fractality, quantum gravity, or a new planetary-to-quantum force. Driven, dissipative, unbound, relativistic, many-body and non-homogeneous systems require boundary terms or a different virial relation and are essential controls."
+      },
+      {
+        "id": "next-step",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## The next discriminating test is controlled failure and recovery\n\nApply the frozen coordinate to potentials `V\u221dr^k`, where established physics predicts `2<T>=k<V>`, and to an open or driven system where the simple ridge should fail. A useful ARA contribution would be to classify the residual from independently measured boundary terms without retuning the coordinate after seeing the outcome."
+      },
+      {
+        "id": "further-questions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Further questions\n\nDoes the same ARA residual decomposition identify the missing pressure, surface or driving term in a generalized virial theorem? Can a frozen measurement-window rule distinguish a genuinely equilibrating system from a conservative system whose running average merely approaches the ridge?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-23T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "virial_ladder": [
+        {
+          "physics_equation": "1. Planetary \u2014 Earth\u2013Sun: <T>=G M_sun M_earth/(2a); <V>=-G M_sun M_earth/a",
+          "ara_equation": "C=|<V>|; R=2<T>; x_vir=2R/(C+R)=1. The instantaneous orbital children move around the ridge; the full-cycle parent balances."
+        },
+        {
+          "physics_equation": "2. Satellite \u2014 circular 7000 km reference: T/mu=GM_earth/(2r); V/mu=-GM_earth/r",
+          "ara_equation": "C=|V|; R=2T; x_vir=1 at every point of the ideal circle. A circular orbit is already locally on the virial ridge rather than only averaging to it."
+        },
+        {
+          "physics_equation": "3. Classical Coulomb \u2014 electron/proton at a0: T=k_e e^2/(2a0)=E_h/2; V=-k_e e^2/a0=-E_h",
+          "ara_equation": "The force law changes identity, but C:R and x_vir remain the same. This is a classical comparison model, not a claim that hydrogen contains a classical orbit."
+        },
+        {
+          "physics_equation": "4. Quantum \u2014 ideal hydrogen 1s: <T>=E_h/2; <V>=-E_h from the quantum virial theorem",
+          "ara_equation": "Expectation-value channels C=|<V>| and R=2<T> give x_vir=1. The ridge is an expectation-value relation; it is not an electron completing a classical orbit."
+        }
+      ],
+      "virial_markers": [
+        {
+          "rung": "1. Planetary \u2014 Earth\u2013Sun",
+          "rung_order": 1,
+          "domain": "Classical gravitation",
+          "reading_type": "Raw Traversal allocation",
+          "ara_coordinate": 0.6666666666666666,
+          "characteristic_scale_m": 149597870700.0,
+          "log10_scale_m": 11.17492541204568,
+          "mean_kinetic": 2.6490393746046813e+33,
+          "mean_potential": -5.298078749209363e+33,
+          "energy_unit": "J",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "1. Planetary \u2014 Earth\u2013Sun",
+          "rung_order": 1,
+          "domain": "Classical gravitation",
+          "reading_type": "Virial comparison ridge",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 149597870700.0,
+          "log10_scale_m": 11.17492541204568,
+          "mean_kinetic": 2.6490393746046813e+33,
+          "mean_potential": -5.298078749209363e+33,
+          "energy_unit": "J",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "1. Planetary \u2014 Earth\u2013Sun",
+          "rung_order": 1,
+          "domain": "Classical gravitation",
+          "reading_type": "Raw Connection allocation",
+          "ara_coordinate": 1.3333333333333333,
+          "characteristic_scale_m": 149597870700.0,
+          "log10_scale_m": 11.17492541204568,
+          "mean_kinetic": 2.6490393746046813e+33,
+          "mean_potential": -5.298078749209363e+33,
+          "energy_unit": "J",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "2. Satellite \u2014 circular 7000 km reference",
+          "rung_order": 2,
+          "domain": "Classical gravitation",
+          "reading_type": "Raw Traversal allocation",
+          "ara_coordinate": 0.6666666666666666,
+          "characteristic_scale_m": 7000000.0,
+          "log10_scale_m": 6.845098040014257,
+          "mean_kinetic": 28471460.12857143,
+          "mean_potential": -56942920.25714286,
+          "energy_unit": "J/kg",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "2. Satellite \u2014 circular 7000 km reference",
+          "rung_order": 2,
+          "domain": "Classical gravitation",
+          "reading_type": "Virial comparison ridge",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 7000000.0,
+          "log10_scale_m": 6.845098040014257,
+          "mean_kinetic": 28471460.12857143,
+          "mean_potential": -56942920.25714286,
+          "energy_unit": "J/kg",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "2. Satellite \u2014 circular 7000 km reference",
+          "rung_order": 2,
+          "domain": "Classical gravitation",
+          "reading_type": "Raw Connection allocation",
+          "ara_coordinate": 1.3333333333333333,
+          "characteristic_scale_m": 7000000.0,
+          "log10_scale_m": 6.845098040014257,
+          "mean_kinetic": 28471460.12857143,
+          "mean_potential": -56942920.25714286,
+          "energy_unit": "J/kg",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "3. Classical Coulomb \u2014 electron/proton at a0",
+          "rung_order": 3,
+          "domain": "Classical electromagnetism",
+          "reading_type": "Raw Traversal allocation",
+          "ara_coordinate": 0.6666666666666667,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "3. Classical Coulomb \u2014 electron/proton at a0",
+          "rung_order": 3,
+          "domain": "Classical electromagnetism",
+          "reading_type": "Virial comparison ridge",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "3. Classical Coulomb \u2014 electron/proton at a0",
+          "rung_order": 3,
+          "domain": "Classical electromagnetism",
+          "reading_type": "Raw Connection allocation",
+          "ara_coordinate": 1.3333333333333335,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "4. Quantum \u2014 ideal hydrogen 1s",
+          "rung_order": 4,
+          "domain": "Nonrelativistic quantum mechanics",
+          "reading_type": "Raw Traversal allocation",
+          "ara_coordinate": 0.6666666666666667,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV expectation value",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "4. Quantum \u2014 ideal hydrogen 1s",
+          "rung_order": 4,
+          "domain": "Nonrelativistic quantum mechanics",
+          "reading_type": "Virial comparison ridge",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV expectation value",
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "4. Quantum \u2014 ideal hydrogen 1s",
+          "rung_order": 4,
+          "domain": "Nonrelativistic quantum mechanics",
+          "reading_type": "Raw Connection allocation",
+          "ara_coordinate": 1.3333333333333335,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "mean_kinetic": 13.6056931229905,
+          "mean_potential": -27.211386245981,
+          "energy_unit": "eV expectation value",
+          "te_ara_total": 2.0
+        }
+      ],
+      "virial_ridge": [
+        {
+          "rung": "1. Planetary \u2014 Earth\u2013Sun",
+          "rung_order": 1,
+          "domain": "Classical gravitation",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 149597870700.0,
+          "log10_scale_m": 11.17492541204568,
+          "raw_traversal_allocation": 0.6666666666666666,
+          "raw_connection_allocation": 1.3333333333333333,
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "2. Satellite \u2014 circular 7000 km reference",
+          "rung_order": 2,
+          "domain": "Classical gravitation",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 7000000.0,
+          "log10_scale_m": 6.845098040014257,
+          "raw_traversal_allocation": 0.6666666666666666,
+          "raw_connection_allocation": 1.3333333333333333,
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "3. Classical Coulomb \u2014 electron/proton at a0",
+          "rung_order": 3,
+          "domain": "Classical electromagnetism",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "raw_traversal_allocation": 0.6666666666666667,
+          "raw_connection_allocation": 1.3333333333333335,
+          "te_ara_total": 2.0
+        },
+        {
+          "rung": "4. Quantum \u2014 ideal hydrogen 1s",
+          "rung_order": 4,
+          "domain": "Nonrelativistic quantum mechanics",
+          "ara_coordinate": 1.0,
+          "characteristic_scale_m": 5.29177210544e-11,
+          "log10_scale_m": -10.276398867334313,
+          "raw_traversal_allocation": 0.6666666666666667,
+          "raw_connection_allocation": 1.3333333333333335,
+          "te_ara_total": 2.0
+        }
+      ],
+      "earth_orbit_curve": [
+        {
+          "phase_fraction": 0.0,
+          "ara_coordinate": 1.0082863772221866,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.98328877,
+          "connection_channel": 1.016995241387736,
+          "traversal_channel": 1.0339904827754718
+        },
+        {
+          "phase_fraction": 0.0,
+          "ara_coordinate": 1.0082863772221866,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.98328877,
+          "connection_channel": 1.016995241387736,
+          "traversal_channel": 1.0339904827754718
+        },
+        {
+          "phase_fraction": 0.05555555555555555,
+          "ara_coordinate": 1.0077740735248624,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9843300334784045,
+          "connection_channel": 1.0159194233525735,
+          "traversal_channel": 1.031838846705147
+        },
+        {
+          "phase_fraction": 0.05555555555555555,
+          "ara_coordinate": 1.0080304270739322,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9843300334784045,
+          "connection_channel": 1.0159194233525735,
+          "traversal_channel": 1.031838846705147
+        },
+        {
+          "phase_fraction": 0.1111111111111111,
+          "ara_coordinate": 1.0063019902815988,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9873160855310863,
+          "connection_channel": 1.0128468629801477,
+          "traversal_channel": 1.0256937259602954
+        },
+        {
+          "phase_fraction": 0.1111111111111111,
+          "ara_coordinate": 1.007456315101635,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9873160855310863,
+          "connection_channel": 1.0128468629801477,
+          "traversal_channel": 1.0256937259602954
+        },
+        {
+          "phase_fraction": 0.16666666666666666,
+          "ara_coordinate": 1.0040552587559113,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9918564583194732,
+          "connection_channel": 1.0082104034431802,
+          "traversal_channel": 1.0164208068863605
+        },
+        {
+          "phase_fraction": 0.16666666666666666,
+          "ara_coordinate": 1.0066126547405303,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9918564583194732,
+          "connection_channel": 1.0082104034431802,
+          "traversal_channel": 1.0164208068863605
+        },
+        {
+          "phase_fraction": 0.2222222222222222,
+          "ara_coordinate": 1.00131322131256,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9973701037390603,
+          "connection_channel": 1.0026368308525395,
+          "traversal_channel": 1.005273661705079
+        },
+        {
+          "phase_fraction": 0.2222222222222222,
+          "ara_coordinate": 1.0055663450312653,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9973701037390603,
+          "connection_channel": 1.0026368308525395,
+          "traversal_channel": 1.005273661705079
+        },
+        {
+          "phase_fraction": 0.2777777777777778,
+          "ara_coordinate": 0.9984117332781517,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0031714962617257,
+          "connection_channel": 0.9968385303275221,
+          "traversal_channel": 0.9936770606550442
+        },
+        {
+          "phase_fraction": 0.2777777777777778,
+          "ara_coordinate": 1.0043952129705047,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0031714962617257,
+          "connection_channel": 0.9968385303275221,
+          "traversal_channel": 0.9936770606550442
+        },
+        {
+          "phase_fraction": 0.3333333333333333,
+          "ara_coordinate": 0.9957003726150577,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0085624394706547,
+          "connection_channel": 0.9915102534701286,
+          "traversal_channel": 0.9830205069402571
+        },
+        {
+          "phase_fraction": 0.3333333333333333,
+          "ara_coordinate": 1.0031806120201425,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0085624394706547,
+          "connection_channel": 0.9915102534701286,
+          "traversal_channel": 0.9830205069402571
+        },
+        {
+          "phase_fraction": 0.3888888888888889,
+          "ara_coordinate": 0.9935006595125014,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0129147436586508,
+          "connection_channel": 0.9872499203516353,
+          "traversal_channel": 0.9744998407032706
+        },
+        {
+          "phase_fraction": 0.3888888888888889,
+          "ara_coordinate": 1.0020008835001604,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0129147436586508,
+          "connection_channel": 0.9872499203516353,
+          "traversal_channel": 0.9744998407032706
+        },
+        {
+          "phase_fraction": 0.4444444444444444,
+          "ara_coordinate": 0.992069942463339,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0157353329774523,
+          "connection_channel": 0.9845084320033183,
+          "traversal_channel": 0.9690168640066366
+        },
+        {
+          "phase_fraction": 0.4444444444444444,
+          "ara_coordinate": 1.0009260809635299,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0157353329774523,
+          "connection_channel": 0.9845084320033183,
+          "traversal_channel": 0.9690168640066366
+        },
+        {
+          "phase_fraction": 0.5,
+          "ara_coordinate": 0.9915739804244442,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.01671123,
+          "connection_channel": 0.9835634450501741,
+          "traversal_channel": 0.9671268901003482
+        },
+        {
+          "phase_fraction": 0.5,
+          "ara_coordinate": 1.0000139665757275,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.01671123,
+          "connection_channel": 0.9835634450501741,
+          "traversal_channel": 0.9671268901003482
+        },
+        {
+          "phase_fraction": 0.5555555555555556,
+          "ara_coordinate": 0.992069942463339,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0157353329774523,
+          "connection_channel": 0.9845084320033183,
+          "traversal_channel": 0.9690168640066366
+        },
+        {
+          "phase_fraction": 0.5555555555555556,
+          "ara_coordinate": 0.999307097885187,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0157353329774523,
+          "connection_channel": 0.9845084320033183,
+          "traversal_channel": 0.9690168640066366
+        },
+        {
+          "phase_fraction": 0.6111111111111112,
+          "ara_coordinate": 0.9935006595125014,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0129147436586508,
+          "connection_channel": 0.9872499203516353,
+          "traversal_channel": 0.9744998407032706
+        },
+        {
+          "phase_fraction": 0.6111111111111112,
+          "ara_coordinate": 0.9988308173521048,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0129147436586508,
+          "connection_channel": 0.9872499203516353,
+          "traversal_channel": 0.9744998407032706
+        },
+        {
+          "phase_fraction": 0.6666666666666666,
+          "ara_coordinate": 0.9957003726150577,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0085624394706547,
+          "connection_channel": 0.9915102534701286,
+          "traversal_channel": 0.9830205069402571
+        },
+        {
+          "phase_fraction": 0.6666666666666666,
+          "ara_coordinate": 0.9985920763048154,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0085624394706547,
+          "connection_channel": 0.9915102534701286,
+          "traversal_channel": 0.9830205069402571
+        },
+        {
+          "phase_fraction": 0.7222222222222222,
+          "ara_coordinate": 0.9984117332781517,
+          "series": "Instantaneous child reading",
+          "radius_au": 1.0031714962617257,
+          "connection_channel": 0.9968385303275221,
+          "traversal_channel": 0.9936770606550442
+        },
+        {
+          "phase_fraction": 0.7222222222222222,
+          "ara_coordinate": 0.9985792011011462,
+          "series": "Cumulative parent reading",
+          "radius_au": 1.0031714962617257,
+          "connection_channel": 0.9968385303275221,
+          "traversal_channel": 0.9936770606550442
+        },
+        {
+          "phase_fraction": 0.7777777777777778,
+          "ara_coordinate": 1.00131322131256,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9973701037390603,
+          "connection_channel": 1.0026368308525395,
+          "traversal_channel": 1.005273661705079
+        },
+        {
+          "phase_fraction": 0.7777777777777778,
+          "ara_coordinate": 0.9987628691738595,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9973701037390603,
+          "connection_channel": 1.0026368308525395,
+          "traversal_channel": 1.005273661705079
+        },
+        {
+          "phase_fraction": 0.8333333333333334,
+          "ara_coordinate": 1.0040552587559113,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9918564583194732,
+          "connection_channel": 1.0082104034431802,
+          "traversal_channel": 1.0164208068863605
+        },
+        {
+          "phase_fraction": 0.8333333333333334,
+          "ara_coordinate": 0.9990986226822886,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9918564583194732,
+          "connection_channel": 1.0082104034431802,
+          "traversal_channel": 1.0164208068863605
+        },
+        {
+          "phase_fraction": 0.8888888888888888,
+          "ara_coordinate": 1.0063019902815988,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9873160855310863,
+          "connection_channel": 1.0128468629801477,
+          "traversal_channel": 1.0256937259602954
+        },
+        {
+          "phase_fraction": 0.8888888888888888,
+          "ara_coordinate": 0.9995311230557558,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9873160855310863,
+          "connection_channel": 1.0128468629801477,
+          "traversal_channel": 1.0256937259602954
+        },
+        {
+          "phase_fraction": 0.9444444444444444,
+          "ara_coordinate": 1.0077740735248624,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.9843300334784045,
+          "connection_channel": 1.0159194233525735,
+          "traversal_channel": 1.031838846705147
+        },
+        {
+          "phase_fraction": 0.9444444444444444,
+          "ara_coordinate": 1.0,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.9843300334784045,
+          "connection_channel": 1.0159194233525735,
+          "traversal_channel": 1.031838846705147
+        },
+        {
+          "phase_fraction": 1.0,
+          "ara_coordinate": 1.0082863772221866,
+          "series": "Instantaneous child reading",
+          "radius_au": 0.98328877,
+          "connection_channel": 1.016995241387736,
+          "traversal_channel": 1.0339904827754718
+        },
+        {
+          "phase_fraction": 1.0,
+          "ara_coordinate": 1.0,
+          "series": "Cumulative parent reading",
+          "radius_au": 0.98328877,
+          "connection_channel": 1.016995241387736,
+          "traversal_channel": 1.0339904827754718
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "src-virial-ladder",
+      "label": "Deterministic virial cross-scale ladder",
+      "path": "analysis/virial/virial_cross_scale_ladder.py",
+      "query": {
+        "engine": "portable-snapshot",
+        "language": "sql",
+        "description": "Deterministic calculations from the inverse-distance virial theorem using NASA orbital inputs and NIST 2022 CODATA constants.",
+        "sql": "SELECT * FROM snapshot.virial_ladder ORDER BY physics_equation; SELECT * FROM snapshot.virial_markers ORDER BY rung_order, ara_coordinate; SELECT * FROM snapshot.virial_ridge ORDER BY rung_order; SELECT * FROM snapshot.earth_orbit_curve ORDER BY phase_fraction, series;",
+        "tables_used": [
+          "snapshot.virial_ladder",
+          "snapshot.virial_markers",
+          "snapshot.virial_ridge",
+          "snapshot.earth_orbit_curve"
+        ],
+        "filters": [
+          "Bound inverse-distance systems only",
+          "Ideal Newtonian gravity, ideal classical Coulomb, and ideal nonrelativistic hydrogen",
+          "Audit Earth orbit sampled at 180 equal-time mean-anomaly positions",
+          "Report visual deterministically downsampled to 18 equal-time positions plus closure"
+        ],
+        "metric_definitions": [
+          "Connection channel C = absolute mean potential energy |<V>|",
+          "Traversal channel R = twice mean kinetic energy 2<T>",
+          "Virial ARA x_vir = 2R/(C+R)",
+          "Raw TE-ARA allocations t_T=2<T>/(<T>+|<V>|), t_C=2|<V>|/(<T>+|<V>|)"
+        ]
+      }
+    }
+  ]
+}

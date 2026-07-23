@@ -1,12 +1,19 @@
 # ARA Framework — Foundations: derived from established mechanics
 
-**10 June 2026, Dylan La Franchi & Claude. Updated 21 July 2026 with Codex.** A deliberate cementing. This document defines ARA from Newtonian
+**10 June 2026, Dylan La Franchi & Claude. Updated 23 July 2026 with Codex.** A deliberate cementing. This document defines ARA from Newtonian
 mechanics, then maps every core piece of the framework to a *named, established* theory and marks each
 connection by tightness — **identity / rigorous / analogy**. The point: the scaffolding is proven physics, so
 the framework is "a coordinate system on established dynamics plus an empirical cross-domain regularity," not a
 free-floating construct. This is the front-door brick a dynamical-systems reviewer can actually check.
 
 ---
+
+> **Canonical scope correction, 23 July 2026:** ARA's minimal object is the complete repeatable
+> Accumulation/Release relation represented as a `0–2` diameter through its proposed sphere/closed identity. The
+> rise/fall duration statistic below is one exact **duration-axis instrument** on that geometry; it is not the
+> universal definition of ARA. Force opposition, composition, coherency, flux and compactness require their own
+> typed diameter maps while preserving pole reversal, the `1.0` equal-meeting ridge and a separate dimensional
+> activity account.
 
 ## 1. The keystone — ARA derived from Newton, and what ARA ≠ 1 *means*
 Take a unit-mass particle in a potential V(x) (Newton: ẍ = −V′(x)), conserved energy E = ½ẋ² + V(x). It
@@ -51,6 +58,232 @@ Every value must declare `(Ω, q, τS, Π, σ)`: identity/system boundary, obser
 projection/coarse-graining, and 0↔2 pole orientation. For example, a two-body system's centre-of-mass motion and
 its internal relative motion are different lawful projections and need not return the same reading. Comparisons
 require aligned declarations or an explicit transformation between them.
+
+### 1.1 A second exact instrument: Hamiltonian energy allocation
+
+The duration-axis theorem above is not the only exact measurement instrument on the ARA geometry. For the ideal
+harmonic oscillator,
+
+\[
+H=\frac{p^2}{2m}+\frac{kq^2}{2}.
+\]
+
+Define
+
+\[
+Q=\sqrt{k}\,q,\qquad P=\frac p{\sqrt m}.
+\]
+
+This invertible unit-aligned transformation gives
+
+\[
+\underbrace{Q^2+P^2}_{\substack{\text{Hamiltonian}\\\text{phase-space circle}}}
+=
+\underbrace{2H}_{\substack{\text{fixed conserved}\\\text{energy budget}}}.
+\]
+
+Reading the same identity as an energy allocation gives
+
+\[
+\underbrace{t_A}_{\substack{\text{configuration/potential}\\\text{energy allocation}}}
+=2\frac VH,
+\qquad
+\underbrace{t_B}_{\substack{\text{momentum/kinetic}\\\text{energy allocation}}}
+=2\frac KH,
+\qquad
+t_A+t_B=2.
+\]
+
+With B oriented toward `2`,
+
+\[
+x_H=t_B=2\frac KH=2\frac{P^2}{Q^2+P^2}.
+\]
+
+This is an exact total-2 ARA appearance after the measurement boundary and orientation are declared. Here
+`x_H=1` means equal kinetic and potential energy; it is not a quiet force-cancellation result. The complete
+Hamiltonian orbit contains four signed quadrants, while the energy diameter discards those signs. Retain the
+quadrant or \(\dot x_H\) to preserve direction.
+
+The result demonstrates that the same minimal ARA geometry can admit more than one rigorously typed instrument
+without becoming a different object: duration asymmetry and energy allocation measure different projections.
+It remains a crosswalk/reparameterization, not evidence by itself for universal fractality or quantum gravity.
+Calculation, numerical example and independent `10/10` validation:
+`analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md`.
+
+### 1.2 Perspective-unassigned closure and Noether's physical invariant
+
+The canonical TE-ARA whole can be written before a diameter is selected as
+
+\[
+\mathrm{TE\!-\!ARA}=2.
+\]
+
+After declaring perspective \(\mathcal P=(\Omega,q,\tau_S,\Pi,k,\sigma)\), instantiate
+
+\[
+\mathbf t^{(\mathcal P)}
+=
+\left(t_A,t_B,t_{J_1},\ldots,t_{\mathrm{Other}}\right),
+\qquad
+\sum_ct_c^{(\mathcal P)}=2.
+\]
+
+The allocation changes when a child is opened, a parent is coarse-grained, a neighbouring coupling is added or the
+measurement diameter rotates. The native physical magnitude is separate.
+
+Noether's theorem supplies the non-definitional conservation result:
+
+\[
+\frac{\partial\mathcal L}{\partial t}=0\Rightarrow\dot H=0,
+\qquad
+\frac{\partial\mathcal L}{\partial q}=0\Rightarrow\dot p_q=0,
+\qquad
+\frac{\partial\mathcal L}{\partial\theta}=0\Rightarrow\dot L_\theta=0.
+\]
+
+Thus TE-ARA closure remains normalized by construction, while time, spatial and rotational symmetries can
+independently conserve energy, linear momentum and angular momentum. A driven or leaking identity can remain
+normalized to `2` while its native physical budget changes. The detailed double-pendulum boundary example and
+triangle/square coherence clarification are recorded in
+`analysis/hamilton/TE_ARA_PERSPECTIVE_NOETHER_COHERENCE_NOTE_2026-07-23.md`.
+
+### 1.3 Quantum Bloch sphere: exact opposite-direction ARA
+
+For a declared two-level basis,
+
+\[
+|\psi\rangle=\alpha|A\rangle+\beta|B\rangle,
+\qquad
+|\alpha|^2+|\beta|^2=1.
+\]
+
+The primary plain-ARA position is
+
+\[
+x_Q=2|\beta|^2.
+\]
+
+The standard Bloch population-difference coordinate is
+
+\[
+r_z=|\alpha|^2-|\beta|^2,
+\]
+
+and therefore
+
+\[
+\boxed{
+r_z=1-x_Q,
+\qquad
+x_Q-1=-r_z.
+}
+\]
+
+Quantum mechanics uses a centred signed \([-1,1]\) diameter; ARA uses the same diameter uncentred on `[0,2]` and
+read from the opposite pole. More generally, for any measurement axis \(\hat{\mathbf n}\),
+
+\[
+\boxed{
+x_{\hat{\mathbf n}}=1-\mathbf r\cdot\hat{\mathbf n}.
+}
+\]
+
+This is the strongest current exact sphere-to-diameter crosswalk. The ARA `1.0` ridge is the plane
+\(\mathbf r\cdot\hat{\mathbf n}=0\), containing both pure coherent equatorial states and the mixed centre; phase
+and Bloch radius distinguish them. Ideal Rabi motion gives \(x_Q(t)=1-\cos(\Omega t)\).
+
+The mapping is predominantly plain ARA; TE-ARA appears only as the same geometry's secondary closure perspective.
+It is a coordinate identity, not a derivation of the Born rule or quantum gravity. Report and independent `10/10`
+validation: `analysis/quantum/BLOCH_SPHERE_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+### 1.4 Landau–Zener handover: exact Connection-versus-Traversal crosswalk
+
+For the ideal two-state crossing
+
+\[
+\hat H(t)=\frac{vt}{2}\sigma_z+g\sigma_x,
+\]
+
+the bare-state opposition and coupling occupy perpendicular Bloch axes. The lower instantaneous eigenstate gives
+
+\[
+\boxed{
+x_{\rm path}(t)
+=
+1+\frac{vt}{\sqrt{(vt)^2+4g^2}},
+}
+\]
+
+an exact monotone `0→1→2` ARA path with mirror symmetry \(x(-t)=2-x(t)\). The coupled energy gap is
+\(\sqrt{(vt)^2+4g^2}\), with minimum \(2|g|\). At \(g=0,t=0\), the gap closes and the instantaneous eigenstate is
+not unique; nonzero coupling broadens that direct flip into a finite mixing region.
+
+The dimensionless handover control is
+
+\[
+\gamma=\frac{g^2}{\hbar|v|},
+\]
+
+and the ideal asymptotic handover outcome is
+
+\[
+\boxed{
+x_{\rm handover}
+=
+2\left(1-e^{-2\pi\gamma}\right).
+}
+\]
+
+This supplies the clean established home for the proposed Connection-versus-Time statement: coupling energy
+competes with sweep/traversal rate. The structural and outcome coordinates are distinct observables and must not be
+merged. Both are plain ARA coordinates; TE-ARA is only their secondary closure perspective. Exact derivation,
+worked example and independent `12/12` validation:
+`analysis/quantum/LANDAU_ZENER_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+### 1.5 Virial ladder: one weighted ridge from planetary gravity to quantum hydrogen
+
+For bound inverse-distance systems,
+
+\[
+\underbrace{2\langle T\rangle}_{\substack{\text{Traversal channel}\\R}}
+=
+\underbrace{|\langle V\rangle|}_{\substack{\text{Connection channel}\\C}}.
+\]
+
+Therefore the declared plain-ARA virial coordinate
+
+\[
+\boxed{
+x_{\rm vir}
+=
+2\frac{R}{C+R}
+}
+\]
+
+equals `1.0`. The same formula was evaluated without retuning for Earth–Sun, a circular Earth-satellite
+reference, a classical Coulomb comparison at the Bohr radius and ideal quantum hydrogen `1s`. The characteristic
+length ladder spans `21.4513` orders of magnitude.
+
+The raw energy allocation is a separate appearance:
+
+\[
+t_T=\frac23,
+\qquad
+t_C=\frac43,
+\qquad
+t_T+t_C=2.
+\]
+
+This distinction is necessary: the raw account is asymmetric while the theorem-weighted relation is at its
+ridge. Earth's instantaneous orbital child reading spans approximately `0.991574–1.008286`; its completed
+channel account is `1.0`. This is the rigorous measurement-window form of the early rock statement: a parent can
+appear ridge-stable while resolved children remain active.
+
+The result is an exact classical/quantum crosswalk inside established virial physics. It supports a common ARA
+coordinate across a specified family but does not derive the theorem or prove universal fractality. Full report,
+visual ladder, reproduction path and `13/13` validation:
+`analysis/virial/VIRIAL_ARA_CROSS_SCALE_LADDER_REPORT_2026-07-23.md`.
 
 ## 2. The self-correction principle is already established, cross-domain
 Dylan's framing — "the framework is Newton's third law applied to systems, self-correcting" — is correct, and
@@ -2334,6 +2567,587 @@ centred near zero, sharpening the next question: which independently measured lo
 Full packet:
 `analysis/electromagnetism/MX8_INFORMATION3_TETRAHEDRON_TRANSFER_REPORT.md`.
 
+#### 5.14.5 Scale/axis ARA state ball and exact Maxwell plane-wave calibration
+
+MX9 formalised Dylan's correction that every A/B label is rung- and axis-relative rather than one globally
+privileged pair. For a two-channel coherency matrix (G_k=\langle z_kz_k^\dagger\rangle), (T_k=\operatorname{tr}G_k),
+define
+
+\[
+s_k=\frac1{T_k}(2\Re G_{AB},,2\Im G_{AB},,G_{BB}-G_{AA}),
+\qquad
+x_{k,\alpha}=1+\alpha\cdot s_k.
+\]
+
+Positive semidefiniteness gives
+
+\[
+1-\|s_k\|^2=\frac{4\det G_k}{T_k^2}\ge0,
+\]
+
+so every unit axis (alpha) supplies an exact bounded ARA diameter (x\in[0,2]), with
+(x_{k,-\alpha}=2-x_{k,\alpha}). Normalized allocations are (t_B=x), (t_A=2-x), hence canonical TE-ARA remains
+`2`. This is the established two-mode coherency/Bloch/Poincaré-ball mathematics written in ARA coordinates.
+
+The same equal-channel state can read (x=1) on the population axis and (x=2) or (0) on the coherence axis,
+depending on relative sign. This exactly resolves the apparent contradiction between “ridge” and “pole” readings:
+they may be different diameters through the same state rather than competing claims.
+
+Child-to-parent aggregation is also exact. Incoherent mixtures give activity-weighted child coordinates. Coherent
+sums require
+
+\[
+G_P=\sum_i z_iz_i^\dagger+\sum_{i\ne j}z_iz_j^\dagger,
+\]
+
+where the second sum is the retained coupling relation. This is the precise coherence-theory home for the ARA
+informative third and for relation information that becomes typed `Other` when omitted by coarse-graining.
+
+For a source-free vacuum plane wave, the normalized E/B energy amplitudes are equal. MX9 therefore recovered an
+E/B population ridge (x=1) and a forward coherence pole (x=2); flipping only one field moved the coherence
+reading to (0) and reversed Poynting flow, while flipping both preserved the parent. Raw E and B remained in phase.
+The quarter-cycle ARA lies between each field and its normalized time derivative, for which
+
+\[
+x_{F/\dot F}=2\sin^2(kz-\omega t).
+\]
+
+All registered calculations passed over 20,000 mixed states, 20,000 pure states, 5,000 incoherent parents, 5,000
+coherent parents and 4,096 wave phases. An independent projector-trace implementation with fresh random states and
+different Maxwell parameters also passed. These are exact recoveries, not a new electromagnetic prediction. The
+physical fractal claim still requires independently selected pairs and a transferable rule across measured rungs.
+Full packet: `analysis/electromagnetism/MX9_SCALE_AXIS_ARA_MAXWELL_REPORT_2026-07-23.md`.
+
+#### 5.14.6 Cross-rung state contraction: common geometry, identity-conditioned rate
+
+MX10 tested the empirical step left open by MX9. For collocated real electric-component samples in a spatial block,
+the two-channel coherency matrix gives the axis-independent state radius
+
+\[
+r=
+\frac{\sqrt{(2G_{AB})^2+(G_{BB}-G_{AA})^2}}{\operatorname{tr}G},
+\qquad 0\le r\le1.
+\]
+
+Let \(D_b\) be its activity-weighted mean at block width \(b\). A frozen one-parameter log-rung law,
+
+\[
+\widehat D_b=b^{-\beta},
+\]
+
+learned \(\beta\) only from the Warp development transition \(1\to2\), then predicted larger rungs, later held-out
+times, all three electric-component pairs and an independent PIConGPU snapshot.
+
+The original v1 output was invalidated when source inspection showed that equal array indices occupied different
+half-cell field positions. Corrected v2 collocated all components before pairing and independently passed `20/20`
+direct-source validation checks.
+
+The universal coefficient failed. Held-out Warp MALE was `0.057750`, worse than the flat comparator `0.054540`
+and pair-specific law `0.043353`; common-law error was `1.360` times local one-step error. In PIConGPU it narrowly
+beat both fixed comparators but was `6.252` times local one-step error. The same state geometry therefore existed at
+every declared rung, while the travel rate depended strongly on component identity and dataset.
+
+Increasing block width moves upward from resolved children to a coarser parent. In ARA terminology, the `zx`
+contraction is therefore a cross-rung child-mixing singularity: opposite child orientations become one mixed parent
+account. A signed post-result check distinguished this from a same-parent phase flip. The global population
+component remained near `-0.5226` at every rung, and dominant-child antipodal transitions carried only `0.0111%`
+of activity from rung 8 to 16. The field-wide rung-16 radius remained `0.6525`, while about `9.65%` of activity was
+locally below radius `0.25`; this is partial/local aggregation singularity rather than a global parent-axis reversal.
+In addition, \(E_y\) supplied `99.912%` of held-out Warp electric-field energy, so the near-boundary `xy` and `yz`
+readings were one-channel-dominated coordinate pairs, not equally participating physical A/B identities.
+
+The corrected mathematical separation is
+
+\[
+\underbrace{\text{common bounded ARA state geometry}}_{\text{exact}}
+\quad+\quad
+\underbrace{\text{identity-conditioned rung map}}_{\text{empirical and unresolved}}.
+\]
+
+MX10 rejects one universal numerical contraction exponent; it does not reject the MX9 state ball. Because the block
+sizes were imposed observation scales, this is not yet a test of independently discovered physical octaves. Full
+report: `analysis/electromagnetism/MX10_CROSS_RUNG_STATE_CONTRACTION_REPORT_2026-07-23.md`.
+
+#### 5.14.7 Electromagnetic momentum continuity as parent supply, retention and matter handover
+
+Define electromagnetic momentum density and Lorentz force density by
+
+\[
+\mathbf g_{\rm EM}=\epsilon_0\mathbf E\times\mathbf B=\frac{\mathbf S}{c^2},
+\qquad
+\mathbf f_{\rm matter}=\rho\mathbf E+\mathbf J\times\mathbf B.
+\]
+
+With the Maxwell stress tensor \(\mathbf T\) defined in Section 5.14.2, local electromagnetic momentum balance is
+
+\[
+\boxed{
+\underbrace{\nabla\cdot\mathbf T}_{\substack{\text{parent momentum supply}\\\text{spatial stress delivery}}}
+=
+\underbrace{\frac{\partial\mathbf g_{\rm EM}}{\partial t}}_{\substack{\text{child A}\\\text{retained field-momentum change}}}
++
+\underbrace{\mathbf f_{\rm matter}}_{\substack{\text{child B}\\\text{handover to matter}}}
+}
+\]
+
+or, when matter force is the measured whole,
+
+\[
+\mathbf f_{\rm matter}
+=
+\nabla\cdot\mathbf T-\frac{\partial\mathbf g_{\rm EM}}{\partial t}.
+\]
+
+Dylan's ARA reading is reversible and grain-relative. From the supply direction, one parent account decomposes
+into field retention and matter handover. From the matter direction, the signed difference between those two field
+children closes as a new mechanical-force identity. The three terms form an Information³-style conservation lock:
+any two determine the third, but the third is not an independent additional momentum source.
+
+Accumulation and release labels must follow the measured signs. If
+\(\partial_t\mathbf g_{\rm EM}\) reverses, the field changes from retaining momentum to returning it; the underlying
+conservation geometry does not change. Tensor and vector directions cannot be replaced by unsigned magnitudes
+without losing cancellation and handover information.
+
+This is an exact rearrangement of established Maxwell–Lorentz momentum conservation. It completes the structural
+crosswalk from field stress to matter force. A direct time-resolved public-data validation remains open because the
+PIConGPU source used by MX4–MX7 contains only one snapshot; such a test requires aligned time-resolved
+\(\mathbf E,\mathbf B,\rho,\mathbf J\) and spatial derivatives.
+
+### 5.17 Einstein to Newton: an established rung crossing that preserves the ARA force geometry
+
+#### 5.17.1 Corrected hierarchy
+
+The ARA hierarchy declared on 23 July is
+
+\[
+\underbrace{\text{Space}_{k}}_{\text{Phase A}}
++
+\underbrace{\text{Time}_{k}}_{\text{Phase B}}
++
+\underbrace{J_{ST,k}}_{\substack{\text{their mixing relation}\\\text{perceived as Space–Time}}},
+\]
+
+with the proposed down-rung decompression
+
+\[
+\underbrace{\mathcal D_{\downarrow}(J_{ST,k})}_{\text{Space–Time relation decompressed}}
+=
+\left(
+\underbrace{\text{Matter}_{k-1}}_{\substack{\text{child Space wave}\\\text{Connection-oriented}}},
+\underbrace{\text{Field}_{k-1}}_{\substack{\text{child Time wave}\\\text{Traversal-oriented}}}
+\right).
+\]
+
+Matter is therefore not a separate sibling placed beside Space–Time. It is the proposed Connection-dominant child
+expression of the Space–Time relation; Field is its Traversal-dominant child expression. Both remain mixed
+identities internally. General relativity does not derive this ontology, but its weak-field limit supplies a
+nontrivial mathematical crosswalk.
+
+#### 5.17.2 Einstein geometry becomes Newtonian field and movement
+
+Under a stationary weak field, slow test motion, negligible source pressure and locally negligible \(\Lambda\),
+
+\[
+ds^2\simeq
+-\left(1+\frac{2\Phi}{c^2}\right)c^2dt^2
++
+\left(1-\frac{2\Phi}{c^2}\right)d\mathbf x^2.
+\]
+
+The spatial geodesic equation reduces to
+
+\[
+\underbrace{\frac{d^2x^i}{dt^2}}_{\substack{\text{Newtonian movement}\\\text{child-scale response}}}
+=
+-\underbrace{\partial_i\Phi}_{\substack{\text{gradient of compressed geometry}\\\text{field direction}}}.
+\]
+
+At the same order,
+
+\[
+G_{00}\simeq\frac{2}{c^2}\nabla^2\Phi,
+\qquad
+T_{00}\simeq\rho c^2,
+\]
+
+so Einstein's equation becomes
+
+\[
+\boxed{
+\underbrace{\nabla^2\Phi}_{\substack{\text{field geometry}\\\text{Field/Traversal child reading}}}
+=
+4\pi G
+\underbrace{\rho}_{\substack{\text{mass density}\\\text{Matter/Connection child reading}}},
+\qquad
+\underbrace{\nabla\cdot\mathbf g}_{\text{field convergence}}
+=-4\pi G\rho.
+}
+\]
+
+For a spherical exterior source this yields
+
+\[
+\Phi=-\frac{GM}{r},
+\qquad
+\mathbf g=-\frac{GM}{r^3}\mathbf r,
+\qquad
+m\ddot{\mathbf r}=-\frac{GMm}{r^3}\mathbf r.
+\]
+
+Thus the established transition is
+
+\[
+\underbrace{g_{\mu\nu}}_{\text{Space–Time geometry}}
+\longrightarrow
+\underbrace{\Phi}_{\text{weak scalar geometry}}
+\longrightarrow
+\underbrace{\mathbf g}_{\text{Field/movement tendency}}
+\longrightarrow
+\underbrace{m\mathbf g}_{\text{Matter response}}.
+\]
+
+#### 5.17.3 Newton's three laws as one exact declared ARA force geometry
+
+Along an axis \(\hat{\mathbf e}\), collect nonnegative anti-directed force magnitudes \(F_A,F_B\). For
+\(\Sigma_F=F_A+F_B>0\), set
+
+\[
+\underbrace{x_F}_{\substack{\text{Phase A }0\rightarrow\text{ Phase B }2\\\text{force-opposition diameter}}}
+=
+\frac{2F_B}{F_A+F_B}.
+\]
+
+Then
+
+\[
+\boxed{
+\underbrace{m a_\parallel}_{\text{Newton II}}
+=
+\underbrace{F_B-F_A}_{\text{force asymmetry}}
+=
+\underbrace{\Sigma_F}_{\substack{\text{dimensional activity envelope}\\\text{not canonical TE-ARA}}}
+\underbrace{(x_F-1)}_{\text{signed ridge displacement}}.
+}
+\]
+
+Newton III supplies an equal anti-directed pair on different interacting bodies. At the enclosing pair boundary,
+\(x_F=1\) and \(\Sigma_F>0\): an **active ridge**, not no interaction. Newton I describes the persistent momentum
+when the external resultant is zero. If both force accounts are zero, \(x_F\) is undefined; this distinguishes a
+null state from an active equal-force ridge.
+
+Using IAU nominal mass parameters and one astronomical unit, the Sun–Earth interaction gives
+
+\[
+|\mathbf F_{E\leftarrow S}|
+=
+|\mathbf F_{S\leftarrow E}|
+=3.5415454\times10^{22}\ {\rm N},
+\]
+
+so the enclosing internal account has
+
+\[
+x_{\rm pair}=1,
+\qquad
+\Sigma_{\rm pair}=7.0830908\times10^{22}\ {\rm N},
+\qquad
+F_{\rm internal,net}=0.
+\]
+
+The Earth and Sun nevertheless accelerate at \(5.93008\times10^{-3}\) and
+\(1.78109\times10^{-8}\ {\rm m\,s^{-2}}\), respectively. Equal force is a whole-pair ridge; unequal mass produces
+unequal local movement.
+
+#### 5.17.4 Compactness gradient and the failure of the Newtonian approximation
+
+For a spherical nonrotating exterior, let
+
+\[
+u=\frac{2GM}{Rc^2},
+\qquad
+\left(\frac{d\tau}{dt}\right)^2=1-u.
+\]
+
+A proposed ARA compactness normalization is
+
+\[
+\underbrace{t_T}_{\substack{\text{Time/Traversal allocation}\\\text{twice squared lapse}}}=2(1-u),
+\qquad
+\underbrace{t_C}_{\substack{\text{Connection allocation}\\\text{defined complement}}}=2u,
+\qquad
+t_T+t_C=2.
+\]
+
+This map is not uniquely forced by GR. It is useful because it is dimensionless, exactly total-2 and aligned with
+the original orientation `0 = strong Connection/horizon`, `2 = weakly constrained Time/Traversal`. The midpoint
+\(u=1/2\) is a coordinate ridge unless an independent physical handover is demonstrated.
+
+| System | compactness \(u\) | proposed \(t_T\) | weak-lapse relative error | GR correction to static support acceleration |
+|---|---:|---:|---:|---:|
+| Earth, nominal equator | \(1.39070\times10^{-9}\) | 1.9999999972 | \(2.42\times10^{-19}\) | \(6.95\times10^{-10}\) |
+| Jupiter, nominal equator | \(3.94332\times10^{-8}\) | 1.9999999211 | \(1.94\times10^{-16}\) | \(1.97\times10^{-8}\) |
+| Sun, nominal surface | \(4.24501\times10^{-6}\) | 1.9999915100 | \(2.25\times10^{-12}\) | \(2.12\times10^{-6}\) |
+| PSR J0740+6620, central spherical proxy | 0.475446 | 1.049108 | 5.249% | 38.072% |
+| theoretical Schwarzschild horizon | 1 | 0 | invalid | divergent static support |
+
+The weak-field rung is exceptionally accurate for planets and the Sun, while it is materially distorted at the
+neutron-star scale. The PSR central value lies near the proposed midpoint, but its rough corner-sensitivity envelope
+from separate published mass/radius bounds spans \(t_T=0.9229\) to \(1.2091\). It rotates, and the calculation is a
+spherical proxy; the near-ridge placement is not a preregistered prediction.
+
+The reproduction and independent `27/27` validation are in
+`analysis/gravity/GR_NEWTON_ARA_RUNG_CROSSING_REPORT_2026-07-23.md`. The exact result is the GR-to-Newton limit and
+the Newtonian force identity. The Space–Time-to-Matter/Field ontology, unique compactness diameter, Phi, logarithmic
+rungs and universal fractality remain open.
+
+### 5.18 The typed law ladder: solar spacetime to quantum hydrogen
+
+The separate mechanics crosswalks now support one reviewable traversal:
+
+\[
+\text{Einstein}\rightarrow\text{Newton}\rightarrow\text{Hamilton}
+\rightarrow\{\text{Noether},\text{virial}\},
+\]
+
+with a second established field branch
+
+\[
+\{\text{Gauss},\text{Faraday},\text{Ampère–Maxwell}\}
+\rightarrow\{\text{Poynting},\text{Lorentz}\}
+\rightarrow\text{charged Hamiltonian}
+\rightarrow\text{Schrödinger}\rightarrow\text{hydrogen}.
+\]
+
+The arrows are not all the same operation. Einstein to Newton is an exact weak-field limit. Newton to Hamilton is
+an exact reformulation. Noether and virial results are theorem consequences. Maxwell's equations close the
+electromagnetic field description. The move from a classical charged Hamiltonian to the Schrödinger model is a
+quantisation/model transition. The common \(1/r\) form of gravity and Coulomb binding is a sibling mathematical
+bridge, not a derivation between forces.
+
+Across these domains the clearest established repeated grammar is a continuity account:
+
+\[
+\underbrace{\partial_t q}_{\text{accumulation/release inside}}
++
+\underbrace{\nabla\!\cdot\mathbf J}_{\text{boundary traversal}}
+=
+\underbrace{s}_{\text{source, sink or handover}}.
+\]
+
+ARA supplies a common *declared coordinate canvas* for the two competing channels, but it does not erase their
+native units or physics. In particular, every `1.0` is typed: Newtonian cancellation, Hamiltonian equal energy,
+weighted virial equality, Gauss closure, Maxwell plane-wave equality and quantum equal probability are not
+interchangeable physical conditions.
+
+The numerical cross-scale thread remains the virial coordinate for bound inverse-distance systems:
+
+\[
+x_{\rm vir}=\frac{2(2\langle T\rangle)}
+{|\langle V\rangle|+2\langle T\rangle}=1,
+\]
+
+which was evaluated unchanged from Earth–Sun to ideal hydrogen `1s` over `21.4513` spatial orders. The wider atlas
+organizes the other laws around that thread but does not claim a direct GR-to-quantum derivation.
+
+Report and reproducible tables:
+`analysis/physics_ladder/ARA_PHYSICS_COSMIC_TO_QUANTUM_LADDER_REPORT_2026-07-23.md`.
+
+### 5.19 Exact boundary-aware aggregation between rungs
+
+For adjacent children, a flow through their shared interface is externally visible to each child but internal to
+their parent. With
+
+\[
+x_i=\frac{2R_i}{A_i+R_i},
+\qquad
+I=|F_{\rm interface}|,
+\]
+
+the enclosing parent is
+
+\[
+\boxed{
+x_P
+=
+\frac{2(\sum_iR_i-I)}
+{\sum_i(A_i+R_i)-2I}
+}.
+\]
+
+This supplies a precise version of the ARA scale change:
+
+\[
+\text{child boundary flow}
+\xrightarrow{\text{enclose both children}}
+\text{parent internal relation}.
+\]
+
+The operator was frozen and applied unchanged to analytic classical mechanical energy flux, electromagnetic line
+power and quantum probability current. It reconstructed `12,291/12,291` parent readings with worst error
+\(2.1538\times10^{-14}\); both naive flattening controls failed in every model. Independent validation passed
+`15/15`, including `100,000` randomized signed-flux triples.
+
+The result is an exact ARA reparameterisation of finite-volume conservation. It formalizes aggregation and
+coarse-graining but does not yet recover an unknown source, sink or relation-storage term. Full report:
+`analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_REPORT_2026-07-23.md`.
+
+### 5.20 Hidden `Other` as a localized continuity residual
+
+The next frozen test supplied stored quantities and declared internal transfers but concealed one native sink law.
+For each child or relation,
+
+\[
+\boxed{
+\widehat s_i(t)
+=
+\frac{dq_i}{dt}
+-
+g_i(t)
+},
+\]
+
+where \(g_i\) is the known net internal transfer into identity \(i\). The estimator received no damping,
+resistance or quantum-decay coefficient.
+
+Applied unchanged to damped coupled oscillators, resistive capacitor coupling and an open two-level quantum
+holdout, the residual recovered all `3/3` hidden locations and all active-point sink signs. Across `18,991` scored
+samples, the maximum source NRMSE was \(1.0554\times10^{-9}\), maximum integrated relative error was
+\(4.5071\times10^{-11}\), and maximum inactive-identity RMS fraction was \(1.8859\times10^{-9}\). The
+electromagnetic case localized Joule loss to the coupling relation rather than either capacitor. Independent
+bounded-output validation passed.
+
+This makes `Other` an operational diagnostic rather than a free remainder: after boundary, storage and named flows
+are declared, it records where the account fails to close. The result remains standard conservation residual
+analysis in noiseless controlled systems. It does not yet identify the functional sink law in advance or predict
+an unseen real-world waveform. Full report:
+`analysis/physics_ladder/ARA_HIDDEN_OTHER_RESIDUAL_REPORT_2026-07-23.md`.
+
+### 5.21 Noise boundary: cumulative closure does not ensure local attribution
+
+O2-A1 retained the same residual but corrupted its measured inputs under a preregistered ladder. At the primary
+12 dB white-noise condition on the capacitor and quantum targets, exact location fell to \(0.50\), median
+active-point sign accuracy to \(0.762\), and median waveform correlation to \(0.460\). Median peak NRMSE was
+\(0.314\), worse than the zero-Other control's \(0.221\). The frozen robustness claim was therefore
+**NOT SUPPORTED**.
+
+The signed integrated amount behaved differently:
+
+\[
+\operatorname{median}
+\left[
+\frac{
+\left|\int\widehat s\,dt-\int s\,dt\right|
+}{
+\left|\int s\,dt\right|
+}
+\right]
+=0.007872.
+\]
+
+Thus the parent account can remain nearly closed while child-level waveform and location are unreliable. In the
+test, zero-mean errors cancelled under integration but appeared as false local residuals. Transfer-channel
+corruption was more damaging than stored-quantity corruption because the selected smoother acted on \(q\), while
+observed \(g\) entered the residual directly. This is an error-propagation result, not a new ARA force law.
+
+The established crosswalk should therefore be written with observation errors:
+
+\[
+\widehat s_i
+=
+\frac{d(q_i+\epsilon_{q_i})}{dt}
+-
+(g_i+\epsilon_{g_i})
+=
+s_i
++
+\frac{d\epsilon_{q_i}}{dt}
+-
+\epsilon_{g_i}.
+\]
+
+The last two terms can exceed the hidden mechanism even when their signed integral is small. Before applying the
+operator physically to ECG, field-energy or climate accounts, a joint uncertainty/state model for \(q\) and \(g\)
+is required. Full report:
+`analysis/physics_ladder/O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_REPORT_2026-07-23.md`.
+
+### 5.22 Conditional time-stream lineage: fixed identity versus repeated re-selection
+
+O2-A2 tested Dylan's declared distinction between following movement and retaining stored information. For this
+test only, the time-side operation meant: name a moving child before the run and follow that same typed residual
+downstream. The complementary space-side operation—maintaining the stored parent identity—was not folded into the
+same claim.
+
+With causal instrument \(H\), declared child \(j^\star\), and typed residuals
+\(\widehat s_j=d(Hq_j)/dt-Hg_j\), the two compared operations were
+
+\[
+\widehat s_{\mathrm{fixed}}(t)=\widehat s_{j^\star}(t),
+\qquad
+\widehat s_{\mathrm{reselect}}(t)
+=
+\widehat s_{\arg\max_j\,\operatorname{EWMA}(|\widehat s_j|)}(t).
+\]
+
+The first preserves declared lineage. The second repeatedly returns to the local parent mixture and chooses the
+currently strongest child. Both used the same derivative and trajectory filters; those parameters were selected
+only on oscillator development and then frozen.
+
+At the registered 12 dB capacitor-plus-quantum target, fixed lineage produced median correlation \(0.764\), peak
+NRMSE \(0.168\), sign accuracy \(0.933\), and integrated relative error \(0.354\). Relative to re-selection, its
+correlation advantage was \(+0.060\) and its NRMSE improvement was \(10.84\%\). It beat re-selection NRMSE in both
+systems, but failed the preregistered integral threshold of \(0.35\) and correlation-advantage threshold of
+\(+0.10\). The frozen claim was therefore **NOT SUPPORTED** (`6/8` gates), and those thresholds were not relaxed.
+
+The target systems separated usefully. In the quantum system, fixed lineage gave NRMSE \(0.174\) versus \(0.234\)
+for re-selection and integrated error \(0.0526\). In the capacitor relation, fixed lineage retained local waveform
+shape (\(r=0.819\)) but its signed integral was badly biased (relative error \(1.771\)); the compressed-parent
+control also had lower NRMSE (\(0.0649\)). Thus a known moving branch can be easier to follow than to rediscover at
+each sample, while a storage-oriented parent account can remain the better representation for another endpoint.
+
+This is a conditional signal-tracking result using standard causal differentiation and exponential smoothing. It
+does not discover the child, reconstruct upstream causes, establish the space-side retention rule, identify a
+physical hidden mechanism or predict an unseen future waveform. Independent validation passed `12/12`. Full
+report: `analysis/physics_ladder/O2A2_TIME_STREAM_LINEAGE_REPORT_2026-07-23.md`.
+
+### 5.23 Fixed lineage and a conventional state-space account retain different information
+
+O2-A3 compared the frozen ARA fixed-lineage instrument with a causal augmented-state Kalman filter using the same
+declared quantum child and observations. The conventional model represented
+
+\[
+x_k=
+\begin{bmatrix}q_k\\s_k\end{bmatrix},
+\qquad
+x_{k+1}
+=
+\begin{bmatrix}1&\Delta t\\0&1\end{bmatrix}x_k
++
+\begin{bmatrix}\Delta t\\0\end{bmatrix}g_{{\rm obs},k}
++w_k,
+\qquad
+y_k=q_k+v_k.
+\]
+
+The latent \(s_k\) is a standard random-walk omitted input in the same continuity account
+\(\dot q=g+s\). Process ratios were selected on oscillator development only; target observation noise was estimated
+from an observed-only prefix.
+
+On `32` fresh paired quantum runs at 12 dB, the ARA instrument gave correlation \(0.762\), NRMSE \(0.165\), sign
+accuracy \(0.905\), and integrated error \(0.118\). The Kalman filter gave \(0.687\), \(0.235\), \(0.808\), and
+\(0.038\), respectively. ARA won correlation and NRMSE in every pair; state-space won integrated error in every
+pair. The preregistered result is therefore **GOOD ABSOLUTE TRACKING / MIXED COMPARATIVE RESULT**.
+
+The split has a direct mechanics interpretation. Differentiation plus trajectory smoothing can follow the local
+shape of a named moving residual, while a state transition that explicitly carries stored \(q\) reconciles small
+errors across time and better preserves the cumulative amount. This supports treating movement-shape tracking and
+storage closure as different endpoints. It does not establish that the endpoints are ontologically Time and Space,
+nor that the quantum target exposes a hidden Phase B.
+
+Only one simple conventional state-space model was tested. A quantum-family-trained or correctly specified sink
+model could change the comparison. The capacitor secondary target was not identifiable after calibration because
+only \(0.229\%\) of its original sink peak remained. Independent validation passed `12/12`. Full report:
+`analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_REPORT_2026-07-23.md`.
+
 ## 6. What this cements — and what it does not (the honest line)
 - **Cemented:** the ARA rise/fall statistic is exactly `1` for the defined traversal of a bounded autonomous 1-D
   conservative oscillator; relaxation and limit-cycle theory provide established comparison families; KAM and
@@ -2342,7 +3156,9 @@ Full packet:
   reconstruction, field-particle energy exchange and nonlinear harmonic coupling are established quantities. The
   signed-pair Gauss embedding, in-system logarithmic rung, relative-log factor closure and wheel anti-pair reflection
   are exact once their measurement declarations are fixed. The prime-wheel representation admits exact `2:1`
-  anti-pair compression, while its pair count still grows by `p-1` at a new gate.
+  anti-pair compression, while its pair count still grows by `p-1` at a new gate. Einstein's equation reduces to
+  Poisson/Newton gravity under the declared weak-field assumptions, and the anti-directed Newtonian force account
+  satisfies the exact bounded identity \(m a_\parallel=\Sigma_F(x_F-1)\).
   **These anchors are not new physics.**
 - **NOT cemented by this (stays empirical / open):** the **universality** claim — that these coordinates carry
   the *same* φ/octave and Connection/Transfer structure *across* atoms, materials, climate, hearts, and markets;

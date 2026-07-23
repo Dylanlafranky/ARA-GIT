@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "passed": 15,
+  "total": 15,
+  "confidence": "Ready to share as an exact reconstruction/formalization result; not as evidence of new dynamics.",
+  "max_randomized_operator_error": 3.5083047578154947e-14,
+  "max_randomized_reversal_error": 3.597122599785507e-14,
+  "checks": [
+    {
+      "name": "saved result is bound to the frozen protocol",
+      "passed": true,
+      "detail": "protocol_sha256=22b1f0ac7cd88f38fdfd3d0e9106d1c5ef18fa9e94032f4f328a77efa6b07d6e"
+    },
+    {
+      "name": "all three preregistered models are present",
+      "passed": true,
+      "detail": "models=['Classical string energy', 'Free Gaussian probability', 'Lossless transmission line']"
+    },
+    {
+      "name": "all planned samples were retained",
+      "passed": true,
+      "detail": "valid_counts=[4097, 4097, 4097]"
+    },
+    {
+      "name": "frozen operator meets the preregistered tolerance",
+      "passed": true,
+      "detail": "max_error=2.154e-14"
+    },
+    {
+      "name": "orientation reversal obeys x_prime = 2 - x",
+      "passed": true,
+      "detail": "max_orientation_error=2.154e-14"
+    },
+    {
+      "name": "both flattening controls are worse in every model",
+      "passed": true,
+      "detail": "naive and unclosed activity-weighted controls compared model by model"
+    },
+    {
+      "name": "native continuity equations meet their tolerances",
+      "passed": true,
+      "detail": "classical=0.000e+00, em=0.000e+00, quantum_fd=6.106e-11"
+    },
+    {
+      "name": "bounded saved rows independently reconstruct",
+      "passed": true,
+      "detail": "max_saved_row_difference=3.997e-15"
+    },
+    {
+      "name": "100,000 independent signed-flux triples satisfy the operator",
+      "passed": true,
+      "detail": "max_randomized_error=3.508e-14"
+    },
+    {
+      "name": "randomized orientation reversal is exact",
+      "passed": true,
+      "detail": "max_randomized_reversal_error=3.597e-14"
+    },
+    {
+      "name": "reader artifact has a matching visible title",
+      "passed": true,
+      "detail": "title=ARA child-to-parent composition across three continuity laws"
+    },
+    {
+      "name": "artifact snapshot stays within row bounds",
+      "passed": true,
+      "detail": "dataset_sizes={'headline_metrics': 1, 'model_summary': 3, 'method_errors': 9, 'quantum_trace': 484}"
+    },
+    {
+      "name": "report includes control and holdout visuals",
+      "passed": true,
+      "detail": "chart_ids=['method-error-orders', 'quantum-holdout-trace']"
+    },
+    {
+      "name": "table sort fields are declared visible columns",
+      "passed": true,
+      "detail": "visible_fields=['continuity_residual_max', 'max_abs_error_frozen', 'mean_abs_error_naive', 'mean_abs_error_no_internal', 'model', 'test_role', 'valid_samples']"
+    },
+    {
+      "name": "report preserves the universality fence",
+      "passed": true,
+      "detail": "new-dynamics and ordinary-conservation limits are both explicit"
+    }
+  ]
+}

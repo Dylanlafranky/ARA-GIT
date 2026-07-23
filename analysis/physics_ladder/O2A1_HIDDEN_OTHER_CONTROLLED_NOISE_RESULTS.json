@@ -1,0 +1,140 @@
+{
+  "test": "O2-A1 hidden Other under controlled observation noise",
+  "run_date": "2026-07-23",
+  "protocol_sha256": "d16485a828d4396e3ced05ce04fd7ca784a7e662fb9f6f46e078b83cb12add49",
+  "protocol_receipt_sha256": "d16485a828d4396e3ced05ce04fd7ca784a7e662fb9f6f46e078b83cb12add49",
+  "parent_operator": "s_hat_i = dq_i/dt - g_i",
+  "selected_window_fractions": {
+    "local_poly": 0.08,
+    "moving_average_fd": 0.04,
+    "causal_local_linear": 0.02
+  },
+  "selected_window_samples_by_model": {
+    "Damped coupled oscillators": {
+      "local_poly": 481,
+      "raw_fd": null,
+      "moving_average_fd": 241,
+      "causal_local_linear": 121
+    },
+    "Resistive capacitor coupling": {
+      "local_poly": 401,
+      "raw_fd": null,
+      "moving_average_fd": 201,
+      "causal_local_linear": 101
+    },
+    "Open two-level probability": {
+      "local_poly": 641,
+      "raw_fd": null,
+      "moving_average_fd": 321,
+      "causal_local_linear": 161
+    }
+  },
+  "primary_verdict": {
+    "status": "NOT SUPPORTED",
+    "metrics": {
+      "target_runs": 32,
+      "location_accuracy": 0.5,
+      "median_sign_accuracy": 0.7619656558275485,
+      "median_correlation": 0.4599102899299763,
+      "median_nrmse": 0.3139139613364823,
+      "median_integrated_error": 0.007871897511986291,
+      "median_inactive_rms_fraction": 0.367465650096251,
+      "raw_fd_median_nrmse": 47.72643339576017,
+      "zero_other_median_nrmse": 0.22119807630867516
+    },
+    "thresholds": {
+      "location_accuracy_min": 0.9,
+      "median_sign_accuracy_min": 0.95,
+      "median_correlation_min": 0.8,
+      "median_nrmse_max": 0.5,
+      "median_integrated_error_max": 0.35,
+      "median_inactive_rms_fraction_max": 0.5
+    },
+    "gates": {
+      "location": false,
+      "sign": false,
+      "correlation": false,
+      "nrmse": true,
+      "integrated_error": true,
+      "inactive_spill": true,
+      "beats_raw_fd": true,
+      "beats_zero_other": false
+    },
+    "passed_gates": 4,
+    "total_gates": 8
+  },
+  "white_both_noise_floors": [
+    {
+      "model": "Resistive capacitor coupling",
+      "lowest_passing_snr_db": null,
+      "first_failure_descending_snr_db": 24,
+      "per_snr": [
+        {
+          "snr_db": 24,
+          "passed": false
+        },
+        {
+          "snr_db": 18,
+          "passed": false
+        },
+        {
+          "snr_db": 12,
+          "passed": false
+        },
+        {
+          "snr_db": 6,
+          "passed": false
+        },
+        {
+          "snr_db": 0,
+          "passed": false
+        },
+        {
+          "snr_db": -6,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "model": "Open two-level probability",
+      "lowest_passing_snr_db": null,
+      "first_failure_descending_snr_db": 24,
+      "per_snr": [
+        {
+          "snr_db": 24,
+          "passed": false
+        },
+        {
+          "snr_db": 18,
+          "passed": false
+        },
+        {
+          "snr_db": 12,
+          "passed": false
+        },
+        {
+          "snr_db": 6,
+          "passed": false
+        },
+        {
+          "snr_db": 0,
+          "passed": false
+        },
+        {
+          "snr_db": -6,
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "trial_rows": 16140,
+  "aggregate_rows": 1020,
+  "representative_waveform_rows": 362,
+  "scope_fence": "Controlled synthetic diagnostic recovery only. This run observes storage change and therefore is not forward prediction or physical attribution in an open natural system.",
+  "artifacts": {
+    "development": "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_DEVELOPMENT.csv",
+    "trials_gzip": "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_TRIALS.csv.gz",
+    "aggregates": "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_AGGREGATES.csv",
+    "waveforms": "O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_WAVEFORMS.csv"
+  }
+}

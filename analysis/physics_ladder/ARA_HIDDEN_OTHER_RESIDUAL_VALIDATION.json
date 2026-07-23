@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "validation_scope": "Independent audit of frozen thresholds, file integrity and bounded-output location/sign/waveform/parent-closure calculations. The validator does not reuse the simulation or recovery functions.",
+  "protocol_sha256": "17c57ef98dade5b8cfb1d3c7a15db712f3f7b98ce9dd60201c766955b2dc8ca6",
+  "results_sha256": "ed7353df0602b74e74ff46d94f0add27e5cf6ee78ffae2f1e292a014497c999a",
+  "summary_sha256": "c6696cd2b8c9a281e80c468b4d7de9ebb73853794eda5182173f83da3e6ac15b",
+  "bounded_sample_sha256": "9b1a8dd8d3e4289e6e8ce90fb34b641c3a2e062a3b5146265acba241552d79a9",
+  "summary_threshold_audit": [
+    {
+      "model": "Damped coupled oscillators",
+      "passed": true
+    },
+    {
+      "model": "Resistive capacitor coupling",
+      "passed": true
+    },
+    {
+      "model": "Open two-level probability",
+      "passed": true
+    }
+  ],
+  "bounded_sample_audit": [
+    {
+      "model": "Damped coupled oscillators",
+      "expected_location": "oscillator 2",
+      "predicted_location": "oscillator 2",
+      "sign_accuracy": 1.0,
+      "source_correlation": 1.0000000000000002,
+      "source_nrmse": 1.0707022501038268e-09,
+      "inactive_rms_fraction": 1.5283192039945928e-09,
+      "parent_total_nmae": 1.3068793155865144e-10,
+      "passed": true
+    },
+    {
+      "model": "Resistive capacitor coupling",
+      "expected_location": "coupling relation",
+      "predicted_location": "coupling relation",
+      "sign_accuracy": 1.0,
+      "source_correlation": 1.0,
+      "source_nrmse": 1.891365400649535e-17,
+      "inactive_rms_fraction": 4.02917090707488e-11,
+      "parent_total_nmae": 1.4242361277872428e-11,
+      "passed": true
+    },
+    {
+      "model": "Open two-level probability",
+      "expected_location": "quantum state 2",
+      "predicted_location": "quantum state 2",
+      "sign_accuracy": 1.0,
+      "source_correlation": 1.0000000000000002,
+      "source_nrmse": 1.986849658799105e-11,
+      "inactive_rms_fraction": 1.9785986040297913e-11,
+      "parent_total_nmae": 2.1321358597618168e-12,
+      "passed": true
+    }
+  ],
+  "errors": []
+}

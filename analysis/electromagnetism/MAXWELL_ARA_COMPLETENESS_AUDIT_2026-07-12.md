@@ -1,7 +1,7 @@
 # Maxwell ↔ ARA completeness audit
 
 **Date:** 12 July 2026; checkpoint updated 13 July 2026
-**Status:** `FIELD EQUATIONS + CHARGE + POYNTING STRUCTURALLY COMPLETE / LORENTZ FORCE + MAXWELL STRESS NEXT / EMPIRICAL VALIDATION PARTIAL`
+**Status:** `FIELD EQUATIONS + CHARGE + POYNTING + LOCAL LORENTZ + MAXWELL STRESS STRUCTURALLY COMPLETE / TIME-RESOLVED MOMENTUM-CONTINUITY TEST OPEN`
 **Orientation:** every bounded 0–2 coordinate below declares its poles locally; reversing them changes labels, not
 the invariant result.
 
@@ -327,3 +327,64 @@ Maxwell status is therefore refined to:
 - time-resolved acceleration and independent transfer: still open.
 
 Full packet: `analysis/electromagnetism/MX5_CHILD_ARA_TEARA_CLOSURE_REPORT.md`.
+
+## 23 July 2026 addendum — MX9 scale/axis state map
+
+MX9 joined the previously separate ARA diameter, E/B paired-flip and child/parent results with the established
+two-channel coherency construction. A positive-semidefinite coherency matrix generates a point (s) inside a unit
+state ball, and every declared unit axis gives the exact ARA projection (x=1+\alpha\cdot s\in[0,2]). Axis reversal
+gives (2-x), while normalized channel allocations sum to canonical TE-ARA `2`.
+
+For a vacuum plane wave, equal normalized E/B energy amplitudes place the state at `1.0` on the population diameter
+and at `2.0` on the forward-coherence diameter. A one-channel sign flip moves the latter to `0` and reverses
+Poynting flow; a joint half-cycle flip preserves the parent. Raw E and B remain temporally in phase. The quarter
+cycle occurs between each field and its own normalized time derivative.
+
+The exact aggregation law is linear for incoherent mixtures and adds cross/coherence terms for coherent children.
+This provides a rigorous Maxwell/optics instance of two child states plus their retained relation without proving a
+universal fractal law. Registered and independent numerical checks all passed. Full report:
+`analysis/electromagnetism/MX9_SCALE_AXIS_ARA_MAXWELL_REPORT_2026-07-23.md`.
+
+## 23 July 2026 addendum — MX10 cross-rung transfer boundary
+
+MX10 tested whether the MX9 state radius contracts under doubled spatial coarse-graining with one transferable
+exponent. After invalidating an uncollocated staggered-grid run, corrected v2 independently passed `20/20`
+calculation checks. The one-number law nevertheless failed its frozen internal and external gates. Pair-specific and
+locally measured child transitions were materially better.
+
+Increasing block width moves upward from resolved children to a coarser parent, so the `zx` inward motion is a
+cross-rung child-mixing singularity in the declared ARA terminology. A signed follow-up ruled out the distinct
+same-parent phase flip: population orientation remained near `-0.5226` at every rung while local orientations
+cancelled under coarse-graining. Moreover, \(E_y\) carried `99.912%` of held-out Warp electric-field energy, so the
+nearly fixed `xy` and `yz` radii were dominated-channel readings rather than three equally participating physical
+A/B pairs.
+
+Therefore Maxwell/ARA status is:
+
+- bounded two-channel state geometry at each declared rung: exact;
+- child-to-parent aggregation with retained relation terms: exact;
+- one universal numerical contraction rate across component identities and simulators: not supported;
+- identity-conditioned rung operator with an independently measurable coupling coordinate: open.
+
+Full report:
+`analysis/electromagnetism/MX10_CROSS_RUNG_STATE_CONTRACTION_REPORT_2026-07-23.md`.
+
+## 23 July 2026 addendum — momentum-continuity ARA closure
+
+The Maxwell stress and Lorentz branches close structurally through
+
+\[
+\nabla\cdot\mathbf T
+=
+\frac{\partial}{\partial t}(\epsilon_0\mathbf E\times\mathbf B)
++
+(\rho\mathbf E+\mathbf J\times\mathbf B).
+\]
+
+The ARA translation treats stress delivery as the parent momentum supply and decomposes it into two children:
+momentum retained as changing electromagnetic field momentum and momentum handed to matter as Lorentz force.
+Equivalently, their signed difference reconstructs the expressed matter-force whole. This is an exact
+Information³-style conservation lock, not a new electromagnetic law.
+
+Structural status is now complete. Empirical finite-difference validation of all three terms together remains open
+because the existing full E/B/particle source has only one time slice.

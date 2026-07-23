@@ -1,0 +1,123 @@
+{
+  "test_id": "MX9/SCALE-AXIS-ARA-MAXWELL/v1",
+  "protocol": "MX9_SCALE_AXIS_ARA_MAXWELL_PROTOCOL_v1_FROZEN.md",
+  "seed": 20260723,
+  "tolerance": 1e-12,
+  "status": "PASS",
+  "sections": {
+    "mixed_state_ball": {
+      "samples": 20000,
+      "metrics": {
+        "maximum_state_norm_excess": 0.0,
+        "minimum_projection": 0.0200604465649995,
+        "maximum_projection": 1.973905874148413,
+        "axis_reversal_max_abs_error": 2.220446049250313e-16,
+        "allocation_sum_relative_l2_error": 3.943673975021513e-17,
+        "allocation_difference_relative_l2_error": 5.554551576467013e-17,
+        "population_axis_max_abs_error": 2.220446049250313e-16
+      },
+      "gates": {
+        "state_inside_ball": true,
+        "projection_in_0_2": true,
+        "axis_reversal": true,
+        "allocation_sum": true,
+        "allocation_difference": true,
+        "population_axis": true
+      },
+      "all_pass": true
+    },
+    "pure_state_surface": {
+      "samples": 20000,
+      "state_norm_max_abs_error_from_one": 4.440892098500626e-16,
+      "pass": true
+    },
+    "incoherent_parent": {
+      "samples": 5000,
+      "children_per_parent": 4,
+      "parent_state_max_abs_error": 3.3306690738754696e-16,
+      "parent_projection_max_abs_error": 6.661338147750939e-16,
+      "ridge_example": {
+        "child_positions": [
+          2.0,
+          0.0
+        ],
+        "parent_position": 1.0
+      },
+      "gates": {
+        "parent_state_weighted_average": true,
+        "parent_projection_weighted_average": true,
+        "asymmetric_children_make_parent_ridge": true
+      },
+      "all_pass": true
+    },
+    "coherent_parent": {
+      "samples": 5000,
+      "children_per_parent": 4,
+      "cross_term_reconstruction_relative_l2_error": 1.8665014327867906e-16,
+      "omitting_cross_terms_relative_error": {
+        "median": 0.7095124670793813,
+        "p95": 3.208603564821694,
+        "maximum": 125.84756195859289
+      },
+      "flattening_example": {
+        "population_axis_positions": [
+          1.0,
+          1.0
+        ],
+        "coherence_axis_positions": [
+          2.0,
+          0.0
+        ]
+      },
+      "gates": {
+        "coherent_cross_term_identity": true,
+        "scalar_population_flattening_example": true
+      },
+      "all_pass": true
+    },
+    "maxwell_plane_wave": {
+      "samples": 4096,
+      "parameters": {
+        "epsilon": 0.7,
+        "mu": 0.13950892857142858,
+        "c": 3.2,
+        "k": 1.7,
+        "omega": 5.44
+      },
+      "metrics": {
+        "faraday_max_abs_residual": 2.220446049250313e-16,
+        "ampere_max_abs_residual": 8.881784197001252e-16,
+        "electric_vs_cB_correlation": 1.0,
+        "field_vs_normalized_change_inner_product": 1.1713720231596827e-17,
+        "electric_magnetic_energy_max_abs_error": 1.6653345369377348e-16,
+        "poynting_equals_c_u_max_abs_error": 8.881784197001252e-16,
+        "population_axis_max_abs_error_from_ridge": 3.3306690738754696e-16,
+        "coherence_axis_max_abs_error_from_forward_pole": 2.220446049250313e-16,
+        "one_flip_coherence_max_abs_error_from_reverse_pole": 2.220446049250313e-16,
+        "paired_flip_coherency_relative_l2_error": 0.0,
+        "quadrature_ara_minimum": 0.0,
+        "quadrature_ara_maximum": 2.0,
+        "quadrature_ara_mean": 1.0
+      },
+      "gates": {
+        "faraday": true,
+        "ampere_maxwell": true,
+        "raw_E_B_in_phase": true,
+        "field_change_quadrature": true,
+        "equal_field_energy": true,
+        "poynting_energy_relation": true,
+        "population_ridge": true,
+        "forward_coherence_pole": true,
+        "one_flip_reverses_coherence_pole": true,
+        "paired_flip_preserves_parent": true,
+        "quadrature_covers_0_2": true
+      },
+      "all_pass": true
+    }
+  },
+  "all_gates_pass": true,
+  "claim_boundary": {
+    "exact": "Two-channel coherency states admit a 0-2 projection on every declared axis; coarse mixtures average by activity and coherent sums require relation cross-terms; the construction matches an analytic source-free Maxwell plane wave.",
+    "not_established": "No universal physical decomposition, privileged axis, cross-scale fractal law, new electromagnetic prediction, or raw E/B temporal phase offset is established."
+  }
+}

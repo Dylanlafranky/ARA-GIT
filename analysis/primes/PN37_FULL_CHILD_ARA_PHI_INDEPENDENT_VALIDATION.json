@@ -1,0 +1,38 @@
+{
+  "validation_id": "PN37/FULL-CHILD-ARA-PHI/INDEPENDENT-VALIDATION/v1",
+  "all_passed": true,
+  "check_count": 6,
+  "checks": [
+    {
+      "name": "CSV row counts match regenerated source populations",
+      "passed": true,
+      "detail": "parent_csv=45166 source=45166; gate_csv=6338 source=6338"
+    },
+    {
+      "name": "independent CSV pair totals reconcile",
+      "passed": true,
+      "detail": "parent_total=286253917; gate_total=286253917; result=286253917"
+    },
+    {
+      "name": "independent CSV Phi hit totals reconcile",
+      "passed": true,
+      "detail": "parent_hits=265390; gate_hits=265390"
+    },
+    {
+      "name": "eight parent rows reconstruct from raw child phases",
+      "passed": true,
+      "detail": "sample_count=8; max_abs_error=2.66e-15"
+    },
+    {
+      "name": "seven gate rows reconstruct from raw parent residues",
+      "passed": true,
+      "detail": "sample_count=7; max_abs_error=1.11e-16"
+    },
+    {
+      "name": "Phi aggregate recomputes from gate CSV",
+      "passed": true,
+      "detail": "max_abs_error=4e-15"
+    }
+  ],
+  "note": "This validator reloads the source interval, reconstructs selected parent and gate child fields, and recomputes the primary Phi aggregate from CSV outputs."
+}

@@ -1,0 +1,171 @@
+{
+  "analysis_id": "GR_NEWTON_ARA_RUNG_CROSSING_2026-07-23",
+  "constants": {
+    "c_m_s_exact": 299792458.0,
+    "G_m3_kg_s2_CODATA_2022": 6.6743e-11,
+    "IAU_nominal_mu_sun_m3_s2": 1.3271244e+20,
+    "IAU_nominal_radius_sun_m": 695700000.0,
+    "IAU_nominal_mu_earth_m3_s2": 398600400000000.0,
+    "IAU_nominal_equatorial_radius_earth_m": 6378100.0,
+    "IAU_nominal_mu_jupiter_m3_s2": 1.2668653e+17,
+    "IAU_nominal_equatorial_radius_jupiter_m": 71492000.0,
+    "astronomical_unit_m_exact": 149597870700.0
+  },
+  "sources": [
+    {
+      "title": "IAU 2015 Resolution B3",
+      "url": "https://www.iau.org/common/Uploaded%20files/IAUGA2015-Resolution-B3-recommended-nominal-conversion.pdf"
+    },
+    {
+      "title": "NIST CODATA 2022 recommended constants",
+      "url": "https://pml.nist.gov/cuu/pdf/wall_2022.pdf"
+    },
+    {
+      "title": "Dittmann et al. 2024 PSR J0740+6620 mass/radius",
+      "url": "https://arxiv.org/abs/2406.14467"
+    }
+  ],
+  "declared_models": {
+    "compactness_examples": "exterior spherical non-rotating Schwarzschild model",
+    "weak_field": "|Phi|/c^2 << 1, stationary source, slow test body, negligible pressure",
+    "neutron_star_caveat": "central mass/radius inserted into a spherical Schwarzschild exterior proxy; the pulsar rotates and the published mass/radius have uncertainty",
+    "ARA_compactness_coordinate": "proposed normalization t_Time=2(1-u), t_Connection=2u with u=2GM/(Rc^2); not a new GR law and not uniquely forced by GR"
+  },
+  "compactness_examples": [
+    {
+      "name": "Earth (IAU nominal equatorial)",
+      "mu_m3_s2": 398600400000000.0,
+      "radius_m": 6378100.0,
+      "compactness_u": 1.390704935334958e-09,
+      "time_allocation_proposed": 1.9999999972185902,
+      "connection_allocation_proposed": 2.781409870669916e-09,
+      "allocation_total": 2.0,
+      "ara_signed_distance_from_ridge": 0.9999999972185902,
+      "schwarzschild_lapse_exact": 0.9999999993046476,
+      "weak_field_lapse_first_order": 0.9999999993046476,
+      "weak_lapse_absolute_error": 2.417575273137329e-19,
+      "weak_lapse_relative_error": 2.4175752748183955e-19,
+      "newton_surface_acceleration_m_s2": 9.798398133669465,
+      "schwarzschild_static_proper_acceleration_m_s2": 9.798398140482805,
+      "proper_acceleration_fractional_GR_correction": 6.953524422925739e-10,
+      "surface_gravitational_redshift": 6.953524422925739e-10
+    },
+    {
+      "name": "Jupiter (IAU nominal equatorial)",
+      "mu_m3_s2": 1.2668653e+17,
+      "radius_m": 71492000.0,
+      "compactness_u": 3.943316027128586e-08,
+      "time_allocation_proposed": 1.9999999211336794,
+      "connection_allocation_proposed": 7.886632054257171e-08,
+      "allocation_total": 2.0,
+      "ara_signed_distance_from_ridge": 0.9999999211336794,
+      "schwarzschild_lapse_exact": 0.9999999802834196,
+      "weak_field_lapse_first_order": 0.9999999802834199,
+      "weak_lapse_absolute_error": 1.9437176995496126e-16,
+      "weak_lapse_relative_error": 1.9437177378730796e-16,
+      "newton_surface_acceleration_m_s2": 24.786519476149145,
+      "schwarzschild_static_proper_acceleration_m_s2": 24.78651996485456,
+      "proper_acceleration_fractional_GR_correction": 1.971658081245664e-08,
+      "surface_gravitational_redshift": 1.971658081245664e-08
+    },
+    {
+      "name": "Sun (IAU nominal)",
+      "mu_m3_s2": 1.3271244e+20,
+      "radius_m": 695700000.0,
+      "compactness_u": 4.245005140290714e-06,
+      "time_allocation_proposed": 1.9999915099897194,
+      "connection_allocation_proposed": 8.490010280581428e-06,
+      "allocation_total": 2.0,
+      "ara_signed_distance_from_ridge": 0.9999915099897194,
+      "schwarzschild_lapse_exact": 0.9999978774951773,
+      "weak_field_lapse_first_order": 0.9999978774974299,
+      "weak_lapse_absolute_error": 2.2525133611047583e-12,
+      "weak_lapse_relative_error": 2.252518142085378e-12,
+      "newton_surface_acceleration_m_s2": 274.20011165737316,
+      "schwarzschild_static_proper_acceleration_m_s2": 274.2006936496678,
+      "proper_acceleration_fractional_GR_correction": 2.1225093276289186e-06,
+      "surface_gravitational_redshift": 2.1225093276289186e-06
+    },
+    {
+      "name": "PSR J0740+6620 (central spherical proxy)",
+      "mu_m3_s2": 2.760418752e+20,
+      "radius_m": 12920.0,
+      "compactness_u": 0.4754458326848699,
+      "time_allocation_proposed": 1.0491083346302603,
+      "connection_allocation_proposed": 0.9508916653697398,
+      "allocation_total": 2.0,
+      "ara_signed_distance_from_ridge": 0.04910833463026032,
+      "schwarzschild_lapse_exact": 0.7242611181853753,
+      "weak_field_lapse_first_order": 0.7622770836575651,
+      "weak_lapse_absolute_error": 0.03801596547218979,
+      "weak_lapse_relative_error": 0.052489308783326916,
+      "newton_surface_acceleration_m_s2": 1653674165380.6707,
+      "schwarzschild_static_proper_acceleration_m_s2": 2283256858415.8223,
+      "proper_acceleration_fractional_GR_correction": 0.3807174993812785,
+      "surface_gravitational_redshift": 0.3807174993812785
+    }
+  ],
+  "psr_uncertainty_sensitivity": {
+    "method": "corner envelope from separate published 68% marginal bounds; not a joint credible interval",
+    "compactness_u_low": 0.3954718622892407,
+    "compactness_u_high": 0.5385485719775688,
+    "time_allocation_low": 0.9229028560448624,
+    "time_allocation_high": 1.2090562754215186
+  },
+  "sun_earth_newton_III_active_ridge": {
+    "separation_m": 149597870700.0,
+    "force_on_earth_by_sun_N": 3.541545424043141e+22,
+    "force_on_sun_by_earth_N": 3.541545424043141e+22,
+    "force_relative_mismatch_numeric": 0.0,
+    "enclosing_pair_ara_x": 1.0,
+    "enclosing_pair_net_internal_force_N": 0.0,
+    "enclosing_pair_active_force_total_N": 7.083090848086282e+22,
+    "earth_acceleration_due_sun_m_s2": 0.0059300835181528,
+    "sun_acceleration_due_earth_m_s2": 1.7810942684567576e-08,
+    "acceleration_ratio": 332946.07832806994,
+    "mass_ratio_sun_to_earth": 332946.07832806994
+  },
+  "newton_II_ara_force_identity_examples": [
+    {
+      "label": "active ridge",
+      "phase_A_force_magnitude_N": 10.0,
+      "phase_B_force_magnitude_N": 10.0,
+      "ara_x": 1.0,
+      "dimensional_force_envelope_N": 20.0,
+      "net_force_direct_N": 0.0,
+      "net_force_from_ara_identity_N": 0.0,
+      "acceleration_m_s2": 0.0,
+      "identity_absolute_error_N": 0.0
+    },
+    {
+      "label": "Phase A dominant",
+      "phase_A_force_magnitude_N": 15.0,
+      "phase_B_force_magnitude_N": 5.0,
+      "ara_x": 0.5,
+      "dimensional_force_envelope_N": 20.0,
+      "net_force_direct_N": -10.0,
+      "net_force_from_ara_identity_N": -10.0,
+      "acceleration_m_s2": -2.5,
+      "identity_absolute_error_N": 0.0
+    },
+    {
+      "label": "Phase B dominant",
+      "phase_A_force_magnitude_N": 5.0,
+      "phase_B_force_magnitude_N": 15.0,
+      "ara_x": 1.5,
+      "dimensional_force_envelope_N": 20.0,
+      "net_force_direct_N": 10.0,
+      "net_force_from_ara_identity_N": 10.0,
+      "acceleration_m_s2": 2.5,
+      "identity_absolute_error_N": 0.0
+    }
+  ],
+  "theoretical_horizon_endpoint": {
+    "compactness_u": 1.0,
+    "time_allocation_proposed": 0.0,
+    "connection_allocation_proposed": 2.0,
+    "schwarzschild_lapse": 0.0,
+    "weak_field_valid": false,
+    "note": "event horizon is a causal/coordinate boundary, not the r=0 curvature singularity"
+  }
+}

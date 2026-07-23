@@ -11,6 +11,184 @@ The safest way to read any claim here is:
 3. Compare against simple baselines such as persistence, Fourier/AR models, parameter count, or a non-phi log ladder.
 4. Treat the larger "geometry of time" interpretation as a hypothesis, not as established fact.
 
+> **Einstein-to-Newton rung-crossing amendment (23 July 2026):** the corrected ARA hierarchy is
+> `Space/Phase A + Time/Phase B + their relation = perceived Space–Time`; down one proposed rung,
+> Matter is the child Space/Connection wave and Field is the child Time/Traversal wave. Standard GR does not derive
+> that ontology. It does, however, reduce independently under stationary weak-field, slow-motion assumptions as
+> `g_μν -> Φ -> g=-∇Φ -> m ẍ=m g`, with `∇·g=-4πGρ`. Along a declared Newtonian force axis,
+> `x_F=2F_B/(F_A+F_B)` gives the exact identity
+> `m a_parallel=(F_A+F_B)(x_F-1)`. Equal nonzero anti-directed forces are an active `1.0` ridge; if both sides are
+> zero the ratio is undefined, separating no interaction from balanced interaction. The nominal Sun–Earth pair
+> gives `x=1`, zero enclosed internal resultant and `7.0831e22 N` active force total while the two bodies have
+> unequal accelerations. Earth/Jupiter/Sun weak-lapse relative errors are approximately
+> `2.42e-19/1.94e-16/2.25e-12`; a spherical central-value proxy for PSR J0740+6620 gives `5.249%`, showing where the
+> Newtonian approximation visibly fails. The proposed compactness allocation
+> `t_Time=2(1-u), t_Connection=2u`, `u=2GM/(Rc²)`, is dimensionless and total-2 but is **not uniquely derived by
+> GR**; its neutron-star near-ridge placement was not preregistered. Independent validation passed `27/27`.
+> Report: `analysis/gravity/GR_NEWTON_ARA_RUNG_CROSSING_REPORT_2026-07-23.md`.
+
+> **Hamiltonian oscillator crosswalk (23 July 2026):** for one isolated ideal harmonic oscillator,
+> `H=K+V=p²/(2m)+kq²/2`. The invertible rescaling `Q=sqrt(k)q`, `P=p/sqrt(m)` gives the exact phase-space circle
+> `Q²+P²=2H`. The typed energy-allocation appearance
+> `t_A=2V/H`, `t_B=2K/H`, `t_A+t_B=2`, with `x_H=t_B`, is therefore an exact total-2 ARA crosswalk.
+> `x_H=0/1/2` means all potential/equal potential and kinetic/all kinetic energy. The `1.0` point is an equal-energy
+> ridge, not force cancellation. The diameter is many-to-one because squaring discards the signs of `Q` and `P`;
+> quadrant or `dx_H/dt` is required to reconstruct direction. Independent validation passed `10/10`, including
+> 10,000 randomized property trials. This is a reparameterization of established Hamiltonian mechanics, not
+> independent evidence for universal fractality, phi, or quantum gravity. Report:
+> `analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md`.
+
+> **Perspective/Noether clarification (23 July 2026):** TE-ARA `2` is now explicitly separated into
+> perspective-unassigned closure and perspective-bound allocation. Before selecting a diameter only the normalized
+> whole is assigned. After declaring boundary, observable, slice, projection, rung and orientation, the vector
+> `(t_A,t_B,t_J1,...,t_Other)` sums to `2`; another perspective can change every component while preserving the
+> normalized closure. Native energy/activity remains a separate number. Noether's theorem provides the stronger
+> physical result: time/spatial/rotational symmetries conserve energy/momentum/angular momentum even while the
+> state changes. A system may remain normalized to TE-ARA `2` while its physical budget leaks or grows. Information³
+> `(A,B,J_AB)` and a dynamical coherence triangle remain related but unconfirmed as the same dimension-shifted
+> geometry. Under strict anti-phase alternation, odd-cycle frustration and even-cycle closure are exact; universal
+> square-coherence advantage remains a testable hypothesis. Full note:
+> `analysis/hamilton/TE_ARA_PERSPECTIVE_NOETHER_COHERENCE_NOTE_2026-07-23.md`.
+
+> **Quantum Bloch-sphere crosswalk (23 July 2026):** in any declared two-outcome basis, the primary plain-ARA
+> coordinate is `x_Q=2|β|²`. The conventional Bloch coordinate satisfies the exact affine relation
+> `r_z=1-x_Q`, hence `x_Q-1=-r_z`: standard quantum mechanics uses the same diameter centred on zero and read from
+> the opposite pole. For any measurement direction, `x_n=1-r·n`. ARA `0/1/2` maps to Bloch `+1/0/-1`.
+> The `1.0` ridge is the whole zero-projection plane, containing both pure coherent equatorial states and the
+> maximally mixed centre; phase and radius are therefore indispensable. Ideal resonant Rabi motion gives
+> `x_Q(t)=1-cos(Ωt)`, or `0→1→2→1→0`. Independent validation passed `10/10` over 10,000 pure states,
+> 10,000 mixed-state/random-axis cases and 4,097 Rabi points. This is an exact reparameterization, not a derivation
+> of the Born rule, universal ARA, or quantum gravity. Report:
+> `analysis/quantum/BLOCH_SPHERE_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+> **Landau–Zener handover crosswalk (23 July 2026):** for
+> `H=(vt/2)σ_z+gσ_x`, the coupling axis is perpendicular to bare-state detuning on the Bloch sphere. The lower
+> instantaneous eigenstate has exact structural ARA
+> `x_path=1+vt/sqrt((vt)²+4g²)`, moving monotonically `0→1→2`, with mirror
+> `x(-t)=2-x(t)`. The minimum gap is `2|g|`; at `g=0,t=0` it closes and the eigenstate is not unique. The separate
+> dimensionless control is `γ=g²/(ℏ|v|)`, and ideal final handover has
+> `x_handover=2(1-exp(-2πγ))`. Structural `1.0` means equal instantaneous bare-state mixture; outcome `1.0` means
+> equal final stay/handover probability. Independent validation passed `12/12`, including 10,000 eigenstate and
+> 10,000 transition-probability trials. These are exact reparameterizations under ideal Landau–Zener assumptions,
+> not a universal handover law or new quantum prediction. Report:
+> `analysis/quantum/LANDAU_ZENER_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+> **Virial cross-scale ladder (23 July 2026):** for a bound inverse-distance potential,
+> established physics gives `2<T>=|<V>|`. Declaring `R=2<T>` as the Traversal channel and
+> `C=|<V>|` as the Connection channel gives the exact plain-ARA coordinate
+> `x_vir=2R/(C+R)=1`. The same frozen mapping was evaluated on Earth–Sun, a circular
+> `7000 km` Earth-satellite reference, a classical electron–proton Coulomb comparison at the Bohr radius and ideal
+> nonrelativistic hydrogen `1s`, spanning `21.4513` spatial orders without retuning. This must be separated from
+> the raw TE-ARA energy allocation, which is `t_T=2/3`, `t_C=4/3`, total `2`. Earth's instantaneous elliptical
+> child coordinate spans `0.991574–1.008286`, while the completed mean-channel parent coordinate returns to `1.0`.
+> Independent validation passed `13/13`, including 10,000 algebraic identity trials and a 60-decade normalization
+> sweep. This is a scale-consistent reparameterization of a known theorem for systems already sharing
+> `V∝-1/r`; it is not a new virial theorem, proof of universal fractality, classical electron orbit or quantum
+> gravity. Report:
+> `analysis/virial/VIRIAL_ARA_CROSS_SCALE_LADDER_REPORT_2026-07-23.md`.
+
+> **Cosmic-to-quantum law-ladder synthesis (23 July 2026):** fourteen reviewed appearances now form a typed
+> traversal from solar spacetime through Einstein/Poisson/Newton, Hamilton/Noether/virial,
+> Gauss/Faraday/Ampère–Maxwell/Poynting/Lorentz and Schrödinger/hydrogen/Landau–Zener. The links are explicitly
+> separated into exact limits, exact reformulations, theorem consequences, field closure, quantisation/model
+> transition and sibling mathematical analogy. The repeated established spine is the domain-specific continuity
+> grammar `∂t q + ∇·J = s`; it does not make stress-energy, charge, electromagnetic energy and probability the same
+> physical quantity. Likewise, the ARA `1.0` landmark has at least thirteen distinct typed meanings across the
+> atlas. The unchanged weighted virial coordinate is the only current numeric thread carried from Earth–Sun to
+> ideal hydrogen `1s`, spanning `21.4513` spatial orders. Automated synthesis validation passed `15/15`. This is a
+> validated reconstruction atlas, not a direct derivation of quantum mechanics from GR and not proof of universal
+> fractality. Report:
+> `analysis/physics_ladder/ARA_PHYSICS_COSMIC_TO_QUANTUM_LADDER_REPORT_2026-07-23.md`.
+
+> **Frozen child-to-parent composition result (23 July 2026):** one preregistered boundary operator,
+> `x_parent=2*(sum R_i-I)/(sum(A_i+R_i)-2I)`, was applied unchanged to analytic classical string-energy flux,
+> lossless transmission-line power and free-Gaussian quantum probability current. The shared interface `I` is
+> release for one child and accumulation for the other but internal to their parent, so it is removed from both
+> parent channels. All `12,291/12,291` samples were retained. Worst frozen error was `2.1538e-14`; the best
+> incorrect-control MAE was `0.302350`; quantum-holdout worst error was `2.4425e-15`. Independent validation passed
+> `15/15`, including `100,000` randomized signed-flux triples. This is an exact finite-volume conservation identity
+> expressed in ARA coordinates. It supplies a rigorous aggregation/zoom rule but is **not** new dynamics or proof
+> of universal fractality. Report:
+> `analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_REPORT_2026-07-23.md`.
+
+> **Frozen hidden-`Other` residual result (23 July 2026):** the preregistered estimator
+> `s_hat_i=dq_i/dt-g_i` received raw child/relation storage and declared internal transfers but no damping,
+> resistance or quantum-decay coefficient. It correctly localized a viscous oscillator sink, a relation-local
+> Joule sink and an open-quantum-state probability sink. All `3/3` systems and `18,991` scored samples passed:
+> sign accuracy and source correlation were `1.0`; maximum peak-normalized source RMSE was `1.0554e-9`; maximum
+> integrated relative error was `4.5071e-11`; maximum inactive residual fraction was `1.8859e-9`. Independent
+> bounded-output validation passed, and no-Other, parent-only and wrong-location controls all lost. Classification:
+> **SUPPORTED controlled diagnostic-inference result.** It operationalizes `Other` and distinguishes child-local
+> loss from relation-local leak, but it is still a noiseless inverse conservation residual—not forward prediction
+> of an unseen waveform or derivation of a new law. Report:
+> `analysis/physics_ladder/ARA_HIDDEN_OTHER_RESIDUAL_REPORT_2026-07-23.md`.
+
+> **Controlled-noise boundary on hidden `Other` (23 July 2026):** the preregistered O2-A1 extension added white,
+> coloured, impulsive, drift, missing-block and timestamp corruption to the same three systems. The frozen 12 dB
+> target across capacitor and quantum holdouts was **NOT SUPPORTED**: only `4/8` gates passed; location was `0.50`,
+> median sign `0.762`, correlation `0.460`, NRMSE `0.314`, integrated error `0.00787`, and inactive spill `0.367`.
+> The primary estimator crushed raw differentiation (`47.73` NRMSE) but was worse than zero-Other (`0.221` NRMSE)
+> and no better than ordinary moving-average smoothing pointwise. The useful retained result was cumulative:
+> integrated loss stayed accurate while local identity assignment smeared. Transfer noise was the main failure
+> source; quantum \(q\)-only recovery remained strong. Independent validation passed `11/11`. This bounds the
+> noiseless controlled result and blocks direct physical use on open data without a joint observation-error model.
+> Report: `analysis/physics_ladder/O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_REPORT_2026-07-23.md`.
+
+> **Declared-child time-stream follow-up (23 July 2026):** O2-A2 froze Dylan's river distinction before the run:
+> following movement is the time-side reading; preserving stored information is the complementary space-side
+> question. In the same synthetic typed systems, the moving child was named in advance and followed causally,
+> then compared with an identically filtered method that repeatedly re-selected the locally strongest child. The
+> exact registered claim was **NOT SUPPORTED** (`6/8` gates). At 12 dB across `32` fresh target runs, fixed-lineage
+> correlation was `0.764`, NRMSE `0.168`, sign accuracy `0.933`, integrated error `0.354`, correlation advantage
+> `+0.060`, and relative NRMSE improvement `10.84%`. It beat re-selection NRMSE in both systems but missed the
+> integral and `+0.10` correlation-advantage gates. The quantum result was clean; the capacitor result preserved
+> local shape but failed cumulative amount, and its compressed-parent control performed better on NRMSE. This is
+> bounded evidence for conditional tracking of an already identified stream, not discovery, upstream recursion,
+> physical hidden-`Other` attribution, forward prediction or a universal Time/Space result. Independent validation
+> passed `12/12`. Report:
+> `analysis/physics_ladder/O2A2_TIME_STREAM_LINEAGE_REPORT_2026-07-23.md`.
+
+> **Quantum fixed-lineage versus causal state-space comparator (23 July 2026):** T257 froze a matched comparison
+> in which both methods received the same named child, noisy stored probability, noisy declared transfer and
+> timestamps. On `32` fresh paired 12 dB quantum runs, ARA passed all four absolute quality gates and beat the
+> forward augmented-state Kalman filter on local waveform correlation (`0.762` versus `0.687`) and NRMSE (`0.165`
+> versus `0.235`) in every `32/32` pair. The Kalman filter beat ARA on integrated error (`0.038` versus `0.118`) in
+> every `32/32` pair. Frozen classification: **GOOD ABSOLUTE TRACKING / MIXED COMPARATIVE RESULT**. The implemented
+> ARA instrument tracks local movement shape better; the state-space account retains cumulative storage closure
+> better. This is not universal state-space superiority testing or evidence for pure quantum information, a hidden
+> Phase B or perceptual uncoupling. Independent validation passed `12/12`. Report:
+> `analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_REPORT_2026-07-23.md`.
+
+> **ARA `Other` memory/compression/security test (23 July 2026):** a frozen recursive integer pair transform stored
+> one parent root plus signed child-difference `Other` coefficients. Restoration was exact on `20/20`
+> dataset/block combinations; independent validation matched all `20/20` and exhaustively inverted all `65,536`
+> byte pairs. The universal compression hypothesis failed: at the primary `1,024`-byte block, ARA+zlib improved
+> smooth telemetry by `19.23%` versus raw zlib, but ordinary delta was better and ARA enlarged record memory
+> (`74.13%`), text (`118.56%`), Python (`146.80%`) and random bytes (`22.85%`). The public unkeyed `Other` stream was
+> inverted exactly, so it supplied no confidentiality. AES-256-GCM wrapping restored exactly and rejected
+> tampering, but that security belongs to AES-GCM. **Claims:** exact hierarchical restoration `CONFIRMED`;
+> compression `MIXED / frozen universal claim NOT SUPPORTED`; naïve ARA encryption `FAILED`; prime/public-key
+> replacement `NOT ESTABLISHED`. Report:
+> `analysis/computing/ara_memory/ARA_MEMORY_OTHER_REPORT_2026-07-23.md`.
+
+> **MX10 cross-rung amendment (23 July 2026):** the exact MX9 state-ball construction was tested against the
+> stronger claim that one contraction exponent learned at the first spatial doubling transfers across later rungs,
+> later times, electric-component pairs and a different plasma simulator. The original v1 run was invalidated
+> because staggered field components had not been collocated; corrected v2 was frozen before recalculation and
+> independently passed `20/20` checks. The one-number law failed internally and externally. On held-out Warp data,
+> its MALE was `0.057750`, worse than flat `0.054540` and pair-specific `0.043353`; it was `1.360x` local one-step
+> error. On PIConGPU, it narrowly beat the two fixed controls but was `6.252x` local one-step error. Component
+> identities followed sharply different contraction paths. **Current claim:** the bounded ARA/coherency state
+> geometry repeats exactly at every declared observation rung, and a local child transition contains useful
+> parent-rung information; one universal numerical contraction rate is **NOT SUPPORTED**. Observation blocks were
+> imposed scales, not discovered physical octaves. Increasing block size travelled upward from resolved children
+> into a coarser parent; the `zx` contraction is therefore classified as a partial/local cross-rung child-mixing
+> singularity. A signed audit found no separate parent-axis `A/B` flip: its population direction remained about
+> `-0.5226` at every rung. Warp's `xy/yz` near-boundary states were also
+> dominated by \(E_y\), which carried `99.912%` of electric-field energy, so the three coordinate pairs were not
+> equally participating physical identities. Report:
+> `analysis/electromagnetism/MX10_CROSS_RUNG_STATE_CONTRACTION_REPORT_2026-07-23.md`.
+
 > **Ladder correction (30 May 2026):** earlier versions described the rung *spacing* as phi. On re-checking against the data (54-heart two-band ECG, solar flywheel), the rung **spacing is octave (x2)** — system geometry sits at ARA = 2.0, the harmonic ceiling. **Phi is kept where it belongs: in the coupling/handover relations** between rungs (golden duty 0.39/0.61, the 1/phi^3 and 1/phi^4 constants). The earlier shared "phi-power" placements (sun = phi^5, etc.) are superseded; each system now carries its own octave ladder anchored at its observed pump. Where claims below say "phi-rung", read it as "octave-rung with phi-timed coupling". Octaves build the tower; phi is the breathing gap between the steps.
 
 > **Cardiac forecast correction (11 July 2026):** the historical `nsr050` ARA-versus-Fourier result (`+0.686` versus `+0.308`) reproduces exactly, but it was online one-beat prediction using the true previous test beat, not a six-hour cold forecast. The table also confused 7 selected ARA subsystems with 7 parameters; the recovered code counts 22 ARA parameters versus 21 Fourier coefficients. On a frozen `nsr051`–`nsr054` replication set, ARA beat Fourier on both metrics in 1/4 records, lost on average, and was decisively beaten by one-step persistence throughout. With test updates removed, ARA cold correlation was negative on all four. See `TheFormula/02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/POST_LEAK_CARDIAC_REPLICATION_2026-07-11.md`.

@@ -1,6 +1,140 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T257 - O2-A3 ARA fixed lineage versus causal state-space tracking
+
+**REGISTERED:** 23 July 2026, 22:32 AEST, before O2-A3 target outcomes | **STATUS:** GOOD ABSOLUTE TRACKING / MIXED COMPARATIVE RESULT `[pre-registered; synthetic matched comparator]`
+
+**Question:** O2-A2's synthetic quantum result looked good in absolute terms. Test whether that quality is an
+ARA-specific advantage or ordinary known-state tracking by comparing it with a causal augmented-state Kalman
+filter given the same declared child, noisy stored quantity, noisy declared transfer and sample times.
+
+**Freeze:** retain the O2-A2 ARA derivative/EWMA settings without target retuning. Select the Kalman process-noise
+ratios only on oscillator development. The filter must estimate target observation-noise scales from the first
+`10%` observed-only prefix and may not receive clean target values, injected SNR, the native hidden waveform or the
+native sink law. Score `32` fresh paired quantum target draws per SNR in a new seed namespace; retain capacitor as a
+secondary boundary target.
+
+**Primary outputs:** first classify ARA's absolute 12 dB quantum tracking against four frozen quality gates. Then
+classify the paired ARA/Kalman comparison as `ARA-SPECIFIC ADVANTAGE`, `STATE-SPACE ADVANTAGE`,
+`STANDARD-RANGE TIE` or `MIXED` using frozen `10%` NRMSE, `0.05` correlation and `10%` integral-tolerance margins.
+
+**Scope:** this compares two implemented synthetic conditional trackers. It cannot establish pure quantum
+information, a hidden Phase B, perceptual uncoupling, a new quantum law or public-data superiority. Fidelity:
+`analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_FIDELITY_v1.md`. Frozen protocol:
+`analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_PROTOCOL_v1_FROZEN.md`.
+
+**Run/result:** the forward Kalman filter selected `alpha=0`, `beta=0.001` on oscillator development only. On the
+`32` fresh paired 12 dB quantum targets, ARA passed all four absolute gates: correlation `0.762`, NRMSE `0.165`,
+sign accuracy `0.905`, and integrated error `0.118`. The matched causal state-space filter returned correlation
+`0.687`, NRMSE `0.235`, sign accuracy `0.808`, and integrated error `0.038`.
+
+**Two-output verdict:** ARA improved median local NRMSE by `29.95%` and correlation by `+0.074`; it won both local
+metrics in `32/32` pairs. The state-space filter won cumulative integral error in `32/32`. Because ARA's integral
+was not within the frozen `10%` tolerance of state-space, the comparative result is **MIXED**, not an unqualified
+ARA advantage. In operational terms, the implemented ARA instrument followed movement shape better, while the
+state-space model maintained cumulative storage closure better.
+
+**Boundary:** the capacitor secondary target became unidentifiable after its registered `10%` calibration prefix;
+only `0.229%` of the original sink peak remained in the scored interval. Preserve that design failure rather than
+using its unstable NRMSE as cross-domain evidence. This compares one simple state-space model, not all conventional
+trackers, and supplies no evidence for pure quantum information, a hidden Phase B or perceptual uncoupling.
+Independent validation passed `12/12`. Full report:
+`analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_REPORT_2026-07-23.md`.
+
+---
+
+### T256 - O2-A2 declared-child downstream time-stream lineage
+
+**REGISTERED:** 23 July 2026, 22:00 AEST, before O2-A2 development or target outcomes | **STATUS:** NOT SUPPORTED `[pre-registered; synthetic conditional-tracking test]`
+
+**Fidelity:** Dylan distinguished two modes using coloured water in a river, then explicitly fixed this test's
+orientation: following movement is a time-wave reading; maintaining stored information would be the complementary
+space-side test. Fidelity packet:
+`analysis/physics_ladder/O2A2_TIME_STREAM_LINEAGE_FIDELITY_v1.md`.
+
+**Claim/test:** in the unchanged O2-A1 synthetic systems, predeclare the moving child, construct every typed
+continuity residual causally, and follow that same child downstream. Compare it with an identically filtered method
+that repeatedly returns to the parent mixture and selects the locally strongest child. Select derivative window
+and trajectory half-life on oscillator development only; keep capacitor relation and quantum state 2 as untouched
+fresh-noise targets.
+
+**Prediction:** at 12 dB white noise on both stored quantities and transfers, fixed time-stream lineage will retain
+adequate waveform/sign/integral accuracy and outperform repeated re-selection by at least `+0.10` median
+correlation and `10%` median NRMSE. It must also beat zero `Other`, and beat re-selection on NRMSE in both target
+systems separately.
+
+**Falsifier:** failure of any absolute or comparative frozen gate prevents support. If comparative gains appear
+while the causal instrument itself is inadequate, rate `INCONCLUSIVE`. Conditional tracking cannot be reported as
+hidden-child discovery, upstream reconstruction, space-side information retention or forward prediction.
+
+**Rivals/controls:** repeated parent re-selection with the same causal filter, fixed child without trajectory
+memory, wrong fixed child, compressed parent, zero `Other`, and the noncausal O2-A1 centred estimate as an offline
+reference. Frozen protocol:
+`analysis/physics_ladder/O2A2_TIME_STREAM_LINEAGE_PROTOCOL_v1_FROZEN.md`.
+
+**Run/result:** the frozen causal instrument selected a trailing-cubic derivative span of `0.04` and an EWMA
+trajectory half-life of `0.02` on oscillator development only, then scored `2,016` rows across fresh capacitor and
+quantum target noise. At the registered 12 dB target, fixed lineage passed `6/8` gates: median correlation `0.764`,
+NRMSE `0.168`, sign accuracy `0.933`, integrated error `0.354`, correlation advantage over re-selection `+0.060`,
+and relative NRMSE improvement `10.84%`. It beat zero `Other` in the pooled NRMSE account and beat re-selection
+NRMSE in both target systems, but missed the frozen integral gate (`<=0.35`) and correlation-advantage gate
+(`>=+0.10`). The exact prediction is therefore **NOT SUPPORTED** without relaxation.
+
+**Retained descriptive result:** fixed identity nevertheless had lower paired NRMSE in `30/32` target runs and
+higher paired correlation in `28/32`; these paired summaries are explicitly post-hoc descriptive, not replacement
+gates. The quantum target was the clean positive case (`0.174` versus `0.234` NRMSE; integrated error `0.0526`).
+The capacitor relation was mixed: fixed lineage preserved local shape (`r=0.819`) but badly biased the signed
+integral (`1.771` relative error), while the compressed-parent control had lower NRMSE (`0.0649`). This supports a
+bounded distinction between following a declared moving stream and maintaining a stored parent identity. It does
+not establish hidden-child discovery, upstream reconstruction, a universal Time/Space law, physical attribution or
+forward prediction. Independent validation passed `12/12`. Full report:
+`analysis/physics_ladder/O2A2_TIME_STREAM_LINEAGE_REPORT_2026-07-23.md`.
+
+---
+
+### T255 - O2-A1 hidden `Other` under controlled observation noise
+
+**REGISTERED:** 23 July 2026 before O2-A1 target outcomes | **STATUS:** NOT SUPPORTED `[pre-registered; synthetic instrument test]`
+
+**Orientation:** positive residual is a source into a declared identity; negative residual is a sink from it.
+
+**Claim/test:** retain the previously frozen operator
+`s_hat_i=dq_i/dt-g_i`, corrupt the observed stored quantities and declared transfers of the same oscillator,
+capacitor and open-two-level systems, and measure how accurately it retains hidden location, sign, waveform and
+integral. Derivative windows are selected only on the first 60% of the oscillator under fixed development noise.
+The capacitor and quantum systems remain target systems. Noise families, SNRs, structural corruptions, controls and
+scoring are frozen in
+`analysis/physics_ladder/O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_PROTOCOL_v1_FROZEN.md`.
+
+**Primary prediction:** at 12 dB white noise on both stored quantities and transfers, the development-selected
+centred local-polynomial continuity residual will retain at least 90% exact location accuracy, 95% median active
+sign accuracy, 0.80 median waveform correlation, at most 0.50 median peak-NRMSE, 0.35 median integrated error and
+0.50 median inactive spill across 32 untouched capacitor/quantum runs. It must beat raw finite difference and the
+zero-Other control on median NRMSE.
+
+**Falsifier:** adequate clean/high-SNR recovery but failure of any frozen 12 dB gate is `NOT SUPPORTED` at that
+noise threshold. Numerical smoothing performance is not ARA-specific evidence. Diagnostic recovery cannot be
+reported as forward prediction.
+
+**Rivals/controls:** raw fourth-order difference, moving-average plus difference, causal local-linear state
+estimate, zero-Other, parent-only and wrong-location residuals.
+
+**RUN:** `16,140` trial rows and `1,020` aggregate conditions were scored. At the registered 12 dB target, `4/8`
+gates passed: location `0.5000`, median sign `0.76197`, correlation `0.45991`, NRMSE `0.31391`, integrated error
+`0.007872`, inactive spill `0.36747`; raw-difference NRMSE was `47.7264`, but zero-Other NRMSE was better at
+`0.22120`. All 16 quantum runs localized state 2; all 16 capacitor runs mislocalized the relation sink to capacitor
+1. Independent validation passed `11/11`.
+
+**Two-output reading:** the registered pointwise robustness claim is **NOT SUPPORTED**. The cumulative parent
+account remained much more stable than child-level location/waveform: zero-mean errors cancelled in the integral
+while residual energy spilled into inactive identities. Separate injection showed transfer noise was the dominant
+bottleneck; quantum \(q\)-only recovery remained strong. This is a measurement-error boundary on a standard
+continuity diagnostic, not evidence against the noiseless algebra and not forward prediction. Full report:
+`analysis/physics_ladder/O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_REPORT_2026-07-23.md`.
+
+---
+
 ### T254 - PN36 Phi-carrier to pentagonal-structure conversion
 
 **REGISTERED:** 22 July 2026 before target cells/candidates/prime labels | **STATUS:** NOT SUPPORTED `[pre-registered]`

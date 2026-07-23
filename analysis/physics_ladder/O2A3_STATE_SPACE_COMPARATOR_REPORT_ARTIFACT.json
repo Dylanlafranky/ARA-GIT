@@ -1,0 +1,874 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "O2-A3 Quantum Tracking Versus State-Space",
+    "description": "Frozen matched comparison of ARA fixed lineage with a causal augmented-state Kalman filter.",
+    "generatedAt": "2026-07-23T22:50:00+10:00",
+    "sources": [
+      {
+        "id": "o2a3-run",
+        "label": "Frozen O2-A3 matched quantum tracking outputs",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\physics_ladder\\O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv",
+        "query": {
+          "id": "o2a3-quantum-comparator-v1",
+          "language": "sql",
+          "engine": "duckdb",
+          "description": "Reads frozen aggregate and paired trial outputs for the 12 dB quantum target and its six-level noise ladder.",
+          "sql": "SELECT * FROM read_csv_auto('analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv');",
+          "tables_used": [
+            "analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv",
+            "analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_TRIALS.csv"
+          ],
+          "filters": [
+            "Primary target: open two-level probability, declared state 2",
+            "Primary condition: 12 dB white noise on q and g",
+            "Thirty-two fresh paired deterministic target replicates",
+            "State-space settings selected on oscillator development only"
+          ],
+          "metric_definitions": [
+            "correlation = Pearson correlation with the native hidden waveform",
+            "NRMSE = waveform RMSE divided by native hidden peak magnitude",
+            "sign accuracy = active samples with matching estimate and truth signs",
+            "integrated error = absolute signed-integral error divided by native signed integral",
+            "ARA NRMSE improvement = 1 - median ARA NRMSE / median state-space NRMSE"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "correlation-card",
+        "description": "Median local waveform correlation at 12 dB.",
+        "dataset": "headline",
+        "sourceId": "o2a3-run",
+        "metrics": [
+          {
+            "label": "ARA correlation",
+            "field": "ara_correlation",
+            "format": "number"
+          },
+          {
+            "label": "vs state-space",
+            "field": "correlation_advantage",
+            "format": "number",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "nrmse-card",
+        "description": "Median peak-normalized waveform error; lower is better.",
+        "dataset": "headline",
+        "sourceId": "o2a3-run",
+        "metrics": [
+          {
+            "label": "ARA NRMSE",
+            "field": "ara_nrmse",
+            "format": "number"
+          },
+          {
+            "label": "Improvement",
+            "field": "nrmse_improvement",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "integral-card",
+        "description": "Cumulative signed-integral error; lower is better.",
+        "dataset": "headline",
+        "sourceId": "o2a3-run",
+        "metrics": [
+          {
+            "label": "ARA integral error",
+            "field": "ara_integrated_error",
+            "format": "percent"
+          },
+          {
+            "label": "State-space",
+            "field": "state_space_integrated_error",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "noise-ladder-chart",
+        "title": "Quantum waveform NRMSE across the noise ladder",
+        "description": "Median across thirty-two paired runs per method and SNR; lower values indicate better local recovery.",
+        "type": "line",
+        "dataset": "ladder",
+        "sourceId": "o2a3-run",
+        "encodings": {
+          "x": {
+            "field": "snr_db",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "nrmse",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "points": "always"
+        }
+      },
+      {
+        "id": "paired-nrmse-chart",
+        "title": "Paired ARA NRMSE reduction at 12 dB",
+        "description": "One bar per fresh quantum replicate; positive values mean ARA had lower waveform error.",
+        "type": "bar",
+        "dataset": "paired",
+        "sourceId": "o2a3-run",
+        "encodings": {
+          "x": {
+            "field": "replicate",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "nrmse_reduction_ara",
+            "type": "quantitative"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "methods-table",
+        "title": "Quantum target methods at 12 dB",
+        "description": "Median metrics across thirty-two paired target runs.",
+        "dataset": "methods",
+        "sourceId": "o2a3-run",
+        "columns": [
+          {
+            "field": "method",
+            "label": "Method",
+            "type": "text"
+          },
+          {
+            "field": "correlation",
+            "label": "Correlation",
+            "type": "number"
+          },
+          {
+            "field": "nrmse",
+            "label": "NRMSE",
+            "type": "number"
+          },
+          {
+            "field": "sign_accuracy",
+            "label": "Sign accuracy",
+            "type": "number"
+          },
+          {
+            "field": "integrated_error",
+            "label": "Integrated error",
+            "type": "number"
+          }
+        ],
+        "defaultSort": {
+          "field": "nrmse",
+          "direction": "asc"
+        }
+      },
+      {
+        "id": "gates-table",
+        "title": "Frozen absolute ARA quality gates",
+        "description": "All four gates apply to the 12 dB quantum target.",
+        "dataset": "gates",
+        "sourceId": "o2a3-run",
+        "columns": [
+          {
+            "field": "order",
+            "label": "#",
+            "type": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "Result",
+            "type": "number"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ],
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# O2-A3 Quantum Tracking Versus State-Space"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "sourceId": "o2a3-run",
+        "body": "## Technical Summary\n\n**ARA tracking was absolutely good, but the comparative result is mixed.** ARA beat the causal state-space filter on local correlation and NRMSE in all `32/32` paired quantum runs. The state-space filter beat ARA on cumulative integral error in all `32/32`. This separates movement-shape tracking from storage closure rather than establishing one universally superior method."
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "cardIds": [
+          "correlation-card",
+          "nrmse-card",
+          "integral-card"
+        ]
+      },
+      {
+        "id": "absolute-heading",
+        "type": "markdown",
+        "sourceId": "o2a3-run",
+        "body": "## ARA Passed Every Frozen Absolute Quality Gate\n\nAt 12 dB, ARA reached correlation `0.762`, NRMSE `0.165`, sign accuracy `0.905`, and integrated error `11.75%`. It therefore qualifies as good tracking under the frozen definition."
+      },
+      {
+        "id": "gates-block",
+        "type": "table",
+        "tableId": "gates-table"
+      },
+      {
+        "id": "comparison-heading",
+        "type": "markdown",
+        "sourceId": "o2a3-run",
+        "body": "## Local Shape Favoured ARA; Cumulative Closure Favoured State-Space\n\nARA improved median NRMSE by `29.95%` and correlation by `+0.074`. Its integral error was `11.75%`, however, versus `3.80%` for state-space. The frozen result is consequently `MIXED`."
+      },
+      {
+        "id": "methods-block",
+        "type": "table",
+        "tableId": "methods-table"
+      },
+      {
+        "id": "ladder-heading",
+        "type": "markdown",
+        "sourceId": "o2a3-run",
+        "body": "## The Local Advantage Ends Under Extreme Noise\n\nARA had lower NRMSE from `24` through `0` dB. At `-6` dB, the state-space filter became better. The comparison is a finite noise-region result, not universal dominance."
+      },
+      {
+        "id": "ladder-block",
+        "type": "chart",
+        "chartId": "noise-ladder-chart"
+      },
+      {
+        "id": "paired-heading",
+        "type": "markdown",
+        "sourceId": "o2a3-run",
+        "body": "## Every 12 dB Replicate Favoured ARA on Waveform Error\n\nAll paired NRMSE reductions were positive. The median reduction was `0.0730`; its post-hoc descriptive 90% bootstrap interval was `[0.0674, 0.0757]`."
+      },
+      {
+        "id": "paired-block",
+        "type": "chart",
+        "chartId": "paired-nrmse-chart"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope and Method\n\nBoth methods received the same named child, noisy stored quantity, noisy declared transfer and timestamps. ARA retained its previously frozen derivative and EWMA settings. The forward Kalman filter selected process ratios on oscillator development and estimated target noise from an observed-only prefix."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and Validation\n\nThis is one simple state-space comparator, not the best possible conventional filter. The capacitor secondary target became unidentifiable after calibration because only `0.229%` of its original sink peak remained. Independent validation passed `12/12`. The test does not establish pure quantum information, a hidden Phase B, perceptual uncoupling or a new quantum law."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended Next Steps\n\n1. Preserve the `GOOD / MIXED` classification.\n2. Test driven target families whose movement and storage endpoints both remain identifiable.\n3. Compare several preregistered causal state-space variants.\n4. Keep time-stream shape and space-side cumulative retention as separate endpoints."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further Questions\n\n- Does the local advantage survive a quantum-family-trained state-space comparator?\n- Can a causal ARA account retain both waveform shape and integral without post-run correction?\n- Does the split persist for oscillatory, sign-changing hidden transfers?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-07-23T22:50:00+10:00",
+    "datasets": {
+      "headline": [
+        {
+          "ara_correlation": 0.7616067133693517,
+          "correlation_advantage": 0.07434350576282045,
+          "ara_nrmse": 0.16456825618714807,
+          "nrmse_improvement": 0.29946743552398836,
+          "ara_integrated_error": 0.11751276622502518,
+          "state_space_integrated_error": 0.03799041091202443,
+          "replicates": 32
+        }
+      ],
+      "methods": [
+        {
+          "method": "ARA fixed lineage",
+          "correlation": 0.7616067133693517,
+          "nrmse": 0.16456825618714807,
+          "sign_accuracy": 0.9051383399209486,
+          "integrated_error": 0.11751276622502518,
+          "replicates": 32,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "correlation": 0.6872632076065313,
+          "nrmse": 0.2349187811279591,
+          "sign_accuracy": 0.8079239600978732,
+          "integrated_error": 0.03799041091202443,
+          "replicates": 32,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Compressed parent",
+          "correlation": 0.7097822054325968,
+          "nrmse": 0.18027653269143085,
+          "sign_accuracy": 0.8795407491059666,
+          "integrated_error": 0.4499702355237156,
+          "replicates": 32,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Repeated re-selection",
+          "correlation": 0.6534474475464476,
+          "nrmse": 0.21517737771878337,
+          "sign_accuracy": 0.707415772633164,
+          "integrated_error": 0.22486687653201531,
+          "replicates": 32,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Zero Other",
+          "correlation": 0.0,
+          "nrmse": 0.2960076164651898,
+          "sign_accuracy": 0.0,
+          "integrated_error": 1.0,
+          "replicates": 32,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        }
+      ],
+      "ladder": [
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": -6,
+          "nrmse": 0.7463209648517024,
+          "correlation": 0.2390276437678712,
+          "sign_accuracy": 0.6367400715226803,
+          "integrated_error": 0.10214502509510826,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": -6,
+          "nrmse": 0.6349029557616359,
+          "correlation": 0.32471882360473897,
+          "sign_accuracy": 0.6586674195369848,
+          "integrated_error": 0.050517460491947705,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": 0,
+          "nrmse": 0.3776838000326244,
+          "correlation": 0.4577351102189554,
+          "sign_accuracy": 0.7352719744024092,
+          "integrated_error": 0.12394436608724786,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": 0,
+          "nrmse": 0.3936257946398122,
+          "correlation": 0.5063403218555751,
+          "sign_accuracy": 0.725202333897986,
+          "integrated_error": 0.07445819651789395,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": 6,
+          "nrmse": 0.22531279419245062,
+          "correlation": 0.639571493114446,
+          "sign_accuracy": 0.8311688311688312,
+          "integrated_error": 0.11928479387278335,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": 6,
+          "nrmse": 0.28877148397835295,
+          "correlation": 0.6080800928558996,
+          "sign_accuracy": 0.7830792396009787,
+          "integrated_error": 0.05556504945816318,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": 12,
+          "nrmse": 0.16456825618714807,
+          "correlation": 0.7616067133693517,
+          "sign_accuracy": 0.9051383399209486,
+          "integrated_error": 0.11751276622502518,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": 12,
+          "nrmse": 0.2349187811279591,
+          "correlation": 0.6872632076065313,
+          "sign_accuracy": 0.8079239600978732,
+          "integrated_error": 0.03799041091202443,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": 18,
+          "nrmse": 0.14266130439886812,
+          "correlation": 0.8015893283858544,
+          "sign_accuracy": 0.9605684170901562,
+          "integrated_error": 0.1159017195348395,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": 18,
+          "nrmse": 0.19570187895876623,
+          "correlation": 0.748859467210806,
+          "sign_accuracy": 0.8414266892527762,
+          "integrated_error": 0.025814917354377853,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "ARA fixed lineage",
+          "snr_db": 24,
+          "nrmse": 0.1373608032487848,
+          "correlation": 0.813499389307117,
+          "sign_accuracy": 0.9900244682853379,
+          "integrated_error": 0.11298769140647023,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "method": "Causal state-space",
+          "snr_db": 24,
+          "nrmse": 0.1613035414935189,
+          "correlation": 0.805013146741057,
+          "sign_accuracy": 0.8647656691134953,
+          "integrated_error": 0.016787656321450933,
+          "replicates": 32,
+          "target": "Open two-level probability \u2014 state 2"
+        }
+      ],
+      "paired": [
+        {
+          "replicate": "01",
+          "nrmse_reduction_ara": 0.07503369712559002,
+          "correlation_gain_ara": 0.09484034671477215,
+          "integrated_error_reduction_ara": -0.10084157569843315,
+          "ara_nrmse": 0.16208667081208342,
+          "state_space_nrmse": 0.23712036793767344,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "02",
+          "nrmse_reduction_ara": 0.08304264448524579,
+          "correlation_gain_ara": 0.1014557439197934,
+          "integrated_error_reduction_ara": -0.07174686256385826,
+          "ara_nrmse": 0.1447886078217656,
+          "state_space_nrmse": 0.2278312523070114,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "03",
+          "nrmse_reduction_ara": 0.07580144340145276,
+          "correlation_gain_ara": 0.06429054956294666,
+          "integrated_error_reduction_ara": -0.07829456632794958,
+          "ara_nrmse": 0.16226540333832237,
+          "state_space_nrmse": 0.23806684673977513,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "04",
+          "nrmse_reduction_ara": 0.07824194576272522,
+          "correlation_gain_ara": 0.10890725558199021,
+          "integrated_error_reduction_ara": -0.09827645367764262,
+          "ara_nrmse": 0.15307878997813518,
+          "state_space_nrmse": 0.2313207357408604,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "05",
+          "nrmse_reduction_ara": 0.06298639275140339,
+          "correlation_gain_ara": 0.04131303396233066,
+          "integrated_error_reduction_ara": -0.05968552689039753,
+          "ara_nrmse": 0.17206823072472008,
+          "state_space_nrmse": 0.23505462347612346,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "06",
+          "nrmse_reduction_ara": 0.07838559125442365,
+          "correlation_gain_ara": 0.08455320972270353,
+          "integrated_error_reduction_ara": -0.07321992157534273,
+          "ara_nrmse": 0.1555849234372979,
+          "state_space_nrmse": 0.23397051469172156,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "07",
+          "nrmse_reduction_ara": 0.06955331122915873,
+          "correlation_gain_ara": 0.07634786051156028,
+          "integrated_error_reduction_ara": -0.09564183848804929,
+          "ara_nrmse": 0.16880738432843465,
+          "state_space_nrmse": 0.23836069555759337,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "08",
+          "nrmse_reduction_ara": 0.06903413437750744,
+          "correlation_gain_ara": 0.08020619162287357,
+          "integrated_error_reduction_ara": -0.10162700251221649,
+          "ara_nrmse": 0.16812374076126405,
+          "state_space_nrmse": 0.23715787513877148,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "09",
+          "nrmse_reduction_ara": 0.08574015199218801,
+          "correlation_gain_ara": 0.10013846041075058,
+          "integrated_error_reduction_ara": -0.07126033286832692,
+          "ara_nrmse": 0.15709877159504765,
+          "state_space_nrmse": 0.24283892358723566,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "10",
+          "nrmse_reduction_ara": 0.08038857226668461,
+          "correlation_gain_ara": 0.09105256091332492,
+          "integrated_error_reduction_ara": -0.09224880465055511,
+          "ara_nrmse": 0.16796704634456783,
+          "state_space_nrmse": 0.24835561861125244,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "11",
+          "nrmse_reduction_ara": 0.0582387085456067,
+          "correlation_gain_ara": 0.03914456803638566,
+          "integrated_error_reduction_ara": -0.07608611924077263,
+          "ara_nrmse": 0.15642014269156126,
+          "state_space_nrmse": 0.21465885123716796,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "12",
+          "nrmse_reduction_ara": 0.07604902231001859,
+          "correlation_gain_ara": 0.08449755996503105,
+          "integrated_error_reduction_ara": -0.06841163258730223,
+          "ara_nrmse": 0.15621471608659024,
+          "state_space_nrmse": 0.23226373839660883,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "13",
+          "nrmse_reduction_ara": 0.0778377390155218,
+          "correlation_gain_ara": 0.05965780316695568,
+          "integrated_error_reduction_ara": -0.07989879737413962,
+          "ara_nrmse": 0.17852775207468372,
+          "state_space_nrmse": 0.2563654910902055,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "14",
+          "nrmse_reduction_ara": 0.059658385280151965,
+          "correlation_gain_ara": 0.06683155561583087,
+          "integrated_error_reduction_ara": -0.10928333852821129,
+          "ara_nrmse": 0.16762924132408163,
+          "state_space_nrmse": 0.2272876266042336,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "15",
+          "nrmse_reduction_ara": 0.05028012220486516,
+          "correlation_gain_ara": 0.04052880385513968,
+          "integrated_error_reduction_ara": -0.0996093074836924,
+          "ara_nrmse": 0.16731264126442652,
+          "state_space_nrmse": 0.21759276346929168,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "16",
+          "nrmse_reduction_ara": 0.07484151766031297,
+          "correlation_gain_ara": 0.09623769366542778,
+          "integrated_error_reduction_ara": -0.08564363676520073,
+          "ara_nrmse": 0.16207665864446844,
+          "state_space_nrmse": 0.2369181763047814,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "17",
+          "nrmse_reduction_ara": 0.059047012169822305,
+          "correlation_gain_ara": 0.033900877601638624,
+          "integrated_error_reduction_ara": -0.06890820622554408,
+          "ara_nrmse": 0.17050677443631232,
+          "state_space_nrmse": 0.22955378660613462,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "18",
+          "nrmse_reduction_ara": 0.07422652804198679,
+          "correlation_gain_ara": 0.08059744659635582,
+          "integrated_error_reduction_ara": -0.07247051215516617,
+          "ara_nrmse": 0.1614391763819272,
+          "state_space_nrmse": 0.235665704423914,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "19",
+          "nrmse_reduction_ara": 0.06073599280121525,
+          "correlation_gain_ara": 0.03426083192426854,
+          "integrated_error_reduction_ara": -0.054863676025958506,
+          "ara_nrmse": 0.17039282847211462,
+          "state_space_nrmse": 0.23112882127332987,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "20",
+          "nrmse_reduction_ara": 0.0764113216177453,
+          "correlation_gain_ara": 0.0741568478820106,
+          "integrated_error_reduction_ara": -0.06956578627189408,
+          "ara_nrmse": 0.16008934594699853,
+          "state_space_nrmse": 0.23650066756474383,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "21",
+          "nrmse_reduction_ara": 0.06824731358218364,
+          "correlation_gain_ara": 0.06549563663529967,
+          "integrated_error_reduction_ara": -0.09500576976164526,
+          "ara_nrmse": 0.16994363554294778,
+          "state_space_nrmse": 0.23819094912513142,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "22",
+          "nrmse_reduction_ara": 0.06469003481911148,
+          "correlation_gain_ara": 0.04495948328070154,
+          "integrated_error_reduction_ara": -0.06321320454423114,
+          "ara_nrmse": 0.16699511966477945,
+          "state_space_nrmse": 0.23168515448389093,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "23",
+          "nrmse_reduction_ara": 0.07218317690613663,
+          "correlation_gain_ara": 0.05280769461605006,
+          "integrated_error_reduction_ara": -0.05691432264167833,
+          "ara_nrmse": 0.16462004156050544,
+          "state_space_nrmse": 0.23680321846664207,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "24",
+          "nrmse_reduction_ara": 0.07570817181871692,
+          "correlation_gain_ara": 0.09912934215069114,
+          "integrated_error_reduction_ara": -0.09547442731078934,
+          "ara_nrmse": 0.1590747669610778,
+          "state_space_nrmse": 0.23478293877979473,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "25",
+          "nrmse_reduction_ara": 0.06591922851289397,
+          "correlation_gain_ara": 0.055967009436766246,
+          "integrated_error_reduction_ara": -0.06975771456129731,
+          "ara_nrmse": 0.1545115897725983,
+          "state_space_nrmse": 0.22043081828549227,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "26",
+          "nrmse_reduction_ara": 0.07390791248388398,
+          "correlation_gain_ara": 0.06097201712643596,
+          "integrated_error_reduction_ara": -0.0672528751979036,
+          "ara_nrmse": 0.1645164708137907,
+          "state_space_nrmse": 0.23842438329767468,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "27",
+          "nrmse_reduction_ara": 0.0769476800197853,
+          "correlation_gain_ara": 0.06277205719789358,
+          "integrated_error_reduction_ara": -0.059875055131365595,
+          "ara_nrmse": 0.17198877177659327,
+          "state_space_nrmse": 0.24893645179637858,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "28",
+          "nrmse_reduction_ara": 0.06406944123285213,
+          "correlation_gain_ara": 0.06406301447740492,
+          "integrated_error_reduction_ara": -0.0920191912481012,
+          "ara_nrmse": 0.16369662092499557,
+          "state_space_nrmse": 0.2277660621578477,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "29",
+          "nrmse_reduction_ara": 0.06744195470949013,
+          "correlation_gain_ara": 0.06617153225364569,
+          "integrated_error_reduction_ara": -0.08717441655290127,
+          "ara_nrmse": 0.1658912936863084,
+          "state_space_nrmse": 0.23333324839579853,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "30",
+          "nrmse_reduction_ara": 0.06166250401927262,
+          "correlation_gain_ara": 0.05678854081034246,
+          "integrated_error_reduction_ara": -0.07741210435067747,
+          "ara_nrmse": 0.16241802765847643,
+          "state_space_nrmse": 0.22408053167774905,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "31",
+          "nrmse_reduction_ara": 0.05762639287117588,
+          "correlation_gain_ara": 0.031177790747214273,
+          "integrated_error_reduction_ara": -0.06358598439185764,
+          "ara_nrmse": 0.16877367725638606,
+          "state_space_nrmse": 0.22640007012756194,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        },
+        {
+          "replicate": "32",
+          "nrmse_reduction_ara": 0.08573653188823543,
+          "correlation_gain_ara": 0.08772937304458128,
+          "integrated_error_reduction_ara": -0.08223808748300762,
+          "ara_nrmse": 0.17306838728429041,
+          "state_space_nrmse": 0.25880491917252585,
+          "snr_db": 12,
+          "target": "Open two-level probability \u2014 state 2"
+        }
+      ],
+      "gates": [
+        {
+          "order": 1,
+          "gate": "ARA correlation \u2265 0.70",
+          "result": 0.7616067133693517,
+          "status": "Pass"
+        },
+        {
+          "order": 2,
+          "gate": "ARA NRMSE \u2264 0.25",
+          "result": 0.16456825618714807,
+          "status": "Pass"
+        },
+        {
+          "order": 3,
+          "gate": "ARA sign accuracy \u2265 0.85",
+          "result": 0.9051383399209486,
+          "status": "Pass"
+        },
+        {
+          "order": 4,
+          "gate": "ARA integrated error \u2264 0.15",
+          "result": 0.11751276622502518,
+          "status": "Pass"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "o2a3-run",
+      "label": "Frozen O2-A3 matched quantum tracking outputs",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\physics_ladder\\O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv",
+      "query": {
+        "id": "o2a3-quantum-comparator-v1",
+        "language": "sql",
+        "engine": "duckdb",
+        "description": "Reads frozen aggregate and paired trial outputs for the 12 dB quantum target and its six-level noise ladder.",
+        "sql": "SELECT * FROM read_csv_auto('analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv');",
+        "tables_used": [
+          "analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_AGGREGATES.csv",
+          "analysis/physics_ladder/O2A3_STATE_SPACE_COMPARATOR_TRIALS.csv"
+        ],
+        "filters": [
+          "Primary target: open two-level probability, declared state 2",
+          "Primary condition: 12 dB white noise on q and g",
+          "Thirty-two fresh paired deterministic target replicates",
+          "State-space settings selected on oscillator development only"
+        ],
+        "metric_definitions": [
+          "correlation = Pearson correlation with the native hidden waveform",
+          "NRMSE = waveform RMSE divided by native hidden peak magnitude",
+          "sign accuracy = active samples with matching estimate and truth signs",
+          "integrated error = absolute signed-integral error divided by native signed integral",
+          "ARA NRMSE improvement = 1 - median ARA NRMSE / median state-space NRMSE"
+        ]
+      }
+    }
+  ]
+}

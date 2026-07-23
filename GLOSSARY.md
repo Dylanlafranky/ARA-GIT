@@ -109,6 +109,17 @@ A plain-language key to the vocabulary used across this repository. Where a term
   `TE-ARA=1.24` are corrected to
   `expressed A/B allocation=1.24, context/Other=0.76, observed TE-ARA total=2`; see
   `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
+- **Perspective-unassigned TE-ARA closure** — the complete normalized identity before selecting a boundary,
+  observable, time slice, projection, rung or pole orientation. Only the closure total `2` is assigned. It is the
+  proposed sphere before selecting a diameter; it does not yet specify A/B component values or a physical magnitude.
+- **Perspective-bound TE-ARA allocation** — after declaring perspective
+  \(\mathcal P=(\Omega,q,\tau_S,\Pi,k,\sigma)\), the component vector
+  \(\mathbf t^{(\mathcal P)}=(t_A,t_B,t_{J_1},\ldots,t_{Other})\) sums to `2`. Changing perspective can move a
+  coupling from external to internal, resolve Other, combine children or split a parent; the component vector
+  changes while its normalized closure remains `2`.
+- **Physical magnitude / activity account** — the native amount carried by an identity, such as joules, flux,
+  momentum, mass or total variation. It is separate from TE-ARA normalization. A physical budget can grow or shrink
+  while its instantaneous component shares are still normalized to `2`.
 - **TE-ARA component allocation / subtotal** — a variable part of the fixed account, such as `t_A`, `t_B`, a named
   environmental coupling edge, the expressed A/B subtotal or `t_Other`. A named subtotal below 2 does not mean the
   identity's total geometry is below 2; unresolved contextual participation is assigned to Other. Allocations must share one denominator and cannot double-count the
@@ -131,11 +142,51 @@ A plain-language key to the vocabulary used across this repository. Where a term
   parent-ledger allocation may be below 2; when opened as its own identity, its internal ledger renormalises to 2.
   Edge thickness represents parent participation share. Any conversion from weak share to large relational distance is a
   proposed display coordinate, not literal physical distance or proof of causality.
+- **Information³ relational ternary versus coherence triangle** — Information³ is
+  \((A,B,J_{AB})\): two identities plus their retained relation. A dynamical triangle contains three stateful
+  participants and a closed coupling route. They are related but not canonically identical. They become one
+  explicit transformation only when \(J_{AB}\) is shown to carry its own state, memory and dynamics.
+- **Even-cycle coherence square** — under a strict alternating anti-phase rule \(s_{i+1}=-s_i\), an odd triangle
+  must retain one frustrated edge, while a four-node square can alternate A–B–A–B and close without mismatch. The
+  exact graph result motivates—but does not yet prove—the ARA hypothesis that square closure can sustain steadier
+  repeated coherent transfer.
+- **Quantum/Bloch ARA diameter** — for a declared two-outcome basis,
+  \(x_Q=2|\beta|^2=1-r_z\). Standard Bloch notation uses the centred signed diameter \(r_z\in[-1,1]\); ARA uses the
+  same diameter on `[0,2]` from the opposite pole, so \(x_Q-1=-r_z\). For any Bloch measurement axis,
+  \(x_{\hat n}=1-\mathbf r\cdot\hat n\). This is predominantly plain ARA; TE-ARA is only its secondary closure
+  perspective.
+- **Quantum `1.0` ridge plane** — all two-level states satisfying
+  \(\mathbf r\cdot\hat n=0\) have equal probabilities on the selected measurement axis and therefore ARA `1.0`.
+  The plane includes pure coherent equatorial states, partially mixed states and the completely mixed centre.
+  Retain relative phase and Bloch radius to distinguish them.
+- **Landau–Zener structural ARA** — for
+  \(H=(vt/2)\sigma_z+g\sigma_x\), the lower instantaneous eigenstate has
+  \(x_{\rm path}=1+vt/\sqrt{(vt)^2+4g^2}\). It traverses `0→1→2`; \(g\) broadens the mixing gradient and
+  \(g=0,t=0\) closes the spectral gap. It describes an instantaneous eigenstate, not automatically the actual
+  finite-speed state.
+- **Landau–Zener handover ARA** — the separate final-outcome coordinate
+  \(x_{\rm handover}=2(1-e^{-2\pi\gamma})\), with
+  \(\gamma=g^2/(\hbar|v|)\). Here \(g^2\) supplies coupling/Connection strength and \(\hbar|v|\) supplies the
+  traversal-rate scale. Its `1.0` ridge is equal final stay/handover probability, not the structural \(t=0\) ridge.
+- **Virial ARA coordinate** — for a bound inverse-distance potential, declare
+  \(C=|\langle V\rangle|\) as Connection and \(R=2\langle T\rangle\) as Traversal, then
+  \(x_{\rm vir}=2R/(C+R)=1\). The factor of two belongs to the established virial theorem; it is not an ARA fit.
+  The coordinate works for classical orbital averages and stationary quantum expectation values under the stated
+  ideal assumptions.
+- **Virial ridge versus raw TE-ARA allocation** — two measurements of the same system that must remain typed.
+  The virial-weighted relation reads \(x_{\rm vir}=1\), while the raw inverse-distance energy account is
+  \(t_T=2/3,t_C=4/3\), total `2`. The latter values are component amounts, not additional locations on the virial
+  diameter.
+- **Running-average parent ridge** — a parent coordinate formed from accumulated channels can approach `1.0` as
+  the observation covers complete cycles even while instantaneous child coordinates continue moving around the
+  ridge. This is measurement convergence, not necessarily physical damping or motion stopping.
 - **Other / contextual coupling residual** — the amount left after the expressed A/B pair and already named external
   couplings are removed: \(t_{Other}=2-(t_A+t_B+\sum_jc_j)\). Its magnitude says how much remains unexplained;
   changes across boundary/location, phase/lag and rung help locate where and how a missing coupling acts. It is not a
   third pure pole. A proposed source is not promoted out of Other by correlation alone; require held-out transfer,
-  independent measurement or a predeclared intervention/removal response.
+  independent measurement or a predeclared intervention/removal response. In the computing subset, a signed
+  child-difference can be retained as `Other` beside a parent/coarse value, making the transform exactly reversible.
+  Reversibility alone does not imply compression, error correction or secrecy.
 - **Recycling / flywheel** — how much of its previous cycle a system stores and reuses (measured as the autocorrelation "cycle-ago floor"). High = flywheel (Sun); near zero = leaky (ENSO surface, heart at its dominant period).
 - **Leanness** — how little energy a cycle wastes into shocky harmonic distortion (measured as R21, the 2nd-harmonic Fourier ratio; lower = leaner). φ-near systems run leanest (see `EnergyRatio/`).
 - **Bedrock / 2−φ floor** — the posited ideal lossless handoff: space (2) compresses to time (φ), shedding the minimum 2−φ ≈ 0.382. A *reference frame*, not a measurement (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).

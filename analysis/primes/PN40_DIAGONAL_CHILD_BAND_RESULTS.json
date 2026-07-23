@@ -1,0 +1,206 @@
+{
+  "test": "PN40 diagonal child-band test",
+  "status": "post-hoc development plus same-file fixed-continuation transfer",
+  "source": "PN39_INDIVIDUAL_PRIME_CHILD_RASTER.json",
+  "fixed_representation": {
+    "display_bins": 80,
+    "bin_width_ara": 0.025,
+    "row_standardization": "subtract row mean; divide by row RMS residual",
+    "circular_vertical_axis": true,
+    "band_kernel": {
+      "offset_bins": [
+        -1,
+        0,
+        1
+      ],
+      "weights": [
+        0.25,
+        0.5,
+        0.25
+      ]
+    }
+  },
+  "development": {
+    "prime_indices": [
+      0,
+      255
+    ],
+    "first_prime": 4000000007,
+    "last_prime": 4000005869,
+    "slope_bins_per_prime": 0.033500000000000016,
+    "intercepts_bins_at_global_zero": [
+      3,
+      61,
+      41
+    ],
+    "individual_scores": [
+      0.7826936629108437,
+      0.7393984578108618,
+      0.646063832364061
+    ],
+    "score": 0.7227186510285888,
+    "intercepts_ara_at_global_zero": [
+      0.075,
+      1.525,
+      1.025
+    ],
+    "circular_separations_bins": [
+      38.0,
+      20.0,
+      22.0
+    ],
+    "circular_separations_ara": [
+      0.95,
+      0.5,
+      0.55
+    ]
+  },
+  "native_slope": {
+    "ara_per_prime_occurrence": 0.0008375000000000004,
+    "ara_change_across_256_occurrences": 0.2144000000000001,
+    "approximate_existing_chart_angle_degrees": 3.1218389108085036,
+    "angle_note": "chart angle depends on plot aspect ratio; native ARA slope does not"
+  },
+  "transfer": {
+    "prime_indices": [
+      256,
+      511
+    ],
+    "first_prime": 4000005901,
+    "last_prime": 4000011529,
+    "fixed_individual_scores": [
+      0.6044569242677181,
+      0.3559521965103543,
+      0.5928562206681337
+    ],
+    "fixed_joint_score": 0.5177551138154021,
+    "common_circular_offset_null": {
+      "count": 800,
+      "mean": -6.183942247162122e-16,
+      "standard_deviation": 0.2169860702833631,
+      "percentile": 99.68789013732834
+    },
+    "prime_order_shuffle_null": {
+      "count": 2000,
+      "seed": 4000000007,
+      "mean": 0.1344533230168161,
+      "standard_deviation": 0.019180323065590976,
+      "percentile": 99.97501249375313
+    },
+    "independent_refit": {
+      "slope_bins_per_prime": 0.056500000000000036,
+      "intercepts_bins_at_global_zero": [
+        31,
+        75,
+        17
+      ],
+      "individual_scores": [
+        0.6870584221548142,
+        0.6840689016002984,
+        0.554997166124252
+      ],
+      "score": 0.6420414966264548
+    }
+  },
+  "post_hoc_exploratory_readouts": {
+    "user_drawn_five_degree_template": {
+      "slope_bins_per_prime": 0.05373764893294902,
+      "slope_ara_per_prime": 0.0013434412233237255,
+      "development_intercepts_bins": [
+        39,
+        57,
+        2
+      ],
+      "development_score": 0.6766373626470426,
+      "fixed_transfer_score": 0.14108017405108333
+    },
+    "independent_128_prime_window_refits": [
+      {
+        "prime_indices": [
+          0,
+          127
+        ],
+        "slope_bins_per_prime": 0.04700000000000003,
+        "intercepts_bins_at_global_zero": [
+          2,
+          57,
+          36
+        ],
+        "individual_scores": [
+          1.2572800924033714,
+          0.8028527377271276,
+          0.747784129955584
+        ],
+        "score": 0.9359723200286942
+      },
+      {
+        "prime_indices": [
+          128,
+          255
+        ],
+        "slope_bins_per_prime": 0.06500000000000004,
+        "intercepts_bins_at_global_zero": [
+          37,
+          56,
+          4
+        ],
+        "individual_scores": [
+          0.98372033797909,
+          0.7893566607613905,
+          0.7165024591011135
+        ],
+        "score": 0.8298598192805313
+      },
+      {
+        "prime_indices": [
+          256,
+          383
+        ],
+        "slope_bins_per_prime": 0.06350000000000004,
+        "intercepts_bins_at_global_zero": [
+          76,
+          28,
+          57
+        ],
+        "individual_scores": [
+          0.7150995203060398,
+          0.6842354761909373,
+          0.5616121545171362
+        ],
+        "score": 0.6536490503380378
+      },
+      {
+        "prime_indices": [
+          384,
+          511
+        ],
+        "slope_bins_per_prime": 0.04550000000000003,
+        "intercepts_bins_at_global_zero": [
+          36,
+          79,
+          50
+        ],
+        "individual_scores": [
+          0.7806184340191493,
+          0.7313812883863272,
+          0.7218874580282805
+        ],
+        "score": 0.7446290601445856
+      }
+    ],
+    "warning": "These readouts were added after the frozen PN40 primary run and are descriptive only."
+  },
+  "arithmetic_crosswalk": {
+    "mean_prime_gap_development": 22.988235294117647,
+    "mean_prime_gap_transfer": 22.070588235294117,
+    "equivalent_gate_q_development": 54897.27831431077,
+    "equivalent_gate_q_transfer": 52705.88235294115,
+    "identity": "A_q(p_next) = A_q(p) + 2*(p_next-p)/q (mod 2)"
+  },
+  "interpretation_limits": [
+    "The first half is opened post-hoc development data.",
+    "The second half is a fixed continuation in the same pre-existing window, not a new blind interval.",
+    "A stable band is a structural feature of the raw child ARA field, not by itself a prime predictor.",
+    "The approximate five-degree screen angle is not invariant to chart dimensions."
+  ]
+}

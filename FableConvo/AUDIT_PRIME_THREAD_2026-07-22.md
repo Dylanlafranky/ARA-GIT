@@ -62,6 +62,19 @@ carries the dual verdict "SUPPORTED SPACING EXPRESSION / NO DISTINCT
 ADVANTAGE OVER PNT"; PN34's full support blocked by a 0.20pp cohort swap on
 a deliberately strict frozen endpoint — correctly not rescued).
 
+### Librarian drift logged (22 Jul, caught by Dylan)
+
+In chat commentary this date, the auditor characterized the prime domain as
+terrain "where the framework's registered claims say the interesting things
+are absent." INCORRECT — φ-centrism, the collapse-onto-phi drift
+(README_FOR_AI anti-drift rule) in strategic-advice form. The axis map
+registers the space hemisphere's OWN positive content (rational locks,
+octave/closure structure, reversibility), and the prime thread is that
+hemisphere's strongest confirmation set: rigorous grain-relative ridge,
+exact anti-pair compression, rational locking at power. These are core-shape
+(F1) results, not φ-adjacent leftovers. Future librarians: "interesting" ≠
+"φ-related"; the space side's exactness constrains the whole sphere.
+
 ### Axis-map note
 
 PN35 + PN36 add two sealed, at-power φ-nulls in the maximally space/rational

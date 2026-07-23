@@ -1,7 +1,7 @@
 # ARA follow-up register — geometry drill with Codex/Sol
 
 **Captured:** 12 July 2026  
-**Last amended:** 21 July 2026 (TE-ARA canonical terminology correction added)
+**Last amended:** 23 July 2026 (CR1 ridge-maze cryptography and O2 hidden-Other noise/field ladder added)
 **Purpose:** preserve promising threads without requiring Dylan to test them immediately.  
 **Orientation:** up = slower/larger; down = faster/smaller unless a test declares otherwise.  
 **Protocol status:** this is a planning register, not `MASTER_PREDICTION_LEDGER` registration. Every item remains `PARKED` until Dylan explicitly activates it and signs a Step-0 header under `TEST_PROTOCOL.md`.
@@ -72,6 +72,8 @@ as one adaptive exploratory chain on one inspected archive.
 | A9 | Three-axis, centre-plus-two-step ARA^9 operator | PARKED | 23 | High | Converts the clarified ARA^9 object into a held-out local coupling/scaling test. |
 | EL1 | Pi/Bedrock/Hex–Pent leak-coordinate discriminator | PARKED | 24 | High | Separates boundary transfer, cross-rung diversion, angular defect, recycling, and true loss. |
 | FM1 | Crack-tip concentration and stop-hole arrest | PROBE / PARKED | 25 | Low–medium | Clean mechanics anchor for local singularity, boundary redistribution, and release threshold. |
+| CR1 | Nested `Other` live/empty ridge-maze cryptography | PARKED / CONCEPT | Later | Very high | Tests whether an ordered secret ARA path adds memory-hard relational security; not currently a cipher or prime replacement. |
+| O2 | Hidden `Other` noise-to-medical-to-field ladder | PARKED / SOURCES IDENTIFIED | Next residual rung | Medium–high | Separates noisy diagnostic recovery, forward prediction, diagnostic association and physical attribution. |
 | F1 | Return to deliberate prediction modelling | PARKED | Later | High | Dylan wants deeper geometry and system knowledge first. |
 
 ---
@@ -2808,3 +2810,61 @@ recurrence rule before any fresh target. Preserve the PN1H p31 target.
 Restart packet: `analysis/primes/PN3B_RAW_DUAL_PHASE_DIAGNOSTIC_REPORT.md`,
 `PN3B_RAW_DUAL_PHASE_DIAGNOSTIC_PROTOCOL.md`, `PN3B_RAW_DUAL_PHASE_DIAGNOSTIC.ipynb`, result/validation JSON,
 figures, CSVs, NPZ data and ledger entry `T233`.
+
+---
+
+## CR1 — Nested `Other` live/empty ridge-maze cryptography
+
+**Added:** 23 July 2026
+**Status:** `PARKED / CONCEPT ONLY / NOT A SECURITY CLAIM`.
+
+Dylan proposed that decryption information could be distributed through `Other` values several layers deep in a
+nested, computationally four-dimensional ARA graph. An initial secret gives only rough direction. Each selected
+`Other` derives the next rung/axis/orientation. Multiple live and empty ridges create route uncertainty, decoy work
+and potentially threshold closure.
+
+The key distinction from the failed unkeyed `Other` confidentiality test is that the ordered route, rather than one
+public residual value, becomes part of the secret. The public exact `Parent + Other` transform remains reversible and
+is not itself encryption.
+
+Before any security claim, a prototype must establish:
+
+1. a genuine bootstrap secret;
+2. keyed nonlinear transitions;
+3. live/empty indistinguishability;
+4. effective route entropy after hints and correlations;
+5. authorised-versus-attacker work scaling;
+6. absence of algebraic, parallel and quantum shortcuts;
+7. authenticated payload recovery.
+
+A prime-independent public-key claim additionally requires a demonstrably hard inversion/trapdoor or
+key-encapsulation problem. Full restart note:
+`CONCEPT_THREAD_ARA_OTHER_RIDGE_MAZE_CRYPTOGRAPHY_2026-07-23.md`.
+
+## O2 — Hidden `Other` noise-to-medical-to-field ladder
+
+**Added:** 23 July 2026
+**Status:** `ACTIVE PROGRAMME / O2-A1 COMPLETE / O2-B THROUGH O2-E PARKED`.
+
+The noiseless hidden-`Other` residual recovered omitted sink waveforms after observing stored-quantity changes. Dylan
+proposed progressively noisier public systems, including medicine and weather/nature.
+
+The staged ladder is:
+
+1. add calibrated Gaussian, coloured, impulsive, drift, missingness and timestamp noise to the original three
+   systems while truth remains known;
+2. use the MIT-BIH Noise Stress Test Database for paired clean/noisy ECG robustness at `24` through `-6 dB`;
+3. use subject-held-out MIT-BIH arrhythmia annotations for prospective diagnostic association;
+4. use AmeriFlux tower energy closure as the first genuinely open field residual;
+5. use NOAA TAO/ENSO heat/storage budgets only after the noise, derivative and holdout methods pass.
+
+Every stage must distinguish residual diagnosis after observing storage change from forward prediction before it,
+and diagnostic association from physical attribution. Full restart note:
+`TEST_THREAD_ARA_HIDDEN_OTHER_NOISE_TO_FIELD_LADDER_2026-07-23.md`.
+
+**O2-A1 result (23 July 2026):** preregistered 12 dB robustness was **NOT SUPPORTED** (`4/8` gates). The integrated
+hidden amount remained accurate (`0.79%` median error), but local location, sign and waveform failed; noisy
+transfers were the main bottleneck. Independent validation passed `11/11`. Do not advance the physical
+hidden-`Other` interpretation to open data without a joint \(q,g\) observation-error model. O2-B remains available
+as an ECG identity-retention/noise test, not a conservation-law test. Report:
+`../analysis/physics_ladder/O2A1_HIDDEN_OTHER_CONTROLLED_NOISE_REPORT_2026-07-23.md`.

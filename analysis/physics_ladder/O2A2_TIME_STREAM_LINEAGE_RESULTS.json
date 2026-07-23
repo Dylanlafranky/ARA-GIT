@@ -1,0 +1,72 @@
+{
+  "test": "O2-A2 declared-child downstream time-stream lineage",
+  "run_date": "2026-07-23",
+  "orientation": "predeclared movement/traversal child followed downstream",
+  "protocol_sha256": "bea32f164f3d2dd3f4df211c5f7bca5b630c390bff9a211b3916659e54f5f712",
+  "fidelity_sha256": "3437518df06a178a549b4cedddea119545e79f77f2763d908bd65c7e1967d777",
+  "selected_settings": {
+    "derivative_fraction": 0.04,
+    "half_life_fraction": 0.02,
+    "development_model": "Damped coupled oscillators",
+    "development_fraction": 0.6,
+    "development_replicates": 8,
+    "target_replicates": 16
+  },
+  "primary_verdict": {
+    "status": "NOT SUPPORTED",
+    "metrics": {
+      "target_runs_per_method": 32,
+      "median_fixed_correlation": 0.763798351414211,
+      "median_fixed_nrmse": 0.1681193260765587,
+      "median_fixed_sign_accuracy": 0.9334656541249569,
+      "median_fixed_integrated_error": 0.3538144276708509,
+      "median_reselection_correlation": 0.7037644534038491,
+      "median_reselection_nrmse": 0.18856430261373414,
+      "median_zero_other_nrmse": 0.21688970368611812,
+      "correlation_advantage": 0.060033898010361963,
+      "nrmse_relative_improvement": 0.10842442739045943,
+      "system_nrmse": {
+        "Resistive capacitor coupling": {
+          "fixed": 0.12927306047460443,
+          "reselection": 0.13499493460709489
+        },
+        "Open two-level probability": {
+          "fixed": 0.17424605949658134,
+          "reselection": 0.23445880762957858
+        }
+      }
+    },
+    "thresholds": {
+      "correlation_min": 0.4,
+      "nrmse_max": 0.35,
+      "sign_accuracy_min": 0.75,
+      "integrated_error_max": 0.35,
+      "correlation_advantage_min": 0.1,
+      "nrmse_relative_improvement_min": 0.1
+    },
+    "gates": {
+      "correlation": true,
+      "nrmse": true,
+      "sign": true,
+      "integrated_error": false,
+      "correlation_advantage": false,
+      "nrmse_relative_improvement": true,
+      "beats_zero_other": true,
+      "beats_reselection_in_both_systems": true
+    },
+    "absolute_pass": false,
+    "comparative_pass": false,
+    "passed_gates": 6,
+    "total_gates": 8
+  },
+  "trial_rows": 2016,
+  "aggregate_rows": 126,
+  "waveform_rows": 549,
+  "scope_fence": "Synthetic conditional tracking of a known moving child. Not hidden-child discovery, upstream recursion, space-side information retention or forward physical prediction.",
+  "artifacts": {
+    "development": "O2A2_TIME_STREAM_LINEAGE_DEVELOPMENT.csv",
+    "trials": "O2A2_TIME_STREAM_LINEAGE_TRIALS.csv",
+    "aggregates": "O2A2_TIME_STREAM_LINEAGE_AGGREGATES.csv",
+    "waveforms": "O2A2_TIME_STREAM_LINEAGE_WAVEFORMS.csv"
+  }
+}

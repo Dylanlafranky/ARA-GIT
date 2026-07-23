@@ -1,0 +1,4883 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "ARA child-to-parent composition across three continuity laws",
+    "description": "Frozen cross-domain test of one ARA child-to-parent boundary operator.",
+    "generatedAt": "2026-07-23T00:00:00+10:00",
+    "sources": [
+      {
+        "id": "src-child-parent-composition",
+        "label": "Frozen ARA child-parent composition test",
+        "path": "analysis/physics_ladder/ara_child_parent_composition_test.py",
+        "query": {
+          "engine": "portable-snapshot",
+          "language": "sql",
+          "description": "Deterministic analytic classical-wave, transmission-line and free-Gaussian probability-current calculations produced by the named Python source, then selected from the bounded report snapshot.",
+          "sql": "SELECT * FROM snapshot.headline_metrics; SELECT * FROM snapshot.model_summary ORDER BY model; SELECT * FROM snapshot.method_errors ORDER BY model, method; SELECT * FROM snapshot.quantum_trace ORDER BY time, series;",
+          "tables_used": [
+            "analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_SUMMARY.csv",
+            "analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_BOUNDED_SAMPLE.csv"
+          ],
+          "filters": [
+            "4,097 deterministic time samples per model",
+            "exclude only parent or child activity at or below 1e-12",
+            "no smoothing, fitting, Fourier decomposition or learned coefficients",
+            "quantum Gaussian packet retained as holdout"
+          ],
+          "metric_definitions": [
+            "x_i = 2 R_i / (A_i + R_i)",
+            "I = absolute signed flux through the shared child interface",
+            "x_parent = 2(sum R_i - I)/(sum T_i - 2I)",
+            "errors compare predicted parent ARA with direct outer-boundary ARA"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "models-passed",
+        "dataset": "headline_metrics",
+        "sourceId": "src-child-parent-composition",
+        "metrics": [
+          {
+            "label": "Passed",
+            "field": "models_passed_text"
+          }
+        ]
+      },
+      {
+        "id": "max-frozen-error",
+        "dataset": "headline_metrics",
+        "sourceId": "src-child-parent-composition",
+        "metrics": [
+          {
+            "label": "Max |error|",
+            "field": "max_frozen_error_text"
+          }
+        ]
+      },
+      {
+        "id": "smallest-control-error",
+        "dataset": "headline_metrics",
+        "sourceId": "src-child-parent-composition",
+        "metrics": [
+          {
+            "label": "Control MAE",
+            "field": "smallest_control_mae_text"
+          }
+        ]
+      },
+      {
+        "id": "quantum-holdout-error",
+        "dataset": "headline_metrics",
+        "sourceId": "src-child-parent-composition",
+        "metrics": [
+          {
+            "label": "Holdout |error|",
+            "field": "quantum_holdout_max_error_text"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "method-error-orders",
+        "title": "Correct decimal orders by model and composition method",
+        "subtitle": "Higher is better; values are -log10(mean absolute ARA error) over each model's valid samples",
+        "intent": "comparison",
+        "question": "Does internal-handover removal matter relative to plausible controls?",
+        "rationale": "A grouped bar comparison makes the machine-precision reconstruction and control gaps visible on one honest scale.",
+        "comparisonContext": {
+          "grain": "one model-method result",
+          "unit": "correct decimal orders",
+          "semanticFamily": "reconstruction accuracy"
+        },
+        "type": "bar",
+        "dataset": "method_errors",
+        "sourceId": "src-child-parent-composition",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Physical model"
+          },
+          "y": {
+            "field": "correct_decimal_orders",
+            "type": "quantitative",
+            "label": "Correct decimal orders"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Composition method"
+          },
+          "tooltip": [
+            {
+              "field": "model",
+              "type": "text",
+              "label": "Model"
+            },
+            {
+              "field": "method",
+              "type": "text",
+              "label": "Method"
+            },
+            {
+              "field": "mean_absolute_error",
+              "type": "quantitative",
+              "label": "Mean absolute error"
+            },
+            {
+              "field": "valid_samples",
+              "type": "quantitative",
+              "label": "Valid samples"
+            }
+          ]
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        },
+        "layout": "full",
+        "maxRows": 9
+      },
+      {
+        "id": "quantum-holdout-trace",
+        "title": "Quantum holdout parent ARA by time",
+        "subtitle": "Direct parent, frozen operator and two controls over the bounded free-Gaussian holdout sample",
+        "intent": "trend",
+        "question": "Does the frozen classical/EM operator transfer unchanged to probability current?",
+        "rationale": "The time trace reveals exact overlap and where controls distort the parent reading.",
+        "comparisonContext": {
+          "grain": "one deterministic holdout time and method",
+          "unit": "ARA coordinate on 0-2",
+          "semanticFamily": "holdout reconstruction"
+        },
+        "type": "line",
+        "dataset": "quantum_trace",
+        "sourceId": "src-child-parent-composition",
+        "encodings": {
+          "x": {
+            "field": "time",
+            "type": "quantitative",
+            "label": "Time"
+          },
+          "y": {
+            "field": "ara_coordinate",
+            "type": "quantitative",
+            "label": "Parent ARA"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Reading"
+          },
+          "tooltip": [
+            {
+              "field": "time",
+              "type": "quantitative",
+              "label": "Time"
+            },
+            {
+              "field": "ara_coordinate",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "series",
+              "type": "text",
+              "label": "Reading"
+            },
+            {
+              "field": "internal_handover",
+              "type": "quantitative",
+              "label": "Internal handover"
+            }
+          ]
+        },
+        "layout": "full",
+        "maxRows": 484
+      }
+    ],
+    "tables": [
+      {
+        "id": "model-summary",
+        "title": "Model-level reconstruction and control results",
+        "subtitle": "All planned systems; errors are dimensionless ARA-coordinate differences",
+        "dataset": "model_summary",
+        "defaultSort": {
+          "field": "model",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "sourceId": "src-child-parent-composition",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "model",
+            "label": "Model",
+            "type": "text"
+          },
+          {
+            "field": "test_role",
+            "label": "Role",
+            "type": "text"
+          },
+          {
+            "field": "valid_samples",
+            "label": "Valid samples",
+            "type": "number"
+          },
+          {
+            "field": "max_abs_error_frozen",
+            "label": "Frozen max error",
+            "type": "number"
+          },
+          {
+            "field": "mean_abs_error_naive",
+            "label": "Naive MAE",
+            "type": "number"
+          },
+          {
+            "field": "mean_abs_error_no_internal",
+            "label": "No-closure MAE",
+            "type": "number"
+          },
+          {
+            "field": "continuity_residual_max",
+            "label": "Continuity residual",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "layout": "full",
+        "body": "# ARA child-to-parent composition across three continuity laws"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-child-parent-composition",
+        "body": "## The frozen boundary operator reconstructed every parent to floating-point precision\n\nThe unchanged rule passed the classical mechanical wave, electromagnetic transmission-line verification and the quantum probability-current holdout. This establishes an exact shared boundary-accounting reparameterisation. It does not establish new dynamics or prove universal fractality."
+      },
+      {
+        "id": "headline-metrics",
+        "type": "metric-strip",
+        "layout": "full",
+        "cardIds": [
+          "models-passed",
+          "max-frozen-error",
+          "smallest-control-error",
+          "quantum-holdout-error"
+        ],
+        "dataset": "headline_metrics"
+      },
+      {
+        "id": "control-finding",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-child-parent-composition",
+        "body": "## Removing the child interface is necessary at the parent boundary\n\nThe naive mean and the activity-weighted version that retains the interface both produce finite errors. The frozen rule succeeds because the interface is a release for one child and an accumulation for the other, but neither enters nor leaves their enclosing parent."
+      },
+      {
+        "id": "error-chart",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "method-error-orders"
+      },
+      {
+        "id": "holdout-finding",
+        "type": "markdown",
+        "layout": "full",
+        "sourceId": "src-child-parent-composition",
+        "body": "## The unchanged operator transferred to the quantum holdout\n\nThe quantum calculation uses raw analytic probability current. The frozen prediction lies on the direct outer-boundary account while both controls wander away. This is expected from continuity and is therefore a cross-domain consistency result, not a derivation of quantum mechanics."
+      },
+      {
+        "id": "holdout-chart",
+        "type": "chart",
+        "layout": "full",
+        "chartId": "quantum-holdout-trace"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Scope and definitions\n\nEach child uses `x=2R/(A+R)`, where `A` is inward boundary activity and `R` is outward boundary activity. The shared interface magnitude `I` is counted once in each direction at child grain and removed from both channels at parent grain. Samples with zero total activity have no defined diameter position."
+      },
+      {
+        "id": "summary-table",
+        "type": "table",
+        "layout": "full",
+        "tableId": "model-summary"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Frozen design and validation\n\nThe protocol fixed 4,097 time samples per system, oriented interval accounting, one parent operator, two incorrect controls and machine-precision pass criteria before the comparison. The models are analytic and unfiltered. An independent validator recomputes the operator on randomized signed boundary fluxes and checks the saved results."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## The pass formalizes scale accounting but does not yet predict an unknown term\n\nAll three systems were deliberately selected because they obey source-free local continuity. The frozen operator is the correct finite-volume boundary identity in ARA coordinates. Its exact success is meaningful for formal coherence, but it cannot by itself distinguish ARA from ordinary conservation accounting."
+      },
+      {
+        "id": "next-step",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Next test: hide an `Other` term prospectively\n\nIntroduce a known damper, conductor or source in an otherwise matched system. Freeze the observed child accounts, hide the source label and require the residual to recover its sign, location and magnitude before revealing the native term."
+      },
+      {
+        "id": "further-questions",
+        "type": "markdown",
+        "layout": "full",
+        "body": "## Further questions\n\nDoes the same operator remain sufficient when the relation stores energy or probability rather than transferring it instantaneously? Can the residual distinguish relation storage from a true external leak?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-07-23T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline_metrics": [
+        {
+          "models_passed": 3,
+          "models_total": 3,
+          "models_passed_text": "3 / 3",
+          "max_frozen_error": 2.1538326677728037e-14,
+          "max_frozen_error_text": "2.154e-14",
+          "smallest_control_mae": 0.3023500954341342,
+          "smallest_control_mae_text": "0.302350",
+          "quantum_holdout_max_error": 2.4424906541753444e-15,
+          "quantum_holdout_max_error_text": "2.442e-15"
+        }
+      ],
+      "model_summary": [
+        {
+          "model": "Classical string energy",
+          "domain": "Newton/Hamilton continuum",
+          "test_role": "Operator establishment",
+          "valid_samples": 4097,
+          "retention_fraction": 1.0,
+          "max_abs_error_frozen": 5.329070518200751e-15,
+          "mean_abs_error_frozen": 1.342227073128727e-16,
+          "mean_abs_error_naive": 0.4224117283143356,
+          "mean_abs_error_no_internal": 0.31272495384835997,
+          "max_abs_orientation_error": 7.105427357601002e-15,
+          "continuity_residual_max": 0.0,
+          "parent_coordinate_min": 0.0,
+          "parent_coordinate_max": 2.0
+        },
+        {
+          "model": "Lossless transmission line",
+          "domain": "Maxwell/Poynting analogue",
+          "test_role": "Verification",
+          "valid_samples": 4097,
+          "retention_fraction": 1.0,
+          "max_abs_error_frozen": 2.1538326677728037e-14,
+          "mean_abs_error_frozen": 1.6339522164030237e-16,
+          "mean_abs_error_naive": 0.4445574340164031,
+          "mean_abs_error_no_internal": 0.3023500954341342,
+          "max_abs_orientation_error": 2.1538326677728037e-14,
+          "continuity_residual_max": 0.0,
+          "parent_coordinate_min": 0.0,
+          "parent_coordinate_max": 2.0
+        },
+        {
+          "model": "Free Gaussian probability",
+          "domain": "Schrodinger probability continuity",
+          "test_role": "Holdout",
+          "valid_samples": 4097,
+          "retention_fraction": 1.0,
+          "max_abs_error_frozen": 2.4424906541753444e-15,
+          "mean_abs_error_frozen": 3.250626531941615e-16,
+          "mean_abs_error_naive": 0.41598087622473323,
+          "mean_abs_error_no_internal": 0.5343418864795906,
+          "max_abs_orientation_error": 2.4424906541753444e-15,
+          "continuity_residual_max": 6.106226635438361e-11,
+          "parent_coordinate_min": 0.0018375479925738416,
+          "parent_coordinate_max": 1.99820939371217
+        }
+      ],
+      "method_errors": [
+        {
+          "model": "Classical string energy",
+          "domain": "Newton/Hamilton continuum",
+          "method": "Frozen operator",
+          "mean_absolute_error": 1.342227073128727e-16,
+          "correct_decimal_orders": 15.872174005579453,
+          "valid_samples": 4097,
+          "test_role": "Operator establishment"
+        },
+        {
+          "model": "Classical string energy",
+          "domain": "Newton/Hamilton continuum",
+          "method": "Naive child mean",
+          "mean_absolute_error": 0.4224117283143356,
+          "correct_decimal_orders": 0.3742640320663703,
+          "valid_samples": 4097,
+          "test_role": "Operator establishment"
+        },
+        {
+          "model": "Classical string energy",
+          "domain": "Newton/Hamilton continuum",
+          "method": "Internal transfer retained",
+          "mean_absolute_error": 0.31272495384835997,
+          "correct_decimal_orders": 0.5048374629008076,
+          "valid_samples": 4097,
+          "test_role": "Operator establishment"
+        },
+        {
+          "model": "Lossless transmission line",
+          "domain": "Maxwell/Poynting analogue",
+          "method": "Frozen operator",
+          "mean_absolute_error": 1.6339522164030237e-16,
+          "correct_decimal_orders": 15.786760648205028,
+          "valid_samples": 4097,
+          "test_role": "Verification"
+        },
+        {
+          "model": "Lossless transmission line",
+          "domain": "Maxwell/Poynting analogue",
+          "method": "Naive child mean",
+          "mean_absolute_error": 0.4445574340164031,
+          "correct_decimal_orders": 0.3520721229613243,
+          "valid_samples": 4097,
+          "test_role": "Verification"
+        },
+        {
+          "model": "Lossless transmission line",
+          "domain": "Maxwell/Poynting analogue",
+          "method": "Internal transfer retained",
+          "mean_absolute_error": 0.3023500954341342,
+          "correct_decimal_orders": 0.5194898899768047,
+          "valid_samples": 4097,
+          "test_role": "Verification"
+        },
+        {
+          "model": "Free Gaussian probability",
+          "domain": "Schrodinger probability continuity",
+          "method": "Frozen operator",
+          "mean_absolute_error": 3.250626531941615e-16,
+          "correct_decimal_orders": 15.488032924208566,
+          "valid_samples": 4097,
+          "test_role": "Holdout"
+        },
+        {
+          "model": "Free Gaussian probability",
+          "domain": "Schrodinger probability continuity",
+          "method": "Naive child mean",
+          "mean_absolute_error": 0.41598087622473323,
+          "correct_decimal_orders": 0.38092663461599374,
+          "valid_samples": 4097,
+          "test_role": "Holdout"
+        },
+        {
+          "model": "Free Gaussian probability",
+          "domain": "Schrodinger probability continuity",
+          "method": "Internal transfer retained",
+          "mean_absolute_error": 0.5343418864795906,
+          "correct_decimal_orders": 0.2721807806103844,
+          "valid_samples": 4097,
+          "test_role": "Holdout"
+        }
+      ],
+      "quantum_trace": [
+        {
+          "trace_order": 0,
+          "time": 0.05,
+          "ara_coordinate": 0.0018375479925738416,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20282267501669152,
+          "direct_parent_activity": 0.3543686887861741
+        },
+        {
+          "trace_order": 0,
+          "time": 0.05,
+          "ara_coordinate": 0.0018375479925738028,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20282267501669152,
+          "direct_parent_activity": 0.3543686887861741
+        },
+        {
+          "trace_order": 0,
+          "time": 0.05,
+          "ara_coordinate": 0.36582452859137704,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20282267501669152,
+          "direct_parent_activity": 0.3543686887861741
+        },
+        {
+          "trace_order": 0,
+          "time": 0.05,
+          "ara_coordinate": 0.5345908085292043,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20282267501669152,
+          "direct_parent_activity": 0.3543686887861741
+        },
+        {
+          "trace_order": 1,
+          "time": 0.06495361328125,
+          "ara_coordinate": 0.0021453399989019356,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21228845796213794,
+          "direct_parent_activity": 0.3428491872243985
+        },
+        {
+          "trace_order": 1,
+          "time": 0.06495361328125,
+          "ara_coordinate": 0.002145339998901982,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21228845796213794,
+          "direct_parent_activity": 0.3428491872243985
+        },
+        {
+          "trace_order": 1,
+          "time": 0.06495361328125,
+          "ara_coordinate": 0.38438977090041193,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21228845796213794,
+          "direct_parent_activity": 0.3428491872243985
+        },
+        {
+          "trace_order": 1,
+          "time": 0.06495361328125,
+          "ara_coordinate": 0.5542063818968419,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21228845796213794,
+          "direct_parent_activity": 0.3428491872243985
+        },
+        {
+          "trace_order": 2,
+          "time": 0.08050537109375,
+          "ara_coordinate": 0.0025233882651809324,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2224012990271488,
+          "direct_parent_activity": 0.33099443598881995
+        },
+        {
+          "trace_order": 2,
+          "time": 0.08050537109375,
+          "ara_coordinate": 0.002523388265180949,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2224012990271488,
+          "direct_parent_activity": 0.33099443598881995
+        },
+        {
+          "trace_order": 2,
+          "time": 0.08050537109375,
+          "ara_coordinate": 0.40406247233628234,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2224012990271488,
+          "direct_parent_activity": 0.33099443598881995
+        },
+        {
+          "trace_order": 2,
+          "time": 0.08050537109375,
+          "ara_coordinate": 0.5744257917659739,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2224012990271488,
+          "direct_parent_activity": 0.33099443598881995
+        },
+        {
+          "trace_order": 3,
+          "time": 0.11101074218750001,
+          "ara_coordinate": 0.003480655014785225,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24298204423334954,
+          "direct_parent_activity": 0.3082077289674873
+        },
+        {
+          "trace_order": 3,
+          "time": 0.11101074218750001,
+          "ara_coordinate": 0.0034806550147851866,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24298204423334954,
+          "direct_parent_activity": 0.3082077289674873
+        },
+        {
+          "trace_order": 3,
+          "time": 0.11101074218750001,
+          "ara_coordinate": 0.4434639596237475,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24298204423334954,
+          "direct_parent_activity": 0.3082077289674873
+        },
+        {
+          "trace_order": 3,
+          "time": 0.11101074218750001,
+          "ara_coordinate": 0.6132638335337132,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24298204423334954,
+          "direct_parent_activity": 0.3082077289674873
+        },
+        {
+          "trace_order": 4,
+          "time": 0.12656250000000002,
+          "ara_coordinate": 0.004106650671440447,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25382247421844456,
+          "direct_parent_activity": 0.2968735562937179
+        },
+        {
+          "trace_order": 4,
+          "time": 0.12656250000000002,
+          "ara_coordinate": 0.00410665067144027,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25382247421844456,
+          "direct_parent_activity": 0.2968735562937179
+        },
+        {
+          "trace_order": 4,
+          "time": 0.12656250000000002,
+          "ara_coordinate": 0.4638187163319177,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25382247421844456,
+          "direct_parent_activity": 0.2968735562937179
+        },
+        {
+          "trace_order": 4,
+          "time": 0.12656250000000002,
+          "ara_coordinate": 0.6325076445526491,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25382247421844456,
+          "direct_parent_activity": 0.2968735562937179
+        },
+        {
+          "trace_order": 5,
+          "time": 0.14151611328125002,
+          "ara_coordinate": 0.004818146832491349,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26444519978851405,
+          "direct_parent_activity": 0.2861805994085588
+        },
+        {
+          "trace_order": 5,
+          "time": 0.14151611328125002,
+          "ara_coordinate": 0.004818146832491311,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26444519978851405,
+          "direct_parent_activity": 0.2861805994085588
+        },
+        {
+          "trace_order": 5,
+          "time": 0.14151611328125002,
+          "ara_coordinate": 0.48346538851858545,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26444519978851405,
+          "direct_parent_activity": 0.2861805994085588
+        },
+        {
+          "trace_order": 5,
+          "time": 0.14151611328125002,
+          "ara_coordinate": 0.6505804529734787,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26444519978851405,
+          "direct_parent_activity": 0.2861805994085588
+        },
+        {
+          "trace_order": 6,
+          "time": 0.172021484375,
+          "ara_coordinate": 0.006686953238848175,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2866419200481548,
+          "direct_parent_activity": 0.2650578901286829
+        },
+        {
+          "trace_order": 6,
+          "time": 0.172021484375,
+          "ara_coordinate": 0.006686953238848323,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2866419200481548,
+          "direct_parent_activity": 0.2650578901286829
+        },
+        {
+          "trace_order": 6,
+          "time": 0.172021484375,
+          "ara_coordinate": 0.5234795070636423,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2866419200481548,
+          "direct_parent_activity": 0.2650578901286829
+        },
+        {
+          "trace_order": 6,
+          "time": 0.172021484375,
+          "ara_coordinate": 0.6859449423552558,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2866419200481548,
+          "direct_parent_activity": 0.2650578901286829
+        },
+        {
+          "trace_order": 7,
+          "time": 0.1875732421875,
+          "ara_coordinate": 0.007908490554054053,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2981843869736941,
+          "direct_parent_activity": 0.2546765736541476
+        },
+        {
+          "trace_order": 7,
+          "time": 0.1875732421875,
+          "ara_coordinate": 0.007908490554054272,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2981843869736941,
+          "direct_parent_activity": 0.2546765736541476
+        },
+        {
+          "trace_order": 7,
+          "time": 0.1875732421875,
+          "ara_coordinate": 0.5436980290843892,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2981843869736941,
+          "direct_parent_activity": 0.2546765736541476
+        },
+        {
+          "trace_order": 7,
+          "time": 0.1875732421875,
+          "ara_coordinate": 0.7031151546869594,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2981843869736941,
+          "direct_parent_activity": 0.2546765736541476
+        },
+        {
+          "trace_order": 8,
+          "time": 0.203125,
+          "ara_coordinate": 0.009355788386534931,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3098460308286033,
+          "direct_parent_activity": 0.24457450745067352
+        },
+        {
+          "trace_order": 8,
+          "time": 0.203125,
+          "ara_coordinate": 0.009355788386535011,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3098460308286033,
+          "direct_parent_activity": 0.24457450745067352
+        },
+        {
+          "trace_order": 8,
+          "time": 0.203125,
+          "ara_coordinate": 0.5636991571253276,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3098460308286033,
+          "direct_parent_activity": 0.24457450745067352
+        },
+        {
+          "trace_order": 8,
+          "time": 0.203125,
+          "ara_coordinate": 0.7196625106484003,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3098460308286033,
+          "direct_parent_activity": 0.24457450745067352
+        },
+        {
+          "trace_order": 9,
+          "time": 0.23363037109375,
+          "ara_coordinate": 0.013012627788359255,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33295988164935,
+          "direct_parent_activity": 0.22561249561595387
+        },
+        {
+          "trace_order": 9,
+          "time": 0.23363037109375,
+          "ara_coordinate": 0.013012627788359153,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33295988164935,
+          "direct_parent_activity": 0.22561249561595387
+        },
+        {
+          "trace_order": 9,
+          "time": 0.23363037109375,
+          "ara_coordinate": 0.6020507830745472,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33295988164935,
+          "direct_parent_activity": 0.22561249561595387
+        },
+        {
+          "trace_order": 9,
+          "time": 0.23363037109375,
+          "ara_coordinate": 0.7502314897083074,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33295988164935,
+          "direct_parent_activity": 0.22561249561595387
+        },
+        {
+          "trace_order": 10,
+          "time": 0.248583984375,
+          "ara_coordinate": 0.015294814821734368,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3443514671193404,
+          "direct_parent_activity": 0.21674730935272232
+        },
+        {
+          "trace_order": 10,
+          "time": 0.248583984375,
+          "ara_coordinate": 0.015294814821734603,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3443514671193404,
+          "direct_parent_activity": 0.21674730935272232
+        },
+        {
+          "trace_order": 10,
+          "time": 0.248583984375,
+          "ara_coordinate": 0.6203180154645929,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3443514671193404,
+          "direct_parent_activity": 0.21674730935272232
+        },
+        {
+          "trace_order": 10,
+          "time": 0.248583984375,
+          "ara_coordinate": 0.7642805875820412,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3443514671193404,
+          "direct_parent_activity": 0.21674730935272232
+        },
+        {
+          "trace_order": 11,
+          "time": 0.2641357421875,
+          "ara_coordinate": 0.01808868220673613,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.35620165125181397,
+          "direct_parent_activity": 0.20783716971133112
+        },
+        {
+          "trace_order": 11,
+          "time": 0.2641357421875,
+          "ara_coordinate": 0.018088682206735877,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.35620165125181397,
+          "direct_parent_activity": 0.20783716971133112
+        },
+        {
+          "trace_order": 11,
+          "time": 0.2641357421875,
+          "ara_coordinate": 0.638880927220944,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.35620165125181397,
+          "direct_parent_activity": 0.20783716971133112
+        },
+        {
+          "trace_order": 11,
+          "time": 0.2641357421875,
+          "ara_coordinate": 0.7782344122439282,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.35620165125181397,
+          "direct_parent_activity": 0.20783716971133112
+        },
+        {
+          "trace_order": 12,
+          "time": 0.29464111328125003,
+          "ara_coordinate": 0.02510202614744147,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37933194546486765,
+          "direct_parent_activity": 0.19129818051984573
+        },
+        {
+          "trace_order": 12,
+          "time": 0.29464111328125003,
+          "ara_coordinate": 0.02510202614744152,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37933194546486765,
+          "direct_parent_activity": 0.19129818051984573
+        },
+        {
+          "trace_order": 12,
+          "time": 0.29464111328125003,
+          "ara_coordinate": 0.6738583255131925,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37933194546486765,
+          "direct_parent_activity": 0.19129818051984573
+        },
+        {
+          "trace_order": 12,
+          "time": 0.29464111328125003,
+          "ara_coordinate": 0.8036803634634619,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37933194546486765,
+          "direct_parent_activity": 0.19129818051984573
+        },
+        {
+          "trace_order": 13,
+          "time": 0.31019287109375,
+          "ara_coordinate": 0.02963483000096013,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3910007986650742,
+          "direct_parent_activity": 0.18335351789863513
+        },
+        {
+          "trace_order": 13,
+          "time": 0.31019287109375,
+          "ara_coordinate": 0.029634830000959973,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3910007986650742,
+          "direct_parent_activity": 0.18335351789863513
+        },
+        {
+          "trace_order": 13,
+          "time": 0.31019287109375,
+          "ara_coordinate": 0.6909017608076164,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3910007986650742,
+          "direct_parent_activity": 0.18335351789863513
+        },
+        {
+          "trace_order": 13,
+          "time": 0.31019287109375,
+          "ara_coordinate": 0.8156949036070885,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3910007986650742,
+          "direct_parent_activity": 0.18335351789863513
+        },
+        {
+          "trace_order": 14,
+          "time": 0.325146484375,
+          "ara_coordinate": 0.03473332510787367,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4021010846841421,
+          "direct_parent_activity": 0.17602847177405284
+        },
+        {
+          "trace_order": 14,
+          "time": 0.325146484375,
+          "ara_coordinate": 0.03473332510787342,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4021010846841421,
+          "direct_parent_activity": 0.17602847177405284
+        },
+        {
+          "trace_order": 14,
+          "time": 0.325146484375,
+          "ara_coordinate": 0.7067633055382971,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4021010846841421,
+          "direct_parent_activity": 0.17602847177405284
+        },
+        {
+          "trace_order": 14,
+          "time": 0.325146484375,
+          "ara_coordinate": 0.8266587367258094,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4021010846841421,
+          "direct_parent_activity": 0.17602847177405284
+        },
+        {
+          "trace_order": 15,
+          "time": 0.35625,
+          "ara_coordinate": 0.04815819979308448,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.42468216604253395,
+          "direct_parent_activity": 0.16178649322889546
+        },
+        {
+          "trace_order": 15,
+          "time": 0.35625,
+          "ara_coordinate": 0.04815819979308444,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.42468216604253395,
+          "direct_parent_activity": 0.16178649322889546
+        },
+        {
+          "trace_order": 15,
+          "time": 0.35625,
+          "ara_coordinate": 0.73806652482313,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.42468216604253395,
+          "direct_parent_activity": 0.16178649322889546
+        },
+        {
+          "trace_order": 15,
+          "time": 0.35625,
+          "ara_coordinate": 0.8477030892831046,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.42468216604253395,
+          "direct_parent_activity": 0.16178649322889546
+        },
+        {
+          "trace_order": 16,
+          "time": 0.37120361328125,
+          "ara_coordinate": 0.056239867207263386,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4352325886235036,
+          "direct_parent_activity": 0.15541963433921366
+        },
+        {
+          "trace_order": 16,
+          "time": 0.37120361328125,
+          "ara_coordinate": 0.05623986720726313,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4352325886235036,
+          "direct_parent_activity": 0.15541963433921366
+        },
+        {
+          "trace_order": 16,
+          "time": 0.37120361328125,
+          "ara_coordinate": 0.7523023688061781,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4352325886235036,
+          "direct_parent_activity": 0.15541963433921366
+        },
+        {
+          "trace_order": 16,
+          "time": 0.37120361328125,
+          "ara_coordinate": 0.8570221012281287,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4352325886235036,
+          "direct_parent_activity": 0.15541963433921366
+        },
+        {
+          "trace_order": 17,
+          "time": 0.38675537109375,
+          "ara_coordinate": 0.06598031728423065,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44595222867118717,
+          "direct_parent_activity": 0.14912971165032154
+        },
+        {
+          "trace_order": 17,
+          "time": 0.38675537109375,
+          "ara_coordinate": 0.06598031728423043,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44595222867118717,
+          "direct_parent_activity": 0.14912971165032154
+        },
+        {
+          "trace_order": 17,
+          "time": 0.38675537109375,
+          "ara_coordinate": 0.7665553618105803,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44595222867118717,
+          "direct_parent_activity": 0.14912971165032154
+        },
+        {
+          "trace_order": 17,
+          "time": 0.38675537109375,
+          "ara_coordinate": 0.8662002745847386,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44595222867118717,
+          "direct_parent_activity": 0.14912971165032154
+        },
+        {
+          "trace_order": 18,
+          "time": 0.41726074218750003,
+          "ara_coordinate": 0.08975984452573087,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46611208253079583,
+          "direct_parent_activity": 0.13777414723657386
+        },
+        {
+          "trace_order": 18,
+          "time": 0.41726074218750003,
+          "ara_coordinate": 0.08975984452573083,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46611208253079583,
+          "direct_parent_activity": 0.13777414723657386
+        },
+        {
+          "trace_order": 18,
+          "time": 0.41726074218750003,
+          "ara_coordinate": 0.7929310410250914,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46611208253079583,
+          "direct_parent_activity": 0.13777414723657386
+        },
+        {
+          "trace_order": 18,
+          "time": 0.41726074218750003,
+          "ara_coordinate": 0.8827964869107122,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46611208253079583,
+          "direct_parent_activity": 0.13777414723657386
+        },
+        {
+          "trace_order": 19,
+          "time": 0.4328125,
+          "ara_coordinate": 0.10466932257004379,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4758894840940519,
+          "direct_parent_activity": 0.13248540009094312
+        },
+        {
+          "trace_order": 19,
+          "time": 0.4328125,
+          "ara_coordinate": 0.10466932257004417,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4758894840940519,
+          "direct_parent_activity": 0.13248540009094312
+        },
+        {
+          "trace_order": 19,
+          "time": 0.4328125,
+          "ara_coordinate": 0.8056089178764432,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4758894840940519,
+          "direct_parent_activity": 0.13248540009094312
+        },
+        {
+          "trace_order": 19,
+          "time": 0.4328125,
+          "ara_coordinate": 0.890600257203624,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4758894840940519,
+          "direct_parent_activity": 0.13248540009094312
+        },
+        {
+          "trace_order": 20,
+          "time": 0.44776611328125004,
+          "ara_coordinate": 0.1210525273589209,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48493781991119606,
+          "direct_parent_activity": 0.12771820881705448
+        },
+        {
+          "trace_order": 20,
+          "time": 0.44776611328125004,
+          "ara_coordinate": 0.12105252735892076,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48493781991119606,
+          "direct_parent_activity": 0.12771820881705448
+        },
+        {
+          "trace_order": 20,
+          "time": 0.44776611328125004,
+          "ara_coordinate": 0.8173392321966292,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48493781991119606,
+          "direct_parent_activity": 0.12771820881705448
+        },
+        {
+          "trace_order": 20,
+          "time": 0.44776611328125004,
+          "ara_coordinate": 0.8977239194724463,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48493781991119606,
+          "direct_parent_activity": 0.12771820881705448
+        },
+        {
+          "trace_order": 21,
+          "time": 0.478271484375,
+          "ara_coordinate": 0.16156061695480423,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5022277395195541,
+          "direct_parent_activity": 0.11895831602492049
+        },
+        {
+          "trace_order": 21,
+          "time": 0.478271484375,
+          "ara_coordinate": 0.16156061695480498,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5022277395195541,
+          "direct_parent_activity": 0.11895831602492049
+        },
+        {
+          "trace_order": 21,
+          "time": 0.478271484375,
+          "ara_coordinate": 0.8399762416266767,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5022277395195541,
+          "direct_parent_activity": 0.11895831602492049
+        },
+        {
+          "trace_order": 21,
+          "time": 0.478271484375,
+          "ara_coordinate": 0.911217631887505,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5022277395195541,
+          "direct_parent_activity": 0.11895831602492049
+        },
+        {
+          "trace_order": 22,
+          "time": 0.4938232421875,
+          "ara_coordinate": 0.1863138945839697,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5103937415188708,
+          "direct_parent_activity": 0.11498998376743576
+        },
+        {
+          "trace_order": 22,
+          "time": 0.4938232421875,
+          "ara_coordinate": 0.1863138945839699,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5103937415188708,
+          "direct_parent_activity": 0.11498998376743576
+        },
+        {
+          "trace_order": 22,
+          "time": 0.4938232421875,
+          "ara_coordinate": 0.850908410811296,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5103937415188708,
+          "direct_parent_activity": 0.11498998376743576
+        },
+        {
+          "trace_order": 22,
+          "time": 0.4938232421875,
+          "ara_coordinate": 0.9176196439987774,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5103937415188708,
+          "direct_parent_activity": 0.11498998376743576
+        },
+        {
+          "trace_order": 23,
+          "time": 0.509375,
+          "ara_coordinate": 0.21412136381899027,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5180945774165256,
+          "direct_parent_activity": 0.11135697955000412
+        },
+        {
+          "trace_order": 23,
+          "time": 0.509375,
+          "ara_coordinate": 0.21412136381899044,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5180945774165256,
+          "direct_parent_activity": 0.11135697955000412
+        },
+        {
+          "trace_order": 23,
+          "time": 0.509375,
+          "ara_coordinate": 0.8614728896349699,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5180945774165256,
+          "direct_parent_activity": 0.11135697955000412
+        },
+        {
+          "trace_order": 23,
+          "time": 0.509375,
+          "ara_coordinate": 0.9237389516674702,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5180945774165256,
+          "direct_parent_activity": 0.11135697955000412
+        },
+        {
+          "trace_order": 24,
+          "time": 0.5398803710937501,
+          "ara_coordinate": 0.2782271767550705,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.531782254450766,
+          "direct_parent_activity": 0.10520318761008694
+        },
+        {
+          "trace_order": 24,
+          "time": 0.5398803710937501,
+          "ara_coordinate": 0.27822717675507114,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.531782254450766,
+          "direct_parent_activity": 0.10520318761008694
+        },
+        {
+          "trace_order": 24,
+          "time": 0.5398803710937501,
+          "ara_coordinate": 0.8812581421786589,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.531782254450766,
+          "direct_parent_activity": 0.10520318761008694
+        },
+        {
+          "trace_order": 24,
+          "time": 0.5398803710937501,
+          "ara_coordinate": 0.9350317415836077,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.531782254450766,
+          "direct_parent_activity": 0.10520318761008694
+        },
+        {
+          "trace_order": 25,
+          "time": 0.5548339843750001,
+          "ara_coordinate": 0.3145193902321694,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5377791422936489,
+          "direct_parent_activity": 0.1026565831005799
+        },
+        {
+          "trace_order": 25,
+          "time": 0.5548339843750001,
+          "ara_coordinate": 0.3145193902321685,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5377791422936489,
+          "direct_parent_activity": 0.1026565831005799
+        },
+        {
+          "trace_order": 25,
+          "time": 0.5548339843750001,
+          "ara_coordinate": 0.8905668582992801,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5377791422936489,
+          "direct_parent_activity": 0.1026565831005799
+        },
+        {
+          "trace_order": 25,
+          "time": 0.5548339843750001,
+          "ara_coordinate": 0.9402748181929163,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5377791422936489,
+          "direct_parent_activity": 0.1026565831005799
+        },
+        {
+          "trace_order": 26,
+          "time": 0.5703857421875,
+          "ara_coordinate": 0.3557465841901014,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5435034796830519,
+          "direct_parent_activity": 0.10033580727353707
+        },
+        {
+          "trace_order": 26,
+          "time": 0.5703857421875,
+          "ara_coordinate": 0.35574658419010197,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5435034796830519,
+          "direct_parent_activity": 0.10033580727353707
+        },
+        {
+          "trace_order": 26,
+          "time": 0.5703857421875,
+          "ara_coordinate": 0.9000202784414527,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5435034796830519,
+          "direct_parent_activity": 0.10033580727353707
+        },
+        {
+          "trace_order": 26,
+          "time": 0.5703857421875,
+          "ara_coordinate": 0.9455576869795017,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5435034796830519,
+          "direct_parent_activity": 0.10033580727353707
+        },
+        {
+          "trace_order": 27,
+          "time": 0.6008911132812501,
+          "ara_coordinate": 0.446810699764902,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5531831937520486,
+          "direct_parent_activity": 0.09675332720692456
+        },
+        {
+          "trace_order": 27,
+          "time": 0.6008911132812501,
+          "ara_coordinate": 0.4468106997649019,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5531831937520486,
+          "direct_parent_activity": 0.09675332720692456
+        },
+        {
+          "trace_order": 27,
+          "time": 0.6008911132812501,
+          "ara_coordinate": 0.9180193582005323,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5531831937520486,
+          "direct_parent_activity": 0.09675332720692456
+        },
+        {
+          "trace_order": 27,
+          "time": 0.6008911132812501,
+          "ara_coordinate": 0.955513233871434,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5531831937520486,
+          "direct_parent_activity": 0.09675332720692456
+        },
+        {
+          "trace_order": 28,
+          "time": 0.6164428710937501,
+          "ara_coordinate": 0.49818230670506997,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5573179313298825,
+          "direct_parent_activity": 0.0954210151054376
+        },
+        {
+          "trace_order": 28,
+          "time": 0.6164428710937501,
+          "ara_coordinate": 0.49818230670507135,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5573179313298825,
+          "direct_parent_activity": 0.0954210151054376
+        },
+        {
+          "trace_order": 28,
+          "time": 0.6164428710937501,
+          "ara_coordinate": 0.9269833266406118,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5573179313298825,
+          "direct_parent_activity": 0.0954210151054376
+        },
+        {
+          "trace_order": 28,
+          "time": 0.6164428710937501,
+          "ara_coordinate": 0.9604283446737596,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5573179313298825,
+          "direct_parent_activity": 0.0954210151054376
+        },
+        {
+          "trace_order": 29,
+          "time": 0.6313964843750001,
+          "ara_coordinate": 0.550443778475261,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5607810423372214,
+          "direct_parent_activity": 0.09445427153148667
+        },
+        {
+          "trace_order": 29,
+          "time": 0.6313964843750001,
+          "ara_coordinate": 0.5504437784752615,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5607810423372214,
+          "direct_parent_activity": 0.09445427153148667
+        },
+        {
+          "trace_order": 29,
+          "time": 0.6313964843750001,
+          "ara_coordinate": 0.9355073856918685,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5607810423372214,
+          "direct_parent_activity": 0.09445427153148667
+        },
+        {
+          "trace_order": 29,
+          "time": 0.6313964843750001,
+          "ara_coordinate": 0.9650806461608351,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5607810423372214,
+          "direct_parent_activity": 0.09445427153148667
+        },
+        {
+          "trace_order": 30,
+          "time": 0.6625000000000001,
+          "ara_coordinate": 0.6667728138230501,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5663775472326079,
+          "direct_parent_activity": 0.09342881534441856
+        },
+        {
+          "trace_order": 30,
+          "time": 0.6625000000000001,
+          "ara_coordinate": 0.6667728138230498,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5663775472326079,
+          "direct_parent_activity": 0.09342881534441856
+        },
+        {
+          "trace_order": 30,
+          "time": 0.6625000000000001,
+          "ara_coordinate": 0.9530585906234508,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5663775472326079,
+          "direct_parent_activity": 0.09342881534441856
+        },
+        {
+          "trace_order": 30,
+          "time": 0.6625000000000001,
+          "ara_coordinate": 0.9746098272893665,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5663775472326079,
+          "direct_parent_activity": 0.09342881534441856
+        },
+        {
+          "trace_order": 31,
+          "time": 0.6774536132812501,
+          "ara_coordinate": 0.7255491875324579,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5683019269997547,
+          "direct_parent_activity": 0.0934082518572355
+        },
+        {
+          "trace_order": 31,
+          "time": 0.6774536132812501,
+          "ara_coordinate": 0.7255491875324579,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5683019269997547,
+          "direct_parent_activity": 0.0934082518572355
+        },
+        {
+          "trace_order": 31,
+          "time": 0.6774536132812501,
+          "ara_coordinate": 0.9614646943514402,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5683019269997547,
+          "direct_parent_activity": 0.0934082518572355
+        },
+        {
+          "trace_order": 31,
+          "time": 0.6774536132812501,
+          "ara_coordinate": 0.9791579525995521,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5683019269997547,
+          "direct_parent_activity": 0.0934082518572355
+        },
+        {
+          "trace_order": 32,
+          "time": 0.69300537109375,
+          "ara_coordinate": 0.7879828536011646,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5697829627767134,
+          "direct_parent_activity": 0.09371096535012344
+        },
+        {
+          "trace_order": 32,
+          "time": 0.69300537109375,
+          "ara_coordinate": 0.7879828536011662,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5697829627767134,
+          "direct_parent_activity": 0.09371096535012344
+        },
+        {
+          "trace_order": 32,
+          "time": 0.69300537109375,
+          "ara_coordinate": 0.97022015792836,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5697829627767134,
+          "direct_parent_activity": 0.09371096535012344
+        },
+        {
+          "trace_order": 32,
+          "time": 0.69300537109375,
+          "ara_coordinate": 0.9838898047905067,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5697829627767134,
+          "direct_parent_activity": 0.09371096535012344
+        },
+        {
+          "trace_order": 33,
+          "time": 0.7235107421875001,
+          "ara_coordinate": 0.9122197691441037,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711793726515738,
+          "direct_parent_activity": 0.09525865006690967
+        },
+        {
+          "trace_order": 33,
+          "time": 0.7235107421875001,
+          "ara_coordinate": 0.9122197691441026,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711793726515738,
+          "direct_parent_activity": 0.09525865006690967
+        },
+        {
+          "trace_order": 33,
+          "time": 0.7235107421875001,
+          "ara_coordinate": 0.9875267202331053,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711793726515738,
+          "direct_parent_activity": 0.09525865006690967
+        },
+        {
+          "trace_order": 33,
+          "time": 0.7235107421875001,
+          "ara_coordinate": 0.9932436095960059,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711793726515738,
+          "direct_parent_activity": 0.09525865006690967
+        },
+        {
+          "trace_order": 34,
+          "time": 0.7390625000000001,
+          "ara_coordinate": 0.975371311097578,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711427021548695,
+          "direct_parent_activity": 0.09652984565048632
+        },
+        {
+          "trace_order": 34,
+          "time": 0.7390625000000001,
+          "ara_coordinate": 0.9753713110975784,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711427021548695,
+          "direct_parent_activity": 0.09652984565048632
+        },
+        {
+          "trace_order": 34,
+          "time": 0.7390625000000001,
+          "ara_coordinate": 0.9964608738621056,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711427021548695,
+          "direct_parent_activity": 0.09652984565048632
+        },
+        {
+          "trace_order": 34,
+          "time": 0.7390625000000001,
+          "ara_coordinate": 0.9980809054954717,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5711427021548695,
+          "direct_parent_activity": 0.09652984565048632
+        },
+        {
+          "trace_order": 35,
+          "time": 0.7540161132812501,
+          "ara_coordinate": 1.0353200577022152,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5706459527031472,
+          "direct_parent_activity": 0.09805585214991133
+        },
+        {
+          "trace_order": 35,
+          "time": 0.7540161132812501,
+          "ara_coordinate": 1.0353200577022157,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5706459527031472,
+          "direct_parent_activity": 0.09805585214991133
+        },
+        {
+          "trace_order": 35,
+          "time": 0.7540161132812501,
+          "ara_coordinate": 1.0051468164012514,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5706459527031472,
+          "direct_parent_activity": 0.09805585214991133
+        },
+        {
+          "trace_order": 35,
+          "time": 0.7540161132812501,
+          "ara_coordinate": 1.002794484707669,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5706459527031472,
+          "direct_parent_activity": 0.09805585214991133
+        },
+        {
+          "trace_order": 36,
+          "time": 0.7845214843750001,
+          "ara_coordinate": 1.1535032077998413,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5682831931512831,
+          "direct_parent_activity": 0.10207863870044531
+        },
+        {
+          "trace_order": 36,
+          "time": 0.7845214843750001,
+          "ara_coordinate": 1.153503207799841,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5682831931512831,
+          "direct_parent_activity": 0.10207863870044531
+        },
+        {
+          "trace_order": 36,
+          "time": 0.7845214843750001,
+          "ara_coordinate": 1.0232195025123143,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5682831931512831,
+          "direct_parent_activity": 0.10207863870044531
+        },
+        {
+          "trace_order": 36,
+          "time": 0.7845214843750001,
+          "ara_coordinate": 1.0126504350900059,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5682831931512831,
+          "direct_parent_activity": 0.10207863870044531
+        },
+        {
+          "trace_order": 37,
+          "time": 0.8000732421875001,
+          "ara_coordinate": 1.2108618085331875,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5664119728957736,
+          "direct_parent_activity": 0.10459080880196937
+        },
+        {
+          "trace_order": 37,
+          "time": 0.8000732421875001,
+          "ara_coordinate": 1.2108618085331877,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5664119728957736,
+          "direct_parent_activity": 0.10459080880196937
+        },
+        {
+          "trace_order": 37,
+          "time": 0.8000732421875001,
+          "ara_coordinate": 1.032643089908373,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5664119728957736,
+          "direct_parent_activity": 0.10459080880196937
+        },
+        {
+          "trace_order": 37,
+          "time": 0.8000732421875001,
+          "ara_coordinate": 1.0178228092222619,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5664119728957736,
+          "direct_parent_activity": 0.10459080880196937
+        },
+        {
+          "trace_order": 38,
+          "time": 0.815625,
+          "ara_coordinate": 1.2658536950441763,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5641127285208848,
+          "direct_parent_activity": 0.10740755401069349
+        },
+        {
+          "trace_order": 38,
+          "time": 0.815625,
+          "ara_coordinate": 1.2658536950441759,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5641127285208848,
+          "direct_parent_activity": 0.10740755401069349
+        },
+        {
+          "trace_order": 38,
+          "time": 0.815625,
+          "ara_coordinate": 1.0422237116408215,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5641127285208848,
+          "direct_parent_activity": 0.10740755401069349
+        },
+        {
+          "trace_order": 38,
+          "time": 0.815625,
+          "ara_coordinate": 1.0231093656886667,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5641127285208848,
+          "direct_parent_activity": 0.10740755401069349
+        },
+        {
+          "trace_order": 39,
+          "time": 0.8461303710937501,
+          "ara_coordinate": 1.3660418637147935,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5584282095810094,
+          "direct_parent_activity": 0.11379284488471628
+        },
+        {
+          "trace_order": 39,
+          "time": 0.8461303710937501,
+          "ara_coordinate": 1.3660418637147935,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5584282095810094,
+          "direct_parent_activity": 0.11379284488471628
+        },
+        {
+          "trace_order": 39,
+          "time": 0.8461303710937501,
+          "ara_coordinate": 1.0615038442791325,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5584282095810094,
+          "direct_parent_activity": 0.11379284488471628
+        },
+        {
+          "trace_order": 39,
+          "time": 0.8461303710937501,
+          "ara_coordinate": 1.0338463169287104,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5584282095810094,
+          "direct_parent_activity": 0.11379284488471628
+        },
+        {
+          "trace_order": 40,
+          "time": 0.8610839843750001,
+          "ara_coordinate": 1.411201040010649,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5551076860882225,
+          "direct_parent_activity": 0.11732553078316055
+        },
+        {
+          "trace_order": 40,
+          "time": 0.8610839843750001,
+          "ara_coordinate": 1.4112010400106478,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5551076860882225,
+          "direct_parent_activity": 0.11732553078316055
+        },
+        {
+          "trace_order": 40,
+          "time": 0.8610839843750001,
+          "ara_coordinate": 1.0712005515736107,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5551076860882225,
+          "direct_parent_activity": 0.11732553078316055
+        },
+        {
+          "trace_order": 40,
+          "time": 0.8610839843750001,
+          "ara_coordinate": 1.039301647840426,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5551076860882225,
+          "direct_parent_activity": 0.11732553078316055
+        },
+        {
+          "trace_order": 41,
+          "time": 0.8766357421875001,
+          "ara_coordinate": 1.4553366745154483,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5513062368655517,
+          "direct_parent_activity": 0.12126983605095797
+        },
+        {
+          "trace_order": 41,
+          "time": 0.8766357421875001,
+          "ara_coordinate": 1.4553366745154477,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5513062368655517,
+          "direct_parent_activity": 0.12126983605095797
+        },
+        {
+          "trace_order": 41,
+          "time": 0.8766357421875001,
+          "ara_coordinate": 1.0814599150565338,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5513062368655517,
+          "direct_parent_activity": 0.12126983605095797
+        },
+        {
+          "trace_order": 41,
+          "time": 0.8766357421875001,
+          "ara_coordinate": 1.0451175766044938,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5513062368655517,
+          "direct_parent_activity": 0.12126983605095797
+        },
+        {
+          "trace_order": 42,
+          "time": 0.9071411132812501,
+          "ara_coordinate": 1.5335926468725245,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5428928269014108,
+          "direct_parent_activity": 0.1297711776311684
+        },
+        {
+          "trace_order": 42,
+          "time": 0.9071411132812501,
+          "ara_coordinate": 1.5335926468725256,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5428928269014108,
+          "direct_parent_activity": 0.1297711776311684
+        },
+        {
+          "trace_order": 42,
+          "time": 0.9071411132812501,
+          "ara_coordinate": 1.1020994147405108,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5428928269014108,
+          "direct_parent_activity": 0.1297711776311684
+        },
+        {
+          "trace_order": 42,
+          "time": 0.9071411132812501,
+          "ara_coordinate": 1.0569656180355562,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5428928269014108,
+          "direct_parent_activity": 0.1297711776311684
+        },
+        {
+          "trace_order": 43,
+          "time": 0.9226928710937501,
+          "ara_coordinate": 1.569371234054762,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5381543562798141,
+          "direct_parent_activity": 0.13447443981384774
+        },
+        {
+          "trace_order": 43,
+          "time": 0.9226928710937501,
+          "ara_coordinate": 1.5693712340547616,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5381543562798141,
+          "direct_parent_activity": 0.13447443981384774
+        },
+        {
+          "trace_order": 43,
+          "time": 0.9226928710937501,
+          "ara_coordinate": 1.1128780633089412,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5381543562798141,
+          "direct_parent_activity": 0.13447443981384774
+        },
+        {
+          "trace_order": 43,
+          "time": 0.9226928710937501,
+          "ara_coordinate": 1.063236656039971,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5381543562798141,
+          "direct_parent_activity": 0.13447443981384774
+        },
+        {
+          "trace_order": 44,
+          "time": 0.9376464843750001,
+          "ara_coordinate": 1.6012735843057735,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.533336241816911,
+          "direct_parent_activity": 0.13921790959819877
+        },
+        {
+          "trace_order": 44,
+          "time": 0.9376464843750001,
+          "ara_coordinate": 1.6012735843057737,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.533336241816911,
+          "direct_parent_activity": 0.13921790959819877
+        },
+        {
+          "trace_order": 44,
+          "time": 0.9376464843750001,
+          "ara_coordinate": 1.123398644545308,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.533336241816911,
+          "direct_parent_activity": 0.13921790959819877
+        },
+        {
+          "trace_order": 44,
+          "time": 0.9376464843750001,
+          "ara_coordinate": 1.0694159701192347,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.533336241816911,
+          "direct_parent_activity": 0.13921790959819877
+        },
+        {
+          "trace_order": 45,
+          "time": 0.9687500000000001,
+          "ara_coordinate": 1.6602738898371414,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5225681850452066,
+          "direct_parent_activity": 0.14972997422688777
+        },
+        {
+          "trace_order": 45,
+          "time": 0.9687500000000001,
+          "ara_coordinate": 1.6602738898371412,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5225681850452066,
+          "direct_parent_activity": 0.14972997422688777
+        },
+        {
+          "trace_order": 45,
+          "time": 0.9687500000000001,
+          "ara_coordinate": 1.145740585364842,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5225681850452066,
+          "direct_parent_activity": 0.14972997422688777
+        },
+        {
+          "trace_order": 45,
+          "time": 0.9687500000000001,
+          "ara_coordinate": 1.082739624375719,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5225681850452066,
+          "direct_parent_activity": 0.14972997422688777
+        },
+        {
+          "trace_order": 46,
+          "time": 0.9837036132812501,
+          "ara_coordinate": 1.6853626402998043,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5170680443445471,
+          "direct_parent_activity": 0.1550695701544013
+        },
+        {
+          "trace_order": 46,
+          "time": 0.9837036132812501,
+          "ara_coordinate": 1.6853626402998039,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5170680443445471,
+          "direct_parent_activity": 0.1550695701544013
+        },
+        {
+          "trace_order": 46,
+          "time": 0.9837036132812501,
+          "ara_coordinate": 1.1566835392747237,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5170680443445471,
+          "direct_parent_activity": 0.1550695701544013
+        },
+        {
+          "trace_order": 46,
+          "time": 0.9837036132812501,
+          "ara_coordinate": 1.0893696470756224,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.5170680443445471,
+          "direct_parent_activity": 0.1550695701544013
+        },
+        {
+          "trace_order": 47,
+          "time": 0.9992553710937501,
+          "ara_coordinate": 1.7093867072674584,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.511149538798556,
+          "direct_parent_activity": 0.16080143803886926
+        },
+        {
+          "trace_order": 47,
+          "time": 0.9992553710937501,
+          "ara_coordinate": 1.7093867072674598,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.511149538798556,
+          "direct_parent_activity": 0.16080143803886926
+        },
+        {
+          "trace_order": 47,
+          "time": 0.9992553710937501,
+          "ara_coordinate": 1.1681875316493744,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.511149538798556,
+          "direct_parent_activity": 0.16080143803886926
+        },
+        {
+          "trace_order": 47,
+          "time": 0.9992553710937501,
+          "ara_coordinate": 1.0964164930592957,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.511149538798556,
+          "direct_parent_activity": 0.16080143803886926
+        },
+        {
+          "trace_order": 48,
+          "time": 1.0297607421875001,
+          "ara_coordinate": 1.7509402196821497,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49902153464390375,
+          "direct_parent_activity": 0.17251784521011182
+        },
+        {
+          "trace_order": 48,
+          "time": 1.0297607421875001,
+          "ara_coordinate": 1.7509402196821504,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49902153464390375,
+          "direct_parent_activity": 0.17251784521011182
+        },
+        {
+          "trace_order": 48,
+          "time": 1.0297607421875001,
+          "ara_coordinate": 1.191065832536871,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49902153464390375,
+          "direct_parent_activity": 0.17251784521011182
+        },
+        {
+          "trace_order": 48,
+          "time": 1.0297607421875001,
+          "ara_coordinate": 1.1106739401398344,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49902153464390375,
+          "direct_parent_activity": 0.17251784521011182
+        },
+        {
+          "trace_order": 49,
+          "time": 1.0453125,
+          "ara_coordinate": 1.7695615251944892,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49260848848332656,
+          "direct_parent_activity": 0.17870222230556423
+        },
+        {
+          "trace_order": 49,
+          "time": 1.0453125,
+          "ara_coordinate": 1.7695615251944887,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49260848848332656,
+          "direct_parent_activity": 0.17870222230556423
+        },
+        {
+          "trace_order": 49,
+          "time": 1.0453125,
+          "ara_coordinate": 1.202859431958225,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49260848848332656,
+          "direct_parent_activity": 0.17870222230556423
+        },
+        {
+          "trace_order": 49,
+          "time": 1.0453125,
+          "ara_coordinate": 1.1181545547483926,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.49260848848332656,
+          "direct_parent_activity": 0.17870222230556423
+        },
+        {
+          "trace_order": 50,
+          "time": 1.06026611328125,
+          "ara_coordinate": 1.786000829574603,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48631631929496677,
+          "direct_parent_activity": 0.18476392759110402
+        },
+        {
+          "trace_order": 50,
+          "time": 1.06026611328125,
+          "ara_coordinate": 1.7860008295746033,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48631631929496677,
+          "direct_parent_activity": 0.18476392759110402
+        },
+        {
+          "trace_order": 50,
+          "time": 1.06026611328125,
+          "ara_coordinate": 1.2142627079783834,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48631631929496677,
+          "direct_parent_activity": 0.18476392759110402
+        },
+        {
+          "trace_order": 50,
+          "time": 1.06026611328125,
+          "ara_coordinate": 1.12547523001667,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.48631631929496677,
+          "direct_parent_activity": 0.18476392759110402
+        },
+        {
+          "trace_order": 51,
+          "time": 1.090771484375,
+          "ara_coordinate": 1.8155483127309415,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4731579161690826,
+          "direct_parent_activity": 0.19741966852996223
+        },
+        {
+          "trace_order": 51,
+          "time": 1.090771484375,
+          "ara_coordinate": 1.8155483127309422,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4731579161690826,
+          "direct_parent_activity": 0.19741966852996223
+        },
+        {
+          "trace_order": 51,
+          "time": 1.090771484375,
+          "ara_coordinate": 1.2376553880486423,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4731579161690826,
+          "direct_parent_activity": 0.19741966852996223
+        },
+        {
+          "trace_order": 51,
+          "time": 1.090771484375,
+          "ara_coordinate": 1.140771426127199,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4731579161690826,
+          "direct_parent_activity": 0.19741966852996223
+        },
+        {
+          "trace_order": 52,
+          "time": 1.1063232421875002,
+          "ara_coordinate": 1.828774488166554,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46631271163653387,
+          "direct_parent_activity": 0.203989823977988
+        },
+        {
+          "trace_order": 52,
+          "time": 1.1063232421875002,
+          "ara_coordinate": 1.828774488166554,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46631271163653387,
+          "direct_parent_activity": 0.203989823977988
+        },
+        {
+          "trace_order": 52,
+          "time": 1.1063232421875002,
+          "ara_coordinate": 1.2496153915903487,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46631271163653387,
+          "direct_parent_activity": 0.203989823977988
+        },
+        {
+          "trace_order": 52,
+          "time": 1.1063232421875002,
+          "ara_coordinate": 1.1487412405978399,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.46631271163653387,
+          "direct_parent_activity": 0.203989823977988
+        },
+        {
+          "trace_order": 53,
+          "time": 1.1218750000000002,
+          "ara_coordinate": 1.840899090472695,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4593940759605682,
+          "direct_parent_activity": 0.21061822168126884
+        },
+        {
+          "trace_order": 53,
+          "time": 1.1218750000000002,
+          "ara_coordinate": 1.8408990904726956,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4593940759605682,
+          "direct_parent_activity": 0.21061822168126884
+        },
+        {
+          "trace_order": 53,
+          "time": 1.1218750000000002,
+          "ara_coordinate": 1.2615760965102414,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4593940759605682,
+          "direct_parent_activity": 0.21061822168126884
+        },
+        {
+          "trace_order": 53,
+          "time": 1.1218750000000002,
+          "ara_coordinate": 1.1568157176976448,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4593940759605682,
+          "direct_parent_activity": 0.21061822168126884
+        },
+        {
+          "trace_order": 54,
+          "time": 1.1523803710937501,
+          "ara_coordinate": 1.8618422434665032,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44566134193613505,
+          "direct_parent_activity": 0.22372676809240927
+        },
+        {
+          "trace_order": 54,
+          "time": 1.1523803710937501,
+          "ara_coordinate": 1.861842243466503,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44566134193613505,
+          "direct_parent_activity": 0.22372676809240927
+        },
+        {
+          "trace_order": 54,
+          "time": 1.1523803710937501,
+          "ara_coordinate": 1.2849750943277964,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44566134193613505,
+          "direct_parent_activity": 0.22372676809240927
+        },
+        {
+          "trace_order": 54,
+          "time": 1.1523803710937501,
+          "ara_coordinate": 1.1729225366610734,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.44566134193613505,
+          "direct_parent_activity": 0.22372676809240927
+        },
+        {
+          "trace_order": 55,
+          "time": 1.1673339843750001,
+          "ara_coordinate": 1.8708901487215297,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4388747241924302,
+          "direct_parent_activity": 0.23017451956480184
+        },
+        {
+          "trace_order": 55,
+          "time": 1.1673339843750001,
+          "ara_coordinate": 1.8708901487215297,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4388747241924302,
+          "direct_parent_activity": 0.23017451956480184
+        },
+        {
+          "trace_order": 55,
+          "time": 1.1673339843750001,
+          "ara_coordinate": 1.2963849176655906,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4388747241924302,
+          "direct_parent_activity": 0.23017451956480184
+        },
+        {
+          "trace_order": 55,
+          "time": 1.1673339843750001,
+          "ara_coordinate": 1.1809300343476319,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4388747241924302,
+          "direct_parent_activity": 0.23017451956480184
+        },
+        {
+          "trace_order": 56,
+          "time": 1.1828857421875,
+          "ara_coordinate": 1.8795472164527243,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4317935415720596,
+          "direct_parent_activity": 0.2368751983767537
+        },
+        {
+          "trace_order": 56,
+          "time": 1.1828857421875,
+          "ara_coordinate": 1.879547216452725,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4317935415720596,
+          "direct_parent_activity": 0.2368751983767537
+        },
+        {
+          "trace_order": 56,
+          "time": 1.1828857421875,
+          "ara_coordinate": 1.3081888384975748,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4317935415720596,
+          "direct_parent_activity": 0.2368751983767537
+        },
+        {
+          "trace_order": 56,
+          "time": 1.1828857421875,
+          "ara_coordinate": 1.1893230916474704,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4317935415720596,
+          "direct_parent_activity": 0.2368751983767537
+        },
+        {
+          "trace_order": 57,
+          "time": 1.21339111328125,
+          "ara_coordinate": 1.8945519749681197,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4178764764166258,
+          "direct_parent_activity": 0.24994557926399133
+        },
+        {
+          "trace_order": 57,
+          "time": 1.21339111328125,
+          "ara_coordinate": 1.8945519749681194,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4178764764166258,
+          "direct_parent_activity": 0.24994557926399133
+        },
+        {
+          "trace_order": 57,
+          "time": 1.21339111328125,
+          "ara_coordinate": 1.331101789870131,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4178764764166258,
+          "direct_parent_activity": 0.24994557926399133
+        },
+        {
+          "trace_order": 57,
+          "time": 1.21339111328125,
+          "ara_coordinate": 1.2059405119883941,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.4178764764166258,
+          "direct_parent_activity": 0.24994557926399133
+        },
+        {
+          "trace_order": 58,
+          "time": 1.2289428710937502,
+          "ara_coordinate": 1.901310066336871,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.41078744960539576,
+          "direct_parent_activity": 0.25654238027888077
+        },
+        {
+          "trace_order": 58,
+          "time": 1.2289428710937502,
+          "ara_coordinate": 1.901310066336871,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.41078744960539576,
+          "direct_parent_activity": 0.25654238027888077
+        },
+        {
+          "trace_order": 58,
+          "time": 1.2289428710937502,
+          "ara_coordinate": 1.342632846579285,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.41078744960539576,
+          "direct_parent_activity": 0.25654238027888077
+        },
+        {
+          "trace_order": 58,
+          "time": 1.2289428710937502,
+          "ara_coordinate": 1.214470386651095,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.41078744960539576,
+          "direct_parent_activity": 0.25654238027888077
+        },
+        {
+          "trace_order": 59,
+          "time": 1.2438964843750002,
+          "ara_coordinate": 1.9073057728442382,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.40398635654216164,
+          "direct_parent_activity": 0.2628253674949476
+        },
+        {
+          "trace_order": 59,
+          "time": 1.2438964843750002,
+          "ara_coordinate": 1.9073057728442377,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.40398635654216164,
+          "direct_parent_activity": 0.2628253674949476
+        },
+        {
+          "trace_order": 59,
+          "time": 1.2438964843750002,
+          "ara_coordinate": 1.3536088953979972,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.40398635654216164,
+          "direct_parent_activity": 0.2628253674949476
+        },
+        {
+          "trace_order": 59,
+          "time": 1.2438964843750002,
+          "ara_coordinate": 1.2226964891915688,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.40398635654216164,
+          "direct_parent_activity": 0.2628253674949476
+        },
+        {
+          "trace_order": 60,
+          "time": 1.2750000000000001,
+          "ara_coordinate": 1.9183785256656594,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38992096501830553,
+          "direct_parent_activity": 0.2756520784298421
+        },
+        {
+          "trace_order": 60,
+          "time": 1.2750000000000001,
+          "ara_coordinate": 1.9183785256656596,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38992096501830553,
+          "direct_parent_activity": 0.2756520784298421
+        },
+        {
+          "trace_order": 60,
+          "time": 1.2750000000000001,
+          "ara_coordinate": 1.376043470590689,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38992096501830553,
+          "direct_parent_activity": 0.2756520784298421
+        },
+        {
+          "trace_order": 60,
+          "time": 1.2750000000000001,
+          "ara_coordinate": 1.2398430946594228,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38992096501830553,
+          "direct_parent_activity": 0.2756520784298421
+        },
+        {
+          "trace_order": 61,
+          "time": 1.2899536132812501,
+          "ara_coordinate": 1.9231056627451844,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38321195893294036,
+          "direct_parent_activity": 0.2816784594347219
+        },
+        {
+          "trace_order": 61,
+          "time": 1.2899536132812501,
+          "ara_coordinate": 1.9231056627451844,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38321195893294036,
+          "direct_parent_activity": 0.2816784594347219
+        },
+        {
+          "trace_order": 61,
+          "time": 1.2899536132812501,
+          "ara_coordinate": 1.3866196137565725,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38321195893294036,
+          "direct_parent_activity": 0.2816784594347219
+        },
+        {
+          "trace_order": 61,
+          "time": 1.2899536132812501,
+          "ara_coordinate": 1.2480854796334044,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.38321195893294036,
+          "direct_parent_activity": 0.2816784594347219
+        },
+        {
+          "trace_order": 62,
+          "time": 1.30550537109375,
+          "ara_coordinate": 1.9276580283400575,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37628029432044363,
+          "direct_parent_activity": 0.28783353181239735
+        },
+        {
+          "trace_order": 62,
+          "time": 1.30550537109375,
+          "ara_coordinate": 1.9276580283400566,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37628029432044363,
+          "direct_parent_activity": 0.28783353181239735
+        },
+        {
+          "trace_order": 62,
+          "time": 1.30550537109375,
+          "ara_coordinate": 1.3974622710756643,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37628029432044363,
+          "direct_parent_activity": 0.28783353181239735
+        },
+        {
+          "trace_order": 62,
+          "time": 1.30550537109375,
+          "ara_coordinate": 1.2566441710521306,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.37628029432044363,
+          "direct_parent_activity": 0.28783353181239735
+        },
+        {
+          "trace_order": 63,
+          "time": 1.3360107421875,
+          "ara_coordinate": 1.9356292130085047,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3628424386083916,
+          "direct_parent_activity": 0.29953177248312196
+        },
+        {
+          "trace_order": 63,
+          "time": 1.3360107421875,
+          "ara_coordinate": 1.935629213008505,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3628424386083916,
+          "direct_parent_activity": 0.29953177248312196
+        },
+        {
+          "trace_order": 63,
+          "time": 1.3360107421875,
+          "ara_coordinate": 1.4182368500766862,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3628424386083916,
+          "direct_parent_activity": 0.29953177248312196
+        },
+        {
+          "trace_order": 63,
+          "time": 1.3360107421875,
+          "ara_coordinate": 1.2733575158396608,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3628424386083916,
+          "direct_parent_activity": 0.29953177248312196
+        },
+        {
+          "trace_order": 64,
+          "time": 1.3515625000000002,
+          "ara_coordinate": 1.9392587709305784,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3560836416476673,
+          "direct_parent_activity": 0.3052841433423317
+        },
+        {
+          "trace_order": 64,
+          "time": 1.3515625000000002,
+          "ara_coordinate": 1.9392587709305782,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3560836416476673,
+          "direct_parent_activity": 0.3052841433423317
+        },
+        {
+          "trace_order": 64,
+          "time": 1.3515625000000002,
+          "ara_coordinate": 1.4285628214030637,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3560836416476673,
+          "direct_parent_activity": 0.3052841433423317
+        },
+        {
+          "trace_order": 64,
+          "time": 1.3515625000000002,
+          "ara_coordinate": 1.281822602783009,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3560836416476673,
+          "direct_parent_activity": 0.3052841433423317
+        },
+        {
+          "trace_order": 65,
+          "time": 1.3665161132812502,
+          "ara_coordinate": 1.942502684988891,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3496494360447878,
+          "direct_parent_activity": 0.31066895915704373
+        },
+        {
+          "trace_order": 65,
+          "time": 1.3665161132812502,
+          "ara_coordinate": 1.942502684988891,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3496494360447878,
+          "direct_parent_activity": 0.31066895915704373
+        },
+        {
+          "trace_order": 65,
+          "time": 1.3665161132812502,
+          "ara_coordinate": 1.438315851900339,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3496494360447878,
+          "direct_parent_activity": 0.31066895915704373
+        },
+        {
+          "trace_order": 65,
+          "time": 1.3665161132812502,
+          "ara_coordinate": 1.2899164895052175,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3496494360447878,
+          "direct_parent_activity": 0.31066895915704373
+        },
+        {
+          "trace_order": 66,
+          "time": 1.3970214843750002,
+          "ara_coordinate": 1.948452669457742,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33673626594654005,
+          "direct_parent_activity": 0.3211777420831949
+        },
+        {
+          "trace_order": 66,
+          "time": 1.3970214843750002,
+          "ara_coordinate": 1.9484526694577418,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33673626594654005,
+          "direct_parent_activity": 0.3211777420831949
+        },
+        {
+          "trace_order": 66,
+          "time": 1.3970214843750002,
+          "ara_coordinate": 1.4576609905976372,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33673626594654005,
+          "direct_parent_activity": 0.3211777420831949
+        },
+        {
+          "trace_order": 66,
+          "time": 1.3970214843750002,
+          "ara_coordinate": 1.3062602955222051,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33673626594654005,
+          "direct_parent_activity": 0.3211777420831949
+        },
+        {
+          "trace_order": 67,
+          "time": 1.4125732421875001,
+          "ara_coordinate": 1.9511780785301713,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33027020350120806,
+          "direct_parent_activity": 0.3262746547122767
+        },
+        {
+          "trace_order": 67,
+          "time": 1.4125732421875001,
+          "ara_coordinate": 1.9511780785301713,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33027020350120806,
+          "direct_parent_activity": 0.3262746547122767
+        },
+        {
+          "trace_order": 67,
+          "time": 1.4125732421875001,
+          "ara_coordinate": 1.4672319136731342,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33027020350120806,
+          "direct_parent_activity": 0.3262746547122767
+        },
+        {
+          "trace_order": 67,
+          "time": 1.4125732421875001,
+          "ara_coordinate": 1.3144918548396105,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.33027020350120806,
+          "direct_parent_activity": 0.3262746547122767
+        },
+        {
+          "trace_order": 68,
+          "time": 1.428125,
+          "ara_coordinate": 1.953717922517048,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.32388756935336094,
+          "direct_parent_activity": 0.33118691339437656
+        },
+        {
+          "trace_order": 68,
+          "time": 1.428125,
+          "ara_coordinate": 1.9537179225170478,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.32388756935336094,
+          "direct_parent_activity": 0.33118691339437656
+        },
+        {
+          "trace_order": 68,
+          "time": 1.428125,
+          "ara_coordinate": 1.4766027798463615,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.32388756935336094,
+          "direct_parent_activity": 0.33118691339437656
+        },
+        {
+          "trace_order": 68,
+          "time": 1.428125,
+          "ara_coordinate": 1.322646719890118,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.32388756935336094,
+          "direct_parent_activity": 0.33118691339437656
+        },
+        {
+          "trace_order": 69,
+          "time": 1.45863037109375,
+          "ara_coordinate": 1.9582174421182081,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3116205894432217,
+          "direct_parent_activity": 0.3402648634976487
+        },
+        {
+          "trace_order": 69,
+          "time": 1.45863037109375,
+          "ara_coordinate": 1.9582174421182081,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3116205894432217,
+          "direct_parent_activity": 0.3402648634976487
+        },
+        {
+          "trace_order": 69,
+          "time": 1.45863037109375,
+          "ara_coordinate": 1.4943972737706999,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3116205894432217,
+          "direct_parent_activity": 0.3402648634976487
+        },
+        {
+          "trace_order": 69,
+          "time": 1.45863037109375,
+          "ara_coordinate": 1.3383971794682763,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.3116205894432217,
+          "direct_parent_activity": 0.3402648634976487
+        },
+        {
+          "trace_order": 70,
+          "time": 1.473583984375,
+          "ara_coordinate": 1.960213781281919,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.30573392297999047,
+          "direct_parent_activity": 0.3444364216262159
+        },
+        {
+          "trace_order": 70,
+          "time": 1.473583984375,
+          "ara_coordinate": 1.9602137812819194,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.30573392297999047,
+          "direct_parent_activity": 0.3444364216262159
+        },
+        {
+          "trace_order": 70,
+          "time": 1.473583984375,
+          "ara_coordinate": 1.5028348200662736,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.30573392297999047,
+          "direct_parent_activity": 0.3444364216262159
+        },
+        {
+          "trace_order": 70,
+          "time": 1.473583984375,
+          "ara_coordinate": 1.3459892481242626,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.30573392297999047,
+          "direct_parent_activity": 0.3444364216262159
+        },
+        {
+          "trace_order": 71,
+          "time": 1.4891357421875002,
+          "ara_coordinate": 1.9621589167858273,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.29970257455056293,
+          "direct_parent_activity": 0.3485756004720106
+        },
+        {
+          "trace_order": 71,
+          "time": 1.4891357421875002,
+          "ara_coordinate": 1.962158916785827,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.29970257455056293,
+          "direct_parent_activity": 0.3485756004720106
+        },
+        {
+          "trace_order": 71,
+          "time": 1.4891357421875002,
+          "ara_coordinate": 1.51141078164513,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.29970257455056293,
+          "direct_parent_activity": 0.3485756004720106
+        },
+        {
+          "trace_order": 71,
+          "time": 1.4891357421875002,
+          "ara_coordinate": 1.3537889586039997,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.29970257455056293,
+          "direct_parent_activity": 0.3485756004720106
+        },
+        {
+          "trace_order": 72,
+          "time": 1.5196411132812502,
+          "ara_coordinate": 1.9656250904353234,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2881463675038931,
+          "direct_parent_activity": 0.3560937607758655
+        },
+        {
+          "trace_order": 72,
+          "time": 1.5196411132812502,
+          "ara_coordinate": 1.9656250904353234,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2881463675038931,
+          "direct_parent_activity": 0.3560937607758655
+        },
+        {
+          "trace_order": 72,
+          "time": 1.5196411132812502,
+          "ara_coordinate": 1.5276460707395294,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2881463675038931,
+          "direct_parent_activity": 0.3560937607758655
+        },
+        {
+          "trace_order": 72,
+          "time": 1.5196411132812502,
+          "ara_coordinate": 1.3687881275711185,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2881463675038931,
+          "direct_parent_activity": 0.3560937607758655
+        },
+        {
+          "trace_order": 73,
+          "time": 1.5351928710937501,
+          "ara_coordinate": 1.9672319781061862,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2823971848397731,
+          "direct_parent_activity": 0.3596160433488225
+        },
+        {
+          "trace_order": 73,
+          "time": 1.5351928710937501,
+          "ara_coordinate": 1.9672319781061862,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2823971848397731,
+          "direct_parent_activity": 0.3596160433488225
+        },
+        {
+          "trace_order": 73,
+          "time": 1.5351928710937501,
+          "ara_coordinate": 1.5356262682187558,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2823971848397731,
+          "direct_parent_activity": 0.3596160433488225
+        },
+        {
+          "trace_order": 73,
+          "time": 1.5351928710937501,
+          "ara_coordinate": 1.376274576816485,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2823971848397731,
+          "direct_parent_activity": 0.3596160433488225
+        },
+        {
+          "trace_order": 74,
+          "time": 1.5501464843750001,
+          "ara_coordinate": 1.9686851425249694,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.27696075476692766,
+          "direct_parent_activity": 0.3628034247775857
+        },
+        {
+          "trace_order": 74,
+          "time": 1.5501464843750001,
+          "ara_coordinate": 1.9686851425249696,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.27696075476692766,
+          "direct_parent_activity": 0.3628034247775857
+        },
+        {
+          "trace_order": 74,
+          "time": 1.5501464843750001,
+          "ara_coordinate": 1.5431128328708645,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.27696075476692766,
+          "direct_parent_activity": 0.3628034247775857
+        },
+        {
+          "trace_order": 74,
+          "time": 1.5501464843750001,
+          "ara_coordinate": 1.3833672174556848,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.27696075476692766,
+          "direct_parent_activity": 0.3628034247775857
+        },
+        {
+          "trace_order": 75,
+          "time": 1.58125,
+          "ara_coordinate": 1.9714471162615954,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2659427990848191,
+          "direct_parent_activity": 0.36880485731365936
+        },
+        {
+          "trace_order": 75,
+          "time": 1.58125,
+          "ara_coordinate": 1.9714471162615959,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2659427990848191,
+          "direct_parent_activity": 0.36880485731365936
+        },
+        {
+          "trace_order": 75,
+          "time": 1.58125,
+          "ara_coordinate": 1.5581075355968332,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2659427990848191,
+          "direct_parent_activity": 0.36880485731365936
+        },
+        {
+          "trace_order": 75,
+          "time": 1.58125,
+          "ara_coordinate": 1.3977775193680484,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.2659427990848191,
+          "direct_parent_activity": 0.36880485731365936
+        },
+        {
+          "trace_order": 76,
+          "time": 1.5962036132812503,
+          "ara_coordinate": 1.9726616862353825,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26078556369320793,
+          "direct_parent_activity": 0.37138833246787323
+        },
+        {
+          "trace_order": 76,
+          "time": 1.5962036132812503,
+          "ara_coordinate": 1.9726616862353825,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26078556369320793,
+          "direct_parent_activity": 0.37138833246787323
+        },
+        {
+          "trace_order": 76,
+          "time": 1.5962036132812503,
+          "ara_coordinate": 1.5650438870183843,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26078556369320793,
+          "direct_parent_activity": 0.37138833246787323
+        },
+        {
+          "trace_order": 76,
+          "time": 1.5962036132812503,
+          "ara_coordinate": 1.4045370679709175,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.26078556369320793,
+          "direct_parent_activity": 0.37138833246787323
+        },
+        {
+          "trace_order": 77,
+          "time": 1.6117553710937502,
+          "ara_coordinate": 1.9738542852062244,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25551844968278725,
+          "direct_parent_activity": 0.3738682050926128
+        },
+        {
+          "trace_order": 77,
+          "time": 1.6117553710937502,
+          "ara_coordinate": 1.9738542852062246,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25551844968278725,
+          "direct_parent_activity": 0.3738682050926128
+        },
+        {
+          "trace_order": 77,
+          "time": 1.6117553710937502,
+          "ara_coordinate": 1.572073715053064,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25551844968278725,
+          "direct_parent_activity": 0.3738682050926128
+        },
+        {
+          "trace_order": 77,
+          "time": 1.6117553710937502,
+          "ara_coordinate": 1.411448811626789,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.25551844968278725,
+          "direct_parent_activity": 0.3738682050926128
+        },
+        {
+          "trace_order": 78,
+          "time": 1.6422607421875002,
+          "ara_coordinate": 1.9760040147626863,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24547161669791429,
+          "direct_parent_activity": 0.378125128373648
+        },
+        {
+          "trace_order": 78,
+          "time": 1.6422607421875002,
+          "ara_coordinate": 1.9760040147626863,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24547161669791429,
+          "direct_parent_activity": 0.378125128373648
+        },
+        {
+          "trace_order": 78,
+          "time": 1.6422607421875002,
+          "ara_coordinate": 1.5853304957426257,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24547161669791429,
+          "direct_parent_activity": 0.378125128373648
+        },
+        {
+          "trace_order": 78,
+          "time": 1.6422607421875002,
+          "ara_coordinate": 1.4246520292418938,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24547161669791429,
+          "direct_parent_activity": 0.378125128373648
+        },
+        {
+          "trace_order": 79,
+          "time": 1.6578125000000001,
+          "ara_coordinate": 1.977012273321196,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24049418478033022,
+          "direct_parent_activity": 0.37998945045368604
+        },
+        {
+          "trace_order": 79,
+          "time": 1.6578125000000001,
+          "ara_coordinate": 1.9770122733211957,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24049418478033022,
+          "direct_parent_activity": 0.37998945045368604
+        },
+        {
+          "trace_order": 79,
+          "time": 1.6578125000000001,
+          "ara_coordinate": 1.5918241357347631,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24049418478033022,
+          "direct_parent_activity": 0.37998945045368604
+        },
+        {
+          "trace_order": 79,
+          "time": 1.6578125000000001,
+          "ara_coordinate": 1.431200837229049,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.24049418478033022,
+          "direct_parent_activity": 0.37998945045368604
+        },
+        {
+          "trace_order": 80,
+          "time": 1.6727661132812501,
+          "ara_coordinate": 1.977931016699804,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.23579955752566903,
+          "direct_parent_activity": 0.38159025197197183
+        },
+        {
+          "trace_order": 80,
+          "time": 1.6727661132812501,
+          "ara_coordinate": 1.9779310166998039,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.23579955752566903,
+          "direct_parent_activity": 0.38159025197197183
+        },
+        {
+          "trace_order": 80,
+          "time": 1.6727661132812501,
+          "ara_coordinate": 1.5979038847373852,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.23579955752566903,
+          "direct_parent_activity": 0.38159025197197183
+        },
+        {
+          "trace_order": 80,
+          "time": 1.6727661132812501,
+          "ara_coordinate": 1.4373811459648553,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.23579955752566903,
+          "direct_parent_activity": 0.38159025197197183
+        },
+        {
+          "trace_order": 81,
+          "time": 1.703271484375,
+          "ara_coordinate": 1.9796647586275986,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22649765124817464,
+          "direct_parent_activity": 0.384283751786908
+        },
+        {
+          "trace_order": 81,
+          "time": 1.703271484375,
+          "ara_coordinate": 1.9796647586275984,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22649765124817464,
+          "direct_parent_activity": 0.384283751786908
+        },
+        {
+          "trace_order": 81,
+          "time": 1.703271484375,
+          "ara_coordinate": 1.6098216718691716,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22649765124817464,
+          "direct_parent_activity": 0.384283751786908
+        },
+        {
+          "trace_order": 81,
+          "time": 1.703271484375,
+          "ara_coordinate": 1.4496341417033312,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22649765124817464,
+          "direct_parent_activity": 0.384283751786908
+        },
+        {
+          "trace_order": 82,
+          "time": 1.7188232421875003,
+          "ara_coordinate": 1.9804824818554643,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22189602032533148,
+          "direct_parent_activity": 0.3853678028537965
+        },
+        {
+          "trace_order": 82,
+          "time": 1.7188232421875003,
+          "ara_coordinate": 1.9804824818554638,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22189602032533148,
+          "direct_parent_activity": 0.3853678028537965
+        },
+        {
+          "trace_order": 82,
+          "time": 1.7188232421875003,
+          "ara_coordinate": 1.615654376489737,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22189602032533148,
+          "direct_parent_activity": 0.3853678028537965
+        },
+        {
+          "trace_order": 82,
+          "time": 1.7188232421875003,
+          "ara_coordinate": 1.4556978762650912,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.22189602032533148,
+          "direct_parent_activity": 0.3853678028537965
+        },
+        {
+          "trace_order": 83,
+          "time": 1.7343750000000002,
+          "ara_coordinate": 1.9812595008238403,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21738805281608697,
+          "direct_parent_activity": 0.3862614331561011
+        },
+        {
+          "trace_order": 83,
+          "time": 1.7343750000000002,
+          "ara_coordinate": 1.9812595008238403,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21738805281608697,
+          "direct_parent_activity": 0.3862614331561011
+        },
+        {
+          "trace_order": 83,
+          "time": 1.7343750000000002,
+          "ara_coordinate": 1.6213280937013204,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21738805281608697,
+          "direct_parent_activity": 0.3862614331561011
+        },
+        {
+          "trace_order": 83,
+          "time": 1.7343750000000002,
+          "ara_coordinate": 1.4616386988171528,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.21738805281608697,
+          "direct_parent_activity": 0.3862614331561011
+        },
+        {
+          "trace_order": 84,
+          "time": 1.7648803710937502,
+          "ara_coordinate": 1.9826756627421456,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20881353892227855,
+          "direct_parent_activity": 0.38747659129697715
+        },
+        {
+          "trace_order": 84,
+          "time": 1.7648803710937502,
+          "ara_coordinate": 1.9826756627421456,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20881353892227855,
+          "direct_parent_activity": 0.38747659129697715
+        },
+        {
+          "trace_order": 84,
+          "time": 1.7648803710937502,
+          "ara_coordinate": 1.6320105571046484,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20881353892227855,
+          "direct_parent_activity": 0.38747659129697715
+        },
+        {
+          "trace_order": 84,
+          "time": 1.7648803710937502,
+          "ara_coordinate": 1.4729376237420768,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20881353892227855,
+          "direct_parent_activity": 0.38747659129697715
+        },
+        {
+          "trace_order": 85,
+          "time": 1.7798339843750002,
+          "ara_coordinate": 1.983322065773925,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20473795733042982,
+          "direct_parent_activity": 0.3878199103911231
+        },
+        {
+          "trace_order": 85,
+          "time": 1.7798339843750002,
+          "ara_coordinate": 1.983322065773925,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20473795733042982,
+          "direct_parent_activity": 0.3878199103911231
+        },
+        {
+          "trace_order": 85,
+          "time": 1.7798339843750002,
+          "ara_coordinate": 1.6370381173886037,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20473795733042982,
+          "direct_parent_activity": 0.3878199103911231
+        },
+        {
+          "trace_order": 85,
+          "time": 1.7798339843750002,
+          "ara_coordinate": 1.4783066252845285,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20473795733042982,
+          "direct_parent_activity": 0.3878199103911231
+        },
+        {
+          "trace_order": 86,
+          "time": 1.7953857421875001,
+          "ara_coordinate": 1.983963795778501,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20058687498736602,
+          "direct_parent_activity": 0.3880065900870298
+        },
+        {
+          "trace_order": 86,
+          "time": 1.7953857421875001,
+          "ara_coordinate": 1.983963795778501,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20058687498736602,
+          "direct_parent_activity": 0.3880065900870298
+        },
+        {
+          "trace_order": 86,
+          "time": 1.7953857421875001,
+          "ara_coordinate": 1.6421259719875372,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20058687498736602,
+          "direct_parent_activity": 0.3880065900870298
+        },
+        {
+          "trace_order": 86,
+          "time": 1.7953857421875001,
+          "ara_coordinate": 1.4837733757270588,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.20058687498736602,
+          "direct_parent_activity": 0.3880065900870298
+        },
+        {
+          "trace_order": 87,
+          "time": 1.82589111328125,
+          "ara_coordinate": 1.9851396404874084,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1926987513830922,
+          "direct_parent_activity": 0.38788601391397315
+        },
+        {
+          "trace_order": 87,
+          "time": 1.82589111328125,
+          "ara_coordinate": 1.9851396404874084,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1926987513830922,
+          "direct_parent_activity": 0.38788601391397315
+        },
+        {
+          "trace_order": 87,
+          "time": 1.82589111328125,
+          "ara_coordinate": 1.6517036702890375,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1926987513830922,
+          "direct_parent_activity": 0.38788601391397315
+        },
+        {
+          "trace_order": 87,
+          "time": 1.82589111328125,
+          "ara_coordinate": 1.494154963935895,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1926987513830922,
+          "direct_parent_activity": 0.38788601391397315
+        },
+        {
+          "trace_order": 88,
+          "time": 1.8414428710937503,
+          "ara_coordinate": 1.9857003214501097,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1888044674522801,
+          "direct_parent_activity": 0.38758583952028225
+        },
+        {
+          "trace_order": 88,
+          "time": 1.8414428710937503,
+          "ara_coordinate": 1.9857003214501097,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1888044674522801,
+          "direct_parent_activity": 0.38758583952028225
+        },
+        {
+          "trace_order": 88,
+          "time": 1.8414428710937503,
+          "ara_coordinate": 1.6563887747202293,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1888044674522801,
+          "direct_parent_activity": 0.38758583952028225
+        },
+        {
+          "trace_order": 88,
+          "time": 1.8414428710937503,
+          "ara_coordinate": 1.4992761312200742,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1888044674522801,
+          "direct_parent_activity": 0.38758583952028225
+        },
+        {
+          "trace_order": 89,
+          "time": 1.8563964843750003,
+          "ara_coordinate": 1.9862167669228235,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.18513924487670622,
+          "direct_parent_activity": 0.3871512849850058
+        },
+        {
+          "trace_order": 89,
+          "time": 1.8563964843750003,
+          "ara_coordinate": 1.9862167669228235,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.18513924487670622,
+          "direct_parent_activity": 0.3871512849850058
+        },
+        {
+          "trace_order": 89,
+          "time": 1.8563964843750003,
+          "ara_coordinate": 1.6607724429663704,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.18513924487670622,
+          "direct_parent_activity": 0.3871512849850058
+        },
+        {
+          "trace_order": 89,
+          "time": 1.8563964843750003,
+          "ara_coordinate": 1.5040930543294138,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.18513924487670622,
+          "direct_parent_activity": 0.3871512849850058
+        },
+        {
+          "trace_order": 90,
+          "time": 1.8875000000000002,
+          "ara_coordinate": 1.9872255242408443,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17775910852165078,
+          "direct_parent_activity": 0.3858088635704517
+        },
+        {
+          "trace_order": 90,
+          "time": 1.8875000000000002,
+          "ara_coordinate": 1.9872255242408443,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17775910852165078,
+          "direct_parent_activity": 0.3858088635704517
+        },
+        {
+          "trace_order": 90,
+          "time": 1.8875000000000002,
+          "ara_coordinate": 1.6695240880746438,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17775910852165078,
+          "direct_parent_activity": 0.3858088635704517
+        },
+        {
+          "trace_order": 90,
+          "time": 1.8875000000000002,
+          "ara_coordinate": 1.5137817942382037,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17775910852165078,
+          "direct_parent_activity": 0.3858088635704517
+        },
+        {
+          "trace_order": 91,
+          "time": 1.9024536132812502,
+          "ara_coordinate": 1.9876815407932005,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17432540981495065,
+          "direct_parent_activity": 0.3849621106465148
+        },
+        {
+          "trace_order": 91,
+          "time": 1.9024536132812502,
+          "ara_coordinate": 1.9876815407932003,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17432540981495065,
+          "direct_parent_activity": 0.3849621106465148
+        },
+        {
+          "trace_order": 91,
+          "time": 1.9024536132812502,
+          "ara_coordinate": 1.6735621503454696,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17432540981495065,
+          "direct_parent_activity": 0.3849621106465148
+        },
+        {
+          "trace_order": 91,
+          "time": 1.9024536132812502,
+          "ara_coordinate": 1.5182841726182363,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17432540981495065,
+          "direct_parent_activity": 0.3849621106465148
+        },
+        {
+          "trace_order": 92,
+          "time": 1.9180053710937501,
+          "ara_coordinate": 1.9881374417122433,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17083133996798516,
+          "direct_parent_activity": 0.38394941846542563
+        },
+        {
+          "trace_order": 92,
+          "time": 1.9180053710937501,
+          "ara_coordinate": 1.9881374417122433,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17083133996798516,
+          "direct_parent_activity": 0.38394941846542563
+        },
+        {
+          "trace_order": 92,
+          "time": 1.9180053710937501,
+          "ara_coordinate": 1.6776495474651534,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17083133996798516,
+          "direct_parent_activity": 0.38394941846542563
+        },
+        {
+          "trace_order": 92,
+          "time": 1.9180053710937501,
+          "ara_coordinate": 1.5228617286635353,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.17083133996798516,
+          "direct_parent_activity": 0.38394941846542563
+        },
+        {
+          "trace_order": 93,
+          "time": 1.9485107421875,
+          "ara_coordinate": 1.9889815582567796,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1642000672461911,
+          "direct_parent_activity": 0.3815913244953537
+        },
+        {
+          "trace_order": 93,
+          "time": 1.9485107421875,
+          "ara_coordinate": 1.9889815582567796,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1642000672461911,
+          "direct_parent_activity": 0.3815913244953537
+        },
+        {
+          "trace_order": 93,
+          "time": 1.9485107421875,
+          "ara_coordinate": 1.685347792426676,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1642000672461911,
+          "direct_parent_activity": 0.3815913244953537
+        },
+        {
+          "trace_order": 93,
+          "time": 1.9485107421875,
+          "ara_coordinate": 1.5315370740582417,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1642000672461911,
+          "direct_parent_activity": 0.3815913244953537
+        },
+        {
+          "trace_order": 94,
+          "time": 1.9640625000000003,
+          "ara_coordinate": 1.9893883162520207,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.16093000378732883,
+          "direct_parent_activity": 0.3802096710305432
+        },
+        {
+          "trace_order": 94,
+          "time": 1.9640625000000003,
+          "ara_coordinate": 1.9893883162520203,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.16093000378732883,
+          "direct_parent_activity": 0.3802096710305432
+        },
+        {
+          "trace_order": 94,
+          "time": 1.9640625000000003,
+          "ara_coordinate": 1.6891160465747737,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.16093000378732883,
+          "direct_parent_activity": 0.3802096710305432
+        },
+        {
+          "trace_order": 94,
+          "time": 1.9640625000000003,
+          "ara_coordinate": 1.535808649350858,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.16093000378732883,
+          "direct_parent_activity": 0.3802096710305432
+        },
+        {
+          "trace_order": 95,
+          "time": 1.9790161132812503,
+          "ara_coordinate": 1.9897655688714881,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.15785435085378657,
+          "direct_parent_activity": 0.3787731018214563
+        },
+        {
+          "trace_order": 95,
+          "time": 1.9790161132812503,
+          "ara_coordinate": 1.989765568871488,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.15785435085378657,
+          "direct_parent_activity": 0.3787731018214563
+        },
+        {
+          "trace_order": 95,
+          "time": 1.9790161132812503,
+          "ara_coordinate": 1.692643755524251,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.15785435085378657,
+          "direct_parent_activity": 0.3787731018214563
+        },
+        {
+          "trace_order": 95,
+          "time": 1.9790161132812503,
+          "ara_coordinate": 1.5398220265707234,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.15785435085378657,
+          "direct_parent_activity": 0.3787731018214563
+        },
+        {
+          "trace_order": 96,
+          "time": 2.009521484375,
+          "ara_coordinate": 1.9904962022392425,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1517832610220112,
+          "direct_parent_activity": 0.37553277507596333
+        },
+        {
+          "trace_order": 96,
+          "time": 2.009521484375,
+          "ara_coordinate": 1.990496202239242,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1517832610220112,
+          "direct_parent_activity": 0.37553277507596333
+        },
+        {
+          "trace_order": 96,
+          "time": 2.009521484375,
+          "ara_coordinate": 1.6995612068759849,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1517832610220112,
+          "direct_parent_activity": 0.37553277507596333
+        },
+        {
+          "trace_order": 96,
+          "time": 2.009521484375,
+          "ara_coordinate": 1.5477310742428663,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1517832610220112,
+          "direct_parent_activity": 0.37553277507596333
+        },
+        {
+          "trace_order": 97,
+          "time": 2.0250732421875,
+          "ara_coordinate": 1.990850068422513,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14879038873377942,
+          "direct_parent_activity": 0.373730423012197
+        },
+        {
+          "trace_order": 97,
+          "time": 2.0250732421875,
+          "ara_coordinate": 1.990850068422513,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14879038873377942,
+          "direct_parent_activity": 0.373730423012197
+        },
+        {
+          "trace_order": 97,
+          "time": 2.0250732421875,
+          "ara_coordinate": 1.7029493988457103,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14879038873377942,
+          "direct_parent_activity": 0.373730423012197
+        },
+        {
+          "trace_order": 97,
+          "time": 2.0250732421875,
+          "ara_coordinate": 1.5516231740935733,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14879038873377942,
+          "direct_parent_activity": 0.373730423012197
+        },
+        {
+          "trace_order": 98,
+          "time": 2.040625,
+          "ara_coordinate": 1.9911923141944352,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14586464614757147,
+          "direct_parent_activity": 0.3718328956871995
+        },
+        {
+          "trace_order": 98,
+          "time": 2.040625,
+          "ara_coordinate": 1.9911923141944352,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14586464614757147,
+          "direct_parent_activity": 0.3718328956871995
+        },
+        {
+          "trace_order": 98,
+          "time": 2.040625,
+          "ara_coordinate": 1.7062479790913874,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14586464614757147,
+          "direct_parent_activity": 0.3718328956871995
+        },
+        {
+          "trace_order": 98,
+          "time": 2.040625,
+          "ara_coordinate": 1.5554233123054635,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14586464614757147,
+          "direct_parent_activity": 0.3718328956871995
+        },
+        {
+          "trace_order": 99,
+          "time": 2.07113037109375,
+          "ara_coordinate": 1.9918323952609325,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14031526694589752,
+          "direct_parent_activity": 0.3678525510001612
+        },
+        {
+          "trace_order": 99,
+          "time": 2.07113037109375,
+          "ara_coordinate": 1.9918323952609325,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14031526694589752,
+          "direct_parent_activity": 0.3678525510001612
+        },
+        {
+          "trace_order": 99,
+          "time": 2.07113037109375,
+          "ara_coordinate": 1.7124686313645543,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14031526694589752,
+          "direct_parent_activity": 0.3678525510001612
+        },
+        {
+          "trace_order": 99,
+          "time": 2.07113037109375,
+          "ara_coordinate": 1.5626177232088043,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.14031526694589752,
+          "direct_parent_activity": 0.3678525510001612
+        },
+        {
+          "trace_order": 100,
+          "time": 2.086083984375,
+          "ara_coordinate": 1.9921321514898258,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1376841466179933,
+          "direct_parent_activity": 0.3657849549314062
+        },
+        {
+          "trace_order": 100,
+          "time": 2.086083984375,
+          "ara_coordinate": 1.9921321514898251,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1376841466179933,
+          "direct_parent_activity": 0.3657849549314062
+        },
+        {
+          "trace_order": 100,
+          "time": 2.086083984375,
+          "ara_coordinate": 1.7154021099284993,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1376841466179933,
+          "direct_parent_activity": 0.3657849549314062
+        },
+        {
+          "trace_order": 100,
+          "time": 2.086083984375,
+          "ara_coordinate": 1.5660222659028888,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.1376841466179933,
+          "direct_parent_activity": 0.3657849549314062
+        },
+        {
+          "trace_order": 101,
+          "time": 2.1016357421875,
+          "ara_coordinate": 1.9924348371190719,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.13500824598116437,
+          "direct_parent_activity": 0.36355918301430973
+        },
+        {
+          "trace_order": 101,
+          "time": 2.1016357421875,
+          "ara_coordinate": 1.9924348371190719,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.13500824598116437,
+          "direct_parent_activity": 0.36355918301430973
+        },
+        {
+          "trace_order": 101,
+          "time": 2.1016357421875,
+          "ara_coordinate": 1.718375381758973,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.13500824598116437,
+          "direct_parent_activity": 0.36355918301430973
+        },
+        {
+          "trace_order": 101,
+          "time": 2.1016357421875,
+          "ara_coordinate": 1.5694801944396826,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.13500824598116437,
+          "direct_parent_activity": 0.36355918301430973
+        },
+        {
+          "trace_order": 102,
+          "time": 2.13214111328125,
+          "ara_coordinate": 1.9930036664132293,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12993330682383467,
+          "direct_parent_activity": 0.3589863464391626
+        },
+        {
+          "trace_order": 102,
+          "time": 2.13214111328125,
+          "ara_coordinate": 1.993003666413229,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12993330682383467,
+          "direct_parent_activity": 0.3589863464391626
+        },
+        {
+          "trace_order": 102,
+          "time": 2.13214111328125,
+          "ara_coordinate": 1.7239872994208776,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12993330682383467,
+          "direct_parent_activity": 0.3589863464391626
+        },
+        {
+          "trace_order": 102,
+          "time": 2.13214111328125,
+          "ara_coordinate": 1.5760249707076794,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12993330682383467,
+          "direct_parent_activity": 0.3589863464391626
+        },
+        {
+          "trace_order": 103,
+          "time": 2.14769287109375,
+          "ara_coordinate": 1.993281886416566,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12743216501811364,
+          "direct_parent_activity": 0.3565579222387665
+        },
+        {
+          "trace_order": 103,
+          "time": 2.14769287109375,
+          "ara_coordinate": 1.993281886416566,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12743216501811364,
+          "direct_parent_activity": 0.3565579222387665
+        },
+        {
+          "trace_order": 103,
+          "time": 2.14769287109375,
+          "ara_coordinate": 1.7267406358173585,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12743216501811364,
+          "direct_parent_activity": 0.3565579222387665
+        },
+        {
+          "trace_order": 103,
+          "time": 2.14769287109375,
+          "ara_coordinate": 1.579243762065115,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12743216501811364,
+          "direct_parent_activity": 0.3565579222387665
+        },
+        {
+          "trace_order": 104,
+          "time": 2.162646484375,
+          "ara_coordinate": 1.9935424487034201,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12508043610944533,
+          "direct_parent_activity": 0.35416608721303233
+        },
+        {
+          "trace_order": 104,
+          "time": 2.162646484375,
+          "ara_coordinate": 1.9935424487034203,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12508043610944533,
+          "direct_parent_activity": 0.35416608721303233
+        },
+        {
+          "trace_order": 104,
+          "time": 2.162646484375,
+          "ara_coordinate": 1.7293223462306462,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12508043610944533,
+          "direct_parent_activity": 0.35416608721303233
+        },
+        {
+          "trace_order": 104,
+          "time": 2.162646484375,
+          "ara_coordinate": 1.582266000292486,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12508043610944533,
+          "direct_parent_activity": 0.35416608721303233
+        },
+        {
+          "trace_order": 105,
+          "time": 2.19375,
+          "ara_coordinate": 1.9940641365587457,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12035097531961464,
+          "direct_parent_activity": 0.34902811575041076
+        },
+        {
+          "trace_order": 105,
+          "time": 2.19375,
+          "ara_coordinate": 1.9940641365587453,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12035097531961464,
+          "direct_parent_activity": 0.34902811575041076
+        },
+        {
+          "trace_order": 105,
+          "time": 2.19375,
+          "ara_coordinate": 1.7344944389247123,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12035097531961464,
+          "direct_parent_activity": 0.34902811575041076
+        },
+        {
+          "trace_order": 105,
+          "time": 2.19375,
+          "ara_coordinate": 1.5883307504435777,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.12035097531961464,
+          "direct_parent_activity": 0.34902811575041076
+        },
+        {
+          "trace_order": 106,
+          "time": 2.20870361328125,
+          "ara_coordinate": 1.994305890201654,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11815282198129998,
+          "direct_parent_activity": 0.34648669541990096
+        },
+        {
+          "trace_order": 106,
+          "time": 2.20870361328125,
+          "ara_coordinate": 1.9943058902016542,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11815282198129998,
+          "direct_parent_activity": 0.34648669541990096
+        },
+        {
+          "trace_order": 106,
+          "time": 2.20870361328125,
+          "ara_coordinate": 1.7368898077996184,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11815282198129998,
+          "direct_parent_activity": 0.34648669541990096
+        },
+        {
+          "trace_order": 106,
+          "time": 2.20870361328125,
+          "ara_coordinate": 1.5911432578155444,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11815282198129998,
+          "direct_parent_activity": 0.34648669541990096
+        },
+        {
+          "trace_order": 107,
+          "time": 2.22425537109375,
+          "ara_coordinate": 1.9945515230408561,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11591725355724125,
+          "direct_parent_activity": 0.34379930387145713
+        },
+        {
+          "trace_order": 107,
+          "time": 2.22425537109375,
+          "ara_coordinate": 1.9945515230408564,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11591725355724125,
+          "direct_parent_activity": 0.34379930387145713
+        },
+        {
+          "trace_order": 107,
+          "time": 2.22425537109375,
+          "ara_coordinate": 1.7393207765202034,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11591725355724125,
+          "direct_parent_activity": 0.34379930387145713
+        },
+        {
+          "trace_order": 107,
+          "time": 2.22425537109375,
+          "ara_coordinate": 1.5939993703637672,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11591725355724125,
+          "direct_parent_activity": 0.34379930387145713
+        },
+        {
+          "trace_order": 108,
+          "time": 2.2547607421875,
+          "ara_coordinate": 1.9950173979012786,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11167717197681035,
+          "direct_parent_activity": 0.3384099586727733
+        },
+        {
+          "trace_order": 108,
+          "time": 2.2547607421875,
+          "ara_coordinate": 1.9950173979012786,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11167717197681035,
+          "direct_parent_activity": 0.3384099586727733
+        },
+        {
+          "trace_order": 108,
+          "time": 2.2547607421875,
+          "ara_coordinate": 1.7439181992186101,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11167717197681035,
+          "direct_parent_activity": 0.3384099586727733
+        },
+        {
+          "trace_order": 108,
+          "time": 2.2547607421875,
+          "ara_coordinate": 1.5994040470855677,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.11167717197681035,
+          "direct_parent_activity": 0.3384099586727733
+        },
+        {
+          "trace_order": 109,
+          "time": 2.2703125,
+          "ara_coordinate": 1.9952473537464006,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10958724691822805,
+          "direct_parent_activity": 0.33560891149609784
+        },
+        {
+          "trace_order": 109,
+          "time": 2.2703125,
+          "ara_coordinate": 1.9952473537464004,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10958724691822805,
+          "direct_parent_activity": 0.33560891149609784
+        },
+        {
+          "trace_order": 109,
+          "time": 2.2703125,
+          "ara_coordinate": 1.7461784150159545,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10958724691822805,
+          "direct_parent_activity": 0.33560891149609784
+        },
+        {
+          "trace_order": 109,
+          "time": 2.2703125,
+          "ara_coordinate": 1.6020617737475102,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10958724691822805,
+          "direct_parent_activity": 0.33560891149609784
+        },
+        {
+          "trace_order": 110,
+          "time": 2.28526611328125,
+          "ara_coordinate": 1.995463998025694,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10762195740995034,
+          "direct_parent_activity": 0.332885477645619
+        },
+        {
+          "trace_order": 110,
+          "time": 2.28526611328125,
+          "ara_coordinate": 1.9954639980256939,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10762195740995034,
+          "direct_parent_activity": 0.332885477645619
+        },
+        {
+          "trace_order": 110,
+          "time": 2.28526611328125,
+          "ara_coordinate": 1.7483006680363617,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10762195740995034,
+          "direct_parent_activity": 0.332885477645619
+        },
+        {
+          "trace_order": 110,
+          "time": 2.28526611328125,
+          "ara_coordinate": 1.6045570863683358,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10762195740995034,
+          "direct_parent_activity": 0.332885477645619
+        },
+        {
+          "trace_order": 111,
+          "time": 2.315771484375,
+          "ara_coordinate": 1.9958933258871328,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10374316612404906,
+          "direct_parent_activity": 0.3272495777022195
+        },
+        {
+          "trace_order": 111,
+          "time": 2.315771484375,
+          "ara_coordinate": 1.9958933258871328,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10374316612404906,
+          "direct_parent_activity": 0.3272495777022195
+        },
+        {
+          "trace_order": 111,
+          "time": 2.315771484375,
+          "ara_coordinate": 1.752481270849881,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10374316612404906,
+          "direct_parent_activity": 0.3272495777022195
+        },
+        {
+          "trace_order": 111,
+          "time": 2.315771484375,
+          "ara_coordinate": 1.6094703278171518,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10374316612404906,
+          "direct_parent_activity": 0.3272495777022195
+        },
+        {
+          "trace_order": 112,
+          "time": 2.3313232421875,
+          "ara_coordinate": 1.9961061374012665,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10183101475499774,
+          "direct_parent_activity": 0.32434066138374334
+        },
+        {
+          "trace_order": 112,
+          "time": 2.3313232421875,
+          "ara_coordinate": 1.996106137401267,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10183101475499774,
+          "direct_parent_activity": 0.32434066138374334
+        },
+        {
+          "trace_order": 112,
+          "time": 2.3313232421875,
+          "ara_coordinate": 1.7545388497498422,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10183101475499774,
+          "direct_parent_activity": 0.32434066138374334
+        },
+        {
+          "trace_order": 112,
+          "time": 2.3313232421875,
+          "ara_coordinate": 1.6118865092643109,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.10183101475499774,
+          "direct_parent_activity": 0.32434066138374334
+        },
+        {
+          "trace_order": 113,
+          "time": 2.346875,
+          "ara_coordinate": 1.9963151488354327,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09996155989420875,
+          "direct_parent_activity": 0.32141130706707965
+        },
+        {
+          "trace_order": 113,
+          "time": 2.346875,
+          "ara_coordinate": 1.9963151488354327,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09996155989420875,
+          "direct_parent_activity": 0.32141130706707965
+        },
+        {
+          "trace_order": 113,
+          "time": 2.346875,
+          "ara_coordinate": 1.7565487096181163,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09996155989420875,
+          "direct_parent_activity": 0.32141130706707965
+        },
+        {
+          "trace_order": 113,
+          "time": 2.346875,
+          "ara_coordinate": 1.614244787495472,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09996155989420875,
+          "direct_parent_activity": 0.32141130706707965
+        },
+        {
+          "trace_order": 114,
+          "time": 2.37738037109375,
+          "ara_coordinate": 1.9967148819310931,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0964146764476905,
+          "direct_parent_activity": 0.3156159771430834
+        },
+        {
+          "trace_order": 114,
+          "time": 2.37738037109375,
+          "ara_coordinate": 1.996714881931093,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0964146764476905,
+          "direct_parent_activity": 0.3156159771430834
+        },
+        {
+          "trace_order": 114,
+          "time": 2.37738037109375,
+          "ara_coordinate": 1.760358213195968,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0964146764476905,
+          "direct_parent_activity": 0.3156159771430834
+        },
+        {
+          "trace_order": 114,
+          "time": 2.37738037109375,
+          "ara_coordinate": 1.6187078979955165,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0964146764476905,
+          "direct_parent_activity": 0.3156159771430834
+        },
+        {
+          "trace_order": 115,
+          "time": 2.392333984375,
+          "ara_coordinate": 1.9969062229136043,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09473231278209539,
+          "direct_parent_activity": 0.3127558707343334
+        },
+        {
+          "trace_order": 115,
+          "time": 2.392333984375,
+          "ara_coordinate": 1.9969062229136043,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09473231278209539,
+          "direct_parent_activity": 0.3127558707343334
+        },
+        {
+          "trace_order": 115,
+          "time": 2.392333984375,
+          "ara_coordinate": 1.7621639256150328,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09473231278209539,
+          "direct_parent_activity": 0.3127558707343334
+        },
+        {
+          "trace_order": 115,
+          "time": 2.392333984375,
+          "ara_coordinate": 1.6208194928039938,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.09473231278209539,
+          "direct_parent_activity": 0.3127558707343334
+        },
+        {
+          "trace_order": 116,
+          "time": 2.4078857421875,
+          "ara_coordinate": 1.9971022334959765,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.093020716905534,
+          "direct_parent_activity": 0.309770959594699
+        },
+        {
+          "trace_order": 116,
+          "time": 2.4078857421875,
+          "ara_coordinate": 1.9971022334959765,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.093020716905534,
+          "direct_parent_activity": 0.309770959594699
+        },
+        {
+          "trace_order": 116,
+          "time": 2.4078857421875,
+          "ara_coordinate": 1.7640005646351482,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.093020716905534,
+          "direct_parent_activity": 0.309770959594699
+        },
+        {
+          "trace_order": 116,
+          "time": 2.4078857421875,
+          "ara_coordinate": 1.6229640884173866,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.093020716905534,
+          "direct_parent_activity": 0.309770959594699
+        },
+        {
+          "trace_order": 117,
+          "time": 2.43839111328125,
+          "ara_coordinate": 1.9974785117512215,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08977254853860023,
+          "direct_parent_activity": 0.30389358265216593
+        },
+        {
+          "trace_order": 117,
+          "time": 2.43839111328125,
+          "ara_coordinate": 1.9974785117512215,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08977254853860023,
+          "direct_parent_activity": 0.30389358265216593
+        },
+        {
+          "trace_order": 117,
+          "time": 2.43839111328125,
+          "ara_coordinate": 1.7674858247400524,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08977254853860023,
+          "direct_parent_activity": 0.30389358265216593
+        },
+        {
+          "trace_order": 117,
+          "time": 2.43839111328125,
+          "ara_coordinate": 1.6270233046398415,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08977254853860023,
+          "direct_parent_activity": 0.30389358265216593
+        },
+        {
+          "trace_order": 118,
+          "time": 2.45394287109375,
+          "ara_coordinate": 1.9976664634482701,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0881705197282737,
+          "direct_parent_activity": 0.3008899863400584
+        },
+        {
+          "trace_order": 118,
+          "time": 2.45394287109375,
+          "ara_coordinate": 1.99766646344827,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0881705197282737,
+          "direct_parent_activity": 0.3008899863400584
+        },
+        {
+          "trace_order": 118,
+          "time": 2.45394287109375,
+          "ara_coordinate": 1.7692052241781764,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0881705197282737,
+          "direct_parent_activity": 0.3008899863400584
+        },
+        {
+          "trace_order": 118,
+          "time": 2.45394287109375,
+          "ara_coordinate": 1.6290199763475215,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.0881705197282737,
+          "direct_parent_activity": 0.3008899863400584
+        },
+        {
+          "trace_order": 119,
+          "time": 2.468896484375,
+          "ara_coordinate": 1.997844898712967,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08666335164848571,
+          "direct_parent_activity": 0.29799972241259864
+        },
+        {
+          "trace_order": 119,
+          "time": 2.468896484375,
+          "ara_coordinate": 1.997844898712967,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08666335164848571,
+          "direct_parent_activity": 0.29799972241259864
+        },
+        {
+          "trace_order": 119,
+          "time": 2.468896484375,
+          "ara_coordinate": 1.7708234135330936,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08666335164848571,
+          "direct_parent_activity": 0.29799972241259864
+        },
+        {
+          "trace_order": 119,
+          "time": 2.468896484375,
+          "ara_coordinate": 1.6308950370852378,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08666335164848571,
+          "direct_parent_activity": 0.29799972241259864
+        },
+        {
+          "trace_order": 120,
+          "time": 2.5,
+          "ara_coordinate": 1.99820939371217,
+          "series": "Direct parent",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08362952596310105,
+          "direct_parent_activity": 0.29198833481663794
+        },
+        {
+          "trace_order": 120,
+          "time": 2.5,
+          "ara_coordinate": 1.9982093937121705,
+          "series": "Frozen operator",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08362952596310105,
+          "direct_parent_activity": 0.29198833481663794
+        },
+        {
+          "trace_order": 120,
+          "time": 2.5,
+          "ara_coordinate": 1.7740835399355355,
+          "series": "Naive child mean",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08362952596310105,
+          "direct_parent_activity": 0.29198833481663794
+        },
+        {
+          "trace_order": 120,
+          "time": 2.5,
+          "ara_coordinate": 1.6346590249223372,
+          "series": "Internal transfer retained",
+          "model": "Free Gaussian probability",
+          "internal_handover": 0.08362952596310105,
+          "direct_parent_activity": 0.29198833481663794
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "src-child-parent-composition",
+      "label": "Frozen ARA child-parent composition test",
+      "path": "analysis/physics_ladder/ara_child_parent_composition_test.py",
+      "query": {
+        "engine": "portable-snapshot",
+        "language": "sql",
+        "description": "Deterministic analytic classical-wave, transmission-line and free-Gaussian probability-current calculations produced by the named Python source, then selected from the bounded report snapshot.",
+        "sql": "SELECT * FROM snapshot.headline_metrics; SELECT * FROM snapshot.model_summary ORDER BY model; SELECT * FROM snapshot.method_errors ORDER BY model, method; SELECT * FROM snapshot.quantum_trace ORDER BY time, series;",
+        "tables_used": [
+          "analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_SUMMARY.csv",
+          "analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_BOUNDED_SAMPLE.csv"
+        ],
+        "filters": [
+          "4,097 deterministic time samples per model",
+          "exclude only parent or child activity at or below 1e-12",
+          "no smoothing, fitting, Fourier decomposition or learned coefficients",
+          "quantum Gaussian packet retained as holdout"
+        ],
+        "metric_definitions": [
+          "x_i = 2 R_i / (A_i + R_i)",
+          "I = absolute signed flux through the shared child interface",
+          "x_parent = 2(sum R_i - I)/(sum T_i - 2I)",
+          "errors compare predicted parent ARA with direct outer-boundary ARA"
+        ]
+      }
+    }
+  ]
+}

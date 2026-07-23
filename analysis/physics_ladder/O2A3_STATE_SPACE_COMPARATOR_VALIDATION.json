@@ -1,0 +1,144 @@
+{
+  "test": "O2-A3 ARA fixed lineage versus causal state-space tracking",
+  "validated_at": "2026-07-23",
+  "checks_passed": 12,
+  "checks_total": 12,
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "protocol_hash",
+      "passed": true,
+      "detail": "ab0b88bb9c966f2a72544015e13d724ee4aa577e99b573e01671dfa210063fc7"
+    },
+    {
+      "name": "fidelity_hash",
+      "passed": true,
+      "detail": "6435cbe421e6ff7f00b9cf9fef693445b34e2f1ac7643f6f977b94e17a1faf59"
+    },
+    {
+      "name": "artifact_row_counts",
+      "passed": true,
+      "detail": {
+        "trials": 1920,
+        "development": 63,
+        "aggregates": 60,
+        "waveforms": 405
+      }
+    },
+    {
+      "name": "development_selection",
+      "passed": true,
+      "detail": {
+        "alpha": 0.0,
+        "beta": 0.001
+      }
+    },
+    {
+      "name": "primary_counts",
+      "passed": true,
+      "detail": 160
+    },
+    {
+      "name": "primary_ara_metrics",
+      "passed": true,
+      "detail": {
+        "correlation": 0.7616067133693517,
+        "nrmse": 0.16456825618714807,
+        "sign_accuracy": 0.9051383399209486,
+        "integrated_error": 0.11751276622502518
+      }
+    },
+    {
+      "name": "primary_state_space_metrics",
+      "passed": true,
+      "detail": {
+        "correlation": 0.6872632076065313,
+        "nrmse": 0.2349187811279591,
+        "sign_accuracy": 0.8079239600978732,
+        "integrated_error": 0.03799041091202443
+      }
+    },
+    {
+      "name": "absolute_status",
+      "passed": true,
+      "detail": {
+        "correlation": true,
+        "nrmse": true,
+        "sign_accuracy": true,
+        "integrated_error": true
+      }
+    },
+    {
+      "name": "comparative_status",
+      "passed": true,
+      "detail": {
+        "status": "MIXED",
+        "ara_nrmse_relative_improvement": 0.29946743552398836,
+        "correlation_difference": 0.07434350576282045,
+        "ara_integrated_error": 0.11751276622502518,
+        "state_space_integrated_error": 0.03799041091202443
+      }
+    },
+    {
+      "name": "paired_direction",
+      "passed": true,
+      "detail": {
+        "ara_correlation_wins": 32,
+        "ara_nrmse_wins": 32,
+        "ara_integral_wins": 0
+      }
+    },
+    {
+      "name": "direct_quantum_reproduction",
+      "passed": true,
+      "detail": {
+        "ara": {
+          "sign_accuracy": 0.9105966497270845,
+          "correlation": 0.7923133652030009,
+          "nrmse": 0.16208667081208342,
+          "integrated_error": 0.13877982458250943
+        },
+        "state_space": {
+          "sign_accuracy": 0.8164878599661208,
+          "correlation": 0.6974730184882292,
+          "nrmse": 0.23712036793767308,
+          "integrated_error": 0.037938248884074925
+        }
+      }
+    },
+    {
+      "name": "secondary_target_identifiability_warning",
+      "passed": true,
+      "detail": {
+        "remaining_peak_fraction_after_scoring_start": 0.0022926064199454994
+      }
+    }
+  ],
+  "post_hoc_descriptive": {
+    "paired_quantum_12db": {
+      "n": 32,
+      "median_correlation_gain_ara": 0.06583358444447268,
+      "correlation_gain_90_bootstrap_interval": [
+        0.06097201712643596,
+        0.08020619162287357
+      ],
+      "median_nrmse_reduction_ara": 0.0730455446950103,
+      "nrmse_reduction_90_bootstrap_interval": [
+        0.06744195470949013,
+        0.07570817181871692
+      ],
+      "median_integrated_error_reduction_ara": -0.07674911179572505,
+      "integrated_error_reduction_90_bootstrap_interval": [
+        -0.08564363676520073,
+        -0.07126033286832692
+      ]
+    }
+  },
+  "artifact_sha256": {
+    "results": "e7d9c51ebfc8ad237a32d232285a9f2b3aa9dbc395c195f268131b21d33feede",
+    "development": "6e4ed84cc1d9330a88e14e3bbf4fad26476215ea4620badcb73c84cdbf84e372",
+    "trials": "7bdc3deaf6a481274e585c8f3e0e7277fcccfa729c8532d3af52d0918a103299",
+    "aggregates": "7a8f10d7a72c630b4ddacda2338d5dd1bf78601a9c05470d69994c446c51d33f",
+    "waveforms": "3f1c0bb11217a205c22705117bcefb52c97705ff2415d7e5392ff5c1468c0ddc"
+  }
+}

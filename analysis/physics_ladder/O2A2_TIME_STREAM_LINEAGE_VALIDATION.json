@@ -1,0 +1,123 @@
+{
+  "test": "O2-A2 declared-child downstream time-stream lineage",
+  "validated_at": "2026-07-23",
+  "checks_passed": 12,
+  "checks_total": 12,
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "protocol_hash",
+      "passed": true,
+      "detail": "bea32f164f3d2dd3f4df211c5f7bca5b630c390bff9a211b3916659e54f5f712"
+    },
+    {
+      "name": "fidelity_hash",
+      "passed": true,
+      "detail": "3437518df06a178a549b4cedddea119545e79f77f2763d908bd65c7e1967d777"
+    },
+    {
+      "name": "artifact_row_counts",
+      "passed": true,
+      "detail": "trials=2016, aggregates=126, waveforms=549"
+    },
+    {
+      "name": "development_selection",
+      "passed": true,
+      "detail": "selected derivative=0.04, half-life=0.02, objective=0.3537671909178767"
+    },
+    {
+      "name": "primary_method_counts",
+      "passed": true,
+      "detail": "{\"compressed_parent\": 32, \"fixed_child_no_memory\": 32, \"fixed_time_lineage\": 32, \"offline_centered_child\": 32, \"repeated_parent_reselection\": 32, \"wrong_fixed_child\": 32, \"zero_other\": 32}"
+    },
+    {
+      "name": "independent_primary_metrics",
+      "passed": true,
+      "detail": "{\"correlation_advantage\": 0.060033898010361963, \"median_fixed_correlation\": 0.763798351414211, \"median_fixed_integrated_error\": 0.3538144276708509, \"median_fixed_nrmse\": 0.1681193260765587, \"median_fixed_sign_accuracy\": 0.9334656541249569, \"median_reselection_correlation\": 0.7037644534038491, \"median_reselection_nrmse\": 0.18856430261373414, \"median_zero_other_nrmse\": 0.21688970368611812, \"nrmse_relative_improvement\": 0.10842442739045943}"
+    },
+    {
+      "name": "independent_system_comparison",
+      "passed": true,
+      "detail": "{\"Open two-level probability\": {\"fixed\": 0.17424605949658134, \"reselection\": 0.23445880762957858}, \"Resistive capacitor coupling\": {\"fixed\": 0.12927306047460443, \"reselection\": 0.13499493460709489}}"
+    },
+    {
+      "name": "independent_gates",
+      "passed": true,
+      "detail": "{\"beats_reselection_in_both_systems\": true, \"beats_zero_other\": true, \"correlation\": true, \"correlation_advantage\": false, \"integrated_error\": false, \"nrmse\": true, \"nrmse_relative_improvement\": true, \"sign\": true}"
+    },
+    {
+      "name": "independent_status",
+      "passed": true,
+      "detail": "NOT SUPPORTED"
+    },
+    {
+      "name": "direct_representative_reproduction",
+      "passed": true,
+      "detail": "{\"correlation\": 0.8084758256762387, \"integrated_error\": 1.6682877410017305, \"nrmse\": 0.1225220032446172, \"sign_accuracy\": 1.0}"
+    },
+    {
+      "name": "direct_reselection_path",
+      "passed": true,
+      "detail": "occupancy=0.14684440741512184, switches=29"
+    },
+    {
+      "name": "aggregate_spot_check",
+      "passed": true,
+      "detail": "median_nrmse=0.12927306047460443"
+    }
+  ],
+  "post_hoc_paired_descriptive": {
+    "pooled": {
+      "n": 32,
+      "median_paired_correlation_gain": 0.04118489036270423,
+      "correlation_gain_90_bootstrap_interval": [
+        0.02378476913158678,
+        0.050626286778412966
+      ],
+      "correlation_win_rate": 0.875,
+      "median_paired_nrmse_reduction": 0.018023947878786625,
+      "nrmse_reduction_90_bootstrap_interval": [
+        0.01211850277868981,
+        0.04051211490737311
+      ],
+      "nrmse_win_rate": 0.9375
+    },
+    "Resistive capacitor coupling": {
+      "n": 16,
+      "median_paired_correlation_gain": 0.02373136350574273,
+      "correlation_gain_90_bootstrap_interval": [
+        0.01587876200400773,
+        0.03611059768764757
+      ],
+      "correlation_win_rate": 0.75,
+      "median_paired_nrmse_reduction": 0.007074190656026422,
+      "nrmse_reduction_90_bootstrap_interval": [
+        0.0034267164099334377,
+        0.011855676055812309
+      ],
+      "nrmse_win_rate": 0.875
+    },
+    "Open two-level probability": {
+      "n": 16,
+      "median_paired_correlation_gain": 0.0815968385674593,
+      "correlation_gain_90_bootstrap_interval": [
+        0.05356557993876568,
+        0.1140256198203049
+      ],
+      "correlation_win_rate": 1.0,
+      "median_paired_nrmse_reduction": 0.0455572491087408,
+      "nrmse_reduction_90_bootstrap_interval": [
+        0.040569611754657536,
+        0.06490993088648096
+      ],
+      "nrmse_win_rate": 1.0
+    }
+  },
+  "artifact_sha256": {
+    "results": "adb33cef1648029e354f777c161064d4f64a06456a8ae6d78995e17f098d5c94",
+    "trials": "338faca5738939713d46c3178a1450f883e0a94d6603946687778fe23ed980fc",
+    "aggregates": "9021f8ce4458ec6815e3185078b99b9d7f36fc10a25f6fa0675199038a703658",
+    "development": "85b6c6749e4ad7a96a262c20676312dddb6150b5c8241ee8fa3758cbe739e931",
+    "waveforms": "c884dc6579d67b59d6193721f06c3e62ffce34e0ba3c9c6a941cffbc0fbb9887"
+  }
+}

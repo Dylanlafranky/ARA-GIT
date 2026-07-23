@@ -79,6 +79,20 @@ and verify them with `analysis/primes/reproduce_pn35_pn36_csvs.py`; read
 `analysis/primes/PN35_PN36_CSV_REPRODUCTION.md` for the exact fresh-clone path. Do not treat the absence of those
 derived CSVs from Git as missing primary evidence when the hash-verified rebuild succeeds.
 
+**Adjacent-prime ARA:** PN7B already measured `x=2*g_out/(g_in+g_out)` at every internal prime in five complete
+windows. The 23 July exact combined inventory covers `44,360,409` nodes: its mean is almost exactly `1`, while only
+`2.1178%` of individual nodes equal `1`. Read
+`analysis/primes/PN7B_ALL_MEASURED_PRIME_ARA_NOTE_2026-07-23.md` before describing primes as locally ridge-balanced.
+This lateral spacing coordinate is not the same axis as factor-survival non-closure.
+
+**Full prime-child ARA:** PN37 opens every prime in the PN10B interval against every lower prime gate through
+`sqrt(p)`: `286,253,917` child relations. The pooled whole is `1.0000472`, but mean individual distance from the
+ridge is `0.4997970`; all odd-gate children are asymmetric. This is a strong parent-cancellation/coarse-graining
+example, not a new prime theorem. Its controlled child-level Phi comparison failed because Phi was negligible and
+did not beat matched quarter/third controls. Read
+`analysis/primes/PN37_FULL_CHILD_ARA_PHI_REPORT_2026-07-23.md` before treating the parent ridge as child quiet or
+moving the prime Phi claim to this factor-child grain.
+
 **Energy-budget rule:** Dylan has Long COVID with ME/CFS. Preserve his limited
 cognitive energy for geometry walking, orientation, and conceptual correction.
 The AI coworker should proactively handle rolling capture, mathematical

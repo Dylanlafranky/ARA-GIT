@@ -1,0 +1,43 @@
+{
+  "analysis": "Exact Hamiltonian harmonic-oscillator to ARA allocation crosswalk",
+  "status": {
+    "hamiltonian_circle": "exact after the declared coordinate rescaling",
+    "total_2_allocation": "exact normalized accounting identity",
+    "ara_interpretation": "candidate typed appearance of the ARA geometry",
+    "universal_fractal_claim": "not tested by this calculation"
+  },
+  "parameters": {
+    "mass_kg": 2.0,
+    "spring_constant_n_per_m": 8.0,
+    "total_energy_j": 10.0,
+    "omega_rad_per_s": 2.0,
+    "period_seconds": 3.141592653589793,
+    "phase_space_radius_sqrt_joule": 4.47213595499958
+  },
+  "definitions": {
+    "Q": "sqrt(k) * q",
+    "P": "p / sqrt(m)",
+    "circle": "Q^2 + P^2 = 2H",
+    "configuration_allocation": "t_Q = 2V/H = 2Q^2/(Q^2+P^2)",
+    "traversal_allocation": "t_P = 2K/H = 2P^2/(Q^2+P^2)",
+    "ara_coordinate": "x_H = t_P",
+    "orientation_reversal": "x_H' = 2 - x_H = t_Q",
+    "direction_field": "dx_H/dt = -4 omega P Q/(Q^2+P^2)"
+  },
+  "maximum_absolute_errors": {
+    "hamiltonian_j": 3.552713678800501e-15,
+    "circle_j": 7.105427357601002e-15,
+    "total_2": 8.881784197001252e-16,
+    "hamilton_q_equation": 0.0,
+    "hamilton_p_equation": 0.0
+  },
+  "important_interpretive_limits": [
+    "x_H is an energy-allocation projection, not the earlier rise/fall-duration statistic.",
+    "x_H=1 means equal kinetic and potential energy; it is not force cancellation.",
+    "x_H=0 and x_H=2 are regular oscillator handovers, not mathematical divergences.",
+    "The 0-2 diameter loses the signs of Q and P, so quadrant or direction must be retained.",
+    "The calculation establishes a crosswalk, not universal ARA fractality or quantum gravity."
+  ],
+  "row_count": 17,
+  "csv": "HAMILTON_ARA_HARMONIC_OSCILLATOR_POINTS.csv"
+}

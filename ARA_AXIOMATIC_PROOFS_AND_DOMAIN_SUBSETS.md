@@ -534,6 +534,107 @@ The geometric embedding is exact once \(R_k,x,n\) are declared. The physical cla
 actually follows this embedding remains testable: the orientations, rung radii and edges must be inferred
 independently rather than chosen to make a sphere after inspection.
 
+#### Corollary 2.5b — A two-channel coherency state generates every ARA diameter projection
+
+At a declared rung (k), let the selected two-channel occurrence be
+
+\[
+z_k=(A_k,B_k)^\mathsf T,
+\qquad
+G_k=\langle z_kz_k^\dagger\rangle,
+\qquad
+T_k=\operatorname{tr}G_k>0.
+\]
+
+Define
+
+\[
+\boxed{
+s_k=\frac1{T_k}
+\left(2\Re G_{AB},,2\Im G_{AB},,G_{BB}-G_{AA}\right)
+}
+\tag{2d-1}
+\]
+
+and, for any unit measurement axis (alphain S^2),
+
+\[
+\boxed{x_{k,\alpha}=1+\alpha\cdot s_k.}
+\tag{2d-2}
+\]
+
+Then (|s_k|\le1), (x_{k,\alpha}in[0,2]), and
+
+\[
+x_{k,-\alpha}=2-x_{k,\alpha}.
+\]
+
+**Proof.** Positive semidefiniteness gives (det G_k\ge0). Direct expansion yields
+
+\[
+1-\|s_k\|^2=\frac{4\det G_k}{T_k^2}\ge0.
+\]
+
+Hence (|\alpha\cdot s_k|\le1), proving the interval bound. Axis reversal changes the sign of the dot product,
+which gives the mirror identity. (square)
+
+On the original population axis (alpha=(0,0,1)),
+
+\[
+x_{k,\alpha}=2\frac{G_{BB}}{T_k}.
+\]
+
+For a rotated axis, the same formula compares rotated superposition modes and therefore includes the retained
+coherence/relative-phase relation. Dimensional allocations and normalized TE-ARA allocations are
+
+\[
+Q_B=\frac{T_kx}{2},\quad Q_A=\frac{T_k(2-x)}2,
+\qquad
+t_B=\frac{2Q_B}{T_k}=x,\quad t_A=\frac{2Q_A}{T_k}=2-x,
+\]
+
+so (t_A+t_B=2) exactly.
+
+**Plain explanation.** Two channel strengths plus their relation generate one point inside a state ball. Looking
+through that point along any chosen direction produces an ARA diameter. The same state can be at the ridge on one
+axis and at a pole on another. The physical amount (T_k) and the normalized two-unit TE-ARA allocation remain
+separate, typed quantities.
+
+#### Corollary 2.5c — Exact incoherent averaging and coherent relation closure
+
+For separately mixed child coherency matrices,
+
+\[
+G_P=\sum_iG_i
+\quad\Longrightarrow\quad
+s_P=\frac{\sum_iT_is_i}{\sum_iT_i},
+\qquad
+x_{P,\alpha}=\frac{\sum_iT_ix_{i,\alpha}}{\sum_iT_i}.
+\tag{2d-3}
+\]
+
+If amplitudes combine coherently before measurement, (z_P=\sum_i z_i), then
+
+\[
+\boxed{
+G_P
+=
+\underbrace{\sum_i z_iz_i^\dagger}_{\text{separate child states}}
++
+\underbrace{\sum_{i\ne j}z_iz_j^\dagger}_{\text{retained child relations}}
+}.
+\tag{2d-4}
+\]
+
+**Proof.** Equation (2d-3) follows by substituting the linear matrix sum into (2d-1) and dividing by the summed
+trace. Equation (2d-4) follows by expanding ((\sum_i z_i)(\sum_jz_j)^\dagger). (square)
+
+**Plain explanation.** Unresolved independent children average into the parent according to how active each child
+is, so asymmetric children may cancel to a ridge. Coherent children also produce cross-terms. Those cross-terms are
+the exact measurable relation in the ARA “two identities plus their coupling” language; omitting them loses parent
+information. Reapplying this construction at several declared rungs is a valid recursive formalism. The physical
+claim that one transferable rule recurs across independently measured scales remains empirical.
+
 ## 2.2 The endpoints are sources; the centre is the strongest meeting
 
 Let two coherent wave contributions arrive from the two ends of the ARA diameter:
@@ -644,6 +745,63 @@ The two stated phases give the minimum and maximum. \(\square\)
 produce the familiar quiet cancellation ridge. Exact same-phase coherence makes the equal waves reinforce as
 strongly as possible—the rarer resonant case you described. Intermediate phase differences fill the gradient
 between those outcomes.
+
+### Corollary 2.6.2 — Opposing Newtonian forces admit an exact active-ridge coordinate
+
+Choose a physical axis \(\hat{\mathbf e}\). Let \(F_A,F_B\geq0\) be the magnitudes of all force contributions on a
+declared body or boundary in the \(-\hat{\mathbf e}\) and \(+\hat{\mathbf e}\) directions. When
+\(\Sigma_F=F_A+F_B>0\), define
+
+\[
+\underbrace{x_F}_{\substack{\text{bounded force-opposition coordinate}\\
+\text{ARA: Phase A }0\rightarrow\text{ Phase B }2}}
+=
+\frac{2F_B}{F_A+F_B}.
+\]
+
+Then the signed resultant is exactly
+
+\[
+\boxed{
+\underbrace{F_{\rm net,\parallel}}_{\text{directed resultant}}
+=
+\underbrace{F_B-F_A}_{\text{Phase B minus Phase A}}
+=
+\underbrace{\Sigma_F}_{\substack{\text{dimensional force envelope}\\
+\text{separate from normalized TE-ARA}}}
+\underbrace{(x_F-1)}_{\text{signed ARA ridge displacement}}.
+}
+\tag{2g-Newton}
+\]
+
+Consequently:
+
+1. \(x_F=1\) if and only if \(F_A=F_B>0\): an active equal-and-opposite ridge.
+2. \(x_F<1\) gives a resultant toward declared Phase A.
+3. \(x_F>1\) gives a resultant toward declared Phase B.
+4. If \(F_A=F_B=0\), \(x_F\) is undefined rather than a measured ridge.
+5. For a constant-mass body, Newton II becomes
+   \(m a_\parallel=\Sigma_F(x_F-1)\).
+6. For a Newton-III interaction pair, the two force magnitudes are equal on different bodies, so their enclosing
+   internal-force account has \(x_F=1\) and \(\Sigma_F>0\), even though both bodies may accelerate.
+
+**Proof.** From the coordinate definition,
+
+\[
+F_B=\frac{\Sigma_Fx_F}{2},
+\qquad
+F_A=\frac{\Sigma_F(2-x_F)}{2}.
+\]
+
+Subtracting gives \(F_B-F_A=\Sigma_F(x_F-1)\). The sign and ridge claims follow immediately. Newton II supplies
+\(m a_\parallel=F_{\rm net,\parallel}\) for constant mass. Newton III supplies equal anti-directed force magnitudes
+on the two interacting bodies, so their sum vanishes only after the enclosing pair boundary is declared.
+\(\square\)
+
+**Plain explanation.** Newton supplies the full local ARA skeleton. Phase A and Phase B are the two directed force
+accounts. Equal nonzero forces sit at the `1.0` ridge: the whole-system resultant is quiet while the children remain
+active. Moving away from the ridge changes momentum in the dominant phase direction. No force at all is a different
+state; because there is no pair to compare, its ARA ratio is undefined.
 
 ## 2.3 A circle unfolded through a monotone progression coordinate becomes a helix
 
@@ -1147,6 +1305,136 @@ an ARA aggregation hypothesis outside the exact Gauss decomposition. Applying it
 scale, independently declared modes and separately measured surrounding contributions. Full correction:
 `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
 
+### Corollary 4.1 — Exact Hamiltonian energy-allocation appearance
+
+For an isolated ideal harmonic oscillator,
+
+\[
+H=K+V=\frac{p^2}{2m}+\frac{kq^2}{2}>0.
+\]
+
+Let
+
+\[
+Q=\sqrt{k}\,q,\qquad P=\frac p{\sqrt m}.
+\]
+
+Then \(Q^2=2V\), \(P^2=2K\), and therefore
+
+\[
+\boxed{
+\underbrace{Q^2+P^2}_{\substack{\text{Hamiltonian phase-space}\\\text{circle}}}
+=2H,
+\qquad
+\underbrace{t_A}_{\text{configuration allocation}}=2\frac VH,
+\qquad
+\underbrace{t_B}_{\text{traversal allocation}}=2\frac KH,
+\qquad
+t_A+t_B=2.
+}
+\tag{4f}
+\]
+
+With B oriented toward the `2` pole,
+
+\[
+\boxed{
+\underbrace{x_H}_{\substack{\text{Hamiltonian energy-allocation}\\\text{ARA coordinate}}}
+=t_B
+=2\frac KH
+=2\frac{P^2}{Q^2+P^2}.
+}
+\tag{4g}
+\]
+
+**Proof.** Substitution gives \(Q^2=kq^2=2V\) and \(P^2=p^2/m=2K\). Hence
+\(Q^2+P^2=2(V+K)=2H\). Dividing the two nonnegative energy accounts by \(H\) and multiplying by two gives
+\(t_A+t_B=2(V+K)/H=2\). Equation (4g) follows from the declared B orientation. \(\square\)
+
+**Plain explanation.** The ideal oscillator is one complete coupling system. Its fixed energy moves continuously
+between a configuration expression and a momentum expression. Hamilton's circle retains the signed direction and
+quadrant; the ARA diameter says how the energy is divided at that instant. Equal division gives `1.0`.
+
+**Evidence fence.** This corollary is an exact coordinate transformation, not an independent prediction. `x_H=1`
+is equal energy, not equal opposing force. The endpoints are regular oscillator handovers, not mathematical
+divergences. Because squaring loses the signs of \(Q\) and \(P\), a complete state also requires the quadrant or
+direction field. Full calculation:
+`analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md`.
+
+### Definition 4.2 — Perspective-unassigned closure and instantiated allocation
+
+Before a measurement perspective is selected, TE-ARA assigns only the complete normalized closure
+
+\[
+\mathrm{TE\!-\!ARA}=2.
+\]
+
+Let \(\mathcal P=(\Omega,q,\tau_S,\Pi,k,\sigma)\) declare boundary, observable, time slice, projection, rung and
+pole orientation. The instantiated allocation is
+
+\[
+\boxed{
+\mathbf t^{(\mathcal P)}
+=
+\left(t_A,t_B,t_{J_1},\ldots,t_{J_n},t_{\mathrm{Other}}\right),
+\qquad
+\sum_ct_c^{(\mathcal P)}=2.
+}
+\tag{4h}
+\]
+
+For a second perspective \(\mathcal P'\),
+
+\[
+\mathbf t^{(\mathcal P')}
+=
+\mathcal R_{\mathcal P\rightarrow\mathcal P'}
+\left(\mathbf t^{(\mathcal P)}\right),
+\qquad
+\sum_ct_c^{(\mathcal P')}=2.
+\tag{4i}
+\]
+
+The transformation may combine, split, internalize or externalize components. Equation (4i) preserves normalized
+closure, not necessarily each component or the native physical magnitude.
+
+**Plain explanation.** TE-ARA is the sphere before selecting a diameter. Choosing how and where to measure it
+creates the component ledger. Walking around, inward, outward or sideways changes the relational perspective and
+therefore the decomposition, while every newly selected complete identity receives its own normalized total `2`.
+
+**Evidence fence.** The fixed sum is definitional. A meaningful cross-rung claim requires predeclared components,
+non-overlapping measurement, a separately retained physical activity scale, and a transformation that preserves or
+predicts something not guaranteed by normalization.
+
+### Corollary 4.3 — Noether conservation is stronger than normalized closure
+
+If a Lagrangian has no explicit time dependence,
+
+\[
+\frac{\partial\mathcal L}{\partial t}=0
+\quad\Longrightarrow\quad
+\frac{dH}{dt}=0.
+\tag{4j}
+\]
+
+If a generalized coordinate \(q\) is cyclic,
+
+\[
+\frac{\partial\mathcal L}{\partial q}=0
+\quad\Longrightarrow\quad
+\frac d{dt}\left(\frac{\partial\mathcal L}{\partial\dot q}\right)=0.
+\tag{4k}
+\]
+
+Time translation therefore conserves energy; spatial translation conserves linear momentum; rotational symmetry
+conserves angular momentum.
+
+**Plain explanation.** TE-ARA always closes to `2` because it is a normalized account. Noether separately tells us
+when the physical size carried by that account is truly unchanged while its internal allocation and state evolve.
+
+**Evidence fence.** Noether's theorem is established physics. Interpreting its conserved quantity as the native
+scale carried by a TE-ARA parent is a crosswalk; Noether does not prove the universal ARA sphere.
+
 ---
 
 # Part II — Relational ternary, Information³, and conditional closure
@@ -1503,6 +1791,50 @@ appearance, some information about the full sphere is necessarily hidden from us
 left about the full state after we see the projection. This gives “webbing cost” a precise information-theory
 meaning. Turning that hidden-information cost into thermodynamic entropy or a fixed energy leak requires an
 additional physical law and measurement.
+
+#### Corollary 8.5a — A non-injective child-to-parent closure is an inter-rung ARA singularity
+
+Let the resolved child configuration be \(X=(C_1,\ldots,C_n)\), and let
+
+\[
+\underbrace{Y}_{\substack{\text{one parent state}\\\text{next-rung identity}}}
+=
+\underbrace{\mathcal R(X)}_{\substack{\text{child-to-parent closure}\\\text{coarse-graining map}}}.
+\]
+
+If \(\mathcal R\) is not injective, then distinct child configurations \(X\ne X'\) can satisfy
+\(\mathcal R(X)=\mathcal R(X')\). For any distribution assigning positive probability to more than one such
+preimage,
+
+\[
+H(X\mid Y)>0.
+\]
+
+For the fixed-activity linear state average
+
+\[
+s_P=\frac{\sum_iT_i s_i}{\sum_iT_i},
+\]
+
+every nonzero child perturbation satisfying \(\sum_iT_i\delta_i=0\) is invisible to the parent:
+
+\[
+\mathcal R(s_1+\delta_1,\ldots,s_n+\delta_n)
+=
+\mathcal R(s_1,\ldots,s_n).
+\]
+
+**Proof.** Non-injectivity supplies at least two distinct preimages of the same parent. A distribution with positive
+weight on both leaves nonzero uncertainty about \(X\) after \(Y\) is known, hence \(H(X\mid Y)>0\) by Theorem 8.5.
+For the linear average, substituting \(s_i+\delta_i\) changes the numerator by
+\(\sum_iT_i\delta_i=0\), so the parent is unchanged. \(\square\)
+
+**Plain explanation.** Moving upward from children to one parent can close several distinguishable arrangements
+into the same identity. Their differences have crossed out of the retained parent description even though they may
+still exist in the decompressed system. ARA calls this an **inter-rung child-mixing singularity**. It is distinct
+from an **intra-rung phase singularity**, where one retained signed A/B state reverses orientation. Established
+mathematics calls the first operation non-injective coarse-graining or aggregation; “singularity” is the declared
+ARA identity-transition term.
 
 ### Interpretation fence — two pentagon constructions
 
@@ -1985,6 +2317,349 @@ T_{12}=\frac h{|E_2-E_1|},
 
 **Plain explanation.** The directly useful atomic clock is usually not one state's private phase but the changing
 phase difference between two states. That difference gives the familiar spectral transition frequency.
+
+## 14.1 A two-level quantum state has an exact ARA diameter on its Bloch sphere
+
+Choose an orthonormal basis \(\{|A\rangle,|B\rangle\}\). For
+
+\[
+|\psi\rangle=\alpha|A\rangle+\beta|B\rangle,
+\qquad
+|\alpha|^2+|\beta|^2=1,
+\]
+
+define the B-oriented ARA coordinate
+
+\[
+\boxed{
+x_Q=2|\beta|^2.
+}
+\tag{20a}
+\]
+
+### Theorem 20.2 — The Bloch coordinate is centred, pole-reversed ARA
+
+Let
+
+\[
+r_z=|\alpha|^2-|\beta|^2.
+\]
+
+Then
+
+\[
+\boxed{
+r_z=1-x_Q,
+\qquad
+x_Q-1=-r_z.
+}
+\tag{20b}
+\]
+
+**Proof.** Normalization gives \(|\alpha|^2=1-|\beta|^2\). Therefore
+
+\[
+r_z
+=1-2|\beta|^2
+=1-x_Q.
+\]
+
+Rearrangement gives \(x_Q-1=-r_z\). \(\square\)
+
+**Plain explanation.** ARA labels the selected diameter `0–2`, with equal population at `1`. Quantum mechanics
+labels the same diameter `+1` to `-1`, with equal population at zero. It is the same information read from the
+opposite pole and shifted to a different origin.
+
+### Corollary 20.3 — Every Bloch measurement axis defines one ARA diameter
+
+For a density matrix
+
+\[
+\rho=\frac12(I+\mathbf r\cdot\boldsymbol\sigma),
+\qquad
+|\mathbf r|\le1,
+\]
+
+measurement along unit direction \(\hat{\mathbf n}\) has
+
+\[
+p_\pm=\frac{1\pm\mathbf r\cdot\hat{\mathbf n}}2.
+\]
+
+Orienting the minus outcome toward `2` gives
+
+\[
+\boxed{
+x_{\hat{\mathbf n}}
+=2p_-
+=1-\mathbf r\cdot\hat{\mathbf n}.
+}
+\tag{20c}
+\]
+
+**Plain explanation.** Choose any rotational diameter through the established Bloch sphere, name its two
+opposing outcomes, and the quantum projection supplies an exact `0–2` ARA reading.
+
+### Corollary 20.4 — One `1.0` population ridge contains different quantum identities
+
+Every state with \(\mathbf r\cdot\hat{\mathbf n}=0\) has \(x_{\hat{\mathbf n}}=1\). In particular, a pure coherent
+equatorial state with \(|\mathbf r|=1\) and the maximally mixed state \(\mathbf r=0\) share the same diameter
+reading.
+
+**Plain explanation.** Equal A/B populations do not tell us whether the state is coherent, mixed, or which
+relative phase it carries. The full sphere direction and radius contain information that the minimal diameter
+deliberately compresses.
+
+### Corollary 20.5 — Ideal Rabi motion traverses the ARA diameter
+
+For ideal resonant Rabi motion beginning in A,
+
+\[
+p_B(t)=\sin^2\left(\frac{\Omega t}{2}\right),
+\]
+
+so
+
+\[
+\boxed{
+x_Q(t)
+=2p_B(t)
+=1-\cos(\Omega t).
+}
+\tag{20d}
+\]
+
+The sequence is `0→1→2→1→0`. The two `1.0` crossings have equal populations but different phase/direction.
+
+**Evidence fence.** Theorem 20.2 and its corollaries are exact reparameterizations of established two-level
+quantum mechanics. They do not derive the Born rule, prove universal ARA geometry or unify quantum mechanics with
+GR. Full independent validation:
+`analysis/quantum/BLOCH_SPHERE_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+## 14.2 Landau–Zener structural and outcome handover coordinates
+
+Let
+
+\[
+\hat H(t)
+=
+\begin{pmatrix}
+vt/2 & g\\
+g &-vt/2
+\end{pmatrix}
+=
+\frac{vt}{2}\sigma_z+g\sigma_x.
+\]
+
+### Theorem 20.6 — The lower instantaneous eigenstate traverses an exact ARA diameter
+
+For \(g\neq0\), \(v>0\), orienting the second basis state toward `2` gives
+
+\[
+\boxed{
+x_{\rm path}(t)
+=
+1+\frac{vt}{\sqrt{(vt)^2+4g^2}}.
+}
+\tag{20e}
+\]
+
+It satisfies
+
+\[
+0<x_{\rm path}<2,
+\qquad
+x_{\rm path}(0)=1,
+\qquad
+x_{\rm path}(-t)=2-x_{\rm path}(t),
+\]
+
+and
+
+\[
+\frac{dx_{\rm path}}{dt}
+=
+\frac{4g^2v}{\left((vt)^2+4g^2\right)^{3/2}}>0.
+\]
+
+**Proof.** The Hamiltonian has effective Bloch vector \(\mathbf h=(2g,0,vt)\). Its lower eigenstate has
+\(\mathbf r_-=-\mathbf h/|\mathbf h|\), hence
+\(r_z=-vt/\sqrt{(vt)^2+4g^2}\). Applying Theorem 20.2,
+\(x_{\rm path}=1-r_z\), proves equation (20e). The remaining properties follow by substitution and
+differentiation. \(\square\)
+
+**Plain explanation.** The uncoupled identities approach from opposite energy directions. Perpendicular coupling
+spreads their direct meeting into a smooth A-to-B mixing gradient across the complete ARA diameter.
+
+### Corollary 20.7 — Vanishing coupling closes the gap and sharpens the flip
+
+The instantaneous gap is
+
+\[
+\Delta E(t)=\sqrt{(vt)^2+4g^2},
+\qquad
+\Delta E_{\min}=2|g|.
+\]
+
+For \(t\neq0\),
+
+\[
+\lim_{g\to0}x_{\rm path}(t)
+=
+1+\operatorname{sgn}(t).
+\]
+
+At \(t=0,g=0\), the gap vanishes and equation (20e) is undefined.
+
+**Plain explanation.** With no coupling, there is no finite mixing region: the selected lower-energy identity
+changes sides across a zero-gap seam. Nonzero coupling prevents the degeneracy and opens a handover corridor.
+
+### Corollary 20.8 — Final handover has a separate exact ARA coordinate
+
+Define
+
+\[
+\gamma=\frac{g^2}{\hbar|v|}.
+\]
+
+Under the ideal Landau–Zener infinite linear sweep,
+
+\[
+P_{\rm stay}=e^{-2\pi\gamma},
+\qquad
+P_{\rm handover}=1-e^{-2\pi\gamma}.
+\]
+
+Therefore
+
+\[
+\boxed{
+x_{\rm handover}
+=
+2P_{\rm handover}
+=
+2\left(1-e^{-2\pi g^2/(\hbar|v|)}\right).
+}
+\tag{20f}
+\]
+
+The final-outcome ridge is \(x_{\rm handover}=1\) at
+\(\gamma=\ln2/(2\pi)\).
+
+**Plain explanation.** Stronger connection or slower traversal makes complete handover more likely. This outcome
+coordinate is not the same measurement as the instantaneous structural path.
+
+**Evidence fence.** Equations (20e) and (20f) are exact reparameterizations under the declared ideal model.
+Calling \(g^2\) Connection and \(\hbar|v|\) Traversal/Time is an ARA crosswalk. Universality across non-quantum
+systems remains open. Full validation:
+`analysis/quantum/LANDAU_ZENER_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+## 14.3 Virial ARA coordinate across inverse-distance rungs
+
+Let a bound classical or stationary quantum system have an inverse-distance potential
+
+\[
+V(r)=-\frac{\kappa}{r},
+\qquad \kappa>0.
+\]
+
+### Theorem 20.9 — The virial-weighted Connection/Traversal coordinate is exactly the ridge
+
+Define
+
+\[
+\underbrace{C}_{\substack{\text{Connection}\\\text{binding channel}}}
+=
+|\langle V\rangle|,
+\qquad
+\underbrace{R}_{\substack{\text{Traversal}\\\text{movement channel}}}
+=
+2\langle T\rangle,
+\]
+
+and orient the ARA diameter toward Traversal:
+
+\[
+\boxed{
+x_{\rm vir}
+=
+2\frac{R}{C+R}.
+}
+\tag{20g}
+\]
+
+Then
+
+\[
+\boxed{x_{\rm vir}=1.}
+\tag{20h}
+\]
+
+**Proof.** The virial theorem gives
+
+\[
+2\langle T\rangle
+=
+\left\langle\mathbf r\cdot\nabla V\right\rangle.
+\]
+
+For \(V=-\kappa/r\), Euler homogeneity gives
+\(\mathbf r\cdot\nabla V=-V\). Hence
+\(R=2\langle T\rangle=-\langle V\rangle=|\langle V\rangle|=C\). Substitution into equation (20g) gives
+\(x_{\rm vir}=2C/(C+C)=1\). \(\square\)
+
+**Plain explanation.** The theorem places twice the accumulated movement energy into the same units as the
+accumulated binding energy. Once those correctly weighted channels are compared, they meet at the ARA ridge.
+Neither channel has stopped.
+
+### Corollary 20.10 — Raw TE-ARA energy allocation remains asymmetric
+
+Define the raw magnitude account
+
+\[
+t_T
+=
+\frac{2\langle T\rangle}{\langle T\rangle+|\langle V\rangle|},
+\qquad
+t_C
+=
+\frac{2|\langle V\rangle|}{\langle T\rangle+|\langle V\rangle|}.
+\]
+
+Using \(|\langle V\rangle|=2\langle T\rangle\),
+
+\[
+\boxed{
+t_T=\frac23,
+\qquad
+t_C=\frac43,
+\qquad
+t_T+t_C=2.
+}
+\tag{20i}
+\]
+
+**Plain explanation.** The virial ridge and the raw energy split are different questions. The first compares the
+theorem's weighted channels and reads \(1\); the second allocates the raw magnitude budget and reads
+\(2/3+4/3=2\). Treating \(2/3\), \(1\) and \(4/3\) as three positions of one observable would flatten the
+geometry.
+
+### Corollary 20.11 — The same coordinate crosses the classical/quantum boundary
+
+Equation (20g) applies without retuning to an ideal planetary orbit, an ideal satellite orbit, a classical
+Coulomb comparison and a stationary nonrelativistic hydrogen state. The characteristic radii from one
+astronomical unit to the Bohr radius span
+
+\[
+\log_{10}\left(\frac{1\,{\rm AU}}{a_0}\right)=21.4513.
+\]
+
+The quantum row uses expectation values; it does not imply an electron executing a classical orbit.
+
+**Evidence fence.** This is an exact reparameterization of a known theorem for a family already sharing
+\(V\propto-1/r\). It establishes scale consistency of the declared coordinate, not universal ARA fractality,
+quantum gravity or a new force. Full report and independent `13/13` validation:
+`analysis/virial/VIRIAL_ARA_CROSS_SCALE_LADDER_REPORT_2026-07-23.md`.
 
 ## 15. Conservative pendulum symmetry
 
@@ -2541,6 +3216,190 @@ The prime thread is parked. Full record:
 
 # Part X — What is proved, assumed, and still testable
 
+## 20.1 Boundary-aware child-to-parent composition
+
+Let \(F_L,F_M,F_R\) be the signed flux through the left external boundary, shared child interface and right
+external boundary. Write
+
+\[
+z_+=\max(z,0),
+\qquad
+z_-=\max(-z,0),
+\qquad
+z_++z_-=|z|.
+\]
+
+For an oriented interval with left flux \(F_a\) and right flux \(F_b\), define
+
+\[
+A=F_{a,+}+F_{b,-},
+\qquad
+R=F_{a,-}+F_{b,+},
+\qquad
+x=\frac{2R}{A+R}
+\]
+
+when \(A+R>0\).
+
+### Theorem 32 — A shared child interface cancels exactly from the enclosing parent
+
+For adjacent children with flux triples \((F_L,F_M)\) and \((F_M,F_R)\), let
+
+\[
+I=|F_M|.
+\]
+
+Then their enclosing parent accounts satisfy
+
+\[
+A_P=A_1+A_2-I,
+\qquad
+R_P=R_1+R_2-I,
+\]
+
+and hence
+
+\[
+\boxed{
+x_P
+=
+\frac{2(R_1+R_2-I)}
+{(A_1+R_1)+(A_2+R_2)-2I}
+}
+\]
+
+whenever the parent external activity is nonzero.
+
+**Proof.** The child accounts are
+
+\[
+A_1=F_{L,+}+F_{M,-},
+\qquad
+R_1=F_{L,-}+F_{M,+},
+\]
+
+\[
+A_2=F_{M,+}+F_{R,-},
+\qquad
+R_2=F_{M,-}+F_{R,+}.
+\]
+
+Because \(F_{M,+}+F_{M,-}=|F_M|=I\),
+
+\[
+A_1+A_2-I
+=
+F_{L,+}+F_{R,-}
+=A_P,
+\]
+
+\[
+R_1+R_2-I
+=
+F_{L,-}+F_{R,+}
+=R_P.
+\]
+
+Substitution into \(x_P=2R_P/(A_P+R_P)\) gives the stated coordinate. \(\square\)
+
+**Plain explanation.** The middle flow leaves one child and enters the other. It is therefore real boundary
+activity for both children. Once both are enclosed inside one parent, that same flow never crosses the parent
+edge. Subtracting it once from accumulation and once from release converts the child view into the parent view.
+
+### Corollary 32.1 — Orientation reversal preserves the mirror rule
+
+Swapping accumulation and release gives
+
+\[
+x'_P
+=
+\frac{2A_P}{A_P+R_P}
+=2-x_P.
+\]
+
+**Plain explanation.** Reading the same parent from the opposite direction mirrors its position across the `1.0`
+ridge without changing the total boundary activity.
+
+### Corollary 32.2 — The unclosed child account identifies a signed `Other`
+
+Let \(q_i(t)\) be the stored quantity in child or relation \(i\), let \(g_i(t)\) be the net declared internal
+transfer into it, and suppose its exact local continuity account is
+
+\[
+\frac{dq_i}{dt}=g_i+s_i.
+\]
+
+Then
+
+\[
+\boxed{
+\widehat s_i
+=
+\frac{dq_i}{dt}-g_i
+=s_i
+}.
+\]
+
+**Proof.** Subtract \(g_i\) from both sides of the local continuity account. \(\square\)
+
+**Plain explanation.** Measure how quickly the amount inside one child changed, then subtract the changes already
+explained by named transfers. The remainder is exactly the missing source, sink or relation leak—provided the
+boundary, stored quantity, derivative and internal transfers are correctly measured.
+
+**Controlled physical check.** The unchanged residual was frozen before application to damped coupled
+Newton/Hamilton oscillators, a resistive electromagnetic relation, and an open two-level quantum-probability
+holdout. It identified all `3/3` hidden locations, recovered sink sign at every active point, and scored a maximum
+peak-normalized source RMSE of \(1.0554\times10^{-9}\) over `18,991` samples. Independent bounded-output validation
+passed. This verifies the identity numerically in noiseless declared models; it does not derive the hidden native
+law or predict an unseen source waveform.
+
+**Physical reconstruction check.** The unchanged operator was evaluated on `4,097` samples each from an analytic
+classical string-energy wave, lossless electromagnetic transmission line and free quantum Gaussian probability
+current. All `12,291` samples were retained; the largest parent-coordinate error was
+\(2.1538\times10^{-14}\). An independent `100,000`-triple signed-flux validation had maximum error
+\(3.5083\times10^{-14}\). These checks confirm the algebra in three physical continuity appearances. They do not
+prove that every physical interaction has this boundary form or that ARA supplies new dynamics.
+
+## 33. Parent plus signed `Other` is an exactly reversible pair transform
+
+For integer child values \(a,b\), define
+
+\[
+m=b+\left\lfloor\frac{a-b}{2}\right\rfloor,
+\qquad
+d=a-b.
+\]
+
+Then both children are recovered exactly by
+
+\[
+b=m-\left\lfloor\frac d2\right\rfloor,
+\qquad
+a=b+d.
+\]
+
+**Proof.** Substituting the definition of \(m\) into the first inverse equation gives
+
+\[
+m-\left\lfloor\frac d2\right\rfloor
+=
+b+\left\lfloor\frac d2\right\rfloor
+-\left\lfloor\frac d2\right\rfloor
+=b.
+\]
+
+The second inverse equation then gives \(a=b+(a-b)=a\). \(\square\)
+
+**Plain explanation.** The parent stores the broad midpoint-like value of the two children. The signed `Other`
+stores precisely what the parent discarded. Keeping both makes the scale change reversible.
+
+**Computing check.** The transform was recursively applied to five `65,536`-byte datasets at four block sizes. All
+`20/20` streams restored exactly; an independent implementation agreed and exhaustively inverted all `65,536`
+possible byte pairs. This proves lossless representation, not compression or encryption. At the frozen primary
+block, the stream improved raw-zlib size by `19.23%` on smooth telemetry but enlarged every other dataset; ordinary
+delta coding was also smaller on the smooth signal. The unkeyed representation was publicly inverted and therefore
+provided no confidentiality.
+
 ## Mathematically proved in this document
 
 1. The canonical duration-axis normalisation produces a bounded, invertible, mirror-symmetric 0–2 coordinate.
@@ -2563,7 +3422,9 @@ The prime thread is parked. Full record:
     every rung. The broader scalable relational recursion is defined but not physically proved.
 12. Three non-collinear points minimally determine a circle; under the declared regular construction, a phase
     triangle plus its anti-phase copy forms a regular hexagon; contracting one hexagonal edge produces a five-cycle.
-13. A deterministic many-to-one projection has a nonnegative hidden-information cost.
+13. A deterministic many-to-one projection has a nonnegative hidden-information cost; a non-injective
+    child-to-parent average has invisible child-difference directions and is therefore an exact aggregation
+    singularity in the declared ARA terminology.
 14. Pentagon/phi, octave projection, and five-versus-six angular-defect identities are exact mathematics.
 15. A sector can be invisible to one measurement channel and visible to another.
 16. The \(7/2\) ratio and cosmic fractions follow exactly once their path weights and ratio axioms are accepted.
@@ -2595,6 +3456,13 @@ The prime thread is parked. Full record:
     completion `R_b=2` occurs near `p~b^2`.
 30. A common traversal of length 2 projected through 36 degrees has length `phi`: `S(u)=2u` and
     `P(u)=2u cos(36 degrees)=phi*u`; reversing the chart mirrors the endpoint to `2-phi`.
+31. For two adjacent one-dimensional child accounts, subtracting the shared interface magnitude once from
+    accumulation and once from release reconstructs the enclosing parent exactly; orientation reversal gives
+    `x_parent' = 2 - x_parent`.
+32. For an exactly declared local continuity account, stored-quantity change minus named internal transfer equals
+    the omitted signed source/sink term exactly.
+33. An integer parent plus its retained signed child-difference `Other` reconstructs both children exactly; recursive
+    application therefore gives a lossless hierarchy when every residual is retained.
 
 ## ARA assumptions not proved by mathematics alone
 
@@ -2636,6 +3504,12 @@ The prime thread is parked. Full record:
    variable A/B subtotal, named environmental couplings and unresolved Other, direction coordinate, native magnitude
    scale and boundary, then predict a signed held-out
    physical result not used to construct those inputs. Do not use the constant TE-ARA total as variable strength.
+8. **Forward hidden-term law:** use the recovered residual on development systems to identify a compact law, freeze
+   that law, and predict a held-out `Other` waveform before observing the held-out stored-quantity change. The
+   completed residual test was inverse diagnosis, not this forward prediction.
+9. **Adaptive ARA memory:** freeze a block selector that chooses among raw, delta, pair-lifting and record-aware
+   predictors after paying selector overhead; test unseen sensors, media, memory pages, text and random controls.
+   Do not treat reversibility as compression or compression as confidentiality.
 
 ---
 

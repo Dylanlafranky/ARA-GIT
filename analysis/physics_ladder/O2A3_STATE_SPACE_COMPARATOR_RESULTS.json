@@ -1,0 +1,50 @@
+{
+  "test": "O2-A3 ARA fixed lineage versus causal state-space tracking",
+  "run_date": "2026-07-23",
+  "protocol_sha256": "ab0b88bb9c966f2a72544015e13d724ee4aa577e99b573e01671dfa210063fc7",
+  "fidelity_sha256": "6435cbe421e6ff7f00b9cf9fef693445b34e2f1ac7643f6f977b94e17a1faf59",
+  "state_space_settings": {
+    "alpha": 0.0,
+    "beta": 0.001
+  },
+  "ara_settings": {
+    "derivative_fraction": 0.04,
+    "half_life_fraction": 0.02
+  },
+  "primary_verdict": {
+    "absolute_status": "GOOD ABSOLUTE TRACKING",
+    "comparative_status": "MIXED",
+    "absolute_gates": {
+      "correlation": true,
+      "nrmse": true,
+      "sign_accuracy": true,
+      "integrated_error": true
+    },
+    "ara_metrics": {
+      "correlation": 0.7616067133693517,
+      "nrmse": 0.16456825618714807,
+      "sign_accuracy": 0.9051383399209486,
+      "integrated_error": 0.11751276622502518
+    },
+    "state_space_metrics": {
+      "correlation": 0.6872632076065313,
+      "nrmse": 0.2349187811279591,
+      "sign_accuracy": 0.8079239600978732,
+      "integrated_error": 0.03799041091202443
+    },
+    "ara_nrmse_relative_improvement": 0.29946743552398836,
+    "correlation_difference_ara_minus_state_space": 0.07434350576282045,
+    "paired_descriptive": {
+      "replicates": 32,
+      "ara_correlation_win_rate": 1.0,
+      "ara_nrmse_win_rate": 1.0,
+      "median_paired_correlation_gain_ara": 0.06583358444447268,
+      "median_paired_nrmse_reduction_ara": 0.0730455446950103,
+      "median_paired_integrated_error_reduction_ara": -0.07674911179572505
+    }
+  },
+  "trial_rows": 1920,
+  "aggregate_rows": 60,
+  "waveform_rows": 405,
+  "scope_fence": "Synthetic matched conditional tracking. Not evidence for pure quantum information, a hidden Phase B, perceptual uncoupling or a new quantum law."
+}

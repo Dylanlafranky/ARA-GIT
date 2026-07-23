@@ -161,6 +161,21 @@ It gives `0` when only `u` is present, `2` when only `v` is present, and `1` whe
 coordinate definition, not a physical law. It must not be silently substituted for the cycle-time ARA
 `T_accumulation/T_release`; the transformation between appearances must be declared.
 
+The coordinate also preserves the signed residual exactly. With \(\Sigma=u+v>0\),
+
+\[
+\boxed{
+\underbrace{v-u}_{\text{signed Phase B--Phase A residual}}
+=
+\underbrace{\Sigma}_{\substack{\text{dimensional activity envelope}\\\text{kept separate from normalized TE-ARA}}}
+\underbrace{(x_B-1)}_{\text{signed distance from the ridge}}.
+}
+\]
+
+For anti-directed Newtonian force magnitudes this becomes
+\(m a_\parallel=\Sigma_F(x_F-1)\). If \(u=v>0\), the result is an active `1.0` ridge. If \(u=v=0\), the ratio is
+undefined rather than a measured ridge.
+
 ## 4. Newton's third law and the 1.0 ridge
 
 Newton's third law for two interacting bodies is
@@ -256,10 +271,168 @@ centre-of-mass cancellation. ARA therefore has to declare what its number belong
 | Damped oscillator | `mẍ+bẋ+kx=f(t)` | Storage/inertia, loss, restoring coupling, and driving explicitly coexist | E0 model; excellent calibrated ARA test bed E1/A1 |
 | Kepler laws | Elliptic orbits, equal areas in equal times, `T²∝a³` | Relational cycles plus an exact scale transformation | E0 within Newtonian two-body idealization; octave/fractal extension A2 |
 | Euler–Lagrange | `d(∂L/∂q̇)/dt=∂L/∂q` | Rate of generalized momentum balances the coordinate-side interaction | E0 variational dynamics; two-pole reading A1 |
-| Hamilton equations | `q̇=∂H/∂p`, `ṗ=-∂H/∂q` | Coupled conjugate flows generate a phase-space trajectory | E0; phase/anti-phase ARA interpretation A1 |
+| Hamilton equations | `q̇=∂H/∂p`, `ṗ=-∂H/∂q`; for the harmonic oscillator, rescaled `Q²+P²=2H` | Coupled conjugate flows generate a four-quadrant phase-space circle; `t_A=2V/H`, `t_B=2K/H` give an exact typed total-2 allocation | E0/E1 exact oscillator crosswalk; universal phase/anti-phase ontology A1 |
 | Noether theorem | Continuous symmetry implies a conserved current/charge | Persistent transformation relation produces a maintained identity | E0 theorem; ARA universality A1 |
 | Liouville theorem | Hamiltonian phase-space flow preserves phase volume | Conservative evolution rearranges without compressing ensemble information | E0; not evidence of ARA asymmetry by itself |
-| Virial theorem | Long-time averages satisfy `2⟨T⟩=⟨r·∇V⟩` for bound systems | Time-averaged balance between motion and binding | E0 under assumptions; a ridge coordinate would be A1 |
+| Virial theorem | Long-time averages satisfy `2⟨T⟩=⟨r·∇V⟩` for bound systems; for `V∝-1/r`, `2⟨T⟩=|⟨V⟩|` | Exact weighted Connection/Traversal ridge from planetary gravity to ideal quantum hydrogen | E0 theorem; E1 exact declared ARA crosswalk across 21.45 spatial orders; not a new virial theorem |
+
+### 5.1 Hamiltonian harmonic oscillator as an exact circle and total-2 allocation
+
+For one isolated ideal mass–spring oscillator,
+
+\[
+\underbrace{H}_{\substack{\text{Hamiltonian}\\\text{whole conserved energy}}}
+=
+\underbrace{\frac{p^2}{2m}}_{\substack{\text{kinetic}\\\text{momentum expression}}}
++
+\underbrace{\frac{kq^2}{2}}_{\substack{\text{potential}\\\text{configuration expression}}}.
+\]
+
+The invertible, unit-aligned transformation
+
+\[
+Q=\sqrt{k}\,q,\qquad P=\frac p{\sqrt m}
+\]
+
+puts both axes in \(\sqrt{\rm J}\) and gives the exact circle
+
+\[
+Q^2+P^2=2H.
+\]
+
+The same state has the canonical energy-allocation appearance
+
+\[
+\underbrace{t_A}_{\substack{\text{configuration}\\\text{allocation}}}
+=2\frac VH,
+\qquad
+\underbrace{t_B}_{\substack{\text{traversal}\\\text{allocation}}}
+=2\frac KH,
+\qquad
+t_A+t_B=2.
+\]
+
+With B oriented toward `2`,
+
+\[
+\underbrace{x_H}_{\substack{\text{typed Hamiltonian}\\\text{ARA diameter}}}
+=t_B
+=2\frac KH
+=2\frac{P^2}{Q^2+P^2}.
+\]
+
+Therefore `x_H=0/1/2` means all potential energy/equal energy/all kinetic energy. The `1.0` point is an
+**equal-energy ridge**, not force cancellation. Hamilton's equations become
+
+\[
+\dot Q=\omega P,\qquad \dot P=-\omega Q,
+\]
+
+so the conjugate coordinates cross-generate a continuous four-quadrant rotation. Since
+\(x_H=2\sin^2\theta\), the diameter folds distinct signed quadrants onto the same reading; the complete declaration
+must retain \((\operatorname{sgn}Q,\operatorname{sgn}P)\) or
+
+\[
+\dot x_H=-\frac{4\omega PQ}{Q^2+P^2}.
+\]
+
+This is an E0/E1 exact reparameterization for the harmonic oscillator and a strong typed ARA appearance. It does
+not by itself establish a universal sphere, cross-scale recurrence, \(\phi\), or quantum gravity. The reproducible
+worked example and independent `10/10` validator are in
+`analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md`.
+
+### 5.2 Noether invariants versus TE-ARA closure
+
+Noether's theorem distinguishes two statements that ARA must keep separate:
+
+\[
+\underbrace{\sum_ct_c^{(\mathcal P)}=2}_{\substack{\text{normalized TE-ARA}\\\text{closure by definition}}}
+\qquad\text{versus}\qquad
+\underbrace{\frac{dQ_{\rm physical}}{dt}=0}_{\substack{\text{native Noether charge}\\\text{physically conserved}}}.
+\]
+
+For time, spatial and rotational symmetry:
+
+\[
+\frac{\partial\mathcal L}{\partial t}=0\Rightarrow\dot H=0,
+\qquad
+\frac{\partial\mathcal L}{\partial q}=0\Rightarrow\dot p_q=0,
+\qquad
+\frac{\partial\mathcal L}{\partial\theta}=0\Rightarrow\dot L_\theta=0.
+\]
+
+The state and its TE-ARA allocation may change continuously while energy, linear momentum or angular momentum
+remains fixed. Conversely, an open or driven subsystem can be normalized to total `2` at every slice while its
+native physical budget changes. Noether is therefore not the statement “if nothing changes, it stays the same”:
+the dynamical state changes, while invariance of the laws under a continuous transformation produces a conserved
+physical quantity.
+
+Perspective clarification:
+
+\[
+\mathbf t^{(\mathcal P')}
+=\mathcal R_{\mathcal P\to\mathcal P'}(\mathbf t^{(\mathcal P)}),
+\qquad
+\sum_ct_c^{(\mathcal P')}=\sum_ct_c^{(\mathcal P)}=2.
+\]
+
+This is the ARA proposal that TE-ARA is the sphere before selecting a diameter. It is definitional until a
+predeclared transformation preserves or predicts independently measured structure. Full note:
+`analysis/hamilton/TE_ARA_PERSPECTIVE_NOETHER_COHERENCE_NOTE_2026-07-23.md`.
+
+### 5.3 Virial ladder: an exact planetary-to-quantum ridge crosswalk
+
+For any bound inverse-distance potential \(V\propto-1/r\), the classical or quantum virial theorem gives
+
+\[
+\underbrace{2\langle T\rangle}_{\substack{\text{Traversal channel}\\R}}
+=
+\underbrace{|\langle V\rangle|}_{\substack{\text{Connection channel}\\C}}.
+\]
+
+The Traversal-oriented plain-ARA coordinate
+
+\[
+\boxed{
+x_{\rm vir}
+=
+2\frac{R}{C+R}
+=
+2\frac{2\langle T\rangle}{|\langle V\rangle|+2\langle T\rangle}
+}
+\]
+
+therefore equals `1.0`. The same frozen transformation was evaluated on an Earth–Sun orbit, a circular Earth
+satellite reference, a classical electron–proton Coulomb comparison and ideal nonrelativistic hydrogen `1s`.
+It remained exactly `1.0` across
+\(\log_{10}(1\,{\rm AU}/a_0)=21.4513\) spatial orders.
+
+This virial reading must not be flattened into the raw energy-allocation view:
+
+\[
+t_T
+=
+\frac{2\langle T\rangle}{\langle T\rangle+|\langle V\rangle|}
+=\frac23,
+\qquad
+t_C
+=
+\frac{2|\langle V\rangle|}{\langle T\rangle+|\langle V\rangle|}
+=\frac43,
+\qquad
+t_T+t_C=2.
+\]
+
+Thus the raw TE-ARA account remains asymmetric while the separately weighted virial comparison sits at the
+ridge. For Earth's elliptical orbit the instantaneous child coordinate spans approximately
+`0.991574–1.008286`; forming the coordinate from completed mean channels returns the parent to `1.0`.
+The planet does not settle—the measurement converges as its time window completes the cycle.
+
+This is an exact E0/E1 crosswalk for systems already unified by the inverse-distance potential. It supports the
+scale consistency of the declared ARA coordinate but is not independent evidence that ARA generates the virial
+theorem or that every physical law shares one sphere. Two-column report, diagram, scripts and independent `13/13`
+validation:
+`analysis/virial/VIRIAL_ARA_CROSS_SCALE_LADDER_REPORT_2026-07-23.md`.
 
 ## 6. Continuum mechanics, fluids, waves, and transport
 
@@ -689,14 +862,48 @@ electromagnetic**, making electromagnetism our dominant Matter↔Information int
 | Equivalence principle | Local free fall removes uniform gravitational acceleration to first order | What looks like force depends on the chosen local frame | Established principle; supports perspective caution, not universal ARA geometry |
 | Gravitational waves | Perturbations of spacetime curvature propagate at `c` | Geometry itself supports radiative transfer modes | E0 prediction/observation of GR; ARA phase/rung mapping A1 |
 | Friedmann equations | Homogeneous-isotropic GR gives scale-factor evolution | Accumulation/dilution and expansion dynamics at cosmic scale | E0 under cosmological assumptions; dark-sector ARA extensions A2 |
+| Newtonian weak-field limit | `g_00≈-(1+2Φ/c²)`, `∇²Φ=4πGρ`, `ẍ=-∇Φ` | Space–Time geometry compresses to a potential, Field/movement tendency and Matter response | E0 exact under declared approximation; recursive ARA hierarchy A1/A2 |
+
+### 9.1 Einstein-to-Newton rung crossing
+
+For a stationary weak field, slow test motion, negligible pressure and locally negligible \(\Lambda\),
+
+\[
+g_{\mu\nu}
+\longrightarrow
+\Phi
+\longrightarrow
+\mathbf g=-\nabla\Phi
+\longrightarrow
+m\ddot{\mathbf r}=m\mathbf g,
+\]
+
+while Einstein's source equation becomes
+
+\[
+\underbrace{\nabla\cdot\mathbf g}_{\substack{\text{field convergence}\\\text{candidate Field/Traversal child}}}
+=
+-4\pi G
+\underbrace{\rho}_{\substack{\text{mass density}\\\text{candidate Matter/Connection child}}}.
+\]
+
+This is an established cross-scale reduction. The corrected ARA hierarchy reads Space/Phase A plus Time/Phase B
+and their relation as perceived Space–Time; one rung down, Matter is proposed as the child Space/Connection wave
+and Field as the child Time/Traversal wave. GR does not derive that ontology, but its Newtonian limit preserves a
+matter-density/field-movement coupling compatible with it.
+
+A worked calculation using Earth, Jupiter, the Sun, PSR J0740+6620 and the theoretical horizon is in
+`analysis/gravity/GR_NEWTON_ARA_RUNG_CROSSING_REPORT_2026-07-23.md`. The independent validator passed `27/27`
+checks. The exact result is the weak-field recovery and Newtonian force accounting; the compactness-to-ARA map and
+universal fractal interpretation remain proposed.
 
 ## 10. Quantum mechanics, atomic, nuclear, and particle physics
 
 | Law or principle | Established mathematical content | Candidate ARA reading | Status / fence |
 |---|---|---|---|
-| State superposition | Linear combinations of valid states are valid states | Multiple potential relations coexist before a declared measurement | E0 postulate; sphere/quadrant ontology A2 |
+| State superposition | Linear combinations of valid states are valid states; a pure two-level state lies on a Bloch sphere | A selected two-outcome basis gives the exact ARA diameter `x_Q=2|β|²=1-r_z` | E0/E1 exact coordinate crosswalk; universal ARA ontology A2 |
 | Schrödinger equation | `iℏ∂ψ/∂t=Hψ` | Hamiltonian generates time evolution and relative phase accumulation | E0. An energy eigenstate has phase frequency `E/ℏ`, but isolated global phase is not an observable classical orbit |
-| Born rule | Outcome probability is `p=abs(ψ)²` | Maps amplitude to observed outcome statistics | E0 postulate; no direct ARA mapping established |
+| Born rule | Outcome probability is `p=abs(ψ)²` | For a declared two-outcome basis, `x_Q=2p_B/(p_A+p_B)=2p_B` is an exact bounded ARA coordinate | E0 rule and E1 crosswalk; ARA does not derive the Born rule |
 | Unitary evolution | Closed-system evolution preserves inner products and total probability | Relational state changes while total probability account is conserved | E0/E1 |
 | Probability continuity | `∂ρ/∂t+∇·j=0` | Exact accumulation/release balance for probability density | E0/E1 |
 | Canonical commutator | `[x,p]=iℏ` | Position and momentum are noncommuting conjugate observables | E0. They are not simply two opposing wave sources |
@@ -707,7 +914,8 @@ electromagnetic**, making electromagnetism our dominant Matter↔Information int
 | Pauli exclusion | Identical fermions occupy an antisymmetric total state; no duplicate one-particle state occupancy | Identity and connection topology constrain allowed packing | E0; hidden-pair/filament interpretation A2 |
 | Fermi golden rule | Transition rate is proportional to coupling squared times final-state density | Connection strength plus available transfer channels determines release rate | E0 perturbative result; strong Connection↔Transfer bridge E1 |
 | Exponential decay | `N(t)=N₀e^{-λt}` for a memoryless constant-rate ensemble | One-way release/survival process with lifetime `1/λ` | E0 model; no accumulation half-cycle unless a preparation process is included |
-| Rabi oscillation | Coherently driven two-level populations exchange periodically | Explicit two-state coupling, phase, and handover | E0 model; excellent ARA cycle test bed E1/A1 |
+| Rabi oscillation | Coherently driven two-level populations exchange periodically | Exact ideal cycle `x_Q(t)=2p_B(t)=1-cos(Ωt)`, traversing `0→1→2→1→0` | E0/E1 exact crosswalk in the ideal resonant model |
+| Landau–Zener crossing | `H=(vt/2)σ_z+gσ_x`; `P_stay=exp[-2πg²/(ℏ|v|)]` | Exact structural `0→1→2` avoided-crossing path plus final stay/handover ARA outcome | E0/E1 exact under ideal model; universal handover mechanism A1/A2 |
 | Klein–Gordon equation | Relativistic scalar-field equation | Local field connection supports relativistic propagation and mass term | E0; no unique ARA diameter yet |
 | Dirac equation | Relativistic spin-1/2 field equation | Couples spinor components while preserving relativistic quantum structure | E0; no unique ARA map yet |
 | Gauge symmetry | Local phase redundancy requires gauge connection fields | A mathematical connection organizes physically invariant relations | E0 structure; resemblance to ARA “connection” is insufficient without a map |
@@ -783,9 +991,154 @@ The functional `𝒞` is not yet known. The ARA “2 energy units” remain norm
 energy scale converts them into joules. A successful law must recover invariant mass while predicting something
 from the independently measured connection state.
 
+### 10.3 Bloch sphere: exact plain-ARA diameter on every quantum measurement axis
+
+For a two-level pure state in the declared basis \(\{|A\rangle,|B\rangle\}\),
+
+\[
+|\psi\rangle=\alpha|A\rangle+\beta|B\rangle,
+\qquad
+|\alpha|^2+|\beta|^2=1.
+\]
+
+Orient B toward ARA `2`. The primary plain-ARA coordinate is
+
+\[
+\boxed{
+x_Q
+=2\frac{|\beta|^2}{|\alpha|^2+|\beta|^2}
+=2|\beta|^2.
+}
+\]
+
+The conventional Bloch coordinate is
+
+\[
+r_z=|\alpha|^2-|\beta|^2,
+\]
+
+so
+
+\[
+\boxed{
+r_z=1-x_Q,
+\qquad
+x_Q-1=-r_z.
+}
+\]
+
+This is the exact “opposite-direction” crosswalk: standard quantum mechanics centres the diameter on zero and
+uses \([-1,1]\), while ARA reads the same selected diameter from `0` to `2`. For any measurement direction
+\(\hat{\mathbf n}\),
+
+\[
+\boxed{
+x_{\hat{\mathbf n}}
+=1-\mathbf r\cdot\hat{\mathbf n}.
+}
+\]
+
+Thus every rotational measurement axis through the Bloch sphere defines a reversible ARA diameter after its poles
+are named.
+
+A general two-level state is
+
+\[
+\rho=\frac12(I+\mathbf r\cdot\boldsymbol\sigma),
+\qquad
+|\mathbf r|\le1.
+\]
+
+The whole plane \(r_z=0\) reads `x_Q=1`. A pure coherent equatorial state and the maximally mixed centre therefore
+share one ARA position while differing in phase and purity. This exactly demonstrates why `1.0` alone cannot
+distinguish coherent resonance, incoherent cancellation and mixed quietness.
+
+For ideal resonant Rabi motion beginning at A,
+
+\[
+x_Q(t)
+=2\sin^2\left(\frac{\Omega t}{2}\right)
+=1-\cos(\Omega t),
+\]
+
+giving `0→1→2→1→0`. This is an exact E0/E1 coordinate crosswalk, not a derivation of quantum mechanics from ARA.
+Independent validation passed `10/10` checks over 10,000 pure states, 10,000 mixed-state/random-axis cases and
+4,097 Rabi points. Full report:
+`analysis/quantum/BLOCH_SPHERE_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+### 10.4 Landau–Zener: connection broadens a direct flip into a handover gradient
+
+For
+
+\[
+\hat H(t)
+=
+\frac{vt}{2}\sigma_z+g\sigma_x,
+\]
+
+the bare-state detuning lies on the Bloch \(z\) axis and the coupling lies on the perpendicular \(x\) axis. The
+coupled energy gap is
+
+\[
+\Delta E(t)
+=
+\sqrt{(vt)^2+4g^2},
+\qquad
+\Delta E_{\min}=2|g|.
+\]
+
+The lower instantaneous eigenstate has the exact B-oriented structural ARA coordinate
+
+\[
+\boxed{
+x_{\rm path}(t)
+=
+1+\frac{vt}{\sqrt{(vt)^2+4g^2}}.
+}
+\]
+
+It is monotone from `0` to `2`, satisfies \(x_{\rm path}(-t)=2-x_{\rm path}(t)\), and reaches equal bare-state
+mixing at `1.0` when \(t=0\). For \(g\to0\), it becomes the one-sided direct `0→2` flip; at \(t=0,g=0\), the gap
+closes and the instantaneous eigenvector is not unique. For \(g\neq0\), coupling spreads the flip into a finite
+gradient-mixing region.
+
+The true dimensionless Connection-versus-Traversal control is
+
+\[
+\gamma
+=
+\frac{g^2}{\hbar|v|}.
+\]
+
+The asymptotic ideal-sweep probabilities are
+
+\[
+P_{\rm stay}=e^{-2\pi\gamma},
+\qquad
+P_{\rm handover}=1-e^{-2\pi\gamma},
+\]
+
+giving the second, outcome-oriented ARA coordinate
+
+\[
+\boxed{
+x_{\rm handover}
+=
+2\left(1-e^{-2\pi g^2/(\hbar|v|)}\right).
+}
+\]
+
+The structural and outcome `1.0` ridges are different observables: the first is instantaneous equal mixing; the
+second is equal final stay/handover probability at \(\gamma=\ln2/(2\pi)\). The structural coordinate describes an
+instantaneous eigenstate; the actual state tracks it only in the adiabatic limit.
+
+Independent validation passed `12/12`, including 10,000 independently solved eigenstates and 10,000 transition
+probability trials. Full report:
+`analysis/quantum/LANDAU_ZENER_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
 ## 11. What repeats most strongly across the atlas
 
-The crosswalk reveals five recurring structures with substantially different evidential strength:
+The crosswalk reveals six recurring structures with substantially different evidential strength:
 
 1. **Balance laws are genuinely widespread.** Change of stored quantity equals source/input minus boundary output.
    This is the most defensible established Accumulation–Release skeleton.
@@ -798,16 +1151,119 @@ The crosswalk reveals five recurring structures with substantially different evi
 5. **Symmetry creates conservation, while broken symmetry or open boundaries permit directed change.** This is
    established through Noether-type reasoning, but identifying every symmetry break with one ARA singularity flip
    is an additional hypothesis.
+6. **A diameter can be exact while incomplete.** Hamilton phase space and the quantum Bloch ball both admit exact
+   bounded ARA coordinates whose single values discard quadrant, phase or purity information.
 
 These repetitions make ARA a plausible *organizing coordinate programme*. They do not yet prove that every law
 is generated by one literal sphere, that every balanced point has the same dynamics, or that the same numerical
 landmarks must occur in all domains.
 
+### 11.1 Cosmic-to-quantum typed traversal
+
+The reviewed laws can now be traversed from solar spacetime to quantum hydrogen without pretending that they are
+one algebraic derivation:
+
+\[
+\text{Einstein}
+\xrightarrow[\text{weak field}]{\text{exact limit}}
+\text{Poisson/Newton}
+\xrightarrow{\text{exact reformulation}}
+\text{Hamilton}
+\xrightarrow{\text{theorem consequences}}
+\{\text{Noether},\text{virial}\},
+\]
+
+\[
+\text{Maxwell/Gauss/Faraday/Ampère}
+\longrightarrow
+\{\text{Poynting},\text{Lorentz}\}
+\longrightarrow
+\text{charged Hamiltonian}
+\xrightarrow{\text{quantisation/model transition}}
+\text{Schrödinger}
+\longrightarrow
+\text{hydrogen}.
+\]
+
+Gravity and electrostatics share an inverse-distance mathematical form, but this is a **sibling bridge**, not a
+derivation of one interaction from the other. The recurring ARA feature is a declared two-channel relation plus
+the relation/current/boundary term that tells how the channels change. The strongest common established spine is
+
+\[
+\partial_t q+\nabla\!\cdot\mathbf J=s,
+\]
+
+which appears as stress-energy conservation, charge continuity, electromagnetic energy continuity and quantum
+probability continuity with domain-specific meanings.
+
+The `1.0` landmark must remain typed. It means active force cancellation for Newton, equal energy allocation for
+the harmonic Hamiltonian, weighted virial equality for inverse-distance binding, source/flux closure for Gauss,
+equal electric/magnetic energy contribution for a vacuum plane wave, equal input/output throughput for Poynting,
+or equal outcome probability for a selected Bloch axis. These are appearances of the same proposed relational
+geometry, not the same physical state.
+
+The full two-column atlas, diagram, data and `15/15` validation are in
+`analysis/physics_ladder/ARA_PHYSICS_COSMIC_TO_QUANTUM_LADDER_REPORT_2026-07-23.md`.
+
+### 11.2 Exact child-to-parent boundary composition
+
+The continuity spine now has a frozen aggregation operator. For two adjacent one-dimensional child intervals, let
+\(A_i\) be inward activity, \(R_i\) outward activity, \(T_i=A_i+R_i\), and \(I\) the magnitude of the shared
+interface flux. Then
+
+\[
+\boxed{
+x_P
+=
+\frac{2(R_1+R_2-I)}
+{T_1+T_2-2I}
+}.
+\]
+
+The shared interface is release for one child and accumulation for the other, but it crosses no boundary of their
+enclosing parent. Removing it from both directional accounts is therefore exact boundary conservation, not an
+empirical coefficient.
+
+The unchanged rule passed `4,097/4,097` samples in each of an analytic Newton/Hamilton string-energy wave, a
+lossless Maxwell/Poynting transmission line and a free Schrödinger Gaussian probability-current holdout. The worst
+parent-coordinate error was \(2.1538\times10^{-14}\). The best incorrect flattening control still had mean error
+`0.302350`.
+
+This is an exact cross-domain reconstruction and an explicit ARA zoom rule. It does not yet predict an unknown
+source or relation-storage term. Report:
+`analysis/physics_ladder/ARA_CHILD_PARENT_COMPOSITION_REPORT_2026-07-23.md`.
+
+### 11.3 Localizing an omitted source, sink or relation leak
+
+For a declared child or relation continuity account,
+
+\[
+\frac{dq_i}{dt}=g_i+s_i,
+\]
+
+the signed unclosed term is
+
+\[
+\boxed{
+\widehat s_i=\frac{dq_i}{dt}-g_i
+}.
+\]
+
+This residual was frozen before three controlled tests. It located a viscous sink on oscillator 2, Joule loss on
+the coupling relation between two capacitors, and probability decay on quantum state 2 in an untouched holdout.
+All three locations and sink directions were correct. Maximum peak-normalized waveform RMSE was
+\(1.0554\times10^{-9}\) over `18,991` scored samples; no-Other, parent-only and wrong-location controls all lost.
+
+The cross-domain result is a valid conservation-diagnostic recovery, not a new physical law. Its contribution to
+the ARA crosswalk is precise bookkeeping: `Other` stays attached to the child, boundary or relation where closure
+fails instead of being flattened into the parent. Report:
+`analysis/physics_ladder/ARA_HIDDEN_OTHER_RESIDUAL_REPORT_2026-07-23.md`.
+
 ## 12. Laws that should not be force-fitted yet
 
-Some foundational statements currently lack a nontrivial ARA transformation:
+Some foundational statements currently lack a nontrivial ARA transformation or derivation:
 
-- the Born rule;
+- derivation of the Born rule rather than reparameterizing its probabilities;
 - Pauli exclusion;
 - gauge redundancy;
 - the numerical values of fundamental constants;
