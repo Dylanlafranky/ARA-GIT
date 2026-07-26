@@ -164,3 +164,28 @@ prematurely entering entanglement or measurement claims.
 Preparation and fidelity question:
 
 `FableConvo/QUANTUM_DEEP_DIVE_PREPARATION_2026-07-23.md`.
+
+## Q1 open-qubit multi-axis test — T258
+
+Dylan approved the prepared test with “Yes. let us do that test :D”. Before any development data, target data,
+code or outcomes, T258 and the full protocol were frozen at 23:18 AEST. Protocol SHA-256:
+`f51c0b44a29869f90af88ada873f1363441424dfc9e2584fcdc5b19215700a2b`.
+
+The known-referee design used four open-qubit mechanisms starting from the same \((1,0,0)\) state. Unitary
+rotation and pure dephasing had the exact same clean `Z=1` diameter, while longitudinal relaxation and combined
+rotation-relaxation had the same paired clean `Z` trajectory. Thus the test directly asked whether coupled
+`X/Y/Z` line cuts retain direction and radius that a single diameter discards.
+
+At the primary `128` shots, multi-axis ARA classified `511/512` fresh trials (`99.80%`) versus `256/512`
+(`50.00%`) for `Z` only. Rotation direction and unitary-versus-dephasing ridge classification were both
+`256/256`; held-out directional MAE was `0.06112`. Time and axis shuffles fell to `45.51%` and `52.34%`.
+All `9/9` frozen gates passed.
+
+The grounding controls prevent overstatement. The independently implemented same-information Bloch account was
+identical to ARA at every sample and decision. A fixed-grid native quantum-model fit scored `512/512`. Therefore
+Q1 supports the value and fidelity of decompression from one ARA diameter to an informationally complete set of
+cuts, but not superiority over tomography, a derivation of quantum mechanics, hidden Phase B ontology, universal
+fractality, phi or quantum gravity. Independent validation passed `14/14`.
+
+Restart from:
+`analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_REPORT_2026-07-23.md`.

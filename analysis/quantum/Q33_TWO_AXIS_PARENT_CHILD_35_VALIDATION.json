@@ -1,0 +1,70 @@
+{
+  "validator": "Q33-independent-validator-v1",
+  "status": "PASS",
+  "observed_hashes": {
+    "protocol_sha256": "c91afedc4a01b763b81940a0057929644ddde1806825afcdf21a7fced48f0a23",
+    "fidelity_sha256": "b7a306b2fa02c9048d017c77768c6b6069dbd8b82e3f9db33d072bc6529ed620",
+    "q27_cache_sha256": "660a59ff416b3938755fcde6b7c361bb46a2fe24bf8c2aaca0cfa63bbb80137c",
+    "q28_cache_sha256": "6b73ac362d50453dad6ff76ea2a9102b04b24d5e9be596c46545cf5671ad4ef9"
+  },
+  "expected_hashes": {
+    "protocol_sha256": "c91afedc4a01b763b81940a0057929644ddde1806825afcdf21a7fced48f0a23",
+    "fidelity_sha256": "b7a306b2fa02c9048d017c77768c6b6069dbd8b82e3f9db33d072bc6529ed620",
+    "q27_cache_sha256": "660a59ff416b3938755fcde6b7c361bb46a2fe24bf8c2aaca0cfa63bbb80137c",
+    "q28_cache_sha256": "6b73ac362d50453dad6ff76ea2a9102b04b24d5e9be596c46545cf5671ad4ef9"
+  },
+  "checks": {
+    "all_hashes_match": true,
+    "event_total_matches_results": true,
+    "development_rows_match": true,
+    "evaluation_rows_match": true,
+    "trial_rows_are_200_strata": true,
+    "event_keys_unique": true,
+    "raw_sample_reconstruction_passes": true,
+    "verdict_recomputes": true,
+    "headline_capacity_matches": true,
+    "headline_origin_matches": true
+  },
+  "raw_sample": {
+    "sample_n": 64,
+    "failure_count": 0,
+    "failures": [],
+    "all_pass": true
+  },
+  "recomputed": {
+    "exact_capacity_median": 1.2734899187005664,
+    "exact_half_distance_median": 0.7833541926189698,
+    "exact_child_origin_x_median": 0.041370345279574394,
+    "both_origin_fraction": 0.8150394178289873,
+    "eligibility": {
+      "source_events_ge_5000": true,
+      "strata_ge_100": true,
+      "exact_routes_ge_5000": true,
+      "topology_paired_events_ge_2000": true,
+      "seed_paired_events_ge_2000": true,
+      "time_paired_events_ge_2000": true
+    },
+    "half_capacity_gates": {
+      "pooled_median_capacity_in_040_060": false,
+      "c2_median_capacity_in_035_065": false,
+      "c4_median_capacity_in_035_065": false,
+      "exact_error_5pct_better_than_topology": true,
+      "bootstrap_probability_ge_095_vs_topology": true,
+      "exact_error_5pct_better_than_seed": true,
+      "bootstrap_probability_ge_095_vs_seed": true,
+      "exact_error_5pct_better_than_time": false,
+      "bootstrap_probability_ge_095_vs_time": false
+    },
+    "backward_pole_gates": {
+      "median_child_origin_x_le_05": true,
+      "both_child_origins_le_05_fraction_ge_050": true
+    },
+    "label": "CROSS-RUNG 3.5 PROJECTION NOT SUPPORTED BY THIS IMPLEMENTATION"
+  },
+  "saved_verdict": "CROSS-RUNG 3.5 PROJECTION NOT SUPPORTED BY THIS IMPLEMENTATION",
+  "limitations": [
+    "The validator shares the same cached source arrays, but not primary code.",
+    "Bootstrap draws are checked through saved probabilities and gate logic; they are not redrawn.",
+    "Validation establishes computational reproducibility, not physical replication."
+  ]
+}

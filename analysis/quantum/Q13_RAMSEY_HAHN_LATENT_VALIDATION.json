@@ -1,0 +1,90 @@
+{
+  "validation_id": "Q13-RAMSEY-HAHN-LATENT-CHILD-independent-v1",
+  "independent_of_main_module": true,
+  "checks": {
+    "protocol_hash": true,
+    "source_cells": true,
+    "finite_matrices": true,
+    "selected_candidate": true,
+    "fold_winners": true,
+    "candidate_summaries": true,
+    "permutation_null": true
+  },
+  "all_checks_pass": true,
+  "recomputed": {
+    "selected_candidate": "H_B",
+    "candidate_summaries": {
+      "R_A": {
+        "amplitude": {
+          "median_reduction": 0.9276765195534127,
+          "mean_reduction": 0.9326607618941053,
+          "median_rank_one_share": 0.999999450801347,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.111096830388696,
+          "mean_reduction": 0.04447940958471841,
+          "median_rank_one_share": 0.9180599629699329,
+          "median_sign_agreement": 1.0
+        }
+      },
+      "R_B": {
+        "amplitude": {
+          "median_reduction": 0.8646947378240919,
+          "mean_reduction": 0.869135036509493,
+          "median_rank_one_share": 0.9999989803057832,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.06747293666701037,
+          "mean_reduction": 0.0682687083228842,
+          "median_rank_one_share": 0.9649804334894225,
+          "median_sign_agreement": 0.0
+        }
+      },
+      "H_A": {
+        "amplitude": {
+          "median_reduction": 0.9168981280177999,
+          "mean_reduction": 0.9199320837487694,
+          "median_rank_one_share": 0.9999779194538495,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.11533102648779264,
+          "mean_reduction": 0.0753722787868801,
+          "median_rank_one_share": 0.9710950270868506,
+          "median_sign_agreement": 0.6666666666666666
+        }
+      },
+      "H_B": {
+        "amplitude": {
+          "median_reduction": 0.9161357957384666,
+          "mean_reduction": 0.9206283503874642,
+          "median_rank_one_share": 0.9999856454178864,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.1263818770901387,
+          "mean_reduction": 0.10546909377338423,
+          "median_rank_one_share": 0.9828037317766187,
+          "median_sign_agreement": 0.3333333333333333
+        }
+      }
+    },
+    "fold_winners": {
+      "Phi-plus": "H_B",
+      "Phi-minus": "R_B",
+      "Psi-plus": "H_B",
+      "Psi-minus": "R_A"
+    },
+    "null": {
+      "p_amplitude": 0.001,
+      "p_direction": 0.336,
+      "p_composite": 0.001,
+      "null_amplitude_q99": 0.44344236387217123,
+      "null_direction_q95": 0.30442144021046513,
+      "null_composite_q95": 0.19180093271702575
+    }
+  },
+  "boundary": "This validates implementation and deterministic reproduction only. It does not turn ordinal matching into a causal temporal handoff."
+}

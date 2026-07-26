@@ -1,0 +1,275 @@
+{
+  "protocol_id": "Q16-ARA2-RAW-v2",
+  "ledger_id": "T275",
+  "verdict": "SUPPORTED",
+  "gates_passed": 8,
+  "gates_total": 8,
+  "protocol_sha256": "63a099cf2ab200459d09240862a5e0239dfb241f45126c6474921adbb19fe51e",
+  "ara_stage": {
+    "children": [
+      "C00",
+      "C01",
+      "C10",
+      "C11"
+    ],
+    "dimensions": 45,
+    "coordinate": "2*n(current>development_ridge)/n(non-tie)",
+    "development_ridge": "median of equally weighted per-record medians",
+    "segments_retained": [
+      "G0",
+      "G1",
+      "G2",
+      "G3",
+      "G4"
+    ],
+    "settings_retained": [
+      "K0",
+      "K1",
+      "K2",
+      "K3",
+      "K4",
+      "K5",
+      "K6",
+      "K7",
+      "K8"
+    ]
+  },
+  "parent_geometry": {
+    "U_holdout_cosine_abs": 0.8778414244327464,
+    "V_holdout_cosine_abs": 0.8293112040304702,
+    "J_holdout_cosine_abs": 0.8183882007776175,
+    "U_cut_sign_retention": 0.9777777777777777,
+    "V_cut_sign_retention": 0.8222222222222222,
+    "J_cut_sign_retention": 0.7111111111111111,
+    "U_informative_cuts": 45,
+    "V_informative_cuts": 45,
+    "J_informative_cuts": 45,
+    "U_energy": 0.07720970233970934,
+    "V_energy": 0.05862298326336849,
+    "J_energy": 0.042857024244746994,
+    "J_energy_share": 0.23984047140288473,
+    "J_shuffle_99": 0.012522541609229679,
+    "J_shuffle_p": 0.0001,
+    "relation_class": "STATEFUL RETAINED RELATION"
+  },
+  "decoding": {
+    "bit_u_balanced_accuracy": 0.98125,
+    "bit_v_balanced_accuracy": 0.90625,
+    "four_child_balanced_accuracy": 0.8875,
+    "nearest_four_centroid_accuracy": 0.95625,
+    "label_shuffle_99": 0.4876250000000027,
+    "label_shuffle_p": 0.0001,
+    "bootstrap": {
+      "bit_u_balanced_accuracy": {
+        "mean": 0.981225,
+        "ci_low": 0.95625,
+        "ci_high": 1.0
+      },
+      "bit_v_balanced_accuracy": {
+        "mean": 0.907046875,
+        "ci_low": 0.8625,
+        "ci_high": 0.95
+      },
+      "four_child_balanced_accuracy": {
+        "mean": 0.888271875,
+        "ci_low": 0.8375,
+        "ci_high": 0.93125
+      }
+    }
+  },
+  "negative_control": {
+    "pseudo_child_passes": 0,
+    "pseudo_child_total": 1000,
+    "false_positive_rate": 0.0
+  },
+  "development_geometry": {
+    "pairwise_distances": {
+      "C00__C01": 0.31440977646210083,
+      "C00__C10": 0.34477478814587387,
+      "C00__C11": 0.4104958739787216,
+      "C01__C10": 0.3211829831304906,
+      "C01__C11": 0.34822952004084945,
+      "C10__C11": 0.32265540051467095
+    },
+    "mean_pairwise_distance": 0.3436247237121179,
+    "parallelogram_residuals": {
+      "C00+C11_vs_C01+C10": {
+        "raw": 0.4140387626527109,
+        "normalized_by_mean_pair_distance": 1.2049155199891395
+      },
+      "C00+C10_vs_C01+C11": {
+        "raw": 0.48424367115479566,
+        "normalized_by_mean_pair_distance": 1.4092224387220915
+      },
+      "C00+C01_vs_C10+C11": {
+        "raw": 0.5557326779656181,
+        "normalized_by_mean_pair_distance": 1.6172662780551266
+      }
+    },
+    "tetrahedral_volume": 0.004502038192571953,
+    "normalized_tetrahedral_volume": 0.1109573214044204,
+    "centered_rank": 3
+  },
+  "holdout_geometry": {
+    "pairwise_distances": {
+      "C00__C01": 0.3041955105984208,
+      "C00__C10": 0.36176905032728746,
+      "C00__C11": 0.41516988687889805,
+      "C01__C10": 0.29297722769648255,
+      "C01__C11": 0.33982432670797336,
+      "C10__C11": 0.32632089729265934
+    },
+    "mean_pairwise_distance": 0.34004281658362023,
+    "parallelogram_residuals": {
+      "C00+C11_vs_C01+C10": {
+        "raw": 0.43263837619379253,
+        "normalized_by_mean_pair_distance": 1.2723055894562678
+      },
+      "C00+C10_vs_C01+C11": {
+        "raw": 0.4591998571435309,
+        "normalized_by_mean_pair_distance": 1.350417755496413
+      },
+      "C00+C01_vs_C10+C11": {
+        "raw": 0.552755708282482,
+        "normalized_by_mean_pair_distance": 1.625547376168593
+      }
+    },
+    "tetrahedral_volume": 0.00427182797437805,
+    "normalized_tetrahedral_volume": 0.1086457997256054,
+    "centered_rank": 3
+  },
+  "post_result_diagnostics": {
+    "energy_by_unnamed_setting": {
+      "K0": {
+        "U": 0.03560797933803881,
+        "V": 0.010331167353282891,
+        "J": 0.001489214097013668
+      },
+      "K1": {
+        "U": 0.0027925899748541317,
+        "V": 0.005447609864069912,
+        "J": 0.0014703371078652692
+      },
+      "K2": {
+        "U": 0.0048921192131405385,
+        "V": 0.002013029378893142,
+        "J": 0.0003544825984879975
+      },
+      "K3": {
+        "U": 0.004975852436656611,
+        "V": 0.0015014313243080588,
+        "J": 0.001072362025412794
+      },
+      "K4": {
+        "U": 0.00408862390393723,
+        "V": 0.03264169292385957,
+        "J": 0.0014248254201181718
+      },
+      "K5": {
+        "U": 0.008555425574825757,
+        "V": 0.002479727197670381,
+        "J": 0.0025105656601087218
+      },
+      "K6": {
+        "U": 0.004988469004454296,
+        "V": 0.0013155134283530064,
+        "J": 0.0007008581463151112
+      },
+      "K7": {
+        "U": 0.005622642287978994,
+        "V": 0.0024658559398899557,
+        "J": 0.002587086218265434
+      },
+      "K8": {
+        "U": 0.005686000605822974,
+        "V": 0.0004269558530415761,
+        "J": 0.03124729297115983
+      }
+    },
+    "energy_by_raw_segment": {
+      "G0": {
+        "U": 0.007276025158088349,
+        "V": 0.0040562712619856365,
+        "J": 0.0008006227718160884
+      },
+      "G1": {
+        "U": 0.01784594282900795,
+        "V": 0.015542591722822201,
+        "J": 0.014359277609586843
+      },
+      "G2": {
+        "U": 0.025060220915734538,
+        "V": 0.022127754908618055,
+        "J": 0.008291334726621044
+      },
+      "G3": {
+        "U": 0.018283427873360583,
+        "V": 0.01062751231628693,
+        "J": 0.011451801068148013
+      },
+      "G4": {
+        "U": 0.008744085563517929,
+        "V": 0.00626885305365566,
+        "J": 0.007953988068575007
+      }
+    },
+    "boundary": "Descriptive only; not used in frozen gates. Conventional setting names may be restored only after this result is saved."
+  },
+  "gates": {
+    "G1_parent_U_holdout_cosine": {
+      "value": 0.8778414244327464,
+      "threshold": 0.8,
+      "pass": true
+    },
+    "G2_parent_V_holdout_cosine": {
+      "value": 0.8293112040304702,
+      "threshold": 0.8,
+      "pass": true
+    },
+    "G3_parent_U_cut_sign_retention": {
+      "value": 0.9777777777777777,
+      "threshold": 0.75,
+      "pass": true,
+      "informative_cuts": 45
+    },
+    "G4_parent_V_cut_sign_retention": {
+      "value": 0.8222222222222222,
+      "threshold": 0.75,
+      "pass": true,
+      "informative_cuts": 45
+    },
+    "G5_parent_U_bit_accuracy": {
+      "value": 0.98125,
+      "threshold": 0.8,
+      "pass": true
+    },
+    "G6_parent_V_bit_accuracy": {
+      "value": 0.90625,
+      "threshold": 0.8,
+      "pass": true
+    },
+    "G7_four_child_accuracy": {
+      "value": 0.8875,
+      "threshold": 0.7,
+      "registered_floor": 0.7,
+      "shuffle_99": 0.4876250000000027,
+      "shuffle_p": 0.0001,
+      "pass": true
+    },
+    "G8_pseudo_child_false_positive_rate": {
+      "value": 0.0,
+      "threshold": 0.05,
+      "passes": 0,
+      "total": 1000,
+      "pass": true
+    }
+  },
+  "data_quality_path": "Q16_ARA2_RAW_FOUR_CHILD_DATA_QUALITY.json",
+  "artifacts": [
+    "Q16_ARA2_RAW_FOUR_CHILD_RECORDS.csv",
+    "Q16_ARA2_RAW_FOUR_CHILD_CUTS.csv",
+    "Q16_ARA2_RAW_FOUR_CHILD_CONTRASTS.csv",
+    "Q16_ARA2_RAW_FOUR_CHILD_CONTROLS.csv"
+  ],
+  "evidence_boundary": "Corrected ARA-native reanalysis of four already-open archives from one device/deposit. Requires unchanged independent-source replication."
+}

@@ -1,0 +1,277 @@
+{
+  "protocol_id": "Q1-OPEN-QUBIT-MULTI-AXIS-v1",
+  "ledger_id": "T258",
+  "protocol_sha256": "f51c0b44a29869f90af88ada873f1363441424dfc9e2584fcdc5b19215700a2b",
+  "registered_primary_shots": 128,
+  "seeds": {
+    "development": 2026072301,
+    "target": 2026072302,
+    "heldout_controls": 2026072303
+  },
+  "sample_sizes": {
+    "development_base_draws": 64,
+    "development_trials": 256,
+    "target_base_draws": 128,
+    "target_trials_all_shots": 3072,
+    "primary_trials": 512,
+    "time_points": 65,
+    "heldout_directions_per_trial": 16
+  },
+  "thresholds_selected_on_development_only": {
+    "rotation": 0.6814251366291233,
+    "relaxation": 0.3549819438467047,
+    "ridge_coherence": 0.6324520036139974,
+    "development_rotation_balanced_accuracy": 0.99609375,
+    "development_relaxation_balanced_accuracy": 1.0,
+    "development_ridge_balanced_accuracy": 1.0
+  },
+  "verdict": "SUPPORTED",
+  "primary_gates": {
+    "four_class_accuracy": {
+      "value": 0.998046875,
+      "criterion": ">= 0.90",
+      "passed": true
+    },
+    "gain_over_z": {
+      "value": 0.498046875,
+      "criterion": ">= 0.30",
+      "passed": true
+    },
+    "rotation_direction_accuracy": {
+      "value": 1.0,
+      "criterion": ">= 0.90",
+      "passed": true
+    },
+    "u_vs_t2_ridge_accuracy": {
+      "value": 1.0,
+      "criterion": ">= 0.95",
+      "passed": true
+    },
+    "heldout_directional_mae": {
+      "value": 0.06112286561479594,
+      "criterion": "<= 0.08",
+      "passed": true
+    },
+    "ara_bloch_max_score_difference": {
+      "value": 0.0,
+      "criterion": "<= 1e-12",
+      "passed": true
+    },
+    "ara_bloch_classification_disagreements": {
+      "value": 0,
+      "criterion": "== 0",
+      "passed": true
+    },
+    "time_shuffle_accuracy": {
+      "value": 0.455078125,
+      "criterion": "<= 0.65",
+      "passed": true
+    },
+    "axis_shuffle_accuracy": {
+      "value": 0.5234375,
+      "criterion": "<= 0.65",
+      "passed": true
+    }
+  },
+  "primary_aggregate": {
+    "shots": 128,
+    "n_trials": 512,
+    "ara_accuracy": 0.998046875,
+    "bloch_accuracy": 0.998046875,
+    "z_accuracy": 0.5,
+    "native_accuracy": 1.0,
+    "time_shuffle_accuracy": 0.455078125,
+    "axis_shuffle_accuracy": 0.5234375,
+    "rotation_direction_accuracy": 1.0,
+    "ridge_u_vs_t2_accuracy": 1.0,
+    "heldout_mae": 0.06112286561479594,
+    "heldout_raw_mae": 0.06203433628932395,
+    "heldout_z_mae": 0.29749031288093847,
+    "antipodal_obs_mae": 0.08674527681790865,
+    "reconstruction_rmse": 0.07734136517667929,
+    "raw_reconstruction_rmse": 0.07836787573123488,
+    "radius_mae": 0.04385489339070872,
+    "raw_radius_mae": 0.04904691021997072,
+    "raw_unphysical_fraction": 0.18428485576923076,
+    "ara_bloch_max_state_diff": 0.0,
+    "ara_bloch_max_score_diff": 0.0,
+    "ara_bloch_disagreements": 0
+  },
+  "uncertainty_90_percent": {
+    "ara_accuracy_90ci": [
+      0.994140625,
+      1.0
+    ],
+    "ara_gain_over_z_90ci": [
+      0.494140625,
+      0.5
+    ],
+    "rotation_direction_wilson": [
+      0.9895419965959273,
+      1.0
+    ],
+    "u_vs_t2_ridge_wilson": [
+      0.9895419965959273,
+      1.0
+    ]
+  },
+  "confusion_matrices_primary": {
+    "ara": {
+      "U": {
+        "U": 128,
+        "T2": 0,
+        "T1": 0,
+        "C": 0
+      },
+      "T2": {
+        "U": 0,
+        "T2": 128,
+        "T1": 0,
+        "C": 0
+      },
+      "T1": {
+        "U": 0,
+        "T2": 0,
+        "T1": 128,
+        "C": 0
+      },
+      "C": {
+        "U": 0,
+        "T2": 0,
+        "T1": 1,
+        "C": 127
+      }
+    },
+    "z_only": {
+      "U": {
+        "U": 128,
+        "T2": 0,
+        "T1": 0,
+        "C": 0
+      },
+      "T2": {
+        "U": 128,
+        "T2": 0,
+        "T1": 0,
+        "C": 0
+      },
+      "T1": {
+        "U": 0,
+        "T2": 0,
+        "T1": 128,
+        "C": 0
+      },
+      "C": {
+        "U": 0,
+        "T2": 0,
+        "T1": 128,
+        "C": 0
+      }
+    },
+    "native_model_fit": {
+      "U": {
+        "U": 128,
+        "T2": 0,
+        "T1": 0,
+        "C": 0
+      },
+      "T2": {
+        "U": 0,
+        "T2": 128,
+        "T1": 0,
+        "C": 0
+      },
+      "T1": {
+        "U": 0,
+        "T2": 0,
+        "T1": 128,
+        "C": 0
+      },
+      "C": {
+        "U": 0,
+        "T2": 0,
+        "T1": 0,
+        "C": 128
+      }
+    },
+    "time_shuffle": {
+      "U": {
+        "U": 103,
+        "T2": 25,
+        "T1": 0,
+        "C": 0
+      },
+      "T2": {
+        "U": 0,
+        "T2": 128,
+        "T1": 0,
+        "C": 0
+      },
+      "T1": {
+        "U": 0,
+        "T2": 127,
+        "T1": 1,
+        "C": 0
+      },
+      "C": {
+        "U": 60,
+        "T2": 67,
+        "T1": 0,
+        "C": 1
+      }
+    },
+    "axis_shuffle": {
+      "U": {
+        "U": 93,
+        "T2": 12,
+        "T1": 2,
+        "C": 21
+      },
+      "T2": {
+        "U": 31,
+        "T2": 97,
+        "T1": 0,
+        "C": 0
+      },
+      "T1": {
+        "U": 0,
+        "T2": 88,
+        "T1": 40,
+        "C": 0
+      },
+      "C": {
+        "U": 0,
+        "T2": 90,
+        "T1": 0,
+        "C": 38
+      }
+    }
+  },
+  "analytic_invariants": {
+    "all_families_initial_state": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "unitary_and_t2_z_cut_identical": true,
+    "t1_and_combined_z_cut_identical_when_t1_paired": true,
+    "clean_antipodal_sum": 2.0,
+    "ara_bloch_same_information_equivalence_expected": true
+  },
+  "interpretive_boundary": {
+    "benchmark": "Frozen multi-axis instrument gates only.",
+    "geometry": "Several measured diameter cuts retain distinctions hidden from one cut.",
+    "not_established": [
+      "derivation of quantum mechanics",
+      "hidden ontological Phase B",
+      "universal fractality",
+      "advantage over standard tomography"
+    ]
+  },
+  "files": {
+    "development_csv": "Q1_OPEN_QUBIT_MULTI_AXIS_DEVELOPMENT.csv",
+    "trials_csv": "Q1_OPEN_QUBIT_MULTI_AXIS_TRIALS.csv",
+    "aggregates_csv": "Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv",
+    "trajectories_csv": "Q1_OPEN_QUBIT_MULTI_AXIS_TRAJECTORIES.csv"
+  }
+}

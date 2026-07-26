@@ -1,0 +1,71 @@
+{
+  "validator": "Q34-independent-raw-HDF-validator-v1",
+  "status": "PASS",
+  "hashes": {
+    "protocol_sha256": "56963274392d0c1f4b1c9c0cfe2ece700d25f20b43c9136b881bbde39baeae1e",
+    "fidelity_sha256": "f480e7fc7bcdbc7a69ad0a3b921552c9c8fad84e9e2e96c438f714f2373bda98",
+    "archive_md5": "c1cf77ccff486e3786d73ba47f8674f1",
+    "source_hdf_sha256": "830a4cb9baf3e8e8f70a81611ba7af97b90654b48de37674fa1a530ac3deb45d",
+    "derived_cache_sha256": "ab32ad22e207b9913eb69352f52ba9422e18ffb9bf8304d46412d80374428e3c",
+    "connected_cache_sha256": "8b02fa7d186e9e6debb60b501297cf39f2d55de11511fe116775d0eb6b4abde7"
+  },
+  "checks": {
+    "hashes_match": true,
+    "event_total_matches": true,
+    "development_rows_match": true,
+    "evaluation_rows_match": true,
+    "trial_rows_are_200": true,
+    "event_keys_unique": true,
+    "raw_hdf_sample_passes": true,
+    "verdict_recomputes": true,
+    "all_routing_gates_match": true,
+    "exact_median_matches": true,
+    "exact_positive_fraction_matches": true,
+    "structural_coordinate_is_fixed": true
+  },
+  "raw_sample": {
+    "sample_n": 64,
+    "raw_route_checks": 319,
+    "failure_count": 0,
+    "all_pass": true,
+    "failures": []
+  },
+  "recomputed": {
+    "exact_flow_median": 0.0073566546625174895,
+    "exact_positive_fraction": 0.5420911193050434,
+    "eligibility": {
+      "source_events_ge_5000": true,
+      "strata_ge_100": true,
+      "sibling_paired_ge_2000": true,
+      "topology_paired_ge_2000": true,
+      "seed_paired_ge_2000": true,
+      "time_paired_ge_2000": true
+    },
+    "routing_gates": {
+      "pooled_exact_median_flow_positive": true,
+      "exact_positive_fraction_ge_055": false,
+      "c2_median_exact_flow_positive": true,
+      "c4_median_exact_flow_positive": true,
+      "positive_fraction_advantage_ge_002_vs_sibling": true,
+      "median_paired_flow_advantage_positive_vs_sibling": false,
+      "bootstrap_probability_ge_095_vs_sibling": false,
+      "positive_fraction_advantage_ge_002_vs_topology": false,
+      "median_paired_flow_advantage_positive_vs_topology": true,
+      "bootstrap_probability_ge_095_vs_topology": true,
+      "positive_fraction_advantage_ge_002_vs_seed": false,
+      "median_paired_flow_advantage_positive_vs_seed": false,
+      "bootstrap_probability_ge_095_vs_seed": true,
+      "positive_fraction_advantage_ge_002_vs_time": false,
+      "median_paired_flow_advantage_positive_vs_time": false,
+      "bootstrap_probability_ge_095_vs_time": false
+    },
+    "label": "CROSS-ARCHIVE BOUNDARY-CHILD FLOW NOT REPLICATED"
+  },
+  "saved_verdict": "CROSS-ARCHIVE BOUNDARY-CHILD FLOW NOT REPLICATED",
+  "limitations": [
+    "The validator shares frozen source files and caches, but not primary analysis code.",
+    "It rebuilds 64 deterministic events and all available routes from raw density matrices.",
+    "Saved cluster-bootstrap probabilities are gate-checked, not redrawn.",
+    "A failed replication bounds the unchanged route; it does not test every possible ARA route."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "validator": "q1_open_qubit_multi_axis_validate.py",
+  "all_checks_passed": true,
+  "passed": 14,
+  "total": 14,
+  "checks": [
+    {
+      "check": "frozen_protocol_hash",
+      "passed": true,
+      "detail": "f51c0b44a29869f90af88ada873f1363441424dfc9e2584fcdc5b19215700a2b"
+    },
+    {
+      "check": "row_counts",
+      "passed": true,
+      "detail": "development=256, target=3072, aggregates=6, trajectories=260"
+    },
+    {
+      "check": "development_target_separation",
+      "passed": true,
+      "detail": "development IDs=64, target IDs=128"
+    },
+    {
+      "check": "development_threshold_reproduction",
+      "passed": true,
+      "detail": "rotation=0.681425136629, relaxation=0.354981943847, ridge=0.632452003614"
+    },
+    {
+      "check": "target_prediction_reproduction",
+      "passed": true,
+      "detail": "recomputed from frozen development thresholds"
+    },
+    {
+      "check": "paired_known_referee_identities",
+      "passed": true,
+      "detail": "same parameters per base; U=T2 and T1=C clean Z sums"
+    },
+    {
+      "check": "common_initial_state",
+      "passed": true,
+      "detail": "all four families start at (1,0,0)"
+    },
+    {
+      "check": "finite_shot_reading_bounds",
+      "passed": true,
+      "detail": "all recorded cuts lie in [0,2]"
+    },
+    {
+      "check": "analytic_antipodal_complement",
+      "passed": true,
+      "detail": "max residual=0"
+    },
+    {
+      "check": "same_information_ara_bloch_equivalence",
+      "passed": true,
+      "detail": "state=0, score=0, disagreements=0"
+    },
+    {
+      "check": "primary_aggregate_reproduction",
+      "passed": true,
+      "detail": "{\"ara_accuracy\": 0.998046875, \"axis_shuffle_accuracy\": 0.5234375, \"heldout_mae\": 0.06112286561479594, \"native_accuracy\": 1.0, \"ridge_u_vs_t2_accuracy\": 1.0, \"rotation_direction_accuracy\": 1.0, \"time_shuffle_accuracy\": 0.455078125, \"z_accuracy\": 0.5}"
+    },
+    {
+      "check": "frozen_gate_reproduction",
+      "passed": true,
+      "detail": "9/9 gates; verdict=SUPPORTED"
+    },
+    {
+      "check": "physical_projection_and_raw_control",
+      "passed": true,
+      "detail": "max physical radius=1, raw outside fraction=0.184285"
+    },
+    {
+      "check": "registered_shot_ladder",
+      "passed": true,
+      "detail": "[32, 64, 128, 256, 512, 1024]"
+    }
+  ]
+}

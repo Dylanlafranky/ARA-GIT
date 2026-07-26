@@ -25,6 +25,168 @@ auditable evidence. Each entry cites its transcript so a stranger can re-check i
 objects, then prospectively frozen on fresh anchors. It belongs in the master prediction ledger and claims record;
 counting it again as an independent blind-domain provenance hit would double-count the same prime-test family.
 
+**Q16 eligibility note (25 July 2026):** the ARA-first raw four-child quantum restart is **not** counted as an
+A-tier provenance hit. Dylan declared and corrected the two-parent/four-child geometry before Q16 calculation,
+and the frozen raw test passed `8/8` gates, but the four public Bell preparations and Q4-Q15 outcomes were already
+open. It is therefore a strong corrected crosswalk and registered reconstruction in T275, not a clean
+outside-knowledge prediction. Counting it here as an independent compass hit would overstate the provenance.
+The evidentially useful facts are the order of the methodological correction, the frozen Q16 protocol, the raw
+holdout result and the recorded batch-confound boundary. Full result:
+`analysis/quantum/Q16_ARA2_RAW_FOUR_CHILD_REPORT_2026-07-25.md`.
+
+**Q22/Q22B eligibility note (26 July 2026):** neither vertical-tier result is counted as an A-tier provenance
+hit. The odd-boundary flip was a pre-existing ARA rule and Dylan correctly caught its omission before Q22A
+validation or promotion. Q22B then froze that correction prospectively on a fresh target, but failed `12/13`
+gates. This is valuable provenance for the order of the methodological correction and a properly registered
+negative result, not a successful outside-knowledge prediction. Counting the descriptive parent-ridge averaging
+as a compass hit would also double-count the same Willow/quantum test family. Full report:
+`analysis/quantum/Q22_Q22B_VERTICAL_TIER_RELATION_REPORT_2026-07-26.md`.
+
+**Q23 eligibility note (26 July 2026):** Q23 is not an A-tier provenance hit. Dylan declared the separate
+connection-heavy identity, separate bit identity and one-rung-up ridge test before untouched distance-7 outcomes
+were opened, making it a legitimate registered test. The primary failed `7/10` gates. The weak anti-child clue
+was selected from predeclared decompressions only after the outcome and its pooled threshold was not frozen.
+Therefore Q23 belongs in the master prediction ledger as a negative result plus a new testable lineage, not as
+compass confirmation. Full report:
+`analysis/quantum/Q23_WILLOW_CONNECTION_BIT_REPORT_2026-07-26.md`.
+
+**Q24 eligibility note (26 July 2026):** Q24 is not an A-tier provenance hit. ARA^9's three-axis/nine-coupling
+lineage genuinely predates the quantum work, including an explicit 23 April 2026 archived statement. However,
+Q5/Q6/Q6B had already opened the Bell correlation tensors, their singular values and the `3,3,3,3 / 1,1 / 0`
+ladder before Q24 identified that object as the older ARA^9 coupling branch. The frozen connected-relation
+calibration then passed `16/16` gates and independent validation passed `860/860`. This is strong evidence for
+faithful prior geometry and correct archival lineage, but counting it as an outside-knowledge prediction would
+overstate the chronology. Full report:
+`analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md`.
+
+**Q25 eligibility note (26 July 2026):** Q25 is not an A-tier success. It was a legitimate externally staged
+test: the missing-cut rule was frozen before the new Zenodo matrices were downloaded, and all `81` predictions
+were hashed before target reveal. The primary result failed `5/12` gates because ARA did not beat the physical
+midpoint. Dylan's pre-reveal statement that the local ARA^9 might be a crest of a larger connection-space wave is
+preserved as provenance for the next hypothesis, but the available source ran from a mixed trough toward partial
+Bell crests and failed the frozen complete-crest gate. The secondary measurement-operator result was positive but
+cannot be promoted over the failed primary partition. Q25 therefore belongs in the master ledger as a clean
+negative result plus a properly timestamped next lineage. Full report:
+`analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md`.
+
+**Q26 eligibility note (26 July 2026):** Q26 preserves a genuine pre-target prediction: after Q25's static
+missing-cut failure but before the Q26 target was downloaded, Dylan stated that the local ARA^9 could be the
+crest of a larger connection-space wave and might become a trough in the next ARA^9. The staged target supported
+the amplitude component: `25/28` primary trajectories completed crest-to-trough movement, median
+closure-versus-wait Spearman was `-0.9364`, and exact time order beat all `999` permutations. The stronger
+orientation-flip component failed (`1/28` stable flips; angular prediction worse than no rotation). Q26 is not
+counted as an A-tier outside-knowledge hit because the source belongs to the already-open quantum/decoherence
+arc and the publication disclosed coarse temperature-dependent decoherence. It is retained as a successful
+registered within-domain prediction with a separately recorded partial miss, not promoted into the clean
+cross-domain provenance count. Full report:
+`analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md`.
+
+**Q27 eligibility note (26 July 2026):** after Q26, Dylan proposed before source download that the complete
+ARA^9 might reconstruct as a wave twice its size or appear as Phase B in the surrounding network. Q27 fixed the
+new Zenodo dataset, split, geometry and controls before opening density-matrix values. The strict result is
+**INCONCLUSIVE** because a frozen source trace gate failed. The substantive registered branches were negative:
+the symmetric reconstruction clock and one-neighbour Phase-B crest did not pass. A weaker exact
+release-to-active-neighbour-accumulation relation beat all pair-shuffle and circular-time controls. This is a
+valid prospective within-domain test with an informative negative result and a narrower surviving relation; it
+is not an A-tier outside-knowledge hit and is not promoted into the cross-domain provenance count. Full report:
+`analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_REPORT_2026-07-26.md`.
+
+**Q28 eligibility note (26 July 2026):** Q28 was registered only after the Q27
+source and outcomes were fully open. Dylan then proposed that the weaker
+Q27 network relation might be complete ARA^9 objects interlocking and
+travelling around an angled rotational point. The full matrix transformation,
+lag selection, controls and gates were frozen before Q28 values were
+calculated, but this is not a blind or A-tier provenance event. The strict
+result was inconclusive: the hidden event count missed its frozen floor, and
+the source's exactly diagonal symmetric relations made endpoint reversal
+unidentifiable. A strong lag-2 binary flip/return survived no-rotation,
+seed/time displacement and zero-lag controls. Dylan's post-result hidden
+Phase-B interpretation is preserved as a new hypothesis requiring a
+non-diagonal time-resolved source; it is not counted as a confirmation. Full
+report:
+`analysis/quantum/Q28_ARA9_INTERLOCKING_ROTATIONAL_TRANSPORT_REPORT_2026-07-26.md`.
+
+**Q29 eligibility note (26 July 2026):** Q29 is not an A-tier provenance hit
+and is not a registered prediction. Dylan explicitly asked to determine the
+remainder's nature before calling it Phase B, keeping two live possibilities:
+a coherent Phase B or residual children from nearby connections. The source
+and Q28 result were already completely open, and the signed-axis instrument
+was added after the remainder's z-axis concentration was observed. Q29 found
+strong short-lived signed-axis memory and endpoint association but no complete
+shape transport or stable partner. The recorded result is **local signed
+z-axis handover memory; no stable counterpart detected**, not Phase-B
+confirmation. The older April/May entanglement, anti-phase/tether and
+perpendicular-singularity writings preserve hypothesis lineage only; they do
+not upgrade this exploratory result. Full report:
+`analysis/quantum/Q29_ARA9_UNCLASSIFIED_COMPONENT_SURFER_REPORT_2026-07-26.md`.
+
+**Q30 eligibility note (26 July 2026):** Q30 is not an A-tier provenance hit
+or registered blind prediction. It operationalised Dylan's pre-existing
+`1.5` perpendicular and `3.5 = 2 + 1.5` crossed-rung route after Q29's results
+were already open. The exact triangle-closing edge, controls and gates were
+frozen before Q30 outcomes, but the source remained the completely opened,
+exactly diagonal simulator. The route failed at the handover: `2.504%`
+recovery versus `2.938%/2.979%` for displaced controls. A very small late
+association survived (`0.294%/0.282%` advantage at lags 4–6), far below the
+frozen `5%` gate. Record this as a transparent implementation-level negative,
+not as confirmation and not as a universal rejection of the older 1.5/3.5
+hypothesis. Full report:
+`analysis/quantum/Q30_ARA15_35_OUT_OF_CUT_ROUTE_REPORT_2026-07-26.md`.
+
+**Q33B eligibility note (26 July 2026):** Q33B is a registered, ARA-first
+within-source test, but not an A-tier outside-knowledge hit. It was frozen
+after the Q33 raw-capacity error was visible and used the same already-open,
+exactly diagonal simulator. Before Q33B outcomes, Dylan fixed the octave
+projection as structural `1 -> 0.5`, retained only the single endpoint child
+nearest the low boundary, and predicted positive next relation-closure flow
+after high-side source release. The exact endpoint was positive in `63.64%`
+of `11,543` evaluation events, versus `55.83%` for its sibling and
+`50.79–56.38%` for same-rule displaced controls; all frozen gates passed and
+all cluster-bootstrap comparisons returned `1.000`. This is valid
+within-simulator support for the directed boundary-child closure-flow
+consequence. It does not independently derive `3.5`, validate raw-energy
+transfer, identify Phase B, or count as blind hardware/cross-domain
+confirmation. Full report:
+`analysis/quantum/Q33B_ARA_FIRST_BOUNDARY_CHILD_REPORT_2026-07-26.md`.
+
+**Q34 eligibility note (26 July 2026):** Q34 is a legitimate untouched
+cross-archive replication, but not an A-tier outside-knowledge hit. Before
+the target values were downloaded, the public `pure_greedy` archive, file
+checksum, exact Q33B geometry, source definition, controls, partitions and
+gates were frozen. The exact route retained weak positive flow (median
+`+0.00736`; `54.21%` positive) and positive medians in both connectivity
+branches, but failed the declared `55%` floor and did not reliably beat all
+same-rule controls. The frozen verdict is **CROSS-ARCHIVE BOUNDARY-CHILD FLOW
+NOT REPLICATED**. This is a clean, informative miss for the unchanged
+random-to-greedy generalization and must be retained alongside Q33B's
+within-source hit. It does not falsify universal ARA, but any
+network-identity-conditioned revision is now a new prediction. Dylan's
+same-day entanglement/singularity relation idea was recorded separately after
+Q33B and supplied no Q34 feature or gate. Independent raw-HDF5 validation
+passed `12/12`. Full report:
+`analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_REPORT_2026-07-26.md`.
+
+**Q33 eligibility note (26 July 2026):** Q33 is not an A-tier provenance hit.
+Dylan corrected the `3.5` construction before Q33 calculation: the legal route
+is `2 + (1 + 0.5)`, where `0.5` must be the lower-rung child's capacity inside
+the parent frame rather than the Information³ closing edge used in Q30. That
+translation, its common energy coordinate, matched controls and gates were
+frozen before outcomes. The calculation returned median
+endpoint-child/source raw capacity `1.27349`, but a post-result audit found
+that this unbounded flow ratio had been incorrectly substituted for ARA's
+fixed rung projection `1 -> 0.5`; it also averaged both endpoint recipients
+rather than retaining the single boundary-nearest child. Q33 is therefore not
+a valid positive or negative test of the pure `3.5` construction. Backward
+tracing did recover a strong child-pole
+origin (`x=0.04137`; both children `x<=0.5` in `81.50%`), sharpening Q32's
+ordered handover. Record this as a transparent implementation correction plus
+a valid raw-capacity/local-origin diagnostic, not as outside-knowledge
+confirmation or evidence against the older conditional `3.5` rule. Full
+report:
+`analysis/quantum/Q33_TWO_AXIS_PARENT_CHILD_35_REPORT_2026-07-26.md`.
+Correction:
+`analysis/quantum/Q33_POST_RESULT_ARA_COORDINATE_CORRECTION_2026-07-26.md`.
+
 ---
 
 ## Source A — session "ARA project content filter issues" (Cowork, ~early Jul 2026)
@@ -377,3 +539,29 @@ This is a useful fidelity example: the user's prior motivated the test, the AI c
 failed, and a later user correction narrowed what the failed bridge can legitimately say. It is not a rescued
 prediction. Full record: `FableConvo/SESSION_RECORD_2026-07-22_PRIME_GEOMETRY_AND_AUDIT.md` and
 `analysis/primes/PN36_GEOMETRY_SCOPE_AMENDMENT_2026-07-22.md`.
+
+### 24 July 2026 Q15 unresolved-identity correction
+
+This entry is a **methodology/provenance correction, not an A-tier blind-domain hit**.
+
+The order was:
+
+1. Q8 introduced the algebraic unresolved \(H=2-K-R\).
+2. Q9 linked that coordinate to independently calculated purity loss.
+3. Q10 mapped \(H\) through amplitude and opening/closing coordinates, but its TE-ARA equation normalized path
+   occupancy across four quadrants.
+4. Q11-Q13 then used provisional A/B language before the intended
+   \(T_U=U_{\rm self}+O_U=2\) self-participation test had been performed.
+5. During the later audit, the missing gate was identified explicitly. A descriptive common-time probe
+   (\(r=0.953478\)) was already open, so Q15 cannot be represented as blind discovery.
+6. Before the new self/Other calculations and wait-rematching null were run, Q15 froze the primary
+   purity-defined waveform, self-purity thresholds, held-out prediction, `9,999` shuffled-time controls and the
+   conditional handover gates. Protocol SHA-256:
+   `8d79aab4260343f51806ea22b563919aecf519904b1fc72c202854c56be23fe2`.
+7. Ramsey passed dominant self-identity; Hahn passed only coherent-but-mixed. The attractive handover relation
+   failed the time-specific rematching control (`p=0.9973`).
+
+The final label is therefore **purity-defined unresolved ARA mode / candidate Phase-B account**, not an
+established pure Phase B. This is an example of a framework interpretation being narrowed after the omitted
+control was restored, while preserving the earlier coordinate successes. Primary record:
+`analysis/quantum/Q15_UNRESOLVED_SELF_IDENTITY_TE_ARA_REPORT_2026-07-24.md`.

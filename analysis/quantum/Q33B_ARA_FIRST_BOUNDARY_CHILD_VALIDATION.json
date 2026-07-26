@@ -1,0 +1,66 @@
+{
+  "validator": "Q33B-independent-validator-v1",
+  "status": "PASS",
+  "hashes": {
+    "protocol_sha256": "780364be62feb97afe336b9cbf16511b832a998e07581e1877fa9a17f6f21a70",
+    "fidelity_sha256": "43a6a2090669588632f76988c1fc18394c8c2950e856ea622116775c05ebd7a3",
+    "q27_cache_sha256": "660a59ff416b3938755fcde6b7c361bb46a2fe24bf8c2aaca0cfa63bbb80137c",
+    "q28_cache_sha256": "6b73ac362d50453dad6ff76ea2a9102b04b24d5e9be596c46545cf5671ad4ef9"
+  },
+  "checks": {
+    "hashes_match": true,
+    "event_total_matches": true,
+    "development_rows_match": true,
+    "evaluation_rows_match": true,
+    "trial_rows_are_200": true,
+    "event_keys_unique": true,
+    "raw_sample_passes": true,
+    "verdict_recomputes": true,
+    "exact_median_matches": true,
+    "exact_positive_fraction_matches": true,
+    "structural_coordinate_is_fixed": true
+  },
+  "raw_sample": {
+    "sample_n": 64,
+    "failure_count": 0,
+    "all_pass": true,
+    "failures": []
+  },
+  "recomputed": {
+    "exact_flow_median": 0.04142549098785525,
+    "exact_positive_fraction": 0.636403014814173,
+    "eligibility": {
+      "source_events_ge_5000": true,
+      "strata_ge_100": true,
+      "sibling_paired_ge_2000": true,
+      "topology_paired_ge_2000": true,
+      "seed_paired_ge_2000": true,
+      "time_paired_ge_2000": true
+    },
+    "routing_gates": {
+      "pooled_exact_median_flow_positive": true,
+      "exact_positive_fraction_ge_055": true,
+      "c2_median_exact_flow_positive": true,
+      "c4_median_exact_flow_positive": true,
+      "positive_fraction_advantage_ge_002_vs_sibling": true,
+      "median_paired_flow_advantage_positive_vs_sibling": true,
+      "bootstrap_probability_ge_095_vs_sibling": true,
+      "positive_fraction_advantage_ge_002_vs_topology": true,
+      "median_paired_flow_advantage_positive_vs_topology": true,
+      "bootstrap_probability_ge_095_vs_topology": true,
+      "positive_fraction_advantage_ge_002_vs_seed": true,
+      "median_paired_flow_advantage_positive_vs_seed": true,
+      "bootstrap_probability_ge_095_vs_seed": true,
+      "positive_fraction_advantage_ge_002_vs_time": true,
+      "median_paired_flow_advantage_positive_vs_time": true,
+      "bootstrap_probability_ge_095_vs_time": true
+    },
+    "label": "BOUNDARY-CHILD FLOW ROUTE SUPPORTED INSIDE THIS SIMULATOR"
+  },
+  "saved_verdict": "BOUNDARY-CHILD FLOW ROUTE SUPPORTED INSIDE THIS SIMULATOR",
+  "limitations": [
+    "The validator shares the source caches but not primary code.",
+    "Saved bootstrap probabilities are gate-checked, not redrawn.",
+    "Validation establishes reproducibility inside an already-open simulator."
+  ]
+}

@@ -1,0 +1,741 @@
+{
+  "bases": {
+    "X": {
+      "development": {
+        "quality": {
+          "bytes_per_shot": 39,
+          "detector_count": 312,
+          "mean_event_count": 20.51284,
+          "pair_quality": {
+            "xt": {
+              "ara_max": 2.0,
+              "ara_min": 0.0,
+              "child_means": [
+                0.2373199909972975,
+                0.23803133647862243,
+                0.25644660944942405,
+                0.2682020630746564
+              ],
+              "empty_fraction": 0.0001,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "xy": {
+              "ara_max": 2.0,
+              "ara_min": 0.0,
+              "child_means": [
+                0.23426619418821557,
+                0.2410851331258467,
+                0.2646456785651417,
+                0.26000299412079153
+              ],
+              "empty_fraction": 0.0001,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "yt": {
+              "ara_max": 2.0,
+              "ara_min": 0.0,
+              "child_means": [
+                0.2464090466944668,
+                0.2525028260588056,
+                0.24735755376117533,
+                0.2537305734855506
+              ],
+              "empty_fraction": 0.0001,
+              "max_child_sum_error": 2.220446049250313e-16
+            }
+          },
+          "target_prevalence": 0.41848
+        },
+        "rounds": 13,
+        "shots": 50000,
+        "source_hashes": {
+          "circuit_ideal.stim": "7623a21a72f64d8564ad944e32a0609110dabc3f2fdaf1f7393b8e15e5b452bf",
+          "detection_events.b8": "399fc15e16c2d53f0f039218f3dd3f9ec576bbc0c369b74b0916515ff1ab3cb2",
+          "metadata.json": "2f199ca2024e8cf5baf9fc229c8dc7541f5c1b43db7310a9d965d8cb447e608e",
+          "obs_flips_actual.b8": "0e9abd8d3364f347119877f063166fe98a1fb051aaace5682c6aa96c756fdfe9"
+        }
+      },
+      "holdout": {
+        "quality": {
+          "bytes_per_shot": 90,
+          "detector_count": 720,
+          "mean_event_count": 50.63438,
+          "pair_quality": {
+            "xt": {
+              "ara_max": 1.6319999850463867,
+              "ara_min": 0.4527777830759684,
+              "child_means": [
+                0.23303338010767816,
+                0.23486560919268878,
+                0.26296111108442916,
+                0.26913989961520596
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "xy": {
+              "ara_max": 1.5714285714285714,
+              "ara_min": 0.5480769230769231,
+              "child_means": [
+                0.22985382448782116,
+                0.23804516470585127,
+                0.27000696649384825,
+                0.2620940443124806
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "yt": {
+              "ara_max": 1.6319999990844727,
+              "ara_min": 0.45277778307596844,
+              "child_means": [
+                0.2481811852121041,
+                0.2516796057227515,
+                0.24781330588281605,
+                0.252325903182328
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            }
+          },
+          "target_prevalence": 0.49168
+        },
+        "rounds": 30,
+        "shots": 50000,
+        "source_hashes": {
+          "circuit_ideal.stim": "091764939692451b1e705c7f4891a14bcff4716ce27b40adb5df7defd43b47d1",
+          "detection_events.b8": "f9441d6436a9ef168cca34bc2a9eaa7f8635b53979531b8edbf0e24659aa92e8",
+          "metadata.json": "32c6f22c89ebc4df7d0801731a8a72282b4a4aec55be3f9476e93c287e8e6f74",
+          "obs_flips_actual.b8": "704550266285923e4af5a622c136ce17b1176e3bb0cb4c1ddbf0b7adc0e7c5b6"
+        }
+      },
+      "models": {
+        "ARA_plus_count": {
+          "development_metrics": {
+            "accuracy": 0.53628,
+            "auroc": 0.5569799169219848,
+            "average_precision": 0.457553570283,
+            "balanced_accuracy": 0.5391734445321694,
+            "error_rate": 0.46372,
+            "prevalence": 0.41848,
+            "true_negative_rate": 0.5214266061356445,
+            "true_positive_rate": 0.5569202829286943
+          },
+          "holdout_metrics": {
+            "accuracy": 0.5051,
+            "auroc": 0.5108144055964399,
+            "average_precision": 0.49915622353833394,
+            "balanced_accuracy": 0.5058793815396028,
+            "error_rate": 0.4949,
+            "prevalence": 0.49168,
+            "true_negative_rate": 0.4590415486307838,
+            "true_positive_rate": 0.5527172144484217
+          },
+          "parameters": {
+            "class_one": [
+              -0.08503094283167778,
+              0.008681227521497943,
+              0.005517588812246522,
+              0.08920833459262738
+            ],
+            "class_zero": [
+              0.06119092886947978,
+              -0.006247283142762355,
+              -0.003970629670961996,
+              -0.06419711077916916
+            ],
+            "direction": [
+              -0.14622187170115755,
+              0.014928510664260299,
+              0.009488218483208518,
+              0.15340544537179654
+            ],
+            "feature_mean": [
+              1.0492973450481626,
+              1.012466799106555,
+              0.9889558918561003,
+              0.06574628205128157
+            ],
+            "feature_sd": [
+              0.16135922953834217,
+              0.20528380621975384,
+              0.09011890984382498,
+              0.022764154319389877
+            ]
+          }
+        },
+        "ARA_relation": {
+          "development_metrics": {
+            "accuracy": 0.52932,
+            "auroc": 0.5408620881264399,
+            "average_precision": 0.4433003934680109,
+            "balanced_accuracy": 0.5289147244070405,
+            "error_rate": 0.47068,
+            "prevalence": 0.41848,
+            "true_negative_rate": 0.5314004677397166,
+            "true_positive_rate": 0.5264289810743644
+          },
+          "holdout_metrics": {
+            "accuracy": 0.5064,
+            "auroc": 0.5116316958956239,
+            "average_precision": 0.5020934472055367,
+            "balanced_accuracy": 0.5052825890939812,
+            "error_rate": 0.49360000000000004,
+            "prevalence": 0.49168,
+            "true_negative_rate": 0.5724346868114574,
+            "true_positive_rate": 0.43813049137650506
+          },
+          "parameters": {
+            "class_one": [
+              -0.08503094283167778,
+              0.008681227521497943,
+              0.005517588812246522
+            ],
+            "class_zero": [
+              0.06119092886947978,
+              -0.006247283142762355,
+              -0.003970629670961996
+            ],
+            "direction": [
+              -0.14622187170115755,
+              0.014928510664260299,
+              0.009488218483208518
+            ],
+            "feature_mean": [
+              1.0492973450481626,
+              1.012466799106555,
+              0.9889558918561003
+            ],
+            "feature_sd": [
+              0.16135922953834217,
+              0.20528380621975384,
+              0.09011890984382498
+            ]
+          },
+          "permutation_control": {
+            "iterations": 999,
+            "null_auroc_99th_percentile": 0.5117619773131935,
+            "null_auroc_mean": 0.4999548545411334,
+            "null_auroc_sd": 0.007457225937418739,
+            "p_value_one_sided": 0.019,
+            "seed": 20260726
+          }
+        },
+        "count_only": {
+          "development_metrics": {
+            "accuracy": 0.53298,
+            "auroc": 0.5434205812983695,
+            "average_precision": 0.4515805601134746,
+            "balanced_accuracy": 0.5302661323902693,
+            "error_rate": 0.46702,
+            "prevalence": 0.41848,
+            "true_negative_rate": 0.5469115421653598,
+            "true_positive_rate": 0.5136207226151788
+          },
+          "holdout_metrics": {
+            "accuracy": 0.5012,
+            "auroc": 0.5051117858003256,
+            "average_precision": 0.4949411738575691,
+            "balanced_accuracy": 0.5027489467547673,
+            "error_rate": 0.4988,
+            "prevalence": 0.49168,
+            "true_negative_rate": 0.409663204280768,
+            "true_positive_rate": 0.5958346892287667
+          },
+          "parameters": {
+            "class_one": [
+              0.08920833459260223
+            ],
+            "class_zero": [
+              -0.06419711077918588
+            ],
+            "direction": [
+              0.15340544537178813
+            ],
+            "feature_mean": [
+              0.06574628205128205
+            ],
+            "feature_sd": [
+              0.022764154319391147
+            ]
+          }
+        }
+      },
+      "secondary_diameters": {
+        "xy": {
+          "holdout_metrics": {
+            "accuracy": 0.5107,
+            "auroc": 0.5165712444052348,
+            "average_precision": 0.5026649909150476,
+            "balanced_accuracy": 0.5099502943330178,
+            "error_rate": 0.48929999999999996,
+            "prevalence": 0.49168,
+            "true_negative_rate": 0.5550047214353163,
+            "true_positive_rate": 0.4648958672307192
+          },
+          "parameters": {
+            "class_one": [
+              -0.08503094307884461,
+              0.1063804931844496,
+              0.04533776397135107
+            ],
+            "class_zero": [
+              0.06119092904733994,
+              -0.07655473378014306,
+              -0.03262647452669754
+            ],
+            "direction": [
+              -0.14622187212618454,
+              0.18293522696459266,
+              0.07796423849804862
+            ],
+            "feature_mean": [
+              1.0492973453718741,
+              1.0021762544932806,
+              1.0114616233819795
+            ],
+            "feature_sd": [
+              0.1613592293931197,
+              0.1561187076328829,
+              0.05102575277036682
+            ]
+          }
+        },
+        "yt": {
+          "holdout_metrics": {
+            "accuracy": 0.51028,
+            "auroc": 0.5129523431691192,
+            "average_precision": 0.49950419964666376,
+            "balanced_accuracy": 0.5099100079781451,
+            "error_rate": 0.48972000000000004,
+            "prevalence": 0.49168,
+            "true_negative_rate": 0.5321451054453887,
+            "true_positive_rate": 0.4876749105109014
+          },
+          "parameters": {
+            "class_one": [
+              0.10638049209178445,
+              0.008681227388905421,
+              0.0025024410813611372
+            ],
+            "class_zero": [
+              -0.07655473299378197,
+              -0.00624728304732399,
+              -0.0018008349561406181
+            ],
+            "direction": [
+              0.18293522508556642,
+              0.014928510436229413,
+              0.004303276037501755
+            ],
+            "feature_mean": [
+              1.0021762544934483,
+              1.0124667990887073,
+              0.9997207596399585
+            ],
+            "feature_sd": [
+              0.15611870757402216,
+              0.20528380620582268,
+              0.08560945592636658
+            ]
+          }
+        }
+      }
+    },
+    "Z": {
+      "development": {
+        "quality": {
+          "bytes_per_shot": 39,
+          "detector_count": 312,
+          "mean_event_count": 21.02466,
+          "pair_quality": {
+            "xt": {
+              "ara_max": 2.0,
+              "ara_min": 0.1250000037252904,
+              "child_means": [
+                0.2394427424332859,
+                0.24051544420364804,
+                0.257128853854307,
+                0.26291295950876137
+              ],
+              "empty_fraction": 6e-05,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "xy": {
+              "ara_max": 2.0,
+              "ara_min": 0.125,
+              "child_means": [
+                0.2310388693528146,
+                0.24891931708552179,
+                0.26036430995543447,
+                0.2596775036062324
+              ],
+              "empty_fraction": 6e-05,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "yt": {
+              "ara_max": 2.0,
+              "ara_min": 0.1500000016391278,
+              "child_means": [
+                0.24350081893834602,
+                0.24790236027644338,
+                0.2530707774039612,
+                0.25552604338125146
+              ],
+              "empty_fraction": 6e-05,
+              "max_child_sum_error": 2.220446049250313e-16
+            }
+          },
+          "target_prevalence": 0.35712
+        },
+        "rounds": 13,
+        "shots": 50000,
+        "source_hashes": {
+          "circuit_ideal.stim": "6505e43d673c7333298702d1c6da0cd8e3e2afaebca0c1cee9b95a911688045b",
+          "detection_events.b8": "9d6be89294783e44ac1e6e4830cdcc918b2f944f220d9974437242a5665b35bc",
+          "metadata.json": "3db60c5898182c2705c702756d69ea19dc3528c7ebeec7f5f679a3914337342c",
+          "obs_flips_actual.b8": "4b543a8bc92f50c8ee2c978344f89623f26669deddcee5a11bd4c5680e92f48a"
+        }
+      },
+      "holdout": {
+        "quality": {
+          "bytes_per_shot": 90,
+          "detector_count": 720,
+          "mean_event_count": 50.02828,
+          "pair_quality": {
+            "xt": {
+              "ara_max": 1.6244444454952522,
+              "ara_min": 0.48333335391112686,
+              "child_means": [
+                0.2312370008577122,
+                0.23370188972603217,
+                0.2658020932489913,
+                0.2692590161672675
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "xy": {
+              "ara_max": 1.5047169811320755,
+              "ara_min": 0.6029411764705883,
+              "child_means": [
+                0.2280813332314851,
+                0.23685755729538607,
+                0.2702732061568095,
+                0.26478790331631813
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            },
+            "yt": {
+              "ara_max": 1.6244444280730348,
+              "ara_min": 0.48333334454468346,
+              "child_means": [
+                0.2476535724351209,
+                0.25070096688047977,
+                0.24938552172367115,
+                0.25225993896072746
+              ],
+              "empty_fraction": 0.0,
+              "max_child_sum_error": 2.220446049250313e-16
+            }
+          },
+          "target_prevalence": 0.47988
+        },
+        "rounds": 30,
+        "shots": 50000,
+        "source_hashes": {
+          "circuit_ideal.stim": "d54b6f616d115c0d34e045792ddd068fd8218d0bde93b5a915e97f9d777f6682",
+          "detection_events.b8": "31b92ce676657a571b7b10953c91723d379b9f45c4599187a504459f396344b4",
+          "metadata.json": "1606af6b4a851f903262266ff14d9cca308964380ff29aef573af587e153c97f",
+          "obs_flips_actual.b8": "4725d74dce718d87b3de9e7601220bcb422620d8067c5137ab8af4af4f810500"
+        }
+      },
+      "models": {
+        "ARA_plus_count": {
+          "development_metrics": {
+            "accuracy": 0.54912,
+            "auroc": 0.5789255015805332,
+            "average_precision": 0.4124969416303338,
+            "balanced_accuracy": 0.5544336997846608,
+            "error_rate": 0.45087999999999995,
+            "prevalence": 0.35712,
+            "true_negative_rate": 0.5358387257341961,
+            "true_positive_rate": 0.5730286738351255
+          },
+          "holdout_metrics": {
+            "accuracy": 0.51332,
+            "auroc": 0.5191711213840016,
+            "average_precision": 0.4916615732841411,
+            "balanced_accuracy": 0.5107282101357968,
+            "error_rate": 0.48668,
+            "prevalence": 0.47988,
+            "true_negative_rate": 0.5751365069599323,
+            "true_positive_rate": 0.44631991331166126
+          },
+          "parameters": {
+            "class_one": [
+              -0.14077941976761968,
+              0.00191007762620089,
+              0.005593305398305951,
+              0.11944215461376045
+            ],
+            "class_zero": [
+              0.07820300271809588,
+              -0.001061048596770859,
+              -0.0031070825408090036,
+              -0.0663501466147628
+            ],
+            "direction": [
+              -0.21898242248571556,
+              0.002971126222971749,
+              0.008700387939114955,
+              0.18579230122852325
+            ],
+            "feature_mean": [
+              1.0400836267261364,
+              1.0068568074248183,
+              0.9952885961159067,
+              0.06738673076923156
+            ],
+            "feature_sd": [
+              0.15924988463203973,
+              0.20090998452175252,
+              0.08920368947914024,
+              0.022890282436920185
+            ]
+          }
+        },
+        "ARA_relation": {
+          "development_metrics": {
+            "accuracy": 0.54228,
+            "auroc": 0.5615992690082688,
+            "average_precision": 0.3959322998514626,
+            "balanced_accuracy": 0.5412599646795513,
+            "error_rate": 0.45772,
+            "prevalence": 0.35712,
+            "true_negative_rate": 0.5448295171727228,
+            "true_positive_rate": 0.5376904121863799
+          },
+          "holdout_metrics": {
+            "accuracy": 0.51438,
+            "auroc": 0.5166768729532738,
+            "average_precision": 0.4885292879008569,
+            "balanced_accuracy": 0.5087323719596617,
+            "error_rate": 0.48562000000000005,
+            "prevalence": 0.47988,
+            "true_negative_rate": 0.6490809813120049,
+            "true_positive_rate": 0.3683837626073185
+          },
+          "parameters": {
+            "class_one": [
+              -0.14077941976761968,
+              0.00191007762620089,
+              0.005593305398305951
+            ],
+            "class_zero": [
+              0.07820300271809588,
+              -0.001061048596770859,
+              -0.0031070825408090036
+            ],
+            "direction": [
+              -0.21898242248571556,
+              0.002971126222971749,
+              0.008700387939114955
+            ],
+            "feature_mean": [
+              1.0400836267261364,
+              1.0068568074248183,
+              0.9952885961159067
+            ],
+            "feature_sd": [
+              0.15924988463203973,
+              0.20090998452175252,
+              0.08920368947914024
+            ]
+          },
+          "permutation_control": {
+            "iterations": 999,
+            "null_auroc_99th_percentile": 0.5160439782777605,
+            "null_auroc_mean": 0.4998244610465048,
+            "null_auroc_sd": 0.00929936952804873,
+            "p_value_one_sided": 0.001,
+            "seed": 20260726
+          }
+        },
+        "count_only": {
+          "development_metrics": {
+            "accuracy": 0.54798,
+            "auroc": 0.5539235225340136,
+            "average_precision": 0.3938414730934871,
+            "balanced_accuracy": 0.5364202821175676,
+            "error_rate": 0.45202,
+            "prevalence": 0.35712,
+            "true_negative_rate": 0.5768728222996515,
+            "true_positive_rate": 0.4959677419354839
+          },
+          "holdout_metrics": {
+            "accuracy": 0.50702,
+            "auroc": 0.5127757937010464,
+            "average_precision": 0.4891173096115935,
+            "balanced_accuracy": 0.5086008726283702,
+            "error_rate": 0.49298,
+            "prevalence": 0.47988,
+            "true_negative_rate": 0.4693147735138045,
+            "true_positive_rate": 0.5478869717429358
+          },
+          "parameters": {
+            "class_one": [
+              0.11944215461380017
+            ],
+            "class_zero": [
+              -0.06635014661473414
+            ],
+            "direction": [
+              0.1857923012285343
+            ],
+            "feature_mean": [
+              0.06738673076923077
+            ],
+            "feature_sd": [
+              0.022890282436918798
+            ]
+          }
+        }
+      },
+      "secondary_diameters": {
+        "xy": {
+          "holdout_metrics": {
+            "accuracy": 0.51766,
+            "auroc": 0.525462456676488,
+            "average_precision": 0.49589768889930336,
+            "balanced_accuracy": 0.5153388455422194,
+            "error_rate": 0.48234,
+            "prevalence": 0.47988,
+            "true_negative_rate": 0.5730216103976006,
+            "true_positive_rate": 0.4576560806868384
+          },
+          "parameters": {
+            "class_one": [
+              -0.14077942006812388,
+              -0.142100329718088,
+              -0.10373979559247672
+            ],
+            "class_zero": [
+              0.07820300288498566,
+              0.07893676852431969,
+              0.0576274822700131
+            ],
+            "direction": [
+              -0.21898242295310955,
+              -0.2210370982424077,
+              -0.16136727786248983
+            ],
+            "feature_mean": [
+              1.0400836271233322,
+              1.017193641383504,
+              1.018567254081924
+            ],
+            "feature_sd": [
+              0.15924988449763292,
+              0.15541010837514388,
+              0.05029537105939528
+            ]
+          }
+        },
+        "yt": {
+          "holdout_metrics": {
+            "accuracy": 0.50764,
+            "auroc": 0.5149120632717845,
+            "average_precision": 0.491615553438398,
+            "balanced_accuracy": 0.5091049929289982,
+            "error_rate": 0.49236,
+            "prevalence": 0.47988,
+            "true_negative_rate": 0.47269860801353536,
+            "true_positive_rate": 0.5455113778444611
+          },
+          "parameters": {
+            "class_one": [
+              -0.14210032939571798,
+              0.0019100789247927135,
+              0.008849835231166158
+            ],
+            "class_zero": [
+              0.07893676834532594,
+              -0.0010610493180790595,
+              -0.004916085673427506
+            ],
+            "direction": [
+              -0.2210370977410439,
+              0.002971128242871773,
+              0.013765920904593665
+            ],
+            "feature_mean": [
+              1.0171936415704128,
+              1.0068568073153847,
+              1.0019462753608048
+            ],
+            "feature_sd": [
+              0.15541010825343113,
+              0.20090998433520244,
+              0.08584641799084773
+            ]
+          }
+        }
+      }
+    }
+  },
+  "claim": "Q20-WILLOW-ARA-RELATION-v1",
+  "created": "2026-07-26",
+  "gates": {
+    "ara_auroc_at_least_0_55_both_bases": false,
+    "ara_permutation_p_at_most_0_01_both_bases": false,
+    "combined_not_over_0_01_worse_than_count_either_basis": true,
+    "construction_and_source_integrity": true,
+    "mean_ara_minus_count_auroc_at_least_0_01": false,
+    "mean_combined_minus_count_auroc_at_least_0_01": false
+  },
+  "geometry_sha256": "29449fd5c5a27c87c2a0966afbcaaa0b20b28f480ca952c0bfc44d5071e0ed4e",
+  "holdout_auroc_differences": {
+    "X": {
+      "ARA_plus_count_minus_count": 0.0057026197961143055,
+      "ARA_relation_minus_count": 0.006519910095298287
+    },
+    "Z": {
+      "ARA_plus_count_minus_count": 0.006395327682955143,
+      "ARA_relation_minus_count": 0.0039010792522273796
+    }
+  },
+  "holdout_equal_basis_mean": {
+    "ARA_plus_count": {
+      "accuracy": 0.5092099999999999,
+      "auroc": 0.5149927634902207,
+      "average_precision": 0.49540889841123753,
+      "balanced_accuracy": 0.5083037958376998,
+      "error_rate": 0.49079
+    },
+    "ARA_relation": {
+      "accuracy": 0.5103899999999999,
+      "auroc": 0.5141542844244489,
+      "average_precision": 0.4953113675531968,
+      "balanced_accuracy": 0.5070074805268214,
+      "error_rate": 0.48961000000000005
+    },
+    "count_only": {
+      "accuracy": 0.5041100000000001,
+      "auroc": 0.508943789750686,
+      "average_precision": 0.4920292417345813,
+      "balanced_accuracy": 0.5056749096915687,
+      "error_rate": 0.49589
+    }
+  },
+  "interpretation_fence": "This is a same-patch cross-duration ARA relation test, not a competitive established-decoder benchmark or a rare-burst cause claim.",
+  "permutations_per_basis": 999,
+  "primary_axis_pair": "xt",
+  "protocol_sha256": "3a55824116968450d43f64770933059c4ce00b0a873a7302b417111986118d6f",
+  "seed": 20260726,
+  "source_archive": "google_105Q_surface_code_d3_d5_d7.zip",
+  "source_archive_md5": "21fa6ad35b395d838ebcdbc92e364a12",
+  "source_doi": "10.5281/zenodo.13273331",
+  "verdict": "NOT SUPPORTED"
+}

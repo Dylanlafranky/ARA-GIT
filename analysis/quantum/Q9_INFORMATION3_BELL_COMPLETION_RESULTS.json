@@ -1,0 +1,130 @@
+{
+  "test_id": "Q9-INFORMATION3-BELL-COMPLETION-v1",
+  "ledger_id": "T268",
+  "test_class": "post-outcome exact-closure and masked-data completion",
+  "protocol_sha256": "621760a7fed6cbf0a9f5832b9cca198f7cb4b45469bde38ef636c0db57d82fad",
+  "verdict": "NOT CALIBRATED",
+  "summary": {
+    "records": 88,
+    "masked_interior_values": 72,
+    "maximum_rho_reconstruction_fro_error": 6.337844922032561e-16,
+    "maximum_purity_closure_abs_error": 2.220446049250313e-15,
+    "off_core_relation_share_medians": {
+      "Ramsey": 0.015919631769728923,
+      "Hahn": 0.019305707106450708
+    },
+    "ara_information3_fill_mae": 0.18048737287229383,
+    "zero_fill_mae": 0.2503178848873184,
+    "time_only_linear_fill_mae": 0.19357368274464365,
+    "positive_branch_only_fill_mae": 0.25932491377451455,
+    "zero_fill_relative_improvement": 0.27896733006696284,
+    "positive_branch_relative_improvement": 0.3040106704547898,
+    "signed_completion_accuracy": 0.625,
+    "q8_h_vs_half_unresolved_information_correlation": 0.9819986595628961,
+    "q8_h_vs_half_unresolved_information_mae": 0.0762792224300687,
+    "gates_passed": 5,
+    "gates_total": 9
+  },
+  "allocation_medians": {
+    "Ramsey": {
+      "initial": {
+        "i_child_a": 0.02021453323494908,
+        "i_child_b": 0.01602656704237341,
+        "i_relation_core": 2.7988326592277115,
+        "i_relation_off": 0.00904672331163292,
+        "i_unresolved_to_pure": 0.14005678112008235,
+        "purity": 0.9649858047199797,
+        "q8_h_linear": 0.07019285335365366
+      },
+      "final": {
+        "i_child_a": 0.021757232465697475,
+        "i_child_b": 0.04454784424594534,
+        "i_relation_core": 0.8342400713619278,
+        "i_relation_off": 0.025301607367902268,
+        "i_unresolved_to_pure": 2.0528136554573275,
+        "purity": 0.48679658613566795,
+        "q8_h_linear": 1.0409020035436618
+      }
+    },
+    "Hahn": {
+      "initial": {
+        "i_child_a": 0.009228992697008848,
+        "i_child_b": 0.009070265005233722,
+        "i_relation_core": 2.6503364119006516,
+        "i_relation_off": 0.03621303598586523,
+        "i_unresolved_to_pure": 0.2908421021949028,
+        "purity": 0.9272894744512743,
+        "q8_h_linear": 0.11330898229463965
+      },
+      "final": {
+        "i_child_a": 0.02438847621930265,
+        "i_child_b": 0.04551689264702984,
+        "i_relation_core": 0.6199586329142819,
+        "i_relation_off": 0.020425049007615104,
+        "i_unresolved_to_pure": 2.281142957766808,
+        "purity": 0.42971426055829803,
+        "q8_h_linear": 1.1504557794457675
+      }
+    }
+  },
+  "gates": [
+    {
+      "gate_id": "I1",
+      "description": "all 88 Information\u00b3 density reconstructions have Frobenius error <= 1e-12",
+      "passed": true,
+      "value": 6.337844922032561e-16
+    },
+    {
+      "gate_id": "I2",
+      "description": "all 88 purity-closure residuals <= 1e-12",
+      "passed": true,
+      "value": 2.220446049250313e-15
+    },
+    {
+      "gate_id": "I3",
+      "description": "all declared information allocations are nonnegative within tolerance",
+      "passed": true,
+      "value": 0.0009135662082027916
+    },
+    {
+      "gate_id": "I4",
+      "description": "median measured off-core relation share <= 0.05 in Ramsey and Hahn",
+      "passed": true,
+      "value": {
+        "Ramsey": 0.015919631769728923,
+        "Hahn": 0.019305707106450708
+      }
+    },
+    {
+      "gate_id": "I5",
+      "description": "masked Information\u00b3 signed-v completion MAE <= 0.08",
+      "passed": false,
+      "value": 0.18048737287229383
+    },
+    {
+      "gate_id": "I6",
+      "description": "masked Information\u00b3 completion improves zero fill by >= 50%",
+      "passed": false,
+      "value": 0.27896733006696284
+    },
+    {
+      "gate_id": "I7",
+      "description": "masked Information\u00b3 completion improves positive-branch-only fill by >= 50%",
+      "passed": false,
+      "value": 0.3040106704547898
+    },
+    {
+      "gate_id": "I8",
+      "description": "masked Information\u00b3 completion sign accuracy >= 80%",
+      "passed": false,
+      "value": 0.625
+    },
+    {
+      "gate_id": "I9",
+      "description": "all completion magnitudes remain inside the supplied parent radius",
+      "passed": true,
+      "value": true
+    }
+  ],
+  "interpretation_boundary": "The state closure is an exact Pauli-basis identity and the masked test is parent-assisted interpolation. It does not obtain the parent radius for free, predict future data, or identify unresolved purity as a coherent environmental wave."
+}

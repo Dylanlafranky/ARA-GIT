@@ -110,6 +110,25 @@ is worth more than a hit you cannot.
 - QUANTUM RIDGE IS A PLANE: `x_n=1` fixes only `r·n=0`. Pure coherent equatorial states
   and the maximally mixed centre can share this ARA value. Never infer coherence, phase,
   resonance or purity from the diameter reading alone.
+- Q29 UNCLASSIFIED-REMAINDER FENCE: do not name an unexplained signed quantum component
+  Phase B from a flip or TE-ARA remainder alone. On the fully opened diagonal Q28
+  simulator, the residual had a strong one-to-three-slice signed z-axis memory and
+  endpoint association, but its complete vector shape and stable partner did not
+  persist. Canonical descriptive label: **local signed z-axis handover memory; no
+  stable counterpart detected**. A Phase-B promotion requires a fresh non-diagonal
+  source, complete-shape recurrence, stable partner identity, route persistence and
+  independent closure. Read
+  `analysis/quantum/Q29_ARA9_UNCLASSIFIED_COMPONENT_SURFER_REPORT_2026-07-26.md`.
+- Q30 1.5/3.5 ROUTE FENCE: the fixed Information³ triangle translation has now
+  been tested and failed its material-effect gates. For source `(u,e)` and
+  child `(e,v)`, the exact closing relation `(u,v)` recovered only `2.504%` of
+  the Q29 remainder at lag 0 and underperformed seed/time displacement. Its
+  lags 4–6 advantage was reproducible but only about `0.29%`, below the frozen
+  `5%` gate. Do not claim that Q30 saw past the singularity or identified
+  Phase B. Equally, do not rewrite this as rejection of every possible
+  `1.5/3.5` representation: Q30 rejects the unique triangle-closing
+  implementation on an already-open, exactly diagonal simulator. Read
+  `analysis/quantum/Q30_ARA15_35_OUT_OF_CUT_ROUTE_REPORT_2026-07-26.md`.
 - LANDAU-ZENER HAS TWO ARA COORDINATES: structural
   `x_path=1+vt/sqrt((vt)^2+4g^2)` and final outcome
   `x_handover=2*(1-exp(-2*pi*g^2/(hbar*abs(v))))`. Do not merge their `1.0` ridges.

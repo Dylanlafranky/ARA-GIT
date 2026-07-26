@@ -485,6 +485,124 @@ on training data. Do not manufacture all measurements from the same quantity. Re
 one independently measured flow. A result showing only accounting closure is calibration; novelty requires the
 ARA-constrained operator to beat standard domain models or predict a new withheld relation.
 
+## 10.1 Q24 landing — ARA^9 as a connected two-parent relation operator
+
+Q24 identified an exact established-mathematics home for the nine-coefficient coupling branch. Two quantum
+parents each have three declared Pauli/Bloch cuts:
+
+\[
+\mathbf a=(XI,YI,ZI)^\mathsf T,
+\qquad
+\mathbf b=(IX,IY,IZ)^\mathsf T.
+\]
+
+Their full joint field has nine ordered slots,
+
+\[
+T=
+\begin{pmatrix}
+XX&XY&XZ\\
+YX&YY&YZ\\
+ZX&ZY&ZZ
+\end{pmatrix},
+\]
+
+and the relation beyond the two separate children is
+
+\[
+\boxed{
+C=T-\mathbf a\mathbf b^\mathsf T,
+\qquad
+X^{(9)}=1-C.
+}
+\]
+
+This lands on the candidate nine-coefficient operator \(M\), not on the separate three-axis/three-position
+observation packet \(\mathcal A_n^{(9)}\). The distinction remains essential.
+
+For ideal algebra:
+
+- product parents give \(C=0\);
+- Bell parents give three unit singular directions and negative determinant;
+- equal Phi/Psi sign mixtures give one direction;
+- the four-state uniform mixture gives zero.
+
+On four public raw-current Bell reconstructions and reconstructed controls, the frozen connected-tensor test
+returned `3,3,3,3 / 1,1 / 0` retained directions in both raw-linear and physical-state layers. All `16/16` gates
+and `860/860` independent checks passed. This is a calibrated prior-geometry identification because Q6 had
+already opened the tensors and singular values before the ARA^9 landing. It is not a blind prediction or proof
+that the operator is universal. Full report:
+`analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md`.
+
+## 10.2 Q25 boundary — complete object does not imply static missing-cut closure
+
+Q25 prospectively tested whether eight cells of \(C\) determine the ninth by choosing the completion that makes
+both parent-side Gram matrices closest to one scaled sphere while retaining negative determinant orientation.
+The rule was frozen on Q24 and applied to a different atomic-qubit source before its hidden targets were opened.
+
+The primary external result was negative:
+
+```text
+ARA sphere closure MAE       0.12394
+physical midpoint MAE        0.08687
+ridge MAE                    0.18616
+eight-cell mean MAE          0.21630
+```
+
+Thus ARA^9 identifies the complete relation object, but a local equal-sphere condition is not a sufficient
+universal completion law.
+
+The failure was structured. A mixed input had closure `0.0089`; four conditioned Bell outputs rose to
+`0.5162-0.5765` but retained only `1,2,2,1` directions at the frozen threshold. Four Bell-measurement operators
+were cleaner for ARA completion, where ARA beat the physical midpoint (`0.07105` versus `0.08716` MAE).
+
+This supports a new test design without confirming it: treat the local ARA^9 as one time/scale slice on a larger
+connection-space envelope. The next test must observe complete ARA^9 matrices over a declared trajectory and
+freeze crest, handover, trough and orientation-flip predictions on untouched later steps. Q25 may not be retuned
+or reclassified as a success. Full report:
+`analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md`.
+
+## 10.3 Q26 landing — the complete local ARA^9 can carry a larger-wave amplitude
+
+Q26 implemented the full-trajectory test proposed at the end of Q25. For repeated complete connected tensors,
+
+\[
+h(t)=|\det C(t)|^{1/3},
+\qquad
+x_h(t)=2h(t)/h(t_0).
+\]
+
+The first seven matrices were exposed and the final four sealed across `28` primary trajectories. The frozen
+larger-wave prediction was supported:
+
+```text
+median closure-versus-wait Spearman     -0.9364
+crest-to-trough trajectories             25/28
+final trough trajectories                 25/28
+ARA held-out cut MAE                     0.08502
+persistence cut MAE                      0.19341
+linear cut MAE                           0.52616
+```
+
+The result separates amplitude from orientation. Only `1/28` trajectories showed a stable reliable orientation
+flip, and the angular predictor was worse than the no-rotation ablation. Therefore the current supported
+operator is
+
+\[
+\boxed{
+C(t)
+\longmapsto
+\bigl(x_h(t),\ \text{mostly retained orientation}\bigr),
+}
+\]
+
+not a rule that every trough is the sign-reversed anti-phase of the earlier crest.
+
+This is the first registered result in this branch to show that a full local ARA^9 can be usefully treated as
+one time slice on a larger connection-space envelope. It does not yet identify a universal return cycle,
+singularity crossing, or next crest. Full report:
+`analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md`.
+
 ## 11. Plain-language summary
 
 The simplest current picture is still “two things and what happens between them.” That is ternary because keeping the

@@ -153,3 +153,31 @@ x_{\hat n}=1-\mathbf r\cdot\hat n.
 It may later serve as the first controlled spherical-tomography calibration. That does not activate this broader
 thread and does not turn an exact Bloch-coordinate reparameterization into new quantum physics.
 
+## Prior implementation — ARA coordinate sphere
+
+Dylan identified:
+
+`3D models/ara_sphere_coordinate_3d.html`
+
+as an earlier attempt at the same decompression. Its declared coordinates are:
+
+- `X`: Mapping/ARA from Space `0`, through ridge `1`, to Time `2`;
+- `Y`: rungs, with a local `0–2` sub-ARA inside each rung;
+- `Z`: coupling ARA from Connections to Information Traversal.
+
+It also declares that every plotted identity is itself a sphere. This correctly anticipates several parts of the
+new formulation: multiple ARA axes, nested local coordinates and nodes that remain full identities after being
+placed in a parent coordinate system.
+
+The current file is primarily an **atlas/state-space viewer**: it places different named identities at assigned or
+approximate `(ARA, rung, coupling)` coordinates. It does not yet rotate a measurement diameter through every
+direction of one fixed identity or reconstruct its hidden volume. The future tomography instrument would therefore
+extend the same idea inward:
+
+\[
+\text{many identities positioned in one atlas}
+\quad\longrightarrow\quad
+\text{many independent cuts through one identity}.
+\]
+
+This is a distinction of measurement grain, not a rejection or replacement of the earlier model.

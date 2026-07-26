@@ -1,0 +1,396 @@
+{
+  "test_id": "Q7-BELL-DECOHERENCE-v1",
+  "ledger_id": "T266",
+  "verdict": "SUPPORTED",
+  "echo_replication": "SUPPORTED",
+  "test_class": "public-data, partially blinded reanalysis",
+  "source_hashes": {
+    "MainFigure5b.csv": "3991a446f66fc244651dc3c303ea0990",
+    "MainFigure5c.csv": "fc7cc2a7376d5ca1ca81c91611b38500",
+    "SuppFigure5a.csv": "c198c156a7aa2235b2c3c35b6a1aaa35",
+    "SuppFigure5b.csv": "55ff84cddfc6b009fcc626345195af5b",
+    "protocol_sha256": "ded5ef93c05815efdbbf7284376b40d91e4f1759c2d22541cc966a92416ed56c"
+  },
+  "schema_unit_correction": {
+    "source_cII_min": 0.24999999999999994,
+    "source_cII_max": 0.25000000000000006,
+    "source_cII_expected": 0.25,
+    "conversion": "<ij> = 4*c_ij",
+    "normalized_II_after_conversion": 1.0,
+    "gates_changed": false
+  },
+  "strong_axis_threshold": 0.5,
+  "state_summaries": {
+    "Ramsey": {
+      "Phi-plus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9994247255164251,
+        "initial_s2": 0.9717020034133654,
+        "initial_s3": 0.9713028552363525,
+        "final_s1": 0.9654553378090343,
+        "final_s2": 0.08673913173722365,
+        "final_s3": 0.05316162646403754,
+        "final_s1_retention": 0.9660110593223135,
+        "final_s2_retention": 0.08926515684081031,
+        "final_s3_retention": 0.05473228682222027,
+        "last_three_axis_index": 3,
+        "last_three_axis_wait_us": 12.02,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 16.02,
+        "first_chsh_failure_wait_us": 20.02
+      },
+      "Phi-minus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9966103467770683,
+        "initial_s2": 0.9801257470992095,
+        "initial_s3": 0.9768411541562579,
+        "final_s1": 0.9687309013233972,
+        "final_s2": 0.027141647986791376,
+        "final_s3": 0.02013370642887212,
+        "final_s1_retention": 0.9720257314768703,
+        "final_s2_retention": 0.027692005915689984,
+        "final_s3_retention": 0.020611034192414338,
+        "last_three_axis_index": 3,
+        "last_three_axis_wait_us": 12.02,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 16.02,
+        "first_chsh_failure_wait_us": 24.02
+      },
+      "Psi-plus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9712164728822157,
+        "initial_s2": 0.9694545169903508,
+        "initial_s3": 0.9464933469845304,
+        "final_s1": 0.8409741982153337,
+        "final_s2": 0.09204537562857383,
+        "final_s3": 0.01404649821739574,
+        "final_s1_retention": 0.865897790756812,
+        "final_s2_retention": 0.09494553278716632,
+        "final_s3_retention": 0.014840567302609173,
+        "last_three_axis_index": 4,
+        "last_three_axis_wait_us": 16.02,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 20.02,
+        "first_chsh_failure_wait_us": 24.02
+      },
+      "Psi-minus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9965023869018937,
+        "initial_s2": 0.9427149564251617,
+        "initial_s3": 0.9424327557001329,
+        "final_s1": 0.8979887328778362,
+        "final_s2": 0.08569132865835472,
+        "final_s3": 0.05421059592905344,
+        "final_s1_retention": 0.9011405739525276,
+        "final_s2_retention": 0.09089845034739025,
+        "final_s3_retention": 0.05752197767020567,
+        "last_three_axis_index": 4,
+        "last_three_axis_wait_us": 16.02,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 20.02,
+        "first_chsh_failure_wait_us": 20.02
+      }
+    },
+    "Hahn": {
+      "Phi-plus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9786544509097014,
+        "initial_s2": 0.9287407825530862,
+        "initial_s3": 0.9084076761508323,
+        "final_s1": 0.7883323549062762,
+        "final_s2": 0.09400311884731816,
+        "final_s3": 0.0380540828335527,
+        "final_s1_retention": 0.8055267660342089,
+        "final_s2_retention": 0.10121566815328797,
+        "final_s3_retention": 0.04189097453997537,
+        "last_three_axis_index": 7,
+        "last_three_axis_wait_us": 125.89,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 251.19,
+        "first_chsh_failure_wait_us": 251.19
+      },
+      "Phi-minus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9848536010407785,
+        "initial_s2": 0.9427162764035689,
+        "initial_s3": 0.9288487877921405,
+        "final_s1": 0.8370846956283289,
+        "final_s2": 0.23071520682113808,
+        "final_s3": 0.09989935013643252,
+        "final_s1_retention": 0.8499585062629719,
+        "final_s2_retention": 0.24473451089792242,
+        "final_s3_retention": 0.10755179039840462,
+        "last_three_axis_index": 7,
+        "last_three_axis_wait_us": 125.89,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 251.19,
+        "first_chsh_failure_wait_us": 251.19
+      },
+      "Psi-plus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9881350196807746,
+        "initial_s2": 0.9130151649332182,
+        "initial_s3": 0.9045619884469379,
+        "final_s1": 0.7140436919433708,
+        "final_s2": 0.14311388122118435,
+        "final_s3": 0.04389946223073553,
+        "final_s1_retention": 0.722617534771765,
+        "final_s2_retention": 0.15674863542014913,
+        "final_s3_retention": 0.04853118171161212,
+        "last_three_axis_index": 7,
+        "last_three_axis_wait_us": 125.89,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 251.19,
+        "first_chsh_failure_wait_us": 251.19
+      },
+      "Psi-minus": {
+        "initial_strong_axes": 3,
+        "final_strong_axes": 1,
+        "initial_s1": 0.9773843108533867,
+        "initial_s2": 0.9540627205434073,
+        "initial_s3": 0.9348067399426578,
+        "final_s1": 0.7969678632847993,
+        "final_s2": 0.11688718900365765,
+        "final_s3": 0.013941750839764662,
+        "final_s1_retention": 0.8154088974366083,
+        "final_s2_retention": 0.12251520417555146,
+        "final_s3_retention": 0.014914046127459314,
+        "last_three_axis_index": 7,
+        "last_three_axis_wait_us": 125.89,
+        "one_axis_after_last_three": true,
+        "first_one_axis_wait_us": 251.19,
+        "first_chsh_failure_wait_us": 251.19
+      }
+    }
+  },
+  "crossings": {
+    "Ramsey": {
+      "Phi-plus": {
+        "found": true,
+        "wait_us": 20.02,
+        "wait_index": 5
+      },
+      "Phi-minus": {
+        "found": true,
+        "wait_us": 24.02,
+        "wait_index": 6
+      },
+      "Psi-plus": {
+        "found": true,
+        "wait_us": 24.02,
+        "wait_index": 6
+      },
+      "Psi-minus": {
+        "found": true,
+        "wait_us": 20.02,
+        "wait_index": 5
+      }
+    },
+    "Hahn": {
+      "Phi-plus": {
+        "found": true,
+        "wait_us": 251.19,
+        "wait_index": 8
+      },
+      "Phi-minus": {
+        "found": true,
+        "wait_us": 251.19,
+        "wait_index": 8
+      },
+      "Psi-plus": {
+        "found": true,
+        "wait_us": 251.19,
+        "wait_index": 8
+      },
+      "Psi-minus": {
+        "found": true,
+        "wait_us": 251.19,
+        "wait_index": 8
+      }
+    }
+  },
+  "summary": {
+    "median_final_ramsey_s1_retention": 0.9335758166374205,
+    "median_final_ramsey_s2_retention": 0.09008180359410028,
+    "preferential_retention_gap": 0.8434940130433202,
+    "ramsey_crossing_geometric_mean_us": 21.928985384645593,
+    "hahn_crossing_geometric_mean_us": 251.19000000000008,
+    "hahn_to_ramsey_crossing_ratio": 11.454702330910406,
+    "primary_gates_passed": 8,
+    "primary_gates_total": 8,
+    "echo_gates_passed": 4,
+    "echo_gates_total": 4
+  },
+  "gates": [
+    {
+      "gate_id": "P1",
+      "description": "all 88 physical reconstructions pass",
+      "passed": true,
+      "value": true
+    },
+    {
+      "gate_id": "P2",
+      "description": "all Ramsey states begin with three strong axes",
+      "passed": true,
+      "value": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "gate_id": "P3",
+      "description": "all Ramsey states cross CHSH within sampled interval",
+      "passed": true,
+      "value": {
+        "Phi-plus": {
+          "found": true,
+          "wait_us": 20.02,
+          "wait_index": 5
+        },
+        "Phi-minus": {
+          "found": true,
+          "wait_us": 24.02,
+          "wait_index": 6
+        },
+        "Psi-plus": {
+          "found": true,
+          "wait_us": 24.02,
+          "wait_index": 6
+        },
+        "Psi-minus": {
+          "found": true,
+          "wait_us": 20.02,
+          "wait_index": 5
+        }
+      }
+    },
+    {
+      "gate_id": "P4",
+      "description": "all Ramsey states exhibit one axis after their last three-axis observation",
+      "passed": true,
+      "value": {
+        "Phi-plus": 16.02,
+        "Phi-minus": 16.02,
+        "Psi-plus": 20.02,
+        "Psi-minus": 20.02
+      }
+    },
+    {
+      "gate_id": "P5",
+      "description": "median final Ramsey s1 retention >= 0.50",
+      "passed": true,
+      "value": 0.9335758166374205
+    },
+    {
+      "gate_id": "P6",
+      "description": "median final Ramsey s2 retention <= 0.50",
+      "passed": true,
+      "value": 0.09008180359410028
+    },
+    {
+      "gate_id": "P7",
+      "description": "preferential retention gap >= 0.20",
+      "passed": true,
+      "value": 0.8434940130433202
+    },
+    {
+      "gate_id": "P8",
+      "description": "CHSH failure is not earlier than last three-axis observation",
+      "passed": true,
+      "value": {
+        "Phi-plus": {
+          "last_three_axis_index": 3,
+          "chsh_failure_index": 5
+        },
+        "Phi-minus": {
+          "last_three_axis_index": 3,
+          "chsh_failure_index": 6
+        },
+        "Psi-plus": {
+          "last_three_axis_index": 4,
+          "chsh_failure_index": 6
+        },
+        "Psi-minus": {
+          "last_three_axis_index": 4,
+          "chsh_failure_index": 5
+        }
+      }
+    },
+    {
+      "gate_id": "E1",
+      "description": "all Hahn states begin with three strong axes",
+      "passed": true,
+      "value": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "gate_id": "E2",
+      "description": "all Hahn states cross CHSH within sampled interval",
+      "passed": true,
+      "value": {
+        "Phi-plus": {
+          "found": true,
+          "wait_us": 251.19,
+          "wait_index": 8
+        },
+        "Phi-minus": {
+          "found": true,
+          "wait_us": 251.19,
+          "wait_index": 8
+        },
+        "Psi-plus": {
+          "found": true,
+          "wait_us": 251.19,
+          "wait_index": 8
+        },
+        "Psi-minus": {
+          "found": true,
+          "wait_us": 251.19,
+          "wait_index": 8
+        }
+      }
+    },
+    {
+      "gate_id": "E3",
+      "description": "Hahn/Ramsey crossing-time geometric-mean ratio >= 4",
+      "passed": true,
+      "value": 11.454702330910406
+    },
+    {
+      "gate_id": "E4",
+      "description": "each Hahn state retains three axes beyond its Ramsey crossing time",
+      "passed": true,
+      "value": {
+        "Phi-plus": {
+          "ramsey_cross_us": 20.02,
+          "latest_hahn_three_axis_us": 125.89
+        },
+        "Phi-minus": {
+          "ramsey_cross_us": 24.02,
+          "latest_hahn_three_axis_us": 125.89
+        },
+        "Psi-plus": {
+          "ramsey_cross_us": 24.02,
+          "latest_hahn_three_axis_us": 125.89
+        },
+        "Psi-minus": {
+          "ramsey_cross_us": 20.02,
+          "latest_hahn_three_axis_us": 125.89
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "claim_id": "Q17-CHILD-PAIR-v1",
+  "seed": 20260725,
+  "source": "Q16_ARA2_RAW_FOUR_CHILD_RECORDS.csv",
+  "source_sha256": "0f7e58b349e5bf3cdda0110a99627134c7a76c69bb0443be8ba1576c4f01e48b",
+  "protocol": "Q17_CHILD_PHASE_PAIR_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "58f7520b9521e80620d2a232974b96fec3d4ac43bb7b5063d5f1f1dbc8228bb3",
+  "children": [
+    "C00",
+    "C01",
+    "C10",
+    "C11"
+  ],
+  "cuts": [
+    "K0G0",
+    "K0G1",
+    "K0G2",
+    "K0G3",
+    "K0G4",
+    "K1G0",
+    "K1G1",
+    "K1G2",
+    "K1G3",
+    "K1G4",
+    "K2G0",
+    "K2G1",
+    "K2G2",
+    "K2G3",
+    "K2G4",
+    "K3G0",
+    "K3G1",
+    "K3G2",
+    "K3G3",
+    "K3G4",
+    "K4G0",
+    "K4G1",
+    "K4G2",
+    "K4G3",
+    "K4G4",
+    "K5G0",
+    "K5G1",
+    "K5G2",
+    "K5G3",
+    "K5G4",
+    "K6G0",
+    "K6G1",
+    "K6G2",
+    "K6G3",
+    "K6G4",
+    "K7G0",
+    "K7G1",
+    "K7G2",
+    "K7G3",
+    "K7G4",
+    "K8G0",
+    "K8G1",
+    "K8G2",
+    "K8G3",
+    "K8G4"
+  ],
+  "observed": {
+    "development": {
+      "radius": 0.2113585282451508,
+      "pairs": {
+        "C00-C01": {
+          "children": [
+            "C00",
+            "C01"
+          ],
+          "opposition": 0.1249450633826789,
+          "balance": 0.9098825490675576,
+          "closure_error": 0.657334107333765,
+          "radial_norm_a": 0.2277829640149313,
+          "radial_norm_b": 0.1901223980542567
+        },
+        "C00-C10": {
+          "children": [
+            "C00",
+            "C10"
+          ],
+          "opposition": 0.344402942811899,
+          "balance": 0.9147398371252549,
+          "closure_error": 0.5727751739843805,
+          "radial_norm_a": 0.2277829640149313,
+          "radial_norm_b": 0.1919928129039544
+        },
+        "C00-C11": {
+          "children": [
+            "C00",
+            "C11"
+          ],
+          "opposition": 0.594568942631398,
+          "balance": 0.9909542615350119,
+          "closure_error": 0.48973510329859327,
+          "radial_norm_a": 0.2277829640149313,
+          "radial_norm_b": 0.23194151138535615
+        },
+        "C01-C10": {
+          "children": [
+            "C01",
+            "C10"
+          ],
+          "opposition": 0.41299971948463193,
+          "balance": 0.9951051023459461,
+          "closure_error": 0.48973510329859393,
+          "radial_norm_a": 0.1901223980542567,
+          "radial_norm_b": 0.1919928129039544
+        },
+        "C01-C11": {
+          "children": [
+            "C01",
+            "C11"
+          ],
+          "opposition": 0.35512859605655905,
+          "balance": 0.9009175804995411,
+          "closure_error": 0.5727751739843808,
+          "radial_norm_a": 0.1901223980542567,
+          "radial_norm_b": 0.23194151138535615
+        },
+        "C10-C11": {
+          "children": [
+            "C10",
+            "C11"
+          ],
+          "opposition": 0.1510001055932273,
+          "balance": 0.9057667751995021,
+          "closure_error": 0.6573341073337648,
+          "radial_norm_a": 0.1919928129039544,
+          "radial_norm_b": 0.23194151138535615
+        }
+      },
+      "architectures": {
+        "P1": {
+          "pairs": [
+            "C00-C01",
+            "C10-C11"
+          ],
+          "max_closure_error": 0.657334107333765,
+          "min_opposition": 0.1249450633826789,
+          "min_balance": 0.9057667751995021,
+          "quality_q": 0.3074026709001796
+        },
+        "P2": {
+          "pairs": [
+            "C00-C10",
+            "C01-C11"
+          ],
+          "max_closure_error": 0.5727751739843808,
+          "min_opposition": 0.344402942811899,
+          "min_balance": 0.9009175804995411,
+          "quality_q": 0.3850506628312876
+        },
+        "P3": {
+          "pairs": [
+            "C00-C11",
+            "C01-C10"
+          ],
+          "max_closure_error": 0.48973510329859393,
+          "min_opposition": 0.41299971948463193,
+          "min_balance": 0.9909542615350119,
+          "quality_q": 0.4699553935698664
+        }
+      },
+      "ranking": [
+        "P3",
+        "P2",
+        "P1"
+      ],
+      "winner": "P3"
+    },
+    "holdout": {
+      "radius": 0.20969909191432926,
+      "pairs": {
+        "C00-C01": {
+          "children": [
+            "C00",
+            "C01"
+          ],
+          "opposition": 0.10028160914374362,
+          "balance": 0.8455507041270444,
+          "closure_error": 0.6589867691323933,
+          "radial_norm_a": 0.23445839333195195,
+          "radial_norm_b": 0.17172383428101987
+        },
+        "C00-C10": {
+          "children": [
+            "C00",
+            "C10"
+          ],
+          "opposition": 0.4342971479984868,
+          "balance": 0.9001825747252082,
+          "closure_error": 0.5474509366630117,
+          "radial_norm_a": 0.23445839333195195,
+          "radial_norm_b": 0.19190036030094676
+        },
+        "C00-C11": {
+          "children": [
+            "C00",
+            "C11"
+          ],
+          "opposition": 0.5729727689700449,
+          "balance": 0.9983506830952844,
+          "closure_error": 0.51578475166996,
+          "radial_norm_a": 0.23445839333195195,
+          "radial_norm_b": 0.23368627441758016
+        },
+        "C01-C10": {
+          "children": [
+            "C01",
+            "C10"
+          ],
+          "opposition": 0.29618425649851104,
+          "balance": 0.9445126965681632,
+          "closure_error": 0.5157847516699576,
+          "radial_norm_a": 0.17172383428101987,
+          "radial_norm_b": 0.19190036030094676
+        },
+        "C01-C11": {
+          "children": [
+            "C01",
+            "C11"
+          ],
+          "opposition": 0.39101185557703755,
+          "balance": 0.8471610874838201,
+          "closure_error": 0.5474509366630136,
+          "radial_norm_a": 0.17172383428101987,
+          "radial_norm_b": 0.23368627441758016
+        },
+        "C10-C11": {
+          "children": [
+            "C10",
+            "C11"
+          ],
+          "opposition": 0.1678055447231945,
+          "balance": 0.9018157274974821,
+          "closure_error": 0.6589867691323933,
+          "radial_norm_a": 0.19190036030094676,
+          "radial_norm_b": 0.23368627441758016
+        }
+      },
+      "architectures": {
+        "P1": {
+          "pairs": [
+            "C00-C01",
+            "C10-C11"
+          ],
+          "max_closure_error": 0.6589867691323933,
+          "min_opposition": 0.10028160914374362,
+          "min_balance": 0.8455507041270444,
+          "quality_q": 0.2803952106972123
+        },
+        "P2": {
+          "pairs": [
+            "C00-C10",
+            "C01-C11"
+          ],
+          "max_closure_error": 0.5474509366630136,
+          "min_opposition": 0.39101185557703755,
+          "min_balance": 0.8471610874838201,
+          "quality_q": 0.3807587976956166
+        },
+        "P3": {
+          "pairs": [
+            "C00-C11",
+            "C01-C10"
+          ],
+          "max_closure_error": 0.51578475166996,
+          "min_opposition": 0.29618425649851104,
+          "min_balance": 0.9445126965681632,
+          "quality_q": 0.4038378424132524
+        }
+      },
+      "ranking": [
+        "P3",
+        "P2",
+        "P1"
+      ],
+      "winner": "P3"
+    },
+    "selected_architecture": "P3",
+    "selected_pairs": [
+      "C00-C11",
+      "C01-C10"
+    ],
+    "selected_pair_holdout": {
+      "C00-C11": {
+        "persistence": 0.8910439965070345,
+        "balanced_accuracy": 1.0,
+        "dprime": 10.538023129762422,
+        "holdout_mean_a": 5.548425705412671,
+        "holdout_mean_b": 5.178491070178725,
+        "frozen_threshold": 5.341360457077673
+      },
+      "C01-C10": {
+        "persistence": 0.7989187584512393,
+        "balanced_accuracy": 0.9624999999999999,
+        "dprime": 3.821973430451656,
+        "holdout_mean_a": 1.8204292350256466,
+        "holdout_mean_b": 1.5863642320198867,
+        "frozen_threshold": 1.699927043238198
+      }
+    },
+    "holdout_runner_up_q": 0.3807587976956166,
+    "gates_1_to_7": {
+      "G1_same_winner": true,
+      "G2_holdout_q_at_least_0_70": false,
+      "G3_both_oppositions_at_least_0_80": false,
+      "G4_both_balances_at_least_0_80": true,
+      "G5_both_persistences_at_least_0_80": false,
+      "G6_both_balanced_accuracies_at_least_0_80": true,
+      "G7_holdout_margin_at_least_10_percent": false
+    },
+    "passes_gates_1_to_7": false
+  },
+  "controls": {
+    "balanced_label_shuffles": 9999,
+    "balanced_label_shuffle_passes": 0,
+    "balanced_label_shuffle_rate": 0.0,
+    "within_archive_pseudo_children": 1000,
+    "within_archive_pseudo_child_passes": 0,
+    "within_archive_pseudo_child_rate": 0.0
+  },
+  "gate_8_controls": true,
+  "all_gates": {
+    "G1_same_winner": true,
+    "G2_holdout_q_at_least_0_70": false,
+    "G3_both_oppositions_at_least_0_80": false,
+    "G4_both_balances_at_least_0_80": true,
+    "G5_both_persistences_at_least_0_80": false,
+    "G6_both_balanced_accuracies_at_least_0_80": true,
+    "G7_holdout_margin_at_least_10_percent": false,
+    "G8_control_rates": true
+  },
+  "verdict": "NOT SUPPORTED",
+  "leave_setting_out": [
+    {
+      "left_out": "K0",
+      "development_winner": "P1",
+      "holdout_winner": "P1",
+      "same_as_full_selected": false,
+      "selected_architecture": "P1",
+      "holdout_q": 0.3516701880236876,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K1",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.40033658421621426,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K2",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.397847765201024,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K3",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.42050808017227986,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K4",
+      "development_winner": "P2",
+      "holdout_winner": "P2",
+      "same_as_full_selected": false,
+      "selected_architecture": "P2",
+      "holdout_q": 0.4791322769024179,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K5",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.3975793937960718,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K6",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.3994693719510929,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K7",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.4133023495292468,
+      "passes_gates_1_to_7": false
+    },
+    {
+      "left_out": "K8",
+      "development_winner": "P3",
+      "holdout_winner": "P3",
+      "same_as_full_selected": true,
+      "selected_architecture": "P3",
+      "holdout_q": 0.6442257826038622,
+      "passes_gates_1_to_7": false
+    }
+  ],
+  "evidence_class": "exploratory same-deposit follow-up; independent replication required"
+}

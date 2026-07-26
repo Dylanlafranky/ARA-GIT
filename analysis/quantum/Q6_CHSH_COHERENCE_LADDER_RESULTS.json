@@ -1,0 +1,507 @@
+{
+  "protocol_id": "Q6-CHSH-COHERENCE-v1",
+  "ledger_id": "T264",
+  "test_class": "post-Q5 known-source calibration with physically prepared Bell rows and equal-weight reconstructed controls",
+  "verdict": "SUPPORTED",
+  "gates_passed": 16,
+  "gates_total": 16,
+  "protocol_sha256": "76e870ee7cb6a595dc0b8ad5a6504e0b1be3e80ddb0ecbf7b50345010926bfc7",
+  "q5_protocol_sha256": "c97459781f38730cfd623820cc7428b1ae24a366c284ca0c45202a21246a206b",
+  "source": {
+    "doi": "10.6084/m9.figshare.14160476.v2",
+    "license": "CC BY 4.0",
+    "archive_md5s": {
+      "Phi-plus": "3275210b912d51e5f10ba99d93ad6ca5",
+      "Phi-minus": "8cd8a5f2b3b9a2ccd090e47312bcc390",
+      "Psi-plus": "43f782ed4404b01393fb57a2da5d1534",
+      "Psi-minus": "1724b4484ffb88e41dbac5f50981e91a"
+    }
+  },
+  "bootstrap": {
+    "seed": 2026072406,
+    "replicates": 5000
+  },
+  "entities": {
+    "Phi-plus": {
+      "entity_type": "physically_prepared",
+      "tensor": [
+        [
+          0.8533333333333333,
+          0.24666666666666662,
+          -0.11333333333333337
+        ],
+        [
+          0.2933333333333333,
+          -0.94,
+          0.013333333333333336
+        ],
+        [
+          0.10666666666666666,
+          0.006666666666666682,
+          0.9466666666666667
+        ]
+      ],
+      "singular_values": [
+        0.9939829101956664,
+        0.945700981047381,
+        0.8927130096362793
+      ],
+      "chsh_smax": 2.7439769469257755,
+      "retained_axes_at_0p50": 3,
+      "frobenius_norm": 1.636853349841973,
+      "determinant": -0.8391597037037035,
+      "chsh_95ci": [
+        2.698361796620612,
+        2.912911130299741
+      ],
+      "s1_95ci": [
+        0.9740164016167099,
+        1.0969738076970974
+      ],
+      "s2_95ci": [
+        0.8933809954449633,
+        0.9962111742599307
+      ],
+      "s3_95ci": [
+        0.7898567363537294,
+        0.9235441041978013
+      ],
+      "fraction_chsh_above_2p00": 1.0,
+      "fraction_chsh_at_most_2p10": 0.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 3
+    },
+    "Phi-minus": {
+      "entity_type": "physically_prepared",
+      "tensor": [
+        [
+          -0.9500000000000002,
+          -0.19999999999999996,
+          0.07499999999999998
+        ],
+        [
+          -0.17499999999999993,
+          0.9500000000000001,
+          -0.14999999999999997
+        ],
+        [
+          -0.025000000000000022,
+          -0.04999999999999999,
+          0.95
+        ]
+      ],
+      "singular_values": [
+        1.0779923614771905,
+        0.9591026567846901,
+        0.8528948131776742
+      ],
+      "chsh_smax": 2.8857896234165237,
+      "retained_axes_at_0p50": 3,
+      "frobenius_norm": 1.6761190291861734,
+      "determinant": -0.8818125000000002,
+      "chsh_95ci": [
+        2.7798007684329797,
+        3.2186638516035284
+      ],
+      "s1_95ci": [
+        1.0170249525829347,
+        1.2779014734799259
+      ],
+      "s2_95ci": [
+        0.8698214270427416,
+        1.0607250690580476
+      ],
+      "s3_95ci": [
+        0.661003489147733,
+        0.9243774105691502
+      ],
+      "fraction_chsh_above_2p00": 1.0,
+      "fraction_chsh_at_most_2p10": 0.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 3
+    },
+    "Psi-plus": {
+      "entity_type": "physically_prepared",
+      "tensor": [
+        [
+          0.855,
+          0.13499999999999998,
+          0.28666666666666674
+        ],
+        [
+          -0.29333333333333333,
+          0.7966666666666666,
+          0.04666666666666666
+        ],
+        [
+          0.18999999999999995,
+          -0.04666666666666666,
+          -0.9266666666666667
+        ]
+      ],
+      "singular_values": [
+        0.9934460399986865,
+        0.9566620622416837,
+        0.7410663471950966
+      ],
+      "chsh_smax": 2.758359900898781,
+      "retained_axes_at_0p50": 3,
+      "frobenius_norm": 1.5656681214953145,
+      "determinant": -0.7043036296296297,
+      "chsh_95ci": [
+        2.662248632815852,
+        2.8720187838208973
+      ],
+      "s1_95ci": [
+        0.9662369986789413,
+        1.0622618306386846
+      ],
+      "s2_95ci": [
+        0.8870067610917904,
+        0.9944771325813637
+      ],
+      "s3_95ci": [
+        0.6733708011083598,
+        0.8002088036104283
+      ],
+      "fraction_chsh_above_2p00": 1.0,
+      "fraction_chsh_at_most_2p10": 0.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 3
+    },
+    "Psi-minus": {
+      "entity_type": "physically_prepared",
+      "tensor": [
+        [
+          -0.835,
+          -0.06499999999999997,
+          0.2066666666666666
+        ],
+        [
+          0.09833333333333333,
+          -0.8816666666666667,
+          0.013333333333333364
+        ],
+        [
+          -0.3433333333333333,
+          -0.04499999999999996,
+          -0.8500000000000001
+        ]
+      ],
+      "singular_values": [
+        0.9588899146372298,
+        0.8871747942922215,
+        0.8168220358204002
+      ],
+      "chsh_smax": 2.6126989754048893,
+      "retained_axes_at_0p50": 3,
+      "frobenius_norm": 1.5406969923454197,
+      "determinant": -0.694872925925926,
+      "chsh_95ci": [
+        2.5345876787104693,
+        2.7357354970623096
+      ],
+      "s1_95ci": [
+        0.9188363959243071,
+        1.030614880918621
+      ],
+      "s2_95ci": [
+        0.8458613335955502,
+        0.9305665319549702
+      ],
+      "s3_95ci": [
+        0.7419732536508575,
+        0.8608234334622912
+      ],
+      "fraction_chsh_above_2p00": 1.0,
+      "fraction_chsh_at_most_2p10": 0.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 3
+    },
+    "Phi-classical": {
+      "entity_type": "equal_weight_reconstruction",
+      "tensor": [
+        [
+          -0.04833333333333345,
+          0.02333333333333333,
+          -0.019166666666666693
+        ],
+        [
+          0.05916666666666667,
+          0.00500000000000006,
+          -0.06833333333333332
+        ],
+        [
+          0.04083333333333332,
+          -0.021666666666666654,
+          0.9483333333333333
+        ]
+      ],
+      "singular_values": [
+        0.9519924564370252,
+        0.078903197158485,
+        0.020015508671782464
+      ],
+      "chsh_smax": 1.9105133882125318,
+      "retained_axes_at_0p50": 1,
+      "frobenius_norm": 0.9554663637314618,
+      "determinant": -0.00150346990740741,
+      "chsh_95ci": [
+        1.8436824067124,
+        2.0112154650003626
+      ],
+      "s1_95ci": [
+        0.915215181659385,
+        0.9970507295904892
+      ],
+      "s2_95ci": [
+        0.040495347212695,
+        0.19765831551526553
+      ],
+      "s3_95ci": [
+        0.0012162581395869947,
+        0.0986223925174246
+      ],
+      "fraction_chsh_above_2p00": 0.0518,
+      "fraction_chsh_at_most_2p10": 1.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 1
+    },
+    "Psi-classical": {
+      "entity_type": "equal_weight_reconstruction",
+      "tensor": [
+        [
+          0.010000000000000009,
+          0.035,
+          0.24666666666666667
+        ],
+        [
+          -0.0975,
+          -0.04250000000000004,
+          0.030000000000000013
+        ],
+        [
+          -0.07666666666666669,
+          -0.04583333333333331,
+          -0.8883333333333334
+        ]
+      ],
+      "singular_values": [
+        0.9268680864388972,
+        0.10878919098019063,
+        0.024020617076799772
+      ],
+      "chsh_smax": 1.8664613981896623,
+      "retained_axes_at_0p50": 1,
+      "frobenius_norm": 0.9335397837145335,
+      "determinant": -0.0024220763888888916,
+      "chsh_95ci": [
+        1.8108039061830672,
+        1.9313048869936056
+      ],
+      "s1_95ci": [
+        0.8988700072444584,
+        0.9581318404553022
+      ],
+      "s2_95ci": [
+        0.06560274591584812,
+        0.16218536718766294
+      ],
+      "s3_95ci": [
+        0.0011685341849127482,
+        0.07270984378868678
+      ],
+      "fraction_chsh_above_2p00": 0.0,
+      "fraction_chsh_at_most_2p10": 1.0,
+      "fraction_chsh_at_most_0p50": 0.0,
+      "modal_retained_axes": 1
+    },
+    "Bell-uniform-mixed": {
+      "entity_type": "equal_weight_reconstruction",
+      "tensor": [
+        [
+          -0.01916666666666672,
+          0.029166666666666667,
+          0.11374999999999999
+        ],
+        [
+          -0.019166666666666665,
+          -0.01874999999999999,
+          -0.01916666666666665
+        ],
+        [
+          -0.017916666666666678,
+          -0.03374999999999998,
+          0.029999999999999916
+        ]
+      ],
+      "singular_values": [
+        0.1229917015263081,
+        0.04758011525238359,
+        0.014582393852027375
+      ],
+      "chsh_smax": 0.26374856217061404,
+      "retained_axes_at_0p50": 0,
+      "frobenius_norm": 0.13267807739872559,
+      "determinant": 8.533557581018516e-05,
+      "chsh_95ci": [
+        0.18987567241613595,
+        0.4287076840701893
+      ],
+      "s1_95ci": [
+        0.08100980760326568,
+        0.1973250075201185
+      ],
+      "s2_95ci": [
+        0.025433535407893094,
+        0.11194284228041679
+      ],
+      "s3_95ci": [
+        0.0007123602000884771,
+        0.05452473271551475
+      ],
+      "fraction_chsh_above_2p00": 0.0,
+      "fraction_chsh_at_most_2p10": 1.0,
+      "fraction_chsh_at_most_0p50": 0.9994,
+      "modal_retained_axes": 0
+    }
+  },
+  "gates": {
+    "B1_all_four_bell_chsh_above_2p00": {
+      "values": [
+        2.7439769469257755,
+        2.8857896234165237,
+        2.758359900898781,
+        2.6126989754048893
+      ],
+      "threshold": 2.0,
+      "pass": true
+    },
+    "B2_all_four_bell_chsh_at_least_2p30": {
+      "values": [
+        2.7439769469257755,
+        2.8857896234165237,
+        2.758359900898781,
+        2.6126989754048893
+      ],
+      "threshold": 2.3,
+      "pass": true
+    },
+    "B3_all_four_bell_s2_at_least_0p50": {
+      "values": [
+        0.945700981047381,
+        0.9591026567846901,
+        0.9566620622416837,
+        0.8871747942922215
+      ],
+      "threshold": 0.5,
+      "pass": true
+    },
+    "B4_all_four_bell_have_three_retained_axes": {
+      "values": [
+        3,
+        3,
+        3,
+        3
+      ],
+      "target": 3,
+      "pass": true
+    },
+    "B5_each_bell_bootstrap_chsh_violation_at_least_0p95": {
+      "values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "threshold": 0.95,
+      "pass": true
+    },
+    "C1_both_classical_chsh_at_most_2p00": {
+      "values": [
+        1.9105133882125318,
+        1.8664613981896623
+      ],
+      "threshold": 2.0,
+      "pass": true
+    },
+    "C2_both_classical_s1_at_least_0p75": {
+      "values": [
+        0.9519924564370252,
+        0.9268680864388972
+      ],
+      "threshold": 0.75,
+      "pass": true
+    },
+    "C3_both_classical_s2_at_most_0p25": {
+      "values": [
+        0.078903197158485,
+        0.10878919098019063
+      ],
+      "threshold": 0.25,
+      "pass": true
+    },
+    "C4_both_classical_have_one_retained_axis": {
+      "values": [
+        1,
+        1
+      ],
+      "target": 1,
+      "pass": true
+    },
+    "C5_each_classical_bootstrap_at_most_2p10_at_least_0p90": {
+      "values": [
+        1.0,
+        1.0
+      ],
+      "threshold": 0.9,
+      "pass": true
+    },
+    "M1_uniform_chsh_at_most_0p50": {
+      "value": 0.26374856217061404,
+      "threshold": 0.5,
+      "pass": true
+    },
+    "M2_uniform_s1_at_most_0p25": {
+      "value": 0.1229917015263081,
+      "threshold": 0.25,
+      "pass": true
+    },
+    "M3_uniform_has_zero_retained_axes": {
+      "value": 0,
+      "target": 0,
+      "pass": true
+    },
+    "M4_uniform_bootstrap_at_most_0p50_at_least_0p95": {
+      "value": 0.9994,
+      "threshold": 0.95,
+      "pass": true
+    },
+    "O1_mean_bell_minus_classical_chsh_at_least_0p50": {
+      "value": 0.8617189684603952,
+      "threshold": 0.5,
+      "pass": true
+    },
+    "O2_retained_axis_sequence_exact": {
+      "value": [
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        0
+      ],
+      "target": [
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        0
+      ],
+      "pass": true
+    }
+  }
+}

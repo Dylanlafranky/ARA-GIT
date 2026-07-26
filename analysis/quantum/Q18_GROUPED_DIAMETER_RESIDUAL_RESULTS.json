@@ -1,0 +1,237 @@
+{
+  "claim_id": "Q18-GROUP-RESIDUAL-v1",
+  "seed": 20260726,
+  "source": "Q16_ARA2_RAW_FOUR_CHILD_RECORDS.csv",
+  "source_sha256": "0f7e58b349e5bf3cdda0110a99627134c7a76c69bb0443be8ba1576c4f01e48b",
+  "q17_result": "Q17_CHILD_PHASE_PAIR_RESULTS.json",
+  "q17_result_sha256": "3c599b25f991d00ee190612f3c2cbd11dd76605d3924c77e351a0def4b54478a",
+  "protocol": "Q18_GROUPED_DIAMETER_RESIDUAL_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "c3833446b6b78c31d48a533be7a3dc235d2e9e9100699f13aa0b7ca65be0035a",
+  "cuts": [
+    "K0G0",
+    "K0G1",
+    "K0G2",
+    "K0G3",
+    "K0G4",
+    "K1G0",
+    "K1G1",
+    "K1G2",
+    "K1G3",
+    "K1G4",
+    "K2G0",
+    "K2G1",
+    "K2G2",
+    "K2G3",
+    "K2G4",
+    "K3G0",
+    "K3G1",
+    "K3G2",
+    "K3G3",
+    "K3G4",
+    "K4G0",
+    "K4G1",
+    "K4G2",
+    "K4G3",
+    "K4G4",
+    "K5G0",
+    "K5G1",
+    "K5G2",
+    "K5G3",
+    "K5G4",
+    "K6G0",
+    "K6G1",
+    "K6G2",
+    "K6G3",
+    "K6G4",
+    "K7G0",
+    "K7G1",
+    "K7G2",
+    "K7G3",
+    "K7G4",
+    "K8G0",
+    "K8G1",
+    "K8G2",
+    "K8G3",
+    "K8G4"
+  ],
+  "primary_removed_axis": "J",
+  "removals": {
+    "J": {
+      "removed_axis": "J",
+      "remaining_axes": [
+        "U",
+        "V"
+      ],
+      "removed_holdout_leakage": 0.5746657748883045,
+      "remaining": {
+        "U": {
+          "development_energy_retention": 0.9999458662074922,
+          "holdout_persistence": 0.8789954199506774,
+          "holdout_phase_ab_balanced_accuracy": 0.98125,
+          "development_midpoint_threshold": -2.0816681711721685e-16,
+          "development_plus_mean": 0.1389256485120346,
+          "development_minus_mean": -0.138925648512035
+        },
+        "V": {
+          "development_energy_retention": 0.9996567192620943,
+          "holdout_persistence": 0.83087989480792,
+          "holdout_phase_ab_balanced_accuracy": 0.9062500000000001,
+          "development_midpoint_threshold": -2.0122792321330962e-16,
+          "development_plus_mean": 0.12101935990750871,
+          "development_minus_mean": -0.12101935990750912
+        }
+      },
+      "remaining_axis_absolute_cosine": 0.24265517321722835,
+      "holdout_rank_two_energy_share": 0.8930879825274902,
+      "holdout_singular_values": [
+        0.2987495643663102,
+        0.1982753288294203,
+        0.12405849757671165,
+        3.8581338497240235e-17
+      ],
+      "four_child_holdout_balanced_accuracy": 0.925,
+      "classification_null": {
+        "iterations": 9999,
+        "observed": 0.925,
+        "null_99th_percentile": 0.33125,
+        "p_value": 0.0001,
+        "null_mean": 0.2501787678767877
+      },
+      "gates_1_to_7": {
+        "G1_removed_holdout_leakage_at_most_0_25": false,
+        "G2_both_development_retentions_at_least_0_75": true,
+        "G3_both_holdout_persistences_at_least_0_80": true,
+        "G4_both_phase_ab_accuracies_at_least_0_80": true,
+        "G5_holdout_rank_two_energy_share_at_least_0_95": false,
+        "G6_remaining_axis_absolute_cosine_at_most_0_80": true,
+        "G7_four_child_accuracy_and_shuffle": true
+      },
+      "passes_gates_1_to_7": false
+    },
+    "U": {
+      "removed_axis": "U",
+      "remaining_axes": [
+        "V",
+        "J"
+      ],
+      "removed_holdout_leakage": 0.4789513895479229,
+      "remaining": {
+        "V": {
+          "development_energy_retention": 0.9700685196223097,
+          "holdout_persistence": 0.8175933628862783,
+          "holdout_phase_ab_balanced_accuracy": 0.91875,
+          "development_midpoint_threshold": -1.5959455978986625e-16,
+          "development_plus_mean": 0.11743738530340124,
+          "development_minus_mean": -0.11743738530340156
+        },
+        "J": {
+          "development_energy_retention": 0.999945866207493,
+          "holdout_persistence": 0.8192484567949512,
+          "holdout_phase_ab_balanced_accuracy": 0.90625,
+          "development_midpoint_threshold": -6.245004513516506e-17,
+          "development_plus_mean": 0.10350408729106082,
+          "development_minus_mean": -0.10350408729106095
+        }
+      },
+      "remaining_axis_absolute_cosine": 0.024405166103923685,
+      "holdout_rank_two_energy_share": 0.8582117561414054,
+      "holdout_singular_values": [
+        0.22861108748725878,
+        0.21147855264457335,
+        0.12658372477123547,
+        4.3908113751670366e-17
+      ],
+      "four_child_holdout_balanced_accuracy": 0.8375,
+      "classification_null": {
+        "iterations": 9999,
+        "observed": 0.8375,
+        "null_99th_percentile": 0.33125,
+        "p_value": 0.0001,
+        "null_mean": 0.2502325232523252
+      },
+      "gates_1_to_7": {
+        "G1_removed_holdout_leakage_at_most_0_25": false,
+        "G2_both_development_retentions_at_least_0_75": true,
+        "G3_both_holdout_persistences_at_least_0_80": true,
+        "G4_both_phase_ab_accuracies_at_least_0_80": true,
+        "G5_holdout_rank_two_energy_share_at_least_0_95": false,
+        "G6_remaining_axis_absolute_cosine_at_most_0_80": true,
+        "G7_four_child_accuracy_and_shuffle": true
+      },
+      "passes_gates_1_to_7": false
+    },
+    "V": {
+      "removed_axis": "V",
+      "remaining_axes": [
+        "U",
+        "J"
+      ],
+      "removed_holdout_leakage": 0.5587870138698047,
+      "remaining": {
+        "U": {
+          "development_energy_retention": 0.9700685196223101,
+          "holdout_persistence": 0.8702430081110801,
+          "holdout_phase_ab_balanced_accuracy": 0.96875,
+          "development_midpoint_threshold": -1.6653345369377348e-16,
+          "development_plus_mean": 0.1347746940549621,
+          "development_minus_mean": -0.13477469405496242
+        },
+        "J": {
+          "development_energy_retention": 0.9996567192620953,
+          "holdout_persistence": 0.8286340521019789,
+          "holdout_phase_ab_balanced_accuracy": 0.9125,
+          "development_midpoint_threshold": -6.938893903907228e-17,
+          "development_plus_mean": 0.10347415778018651,
+          "development_minus_mean": -0.10347415778018665
+        }
+      },
+      "remaining_axis_absolute_cosine": 0.0041690046800939,
+      "holdout_rank_two_energy_share": 0.8969009339854368,
+      "holdout_singular_values": [
+        0.26366481493920674,
+        0.22002769931199628,
+        0.11643129097067863,
+        6.391121787097927e-17
+      ],
+      "four_child_holdout_balanced_accuracy": 0.8875,
+      "classification_null": {
+        "iterations": 9999,
+        "observed": 0.8875,
+        "null_99th_percentile": 0.33125,
+        "p_value": 0.0001,
+        "null_mean": 0.250531303130313
+      },
+      "gates_1_to_7": {
+        "G1_removed_holdout_leakage_at_most_0_25": false,
+        "G2_both_development_retentions_at_least_0_75": true,
+        "G3_both_holdout_persistences_at_least_0_80": true,
+        "G4_both_phase_ab_accuracies_at_least_0_80": true,
+        "G5_holdout_rank_two_energy_share_at_least_0_95": false,
+        "G6_remaining_axis_absolute_cosine_at_most_0_80": true,
+        "G7_four_child_accuracy_and_shuffle": true
+      },
+      "passes_gates_1_to_7": false
+    }
+  },
+  "primary_all_gates": {
+    "G1_removed_holdout_leakage_at_most_0_25": false,
+    "G2_both_development_retentions_at_least_0_75": true,
+    "G3_both_holdout_persistences_at_least_0_80": true,
+    "G4_both_phase_ab_accuracies_at_least_0_80": true,
+    "G5_holdout_rank_two_energy_share_at_least_0_95": false,
+    "G6_remaining_axis_absolute_cosine_at_most_0_80": true,
+    "G7_four_child_accuracy_and_shuffle": true,
+    "G8_control_rates": true
+  },
+  "primary_verdict": "NOT SUPPORTED",
+  "secondary_three_diameter_residual_symmetry_supported": false,
+  "controls": {
+    "balanced_label_full_pipeline_iterations": 9999,
+    "balanced_label_full_pipeline_passes": 0,
+    "balanced_label_full_pipeline_rate": 0.0,
+    "within_archive_pseudo_child_iterations": 1000,
+    "within_archive_pseudo_child_passes": 0,
+    "within_archive_pseudo_child_rate": 0.0
+  },
+  "evidence_class": "exploratory same-deposit residual test; independent replication required"
+}

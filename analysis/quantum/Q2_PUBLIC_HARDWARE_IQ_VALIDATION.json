@@ -1,0 +1,107 @@
+{
+  "protocol_id": "Q2-PUBLIC-HARDWARE-IQ-v1",
+  "ledger_id": "T259",
+  "validation_status": "PASS",
+  "checks_passed": 19,
+  "checks_total": 19,
+  "checks": [
+    {
+      "check": "frozen_protocol_hash",
+      "pass": true,
+      "detail": "baeaee364d4eaca7f013bd6c7d8d5e2bfffcd14b7e77010f8b46d7a89dbd0311"
+    },
+    {
+      "check": "source_archive_hash",
+      "pass": true,
+      "detail": "73f3e2ca7b3658452b4c171532c751e96d7392dcb8741b87a18e28c7073d67fd"
+    },
+    {
+      "check": "fold_row_count",
+      "pass": true,
+      "detail": "192"
+    },
+    {
+      "check": "block_row_count",
+      "pass": true,
+      "detail": "600"
+    },
+    {
+      "check": "conditions_complete",
+      "pass": true,
+      "detail": "[0, 10, 50, 250, 500, 1000]"
+    },
+    {
+      "check": "all_primary_axes_selected_in_training",
+      "pass": true,
+      "detail": "selection recorded per fold"
+    },
+    {
+      "check": "primary_ara_recomputed",
+      "pass": true,
+      "detail": "0.8828083333333332"
+    },
+    {
+      "check": "primary_onecut_recomputed",
+      "pass": true,
+      "detail": "0.8828383333333335"
+    },
+    {
+      "check": "raw_ara_accuracy_tie",
+      "pass": true,
+      "detail": "0.8828083333333332 vs 0.8828083333333332"
+    },
+    {
+      "check": "reported_gain_recomputed",
+      "pass": true,
+      "detail": "-3.000000000030756e-05"
+    },
+    {
+      "check": "reported_shuffle_recomputed",
+      "pass": true,
+      "detail": "0.7334650000000001"
+    },
+    {
+      "check": "confusion_totals_per_primary_arm",
+      "pass": true,
+      "detail": "600,000 held-out predictions per arm"
+    },
+    {
+      "check": "ara_raw_zero_disagreement",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "check": "pole_reversal_zero_disagreement",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "check": "complement_machine_precision",
+      "pass": true,
+      "detail": "4.440892098500626e-16"
+    },
+    {
+      "check": "bootstrap_low_reproduced",
+      "pass": true,
+      "detail": "-0.0001466666666666668 vs -0.00014666666666652284"
+    },
+    {
+      "check": "bootstrap_high_reproduced",
+      "pass": true,
+      "detail": "5.000000000000005e-05 vs 4.999999999999449e-05"
+    },
+    {
+      "check": "all_gate_flags_reproduced",
+      "pass": true,
+      "detail": "{\"G1_ara_ba_at_least_0p80\": true, \"G2_gain_at_least_0p005\": false, \"G3_gain_ci_low_above_zero\": false, \"G4_worst_condition_at_least_0p70\": true, \"G5_equal_information_tie\": true, \"G6_pole_reversal_and_complement\": true, \"G7_label_shuffle_at_most_0p55\": false}"
+    },
+    {
+      "check": "verdict_reproduced",
+      "pass": true,
+      "detail": "NOT SUPPORTED, 4/7"
+    }
+  ],
+  "independent_verdict": "NOT SUPPORTED",
+  "independent_gate_count": 4,
+  "note": "Artifact-level independent recomputation. The frozen negative verdict remains driven by G2/G3 even if the one-shot label-shuffle control is treated cautiously."
+}

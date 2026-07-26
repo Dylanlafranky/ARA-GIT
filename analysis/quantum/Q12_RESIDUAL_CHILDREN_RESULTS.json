@@ -1,0 +1,182 @@
+{
+  "test_id": "Q12-RESIDUAL-CHILDREN-v1",
+  "ledger_id": "T271",
+  "test_class": "post-outcome orthogonal child decomposition with held-out identity",
+  "protocol_sha256": "18d3a3eb6afbe760e7af87f3b6725a9a4e56fab17f6680cd4c89048279d28ccb",
+  "verdict": "PARTIAL / NOT CALIBRATED",
+  "summary": {
+    "records": 88,
+    "cells": 22,
+    "energy_shares": {
+      "Ramsey": {
+        "real": {
+          "common": 0.9522131464884893,
+          "family": 0.03177122908836257,
+          "sign": 0.008644037017248241,
+          "interaction": 0.007371587405899908
+        },
+        "imag": {
+          "common": 0.5871622784203704,
+          "family": 0.3338394214112618,
+          "sign": 0.017375641106765143,
+          "interaction": 0.06162265906160265
+        },
+        "complex": {
+          "common": 0.7534738852140767,
+          "family": 0.1962217609127329,
+          "sign": 0.013397655480545301,
+          "interaction": 0.036906698392645154
+        }
+      },
+      "Hahn": {
+        "real": {
+          "common": 0.8013055069477127,
+          "family": 0.0541016302674372,
+          "sign": 0.037816638561202987,
+          "interaction": 0.10677622422364706
+        },
+        "imag": {
+          "common": 0.32553471728006067,
+          "family": 0.36888259559130354,
+          "sign": 0.23055215429513246,
+          "interaction": 0.07503053283350339
+        },
+        "complex": {
+          "common": 0.7380126491561486,
+          "family": 0.09597764978442391,
+          "sign": 0.06345667753302131,
+          "interaction": 0.10255302352640622
+        }
+      }
+    },
+    "heldout_metrics": {
+      "Ramsey": {
+        "scope": "Ramsey",
+        "records": 44,
+        "real_mae": 0.052333045822819196,
+        "imag_mae": 0.2193799979962491,
+        "complex_mean_error": 0.2415955501771326,
+        "complex_median_error": 0.25303603247268386,
+        "zero_mean_error": 0.3119757056135107,
+        "loo_mean_error": 0.18203728238099537,
+        "sibling_mean_error": 0.1352600990523079,
+        "improvement_vs_zero_pct": 22.559498759037385,
+        "improvement_vs_loo_mean_pct": -32.71762081763263,
+        "real_sign_accuracy": 0.9210526315789473,
+        "real_sign_evaluable": 38,
+        "imag_sign_accuracy": 0.75,
+        "imag_sign_evaluable": 40,
+        "real_correlation": 0.8823330643217255,
+        "imag_correlation": 0.564775210611915
+      },
+      "Hahn": {
+        "scope": "Hahn",
+        "records": 44,
+        "real_mae": 0.15668615233373498,
+        "imag_mae": 0.0440258336836985,
+        "complex_mean_error": 0.16833637443464564,
+        "complex_median_error": 0.16777361473874455,
+        "zero_mean_error": 0.11483398241029975,
+        "loo_mean_error": 0.08153361887555656,
+        "sibling_mean_error": 0.10333492664448052,
+        "improvement_vs_zero_pct": -46.59107948828492,
+        "improvement_vs_loo_mean_pct": -106.46253258005721,
+        "real_sign_accuracy": 0.5,
+        "real_sign_evaluable": 38,
+        "imag_sign_accuracy": 0.7,
+        "imag_sign_evaluable": 40,
+        "real_correlation": 0.24166650817481136,
+        "imag_correlation": 0.5319973667731055
+      }
+    },
+    "gates_passed": 6,
+    "gates_total": 10
+  },
+  "gates": [
+    {
+      "gate_id": "C1",
+      "description": "88 records form 22 complete four-state cells",
+      "passed": true,
+      "value": {
+        "records": 88,
+        "cells": 22
+      }
+    },
+    {
+      "gate_id": "C2",
+      "description": "Hadamard inverse maximum error <= 1e-12",
+      "passed": true,
+      "value": 1.1102230246251565e-16
+    },
+    {
+      "gate_id": "C3",
+      "description": "Parseval maximum error <= 1e-12",
+      "passed": true,
+      "value": 2.220446049250313e-16
+    },
+    {
+      "gate_id": "C4",
+      "description": "common real-energy share >= 50% in both conditions",
+      "passed": true,
+      "value": {
+        "Ramsey": 0.9522131464884893,
+        "Hahn": 0.8013055069477127
+      }
+    },
+    {
+      "gate_id": "C5",
+      "description": "non-common imaginary-energy share >= 50% in both conditions",
+      "passed": false,
+      "value": {
+        "Ramsey": 0.4128377215796296,
+        "Hahn": 0.6744652827199393
+      }
+    },
+    {
+      "gate_id": "C6",
+      "description": "held-out error improves zero by >= 10% in both conditions",
+      "passed": false,
+      "value": {
+        "Ramsey": 22.559498759037385,
+        "Hahn": -46.59107948828492
+      }
+    },
+    {
+      "gate_id": "C7",
+      "description": "held-out error improves LOO mean by >= 5% in both conditions",
+      "passed": false,
+      "value": {
+        "Ramsey": -32.71762081763263,
+        "Hahn": -106.46253258005721
+      }
+    },
+    {
+      "gate_id": "C8",
+      "description": "held-out real sign accuracy >= 75% in both conditions",
+      "passed": false,
+      "value": {
+        "Ramsey": 0.9210526315789473,
+        "Hahn": 0.5
+      }
+    },
+    {
+      "gate_id": "C9",
+      "description": "held-out imaginary sign accuracy >= 60% in both conditions",
+      "passed": true,
+      "value": {
+        "Ramsey": 0.75,
+        "Hahn": 0.7
+      }
+    },
+    {
+      "gate_id": "C10",
+      "description": "interaction complex-energy share <= 25% in both conditions",
+      "passed": true,
+      "value": {
+        "Ramsey": 0.036906698392645154,
+        "Hahn": 0.10255302352640622
+      }
+    }
+  ],
+  "boundary": "The four child modes are an exact coordinate rotation of Q11 residuals. Only held-out-state performance and energy allocation are empirical. The test does not identify physical environmental channels or predict future times."
+}

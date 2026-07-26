@@ -1,0 +1,973 @@
+{
+  "protocol_id": "Q25-ARA9-MISSING-CUT-v1",
+  "ledger_id": "T281",
+  "protocol_sha256": "d267c807ff60ca84f2475e04fd29b22ed953e3c6b23036aeb022de1dd6c69397",
+  "prediction_sha256": "ec06e6ea3075cfd30f945de3142613c7cf40b2b33f258ef5911d8f0d8c7ad390",
+  "test_class": "blind external missing-cut reconstruction on processed public density matrices",
+  "source": {
+    "doi": "10.5281/zenodo.4604775",
+    "primary_platform": "two distant atomic qubits",
+    "primary_matrices": 5,
+    "primary_predictions": 45,
+    "secondary_matrices": 4,
+    "secondary_predictions": 36,
+    "source_quality": {
+      "Fig3a-mixed-input": {
+        "hermitian_residual_before_symmetrization": 0.0,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.23753239385889846,
+        "maximum_eigenvalue": 0.26947564748932407,
+        "filename": "Fig3a_dm.csv",
+        "source_basis": "computational"
+      },
+      "Fig3b-AA": {
+        "hermitian_residual_before_symmetrization": 0.0,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.02127632825760386,
+        "maximum_eigenvalue": 0.6768814455581325,
+        "filename": "Fig3b_dm_AA.csv",
+        "source_basis": "computational"
+      },
+      "Fig3b-AD": {
+        "hermitian_residual_before_symmetrization": 0.0,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.0024132501115504304,
+        "maximum_eigenvalue": 0.7189259217898798,
+        "filename": "Fig3b_dm_AD.csv",
+        "source_basis": "computational"
+      },
+      "Fig3b-DA": {
+        "hermitian_residual_before_symmetrization": 0.0,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.0009665893254028092,
+        "maximum_eigenvalue": 0.6703062277790646,
+        "filename": "Fig3b_dm_DA.csv",
+        "source_basis": "computational"
+      },
+      "Fig3b-DD": {
+        "hermitian_residual_before_symmetrization": 0.0,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": -0.013059544785853213,
+        "maximum_eigenvalue": 0.6838996033836175,
+        "filename": "Fig3b_dm_DD.csv",
+        "source_basis": "computational"
+      },
+      "Fig4-AA": {
+        "hermitian_residual_before_symmetrization": 6.938893903907228e-18,
+        "trace_before_normalization_real": 0.9999999999999998,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 2.220446049250313e-16,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.026418007739318416,
+        "maximum_eigenvalue": 0.6344612993992873,
+        "filename": "figure4_dm_AA.csv",
+        "source_basis": "bell"
+      },
+      "Fig4-AD": {
+        "hermitian_residual_before_symmetrization": 1.3877787807814457e-17,
+        "trace_before_normalization_real": 0.9999999999999999,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 1.1102230246251565e-16,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.04012389257076396,
+        "maximum_eigenvalue": 0.6531265205107859,
+        "filename": "figure4_dm_AD.csv",
+        "source_basis": "bell"
+      },
+      "Fig4-DA": {
+        "hermitian_residual_before_symmetrization": 4.163336342344337e-17,
+        "trace_before_normalization_real": 1.0,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 1.1102230246251565e-16,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.0015446531466345368,
+        "maximum_eigenvalue": 0.6407034932066833,
+        "filename": "figure4_dm_DA.csv",
+        "source_basis": "bell"
+      },
+      "Fig4-DD": {
+        "hermitian_residual_before_symmetrization": 4.163336342344337e-17,
+        "trace_before_normalization_real": 0.9999999999999996,
+        "trace_before_normalization_imag": 0.0,
+        "trace_residual_after_normalization": 0.0,
+        "imaginary_trace_after_normalization": 0.0,
+        "minimum_eigenvalue": 0.008481388784224478,
+        "maximum_eigenvalue": 0.6359722040486322,
+        "filename": "figure4_dm_DD.csv",
+        "source_basis": "bell"
+      }
+    }
+  },
+  "summaries": {
+    "primary": {
+      "ara": {
+        "n": 45,
+        "mae": 0.12393755479865508,
+        "median_absolute_error": 0.10050215719528352,
+        "rmse": 0.16629322169037716,
+        "fraction_within_0p10": 0.4888888888888889,
+        "pearson": 0.8538026315815387,
+        "pole_quiet_accuracy": 0.8666666666666667
+      },
+      "ridge": {
+        "n": 45,
+        "mae": 0.18616243068082794,
+        "median_absolute_error": 0.04781576033106019,
+        "rmse": 0.30584443721799925,
+        "fraction_within_0p10": 0.5777777777777777,
+        "pearson": 0.0,
+        "pole_quiet_accuracy": 0.5777777777777777
+      },
+      "mean8": {
+        "n": 45,
+        "mae": 0.2162988456468707,
+        "median_absolute_error": 0.09887460874352971,
+        "rmse": 0.3268407207596183,
+        "fraction_within_0p10": 0.5111111111111111,
+        "pearson": -0.045996080789036775,
+        "pole_quiet_accuracy": 0.4888888888888889
+      },
+      "physical_midpoint": {
+        "n": 37,
+        "mae": 0.08686935672595368,
+        "median_absolute_error": 0.03505716918584468,
+        "rmse": 0.14963007740766518,
+        "fraction_within_0p10": 0.7297297297297297,
+        "pearson": 0.9092967472452785,
+        "pole_quiet_accuracy": 0.918918918918919
+      }
+    },
+    "secondary": {
+      "ara": {
+        "n": 36,
+        "mae": 0.07104849757475586,
+        "median_absolute_error": 0.05777882685630591,
+        "rmse": 0.08559794123727926,
+        "fraction_within_0p10": 0.7222222222222222,
+        "pearson": 0.9582553460455319,
+        "pole_quiet_accuracy": 0.8888888888888888
+      },
+      "ridge": {
+        "n": 36,
+        "mae": 0.19515786286151565,
+        "median_absolute_error": 0.07080139366828951,
+        "rmse": 0.29395269818021386,
+        "fraction_within_0p10": 0.6111111111111112,
+        "pearson": 0.0,
+        "pole_quiet_accuracy": 0.6111111111111112
+      },
+      "mean8": {
+        "n": 36,
+        "mae": 0.233321624291348,
+        "median_absolute_error": 0.14865051038789445,
+        "rmse": 0.31023123272516134,
+        "fraction_within_0p10": 0.3611111111111111,
+        "pearson": 0.027006245733747155,
+        "pole_quiet_accuracy": 0.5
+      },
+      "physical_midpoint": {
+        "n": 36,
+        "mae": 0.0871547173016979,
+        "median_absolute_error": 0.07289687475428931,
+        "rmse": 0.11530948276511638,
+        "fraction_within_0p10": 0.8055555555555556,
+        "pearson": 0.9287516625408944,
+        "pole_quiet_accuracy": 0.8611111111111112
+      }
+    }
+  },
+  "cluster_bootstrap": {
+    "ridge": {
+      "probability_ara_lower_mae": 0.9998,
+      "ara_mae_95ci": [
+        0.061405516691639246,
+        0.1721713992293301
+      ],
+      "control_mae_95ci": [
+        0.09297409195184471,
+        0.24249601888388708
+      ],
+      "control_minus_ara_mae_95ci": [
+        0.02052660960842756,
+        0.10009556342064424
+      ]
+    },
+    "mean8": {
+      "probability_ara_lower_mae": 0.9997,
+      "ara_mae_95ci": [
+        0.061405516691639246,
+        0.17417756631863
+      ],
+      "control_mae_95ci": [
+        0.10937115041193037,
+        0.28149101268015364
+      ],
+      "control_minus_ara_mae_95ci": [
+        0.03929963016240762,
+        0.13317459618277422
+      ]
+    },
+    "physical_midpoint": {
+      "probability_ara_lower_mae": 0.005,
+      "ara_mae_95ci": [
+        0.061405516691639246,
+        0.17368110223476277
+      ],
+      "control_mae_95ci": [
+        0.0396200287324537,
+        0.14827746874422945
+      ],
+      "control_minus_ara_mae_95ci": [
+        -0.05179125290250289,
+        -0.013814745177692142
+      ]
+    }
+  },
+  "paired_sign_flip": {
+    "ridge": {
+      "n": 45,
+      "mean_control_minus_ara_absolute_error": 0.062224875882172875,
+      "exact_one_sided_sign_flip_p": 0.013514233416316301
+    },
+    "mean8": {
+      "n": 45,
+      "mean_control_minus_ara_absolute_error": 0.0923612908482156,
+      "exact_one_sided_sign_flip_p": 0.0006772061385333927
+    },
+    "physical_midpoint": {
+      "n": 37,
+      "mean_control_minus_ara_absolute_error": -0.026330270861507153,
+      "exact_one_sided_sign_flip_p": 0.9872224041318987
+    }
+  },
+  "entity_metrics": {
+    "Fig3a-mixed-input": {
+      "group": "primary",
+      "a": [
+        -0.0077499356000000005,
+        -0.0310858522,
+        0.0024110909999999763
+      ],
+      "b": [
+        0.008524928999999999,
+        -0.0044777406,
+        0.024283131000000013
+      ],
+      "joint": [
+        [
+          0.00017222079999999968,
+          -0.005855506799999999,
+          -0.0055110652
+        ],
+        [
+          -0.014552656399999999,
+          -0.0048221819999999995,
+          -0.012572117399999999
+        ],
+        [
+          -0.0084388186,
+          -0.0024110909999999998,
+          0.0017222080000000028
+        ]
+      ],
+      "connected": [
+        [
+          0.00023828845074457206,
+          -0.005890209001283505,
+          -0.005322872498583636
+        ],
+        [
+          -0.014287651717090505,
+          -0.004961376382481539,
+          -0.01181725557878076
+        ],
+        [
+          -0.00845937297958754,
+          -0.0024002947599390053,
+          0.0016636591613940824
+        ]
+      ],
+      "ara9": [
+        [
+          0.9997617115492554,
+          1.0058902090012836,
+          1.0053228724985837
+        ],
+        [
+          1.0142876517170905,
+          1.0049613763824816,
+          1.0118172555787808
+        ],
+        [
+          1.0084593729795874,
+          1.002400294759939,
+          0.9983363408386059
+        ]
+      ],
+      "singular_values": [
+        0.0206729960393155,
+        0.008205719164373624,
+        0.00410702659037182
+      ],
+      "retained_directions_at_0p50": 0,
+      "determinant": -6.967028474218818e-07,
+      "closure_strength": 0.008865077334052817,
+      "directional_balance": 0.1986662495634961
+    },
+    "Fig3b-AA": {
+      "group": "primary",
+      "a": [
+        -0.18367346938775508,
+        -0.10144927536231887,
+        -0.04651162790697683
+      ],
+      "b": [
+        -0.10204081632653061,
+        0.10869565217391305,
+        0.03488372093023262
+      ],
+      "joint": [
+        [
+          0.7823129251700681,
+          0.015873015873015872,
+          0.01694915254237289
+        ],
+        [
+          -0.08670520231213869,
+          -0.4565217391304347,
+          0.10249307479224376
+        ],
+        [
+          0.024539877300613522,
+          0.13944223107569725,
+          0.37209302325581395
+        ]
+      ],
+      "connected": [
+        [
+          0.7635707344162156,
+          0.035837523415163164,
+          0.023356366590782964
+        ],
+        [
+          -0.0970571691858447,
+          -0.44549464398235655,
+          0.10603200300255722
+        ],
+        [
+          0.019793792820309762,
+          0.14449784280471648,
+          0.37371552190373175
+        ]
+      ],
+      "ara9": [
+        [
+          0.2364292655837844,
+          0.9641624765848369,
+          0.976643633409217
+        ],
+        [
+          1.0970571691858446,
+          1.4454946439823566,
+          0.8939679969974428
+        ],
+        [
+          0.9802062071796902,
+          0.8555021571952836,
+          0.6262844780962682
+        ]
+      ],
+      "singular_values": [
+        0.7793554076423249,
+        0.4550207278456116,
+        0.38793616730148883
+      ],
+      "retained_directions_at_0p50": 1,
+      "determinant": -0.1375710350218835,
+      "closure_strength": 0.5162289248999138,
+      "directional_balance": 0.49776541420949133
+    },
+    "Fig3b-AD": {
+      "group": "primary",
+      "a": [
+        -0.08552631578947364,
+        -0.10299003322259143,
+        0.05167173252279644
+      ],
+      "b": [
+        0.21710526315789472,
+        -0.0830564784053156,
+        0.003039513677811634
+      ],
+      "joint": [
+        [
+          -0.8026315789473684,
+          -0.012422360248447173,
+          0.02923976608187137
+        ],
+        [
+          -0.07017543859649122,
+          0.46179401993355484,
+          0.19519519519519518
+        ],
+        [
+          -0.15,
+          -0.13636363636363635,
+          0.48936170212765967
+        ]
+      ],
+      "connected": [
+        [
+          -0.7840633656509695,
+          -0.019525874848901795,
+          0.029499724488526315
+        ],
+        [
+          -0.04781576033106019,
+          0.45324003046323996,
+          0.19550823480985352
+        ],
+        [
+          -0.16121820508718607,
+          -0.13207196422719147,
+          0.4892046451899004
+        ]
+      ],
+      "ara9": [
+        [
+          1.7840633656509695,
+          1.0195258748489018,
+          0.9705002755114737
+        ],
+        [
+          1.0478157603310603,
+          0.54675996953676,
+          0.8044917651901464
+        ],
+        [
+          1.161218205087186,
+          1.1320719642271915,
+          0.5107953548100996
+        ]
+      ],
+      "singular_values": [
+        0.8212734991172136,
+        0.5140759481076217,
+        0.4538000158715489
+      ],
+      "retained_directions_at_0p50": 2,
+      "determinant": -0.19159298384268952,
+      "closure_strength": 0.5764918877274272,
+      "directional_balance": 0.5525565068875816
+    },
+    "Fig3b-DA": {
+      "group": "primary",
+      "a": [
+        0.006896551724137945,
+        -0.037267080745341685,
+        0.04207119741100329
+      ],
+      "b": [
+        -0.05517241379310345,
+        -0.06832298136645965,
+        0.06148867313915862
+      ],
+      "joint": [
+        [
+          0.7862068965517239,
+          0.04702194357366771,
+          -0.02631578947368418
+        ],
+        [
+          -0.02265372168284796,
+          0.3602484472049689,
+          -0.14024390243902438
+        ],
+        [
+          0.04024767801857587,
+          -0.03496503496503495,
+          -0.5080906148867315
+        ]
+      ],
+      "connected": [
+        [
+          0.7865873959571936,
+          0.04749313654860881,
+          -0.026739849288437
+        ],
+        [
+          -0.02470983648259095,
+          0.3577022491416226,
+          -0.13795239909222343
+        ],
+        [
+          0.04256884753090709,
+          -0.032090605328258325,
+          -0.5106775169929096
+        ]
+      ],
+      "ara9": [
+        [
+          0.21341260404280638,
+          0.9525068634513912,
+          1.026739849288437
+        ],
+        [
+          1.0247098364825908,
+          0.6422977508583774,
+          1.1379523990922233
+        ],
+        [
+          0.9574311524690929,
+          1.0320906053282584,
+          1.5106775169929096
+        ]
+      ],
+      "singular_values": [
+        0.7921877168923216,
+        0.5312885156243068,
+        0.3508379440373041
+      ],
+      "retained_directions_at_0p50": 2,
+      "determinant": -0.1476607567555815,
+      "closure_strength": 0.528552782281336,
+      "directional_balance": 0.4428722341386567
+    },
+    "Fig3b-DD": {
+      "group": "primary",
+      "a": [
+        0.2,
+        -0.031339031339031376,
+        0.0060606060606061
+      ],
+      "b": [
+        -0.05352112676056338,
+        0.04843304843304844,
+        0.06666666666666665
+      ],
+      "joint": [
+        [
+          -0.819718309859155,
+          0.07255520504731858,
+          -0.09186351706036748
+        ],
+        [
+          0.04643962848297212,
+          -0.378917378917379,
+          0.005952380952380959
+        ],
+        [
+          -0.0392749244712991,
+          0.09698996655518391,
+          -0.49090909090909096
+        ]
+      ],
+      "connected": [
+        [
+          -0.8090140845070423,
+          0.06286859536070889,
+          -0.10519685039370082
+        ],
+        [
+          0.04476232821412255,
+          -0.37739953409469085,
+          0.008041649708316383
+        ],
+        [
+          -0.03895055400608356,
+          0.09669643292831695,
+          -0.49131313131313137
+        ]
+      ],
+      "ara9": [
+        [
+          1.8090140845070422,
+          0.9371314046392911,
+          1.1051968503937009
+        ],
+        [
+          0.9552376717858775,
+          1.3773995340946907,
+          0.9919583502916837
+        ],
+        [
+          1.0389505540060835,
+          0.903303567071683,
+          1.4913131313131314
+        ]
+      ],
+      "singular_values": [
+        0.834406572765275,
+        0.49176457824168696,
+        0.35806504821088025
+      ],
+      "retained_directions_at_0p50": 1,
+      "determinant": -0.14692540282521585,
+      "closure_strength": 0.5276739201152035,
+      "directional_balance": 0.42912539270182226
+    },
+    "Fig4-AA": {
+      "group": "secondary",
+      "a": [
+        -0.04596956885245085,
+        -0.03472798193955978,
+        0.22982847882015994
+      ],
+      "b": [
+        -0.07082340354235117,
+        -0.0018515335317762357,
+        -0.014508090759128012
+      ],
+      "joint": [
+        [
+          0.3888009586333082,
+          0.06566810895298253,
+          -0.008870930453774361
+        ],
+        [
+          0.1478916047097865,
+          -0.4627949311146883,
+          0.06525199040050388
+        ],
+        [
+          -0.07907120461235917,
+          0.012228257645944585,
+          0.6183773829444563
+        ]
+      ],
+      "connected": [
+        [
+          0.3855452373078032,
+          0.06558299475481091,
+          -0.009537861130843702
+        ],
+        [
+          0.14543205083066957,
+          -0.4628592311377403,
+          0.06474815368664338
+        ],
+        [
+          -0.06279396951135427,
+          0.012653792781037235,
+          0.6217117553742115
+        ]
+      ],
+      "ara9": [
+        [
+          0.6144547626921968,
+          0.9344170052451891,
+          1.0095378611308437
+        ],
+        [
+          0.8545679491693304,
+          1.4628592311377404,
+          0.9352518463133566
+        ],
+        [
+          1.0627939695113542,
+          0.9873462072189627,
+          0.3782882446257885
+        ]
+      ],
+      "singular_values": [
+        0.6303465255652119,
+        0.4945249563470045,
+        0.37597305193036873
+      ],
+      "retained_directions_at_0p50": 1,
+      "determinant": -0.11719910479398789,
+      "closure_strength": 0.4893746079400279,
+      "directional_balance": 0.5964545479064004
+    },
+    "Fig4-AD": {
+      "group": "secondary",
+      "a": [
+        0.02635769197074765,
+        0.07702198303918015,
+        0.35658610116767664
+      ],
+      "b": [
+        0.009895465672455764,
+        0.01642968402726263,
+        0.12843076136185136
+      ],
+      "joint": [
+        [
+          -0.427168913873739,
+          -0.08059384756545046,
+          -0.02039756866316947
+        ],
+        [
+          0.016570052933689287,
+          0.4795299119323333,
+          0.0018620353904960987
+        ],
+        [
+          0.026867662945193486,
+          0.03747725097680279,
+          0.5771723064775738
+        ]
+      ],
+      "connected": [
+        [
+          -0.4274297355098407,
+          -0.08102689611621776,
+          -0.023782707110713747
+        ],
+        [
+          0.01580788454450061,
+          0.47826446508784637,
+          -0.00802995653282541
+        ],
+        [
+          0.023339077421813903,
+          0.031618654006104356,
+          0.5313756820135549
+        ]
+      ],
+      "ara9": [
+        [
+          1.4274297355098406,
+          1.0810268961162177,
+          1.0237827071107137
+        ],
+        [
+          0.9841921154554993,
+          0.5217355349121536,
+          1.0080299565328255
+        ],
+        [
+          0.9766609225781862,
+          0.9683813459938957,
+          0.4686243179864451
+        ]
+      ],
+      "singular_values": [
+        0.5467387616087681,
+        0.49562101774285805,
+        0.39776817671689585
+      ],
+      "retained_directions_at_0p50": 1,
+      "determinant": -0.10778531977878641,
+      "closure_strength": 0.4759045659056388,
+      "directional_balance": 0.7275287662913651
+    },
+    "Fig4-DA": {
+      "group": "secondary",
+      "a": [
+        0.019347690860460738,
+        0.04493342765290306,
+        -0.3194290967691341
+      ],
+      "b": [
+        0.07666742031133776,
+        -0.020970846698237774,
+        -0.03463945275618929
+      ],
+      "joint": [
+        [
+          0.5034397577339846,
+          -0.023956221835670123,
+          -5.8184736814233945e-05
+        ],
+        [
+          -0.08664984346802523,
+          0.4189506446780356,
+          -0.10199315555390598
+        ],
+        [
+          0.051529987760097914,
+          0.0028604779737670637,
+          -0.5875313682763659
+        ]
+      ],
+      "connected": [
+        [
+          0.5019564201867319,
+          -0.023550484376670504,
+          0.0006120086866880512
+        ],
+        [
+          -0.09009477345191944,
+          0.419892936700971,
+          -0.1004366862095496
+        ],
+        [
+          0.07601979258176811,
+          -0.0038382206455350072,
+          -0.5985962173828525
+        ]
+      ],
+      "ara9": [
+        [
+          0.4980435798132681,
+          1.0235504843766705,
+          0.9993879913133119
+        ],
+        [
+          1.0900947734519195,
+          0.5801070632990291,
+          1.1004366862095496
+        ],
+        [
+          0.923980207418232,
+          1.003838220645535,
+          1.5985962173828525
+        ]
+      ],
+      "singular_values": [
+        0.6187221293174794,
+        0.5343714125086042,
+        0.37785078340599304
+      ],
+      "retained_directions_at_0p50": 2,
+      "determinant": -0.12492782897999523,
+      "closure_strength": 0.4999037534477181,
+      "directional_balance": 0.6106954406541193
+    },
+    "Fig4-DD": {
+      "group": "secondary",
+      "a": [
+        0.0002641860212424796,
+        -0.08722742875252357,
+        -0.2669854832187024
+      ],
+      "b": [
+        -0.015739482441442354,
+        0.00639269620275134,
+        -0.07928321784653414
+      ],
+      "joint": [
+        [
+          -0.46507180249355395,
+          0.03888196044813814,
+          0.029326683853758084
+        ],
+        [
+          -0.07781181417545058,
+          -0.4356856254956806,
+          0.03487912976290603
+        ],
+        [
+          0.0006735539070677476,
+          -0.052565986596514465,
+          -0.6080183211456645
+        ]
+      ],
+      "connected": [
+        [
+          -0.46506764434231135,
+          0.03888027158716332,
+          0.02934762937163226
+        ],
+        [
+          -0.07918472875871309,
+          -0.43512800704311855,
+          0.027963458526926672
+        ],
+        [
+          -0.0035286594181730213,
+          -0.050859229511752535,
+          -0.6291857893735551
+        ]
+      ],
+      "ara9": [
+        [
+          1.4650676443423114,
+          0.9611197284128367,
+          0.9706523706283677
+        ],
+        [
+          1.079184728758713,
+          1.4351280070431185,
+          0.9720365414730733
+        ],
+        [
+          1.003528659418173,
+          1.0508592295117525,
+          1.629185789373555
+        ]
+      ],
+      "singular_values": [
+        0.6328141521987843,
+        0.47955596710421705,
+        0.42789674558512664
+      ],
+      "retained_directions_at_0p50": 1,
+      "determinant": -0.12985374098219185,
+      "closure_strength": 0.506389651517319,
+      "directional_balance": 0.6761807461137698
+    }
+  },
+  "larger_wave_transition_probe": {
+    "input": {
+      "closure_strength": 0.008865077334052817,
+      "retained_directions": 0
+    },
+    "outputs": {
+      "AA": {
+        "closure_strength": 0.5162289248999138,
+        "retained_directions": 1
+      },
+      "AD": {
+        "closure_strength": 0.5764918877274272,
+        "retained_directions": 2
+      },
+      "DA": {
+        "closure_strength": 0.528552782281336,
+        "retained_directions": 2
+      },
+      "DD": {
+        "closure_strength": 0.5276739201152035,
+        "retained_directions": 1
+      }
+    },
+    "mean_output_closure_strength": 0.5372368787559701,
+    "mean_output_minus_input_closure": 0.5283718014219173,
+    "gates": {
+      "T1_input_trough": true,
+      "T2_all_outputs_crest": false,
+      "T3_closure_gain": true
+    },
+    "verdict": "NOT SUPPORTED"
+  },
+  "gates": {
+    "S1_source_md5": true,
+    "S2_primary_matrix_quality": false,
+    "S3_exactly_45_predictions_frozen": true,
+    "S4_ara_mae_below_ridge": true,
+    "S5_ara_mae_below_mean8": true,
+    "S6_ara_mae_below_physical_midpoint": false,
+    "S7_ara_median_at_most_every_control": false,
+    "S8_ara_classification_above_every_control": false,
+    "S9_ara_mae_at_most_0p15": true,
+    "S10_ara_pearson_at_least_0p75": true,
+    "S11_bootstrap_below_ridge_at_least_0p95": true,
+    "S12_bootstrap_below_physical_at_least_0p90": false
+  },
+  "gates_passed": 7,
+  "gates_total": 12,
+  "verdict": "NOT SUPPORTED",
+  "evidence_boundary": "External numerical targets were untouched at protocol freeze and were read only after the 81 prediction packet was hashed. The source provides reconstructed density matrices rather than raw shot records.",
+  "artifacts": {
+    "predictions_csv": "Q25_ARA9_BLIND_MISSING_CUT_PREDICTIONS.csv",
+    "metrics_csv": "Q25_ARA9_BLIND_MISSING_CUT_METRICS.csv",
+    "figure_svg": "Q25_ARA9_BLIND_MISSING_CUT_GEOMETRY.svg",
+    "figure_png": "Q25_ARA9_BLIND_MISSING_CUT_GEOMETRY.png"
+  }
+}

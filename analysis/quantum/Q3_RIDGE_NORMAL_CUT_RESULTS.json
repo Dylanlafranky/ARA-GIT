@@ -1,0 +1,172 @@
+{
+  "protocol_id": "Q3-RIDGE-NORMAL-CUT-v1",
+  "evidence_class": "post-hoc known-source calibration",
+  "verdict": "CALIBRATED",
+  "gates_passed": 7,
+  "gates_total": 7,
+  "protocol_sha256": "fddffb5716262b8d68e6f185a2eae80d015176e06776491151aff5642f23a423",
+  "source": {
+    "doi": "10.5281/zenodo.14033026",
+    "conditions_hz": [
+      0,
+      10,
+      50,
+      250,
+      500,
+      1000
+    ],
+    "shots_per_class_condition": 50000
+  },
+  "overall": {
+    "phase_a_ba": 0.8828083333333332,
+    "phase_b_control_ba": 0.49660666666666664,
+    "raw_iq_lda_ba": 0.8828083333333332,
+    "phase_a_raw_disagreements": 0,
+    "pole_reversal_disagreements": 0,
+    "mean_phase_a_separation_share": 0.9911623346322442,
+    "worst_phase_a_separation_share": 0.9632407413936352,
+    "max_training_tangent_residual": 0.0
+  },
+  "gates": {
+    "C1_phase_a_equals_raw_lda": {
+      "value": 0,
+      "threshold": 0,
+      "pass": true
+    },
+    "C2_phase_a_ba_at_least_0p80": {
+      "value": 0.8828083333333332,
+      "threshold": 0.8,
+      "pass": true
+    },
+    "C3_phase_b_control_between_0p40_and_0p60": {
+      "value": 0.49660666666666664,
+      "lower": 0.4,
+      "upper": 0.6,
+      "pass": true
+    },
+    "C4_mean_phase_a_share_at_least_0p90": {
+      "value": 0.9911623346322442,
+      "threshold": 0.9,
+      "pass": true
+    },
+    "C5_worst_phase_a_share_at_least_0p75": {
+      "value": 0.9632407413936352,
+      "threshold": 0.75,
+      "pass": true
+    },
+    "C6_training_tangent_residual_at_most_1e_12": {
+      "value": 0.0,
+      "threshold": 1e-12,
+      "pass": true
+    },
+    "C7_pole_reversal_invariant": {
+      "value": 0,
+      "threshold": 0,
+      "pass": true
+    }
+  },
+  "folds": [
+    {
+      "held_out_condition_hz": 0,
+      "phase_a_ba": 0.9414,
+      "phase_b_control_ba": 0.39097000000000004,
+      "raw_iq_lda_ba": 0.9414,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 2.5027718107102426,
+      "target_d_phase_b": -0.48891932658114756,
+      "phase_a_separation_share": 0.9632407413936352,
+      "target_separation_angle_degrees": -11.05358957382892,
+      "best_sweep_angle_degrees": 0,
+      "best_sweep_ba": 0.9414,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.9958532462936128,
+      "phase_a_q_component": -0.0909742372678818
+    },
+    {
+      "held_out_condition_hz": 10,
+      "phase_a_ba": 0.9468799999999999,
+      "phase_b_control_ba": 0.50518,
+      "raw_iq_lda_ba": 0.9468799999999999,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 2.464705263050711,
+      "target_d_phase_b": 0.03335699499693004,
+      "phase_a_separation_share": 0.9998168679680434,
+      "target_separation_angle_degrees": 0.7753861617594632,
+      "best_sweep_angle_degrees": 1,
+      "best_sweep_ba": 0.94701,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.9982858974547659,
+      "phase_a_q_component": -0.058525780156549585
+    },
+    {
+      "held_out_condition_hz": 50,
+      "phase_a_ba": 0.93567,
+      "phase_b_control_ba": 0.51271,
+      "raw_iq_lda_ba": 0.93567,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 2.383420832486975,
+      "target_d_phase_b": 0.06321765119622477,
+      "phase_a_separation_share": 0.9992969765311005,
+      "target_separation_angle_degrees": 1.5193521462700654,
+      "best_sweep_angle_degrees": 0,
+      "best_sweep_ba": 0.93567,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.9984874201176878,
+      "phase_a_q_component": -0.05498064992998821
+    },
+    {
+      "held_out_condition_hz": 250,
+      "phase_a_ba": 0.88502,
+      "phase_b_control_ba": 0.51773,
+      "raw_iq_lda_ba": 0.88502,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 2.156348194915017,
+      "target_d_phase_b": 0.08728842024750116,
+      "phase_a_separation_share": 0.9983640710742713,
+      "target_separation_angle_degrees": 2.3180528412738157,
+      "best_sweep_angle_degrees": 0,
+      "best_sweep_ba": 0.88502,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.9985297670950045,
+      "phase_a_q_component": -0.05420612719237407
+    },
+    {
+      "held_out_condition_hz": 500,
+      "phase_a_ba": 0.8295399999999999,
+      "phase_b_control_ba": 0.52915,
+      "raw_iq_lda_ba": 0.8295399999999999,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 1.912662987550961,
+      "target_d_phase_b": 0.14777866948039126,
+      "phase_a_separation_share": 0.9940658061142267,
+      "target_separation_angle_degrees": 4.418083984594053,
+      "best_sweep_angle_degrees": 2,
+      "best_sweep_ba": 0.8296399999999999,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.998354545089173,
+      "phase_a_q_component": -0.057342848724058856
+    },
+    {
+      "held_out_condition_hz": 1000,
+      "phase_a_ba": 0.75834,
+      "phase_b_control_ba": 0.5239,
+      "raw_iq_lda_ba": 0.75834,
+      "phase_a_raw_disagreements": 0,
+      "pole_reversal_disagreements": 0,
+      "target_d_phase_a": 1.5756416019779893,
+      "target_d_phase_b": 0.1397971414689987,
+      "phase_a_separation_share": 0.9921895447121882,
+      "target_separation_angle_degrees": 5.070231316039983,
+      "best_sweep_angle_degrees": 0,
+      "best_sweep_ba": 0.75834,
+      "training_tangent_residual": 0.0,
+      "phase_a_i_component": -0.9978623814588944,
+      "phase_a_q_component": -0.06535034559345425
+    }
+  ]
+}

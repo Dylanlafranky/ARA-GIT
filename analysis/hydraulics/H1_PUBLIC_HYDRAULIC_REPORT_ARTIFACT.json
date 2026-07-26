@@ -1,0 +1,692 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "H1 Public Hydraulic Two-Cut ARA Test",
+    "description": "Frozen T260-H1 benchmark on public connection-rich hydraulic data.",
+    "generatedAt": "2026-07-24T10:30:00+10:00",
+    "sources": [
+      {
+        "id": "t260-run",
+        "label": "Frozen T260-H1 outputs",
+        "path": "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv",
+        "query": {
+          "id": "t260-hydraulic-two-cut-v1",
+          "language": "sql",
+          "engine": "duckdb",
+          "description": "Reads the frozen whole-group outer-fold results and independently validated control summaries.",
+          "sql": "SELECT * FROM read_csv_auto('analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv');",
+          "tables_used": [
+            "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv",
+            "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_PREDICTIONS.csv",
+            "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_PERMUTATIONS.csv",
+            "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_RESULTS.json",
+            "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_VALIDATION.json"
+          ],
+          "filters": [
+            "All 2,205 complete 60-second cycles",
+            "Contiguous 15-cycle groups remain intact",
+            "Five outer StratifiedGroupKFold holdouts",
+            "Sensor and sensor-pair selection occurs inside outer training only",
+            "Pressure sensors PS1 through PS6 only"
+          ],
+          "metric_definitions": [
+            "balanced accuracy = unweighted mean of recall across accumulator states 90, 100, 115 and 130 bar",
+            "gain = two-cut balanced accuracy minus selected one-cut balanced accuracy",
+            "paired interval = 2,000 paired bootstrap replicates over held-out predictions",
+            "phase-destroyed accuracy = pair-model accuracy after deterministic within-cycle bin shift of the second sensor"
+          ]
+        }
+      },
+      {
+        "id": "uci-hydraulic-source",
+        "label": "UCI Condition Monitoring of Hydraulic Systems",
+        "href": "https://doi.org/10.24432/C5CW21",
+        "path": "UCI dataset 447 / condition monitoring of hydraulic systems",
+        "query": {
+          "id": "doi-10.24432-C5CW21",
+          "description": "Public CC BY 4.0 experimental hydraulic test-rig archive with 2,205 labelled 60-second cycles.",
+          "tables_used": [
+            "PS1.txt",
+            "PS2.txt",
+            "PS3.txt",
+            "PS4.txt",
+            "PS5.txt",
+            "PS6.txt",
+            "profile.txt"
+          ],
+          "filters": [
+            "Archive SHA-256 24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+            "No source numerical values opened before protocol freeze"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "pair-card",
+        "description": "Balanced accuracy across all 2,205 whole-group held-out cycles.",
+        "dataset": "headline",
+        "sourceId": "t260-run",
+        "metrics": [
+          {
+            "label": "Two-cut accuracy",
+            "field": "pair_accuracy",
+            "format": "percent"
+          },
+          {
+            "label": "One cut",
+            "field": "single_accuracy",
+            "format": "percent"
+          },
+          {
+            "label": "Gain",
+            "field": "gain",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "relation-card",
+        "description": "Accuracy after deliberately breaking within-cycle synchronization.",
+        "dataset": "headline",
+        "sourceId": "t260-run",
+        "metrics": [
+          {
+            "label": "Shifted-pair accuracy",
+            "field": "phase_destroyed_accuracy",
+            "format": "percent"
+          },
+          {
+            "label": "Synchronized pair",
+            "field": "pair_accuracy",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "gates-card",
+        "description": "All eight frozen gates were required for support.",
+        "dataset": "headline",
+        "sourceId": "t260-run",
+        "metrics": [
+          {
+            "label": "Gates passed",
+            "field": "gates_passed",
+            "format": "number"
+          },
+          {
+            "label": "Required",
+            "field": "gates_total",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "fold-performance-chart",
+        "title": "Balanced accuracy across held-out folds",
+        "description": "The synchronized pair beats one cut in every fold; shifting its timing destroys the gain. The random forest is the stronger standard model.",
+        "type": "bar",
+        "dataset": "fold_performance",
+        "sourceId": "t260-run",
+        "encodings": {
+          "x": {
+            "field": "fold_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "balanced_accuracy",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        }
+      },
+      {
+        "id": "class-recall-chart",
+        "title": "Recall across accumulator states",
+        "description": "Every class clears the frozen 0.60 floor; 130 bar remains hardest.",
+        "type": "bar",
+        "dataset": "class_recalls",
+        "sourceId": "t260-run",
+        "encodings": {
+          "x": {
+            "field": "state",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "recall",
+            "type": "quantitative"
+          }
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "single"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate-table",
+        "title": "Frozen gate outcomes",
+        "description": "All eight predeclared gates passed.",
+        "dataset": "gates",
+        "sourceId": "t260-run",
+        "columns": [
+          {
+            "field": "order",
+            "label": "#",
+            "type": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "measured",
+            "label": "Measured",
+            "type": "number"
+          }
+        ],
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# H1 Public Hydraulic Two-Cut ARA Test"
+      },
+      {
+        "id": "executive-summary",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Executive Summary\n\n**The frozen connection-rich prediction is supported: all `8/8` gates passed.** Two synchronized pressure cuts reached `87.73%` balanced accuracy versus `71.18%` for the best one cut, a gain of `+16.55` percentage points with paired 95% interval `+12.39` to `+21.04` points. Deliberately shifting the second cut collapsed performance to `26.68%`, showing that synchronized relation carried the additional information."
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "cardIds": [
+          "pair-card",
+          "relation-card",
+          "gates-card"
+        ]
+      },
+      {
+        "id": "fold-heading",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Two Cuts Won in Every Complete-Group Holdout\n\nNested training-only selection chose `PS3` as the one cut and `PS1+PS3` as the pair in all five outer folds. The pair gain ranged from `+13.00` to `+20.58` percentage points. The random forest bars are retained to show the scientific boundary: ARA/LDA is not the strongest classifier."
+      },
+      {
+        "id": "fold-chart-block",
+        "type": "chart",
+        "chartId": "fold-performance-chart"
+      },
+      {
+        "id": "relation-heading",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Breaking Synchronization Removed the Added Information\n\nThe second sensor was shifted across the twelve fixed five-second windows while preserving its values. Accuracy fell from `87.73%` to `26.68%`, close to four-class chance. The result therefore depends on the relation between co-temporal cuts, not simply feature count."
+      },
+      {
+        "id": "class-heading",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## The Gain Was Not Confined to an Easy Accumulator State\n\nRecalls were `98.27%`, `87.97%`, `91.73%` and `72.95%` for the `90`, `100`, `115` and `130 bar` states. The hardest class still cleared the frozen `60%` floor."
+      },
+      {
+        "id": "class-chart-block",
+        "type": "chart",
+        "chartId": "class-recall-chart"
+      },
+      {
+        "id": "gate-heading",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Every Frozen Gate Passed\n\nThe gates jointly required absolute accuracy, meaningful gain, positive uncertainty bound, coverage of the hardest class, fold consistency, exact coordinate equivalence, pole-reversal invariance and chance-level label controls."
+      },
+      {
+        "id": "gate-table-block",
+        "type": "table",
+        "tableId": "gate-table"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "uci-hydraulic-source",
+        "body": "## Public Data and Measurement Boundary\n\nThe UCI source provides `2,205` labelled 60-second hydraulic test-rig cycles, including six synchronized `100 Hz` pressure sensors and four imposed accumulator states. One cycle was one identity; one sensor was one spatial cut; two sensors were two cuts through that same completed cycle."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Frozen Method\n\nEach cut supplied means and population standard deviations from twelve fixed five-second windows. Contiguous 15-cycle groups were never split. Five outer grouped folds measured performance; four inner grouped folds selected the sensor or pair on training data only. The classifier was shrinkage LDA. No Fourier, wavelet, PCA, NMF or learned embedding was used."
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "sourceId": "t260-run",
+        "body": "## Interpretation and Limits\n\nThis supports multi-cut information retention in this connection/storage-heavy system. Raw and ARA-coordinate LDA had zero disagreements, which is the expected consequence of an invertible affine coordinate map. A random forest on the same pair reached `95.58%`, so the result is not ARA classifier superiority. It does not establish a universal Connection law, universal fractality, TE-ARA ontology, phi or new hydraulic physics."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Replicate the Connection-Rich Contrast\n\nApply the unchanged one-cut-versus-two-cut instrument to a second public spatial sensor network. Freeze both the total gain and a stable-versus-transition interaction before opening its values. This directly tests whether H1 repeats beyond one hydraulic rig."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further Questions\n\n- Does the two-cut gain replicate in bridge strain, battery packs or structural vibration?\n\n- Is synchronized gain reliably larger in settled than transition-heavy states?\n\n- How many independent cuts are sufficient before marginal information saturates?\n\n- Can an ARA-native nonlinear model close any of the gap to the random forest without hiding the geometry?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-07-24T10:30:00+10:00",
+    "datasets": {
+      "headline": [
+        {
+          "pair_accuracy": 0.8773037493194134,
+          "single_accuracy": 0.7118476082642846,
+          "gain": 0.16545614105512874,
+          "gain_ci_low": 0.1239473469047224,
+          "gain_ci_high": 0.210382856134711,
+          "phase_destroyed_accuracy": 0.2668265651753145,
+          "random_forest_accuracy": 0.9557525283356659,
+          "gates_passed": 8,
+          "gates_total": 8,
+          "cycles": 2205,
+          "fold_wins": 5
+        }
+      ],
+      "fold_performance": [
+        {
+          "fold": 0,
+          "fold_label": "Fold 0",
+          "method": "Best one cut",
+          "balanced_accuracy": 0.6932575757575757,
+          "gain": 0.15719696969696972,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 0,
+          "fold_label": "Fold 0",
+          "method": "Two synchronized cuts",
+          "balanced_accuracy": 0.8504545454545455,
+          "gain": 0.15719696969696972,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 0,
+          "fold_label": "Fold 0",
+          "method": "Shifted second cut",
+          "balanced_accuracy": 0.27462121212121215,
+          "gain": 0.15719696969696972,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 0,
+          "fold_label": "Fold 0",
+          "method": "Random forest, same pair",
+          "balanced_accuracy": 0.9737878787878789,
+          "gain": 0.15719696969696972,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 1,
+          "fold_label": "Fold 1",
+          "method": "Best one cut",
+          "balanced_accuracy": 0.7330808080808081,
+          "gain": 0.20580808080808077,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 1,
+          "fold_label": "Fold 1",
+          "method": "Two synchronized cuts",
+          "balanced_accuracy": 0.9388888888888889,
+          "gain": 0.20580808080808077,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 1,
+          "fold_label": "Fold 1",
+          "method": "Shifted second cut",
+          "balanced_accuracy": 0.25277777777777777,
+          "gain": 0.20580808080808077,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 1,
+          "fold_label": "Fold 1",
+          "method": "Random forest, same pair",
+          "balanced_accuracy": 0.9777777777777779,
+          "gain": 0.20580808080808077,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 2,
+          "fold_label": "Fold 2",
+          "method": "Best one cut",
+          "balanced_accuracy": 0.7156436960155838,
+          "gain": 0.1624760821600918,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 2,
+          "fold_label": "Fold 2",
+          "method": "Two synchronized cuts",
+          "balanced_accuracy": 0.8781197781756755,
+          "gain": 0.1624760821600918,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 2,
+          "fold_label": "Fold 2",
+          "method": "Shifted second cut",
+          "balanced_accuracy": 0.26402484939759036,
+          "gain": 0.1624760821600918,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 2,
+          "fold_label": "Fold 2",
+          "method": "Random forest, same pair",
+          "balanced_accuracy": 0.9721305494647663,
+          "gain": 0.1624760821600918,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 3,
+          "fold_label": "Fold 3",
+          "method": "Best one cut",
+          "balanced_accuracy": 0.6673086549463123,
+          "gain": 0.1760220471747932,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 3,
+          "fold_label": "Fold 3",
+          "method": "Two synchronized cuts",
+          "balanced_accuracy": 0.8433307021211055,
+          "gain": 0.1760220471747932,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 3,
+          "fold_label": "Fold 3",
+          "method": "Shifted second cut",
+          "balanced_accuracy": 0.265625,
+          "gain": 0.1760220471747932,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 3,
+          "fold_label": "Fold 3",
+          "method": "Random forest, same pair",
+          "balanced_accuracy": 0.885889230549199,
+          "gain": 0.1760220471747932,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 435,
+          "test_groups": 29
+        },
+        {
+          "fold": 4,
+          "fold_label": "Fold 4",
+          "method": "Best one cut",
+          "balanced_accuracy": 0.7638948054455499,
+          "gain": 0.13003380152421573,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 4,
+          "fold_label": "Fold 4",
+          "method": "Two synchronized cuts",
+          "balanced_accuracy": 0.8939286069697656,
+          "gain": 0.13003380152421573,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 4,
+          "fold_label": "Fold 4",
+          "method": "Shifted second cut",
+          "balanced_accuracy": 0.26048310890621307,
+          "gain": 0.13003380152421573,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        },
+        {
+          "fold": 4,
+          "fold_label": "Fold 4",
+          "method": "Random forest, same pair",
+          "balanced_accuracy": 0.9844527661993938,
+          "gain": 0.13003380152421573,
+          "selected_single": "PS3",
+          "selected_pair": "PS1+PS3",
+          "test_cycles": 450,
+          "test_groups": 30
+        }
+      ],
+      "class_recalls": [
+        {
+          "accumulator_state_bar": 90,
+          "state": "90 bar",
+          "recall": 0.9826732673267327,
+          "total_cycles": 2205,
+          "selected_pair": "PS1+PS3"
+        },
+        {
+          "accumulator_state_bar": 100,
+          "state": "100 bar",
+          "recall": 0.8796992481203008,
+          "total_cycles": 2205,
+          "selected_pair": "PS1+PS3"
+        },
+        {
+          "accumulator_state_bar": 115,
+          "state": "115 bar",
+          "recall": 0.9172932330827067,
+          "total_cycles": 2205,
+          "selected_pair": "PS1+PS3"
+        },
+        {
+          "accumulator_state_bar": 130,
+          "state": "130 bar",
+          "recall": 0.7295492487479132,
+          "total_cycles": 2205,
+          "selected_pair": "PS1+PS3"
+        }
+      ],
+      "gates": [
+        {
+          "order": 1,
+          "gate": "Pair balanced accuracy",
+          "status": "PASS",
+          "measured": 0.8773037493194134,
+          "detail": "{\"pass\": true, \"threshold\": 0.75, \"value\": 0.8773037493194134}"
+        },
+        {
+          "order": 2,
+          "gate": "Gain over one cut",
+          "status": "PASS",
+          "measured": 0.16545614105512874,
+          "detail": "{\"pass\": true, \"threshold\": 0.03, \"value\": 0.16545614105512874}"
+        },
+        {
+          "order": 3,
+          "gate": "Gain interval lower bound",
+          "status": "PASS",
+          "measured": 0.1239473469047224,
+          "detail": "{\"pass\": true, \"threshold\": 0.0, \"value\": 0.1239473469047224}"
+        },
+        {
+          "order": 4,
+          "gate": "Worst class recall",
+          "status": "PASS",
+          "measured": 0.7295492487479132,
+          "detail": "{\"pass\": true, \"threshold\": 0.6, \"value\": 0.7295492487479132}"
+        },
+        {
+          "order": 5,
+          "gate": "Outer-fold wins",
+          "status": "PASS",
+          "measured": 5.0,
+          "detail": "{\"pass\": true, \"threshold\": 4, \"value\": 5}"
+        },
+        {
+          "order": 6,
+          "gate": "Raw/ARA exact tie",
+          "status": "PASS",
+          "measured": 0.0,
+          "detail": "{\"accuracy_difference\": 0.0, \"disagreements\": 0, \"pass\": true, \"threshold\": 1e-12}"
+        },
+        {
+          "order": 7,
+          "gate": "Pole-reversal invariance",
+          "status": "PASS",
+          "measured": 0.0,
+          "detail": "{\"accuracy_difference\": 0.0, \"disagreements\": 0, \"pass\": true, \"threshold\": 0}"
+        },
+        {
+          "order": 8,
+          "gate": "Label permutations",
+          "status": "PASS",
+          "measured": 0.2605677333491266,
+          "detail": "{\"mean\": 0.2605677333491266, \"mean_threshold\": 0.3, \"p95\": 0.3108838383838383, \"p95_threshold\": 0.35, \"pass\": true}"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t260-run",
+      "label": "Frozen T260-H1 outputs",
+      "path": "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv",
+      "query": {
+        "id": "t260-hydraulic-two-cut-v1",
+        "language": "sql",
+        "engine": "duckdb",
+        "description": "Reads the frozen whole-group outer-fold results and independently validated control summaries.",
+        "sql": "SELECT * FROM read_csv_auto('analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv');",
+        "tables_used": [
+          "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_FOLDS.csv",
+          "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_PREDICTIONS.csv",
+          "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_PERMUTATIONS.csv",
+          "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_RESULTS.json",
+          "analysis/hydraulics/H1_PUBLIC_HYDRAULIC_VALIDATION.json"
+        ],
+        "filters": [
+          "All 2,205 complete 60-second cycles",
+          "Contiguous 15-cycle groups remain intact",
+          "Five outer StratifiedGroupKFold holdouts",
+          "Sensor and sensor-pair selection occurs inside outer training only",
+          "Pressure sensors PS1 through PS6 only"
+        ],
+        "metric_definitions": [
+          "balanced accuracy = unweighted mean of recall across accumulator states 90, 100, 115 and 130 bar",
+          "gain = two-cut balanced accuracy minus selected one-cut balanced accuracy",
+          "paired interval = 2,000 paired bootstrap replicates over held-out predictions",
+          "phase-destroyed accuracy = pair-model accuracy after deterministic within-cycle bin shift of the second sensor"
+        ]
+      }
+    },
+    {
+      "id": "uci-hydraulic-source",
+      "label": "UCI Condition Monitoring of Hydraulic Systems",
+      "href": "https://doi.org/10.24432/C5CW21",
+      "path": "UCI dataset 447 / condition monitoring of hydraulic systems",
+      "query": {
+        "id": "doi-10.24432-C5CW21",
+        "description": "Public CC BY 4.0 experimental hydraulic test-rig archive with 2,205 labelled 60-second cycles.",
+        "tables_used": [
+          "PS1.txt",
+          "PS2.txt",
+          "PS3.txt",
+          "PS4.txt",
+          "PS5.txt",
+          "PS6.txt",
+          "profile.txt"
+        ],
+        "filters": [
+          "Archive SHA-256 24128aad2ee45eea7e6b63ebbd9992cdf25d0483a2cebefbfc13bc69079af1f2",
+          "No source numerical values opened before protocol freeze"
+        ]
+      }
+    }
+  ]
+}

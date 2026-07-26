@@ -1,0 +1,146 @@
+{
+  "protocol": "Q31-LATTICE-TO-TRAVERSAL-SINGULARITY-FLIP-v1",
+  "audit_date": "2026-07-26",
+  "confirmatory_outcome_metrics_calculated": false,
+  "candidate_count_in_this_reproducible_audit": 5,
+  "eligible_candidate_count": 0,
+  "verdict": "INCONCLUSIVE \u2014 DATA/ELIGIBILITY GATE",
+  "candidates": [
+    {
+      "candidate": 4,
+      "source": "Lin et al. photonic quantum walks",
+      "local_files": 3,
+      "hashes": {
+        "SourceData_Fig2.xlsx": "746c65ddccd37e82d0710712ecfec4fb",
+        "SourceData_Fig3.xlsx": "c24a6ed6475b64d61e08318eeae0c629",
+        "SourceData_Fig4.xlsx": "7d4dda38985171a5196981ee5a7ed397"
+      },
+      "hashes_match": true,
+      "measured_trajectory_units": 9,
+      "minimum_required_units": 60,
+      "two_coordinate_path": true,
+      "external_handover": true,
+      "pre_and_post_windows": true,
+      "eligible_evaluation_transitions": null,
+      "decision": "INELIGIBLE",
+      "failed_gates": [
+        "D3: only 9 measured trajectories; 30 evaluation units impossible"
+      ]
+    },
+    {
+      "candidate": 5,
+      "source": "Dalmasso et al. Quantinuum H1 trajectories",
+      "archive_md5": "185a52581636ce37dfeb950bf64214de",
+      "hashes_match": true,
+      "hardware_files": [
+        {
+          "file": "fermions_random_V0.0_phi0.0_dt0.21_p0.42_steps14_shots1480.h5",
+          "steps": 14,
+          "shots": 1480
+        },
+        {
+          "file": "bosons_random_V0.0_phi0.0_dt0.31_p0.62_steps10_shots1280.h5",
+          "steps": 10,
+          "shots": 1280
+        },
+        {
+          "file": "fermions_random_V0.0_phi0.5_dt0.27_p0.54_steps16_shots1480.h5",
+          "steps": 16,
+          "shots": 1480
+        },
+        {
+          "file": "fermions_random_V1.0_phi0.5_dt0.29_p0.58_steps18_shots1480.h5",
+          "steps": 18,
+          "shots": 1480
+        },
+        {
+          "file": "bosons_custom_V1.5_phi0.0_dt0.31_p0.62_steps14_shots1280.h5",
+          "steps": 14,
+          "shots": 1280
+        }
+      ],
+      "hardware_file_count": 5,
+      "maximum_ordered_hardware_steps": 18,
+      "minimum_required_ordered_samples": 25,
+      "two_coordinate_path": true,
+      "external_handover": true,
+      "pre_and_post_windows": false,
+      "eligible_evaluation_transitions": 0,
+      "decision": "INELIGIBLE",
+      "failed_gates": [
+        "D1: hardware paths have at most 18 ordered steps, below 25"
+      ]
+    },
+    {
+      "candidate": 6,
+      "source": "Farid et al. inductively shunted transmon",
+      "archive_md5": "ced1ed4af893ad064045900903e19a17",
+      "hashes_match": true,
+      "conditions": {
+        "6,6507": {
+          "events_after_author_filters": 64,
+          "events_with_at_least_25_pre_samples": 51,
+          "median_tunnelling_time_s": 2760.0,
+          "maximum_tunnelling_time_s": 15420.0,
+          "raw_files": 7,
+          "raw_float32_values": 7664
+        },
+        "6,6641": {
+          "events_after_author_filters": 51,
+          "events_with_at_least_25_pre_samples": 45,
+          "median_tunnelling_time_s": 8250.0,
+          "maximum_tunnelling_time_s": 27570.0,
+          "raw_files": 4,
+          "raw_float32_values": 15908
+        },
+        "6,7057": {
+          "events_after_author_filters": 85,
+          "events_with_at_least_25_pre_samples": 48,
+          "median_tunnelling_time_s": 810.0,
+          "maximum_tunnelling_time_s": 7110.0,
+          "raw_files": 5,
+          "raw_float32_values": 9392
+        }
+      },
+      "events_after_author_filters": 200,
+      "events_with_at_least_25_pre_samples": 144,
+      "evaluation_events_upper_bound": 100,
+      "evaluation_long_enough_upper_bound": 72,
+      "minimum_required_evaluation_transitions": 500,
+      "two_coordinate_path": false,
+      "external_handover": true,
+      "pre_and_post_windows": false,
+      "eligible_evaluation_transitions": 0,
+      "decision": "INELIGIBLE",
+      "failed_gates": [
+        "D1/D2: Fig. 8c monitoring files do not retain a fixed two-coordinate relation path",
+        "D1: monitoring terminates when tunnelling is detected, so no post-handover path exists",
+        "D3: at most 72 evaluation events have 25 pre-samples, below 500 required evaluation transitions"
+      ]
+    },
+    {
+      "candidate": 7,
+      "source": "NIST coherence-limited digital qubit control",
+      "decision": "INELIGIBLE",
+      "two_coordinate_path": true,
+      "external_handover": true,
+      "pre_and_post_windows": true,
+      "eligible_evaluation_transitions": null,
+      "failed_gates": [
+        "D3: published CSVs are averaged parameter sweeps, not at least 60 independent crossing units"
+      ]
+    },
+    {
+      "candidate": 8,
+      "source": "Larsen et al. 2D photonic cluster-state traces",
+      "decision": "INELIGIBLE",
+      "two_coordinate_path": true,
+      "external_handover": false,
+      "pre_and_post_windows": false,
+      "eligible_evaluation_transitions": null,
+      "failed_gates": [
+        "D4: the public record is a persistent cluster-lattice trace, not an externally switched lattice-to-release crossing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "test_id": "Q14-CHILD-PHASE-SWAP-v1",
+  "ledger_id": "T273",
+  "test_class": "post-outcome parameter-free correspondence and held-out transform test",
+  "protocol_sha256": "ba12118684b6e42d627267aa2cc8c9fb6495f96e73318935bd640a551733d1c9",
+  "verdict": "PARTIAL / NOT CALIBRATED",
+  "summary": {
+    "metrics": {
+      "amplitude": {
+        "identity_sse": 47.04303783296705,
+        "swap_sse": 159.12948998406853,
+        "swap_gain": -2.3826363541631865,
+        "flipped_fraction": 0.3409090909090909,
+        "flipped_cosine": -0.5509569871582594,
+        "evaluable_cells": 44,
+        "sum_invariance_max_error": 0.0
+      },
+      "direction": {
+        "identity_sse": 28.092914096366478,
+        "swap_sse": 44.923606229414574,
+        "swap_gain": -0.5991080909340398,
+        "flipped_fraction": 0.22727272727272727,
+        "flipped_cosine": -0.26472133082034444,
+        "evaluable_cells": 44,
+        "sum_invariance_max_error": 0.0
+      }
+    },
+    "nulls": {
+      "amplitude": {
+        "permutations": 9999,
+        "seed": 27014,
+        "observed_swap_gain": -2.3826363541631865,
+        "p_value": 1.0,
+        "null_q95": 0.5127033229620134,
+        "null_q99": 0.6102007695881644,
+        "null_mean": 0.18236317066433466
+      },
+      "direction": {
+        "permutations": 9999,
+        "seed": 27014,
+        "observed_swap_gain": -0.5991080909340398,
+        "p_value": 0.3098,
+        "null_q95": -0.34160406277942307,
+        "null_q99": -0.2321928822438742,
+        "null_mean": -0.7735743970017714
+      }
+    },
+    "cv_median_swap_gain": {
+      "amplitude": -1.1773941153547396,
+      "direction": 0.0
+    },
+    "cv_swap_wins": {
+      "amplitude": 0,
+      "direction": 1
+    },
+    "gates_passed": 2,
+    "gates_total": 12
+  },
+  "gates": [
+    {
+      "gate_id": "F1",
+      "description": "44 finite cells and four expected Bell identities",
+      "passed": true,
+      "value": {
+        "cells": 44,
+        "complete": true
+      }
+    },
+    {
+      "gate_id": "F2",
+      "description": "swap preserves the two-component sum within 1e-12",
+      "passed": true,
+      "value": 0.0
+    },
+    {
+      "gate_id": "F3",
+      "description": "parameter-free direction swap gain > 0",
+      "passed": false,
+      "value": -0.5991080909340398
+    },
+    {
+      "gate_id": "F4",
+      "description": "direction matched-stage permutation p <= 0.05",
+      "passed": false,
+      "value": 0.3098
+    },
+    {
+      "gate_id": "F5",
+      "description": "direction flipped-parity fraction >= 0.75",
+      "passed": false,
+      "value": 0.22727272727272727
+    },
+    {
+      "gate_id": "F6",
+      "description": "direction flipped cosine >= 0.50",
+      "passed": false,
+      "value": -0.26472133082034444
+    },
+    {
+      "gate_id": "F7",
+      "description": "median held-out direction swap gain > 0",
+      "passed": false,
+      "value": 0.0
+    },
+    {
+      "gate_id": "F8",
+      "description": "swap wins direction in at least 3/4 held-out states",
+      "passed": false,
+      "value": 1
+    },
+    {
+      "gate_id": "F9",
+      "description": "parameter-free amplitude swap gain > 0",
+      "passed": false,
+      "value": -2.3826363541631865
+    },
+    {
+      "gate_id": "F10",
+      "description": "amplitude matched-stage permutation p <= 0.05",
+      "passed": false,
+      "value": 1.0
+    },
+    {
+      "gate_id": "F11",
+      "description": "amplitude flipped-parity fraction >= 0.75",
+      "passed": false,
+      "value": 0.3409090909090909
+    },
+    {
+      "gate_id": "F12",
+      "description": "median held-out amplitude swap gain > 0",
+      "passed": false,
+      "value": -1.1773941153547396
+    }
+  ],
+  "boundary": "Q14 tests crossed correspondence between two locally normalized child sets. Ramsey and Hahn are separate protocols matched by ordinal stage, so the result does not establish causal or literal energy transfer between them."
+}

@@ -1,6 +1,1627 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T290 - Q35 whole Phase-A / external Phase-B counterpart
+
+**REGISTERED:** 27 July 2026 after ARA re-grounding and before calculating
+Q35 candidate identities or evaluation outcomes | **STATUS: INCONCLUSIVE BY
+FROZEN SEAM-ELIGIBILITY GATE; STRONG POST-HOC PHASE-PAIR SIGNAL**
+
+**USER PRIOR:** The coherent Q34 `c2` circle is one complete Phase-A identity,
+not a fragment whose missing half should be found inside the same loop. Its
+internal quadrants already contain local phase/anti-phase mixing. At the
+parent boundary it can nevertheless serve as Phase A, so a distinct,
+equal-and-opposite parent Phase B should be sought outside that loop. The
+zero-return line is a local singularity seam and can be used as a pivot for
+the search.
+
+**ARA-first method:** Follow every pair as a fixed lineage. Establish a
+complete local loop from relation closure and its raw next-slice movement.
+Using development only, select one different complete lineage and lag that
+maximizes half-turn opposition. Freeze that identity. On evaluation, test
+whether the pair remains opposed, cancels at the parent ridge, and places the
+counterpart near its far pole when the visible source reaches its seam.
+Compare against displaced time, seed, pair and network-identity controls.
+Raw determinant closure is treated as flow over the geometry, never as the
+literal structural `0-2` coordinate.
+
+**Honesty boundary:** The Q34 archive and its broad `c2` loop were already
+inspected. Q35 is therefore a frozen post-hoc/retrospective test with an
+internal development/evaluation separation, not an untouched blind test.
+It can support a within-archive external-counterpart relation; it cannot by
+itself identify a fundamental hidden Phase B.
+
+**Outcome:** `2,495` development lineages qualified as complete loops and
+`2,491` received a frozen development-selected counterpart, but only `84`
+repeated the strict low-boundary seam at least five times in evaluation,
+below the registered `500` eligibility floor. In those `84`, exact median
+opposition was `0.89576`, positive in `100%`, and parent residual was
+`0.19366`; every opposition/residual comparison beat time, seed, pair and
+network controls with cluster-bootstrap probability `1.000`. The exact
+counterpart was above the seam-display ridge in `100%` of `1,344` seam
+events, but its median `x=1.736` did not beat the `37`-slice time control
+(`1.776`). **Frozen claim verdict: INCONCLUSIVE.**
+
+**Post-result diagnostic:** Across all `2,491` fixed pairings, exact
+opposition remained `0.90474`, positive in `100%`, with parent residual
+`0.19201`; controls were much weaker. This strongly describes a persistent
+external half-turn pairing in the deterministic greedy simulator, but cannot
+repair the frozen seam failure or promote the identity to a fundamental
+hidden Phase B.
+
+**Fidelity packet:**
+`analysis/quantum/Q35_WHOLE_PHASE_EXTERNAL_COUNTERPART_FIDELITY_v1.md`.
+**Frozen protocol:**
+`analysis/quantum/Q35_WHOLE_PHASE_EXTERNAL_COUNTERPART_PROTOCOL_v1_FROZEN.md`.
+**Report:**
+`analysis/quantum/Q35_WHOLE_PHASE_EXTERNAL_COUNTERPART_REPORT_2026-07-27.md`.
+**Independent validation:** PASS, `9/9`.
+
+---
+
+### T289 - Q34 untouched greedy-archive boundary-child replication
+
+**REGISTERED:** 26 July 2026 before downloading or opening target numerical
+values | **STATUS: CROSS-ARCHIVE BOUNDARY-CHILD FLOW NOT REPLICATED**
+
+**USER PRIOR:** After Q33B's positive simulator result, test the identical
+ARA-first rule on an untouched archive. Keep the generating geometry fixed
+while changing the network identity. Dylan's same-day entanglement idea is
+recorded separately as musing tier and supplies no Q34 feature or gate.
+
+**Locked target:** Akhouri, Shandera and Henry, Zenodo
+`10.5281/zenodo.16753415`,
+`unnati_submit_12_pure_greedy.hdf5.zip`, deposited MD5
+`c1cf77ccff486e3786d73ba47f8674f1`. This preserves the 12-qubit pure-state
+family while changing the connectivity ordering from random to greedy.
+
+**Frozen method:** Exact Q33B geometry, source eligibility, single
+boundary-nearest endpoint selection, partitions, controls, deterministic
+sampling, bootstrap and numerical gates. The structural rule remains
+`1 -> 0.5` and `2 + (1 + 0.5) = 3.5`; it is not estimated from the target
+archive.
+
+**Protocol:**
+`analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_PROTOCOL_v1_FROZEN.md`.
+
+**Outcome:** All eligibility requirements passed on `16,001` evaluation
+events and `200` strata. The exact route retained a positive median in both
+branches: pooled median `+0.00736`, mean `+0.03577`, positive fraction
+`54.21%`. This missed the frozen `55%` floor and fell `9.43` percentage
+points below Q33B. The exact route exceeded the sibling's positive frequency
+by `2.27` points, but its paired median advantage was negative and its
+cluster-bootstrap probability was only `0.750`. Topology, seed and time
+controls also prevented the full routing gate from closing.
+
+**Frozen verdict:** **CROSS-ARCHIVE BOUNDARY-CHILD FLOW NOT REPLICATED.**
+The Q33B route is not invariant to the random-to-greedy network-ordering
+change. The surviving weak inward tendency is descriptive; any
+network-identity-conditioned revision is a new hypothesis and cannot rescue
+this test.
+
+**Independent validation:** PASS, `12/12`, including `64/64` deterministic
+events and `319` available route transitions rebuilt from raw public density
+matrices.
+
+**Report:**
+`analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_REPORT_2026-07-26.md`.
+**Notebook:**
+`analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_NOTEBOOK.ipynb`.
+
+---
+
+### T288 - Q33B ARA-first boundary-child flow route
+
+**REGISTERED:** 26 July 2026 after the Q33 coordinate correction and before
+Q33B outcome calculation | **STATUS: BOUNDARY-CHILD FLOW ROUTE SUPPORTED
+INSIDE THIS SIMULATOR**
+
+**USER PRIOR:** ARA supplies the generating geometry rather than inheriting
+its coordinate from the variable physical load. A complete boundary child
+therefore contributes `1` at its own rung and exactly `0.5` when projected one
+octave upward. The corrected path is fixed as `2 + (1 + 0.5) = 3.5`. Of the
+two endpoint recipients, the single child closest to the low/`0` boundary
+should receive the flipped relation flow after the high-side source releases.
+
+**Method:** Preserve Q33's source events and evaluation partition. Define each
+endpoint's starting normalized determinant closure as
+\(z=h/Q_{.95}^{dev}(h)\), where \(h=|\det C|^{1/3}\). Select the endpoint with
+the smaller starting \(z\) without reading its future, then score its
+next-slice normalized closure movement \(g=\Delta h/Q_{.95}^{dev}(h)\).
+Compare the exact endpoint with its sibling and with topology-, seed- and
+time-displaced controls, all using the identical one-of-two lower-\(z\)
+selection. The fixed `0.5` structural coefficient is never fitted from
+energy. Protocol and fidelity hashes were frozen before outcomes.
+
+**Result:** `11,543` evaluation events across `200` branch/seed strata. The
+exact boundary child had median flow `+0.04143`, mean `+0.04952`, and positive
+flow in `63.64%` of events. Positive fractions were `55.83%` for the sibling,
+`50.79%` topology, `56.38%` seed and `56.02%` time. Median paired
+exact-minus-comparator flow was
+`+0.01781/+0.03385/+0.02997/+0.02909`; every branch/seed-cluster bootstrap
+probability that exact exceeded the named comparator was `1.000`. Both `c2`
+and `c4` branches passed (`63.34%` and `63.94%` positive), and development
+and evaluation were stable. Every frozen gate passed.
+
+**Interpretation:** Within this simulator, the fixed ARA boundary rule selects
+the endpoint recipient with the more reliable next relation-closure increase.
+This supports the **directed flow consequence** generated by the structural
+`3.5` route. It is not a numerical derivation or empirical fit of `3.5`.
+Lower-of-two selection creates generic rebound, as the mildly positive
+controls show; the result is the exact endpoint's additional
+`7.26–12.85` percentage-point positive-flow advantage.
+
+**Boundary:** The supported observable is normalized determinant-closure
+movement, not literal raw energy: the exact route did not exceed its sibling
+on median connected-energy flow. The source is the already-open, exactly
+diagonal Q27/Q28 simulator; this is retrospective, not blind hardware
+evidence, Phase-B identification, universal ARA or cosmological
+\(\varphi^{3.5}\) validation.
+
+**Independent validation:** PASS, `11/11`, including `64/64` bounded raw-route
+reconstructions.
+**Report:**
+`analysis/quantum/Q33B_ARA_FIRST_BOUNDARY_CHILD_REPORT_2026-07-26.md`.
+**Notebook:**
+`analysis/quantum/Q33B_ARA_FIRST_BOUNDARY_CHILD_NOTEBOOK.ipynb`.
+
+---
+
+### T287 - Q33 corrected two-axis parent/child 3.5 projection
+
+**REGISTERED:** 26 July 2026 after Q32 and before Q33 outcome calculation |
+**STATUS: POST-RESULT METHOD CORRECTION — RAW-CAPACITY DIAGNOSTIC; INVALID
+AS A PURE ARA 3.5 TEST**
+
+**USER PRIOR:** Dylan corrected the earlier quantum `3.5` translation. The
+route is a weighted two-axis path: a complete same-rung span contributes `2`;
+the crossed-rung leg contributes one current-rung whole plus one child at half
+parent-facing capacity, `1+0.5=1.5`; total `3.5`. A child remains a complete
+local TE-ARA of `2` inside its own boundary. The empirical question is whether
+the Q32 endpoint child is actually half-sized in the source frame.
+
+**Method:** Retain Q32's releasing source and two exact endpoint recipients,
+but trace the source backward eight slices to its latest local crest and each
+recipient to its latest local pole. Preserve each relation's local `0–2`
+coordinate while comparing source and child in one common connected-matrix
+energy coordinate, \(E=\lVert C\rVert_F^2\), with all capacities frozen from
+development `t=0..249`. Test
+\(\rho=E_{\max,c}/E_{\max,p}\approx0.5\), hence \(L=3+\rho\approx3.5\),
+against equal-count topology, seed and time controls. Protocol and fidelity
+hashes were frozen before calculating outcomes.
+
+**Frozen implementation result:** `11,543` evaluation source events, `200` branch/seed strata and
+`23,086` exact child routes. Median exact capacity ratio was `1.27349`
+(`c2=1.24587`, `c4=1.30661`), producing median path `4.27349`, not `3.5`.
+Amplitude and determinant-closure alternatives also remained near a
+same-sized relation (`1.10793` and `1.14516`), not `0.5`. Exact half-distance
+beat topology and seed controls but missed the frozen time-control gates
+(`1.01%` advantage; bootstrap probability `0.9395`).
+
+**Surviving handover result:** backward tracing strongly recovered local child
+pole origins: median `x=0.04137`, with both recipients at `x<=0.5` in
+`81.50%` of events. Median summed realised child gain/source loss was
+`1.03265`; this is diagnostic only because local conservation is not
+guaranteed.
+
+**Post-result ARA correction:** Q33 substituted the unbounded raw capacity
+ratio into the ARA path and averaged both endpoint recipients. That is not the
+declared ARA construction. The octave projection is a geometric rule
+`1 -> 0.5` for the single boundary-nearest child; system-specific energy is
+flow over that geometry and cannot redefine the rung coefficient. Therefore
+the frozen calculation is retained as a raw-capacity and backward-origin
+diagnostic, but its negative `3.5` verdict is methodologically invalid and
+must not be cited against the conditional ARA path.
+
+**Boundary:** retrospective analysis of the same already-open, exactly
+diagonal simulator used in Q27–Q32; not fresh blind or hardware evidence.
+
+**Independent validation:** PASS, `10/10`, including `64/64` bounded raw-event
+reconstructions.
+**Report:**
+`analysis/quantum/Q33_TWO_AXIS_PARENT_CHILD_35_REPORT_2026-07-26.md`.
+**Correction:**
+`analysis/quantum/Q33_POST_RESULT_ARA_COORDINATE_CORRECTION_2026-07-26.md`.
+**Notebook:**
+`analysis/quantum/Q33_TWO_AXIS_PARENT_CHILD_35_NOTEBOOK.ipynb`.
+
+---
+
+### Q30 - Fixed ARA 1.5 / 3.5 out-of-cut route
+
+**RUN:** 26 July 2026 | **STATUS: EXPLORATORY / NOT A REGISTERED PREDICTION /
+FROZEN ROUTE NOT SUPPORTED**
+
+**User prior:** after Q29's local signed handover memory disappeared from the
+direct cut, test the existing `1.5` and `3.5` route idea to look past the
+singularity handover.
+
+**Frozen translation:** for source edge `(u,e)` and positively accumulating
+child `(e,v)`, use the unique Information³ closing edge `(u,v)` as the
+perpendicular `1.5` leg. Preserve `3.5 = 2 + 1.5` as the complete source span
+plus closing leg; do not fold it modulo two. This mapping, controls, lag window
+and gates were written before Q30 outcomes.
+
+**Method:** reconstruct the exact Q29 event population; fit the closing edge to
+the unresolved vector with the same four proper sign transformations and one
+non-negative scale used by displaced controls. Compare seed `+37`, time `+137`,
+one deterministic nonclosing edge and the direct child. Test lag 0 and the
+predeclared late window, lags 4–6.
+
+**Result:** at lag 0, the exact edge recovered `2.504%` of the remainder versus
+`2.938%/2.979%` for seed/time controls. It therefore failed the perpendicular
+route and composite gates. At lags 4–6 the exact edge had a small stable
+`0.294%/0.282%` error advantage, but this was far below the frozen `5%`
+continuation requirement.
+
+**Verdict:** **FROZEN TRIANGLE-CLOSING 1.5/3.5 ROUTE NOT SUPPORTED ON THIS
+SOURCE.** No Phase-B identification. This is an implementation-level negative
+result on an already-open, exactly diagonal simulator.
+
+**Independent validation:** PASS, `213/213` checks.
+**Report:** `analysis/quantum/Q30_ARA15_35_OUT_OF_CUT_ROUTE_REPORT_2026-07-26.md`.
+**Notebook:** `analysis/quantum/Q30_ARA15_35_OUT_OF_CUT_ROUTE_NOTEBOOK.ipynb`.
+
+---
+
+### Q29 - Post-Q28 unclassified-component characterization
+
+**RUN:** 26 July 2026 | **STATUS: EXPLORATORY / NOT A REGISTERED PREDICTION**
+
+**User question:** before calling the Q28 remainder Phase B, determine whether
+it is a coherent opposite component or residual children from nearby
+connections.
+
+**Why this is not a prediction-ledger success:** Q29 used the completely
+opened Q28 source and selected its axis-native follow-up only after observing
+that the residual was strongly one-dimensional. It is recorded here to prevent
+later compression from making it look preregistered or blind.
+
+**Method:** retain Q28's unexplained vector; test complete-shape transport,
+local-child/endpoint landing, partner persistence and direct-or-sign-flipped
+recurrence. The signed axis test used no fitted scale and forced exact,
+seed-displaced and time-displaced searches to inspect equal candidate counts.
+
+**Result:** across `76,043` events, the residual fraction was `0.102884` and
+largest-axis share was `0.946149`. Its complete shape did not recur, but its
+signed z coordinate showed a strong one-slice echo (`0.186469` error versus
+`0.469870/0.468162` controls) and enriched endpoint association. Partner
+persistence did not beat both controls, and recurrence decayed to control
+level by lag 4–6.
+
+**Geometry verdict:** **LOCAL SIGNED Z-AXIS HANDOVER MEMORY; NO STABLE
+COUNTERPART DETECTED.** Do not cite this as a Phase-B identification. A fresh
+non-diagonal source is required.
+
+**Post-result geometry hypothesis:** Dylan proposes that the localized,
+ridge-centred, rapidly decaying component is **residual singularity
+information from the handover—Phase B while it is still mixing**, rather than
+either random residue or a completed Phase-B identity. This is a new
+interpretation generated after Q29 results were visible. It requires a future
+handover-aligned Phase-A loss → transient residual → Phase-B gain/return test
+and is not part of the Q29 empirical verdict.
+
+**Independent validation:** PASS, `38/38` checks.
+**Report:** `analysis/quantum/Q29_ARA9_UNCLASSIFIED_COMPONENT_SURFER_REPORT_2026-07-26.md`.
+**Notebook:** `analysis/quantum/Q29_ARA9_UNCLASSIFIED_COMPONENT_SURFER_NOTEBOOK.ipynb`.
+
+---
+
+### T286 - Q32 edge-child pole handover before revisiting 3.5
+
+**REGISTERED:** 26 July 2026 after Q31's data gate and before Q32 outcome
+calculation | **STATUS: ORDERED CHILD TRANSFER WITHOUT POLE-ORIGIN SUPPORT**
+
+**USER PRIOR:** Before retrying the quantum `3.5` route, Dylan proposed first
+looking for information/relation movement entering and leaving the lattice
+edge, then measuring the receiving children because they might begin near an
+asymmetric ARA extreme or pole.
+
+**Method:** On the already-open Q27/Q28 simulator, select high-connection
+sources (`x>=1.5`) that begin releasing. At each named endpoint, select the
+active child with lowest starting ARA `x` without reading its future. Use the
+development half to select lag `1`; transport it unchanged to the evaluation
+half. Compare signed child gain and source-release/child-accumulation overlap
+against topology-, seed- and time-displaced routes. Preserve all children for
+a secondary starting-position gradient.
+
+**Result:** `23,591` evaluation events across `200` trial strata. Exact child
+gain was `+0.07565`, versus topology `+0.03302`, seed `+0.00700` and time
+`+0.00491`; trial-weighted exact advantages were
+`+0.04416/+0.06855/+0.07150`, and all cluster-bootstrap probabilities were
+`1.000`. Exact overlap was `0.14051` versus
+`0.01965/0.06785/0.07174`; both connectivity strata retained positive
+exact-control gain.
+
+**Pole result:** not supported at the declared source-release slice. Median
+child start was `0.6311`; `43.52%` began at `x<=0.5` versus the frozen `50%`
+gate. But the secondary gradient was strongly ordered: pole children gained
+`+0.19186`, then `+0.10168`, `+0.01922`, and crest children released
+`-0.13716`. This suggests the measured source-release slice is often later
+than the child's true pole origin.
+
+**Control caveat:** the topology control took the minimum of several
+nonadjacent candidates while the exact endpoint usually had one candidate.
+Its starting-position comparison therefore has unequal order-statistic
+pressure. The absolute pole gate independently failed, and exact movement
+still beat one-candidate seed/time controls. A later test must baseline-match
+topology and trace the child backward.
+
+**Boundary:** retrospective, same public simulated and exactly diagonal source
+as Q27–Q31. This supports an immediate ordered child handover in this source,
+not a universal singularity flip, Phase B, physical energy conservation or a
+completed `3.5` route.
+
+**Independent validation:** PASS, `9/9`; all `23,591` events reconstructed.
+**Report:**
+`analysis/quantum/Q32_EDGE_CHILD_POLE_HANDOVER_REPORT_2026-07-26.md`.
+**Notebook:**
+`analysis/quantum/Q32_EDGE_CHILD_POLE_HANDOVER_NOTEBOOK.ipynb`.
+
+---
+
+### T285 - Q31 lattice-to-traversal singularity flip
+
+**REGISTERED:** 26 July 2026, before selecting or opening any eligible new
+source | **STATUS: INCONCLUSIVE — DATA/ELIGIBILITY GATE**
+
+**Orientation:** on this declared local diameter, `2 = persistent connection
+lattice`, `1 = handover ridge`, `0 = unbound information traversal`.
+
+**USER PRIOR:** “I think the opposite would be irrational threads of
+information... It is stand alone information with no connection. If there is
+connection then it would collapse.” Dylan then described the observed lattice
+as “the most ‘space’ like ‘time’ wave” and proposed that it flips back across
+the singularity.
+
+**Claim:** across an externally located local handover, persistent
+neighbour/edge identity will fall while coherent traversal rises. The
+counter-side will retain strong short-lag directional memory but weak
+long-return/partner closure, distinguishing a non-closing information thread
+from both another lattice and random noise.
+
+**Test:** select the first fresh public experimental source satisfying the
+frozen Q31 non-diagonal, time-resolved and untouched-holdout criteria. Measure
+connection persistence `C`, coherent traversal `T`, the local ARA coordinate
+`x=2C/(C+T)`, short-lag directional memory, long-return/partner recurrence,
+native magnitude and independently calibrated TE-ARA allocation. Compare
+against no-crossing, trial-displaced, time-displaced, phase-randomised,
+stable-lattice and decay-only controls.
+
+**Prediction:** `C` falls and `T` rises around the same externally located
+crossing; `x` moves from above `1` to below `1`; post-crossing short memory
+beats controls while long return remains below the stable-lattice control.
+
+**Falsifier:** eligibility passes but connection falls without structured
+traversal, the post path is indistinguishable from phase-randomised noise,
+stable partners/closure persist like another lattice, the two changes do not
+share a crossing, the result fails untouched units, or TE-ARA closure requires
+outcome-dependent normalisation.
+
+**Rivals:** ordinary decay, decoherence, projection loss, random phase
+diffusion, another persistent lattice and a smooth coordinate relabelling.
+
+**Fidelity:** `EXACT ENOUGH TO TEST`; packet
+`analysis/quantum/Q31_LATTICE_TO_TRAVERSAL_FIDELITY_v1.md`.
+
+**Frozen protocol:**
+`analysis/quantum/Q31_LATTICE_TO_TRAVERSAL_PROTOCOL_v1_FROZEN.md`; SHA-256
+`ffb93210897f89a20a8ee116144bde68965396be745625153fcb41d497028f30`.
+
+**Data-gate result, 26 July 2026:** eight public experimental source families
+were inspected in registered order. None supplied the full frozen object.
+The closest sphere-resolved source had only `9` measured trajectories; the
+Quantinuum H1 paths had only `10–18` ordered hardware steps. The closest
+detector-anchored transition source contained `200` non-sentinel fluxon
+tunnelling events, `144` with at least `25` pre-samples, but monitoring stopped
+at detection and did not retain a fixed two-coordinate post-handover path. A
+deterministic half split leaves at most `72` long-enough evaluation events
+against the frozen `500`-transition gate. No `C/T/x` outcome statistic was
+calculated on an ineligible source. This is not a negative geometry result;
+Q31 remains untested until a qualifying dataset exists.
+
+**Scope amendment after user clarification:** Q31 is the quantum-domain
+replication of an already tested conditional singularity-flip rule, not the
+first existence test. The earlier lineage is mixed: Formula engines supplied
+soft/geometric conditional support; PN30 improved hard-control AUC from
+`0.5301` to `0.5663` but missed confirmation at one-sided `p=0.06199`; Q14
+supplied same-rung consistency; Q22B's strict three-boundary quantum
+implementation passed only `1/13` gates. Q31 asks only whether the flip appears
+here as `persistent lattice -> handover -> coherent non-closing traversal`.
+The lack of a continuous public far-side measurement is recorded as a
+measurement-ecology clue, not as physical evidence for the flip.
+
+**Report:**
+`analysis/quantum/Q31_LATTICE_TO_TRAVERSAL_DATA_GATE_REPORT_2026-07-26.md`.
+
+**Reproduction:**
+`analysis/quantum/q31_data_gate_audit.py` and
+`analysis/quantum/Q31_LATTICE_TO_TRAVERSAL_DATA_GATE_AUDIT_NOTEBOOK.ipynb`.
+
+---
+
+### T284 - Q28 ARA^9 interlocking rotational transport
+
+**REGISTERED:** 26 July 2026, after Q27 values were fully opened but before any
+Q28 rotation, Procrustes, lag-selection or singular-spectrum value was
+calculated | **STATUS: INCONCLUSIVE**
+
+**USER PRIOR:** “I wonder if its the ARA^9 just interlocking then and
+traveling, the larger but small wave might be its angled rotational point.”
+
+**Claim:** the Q27 release-to-neighbour relation is carried by complete ARA^9
+objects interlocking through a shared endpoint. A non-negative scale plus one
+proper shared-point rotation should reconstruct the accumulation-weighted
+active-neighbour web better than no rotation, wrong-endpoint alignment,
+seed displacement and time displacement. A short positive delay and angle band
+should generalize from development to hidden times.
+
+**Test:** retain the full connected \(3\times3\) matrix, decompose radial
+release, proper shared-endpoint rotation and residual deformation, select lag
+`1–8` on times `0–241`, and evaluate the frozen lag on times `250–491`.
+All `200` trials and both connectivity strata remain in scope. Events use a
+predeclared value-independent `mod 16` sampling rule.
+
+**Falsifier:** with at least 100 trials and 100,000 hidden events, failure to
+beat the no-rotation, wrong-endpoint, seed-displaced and time-displaced controls
+rejects the interlocking-rotation branch. Failure of the frozen positive lag
+and angle band rejects the traveling-wave branch.
+
+**Evidence tier:** registered on a fully opened source; not blind and not
+A-tier provenance.
+
+**Run/result:** the full `6.6 million` connected matrices were retained.
+Development selected lag `2`; the hidden half independently had its minimum at
+lag `2`. Hidden proper-rotation residual was `0.101637`, versus no rotation
+`0.546173`, seed displacement `0.153025`, time displacement `0.152886` and
+zero lag `0.132915`. Singular-spectrum similarity was `0.991784`; all
+`2,000/2,000` paired hidden bootstraps favoured exact rotation over no
+rotation, seed/time displacement and zero lag.
+
+**Failure/boundary:** only `76,393` hidden events survived, below the frozen
+`100,000` eligibility floor. More importantly, every connected matrix in this
+source was exactly diagonal and symmetric, so endpoint reversal left it
+unchanged. Correct- and wrong-endpoint residuals were exactly equal; fitted
+angles were only `0°/180°`. The frozen shared-endpoint interlocking gate
+therefore failed. **Strict verdict: INCONCLUSIVE.** The narrower lag-2 binary
+flip/return is reproducible, but the continuous angled rotational point is not
+identified by this source.
+
+**Post-result geometry hypothesis:** Dylan interprets the binary flip and
+delayed return as compatible with a Phase B whose connection lies outside the
+present measurement cut. This is retained as a testable ARA interpretation,
+not promoted to the empirical result. A non-diagonal, time-resolved source is
+required to distinguish it from diagonal sign symmetry.
+
+**Protocol:** `analysis/quantum/Q28_ARA9_INTERLOCKING_ROTATIONAL_TRANSPORT_PROTOCOL_v1_FROZEN.md`.
+**Fidelity:** `analysis/quantum/Q28_ARA9_INTERLOCKING_ROTATIONAL_TRANSPORT_FIDELITY_v1.md`.
+**Independent validation:** PASS, `38/38` checks.
+**Report:** `analysis/quantum/Q28_ARA9_INTERLOCKING_ROTATIONAL_TRANSPORT_REPORT_2026-07-26.md`.
+**Notebook:** `analysis/quantum/Q28_ARA9_INTERLOCKING_ROTATIONAL_TRANSPORT_NOTEBOOK.ipynb`.
+
+---
+
+### T283 - Q27 ARA^9 network reconstruction or larger-wave Phase B
+REGISTERED: 26 July 2026 | **STATUS: INCONCLUSIVE**
+`[complete public simulated network; one frozen source-quality gate failed]`
+
+**Orientation:** local pair `0 = trough / unresolved closure`, `2 = exposed local crest`; upward means the
+larger network-parent relation assembled from local pair children.
+
+**USER PRIOR:** “Oh, is it just rotating around a central point and the overarching wave inside the ARA^9 is
+reconstructing a wave x2 its size.... resonance style.” Followed by: “Based on ARA I think that is what it is
+doing, or iti is a phase B of a larger wave.”
+
+**Claim:** A complete local ARA^9 that reaches a trough will either reconstruct as the next crest of a larger
+local cycle, or its release will be recovered as accumulation in directly coupled neighbouring pair relations.
+
+**Test:** Freeze the ARA^9 connected-tensor and closure calculation on the first 250 time steps of the public
+12-qubit `pure_random` network data, predict the next local crest by reflecting the exposed crest-to-trough
+half-cycle, and reveal time steps 250–499. Separately test release-to-accumulation coupling in exact deposited
+neighbourhoods against matched pair-shuffled and circular-time controls.
+
+**Prediction:** At least half of eligible local pairs reconstruct; if they do not, at least half show a sustained
+direct-neighbour crest. Exact adjacency and time order should each beat at least 95% of their frozen controls.
+Amplitude return and orientation flip are separate.
+
+**Falsifier:** With at least 30 eligible sources across 20 trials, neither local reconstruction nor direct-neighbour
+transfer passes its frozen gates. In that case this dataset supports contraction or more complex evolution, not
+the registered ARA continuation.
+
+**Rivals:** persistence, no-return contraction, pair-shuffled adjacency, circular-time order. ARA mirror is the
+registered reconstruction waveform. No Fourier transform defines the ARA object.
+
+**Data fixed before download:** Zenodo DOI `10.5281/zenodo.16753415`,
+`unnati_submit_12_pure_random.hdf5.zip`, MD5 `06b6b278c4ce1e8ce14d2d662f0dc9dc`.
+
+**Protocol:** `analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_PROTOCOL_v1_FROZEN.md`.
+**Fidelity:** `analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_FIDELITY_v1.md`.
+**Schema-frozen implementation:** `analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_IMPLEMENTATION_MANIFEST_v1_FROZEN.md`
+(`0035422d9504d788c74d01ae4d856f472554f7664a669c3fbfe9824fd311c677`), written after path/shape
+inspection and before any density-matrix value was read.
+
+**Pre-run provenance correction:** the first extracted-HDF5 SHA was accidentally calculated on a command-window
+truncation (`548,405,248` bytes) and the numerical runner stopped before reading values. The verified archive MD5
+was unaffected. Complete extracted size: `3,452,716,320` bytes; corrected SHA-256:
+`0e10afb6e5c7bcc3b469a9bb18a9bcae9469bfae165d5da5add93eeeb1972eeb`.
+
+**Run/result:** all `6,600,000` pair matrices were used across two connectivity strata, `200` trials and
+`10,519` eligible sources. Local crest reconstruction was common (`88.20%`, cluster-bootstrap 95% CI
+`87.60-88.79%`), but only `31.82%` met the frozen mirrored timing tolerance. The ARA mirror MAE was `1.37830`,
+worse than persistence `0.70753` and no-return `0.51933`; its bootstrap probability of beating either was `0`.
+The strong direct-neighbour crest occurred in only `2.58%` of `1,241` eligible non-returning cases. Stable
+orientation flips occurred in `0/9,278` reliable reconstructions.
+
+**Source-quality gate:** the frozen `5,000`-matrix sample had maximum trace error `2.5342e-05`, above the
+runner's frozen `1e-05` gate. Hermiticity error was `0`, minimum eigenvalue was `-3.1154e-07`, and no matrix
+failed the reported `-1e-06` PSD tolerance. The gate was not relaxed; the strict verdict is **INCONCLUSIVE**.
+Conditioned on accepting the observed storage precision, neither registered substantive branch passes and the
+claim verdict is **NOT SUPPORTED**.
+
+**Geometry retained:** exact source-release to active-neighbour-accumulation overlap was `0.27677`, versus
+pair-shuffle median `0.20721` and circular-time median `0.22606`. It beat all `999` controls in both families
+and reproduced in both predeclared seed halves. This supports a weaker ordered, distributed network-transfer
+relation, not the registered one-neighbour Phase-B crest or simple doubled resonance clock.
+
+**Independent validation:** PASS, `46/46` checks.
+**Report:** `analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_REPORT_2026-07-26.md`.
+**Notebook:** `analysis/quantum/Q27_ARA9_NETWORK_RECONSTRUCTION_NOTEBOOK.ipynb`.
+
+---
+
+### T282 - Q26 ARA^9 larger-wave trajectory
+
+**REGISTERED:** 26 July 2026, after Q25 failed its static missing-cut rule and after Dylan proposed that the local
+ARA^9 was a crest of a larger connection-space wave, but before downloading or opening the Q26 target matrices |
+**STATUS: SUPPORTED - 13/14 SCORED GATES**
+`[public processed tomography, staged partially blind trajectory prediction, independently validated]`
+
+**Question:** does a complete connected ARA^9 relation move as one slice on a larger wave, specifically from a
+local crest through handover toward a later trough? Does the full relation also reverse orientation?
+
+**Frozen construction:** for every full two-parent relation
+\(C(t)=T(t)-\mathbf a(t)\mathbf b(t)^\mathsf T\), define closure
+\(h(t)=|\det C(t)|^{1/3}\) and local diameter coordinate \(x_h(t)=2h(t)/h(t_0)\). Freeze crest at
+`x_h >= 1.5`, handover at `0.5 < x_h < 1.5`, trough at `x_h <= 0.5`, and a stable orientation flip as a
+determinant-sign reversal persisting for two reliable non-trough samples. The first seven complete matrices of
+each trajectory were exposed; the final four were sealed. Protocol SHA-256:
+`0bd8f2a0ee96733e0411d477a5c808c4ebd100b083b84b30108d05ed110347e6`.
+All `112` primary hidden matrices (`1,008` cuts) were predicted and hashed before reveal. Prediction SHA-256:
+`e0e52a552df3b114bc6def1ea392f697d9da301f77d5c71214e7c491355be968`.
+
+**Run/result:** across `28` primary trajectories, median closure-versus-wait Spearman was `-0.9364`;
+`25/28` ended in the frozen trough and completed crest-to-trough movement. Ridge timing was within one sample
+for `21/22` eligible trajectories; trough timing for `25/28`. ARA cut MAE was `0.08502`, versus persistence
+`0.19341`, elementwise linear `0.52616`, zero `0.16620`, and no-rotation contraction `0.08632`. Exact time order
+beat all `999` permutations. ARA beat persistence and linear on every primary trajectory.
+
+**Orientation boundary:** only `1/28` trajectories showed a stable reliable orientation reversal. ARA phase
+error (`1.3819 rad`) was worse than no rotation (`1.2388 rad`). The ARA/no-rotation cut-MAE difference was only
+`0.00130`, with bootstrap win probability `0.6344`.
+
+**Verdict/boundary:** **SUPPORTED for the larger-wave amplitude claim.** A complete local ARA^9 relation can be
+followed from crest through handover toward trough on this public trajectory. **NOT SUPPORTED for a general
+orientation flip.** This is one published decoherence family, not a new quantum law, universal-fractality proof,
+or demonstration that every next ARA^9 turns inside out. Independent validation passed `282/282`.
+
+**Report:** `analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q26_ARA9_LARGER_WAVE_VALIDATION.json` (`PASS`).
+
+---
+
+### T281 - Q25 blind ARA^9 missing-cut reconstruction
+
+**REGISTERED:** 26 July 2026, after Q24 calibration but before downloading or opening any numerical matrix from
+the external Zenodo source | **STATUS: NOT SUPPORTED - 7/12 FROZEN GATES**
+`[external public processed tomography, staged blind reveal, independently validated]`
+
+**Question:** can the other eight cells of a connected ARA^9 relation predict its hidden ninth cell on a different
+atomic-qubit platform? Dylan separately proposed before source values were opened that the tested ARA^9 might be
+only the crest of a larger connection-space wave and could become a trough in the next ARA^9.
+
+**Frozen construction:** hide each connected Pauli cell of
+\(C=T-\mathbf a\mathbf b^\mathsf T\) in turn. Search a fixed candidate grid for the value that makes both
+\(CC^\mathsf T\) and \(C^\mathsf TC\) closest to the same scaled identity while penalizing positive determinant
+orientation. Compare against the `C=0` ridge, mean of the other eight cells and the positivity-feasible interval
+midpoint. The protocol was hashed before downloading Zenodo `10.5281/zenodo.4604775`; all `81` predictions were
+then hashed before the target packet was read. Protocol SHA-256:
+`d267c807ff60ca84f2475e04fd29b22ed953e3c6b23036aeb022de1dd6c69397`.
+
+**Run/result:** on five external density matrices (`45` hidden cuts), ARA MAE was `0.12394`, better than ridge
+`0.18616` and eight-cell mean `0.21630`, but worse than the physical midpoint `0.08687`. ARA correlation was
+`0.8538` and pole/quiet accuracy `86.7%`, versus `0.9093/91.9%` for the physical control. The bootstrap
+probability that ARA beat the physical midpoint was only `0.50%`. One source matrix had minimum eigenvalue
+`-0.01306`, failing the frozen quality gate; the matched `37`-cell comparison still favoured the physical
+midpoint.
+
+**Secondary results:** on four normalized Bell-measurement operators, ARA MAE was `0.07105`, better than the
+physical midpoint `0.08716` and ridge `0.19516`. The fully mixed input had ARA^9 closure `0.0089` with zero
+retained directions, while four conditioned Bell outputs had closure `0.5162-0.5765`; however their frozen
+direction counts were `1,2,2,1`, so the larger-wave trough-to-complete-crest probe failed one of three gates.
+
+**Verdict/boundary:** **NOT SUPPORTED.** Q24's complete ARA^9 relation object remains valid, but one static,
+locally balanced sphere closure is not sufficient to reconstruct every missing cut in these external prepared
+states. The failure pattern motivates a new full-trajectory test of Dylan's larger-wave crest/handover/trough
+proposal; it does not retrospectively confirm it. The measurement-operator result is secondary and cannot rescue
+the primary verdict. Independent validation passed `490/490`.
+
+**Report:** `analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_VALIDATION.json` (`PASS`).
+
+---
+
+### T280 - Q24 ARA^9 connected Bell relation
+
+**REGISTERED:** 26 July 2026, after Q5/Q6/Q6B Bell outcomes and tensor singular values were already open but
+before calculating the connected tensors, ARA^9 cells, Q24 metrics or bootstrap gates |
+**STATUS: CALIBRATED - 16/16 FROZEN GATES**
+`[public raw-current reconstruction, prior-geometry identification, independently validated]`
+
+**Prior geometry:** archived Script 201 explicitly described ARA^9 as “three systems × three axes = nine
+couplings” on 23 April 2026. The 16 July corrected formalism retained a distinct nine-coefficient three-axis
+coupling-operator branch. Q24 tested whether that older object maps faithfully to the already-open two-parent Bell
+relation; it was not registered as a blind Bell prediction.
+
+**Frozen construction:** for first-parent cuts
+\(\mathbf a=(XI,YI,ZI)^\mathsf T\), second-parent cuts
+\(\mathbf b=(IX,IY,IZ)^\mathsf T\), and the nine joint cuts \(T_{ij}\), calculate
+
+\[
+C=T-\mathbf a\mathbf b^\mathsf T,
+\qquad
+X^{(9)}=1-C.
+\]
+
+The primary layer used the Q5 raw-current linear expectation reconstruction without clipping or physical
+projection. Q6B positive density states were held side by side as the established-physics companion. Gates tested
+retained relation directions, determinant orientation, three-direction closure, directional balance,
+relation dominance, `2,000` raw bootstraps, proper-rotation invariance and rank-one destruction controls. Protocol
+SHA-256: `cc8628281ec391a4c045b4bb2f7e12284ca63ef5206282e5d84bacd54e417714`.
+
+**Run/result:** raw and physical layers both returned the exact retained-direction ladder
+`3,3,3,3 / 1,1 / 0` for the four Bell records, two reconstructed classical mixtures and uniform mixture. Raw Bell
+closure strengths were `0.9423/0.9592/0.8910/0.8831`; directional balances were
+`0.8997/0.7931/0.7509/0.8577`; connected-relation shares were
+`0.9963/0.9899/0.9954/0.9842`. Every entity retained its expected direction count in `2,000/2,000` bootstrap
+draws, and every Bell determinant remained negative in every draw. Proper rotations preserved the invariants to
+`5.55e-16`; rank-one compression reduced every Bell from three directions to one.
+
+**Verdict/boundary:** **CALIBRATED.** The pre-existing ARA^9 three-axis coupling object is a faithful mathematical
+home for the connected Bell parent relation. This is stronger than a shared count of nine because the relation
+survives removal of the separate-child product, follows the coherent/classical/mixed `3→1→0` ladder and is
+coordinate-rotation invariant. Q6 had already opened the same tensors and singular values, so T280 is not a fresh
+quantum prediction, new entanglement witness, A-tier provenance hit, universal-fractality proof or ARA
+superiority claim. Independent validation passed `860/860`.
+
+**Report:** `analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q24_ARA9_BELL_RELATION_VALIDATION.json` (`PASS`).
+
+---
+
+### T279 - Q23 connection-web to logical-bit parent ARA
+
+**REGISTERED:** 26 July 2026, after outcome-blind extraction of distance-7 geometry/events but before extracting
+any distance-7 logical outcome | **STATUS: NOT SUPPORTED - 3/10 FROZEN GATES**
+`[public raw data, untouched code-distance patch, independently validated]`
+
+**Question:** can the previously measured change-heavy detector expression be paired with a larger,
+connection-heavy Information³ web and the logical bit independently, then recover a specific Tier-up `1.0`
+coupling ridge?
+
+**Frozen construction:** preserve source record order; divide each 50,000-shot X/Z, 13/30-round record into 200
+blocks of 250. Construct the connection identity from stability of the complete sixteen-path child-handover web
+between block halves. Construct the bit identity independently as logical retention versus flip. Map each
+marginal ordering separately to its open `0-2` diameter, then calculate `P=2B/(C+B)`. Compare correct blocks with
+half-cycle, wrong-bit, spatially broken, flip-orientation and 999-permutation controls. Protocol SHA-256:
+`5ec5c9dd363c6d6edc93e00493d78c5cfa67be3e40d0009785d9e5c0a57e1c0a`.
+
+**Run/result:** every genuine parent median lay near `1` (`0.99433-1.01787`). However, paired mean ridge
+distances were `0.37987/0.38132/0.39831/0.38513` for X-r13/X-r30/Z-r13/Z-r30 versus permutation-null means
+`0.38410/0.38469/0.38438/0.38437`. Rank relations were
+`+0.05371/+0.00509/-0.09616/-0.02300`; permutation p-values were `0.375/0.397/0.836/0.525`. Correct blocks did
+not consistently beat shifted, wrong-bit or broken-web controls.
+
+**Verdict/boundary:** **NOT SUPPORTED.** The complete web-stability identity does not show specific block-level
+coupling to logical retention at this grain. The parent medians demonstrate why `P≈1` alone is insufficient:
+separately normalized exchangeable marginals also centre near the ridge after their relation is broken. Specific
+coupling requires extra correct-pair ridge concentration beyond those controls. This rejects the instrument, not
+the existence of a larger connection-heavy counterpart or ARA generally. Independent validation passed
+`117/117`.
+
+**Exploratory clue:** the predeclared anti-child handover decomposition was weakly positive in all four datasets
+(mean rank relation `+0.07084`); a post-result pooled permutation gave `p=0.0226`. This cannot rescue T279 and is
+only a candidate for a future frozen lineage test.
+
+**Report:** `analysis/quantum/Q23_WILLOW_CONNECTION_BIT_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q23_WILLOW_CONNECTION_BIT_VALIDATION.json` (`PASS`).
+
+---
+
+### T278 - Q22B flipped Tier-4 to Tier-1 Willow relation
+
+**REGISTERED:** 26 July 2026, after extracting fresh q8_7/r13 detector geometry and events but before extracting
+either fresh logical-observable target | **STATUS: NOT SUPPORTED - 1/13 FROZEN GATES**
+`[public raw data, cross-patch cross-duration prediction, independently validated]`
+
+**Method correction before registration:** Q22A had compared local Tier-4 coordinates directly with Tier 1.
+Dylan caught before Q22A validation or ledger promotion that this omitted the declared singularity flip. Tier 4
+to Tier 1 crosses three completed rung boundaries, so Q22A remains only an unflipped control and Q22B froze:
+
+\[
+x_{4\rightarrow1}=F^3(x_4)=2-x_4,\qquad F(x)=2-x.
+\]
+
+**Frozen test:** use untouched distance-5 patch `d5_at_q8_7`, fit X and Z directions on 13-cycle records, and
+apply them unchanged to 30-cycle holdout. Retain the four direct children and three future delays separately.
+Compare flipped state, travel and combined representations with the unflipped coordinate, past travel, broken
+cross-rung pairing, Q21 topology and event count. Protocol SHA-256:
+`625689063971a2c56a568f1a58610915e1792e3d0721305408ffff3452334725`.
+
+**Outcome-blind geometry:** the registered direction already failed before the target bits were opened. Mean
+future-versus-past ridge-distance differences were positive in development and holdout for both bases. On
+holdout, flipped future/past distances were `0.413389/0.382021` for X and `0.414013/0.383283` for Z.
+
+**Run/result:** mean holdout AUROC was `0.500377` for flipped state, `0.497949` for flipped travel and `0.498422`
+for their combination. The unflipped control scored `0.499210`, Q21 topology `0.502352`, and event count
+`0.502176`. X/Z combined AUROCs were `0.498755/0.498090`; permutation p-values were `0.694/0.728`. Only the
+count non-inferiority gate passed.
+
+**Verdict/boundary:** **NOT SUPPORTED.** The net three-boundary flip applied to all retained children and both
+direct pathways did not recover the registered direction or useful logical-outcome prediction. This rejects that
+specific transported-lineage representation, not the conditional identity \(F^2=I\), parent-ridge
+coarse-graining, amplitude scaling or the wider ARA framework. Both complementary pathways can average toward a
+Tier-1 ridge; the predictive model nevertheless retained their child/delay features separately and still failed.
+The next clean test is one frozen branch-preserving lineage with its complement and branch-swapped path as
+controls. Independent validation passed `57/57` checks.
+
+**Report:** `analysis/quantum/Q22_Q22B_VERTICAL_TIER_RELATION_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q22B_WILLOW_FLIP_VERTICAL_VALIDATION.json` (`PASS`).
+
+---
+
+### T277 - Q21 recursive children beneath the Willow parent ridge
+
+**REGISTERED:** 26 July 2026, after extracting fresh q6_5/r30 detector geometry and events but before extracting
+either fresh observable target | **STATUS: NOT SUPPORTED - 2/8 FROZEN GATES**
+`[public raw data, cross-patch cross-duration prediction, independently validated]`
+
+**Governing correction:** a whole detector cloud near the parent `1.0` ridge need not have quiet or ridge-like
+children. As in the earlier LLM and prime work, asymmetric children can cancel when coarse-grained into their
+parent. Q21 therefore retained four spatial children, their eight time grandchildren and all sixteen directed
+adjacent-time child handovers instead of demanding a non-ridge parent.
+
+**Outcome-blind check:** across q4_7/r13 and fresh q6_5/r30, the twelve recompressed x/y/relation parent means
+were all `0.996595-1.049297`. Each grandchild allocation and handover allocation separately closed to TE-ARA `2`
+within floating precision. The fresh pre-freeze manifest contained only metadata, circuits and detector events.
+
+**Frozen test:** fit a 24-coordinate equal-prior nearest-centroid direction on the already-open q4_7/r13 X and Z
+records, then transport it unchanged to untouched q6_5/r30 outcomes. Compare with grandchildren alone,
+recompressed x-y parent, Q20-style x-time parent, event count, topology plus count, coordinate misassignment and
+`999` development-label permutations per basis. Protocol SHA-256:
+`bd26fa2e70c1e4ddbb4e5d768b6099cb6caaea3c96ab1ce3cac545d6575cd24d`.
+
+**Run/result:** mean holdout AUROC was `0.512172` for child topology, `0.512371` for grandchildren,
+`0.513420` for the recompressed spatial parent, `0.506218` for Q20 global x-time, `0.506055` for count,
+`0.512532` for topology plus count and `0.503705` after spatial-coordinate misassignment. X/Z topology AUROCs
+were `0.507656/0.516688`; permutation p-values were `0.126/0.006`. Child topology beat the shuffled geometry by
+`0.008467` but missed the frozen `0.01` effect gate. Aggregate handovers added no mean benefit over grandchildren.
+
+**Verdict/boundary:** **NOT SUPPORTED:** the registered eight-grandchild/sixteen-handover representation did not
+transport useful logical-outcome prediction across detector patches. The parent-ridge construction itself was
+recovered, and the Z-only direction is a post-result clue, not a supported claim. This does not reject the wider
+ARA framework, compare against full decoders, explain rare bursts or test entanglement. Independent validation
+re-parsed the sources, refitted all seven models, reran `1,998` permutations and passed `95/95` checks.
+
+**Post-result geometry correction / next discrimination:** Q21 opened Tier 4 and measured mainly sideways
+Tier-3 handovers, but omitted the vertical ARA wave between the Tier-4 grandchildren and Tier-1 whole/meta
+relation `J`. Q22 should freeze `ARA(Tier1,Tier4)` and test it within untouched patch q6_9 (`r13 -> r30`) against
+Tier 1 alone, Tier 4 alone, Q21 topology, count and broken cross-rung pairings.
+
+**Report:** `analysis/quantum/Q21_WILLOW_RECURSIVE_CHILD_TOPOLOGY_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q21_WILLOW_RECURSIVE_CHILD_TOPOLOGY_VALIDATION.json` (`PASS`).
+
+---
+
+### T276 - Q20 Willow x-time ARA relation decoder
+
+**REGISTERED:** 26 July 2026, after outcome-blind inspection of the 13-cycle raw detector geometry but before
+opening any `obs_flips_actual.b8` target | **STATUS: NOT SUPPORTED - 2/6 FROZEN GATES**
+`[public raw data, same-patch cross-duration prediction, independently validated]`
+
+**Question:** can one raw surface-code detector cloud be reduced to an ARA Information³ lock — physical
+x-parent, time-parent and their aligned-versus-crossed relation — and predict untouched 30-cycle
+logical-observable flips better than total detector-event count?
+
+**Outcome-blind cut selection:** among x-y, x-time and y-time, choose the pair with the largest pooled 13-cycle
+development variability in its crossed-versus-aligned relation coordinate. X-time was selected
+(`SD=0.0897184`) before any target bit was opened. Raw events were allocated into four gradient children
+`AA/AB/BA/BB`, giving `X=2(BA+BB)`, `T=2(AB+BB)` and `J=2(AB+BA)`. Development labels could orient only a frozen
+equal-prior nearest-centroid score. X and Z were fitted separately and applied unchanged to 30-cycle holdout.
+
+**Frozen gates:** valid source/construction; ARA AUROC at least `0.55` in both bases; mean ARA-minus-count AUROC
+at least `0.01`; label-permutation `p<=0.01` in both bases; mean ARA-plus-count gain at least `0.01`; no basis
+more than `0.01` worse after adding ARA. Protocol SHA-256:
+`3a55824116968450d43f64770933059c4ce00b0a873a7302b417111986118d6f`.
+
+**Run/result:** mean holdout AUROC was `0.514154` for ARA relation, `0.508944` for count and `0.514993` for
+ARA-plus-count. X/Z relation AUROCs were `0.511632/0.516677`; permutation p-values were `0.019/0.001`. Only source
+integrity and combined-model non-inferiority passed. The relation advantage was small (`+0.005210`) and below the
+registered effect threshold.
+
+**Secondary post-result guidance:** the x-y spatial cut scored `0.516571/0.525462`, exceeding the primary x-time
+cut in both bases. This cannot repair Q20. It suggests that local spatial topology carries more endpoint
+information than the globally loudest moving relation.
+
+**Verdict/boundary:** **NOT SUPPORTED:** one global x-time ARA compression is not an adequate decoder of this
+observable. The failure is consistent with local child paths cancelling inside a near-ridge parent reading, but
+that explanation is a new hypothesis. Q20 does not compare with full established decoders, isolate the rare
+hourly correlated bursts, reject the wider ARA framework or support entanglement claims. Independent validation
+re-parsed the source, rebuilt every coordinate, reran `1,998` permutations and reproduced every central metric.
+
+**Report:** `analysis/quantum/Q20_WILLOW_ARA_RELATION_DECODER_REPORT_2026-07-26.md`.
+**Validation:** `analysis/quantum/Q20_WILLOW_ARA_RELATION_DECODER_VALIDATION.json` (`PASS`).
+
+---
+
+### T275 - Q16 raw ARA×2 four-child geometry restart
+
+**REGISTERED:** 25 July 2026, after Q4-Q15 outcomes were already open but before calculating the new raw-occupancy
+ARA coordinates, parent directions, retained relation, held-out gates or negative controls | **STATUS: SUPPORTED -
+8/8 FROZEN GATES**
+`[corrected public-data reconstruction, ARA-native operator, unreplicated]`
+
+**Orientation:** two complete parent ARA spheres, each sign-reversible; parent/larger is up and four ordered mixture
+children are down. Each parent retains its own normalized `TE-ARA=2`.
+
+**Claim:** four raw prepared-current identities are ordered children of two coupled ARA parents:
+\((A_1,B_1)\times(A_2,B_2)\to\{AA,AB,BA,BB\}\). Two independent parent directions and their retained relation
+must recur on acquisition-index held-out records without conventional quantum geometry generating the axes.
+
+**Test:** rename the four immutable Figshare archives `C00,C01,C10,C11` by file-ID order. On every aligned raw
+current cut/readout, build `x=2*n(above development ridge)/n(non-tie)`, preserving magnitude and dispersion. Freeze
+the two parent contrasts \(U,V\) and relation \(J\); test holdout direction, bit/four-child decoding, relation
+stability, label shuffles and within-archive pseudo-child controls. Conventional Bell/Pauli/density interpretation
+is quarantined until after ARA results are saved.
+
+**Prediction:** both parent directions have holdout cosine `>=0.80`, cut-sign retention `>=75%`, parent-bit balanced
+accuracy `>=0.80`, four-child balanced accuracy `>=0.70` and above the `99th` shuffle percentile. Pseudo-children
+pass all gates in no more than `5%` of controls. \(J\) is separately classified as stateful or planar by frozen
+gates.
+
+**Falsifier:** failure of either parent holdout/bit gate, failure of four-child decoding against shuffle, or a
+negative-control false-positive rate above `5%`. Raw decoder/alignment inadequacy gives `INCONCLUSIVE`.
+
+**Pre-run schema amendment:** byte audit showed `_1..._10` are acquisition buckets, not two parent channels, and
+each member contains five current segments. Unrun v1 is preserved but superseded. Q16 v2 retains all five segments,
+uses nine unnamed settings × five segments (`45` raw ARA cuts), and balances `40` development plus `40` holdout
+records per child/setting. No result was calculated before this amendment.
+
+**Fidelity packet:** `analysis/quantum/Q16_ARA2_RAW_FOUR_CHILD_FIDELITY_v2.md`.
+**Frozen protocol:** `analysis/quantum/Q16_ARA2_RAW_FOUR_CHILD_PROTOCOL_v2_FROZEN.md`.
+**Protocol SHA-256:** `63a099cf2ab200459d09240862a5e0239dfb241f45126c6474921adbb19fe51e`.
+
+**Run/result:** all eight gates passed. Development-to-holdout parent cosines were `0.877841` (`U`) and
+`0.829311` (`V`); cut-sign retention was `0.977778` and `0.822222`; parent-bit balanced accuracy was `0.981250`
+and `0.906250`. Four-child balanced accuracy was `0.887500` (bootstrap interval `[0.8375,0.93125]`) against a
+label-shuffle 99th percentile of `0.487625`, `p=0.0001`. The within-archive pseudo-child control passed the frozen
+geometry in `0/1000` cases.
+
+The retained relation `J` had holdout cosine `0.818388`, energy share `0.239840` and shuffle `p=0.0001`, so it
+received the frozen classification **STATEFUL RETAINED RELATION**. Development/holdout four-child centroids both
+had centered rank `3` and normalized tetrahedral volume `0.110957/0.108646`; the raw geometry was non-planar rather
+than a flat square. Previously discarded segment `G0` carried `6.79%` of total `U+V+J` contrast energy.
+Independent validation redecoded raw binaries, reproduced every central metric exactly, reran both shuffle tests
+and obtained `0/1000` pseudo-control passes.
+
+**Construction/evidence boundary:** the four-point `M/U/V/J` transform and a maximum centered rank of three are
+algebraic facts, not independent ARA evidence. The empirical result is the held-out stability, raw separability,
+sign recurrence, non-planar shape preservation, shuffle separation and failed pseudo-child controls. The file-ID
+ordering was frozen before Q16 calculation but the public preparations and prior Q4-Q15 outcomes were already
+known, so this is not a genuinely blind result. The four states were acquired in separate archives/runs; a
+preparation-correlated device/day/batch effect remains the strongest confound.
+
+**Post-result comparator:** restoring conventional metadata only after scoring maps dominant `U/V/J` energy to
+the established three Bell-correlation directions conventionally called `ZZ/XX/YY`. This is a clean
+Information³-style crosswalk — two parent signs plus their retained relation — not a new quantum state or proof
+that ARA generated Bell algebra.
+
+**Report:** `analysis/quantum/Q16_ARA2_RAW_FOUR_CHILD_REPORT_2026-07-25.md`.
+**Validation:** `analysis/quantum/Q16_ARA2_RAW_FOUR_CHILD_VALIDATION.json` (`PASS`, zero failures).
+
+---
+
+### T274 - Q15 unresolved self-identity and conditional Phase-B handover
+
+**REGISTERED:** 24 July 2026, after Q8-Q14 outcomes and the descriptive common-time probe were open, but before
+calculating Q15 self/Other energy shares, held-out scores, shuffled-time controls or the frozen handover rematching
+null | **STATUS:** COHERENT BUT MIXED / PHASE B NOT PROMOTED
+`[public-data, post-outcome self-identity calibration and conditional coupling test]`
+
+**Question:** complete the self-identity step that had been skipped before unresolved \(H\) received provisional
+Phase-B labels. Use independently purity-defined
+\(U=2(1-\operatorname{Tr}\rho^2)\) as primary. Across four Bell states, separate the common baseline-subtracted
+change and movement-rate trajectories from state-specific `Other`; freeze
+\(\eta_U=\min(\eta_D,\eta_G)\) and \(U_{\rm self}=2\eta_U,\ O_U=2(1-\eta_U)\). Require held-out Bell-state
+prediction, `9,999` independently shuffled wait orders and agreement with Q8's algebraic remainder. Only after a
+dominant identity pass, test whether correct common Ramsey/Hahn waits uniquely exchange unresolved and visible
+account. Protocol SHA-256:
+`8d79aab4260343f51806ea22b563919aecf519904b1fc72c202854c56be23fe2`.
+
+**Run/result:** Ramsey common change/rate shares were `0.997439/0.915259`; its conservative TE-ARA account was
+`1.830519` self plus `0.169481` Other. Hahn shares were `0.986048/0.676414`, giving `1.352827` self plus
+`0.647173` Other. Pooled held-out change/rate \(R^2\) was `0.978916/0.677142` Ramsey and
+`0.955962/0.367521` Hahn. Shuffled-time \(p\) was `0.0001` and `0.0073`. Cross-definition correlations were
+`0.974867`/`0.988051`. Ramsey passed the dominant gate; Hahn passed only coherent-but-mixed.
+
+The conditional exchange had `15/16` sign agreement, correlation `0.953478`, through-origin slope `0.840035`
+and MAE `0.091438`. But within-state Hahn-wait rematching produced median correlation `0.976921` and
+`p=0.9973`; the correct wait pairing was not distinctive.
+
+**Verdict/boundary:** **SUPPORTED:** the unresolved purity-loss account contains a recurring ARA trajectory that
+generalizes across Bell identities and can be decomposed into self plus material Other. **NOT SUPPORTED:** one
+dominant Phase-B identity in both protocols or a uniquely timed Ramsey-to-Hahn handover. The current label is
+**purity-defined unresolved ARA mode / candidate Phase-B account**. This is post-outcome calibration on projections
+of the same density matrices, not a blind prediction, new hidden quantum degree of freedom, new quantum law or
+proof of fractality. Independent validation passed with zero failures. Report:
+`analysis/quantum/Q15_UNRESOLVED_SELF_IDENTITY_TE_ARA_REPORT_2026-07-24.md`.
+
+**25 July TE-ARA correction:** Q15's `self + Other = 2` is a normalized participation/coherence account, not a
+complete identity decomposition. Under the clarified canon, Phase A and Phase B are mandatory and
+`Phase A + Phase B + sum(Other) = 2`. Q15 did not independently resolve the unresolved mode's own A/B pair.
+Its numbers and frozen verdict remain; only the label boundary is tightened. Correction:
+`analysis/quantum/Q15_TE_ARA_METHOD_CORRECTION_2026-07-25.md`.
+
+---
+
+### T273 - Q14 same-depth child phase-swap diagnostic
+
+**REGISTERED:** 24 July 2026, after Q13 outcomes were open but before calculating Q14 swap errors, parity,
+held-out folds or permutation nulls | **STATUS:** PARTIAL / NOT CALIBRATED - 2/12 FROZEN GATES
+`[public-data, post-outcome parameter-free correspondence diagnostic]`
+
+**Question:** operationalize the proposed compulsory child flip with the available Q13 trajectories by comparing
+same-label correspondence \((R_A,R_B)\leftrightarrow(H_A,H_B)\) against crossed correspondence
+\((R_A,R_B)\leftrightarrow(H_B,H_A)\). Test amplitude and direction parameter-free, under `9,999` paired
+within-state permutations, and with leave-one-Bell-identity-out nonnegative common-scale transforms. Protocol
+SHA-256: `ba12118684b6e42d627267aa2cc8c9fb6495f96e73318935bd640a551733d1c9`.
+
+**Run/result:** crossed pairing increased parameter-free error by `238.26%` in amplitude and `59.91%` in
+direction. Only `34.09%`/`22.73%` of cells had the predicted opposite ordering; flipped cosines were
+`-0.550957`/`-0.264721`. Matched-stage swap-support p-values were `1.0`/`0.3098`. The swap won `0/4`
+held-out amplitude identities and `1/4` direction identities; median held-out gains were `-1.177394` and `0.0`.
+Independent recomputation reproduced every metric and all permutation summaries exactly.
+
+**POST-RESULT FIDELITY CORRECTION:** Dylan clarified after opening Q14 that a child relation does not flip merely
+because it is a child. Orientation is retained within the same or a nearby rung. The discrete swap occurs only
+when one full TE-ARA at that scale completes and crosses a rung boundary:
+\(\mathbf u_{\rm dest}=S^{N_{\partial T}}\mathbf u_{\rm source}\). Even boundary count gives \(I\); odd count
+gives \(S\). Q14's frozen odd-swap prediction therefore did not faithfully represent the clarified same-rung
+claim. Its gates remain unchanged for provenance.
+
+**Verdict/boundary:** **REJECTED FOR THIS OPERATIONAL MAPPING:** Q13's Ramsey and Hahn child sets align
+same-label, not after an extra unmatched swap. **NOT A REJECTION OF THE PARENT-TO-CHILD RULE:** the audit showed
+that Q14 compared child set to child set. If both branches underwent the same flip, their relative operation is
+\(S^{\mathsf T}S=I\), so equal-depth children should retain same-label correspondence. The available table lacks
+the parent phase vectors needed for the direct \(\mathbf C\approx S\mathbf P\) versus
+\(\mathbf C\approx I\mathbf P\) test. Under the clarified rule, the result is consistent with zero or even
+completed-rung separation but does not independently establish the rung count. Report:
+`analysis/quantum/Q14_CHILD_PHASE_SWAP_REPORT_2026-07-24.md`. Prior Formula, prime, pendulum, recycling and
+axiomatic lineage:
+`analysis/quantum/Q14_COMPLETED_RUNG_FLIP_PRIOR_LINEAGE_2026-07-24.md`.
+
+**POST-RESULT SPHERE-FIRST AUDIT (24 July 2026):** Ramsey and Hahn are pulse-conditioned views at matched
+ordinal stages, not an independently established one-rung parent/child pair. Same-label correspondence is
+therefore the natural view-preserving comparison; Q14 rejects the added unmatched swap but provides no direct
+completed-rung evidence. Frozen gates and verdict remain unchanged. Consolidated audit:
+`analysis/quantum/Q10_Q14_SPHERE_FIRST_REEVALUATION_2026-07-24.md`.
+
+**POST-RESULT QUADRANT CORRECTION (24 July 2026):** Ramsey and Hahn can each be treated as a complete
+protocol-conditioned ARA parent with its own A/B coordinate pair, giving four legitimate coordinate children at
+the larger comparison boundary. Q14's literal A/B label swap did not test that quadrant. Ideal common-interval
+Ramsey/Hahn sensitivity functions are an orthogonal sum/difference pair; a label swap is not the corresponding
+Hadamard rotation. Q14 therefore remains a rejection only of the unmatched swap it froze. Re-audit:
+`analysis/quantum/Q13_Q14_RAMSEY_HAHN_QUADRANT_REAUDIT_2026-07-24.md`.
+
+---
+
+### T272 - Q13 Ramsey/Hahn four-child latent relation
+
+**REGISTERED:** 24 July 2026, after Q12 outcomes were open but before calculating Q13 candidate reductions,
+candidate identity, rank-one scores or permutation nulls | **STATUS:** PARTIAL / NOT CALIBRATED - 6/10 FROZEN
+GATES `[public-data, post-outcome held-out latent-coordinate test]`
+
+**Question:** construct four matched-stage children from Q11:
+\(R_A=C_{V,\mathrm{Ramsey}}\), \(R_B=C_{P,\mathrm{Ramsey}}\),
+\(H_A=C_{V,\mathrm{Hahn}}\) and \(H_B=C_{P,\mathrm{Hahn}}\). In leave-one-Bell-identity-out folds, test each
+child as a supplied latent coordinate and measure how much covariance it removes among the other three,
+separately for amplitude and direction. Select across all four candidates and compare with `999`
+within-identity trajectory permutations. Protocol SHA-256:
+`17b6a9bb93e845842e12289d98eda6390b9881be15ce6f996bd8a5b8e6588021`.
+
+**Run/result:** \(H_B\) had the highest frozen composite score, but only `0.00187` above \(R_A\). It removed a
+median `91.6136%` of held-out amplitude covariance (`p=0.001`, selection-corrected), but only `12.6382%` of
+direction covariance (`p=0.336`). The removed matrix was nearly rank one on amplitude (`0.999986` leading-mode
+energy) and direction (`0.982804`), yet directional off-diagonal sign agreement was only `1/3`. \(H_B\) won
+only `2/4` held-out Bell identities; fold winners were \(H_B,R_B,H_B,R_A\). An independent implementation
+reproduced candidate summaries, fold winners and all permutation statistics exactly.
+
+**Verdict/boundary:** **SUPPORTED:** the four derived children share a strong aligned amplitude relation; one
+supplied child removes most of the other three's held-out amplitude covariance, far beyond shuffled alignment.
+**NOT SUPPORTED:** a unique hidden Phase-B identity, robust directional propagation, pulse-resolved Ramsey-to-Hahn
+handoff or causal “one hidden becomes three” process. All four children are derived from the same density
+matrices, equal wait indices match ordinal stages rather than equal physical times, and the selected label is
+not separated from alternatives. This is a structural latent-coordinate result, not a forward prediction, new
+quantum law or proof of universal fractality. Report:
+`analysis/quantum/Q13_RAMSEY_HAHN_LATENT_CHILD_REPORT_2026-07-24.md`.
+
+**POST-RESULT SPHERE-FIRST AND QUADRANT AUDIT (24 July 2026):** \(R_A,R_B,H_A,H_B\) are four legitimate ARA
+coordinate children inside a two-parent Ramsey/Hahn comparison, although they are not four independently
+instrumented physical subsystems. Their amplitudes already correlate strongly with ordinal stage (median
+absolute correlations `0.909` to `0.968`). On the same held-out identities, a two-parameter ordinal-stage model
+removed `0.980694` median amplitude covariance, exceeding Q13's selected \(H_B\) value of `0.916136`. This
+challenges only the unique one-child-generates-three interpretation; it does not demote the four coordinate
+children or reject a two-axis quadrant. Ideal common-interval Ramsey/Hahn sensitivity functions form an exact
+orthogonal sum/difference basis. Q13 used unequal times and a one-latent-axis test, so it did not directly test
+that basis or a cross-parent handover. Frozen gates and original provenance remain unchanged. Audits:
+`analysis/quantum/Q10_Q14_SPHERE_FIRST_REEVALUATION_2026-07-24.md` and
+`analysis/quantum/Q13_Q14_RAMSEY_HAHN_QUADRANT_REAUDIT_2026-07-24.md`.
+
+---
+
+### T271 - Q12 Q11-residual coordinate children
+
+**REGISTERED:** 24 July 2026, after Q11 residual diagnostics were open but before calculating Q12 child energy,
+held-out-state predictions or gates | **STATUS:** PARTIAL / NOT CALIBRATED - 6/10 FROZEN GATES
+`[public-data, post-outcome orthogonal decomposition and held-out identity]`
+
+**Question:** decompose Q11's complex residual \(E=C_P+C_V\) along the two native Bell-label axes into common,
+Phi/Psi-family, plus/minus-sign and family-by-sign interaction children. Verify exact inverse and energy closure,
+then omit one Bell identity and predict it from the other three under the lower-order no-interaction rule
+\(\widehat E_{f,s}=E_{f,-s}+E_{-f,s}-E_{-f,-s}\). Compare with zero, leave-one-out mean and same-family-sibling
+controls. Protocol SHA-256: `18d3a3eb6afbe760e7af87f3b6725a9a4e56fab17f6680cd4c89048279d28ccb`.
+
+**Run/result:** the common child carried `95.22%` of Ramsey and `80.13%` of Hahn amplitude-residual energy.
+Direction was distributed: Ramsey common/family/sign/interaction shares were `58.72/33.38/1.74/6.16%`; Hahn
+shares were `32.55/36.89/23.06/7.50%`. Exact inverse and Parseval checks held to `1.110e-16` and `2.220e-16`.
+The held-out no-interaction model improved zero by `22.56%` in Ramsey but worsened it by `46.59%` in Hahn; it
+lost to the leave-one-out mean in both conditions. Direction-sign accuracy was `75%`/`70%`, while
+amplitude-sign accuracy was `92.11%`/`50%`. Independent recomputation matched all gates and metrics exactly.
+
+**Verdict/boundary:** **SUPPORTED:** the residual has a dominant common amplitude child and losslessly separable
+Bell-label coordinate structure; direction uses different mixtures across Ramsey and Hahn. **NOT SUPPORTED:** a
+universal three-child/no-interaction rule does not predict a hidden fourth identity better than simpler controls.
+The interaction coordinate is modest in energy but load-bearing for closure. The transform is established
+Walsh/Hadamard mathematics and the modes are coordinate children, not identified particles, environments or
+causal channels. Report:
+`analysis/quantum/Q12_RESIDUAL_CHILDREN_REPORT_2026-07-24.md`.
+
+**POST-RESULT SPHERE-FIRST AUDIT (24 July 2026):** these exact Hadamard outputs are coordinate modes within one
+derived residual field. \(m_0\) is best read as common radial/decoherence deformation, while family, sign and
+interaction modes describe angular/label structure. They may be called coordinate children only in this
+representational sense; the test did not establish four physical child systems. Frozen gates remain unchanged.
+Consolidated audit: `analysis/quantum/Q10_Q14_SPHERE_FIRST_REEVALUATION_2026-07-24.md`.
+
+---
+
+### T270 - Q11 visible/unresolved Information³ relation
+
+**REGISTERED:** 24 July 2026, after Q10 outcomes were open but before calculating Q11 condition correlations,
+branch agreement, angular opposition, controls or residual fields | **STATUS:** CALIBRATED - 10/10 FROZEN GATES
+`[public-data, post-outcome parameter-free relation calibration]`
+
+**Question:** before declaring Q10's unresolved identity part of the larger quantum parent, test whether its
+independent purity-loss definition actually follows change in the visible compact Bell relation. Let
+\(V=K+R\), \(P=2(1-\operatorname{Tr}\rho^2)\), give each a local amplitude/direction plane, and freeze the
+unfitted anti-phase prediction \(C_P=-C_V\). Retain \(E=C_P+C_V\) as the unresolved relation/next child-search
+field. Compare against ridge-only, same-phase, amplitude-only and direction-only controls. Protocol SHA-256:
+`ce896f3796b46703bd7b4fd659c6172680781cf4087ece4f50271aa922fdcd75`.
+
+**Run/result:** amplitude correlations were `0.974314` Ramsey and `0.989231` Hahn; direction correlations were
+`0.765762` and `0.986616`. Opening/closing branch agreement was `84.09%` and `95.45%`; median angular opposition
+scores were `0.938439` and `0.999390`. Overall median two-axis error was `0.171070`. The unfitted anti-phase map
+improved mean error over ridge-only by `65.88%`/`85.43%` and over same-phase by `82.69%`/`92.62%`. Independent
+source-to-result recomputation reproduced every gate and audited record field with difference `0.0`.
+
+**Verdict/boundary:** **SUPPORTED:** independently defined purity loss moves in a strongly correlated anti-phase
+amplitude/direction relation to the visible compact Bell geometry on these records, so the two may faithfully be
+placed in a larger Information³ account with their residual retained. **EXPLORATORY:** residual amplitude
+repeated across states more strongly than residual direction, making it a candidate child-search axis rather
+than an established child. Q10 had already exposed an equivalent aggregate distance; both coordinates are
+different functions of the same measured density matrices. This is not independent experimental prediction,
+causality, identification of an environment, a new quantum law or proof of universal fractality. Report:
+`analysis/quantum/Q11_VISIBLE_UNRESOLVED_INFORMATION3_REPORT_2026-07-24.md`.
+
+**POST-RESULT SPHERE-FIRST AUDIT (24 July 2026):** \(V\) and \(P\) are complementary functions of the same
+measured parent density matrix. A standard compact Bell-core purity proxy reconstructed the measured purity-loss
+shape with correlations `0.999149` Ramsey and `0.995538` Hahn (MAE `0.035239` and `0.052120`). The anti-phase
+relation is retained as a strong same-sphere crosswalk, not evidence that \(V\) and \(P\) are independent
+physical children. Frozen gates remain unchanged. Consolidated audit:
+`analysis/quantum/Q10_Q14_SPHERE_FIRST_REEVALUATION_2026-07-24.md`.
+
+---
+
+### T269 - Q10 unresolved-\(H\) amplitude/opening relation plane
+
+**REGISTERED:** 24 July 2026, after Q9 outcomes were open but before calculating Q10 coordinates, quadrant
+allocations or loop diagnostics | **STATUS:** CALIBRATED - 9/9 FROZEN GATES
+`[public-data, post-outcome geometry-first instrument calibration]`
+
+**Question:** apply Dylan's correction that Q8/Q9's unresolved \(H\) is itself an ARA identity. Give it one local
+`0–2` amplitude cut, a perpendicular `0–2` opening/closing-rate cut and an ordered complex relation
+\(C_H=(x_H-1)+i(y_H-1)\). Test whether the resulting two-axis shape repeats across the four Bell identities,
+remains stable when \(H\) is independently defined from purity loss, and closes a complete observed loop.
+Protocol SHA-256: `0d2d19091b198efeffe7d5ef8fed205d5b02100fb5b14c82602f30fb0cb16d98`.
+
+**Run/result:** all `88` records formed eight valid eleven-point paths. Median cross-state amplitude correlations
+were `0.987945` in Ramsey and `0.983026` in Hahn. Median opening/closing-rate correlations were `0.459003` and
+`0.929915`. Repeating the two-axis construction with \(H_P=I_{\rm unresolved}/2\) gave median pointwise plane
+distance `0.171070`, under the frozen `0.25` gate. Every inverse, relation-plane and quadrant-account check passed
+to numerical precision. Independent recomputation reproduced all nine gate outcomes and every headline metric
+with maximum difference `0.0`.
+
+**Verdict/boundary:** **SUPPORTED:** \(H\) has a reproducible two-coordinate amplitude/direction representation on
+this source, and the ordered relation preserves information flattened by either scalar alone. **NOT
+ESTABLISHED:** none of the eight traces met the frozen full-loop criterion; the eleven-point window does not
+demonstrate a complete hidden cycle or identify the physical causes inside \(H\). The first six gates are
+instrument identities; empirical support resides in cross-state recurrence and agreement between the two
+independent \(H\) definitions. This is calibration on already-open data, not a forward prediction, new quantum
+law or proof of universal fractality. Report:
+`analysis/quantum/Q10_UNRESOLVED_TWO_AXIS_REPORT_2026-07-24.md`.
+
+**POST-RESULT SPHERE-FIRST AUDIT (24 July 2026):** the two-axis portrait remains a valid decompression of
+\(H\), but \(H\) is still a residual defined from the parent ledger. With no observed closed loop or independent
+physical boundary, Q10 establishes a reproducible partial phase portrait of `Other`, not an autonomous completed
+child sphere. Frozen gates remain unchanged. Consolidated audit:
+`analysis/quantum/Q10_Q14_SPHERE_FIRST_REEVALUATION_2026-07-24.md`.
+
+**POST-RESULT SELF-IDENTITY AUDIT (24 July 2026):** Q10's TE-ARA equation normalized time spent in four
+amplitude/direction quadrants to `2`. It did not perform the intended decomposition
+\(T_U=U_{\rm self}+O_U=2\). The amplitude/direction instrument remains calibrated, but unresolved \(H\) must
+remain a candidate Phase-B coordinate until a held-out self-participation test separates repeatable identity from
+state/protocol/environmental `Other`, followed by a separate Ramsey/Hahn coupling test. Full correction:
+`analysis/quantum/Q13_Q14_RAMSEY_HAHN_QUADRANT_REAUDIT_2026-07-24.md`.
+
+---
+
+### T268 - Q9 Information³ Bell closure and masked-child completion
+
+**REGISTERED:** 24 July 2026, after Q8 outcomes were open but before calculating the Q9 purity allocation or
+signed masked-child scores | **STATUS:** PARTIAL / NOT CALIBRATED - 5/9 FROZEN GATES
+`[public-data, post-outcome exact closure and masked completion]`
+
+**Question:** implement Dylan's Information³ lock at two nested quantum rungs. First, reconstruct each complete
+two-qubit parent from Child A, Child B and their relation tensor. Second, deliberately hide the perpendicular
+Bell child \(v\), infer its magnitude from visible \(u\) plus the parent radius, and use temporal neighbours to
+select its mirror sign. Split observable information into child, compact-relation, off-core-relation and
+unresolved-to-pure allocations. Protocol SHA-256:
+`621760a7fed6cbf0a9f5832b9cca198f7cb4b45469bde38ef636c0db57d82fad`.
+
+**Run/result:** the exact Pauli Information³ identity reconstructed all `88` physical density matrices with
+maximum Frobenius error `6.338e-16`; purity closure was exact to `2.220e-15`. Median measured off-core relation
+shares were only `0.015920` (Ramsey) and `0.019306` (Hahn). Q8's linear unresolved \(H\) tracked half the exact
+unresolved-to-pure information with correlation `0.981999` and MAE `0.076279`. However, across `72` masked
+interior values, signed completion MAE was `0.180487`, improvement over zero fill only `27.90%`, improvement over
+the positive-only branch `30.40%`, and sign accuracy `62.5%`; frozen requirements were `0.08`, `50%`, `50%` and
+`80%`. Independent validation matched every audited allocation/completion field with difference `0.0` and
+reproduced all gate outcomes.
+
+**Verdict/boundary:** **SUPPORTED:** two children plus their relation exactly close the measured two-qubit state;
+the compact Bell block dominates observed relation information; and Q8's unresolved coordinate strongly tracks
+loss of observable two-qubit purity. **NOT SUPPORTED:** the supplied parent magnitude and neighbouring scalar
+values do not reliably lock the hidden child's signed direction. The informative third must retain orientation,
+ordering or another independent cut. The result does not identify purity loss as a coherent environmental wave,
+obtain the parent radius without measurement or predict future data. Report:
+`analysis/quantum/Q9_INFORMATION3_BELL_COMPLETION_REPORT_2026-07-24.md`.
+
+---
+
+### T267 - Q8 Bell relation-plane and TE-ARA deconstruction
+
+**REGISTERED:** 24 July 2026, after Q7 outcomes were open but before calculating the Bell-family complex relation
+coordinates | **STATUS:** CALIBRATED - 11/11 FROZEN GATES
+`[public-data, post-outcome ARA deconstruction]`
+
+**Source/question:** reuse Q7's `88` checksum-pinned physical Bell-state trajectories from Zenodo DOI
+`10.5281/zenodo.14880901`. Test Dylan's clarification that ARA is itself the relation between Phase A and Phase B:
+can each Bell family be decompressed into two perpendicular relation cuts \(u,v\), recompressed as
+\(C=u+iv=Re^{i\theta}\), joined to persistent parity \(K=|ZZ|\), and closed through
+\(K+R+H=2\) without flattening the larger parent tensor?
+
+**Frozen method:** Phi uses \(u=(XX-YY)/2,\ v=(XY+YX)/2\); Psi uses
+\(u=(XX+YY)/2,\ v=(YX-XY)/2\). Reconstruct a fixed family-specific compact tensor from \(u,v,ZZ\); compare
+\((K,R,R)\) with its full singular values; locate the \(R<0.50\) transition; and infer the perpendicular-child
+magnitude from one cut plus the parent transverse radius. Protocol SHA-256:
+`725e307378d8ab8dbcaf31fa1d62dc2715d87f975bdbba0261ade1cc1a448eab`.
+
+**Run/result:** median compact-core tensor shares were `0.984080` in Ramsey and `0.980694` in Hahn; median
+singular-model MAE was `0.0221845`. At final Ramsey, persistent \(K\) retained median `0.932665` while phase
+radius \(R\) retained `0.055777`, a `0.876888` gap. The \(R<0.50\) transition aligned within one sample of Q7's
+one-strong-axis event for every state, and Hahn delayed it by `14.0262x`. The hidden perpendicular magnitude
+\(|v|\), reconstructed from one child and the parent transverse radius, had median absolute error `0.0120460`.
+Independent validation reproduced all `88` rows with maximum audited field difference `0.0` and all `11/11`
+gate outcomes.
+
+**Verdict/boundary:** the Bell parent can be compactly deconstructed into a persistent cut and a two-dimensional
+phase relation while retaining about `98%` of its measured tensor structure. This supports ARA as a precise
+relation-plane crosswalk here. \(H=2-K-R\) is unresolved `Other`, not a uniquely identified environmental wave or
+conserved energy; one visible cut plus radius fixes the hidden magnitude but not its sign. This is established
+Bell/Pauli/dephasing geometry expressed through ARA, not a blind prediction, replacement for tomography,
+derivation of quantum mechanics or proof of universal fractality. Report:
+`analysis/quantum/Q8_BELL_RELATION_PLANE_REPORT_2026-07-24.md`.
+
+---
+
+### T266 - Q7 physical Bell-decoherence trajectory
+
+**REGISTERED:** 24 July 2026, after source checksum/schema inspection and publication-level coarse lifetime
+disclosure but before programmatic opening of the held-out Pauli trajectories | **STATUS:** SUPPORTED - 8/8 PRIMARY
+GATES; HAHN REPLICATION SUPPORTED - 4/4 `[public-data, partially blinded reanalysis]`
+
+**Source:** Steinacker et al., *Bell inequality violation in gate-defined quantum dots*, Nature Communications
+16, 3606 (2025), DOI `10.1038/s41467-025-57987-0`; checksum-pinned public data DOI
+`10.5281/zenodo.14880901`. Four physically prepared Bell states were measured by tomography across eleven Ramsey
+waits and eleven Hahn-echo waits.
+
+**Frozen ARA claim:** inherit Q6B's physical density-matrix projection and `s_i>=0.50` strong-axis threshold.
+Directional dephasing should take each coherent three-axis parent toward a one-axis remnant rather than requiring
+isotropic `3->0` mixing. The second relation-axis contraction should remove physical CHSH violation, and Hahn echo
+should delay the transition by at least fourfold. The final six Ramsey waits were the primary numerical target.
+Protocol SHA-256: `ded5ef93c05815efdbbf7284376b40d91e4f1759c2d22541cc966a92416ed56c`.
+
+**Schema correction:** the source cells store density-expansion coefficients with `cII=0.25`, not normalized Pauli
+expectations. The exact, outcome-independent conversion `<ij>=4*cij` was applied after the first run exposed the
+factor-of-four scale error. No frozen gate changed; the original protocol hash remains intact.
+
+**Run/result:** all four Ramsey states began with three strong axes, became one-axis states at `16.02-20.02 us`,
+and crossed the physical Horodecki `Smax=2` boundary at `20.02-24.02 us`. At `40.02 us`, median dominant-axis
+retention was `93.36%`, versus `9.01%` for the second axis, an `84.35`-point retention gap. Under Hahn echo, all
+four retained three axes through `125.89 us` and first became one-axis/CHSH-failing states at `251.19 us`. The
+geometric-mean crossing delay was `11.45x`.
+
+**Verdict/boundary:** the directional `3->1` ARA relational-axis trajectory and its Hahn delay are
+**SUPPORTED** on this real public time-evolving source. Independent validation passed `28/28`. The paper already
+disclosed the coarse Ramsey/Hahn lifetime direction, so this is not blind discovery. It is established
+dephasing, dynamical-decoupling and Bell/Pauli/Horodecki physics expressed through ARA; it does not establish ARA
+superiority, derive quantum mechanics or prove universal fractality. Report:
+`analysis/quantum/Q7_BELL_DECOHERENCE_REPORT_2026-07-24.md`.
+
+---
+
+### T265 - Q6B physical CHSH coherence ladder
+
+**REGISTERED:** 24 July 2026, after Q6 exposed an unphysical raw-tensor Tsirelson violation but before any
+physical-density projection was calculated | **STATUS:** SUPPORTED - 20/20 GATES
+`[remedial post-hoc known-source calibration]`
+
+**Source:** the four checksum-locked public raw-current Bell tomography archives used in Q5/Q6, Figshare DOI
+`10.6084/m9.figshare.14160476.v2`.
+
+**Reason for amendment:** Q6's raw geometric ladder passed `16/16`, but `Phi-minus` gave
+`Smax=2.88579 > 2sqrt(2)=2.82843`. The unconstrained tomography coefficients therefore did not form a physical
+density matrix, making the raw CHSH interpretation invalid.
+
+**Frozen correction:** reconstruct the Hermitian linear two-qubit density matrix from all sixteen Pauli
+coefficients, project its eigenvalues onto the nonnegative unit-sum simplex while preserving eigenvectors, then
+recompute the nine-cut tensor, singular values and `Smax`. Equal-weight classical and uniform controls are formed
+only after each Bell estimate is physical. Protocol SHA-256:
+`cf6210ed172fc13a62dec5a1374a5d81c500380125e42bc41076ed86bbc82f55`.
+
+**Run/result:** all seven rows became positive-semidefinite, trace one and Tsirelson-bounded. The four physically
+prepared Bell states returned `Smax=2.6939, 2.6783, 2.5610, 2.5450`, each with three singular axes at least `0.50`
+and each above `2` in all `5,000` bootstrap draws. The reconstructed Phi/Psi classical controls returned
+`1.8783/1.8012`, one retained axis each and no bootstrap draw above `2.1`. The reconstructed uniform mixture
+returned `0.2382`, zero retained axes and no draw above `0.6`. The axis sequence was exactly
+`3,3,3,3 / 1,1 / 0`; mean Bell-minus-classical CHSH gap was `0.7798`.
+
+**Two-output verdict:** the physical-state-constrained ARA coherence ladder is **SUPPORTED as a bounded
+known-source calibration**. It shows that the Q5 parent relation separates coherent multi-axis, classical
+one-axis and mixed zero-axis closure under established Bell/Pauli/Horodecki physics. The classical and uniform
+rows are algebraic reconstructions, not separately prepared experiments. This is not blind prediction, discovery
+of entanglement, ARA superiority, proof of Information-cubed, universal fractality or quantum gravity.
+Independent validation passed `26/26`. Report:
+`analysis/quantum/Q6B_PHYSICAL_CHSH_COHERENCE_REPORT_2026-07-24.md`.
+
+---
+
+### T264 - Q6 raw-tensor CHSH ladder diagnostic
+
+**REGISTERED:** 24 July 2026, 12:23 AEST, after Q5 outcomes were open but before calculating correlation-tensor
+singular values | **STATUS:** SUPERSEDED - 16/16 GEOMETRIC GATES PASSED, PHYSICAL CHSH INTERPRETATION INVALID
+`[post-hoc diagnostic]`
+
+**Claim/test:** assemble each state's full `3x3` two-qubit correlation tensor, calculate singular values and the
+Horodecki `Smax`, and compare the four physically prepared Bell rows with equal-weight reconstructed classical and
+uniform controls. Frozen retained-axis prediction: `3,3,3,3 / 1,1 / 0`. Protocol SHA-256:
+`76e870ee7cb6a595dc0b8ad5a6504e0b1be3e80ddb0ecbf7b50345010926bfc7`.
+
+**Result:** the retained-axis ladder and all `16/16` registered gates passed, but the raw `Phi-minus` tensor had
+singular value `1.078` and `Smax=2.88579`, above the quantum Tsirelson limit. The protocol had omitted a necessary
+physical-density condition. Passing the frozen gates therefore does not license a CHSH claim.
+
+**Verdict:** retained as a methodology diagnostic and superseded by T265/Q6B. No threshold was silently changed.
+Report: `analysis/quantum/Q6_CHSH_RAW_TENSOR_DIAGNOSTIC_2026-07-24.md`.
+
+---
+
+### T263 - Q5 public four-Bell-state parent/child replication
+
+**REGISTERED:** 24 July 2026, 11:55 AEST, after Figshare metadata and ideal Bell/Pauli patterns were inspected but
+before the three additional archives were downloaded or opened | **STATUS:** SUPPORTED - 37/37 GATES
+`[pre-registered; three untouched public real-tomography replications]`
+
+**Source:** Madzik and Asaad, “Figure 2 — Bell states tomography,” Figshare DOI
+`10.6084/m9.figshare.14160476.v2`, four checksum-locked archives for the declared `Phi-plus`, `Phi-minus`,
+`Psi-plus` and `Psi-minus` prepared states.
+
+**Fidelity/prediction:** inherit Q4's raw-current decoder, projection groups, thresholds and affine ARA map without
+retuning. All four states should have local children near ARA `1.0` while the ordered parent cuts occupy four
+distinct pole patterns: `Phi-plus=(+,-,+)`, `Phi-minus=(-,+,+)`, `Psi-plus=(+,+,-)`,
+`Psi-minus=(-,-,-)` in `XX/YY/ZZ` expectation coordinates. Frozen protocol:
+`analysis/quantum/Q5_BELL_FOUR_STATE_PROTOCOL_v1_FROZEN.md`; SHA-256
+`c97459781f38730cfd623820cc7428b1ae24a366c284ca0c45202a21246a206b`.
+
+**Primary gates:** all `32/32` per-state gates and all `5/5` cross-state gates, including `4/4` correct labels,
+four distinct sign patterns, minimum parent-vector distance `>=1.00`, and `>=90%` record-bootstrap label
+stability for each state.
+
+**Run/result:** the three untouched states and the prior Q4 state returned
+`Phi-plus=(+0.8533,-0.9400,+0.9467)`, `Phi-minus=(-0.9500,+0.9500,+0.9500)`,
+`Psi-plus=(+0.8550,+0.7967,-0.9267)`, and `Psi-minus=(-0.8350,-0.8817,-0.8500)`.
+Local-child mean magnitudes ranged `0.0333–0.0725`; same-axis parent means ranged `0.8556–0.9500`. The minimum
+parent-vector separation was `2.3830`, and the correct four-label assignment ranked `1/24`. Every state remained
+correct in all `2,000` of its bootstrap draws. All `37/37` gates passed.
+
+**Two-output verdict:** the frozen ARA relational-parent and non-flattening crosswalk is **SUPPORTED across all
+four prepared states in this deposit**. The result is genuinely pre-outcome for three archives. Bell/Pauli
+structure is established quantum mechanics and ARA is an affine coordinate account, so this is not discovery of
+entanglement, superiority to tomography, cross-device replication, proof of universal fractality or a new
+quantum law. Independent validation passed `20/20`. Report:
+`analysis/quantum/Q5_BELL_FOUR_STATE_REPORT_2026-07-24.md`.
+
+---
+
+### T262 - Q4 public Bell parent/child tomography
+
+**REGISTERED:** 24 July 2026, after public metadata, the associated paper and ZIP member names were inspected but
+before raw current values, analysis-script contents, figures or reconstructed outcomes were opened | **STATUS:**
+SUPPORTED - 8/8 GATES `[pre-registered; public real-tomography benchmark]`
+
+**Source:** Madzik and Asaad, “Figure 2 — Bell states tomography,” Figshare DOI
+`10.6084/m9.figshare.14160476.v2`, selected file `UPUP-DOWNDOWN.zip`, file ID `26690663`, MD5
+`8cd8a5f2b3b9a2ccd090e47312bcc390`, CC BY 4.0. The associated open paper declares fifteen linearly independent
+two-qubit Pauli projections obtained through parity readout.
+
+**Fidelity/prediction:** the selected filename declares the prepared
+`(|up up> - |down down>)/sqrt(2)` Bell state. Before values were opened, the frozen standard-quantum/ARA
+translation predicts locally ridge-like child cuts (`XI,YI,ZI,IX,IY,IZ` near ARA `1.0`) but a structured parent
+relation with `XX<0`, `YY>0`, `ZZ>0`. Under `x_P=1-<P>`, the ideal pattern is `XX=2`, `YY=ZZ=0`, with all twelve
+other cuts at `1`.
+
+**Primary gates:** local-child mean absolute expectation `<=0.20`; correct `XX/YY/ZZ` signs; weakest same-axis
+magnitude `>=0.50`; same-axis versus local magnitude contrast `>=0.40`; mixed-pair mean magnitude `<=0.25`;
+correlation product `<=-0.125`; closest ideal Bell pattern `Phi-minus` with MAE margin `>=0.20`; and exact
+ARA/Pauli plus pole-reversal identities. All must pass.
+
+**Falsifier/boundary:** clean gate failure gives `NOT SUPPORTED`; ambiguity preventing defensible raw-current
+reconstruction gives `INCONCLUSIVE`. A pass would show a real Bell record in which quiet local child cuts coexist
+with strong parent correlations. It would remain an established Pauli/stabilizer pattern expressed through ARA,
+not discovery of entanglement, proof of Information-cubed, universal fractality or new quantum physics. Frozen
+protocol: `analysis/quantum/Q4_BELL_PARENT_CHILD_PROTOCOL_v1_FROZEN.md`; SHA-256
+`3972e2dca1498b703245fbe82e8c9ac6e7bc44066abb931dc8998731f86b431f`.
+
+**Run/result:** the checksum-verified raw currents yielded `XX=-0.95`, `YY=+0.95`, `ZZ=+0.95`. The six local
+child expectations averaged `0.05833` in absolute magnitude, the six mixed-pair controls averaged `0.11250`, and
+the same-axis parent correlations averaged `0.95`. Parent-minus-child magnitude was `0.89167`; the signed
+three-correlation product was `-0.857375`. The `Phi-minus` ideal was closest with MAE `0.05` and a `1.26667`
+margin over the runner-up. All `8/8` frozen gates passed.
+
+**Two-output verdict:** the frozen real-data parent/child crosswalk is **SUPPORTED**. Locally ridge-like child
+marginals coexist with a strongly structured parent relation in the expected Bell sign pattern. The Pauli/ARA
+coordinate equality is an exact affine translation and the Bell structure is established quantum mechanics, so
+this is not ARA superiority, discovery of entanglement, or proof of Information-cubed or universal fractality.
+The archive contains one complete tomography set; record bootstrap is not independent device/state replication.
+Independent validation passed `21/21`. Report:
+`analysis/quantum/Q4_BELL_PARENT_CHILD_REPORT_2026-07-24.md`.
+
+---
+
+### T261 - Q3 ridge-normal quantum-output cut calibration
+
+**REGISTERED:** 24 July 2026, after Q2 numerical values and outcomes were already open | **STATUS:** CALIBRATED -
+7/7 GATES `[post-hoc known-source geometric calibration; not independent evidence]`
+
+**Source:** the same DOI-pinned Arnold-Werner superconducting-qubit I/Q archive used by T259, with six complete
+hardware conditions and `50,000` ground plus `50,000` excited paired shots per condition.
+
+**Fidelity:** for an Information-facing question on a two-cut measurement plane, whiten using training data,
+locate the equal-class ridge, point Phase A perpendicular to that ridge toward the changing class, and retain the
+ridge-tangent direction as the Phase-B/control cut. In standard terms these are the Fisher/LDA discriminant normal
+and its orthogonal tangent. Fidelity packet:
+`analysis/quantum/Q3_RIDGE_NORMAL_CUT_FIDELITY_v1.md`.
+
+**Claim/test:** in six leave-one-condition-out folds, estimate the covariance, midpoint and Phase-A orientation
+from five conditions only. Score the untouched sixth condition along Phase A, the perpendicular Phase-B control
+and an independently computed raw-I/Q LDA. Measure the held-out centroid direction and sweep the cut through
+`0-179°` descriptively.
+
+**Calibration gates:** exact Phase-A/raw-LDA decisions; Phase-A balanced accuracy `>=0.80`; Phase-B/control
+balanced accuracy in `[0.40,0.60]`; mean and worst Phase-A held-out separation share `>=0.90` and `>=0.75`;
+training tangent residual `<=1e-12`; and exact pole-reversal invariance. Frozen protocol:
+`analysis/quantum/Q3_RIDGE_NORMAL_CUT_PROTOCOL_v1_FROZEN.md`; SHA-256
+`fddffb5716262b8d68e6f185a2eae80d015176e06776491151aff5642f23a423`.
+
+**Run/result:** all `7/7` calibration gates passed. Phase-A and raw-I/Q LDA scored `0.882808` and made zero
+different decisions. The perpendicular Phase-B control scored `0.496607`. Held-out centroid separation lay
+`99.1162%` on Phase A on average and `96.3241%` in the worst fold. Pole reversal produced zero disagreements, and
+the best one-degree sweep angle was within `0-2°` of the training Phase-A direction in five folds and exactly
+`0°` in the larger-shift sixth fold.
+
+**Verdict/boundary:** the ARA cut instruction is **CALIBRATED** as a faithful translation of standard
+Fisher/LDA geometry on this known source, and its training-defined orientation remained stable across the
+held-out hardware conditions. This is not new quantum physics, not ARA superiority over LDA, and not independent
+evidence for universal Information/Connection axes because T259's data were already open. Independent validation
+passed `18/18`. Report:
+`analysis/quantum/Q3_RIDGE_NORMAL_CUT_CALIBRATION_2026-07-24.md`.
+
+---
+
+### T260 - H1 public hydraulic connection-rich two-cut test
+
+**REGISTERED:** 24 July 2026, 09:10 AEST, after public metadata inspection and before the numerical archive was
+downloaded or opened | **STATUS:** SUPPORTED — 8/8 GATES `[pre-registered; public real-hardware benchmark]`
+
+**Source:** Helwig, Pignanelli and Schütze, “Condition monitoring of hydraulic systems,” UCI Machine Learning
+Repository dataset 447, DOI `10.24432/C5CW21`, CC BY 4.0. Public metadata declares `2,205` experimental 60-second
+cycles, six synchronized `100 Hz` pressure sensors and imposed four-level accumulator condition.
+
+**Fidelity:** Q2's real quantum readout was an information-heavy boundary in which one I axis already carried
+nearly all class separation. H1 tests the complementary prediction on a literal connection/storage component
+embedded in a distributed hydraulic pressure network. One pressure sensor is one spatial cut through a completed
+cycle; two sensors are two cuts through the same identity. Fidelity packet:
+`analysis/hydraulics/H1_PUBLIC_HYDRAULIC_TWO_CUT_FIDELITY_v1.md`, SHA-256
+`2e1a6c660fb591c822d322d6463dbef7972426e0dd0a05f0e27e745e684392ac`.
+
+**Claim/test:** represent each `PS1`–`PS6` cycle using twelve fixed five-second mean and standard-deviation windows.
+Use nested grouped cross-validation to select the best pressure sensor and best distinct sensor pair on training
+data only. Hold out complete consecutive 15-cycle groups in five outer folds. Compare shrinkage LDA on the
+training-calibrated two-cut ARA coordinates against the selected one-cut account and an independently fitted
+same-information raw pair.
+
+**Primary gates:** pair balanced accuracy `>=0.75`; pair gain `>=+0.03`; paired 95% bootstrap lower bound `>0`;
+worst accumulator-class recall `>=0.60`; pair wins at least `4/5` outer folds; raw/ARA pair exact tie with zero
+disagreements; pole reversal gives zero disagreements; and 100 deterministic label permutations remain at chance
+(`mean <=0.30`, `95th percentile <=0.35`). All eight gates must pass.
+
+**Falsifier/boundary:** any clean gate failure prevents support. If source structure cannot provide at least four
+valid complete-class outer folds, classify `BLOCKED`. A pass would show that two real spatial pressure cuts retain
+held-out accumulator-state information absent from the best single cut. It would not establish a universal
+connection law, new hydraulic physics, universal fractality or general superiority over standard monitoring.
+Frozen protocol: `analysis/hydraulics/H1_PUBLIC_HYDRAULIC_TWO_CUT_PROTOCOL_v1_FROZEN.md`; SHA-256
+`bd23be7b65468eec5ccee020f41294636bd714b40276896cf0b409d8541bd391`.
+
+**Run/result:** all `2,205` cycles were scored once through five whole-group outer folds. The training-selected
+single cut was `PS3` and the selected pair was `PS1+PS3` in every fold. Two-cut balanced accuracy was `0.877304`
+versus `0.711848` for one cut, a gain of `+0.165456` (`+16.55` percentage points) with paired 95% interval
+`[+0.123947,+0.210383]`. The pair won `5/5` folds; worst class recall was `0.729549`. All eight frozen gates
+passed.
+
+**Two-output verdict:** the bounded connection-rich multi-cut claim is **SUPPORTED** on this public real-hardware
+system. An independently fitted same-information raw LDA had identical balanced accuracy and zero prediction
+disagreements, so the ARA coordinate bridge is also supported as an exact affine translation. When the second
+sensor's twelve within-cycle bins were shifted, accuracy collapsed to `0.266827`, showing that synchronized
+cross-cut relation—not merely a second column—carried the added information.
+
+**Controls/boundary:** `500` training-label permutations averaged `0.260568` with 95th percentile `0.310884`;
+pole reversal produced zero disagreements. A random forest on the same selected pair reached `0.955753`, so this
+is not evidence that ARA is the best predictive algorithm. It does not prove a universal Connection/Space law,
+universal fractality, TE-ARA ontology, phi or new hydraulic physics. The contrast with Q2 is a two-dataset
+replication direction, not yet a universal connection-versus-information rule. Independent validation passed
+`26/26`. Full report:
+`analysis/hydraulics/H1_PUBLIC_HYDRAULIC_TWO_CUT_REPORT_2026-07-24.md`.
+
+---
+
+### T259 - Q2 public-hardware I/Q ARA generalisation
+
+**REGISTERED:** 24 July 2026, 06:47 AEST, after public metadata/manifest/schema inspection and before numerical
+shot values | **STATUS:** NOT SUPPORTED - 4/7 GATES `[pre-registered; public real-hardware benchmark]`
+
+**Source:** Arnold and Werner, “All-optical superconducting qubit readout,” immutable Zenodo DOI
+`10.5281/zenodo.14033026`. Archive SHA-256:
+`73F3E2CA7B3658452B4C171532C751E96D7392DCB8741B87A18E28C7073D67FD`. Six conditions contain `50,000`
+paired I/Q shots per ground/excited class, plus second-readout and prepared-file replications. Only source metadata,
+file names and variable shapes/types were inspected before freeze.
+
+**Fidelity:** Q2 inherits Q1’s one-cut-versus-coupled-cuts geometry but narrows the measured object to real
+readout output. I and Q are hardware quadratures, not Bloch X/Y/Z axes. The ARA map is a reversible training-only
+affine calibration of two cuts; it may not be described as state tomography. Fidelity packet:
+`analysis/quantum/Q2_PUBLIC_HARDWARE_IQ_FIDELITY_v1.md`.
+
+**Claim/test:** use six leave-one-condition-out folds. Compare a training-selected fixed I-or-Q linear
+discriminant with a two-cut ARA-coordinate discriminant. Independently fit raw I/Q LDA as the equal-information
+control. Retain pole reversal, training-label shuffle, shot-pair destruction and exact complement audits. Source
+thresholds, angles and fidelities are prohibited.
+
+**Primary gates:** two-cut balanced accuracy `>=0.80`; gain over the training-selected one cut `>=+0.005`; paired
+bootstrap 95% lower bound for that gain `>0`; worst held-out condition `>=0.70`; raw-I/Q and ARA accuracy
+difference `<=1e-12` with zero prediction disagreements; zero pole-reversal disagreements and complement residual
+`<=1e-12`; label-shuffle accuracy `<=0.55`. All seven gates must pass.
+
+**Falsifier/boundary:** any clean gate failure prevents support. A pass would show that two real output cuts retain
+held-out readout information absent from one selected native cut while ARA and standard LDA agree under equal
+information. It would not reconstruct the qubit state, derive quantum mechanics, prove universal fractality or
+establish a hidden Phase B. Frozen protocol:
+`analysis/quantum/Q2_PUBLIC_HARDWARE_IQ_PROTOCOL_v1_FROZEN.md`; protocol SHA-256:
+`baeaee364d4eaca7f013bd6c7d8d5e2bfffcd14b7e77010f8b46d7a89dbd0311`.
+
+**Run/result:** the six untouched hardware-condition folds contained `600,000` held-out classifications. Two-cut
+ARA balanced accuracy was `0.882808`, while the training-selected one-cut comparator was `0.882838`, for a gain
+of `-0.000030` (`-0.0030` percentage points). The paired 95% bootstrap interval was `[-0.000147,+0.000050]`.
+Worst-condition ARA accuracy was `0.758340`. Every fold selected I; Q alone scored `0.578943`. The second-readout
+and both prepared-file replications also returned slightly negative two-cut gains. QDA added only a small amount.
+
+**Two-output verdict:** the strong claim that two real output cuts retain held-out information absent from the best
+native one-cut reading is **NOT SUPPORTED** (`4/7` gates). The coordinate crosswalk is **SUPPORTED AS AN EXACT
+TRANSLATION**: independently fitted raw-I/Q LDA and ARA-coordinate LDA had identical accuracy and zero prediction
+disagreements, and pole reversal/complement checks were exact to machine precision. This equivalence is expected
+for an invertible affine coordinate change and is not new quantum physics. The result establishes a useful
+boundary: the source's state separation was already almost entirely aligned with I, so decompression could not
+recover information that Q did not contain.
+
+**Control audit:** the frozen one-shot label-shuffle gate failed at `0.733465`, but its complemented labels score
+`0.266535`; the paired mean is chance. This exposes that G7 was under-specified for a randomly oriented 2-D
+hyperplane. The frozen failure is retained, and the verdict does not depend on G7 because the decisive gain gates
+G2 and G3 independently failed. Independent validation passed `19/19`. Full report:
+`analysis/quantum/Q2_PUBLIC_HARDWARE_IQ_REPORT_2026-07-24.md`.
+
+---
+
+### T258 - Q1 open-qubit multi-axis ARA fidelity
+
+**REGISTERED:** 23 July 2026, 23:18 AEST, before development data, target data, code or outcomes | **STATUS:** SUPPORTED — 9/9 GATES `[pre-registered; synthetic known-referee instrument test]`
+
+**Fidelity:** one ARA diameter is a real but incomplete line cut through one qubit identity. Independent `X`, `Y`
+and `Z` cuts remain on the same rung and must preserve distinctions hidden from one compressed cut. Dylan rated
+this translation `EXACT ENOUGH TO TEST`. Fidelity packet:
+`analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_FIDELITY_v1.md`.
+
+**Claim/test:** generate fresh finite-shot observations from four standard open-qubit mechanisms that all start
+from the same state: unitary rotation, pure dephasing, longitudinal relaxation and combined
+rotation-relaxation. Reconstruct three coupled ARA cuts, classify the mechanism from frozen direction, relaxation
+and ridge-coherence features, and predict unseen directional cuts.
+
+**Primary gates at 128 shots:** four-class accuracy `>=0.90`; improvement over a one-axis `Z` account `>=0.30`;
+rotation-direction accuracy `>=0.90`; unitary-versus-dephasing ridge accuracy `>=0.95`; held-out directional MAE
+`<=0.08`; exact same-information agreement with an independently implemented Bloch account
+(`max difference <=1e-12`, zero classification disagreements); and both time-shuffled and axis-shuffled accuracy
+`<=0.65`. All gates must pass.
+
+**Rivals/controls:** one-axis `Z`, same-information Bloch reconstruction, a fixed-grid native four-model fit,
+common time shuffle, axis-label shuffle, raw unphysical reconstruction, zero-transverse held-out prediction, a
+shot-count ladder and paired uncertainty intervals.
+
+**Falsifier/boundary:** any clean primary-gate failure prevents support. A pass would validate the value of
+decompressing one diameter into several measured cuts and the exact ARA/Bloch coordinate bridge. It would not
+derive quantum mechanics, prove hidden Phase B ontology or universal fractality, or establish superiority over
+standard tomography. Frozen protocol:
+`analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_PROTOCOL_v1_FROZEN.md`.
+
+**Run/result:** the development-only thresholds were applied unchanged to `512` fresh primary trials. Three-axis
+ARA classified `511/512` (`0.998047`) versus the exact paired `Z`-only ceiling of `256/512` (`0.500000`), a gain
+of `+0.498047`. Rotation direction and unitary-versus-dephasing ridge classification were both `256/256`.
+Held-out directional MAE was `0.061123`. The same-information Bloch account was identical to machine precision
+(zero state/feature difference and zero disagreements), while the fixed-grid native quantum-model fit scored
+`512/512`. Time and axis shuffles fell to `0.455078` and `0.523438`.
+
+**Two-output verdict:** the frozen **benchmark is SUPPORTED** (`9/9` gates), and the **geometry crosswalk is
+SUPPORTED**: several independently measured ARA diameters retain direction and radius information that one
+diameter discards. This is not an ARA advantage over tomography; ARA and Bloch were exactly the same
+equal-information reconstruction. The result is synthetic and does not derive quantum mechanics, establish a
+hidden Phase B, universal fractality, phi or quantum gravity. Independent validation passed `14/14`. Report:
+`analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_REPORT_2026-07-23.md`.
+
+---
+
 ### T257 - O2-A3 ARA fixed lineage versus causal state-space tracking
 
 **REGISTERED:** 23 July 2026, 22:32 AEST, before O2-A3 target outcomes | **STATUS:** GOOD ABSOLUTE TRACKING / MIXED COMPARATIVE RESULT `[pre-registered; synthetic matched comparator]`

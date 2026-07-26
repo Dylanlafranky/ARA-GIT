@@ -1,0 +1,180 @@
+{
+  "test_id": "Q13-RAMSEY-HAHN-LATENT-CHILD-v1",
+  "ledger_id": "T272",
+  "test_class": "post-outcome held-out latent-coordinate test",
+  "protocol_sha256": "17b6a9bb93e845842e12289d98eda6390b9881be15ce6f996bd8a5b8e6588021",
+  "verdict": "PARTIAL / NOT CALIBRATED",
+  "summary": {
+    "selected_candidate": "H_B",
+    "selected_phase_assignment": "B_unresolved",
+    "candidate_summaries": {
+      "R_A": {
+        "amplitude": {
+          "median_reduction": 0.9276765195534127,
+          "mean_reduction": 0.9326607618941053,
+          "median_rank_one_share": 0.999999450801347,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.111096830388696,
+          "mean_reduction": 0.04447940958471841,
+          "median_rank_one_share": 0.9180599629699329,
+          "median_sign_agreement": 1.0
+        }
+      },
+      "R_B": {
+        "amplitude": {
+          "median_reduction": 0.8646947378240919,
+          "mean_reduction": 0.869135036509493,
+          "median_rank_one_share": 0.9999989803057832,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.06747293666701037,
+          "mean_reduction": 0.0682687083228842,
+          "median_rank_one_share": 0.9649804334894225,
+          "median_sign_agreement": 0.0
+        }
+      },
+      "H_A": {
+        "amplitude": {
+          "median_reduction": 0.9168981280177999,
+          "mean_reduction": 0.9199320837487694,
+          "median_rank_one_share": 0.9999779194538495,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.11533102648779264,
+          "mean_reduction": 0.0753722787868801,
+          "median_rank_one_share": 0.9710950270868506,
+          "median_sign_agreement": 0.6666666666666666
+        }
+      },
+      "H_B": {
+        "amplitude": {
+          "median_reduction": 0.9161357957384666,
+          "mean_reduction": 0.9206283503874642,
+          "median_rank_one_share": 0.9999856454178864,
+          "median_sign_agreement": 1.0
+        },
+        "direction": {
+          "median_reduction": 0.1263818770901387,
+          "mean_reduction": 0.10546909377338423,
+          "median_rank_one_share": 0.9828037317766187,
+          "median_sign_agreement": 0.3333333333333333
+        }
+      }
+    },
+    "rank_one_shares": {
+      "amplitude": 0.9999856454178864,
+      "direction": 0.9828037317766187
+    },
+    "sign_agreement": {
+      "amplitude": 1.0,
+      "direction": 0.3333333333333333
+    },
+    "fold_winners": {
+      "Phi-plus": "H_B",
+      "Phi-minus": "R_B",
+      "Psi-plus": "H_B",
+      "Psi-minus": "R_A"
+    },
+    "selected_fold_wins": 2,
+    "null": {
+      "permutations": 999,
+      "seed": 27013,
+      "selected_candidate": "H_B",
+      "observed_amplitude": 0.9161357957384666,
+      "observed_direction": 0.1263818770901387,
+      "observed_composite": 0.5212588364143027,
+      "p_amplitude": 0.001,
+      "p_direction": 0.336,
+      "p_composite": 0.001,
+      "null_amplitude_q99": 0.44344236387217123,
+      "null_direction_q95": 0.30442144021046513,
+      "null_composite_q95": 0.19180093271702575
+    },
+    "gates_passed": 6,
+    "gates_total": 10
+  },
+  "gates": [
+    {
+      "gate_id": "L1",
+      "description": "44 complete cells contain four finite children",
+      "passed": true,
+      "value": {
+        "cells": 44,
+        "finite": true
+      }
+    },
+    {
+      "gate_id": "L2",
+      "description": "every fold uses 33 training and 11 held-out rows",
+      "passed": true,
+      "value": true
+    },
+    {
+      "gate_id": "L3",
+      "description": "selected candidate is unresolved Phase B",
+      "passed": true,
+      "value": "H_B"
+    },
+    {
+      "gate_id": "L4",
+      "description": "selected amplitude covariance reduction >= 0.60",
+      "passed": true,
+      "value": 0.9161357957384666
+    },
+    {
+      "gate_id": "L5",
+      "description": "selected direction covariance reduction >= 0.25",
+      "passed": false,
+      "value": 0.1263818770901387
+    },
+    {
+      "gate_id": "L6",
+      "description": "selection-corrected amplitude p <= 0.01",
+      "passed": true,
+      "value": 0.001
+    },
+    {
+      "gate_id": "L7",
+      "description": "selection-corrected direction p <= 0.05",
+      "passed": false,
+      "value": 0.336
+    },
+    {
+      "gate_id": "L8",
+      "description": "median rank-one share >= 0.70 on both axes",
+      "passed": true,
+      "value": {
+        "amplitude": 0.9999856454178864,
+        "direction": 0.9828037317766187
+      }
+    },
+    {
+      "gate_id": "L9",
+      "description": "median induced-relation sign agreement >= 2/3 on both axes",
+      "passed": false,
+      "value": {
+        "amplitude": 1.0,
+        "direction": 0.3333333333333333
+      }
+    },
+    {
+      "gate_id": "L10",
+      "description": "same candidate wins at least 3/4 held-out states",
+      "passed": false,
+      "value": {
+        "selected_wins": 2,
+        "fold_winners": {
+          "Phi-plus": "H_B",
+          "Phi-minus": "R_B",
+          "Psi-plus": "H_B",
+          "Psi-minus": "R_A"
+        }
+      }
+    }
+  ],
+  "boundary": "This matched-ordinal-stage test conditions on the deliberately revealed hidden candidate. It tests structural mediation across Bell identities, not recovery of an unmeasured variable or a pulse-resolved Ramsey-to-Hahn temporal handoff."
+}

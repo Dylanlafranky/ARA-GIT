@@ -1,0 +1,586 @@
+{
+  "protocol_id": "Q5-BELL-FOUR-STATE-v1",
+  "ledger_id": "T263",
+  "verdict": "SUPPORTED",
+  "gates_passed": 37,
+  "gates_total": 37,
+  "per_state_gates_passed": 32,
+  "per_state_gates_total": 32,
+  "cross_state_gates_passed": 5,
+  "cross_state_gates_total": 5,
+  "source": {
+    "doi": "10.6084/m9.figshare.14160476.v2",
+    "license": "CC BY 4.0",
+    "archive_md5s": {
+      "Phi-plus": "3275210b912d51e5f10ba99d93ad6ca5",
+      "Phi-minus": "8cd8a5f2b3b9a2ccd090e47312bcc390",
+      "Psi-plus": "43f782ed4404b01393fb57a2da5d1534",
+      "Psi-minus": "1724b4484ffb88e41dbac5f50981e91a"
+    }
+  },
+  "protocol_sha256": "c97459781f38730cfd623820cc7428b1ae24a366c284ca0c45202a21246a206b",
+  "decoder": {
+    "offset": 32766,
+    "scale": 3.0519e-05,
+    "current_threshold": 0.1,
+    "state_threshold": 0.5,
+    "readouts_per_state_segment": 40
+  },
+  "states": {
+    "Phi-plus": {
+      "archive": "UPUP+DOWNDOWN.zip",
+      "file_id": 26690666,
+      "archive_md5": "3275210b912d51e5f10ba99d93ad6ca5",
+      "orientation_timestamps": {
+        "II": "183730",
+        "IX": "185433",
+        "IY": "190045",
+        "XI": "190657",
+        "XX": "191311",
+        "XY": "191932",
+        "YI": "192544",
+        "YX": "193149",
+        "YY": "193748"
+      },
+      "records_per_orientation": 300,
+      "expectations": {
+        "II": 0.9933333333333333,
+        "IX": 0.026666666666666644,
+        "IY": 0.060000000000000026,
+        "IZ": 0.033333333333333326,
+        "XI": -0.013333333333333308,
+        "XX": 0.8533333333333333,
+        "XY": 0.24666666666666662,
+        "XZ": -0.11333333333333337,
+        "YI": -0.06666666666666668,
+        "YX": 0.2933333333333333,
+        "YY": -0.94,
+        "YZ": 0.013333333333333336,
+        "ZI": 0.0,
+        "ZX": 0.10666666666666666,
+        "ZY": 0.006666666666666682,
+        "ZZ": 0.9466666666666667
+      },
+      "metrics": {
+        "local_child_mean_abs": 0.03333333333333333,
+        "same_axis_mean_abs": 0.9133333333333332,
+        "same_axis_min_abs": 0.8533333333333333,
+        "same_minus_local": 0.8799999999999999,
+        "mixed_pair_mean_abs": 0.12999999999999998,
+        "correlation_product": -0.7593528888888889
+      },
+      "bell_mae": {
+        "Phi-plus": 0.08666666666666671,
+        "Phi-minus": 1.2822222222222222,
+        "Psi-plus": 1.3444444444444443,
+        "Psi-minus": 1.2866666666666668
+      },
+      "closest_parent": "Phi-plus",
+      "runner_up_parent": "Phi-minus",
+      "bell_margin": 1.1955555555555555,
+      "bootstrap_label_stability": 1.0,
+      "gates": {
+        "S1_local_child_mean_abs_at_most_0p20": {
+          "value": 0.03333333333333333,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S2_same_axis_signs_match_target": {
+          "observed": [
+            1,
+            -1,
+            1
+          ],
+          "target": [
+            1,
+            -1,
+            1
+          ],
+          "pass": true
+        },
+        "S3_weakest_same_axis_abs_at_least_0p50": {
+          "value": 0.8533333333333333,
+          "threshold": 0.5,
+          "pass": true
+        },
+        "S4_same_minus_local_at_least_0p40": {
+          "value": 0.8799999999999999,
+          "threshold": 0.4,
+          "pass": true
+        },
+        "S5_mixed_pair_mean_abs_at_most_0p25": {
+          "value": 0.12999999999999998,
+          "threshold": 0.25,
+          "pass": true
+        },
+        "S6_correlation_product_at_most_negative_0p125": {
+          "value": -0.7593528888888889,
+          "threshold": -0.125,
+          "pass": true
+        },
+        "S7_declared_parent_closest_with_margin": {
+          "closest": "Phi-plus",
+          "closest_mae": 0.08666666666666671,
+          "runner_up": "Phi-minus",
+          "runner_up_mae": 1.2822222222222222,
+          "margin": 1.1955555555555555,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S8_affine_and_reversal_residuals": {
+          "affine": 0.0,
+          "reversal": 0.0,
+          "threshold": 1e-12,
+          "pass": true
+        }
+      },
+      "gates_passed": 8,
+      "gates_total": 8
+    },
+    "Phi-minus": {
+      "archive": "UPUP-DOWNDOWN.zip",
+      "file_id": 26690663,
+      "archive_md5": "8cd8a5f2b3b9a2ccd090e47312bcc390",
+      "orientation_timestamps": {
+        "II": "115025",
+        "IX": "115222",
+        "IY": "115424",
+        "XI": "115627",
+        "XX": "115835",
+        "XY": "120033",
+        "YI": "120230",
+        "YX": "120428",
+        "YY": "120626"
+      },
+      "records_per_orientation": 80,
+      "expectations": {
+        "II": 0.9999999999999999,
+        "IX": -0.125,
+        "IY": -0.07499999999999996,
+        "IZ": 0.04999999999999993,
+        "XI": 0.0,
+        "XX": -0.9500000000000002,
+        "XY": -0.19999999999999996,
+        "XZ": 0.07499999999999998,
+        "YI": 0.04999999999999999,
+        "YX": -0.17499999999999993,
+        "YY": 0.9500000000000001,
+        "YZ": -0.14999999999999997,
+        "ZI": 0.04999999999999993,
+        "ZX": -0.025000000000000022,
+        "ZY": -0.04999999999999999,
+        "ZZ": 0.95
+      },
+      "metrics": {
+        "local_child_mean_abs": 0.0583333333333333,
+        "same_axis_mean_abs": 0.9500000000000002,
+        "same_axis_min_abs": 0.95,
+        "same_minus_local": 0.8916666666666668,
+        "mixed_pair_mean_abs": 0.11249999999999998,
+        "correlation_product": -0.8573750000000001
+      },
+      "bell_mae": {
+        "Phi-plus": 1.3166666666666667,
+        "Phi-minus": 0.04999999999999993,
+        "Psi-plus": 1.3166666666666667,
+        "Psi-minus": 1.3166666666666667
+      },
+      "closest_parent": "Phi-minus",
+      "runner_up_parent": "Phi-plus",
+      "bell_margin": 1.2666666666666666,
+      "bootstrap_label_stability": 1.0,
+      "gates": {
+        "S1_local_child_mean_abs_at_most_0p20": {
+          "value": 0.0583333333333333,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S2_same_axis_signs_match_target": {
+          "observed": [
+            -1,
+            1,
+            1
+          ],
+          "target": [
+            -1,
+            1,
+            1
+          ],
+          "pass": true
+        },
+        "S3_weakest_same_axis_abs_at_least_0p50": {
+          "value": 0.95,
+          "threshold": 0.5,
+          "pass": true
+        },
+        "S4_same_minus_local_at_least_0p40": {
+          "value": 0.8916666666666668,
+          "threshold": 0.4,
+          "pass": true
+        },
+        "S5_mixed_pair_mean_abs_at_most_0p25": {
+          "value": 0.11249999999999998,
+          "threshold": 0.25,
+          "pass": true
+        },
+        "S6_correlation_product_at_most_negative_0p125": {
+          "value": -0.8573750000000001,
+          "threshold": -0.125,
+          "pass": true
+        },
+        "S7_declared_parent_closest_with_margin": {
+          "closest": "Phi-minus",
+          "closest_mae": 0.04999999999999993,
+          "runner_up": "Phi-plus",
+          "runner_up_mae": 1.3166666666666667,
+          "margin": 1.2666666666666666,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S8_affine_and_reversal_residuals": {
+          "affine": 0.0,
+          "reversal": 0.0,
+          "threshold": 1e-12,
+          "pass": true
+        }
+      },
+      "gates_passed": 8,
+      "gates_total": 8
+    },
+    "Psi-plus": {
+      "archive": "UPDOWN+DOWNUP.zip",
+      "file_id": 26690660,
+      "archive_md5": "43f782ed4404b01393fb57a2da5d1534",
+      "orientation_timestamps": {
+        "II": "171731",
+        "IX": "172913",
+        "IY": "174052",
+        "XI": "175222",
+        "XX": "180412",
+        "XY": "181547",
+        "YI": "182710",
+        "YX": "183831",
+        "YY": "184958"
+      },
+      "records_per_orientation": 600,
+      "expectations": {
+        "II": 1.0,
+        "IX": -0.00666666666666671,
+        "IY": -0.05666666666666667,
+        "IZ": 0.04333333333333342,
+        "XI": 0.0633333333333333,
+        "XX": 0.855,
+        "XY": 0.13499999999999998,
+        "XZ": 0.28666666666666674,
+        "YI": 0.04666666666666669,
+        "YX": -0.29333333333333333,
+        "YY": 0.7966666666666666,
+        "YZ": 0.04666666666666666,
+        "ZI": -0.0033333333333333843,
+        "ZX": 0.18999999999999995,
+        "ZY": -0.04666666666666666,
+        "ZZ": -0.9266666666666667
+      },
+      "metrics": {
+        "local_child_mean_abs": 0.036666666666666695,
+        "same_axis_mean_abs": 0.8594444444444443,
+        "same_axis_min_abs": 0.7966666666666666,
+        "same_minus_local": 0.8227777777777776,
+        "mixed_pair_mean_abs": 0.1663888888888889,
+        "correlation_product": -0.631199
+      },
+      "bell_mae": {
+        "Phi-plus": 1.2894444444444444,
+        "Phi-minus": 1.3283333333333334,
+        "Psi-plus": 0.14055555555555554,
+        "Psi-minus": 1.2416666666666665
+      },
+      "closest_parent": "Psi-plus",
+      "runner_up_parent": "Psi-minus",
+      "bell_margin": 1.101111111111111,
+      "bootstrap_label_stability": 1.0,
+      "gates": {
+        "S1_local_child_mean_abs_at_most_0p20": {
+          "value": 0.036666666666666695,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S2_same_axis_signs_match_target": {
+          "observed": [
+            1,
+            1,
+            -1
+          ],
+          "target": [
+            1,
+            1,
+            -1
+          ],
+          "pass": true
+        },
+        "S3_weakest_same_axis_abs_at_least_0p50": {
+          "value": 0.7966666666666666,
+          "threshold": 0.5,
+          "pass": true
+        },
+        "S4_same_minus_local_at_least_0p40": {
+          "value": 0.8227777777777776,
+          "threshold": 0.4,
+          "pass": true
+        },
+        "S5_mixed_pair_mean_abs_at_most_0p25": {
+          "value": 0.1663888888888889,
+          "threshold": 0.25,
+          "pass": true
+        },
+        "S6_correlation_product_at_most_negative_0p125": {
+          "value": -0.631199,
+          "threshold": -0.125,
+          "pass": true
+        },
+        "S7_declared_parent_closest_with_margin": {
+          "closest": "Psi-plus",
+          "closest_mae": 0.14055555555555554,
+          "runner_up": "Psi-minus",
+          "runner_up_mae": 1.2416666666666665,
+          "margin": 1.101111111111111,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S8_affine_and_reversal_residuals": {
+          "affine": 0.0,
+          "reversal": 0.0,
+          "threshold": 1e-12,
+          "pass": true
+        }
+      },
+      "gates_passed": 8,
+      "gates_total": 8
+    },
+    "Psi-minus": {
+      "archive": "UPDOWN-DOWNUP.zip",
+      "file_id": 26690657,
+      "archive_md5": "1724b4484ffb88e41dbac5f50981e91a",
+      "orientation_timestamps": {
+        "II": "190250",
+        "IX": "191433",
+        "IY": "192618",
+        "XI": "193759",
+        "XX": "194951",
+        "XY": "200149",
+        "YI": "201324",
+        "YX": "202517",
+        "YY": "203722"
+      },
+      "records_per_orientation": 600,
+      "expectations": {
+        "II": 1.0133333333333334,
+        "IX": 0.13333333333333336,
+        "IY": 0.08166666666666675,
+        "IZ": 0.07666666666666672,
+        "XI": 0.026666666666666672,
+        "XX": -0.835,
+        "XY": -0.06499999999999997,
+        "XZ": 0.2066666666666666,
+        "YI": -0.050000000000000044,
+        "YX": 0.09833333333333333,
+        "YY": -0.8816666666666667,
+        "YZ": 0.013333333333333364,
+        "ZI": -0.06666666666666671,
+        "ZX": -0.3433333333333333,
+        "ZY": -0.04499999999999996,
+        "ZZ": -0.8500000000000001
+      },
+      "metrics": {
+        "local_child_mean_abs": 0.07250000000000005,
+        "same_axis_mean_abs": 0.8555555555555556,
+        "same_axis_min_abs": 0.835,
+        "same_minus_local": 0.7830555555555556,
+        "mixed_pair_mean_abs": 0.1286111111111111,
+        "correlation_product": -0.6257629166666667
+      },
+      "bell_mae": {
+        "Phi-plus": 1.2677777777777777,
+        "Phi-minus": 1.298888888888889,
+        "Psi-plus": 1.288888888888889,
+        "Psi-minus": 0.1444444444444444
+      },
+      "closest_parent": "Psi-minus",
+      "runner_up_parent": "Phi-plus",
+      "bell_margin": 1.1233333333333333,
+      "bootstrap_label_stability": 1.0,
+      "gates": {
+        "S1_local_child_mean_abs_at_most_0p20": {
+          "value": 0.07250000000000005,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S2_same_axis_signs_match_target": {
+          "observed": [
+            -1,
+            -1,
+            -1
+          ],
+          "target": [
+            -1,
+            -1,
+            -1
+          ],
+          "pass": true
+        },
+        "S3_weakest_same_axis_abs_at_least_0p50": {
+          "value": 0.835,
+          "threshold": 0.5,
+          "pass": true
+        },
+        "S4_same_minus_local_at_least_0p40": {
+          "value": 0.7830555555555556,
+          "threshold": 0.4,
+          "pass": true
+        },
+        "S5_mixed_pair_mean_abs_at_most_0p25": {
+          "value": 0.1286111111111111,
+          "threshold": 0.25,
+          "pass": true
+        },
+        "S6_correlation_product_at_most_negative_0p125": {
+          "value": -0.6257629166666667,
+          "threshold": -0.125,
+          "pass": true
+        },
+        "S7_declared_parent_closest_with_margin": {
+          "closest": "Psi-minus",
+          "closest_mae": 0.1444444444444444,
+          "runner_up": "Phi-plus",
+          "runner_up_mae": 1.2677777777777777,
+          "margin": 1.1233333333333333,
+          "threshold": 0.2,
+          "pass": true
+        },
+        "S8_affine_and_reversal_residuals": {
+          "affine": 0.0,
+          "reversal": 0.0,
+          "threshold": 1e-12,
+          "pass": true
+        }
+      },
+      "gates_passed": 8,
+      "gates_total": 8
+    }
+  },
+  "pairwise": [
+    {
+      "state_a": "Phi-plus",
+      "state_b": "Phi-minus",
+      "parent_euclidean_distance": 2.612302092450684,
+      "local_child_euclidean_distance": 0.24040475129340608,
+      "parent_to_local_distance_ratio": 10.866266487647142
+    },
+    {
+      "state_a": "Phi-plus",
+      "state_b": "Psi-plus",
+      "parent_euclidean_distance": 2.5544846186005246,
+      "local_child_euclidean_distance": 0.18318175552045451,
+      "parent_to_local_distance_ratio": 13.945082092606567
+    },
+    {
+      "state_a": "Phi-plus",
+      "state_b": "Psi-minus",
+      "parent_euclidean_distance": 2.466147467880486,
+      "local_child_euclidean_distance": 0.14158821357098283,
+      "parent_to_local_distance_ratio": 17.417745486591123
+    },
+    {
+      "state_a": "Phi-minus",
+      "state_b": "Psi-plus",
+      "parent_euclidean_distance": 2.6083354632579163,
+      "local_child_euclidean_distance": 0.1457737973711324,
+      "parent_to_local_distance_ratio": 17.893033661030532
+    },
+    {
+      "state_a": "Phi-minus",
+      "state_b": "Psi-minus",
+      "parent_euclidean_distance": 2.570647346054643,
+      "local_child_euclidean_distance": 0.3410482207678101,
+      "parent_to_local_distance_ratio": 7.537489391580118
+    },
+    {
+      "state_a": "Psi-plus",
+      "state_b": "Psi-minus",
+      "parent_euclidean_distance": 2.383019210068512,
+      "local_child_euclidean_distance": 0.23355346758766454,
+      "parent_to_local_distance_ratio": 10.2033133341257
+    }
+  ],
+  "cross_state_gates": {
+    "C1_four_way_parent_identification": {
+      "correct": 4,
+      "total": 4,
+      "pass": true
+    },
+    "C2_parent_sign_pattern_coverage": {
+      "distinct_observed": 4,
+      "all_signs_match_targets": true,
+      "pass": true
+    },
+    "C3_minimum_parent_vector_distance": {
+      "value": 2.383019210068512,
+      "threshold": 1.0,
+      "pass": true
+    },
+    "C4_bootstrap_parent_label_stability": {
+      "per_state": {
+        "Phi-plus": 1.0,
+        "Phi-minus": 1.0,
+        "Psi-plus": 1.0,
+        "Psi-minus": 1.0
+      },
+      "minimum": 1.0,
+      "threshold": 0.9,
+      "pass": true
+    },
+    "C5_local_only_ideal_discrimination": {
+      "ideal_local_patterns": 1,
+      "states": 4,
+      "distinguishable": false,
+      "pass": true
+    }
+  },
+  "controls": {
+    "same_information_affine_equivalence": true,
+    "local_only_ideal_bell_patterns_distinguishable": false,
+    "local_only_ideal_distinct_patterns": 1,
+    "assignment_permutation": {
+      "identity_assignment_rank": 1,
+      "assignments_total": 24,
+      "identity_mean_state_mae": 0.10541666666666666,
+      "best_assignment": {
+        "assignment": {
+          "Phi-plus": "Phi-plus",
+          "Phi-minus": "Phi-minus",
+          "Psi-plus": "Psi-plus",
+          "Psi-minus": "Psi-minus"
+        },
+        "mean_state_mae": 0.10541666666666666
+      },
+      "runner_up_assignment": {
+        "assignment": {
+          "Phi-plus": "Phi-plus",
+          "Phi-minus": "Phi-minus",
+          "Psi-plus": "Psi-minus",
+          "Psi-minus": "Psi-plus"
+        },
+        "mean_state_mae": 0.6668055555555555
+      },
+      "identity_margin_over_runner_up": 0.5613888888888889
+    },
+    "mean_parent_pairwise_distance": 2.5324893663854606,
+    "mean_local_pairwise_distance": 0.21425836768524173
+  },
+  "bootstrap": {
+    "seed": 2026072405,
+    "repetitions_per_state": 2000,
+    "grain": "classified acquisition records resampled independently within each of nine orientations and each prepared state"
+  },
+  "evidence_boundary": "Four prepared-state archives from one public deposit and device. This is cross-state replication, not cross-device or cross-day replication."
+}

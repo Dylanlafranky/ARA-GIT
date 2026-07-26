@@ -1,0 +1,172 @@
+{
+  "test_id": "Q27-ARA9-NETWORK-RECONSTRUCTION-v1",
+  "ledger_id": "T283",
+  "verdict": "INCONCLUSIVE",
+  "branches": [
+    {
+      "stratum": "c2",
+      "eligible_sources": 5311,
+      "trial_strata": 100,
+      "local_reconstruction_fraction": 0.8879683675390698,
+      "timing_hit_fraction": 0.32782018659881257,
+      "timing_eligible": 4716,
+      "direct_neighbour_transfer_fraction": 0.02857142857142857,
+      "transfer_eligible_nonreturning": 595,
+      "mirror_mae": 1.3682191752495336,
+      "persistence_mae": 0.6987246628850642,
+      "no_return_mae": 0.5111557778112243,
+      "exact_transfer_overlap": 0.26533827853504577,
+      "orientation_reliable_reconstructions": 4716,
+      "stable_orientation_flip_fraction": 0.0,
+      "final_source_x_quantiles": {
+        "q05": 0.005047204037369455,
+        "q25": 0.05707150206894575,
+        "median": 0.24366328350344502,
+        "q75": 0.7722911666486982,
+        "q95": 2.2393012576683198
+      },
+      "final_neighbour_x_quantiles": {
+        "q05": 0.0,
+        "q25": 0.15417710471637397,
+        "median": 0.46803138653056764,
+        "q75": 1.0018645476529344,
+        "q95": 2.183442249579328
+      }
+    },
+    {
+      "stratum": "c4",
+      "eligible_sources": 5208,
+      "trial_strata": 100,
+      "local_reconstruction_fraction": 0.8759600614439325,
+      "timing_hit_fraction": 0.30819815870232353,
+      "timing_eligible": 4562,
+      "direct_neighbour_transfer_fraction": 0.02321981424148607,
+      "transfer_eligible_nonreturning": 646,
+      "mirror_mae": 1.3885841167523092,
+      "persistence_mae": 0.7165008562977206,
+      "no_return_mae": 0.5276581716475529,
+      "exact_transfer_overlap": 0.28841870556166205,
+      "orientation_reliable_reconstructions": 4562,
+      "stable_orientation_flip_fraction": 0.0,
+      "final_source_x_quantiles": {
+        "q05": 0.006924831753805218,
+        "q25": 0.06798865013372059,
+        "median": 0.2596533384768418,
+        "q75": 0.7597153244549277,
+        "q95": 2.3399838080853184
+      },
+      "final_neighbour_x_quantiles": {
+        "q05": 0.0,
+        "q25": 0.16410686345976389,
+        "median": 0.4832296819551297,
+        "q75": 0.9671050840530931,
+        "q95": 2.1318194111176587
+      }
+    },
+    {
+      "stratum": "pooled",
+      "eligible_sources": 10519,
+      "trial_strata": 200,
+      "local_reconstruction_fraction": 0.8820230059891625,
+      "timing_hit_fraction": 0.31817201983186033,
+      "timing_eligible": 9278,
+      "direct_neighbour_transfer_fraction": 0.0257856567284448,
+      "transfer_eligible_nonreturning": 1241,
+      "mirror_mae": 1.3783019412298032,
+      "persistence_mae": 0.7075257290789149,
+      "no_return_mae": 0.5193261806156353,
+      "exact_transfer_overlap": 0.2767654925244571,
+      "orientation_reliable_reconstructions": 9278,
+      "stable_orientation_flip_fraction": 0.0,
+      "final_source_x_quantiles": {
+        "q05": 0.005804893212335538,
+        "q25": 0.0621854326950797,
+        "median": 0.2518167117534796,
+        "q75": 0.7673845950365079,
+        "q95": 2.280596762502991
+      },
+      "final_neighbour_x_quantiles": {
+        "q05": 0.0,
+        "q25": 0.16018835652069452,
+        "median": 0.4737598906049938,
+        "q75": 0.984429835333318,
+        "q95": 2.1612935323801916
+      }
+    }
+  ],
+  "bootstrap": {
+    "draws": 2000,
+    "mirror_beats_persistence_probability": 0.0,
+    "mirror_beats_no_return_probability": 0.0,
+    "reconstruction_fraction_ci95": [
+      0.876045631560567,
+      0.8879419703869169
+    ]
+  },
+  "controls": {
+    "exact_transfer_overlap": 0.2767654925244571,
+    "pair_shuffle_percentile": 1.0,
+    "pair_shuffle_quantiles": {
+      "q05": 0.20628601419744902,
+      "q25": 0.2068641303780361,
+      "median": 0.2072121008442616,
+      "q75": 0.20755096346698365,
+      "q95": 0.2081125092991147
+    },
+    "circular_time_percentile": 1.0,
+    "circular_time_quantiles": {
+      "q05": 0.22525199953506092,
+      "q25": 0.22569319752644684,
+      "median": 0.2260580328553795,
+      "q75": 0.22641121760712046,
+      "q95": 0.22689476855553967
+    },
+    "split_halves": {
+      "seed_0_49": {
+        "eligible_sources": 5282,
+        "exact_overlap": 0.2763578953563946,
+        "pair_shuffle_advantage_vs_pooled_median": 0.06914579451213301,
+        "circular_time_advantage_vs_pooled_median": 0.05029986250101509
+      },
+      "seed_50_99": {
+        "eligible_sources": 5237,
+        "exact_overlap": 0.2771765920550483,
+        "pair_shuffle_advantage_vs_pooled_median": 0.06996449121078671,
+        "circular_time_advantage_vs_pooled_median": 0.05111855919966879
+      }
+    }
+  },
+  "gates": {
+    "D1_archive_md5": true,
+    "D2_100x500_each_stratum": true,
+    "D3_all_66_pairs": true,
+    "D4_sampled_physical_matrices": false,
+    "D5_freeze_precedes_numerical_read": true,
+    "R1_at_least_30_sources_20_trials": true,
+    "R2_local_reconstruction_50pct": true,
+    "R3_timing_hit_50pct": false,
+    "R4_mirror_beats_both_controls": false,
+    "R5_bootstrap_95pct_both": false,
+    "B1_direct_neighbour_crest_50pct": false,
+    "B2_exact_adjacency_95pct": true,
+    "B3_exact_time_95pct": true,
+    "B4_split_half_same_advantage": true,
+    "O1_stable_flips_50pct": false
+  },
+  "data_quality": {
+    "sampled_matrices": 5000,
+    "maximum_trace_error": 2.534210216253996e-05,
+    "maximum_hermiticity_error": 0.0,
+    "minimum_eigenvalue": -3.115426222572576e-07,
+    "psd_failures_below_minus_1e_6": 0
+  },
+  "source": {
+    "doi": "10.5281/zenodo.16753415",
+    "archive": "unnati_submit_12_pure_random.hdf5.zip",
+    "archive_md5": "06b6b278c4ce1e8ce14d2d662f0dc9dc",
+    "hdf5_sha256": "0e10afb6e5c7bcc3b469a9bb18a9bcae9469bfae165d5da5add93eeeb1972eeb",
+    "protocol_sha256": "d1d9c8051f46e10b737aea00a069ec45be9303ed89a5914416649899372c1427",
+    "implementation_sha256": "0035422d9504d788c74d01ae4d856f472554f7664a669c3fbfe9824fd311c677"
+  },
+  "evidence_boundary": "Complete public simulated network data; tests ARA compression and held-out trajectory/adjacency rules, not a new hardware law or universal fractality."
+}

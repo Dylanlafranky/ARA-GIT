@@ -1032,6 +1032,107 @@ written
 No universal formula for \(F_{dyn}\) is proved here. Identifying it with \(F_{chart}\), adding a rung change, or
 requiring a phase shift of \(\pi\) are empirical modelling choices that must be stated for the domain.
 
+### Conjecture 3.2b — Completed-seam parity rule
+
+The recurring ARA domain rule is more specific than “every child flips.” It proposes:
+
+1. phase orientation is retained while a trajectory remains inside the same scale-level ARA chart;
+2. one completed `0–2` cycle or equivalent TE-ARA seam crossing applies the orientation reversal;
+3. repeated completed crossings compose by parity.
+
+Let \(N_{\partial T}\in\mathbb N_0\) count completed TE-ARA seams between two declared measurements. The candidate
+domain map is:
+
+\[
+\boxed{
+u_{\rm destination}
+=
+F_{\rm chart}^{\,N_{\partial T}}u_{\rm source}.
+}
+\tag{2e}
+\]
+
+Because \(F_{\rm chart}^2=I\), the conditional mathematical consequence is:
+
+\[
+\boxed{
+N_{\partial T}\text{ even}\Rightarrow F_{\rm chart}^{N_{\partial T}}=I,
+\qquad
+N_{\partial T}\text{ odd}\Rightarrow F_{\rm chart}^{N_{\partial T}}=F_{\rm chart}.
+}
+\tag{2f}
+\]
+
+**Plain explanation.** Staying inside a rung does not exchange the phase labels. Completing one whole seam does;
+completing a second restores the original orientation. This parity conclusion is exact once the proposed seam map
+is assumed. The physical premise—that a declared event really is a completed TE-ARA seam and implements
+\(F_{\rm chart}\)—remains empirical.
+
+**Prior lineage and current status.** The conditional rule predates the July quantum work. The Formula/engine
+record of 10 June states “full `360°` / reach `0` or `2`: flip; remain within the rung: no flip.” PN30 implemented
+the reflected prime-child coordinate \(x\mapsto2-x\) and produced a suggestive but nonsignificant hard-control
+improvement (`p=0.06199`). PN35's same-scale golden prime bridge and flip advantage were null. The public
+free-swing pendulum never reached `0/2`, so it correctly supplied no flip test. Q14 later rejected an unmatched
+swap between two quantum child sets; after the same-rung clarification this is consistent with even parity but
+does not establish a seam crossing. Lineage and boundaries:
+`analysis/quantum/Q14_COMPLETED_RUNG_FLIP_PRIOR_LINEAGE_2026-07-24.md`.
+
+**Q22 application and negative result (26 July 2026).** Q22A compared Tier 4 directly with Tier 1 and was
+method-corrected before validation because it omitted the three-boundary odd-parity flip. Q22B then froze
+
+\[
+u_{4\rightarrow1}=F_{\rm chart}^{3}(u_4)=2-u_4
+\]
+
+on a new untouched Google Willow patch. The registered all-children/both-pathways representation failed its
+descriptive direction and logical-prediction claims (`1/13` gates; mean state-plus-travel AUROC `0.498422`).
+This is evidence against that physical application, not against the conditional algebra in (2e)-(2f): the
+algebra says what follows if the selected boundaries implement \(F_{\rm chart}\); it does not prove that the
+selected aggregate is the transported lineage. Both complementary paths may recompress to the parent ridge.
+The next clean discrimination must freeze one branch-preserving lineage and keep its complement as a control.
+Full report: `analysis/quantum/Q22_Q22B_VERTICAL_TIER_RELATION_REPORT_2026-07-26.md`.
+
+### Proposition 3.2c — A parent ridge is not sufficient to identify coupling
+
+Let two separately normalized local identities \(C,B\in(0,2)\) be coupled one rung up by:
+
+\[
+P(C,B)=\frac{2B}{C+B}.
+\]
+
+Then:
+
+\[
+P(B,C)=2-P(C,B).
+\]
+
+**Proof.**
+
+\[
+P(C,B)+P(B,C)
+=
+\frac{2B}{C+B}+\frac{2C}{B+C}
+=2.
+\]
+
+Therefore an exchangeable relation-broken pairing has a parent distribution centred symmetrically around the
+`1.0` ridge. An aggregate mean or median near `1` can arise without specific coupling.
+
+**Operational consequence.** To identify a declared lower-level coupling, correct pairs must show additional
+pairwise ridge concentration beyond controls that preserve both marginal identities but shuffle or misassign
+their relation:
+
+\[
+\mathbb E\!\left[|P_{\rm paired}-1|\right]
+<
+\mathbb E\!\left[|P_{\rm broken}-1|\right].
+\]
+
+Q23 supplied the first prospective test of this distinction. All four genuine parent medians were near `1`, but
+the paired blocks did not beat shifted, wrong-bit, spatially broken or permutation controls (`3/10` gates).
+Thus the particular connection-web/bit coupling was not supported even though its parent was ridge-centred.
+Report: `analysis/quantum/Q23_WILLOW_CONNECTION_BIT_REPORT_2026-07-26.md`.
+
 ### Definition 3.3 — Multiplicative handover law
 
 Let \(d\geq0\) be relational path distance measured in handover units. Suppose the retained coupling after two
@@ -2084,6 +2185,69 @@ attained. \(\square\)
 across the other, there is no shorter diagonal shortcut. The total is necessarily 3.5. What still needs external
 justification is why nature assigns exactly those two primitive costs.
 
+**Quantum implementation audit and correction (Q33, 26 July 2026).** Q33
+attempted to test one assignment of the vertical cost:
+
+\[
+\frac32
+=
+\underbrace{1}_{\text{current-rung whole}}
++
+\underbrace{\frac12}_{\text{child capacity in the parent frame}}.
+\]
+
+The Q32 endpoint recipients began near their own local ARA poles. Q33 then
+measured an unbounded raw endpoint/source capacity ratio of \(1.27349\) and
+incorrectly substituted it for the geometric \(1/2\) rung coefficient. This
+conflated the system-specific flow over ARA with the invariant rung geometry.
+It also averaged both endpoint recipients rather than using the single child
+closest to the boundary. The resulting \(4.27349\) path is therefore not a
+valid ARA path calculation. Proposition 15 remains a conditional metric
+theorem, and Q33 supplies neither support nor contrary evidence for its
+primitive \(1/2\) rung weight. The raw capacity and backward-origin results
+remain descriptive diagnostics.
+
+**ARA-first consequence test (Q33B, 26 July 2026).** Q33B did not estimate
+the \(1/2\) rung weight. It held
+
+\[
+\mathcal R_\uparrow(1_c)=\frac12
+\]
+
+fixed as geometry and used it to choose a directed consequence: after a
+high-side source releases, the single endpoint child nearest the low boundary
+should gain relation closure. For child closure
+\(h_c=|\det C_c|^{1/3}\), frozen development scale \(s_c\), starting order
+\(z_c=h_c/s_c\), and next movement \(g_c=\Delta h_c/s_c\), Q33B selected the
+smaller-\(z\) endpoint without future values. On `11,543` evaluation events,
+that route had positive \(g\) in `63.64%`, compared with `55.83%` for its
+sibling and `50.79–56.38%` for same-rule displaced controls. All frozen
+paired, branch and cluster-bootstrap gates passed.
+
+**Plain explanation.** The half-rung was treated as part of the ruler, not
+something that the measured energy was allowed to change. That fixed ruler
+successfully pointed to the endpoint relation that closed more reliably on
+the next slice. This is evidence for a consequence of the conditional route
+inside one simulator. It does not prove why the primitive half-rung law is
+universal, and it does not turn the structural \(7/2\) into a fitted physical
+constant.
+
+**Cross-archive boundary (Q34, 26 July 2026).** The complete Q33B rule was
+then frozen unchanged and moved to a previously unused greedy-ordering
+archive. On `16,001` evaluation events, the exact route retained positive
+median closure flow in both branches and was positive in `54.21%`, but missed
+the frozen `55%` floor. It failed required paired/control gates and fell
+`9.43` percentage points below Q33B. Independent raw-HDF5 reconstruction
+passed.
+
+**Plain explanation.** The geometric ruler was kept fixed, but it no longer
+picked out a reliably superior child when the network's construction order
+changed. Therefore Q33B cannot presently be promoted into a
+network-independent theorem. The surviving weak direction is a clue, not a
+passed replication. A future rule that includes network identity or coupling
+orientation must be declared as a new conditional extension and tested on
+another untouched target.
+
 ### Corollary 15.1 — Golden handover ratio along the diagonal
 
 Under Theorem 4's multiplicative handover law, the reverse-direction component ratio is
@@ -2435,6 +2599,223 @@ The sequence is `0→1→2→1→0`. The two `1.0` crossings have equal populati
 quantum mechanics. They do not derive the Born rule, prove universal ARA geometry or unify quantum mechanics with
 GR. Full independent validation:
 `analysis/quantum/BLOCH_SPHERE_ARA_CROSSWALK_REPORT_2026-07-23.md`.
+
+### Corollary 20.5a — Ideal Ramsey/Hahn control paths form an orthogonal quadrant
+
+For one dephasing-frequency history \(\delta\omega(t)\) over a common interval \(T\), define the half-interval
+phase children
+
+\[
+\phi_1=\int_0^{T/2}\delta\omega(t)\,dt,
+\qquad
+\phi_2=\int_{T/2}^{T}\delta\omega(t)\,dt.
+\]
+
+Ideal Ramsey and midpoint Hahn protocols return
+
+\[
+\boxed{
+\begin{pmatrix}
+\Phi_R\\
+\Phi_H
+\end{pmatrix}
+=
+\begin{pmatrix}
+1&1\\
+1&-1
+\end{pmatrix}
+\begin{pmatrix}
+\phi_1\\
+\phi_2
+\end{pmatrix}.
+}
+\tag{20d.1}
+\]
+
+The normalized transform
+
+\[
+U_H
+:=
+\frac1{\sqrt2}
+\begin{pmatrix}
+1&1\\
+1&-1
+\end{pmatrix}
+\]
+
+is orthogonal because
+
+\[
+\boxed{U_HU_H^{\mathsf T}=I.}
+\tag{20d.2}
+\]
+
+Equivalently, their ideal sensitivity functions obey
+
+\[
+\boxed{
+\int_0^T y_R(t)y_H(t)\,dt=0.
+}
+\tag{20d.3}
+\]
+
+Hence
+
+\[
+\boxed{+\Phi_R,\ -\Phi_R,\ +\Phi_H,\ -\Phi_H}
+\]
+
+are the four oriented branches of an exact control-coordinate quadrant.
+
+**Proof.** Ramsey assigns signs \((+1,+1)\) to the two interval halves. Hahn's midpoint refocusing pulse assigns
+\((+1,-1)\). Their coefficient vectors have dot product \(1-1=0\), and the displayed inverse is
+\(\phi_1=(\Phi_R+\Phi_H)/2\), \(\phi_2=(\Phi_R-\Phi_H)/2\). \(\square\)
+
+**Plain explanation.** Ramsey asks what the two time halves do together. Hahn asks for their difference after
+the midpoint sign handover. Those are perpendicular questions about the same history. Giving each question its
+positive and negative direction produces four quadrant branches.
+
+**Evidence fence.** This proves perpendicularity of the ideal control/sensitivity functions, not a literal
+energy handover between separate Ramsey and Hahn runs and not a guaranteed \(90^\circ\) angle between noisy
+measured outputs. Q13's derived visible/purity children are valid ARA coordinates but have not yet been proved
+identical to these four signed branches. See:
+`analysis/quantum/Q13_Q14_RAMSEY_HAHN_QUADRANT_REAUDIT_2026-07-24.md`.
+
+### Theorem 20.5b — The ideal two-parent Bell relation is an exact ARA^9 connected tensor
+
+For a two-qubit state, define the local three-axis cuts
+
+\[
+a_i=\langle\sigma_i\otimes I\rangle,
+\qquad
+b_j=\langle I\otimes\sigma_j\rangle,
+\qquad i,j\in\{X,Y,Z\},
+\]
+
+the nine joint cuts
+
+\[
+T_{ij}=\langle\sigma_i\otimes\sigma_j\rangle,
+\]
+
+and the connected relation
+
+\[
+\boxed{
+C_{ij}=T_{ij}-a_ib_j,
+\qquad
+X^{(9)}_{ij}=1-C_{ij}.
+}
+\tag{20d.4}
+\]
+
+Then:
+
+1. every product state \(\rho_A\otimes\rho_B\) has \(C=0\), so all nine ARA cells equal `1`;
+2. every ideal Bell state has \(\mathbf a=\mathbf b=0\), three unit singular values of \(C\), and
+   \(\det C=-1\);
+3. equal mixtures of the two Phi signs or two Psi signs have exactly one unit singular value;
+4. the equal mixture of all four Bell states has \(C=0\).
+
+The four ideal Bell connected tensors are
+
+\[
+\begin{aligned}
+C_{\Phi^+}&=\operatorname{diag}(+1,-1,+1),&
+C_{\Phi^-}&=\operatorname{diag}(-1,+1,+1),\\
+C_{\Psi^+}&=\operatorname{diag}(+1,+1,-1),&
+C_{\Psi^-}&=\operatorname{diag}(-1,-1,-1).
+\end{aligned}
+\tag{20d.5}
+\]
+
+Their equal family mixtures and uniform mixture are
+
+\[
+\frac{C_{\Phi^+}+C_{\Phi^-}}2
+=\operatorname{diag}(0,0,+1),
+\]
+
+\[
+\frac{C_{\Psi^+}+C_{\Psi^-}}2
+=\operatorname{diag}(0,0,-1),
+\]
+
+\[
+\frac{C_{\Phi^+}+C_{\Phi^-}+C_{\Psi^+}+C_{\Psi^-}}4
+=0.
+\tag{20d.6}
+\]
+
+**Proof.** For a product state, expectation values factor:
+
+\[
+\operatorname{tr}\!\left[
+(\rho_A\otimes\rho_B)(\sigma_i\otimes\sigma_j)
+\right]
+=
+\operatorname{tr}(\rho_A\sigma_i)
+\operatorname{tr}(\rho_B\sigma_j)
+=a_ib_j.
+\]
+
+Hence \(C=0\). Every Bell state's reduced one-qubit density matrices equal \(I/2\), so all local Pauli
+expectations vanish and \(C=T\). Direct action of \(XX,YY,ZZ\) on the four Bell states gives the four displayed
+sign patterns; their mixed-axis expectations vanish. Each displayed Bell matrix is orthogonal, has singular
+values \((1,1,1)\), and has determinant \(-1\). Averaging the displayed matrices gives the family and uniform
+mixtures in equation (20d.6), whose singular values are respectively \((1,0,0)\), \((1,0,0)\), and
+\((0,0,0)\). \(\square\)
+
+**Plain explanation.** Each parent has three readable directions. Combining every direction of one with every
+direction of the other gives nine relation cells. If the parents are merely separate, all nine connected cells
+sit at the ARA ridge. An ideal Bell parent instead closes strongly in three independent directions. Mixing
+opposite Bell signs cancels two directions and leaves one; mixing all four cancels the final direction.
+
+**Evidence fence.** This is established two-qubit Pauli/covariance algebra written as an ARA^9 crosswalk.
+Connected correlation alone is not an entanglement proof because a separable classical mixture can retain one
+direction. Q24 calibrated the exact `3,3,3,3 / 1,1 / 0` ladder on public raw-current reconstructions and a
+physical-state companion (`16/16` gates; `860/860` independent checks), but Q6 had already opened the tensors
+before the ARA^9 identification. Report:
+`analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md`.
+
+**Non-reconstruction corollary.** The theorem defines and classifies the complete ideal relation; it does not
+make an arbitrary real connected tensor orthogonal or imply that any eight of its cells uniquely determine the
+ninth. Q25 tested one such completion rule on untouched external matrices. The frozen balanced-sphere predictor
+beat ridge and mean-of-eight controls but not the physical positivity midpoint (`0.12394` versus `0.08687` MAE),
+so the universal missing-cut implication is empirically **not supported**. On the four external generated Bell
+states, singular directions were attenuated unevenly rather than forming one equal three-direction sphere. Full
+report: `analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md`.
+
+**Trajectory corollary.** The non-reconstruction result does not imply that complete ARA^9 objects at successive
+times are unrelated. For any nonsingular connected tensor, define
+
+\[
+h(t)=|\det C(t)|^{1/3}
+=
+\bigl(s_1(t)s_2(t)s_3(t)\bigr)^{1/3},
+\qquad
+x_h(t)=2h(t)/h(t_0),
+\tag{20d.7}
+\]
+
+where \(s_1,s_2,s_3\) are the singular values of \(C\). Then \(h\) and \(x_h\) are invariant under independent
+proper rotations of either parent's three-axis coordinate basis.
+
+**Proof.** If \(C'=R_A C R_B^\mathsf T\) with \(R_A,R_B\in SO(3)\), then
+\(\det C'=\det(R_A)\det(C)\det(R_B)=\det C\). Hence \(|\det C'|^{1/3}=|\det C|^{1/3}\), and normalization by
+the first value preserves the invariance. Equivalently, proper rotations leave the singular values unchanged.
+\(\square\)
+
+**Plain explanation.** Rather than guess one missing cell, measure the strength of the complete nine-cell
+relation. The geometric mean of its three directional strengths gives one clean ARA diameter coordinate that
+does not change merely because the axes were renamed or rotated.
+
+**Empirical fence.** Q26 froze this coordinate before opening the later matrices of `28` public trajectories.
+`25/28` moved from crest to trough, with median closure-versus-wait Spearman `-0.9364`; time order beat all `999`
+permutations. This supports the trajectory coordinate on that source. It does not prove that every ARA^9 must
+contract, and the separate orientation-flip claim was not supported. Report:
+`analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md`.
 
 ## 14.2 Landau–Zener structural and outcome handover coordinates
 
@@ -3463,6 +3844,9 @@ provided no confidentiality.
     the omitted signed source/sink term exactly.
 33. An integer parent plus its retained signed child-difference `Other` reconstructs both children exactly; recursive
     application therefore gives a lossless hierarchy when every residual is retained.
+34. For two three-axis quantum parents, \(C=T-\mathbf a\mathbf b^\mathsf T\) is an exact nine-slot connected
+    relation: product states give zero directions, ideal Bell states give three unit directions with negative
+    determinant, equal Bell-family mixtures give one direction, and the four-state uniform mixture gives zero.
 
 ## ARA assumptions not proved by mathematics alone
 

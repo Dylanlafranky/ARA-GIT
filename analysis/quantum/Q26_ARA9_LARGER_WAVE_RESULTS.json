@@ -1,0 +1,122 @@
+{
+  "blindness_boundary": "Coarse faster decoherence at higher temperature was published; exact target matrices, transition positions, orientation outcome, and model comparisons were sealed until prediction hashing.",
+  "bootstrap": {
+    "ara_lower_mae_than_linear": 1.0,
+    "ara_lower_mae_than_no_rotation": 0.6344,
+    "ara_lower_mae_than_persistence": 1.0
+  },
+  "data_quality": {
+    "fraction_positive_semidefinite_at_minus_1e_10": 1.0,
+    "maximum_hermiticity_residual": 0.0,
+    "maximum_trace_error": 3.3306690738754696e-16,
+    "minimum_eigenvalue": -1.0517299511321857e-14,
+    "record_count": 352
+  },
+  "gate_counts": {
+    "data": 4,
+    "data_total": 4,
+    "scored": 13,
+    "scored_total": 14
+  },
+  "gates": {
+    "D1_source_checksum": true,
+    "D2_schema_8x4x11x16": true,
+    "D3_cII_invariant": true,
+    "D4_predictions_frozen_before_reveal": true,
+    "P1_ara_beats_persistence_cut_mae": true,
+    "P2_ara_beats_linear_cut_mae": true,
+    "P3_ara_beats_no_rotation_cut_mae": true,
+    "P4_ara_beats_persistence_70pct_trajectories": true,
+    "P5_ara_beats_persistence_closure_mae": true,
+    "P6_ara_beats_no_rotation_phase_error": false,
+    "P7_class_accuracy_70pct": true,
+    "P8_ridge_within_one_60pct": true,
+    "P9_trough_within_one_60pct": true,
+    "W1_median_spearman_at_most_minus_0p70": true,
+    "W2_final_trough_75pct": true,
+    "W3_amplitude_flip_75pct": true,
+    "W4_time_order_beats_95pct_permutations": true,
+    "W5_bootstrap_95pct_vs_persistence_and_linear": true
+  },
+  "ledger_id": "T282",
+  "model_summary": {
+    "ara": {
+      "class_accuracy": 0.7410714285714286,
+      "closure_mae": 0.10920218614031077,
+      "cut_mae": 0.08501739523706484,
+      "cut_rmse": 0.12778498719638906,
+      "phase_mae_rad": 1.381858185427649,
+      "trajectory_cut_mae_median": 0.07494539437841896
+    },
+    "linear": {
+      "class_accuracy": 0.16964285714285715,
+      "closure_mae": 0.6159457714198071,
+      "cut_mae": 0.5261618961943331,
+      "cut_rmse": 0.6584238954364732,
+      "phase_mae_rad": 1.4272374088541575,
+      "trajectory_cut_mae_median": 0.5400527065319437
+    },
+    "no_rotation": {
+      "class_accuracy": 0.7410714285714286,
+      "closure_mae": 0.10891164171868616,
+      "cut_mae": 0.08631949526088752,
+      "cut_rmse": 0.12928719050830936,
+      "phase_mae_rad": 1.2388078257359634,
+      "trajectory_cut_mae_median": 0.07478908731931817
+    },
+    "persistence": {
+      "class_accuracy": 0.13392857142857142,
+      "closure_mae": 0.36491324631924477,
+      "cut_mae": 0.1934108036176073,
+      "cut_rmse": 0.27116522614352384,
+      "phase_mae_rad": 1.2388078257359634,
+      "trajectory_cut_mae_median": 0.20570613888541922
+    },
+    "zero": {
+      "class_accuracy": 0.6339285714285714,
+      "closure_mae": 0.242936015694491,
+      "cut_mae": 0.16620119993292987,
+      "cut_rmse": 0.2931075168741223,
+      "phase_mae_rad": 1.4543469856691082,
+      "trajectory_cut_mae_median": 0.15894966911842595
+    }
+  },
+  "permutation": {
+    "draws": 999,
+    "observed_ara_cut_mae": 0.08501739523706484,
+    "permutation_mean_cut_mae": 0.19755101271674713,
+    "seed": 26026,
+    "time_order_percentile": 1.0
+  },
+  "sample": {
+    "all_trajectories": 32,
+    "exposed_matrices_per_trajectory": 7,
+    "hidden_matrices_per_trajectory": 4,
+    "primary_hidden_cuts": 1008,
+    "primary_hidden_matrices": 112,
+    "primary_trajectories": 28,
+    "replication_trajectories": 4
+  },
+  "source": {
+    "doi": "10.5281/zenodo.14880901",
+    "file": "SuppFigure10.csv",
+    "md5": "9a9e3abac0ee8f80535e17ec72313919",
+    "prediction_sha256": "e0e52a552df3b114bc6def1ea392f697d9da301f77d5c71214e7c491355be968",
+    "protocol_sha256": "0bd8f2a0ee96733e0411d477a5c808c4ebd100b083b84b30108d05ed110347e6"
+  },
+  "test_class": "public-data, staged partially blind trajectory prediction",
+  "test_id": "Q26-ARA9-LARGER-WAVE-v1",
+  "trajectory_summary": {
+    "amplitude_crest_to_trough_fraction": 0.8928571428571429,
+    "ara_win_persistence_fraction": 1.0,
+    "final_trough_fraction": 0.8928571428571429,
+    "interpretation": "amplitude crest-to-trough with stable orientation",
+    "median_closure_wait_spearman": -0.9363636363636365,
+    "ridge_eligible_trajectories": 22,
+    "ridge_within_one_fraction": 0.9545454545454546,
+    "stable_orientation_flip_fraction": 0.03571428571428571,
+    "trough_eligible_trajectories": 28,
+    "trough_within_one_fraction": 0.8928571428571429
+  },
+  "verdict": "SUPPORTED"
+}

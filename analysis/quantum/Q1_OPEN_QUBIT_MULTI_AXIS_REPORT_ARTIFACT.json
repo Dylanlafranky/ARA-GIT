@@ -1,0 +1,2179 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Q1 Open-Qubit Multi-Axis ARA Test",
+    "description": "Frozen known-referee test of one ARA diameter versus several independently measured cuts through one qubit identity.",
+    "generatedAt": "2026-07-23T23:55:00+10:00",
+    "sources": [
+      {
+        "id": "q1-frozen-run",
+        "label": "Frozen Q1 open-qubit multi-axis outputs",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv",
+        "query": {
+          "id": "q1-open-qubit-v1",
+          "language": "sql",
+          "engine": "duckdb",
+          "description": "Reads the frozen aggregate and representative trajectory outputs for T258 across the six-level shot-count ladder.",
+          "sql": "SELECT * FROM read_csv_auto('analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv');",
+          "tables_used": [
+            "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv",
+            "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_TRAJECTORIES.csv",
+            "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_RESULTS.json"
+          ],
+          "filters": [
+            "Primary condition: 128 shots per axis and time",
+            "Fresh target: 128 paired draws across four mechanism families",
+            "Thresholds selected on development only",
+            "Synthetic independent binomial observations"
+          ],
+          "metric_definitions": [
+            "accuracy = correctly classified mechanism trials divided by all trials",
+            "gain over Z = multi-axis accuracy minus Z-only accuracy",
+            "held-out MAE = mean absolute error on sixteen unseen directions per trial and time",
+            "ridge accuracy = unitary versus pure-dephasing accuracy for the identical clean Z=1 pair"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "accuracy-card",
+        "description": "Fresh four-family classification at 128 shots.",
+        "dataset": "headline",
+        "sourceId": "q1-frozen-run",
+        "metrics": [
+          {
+            "label": "ARA accuracy",
+            "field": "ara_accuracy",
+            "format": "percent"
+          },
+          {
+            "label": "Gain over Z",
+            "field": "gain_over_z",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "heldout-card",
+        "description": "Prediction error on independently drawn sphere directions.",
+        "dataset": "headline",
+        "sourceId": "q1-frozen-run",
+        "metrics": [
+          {
+            "label": "Held-out MAE",
+            "field": "heldout_mae",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "equivalence-card",
+        "description": "Same-information ARA and Bloch decisions.",
+        "dataset": "headline",
+        "sourceId": "q1-frozen-run",
+        "metrics": [
+          {
+            "label": "Disagreements",
+            "field": "bloch_disagreements",
+            "format": "number"
+          },
+          {
+            "label": "Frozen gates passed",
+            "field": "gates_passed",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "method-accuracy-chart",
+        "title": "Mechanism classification accuracy at 128 shots",
+        "description": "Multi-axis ARA ties the same-information Bloch account and nearly ties the native model; compressed and shuffled controls fall.",
+        "type": "bar",
+        "dataset": "methods",
+        "sourceId": "q1-frozen-run",
+        "encodings": {
+          "x": {
+            "field": "method",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "accuracy",
+            "type": "quantitative"
+          }
+        }
+      },
+      {
+        "id": "accuracy-ladder-chart",
+        "title": "Classification accuracy across shot counts",
+        "description": "ARA approaches perfect classification as sampling noise falls; the one-axis information ceiling remains at one half.",
+        "type": "line",
+        "dataset": "accuracy_ladder",
+        "sourceId": "q1-frozen-run",
+        "encodings": {
+          "x": {
+            "field": "shot_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "accuracy",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "points": "always"
+        }
+      },
+      {
+        "id": "heldout-ladder-chart",
+        "title": "Held-out directional error across shot counts",
+        "description": "The physical multi-axis reconstruction improves with sampling while Z-only cannot recover transverse directions.",
+        "type": "line",
+        "dataset": "heldout_ladder",
+        "sourceId": "q1-frozen-run",
+        "encodings": {
+          "x": {
+            "field": "shot_label",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "mae",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "points": "always"
+        }
+      },
+      {
+        "id": "ridge-demo-chart",
+        "title": "Representative Z cut and sphere radius",
+        "description": "Unitary rotation and pure dephasing share the same Z=1 line while their full-state radii separate.",
+        "type": "line",
+        "dataset": "ridge_demo",
+        "sourceId": "q1-frozen-run",
+        "encodings": {
+          "x": {
+            "field": "time",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "value",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "points": "never"
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "methods-table",
+        "title": "Matched accounts at the primary condition",
+        "description": "All accounts are scored on the same fresh target.",
+        "dataset": "methods",
+        "sourceId": "q1-frozen-run",
+        "columns": [
+          {
+            "field": "method",
+            "label": "Account",
+            "type": "text"
+          },
+          {
+            "field": "accuracy",
+            "label": "Accuracy",
+            "type": "number"
+          },
+          {
+            "field": "information",
+            "label": "Information",
+            "type": "text"
+          },
+          {
+            "field": "role",
+            "label": "Role",
+            "type": "text"
+          }
+        ],
+        "defaultSort": {
+          "field": "accuracy",
+          "direction": "desc"
+        }
+      },
+      {
+        "id": "gates-table",
+        "title": "Frozen primary gates",
+        "description": "All nine gates were required for support.",
+        "dataset": "gates",
+        "sourceId": "q1-frozen-run",
+        "columns": [
+          {
+            "field": "order",
+            "label": "#",
+            "type": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Endpoint",
+            "type": "text"
+          },
+          {
+            "field": "criterion",
+            "label": "Criterion",
+            "type": "text"
+          },
+          {
+            "field": "value",
+            "label": "Observed",
+            "type": "number"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ],
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        }
+      },
+      {
+        "id": "confusion-table",
+        "title": "ARA primary confusion matrix",
+        "description": "One combined case was classified as T1.",
+        "dataset": "confusion",
+        "sourceId": "q1-frozen-run",
+        "columns": [
+          {
+            "field": "true_family",
+            "label": "True family",
+            "type": "text"
+          },
+          {
+            "field": "predicted_U",
+            "label": "Pred U",
+            "type": "number"
+          },
+          {
+            "field": "predicted_T2",
+            "label": "Pred T2",
+            "type": "number"
+          },
+          {
+            "field": "predicted_T1",
+            "label": "Pred T1",
+            "type": "number"
+          },
+          {
+            "field": "predicted_C",
+            "label": "Pred C",
+            "type": "number"
+          },
+          {
+            "field": "total",
+            "label": "Total",
+            "type": "number"
+          }
+        ],
+        "defaultSort": {
+          "field": "true_family",
+          "direction": "asc"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Q1 Open-Qubit Multi-Axis ARA Test"
+      },
+      {
+        "id": "answer",
+        "type": "markdown",
+        "sourceId": "q1-frozen-run",
+        "body": "## Answer First\n\n**The frozen benchmark is supported: all `9/9` gates passed.** Multi-axis ARA classified `511/512` fresh trials at 128 shots, versus the exact paired `256/512` ceiling for one `Z` diameter. The same-information Bloch account was identical, so this validates decompression\u2014not an advantage over tomography."
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "cardIds": [
+          "accuracy-card",
+          "heldout-card",
+          "equivalence-card"
+        ]
+      },
+      {
+        "id": "primary-heading",
+        "type": "markdown",
+        "sourceId": "q1-frozen-run",
+        "body": "## The Full Account Retained What One Diameter Discarded\n\nThe target deliberately gave unitary rotation and pure dephasing the same clean `Z=1` trajectory. Their transverse direction and radius remained different, and the independent `X/Y` cuts recovered that difference."
+      },
+      {
+        "id": "method-chart",
+        "type": "chart",
+        "chartId": "method-accuracy-chart"
+      },
+      {
+        "id": "methods",
+        "type": "table",
+        "tableId": "methods-table"
+      },
+      {
+        "id": "geometry-heading",
+        "type": "markdown",
+        "sourceId": "q1-frozen-run",
+        "body": "## The Ridge Is a Plane, Not One State\n\n`x_Z=1` means only `r_z=0`. It contains coherent rotating states, dephased states and the maximally mixed centre. One line cut is accurate but many-to-one; direction and radius require other cuts."
+      },
+      {
+        "id": "ridge-demo",
+        "type": "chart",
+        "chartId": "ridge-demo-chart"
+      },
+      {
+        "id": "gates-heading",
+        "type": "markdown",
+        "sourceId": "q1-frozen-run",
+        "body": "## Every Frozen Gate Passed\n\nRotation direction and unitary-versus-dephasing ridge classification were each `256/256`. Held-out directional MAE was `0.06112`; time and axis shuffles fell to `45.51%` and `52.34%`."
+      },
+      {
+        "id": "gates",
+        "type": "table",
+        "tableId": "gates-table"
+      },
+      {
+        "id": "confusion",
+        "type": "table",
+        "tableId": "confusion-table"
+      },
+      {
+        "id": "noise-heading",
+        "type": "markdown",
+        "sourceId": "q1-frozen-run",
+        "body": "## Finite Sampling Behaved as Expected\n\nARA rose from `91.21%` at 32 shots to `100%` at 256. Held-out error fell from `0.11997` to `0.02168` over the full shot ladder."
+      },
+      {
+        "id": "accuracy-ladder",
+        "type": "chart",
+        "chartId": "accuracy-ladder-chart"
+      },
+      {
+        "id": "heldout-ladder",
+        "type": "chart",
+        "chartId": "heldout-ladder-chart"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Scope and Method\n\nT258 was frozen before data or code. Development used 64 paired draws; the untouched target used 128 new paired draws across four standard open-qubit mechanisms and six shot counts. ARA and Bloch received identical observations. Independent validation reproduced `14/14` checks."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations\n\nThis is a synthetic known-referee instrument test with independent binomial samples and deliberately separated mechanisms. The native quantum-model fit scored `512/512`. The result does not derive quantum mechanics, establish a hidden Phase B, universal fractality, phi, quantum gravity or superiority over standard tomography."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended Next Step\n\nFreeze Q2 against public or hardware-derived qubit calibration records with state-preparation, readout, drift and correlated-noise effects. Preserve the same-information tomography control and keep mechanism classification, direction, radius and held-out reconstruction separate."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-07-23T23:55:00+10:00",
+    "datasets": {
+      "headline": [
+        {
+          "ara_accuracy": 0.998046875,
+          "gain_over_z": 0.498046875,
+          "heldout_mae": 0.06112286561479594,
+          "bloch_disagreements": 0,
+          "gates_passed": 9,
+          "gates_total": 9
+        }
+      ],
+      "methods": [
+        {
+          "method": "ARA multi-axis",
+          "accuracy": 0.998046875,
+          "information": "Noisy X/Y/Z cuts",
+          "role": "Registered compact geometry account"
+        },
+        {
+          "method": "Bloch multi-axis",
+          "accuracy": 0.998046875,
+          "information": "Same noisy X/Y/Z cuts",
+          "role": "Equal-information identity control"
+        },
+        {
+          "method": "Native model fit",
+          "accuracy": 1.0,
+          "information": "X/Y/Z plus fixed physics model grid",
+          "role": "Established-physics reference"
+        },
+        {
+          "method": "Z only",
+          "accuracy": 0.5,
+          "information": "Noisy Z cut",
+          "role": "Registered compressed-diameter account"
+        },
+        {
+          "method": "Time shuffled",
+          "accuracy": 0.455078125,
+          "information": "X/Y/Z with time order destroyed",
+          "role": "Temporal-order control"
+        },
+        {
+          "method": "Axes shuffled",
+          "accuracy": 0.5234375,
+          "information": "X/Y/Z with axis identity destroyed",
+          "role": "Orientation control"
+        }
+      ],
+      "accuracy_ladder": [
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "ARA multi-axis",
+          "accuracy": 0.912109375
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "Time shuffled",
+          "accuracy": 0.39453125
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "Axes shuffled",
+          "accuracy": 0.4921875
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "ARA multi-axis",
+          "accuracy": 0.958984375
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "Time shuffled",
+          "accuracy": 0.419921875
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "Axes shuffled",
+          "accuracy": 0.5390625
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "ARA multi-axis",
+          "accuracy": 0.998046875
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "Time shuffled",
+          "accuracy": 0.455078125
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "Axes shuffled",
+          "accuracy": 0.5234375
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "ARA multi-axis",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "Time shuffled",
+          "accuracy": 0.44921875
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "Axes shuffled",
+          "accuracy": 0.62109375
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "ARA multi-axis",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "Time shuffled",
+          "accuracy": 0.439453125
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "Axes shuffled",
+          "accuracy": 0.591796875
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "ARA multi-axis",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "Native model fit",
+          "accuracy": 1.0
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "Z only",
+          "accuracy": 0.5
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "Time shuffled",
+          "accuracy": 0.443359375
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "Axes shuffled",
+          "accuracy": 0.607421875
+        }
+      ],
+      "heldout_ladder": [
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "ARA physical",
+          "mae": 0.11997263296943869
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "ARA raw",
+          "mae": 0.12400192819202868
+        },
+        {
+          "shots": 32,
+          "shot_label": "32",
+          "method": "Z only",
+          "mae": 0.30739108472361776
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "ARA physical",
+          "mae": 0.08612753917730905
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "ARA raw",
+          "mae": 0.08803376669161908
+        },
+        {
+          "shots": 64,
+          "shot_label": "64",
+          "method": "Z only",
+          "mae": 0.3005306414125133
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "ARA physical",
+          "mae": 0.06112286561479594
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "ARA raw",
+          "mae": 0.06203433628932395
+        },
+        {
+          "shots": 128,
+          "shot_label": "128",
+          "method": "Z only",
+          "mae": 0.29749031288093847
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "ARA physical",
+          "mae": 0.04338711841342366
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "ARA raw",
+          "mae": 0.04395085684856205
+        },
+        {
+          "shots": 256,
+          "shot_label": "256",
+          "method": "Z only",
+          "mae": 0.2970069227877975
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "ARA physical",
+          "mae": 0.0307623453036494
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "ARA raw",
+          "mae": 0.031099240532163112
+        },
+        {
+          "shots": 512,
+          "shot_label": "512",
+          "method": "Z only",
+          "mae": 0.291494160872336
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "ARA physical",
+          "mae": 0.021684998753543162
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "ARA raw",
+          "mae": 0.02192484544229968
+        },
+        {
+          "shots": 1024,
+          "shot_label": "1024",
+          "method": "Z only",
+          "mae": 0.29434338966915646
+        }
+      ],
+      "gates": [
+        {
+          "order": 1,
+          "gate": "four class accuracy",
+          "criterion": ">= 0.90",
+          "value": 0.998046875,
+          "status": "Pass"
+        },
+        {
+          "order": 2,
+          "gate": "gain over z",
+          "criterion": ">= 0.30",
+          "value": 0.498046875,
+          "status": "Pass"
+        },
+        {
+          "order": 3,
+          "gate": "rotation direction accuracy",
+          "criterion": ">= 0.90",
+          "value": 1.0,
+          "status": "Pass"
+        },
+        {
+          "order": 4,
+          "gate": "u vs t2 ridge accuracy",
+          "criterion": ">= 0.95",
+          "value": 1.0,
+          "status": "Pass"
+        },
+        {
+          "order": 5,
+          "gate": "heldout directional mae",
+          "criterion": "<= 0.08",
+          "value": 0.06112286561479594,
+          "status": "Pass"
+        },
+        {
+          "order": 6,
+          "gate": "ara bloch max score difference",
+          "criterion": "<= 1e-12",
+          "value": 0.0,
+          "status": "Pass"
+        },
+        {
+          "order": 7,
+          "gate": "ara bloch classification disagreements",
+          "criterion": "== 0",
+          "value": 0.0,
+          "status": "Pass"
+        },
+        {
+          "order": 8,
+          "gate": "time shuffle accuracy",
+          "criterion": "<= 0.65",
+          "value": 0.455078125,
+          "status": "Pass"
+        },
+        {
+          "order": 9,
+          "gate": "axis shuffle accuracy",
+          "criterion": "<= 0.65",
+          "value": 0.5234375,
+          "status": "Pass"
+        }
+      ],
+      "ridge_demo": [
+        {
+          "time": 0.0,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.0,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.0625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.0625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.1875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.1875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.25,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.25,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.3125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.3125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.4375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.4375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.5,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.5,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 0.5625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.5625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.6875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.6875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.75,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.75,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.8125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.8125,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 0.875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.9375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.9375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.0,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.0,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.0625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.0625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.125,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 1.1875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.1875,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 1.25,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.25,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.3125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.3125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.4375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.4375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.5,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.5,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.5625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.5625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.6875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.6875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.75,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.75,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.8125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.8125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 1.9375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.9375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.0,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.0,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.0625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.0625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.1875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.1875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.25,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.25,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.3125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.3125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.375,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 2.4375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.4375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.5,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.5,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.5625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.5625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.6875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.6875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.75,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.75,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.8125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.8125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 2.9375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.9375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.0,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.0,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.0625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.0625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.1875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.1875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.25,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.25,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.3125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.3125,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.4375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.4375,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 3.5,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.5,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.5625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.5625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.625,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.625,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.6875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.6875,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 3.75,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.75,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 3.8125,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.8125,
+          "series": "Unitary radius",
+          "value": 0.9999999999999999
+        },
+        {
+          "time": 3.875,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.875,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 3.9375,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.9375,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 4.0,
+          "series": "Unitary Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 4.0,
+          "series": "Unitary radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.0,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.0,
+          "series": "Pure T2 radius",
+          "value": 1.0
+        },
+        {
+          "time": 0.0625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.0625,
+          "series": "Pure T2 radius",
+          "value": 0.9396355888133009
+        },
+        {
+          "time": 0.125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.125,
+          "series": "Pure T2 radius",
+          "value": 0.8829150397645188
+        },
+        {
+          "time": 0.1875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.1875,
+          "series": "Pure T2 radius",
+          "value": 0.8296183932612525
+        },
+        {
+          "time": 0.25,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.25,
+          "series": "Pure T2 radius",
+          "value": 0.7795389674423817
+        },
+        {
+          "time": 0.3125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.3125,
+          "series": "Pure T2 radius",
+          "value": 0.732482556675635
+        },
+        {
+          "time": 0.375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.375,
+          "series": "Pure T2 radius",
+          "value": 0.6882666784373823
+        },
+        {
+          "time": 0.4375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.4375,
+          "series": "Pure T2 radius",
+          "value": 0.6467198656540846
+        },
+        {
+          "time": 0.5,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.5,
+          "series": "Pure T2 radius",
+          "value": 0.6076810017611347
+        },
+        {
+          "time": 0.5625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.5625,
+          "series": "Pure T2 radius",
+          "value": 0.5709986959004802
+        },
+        {
+          "time": 0.625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.625,
+          "series": "Pure T2 radius",
+          "value": 0.5365306958340748
+        },
+        {
+          "time": 0.6875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.6875,
+          "series": "Pure T2 radius",
+          "value": 0.5041433362964609
+        },
+        {
+          "time": 0.75,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.75,
+          "series": "Pure T2 radius",
+          "value": 0.47371102064722703
+        },
+        {
+          "time": 0.8125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.8125,
+          "series": "Pure T2 radius",
+          "value": 0.44511573381320696
+        },
+        {
+          "time": 0.875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.875,
+          "series": "Pure T2 radius",
+          "value": 0.4182465846316372
+        },
+        {
+          "time": 0.9375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 0.9375,
+          "series": "Pure T2 radius",
+          "value": 0.3929993758195005
+        },
+        {
+          "time": 1.0,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.0,
+          "series": "Pure T2 radius",
+          "value": 0.36927619990141614
+        },
+        {
+          "time": 1.0625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.0625,
+          "series": "Pure T2 radius",
+          "value": 0.3469850595291054
+        },
+        {
+          "time": 1.125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.125,
+          "series": "Pure T2 radius",
+          "value": 0.32603951072004916
+        },
+        {
+          "time": 1.1875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.1875,
+          "series": "Pure T2 radius",
+          "value": 0.30635832763183396
+        },
+        {
+          "time": 1.25,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.25,
+          "series": "Pure T2 radius",
+          "value": 0.2878651875721965
+        },
+        {
+          "time": 1.3125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.3125,
+          "series": "Pure T2 radius",
+          "value": 0.2704883750232521
+        },
+        {
+          "time": 1.375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.375,
+          "series": "Pure T2 radius",
+          "value": 0.2541605035321265
+        },
+        {
+          "time": 1.4375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.4375,
+          "series": "Pure T2 radius",
+          "value": 0.23881825438949475
+        },
+        {
+          "time": 1.5,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.5,
+          "series": "Pure T2 radius",
+          "value": 0.22440213108263754
+        },
+        {
+          "time": 1.5625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.5625,
+          "series": "Pure T2 radius",
+          "value": 0.2108562285707937
+        },
+        {
+          "time": 1.625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.625,
+          "series": "Pure T2 radius",
+          "value": 0.1981280164880697
+        },
+        {
+          "time": 1.6875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.6875,
+          "series": "Pure T2 radius",
+          "value": 0.18616813543317876
+        },
+        {
+          "time": 1.75,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.75,
+          "series": "Pure T2 radius",
+          "value": 0.17493020555602928
+        },
+        {
+          "time": 1.8125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.8125,
+          "series": "Pure T2 radius",
+          "value": 0.16437064669887136
+        },
+        {
+          "time": 1.875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.875,
+          "series": "Pure T2 radius",
+          "value": 0.15444850939451701
+        },
+        {
+          "time": 1.9375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 1.9375,
+          "series": "Pure T2 radius",
+          "value": 0.14512531606625365
+        },
+        {
+          "time": 2.0,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.0,
+          "series": "Pure T2 radius",
+          "value": 0.13636491181363067
+        },
+        {
+          "time": 2.0625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.0625,
+          "series": "Pure T2 radius",
+          "value": 0.1281333242054747
+        },
+        {
+          "time": 2.125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.125,
+          "series": "Pure T2 radius",
+          "value": 0.12039863153641682
+        },
+        {
+          "time": 2.1875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.1875,
+          "series": "Pure T2 radius",
+          "value": 0.11313083903603664
+        },
+        {
+          "time": 2.25,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.25,
+          "series": "Pure T2 radius",
+          "value": 0.10630176255056907
+        },
+        {
+          "time": 2.3125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.3125,
+          "series": "Pure T2 radius",
+          "value": 0.09988491924609567
+        },
+        {
+          "time": 2.375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.375,
+          "series": "Pure T2 radius",
+          "value": 0.09385542490937412
+        },
+        {
+          "time": 2.4375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.4375,
+          "series": "Pure T2 radius",
+          "value": 0.08818989744804231
+        },
+        {
+          "time": 2.5,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.5,
+          "series": "Pure T2 radius",
+          "value": 0.08286636621597587
+        },
+        {
+          "time": 2.5625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.5625,
+          "series": "Pure T2 radius",
+          "value": 0.07786418681216709
+        },
+        {
+          "time": 2.625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.625,
+          "series": "Pure T2 radius",
+          "value": 0.07316396102271949
+        },
+        {
+          "time": 2.6875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.6875,
+          "series": "Pure T2 radius",
+          "value": 0.06874746159549643
+        },
+        {
+          "time": 2.75,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.75,
+          "series": "Pure T2 radius",
+          "value": 0.06459756155570409
+        },
+        {
+          "time": 2.8125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.8125,
+          "series": "Pure T2 radius",
+          "value": 0.060698167788297466
+        },
+        {
+          "time": 2.875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.875,
+          "series": "Pure T2 radius",
+          "value": 0.05703415862964543
+        },
+        {
+          "time": 2.9375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 2.9375,
+          "series": "Pure T2 radius",
+          "value": 0.05359132522643809
+        },
+        {
+          "time": 3.0,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.0,
+          "series": "Pure T2 radius",
+          "value": 0.05035631643442925
+        },
+        {
+          "time": 3.0625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.0625,
+          "series": "Pure T2 radius",
+          "value": 0.04731658704333383
+        },
+        {
+          "time": 3.125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.125,
+          "series": "Pure T2 radius",
+          "value": 0.04446034912709879
+        },
+        {
+          "time": 3.1875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.1875,
+          "series": "Pure T2 radius",
+          "value": 0.04177652633088641
+        },
+        {
+          "time": 3.25,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.25,
+          "series": "Pure T2 radius",
+          "value": 0.03925471091749682
+        },
+        {
+          "time": 3.3125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.3125,
+          "series": "Pure T2 radius",
+          "value": 0.03688512340665804
+        },
+        {
+          "time": 3.375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.375,
+          "series": "Pure T2 radius",
+          "value": 0.034658574650666386
+        },
+        {
+          "time": 3.4375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.4375,
+          "series": "Pure T2 radius",
+          "value": 0.03256643019930865
+        },
+        {
+          "time": 3.5,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.5,
+          "series": "Pure T2 radius",
+          "value": 0.030600576815874657
+        },
+        {
+          "time": 3.5625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.5625,
+          "series": "Pure T2 radius",
+          "value": 0.02875339101441103
+        },
+        {
+          "time": 3.625,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.625,
+          "series": "Pure T2 radius",
+          "value": 0.027017709496205185
+        },
+        {
+          "time": 3.6875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.6875,
+          "series": "Pure T2 radius",
+          "value": 0.025386801370853473
+        },
+        {
+          "time": 3.75,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.75,
+          "series": "Pure T2 radius",
+          "value": 0.02385434205418821
+        },
+        {
+          "time": 3.8125,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.8125,
+          "series": "Pure T2 radius",
+          "value": 0.022414388741841026
+        },
+        {
+          "time": 3.875,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.875,
+          "series": "Pure T2 radius",
+          "value": 0.021061357363330018
+        },
+        {
+          "time": 3.9375,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 3.9375,
+          "series": "Pure T2 radius",
+          "value": 0.019790000927299954
+        },
+        {
+          "time": 4.0,
+          "series": "Pure T2 Z cut",
+          "value": 1.0
+        },
+        {
+          "time": 4.0,
+          "series": "Pure T2 radius",
+          "value": 0.018595389173939266
+        }
+      ],
+      "confusion": [
+        {
+          "true_family": "U",
+          "predicted_U": 128,
+          "predicted_T2": 0,
+          "predicted_T1": 0,
+          "predicted_C": 0,
+          "total": 128
+        },
+        {
+          "true_family": "T2",
+          "predicted_U": 0,
+          "predicted_T2": 128,
+          "predicted_T1": 0,
+          "predicted_C": 0,
+          "total": 128
+        },
+        {
+          "true_family": "T1",
+          "predicted_U": 0,
+          "predicted_T2": 0,
+          "predicted_T1": 128,
+          "predicted_C": 0,
+          "total": 128
+        },
+        {
+          "true_family": "C",
+          "predicted_U": 0,
+          "predicted_T2": 0,
+          "predicted_T1": 1,
+          "predicted_C": 127,
+          "total": 128
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "q1-frozen-run",
+      "label": "Frozen Q1 open-qubit multi-axis outputs",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv",
+      "query": {
+        "id": "q1-open-qubit-v1",
+        "language": "sql",
+        "engine": "duckdb",
+        "description": "Reads the frozen aggregate and representative trajectory outputs for T258 across the six-level shot-count ladder.",
+        "sql": "SELECT * FROM read_csv_auto('analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv');",
+        "tables_used": [
+          "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_AGGREGATES.csv",
+          "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_TRAJECTORIES.csv",
+          "analysis/quantum/Q1_OPEN_QUBIT_MULTI_AXIS_RESULTS.json"
+        ],
+        "filters": [
+          "Primary condition: 128 shots per axis and time",
+          "Fresh target: 128 paired draws across four mechanism families",
+          "Thresholds selected on development only",
+          "Synthetic independent binomial observations"
+        ],
+        "metric_definitions": [
+          "accuracy = correctly classified mechanism trials divided by all trials",
+          "gain over Z = multi-axis accuracy minus Z-only accuracy",
+          "held-out MAE = mean absolute error on sixteen unseen directions per trial and time",
+          "ridge accuracy = unitary versus pure-dephasing accuracy for the identical clean Z=1 pair"
+        ]
+      }
+    }
+  ]
+}

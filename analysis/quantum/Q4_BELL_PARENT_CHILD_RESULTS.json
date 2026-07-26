@@ -1,0 +1,128 @@
+{
+  "protocol_id": "Q4-BELL-PARENT-CHILD-v1",
+  "ledger_id": "T262",
+  "verdict": "SUPPORTED",
+  "gates_passed": 8,
+  "gates_total": 8,
+  "source": {
+    "doi": "10.6084/m9.figshare.14160476.v2",
+    "file_id": 26690663,
+    "archive": "UPUP-DOWNDOWN.zip",
+    "archive_md5": "8cd8a5f2b3b9a2ccd090e47312bcc390",
+    "license": "CC BY 4.0"
+  },
+  "protocol_sha256": "3972e2dca1498b703245fbe82e8c9ac6e7bc44066abb931dc8998731f86b431f",
+  "raw_decoder": {
+    "orientations": {
+      "II": "115025",
+      "IX": "115222",
+      "IY": "115424",
+      "XI": "115627",
+      "XX": "115835",
+      "XY": "120033",
+      "YI": "120230",
+      "YX": "120428",
+      "YY": "120626"
+    },
+    "records_per_orientation": 80,
+    "readouts_per_state_segment": 40,
+    "current_threshold": 0.1,
+    "state_threshold": 0.5,
+    "independent_complete_tomography_sets": 1
+  },
+  "expectations": {
+    "II": 0.9999999999999999,
+    "IX": -0.125,
+    "IY": -0.07499999999999996,
+    "IZ": 0.04999999999999993,
+    "XI": 0.0,
+    "XX": -0.9500000000000002,
+    "XY": -0.19999999999999996,
+    "XZ": 0.07499999999999998,
+    "YI": 0.04999999999999999,
+    "YX": -0.17499999999999993,
+    "YY": 0.9500000000000001,
+    "YZ": -0.14999999999999997,
+    "ZI": 0.04999999999999993,
+    "ZX": -0.025000000000000022,
+    "ZY": -0.04999999999999999,
+    "ZZ": 0.95
+  },
+  "metrics": {
+    "local_child_mean_abs": 0.0583333333333333,
+    "same_axis_mean_abs": 0.9500000000000002,
+    "same_axis_min_abs": 0.95,
+    "same_minus_local": 0.8916666666666668,
+    "mixed_pair_mean_abs": 0.11249999999999998,
+    "correlation_product": -0.8573750000000001
+  },
+  "bell_mae": {
+    "Phi-plus": 1.3166666666666667,
+    "Phi-minus": 0.04999999999999993,
+    "Psi-plus": 1.3166666666666667,
+    "Psi-minus": 1.3166666666666667
+  },
+  "closest_bell": "Phi-minus",
+  "bell_margin": 1.2666666666666666,
+  "gates": {
+    "G1_local_child_mean_abs_at_most_0p20": {
+      "value": 0.0583333333333333,
+      "threshold": 0.2,
+      "pass": true
+    },
+    "G2_same_axis_signs": {
+      "xx": -0.9500000000000002,
+      "yy": 0.9500000000000001,
+      "zz": 0.95,
+      "pass": true
+    },
+    "G3_weakest_same_axis_abs_at_least_0p50": {
+      "value": 0.95,
+      "threshold": 0.5,
+      "pass": true
+    },
+    "G4_same_minus_local_at_least_0p40": {
+      "value": 0.8916666666666668,
+      "threshold": 0.4,
+      "pass": true
+    },
+    "G5_mixed_pair_mean_abs_at_most_0p25": {
+      "value": 0.11249999999999998,
+      "threshold": 0.25,
+      "pass": true
+    },
+    "G6_correlation_product_at_most_negative_0p125": {
+      "value": -0.8573750000000001,
+      "threshold": -0.125,
+      "pass": true
+    },
+    "G7_phi_minus_closest_with_margin": {
+      "closest": "Phi-minus",
+      "closest_mae": 0.04999999999999993,
+      "runner_up": "Phi-plus",
+      "runner_up_mae": 1.3166666666666667,
+      "margin": 1.2666666666666666,
+      "threshold": 0.2,
+      "pass": true
+    },
+    "G8_affine_and_reversal_residuals": {
+      "affine": 0.0,
+      "reversal": 0.0,
+      "threshold": 1e-12,
+      "pass": true
+    }
+  },
+  "controls": {
+    "local_only_ideal_bell_patterns_distinguishable": false,
+    "local_only_distinct_patterns": 1,
+    "relation_label_shuffle_survivors": 2,
+    "relation_label_shuffle_total": 6,
+    "mixed_projection_best_phi_minus_mae": 0.9166666666666666
+  },
+  "bootstrap": {
+    "seed": 2026072404,
+    "repetitions": 2000,
+    "grain": "80 classified measurement records resampled independently within each of nine acquisition orientations"
+  },
+  "evidence_boundary": "One complete fifteen-projection tomography set. Raw record bootstrap quantifies acquisition-record variability but is not an independent device or state replication."
+}
