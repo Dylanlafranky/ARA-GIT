@@ -1,6 +1,296 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T294 - Q39 lower-tier ARA⁹ Information³ fourth-quadrant reconstruction
+
+**REGISTERED:** 27 July 2026 before downloading or opening the untouched
+target values | **STATUS: INCONCLUSIVE — ELIGIBILITY; STRONG ORDERED
+RECONSTRUCTION SIGNAL, COMPLETE FROZEN CLAIM NOT PASSED**
+
+**USER PRIOR:** Bell is an upper calibration lens rather than the four lower
+quadrants. The connected relation
+\(C=T-\mathbf a\mathbf b^{\mathsf T}\) is itself the ARA⁹ lattice. Q36–Q38
+examined a pinch/flip inside that lattice. The next test should move down a
+tier and across: use three ordered internal meta-quadrants and Information³
+to reconstruct the fourth.
+
+**Frozen method:** On untouched public archive
+`unnati_submit_12_pure_strongmax.hdf5.zip`, calculate raw connected
+\(3\times3\) lattices. Use only development slices `0..249` to normalize
+determinant closure
+\(h=|\det C|^{1/3}\) and closure flow \(\Delta h\). Their sign combinations
+define four internal meta-quadrants. In evaluation slices `250..498`, retain
+non-overlapping complete four-visit cycles in the frozen circulation
+direction. Mask the fourth raw quadrant identity and predict it without
+fitting:
+
+\[
+\widehat C_4=C_1-C_2+C_3.
+\]
+
+Compare with persistence, no flip, linear continuation, the three-state
+mean and the same matrices in the wrong order. Frozen eligibility required
+`500` cycles, `300` lineages and `80` seeds. Full numerical support also
+required lower NRMSE and higher cosine than every baseline, seed-cluster
+significance, at least `55%` single-best cycles and a worse wrong-order
+control.
+
+**Target lock:** Zenodo `10.5281/zenodo.16753415`;
+`12_pure_strongmax`; deposited MD5
+`11b5f14ba185a9901f6a85bd31497d71`; `c2` primary branch.
+
+**Fidelity packet:**
+`analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_FIDELITY_v1.md`
+(SHA-256
+`6ac71c0904a6295391261fca67cde7e7cc71d02a9d91f50c27d45f0b27a8d779`).
+**Frozen protocol:**
+`analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_PROTOCOL_v1_FROZEN.md`
+(SHA-256
+`db74e4f69c4a263d317b5b1ae53dfb042d94585e2f2eb8404048e5fcad3f7ccb`).
+
+**Outcome:** The target produced `17,967` complete cycles from `1,121`
+lineages, but only `71` represented seeds versus the frozen `80`; the formal
+verdict is **INCONCLUSIVE — ELIGIBILITY**. The ordered ARA rule nevertheless
+showed a large prospective NRMSE advantage: lineage mean `0.3074`, versus
+`1.2444` persistence, `0.9361` no flip, `1.7240` linear, `1.2416` mean and
+`2.4375` wrong order. All seed-cluster NRMSE comparisons had
+\(p<0.00005\) at the `20,000`-draw resolution. ARA beat each named baseline
+individually on `72.22–94.92%` of cycles, and the wrong-order result supports
+the importance of ordered relation rather than mere access to three
+matrices.
+
+The complete frozen claim did not pass. ARA was the single best of all six
+methods on `48.96%` of cycles, below `55%`. Persistence had higher
+lineage-mean cosine (`0.9958` versus `0.8763`). Median ARA cosine was
+`0.99967`, but `7.25%` of cycles had negative cosine, revealing a minority
+orientation-failure mode. The established algebraic operator is affine
+parallelogram completion; the empirical contribution here is its
+ARA-motivated tier placement and ordering on untouched data, not discovery
+of that operator. Independent validation passed `4,000` raw density-matrix
+reconstructions, all cycle/order checks and `254` metric spot checks.
+Report:
+`analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_REPORT_2026-07-27.md`.
+
+**Boundary:** This is masked fourth-state reconstruction in a deterministic
+simulator. The scalar closure–flow trajectory supplies quadrant timing. The
+result does not establish unique hidden children, a physical singularity,
+blind timing or a universal Information³ law.
+
+**Post-result Q39A audit (not a new registered prediction):** the `7.25%`
+negative-cosine tail did not cluster at the deepest determinant pinch.
+Reversed cycles had a shallower median minimum (`u=-0.9199` versus
+`-0.9987`), and `1,293/1,302` occurred in the high-closure accumulating
+\(Q_{++}\) fourth visit. A target-blind visible condition,
+\(\cos(C_1-C_2+C_3,C_3)<0\), flagged `1,342` cycles with `96.35%`
+precision and `99.31%` recall for the reversed target orientation.
+Conditionally reversing only the ordered relation contribution,
+\(\widehat C_4=C_3-(C_1-C_2)\), improved all `1,342` changed cycles and
+reduced lineage-mean NRMSE from `0.3074` to `0.2508`. This is a post-outcome
+return-flow / relation-orientation hypothesis for Q40, not a rescue of T294.
+The audit also showed that Q39's purity association was dominated by target
+normalization: absolute error decreased with purity while
+\(\lVert C_4\rVert\) shrank sharply. Report:
+`analysis/quantum/Q39A_POST_RESULT_SEAM_PARITY_AUDIT_2026-07-27.md`.
+
+---
+
+### T293 - Q38 fixed-anchor Phase-A → Phase-B → Phase-A cycle
+
+**REGISTERED:** 27 July 2026 before downloading or opening the untouched
+target values | **STATUS: INCONCLUSIVE — ELIGIBILITY; FROZEN CYCLE
+SIGNATURE NOT SUPPORTED NUMERICALLY**
+
+**USER PRIOR:** Q37 may have traversed a complete Phase B and returned to
+Phase A. Its nearly stationary `-0.107, -0.111, -0.110` region may be the
+rounded edge of the ARA sphere before the sudden positive jump.
+
+**Frozen method:** On untouched public archive
+`unnati_submit_12_pure_mimic.hdf5.zip`, reconstruct raw connected
+\(3\times3\) tensors and reuse the development-only complete-loop and
+determinant-pinch rules. For each event, fix one Phase-A anchor as the
+highest-amplitude approach tensor at offsets `-7..-3`; never move or refit
+it. Follow exit offsets `+1..+14`. A completed operational cycle requires a
+reliable anti-oriented basin at most `-0.25` within seven slices, followed
+by a reliable return to at least `+0.25` with at least half the anchor
+amplitude. Test event and lineage majorities, continuous cycle strength and
+seed-cluster separation from displaced-time, pair and `c4` network controls.
+
+**Target lock:** Zenodo `10.5281/zenodo.16753415`;
+`12_pure_mimic`; deposited MD5
+`04477abdac1849dd034576c0dbb685cb`; all `100` seeds, `500` times, `66`
+pairs, `c2` primary and `c4` control.
+
+**Evidence boundary:** This removes Q37's moving-reference ambiguity but
+still measures an operational tensor path inside a deterministic simulator.
+It cannot by itself establish physical Phase B, a literal singularity or a
+topological sphere.
+
+**Fidelity packet:**
+`analysis/quantum/Q38_FIXED_ANCHOR_PHASE_CYCLE_FIDELITY_v1.md`
+(SHA-256
+`ff97db53aa769964c6178657f98c5fed356966577723b40bef05e342c259f70e`).
+**Frozen protocol:**
+`analysis/quantum/Q38_FIXED_ANCHOR_PHASE_CYCLE_PROTOCOL_v1_FROZEN.md`
+(SHA-256
+`166551802e124688acc898033435a964534c02dc2f15ded75ce4dabcba56eda6`).
+
+**Outcome:** The untouched `pure_mimic` archive produced `10,458` events
+from `688` represented lineages, but only `32` seeds versus the frozen
+minimum of `80`; the formal verdict is **INCONCLUSIVE — ELIGIBILITY**. The
+registered cycle signature also failed numerically independent of
+eligibility: exact Phase-A → Phase-B → Phase-A completion was `41.72%`
+versus `41.55%` for displaced time and `40.35%` for the pair control;
+lineage-majority prevalence was `41.13%`, mean cycle score was `-0.1670`,
+and all eight frozen gates failed. A fixed-anchor descriptive path did
+expose a sharp local anti-turn: at exit `+1`, median orientation was
+`-0.9693`, but median amplitude was only `0.0922` of the anchor, below the
+frozen reliability floor. Amplitude then rebuilt through `0.2541`,
+`0.4670`, `0.6507` and onward while median orientation was already positive.
+A mandatory post-verdict replay on Q37 returned from median `-0.9742`,
+`-0.8460` to `+0.9833` by slice three, and exact cycle prevalence (`43.84%`)
+did not beat displaced time (`44.06%`). The former `-0.11` plateau was
+therefore a moving-reference feature, not a fixed-anchor seven-slice
+Phase-B boundary. Independent validation passed provenance, the complete
+event list, every summary and bootstrap, and `4,224` sampled raw-metric
+checks with maximum absolute error \(1.42\times10^{-14}\). Report:
+`analysis/quantum/Q38_FIXED_ANCHOR_PHASE_CYCLE_REPORT_2026-07-27.md`.
+
+**Post-result lineage:** After the outcome was open, Dylan proposed a
+different `2→0 | 0→2` quadrant interpretation: one child flips first,
+making the parent anti-oriented, and the second child then flips, making the
+parent appear restored even though both child orientations have reversed.
+This is mathematically consistent with the older ARA involution
+\(F_{\rm chart}^2=I\) and the exact MX6 Maxwell result that one E/B sign flip
+reverses parent flow while two preserve it. It is not a Q38 rescue because
+the parent tensor satisfies
+\(uv^{\mathsf T}=(-u)(-v)^{\mathsf T}\) and cannot identify the child
+history. The new perpendicular time-resolved application requires
+independently observed child directions:
+`analysis/quantum/Q38_POST_RESULT_QUADRANT_DOUBLE_FLIP_HYPOTHESIS_2026-07-27.md`.
+The proposed children sit inside the ARA⁹ lattice
+\(C=T-\mathbf a\mathbf b^{\mathsf T}\); they are not automatically the
+upper local qubit vectors \(\mathbf a,\mathbf b\). Bell is the calibration
+lens, while Q38 is provisionally placed down one tier and across \(C\)'s own
+singularity.
+
+---
+
+### T292 - Q37 signed singularity crossing and traversal asymmetry
+
+**REGISTERED:** 27 July 2026 before downloading or opening the untouched
+target values | **STATUS: INCONCLUSIVE — ELIGIBILITY; DESCRIPTIVE TRAVERSAL
+ASYMMETRY REPLICATION**
+
+**USER PRIOR:** The Q36 pinch is the singularity crossing. The relation should
+emerge on its far side as anti-oriented Phase B. The crossing itself should be
+asymmetric: equal pre/post windows should sit slightly below the ARA ridge,
+approximately `0.94–0.95`, because the approach/accumulation side is heavier
+than the immediate exit/release side.
+
+**Frozen method:** On the untouched public
+`unnati_submit_12_pure_landmax.hdf5.zip` archive, reconstruct each raw
+connected \(3\times3\) relation tensor. Reuse Q35/Q36 development-only loop
+eligibility and determinant-trough events. Across equal seven-slice windows,
+measure the signed normalized Frobenius relation between approach and exit,
+plus total-amplitude and determinant-closure traversal coordinates. Compare
+against displaced time, pair and `c4` network controls. Full signed support
+requires a median cross-seam orientation at most `-0.25`, at least `60%`
+negative events and controlled bootstrap separation. Full traversal support
+requires both event-weighted coordinates in `[0.92,0.98]`, majority event and
+lineage direction, and controlled bootstrap separation.
+
+**Target lock:** Zenodo `10.5281/zenodo.16753415`;
+`12_pure_landmax`; deposited MD5
+`ace64ede12cfbc9e5413326f23c306ad`; all `100` seeds, `500` times, `66`
+pairs, `c2` primary and `c4` control.
+
+**Evidence boundary:** A negative tensor inner product is operational
+anti-orientation, not automatically universal Phase B. This is a prospective
+cross-archive test inside a deterministic public simulator, not hardware.
+
+**Fidelity packet:**
+`analysis/quantum/Q37_SIGNED_SINGULARITY_CROSSING_FIDELITY_v1.md`.
+**Frozen protocol:**
+`analysis/quantum/Q37_SIGNED_SINGULARITY_CROSSING_PROTOCOL_v1_FROZEN.md`.
+
+**Outcome:** The untouched `pure_landmax` archive produced `39,567` registered
+events from `1,915` lineages, but only `71` represented seeds versus the
+frozen minimum of `80`; the formal verdict is therefore **INCONCLUSIVE —
+ELIGIBILITY**. All twelve numerical traversal gates nevertheless passed:
+mean amplitude traversal was `0.95601`, mean determinant-closure traversal
+was `0.94875`, event and lineage majorities were below the `1.0` ridge, and
+both measures beat time, pair and `c4` network controls with seed-bootstrap
+probability `1.000`. This descriptively repeats the predicted accumulation-
+heavy crossing on an untouched archive. Signed orientation was mixed:
+median `-0.87493`, mean `-0.10354`, and `56.18%` negative. It passed three of
+five signed gates but missed the frozen `60%` negative-event gate and the
+`0.10` mean margin against the time control (`0.0770`). Offset-specific
+similarity was strongly anti-oriented at the first far-side slice
+(`-0.56946`) but returned positive by slice seven (`+0.24502`), supporting a
+local anti-turn rather than a stable whole-window Phase-B inversion.
+Independent validation passed provenance, eligibility, the complete event
+list, all summaries and bootstraps, and `1,056` sampled raw-tensor checks
+with maximum absolute error \(2.22\times10^{-16}\).
+
+**Report:**
+`analysis/quantum/Q37_SIGNED_SINGULARITY_CROSSING_REPORT_2026-07-27.md`.
+
+---
+
+### T291 - Q36 closed-but-deforming sphere at determinant troughs
+
+**REGISTERED:** 27 July 2026 after Q35 and before calculating singular-value,
+retention, wobble or reclosure outcomes | **STATUS: MIXED / INCONCLUSIVE —
+REGISTERED CLOSED-DEFORMING SIGNATURE DID NOT PASS**
+
+**USER PRIOR:** The Q35 relation may not fully unravel beyond the
+lattice-facing cut. It may remain closed as an irregular, fluid or
+"wibbly-wobbly" sphere, analogous to gas or plasma remaining inside a sphere
+container. A determinant trough may therefore mark loss of balanced lattice
+closure rather than disappearance of the whole identity.
+
+**Frozen method:** Keep each Q35-complete `c2` pair lineage fixed. At
+development-referenced local determinant troughs, decompose its raw connected
+tensor into total Frobenius magnitude, balanced determinant share,
+deforming/anisotropic share, normalized shape wobble, effective rank and
+weakest-axis retention. Test whether total relation is retained while
+balanced closure falls, shape wobble rises and determinant closure reforms
+within seven slices. Compare against displaced time, pair and `c4` network
+controls. The exact `x_L+x_D=2` accounting identity is not evidence; the
+independent retention, wobble and reclosure consequences carry the test.
+
+**Honesty boundary:** This is retrospective within the already-open Q34/Q35
+simulator. A connected \(3\times3\) tensor cannot establish literal
+topological sphere closure, physical plasma, a hidden quantum state or
+universal ARA.
+
+**Fidelity packet:**
+`analysis/quantum/Q36_CLOSED_DEFORMING_SPHERE_FIDELITY_v1.md`.
+**Frozen protocol:**
+`analysis/quantum/Q36_CLOSED_DEFORMING_SPHERE_PROTOCOL_v1_FROZEN.md`.
+
+**Outcome:** All eligibility floors passed: `51,037` evaluation troughs from
+`2,486` lineages and `87` seeds. At the exact determinant trough, median total
+relation-amplitude retention was only `0.05611` and just `0.063%` of events
+retained half their local amplitude. Determinant closure retained `0.03619`,
+leaving a selective gap of only `0.01724`, below the registered `>0.25` gate.
+The deforming share was high (`0.90977`) and exceeded every control with
+bootstrap probability `1.000`, but normalized shape wobble was suppressed
+(`0.15729`) rather than enhanced. Reclosure was strong (`1.71506` median;
+`100%` reached `0.75` within seven slices), but controls also reclosed.
+Therefore the exact relation does not remain visibly full and wobbly at the
+registered seam; it nearly pinches out in this tensor and then re-expands.
+The permanent relation-loss alternative also failed. The narrower
+post-result interpretation is a measured compression/handover seam, not a
+recovered topologically closed sphere or hidden channel. Independent
+validation passed every hash, count, event reconstruction, raw-matrix sample
+and summary check.
+
+**Report:**
+`analysis/quantum/Q36_CLOSED_DEFORMING_SPHERE_REPORT_2026-07-27.md`.
+
+---
+
 ### T290 - Q35 whole Phase-A / external Phase-B counterpart
 
 **REGISTERED:** 27 July 2026 after ARA re-grounding and before calculating

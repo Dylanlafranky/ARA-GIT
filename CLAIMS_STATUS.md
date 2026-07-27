@@ -1,5 +1,133 @@
 # Claims Status
 
+> **Q39 lower-tier ARA⁹ Information³ fourth-quadrant reconstruction (T294,
+> 27 July 2026):** Q39 preserved the post-Q38 tier correction: Bell remained
+> an upper calibration lens, while the tested identity was the complete
+> connected lattice \(C=T-\mathbf a\mathbf b^{\mathsf T}\). On the previously
+> untouched `pure_strongmax` archive, development-only determinant
+> closure–flow coordinates defined four internal meta-quadrants. The fourth
+> raw lattice identity was masked and prospectively reconstructed from the
+> preceding three with the unfitted ordered rule
+> \(\widehat C_4=C_1-C_2+C_3\). The target produced `17,967` complete cycles
+> and `1,121` lineages but only `71` represented seeds versus the frozen
+> minimum of `80`; formal status is **INCONCLUSIVE — ELIGIBILITY**. The
+> numerical signal was nevertheless strong and order-specific: lineage-mean
+> NRMSE was `0.3074`, versus `0.9361–2.4375` for all five baselines, with
+> seed-cluster bootstrap \(p<0.00005\) at `20,000`-draw resolution. The same
+> matrices in the wrong order scored `2.4375`. The full claim did not pass:
+> persistence retained higher mean cosine (`0.9958` versus `0.8763`) and ARA
+> was the single best method on `48.96%` of cycles, below the frozen `55%`
+> gate. Median ARA cosine was `0.99967`; a `7.25%` negative-cosine tail
+> explains the mean-direction failure. Independent validation passed `4,000`
+> raw matrix checks, all `17,967` cycle records and `254` deterministic metric
+> checks. This supports a useful ordered lower-tier reconstruction on this
+> simulator family; it does not establish four hidden physical children, a
+> literal singularity, blind quadrant timing or a universal Information³
+> law. Report:
+> `analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_REPORT_2026-07-27.md`.
+
+> **Q39A post-result return-flow orientation audit (27 July 2026):** this
+> diagnostic used Q39's already-open data and does not change T294's frozen
+> **INCONCLUSIVE — ELIGIBILITY** verdict. Claude's proposed deep-pinch
+> classifier was falsified on this archive: reversed reconstructions had
+> shallower determinant minima, not deeper ones. Dylan's alternative
+> return-flow account was strongly localized: `1,293/1,302` negative-cosine
+> cycles occurred in the high-closure, accumulating \(Q_{++}\) target
+> quadrant, with none in either release quadrant. The target-blind visible
+> condition \(\cos(C_1-C_2+C_3,C_3)<0\) flagged `1,293` true reversals,
+> `49` same-orientation cycles and missed only `9` reversals. Conditionally
+> reversing the relation term,
+> \(\widehat C_4=C_3-(C_1-C_2)\), improved all `1,342` changed cycles,
+> reduced lineage-mean NRMSE from `0.3074` to `0.2508` and raised cosine from
+> `0.8763` to `0.9905`. This is a strong **post-result candidate
+> relation-flow inversion / Phase-B-return crosswalk**, not yet a prediction,
+> physical Phase-B identification or seam proof. It must be frozen on an
+> untouched archive. The same audit corrected Q39's purity wording:
+> absolute error decreases with purity (`ρ=-0.5135`) while target norm
+> collapses (`ρ=-0.8330`), so the earlier normalized “higher purity, worse
+> reconstruction” association was predominantly denominator mechanics.
+> Report:
+> `analysis/quantum/Q39A_POST_RESULT_SEAM_PARITY_AUDIT_2026-07-27.md`.
+
+> **Q38 fixed-anchor Phase-A → Phase-B → Phase-A cycle (T293, 27 July
+> 2026):** Q37's possible complete Phase-B traversal was tested by fixing
+> one approach-side Phase-A tensor and following fourteen exit slices on the
+> untouched `pure_mimic` archive. The archive produced `10,458` events from
+> `688` lineages but only `32` represented seeds versus the frozen minimum
+> of `80`, so the formal verdict is **INCONCLUSIVE — ELIGIBILITY**. The
+> registered full-cycle signature also failed numerically: exact completion
+> was `41.72%` versus `41.55%` for displaced time and `40.35%` for the pair
+> control; lineage-majority prevalence was `41.13%`, mean cycle score was
+> `-0.1670`, and all eight gates failed. A strong descriptive local feature
+> remains: median orientation at the first exit slice was `-0.9693`, but
+> median amplitude had collapsed to `0.0922` of the anchor and was below the
+> frozen reliability floor. The relation then rebuilt while median
+> orientation had already returned positive. The mandatory post-verdict Q37
+> replay went from `-0.9742`, `-0.8460` to `+0.9833` by slice three and did
+> not beat its time control, showing that Q37's earlier `-0.11` plateau was
+> a moving-reference feature rather than a fixed-anchor seven-slice
+> Phase-B boundary. The supported descriptive thread is therefore
+> **amplitude collapse → faint anti-turn → reconstruction**, not a completed
+> universal singularity traversal. Independent validation passed every
+> audit family and `4,224` sampled raw-metric checks. Report:
+> `analysis/quantum/Q38_FIXED_ANCHOR_PHASE_CYCLE_REPORT_2026-07-27.md`.
+> A subsequent `2→0 | 0→2` interpretation treats the `+ → - → +` parent
+> sequence as two ordered child flips: one flip reverses the parent and two
+> make it appear restored. This has prior lineage in the ARA involution
+> \(F^2=I\) and the Maxwell MX6 sign result, but the parent tensor alone
+> cannot distinguish both children flipping from neither flipping. It is
+> recorded as a **post-result, independently testable child-decompression
+> hypothesis**, not a Q38 confirmation:
+> `analysis/quantum/Q38_POST_RESULT_QUADRANT_DOUBLE_FLIP_HYPOTHESIS_2026-07-27.md`.
+> The lower flip-children belong inside the ARA⁹ connected lattice and are
+> not automatically the upper Bell/qubit local vectors; Bell remains the
+> calibration lens, not the identity of these four meta quadrants.
+
+> **Q37 signed singularity crossing and traversal asymmetry (T292, 27 July
+> 2026):** Dylan's Q36 interpretation was frozen prospectively on the
+> untouched `pure_landmax` archive: the determinant pinch should hand over
+> into an anti-oriented relation, while equal approach/exit windows should
+> read accumulation-heavy near `0.94–0.95`. The archive produced `39,567`
+> events from `1,915` lineages, but only `71` qualifying seeds versus the
+> frozen minimum of `80`, so the registered verdict is **INCONCLUSIVE —
+> ELIGIBILITY**. All twelve numerical traversal gates passed descriptively:
+> mean total-amplitude coordinate `0.95601`, determinant-closure coordinate
+> `0.94875`, event and lineage majorities below the `1.0` ridge, and
+> seed-bootstrap separation from time, pair and network controls all `1.000`.
+> The signed test was mixed: median `-0.87493`, mean `-0.10354`, `56.18%`
+> negative; it passed three of five gates but missed the `60%` negative-event
+> gate and the required `0.10` margin against the time control. The immediate
+> far-side relation was strongly anti-oriented (`-0.56946` at offset one) but
+> became same-oriented by offset seven (`+0.24502`), supporting a local
+> anti-turn rather than a persistent whole Phase-B inversion. Independent
+> validation passed every audit family, including the complete event list,
+> all summaries and bootstraps, and `1,056` sampled raw-tensor calculations.
+> Report:
+> `analysis/quantum/Q37_SIGNED_SINGULARITY_CROSSING_REPORT_2026-07-27.md`.
+
+> **Q36 closed-deforming sphere at determinant troughs (T291, 27 July
+> 2026):** The user prior that the Q35 relation might remain complete but
+> irregular at its lattice-facing boundary was converted into a frozen tensor
+> test: determinant closure should fall while total relation magnitude remains,
+> normalized shape wobble rises and closure subsequently reforms. Across
+> `51,037` registered troughs from `2,486` Q35-complete `c2` lineages and `87`
+> seeds, total amplitude retained only `0.05611` of its local level and just
+> `0.063%` of events retained half amplitude. Determinant retention was
+> `0.03619`, so the selective gap was only `0.01724`. Deforming share was high
+> (`0.90977`) and exceeded time, pair and network controls, but shape wobble
+> was suppressed (`0.15729`) rather than enhanced. Every exact event reclosed
+> to at least `0.75` within seven slices, yet controls also reclosed strongly.
+> **Frozen status: MIXED/INCONCLUSIVE; THE REGISTERED CLOSED-BUT-WOBBLY
+> SIGNATURE DID NOT PASS.** The tensor nearly pinches out and then re-expands;
+> this supports neither a still-full deforming sphere at the exact seam nor
+> simple permanent loss. A compression/handover-seam interpretation remains a
+> post-result hypothesis. This simulator tensor cannot prove topological
+> closure, plasma, a hidden quantum state or continuity through an unmeasured
+> channel. Independent validation passed all source hashes, exact counts,
+> sampled event lists, `24` raw-matrix reconstructions and reported summaries.
+> Report:
+> `analysis/quantum/Q36_CLOSED_DEFORMING_SPHERE_REPORT_2026-07-27.md`.
+
 > **Q35 whole Phase-A / external Phase-B counterpart (T290, 27 July 2026):**
 > Q35 corrected the rung interpretation: the visible Q34 `c2` circle is one
 > complete local identity, while any parent Phase B must be a separate fixed

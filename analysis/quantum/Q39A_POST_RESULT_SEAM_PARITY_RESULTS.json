@@ -1,0 +1,309 @@
+{
+  "test_id": "Q39A-POST-RESULT-SEAM-PARITY-AUDIT-v1",
+  "status": "POST-RESULT EXPLORATORY DIAGNOSTIC",
+  "q39_verdict_unchanged": "INCONCLUSIVE \u2014 ELIGIBILITY",
+  "population": {
+    "cycles": 17967,
+    "represented_seeds": 71,
+    "represented_lineages": 1121,
+    "negative_cosine_cycles": 1302,
+    "negative_cosine_fraction": 0.07246618801135415
+  },
+  "orientation_groups": {
+    "same_orientation": {
+      "cycles": 16665,
+      "fraction": 0.9275338119886458,
+      "median_cosine": 0.9997738799424318,
+      "median_cycle_minimum_u": -0.9986717189027595,
+      "median_trough_retention": 0.008710117095455895,
+      "median_target_u": -0.5016906605373865,
+      "median_target_v": -0.4660036278300722,
+      "median_target_norm": 0.10922505584162684,
+      "median_purity": 0.7887837290763855,
+      "q36_trough_in_target_fraction": 0.11905190519051906,
+      "deep_q05_fraction": 0.0019201920192019203
+    },
+    "reversed_orientation": {
+      "cycles": 1302,
+      "fraction": 0.07246618801135415,
+      "median_cosine": -0.6207985195764718,
+      "median_cycle_minimum_u": -0.919907778922689,
+      "median_trough_retention": 0.11676878275933376,
+      "median_target_u": 0.6549413844519227,
+      "median_target_v": 0.3920048864100314,
+      "median_target_norm": 0.17035542952045007,
+      "median_purity": 0.7232378125190735,
+      "q36_trough_in_target_fraction": 0.0030721966205837174,
+      "deep_q05_fraction": 0.0
+    }
+  },
+  "target_quadrants": {
+    "Q++": {
+      "cycles": 4350,
+      "negative_cosine_cycles": 1293,
+      "negative_cosine_fraction": 0.29724137931034483,
+      "median_cycle_minimum_u": -0.998273656324272,
+      "median_target_u": 0.5906624933986555,
+      "median_target_v": 0.5270108140496952
+    },
+    "Q\u2212+": {
+      "cycles": 1993,
+      "negative_cosine_cycles": 9,
+      "negative_cosine_fraction": 0.004515805318615153,
+      "median_cycle_minimum_u": -0.9990717484045848,
+      "median_target_u": -0.7401044200525774,
+      "median_target_v": 0.5385694293692496
+    },
+    "Q\u2212\u2212": {
+      "cycles": 7816,
+      "negative_cosine_cycles": 0,
+      "negative_cosine_fraction": 0.0,
+      "median_cycle_minimum_u": -0.998156010679595,
+      "median_target_u": -0.6051779210757049,
+      "median_target_v": -0.49475189870950054
+    },
+    "Q+\u2212": {
+      "cycles": 3808,
+      "negative_cosine_cycles": 0,
+      "negative_cosine_fraction": 0.0,
+      "median_cycle_minimum_u": -0.9986229040188404,
+      "median_target_u": 0.7115383817510985,
+      "median_target_v": -0.6624424010395772
+    }
+  },
+  "seam_association": {
+    "auc_deeper_minimum_u_predicts_negative": 0.10399551475884916,
+    "auc_deeper_trough_retention_predicts_negative": 0.041097105102215294,
+    "q36_trough_in_target": {
+      "condition_negative_fraction": 0.002012072434607646,
+      "complement_negative_fraction": 0.08123161649665185,
+      "difference": -0.0792195440620442,
+      "seed_cluster_bootstrap_ci95": [
+        -0.09761041911329461,
+        -0.060442435765567876
+      ],
+      "bootstrap_p_difference_le_0": 1.0,
+      "represented_seeds": 71
+    },
+    "q36_trough_in_late_half": {
+      "condition_negative_fraction": 0.18585390094417756,
+      "complement_negative_fraction": 0.015088013411567477,
+      "difference": 0.17076588753261007,
+      "seed_cluster_bootstrap_ci95": [
+        0.12918713945190316,
+        0.21023303196064275
+      ],
+      "bootstrap_p_difference_le_0": 4.999750012499375e-05,
+      "represented_seeds": 71
+    },
+    "below_development_q05": {
+      "condition_negative_fraction": 0.0,
+      "complement_negative_fraction": 0.07259548369110677,
+      "difference": -0.07259548369110677,
+      "seed_cluster_bootstrap_ci95": [
+        -0.08791642065251822,
+        -0.05658223264352604
+      ],
+      "bootstrap_p_difference_le_0": 1.0,
+      "represented_seeds": 71
+    },
+    "target_low_release_qminusminus": {
+      "condition_negative_fraction": 0.0,
+      "complement_negative_fraction": 0.1282632252980002,
+      "difference": -0.1282632252980002,
+      "seed_cluster_bootstrap_ci95": [
+        -0.15553381917275858,
+        -0.10149305563983323
+      ],
+      "bootstrap_p_difference_le_0": 1.0,
+      "represented_seeds": 71
+    },
+    "visible_prediction_anti_to_c3": {
+      "condition_negative_fraction": 0.9634873323397913,
+      "complement_negative_fraction": 0.0005413533834586466,
+      "difference": 0.9629459789563327,
+      "seed_cluster_bootstrap_ci95": [
+        0.9136951445551262,
+        0.9994394627561397
+      ],
+      "bootstrap_p_difference_le_0": 4.999750012499375e-05,
+      "represented_seeds": 71,
+      "flagged_cycles": 1342,
+      "flagged_fraction": 0.07469249179050481,
+      "true_positive": 1293,
+      "false_positive": 49,
+      "false_negative": 9,
+      "true_negative": 16616,
+      "precision_for_negative_target_cosine": 0.9634873323397913,
+      "recall_for_negative_target_cosine": 0.9930875576036866,
+      "specificity": 0.997059705970597,
+      "definition": "cos(C1-C2+C3, C3) < 0; uses no C4 value"
+    }
+  },
+  "parity_rule_diagnostics": {
+    "no_parity": {
+      "event_mean_nrmse": 0.30985957199267833,
+      "event_median_nrmse": 0.2173780243397811,
+      "event_mean_cosine": 0.8744462044512782,
+      "event_median_cosine": 0.9996729273524395,
+      "negative_cosine_fraction": 0.07246618801135415,
+      "lineage_mean_nrmse": 0.30739791425048985,
+      "lineage_mean_cosine": 0.8762805416255665
+    },
+    "q36_target_parity": {
+      "event_mean_nrmse": 0.5074474017701193,
+      "event_median_nrmse": 0.22158202395682938,
+      "event_mean_cosine": 0.6551351817779597,
+      "event_median_cosine": 0.9994784217926211,
+      "negative_cosine_fraction": 0.18266822507931207,
+      "lineage_mean_nrmse": 0.505348081990425,
+      "lineage_mean_cosine": 0.6565647161025923
+    },
+    "q36_late_half_parity": {
+      "event_mean_nrmse": 0.8064770971709208,
+      "event_median_nrmse": 0.3140113955329637,
+      "event_mean_cosine": 0.4104548243773036,
+      "event_median_cosine": 0.9977851377627849,
+      "negative_cosine_fraction": 0.283575443869316,
+      "lineage_mean_nrmse": 0.8050124308851314,
+      "lineage_mean_cosine": 0.4103234689002021
+    },
+    "deep_q05_parity": {
+      "event_mean_nrmse": 0.3134188972925013,
+      "event_median_nrmse": 0.21739059617597403,
+      "event_mean_cosine": 0.870885112374482,
+      "event_median_cosine": 0.9996719334442188,
+      "negative_cosine_fraction": 0.07424723103467468,
+      "lineage_mean_nrmse": 0.31096339137258605,
+      "lineage_mean_cosine": 0.872713294672857
+    },
+    "low_release_parity": {
+      "event_mean_nrmse": 1.0489226538759502,
+      "event_median_nrmse": 1.017019006633643,
+      "event_mean_cosine": 0.005770368802219381,
+      "event_median_cosine": -0.21970384790697578,
+      "negative_cosine_fraction": 0.5074859464573941,
+      "lineage_mean_nrmse": 1.0487029125195986,
+      "lineage_mean_cosine": 0.004789845830713498
+    },
+    "visible_parent_parity": {
+      "event_mean_nrmse": 0.30179129318046616,
+      "event_median_nrmse": 0.2173780243397811,
+      "event_mean_cosine": 0.9591365657498667,
+      "event_median_cosine": 0.9996729273524395,
+      "negative_cosine_fraction": 0.0032281404797684645,
+      "lineage_mean_nrmse": 0.29945108827531763,
+      "lineage_mean_cosine": 0.9597422403871159
+    },
+    "visible_relation_reversal": {
+      "event_mean_nrmse": 0.25242484683265765,
+      "event_median_nrmse": 0.21389565008445643,
+      "event_mean_cosine": 0.9903201939194453,
+      "event_median_cosine": 0.9996942914461262,
+      "negative_cosine_fraction": 0.0005009183503088997,
+      "lineage_mean_nrmse": 0.250790404801574,
+      "lineage_mean_cosine": 0.990489871544044
+    },
+    "visible_persistence_guard": {
+      "event_mean_nrmse": 0.28000390252836743,
+      "event_median_nrmse": 0.2173780243397811,
+      "event_mean_cosine": 0.9913299059212527,
+      "event_median_cosine": 0.9997407799102846,
+      "negative_cosine_fraction": 0.0005009183503088997,
+      "lineage_mean_nrmse": 0.27797564447618833,
+      "lineage_mean_cosine": 0.9914813450354282
+    },
+    "oracle_negative_parity": {
+      "event_mean_nrmse": 0.3008932419215462,
+      "event_median_nrmse": 0.2173777773942919,
+      "event_mean_cosine": 0.9606317507679282,
+      "event_median_cosine": 0.999672933631914,
+      "negative_cosine_fraction": 0.0,
+      "lineage_mean_nrmse": 0.29860228338302924,
+      "lineage_mean_cosine": 0.9611677435890313
+    }
+  },
+  "visible_relation_reversal_comparison": {
+    "cycles_changed": 1342,
+    "changed_cycles_improved": 1342,
+    "changed_cycles_tied": 0,
+    "changed_cycles_worsened": 0,
+    "flagged_median_original_nrmse": 1.0468452002536317,
+    "flagged_median_corrected_nrmse": 0.27865554361656986,
+    "pairwise_win_fraction_vs_q39_baselines": {
+      "persistence": 0.7969054377469805,
+      "no_flip": 0.772694384148717,
+      "linear": 0.8812823509767908,
+      "mean": 0.9492402738353648,
+      "wrong_order": 0.8013023877108031
+    },
+    "single_best_fraction_against_all_five_q39_baselines": 0.48961985862971,
+    "cluster_advantage_over_original_q39": {
+      "candidate": "visible_relation_reversal",
+      "control": "no_parity",
+      "metric": "nrmse",
+      "lineage_then_seed_balanced_advantage": 0.05255827738850441,
+      "seed_cluster_bootstrap_ci95": [
+        0.03818889632188927,
+        0.06844697526764411
+      ],
+      "bootstrap_p_advantage_le_0": 4.999750012499375e-05,
+      "represented_seeds": 71
+    }
+  },
+  "purity_normalization_audit": {
+    "nrmse_vs_purity": {
+      "rho": 0.1926375102138385,
+      "p_value": 1.3712247808215169e-152,
+      "n": 17967,
+      "p_method": "large-sample normal approximation"
+    },
+    "absolute_error_vs_purity": {
+      "rho": -0.5135049894282812,
+      "p_value": 0.0,
+      "n": 17967,
+      "p_method": "large-sample normal approximation"
+    },
+    "target_norm_vs_purity": {
+      "rho": -0.8329780789799,
+      "p_value": 0.0,
+      "n": 17967,
+      "p_method": "large-sample normal approximation"
+    },
+    "nrmse_vs_target_norm": {
+      "rho": -0.17545851905787804,
+      "p_value": 4.0905560808769393e-126,
+      "n": 17967,
+      "p_method": "large-sample normal approximation"
+    },
+    "partial_nrmse_vs_purity_controlling_target_norm": {
+      "rho": 0.08533595292338059,
+      "p_value": 1.6736280214150872e-30,
+      "n": 17967,
+      "control": "rank(target_norm)",
+      "method": "linear residuals of ranks"
+    },
+    "lowest_purity_quartile": {
+      "cut": 0.6348952651023865,
+      "cycles": 4492,
+      "median_nrmse": 0.07015140578320844,
+      "median_absolute_error": 0.0351151672301821,
+      "median_target_norm": 0.3487657519971227
+    },
+    "highest_purity_quartile": {
+      "cut": 0.8788303434848785,
+      "cycles": 4492,
+      "median_nrmse": 0.23365668977873358,
+      "median_absolute_error": 0.008041897269548067,
+      "median_target_norm": 0.03724304663057802
+    }
+  },
+  "boundaries": [
+    "Q39A was defined after Q39 outcomes were open and cannot rescue or alter Q39's frozen verdict.",
+    "The oracle parity rule uses target cosine and is only an unattainable diagnostic ceiling.",
+    "Visible C3 guards were conceived after Q39 outcomes were open and require untouched replication.",
+    "The Q36 seam detector is theory-derived and previously frozen, but its use as a Q39 parity classifier is post-result.",
+    "Quadrant timing still uses the observed scalar closure-flow path.",
+    "Absolute matrix error removes division by target norm but remains simulator- and representation-specific."
+  ]
+}

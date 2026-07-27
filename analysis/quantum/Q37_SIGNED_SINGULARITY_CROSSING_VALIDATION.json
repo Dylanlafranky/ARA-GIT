@@ -1,0 +1,55 @@
+{
+  "test_id": "Q37-INDEPENDENT-VALIDATION-v1",
+  "date": "2026-07-27",
+  "pass": true,
+  "checks": {
+    "provenance_and_sizes": true,
+    "cache_shapes": true,
+    "complete_loop_eligibility": true,
+    "complete_event_list": true,
+    "sampled_raw_metrics": true,
+    "all_exported_summaries": true,
+    "seed_cluster_bootstraps": true,
+    "gates": true,
+    "verdict": true
+  },
+  "provenance": {
+    "archive_md5": "ace64ede12cfbc9e5413326f23c306ad",
+    "protocol_sha256": "05d590b14751e289796a95e9d156210d51895a21ae11bd332182524a4c4ebe9a",
+    "fidelity_sha256": "2d42c57dea506949c760b85893905be86280055338a071d8af7972eb8e63134a",
+    "archive_size": 224191403,
+    "hdf_size": 3452715680
+  },
+  "eligibility": {
+    "complete_c2_lineages": 1920,
+    "events": 39567,
+    "represented_seeds": 71,
+    "represented_lineages": 1915
+  },
+  "eligibility_pass": false,
+  "sampled_rows": 24,
+  "sampled_metric_checks": 1056,
+  "sampled_max_absolute_error": 2.220446049250313e-16,
+  "bootstrap": {
+    "signed_below_zero": 0.993,
+    "signed_vs_controls": {
+      "time": 1.0,
+      "pair": 1.0,
+      "network": 1.0
+    },
+    "amplitude_below_ridge": 1.0,
+    "closure_below_ridge": 1.0,
+    "amplitude_vs_controls": {
+      "time": 1.0,
+      "pair": 1.0,
+      "network": 1.0
+    },
+    "closure_vs_controls": {
+      "time": 1.0,
+      "pair": 1.0,
+      "network": 1.0
+    }
+  },
+  "verdict": "INCONCLUSIVE \u2014 ELIGIBILITY",
+  "note": "The eligibility floor fails only because 71 represented seeds is below the frozen minimum of 80."
+}

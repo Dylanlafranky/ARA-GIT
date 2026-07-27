@@ -1092,6 +1092,154 @@ selected aggregate is the transported lineage. Both complementary paths may reco
 The next clean discrimination must freeze one branch-preserving lineage and keep its complement as a control.
 Full report: `analysis/quantum/Q22_Q22B_VERTICAL_TIER_RELATION_REPORT_2026-07-26.md`.
 
+**Q38 perpendicular two-child application (27 July 2026; post-result
+hypothesis).** Q38's fixed parent anchor produced an immediate low-amplitude
+orientation sequence `+ → - → +`. After that outcome was open, Dylan
+proposed that this may be a perpendicular view of two ordered child
+crossings rather than return to the old quadrant:
+
+\[
+2\rightarrow0\;\big|\;0\rightarrow2,
+\qquad
+AB\rightarrow BA.
+\]
+
+For a locally factorised parent \(C=\sigma uv^{\mathsf T}\),
+
+\[
+uv^{\mathsf T}\rightarrow(-u)v^{\mathsf T}
+\rightarrow(-u)(-v)^{\mathsf T}=uv^{\mathsf T}.
+\]
+
+This is a direct two-child expression of the even-parity consequence in
+(2f), and it has an exact established analogue in the MX6 Maxwell sign
+crosswalk. It does not establish the physical premise in Q38:
+\(uv^{\mathsf T}=(-u)(-v)^{\mathsf T}\) makes the two child histories
+non-identifiable from the parent alone. A valid test requires two
+independently oriented child observables and must not infer their signs only
+from an SVD of the parent. Record:
+`analysis/quantum/Q38_POST_RESULT_QUADRANT_DOUBLE_FLIP_HYPOTHESIS_2026-07-27.md`.
+
+**Tier correction.** In this application, \(C\) is the ARA⁹ connected
+lattice already defined by Q24 as
+\(C=T-\mathbf a\mathbf b^{\mathsf T}\). The proposed \(u,v\) are internal
+children of \(C\), not automatically the upper local vectors
+\(\mathbf a,\mathbf b\). Bell preparations calibrated complete instances of
+the lattice but are not the four lower meta quadrants. Q38 is provisionally
+placed down one tier from that whole-pair lens and across \(C\)'s own
+singularity chart.
+
+**Q39 prospective lower-tier test (27 July 2026).** Q39 operationalised that
+tier correction on the previously untouched `pure_strongmax` archive. It
+defined one invariant scalar closure cut and its signed flow:
+
+\[
+\underbrace{h(t)}_{\substack{\text{connected-lattice}\\\text{closure cut}}}
+=|\det C(t)|^{1/3},
+\qquad
+\underbrace{(u(t),v(t))}_{\substack{\text{ridge side}\\\text{and closure flow}}}
+=
+\left(
+\frac{h(t)-m}{r},
+\frac{\Delta h(t)}{s}
+\right).
+\]
+
+The four signs of \((u,v)\) supplied four internal meta-quadrants of \(C\).
+For four ordered quadrant identities, the frozen Information³ completion was
+
+\[
+\boxed{\widehat C_4=C_1-C_2+C_3},
+\qquad
+\text{equivalently}\qquad
+C_1+C_3=C_2+\widehat C_4.
+\]
+
+This is the established affine/parallelogram closing relation. Q39 did not
+derive that algebra from ARA. It tested whether ARA's independently declared
+tier, connected identity and quadrant order locate that operator usefully.
+The target missed the frozen seed floor (`71/80`), so the formal result is
+**INCONCLUSIVE — ELIGIBILITY**. Descriptively, lineage-mean NRMSE was
+`0.3074`, versus `0.9361–2.4375` for all controls; all seed-cluster
+comparisons were favourable at the `20,000`-draw resolution, and the
+wrong-order control was worst. The complete support rule failed because
+persistence retained higher mean cosine and ARA was single-best on only
+`48.96%` of cycles versus the frozen `55%`.
+
+**Axiomatic consequence.** Proposition 3.2b gives only flip parity. Q39 adds
+evidence that an ordered affine closing relation can retain useful
+fourth-state magnitude information inside one connected lattice. It does not
+prove that the four sign regions are four unique physical children, that
+their boundaries can be forecast blindly or that every ARA identity obeys
+affine closure. The correct conditional statement is:
+
+\[
+\left.
+\begin{array}{c}
+\text{one connected identity has a stable four-quadrant closure–flow chart},\\
+\text{its ordered cycle approximately satisfies affine closure}
+\end{array}
+\right\}
+\Longrightarrow
+\widehat C_4=C_1-C_2+C_3
+\text{ is a candidate masked-state reconstruction.}
+\]
+
+Full report:
+`analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_REPORT_2026-07-27.md`.
+
+**Post-result Q39A conditional-orientation refinement (27 July 2026).**
+Q39's negative-cosine tail was not a direct marker of the deepest determinant
+pinch. It was concentrated on the high-closure return branch. Let
+
+\[
+\underbrace{D}_{\substack{\text{ordered retained relation}\\
+\text{between the first two visits}}}
+=C_1-C_2,
+\qquad
+\underbrace{P}_{\substack{\text{unconditional affine}\\
+\text{fourth-state prediction}}}
+=C_3+D.
+\]
+
+The opened-data audit found the following target-blind conditional candidate:
+
+\[
+\boxed{
+\widehat C_4=
+\begin{cases}
+C_3-D,&\cos(P,C_3)<0,\\
+C_3+D,&\cos(P,C_3)\ge 0.
+\end{cases}}
+\]
+
+Plainly: if carrying the ordered relation forward would reverse the current
+parent orientation, reverse the **relation-flow contribution** rather than
+the whole parent. On Q39's open archive this flag had `96.35%` precision and
+`99.31%` recall for the negative target orientation; the conditional rule
+improved every one of the `1,342` changed cycles and reduced lineage-mean
+NRMSE from `0.3074` to `0.2508`.
+
+This does not amend Proposition 3.2b or prove seam parity. The condition and
+operator were found after Q39 outcomes were known. Its present axiomatic
+status is therefore:
+
+\[
+\left.
+\begin{array}{c}
+\text{one ordered four-visit identity follows affine closure},\\
+\text{the provisional fourth state points against the third}
+\end{array}
+\right\}
+\Longrightarrow
+\text{test a reversal of the retained relation term on untouched data.}
+\]
+
+It is a falsifiable Q40 hypothesis and a candidate ARA return-flow
+orientation rule, not yet a general law or physical Phase-B identification.
+Audit:
+`analysis/quantum/Q39A_POST_RESULT_SEAM_PARITY_AUDIT_2026-07-27.md`.
+
 ### Proposition 3.2c — A parent ridge is not sufficient to identify coupling
 
 Let two separately normalized local identities \(C,B\in(0,2)\) be coupled one rung up by:

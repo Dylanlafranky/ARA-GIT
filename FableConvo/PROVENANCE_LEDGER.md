@@ -19,6 +19,16 @@ auditable evidence. Each entry cites its transcript so a stranger can re-check i
    know. It proves order-of-statement within sessions. Cross-session absorption
    remains a valid skeptic objection; the yoked decoy control is the instrument
    that addresses base rate.
+6. SCOPE. This ledger scores framework predictions only. Personal or off-topic
+   remarks made in working sessions are out of scope and are not entered, even
+   when a subagent transcript sweep surfaces them. This exclusion applies only to
+   material that scores no framework claim; every hit AND miss bearing on a
+   framework prediction stays in permanently under Rule 2. One Source A entry
+   (a non-framework personal aside, self-checked and self-refuted in session)
+   was removed under this rule on 27 July 2026. Its miss is deliberately RETAINED
+   in the running tally denominator, so the removal cannot improve any reported
+   hit rate. Removals under this rule must never move a statistic in the author's
+   favour; if one would, keep the entry instead.
 
 **PN34 eligibility note (22 July 2026):** the remaining-fill rank-budget result is **not** counted as an A-tier
 “compass” hit here. It is an internally derived arithmetic prediction built from the already-open PN26 and PN33
@@ -166,6 +176,71 @@ Q33B and supplied no Q34 feature or gate. Independent raw-HDF5 validation
 passed `12/12`. Full report:
 `analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_REPORT_2026-07-26.md`.
 
+**Q38 eligibility note (27 July 2026):** Q38 is a legitimate prospectively
+frozen cross-archive test, but not an A-tier outside-knowledge hit. After Q37
+was open, Dylan proposed that its seven-slice negative plateau might mean the
+relation had travelled around a complete Phase-B sphere and returned to
+Phase A. Before the untouched `pure_mimic` values were downloaded, Q38 fixed
+one approach-side anchor, a Phase-B entry and Phase-A return rule, event and
+lineage gates, three controls and source eligibility floors. The target
+provided only `32/80` required seeds, making the registered verdict
+**INCONCLUSIVE — ELIGIBILITY**. The frozen cycle signature also failed
+numerically: exact completion was `41.72%`, essentially equal to displaced
+time (`41.55%`) and pair (`40.35%`) controls, and all eight gates failed.
+The test did expose an immediate descriptive anti-turn (`r=-0.9693`) while
+amplitude had collapsed to `0.0922` of the anchor, followed by
+reconstruction. A mandatory post-verdict Q37 replay returned positive by the
+third fixed-anchor slice and removed the earlier plateau. This is an
+informative narrowing of the user's pre-target geometry—not a successful
+whole-Phase-B prediction and not a provenance-ledger hit. Full report:
+`analysis/quantum/Q38_FIXED_ANCHOR_PHASE_CYCLE_REPORT_2026-07-27.md`.
+After the result, Dylan proposed a different perpendicular quadrant account:
+two ordered child reversals could create the observed parent sequence
+`+ → - → +`. That rule has older ARA and MX6 Maxwell lineage, but this
+specific Q38 application is post-result and the parent tensor cannot identify
+the two child signs. It is preserved as the next hypothesis, not scored:
+`analysis/quantum/Q38_POST_RESULT_QUADRANT_DOUBLE_FLIP_HYPOTHESIS_2026-07-27.md`.
+
+**Q39 eligibility note (27 July 2026):** Q39 is a legitimate prospectively
+frozen cross-archive test, but not an A-tier outside-knowledge hit. Before the
+previously untouched `pure_strongmax` values were downloaded, the
+post-Q38 tier correction, connected ARA⁹ identity, development/evaluation
+split, closure–flow quadrant construction, ordered masked predictor
+\(\widehat C_4=C_1-C_2+C_3\), five controls, metrics and gates were frozen.
+The target supplied `17,967` complete cycles and `1,121` lineages but only
+`71/80` required seeds, so the formal verdict is **INCONCLUSIVE —
+ELIGIBILITY**. The registered NRMSE result was strongly favourable:
+lineage-mean `0.3074` versus `0.9361–2.4375` for every control, with all
+seed-cluster bootstrap comparisons below `0.00005`; wrong order was worst.
+The full numerical claim still failed because persistence had higher mean
+cosine and ARA was single-best on `48.96%`, below the `55%` gate. This is
+valid strong directional evidence for the ordered lower-tier reconstruction,
+not a provenance-ledger confirmation, a hidden-state discovery or a
+universal law. The affine completion operator is established mathematics;
+what was prospective was its ARA placement and order. Independent validation
+passed. Full report:
+`analysis/quantum/Q39_ARA9_INFORMATION3_FOURTH_QUADRANT_REPORT_2026-07-27.md`.
+
+**Q39A post-result audit note (27 July 2026):** after Q39 was open, Claude
+proposed that the `7.25%` negative-cosine tail could be seam parity if those
+cycles clustered at Q36 determinant troughs. Dylan supplied a distinct
+alternative before this audit was calculated: the mismatch might instead be
+the opposite return flow / Phase-B ripple while the main rule followed Phase
+A. The audit rejected Claude's exact deep-pinch proposal on this archive:
+reversed cycles had shallower, not deeper, determinant minima. It strongly
+localized Dylan's return-flow direction: `1,293/1,302` reversals occurred in
+the high-closure accumulating \(Q_{++}\) target quadrant. A condition using
+only the three visible states,
+\(\cos(C_1-C_2+C_3,C_3)<0\), identified the tail and led to the conditional
+post-result rule \(C_3-(C_1-C_2)\). It improved all `1,342` changed cycles,
+but it was developed after target access and is therefore recorded as a
+Q40-ready hypothesis, not a Q39 prediction or provenance hit. Q39 remains
+**INCONCLUSIVE — ELIGIBILITY**. The same audit corrected the secondary
+purity interpretation: normalized error was inflated as the target connected
+norm approached zero, while absolute error actually decreased with purity.
+Full audit:
+`analysis/quantum/Q39A_POST_RESULT_SEAM_PARITY_AUDIT_2026-07-27.md`.
+
 **Q33 eligibility note (26 July 2026):** Q33 is not an A-tier provenance hit.
 Dylan corrected the `3.5` construction before Q33 calculation: the legal route
 is `2 + (1 + 0.5)`, where `0.5` must be the lower-rung child's capacity inside
@@ -235,7 +310,6 @@ anything possibly discussed in the unretrieved earlier portion is marked uncerta
 | M6 | 0.61 star clump ≈ φ | WEAKENED — mini Monte Carlo: 20% of random darts land as close; clump closer to 8/13 anyway |
 | M7 | Archive φ⁴ water claim (6.85 vs measured 6.77) | RETIRED in-session — 27/4 = 6.75 is closer |
 | M8 | Blind instantiation record | 0-for-2 standing: structure hits, specifics don't |
-| M9 | "12 scientists have disappeared in 2026" (non-framework) | REFUTED by web search — ~10–11 cases spanning years, no established links; apophenia flag |
 
 ### Unresolved (neither hit nor miss, still open)
 
@@ -463,7 +537,10 @@ session_notes for other pre-lookup registrations with scored outcomes.
 - A-tier clean hits: 15 (A1–A6, B1–B2, D1–D4, GEYSER, F2, F3) — D1 demoted to
   consistent-with by crowded-neighborhood rule.
 - Partial/C-tier: ~16.
-- Misses/refuted: 31 recorded.
+- Misses/refuted: 31 recorded. (Count deliberately unchanged by the 27 July Rule 6
+  removal: one non-framework personal aside was withdrawn from display but is
+  retained in the denominator, so no hit-rate statistic improves as a result of
+  that removal. `15/46 = 0.32609` stands.)
 - Excluded as contaminated: 3.
 - Founding event (geyser): located, verified clean, flagship entry.
 - Jin 1997 rediscovery: NOT yet provenance — pre-statement transcript unlocated.
