@@ -1,7 +1,20 @@
 # Golden Stars Run Leaner — φ and the Energy Budget of Pulsating Stars
 
 **Date:** 31 May 2026 · ARA Framework (Dylan La Franchi & Claude)
-**Status:** CONFIRMED on real photometry; honestly hedged (see caveats).
+**Status:** **CORRECTED 30 JULY 2026 — exact-Phi leanness gradient not
+supported as written.** The historical class association is retained with
+caveats; the within-club dose-response interpretation contained a sign error.
+
+> **Correction (formal re-run already completed 2 July 2026):** this report
+> defines lower `R21` as leaner and reports
+> `corr(|Px/P1O - 1/phi|, R21) = -0.347`. Because smaller distance means
+> *closer* to Phi, a negative correlation means that moving farther from exact
+> Phi is associated with lower `R21`. The sentence claiming the opposite was
+> mathematically reversed. The independent re-run found an `8.9%` class gap
+> and a period/amplitude-matched difference (`p=8.8e-43`) but confirmed the
+> within-class exact-Phi gradient runs the opposite way (partial
+> `r=-0.203`). See `../GOLDEN_STARS_CORRECTION.md` and
+> `analysis/phi_calibration/T303_PHI_THREE_EIGHTHS_STATE_DUALITY_AUDIT_2026-07-30.md`.
 
 ## The question
 
@@ -31,11 +44,20 @@ Golden club members (raw Kepler, 2nd-mode/f₁): KIC 5520878 = 1.583 (−2.2%), 
 
 ### Population confirmation (n≈950)
 - φ-club = 949 OGLE RR0.61 stars (period ratio Px/P1O ≈ 0.61 = 1/φ). Mean R21 **0.1138** vs 18,318 ordinary single-mode RRc **0.1181** → club **3.6% leaner**, Mann–Whitney p = **0.016**.
-- **Within the club: corr(|Px/P1O − 1/φ|, R21) = −0.347 (n=949)** — the closer to *exact* 1/φ, the leaner. This dose-response gradient on the golden axis is the strongest, least-confoundable part of the result.
+- **Within the club: corr(|Px/P1O − 1/φ|, R21) = −0.347 (n=949).**
+  The original text incorrectly said this meant closer to exact `1/φ` was
+  leaner. With lower `R21 = leaner`, the reported sign points in the opposite
+  direction.
 
 ## Reading & mechanism
 
-Closeness to φ tracks a leaner energy budget. Mechanism is consistent with **KAM theory**: φ is the most-irrational ratio, so no harmonic can phase-lock and grow → energy stays in clean modes (lean). Rational ratios let overtones lock and reinforce → energy piles into fat harmonics (waste). This is *why* the most-rational stars (single-mode 2:1/3:1) are the **fattest** (R21 0.28) and the φ-club is the leanest. Note 1/φ = 0.618 is **not** "anti-φ" — it is the same golden family reciprocal.
+The corrected calculation reports a class-level association: the selected
+RR0.61 group has lower mean `R21` than the broad RRc control, and the result
+survives period/amplitude matching. It does **not** show that closeness to
+exact Phi tracks greater leanness inside the group.
+The proposed KAM/locking mechanism therefore remains a hypothesis rather than
+the demonstrated explanation of this comparison. Note `1/φ = 0.618` is the
+golden-family reciprocal.
 
 This matches the framework's earlier φ-rung **entropy-decay** result on ECG/ENSO (`PHI_RUNG_ENTROPY_DECAY_RESULT.md`): φ = most-irrational packing = least entropy leaked per cycle. There it was a number in a decay curve; here it is a physical energy signature in starlight — same principle, new domain.
 
@@ -49,7 +71,12 @@ Only **leanness (R21)** pointed the right way in both classes and on the golden 
 ## Caveats (kept explicit)
 - n=4 Kepler club is a **known related class** (Lindner 2015 strange-nonchaotic stars) — re-found, not independently discovered. The leanness *measurement* is ours.
 - R21 is **one** (clean, physical) leanness proxy.
-- Against **same-type** RRc the class gap is modest (3.6%); the within-club gradient toward exact φ is the backbone.
+- The corrected re-run found an `8.9%` class gap and a matched-control
+  difference of `-0.0077` in `R21`.
+- The old within-club exact-Phi gradient was interpreted in the wrong
+  direction and cannot serve as the backbone of the claim.
+- The corrected download/reproduction pathway is documented in
+  `../GOLDEN_STARS_CORRECTION.md` and `../golden_stars_corrected.py`.
 - Golden-star secondary modes may be **non-radial**, vs the crowd's radial overtones — not perfectly apples-to-apples.
 - "φ resists locking / most-irrational stability" is **established mathematics** (KAM). The empirical leanness gradient and the cross-domain entropy framing are the framework's new contribution.
 

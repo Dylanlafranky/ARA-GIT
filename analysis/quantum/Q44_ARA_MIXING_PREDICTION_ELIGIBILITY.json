@@ -1,0 +1,28 @@
+{
+  "test_id": "Q44-ARA-MIXING-PREDICTION-v1",
+  "verdict": "INCONCLUSIVE — ELIGIBILITY",
+  "reason": "Three evaluation groups had fewer than the frozen minimum of 25 development cycles. The prediction artifact was not written and held-out fourth matrices were not scored.",
+  "development_cycles": 4965,
+  "eligible_lineages": 801,
+  "evaluation_cycles": 5278,
+  "sparse_evaluation_groups": {
+    "('other', 1)": {
+      "development_cycles": 6,
+      "evaluation_cycles": 8
+    },
+    "('other', 2)": {
+      "development_cycles": 14,
+      "evaluation_cycles": 16
+    },
+    "('other', 3)": {
+      "development_cycles": 23,
+      "evaluation_cycles": 16
+    }
+  },
+  "held_out_target_access": {
+    "prediction_artifact_written": false,
+    "evaluation_fourth_matrices_read": false,
+    "evaluation_fourth_matrices_scored": false
+  },
+  "next_step": "Freeze a sparse-group fallback using development counts only, then seal predictions before target scoring."
+}

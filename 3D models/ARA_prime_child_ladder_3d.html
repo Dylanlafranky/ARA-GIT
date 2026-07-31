@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ARA — Prime child ladder (fixed skeleton, octave rungs)</title>
+<style>
+  :root{
+    --bg:#0a0e14; --panel:#111820; --border:#1e2a3a;
+    --text:#c8d1db; --dim:#6b7d93; --bright:#e8edf3;
+    --gold:#d4a843; --blue:#4a9eff; --red:#f44747;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;font-size:13px}
+  #view{position:fixed;inset:0}
+
+  /* ---- collapsible wrappers ---- */
+  .wrap{position:fixed;top:0;height:100%;display:flex;align-items:stretch;z-index:10;
+    transition:transform .26s cubic-bezier(.4,0,.2,1)}
+  #wrapL{left:0}
+  #wrapR{right:0;flex-direction:row-reverse}
+  #wrapL.hid{transform:translateX(-310px)}
+  #wrapR.hid{transform:translateX(292px)}
+
+  .pnl{width:310px;max-height:100vh;overflow-y:auto;background:rgba(17,24,32,.94);
+    padding:16px 16px 26px}
+  #panelL{border-right:1px solid var(--border)}
+  #panelR{width:292px;border-left:1px solid var(--border)}
+
+  .tab{width:22px;align-self:center;height:96px;background:rgba(17,24,32,.94);
+    border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--dim);font-size:12px;user-select:none}
+  #tabL{border-left:none;border-radius:0 4px 4px 0}
+  #tabR{border-right:none;border-radius:4px 0 0 4px}
+  .tab:hover{color:var(--gold);background:#16202c}
+
+  h1{font-size:15px;font-weight:600;color:var(--bright);letter-spacing:-.01em;margin-bottom:2px}
+  h2{font-size:12px;font-weight:600;color:var(--bright);margin-bottom:9px;letter-spacing:.02em}
+  .sub{font-size:11px;color:var(--dim);margin-bottom:14px;line-height:1.45}
+  .grp{border-top:1px solid var(--border);padding-top:11px;margin-top:11px}
+  .lab{display:flex;justify-content:space-between;align-items:baseline;
+    font-size:11px;color:var(--dim);margin-bottom:4px;letter-spacing:.03em;text-transform:uppercase}
+  .val{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:none}
+  input[type=range]{width:100%;margin-bottom:11px;accent-color:var(--gold)}
+  input[type=range].pt{accent-color:var(--gold)}
+  input[type=range].th{accent-color:var(--blue)}
+  .row{display:flex;gap:6px;margin-bottom:7px;flex-wrap:wrap}
+  button{flex:1;min-width:64px;background:#16202c;color:var(--text);border:1px solid var(--border);
+    border-radius:3px;padding:6px 4px;font-size:11px;cursor:pointer;font-family:inherit}
+  button:hover{border-color:var(--gold);color:var(--bright)}
+  button.on{background:var(--gold);color:#0a0e14;border-color:var(--gold);font-weight:600}
+  .note{font-size:10.5px;color:var(--dim);line-height:1.5;margin-top:8px}
+  .note b{color:var(--text);font-weight:600}
+  code{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:10.5px}
+  .swatch{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;
+    vertical-align:middle}
+  #stats{position:fixed;bottom:0;left:50%;transform:translateX(-50%);padding:9px 16px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-align:center;
+    line-height:1.6;background:rgba(10,14,20,.72);pointer-events:none;z-index:5}
+  #stats b{color:var(--gold);font-weight:400}
+  #hint{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);margin-top:4px;
+    font-size:10.5px;color:#3d4c5e;z-index:4;pointer-events:none}
+</style>
+</head>
+<body>
+<canvas id="view"></canvas>
+
+<!-- ================= LEFT ================= -->
+<div class="wrap" id="wrapL">
+  <div class="pnl" id="panelL">
+    <h1>Prime child ladder</h1>
+    <div class="sub">
+      Every prime parent <code>p</code> read against every lower prime gate <code>q</code>.<br>
+      Child coordinate <code>A = 2(p mod q)/q</code>, closing <code>A + B = 2</code>.
+    </div>
+
+    <div class="grp">
+      <div class="lab">Prime parents <span class="val" id="vN">400</span></div>
+      <input type="range" id="sN" min="50" max="1500" step="25" value="400">
+
+      <div class="lab">Gate rungs shown <span class="val" id="vG">10</span></div>
+      <input type="range" id="sG" min="1" max="24" step="1" value="10">
+
+      <div class="lab">Start from prime # <span class="val" id="vS">0</span></div>
+      <input type="range" id="sS" min="0" max="4000" step="50" value="0">
+    </div>
+
+    <div class="grp">
+      <div class="lab">Order</div>
+      <div class="row">
+        <button id="bReal" class="on">Prime order</button>
+        <button id="bShuf">Shuffled</button>
+      </div>
+      <div class="note">
+        The shuffle keeps the identical set of primes and gates and only destroys their
+        <b>sequence</b>. Marginal distributions are unchanged. Anything that survives the
+        shuffle was never sequential structure.
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="lab">Skeleton</div>
+      <div class="row">
+        <button id="bRidge" class="on">Ridge</button>
+        <button id="bSeam" class="on">Seam</button>
+        <button id="bRungs" class="on">Rungs</button>
+      </div>
+      <div class="row">
+        <button id="bThread" class="on">Threads</button>
+        <button id="bSpin" class="on">Spin</button>
+        <button id="bReset">Reset view</button>
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="note">
+        <b>Fixed skeleton.</b> The <span style="color:var(--gold)">ridge</span> is
+        <code>A = 1</code>. The <span style="color:var(--red)">seam</span> is where
+        <code>A = 0</code> and <code>A = 2</code> meet — the two poles are one point once the
+        diameter is wrapped. Radius is <code>log₂ q</code>, so every <b>octave of gate size is
+        an equal radial step</b>. Height is parent index.<br><br>
+        Nothing is fitted per gate. Each gate <code>q</code> admits exactly <code>q−1</code>
+        positions, mirror-symmetric about the ridge, because <code>r ↔ q−r</code> is a
+        fixed-point-free involution (Thm 26). Gate <code>q = 2</code> sits <b>exactly</b> on the
+        ridge for every odd prime — the only exact <code>1.0</code> readings in the field.
+      </div>
+    </div>
+  </div>
+  <div class="tab" id="tabL">‹</div>
+</div>
+
+<!-- ================= RIGHT ================= -->
+<div class="wrap" id="wrapR">
+  <div class="pnl" id="panelR">
+    <h2>Display</h2>
+
+    <div class="lab">
+      <span><span class="swatch" style="background:var(--gold)"></span>Prime brightness</span>
+      <span class="val" id="vPB">1.00</span>
+    </div>
+    <input type="range" class="pt" id="sPB" min="0" max="2" step="0.01" value="1">
+
+    <div class="lab">
+      <span><span class="swatch" style="background:var(--blue)"></span>Thread brightness</span>
+      <span class="val" id="vTB">0.55</span>
+    </div>
+    <input type="range" class="th" id="sTB" min="0" max="2" step="0.01" value="0.55">
+
+    <div class="grp">
+      <div class="lab">Prime point size <span class="val" id="vPS">2.1</span></div>
+      <input type="range" id="sPS" min="0.4" max="7" step="0.1" value="2.1">
+
+      <div class="lab">Skeleton brightness <span class="val" id="vSB">1.00</span></div>
+      <input type="range" id="sSB" min="0" max="2" step="0.01" value="1">
+    </div>
+
+    <div class="grp">
+      <div class="row">
+        <button id="bDisplayReset">Reset display</button>
+      </div>
+      <div class="note">
+        Brightness multiplies the vertex colours, so <code>0</code> fades a layer out entirely
+        and <code>2</code> pushes it hot. Turn <b>threads</b> down to read individual gate rings;
+        turn <b>primes</b> down and threads up to read the sequential bands.
+      </div>
+    </div>
+  </div>
+  <div class="tab" id="tabR">›</div>
+</div>
+
+<div id="stats"></div>
+<div id="hint">drag to orbit · scroll to zoom · right-drag to pan</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ---------- primes ---------- */
+function sieve(limit){
+  const m = new Uint8Array(limit+1); const out=[];
+  for(let i=2;i<=limit;i++){
+    if(!m[i]){ out.push(i); for(let j=i*i;j<=limit;j+=i) m[j]=1; }
+  }
+  return out;
+}
+const PRIMES = sieve(200000);
+
+/* ---------- state ---------- */
+const S = { N:400, G:10, start:0, shuffled:false,
+            ridge:true, seam:true, rungs:true, thread:true, spin:true,
+            ptBright:1.0, thBright:0.55, ptSize:2.1, skBright:1.0 };
+
+/* ---------- three ---------- */
+const canvas = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0a0e14);
+scene.fog = new THREE.FogExp2(0x0a0e14, 0.0032);
+const camera = new THREE.PerspectiveCamera(52, 1, 0.5, 4000);
+
+const root = new THREE.Group();
+const skel = new THREE.Group();
+const data = new THREE.Group();
+root.add(skel); root.add(data); scene.add(root);
+
+/* material registries so sliders can update without rebuilding */
+let ptMats = [], thMats = [], skMats = [];
+
+/* ---------- orbit ---------- */
+const cam = {theta:0.72, phi:1.16, dist:340, tx:0, ty:0, tz:0};
+function applyCam(){
+  const x = cam.dist*Math.sin(cam.phi)*Math.cos(cam.theta);
+  const y = cam.dist*Math.cos(cam.phi);
+  const z = cam.dist*Math.sin(cam.phi)*Math.sin(cam.theta);
+  camera.position.set(x+cam.tx, y+cam.ty, z+cam.tz);
+  camera.lookAt(cam.tx, cam.ty, cam.tz);
+}
+let drag=null, lx=0, ly=0;
+canvas.addEventListener('pointerdown', e=>{ drag = e.button===2?'pan':'orbit'; lx=e.clientX; ly=e.clientY; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointerup',   ()=>{ drag=null; });
+canvas.addEventListener('contextmenu', e=>e.preventDefault());
+canvas.addEventListener('pointermove', e=>{
+  if(!drag) return;
+  const dx=e.clientX-lx, dy=e.clientY-ly; lx=e.clientX; ly=e.clientY;
+  if(drag==='orbit'){
+    cam.theta -= dx*0.006;
+    cam.phi = Math.max(0.05, Math.min(Math.PI-0.05, cam.phi - dy*0.006));
+  } else {
+    cam.tx -= dx*0.35*Math.cos(cam.theta);
+    cam.ty += dy*0.45;
+    cam.tz += dx*0.35*Math.sin(cam.theta);
+  }
+  applyCam();
+});
+canvas.addEventListener('wheel', e=>{
+  e.preventDefault();
+  cam.dist = Math.max(40, Math.min(1800, cam.dist*(1+Math.sign(e.deltaY)*0.09)));
+  applyCam();
+}, {passive:false});
+
+/* ---------- fixed geometry constants ---------- */
+const R0 = 26, RK = 30, DZ = 0.52;
+const radiusOf = q => R0 + RK*(Math.log2(q) - 1);
+const angleOf  = A => Math.PI * A;
+
+function clearGroup(g){
+  while(g.children.length){
+    const c=g.children.pop();
+    if(c.geometry) c.geometry.dispose();
+    if(c.material) c.material.dispose();
+  }
+}
+
+/* ---------- skeleton ---------- */
+function buildSkeleton(gates, height){
+  clearGroup(skel); skMats = [];
+  const rMax = radiusOf(gates[gates.length-1]) + 14;
+
+  const addLines = (pts, color, opacity, isLoop)=>{
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pts,3));
+    const m=new THREE.LineBasicMaterial({color, transparent:true, opacity});
+    m.userData.baseColor = new THREE.Color(color);
+    m.userData.baseOpacity = opacity;
+    skMats.push(m);
+    skel.add(isLoop ? new THREE.Line(g,m) : new THREE.LineSegments(g,m));
+  };
+
+  if(S.rungs){
+    gates.forEach(q=>{
+      const r = radiusOf(q); const pts=[];
+      for(let i=0;i<=128;i++){ const a=i/128*Math.PI*2; pts.push(r*Math.cos(a),0,r*Math.sin(a)); }
+      const isOct = Number.isInteger(Math.log2(q));
+      addLines(pts, isOct?0x4a9eff:0x1e2a3a, isOct?0.55:0.32, true);
+    });
+  }
+  if(S.ridge){
+    const a = angleOf(1), pts=[];
+    pts.push(0,0,0, rMax*Math.cos(a),0,rMax*Math.sin(a));
+    pts.push(rMax*Math.cos(a),0,rMax*Math.sin(a), rMax*Math.cos(a),height,rMax*Math.sin(a));
+    pts.push(0,0,0, 0,height,0);
+    pts.push(0,height,0, rMax*Math.cos(a),height,rMax*Math.sin(a));
+    addLines(pts, 0xd4a843, 0.75, false);
+  }
+  if(S.seam){
+    const pts=[];
+    pts.push(0,0,0, rMax,0,0);
+    pts.push(rMax,0,0, rMax,height,0);
+    pts.push(0,height,0, rMax,height,0);
+    addLines(pts, 0xf44747, 0.62, false);
+  }
+  applySkeletonBrightness();
+}
+
+/* ---------- data ---------- */
+let stats = {};
+function build(){
+  clearGroup(data); ptMats = []; thMats = [];
+
+  const gates   = PRIMES.slice(0, S.G);
+  const parents = PRIMES.slice(2 + S.start, 2 + S.start + S.N);
+  const height  = S.N * DZ;
+
+  let order = parents.map((_,i)=>i);
+  if(S.shuffled){
+    let seed = 20260727;
+    const rnd = ()=> (seed = (seed*1664525 + 1013904223) >>> 0) / 4294967296;
+    for(let i=order.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [order[i],order[j]]=[order[j],order[i]]; }
+  }
+
+  buildSkeleton(gates, height);
+
+  let sumA=0, nA=0, sumAbs=0, exact=0;
+
+  gates.forEach(q=>{
+    const r = radiusOf(q);
+    const pos=[], col=[];
+    for(let k=0;k<parents.length;k++){
+      const p = parents[order[k]];
+      if(q*q > p) continue;
+      const A = 2*(p % q)/q;
+      const a = angleOf(A);
+      pos.push(r*Math.cos(a), k*DZ, r*Math.sin(a));
+      const d = Math.abs(A-1);
+      if(d < 1e-12) exact++;
+      sumA += A; nA++; sumAbs += d;
+      col.push(0.83 + 0.13*d, 0.66 - 0.38*d, 0.26 - 0.19*d);
+    }
+    if(!pos.length) return;
+
+    const g=new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+    g.setAttribute('color',    new THREE.Float32BufferAttribute(col,3));
+
+    const pm = new THREE.PointsMaterial({size:S.ptSize, vertexColors:true,
+      transparent:true, opacity:0.92, sizeAttenuation:true});
+    ptMats.push(pm);
+    data.add(new THREE.Points(g, pm));
+
+    if(S.thread){
+      const tm = new THREE.LineBasicMaterial({vertexColors:true, transparent:true, opacity:0.5});
+      thMats.push(tm);
+      data.add(new THREE.Line(g, tm));
+    }
+  });
+
+  applyDataBrightness();
+
+  stats = { parents:parents.length, gates:gates.length, relations:nA,
+            pooled: nA? sumA/nA : 0, meanDist: nA? sumAbs/nA : 0, exact };
+  drawStats();
+}
+
+/* ---------- brightness ---------- */
+function applyDataBrightness(){
+  ptMats.forEach(m=>{
+    m.color.setScalar(Math.min(S.ptBright, 1));
+    m.opacity = 0.92 * Math.min(S.ptBright, 1);
+    if(S.ptBright > 1) m.color.setScalar(S.ptBright*0.6 + 0.4), m.opacity = 0.92;
+    m.size = S.ptSize;
+    m.visible = S.ptBright > 0.015;
+    m.needsUpdate = true;
+  });
+  thMats.forEach(m=>{
+    m.color.setScalar(Math.min(S.thBright, 1));
+    m.opacity = 0.55 * Math.min(S.thBright, 1);
+    if(S.thBright > 1) m.color.setScalar(S.thBright*0.6 + 0.4), m.opacity = 0.55;
+    m.visible = S.thBright > 0.015;
+    m.needsUpdate = true;
+  });
+}
+function applySkeletonBrightness(){
+  skMats.forEach(m=>{
+    const b = S.skBright;
+    m.color.copy(m.userData.baseColor).multiplyScalar(Math.min(b,1.6));
+    m.opacity = m.userData.baseOpacity * Math.min(b,1);
+    m.visible = b > 0.015;
+    m.needsUpdate = true;
+  });
+}
+
+function drawStats(){
+  document.getElementById('stats').innerHTML =
+    `parents <b>${stats.parents.toLocaleString()}</b> · gates <b>${stats.gates}</b> · relations <b>${stats.relations.toLocaleString()}</b> · `+
+    `pooled child A <b>${stats.pooled.toFixed(7)}</b> · mean |A−1| <b>${stats.meanDist.toFixed(7)}</b> · `+
+    `exact 1.0 <b>${stats.exact.toLocaleString()}</b>`;
+}
+
+/* ---------- ui ---------- */
+function bindBuild(id, key, vid){
+  const s=document.getElementById(id), v=document.getElementById(vid);
+  s.addEventListener('input', ()=>{ S[key]=+s.value; v.textContent=s.value; build(); });
+}
+bindBuild('sN','N','vN'); bindBuild('sG','G','vG'); bindBuild('sS','start','vS');
+
+function bindLive(id, key, vid, fn, dec){
+  const s=document.getElementById(id), v=document.getElementById(vid);
+  s.addEventListener('input', ()=>{ S[key]=+s.value; v.textContent=(+s.value).toFixed(dec); fn(); });
+}
+bindLive('sPB','ptBright','vPB', applyDataBrightness, 2);
+bindLive('sTB','thBright','vTB', applyDataBrightness, 2);
+bindLive('sPS','ptSize','vPS',  applyDataBrightness, 1);
+bindLive('sSB','skBright','vSB', applySkeletonBrightness, 2);
+
+document.getElementById('bDisplayReset').addEventListener('click', ()=>{
+  const d={sPB:[1,'ptBright','vPB',2],sTB:[0.55,'thBright','vTB',2],
+           sPS:[2.1,'ptSize','vPS',1],sSB:[1,'skBright','vSB',2]};
+  for(const id in d){ const [val,key,vid,dec]=d[id];
+    document.getElementById(id).value=val; S[key]=val;
+    document.getElementById(vid).textContent=val.toFixed(dec); }
+  applyDataBrightness(); applySkeletonBrightness();
+});
+
+function toggle(id, key){
+  const b=document.getElementById(id);
+  b.addEventListener('click', ()=>{ S[key]=!S[key]; b.classList.toggle('on', S[key]); build(); });
+}
+toggle('bRidge','ridge'); toggle('bSeam','seam'); toggle('bRungs','rungs'); toggle('bThread','thread');
+
+document.getElementById('bSpin').addEventListener('click', e=>{
+  S.spin=!S.spin; e.target.classList.toggle('on', S.spin);
+});
+document.getElementById('bReset').addEventListener('click', ()=>{
+  cam.theta=0.72; cam.phi=1.16; cam.dist=340; cam.tx=cam.ty=cam.tz=0; applyCam();
+});
+const bReal=document.getElementById('bReal'), bShuf=document.getElementById('bShuf');
+bReal.addEventListener('click',()=>{ S.shuffled=false; bReal.classList.add('on'); bShuf.classList.remove('on'); build(); });
+bShuf.addEventListener('click',()=>{ S.shuffled=true;  bShuf.classList.add('on'); bReal.classList.remove('on'); build(); });
+
+/* collapse tabs */
+function collapser(tabId, wrapId, openChar, shutChar){
+  const t=document.getElementById(tabId), w=document.getElementById(wrapId);
+  t.addEventListener('click', ()=>{
+    const hid = w.classList.toggle('hid');
+    t.textContent = hid ? shutChar : openChar;
+  });
+}
+collapser('tabL','wrapL','‹','›');
+collapser('tabR','wrapR','›','‹');
+
+/* ---------- loop ---------- */
+function resize(){
+  const w=innerWidth, h=innerHeight;
+  renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+function tick(){
+  requestAnimationFrame(tick);
+  if(S.spin) root.rotation.y += 0.0016;
+  renderer.render(scene,camera);
+}
+resize(); applyCam(); build(); tick();
+</script>
+</body>
+</html>

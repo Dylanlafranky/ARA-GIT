@@ -20,6 +20,13 @@ Dylan's explicit fidelity verdict. No `EXACT ENOUGH TO TEST`, no ARA test.
 Previously run wrong-object instruments are retained as `PROXY TEST`, not
 negative ARA evidence.
 
+**Compaction override (30 Jul 2026):** if context compacts between proposal
+and execution, the earlier sign-off no longer authorises a run. Retrieve the
+durable record, restate identity, axis/relation, ordered poles, observable and
+forbidden neighboring proxy, then ask Dylan again for `EXACT ENOUGH TO TEST`.
+Do not freeze or run until he reconfirms. A post-compaction test run without
+that reconfirmation is automatically a construct-invalid proxy test.
+
 STEP 0 - REGISTER FIRST (before any code runs on real data).
 Add an entry to MASTER_PREDICTION_LEDGER.md:
 

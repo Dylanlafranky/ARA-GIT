@@ -14,6 +14,36 @@ Exploration remains free. This gate binds only when a musing is translated into 
 
 ## Prime rule
 
+## Post-compaction reconfirmation kill gate — added 30 July 2026
+
+If chat context is compacted at any point after a test idea is proposed but
+before the test is run, all earlier fidelity approval expires for execution
+purposes. Retrieval from the repository is required but is not sufficient.
+
+Before freezing code or touching target data, the AI must ask Dylan to
+reconfirm:
+
+```text
+I think the test is:
+- identity being moved/measured:
+- axis or relation:
+- ordered poles/direction:
+- observable:
+- what nearby relation must NOT be substituted:
+
+Is that EXACT ENOUGH TO TEST?
+```
+
+No answer, no test. An answer given before compaction cannot be inferred to
+cover the AI's reconstructed post-compaction object. If the AI runs anyway
+and later discovers that it measured a neighboring axis, the result is
+automatically:
+
+`PROXY TEST — CONSTRUCT INVALID FOR THE INTENDED CLAIM`.
+
+This rule applies even when the mathematics is clean, the data are valid, or
+the proxy produces an interesting result.
+
 > No formalisation is authorised as “the ARA claim” until it survives plain-language back-translation and Dylan
 > recognises the intended relational object, direction and scope.
 

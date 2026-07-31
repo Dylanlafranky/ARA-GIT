@@ -1,0 +1,141 @@
+{
+  "protocol": "PHI_FOUR_CHILD_HANDOVER_PROTOCOL_2026-07-30.md",
+  "data": {
+    "source": "dynamicslab MultiArm-Pendulum",
+    "doi": "10.5281/zenodo.6633719",
+    "development": {
+      "filename": "DoubleDataWithControl_1_Dt_0_0001.mat",
+      "n_samples": 38501,
+      "duration_s": 76.99990000000001,
+      "fs_hz": 500.0,
+      "n_parent_crossings": 74,
+      "n_cycles": 73
+    },
+    "frozen": {
+      "filename": "DoubleDataWithControl_2_Dt_0_0001.mat",
+      "n_samples": 53501,
+      "duration_s": 107.0,
+      "fs_hz": 500.0,
+      "n_parent_crossings": 51,
+      "n_cycles": 50
+    }
+  },
+  "constants": {
+    "phi": 1.618033988749895,
+    "u_phi": 0.3819660112501051,
+    "golden_quartet": [
+      0.14589803375031543,
+      0.23606797749978967,
+      0.38196601125010515,
+      0.23606797749978967
+    ],
+    "decimate": 20,
+    "min_cycle_s": 0.5332,
+    "permutations": 5000,
+    "seed": 20260730
+  },
+  "development": {
+    "n_cycles": 73,
+    "all_four_seen_n": 56,
+    "all_four_seen_fraction": 0.7671232876712328,
+    "median_transition_count": 4.0,
+    "median_child_shares": {
+      "AA": 0.48854961832061067,
+      "AB": 0.014787430683918669,
+      "BB": 0.48330058939096265,
+      "BA": 0.011029411764705883
+    },
+    "template_median_total_variation_distance": {
+      "phi_quartet": 0.4433071261707505,
+      "equal_quarters": 0.4711711711711712,
+      "paired_dyadic": 0.029259896729776247,
+      "linear_irregular": 0.37117117117117115
+    },
+    "completion_landmark_median_circular_distance": {
+      "phi": 0.3607680020315072,
+      "poles": 0.02119800921859788,
+      "ridge_opposition": 0.4788019907814021,
+      "quarters": 0.23375430090710042,
+      "thirds": 0.3121353241147355
+    },
+    "inequality_median": 0.40947862630538634,
+    "parent_retention_median": 0.8008484566684944,
+    "inequality_to_parent_retention": {
+      "n": 72,
+      "spearman_r": 0.4628271914592579,
+      "p_one_sided_circular_shift": 0.0001999600079984003,
+      "null_median": -0.001736446073702489,
+      "null_q95": 0.3188951057945849
+    },
+    "phi_proximity_to_parent_retention": {
+      "n": 72,
+      "spearman_r": -0.47454356910311596,
+      "p_one_sided_circular_shift": 1.0,
+      "null_median": 0.008698518360262444,
+      "null_q95": 0.45225864036499447
+    },
+    "secondary": {
+      "period_retention_median": 0.9558845430052985,
+      "child_allocation_retention_median": 0.9858628891441279,
+      "one_wave_phi_template_median_distance": 0.12165414841287239,
+      "one_wave_equal_quarters_median_distance": 0.02762923351158647
+    }
+  },
+  "frozen": {
+    "n_cycles": 50,
+    "all_four_seen_n": 44,
+    "all_four_seen_fraction": 0.88,
+    "median_transition_count": 7.0,
+    "median_child_shares": {
+      "AA": 0.3939699888440895,
+      "AB": 0.13730989190548015,
+      "BB": 0.41291463313756305,
+      "BA": 0.10227572615885529
+    },
+    "template_median_total_variation_distance": {
+      "phi_quartet": 0.255005061571686,
+      "equal_quarters": 0.2828691065721066,
+      "paired_dyadic": 0.21713089342789338,
+      "linear_irregular": 0.18286910657210662
+    },
+    "completion_landmark_median_circular_distance": {
+      "phi": 0.03586000118556826,
+      "poles": 0.3686113041072001,
+      "ridge_opposition": 0.1313886958927999,
+      "quarters": 0.12249355951749857,
+      "thirds": 0.041001998465463985
+    },
+    "inequality_median": 0.132429929499143,
+    "parent_retention_median": 0.8541654841134505,
+    "inequality_to_parent_retention": {
+      "n": 49,
+      "spearman_r": -0.5627551020408162,
+      "p_one_sided_circular_shift": 0.946010797840432,
+      "null_median": 0.07989795918367347,
+      "null_q95": 0.38295918367346937
+    },
+    "phi_proximity_to_parent_retention": {
+      "n": 49,
+      "spearman_r": 0.6553061224489796,
+      "p_one_sided_circular_shift": 0.0001999600079984003,
+      "null_median": -0.06959183673469387,
+      "null_q95": 0.6104081632653061
+    },
+    "secondary": {
+      "period_retention_median": 0.9153488372093022,
+      "child_allocation_retention_median": 0.8478561877173685,
+      "one_wave_phi_template_median_distance": 0.11244127653747088,
+      "one_wave_equal_quarters_median_distance": 0.12242025535161746
+    }
+  },
+  "verdict": {
+    "label": "MIXED",
+    "checks_passed": 2,
+    "checks": {
+      "phi_quartet_best_template": false,
+      "completion_closest_to_phi": true,
+      "inequality_maintains_parent": false,
+      "phi_proximity_maintains_parent": true
+    }
+  }
+}

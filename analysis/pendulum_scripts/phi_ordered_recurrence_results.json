@@ -1,0 +1,615 @@
+{
+  "protocol": "PHI_ORDERED_RECURRENCE_PROTOCOL_2026-07-30.md",
+  "source": {
+    "repository": "https://github.com/dynamicslab/MultiArm-Pendulum",
+    "doi": "10.5281/zenodo.6633719"
+  },
+  "constants": {
+    "candidates": {
+      "phi": 0.38196601125010515,
+      "three_eighths": 0.375,
+      "two_fifths": 0.4,
+      "sqrt2_conjugate": 0.41421356237309515,
+      "third": 0.3333333333333333,
+      "quarter": 0.25,
+      "e_conjugate": 0.2817181715409549,
+      "pi_conjugate": 0.14159265358979312
+    },
+    "min_cycle_s": 0.5332,
+    "min_child_samples": 3,
+    "permutations": 5000,
+    "seed": 20260730
+  },
+  "data_quality": {
+    "run1": {
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\pendulum_scripts\\data\\pend_double.mat",
+      "sha256": "2AF828048DEBC0EC33DCD9F46538B747A72A7BFAA3B333852CC474DB5ADA7633",
+      "sha256_matches_frozen": true,
+      "n_samples": 170834,
+      "duration_s": 170.833,
+      "n_crossings": 147,
+      "n_eligible_cycles": 35
+    },
+    "run2": {
+      "path": "F:\\SystemFormulaFolder\\external_data\\MultiArm-Pendulum\\DoublePendulum\\DoubleDataFreeSwing_2_Dt_0_001.mat",
+      "sha256": "B0F94AFDC6F1BB20285CA9FD416DDB249521AC678AC84F45C0881F4D9DCB8FF2",
+      "sha256_matches_frozen": true,
+      "n_samples": 182529,
+      "duration_s": 182.52800000000002,
+      "n_crossings": 155,
+      "n_eligible_cycles": 47
+    },
+    "run3": {
+      "path": "F:\\SystemFormulaFolder\\external_data\\MultiArm-Pendulum\\DoublePendulum\\DoubleDataFreeSwing_3_Dt_0_001.mat",
+      "sha256": "8E8369479E135B8BBD3FC292B051B314EEC61E1AC98DC56CB871CEB8299978EB",
+      "sha256_matches_frozen": true,
+      "n_samples": 150020,
+      "duration_s": 150.019,
+      "n_crossings": 144,
+      "n_eligible_cycles": 40
+    },
+    "run4": {
+      "path": "F:\\SystemFormulaFolder\\external_data\\MultiArm-Pendulum\\DoublePendulum\\DoubleDataFreeSwing_4_Dt_0_001.mat",
+      "sha256": "2876A0D76708725723BF382DCE3E42A1C37327D88775671ABB6C9EBD448C77C6",
+      "sha256_matches_frozen": true,
+      "n_samples": 208921,
+      "duration_s": 208.92000000000002,
+      "n_crossings": 137,
+      "n_eligible_cycles": 36
+    }
+  },
+  "runs": {
+    "run1": {
+      "n_cycles": 35,
+      "n_scored_transitions": 34,
+      "median_te_ara": {
+        "AA": 0.7577854671280276,
+        "AB": 0.14417435037720033,
+        "BB": 0.7774891774891775,
+        "BA": 0.2916666666666667
+      },
+      "median_inequality": 0.15052962096429956,
+      "median_rotation_folded": 0.004993824437467986,
+      "median_rotation_coherence": 0.9988793082584295,
+      "median_recurrence_residual": 0.007433467903927432,
+      "gap_candidate_median_distance": {
+        "phi": 0.1044150350891444,
+        "three_eighths": 0.10678593838478134,
+        "two_fifths": 0.0851995937993213,
+        "sqrt2_conjugate": 0.1229274216383465,
+        "third": 0.23027522935779826,
+        "quarter": 0.18419604072123097,
+        "e_conjugate": 0.155897791828364,
+        "pi_conjugate": 0.16387804873491732
+      },
+      "drift_candidate_median_distance": {
+        "phi": 0.37697218681263717,
+        "three_eighths": 0.370006175562532,
+        "two_fifths": 0.39500617556253204,
+        "sqrt2_conjugate": 0.40921973793562716,
+        "third": 0.32833950889586533,
+        "quarter": 0.245006175562532,
+        "e_conjugate": 0.2767243471034869,
+        "pi_conjugate": 0.13659882915232513
+      },
+      "conditional_retention": {
+        "phi": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.01769230769230769,
+          "p_one_sided_within_stratum": 0.6350729854029195,
+          "null_median": 0.041538461538461545,
+          "null_q95": 0.34926923076923083
+        },
+        "three_eighths": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.07615384615384616,
+          "p_one_sided_within_stratum": 0.6900619876024795,
+          "null_median": 0.011538461538461539,
+          "null_q95": 0.33003846153846167
+        },
+        "two_fifths": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.15538461538461537,
+          "p_one_sided_within_stratum": 0.6286742651469706,
+          "null_median": -0.09461538461538462,
+          "null_q95": 0.1415769230769232
+        },
+        "sqrt2_conjugate": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": 0.0876923076923077,
+          "p_one_sided_within_stratum": 0.39792041591681665,
+          "null_median": 0.03307692307692307,
+          "null_q95": 0.3192307692307692
+        },
+        "third": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.16538461538461538,
+          "p_one_sided_within_stratum": 0.6852629474105179,
+          "null_median": -0.05461538461538461,
+          "null_q95": 0.2100384615384617
+        },
+        "quarter": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.1392307692307692,
+          "p_one_sided_within_stratum": 0.7410517896420716,
+          "null_median": -0.011923076923076923,
+          "null_q95": 0.2892692307692309
+        },
+        "e_conjugate": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": -0.12923076923076923,
+          "p_one_sided_within_stratum": 0.6596680663867227,
+          "null_median": -0.03846153846153846,
+          "null_q95": 0.2407692307692308
+        },
+        "pi_conjugate": {
+          "n": 25,
+          "n_strata": 4,
+          "spearman_r": 0.16076923076923075,
+          "p_one_sided_within_stratum": 0.22055588882223556,
+          "null_median": -0.006923076923076924,
+          "null_q95": 0.28773076923076935
+        }
+      },
+      "resonance_death": {
+        "n_repeat": 9,
+        "n_nonclosing": 1,
+        "repeat_median_stratum_residual": -0.00032807252711131163,
+        "nonclosing_median_stratum_residual": -0.006593598879331641,
+        "difference_nonclosing_minus_repeat": -0.00626552635222033,
+        "p_one_sided_within_stratum": 1.0
+      }
+    },
+    "run2": {
+      "n_cycles": 47,
+      "n_scored_transitions": 46,
+      "median_te_ara": {
+        "AA": 0.9700272479564033,
+        "AB": 0.01634877384196185,
+        "BB": 0.9936421435059037,
+        "BA": 0.016363636363636365
+      },
+      "median_inequality": 0.43510562328871916,
+      "median_rotation_folded": 0.0004549586780274728,
+      "median_rotation_coherence": 0.9999977160771027,
+      "median_recurrence_residual": 0.0002839341261059655,
+      "gap_candidate_median_distance": {
+        "phi": 0.12923873852283235,
+        "three_eighths": 0.12408966603132507,
+        "two_fifths": 0.1475022706630336,
+        "sqrt2_conjugate": 0.16182833406824826,
+        "third": 0.24625154817934108,
+        "quarter": 0.00613368012550574,
+        "e_conjugate": 0.09276928631801785,
+        "pi_conjugate": 0.3214735874099618
+      },
+      "drift_candidate_median_distance": {
+        "phi": 0.3815110525720777,
+        "three_eighths": 0.3745450413219725,
+        "two_fifths": 0.39954504132197255,
+        "sqrt2_conjugate": 0.4137586036950677,
+        "third": 0.33287837465530584,
+        "quarter": 0.24954504132197253,
+        "e_conjugate": 0.28126321286292744,
+        "pi_conjugate": 0.14113769491176564
+      },
+      "conditional_retention": {
+        "phi": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9954009198160368,
+          "null_median": 0.00485748329416146,
+          "null_q95": 0.3605902315575256
+        },
+        "three_eighths": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.3552378348711287,
+          "p_one_sided_within_stratum": 0.9520095980803839,
+          "null_median": 0.003940977012244204,
+          "null_q95": 0.36314728408407476
+        },
+        "two_fifths": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9942011597680463,
+          "null_median": 0.008065255280871859,
+          "null_q95": 0.36442122781593966
+        },
+        "sqrt2_conjugate": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9954009198160368,
+          "null_median": 0.008798460306405666,
+          "null_q95": 0.3609293388818349
+        },
+        "third": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9966006798640272,
+          "null_median": 0.006598845229804248,
+          "null_q95": 0.3602236290447587
+        },
+        "quarter": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": 0.5000458274140553,
+          "p_one_sided_within_stratum": 0.009598080383923215,
+          "null_median": 0.0006415543973420797,
+          "null_q95": 0.3655210353542404
+        },
+        "e_conjugate": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9924015196960608,
+          "null_median": 0.007332050255338054,
+          "null_q95": 0.3572816438798043
+        },
+        "pi_conjugate": {
+          "n": 32,
+          "n_strata": 5,
+          "spearman_r": -0.501145634952356,
+          "p_one_sided_within_stratum": 0.9948010397920416,
+          "null_median": 0.010173219729281549,
+          "null_q95": 0.36150673783944287
+        }
+      },
+      "resonance_death": {
+        "n_repeat": 0,
+        "n_nonclosing": 0,
+        "difference": NaN,
+        "p": NaN
+      }
+    },
+    "run3": {
+      "n_cycles": 40,
+      "n_scored_transitions": 39,
+      "median_te_ara": {
+        "AA": 0.8826560039550299,
+        "AB": 0.1512609771613645,
+        "BB": 0.7608974065074199,
+        "BA": 0.21192890424250177
+      },
+      "median_inequality": 0.19004771719779912,
+      "median_rotation_folded": 0.02686554761536386,
+      "median_rotation_coherence": 0.9919485996692589,
+      "median_recurrence_residual": 0.015663718951866995,
+      "gap_candidate_median_distance": {
+        "phi": 0.12622680096544034,
+        "three_eighths": 0.12363760217983646,
+        "two_fifths": 0.14080882352941174,
+        "sqrt2_conjugate": 0.1568542494923806,
+        "third": 0.22771567784465452,
+        "quarter": 0.11595021887717691,
+        "e_conjugate": 0.09401504333754107,
+        "pi_conjugate": 0.26780924853294635
+      },
+      "drift_candidate_median_distance": {
+        "phi": 0.3551004636347413,
+        "three_eighths": 0.34813445238463614,
+        "two_fifths": 0.37313445238463616,
+        "sqrt2_conjugate": 0.3873480147577313,
+        "third": 0.30646778571796945,
+        "quarter": 0.22313445238463614,
+        "e_conjugate": 0.25485262392559105,
+        "pi_conjugate": 0.11936953890971558
+      },
+      "conditional_retention": {
+        "phi": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.27499999999999997,
+          "p_one_sided_within_stratum": 0.7866426714657069,
+          "null_median": -0.0857142857142857,
+          "null_q95": 0.4071428571428571
+        },
+        "three_eighths": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.5142857142857142,
+          "p_one_sided_within_stratum": 0.9590081983603279,
+          "null_median": 0.039285714285714285,
+          "null_q95": 0.5785714285714285
+        },
+        "two_fifths": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.3107142857142856,
+          "p_one_sided_within_stratum": 0.8032393521295741,
+          "null_median": -0.09285714285714285,
+          "null_q95": 0.38214285714285706
+        },
+        "sqrt2_conjugate": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.3107142857142856,
+          "p_one_sided_within_stratum": 0.8114377124575085,
+          "null_median": -0.0964285714285714,
+          "null_q95": 0.37857142857142856
+        },
+        "third": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.8642857142857141,
+          "p_one_sided_within_stratum": 0.9722055588882224,
+          "null_median": -0.08214285714285713,
+          "null_q95": 0.2571428571428571
+        },
+        "quarter": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.14285714285714282,
+          "p_one_sided_within_stratum": 0.6690661867626475,
+          "null_median": 0.049999999999999996,
+          "null_q95": 0.6107142857142855
+        },
+        "e_conjugate": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": -0.125,
+          "p_one_sided_within_stratum": 0.6558688262347531,
+          "null_median": 0.06071428571428571,
+          "null_q95": 0.6142857142857142
+        },
+        "pi_conjugate": {
+          "n": 15,
+          "n_strata": 4,
+          "spearman_r": 0.8107142857142855,
+          "p_one_sided_within_stratum": 0.04839032193561288,
+          "null_median": 0.07142857142857142,
+          "null_q95": 0.8035714285714284
+        }
+      },
+      "resonance_death": {
+        "n_repeat": 1,
+        "n_nonclosing": 1,
+        "repeat_median_stratum_residual": 0.0820847876361388,
+        "nonclosing_median_stratum_residual": -0.25478305854121364,
+        "difference_nonclosing_minus_repeat": -0.33686784617735244,
+        "p_one_sided_within_stratum": 1.0
+      }
+    },
+    "run4": {
+      "n_cycles": 36,
+      "n_scored_transitions": 35,
+      "median_te_ara": {
+        "AA": 0.9800181653042689,
+        "AB": 0.01272149285773264,
+        "BB": 0.991367351994055,
+        "BA": 0.015440508628519527
+      },
+      "median_inequality": 0.44579698590859257,
+      "median_rotation_folded": 0.00022913392340140337,
+      "median_rotation_coherence": 0.9999989841104433,
+      "median_recurrence_residual": 0.00022686025408349964,
+      "gap_candidate_median_distance": {
+        "phi": 0.1303765471265811,
+        "three_eighths": 0.12409255898366606,
+        "two_fifths": 0.14841053587647596,
+        "sqrt2_conjugate": 0.16262409824957108,
+        "third": 0.24795640326975482,
+        "quarter": 0.0031789282470481156,
+        "e_conjugate": 0.09356505049934068,
+        "pi_conjugate": 0.3231784425003754
+      },
+      "drift_candidate_median_distance": {
+        "phi": 0.38173687732670375,
+        "three_eighths": 0.3747708660765986,
+        "two_fifths": 0.3997708660765986,
+        "sqrt2_conjugate": 0.41398442844969374,
+        "third": 0.3331041994099319,
+        "quarter": 0.2497708660765986,
+        "e_conjugate": 0.2814890376175535,
+        "pi_conjugate": 0.1413635196663917
+      },
+      "conditional_retention": {
+        "phi": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.1528225806451613,
+          "p_one_sided_within_stratum": 0.7742451509698061,
+          "null_median": 0.004435483870967742,
+          "null_q95": 0.3366935483870968
+        },
+        "three_eighths": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.008670228897777152,
+          "p_one_sided_within_stratum": 0.5322935412917417,
+          "null_median": 0.011896360580670973,
+          "null_q95": 0.3345095288700533
+        },
+        "two_fifths": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.1528225806451613,
+          "p_one_sided_within_stratum": 0.7762447510497901,
+          "null_median": 0.016532258064516133,
+          "null_q95": 0.33830645161290324
+        },
+        "sqrt2_conjugate": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.1528225806451613,
+          "p_one_sided_within_stratum": 0.7760447910417917,
+          "null_median": 0.011693548387096776,
+          "null_q95": 0.33268145161290336
+        },
+        "third": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.1528225806451613,
+          "p_one_sided_within_stratum": 0.7746450709858028,
+          "null_median": 0.0076612903225806465,
+          "null_q95": 0.3496169354838711
+        },
+        "quarter": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": 0.33491279533041507,
+          "p_one_sided_within_stratum": 0.05118976204759048,
+          "null_median": -0.01673555810501171,
+          "null_q95": 0.33632422794168115
+        },
+        "e_conjugate": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.1528225806451613,
+          "p_one_sided_within_stratum": 0.7762447510497901,
+          "null_median": 0.002419354838709678,
+          "null_q95": 0.3358870967741936
+        },
+        "pi_conjugate": {
+          "n": 31,
+          "n_strata": 6,
+          "spearman_r": -0.151224922635648,
+          "p_one_sided_within_stratum": 0.7698460307938413,
+          "null_median": 0.011291460890128384,
+          "null_q95": 0.33378364924140247
+        }
+      },
+      "resonance_death": {
+        "n_repeat": 0,
+        "n_nonclosing": 0,
+        "difference": NaN,
+        "p": NaN
+      }
+    }
+  },
+  "pooled_frozen_run2_run3": {
+    "n_cycles": 87,
+    "n_scored_transitions": 85,
+    "median_te_ara": {
+      "AA": 0.9581056466302368,
+      "AB": 0.04021937842778794,
+      "BB": 0.9752973467520586,
+      "BA": 0.029250457038391225
+    },
+    "median_inequality": 0.382975522318325,
+    "median_rotation_folded": 0.0018360576582876487,
+    "median_rotation_coherence": 0.9999849871396206,
+    "median_recurrence_residual": 0.0008011761734554868,
+    "gap_candidate_median_distance": {
+      "phi": 0.12899254372951954,
+      "three_eighths": 0.12408759124087604,
+      "two_fifths": 0.14727272727272722,
+      "sqrt2_conjugate": 0.16148628964582235,
+      "third": 0.2447679708826205,
+      "quarter": 0.010101010101010138,
+      "e_conjugate": 0.09311091789261945,
+      "pi_conjugate": 0.319980471318132
+    },
+    "drift_candidate_median_distance": {
+      "phi": 0.3801299535918175,
+      "three_eighths": 0.37316394234171235,
+      "two_fifths": 0.3981639423417124,
+      "sqrt2_conjugate": 0.4123775047148075,
+      "third": 0.33149727567504567,
+      "quarter": 0.24816394234171235,
+      "e_conjugate": 0.27988211388266726,
+      "pi_conjugate": 0.13976468724075908
+    },
+    "conditional_retention": {
+      "phi": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.2915209159669806,
+        "p_one_sided_within_stratum": 0.9110177964407119,
+        "null_median": -0.03489346941413582,
+        "null_q95": 0.27171518614459095
+      },
+      "three_eighths": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.3969818740637225,
+        "p_one_sided_within_stratum": 0.9894021195760848,
+        "null_median": 0.0025440143400529847,
+        "null_q95": 0.3262900755895003
+      },
+      "two_fifths": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.2963776706161727,
+        "p_one_sided_within_stratum": 0.9108178364327134,
+        "null_median": -0.03636784136121198,
+        "null_q95": 0.2698967940765303
+      },
+      "sqrt2_conjugate": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.2963776706161727,
+        "p_one_sided_within_stratum": 0.914617076584683,
+        "null_median": -0.032291636566354365,
+        "null_q95": 0.27259402746206385
+      },
+      "third": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.6047815908398686,
+        "p_one_sided_within_stratum": 0.9964007198560288,
+        "null_median": -0.05828105579030473,
+        "null_q95": 0.21632505574071004
+      },
+      "quarter": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": 0.05446503428022525,
+        "p_one_sided_within_stratum": 0.4305138972205559,
+        "null_median": 0.017721372618778174,
+        "null_q95": 0.35078777731405586
+      },
+      "e_conjugate": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": -0.19230435670491425,
+        "p_one_sided_within_stratum": 0.8478304339132173,
+        "null_median": 0.011187881245460283,
+        "null_q95": 0.3380098871060625
+      },
+      "pi_conjugate": {
+        "n": 47,
+        "n_strata": 9,
+        "spearman_r": 0.1617761846242784,
+        "p_one_sided_within_stratum": 0.3103379324135173,
+        "null_median": 0.05799196325166235,
+        "null_q95": 0.39640368898643774
+      }
+    },
+    "resonance_death": {
+      "n_repeat": 1,
+      "n_nonclosing": 1,
+      "repeat_median_stratum_residual": 0.0820847876361388,
+      "nonclosing_median_stratum_residual": -0.25478305854121364,
+      "difference_nonclosing_minus_repeat": -0.33686784617735244,
+      "p_one_sided_within_stratum": 1.0
+    }
+  },
+  "run4_confirmation": {
+    "gap_best": "quarter",
+    "drift_best": "pi_conjugate",
+    "checks_applied_to": "runs.run4"
+  },
+  "verdict": {
+    "label": "NOT SUPPORTED",
+    "checks_passed": 0,
+    "checks": {
+      "pooled_phi_gap_best": false,
+      "pooled_phi_drift_best": false,
+      "pooled_phi_retention_specific": false,
+      "pooled_resonance_death_direction": false,
+      "run4_confirmation": false
+    }
+  }
+}

@@ -1,0 +1,1421 @@
+{
+  "test_id": "T302-PHI-PHYLLOTAXIS-v1",
+  "ran_date": "2026-07-30",
+  "status_boundary": "Empirical calibration/retrodiction; source paper already identifies the golden-angle neighbourhood.",
+  "source": {
+    "doi": "10.1038/s41467-025-65792-y",
+    "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-025-65792-y/MediaObjects/41467_2025_65792_MOESM9_ESM.zip",
+    "archive_sha256": "1D93DE8B177F7556525DBCA07D34F1D40880DA33F68DC44ECCF93BBC7CB0D563",
+    "workbook_sha256": "E78372214B1386A486B25C8340C19F22BC74D3382F80A9B36A2972CC3D35ADFB",
+    "rows": 359,
+    "plants": {
+      "Col": 21,
+      "e1e2": 18,
+      "e2": 19
+    }
+  },
+  "ara_mapping": {
+    "measured": "x_A = divergence_angle_deg / 360",
+    "assigned_not_measured": "x_B = 2 - x_A",
+    "phi_A": 0.38196601125010515,
+    "phi_B": 1.618033988749895
+  },
+  "development_median_turn": 0.38382777777777777,
+  "frozen": {
+    "passes": {
+      "P1_landmark_within_0.01": true,
+      "P2_exact_phi_step_winner": false,
+      "P3_exact_phi_cumulative_winner": true,
+      "P4_ordered_clearance_both_parts": false
+    },
+    "score": 2,
+    "verdict": "MIXED / SUGGESTIVE",
+    "P1_confirmation_wt_coordinate": 0.3874916666666666,
+    "P1_distance_from_phi": 0.00552565541656147,
+    "P2_fixed_step_winner": "three_eighths",
+    "P3_fixed_cumulative_winner": "phi",
+    "P4_confirmation_clearance_medians": {
+      "Col": 0.7391952055679046,
+      "e1e2": 0.666551109460811,
+      "e2": 0.7099110337240224
+    },
+    "P4_clearance_bootstrap_95": {
+      "Col": [
+        0.7086990442754058,
+        0.7592655564976829
+      ],
+      "e2": [
+        0.575655878227439,
+        0.760304743952246
+      ],
+      "e1e2": [
+        0.6017705712421959,
+        0.7399711178417616
+      ]
+    },
+    "P4_group_ordering_pass": true,
+    "P4_shuffle_p_one_sided": 0.1581841815818418,
+    "P4_shuffle_pass": false,
+    "P4_actual_wt_stat": 0.7391952055679046,
+    "P4_shuffle_median": 0.7047244810143332,
+    "P4_shuffle_95": [
+      0.6413379514479169,
+      0.7751862713659513
+    ]
+  },
+  "secondary": {
+    "adjacent_error_geometry": {
+      "Col_development": {
+        "pairs": 58,
+        "spearman_rho": -0.4952782306438218,
+        "within_plant_order_shuffle_p_negative": 0.0026997300269973002,
+        "shuffle_rho_median": -0.14645175182257222,
+        "shuffle_rho_95": [
+          -0.40213633147743705,
+          0.12221538650835151
+        ],
+        "median_individual_error_turn": 0.023258700069497013,
+        "median_pair_mean_error_turn": 0.009883333333333327,
+        "pair_mean_over_individual_error_ratio": 0.4249305981762489,
+        "pairs_xy": [
+          {
+            "previous_error": 0.0018006554165615474,
+            "next_error": 0.005761766527672629
+          },
+          {
+            "previous_error": 0.005761766527672629,
+            "next_error": -0.006399344583438438
+          },
+          {
+            "previous_error": -0.006399344583438438,
+            "next_error": -0.011724344583438462
+          },
+          {
+            "previous_error": -0.04744378902788293,
+            "next_error": -0.019727122361216265
+          },
+          {
+            "previous_error": -0.019727122361216265,
+            "next_error": 0.03610621097211708
+          },
+          {
+            "previous_error": 0.03610621097211708,
+            "next_error": -0.03556323347232737
+          },
+          {
+            "previous_error": -0.03556323347232737,
+            "next_error": 0.008245099861005967
+          },
+          {
+            "previous_error": 0.008245099861005967,
+            "next_error": -0.004785455694549634
+          },
+          {
+            "previous_error": -0.029085455694549567,
+            "next_error": -0.015416011250105166
+          },
+          {
+            "previous_error": -0.015416011250105166,
+            "next_error": 0.05858954430545038
+          },
+          {
+            "previous_error": 0.05858954430545038,
+            "next_error": -0.04072156680566069
+          },
+          {
+            "previous_error": -0.04072156680566069,
+            "next_error": 0.002956210972117068
+          },
+          {
+            "previous_error": 0.002956210972117068,
+            "next_error": 0.015828433194339242
+          },
+          {
+            "previous_error": -0.02794378902788297,
+            "next_error": -0.007668789027882872
+          },
+          {
+            "previous_error": -0.007668789027882872,
+            "next_error": 0.032650655416561536
+          },
+          {
+            "previous_error": 0.032650655416561536,
+            "next_error": -0.016277122361216256
+          },
+          {
+            "previous_error": -0.016277122361216256,
+            "next_error": 0.021461766527672677
+          },
+          {
+            "previous_error": 0.021461766527672677,
+            "next_error": -0.019549344583438488
+          },
+          {
+            "previous_error": -0.019549344583438488,
+            "next_error": -0.013252122361216256
+          },
+          {
+            "previous_error": -0.0037215668056607143,
+            "next_error": 0.01547565541656154
+          },
+          {
+            "previous_error": 0.01547565541656154,
+            "next_error": -0.0035437890278829376
+          },
+          {
+            "previous_error": -0.0035437890278829376,
+            "next_error": 0.0012284331943392401
+          },
+          {
+            "previous_error": 0.0012284331943392401,
+            "next_error": -0.016574344583438483
+          },
+          {
+            "previous_error": -0.016574344583438483,
+            "next_error": 0.008942322083228205
+          },
+          {
+            "previous_error": 0.008942322083228205,
+            "next_error": 0.004117322083228181
+          },
+          {
+            "previous_error": -0.03839378902788293,
+            "next_error": -0.01796878902788296
+          },
+          {
+            "previous_error": -0.01796878902788296,
+            "next_error": 0.04946732208322818
+          },
+          {
+            "previous_error": 0.04946732208322818,
+            "next_error": -0.04756601125010518
+          },
+          {
+            "previous_error": -0.04756601125010518,
+            "next_error": 0.005031210972117062
+          },
+          {
+            "previous_error": 0.005031210972117062,
+            "next_error": 0.018131210972117062
+          },
+          {
+            "previous_error": 0.018131210972117062,
+            "next_error": -0.03887990013899406
+          },
+          {
+            "previous_error": -0.04202990013899405,
+            "next_error": -0.011035455694549612
+          },
+          {
+            "previous_error": -0.011035455694549612,
+            "next_error": 0.04003121097211709
+          },
+          {
+            "previous_error": 0.04003121097211709,
+            "next_error": -0.04471045569454957
+          },
+          {
+            "previous_error": -0.04471045569454957,
+            "next_error": 0.01853954430545035
+          },
+          {
+            "previous_error": -0.02053267791677177,
+            "next_error": -0.027354900138994054
+          },
+          {
+            "previous_error": -0.027354900138994054,
+            "next_error": 0.045947877638783774
+          },
+          {
+            "previous_error": 0.045947877638783774,
+            "next_error": -0.022302122361216203
+          },
+          {
+            "previous_error": -0.022302122361216203,
+            "next_error": 0.008114544305450389
+          },
+          {
+            "previous_error": 0.008114544305450389,
+            "next_error": 0.016583988749894862
+          },
+          {
+            "previous_error": 0.016583988749894862,
+            "next_error": -0.005927122361216286
+          },
+          {
+            "previous_error": -0.039357677916771805,
+            "next_error": -0.0007243445834384521
+          },
+          {
+            "previous_error": -0.0007243445834384521,
+            "next_error": 0.04101732208322817
+          },
+          {
+            "previous_error": 0.04101732208322817,
+            "next_error": -0.04498267791677185
+          },
+          {
+            "previous_error": -0.04498267791677185,
+            "next_error": 0.020053433194339276
+          },
+          {
+            "previous_error": 0.020053433194339276,
+            "next_error": -0.020868789027882917
+          },
+          {
+            "previous_error": -0.020868789027882917,
+            "next_error": -0.02806601125010516
+          },
+          {
+            "previous_error": 0.0888534331943393,
+            "next_error": -0.056560455694549594
+          },
+          {
+            "previous_error": -0.056560455694549594,
+            "next_error": -0.0026354556945495933
+          },
+          {
+            "previous_error": -0.0026354556945495933,
+            "next_error": 0.042511766527672634
+          },
+          {
+            "previous_error": 0.042511766527672634,
+            "next_error": -0.05583823347232736
+          },
+          {
+            "previous_error": -0.05583823347232736,
+            "next_error": 0.047603433194339295
+          },
+          {
+            "previous_error": 0.10549232208322823,
+            "next_error": -0.03806045569454958
+          },
+          {
+            "previous_error": -0.03806045569454958,
+            "next_error": -0.028816011250105134
+          },
+          {
+            "previous_error": -0.028816011250105134,
+            "next_error": 0.044111766527672625
+          },
+          {
+            "previous_error": 0.044111766527672625,
+            "next_error": -0.032704900138994075
+          },
+          {
+            "previous_error": -0.032704900138994075,
+            "next_error": 0.003458988749894809
+          },
+          {
+            "previous_error": 0.003458988749894809,
+            "next_error": 0.0018617665276726147
+          }
+        ]
+      },
+      "Col_confirmation": {
+        "pairs": 55,
+        "spearman_rho": -0.5356421356421357,
+        "within_plant_order_shuffle_p_negative": 0.0005999400059994001,
+        "shuffle_rho_median": -0.13968253968253969,
+        "shuffle_rho_95": [
+          -0.38167568542568553,
+          0.11638347763347758
+        ],
+        "median_individual_error_turn": 0.01859305555555557,
+        "median_pair_mean_error_turn": 0.007977044305450431,
+        "pair_mean_over_individual_error_ratio": 0.42903353252590615,
+        "pairs_xy": [
+          {
+            "previous_error": 0.02012009986100599,
+            "next_error": -0.007593789027882936
+          },
+          {
+            "previous_error": -0.007593789027882936,
+            "next_error": 0.0235478776387838
+          },
+          {
+            "previous_error": 0.0235478776387838,
+            "next_error": -0.013638233472327344
+          },
+          {
+            "previous_error": -0.013638233472327344,
+            "next_error": -0.010346566805660762
+          },
+          {
+            "previous_error": -0.010346566805660762,
+            "next_error": 0.01981176652767258
+          },
+          {
+            "previous_error": -0.019793789027882924,
+            "next_error": -0.012132677916771861
+          },
+          {
+            "previous_error": -0.012132677916771861,
+            "next_error": 0.020270099861005975
+          },
+          {
+            "previous_error": 0.020270099861005975,
+            "next_error": -0.01986323347232738
+          },
+          {
+            "previous_error": -0.01986323347232738,
+            "next_error": 0.033936766527672635
+          },
+          {
+            "previous_error": -0.02009101125010515,
+            "next_error": -0.00038267791677182306
+          },
+          {
+            "previous_error": -0.00038267791677182306,
+            "next_error": 0.013658988749894851
+          },
+          {
+            "previous_error": 0.013658988749894851,
+            "next_error": -0.015438233472327423
+          },
+          {
+            "previous_error": -0.015438233472327423,
+            "next_error": 0.013095099861005988
+          },
+          {
+            "previous_error": 0.013095099861005988,
+            "next_error": 0.02068121097211706
+          },
+          {
+            "previous_error": 0.0012562109721170889,
+            "next_error": -0.016952122361216238
+          },
+          {
+            "previous_error": -0.016952122361216238,
+            "next_error": 0.0410506554165615
+          },
+          {
+            "previous_error": 0.0410506554165615,
+            "next_error": -0.035677122361216285
+          },
+          {
+            "previous_error": -0.035677122361216285,
+            "next_error": 0.01014787763878372
+          },
+          {
+            "previous_error": 0.01014787763878372,
+            "next_error": 0.002178433194339302
+          },
+          {
+            "previous_error": 0.002178433194339302,
+            "next_error": -0.01408823347232735
+          },
+          {
+            "previous_error": -0.023471566805660704,
+            "next_error": 0.0007645443054503653
+          },
+          {
+            "previous_error": 0.0007645443054503653,
+            "next_error": 0.009836766527672625
+          },
+          {
+            "previous_error": 0.009836766527672625,
+            "next_error": -0.029868789027882925
+          },
+          {
+            "previous_error": -0.029868789027882925,
+            "next_error": 0.030650655416561534
+          },
+          {
+            "previous_error": 0.030650655416561534,
+            "next_error": -0.020582677916771763
+          },
+          {
+            "previous_error": -0.020582677916771763,
+            "next_error": -0.024085455694549618
+          },
+          {
+            "previous_error": -0.046885455694549605,
+            "next_error": 0.0008645443054503543
+          },
+          {
+            "previous_error": 0.0008645443054503543,
+            "next_error": 0.03132843319433931
+          },
+          {
+            "previous_error": 0.03132843319433931,
+            "next_error": -0.0441493445834385
+          },
+          {
+            "previous_error": -0.0441493445834385,
+            "next_error": 0.007636766527672645
+          },
+          {
+            "previous_error": 0.007636766527672645,
+            "next_error": 0.007983988749894866
+          },
+          {
+            "previous_error": 0.007983988749894866,
+            "next_error": -0.01891878902788291
+          },
+          {
+            "previous_error": -0.0471965668056607,
+            "next_error": 0.01680065541656156
+          },
+          {
+            "previous_error": 0.01680065541656156,
+            "next_error": 0.020672877638783727
+          },
+          {
+            "previous_error": 0.020672877638783727,
+            "next_error": -0.042068789027882914
+          },
+          {
+            "previous_error": -0.042068789027882914,
+            "next_error": 0.03580343319433926
+          },
+          {
+            "previous_error": 0.03580343319433926,
+            "next_error": -0.007174344583438463
+          },
+          {
+            "previous_error": -0.007174344583438463,
+            "next_error": -0.012416011250105108
+          },
+          {
+            "previous_error": -0.04292990013899406,
+            "next_error": 2.8433194339316792e-05
+          },
+          {
+            "previous_error": 2.8433194339316792e-05,
+            "next_error": 0.03187565541656151
+          },
+          {
+            "previous_error": 0.03187565541656151,
+            "next_error": -0.016488233472327363
+          },
+          {
+            "previous_error": -0.016488233472327363,
+            "next_error": 0.008953433194339278
+          },
+          {
+            "previous_error": 0.008953433194339278,
+            "next_error": 0.002861766527672671
+          },
+          {
+            "previous_error": 0.002861766527672671,
+            "next_error": 0.010139544305450388
+          },
+          {
+            "previous_error": -0.018399344583438504,
+            "next_error": -0.005671566805660666
+          },
+          {
+            "previous_error": -0.005671566805660666,
+            "next_error": 0.046420099861005926
+          },
+          {
+            "previous_error": 0.046420099861005926,
+            "next_error": -0.044621566805660706
+          },
+          {
+            "previous_error": -0.044621566805660706,
+            "next_error": 0.01884787763878376
+          },
+          {
+            "previous_error": 0.01884787763878376,
+            "next_error": -0.006210455694549644
+          },
+          {
+            "previous_error": 0.09258676652767261,
+            "next_error": -0.058527122361216266
+          },
+          {
+            "previous_error": -0.058527122361216266,
+            "next_error": -0.015582677916771814
+          },
+          {
+            "previous_error": -0.015582677916771814,
+            "next_error": 0.057658988749894835
+          },
+          {
+            "previous_error": 0.057658988749894835,
+            "next_error": -0.044893789027882935
+          },
+          {
+            "previous_error": -0.044893789027882935,
+            "next_error": 0.01989232208322822
+          },
+          {
+            "previous_error": 0.01989232208322822,
+            "next_error": -0.0023576779167718276
+          }
+        ]
+      },
+      "e2_development": {
+        "pairs": 52,
+        "spearman_rho": -0.3011184154358405,
+        "within_plant_order_shuffle_p_negative": 0.0005999400059994001,
+        "shuffle_rho_median": 0.0031588832920686413,
+        "shuffle_rho_95": [
+          -0.19791044138990863,
+          0.21831085119098428
+        ],
+        "median_individual_error_turn": 0.022561111111111115,
+        "median_pair_mean_error_turn": 0.009794444444444439,
+        "pair_mean_over_individual_error_ratio": 0.4341295247475988,
+        "pairs_xy": [
+          {
+            "previous_error": 0.04668398874989482,
+            "next_error": -0.009152122361216264
+          },
+          {
+            "previous_error": -0.009152122361216264,
+            "next_error": 0.0334312109721171
+          },
+          {
+            "previous_error": -0.049985455694549596,
+            "next_error": 0.01926176652767264
+          },
+          {
+            "previous_error": 0.01926176652767264,
+            "next_error": 0.00404509986100593
+          },
+          {
+            "previous_error": 0.00404509986100593,
+            "next_error": -0.0006187890278829267
+          },
+          {
+            "previous_error": -0.0006187890278829267,
+            "next_error": 0.003986766527672658
+          },
+          {
+            "previous_error": 0.003986766527672658,
+            "next_error": 0.05556454430545038
+          },
+          {
+            "previous_error": 0.05556454430545038,
+            "next_error": -0.0643715668056607
+          },
+          {
+            "previous_error": 0.017547877638783682,
+            "next_error": -0.021318789027882923
+          },
+          {
+            "previous_error": -0.021318789027882923,
+            "next_error": 0.021970099861005954
+          },
+          {
+            "previous_error": 0.021970099861005954,
+            "next_error": -0.013421566805660756
+          },
+          {
+            "previous_error": -0.013421566805660756,
+            "next_error": 0.008245099861005967
+          },
+          {
+            "previous_error": 0.008245099861005967,
+            "next_error": 0.028308988749894903
+          },
+          {
+            "previous_error": 0.028308988749894903,
+            "next_error": -0.04729101125010515
+          },
+          {
+            "previous_error": -0.04729101125010515,
+            "next_error": 0.022014544305450356
+          },
+          {
+            "previous_error": -0.13626323347232736,
+            "next_error": -0.17882990013899402
+          },
+          {
+            "previous_error": -0.17882990013899402,
+            "next_error": -0.05985490013899408
+          },
+          {
+            "previous_error": -0.05985490013899408,
+            "next_error": -0.04706878902788292
+          },
+          {
+            "previous_error": -0.04706878902788292,
+            "next_error": -0.12416878902788292
+          },
+          {
+            "previous_error": -0.12416878902788292,
+            "next_error": -0.18592434458343848
+          },
+          {
+            "previous_error": -0.18592434458343848,
+            "next_error": 0.24513954430545043
+          },
+          {
+            "previous_error": -0.011757677916771792,
+            "next_error": -0.02579378902788293
+          },
+          {
+            "previous_error": -0.02579378902788293,
+            "next_error": 0.04993954430545039
+          },
+          {
+            "previous_error": 0.04993954430545039,
+            "next_error": -0.0527715668056607
+          },
+          {
+            "previous_error": -0.0527715668056607,
+            "next_error": 0.03290065541656151
+          },
+          {
+            "previous_error": 0.0019145443054504052,
+            "next_error": -0.005368789027882959
+          },
+          {
+            "previous_error": -0.005368789027882959,
+            "next_error": 0.021089544305450403
+          },
+          {
+            "previous_error": 0.021089544305450403,
+            "next_error": -0.02586601125010518
+          },
+          {
+            "previous_error": -0.02586601125010518,
+            "next_error": 0.014997877638783741
+          },
+          {
+            "previous_error": 0.014997877638783741,
+            "next_error": -0.008443789027882953
+          },
+          {
+            "previous_error": -0.008443789027882953,
+            "next_error": -0.009838233472327373
+          },
+          {
+            "previous_error": -0.025293789027882985,
+            "next_error": 0.00834232208322816
+          },
+          {
+            "previous_error": 0.00834232208322816,
+            "next_error": 0.01918954430545039
+          },
+          {
+            "previous_error": 0.01918954430545039,
+            "next_error": -0.03636878902788293
+          },
+          {
+            "previous_error": -0.03636878902788293,
+            "next_error": 0.03387565541656151
+          },
+          {
+            "previous_error": 0.03387565541656151,
+            "next_error": -0.04796601125010519
+          },
+          {
+            "previous_error": -0.04796601125010519,
+            "next_error": -0.02154934458343849
+          },
+          {
+            "previous_error": -0.004007677916771812,
+            "next_error": 0.024011766527672562
+          },
+          {
+            "previous_error": 0.024011766527672562,
+            "next_error": -0.010988233472327413
+          },
+          {
+            "previous_error": -0.010988233472327413,
+            "next_error": 0.020336766527672634
+          },
+          {
+            "previous_error": 0.020336766527672634,
+            "next_error": -0.0010299001389940665
+          },
+          {
+            "previous_error": -0.0010299001389940665,
+            "next_error": -0.03924378902788295
+          },
+          {
+            "previous_error": 0.06592287763878374,
+            "next_error": -0.16689378902788293
+          },
+          {
+            "previous_error": -0.16689378902788293,
+            "next_error": -0.0049354556945496175
+          },
+          {
+            "previous_error": -0.0049354556945496175,
+            "next_error": 0.019747877638783717
+          },
+          {
+            "previous_error": 0.019747877638783717,
+            "next_error": -0.01291878902788296
+          },
+          {
+            "previous_error": -0.01291878902788296,
+            "next_error": 0.017506210972117076
+          },
+          {
+            "previous_error": 0.046267322083228146,
+            "next_error": -0.0227132334723274
+          },
+          {
+            "previous_error": -0.0227132334723274,
+            "next_error": -0.009107677916771806
+          },
+          {
+            "previous_error": -0.009107677916771806,
+            "next_error": 0.059308988749894875
+          },
+          {
+            "previous_error": 0.059308988749894875,
+            "next_error": -0.05863267791677179
+          },
+          {
+            "previous_error": -0.05863267791677179,
+            "next_error": 0.014111766527672598
+          }
+        ]
+      },
+      "e2_confirmation": {
+        "pairs": 49,
+        "spearman_rho": -0.5240816326530612,
+        "within_plant_order_shuffle_p_negative": 0.001999800019998,
+        "shuffle_rho_median": -0.1366326530612245,
+        "shuffle_rho_95": [
+          -0.41583163265306117,
+          0.16766326530612224
+        ],
+        "median_individual_error_turn": 0.042091666666666666,
+        "median_pair_mean_error_turn": 0.020061766527672636,
+        "pair_mean_over_individual_error_ratio": 0.47662086385284425,
+        "pairs_xy": [
+          {
+            "previous_error": -0.021574344583438432,
+            "next_error": -0.014304900138994048
+          },
+          {
+            "previous_error": -0.014304900138994048,
+            "next_error": 0.04545343319433931
+          },
+          {
+            "previous_error": 0.04545343319433931,
+            "next_error": -0.03998267791677179
+          },
+          {
+            "previous_error": -0.03998267791677179,
+            "next_error": 0.0049062109721170755
+          },
+          {
+            "previous_error": 0.1109812109721171,
+            "next_error": -0.20294378902788296
+          },
+          {
+            "previous_error": -0.20294378902788296,
+            "next_error": 0.15223398874989486
+          },
+          {
+            "previous_error": 0.15223398874989486,
+            "next_error": 0.25489232208322815
+          },
+          {
+            "previous_error": 0.25489232208322815,
+            "next_error": 0.3546145443054503
+          },
+          {
+            "previous_error": 0.3546145443054503,
+            "next_error": -0.19802712236121625
+          },
+          {
+            "previous_error": -0.029654900138994078,
+            "next_error": -0.028299344583438524
+          },
+          {
+            "previous_error": -0.028299344583438524,
+            "next_error": 0.06185343319433928
+          },
+          {
+            "previous_error": 0.06185343319433928,
+            "next_error": -0.06035490013899403
+          },
+          {
+            "previous_error": -0.06035490013899403,
+            "next_error": 0.01538954430545042
+          },
+          {
+            "previous_error": 0.01538954430545042,
+            "next_error": 0.024733988749894853
+          },
+          {
+            "previous_error": -0.033307677916771805,
+            "next_error": -0.008716011250105127
+          },
+          {
+            "previous_error": -0.008716011250105127,
+            "next_error": 0.04013121097211708
+          },
+          {
+            "previous_error": 0.04013121097211708,
+            "next_error": -0.04799934458343852
+          },
+          {
+            "previous_error": -0.04799934458343852,
+            "next_error": 0.03618398874989481
+          },
+          {
+            "previous_error": 0.03618398874989481,
+            "next_error": 0.007236766527672633
+          },
+          {
+            "previous_error": 0.007236766527672633,
+            "next_error": -0.05823823347232737
+          },
+          {
+            "previous_error": -0.02158823347232741,
+            "next_error": 0.02433398874989484
+          },
+          {
+            "previous_error": 0.02433398874989484,
+            "next_error": 0.006253433194339242
+          },
+          {
+            "previous_error": 0.006253433194339242,
+            "next_error": -0.027313233472327392
+          },
+          {
+            "previous_error": -0.027313233472327392,
+            "next_error": 0.04265065541656149
+          },
+          {
+            "previous_error": 0.04265065541656149,
+            "next_error": 0.008050655416561525
+          },
+          {
+            "previous_error": 0.08917009986100599,
+            "next_error": -0.044082677916771784
+          },
+          {
+            "previous_error": -0.044082677916771784,
+            "next_error": 0.012803433194339242
+          },
+          {
+            "previous_error": 0.012803433194339242,
+            "next_error": 0.03676732208322819
+          },
+          {
+            "previous_error": 0.03676732208322819,
+            "next_error": -0.06501045569454961
+          },
+          {
+            "previous_error": -0.06501045569454961,
+            "next_error": 0.07274232208322817
+          },
+          {
+            "previous_error": 0.07274232208322817,
+            "next_error": -0.0037660112501051723
+          },
+          {
+            "previous_error": -0.007649344583438522,
+            "next_error": -0.03688823347232739
+          },
+          {
+            "previous_error": -0.03688823347232739,
+            "next_error": 0.10366176652767262
+          },
+          {
+            "previous_error": 0.10366176652767262,
+            "next_error": -0.06392156680566075
+          },
+          {
+            "previous_error": -0.06392156680566075,
+            "next_error": 0.005947877638783738
+          },
+          {
+            "previous_error": 0.005947877638783738,
+            "next_error": 0.027953433194339294
+          },
+          {
+            "previous_error": 0.027953433194339294,
+            "next_error": -0.05134101125010515
+          },
+          {
+            "previous_error": -0.05134101125010515,
+            "next_error": 0.10512843319433934
+          },
+          {
+            "previous_error": 0.039970099861005914,
+            "next_error": -0.15087712236121628
+          },
+          {
+            "previous_error": -0.15087712236121628,
+            "next_error": 0.22249787763878376
+          },
+          {
+            "previous_error": 0.22249787763878376,
+            "next_error": 0.009697877638783714
+          },
+          {
+            "previous_error": 0.009697877638783714,
+            "next_error": -0.05935767791677182
+          },
+          {
+            "previous_error": -0.05935767791677182,
+            "next_error": 0.07109509986100598
+          },
+          {
+            "previous_error": 0.07109509986100598,
+            "next_error": -0.03782712236121627
+          },
+          {
+            "previous_error": 0.12369787763878365,
+            "next_error": -0.0633465668056607
+          },
+          {
+            "previous_error": -0.0633465668056607,
+            "next_error": -0.021243789027882876
+          },
+          {
+            "previous_error": -0.021243789027882876,
+            "next_error": 0.05309232208322823
+          },
+          {
+            "previous_error": 0.05309232208322823,
+            "next_error": -0.06376323347232737
+          },
+          {
+            "previous_error": -0.06376323347232737,
+            "next_error": 0.07219232208322823
+          }
+        ]
+      },
+      "e1e2_development": {
+        "pairs": 44,
+        "spearman_rho": 0.1007751937984496,
+        "within_plant_order_shuffle_p_negative": 0.3190680931906809,
+        "shuffle_rho_median": 0.1635658914728682,
+        "shuffle_rho_95": [
+          -0.0830197322057787,
+          0.43016560958421424
+        ],
+        "median_individual_error_turn": 0.1041139279167718,
+        "median_pair_mean_error_turn": 0.035513849861005975,
+        "pair_mean_over_individual_error_ratio": 0.341105657730977,
+        "pairs_xy": [
+          {
+            "previous_error": -0.058674344583438454,
+            "next_error": 0.1010062109721171
+          },
+          {
+            "previous_error": 0.1010062109721171,
+            "next_error": -0.08186045569454958
+          },
+          {
+            "previous_error": -0.08186045569454958,
+            "next_error": 0.13392843319433928
+          },
+          {
+            "previous_error": 0.13392843319433928,
+            "next_error": -0.08533545569454959
+          },
+          {
+            "previous_error": -0.08533545569454959,
+            "next_error": 0.1475923220832282
+          },
+          {
+            "previous_error": -0.026093789027882897,
+            "next_error": 0.013364544305450365
+          },
+          {
+            "previous_error": 0.013364544305450365,
+            "next_error": 0.0024617665276726597
+          },
+          {
+            "previous_error": 0.25109232208322824,
+            "next_error": -0.17129378902788295
+          },
+          {
+            "previous_error": -0.17129378902788295,
+            "next_error": 0.04102287763878376
+          },
+          {
+            "previous_error": 0.04102287763878376,
+            "next_error": 0.3534728776387837
+          },
+          {
+            "previous_error": 0.3534728776387837,
+            "next_error": 0.04123954430545046
+          },
+          {
+            "previous_error": 0.04123954430545046,
+            "next_error": -0.018357677916771842
+          },
+          {
+            "previous_error": 0.017531210972117017,
+            "next_error": -0.0028576779167717725
+          },
+          {
+            "previous_error": -0.0028576779167717725,
+            "next_error": 0.002075655416561517
+          },
+          {
+            "previous_error": 0.002075655416561517,
+            "next_error": -0.003854900138994033
+          },
+          {
+            "previous_error": -0.003854900138994033,
+            "next_error": -0.0016437890278829248
+          },
+          {
+            "previous_error": -0.0016437890278829248,
+            "next_error": 0.04133398874989486
+          },
+          {
+            "previous_error": 0.04133398874989486,
+            "next_error": -0.04902434458343852
+          },
+          {
+            "previous_error": -0.1340715668056607,
+            "next_error": 0.13896176652767261
+          },
+          {
+            "previous_error": 0.13896176652767261,
+            "next_error": 0.32019509986100597
+          },
+          {
+            "previous_error": 0.32019509986100597,
+            "next_error": 0.1499312109721171
+          },
+          {
+            "previous_error": 0.1499312109721171,
+            "next_error": -0.15035212236121626
+          },
+          {
+            "previous_error": -0.15035212236121626,
+            "next_error": 0.1202950998610059
+          },
+          {
+            "previous_error": -0.12180767791677183,
+            "next_error": -0.1367965668056607
+          },
+          {
+            "previous_error": -0.1367965668056607,
+            "next_error": -0.10366323347232742
+          },
+          {
+            "previous_error": -0.10366323347232742,
+            "next_error": -0.05176601125010516
+          },
+          {
+            "previous_error": -0.05176601125010516,
+            "next_error": -0.11909101125010513
+          },
+          {
+            "previous_error": -0.11909101125010513,
+            "next_error": -0.11567990013899404
+          },
+          {
+            "previous_error": -0.11567990013899404,
+            "next_error": -0.08737156680566072
+          },
+          {
+            "previous_error": -0.05242712236121627,
+            "next_error": -0.13052990013899407
+          },
+          {
+            "previous_error": -0.13052990013899407,
+            "next_error": -0.10377990013899402
+          },
+          {
+            "previous_error": -0.10377990013899402,
+            "next_error": -0.10093823347232739
+          },
+          {
+            "previous_error": -0.10093823347232739,
+            "next_error": -0.06046323347232735
+          },
+          {
+            "previous_error": -0.06046323347232735,
+            "next_error": -0.15127434458343847
+          },
+          {
+            "previous_error": -0.09034656680566072,
+            "next_error": -0.13035490013899403
+          },
+          {
+            "previous_error": -0.13035490013899403,
+            "next_error": 0.21565343319433933
+          },
+          {
+            "previous_error": 0.21565343319433933,
+            "next_error": 0.33977565541656146
+          },
+          {
+            "previous_error": 0.33977565541656146,
+            "next_error": 0.08580065541656146
+          },
+          {
+            "previous_error": 0.08580065541656146,
+            "next_error": -0.13836601125010517
+          },
+          {
+            "previous_error": 0.06740065541656148,
+            "next_error": -0.05284656680566069
+          },
+          {
+            "previous_error": -0.05284656680566069,
+            "next_error": -0.028002122361216242
+          },
+          {
+            "previous_error": -0.028002122361216242,
+            "next_error": 0.034503433194339295
+          },
+          {
+            "previous_error": 0.034503433194339295,
+            "next_error": -0.023199344583438475
+          },
+          {
+            "previous_error": -0.023199344583438475,
+            "next_error": 0.01620343319433931
+          }
+        ]
+      },
+      "e1e2_confirmation": {
+        "pairs": 43,
+        "spearman_rho": 0.1828752642706131,
+        "within_plant_order_shuffle_p_negative": 0.9338066193380662,
+        "shuffle_rho_median": -0.033298097251585626,
+        "shuffle_rho_95": [
+          -0.2849630021141649,
+          0.24011250377529442
+        ],
+        "median_individual_error_turn": 0.06798055555555557,
+        "median_pair_mean_error_turn": 0.023654900138994017,
+        "pair_mean_over_individual_error_ratio": 0.34796567850438626,
+        "pairs_xy": [
+          {
+            "previous_error": 0.10363954430545042,
+            "next_error": 0.33387009986100596
+          },
+          {
+            "previous_error": 0.33387009986100596,
+            "next_error": 0.1509728776387837
+          },
+          {
+            "previous_error": 0.1509728776387837,
+            "next_error": -0.16477712236121625
+          },
+          {
+            "previous_error": 0.20702287763878374,
+            "next_error": -0.11511045569454958
+          },
+          {
+            "previous_error": -0.11511045569454958,
+            "next_error": -0.09894378902788292
+          },
+          {
+            "previous_error": -0.09894378902788292,
+            "next_error": -0.10885212236121627
+          },
+          {
+            "previous_error": 0.01888121097211709,
+            "next_error": -0.025574344583438546
+          },
+          {
+            "previous_error": -0.025574344583438546,
+            "next_error": 0.012408988749894823
+          },
+          {
+            "previous_error": 0.012408988749894823,
+            "next_error": 0.008325655416561495
+          },
+          {
+            "previous_error": 0.008325655416561495,
+            "next_error": 0.004270099861005905
+          },
+          {
+            "previous_error": 0.004270099861005905,
+            "next_error": 0.023642322083228196
+          },
+          {
+            "previous_error": -0.06480490013899404,
+            "next_error": 0.00278954430545042
+          },
+          {
+            "previous_error": 0.00278954430545042,
+            "next_error": 0.029297877638783776
+          },
+          {
+            "previous_error": 0.029297877638783776,
+            "next_error": -0.025988233472327427
+          },
+          {
+            "previous_error": -0.025988233472327427,
+            "next_error": 0.05918676652767263
+          },
+          {
+            "previous_error": -0.0852632334723274,
+            "next_error": 0.15352565541656144
+          },
+          {
+            "previous_error": 0.15352565541656144,
+            "next_error": -0.09727434458343848
+          },
+          {
+            "previous_error": -0.09727434458343848,
+            "next_error": 0.15088676652767258
+          },
+          {
+            "previous_error": 0.15088676652767258,
+            "next_error": 0.2616228776387837
+          },
+          {
+            "previous_error": 0.2616228776387837,
+            "next_error": 0.1457312109721171
+          },
+          {
+            "previous_error": 0.1457312109721171,
+            "next_error": 0.2967062109721171
+          },
+          {
+            "previous_error": -0.016841011250105176,
+            "next_error": -0.02147712236121624
+          },
+          {
+            "previous_error": -0.02147712236121624,
+            "next_error": 0.041550655416561555
+          },
+          {
+            "previous_error": 0.041550655416561555,
+            "next_error": -0.02284101125010518
+          },
+          {
+            "previous_error": -0.02284101125010518,
+            "next_error": 0.02153954430545041
+          },
+          {
+            "previous_error": 0.02153954430545041,
+            "next_error": 0.007375655416561544
+          },
+          {
+            "previous_error": 0.007375655416561544,
+            "next_error": -0.03787434458343847
+          },
+          {
+            "previous_error": 0.05489509986100599,
+            "next_error": -0.01180490013899399
+          },
+          {
+            "previous_error": -0.01180490013899399,
+            "next_error": -0.035504900138994044
+          },
+          {
+            "previous_error": -0.035504900138994044,
+            "next_error": 0.024458988749894828
+          },
+          {
+            "previous_error": 0.024458988749894828,
+            "next_error": 0.0005812109721171077
+          },
+          {
+            "previous_error": 0.0005812109721171077,
+            "next_error": -0.01350490013899408
+          },
+          {
+            "previous_error": 0.344870099861006,
+            "next_error": 0.1935173220832282
+          },
+          {
+            "previous_error": 0.1935173220832282,
+            "next_error": -0.14267712236121624
+          },
+          {
+            "previous_error": -0.14267712236121624,
+            "next_error": -0.10013823347232736
+          },
+          {
+            "previous_error": -0.10013823347232736,
+            "next_error": -0.0914521223612163
+          },
+          {
+            "previous_error": -0.0914521223612163,
+            "next_error": -0.11185767791677181
+          },
+          {
+            "previous_error": -0.11185767791677181,
+            "next_error": -0.09539934458343846
+          },
+          {
+            "previous_error": -0.07724656680566072,
+            "next_error": 0.05871454430545042
+          },
+          {
+            "previous_error": 0.05871454430545042,
+            "next_error": 0.35364232208322827
+          },
+          {
+            "previous_error": 0.35364232208322827,
+            "next_error": 0.01774509986100592
+          },
+          {
+            "previous_error": 0.01774509986100592,
+            "next_error": -0.08947156680566071
+          },
+          {
+            "previous_error": -0.08947156680566071,
+            "next_error": 0.07969787763878378
+          }
+        ]
+      }
+    },
+    "constant_benchmark": [
+      {
+        "candidate": "eight_twenty_firsts",
+        "mean_largest_gap_rank": 3.0576923076923075,
+        "mean_minimum_gap_rank": 3.423076923076923,
+        "largest_gap_wins": 8,
+        "minimum_gap_wins": 8
+      },
+      {
+        "candidate": "one_over_e",
+        "mean_largest_gap_rank": 3.1346153846153846,
+        "mean_minimum_gap_rank": 2.9423076923076925,
+        "largest_gap_wins": 3,
+        "minimum_gap_wins": 0
+      },
+      {
+        "candidate": "one_third",
+        "mean_largest_gap_rank": 6.884615384615385,
+        "mean_minimum_gap_rank": 4.480769230769231,
+        "largest_gap_wins": 1,
+        "minimum_gap_wins": 0
+      },
+      {
+        "candidate": "phi",
+        "mean_largest_gap_rank": 2.2115384615384617,
+        "mean_minimum_gap_rank": 1.8076923076923077,
+        "largest_gap_wins": 12,
+        "minimum_gap_wins": 27
+      },
+      {
+        "candidate": "silver_conjugate",
+        "mean_largest_gap_rank": 2.3461538461538463,
+        "mean_minimum_gap_rank": 2.25,
+        "largest_gap_wins": 23,
+        "minimum_gap_wins": 12
+      },
+      {
+        "candidate": "three_eighths",
+        "mean_largest_gap_rank": 4.634615384615385,
+        "mean_minimum_gap_rank": 4.115384615384615,
+        "largest_gap_wins": 3,
+        "minimum_gap_wins": 3
+      },
+      {
+        "candidate": "two_fifths",
+        "mean_largest_gap_rank": 5.730769230769231,
+        "mean_minimum_gap_rank": 4.25,
+        "largest_gap_wins": 2,
+        "minimum_gap_wins": 2
+      }
+    ]
+  },
+  "artifacts": {
+    "event_geometry_csv": "T302_PHI_PHYLLOTAXIS_EVENT_GEOMETRY.csv",
+    "plant_summary_csv": "T302_PHI_PHYLLOTAXIS_PLANT_SUMMARY.csv",
+    "candidate_summary_csv": "T302_PHI_PHYLLOTAXIS_CANDIDATES.csv",
+    "visualization": "T302_PHI_PHYLLOTAXIS_VISUALIZATION.html"
+  }
+}

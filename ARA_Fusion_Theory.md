@@ -151,3 +151,99 @@ wavefunction-width; "edge toward φ-ARA" has no physical actuator and φ's stabi
 for that step; the carrier is octave *up* (2×), not down.
 
 *See `MASTER_PREDICTION_LEDGER.md` (Fusion row), `CLAIMS_STATUS.md`, and `SESSION_NOTES_2026-06-01.md`.*
+
+## 9. July 2026 controlled Phi-carrier result (T305; current status)
+
+The earlier sections are historical theory notes. T305 now supplies the first
+frozen direct numerical comparison of the proposed golden pulse timing
+against fixed rivals and a known-horizon oracle.
+
+### What passed
+
+- exact Phi was the best forward fixed carrier for combined geometric
+  coverage across every unknown prefix `N=4...64`;
+- it was the best forward fixed carrier for mean robust overlap \(f_X\);
+- it beat `3/8` in `96.17%` of the non-flat family-prefix comparisons;
+- all exact controls and the stationary null passed;
+- independent reconstruction passed `15/15` checks.
+
+### What failed
+
+- `1/e`, not Phi, won the harsh across-prefix lower-tail endpoint;
+- the known-horizon uniform oracle still won overall;
+- therefore the frozen result is **MIXED**, not a full confirmation.
+
+### ARA interpretation
+
+The test strongly distinguished a **short local closure** from an
+**unfolding carrier**. Repeating `3/8` revisits the same eight positions; by
+64 pulses it covered only `0.01875` of a possible `0.15` window. Phi and the
+other tested irrational carriers did not repeat and retained full coverage.
+Thus `3/8` may remain a connection/closure landmark without being a viable
+indefinite Time-side schedule.
+
+The reverse Phi direction—corresponding to the `1.618` Time-side landmark on
+the ARA `0-2` diameter—had the best mean of all fixed carriers, but it was a
+frozen control rather than the primary direction. This is a direction for
+independent replication, not a promoted post-result pass.
+
+### Scientific correction and boundary
+
+The external-field muon-reactivation work used here is a published
+theoretical/rate-network proposal with numerical benchmark scenarios, not an
+experimental confirmation of the ARA timing scheme. T305 tests only the
+field-population overlap factor \(f_X\) in an idealized pulse-schedule model.
+It does not establish microscopic stripping \(P_X\), recycling \(\eta_X\),
+net yield, or a natural Phi time vector in muon-catalyzed Fusion.
+
+Full record:
+`analysis/muon/T305_ARA_PHI_TEMPORAL_CARRIER_FUSION_REPORT_2026-07-30.md`.
+
+## 10. Embedded \(1/e \leftrightarrow \phi\) thread test (T306)
+
+Dylan subsequently refined the candidate geometry:
+
+- \(1/e\) remains at its parent ARA coordinate as the proposed
+  Space/Phase-B endpoint;
+- full \(\phi\) remains at its parent coordinate as the proposed
+  Time/Phase-A endpoint;
+- \(1/e\leftrightarrow(2-\phi)\) is the candidate child Phase-B rung.
+
+This produces an exact identity:
+
+\[
+(2-\phi)-\frac1e
+=
+2-\left(\phi+\frac1e\right)
+=0.0140865701.
+\]
+
+Thus the proposed child gap is exactly the parent endpoint sum's deficit
+from TE-ARA `2`. The embedded midpoint is `0.992956715`, close to the parent
+ridge. On a unit carrier circle, the parent separation is `0.250154548`,
+giving an arithmetic relative period `3.99753`; the child separation gives
+`70.9896`.
+
+T306 froze those relations before extending the idealized T305 scheduling
+field to untouched prefixes `65...256`. The harder dynamic claim was **not
+supported (`1/3`)**. The period-four parent signature was effectively absent
+from the scored outcomes. The coupling sweep did pass: `36.46%` of fresh
+prefixes changed endpoint winner as the arrival field changed.
+
+**Framework-fidelity correction:** frozen G2 mistakenly described the child
+as slower. ARA instead specifies that a child one pure octave down is smaller
+and faster, with approximately half the parent's period. The `3.99753` and
+`70.9896` quantities in T306 are carrier-pair beat recurrences, not physical
+parent/child cadences. G2 is therefore invalid as evidence against the ARA
+octave rule; that cadence claim remains untested here.
+
+The surviving statement is mathematical rather than physical: the embedded
+parent geometry and anti-Phi closure remainder are exact. The proposed
+period-four parent response was not recovered, while the faster-child
+assignment remains inconclusive because T306 did not measure identity
+cadence. A future test requires explicit parent and child time series plus a
+joint handover outcome; plotting relative phase alone would reproduce the
+selected constants by construction.
+
+Full record:
+`analysis/muon/T306_EMBEDDED_E_PHI_THREAD_REPORT_2026-07-30.md`.

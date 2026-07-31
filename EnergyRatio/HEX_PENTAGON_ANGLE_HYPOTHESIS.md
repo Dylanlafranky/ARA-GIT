@@ -38,6 +38,18 @@ is still a clean framing, and because honest negatives are part of the value.
 > polyhedral angles) tested → not supported on this evidence. Curiosities kept: a golden star on 72°
 > (pentagon), a loose cluster near the icosahedral 63.4°. Script: `/tmp/poly_test.py`.
 
+> **INDEPENDENT FOLLOW-UP (30 July 2026):** T301 removed the `60°→72°`
+> assumption and tested Dylan's broader possibility that a coupled sphere
+> “breathes” while its orientation advances by `phi^-2` through time.
+> Raw 2D/3D pendulum state vectors instead followed opposition then near-zero
+> complete-breath recurrence in every development, frozen and confirmation
+> record (`0/4`; `18/18` sensitivity settings retained recurrence). A
+> controlled circle benchmark did show that Phi is a leading but non-unique
+> irrational non-repeating winding. This strengthens the distinction between
+> **hard golden geometry** and evidence that a specific physical coordinate
+> actually uses it. See
+> `analysis/pendulum_scripts/PHI_SPHERE_BREATHING_RESULT_2026-07-30.md`.
+
 ## Triangle-assembly: hexagon vs pentagon = ONE lost triangle = the shed = curvature into the next dimension (1 June 2026)
 
 This is the cleanest geometric grounding of the hexagon↔pentagon split — and it's hard geometry (real
@@ -198,6 +210,229 @@ run through the whole framework: hexagon = rational/space/locking (bee, octave l
 golden/time/non-locking (φ, golden stars). The shear that turns the space octave into time is 36°
 (φ = 2cos36°); its double, 72°, is the pentagon. So the band endpoints are not arbitrary — they are the
 two regular polygons that tile-vs-don't-tile, i.e. the space and time poles.
+
+## Cross-rung Phi pillars: the clarified Hexagon/Pentagon construction (31 July 2026)
+
+### Dylan's clarified identification
+
+The new Phase-lineage calibration makes a cleaner version of the
+Hexagon/Pentagon proposal possible:
+
+- the **hexagon** is the rational parent closure formed by **two coupled ARA
+  relational units**;
+- the **pentagon** is the cross-rung handover scaffold made visible by the
+  same-phase Phi pillars;
+- the full within-rung return remains the octave/TE-ARA closure;
+- the direct Phase A → Phase A or Phase B → Phase B route passes between
+  scales without same-rung phase mixing.
+
+The phrase “two ARA make the hexagon” is topological rather than a claim that
+the parent contains four TE-ARA energy units. Each minimal ARA has the
+Information³ closure
+
+\[
+\underbrace{
+  \left(A_1,\ B_1,\ A_1\!\leftrightarrow\!B_1\right)
+}_{\substack{\text{first ARA}\\\text{three relational parts}}}
+\]
+
+and the coupled partner has
+
+\[
+\underbrace{
+  \left(A_2,\ B_2,\ A_2\!\leftrightarrow\!B_2\right)
+}_{\substack{\text{second ARA}\\\text{three relational parts}}}.
+\]
+
+Together they provide a six-part parent closure:
+
+\[
+\underbrace{3+3}_{\substack{\text{two ARA}\\\text{relational closures}}}
+\longrightarrow
+\underbrace{6}_{\substack{\text{hexagonal}\\\text{parent scaffold}}}.
+\]
+
+At its own measurement tier the new parent is renormalized to one complete
+TE-ARA:
+
+\[
+\underbrace{\mathrm{TE\!-\!ARA}_{\mathrm{parent}}}_{\text{complete parent}}
+=2.
+\]
+
+This preserves the scale rule: a parent is complete at its own tier even
+though decompression reveals the two coupled children beneath it.
+
+### The normalized path
+
+Normalize the full within-rung Phase A → Phase B → returning Phase A path to
+the TE-ARA closure:
+
+\[
+\underbrace{
+L_{\mathrm{full}}
+}_{\substack{\text{Phase A → Phase B}\\\text{→ starting Phase A}}}
+=2.
+\]
+
+The proposed direct same-phase cross-rung pillar is
+
+\[
+\underbrace{
+L_{AA}=L_{BB}
+}_{\substack{\text{Phase A → Phase A}\\
+\text{or Phase B → Phase B}\\
+\text{across scale}}}
+=\phi
+\approx1.618033989.
+\]
+
+The unoccupied or handover remainder is therefore
+
+\[
+\underbrace{
+L_{\mathrm{seam}}
+}_{\substack{\text{remaining handover}\\\text{inside the full }2}}
+=
+\underbrace{2-\phi}_{\text{TE-ARA remainder}}
+=
+\underbrace{\phi^{-2}}_{\text{reverse Phi landmark}}
+\approx0.381966011.
+\]
+
+Thus the two established ARA Phi landmarks become complementary parts of one
+complete path:
+
+\[
+\boxed{\phi+\phi^{-2}=2}.
+\]
+
+Plainly: the same-phase route uses the long Phi pillar between scales, while
+the `0.382` remainder is the seam required to finish the full TE-ARA closure.
+The pillars can appear at the corners or middle arcs of multiple quadrant
+cuts. Those appearances are rotations of the same local map and must not be
+added together as though they all consumed one scalar TE-ARA budget.
+
+### Why the pillar is pentagonal
+
+The cross-scale Phi value follows from the self-similar recurrence
+
+\[
+\underbrace{L_{AA}}_{\text{next same-phase scale}}
+=
+\underbrace{1}_{\text{completed current identity}}
++
+\underbrace{\frac1{L_{AA}}}_{\text{retained preceding-scale share}}.
+\]
+
+Therefore
+
+\[
+L_{AA}^2-L_{AA}-1=0,
+\qquad
+\underbrace{L_{AA}}_{\text{positive path length}}=\phi.
+\]
+
+There is also an exact circular embedding. In a unit-radius circle, whose
+diameter is the ARA-normalized `2`, a chord of length \(\phi\) subtends
+\(108^\circ\):
+
+\[
+\underbrace{\phi}_{\text{same-phase pillar}}
+=
+\underbrace{2\sin54^\circ}_{\substack{\text{unit-circle chord}\\
+\text{with }108^\circ\text{ central angle}}}
+=
+\underbrace{2\cos36^\circ}_{\text{golden/pentagonal identity}}.
+\]
+
+The supplementary turn is
+
+\[
+180^\circ-108^\circ=72^\circ,
+\]
+
+which is the pentagon step already used in this document. The older
+Hexagon/Pentagon band therefore acquires a cleaner internal connection:
+
+- hexagonal rational step: \(60^\circ\);
+- pentagonal handover step: \(72^\circ\);
+- same-phase Phi chord: \(108^\circ\);
+- half-angle/shear identity: \(36^\circ\);
+- normalized unfinished seam: \(2-\phi=\phi^{-2}\).
+
+This is the proposed **Phi pillar**: a same-phase cross-scale connection
+embedded inside a full octave closure.
+
+### Connection to the 31 July sunflower scale calibration
+
+The frozen scale-lineage run used six published Fibonacci-type sunflower
+families:
+
+- `49` adjacent scale ratios selected Phi as the closest frozen landmark
+  (median absolute error `0.024823`);
+- `43` flip-aware same-phase two-rung ratios selected Phi-squared
+  (median absolute error `0.046605`);
+- both phase-parity paths converged;
+- `10,000` scale-order shuffles destroyed both relations
+  (`p=0.000100`);
+- independent validation passed `13/13` checks.
+
+This supports the mathematical scale placement:
+
+\[
+\text{one ordered scale step}\longrightarrow\phi,
+\]
+
+and, if each adjacent step flips phase orientation,
+
+\[
+\text{same phase after two steps}\longrightarrow\phi^2.
+\]
+
+**Evidence boundary:** every selected family obeys a Fibonacci recurrence by
+definition, so the Phi limit is mathematically entailed. The result is a
+successful ARA crosswalk/calibration, not independent evidence that the
+physical sunflower contains literal Phi chords or that every natural scale
+transition uses this pillar.
+
+### Revised Hexagon/Pentagon hypothesis
+
+The current musing-tier geometry is:
+
+1. two Information³ ARA closures couple into a six-part rational parent
+   scaffold—the hexagon;
+2. the same-phase connections traverse between scales along Phi-length
+   pillars;
+3. a time-slice or handover projection makes the fivefold/pentagonal scaffold
+   visible while the sixth relation is shared, webbed or carried into the
+   adjacent rung;
+4. the complete parent still closes at TE-ARA `2`;
+5. the unclosed remainder is `0.382`, providing the displacement that prevents
+   the cross-scale path from simply repeating the same position.
+
+Items 1–3 are a proposed geometric interpretation, not yet a physical result.
+The exact identities \(\phi+\phi^{-2}=2\),
+\(\phi=2\cos36^\circ\), and the recurrence limit are established mathematics.
+
+### Strong next test
+
+Generate the two-ARA hexagonal parent and its rotational Phi-pillar scaffold
+without fitting measured data. Freeze the predicted pillar crossings,
+\(108^\circ/72^\circ\) angular signatures and `0.382` seam. Then compare them
+with independently observed Phase A and Phase B features at child, parent and
+grandparent scales:
+
+\[
+(A_k,B_k),\quad(A_{k+1},B_{k+1}),\quad(A_{k+2},B_{k+2}).
+\]
+
+The pillar interpretation is weakened if the independently measured
+same-phase paths do not prefer Phi/Phi-squared over the declared rivals, or if
+the proposed fivefold projection cannot be obtained without tuning.
+
+Primary numerical record:
+`analysis/phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`.
 
 ## Evidence so far (thin — n=2, weak locks)
 Octave-rung phase-lock measured on real series (Hilbert phase of octave-bandpassed rungs, 1:2 relative

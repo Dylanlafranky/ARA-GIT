@@ -1,0 +1,230 @@
+{
+  "test_id": "Q45-15-CYCLE-PARENT-COMPLEMENT-v1",
+  "date": "2026-07-28",
+  "status": "descriptive shaping on previously opened Q44 archive",
+  "verdict": "NOT SUPPORTED",
+  "gates": {
+    "adequacy": false,
+    "phase_skill": true,
+    "wrong_rung": true,
+    "half_share": true,
+    "forward": true,
+    "reverse": false
+  },
+  "source": {
+    "archive": "unnati_submit_12_inhomo_v1_mimic.hdf5.zip",
+    "archive_md5": "08b2eaa89268952f7e197eecb2ea9610",
+    "hdf5": "unnati_submit_12_inhomo_v1_mimic.hdf5",
+    "branch": "c2_2local connectivity",
+    "seeds": 100,
+    "time_samples": 500,
+    "pairs": 66,
+    "development": "0..249",
+    "evaluation": "250..499"
+  },
+  "frozen": {
+    "protocol": "Q45_15_CYCLE_PARENT_COMPLEMENT_PROTOCOL_v1_FROZEN.md",
+    "protocol_sha256": "43e83f4be441d3e29645cca888d35284287fc62c44bcc90e24e395143bbec9ca",
+    "phase_bins": 16,
+    "bootstrap_draws": 20000,
+    "bootstrap_seed": 450028
+  },
+  "eligibility": {
+    "lineages": 79,
+    "seeds": 17,
+    "evaluation_phase_observations": 19671,
+    "family_counts": {
+      "two_turn_7_5": 14,
+      "one_turn_15": 65
+    }
+  },
+  "lineage_summary": {
+    "parent_phase_skill": {
+      "count": 17,
+      "statistic": "mean",
+      "estimate": 0.6094493352030929,
+      "ci95": [
+        0.45402888670081293,
+        0.7475680449303611
+      ]
+    },
+    "parent_over_wrong_rung": {
+      "count": 17,
+      "statistic": "mean",
+      "estimate": 0.9249730500475724,
+      "ci95": [
+        0.6632217103094974,
+        1.20401937603932
+      ]
+    },
+    "parent_over_four_sample_lag": {
+      "count": 17,
+      "statistic": "mean",
+      "estimate": 1.8874945928001532,
+      "ci95": [
+        1.6728464493143191,
+        2.087117431693196
+      ]
+    },
+    "path_share_l": {
+      "count": 17,
+      "statistic": "median",
+      "estimate": 0.5891667927648991,
+      "ci95": [
+        0.4171022671487197,
+        0.6659787382403226
+      ]
+    },
+    "state_share_l": {
+      "count": 17,
+      "statistic": "median",
+      "estimate": 0.9552470722459323,
+      "ci95": [
+        0.9426615182352676,
+        0.9709853882537922
+      ]
+    },
+    "movement_relation": {
+      "count": 17,
+      "statistic": "mean",
+      "estimate": 0.023687341495643232,
+      "ci95": [
+        -0.011330696232645602,
+        0.06073993575560722
+      ]
+    },
+    "families": {
+      "two_turn_7_5": {
+        "lineages": 14,
+        "seeds": 7,
+        "parent_skill": {
+          "count": 7,
+          "statistic": "mean",
+          "estimate": 0.4402146787604995,
+          "ci95": [
+            0.03982155344517768,
+            0.7927104782190871
+          ]
+        },
+        "path_share_l": {
+          "count": 7,
+          "statistic": "median",
+          "estimate": 0.5144190642438251,
+          "ci95": [
+            0.03252985466901266,
+            0.6866359101959624
+          ]
+        }
+      },
+      "one_turn_15": {
+        "lineages": 65,
+        "seeds": 17,
+        "parent_skill": {
+          "count": 17,
+          "statistic": "mean",
+          "estimate": 0.6212674023130942,
+          "ci95": [
+            0.4643596461667876,
+            0.7561496139762397
+          ]
+        },
+        "path_share_l": {
+          "count": 17,
+          "statistic": "median",
+          "estimate": 0.6246035650682557,
+          "ci95": [
+            0.5377874161464485,
+            0.6566117797156357
+          ]
+        }
+      }
+    }
+  },
+  "flow_summary": {
+    "parent": {
+      "baseline_error": 0.8139058379551813,
+      "augmented_error": 0.41140929783020264,
+      "lagged_control_error": 0.7159613171198387,
+      "augmented_advantage": {
+        "count": 17,
+        "statistic": "mean",
+        "estimate": 0.4024965401249787,
+        "ci95": [
+          0.3358916951174666,
+          0.46126962231508056
+        ]
+      },
+      "real_l_over_lagged_advantage": {
+        "count": 17,
+        "statistic": "mean",
+        "estimate": 0.3045520192896359,
+        "ci95": [
+          0.2535167630913768,
+          0.35043641810605003
+        ]
+      }
+    },
+    "child": {
+      "baseline_error": 0.419641475186292,
+      "augmented_error": 0.4197960490915511,
+      "lagged_control_error": 0.41923391935428833,
+      "augmented_advantage": {
+        "count": 17,
+        "statistic": "mean",
+        "estimate": -0.00015457390525913008,
+        "ci95": [
+          -0.00045370601602188576,
+          0.0001274736380447096
+        ]
+      },
+      "real_l_over_lagged_advantage": {
+        "count": 17,
+        "statistic": "mean",
+        "estimate": -0.000562129737262845,
+        "ci95": [
+          -0.0013392721360274127,
+          0.00016333754702937435
+        ]
+      }
+    }
+  },
+  "flow_coefficients": {
+    "parent_baseline": [
+      0.9271328834533819,
+      0.0
+    ],
+    "parent_augmented": [
+      0.8748403816590055,
+      0.9044971585025644
+    ],
+    "parent_lagged": [
+      0.9342941923143614,
+      -0.48783170788992763
+    ],
+    "child_baseline": [
+      0.882922180623782,
+      0.0
+    ],
+    "child_augmented": [
+      0.8826630318418346,
+      0.004482465532489107
+    ],
+    "child_lagged": [
+      0.8830847779132142,
+      -0.01107620337870492
+    ]
+  },
+  "quality": {
+    "max_local_bloch_a_norm": 0.9529535968322307,
+    "max_local_bloch_b_norm": 0.9529535146430135,
+    "nonfinite_local_product_values": 0
+  },
+  "bookkeeping_boundary": "T=C+L is an exact Pauli-tensor decomposition and is not counted as evidence. Phase, path share and held-out lagged prediction are the scored quantities.",
+  "artifacts": {
+    "lineages": "Q45_15_CYCLE_PARENT_COMPLEMENT_LINEAGES.csv.gz",
+    "flow_seeds": "Q45_15_CYCLE_PARENT_COMPLEMENT_FLOW_SEEDS.csv",
+    "profiles": "Q45_15_CYCLE_PARENT_COMPLEMENT_PROFILES.npz",
+    "figure_png": "Q45_15_CYCLE_PARENT_COMPLEMENT_DIAGNOSTICS.png",
+    "figure_svg": "Q45_15_CYCLE_PARENT_COMPLEMENT_DIAGNOSTICS.svg"
+  }
+}

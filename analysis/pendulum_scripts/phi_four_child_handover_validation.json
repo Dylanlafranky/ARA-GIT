@@ -1,0 +1,79 @@
+{
+  "validator": "validate_phi_four_child_handover.py",
+  "row_count": 123,
+  "checks": 38,
+  "failures": 0,
+  "recomputed": {
+    "development": {
+      "n_cycles": 73,
+      "all_four_seen_n": 56,
+      "median_AA": 0.48854961832061067,
+      "median_AB": 0.014787430683918669,
+      "median_BB": 0.48330058939096265,
+      "median_BA": 0.011029411764705883,
+      "phi_template": 0.4433071261707505,
+      "equal_template": 0.4711711711711712,
+      "paired_template": 0.029259896729776247,
+      "linear_template": 0.37117117117117115,
+      "completion_phi": 0.3607680020315072,
+      "completion_poles": 0.02119800921859788,
+      "completion_ridge": 0.4788019907814021,
+      "completion_quarters": 0.23375430090710042,
+      "completion_thirds": 0.3121353241147355,
+      "inequality_median": 0.40947862630538634,
+      "retention_median": 0.8008484566684944,
+      "inequality_r": 0.4628271914592579,
+      "phi_retention_r": -0.47454356910311596
+    },
+    "frozen": {
+      "n_cycles": 50,
+      "all_four_seen_n": 44,
+      "median_AA": 0.3939699888440895,
+      "median_AB": 0.13730989190548015,
+      "median_BB": 0.41291463313756305,
+      "median_BA": 0.10227572615885529,
+      "phi_template": 0.255005061571686,
+      "equal_template": 0.2828691065721066,
+      "paired_template": 0.21713089342789338,
+      "linear_template": 0.18286910657210662,
+      "completion_phi": 0.03586000118556826,
+      "completion_poles": 0.3686113041072001,
+      "completion_ridge": 0.1313886958927999,
+      "completion_quarters": 0.12249355951749857,
+      "completion_thirds": 0.041001998465463985,
+      "inequality_median": 0.132429929499143,
+      "retention_median": 0.8541654841134505,
+      "inequality_r": -0.5627551020408162,
+      "phi_retention_r": 0.6553061224489796
+    }
+  },
+  "post_verdict_specificity": {
+    "template_proximity_to_parent_retention_spearman": {
+      "phi": 0.6553061224489796,
+      "equal": 0.6447959183673468,
+      "paired": -0.6447959183673468,
+      "linear": 0.5841836734693877
+    },
+    "completion_phi_vs_thirds": {
+      "n": 44,
+      "phi_better_count": 28,
+      "thirds_better_count": 16,
+      "paired_wilcoxon_one_sided_p": 0.010777565818696823,
+      "bootstrap_median_difference_phi_minus_thirds_q025_q50_q975": [
+        -0.022470004775127395,
+        -0.004454198498819145,
+        0.014365786819021065
+      ]
+    }
+  },
+  "saved_verdict": {
+    "label": "MIXED",
+    "checks_passed": 2,
+    "checks": {
+      "phi_quartet_best_template": false,
+      "completion_closest_to_phi": true,
+      "inequality_maintains_parent": false,
+      "phi_proximity_maintains_parent": true
+    }
+  }
+}

@@ -110,6 +110,28 @@ is worth more than a hit you cannot.
 - QUANTUM RIDGE IS A PLANE: `x_n=1` fixes only `r·n=0`. Pure coherent equatorial states
   and the maximally mixed centre can share this ARA value. Never infer coherence, phase,
   resonance or purity from the diameter reading alone.
+- QUANTUM `7.5 : 15` CADENCE IS CHILD-TO-PARENT: keep `two-turn 7.5` and
+  `one-turn 15` as the empirical classifier names, but never summarize them as
+  two unrelated systems or wave species. Canonical ARA interpretation: the
+  complete approximately `7.5`-sample child contains its own Phase-A/Phase-B
+  cycle and is the resolved finer/faster structure inside the approximately
+  `15`-sample adult/parent closure one multiplicative/log rung upward
+  (`T_parent≈2*T_child`, `f_child≈2*f_parent`). The complete child projects to
+  `0.5` in parent units; never count its internal A and B as two independent
+  `0.5` children. The other parent-level `0.5` is an unidentified coupled
+  complement. Read elevated perpendicular
+  `Other` in the child-resolved class first as exposed lower-rung structure;
+  child asymmetry feeds the signed asymmetry of the parent above. Only equal
+  opposite child contributions cancel at the parent ridge; otherwise their
+  signed remainder is inherited, possibly inside the main parent coordinate
+  rather than perpendicular `Other`. The coupling is bidirectional: the
+  parent state also constrains/drives the children's later expression.
+  Upward aggregation and downward influence are not automatic inverses;
+  parent-only reconstruction of children requires retained `Other` or an
+  independently measured coupling law. Cadence alone does not prove a pure
+  Time-versus-Connection assignment. This interpretation changes no
+  Q40C-Q44A frozen verdict. Restore full context from
+  `analysis/quantum/QUANTUM_7_5_15_PARENT_CHILD_CADENCE_CANON_2026-07-28.md`.
 - Q29 UNCLASSIFIED-REMAINDER FENCE: do not name an unexplained signed quantum component
   Phase B from a flip or TE-ARA remainder alone. On the fully opened diagonal Q28
   simulator, the residual had a strong one-to-three-slice signed z-axis memory and
@@ -477,6 +499,13 @@ Before a musing becomes a mathematical test or public claim, apply
 5. obtain Dylan's explicit `EXACT ENOUGH TO TEST` verdict;
 6. bind that packet/version to the test registration.
 
+**Post-compaction execution rule (30 Jul 2026):** if context compacts after
+the idea is discussed but before the test runs, repeat the two-sentence
+back-translation and obtain a fresh `EXACT ENOUGH TO TEST`. Repository
+retrieval is mandatory preparation but cannot substitute for this renewed
+sign-off. Until then, do not freeze or execute. Any unreconfirmed run is a
+`PROXY TEST — CONSTRUCT INVALID FOR THE INTENDED CLAIM`.
+
 Any critical mismatch gives `WRONG OBJECT`. If discovered after a run, retain
 the artifact as `PROXY TEST — CONSTRUCT INVALID FOR THE INTENDED CLAIM`; do not
 count it as evidence against ARA.
@@ -489,3 +518,50 @@ can share training and priors.
 
 Low-energy rule: the librarian drafts and records the packet. Dylan need only
 confirm/correct a two-sentence back-translation in ordinary language.
+
+## §9. Quantum `7.5:15` complement restoration (28 Jul 2026)
+
+Do not count the internal Phase A and Phase B of the complete approximately
+`7.5` child as two separate parent-level halves. The child projects to `0.5`
+in the approximately `15` parent frame; another parent-rung contribution
+remains to be identified.
+
+Q45 tested the local-product relation \(L=ab^{\mathsf T}\) as that complement.
+Restore the result exactly:
+
+- \(L\) followed the held-out 15-cycle phase and strongly improved upward
+  child→parent matrix-flow prediction;
+- its movement-path share was `0.589`, near the proposed half;
+- its static tensor share was about `0.955`, so it was not a 50:50 state;
+- it did not improve the frozen one-step parent→child prediction;
+- only `17` seeds and `79` lineages were eligible; and
+- the strict verdict is **NOT SUPPORTED**.
+
+Therefore say **strong upward parent-complement candidate in the Q44 shaping
+archive**, not hidden Phase B, universal missing half, bidirectional coupling
+law, physical energy split or quantum discovery. Authority:
+`analysis/quantum/Q45_15_CYCLE_PARENT_COMPLEMENT_REPORT_2026-07-28.md`.
+
+## §10. Quantum double-parent cut restoration (28 Jul 2026)
+
+Q45's \(T=C+L\) account is one relational cut through the proposed
+double-parent identity, not its complete TE-ARA sphere.
+
+Q46 decompressed \(L=ab^{\mathsf T}\) into the two measured local parents.
+Restore the result as:
+
+- pooled native parent shares `0.5196 : 0.4804`, giving a coarse `1.0`
+  parent ridge;
+- substantial hidden local asymmetry remains (`~0.390` mean absolute ARA
+  distance from the ridge);
+- within-\(L\) shares are approximately `53.68%`, `45.76%`, and `0.46%`
+  simultaneous handover `Other`;
+- the measured \(C/L\) movement cut is `41.08% : 58.92%`; and
+- Dylan's approximate 42% expectation matched this accounting to `0.92`
+  percentage points, but it is not independent because it complements Q45's
+  already observed 58.92%.
+
+Say **coarse parent ridge with retained child asymmetry on one measured
+cut**, not pointwise equality, full TE-ARA recovery, literal energy split or
+universal 42% law. Authority:
+`analysis/quantum/Q46_DOUBLE_PARENT_INTERNAL_ARA_REPORT_2026-07-28.md`.

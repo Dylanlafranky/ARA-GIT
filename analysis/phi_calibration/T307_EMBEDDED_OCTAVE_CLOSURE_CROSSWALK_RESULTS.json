@@ -1,0 +1,101 @@
+{
+  "test": "T307 embedded octave-closure crosswalk",
+  "status": "RETROSPECTIVE",
+  "protocol": "T307_EMBEDDED_OCTAVE_CLOSURE_CROSSWALK_PROTOCOL_v1_FROZEN.md",
+  "source_hashes": {
+    "Q40C_POST_RESULT_DOUBLE_HELIX_RESULTS.json": "5BFDEA834CD3E9F40ECD0FEF75DEE8A848D00902C62F342FA1DB96F21128B242",
+    "T306_EMBEDDED_E_PHI_THREAD_RESULTS.json": "F1D524DD32B7A6B1DFF5537FE0313164A318B0710BBFDCEE0A74FDFB1A483484"
+  },
+  "geometry": {
+    "lower_1_over_e": 0.36787944117144233,
+    "upper_phi": 1.618033988749895,
+    "anti_phi": 0.3819660112501051,
+    "parent_midpoint": 0.9929567149606686,
+    "parent_ridge_displacement": 0.007043285039331382,
+    "parent_diameter": 1.2501545475784526,
+    "child_radius": 0.007043285039331382,
+    "child_diameter": 0.014086570078662763,
+    "raw_child_to_parent_width_ratio": 0.01126786292618655,
+    "geometry_closure_ratio_rC_over_dP": 1.0,
+    "exact_identity_note": "rC = dP is algebraically forced by anti_phi = 2 - phi. The raw child and parent interval widths are not in a 1:2 ratio."
+  },
+  "t306_recalculation_checks": {
+    "parent_midpoint_abs_difference": 0.0,
+    "child_diameter_abs_difference": 5.551115123125783e-17,
+    "closure_deficit_abs_difference": 0.0
+  },
+  "quantum_cadence": {
+    "eligible_seeds": 94,
+    "child_lineages": 359,
+    "parent_lineages": 588,
+    "pooled_child_period_median": 7.50011961998879,
+    "pooled_parent_period_median": 14.999632840387694,
+    "seed_ratio_Q_2Tc_over_Tp": {
+      "q025": 0.9998306767649323,
+      "q25": 0.9999591087248957,
+      "median": 1.0000330217658415,
+      "q75": 1.000091961072145,
+      "q975": 1.000272849849745,
+      "mean": 1.0000298856937464,
+      "mean_absolute_distance_from_1": 8.968314680198072e-05,
+      "median_absolute_distance_from_1": 6.900531634673746e-05,
+      "bootstrap_median_95_ci": [
+        1.0000004297110636,
+        1.0000646933253998
+      ]
+    }
+  },
+  "candidate_factor_control": {
+    "metric": "median absolute log(T_parent / (k*T_child))",
+    "errors": {
+      "1": 0.6931141593412675,
+      "3/2": 0.2876490512331031,
+      "phi": 0.21190233428166416,
+      "2": 6.900769741130095e-05,
+      "e": 0.30688584065873237,
+      "3": 0.4054981293268422
+    },
+    "ranking": [
+      "2",
+      "phi",
+      "3/2",
+      "e",
+      "3",
+      "1"
+    ]
+  },
+  "seed_pairing_control": {
+    "paired_mean_absolute_closure_error": 8.968314680198072e-05,
+    "shuffled_mean_absolute_closure_error": {
+      "q025": 8.200814051762097e-05,
+      "q25": 8.800098371266246e-05,
+      "median": 9.103007470951008e-05,
+      "q75": 9.402275280522601e-05,
+      "q975": 9.924760933486938e-05,
+      "mean": 9.095510597541487e-05
+    },
+    "p_shuffled_no_worse_than_paired": 0.3814
+  },
+  "gates": {
+    "G1_cadence_closure": true,
+    "G2_factor_specificity": true,
+    "G3_seed_specific_pairing": false
+  },
+  "verdict": {
+    "q40c_population_factor_two_cadence": "SUPPORTED IN THIS ARCHIVE",
+    "cross_domain_equivalence": "FORMAL CLOSURE MOTIF ONLY \u2014 RAW INTERVAL WIDTHS ARE NOT AN OCTAVE PAIR",
+    "seed_specific_child_parent_pairing": "NOT SUPPORTED",
+    "overall": "PARTIAL \u2014 matching factor-two closure motif, not literal scale equivalence"
+  },
+  "boundaries": [
+    "The geometry equality is exact algebra, not empirical evidence.",
+    "The raw embedded-child/parent interval-width ratio is about 0.01127, not 0.5.",
+    "Q40C cadence families were previously identified near 7.5 and 15.",
+    "The result is a retrospective structural crosswalk in a deterministic simulator.",
+    "It does not show that Phi causes the quantum cadence."
+  ],
+  "artifacts": {
+    "seed_csv": "T307_EMBEDDED_OCTAVE_CLOSURE_SEED_RATIOS.csv",
+    "figure": "T307_EMBEDDED_OCTAVE_CLOSURE_CROSSWALK.png"
+  }
+}

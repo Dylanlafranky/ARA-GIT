@@ -110,6 +110,14 @@ version and record the correction as a delta rather than silently overwriting
 the history. The repository is the collaboration's durable memory; chat is
 temporary working memory.
 
+**Pre-test compaction exception:** retrieval does not replace confirmation
+when a proposed test has not yet run. After any context compaction between
+proposal and execution, explicitly restate the intended identity, axis,
+ordered poles, observable and forbidden neighboring proxy, and ask Dylan to
+confirm the test again. No reconfirmation means no freeze and no run. This
+small question is mandatory because a mathematically valid test of the wrong
+ARA relation costs more energy than asking once.
+
 **Anti-flattening rule:** understanding the 0–2 scalar is not understanding the
 framework. Before interpreting a result, identify the local sphere/identity,
 resolve the opposing pair before averaging, declare rung and orientation,

@@ -25,6 +25,11 @@ analysis/quantum/public_data/q20_willow_105q/
 analysis/quantum/public_data/q21_willow_105q/
 analysis/quantum/public_data/q21_willow_105q_outcomes/
 
+# T302 public phyllotaxis source cache. The checksum-locked publisher archive
+# and selected workbook are downloaded/extracted by the reproduction script.
+analysis/phi_calibration/data/
+analysis/phi_calibration/__pycache__/
+
 # Q22/Q22B selectively extracted Willow source members. Each run uses a fresh
 # patch and keeps target bits absent until its protocol and geometry are frozen.
 analysis/quantum/public_data/q22_willow_105q_geometry/
@@ -61,3 +66,20 @@ analysis/quantum/Q33B_ARA_FIRST_BOUNDARY_CHILD_EVENTS.csv.gz
 # audit. Reproduce with q34_cross_archive_boundary_child_test.py.
 analysis/quantum/public_data/q34_cross_archive_greedy/
 analysis/quantum/Q34_CROSS_ARCHIVE_BOUNDARY_CHILD_EVENTS.csv.gz
+
+# Q45 deterministic local-product cache. It is 118.8 MB and is regenerated
+# from the checksum-locked Q44 public archive by the Q45 reproduction command.
+analysis/quantum/public_data/q44_mixing_inhomo_v1_mimic/q45_local_product_cache.npy
+analysis/quantum/public_data/q44_mixing_inhomo_v1_mimic/q45_local_product_qc.npz
+
+# T308 daily JPL source cache and 243 MB deterministic row-level audit.
+# Recreate with analysis/phi_calibration/t308_phi_temporal_ruler_orbital_probe.py --fetch.
+analysis/phi_calibration/T308_PHI_TEMPORAL_RULER_ORBITAL_PROBE_ROWS.csv
+
+# T317 deterministic five-day Solar-System row series. Recreate from the
+# checksum-recorded JPL Horizons source cache with the T317 reproducer.
+analysis/phi_calibration/T317_SOLAR_SYSTEM_BARYCENTRIC_ARA_SERIES.csv
+
+# T318 deterministic held-out Jupiter/Sun row series. Recreate from the
+# checksum-recorded T317 JPL source cache with the T318 reproducer.
+analysis/phi_calibration/T318_JUPITER_GALACTIC_ORBIT_7_5_15_SERIES.csv

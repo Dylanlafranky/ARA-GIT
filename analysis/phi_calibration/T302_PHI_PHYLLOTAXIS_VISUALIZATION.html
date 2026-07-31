@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T302 — empirical Phi handover calibration</title>
+<style>
+:root { --ink:#172033; --muted:#667085; --grid:#d8dee8; --panel:#ffffff;
+  --bg:#f4f6f9; --phi:#e8792e; --wt:#3569a8; --e2:#d18a2c; --e1e2:#9b4d87; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:15px/1.45 Inter, ui-sans-serif, system-ui, sans-serif; }
+main { max-width:1480px; margin:0 auto; padding:28px; }
+h1 { margin:0; font-size:30px; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:5px 0 20px; }
+.cards { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;
+  margin-bottom:16px; }
+.card,.panel { background:var(--panel); border:1px solid #dfe4ec; border-radius:14px;
+  box-shadow:0 4px 18px rgba(20,32,54,.05); }
+.card { padding:14px 16px; }
+.card b { display:block; font-size:22px; margin-top:4px; }
+.pass { color:#147a54; } .fail { color:#ba3a32; }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.panel { padding:16px; min-width:0; }
+.panel h2 { margin:0 0 2px; font-size:18px; }
+.panel p { color:var(--muted); margin:0 0 10px; font-size:13px; }
+svg { width:100%; height:auto; overflow:visible; }
+.legend { display:flex; flex-wrap:wrap; gap:14px; color:var(--muted);
+  font-size:13px; margin-top:5px; }
+.key { display:inline-flex; align-items:center; gap:6px; }
+.dot { width:10px; height:10px; border-radius:50%; display:inline-block; }
+.wide { grid-column:1 / -1; }
+.note { margin-top:16px; padding:14px 16px; border-left:4px solid var(--phi);
+  background:#fff8f1; border-radius:8px; }
+@media (max-width:900px) { .cards,.grid { grid-template-columns:1fr; }
+  .wide { grid-column:auto; } main { padding:16px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>T302 — empirical Phi handover in ordered phyllotaxis</h1>
+  <div class="sub">359 measured divergence angles · 58 meristems · public biological controls · frozen ARA mapping</div>
+  <section class="cards" id="cards"></section>
+  <section class="grid">
+    <article class="panel">
+      <h2>A. ARA diameter reading</h2>
+      <p>Filled points are measured. Open points are the assigned mirror 2−x, not a second measurement.</p>
+      <svg id="ara" viewBox="0 0 720 350"></svg>
+      <div class="legend">
+        <span class="key"><i class="dot" style="background:var(--wt)"></i>wild type</span>
+        <span class="key"><i class="dot" style="background:var(--e2)"></i>e2</span>
+        <span class="key"><i class="dot" style="background:var(--e1e2)"></i>e1e2</span>
+      </div>
+    </article>
+    <article class="panel">
+      <h2>B. Exact Phi versus frozen rivals</h2>
+      <p>Plant-clustered confirmation medians; lower is better.</p>
+      <svg id="candidates" viewBox="0 0 720 350"></svg>
+    </article>
+    <article class="panel">
+      <h2>C. Ordered open-space clearance</h2>
+      <p>Each dot is one confirmation plant. The grey interval is the within-plant shuffle null.</p>
+      <svg id="clearance" viewBox="0 0 720 350"></svg>
+    </article>
+    <article class="panel">
+      <h2>D. Placement trajectories</h2>
+      <p>Representative physical sequences versus a supplied exact-Phi generator.</p>
+      <svg id="trajectories" viewBox="0 0 720 350"></svg>
+    </article>
+    <article class="panel wide">
+      <h2>E. The local children breathe around the longer Phi carrier</h2>
+      <p>Each point is one measured wild-type step error followed by the next.
+      The upper-left/lower-right tilt is not forced by the ARA mirror.</p>
+      <svg id="compensation" viewBox="0 0 1120 360"></svg>
+    </article>
+    <article class="panel wide">
+      <h2>Reading boundary</h2>
+      <div class="note"><b>This is a calibration, not a discovery claim.</b>
+      The source paper already identifies the golden-angle neighbourhood. The
+      informative questions are whether exact Phi beats close rivals and whether
+      measured biological order preserves open space. A forced mirror can illustrate
+      ARA symmetry but cannot count as independent evidence.</div>
+    </article>
+  </section>
+</main>
+<script id="payload" type="application/json">{"phiA":0.38196601125010515,"phiB":1.618033988749895,"developmentMedian":0.38382777777777777,"araPoints":[{"genotype":"Col","plant":2,"meristem":3,"x_A":0.40551388888888895,"x_B_assigned":1.594486111111111},{"genotype":"Col","plant":2,"meristem":4,"x_A":0.3683277777777778,"x_B_assigned":1.6316722222222222},{"genotype":"Col","plant":2,"meristem":5,"x_A":0.3716194444444444,"x_B_assigned":1.6283805555555557},{"genotype":"Col","plant":2,"meristem":6,"x_A":0.40177777777777773,"x_B_assigned":1.5982222222222222},{"genotype":"Col","plant":4,"meristem":3,"x_A":0.4022361111111111,"x_B_assigned":1.5977638888888888},{"genotype":"Col","plant":4,"meristem":4,"x_A":0.3621027777777778,"x_B_assigned":1.6378972222222221},{"genotype":"Col","plant":4,"meristem":5,"x_A":0.4159027777777778,"x_B_assigned":1.5840972222222223},{"genotype":"Col","plant":6,"meristem":3,"x_A":0.395625,"x_B_assigned":1.604375},{"genotype":"Col","plant":6,"meristem":4,"x_A":0.36652777777777773,"x_B_assigned":1.6334722222222222},{"genotype":"Col","plant":6,"meristem":5,"x_A":0.39506111111111114,"x_B_assigned":1.604938888888889},{"genotype":"Col","plant":6,"meristem":6,"x_A":0.4026472222222222,"x_B_assigned":1.5973527777777778},{"genotype":"Col","plant":8,"meristem":3,"x_A":0.42301666666666665,"x_B_assigned":1.5769833333333334},{"genotype":"Col","plant":8,"meristem":4,"x_A":0.34628888888888887,"x_B_assigned":1.6537111111111111},{"genotype":"Col","plant":8,"meristem":5,"x_A":0.3921138888888889,"x_B_assigned":1.6078861111111111},{"genotype":"Col","plant":8,"meristem":6,"x_A":0.38414444444444446,"x_B_assigned":1.6158555555555556},{"genotype":"Col","plant":8,"meristem":7,"x_A":0.3678777777777778,"x_B_assigned":1.6321222222222223},{"genotype":"Col","plant":10,"meristem":3,"x_A":0.3918027777777778,"x_B_assigned":1.6081972222222223},{"genotype":"Col","plant":10,"meristem":4,"x_A":0.35209722222222223,"x_B_assigned":1.6479027777777777},{"genotype":"Col","plant":10,"meristem":5,"x_A":0.4126166666666667,"x_B_assigned":1.5873833333333334},{"genotype":"Col","plant":10,"meristem":6,"x_A":0.3613833333333334,"x_B_assigned":1.6386166666666666},{"genotype":"Col","plant":10,"meristem":7,"x_A":0.35788055555555554,"x_B_assigned":1.6421194444444445},{"genotype":"Col","plant":12,"meristem":3,"x_A":0.41329444444444446,"x_B_assigned":1.5867055555555556},{"genotype":"Col","plant":12,"meristem":4,"x_A":0.33781666666666665,"x_B_assigned":1.6621833333333333},{"genotype":"Col","plant":12,"meristem":5,"x_A":0.3896027777777778,"x_B_assigned":1.6103972222222223},{"genotype":"Col","plant":12,"meristem":6,"x_A":0.38995,"x_B_assigned":1.61005},{"genotype":"Col","plant":12,"meristem":7,"x_A":0.36304722222222224,"x_B_assigned":1.6369527777777777},{"genotype":"Col","plant":14,"meristem":3,"x_A":0.4026388888888889,"x_B_assigned":1.5973611111111112},{"genotype":"Col","plant":14,"meristem":4,"x_A":0.33989722222222224,"x_B_assigned":1.6601027777777777},{"genotype":"Col","plant":14,"meristem":5,"x_A":0.4177694444444444,"x_B_assigned":1.5822305555555556},{"genotype":"Col","plant":14,"meristem":6,"x_A":0.3747916666666667,"x_B_assigned":1.6252083333333334},{"genotype":"Col","plant":14,"meristem":7,"x_A":0.36955000000000005,"x_B_assigned":1.63045},{"genotype":"Col","plant":16,"meristem":3,"x_A":0.41384166666666666,"x_B_assigned":1.5861583333333333},{"genotype":"Col","plant":16,"meristem":4,"x_A":0.3654777777777778,"x_B_assigned":1.6345222222222222},{"genotype":"Col","plant":16,"meristem":5,"x_A":0.39091944444444443,"x_B_assigned":1.6090805555555556},{"genotype":"Col","plant":16,"meristem":6,"x_A":0.3848277777777778,"x_B_assigned":1.6151722222222222},{"genotype":"Col","plant":16,"meristem":7,"x_A":0.39210555555555554,"x_B_assigned":1.6078944444444445},{"genotype":"Col","plant":18,"meristem":3,"x_A":0.4283861111111111,"x_B_assigned":1.5716138888888889},{"genotype":"Col","plant":18,"meristem":4,"x_A":0.33734444444444445,"x_B_assigned":1.6626555555555556},{"genotype":"Col","plant":18,"meristem":5,"x_A":0.4008138888888889,"x_B_assigned":1.599186111111111},{"genotype":"Col","plant":18,"meristem":6,"x_A":0.3757555555555555,"x_B_assigned":1.6242444444444444},{"genotype":"e1e2","plant":2,"meristem":3,"x_A":0.5329388888888889,"x_B_assigned":1.4670611111111111},{"genotype":"e1e2","plant":2,"meristem":4,"x_A":0.2171888888888889,"x_B_assigned":1.7828111111111111},{"genotype":"e1e2","plant":4,"meristem":3,"x_A":0.28302222222222223,"x_B_assigned":1.7169777777777777},{"genotype":"e1e2","plant":4,"meristem":4,"x_A":0.2731138888888889,"x_B_assigned":1.7268861111111111},{"genotype":"e1e2","plant":6,"meristem":3,"x_A":0.394375,"x_B_assigned":1.605625},{"genotype":"e1e2","plant":6,"meristem":4,"x_A":0.39029166666666665,"x_B_assigned":1.6097083333333333},{"genotype":"e1e2","plant":6,"meristem":5,"x_A":0.38623611111111106,"x_B_assigned":1.613763888888889},{"genotype":"e1e2","plant":6,"meristem":6,"x_A":0.40560833333333335,"x_B_assigned":1.5943916666666667},{"genotype":"e1e2","plant":8,"meristem":3,"x_A":0.41126388888888893,"x_B_assigned":1.5887361111111111},{"genotype":"e1e2","plant":8,"meristem":4,"x_A":0.3559777777777777,"x_B_assigned":1.6440222222222223},{"genotype":"e1e2","plant":8,"meristem":5,"x_A":0.4411527777777778,"x_B_assigned":1.5588472222222223},{"genotype":"e1e2","plant":10,"meristem":3,"x_A":0.2846916666666667,"x_B_assigned":1.7153083333333332},{"genotype":"e1e2","plant":10,"meristem":4,"x_A":0.5328527777777777,"x_B_assigned":1.4671472222222222},{"genotype":"e1e2","plant":10,"meristem":5,"x_A":0.6435888888888889,"x_B_assigned":1.356411111111111},{"genotype":"e1e2","plant":10,"meristem":6,"x_A":0.5276972222222223,"x_B_assigned":1.4723027777777777},{"genotype":"e1e2","plant":10,"meristem":7,"x_A":0.6786722222222222,"x_B_assigned":1.3213277777777779},{"genotype":"e1e2","plant":12,"meristem":3,"x_A":0.4235166666666667,"x_B_assigned":1.5764833333333332},{"genotype":"e1e2","plant":12,"meristem":4,"x_A":0.35912499999999997,"x_B_assigned":1.640875},{"genotype":"e1e2","plant":12,"meristem":5,"x_A":0.40350555555555556,"x_B_assigned":1.5964944444444444},{"genotype":"e1e2","plant":12,"meristem":6,"x_A":0.3893416666666667,"x_B_assigned":1.6106583333333333},{"genotype":"e1e2","plant":12,"meristem":7,"x_A":0.3440916666666667,"x_B_assigned":1.6559083333333333},{"genotype":"e2","plant":2,"meristem":3,"x_A":0.42741944444444446,"x_B_assigned":1.5725805555555556},{"genotype":"e2","plant":2,"meristem":4,"x_A":0.34198333333333336,"x_B_assigned":1.6580166666666667},{"genotype":"e2","plant":2,"meristem":5,"x_A":0.38687222222222223,"x_B_assigned":1.6131277777777777},{"genotype":"e2","plant":4,"meristem":3,"x_A":0.5342,"x_B_assigned":1.4658},{"genotype":"e2","plant":4,"meristem":4,"x_A":0.6368583333333333,"x_B_assigned":1.3631416666666667},{"genotype":"e2","plant":4,"meristem":5,"x_A":0.7365805555555555,"x_B_assigned":1.2634194444444447},{"genotype":"e2","plant":4,"meristem":6,"x_A":0.1839388888888889,"x_B_assigned":1.8160611111111111},{"genotype":"e2","plant":6,"meristem":3,"x_A":0.44381944444444443,"x_B_assigned":1.5561805555555557},{"genotype":"e2","plant":6,"meristem":4,"x_A":0.3216111111111111,"x_B_assigned":1.678388888888889},{"genotype":"e2","plant":6,"meristem":5,"x_A":0.3973555555555556,"x_B_assigned":1.6026444444444445},{"genotype":"e2","plant":6,"meristem":6,"x_A":0.4067,"x_B_assigned":1.5933},{"genotype":"e2","plant":8,"meristem":3,"x_A":0.42209722222222223,"x_B_assigned":1.5779027777777777},{"genotype":"e2","plant":8,"meristem":4,"x_A":0.33396666666666663,"x_B_assigned":1.6660333333333335},{"genotype":"e2","plant":8,"meristem":5,"x_A":0.41814999999999997,"x_B_assigned":1.58185},{"genotype":"e2","plant":8,"meristem":6,"x_A":0.3892027777777778,"x_B_assigned":1.6107972222222222},{"genotype":"e2","plant":8,"meristem":7,"x_A":0.3237277777777778,"x_B_assigned":1.6762722222222222},{"genotype":"e2","plant":10,"meristem":3,"x_A":0.3882194444444444,"x_B_assigned":1.6117805555555555},{"genotype":"e2","plant":10,"meristem":4,"x_A":0.35465277777777776,"x_B_assigned":1.6453472222222223},{"genotype":"e2","plant":10,"meristem":5,"x_A":0.42461666666666664,"x_B_assigned":1.5753833333333334},{"genotype":"e2","plant":10,"meristem":6,"x_A":0.3900166666666667,"x_B_assigned":1.6099833333333333},{"genotype":"e2","plant":12,"meristem":3,"x_A":0.3947694444444444,"x_B_assigned":1.6052305555555555},{"genotype":"e2","plant":12,"meristem":4,"x_A":0.41873333333333335,"x_B_assigned":1.5812666666666666},{"genotype":"e2","plant":12,"meristem":5,"x_A":0.31695555555555555,"x_B_assigned":1.6830444444444446},{"genotype":"e2","plant":12,"meristem":6,"x_A":0.4547083333333333,"x_B_assigned":1.5452916666666667},{"genotype":"e2","plant":12,"meristem":7,"x_A":0.3782,"x_B_assigned":1.6218},{"genotype":"e2","plant":14,"meristem":3,"x_A":0.48562777777777777,"x_B_assigned":1.5143722222222222},{"genotype":"e2","plant":14,"meristem":4,"x_A":0.3180444444444444,"x_B_assigned":1.6819555555555556},{"genotype":"e2","plant":14,"meristem":5,"x_A":0.3879138888888889,"x_B_assigned":1.612086111111111},{"genotype":"e2","plant":14,"meristem":6,"x_A":0.40991944444444445,"x_B_assigned":1.5900805555555555},{"genotype":"e2","plant":14,"meristem":7,"x_A":0.330625,"x_B_assigned":1.669375},{"genotype":"e2","plant":14,"meristem":8,"x_A":0.4870944444444445,"x_B_assigned":1.5129055555555555},{"genotype":"Col","plant":20,"meristem":3,"x_A":0.36638333333333334,"x_B_assigned":1.6336166666666667},{"genotype":"Col","plant":20,"meristem":4,"x_A":0.439625,"x_B_assigned":1.560375},{"genotype":"Col","plant":20,"meristem":5,"x_A":0.3370722222222222,"x_B_assigned":1.6629277777777778},{"genotype":"Col","plant":20,"meristem":6,"x_A":0.4018583333333334,"x_B_assigned":1.5981416666666666},{"genotype":"Col","plant":20,"meristem":7,"x_A":0.3796083333333333,"x_B_assigned":1.6203916666666667},{"genotype":"e2","plant":16,"meristem":3,"x_A":0.6044638888888889,"x_B_assigned":1.395536111111111},{"genotype":"e2","plant":16,"meristem":4,"x_A":0.39166388888888887,"x_B_assigned":1.6083361111111112},{"genotype":"e2","plant":16,"meristem":5,"x_A":0.32260833333333333,"x_B_assigned":1.6773916666666666},{"genotype":"e2","plant":16,"meristem":6,"x_A":0.45306111111111114,"x_B_assigned":1.5469388888888889},{"genotype":"e2","plant":16,"meristem":7,"x_A":0.3441388888888889,"x_B_assigned":1.6558611111111112},{"genotype":"e2","plant":18,"meristem":3,"x_A":0.3607222222222223,"x_B_assigned":1.6392777777777776},{"genotype":"e2","plant":18,"meristem":4,"x_A":0.4350583333333334,"x_B_assigned":1.5649416666666667},{"genotype":"e2","plant":18,"meristem":5,"x_A":0.3182027777777778,"x_B_assigned":1.6817972222222222},{"genotype":"e2","plant":18,"meristem":6,"x_A":0.4541583333333334,"x_B_assigned":1.5458416666666666},{"genotype":"e1e2","plant":14,"meristem":3,"x_A":0.3464611111111111,"x_B_assigned":1.653538888888889},{"genotype":"e1e2","plant":14,"meristem":4,"x_A":0.406425,"x_B_assigned":1.593575},{"genotype":"e1e2","plant":14,"meristem":5,"x_A":0.38254722222222226,"x_B_assigned":1.6174527777777779},{"genotype":"e1e2","plant":14,"meristem":6,"x_A":0.3684611111111111,"x_B_assigned":1.6315388888888889},{"genotype":"e1e2","plant":16,"meristem":3,"x_A":0.2392888888888889,"x_B_assigned":1.7607111111111111},{"genotype":"e1e2","plant":16,"meristem":4,"x_A":0.2818277777777778,"x_B_assigned":1.7181722222222222},{"genotype":"e1e2","plant":16,"meristem":5,"x_A":0.29051388888888885,"x_B_assigned":1.709486111111111},{"genotype":"e1e2","plant":16,"meristem":6,"x_A":0.27010833333333334,"x_B_assigned":1.7298916666666666},{"genotype":"e1e2","plant":16,"meristem":7,"x_A":0.2865666666666667,"x_B_assigned":1.7134333333333334},{"genotype":"e1e2","plant":18,"meristem":3,"x_A":0.7356083333333334,"x_B_assigned":1.2643916666666666},{"genotype":"e1e2","plant":18,"meristem":4,"x_A":0.3997111111111111,"x_B_assigned":1.6002888888888889},{"genotype":"e1e2","plant":18,"meristem":5,"x_A":0.29249444444444445,"x_B_assigned":1.7075055555555556},{"genotype":"e1e2","plant":18,"meristem":6,"x_A":0.46166388888888893,"x_B_assigned":1.5383361111111111}],"candidates":[{"candidate":"one_third","candidate_type":"fixed","turn_fraction":0.3333333333333333,"step_error_median_deg":19.496999999999993,"cumulative_error_median_deg":51.083000000000006},{"candidate":"one_over_e","candidate_type":"fixed","turn_fraction":0.36787944117144233,"step_error_median_deg":9.09065117828076,"cumulative_error_median_deg":18.37480235656158},{"candidate":"three_eighths","candidate_type":"fixed","turn_fraction":0.375,"step_error_median_deg":6.743250000000007,"cumulative_error_median_deg":10.238999999999972},{"candidate":"phi","candidate_type":"fixed","turn_fraction":0.38196601125010515,"step_error_median_deg":6.986000000000003,"cumulative_error_median_deg":5.429457849886418},{"candidate":"eight_twenty_firsts","candidate_type":"fixed","turn_fraction":0.38095238095238093,"step_error_median_deg":6.986000000000003,"cumulative_error_median_deg":6.524178571428618},{"candidate":"two_fifths","candidate_type":"fixed","turn_fraction":0.4,"step_error_median_deg":7.193500000000004,"cumulative_error_median_deg":14.121500000000026},{"candidate":"silver_conjugate","candidate_type":"fixed","turn_fraction":0.41421356237309515,"step_error_median_deg":9.689441227157136,"cumulative_error_median_deg":28.278676749364173}],"clearance":[{"genotype":"Col","plant":2,"clearance_median":0.7425104613401968},{"genotype":"Col","plant":4,"clearance_median":0.7255820940363522},{"genotype":"Col","plant":6,"clearance_median":0.7411734731018413},{"genotype":"Col","plant":8,"clearance_median":0.7504154124021687},{"genotype":"Col","plant":10,"clearance_median":0.7760206516551689},{"genotype":"Col","plant":12,"clearance_median":0.6997438669559348},{"genotype":"Col","plant":14,"clearance_median":0.7086990442754058},{"genotype":"Col","plant":16,"clearance_median":0.7061475588650215},{"genotype":"Col","plant":18,"clearance_median":0.7372169380339679},{"genotype":"e1e2","plant":2,"clearance_median":0.6540586919096191},{"genotype":"e1e2","plant":4,"clearance_median":0.629016328677364},{"genotype":"e1e2","plant":6,"clearance_median":0.666551109460811},{"genotype":"e1e2","plant":8,"clearance_median":0.6017705712421959},{"genotype":"e1e2","plant":10,"clearance_median":0.43655622818074746},{"genotype":"e1e2","plant":12,"clearance_median":0.7399711178417616},{"genotype":"e2","plant":2,"clearance_median":0.8457365629580392},{"genotype":"e2","plant":4,"clearance_median":0.7204274475041079},{"genotype":"e2","plant":6,"clearance_median":0.760304743952246},{"genotype":"e2","plant":8,"clearance_median":0.7470758043410943},{"genotype":"e2","plant":10,"clearance_median":0.6231815077807208},{"genotype":"e2","plant":12,"clearance_median":0.575655878227439},{"genotype":"e2","plant":14,"clearance_median":0.6549154563190989},{"genotype":"Col","plant":20,"clearance_median":0.7778971032547216},{"genotype":"e2","plant":16,"clearance_median":0.16277189358823502},{"genotype":"e2","plant":18,"clearance_median":0.7099110337240224},{"genotype":"e1e2","plant":14,"clearance_median":0.6837474186777044},{"genotype":"e1e2","plant":16,"clearance_median":0.6831816493313515},{"genotype":"e1e2","plant":18,"clearance_median":0.818062426041734}],"shuffle":{"median":0.7047244810143332,"lo":0.6413379514479169,"hi":0.7751862713659513},"trajectories":[{"name":"Col plant 6","color":"#3569a8","turns":[0.0,0.361875,0.7434583333333333,0.13908333333333323,0.505611111111111,0.9006722222222221,0.30331944444444425]},{"name":"e2 plant 18","color":"#d18a2c","turns":[0.0,0.5056638888888888,0.8242833333333333,0.18500555555555565,0.620063888888889,0.9382666666666668,0.39242500000000025]},{"name":"e1e2 plant 6","color":"#9b4d87","turns":[0.0,0.40084722222222224,0.7572388888888888,0.15161388888888871,0.5419055555555554,0.9281416666666664,0.33374999999999977]},{"name":"exact Phi generator","color":"#e8792e","turns":[0.0,0.38196601125010515,0.7639320225002103,0.14589803375031551,0.5278640450004206,0.9098300562505257,0.29179606750063103,0.6737620787507361]}],"frozen":{"passes":{"P1_landmark_within_0.01":true,"P2_exact_phi_step_winner":false,"P3_exact_phi_cumulative_winner":true,"P4_ordered_clearance_both_parts":false},"score":2,"verdict":"MIXED / SUGGESTIVE","P1_confirmation_wt_coordinate":0.3874916666666666,"P1_distance_from_phi":0.00552565541656147,"P2_fixed_step_winner":"three_eighths","P3_fixed_cumulative_winner":"phi","P4_confirmation_clearance_medians":{"Col":0.7391952055679046,"e1e2":0.666551109460811,"e2":0.7099110337240224},"P4_clearance_bootstrap_95":{"Col":[0.7086990442754058,0.7592655564976829],"e2":[0.575655878227439,0.760304743952246],"e1e2":[0.6017705712421959,0.7399711178417616]},"P4_group_ordering_pass":true,"P4_shuffle_p_one_sided":0.1581841815818418,"P4_shuffle_pass":false,"P4_actual_wt_stat":0.7391952055679046,"P4_shuffle_median":0.7047244810143332,"P4_shuffle_95":[0.6413379514479169,0.7751862713659513]},"adjacent":{"pairs":55,"spearman_rho":-0.5356421356421357,"within_plant_order_shuffle_p_negative":0.0005999400059994001,"shuffle_rho_median":-0.13968253968253969,"shuffle_rho_95":[-0.38167568542568553,0.11638347763347758],"median_individual_error_turn":0.01859305555555557,"median_pair_mean_error_turn":0.007977044305450431,"pair_mean_over_individual_error_ratio":0.42903353252590615,"pairs_xy":[{"previous_error":0.02012009986100599,"next_error":-0.007593789027882936},{"previous_error":-0.007593789027882936,"next_error":0.0235478776387838},{"previous_error":0.0235478776387838,"next_error":-0.013638233472327344},{"previous_error":-0.013638233472327344,"next_error":-0.010346566805660762},{"previous_error":-0.010346566805660762,"next_error":0.01981176652767258},{"previous_error":-0.019793789027882924,"next_error":-0.012132677916771861},{"previous_error":-0.012132677916771861,"next_error":0.020270099861005975},{"previous_error":0.020270099861005975,"next_error":-0.01986323347232738},{"previous_error":-0.01986323347232738,"next_error":0.033936766527672635},{"previous_error":-0.02009101125010515,"next_error":-0.00038267791677182306},{"previous_error":-0.00038267791677182306,"next_error":0.013658988749894851},{"previous_error":0.013658988749894851,"next_error":-0.015438233472327423},{"previous_error":-0.015438233472327423,"next_error":0.013095099861005988},{"previous_error":0.013095099861005988,"next_error":0.02068121097211706},{"previous_error":0.0012562109721170889,"next_error":-0.016952122361216238},{"previous_error":-0.016952122361216238,"next_error":0.0410506554165615},{"previous_error":0.0410506554165615,"next_error":-0.035677122361216285},{"previous_error":-0.035677122361216285,"next_error":0.01014787763878372},{"previous_error":0.01014787763878372,"next_error":0.002178433194339302},{"previous_error":0.002178433194339302,"next_error":-0.01408823347232735},{"previous_error":-0.023471566805660704,"next_error":0.0007645443054503653},{"previous_error":0.0007645443054503653,"next_error":0.009836766527672625},{"previous_error":0.009836766527672625,"next_error":-0.029868789027882925},{"previous_error":-0.029868789027882925,"next_error":0.030650655416561534},{"previous_error":0.030650655416561534,"next_error":-0.020582677916771763},{"previous_error":-0.020582677916771763,"next_error":-0.024085455694549618},{"previous_error":-0.046885455694549605,"next_error":0.0008645443054503543},{"previous_error":0.0008645443054503543,"next_error":0.03132843319433931},{"previous_error":0.03132843319433931,"next_error":-0.0441493445834385},{"previous_error":-0.0441493445834385,"next_error":0.007636766527672645},{"previous_error":0.007636766527672645,"next_error":0.007983988749894866},{"previous_error":0.007983988749894866,"next_error":-0.01891878902788291},{"previous_error":-0.0471965668056607,"next_error":0.01680065541656156},{"previous_error":0.01680065541656156,"next_error":0.020672877638783727},{"previous_error":0.020672877638783727,"next_error":-0.042068789027882914},{"previous_error":-0.042068789027882914,"next_error":0.03580343319433926},{"previous_error":0.03580343319433926,"next_error":-0.007174344583438463},{"previous_error":-0.007174344583438463,"next_error":-0.012416011250105108},{"previous_error":-0.04292990013899406,"next_error":2.8433194339316792e-05},{"previous_error":2.8433194339316792e-05,"next_error":0.03187565541656151},{"previous_error":0.03187565541656151,"next_error":-0.016488233472327363},{"previous_error":-0.016488233472327363,"next_error":0.008953433194339278},{"previous_error":0.008953433194339278,"next_error":0.002861766527672671},{"previous_error":0.002861766527672671,"next_error":0.010139544305450388},{"previous_error":-0.018399344583438504,"next_error":-0.005671566805660666},{"previous_error":-0.005671566805660666,"next_error":0.046420099861005926},{"previous_error":0.046420099861005926,"next_error":-0.044621566805660706},{"previous_error":-0.044621566805660706,"next_error":0.01884787763878376},{"previous_error":0.01884787763878376,"next_error":-0.006210455694549644},{"previous_error":0.09258676652767261,"next_error":-0.058527122361216266},{"previous_error":-0.058527122361216266,"next_error":-0.015582677916771814},{"previous_error":-0.015582677916771814,"next_error":0.057658988749894835},{"previous_error":0.057658988749894835,"next_error":-0.044893789027882935},{"previous_error":-0.044893789027882935,"next_error":0.01989232208322822},{"previous_error":0.01989232208322822,"next_error":-0.0023576779167718276}]}}</script>
+<script>
+const D=JSON.parse(document.getElementById("payload").textContent);
+const NS="http://www.w3.org/2000/svg";
+const colors={Col:"#3569a8",e2:"#d18a2c",e1e2:"#9b4d87"};
+function add(svg,tag,attrs={},text="") {
+  const n=document.createElementNS(NS,tag);
+  Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,v));
+  if(text) n.textContent=text; svg.appendChild(n); return n;
+}
+function label(svg,x,y,text,attrs={}) {
+  return add(svg,"text",{x,y,fill:"#4b5563","font-size":12,...attrs},text);
+}
+function line(svg,x1,y1,x2,y2,attrs={}) {
+  return add(svg,"line",{x1,y1,x2,y2,stroke:"#d8dee8","stroke-width":1,...attrs});
+}
+function cards() {
+  const host=document.getElementById("cards");
+  const p=D.frozen.passes;
+  const items=[
+    ["Frozen verdict",`${D.frozen.score}/4 · ${D.frozen.verdict}`,D.frozen.score>=2],
+    ["P1 ARA landmark",D.frozen.P1_confirmation_wt_coordinate.toFixed(6),p.P1_landmark_within_0.01],
+    ["P2 step winner",D.frozen.P2_fixed_step_winner,p.P2_exact_phi_step_winner],
+    ["P3 carrier winner",D.frozen.P3_fixed_cumulative_winner,p.P3_exact_phi_cumulative_winner]
+  ];
+  items.forEach(([name,value,pass])=>{
+    const el=document.createElement("div"); el.className="card";
+    el.innerHTML=`<span>${name}</span><b class="${pass?"pass":"fail"}">${value}</b>`;
+    host.appendChild(el);
+  });
+}
+function ara() {
+  const s=document.getElementById("ara"), L=78,R=690,T=38,B=305;
+  const x=v=>L+(R-L)*v/2, ys={Col:92,e2:172,e1e2:252};
+  [0,.382,1,1.618,2].forEach(v=>{
+    const exact=v===.382?D.phiA:v===1.618?D.phiB:v;
+    line(s,x(exact),T,x(exact),B,{stroke:v===1?"#3f4652":(v===.382||v===1.618?"#e8792e":"#d8dee8"),
+      "stroke-dasharray":v===.382||v===1.618?"6 5":"none","stroke-width":v===1?1.5:1});
+    label(s,x(exact),326,v===.382?"φ⁻²":v===1.618?"φ":String(v),{"text-anchor":"middle"});
+  });
+  Object.entries(ys).forEach(([g,y])=>{
+    line(s,L,y,R,y,{stroke:"#eef1f5"});
+    label(s,L-10,y+4,g==="Col"?"wild type":g,{"text-anchor":"end"});
+  });
+  D.araPoints.forEach((d,i)=>{
+    const y=ys[d.genotype]+(((i*37)%17)-8)*1.5;
+    add(s,"circle",{cx:x(d.x_A),cy:y,r:4,fill:colors[d.genotype],"fill-opacity":.7});
+    add(s,"circle",{cx:x(d.x_B_assigned),cy:y,r:3.3,fill:"white",stroke:colors[d.genotype],
+      "stroke-width":1.3,"stroke-opacity":.62});
+  });
+  label(s,x(D.phiA),24,"measured-side Phi",{"text-anchor":"middle",fill:"#a64e13"});
+  label(s,x(1),24,"ridge",{"text-anchor":"middle"});
+  label(s,x(D.phiB),24,"assigned mirror",{"text-anchor":"middle",fill:"#a64e13"});
+  label(s,(L+R)/2,348,"ARA coordinate (0–2)",{"text-anchor":"middle"});
+}
+function candidateChart() {
+  const s=document.getElementById("candidates"), L=56,R=700,T=30,B=292;
+  const max=Math.max(...D.candidates.flatMap(d=>[d.step_error_median_deg,d.cumulative_error_median_deg]))*1.12;
+  const y=v=>B-(B-T)*v/max, names={one_third:"1/3",one_over_e:"1/e",three_eighths:"3/8",
+    phi:"Phi",eight_twenty_firsts:"8/21",two_fifths:"2/5",silver_conjugate:"silver"};
+  [0,.25,.5,.75,1].forEach(q=>{ const v=max*q; line(s,L,y(v),R,y(v));
+    label(s,L-8,y(v)+4,v.toFixed(1),{"text-anchor":"end"}); });
+  const slot=(R-L)/D.candidates.length;
+  D.candidates.forEach((d,i)=>{
+    const cx=L+slot*(i+.5), bw=slot*.28;
+    add(s,"rect",{x:cx-bw-2,y:y(d.step_error_median_deg),width:bw,height:B-y(d.step_error_median_deg),fill:"#4c78a8"});
+    add(s,"rect",{x:cx+2,y:y(d.cumulative_error_median_deg),width:bw,height:B-y(d.cumulative_error_median_deg),fill:"#f2a541"});
+    label(s,cx,B+19,names[d.candidate],{"text-anchor":"middle","font-weight":d.candidate==="phi"?"700":"400"});
+  });
+  label(s,16,(T+B)/2,"degrees",{transform:`rotate(-90 16 ${(T+B)/2})`,"text-anchor":"middle"});
+  add(s,"rect",{x:475,y:8,width:12,height:12,fill:"#4c78a8"}); label(s,492,18,"step");
+  add(s,"rect",{x:545,y:8,width:12,height:12,fill:"#f2a541"}); label(s,562,18,"cumulative");
+}
+function clearanceChart() {
+  const s=document.getElementById("clearance"), L=62,R=690,T=28,B=298;
+  const y=v=>B-(B-T)*v, xs={Col:150,e2:305,e1e2:460,shuffle:620};
+  [0,.25,.5,.75,1].forEach(v=>{line(s,L,y(v),R,y(v));label(s,L-8,y(v)+4,v.toFixed(2),{"text-anchor":"end"});});
+  Object.entries(xs).forEach(([g,x])=>label(s,x,B+22,g==="Col"?"wild type":g,{"text-anchor":"middle"}));
+  ["Col","e2","e1e2"].forEach(g=>{
+    const vals=D.clearance.filter(d=>d.genotype===g).map(d=>d.clearance_median).sort((a,b)=>a-b);
+    vals.forEach((v,i)=>add(s,"circle",{cx:xs[g]+(((i*31)%13)-6)*3,cy:y(v),r:5,fill:colors[g],stroke:"white","stroke-width":1}));
+    const med=vals[Math.floor(vals.length/2)];
+    line(s,xs[g]-38,y(med),xs[g]+38,y(med),{stroke:colors[g],"stroke-width":3});
+  });
+  add(s,"rect",{x:xs.shuffle-32,y:y(D.shuffle.hi),width:64,height:y(D.shuffle.lo)-y(D.shuffle.hi),fill:"#9ca3af","fill-opacity":.45});
+  add(s,"path",{d:`M ${xs.shuffle} ${y(D.shuffle.median)-7} l 7 7 l -7 7 l -7 -7 z`,fill:"#4b5563"});
+  label(s,18,(T+B)/2,"normalized clearance",{transform:`rotate(-90 18 ${(T+B)/2})`,"text-anchor":"middle"});
+}
+function trajectories() {
+  const s=document.getElementById("trajectories"), centers=[[95,150],[270,150],[445,150],[620,150]], radius=67;
+  D.trajectories.forEach((tr,j)=>{
+    const [cx,cy]=centers[j]; add(s,"circle",{cx,cy,r:radius,fill:"none",stroke:"#cbd5e1","stroke-width":1.2});
+    const pts=tr.turns.map((t,i)=>{
+      const a=2*Math.PI*t-Math.PI/2, r=8+i*(radius-13)/(tr.turns.length-1);
+      return [cx+r*Math.cos(a),cy+r*Math.sin(a)];
+    });
+    add(s,"polyline",{points:pts.map(p=>p.join(",")).join(" "),fill:"none",stroke:tr.color,"stroke-width":2.2});
+    pts.forEach((p,i)=>{add(s,"circle",{cx:p[0],cy:p[1],r:4,fill:tr.color,stroke:"white","stroke-width":1});
+      label(s,p[0]+6,p[1]-5,String(i),{"font-size":9});});
+    label(s,cx,246,tr.name,{"text-anchor":"middle","font-weight":"600"});
+  });
+  label(s,360,286,"radius shows placement order; angle shows cumulative position",{"text-anchor":"middle"});
+}
+function compensation() {
+  const s=document.getElementById("compensation"), L=86,R=760,T=28,B=308;
+  const pairs=D.adjacent.pairs_xy;
+  const maxAbs=Math.max(.04,...pairs.flatMap(d=>[Math.abs(d.previous_error),Math.abs(d.next_error)]))*1.08;
+  const x=v=>L+(R-L)*(v+maxAbs)/(2*maxAbs), y=v=>B-(B-T)*(v+maxAbs)/(2*maxAbs);
+  [-1,-.5,0,.5,1].forEach(q=>{
+    const v=q*maxAbs; line(s,x(v),T,x(v),B,{stroke:q===0?"#444b56":"#e6e9ef","stroke-width":q===0?1.5:1});
+    line(s,L,y(v),R,y(v),{stroke:q===0?"#444b56":"#e6e9ef","stroke-width":q===0?1.5:1});
+    label(s,x(v),B+20,v.toFixed(3),{"text-anchor":"middle"});
+    label(s,L-10,y(v)+4,v.toFixed(3),{"text-anchor":"end"});
+  });
+  line(s,x(-maxAbs),y(maxAbs),x(maxAbs),y(-maxAbs),{stroke:"#e8792e","stroke-dasharray":"7 5","stroke-width":1.5});
+  pairs.forEach(d=>add(s,"circle",{cx:x(d.previous_error),cy:y(d.next_error),r:5,fill:"#3569a8","fill-opacity":.72,stroke:"white","stroke-width":.7}));
+  label(s,(L+R)/2,350,"previous step error from Phi (turn)",{"text-anchor":"middle"});
+  label(s,24,(T+B)/2,"next step error",{transform:`rotate(-90 24 ${(T+B)/2})`,"text-anchor":"middle"});
+  const X=825;
+  label(s,X,75,"confirmation wild type",{"font-size":14,"font-weight":"700",fill:"#172033"});
+  label(s,X,112,`adjacent ρ = ${D.adjacent.spearman_rho.toFixed(3)}`,{"font-size":19,fill:"#3569a8"});
+  label(s,X,143,`order-shuffle p = ${D.adjacent.within_plant_order_shuffle_p_negative.toFixed(4)}`);
+  label(s,X,185,"pair-mean error / child error",{"font-size":13});
+  label(s,X,218,`${D.adjacent.pair_mean_over_individual_error_ratio.toFixed(3)}`,{"font-size":26,"font-weight":"700",fill:"#e8792e"});
+  label(s,X,258,"Below 1 means opposite local deviations",{"font-size":12});
+  label(s,X,277,"partly cancel in their two-step parent.",{"font-size":12});
+}
+cards(); ara(); candidateChart(); clearanceChart(); trajectories(); compensation();
+</script>
+</body>
+</html>

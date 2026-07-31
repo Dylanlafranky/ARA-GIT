@@ -57,6 +57,19 @@ A plain-language key to the vocabulary used across this repository. Where a term
 ## Structure and coupling
 
 - **Rung** — one timescale level on the ladder; subsystems sit at rungs spaced by octaves from the pump.
+- **Quantum `7.5 : 15` child-parent cadence** — the `two-turn 7.5` and `one-turn 15` names are observational
+  classifiers, not two unrelated wave species. Canonical ARA reading: the complete approximately `7.5`-sample child
+  contains its own Phase-A/Phase-B cycle and sits inside the approximately `15`-sample adult/parent closure one
+  multiplicative rung upward. Thus \(T_P\approx2T_C\) and \(f_C\approx2f_P\). The complete child projects to `0.5`
+  in parent units; do not assign `0.5` independently to both internal child poles. The complementary parent-level
+  `0.5` remains to be identified. Elevated child-level
+  `Other` should first be read as exposed lower-rung structure. Child asymmetry feeds the signed parent asymmetry;
+  the parent also couples back down to constrain or drive later child expression. Only equal opposite child
+  contributions cancel to a parent ridge. At the parent grain, inherited asymmetry may move from perpendicular
+  `Other` into the main parent coordinate. Upward aggregation and downward influence are not automatic inverses:
+  reconstructing children requires retained `Other` or a measured coupling law. None of this is by itself proof of a separate
+  Time/Connection substance. See
+  `analysis/quantum/QUANTUM_7_5_15_PARENT_CHILD_CADENCE_CANON_2026-07-28.md`.
 - **Pump / ground cycle** — the irreducible base oscillation that defines what the system *is* (rung 0). Remove it and the system stops.
 - **Matched-rung pair** — two systems at the same rung, coupled anti-phase (e.g. NINO ↔ SOI, atria ↔ ventricles). Couple at ratio ~1 (same coordinate), not φ apart.
 - **Anti-phase** — 180° offset; the two partners of a matched-rung pair.
@@ -187,6 +200,28 @@ A plain-language key to the vocabulary used across this repository. Where a term
   independent measurement or a predeclared intervention/removal response. In the computing subset, a signed
   child-difference can be retained as `Other` beside a parent/coarse value, making the transform exactly reversible.
   Reversibility alone does not imply compression, error correction or secrecy.
+- **Parent complement** — the still-unassigned parent-rung contribution that
+  closes beside a complete child after that child is projected upward. For the
+  quantum `7.5:15` cadence, the canonical pure account is
+  \(0.5_C+0.5_Y=1_P\). Q45 tested the local-product relation
+  \(L=ab^{\mathsf T}\) as \(Y\). It showed strong upward phase and flow
+  information but failed adequacy and one-step downward coupling, so \(L\)
+  remains a candidate rather than the identified universal complement.
+- **Local-product relation \(L=ab^{\mathsf T}\) (quantum)** — the outer
+  product of the two local Bloch vectors. Established notation decomposes the
+  full two-body Pauli relation as \(T=C+L\), with
+  \(C=T-ab^{\mathsf T}\) the connected relation. The exact sum is bookkeeping,
+  not ARA evidence. Q45's non-forced result was that \(L\)'s shape followed
+  the held-out 15-cycle phase and added strong child→parent flow information.
+  Its near-half value applied to movement path, while its static tensor share
+  was about `0.955`; never quote the former as a 50:50 state or energy split.
+- **Double-parent cut (Q46 quantum use)** — a declared relation axis through
+  two complete same-tier local parents and their connected child. In Q46 the
+  measured movement cut divided into `0.589` local-parent strand \(L\) and
+  `0.411` connected child \(C\). Inside \(L\), the pooled local-parent ARA was
+  near the `1.0` ridge, but individual windows remained asymmetric. This is a
+  tomography cut through the proposed double-parent TE-ARA, not the complete
+  TE-ARA sphere and not a literal energy division.
 - **Recycling / flywheel** — how much of its previous cycle a system stores and reuses (measured as the autocorrelation "cycle-ago floor"). High = flywheel (Sun); near zero = leaky (ENSO surface, heart at its dominant period).
 - **Leanness** — how little energy a cycle wastes into shocky harmonic distortion (measured as R21, the 2nd-harmonic Fourier ratio; lower = leaner). φ-near systems run leanest (see `EnergyRatio/`).
 - **Bedrock / 2−φ floor** — the posited ideal lossless handoff: space (2) compresses to time (φ), shedding the minimum 2−φ ≈ 0.382. A *reference frame*, not a measurement (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).

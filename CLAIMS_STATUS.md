@@ -1,5 +1,419 @@
 # Claims Status
 
+> **Sun-versus-planetary-collective Solar-System ARA (T317, 31 July
+> 2026): SUCCESSFUL PLACEMENT/CROSSWALK; 6/6 frozen gates and 66/66
+> independent checks.** Dylan corrected the earlier Earth/Sun interpretation:
+> the local pair is the Sun as Phase A versus the combined planetary systems
+> as Phase B, and their completed parent then participates in Galactic motion.
+> Across `14,683` public JPL Horizons states at five-day cadence from 1900
+> through 2100, the extended Sun-versus-planets velocity pair had median
+> coordinates `x_A=1.000000016` and `x_B=0.999999984`, median opposition
+> error `0.000081896 degrees`, and unresolved Other `1.64413e-06`.
+> The position crosswalk independently gave median opposition error
+> `0.00582896 degrees` and Other `0.000146375`.
+>
+> The closure itself is established barycentric conservation and is not new
+> physics or independent evidence for universal ARA dynamics. The informative
+> decomposition lies beneath that compressed ridge: Jupiter supplied a median
+> `77.93%` of absolute retained planetary movement, Saturn `17.30%`, Uranus
+> `1.85%`, and Neptune `1.75%`; adding Pluto reduced median velocity Other by
+> `47.23%`; and both poles carried the same dominant `11.823-year` cadence.
+> This supports the corrected ARA **boundary and rung placement**: Earth is a
+> child inside the planetary pole, not the Sun's complete opposite.
+> Report:
+> `analysis/phi_calibration/T317_SOLAR_SYSTEM_BARYCENTRIC_ARA_REPORT_2026-07-31.md`.
+>
+> **Jupiter–Sun repetition of the orbital T309 geometry (T318, 31 July
+> 2026): FIXED `7.5° : 15°` CADENCE NOT SUPPORTED; 32/32 independent
+> checks.** T318 repeated T309 exactly while replacing Earth’s Sun-relative
+> velocity with the Jupiter-system-barycentre’s Sun-relative velocity. The
+> `7.5°` branch and `15°` opposite-aperture targets and tolerances were frozen
+> before calculation; 1900–1949 data estimated Jupiter’s period, and 1950
+> onward was held out for evaluation.
+>
+> In the rounded T309 parent frame, branch \(\alpha\) had median `3.053°`
+> and maximum `3.406°`; aperture \(\beta\) had median `6.101°` and maximum
+> `6.493°`. In the modern measured Galactocentric frame they were
+> `2.844°`, `3.145°`, `5.671°`, and `6.004°`. Neither central nor envelope
+> gates passed, and `0/12` complete Jupiter cycles passed both crest targets
+> in either frame. The results instead lie near the pre-registered
+> child-speed/parent-speed expectation of roughly `3° : 6°`.
+>
+> This is evidence against treating Earth’s approximate `7.5 : 15` result as
+> a planet-independent ARA constant. The relational construction does
+> survive: opposite half-orbit children remain close to a normalized ARA
+> ridge and their direct aperture is close to their angular sum. What changes
+> is the geometric opening, which scales with the chosen child and parent
+> velocities. Report:
+> `analysis/phi_calibration/T318_JUPITER_GALACTIC_ORBIT_7_5_15_REPORT_2026-07-31.md`.
+>
+> **Earth orbit extruded along Solar-System Galactic travel (orbital T309,
+> 31 July 2026): SIMPLIFIED-FRAME ENVELOPE RECURRENCE; NOT ROBUST AS AN
+> ORBITAL `7.5° : 15°` RECOVERY; 22/22 independent checks.** The registered
+> calculation added the public daily JPL Earth/Sun velocity vector to NASA's
+> rounded `829,000 km/h` Solar-System travel estimate, represented as a pure
+> local Galactic tangent. In the 2013–2024 evaluation years, the
+> child-to-parent angle had median `7.027°` and maximum `7.519°`; the
+> independently calculated opposite-branch aperture had median `13.807°`
+> and maximum `14.726°`. All `12/12` complete years therefore passed the
+> registered envelope gate, although the central-value gate failed. The
+> near identity \(\beta\approx\alpha_A+\alpha_B\) closed to median
+> `−0.000936°`, and the paired ARA coordinate centred at `0.998954` while
+> its children ranged `0.919725–1.080314`.
+>
+> The decisive robustness control replaced the rounded speed and assumed
+> direction with a modern measured Galactocentric vector reconstructed from
+> Sgr A* proper motion, the GRAVITY Galactic-centre distance and Solar
+> peculiar motion. Its speed was `248.931 km/s`, and it lowered the maxima
+> to `6.960°` and `13.636°`; the registered landmark gate then failed. Thus
+> the exact `7.5° : 15°` values are not a robust recovery of Solar/Galactic
+> orbital geometry. What survives is the descriptive ARA crosswalk of one
+> parent direction, two opposite child branches, an almost exact branch-sum
+> aperture and a periodically breathing child asymmetry. Report:
+> `analysis/phi_calibration/T309_GALACTIC_ORBIT_7_5_15_REPORT_2026-07-31.md`.
+>
+> **Recorded transmon \(1/e\leftrightarrow\phi\) whole-circle external return
+> (T314/Q54, 30 July 2026): INVALID / CONSTRUCT INSUFFICIENT — no scientific
+> verdict; 13/13 independent checks.** Q54 froze the exact external
+> circle-centre construction before extracting outcomes from 21 public Device
+> B/C hardware Ramsey \(I/Q\) files. Only 18 primary complete-circle centres
+> survived the fixed completeness, radius and residual rules. These produced
+> one eligible external tangent in one file, versus the G0 requirement of at
+> least three tangents in at least five files. The single tangent occupied a
+> rotated control arc; no contiguous path, half-traversal or full return could
+> be formed. This does not support or reject the ARA return claim: the source
+> did not contain enough sequential strong circles to instantiate the frozen
+> measured object. Each delay point was also a repeated hardware
+> preparation/measurement rather than a continuous single-shot trajectory.
+> Report:
+> `analysis/quantum/Q54_RECORDED_TRANSMON_EXTERNAL_RETURN_REPORT_2026-07-30.md`.
+>
+> **Recorded trapped-qutrit \(1/e\leftrightarrow\phi\) whole-direction
+> return (T313/Q53, 30 July 2026): NOT SUPPORTED — 1/4 substantive gates;
+> 22/22 independent checks.** Q53 replaced generated simulator futures with
+> `53,459,987` sequential measurements from one physical trapped-ion qutrit.
+> The published 13-ray geometry and raw photon responses reconstructed the
+> recorded direction; three fixed sphere cuts yielded approximately
+> `196,000` complete circuits and `168,000–169,000` whole-centre movements
+> each. Strict `0→2→0` returns occurred `7`, `3` and `3` times in the
+> \(1/e\rightarrow\phi\) arc. They did not beat shuffled time order:
+> shuffled means were `2.398–2.648` per chronological cell and every
+> shuffled 99th percentile was `7`, while observations were `0–3`.
+> Landmark occupancy was nearly uniform across the declared and three
+> matched rotated arcs, and the declared return count was uniquely largest
+> in only one cut. Thus chance-compatible crossings occurred, but an ordered
+> \(1/e\rightarrow\phi\rightarrow1/e\) whole-vector wobble was not found.
+> This rejects the specific coordinate realization in this randomly driven
+> hardware record; it does not test the already-known parent-ridge rule.
+> Report:
+> `analysis/quantum/Q53_RECORDED_QUTRIT_EXTERNAL_RETURN_REPORT_2026-07-30.md`.
+>
+> **Whole-sphere quantum continuation (T312/Q52, 30 July 2026):
+> UNRESOLVED / MIXED; 14/14 independent checks.** Q52 extended exact
+> slice-499 simulator states by 1,500 interactions under eight predeclared
+> valid fixed, alternating and random coupling futures. No family passed the
+> aggregate active `0 -> 2 -> 0` return definition and none passed aggregate
+> one-way settling. Pooled source-seed active return was `0.601912`, but its
+> bootstrap 95% interval `[0.453824, 0.742257]` missed the frozen
+> majority-confidence gate; pooled settling was `0.045996`
+> (`[0.021645, 0.071429]`). Fixed futures produced apparent geometric
+> returns only after external movement collapsed to about `1e-8` of its
+> historical baseline, so the active-movement guard correctly rejected them.
+> Alternating/random futures retained active returns in `63.6%–67.7%` of
+> eligible source seeds, while their aggregate parent coordinate remained
+> near the `1.0` ridge. This child/parent cancellation pattern is compatible
+> with an existing ARA coarse-ridge rule but was not the frozen universal
+> endpoint; it requires predeclared replication. The source is a validated
+> deterministic simulator continuation, not quantum hardware. Report:
+> `analysis/quantum/Q52_WHOLE_SPHERE_CONTINUATION_REPORT_2026-07-30.md`.
+> Q52 is now marked **superseded for the natural recorded-continuation
+> question** because its future paths were generated by the validated
+> simulator. It remains a valid simulator result rather than a hardware
+> continuation test.
+>
+> **External quantum orientation reversal (T310/Q50 and T311/Q51,
+> 30 July 2026): PARTIAL — a same-lineage `0→2` orientation reversal
+> replicates within the deterministic simulator family; active return and a
+> complete `0→2→0` cycle are not supported; Q50 11/11 and Q51 13/13
+> independent checks.** Q50 fixed `1,120` `(seed,pair)` lineages and found
+> their external whole-circle coordinate move from `x=0.415611` in
+> development to `x=1.720566` in evaluation. The aggregate headings were
+> `0.481695` turns apart, only `0.018305` from an exact half-turn; a
+> within-lineage time shuffle gave `p=0.00019996`. Q51 froze the same
+> construct before applying it to four previously used strategy archives.
+> All three eligible `c2` strategies crossed from the declared side to its
+> opposite, with heading separations `0.491752–0.498672` turns. The fourth
+> `c2` strategy and every `c4` branch lacked fixed lineages spanning both
+> halves and were NOT TESTABLE. No strategy completed a return, and movement
+> was commonly near the floor after reversal. The result supports a
+> recurring external orientation flip in this simulator family. It does not
+> yet establish a complete ARA cycle, a physical singularity crossing, or
+> quantum-hardware behaviour. Report:
+> `analysis/quantum/Q50_Q51_EXTERNAL_REVERSAL_REPORT_2026-07-30.md`.
+>
+> **External whole-circle quantum time vector (T309/Q49, 30 July 2026):
+> NOT SUPPORTED under the frozen directional and ordered-wobble gates;
+> 10/10 independent checks.** Q49 corrected the measured object after Q48's
+> invalid proxy: every complete four-quadrant cycle was treated as one circle,
+> its centre was calculated, and successive centres supplied the external
+> vector carrying the whole internally rotating circle through time. The
+> declared heading arc ran from \(1/e\) to full Phi wrapped onto one turn,
+> \(\phi-1\), a width of `0.250154548` turns. It was the pooled winner:
+> `461/1300 = 35.4615%`, versus `29.8462%` for the strongest matched control
+> and `25.0155%` uniform expectation. This did not survive seed clustering:
+> bootstrap support was `0.7412`, with difference interval
+> `[-0.13111,+0.20054]`. It also changed with centre definition and produced
+> no ordered endpoint traversal. Post-result, the instability resolved into
+> a strong half-turn reversal: development favoured the declared arc
+> (`39.8601%`), while evaluation favoured the opposite arc (`63.5762%`), and
+> all three centre estimators agreed on that reversal. This is a frozen-new
+> replication hypothesis for a parity-conditioned opposite-arc pair, not a
+> rescue. `3/8` was not selected. Report:
+> `analysis/quantum/Q49_EXTERNAL_TIME_VECTOR_REPORT_2026-07-30.md`.
+>
+> **Construct correction:** Q48 is retired as an invalid proxy and is not
+> evidence for or against the intended ARA claim. It measured internal
+> cycle-to-cycle turning rather than the external path of the complete
+> circle. If context compacts after a test is agreed but before it runs, the
+> measured object must now be restated and reconfirmed before execution.
+
+> **Embedded octave-closure crosswalk to quantum `7.5 : 15` (T307,
+> 30 July 2026): PARTIAL — Q40C factor-two cadence supported and a matching
+> constant-geometry closure motif identified;
+> seed-specific pairing not supported; 9/9 independent checks.** The exact
+> constant geometry has child radius equal to parent ridge displacement:
+> \[
+> \frac{(2-\phi)-1/e}{2}
+> =
+> 1-\frac{\phi+1/e}{2}
+> =
+> 0.00704328504.
+> \]
+> In the already-open Q40C simulator result, `94` seeds containing both
+> continuous cadence families gave pooled period medians `7.500119620` and
+> `14.999632840`; the seed-balanced median
+> \(2T_C/T_P=1.000033022\), with bootstrap 95% interval
+> `[1.000000430, 1.000064693]`. Factor `2` uniquely beat `1`, `3/2`, Phi,
+> \(e\) and `3`. Actual child/parent seed matching did not beat shuffled
+> matching (`p=0.3814`). The result supports a shared factor-two closure
+> motif, but the raw embedded child/parent interval-width ratio is
+> `0.0112679`, not `0.5`; the records therefore do not establish that the
+> constant nesting and quantum cadence are the same physical octave
+> operation. They also do not support a seed-specific genealogy, Phi
+> causation or transfer beyond this deterministic archive. Report:
+> `analysis/phi_calibration/T307_EMBEDDED_OCTAVE_CLOSURE_CROSSWALK_REPORT_2026-07-30.md`.
+
+> **Embedded \(1/e\leftrightarrow\phi\) parent and anti-Phi child thread
+> (T306, 30 July 2026): ORIGINAL FROZEN VERDICT NOT SUPPORTED — 1/3
+> substantive gates; 9/9 independent checks; G2 subsequently marked
+> FRAMEWORK-INVALID.** The placement has an exact algebraic crosswalk: its
+> embedded midpoint is `0.992956715`, and
+> \((2-\phi)-1/e=2-(\phi+1/e)=0.0140865701\), so the proposed child gap is
+> exactly the parent's endpoint TE-ARA closure deficit. On the unit
+> scheduling circle, the parent separation is `0.250154548` (arithmetic
+> beat recurrence `3.99753`) and the child separation is `0.0140865701`
+> (beat recurrence `70.9896`). These follow from the selected constants; the frozen
+> fresh-prefix test asked whether they appeared in the scored outcomes. They
+> did not: the parent's period-four partial `R²` was only `0.00004964`, sixth
+> of seven pairs. Parent and child both selected the scan ceiling `128`, but
+> frozen G2 had accidentally required a slower child. ARA's actual octave
+> rule is a smaller, faster child, approximately \(T_C=T_P/2\). The reported
+> beat recurrences are not identity cycle periods, so G2 cannot count against
+> the faster-child rule.
+> Coupling remained important—`70/192` prefixes (`36.46%`) changed whether
+> Phi-Time or `1/e` won—but that does not identify the proposed hierarchy.
+> The exact geometry survives as a mathematical crosswalk; its dynamic
+> parent period-four response was not supported, while the child-cadence
+> claim remains untested by this phase-marginalized idealized scheduling
+> observable. Report:
+> `analysis/muon/T306_EMBEDDED_E_PHI_THREAD_REPORT_2026-07-30.md`.
+
+> **ARA Phi temporal carrier in muon-Fusion scheduling (T305, 30 July
+> 2026): MIXED — 2/3 substantive gates; 15/15 validation checks.** Exact Phi
+> was the unique best forward fixed carrier for unknown-prefix geometric
+> coverage and mean fifth-percentile overlap across three idealized
+> non-flat muon-source families. It beat `3/8` in `96.17%` of `183`
+> family-prefix cells and retained `98.22%` of the known-horizon uniform
+> oracle's mean. It did not win the harsh lower-tail endpoint: `1/e` scored
+> `0.013788` versus Phi `0.011726`. Reverse Phi, corresponding to Dylan's
+> `1.618` Time-side orientation on the `0-2` diameter, had the best mean of
+> all fixed carriers (`0.077722`) but was frozen as an orientation control.
+> The main `3/8` deficit came from rational recurrence: after eight distinct
+> placements its later pulses revisited the same sites. This supports a
+> distinction between local rational closure and a non-repeating carrier,
+> not a natural Phi law of Fusion. The target is an idealized schedule for
+> the public \(f_X\) overlap factor, not laboratory muon data, microscopic
+> stripping or recycling. Report:
+> `analysis/muon/T305_ARA_PHI_TEMPORAL_CARRIER_FUSION_REPORT_2026-07-30.md`.
+
+> **Q47 ARA⁹ whole-lattice meta movement (T304, 30 July 2026):
+> NOT SUPPORTED — 0/3 Phi-carrier gates.** The corrected target treated the
+> complete connected \(3\times3\) lattice as one ARA⁹ identity and compared
+> the same four internal quadrant anchors in consecutive complete cycles.
+> Across `16,846` events from `1,121` lineages and `71` seeds, the median
+> whole-lattice advance was only `0.000000879` full turns. Recurrence at `0`
+> was the unique winner in the pooled coordinate, all quadrants, all
+> magnitude quartiles and the lag-two control. Thus this source does not
+> support a common \(\phi^{-2}\) or `3/8` parent-to-parent carrier step.
+> Post-result, the strongest opening-boundary event had three quadrant
+> anchors near half-turn opposition and one recurrent anchor, producing
+> mean `0.369685`, close to `3/8`. That one three-of-four reversal is a
+> replication hypothesis, not a promoted finding or rescue. Independent
+> validation passed. Report:
+> `analysis/quantum/Q47_ARA9_WHOLE_LATTICE_META_MOVEMENT_REPORT_2026-07-30.md`.
+
+> **Phi / three-eighths state-duality audit (T303, 30 July 2026):
+> MIXED — exact universal duality not supported; reduced distinction
+> suggestive.** T302 supplies one direct supporting split: `3/8` was the best
+> fixed local placement step while exact \(\phi^{-2}\) was the best fixed
+> cumulative-position carrier. The canonical ARA⁹ quantum lattice does not
+> numerically supply `3/8`: three retained directions in nine relation cells
+> is `1/3`. Its time-resolved records support a distinction between connected
+> lattice, moving closure, delayed flip and ordered quadrant circulation, but
+> none predeclared a commensurate Phi-versus-`3/8` carrier coordinate. Q43's
+> frozen handover timing also failed to privilege Phi. Connected prime and
+> pendulum cuts frequently prefer rational closure/recurrence, but not a
+> universal `3/8`. Therefore the exact ARA⁹ duality is **not testable from
+> existing records**, and the universal two-constant law is not supported.
+> The useful surviving claim is that local closure and moving larger-carrier
+> motion must be measured separately. Audit:
+> `analysis/phi_calibration/T303_PHI_THREE_EIGHTHS_STATE_DUALITY_AUDIT_2026-07-30.md`.
+>
+> **Target clarification:** ARA⁹ is not being proposed as a `3/9` lattice
+> occupancy fraction. The whole nine-cell lattice is one time-slice identity;
+> the relevant candidate is its meta movement into the next whole lattice
+> state. Existing Q26–Q39 records contain partial trajectory information but
+> did not freeze that full scale-free moving-lattice coordinate.
+
+> **Empirical Phi calibration in ordered phyllotaxis (T302, 30 July 2026):
+> MIXED / SUGGESTIVE — 2/4.** A frozen ARA-native test used `359`
+> successive divergence-angle measurements from `58` Arabidopsis meristems
+> with wild-type, `e2` and `e1e2` controls. On the measured directed cut
+> \(x_A=\theta/360^\circ\), confirmation wild type sat within `0.005526` of
+> \(\phi^{-2}\), and exact Phi was the best fixed cumulative-position carrier
+> (`5.429°` median error versus `6.524°` for `8/21`). Exact Phi was not the
+> best local child step: `3/8` scored `6.743°` versus Phi `6.986°`.
+> Wild-type open-space clearance was directionally above both mutants, but
+> actual order did not beat within-plant shuffles (`p=0.1582`), so the
+> proposed order-sensitive handover mechanism did not pass. Post-result,
+> adjacent wild-type child errors alternated around Phi (`rho=-0.5356`,
+> within-plant order-shuffle `p=0.00060`) and their two-step coarse-grained
+> error fell to `42.9%` of individual-child error. That parent/child clue is
+> descriptive and needs frozen independent replication. The source paper
+> already identifies the golden neighbourhood; this is calibration, not
+> discovery. The `2-x` mirror is assigned, not measured. Report:
+> `analysis/phi_calibration/T302_PHI_PHYLLOTAXIS_RESULT_2026-07-30.md`.
+
+> **CANONICAL QUANTUM `7.5 : 15` RUNG INTERPRETATION (28 July 2026).**
+> `Two-turn 7.5` and `one-turn 15` remain the empirical classifier names used
+> by Q40C-Q44A, but they are not two unrelated proposed systems. In the ARA
+> interpretation, the complete approximately `7.5`-sample child contains its
+> own internal Phase-A/Phase-B cycle and sits inside the approximately
+> `15`-sample adult/parent closure one multiplicative/log rung upward:
+> \(T_P\approx2T_C\), \(f_C\approx2f_P\). The complete child projects to
+> `0.5` in parent units; its internal A and B must not each be counted as
+> separate `0.5` children. The complementary parent-level contribution remains
+> unidentified. Consequently, elevated
+> perpendicular `Other` in the `7.5` class should first be read as exposed
+> child structure. Its signed asymmetry feeds the parent above; only equal
+> opposite child contributions cancel at the parent ridge. Smaller
+> parent-level perpendicular gain can instead mean the inherited asymmetry
+> has moved into the main parent coordinate. The parent also couples back down
+> to constrain or drive later child expression, but that downward map is not
+> recoverable from the parent alone without retained `Other` or a measured
+> coupling law. Cadence alone does not prove distinct
+> Time-versus-Connection substances. This clarification changes no frozen
+> protocol, number or verdict. Canonical note:
+> `analysis/quantum/QUANTUM_7_5_15_PARENT_CHILD_CADENCE_CANON_2026-07-28.md`.
+
+> **Q43 projected child ridge and Phi handover (T299, 28 July 2026):
+> NEAR CHILD-RIDGE LOCATION AFTER CONTROL; FROZEN SUPPORT GATES NOT
+> PASSED.** Q43 separately froze (a) the octave-halving statement that a
+> child ridge `1.0` at its own rung projects to `0.5` in parent units and
+> (b) a directional passage-time test of the exact
+> \((2-\phi,\phi)\) handover pair. In the two-turn family, raw matched
+> half-progress residuals were `0.6443` greedy and `0.6287` landmax. The
+> unchanged fitted symmetric-sampling control moved the lineage-matched
+> estimates toward `0.5`, to `0.5532` and `0.5611`, but their complete 95%
+> seed-bootstrap intervals (`[0.5282,0.5914]`,
+> `[0.5319,0.5947]`) did not fit inside the frozen `[0.45,0.55]`
+> equivalence band. The one-turn control remained near zero, so the
+> residual is cadence-family-local rather than a normalization inevitability.
+> Exact Phi beat only `39.3%` and `36.1%` of the fixed symmetric-landmark
+> grid on the primary temporal-tension score, far below the frozen `90%`
+> gate. Thus this simple passage-time definition does not privilege Phi.
+> Independent validation passed with zero saved-precision recalculation
+> error. Q43 does not identify one physical hidden child or disprove every
+> possible Phi handover law; it localizes an unresolved `~0.05–0.06`
+> parent-view excess after control. Report:
+> `analysis/quantum/Q43_CHILD_RIDGE_AND_PHI_HANDOVER_REPORT_2026-07-28.md`.
+
+> **Q42 independently measured dual-strand flow (T298, 28 July 2026):
+> DESCRIPTIVE FLOW SHAPE RECOVERED; parent matrix normalization unresolved.**
+> A protocol frozen before calculation measured forward and return halves
+> independently on the previously revealed Q40 greedy and Q41B landmax
+> archives (`73,760` half-wave pairs). Total duration and mean speed sat at
+> the equal `1.0` ridge in both archives, while local traversal remained
+> asymmetric: median signed `forward + return - 2` was `+0.34744` and
+> `+0.34620`. The one-turn parent family nearly closed in signed average
+> (`+0.00188`, `+0.01484`), whereas the two-turn child family repeated a
+> large positive excess (`+0.41186`, `+0.40797`). A symmetric-sinusoid
+> sampling control explained only part of it; observed-minus-control was
+> `+0.25846`, 95% seed-cluster interval `[0.25152,0.26540]`. Aggregate
+> forward flow matched time-reversed return flow at `r=0.99993`: the complete
+> amounts balance while their passage through the rung is temporally
+> asymmetric. Matrix projection recomputed `31,255` cycles and found an
+> elevated perpendicular `Other` in two-turn `Ba`, but the candidate
+> \(D=C_1-C_2\) coordinate frequently left `0..2`; it is not a normalized
+> whole-parent diameter at this grain. Q42 therefore explains why Q41B's
+> full reversal was scale/operator-wrong but does not yet provide a
+> predictive mixing constant. This is not prospective because both targets
+> were previously opened. Independent validation passed with zero arithmetic
+> mismatches. Report:
+> `analysis/quantum/Q42_ARA_DUAL_STRAND_FLOW_REPORT_2026-07-28.md`.
+
+> **Q41/Q41B cadence-defined Ba strand transfer (T296–T297, 27 July
+> 2026): exact full-vector repair NOT SUPPORTED; prospective strand-state
+> localization SUPPORTED as a secondary result.** Q41 froze the Q40C
+> `7.5/15 + Ba` rule before selecting the untouched inhomogeneous-v1
+> `random` archive. All `6,600` lineages failed the frozen direction-
+> coherence threshold, so Q41 was **INCONCLUSIVE — ELIGIBILITY**; no
+> prediction was written and no fourth identity was revealed. Q41B then
+> froze the identical operator on untouched inhomogeneous-v1 `landmax`.
+> Adequacy passed (`15,917` cycles, `1,006` scored lineages, `100` seeds),
+> and predictions were hashed before reveal. The proposed full reverse
+> \(C_3-(C_1-C_2)\) worsened seed-balanced scaled error to `0.51516` versus
+> Q40's `0.46517`; Q41B-over-Q40 advantage was `-0.04999`, 95% seed-cluster
+> interval `[-0.06827,-0.03315]`. However, the frozen cadence-plus-Ba
+> coordinate prospectively raised hidden negative-orientation recall from
+> `0.497` to `0.924` and balanced accuracy from `0.746` to `0.948`
+> (`precision=0.804`). Thus the clock locates the reverse-oriented strand
+> but does not supply its amplitude/complete matrix operator. Independent
+> validation recomputed all cycles with zero mismatches. Reports:
+> `analysis/quantum/Q41_CADENCE_STRAND_REVERSAL_REPORT_2026-07-27.md` and
+> `analysis/quantum/Q41B_CADENCE_STRAND_REVERSAL_REPORT_2026-07-27.md`.
+
+> **Q40 conditional return-flow relation reversal (T295, 27 July 2026):
+> NOT SUPPORTED — RETURN-FLOW RULE; strong quadrant-localized partial
+> signal.** Q39A's exact visible-state rule was frozen before Q40 target
+> enumeration, selected the previously unopened
+> `unnati_submit_12_inhomo_v1_greedy.hdf5.zip` by metadata only, and predicted
+> every fourth-visit matrix before targets were revealed. All eligibility
+> gates passed (`15,338` cycles, `968` lineages, `99` seeds). The flag
+> returned `94.64%` precision and `99.48%` specificity, but only `65.67%`
+> recall, below the frozen `75%` minimum. Conditional reversal improved
+> `88.13%` of flagged cycles and its seed-balanced scaled error (`0.46262`)
+> beat every fixed control with Holm-corrected seed-cluster significance, but
+> not the development-only affine comparator (`0.38092`). Post-result
+> localization found that `613/646` false negatives occurred in `Ba/Q-+`;
+> this cannot rescue Q40 but cleanly specifies a later untouched-data test of
+> the missing reversible orientation. Independent raw-data validation passed
+> every check with zero flag disagreements. Q40 supports a transported,
+> structured orientation effect at this tested tier, but not a complete
+> return-flow law, physical Phase B, literal singularity, entanglement
+> transport or universal fractal law. Report:
+> `analysis/quantum/Q40_RETURN_FLOW_RELATION_REVERSAL_REPORT_2026-07-27.md`.
+
 > **Q39 lower-tier ARA⁹ Information³ fourth-quadrant reconstruction (T294,
 > 27 July 2026):** Q39 preserved the post-Q38 tier correction: Bell remained
 > an upper calibration lens, while the tested identity was the complete
@@ -1309,7 +1723,19 @@ What is honest about it:
 
 Careful claim: the catalogue is now large, self-similar across ~40 orders of scale, and audited rather than cherry-picked. It is a mapping/orientation tool, not a forecast. The over-2 audit is the honesty check — read it alongside any "everything sits in the band" statement.
 
-## Update - May 31 2026: Pulsating stars — closeness to φ tracks a leaner energy budget
+## Update - May 31 2026: Pulsating stars — corrected 30 July 2026
+
+> **Correction (independently re-run and replicated 2 July 2026):** the
+> exact-Phi leanness gradient below was interpreted in the wrong direction.
+> The report defines smaller distance as closer to `1/phi`
+> and smaller `R21` as leaner. Therefore
+> `corr(distance, R21) = -0.347` associates *greater* distance with lower
+> `R21`; it does not show that closer-to-Phi stars are leaner. The reported
+> 3.6% class gap remains a descriptive association, but is not an exact-Phi
+> dose response. The corrected re-run found an `8.9%` class gap and a
+> period/amplitude-matched mean difference of `-0.0077` (`p=8.8e-43`), while
+> the inverse within-club gradient survived controls (partial `r=-0.203`).
+> See `GOLDEN_STARS_CORRECTION.md`.
 
 Full record: [`EnergyRatio/GOLDEN_STARS_LEAN_RESULT.md`](EnergyRatio/GOLDEN_STARS_LEAN_RESULT.md). Real Kepler light curves (lightkurve/MAST) + OGLE-IV double-mode catalogs + Netzel & Smolec 2019 RR0.61 census (`J/MNRAS/487/5584`), cross-matched to OGLE `RRc.dat`. All frequencies measured by us (Lomb–Scargle + iterative prewhitening). Supersedes the old Script 98 Cepheid test, which used hand-typed literature rise fractions rather than raw photometry.
 
@@ -1321,9 +1747,18 @@ The measurable is **R21** = Fourier harmonic spray A(2f)/A(f₁); **lower = lean
 | Ordinary double-mode (433 OGLE RRd/Cep) | 1.34–1.42 (near-rational Petersen) | 0.16 / 0.19 |
 | Near-φ "golden" club (4 Kepler RRc, KIC 5520878/4064484/8832417/9453114) | within ~2% of φ (3 within 1%) | ≈0.11 (leanest) |
 
-Population confirmation: 949 OGLE RR0.61 stars (period ratio ≈ 1/φ) are 3.6% leaner than 18,318 ordinary single-mode RRc (p=0.016); and **within the club, leanness deepens toward exact 1/φ — corr(|Px/P1O − 1/φ|, R21) = −0.347, n=949.**
+Corrected population calculation: 949 OGLE RR0.61 stars (period ratio
+approximately `1/phi`) had mean `R21` 8.9% below 17,305 ordinary single-mode
+RRc and survived period/amplitude matching. The within-club exact-Phi
+statement is rejected:
+`corr(|Px/P1O - 1/phi|, R21) = -0.347` points away from, not toward, the
+claimed leanness gradient.
 
-Careful claim: **closeness to φ tracks a leaner energy budget — confirmed on real stellar photometry.** The mechanism is consistent with established KAM theory (φ is the most-irrational ratio, so harmonics cannot lock and grow → energy stays in clean modes; rational ratios let overtones reinforce → waste). What is novel here is the *measured entropy-leanness gradient* and its consistency with the framework's φ-rung entropy-decay result in ECG/ENSO (`TheFormula/Claude4.8/PHI_RUNG_ENTROPY_DECAY_RESULT.md`) — same φ-leanness principle, new domain. Honest hedges: n=4 Kepler club is a known related class (re-found, not discovered); R21 is one (clean, physical) leanness proxy; against *same-type* RRc the class gap is modest (3.6%) and the within-club gradient toward exact φ is the backbone; golden-star secondary modes may be non-radial vs the crowd's radial overtones. "φ resists locking" is textbook math; the empirical leanness gradient and cross-domain framing are the new part.
+Current claim: the selected RR0.61 class has a lower-`R21` association that
+survives the corrected class-matched analysis. Exact-Phi proximity is **not**
+supported; the corrected within-class gradient runs the other way. The
+KAM/locking explanation remains a hypothesis, and secondary-mode prewhitening
+is the documented decisive follow-up.
 
 ## Update — 1 June 2026: Fusion application (muon-catalyzed fusion)
 
@@ -1332,6 +1767,337 @@ Full record: [`FUSION.md`](FUSION.md). The framework was applied to muon-catalyz
 real, published method**, with one genuinely novel untested addition.
 
 What is **solid / confirmed**:
+
+## Update — 28 July 2026: compact quantum mixing prediction
+
+Q44/Q44A prospectively tested the compact ARA equation
+
+\[
+\widehat C_4=C_3+\widehat\alpha_g(C_1-C_2)+\widehat\beta_gO
+\]
+
+on the previously unused public `inhomo_v1_mimic` simulator archive. Q44
+stopped before scoring because three small family × quadrant groups failed its
+frozen 25-development-cycle floor. Before any evaluation fourth matrix was
+read, Q44A froze a quadrant-only fallback for those sparse groups. Only
+`40/5,278` predictions used it. The prediction artifact was sealed first with
+SHA-256
+`3f75eed32c96ba0810d07e36bf19683925e330ba4466aa81fa0f9527d829c5da`.
+
+The strict verdict is **INCONCLUSIVE — ELIGIBILITY** because only `49` seeds
+produced complete evaluation cycles, below the frozen minimum of `80`.
+Conditional on that sample, all four performance gates passed: scaled error
+`0.31868`, cosine `0.86589`, improvement over diameter-only `+0.02938`
+(95% CI `[0.01655, 0.04404]`) and improvement over pooled affine `+0.06162`
+(95% CI `[0.00923, 0.11335]`). Retaining perpendicular `Other` also raised
+orientation accuracy from `0.91210` to `0.95074`. The more flexible grouped
+affine model remained better (`0.22605` error).
+
+Careful claim: a geometrically named, two-direction ARA mixing operator
+prospectively predicted an unopened fourth connected-matrix identity and
+outperformed its one-axis ablation plus simple controls in the observed sample.
+The result is a validated predictive signal under an inconclusive adequacy
+verdict, not yet a supported universal quantum law or proof of TE-ARA,
+fractal geometry, a hidden Phase B, exact `0.5`, or Phi timing.
+
+Primary report:
+`analysis/quantum/Q44_Q44A_ARA_MIXING_PREDICTION_REPORT_2026-07-28.md`.
+
+## Update — 28 July 2026: Q45 first 15-cycle parent-complement candidate
+
+Q45 asked what supplies the still-unassigned parent-level contribution beside
+the complete approximately `7.5` connected child. It tested the local-product
+Pauli relation
+
+\[
+L=ab^{\mathsf T}
+\]
+
+against the already measured connected relation
+\(C=T-ab^{\mathsf T}\). The exact identity \(T=C+L\) was treated as forced
+bookkeeping and was not counted as evidence. Cadence and phase were defined
+from development \(C\) only; \(L\) was then tested on held-out samples for
+15-cycle phase recurrence, parent-path participation and lagged flow.
+
+The strict verdict is **NOT SUPPORTED**. Only `17` seeds and `79` lineages
+passed the development-only cadence filter, below the frozen `80`-seed and
+`1,000`-lineage adequacy floors. In addition, \(L\) did not improve one-step
+parent→child prediction.
+
+The upward shaping results were strong:
+
+- held-out 15-cycle phase skill `0.609`, 95% seed interval
+  `[0.454, 0.748]`;
+- \(L\) movement-path share `0.589`, interval `[0.417, 0.666]`;
+- child→parent error improved from `0.81391` with \(C\) alone to `0.41141`
+  with \(C+L\), advantage `+0.40250`
+  `[0.33589, 0.46127]`; and
+- real-time \(L\) substantially beat a four-sample-lag timing control.
+
+However, \(L\) held about `0.955` of static \(C+L\) tensor magnitude, so the
+near-half result is specifically a **movement share**, not a 50:50 state,
+energy or amplitude division.
+
+Careful claim: \(L=ab^{\mathsf T}\) is a strong candidate contributor to the
+upward approximately `7.5→15` parent relation in this already-open shaping
+archive. It is not established as the universal or bidirectional missing ARA
+half. Independent validation passed all source, cache, arithmetic and visual
+checks.
+
+Primary report:
+`analysis/quantum/Q45_15_CYCLE_PARENT_COMPLEMENT_REPORT_2026-07-28.md`.
+
+## Update — 28 July 2026: Q46 internal double-parent ARA
+
+Q46 decompressed Q45's local-product strand
+\(L=ab^{\mathsf T}\) into the two measured local parents before
+coarse-graining. Its protocol and Dylan's approximately `42%` expectation
+were frozen before the local-parent trajectories were opened.
+
+The result supports a **coarse same-tier parent ridge for this measured
+cut**:
+
+- native parent shares `0.5196 : 0.4804`, corresponding to diameter
+  positions `1.0392 : 0.9608`;
+- lifted within-\(L\) contributions approximately `53.68%` and `45.76%`;
+- simultaneous handover `Other` approximately `0.46%`; and
+- exact product-rule reconstruction to about `1.11e-16`.
+
+The measured double-parent movement cut divided into `58.92%` local-parent
+strand and `41.08%` connected-child strand. The latter is within `0.92`
+percentage points of Dylan's `42%` expectation. This match is accounting,
+not independent evidence, because it is the complement of Q45's already
+observed `58.92%`.
+
+The pooled ridge hides substantial local asymmetry: the seed-balanced mean
+absolute diameter distance from `1.0` was about `0.390`. Thus Q46 does not
+show that the parents are equal at each time slice, that `41.08%` is
+universal, or that the complete double-parent TE-ARA sphere has been
+recovered.
+
+All validation checks passed, including raw-density-matrix spot checks.
+
+Primary report:
+`analysis/quantum/Q46_DOUBLE_PARENT_INTERNAL_ARA_REPORT_2026-07-28.md`.
+
+## Update — 30 July 2026: Phi as a collective four-child handover
+
+After the single-child-turn test located poles rather than Phi, Dylan proposed
+that the relevant handover may require the four children produced by two
+coupled A/B parents. This was frozen before opening the second public driven
+double-pendulum run.
+
+The frozen verdict is **MIXED (`2/4`)**:
+
+- `44/50` parent cycles visited all four coupled child states;
+- collective all-four completion was nominally closest to Phi
+  (`0.03586` median circular distance), narrowly ahead of thirds (`0.04100`);
+- Phi-quartet proximity positively predicted next-cycle parent amplitude
+  retention (`Spearman r=+0.655`, circular-shift `p=0.00020`);
+- the exact Phi allocation was not the best four-child template: a simple
+  irregular `(1,2,3,4)` allocation was closer (`0.1829`) than Phi (`0.2550`);
+- the frozen monotonic translation “greater inequality means greater
+  retention” ran oppositely (`r=-0.563`);
+- equal-quarter proximity predicted retention almost as well as Phi
+  (`r=+0.645`), and the development run showed the opposite association.
+
+The supported interpretation is narrower than a Phi law: the collective
+four-child measurement is useful, and parent retention improves as two weak
+cross-children become involved and the system leaves an extreme two-child
+lock. Phi is a plausible transition location in the frozen run, but its unique
+specificity and cross-regime stability are not established.
+
+Post-freeze, Dylan clarified that the intended claim was bounded, maintained
+asymmetry inside TE-ARA—not maximum inequality. The monotonic endpoint was an
+over-strong Codex translation. Its negative result remains recorded, but the
+clarified claim requires a phase-order/recurrence test rather than occupancy
+inequality alone.
+
+Primary record:
+`analysis/pendulum_scripts/PHI_FOUR_CHILD_HANDOVER_RESULT_2026-07-30.md`.
+
+## Update — 30 July 2026: Phi dimensional handover in the triple pendulum
+
+A frozen reanalysis tested whether one Phi operation appeared simultaneously
+as a child turn near the parent's local ARA diameter landmarks
+`0.381966/1.618034`, a parent-cycle location near
+`0.381966/0.618034`, and improved preservation of the parent's following
+excursion.
+
+The frozen free-swing run-3 verdict is **NOT SUPPORTED** (`1/4` registered
+check families passed):
+
+- circular child-turn locations preferred the parent turn/opposition pair
+  (`0/0.5`, median distance `0.0725`) over Phi (`0.1153`);
+- joint Phi proximity did not beat `2,000` shifted-event controls
+  (`p=0.8806`);
+- high-Phi-proximity events retained the next parent excursion slightly less,
+  not more (`−0.0112`, `p=0.9760`);
+- only positive association between the line and circular proximity cuts
+  survived (weighted Spearman `r=+0.325`).
+
+An independent post-verdict audit identified an omitted ARA pole control. On
+frozen run 3 the local parent poles were substantially closer than Phi
+(`0.1223` versus `0.3192`). This reinforces the interpretation that the
+instrument found ordinary nested turn/pole locking, not a Phi handover.
+
+This rejects the tested placement of Phi at the **raw child extrema**. It does
+not reject Phi elsewhere in ARA. A separate conjecture—that Phi is the
+diagonal travel between successive pole handovers—remains open and may not be
+used to repair this frozen result.
+
+Primary report:
+`analysis/pendulum_scripts/PHI_DIMENSIONAL_HANDOVER_RESULT_2026-07-30.md`.
+
+## Update — 30 July 2026: Phi-ordered recurrence and resonance death
+
+Dylan clarified the four-child proposal after the T298 mixed result:
+TE-ARA fixes the child budget at `2`, but the important possibility is
+maintained, non-closing order—not maximum inequality. Phi was proposed as the
+irregular handover that could keep a parent from terminal “resonance death.”
+
+This was frozen before opening three additional public free-swing
+double-pendulum runs. Raw centred arm signs supplied `AA, AB, BB, BA`; their
+circular timing gaps and movement between parent cycles were compared with
+Phi, close rational and irrational controls while allocation and amplitude
+were held roughly fixed.
+
+The result is **NOT SUPPORTED (`0/5`)** for this placement of Phi:
+
+- frozen runs 2–3 supplied `85` scored transitions;
+- quarter timing was much closer than Phi (`0.010101` versus `0.128993`);
+- the close rational `3/8` also beat Phi (`0.124088`);
+- the whole child pattern nearly returned to its previous parent-cycle
+  position (median circular movement `0.001836`, not `0.381966`);
+- conditional Phi-likeness predicted slightly poorer retention
+  (`rho=-0.291521`, `p=0.9110`);
+- untouched run 4 repeated quarter gaps and near-zero recurrence.
+
+The four-child ARA cut therefore exposes a strong **parent-locked quadrant
+cycle**, but not a Phi-ordered non-closing local step. After the verdict,
+Dylan corrected the tested axis: the quarter sequence may be the identity's
+fast internal rotation, while the immediate orbit is another locally closed
+cycle. The whole locally coupled system is simultaneously transported through
+the next-higher frame, as the Sun carries the planetary system through the
+Galaxy. Phi may concern the relation between local closure and this
+common-mode carrier. The fixed-pivot pendulum did not contain that measured
+coordinate, so this result does not test or reject the intended
+rotation–orbit–carrier claim.
+
+The resonance-death comparison itself retained only one matched case in each
+group and is underpowered. Resonance death remains a hypothesis rather than a
+result rejected by this endpoint.
+
+Independent validation reconstructed all source hashes, `158` cycle rows,
+TE-ARA sums, candidate distances, correlations and the verdict.
+
+Primary report:
+`analysis/pendulum_scripts/PHI_ORDERED_RECURRENCE_RESULT_2026-07-30.md`.
+
+## Update — 30 July 2026: Phi as a breathing state-sphere advance
+
+Dylan refined the possible Phi location again without altering the earlier
+negative results: Phi may not be the literal breath duty ratio, local
+Hexagon–Pentagon angle or internal quarter-turn. It may be the orientation
+advance of one complete sphere breath through the next time slice.
+
+T301 froze a direct raw-state test. Circular-mean-centred double- and
+triple-pendulum arm angles formed 2D/3D vectors. Their radius supplied
+accumulation/release, while the direction at successive radial maxima supplied
+the orientation of each breath. Lag 2 compared one complete breath with the
+next after the intervening opposite-side maximum.
+
+The empirical result is **NOT SUPPORTED (`0/4`)** for this coordinate:
+
+- every development, frozen and confirmation record selected near-zero
+  complete-breath recurrence rather than `phi^-2=0.381966`;
+- frozen 2D distance was `0.000366` to recurrence versus `0.381600` to Phi;
+- frozen 3D distance was `0.031118` to recurrence versus `0.350848` to Phi;
+- confirmation distances to recurrence were `0.000145` and `0.005193`;
+- Phi proximity predicted poorer radial retention (`rho=-0.4270`,
+  one-sided shift `p=0.9934`);
+- all `18/18` detector sensitivity settings retained recurrence.
+
+The observed local path was an opposition-and-return breath:
+`pole A -> pole B -> pole A`.
+
+A controlled circle benchmark supplied each candidate as the generator. Phi
+was the strongest finite-horizon coverage/discrepancy candidate in the
+declared set (`85/197` discrepancy wins), but `sqrt(2)-1` won more
+recurrence-avoidance horizons. This supports only the mathematical statement
+that Phi is a particularly strong, non-unique irrational
+circle-stretched-through-time geometry.
+
+T301 does not test a complete apparatus moving through an external
+next-higher frame. The fixed pendulum pivot supplies no measured analogue of
+the Solar System's common galactic carrier. That carrier placement remains
+untested and may not be used to rewrite the local `0/4` result.
+
+Independent validation re-read `2,595` event rows and passed every arithmetic,
+median, winner, raw-vector spot and artifact check.
+
+Primary report:
+`analysis/pendulum_scripts/PHI_SPHERE_BREATHING_RESULT_2026-07-30.md`.
+
+## Update — 31 July 2026: Phi same-phase pillar / Hexagon–Pentagon refinement
+
+The clarified test treated child, parent and grandparent as adjacent **ARA
+octave scales**, not biological descendants. Six published Fibonacci-type
+sunflower families supplied 49 adjacent scale ratios and 43 flip-aware
+same-phase two-rung ratios.
+
+**Structural calibration result:**
+
+- Phi had the lowest frozen median adjacent-ratio error: `0.024823`;
+- Phi-squared had the lowest frozen median same-phase two-rung error:
+  `0.046605`;
+- separated A/B parity paths both converged;
+- destroying scale order in 10,000 shuffles destroyed both relations
+  (`p=0.000100`);
+- independent validation passed `13/13` checks.
+
+This is a successful scale crosswalk, not independent Phi discovery: the
+selected families obey the Fibonacci recurrence by definition.
+
+Dylan's post-result Hexagon/Pentagon interpretation is recorded at
+**musing/proposed-geometry tier**:
+
+\[
+\underbrace{L_{\mathrm{full}}}_{A\rightarrow B\rightarrow A}=2,
+\qquad
+\underbrace{L_{AA}=L_{BB}}_{\text{same-phase cross-rung pillar}}=\phi,
+\qquad
+\underbrace{L_{\mathrm{seam}}}_{\text{handover remainder}}
+=2-\phi=\phi^{-2}.
+\]
+
+The exact identity
+
+\[
+\phi+\phi^{-2}=2
+\]
+
+places the `1.618` same-phase pillar and `0.382` handover seam inside one
+normalized TE-ARA closure. On a unit-radius circle the Phi-length chord
+subtends `108°`, with supplementary `72°`, giving an exact bridge to the
+pentagonal angle already used by the framework:
+
+\[
+\phi=2\sin54^\circ=2\cos36^\circ.
+\]
+
+The current topology proposes that two three-part Information³ ARA closures
+form the six-part hexagonal parent, while the fivefold appearance is the
+cross-rung Phi-pillar/handover projection with one relation shared or carried
+into the adjacent rung. The exact algebra is established; the literal
+physical pillar, the two-ARA-to-hexagon topology and the webbed sixth relation
+remain unconfirmed.
+
+Primary records:
+
+- `analysis/phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`
+- `EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`
+
 - The muon-catalysis **cycle maps as a deep snap** on the rational pole (formation ~140 ps ≫ fusion ~1 ps;
   ~6.9 ns rung), and φ is correctly **absent** — a nuclear event is the integer/rational/snap regime, like
   fission (U-235 fragment ratio ≈ 3/2, shell-driven). The framework finding "no φ here" is the *right* answer.

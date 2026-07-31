@@ -1,0 +1,262 @@
+{
+  "test": "Q53 recorded qutrit external-return validation",
+  "status": "PASS",
+  "checks_passed": 22,
+  "checks_total": 22,
+  "checks": [
+    {
+      "name": "source hash",
+      "pass": true,
+      "detail": "5410775C307EDEA9F68E95133CF0A733B6CD34E7D9D774B6509472FACE74D55D"
+    },
+    {
+      "name": "source population",
+      "pass": true,
+      "detail": {
+        "measurements": 53459987,
+        "valid_rows": 53301,
+        "omitted_rows": 1062
+      }
+    },
+    {
+      "name": "unit norms",
+      "pass": true,
+      "detail": 0
+    },
+    {
+      "name": "psi0_psi1 binary record integrity",
+      "pass": true,
+      "detail": {
+        "bytes": 10777536,
+        "records": 168399,
+        "expected": 168399
+      }
+    },
+    {
+      "name": "psi0_psi1 finite primary events",
+      "pass": true,
+      "detail": 168399
+    },
+    {
+      "name": "psi0_psi1 active count",
+      "pass": true,
+      "detail": {
+        "recomputed": 167842,
+        "saved": 167842
+      }
+    },
+    {
+      "name": "psi0_psi1 arc occupancy",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 41910,
+          "rotated_1": 42051,
+          "rotated_2": 42036,
+          "rotated_3": 41973
+        },
+        "saved": {
+          "declared": 41910,
+          "rotated_1": 42051,
+          "rotated_2": 42036,
+          "rotated_3": 41973
+        }
+      }
+    },
+    {
+      "name": "psi0_psi1 ordered returns",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 7,
+          "rotated_1": 5,
+          "rotated_2": 3,
+          "rotated_3": 2
+        },
+        "saved": {
+          "declared": 7,
+          "rotated_1": 5,
+          "rotated_2": 3,
+          "rotated_3": 2
+        }
+      }
+    },
+    {
+      "name": "psi1_psi2 binary record integrity",
+      "pass": true,
+      "detail": {
+        "bytes": 10818240,
+        "records": 169035,
+        "expected": 169035
+      }
+    },
+    {
+      "name": "psi1_psi2 finite primary events",
+      "pass": true,
+      "detail": 169035
+    },
+    {
+      "name": "psi1_psi2 active count",
+      "pass": true,
+      "detail": {
+        "recomputed": 168493,
+        "saved": 168493
+      }
+    },
+    {
+      "name": "psi1_psi2 arc occupancy",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 41912,
+          "rotated_1": 42223,
+          "rotated_2": 42109,
+          "rotated_3": 42351
+        },
+        "saved": {
+          "declared": 41912,
+          "rotated_1": 42223,
+          "rotated_2": 42109,
+          "rotated_3": 42351
+        }
+      }
+    },
+    {
+      "name": "psi1_psi2 ordered returns",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 3,
+          "rotated_1": 3,
+          "rotated_2": 1,
+          "rotated_3": 3
+        },
+        "saved": {
+          "declared": 3,
+          "rotated_1": 3,
+          "rotated_2": 1,
+          "rotated_3": 3
+        }
+      }
+    },
+    {
+      "name": "psi2_psi0 binary record integrity",
+      "pass": true,
+      "detail": {
+        "bytes": 10781184,
+        "records": 168456,
+        "expected": 168456
+      }
+    },
+    {
+      "name": "psi2_psi0 finite primary events",
+      "pass": true,
+      "detail": 168456
+    },
+    {
+      "name": "psi2_psi0 active count",
+      "pass": true,
+      "detail": {
+        "recomputed": 167928,
+        "saved": 167928
+      }
+    },
+    {
+      "name": "psi2_psi0 arc occupancy",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 42095,
+          "rotated_1": 42061,
+          "rotated_2": 42076,
+          "rotated_3": 41808
+        },
+        "saved": {
+          "declared": 42095,
+          "rotated_1": 42061,
+          "rotated_2": 42076,
+          "rotated_3": 41808
+        }
+      }
+    },
+    {
+      "name": "psi2_psi0 ordered returns",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "declared": 3,
+          "rotated_1": 2,
+          "rotated_2": 2,
+          "rotated_3": 3
+        },
+        "saved": {
+          "declared": 3,
+          "rotated_1": 2,
+          "rotated_2": 2,
+          "rotated_3": 3
+        }
+      }
+    },
+    {
+      "name": "return counter stress test",
+      "pass": true,
+      "detail": "500 random sequences x 4 arcs"
+    },
+    {
+      "name": "gate arithmetic",
+      "pass": true,
+      "detail": {
+        "recomputed": {
+          "G0_source_and_reconstruction_integrity": true,
+          "G1_declared_directional_location": false,
+          "G2_complete_ordered_return": true,
+          "G3_time_order": false,
+          "G4_landmark_specificity": false
+        },
+        "saved": {
+          "G0_source_and_reconstruction_integrity": true,
+          "G1_declared_directional_location": false,
+          "G2_complete_ordered_return": true,
+          "G3_time_order": false,
+          "G4_landmark_specificity": false,
+          "cut_passes": {
+            "G1": {
+              "psi0_psi1": false,
+              "psi1_psi2": false,
+              "psi2_psi0": true
+            },
+            "G2": {
+              "psi0_psi1": true,
+              "psi1_psi2": false,
+              "psi2_psi0": true
+            },
+            "G3": {
+              "psi0_psi1": false,
+              "psi1_psi2": false,
+              "psi2_psi0": false
+            },
+            "G4": {
+              "psi0_psi1": true,
+              "psi1_psi2": false,
+              "psi2_psi0": false
+            }
+          },
+          "substantive_passes": 1
+        }
+      }
+    },
+    {
+      "name": "verdict arithmetic",
+      "pass": true,
+      "detail": {
+        "recomputed": "NOT SUPPORTED",
+        "saved": "NOT SUPPORTED"
+      }
+    },
+    {
+      "name": "figure exists",
+      "pass": true,
+      "detail": 5892177
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "test_id": "T301-PHI-SPHERE-BREATHING-v1",
+  "status": "PASS",
+  "protocol_sha256": "4490D2E14B8FE9D542CCEBBBC7EEA7D27E610B2C3798B3FB4BE3602679367469",
+  "results_sha256": "4344266B3BE8873740433D84F38C5BA11B97B5FB55F60F8929AE9121AA2B8E4F",
+  "events_sha256": "780DCDD8EAFBF453F80A8B30FA85DD09AB7E8FB1928E560113131489B8CA2CDE",
+  "checks": [
+    {
+      "name": "event_row_count",
+      "pass": true,
+      "observed": 2595,
+      "expected": 2595
+    },
+    {
+      "name": "row_arithmetic",
+      "pass": true,
+      "maximum_distance_error": 0.0,
+      "maximum_retention_error": 0.0
+    },
+    {
+      "name": "group_medians_and_winners",
+      "pass": true,
+      "maximum_median_error": 0.0,
+      "recalculated_winners": {
+        "double_development": "recurrence",
+        "double_frozen": "recurrence",
+        "double_confirmation": "recurrence",
+        "triple_development": "recurrence",
+        "triple_frozen": "recurrence",
+        "triple_confirmation": "recurrence"
+      }
+    },
+    {
+      "name": "raw_spherical_angle_spots",
+      "pass": true,
+      "errors": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "controlled_geometry_benchmark",
+      "pass": true,
+      "recalculated_win_counts": {
+        "recurrence_avoidance": {
+          "pi_conjugate": 44,
+          "quarter": 0,
+          "e_conjugate": 24,
+          "third": 0,
+          "three_eighths": 1,
+          "phi": 59,
+          "two_fifths": 1,
+          "silver": 68
+        },
+        "largest_gap": {
+          "pi_conjugate": 32,
+          "quarter": 1,
+          "e_conjugate": 34,
+          "third": 0,
+          "three_eighths": 4,
+          "phi": 67,
+          "two_fifths": 2,
+          "silver": 57
+        },
+        "discrepancy": {
+          "pi_conjugate": 10,
+          "quarter": 1,
+          "e_conjugate": 27,
+          "third": 0,
+          "three_eighths": 0,
+          "phi": 85,
+          "two_fifths": 1,
+          "silver": 73
+        }
+      }
+    },
+    {
+      "name": "artifacts_nonempty",
+      "pass": true,
+      "sizes": {
+        "PHI_SPHERE_BREATHING_PROTOCOL_2026-07-30.md": 6266,
+        "phi_sphere_breathing_results.json": 19340,
+        "phi_sphere_breathing_events.csv": 1356146,
+        "PHI_SPHERE_BREATHING_DIAGNOSTICS.png": 174570
+      }
+    }
+  ]
+}

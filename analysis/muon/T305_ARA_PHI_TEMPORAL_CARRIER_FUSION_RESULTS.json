@@ -1,0 +1,247 @@
+{
+  "test": "T305",
+  "config": {
+    "n_max": 64,
+    "prefix_min": 4,
+    "prefix_max": 64,
+    "n_prefixes": 61,
+    "pulse_width": 0.00234375,
+    "total_duty_at_n64": 0.15,
+    "n_source_phases": 128,
+    "candidates": {
+      "phi": 0.38196601125010515,
+      "phi_reverse": 0.6180339887498949,
+      "three_eighths": 0.375,
+      "eight_twentyone": 0.38095238095238093,
+      "one_over_e": 0.36787944117144233,
+      "two_fifths": 0.4,
+      "sqrt2_minus_1": 0.41421356237309515,
+      "one_third": 0.3333333333333333,
+      "pi_minus_3": 0.14159265358979312
+    },
+    "forward_eligible": [
+      "phi",
+      "three_eighths",
+      "eight_twentyone",
+      "one_over_e",
+      "two_fifths",
+      "sqrt2_minus_1",
+      "one_third",
+      "pi_minus_3"
+    ],
+    "nonflat_families": [
+      "beam7",
+      "beam7_cycle23",
+      "beam7_decay"
+    ]
+  },
+  "known_exact_controls": {
+    "phi": {
+      "supplied": 0.38196601125010515,
+      "recovered": 0.3819660112501051,
+      "circular_abs_error": 5.551115123125783e-17,
+      "pass": true
+    },
+    "phi_reverse": {
+      "supplied": 0.6180339887498949,
+      "recovered": 0.6180339887498949,
+      "circular_abs_error": 0.0,
+      "pass": true
+    },
+    "three_eighths": {
+      "supplied": 0.375,
+      "recovered": 0.375,
+      "circular_abs_error": 0.0,
+      "pass": true
+    },
+    "sqrt2_minus_1": {
+      "supplied": 0.41421356237309515,
+      "recovered": 0.41421356237309515,
+      "circular_abs_error": 0.0,
+      "pass": true
+    },
+    "one_third": {
+      "supplied": 0.3333333333333333,
+      "recovered": 0.3333333333333333,
+      "circular_abs_error": 0.0,
+      "pass": true
+    }
+  },
+  "known_empirical_calibration": {
+    "source": "analysis\\phi_calibration\\T302_PHI_PHYLLOTAXIS_RESULTS.json",
+    "confirmation_wt_coordinate": 0.3874916666666666,
+    "distance_from_phi": 0.00552565541656147,
+    "fixed_step_winner": "three_eighths",
+    "fixed_cumulative_winner": "phi",
+    "landmark_pass": true,
+    "cumulative_phi_pass": true,
+    "calibration_only": true
+  },
+  "dense_integration_spot_check": {
+    "candidate": "phi",
+    "n": 37,
+    "family": "beam7_decay",
+    "phase": 0.713,
+    "analytic": 0.08476134515664642,
+    "dense_numeric": 0.08475598225602385,
+    "absolute_error": 5.362900622571387e-06,
+    "pass": true
+  },
+  "gates": {
+    "G0_implementation": true,
+    "G1_geometry": true,
+    "G2_fusion_mean_robust_overlap": true,
+    "G3_fusion_tail_robustness": false,
+    "G4_stationary_null": true,
+    "primary_pass_count": 2,
+    "verdict": "MIXED",
+    "details": {
+      "G1_winner": "phi",
+      "G1_unique": true,
+      "G2_winner": "phi",
+      "G2_unique": true,
+      "G3_winner": "one_over_e",
+      "G3_unique": true,
+      "phi_strict_cell_win_share_vs_three_eighths": 0.9617486338797814,
+      "max_flat_null_spread_nonoverlap": 5.551115123125783e-16
+    }
+  },
+  "summary": [
+    {
+      "candidate": "phi",
+      "alpha": 0.38196601125010515,
+      "eligible_forward": true,
+      "geometry_mean_rank": 1.971311475409836,
+      "largest_gap_mean": 0.06887911678280595,
+      "discrepancy_mean": 0.050497188283724646,
+      "overlap_loss_total": 0.0,
+      "fusion_robust_overlap_mean": 0.07748512795772647,
+      "fusion_robust_overlap_tail_p05": 0.011726398101734613,
+      "flat_overlap_mean": 0.0796875000000012,
+      "strict_cell_win_share_vs_three_eighths": 0.9617486338797814
+    },
+    {
+      "candidate": "phi_reverse",
+      "alpha": 0.6180339887498949,
+      "eligible_forward": false,
+      "geometry_mean_rank": null,
+      "largest_gap_mean": 0.06887911678280666,
+      "discrepancy_mean": 0.050497188283724626,
+      "overlap_loss_total": 0.0,
+      "fusion_robust_overlap_mean": 0.07772216819026177,
+      "fusion_robust_overlap_tail_p05": 0.013765488258704911,
+      "flat_overlap_mean": 0.07968750000000127,
+      "strict_cell_win_share_vs_three_eighths": 0.9726775956284153
+    },
+    {
+      "candidate": "three_eighths",
+      "alpha": 0.375,
+      "eligible_forward": true,
+      "geometry_mean_rank": 5.852459016393443,
+      "largest_gap_mean": 0.13524590163934427,
+      "discrepancy_mean": 0.12925448868071818,
+      "overlap_loss_total": 3.740624999999983,
+      "fusion_robust_overlap_mean": 0.01547723521165877,
+      "fusion_robust_overlap_tail_p05": 0.01258234032362387,
+      "flat_overlap_mean": 0.018365778688524872,
+      "strict_cell_win_share_vs_three_eighths": 0.0
+    },
+    {
+      "candidate": "eight_twentyone",
+      "alpha": 0.38095238095238093,
+      "eligible_forward": true,
+      "geometry_mean_rank": 3.3852459016393444,
+      "largest_gap_mean": 0.07650273224043744,
+      "discrepancy_mean": 0.058026317839352415,
+      "overlap_loss_total": 2.217187499999477,
+      "fusion_robust_overlap_mean": 0.04253349513861754,
+      "fusion_robust_overlap_tail_p05": 0.011822124550389357,
+      "flat_overlap_mean": 0.04334016393443495,
+      "strict_cell_win_share_vs_three_eighths": 0.9453551912568307
+    },
+    {
+      "candidate": "one_over_e",
+      "alpha": 0.36787944117144233,
+      "eligible_forward": true,
+      "geometry_mean_rank": 3.0245901639344264,
+      "largest_gap_mean": 0.07486986735610901,
+      "discrepancy_mean": 0.054273452322102185,
+      "overlap_loss_total": 0.0,
+      "fusion_robust_overlap_mean": 0.07709480571366974,
+      "fusion_robust_overlap_tail_p05": 0.013787730629156046,
+      "flat_overlap_mean": 0.07968750000000123,
+      "strict_cell_win_share_vs_three_eighths": 0.9726775956284153
+    },
+    {
+      "candidate": "two_fifths",
+      "alpha": 0.4,
+      "eligible_forward": true,
+      "geometry_mean_rank": 6.508196721311475,
+      "largest_gap_mean": 0.20327868852459002,
+      "discrepancy_mean": 0.1292590315917415,
+      "overlap_loss_total": 4.148437499999752,
+      "fusion_robust_overlap_mean": 0.010859007181493246,
+      "fusion_robust_overlap_tail_p05": 0.009651987969592424,
+      "flat_overlap_mean": 0.011680327868856526,
+      "strict_cell_win_share_vs_three_eighths": 0.03825136612021858
+    },
+    {
+      "candidate": "sqrt2_minus_1",
+      "alpha": 0.41421356237309515,
+      "eligible_forward": true,
+      "geometry_mean_rank": 2.307377049180328,
+      "largest_gap_mean": 0.07079933004701938,
+      "discrepancy_mean": 0.05249956727497014,
+      "overlap_loss_total": 0.0,
+      "fusion_robust_overlap_mean": 0.07605097754797029,
+      "fusion_robust_overlap_tail_p05": 0.011357695996304887,
+      "flat_overlap_mean": 0.07968750000000116,
+      "strict_cell_win_share_vs_three_eighths": 0.9344262295081968
+    },
+    {
+      "candidate": "one_third",
+      "alpha": 0.3333333333333333,
+      "eligible_forward": true,
+      "geometry_mean_rank": 7.926229508196721,
+      "largest_gap_mean": 0.3333333333333333,
+      "discrepancy_mean": 0.20647772824017765,
+      "overlap_loss_total": 4.4320312499998895,
+      "fusion_robust_overlap_mean": 0.006290545329068543,
+      "fusion_robust_overlap_tail_p05": 0.005791192781755551,
+      "flat_overlap_mean": 0.007031250000001821,
+      "strict_cell_win_share_vs_three_eighths": 0.0
+    },
+    {
+      "candidate": "pi_minus_3",
+      "alpha": 0.14159265358979312,
+      "eligible_forward": true,
+      "geometry_mean_rank": 5.024590163934426,
+      "largest_gap_mean": 0.1264987346922377,
+      "discrepancy_mean": 0.08584795069102157,
+      "overlap_loss_total": 2.2551405187698492e-17,
+      "fusion_robust_overlap_mean": 0.03344418006950549,
+      "fusion_robust_overlap_tail_p05": 0.0032116908970493377,
+      "flat_overlap_mean": 0.07968750000000138,
+      "strict_cell_win_share_vs_three_eighths": 0.6666666666666666
+    },
+    {
+      "candidate": "oracle_uniform",
+      "alpha": null,
+      "eligible_forward": false,
+      "geometry_mean_rank": null,
+      "largest_gap_mean": 0.04771405853069571,
+      "discrepancy_mean": 0.047714058530695685,
+      "overlap_loss_total": 0.0,
+      "fusion_robust_overlap_mean": 0.07888801451815365,
+      "fusion_robust_overlap_tail_p05": 0.011600283327298769,
+      "flat_overlap_mean": 0.07968750000000123,
+      "strict_cell_win_share_vs_three_eighths": null
+    }
+  ],
+  "artifacts": {
+    "prefix_csv": "T305_ARA_PHI_TEMPORAL_CARRIER_FUSION_PREFIX_RESULTS.csv",
+    "summary_csv": "T305_ARA_PHI_TEMPORAL_CARRIER_FUSION_SUMMARY.csv",
+    "figure": "T305_ARA_PHI_TEMPORAL_CARRIER_FUSION.png"
+  },
+  "interpretation_boundary": "Idealized overlap scheduling only; not laboratory muon data, microscopic stripping, recycling, or proof of a natural Phi carrier."
+}

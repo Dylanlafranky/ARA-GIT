@@ -1,0 +1,422 @@
+{
+  "test": "Q50 same-lineage external ARA flip diagnostic",
+  "status": "POST-Q49 EXPLORATORY; NOT CONFIRMATORY",
+  "source": {
+    "events_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q49_EXTERNAL_TIME_VECTOR_EVENTS.csv.gz",
+    "events": 32420,
+    "all_lineages": 1145,
+    "fixed_lineages": 1120,
+    "fixed_seeds": 71
+  },
+  "coordinate": {
+    "declared_arc_centre_turns": 0.4929567149606686,
+    "declared_axis": [
+      -0.9990209398129384,
+      0.044239821600830814
+    ],
+    "interpretation": {
+      "0": "declared external orientation",
+      "1": "directional ridge / axial cancellation",
+      "2": "exact half-turn opposite orientation"
+    }
+  },
+  "primary": {
+    "paired_lineages": {
+      "lineages": 1120,
+      "seeds": 71,
+      "declared_to_opposite": 460,
+      "declared_to_opposite_fraction": 0.4107142857142857,
+      "opposite_to_declared": 20,
+      "opposite_to_declared_fraction": 0.017857142857142856,
+      "median_delta_x": 0.5915205648738623,
+      "mean_delta_x": 0.763665775158722,
+      "median_heading_separation_turns": 0.19030460126620236
+    },
+    "seed_cluster_bootstrap": {
+      "draws": 5000,
+      "seed": 500030,
+      "cluster_seeds": 71,
+      "mean_seed_delta_x": 0.9117736416570494,
+      "probability_positive": 1.0,
+      "ci95": [
+        0.8182971962113393,
+        1.006540443568704
+      ]
+    },
+    "fixed_population_strata": {
+      "development": {
+        "events": 14809,
+        "movement": 339.81792531259157,
+        "axial": 198.58576118204965,
+        "perpendicular": -3.3968716088545445,
+        "balance": 0.5843887163968018,
+        "x": 0.4156112836031982,
+        "heading": 0.4902345853085481
+      },
+      "evaluation": {
+        "events": 16629,
+        "movement": 7.7421376350956805,
+        "axial": -5.578724588392877,
+        "perpendicular": -0.5479666493488249,
+        "balance": -0.7205664444796366,
+        "x": 1.7205664444796365,
+        "heading": 0.008539620836130205
+      },
+      "pooled_delta_x": 1.3049551608764383,
+      "aggregate_heading_separation_turns": 0.4816949644724179,
+      "distance_to_exact_half_turn": 0.018305035527582114
+    },
+    "ordered": {
+      "crossings": [
+        {
+          "direction": "0_to_2",
+          "between_bins": [
+            5,
+            6
+          ],
+          "between_slices": [
+            125,
+            175
+          ]
+        }
+      ],
+      "starts_near_0_then_reaches_near_2": true,
+      "complete_0_to_2_to_0": false,
+      "witness_bin_indices": null,
+      "minimum_x": 0.29263736132537077,
+      "maximum_x": 1.9944993078839008
+    },
+    "pinch": {
+      "available": true,
+      "crossing_bin_index": 6,
+      "crossing_slices": [
+        150,
+        175
+      ],
+      "crossing_mean_relative_movement": 0.0004222188111960673,
+      "preceding_two_bin_mean_relative_movement": 0.002754843314150996,
+      "following_two_bin_mean_relative_movement": 0.0004149994209537318,
+      "four_flank_mean_relative_movement": 0.0015849213675523637,
+      "crossing_to_flank_ratio": 0.2663973240818319,
+      "below_four_flank_average": true,
+      "strict_local_minimum_with_post_crossing_rebound": false,
+      "pinch_supported": false
+    },
+    "within_lineage_time_shuffle": {
+      "draws": 5000,
+      "seed": 500031,
+      "mean": 0.0005641631596537673,
+      "p95": 0.08386092617161636,
+      "p99": 0.11934640687340113,
+      "observed_pooled_change": 1.3049551608764383,
+      "one_sided_p": 0.0001999600079984003
+    },
+    "complete_0_to_2_to_0": false
+  },
+  "estimator_sensitivity": {
+    "circle": {
+      "paired_lineages": {
+        "lineages": 1120,
+        "seeds": 71,
+        "declared_to_opposite": 460,
+        "declared_to_opposite_fraction": 0.4107142857142857,
+        "opposite_to_declared": 20,
+        "opposite_to_declared_fraction": 0.017857142857142856,
+        "median_delta_x": 0.5915205648738623,
+        "mean_delta_x": 0.763665775158722,
+        "median_heading_separation_turns": 0.19030460126620236
+      },
+      "seed_cluster_bootstrap": {
+        "draws": 5000,
+        "seed": 500030,
+        "cluster_seeds": 71,
+        "mean_seed_delta_x": 0.9117736416570494,
+        "probability_positive": 1.0,
+        "ci95": [
+          0.8182971962113393,
+          1.006540443568704
+        ]
+      },
+      "fixed_population_strata": {
+        "development": {
+          "events": 14809,
+          "movement": 339.81792531259157,
+          "axial": 198.58576118204965,
+          "perpendicular": -3.3968716088545445,
+          "balance": 0.5843887163968018,
+          "x": 0.4156112836031982,
+          "heading": 0.4902345853085481
+        },
+        "evaluation": {
+          "events": 16629,
+          "movement": 7.7421376350956805,
+          "axial": -5.578724588392877,
+          "perpendicular": -0.5479666493488249,
+          "balance": -0.7205664444796366,
+          "x": 1.7205664444796365,
+          "heading": 0.008539620836130205
+        },
+        "pooled_delta_x": 1.3049551608764383,
+        "aggregate_heading_separation_turns": 0.4816949644724179,
+        "distance_to_exact_half_turn": 0.018305035527582114
+      },
+      "ordered": {
+        "crossings": [
+          {
+            "direction": "0_to_2",
+            "between_bins": [
+              5,
+              6
+            ],
+            "between_slices": [
+              125,
+              175
+            ]
+          }
+        ],
+        "starts_near_0_then_reaches_near_2": true,
+        "complete_0_to_2_to_0": false,
+        "witness_bin_indices": null,
+        "minimum_x": 0.29263736132537077,
+        "maximum_x": 1.9944993078839008
+      },
+      "pinch": {
+        "available": true,
+        "crossing_bin_index": 6,
+        "crossing_slices": [
+          150,
+          175
+        ],
+        "crossing_mean_relative_movement": 0.0004222188111960673,
+        "preceding_two_bin_mean_relative_movement": 0.002754843314150996,
+        "following_two_bin_mean_relative_movement": 0.0004149994209537318,
+        "four_flank_mean_relative_movement": 0.0015849213675523637,
+        "crossing_to_flank_ratio": 0.2663973240818319,
+        "below_four_flank_average": true,
+        "strict_local_minimum_with_post_crossing_rebound": false,
+        "pinch_supported": false
+      },
+      "within_lineage_time_shuffle": {
+        "draws": 5000,
+        "seed": 500031,
+        "mean": 0.0005641631596537673,
+        "p95": 0.08386092617161636,
+        "p99": 0.11934640687340113,
+        "observed_pooled_change": 1.3049551608764383,
+        "one_sided_p": 0.0001999600079984003
+      }
+    },
+    "centroid": {
+      "paired_lineages": {
+        "lineages": 1120,
+        "seeds": 71,
+        "declared_to_opposite": 414,
+        "declared_to_opposite_fraction": 0.36964285714285716,
+        "opposite_to_declared": 29,
+        "opposite_to_declared_fraction": 0.025892857142857145,
+        "median_delta_x": 0.1785295030832973,
+        "mean_delta_x": 0.687644528376811,
+        "median_heading_separation_turns": 0.14644353327776194
+      },
+      "seed_cluster_bootstrap": {
+        "draws": 5000,
+        "seed": 500030,
+        "cluster_seeds": 71,
+        "mean_seed_delta_x": 0.8803730828609788,
+        "probability_positive": 1.0,
+        "ci95": [
+          0.7761331855231199,
+          0.990255355998971
+        ]
+      },
+      "fixed_population_strata": {
+        "development": {
+          "events": 14809,
+          "movement": 290.8960827809004,
+          "axial": 121.52855873769161,
+          "perpendicular": 21.205108982618803,
+          "balance": 0.4177731015691454,
+          "x": 0.5822268984308546,
+          "heading": 0.5204503351477686
+        },
+        "evaluation": {
+          "events": 16629,
+          "movement": 18.104778926620533,
+          "axial": -7.204694122087602,
+          "perpendicular": -1.3829821859933316,
+          "balance": -0.3979443301289977,
+          "x": 1.3979443301289978,
+          "heading": 0.02314026493703505
+        },
+        "pooled_delta_x": 0.8157174316981431,
+        "aggregate_heading_separation_turns": 0.4973100702107336,
+        "distance_to_exact_half_turn": 0.00268992978926641
+      },
+      "ordered": {
+        "crossings": [
+          {
+            "direction": "0_to_2",
+            "between_bins": [
+              4,
+              5
+            ],
+            "between_slices": [
+              100,
+              150
+            ]
+          },
+          {
+            "direction": "2_to_0",
+            "between_bins": [
+              18,
+              19
+            ],
+            "between_slices": [
+              450,
+              500
+            ]
+          }
+        ],
+        "starts_near_0_then_reaches_near_2": true,
+        "complete_0_to_2_to_0": false,
+        "witness_bin_indices": null,
+        "minimum_x": 0.3185702507722743,
+        "maximum_x": 1.9978150214297092
+      },
+      "pinch": {
+        "available": true,
+        "crossing_bin_index": 5,
+        "crossing_slices": [
+          125,
+          150
+        ],
+        "crossing_mean_relative_movement": 0.0009237678559719208,
+        "preceding_two_bin_mean_relative_movement": 0.012847974405312393,
+        "following_two_bin_mean_relative_movement": 0.00040965305835639573,
+        "four_flank_mean_relative_movement": 0.006628813731834394,
+        "crossing_to_flank_ratio": 0.1393564359088253,
+        "below_four_flank_average": true,
+        "strict_local_minimum_with_post_crossing_rebound": false,
+        "pinch_supported": false
+      },
+      "within_lineage_time_shuffle": {
+        "draws": 5000,
+        "seed": 500032,
+        "mean": -0.0032828061902121833,
+        "p95": 0.09660909902402504,
+        "p99": 0.1368282182962365,
+        "observed_pooled_change": 0.8157174316981431,
+        "one_sided_p": 0.0001999600079984003
+      }
+    },
+    "extrema": {
+      "paired_lineages": {
+        "lineages": 1120,
+        "seeds": 71,
+        "declared_to_opposite": 419,
+        "declared_to_opposite_fraction": 0.37410714285714286,
+        "opposite_to_declared": 18,
+        "opposite_to_declared_fraction": 0.01607142857142857,
+        "median_delta_x": 0.13174405149033386,
+        "mean_delta_x": 0.6753249141472559,
+        "median_heading_separation_turns": 0.12598728383925423
+      },
+      "seed_cluster_bootstrap": {
+        "draws": 5000,
+        "seed": 500030,
+        "cluster_seeds": 71,
+        "mean_seed_delta_x": 0.8369006061082223,
+        "probability_positive": 1.0,
+        "ci95": [
+          0.738202416963348,
+          0.9377064410430488
+        ]
+      },
+      "fixed_population_strata": {
+        "development": {
+          "events": 14809,
+          "movement": 317.3006659486845,
+          "axial": 189.17466260196028,
+          "perpendicular": 6.938572451638752,
+          "balance": 0.5962000175333845,
+          "x": 0.4037999824666155,
+          "heading": 0.4987916047115642
+        },
+        "evaluation": {
+          "events": 16629,
+          "movement": 8.553007333627498,
+          "axial": -4.708403062663428,
+          "perpendicular": -1.8055533307439031,
+          "balance": -0.5504967877382261,
+          "x": 1.550496787738226,
+          "heading": 0.051236031057111844
+        },
+        "pooled_delta_x": 1.1466968052716107,
+        "aggregate_heading_separation_turns": 0.44755557365445237,
+        "distance_to_exact_half_turn": 0.052444426345547634
+      },
+      "ordered": {
+        "crossings": [
+          {
+            "direction": "0_to_2",
+            "between_bins": [
+              5,
+              6
+            ],
+            "between_slices": [
+              125,
+              175
+            ]
+          },
+          {
+            "direction": "2_to_0",
+            "between_bins": [
+              18,
+              19
+            ],
+            "between_slices": [
+              450,
+              500
+            ]
+          }
+        ],
+        "starts_near_0_then_reaches_near_2": true,
+        "complete_0_to_2_to_0": false,
+        "witness_bin_indices": null,
+        "minimum_x": 0.2774163204321395,
+        "maximum_x": 1.9918896850137526
+      },
+      "pinch": {
+        "available": true,
+        "crossing_bin_index": 6,
+        "crossing_slices": [
+          150,
+          175
+        ],
+        "crossing_mean_relative_movement": 0.0003543409486365737,
+        "preceding_two_bin_mean_relative_movement": 0.0024276643198762474,
+        "following_two_bin_mean_relative_movement": 0.0003688943318049733,
+        "four_flank_mean_relative_movement": 0.0013982793258406102,
+        "crossing_to_flank_ratio": 0.25341213453438777,
+        "below_four_flank_average": true,
+        "strict_local_minimum_with_post_crossing_rebound": true,
+        "pinch_supported": true
+      },
+      "within_lineage_time_shuffle": {
+        "draws": 5000,
+        "seed": 500033,
+        "mean": -0.0007936741831864032,
+        "p95": 0.08269187468352836,
+        "p99": 0.11776286913625512,
+        "observed_pooled_change": 1.1466968052716107,
+        "one_sided_p": 0.0001999600079984003
+      }
+    }
+  },
+  "boundaries": [
+    "The Q49 source was already opened; Q50 is diagnostic only.",
+    "The directional ARA coordinate is a newly declared cut between a direction and its exact opposite.",
+    "A same-lineage reversal is not by itself a physical quantum singularity.",
+    "A complete 0\u21922\u21920 claim requires an ordered return inside the observed window."
+  ]
+}

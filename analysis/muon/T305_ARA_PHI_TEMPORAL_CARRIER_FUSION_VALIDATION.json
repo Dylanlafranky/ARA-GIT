@@ -1,0 +1,202 @@
+{
+  "test": "T305 independent validation",
+  "checks": [
+    {
+      "check": "prefix rows 10x61",
+      "passed": true,
+      "detail": 610
+    },
+    {
+      "check": "unique candidate-prefix rows",
+      "passed": true,
+      "detail": 0
+    },
+    {
+      "check": "every candidate has N=4..64",
+      "passed": true,
+      "detail": "checked"
+    },
+    {
+      "check": "flat equals union coverage",
+      "passed": true,
+      "detail": 0.0
+    },
+    {
+      "check": "all overlap scores bounded",
+      "passed": true,
+      "detail": [
+        0.00142603263868,
+        0.153071557074
+      ]
+    },
+    {
+      "check": "reconstruct geometry_mean_rank",
+      "passed": true,
+      "detail": 4.426237154575574e-12
+    },
+    {
+      "check": "reconstruct fusion_robust_overlap_mean",
+      "passed": true,
+      "detail": 4.5449755070592346e-14
+    },
+    {
+      "check": "reconstruct fusion_robust_overlap_tail_p05",
+      "passed": true,
+      "detail": 6.00006155870858e-14
+    },
+    {
+      "check": "geometry winner Phi",
+      "passed": true,
+      "detail": "phi"
+    },
+    {
+      "check": "Fusion mean winner Phi",
+      "passed": true,
+      "detail": "phi"
+    },
+    {
+      "check": "Fusion tail winner 1/e",
+      "passed": true,
+      "detail": "one_over_e"
+    },
+    {
+      "check": "reverse Phi best overall mean",
+      "passed": true,
+      "detail": {
+        "all": "oracle_uniform",
+        "fixed": "phi_reverse"
+      }
+    },
+    {
+      "check": "independent dense-grid spot checks",
+      "passed": true,
+      "detail": 5.060708728386876e-05
+    },
+    {
+      "check": "stored verdict is mixed 2/3",
+      "passed": true,
+      "detail": {
+        "verdict": "MIXED",
+        "primary": 2
+      }
+    },
+    {
+      "check": "stored gate pattern",
+      "passed": true,
+      "detail": {
+        "G0_implementation": true,
+        "G1_geometry": true,
+        "G2_fusion_mean_robust_overlap": true,
+        "G3_fusion_tail_robustness": false,
+        "G4_stationary_null": true,
+        "primary_pass_count": 2,
+        "verdict": "MIXED",
+        "details": {
+          "G1_winner": "phi",
+          "G1_unique": true,
+          "G2_winner": "phi",
+          "G2_unique": true,
+          "G3_winner": "one_over_e",
+          "G3_unique": true,
+          "phi_strict_cell_win_share_vs_three_eighths": 0.9617486338797814,
+          "max_flat_null_spread_nonoverlap": 5.551115123125783e-16
+        }
+      }
+    }
+  ],
+  "passed": 15,
+  "total": 15,
+  "all_passed": true,
+  "dense_spot_checks": [
+    {
+      "candidate": "phi",
+      "n": 64,
+      "family": "beam7",
+      "direct": {
+        "mean": 0.15000000000000002,
+        "p05": 0.1491473134054458,
+        "min": 0.1491348383094881
+      },
+      "absolute_deltas": {
+        "mean": 2.7755575615628914e-17,
+        "p05": 2.20688155419535e-06,
+        "min": 2.360411511914684e-06
+      }
+    },
+    {
+      "candidate": "phi",
+      "n": 64,
+      "family": "beam7_decay",
+      "direct": {
+        "mean": 0.1530878446123498,
+        "p05": 0.14959695932852987,
+        "min": 0.14954601409858584
+      },
+      "absolute_deltas": {
+        "mean": 1.628753834981289e-05,
+        "p05": 4.6567827529875316e-05,
+        "min": 4.720965958585066e-05
+      }
+    },
+    {
+      "candidate": "phi_reverse",
+      "n": 37,
+      "family": "beam7_cycle23",
+      "direct": {
+        "mean": 0.08662184523331867,
+        "p05": 0.08557991887912729,
+        "min": 0.08555589119095239
+      },
+      "absolute_deltas": {
+        "mean": 1.8998325418670414e-05,
+        "p05": 4.1741079127285974e-05,
+        "min": 4.3082235552383e-05
+      }
+    },
+    {
+      "candidate": "three_eighths",
+      "n": 64,
+      "family": "beam7_decay",
+      "direct": {
+        "mean": 0.01903293054668387,
+        "p05": 0.013431185050522897,
+        "min": 0.013356903998867785
+      },
+      "absolute_deltas": {
+        "mean": 5.060708728386876e-05,
+        "p05": 3.5861146722895865e-05,
+        "min": 3.566666096778588e-05
+      }
+    },
+    {
+      "candidate": "one_over_e",
+      "n": 4,
+      "family": "beam7_decay",
+      "direct": {
+        "mean": 0.011699449352032876,
+        "p05": 0.00723259820202162,
+        "min": 0.007171394682167641
+      },
+      "absolute_deltas": {
+        "mean": 1.1285586332876116e-05,
+        "p05": 4.3972900162000256e-07,
+        "min": 9.094606764122742e-08
+      }
+    },
+    {
+      "candidate": "one_over_e",
+      "n": 64,
+      "family": "beam7",
+      "direct": {
+        "mean": 0.15,
+        "p05": 0.1488671693014563,
+        "min": 0.14885082730802224
+      },
+      "absolute_deltas": {
+        "mean": 0.0,
+        "p05": 2.556239456302789e-06,
+        "min": 2.101194022247066e-06
+      }
+    }
+  ]
+}

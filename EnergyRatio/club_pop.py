@@ -37,4 +37,4 @@ for ln in open('/tmp/RRc.dat',encoding='latin1'):
     if nm in club and r is not None and np.isfinite(r): rr[nm]=r
 pr=np.array([club[k] for k in rr]); r21=np.array([rr[k] for k in rr])
 dist=np.abs(pr-1/PHI)
-print("\n  within club: corr(|Px/P1O - 1/phi| , R21) = %+.3f  (n=%d) [negative => closer to 1/phi = leaner]"%(np.corrcoef(dist,r21)[0,1],len(pr)))
+print("\n  within club: corr(|Px/P1O - 1/phi| , R21) = %+.3f  (n=%d) [negative => farther from 1/phi = leaner, because lower R21 is leaner]"%(np.corrcoef(dist,r21)[0,1],len(pr)))
