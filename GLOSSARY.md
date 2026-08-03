@@ -6,11 +6,29 @@ A plain-language key to the vocabulary used across this repository. Where a term
 
 ## The core measure
 
-- **ARA** — the framework's central number. A ratio of a cycle's **accumulation** time to its **release** time (this repo uses `T_accumulation / T_release`; some older docs use the inverse — both are valid, declare which). Measures the *shape* of an oscillation, not its size or speed. Runs roughly 0 to 2.
+- **ARA** — the framework's central reversible `0–2` relational coordinate. It measures the declared Phase-A/Phase-B composition or position of one identity at one boundary, rung and projection. Rise/release duration duty is one original operational subset, not the definition of the entire framework. For positive reciprocal scale relations, the exact map is `x=2s/(1+s)=1+tanh(log(s)/2)`. Always declare the observable and map; do not mix duration ratios, scale ratios, probabilities or physical magnitudes as if they were the same quantity.
 - **ARA measurement declaration** — every reported ARA value must name (1) the identity/system boundary, (2) the observable, (3) the time slice, (4) the projection or coarse-graining, and (5) the 0↔2 pole orientation. ARA can remain the minimal geometry while different declared views of the same interaction return different lawful readings.
+- **Continuous relational web** — ARA begins with one connected wave/sphere whole. Named information packets,
+  identities and relations are local cuts of that whole, not disconnected objects that become related only after
+  measurement.
+- **Information³** — the informational foundation beneath ARA: two locally distinguishable wave cuts and their
+  already-existing relation form the minimum identifiable unit, `(A,B,R_AB)`. Two independent relations plus a
+  declared closure geometry can constrain a third. A completed closure may compress into one identity and repeat at
+  the next rung. Local triangular closure and global web/lattice formation are the same operation viewed at different
+  scales. The name does not by itself prove a literal cubic counting law.
+- **Typed source/terminal pole** — with Phase A travelling `0→2` and Phase B travelling `2→0`, `0` is the Phase-A
+  source and Phase-B terminal, while `2` is the Phase-B source and Phase-A terminal. This prevents “Space pole” or
+  “Time pole” from ambiguously mixing where a wave is born with which wave dominates upon arrival.
 - **A–R–A** — Accumulate → Relate (hand over) → Release. The three-part shape of any cycle, and the framework's recurring "always three" structure (two buckets joined by a relationship). Also read as Mapping → Information-geometry → Predicting.
 - **Accumulation** — the phase where a system builds up, stores, fills, concentrates.
 - **Release** — the phase where it expends, ejects, disperses, empties.
+- **Positive scale ratio (`s`)** — for a declared positive observable, `s=M_next/M_current`. `s<1` contracts, `s=1` is the unchanged same-rung ridge, and `s>1` expands. This ratio is dimensionless only when numerator and denominator use the same observable and units.
+- **Signed log-asymmetry (`u`)** — `u=log(s)`. Reciprocal reversal becomes the exact sign flip `s↔1/s` and `u↔-u`. It is unbounded and therefore retains how strongly the relation differs from its ridge before ARA folds it into `0–2`.
+- **Reciprocal-scale ARA map** — the exact positive-ratio chart `x=2s/(1+s)=1+tanh(u/2)`, with inverse `s=x/(2-x)`. It satisfies `x(1/s)=2-x(s)`. This is a major operational subset, not a mandatory map for signed or non-multiplicative observables.
+- **Identity-specific reciprocal amplitude (`alpha`)** — the unsigned strength of one reciprocal Phase/anti-Phase pair, written `1/alpha↔alpha` for `alpha>1`. Its ARA endpoints are `2/(1+alpha)` and `2alpha/(1+alpha)`, which sum to `2`. `alpha` belongs to the declared identity, observable, rung and estimator; it is not assumed universal.
+- **Conditional child-to-parent log composition** — if a physical parent ratio obeys `s_P=c*product(s_i^w_i)`, then `u_P=log(c)+sum(w_i*u_i)` and `alpha_P=exp(abs(u_P))`. This is the precise candidate translation of “the parent identity is the surviving asymmetric mixture of child identities.” The algebra is exact conditional on that multiplicative rule; whether a physical system obeys it must be frozen and tested. Unresolved `log(c)` is coupling/Other, not permission to fit the parent target.
+
+- **Child-to-parent evidence status** — child/parent ARA structure is already empirically represented in the prime and quantum records, including supported finite prime-wheel inheritance (T230) and supported quantum parent/child tomography (T262, T263 and T277), alongside null compressed-child tests. The open question is narrower: whether the reciprocal/log composition above is the common quantitative law behind those domain-specific results.
 
 ## The 0–2 scale and its zones
 
@@ -20,10 +38,10 @@ A plain-language key to the vocabulary used across this repository. Where a term
   separate substances or intrinsically discrete boxes. A hard jump may be claimed only when the measured system
   supplies an independently demonstrated discontinuity. This continuous rule is proposed to recur at nested scales;
   calling that recurrence fractal does not by itself establish a mathematical fractal dimension.
-- **1.0 (balance / shock absorber)** — the centre/equality landmark at the declared measurement grain: symmetric
-  build and release, an externally clocked relation, or aggregate cancellation may project here. Atomic clocks,
-  pendulums and random draws can land here under specified measurements; this does not imply exact balance at every
-  nested scale.
+- **1.0 (parent cancellation core)** — the equal-and-opposite meeting at the declared measurement grain. The retained
+  parent coordinate cancels here, but asymmetric children, perpendicular flow or a projected child endpoint may
+  remain active. In the sphere picture it is the compressed core of the diameter cut; physical density is a separate
+  modelling claim.
 - **Ridge state / active ridge** — \(x=1\) fixes equal composition only at the declared boundary, window and
   projection; it does not identify the internal state.
   Always retain total activity, variance, coherence/phase and sign alignment. The **null ridge** has negligible
@@ -40,21 +58,57 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **Consumer (< 1)** — fast build held long, or fast release after long buildup, depending on convention; the "taking in" side.
 - **Engine (historically associated with ≈ φ ≈ 1.618)** — an ARA label for a sustained, self-timed operating region. Treat exact Phi as a candidate landmark, not a universal engine value.
 - **Exothermic / donor (≈ 1.75)** — energy-producing sources (e.g. the solar magnetic cycle).
-- **Pure harmonic (≈ 2.0)** — smooth, symmetric resonance; the octave/integer pole.
-- **Snap** — rare oscillators past 2: long quiet, then sudden violent release (lightning, some neuron spikes).
+- **Endpoint lock (2.0 under one declared orientation)** — a terminal pole, not automatically a harmonic state.
+  Resonance requires an independently measured periodic lock. The stronger resonance-death hypothesis additionally
+  requires Connection domination, loss of resolved Traversal and failure of internal flows to reopen the cycle.
+- **Snap** — a fast endpoint reaction under a declared timing instrument. A value numerically above `2` is outside
+  one normalized ARA identity and must first be audited for inverted coordinates, mixed identities or an unsuitable
+  instrument; it is not a new generic region beyond the terminal pole.
 - **Walls (0.25 and 1.75)** — the 3/4 displacement limits; sustainable engines live in roughly [0.25, 1.75], not at the singular ends.
 
 ## The two rulers and the key constants
 
-- **Octave / "the 2"** — the ×2 doubling that sets **rung spacing** and the harmonic pole. Octaves build the ladder. Derived from stacking ARA spheres.
+- **Octave / "the 2"** — the ×2 doubling generated by stacking complete total-`2` ARA identities. It sets pure
+  rung spacing. The endpoint is not automatically harmonic; resonance must be measured independently.
 - **φ (phi ≈ 1.618, golden ratio)** — an exact irrational constant and the framework's historical handover candidate. The broad claim that Phi alone supplies the universal Time/irrationality carrier is superseded. Phi now remains a narrower candidate for efficient structured non-closure within the phase coordinate of the complex irrationality quadrant. The identities `φ = 2 cos(36°)`, the ridge-centred Phi circle and Fibonacci near-returns remain exact conditional mathematics; their universal physical placement is unestablished. See `TWO_RULERS_PHI_AND_TWO.md` and `analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
-- **Complex irrationality quadrant** — the current lead ARA hypothesis for the rational/non-rational balance. One binary axis is radial contraction versus expansion; the other is forward versus reverse phase traversal. In sampled form, (q_n=z_{n+1}/z_n=s_ne^{i\delta_n}), so the signs of (log s_n) and (delta_n) generate four modes. Rational closure, structured irrational progression and randomness are behaviours inside the phase coordinate, not the four primary quadrants. The classification is exact mathematics; universal physical use remains a hypothesis.
-- **`1/e ↔ Phi` complex-quadrant placement** — the current lead ARA-specific candidate places `1/e` at the contracting radial landmark and Phi at the expanding/structured-retention landmark, then crosses this span with forward/reverse phase. It is an asymmetric empirical hypothesis, not a complex-exponential identity: the mathematical inverse of `1/e` is `e`. A dataset must justify these endpoints before evaluation and must report rather than clamp values outside them.
-- **Two rulers → one ruler at two angles** — 2 and φ may be the *same* octave viewed from two angles: **φ = 2·cos(36°)**, exact. Space sees the octave head-on (×2); time sees it sheared by the pentagon angle (×φ). See `TWO_RULERS_PHI_AND_TWO.md`.
-- **Shear** — viewing a structure at an angle so it projects differently; the proposed reason time's octave reads as φ rather than 2 (an exact identity; the physical claim is an open conjecture).
-- **The golden-duty (0.39 / 0.61 = 1/φ² : 1/φ)** — the fraction of a cycle each band dominates; the handover timing.
-- **1/φ³ ≈ 0.236, 1/φ⁴ ≈ 0.146** — framework constants used in the predictor (beat-to-beat feedback, and the optimal blend weight).
-- **2 − φ = 1/φ² ≈ 0.382** — the "rent" / minimum entropy shed per cycle in the bedrock reference (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).
+- **Di-ARA** — two complete ARA relations coupled frequently and persistently enough to be treated as one parent,
+  written `D=(x,y)` on `[0,2]²`. The four mixed branches are `Ab`, `aB`, `bA`, `Ba`: letter order records
+  ownership/lineage and capitalization records the stronger expressed component. One forward cycle is
+  `Ab→aB→bA→Ba→Ab`, with reverse traversal permitted. The sectors are not new primitives; each can be decompressed
+  into its own Phase-A/Phase-B pair. Each child axis and the coupled parent has TE-ARA `2` at its own declared tier;
+  the perpendicular accounts are not added into scalar TE-ARA `4`. Canonical definition:
+  `DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
+- **ARA⁹** — one complete `3×3` relational neighbourhood. Along a branch, it reads the Information³ components
+  `(A,B,R)` at the centre, one step and two steps away. Across branches, it relates the three components of one
+  identity to the three components of another. These are the same structure viewed longitudinally and laterally.
+  A complete ARA⁹ may compress into one parent ARA; exact recovery of its nine cells requires retained relations or
+  a valid Information³ closure constraint.
+- **Irrationality Di-ARA / complex irrationality quadrant** — the first typed operational use of Di-ARA for the
+  rational/non-rational investigation. One axis is radial contraction versus expansion; the perpendicular axis is
+  forward versus reverse phase traversal. In sampled form, `q_n=z_(n+1)/z_n=s_n exp(i delta_n)`, so the signs of
+  `log s_n` and `delta_n` generate four modes. Rational closure, structured irrational progression and randomness
+  are behaviours inside this typed path coordinate, not parts of generic Di-ARA. Phi is one candidate
+  structured-irrational route within Irrationality Di-ARA; generic Di-ARA has no Phi requirement. T333, T334 and
+  T335 occupied all four sectors while returning identity-specific reciprocal amplitudes; one universal numeric
+  endpoint is unsupported. T335 additionally passed recorded-order, intact-lineage and thalweg-specific gates in
+  one previously opened curved-flume archive.
+- **`1/e ↔ Phi` complex-quadrant placement** — a superseded provisional numerical placement that put `1/e` at
+  contraction and Phi at expansion/structured retention. It remains a declared candidate pair, not the current
+  domain-general lead and not a complex-exponential identity: the mathematical inverse of `1/e` is `e`. T333 and
+  T334 instead support identity-specific reciprocal amplitudes. Any future dataset must justify endpoints before
+  evaluation and report rather than clamp values outside them.
+- **Two rulers → one ruler at two angles (historical conjecture)** — the identity
+  `φ=2 cos(36°)` is exact, but the former interpretation “Space sees ×2 while Time sees the same octave as ×φ” is
+  superseded as a universal law. It remains a pentagonal projection hypothesis to test under declared geometry.
+  See `TWO_RULERS_PHI_AND_TWO.md`.
+- **Shear** — viewing a structure at an angle so its projection changes. A `36°`/Phi shear is one conditional
+  pentagonal construction, not the generic Time octave.
+- **Golden duty (historical candidate)** — the exact split
+  `1/φ² : 1/φ ≈ 0.382 : 0.618`. Calling it the physical handover timing requires an independent domain test.
+- **1/φ³ ≈ 0.236, 1/φ⁴ ≈ 0.146** — Phi-derived weights used in particular historical predictors. They are
+  domain-specific model parameters, not canonical ARA constants.
+- **2 − φ = 1/φ² ≈ 0.382** — an exact Phi identity and the historical “rent” candidate in
+  `EnergyRatio/THE_BEDROCK_REFERENCE.md`; a universal minimum-entropy interpretation is unproved.
 
 - **Phi circle / ridge-centred handover circle** — the circle whose diameter endpoints on one ARA axis are
   `2-phi` and `phi`. Its centre is exactly the ridge `1`, its diameter is `2/phi`, and its radius is `1/phi`.
@@ -73,7 +127,10 @@ A plain-language key to the vocabulary used across this repository. Where a term
 
 ## Structure and coupling
 
-- **Rung** — one timescale level on the ladder; subsystems sit at rungs spaced by octaves from the pump.
+- **Rung / pure octave** — one selected scale level. Every complete identity has native TE-ARA total `2`; stacking
+  complete identities gives the pure octave `Lambda_(k+1)=2 Lambda_k`. A complete child remains total `2` at its own
+  rung but its selected parent-facing wave contributes half-weight one pure octave up. Intermediate gradient
+  identities may sit between pure octaves.
 - **Quantum `7.5 : 15` child-parent cadence** — the `two-turn 7.5` and `one-turn 15` names are observational
   classifiers, not two unrelated wave species. Canonical ARA reading: the complete approximately `7.5`-sample child
   contains its own Phase-A/Phase-B cycle and sits inside the approximately `15`-sample adult/parent closure one
@@ -100,17 +157,12 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **Momentary asymmetry** — an off-ridge reading can be a genuine position in the current time slice rather than a
   missing external partner. Enlarge the boundary and the time window independently: spatial closure identifies an
   external counterphase; temporal closure identifies an internally complete but currently asymmetric cycle.
-- **Resonant death (ARA musing)** — proposed local \(2.0\) Time-side terminal/singularity limit: usable gradients
-  and directed transfer approach zero although total energy may remain. Once cycles stop, timing ARA is undefined, so
-  \(2.0\) is the limit approached by the last measurable cycles. Dylan proposes that the complete Space-origin
-  lifecycle runs \(0\to2\); reading its beginning and end as one completed diameter/history gives the centre
-  \((0+2)/2=1\). A higher rung returns that ridge only if it compresses the full child history. This is
-  distinct from established amplitude death. Heat death is the proposed universe-scale analogy, understood as loss
-  of work-producing gradients rather than literal cessation of all microscopic motion or of time. A persistent
-  resonant-death identity is additionally proposed to require a strong Connection-side holding relation and no
-  effective anti-phase response from adjacent rungs large enough to reopen or unravel it. Canonical TE-ARA remains
-  `2`; an **expressed A/B subtotal of 2 with contextual Other at 0** would mean the pure pair occupies the complete
-  observed account. It is usable exergy, not TE-ARA, that is “spent.”
+- **Resonance death (ARA hypothesis)** — with Space/Connection launched at `0`, its terminal arrival at `2` becomes
+  a candidate resonance-death limit only when Space/Connection completely locks the selected relation, resolved
+  Time/Traversal vanishes, no internal child/perpendicular/neighbour flow can reopen the cycle, and a sufficiently
+  large external coupling is required to unlock it. Total energy or microscopic motion outside the selected scale
+  may remain. The mirrored `0` limit is pure Time/Traversal domination under this orientation and currently has no
+  separate frozen name. Canonical TE-ARA remains `2`; usable exergy or accessible gradient is what vanishes.
 - **Cross-rung reopening/unravelling condition (ARA musing)** — let \(R_k^-\) denote the effective anti-phase response
   induced at rung \(k\) by neighbouring rungs \(k-1\) and \(k+1\). A persistent terminal candidate requires
   \(R_k^-<R_{k,\mathrm{unlock}}\) over a declared observation window. Crossing the threshold must have an observable
@@ -123,8 +175,11 @@ A plain-language key to the vocabulary used across this repository. Where a term
   projection: the same seam may appear as \(0/2\) on a cyclic ARA coordinate and as zero on a signed observable.
   “Becomes anti-phase” means entering the oppositely oriented branch; a conventional complex/analytic phase need not
   jump discontinuously by \(\pi\) at the zero crossing.
-- **Forward-spin / counterspin** — the two directions of the handover. Forward-spin = the fast band (the fresh predictive donor); counterspin = the slow band (the accumulation-release clock, reads negative). The φ and anti-φ (1/φ) directions.
-- **Handover** — the φ-timed pass of energy/information from one rung to the next.
+- **Forward-spin / counterspin** — the two declared directions of a cyclic handover. Any fast/slow, Phi/anti-Phi or
+  donor/receiver assignment is identity-specific and must be measured rather than built into the generic term.
+- **Handover** — transfer of expressed participation, energy or information between phases, identities or rungs.
+  Phi is one conditional structured-non-closing candidate inside Irrationality Di-ARA, not part of the generic
+  handover definition.
 - **Coupling types** — Type 1 Handoff (release → next's accumulation); Type 2 Overflow (a big cycle's buildup sustains a smaller one); Type 3 Destructive (one's release disrupts another — a sign of degradation).
 - **Feeder / driver-below** — a slower system one rung up that drives the target (e.g. warm-water volume driving ENSO surface temperature).
 
@@ -240,8 +295,12 @@ A plain-language key to the vocabulary used across this repository. Where a term
   tomography cut through the proposed double-parent TE-ARA, not the complete
   TE-ARA sphere and not a literal energy division.
 - **Recycling / flywheel** — how much of its previous cycle a system stores and reuses (measured as the autocorrelation "cycle-ago floor"). High = flywheel (Sun); near zero = leaky (ENSO surface, heart at its dominant period).
-- **Leanness** — how little energy a cycle wastes into shocky harmonic distortion (measured as R21, the 2nd-harmonic Fourier ratio; lower = leaner). φ-near systems run leanest (see `EnergyRatio/`).
-- **Bedrock / 2−φ floor** — the posited ideal lossless handoff: space (2) compresses to time (φ), shedding the minimum 2−φ ≈ 0.382. A *reference frame*, not a measurement (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).
+- **Leanness** — how little signal appears in a declared higher-harmonic distortion measure such as `R21`.
+  Historical EnergyRatio tests associated low values with Phi-near cases; that association is domain-specific and
+  does not establish a universal Phi optimum.
+- **Bedrock / 2−φ floor (historical conjecture)** — the proposed ideal handoff in which `2` maps to `φ` and leaves
+  `2−φ≈0.382`. It is a reference construction, not an observed universal floor; see
+  `EnergyRatio/THE_BEDROCK_REFERENCE.md`.
 - **Identity from blending** — the framework's generative idea: when two waves on one rung blend, the surviving overflow (the part that doesn't cancel) becomes the identity of the next rung. Mixing makes the next thing; it's fractal. (The everyday version is testable; the foundational version is conjecture.)
 - **Action/π (Z axis)** — `T × E / π`, the "temporal weight" used to place a system on the 60-order action spectrum.
 
@@ -251,7 +310,10 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **"π"** — used for the **circular / wave** measure (rotation, closure). π and φ are independent; "π present ⇒ φ present" is **false** in general. They meet *exactly* only in the pentagon (φ = 2cos(π/5), five-fold symmetry).
 - **"E"** — disruption / displacement-correction **events**, not the math constant e or energy E (energy is written out or as `E`-per-cycle in the Action steps; context distinguishes).
 - **Pole orientation (space vs time end) is a free, flip-symmetric choice.** Which end of the 0–2 scale is "space" and which is "time" is a coordinate label. Swapping 0 ↔ 2 changes **no** computed result (asymmetry and distance from 1.0 are invariant). Different docs use opposite orientations (body-mapping vs foundational/cosmic) — that's perspective, not contradiction. See `TWO_RULERS_PHI_AND_TWO.md` and `ARA_decomposition_rules.md`.
-- **Two different axes — do not conflate.** (1) Rung **spacing**/size: space steps ×2, time steps ×φ — and that ×φ is the *same* octave seen sheared from inside time (×2 in the absolute frame, ×φ from our moving-through-time vantage; φ = 2·cos36°), not a different ladder. (2) The 0–2 **position**: a build/release ratio. "Spaced by ×2" ≠ "sits at 2.0."
+- **Scale and position — do not conflate.** (1) Pure rung spacing is the TE-ARA octave
+  `Lambda_(k+1)=2 Lambda_k`. (2) The `0–2` coordinate is the declared within-identity relation. “Scaled by ×2” does
+  not mean “located at 2.0.” A Phi/shear projection is a separate conditional hypothesis, not a second canonical
+  rung law.
 - **Descriptive vs forecasting.** Many results describe/track shape; fewer are true strict-causal forecasts. Always check which (see `CLAIMS_STATUS.md`).
 - **An object does not have one context-free ARA number.** The whole coupled system, either component, their relative motion, and their interface can occupy different positions because they are different observables and boundaries. Compare ARA readings only after their measurement declarations are aligned or an explicit transformation between them is supplied.
 

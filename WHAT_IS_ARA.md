@@ -13,6 +13,13 @@ Its central proposition is simpler:
 
 ARA attempts to reconstruct that geometry.
 
+**Historical lineage.** The bounded `0–2` relation, Phase/anti-Phase pairing
+and its Space/Connection versus Time/Traversal interpretation have been part
+of the developing ARA framework since April 2026. Later prime, quantum and
+physics walks tested and refined that architecture. The reciprocal/log
+notation added on 3 August 2026 is a mathematical translation of that older
+geometry, not a claim that the geometry began on that date.
+
 ---
 
 # 1. The Core Idea
@@ -254,6 +261,124 @@ A key ARA idea is:
 
 ---
 
+## 5.4a The Reciprocal/Log Mathematics Behind Phase A and Phase B
+
+For any declared **positive** observable—such as a duration, wavelength,
+step length, amplitude or coupling magnitude—compare two consecutive values:
+
+\[
+s=\frac{\text{next magnitude}}{\text{current magnitude}}.
+\]
+
+The natural unchanged ridge is `s=1`. A smaller next value gives `s<1`; a
+larger next value gives `s>1`.
+
+Write that change in signed log form:
+
+\[
+u=\log s.
+\]
+
+Then reciprocal Phase A and Phase B are exact opposites:
+
+\[
+s\leftrightarrow\frac1s
+\quad\Longleftrightarrow\quad
+u\leftrightarrow-u.
+\]
+
+ARA folds this unbounded signed coordinate into its `0–2` diameter using
+
+\[
+\boxed{
+x=\frac{2s}{1+s}
+=1+\tanh\left(\frac{\log s}{2}\right).
+}
+\]
+
+This guarantees
+
+\[
+x(1/s)=2-x(s).
+\]
+
+The same relation can therefore be read in three equivalent languages:
+
+| Framework language | Raw relation | Signed mathematical relation |
+|---|---:|---:|
+| Phase-A side | `s<1` | `u<0` |
+| ridge | `s=1` | `u=0` |
+| Phase-B side | `s>1` | `u>0` |
+
+For one identity, let its measured reciprocal amplitude be
+\(\alpha>1\). Its pure reciprocal pair is
+
+\[
+\boxed{
+\frac1\alpha\leftrightarrow\alpha.
+}
+\]
+
+ARA places those endpoints at
+
+\[
+x_A=\frac{2}{1+\alpha},
+\qquad
+x_B=\frac{2\alpha}{1+\alpha},
+\qquad
+x_A+x_B=2.
+\]
+
+The geometry is shared; \(\alpha\) belongs to the measured identity. A river,
+a bubble lineage and a quantum relation may therefore recover the same
+reciprocal ARA structure while returning different amplitudes.
+
+### How a parent amplitude may arise from children
+
+The current recursive composition hypothesis can now be stated precisely. If
+a parent scale relation is generated multiplicatively from child relations,
+
+\[
+s_P=c\prod_i s_i^{w_i},
+\]
+
+then
+
+\[
+\log s_P=\log c+\sum_iw_i\log s_i.
+\]
+
+The parent amplitude and orientation are
+
+\[
+\alpha_P=e^{|\log s_P|},
+\qquad
+\text{parent side}=\operatorname{sgn}(\log s_P).
+\]
+
+In ARA language:
+
+> **The parent identity is the signed child asymmetry that survives their
+> mixing, together with the measured coupling remainder.**
+
+Equal opposite children can cancel to a parent `1.0` ridge without becoming
+internally symmetric. Unequal child amplitudes, weights or coupling leave a
+signed remainder that becomes the parent's identity-specific \(\alpha\).
+
+The log algebra is exact when the multiplicative parent rule is valid. The
+claim that a particular physical parent actually follows that rule remains a
+testable hypothesis. Child weights and coupling cannot be chosen after seeing
+the parent answer.
+
+This reciprocal/log bridge is one important ARA subset. It does not replace
+the established ARA maps for signed forces, probabilities, compositions or
+duration duty, and it must not be applied when a positive ratio is undefined.
+
+Worked calculation guide:
+`ARA_RECIPROCAL_LOG_TRANSLATION_PLAYBOOK.md`.
+
+---
+
 ## 5.5 The φ Landmarks
 
 The two familiar φ-related positions on the 0–2 axis are:
@@ -473,6 +598,37 @@ This is especially important in:
 - markets.
 
 The same visible state can contain different futures because the hidden path differs.
+
+## 8.1 Di-ARA — the first perpendicular memory extension
+
+When one scalar ARA cut cannot distinguish the path or cross-rung orientation,
+ARA can retain a second independently meaningful perpendicular cut:
+
+\[
+D=(x,y)\in[0,2]^2.
+\]
+
+This is called **Di-ARA**. Its two ridge-centred binary distinctions create
+four mixed sectors, canonically labelled
+
+\[
+\begin{array}{c|c}
+Ba & Ab\\
+\hline
+bA & aB
+\end{array}.
+\]
+
+The four labels are not new primitives. They are mixed addresses produced by
+two Phase-A/Phase-B relations, and each address can itself be decomposed into
+another Phase-A/Phase-B pair at a finer rung. Four states are the mathematical
+minimum needed to retain two independent binary distinctions.
+
+This makes Di-ARA the framework's minimal candidate for cross-rung
+information storage. A physical storage claim still requires reconstruction
+or held-out prediction; merely drawing or occupying four quadrants is not
+enough. Full definition:
+`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
 
 ---
 
@@ -856,7 +1012,7 @@ The strongest responsible claim is:
 
 # 18. The Deeper Definition
 
-> **ARA proposes that complex physical, biological, cognitive, social, and poorly understood phenomena may be generated from a recursively reusable two-sided relation. Instead of treating binary as a fixed either/or, ARA unfolds it into a bounded, reversible coordinate with poles, orientation, a connection ridge, recursive scale, phase, path, coupling, and energy. The present 0–2 geometry is the working result of cross-system testing intended to discover the shape and rules of that relation. Octaves are proposed to organise structural recurrence across scale, while φ is investigated as a non-closing directional handover through that recurring structure.**
+> **ARA proposes that complex physical, biological, cognitive, social, and poorly understood phenomena may be generated from a recursively reusable two-sided relation. Instead of treating binary as a fixed either/or, ARA unfolds it into a bounded, reversible coordinate with poles, orientation, a connection ridge, recursive scale, phase, path, coupling, and energy. For positive scale relations, reciprocal Phase/anti-Phase is now expressed exactly by `1/alpha↔alpha`, with logarithms carrying signed asymmetry and the ARA transform folding it into `0–2`. Octaves remain the proposed structural recurrence across scale; Phi remains a narrower candidate for structured non-closing traversal rather than the universal generator of the relation.**
 
 ---
 
@@ -903,8 +1059,10 @@ The current answer is a folded 0–2 relational coordinate with:
 
 - opposed poles at 0 and 2;
 - a central ridge at 1;
+- an exact reciprocal/log chart for declared positive scale relations;
+- identity-specific reciprocal amplitudes `1/alpha↔alpha`;
 - recursive octave structure;
-- proposed φ-related handover positions;
+- narrower proposed φ-related structured-handover positions;
 - orientation;
 - phase;
 - path;

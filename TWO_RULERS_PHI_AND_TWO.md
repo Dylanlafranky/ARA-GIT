@@ -6,14 +6,16 @@
 
 > **3 August 2026 scope supersession:** Standalone Phi is no longer the lead
 > domain-general explanation of ARA's irrationality/non-locking function. The
-> new lead hypothesis is the full complex quadrant: radial
-> contraction/expansion crossed with forward/reverse phase. Its current
-> ARA-specific placement provisionally spans radial `1/e ↔ Phi`, then crosses
-> that span with phase direction. This asymmetric endpoint choice remains
-> empirical, not forced by the exponential mathematics. Historical Phi-only
-> reasoning is retained below as provenance, not as
-> the current claim. Canonical revision:
-> `analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+> new lead structure is **Di-ARA**: two perpendicular ARA cuts forming the
+> mixed `Ab/aB/Ba/bA` quadrant. Radial contraction/expansion crossed with
+> forward/reverse phase is its first operational form. T333 and T334 recovered
+> that form with different identity-specific reciprocal amplitudes, so neither
+> `1/e ↔ Phi` nor `1/Phi ↔ Phi` is a universal endpoint placement. Phi remains
+> an exact candidate same-phase/cross-rung route in the typed Irrationality
+> Di-ARA application under the regular-pentagon construction; it is not a
+> component of generic Di-ARA. Historical Phi-only reasoning is retained
+> below as provenance, not as the current claim. Canonical revision:
+> `DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
 
 This is a structural reading of what we learned this week. The framework has *two distinct* base constants doing *two distinct jobs*, plus a third "floor" reference point that closes the picture. All three live in different parts of the same A-R-A geometry.
 
@@ -196,10 +198,11 @@ Phi coordinate. Report:
 **Status:** motivation and candidate mechanism, not a recovered empirical law
 
 **Current reading:** This section preserves why Phi was pursued. Its broad
-functional role is now assigned first to the complex contraction/expansion ×
-forward/reverse quadrant, with rational, structured-irrational and random
-progressions tested inside the phase coordinate. Phi is one candidate within
-that model, not the whole model. See the 3 August 2026 canonical revision
+functional role is now assigned first to Irrationality Di-ARA, a typed use of
+the generic two-perpendicular-ARA quadrant. Rational, structured-irrational
+and random progressions are tested inside its declared path coordinate. Phi
+is one candidate cross-rung route within that application, not part of generic
+Di-ARA and not the whole model. See the 3 August 2026 canonical revision
 linked at the top of this file.
 
 Phi was not introduced merely because it is visually common or because a

@@ -1,4 +1,4 @@
-# ARA complex irrationality-quadrant hypothesis
+# ARA complex irrationality-quadrant hypothesis — a Di-ARA operational form
 
 **Recorded:** 3 August 2026  
 **Originator:** Dylan La Franchi  
@@ -10,13 +10,14 @@ ARA's rational/irrational balance
 ## Outcome first
 
 The current leading ARA hypothesis is no longer that **Phi by itself** is the
-universal carrier of non-locking handover. The stronger candidate is a
-two-axis dynamical family:
+universal carrier of non-locking handover. The stronger candidate is now
+named **Di-ARA**: two perpendicular ARA cuts forming one four-sector parent
+coordinate. This document studies its first complex operational form:
 
 1. contraction versus expansion of a relation's magnitude;
 2. forward versus reverse traversal of its phase.
 
-These two binary distinctions form four quadrants. Rational closure,
+These two binary distinctions form the mixed `Ab/aB/Ba/bA` quadrants. Rational closure,
 structured irrational traversal and randomness are then different behaviours
 of the phase progression **inside** this larger state space, rather than three
 interchangeable points on one line.
@@ -31,6 +32,9 @@ secondary centre definitions sat nearer `0.5894 <-> 1.699`. Thus `1/e`
 retains only its narrower exponential-decay role, Phi remains a candidate in
 specific structured-retention coordinates, and the radial breathing amount
 must presently be measured rather than assumed.
+
+Canonical Di-ARA definition and flip algebra:
+`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
 
 ## Original physical intuition retained
 
@@ -399,6 +403,48 @@ Primary records:
 - `analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`
 - `analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_RESULTS.json`
 
+### 8. T335 river/thalweg replication
+
+T335 froze the same typed Di-ARA question on the public curved-flume
+bed-topography archive previously used in T327, while changing the operator
+from the failed standalone Phi carrier to a native same-lineage planform
+quotient:
+
+\[
+q_{r,k}=\frac{v_{r,k+1}}{v_{r,k}}=s_{r,k}e^{i\delta_{r,k}}.
+\]
+
+The natural same-rung ridge was `s=1`; no radial carrier or numerical constant
+was fitted into the coordinate. The exact maps were
+`X=2s/(1+s)` and `Y=1+delta/pi`. All four sectors occurred in evaluation and
+strict holdout. Calibration `alpha=1.097339` transferred to implied field
+amplitudes `1.111325` and `1.107258`, with reciprocal products `1.044618` and
+`0.980238`.
+
+Unlike T334's strict-holdout order failure, the river's recorded downstream
+order beat all `1,000` step-order shuffles in evaluation and holdout
+(`p=0.000999` each). Intact elevation-rank lineage also beat cyclic broken
+lineage strongly. The declared thalweg ranked `4/41` paths in evaluation and
+`1/41` in holdout. All frozen gates passed, and an independent validator
+passed `17/17` checks.
+
+T335 therefore strengthens the shared-form claim:
+
+1. the contraction/expansion × reverse/forward Di-ARA coordinate now appears
+   in recorded quantum, bubble and river representations;
+2. reciprocal organisation can transfer while its amplitude remains
+   identity-specific;
+3. ordered traversal and lineage dependence are empirical properties that
+   can pass or fail separately in different identities;
+4. the result does not restore standalone Phi or establish a universal
+   constant.
+
+Primary records:
+
+- `analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md`
+- `analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md`
+- `analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_RESULTS.json`
+
 ## What is superseded and what survives
 
 | Earlier statement | Current status |
@@ -410,9 +456,9 @@ Primary records:
 | `1/e ↔ Phi` is the general radial placement | **Superseded / not supported as a general placement** |
 | `1/Phi ↔ Phi` is the universal radial breathing pair | **Not supported by T333's frozen primary coordinate** |
 | A reciprocal `1/alpha ↔ alpha` radial breath can be measured | **Strong T333 coordinate result; `alpha` is presently identity/estimator-specific** |
-| Four modes arise from contraction/expansion crossed with forward/reverse phase | **Exact mathematical classification; empirically occupied in T333 and T334** |
+| Four modes arise from contraction/expansion crossed with forward/reverse phase | **Exact mathematical classification; empirically occupied in T333, T334 and T335** |
 | One reciprocal amplitude is shared across identities | **Not supported: T333 and T334 recover materially different amplitudes** |
-| Physical systems universally implement that classification with the same constants | **Not supported by T334; shared form does not imply shared constant** |
+| Physical systems universally implement that classification with the same constants | **Not supported by T334/T335; shared form does not imply shared constant** |
 
 Earlier frozen tests and null results are not re-labelled as successes by this
 revision. In particular, failures of standalone Phi operators remain failures

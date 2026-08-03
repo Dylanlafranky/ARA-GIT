@@ -1,5 +1,12 @@
 # TheFormula Main-Thread Results Audit
 
+> **3 August 2026 correction for Threads 22–23:** both runs are
+> architecture-invalid as ARA framework tests. Codex imposed NINO3.4 and
+> warm-water volume as same-scale perpendicular axes without first confirming
+> that geometry with Dylan. Their scores survive only as negatives for the
+> artificial `T+iR` encoding. The intended ENSO ARA handover remains untested.
+> See `T336_T337_ENSO_ARCHITECTURE_INVALIDATION_2026-08-03.md`.
+
 **Date:** 2026-07-11  
 **Scope:** The 20 numbered method threads in `TheFormula/`, checked against their READMEs, detailed result reports, saved JSON/JS score files, `CLAIMS_STATUS.md`, and the master prediction ledger.
 
@@ -101,3 +108,36 @@ That proposed experiment was subsequently frozen, hash-locked, and run on the sa
 - Ordinary AR remained stronger than the raw geometric models.
 
 **Preregistered verdict: FAIL.** The phase/anti-phase relation may carry a subject-dependent long-horizon correction, but the fixed closure-defect and shaped-projection rule does not yet generalize.
+
+## 3 August 2026 addendum: Thread 22 reciprocal/log Di-ARA handover
+
+The clarified handover was frozen and replayed on causal NINO3.4 plus
+warm-water-volume data. At the primary six-month 2017–2025 replay holdout,
+full Di-ARA scored skill `0.4110` and MAE `0.4865`; ordinary raw movement
+scored `0.4312` and `0.4732`. Both frozen improvement gates failed and both
+paired block-bootstrap intervals included zero.
+
+The decomposition reproduced the audit's earlier distinction between
+geometry and value. Signed turn alone nearly tied the strong level baseline,
+and radius-only slightly improved direction, but contraction/expansion hurt
+value prediction. Apparent 9–12 month evaluation improvements reversed in
+holdout. **Frozen verdict: NOT SUPPORTED IN THIS FORM.** The appropriate next
+test is transition/direction/confidence prediction, not post-result tuning of
+the failed point decoder.
+
+Full report: `22 - Reciprocal-log Di-ARA ENSO handover predictor
+(03-08-26)/T336_ENSO_DI_ARA_HANDOVER_REPORT_2026-08-03.md`.
+
+## 3 August 2026 addendum: Thread 23 traversal direction
+
+T337 froze the post-T336 direction hypothesis rather than altering T336. At
+the primary six-month replay, traversal balanced accuracy was `0.7353`, below
+ordinary raw movement at `0.7438`; its block-bootstrap improvement interval
+was `[-0.0268,0.0000]`. The three-month horizon showed a non-primary `+0.0192`
+lead, just below the frozen `+0.02` threshold, but it did not persist across
+horizons. **Frozen verdict: NOT SUPPORTED IN THIS FORM.** Together, threads 22
+and 23 say the current handover is not an adequate direct value or direction
+operator. The next coherent layer is geometry-to-future-geometry transport.
+
+Full report: `23 - Di-ARA traversal direction predictor
+(03-08-26)/T337_DI_ARA_ENSO_DIRECTION_REPORT_2026-08-03.md`.

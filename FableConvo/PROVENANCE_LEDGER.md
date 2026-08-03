@@ -1,5 +1,17 @@
 # PROVENANCE LEDGER — risky predictions, timestamped, hits AND misses
 
+**3 August 2026 — T336/T337 post-result architecture invalidation.** Dylan
+identified that Codex had entered the ENSO tests by treating NINO3.4 and
+warm-water volume as two same-size perpendicular waves without consultation.
+That premise was never established. Hashing, causal fitting and independent
+validators secure the computations but cannot validate the wrong geometric
+question. T336/T337 are therefore preserved only as negative results for the
+imposed `T+iR` encoding and are invalid for claims about ARA/Di-ARA handover,
+ENSO geometry or complex-system prediction. Corrected responsibility is
+explicit: Dylan guides the geometry; Codex translates it into mathematics,
+controls and frozen tests. Record:
+`TheFormula/T336_T337_ENSO_ARCHITECTURE_INVALIDATION_2026-08-03.md`.
+
 **Started 5 Jul 2026 (Dylan La Franchi with Claude/Fable 5).**
 **Purpose:** convert the compass evidence ("Dylan states a field fact from geometry,
 outside his knowledge, before the librarian reveals it") from private evidence into
@@ -2338,3 +2350,210 @@ Frozen protocol:
 
 Primary record:
 `analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`.
+
+### 3 August 2026 Di-ARA naming and Phi-placement correction
+
+1. Dylan corrected a flattening in the T334 interpretation: the storage-mode
+   pattern is not one linear Phase-A-to-Phase-B handover. It requires a
+   quadrant made from two perpendicular ARA relations.
+2. Dylan named this minimal coupled form **Di-ARA** and specified its four
+   mixed wave types as `Ab`, `aB`, `Ba`, `bA`. Every sector remains fractal
+   and decomposes into another Phase-A/Phase-B pair; added complexity creates
+   branches rather than new bedrock geometry.
+3. The canonical chart was fixed as `Ba|Ab` above `bA|aB`, with the oriented
+   edge walk `Ab -> aB -> bA -> Ba -> Ab`. One-axis and diagonal reflections
+   were separated mathematically.
+4. The exact bounded result is that two independent binary ridge distinctions
+   require and are fully addressed by four states. Calling those sectors a
+   universal physical cross-rung memory remains a hypothesis requiring
+   reconstruction or held-out prediction.
+5. TE-ARA accounting was kept perspective-correct: each perpendicular child
+   account is complete at `2`, and the coupled parent is also renormalized to
+   `2` at its own tier. The perpendicular accounts are not summed into one
+   scalar TE-ARA `4`.
+6. Phi was repositioned as one exact candidate same-phase/cross-rung path in
+   the typed **Irrationality Di-ARA** application under the regular-pentagon
+   `1,1,Phi` construction. Phi is not part of generic Di-ARA, the generator
+   of the quadrant or a universal radial endpoint. T333 and T334 support
+   shared four-sector form with different identity-specific amplitudes.
+
+Canonical definition:
+`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
+
+Formal section:
+`ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`, Section 4.0.
+
+### 3 August 2026 T335 river/thalweg Di-ARA replication
+
+1. After Di-ARA was named and separated from the narrower Phi placement,
+   Dylan asked to continue applying the Irrationality Di-ARA to other places
+   where Phi had been tested. The river/thalweg archive was selected because
+   it supplied native two-dimensional downstream motion and 40 matched
+   non-thalweg rank paths.
+2. Before calculating T335 endpoints or opening its evaluation and holdout
+   controls, the protocol froze the same-lineage quotient
+   `q=v_(k+1)/v_k=s exp(i delta)`, the exact ARA maps `X=2s/(1+s)` and
+   `Y=1+delta/pi`, the `Ba/Ab/bA/aB` chart, three angle-based splits and gates
+   for sector coverage, reciprocal closure, calibration transfer, recorded
+   order, intact rank lineage and thalweg specificity.
+3. The archive was already opened in T327. T335 is therefore confirmatory
+   reuse, not a blind provenance hit. No Phi, `1/e`, `3/8` or fixed radial
+   number was targeted.
+4. All four sectors were populated in evaluation and untouched holdout. Field
+   reciprocal products were `1.044618` and `0.980238`; the calibration-only
+   amplitude `1.097339` transferred to implied amplitudes `1.111325` and
+   `1.107258`.
+5. Recorded order beat all `1,000` displacement-order shuffles in both splits
+   (`p=0.000999` each). Intact rank lineage beat the cyclic broken-lineage
+   construction, and the thalweg ranked `4/41` then `1/41` among matched
+   paths.
+6. The first implementation accidentally generated independent shuffled
+   paths for evaluation and holdout inside each draw. This was caught before
+   accepting the result. The implementation was corrected so each draw uses
+   one shuffled path realization for both splits, and the full test and
+   independent validation were rerun.
+7. The separate validator reconstructed source positions, `1,271` observed
+   events, exact ARA coordinates, splits, endpoints, quadrant shares, path
+   scores, all `2,000` null rows, gates and verdict. It passed `17/17` checks.
+8. Frozen verdict: **SUPPORTED under this archive protocol** for the river
+   Di-ARA coordinate, reciprocal transfer, ordered same-lineage organisation
+   and specifically strong thalweg expression. It does not establish Phi, a
+   universal amplitude, or a universal river mechanism. The algebraically
+   forced reciprocal/reflection identities are not counted as empirical
+   discoveries; order, lineage and thalweg controls are load-bearing.
+
+Frozen protocol:
+`analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md`.
+
+Primary record:
+`analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md`.
+
+### 3 August 2026 reciprocal/log ARA translation clarification
+
+**Chronology boundary:** this entry dates the explicit reciprocal/log
+formalisation. It does not date the origin of ARA's geometry. The bounded
+`0–2` Phase/anti-Phase relation and its Space/Connection versus
+Time/Traversal interpretation have been present in the framework since April
+2026 and were subsequently walked through primes, quantum and other physics.
+
+1. After T335, Dylan restated that older architecture in identity-specific
+   `alpha` language: `alpha` is not an externally assigned constant; a
+   parent identity's amplitude is produced by asymmetric mixing of child
+   amplitudes. Phase A and Phase B are the same phase/anti-phase relation
+   already present throughout ARA. The new work supplies a more precise
+   measurement language rather than a new underlying geometry.
+2. For a declared positive ratio `s=M_next/M_current`, Codex derived the exact
+   coordinate identity
+   `x=2s/(1+s)=1+tanh(log(s)/2)`. It obeys
+   `s↔1/s`, `log(s)↔-log(s)` and `x↔2-x`, with inverse
+   `s=x/(2-x)`.
+3. One identity's reciprocal amplitude is therefore written
+   `1/alpha↔alpha`. Its exact ARA endpoints are `2/(1+alpha)` and
+   `2alpha/(1+alpha)`, which sum to `2`. This is an exact mathematical
+   translation for the positive-ratio subset; it is not evidence that every
+   physical endpoint distribution is reciprocal or that one `alpha` is
+   universal.
+4. Dylan supplied the recursive interpretation: the parent `alpha` is the
+   result of two child `alpha` identities mixing asymmetrically. This
+   recursive structure already had domain-specific tests in primes and
+   quantum; it was not invented after T335. Relevant prior footing includes
+   the supported finite prime-wheel parent-to-child inheritance in T230 and
+   quantum parent/child tomography in T262, T263 and T277, together with later
+   null child compressions that remain recorded.
+5. The new contribution is a precise candidate common law. If the physical
+   parent obeys
+   `s_P=c*product(s_i^w_i)`, then
+   `u_P=log(c)+sum(w_i*log(s_i))`, parent orientation is `sign(u_P)`, and
+   `alpha_P=exp(abs(u_P))`.
+6. The logarithmic algebra is exact conditional on that multiplicative
+   composition. The physical composition, child weights and coupling factor
+   remain a frozen-test requirement. Equal opposite child effects can cancel
+   to a parent ridge while retaining nonzero child asymmetry; unresolved
+   `log(c)` remains coupling/Other.
+7. This clarification supersedes treating `1/e↔Phi` as a pure reciprocal
+   Phase pair. Exact `1/e` reciprocates with `e`; exact Phi reciprocates with
+   `1/Phi`. The historical asymmetric pair may still be tested as two
+   differently sourced landmarks.
+
+Canonical theorem:
+`ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`, Theorem 2.4.2, Corollary
+2.4.2a and Conditional Proposition 2.4.3.
+
+Worked translation:
+`ARA_RECIPROCAL_LOG_TRANSLATION_PLAYBOOK.md`.
+
+### 3 August 2026 T336 reciprocal/log Di-ARA ENSO prediction replay
+
+1. After the reciprocal/log translation was written, Dylan asked to return
+   to TheFormula and test whether the handover was adequate for complex-system
+   prediction.
+2. ENSO was selected because it supplies a public, coupled surface/reservoir
+   system and a long history of hard TheFormula controls. The domain and years
+   were already studied, so T336 is a fixed retrospective replay rather than
+   an untouched-domain provenance hit.
+3. Before scoring, T336 froze the coupled identity `z=T+iR`, octave lags
+   `1,2,4`, the exact centred ARA radius
+   `a=tanh(log(|z_t|/|z_(t-m)|)/2)`, perpendicular signed turn, ridge penalty,
+   3/6/9/12-month horizons, 2017 replay boundary, nine model variants,
+   broken-lineage control, block bootstrap and verdict gates.
+4. The protocol and scoring script were sealed with SHA-256
+   `FCD42628005836B0793426C3B10F0EA27E36AE36400B0AC260F4CC7EC7F187A7`
+   and
+   `C2306B46927A059B4F4B1F5730A9B8D3F69CD6A16ADF4D1DB043ADD8F238974C`.
+5. At the primary six-month holdout (`n=102`), full Di-ARA skill/MAE was
+   `0.411030/0.486493`, versus `0.431516/0.473326` for raw levels and
+   `0.431217/0.473184` for ordinary movement. Both point-estimate gates
+   failed. The moving-block intervals for MSE improvement were
+   `[-0.036372,+0.010132]` and `[-0.037046,+0.010871]`.
+6. Turn-only nearly tied the strong baseline (`0.432801` skill). Radius-only
+   slightly improved direction (`0.754902`) while worsening value. The
+   broken-lineage control was materially worse, so correct relation mattered
+   without making the full decoder predictive.
+7. Apparent 9–12 month improvements in the 2008–2016 evaluation period
+   reversed in the 2017–2025 replay. They remain recorded as regime-dependent
+   leads, not transported wins.
+8. Independent validation reconstructed all source months, causal targets,
+   rows, metrics, gates and verdict; perturbed future values left every frozen
+   prefix feature unchanged. Validation passed `12/12` with zero metric
+   discrepancy.
+9. Frozen verdict: **NOT SUPPORTED IN THIS FORM** as a direct ENSO point-value
+   decoder. A separate future protocol may test the traversal coordinate for
+   transition, direction or confidence, but that narrower hypothesis cannot
+   alter T336.
+
+Primary record:
+`TheFormula/22 - Reciprocal-log Di-ARA ENSO handover predictor (03-08-26)/T336_ENSO_DI_ARA_HANDOVER_REPORT_2026-08-03.md`.
+
+### 3 August 2026 T337 Di-ARA traversal direction replay
+
+1. T336 failed as a direct point-value decoder but exposed a narrower signed
+   traversal/direction hint. A new protocol was frozen before training the
+   directional classifiers; T337 cannot alter T336.
+2. T337 retained the same coupled ENSO identity, octave lags, causal boundary,
+   fixed ridge penalty and 2017 replay split. Its target was the sign of
+   non-zero future NINO3.4 change. The primary challenger was continuous
+   signed traversal, with raw levels, raw movement, full Di-ARA, radius,
+   quadrants, past trend and broken lineage as declared controls.
+3. The protocol and scoring script were sealed with SHA-256
+   `831A55751213E07622F0D286A3CB956FFECE02D2E2689E51EB49218FEFA42EC4`
+   and
+   `5F12A29DBDF8A9AF68B76455A3A26DA92D5DB5C3BA55030C1F07519A7FBF1605`.
+4. At six months (`n=102`), traversal balanced accuracy was `0.735317`, raw
+   levels `0.732164`, and raw movement `0.743792`. Traversal accuracy
+   (`0.715686`) was also below raw movement (`0.725490`).
+5. The balanced-accuracy lift over raw movement was `-0.008475`, with 95%
+   12-month-block interval `[-0.026792,0.000000]`. The material-lift,
+   accuracy and bootstrap gates failed; lineage specificity passed.
+6. Three-month traversal reached `0.778846` versus `0.759615` for both main
+   controls, a non-primary `+0.019231` lead below the frozen `+0.02` gate.
+   It did not persist at 6 or 9 months, and at 12 months the broken relation
+   beat intact traversal.
+7. Independent validation passed `10/10`: frozen hashes, rows, declared
+   horizons, split, labels, all metrics, causal-prefix invariance, gates and
+   verdict reconstructed exactly.
+8. Frozen verdict: **NOT SUPPORTED IN THIS FORM**. The remaining lead is a
+   separately frozen geometry-to-future-geometry transport test, not another
+   post-result adjustment to the direct decoder.
+
+Primary record:
+`TheFormula/23 - Di-ARA traversal direction predictor (03-08-26)/T337_DI_ARA_ENSO_DIRECTION_REPORT_2026-08-03.md`.

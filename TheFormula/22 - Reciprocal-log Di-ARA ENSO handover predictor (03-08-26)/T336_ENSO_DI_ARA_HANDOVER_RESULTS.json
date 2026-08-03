@@ -1,0 +1,731 @@
+{
+  "test": "T336",
+  "frozen_protocol": "T336_ENSO_DI_ARA_HANDOVER_PROTOCOL_v1_FROZEN.md",
+  "data": {
+    "first_common_month": "198001",
+    "last_common_month": "202512",
+    "months": 552,
+    "nino_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\TheFormula\\Claude4.8\\nino34_long_anom.csv",
+    "wwv_west_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\TheFormula\\Claude4.8\\wwv_west.dat",
+    "wwv_east_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\TheFormula\\Claude4.8\\wwv_east.dat"
+  },
+  "constants": {
+    "horizons": [
+      3,
+      6,
+      9,
+      12
+    ],
+    "state_lags": [
+      0,
+      1,
+      2,
+      4,
+      8,
+      12
+    ],
+    "octave_lags": [
+      1,
+      2,
+      4
+    ],
+    "walk_start": 2008.0,
+    "holdout_start": 2017.0,
+    "ridge_alpha": 1.0,
+    "bootstrap_seed": 20260803
+  },
+  "scores": {
+    "evaluation": {
+      "3": {
+        "climatology": {
+          "n": 108,
+          "mse": 0.9023343865107522,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.7342232231548962,
+          "corr": -0.1734546689945128,
+          "direction": 0.5754716981132075,
+          "amplitude_ratio": 0.024766529341455682
+        },
+        "persistence": {
+          "n": 108,
+          "mse": 0.4613296296296297,
+          "skill_vs_climatology": 0.4887376159811987,
+          "mae": 0.5614814814814815,
+          "corr": 0.7521582670051119,
+          "direction": 0.0,
+          "amplitude_ratio": 1.0393788740526506
+        },
+        "base_levels": {
+          "n": 108,
+          "mse": 0.2368463471229839,
+          "skill_vs_climatology": 0.7375182075917023,
+          "mae": 0.3941154026364358,
+          "corr": 0.8583356449307139,
+          "direction": 0.6981132075471698,
+          "amplitude_ratio": 0.8074077601889132
+        },
+        "base_raw_movement": {
+          "n": 108,
+          "mse": 0.23240523822762094,
+          "skill_vs_climatology": 0.7424400070506992,
+          "mae": 0.39058199066474236,
+          "corr": 0.8611957453529796,
+          "direction": 0.6981132075471698,
+          "amplitude_ratio": 0.8109097037860917
+        },
+        "base_diara": {
+          "n": 108,
+          "mse": 0.23041574292659842,
+          "skill_vs_climatology": 0.7446448385752029,
+          "mae": 0.39976883718050005,
+          "corr": 0.8623619161448725,
+          "direction": 0.6886792452830188,
+          "amplitude_ratio": 0.8159392209916655
+        },
+        "base_radius": {
+          "n": 108,
+          "mse": 0.23429947079440328,
+          "skill_vs_climatology": 0.7403407491756812,
+          "mae": 0.4018828803236179,
+          "corr": 0.8595254612401212,
+          "direction": 0.6698113207547169,
+          "amplitude_ratio": 0.8219616984478917
+        },
+        "base_turn": {
+          "n": 108,
+          "mse": 0.23724094777946098,
+          "skill_vs_climatology": 0.7370808966985611,
+          "mae": 0.3952154311813749,
+          "corr": 0.8581199628276809,
+          "direction": 0.6886792452830188,
+          "amplitude_ratio": 0.8051126377173162
+        },
+        "base_quadrant": {
+          "n": 108,
+          "mse": 0.22464793858952795,
+          "skill_vs_climatology": 0.7510369304906779,
+          "mae": 0.38554297776978136,
+          "corr": 0.8670857826517245,
+          "direction": 0.6886792452830188,
+          "amplitude_ratio": 0.8070753500772199
+        },
+        "base_broken_diara": {
+          "n": 108,
+          "mse": 0.22365181404310344,
+          "skill_vs_climatology": 0.7521408721793864,
+          "mae": 0.384288621203536,
+          "corr": 0.8670783310887262,
+          "direction": 0.7075471698113207,
+          "amplitude_ratio": 0.8162985678720297
+        }
+      },
+      "6": {
+        "climatology": {
+          "n": 108,
+          "mse": 0.8984914587872151,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.7250386381131594,
+          "corr": -0.3412550772804277,
+          "direction": 0.6388888888888888,
+          "amplitude_ratio": 0.025188520809628665
+        },
+        "persistence": {
+          "n": 108,
+          "mse": 1.217039814814815,
+          "skill_vs_climatology": -0.35453687724263605,
+          "mae": 0.873425925925926,
+          "corr": 0.33974104472862215,
+          "direction": 0.0,
+          "amplitude_ratio": 1.0482814232387803
+        },
+        "base_levels": {
+          "n": 108,
+          "mse": 0.63062245462044,
+          "skill_vs_climatology": 0.2981319427658723,
+          "mae": 0.613253687189146,
+          "corr": 0.5289409109537908,
+          "direction": 0.7407407407407407,
+          "amplitude_ratio": 0.5194373230864224
+        },
+        "base_raw_movement": {
+          "n": 108,
+          "mse": 0.6241210939527428,
+          "skill_vs_climatology": 0.3053678052819976,
+          "mae": 0.6095928253998466,
+          "corr": 0.5359196413568988,
+          "direction": 0.75,
+          "amplitude_ratio": 0.5253157944541652
+        },
+        "base_diara": {
+          "n": 108,
+          "mse": 0.6391650403590066,
+          "skill_vs_climatology": 0.28862424443995016,
+          "mae": 0.6276732933884358,
+          "corr": 0.521888228102054,
+          "direction": 0.6851851851851852,
+          "amplitude_ratio": 0.5655190394845038
+        },
+        "base_radius": {
+          "n": 108,
+          "mse": 0.6319769869640668,
+          "skill_vs_climatology": 0.2966243799166326,
+          "mae": 0.6251760935567943,
+          "corr": 0.5295389596126359,
+          "direction": 0.6759259259259259,
+          "amplitude_ratio": 0.5657503258399759
+        },
+        "base_turn": {
+          "n": 108,
+          "mse": 0.6406122133460769,
+          "skill_vs_climatology": 0.28701357471914535,
+          "mae": 0.6206962156594409,
+          "corr": 0.5178212304347962,
+          "direction": 0.7314814814814815,
+          "amplitude_ratio": 0.524234710228046
+        },
+        "base_quadrant": {
+          "n": 108,
+          "mse": 0.6108259942489626,
+          "skill_vs_climatology": 0.3201649406067185,
+          "mae": 0.6286261620564804,
+          "corr": 0.5503876406394826,
+          "direction": 0.7222222222222222,
+          "amplitude_ratio": 0.5587743751572505
+        },
+        "base_broken_diara": {
+          "n": 108,
+          "mse": 0.563774861015819,
+          "skill_vs_climatology": 0.3725317525257247,
+          "mae": 0.5893586322364266,
+          "corr": 0.5983246835601017,
+          "direction": 0.6944444444444444,
+          "amplitude_ratio": 0.5623778237876469
+        }
+      },
+      "9": {
+        "climatology": {
+          "n": 108,
+          "mse": 0.9049948924426258,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.7313402467564982,
+          "corr": -0.4212846959006003,
+          "direction": 0.6915887850467289,
+          "amplitude_ratio": 0.025354742856497144
+        },
+        "persistence": {
+          "n": 108,
+          "mse": 1.745237962962963,
+          "skill_vs_climatology": -0.9284506216963058,
+          "mae": 1.0056481481481483,
+          "corr": 0.053254208901119274,
+          "direction": 0.0,
+          "amplitude_ratio": 1.0463936066903448
+        },
+        "base_levels": {
+          "n": 108,
+          "mse": 0.8929907082262196,
+          "skill_vs_climatology": 0.013264366812066997,
+          "mae": 0.7525686772566912,
+          "corr": 0.21095041862394154,
+          "direction": 0.7009345794392523,
+          "amplitude_ratio": 0.4485932847032548
+        },
+        "base_raw_movement": {
+          "n": 108,
+          "mse": 0.8923932448469954,
+          "skill_vs_climatology": 0.013924551067484914,
+          "mae": 0.7518606278918767,
+          "corr": 0.21198967543990319,
+          "direction": 0.7102803738317757,
+          "amplitude_ratio": 0.4490371822704823
+        },
+        "base_diara": {
+          "n": 108,
+          "mse": 0.8830420254297964,
+          "skill_vs_climatology": 0.024257448518386182,
+          "mae": 0.741985937791254,
+          "corr": 0.24213491742292348,
+          "direction": 0.7009345794392523,
+          "amplitude_ratio": 0.4841618032050955
+        },
+        "base_radius": {
+          "n": 108,
+          "mse": 0.9083374540213767,
+          "skill_vs_climatology": -0.003693459053375703,
+          "mae": 0.7615625765648657,
+          "corr": 0.21649887391633096,
+          "direction": 0.7009345794392523,
+          "amplitude_ratio": 0.48956829479842284
+        },
+        "base_turn": {
+          "n": 108,
+          "mse": 0.8732071699989844,
+          "skill_vs_climatology": 0.035124753420259336,
+          "mae": 0.7373724873639587,
+          "corr": 0.2343191521968574,
+          "direction": 0.719626168224299,
+          "amplitude_ratio": 0.4464372382459731
+        },
+        "base_quadrant": {
+          "n": 108,
+          "mse": 0.8549118328978177,
+          "skill_vs_climatology": 0.055340709613986294,
+          "mae": 0.7305381672612135,
+          "corr": 0.2888120320388389,
+          "direction": 0.719626168224299,
+          "amplitude_ratio": 0.5131953005512165
+        },
+        "base_broken_diara": {
+          "n": 108,
+          "mse": 0.8675854883187424,
+          "skill_vs_climatology": 0.04133659143966384,
+          "mae": 0.7565994177977474,
+          "corr": 0.2706450357139922,
+          "direction": 0.6822429906542056,
+          "amplitude_ratio": 0.506808229971581
+        }
+      },
+      "12": {
+        "climatology": {
+          "n": 108,
+          "mse": 0.9118861831343542,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.7370790571527301,
+          "corr": -0.4322312387372743,
+          "direction": 0.8037383177570093,
+          "amplitude_ratio": 0.025451779450609932
+        },
+        "persistence": {
+          "n": 108,
+          "mse": 1.880147222222222,
+          "skill_vs_climatology": -1.0618222504038175,
+          "mae": 1.0800925925925926,
+          "corr": -0.016610671736050974,
+          "direction": 0.0,
+          "amplitude_ratio": 1.0421681365501698
+        },
+        "base_levels": {
+          "n": 108,
+          "mse": 0.8715738728985464,
+          "skill_vs_climatology": 0.04420761163114184,
+          "mae": 0.7404685519918016,
+          "corr": 0.2875652687932456,
+          "direction": 0.8037383177570093,
+          "amplitude_ratio": 0.5379245138096247
+        },
+        "base_raw_movement": {
+          "n": 108,
+          "mse": 0.8715290431326458,
+          "skill_vs_climatology": 0.044256773211533984,
+          "mae": 0.7404437591196712,
+          "corr": 0.2875319720909317,
+          "direction": 0.8037383177570093,
+          "amplitude_ratio": 0.5375947851526106
+        },
+        "base_diara": {
+          "n": 108,
+          "mse": 0.8445490495179412,
+          "skill_vs_climatology": 0.07384379197956525,
+          "mae": 0.7248682657934885,
+          "corr": 0.32956038544269683,
+          "direction": 0.8411214953271028,
+          "amplitude_ratio": 0.573108940711966
+        },
+        "base_radius": {
+          "n": 108,
+          "mse": 0.8770078498477452,
+          "skill_vs_climatology": 0.03824855988795062,
+          "mae": 0.7495630865974262,
+          "corr": 0.2857756461979848,
+          "direction": 0.8130841121495327,
+          "amplitude_ratio": 0.5463223997476655
+        },
+        "base_turn": {
+          "n": 108,
+          "mse": 0.8348296309678794,
+          "skill_vs_climatology": 0.08450237934477134,
+          "mae": 0.7167830232024374,
+          "corr": 0.3363413436609879,
+          "direction": 0.8411214953271028,
+          "amplitude_ratio": 0.5659734687387105
+        },
+        "base_quadrant": {
+          "n": 108,
+          "mse": 0.8273097338755747,
+          "skill_vs_climatology": 0.09274890970282235,
+          "mae": 0.7222981475017237,
+          "corr": 0.35142926169774635,
+          "direction": 0.822429906542056,
+          "amplitude_ratio": 0.5807294466680427
+        },
+        "base_broken_diara": {
+          "n": 108,
+          "mse": 0.9007135165453163,
+          "skill_vs_climatology": 0.01225225998121282,
+          "mae": 0.7520176813479823,
+          "corr": 0.26642928679849703,
+          "direction": 0.8130841121495327,
+          "amplitude_ratio": 0.5562866567879236
+        }
+      }
+    },
+    "holdout": {
+      "3": {
+        "climatology": {
+          "n": 105,
+          "mse": 0.5702005892882384,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.6193680812727925,
+          "corr": -0.2763578400757508,
+          "direction": 0.6057692307692307,
+          "amplitude_ratio": 0.017247349535358572
+        },
+        "persistence": {
+          "n": 105,
+          "mse": 0.25727333333333335,
+          "skill_vs_climatology": 0.5488020563877727,
+          "mae": 0.42199999999999993,
+          "corr": 0.7695332964492452,
+          "direction": 0.0,
+          "amplitude_ratio": 0.9935256565580869
+        },
+        "base_levels": {
+          "n": 105,
+          "mse": 0.15594408669321536,
+          "skill_vs_climatology": 0.7265101270977727,
+          "mae": 0.30483731528835095,
+          "corr": 0.8507759114702782,
+          "direction": 0.7596153846153846,
+          "amplitude_ratio": 0.8121611048033791
+        },
+        "base_raw_movement": {
+          "n": 105,
+          "mse": 0.1566326649270169,
+          "skill_vs_climatology": 0.7253025200788795,
+          "mae": 0.3061391393275384,
+          "corr": 0.8497970955940155,
+          "direction": 0.7596153846153846,
+          "amplitude_ratio": 0.81721664252551
+        },
+        "base_diara": {
+          "n": 105,
+          "mse": 0.16565865136020744,
+          "skill_vs_climatology": 0.7094730267343403,
+          "mae": 0.3163900656789208,
+          "corr": 0.8407740477707533,
+          "direction": 0.7403846153846154,
+          "amplitude_ratio": 0.7981006514454225
+        },
+        "base_radius": {
+          "n": 105,
+          "mse": 0.16219541097817783,
+          "skill_vs_climatology": 0.7155467496435934,
+          "mae": 0.3173023502052974,
+          "corr": 0.8445691659270183,
+          "direction": 0.7596153846153846,
+          "amplitude_ratio": 0.7988996881829981
+        },
+        "base_turn": {
+          "n": 105,
+          "mse": 0.15873921242641179,
+          "skill_vs_climatology": 0.7216081228106754,
+          "mae": 0.3052523067552962,
+          "corr": 0.8475584791895395,
+          "direction": 0.75,
+          "amplitude_ratio": 0.8164956710725274
+        },
+        "base_quadrant": {
+          "n": 105,
+          "mse": 0.17327085342688575,
+          "skill_vs_climatology": 0.696122984293696,
+          "mae": 0.32260499751206284,
+          "corr": 0.8320908572162804,
+          "direction": 0.75,
+          "amplitude_ratio": 0.8044455102183917
+        },
+        "base_broken_diara": {
+          "n": 105,
+          "mse": 0.16683862878964564,
+          "skill_vs_climatology": 0.7074036191405826,
+          "mae": 0.3140144224320637,
+          "corr": 0.8394087108623932,
+          "direction": 0.7403846153846154,
+          "amplitude_ratio": 0.7973763895507924
+        }
+      },
+      "6": {
+        "climatology": {
+          "n": 102,
+          "mse": 0.5904845010779624,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.6341575867434475,
+          "corr": -0.5200136532502915,
+          "direction": 0.6176470588235294,
+          "amplitude_ratio": 0.017417840113453025
+        },
+        "persistence": {
+          "n": 102,
+          "mse": 0.6856225490196078,
+          "skill_vs_climatology": -0.16111861999420074,
+          "mae": 0.6697058823529412,
+          "corr": 0.4017933383637765,
+          "direction": 0.0,
+          "amplitude_ratio": 0.9948679428856994
+        },
+        "base_levels": {
+          "n": 102,
+          "mse": 0.33568077347165254,
+          "skill_vs_climatology": 0.43151636857724707,
+          "mae": 0.47332565143123084,
+          "corr": 0.6475097711716914,
+          "direction": 0.7352941176470589,
+          "amplitude_ratio": 0.6912600572645404
+        },
+        "base_raw_movement": {
+          "n": 102,
+          "mse": 0.33585779536554244,
+          "skill_vs_climatology": 0.4312165776537482,
+          "mae": 0.47318433175309943,
+          "corr": 0.6476494098283727,
+          "direction": 0.7352941176470589,
+          "amplitude_ratio": 0.696895081737786
+        },
+        "base_diara": {
+          "n": 102,
+          "mse": 0.34777778325978825,
+          "skill_vs_climatology": 0.41102978549834834,
+          "mae": 0.4864930142586255,
+          "corr": 0.6335895631489051,
+          "direction": 0.7450980392156863,
+          "amplitude_ratio": 0.7048495167065831
+        },
+        "base_radius": {
+          "n": 102,
+          "mse": 0.3459875167963374,
+          "skill_vs_climatology": 0.4140616457083668,
+          "mae": 0.48648878869453416,
+          "corr": 0.6352695426715338,
+          "direction": 0.7549019607843137,
+          "amplitude_ratio": 0.7007083229780704
+        },
+        "base_turn": {
+          "n": 102,
+          "mse": 0.3349219484757614,
+          "skill_vs_climatology": 0.4328014573382659,
+          "mae": 0.47379572342155885,
+          "corr": 0.6489070742706702,
+          "direction": 0.7352941176470589,
+          "amplitude_ratio": 0.6959864730450789
+        },
+        "base_quadrant": {
+          "n": 102,
+          "mse": 0.39198166982982097,
+          "skill_vs_climatology": 0.3361694183094788,
+          "mae": 0.5140928795477261,
+          "corr": 0.580024395748756,
+          "direction": 0.7450980392156863,
+          "amplitude_ratio": 0.7095413016850397
+        },
+        "base_broken_diara": {
+          "n": 102,
+          "mse": 0.393733088374256,
+          "skill_vs_climatology": 0.3332033480040978,
+          "mae": 0.5240027240185968,
+          "corr": 0.5769801234301984,
+          "direction": 0.7156862745098039,
+          "amplitude_ratio": 0.707285667795865
+        }
+      },
+      "9": {
+        "climatology": {
+          "n": 99,
+          "mse": 0.606374970980657,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.6450742069756815,
+          "corr": -0.6219416511617737,
+          "direction": 0.696969696969697,
+          "amplitude_ratio": 0.017605943788244472
+        },
+        "persistence": {
+          "n": 99,
+          "mse": 1.095010101010101,
+          "skill_vs_climatology": -0.8058299788317471,
+          "mae": 0.8018181818181819,
+          "corr": 0.06937899256604825,
+          "direction": 0.0,
+          "amplitude_ratio": 0.9978406215918122
+        },
+        "base_levels": {
+          "n": 99,
+          "mse": 0.4609555717971741,
+          "skill_vs_climatology": 0.2398176147480231,
+          "mae": 0.5585239047835223,
+          "corr": 0.5134411159308396,
+          "direction": 0.797979797979798,
+          "amplitude_ratio": 0.7270922786245111
+        },
+        "base_raw_movement": {
+          "n": 99,
+          "mse": 0.4613297998605807,
+          "skill_vs_climatology": 0.23920045856362226,
+          "mae": 0.5590678743625713,
+          "corr": 0.5131705351164452,
+          "direction": 0.8080808080808081,
+          "amplitude_ratio": 0.7276735784390347
+        },
+        "base_diara": {
+          "n": 99,
+          "mse": 0.49642113403614535,
+          "skill_vs_climatology": 0.1813297748201732,
+          "mae": 0.5749281637918474,
+          "corr": 0.4744997307810532,
+          "direction": 0.8181818181818182,
+          "amplitude_ratio": 0.7341329179993689
+        },
+        "base_radius": {
+          "n": 99,
+          "mse": 0.4736216541150566,
+          "skill_vs_climatology": 0.21892941367765517,
+          "mae": 0.5617114062219178,
+          "corr": 0.5048702008292528,
+          "direction": 0.8181818181818182,
+          "amplitude_ratio": 0.7464986149557544
+        },
+        "base_turn": {
+          "n": 99,
+          "mse": 0.48400554271835544,
+          "skill_vs_climatology": 0.20180488001409447,
+          "mae": 0.5694233876134349,
+          "corr": 0.4828946581064669,
+          "direction": 0.7878787878787878,
+          "amplitude_ratio": 0.7161257517723525
+        },
+        "base_quadrant": {
+          "n": 99,
+          "mse": 0.5246372162535834,
+          "skill_vs_climatology": 0.13479737561542748,
+          "mae": 0.5868523710118979,
+          "corr": 0.44699520794733555,
+          "direction": 0.797979797979798,
+          "amplitude_ratio": 0.7469425249967382
+        },
+        "base_broken_diara": {
+          "n": 99,
+          "mse": 0.524196742249693,
+          "skill_vs_climatology": 0.1355237809338693,
+          "mae": 0.6141740276437112,
+          "corr": 0.45936506067776967,
+          "direction": 0.7676767676767676,
+          "amplitude_ratio": 0.7757585726226638
+        }
+      },
+      "12": {
+        "climatology": {
+          "n": 96,
+          "mse": 0.6061277767063323,
+          "skill_vs_climatology": 0.0,
+          "mae": 0.6416693994733665,
+          "corr": -0.6108077953168218,
+          "direction": 0.7395833333333334,
+          "amplitude_ratio": 0.017961097503302523
+        },
+        "persistence": {
+          "n": 96,
+          "mse": 1.3603427083333333,
+          "skill_vs_climatology": -1.2443167276137164,
+          "mae": 0.8763541666666667,
+          "corr": -0.14393350051583173,
+          "direction": 0.0,
+          "amplitude_ratio": 1.0054755330148986
+        },
+        "base_levels": {
+          "n": 96,
+          "mse": 0.48723770689081,
+          "skill_vs_climatology": 0.19614687593029478,
+          "mae": 0.5789543467809475,
+          "corr": 0.48814609484220567,
+          "direction": 0.8229166666666666,
+          "amplitude_ratio": 0.7278724151036386
+        },
+        "base_raw_movement": {
+          "n": 96,
+          "mse": 0.48792728238782246,
+          "skill_vs_climatology": 0.1950092024503569,
+          "mae": 0.5796313476770685,
+          "corr": 0.48750814862710035,
+          "direction": 0.8229166666666666,
+          "amplitude_ratio": 0.7284502493888088
+        },
+        "base_diara": {
+          "n": 96,
+          "mse": 0.5287121581427358,
+          "skill_vs_climatology": 0.12772161504339752,
+          "mae": 0.5986579839281873,
+          "corr": 0.43633940333338117,
+          "direction": 0.8020833333333334,
+          "amplitude_ratio": 0.7215311356374514
+        },
+        "base_radius": {
+          "n": 96,
+          "mse": 0.4925012480160298,
+          "skill_vs_climatology": 0.18746299552174184,
+          "mae": 0.5818905831092631,
+          "corr": 0.4801539039282287,
+          "direction": 0.8125,
+          "amplitude_ratio": 0.7223483618241575
+        },
+        "base_turn": {
+          "n": 96,
+          "mse": 0.5240759587458088,
+          "skill_vs_climatology": 0.1353704963108422,
+          "mae": 0.59603704051428,
+          "corr": 0.4425369446010479,
+          "direction": 0.8020833333333334,
+          "amplitude_ratio": 0.7235485905846198
+        },
+        "base_quadrant": {
+          "n": 96,
+          "mse": 0.5273097908884791,
+          "skill_vs_climatology": 0.13003526458752013,
+          "mae": 0.6045341461085925,
+          "corr": 0.43285427390924197,
+          "direction": 0.7916666666666666,
+          "amplitude_ratio": 0.7099485451593188
+        },
+        "base_broken_diara": {
+          "n": 96,
+          "mse": 0.49721811132489985,
+          "skill_vs_climatology": 0.179681033549134,
+          "mae": 0.5911552907849023,
+          "corr": 0.47628146583639913,
+          "direction": 0.8333333333333334,
+          "amplitude_ratio": 0.7285122252031377
+        }
+      }
+    }
+  },
+  "bootstrap_primary_h6_holdout": {
+    "vs_base_levels": {
+      "observed_mse_improvement": -0.012097009788135615,
+      "ci95_low": -0.03637184309133822,
+      "ci95_high": 0.010132135502751485,
+      "bootstrap_probability_positive": 0.1584,
+      "repetitions": 5000,
+      "block_months": 12
+    },
+    "vs_base_raw_movement": {
+      "observed_mse_improvement": -0.011919987894245697,
+      "ci95_low": -0.037045702230219815,
+      "ci95_high": 0.010871107151046609,
+      "bootstrap_probability_positive": 0.1692,
+      "repetitions": 5000,
+      "block_months": 12
+    }
+  },
+  "gates": {
+    "point_estimates_beat_levels_and_raw_movement": false,
+    "bootstrap_ci_above_zero_vs_raw_movement": false,
+    "intact_not_matched_on_both_metrics_by_broken_relation": true
+  },
+  "verdict": "NOT_SUPPORTED_IN_THIS_FORM"
+}

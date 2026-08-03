@@ -1,6 +1,6 @@
 # TheFormula — index of prediction-model threads
 
-This folder holds the ARA framework's prediction-model experiments, organized into **21 numbered
+This folder holds the ARA framework's prediction-model experiments, organized into **23 numbered
 thread subfolders**, one per method/logic family, in roughly chronological order. Each subfolder has
 its own `README.md` (model logic, systems, what was tested, key results, what wasn't tested, key files).
 The date in each folder name is the **last script method modified within that folder** (DD-MM-YY).
@@ -40,6 +40,8 @@ The date in each folder name is the **last script method modified within that fo
 | 19 | Frozen-sphere mold-then-roll | 14-06 | **Honest negative.** Leak-free vehicle, but on VALUE it rides the feeder, not the geometry — plain linear recharge regression matches the nested sphere; φ-handover near-inert. Edge is direction + confidence. |
 | 20 | Shaped-circle octave, golden-tree walk & orbit-clock | 21-06 | ARA-shape helps asymmetric ENSO (+0.08–0.10 over Fourier); size-weight hurts. Golden-tree walk validated as a *map*, NULL as a predictor. ENSO's stable clock = the annual orbit (Dec peaks, p~1e-5). |
 | 21 | Double-helix relation & closure-defect predictor | 11-07 | First hash-locked test of the new two-strand math. Formal FAIL: 0/6 matched wins on nsr047 but 5/6 on nsr053; relation channel helps replication long-horizon MAE, does not generalize, and raw AR remains stronger. |
+| 22 | Reciprocal/log Di-ARA ENSO handover | 03-08 | **Architecture-invalid as an ARA test.** The imposed `T+iR` encoding failed the 6-month point-value gate (skill 0.411 vs raw movement 0.431), but same-rung perpendicularity and the ENSO identity were never established. Implementation negative only; framework question untested. |
+| 23 | Di-ARA traversal direction predictor | 03-08 | **Architecture-invalid as an ARA test.** This inherited T336's imposed geometry (0.735 vs raw movement 0.744 balanced accuracy). Implementation negative only; no ARA handover inference. |
 
 ## The throughline
 

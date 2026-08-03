@@ -1,212 +1,349 @@
-# The ARA Framework — An Open Research Notebook on Oscillating Systems
+# The ARA Framework
+## An open research notebook on relational geometry, coupled waves and recursive scale
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19653363.svg)](https://doi.org/10.5281/zenodo.19653363)
 
-**Dylan La Franchi · independent researcher · May 2026**
+**Dylan La Franchi · independent researcher · begun April 2026**
+**README last structurally revised: 3 August 2026**
 
-A heartbeat, an El Nino cycle, a planetary orbit, a neuron firing, a transformer language model generating text. This repository explores a possibility: that many natural and artificial systems can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart), with phi as the coupling/handover constant between rungs rather than the spacing of the rungs. Each system can be summarized by a small set of coordinates: period, amplitude, phase, and a build-vs-release ratio (ARA) per rung of the ladder.
+ARA stands for **Accumulation–Release Asymmetry**. It is a proposed relational
+framework for asking whether systems at very different scales can be described
+as coupled, recursively nested wave/sphere identities.
 
-> **Ladder correction (30 May 2026):** earlier versions described this as a *phi-spaced* ladder. Read edge-free (each system's own strongest cycles, no fixed windows), the rung *spacing* comes out octave (×2), not phi — consistent with system geometry sitting at ARA = 2.0 and nested cycles locking 2:1. Phi is retained where it earns its place: in the *coupling relations* — the handover timing between rungs and the feedback/blend constants (1/phi³, 1/phi⁴). The older shared phi-power placements are superseded; see `TWO_RULERS_PHI_AND_TWO.md` and `TWOBAND_ECG_HORIZON_LADDER_RESULT.md`.
+The framework starts with a whole. Its simplest measurement is one oriented
+diameter cut from `0` to `2`, showing the relation between two opposed wave
+directions. More cuts can then decompress the children, perpendicular
+relations and cross-scale structure hidden by that one number.
 
-> **June 2026 updates:** (1) the ARA scale is now read as a *folded symmetric circle* — `0` and `2` are opposing space/time singularities (the same rim folded), `1.0` is a cancellation ridge, and φ is mirrored at `1.618` / `0.382` (= 2−φ); see [`what_is_this.html`](what_is_this.html). (2) The over-2 atlas audit is **complete** — all 45 over-2 catalogue entries resolved (a snap stored upside-down, or a non-oscillation that never belonged on the cyclic axis); see [`Mapping/ARA_OVER2_AUDIT.md`](Mapping/ARA_OVER2_AUDIT.md). (3) [`TheFormula/`](TheFormula/) has been reorganised into **20 dated thread subfolders**, each with its own README — start at `TheFormula/00 - INDEX.md`.
+This repository is not presented as proof of a finished fundamental law. It
+contains:
 
-The strongest version of the claim is not that this proves a finished law of nature. It is that an octave-rung coordinate system (with phi-timed coupling) appears to carry real signal in several datasets, sometimes with surprisingly few inputs, and deserves independent checking. This repository is the framework, the tests, the failures, the corrections, and an open invitation to falsify it.
+- a consistent mathematical coordinate system;
+- exact algebraic translations and crosswalks;
+- empirical tests, including failures and retractions;
+- conditional physical hypotheses; and
+- speculative extensions kept separate from the load-bearing core.
 
-I am not a scientist by training. I am releasing this because the idea has gone further than I expected, I have run out of resources to keep pushing it privately, and I would rather make the work inspectable than bury it. Please read it as an open research notebook: some parts are supported by saved outputs, some are promising but fragile, and some are clearly speculative.
+The strongest open claim is that the same relational geometry may recur across
+domains and scales. That claim remains empirical and falsifiable.
+
+> **Important current correction.** Earlier public summaries made standalone
+> Phi and a particular forecasting formula too central. Phi is now a narrower
+> candidate inside an Irrationality Di-ARA hypothesis, not the universal ARA
+> handover constant. Forecasting results are mixed, and no universal ARA
+> predictor or prime-number shortcut has been established.
 
 ---
 
-## Current Signals Worth Checking
+## ARA in plain language
 
-| Test | Result |
+Choose one identity, boundary, scale, time window and viewing direction. Then
+ask:
+
+1. What are the two opposed contributions?
+2. Where does their present relation sit between its two poles?
+3. How much native activity carries that relation?
+4. What child, neighbour or perpendicular couplings are hidden by the cut?
+5. Does the same structure recur when the identity is opened or compressed?
+
+ARA treats the `0–2` value as a **coordinate**, not as the entire system.
+Two systems can share the same coordinate while differing in amplitude,
+direction, history, children and external coupling.
+
+### The oriented diameter
+
+For one declared cut,
+
+\[
+x\in[0,2],\qquad s=x-1\in[-1,1].
+\]
+
+Reversing the declared chart gives
+
+\[
+M(x)=2-x.
+\]
+
+With Phase A labelled Space/Connection and Phase B labelled Time/Traversal:
+
+| Pole | Wave born there | Wave completing there |
+|---|---|---|
+| `0` | Phase A | Phase B |
+| `2` | Phase B | Phase A |
+
+The labels may be reversed when the orientation is stated. A chart reversal
+is not automatically a physical singularity crossing.
+
+### The `1.0` ridge
+
+`x=1` is the equal-and-opposite meeting point on the selected parent cut. The
+retained parent coordinate cancels there, but internal activity need not.
+Asymmetric children, perpendicular flow or a child endpoint can all compress
+to the same parent ridge. A scalar `1.0` therefore does not by itself prove
+stillness or resonance.
+
+### One exact positive-ratio instrument
+
+For declared positive, same-unit parts `a` and `b`, one exact bounded reading
+is
+
+\[
+x=2\frac{a}{a+b},
+\qquad
+\frac{a}{b}=\frac{x}{2-x}.
+\]
+
+This guarantees `x=1` when `a=b` and `x(b,a)=2-x(a,b)`. It does **not** prove
+that the chosen measurements are the correct physical ARA poles. Duration,
+flux, scale, probability and coherence require separately declared
+instruments.
+
+---
+
+## The recursive hierarchy
+
+### Information³
+
+ARA begins with one connected relational web rather than isolated packets.
+The minimum locally identifiable unit contains two distinguishable cuts and
+their retained relation:
+
+\[
+(A,B,R_{AB}).
+\]
+
+Two independent relations plus a valid declared geometry can constrain a
+third. Once closed, that ternary can be treated as one identity on the next
+rung. `Information³` names this relational foundation; a literal universal
+arithmetic law such as `i+1=i³` requires an additional counting convention.
+
+### TE-ARA and octaves
+
+TE-ARA is the total-allocation view of the same ARA geometry. Every complete
+selected identity is normalized to
+
+\[
+\operatorname{TE\!-\!ARA}(\Omega)=2.
+\]
+
+In context,
+
+\[
+t_A+t_B+\sum_j t_{J_j}+O_{share}=2.
+\]
+
+This is a relational account, not automatically energy in joules. Native
+magnitude or activity must be reported separately. `Other` is an unresolved
+remainder, not a third pole, and must be typed rather than used to absorb
+error.
+
+Stacking complete total-`2` identities gives the pure octave rule
+
+\[
+\Lambda_{k+1}=2\Lambda_k.
+\]
+
+A complete child remains total `2` on its own rung. Its selected parent-facing
+expression has weight `1/2` one pure octave up; a full child endpoint can
+occupy one complete parent phase.
+
+### Di-ARA
+
+Two ARA relations that couple persistently can be read as one two-axis parent:
+
+\[
+D=(u,v)\in[0,2]^2.
+\]
+
+Its mixed branches are `Ab`, `aB`, `bA` and `Ba`. Letter order records
+ownership or lineage; capitalization records the stronger expressed
+component. Di-ARA is a common recursive arrangement, not a second foundation.
+
+### ARA⁹
+
+ARA⁹ is a `3×3` relational neighbourhood. It can follow the Information³
+components `(A,B,R)` through a branch at the centre, one step and two steps
+away, or relate the three components of one identity to the three of another.
+A complete ARA⁹ may compress into one parent ARA. Exact recovery requires
+retained relations or a valid closure constraint; fractality alone does not
+restore discarded information.
+
+The hierarchy is therefore:
+
+\[
+\boxed{
+\text{Information}^3
+\rightarrow\text{ARA}
+\rightarrow\text{Di-ARA}
+\rightarrow\text{ARA}^9
+\rightarrow\cdots
+}
+\]
+
+---
+
+## What is exact, supported, and still open
+
+| Status | Current position |
 |---|---|
-| **ENSO 1-month forecast (canonical predictor)** | Saved benchmark output: MAE about **0.28 C**, correlation about **+0.90** over 242 anchors. Important caveat: in that saved run, skill versus persistence was negative, so this is signal but not yet a decisive forecast win. |
-| **ECG forecast (same predictor family)** | Saved benchmark output shows useful single-subject ECG signal. The best saved h=3 result is about **+0.96 correlation** with MAE about **35 ms**; h=1 is lower than an earlier headline. This needs rerunning cleanly before being treated as a public headline. |
-| **Cross-species decomposition (mouse → human RR)** | Decomposition architecture (mouse topology × human energy) cut MAE from **82.22 ms → 34.29 ms** vs naive cross-species transfer — a **58% improvement (2.4× better)**. Correlation stayed at chance level for both methods, consistent with the framework's "vertical-ARA partners share map not position" rule. The improvement is real but invisible to correlation/R² metrics; it surfaces only in MAE. |
-| **Cross-mammal cycle shape match** | Some pairwise mammal comparisons are very high, especially rabbit/dog. The broad mean **+0.955** appears sensitive to normalization and endpoint effects, so I treat this as promising rather than settled. |
-| **3/4 ceiling / ARA band idea** | The refined subset claim may still be interesting, but one saved raw 77-system artifact does **not** support the simple "76 of 77 in band" headline. This should be read as a hypothesis needing a cleaned catalogue. |
-| **Prediction ledger** | The ledger contains hits, misses, retractions, and methodology corrections. It is evidence of the research process, not independent proof by itself. |
-| **Tidally locked bodies** | The ARA=1.000 result for locked bodies is a clean descriptive check worth preserving, with the usual caveat that classification is not the same as prediction. |
-| **LLM closure index vs Pythia capability** | Preliminary n=4 result: closure ordering matches 5 of 6 benchmark rank orders, with WinoGrande weaker. This is interesting and close to my domain limits, but it needs more model sizes and comparison to parameter-count baselines. |
+| **Exact or definitional** | The bounded coordinate and reversal; positive-ratio inverse; TE-ARA normalization once its account is declared; independent Di-ARA chart reversals; several typed algebraic crosswalks. |
+| **Empirically represented in recorded tests** | Child/parent structure in bounded prime and quantum analyses; useful complete-relation structure in quantum ARA⁹; identity-specific reciprocal contraction/expansion plus phase quadrants in qutrit, bubble and river tests; multiple domain-specific physics crosswalks. |
+| **Mixed or negative** | Universal Phi handover; universal missing-ninth reconstruction; several compact prime predictors; direct Phi circle-train carriers; direct ENSO Di-ARA value prediction; several historical forecasting headlines. |
+| **Open central hypothesis** | Whether the whole wave/sphere geometry, octave projection and recursive hierarchy are physically common across independently chosen domains rather than a flexible descriptive language. |
+| **Speculative** | Cosmological origins, Dark-sector interpretations, universal resonance-death physics, and other metaphysical or unmeasured extensions. |
 
-The core methodology is intended to be strict-causal. Earlier acausal-bandpass leakage was caught and documented, and affected results were retracted. Some older scripts and documents remain in the repo as research history, so the safest way to read any claim is to check the saved data artifact and the current claim-status notes.
-
----
-
-## What this is, in plain English
-
-Things cycle. Hearts beat, lungs breathe, climates oscillate, planets orbit, neurons fire, language models generate text token by token. The question I started with: can the same simple geometric ratio describe a lot of these very different cycles?
-
-The framework's tentative answer is yes — in a soft, statistical way, not a perfect-law way. In the datasets gathered so far, self-organising systems often cluster near the golden ratio (φ ≈ 1.618) on a build-to-release ratio I call ARA. Multi-scale systems can be mapped onto an octave-spaced ladder of timescales (rungs a doubling apart), with φ as the coupling/handover timing between rungs rather than the spacing (see the ladder correction above). The same formula is being tested as a way to read coordinates from a system and project them forward in time.
-
-I'm not a scientist by training. I built this in spare time over the last month-ish, in continuous dialogue with AI — Claude (Anthropic) most of all, then ChatGPT (OpenAI) and Gemini (Google). The framework as it stands is the product of that collaboration — I provided conceptual direction and the falsification mindset; the AI models handled the code-heavy iteration cycles I can't sustain physically due to ME/CFS. The transcripts are buried in `transcripts/local_sessions/` for anyone who wants the unfiltered audit trail.
+Normalization is never counted as empirical evidence by itself. A result must
+distinguish ARA from declared controls on untouched data or recover an exact
+independently known relation without selecting the geometry after seeing the
+answer.
 
 ---
 
-## How to use the canonical predictor
+## Selected evidence and boundaries
 
-```python
-from ara_framework import extract_topology, predict
+| Thread | What the record currently supports | What it does not establish |
+|---|---|---|
+| [Physics foundations](ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md) and [law crosswalk](ARA_PHYSICAL_LAWS_CROSSWALK.md) | ARA can be translated alongside several established conservation, field, mechanics and quantum relations; some translations are exact algebra. | That ARA replaces those theories or has independently predicted all of their physics. |
+| [Prime capstone](analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md) | Exact factor, wheel and CRT crosswalks; bounded child/parent tests; useful compression and clear failure records. | A constant-time next-prime formula, a cryptographic break, or a new prime theorem. The thread is parked. |
+| [Quantum ARA⁹ relation test](analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md) | The complete `3×3` connected relation object and its trajectories carry structured information. | That any arbitrary eight cells universally determine the ninth; that stronger rule failed without extra constraints. |
+| [Recorded qutrit Di-ARA](analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md) | Four radial/phase sectors and a stable identity-specific reciprocal radial coordinate in a large public record. | Universal Phi endpoints; the frozen Phi rule was not supported. |
+| [Bubble Di-ARA](analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md) | Four sectors, reciprocal breathing and intact-lineage structure across evaluation and holdout. | One universal constant or one stable chronological operator. |
+| [River/thalweg Di-ARA](analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md) | Frozen coordinate, reciprocal closure, order, lineage and thalweg gates in one public flume archive. | Phi, a universal mechanism, or a domain-general river law. |
+| [Forecasting record](TheFormula/00%20-%20INDEX.md) | Several descriptive, transition-risk and partial forecasting signals, with useful negative results. | A finished universal predictor. Some older headline results were weaker than persistence or used invalid architecture. |
 
-# Extract topology coordinates from training data
-topo = extract_topology(data, t=anchor_index, rungs_k=range(2, 22), home_k=8)
+For the complete moving boundary, read [CLAIMS_STATUS.md](CLAIMS_STATUS.md).
+It is intentionally more current and more conservative than individual early
+reports.
 
-# Forward predict at horizon h
-prediction = predict(topo, h, closed=is_closed_system)
-```
+---
 
-Three lines. `closed=True` for systems with a tight matched-rung partner (ENSO+SOI); `closed=False` for single-channel systems (ECG).
+## Where to start
 
-For public tests, `home_k` should be chosen before scoring from the measured ground-cycle period:
+| If you want… | Read this |
+|---|---|
+| A plain-language framework guide | [WHAT_IS_ARA.md](WHAT_IS_ARA.md) |
+| The cleaned canonical mathematics | [ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md](ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md) |
+| The full pre-cleanup derivation record | [ARA_AXIOMATIC_EVIDENCE_RICH_LEGACY_2026-08-03.md](ARA_AXIOMATIC_EVIDENCE_RICH_LEGACY_2026-08-03.md) |
+| Definitions and naming conventions | [GLOSSARY.md](GLOSSARY.md) |
+| The `0–2` landmarks and historical scale | [ARA_SCALE.md](ARA_SCALE.md) |
+| The whole-first sphere explanation | [ARA_FOUNDATION_THE_GEOMETRY_BENEATH.md](ARA_FOUNDATION_THE_GEOMETRY_BENEATH.md) |
+| Physics translations | [ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md](ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md) and [ARA_PHYSICAL_LAWS_CROSSWALK.md](ARA_PHYSICAL_LAWS_CROSSWALK.md) |
+| Current claim status | [CLAIMS_STATUS.md](CLAIMS_STATUS.md) |
+| Reproduction limitations and setup | [REPRODUCIBILITY.md](REPRODUCIBILITY.md) |
+| Recorded predictions and outcomes | [MASTER_PREDICTION_LEDGER.md](MASTER_PREDICTION_LEDGER.md) |
+| Timestamped conceptual provenance | [FableConvo/PROVENANCE_LEDGER.md](FableConvo/PROVENANCE_LEDGER.md) |
+| The testing rules used for new work | [FableConvo/TEST_PROTOCOL.md](FableConvo/TEST_PROTOCOL.md) |
 
-```text
-home_k = round(log(ground_cycle_period) / log(phi))
-```
+---
 
-If more than one ground cycle is plausible, declare the candidates before running the test and report all of them. Do not choose `home_k` from forecast performance.
+## Testing discipline
 
-Run the self-test:
+A valid ARA test should declare before scoring:
+
+1. the identity and its boundary;
+2. the two proposed pole observables;
+3. pole orientation;
+4. the time window, projection and rung;
+5. activity or native magnitude separately from the normalized coordinate;
+6. retained children, named couplings and typed `Other`;
+7. comparison baselines and null controls;
+8. the success and rejection gates; and
+9. whether the task is description, reconstruction, retrodiction or genuine
+   forward prediction.
+
+Raw data should be inspected before applying Fourier, learned embeddings or
+other transforms that may hide the geometry being tested. Those transforms
+remain valid controls or secondary views when declared.
+
+Failures remain part of the record. Poles, constants and scale boundaries
+must not be changed after looking at the target and then reported as if they
+were frozen.
+
+---
+
+## Running repository code
+
+This is a research notebook, not yet one uniform software package. Experiments
+span several months and use different public datasets and environments.
+
+The minimal historical forecasting setup is:
+
 ```bash
+python -m pip install -r requirements.txt
 python ara_framework.py
 ```
 
-The whole module is ~250 lines. It has two halves — `extract_topology` (data → coordinates) and `predict` (coordinates → forecast) — cleanly separated and fully docstring-documented.
+`ara_framework.py` represents one forecasting branch; it is not the complete
+ARA framework or the current axiomatic definition. For recent tests, start
+from the linked report and frozen protocol in its analysis folder. Many recent
+reports include a validation script, saved result JSON and reproduction path.
+
+See [REPRODUCIBILITY.md](REPRODUCIBILITY.md) before treating the repository as
+a turnkey benchmark. Older exploratory scripts, hard-coded paths and
+superseded methods remain for audit history.
 
 ---
 
-## Where to start, depending on what you're after
+## Repository map
 
-| If you want… | Read this first |
-|---|---|
-| **The plain-language explainer with figures** | [`what_is_this.html`](what_is_this.html) |
-| **A sober public-release claim audit** | [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md) |
-| **Known reproducibility issues and commands** | [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) |
-| **A confidence-tiered catalogue of every finding** | [`INDEX.md`](INDEX.md) |
-| **The complete record of advance predictions and outcomes** | [`MASTER_PREDICTION_LEDGER.md`](MASTER_PREDICTION_LEDGER.md) |
-| **The canonical predictor module** | [`ara_framework.py`](ara_framework.py) |
-| **The long-form theory document with three-tier confidence labels** | [`FRACTAL_UNIVERSE_THEORY.md`](FRACTAL_UNIVERSE_THEORY.md) |
-| **The LLM application (closure index → Pythia capability)** | [`LLM/LLM_CLOSURE_VS_CAPABILITY.md`](LLM/LLM_CLOSURE_VS_CAPABILITY.md) |
-| **The φ-vs-nearby-bases predictor ablation** | [`PHI_BASE_ABLATION.md`](PHI_BASE_ABLATION.md) — φ wins at h=1, 3, 6 mo on ENSO; loses at h=12. All bases underperform persistence. Partial-evidence result, honestly framed. |
-| **The unfiltered research-process record** | [`transcripts/local_sessions/`](transcripts/local_sessions/) — research thinking in real time, not academic prose |
-
----
-
-## The LLM application (May 2026)
-
-Once the framework's coupling-graph and Information³-closure tools were working on heart rhythms and climate cycles, the natural test was whether they describe transformer language models too. Pythia is open and benchmarked; clean test bed.
-
-The framework's "intelligence index" (closed Information³ triangles per active component, divided by loose-thread fraction) was computed from internal activations during 200 generation steps — no benchmark data, no behavioural test. The result:
-
-| Pythia | params | closure index | LAMBADA | ARC-easy | SciQ |
-|---|---|---|---|---|---|
-| 70m-deduped | 70 M | 80 | 0.192 | 0.385 | 0.606 |
-| 160m-deduped | 160 M | 756 | 0.342 | 0.440 | 0.720 |
-| 410m-deduped | 410 M | 877 | 0.524 | 0.517 | 0.826 |
-| 1b-deduped | 1000 M | **6,284** | **0.580** | **0.585** | **0.870** |
-
-On this four-model run, **Spearman rank correlation = +1.000** on LAMBADA, PIQA, ARC-easy, ARC-challenge, and SciQ, with WinoGrande weaker at **ρ = +0.800**. The average across all six is therefore about **+0.967**, not a universal perfect rank result. **Pearson r vs log(closure) = +0.886 to +0.997** across the five monotonic benchmarks.
-
-This could still partly be a scale proxy: bigger models are already known to be better on many benchmarks. The interesting question is whether the closure metric explains anything beyond parameter count, layer count, and active-node count. n=4 is small; the natural confirming experiment is adding Pythia-1.4B / 2.8B / 6.9B / 12B and comparing directly against those baselines. See [`LLM/LLM_CLOSURE_VS_CAPABILITY.md`](LLM/LLM_CLOSURE_VS_CAPABILITY.md) for the full writeup, caveats, and falsifying experiments.
-
-The framework also produced a coupling-graph interpretability tool that surfaces dead layers, within-layer clusters, cross-layer information-flow circuits, and anti-phase pairs in 30 seconds of analysis — without being told what to look for. See [`LLM/llm_node_map_visualization.html`](LLM/llm_node_map_visualization.html).
-
----
-
-## Findings by confidence
-
-The full catalogue with sources is in [`INDEX.md`](INDEX.md). The short version:
-
-**Currently supported / worth independent replication** — ENSO and ECG canonical-predictor signals, Walker Circulation anti-phase structure across rungs, closed-system coupling differing from incidental coupling, mid-horizon ECG dip patterns, tidally locked body classification, and the preliminary LLM closure-vs-capability rank result.
-
-**Provisional — single test, fragile metric, or coincidence-flagged** — predictor crossover at φ^(±7/4), 1.75/0.25 mirror pair as donor ARAs, cross-mammal local-cycle shape, the refined 3/4 ceiling claim, cosmic budget Ω from π and φ within 0.5%, Information³ → cosmic budget mapping, three-circle architecture, and layer-depth-tracks-hierarchy in transformers.
-
-**Speculative — conceptual, no direct test yet** — Light/Dark as nested matched-rung pair (origin of c), (π−3)/π universal coupling tax, 1/α ≈ φ^(10 + 1/φ³), quantum entanglement as matched-rung pair, 4D shape as two-spheres-joined / S³ Hopf fibration, and the φ-deep × φ-wide all-closed LLM architecture prediction.
-
-I report numbers as they actually came out, including the misses.
-
----
-
-## How I'm trying to stay honest
-
-- **Failures stay alongside successes.** When a prediction model went wildly unstable (values swinging from −3,000 to +900), I saved it next to the working version. When a data-leakage error made results look better than they were, I retracted in the theory document instead of quietly deleting.
-- **Every claim is tier-labelled.** Three confidence tiers throughout — checked-against-real-data, pattern-needs-replication, conceptual-invitation-to-think. I try not to blur the boundaries even when something feels exciting.
-- **I rebuild methodology when I notice it was wrong.** The strict-causal protocol replaced an earlier acausal one when I caught future-data leakage. The corrected numbers are what's in this repo. The retraction is documented in the theory document.
-- **What didn't work is documented too.** Multiplicative envelopes hurt forecasts. Linear blending of vehicle + framework collapsed the vehicle weight to zero. Most events-layer basis functions overfit. These are kept around as guardrails.
-- **What I'm not.** I'm not a physicist, a cardiologist, a climate scientist, an ML researcher, or a cosmologist. I live with ME/CFS and have a lot of thinking time. The strongest version of this work would come from people with relevant training picking it up and either improving it, knocking pieces of it down, or showing me where the framework is just rediscovering established results in different language. **If you're one of those people and you've read this far, I'd love to hear from you.**
-
----
-
-## What I'd most want a domain expert to test
-
-| Field | Open prediction |
-|---|---|
-| Cardiology | Donor ARA prediction: the rung 1.75 φ-rungs above home should contain a system with measured ARA ≈ 1.75. Find candidate donors in autonomic control. |
-| Climate | The ENSO matched-rung architecture (NINO ↔ SOI anti-phase across φ⁵ to φ¹¹). Does this match existing Walker-Circulation models or extend them? |
-| Cosmology | The π-and-φ scheme matches Ω_b/Ω_dm/Ω_de within 0.5% from two geometric inputs. A two-parameter scheme fitting two numbers can do this by construction; is there a physical mechanism, or is it a coincidence? |
-| ML / Interpretability | Replicate the closure-vs-capability test on Pythia-1.4B / 2.8B / 6.9B / 12B. If Spearman ρ stays near 1.000 across all eight sizes, this becomes much harder to dismiss. |
-| Physiology | Multi-species vertical-ARA in birds and reptiles. The mammalian result holds; extending tells us whether the local cycle shape preservation is mammal-specific or universal across vertebrates. |
-
----
-
-## Repository layout
-
-```
+```text
 ARA-GIT/
-├── README.md                          (this file)
-├── CLAIMS_STATUS.md                   public-release claim audit
-├── REPRODUCIBILITY.md                 setup notes and known issues
-├── INDEX.md                           findings by confidence tier
-├── what_is_this.html                  plain-language explainer
-├── FRACTAL_UNIVERSE_THEORY.md         long-form theory document
-├── MASTER_PREDICTION_LEDGER.md        every prediction and outcome
-├── ara_framework.py                   canonical predictor (~250 lines)
-├── LLM/LLM_CLOSURE_VS_CAPABILITY.md       LLM application headline
-├── LLM/LLM_SIZE_SERIES_RESULT.md          depth-vs-width finding
-├── LLM/LLM_INFO_CUBED_RESULT.md           closure scaling across Pythia
-├── LLM/LLM_ARA_PILOT_RESULT.md            dynamic vs static methodology
-├── BEESWAX_GEOMETRY_WRITEUP.md        (π−3)/π coupling tax
-├── HOW_TO_map_a_system.md             practical guide
-├── ARA_decomposition_rules.md         per-rung mapping rules
-├── MAPPING_TO_THE_FRAMEWORK.md        cross-domain mapping
-├── THE_FRAMEWORK_FORMULATION.md       formal statement
-├── TheFormula/                        forecasting experiments — reorganised June 2026 into
-│   │                                  20 dated thread subfolders, each with a README
-│   ├── 00 - INDEX.md                  master index of all 20 threads (start here)
-│   ├── 01 - Compass & Vehicle predictors (20-05-26)/
-│   ├── 02 - Cross-system ENSO forecasting & Formula v4 (20-05-26)/
-│   ├── …                              (cascades, shape-kernel, sphere/terrain, heart/solar,
-│   │                                  energy-pipe, recoil, frozen-sphere, …)
-│   └── 20 - Shaped-circle octave, golden-tree walk & orbit-clock (21-06-26)/
-├── Mapping/                           where systems sit on the ARA scale (atlas)
-├── EnergyRatio/                       how leanly a system moves energy per cycle
-│   ├── README.md
-│   ├── fetch_data.py                  pulls all real data from source
-│   ├── GOLDEN_STARS_LEAN_RESULT.md    φ → leaner pulsating stars (first result)
-│   └── … (leanness test scripts)
-└── transcripts/local_sessions/        unfiltered research-process record
+├── README.md
+├── WHAT_IS_ARA.md
+├── ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md
+├── ARA_AXIOMATIC_EVIDENCE_RICH_LEGACY_2026-08-03.md
+├── ARA_SCALE.md
+├── GLOSSARY.md
+├── CLAIMS_STATUS.md
+├── REPRODUCIBILITY.md
+├── FRACTAL_UNIVERSE_THEORY.md
+├── ARA_FOUNDATIONS_FROM_ESTABLISHED_MECHANICS.md
+├── ARA_PHYSICAL_LAWS_CROSSWALK.md
+├── DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md
+├── FableConvo/                 testing canon, provenance and session records
+├── analysis/                   frozen tests, reports, data and validators
+│   ├── primes/
+│   ├── quantum/
+│   ├── phi_calibration/
+│   ├── vertical_ara_bubbles/
+│   ├── hydraulics/
+│   └── ...
+├── TheFormula/                 forecasting and transport experiments
+├── Mapping/                    mapping and atlas work
+├── EnergyRatio/                efficiency/leanness investigations
+├── LLM/                        language-model applications
+├── 3D models/                  interactive geometric visualizations
+├── journey/                    conversation and research-history material
+└── archive/                    superseded or historical material
 ```
 
-The three working folders correspond to three questions the framework asks of any cycling system: **`Mapping/`** — *where* does it sit on the ARA scale (what kind of cycle is it)? **`TheFormula/`** — can we *forecast* it from a few geometric constants? **`EnergyRatio/`** — how *efficiently* does it move energy/information per cycle (the leanness / entropy-budget side)? The first `EnergyRatio` result is that pulsating stars whose mode ratio sits near φ run measurably leaner than off-φ stars, consistent with KAM theory and the framework's φ-rung entropy-decay finding.
+---
+
+## Authorship, AI collaboration and provenance
+
+Dylan La Franchi developed the framework's conceptual direction, relational
+language and testing questions. AI collaborators have supplied substantial
+mathematical translation, coding, literature crosswalks, criticism and
+documentation. The repository keeps conversation records, corrections and a
+provenance ledger because distinguishing prior framework statements from
+post-result interpretation is essential to evaluating such a broad claim.
+
+Dylan is not a scientist by formal training and lives with ME/CFS. The work is
+released publicly so domain experts can reproduce it, identify rediscoveries,
+improve its mathematics, or falsify its physical claims.
 
 ---
 
 ## Citing
 
-If you use the framework in your research, please cite:
-
-```
+```text
 La Franchi, D. (2026). The Geometry of Time — ARA Framework.
 GitHub: https://github.com/Dylanlafranky/ARA-GIT
 Zenodo: 10.5281/zenodo.19653363
 ```
 
----
+## License and contact
 
-## License & contact
+CC-BY-4.0 — cite freely, build on it, test it and challenge it.
 
-CC-BY-4.0 — cite freely, build on it, tear it apart.
-
-**Dylan La Franchi** — independent researcher, living with ME/CFS
-[dylan.lafranchi@gmail.com](mailto:dylan.lafranchi@gmail.com)
-
-If you've read this far and you have relevant training, I'd be genuin
+**Dylan La Franchi** — [dylan.lafranchi@gmail.com](mailto:dylan.lafranchi@gmail.com)

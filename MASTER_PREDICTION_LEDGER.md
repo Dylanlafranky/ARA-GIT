@@ -1,6 +1,37 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T335 - River/thalweg Irrationality Di-ARA
+
+**REGISTERED:** 3 August 2026 after T333 and T334 established the candidate
+cross-domain coordinate, but before T335 endpoints, quadrant shares, nulls,
+path ranks or holdout results were calculated | **STATUS: SUPPORTED UNDER THE
+FROZEN ONE-ARCHIVE PROTOCOL; 17/17 INDEPENDENT VALIDATION CHECKS**
+
+**Frozen identity:** each of 41 elevation-rank paths through 33 public flume
+cross-sections retained its native planform displacement vectors. The
+same-lineage quotient `q=v_(k+1)/v_k=s exp(i delta)` supplied radial
+contraction/expansion and signed reverse/forward turning. The exact maps were
+`X=2s/(1+s)` and `Y=1+delta/pi`; rank 1 was the declared thalweg and ranks
+2–41 were matched controls. No Phi or fixed endpoint was tested.
+
+**Prediction:** evaluation and untouched holdout should populate all four
+`Ba/Ab/bA/aB` sectors, preserve reciprocal radial organisation learned from
+calibration, beat 1,000 downstream-order shuffles and a cyclic broken-rank
+lineage, and show a specifically clean thalweg expression.
+
+**Result:** all frozen gates passed. Field products were `1.044618` in
+evaluation and `0.980238` in holdout; calibration `alpha=1.097339`
+transferred to `1.111325` and `1.107258`. Recorded order beat all 1,000 nulls
+in each split (`p=0.000999`), while broken-lineage losses rose from
+`0.021826` to `0.105232` and from `0.009982` to `0.128011`. The thalweg
+ranked `4/41` then `1/41`. This is support for an ordered, lineage-dependent
+river Di-ARA coordinate in this archive, not proof of Phi, a universal
+amplitude or a universal river mechanism.
+
+**Primary record:**
+`analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md`.
+
 ### T334 - Bubble octave-relative irrationality quadrant
 
 **REGISTERED:** 3 August 2026 after T333 established the four-quadrant

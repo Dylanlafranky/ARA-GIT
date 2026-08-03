@@ -1,15 +1,17 @@
 # Hypothesis — the Hexagon→Pentagon angle band as the space↔time dial
 
-> **3 August 2026 scope revision:** Pentagon/Phi geometry is retained here as
-> an exact construction and a narrower handover candidate, but standalone Phi
-> no longer leads the broad irrationality hypothesis. The parent candidate is
-> now the complex four-mode plane: radial contraction/expansion crossed with
-> forward/reverse phase. Its current ARA-specific placement provisionally
-> spans radial `1/e ↔ Phi`; this is an empirical asymmetry, not a mathematical
-> reciprocal identity. Rational closure, structured irrational progression
-> and randomness are tested inside its phase coordinate. This file's previous
+> **3 August 2026 Di-ARA scope revision:** Pentagon/Phi geometry is retained
+> here as an exact construction and a narrower same-phase/cross-rung path
+> candidate, but standalone Phi no longer leads the broad irrationality
+> hypothesis. The parent coordinate is now named **Di-ARA**: two perpendicular
+> ARA cuts producing the four mixed sectors `Ab`, `aB`, `Ba`, `bA`. T333 and
+> T334 recovered the four-sector/reciprocal form with materially different
+> radial amplitudes, so neither `1/e ↔ Phi` nor `1/Phi ↔ Phi` is a universal
+> placement. Rational closure, structured irrational progression and
+> randomness are behaviours inside the declared **Irrationality Di-ARA** path
+> coordinate. Phi is not part of generic Di-ARA itself. This file's previous
 > results and null verdicts are unchanged. Canonical revision:
-> `analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+> `DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
 
 **Status: TESTED → NOT SUPPORTED (31 May 2026).** Principled and elegant, but the data said no — see
 "Test result" below. Kept on record because the *geometry* (60° hexagon = space, 72° pentagon = time)
@@ -221,6 +223,60 @@ run through the whole framework: hexagon = rational/space/locking (bee, octave l
 golden/time/non-locking (φ, golden stars). The shear that turns the space octave into time is 36°
 (φ = 2cos36°); its double, 72°, is the pentagon. So the band endpoints are not arbitrary — they are the
 two regular polygons that tile-vs-don't-tile, i.e. the space and time poles.
+
+## Di-ARA correction: generic four-sector geometry and the typed Irrationality/Phi path (3 August 2026)
+
+The earlier Hexagon/Pentagon discussion contained three related geometries
+that must not be flattened into one count:
+
+1. **One ARA** is the binary Phase-A/Phase-B relation on one declared axis.
+2. **Di-ARA** is two perpendicular ARA cuts. Their coarse product has four
+   mixed state sectors:
+
+   \[
+   \begin{array}{c|c}
+   Ba & Ab\\
+   \hline
+   bA & aB
+   \end{array}.
+   \]
+
+3. **The hexagonal parent scaffold** counts the relational ternaries of two
+   ARA identities: `3+3=6` retained parts.
+
+Four and six therefore answer different questions. Four counts Di-ARA state
+addresses; six counts the two Information³ relational closures from which the
+parent scaffold is decompressed. Neither count changes the rule that the
+coupled parent is one complete TE-ARA `2` at its own tier.
+
+The pentagon/Phi construction is narrower again. Its exact `1,1,phi`
+triangle supplies a possible direct same-phase cross-rung route in the typed
+Irrationality Di-ARA application. Phi is not part of generic Di-ARA, is not
+the generator of its four sectors and is not forced to be the radial endpoint
+of every physical identity.
+
+This resolves the earlier placement problem:
+
+- the quadrant is the two-axis Di-ARA state space;
+- the hexagon is the six-relation parent scaffold;
+- the pentagon is an exact candidate route connecting selected corresponding
+  phases across scale;
+- Phi is the length/ratio of that Irrationality Di-ARA route under golden
+  self-similarity, not part of generic Di-ARA, the whole Time wave or the
+  whole parent sphere.
+
+Every Di-ARA sector remains fractal. Promoting `Ab`, `aB`, `Ba` or `bA` to a
+new boundary reveals another Phase-A/Phase-B decomposition. Complexity adds
+branches; it does not replace the binary base geometry.
+
+**Evidence boundary.** The four-sector product, reflection algebra, regular
+pentagon and `1,1,phi` triangle are exact mathematics under their declarations.
+T333 and T334 support cross-domain occupation of the four-sector coordinate
+and identity-specific reciprocal breathing. They do not establish a universal
+Phi pillar or prove that every physical cross-rung handover is Di-ARA.
+
+Canonical breakdown:
+`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`.
 
 ## Cross-rung Phi pillars: the clarified Hexagon/Pentagon construction (31 July 2026)
 
@@ -495,18 +551,23 @@ transition uses this pillar.
 
 The current musing-tier geometry is:
 
-1. two Information³ ARA closures couple into a six-part rational parent
-   scaffold—the hexagon;
-2. the same-phase connections traverse between scales along Phi-length
-   pillars;
-3. a time-slice or handover projection makes the fivefold/pentagonal scaffold
-   visible while the sixth relation is shared, webbed or carried into the
+1. two perpendicular ARA cuts form the four mixed Di-ARA sectors
+   `Ab/aB/Ba/bA`;
+2. the same two ARA identities decompress into two Information³ ternaries and
+   therefore a six-part rational parent scaffold—the hexagon;
+3. under golden self-similarity, selected same-phase cross-rung connections
+   can take the exact Phi-length pentagon diagonal;
+4. a time-slice or handover projection may then make a fivefold/pentagonal
+   route visible while a relation is shared, webbed or carried into the
    adjacent rung;
-4. the complete parent still closes at TE-ARA `2`;
-5. the unclosed remainder is `0.382`, providing the displacement that prevents
-   the cross-scale path from simply repeating the same position.
+5. the complete coupled parent still closes at TE-ARA `2` at its own tier;
+6. for the exact golden route, the complementary seam is
+   `2-Phi=Phi^-2≈0.382`.
 
-Items 1–3 are a proposed geometric interpretation, not yet a physical result.
+The Di-ARA four-sector count and the regular-polygon identities are exact
+under their declarations. Their universal physical coupling, and especially
+the selection of the golden route rather than another identity-specific
+reciprocal path, remain hypotheses.
 The exact identities \(\phi+\phi^{-2}=2\),
 \(\phi=2\cos36^\circ\), and the recurrence limit are established mathematics.
 

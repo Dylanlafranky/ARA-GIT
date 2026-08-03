@@ -4,6 +4,22 @@ This is the ARA framework repo: a relational coordinate for oscillating
 systems, built by a self-taught researcher with AI collaborators since April
 2026. Wrong entry paths produce predictable misreadings. Read in this order:
 
+**3 Aug reciprocal/log and Di-ARA amendment:** this is a formalisation of the
+April-origin 0–2 Phase/anti-Phase and Space/Time-wave architecture, not a new
+origin claim. Before translating Dylan's
+Phase-A/Phase-B, parent/child or `alpha` language into a new test, read
+`../ARA_RECIPROCAL_LOG_TRANSLATION_PLAYBOOK.md`, Theorem 2.4.2 through
+Conditional Proposition 2.4.3 in
+`../ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`, and
+`../DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`. For a positive scale
+ratio, the exact bridge is `s↔1/s`, `u=log(s)↔-u`, and
+`x=2s/(1+s)↔2-x`. A reciprocal identity is `1/alpha↔alpha`; `alpha` is
+identity-specific. Child-to-parent log addition is valid only when a frozen
+physical multiplicative composition has been declared. Do not revert to
+standalone Phi, treat `alpha` as universal, or mistake the exact coordinate
+reflection for empirical evidence that physical endpoint populations are
+reciprocal.
+
 **Latest continuation record (12 Jul 2026):** after loading this README and
 `CANON_FOR_AI.md`, read
 `ARA_CONVERSATION_RECORD_2026-07-12_CODEX_GEOMETRY_DRILL.md` for the current

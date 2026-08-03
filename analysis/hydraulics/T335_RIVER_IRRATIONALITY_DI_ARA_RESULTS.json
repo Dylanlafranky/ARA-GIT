@@ -1,0 +1,332 @@
+{
+  "test": "T335 river/thalweg Irrationality Di-ARA",
+  "date": "2026-08-03",
+  "protocol": "T335_RIVER_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "9724EA029D2A4A51A28149D1C6639CC55964A7F3DF0F37FE0D7B02F5A4953C72",
+  "source": "Public bed-topography workbook reused from T327",
+  "source_sha256": "041FBFF2233E590AECFD9A5DFC08C84C5A17678A8DF1ABDAC667A21A2D823ED7",
+  "counts": {
+    "source_rows": 1666,
+    "retained_sections": 33,
+    "paths": 41,
+    "events_per_path": 31,
+    "observed_events": 1271,
+    "split_events_field": {
+      "calibration": 410,
+      "evaluation": 410,
+      "holdout": 451
+    },
+    "split_events_thalweg": {
+      "calibration": 10,
+      "evaluation": 10,
+      "holdout": 11
+    },
+    "boundary_events": 39
+  },
+  "coordinate": {
+    "radial": "X=2s/(1+s)",
+    "turn": "Y=1+delta/pi",
+    "reciprocal_identity": "X(1/s)=2-X(s)",
+    "sector_map": {
+      "Ba": "contracting_forward",
+      "Ab": "expanding_forward",
+      "bA": "contracting_reverse",
+      "aB": "expanding_reverse"
+    }
+  },
+  "alpha_cal": 1.0973394538133465,
+  "field_endpoints": {
+    "calibration": {
+      "population": "field",
+      "split": "calibration",
+      "n": 410,
+      "n_contraction": 202,
+      "n_expansion": 206,
+      "s_minus": 0.923793734651478,
+      "s_plus": 1.1123930560646635,
+      "product": 1.0276217356623465,
+      "implied_alpha": 1.0973394538133465,
+      "endpoint_loss": 0.013621530335480227
+    },
+    "evaluation": {
+      "population": "field",
+      "split": "evaluation",
+      "n": 410,
+      "n_contraction": 219,
+      "n_expansion": 191,
+      "s_minus": 0.9196818882425467,
+      "s_plus": 1.1358469774170774,
+      "product": 1.044617892945527,
+      "implied_alpha": 1.1113250313202314,
+      "endpoint_loss": 0.0218255829329125
+    },
+    "holdout": {
+      "population": "field",
+      "split": "holdout",
+      "n": 451,
+      "n_contraction": 204,
+      "n_expansion": 210,
+      "s_minus": 0.894165532086547,
+      "s_plus": 1.0962598401782628,
+      "product": 0.9802377632981094,
+      "implied_alpha": 1.107257786625585,
+      "endpoint_loss": 0.009982384743980041
+    },
+    "pooled": {
+      "population": "field",
+      "split": "pooled",
+      "n": 1271,
+      "n_contraction": 625,
+      "n_expansion": 607,
+      "s_minus": 0.91720150155694,
+      "s_plus": 1.1066346650101329,
+      "product": 1.0150069764222551,
+      "implied_alpha": 1.098423350381128,
+      "endpoint_loss": 0.007447742896274187
+    }
+  },
+  "thalweg_endpoints": {
+    "calibration": {
+      "population": "thalweg",
+      "split": "calibration",
+      "n": 10,
+      "n_contraction": 5,
+      "n_expansion": 5,
+      "s_minus": 0.9488516256177025,
+      "s_plus": 1.014066695611698,
+      "product": 0.9621988326159315,
+      "implied_alpha": 1.033794237069256,
+      "endpoint_loss": 0.059652812473304874
+    },
+    "evaluation": {
+      "population": "thalweg",
+      "split": "evaluation",
+      "n": 10,
+      "n_contraction": 5,
+      "n_expansion": 5,
+      "s_minus": 0.9125319762393168,
+      "s_plus": 1.1358469774170774,
+      "product": 1.0364966870078602,
+      "implied_alpha": 1.115670288578966,
+      "endpoint_loss": 0.01792322828117837
+    },
+    "holdout": {
+      "population": "thalweg",
+      "split": "holdout",
+      "n": 11,
+      "n_contraction": 4,
+      "n_expansion": 6,
+      "s_minus": 0.9140681296112654,
+      "s_plus": 1.0913939200794256,
+      "product": 0.9976083991961074,
+      "implied_alpha": 1.0926950327172518,
+      "endpoint_loss": 0.004241420020808566
+    },
+    "pooled": {
+      "population": "thalweg",
+      "split": "pooled",
+      "n": 31,
+      "n_contraction": 14,
+      "n_expansion": 16,
+      "s_minus": 0.9241699335571363,
+      "s_plus": 1.0913939200794256,
+      "product": 1.0086334466044653,
+      "implied_alpha": 1.0867318076591332,
+      "endpoint_loss": 0.009713721112914887
+    }
+  },
+  "broken_field_endpoints": {
+    "calibration": {
+      "population": "broken_field",
+      "split": "calibration",
+      "n": 410,
+      "n_contraction": 192,
+      "n_expansion": 218,
+      "s_minus": 0.8066778497679279,
+      "s_plus": 1.2099355240742928,
+      "product": 0.9760281869180815,
+      "implied_alpha": 1.2247034109331052,
+      "endpoint_loss": 0.1098101294331449
+    },
+    "evaluation": {
+      "population": "broken_field",
+      "split": "evaluation",
+      "n": 410,
+      "n_contraction": 207,
+      "n_expansion": 203,
+      "s_minus": 0.838418166016714,
+      "s_plus": 1.2460796423024247,
+      "product": 1.044735808409962,
+      "implied_alpha": 1.2191090650746153,
+      "endpoint_loss": 0.10523174571048888
+    },
+    "holdout": {
+      "population": "broken_field",
+      "split": "holdout",
+      "n": 451,
+      "n_contraction": 245,
+      "n_expansion": 205,
+      "s_minus": 0.823630406588668,
+      "s_plus": 1.2811587434699827,
+      "product": 1.055201296788809,
+      "implied_alpha": 1.2471976581500916,
+      "endpoint_loss": 0.12801058934838505
+    },
+    "pooled": {
+      "population": "broken_field",
+      "split": "pooled",
+      "n": 1271,
+      "n_contraction": 644,
+      "n_expansion": 626,
+      "s_minus": 0.8206628190480281,
+      "s_plus": 1.2453317154440584,
+      "product": 1.0219974362462376,
+      "implied_alpha": 1.2318567906938966,
+      "endpoint_loss": 0.11563404530955443
+    }
+  },
+  "quadrant_shares": {
+    "field": {
+      "calibration": {
+        "Ba": 0.2965686274509804,
+        "Ab": 0.25245098039215685,
+        "bA": 0.19852941176470587,
+        "aB": 0.25245098039215685
+      },
+      "evaluation": {
+        "Ba": 0.32926829268292684,
+        "Ab": 0.22926829268292684,
+        "bA": 0.2048780487804878,
+        "aB": 0.23658536585365852
+      },
+      "holdout": {
+        "Ba": 0.27053140096618356,
+        "Ab": 0.30676328502415456,
+        "bA": 0.2222222222222222,
+        "aB": 0.20048309178743962
+      },
+      "pooled": {
+        "Ba": 0.2987012987012987,
+        "Ab": 0.262987012987013,
+        "bA": 0.2086038961038961,
+        "aB": 0.2297077922077922
+      }
+    },
+    "thalweg": {
+      "calibration": {
+        "Ba": 0.2,
+        "Ab": 0.3,
+        "bA": 0.3,
+        "aB": 0.2
+      },
+      "evaluation": {
+        "Ba": 0.4,
+        "Ab": 0.2,
+        "bA": 0.1,
+        "aB": 0.3
+      },
+      "holdout": {
+        "Ba": 0.2,
+        "Ab": 0.3,
+        "bA": 0.2,
+        "aB": 0.3
+      },
+      "pooled": {
+        "Ba": 0.26666666666666666,
+        "Ab": 0.26666666666666666,
+        "bA": 0.2,
+        "aB": 0.26666666666666666
+      }
+    }
+  },
+  "thalweg_sector_counts": {
+    "calibration": {
+      "Ba": 2,
+      "Ab": 3,
+      "bA": 3,
+      "aB": 2
+    },
+    "evaluation": {
+      "Ba": 4,
+      "Ab": 2,
+      "bA": 1,
+      "aB": 3
+    },
+    "holdout": {
+      "Ba": 2,
+      "Ab": 3,
+      "bA": 2,
+      "aB": 3
+    },
+    "pooled": {
+      "Ba": 8,
+      "Ab": 8,
+      "bA": 6,
+      "aB": 8
+    }
+  },
+  "order_null": {
+    "evaluation": {
+      "observed_endpoint_loss": 0.0218255829329125,
+      "null_median": 0.09376591008174864,
+      "null_95": [
+        0.06329413034994989,
+        0.13134921662346208
+      ],
+      "empirical_p_lower": 0.000999000999000999
+    },
+    "holdout": {
+      "observed_endpoint_loss": 0.009982384743980041,
+      "null_median": 0.09337214666384314,
+      "null_95": [
+        0.06236760086112246,
+        0.13322066152208745
+      ],
+      "empirical_p_lower": 0.000999000999000999
+    }
+  },
+  "reverse_audit": {
+    "maximum_reciprocal_scale_error": 1.7763568394002505e-15,
+    "maximum_turn_sign_error_rad": 4.440892098500626e-16,
+    "sector_diagonal_reflection_matches": 1271,
+    "sector_diagonal_reflection_total": 1271,
+    "sector_diagonal_reflection_share": 1.0
+  },
+  "thalweg_control_comparison": {
+    "evaluation": {
+      "thalweg_endpoint_loss": 0.01792322828117837,
+      "thalweg_rank_of_41": 4,
+      "control_median_endpoint_loss": 0.08573685467976216
+    },
+    "holdout": {
+      "thalweg_endpoint_loss": 0.004241420020808566,
+      "thalweg_rank_of_41": 1,
+      "control_median_endpoint_loss": 0.11591090802502474
+    }
+  },
+  "gates": {
+    "G0_integrity": false,
+    "G1_field_four_sectors": true,
+    "G2_thalweg_sector_coverage": true,
+    "G3_reciprocal_closure": true,
+    "G4_calibration_transfer": true,
+    "G5_recorded_order": true,
+    "G6_intact_rank_lineage": true,
+    "G7_thalweg_specificity": true
+  },
+  "verdict": {
+    "field_di_ara_coordinate_supported": true,
+    "transferable_reciprocal_field_organisation_supported": true,
+    "ordered_same_lineage_field_mechanism_supported": true,
+    "thalweg_specific_expression_supported": true,
+    "full_river_thalweg_claim_supported_pending_validation": true,
+    "phi_supported": false
+  },
+  "boundaries": [
+    "The source was opened previously in T327; T335 is confirmatory reuse.",
+    "Reciprocal scale ratios can partly reflect stationary step-size variation, so order and lineage controls are load-bearing.",
+    "The flume bend can bias signed turning.",
+    "Elevation ranks are geometric feature paths, not persistent water parcels.",
+    "T335 contains no Phi or fixed-constant target."
+  ]
+}

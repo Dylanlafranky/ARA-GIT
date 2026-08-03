@@ -1,5 +1,96 @@
 # Claims Status
 
+> **T336/T337 ENSO ARCHITECTURE CORRECTION (3 AUGUST 2026): INVALID AS
+> FRAMEWORK TESTS.** Codex imposed NINO3.4 and warm-water volume as a
+> same-scale perpendicular `T+iR` identity without first establishing that ARA
+> geometry with Dylan. The frozen computations remain valid negatives for that
+> artificial encoding, but neither run tested the intended ENSO parent,
+> Phase-A/Phase-B structure, rung relation or handover. No conclusion about the
+> adequacy of ARA/Di-ARA for ENSO prediction may be drawn from T336/T337. The
+> framework question remains untested. Full correction:
+> `TheFormula/T336_T337_ENSO_ARCHITECTURE_INVALIDATION_2026-08-03.md`.
+
+> **T337 DI-ARA TRAVERSAL DIRECTION PREDICTOR (3 AUGUST 2026): NOT
+> SUPPORTED IN THIS FORM; THE T336 DIRECTION HINT DID NOT BECOME A
+> SIX-MONTH FORECAST WIN.** T337 froze the narrower post-T336 hypothesis that
+> continuous signed traversal might predict ENSO rise/fall even though full
+> handover failed at exact value. On the primary six-month 2017–2025 replay,
+> traversal balanced accuracy was `0.735317`, versus `0.732164` for raw levels
+> and `0.743792` for ordinary movement; ordinary accuracy was `0.715686`
+> versus raw movement's `0.725490`. The paired lift over raw movement was
+> `-0.008475`, with 95% block interval `[-0.026792,0.000000]`. Three-month
+> traversal reached `0.778846` versus `0.759615`, a non-primary `+0.019231`
+> lead just below the frozen material threshold. At 12 months the broken
+> relation beat intact traversal. Verdict: **NOT SUPPORTED IN THIS FORM**.
+> The remaining methodological lead is geometry→future geometry→observable,
+> not further tuning of a direct value or direction decoder. Independent
+> validation passed `10/10` checks. Report: `TheFormula/23 - Di-ARA traversal
+> direction predictor (03-08-26)/T337_DI_ARA_ENSO_DIRECTION_REPORT_2026-08-03.md`.
+
+> **T336 RECIPROCAL/LOG DI-ARA ENSO HANDOVER PREDICTOR (3 AUGUST
+> 2026): NOT SUPPORTED AS A DIRECT POINT-VALUE DECODER; A NARROW
+> TURN/DIRECTION LEAD SURVIVES.** T336 froze the first TheFormula replay of
+> the exact reciprocal/log handover before scoring. It crossed causal radial
+> contraction/expansion with signed traversal at octave lags `1,2,4` on a
+> coupled NINO3.4 plus warm-water-volume identity. At the primary six-month
+> 2017–2025 replay holdout, full Di-ARA scored skill `0.411030` and MAE
+> `0.486493`, worse than raw levels (`0.431516`, `0.473326`) and ordinary raw
+> movement (`0.431217`, `0.473184`). The paired MSE-improvement intervals were
+> `[-0.036372,+0.010132]` and `[-0.037046,+0.010871]`, so the frozen
+> improvement gates failed. Turn-only nearly tied the strong baseline
+> (`0.432801` skill), while radius-only raised direction to `0.754902` but
+> worsened value. Evaluation-period 9–12 month lifts reversed in holdout.
+> Broken lineage was materially worse at the primary horizon, but this did
+> not rescue the predictor. Verdict: **NOT SUPPORTED IN THIS FORM** for direct
+> value prediction; transition/direction/confidence is the next separately
+> frozen hypothesis. Independent validation passed `12/12` checks with exact
+> causal-prefix invariance and zero metric-recalculation error. Report:
+> `TheFormula/22 - Reciprocal-log Di-ARA ENSO handover predictor
+> (03-08-26)/T336_ENSO_DI_ARA_HANDOVER_REPORT_2026-08-03.md`.
+
+> **T335 RIVER/THALWEG IRRATIONALITY DI-ARA (3 AUGUST 2026): FULL
+> FROZEN COORDINATE, RECIPROCAL-CLOSURE, ORDER, LINEAGE AND THALWEG GATES
+> SUPPORTED IN ONE PUBLIC FLUME ARCHIVE.** T335 reused the T327 bed-topography
+> workbook but froze a new native planform quotient before calculating its
+> endpoints or controls. Consecutive downstream step-size change supplied
+> contraction/expansion; signed turning supplied the perpendicular
+> reverse/forward cut. All four `Ba/Ab/bA/aB` sectors occurred in evaluation
+> and untouched holdout. The field endpoint products were `1.044618` and
+> `0.980238`, while calibration-only `alpha=1.097339` transferred to implied
+> amplitudes `1.111325` and `1.107258`. Recorded order beat all `1,000`
+> shuffles in both splits (`p=0.000999` each), intact rank lineage beat the
+> cyclic broken-lineage control, and the thalweg ranked `4/41` then `1/41`.
+> Verdict: **SUPPORTED under this frozen archive protocol**, with independent
+> validation `17/17`. This supports the shared Di-ARA form with an
+> identity-specific amplitude; it does **not** establish Phi, one universal
+> mechanism, or a domain-general river law. Report:
+> `analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md`.
+
+> **RECIPROCAL/LOG ARA TRANSLATION (3 AUGUST 2026): EXACT COORDINATE
+> THEOREM; CHILD-TO-PARENT PHYSICAL COMPOSITION REMAINS CONDITIONAL.**
+> **Chronology:** 3 August dates the mathematical translation, not the
+> framework claim. The bounded 0–2 Phase/anti-Phase geometry and its
+> Space/Connection versus Time/Traversal reading have been developed since
+> April 2026 and predate the prime and quantum walks.
+>
+> For a
+> declared positive same-unit scale ratio `s=M_next/M_current`, the map
+> `x=2s/(1+s)=1+tanh(log(s)/2)` is invertible and obeys the exact
+> phase/anti-phase reflection `s↔1/s`, `log(s)↔-log(s)`, `x↔2-x`. An
+> identity-specific amplitude therefore has the pure reciprocal form
+> `1/alpha↔alpha`, with ARA endpoints summing to `2`. If a parent relation is
+> physically multiplicative, `s_P=c*product(s_i^w_i)`, its log-asymmetry is
+> exactly `log(c)+sum(w_i*log(s_i))`; whether any particular parent obeys that
+> law is an empirical hypothesis requiring frozen child weights, coupling and
+> holdout prediction. This does not demote the already recorded cross-domain
+> child-to-parent results: finite prime-wheel inheritance (T230) and quantum
+> parent/child tomography (T262, T263 and T277) supply prior empirical footing,
+> alongside recorded null compressions. The unresolved question is whether
+> this exact reciprocal/log equation is their common quantitative law.
+> Canonical theorem and worked guide:
+> `ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`, Theorem 2.4.2–Conditional
+> Proposition 2.4.3; `ARA_RECIPROCAL_LOG_TRANSLATION_PLAYBOOK.md`.
+
 > **T334 BUBBLE OCTAVE-RELATIVE IRRATIONALITY QUADRANT (3 AUGUST
 > 2026): FOUR-QUADRANT GEOMETRY AND RECIPROCAL BREATH SUPPORTED;
 > UNIVERSAL PHI AND ONE STABLE ORDERED OPERATOR NOT SUPPORTED.** T334 reused

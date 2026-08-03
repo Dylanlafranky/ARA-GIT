@@ -1,0 +1,141 @@
+{
+  "test": "T335 river/thalweg Irrationality Di-ARA independent validation",
+  "date": "2026-08-03",
+  "passed": true,
+  "checks_passed": 17,
+  "checks_total": 17,
+  "checks": [
+    {
+      "name": "protocol_hash",
+      "passed": true,
+      "detail": "9724EA029D2A4A51A28149D1C6639CC55964A7F3DF0F37FE0D7B02F5A4953C72"
+    },
+    {
+      "name": "source_hash",
+      "passed": true,
+      "detail": "041FBFF2233E590AECFD9A5DFC08C84C5A17678A8DF1ABDAC667A21A2D823ED7"
+    },
+    {
+      "name": "source_shape",
+      "passed": true,
+      "detail": [
+        1666,
+        3
+      ]
+    },
+    {
+      "name": "reconstructed_path_shape",
+      "passed": true,
+      "detail": {
+        "paths": 41,
+        "sections": [
+          33
+        ]
+      }
+    },
+    {
+      "name": "saved_event_counts",
+      "passed": true,
+      "detail": {
+        "broken_lineage": 1271,
+        "observed": 1271,
+        "reversed": 1271
+      }
+    },
+    {
+      "name": "source_to_event_reconstruction",
+      "passed": true,
+      "detail": {
+        "scale_ratio_s": 8.881784197001252e-16,
+        "turn_delta_rad": 4.440892098500626e-16,
+        "x_radial_ara": 2.220446049250313e-16,
+        "y_turn_ara": 4.440892098500626e-16
+      }
+    },
+    {
+      "name": "split_counts",
+      "passed": true,
+      "detail": {
+        "calibration": 410,
+        "evaluation": 410,
+        "holdout": 451
+      }
+    },
+    {
+      "name": "ara_coordinate_ranges",
+      "passed": true,
+      "detail": {
+        "x": [
+          0.3487160868846334,
+          1.6512839131153667
+        ],
+        "y": [
+          0.1908850898967993,
+          1.8646704681800637
+        ]
+      }
+    },
+    {
+      "name": "exact_reciprocal_transform",
+      "passed": true,
+      "detail": 2.8915671940188403e-16
+    },
+    {
+      "name": "calibration_alpha",
+      "passed": true,
+      "detail": {
+        "recomputed": 1.0973394538133465,
+        "saved": 1.0973394538133465
+      }
+    },
+    {
+      "name": "endpoint_recalculation",
+      "passed": true,
+      "detail": {
+        "max_error": 2.220446049250313e-16
+      }
+    },
+    {
+      "name": "quadrant_recalculation",
+      "passed": true,
+      "detail": "all field and thalweg split shares"
+    },
+    {
+      "name": "path_score_recalculation",
+      "passed": true,
+      "detail": "41 ranks x 3 splits"
+    },
+    {
+      "name": "order_null_recalculation",
+      "passed": true,
+      "detail": {
+        "rows": 2000,
+        "max_error": 9.71445146547012e-17
+      }
+    },
+    {
+      "name": "reverse_diagonal_reflection",
+      "passed": true,
+      "detail": "s -> 1/s and delta -> -delta"
+    },
+    {
+      "name": "gate_recalculation",
+      "passed": true,
+      "detail": {
+        "G1_field_four_sectors": true,
+        "G2_thalweg_sector_coverage": true,
+        "G3_reciprocal_closure": true,
+        "G4_calibration_transfer": true,
+        "G5_recorded_order": true,
+        "G6_intact_rank_lineage": true,
+        "G7_thalweg_specificity": true
+      }
+    },
+    {
+      "name": "declared_phi_boundary",
+      "passed": true,
+      "detail": false
+    }
+  ],
+  "note": "G0 passes when this validator passes; the runner leaves G0 pending/false to avoid self-validation."
+}

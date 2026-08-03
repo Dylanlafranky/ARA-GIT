@@ -9,12 +9,50 @@ is worth more than a hit you cannot.
 
 ## 1. Definitions (do not drift)
 
+- CHRONOLOGY: the bounded `0–2` Phase/anti-Phase geometry and its
+  Space/Connection versus Time/Traversal interpretation are April-origin ARA
+  architecture. Later prime, quantum and physics tests refined and tested
+  them. The 3 August 2026 reciprocal/log notation is a mathematical
+  formalisation, not the origin of the framework claim.
 - ARA scalar: bounded 0-2, folded, flip-symmetric. TWO distinct measures exist -
   say which you are using, always:
   (a) rise/fall duty of a waveform (SHAPE measure, space-side);
   (b) band-dominance duty: fraction of time the fast band's envelope dominates the
       slow band's (RELATIONAL measure, motion-side). The framework's registered
       golden-duty claims are (b), never (a).
+- RECIPROCAL-SCALE ARA IS AN EXACT THIRD OPERATIONAL SUBSET, not a replacement
+  for (a) or (b). For a declared positive same-unit ratio
+  `s=M_next/M_current`, use `u=log(s)` and
+  `x=2s/(1+s)=1+tanh(u/2)`. Then `s=1 <=> u=0 <=> x=1`, and the
+  phase/anti-phase reversal is exactly
+  `s<->1/s`, `u<->-u`, `x<->2-x`. The inverse is `s=x/(2-x)`.
+  Do not apply this chart to signed, zero-valued or dimensionally mismatched
+  observables.
+- IDENTITY-SPECIFIC RECIPROCAL AMPLITUDE: write one pure reciprocal pair as
+  `1/alpha <-> alpha`, `alpha>1`. Its ARA endpoints are
+  `2/(1+alpha)` and `2alpha/(1+alpha)`, which sum to `2`. The shared
+  object is the reciprocal/reflection geometry; `alpha` belongs to the
+  declared identity, observable, rung and estimator. Never substitute Phi,
+  `e`, octave or another constant without a frozen domain reason. In
+  particular, exact `1/e` pairs reciprocally with `e`, and exact Phi pairs
+  with `1/Phi`; historical `1/e <-> Phi` is an asymmetric two-landmark
+  hypothesis, not a pure reciprocal identity.
+- CHILD-TO-PARENT LOG MIXING IS CONDITIONAL. If—and only if—the physical
+  parent relation has the predeclared multiplicative form
+  `s_P=c*product(s_i^w_i)`, then the exact algebra is
+  `u_P=log(c)+sum(w_i*u_i)`, parent side `sign(u_P)`, and
+  `alpha_P=exp(abs(u_P))`. This is the mathematical translation of Dylan's
+  statement that parent identity is the surviving asymmetric mixture of its
+  child identities. Equal opposite child effects may cancel to a parent
+  ridge while retaining child variance. The physical composition law,
+  weights and coupling `c` require frozen testing; unresolved `log(c)` stays
+  in coupling/Other and may not be fitted to the parent target.
+  Do not misread “conditional formula” as “no child-to-parent evidence.”
+  Cross-rung inheritance and parent/child structure have already been tested
+  in primes (including T230) and quantum (including T262, T263 and T277), with
+  both supported and null compressed representations preserved. What remains
+  conditional is whether this exact reciprocal/log composition is their
+  shared quantitative law.
 - Arrow convention: up = slower/larger, down = faster/smaller. Declare orientation at
   first use in every document (like a metric signature). 1.0 is its own mirror (2-A rule).
 - Full state: (position, orientation, rung, phase, path, coupling, energy, variance,

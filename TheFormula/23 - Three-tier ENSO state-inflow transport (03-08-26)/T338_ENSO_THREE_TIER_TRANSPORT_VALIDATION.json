@@ -1,0 +1,159 @@
+{
+  "test": "T338 independent validation",
+  "verdict": "PASS",
+  "checks": {
+    "protocol_hash_matches_result": true,
+    "all_input_hashes_match": true,
+    "wwv_full_monthly_record": true,
+    "wwv_scientific_notation_preserved": true,
+    "four_grandchild_strengths_nonnegative": true,
+    "parent_ara_reconstructs_from_four_grandchildren": true,
+    "all_holdout_scores_recompute": true
+  },
+  "holdout_replays": {
+    "ocean WWV redistribution → Niño3.4": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.6363939677031896,
+        "recall_el_nino_direction": 0.6271186440677966,
+        "recall_la_nina_direction": 0.6456692913385826,
+        "spearman": 0.3723671423389567,
+        "n": 245
+      }
+    },
+    "west trade wind → SOI": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.5115734455606842,
+        "recall_el_nino_direction": 0.2672413793103448,
+        "recall_la_nina_direction": 0.7559055118110236,
+        "spearman": -0.11447761681348126,
+        "n": 243
+      }
+    },
+    "central trade wind → SOI": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.4575479169966735,
+        "recall_el_nino_direction": 0.27102803738317754,
+        "recall_la_nina_direction": 0.6440677966101694,
+        "spearman": -0.12454097107900412,
+        "n": 225
+      }
+    },
+    "east trade wind → SOI": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.494795228326115,
+        "recall_el_nino_direction": 0.6074766355140186,
+        "recall_la_nina_direction": 0.3821138211382114,
+        "spearman": 0.019707470379462848,
+        "n": 230
+      }
+    },
+    "nested inflow relation → ENSO parent": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.624074074074074,
+        "recall_el_nino_direction": 0.6,
+        "recall_la_nina_direction": 0.6481481481481481,
+        "spearman": 0.1029302345903314,
+        "n": 99
+      }
+    },
+    "west trade wind → OLR replication": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.5052948843271424,
+        "recall_el_nino_direction": 0.25252525252525254,
+        "recall_la_nina_direction": 0.7580645161290323,
+        "spearman": -0.06757573952938402,
+        "n": 223
+      }
+    },
+    "central trade wind → OLR replication": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.5436602343818838,
+        "recall_el_nino_direction": 0.36082474226804123,
+        "recall_la_nina_direction": 0.7264957264957265,
+        "spearman": 0.018101534062656393,
+        "n": 214
+      }
+    },
+    "east trade wind → OLR replication": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.5553168635875403,
+        "recall_el_nino_direction": 0.6632653061224489,
+        "recall_la_nina_direction": 0.4473684210526316,
+        "spearman": 0.2004516710073024,
+        "n": 212
+      }
+    },
+    "heat-content change → Niño3.4 replication": {
+      "checks": {
+        "bacc": true,
+        "recall_el_nino_direction": true,
+        "recall_la_nina_direction": true,
+        "spearman": true,
+        "n": true
+      },
+      "recomputed": {
+        "bacc": 0.7092885513204654,
+        "recall_el_nino_direction": 0.7256637168141593,
+        "recall_la_nina_direction": 0.6929133858267716,
+        "spearman": 0.5501582725253329,
+        "n": 240
+      }
+    }
+  }
+}
