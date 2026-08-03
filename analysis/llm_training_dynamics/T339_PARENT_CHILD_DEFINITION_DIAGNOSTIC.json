@@ -1,0 +1,75 @@
+{
+  "status": "POST-RESULT ALGEBRAIC RECONCILIATION; DOES NOT ALTER T339 VERDICT",
+  "definitions": {
+    "measured_layer_flow": "C_total",
+    "parent_common_flow": "P",
+    "child_specific_flow": "C_specific = C_total - P",
+    "user_rule": "P + 0.5*C_specific",
+    "expanded_rule": "0.5*P + 0.5*C_total"
+  },
+  "max_abs_delta_difference_vs_t338_equal_average": 8.604228440844963e-16,
+  "mean_abs_delta_difference_vs_t338_equal_average": 1.0947656684910382e-16,
+  "exact_within_1e_12": true,
+  "by_split_stream": [
+    {
+      "split": "calibration",
+      "stream": "median",
+      "n": 900,
+      "parent_child_pearson": 0.44362114457273555,
+      "parent_child_same_sign_rate": 0.8533333333333334,
+      "mean_abs_parent_flow": 0.18567234184705017,
+      "mean_abs_total_child_flow": 0.23803695824932364,
+      "mean_abs_child_specific_residual": 0.1293869648560141
+    },
+    {
+      "split": "calibration",
+      "stream": "top1",
+      "n": 900,
+      "parent_child_pearson": 0.8326159143060644,
+      "parent_child_same_sign_rate": 0.8588888888888889,
+      "mean_abs_parent_flow": 0.33811333366807766,
+      "mean_abs_total_child_flow": 0.38908597908159726,
+      "mean_abs_child_specific_residual": 0.16404450924960556
+    },
+    {
+      "split": "evaluation",
+      "stream": "median",
+      "n": 1832,
+      "parent_child_pearson": 0.9417892891812325,
+      "parent_child_same_sign_rate": 0.9284934497816594,
+      "mean_abs_parent_flow": 0.1796417775428507,
+      "mean_abs_total_child_flow": 0.17745651316897135,
+      "mean_abs_child_specific_residual": 0.043022173560784964
+    },
+    {
+      "split": "evaluation",
+      "stream": "top1",
+      "n": 1832,
+      "parent_child_pearson": 0.936443846843998,
+      "parent_child_same_sign_rate": 0.9361353711790393,
+      "mean_abs_parent_flow": 0.4347940418648771,
+      "mean_abs_total_child_flow": 0.449322227683583,
+      "mean_abs_child_specific_residual": 0.09037063173959137
+    },
+    {
+      "split": "holdout",
+      "stream": "median",
+      "n": 3164,
+      "parent_child_pearson": 0.9443389932409613,
+      "parent_child_same_sign_rate": 0.9222503160556258,
+      "mean_abs_parent_flow": 0.15056318316993192,
+      "mean_abs_total_child_flow": 0.1518545173501576,
+      "mean_abs_child_specific_residual": 0.041852039474212455
+    },
+    {
+      "split": "holdout",
+      "stream": "top1",
+      "n": 3164,
+      "parent_child_pearson": 0.9495359665449153,
+      "parent_child_same_sign_rate": 0.8934892541087232,
+      "mean_abs_parent_flow": 0.351003053970148,
+      "mean_abs_total_child_flow": 0.35801615232362693,
+      "mean_abs_child_specific_residual": 0.0750615203149038
+    }
+  ]
+}

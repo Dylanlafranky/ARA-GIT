@@ -1,5 +1,37 @@
 # PROVENANCE LEDGER — risky predictions, timestamped, hits AND misses
 
+**4 August 2026 — T338 translation correction and T339 freeze.** After T338
+had been fully scored, Dylan identified a scale-flattening error in Codex's
+formula: the parent contribution had incorrectly been halved along with the
+child. The intended measured-parent-rung rule is `1 parent + 0.5 child`, not
+`0.5 parent + 0.5 child`. T338 is permanently retained as the wrong-translation
+equal-average control; its numerical result is not evidence for or against the
+corrected weighting. Before calculating the corrected outcome, T339 froze the
+exact rule `v_parent + 0.5*v_child`, an identically reduced archive, the T338
+control, non-ARA baselines, corrected broken lineage, model splits, gates and
+verdict. Because T338 already opened this archive and its holdout, T339 is a
+prospective formula-correction replay rather than an independent blind-domain
+prediction. Frozen hashes: protocol
+`591A88345849F9D7D4377A59BDA53E05B00549D6E91ADA12C77E06A15BE97F23`;
+claim packet
+`047D8F558AD1692E178E7C35FBAFC2318B421C8FE889EB915576B4A9FBCB8600`.
+
+**4 August 2026 — T339 outcome and residual-child reconciliation.** The
+literal `P + 0.5*C_total` forecast was not supported: it lost to the T338
+equal average by 33.88% evaluation and 23.56% holdout MAE, lost to local trend
+in both splits and narrowly lost to persistence in holdout. It retained only
+a small intact-lineage advantage and a direction advantage. Frozen verdict:
+`NOT SUPPORTED IN THIS FORM`; independent validation `17/17`. The failure then
+located a variable-definition error rather than a scale-weight ambiguity: the
+raw layer flow `C_total` already included the parent common flow `P`.
+Separating `C_specific=C_total-P` gives the exact identity
+`P+0.5*C_specific=0.5P+0.5C_total`, reproducing T338's numerical forecast to
+`8.60e-16`. This algebraic reconciliation is marked post-result and cannot be
+counted as a new prediction. It supports a fresh-test method: define parent
+common motion and child-specific residual before scoring, then test the
+unfitted `1 + 0.5` scale rule on an unopened hierarchy. Full report:
+`analysis/llm_training_dynamics/T339_LLM_TRAINING_PARENT_PLUS_CHILD_REPORT_2026-08-04.md`.
+
 **3 August 2026 — T336/T337 post-result architecture invalidation.** Dylan
 identified that Codex had entered the ENSO tests by treating NINO3.4 and
 warm-water volume as two same-size perpendicular waves without consultation.
@@ -2557,3 +2589,49 @@ Primary record:
 
 Primary record:
 `TheFormula/23 - Di-ARA traversal direction predictor (03-08-26)/T337_DI_ARA_ENSO_DIRECTION_REPORT_2026-08-03.md`.
+
+### 3 August 2026 T338 Pythia training Di-ARA forecast registration
+
+1. Dylan asked for a public LLM route that did not require locally training or
+   running a model. A public archive of raw Pythia activation summaries across
+   training checkpoints was located and inspected only for source identity,
+   file counts and schema.
+2. After a context compaction, Codex restated the exact proposed identity:
+   follow the same activation identity within each layer through training;
+   keep massive and background activations as separate ARA axes; preserve
+   layers as children of the model parent; do not assign Phase A/Phase B yet.
+   Dylan explicitly replied that this was an excellent starting point.
+3. T338 was frozen before activation trajectories or predictive outcomes were
+   opened. Calibration models are 14M/70M/160M, evaluation models are
+   410M/1B/1.4B, and untouched size holdouts are 2.8B/6.9B/12B.
+4. The fixed forecast uses half recent same-layer log-rung flow and half recent
+   model-parent flow, independently for top-1 and median activation. It must
+   beat persistence, ordinary local trend and a cyclic broken-layer lineage.
+5. Raw source commit is
+   `c4c539ac4f8c8fc9694603895d00c1f1af940a20`. Publisher fits and capability
+   labels are excluded from the primary score. The already-discovered malformed
+   1B step-0 file is excluded by schema.
+6. Protocol SHA-256:
+   `8A908E8488169F3460F1FC7105BF6590D65BE341E4E832247FEE76F3730203C0`.
+   Claim-packet SHA-256:
+   `AF7759430D3DF537855A8A332A3A23A8AB66CAEBE545F9A9F709282D75B8FC50`.
+
+Frozen records:
+`analysis/llm_training_dynamics/T338_LLM_TRAINING_DI_ARA_PROTOCOL_v1_FROZEN.md`
+and `T338_LLM_TRAINING_DI_ARA_CLAIM_PACKET_v1.md`.
+
+7. T338 then ran on 335 clean files and 70,752 forecast rows. On the untouched
+   2.8B/6.9B/12B models, ARA beat persistence (`0.118541` versus `0.144781`),
+   layer-only flow (`0.119794`), parent-only flow (`0.119962`) and broken
+   lineage (`0.118927`), while both visible streams survived separately.
+8. The decisive frozen amplitude gate failed: local four-point trend scored
+   `0.115799`, better than ARA's `0.118541` on holdout. ARA did retain the best
+   holdout direction among the named dynamic rules (`0.776882`, versus
+   `0.763241` layer-only and `0.772972` local trend).
+9. The frozen verdict is **MIXED/PARTIAL**. Parent/child coupling contributes a
+   modest directional relation, but equal `0.5+0.5` composition is not the best
+   exact-amplitude rule for the largest models. Independent validation passed
+   `15/15` checks.
+
+Primary result:
+`analysis/llm_training_dynamics/T338_LLM_TRAINING_DI_ARA_REPORT_2026-08-03.md`.

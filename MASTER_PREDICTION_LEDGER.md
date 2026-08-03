@@ -1,6 +1,106 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T339 - Corrected Pythia parent-plus-child forecast
+
+**REGISTERED:** 4 August 2026 after T338 results exposed the consequences of
+the wrong equal-average translation and Dylan corrected it to `0.5 child + 1
+parent`, but before the corrected forecast, errors, directions, bootstraps or
+verdict were calculated | **STATUS: NOT SUPPORTED IN LITERAL TOTAL-CHILD
+FORM; RESIDUAL-CHILD RECONCILIATION EXACT; 17/17 INDEPENDENT VALIDATION
+CHECKS**
+
+**Frozen correction:** at the measured parent rung, the parent remains one
+complete local identity with weight `1`; its direct child one octave below
+contributes `0.5`. The unfitted next-flow rule is therefore
+`v_parent + 0.5*v_child`. It is not divided by `1.5`. T338's
+`0.5*v_parent + 0.5*v_child` is retained as a named translation-error control.
+
+**Prediction:** the corrected rule must beat the T338 equal average,
+persistence and corrected broken-child-lineage controls in evaluation and the
+formula-correction holdout. Full support additionally requires beating local
+trend, surviving both activation streams and improving holdout direction over
+child-only flow.
+
+**Evidence boundary:** the source archive and T338 outcomes are already open.
+T339 is a prospectively frozen formula-correction replay, not a pristine
+data-blind new-domain test.
+
+**Frozen records:**
+`analysis/llm_training_dynamics/T339_LLM_TRAINING_PARENT_PLUS_CHILD_PROTOCOL_v1_FROZEN.md`
+(SHA-256 `591A88345849F9D7D4377A59BDA53E05B00549D6E91ADA12C77E06A15BE97F23`)
+and
+`T339_LLM_TRAINING_PARENT_PLUS_CHILD_CLAIM_PACKET_v1.md` (SHA-256
+`047D8F558AD1692E178E7C35FBAFC2318B421C8FE889EB915576B4A9FBCB8600`).
+
+**Result:** the literal `v_parent + 0.5*v_child_total` rule scored joint
+log-MAE `0.116751` in evaluation and `0.146464` in holdout. It was 33.88% and
+23.56% worse than T338's equal average, lost to local trend in both splits and
+lost slightly to persistence in holdout. It retained a tiny intact-lineage
+advantage and improved holdout direction over local flow, but failed G1, G2,
+G4 and G6, giving the frozen verdict **NOT SUPPORTED IN THIS FORM**.
+
+**Post-result reconciliation:** the measured layer flow was a total child
+signal already containing the parent common mode. Defining the child-specific
+identity as `C_specific=C_total-P` makes Dylan's scale rule exact:
+`P+0.5*C_specific = 0.5P+0.5C_total`. This reproduced the T338 equal-average
+prediction to maximum error `8.60e-16`. It is an exact algebraic
+re-expression, not a new predictive win, and requires a fresh prospective
+test. Report:
+`analysis/llm_training_dynamics/T339_LLM_TRAINING_PARENT_PLUS_CHILD_REPORT_2026-08-04.md`.
+
+### T338 - Pythia training Di-ARA child/parent forecast
+
+**REGISTERED:** 3 August 2026 after public-source/schema/integrity inspection
+but before opening activation trajectories, forecasts, errors, directions or
+capability associations | **STATUS: MIXED/PARTIAL; 15/15 INDEPENDENT
+VALIDATION CHECKS; ORIGINAL WORDING SUPERSEDED, NUMERICAL RULE RECONCILED
+POST-RESULT AS A RESIDUAL-CHILD FORM**
+
+**Translation-fidelity correction (4 August 2026):** T338 froze
+`0.5 child + 0.5 parent`, but Dylan clarified that the parent stays at weight
+`1` on its own measured rung while the one-rung-down child contributes `0.5`.
+T339 first retained the T338 computation as an equal-average control. After
+the literal corrected rule failed, an exact decomposition showed that T338's
+number is also `1 parent + 0.5 child-specific residual` whenever the measured
+layer flow already contains the parent mode. The original T338 wording did
+not define this residual and is not rewritten; its frozen result and verdict
+remain below, while the reconciliation is explicitly post-result.
+
+**Frozen identity as originally stated:** in each model layer, the median top-1 activation and
+median background activation across ten fixed sequences are two independent
+same-identity time cuts. For each stream, the exact reciprocal ARA coordinate
+is `x=2s/(1+s)` for successive-checkpoint ratio `s`. A fixed, unfitted next
+state forecast combines half the layer-child's last-three log-rung flow with
+half the model-parent's last-three across-layer flow. Phase ownership remains
+unassigned.
+
+**Prediction:** on middle-size evaluation models and untouched 2.8B/6.9B/12B
+size holdouts, the fixed ARA forecast should beat persistence and ordinary
+local trend, while intact layer lineage should beat a cyclic broken-lineage
+control. Both massive and background streams must survive separately.
+
+**Sources and exclusions:** raw arrays only from Hugging Face commit
+`c4c539ac4f8c8fc9694603895d00c1f1af940a20`; publisher fits/conclusions and
+official capability labels are excluded from the primary forecast. One
+malformed `pythia_1b_step0` file is excluded by frozen schema.
+
+**Frozen records:**
+`analysis/llm_training_dynamics/T338_LLM_TRAINING_DI_ARA_PROTOCOL_v1_FROZEN.md`
+(SHA-256 `8A908E8488169F3460F1FC7105BF6590D65BE341E4E832247FEE76F3730203C0`)
+and `T338_LLM_TRAINING_DI_ARA_CLAIM_PACKET_v1.md` (SHA-256
+`AF7759430D3DF537855A8A332A3A23A8AB66CAEBE545F9A9F709282D75B8FC50`).
+
+**Result:** on the untouched 2.8B/6.9B/12B size holdouts, ARA joint log-MAE
+was `0.118541`, beating persistence (`0.144781`), layer-only flow (`0.119794`),
+parent-only flow (`0.119962`) and broken lineage (`0.118927`), but losing to
+ordinary local trend (`0.115799`). Both top-1 and background cuts beat
+persistence. ARA direction was `0.776882`, above layer-only `0.763241` and
+local-trend `0.772972`. Evaluation ARA MAE was `0.087203`, beating all frozen
+controls. Thus parent/child coupling adds a modest directional signal, but the
+fixed equal handover is not the best large-model amplitude decoder. Primary
+report: `analysis/llm_training_dynamics/T338_LLM_TRAINING_DI_ARA_REPORT_2026-08-03.md`.
+
 ### T335 - River/thalweg Irrationality Di-ARA
 
 **REGISTERED:** 3 August 2026 after T333 and T334 established the candidate
