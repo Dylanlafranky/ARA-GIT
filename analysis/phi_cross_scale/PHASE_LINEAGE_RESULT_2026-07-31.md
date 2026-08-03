@@ -258,16 +258,19 @@ Therefore
 \boxed{\phi+\phi^{-2}=2}.
 \]
 
-On a unit-radius circle, a chord of length \(\phi\) subtends
-\(108^\circ\):
+T319 subsequently fixed the geometric normalization to a regular pentagon
+with side length `1`. The two-edge route has length `2`, while its direct
+same-phase diagonal has length \(\phi\). In that embedding the central/exterior
+step is \(72^\circ\), the interior angle is \(108^\circ\), and the Phi diagonal
+spans \(144^\circ\) at the centre:
 
 \[
-\phi=2\sin54^\circ=2\cos36^\circ.
+\phi=2\cos36^\circ.
 \]
 
-Its supplementary angle is \(72^\circ\), the pentagonal step. This joins the
-`36°` shear, `72°` pentagon, `108°` Phi chord and `0.382` handover seam in one
-conditional construction.
+A Phi-length chord in a separate unit-radius circle does subtend
+\(108^\circ\), but that is not the same normalization as the side-one
+pentagon. The earlier record conflated these embeddings.
 
 These identities are exact mathematics once the diameter/closure is
 normalized to `2`. Interpreting the chord as a literal physical cross-rung
@@ -277,6 +280,55 @@ fivefold pillar scaffold.
 
 The full proposal and its falsifier are recorded in
 `EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`.
+
+The exact construction passed `13/13` frozen gates and `23/23` independent
+validation checks. Its report is
+`T319_PENTAGON_PHI_PILLAR_GEOMETRY_REPORT_2026-07-31.md`.
+
+## Q58 physical cross-domain follow-up: the constant pillar did not survive
+
+Q58 subsequently tested the same-phase vertical-pillar idea in the public Q42
+quantum simulator archives. It held the local ARA coordinate fixed across nine
+points and compared unnormalised parent Phase A with child Phase A, then
+parent Phase B with child Phase B.
+
+That empirical operationalization did **not** reproduce a constant Phi ratio.
+Only `1/9` to `2/9` cells per archive/phase were inside `Phi ± 0.08`, and the
+cross-archive profiles missed the frozen replication gate. It did reproduce a
+directed cross-tier relation: parent magnitude exceeded child magnitude in all
+`36/36` cells, with the ratio changing over the ARA coordinate. Phase A at the
+low boundary `x=0.2` was locally Phi-like in both archives, but this did not
+extend to the complete grid or to a common Phase-B location.
+
+This sharpens the boundary of the scale-lineage result. The sunflower
+recurrence and side-one pentagon construction establish the golden-ratio
+crosswalk in those defined geometries; they do not imply that every measured
+same-phase parent/child magnitude ratio is a constant Phi. Full Q58 report:
+`../quantum/Q58_SAME_GRADIENT_VERTICAL_PHI_PILLAR_REPORT_2026-07-31.md`.
+
+## Q59 directional follow-up: the pentagonal screw did not survive controls
+
+Q59 then tested the directional version of the proposal instead of another
+magnitude ratio. It fixed the same nine local ARA coordinates and measured
+the Frobenius angle between full parent and child connected-correlation
+matrices. Greedy calibration selected the predeclared `72°` pentagon-edge
+route over `144°`; the choice and handedness model were hashed before Landmax
+was loaded.
+
+Landmax whole-grid medians were approximately `80.26°` (Phase A) and
+`80.43°` (Phase B). Although `72°` was nominally their nearest registered
+landmark, only `2/9` and `4/9` cells entered `72° ± 8°`, the signed screw had
+`0/18` cells within tolerance, wrong-phase comparisons were slightly closer,
+and a family-label null was at least as target-like (`p=0.822`). The unsigned
+curve replicated across archives, but it is a broad near-quarter-turn
+correlation-space separation rather than specific evidence for the regular
+pentagon scaffold.
+
+Together Q58 and Q59 leave the exact sunflower recurrence and regular
+pentagon construction intact as mathematical crosswalks while rejecting both
+a universal constant-Phi magnitude pillar and this fixed 72°/144° quantum
+directional translation. Full Q59 report:
+`../quantum/Q59_CROSS_RUNG_PENTAGONAL_TWIST_REPORT_2026-08-01.md`.
 
 ## What remains unproven
 

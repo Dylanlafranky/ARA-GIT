@@ -1,0 +1,609 @@
+{
+  "test": "T324 spatial-octave observer-source",
+  "date": "2026-08-01",
+  "protocol": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\phi_observer_source\\T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "8ebd264266be933f2060b460c67301eb09d532ff80b416e3587bc45edd3c8f0d",
+  "source": {
+    "file": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\phi_observer_source\\data\\qu_kemar_anechoic_radius_0.5_1_2_3_m.sofa",
+    "sha256": "4d11740336d936ad129473029fadce5320f7455f0475634fed4d5519b2878a42",
+    "shape_flat": [
+      1440,
+      2,
+      2048
+    ],
+    "shape_matched": [
+      360,
+      4,
+      2,
+      2048
+    ],
+    "sampling_rate_hz": 44100.0,
+    "directions": 360,
+    "ears": 2,
+    "samples": 2048,
+    "radii_m": [
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "data_delay_shape": [
+      1,
+      2
+    ],
+    "data_delay_units": "unspecified",
+    "data_delay_min": 0.0,
+    "data_delay_max": 0.0,
+    "measurement_audio_latency_present": false,
+    "database": "TU Berlin",
+    "listener": "KEMAR",
+    "room_type": "free field",
+    "license": "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license",
+    "reference": "H. Wierstorf, M. Geier, A. Raake, and S. Spors, \"A free database of head-related impulse response measurements in the horizontal plane with multiple distances,\" in 130th Convention of the Audio Engineering Society (AES), 2011, ebrief 6"
+  },
+  "frozen_parameters": {
+    "radii_m": [
+      0.5,
+      1.0,
+      2.0,
+      3.0
+    ],
+    "frequency_band_hz": [
+      500.0,
+      8000.0
+    ],
+    "magnitude_floor_fraction": 0.01,
+    "phase_floor_rad": 0.05,
+    "minimum_bins_per_path": 8,
+    "cluster_bootstrap_samples": 5000,
+    "phi": 1.618033988749895,
+    "angle_targets_deg": {
+      "direct": 0.0,
+      "thirty": 30.0,
+      "phi": 36.0,
+      "ordinary_octave": 45.0,
+      "phi_reversed": 54.0,
+      "ridge_half": 60.0,
+      "perpendicular": 90.0
+    },
+    "non_octave_targets_deg": {
+      "ordinary_non_octave": 26.56505117707799,
+      "phi": 36.0,
+      "ordinary_octave": 45.0,
+      "phi_reversed": 54.0
+    }
+  },
+  "analytic_free_field_null": {
+    "angles_deg": {
+      "0.5_to_1": 45.0,
+      "1_to_2": 45.0,
+      "2_to_3": 26.56505117707799
+    },
+    "median_rho": 2.0,
+    "median_eta": 1.0
+  },
+  "arrival_time_audit": {
+    "peak_sample_by_radius_m": {
+      "0.5": 64.0,
+      "1.0": 68.0,
+      "2.0": 68.0,
+      "3.0": 73.0
+    },
+    "ten_percent_onset_sample_by_radius_m": {
+      "0.5": 53.0,
+      "1.0": 57.0,
+      "2.0": 56.0,
+      "3.0": 62.0
+    },
+    "median_matched_peak_increment_samples": {
+      "0.5_to_1": 4.0,
+      "1_to_2": 0.0,
+      "2_to_3": 5.0
+    },
+    "median_matched_onset_increment_samples": {
+      "0.5_to_1": 4.0,
+      "1_to_2": 0.0,
+      "2_to_3": 5.0
+    },
+    "expected_free_field_increment_samples_at_343mps": {
+      "0.5_to_1": 64.28571428571428,
+      "1_to_2": 128.57142857142856,
+      "2_to_3": 128.57142857142856
+    },
+    "interpretation": "The stored responses keep arrivals in nearly the same sample region across radii; they do not retain the literal free-field time-of-flight increments."
+  },
+  "angle_summaries": {
+    "0.5_to_1": {
+      "paths": 720,
+      "excluded_paths": 0,
+      "events": 249225,
+      "median_event_angle_deg": 2.6860268190226155,
+      "median_free_path_angle_deg": 2.437681374042104,
+      "median_event_ara_x": 1.9978026669686413,
+      "median_target_losses": {
+        "direct": 2.623159566418927,
+        "thirty": 27.57898774336836,
+        "phi": 33.57608097522733,
+        "ordinary_octave": 42.573171713046335,
+        "phi_reversed": 51.571277717470366,
+        "ridge_half": 57.57034400728722,
+        "perpendicular": 87.56759461787604
+      },
+      "closest_loss_target": "direct",
+      "closest_free_target": "direct",
+      "phi_target_comparisons": {
+        "direct": {
+          "source_directions": 360,
+          "median_difference": 31.04021183775433,
+          "ci95_low": 30.931451636327942,
+          "ci95_high": 31.109409924128354
+        },
+        "thirty": {
+          "source_directions": 360,
+          "median_difference": 5.997080295568362,
+          "ci95_low": 5.996836407313163,
+          "ci95_high": 5.997341796490387
+        },
+        "ordinary_octave": {
+          "source_directions": 360,
+          "median_difference": -8.997175252190859,
+          "ci95_low": -8.997420261213836,
+          "ci95_high": -8.996944599694334
+        },
+        "phi_reversed": {
+          "source_directions": 360,
+          "median_difference": -17.995342647022643,
+          "ci95_low": -17.99573490030337,
+          "ci95_high": -17.99496107056448
+        },
+        "ridge_half": {
+          "source_directions": 360,
+          "median_difference": -23.994441040872275,
+          "ci95_low": -23.9949134996752,
+          "ci95_high": -23.993987253434568
+        },
+        "perpendicular": {
+          "source_directions": 360,
+          "median_difference": -53.99178809981606,
+          "ci95_low": -53.992476632401576,
+          "ci95_high": -53.99114418044186
+        }
+      },
+      "observed_phi_minus_broken": {
+        "source_directions": 360,
+        "median_difference": 0.0005630940960088537,
+        "ci95_low": -0.0011787258386291464,
+        "ci95_high": 0.0032898945220765086
+      },
+      "quadrant_counts": {
+        "++": 0,
+        "+-": 0,
+        "-+": 25499,
+        "--": 223726
+      },
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_free_angle_deg": 2.472299679545814,
+          "closest_free_target_36_45_54": "phi"
+        },
+        "1": {
+          "paths": 360,
+          "median_free_angle_deg": 2.414043147393004,
+          "closest_free_target_36_45_54": "phi"
+        }
+      }
+    },
+    "1_to_2": {
+      "paths": 720,
+      "excluded_paths": 0,
+      "events": 237000,
+      "median_event_angle_deg": 0.5100711751288562,
+      "median_free_path_angle_deg": 0.45623268671138995,
+      "median_event_ara_x": 1.999920747416178,
+      "median_target_losses": {
+        "direct": 0.5395704025881041,
+        "thirty": 29.54487000587544,
+        "phi": 35.54470347552224,
+        "ordinary_octave": 44.544537795554206,
+        "phi_reversed": 53.544427811763015,
+        "ridge_half": 59.54436898172993,
+        "perpendicular": 89.54416740457289
+      },
+      "closest_loss_target": "direct",
+      "closest_free_target": "direct",
+      "phi_target_comparisons": {
+        "direct": {
+          "source_directions": 360,
+          "median_difference": 35.00554058305937,
+          "ci95_low": 34.97012830531857,
+          "ci95_high": 35.03863991033482
+        },
+        "thirty": {
+          "source_directions": 360,
+          "median_difference": 5.999803147187436,
+          "ci95_low": 5.999774919294986,
+          "ci95_high": 5.999822857461566
+        },
+        "ordinary_octave": {
+          "source_directions": 360,
+          "median_difference": -8.999804168232819,
+          "ci95_low": -8.999821981763247,
+          "ci95_high": -8.99977058250558
+        },
+        "phi_reversed": {
+          "source_directions": 360,
+          "median_difference": -17.999674177454292,
+          "ci95_low": -17.99970583183849,
+          "ci95_high": -17.999617966339006
+        },
+        "ridge_half": {
+          "source_directions": 360,
+          "median_difference": -23.999609350398885,
+          "ci95_low": -23.999648127482075,
+          "ci95_high": -23.999556367776773
+        },
+        "perpendicular": {
+          "source_directions": 360,
+          "median_difference": -53.99941553944282,
+          "ci95_low": -53.999472135052706,
+          "ci95_high": -53.99933711697544
+        }
+      },
+      "observed_phi_minus_broken": {
+        "source_directions": 360,
+        "median_difference": 0.0004424767675121899,
+        "ci95_low": -0.003562923797082007,
+        "ci95_high": 0.008540984560124087
+      },
+      "quadrant_counts": {
+        "++": 0,
+        "+-": 0,
+        "-+": 210335,
+        "--": 26665
+      },
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_free_angle_deg": 0.4617820036194846,
+          "closest_free_target_36_45_54": "phi"
+        },
+        "1": {
+          "paths": 360,
+          "median_free_angle_deg": 0.43389750943994376,
+          "closest_free_target_36_45_54": "phi"
+        }
+      }
+    },
+    "2_to_3": {
+      "paths": 720,
+      "excluded_paths": 0,
+      "events": 250314,
+      "median_event_angle_deg": 4.046675644477291,
+      "median_free_path_angle_deg": 5.402530027634093,
+      "median_event_ara_x": 1.9950137851640086,
+      "median_target_losses": {
+        "ordinary_non_octave": 21.74142469276569,
+        "phi": 30.96710697087945,
+        "ordinary_octave": 39.897435050973684,
+        "phi_reversed": 48.839583348696166
+      },
+      "closest_loss_target": "ordinary_non_octave",
+      "closest_free_target": "ordinary_non_octave",
+      "phi_target_comparisons": {
+        "ordinary_non_octave": {
+          "source_directions": 360,
+          "median_difference": 9.206569998809735,
+          "ci95_low": 9.100528441614562,
+          "ci95_high": 9.297506517542129
+        },
+        "ordinary_octave": {
+          "source_directions": 360,
+          "median_difference": -8.886763688879505,
+          "ci95_low": -8.9289405517127,
+          "ci95_high": -8.82956590813046
+        },
+        "phi_reversed": {
+          "source_directions": 360,
+          "median_difference": -17.818689967238075,
+          "ci95_low": -17.88442746943695,
+          "ci95_high": -17.72291143952611
+        }
+      },
+      "observed_phi_minus_broken": {
+        "source_directions": 360,
+        "median_difference": -0.00112904882173126,
+        "ci95_low": -0.006818402995877548,
+        "ci95_high": 0.004105726538210064
+      },
+      "quadrant_counts": {
+        "++": 0,
+        "+-": 0,
+        "-+": 89650,
+        "--": 160664
+      },
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_free_angle_deg": 5.4230894346097624,
+          "closest_free_target_36_45_54": "phi"
+        },
+        "1": {
+          "paths": 360,
+          "median_free_angle_deg": 5.379820018040478,
+          "closest_free_target_36_45_54": "phi"
+        }
+      }
+    }
+  },
+  "ratio_summary": {
+    "paths": 720,
+    "excluded_rho_paths": 0,
+    "excluded_eta_paths": 0,
+    "rho_events": 235926,
+    "eta_events": 236786,
+    "median_event_rho": 0.22769092259634402,
+    "median_path_rho": 0.15246709625177804,
+    "rho_closest_target": "phi",
+    "rho_phi_minus_two_log_loss": {
+      "source_directions": 360,
+      "median_difference": -0.21193535550034182,
+      "ci95_low": -0.21193535550034182,
+      "ci95_high": -0.21193535550034182
+    },
+    "median_event_eta": 7.2521167685650845,
+    "median_path_eta": 10.694460885269006,
+    "eta_closest_target": "two",
+    "per_ear": {
+      "0": {
+        "paths": 360,
+        "median_rho": 0.14569030045528153,
+        "rho_closest_target": "phi",
+        "phi_minus_two_log_loss": {
+          "source_directions": 360,
+          "median_difference": -0.21193535550034204,
+          "ci95_low": -0.21193535550034204,
+          "ci95_high": -0.2119353555003416
+        },
+        "median_eta": 11.037638134634793,
+        "eta_closest_target": "two"
+      },
+      "1": {
+        "paths": 360,
+        "median_rho": 0.1604554665846712,
+        "rho_closest_target": "phi",
+        "phi_minus_two_log_loss": {
+          "source_directions": 360,
+          "median_difference": -0.2119353555003416,
+          "ci95_low": -0.21193535550034204,
+          "ci95_high": -0.2119353555003416
+        },
+        "median_eta": 9.529338866973085,
+        "eta_closest_target": "two"
+      }
+    }
+  },
+  "timing_sensitivity": {
+    "0.5_to_1": {
+      "paths": 720,
+      "excluded_paths": 0,
+      "events": 249225,
+      "median_event_angle_deg": 2.6860268190226155,
+      "median_free_path_angle_deg": 2.437681374042104,
+      "median_event_ara_x": 1.9978026669686413,
+      "median_target_losses": {
+        "direct": 2.623159566418927,
+        "thirty": 27.57898774336836,
+        "phi": 33.57608097522733,
+        "ordinary_octave": 42.573171713046335,
+        "phi_reversed": 51.571277717470366,
+        "ridge_half": 57.57034400728722,
+        "perpendicular": 87.56759461787604
+      },
+      "closest_loss_target": "direct",
+      "closest_free_target": "direct",
+      "phi_target_comparisons": {
+        "direct": {
+          "source_directions": 360,
+          "median_difference": 31.04021183775433,
+          "ci95_low": 30.93643502055207,
+          "ci95_high": 31.109942823195755
+        },
+        "thirty": {
+          "source_directions": 360,
+          "median_difference": 5.997080295568362,
+          "ci95_low": 5.996836407313163,
+          "ci95_high": 5.997328425456806
+        },
+        "ordinary_octave": {
+          "source_directions": 360,
+          "median_difference": -8.997175252190859,
+          "ci95_low": -8.997420261213836,
+          "ci95_high": -8.99694817523648
+        },
+        "phi_reversed": {
+          "source_directions": 360,
+          "median_difference": -17.995342647022643,
+          "ci95_low": -17.99573153848692,
+          "ci95_high": -17.994977898271053
+        },
+        "ridge_half": {
+          "source_directions": 360,
+          "median_difference": -23.994441040872275,
+          "ci95_low": -23.9949134996752,
+          "ci95_high": -23.99398782306775
+        },
+        "perpendicular": {
+          "source_directions": 360,
+          "median_difference": -53.99178809981606,
+          "ci95_low": -53.99247988662097,
+          "ci95_high": -53.99113045013252
+        }
+      },
+      "observed_phi_minus_broken": {
+        "source_directions": 360,
+        "median_difference": 0.0005630940960088537,
+        "ci95_low": -0.001130569676348614,
+        "ci95_high": 0.0031566557270247876
+      },
+      "quadrant_counts": {
+        "++": 0,
+        "+-": 0,
+        "-+": 25499,
+        "--": 223726
+      },
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_free_angle_deg": 2.472299679545814,
+          "closest_free_target_36_45_54": "phi"
+        },
+        "1": {
+          "paths": 360,
+          "median_free_angle_deg": 2.414043147393004,
+          "closest_free_target_36_45_54": "phi"
+        }
+      }
+    },
+    "1_to_2": {
+      "paths": 720,
+      "excluded_paths": 0,
+      "events": 237000,
+      "median_event_angle_deg": 0.5100711751288562,
+      "median_free_path_angle_deg": 0.45623268671138995,
+      "median_event_ara_x": 1.999920747416178,
+      "median_target_losses": {
+        "direct": 0.5395704025881041,
+        "thirty": 29.54487000587544,
+        "phi": 35.54470347552224,
+        "ordinary_octave": 44.544537795554206,
+        "phi_reversed": 53.544427811763015,
+        "ridge_half": 59.54436898172993,
+        "perpendicular": 89.54416740457289
+      },
+      "closest_loss_target": "direct",
+      "closest_free_target": "direct",
+      "phi_target_comparisons": {
+        "direct": {
+          "source_directions": 360,
+          "median_difference": 35.00554058305937,
+          "ci95_low": 34.97036591365779,
+          "ci95_high": 35.038630586714675
+        },
+        "thirty": {
+          "source_directions": 360,
+          "median_difference": 5.999803147187436,
+          "ci95_low": 5.9997764663018955,
+          "ci95_high": 5.999823097419146
+        },
+        "ordinary_octave": {
+          "source_directions": 360,
+          "median_difference": -8.999804168232819,
+          "ci95_low": -8.999821518261486,
+          "ci95_high": -8.999777613982168
+        },
+        "phi_reversed": {
+          "source_directions": 360,
+          "median_difference": -17.999674177454292,
+          "ci95_low": -17.99970297061615,
+          "ci95_high": -17.999629896364137
+        },
+        "ridge_half": {
+          "source_directions": 360,
+          "median_difference": -23.999609350398885,
+          "ci95_low": -23.999648127482075,
+          "ci95_high": -23.99954195001314
+        },
+        "perpendicular": {
+          "source_directions": 360,
+          "median_difference": -53.99941553944282,
+          "ci95_low": -53.99946817797941,
+          "ci95_high": -53.999320435744615
+        }
+      },
+      "observed_phi_minus_broken": {
+        "source_directions": 360,
+        "median_difference": 0.0004424767675121899,
+        "ci95_low": -0.0037367213174341884,
+        "ci95_high": 0.009346887287881245
+      },
+      "quadrant_counts": {
+        "++": 0,
+        "+-": 0,
+        "-+": 210335,
+        "--": 26665
+      },
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_free_angle_deg": 0.4617820036194846,
+          "closest_free_target_36_45_54": "phi"
+        },
+        "1": {
+          "paths": 360,
+          "median_free_angle_deg": 0.43389750943994376,
+          "closest_free_target_36_45_54": "phi"
+        }
+      }
+    },
+    "ratios": {
+      "paths": 720,
+      "excluded_rho_paths": 0,
+      "excluded_eta_paths": 0,
+      "rho_events": 235926,
+      "eta_events": 236786,
+      "median_event_rho": 0.22769092259634402,
+      "median_path_rho": 0.15246709625177804,
+      "rho_closest_target": "phi",
+      "rho_phi_minus_two_log_loss": {
+        "source_directions": 360,
+        "median_difference": -0.21193535550034182,
+        "ci95_low": -0.21193535550034182,
+        "ci95_high": -0.21193535550034182
+      },
+      "median_event_eta": 7.2521167685650845,
+      "median_path_eta": 10.694460885269006,
+      "eta_closest_target": "two",
+      "per_ear": {
+        "0": {
+          "paths": 360,
+          "median_rho": 0.14569030045528153,
+          "rho_closest_target": "phi",
+          "phi_minus_two_log_loss": {
+            "source_directions": 360,
+            "median_difference": -0.21193535550034204,
+            "ci95_low": -0.21193535550034204,
+            "ci95_high": -0.2119353555003416
+          },
+          "median_eta": 11.037638134634793,
+          "eta_closest_target": "two"
+        },
+        "1": {
+          "paths": 360,
+          "median_rho": 0.1604554665846712,
+          "rho_closest_target": "phi",
+          "phi_minus_two_log_loss": {
+            "source_directions": 360,
+            "median_difference": -0.2119353555003416,
+            "ci95_low": -0.21193535550034204,
+            "ci95_high": -0.2119353555003416
+          },
+          "median_eta": 9.529338866973085,
+          "eta_closest_target": "two"
+        }
+      }
+    }
+  },
+  "verdict": {
+    "gates": {
+      "G1_phi_angle_specificity": false,
+      "G2_repeated_free_angle_location": true,
+      "G3_relation_control": false,
+      "G4_offset_invariant_phi_scaling": true,
+      "G5_non_octave_and_timing_robustness": false
+    },
+    "passed": 2,
+    "total": 5,
+    "verdict": "NOT SUPPORTED"
+  }
+}

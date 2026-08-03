@@ -1,5 +1,234 @@
 # Claims Status
 
+> **T334 BUBBLE OCTAVE-RELATIVE IRRATIONALITY QUADRANT (3 AUGUST
+> 2026): FOUR-QUADRANT GEOMETRY AND RECIPROCAL BREATH SUPPORTED;
+> UNIVERSAL PHI AND ONE STABLE ORDERED OPERATOR NOT SUPPORTED.** T334 reused
+> the public Pandey et al. bubble archive but froze a new question before
+> calculating endpoints. The known raw factor-two Vertical-ARA climb was
+> treated as the carrier, and its residual `u=s/2` was crossed with signed
+> turning direction. All four contraction/expansion x reverse/forward sectors
+> exceeded 18% in strict holdout. Pooled residual endpoints were
+> `0.867331 <-> 1.191348` in evaluation and
+> `0.784672 <-> 1.223070` in holdout, with products `1.033293` and
+> `0.959709`. A calibration-only reciprocal scale `alpha=1.205287`
+> transferred better than every frozen fixed candidate; neither Phi nor
+> T333's qutrit scale was universal. Intact bubble identity beat broken
+> lineage strongly in both untouched splits, but temporal ordering beat all
+> `500` shuffles only in evaluation (`p=0.001996`) and failed holdout
+> (`p=0.658683`). Verdict: **SUPPORTED** as a cross-domain ARA coordinate and
+> identity-preserving reciprocal closure; **NOT SUPPORTED** as one universal
+> constant or chronological operator. Independent validation passed `17/17`
+> checks. Report:
+> `analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`.
+
+> **T333 RECORDED-QUTRIT RECIPROCAL RADIAL BREATHING (3 AUGUST 2026):
+> UNIVERSAL `1/PHI <-> PHI` ENDPOINTS NOT SUPPORTED; A STABLE
+> IDENTITY-SPECIFIC RECIPROCAL RADIAL COORDINATE IS PRESENT.** T333 froze the
+> reciprocal-golden prediction raised by T307 on Q53's real
+> `53,459,987`-measurement trapped-qutrit record. All three fixed sphere cuts
+> occupied all four contraction/expansion x forward/reverse quadrants. The
+> primary fitted-circle centre recovered `0.552668 <-> 1.808822` in
+> calibration and `0.553331 <-> 1.806922` on holdout, with reciprocal products
+> `0.999678` and `0.999826`. Exact Phi won only `3/21` primary cells; octave
+> was closer in `18/21`, and the calibration-fitted `alpha=1.809114` scored
+> `0.002251` on holdout versus Phi's `0.221000`. The real temporal order was
+> nevertheless non-random in this coordinate: every cut and the pooled record
+> beat all `500` blockwise shuffles (`p=0.001996`). Centroid and extrema
+> sensitivities moved Phi-ward to approximately `0.5894 <-> 1.699` and chose
+> Phi in `21/21` cells each, but they derive from the same circuits, remain
+> numerically off exact Phi, and cannot replace the frozen primary centre.
+> Verdict: **NOT SUPPORTED** under the frozen rule; the complex radial/phase
+> geometry and an identity/estimator-specific reciprocal breath survive.
+> Independent validation passed `14/14` checks. Report:
+> `analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`.
+
+> **T332 Information³ zipper at bubble-merger closure (3 August 2026): NOT
+> SUPPORTED IN THIS DIRECTIONAL-FREEDOM CUT.** T332 reused all `91`
+> independently accepted T329 two-child-to-one-parent seams and froze
+> `Z = F_child - F_parent` before scoring. Positive `Z` meant that the two
+> incoming child directions compressed into less immediate parent turning.
+> Evaluation was effectively neutral (mean `+0.011904`, whole-video 95% CI
+> `[-0.119230,+0.125039]`) and holdout reversed (`-0.158769`). The parent was
+> not more stable than the inherited child's preceding ordinary turn, and
+> child freedom did not predict parent freedom against within-video cyclic
+> shifts. The full ordered zipper could not be tested because only three
+> lineages merged again. A post-result forcing split leaned positive at low
+> settings and negative at high settings, but all intervals crossed zero and
+> forcing is confounded with the frozen splits. This rejects a universal local
+> contraction in the chosen coordinate; it does not reject every possible
+> Information³ closure coordinate. Independent validation passed `25/25`
+> checks with zero metric-recalculation error. Report:
+> `analysis/vertical_ara_bubbles/T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_REPORT_2026-08-03.md`.
+
+> **Q60 Ramsey vertical-Phi phase advance (3 August 2026): NOT SUPPORTED;
+> THE REPEATED COMPLETE-SWEEP PHASE IS PERSISTENT, NOT A `2/PHI` CARRIER.**
+> Q60 treated each raw `126`-delay Ramsey interference sweep as one complete
+> repeated phase identity and recovered its position on the native ARA
+> `0..2` phase circle without relabelling detector `I/Q` as Bloch axes. All
+> six averaged waveforms passed quality control and supplied `2,000` raw
+> phases each. The calibration-fitted step was `0.000256`. On untouched
+> evaluation, persistence loss was `0.207843` versus Phi `0.715688`; on
+> chronological holdout it was `0.398358` versus `0.584061`. Bootstrap
+> phase-step intervals sat at the `0/2` seam and excluded `2/phi`. Real order
+> did not pass shuffle/broken-lineage gates, and persistence won the
+> Fibonacci-lag score. The result rejects a universal Phi jump from one
+> complete Ramsey sweep to the next; it does not test within-sweep,
+> cross-scale or measurement-strength-dependent Phi. Independent validation
+> passed `70/70` checks. Report:
+> `analysis/quantum/Q60_RAMSEY_VERTICAL_PHI_PHASE_ADVANCE_REPORT_2026-08-03.md`.
+
+> **Ridge-centred Phi circle-train derivation (2 August 2026): EXACT FOR THE
+> DECLARED GEOMETRY; THE FIRST INDEPENDENT PHYSICAL TESTS DID NOT REPLICATE OR
+> SUPPORT THE FROZEN EMPIRICAL OPERATOR.** The mirrored Phi endpoints
+> `[2-phi,phi]` form a circle centred at the ARA ridge `1`, with diameter
+> `2/phi` and radius `1/phi`. Repeating it tangentially against the standard
+> period-`2` ARA circle train gives an irrational relative phase step of
+> `1/phi`, so exact finite closure is impossible and Fibonacci counts generate
+> near-returns. On an eighth grid the endpoints become the symmetric rational
+> approximation `(3/8,13/8)`, with equal error `0.00696601125...`. This is a
+> mathematical mechanism for the proposed moving-Phi / cooled-`3/8`
+> distinction, not empirical proof that physical systems use it. T325 found a
+> `3/8` child / Phi parent split in one already-open Arabidopsis source, but
+> T326 did not replicate that split in 196 independent plants: `1/e` won the
+> child score, `8/21` won the parent score, and true order did not beat 10,000
+> shuffles (`p=0.19808`). T327 then applied the same frozen operator directly
+> to a 33-slice flume thalweg and all 40 matched downstream-ordered elevation
+> paths. Persistence won both local and parent scores, real thalweg order did
+> not beat shuffling (`p=0.55094`), and the thalweg ranked `16/41` for Phi.
+> Exact Phi versus `8/21` became resolvable by horizon 13, so the river result
+> is a genuine negative rather than a local-resolution escape. The exact
+> circle-train mathematics survives; a domain-general physical carrier does
+> not currently have empirical support. Independent validation passed `89/89`
+> joint checks.
+> Canonical record: `TWO_RULERS_PHI_AND_TWO.md`; formal statement:
+> `ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`, Theorem 9.3.
+
+> **T328 direct bubble-direction Phi circle train (2 August 2026): PARTIAL /
+> MIXED; RETURN FINGERPRINT ONLY, NOT A PARENT CARRIER.** The exact frozen
+> operator `x[n+1]=(x[n]+2/phi) mod 2` was applied to raw one-frame movement
+> headings from `170` evaluation and `40` strict-holdout uninterrupted bubble
+> lineages. Persistence won both the local and unreanchored parent scores in
+> calibration, evaluation and holdout. Recorded order did not beat 10,000
+> turn-order shuffles (`p=0.49045` evaluation; `p=0.68243` holdout), and the
+> real-lineage advantage over broken lineages was not significant. Phi did
+> win the predeclared Fibonacci-lag return score in all three splits. A
+> post-result sensitivity audit found lower return error than `8/21` in both
+> evaluation and holdout, but not a cluster-secure advantage over persistence.
+> Median directional grain was `0.04338` ARA; Phi-versus-`8/21` separation
+> remained below it even at horizon `21`. Observed returns did not shrink
+> toward zero at the larger Fibonacci lags, so the Phi win is a fixed-template
+> ranking clue rather than an observed near-closure sequence. The result
+> rejects the proposed direct directional carrier in this observable and
+> withholds exact-Phi recovery. Independent
+> validation passed `107/107` checks with zero recomputation error. Report:
+> `analysis/vertical_ara_bubbles/T328_PHI_CIRCLE_TRAIN_BUBBLES_REPORT_2026-08-02.md`.
+
+> **T329 independently detected binary-merger Phi seam (2 August 2026): NOT
+> SUPPORTED; PERSISTENCE DOMINATES ACTUAL HANDOVERS.** The test used only
+> previously frozen primary two-child-to-one-parent events where one released
+> child ID continued exactly as the parent ID. The inherited bubble's raw
+> direction immediately before and after the merger supplied the same-phase
+> seam; left/right orientation was fixed by the observed side of the joining
+> child, without Phi or outcome-based sign selection. Among `52` evaluation
+> seams, persistence mean loss was `0.286706` versus Phi `0.651495`;
+> Phi-minus-persistence was `+0.364789` with 95% whole-video interval
+> `[+0.229724,+0.503693]`. Persistence also won the `16`-event underpowered
+> holdout. Real seams did not beat broken lineages, contact-side scrambling or
+> the inherited track's preceding ordinary turn. Exact Phi lost narrowly but
+> consistently to `26/21` in evaluation, while source grain was too coarse to
+> distinguish those constants directly. The three-part contact decomposition
+> closed exactly as bookkeeping, but no Phi-specific physical seam appeared.
+> Only three repeated primary merger lineages existed, so the multi-handover
+> Fibonacci-return claim remains untested. Independent validation passed
+> `22/22` checks. Report:
+> `analysis/vertical_ara_bubbles/T329_ACTUAL_HANDOVER_PHI_SEAM_REPORT_2026-08-02.md`.
+
+> **Vertical ARA direct bubble-handover Phi area-ratio test (1 August
+> 2026): NOT SUPPORTED IN THIS POPULATION; THE TEMPORAL-HANDOVER COORDINATE
+> WAS NOT TESTED.** A detector frozen without Phi or outcome terms recovered
+> direct two-child-to-one-parent lineages from 35 public 50 fps quasi-2D
+> fluidized-bed runs. Strict, primary and broad rules found `14`, `103` and
+> `249` total families, but none placed both registered vertical legs within
+> 20% of Phi. Primary evaluation child-area ratios ranged from `4.335` to
+> `263.346` (median `31.987`), while parent/larger-child stayed near one
+> (median `0.982`): the sampled events were mostly asymmetric absorptions.
+> Holdout circularity tension associated with asymmetry (`rho=0.4491`,
+> blocked `p=0.02559`), but every target from 1 through 2 produced the exact
+> same ranking, so this is not Phi-specific. Settling and persistence failed
+> their frozen directions. The result rejects Phi as the distinguished 2D
+> area ratio in this dataset; it does not reject Vertical ARA as same-lineage
+> recurrence, nor the separate claim that time carries the same branch
+> through successive slices. Report:
+> `analysis/vertical_ara_bubbles/VERTICAL_ARA_BUBBLE_HANDOVER_RESULT_2026-08-01.md`.
+
+> **Quantum cross-rung pentagonal-twist test (Q59, 1 August 2026): FIXED
+> 72°/144° SCREW NOT SUPPORTED; REPRODUCIBLE HIGH-ANGLE SEPARATION REMAINS
+> DESCRIPTIVE.** Q59 retained the full directional information discarded by
+> Q58's magnitude ratio. At each fixed local ARA coordinate it measured the
+> Frobenius angle between the Q42 `one-turn-15` parent and `two-turn-7.5`
+> child connected-correlation matrices, separately for Phase A and Phase B.
+> Greedy calibration selected the predeclared `72°` pentagon-edge target over
+> `144°` and locked a signed screw model before Landmax was loaded.
+>
+> Landmax whole-grid medians were `80.26276°` (A) and `80.42711°` (B), with
+> seed-bootstrap intervals `76.60482°–83.79490°` and
+> `76.26653°–83.57440°`. Although `72°` was nominally the nearest registered
+> whole-grid landmark, only `2/9` and `4/9` cells entered the frozen
+> `72° ± 8°` band. The locked handedness failed (`0/18` cells within `10°`;
+> `57.8667°` mean circular error), wrong-phase comparisons were slightly
+> closer to `72°` than same-phase, and the family-label null was more
+> 72°-like (`p=0.822`). Cross-archive unsigned curves did replicate within
+> `5.16135°` (A) and `8.82279°` (B), but this broad near-quarter-turn
+> separation is not specific evidence for a pentagonal handover. Independent
+> validation passed every deterministic and Monte Carlo-distribution check.
+> Report:
+> `analysis/quantum/Q59_CROSS_RUNG_PENTAGONAL_TWIST_REPORT_2026-08-01.md`.
+
+> **Quantum matched-gradient same-phase vertical Phi-pillar test (Q58,
+> 31 July 2026): CONSTANT PHI PILLAR NOT SUPPORTED; DIRECTED,
+> GRADIENT-DEPENDENT PARENT/CHILD SEPARATION SUPPORTED.** Q58 fixed the local
+> ARA coordinate at `x=0.2,0.4,...,1.8` and compared unnormalised
+> connected-correlation magnitude vertically from the Q42 `one-turn-15`
+> parent family to the `two-turn-7.5` child family. It tested Phase A against
+> Phase A and Phase B against Phase B, without the ridge compression that made
+> Q57A return `1 + 0.5` by construction.
+>
+> The exact Phi claim failed: only `1/9` to `2/9` fixed-grid cells per
+> archive/phase fell inside `Phi ± 0.08`; mean absolute Phi errors were
+> `0.135486–0.249441`; and cross-archive grid errors (`0.084187` A,
+> `0.164071` B) missed the frozen `0.08` gate. Family-label permutations did
+> not show unusual Phi proximity.
+>
+> A narrower relation survived cleanly. Parent magnitude exceeded child
+> magnitude in all `36/36` archive–phase–coordinate cells, but the ratio bent
+> across the ARA coordinate instead of remaining constant. Phase A at
+> `x=0.2` was locally Phi-like in both archives (`1.64305`, `1.60213`), which
+> is a predeclared-grid observation suitable for a new boundary-localisation
+> test, not a rescued universal claim. Whole-grid medians were post-hoc
+> nearest `sqrt(3)`, but the curves were not flat and no `sqrt(3)` law is
+> claimed. Independent validation passed all checks. Report:
+> `analysis/quantum/Q58_SAME_GRADIENT_VERTICAL_PHI_PILLAR_REPORT_2026-07-31.md`.
+
+> **Quantum `7.5 → 15` same-phase golden-section test (Q57/Q57A,
+> 31 July 2026): NOT SUPPORTED; both archives independently reproduce the
+> coarse `1 + 0.5 = 1.5` rung account.** Q57 compared the already identified
+> Q42 parent and child cadence families without Ramsey/Hahn filtering. The
+> genuinely same-phase duration ratios were `1.75` for both Phase A and
+> Phase B in both archives; `1 + 1/r` was `1.5714286`. Because a golden fixed
+> point requires both values to equal Phi, the `1.75` side missed the frozen
+> `±0.08` band and Phi was not its nearest landmark.
+>
+> Dylan then caught an orientation error in the additive branch:
+> `2 - parent A + half-child A` is exactly `parent B + half-child A`, not an
+> AA path. The post-result Q57A correction calculated true additive AA and BB
+> paths. Both returned median `1.5` in both archives because the separately
+> coarse-grained parent and child coordinates were already at their local
+> `1.0` ridges. Thus the calculation recovers the ARA half-rung ledger but
+> cannot expose a same-phase Phi pillar after ridge compression. Q57 and Q57A
+> validation reproduced all `193` seed rows with zero numerical mismatch.
+> Report:
+> `analysis/quantum/Q57_Q57A_QUANTUM_SAME_PHASE_GOLDEN_SECTION_REPORT_2026-07-31.md`.
+
 > **Sun-versus-planetary-collective Solar-System ARA (T317, 31 July
 > 2026): SUCCESSFUL PLACEMENT/CROSSWALK; 6/6 frozen gates and 66/66
 > independent checks.** Dylan corrected the earlier Earth/Sun interpretation:
@@ -2078,25 +2307,442 @@ The exact identity
 \]
 
 places the `1.618` same-phase pillar and `0.382` handover seam inside one
-normalized TE-ARA closure. On a unit-radius circle the Phi-length chord
-subtends `108°`, with supplementary `72°`, giving an exact bridge to the
-pentagonal angle already used by the framework:
+normalized TE-ARA closure. T319 fixed the construction to a regular pentagon
+with side length `1`: the two-edge route is `2`, the same-phase diagonal is
+Phi, the central/exterior step is `72°`, the interior angle is `108°`, and the
+Phi diagonal spans `144°` at the centre:
 
 \[
 \phi=2\sin54^\circ=2\cos36^\circ.
 \]
 
-The current topology proposes that two three-part Information³ ARA closures
-form the six-part hexagonal parent, while the fivefold appearance is the
-cross-rung Phi-pillar/handover projection with one relation shared or carried
-into the adjacent rung. The exact algebra is established; the literal
-physical pillar, the two-ARA-to-hexagon topology and the webbed sixth relation
-remain unconfirmed.
+T319's unfitted exact construction passed `13/13` frozen gates; an independent
+implementation passed `23/23` checks. Five pentagon diagonals divide one
+another in Phi and generate an inner pentagon at scale \(\phi^{-2}\). Two
+three-direction Information³ closures offset by `60°` generate the six-node
+hexagonal scaffold. Among regular polygons `n=3..12`, only the pentagon has a
+two-edge shortcut exactly equal to Phi.
+
+This establishes the mathematical construction and its internal ARA
+crosswalk. The literal physical pillar, universal cross-scale mechanism, and
+webbed sixth relation remain unconfirmed and require empirical testing.
+
+### T320/T320A cross-arm cut — intended temporal handover not tested
+
+T320 froze a common non-forced route coordinate,
+
+\[
+q=\frac{2d(A_0,A_1)}{d(A_0,B)+d(B,A_1)},
+\]
+
+for which the exact side-one pentagon gives (q=\phi). The first raw
+physical transfer used three simultaneous public triple-pendulum arm states.
+
+The initial T320 filter incorrectly equated cross-rung same-phase identity
+with parallel phase-plane vectors. T320A removed that condition, but retained
+a more fundamental identity-boundary error: arm 3, arm 2 and arm 1 are three
+separate identities. Dylan's intended handover is temporal and
+identity-preserving: one arm's Phase-A swing, its intervening Phase-B swing,
+and that same arm's next Phase-A swing. T320/T320A did not measure it.
+
+Retained cross-arm result: median `q=1.88651`, with `2` the closest frozen landmark.
+The angle winner was `144°`, the median equal-leg ratio was `0.23315`, and
+both mirror branches selected `2`. Only the relation-control gate passed: the
+real middle-arm alignment had lower Phi error than all three shifted-middle
+controls. Cross-arm triangle verdict: **NOT SUPPORTED — 1/5**. This is not
+a verdict on the intended same-arm Phi handover, whose status is **NOT TESTED**.
+
+The exact T319 construction remains true, but its universal physical use is
+not established. At the end of T320, the repository had no completed raw
+physical test of the intended same-identity temporal route. T321 subsequently
+tested a routed same-arm object; T322 below records the further
+`A(parent)/A(child)` correction without changing T320's historical scope.
+
+Primary report:
+`analysis/phi_cross_scale/T320_CROSS_DOMAIN_PHI_PILLAR_REPORT_2026-07-31.md`.
+
+### T321 routed same-arm A–B–A diagnostic — not Phi-shaped
+
+T321 tested an identity-preserving pendulum route. Each
+event retained one arm and used its complete Phase-A half-swing, intervening
+Phase-B half-swing, and next Phase-A half-swing. Runs 1–2 supplied frozen
+scales; public free run 3 supplied `275` evaluation events.
+
+The frozen angle-plus-time route coordinate returned median `q=1.965901`.
+`2` was the unique closest landmark (median error `0.034099`), while Phi's
+error was `0.347867`. All three arms, both reversible phase directions, and
+the driven transfer selected `2`. The real B pairing beat all three shifted-B
+controls, showing a genuine relation, but only that gate passed. Verdict:
+**NOT SUPPORTED — 1/5**; independent validation **15/15**.
+
+Later scope correction: Dylan clarified that the golden-section equation is
+`A(parent)/A(child)`, with lowercase `b` denoting a smaller occurrence of the
+same Phase-A type, not Phase B. T321 therefore remains a valid negative result
+for its routed `A -> B -> A` object but is not the decisive physical test of
+the direct cross-scale claim.
+
+Primary report:
+`analysis/phi_cross_scale/T321_SAME_ARM_TEMPORAL_PHI_HANDOVER_REPORT_2026-07-31.md`.
+
+### T322 direct A(parent)/A(child) golden section — local rule not supported
+
+T322 removed the Phase-B vertex and froze the direct equation
+
+\[
+\frac{a}{b}=\frac{a+b}{a}=\phi,
+\qquad a=A_{\rm parent},\ b=A_{\rm child}.
+\]
+
+Across `184` event-local free-run-3 matches, median `a/b=1.00905` and median
+`(a+b)/a=1.99103`: the cut read the `(1,2)` ridge/octave relation rather than
+the golden fixed point. All five frozen gates failed; independent arithmetic
+validation passed `15/15` checks.
+
+The result has a material caveat. The maximum-overlap rule selected the longer
+arm-3 recurrence family. A post-hoc branch-median scale audit found Phi-like
+ratios in free run 3 (`1.578–1.628`) but not in free run 1, free run 2, or the
+driven record. This is evidence of state-dependent recurrence families, not a
+replicated universal Phi handover. Status: **local operationalization not
+supported; universal cross-scale pillar remains unconfirmed**.
+
+Primary report:
+`analysis/phi_cross_scale/T322_CROSS_SCALE_SAME_PHASE_GOLDEN_SECTION_REPORT_2026-07-31.md`.
+
+### 1 August 2026 bubble temporal-handover test — joint Phi geometry, direct ratio not Phi-specific
+
+After the area-ratio bubble test missed the intended temporal object, a second
+protocol measured the movement **between successive slices of one tracked
+identity**. Five consecutive 50-fps positions supplied two handover steps and
+two later steps reserved for future directional tension. The public source
+yielded `152,780` eligible windows: `82,400` evaluation and `26,615` untouched
+holdout.
+
+The frozen joint ruler
+
+\[
+q_{\rm whole}=(a+b)/a,
+\qquad q_{\rm lineage}=a/b
+\]
+
+fitted `1.607795` on calibration. Phi was the closest fixed landmark by mean
+joint distance in evaluation (`0.408533`) and holdout (`0.425979`). Real
+adjacent slices also had lower golden-equality residual than within-track
+shifted controls in evaluation (difference `-0.037828`, 95% whole-video
+interval `[-0.045615,-0.030207]`) and holdout (`-0.061808`,
+`[-0.071712,-0.049482]`).
+
+An essential audit prevents overclaiming. The joint equation has Phi as its
+unique algebraic fixed point, so its fixed-target comparison partly privileges
+Phi. Under the fair direct step-ratio loss, calibration fitted `1.416072`,
+evaluation preferred \(\sqrt2\), and holdout preferred `1.5`; Phi was close but
+not best. The registered consequence also failed: Phi distance did not predict
+lower future directional tension in evaluation (`rho=0.00961`, `p=0.3535`) or
+the non-overlapping robustness sample (`rho=-0.03595`, `p=0.9524`).
+
+Status: **golden fixed-point geometry recovered and local temporal continuity
+detected; Phi-specific physical movement ratio and reduced-tension consequence
+not supported in this sampled representation**.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_TEMPORAL_HANDOVER_RESULT_2026-08-01.md`.
 
 Primary records:
 
 - `analysis/phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`
+- `analysis/phi_cross_scale/T319_PENTAGON_PHI_PILLAR_GEOMETRY_REPORT_2026-07-31.md`
+- `analysis/phi_cross_scale/T321_SAME_ARM_TEMPORAL_PHI_HANDOVER_REPORT_2026-07-31.md`
+- `analysis/phi_cross_scale/T322_CROSS_SCALE_SAME_PHASE_GOLDEN_SECTION_REPORT_2026-07-31.md`
 - `EnergyRatio/HEX_PENTAGON_ANGLE_HYPOTHESIS.md`
+
+### 1 August 2026 long-chain dyadic bubble reconstruction — scale effect present, Phi-specific placement not supported
+
+The follow-up test extended one tracked bubble identity from two adjacent
+movements to a `33`-position chain. Five same-origin dyadic cuts compared
+children spanning `1`, `2`, `4`, `8` and `16` frames as they closed parents
+spanning `2`, `4`, `8`, `16` and `32` frames. The frozen direct coordinate
+was
+
+\[
+r_\ell=
+\frac{\max(\lVert A_\ell\rVert,\lVert B_\ell\rVert)}
+     {\min(\lVert A_\ell\rVert,\lVert B_\ell\rVert)},
+\qquad
+L_{\tau,\ell}=\left|\log\frac{r_\ell}{\tau}\right|.
+\]
+
+The final sample contained `125` calibration roots, `172` evaluation roots
+and `40` untouched holdout roots. Evaluation Phi loss genuinely fell with
+scale: mean level-4 minus level-0 change was `-0.166028`, with a whole-video
+95% interval `[-0.230093,-0.116381]`. True temporal order also improved more
+than a within-root permutation.
+
+The registered Phi interpretation failed its decisive controls. Broken
+lineages improved at least as much as true lineages; the strict holdout change
+was only `-0.032828` with an interval crossing zero. The level-4 evaluation
+free target was `1.374419`, and `sqrt(2)` had lower mean loss than Phi;
+holdout instead fitted `1.638332` and gave Phi the lowest fixed-target point
+estimate. Concentration narrowed in evaluation but widened in holdout.
+
+Status: **a real scale-dependent temporal-order structure is present, but a
+universal same-lineage Vertical-ARA Phi pillar is not supported in this
+sampled 2D centroid representation**. This is evidence for a coarse-scale
+relation, not evidence that nothing occurs; the coordinate appears
+condition-dependent rather than Phi-invariant.
+
+Primary records:
+
+- `analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_DYADIC_CHAIN_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/VERTICAL_ARA_DYADIC_CHAIN_RESULT_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/VERTICAL_ARA_DYADIC_CHAIN_REPORT.artifact.json`
+
+### 1 August 2026 corrected cross-rung spiral and Phi-per-octave shorthand
+
+The corrected follow-up retained the full parent displacement vectors at
+`2`, `4`, `8`, `16` and `32`-frame spans. It tested both (a) one repeated
+scale-and-rotation operator and (b) Dylan's shorthand
+
+\[
+\widehat R_\ell(\tau)=|Z_0|\tau^\ell,
+\]
+
+which assigns one candidate multiplier, including Phi, to every octave.
+
+The empirical free radial multipliers were `2.08274` in calibration,
+`2.06656` in evaluation and `2.02382` in confirmation. `2` was the closest
+frozen target in all three splits. It also had lower loss than Phi in both the
+full operator and the shorthand. Evaluation paired Phi-minus-2 intervals were
+strictly positive: `[+0.07418,+0.09141]` for the full loss and
+`[+0.27364,+0.36564]` for the shorthand.
+
+Angular coherence was high, but the original temporal ordering did not beat
+the step-permutation control. The observed path beat broken lineages while
+performing worse than permutation on full loss, so the registered repeated
+spiral-operator gate failed.
+
+Status: **octave-like radial accumulation near `2` is supported in this
+centroid coordinate; a Phi radial multiplier and a uniquely ordered Phi
+spiral are not supported**. Phi may still occupy a different coordinate, but
+it is not the radial scale factor measured here.
+
+Primary records:
+
+- `analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_SPIRAL_SCALE_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/VERTICAL_ARA_SPIRAL_SCALE_RESULT_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/results/spiral_scale_summary.json`
+- `analysis/vertical_ara_bubbles/results/spiral_scale_validation.json`
+
+### 1 August 2026 octave-to-Phi directional projection test
+
+The next frozen test retained `2` as the radial octave and tested the distinct
+proposal
+
+\[
+2\cos36^\circ=\phi.
+\]
+
+For each root and four dyadic levels, the same-origin child displacement `A`
+was compared with its doubled-span parent `P=A+B`. The equivalent ARA
+projection was `x=2|cos(theta)|`. Fixed angles ranged from direct alignment to
+perpendicular, while a 64-rotation phase scramble preserved `A`, `|B|` and the
+addition geometry but destroyed the measured phase relation.
+
+The registered `36 degree` result was not recovered. Median free angles were
+`10.46 degrees` in evaluation and `10.05 degrees` in confirmation, both
+closest to direct alignment. Median projections approached `2` at broader
+rungs. Evaluation Phi loss exceeded direct loss by `9.572 degrees` with 95%
+whole-video interval `[+6.820,+12.934]`.
+
+Observed Phi loss was also worse than the phase-scramble control by `3.244`
+degrees and worse than the broken-complement control by `2.164` degrees; both
+intervals were strictly positive. The complementary `B` child showed the same
+near-direct pattern.
+
+Status: **the same-origin centroid direction does not express Phi as a
+36-degree projection of its doubled parent**. This rejects that coordinate,
+not every possible quarter-access, boundary or circumference interpretation.
+
+Primary records:
+
+- `analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_OCTAVE_PROJECTION_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/VERTICAL_ARA_OCTAVE_PROJECTION_RESULT_2026-08-01.md`
+- `analysis/vertical_ara_bubbles/results/octave_projection_summary.json`
+- `analysis/vertical_ara_bubbles/results/octave_projection_validation.json`
+
+### 1 August 2026 independent observer–source octave projection
+
+The follow-up replaced the self-containing bubble parent with an independent
+measured source and receiver. Across ARI NH2 and NH4, each with `1,550` source
+directions and two receivers, the frozen coordinate combined accumulated
+transfer phase at `f` with the additional phase from `f` to `2f`.
+
+The declared `36 degree` Phi projection was not recovered. Median free path
+angles were `52.006` and `52.166 degrees`; the frozen `54-degree` complement
+had the lowest target loss in both datasets. Phi was approximately `7 degrees`
+worse than the `45-degree` pure-delay target and `9 degrees` worse than the
+complement. It won only `6/57` and `6/56` frequency bins. All five gates failed.
+
+The true source path slightly beat broken-direction pairings, showing a real
+path-specific relation, but performed substantially worse than phase-scrambled
+paths for Phi proximity. The SOFA archive stores measurement latency separately
+from its impulse responses; restoring that published latency moved the medians
+to `46.365` and `46.537 degrees`, where the ordinary `45-degree` delay relation
+was decisively best.
+
+Status: **this frequency-octave observer–source coordinate does not support a
+Phi handover**. Its raw complementary orientation is representation-dependent;
+the fuller recorded transfer recovers ordinary delay geometry. A geometric-size
+observer/source octave remains a distinct untested object.
+
+Primary records:
+
+- `analysis/phi_observer_source/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_PROTOCOL_v1_FROZEN.md`
+- `analysis/phi_observer_source/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_REPORT_2026-08-01.md`
+- `analysis/phi_observer_source/results/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_RESULTS.json`
+- `analysis/phi_observer_source/results/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_VALIDATION.json`
+
+### 1 August 2026 literal spatial-octave observer–source test
+
+T324 replaced T323's frequency octave with matched physical KEMAR source
+radii at `0.5`, `1`, `2`, and `3 m`. The frozen test combined complete stored
+phase with the change across `0.5 -> 1 m` and `1 -> 2 m`, retained `2 -> 3 m`
+as a non-octave control, and independently calculated an offset-invariant
+ratio of consecutive phase increments.
+
+The Phi projection was not recovered. Median free path angles were `2.438`
+and `0.456 degrees`, both closest to the direct `0-degree` target. Only about
+`0.46%` of octave events lay within five degrees of `36 degrees`. Observed Phi
+loss did not beat the broken-direction control at either octave.
+
+The invariant octave ratio was also far from both physical candidates:
+event median `0.22769` and path median `0.15247`, compared with Phi `1.618`
+and ordinary propagation `2`. Two frozen relative-ranking gates formally
+passed because values near zero are closer to Phi than to the still larger
+controls. Validation explicitly identifies those as gate-design artefacts,
+not absolute Phi proximity. The overall frozen verdict is **NOT SUPPORTED
+(2/5)**.
+
+A load-bearing data boundary remains. The archive publishes `Data.Delay = 0`,
+no separate latency, and aligned impulse arrivals. Expected free-field shifts
+of about `64.3`, `128.6`, and `128.6` samples across the three radius steps
+appeared as only `4`, `0`, and `5` median samples. The test therefore rejects
+Phi in the retained radius-dependent HRTF shape but cannot adjudicate Dylan's
+literal propagation-time lighthouse version because that timing coordinate is
+absent from the stored representation.
+
+Status: **literal spatial-octave Phi is not supported in the available KEMAR
+transfer coordinate; a raw-time-of-flight version remains untested rather than
+failed**.
+
+Primary records:
+
+- `analysis/phi_observer_source/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_PROTOCOL_v1_FROZEN.md`
+- `analysis/phi_observer_source/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_REPORT_2026-08-01.md`
+- `analysis/phi_observer_source/results/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_RESULTS.json`
+- `analysis/phi_observer_source/results/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_VALIDATION.json`
+
+## Update — 3 August 2026: complex irrationality quadrant supersedes standalone Phi
+
+Standalone Phi is no longer the lead domain-general ARA explanation of the
+balance between rational resonance and non-closing information traversal. The
+new lead hypothesis is the exact two-axis classification
+
+\[
+z(t)=r_0e^{(\sigma+i\omega)t},
+\]
+
+with radial contraction/expansion determined by `sign(sigma)` and
+forward/reverse phase determined by `sign(omega)`. Rational closure,
+structured irrational progression and randomness are competing behaviours
+inside the phase coordinate rather than the four primary quadrants.
+
+This revision preserves the motivating ARA proposal: rational recurrence may
+support connection yet approach “resonance death” if usable asymmetry closes
+across all relevant rungs; unstructured randomness avoids closure but need not
+preserve recoverable lineage; structured non-repetition may supply an
+efficient middle. That physical interpretation remains a hypothesis.
+
+The current ARA-specific lead placement provisionally uses `1/e` as the
+contracting radial landmark and Phi as the expanding/structured-retention
+landmark, then crosses that span with forward/reverse phase. It is not forced
+by exponential symmetry, whose reciprocal pair would be `1/e ↔ e`; it is a
+falsifiable asymmetric physical placement.
+
+The bubble Vertical-ARA spiral-scale analysis had already implemented the
+sampled form
+
+\[
+q_\ell=Z_{\ell+1}/Z_\ell=s_\ell e^{i\delta_\ell}.
+\]
+
+A descriptive audit of its versioned `1,348` transitions found all four sign
+modes: `655` expanding-forward, `615` expanding-reverse, `40`
+contracting-forward, `32` contracting-reverse and `6` boundary cases. This
+recovers the coordinate classification, not a universal law: the registered
+repeated spiral operator failed against temporal permutation and radial scale
+was near `2`, not Phi.
+
+The first frozen follow-up, T307, tested the same two-axis coordinate on the
+fresh `N=257..1024` range of the idealised muon-Fusion overlap model. All
+three arrival families occupied all four quadrants with `100%` valid adjacent
+steps. The four-state ARA compression beat persistence, a global complex
+ratio and all `1,000` temporal shuffles in every family, but it lost to a
+continuous affine AR(2) model. The primary Phi-Time/`1/e` pair was not
+predictively unique and broken same-prefix lineages were sometimes as good or
+better. Frozen verdict: **coordinate recovered without full predictive
+support**.
+
+T307's post-gate radial audit also rejects the provisional asymmetric radial
+placement inside this model: `1/Phi <-> Phi` won all `21/21` primary
+family-lag cells and `114/147` cells across all fixed pairs, while
+`1/e <-> Phi` won none. The pooled primary ordered ratios were `0.611600` on
+contraction and `1.617293` on expansion. This is an exploratory lead rather
+than a promoted result because the primary input already contains `Phi^-1`
+and the source is a deterministic scheduling model, not laboratory muon data.
+It elevates the **separable-role alternative**: retain `1/e` as a decay
+landmark and test reciprocal `1/Phi <-> Phi` breathing independently.
+
+T333 performed that independent recorded-data follow-up on Q53's real
+trapped-qutrit sequence. Its primary fitted-circle coordinate was internally
+stable across calibration and holdout, across all three fixed cuts, and under
+the reciprocal product check, but it was not the exact golden pair. The
+holdout pooled endpoints were `0.553331 <-> 1.806922`, compared with
+`1/Phi <-> Phi = 0.618034 <-> 1.618034`; a calibration-fitted
+`alpha=1.809114` greatly outperformed exact Phi. Exact Phi won only `3/21`
+primary cells and no primary cut met the frozen 10% endpoint gate. All four
+quadrants remained populated, and real order beat every one of `500`
+blockwise shuffles in each cut and pooled (`p=0.001996`). Alternative centre
+definitions shifted the inferred reciprocal pair to about
+`0.5894 <-> 1.699`, so the centre/identity boundary is empirically
+load-bearing. Frozen verdict: **NOT SUPPORTED** for universal reciprocal-Phi
+endpoints; **supported as a recorded coordinate result** for a stable,
+ordered, identity-specific reciprocal radial breath.
+
+Status:
+
+- exact four-mode mathematical classification: **established**;
+- previous bubble occurrence of the sampled coordinates: **established,
+  descriptive**;
+- T307 four-quadrant occurrence and compression information: **supported in
+  the idealised muon scheduling model, but inferior to continuous AR(2)**;
+- provisional asymmetric radial `1/e <-> Phi` placement: **not supported in
+  T307**;
+- universal reciprocal-golden `1/Phi <-> Phi` breathing: **not supported by
+  T333's frozen primary recorded-data coordinate**;
+- identity-specific reciprocal radial breathing `1/alpha <-> alpha`:
+  **supported as a stable recorded coordinate; the physical identity rule for
+  `alpha` remains unresolved**;
+- universal ARA irrationality mechanism: **new hypothesis**;
+- standalone universal Phi carrier: **superseded / not supported**;
+- Phi as one narrower efficient non-closing candidate: **open**.
+
+Canonical record:
+`analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+
+T307 record:
+`analysis/muon/T307_COMPLEX_IRRATIONALITY_QUADRANT_MUON_REPORT_2026-08-03.md`.
+
+T333 record:
+`analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`.
 
 - The muon-catalysis **cycle maps as a deep snap** on the rational pole (formation ~140 ps ≫ fusion ~1 ps;
   ~6.9 ns rung), and φ is correctly **absent** — a nuclear event is the integer/rational/snap regime, like

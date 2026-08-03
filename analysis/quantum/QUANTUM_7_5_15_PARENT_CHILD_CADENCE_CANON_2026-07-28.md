@@ -6,6 +6,93 @@ Status: **canonical ARA interpretation and context-restoration note**. This
 clarifies the language used for Q40C-Q44A. It does not alter any frozen
 protocol, prediction, numerical result or verdict.
 
+## 1 August 2026 full-direction pentagonal-twist test (Q59)
+
+Q59 followed Q58 by retaining the connected matrix's direction rather than
+only its magnitude. At every fixed local coordinate it calculated the
+Frobenius angle between the `one-turn-15` parent and `two-turn-7.5` child,
+separately for A-to-A and B-to-B. Greedy was calibration-only and selected
+the predeclared `72°` pentagon-edge target over the `144°` same-phase
+diagonal; that choice and its signed handedness model were hashed before
+Landmax was loaded.
+
+The fixed pentagonal screw was **not supported**. Landmax whole-grid medians
+were `80.26276°` for Phase A and `80.42711°` for Phase B. Only `2/9` and
+`4/9` coordinate medians lay inside `72° ± 8°`; the signed model had `0/18`
+cells within `10°`; wrong-phase comparisons were slightly closer to `72°`;
+and the `1,999`-draw family-label null was more target-like (`p=0.822`).
+
+The unsigned high-angle curve nevertheless replicated across archives within
+`5.16135°` for A and `8.82279°` for B. Because the public matrices are
+Bell-diagonal, this is an effective two-coordinate correlation-space turn,
+not an observed literal spatial edge. Both clockwise and counter-clockwise
+seed signs occur, so signed population medians collapse near zero while the
+unsigned separation remains high. The supported narrow reading is therefore
+a reproducible, two-handed near-quarter-turn population geometry—not a
+locked pentagonal handover. Full report:
+`Q59_CROSS_RUNG_PENTAGONAL_TWIST_REPORT_2026-08-01.md`.
+
+## 31 July 2026 matched-gradient vertical-magnitude test (Q58)
+
+Q58 implemented the corrected question that Q57/Q57A could not answer. It
+held the local ARA coordinate fixed at `x=0.2,0.4,...,1.8` and compared the
+unnormalised connected-matrix magnitude of parent Phase A with child Phase A,
+then parent Phase B with child Phase B. The primary ratios were
+
+\[
+R_A(x)=\frac{\lVert C_{P,A}(x)\rVert_F}
+{\lVert C_{C,A}(x)\rVert_F},
+\qquad
+R_B(x)=\frac{\lVert C_{P,B}(x)\rVert_F}
+{\lVert C_{C,B}(x)\rVert_F}.
+\]
+
+The frozen constant-Phi pillar was **not supported**. Only `1/9` to `2/9`
+cells per archive/phase fell inside `Phi ± 0.08`, with cell-median mean
+absolute Phi errors from `0.135486` to `0.249441`. Cross-archive grid errors
+were `0.084187` for Phase A and `0.164071` for Phase B, above the registered
+`0.08` replication gate.
+
+The narrower cross-tier result was strong: the parent magnitude exceeded the
+child magnitude in all `36/36` archive–phase–coordinate cells. Its size
+varied over the ARA coordinate, so this operational vertical relation is a
+gradient profile rather than one invariant pillar. Phase A at `x=0.2` was
+locally Phi-like in both archives (`1.64305` and `1.60213`), but the complete
+grid and Phase B did not reproduce a common Phi placement.
+
+All four whole-grid medians were post-hoc nearest `sqrt(3)` (`1.73207` to
+`1.86340`), but the profile was not flat, archive agreement was insufficient,
+and `sqrt(3)` was not the frozen target. It is not promoted as a constant.
+Independent validation passed every registered recalculation. Full report:
+`Q58_SAME_GRADIENT_VERTICAL_PHI_PILLAR_REPORT_2026-07-31.md`.
+
+## 31 July 2026 same-phase Phi test boundary
+
+Q57 directly compared the seed-balanced Phase-A durations of the `15` parent
+and `7.5` child, and independently repeated the comparison for Phase B. Both
+archives returned parent/child medians `1.75` and transformed
+`1 + child/parent` medians `1.5714286`. The registered golden fixed-point
+condition was **not supported** because both values must meet at Phi and the
+`1.75` branch missed the frozen `±0.08` band.
+
+The additive expression `2 - parent A + half-child A` was initially described
+as same-phase. Dylan identified the exact orientation correction:
+
+\[
+2-P_A=P_B,
+\]
+
+so that expression is actually parent-B plus child-A. Q57A then calculated
+the true additive same-phase expressions `P_A + 0.5 C_A` and
+`P_B + 0.5 C_B`; both had archive medians `1.5`. Because parent and child were
+already compressed to their own `1.0` duration ridges, this is the canonical
+`1 + 0.5` coarse-rung account, not a measurement of the proposed Phi pillar.
+
+Consequently, the `7.5 : 15` cadence remains a strong factor-two parent/child
+crosswalk, but this ridge-averaged representation does not recover a
+same-phase golden handover. Full report:
+`Q57_Q57A_QUANTUM_SAME_PHASE_GOLDEN_SECTION_REPORT_2026-07-31.md`.
+
 ## The rule in one paragraph
 
 The `two-turn 7.5` and `one-turn 15` labels are useful observational

@@ -1,0 +1,249 @@
+{
+  "test": "T332 Information3 zipper at bubble-merger closure",
+  "run_date": "2026-08-03",
+  "verdict": "NOT SUPPORTED \u2014 LOCAL ZIPPER CONTRACTION",
+  "protocol": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "0279BCF2A518810FB3D4D500F389962282B826FF3FA8ECCC12553AE8492CFDD3",
+  "source_t329_events_sha256": "91A35A3133048D4CCE4E2ABA3ABCFA92215E88C1D60C953F3B70FABF8D765293",
+  "constants": {
+    "min_step_m": 0.0005,
+    "bootstraps": 5000,
+    "seed": 20261135
+  },
+  "diagnostics": {
+    "calibration_source": 23,
+    "calibration_ordinary_control": 20,
+    "calibration_eligible_primary": 23,
+    "evaluation_source": 52,
+    "evaluation_ordinary_control": 42,
+    "evaluation_eligible_primary": 52,
+    "holdout_source": 16,
+    "holdout_ordinary_control": 11,
+    "holdout_eligible_primary": 16,
+    "total_eligible_primary": 91
+  },
+  "summaries": {
+    "calibration": {
+      "f_child": {
+        "n": 23,
+        "mean": 0.28348306724209615,
+        "median": 0.255722251877986,
+        "q25": 0.0530916840914218,
+        "q75": 0.49162923106828604,
+        "positive_share": 1.0
+      },
+      "f_parent": {
+        "n": 23,
+        "mean": 0.18312259758282765,
+        "median": 0.1288353856762351,
+        "q25": 0.03627696239164062,
+        "q75": 0.19991899201404079,
+        "positive_share": 1.0
+      },
+      "zipper_contraction": {
+        "n": 23,
+        "mean": 0.1003604696592685,
+        "median": 0.06783905302900214,
+        "q25": -0.07111696811788867,
+        "q75": 0.24050614608785373,
+        "positive_share": 0.6521739130434783,
+        "ci_low": -0.07496228864672157,
+        "ci_high": 0.2268739202687407
+      },
+      "event_specificity": {
+        "n": 20,
+        "mean": -0.01593341221244097,
+        "median": -0.02089896657602975,
+        "q25": -0.11297833068354146,
+        "q75": 0.09603880041329135,
+        "positive_share": 0.4,
+        "ci_low": -0.17895809701679397,
+        "ci_high": 0.1474191886392614
+      }
+    },
+    "evaluation": {
+      "f_child": {
+        "n": 52,
+        "mean": 0.3459001643642497,
+        "median": 0.25417511922578817,
+        "q25": 0.09864644587607636,
+        "q75": 0.5584800563280194,
+        "positive_share": 1.0
+      },
+      "f_parent": {
+        "n": 52,
+        "mean": 0.33399598717415346,
+        "median": 0.12704640632482408,
+        "q25": 0.043434010464472685,
+        "q75": 0.7083063801867566,
+        "positive_share": 1.0
+      },
+      "zipper_contraction": {
+        "n": 52,
+        "mean": 0.011904177190096232,
+        "median": 0.08632808206052472,
+        "q25": -0.17248327218331744,
+        "q75": 0.269145925294652,
+        "positive_share": 0.6346153846153846,
+        "ci_low": -0.1192299594278599,
+        "ci_high": 0.12503922364242515
+      },
+      "event_specificity": {
+        "n": 42,
+        "mean": -0.054206716730716385,
+        "median": -0.031403984389421484,
+        "q25": -0.4167826045350186,
+        "q75": 0.15687331207669034,
+        "positive_share": 0.47619047619047616,
+        "ci_low": -0.21459268543445673,
+        "ci_high": 0.0983228591857259
+      }
+    },
+    "holdout": {
+      "f_child": {
+        "n": 16,
+        "mean": 0.36559588371404556,
+        "median": 0.3651798720198597,
+        "q25": 0.17568892140011583,
+        "q75": 0.5597316032605981,
+        "positive_share": 1.0
+      },
+      "f_parent": {
+        "n": 16,
+        "mean": 0.524364769892439,
+        "median": 0.5114837270322201,
+        "q25": 0.2580263950461854,
+        "q75": 0.8371034325890739,
+        "positive_share": 1.0
+      },
+      "zipper_contraction": {
+        "n": 16,
+        "mean": -0.15876888617839344,
+        "median": -0.2747908370799206,
+        "q25": -0.44727288305316637,
+        "q75": 0.30940606029824635,
+        "positive_share": 0.375,
+        "ci_low": -0.426067151089613,
+        "ci_high": 0.0761818246795672
+      },
+      "event_specificity": {
+        "n": 11,
+        "mean": -0.03578402635540939,
+        "median": -0.1319515769975051,
+        "q25": -0.3012802297600159,
+        "q75": 0.13623808121297623,
+        "positive_share": 0.36363636363636365,
+        "ci_low": -0.3012802297600159,
+        "ci_high": 0.04450460851041457
+      }
+    }
+  },
+  "residual_inheritance": {
+    "calibration": {
+      "n": 22,
+      "videos": 4,
+      "spearman": 0.28176171654432525,
+      "ci_low": -0.04744525547445255,
+      "ci_high": 0.4235500878734622,
+      "cyclic_null_mean": -0.09503512140033882,
+      "cyclic_null_q025": -0.365330321852061,
+      "cyclic_null_q975": 0.313382269904009,
+      "p_one_sided": 0.04499100179964007
+    },
+    "evaluation": {
+      "n": 50,
+      "videos": 10,
+      "spearman": 0.00907563025210084,
+      "ci_low": -0.24960552424518517,
+      "ci_high": 0.1616907746518034,
+      "cyclic_null_mean": 0.1336606770708283,
+      "cyclic_null_q025": -0.07430252100840336,
+      "cyclic_null_q975": 0.34108283313325327,
+      "p_one_sided": 0.8750249950009998
+    },
+    "holdout": {
+      "n": 16,
+      "videos": 3,
+      "spearman": -0.3411764705882353,
+      "ci_low": -1.0,
+      "ci_high": -0.14285714285714285,
+      "cyclic_null_mean": -0.005404705882352941,
+      "cyclic_null_q025": -0.4823529411764706,
+      "cyclic_null_q975": 0.40294117647058825,
+      "p_one_sided": 0.9334133173365327
+    }
+  },
+  "post_result_amplitude_summary": {
+    "0": {
+      "n": 23,
+      "mean": 0.1003604696592685,
+      "median": 0.06783905302900214,
+      "q25": -0.07111696811788867,
+      "q75": 0.24050614608785373,
+      "positive_share": 0.6521739130434783,
+      "ci_low": -0.07496228864672157,
+      "ci_high": 0.22687392026874073
+    },
+    "0.25": {
+      "n": 20,
+      "mean": 0.06722041965612487,
+      "median": 0.0790942880956956,
+      "q25": -0.038355790832783364,
+      "q75": 0.2594674585324177,
+      "positive_share": 0.7,
+      "ci_low": -0.35007006249926753,
+      "ci_high": 0.20631724704125565
+    },
+    "0.5": {
+      "n": 18,
+      "mean": 0.05904658554505374,
+      "median": 0.17690626904149037,
+      "q25": -0.020701650206149714,
+      "q75": 0.2252820654523069,
+      "positive_share": 0.7222222222222222,
+      "ci_low": -0.05628390496541251,
+      "ci_high": 0.23741180963355712
+    },
+    "0.75": {
+      "n": 14,
+      "mean": -0.12773069421774716,
+      "median": -0.11982724080717502,
+      "q25": -0.6393833010809687,
+      "q75": 0.28923680020431763,
+      "positive_share": 0.42857142857142855,
+      "ci_low": -0.5414051579561517,
+      "ci_high": 0.20121562508136057
+    },
+    "1": {
+      "n": 16,
+      "mean": -0.15876888617839344,
+      "median": -0.2747908370799206,
+      "q25": -0.44727288305316637,
+      "q75": 0.30940606029824635,
+      "positive_share": 0.375,
+      "ci_low": -0.426067151089613,
+      "ci_high": 0.0761818246795672
+    }
+  },
+  "gates": {
+    "local_contraction": false,
+    "event_specificity": false,
+    "immediate_residual_inheritance": false,
+    "later_ordered_closure_available": false,
+    "full_information3_zipper_confirmed": false
+  },
+  "boundaries": [
+    "This is a post-result mechanism probe in a previously used bubble archive.",
+    "F_child is inter-child disagreement; F_parent is intra-parent turning.",
+    "The metric is magnitude-only, so reversal is non-discriminating.",
+    "No Phi, 3/8, 1/e or rational-grid target was scored.",
+    "Only three repeated primary merger lineages exist; later seam timing is not inferentially testable."
+  ],
+  "artifacts": {
+    "events": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_EVENTS.csv",
+    "bootstrap_summary": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_BOOTSTRAP_SUMMARY.csv",
+    "evaluation_residual_null": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_EVALUATION_RESIDUAL_NULL.csv",
+    "figure": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_FIGURE.png",
+    "report": "T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_REPORT_2026-08-03.md"
+  }
+}

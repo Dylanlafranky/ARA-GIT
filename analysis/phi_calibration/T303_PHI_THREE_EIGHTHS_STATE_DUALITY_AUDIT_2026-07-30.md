@@ -228,3 +228,61 @@ Required result:
 
 That would test exactly the distinction proposed here. The current ARA⁹
 visuals are a reason to run it, not already the result.
+
+## 6. Post-audit geometric refinement — 2 August 2026
+
+Dylan's later two-circle construction supplies a precise mathematical reason
+for the numerical neighbourhood audited here. On the standard ARA diameter,
+the mirrored Phi endpoints
+
+\[
+a=2-\phi,
+\qquad
+b=\phi
+\]
+
+define a ridge-centred circle with
+
+\[
+\frac{a+b}{2}=1,
+\qquad
+b-a=\frac{2}{\phi},
+\qquad
+\text{radius}=\frac1\phi.
+\]
+
+Repeating that circle tangentially against the ordinary period-`2` ARA circle
+train creates an irrational relative phase step of `1/phi`. On a finite grid
+of eighths, its endpoints are represented by the nearest symmetric rational
+pair
+
+\[
+\left(2-\phi,\phi\right)
+\approx
+\left(\frac38,\frac{13}{8}\right),
+\]
+
+with equal endpoint error `0.00696601125...`.
+
+This strengthens the **mathematical candidate mechanism** behind the phrase
+“3/8 is Phi cooled into connection”: irrational motion can be recorded as a
+nearby finite rational closure. It does not change the empirical verdicts in
+Sections 1–5. In particular, it does not manufacture a `3/8` coordinate in
+the ARA⁹ cell count, rescue Q43, or turn the T302 calibration into universal
+evidence.
+
+It also separates the `9/8` thread cleanly. The exact arithmetic
+
+\[
+3\left(\frac38\right)=\frac98
+\]
+
+remains a separate three-step candidate. The two-circle construction itself
+forces the eighth-grid endpoint pair `3/8` and `13/8`, not a literal `9/8`
+period.
+
+The appropriate new empirical test is therefore not another occupancy count.
+It is an ordered handover test: measure successive contact/phase displacement
+of one retained identity, freeze the `2/phi` ARA increment (equivalently
+`1/phi` of the base-circle period), and compare held-out phase prediction and
+Fibonacci near-closures with rational and fitted controls.

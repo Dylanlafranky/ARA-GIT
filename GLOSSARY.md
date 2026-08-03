@@ -38,7 +38,7 @@ A plain-language key to the vocabulary used across this repository. Where a term
   posit a physically final, scale-independent \(1.0\) at which every nested deviation vanishes.
   Exact algebraic ridge equalities remain valid within their explicitly declared projections.
 - **Consumer (< 1)** — fast build held long, or fast release after long buildup, depending on convention; the "taking in" side.
-- **Engine (≈ φ ≈ 1.618)** — self-sustaining, self-timed, efficient. Hearts, breathing, the sustained-oscillator sweet spot.
+- **Engine (historically associated with ≈ φ ≈ 1.618)** — an ARA label for a sustained, self-timed operating region. Treat exact Phi as a candidate landmark, not a universal engine value.
 - **Exothermic / donor (≈ 1.75)** — energy-producing sources (e.g. the solar magnetic cycle).
 - **Pure harmonic (≈ 2.0)** — smooth, symmetric resonance; the octave/integer pole.
 - **Snap** — rare oscillators past 2: long quiet, then sudden violent release (lightning, some neuron spikes).
@@ -47,12 +47,29 @@ A plain-language key to the vocabulary used across this repository. Where a term
 ## The two rulers and the key constants
 
 - **Octave / "the 2"** — the ×2 doubling that sets **rung spacing** and the harmonic pole. Octaves build the ladder. Derived from stacking ARA spheres.
-- **φ (phi ≈ 1.618, golden ratio)** — the **most irrational** number, so it never phase-locks; the framework's **handover / balance** constant (the "breathing gap" between rungs), and the engine sweet spot. It is the rung spacing **for time** — but note: time's rungs are a ×2 octave in their *absolute* frame and read as **×φ only from inside** (we move through time, so we see the octave *sheared*: φ = 2·cos36°). Octave head-on, φ from our vantage — same rungs, two viewing angles. We forecast from *inside* time, so we correctly use φ there. See "two axes" below and `TWO_RULERS_PHI_AND_TWO.md`.
+- **φ (phi ≈ 1.618, golden ratio)** — an exact irrational constant and the framework's historical handover candidate. The broad claim that Phi alone supplies the universal Time/irrationality carrier is superseded. Phi now remains a narrower candidate for efficient structured non-closure within the phase coordinate of the complex irrationality quadrant. The identities `φ = 2 cos(36°)`, the ridge-centred Phi circle and Fibonacci near-returns remain exact conditional mathematics; their universal physical placement is unestablished. See `TWO_RULERS_PHI_AND_TWO.md` and `analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+- **Complex irrationality quadrant** — the current lead ARA hypothesis for the rational/non-rational balance. One binary axis is radial contraction versus expansion; the other is forward versus reverse phase traversal. In sampled form, (q_n=z_{n+1}/z_n=s_ne^{i\delta_n}), so the signs of (log s_n) and (delta_n) generate four modes. Rational closure, structured irrational progression and randomness are behaviours inside the phase coordinate, not the four primary quadrants. The classification is exact mathematics; universal physical use remains a hypothesis.
+- **`1/e ↔ Phi` complex-quadrant placement** — the current lead ARA-specific candidate places `1/e` at the contracting radial landmark and Phi at the expanding/structured-retention landmark, then crosses this span with forward/reverse phase. It is an asymmetric empirical hypothesis, not a complex-exponential identity: the mathematical inverse of `1/e` is `e`. A dataset must justify these endpoints before evaluation and must report rather than clamp values outside them.
 - **Two rulers → one ruler at two angles** — 2 and φ may be the *same* octave viewed from two angles: **φ = 2·cos(36°)**, exact. Space sees the octave head-on (×2); time sees it sheared by the pentagon angle (×φ). See `TWO_RULERS_PHI_AND_TWO.md`.
 - **Shear** — viewing a structure at an angle so it projects differently; the proposed reason time's octave reads as φ rather than 2 (an exact identity; the physical claim is an open conjecture).
 - **The golden-duty (0.39 / 0.61 = 1/φ² : 1/φ)** — the fraction of a cycle each band dominates; the handover timing.
 - **1/φ³ ≈ 0.236, 1/φ⁴ ≈ 0.146** — framework constants used in the predictor (beat-to-beat feedback, and the optimal blend weight).
 - **2 − φ = 1/φ² ≈ 0.382** — the "rent" / minimum entropy shed per cycle in the bedrock reference (see `EnergyRatio/THE_BEDROCK_REFERENCE.md`).
+
+- **Phi circle / ridge-centred handover circle** — the circle whose diameter endpoints on one ARA axis are
+  `2-phi` and `phi`. Its centre is exactly the ridge `1`, its diameter is `2/phi`, and its radius is `1/phi`.
+  This is an exact geometric construction; interpreting it as a universal physical handover remains a hypothesis.
+- **Phi circle train / irrational-rotation handover** — tangent Phi circles advance by `2/phi` while standard ARA
+  circles advance by `2`. The relative phase step is therefore `1/phi`, so the two trains do not close exactly and
+  have Fibonacci near-returns. This differs from octave radial growth and from testing whether one absolute maximum
+  happens to sit at a Phi landmark. Living empirical procedure:
+  `analysis/phi_calibration/ARA_PHI_CIRCLE_TRAIN_DETECTION_PROCEDURE_LIVING.md`.
+- **Phi–3/8 finite-closure bridge** — on an eight-part finite grid, the mirrored irrational endpoints
+  `(2-phi,phi)` are approximated by `(3/8,13/8)`. Both errors equal `0.00696601125...`. This gives a precise
+  candidate meaning to “3/8 is Phi cooled into connection,” but does not establish a universal physical `3/8` law.
+- **Thalweg handover cut** — the ordered path connecting locally deepest points in successive cross-sections,
+  treated as a changing along-path relation. It is not the same observable as the location of one global velocity
+  or depth maximum. The latter is a longitudinal-extrema proxy and cannot by itself test a `2/phi` handover step.
 
 ## Structure and coupling
 

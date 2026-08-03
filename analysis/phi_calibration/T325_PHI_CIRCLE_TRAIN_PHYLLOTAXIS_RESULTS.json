@@ -1,0 +1,171 @@
+{
+  "test_id": "T325-PHI-CIRCLE-TRAIN-PHYLLOTAXIS-v2",
+  "status": "calibration/re-analysis; not independent replication",
+  "source": {
+    "doi": "10.1038/s41467-025-65792-y",
+    "workbook": "data\\Source Data 21.xlsx",
+    "workbook_sha256": "E78372214B1386A486B25C8340C19F22BC74D3382F80A9B36A2972CC3D35ADFB",
+    "protocol_sha256": "3CFD1A0BE552DF7BECBF69087462BF8C2C3A974EBD7ED15340A4696306536593",
+    "rows": 359,
+    "plants": 58,
+    "genotype_counts": {
+      "Col": 134,
+      "e1e2": 105,
+      "e2": 120
+    },
+    "recorded_angle_precision_deg": 0.001,
+    "measurement_uncertainty_reported_in_workbook": false
+  },
+  "ara_mapping": {
+    "parent_cycle_deg": 360.0,
+    "parent_cycle_ara": 2.0,
+    "living_directed_increment": 1.2360679774997896,
+    "source_compatible_minor_increment": 0.7639320225002103,
+    "source_compatible_angle_deg": 137.50776405003785,
+    "handedness_tested": false,
+    "phi_vs_three_eighths_separation_ara": 0.013932022500210306,
+    "phi_vs_three_eighths_separation_deg": 2.507764050037855
+  },
+  "development_fits": {
+    "step_fit_ara": 0.7676555555555555,
+    "carrier_fit_ara": 0.7662799999992432,
+    "carrier_fit_bootstrap_95": [
+      0.755569999999292,
+      0.7799699999991809
+    ],
+    "phi_inside_carrier_fit_95": true,
+    "confirmation_phi_minus_fit_median_plant_difference_ara": 0.006558533055724514,
+    "confirmation_phi_minus_fit_bootstrap_95": [
+      0.0,
+      0.007630926871856847
+    ],
+    "fit_advantage_p_positive": 0.0263973602639736,
+    "fit_advantage_significant": false
+  },
+  "headline": {
+    "fixed_one_step_winner": "nearest_eighth_3_8",
+    "fixed_carrier_winner": "phi",
+    "fibonacci_profile_winner": "phi",
+    "order_carrier_p_lower": 0.026297370262973702,
+    "compensation_ratio": 0.3194579249775543,
+    "compensation_order_p_lower": 0.0184981501849815,
+    "compensation_broken_lineage_p_lower": 0.0007999200079992001
+  },
+  "gates": {
+    "eligibility": true,
+    "recorded_resolution": true,
+    "physical_measurement_uncertainty": "not reported",
+    "one_step_phi_wins_fixed": false,
+    "carrier_phi_wins_fixed": true,
+    "fit_compatible_and_not_significantly_better": true,
+    "real_order_beats_shuffle": true,
+    "ordered_compensation_beats_shuffle": true,
+    "ordered_compensation_beats_broken_lineage": true,
+    "fibonacci_profile_phi_wins_fixed": true,
+    "independent_replication": false
+  },
+  "order_control": {
+    "observed_carrier_loss_ara": 0.030163654721591326,
+    "shuffle_median_ara": 0.039755555555555766,
+    "shuffle_95": [
+      0.03004316590056681,
+      0.06038863923637361
+    ],
+    "p_lower": 0.026297370262973702
+  },
+  "compensation": {
+    "pairs": 35,
+    "observed_ratio": 0.3194579249775543,
+    "within_order": {
+      "p_lower": 0.0184981501849815,
+      "null_median": 0.48567288799641023,
+      "null_95": [
+        0.32395292773562423,
+        0.7776779358300699
+      ]
+    },
+    "broken_lineage": {
+      "p_lower": 0.0007999200079992001,
+      "null_median": 0.624795990853689,
+      "null_95": [
+        0.4215826527884198,
+        0.829898149583909
+      ]
+    }
+  },
+  "fibonacci_profile_mae": {
+    "persistence": 0.31152870370370367,
+    "one_third_phase": 0.32439351851851866,
+    "one_over_e": 0.09408613293112522,
+    "nearest_eighth_3_8": 0.04661574074074077,
+    "fibonacci_8_21": 0.006933201058201231,
+    "phi": 0.0032285996293493213,
+    "two_fifths_phase": 0.12005092592592603,
+    "silver_conjugate": 0.12005092592592603,
+    "half_turn_ridge": 0.6698824074074076
+  },
+  "genotype_phi_summary": [
+    {
+      "genotype": "Col",
+      "n_plants": 10,
+      "one_step_median_ara": 0.03881111111111113,
+      "carrier_median_ara": 0.030163654721591326
+    },
+    {
+      "genotype": "e1e2",
+      "n_plants": 9,
+      "one_step_median_ara": 0.16916944444444448,
+      "carrier_median_ara": 0.16477712236121633
+    },
+    {
+      "genotype": "e2",
+      "n_plants": 9,
+      "one_step_median_ara": 0.08508888888888888,
+      "carrier_median_ara": 0.06376323347232749
+    }
+  ],
+  "robustness": {
+    "remove_longest_sequence": {
+      "removed_length": 7,
+      "retained_plants": 4,
+      "winner": "phi",
+      "losses": {
+        "persistence": 0.6325722222222222,
+        "one_third_phase": 0.2526680555555558,
+        "one_over_e": 0.08061334806184306,
+        "nearest_eighth_3_8": 0.054413888888889095,
+        "fibonacci_8_21": 0.0387720238095246,
+        "phi": 0.032183426874316856,
+        "two_fifths_phase": 0.07285555555555567,
+        "silver_conjugate": 0.1452469785321424,
+        "half_turn_ridge": 0.5741791666666666
+      }
+    },
+    "remove_shortest_sequence": {
+      "removed_length": 5,
+      "retained_plants": 9,
+      "winner": "phi",
+      "losses": {
+        "persistence": 0.5122,
+        "one_third_phase": 0.28616111111111087,
+        "one_over_e": 0.1133344640824574,
+        "nearest_eighth_3_8": 0.059294444444445205,
+        "fibonacci_8_21": 0.03536626984127067,
+        "phi": 0.029284488054925006,
+        "two_fifths_phase": 0.0789194444444441,
+        "silver_conjugate": 0.1624424853496822,
+        "half_turn_ridge": 0.6771611111111109
+      }
+    }
+  },
+  "artifacts": {
+    "event_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_EVENTS.csv",
+    "plant_scores_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_PLANT_SCORES.csv",
+    "candidate_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_CANDIDATES.csv",
+    "horizon_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_HORIZONS.csv",
+    "fibonacci_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_FIBONACCI.csv",
+    "null_csv": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_NULLS.csv",
+    "validation_json": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_VALIDATION.json",
+    "technical_report": "T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_REPORT_2026-08-02.md"
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "test": "T333 recorded-qutrit reciprocal radial breathing",
+  "date": "2026-08-03",
+  "verdict_before_independent_validation": "NOT SUPPORTED",
+  "source": {
+    "path": "F:\\SystemFormulaFolder\\external_data\\quantum\\eth_single_ion_contextuality_2017\\ExpDataYuOh.csv",
+    "sha256": "5410775c307edea9f68e95133cf0a733b6cd34e7d9d774b6509472face74d55d",
+    "expected_sha256": "5410775c307edea9f68e95133cf0a733b6cd34e7d9d774b6509472face74d55d",
+    "q53_events_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q53_RECORDED_QUTRIT_EXTERNAL_RETURN_EVENTS.npz",
+    "q53_events_sha256": "b84918cff03f2d268df1c8317cfe16bd93b507bd8cf4ca44a0dbac79f9f0ce12",
+    "counts": {
+      "psi0_psi1": 168399,
+      "psi1_psi2": 169035,
+      "psi2_psi0": 168456
+    }
+  },
+  "protocol": {
+    "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\phi_calibration\\T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_PROTOCOL_v1_FROZEN.md",
+    "sha256": "81a05e47746d6cc2829f658af7376b78e2c0f90e12001fecbea420c8c0e03f93",
+    "expected_sha256": "81a05e47746d6cc2829f658af7376b78e2c0f90e12001fecbea420c8c0e03f93"
+  },
+  "configuration": {
+    "primary_estimator": "circle",
+    "lags": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "max_gap": 2200,
+    "min_strength": 0.01,
+    "max_residual": 0.25,
+    "shuffles": 500,
+    "shuffle_seed": 3332026,
+    "candidates": {
+      "plastic": 1.324717957244746,
+      "sqrt2": 1.4142135623730951,
+      "three_halves": 1.5,
+      "phi": 1.618033988749895,
+      "octave": 2.0,
+      "e": 2.718281828459045
+    }
+  },
+  "calibration": {
+    "fitted_reciprocal_alpha": 1.8091140522918032,
+    "pooled_primary": {
+      "n": 1575525,
+      "n_contracting": 787495,
+      "n_expanding": 788030,
+      "median_contracting": 0.552667618090983,
+      "median_expanding": 1.8088223401317456,
+      "reciprocal_product": 0.9996775342703696,
+      "scores": {
+        "plastic": 0.6232753545028678,
+        "sqrt2": 0.49252732258884613,
+        "three_halves": 0.37474428693246276,
+        "phi": 0.22325085302958458,
+        "octave": 0.20061985797109905,
+        "e": 0.8143254968512085
+      },
+      "winner": "octave",
+      "asymmetric_e_phi_score": 0.518465657207513
+    }
+  },
+  "holdout": {
+    "pooled_primary": {
+      "n": 1571673,
+      "n_contracting": 785198,
+      "n_expanding": 786475,
+      "median_contracting": 0.5533312481023227,
+      "median_expanding": 1.8069219907312488,
+      "reciprocal_product": 0.9998264003548555,
+      "scores": {
+        "plastic": 0.6210241462318429,
+        "sqrt2": 0.49027611431782125,
+        "three_halves": 0.3724930786614379,
+        "phi": 0.2209996447585597,
+        "octave": 0.20287106624212392,
+        "e": 0.8165767051222333
+      },
+      "winner": "octave",
+      "asymmetric_e_phi_score": 0.5186145602250896
+    },
+    "fitted_alpha_score": 0.0022512082709579273,
+    "planes": {
+      "psi0_psi1": {
+        "n": 523473,
+        "n_contracting": 261736,
+        "n_expanding": 261737,
+        "median_contracting": 0.5540433810220258,
+        "median_expanding": 1.804655086615083,
+        "reciprocal_product": 0.9998572057668174,
+        "scores": {
+          "plastic": 0.6184826273380819,
+          "sqrt2": 0.4877345954240603,
+          "three_halves": 0.3699515597676769,
+          "phi": 0.21845812586479874,
+          "octave": 0.2054125851358849,
+          "e": 0.8191182240159943
+        },
+        "winner": "octave",
+        "asymmetric_e_phi_score": 0.5186453705111467
+      },
+      "psi1_psi2": {
+        "n": 526515,
+        "n_contracting": 262918,
+        "n_expanding": 263597,
+        "median_contracting": 0.5528521481072652,
+        "median_expanding": 1.8088576858115237,
+        "reciprocal_product": 1.0000308572212375,
+        "scores": {
+          "plastic": 0.622961061070713,
+          "sqrt2": 0.4922130291566914,
+          "three_halves": 0.37442999350030803,
+          "phi": 0.22293655959742986,
+          "octave": 0.20093415140325377,
+          "e": 0.8146397902833632
+        },
+        "winner": "octave",
+        "asymmetric_e_phi_score": 0.5188190316855599
+      },
+      "psi2_psi0": {
+        "n": 521685,
+        "n_contracting": 260544,
+        "n_expanding": 261141,
+        "median_contracting": 0.553105207000359,
+        "median_expanding": 1.8071405817847361,
+        "reciprocal_product": 0.9995388655667957,
+        "scores": {
+          "plastic": 0.6215537061944063,
+          "sqrt2": 0.4908056742803847,
+          "three_halves": 0.3730226386240013,
+          "phi": 0.22152920472112314,
+          "octave": 0.2023415062795605,
+          "e": 0.8160471451596699
+        },
+        "winner": "octave",
+        "asymmetric_e_phi_score": 0.5183269341520123
+      }
+    },
+    "plane_absolute_checks": {
+      "psi0_psi1": {
+        "contraction_relative_error": -0.1035389782644538,
+        "expansion_relative_error": 0.11533818149850661,
+        "reciprocal_product_error": 0.0001427942331826415,
+        "pass": false
+      },
+      "psi1_psi2": {
+        "contraction_relative_error": -0.10546643360905394,
+        "expansion_relative_error": 0.11793553064300011,
+        "reciprocal_product_error": 3.085722123752355e-05,
+        "pass": false
+      },
+      "psi2_psi0": {
+        "contraction_relative_error": -0.10505697571887274,
+        "expansion_relative_error": 0.11687430199222604,
+        "reciprocal_product_error": 0.00046113443320427994,
+        "pass": false
+      }
+    },
+    "sensitivity": {
+      "circle": {
+        "pooled": {
+          "n": 1571673,
+          "n_contracting": 785198,
+          "n_expanding": 786475,
+          "median_contracting": 0.5533312481023227,
+          "median_expanding": 1.8069219907312488,
+          "reciprocal_product": 0.9998264003548555,
+          "scores": {
+            "plastic": 0.6210241462318429,
+            "sqrt2": 0.49027611431782125,
+            "three_halves": 0.3724930786614379,
+            "phi": 0.2209996447585597,
+            "octave": 0.20287106624212392,
+            "e": 0.8165767051222333
+          },
+          "winner": "octave",
+          "asymmetric_e_phi_score": 0.5186145602250896
+        },
+        "phi_wins_of_21": 3
+      },
+      "centroid": {
+        "pooled": {
+          "n": 1580270,
+          "n_contracting": 789890,
+          "n_expanding": 790380,
+          "median_contracting": 0.5892636677009743,
+          "median_expanding": 1.6998740811337716,
+          "reciprocal_product": 1.0016740356787097,
+          "scores": {
+            "plastic": 0.49703657210637897,
+            "sqrt2": 0.36628854019235735,
+            "three_halves": 0.24850550453597398,
+            "phi": 0.0970120706330958,
+            "octave": 0.3268586403675878,
+            "e": 0.9405642792476973
+          },
+          "winner": "phi",
+          "asymmetric_e_phi_score": 0.5204608109831887
+        },
+        "phi_wins_of_21": 21
+      },
+      "extrema": {
+        "pooled": {
+          "n": 1525885,
+          "n_contracting": 762614,
+          "n_expanding": 763271,
+          "median_contracting": 0.5895077168610028,
+          "median_expanding": 1.6979934651309445,
+          "reciprocal_product": 1.0009802508742458,
+          "scores": {
+            "plastic": 0.49551555923878055,
+            "sqrt2": 0.3647675273247589,
+            "three_halves": 0.24698449166837555,
+            "phi": 0.09549105776549738,
+            "octave": 0.32837965323518625,
+            "e": 0.9420852921152957
+          },
+          "winner": "phi",
+          "asymmetric_e_phi_score": 0.5197679456824951
+        },
+        "phi_wins_of_21": 21
+      }
+    }
+  },
+  "quadrants": [
+    {
+      "plane": "psi0_psi1",
+      "valid_steps": 79706,
+      "contracting_reverse_count": 19921,
+      "contracting_reverse_share": 0.2499309964118134,
+      "contracting_forward_count": 20000,
+      "contracting_forward_share": 0.25092213886031167,
+      "expanding_reverse_count": 19855,
+      "expanding_reverse_share": 0.24910295335357438,
+      "expanding_forward_count": 19930,
+      "expanding_forward_share": 0.25004391137430054
+    },
+    {
+      "plane": "psi1_psi2",
+      "valid_steps": 80370,
+      "contracting_reverse_count": 20113,
+      "contracting_reverse_share": 0.25025507029986316,
+      "contracting_forward_count": 20129,
+      "contracting_forward_share": 0.25045414955829287,
+      "expanding_reverse_count": 20014,
+      "expanding_reverse_share": 0.24902326738832897,
+      "expanding_forward_count": 20114,
+      "expanding_forward_share": 0.250267512753515
+    },
+    {
+      "plane": "psi2_psi0",
+      "valid_steps": 79659,
+      "contracting_reverse_count": 19945,
+      "contracting_reverse_share": 0.2503797436573394,
+      "contracting_forward_count": 19873,
+      "contracting_forward_share": 0.24947589098532494,
+      "expanding_reverse_count": 19992,
+      "expanding_reverse_share": 0.2509697585960155,
+      "expanding_forward_count": 19849,
+      "expanding_forward_share": 0.24917460676132014
+    }
+  ],
+  "temporal_null": {
+    "psi0_psi1": {
+      "observed": 0.21845812586479874,
+      "p05": 0.25309206082699537,
+      "median": 0.25575241728928194,
+      "p95": 0.25873830583334606,
+      "empirical_p": 0.001996007984031936
+    },
+    "psi1_psi2": {
+      "observed": 0.22293655959742986,
+      "p05": 0.2535367968112224,
+      "median": 0.256599179919756,
+      "p95": 0.25963120532211736,
+      "empirical_p": 0.001996007984031936
+    },
+    "psi2_psi0": {
+      "observed": 0.22152920472112314,
+      "p05": 0.25205468500844574,
+      "median": 0.25479777423139915,
+      "p95": 0.2577849328860525,
+      "empirical_p": 0.001996007984031936
+    },
+    "pooled": {
+      "observed": 0.2209996447585597,
+      "p05": 0.25402836297296,
+      "median": 0.25576250014973584,
+      "p95": 0.2574511873185977,
+      "empirical_p": 0.001996007984031936
+    }
+  },
+  "gates": {
+    "g0_primary_source_and_implementation": true,
+    "g1_four_quadrants": true,
+    "g2_phi_wins": false,
+    "g2_phi_wins_of_21": 3,
+    "g3_absolute_endpoints": false,
+    "g3_plane_passes_of_3": 0,
+    "g4_temporal_order": true,
+    "g4_plane_passes_of_3": 3,
+    "g4_pooled_empirical_p": 0.001996007984031936,
+    "g5_beats_train_fitted": false
+  },
+  "artifacts": {
+    "cells": "T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_CELLS.csv",
+    "quadrants": "T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_QUADRANTS.csv",
+    "nulls": "T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_NULLS.csv",
+    "figure": "T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING.png"
+  },
+  "boundary": "New exact radial question on a previously opened external archive; second-archive replication remains required."
+}

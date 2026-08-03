@@ -1,0 +1,682 @@
+{
+  "test_id": "T328-PHI-CIRCLE-TRAIN-BUBBLES-v1",
+  "run_date": "2026-08-02",
+  "source": "Pandey et al., Zenodo 10.5281/zenodo.15102957",
+  "protocol_sha256": "14FC951AFB39DF73442F19A50A5189833C700C1B7BA9E90D3A37F2E410221F84",
+  "source_aggregate_sha256": "69FC6E3F614B4B3422183F48968F1A9657756EE9F4A342EC76272CCF6CF73BCC",
+  "operator": "x[n+1] = (x[n] + 2/phi) mod 2",
+  "verdict": "PARTIAL / MIXED",
+  "diagnostics": {
+    "calibration_source_videos": 7,
+    "calibration_candidate_roots": 125,
+    "calibration_eligible_roots": 123,
+    "calibration_resolution_exclusions": 2,
+    "evaluation_source_videos": 21,
+    "evaluation_candidate_roots": 173,
+    "evaluation_eligible_roots": 170,
+    "evaluation_resolution_exclusions": 3,
+    "holdout_source_videos": 7,
+    "holdout_candidate_roots": 40,
+    "holdout_eligible_roots": 40
+  },
+  "candidate_summary": {
+    "calibration": {
+      "persistence": {
+        "increment_ara": 0.0,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.11919964160247783,
+        "local_directed_median": 0.09368855227654427,
+        "parent_directed_mean": 0.28476003640768005,
+        "parent_directed_median": 0.2647583724376785,
+        "local_reversible_mean": 0.11919964160247783,
+        "local_reversible_median": 0.09368855227654427,
+        "parent_reversible_mean": 0.28476003640768005,
+        "parent_reversible_median": 0.2647583724376785,
+        "return_mae_mean": 0.15159881054026894,
+        "return_mae_median": 0.13187612797242748
+      },
+      "ridge": {
+        "increment_ara": 1.0,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.8808003583975221,
+        "local_directed_median": 0.9063114477234557,
+        "parent_directed_mean": 0.5217692425799823,
+        "parent_directed_median": 0.5072743878856179,
+        "local_reversible_mean": 0.8808003583975221,
+        "local_reversible_median": 0.9063114477234557,
+        "parent_reversible_mean": 0.521769242579982,
+        "parent_reversible_median": 0.5072743878856179,
+        "return_mae_mean": 0.6072409708198934,
+        "return_mae_median": 0.6134304503549507
+      },
+      "silver_conjugate": {
+        "increment_ara": 1.1715728752538097,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.7871055622598266,
+        "local_directed_median": 0.8030623733023892,
+        "parent_directed_mean": 0.5028693201530401,
+        "parent_directed_median": 0.5054748464312471,
+        "local_reversible_mean": 0.7746345429357362,
+        "local_reversible_median": 0.7977362167703921,
+        "parent_reversible_mean": 0.47087867909026077,
+        "parent_reversible_median": 0.4726666254775411,
+        "return_mae_mean": 0.353033151456117,
+        "return_mae_median": 0.3648455817743736
+      },
+      "two_fifths": {
+        "increment_ara": 1.2,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.764491225409804,
+        "local_directed_median": 0.7804303638563297,
+        "parent_directed_mean": 0.5027050917688329,
+        "parent_directed_median": 0.4936405492109659,
+        "local_reversible_mean": 0.7503746985246726,
+        "local_reversible_median": 0.7723140051352777,
+        "parent_reversible_mean": 0.48223314199085454,
+        "parent_reversible_median": 0.48153551743027734,
+        "return_mae_mean": 0.2952508297723271,
+        "return_mae_median": 0.30880031188796014
+      },
+      "phi": {
+        "increment_ara": 1.2360679774997896,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.7349199131341135,
+        "local_directed_median": 0.7484136452824826,
+        "parent_directed_mean": 0.5077289059375608,
+        "parent_directed_median": 0.5135439568617852,
+        "local_reversible_mean": 0.7199943258169642,
+        "local_reversible_median": 0.7402215041652613,
+        "parent_reversible_mean": 0.4708920645858643,
+        "parent_reversible_median": 0.4788639570179223,
+        "return_mae_mean": 0.15029659455280067,
+        "return_mae_median": 0.14700685709688457
+      },
+      "fibonacci_8_21": {
+        "increment_ara": 1.2380952380952381,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.7331940998359502,
+        "local_directed_median": 0.747004388807448,
+        "parent_directed_mean": 0.5077277368473758,
+        "parent_directed_median": 0.5065951278302225,
+        "local_reversible_mean": 0.7181485433806191,
+        "local_reversible_median": 0.7388501213993066,
+        "parent_reversible_mean": 0.46997216859462304,
+        "parent_reversible_median": 0.4759686642291885,
+        "return_mae_mean": 0.155448453468961,
+        "return_mae_median": 0.15201060931140825
+      },
+      "three_eighths": {
+        "increment_ara": 1.25,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.7228234377765591,
+        "local_directed_median": 0.735416280248097,
+        "parent_directed_mean": 0.5088565625872323,
+        "parent_directed_median": 0.5033946442384838,
+        "local_reversible_mean": 0.7077108205721528,
+        "local_reversible_median": 0.7271982462032951,
+        "parent_reversible_mean": 0.48244777528868316,
+        "parent_reversible_median": 0.48566619231162766,
+        "return_mae_mean": 0.1630999436363292,
+        "return_mae_median": 0.1657727888450475
+      },
+      "one_over_e": {
+        "increment_ara": 1.2642411176571153,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.7104839726096389,
+        "local_directed_median": 0.7217342621067702,
+        "parent_directed_mean": 0.5081954625463201,
+        "parent_directed_median": 0.5049018929788772,
+        "local_reversible_mean": 0.6944307019496906,
+        "local_reversible_median": 0.7133191832425607,
+        "parent_reversible_mean": 0.4805753070758864,
+        "parent_reversible_median": 0.484811472192876,
+        "return_mae_mean": 0.228270955024775,
+        "return_mae_median": 0.2355922054090344
+      },
+      "one_third": {
+        "increment_ara": 1.3333333333333335,
+        "roots": 123,
+        "videos": 4,
+        "local_directed_mean": 0.6471205178354613,
+        "local_directed_median": 0.6565943292619856,
+        "parent_directed_mean": 0.49833476267464616,
+        "parent_directed_median": 0.4922393763967152,
+        "local_reversible_mean": 0.6334575244709022,
+        "local_reversible_median": 0.6470970305229962,
+        "parent_reversible_mean": 0.47595107477878135,
+        "parent_reversible_median": 0.4692351233779206,
+        "return_mae_mean": 0.4022402138540035,
+        "return_mae_median": 0.4054623741706749
+      },
+      "winner_local_directed_mean": "persistence",
+      "winner_parent_directed_mean": "persistence",
+      "winner_return_mae_mean": "phi"
+    },
+    "evaluation": {
+      "persistence": {
+        "increment_ara": 0.0,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.1319664212458484,
+        "local_directed_median": 0.10868349531467836,
+        "parent_directed_mean": 0.2529794300404968,
+        "parent_directed_median": 0.1952856497169806,
+        "local_reversible_mean": 0.1319664212458484,
+        "local_reversible_median": 0.10868349531467836,
+        "parent_reversible_mean": 0.2529794300404968,
+        "parent_reversible_median": 0.1952856497169806,
+        "return_mae_mean": 0.16070205873690221,
+        "return_mae_median": 0.14180549565565678
+      },
+      "ridge": {
+        "increment_ara": 1.0,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.8680335787541515,
+        "local_directed_median": 0.8913165046853216,
+        "parent_directed_mean": 0.560840570304303,
+        "parent_directed_median": 0.540545200892396,
+        "local_reversible_mean": 0.8680335787541515,
+        "local_reversible_median": 0.8913165046853216,
+        "parent_reversible_mean": 0.560840570304303,
+        "parent_reversible_median": 0.540545200892396,
+        "return_mae_mean": 0.6040912769194513,
+        "return_mae_median": 0.6123260761744682
+      },
+      "silver_conjugate": {
+        "increment_ara": 1.1715728752538097,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7824804024682054,
+        "local_directed_median": 0.8027001445014328,
+        "parent_directed_mean": 0.5026347993379159,
+        "parent_directed_median": 0.4948744245151754,
+        "local_reversible_mean": 0.7677939414229188,
+        "local_reversible_median": 0.7879028018472647,
+        "parent_reversible_mean": 0.4716125720152999,
+        "parent_reversible_median": 0.47412167806407346,
+        "return_mae_mean": 0.34856973381231854,
+        "return_mae_median": 0.3556040076308691
+      },
+      "two_fifths": {
+        "increment_ara": 1.2,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7589743140321049,
+        "local_directed_median": 0.7762445400988901,
+        "parent_directed_mean": 0.5010348809786508,
+        "parent_directed_median": 0.5018318034617516,
+        "local_reversible_mean": 0.7447881042051037,
+        "local_reversible_median": 0.7636489701261292,
+        "parent_reversible_mean": 0.47350561201757196,
+        "parent_reversible_median": 0.4737918088252169,
+        "return_mae_mean": 0.2932148080972524,
+        "return_mae_median": 0.30553170210879926
+      },
+      "phi": {
+        "increment_ara": 1.2360679774997896,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7275458881552563,
+        "local_directed_median": 0.743672653190828,
+        "parent_directed_mean": 0.5045951896121239,
+        "parent_directed_median": 0.5008110821069707,
+        "local_reversible_mean": 0.7137550592923092,
+        "local_reversible_median": 0.7308642327864232,
+        "parent_reversible_mean": 0.4742150599455593,
+        "parent_reversible_median": 0.47592822263618373,
+        "return_mae_mean": 0.15074476938962184,
+        "return_mae_median": 0.14252393364644644
+      },
+      "fibonacci_8_21": {
+        "increment_ara": 1.2380952380952381,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7257561218905043,
+        "local_directed_median": 0.7416453925953794,
+        "parent_directed_mean": 0.5046373478449988,
+        "parent_directed_median": 0.5061831891230217,
+        "local_reversible_mean": 0.7119790227255091,
+        "local_reversible_median": 0.7288369721909747,
+        "parent_reversible_mean": 0.47197896497150693,
+        "parent_reversible_median": 0.47261422385176366,
+        "return_mae_mean": 0.15623192735590685,
+        "return_mae_median": 0.14865363310757934
+      },
+      "three_eighths": {
+        "increment_ara": 1.25,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7156224216048594,
+        "local_directed_median": 0.7316970478278475,
+        "parent_directed_mean": 0.509273927460188,
+        "parent_directed_median": 0.5014667337792857,
+        "local_reversible_mean": 0.7020374001942167,
+        "local_reversible_median": 0.7173496815552372,
+        "parent_reversible_mean": 0.4796527501958004,
+        "parent_reversible_median": 0.4778602992843407,
+        "return_mae_mean": 0.16395146199651742,
+        "return_mae_median": 0.16451349391519599
+      },
+      "one_over_e": {
+        "increment_ara": 1.2642411176571153,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.7036080605604275,
+        "local_directed_median": 0.7176806836420095,
+        "parent_directed_mean": 0.51703408954071,
+        "parent_directed_median": 0.5140495241769429,
+        "local_reversible_mean": 0.689762261523215,
+        "local_reversible_median": 0.7053768835073824,
+        "parent_reversible_mean": 0.4828037609824207,
+        "parent_reversible_median": 0.4841882415642682,
+        "return_mae_mean": 0.22822711346246977,
+        "return_mae_median": 0.23208041259787646
+      },
+      "one_third": {
+        "increment_ara": 1.3333333333333335,
+        "roots": 170,
+        "videos": 10,
+        "local_directed_mean": 0.6442378247846977,
+        "local_directed_median": 0.6552340799658988,
+        "parent_directed_mean": 0.5184051565299123,
+        "parent_directed_median": 0.5247394421035542,
+        "local_reversible_mean": 0.6286153925245227,
+        "local_reversible_median": 0.6418907937911514,
+        "parent_reversible_mean": 0.49581298640872307,
+        "parent_reversible_median": 0.4992876745457515,
+        "return_mae_mean": 0.3963512324948078,
+        "return_mae_median": 0.39911147748086484
+      },
+      "winner_local_directed_mean": "persistence",
+      "winner_parent_directed_mean": "persistence",
+      "winner_return_mae_mean": "phi"
+    },
+    "holdout": {
+      "persistence": {
+        "increment_ara": 0.0,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.2028172711484585,
+        "local_directed_median": 0.11638620922706477,
+        "parent_directed_mean": 0.2651769560335572,
+        "parent_directed_median": 0.24589269789090984,
+        "local_reversible_mean": 0.2028172711484585,
+        "local_reversible_median": 0.11638620922706477,
+        "parent_reversible_mean": 0.2651769560335572,
+        "parent_reversible_median": 0.24589269789090984,
+        "return_mae_mean": 0.20984924318176393,
+        "return_mae_median": 0.15726267153672757
+      },
+      "ridge": {
+        "increment_ara": 1.0,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.7971827288515415,
+        "local_directed_median": 0.8836137907729352,
+        "parent_directed_mean": 0.546008065229988,
+        "parent_directed_median": 0.5354218378454193,
+        "local_reversible_mean": 0.7971827288515415,
+        "local_reversible_median": 0.8836137907729352,
+        "parent_reversible_mean": 0.546008065229988,
+        "parent_reversible_median": 0.5354218378454193,
+        "return_mae_mean": 0.597823755862764,
+        "return_mae_median": 0.6026120148140562
+      },
+      "silver_conjugate": {
+        "increment_ara": 1.1715728752538097,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.7326153203376616,
+        "local_directed_median": 0.7953515432160005,
+        "parent_directed_mean": 0.5068513104226634,
+        "parent_directed_median": 0.5058890516975207,
+        "local_reversible_mean": 0.7142471459862626,
+        "local_reversible_median": 0.7806709725224649,
+        "parent_reversible_mean": 0.4756951219660897,
+        "parent_reversible_median": 0.4868558044630904,
+        "return_mae_mean": 0.3232661810445231,
+        "return_mae_median": 0.34096930727283664
+      },
+      "two_fifths": {
+        "increment_ara": 1.2,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.7118113540447963,
+        "local_directed_median": 0.7733529949698451,
+        "parent_directed_mean": 0.5104575026258726,
+        "parent_directed_median": 0.5052181189156991,
+        "local_reversible_mean": 0.6938935669223955,
+        "local_reversible_median": 0.7558973724672072,
+        "parent_reversible_mean": 0.4832118252130158,
+        "parent_reversible_median": 0.4820410600190683,
+        "return_mae_mean": 0.28376236798474397,
+        "return_mae_median": 0.29071670526197696
+      },
+      "phi": {
+        "increment_ara": 1.2360679774997896,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.6861433182737062,
+        "local_directed_median": 0.7385130926828218,
+        "parent_directed_mean": 0.507744969261,
+        "parent_directed_median": 0.5123966948717726,
+        "local_reversible_mean": 0.6652054120322016,
+        "local_reversible_median": 0.7260949773561662,
+        "parent_reversible_mean": 0.48254755713139885,
+        "parent_reversible_median": 0.4816216808897714,
+        "return_mae_mean": 0.16364699622276413,
+        "return_mae_median": 0.1396504505386375
+      },
+      "fibonacci_8_21": {
+        "increment_ara": 1.2380952380952381,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.6845397648643757,
+        "local_directed_median": 0.7364858320873733,
+        "parent_directed_mean": 0.5099866392999004,
+        "parent_directed_median": 0.5080504058965264,
+        "local_reversible_mean": 0.663601858622871,
+        "local_reversible_median": 0.7240677167607177,
+        "parent_reversible_mean": 0.47948596082124084,
+        "parent_reversible_median": 0.47541890923134567,
+        "return_mae_mean": 0.16940700599771516,
+        "return_mae_median": 0.14670267319204006
+      },
+      "three_eighths": {
+        "increment_ara": 1.25,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.676069573975753,
+        "local_directed_median": 0.7245810701826114,
+        "parent_directed_mean": 0.5158672224977566,
+        "parent_directed_median": 0.5173937297649867,
+        "local_reversible_mean": 0.6547874364160055,
+        "local_reversible_median": 0.712643445662714,
+        "parent_reversible_mean": 0.4696491341374395,
+        "parent_reversible_median": 0.47462701114256844,
+        "return_mae_mean": 0.1693510433555432,
+        "return_mae_median": 0.1744318780954451
+      },
+      "one_over_e": {
+        "increment_ara": 1.2642411176571153,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.6661115185672146,
+        "local_directed_median": 0.7103399525254961,
+        "parent_directed_mean": 0.5182685204310363,
+        "parent_directed_median": 0.5187675260057029,
+        "local_reversible_mean": 0.6450096804222946,
+        "local_reversible_median": 0.6989319527718071,
+        "parent_reversible_mean": 0.47888137956497634,
+        "parent_reversible_median": 0.48128686287667355,
+        "return_mae_mean": 0.21670506408248646,
+        "return_mae_median": 0.21684643326593772
+      },
+      "one_third": {
+        "increment_ara": 1.3333333333333335,
+        "roots": 40,
+        "videos": 4,
+        "local_directed_mean": 0.6184060789273276,
+        "local_directed_median": 0.6461721686921312,
+        "parent_directed_mean": 0.5091260009266261,
+        "parent_directed_median": 0.5142986804900374,
+        "local_reversible_mean": 0.5951978943532411,
+        "local_reversible_median": 0.6371928907401195,
+        "parent_reversible_mean": 0.47350227822420443,
+        "parent_reversible_median": 0.4670278968880116,
+        "return_mae_mean": 0.3722324770451391,
+        "return_mae_median": 0.39202890901551907
+      },
+      "winner_local_directed_mean": "persistence",
+      "winner_parent_directed_mean": "persistence",
+      "winner_return_mae_mean": "phi"
+    }
+  },
+  "phi_parent_comparisons": {
+    "evaluation": {
+      "persistence": {
+        "mean": 0.2516157595716272,
+        "ci_low": 0.22295089097339177,
+        "ci_high": 0.27244501761343143,
+        "roots": 170,
+        "videos": 10
+      },
+      "ridge": {
+        "mean": -0.056245380692179055,
+        "ci_low": -0.08129119860394528,
+        "ci_high": -0.03984771281367853,
+        "roots": 170,
+        "videos": 10
+      },
+      "silver_conjugate": {
+        "mean": 0.0019603902742080415,
+        "ci_low": -0.0092657500716327,
+        "ci_high": 0.01671475418131434,
+        "roots": 170,
+        "videos": 10
+      },
+      "two_fifths": {
+        "mean": 0.003560308633473216,
+        "ci_low": -0.004739565887519735,
+        "ci_high": 0.019409052143648558,
+        "roots": 170,
+        "videos": 10
+      },
+      "fibonacci_8_21": {
+        "mean": -4.2158232874847497e-05,
+        "ci_low": -0.0019373556534007625,
+        "ci_high": 0.001098725758713676,
+        "roots": 170,
+        "videos": 10
+      },
+      "three_eighths": {
+        "mean": -0.004678737848063971,
+        "ci_low": -0.011805550287161737,
+        "ci_high": 0.0011175306234468036,
+        "roots": 170,
+        "videos": 10
+      },
+      "one_over_e": {
+        "mean": -0.01243889992858599,
+        "ci_low": -0.017896180388463113,
+        "ci_high": -0.0072024091861302006,
+        "roots": 170,
+        "videos": 10
+      },
+      "one_third": {
+        "mean": -0.013809966917788293,
+        "ci_low": -0.02908239282999464,
+        "ci_high": 0.0006774181304390509,
+        "roots": 170,
+        "videos": 10
+      }
+    },
+    "holdout": {
+      "persistence": {
+        "mean": 0.2425680132274428,
+        "ci_low": 0.12005694286105897,
+        "ci_high": 0.301560273331328,
+        "roots": 40,
+        "videos": 4
+      },
+      "ridge": {
+        "mean": -0.03826309596898804,
+        "ci_low": -0.06387135868296015,
+        "ci_high": 0.035340569989655395,
+        "roots": 40,
+        "videos": 4
+      },
+      "silver_conjugate": {
+        "mean": 0.0008936588383365709,
+        "ci_low": -0.02750477302446269,
+        "ci_high": 0.04182972850765595,
+        "roots": 40,
+        "videos": 4
+      },
+      "two_fifths": {
+        "mean": -0.002712533364872617,
+        "ci_low": -0.013890587371683614,
+        "ci_high": 0.010514289025398256,
+        "roots": 40,
+        "videos": 4
+      },
+      "fibonacci_8_21": {
+        "mean": -0.0022416700389003424,
+        "ci_low": -0.014115325726275916,
+        "ci_high": 0.010697133404695263,
+        "roots": 40,
+        "videos": 4
+      },
+      "three_eighths": {
+        "mean": -0.00812225323675657,
+        "ci_low": -0.02038580084545403,
+        "ci_high": 0.009602963044027468,
+        "roots": 40,
+        "videos": 4
+      },
+      "one_over_e": {
+        "mean": -0.010523551170036336,
+        "ci_low": -0.027703648721024838,
+        "ci_high": 0.02179594029251989,
+        "roots": 40,
+        "videos": 4
+      },
+      "one_third": {
+        "mean": -0.0013810316656260742,
+        "ci_low": -0.020562134558592297,
+        "ci_high": 0.015778619891712246,
+        "roots": 40,
+        "videos": 4
+      }
+    }
+  },
+  "controls": {
+    "evaluation": {
+      "real_mean": 0.5045951896121239,
+      "reversed_time_mean": 0.5088647455714405,
+      "broken_lineage_mean": 0.5070072519187739,
+      "real_minus_reversed": {
+        "mean": -0.004269555959316528,
+        "ci_low": -0.021478450233435035,
+        "ci_high": 0.008389402194232497,
+        "roots": 170,
+        "videos": 10
+      },
+      "real_minus_broken": {
+        "mean": -0.00205511982373306,
+        "ci_low": -0.0082169148695797,
+        "ci_high": 0.003825019221221327,
+        "roots": 169,
+        "videos": 9
+      }
+    },
+    "holdout": {
+      "real_mean": 0.507744969261,
+      "reversed_time_mean": 0.5039736974251843,
+      "broken_lineage_mean": 0.5140232169279144,
+      "real_minus_reversed": {
+        "mean": 0.0037712718358157093,
+        "ci_low": -0.005021597949502878,
+        "ci_high": 0.0255327642706549,
+        "roots": 40,
+        "videos": 4
+      },
+      "real_minus_broken": {
+        "mean": -0.006278247666914367,
+        "ci_low": -0.019102269348225304,
+        "ci_high": 0.008746532645677004,
+        "roots": 40,
+        "videos": 4
+      }
+    }
+  },
+  "shuffle": {
+    "evaluation": {
+      "observed_mean": 0.504595189612124,
+      "null_median": 0.5046797242145888,
+      "null_95": [
+        0.49648553513636784,
+        0.5127177442193349
+      ],
+      "p_lower": 0.4904509549045096
+    },
+    "holdout": {
+      "observed_mean": 0.5077449692609999,
+      "null_median": 0.5034331057170194,
+      "null_95": [
+        0.4845116424150409,
+        0.5225788777567768
+      ],
+      "p_lower": 0.6824317568243176
+    }
+  },
+  "resolution": {
+    "pixel_scale_m": 0.0005208333333333333,
+    "median_heading_grain_ara": 0.04338010158164775,
+    "heading_grain_95": [
+      0.01001056538028121,
+      0.13616352032559337
+    ],
+    "nearest_fixed_candidate": "fibonacci_8_21",
+    "phi_increment_ara": 1.2360679774997896,
+    "nearest_increment_ara": 1.2380952380952381,
+    "one_step_separation_ara": 0.0020272605954485545,
+    "one_step_exact_phi_resolution": false,
+    "horizons": [
+      {
+        "horizon": 1,
+        "candidate_separation_ara": 0.0020272605954485545,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 2,
+        "candidate_separation_ara": 0.004054521190897109,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 3,
+        "candidate_separation_ara": 0.006081781786345886,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 5,
+        "candidate_separation_ara": 0.01013630297724255,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 8,
+        "candidate_separation_ara": 0.016218084763588436,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 13,
+        "candidate_separation_ara": 0.026354387740830987,
+        "resolves_median_heading_grain": false
+      },
+      {
+        "horizon": 21,
+        "candidate_separation_ara": 0.04257247250441765,
+        "resolves_median_heading_grain": false
+      }
+    ],
+    "first_resolved_horizon": null
+  },
+  "gates": {
+    "holdout_sufficient": true,
+    "phi_parent_winner_evaluation_and_holdout": false,
+    "phi_beats_every_rival_with_registered_uncertainty": false,
+    "observed_order_beats_shuffle_evaluation_and_holdout": false,
+    "real_lineage_beats_broken_lineage": false,
+    "phi_fibonacci_return_winner_evaluation_and_holdout": true,
+    "multistep_exact_constant_resolution": false
+  }
+}

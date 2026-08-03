@@ -1,0 +1,141 @@
+{
+  "test_id": "T327-PHI-CIRCLE-TRAIN-THALWEG-v2",
+  "protocol_sha256": "13AE347522CD8B7931D21E0E1F760ECF8907A05F7A556CD9C4D51047E48EA909",
+  "source_sha256": "041FBFF2233E590AECFD9A5DFC08C84C5A17678A8DF1ABDAC667A21A2D823ED7",
+  "verdict": "NOT SUPPORTED",
+  "source_geometry": {
+    "cross_sections": 33,
+    "points_per_cross_section": 41,
+    "angles_deg": [
+      10,
+      15,
+      20,
+      25,
+      30,
+      35,
+      40,
+      45,
+      50,
+      55,
+      60,
+      65,
+      70,
+      75,
+      80,
+      85,
+      90,
+      95,
+      100,
+      105,
+      110,
+      115,
+      120,
+      125,
+      130,
+      135,
+      140,
+      145,
+      150,
+      155,
+      160,
+      165,
+      170
+    ],
+    "thalweg_ties": 0,
+    "control_paths": 40
+  },
+  "thalweg": {
+    "local_winner": "persistence",
+    "parent_winner": "persistence",
+    "phi_local_score": 0.7247693493902059,
+    "phi_local_positive": 0.7634813143332192,
+    "phi_local_negative": 0.7247693493902059,
+    "phi_local_sign": "-",
+    "phi_parent_score": 0.47173599110813513,
+    "phi_parent_positive": 0.47173599110813513,
+    "phi_parent_negative": 0.5365563401056961,
+    "phi_parent_sign": "+",
+    "phi_control_rank_of_41": 16,
+    "phi_control_percentile": 39.02439024390244,
+    "control_phi_median": 0.4804391688663661,
+    "return_winner": "three_eighths",
+    "phi_return_mae": 0.1769904252752217,
+    "best_return_mae": 0.14009716694258947,
+    "free_increment_diagnostic": {
+      "increment_ara": 0.0184,
+      "parent_loss_ara": 0.1043019762569628
+    }
+  },
+  "order_controls": {
+    "observed": 0.47173599110813513,
+    "shuffle_median": 0.4649098500737927,
+    "shuffle_95": [
+      0.35423502442272303,
+      0.5663653269113591
+    ],
+    "shuffle_p_lower": 0.5509449055094491,
+    "reverse": 0.4446867121663527,
+    "seam_median": 0.45626985691021393,
+    "seam_min": 0.4140565018809841,
+    "seam_max": 0.5768096552824398
+  },
+  "resolution": {
+    "nearest_fixed_rational": "fibonacci_8_21",
+    "phi_increment_ara": 0.7639320225002103,
+    "nearest_rational_increment_ara": 0.7619047619047619,
+    "candidate_separation_ara": 0.0020272605954484435,
+    "median_raw_lateral_neighbour_spacing_ara": 0.022067024442014915,
+    "horizons": [
+      {
+        "horizon": 1,
+        "separation_ara": 0.0020272605954484435,
+        "resolves_raw_grain": false
+      },
+      {
+        "horizon": 2,
+        "separation_ara": 0.004054521190896887,
+        "resolves_raw_grain": false
+      },
+      {
+        "horizon": 3,
+        "separation_ara": 0.0060817817863454415,
+        "resolves_raw_grain": false
+      },
+      {
+        "horizon": 5,
+        "separation_ara": 0.010136302977242106,
+        "resolves_raw_grain": false
+      },
+      {
+        "horizon": 8,
+        "separation_ara": 0.016218084763587548,
+        "resolves_raw_grain": false
+      },
+      {
+        "horizon": 13,
+        "separation_ara": 0.02635438774082921,
+        "resolves_raw_grain": true
+      },
+      {
+        "horizon": 21,
+        "separation_ara": 0.04257247250441765,
+        "resolves_raw_grain": true
+      }
+    ],
+    "first_resolved_horizon": 13
+  },
+  "fixed_index_persistence": {
+    "paths": 41,
+    "median_local_persistence_loss": 0.033159698553846706,
+    "maximum_local_persistence_loss": 0.04961401197730808
+  },
+  "gates": {
+    "phi_parent_winner": false,
+    "downstream_order_p_lt_0_05": false,
+    "thalweg_below_control_median": true,
+    "thalweg_best_ten_percent": false,
+    "fibonacci_return_no_worse_than_best_fixed": false,
+    "local_exact_phi_resolution": false,
+    "multistep_phi_resolution": true
+  }
+}

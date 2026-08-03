@@ -1,6 +1,378 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T334 - Bubble octave-relative irrationality quadrant
+
+**REGISTERED:** 3 August 2026 after T333 established the four-quadrant
+coordinate on recorded qutrit data, but before the bubble residual endpoints,
+controls or gates were calculated | **STATUS: SUPPORTED for the coordinate
+and reciprocal closure; NOT SUPPORTED for a universal endpoint or stable
+ordered operator; 17/17 INDEPENDENT VALIDATION CHECKS**
+
+**Frozen identity:** the existing bubble Vertical-ARA multiplier
+`q=Z_(l+1)/Z_l=s exp(i delta)` was retained without relabelling. The
+pre-existing factor-two parent climb was the primary carrier, so
+`u=s/2` supplied local contraction/expansion and signed `delta` supplied
+reverse/forward movement. Calibration used V01-07, evaluation V08-28 and
+strict holdout V29-35.
+
+**Prediction:** the residual should occupy all four complex ARA sectors,
+contraction and expansion should approximately reciprocate around the local
+ridge, the calibration-only reciprocal amplitude should transfer, and both
+recorded ordering and intact bubble identity should beat their frozen
+controls.
+
+**Result:** every quadrant occupied at least 18.13% of strict holdout.
+Evaluation endpoints were `0.867331 <-> 1.191348` with product `1.033293`;
+holdout was `0.784672 <-> 1.223070` with product `0.959709`. The
+calibration-fitted `alpha=1.205287` beat every frozen fixed candidate on both
+untouched splits. Correct bubble lineage was load-bearing: observed-minus-
+broken scores were `-0.085725` in evaluation and `-0.200528` in holdout,
+with both whole-video intervals below zero. Recorded order beat `500/500`
+evaluation shuffles (`p=0.001996`) but failed holdout (`p=0.658683`). Thus
+the coordinate and reciprocal closure replicate, while the all-gates
+dynamical claim, exact Phi and T333's numerical endpoint do not.
+
+**Primary record:**
+`analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`.
+
+### T333 - Recorded-qutrit reciprocal radial breathing
+
+**REGISTERED:** 3 August 2026 after T307 elevated reciprocal
+`1/Phi <-> Phi` in a Phi-containing scheduling model, but before T333 opened
+the radial endpoint, holdout, fixed-pair, temporal-null or sensitivity results
+from Q53's recorded trapped-qutrit sequence | **STATUS: NOT SUPPORTED for
+universal reciprocal-Phi endpoints; stable identity-specific reciprocal
+coordinate recovered**
+
+**Prediction:** three pre-existing external whole-circle cuts should occupy all
+four contraction/expansion x forward/reverse quadrants. If the T307 numerical
+lead is domain-general, contraction and expansion should rest near
+`1/Phi <-> Phi`, outperform the other frozen reciprocal pairs and remain near
+those endpoints on the chronological holdout. Recorded order should beat
+blockwise temporal shuffling.
+
+**Result:** all four quadrants occurred in all three cuts, and the primary
+fitted-circle coordinate was highly stable and reciprocal:
+`0.552668 <-> 1.808822` in calibration and
+`0.553331 <-> 1.806922` in holdout, with products `0.999678` and
+`0.999826`. But this was not exact Phi. Phi won only `3/21` primary cells,
+octave won `18/21`, and no cut met the frozen 10% endpoint gate. A reciprocal
+scale fitted only on calibration (`alpha=1.809114`) scored `0.002251` on
+holdout versus Phi's `0.221000`. The real order was non-random in the chosen
+coordinate: every cut and the pooled record beat all `500` shuffles
+(`p=0.001996`). Centroid and extrema sensitivity centres moved to about
+`0.5894 <-> 1.699` and preferred Phi, but remained off exact Phi and cannot
+replace the frozen primary result. The surviving claim is therefore the
+two-axis complex geometry plus an identity/estimator-specific reciprocal
+radial breath, not a universal golden endpoint. Independent validation passed
+`14/14` checks.
+
+**Primary record:**
+`analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`.
+
+### T332 - Information³ zipper at bubble-merger closure
+
+**REGISTERED:** 3 August 2026 after the 91 T329 seams were frozen, but before
+any T332 freedom, contraction, bootstrap, cyclic-null or correlation result
+was calculated | **STATUS: NOT SUPPORTED; 25/25 INDEPENDENT VALIDATION
+CHECKS**
+
+**Frozen identity:** the circular separation of the two incoming child paths
+is the pre-merger relation freedom, and the new parent's first two outgoing
+paths are its immediate post-merger freedom. Their difference
+`Z = F_child - F_parent` is positive when two child relations contract into a
+more directionally constrained parent. The inherited child's preceding turn
+is the ordinary-motion control.
+
+**Prediction:** evaluation and holdout should show positive local contraction,
+merger-specific stabilization beyond the ordinary-turn control, and positive
+residual rank inheritance against within-video cyclic shifts. Later ordered
+reclosure was registered as unavailable unless enough repeated merger
+lineages existed. No Phi, `3/8`, `1/e`, rational grid, smoothing or eventwise
+sign selection entered the endpoint.
+
+**Result:** evaluation contraction was nearly zero (mean `+0.011904`, 95%
+whole-video interval `[-0.119230,+0.125039]`) and the holdout mean reversed
+to `-0.158769`. Event specificity was negative in both evaluation
+(`-0.054207`) and holdout (`-0.035784`). Evaluation child-to-parent rank
+inheritance was `rho=+0.009076` against a cyclic-null mean of `+0.133661`
+(`p=0.875025`); holdout `rho=-0.341176`. All three measurable gates failed,
+and only three repeated merger lineages made later reclosure unavailable.
+A post-result forcing breakdown changed sign—positive means at amplitudes
+`0`–`0.5`, negative at `0.75`–`1.0`—but every cluster interval crossed zero
+and amplitude is confounded with the frozen splits. It is a new hypothesis,
+not a rescue of T332.
+
+**Record:**
+`analysis/vertical_ara_bubbles/T332_INFORMATION3_ZIPPER_BUBBLE_CLOSURE_REPORT_2026-08-03.md`.
+
+### T330 / Q60 - Ramsey vertical-Phi relative-phase advance
+
+**REGISTERED:** 3 August 2026 after choosing an already-open immutable public
+Ramsey archive, but before calculating the Q60 phase-advance endpoint |
+**STATUS: NOT SUPPORTED; 70/70 INDEPENDENT VALIDATION CHECKS**
+
+**Frozen identity:** one complete saved `126`-delay Ramsey interference sweep
+is one repeated ARA phase identity on `0..2`. The ordered handover is the
+modulo-2 phase difference between consecutive raw sweeps. Detector `I/Q` are
+used only to identify the common readout direction; they are not relabelled
+as Bloch axes.
+
+**Prediction:** the fixed advance `2/phi = 1.236067977...` should be compatible
+with the ordered one-sweep phase advance, survive evaluation and chronological
+holdout, beat persistence and registered constant controls, and retain the
+Fibonacci-lag return fingerprint.
+
+**Result:** all six averaged Ramsey waveforms were usable (`R²=0.8013` to
+`0.9845`) and yielded `2,000` phases each. The calibration-fitted step was
+`0.000256`, effectively persistence. Evaluation loss was `0.207843` for
+persistence versus `0.715688` for Phi; holdout was `0.398358` versus
+`0.584061`. Evaluation's circular-mean step interval was centred at the
+`0/2` seam (`[1.995425,2.004399]`); holdout was `[0.000285,0.063744]`.
+Recorded order did not pass shuffle or broken-lineage gates, and persistence
+also won the aggregate Fibonacci-lag score. Q60 therefore rejects `2/phi` as
+the fixed advance between consecutive complete Ramsey sweeps. It does not
+test a within-sweep, cross-scale or measurement-strength-dependent Phi
+coordinate. Individual sweeps were noisy, but every candidate used the same
+reconstruction and Phi remained far from the observed central step.
+
+**Record:**
+`analysis/quantum/Q60_RAMSEY_VERTICAL_PHI_PHASE_ADVANCE_REPORT_2026-08-03.md`.
+
+### T329 - actual binary-merger Phi handover seam
+
+**REGISTERED:** 2 August 2026 after event-count feasibility only and before
+any T329 angular coordinate or target loss was calculated | **STATUS: NOT
+SUPPORTED; 22/22 INDEPENDENT VALIDATION CHECKS**
+
+**Frozen identity:** use only primary events from the previously frozen
+two-child-to-one-parent detector where exactly one released child ID continues
+as the parent ID. Compare that inherited bubble's resolved centroid direction
+immediately before and after the merger. Reflect left/right mergers using only
+the independently observed side of the joining child.
+
+**Prediction:** the contact-oriented same-phase seam should advance by
+`2/phi`, beat persistence and every frozen rational/irrational competitor,
+beat broken-lineage and contact-side-scramble controls, and be closer to Phi
+than the inherited track's immediately preceding ordinary turn.
+
+**Result:** `23` calibration, `52` evaluation and `16` underpowered holdout
+seams were eligible. Persistence won decisively in evaluation (`0.286706`
+mean loss versus Phi `0.651495`) and holdout (`0.419947` versus `0.553797`).
+Evaluation Phi-minus-persistence was `+0.364789`, with 95% whole-video
+interval `[+0.229724,+0.503693]`. Real seams did not beat broken lineage,
+contact-side scrambling or pre-event turns. Exact Phi was also worse than the
+nearby `26/21`, `5/4`, `2-2/e` and `4/3` controls in evaluation. The
+Information³ decomposition closed numerically to `4.44e-16`, validating the
+coordinate bookkeeping but not Phi. Median seam-turn grain was `0.037218`
+ARA versus exact-Phi/`26/21` separation `0.002027`, so exact constant
+resolution failed independently. Only three primary lineages underwent a
+later detected merger; the full Fibonacci return train remains data-
+insufficient.
+
+**Record:**
+`analysis/vertical_ara_bubbles/T329_ACTUAL_HANDOVER_PHI_SEAM_REPORT_2026-08-02.md`.
+
+### T328 - direct Phi circle train in tracked bubble direction
+
+**REGISTERED:** 2 August 2026 after the bubble archive and prior lineage tests
+were open, but before any T328 endpoint was calculated | **STATUS: PARTIAL /
+MIXED; 107/107 INDEPENDENT VALIDATION CHECKS**
+
+**Frozen identity:** one tracker-assigned bubble observed for 33 consecutive
+50-fps frames. Each raw centroid displacement direction maps to the ARA
+direction circle `0..2`. All 32 displacements must exceed the existing
+`0.0005 m` grain. No smoothing, interpolation, Fourier transform, carrier
+reanchoring or eventwise sign selection is allowed.
+
+**Prediction:** the exact directed recurrence
+`x[n+1]=(x[n]+2/phi) mod 2` should beat every frozen landmark in the
+unreanchored parent score, beat 10,000 within-lineage turn-order shuffles and
+broken lineages, and win the Fibonacci-lag return fingerprint in evaluation
+and strict holdout.
+
+**Result:** persistence, not Phi, won local and parent scores in calibration,
+evaluation and holdout. Recorded order was ordinary under shuffling
+(`p=0.490451` evaluation; `p=0.682432` holdout), and real-minus-broken
+intervals crossed zero. Phi did win the return fingerprint in all splits. It
+numerically beat nearby `8/21` in a post-result paired audit, but its advantage
+over persistence was not cluster-secure. Median directional grain was
+`0.043380` ARA and Phi-versus-`8/21` separation remained smaller through
+horizon 21. Observed returns also failed to shrink toward zero at the larger
+Fibonacci lags. This is not exact-Phi recovery or an observed near-closure
+sequence. The registered direct carrier is unsupported; only the frozen
+template ranking remains explicitly partial.
+
+**Record:**
+`analysis/vertical_ara_bubbles/T328_PHI_CIRCLE_TRAIN_BUBBLES_REPORT_2026-08-02.md`.
+
+### T327 - direct downstream Phi circle-train on a flume thalweg
+
+**REGISTERED:** 2 August 2026 after the source cross-section schema was known,
+but before any T327 endpoint was calculated | **STATUS: NOT SUPPORTED;
+89/89 JOINT T326/T327 VALIDATION CHECKS**
+
+**Frozen identity:** one undulating bed through a constant-curvature bend.
+The source-defined slices at `10,15,...,170 degrees` are the downstream order.
+Within each slice, inner-bank radius maps to ARA `0`, outer-bank radius to `2`,
+and the minimum-elevation point is the thalweg. Elevation ranks `2..41` form
+40 matched non-thalweg paths through exactly the same slices. No smoothing,
+interpolation, fitted centreline, Fourier transform or after-result rotation
+is allowed.
+
+**Prediction:** the unchanged T325 increment `2/phi^2` should win the
+whole-path parent carrier, true downstream order should beat 10,000
+permutations, the thalweg should fall in the best 10% of the 41 matched paths,
+and its Fibonacci-lag return profile should be no worse than every rival.
+One sign is selected for the complete path, never separately by event.
+
+**Result:** persistence, not Phi, won both local and parent scores. Phi's
+parent loss was `0.471736`; true order did not beat the shuffle distribution
+(`p=0.550945`); reversed order was slightly better (`0.444687`); and the
+thalweg ranked `16/41` among matched paths. The `3/8` candidate best matched
+the return fingerprint. Exact Phi versus nearby `8/21` was not locally
+separable, but their accumulated phase separation exceeded raw lateral grain
+by horizon 13. The failed order, candidate, specificity and return gates are
+therefore not rescued by the one-step resolution limitation.
+
+**Record:**
+`analysis/hydraulics/T327_PHI_CIRCLE_TRAIN_THALWEG_REPORT_2026-08-02.md`.
+
+### T326 - independent plant replication of the Phi circle train
+
+**REGISTERED:** 2 August 2026 before loading either target archive |
+**STATUS: NOT REPLICATED; CYANELLA EXACT-CONSTANT CONTROL INCONCLUSIVE BY
+RESOLUTION; 89/89 JOINT T326/T327 VALIDATION CHECKS**
+
+**Frozen prediction:** apply the unchanged T325 child and parent carrier to
+independent ordered phyllotaxis. `3/8` should win the isolated child score,
+Phi should win the cumulative parent carrier, real order should beat 10,000
+within-plant order shuffles, and compensation should weaken when lineage is
+broken.
+
+**Result:** the Landrein archive supplied 7,507 ordered events from 196 plants
+in eight genotype/condition cohorts. `1/e`, not `3/8`, won the child score;
+`8/21`, not Phi, won the parent score; and real order was not exceptional
+(`p=0.198080`). Adjacent residual compensation beat within-lineage shuffling
+(`p=0.035096`) but not cross-lineage substitution (`p=0.447855`). Cyanella's
+22.5-degree bins are coarser than the 2.508-degree Phi-versus-`3/8` separation,
+so that archive cannot adjudicate the exact constants. Raw Landrein angular
+positions independently reproduced all 75 checked published divergence
+series with zero best-direction MAE.
+
+**Record:**
+`analysis/phi_calibration/T326_PHI_CIRCLE_TRAIN_INDEPENDENT_PLANTS_REPORT_2026-08-02.md`.
+
+### T319 - longitudinal Phi-motion / 3/8-structure separation
+
+**REGISTERED:** 2 August 2026, after post-compaction construct
+reconfirmation and source-metadata review, but before downloading or opening
+the target numerical workbooks | **STATUS: INCONCLUSIVE — RESOLUTION;
+VALID CONSTRUCT; 55/55 INDEPENDENT CHECKS**
+
+**Corrected identity:** one continuous centreline flow path through a fixed
+channel reach. The source-defined upstream position maps to ARA `0`, the
+downstream position maps to `2`, and every observable is located along that
+direction of travel. Bank-to-bank locations and lateral thalweg traces are
+forbidden proxies.
+
+**Public source:** Li et al. Dryad `10.5061/dryad.4xgxd25hg`, selected from
+metadata stating that ADV velocity and water depth were measured along the
+same flume centreline in five plain-bed and three undulating-bed runs.
+
+**Frozen test:** in each run, extract the raw longitudinal coordinate of
+maximum source-provided depth-averaged streamwise velocity and maximum water
+depth over their common sampled reach. Map distance linearly to `0..2` without
+smoothing, fitted peaks, Fourier processing or after-result orientation
+changes.
+
+**Prediction:** maximum along-path speed prefers the mirrored Phi loci
+`{0.381966, 1.618034}`; maximum accumulated depth prefers
+`{0.375, 1.625}`. Fixed rivals are mirrored `1/3`, `0.4`, `0.5`, and ridge
+`1.0`.
+
+**Resolution kill gate:** exact Phi-versus-`3/8` adjudication requires raw
+local longitudinal resolution finer than their `0.006966`-ARA separation.
+Otherwise the verdict is `INCONCLUSIVE — RESOLUTION`, not support or
+falsification.
+
+**Fidelity packet:**
+`analysis/hydraulics/H2_LONGITUDINAL_PHI_THREE_EIGHTHS_PROTOCOL_v2_FROZEN.md`.
+**Dylan verdict:** after the mandated context-compaction recheck, the exact
+upstream-to-downstream construct was confirmed with `Continue`.
+
+**Post-run result:** seven released runs contained paired centreline velocity
+and depth (`PRUN1`, `PRUN2`, `PRUN3`, `PRUN5`, `URUN1`–`URUN3`); `PRUN4`
+had no released matching depth series. The exact Phi / `3/8` separation is
+`0.006966` ARA units, while local raw station spacing at the maxima was
+`0.104824`–`0.333333`. No run passed the frozen resolution gate. On the
+coarse observed grid, no motion maximum selected Phi and no structure maximum
+selected `3/8`; all four plain-bed runs repeated motion at `x=0` and depth at
+`x=5/3`, while the undulating runs differed. This is not positive evidence
+for the predicted field separation, but exact adjudication remains
+resolution-inconclusive under the frozen rule. Full report:
+`analysis/hydraulics/T319_LONGITUDINAL_PHI_THREE_EIGHTHS_REPORT_2026-08-02.md`.
+
+**Post-run construct refinement (2 August):** Dylan's later two-circle drawing
+defines a different, more specific handover operator. The mirrored Phi
+endpoints `[2-phi,phi]` form a ridge-centred circle of diameter `2/phi`; its
+tangent train advances by `1/phi` of the period-2 ARA circle train. T319
+measured absolute global extrema along a fixed centreline, not successive
+contact/phase displacement of an ordered thalweg path. Its status is therefore
+also labelled **LONGITUDINAL-EXTREMA PROXY — NOT A DIRECT THALWEG/Phi-CIRCLE
+HANDOVER TEST**. This is a post-result identity correction, not a change to the
+frozen protocol, maxima result or resolution verdict. A new test requires a
+separately frozen ordered handover coordinate.
+
+### T315 - Rønne Å motion / connection / thalweg landmark separation
+
+**REGISTERED:** 2 August 2026, after target-object reconfirmation and before
+downloading or opening the target measurement files | **STATUS: PROXY TEST —
+WRONG AXIS FOR LONGITUDINAL PHI**
+
+**Orientation:** every source-defined river cross-section is mapped bank to
+bank on raw ARA `0..2`; raw downstream-facing orientation is retained.
+
+**Claim:** moving flow preferentially occupies the mirrored
+`2-phi / phi` handover locations, while accumulated bed structure
+preferentially occupies the nearby mirrored `3/8 / 13/8` locations. The
+ordered deepest-point thalweg is also reported as a dedicated cut rather
+than assumed to be Phi.
+
+**Test:** on public Rønne Å velocity and bathymetry measurements, extract the
+lateral location of maximum downstream velocity and maximum depth/minimum
+bed elevation in every eligible cross-section. Score untouched coordinates
+against fixed mirrored candidates. Display the ordered thalweg path
+separately; duplicate deepest points do not count as independent evidence.
+
+**Prediction:** velocity-core locations prefer `{0.381966, 1.618034}`;
+bed-structure locations prefer `{0.375, 1.625}`. The resolution gate must
+first distinguish their `0.006966`-ARA separation.
+
+**Falsifier:** a fixed rival wins, the two directional preferences fail on
+held-out sections, or the distinction is smaller than measurement/coordinate
+resolution. Insufficient resolution produces `INCONCLUSIVE`.
+
+**Rivals:** mirrored `1/3`, `0.4`, `0.5`, ridge `1.0`, and the competing
+Phi-versus-`3/8` landmark for each field.
+
+**Fidelity packet:**
+`analysis/hydraulics/H2_RONNE_AA_PHI_THREE_EIGHTHS_FIDELITY_v1.md`.
+**Dylan verdict:** `EXACT ENOUGH TO TEST` in ordinary language, with the
+dedicated thalweg cut added. Forbidden proxies include cumulative-discharge
+midpoints, post-result orientation changes, result-selected smoothing and
+double-counting thalweg points as an independent replication.
+
+**Post-run correction:** Dylan identified that the Phi cut must follow the
+direction of travel. T315 instead measured bank-to-bank locations
+perpendicular to travel. Its thalweg chart still used lateral deepest-point
+coordinates and therefore did not repair the axis. The direct measurements
+and 28/28 validation checks are retained as a perpendicular cross-section
+probe only. The control winners and resolution result are not evidence for
+or against the corrected longitudinal Phi claim. A separately frozen v2 is
+required.
+
 ### T314 - Q54 recorded transmon whole-circle external return
 
 **REGISTERED:** 30 July 2026 after source-field profiling and before any

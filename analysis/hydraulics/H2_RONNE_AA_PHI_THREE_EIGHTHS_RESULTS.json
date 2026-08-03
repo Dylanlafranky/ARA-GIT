@@ -1,0 +1,145 @@
+{
+  "test_id": "T315/H2",
+  "source_doi": "10.11583/DTU.24168960",
+  "source_manifest": {
+    "Readme.txt": {
+      "url": "https://ndownloader.figshare.com/files/46579429",
+      "bytes": 7878,
+      "md5": "9c75f7b197e9c19450346af41c8f553c"
+    },
+    "Ground_truth_bathymetry_Level_3.zip": {
+      "url": "https://ndownloader.figshare.com/files/46539463",
+      "bytes": 318280,
+      "md5": "5b1dd21c4f8f47f1314d9187f6552751"
+    },
+    "Ground_truth_velocimetry_OttMFPro_Level_3.zip": {
+      "url": "https://ndownloader.figshare.com/files/46539469",
+      "bytes": 312172,
+      "md5": "fe3987c878caa430627c76418ed20db3"
+    },
+    "Image_velocimetry_Level_3.zip": {
+      "url": "https://ndownloader.figshare.com/files/46539562",
+      "bytes": 1190092,
+      "md5": "51abc7e2198f87c682fec7c36db890e8"
+    }
+  },
+  "constants": {
+    "phi": 1.618033988749895,
+    "anti_phi": 0.3819660112501051,
+    "three_eighths": 0.375,
+    "absolute_gap": 0.0069660112501050975
+  },
+  "n_paired_sections": 5,
+  "resolution_gate": {
+    "landmark_gap_ara": 0.0069660112501050975,
+    "required_full_step_smaller_than_gap": true,
+    "direct_flow_sections_passing": 0,
+    "bed_sections_passing": 0,
+    "piv_sections_passing": 2,
+    "eligible_sections": 5
+  },
+  "candidate_winners": {
+    "direct_flow": {
+      "winner": "ridge",
+      "runner_up": "half",
+      "winner_mean_distance": 0.18780932097389214,
+      "runner_up_mean_distance": 0.31219067902610786,
+      "leave_one_out_winners": [
+        "ridge",
+        "ridge",
+        "ridge",
+        "ridge",
+        "ridge"
+      ]
+    },
+    "bed_structure": {
+      "winner": "half",
+      "runner_up": "ridge",
+      "winner_mean_distance": 0.236394979552703,
+      "runner_up_mean_distance": 0.26610502044729706,
+      "leave_one_out_winners": [
+        "ridge",
+        "ridge",
+        "half",
+        "half",
+        "half"
+      ]
+    },
+    "piv_flow_proxy": {
+      "winner": "half",
+      "runner_up": "two_fifths",
+      "winner_mean_distance": 0.24378862194533504,
+      "runner_up_mean_distance": 0.27917323732995036,
+      "leave_one_out_winners": [
+        "half",
+        "half",
+        "half",
+        "half",
+        "half"
+      ]
+    }
+  },
+  "phi_minus_three_eighths_distance_delta": {
+    "direct_flow": {
+      "observed": -0.0069660112501050975,
+      "ci95_low": -0.0069660112501050975,
+      "ci95_high": -0.0069660112501050975,
+      "bootstrap_probability_phi_closer": 1.0
+    },
+    "bed_structure": {
+      "observed": -0.0069660112501050975,
+      "ci95_low": -0.0069660112501050975,
+      "ci95_high": -0.0069660112501050975,
+      "bootstrap_probability_phi_closer": 1.0
+    },
+    "piv_flow_proxy": {
+      "observed": -0.004179606750063058,
+      "ci95_low": -0.0069660112501050975,
+      "ci95_high": 0.0013932022500210196,
+      "bootstrap_probability_phi_closer": 0.9415
+    }
+  },
+  "nested_landmark_artifact_audit": {
+    "direct_flow": {
+      "n": 5,
+      "folded_at_or_above_anti_phi": 5,
+      "folded_at_or_below_three_eighths": 0,
+      "folded_between_the_two": 0,
+      "warning": "For any folded coordinate at or above anti-Phi, distance(Phi) minus distance(3/8) is forced to equal -(anti-Phi-3/8). This is nested-landmark arithmetic, not an empirical preference. Coordinates below 3/8 force the opposite sign. Only coordinates within the 0.006966 interval can distinguish the two by location alone, and then only if measurement resolution permits."
+    },
+    "bed_structure": {
+      "n": 5,
+      "folded_at_or_above_anti_phi": 5,
+      "folded_at_or_below_three_eighths": 0,
+      "folded_between_the_two": 0,
+      "warning": "For any folded coordinate at or above anti-Phi, distance(Phi) minus distance(3/8) is forced to equal -(anti-Phi-3/8). This is nested-landmark arithmetic, not an empirical preference. Coordinates below 3/8 force the opposite sign. Only coordinates within the 0.006966 interval can distinguish the two by location alone, and then only if measurement resolution permits."
+    },
+    "piv_flow_proxy": {
+      "n": 5,
+      "folded_at_or_above_anti_phi": 4,
+      "folded_at_or_below_three_eighths": 1,
+      "folded_between_the_two": 0,
+      "warning": "For any folded coordinate at or above anti-Phi, distance(Phi) minus distance(3/8) is forced to equal -(anti-Phi-3/8). This is nested-landmark arithmetic, not an empirical preference. Coordinates below 3/8 force the opposite sign. Only coordinates within the 0.006966 interval can distinguish the two by location alone, and then only if measurement resolution permits."
+    }
+  },
+  "dedicated_thalweg": {
+    "ordered_sections": [
+      "XS2",
+      "XS3",
+      "XS5",
+      "XS6",
+      "XS1"
+    ],
+    "ordered_ara": [
+      0.4937499999999999,
+      1.1181818181818182,
+      0.8588235294117648,
+      0.9058524173027991,
+      0.5292307692307692
+    ],
+    "is_independent_of_bed_structure": false,
+    "reason": "The public Level-3 ground-truth bathymetry supplies six discrete cross-sections, not a dense longitudinal bed field; XS4 lacks paired measured wet-bank endpoints and is excluded from normalized scoring."
+  },
+  "benchmark_verdict": "The source is valid and reproducible. Direct flow is closest to ridge 1 in the pooled score and all five leave-one-out folds; bed/thalweg is closest to the mirrored half pair overall; the image-flow proxy is also closest to half in all five leave-one-out folds.",
+  "geometry_verdict": "NOT SUPPORTED for the frozen claim that flow cores occupy Phi and accumulated structure occupies 3/8, because fixed rivals win by much larger margins. Separately, the exact Phi-versus-3/8 numerical distinction is INCONCLUSIVE for the primary direct measures because no section resolves their 0.006966-ARA gap."
+}

@@ -35,6 +35,88 @@ auditable evidence. Each entry cites its transcript so a stranger can re-check i
 objects, then prospectively frozen on fresh anchors. It belongs in the master prediction ledger and claims record;
 counting it again as an independent blind-domain provenance hit would double-count the same prime-test family.
 
+**Phi circle-train eligibility note (2 August 2026):** Dylan drew a standard
+period-`2` ARA circle train overlaid with a second circle train whose first
+diameter runs from `2-phi` to `phi`. The resulting centre `1`, diameter
+`2/phi`, radius `1/phi`, irrational relative phase step and Fibonacci
+near-closures are forced mathematics once those endpoints are declared. The
+nearest symmetric eighth-grid endpoints are `3/8` and `13/8`, both displaced
+from the exact Phi pair by `0.00696601125...`. This is important chronological
+provenance for the refinement of the older Phi/`3/8` and Vertical-ARA threads,
+but it is **not** an A-tier outside-knowledge hit: no external physical target
+was predicted and then opened. The empirical claim requires a separately
+frozen ordered handover test. Canonical derivation:
+`TWO_RULERS_PHI_AND_TWO.md`; dated record:
+`FableConvo/SESSION_RECORD_2026-08-02_PHI_CIRCLE_TRAIN.md`.
+
+**Phi circle-train empirical follow-up (2 August 2026):** T326, T327 and T328 are
+recorded as negative tests, not provenance hits. T326 applied the frozen T325
+operator to 196 independent Landrein plant lineages and failed to replicate
+the `3/8` child / Phi parent split (`1/e` child winner, `8/21` parent winner,
+order-shuffle `p=0.19808`). T327 followed a public flume thalweg through 33
+successive source cross-sections and compared it with all 40 other
+downstream-ordered elevation-rank paths. Persistence won both frozen scores,
+the thalweg's true order failed against shuffling (`p=0.55094`), and its Phi
+carrier ranked `16/41`. The direct tests strengthen the audit trail by
+preserving a clean miss and prevent the exact circle-train derivation or T325
+calibration from being promoted as domain-general empirical evidence. Joint
+independent validation passed `89/89` checks.
+
+T328 then applied the exact positive recurrence directly to raw movement
+headings of uninterrupted public bubble trajectories. Persistence won local
+and parent scores; true turn order failed against shuffling (`p=0.49045`
+evaluation; `p=0.68243` holdout); and real lineages did not securely beat
+broken ones. Phi did win the frozen Fibonacci-return ranking in calibration,
+evaluation and holdout, but a post-result audit could not separate it from
+persistence at whole-video uncertainty and the archive could not resolve Phi
+from `8/21` through horizon 21. Observed returns did not shrink toward zero at
+the larger Fibonacci lags. T328 is therefore recorded as a partial template
+ranking and a failed direct carrier, not as a provenance hit. Its independent
+validator passed `107/107` checks.
+
+T329 then moved the measurement from ordinary bubble headings to actual
+binary-merger handovers. It reused the primary detector frozen before the Phi
+circle-train work and admitted only events where one released child ID
+continued exactly as the parent. The joining child's observed side fixed the
+left/right chart before scoring. Persistence again won decisively: evaluation
+loss `0.286706` versus Phi `0.651495`, with Phi-minus-persistence interval
+`[+0.229724,+0.503693]`; holdout retained the same winner. Real seams did not
+beat broken-lineage, contact-side-scramble or pre-event-turn controls. The
+result is a registered miss, not a provenance hit. It rejects `2/phi` as this
+one-step centroid-direction merger seam while leaving the multi-handover
+Fibonacci test data-insufficient because only three repeated primary merger
+lineages existed. Independent validation passed `22/22` checks.
+
+**Q60 empirical follow-up (3 August 2026):** Dylan proposed that measurement
+might turn an otherwise irrational Phi-like quantum handover into a rational
+or connection-fixed record. Before numerical scoring, Q60 froze a narrower
+operational question on an already-open public Ramsey archive: does the phase
+of one complete interference sweep advance to the next by `2/phi` on the ARA
+`0..2` circle? The calibration-fitted advance was `0.000256`, effectively
+persistence. Persistence decisively beat Phi in evaluation (`0.207843` versus
+`0.715688`) and holdout (`0.398358` versus `0.584061`); phase-step bootstrap
+intervals remained at the `0/2` seam and excluded Phi. Recorded order also
+failed the shuffle and broken-lineage gates. This is a registered negative,
+not a provenance hit. It rules out the fixed complete-sweep Phi carrier in
+this observable but does not directly compare measured and unmeasured or
+which-path conditions. Independent validation passed `70/70` checks.
+
+**T332 Information³ zipper follow-up (3 August 2026):** After the Phi carrier
+tests, Dylan proposed that relational information might become rational or
+locked when two child relations close into a parent. T332 froze a non-Phi
+mechanism probe on the already accepted T329 merger seams: incoming
+inter-child directional separation should contract into the parent's first
+two outgoing turns, beat the inherited child's preceding ordinary turn, and
+retain child-rank information against a within-video cyclic null. None of the
+three measurable gates survived evaluation and holdout. Evaluation mean
+contraction was `+0.011904` with interval `[-0.119230,+0.125039]`; holdout
+reversed to `-0.158769`. Evaluation residual inheritance was `rho=+0.009076`
+with `p=0.875025`, and holdout was negative. This is a registered mechanism
+miss, not a provenance hit. A post-result forcing-dependent sign change is
+retained only as a candidate future test because amplitude is confounded with
+the frozen splits and every amplitude interval crosses zero. Independent
+validation passed `25/25` checks.
+
 **Q16 eligibility note (25 July 2026):** the ARA-first raw four-child quantum restart is **not** counted as an
 A-tier provenance hit. Dylan declared and corrected the two-parent/four-child geometry before Q16 calculation,
 and the frozen raw test passed `8/8` gates, but the four public Bell preparations and Q4-Q15 outcomes were already
@@ -1812,3 +1894,447 @@ Registered protocol:
 
 Primary record:
 `analysis/phi_calibration/T318_JUPITER_GALACTIC_ORBIT_7_5_15_REPORT_2026-07-31.md`.
+
+### 1 August 2026 Vertical ARA bubble-handover Phi test
+
+1. Dylan reintroduced the earlier term **Vertical ARA** for the same branch
+   recurring between child, parent and grandparent rungs. He clarified that
+   time is attributed the same geometry because it is that branch replicated
+   through successive time slices: the realization changes, while the
+   proposed relation repeats.
+2. Before seeing results, the test separated the broad same-lineage claim
+   from the narrower numerical claim that Phi is the distinguished handover
+   coordinate. It declared observed 2D bubble area as the tested coordinate.
+3. A public Zenodo dataset of 35 one-minute quasi-2D fluidized-bed contour
+   runs at 50 fps was split into calibration (`V01-V07`), evaluation
+   (`V08-V28`) and untouched holdout (`V29-V35`).
+4. The identity detector was frozen without Phi proximity or outcome terms.
+   It required two persistent child tracks to terminate into one persistent,
+   geometrically compatible parent. Strict, primary and broad sensitivity
+   rules were retained before scoring.
+5. The three detectors recovered `14`, `103` and `249` total families. None
+   placed both registered vertical ratios within 20% of Phi.
+6. Primary evaluation child-area ratios ranged from `4.335` to `263.346`
+   (median `31.987`), while parent/larger-child had median `0.982`. The
+   source mainly sampled large bubbles absorbing far smaller contours, not
+   balanced handovers in the target interval from 1 to 2.
+7. Primary holdout circularity tension gave `rho=0.4491`, blocked
+   `p=0.02559`, but the result was exactly identical for every fixed target
+   from 1 through 2 because all observed child ratios lay above that range.
+   It is a generic asymmetry relation, not Phi specificity.
+8. Settling time and parent persistence failed their frozen directions. The
+   free settling optimum was numerically near Phi in evaluation but weak and
+   reversed in holdout, so it was not promoted.
+9. The honest verdict is **Phi area ratio not supported in this bubble
+   population**. Vertical ARA as a general same-lineage construct remains
+   open, and the temporal claim was not tested by an area ratio.
+10. The next clean experiment requires labelled controlled coalescences with
+    initial ratios deliberately spanning 1 to 2, plus separately frozen
+    scale and timing coordinates.
+
+Frozen protocols:
+`analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_BUBBLE_HANDOVER_2026-08-01.md`
+and
+`analysis/vertical_ara_bubbles/FROZEN_LINEAGE_DETECTOR_2026-08-01.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_BUBBLE_HANDOVER_RESULT_2026-08-01.md`.
+
+### 1 August 2026 bubble movement-between-slices Phi test
+
+1. After the area-ratio result, Dylan clarified that Phi is movement—the
+   handover between data slices—and asked to measure differences and changes
+   rather than bubble-size ratios.
+2. A context compaction occurred immediately before execution. Following
+   Dylan's standing rule, Codex restated the exact test and waited for explicit
+   confirmation before running it.
+3. The frozen object was one tracker ID across five consecutive 0.02-second
+   slices. The first two centroid displacements formed the handover; the last
+   two supplied a non-overlapping future-turn outcome.
+4. The Golden Handover ruler required both `(a+b)/a` and `a/b` to approach the
+   same target. Fixed controls were `1`, `sqrt(2)`, `1.5`, Phi and `2`, with a
+   calibration-only free target, within-track circular shifts, whole-video
+   bootstrap uncertainty and 5,000 blocked permutations.
+5. The source produced `152,780` eligible windows. Calibration fitted the joint
+   target at `1.607795`; Phi was the closest fixed joint landmark in both
+   evaluation and untouched holdout.
+6. Real adjacent slices approached the golden equality more closely than
+   shifted slices from the same tracks, with whole-video intervals excluding
+   zero in both evaluation and holdout.
+7. Codex then identified a ruler problem before promotion: the joint equality
+   has Phi as its unique algebraic fixed point. A dated post-protocol audit was
+   declared before calculating a fair one-coordinate comparison.
+8. The direct step-ratio audit fitted `1.416072` on calibration. Evaluation was
+   closest to `sqrt(2)` and holdout to `1.5`; Phi was nearby but not the winner.
+9. The frozen temporal-tension prediction failed: Phi proximity did not predict
+   smoother later motion in evaluation or the non-overlapping robustness set.
+10. Verdict: **the data show real local temporal continuity and recover the
+    golden fixed-point construction, but do not isolate Phi as the physical
+    movement ratio or as a reduced-tension mechanism**.
+
+Frozen protocol:
+`analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_TEMPORAL_HANDOVER_2026-08-01.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_TEMPORAL_HANDOVER_RESULT_2026-08-01.md`.
+
+### 1 August 2026 long-chain Vertical ARA bubble follow-up
+
+1. After seeing the first temporal visualization, Dylan observed that the
+   relation appeared more visible over longer separations and proposed
+   following one identity through a long chain.
+2. Before outcomes were inspected, the protocol froze one tracker-assigned
+   bubble across `33` positions and five same-origin dyadic child/parent
+   levels: `1+1`, `2+2`, `4+4`, `8+8` and `16+16` frames.
+3. The registered ratio used only the two child displacement magnitudes. Phi
+   was a candidate target alongside `1`, `sqrt(2)`, `1.5` and `2`; it was not
+   used to construct the measured ratio.
+4. Three controls were frozen: temporal permutation of the same 32 steps,
+   a broken-lineage child from another root in the same video, and exact
+   whole-tree time-reversal invariance.
+5. The final analysis retained `125` calibration, `172` evaluation and `40`
+   untouched-holdout roots. One evaluation chain was removed because its
+   registered child movement was below the resolution threshold.
+6. Evaluation trajectories approached Phi as the temporal window grew.
+   Endpoint change was `-0.166028`, with whole-video 95% interval
+   `[-0.230093,-0.116381]`, and true order beat the step-permutation control.
+7. The same-lineage interpretation did not survive the broken-lineage
+   control: broken roots improved at least as much as true roots. The effect
+   therefore tracks a broader flow/video scale rather than uniquely preserved
+   bubble identity.
+8. Phi placement did not replicate. Evaluation level 4 preferred `sqrt(2)`
+   and fitted a free target of `1.374419`; strict holdout preferred Phi by
+   point estimate and fitted `1.638332`. Holdout convergence was weak and its
+   interval crossed zero.
+9. An independent validator recomputed all target losses, free targets,
+   endpoint changes, slopes, paired comparisons, raw-source trajectory spot
+   checks and the reversal invariant with zero discrepancies.
+10. Verdict: **the long chain exposes real scale-dependent temporal structure,
+    but the registered universal Vertical-ARA Phi handover is not supported
+    in this sampled coordinate**.
+
+Frozen protocol:
+`analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_DYADIC_CHAIN_2026-08-01.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_DYADIC_CHAIN_RESULT_2026-08-01.md`.
+
+### 1 August 2026 corrected scale-and-spiral bubble test
+
+1. Dylan noticed that the dyadic-chain visualization enlarged each octave but
+   did not scale the proposed Phi movement with the rung. He proposed going
+   through scale and spiral, with a shorthand that assigns one Phi multiplier
+   to every octave.
+2. Before calculation, Codex froze two distinct tests: a full complex
+   scale-and-rotation operator and the shorthand radial prediction
+   `R_l = R_0 tau^l`. Phi was compared fairly with `1`, `sqrt(2)`, `1.5` and
+   `2`.
+3. The same-origin vectors spanned `2`, `4`, `8`, `16` and `32` frames. The
+   protocol also froze deterministic step-permutation and broken-lineage
+   controls plus `5,000` whole-video bootstrap samples.
+4. The analysis retained `125` calibration roots, `172` evaluation roots and
+   `40` confirmation roots. The last split is confirmation rather than a
+   pristine external holdout because the source archive had already informed
+   the preceding bubble tests.
+5. The free radial multiplier was `2.08274`, `2.06656` and `2.02382` across
+   the three splits. `2` was the closest frozen target every time.
+6. Phi was better than `1`, `sqrt(2)` and `1.5`, but worse than `2`. In
+   evaluation, Phi-minus-2 was `+0.08244` for the full operator and `+0.32509`
+   for the shorthand, with both whole-video intervals entirely above zero.
+7. The paths had high angular coherence and modest repeated turning, but the
+   original temporal order did not beat the same-step permutation. It did beat
+   broken lineages, showing persistent shared flow without satisfying the
+   registered root-specific repeated-spiral gate.
+8. Every registered gate failed. The bounded verdict is: **the sampled
+   centroid coordinate shows octave-like radial accumulation near `2`, not a
+   Phi radial multiplier or a uniquely ordered Phi spiral**.
+9. This does not eliminate Phi from every Vertical-ARA coordinate. It directs
+   the next search away from radial centroid scale and toward a separately
+   defined boundary, phase-advance or circumference-handover coordinate.
+10. An independent validator reconstructed all `337` roots, target losses,
+    free scales, bootstrap records and raw-source spot checks with no errors.
+
+Frozen protocol:
+`analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_SPIRAL_SCALE_2026-08-01.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_SPIRAL_SCALE_RESULT_2026-08-01.md`.
+
+### 1 August 2026 octave-to-Phi projection follow-up
+
+1. After learning that the preceding analysis measured radial octave scale,
+   Dylan proposed that Phi might instead be the quarter-access distortion of a
+   larger anti-phase seen through the octave `2`.
+2. Codex translated one exact, falsifiable version before calculation:
+   `2 cos(36 degrees) = Phi`. Phi was treated as a directional projection, not
+   as radial growth.
+3. The frozen primary coordinate compared the same-origin child `A` with the
+   doubled-span parent `P=A+B` at four levels. Its ARA coordinate was
+   `x=2|cos(theta)|`. Signed cosine was retained so a 144-degree anti-direction
+   could not be hidden by folding.
+4. Fixed targets were `0`, `30`, `36`, `45`, `54`, `60` and `90` degrees. A
+   64-rotation phase scramble preserved `A`, `|B|` and `P=A+B` geometry while
+   breaking measured phase. A broken-complement control replaced `B` with the
+   same-level complement from another root in the same video.
+5. All `337` prior roots remained eligible. Median free same-origin angles were
+   `14.41`, `10.46` and `10.05` degrees across calibration, evaluation and
+   confirmation, closest to direct alignment rather than 36 degrees.
+6. Evaluation Phi loss was `9.572` degrees worse than direct alignment and
+   `4.537` degrees worse than 30 degrees, with both whole-video intervals above
+   zero.
+7. Observed Phi loss was worse than phase scramble by `3.244` degrees and
+   broken complements by `2.164` degrees. Thus even geometric proximity to
+   36 degrees was not uniquely preserved by the true lineage.
+8. The equivalent median ARA projection approached `2` at broader rungs. The
+   signed relation was overwhelmingly direct rather than a folded
+   anti-direction. The complementary `B` child behaved similarly.
+9. All frozen gates failed. The bounded verdict is: **the same-origin centroid
+   displacement does not recover Phi as a 36-degree projection of its doubled
+   parent**.
+10. This leaves Dylan's not-yet-fully-stated quarter-access idea open only if
+    it refers to a different object, such as one quadrant, a perpendicular
+    boundary component or an independently measured larger anti-phase.
+11. An independent validator reconstructed all rows, controls, summaries,
+    bootstrap intervals and raw-source spot checks without error.
+
+Frozen protocol:
+`analysis/vertical_ara_bubbles/FROZEN_PROTOCOL_VERTICAL_ARA_OCTAVE_PROJECTION_2026-08-01.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/VERTICAL_ARA_OCTAVE_PROJECTION_RESULT_2026-08-01.md`.
+
+### 1 August 2026 observer–source octave projection
+
+1. Dylan clarified that the failed bubble projection measured the wrong
+   relation. The intended geometry is a boat observing a lighthouse: observer,
+   independent source and transfer path, with horizontal propagation and
+   vertical scale separation.
+2. A context compaction occurred before execution. Following Dylan's standing
+   rule, Codex restated the exact test and waited for confirmation.
+3. Before inspecting either file, T323 froze measured ARI NH2 as evaluation and
+   NH4 as confirmation. Each contains `1,550` source directions, two receiver
+   ears and 256-sample impulse responses.
+4. The horizontal coordinate was unwrapped source-to-receiver phase at `f`.
+   The vertical coordinate was the added phase at exact octave `2f`. Their
+   folded angle was compared with `0, 30, 36, 45, 54, 60, 90 degrees`.
+5. `36 degrees` encoded the Phi proposal through `2 cos(36 degrees)=Phi`.
+   `45 degrees` was the physical pure-delay null because phase doubles when
+   frequency doubles.
+6. The primary medians were `52.006 degrees` in NH2 and `52.166 degrees` in
+   NH4. The registered `54-degree` complement, not Phi, had the lowest path
+   loss in both.
+7. Phi was about `7 degrees` worse than pure delay and `9 degrees` worse than
+   the complement. It was closest in only six frequency bins per dataset.
+8. The real path slightly beat broken source directions, but phase-scrambled
+   paths were about six degrees closer to Phi. All five gates failed.
+9. The SOFA files separately store measurement audio latency. A non-fitted
+   sensitivity restoring that metadata moved the angles to `46.365` and
+   `46.537 degrees`, decisively selecting the ordinary `45-degree` delay
+   relation. The tempting 54-degree orientation is therefore not invariant to
+   the archive's timing representation.
+10. Verdict: **NOT SUPPORTED for a frequency octave as the vertical ARA rung**.
+    A true geometric-size observer/source octave is not tested here and would
+    require a separately frozen design.
+11. The independent validator passed `192/192` checks.
+
+Frozen protocol:
+`analysis/phi_observer_source/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_PROTOCOL_v1_FROZEN.md`.
+
+Primary record:
+`analysis/phi_observer_source/T323_OBSERVER_SOURCE_OCTAVE_PROJECTION_REPORT_2026-08-01.md`.
+
+### 1 August 2026 literal spatial-octave observer–source test
+
+1. After T323 rejected a frequency octave as the relevant vertical ruler,
+   Dylan proposed using literal observer-source distances and asked to continue
+   with the geometric-size version.
+2. Context compacted before execution. Following Dylan's standing rule, Codex
+   restated the entire proposed test and waited for a fresh explicit `yes`.
+3. Before opening the selected file, T324 froze the official TU-Berlin KEMAR
+   measurement at `0.5`, `1`, `2`, and `3 m`; `0.5 -> 1` and `1 -> 2` were
+   spatial octaves and `2 -> 3` was the non-octave control.
+4. The primary angle used complete published timing. A second coordinate used
+   consecutive phase-increment ratios so any time offset common to all radii
+   would cancel. Phi predicted `rho = 1.618`; ordinary propagation predicted
+   `rho = 2` and non-octave `eta = 1`.
+5. The source contained `360` exactly matched directions, two ears and 2048
+   samples. The analytic implementation independently recovered `45 degrees`,
+   `rho = 2`, and `eta = 1` for ideal free-field propagation.
+6. The measured octave angles instead collapsed near the direct axis: median
+   free path angles `2.438` and `0.456 degrees`. Their median ARA projections
+   were `1.9978` and `1.9999`; `0 degrees`, not Phi, minimized loss.
+7. The invariant ratio did not reveal a hidden Phi handover. Its event median
+   was `0.22769` and path median `0.15247`; only `3.88%` of events were within
+   10% of Phi.
+8. Two of five frozen gates formally passed because they asked which of several
+   distant nonzero targets was less wrong. A value near zero is necessarily
+   closer to `36` than `45/54` and closer to `1.618` than `2`. These passes were
+   retained for protocol integrity but explicitly classified as relative-ranking
+   artefacts rather than Phi evidence.
+9. A timing audit found the archive did not preserve literal distance travel
+   time. Expected shifts of about `64.3`, `128.6`, and `128.6` samples appeared
+   as only `4`, `0`, and `5`; `Data.Delay` was zero and no recoverable latency
+   field existed.
+10. Frozen verdict: **NOT SUPPORTED (2/5)** for Phi in the stored
+    radius-dependent transfer shape. The literal time-of-flight hypothesis is
+    not adjudicated by this aligned archive and needs raw measurements with a
+    common documented clock origin.
+11. An independent validator reconstructed source matching, phases, eligibility,
+    target losses, ratios, analytic nulls, file products and verdict with
+    `59/59` checks passing.
+
+Frozen protocol:
+`analysis/phi_observer_source/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_PROTOCOL_v1_FROZEN.md`.
+
+Primary record:
+`analysis/phi_observer_source/T324_SPATIAL_OCTAVE_OBSERVER_SOURCE_REPORT_2026-08-01.md`.
+
+### 3 August 2026 complex irrationality-quadrant revision
+
+1. Dylan returned to the original April motivation for Phi: an efficient
+   universe may need rational recurrence to preserve connection while also
+   needing structured non-repetition to prevent cross-scale resonance closure.
+   Pure randomness can avoid closure but may discard recoverable information
+   pathways.
+2. The preceding Phi calibration programme had repeatedly failed to establish
+   standalone Phi as the universal carrier. Dylan proposed that the missing
+   object might instead be a full quadrant containing contraction/expansion
+   and forward/reverse flow.
+3. Codex wrote the exact complex scaffold
+   `z(t)=r0 exp((sigma+i omega)t)`. The signs of `sigma` and `omega` generate
+   four dynamical modes. Rational, irrational and random progression classify
+   the phase sequence inside that plane; they are not the four sign quadrants.
+4. Dylan recognised that the bubble Vertical-ARA spiral-scale test had already
+   used the sampled equivalent
+   `q_l=Z_(l+1)/Z_l=s_l exp(i delta_l)`.
+5. A new direct audit of the versioned bubble root table counted all `1,348`
+   transitions: `655` expanding-forward, `615` expanding-reverse, `40`
+   contracting-forward, `32` contracting-reverse and `6` exact sign-boundary
+   cases.
+6. The audit is evidence that the coordinate system was previously present,
+   not that one constant generator was recovered. The frozen bubble result
+   remains negative for one repeated ordered spiral: temporal permutation was
+   not beaten, and the radial multiplier was near octave `2` rather than Phi.
+7. The new hierarchy supersedes standalone Phi as the lead domain-general
+   irrationality mechanism. The current ARA-specific lead placement uses
+   `1/e` as its provisional contracting radial landmark and Phi as its
+   provisional expanding/structured-retention landmark, crossed with
+   forward/reverse phase. This `1/e ↔ Phi` placement is an asymmetric empirical
+   hypothesis, not a consequence of the exponential identity.
+8. All earlier frozen Phi results retain their original verdicts. The revision
+   does not convert nulls into support; it records that the earlier search may
+   have compressed a two-axis family into one number.
+
+### 3 August 2026 T307 muon-model quadrant test
+
+1. After the complex-quadrant revision was recorded, Dylan asked to try the
+   method on the existing muon work.
+2. A protocol was frozen before opening the new `N=257..1024` range. The test
+   retained all `128` source-phase overlap readings and defined the joint
+   Phi-Time-versus-`1/e` state from perpendicular cosine and sine cuts.
+3. All three arrival families occupied all four contraction/expansion ×
+   forward/reverse quadrants with every adjacent step amplitude-valid.
+4. The four-state ARA predictor beat persistence, a global complex ratio and
+   all `1,000` temporal shuffles in every family, but a continuous affine
+   AR(2) model predicted better in all three. The primary pair was not
+   predictively unique, and broken same-prefix lineages were sometimes as good
+   or better. Frozen verdict: coordinate recovered without full predictive
+   support.
+5. The frozen post-gate radial comparison favoured reciprocal
+   `1/Phi <-> Phi` over asymmetric `1/e <-> Phi` in all `21/21` primary
+   family-lag cells and `114/147` cells across all fixed pairs. The pooled
+   primary contraction and expansion medians were `0.611600` and `1.617293`.
+6. A subsequent explicitly post-hoc order shuffle found none of `1,000`
+   permutations as close to the reciprocal-golden pair. This does not alter
+   the verdict because the primary schedule already contains `Phi^-1` and the
+   source is an idealised scheduling model rather than laboratory muon data.
+7. The resulting next lead is the separable-role alternative: `1/e` remains a
+   decay landmark, while reciprocal `1/Phi <-> Phi` becomes the radial
+   breathing candidate for an independent fresh test.
+
+Primary record:
+`analysis/muon/T307_COMPLEX_IRRATIONALITY_QUADRANT_MUON_REPORT_2026-08-03.md`.
+
+Canonical hypothesis:
+`analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+
+### 3 August 2026 T333 recorded-qutrit reciprocal radial-breathing test
+
+1. T307's muon scheduling model had elevated reciprocal
+   `1/Phi <-> Phi` breathing over the asymmetric `1/e <-> Phi` placement,
+   but the model already contained `Phi^-1`. T333 therefore froze the exact
+   reciprocal-golden prediction before evaluating an independently recorded
+   quantum dataset.
+2. The source was ETH Zürich's public single trapped-ion qutrit contextuality
+   record: `53,459,987` valid sequential measurements, SHA256
+   `5410775c307edea9f68e95133cf0a733b6cd34e7d9d774b6509472face74d55d`.
+   T333 reused Q53's three fixed external whole-circle cuts while asking a new
+   radial-breathing question.
+3. For each cut and lag, the complex relation
+   `q_(t,l)=z_(t+l)/z_t=s exp(i delta)` supplied radial contraction/expansion
+   from `s` and forward/reverse phase from `delta`. Calibration was the first
+   chronological half; holdout was the second. The fitted-circle centre was
+   frozen primary, with centroid and extrema-midpoint sensitivities.
+4. The primary pooled endpoints were `0.552668 <-> 1.808822` in calibration
+   and `0.553331 <-> 1.806922` in holdout. Their reciprocal products were
+   `0.999678` and `0.999826`, and the calibration-fitted reciprocal
+   `alpha=1.809114` transferred to holdout with score `0.002251`.
+5. Exact Phi did not survive the frozen numerical gates. It won only `3/21`
+   primary cells, octave won `18/21`, no primary cut met the 10% endpoint
+   criterion, and Phi's pooled holdout score was `0.221000`.
+6. The coordinate was nevertheless order-sensitive. Every cut and the pooled
+   record beat all `500` within-block temporal shuffles; the empirical value
+   was `p=1/501=0.001996`. All four contraction/expansion x forward/reverse
+   quadrants were occupied in all three cuts.
+7. Centre choice was load-bearing. Centroid and extrema-midpoint sensitivities
+   moved to about `0.5894 <-> 1.699` and selected Phi in `21/21` cells each,
+   but remained off exact Phi and arose from the same circuits, so they could
+   not replace or rescue the frozen primary result.
+8. Frozen verdict: **NOT SUPPORTED** for universal reciprocal-Phi endpoints.
+   The narrower result retained is a stable, temporally ordered,
+   identity/estimator-specific reciprocal radial coordinate. The next test
+   must derive one ARA identity-centre rule and predict a withheld cut or
+   independent archive; choosing a centre after seeing Phi is forbidden.
+9. An independent validator reconstructed source hashes, split membership,
+   cell metrics, fitted-alpha transfer, all `500` nulls, gates and verdict with
+   `14/14` checks passing.
+
+Frozen protocol:
+`analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_PROTOCOL_v1_FROZEN.md`.
+
+Primary record:
+`analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`.
+
+### 3 August 2026 T334 bubble octave-relative quadrant replication
+
+1. After T333 recovered the complex four-sector coordinate but rejected exact
+   reciprocal Phi, Dylan asked to continue the new irrationality-quadrant test
+   in places where Phi had previously been tested.
+2. Bubbles were selected first because they supplied real ordered lineages,
+   complex radial-plus-turning relations and a pre-existing Vertical-ARA
+   factor-two carrier. No new carrier was fitted after viewing endpoints.
+3. Before calculation, T334 froze `u=s/2` as the primary octave-relative
+   breath, crossed sign(`log u`) with signed turning, inherited the original
+   calibration/evaluation/holdout split, and registered temporal-shuffle,
+   broken-lineage and whole-video-bootstrap controls.
+4. The retained archive contained `337` roots and `1,348` transitions. All
+   four sectors were present in evaluation and strict holdout, each exceeding
+   the frozen 5% floor.
+5. Pooled endpoints were `0.867331 <-> 1.191348` in evaluation and
+   `0.784672 <-> 1.223070` in holdout. Their products were `1.033293` and
+   `0.959709`. The calibration-fitted `alpha=1.205287` transferred better
+   than every frozen fixed constant, but neither Phi nor T333's qutrit scale
+   was universal.
+6. Intact bubble identity beat broken lineages with both bootstrap intervals
+   wholly below zero. Exact temporal order beat all `500` evaluation shuffles
+   (`p=0.001996`) but failed holdout (`p=0.658683`). The result therefore
+   supports identity-preserving quadrant geometry and reciprocal closure, not
+   one universal ordered operator.
+7. The independent validator rebuilt all events and controls from the source
+   CSVs and passed `17/17` checks.
+
+Frozen protocol:
+`analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_PROTOCOL_v1_FROZEN.md`.
+
+Primary record:
+`analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`.

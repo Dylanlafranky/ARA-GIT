@@ -1,0 +1,549 @@
+{
+  "test": "T329 actual bubble-handover Phi seam",
+  "run_date": "2026-08-02",
+  "verdict": "NOT SUPPORTED \u2014 ACTUAL HANDOVER PHI SEAM",
+  "protocol": "T329_ACTUAL_HANDOVER_PHI_SEAM_PROTOCOL_v1_FROZEN.md",
+  "protocol_sha256": "83D8B6904F915A10485C0ED00EF55B3BC5D67A9916EC69176158888B62E61F61",
+  "source_event_sha256": "7217950D137A1DCA398B0313007BFB342071404114874D12FB3381AE0AD10FFA",
+  "source_csv_set_sha256": "69FC6E3F614B4B3422183F48968F1A9657756EE9F4A342EC76272CCF6CF73BCC",
+  "constants": {
+    "phi": 1.618033988749895,
+    "phi_increment": 1.2360679774997896,
+    "min_step_m": 0.0005,
+    "bootstraps": 5000,
+    "seed": 20261131
+  },
+  "candidates": {
+    "persistence": 0.0,
+    "ridge": 1.0,
+    "silver_conjugate": 1.1715728752538097,
+    "two_fifths": 1.2,
+    "phi": 1.2360679774997896,
+    "fibonacci_8_21": 1.2380952380952381,
+    "three_eighths_grid": 1.25,
+    "one_over_e": 1.2642411176571153,
+    "one_third": 1.3333333333333333
+  },
+  "diagnostics": {
+    "calibration_primary_events": 26,
+    "calibration_eligible": 23,
+    "calibration_no_exact_inherited_id": 3,
+    "evaluation_primary_events": 58,
+    "evaluation_eligible": 52,
+    "evaluation_no_exact_inherited_id": 6,
+    "holdout_primary_events": 19,
+    "holdout_no_exact_inherited_id": 3,
+    "holdout_eligible": 16,
+    "total_primary_events": 103,
+    "total_eligible": 91,
+    "information3_max_identity_error": 4.440892098500626e-16
+  },
+  "candidate_summary": {
+    "calibration": {
+      "persistence": {
+        "events": 23,
+        "mean": 0.2578780650784638,
+        "median": 0.17127047198830617
+      },
+      "ridge": {
+        "events": 23,
+        "mean": 0.7421219349215362,
+        "median": 0.8287295280116939
+      },
+      "silver_conjugate": {
+        "events": 23,
+        "mean": 0.6625565623305208,
+        "median": 0.7488895740854504
+      },
+      "two_fifths": {
+        "events": 23,
+        "mean": 0.6486470213650037,
+        "median": 0.7204624493392602
+      },
+      "phi": {
+        "events": 23,
+        "mean": 0.6282607732129488,
+        "median": 0.6843944718394706
+      },
+      "fibonacci_8_21": {
+        "events": 23,
+        "mean": 0.6271149302676953,
+        "median": 0.682367211244022
+      },
+      "three_eighths_grid": {
+        "events": 23,
+        "mean": 0.6207652941200722,
+        "median": 0.6704624493392601
+      },
+      "one_over_e": {
+        "events": 23,
+        "mean": 0.6127159667486592,
+        "median": 0.6562213316821448
+      },
+      "one_third": {
+        "events": 23,
+        "mean": 0.5709258382430821,
+        "median": 0.5871291160059269
+      },
+      "winner_mean": "persistence"
+    },
+    "evaluation": {
+      "persistence": {
+        "events": 52,
+        "mean": 0.286705866032085,
+        "median": 0.13873427149466608
+      },
+      "ridge": {
+        "events": 52,
+        "mean": 0.713294133967915,
+        "median": 0.8612657285053339
+      },
+      "silver_conjugate": {
+        "events": 52,
+        "mean": 0.673819811535142,
+        "median": 0.7490085241178
+      },
+      "two_fifths": {
+        "events": 52,
+        "mean": 0.6639796529691531,
+        "median": 0.7205813993716097
+      },
+      "phi": {
+        "events": 52,
+        "mean": 0.6514945838346105,
+        "median": 0.7036928997395093
+      },
+      "fibonacci_8_21": {
+        "events": 52,
+        "mean": 0.6507928397823398,
+        "median": 0.7016656391440608
+      },
+      "three_eighths_grid": {
+        "events": 52,
+        "mean": 0.6463205336821759,
+        "median": 0.6897608772392989
+      },
+      "one_over_e": {
+        "events": 52,
+        "mean": 0.6408431807371316,
+        "median": 0.6755197595821836
+      },
+      "one_third": {
+        "events": 52,
+        "mean": 0.6135410839835203,
+        "median": 0.6272641795881431
+      },
+      "winner_mean": "persistence"
+    },
+    "holdout": {
+      "persistence": {
+        "events": 16,
+        "mean": 0.41994684585304853,
+        "median": 0.37606260703711614
+      },
+      "ridge": {
+        "events": 16,
+        "mean": 0.5800531541469515,
+        "median": 0.6239373929628839
+      },
+      "silver_conjugate": {
+        "events": 16,
+        "mean": 0.567414522011793,
+        "median": 0.5513780248359647
+      },
+      "two_fifths": {
+        "events": 16,
+        "mean": 0.5603077408252455,
+        "median": 0.5513780248359647
+      },
+      "phi": {
+        "events": 16,
+        "mean": 0.5537966633847423,
+        "median": 0.5619052315020086
+      },
+      "fibonacci_8_21": {
+        "events": 16,
+        "mean": 0.5532898482358802,
+        "median": 0.5620681845168656
+      },
+      "three_eighths_grid": {
+        "events": 16,
+        "mean": 0.5503136577596898,
+        "median": 0.5655522010620944
+      },
+      "one_over_e": {
+        "events": 16,
+        "mean": 0.5467533783454109,
+        "median": 0.5797933187192097
+      },
+      "one_third": {
+        "events": 16,
+        "mean": 0.5338376981475537,
+        "median": 0.6417335536085746
+      },
+      "winner_mean": "persistence"
+    }
+  },
+  "mirrored_candidate_summary": {
+    "calibration": {
+      "persistence": {
+        "events": 23,
+        "mean": 0.2578780650784638,
+        "median": 0.17127047198830625
+      },
+      "ridge": {
+        "events": 23,
+        "mean": 0.7421219349215362,
+        "median": 0.8287295280116938
+      },
+      "silver_conjugate": {
+        "events": 23,
+        "mean": 0.7467173033994939,
+        "median": 0.8044941801077727
+      },
+      "two_fifths": {
+        "events": 23,
+        "mean": 0.7334219878438746,
+        "median": 0.7760670553615825
+      },
+      "phi": {
+        "events": 23,
+        "mean": 0.7098993938222726,
+        "median": 0.7399990778617929
+      },
+      "fibonacci_8_21": {
+        "events": 23,
+        "mean": 0.7085772673469801,
+        "median": 0.7379718172663443
+      },
+      "three_eighths_grid": {
+        "events": 23,
+        "mean": 0.7008132921917006,
+        "median": 0.7260670553615824
+      },
+      "one_over_e": {
+        "events": 23,
+        "mean": 0.6915256067631471,
+        "median": 0.7118259377044671
+      },
+      "one_third": {
+        "events": 23,
+        "mean": 0.6464654661047442,
+        "median": 0.6427337220282492
+      },
+      "winner_mean": "persistence"
+    },
+    "evaluation": {
+      "persistence": {
+        "events": 52,
+        "mean": 0.286705866032085,
+        "median": 0.1387342714946661
+      },
+      "ridge": {
+        "events": 52,
+        "mean": 0.7132941339679151,
+        "median": 0.8612657285053339
+      },
+      "silver_conjugate": {
+        "events": 52,
+        "mean": 0.6633335789113752,
+        "median": 0.8140971119302169
+      },
+      "two_fifths": {
+        "events": 52,
+        "mean": 0.6472570891034548,
+        "median": 0.7856699871840267
+      },
+      "phi": {
+        "events": 52,
+        "mean": 0.6249596107314769,
+        "median": 0.7496020096842371
+      },
+      "fibonacci_8_21": {
+        "events": 52,
+        "mean": 0.6237120657496624,
+        "median": 0.7475747490887885
+      },
+      "three_eighths_grid": {
+        "events": 52,
+        "mean": 0.6166233931876007,
+        "median": 0.7356699871840267
+      },
+      "one_over_e": {
+        "events": 52,
+        "mean": 0.6084073637700341,
+        "median": 0.7214288695269113
+      },
+      "one_third": {
+        "events": 52,
+        "mean": 0.5657663178830523,
+        "median": 0.6523366538506934
+      },
+      "winner_mean": "persistence"
+    },
+    "holdout": {
+      "persistence": {
+        "events": 16,
+        "mean": 0.41994684585304853,
+        "median": 0.37606260703711614
+      },
+      "ridge": {
+        "events": 16,
+        "mean": 0.5800531541469515,
+        "median": 0.6239373929628839
+      },
+      "silver_conjugate": {
+        "events": 16,
+        "mean": 0.5582166182980064,
+        "median": 0.6324017936555673
+      },
+      "two_fifths": {
+        "events": 16,
+        "mean": 0.5545504867007592,
+        "median": 0.603974668909377
+      },
+      "phi": {
+        "events": 16,
+        "mean": 0.5442354973046587,
+        "median": 0.5692799407141758
+      },
+      "fibonacci_8_21": {
+        "events": 16,
+        "mean": 0.5434752745813655,
+        "median": 0.5692799407141758
+      },
+      "three_eighths_grid": {
+        "events": 16,
+        "mean": 0.5390109888670798,
+        "median": 0.5692799407141758
+      },
+      "one_over_e": {
+        "events": 16,
+        "mean": 0.5336705697456615,
+        "median": 0.5692799407141758
+      },
+      "one_third": {
+        "events": 16,
+        "mean": 0.5128179302262444,
+        "median": 0.5649833166396699
+      },
+      "winner_mean": "persistence"
+    }
+  },
+  "phi_candidate_comparisons": {
+    "evaluation": {
+      "persistence": {
+        "mean": 0.3647887178025255,
+        "ci_low": 0.2297240580898543,
+        "ci_high": 0.5036927297617734,
+        "events": 52,
+        "videos": 12
+      },
+      "ridge": {
+        "mean": -0.06179955013330451,
+        "ci_low": -0.12955987206986735,
+        "ci_high": -0.0015345170979492507,
+        "events": 52,
+        "videos": 12
+      },
+      "silver_conjugate": {
+        "mean": -0.022325227700531493,
+        "ci_low": -0.040803023869905634,
+        "ci_high": -0.006788958131155782,
+        "events": 52,
+        "videos": 12
+      },
+      "two_fifths": {
+        "mean": -0.012485069134542563,
+        "ci_low": -0.022818516377417927,
+        "ci_high": -0.0038644261606917457,
+        "events": 52,
+        "videos": 12
+      },
+      "fibonacci_8_21": {
+        "mean": 0.0007017440522706535,
+        "ci_low": 0.00020675989440313274,
+        "ci_high": 0.001290202907999801,
+        "events": 52,
+        "videos": 12
+      },
+      "three_eighths_grid": {
+        "mean": 0.005174050152434552,
+        "ci_low": 0.0017976803226077993,
+        "ci_high": 0.009019451800561374,
+        "events": 52,
+        "videos": 12
+      },
+      "one_over_e": {
+        "mean": 0.01065140309747891,
+        "ci_low": 0.003595954364654523,
+        "ci_high": 0.018768910167074323,
+        "events": 52,
+        "videos": 12
+      },
+      "one_third": {
+        "mean": 0.03795349985109026,
+        "ci_low": 0.013895050833363383,
+        "ci_high": 0.0667444235087125,
+        "events": 52,
+        "videos": 12
+      }
+    },
+    "holdout": {
+      "persistence": {
+        "mean": 0.13384981753169378,
+        "ci_low": 0.01840240724033872,
+        "ci_high": 0.332816705943,
+        "events": 16,
+        "videos": 3
+      },
+      "ridge": {
+        "mean": -0.026256490762209116,
+        "ci_low": -0.13000457456954362,
+        "ci_high": 0.039451806921556906,
+        "events": 16,
+        "videos": 3
+      },
+      "silver_conjugate": {
+        "mean": -0.013617858627050672,
+        "ci_low": -0.04299673483065325,
+        "ci_high": 0.01494139617101266,
+        "events": 16,
+        "videos": 3
+      },
+      "two_fifths": {
+        "mean": -0.00651107744050311,
+        "ci_low": -0.024045318333193084,
+        "ci_high": 0.010880378350128339,
+        "events": 16,
+        "videos": 3
+      },
+      "fibonacci_8_21": {
+        "mean": 0.0005068151488621386,
+        "ci_low": -0.00028960865649265067,
+        "ci_high": 0.0013515070636323696,
+        "events": 16,
+        "videos": 3
+      },
+      "three_eighths_grid": {
+        "mean": 0.0034830056250526042,
+        "ci_low": -0.001990288928601488,
+        "ci_high": 0.009288015000140279,
+        "events": 16,
+        "videos": 3
+      },
+      "one_over_e": {
+        "mean": 0.007043285039331437,
+        "ci_low": -0.004024734308189393,
+        "ci_high": 0.018782093438217167,
+        "events": 16,
+        "videos": 3
+      },
+      "one_third": {
+        "mean": 0.019958965237188653,
+        "ci_low": -0.013895050833363383,
+        "ci_high": 0.05322390729916974,
+        "events": 16,
+        "videos": 3
+      }
+    }
+  },
+  "control_summary": {
+    "evaluation": {
+      "real_minus_broken": {
+        "mean": 0.027470698975547214,
+        "ci_low": -0.03024704256854208,
+        "ci_high": 0.08970791915327331,
+        "events": 50,
+        "videos": 10
+      },
+      "real_minus_contact_scramble": {
+        "mean": 0.022159730238222902,
+        "ci_low": -0.025171885188678647,
+        "ci_high": 0.06958283193206682,
+        "events": 50,
+        "videos": 10
+      },
+      "real_minus_preordinary": {
+        "mean": -0.005567931657374559,
+        "ci_low": -0.11636417982733102,
+        "ci_high": 0.13081798337303024,
+        "events": 42,
+        "videos": 12
+      },
+      "phi_real_mean": 0.6514945838346105,
+      "phi_real_events": 52,
+      "phi_broken_mean": 0.6192796409184355,
+      "phi_broken_events": 50,
+      "phi_contact_scramble_mean": 0.6245906096557597,
+      "phi_contact_scramble_events": 50,
+      "phi_preordinary_mean": 0.639255622967982,
+      "phi_preordinary_events": 42
+    },
+    "holdout": {
+      "real_minus_broken": {
+        "mean": -0.009657301685524047,
+        "ci_low": -0.07718114262523508,
+        "ci_high": 0.05251391229699418,
+        "events": 16,
+        "videos": 3
+      },
+      "real_minus_contact_scramble": {
+        "mean": 0.0721781166629791,
+        "ci_low": 0.0,
+        "ci_high": 0.14472897054584255,
+        "events": 16,
+        "videos": 3
+      },
+      "real_minus_preordinary": {
+        "mean": 0.03603291472300499,
+        "ci_low": -0.07440559755960774,
+        "ci_high": 0.289824080255252,
+        "events": 11,
+        "videos": 3
+      },
+      "phi_real_mean": 0.5537966633847423,
+      "phi_real_events": 16,
+      "phi_broken_mean": 0.5634539650702663,
+      "phi_broken_events": 16,
+      "phi_contact_scramble_mean": 0.48161854672176324,
+      "phi_contact_scramble_events": 16,
+      "phi_preordinary_mean": 0.5624843493016574,
+      "phi_preordinary_events": 11
+    }
+  },
+  "resolution": {
+    "pixel_scale_m": 0.0005208333333333333,
+    "median_turn_grain_ara": 0.03721791643757637,
+    "turn_grain_95": [
+      0.01681296458685655,
+      0.15359453612077253
+    ],
+    "nearest_fixed_candidate": "fibonacci_8_21",
+    "nearest_increment_ara": 1.2380952380952381,
+    "one_step_separation_ara": 0.0020272605954485545,
+    "one_step_exact_phi_resolution": false
+  },
+  "gates": {
+    "evaluation_phi_winner": false,
+    "holdout_phi_winner_underpowered": false,
+    "evaluation_phi_beats_all_with_cluster_interval": false,
+    "lineage_and_contact_side_specificity": false,
+    "event_specificity_vs_pre_event_turn": false,
+    "exact_constant_resolution": false,
+    "strict_holdout_sufficient": false,
+    "multi_handover_fibonacci_test_available": false
+  },
+  "boundaries": [
+    "The archive was used in prior bubble analyses; T329 freezes a new contact-oriented coordinate.",
+    "Only 16 eligible holdout seams were available, below the strict 20-event boundary.",
+    "Only three repeated primary merger lineages existed before scoring, so Fibonacci near-returns are not tested.",
+    "The result concerns released centroid directions around independently detected binary merger seams."
+  ],
+  "artifacts": {
+    "events": "T329_ACTUAL_HANDOVER_PHI_SEAM_EVENTS.csv",
+    "candidate_scores": "T329_ACTUAL_HANDOVER_PHI_SEAM_CANDIDATE_SCORES.csv",
+    "mirrored_scores": "T329_ACTUAL_HANDOVER_PHI_SEAM_MIRRORED_SCORES.csv",
+    "controls": "T329_ACTUAL_HANDOVER_PHI_SEAM_CONTROLS.csv"
+  }
+}

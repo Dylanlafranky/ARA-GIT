@@ -451,6 +451,64 @@ yes/no distinction says whether it is moving toward accumulation or toward relea
 four combinations—the four quadrants you have been unpacking around the sphere. On the axes themselves one sign
 is zero, marking a boundary between quadrants.
 
+### Corollary 2.4.1 — A complex scale-and-phase generator realizes four dynamical quadrants
+
+Let a nonzero two-cut relation evolve as
+
+\[
+z(t)=r_0e^{(\sigma+i\omega)t}.
+\]
+
+Then
+
+\[
+|z(t)|=r_0e^{\sigma t},
+\qquad
+\arg z(t)=\omega t,
+\]
+
+and the independent signs
+
+\[
+\operatorname{sgn}(\sigma),
+\qquad
+\operatorname{sgn}(\omega)
+\]
+
+generate contracting/expanding magnitude crossed with forward/reverse phase.
+For sampled states, the same result is obtained from
+
+\[
+q_n=\frac{z_{n+1}}{z_n}=s_ne^{i\delta_n},
+\qquad
+\sigma_n=\frac{\log s_n}{\Delta t},
+\qquad
+\omega_n=\frac{\delta_n}{\Delta t}.
+\tag{2d-1}
+\]
+
+**Proof.** Euler's identity separates the exponential into the positive
+radial factor (e^{\sigma t}) and the unit-modulus rotation
+(e^{i\omega t}). The sign of (sigma) determines whether the radius shrinks
+or grows, while the sign of (omega) determines orientation. Two independent
+nonzero signs have four combinations. Taking the logarithm of the sampled
+multiplier gives the displayed local rates. \(\square\)
+
+**Plain explanation.** This is one exact dynamical realization of the ARA
+four-quadrant rule. It distinguishes how much of a relation remains from which
+way its phase travels. Rational closure, irrational non-closure and randomness
+are possible phase behaviours inside this plane; they are not themselves the
+four quadrant signs.
+
+**Physical boundary.** This corollary proves the classification, not that one
+universal pair of rates or constants governs every physical identity. In
+particular, the current ARA-specific lead placement uses `1/e` and Phi as
+provisional contracting and expanding/structured-retention radial landmarks,
+then crosses that span with phase direction. This asymmetric `1/e ↔ Phi`
+diameter is an empirical ARA hypothesis, not a consequence of the exponential
+identity. Current hypothesis and evidence audit:
+`analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+
 ### Theorem 2.5 — Rotating the ARA diameter reconstructs the full state ball
 
 Let \(D_n=\{tn:-1\leq t\leq1\}\) be the diameter in direction \(n\in S^2\). Then
@@ -2128,6 +2186,244 @@ q=\frac{1+\sqrt5}{2}=\varphi.
 
 **Plain explanation.** Phi is not painted onto a pentagon afterwards. It is forced by the pentagon's own similar
 triangles: the diagonal is exactly phi times the side.
+
+### Theorem 9.1 — The side-one pentagon contains an exact \(1,1,\varphi\) Information³ handover triangle
+
+Let \(A_k,B,A_{k+1}\) be three consecutive vertices of a regular pentagon with
+side length `1`, where the two \(A\)-labels mark corresponding phase identities
+and \(B\) marks the intervening opposite-phase identity. Then
+
+\[
+\boxed{
+|A_kB|=1,
+\qquad
+|BA_{k+1}|=1,
+\qquad
+|A_kA_{k+1}|=\varphi
+}.
+\tag{9a}
+\]
+
+Consequently, the indirect mixed-phase route and direct same-phase route are
+
+\[
+\underbrace{|A_kB|+|BA_{k+1}|}_{A_k\rightarrow B\rightarrow A_{k+1}}
+=2,
+\qquad
+\underbrace{|A_kA_{k+1}|}_{A_k\rightarrow A_{k+1}}
+=\varphi,
+\]
+
+and their path difference is
+
+\[
+\boxed{2-\varphi=\varphi^{-2}}.
+\tag{9b}
+\]
+
+The triangle's angles are
+
+\[
+36^\circ,
+\qquad108^\circ,
+\qquad36^\circ,
+\]
+
+with \(108^\circ\) opposite the \(\varphi\)-length side.
+
+**Proof.** The first two lengths equal `1` by the side normalization. The
+segment \(A_kA_{k+1}\) skips the intervening vertex and is therefore a pentagon
+diagonal; Theorem 9 gives its length as \(\varphi\). Corollary 1.1 gives
+\(2-\varphi=\varphi^{-2}\). Let \(\theta\) be the angle at \(B\). The cosine law
+gives
+
+\[
+\cos\theta
+=\frac{1^2+1^2-\varphi^2}{2}
+=\frac{1-\varphi}{2}
+=-\cos72^\circ,
+\]
+
+so \(\theta=108^\circ\). The triangle is isosceles, so each remaining angle is
+\((180^\circ-108^\circ)/2=36^\circ\). \(\square\)
+
+**Information³ reading.** The three vertices retain the earlier phase identity
+\(A_k\), the intervening opposite-phase identity \(B\), and the corresponding
+next-scale phase identity \(A_{k+1}\). The two unit relations give the ordered
+mixed path, while the \(\varphi\)-length base retains the direct relation between
+the two \(A\) identities. Thus the \(1,1,\varphi\) triangle is an exact Euclidean
+realization of the minimal relational ternary from Definition 5.1:
+
+\[
+\boxed{
+\left(A_k,\,A_{k+1},\,
+\mathcal C(A_k,A_{k+1})\text{ resolved through }B\right)
+}.
+\]
+
+The reversed construction
+
+\[
+B_k\rightarrow A\rightarrow B_{k+1}
+\]
+
+has the same metric with the phase labels exchanged. This mathematical
+realization does not prove that physical systems universally use
+\(\varphi\) for same-phase cross-rung handover.
+
+**Plain explanation.** Going from one Phase A to the next Phase A through the
+intervening Phase B takes two unit steps. Going directly between the two Phase
+A positions takes exactly Phi. Keeping the two identities and both ways of
+relating them closes the smallest Information³ triangle. The untraversed
+difference between the paths is exactly the reverse Phi landmark `0.382`.
+
+### Corollary 9.2 — Five handover triangles generate the pentagram and its next \(\varphi^{-2}\) rung
+
+Apply Theorem 9.1 at each of the five cyclic triples of consecutive pentagon
+vertices. The five direct same-phase segments are exactly the five pentagon
+diagonals and therefore form a pentagram. Their proper intersections form a
+similar inner regular pentagon whose side-to-outer-side ratio is
+
+\[
+\boxed{\varphi^{-2}}.
+\tag{9c}
+\]
+
+Repeating the same construction produces scales
+
+\[
+1,
+\quad\varphi^{-2},
+\quad\varphi^{-4},
+\quad\varphi^{-6},
+\quad\ldots
+\]
+
+**Proof.** The five cyclic choices supply all five diagonals. By the similar
+triangles used in Theorem 9, each diagonal is divided at a pentagram
+intersection in the ratio \(\varphi:1\). The inner pentagon is similar to the
+outer pentagon and its side is \(1/\varphi^2\) of the outer side. Applying the
+same similarity recursively multiplies the scale by \(\varphi^{-2}\) at every
+step. \(\square\)
+
+**Plain explanation.** One locked triangle supplies one Phi connection.
+Rotating that triangle around the five available positions supplies all five
+Phi connections. They cross to make a smaller pentagon, which repeats the same
+construction at exactly `0.382` of the previous size. This is the exact finite
+geometry behind the proposed recursive Phi-pillar scaffold.
+
+### Theorem 9.3 — A ridge-centred Phi circle generates an irrational handover train against the ARA octave
+
+Tile one axis by standard ARA circles whose diameter intervals are
+
+\[
+C_m=[2m,2m+2],
+\qquad m\in\mathbb Z.
+\]
+
+Let
+
+\[
+a=2-\varphi=\varphi^{-2},
+\qquad
+b=\varphi,
+\]
+
+and define a second tangent-circle train by the diameter intervals
+
+\[
+H_n=
+\left[
+a+n\ell,
+b+n\ell
+\right],
+\qquad
+\ell=b-a.
+\]
+
+Then:
+
+\[
+\boxed{
+\ell=\frac{2}{\varphi},
+\qquad
+\frac{\ell}{2}=\frac1\varphi,
+\qquad
+\frac{a+b}{2}=1
+}.
+\tag{9d}
+\]
+
+Relative to the period `2` of the standard ARA train, successive Phi-circle
+centres and contacts advance by the normalized phase
+
+\[
+\boxed{\frac{\ell}{2}=\frac1\varphi}.
+\tag{9e}
+\]
+
+No positive integer number of these advances returns to exactly the same phase
+of the standard train. If (F_k) is the `k`th Fibonacci number, the near-return
+error after (F_k) advances is
+
+\[
+\boxed{
+\frac{F_k}{\varphi}-F_{k-1}
+=(-1)^{k-1}\varphi^{-k}
+}.
+\tag{9f}
+\]
+
+On a finite grid of eighths, the nearest symmetric endpoint pair is
+
+\[
+\boxed{
+2-\varphi\approx\frac38,
+\qquad
+\varphi\approx\frac{13}{8}
+},
+\tag{9g}
+\]
+
+with equal endpoint error
+
+\[
+\frac{13}{8}-\varphi
+=(2-\varphi)-\frac38
+=0.00696601125\ldots.
+\]
+
+**Proof.** From (arphi^2=\varphi+1),
+
+\[
+b-a
+=\varphi-(2-\varphi)
+=2\varphi-2
+=2(\varphi-1)
+=\frac{2}{\varphi}.
+\]
+
+Halving gives (1/\varphi), and (a+b=2) places the first circle's centre at
+the ridge `1`. An exact return after (n>0) advances would require
+(n/\varphi\in\mathbb Z), which is impossible because (arphi) is
+irrational. Identity (9f) follows by induction from the Fibonacci recurrence
+and (1/\varphi=\varphi-1). The eighth-grid statements follow by direct
+substitution. \(\square\)
+
+**Plain explanation.** The ordinary circle train walks in exact steps of `2`.
+The ridge-centred Phi circle train walks in steps of `2/phi`. Those step sizes
+never lock exactly, so their contact point keeps moving through the ARA circle,
+with increasingly close Fibonacci returns. When that irrational pair is
+coarse-grained to eighths, it appears as the nearby connected pair
+`3/8` and `13/8`.
+
+**Interpretation fence.** This theorem proves the behaviour of the declared
+two-circle construction. It does not prove that a physical time vector, river
+thalweg, quantum trajectory or other empirical system uses that construction.
+`3(3/8)=9/8` is a separate three-step arithmetic candidate and is not implied
+as a circle-train period by this theorem. A physical test must measure ordered
+handover increments or contact phases; absolute landmark occupancy is a
+different observable.
 
 ### Theorem 10 — The projected octave identity
 
@@ -3954,7 +4250,54 @@ provided no confidentiality.
 13. A deterministic many-to-one projection has a nonnegative hidden-information cost; a non-injective
     child-to-parent average has invisible child-difference directions and is therefore an exact aggregation
     singularity in the declared ARA terminology.
-14. Pentagon/phi, octave projection, and five-versus-six angular-defect identities are exact mathematics.
+14. Pentagon/phi, octave projection, and five-versus-six angular-defect identities are exact mathematics. In the
+    side-one pentagon, three consecutive vertices form an exact \(1,1,\varphi\) Information³ triangle: the
+    two-edge mixed path is `2`, the direct same-phase diagonal is \(\varphi\), the seam is
+    \(\varphi^{-2}\), and five rotated copies generate an inner pentagonal rung at scale
+    \(\varphi^{-2}\). The ridge-centred circle on `[2-phi,phi]` has diameter `2/phi`, radius
+    `1/phi`, and an irrational phase advance of `1/phi` against the period-2 ARA circle train.
+    It cannot close exactly after a finite number of steps, has Fibonacci near-returns, and
+    coarse-grains to the symmetric eighth-grid endpoints `3/8` and `13/8` with equal error.
+    T320A did not test the intended same-identity temporal handover. It compared three distinct pendulum
+    arms simultaneously, whereas the intended cut follows one arm's Phase-A swing through its intervening
+    Phase-B swing to that same arm's next Phase-A swing. The retained cross-arm triangle returned median
+    route coordinate `1.88651`, selected `2` rather than \(\varphi\), and had median leg balance `0.23315`.
+    T321 subsequently measured an identity-preserving routed `A -> B -> A` trajectory. Its frozen
+    angle-plus-time coordinate returned median `1.965901`, and `2` was the unique closest landmark in all
+    three arms and both reversible phase directions. The route legs were balanced (median ratio `0.97530`)
+    but nearly straight rather than pentagonal. Verdict **NOT SUPPORTED — 1/5**; validation `15/15`.
+    Dylan later clarified that the golden-section claim instead uses (a=A_{\rm parent}) and
+    (b=A_{\rm child}), two scales of the same phase type, with no Phase-B measurement vertex:
+    (a/b=(a+b)/a=\varphi). T322 froze that direct object. Its event-local pendulum reading was
+    `(1.00905, 1.99103)`, so all `5` Phi gates failed; validation `15/15`. A post-hoc scale summary found
+    Phi-like deeper ratios only in free run 3 (`1.578–1.628`), not across the other records. Thus the exact
+    pentagon construction remains a mathematical identity, while neither physical pendulum
+    operationalization establishes a universal cross-rung pillar.
+    Q59 then tested the construction's frozen `72°` edge and `144°` diagonal directly in the full directional
+    connected-correlation geometry of two public Q42 quantum archives. Greedy selected `72°` before Landmax
+    was opened, but Landmax medians were `80.26276°` and `80.42711°`; only `2/9` and `4/9` cells entered the
+    `72° ± 8°` band. Signed handedness, wrong-phase and family-label controls failed, with the null more
+    target-like (`p=0.822`). The unsigned high-angle profile replicated across archives, but it is not specific
+    evidence for a pentagonal screw. This leaves Theorems 9–10 as exact pentagon/circle-train mathematics while
+    rejecting this quantum directional operationalization as a universal physical realization.
+    Those values describe cross-arm coupling only; they neither support nor reject the temporal pillar.
+    T329 subsequently tested an independently detected one-step bubble handover rather than ordinary trajectory
+    frames. One released child ID had to continue exactly as the merger parent, and the joining child's observed
+    side fixed the chart orientation before scoring. Persistence beat `2/phi` decisively in `52` evaluation seams
+    (`0.286706` versus `0.651495` mean circular loss) and remained the winner in the `16`-event underpowered
+    holdout. Broken-lineage, contact-side-scramble and pre-event-turn controls supplied no Phi specificity.
+    The exact three-leg relation closed as bookkeeping, while exact Phi could not be resolved from `26/21` at the
+    available angular grain. Only three repeated primary merger lineages existed, so Theorem 9.3's Fibonacci
+    near-return consequence remains untested in this archive. T329 therefore rejects this one-step centroid-
+    direction seam without changing the exact mathematical theorem.
+    Q60 then tested the exact `2/phi` advance between consecutive complete Ramsey interference sweeps in six
+    public raw quantum records. The calibration-fitted advance was `0.000256`; persistence beat Phi in both
+    evaluation (`0.207843` versus `0.715688`) and chronological holdout (`0.398358` versus `0.584061`). The
+    ordered sequence also failed shuffle/broken-lineage gates, and its bootstrap mean-step intervals remained
+    at the `0/2` seam rather than Phi. This rejects the repeated-complete-sweep realization of Theorem 9.3 in
+    that observable. It does not test a within-sweep, cross-scale or measurement-strength-dependent carrier.
+    Independent validation passed `70/70` checks.
+    Literal physical use of the exact theorem therefore remains unproved.
 15. A sector can be invisible to one measurement channel and visible to another.
 16. The \(7/2\) ratio and cosmic fractions follow exactly once their path weights and ratio axioms are accepted.
 17. `trace(A³)/6` counts graph triangles, but triangle-per-node is size-dependent and correlation can create false

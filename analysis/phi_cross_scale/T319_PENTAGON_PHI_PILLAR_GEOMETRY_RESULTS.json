@@ -1,0 +1,140 @@
+{
+  "test_id": "T319-PENTAGON-PHI-PILLAR-GEOMETRY-v1",
+  "status": "EXACT PENTAGON PILLAR SUPPORTED",
+  "evidence_class": "exact geometry / internal consistency; not empirical",
+  "constants": {
+    "phi": 1.618033988749895,
+    "phi_inverse_squared": 0.38196601125010515
+  },
+  "pentagon": {
+    "side": 1.0,
+    "two_side_path": 2.0,
+    "diagonal": 1.6180339887498945,
+    "diagonal_over_side": 1.6180339887498945,
+    "path_minus_diagonal_seam": 0.38196601125010554,
+    "circumradius_when_side_is_1": 0.8506508083520399,
+    "central_step_degrees": 72.0,
+    "interior_angle_degrees": 108.0,
+    "diagonal_central_angle_degrees": 143.99999999999994,
+    "inner_pentagon_side": 0.3819660112501051,
+    "inner_to_outer_side_ratio": 0.3819660112501051,
+    "diagonal_intersection_ratios": [
+      1.6180339887498951,
+      1.6180339887498945,
+      1.6180339887498945,
+      1.6180339887498953,
+      1.6180339887498945,
+      1.6180339887498938,
+      1.6180339887498951,
+      1.6180339887498945,
+      1.6180339887498945,
+      1.6180339887498951
+    ],
+    "recursive_inner_scales": [
+      1.0,
+      0.3819660112501051,
+      0.1458980337503154,
+      0.05572809000084119,
+      0.021286236252208175,
+      0.008130618755783343
+    ]
+  },
+  "hexagon": {
+    "triangle_A_angles_degrees": [
+      0.0,
+      120.0,
+      240.0
+    ],
+    "triangle_B_angles_degrees": [
+      60.0,
+      180.0,
+      300.0
+    ],
+    "union_angles_degrees": [
+      0.0,
+      60.0,
+      120.0,
+      180.0,
+      240.0,
+      300.0
+    ],
+    "successive_angle_gaps_degrees": [
+      60.0,
+      60.0,
+      60.0,
+      60.0,
+      60.0,
+      60.0
+    ]
+  },
+  "polygon_controls": [
+    {
+      "n": 3,
+      "two_edge_shortcut": 1.0000000000000002,
+      "absolute_error_from_phi": 0.6180339887498947
+    },
+    {
+      "n": 4,
+      "two_edge_shortcut": 1.4142135623730951,
+      "absolute_error_from_phi": 0.20382042637679976
+    },
+    {
+      "n": 5,
+      "two_edge_shortcut": 1.618033988749895,
+      "absolute_error_from_phi": 0.0
+    },
+    {
+      "n": 6,
+      "two_edge_shortcut": 1.7320508075688774,
+      "absolute_error_from_phi": 0.11401681881898251
+    },
+    {
+      "n": 7,
+      "two_edge_shortcut": 1.8019377358048383,
+      "absolute_error_from_phi": 0.1839037470549434
+    },
+    {
+      "n": 8,
+      "two_edge_shortcut": 1.8477590650225735,
+      "absolute_error_from_phi": 0.22972507627267857
+    },
+    {
+      "n": 9,
+      "two_edge_shortcut": 1.8793852415718169,
+      "absolute_error_from_phi": 0.26135125282192195
+    },
+    {
+      "n": 10,
+      "two_edge_shortcut": 1.902113032590307,
+      "absolute_error_from_phi": 0.28407904384041216
+    },
+    {
+      "n": 11,
+      "two_edge_shortcut": 1.9189859472289947,
+      "absolute_error_from_phi": 0.30095195847909983
+    },
+    {
+      "n": 12,
+      "two_edge_shortcut": 1.9318516525781366,
+      "absolute_error_from_phi": 0.3138176638282417
+    }
+  ],
+  "gates": {
+    "two_side_path_is_2": true,
+    "diagonal_over_side_is_phi": true,
+    "seam_is_phi_inverse_squared": true,
+    "diagonal_central_angle_is_144_degrees": true,
+    "pentagon_interior_angle_is_108_degrees": true,
+    "all_diagonal_divisions_are_golden": true,
+    "inner_pentagon_scale_is_phi_inverse_squared": true,
+    "recursive_scales_follow_phi_inverse_even_powers": true,
+    "two_triangles_supply_six_outer_directions": true,
+    "hexagonal_steps_are_60_degrees": true,
+    "pentagon_unique_phi_shortcut_in_n3_to_n12": true,
+    "hexagon_shortcut_is_sqrt3": true,
+    "square_shortcut_is_sqrt2": true
+  },
+  "checks_passed": 13,
+  "checks_total": 13,
+  "interpretation_boundary": "The exact construction supports the ARA geometric crosswalk. It does not show that a physical system uses the pillar."
+}

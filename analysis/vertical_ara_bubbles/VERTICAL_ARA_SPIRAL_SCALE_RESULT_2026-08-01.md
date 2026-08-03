@@ -1,0 +1,216 @@
+# Vertical ARA bubble spiral-scale result
+
+**Date:** 1 August 2026  
+**Status:** completed, independently validated  
+**Source:** Zenodo `10.5281/zenodo.15102957`
+
+## Outcome first
+
+The corrected cross-rung test does **not** support one Phi radial multiplier per
+octave in the sampled two-dimensional bubble-centroid coordinate.
+
+The correction itself mattered. The earlier dyadic-chain test enlarged the
+observation window while measuring the balance of two children inside each
+rung. It did not carry the same parent direction from one rung into the next.
+This test retained the full parent vectors and asked whether one repeated
+scale-and-rotation operator carries a root through the `2`, `4`, `8`, `16` and
+`32`-frame spans.
+
+The empirical radial multiplier was close to `2` in every split:
+
+| Split | Roots | Free radial multiplier | Closest frozen target |
+|---|---:|---:|---:|
+| Calibration | 125 | 2.08274 | 2 |
+| Evaluation | 172 | 2.06656 | 2 |
+| Confirmation | 40 | 2.02382 | 2 |
+
+The paths also turned modestly and coherently, but the observed ordering did
+not outperform the step-permutation control. The result therefore supports
+roughly octave-scaled cumulative motion in this coordinate, not a uniquely
+ordered Phi spiral.
+
+## Frozen geometry
+
+For each eligible non-overlapping root, the same starting point generated five
+parent displacement vectors:
+
+\[
+Z_\ell=
+\sum_{j=0}^{2^{\ell+1}-1}(\Delta x_j+i\Delta y_j),
+\qquad \ell=0,1,2,3,4.
+\]
+
+They span `2`, `4`, `8`, `16` and `32` frames. Consecutive cross-rung
+multipliers were
+
+\[
+q_\ell=\frac{Z_{\ell+1}}{Z_\ell}
+=s_\ell e^{i\delta_\ell}.
+\]
+
+The full frozen loss for a candidate radial multiplier \(\tau\) was
+
+\[
+F_\tau=
+\sqrt{
+\frac14\sum_{\ell=0}^{3}
+\left[
+\log^2\!\left(\frac{s_\ell}{\tau}\right)
++\operatorname{wrap}(\delta_\ell-\bar\delta)^2
+\right]
+}.
+\]
+
+The angular term is identical for every fixed radial target. This means the
+comparison between `1`, `sqrt(2)`, `1.5`, Phi and `2` is fair: Phi is not built
+into the measured coordinate.
+
+The user-proposed shorthand was tested separately:
+
+\[
+\widehat R_\ell(\tau)=|Z_0|\tau^\ell,
+\qquad
+H_\tau=
+\sqrt{\frac14\sum_{\ell=1}^{4}
+\log^2\!\left(
+\frac{|Z_\ell|}{|Z_0|\tau^\ell}
+\right)}.
+\]
+
+This is exactly the proposal to assign one Phi multiplier to every octave.
+
+## Fixed-target results
+
+Lower loss is better.
+
+### Full scale-and-rotation loss
+
+| Target | Evaluation | Confirmation |
+|---|---:|---:|
+| 1 | 0.89467 | 0.90725 |
+| sqrt(2) | 0.61795 | 0.65445 |
+| 1.5 | 0.57711 | 0.61843 |
+| Phi | 0.52926 | 0.57741 |
+| **2** | **0.44682** | **0.51840** |
+
+Phi performed better than `1`, `sqrt(2)` and `1.5`, but `2` performed better
+than Phi. In evaluation, the paired Phi-minus-2 difference was `+0.08244`,
+with whole-video 95% interval `[+0.07418,+0.09141]`. The positive interval
+means Phi was decisively worse than `2` under the frozen loss.
+
+### Phi-per-octave shorthand loss
+
+| Target | Evaluation | Confirmation |
+|---|---:|---:|
+| 1 | 1.96036 | 1.76122 |
+| sqrt(2) | 1.05678 | 0.96133 |
+| 1.5 | 0.91316 | 0.84368 |
+| Phi | 0.73774 | 0.70490 |
+| **2** | **0.41265** | **0.53488** |
+
+The shorthand gave the same ordering. Evaluation Phi-minus-2 was `+0.32509`,
+with whole-video 95% interval `[+0.27364,+0.36564]`.
+
+## Direction and spiral controls
+
+Mean within-root angular coherence was high:
+
+| Split | Mean angular coherence |
+|---|---:|
+| Calibration | 0.89208 |
+| Evaluation | 0.92221 |
+| Confirmation | 0.90545 |
+
+This alone cannot establish a repeated spiral operator because nested
+cumulative displacements naturally inherit direction. The registered controls
+were decisive:
+
+| Evaluation comparison | Mean observed minus control | 95% whole-video interval | Desired sign |
+|---|---:|---:|---:|
+| Full loss minus step permutation | +0.06686 | [+0.00883,+0.13213] | negative |
+| Full loss minus broken lineage | -0.07742 | [-0.11259,-0.05698] | negative |
+| Coherence minus step permutation | -0.02190 | [-0.05341,+0.00256] | positive |
+| Coherence minus broken lineage | +0.01897 | [+0.01148,+0.03303] | positive |
+
+The observed lineage beat the broken-lineage control, but not the temporal
+step-permutation control. Therefore the repeated-operator gate failed.
+
+The trajectory was not perfectly straight. Median absolute per-transition
+turns were roughly `6-16 degrees`, generally decreasing at broader spans. But
+left- and right-turning roots cancelled in the signed average, and the turning
+was not Phi-specific or uniquely tied to the original temporal order.
+
+## Registered gate verdicts
+
+| Gate | Result |
+|---|---|
+| Repeated cross-rung spiral operator | Failed |
+| Phi radial scale in full operator | Failed |
+| Phi-per-octave shorthand | Failed |
+| Free scale closest to Phi | Failed |
+| Overall Vertical-ARA Phi spiral | **Not supported** |
+
+## ARA interpretation
+
+This test separates two geometric roles that had become mixed:
+
+- `2` is supported here as the radial octave factor generated by doubling the
+  temporal window and accumulating centroid displacement;
+- a gentle angular drift is present, but it is not isolated as a Phi-governed
+  cross-rung handover;
+- Phi may still belong to a different coordinate, such as boundary
+  deformation, phase advance relative to a parent, or a circumference/arc
+  handover. This result says it is not the radial multiplier of the centroid
+  displacement vectors tested here.
+
+The result does not falsify all Vertical ARA or all Phi claims. It falsifies a
+specific operational statement: **one Phi radial multiplier per doubled
+centroid-displacement octave, combined with a repeated root-specific rotation,
+does not describe these bubble trajectories better than the frozen controls.**
+
+## Reproduction and validation
+
+Frozen protocol:
+`FROZEN_PROTOCOL_VERTICAL_ARA_SPIRAL_SCALE_2026-08-01.md`
+
+Run:
+
+```powershell
+python work/run_vertical_ara_spiral_scale.py
+python work/validate_vertical_ara_spiral_scale.py
+```
+
+Independent validation passed with:
+
+- `337` reconstructed roots;
+- maximum row-formula discrepancy `1.17e-13`;
+- zero discrepancies in target summaries, free scales and bootstrap records;
+- raw-source vector spot-check errors below `3e-17`;
+- no validator errors.
+
+Machine-readable outputs:
+
+- `results/spiral_scale_root_results.csv`
+- `results/spiral_scale_target_summary.csv`
+- `results/spiral_scale_summary.json`
+- `results/spiral_scale_validation.json`
+
+## 3 August 2026 octave-relative follow-up
+
+T334 did not reverse this result. It asked a different, explicitly frozen
+question: once the supported raw factor-two carrier is removed, does the
+remaining radial-and-turning relation form the newer complex irrationality
+quadrant?
+
+Using `u=s/2`, T334 found all four contraction/expansion x reverse/forward
+sectors and reciprocal products near one in evaluation and holdout. Intact
+bubble lineage was load-bearing, but exact temporal ordering again failed
+strict holdout. Thus the two records agree:
+
+- raw radial cross-rung scale: octave `2`, not Phi;
+- local residual around that carrier: reciprocal four-sector breath;
+- exact repeated chronological operator: not supported;
+- universal Phi endpoint: not supported.
+
+Follow-up report:
+`T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`.

@@ -1,0 +1,273 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Vertical ARA Long-Chain Dyadic Bubble Test",
+    "description": "Frozen long-chain test of whether same-identity bubble motion approaches a Phi handover coordinate across dyadic temporal scales.",
+    "generatedAt": "2026-08-01T15:30:00+10:00",
+    "sources": [
+      {
+        "id": "zenodo-dyadic-bubble-trajectories",
+        "label": "Bubble dynamics data for oscillating gas flow in a quasi-2D fluidized bed",
+        "href": "https://doi.org/10.5281/zenodo.15102957",
+        "query": {
+          "sql": "SELECT * FROM read_csv_auto('results/dyadic_chain_level_summary.csv');\nSELECT * FROM read_csv_auto('results/dyadic_chain_root_levels.csv');",
+          "description": "Non-overlapping 33-position chains reconstructed from public 50 fps tracker-assigned bubble centroids and evaluated across five dyadic child/parent levels.",
+          "engine": "DuckDB",
+          "language": "sql",
+          "executed_at": "2026-08-01",
+          "tables_used": [
+            "Zenodo 10.5281/zenodo.15102957 - 35 contour CSV files",
+            "results/dyadic_chain_level_summary.csv",
+            "results/dyadic_chain_root_levels.csv"
+          ],
+          "filters": [
+            "Calibration V01-V07; evaluation V08-V28; untouched holdout V29-V35",
+            "One tracker ID across 33 consecutive positions",
+            "Five same-origin dyadic levels with 1, 2, 4, 8 and 16-frame children",
+            "Registered child displacements must exceed the 0.0005 m resolution threshold",
+            "Non-overlapping roots within each track"
+          ],
+          "metric_definitions": [
+            "dyadic ratio r_l = max(norm(A_l), norm(B_l)) / min(norm(A_l), norm(B_l))",
+            "target loss = absolute log(r_l / target)",
+            "endpoint change = level-4 Phi loss minus level-0 Phi loss; negative means closer to Phi at coarse scale",
+            "free target = exp(median(log(r_l))) within one split and level",
+            "permuted control preserves the 32 step vectors and full resultant while breaking temporal order",
+            "broken-lineage control pairs the first child with a child from a different root in the same video"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "card-roots",
+        "dataset": "headline",
+        "metrics": [
+          {"label": "Eligible roots", "field": "eligible_roots", "format": "number"},
+          {"label": "holdout", "field": "holdout_roots", "format": "number"}
+        ],
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      },
+      {
+        "id": "card-eval-change",
+        "dataset": "headline",
+        "metrics": [
+          {"label": "Evaluation Phi change", "field": "evaluation_endpoint_change", "format": "number", "signed": true},
+          {"label": "holdout", "field": "holdout_endpoint_change", "format": "number", "signed": true}
+        ],
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      },
+      {
+        "id": "card-free-target",
+        "dataset": "headline",
+        "metrics": [
+          {"label": "Evaluation level-4 target", "field": "evaluation_free_target_l4", "format": "number"},
+          {"label": "holdout", "field": "holdout_free_target_l4", "format": "number"}
+        ],
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      }
+    ],
+    "charts": [
+      {
+        "id": "chart-free-targets",
+        "title": "Free target by dyadic child span",
+        "description": "The limiting coordinate changes with scale and split instead of converging consistently on Phi.",
+        "type": "line",
+        "dataset": "free_targets",
+        "encodings": {
+          "x": {"field": "child_frames", "type": "quantitative", "title": "Child span (frames)"},
+          "y": {"field": "free_target", "type": "quantitative", "title": "Free ratio target"},
+          "color": {"field": "series", "type": "nominal", "title": "Series"}
+        },
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      },
+      {
+        "id": "chart-evaluation-controls",
+        "title": "Evaluation Phi loss across temporal scale",
+        "description": "True temporal order beats the step-permutation control at coarse scale, but not the broken-lineage control.",
+        "type": "line",
+        "dataset": "evaluation_controls",
+        "encodings": {
+          "x": {"field": "child_frames", "type": "quantitative", "title": "Child span (frames)"},
+          "y": {"field": "mean_phi_loss", "type": "quantitative", "title": "Mean absolute log distance from Phi"},
+          "color": {"field": "control", "type": "nominal", "title": "Relation"}
+        },
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      },
+      {
+        "id": "chart-coarsest-targets",
+        "title": "Level-4 fixed-target loss",
+        "description": "Evaluation prefers sqrt(2), whereas holdout prefers Phi; the target-specific result does not replicate across splits.",
+        "type": "bar",
+        "dataset": "coarsest_targets",
+        "encodings": {
+          "x": {"field": "target", "type": "nominal", "title": "Fixed target"},
+          "y": {"field": "mean_loss", "type": "quantitative", "title": "Mean absolute log loss"},
+          "color": {"field": "split", "type": "nominal", "title": "Data split"}
+        },
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      }
+    ],
+    "tables": [
+      {
+        "id": "table-coarsest-targets",
+        "title": "Coarsest fixed-target comparison",
+        "description": "Exact mean losses for the registered evaluation and strict holdout comparisons.",
+        "dataset": "coarsest_targets",
+        "columns": [
+          {"field": "split", "label": "Split", "type": "text"},
+          {"field": "target", "label": "Target", "type": "text"},
+          {"field": "target_value", "label": "Value", "type": "number", "format": "0.000000"},
+          {"field": "mean_loss", "label": "Mean loss", "type": "number", "format": "0.000000"},
+          {"field": "median_loss", "label": "Median loss", "type": "number", "format": "0.000000"},
+          {"field": "roots", "label": "Roots", "type": "number", "format": "0"}
+        ],
+        "defaultSort": {"field": "mean_loss", "direction": "asc"},
+        "sourceId": "zenodo-dyadic-bubble-trajectories"
+      }
+    ],
+    "blocks": [
+      {"id": "title", "type": "markdown", "body": "# Vertical ARA Long-Chain Dyadic Bubble Test"},
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## Executive Summary\n\n**The long chain reveals a genuine scale-dependent temporal-order effect, but not a stable Phi-specific same-lineage handover.** Evaluation trajectories moved closer to Phi as the dyadic window expanded, and their true ordering beat a within-root step permutation. The effect did not beat the broken-lineage control, weakened in strict holdout, and did not select the same fixed landmark across splits. The predeclared Phi-specific claim is therefore not supported."
+      },
+      {"id": "metrics", "type": "metric-strip", "cardIds": ["card-roots", "card-eval-change", "card-free-target"]},
+      {
+        "id": "question",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## Question and measurement\n\nThe test followed one tracked bubble through 33 consecutive positions. At each dyadic level, two adjacent children closed one parent: 1+1 frames, 2+2, 4+4, 8+8 and 16+16. The ratio between the two child displacement magnitudes was measured directly. Phi was a frozen candidate target, not an ingredient used to construct the ratio."
+      },
+      {
+        "id": "free-target-intro",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## The long chain does not settle on one universal coordinate\n\nA calibration-only free target and the same descriptive target in later splits move as the temporal scale changes. Evaluation ends at 1.374419, while holdout ends at 1.638332. The long chain makes the scale dependence clearer, but the split difference rules out a stable universal Phi placement in this representation."
+      },
+      {"id": "free-target-chart", "type": "chart", "chartId": "chart-free-targets"},
+      {
+        "id": "controls-intro",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## Temporal order matters, but same identity is not isolated\n\nEvaluation mean Phi loss decreased by 0.166028 from level 0 to level 4, with a whole-video 95% interval of [-0.230093, -0.116381]. True order improved more than the within-root permutation. Broken lineages, however, improved at least as much; real-minus-broken endpoint change was +0.038025. This points to a broad video or flow-scale structure rather than a uniquely preserved same-bubble lineage handover."
+      },
+      {"id": "controls-chart", "type": "chart", "chartId": "chart-evaluation-controls"},
+      {
+        "id": "targets-intro",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## Fixed-target identity changes across splits\n\nAt the coarsest evaluation level, sqrt(2) had the lowest mean loss and Phi was significantly worse than 1.5. In strict holdout, Phi had the lowest point estimate. A physical universal target should not require choosing whichever split is favourable, so the target-placement gate fails."
+      },
+      {"id": "targets-chart", "type": "chart", "chartId": "chart-coarsest-targets"},
+      {"id": "targets-table", "type": "table", "tableId": "table-coarsest-targets"},
+      {
+        "id": "ara-interpretation",
+        "type": "markdown",
+        "body": "## ARA interpretation\n\nThe productive part of Dylan's intuition survives: moving farther along the same recorded chain exposes a more coherent coarse-scale relation than a single local step. What fails is the stronger identification of that relation with one invariant Phi coordinate. In ARA language, the chain contains scale-dependent child/parent structure, but this dataset does not show a universal Vertical-ARA Phi pillar."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Measurement boundary\n\nThe observations are 2D tracker-assigned centroids sampled at 50 fps, not the full bubble surface or velocity field. Only 40 strict-holdout roots were available, no 64-frame dyadic child level was feasible, and one evaluation chain was excluded because its registered child displacement was below resolution. The negative result applies to this trajectory coordinate, not to every possible physical realization of Vertical ARA."
+      },
+      {
+        "id": "validation",
+        "type": "markdown",
+        "sourceId": "zenodo-dyadic-bubble-trajectories",
+        "body": "## Validation and reproducibility\n\nAn independent script recomputed every fixed-target loss, free target, endpoint change, slope, coarsest paired comparison and three raw-source trajectory spot checks. All checks passed with zero numerical discrepancy. Whole-tree time reversal preserved the ratio multiset exactly. The frozen protocol, scripts, detailed result and retained CSV/JSON outputs live together in analysis/vertical_ara_bubbles."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-01T15:30:00+10:00",
+    "datasets": {
+      "headline": [
+        {
+          "eligible_roots": 337,
+          "calibration_roots": 125,
+          "evaluation_roots": 172,
+          "holdout_roots": 40,
+          "evaluation_endpoint_change": -0.1660280841,
+          "holdout_endpoint_change": -0.03282757984,
+          "evaluation_free_target_l4": 1.374419,
+          "holdout_free_target_l4": 1.638332
+        }
+      ],
+      "free_targets": [
+        {"series": "Calibration", "split": "calibration", "level": 0, "child_frames": 1, "parent_frames": 2, "free_target": 1.8240963043, "roots": 125},
+        {"series": "Calibration", "split": "calibration", "level": 1, "child_frames": 2, "parent_frames": 4, "free_target": 1.5038944246, "roots": 125},
+        {"series": "Calibration", "split": "calibration", "level": 2, "child_frames": 4, "parent_frames": 8, "free_target": 1.3173008236, "roots": 125},
+        {"series": "Calibration", "split": "calibration", "level": 3, "child_frames": 8, "parent_frames": 16, "free_target": 1.3910813541, "roots": 125},
+        {"series": "Calibration", "split": "calibration", "level": 4, "child_frames": 16, "parent_frames": 32, "free_target": 1.4998672558, "roots": 125},
+        {"series": "Evaluation", "split": "evaluation", "level": 0, "child_frames": 1, "parent_frames": 2, "free_target": 1.663596, "roots": 172},
+        {"series": "Evaluation", "split": "evaluation", "level": 1, "child_frames": 2, "parent_frames": 4, "free_target": 1.393481, "roots": 172},
+        {"series": "Evaluation", "split": "evaluation", "level": 2, "child_frames": 4, "parent_frames": 8, "free_target": 1.346243, "roots": 172},
+        {"series": "Evaluation", "split": "evaluation", "level": 3, "child_frames": 8, "parent_frames": 16, "free_target": 1.303683, "roots": 172},
+        {"series": "Evaluation", "split": "evaluation", "level": 4, "child_frames": 16, "parent_frames": 32, "free_target": 1.374419, "roots": 172},
+        {"series": "Holdout", "split": "holdout", "level": 0, "child_frames": 1, "parent_frames": 2, "free_target": 1.469814, "roots": 40},
+        {"series": "Holdout", "split": "holdout", "level": 1, "child_frames": 2, "parent_frames": 4, "free_target": 1.406844, "roots": 40},
+        {"series": "Holdout", "split": "holdout", "level": 2, "child_frames": 4, "parent_frames": 8, "free_target": 1.555122, "roots": 40},
+        {"series": "Holdout", "split": "holdout", "level": 3, "child_frames": 8, "parent_frames": 16, "free_target": 1.441212, "roots": 40},
+        {"series": "Holdout", "split": "holdout", "level": 4, "child_frames": 16, "parent_frames": 32, "free_target": 1.638332, "roots": 40},
+        {"series": "Phi reference", "split": "reference", "level": 0, "child_frames": 1, "parent_frames": 2, "free_target": 1.6180339887, "roots": 337},
+        {"series": "Phi reference", "split": "reference", "level": 1, "child_frames": 2, "parent_frames": 4, "free_target": 1.6180339887, "roots": 337},
+        {"series": "Phi reference", "split": "reference", "level": 2, "child_frames": 4, "parent_frames": 8, "free_target": 1.6180339887, "roots": 337},
+        {"series": "Phi reference", "split": "reference", "level": 3, "child_frames": 8, "parent_frames": 16, "free_target": 1.6180339887, "roots": 337},
+        {"series": "Phi reference", "split": "reference", "level": 4, "child_frames": 16, "parent_frames": 32, "free_target": 1.6180339887, "roots": 337}
+      ],
+      "evaluation_controls": [
+        {"control": "Observed lineage", "level": 0, "child_frames": 1, "parent_frames": 2, "mean_phi_loss": 0.4271310395, "roots": 172},
+        {"control": "Observed lineage", "level": 1, "child_frames": 2, "parent_frames": 4, "mean_phi_loss": 0.3014707011, "roots": 172},
+        {"control": "Observed lineage", "level": 2, "child_frames": 4, "parent_frames": 8, "mean_phi_loss": 0.2671554488, "roots": 172},
+        {"control": "Observed lineage", "level": 3, "child_frames": 8, "parent_frames": 16, "mean_phi_loss": 0.3345613273, "roots": 172},
+        {"control": "Observed lineage", "level": 4, "child_frames": 16, "parent_frames": 32, "mean_phi_loss": 0.2611029555, "roots": 172},
+        {"control": "Step permutation", "level": 0, "child_frames": 1, "parent_frames": 2, "mean_phi_loss": 0.3708440236, "roots": 172},
+        {"control": "Step permutation", "level": 1, "child_frames": 2, "parent_frames": 4, "mean_phi_loss": 0.3366883793, "roots": 172},
+        {"control": "Step permutation", "level": 2, "child_frames": 4, "parent_frames": 8, "mean_phi_loss": 0.3234875448, "roots": 172},
+        {"control": "Step permutation", "level": 3, "child_frames": 8, "parent_frames": 16, "mean_phi_loss": 0.3631827022, "roots": 172},
+        {"control": "Step permutation", "level": 4, "child_frames": 16, "parent_frames": 32, "mean_phi_loss": 0.3576543826, "roots": 172},
+        {"control": "Broken lineage", "level": 0, "child_frames": 1, "parent_frames": 2, "mean_phi_loss": 0.4588192053, "roots": 171},
+        {"control": "Broken lineage", "level": 1, "child_frames": 2, "parent_frames": 4, "mean_phi_loss": 0.2922487619, "roots": 171},
+        {"control": "Broken lineage", "level": 2, "child_frames": 4, "parent_frames": 8, "mean_phi_loss": 0.2786608583, "roots": 171},
+        {"control": "Broken lineage", "level": 3, "child_frames": 8, "parent_frames": 16, "mean_phi_loss": 0.3197485387, "roots": 171},
+        {"control": "Broken lineage", "level": 4, "child_frames": 16, "parent_frames": 32, "mean_phi_loss": 0.2594963845, "roots": 171}
+      ],
+      "coarsest_targets": [
+        {"split": "evaluation", "target": "1", "target_value": 1.0, "mean_loss": 0.3799603411, "median_loss": 0.3180307564, "roots": 172},
+        {"split": "evaluation", "target": "sqrt(2)", "target_value": 1.4142135624, "mean_loss": 0.2353578609, "median_loss": 0.2130712042, "roots": 172},
+        {"split": "evaluation", "target": "1.5", "target_value": 1.5, "mean_loss": 0.2428872357, "median_loss": 0.2204124560, "roots": 172},
+        {"split": "evaluation", "target": "Phi", "target_value": 1.6180339887, "mean_loss": 0.2611029555, "median_loss": 0.2458917213, "roots": 172},
+        {"split": "evaluation", "target": "2", "target_value": 2.0, "mean_loss": 0.3740354251, "median_loss": 0.4088024201, "roots": 172},
+        {"split": "holdout", "target": "1", "target_value": 1.0, "mean_loss": 0.5367351882, "median_loss": 0.4936785701, "roots": 40},
+        {"split": "holdout", "target": "sqrt(2)", "target_value": 1.4142135624, "mean_loss": 0.2859641795, "median_loss": 0.2213504747, "roots": 40},
+        {"split": "holdout", "target": "1.5", "target_value": 1.5, "mean_loss": 0.2656283878, "median_loss": 0.2154207278, "roots": 40},
+        {"split": "holdout", "target": "Phi", "target_value": 1.6180339887, "mean_loss": 0.2528129870, "median_loss": 0.2271477767, "roots": 40},
+        {"split": "holdout", "target": "2", "target_value": 2.0, "mean_loss": 0.2934379807, "median_loss": 0.2425187487, "roots": 40}
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "zenodo-dyadic-bubble-trajectories",
+      "label": "Bubble dynamics data for oscillating gas flow in a quasi-2D fluidized bed",
+      "href": "https://doi.org/10.5281/zenodo.15102957",
+      "query": {
+        "sql": "SELECT * FROM read_csv_auto('results/dyadic_chain_level_summary.csv');\nSELECT * FROM read_csv_auto('results/dyadic_chain_root_levels.csv');",
+        "description": "Non-overlapping 33-position chains reconstructed from public 50 fps tracker-assigned bubble centroids and evaluated across five dyadic child/parent levels.",
+        "engine": "DuckDB",
+        "language": "sql",
+        "executed_at": "2026-08-01",
+        "tables_used": ["Zenodo 10.5281/zenodo.15102957 - 35 contour CSV files", "results/dyadic_chain_level_summary.csv", "results/dyadic_chain_root_levels.csv"],
+        "filters": ["Calibration V01-V07; evaluation V08-V28; untouched holdout V29-V35", "One tracker ID across 33 consecutive positions", "Non-overlapping roots"],
+        "metric_definitions": ["target loss = absolute log(r_l / target)", "free target = exp(median(log(r_l)))"]
+      }
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "test_id": "T320-CROSS-DOMAIN-PHI-PILLAR-v1",
+  "protocol_sha256": "ab3324af52a84175c20afb0afc6a95d94404475abd48210e2ee4f39c2e9bf2c1",
+  "claim": {
+    "around_route": "A_k -> B -> A_(k+1), normalized to 2",
+    "direct_route": "A_k -> A_(k+1)",
+    "predicted_direct_coordinate": 1.618033988749895,
+    "route_statistic": "q = 2*d(A0,A1)/(d(A0,B)+d(B,A1))"
+  },
+  "development_metric_scales": {
+    "angle": 0.28201750688437843,
+    "velocity": 1.609331845946112
+  },
+  "pendulum": {
+    "source": "dynamicslab MultiArm-Pendulum, Zenodo 10.5281/zenodo.6633719",
+    "mapping": "arm3 A0/child -> arm2 B/intermediate -> arm1 A1/larger",
+    "evaluation": {
+      "windows": 4,
+      "eligible_samples": 199,
+      "median_q": 1.3661604812082107,
+      "q_candidate_errors": {
+        "1": 0.36616048120821065,
+        "sqrt2": 0.13581731669719221,
+        "1.5": 0.13581731669719221,
+        "phi": 0.25187350754168425,
+        "sqrt3": 0.36589032636066654,
+        "2": 0.6338395187917893
+      },
+      "q_winner": "sqrt2",
+      "median_angle_degrees": 14.543152342131595,
+      "angle_candidate_errors": {
+        "90": 75.45684765786841,
+        "108": 93.45684765786841,
+        "120": 105.45684765786841,
+        "135": 120.45684765786841,
+        "144": 129.45684765786842,
+        "180": 165.45684765786842
+      },
+      "angle_winner": "90",
+      "median_leg_balance": 0.20225392380375434,
+      "branches": {
+        "A-positive": {
+          "windows": 2,
+          "median_q": 1.5019777979054028,
+          "candidate_errors": {
+            "1": 0.5019777979054029,
+            "sqrt2": 0.08776423553230772,
+            "1.5": 0.001977797905402867,
+            "phi": 0.11605619084449204,
+            "sqrt3": 0.23007300966347433,
+            "2": 0.49802220209459713
+          },
+          "winner": "1.5"
+        },
+        "B-negative": {
+          "windows": 2,
+          "median_q": 1.1933881100602457,
+          "candidate_errors": {
+            "1": 0.1933881100602457,
+            "sqrt2": 0.22082545231284945,
+            "1.5": 0.3066118899397543,
+            "phi": 0.4246458786896492,
+            "sqrt3": 0.5386626975086315,
+            "2": 0.8066118899397543
+          },
+          "winner": "1"
+        }
+      }
+    },
+    "middle_shift_controls": {
+      "0.17": {
+        "windows": 94,
+        "eligible_samples": 4898,
+        "median_q": 0.9761688804539128,
+        "q_candidate_errors": {
+          "1": 0.15437270993300578,
+          "sqrt2": 0.4380446819191824,
+          "1.5": 0.5238311195460872,
+          "phi": 0.6418651082959821,
+          "sqrt3": 0.7558819271149644,
+          "2": 1.0238311195460872
+        },
+        "q_winner": "1",
+        "median_angle_degrees": 35.905875819292,
+        "angle_candidate_errors": {
+          "90": 54.094124180708,
+          "108": 72.09412418070801,
+          "120": 84.09412418070801,
+          "135": 99.09412418070801,
+          "144": 108.09412418070801,
+          "180": 144.094124180708
+        },
+        "angle_winner": "90",
+        "median_leg_balance": 0.45104292354551134,
+        "branches": {
+          "A-positive": {
+            "windows": 44,
+            "median_q": 0.9552324039840896,
+            "candidate_errors": {
+              "1": 0.15826130178952535,
+              "sqrt2": 0.45898115838900555,
+              "1.5": 0.5447675960159104,
+              "phi": 0.6628015847658053,
+              "sqrt3": 0.7768184035847876,
+              "2": 1.0447675960159104
+            },
+            "winner": "1"
+          },
+          "B-negative": {
+            "windows": 50,
+            "median_q": 1.0025683555367064,
+            "candidate_errors": {
+              "1": 0.12447619722757719,
+              "sqrt2": 0.4116452068363886,
+              "1.5": 0.49743164446329347,
+              "phi": 0.6154656332131884,
+              "sqrt3": 0.7294824520321707,
+              "2": 0.9974316444632935
+            },
+            "winner": "1"
+          }
+        }
+      },
+      "0.31": {
+        "windows": 154,
+        "eligible_samples": 12205,
+        "median_q": 1.1444769101479344,
+        "q_candidate_errors": {
+          "1": 0.1778587516972866,
+          "sqrt2": 0.26973665222516086,
+          "1.5": 0.3555230898520657,
+          "phi": 0.4735570786019606,
+          "sqrt3": 0.5875738974209429,
+          "2": 0.8555230898520657
+        },
+        "q_winner": "1",
+        "median_angle_degrees": 42.275700548752106,
+        "angle_candidate_errors": {
+          "90": 47.724299451247894,
+          "108": 65.7242994512479,
+          "120": 77.7242994512479,
+          "135": 92.7242994512479,
+          "144": 101.7242994512479,
+          "180": 137.72429945124787
+        },
+        "angle_winner": "90",
+        "median_leg_balance": 0.3945586000083371,
+        "branches": {
+          "A-positive": {
+            "windows": 72,
+            "median_q": 1.1293157687177524,
+            "candidate_errors": {
+              "1": 0.16869891716841257,
+              "sqrt2": 0.28489779365534273,
+              "1.5": 0.3706842312822476,
+              "phi": 0.4887182200321425,
+              "sqrt3": 0.6027350388511248,
+              "2": 0.8706842312822476
+            },
+            "winner": "1"
+          },
+          "B-negative": {
+            "windows": 82,
+            "median_q": 1.153433077081628,
+            "candidate_errors": {
+              "1": 0.17899509274744807,
+              "sqrt2": 0.26078048529146713,
+              "1.5": 0.346566922918372,
+              "phi": 0.4646009116682669,
+              "sqrt3": 0.5786177304872492,
+              "2": 0.846566922918372
+            },
+            "winner": "1"
+          }
+        }
+      },
+      "0.47": {
+        "windows": 310,
+        "eligible_samples": 29093,
+        "median_q": 0.587800654545659,
+        "q_candidate_errors": {
+          "1": 0.41330279009143045,
+          "sqrt2": 0.8264129078274361,
+          "1.5": 0.912199345454341,
+          "phi": 1.0302333342042358,
+          "sqrt3": 1.144250153023218,
+          "2": 1.412199345454341
+        },
+        "q_winner": "1",
+        "median_angle_degrees": 19.036938844833596,
+        "angle_candidate_errors": {
+          "90": 70.9630611551664,
+          "108": 88.9630611551664,
+          "120": 100.9630611551664,
+          "135": 115.9630611551664,
+          "144": 124.9630611551664,
+          "180": 160.9630611551664
+        },
+        "angle_winner": "90",
+        "median_leg_balance": 0.6892307079564515,
+        "branches": {
+          "A-positive": {
+            "windows": 160,
+            "median_q": 0.6075167056370789,
+            "candidate_errors": {
+              "1": 0.39248329436292106,
+              "sqrt2": 0.8066968567360162,
+              "1.5": 0.8924832943629211,
+              "phi": 1.010517283112816,
+              "sqrt3": 1.1245341019317983,
+              "2": 1.392483294362921
+            },
+            "winner": "1"
+          },
+          "B-negative": {
+            "windows": 150,
+            "median_q": 0.5618204013262952,
+            "candidate_errors": {
+              "1": 0.4392905512703833,
+              "sqrt2": 0.8523931610468,
+              "1.5": 0.9381795986737048,
+              "phi": 1.0562135874235996,
+              "sqrt3": 1.170230406242582,
+              "2": 1.4381795986737047
+            },
+            "winner": "1"
+          }
+        }
+      }
+    },
+    "driven_transfer": {
+      "windows": 0,
+      "eligible_samples": 0,
+      "median_q": null,
+      "q_candidate_errors": {},
+      "q_winner": null,
+      "median_angle_degrees": null,
+      "angle_candidate_errors": {},
+      "angle_winner": null,
+      "median_leg_balance": null,
+      "branches": {
+        "A-positive": {
+          "windows": 0,
+          "median_q": null,
+          "candidate_errors": {},
+          "winner": null
+        },
+        "B-negative": {
+          "windows": 0,
+          "median_q": null,
+          "candidate_errors": {},
+          "winner": null
+        }
+      }
+    },
+    "gates": {
+      "G1_phi_unique_q_winner": false,
+      "G2_108_unique_angle_winner": false,
+      "G3_equal_leg_ratio_at_least_0_90": false,
+      "G4_both_mirror_branches_choose_phi": false,
+      "G5_real_alignment_beats_all_middle_shifts": true
+    },
+    "gates_passed": 1,
+    "gates_total": 5,
+    "verdict": "NOT SUPPORTED"
+  },
+  "existing_domain_eligibility": {
+    "exact_geometry": {
+      "class": "deductive benchmark",
+      "eligible_for_route_statistic": true,
+      "q": 1.6180339887498945,
+      "direct_route_on_octave_scale": 1.6180339887498945,
+      "checks": "13/13",
+      "result": "exact phi by regular-pentagon construction"
+    },
+    "sunflower_scale_lineage": {
+      "class": "ordered-scale calibration",
+      "eligible_for_complete_route_statistic": false,
+      "adjacent_ratio_phi_median_error": 0.02482315410724789,
+      "same_phase_phi_squared_median_error": 0.046605417321323284,
+      "reason": "observes ordered scale ratios but not both physical paths between common endpoints"
+    },
+    "quantum_Q46_Q47": {
+      "class": "existing public/simulator analyses",
+      "eligible_for_complete_route_statistic": false,
+      "reason": "tiers are not three independently labelled commensurate A-B-A endpoint states; Q47 tests recurrence, not the cross-scale pillar"
+    },
+    "solar_system_T317": {
+      "class": "public orbital crosswalk",
+      "eligible_for_complete_route_statistic": false,
+      "reason": "supplies a Sun/planet A-B pair and a parent frame, not two same-phase endpoints with one commensurate middle state"
+    },
+    "T302_T305_carriers": {
+      "class": "biological and schedule-carrier tests",
+      "eligible_for_complete_route_statistic": false,
+      "reason": "test cumulative placement/coverage rather than the direct-versus-around route"
+    }
+  },
+  "eligible_raw_physical_domains": 1,
+  "passing_raw_physical_domains": 0,
+  "cross_domain_verdict": "INSUFFICIENT ELIGIBLE PHYSICAL DOMAINS",
+  "boundary": "The exact pentagon identity is deductive. Sunflower scale lineage is calibration. The pendulum is the only existing raw physical archive eligible under the frozen common-route rule; therefore this run cannot establish physical cross-domain universality even if it passes."
+}

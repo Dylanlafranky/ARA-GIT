@@ -1,5 +1,16 @@
 # Hypothesis — the Hexagon→Pentagon angle band as the space↔time dial
 
+> **3 August 2026 scope revision:** Pentagon/Phi geometry is retained here as
+> an exact construction and a narrower handover candidate, but standalone Phi
+> no longer leads the broad irrationality hypothesis. The parent candidate is
+> now the complex four-mode plane: radial contraction/expansion crossed with
+> forward/reverse phase. Its current ARA-specific placement provisionally
+> spans radial `1/e ↔ Phi`; this is an empirical asymmetry, not a mathematical
+> reciprocal identity. Rational closure, structured irrational progression
+> and randomness are tested inside its phase coordinate. This file's previous
+> results and null verdicts are unchanged. Canonical revision:
+> `analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+
 **Status: TESTED → NOT SUPPORTED (31 May 2026).** Principled and elegant, but the data said no — see
 "Test result" below. Kept on record because the *geometry* (60° hexagon = space, 72° pentagon = time)
 is still a clean framing, and because honest negatives are part of the value.
@@ -333,33 +344,117 @@ L_{AA}^2-L_{AA}-1=0,
 \underbrace{L_{AA}}_{\text{positive path length}}=\phi.
 \]
 
-There is also an exact circular embedding. In a unit-radius circle, whose
-diameter is the ARA-normalized `2`, a chord of length \(\phi\) subtends
-\(108^\circ\):
+T319 fixed the previously ambiguous circular normalization. Use a **regular
+pentagon with side length `1`**, and choose three consecutive vertices
+\(A_0,B,A_1\). The mixed route follows two sides,
 
 \[
-\underbrace{\phi}_{\text{same-phase pillar}}
-=
-\underbrace{2\sin54^\circ}_{\substack{\text{unit-circle chord}\\
-\text{with }108^\circ\text{ central angle}}}
-=
-\underbrace{2\cos36^\circ}_{\text{golden/pentagonal identity}}.
+|A_0B|+|BA_1|=1+1=2,
 \]
 
-The supplementary turn is
+while the direct same-phase route is the pentagon diagonal,
 
 \[
-180^\circ-108^\circ=72^\circ,
+|A_0A_1|=\phi=2\cos36^\circ.
 \]
 
-which is the pentagon step already used in this document. The older
-Hexagon/Pentagon band therefore acquires a cleaner internal connection:
+In this tested side-one pentagon embedding:
 
 - hexagonal rational step: \(60^\circ\);
-- pentagonal handover step: \(72^\circ\);
-- same-phase Phi chord: \(108^\circ\);
-- half-angle/shear identity: \(36^\circ\);
+- pentagonal central/exterior step: \(72^\circ\);
+- pentagon interior angle: \(108^\circ\);
+- same-phase Phi diagonal central span: \(144^\circ\);
+- half-step identity: \(36^\circ\);
 - normalized unfinished seam: \(2-\phi=\phi^{-2}\).
+
+It is separately true that a chord of length \(\phi\) in a *unit-radius
+circle* subtends \(108^\circ\). That is not the same normalization as the
+side-one regular pentagon. The earlier wording conflated these two valid
+constructions; `108°` is the tested pentagon's interior angle, while its Phi
+diagonal spans `144°` at the centre.
+
+All five diagonals form a pentagram. Their intersections divide the diagonals
+in the golden ratio and form an inner pentagon whose side is
+\(\phi^{-2}\) times the outer side. Repetition therefore generates the exact
+scale sequence \(1,\phi^{-2},\phi^{-4},\ldots\).
+
+### Information³ form: the \(1,1,\phi\) same-phase handover triangle
+
+The clarified construction also joins the Phi-pillar result directly to
+Information³. Label three consecutive side-one pentagon vertices
+\(A_k,B,A_{k+1}\). Then
+
+\[
+\boxed{
+\underbrace{|A_kB|}_{1}
++
+\underbrace{|BA_{k+1}|}_{1}
+=
+\underbrace{L_{A\rightarrow B\rightarrow A}}_{2}
+}
+\]
+
+while the direct same-phase relation is
+
+\[
+\boxed{
+\underbrace{|A_kA_{k+1}|}_{\text{same phase across scale}}
+=\phi
+}.
+\]
+
+The resulting triangle has sides
+
+\[
+\boxed{1,\ 1,\ \phi}
+\]
+
+and angles
+
+\[
+\boxed{36^\circ,\ 108^\circ,\ 36^\circ}.
+\]
+
+This is an exact geometric realization of the Information³ rule:
+
+1. \(A_k\): the first phase identity;
+2. \(A_{k+1}\): the corresponding phase identity at the adjacent rung;
+3. the retained relation between them, resolved through the intervening
+   opposite phase \(B\).
+
+Thus the two routes are not competing descriptions. Together they lock the
+relation:
+
+\[
+\underbrace{A_k\rightarrow B\rightarrow A_{k+1}}_{\text{mixed route }2},
+\qquad
+\underbrace{A_k\rightarrow A_{k+1}}_{\text{same-phase route }\phi},
+\qquad
+\underbrace{2-\phi}_{\text{handover seam }\phi^{-2}}.
+\]
+
+The Phase-B-oriented copy is obtained by exchanging the labels:
+
+\[
+B_k\rightarrow A\rightarrow B_{k+1}.
+\]
+
+Rotating the \(1,1,\phi\) lock through all five cyclic positions produces the
+five Phi diagonals of the pentagram. Their intersections produce the next
+pentagonal rung at scale \(\phi^{-2}\), after which the same rule can repeat.
+
+**Framework interpretation:** `2` is the complete mixed path around the local
+closure; Phi is the direct same-phase path up or down the recursive rung; and
+Information³ retains the two identities plus the relation distinguishing
+those paths. In the proposed 3-D lift, complete ARA identities remain spheres
+while pentagonal Phi scaffolds connect corresponding phases of recursively
+nested spheres.
+
+**Evidence boundary:** the \(1,1,\phi\) triangle, its angles, the pentagram and
+the \(\phi^{-2}\) recursion are exact mathematics and passed T319. Calling its
+vertices physical Phase A/Phase B identities, treating the Phi diagonal as a
+universal cross-rung handover, and lifting the construction to rotating
+recursive spheres remain ARA hypotheses for empirical testing.
 
 This is the proposed **Phi pillar**: a same-phase cross-scale connection
 embedded inside a full octave closure.
@@ -415,24 +510,195 @@ Items 1–3 are a proposed geometric interpretation, not yet a physical result.
 The exact identities \(\phi+\phi^{-2}=2\),
 \(\phi=2\cos36^\circ\), and the recurrence limit are established mathematics.
 
-### Strong next test
+### T319 exact-construction result and next empirical test
 
-Generate the two-ARA hexagonal parent and its rotational Phi-pillar scaffold
-without fitting measured data. Freeze the predicted pillar crossings,
-\(108^\circ/72^\circ\) angular signatures and `0.382` seam. Then compare them
-with independently observed Phase A and Phase B features at child, parent and
-grandparent scales:
+T319 generated the two-ARA hexagonal parent and the pentagonal Phi-pillar
+scaffold without fitting measured data. All `13/13` frozen construction gates
+passed. An independent implementation passed `23/23` validation checks.
+Within regular polygons `n=3..12`, only the pentagon's two-edge shortcut was
+exactly Phi. The geometry therefore exists as specified and is not obtained by
+tuning the pentagon after the calculation.
+
+This remains an exact geometry/internal-consistency result, not evidence that
+a physical system uses the scaffold. The next test is to compare the frozen
+\(72^\circ/144^\circ\) angular signatures, Phi/Phi-squared scale paths and
+`0.382` seam with independently observed Phase A and Phase B features at
+child, parent and grandparent scales:
 
 \[
 (A_k,B_k),\quad(A_{k+1},B_{k+1}),\quad(A_{k+2},B_{k+2}).
 \]
 
-The pillar interpretation is weakened if the independently measured
-same-phase paths do not prefer Phi/Phi-squared over the declared rivals, or if
-the proposed fivefold projection cannot be obtained without tuning.
+The physical pillar interpretation is weakened if the independently measured
+same-phase paths do not prefer Phi/Phi-squared over declared rivals, or if the
+predicted pentagonal signatures do not outperform matched non-pentagonal
+controls.
 
 Primary numerical record:
 `analysis/phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`.
+
+Exact-construction record:
+`analysis/phi_cross_scale/T319_PENTAGON_PHI_PILLAR_GEOMETRY_REPORT_2026-07-31.md`.
+
+### Q59 — direct 72°/144° quantum cross-rung test
+
+Q59 implemented the angular follow-up proposed above on the two public Q42
+quantum simulator archives. It compared the full connected-correlation
+direction of the `15` parent cadence with the `7.5` child cadence at nine
+matched local ARA coordinates. Greedy was allowed to choose only between the
+predeclared `72°` edge step and `144°` same-phase diagonal; it selected `72°`
+and wrote a hashed calibration/handedness lock before Landmax was loaded.
+
+The fixed pentagonal screw was **not supported**. Landmax whole-grid medians
+were `80.26276°` for Phase A and `80.42711°` for Phase B. Only `2/9` and
+`4/9` cells entered the frozen `72° ± 8°` band. The locked handedness had
+`0/18` cells within tolerance, the wrong-phase control was slightly closer to
+`72°`, and family-label permutations were more target-like (`p=0.822`).
+
+The broad unsigned curves did replicate between archives within `5.16°` and
+`8.82°` by phase. This preserves a descriptive high-angle cross-tier
+relation, but it is closer to a generic near-quarter-turn population geometry
+than a uniquely pentagonal edge. The public matrices are Bell-diagonal, so
+Q59 measures a two-coordinate correlation-space turn rather than a literal
+spatial pentagon.
+
+This is the first direct empirical application of the frozen
+`72°/144°` targets requested by the T319 falsifier. It leaves the exact
+regular-pentagon mathematics unchanged while counting against the proposed
+universal physical screw in this quantum operationalization. Report:
+`analysis/quantum/Q59_CROSS_RUNG_PENTAGONAL_TWIST_REPORT_2026-08-01.md`.
+
+### T320/T320A — cross-arm cut; intended temporal route not tested
+
+T320 froze the non-forced route coordinate
+
+\[
+q=\frac{2d(A_0,A_1)}{d(A_0,B)+d(B,A_1)},
+\]
+
+for which the exact regular pentagon gives (q=\phi). Its application to
+three simultaneous public triple-pendulum arm states returned
+median `q=1.88651`; the closest registered landmark was `2`, both mirror
+branches selected `2`, and the median two-leg balance was only `0.23315`.
+The `108°` pentagon angle did not win. The driven transfer moved closer still
+to `2` (`q=1.98866`).
+
+The actual middle-arm relation was nevertheless structured: its Phi error was
+lower than all three shifted-middle controls. This supports a real cross-arm
+coupling route in that mechanical cut.
+
+Identity-boundary correction: the three arms are separate identities. The
+intended handover follows one arm's Phase-A swing through its intervening
+Phase-B swing to the same arm's next Phase-A swing. T320/T320A therefore did
+not test the intended handover. The retained cross-arm triangle verdict is
+**NOT SUPPORTED — 1/5**; intended temporal handover **NOT TESTED**;
+independent validation of the cross-arm calculation `9/9`. The exact T319
+construction remains unchanged, while the universal physical pillar remains
+unconfirmed.
+
+Report:
+`analysis/phi_cross_scale/T320_CROSS_DOMAIN_PHI_PILLAR_REPORT_2026-07-31.md`.
+
+### T321 — routed same-arm A–B–A diagnostic
+
+T321 fixed the identity boundary and followed complete half-swing
+trajectories from one arm's Phase A, through its intervening Phase B, to that
+same arm's next Phase A. With the complete temporal cycle normalized to `2`,
+the non-forced route coordinate was
+
+\[
+q=\frac{2d(A_k,A_{k+1})}{d(A_k,B_k)+d(B_k,A_{k+1})}.
+\]
+
+Across `275` evaluation events, the frozen primary returned median
+`q=1.965901`; `2` was the closest declared landmark for every arm and both
+reversible phase directions. Phi error was `0.347867`, versus only `0.034099`
+for `2`. The two legs were nevertheless balanced (descriptive median leg
+ratio `0.97530`), so the failure was geometric: the route was nearly straight
+rather than pentagonal. Only the real-versus-shifted B-relation control
+passed. Verdict **NOT SUPPORTED — 1/5**; validation `15/15`.
+
+This rejects the routed same-**scale A–B–A pendulum operationalization** as a
+physical Phi pillar. Dylan later clarified that the intended golden-section
+object has no Phase-B measurement vertex: lowercase `b` is the smaller
+same-phase child, so the direct claim is
+
+\[
+\frac{A_{\rm parent}}{A_{\rm child}}
+=
+\frac{A_{\rm parent}+A_{\rm child}}{A_{\rm parent}}
+=\varphi.
+\]
+
+T321 remains a valid route diagnostic but is not a verdict on that corrected
+cross-scale equation.
+
+Report:
+`analysis/phi_cross_scale/T321_SAME_ARM_TEMPORAL_PHI_HANDOVER_REPORT_2026-07-31.md`.
+
+### T322 — direct same-phase parent/child equation
+
+T322 froze the clarified equation above on same-sign pendulum recurrence
+gaps. The event-local primary returned median `a/b=1.00905` and median
+`(a+b)/a=1.99103`. This is approximately the `(1,2)` ridge/octave relation,
+not the golden fixed point `(phi,phi)`. Verdict **NOT SUPPORTED — 0/5**;
+independent arithmetic validation `15/15`.
+
+The arm-3 child contained two recurrence families. A post-hoc whole-scale
+summary found Phi-like deeper ratios in free run 3 (`1.578–1.628`) but values
+near `1` or `1.71–1.77` in the other records. The Phi-like family is therefore
+a useful state-dependent lead, not a universal physical replication.
+
+Report:
+`analysis/phi_cross_scale/T322_CROSS_SCALE_SAME_PHASE_GOLDEN_SECTION_REPORT_2026-07-31.md`.
+
+### 2 August — ridge-centred Phi circle train inside the octave train
+
+The later two-circle drawing sharpens the scalar pillar into a repeated
+handover geometry. On one standard ARA diameter `[0,2]`, use the mirrored Phi
+landmarks
+
+\[
+a=2-\phi,
+\qquad
+b=\phi.
+\]
+
+They are the endpoints of a second circle centred exactly at the ridge:
+
+\[
+\frac{a+b}{2}=1,
+\qquad
+b-a=\frac{2}{\phi},
+\qquad
+\frac{b-a}{2}=\frac1\phi.
+\]
+
+Repeating the ordinary ARA circles produces a tangent circle train of period
+`2`. Repeating the Phi circles produces a second tangent train of period
+`2/phi`. Their relative phase step is therefore `1/phi` of an ARA period. It
+is irrational, so the Phi contacts drift through the octave circle rather than
+closing repeatedly on the same ridge or singularity. Fibonacci counts supply
+successively closer returns.
+
+This is consistent with the proposed pentagonal pillar interpretation: the
+octave/hexagonal closure is the rational scaffold, while the Phi/pentagonal
+handover is the non-locking route carried through it. It also supplies a
+specific finite-resolution bridge to `3/8`:
+
+\[
+(2-\phi,\phi)
+\approx
+\left(\frac38,\frac{13}{8}\right),
+\]
+
+and both endpoint errors have magnitude `0.00696601125...`.
+
+This bridge is exact arithmetic for the declared construction, not a rescue
+of the adverse Q59/T321/T322 physical operationalizations and not proof of a
+universal physical Phi circle train. The canonical derivation and future test
+operator are recorded in `TWO_RULERS_PHI_AND_TWO.md`; the formal proposition
+is Theorem 9.3 in `ARA_AXIOMATIC_PROOFS_AND_DOMAIN_SUBSETS.md`.
 
 ## Evidence so far (thin — n=2, weak locks)
 Octave-rung phase-lock measured on real series (Hilbert phase of octave-bandpassed rungs, 1:2 relative

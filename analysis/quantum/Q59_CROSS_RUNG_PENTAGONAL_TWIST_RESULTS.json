@@ -1,0 +1,202 @@
+{
+  "test_id": "Q59-CROSS-RUNG-PENTAGONAL-TWIST-v1",
+  "status": "NOT SUPPORTED",
+  "question": "At the same local ARA coordinate, is parent/child connected-correlation direction separated by a 72\u00b0 or 144\u00b0 pentagonal twist?",
+  "protocol_sha256": "296059b79f85f0bb7b0ef51f9190383cb4e01bcdc1ae353cc0dd52b795945808",
+  "calibration_lock_sha256": "802265f14f1b255a8a10b68539f9bd978d0238e3bed8357806b6104af87a51a9",
+  "calibration": {
+    "test_id": "Q59-CROSS-RUNG-PENTAGONAL-TWIST-v1",
+    "created_before_landmax_load": true,
+    "created_at": "2026-08-01T05:53:35.375164+10:00",
+    "protocol_sha256": "296059b79f85f0bb7b0ef51f9190383cb4e01bcdc1ae353cc0dd52b795945808",
+    "calibration_archive": "greedy",
+    "replication_archive_not_yet_loaded": "landmax",
+    "target_candidate_mean_absolute_errors_deg": {
+      "72": 11.541722342731777,
+      "144": 62.5360604930867
+    },
+    "selected_target_deg": 72.0,
+    "signed_model_mean_circular_errors_deg": {
+      "co_rotating_positive": 75.19681657967868,
+      "co_rotating_negative": 68.80318342032132,
+      "counter_rotating_A_positive": 72.06439080367485,
+      "counter_rotating_B_positive": 71.93560919632515
+    },
+    "selected_signed_model": "co_rotating_negative",
+    "selected_signed_targets_deg": {
+      "A": -72.0,
+      "B": -72.0
+    },
+    "tolerance_deg": 8.0,
+    "signed_tolerance_deg": 10.0
+  },
+  "inventory": {
+    "greedy": {
+      "archive": "greedy",
+      "source_shapes": {
+        "closure": [
+          100,
+          500,
+          66
+        ],
+        "connected": [
+          100,
+          500,
+          66,
+          3,
+          3
+        ]
+      },
+      "eligible_lineages": 2180,
+      "family_lineages": {
+        "two_turn_7_5": 1460,
+        "one_turn_15": 642,
+        "other": 78
+      },
+      "qualifying_cycles": 35423,
+      "crossing_rows": 608452,
+      "offdiagonal_max_abs": 0.0,
+      "max_abs_cxx_minus_cyy": 0.0,
+      "source_hashes": {
+        "derived": "f339ba427f2a45179089b7224f853053c1e4359bbdebc52ace89c357abd55b86",
+        "connected": "43160e0997c528ba35061f557babe8ace2e3fb888c3efc07ea3757219b628ff7"
+      }
+    },
+    "landmax": {
+      "archive": "landmax",
+      "source_shapes": {
+        "closure": [
+          100,
+          500,
+          66
+        ],
+        "connected": [
+          100,
+          500,
+          66,
+          3,
+          3
+        ]
+      },
+      "eligible_lineages": 2287,
+      "family_lineages": {
+        "other": 73,
+        "one_turn_15": 669,
+        "two_turn_7_5": 1545
+      },
+      "qualifying_cycles": 38337,
+      "crossing_rows": 658479,
+      "offdiagonal_max_abs": 0.0,
+      "max_abs_cxx_minus_cyy": 0.0,
+      "source_hashes": {
+        "derived": "b48dded7ab448693e625e5341ca72773aa57e1f40e9f06d4d590eda6d2761b53",
+        "connected": "53de82bb0ead8c1f08fbaa5932ac93ba66c98aea9cb2a637996ce174d04a2831"
+      }
+    }
+  },
+  "evaluation": {
+    "data_gate": {
+      "minimum_matched_seeds": 93,
+      "minimum_parent_norm": 0.00020071389690844634,
+      "minimum_child_norm": 2.48484678907231e-05,
+      "maximum_source_offdiagonal_abs": 0.0,
+      "maximum_abs_cxx_minus_cyy": 0.0,
+      "passed": true
+    },
+    "phase_checks": {
+      "A": {
+        "cells_inside_target_band": 2,
+        "mean_absolute_target_error_deg": 8.260949600802341,
+        "whole_grid_median_deg": 80.26276109306471,
+        "nearest_landmark": "pentagon edge",
+        "nearest_landmark_angle_deg": 72.0,
+        "nearest_is_selected_target": true,
+        "whole_grid_seed_bootstrap_95_ci_deg": [
+          76.60481771779729,
+          83.7948995781893
+        ]
+      },
+      "B": {
+        "cells_inside_target_band": 4,
+        "mean_absolute_target_error_deg": 9.992210802572297,
+        "whole_grid_median_deg": 80.4271138633402,
+        "nearest_landmark": "pentagon edge",
+        "nearest_landmark_angle_deg": 72.0,
+        "nearest_is_selected_target": true,
+        "whole_grid_seed_bootstrap_95_ci_deg": [
+          76.26652808541535,
+          83.5744046953416
+        ]
+      }
+    },
+    "signed_check": {
+      "mean_circular_error_deg": 57.86669722345133,
+      "cells_within_10_deg": 0,
+      "cells_total": 18
+    },
+    "cross_archive_mean_absolute_difference_deg": {
+      "A": 5.161351662048258,
+      "B": 8.822785421369929
+    },
+    "same_phase_control": {
+      "same_phase_mean_absolute_error_deg": 9.12658020168732,
+      "wrong_phase_mean_absolute_error_deg": 8.33150678653411,
+      "same_phase_better": false
+    },
+    "permutation_null": {
+      "draws": 1999,
+      "observed_error_deg": 9.12658020168732,
+      "null_median_error_deg": 6.782857418060303,
+      "null_95_interval_deg": [
+        3.743174731731415,
+        12.35870909690857
+      ],
+      "one_sided_no_worse_than_null_probability": 0.822
+    },
+    "strict_components": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false
+    ],
+    "strict_support": false
+  },
+  "null_finite_cell_fraction": 1.0,
+  "source": {
+    "doi": "10.5281/zenodo.16753415",
+    "branch": "c2_2local connectivity"
+  },
+  "coordinate": {
+    "grid": [
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      1.0,
+      1.2,
+      1.4,
+      1.6,
+      1.8
+    ],
+    "angle": "acos(<Cp,Cc>F/(||Cp||F||Cc||F)) in degrees"
+  },
+  "outputs": {
+    "greedy_crossings": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_GREEDY_CROSSINGS.csv.gz",
+    "landmax_crossings": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_LANDMAX_CROSSINGS.csv.gz",
+    "pair_profiles": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_PAIR_PROFILES.csv.gz",
+    "seed_profiles": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_SEED_PROFILES.csv.gz",
+    "seed_angles": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_SEED_ANGLES.csv",
+    "grid_summary": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_GRID_SUMMARY.csv",
+    "null_errors": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST_NULL_ERRORS.npy",
+    "figure_png": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST.png",
+    "figure_svg": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\quantum\\Q59_CROSS_RUNG_PENTAGONAL_TWIST.svg"
+  }
+}

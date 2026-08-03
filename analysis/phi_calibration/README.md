@@ -1,5 +1,23 @@
 # T302 — empirical Phi calibration in ordered phyllotaxis
 
+> **Current scope (3 August 2026):** Standalone Phi is no longer the leading
+> general ARA irrationality hypothesis. This folder's Phi tests remain valid
+> bounded tests of specific operators. The parent model is now the complex
+> contraction/expansion × forward/reverse phase quadrant. Its first
+> ARA-specific radial placement provisionally spanned `1/e ↔ Phi`, but T307
+> did not support that asymmetric span in the idealised muon scheduling model.
+> T333 then tested candidate reciprocal `1/Phi <-> Phi` breathing on recorded
+> qutrit hardware data. The primary centre instead recovered a stable
+> `0.5533 <-> 1.8069` reciprocal breath; two secondary centres sat nearer
+> `0.5894 <-> 1.699`. T334 then replicated the four-sector coordinate and
+> octave-relative reciprocal closure in public bubble lineages, but at the
+> much narrower identity-specific scale `alpha~1.2`; exact time ordering did
+> not survive strict holdout. The current lead is therefore a shared
+> contraction/expansion x forward/reverse coordinate with identity-specific
+> radial amplitude, while `1/e` remains a separate decay landmark and Phi
+> remains a narrower candidate. See
+> `ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`.
+
 This folder contains a reproducible ARA-native calibration of the proposed
 Phi handover landmark using ordered Arabidopsis leaf-placement measurements.
 
@@ -83,6 +101,29 @@ CSV is deterministic and ignored.
 - the three CSV files — event, plant and candidate-level audit tables.
 
 Additional calibration and cross-domain records:
+
+- `T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`
+  — a frozen test of the T307 reciprocal-golden radial lead on a real
+  `53,459,987`-measurement trapped-qutrit record. All four complex ARA
+  quadrants and a stable reciprocal radial pair were recovered, and true order
+  beat all `500` blockwise nulls. The frozen primary endpoints were
+  `0.553331 <-> 1.806922`, however, so Phi won only `3/21` primary cells and
+  lost badly to the calibration-fitted reciprocal scale. Two secondary centre
+  definitions moved toward `0.5894 <-> 1.699` and preferred Phi among the
+  fixed candidates, exposing centre-definition dependence rather than rescuing
+  a universal Phi endpoint. Verdict: **NOT SUPPORTED for universal reciprocal
+  Phi; strong identity-specific reciprocal-coordinate result**. Independent
+  validation passed `14/14` checks.
+
+- `T325_PHI_CIRCLE_TRAIN_PHYLLOTAXIS_REPORT_2026-08-02.md` — the first frozen
+  child test of the Phi circle-train detection procedure. On 359 ordered
+  Arabidopsis divergence angles, `3/8` was the best isolated child-step rule
+  (`6.743°` versus Phi `6.986°`), while exact Phi was the best fixed ordered
+  parent carrier (`5.429°` versus `3/8` `10.239°`). Real order beat within-plant
+  shuffles (`p=0.0263`), adjacent errors compensated (`C=0.319`), and Phi won
+  the fixed Fibonacci-lag profile. Independent validation passed 46/46 checks.
+  Verdict: **mixed / partial calibration**, because Phi failed the one-step
+  gate and the source is previously opened rather than an external holdout.
 
 - [`../phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`](../phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md)
   — freezes the clarified ARA-octave meaning of child → parent →
@@ -170,6 +211,17 @@ T317 downloads checksum-recorded JPL Horizons vectors for the Sun and nine
 planetary-system barycentres into the ignored `data/t317/` cache. The compact
 JSON, composition table, report, figure, protocol and independent validation
 remain versionable. The 14,683-row series CSV is deterministic and ignored.
+
+T325 reproduction:
+
+```powershell
+python t325_phi_circle_train_phyllotaxis.py
+python validate_t325_phi_circle_train_phyllotaxis.py
+```
+
+T325 reuses the checksum-locked public Source Data 21 workbook already stored
+under the ignored `data/` directory. The protocol, compact CSV/JSON outputs,
+technical report and independent validation record remain versionable.
 
 ## Evidential boundary
 

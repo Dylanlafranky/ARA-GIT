@@ -1,0 +1,293 @@
+{
+  "test_id": "T320A-CROSS-DOMAIN-PHI-PILLAR-FIDELITY-v1",
+  "protocol_sha256": "dc6faec59f3809cc180f28fa08660278ddd4a404508fed7608116c51e96992fc",
+  "status": "post-result fidelity correction; retrospective",
+  "correction": "cross-rung A/B labels no longer require instantaneous phase-plane sign alignment",
+  "source": "dynamicslab MultiArm-Pendulum, Zenodo 10.5281/zenodo.6633719",
+  "development_metric_scales": {
+    "angle": 0.28201750688437843,
+    "velocity": 1.609331845946112
+  },
+  "evaluation": {
+    "windows": 601,
+    "eligible_samples": 60001,
+    "median_q": 1.886509321584634,
+    "q_candidate_errors": {
+      "1": 0.886509321584634,
+      "sqrt2": 0.48460268129848383,
+      "1.5": 0.4126990110281663,
+      "phi": 0.3156039500743608,
+      "sqrt3": 0.2307715286479015,
+      "2": 0.11349067841536598
+    },
+    "q_winner": "2",
+    "median_angle_degrees": 129.8532950145836,
+    "angle_candidate_errors": {
+      "90": 53.304291655518966,
+      "108": 45.748066433810806,
+      "120": 39.73562278752871,
+      "135": 33.21866907841809,
+      "144": 29.332552401210705,
+      "180": 50.14670498541639
+    },
+    "angle_winner": "144",
+    "median_leg_balance": 0.2331501434445093,
+    "branches": {
+      "A-positive": {
+        "windows": 298,
+        "median_q": 1.8964865995594384,
+        "candidate_errors": {
+          "1": 0.8964865995594383,
+          "sqrt2": 0.4850742577820507,
+          "1.5": 0.4183158325258547,
+          "phi": 0.31720376224835656,
+          "sqrt3": 0.22755195100103798,
+          "2": 0.10351340044056168
+        },
+        "winner": "2"
+      },
+      "B-negative": {
+        "windows": 303,
+        "median_q": 1.8771735943841144,
+        "candidate_errors": {
+          "1": 0.8771735943841144,
+          "sqrt2": 0.47311994067366725,
+          "1.5": 0.40790471775174897,
+          "phi": 0.3149125117994229,
+          "sqrt3": 0.23112938413900985,
+          "2": 0.12282640561588565
+        },
+        "winner": "2"
+      }
+    }
+  },
+  "middle_shift_controls": {
+    "0.17": {
+      "windows": 601,
+      "eligible_samples": 60001,
+      "median_q": 1.0447412172058426,
+      "q_candidate_errors": {
+        "1": 0.26523904046998426,
+        "sqrt2": 0.4319606052182162,
+        "1.5": 0.46899951861084355,
+        "phi": 0.5732927715440523,
+        "sqrt3": 0.6873095903630346,
+        "2": 0.9552587827941574
+      },
+      "q_winner": "1",
+      "median_angle_degrees": 44.67003116273028,
+      "angle_candidate_errors": {
+        "90": 47.66551524477917,
+        "108": 63.40607956006738,
+        "120": 75.32996883726972,
+        "135": 90.32996883726972,
+        "144": 99.32996883726972,
+        "180": 135.32996883726972
+      },
+      "angle_winner": "90",
+      "median_leg_balance": 0.5073743434456949,
+      "branches": {
+        "A-positive": {
+          "windows": 298,
+          "median_q": 1.0471432034279533,
+          "candidate_errors": {
+            "1": 0.26250120041921743,
+            "sqrt2": 0.43828461071833974,
+            "1.5": 0.4599734344851486,
+            "phi": 0.5708907853219415,
+            "sqrt3": 0.6849076041409238,
+            "2": 0.9528567965720466
+          },
+          "winner": "1"
+        },
+        "B-negative": {
+          "windows": 303,
+          "median_q": 1.042331609818726,
+          "candidate_errors": {
+            "1": 0.2682908042641813,
+            "sqrt2": 0.4184183753968582,
+            "1.5": 0.47110654184010636,
+            "phi": 0.5757023789311688,
+            "sqrt3": 0.6897191977501511,
+            "2": 0.9576683901812739
+          },
+          "winner": "1"
+        }
+      }
+    },
+    "0.31": {
+      "windows": 601,
+      "eligible_samples": 60001,
+      "median_q": 1.2349827236418756,
+      "q_candidate_errors": {
+        "1": 0.3185389473932463,
+        "sqrt2": 0.2696516930079549,
+        "1.5": 0.3137911984074526,
+        "phi": 0.38305126510801935,
+        "sqrt3": 0.49706808392700164,
+        "2": 0.7650172763581244
+      },
+      "q_winner": "sqrt2",
+      "median_angle_degrees": 55.89115393629345,
+      "angle_candidate_errors": {
+        "90": 40.725149766114484,
+        "108": 53.235404133785806,
+        "120": 64.10884606370655,
+        "135": 79.10884606370655,
+        "144": 88.10884606370655,
+        "180": 124.10884606370655
+      },
+      "angle_winner": "90",
+      "median_leg_balance": 0.48861754046907613,
+      "branches": {
+        "A-positive": {
+          "windows": 298,
+          "median_q": 1.2433211247819065,
+          "candidate_errors": {
+            "1": 0.30762137991338667,
+            "sqrt2": 0.26886273693409635,
+            "1.5": 0.30197325965754573,
+            "phi": 0.37593753977768596,
+            "sqrt3": 0.4887296827869706,
+            "2": 0.7566788752180934
+          },
+          "winner": "sqrt2"
+        },
+        "B-negative": {
+          "windows": 303,
+          "median_q": 1.2128746083757458,
+          "candidate_errors": {
+            "1": 0.326738306440985,
+            "sqrt2": 0.2696516930079549,
+            "1.5": 0.32308922137137364,
+            "phi": 0.4051593803741491,
+            "sqrt3": 0.5191761991931314,
+            "2": 0.7871253916242542
+          },
+          "winner": "sqrt2"
+        }
+      }
+    },
+    "0.47": {
+      "windows": 601,
+      "eligible_samples": 60001,
+      "median_q": 0.9073447940656861,
+      "q_candidate_errors": {
+        "1": 0.48791172207233524,
+        "sqrt2": 0.5742064394138251,
+        "1.5": 0.5926552059343139,
+        "phi": 0.7106891946842088,
+        "sqrt3": 0.8247060135031911,
+        "2": 1.0926552059343138
+      },
+      "q_winner": "1",
+      "median_angle_degrees": 32.641086667001645,
+      "angle_candidate_errors": {
+        "90": 60.21742315324181,
+        "108": 75.35891333299836,
+        "120": 87.35891333299836,
+        "135": 102.35891333299836,
+        "144": 111.35891333299836,
+        "180": 147.35891333299836
+      },
+      "angle_winner": "90",
+      "median_leg_balance": 0.5494516679533321,
+      "branches": {
+        "A-positive": {
+          "windows": 298,
+          "median_q": 0.8097884970979312,
+          "candidate_errors": {
+            "1": 0.47238698034626236,
+            "sqrt2": 0.6044250652751639,
+            "1.5": 0.6902115029020688,
+            "phi": 0.8082454916519637,
+            "sqrt3": 0.922262310470946,
+            "2": 1.1902115029020688
+          },
+          "winner": "1"
+        },
+        "B-negative": {
+          "windows": 303,
+          "median_q": 1.0028495119591834,
+          "candidate_errors": {
+            "1": 0.5012815167815058,
+            "sqrt2": 0.5424180515923644,
+            "1.5": 0.49918342971298335,
+            "phi": 0.6151844767907115,
+            "sqrt3": 0.7292012956096938,
+            "2": 0.9971504880408166
+          },
+          "winner": "1.5"
+        }
+      }
+    }
+  },
+  "driven_transfer": {
+    "windows": 700,
+    "eligible_samples": 70000,
+    "median_q": 1.9886589622368422,
+    "q_candidate_errors": {
+      "1": 0.9886589622368421,
+      "sqrt2": 0.574590453302807,
+      "1.5": 0.48907203385211484,
+      "phi": 0.37105462411743173,
+      "sqrt3": 0.25725200265601533,
+      "2": 0.011341037763157868
+    },
+    "q_winner": "2",
+    "median_angle_degrees": 167.00582068865285,
+    "angle_candidate_errors": {
+      "90": 77.07138291023908,
+      "108": 59.38251429875115,
+      "120": 47.44087705214356,
+      "135": 32.67591454980408,
+      "144": 24.507220132764502,
+      "180": 12.994179311347153
+    },
+    "angle_winner": "180",
+    "median_leg_balance": 0.6259456657983709,
+    "branches": {
+      "A-positive": {
+        "windows": 344,
+        "median_q": 1.989109362399645,
+        "candidate_errors": {
+          "1": 0.989109362399645,
+          "sqrt2": 0.5750698045628158,
+          "1.5": 0.489418617926353,
+          "phi": 0.3713846291764581,
+          "sqrt3": 0.2575191218615135,
+          "2": 0.010890637600355024
+        },
+        "winner": "2"
+      },
+      "B-negative": {
+        "windows": 356,
+        "median_q": 1.9884741517675517,
+        "candidate_errors": {
+          "1": 0.9884741517675517,
+          "sqrt2": 0.5742605893944566,
+          "1.5": 0.4884741517675517,
+          "phi": 0.370509275906313,
+          "sqrt3": 0.2566889352805024,
+          "2": 0.011525848232448288
+        },
+        "winner": "2"
+      }
+    }
+  },
+  "endpoint_swap_invariance": "exact by symmetry of q and included angle",
+  "gates": {
+    "G1_phi_unique_q_winner": false,
+    "G2_108_unique_angle_winner": false,
+    "G3_equal_leg_ratio_at_least_0_90": false,
+    "G4_both_mirror_branches_choose_phi": false,
+    "G5_real_alignment_beats_all_middle_shifts": true
+  },
+  "gates_passed": 1,
+  "gates_total": 5,
+  "cross_arm_triangle_verdict": "NOT SUPPORTED",
+  "intended_same_identity_temporal_handover_status": "NOT TESTED \u2014 WRONG IDENTITY BOUNDARY",
+  "physical_cross_domain_status": "NO ELIGIBLE PHYSICAL TEST OF THE INTENDED HANDOVER",
+  "superseded_interpretation": "Arm 3 -> arm 2 -> arm 1 compares three distinct identities. It is not the intended same-identity temporal handover A[j,k] -> B[j,k] -> A[j,k+1].",
+  "boundary": "This retains a descriptive cross-arm coupling cut only. It neither supports nor rejects the intended same-arm temporal Phi-handover claim."
+}

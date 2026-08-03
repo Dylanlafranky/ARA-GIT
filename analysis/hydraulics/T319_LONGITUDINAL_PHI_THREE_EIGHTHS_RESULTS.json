@@ -1,0 +1,726 @@
+{
+  "test_id": "T319",
+  "title": "Longitudinal Phi-motion / 3/8-structure separation",
+  "run_date": "2026-08-02",
+  "frozen_protocol_sha256": "d4e3d7ece8a7c1ada9568ae609c84135a6a19f0497d1e57115c4ccf59b6884aa",
+  "source_doi": "10.5061/dryad.4xgxd25hg",
+  "source_files_sha256": {
+    "Plain-bed-velocity.xlsx": "946ed8d9789b476e5a766166db15825b98b20e9b08594560d71b3da9b0ceac16",
+    "Undulating-bed-velocity.xlsx": "6e90e6d6f991a778c24450b5b58ccc7767a580cb3218308b7c406a1a7705fe3e",
+    "Water-depth.xlsx": "052f5353c6fc54e73282e4b285484b54aaa4f5ab953c33d0b660a4ca1e133b9c"
+  },
+  "observable_definition": {
+    "motion": "raw longitudinal location of maximum source-provided depth-averaged streamwise speed Us",
+    "structure": "raw longitudinal location of maximum centreline water depth",
+    "orientation": "increasing source distance from bend entry maps to ARA 0->2",
+    "joining": "exact source station match within 0.000001 m; no interpolation",
+    "Us_recovery": "median of repeated algebraic values us/(us/Us) at each station"
+  },
+  "candidate_loci": {
+    "phi": [
+      0.3819660112501051,
+      1.618033988749895
+    ],
+    "three_eighths": [
+      0.375,
+      1.625
+    ],
+    "one_third": [
+      0.3333333333333333,
+      1.6666666666666667
+    ],
+    "two_fifths": [
+      0.4,
+      1.6
+    ],
+    "half": [
+      0.5,
+      1.5
+    ],
+    "ridge": [
+      1
+    ]
+  },
+  "phi_three_eighths_separation": 0.0069660112501050975,
+  "eligible_runs": [
+    "PRUN1",
+    "PRUN2",
+    "PRUN3",
+    "PRUN5",
+    "URUN1",
+    "URUN2",
+    "URUN3"
+  ],
+  "ineligible_runs": [
+    {
+      "run": "PRUN4",
+      "reason": "No matching water-depth series in the released Water-depth.xlsx workbook"
+    }
+  ],
+  "exact_verdict": "INCONCLUSIVE_RESOLUTION",
+  "exact_verdict_reason": "No run's local raw station spacing was fine enough to distinguish 0.381966 from 0.375 on the frozen gate.",
+  "coarse_descriptive_result": {
+    "motion_phi_closest_runs": 0,
+    "structure_three_eighths_closest_runs": 0,
+    "plain_pattern": "All four plain-bed runs have observed motion maxima at x=0 and structure maxima at x=5/3.",
+    "undulating_pattern": "The three undulating-bed runs have different observed maxima; no common Phi-motion / 3/8-structure placement appears.",
+    "interpretation_boundary": "These raw-grid observations do not support the declared separation, but the preregistered exact verdict remains resolution-inconclusive because all local station gaps exceed the Phi-versus-3/8 separation."
+  },
+  "run_results": [
+    {
+      "run": "PRUN1",
+      "family": "plain",
+      "shared_station_count": 11,
+      "support_s0_m": 0,
+      "support_s1_m": 3.7699111841999997,
+      "motion_peak_x": [
+        0
+      ],
+      "motion_peak_s_m": [
+        0
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.4922582460107058
+      ],
+      "structure_peak_x": [
+        1.6666666666666665
+      ],
+      "structure_peak_s_m": [
+        3.1415926534999996
+      ],
+      "structure_peak_depth_m": [
+        0.14339999999999997
+      ],
+      "motion_local_resolution_x": 0.1111111111111111,
+      "structure_local_resolution_x": 0.33333333333333304,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "one_third"
+      ],
+      "motion_phi_distance": 0.3819660112501051,
+      "motion_three_eighths_distance": 0.375,
+      "structure_phi_distance": 0.048632677916771616,
+      "structure_three_eighths_distance": 0.04166666666666652,
+      "predicted_pair_distance": 0.4236326779167716,
+      "swapped_pair_distance": 0.4236326779167716,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "PRUN2",
+      "family": "plain",
+      "shared_station_count": 11,
+      "support_s0_m": 0,
+      "support_s1_m": 3.7699111841999997,
+      "motion_peak_x": [
+        0
+      ],
+      "motion_peak_s_m": [
+        0
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.4526539084871066
+      ],
+      "structure_peak_x": [
+        1.6666666666666665
+      ],
+      "structure_peak_s_m": [
+        3.1415926534999996
+      ],
+      "structure_peak_depth_m": [
+        0.1144
+      ],
+      "motion_local_resolution_x": 0.1111111111111111,
+      "structure_local_resolution_x": 0.33333333333333304,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "one_third"
+      ],
+      "motion_phi_distance": 0.3819660112501051,
+      "motion_three_eighths_distance": 0.375,
+      "structure_phi_distance": 0.048632677916771616,
+      "structure_three_eighths_distance": 0.04166666666666652,
+      "predicted_pair_distance": 0.4236326779167716,
+      "swapped_pair_distance": 0.4236326779167716,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "PRUN3",
+      "family": "plain",
+      "shared_station_count": 11,
+      "support_s0_m": 0,
+      "support_s1_m": 3.7699111841999997,
+      "motion_peak_x": [
+        0
+      ],
+      "motion_peak_s_m": [
+        0
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.4239698809087601
+      ],
+      "structure_peak_x": [
+        1.6666666666666665
+      ],
+      "structure_peak_s_m": [
+        3.1415926534999996
+      ],
+      "structure_peak_depth_m": [
+        0.09720000000000001
+      ],
+      "motion_local_resolution_x": 0.1111111111111111,
+      "structure_local_resolution_x": 0.33333333333333304,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "one_third"
+      ],
+      "motion_phi_distance": 0.3819660112501051,
+      "motion_three_eighths_distance": 0.375,
+      "structure_phi_distance": 0.048632677916771616,
+      "structure_three_eighths_distance": 0.04166666666666652,
+      "predicted_pair_distance": 0.4236326779167716,
+      "swapped_pair_distance": 0.4236326779167716,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "PRUN5",
+      "family": "plain",
+      "shared_station_count": 11,
+      "support_s0_m": 0,
+      "support_s1_m": 3.7699111841999997,
+      "motion_peak_x": [
+        0
+      ],
+      "motion_peak_s_m": [
+        0
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.352108103110778
+      ],
+      "structure_peak_x": [
+        1.6666666666666665
+      ],
+      "structure_peak_s_m": [
+        3.1415926534999996
+      ],
+      "structure_peak_depth_m": [
+        0.07415000000000001
+      ],
+      "motion_local_resolution_x": 0.1111111111111111,
+      "structure_local_resolution_x": 0.33333333333333304,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "one_third"
+      ],
+      "motion_phi_distance": 0.3819660112501051,
+      "motion_three_eighths_distance": 0.375,
+      "structure_phi_distance": 0.048632677916771616,
+      "structure_three_eighths_distance": 0.04166666666666652,
+      "predicted_pair_distance": 0.4236326779167716,
+      "swapped_pair_distance": 0.4236326779167716,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "URUN1",
+      "family": "undulating",
+      "shared_station_count": 17,
+      "support_s0_m": -0.5,
+      "support_s1_m": 4.2699111842,
+      "motion_peak_x": [
+        0.4730983396242165
+      ],
+      "motion_peak_s_m": [
+        0.6283185307
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.6271883956955189
+      ],
+      "structure_peak_x": [
+        1.263450830187892
+      ],
+      "structure_peak_s_m": [
+        2.5132741228
+      ],
+      "structure_peak_depth_m": [
+        0.1297167012890625
+      ],
+      "motion_local_resolution_x": 0.13172541509394592,
+      "structure_local_resolution_x": 0.1317254150939462,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "half"
+      ],
+      "structure_closest_candidates": [
+        "half"
+      ],
+      "motion_phi_distance": 0.0911323283741114,
+      "motion_three_eighths_distance": 0.09809833962421649,
+      "structure_phi_distance": 0.35458315856200295,
+      "structure_three_eighths_distance": 0.36154916981210805,
+      "predicted_pair_distance": 0.45268149818621944,
+      "swapped_pair_distance": 0.45268149818621944,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "URUN2",
+      "family": "undulating",
+      "shared_station_count": 17,
+      "support_s0_m": -0.5,
+      "support_s1_m": 4.2699111842,
+      "motion_peak_x": [
+        0.10482375471816233
+      ],
+      "motion_peak_s_m": [
+        -0.25
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.6080059787501915
+      ],
+      "structure_peak_x": [
+        1.263450830187892
+      ],
+      "structure_peak_s_m": [
+        2.5132741228
+      ],
+      "structure_peak_depth_m": [
+        0.11581670128906252
+      ],
+      "motion_local_resolution_x": 0.10482375471816233,
+      "structure_local_resolution_x": 0.1317254150939462,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "half"
+      ],
+      "motion_phi_distance": 0.2771422565319428,
+      "motion_three_eighths_distance": 0.2701762452818377,
+      "structure_phi_distance": 0.35458315856200295,
+      "structure_three_eighths_distance": 0.36154916981210805,
+      "predicted_pair_distance": 0.6386914263440508,
+      "swapped_pair_distance": 0.6247594038438407,
+      "predicted_minus_swapped": 0.013932022500210195,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    },
+    {
+      "run": "URUN3",
+      "family": "undulating",
+      "shared_station_count": 17,
+      "support_s0_m": -0.5,
+      "support_s1_m": 4.2699111842,
+      "motion_peak_x": [
+        0.34137292453027057
+      ],
+      "motion_peak_s_m": [
+        0.31415926535
+      ],
+      "motion_peak_Us_m_per_s": [
+        0.5262059401181562
+      ],
+      "structure_peak_x": [
+        0
+      ],
+      "structure_peak_s_m": [
+        -0.5
+      ],
+      "structure_peak_depth_m": [
+        0.1068718628515625
+      ],
+      "motion_local_resolution_x": 0.13172541509394592,
+      "structure_local_resolution_x": 0.10482375471816233,
+      "exact_phi_vs_three_eighths_eligible": 0,
+      "motion_closest_candidates": [
+        "one_third"
+      ],
+      "structure_closest_candidates": [
+        "one_third"
+      ],
+      "motion_phi_distance": 0.040593086719834526,
+      "motion_three_eighths_distance": 0.03362707546972943,
+      "structure_phi_distance": 0.3819660112501051,
+      "structure_three_eighths_distance": 0.375,
+      "predicted_pair_distance": 0.4155930867198345,
+      "swapped_pair_distance": 0.4155930867198345,
+      "predicted_minus_swapped": 0,
+      "exact_run_verdict": "INCONCLUSIVE_RESOLUTION"
+    }
+  ],
+  "candidate_aggregate": [
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "phi",
+      "run_count": 4,
+      "mean_absolute_distance": 0.3819660112501051,
+      "median_absolute_distance": 0.3819660112501051,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "three_eighths",
+      "run_count": 4,
+      "mean_absolute_distance": 0.375,
+      "median_absolute_distance": 0.375,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "one_third",
+      "run_count": 4,
+      "mean_absolute_distance": 0.3333333333333333,
+      "median_absolute_distance": 0.3333333333333333,
+      "wins": 4
+    },
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "two_fifths",
+      "run_count": 4,
+      "mean_absolute_distance": 0.4,
+      "median_absolute_distance": 0.4,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "half",
+      "run_count": 4,
+      "mean_absolute_distance": 0.5,
+      "median_absolute_distance": 0.5,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "motion",
+      "candidate": "ridge",
+      "run_count": 4,
+      "mean_absolute_distance": 1,
+      "median_absolute_distance": 1,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "phi",
+      "run_count": 4,
+      "mean_absolute_distance": 0.048632677916771616,
+      "median_absolute_distance": 0.048632677916771616,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "three_eighths",
+      "run_count": 4,
+      "mean_absolute_distance": 0.04166666666666652,
+      "median_absolute_distance": 0.04166666666666652,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "one_third",
+      "run_count": 4,
+      "mean_absolute_distance": 2.220446049250313e-16,
+      "median_absolute_distance": 2.220446049250313e-16,
+      "wins": 4
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "two_fifths",
+      "run_count": 4,
+      "mean_absolute_distance": 0.06666666666666643,
+      "median_absolute_distance": 0.06666666666666643,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "half",
+      "run_count": 4,
+      "mean_absolute_distance": 0.16666666666666652,
+      "median_absolute_distance": 0.16666666666666652,
+      "wins": 0
+    },
+    {
+      "family": "plain",
+      "observable": "structure",
+      "candidate": "ridge",
+      "run_count": 4,
+      "mean_absolute_distance": 0.6666666666666665,
+      "median_absolute_distance": 0.6666666666666665,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "phi",
+      "run_count": 3,
+      "mean_absolute_distance": 0.13628922387529624,
+      "median_absolute_distance": 0.0911323283741114,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "three_eighths",
+      "run_count": 3,
+      "mean_absolute_distance": 0.13396722012526122,
+      "median_absolute_distance": 0.09809833962421649,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "one_third",
+      "run_count": 3,
+      "mean_absolute_distance": 0.12543805870099714,
+      "median_absolute_distance": 0.13976500629088318,
+      "wins": 2
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "two_fifths",
+      "run_count": 3,
+      "mean_absolute_distance": 0.14230055345859455,
+      "median_absolute_distance": 0.07309833962421647,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "half",
+      "run_count": 3,
+      "mean_absolute_distance": 0.1935683270424502,
+      "median_absolute_distance": 0.15862707546972943,
+      "wins": 1
+    },
+    {
+      "family": "undulating",
+      "observable": "motion",
+      "candidate": "ridge",
+      "run_count": 3,
+      "mean_absolute_distance": 0.6935683270424503,
+      "median_absolute_distance": 0.6586270754697294,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "phi",
+      "run_count": 3,
+      "mean_absolute_distance": 0.36371077612470365,
+      "median_absolute_distance": 0.35458315856200295,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "three_eighths",
+      "run_count": 3,
+      "mean_absolute_distance": 0.3660327798747387,
+      "median_absolute_distance": 0.36154916981210805,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "one_third",
+      "run_count": 3,
+      "mean_absolute_distance": 0.3799216687636276,
+      "median_absolute_distance": 0.4032158364787748,
+      "wins": 1
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "two_fifths",
+      "run_count": 3,
+      "mean_absolute_distance": 0.3576994465414054,
+      "median_absolute_distance": 0.33654916981210814,
+      "wins": 0
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "half",
+      "run_count": 3,
+      "mean_absolute_distance": 0.324366113208072,
+      "median_absolute_distance": 0.23654916981210805,
+      "wins": 2
+    },
+    {
+      "family": "undulating",
+      "observable": "structure",
+      "candidate": "ridge",
+      "run_count": 3,
+      "mean_absolute_distance": 0.5089672201252613,
+      "median_absolute_distance": 0.26345083018789195,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "phi",
+      "run_count": 7,
+      "mean_absolute_distance": 0.2766759595180442,
+      "median_absolute_distance": 0.3819660112501051,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "three_eighths",
+      "run_count": 7,
+      "mean_absolute_distance": 0.2717002371965405,
+      "median_absolute_distance": 0.375,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "one_third",
+      "run_count": 7,
+      "mean_absolute_distance": 0.24423535849090355,
+      "median_absolute_distance": 0.3333333333333333,
+      "wins": 6
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "two_fifths",
+      "run_count": 7,
+      "mean_absolute_distance": 0.2895573800536834,
+      "median_absolute_distance": 0.4,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "half",
+      "run_count": 7,
+      "mean_absolute_distance": 0.3686721401610501,
+      "median_absolute_distance": 0.5,
+      "wins": 1
+    },
+    {
+      "family": "all",
+      "observable": "motion",
+      "candidate": "ridge",
+      "run_count": 7,
+      "mean_absolute_distance": 0.86867214016105,
+      "median_absolute_distance": 1,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "phi",
+      "run_count": 7,
+      "mean_absolute_distance": 0.18366614857731392,
+      "median_absolute_distance": 0.048632677916771616,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "three_eighths",
+      "run_count": 7,
+      "mean_absolute_distance": 0.18068071518441173,
+      "median_absolute_distance": 0.04166666666666652,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "one_third",
+      "run_count": 7,
+      "mean_absolute_distance": 0.1628235723272691,
+      "median_absolute_distance": 2.220446049250313e-16,
+      "wins": 5
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "two_fifths",
+      "run_count": 7,
+      "mean_absolute_distance": 0.1913950008986974,
+      "median_absolute_distance": 0.06666666666666643,
+      "wins": 0
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "half",
+      "run_count": 7,
+      "mean_absolute_distance": 0.2342521437558403,
+      "median_absolute_distance": 0.16666666666666652,
+      "wins": 2
+    },
+    {
+      "family": "all",
+      "observable": "structure",
+      "candidate": "ridge",
+      "run_count": 7,
+      "mean_absolute_distance": 0.5990811895774929,
+      "median_absolute_distance": 0.6666666666666665,
+      "wins": 0
+    }
+  ],
+  "paired_summary": [
+    {
+      "family": "plain",
+      "run_count": 4,
+      "mean_predicted_pair_distance": 0.4236326779167716,
+      "mean_swapped_pair_distance": 0.4236326779167716,
+      "mean_predicted_minus_swapped": 0,
+      "predicted_pair_better_runs": 0,
+      "swapped_pair_better_runs": 0,
+      "tied_runs": 4,
+      "exact_resolution_eligible_runs": 0
+    },
+    {
+      "family": "undulating",
+      "run_count": 3,
+      "mean_predicted_pair_distance": 0.502322003750035,
+      "mean_swapped_pair_distance": 0.4976779962499649,
+      "mean_predicted_minus_swapped": 0.004644007500070065,
+      "predicted_pair_better_runs": 0,
+      "swapped_pair_better_runs": 1,
+      "tied_runs": 2,
+      "exact_resolution_eligible_runs": 0
+    },
+    {
+      "family": "all",
+      "run_count": 7,
+      "mean_predicted_pair_distance": 0.45735667470245595,
+      "mean_swapped_pair_distance": 0.45536638577385447,
+      "mean_predicted_minus_swapped": 0.0019902889286014564,
+      "predicted_pair_better_runs": 0,
+      "swapped_pair_better_runs": 1,
+      "tied_runs": 6,
+      "exact_resolution_eligible_runs": 0
+    }
+  ]
+}
