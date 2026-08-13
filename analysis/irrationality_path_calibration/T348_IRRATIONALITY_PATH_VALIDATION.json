@@ -1,0 +1,172 @@
+{
+  "test": "T348 independent artifact validation",
+  "all_checks_passed": true,
+  "checks": {
+    "metrics row count = 2016 paths x 8 rows": true,
+    "closure row count = 2016 paths x 2 controls": true,
+    "curve row count = 2 splits x 5 families x 2 controls x 512 lags": true,
+    "metrics natural key unique": true,
+    "closure natural key unique": true,
+    "all coordinates in [0,2]": true,
+    "all losses non-negative": true,
+    "all closure coherence in [0,1] within tolerance": true,
+    "protocol hash matches sidecar": true,
+    "claim hash matches sidecar": true,
+    "protocol hash matches result": true,
+    "claim hash matches result": true,
+    "independently recomputed gates match emitted gates": true,
+    "reported holdout accuracy independently matches": true,
+    "T348_IRRATIONALITY_PATH_FIGURE.png has nontrivial dimensions": true,
+    "T348_IRRATIONALITY_CIRCLE_EXAMPLES.png has nontrivial dimensions": true
+  },
+  "recomputed_gates": {
+    "G1 potential orientation": true,
+    "G2 residual orientation": true,
+    "G3 broad-sector recovery": true,
+    "G4 closure independence": true,
+    "G5 order-destruction control": true
+  },
+  "overall_holdout_sector_accuracy": 0.9565217391304348,
+  "macro_family_holdout_sector_accuracy": 0.9,
+  "family_holdout_sector_accuracy": {
+    "periodic rational": 1.0,
+    "irrational rotation": 1.0,
+    "deterministic chaos": 0.5,
+    "finite stochastic": 1.0,
+    "continuous stochastic": 1.0
+  },
+  "parameter_holdout_sector_accuracy": [
+    {
+      "family": "periodic rational",
+      "parameter": "6",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "8",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "10",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "12",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "14",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "15",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "periodic rational",
+      "parameter": "17",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "irrational rotation",
+      "parameter": "13",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "irrational rotation",
+      "parameter": "17",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "irrational rotation",
+      "parameter": "19",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "irrational rotation",
+      "parameter": "23",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "irrational rotation",
+      "parameter": "29",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "deterministic chaos",
+      "parameter": "(4, 5)",
+      "sector_correct": 0.0
+    },
+    {
+      "family": "deterministic chaos",
+      "parameter": "(5, 7)",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "6",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "8",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "10",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "12",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "14",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "15",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "finite stochastic",
+      "parameter": "17",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "continuous stochastic",
+      "parameter": "(0.8, 0.8)",
+      "sector_correct": 1.0
+    },
+    {
+      "family": "continuous stochastic",
+      "parameter": "(3.0, 3.0)",
+      "sector_correct": 1.0
+    }
+  ],
+  "irrational_best_miss_improvement_share": 1.0,
+  "image_info": {
+    "T348_IRRATIONALITY_PATH_FIGURE.png": {
+      "width": 1900,
+      "height": 1380,
+      "mode": "RGB"
+    },
+    "T348_IRRATIONALITY_CIRCLE_EXAMPLES.png": {
+      "width": 1900,
+      "height": 470,
+      "mode": "RGB"
+    }
+  },
+  "provenance": {
+    "protocol_sha256": "4EB33854992EF4B30B70142814804C276B95C8794871D55F679B68A5ABB23547",
+    "claim_sha256": "E03F55A4848028037D13B1731BACA7664E4BA5F8E3D8D3F51F9F59BC71832951"
+  }
+}

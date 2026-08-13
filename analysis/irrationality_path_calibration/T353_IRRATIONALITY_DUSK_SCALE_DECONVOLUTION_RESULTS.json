@@ -1,0 +1,70 @@
+{
+  "test": "T353 Irrationality dusk scale deconvolution",
+  "run_date": "2026-08-11",
+  "evidence_class": "synthetic known-referee multiscale follow-up",
+  "protocol_sha256": "47E458700C35A0A994A6371C8E4387A5BF47E10859ED600203EE74908E9D6F68",
+  "verdict": "WINDOW SMEAR ONLY",
+  "gates_passed": 2,
+  "gates_total": 6,
+  "band_rows": 2304,
+  "profile_rows": 76032,
+  "identity_rows": 288,
+  "direction_results": {
+    "irrational_to_rational": {
+      "duration_hat": {
+        "estimate": 56.0,
+        "ci_low": 8.0,
+        "ci_high": 96.0,
+        "n": 144
+      },
+      "duration_spearman": {
+        "estimate": -0.03401822905328951,
+        "ci_low": -0.2057825541583835,
+        "ci_high": 0.14006697955178715,
+        "n": 144
+      },
+      "absolute_error": {
+        "estimate": 352.0,
+        "ci_low": 304.0,
+        "ci_high": 448.0,
+        "n": 144
+      },
+      "positive_window_median": 2.0
+    },
+    "rational_to_irrational": {
+      "duration_hat": {
+        "estimate": 24.0,
+        "ci_low": 0.0,
+        "ci_high": 72.0,
+        "n": 144
+      },
+      "duration_spearman": {
+        "estimate": -0.016945439536800937,
+        "ci_low": -0.185892612860386,
+        "ci_high": 0.15434449285436394,
+        "n": 144
+      },
+      "absolute_error": {
+        "estimate": 376.0,
+        "ci_low": 352.0,
+        "ci_high": 448.0,
+        "n": 144
+      },
+      "positive_window_median": 2.0
+    }
+  },
+  "abrupt_smear": {
+    "irrational_to_rational": {
+      "median_abs_intercept": 32.00000000000008,
+      "median_r2": 0.9846153846153847
+    },
+    "rational_to_irrational": {
+      "median_abs_intercept": 15.999999999999893,
+      "median_r2": 0.9956363636363637
+    }
+  },
+  "width_wins": {
+    "irrational_to_rational": 2,
+    "rational_to_irrational": 2
+  }
+}

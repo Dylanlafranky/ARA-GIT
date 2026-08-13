@@ -1,0 +1,717 @@
+{
+  "test": "T345_LINE_CIRCLE_TWO_LEDGER",
+  "representation": "num",
+  "status": "frozen_post_T344_diagnostic",
+  "protocol_sha256": "65770ca22b4be2cdca94eecbb976f31d139b9df30847bec509b26920f52a7a23",
+  "tracks": 5400,
+  "primary_windows": 8233756,
+  "sensitivity_windows": {
+    "8": 8271555,
+    "30": 8152754
+  },
+  "optimisers_all_converged": true,
+  "gates": {
+    "A": {
+      "pass": true
+    },
+    "B": {
+      "pass": false
+    },
+    "C": {
+      "pass": false
+    },
+    "D": {
+      "pass": false
+    }
+  },
+  "components": {
+    "A1 structured minus random circularity": {
+      "name": "A1",
+      "group_col": "closure_class",
+      "a": 1,
+      "b": 2,
+      "metric": "circularity",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 79327,
+          "tracks": 1491
+        },
+        "low:2": {
+          "windows": 3385,
+          "tracks": 322
+        },
+        "medium:1": {
+          "windows": 77376,
+          "tracks": 1498
+        },
+        "medium:2": {
+          "windows": 3402,
+          "tracks": 332
+        },
+        "high:1": {
+          "windows": 66650,
+          "tracks": 1516
+        },
+        "high:2": {
+          "windows": 5532,
+          "tracks": 466
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.18631781177349152,
+          "strata": 36
+        },
+        "medium": {
+          "estimate": 0.16500955033042294,
+          "strata": 39
+        },
+        "high": {
+          "estimate": 0.1665889524766952,
+          "strata": 39
+        }
+      },
+      "pooled": {
+        "estimate": 0.17227879678353777,
+        "ci_low": 0.16327740680033384,
+        "ci_high": 0.17703743267936456,
+        "n_tracks": 4528,
+        "n_strata": 114,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "A2 closure minus structured directness": {
+      "name": "A2",
+      "group_col": "closure_class",
+      "a": 0,
+      "b": 1,
+      "metric": "directness",
+      "eligible": true,
+      "eligibility": {
+        "low:0": {
+          "windows": 2043843,
+          "tracks": 1800
+        },
+        "low:1": {
+          "windows": 79327,
+          "tracks": 1491
+        },
+        "medium:0": {
+          "windows": 2106392,
+          "tracks": 1800
+        },
+        "medium:1": {
+          "windows": 77376,
+          "tracks": 1498
+        },
+        "high:0": {
+          "windows": 2227347,
+          "tracks": 1800
+        },
+        "high:1": {
+          "windows": 66650,
+          "tracks": 1516
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.24691004513094622,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": 0.24054275140313158,
+          "strata": 50
+        },
+        "high": {
+          "estimate": 0.23609641372104856,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": 0.24118307008504214,
+        "ci_low": 0.23682633985488444,
+        "ci_high": 0.2451318350123709,
+        "n_tracks": 5400,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "B1 closure minus structured connection": {
+      "name": "B1",
+      "group_col": "closure_class",
+      "a": 0,
+      "b": 1,
+      "metric": "connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:0": {
+          "windows": 2043843,
+          "tracks": 1800
+        },
+        "low:1": {
+          "windows": 79327,
+          "tracks": 1491
+        },
+        "medium:0": {
+          "windows": 2106392,
+          "tracks": 1800
+        },
+        "medium:1": {
+          "windows": 77376,
+          "tracks": 1498
+        },
+        "high:0": {
+          "windows": 2227347,
+          "tracks": 1800
+        },
+        "high:1": {
+          "windows": 66650,
+          "tracks": 1516
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.07783572714061396,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.10885209305263835,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.09506906836403946,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.09391896285243062,
+        "ci_low": -0.10303957543973785,
+        "ci_high": -0.08685261207400485,
+        "n_tracks": 5400,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    },
+    "B2 structured minus random connection": {
+      "name": "B2",
+      "group_col": "closure_class",
+      "a": 1,
+      "b": 2,
+      "metric": "connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 79327,
+          "tracks": 1491
+        },
+        "low:2": {
+          "windows": 3385,
+          "tracks": 322
+        },
+        "medium:1": {
+          "windows": 77376,
+          "tracks": 1498
+        },
+        "medium:2": {
+          "windows": 3402,
+          "tracks": 332
+        },
+        "high:1": {
+          "windows": 66650,
+          "tracks": 1516
+        },
+        "high:2": {
+          "windows": 5532,
+          "tracks": 466
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.4023115770252341,
+          "strata": 36
+        },
+        "medium": {
+          "estimate": 0.4748671824898359,
+          "strata": 39
+        },
+        "high": {
+          "estimate": 0.49521020868498905,
+          "strata": 39
+        }
+      },
+      "pooled": {
+        "estimate": 0.45891434235725087,
+        "ci_low": 0.4399427959548112,
+        "ci_high": 0.4728577314825483,
+        "n_tracks": 4528,
+        "n_strata": 114,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "C circle-like minus crooked movement info": {
+      "name": "C",
+      "group_col": "path_class",
+      "a": 1,
+      "b": 2,
+      "metric": "information_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 415881,
+          "tracks": 1565
+        },
+        "low:2": {
+          "windows": 145874,
+          "tracks": 1466
+        },
+        "medium:1": {
+          "windows": 400003,
+          "tracks": 1626
+        },
+        "medium:2": {
+          "windows": 149332,
+          "tracks": 1470
+        },
+        "high:1": {
+          "windows": 432854,
+          "tracks": 1654
+        },
+        "high:2": {
+          "windows": 158445,
+          "tracks": 1480
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.00034101942508712687,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.0001220994788452134,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.00023442732082548458,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.0002325154082526083,
+        "ci_low": -0.0003650400303657876,
+        "ci_high": -0.00010208637838443847,
+        "n_tracks": 4898,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    },
+    "D1 circle-like future connection change": {
+      "name": "D1",
+      "group_col": "path_class",
+      "group_value": 1,
+      "metric": "delta_connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 412270,
+          "tracks": 1565
+        },
+        "medium:1": {
+          "windows": 396017,
+          "tracks": 1626
+        },
+        "high:1": {
+          "windows": 428898,
+          "tracks": 1654
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.07287954548993056,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.07270143389887693,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.10045697513659467,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.08201265150846739,
+        "ci_low": -0.0896742763241578,
+        "ci_high": -0.07404826484610362,
+        "n_tracks": 4845,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    },
+    "D2 circle-like minus crooked connection change": {
+      "name": "D2",
+      "group_col": "path_class",
+      "a": 1,
+      "b": 2,
+      "metric": "delta_connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 412270,
+          "tracks": 1565
+        },
+        "low:2": {
+          "windows": 144500,
+          "tracks": 1466
+        },
+        "medium:1": {
+          "windows": 396017,
+          "tracks": 1626
+        },
+        "medium:2": {
+          "windows": 147838,
+          "tracks": 1470
+        },
+        "high:1": {
+          "windows": 428898,
+          "tracks": 1654
+        },
+        "high:2": {
+          "windows": 157086,
+          "tracks": 1480
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.22255834598651808,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.23289406455063258,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.25798802609763416,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.23781347887826162,
+        "ci_low": -0.2486311848144587,
+        "ci_high": -0.22664044391423663,
+        "n_tracks": 4898,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    }
+  },
+  "examples": {
+    "straight closure": {
+      "path_type": "straight closure",
+      "condition": "medium",
+      "track_id": "medium:1116",
+      "frame": 308,
+      "score": 0.9999999944317242,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.07443442740974043,
+          -1.5114114654687154e-22
+        ],
+        [
+          0.14823849165348224,
+          2.0633841172842e-05
+        ],
+        [
+          0.22118334681666135,
+          3.446203698116226e-05
+        ],
+        [
+          0.2929647329775064,
+          3.768997950746976e-05
+        ],
+        [
+          0.36324770425528485,
+          2.859620294875303e-05
+        ],
+        [
+          0.4325934516152789,
+          2.706312567683335e-05
+        ],
+        [
+          0.5007414034672969,
+          2.1912307127434795e-05
+        ],
+        [
+          0.5669290903896201,
+          2.5195242571437073e-05
+        ],
+        [
+          0.631157031999586,
+          2.28077824856488e-05
+        ],
+        [
+          0.6943920986490767,
+          2.488312569929822e-05
+        ],
+        [
+          0.7566212874457956,
+          2.1615192104916253e-05
+        ],
+        [
+          0.8181218130352401,
+          1.791877933140087e-05
+        ],
+        [
+          0.8789976958634294,
+          1.392605804542339e-05
+        ],
+        [
+          0.939520949479056,
+          1.2377977452041178e-05
+        ],
+        [
+          0.9999999943810007,
+          1.0072067440723656e-05
+        ]
+      ]
+    },
+    "circle-like": {
+      "path_type": "circle-like",
+      "condition": "low",
+      "track_id": "low:496",
+      "frame": 703,
+      "score": 0.998254196419502,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.10567187783919227,
+          -7.855168012635864e-18
+        ],
+        [
+          0.22152873852112223,
+          0.0001475459226827575
+        ],
+        [
+          0.3069714183858542,
+          0.0002487193647365368
+        ],
+        [
+          0.348419479487024,
+          0.0003699266002775377
+        ],
+        [
+          0.3290388076535081,
+          0.000610404927363322
+        ],
+        [
+          0.2614677097665101,
+          0.0003630999725797233
+        ],
+        [
+          0.20625009853046422,
+          0.000591868477971178
+        ],
+        [
+          0.2193594135237565,
+          0.00028792582817999726
+        ],
+        [
+          0.2831585874927344,
+          0.00031387788547771134
+        ],
+        [
+          0.3179581080835166,
+          0.00034450536620176986
+        ],
+        [
+          0.26495671015531524,
+          0.0005845451170793673
+        ],
+        [
+          0.1392448971226575,
+          0.00031615940065203373
+        ],
+        [
+          0.01706990120650581,
+          -0.00010926552311713794
+        ],
+        [
+          -0.04003307189066613,
+          -0.0003338353493972967
+        ],
+        [
+          -0.0003294377381132864,
+          -0.00036517476091079256
+        ]
+      ]
+    },
+    "crooked/random-like": {
+      "path_type": "crooked/random-like",
+      "condition": "high",
+      "track_id": "high:536",
+      "frame": 672,
+      "score": 0.9997154755914047,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.10082734797506869,
+          -1.0589042084288836e-22
+        ],
+        [
+          0.17518460821404683,
+          0.00035840082921580625
+        ],
+        [
+          0.15551666765359679,
+          0.00036412315242832777
+        ],
+        [
+          0.08364705977665665,
+          0.0004422877947405528
+        ],
+        [
+          0.01784108320431268,
+          0.0003743238308264464
+        ],
+        [
+          -0.04302846799406906,
+          0.0006175865619202879
+        ],
+        [
+          -0.12558718267341287,
+          0.0002067787275135075
+        ],
+        [
+          -0.20511407126628298,
+          0.00031499865184312574
+        ],
+        [
+          -0.2631461600097668,
+          0.00014713209756492347
+        ],
+        [
+          -0.29117103123587734,
+          0.00018933872142884686
+        ],
+        [
+          -0.31460930981510205,
+          0.00010609295164268347
+        ],
+        [
+          -0.32483197165278127,
+          0.0002747653021016492
+        ],
+        [
+          -0.2666055444046617,
+          -5.3044890202601164e-05
+        ],
+        [
+          -0.1424565218320967,
+          0.0002777338249665959
+        ],
+        [
+          -3.8865162574282536e-05,
+          0.0002431757251536768
+        ]
+      ]
+    }
+  },
+  "source_audits": [
+    {
+      "condition": "low",
+      "file": "Spheres_num_low.xlsx",
+      "file_bytes": 78799866,
+      "sha256": "6b4b30f532cfca965da92d73f92c100ed429cd5a2078a7c7dfc18d1eaf7bdfdd",
+      "sha256_matches_official": true,
+      "x_header_particles": 1800,
+      "y_header_particles": 1800,
+      "common_particle_ids": 1800,
+      "x_only_particle_ids": 0,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1800,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 3601800,
+      "x_data_cells": 3601800,
+      "y_data_cells": 3601800,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -0.53,
+      "max_time_s": 19.61
+    },
+    {
+      "condition": "medium",
+      "file": "Spheres_num_medium.xlsx",
+      "file_bytes": 79398655,
+      "sha256": "feb38f39468a64df5ef50d292b8edbe716f9a4bdd1d76782147d11c0b43a6632",
+      "sha256_matches_official": true,
+      "x_header_particles": 1800,
+      "y_header_particles": 1800,
+      "common_particle_ids": 1800,
+      "x_only_particle_ids": 0,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1800,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 3601800,
+      "x_data_cells": 3601800,
+      "y_data_cells": 3601800,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -0.52,
+      "max_time_s": 19.62
+    },
+    {
+      "condition": "high",
+      "file": "Spheres_num_high.xlsx",
+      "file_bytes": 80916638,
+      "sha256": "4a3e737bfdb66ad913d08fe182d563e573648820e105da73726b88af6eb07eab",
+      "sha256_matches_official": true,
+      "x_header_particles": 1800,
+      "y_header_particles": 1800,
+      "common_particle_ids": 1800,
+      "x_only_particle_ids": 0,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1800,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 3601800,
+      "x_data_cells": 3601800,
+      "y_data_cells": 3601800,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -0.55,
+      "max_time_s": 19.61
+    }
+  ]
+}

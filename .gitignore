@@ -101,3 +101,17 @@ analysis/phi_calibration/T317_SOLAR_SYSTEM_BARYCENTRIC_ARA_SERIES.csv
 # T318 deterministic held-out Jupiter/Sun row series. Recreate from the
 # checksum-recorded T317 JPL source cache with the T318 reproducer.
 analysis/phi_calibration/T318_JUPITER_GALACTIC_ORBIT_7_5_15_SERIES.csv
+
+# T368 public Super-Kamiokande source and deterministic event coordinates.
+# Re-download the checksum-locked CSV from Zenodo and regenerate the compact
+# coordinate archive with analysis/muon/t368_muon_decay_handover.py.
+analysis/muon/T368_SUPERK_DECAYES_AND_NEUTRONS_SOURCE.csv
+analysis/muon/T368_MUON_DECAY_HANDOVER_COORDINATES.npz
+
+# T370/T370B public ISIS EMU raw archive and isolated legacy-HDF runtime.
+# Re-download dataset 83342268 under DOI 10.5286/ISIS.E.RB1620201 and run the
+# registered T370B reproducer; compact results, reports and figures stay in Git.
+analysis/muon/data/
+analysis/muon/_vendor/
+analysis/muon/t370b_run.stdout.txt
+analysis/muon/t370b_run.stderr.txt

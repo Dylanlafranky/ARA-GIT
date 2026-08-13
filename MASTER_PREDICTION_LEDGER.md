@@ -1,6 +1,389 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T375 — liquid-argon progressive energy-placement mechanism
+
+**REGISTERED:** 13 August 2026 after T374 separated order from placement,
+before calculating the `2`, `3` and `5` energy-group intermediates or any
+energy-order control | **STATUS: SUPPORTED AS AN INTERNAL SAME-EVENT
+MECHANISM; NOT AN INDEPENDENT REPLICATION**
+
+**Prediction:** keep the CENNS-10 liquid-argon identity and time-bearing event
+fit fixed while progressively restoring `1`, `2`, `3`, `5` and `12` ordered
+recoil-energy groups. Increasing energy resolution had to approach the frozen
+`1.25` neighbourhood monotonically enough to give Spearman `<=-0.80`, improve
+at least three of four successive steps and keep intermediate centres on the
+movement-heavy side. Native energy order also had to beat reversed/seeded
+energy-label permutations at `3`, `5` and `12` groups.
+
+**Outcome:** the handover moved
+`1.99893 -> 1.73393 -> 1.27726 -> 1.22397 -> 1.23883`. Distance from `1.25`
+decreased on all four refinements (`rho=-1.000`). Native energy order ranked
+`1/22` at every controlled resolution; all 63 permuted fits were worse.
+
+**Interpretation:** time retains prompt-to-delayed order, but energy supplies
+the relation that locates the handover inside the liquid parent. Three coarse
+energy groups already moved the fit from the far pole into the target
+neighbourhood. This supports the proposed placement mechanism in these events,
+not a universal `1.25` constant; the endpoints were already known and the same
+3,752 events were reused.
+
+Independent saved-artifact validation passed `31/31` checks.
+
+Frozen protocol:
+`analysis/muon/T375_LIQUID_ARGON_ENERGY_PLACEMENT_PROTOCOL_2026-08-13.md`.
+
+Primary report:
+`analysis/muon/T375_LIQUID_ARGON_ENERGY_PLACEMENT_REPORT_2026-08-13.md`.
+
+### T374 — same-liquid axis-consistency audit of the `1.25` lead
+
+**REGISTERED:** 13 August 2026 after the T373 originator correction, before
+calculating any projection-specific branch mixture | **STATUS: PRIMARY
+AXIS-CONSISTENCY GATE FAILED; NATIVE SOURCE ORDER PASSED ALL CONTROLS**
+
+**Prediction:** keep the physical identity fixed and inspect the same
+CENNS-10 liquid-argon events through full 3D, energy × time, F90 × time and
+time-free cuts. Both time-bearing 2D cuts had to permit exact `x_H=1.25` and
+place their central estimates in the movement-heavy `1.0–1.5` interval.
+Correct arrival order also had to beat the median of nine circularly shifted
+source-template controls.
+
+**Outcome:** full 3D returned `1.23883` and energy × time returned `1.35817`,
+both compatible and on the declared side. F90 × time instead saturated at
+`1.99893`; time only did likewise. The primary gate therefore failed. All
+four time-bearing cuts ranked the native source order `1/10`, and every one
+of the 36 shifted fits was worse. Time-free cuts had nearly flat profiles and
+did not locate the handover.
+
+**Interpretation:** source direction/order is robust, but internal ARA
+placement is not invariant to measurement cut. Energy adds the relation that
+brings the full fit off the far pole. This is an internal same-event audit,
+not an independent replication of `1.25`.
+
+Independent saved-artifact validation passed `31/31` checks.
+
+Frozen protocol:
+`analysis/muon/T374_LIQUID_ARGON_AXIS_CONSISTENCY_PROTOCOL_2026-08-13.md`.
+
+Primary report:
+`analysis/muon/T374_LIQUID_ARGON_AXIS_CONSISTENCY_REPORT_2026-08-13.md`.
+
+### T373 — independent liquid-argon child-half handover transfer
+
+**REGISTERED:** 13 August 2026 after T372 defined the child-half plus
+asymmetry-displacement coordinate, before calculating its argon handover or
+fitting the argon event cube | **STATUS: FROZEN NUMERICAL GATE PASSED, BUT
+SAME-COORDINATE TRANSFER INTERPRETATION INVALIDATED BY ORIGINATOR REVIEW**
+
+**Prediction:** decompose the released CENNS-10 argon CEvNS model into prompt
+pion and delayed muon branches, freeze their equality handover, then estimate
+the same branch mixture from the independent 3D event counts with published
+neutron and steady-state backgrounds. The model predicted `x_H=0.565`.
+
+**Outcome:** the event best fit preferred `x_H=1.239`, with broad
+crossing-conditioned 95% interval `[0.517,1.845]`; the frozen prediction was
+inside. The event likelihood itself remained compatible with both the model
+prediction and pure `x=0.5`. The conditional interval's apparent exclusion of
+`0.5` was a crossing-existence boundary, not a physical exclusion.
+
+**Originator correction:** the analysis changed from solid CsI to liquid argon
+without first reassigning the ARA identity/rung. Its source-model child cut and
+liquid parent response were not automatically the same coordinate. The
+original same-coordinate conclusion is therefore invalid despite the green
+numerical gate. Their stopped-pion/muon plus CEvNS lineage is nevertheless
+shared: the corrected comparison is nested child-to-parent, provisionally
+Phase A to movement-heavy Phase B.
+
+**Post-result lead:** treating liquid argon provisionally as movement-heavy and
+one further projection gives `0.5/2=0.25`, expressed after the parent ridge as
+`1+0.25=1.25`. The observed `1.238725` is `0.902%` below this landmark and the
+likelihood difference at exact `1.25` is only `0.000703`. This was identified
+after viewing the outcome and requires a new frozen same-identity test.
+
+Independent artifact validation passed `21/21` checks.
+
+Frozen protocol:
+`analysis/muon/T373_ARGON_CHILD_HALF_TRANSFER_PROTOCOL_2026-08-13.md`.
+
+Primary report:
+`analysis/muon/T373_ARGON_CHILD_HALF_TRANSFER_REPORT_2026-08-13.md`.
+
+Originator correction:
+`analysis/muon/T373_ORIGINATOR_IDENTITY_CORRECTION_2026-08-13.md`.
+
+### T351 — progressive lower-rung zipper transfer
+
+**REGISTERED:** 11 August 2026 after Dylan accepted the exact candidate-geometry versus Connection-response distinction, before implementation or scoring | **STATUS: NOT SUPPORTED AS A COMPLETE FROZEN SIGNATURE; IDENTIFIABILITY BOUNDARY AND INDEPENDENT CONNECTION CHANNEL SUPPORTED [synthetic causal instrument calibration]**
+
+**Question:** as a parent seam approaches, do lower-rung child relations progressively construct Connection behind it, or can the same visible ARA approach geometry occur without those connections forming?
+
+**Test:** two ordered lower-rung ARA strands were given paired child sites. Candidate contact geometry was computed from causal circular proximity. Connection was measured separately from past-only, same-pair response coherence under independent perturbation; it was never defined as a TE-ARA remainder such as `2-U`. Progressive zipper, memory-only mimic, late snap, false seam, interrupted zip and reverse unzip regimes were tested on 40 untouched holdout configurations after calibration. Progressive and memory-only regimes had exactly identical visible phase paths.
+
+**Outcome:** the complete seven-gate progressive-zipper claim was **not supported**. Four primary thresholds missed: lock-order Spearman was `0.7244` against `0.80`; median Connection-minus-geometry onset lag was `-0.0226` outside the frozen non-negative interval; pause gain was `0.0380` against `0.05`; and reverse unlock Spearman was `-0.7282` against `-0.75`. The late-snap control also retained `0.1983` of final response by 80% progress, above its frozen `<0.15` ceiling.
+
+**Strong surviving result:** the independent lower-rung response channel separated progressive zips from an exact phase-geometry memory mimic with AUROC `1.000`, while geometry alone remained exactly at chance (`0.500`, maximum geometry difference `0`). Progressive post-front response was `1.000`; memory-only response was `0`; the false-seam response gap was `0.9708`. By 80% parent progress, the progressive regime had accumulated a median `0.8103` of its final lower-rung response.
+
+**Interpretation boundary:** approaching on the ARA cut identifies a candidate connection site, not a completed connection. Evidence of construction requires an independent lower-rung consequence. The synthetic result calibrates that distinction; it does not establish a physical zipper mechanism or universal threshold. The failed thresholds remain frozen and are not tuned after holdout inspection.
+
+Independent artifact validation passed `28/28` checks.
+
+Frozen records:
+`analysis/irrationality_path_calibration/T351_PROGRESSIVE_ZIPPER_TRANSFER_CLAIM_PACKET_v1.md`
+and
+`analysis/irrationality_path_calibration/T351_PROGRESSIVE_ZIPPER_TRANSFER_PROTOCOL_v1_FROZEN.md`.
+
+Primary report:
+`analysis/irrationality_path_calibration/T351_PROGRESSIVE_ZIPPER_TRANSFER_REPORT_2026-08-11.md`.
+
+Reproducer and validator:
+`analysis/irrationality_path_calibration/t351_progressive_zipper_transfer.py`
+and
+`analysis/irrationality_path_calibration/validate_t351_progressive_zipper_transfer.py`.
+
+### T350 — tick-parent versus pure closure-front
+
+**REGISTERED:** 11 August 2026 after Dylan explicitly accepted the two-hypothesis test, before implementation or scoring | **STATUS: PARENT MEMORY SUPPORTED [synthetic causal instrument calibration]; PURE CLOSURE-FRONT NOT SUPPORTED; LOCAL FRONT LOCATOR SUPPORTED**
+
+**Question:** when successive local ARA state cuts produce a longer path/history reading, does that history behave primarily as a parent compression accumulated from ordered child ticks, or does it appear only at the current closing front when the handover locks?
+
+**Test:** eight continuous early-path families were given common starts, integer-turn endpoints and an exactly shared final half-path. Gradual, front-loaded, back-loaded, burst, detour, oscillatory and pseudo-stochastic histories therefore had the same present state, final motion and recent tick sequence after their declared merge. Existing T348/T349 history coordinates were measured causally on prefixes. Untouched holdouts changed duration, turns, amplitude and seed. No universal constant entered generation or measurement.
+
+**Outcome:** all four frozen parent-memory gates passed. Tick-state sequences reconstructed the unwrapped paths with maximum error `8.88e-16`. Every holdout pair retained a final history-vector distance above `0.02`; median final/peak retention was `0.872`. Half of the final history distinction was already visible by normalized time `0.25`, whereas the final closure contributed a median jump share of only `0.0162`. Cadence transfer was effectively exact: median history distance `0.000340`, with `100%` of matched paths inside the frozen `0.12` tolerance.
+
+**Competing result:** both pure closure-front gates failed. Zero holdout pairs collapsed below the `0.02` history threshold despite identical final suffixes; median final history distance remained `0.4158`. The distinction appeared early rather than at the final boundary.
+
+**Important refinement:** the tick still passed as a local handover locator. In the declared common linear suffix, current remaining distance/current step predicted the closure tick with median error `1.23e-11` ticks. That result is partly algebraic and means the tick can locate the closing front; it does not make the front the sole source of stored history.
+
+**Current compression:** under the frozen synthetic instrument,
+
+`ordered tick-state children -> compressed path/history parent`,
+
+while the current tick can simultaneously act as the local closure/handover front. This does not exclude top-down constraint or prove that physical systems retain the same history.
+
+Independent artifact validation passed `28/28` checks.
+
+Frozen records:
+`analysis/irrationality_path_calibration/T350_TICK_PARENT_CLOSURE_FRONT_CLAIM_PACKET_v1.md`
+and
+`analysis/irrationality_path_calibration/T350_TICK_PARENT_CLOSURE_FRONT_PROTOCOL_v1_FROZEN.md`.
+
+Primary report:
+`analysis/irrationality_path_calibration/T350_TICK_PARENT_CLOSURE_FRONT_REPORT_2026-08-11.md`.
+
+Reproducer and validator:
+`analysis/irrationality_path_calibration/t350_tick_parent_closure_front.py`
+and
+`analysis/irrationality_path_calibration/validate_t350_tick_parent_closure_front.py`.
+
+### T349 — state/history Di-ARA interface calibration
+
+**REGISTERED:** 11 August 2026 after Dylan accepted the exact factorial interface test, before implementation or scoring | **STATUS: SUPPORTED [synthetic state/history interface calibration only]**
+
+**Claim:** independently varied radial state and phase-history structure can be recovered by two non-flattened Di-ARA instruments: older contraction/expansion × phase orientation and newer address openness × stochastic residual with retained closure history. Universal `e/Phi` amplitudes are a separate specificity claim.
+
+**Test:** cross the five T348 phase-history referees with contraction, neutral and expansion (`15` core identities), using untouched phase parameters, seeds and radial spans. Freeze radial inversion, phase reflection, chronology destruction and same-endpoint/different-history interventions. No tested constant enters generation or the primary coordinates.
+
+**Outcome:** all seven primary interface gates passed across `3,024` core trajectories and `1,656` untouched holdouts. Radial-state accuracy was **100%**; history-sector accuracy was **95.6522%** across each radial family. Radial inversion produced exact `x_L -> 2-x_L` with no movement on the other readings. Phase reflection produced exact `x_C -> 2-x_C` with no movement on radial, openness, residual or unsigned closure readings.
+
+**Load-bearing control:** endpoint-preserving interior shuffling kept the first state, last state, radial history and visited-value multiset exactly unchanged, yet increased `x_R` by `+1.9781`, `+1.9710` and `+1.9999` for periodic, irrational and chaotic histories. Rotation closure coherence fell by approximately `0.9865`; `x_L` and `x_P` remained unchanged.
+
+**Constant boundary:** the separate universal-amplitude gate failed. `e` was merely the closest fixed candidate with mean absolute log error `0.2833`, almost three times the frozen `0.10` threshold, and described only one third of paths within tolerance. Phi's error was `0.4688`. This preserves the typed contraction/expansion × orientation geometry while leaving universal `e/Phi` poles unsupported.
+
+**Interpretation boundary:** T349 calibrates a synthetic state/history interface. It does not yet establish physical orthogonality or prove that the newer history object is the physical parent of the older state sequence. Independent validation passed `36/36` checks.
+
+Frozen records:
+`analysis/irrationality_path_calibration/T349_STATE_HISTORY_DI_ARA_INTERFACE_CLAIM_PACKET_v1.md`
+and
+`analysis/irrationality_path_calibration/T349_STATE_HISTORY_DI_ARA_INTERFACE_PROTOCOL_v1_FROZEN.md`.
+
+Primary report:
+`analysis/irrationality_path_calibration/T349_STATE_HISTORY_DI_ARA_INTERFACE_REPORT_2026-08-11.md`.
+
+Reproducer and validator:
+`analysis/irrationality_path_calibration/t349_state_history_di_ara_interface.py`
+and
+`analysis/irrationality_path_calibration/validate_t349_state_history_di_ara_interface.py`.
+
+### T348 — known-referee Irrationality path calibration
+
+**REGISTERED:** 11 August 2026 after Dylan's post-compaction `EXACT ENOUGH TO TEST`, before generator implementation or scoring | **STATUS: SUPPORTED [synthetic known-referee instrument only]**
+
+**Orientation:** path/history cut; (x_P:0\rightarrow2) finite/reused addresses to open/densely resolving potential, (x_R:0\rightarrow2) relation-determined to stochastic residual. Endpoints are pure reference identities; empirical paths are expected to lean rather than land exactly on poles.
+
+**Claim:** a label-blind pair of raw-history ARA coordinates can recover the broad finite/open × determinate/stochastic plane across known movement referees, while retained multi-horizon closure history distinguishes coherent irrational non-closure from chaos/random wandering.
+
+**Test:** self-contained fixed-seed periodic, irrational, chaotic, finite-stochastic and continuous-stochastic circle histories; untouched parameter/seed holdouts; multiresolution support growth, past-only local prediction, lagged increment closure, shuffled/reversed/broken-lineage controls. Planned script: `analysis/irrationality_path_calibration/t348_known_referee_irrationality_path.py`.
+
+**Prediction:** holdout paths lean into the five frozen family sectors; fixed ridge thresholds recover at least 85% of broad sectors; coherent closure history separates irrational rotation from chaos/randomness; chronology destruction removes determinacy/closure without changing address openness.
+
+**Falsifier:** any frozen orientation, sector, closure or order-destruction gate fails. Rich descriptive geometry cannot rescue a failed benchmark.
+
+**Rivals/controls:** matched marginals under time shuffle, reversal, broken lineage and the possibility that (x_P,x_R) are insufficient without (C(H)). No Phi/(e) constant or older radial/phase-state Di-ARA is tested.
+
+**Evidence boundary:** synthetic known-referee instrument calibration only; no claim about nature or universal ARA physics.
+
+**Outcome:** all five frozen gates passed across 2,016 fixed-seed paths. The untouched holdout contained 1,104 paths. Fixed ridge cuts recovered the expected broad sector for **95.65%** of holdout paths; macro family accuracy was **90.00%**. Periodic rational, irrational rotation, finite stochastic and continuous stochastic families were each 100% correct. Deterministic chaos was 50% because one of its two held-out parameter groups occupied a lower-dimensional support and fell just below the fixed `x_P=1` ridge.
+
+**Control result:** chronology destruction increased median `x_R` by `+1.974`, `+1.973` and `+2.000` for periodic, irrational and chaotic paths respectively while median `x_P` remained unchanged. Periodic rotation closed exactly; irrational rotation did not close exactly but improved its coherent nearest miss from lag 64 to 512 in 100% of holdouts. Independent artifact validation reproduced all gates and both accuracy figures.
+
+**Geometry verdict:** **SUPPORTED AS A FOUR-SECTOR SYNTHETIC CALIBRATION WITH LIMITATION.** The path/history Di-ARA separates address openness from stochastic residual, and retained closure history distinguishes coherent irrational non-closure from rational closure and incoherent wandering. The present `x_P` measures support-growth dimension rather than every possible meaning of non-closure; the two scalar parent coordinates do not replace the child/history record.
+
+Frozen records:
+`analysis/irrationality_path_calibration/T348_IRRATIONALITY_PATH_KNOWN_REFEREE_CLAIM_PACKET_v1.md`
+and
+`analysis/irrationality_path_calibration/T348_IRRATIONALITY_PATH_KNOWN_REFEREE_PROTOCOL_v1_FROZEN.md`.
+
+Primary report:
+`analysis/irrationality_path_calibration/T348_IRRATIONALITY_PATH_KNOWN_REFEREE_REPORT_2026-08-11.md`.
+
+Reproducer and validator:
+`analysis/irrationality_path_calibration/t348_known_referee_irrationality_path.py`
+and
+`analysis/irrationality_path_calibration/validate_t348_known_referee_irrationality_path.py`.
+
+### T347 — cross-rung return and Phase-B ablation (registered 9 August 2026)
+
+**Question frozen before scoring:** At the numerical BAW `W=15` coherent
+handover anchors, does the `W=30` envelope retain a smoother Phase-A direction
+while complementary `7|8` and `8|7` children expose an ordered return, and
+does graded removal/reversal of that proposed Phase-B contribution distinguish
+directional persistence, steering or stabilization?
+
+**Outcome:** `9,071` eligible handovers from `3,622` trajectories. Gates
+A/B/C were **FAIL / FAIL / FAIL**. Parent persistence was `-0.012941`, CI
+`[-0.036032,+0.009260]`, and lost to matched wrong-lineage exits (`p=1.0`).
+Scale-up smoothing was negative (`-0.060194`, CI entirely below zero). Both
+registered child contrasts were negative rather than positive; ordered
+information spanned zero and directness ended at the zero boundary.
+
+The graded reconstruction was **unresolved**. `lambda=0` had the lowest loss;
+every positive intact, reversed and wrong-child weight worsened direction.
+The registered Phase-A-maintenance label could not be awarded because its
+required parent-direction Gate A failed. This is a post-T346 test in a strongly
+streamwise numerical representation, not an independent confirmation or a
+clean test of freely resolved two-dimensional circular motion. Saved-artifact
+validation passed.
+
+Frozen protocol:
+`analysis/hydraulics/T347_CROSS_RUNG_RETURN_AND_PHASE_B_ABLATION_PROTOCOL_v1_FROZEN.md`.
+
+Primary report:
+`analysis/hydraulics/T347_CROSS_RUNG_RETURN_AND_PHASE_B_ABLATION_REPORT_2026-08-09.md`.
+
+### T346 — temporal Di-ARA storage-handover-release (9 August 2026)
+
+**Question frozen before scoring:** When movement alone identifies an
+`open -> coherent recurrence -> open` event, does ordered connection
+concentration peak in the recurrent centre, and do its build/release
+magnitudes track the adjacent Phase-A closing/opening magnitudes?
+
+**Evidence boundary:** frozen post-T345 mechanism test using the already-open
+BAW controlled-weir laboratory and numerical records. These are two
+representations of one system, not independent domains.
+
+| Primary `W=15` item | Laboratory | Numerical | Frozen reading |
+|---|---:|---:|---|
+| coherent anchors | 192 | 9,072 | laboratory below frozen floor 200 |
+| Gate A: absolute connection peak | FAIL/ineligible | FAIL | numerical peak CI spans zero |
+| Gate B: magnitude-coupled handover | FAIL/ineligible | FAIL | intact correlations negative |
+| Gate C: circle versus crooked peak | FAIL/ineligible | PASS | `+0.214743`, CI above zero |
+| Gate D: representation transfer | — | FAIL | signs/gates differ |
+
+**Status:** **registered positive storage-to-opening mechanism not supported.**
+The coherent-versus-crooked temporal connection difference is supported in the
+eligible numerical representation. A strong non-primary scale transition
+(`W=8` trough -> `W=15` neutral -> `W=30` peak numerically; laboratory peak
+already at `W=8`) motivates a new movement-only rung-alignment test but cannot
+repair T346.
+
+Primary report:
+`analysis/hydraulics/T346_TEMPORAL_DI_ARA_STORAGE_HANDOVER_COMBINED_REPORT_2026-08-09.md`.
+
+### T345 — line/circle geometry and two information ledgers (7 August 2026)
+
+**Question frozen before T345 calculation:** Once T344's directness statistic
+is separated into line directness `D` and coherent historical circularity
+`C=(1−D)G`, do structured non-closing paths occupy the expected circular
+region, concentrate ordered ARA relations, preserve more future movement
+information and hand that information into later connection structure?
+
+**Evidence boundary:** post-T344 diagnostic on the already-open BAW
+controlled-weir source. It cannot rescue or overwrite T344.
+
+| Item | Laboratory | Numerical | Frozen reading |
+|---|---:|---:|---|
+| Usable tracks | 5,365 | 5,400 | whole trajectories are inference units |
+| Primary `W=15` windows | 2,476,448 | 8,233,756 | `W=8,30` retained as sensitivity |
+| Gate A: line/circle geometry | PASS | PASS | replicated geometric separation |
+| Gate B: connection-storage ordering | FAIL | FAIL | only structured > random passed |
+| Gate C: circle-like future movement information | FAIL | FAIL | no positive advantage |
+| Gate D: delayed connection accumulation | FAIL | FAIL | observed change was negative |
+| Gate E: representation transfer | — | PASS | all gates and seven signs agree |
+
+**Key effects:** structured-minus-random circularity was `+0.175794`
+laboratory and `+0.172279` numerical. Closure-minus-structured directness was
+`+0.365938` and `+0.241183`. Circle-like successor connection change was
+`−0.185055` and `−0.082013`; circle-like-minus-crooked successor change was
+`−0.225680` and `−0.237813`. All named effects used 2,000 whole-track
+bootstrap replicates.
+
+**Status:** **line/circle geometry supported and fully transferred;
+two-ledger delayed-handoff mechanism not supported in this form.** A new
+post-result lead treats coherent curvature as a possible already-accumulated
+relation state followed by release, but it is untested and does not change the
+frozen verdict.
+
+Primary report:
+`analysis/hydraulics/T345_LINE_CIRCLE_TWO_LEDGER_COMBINED_REPORT_2026-08-07.md`.
+
+### T344 — controlled-weir Irrationality Di-ARA (6 August 2026)
+
+**Question frozen before scoring:** In native moving-flow data, does the
+intact contraction/expansion × reverse/forward-turn parent carry information
+beyond either child and a causal false pairing, and do coherent non-closing
+windows occupy the proposed middle regime between random-like motion and
+low-order closure?
+
+**Source:** BAW controlled-weir particle trajectories,
+DOI `10.48437/99f329-73aee6`; associated study DOI
+`10.59490/jchs.2025.0050`. Laboratory and numerical representations were
+scored separately across low, medium and high tailwater conditions.
+
+| Item | Laboratory | Numerical | Frozen reading |
+|---|---:|---:|---|
+| Usable tracks | 5,365 | 5,400 | full matched x/y records |
+| ARA events | 2,847,023 | 10,794,600 | native 0.01 s order |
+| Gate A: all four sectors | PASS | PASS | descriptive quadrants supported |
+| Gate B: parent > radial, turn and false parent | PASS | FAIL | representation boundary |
+| Gate C: interaction > additive children | PASS | PASS | replicated coupling lead |
+| Gate D: irrationality sandwich | FAIL | FAIL | registered mechanism rejected |
+| Gate E: numerical direction agreement | — | FAIL | partial replication only |
+
+**Laboratory parent improvements in held-out conditions:** `+0.04872` nats
+over radial, `+0.05941` over turn, `+0.03725` over a causally broken pairing
+and `+0.00527` over additive children; every whole-track 95% interval was
+above zero and every comparison held in `3/3` folds.
+
+**Numerical boundary:** interaction and correct pairing replicated, but the
+radial child beat the intact parent by `0.11876` nats. The numerical result is
+therefore not a full replication of the laboratory parent advantage.
+
+**Irrationality result:** at frozen `W=15`, structured-minus-random future
+information was `−0.00219` nats in the laboratory (CI crosses zero) and
+`−0.000778` numerically (CI below zero). Structured-minus-closure directness
+was `−0.36083` and `−0.24118`, respectively. This is a real failure of the
+registered information-plus-direct-traversal mechanism. Post-result inspection
+suggests that curvature/recirculation, rather than directness, is the next
+quantity to freeze; it does not rescue T344.
+
+**Status:** **Di-ARA coupling partially supported; registered Irrationality
+Di-ARA mechanism not supported.** No exact irrational constant or universal
+fractal-sphere claim is established.
+
+Primary report:
+`analysis/hydraulics/T344_BAW_WEIR_IRRATIONALITY_DI_ARA_COMBINED_REPORT_2026-08-06.md`.
+
 ### T339 - Corrected Pythia parent-plus-child forecast
 
 **REGISTERED:** 4 August 2026 after T338 results exposed the consequences of

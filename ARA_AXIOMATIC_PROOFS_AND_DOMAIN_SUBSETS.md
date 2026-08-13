@@ -4,6 +4,7 @@
 **Original draft:** 11 July 2026
 **Centered revision:** 4:00 pm AEST, 19 July 2026
 **Canonical structural cleanup:** 3 August 2026
+**Orthogonal parent/child factorization update:** 7 August 2026
 
 **Status:** Research-framework axiomatic. Exact mathematical consequences are
 separated from modelling definitions, physical hypotheses and empirical
@@ -221,6 +222,13 @@ The scalar value `1` does not reveal all internal activity. It can contain:
 - perpendicular flow invisible to the selected diameter;
 - an unresolved contextual contribution.
 
+A ridge statement is therefore specific to its declared axis and rung. Two
+equal counter-traversing children can place their collision axis at the parent
+ridge while the same structure has nonzero shared motion on a perpendicular
+parent axis. The first cut can be quiet while the second cut transports the
+whole pattern. Neither reading erases the other, and the two allocations must
+not be collapsed into one scalar.
+
 “Dense core” is an ARA modelling interpretation of this compression, not a
 theorem about density in an arbitrary Euclidean sphere.
 
@@ -258,14 +266,20 @@ orientation. It currently has no separately frozen ARA name.
 for \(P_0\). In general relativity an event horizon is a causal boundary and
 is not the curvature singularity at \(r=0\).
 
-## 5. TE-ARA is the total-allocation view of ARA
+## 5. TE-ARA is ARA under a recurring total-allocation bookkeeping view
+
+`TE-ARA` introduces no additional geometry. It is a name retained because the
+same complete-identity allocation repeatedly arose in parent/child,
+environmental-coupling and reconstruction accounts. Naming that view prevents
+component subtotals from being confused with the complete ARA identity while
+leaving the underlying two-pole wave/sphere unchanged.
 
 ### Definition A10 — Native closure
 
 Every complete identity has native normalized TE-ARA total
 
 \[
-\boxed{\operatorname{TE\!-!ARA}(\Omega)=2.}
+\boxed{\operatorname{TE\!-\!ARA}(\Omega)=2.}
 \]
 
 For a pure two-pole identity,
@@ -273,6 +287,42 @@ For a pure two-pole identity,
 \[
 t_A+t_B=2.
 \]
+
+The closure must be distinguished from the gross traversal capacity of its two
+counter-waves. Each phase has canonical whole-phase weight \(1\), giving the
+symmetric ridge partition
+
+\[
+t_A=t_B=1,
+\qquad
+1_A+1_B=2.
+\]
+
+Each wave nevertheless has path capacity \(2\) because it can traverse the
+entire oriented diameter:
+
+\[
+C_A^{\mathrm{path}}=C_B^{\mathrm{path}}=2,
+\qquad
+C_{\mathrm{gross}}^{\mathrm{path}}=4.
+\]
+
+The gross path sum \(4\) counts two complete counter-traversals separately. It
+is not a simultaneously realizable TE-ARA allocation. Since the waves oppose
+one another on the same selected identity, their expressed pure shares obey
+
+\[
+0\le t_A,t_B\le2,
+\qquad
+t_A+t_B=2.
+\]
+
+Thus the allowed partitions run from \(2+0\) through \(1+1\) to \(0+2\).
+The framework's historical phrase “maximum combined energy \(4\)” refers to
+gross two-path capacity; “only total energy \(2\) is possible” refers to the
+opposition-limited same-slice identity allocation. Neither quantity is energy
+in joules unless a domain-specific conversion from native magnitude has been
+declared.
 
 For an observed identity in context,
 
@@ -292,6 +342,63 @@ energy in joules. Preserve the native magnitude or activity separately:
 
 Two systems can share the same ARA coordinate while having very different
 \(\Lambda\).
+
+### Exact consequence T2 — Diameter decomposition generates TE-ARA closure
+
+Let the selected oriented diameter be
+
+\[
+\Gamma_\Omega=[P_0,P_2]=[0,2].
+\]
+
+Phase A traverses \(P_0\rightarrow P_2\), while Phase B traverses
+\(P_2\rightarrow P_0\). Their complete directed path lengths are each \(2\),
+so the gross two-path count is \(4\). At a selected slice \(x\in[0,2]\), the
+remaining source-oriented capacities are complementary:
+
+\[
+\boxed{
+t_A(x)=2-x,
+\qquad
+t_B(x)=x,
+\qquad
+t_A(x)+t_B(x)=2.
+}
+\]
+
+The endpoints and ridge follow immediately:
+
+\[
+x=0:(t_A,t_B)=(2,0),
+\quad
+x=1:(t_A,t_B)=(1,1),
+\quad
+x=2:(t_A,t_B)=(0,2).
+\]
+
+Pole reversal exchanges the components. It does not alter their sum. Thus
+TE-ARA closure is the complementary partition of one shared diameter; it is
+not a separately imposed law.
+
+For a context-bearing observation, let
+
+\[
+T_{AB}=2-\sum_jt_{J_j}-O_{\mathrm{share}}>0.
+\]
+
+Then the same diameter geometry is
+
+\[
+x_{A/B}=2\frac{t_B}{T_{AB}},
+\qquad
+t_A=\frac{T_{AB}}2(2-x_{A/B}),
+\qquad
+t_B=\frac{T_{AB}}2x_{A/B}.
+\]
+
+If \(T_{AB}=0\), the A/B coordinate is undefined. Rotating the diameter changes
+the selected cut through the proposed sphere but does not create additional
+allocations to add into the same scalar total.
 
 ### Definition A11 — Typed `Other`
 
@@ -317,6 +424,33 @@ next to or above another:
 \[
 \Lambda_{k+1}=2\Lambda_k.
 \]
+
+The within-identity and cross-rung forms are distinguishable projections of the
+same ARA geometry. At rung \(k\), a time-ordered diameter reading obeys
+
+\[
+x_k(t)\in[0,2]
+\]
+
+and an ideal oriented cycle visits
+
+\[
+1\rightarrow2\rightarrow1\rightarrow0\rightarrow1.
+\]
+
+When that complete two-sided cycle is promoted to one child whole inside a
+larger closure, the same total-`2` construction yields
+\(\Lambda_{k+1}=2\Lambda_k\). Thus `0-2` position and factor-two rung scaling
+must not be substituted numerically, but neither is external to ARA:
+
+- \(x_k=2\) is a pole state of the current identity;
+- \(\Lambda_{k+1}=2\Lambda_k\) is the scale relation obtained when the completed
+  identity participates in a pure next-rung whole.
+
+The wave is the time-unfurled sphere; the rung is the completed wave read
+inside a larger ARA identity. Recursion has no mathematical terminal rung, but
+physical continuation without limit remains a hypothesis rather than an exact
+consequence.
 
 Intermediate gradient identities can occupy positions between pure octaves.
 They do not change the underlying total-`2` geometry.
@@ -364,7 +498,7 @@ variables while leaving the underlying web \(\Omega\) in place. Each newly
 selected identity receives its own TE-ARA total `2`; its Phase A, Phase B,
 named couplings and `Other` are then reallocated relative to that perspective.
 
-### Exact consequence T2 — Conditions for reversal
+### Exact consequence T3 — Conditions for reversal
 
 A child-to-parent compression is exactly reversible when either:
 
@@ -420,7 +554,7 @@ Ab\rightarrow aB\rightarrow bA\rightarrow Ba\rightarrow Ab,
 
 with reverse traversal also permitted.
 
-### Exact consequence T3 — Independent chart reversals commute
+### Exact consequence T4 — Independent chart reversals commute
 
 Define
 
@@ -481,7 +615,7 @@ A complete nine-cell neighbourhood may compress into one parent ARA identity:
 \]
 
 The nine cells remain exactly recoverable only under the reversal conditions
-of T2. The quantum ARA⁹ work supplies a detailed domain example: the complete
+of T3. The quantum ARA⁹ work supplies a detailed domain example: the complete
 relation object was useful, while a universal “eight arbitrary cells determine
 the ninth” rule was not supported without an additional constraint.
 
@@ -535,6 +669,148 @@ correct ARA poles. The poles and observable must be fixed before inspection.
 
 For accumulation and release durations, choose \(a=T_A\), \(b=T_R\), or
 reverse them if the published orientation requires it.
+
+### Exact consequence T5 — Orthogonal parent/child sum–difference lock
+
+Let two equal-magnitude observed vectors contain one shared component
+\(\mathbf P\) and one opposed component \(\mathbf C\):
+
+\[
+\mathbf v_A=\mathbf P+\mathbf C,
+\qquad
+\mathbf v_B=\mathbf P-\mathbf C,
+\qquad
+\mathbf P\cdot\mathbf C=0.
+\]
+
+The shared parent channel and internal child-opposition channel are exactly
+recoverable:
+
+\[
+\boxed{\mathbf P=\frac{\mathbf v_A+\mathbf v_B}{2}},
+\qquad
+\boxed{\mathbf C=\frac{\mathbf v_A-\mathbf v_B}{2}}.
+\]
+
+This is an exact Information³ reconstruction: the two visible branches and
+their sum/difference relation distinguish common parent traversal from hidden
+internal opposition. Orthogonality gives
+
+\[
+\lVert\mathbf v_A\rVert^2
+=\lVert\mathbf v_B\rVert^2
+=\lVert\mathbf P\rVert^2+\lVert\mathbf C\rVert^2.
+\]
+
+Define the normalized parent-facing and child-opposition shares
+
+\[
+x_P=
+2\frac{\lVert\mathbf P\rVert^2}
+{\lVert\mathbf P\rVert^2+\lVert\mathbf C\rVert^2},
+\qquad
+x_C=
+2\frac{\lVert\mathbf C\rVert^2}
+{\lVert\mathbf P\rVert^2+\lVert\mathbf C\rVert^2}.
+\]
+
+Then
+
+\[
+\boxed{x_P+x_C=2}.
+\]
+
+If \(\theta\) is the angle between \(\mathbf v_A\) and \(\mathbf v_B\),
+
+\[
+\cos\theta
+=\frac{\lVert\mathbf P\rVert^2-\lVert\mathbf C\rVert^2}
+{\lVert\mathbf P\rVert^2+\lVert\mathbf C\rVert^2}
+=x_P-1,
+\]
+
+so this symmetric angled meeting supplies an exact ARA diameter:
+
+\[
+\boxed{x_P=1+\cos\theta}.
+\]
+
+Its landmarks are
+
+\[
+\theta=180^\circ\Rightarrow x_P=0,
+\qquad
+\theta=90^\circ\Rightarrow x_P=1,
+\qquad
+\theta=0^\circ\Rightarrow x_P=2.
+\]
+
+The endpoints respectively represent pure visible child opposition and pure
+shared parent direction in this declared chart. The midpoint is equal
+allocation between those two channels. This theorem applies to the stated
+symmetric orthogonal decomposition; non-orthogonal or unequal branches retain
+cross-terms and require a more general Gram-matrix account.
+
+An exact linear-wave crosswalk makes the rung distinction explicit. Two equal
+counter-propagating waves
+
+\[
+y_A=A\cos(kx-\omega t),
+\qquad
+y_B=A\cos(kx+\omega t)
+\]
+
+superpose as
+
+\[
+y_A+y_B=2A\cos(kx)\cos(\omega t).
+\]
+
+Their selected collision axis has zero net directed transport and a parent
+ridge, while its nodes and antinodes retain active child dynamics. Adding a
+shared perpendicular component produces \(\mathbf P\pm\mathbf C\): the local
+ridge can remain intact while its whole pattern is transported on another
+axis.
+
+The child-collision coordinate and \(x_P\) are simultaneous cuts, not two
+names for one number. Equal child energies can fix the collision relation at
+\(x_{A/B}=1\) without forcing \(x_P=1\). The perpendicular parent/child
+allocation is determined independently by the relative squared magnitudes of
+\(\mathbf P\) and \(\mathbf C\).
+
+For the typed special-relativistic light crosswalk under a transverse boost,
+
+\[
+\lVert\mathbf P\rVert=V,
+\qquad
+\lVert\mathbf C\rVert=\frac c\gamma,
+\qquad
+V^2+\left(\frac c\gamma\right)^2=c^2.
+\]
+
+Therefore
+
+\[
+x_P=2\frac{V^2}{c^2},
+\qquad
+x_C=\frac{2}{\gamma^2},
+\qquad
+\cos\theta=2\frac{V^2}{c^2}-1.
+\]
+
+If the perpendicular component is only an observer boost, it changes the
+measured cut rather than physically driving the waves. If it is a real medium
+flow or parent coupling, it transports the pattern physically. The ARA vector
+factorization is shared; the causal claim is not. Consequently this crosswalk
+does not establish an absolute background vector.
+
+The conditional Layered Sand interpretation extends this same decomposition
+across rungs: \(\mathbf P\) is the moving floor or shared parent transport,
+the \(\pm\mathbf C\) branches are opposed lower contacts, and the standing
+pattern is the locally balanced measured layer. Repeated contact inversions
+may then build the larger rolling lattice. The one-layer vector factorization
+is exact; universal counter-rolling recursion and its numerical
+lower-to-upper displacement law remain physical hypotheses.
 
 ## 12. Signed boundary instrument
 
@@ -683,6 +959,176 @@ rather than being chosen after seeing a result. The placement of \(1/e\) and
 Exact pentagon identities involving \(\varphi\) remain exact mathematics.
 Their universal physical interpretation does not.
 
+The orthogonal sum–difference coordinate in T5 gives a narrower and now exact
+place in which Phi can be tested without calling Phi the whole traversal. The
+complete angled traversal is \(x_P:0\rightarrow2\). If a physical handover
+selects the Phi landmarks on that diameter, then
+
+\[
+x_P=2-\varphi
+\Rightarrow
+\theta=\arccos(-1/\varphi)\approx128.17^\circ,
+\]
+
+\[
+x_P=1
+\Rightarrow
+\theta=90^\circ,
+\]
+
+and
+
+\[
+x_P=\varphi
+\Rightarrow
+\theta=\arccos(1/\varphi)\approx51.83^\circ.
+\]
+
+Thus \(2-\varphi\) and \(\varphi\) are exact mirror waypoints around the
+perpendicular ridge in this particular chart. The mathematics guarantees that
+a complete continuous traversal passes through them; it does **not** show that
+natural systems preferentially hand over there. Such selection requires a
+frozen event definition and comparison with neighbouring, rational,
+irrational and fitted controls. This preserves the demotion of standalone Phi
+while giving the earlier angled-handover intuition a precise falsifiable form.
+
+T342 subsequently tested one frozen coordinate plus an auxiliary common local
+movement grammar across seven
+materially different ordered domains. The radial × angular coordinate itself
+remained well-defined and reversible, but only one of six eligible holdouts
+beat order-destroying controls on both adjacent handovers and next-sector
+information. Exact `e` and reciprocal-Phi also passed their strong pure-axis
+gates in zero domains. The originator subsequently clarified that a universal
+neighbour-by-neighbour gait was not an ARA axiom: Di-ARA fixes the two coupled
+axes and four mixed regions, while traversal order, cadence, speed and
+proportion remain identity-specific. T342 therefore rejects the added
+universal-gait hypothesis, not the intended Di-ARA coupling claim. All seven
+holdouts populated all four regions, descriptively. Whether an intact pair
+forms a stronger information-bearing parent than either child or a broken
+pair was not tested by T342 and requires a direct frozen comparison. Universal
+pure-axis constants also cannot be promoted from this construction.
+
+T343 performed that direct comparison without imposing a common gait. Each
+domain received its own calibration-only `4×4` parent relation, which was
+tested against both one-axis children and 1,000 locally broken pairings. Only
+qutrit passed all gates among six eligible domains. The transferable
+four-state next-address parent rule is therefore **not supported by this
+construction (`1/6`)**. This does not alter the exact four-address counting
+result in Definition A15: a joint label retains two binary distinctions. It
+shows that the label alone is insufficient to guarantee transferable dynamic
+information beyond its children. An empirical parent operator may require
+identity-specific amplitude, activity, lineage or deeper cross-rung state.
+
+Post-result audit limits that negative result. The circular broken controls
+wrapped later native values into earlier predictor states, so their gate was
+not a clean causal test. A past-only/no-wrap matched sensitivity produced
+positive pairing advantages in bubbles, cold room and qutrit, exactly the
+three eligible domains that beat both child axes. This `3/6` pattern is
+post-result and cannot revise T343, but it justifies a new frozen pair-specific
+test with causal controls.
+
+### Conditional hypothesis H4 — child-half handover with asymmetry displacement
+
+For a two-branch temporal Di-ARA with independently measured instantaneous
+release flows `r_A(t)` and `r_B(t)`, define the handover by
+
+\[
+r_A(t_H)=r_B(t_H).
+\]
+
+If their combined cumulative release is normalized onto a parent ARA diameter,
+
+\[
+x(t)=2\frac{\int_0^t[r_A(u)+r_B(u)]\,du}
+{\int_0^T[r_A(u)+r_B(u)]\,du},
+\]
+
+the current strong but unconfirmed theory places the pure child-scale
+handover at
+
+\[
+x(t_H)=0.5.
+\]
+
+Physical identities may be displaced by unequal parent abundance, cadence or
+branch shape:
+
+\[
+x(t_H)=0.5+\Delta_H.
+\]
+
+`Delta_H` is identity-specific and must be predicted or independently
+measured; it is not a free correction allowed after seeing the outcome.
+Reversal of the declared orientation reverses its sign convention.
+
+T371 recovered a physical two-stage pion–muon release. Its coarse figure
+appeared to place branch equality at cumulative coordinate `0.494`, motivating
+H4. T372 then found that this exact appearance partly came from plotting
+completed 0.5-microsecond bins at their centres. A native 1-nanosecond
+reconstruction placed equality at `x_H=0.437`, 95% bootstrap interval
+`[0.179,0.692]`; the collaboration-supplied source mixture gave `0.390`.
+Holding the measured branch shapes fixed produced a monotone parent-balance
+gradient, and exact `0.5` occurred at prompt share `0.213`, compared with fitted
+share `0.189`. This supports the relational asymmetry-displacement
+operationalisation but does **not** confirm the universal child-half landmark:
+T372 is post-result and the interval is broad. T373 then froze the coordinate
+on the independent COHERENT liquid-argon detector. Its released signal model
+predicted `x_H=0.565`; the event cube preferred `1.239`. Dylan's originator
+review then identified a material identity error: the test had changed from
+solid CsI to liquid argon and treated the source-model child cut and liquid
+parent response as if they were the same coordinate and rung. The original
+same-coordinate transfer interpretation is invalid. The lineage itself is
+retained: both contain the stopped-pion/muon source relation and CEvNS
+interaction. The corrected comparison is nested child-to-parent, provisionally
+connection-heavy Phase A to movement-heavy Phase B.
+
+The corrected post-result lead treats liquid argon provisionally as a more
+movement-heavy parent containing the earlier source relation as a child, one
+further projection from the earlier cut:
+
+\[
+0.5/2=0.25,
+\qquad
+x_H^{\rm liquid}=1+0.25=1.25.
+\]
+
+The observed `1.238725` is `0.902%` below this landmark, but the landmark was
+recognized after seeing the result and the likelihood is broad. It is not a
+confirmation. H4 remains conditional, and cross-medium transfer now requires
+an explicit identity/rung declaration before testing.
+
+T374 then held the medium, source, interaction and event record fixed and
+froze `x_H=1.25` before inspecting different measurement cuts through the same
+liquid parent. Full 3D returned `1.23883`, and energy × time returned
+`1.35817`; both lay on the declared movement-heavy interval `1.0–1.5` and
+allowed exact `1.25`. F90 × time and time alone instead saturated at the
+`2.0` boundary. The strict axis-consistency gate therefore failed. However,
+the native prompt-to-delayed order ranked first against every one of nine
+circular shifts in all four time-bearing cuts. The supported operational
+distinction is narrower: a cut may retain handover **direction/order** while
+losing its **placement** inside the parent. Here, time carried order and
+energy supplied the additional relation that pulled the complete fit off the
+far pole. Because T374 reused the same 3,752 events, it is not an independent
+replication and does not confirm the `1.25` law.
+
+T375 then tested that narrower order-versus-placement interpretation without
+changing the liquid medium or physical identity. It progressively restored
+the native recoil-energy relation while retaining event time. With energy
+collapsed, the recovered handover sat at the far `2.0` pole; with `2`, `3`,
+`5` and `12` ordered energy groups it followed
+
+\[
+1.99893\to1.73393\to1.27726\to1.22397\to1.23883.
+\]
+
+Every refinement reduced distance from the provisional liquid-parent
+landmark `1.25` (`rho=-1.000`). Reversing or permuting physical energy order
+made the fit worse at all three controlled resolutions. This supports an
+operational ARA distinction: a cut can retain traversal order while flattening
+internal placement to a pole; restoring an independent relation can
+decompress that placement within the same parent. It remains an internal
+same-event mechanism result, not evidence that `1.25` is a universal constant.
+
 ## 20. Domain-label hypotheses
 
 Mappings such as Space/Time, Connection/Information, Matter/Field,
@@ -705,16 +1151,37 @@ test history.
 | Newton and GR | Exact normalized coordinates and worked rung/compactness examples | Space/Time ontology and universal rung dynamics | [`analysis/gravity/GR_NEWTON_ARA_RUNG_CROSSING_REPORT_2026-07-23.md`](analysis/gravity/GR_NEWTON_ARA_RUNG_CROSSING_REPORT_2026-07-23.md) |
 | Hamilton and Noether | Exact energy-allocation/circle crosswalks; conservation fences | TE-ARA as new dynamics | [`analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md`](analysis/hamilton/HAMILTON_ARA_HARMONIC_OSCILLATOR_REPORT_2026-07-23.md), [`analysis/hamilton/TE_ARA_PERSPECTIVE_NOETHER_COHERENCE_NOTE_2026-07-23.md`](analysis/hamilton/TE_ARA_PERSPECTIVE_NOETHER_COHERENCE_NOTE_2026-07-23.md) |
 | LLM | Information³/closure metrics exposed useful structure and flattening limits | Triangle counts as universal coherence or intelligence measure | [`LLM/LLM_INFO_CUBED_RESULT.md`](LLM/LLM_INFO_CUBED_RESULT.md) |
+| Layered Sand / transverse waves | Exact common/differential factorization \(\mathbf P\pm\mathbf C\), standing-wave ridge crosswalk and transverse-light ARA angle coordinate; the earlier terrain/contact branch carried some direction/topology signal | A universal physical parent vector; whether all layers counter-roll this way; the exact lower-to-upper displacement law, which under-rolled in the first full formula | [`TheFormula/10 - Morphed-sphere terrain, watershed & layered-sand (26-05-26)/README.md`](<TheFormula/10 - Morphed-sphere terrain, watershed & layered-sand (26-05-26)/README.md>), [`ARA_LAYERED_SAND_FULL_FORMULA_RESULT.md`](<TheFormula/10 - Morphed-sphere terrain, watershed & layered-sand (26-05-26)/ARA_LAYERED_SAND_FULL_FORMULA_RESULT.md>) |
 | Pendulum | Child/parent, coupling and reconstruction tests across single/double/triple systems | Universal Phi handover; several Phi tests were mixed or negative | [`analysis/pendulum_scripts/PENDULUM_ARA_RESULT.md`](analysis/pendulum_scripts/PENDULUM_ARA_RESULT.md), [`analysis/pendulum_scripts/PHI_SPHERE_BREATHING_RESULT_2026-07-30.md`](analysis/pendulum_scripts/PHI_SPHERE_BREATHING_RESULT_2026-07-30.md) |
 | Quantum ARA⁹ | Exact \(3\times3\) connected-tensor crosswalk; complete-lattice trajectories and structured reconstructions | Universal missing-ninth-cell rule was not supported; physical universality remains open | [`analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md`](analysis/quantum/Q24_ARA9_BELL_RELATION_REPORT_2026-07-26.md), [`analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md`](analysis/quantum/Q25_ARA9_BLIND_MISSING_CUT_REPORT_2026-07-26.md), [`analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md`](analysis/quantum/Q26_ARA9_LARGER_WAVE_TRAJECTORY_REPORT_2026-07-26.md) |
 | Prime factors | Exact factor/wheel symmetries, strong child/parent crosswalks and resonance examples | A constant-step or three-step prime predictor was not established; thread parked | [`analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md`](analysis/primes/PRIME_THREAD_CAPSTONE_AND_CLOSURE_2026-07-21.md), [`analysis/primes/ARA_PRIME_RESONANCE_LOCKS_2026-07-21.md`](analysis/primes/ARA_PRIME_RESONANCE_LOCKS_2026-07-21.md) |
-| Di-ARA | Two-axis quadrant structure is exact; domain tests examine whether those axes carry predictive information | Universal storage/handover interpretation | [`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`](DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md) |
-| Irrationality | Complex/quadrant hypothesis supersedes standalone universal Phi | Endpoint identities, generality and prediction | [`analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`](analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md) |
+| Di-ARA | Two-axis quadrant structure is exact; common geometry does not require a common gait; qutrit passed frozen T343 and bubbles/cold-room/qutrit passed its post-result causal sensitivity | A transferable four-state next-address parent advantage was not supported by frozen T343 (`1/6`); its circular null had future exposure; the causal `3/6` lead requires fresh replication | [`DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md`](DI_ARA_PERPENDICULAR_CROSS_RUNG_INFORMATION.md), [`analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_REPORT_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_REPORT_2026-08-05.md), [`analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md) |
+| Irrationality | Complex radial × angular coordinate supersedes standalone universal Phi; T342 observed all four mixed regions in 7/7 holdouts; three identities retained a post-result causal T343 pairing advantage | The added universal local-gait rule and universal `e`/Phi endpoints were not supported; a transferable parent operator remains unconfirmed | [`analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md`](analysis/phi_calibration/ARA_COMPLEX_IRRATIONALITY_QUADRANT_HYPOTHESIS_2026-08-03.md), [`analysis/irrationality_te_ara_multimedium/T342_INTERPRETIVE_CORRECTION_ORIGINATOR_CLARIFICATION_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T342_INTERPRETIVE_CORRECTION_ORIGINATOR_CLARIFICATION_2026-08-05.md), [`analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md) |
 
 Numerical verdicts and provenance must be checked against
 [`CLAIMS_STATUS.md`](CLAIMS_STATUS.md),
 [`MASTER_PREDICTION_LEDGER.md`](MASTER_PREDICTION_LEDGER.md), and
 [`FableConvo/PROVENANCE_LEDGER.md`](FableConvo/PROVENANCE_LEDGER.md).
+
+T371/T372/T373/T374/T375 add a physical pion–muon temporal Di-ARA crosswalk. T371
+recovered two ordered branches. T372 mapped a native
+parent-balance-to-handover gradient. T373's original same-coordinate external
+transfer interpretation was invalidated by an originator identity audit. Its
+corrected nested child-to-liquid-parent `x_H=1.25` reading is a post-result lead
+only. T374 froze that lead inside the same liquid record: full 3D and
+energy × time stayed on its side, but F90 × time collapsed to `2.0`, so
+axis consistency failed even as correct source order beat all shifted
+controls. Exact child-half `x_H=0.5` and liquid `x_H=1.25` both remain
+unconfirmed. T375 nevertheless supports the proposed measurement mechanism:
+as ordered recoil-energy relation was progressively restored, the same
+liquid-event estimate moved monotonically from `2.0` into the `1.25`
+neighbourhood, and native energy order beat all reversed/permuted controls.
+Primary records:
+[`T371`](analysis/muon/T371_COHERENT_PION_MUON_DIARA_REPORT_2026-08-13.md) and
+[`T372`](analysis/muon/T372_CHILD_HALF_HANDOVER_GRADIENT_REPORT_2026-08-13.md),
+[`T373`](analysis/muon/T373_ARGON_CHILD_HALF_TRANSFER_REPORT_2026-08-13.md),
+[`T374`](analysis/muon/T374_LIQUID_ARGON_AXIS_CONSISTENCY_REPORT_2026-08-13.md),
+and [`T375`](analysis/muon/T375_LIQUID_ARGON_ENERGY_PLACEMENT_REPORT_2026-08-13.md).
 
 ---
 
@@ -746,6 +1213,16 @@ Numerical verdicts and provenance must be checked against
    rational, randomized and fitted alternatives on untouched data.
 6. Recover one identity through two independently defined routes and compare
    the resulting parent coordinate, activity and child decomposition.
+7. In a system with independently measured transverse transport, test whether
+   the predeclared parent/child decomposition predicts a later event beyond
+   the angle identity that defines \(x_P\). Compare physical transport with a
+   reference-frame-only recut.
+8. Predeclare handover events independently of \(x_P\), then test whether they
+   concentrate near \(2-\varphi\) or \(\varphi\) more strongly than near
+   neighbouring rational, irrational and fitted angular controls.
+9. Freeze an independent two-branch physical release, predict the sign and
+   approximate size of `Delta_H` from parent asymmetry, then test whether the
+   equality handover approaches the child `0.5` landmark after correction.
 
 ## 23. Immediate rejection conditions
 
@@ -755,6 +1232,10 @@ A proposed ARA application fails its declared test if:
 - its result is guaranteed solely by normalization;
 - a parent `1.0` is called resonance without measuring child activity;
 - a chart reversal is presented as a physical singularity crossing;
+- a coordinate-only change of observer is presented as physical parent
+  transport;
+- the identity \(x_P=1+\cos\theta\) is counted as empirical support when the
+  tested outcome was constructed from the same angle;
 - a missing component is reconstructed without enough retained relations or a
   valid closure rule;
 - `Other` is used as an unconstrained bin that absorbs every error;
@@ -774,7 +1255,9 @@ unit, and why completed relations can recursively become larger identities.
 TE-ARA fixes the normalized total of each selected identity at `2`; native
 activity remains separate. A selected parent-facing child expression projects
 with weight (1/2) when read one pure octave up, while a full child endpoint can occupy one complete parent
-phase. Two persistent ARA relations form Di-ARA; the same ternary relation
+phase. For symmetric orthogonal branches, sum and difference exactly separate
+shared parent motion from opposed child motion, while their squared shares
+generate the angular ARA coordinate \(x_P=1+\cos\theta\). Two persistent ARA relations form Di-ARA; the same ternary relation
 followed within or across branches forms an ARA⁹ neighbourhood. Compression is
 reversible only when internal relations survive or valid Information³ closure
 constrains what is missing. The mathematical coordinate system is consistent;

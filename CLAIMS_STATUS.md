@@ -1,5 +1,273 @@
 # Claims Status
 
+### Update — 13 August 2026: T375 liquid-argon energy-placement mechanism
+
+T375 kept the T374 medium, source, interaction, event record and time-bearing
+fit fixed. It changed only how much of the native recoil-energy relation was
+retained: `1`, `2`, `3`, `5` and all `12` ordered energy groups. The
+intermediate ladder and energy-order controls were frozen before calculation;
+the one- and twelve-group endpoints were already known and were not counted as
+fresh evidence.
+
+**Verdict: PROGRESSIVE ENERGY-PLACEMENT MECHANISM SUPPORTED.**
+
+- The recovered handover followed
+  `1.99893 -> 1.73393 -> 1.27726 -> 1.22397 -> 1.23883` as energy resolution
+  was restored.
+- Distance from the post-T373 `1.25` liquid-parent lead decreased at all four
+  refinements (`rho=-1.000`). The new three-group cut entered the neighbourhood
+  from above; the five-group cut crossed below; the native twelve-group cut
+  remained below and was closest.
+- Native physical energy order ranked `1/22` against reversed and seeded
+  energy-label permutations at `3`, `5` and `12` groups. All 63 permuted fits
+  were worse than their native counterpart.
+- The supported operational reading is that arrival time retains branch
+  direction/order, while recoil-energy relation restores placement inside the
+  liquid parent instead of leaving the estimate compressed at the `2.0` pole.
+- This remains an internal test on the same 3,752 events, not independent
+  confirmation of exact `1.25` or of a universal cross-medium law. Ordinary
+  detector separation of CEvNS signal and backgrounds remains a compatible
+  physical explanation.
+
+Independent saved-artifact validation passed `31/31` checks.
+
+Primary record:
+`analysis/muon/T375_LIQUID_ARGON_ENERGY_PLACEMENT_REPORT_2026-08-13.md`.
+
+### Update — 13 August 2026: T374 same-liquid axis-consistency audit
+
+T374 kept the T373 physical identity fixed: the same CENNS-10 liquid argon,
+the same stopped-pion/muon source, the same CEvNS interaction and the same
+3,752 released events. It prospectively froze the post-T373 liquid-parent
+lead `x_H=1.25`, then changed only the measurement cut through the event cube.
+
+**Primary verdict: LIQUID-PARENT `1.25` LEAD NOT AXIS-CONSISTENT.**  
+**Secondary verdict: NATIVE PROMPT-TO-DELAYED ORDER PASSED ALL SHIFTED-ORDER
+CONTROLS.**
+
+- Full 3D returned `x_H=1.23883`; energy × time returned `1.35817`. Both were
+  on the frozen movement-heavy interval `1.0–1.5` and compatible with `1.25`.
+- F90 × time and time only ran to the `2.0` boundary (`x_H=1.99893`). The
+  F90 × time profile only barely allowed `1.25` (`Delta NLL=1.91264` against
+  the frozen `1.92073` boundary), so the strict central-location gate failed.
+- Removing time made the mixture nearly unidentifiable. Those cuts permit
+  `1.25` because their profiles are flat, not because they independently found
+  it.
+- The unshifted physical source order ranked `1/10` against nine circular
+  timing shifts for full 3D, energy × time, F90 × time and time only; all 36
+  shifted models fit worse.
+- The clean reading is that time carries source order, while energy supplies
+  enough additional relation to place the handover inside the parent rather
+  than at the far pole. This is a measurement-cut result, not proof of a new
+  particle mechanism.
+- T374 reuses the same events as T373 and therefore is an internal
+  axis-consistency audit, not an independent replication. Exact `1.25`
+  remains an open lead requiring a new same-identity event record.
+
+Independent saved-artifact validation passed `31/31` checks.
+
+Primary record:
+`analysis/muon/T374_LIQUID_ARGON_AXIS_CONSISTENCY_REPORT_2026-08-13.md`.
+
+### Update — 13 August 2026: T373 independent liquid-argon handover transfer
+
+T373 froze the T372 child-half coordinate before calculating it on the
+independent COHERENT CENNS-10 liquid-argon release. The released CEvNS model
+predicted `x_H=0.565` (`Delta_H=+0.065`) from its prompt/delayed parent
+mixture; the 3D event cube then estimated the same mixture while retaining
+energy, pulse-shape and timing information and fitting all published
+background families.
+
+**Frozen numerical gate: PASSED, retained as audit history.**  
+**Corrected scientific interpretation: ORIGINAL SAME-COORDINATE TRANSFER CLAIM
+INVALID; NESTED LIQUID CHILD-TO-PARENT `x_H=1.25` IS A POST-RESULT LEAD.**
+
+- The test changed from solid CsI to liquid argon without first reassigning the
+  ARA identity/rung. The source-model child cut and liquid parent response
+  cannot automatically be treated as the same coordinate. Dylan caught this
+  before accepting the interpretation.
+- The correction preserves their lineage: the argon record contains the same
+  stopped-pion/muon source relation and CEvNS interaction as a child within a
+  new liquid target/detector mixture. The comparison is nested child-to-parent,
+  provisionally connection-heavy Phase A to movement-heavy Phase B.
+- The liquid central value `x_H=1.238725` is only `0.011275` below `1.25`
+  (`0.902%`). Exact `1.25` corresponds to prompt share `0.503231`, versus the
+  fitted `0.496709`, and changes the likelihood by only `0.000703`.
+- The corrected working hypothesis is that the movement-heavy liquid parent
+  expresses its retained child one further projection: child `0.5/2=0.25`,
+  exposed after the parent ridge as `1+0.25=1.25`.
+- This was identified after seeing the result and is not confirmed. It requires
+  a newly frozen same-identity liquid test.
+
+- The event central estimate was much later, `x_H=1.239`, not a close
+  reproduction of `0.565`.
+- Its crossing-conditioned 95% interval was broad: `[0.517,1.845]`, and
+  contained the frozen model prediction. `1947/2000` bootstrap fits yielded a
+  finite crossing.
+- A post-result likelihood-profile audit exposed an important boundary: very
+  prompt-poor mixtures have no equality crossing inside the released window,
+  so conditioning the bootstrap on a crossing truncates its low edge.
+- Both the frozen model (`Delta NLL=1.256`) and pure `x=0.5`
+  (`Delta NLL=1.417`) remain compatible. Exact child-half is therefore still
+  unconfirmed and is **not** excluded by the conditional interval.
+- The free event fit recovered `156.22` CEvNS events, close to the published
+  `159`, but the prompt/delayed ratio remained weakly constrained because of
+  the large prompt-neutron background and ten native half-microsecond bins.
+- This is not evidence for universal transfer, a universal ARA correction law,
+  or an ARA-only particle prediction.
+
+Primary record:
+`analysis/muon/T373_ARGON_CHILD_HALF_TRANSFER_REPORT_2026-08-13.md`.
+
+Originator correction:
+`analysis/muon/T373_ORIGINATOR_IDENTITY_CORRECTION_2026-08-13.md`.
+
+### Update — 13 August 2026: T372 child-half handover gradient audit
+
+T372 recorded the strong but unconfirmed theory that equality between two
+ordered release branches occurs at the pure child landmark `x_H=0.5`, with an
+identity-specific displacement `Delta_H` caused by unequal parent abundance,
+cadence or branch shape.
+
+**Verdict: HANDOVER GRADIENT MAPPED; EXACT CHILD-HALF REMAINS UNCONFIRMED.**
+
+- The coarse T371 figure appeared to intersect at `(0.492 us, 0.494 ARA)`, but
+  it plotted completed 0.5-microsecond bins at their centres. That visual value
+  is retracted as a native integral.
+- Native 1-nanosecond reconstruction gives branch equality at `0.636 us` and
+  cumulative coordinate `x_H=0.437`.
+- The 95% parametric-bootstrap interval is `[0.179,0.692]`; exact `0.5` remains
+  compatible but is not localized tightly enough to confirm.
+- The collaboration-source mixture independently supplies the branch ratio
+  and gives `x_H=0.390`, inside the fitted interval.
+- With native branch shapes fixed, parent balance moves `x_H` monotonically.
+  Exact `0.5` requires prompt share `0.213`; the fitted share is `0.189`.
+- This is post-result calibration on opened T371 data. The gradient is exact
+  conditional on the extracted shapes, not an independent universal law.
+- Standalone universal Phi is not restored.
+
+Primary record:
+`analysis/muon/T372_CHILD_HALF_HANDOVER_GRADIENT_REPORT_2026-08-13.md`.
+
+### Update — 9 August 2026: T346 temporal Di-ARA storage handover
+
+T346 froze the post-T345 correction that a coherent recurrent interval may
+already contain concentrated Phase-B children and release or redistribute
+them into the next Phase-A opening. Anchors were selected from movement alone;
+connection concentration could not affect membership.
+
+**Verdict: THE FROZEN POSITIVE STORAGE-TO-OPENING MECHANISM IS NOT SUPPORTED.
+COHERENT RECURRENCE DOES HAVE A DISTINCT CONNECTION PROFILE, AND ITS ABSOLUTE
+PEAK IS STRONGLY RUNG-DEPENDENT.**
+
+- The laboratory primary `W=15` rung was ineligible (`192<200` circle-like
+  anchors), so no threshold was relaxed and Gates A-C failed.
+- The eligible numerical primary rung had no absolute connection peak:
+  `S_peak=+0.001130 [-0.009023,+0.011100]`.
+- Approach/build and release/open magnitudes were negatively correlated:
+  `rho_in=-0.089977` and `rho_out=-0.106357`; both registered positive gates
+  failed and both were worse than broken-lineage controls.
+- Coherent recurrence minus crooked-curvature `S_peak` was strongly positive:
+  `+0.214743 [+0.198696,+0.231335]`, positive in all three numerical
+  conditions. Numerical Gate C passed.
+- Sensitivity exposed a post-result scale lead: numerical `S_peak` moved from
+  `-0.089238` at `W=8`, through approximately zero at `W=15`, to `+0.109845`
+  at `W=30`; laboratory `W=8` was already positive at `+0.173534`.
+- Representation transfer Gate D failed.
+
+`I_conn` measures concentration of observed ordered connection channels, not
+total Phase B or energy. T346 therefore rejects the attempted proportional
+energy-ledger reading. It does not reject generic ARA/Di-ARA. The next lead is
+movement-only rung alignment followed by an untouched connection readout.
+
+Primary record:
+`analysis/hydraulics/T346_TEMPORAL_DI_ARA_STORAGE_HANDOVER_COMBINED_REPORT_2026-08-09.md`.
+
+Frozen protocol SHA-256:
+`205f48d722b80e59f3d0c766790c1ecfeabbf7eac50f3f644590301e1fdda512`.
+
+### Update — 7 August 2026: T345 line/circle and two-ledger diagnostic
+
+T345 froze a post-T344 correction that separated path directness from coherent
+historical turning and separated future-movement information from concentration
+in ordered ARA-sector relations. It used the same public controlled-weir
+source, so it is a diagnostic successor rather than an independent blind-domain
+confirmation.
+
+**Verdict: THE LINE/CIRCLE GEOMETRY IS SUPPORTED IN BOTH REPRESENTATIONS; THE
+FROZEN INFORMATION-HANDOFF MECHANISM IS NOT SUPPORTED. FULL LABORATORY/NUMERICAL
+SIGN TRANSFER PASSED.**
+
+- Structured non-closing paths were more circular than random-like paths:
+  `+0.175794` laboratory and `+0.172279` numerical; both whole-track intervals
+  were above zero.
+- Low-order closure was substantially straighter than structured non-closure:
+  `+0.365938` laboratory and `+0.241183` numerical.
+- Structured non-closure concentrated ordered ARA relations more than
+  random-like motion, but closure concentrated **less**, not more, than
+  structured non-closure.
+- Circle-like paths did not retain more held-out future-movement information.
+- Their non-overlapping successors lost connection-relation concentration:
+  `−0.185055` laboratory and `−0.082013` numerical. The registered delayed
+  accumulation gate therefore failed in the opposite direction.
+- Gates A/B/C/D were `PASS / FAIL / FAIL / FAIL` in both representations;
+  every one of seven component signs agreed. Gate E full transfer passed.
+
+The replicated reverse handoff creates a new post-result lead—coherent
+curvature may already be an accumulated relation state followed by release or
+distribution—but this is not a T345 pass and requires a fresh frozen test. No
+exact irrational constant or universal Irrationality Di-ARA is established.
+
+Primary record:
+`analysis/hydraulics/T345_LINE_CIRCLE_TWO_LEDGER_COMBINED_REPORT_2026-08-07.md`.
+
+Frozen protocol SHA-256:
+`65770ca22b4be2cdca94eecbb976f31d139b9df30847bec509b26920f52a7a23`.
+
+### Update — 6 August 2026: T344 controlled-weir Irrationality Di-ARA
+
+T344 used public particle trajectories through a controlled weir to test the
+irrationality subtype more strongly than a descriptive four-quadrant match.
+The ARA method was frozen before scoring, then applied separately to 5,365
+laboratory tracks and 5,400 numerical tracks across three tailwater
+conditions. The native children were derived directly from consecutive
+movement vectors:
+
+\[
+X_t=\frac{2s_t}{1+s_t},\qquad
+Y_t=1+\frac{\delta_t}{\pi},\qquad
+\frac{w_t}{w_{t-1}}=s_t e^{i\delta_t}.
+\]
+
+**Verdict: PARTIAL SUPPORT FOR DI-ARA COUPLING; THE REGISTERED
+IRRATIONALITY MECHANISM IS NOT SUPPORTED.**
+
+- All four `Ba`, `Ab`, `bA`, `aB` sectors occurred in both representations.
+- In the laboratory, the intact ordered `X × Y` parent beat the radial child,
+  turn child, a causally mispaired parent and an additive child model in every
+  held-out condition. Whole-trajectory confidence intervals were positive.
+- Numerically, the intact parent beat turn, causal mispairing and additivity,
+  but the radial child alone was better in all three conditions. Full
+  cross-representation direction agreement therefore failed.
+- The interaction term beat additive children in both representations. This
+  is the most transferable positive coupling result.
+- The frozen irrationality sandwich failed in both representations. Coherent
+  non-closing windows did not retain more future information than random-like
+  windows, and their registered direct-traversal score was substantially
+  lower than low-order closure.
+
+Exact Phi, reciprocal-Phi, `e` or `1/e` landmarks cannot rescue the failed
+gate. Post-result inspection showed that the traversal score measured path
+directness: closure followed the direct downstream branch, while structured
+non-closure was more curved or recirculating. That is a lead for a new frozen
+curvature/return-flow test, not a revision of T344.
+
+Primary record:
+`analysis/hydraulics/T344_BAW_WEIR_IRRATIONALITY_DI_ARA_COMBINED_REPORT_2026-08-06.md`.
+
+Frozen protocol SHA-256:
+`998a9a2aaa640b725e8c48bdec4e9bfc933ab4e611d3c56f74ec3ba52ef12919`.
+
 > **T336/T337 ENSO ARCHITECTURE CORRECTION (3 AUGUST 2026): INVALID AS
 > FRAMEWORK TESTS.** Codex imposed NINO3.4 and warm-water volume as a
 > same-scale perpendicular `T+iR` identity without first establishing that ARA
@@ -2834,6 +3102,263 @@ T307 record:
 
 T333 record:
 `analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`.
+
+## Update — 4 August 2026: diameter/circumference fixed placement (T340)
+
+T340 froze Dylan's refinement that exponential change belongs to the straight
+radial/diameter axis while golden non-closing belongs to the curved
+angular/circumference axis. For
+`q_n=z_(n+1)/z_n=s_n exp(i delta_n)`, the radial candidate was
+`1/e <-> e`; the angular candidate was `phi^-2=0.381966...` turns under
+principal-angle wrapping, orientation-equivalent to `1/phi` around the other
+direction. Rational, algebraic and calibration-fitted competitors were fixed
+before scoring.
+
+The exact cross-domain claim is **NOT SUPPORTED**. Among the primary qutrit,
+bubble and river holdouts, `0/3` selected `e` radially, `0/3` selected the
+golden turn angularly and `0/3` selected both. The corresponding implied
+holdout pairs were:
+
+- qutrit: `alpha=1.807079`, `tau=0.267010` turns;
+- bubbles: `alpha=1.248485`, `tau=0.021847` turns; and
+- river thalweg: `alpha=1.092695`, `tau=0.157511` turns.
+
+The defensible survivor is the typed decomposition: radial magnitude and
+angular traversal are different Di-ARA observables. T340 rejects universal
+fixed constants on the native local increments; it does not test a separately
+segmented complete circuit or an integrated arc-length/diameter relation.
+Independent validation passed every registered structural and arithmetic
+check.
+
+Primary record:
+`analysis/phi_calibration/T340_DIAMETER_CIRCUMFERENCE_IRRATIONALITY_DI_ARA_REPORT_2026-08-04.md`.
+
+## Update — 5 August 2026: pure-axis Di-ARA gradient test (T341)
+
+T341 corrected T340's local-step interpretation. Line and circle were treated
+as the pure radial and angular limits of one Di-ARA, with ordinary events
+occupying the gradient between them. The frozen mixing angle was
+`gamma=atan2(|Y-1|,|X-1|)` using the exact ARA maps
+`X=2s/(1+s)` and `Y=1+delta/pi`. Fifteen-degree cones defined the primary
+line- and circle-dominant populations before conditional medians were opened.
+
+The universal joint claim is **NOT SUPPORTED** (`0/3` holdout joint passes).
+The proposed linear budget combining `|log s|=1` at the exponential line pole
+with `phi^-2` turns at the golden circle pole did not beat fixed alternatives
+and coupling shuffles across the required domains.
+
+One narrower result survived cleanly in the recorded qutrit identity. Its
+line-dominant holdout contained `20,942` events and returned
+`|log s|=1.016128`, equivalent to `s=2.762479`; `e` was the closest fixed
+landmark and the absolute fixed gate passed. Tightening the cone from 20° to
+15° to 10° moved the median `1.021646 -> 1.016128 -> 1.010681`, toward exact
+`e`. The strong endpoint gate still failed because the calibration-fitted
+`1.025085` was marginally closer to holdout than exact `1`.
+
+The qutrit circular limit was `0.350769` turns, closer to `1/e` than
+`phi^-2`. Its radial and angular magnitudes were essentially independent
+(`rho=0.000180`; shuffle `p=0.510490`), so the proposed event-wise budget did
+not appear. Bubble and river did not reproduce the constants and lacked dense
+coverage at one pure pole each.
+
+Status:
+
+- line/circle as pure projections of one Di-ARA: **retained geometry**;
+- universal additive `e/Phi` gradient budget: **not supported**;
+- qutrit exponential line limit: **supported as a frozen fixed-landmark
+  identity-specific lead; strong fitted-control gate failed**;
+- universal golden circumference pole: **not supported by T341**.
+
+Independent validation passed `11/11`, including source counts, exact ARA
+coordinates, all 42 fixed pairs and all 5,000 permutation losses.
+
+Primary record:
+`analysis/phi_calibration/T341_PURE_AXIS_DI_ARA_GRADIENT_REPORT_2026-08-05.md`.
+
+## Update — 5 August 2026: multi-medium Irrationality TE-ARA audit (T342)
+
+T342 froze one radial × angular coordinate and an auxiliary common movement
+grammar before scoring seven
+materially different ordered records: pendulum, hydraulic pressure, bubble
+motion, cold-room temperature/humidity, stereo acoustic impulse responses,
+recorded qutrit relations and ordered river paths. The exact common coordinate
+was
+
+\[
+q_t=z_{t+1}/z_t=s_t e^{i\Delta\theta_t},\qquad
+X_t=\frac{2s_t}{1+s_t},\qquad
+Y_t=1+\frac{\Delta\theta_t}{\pi}.
+\]
+
+The registered auxiliary claim required chronological four-sector handovers to show both
+more adjacent quadrant changes and more next-sector information than 1,000
+within-lineage order shuffles. Six domains were inferentially eligible. Only
+the recorded qutrit passed both endpoints (`1/6`), far below the frozen
+five-domain/70% gate. The frozen auxiliary verdict is **NOT SUPPORTED**.
+
+Post-result originator clarification established that this registered rule was
+stronger than the intended Di-ARA claim. Di-ARA supplies two coupled
+perpendicular ARA axes and the four mixed regions `Ab`, `aB`, `bA` and `Ba`.
+It does not require every identity to traverse those regions in one universal
+neighbour order, cadence, speed or proportion. Exact path behaviour is
+identity- and coupling-specific. Therefore T342's `1/6` result must not be
+reported as a failure of the intended Di-ARA coupling claim.
+
+The failures divided rather than simply becoming noise. Pendulum and
+hydraulic holdouts strongly favoured adjacent handovers but did not beat the
+ordered-information null. Bubbles, cold-room and acoustics retained more
+ordered information but did not favour adjacency over their own shuffled
+sector counts. The qutrit did both. The river also retained ordered
+information but was too small for inference and did not favour adjacency.
+All seven holdouts populated all four mixed regions. This retains the
+usefulness of the two-axis descriptive cut while rejecting only the added
+universal local-gait hypothesis in this operationalisation. Four-region
+coverage is descriptive rather than an empirical pass because the coordinate
+defines those four possible regions.
+
+The frozen pure-axis constant audit also gave no universal rescue: exact `e`
+passed the strong radial gate in `0` domains and exact reciprocal-Phi passed
+the strong angular gate in `0` domains. Qutrit was nearest `e` radially and
+`1/e` angularly, but calibration-fitted identity-specific values transferred
+better. TE-ARA complement sums remained definitional and were not counted as
+evidence.
+
+Independent validation reproduced every source hash, exported transition
+metric, all 1,000-null probabilities, gate and the `1/6` verdict. It exposed
+and corrected one presentation-only river coverage label; river eligibility,
+all numerical scores and the verdict were unchanged.
+
+Status:
+
+- radial × angular Di-ARA coordinate: **retained exact measurement geometry**;
+- four mixed regions under the frozen coordinate: **observed in 7/7
+  holdouts; descriptive, not a frozen proof**;
+- added universal four-sector chronological gait across media: **not
+  supported by T342 (`1/6`)**;
+- intended intact-pair Di-ARA coupling advantage over child-only and broken
+  pairs: **not tested by T342**;
+- exact universal `1/e <-> e` / reciprocal-Phi pure-axis constants: **not
+  supported by T342**;
+- identity- and rung-specific movement: **part of the intended framework but
+  empirically open**;
+- intact-pair versus broken-pair coupling: **next direct test**.
+
+Primary record:
+`analysis/irrationality_te_ara_multimedium/T342_MULTIMEDIUM_IRRATIONALITY_TE_ARA_REPORT_2026-08-05.md`.
+
+Required interpretive correction:
+`analysis/irrationality_te_ara_multimedium/T342_INTERPRETIVE_CORRECTION_ORIGINATOR_CLARIFICATION_2026-08-05.md`.
+
+Direct successor T343 is now **scored**. It removed the universal-gait
+requirement and tested whether the intact four-state parent predicted its
+holdout future better than either one-axis child and 1,000 equal-complexity
+broken pairings. Every identity retained its own full `4×4` transition
+relation; exact `e`, Phi and anti-Phi landmarks were excluded from scoring.
+
+Before any endpoint was calculated, two dated addenda corrected the measured
+rung and the inference unit. The two children were the already-formed radial
+and angular ARA axes, not the raw upstream source channels. Circular shifts
+therefore broke `a=log(s)` or `b=delta theta` inside each frozen block. The
+non-overlapping T342 blocks, rather than individual transitions, were the
+sign-flip units because five valid source families contained fewer than 20
+named lineages.
+
+Six domains were eligible. Only qutrit passed both child-only comparisons and
+the broken-pair gate (`1/6`). River showed positive advantages over both
+children and the broken median but was inferentially ineligible (`336`
+holdout transitions) and its broken-control p-value was `0.0679`. Bubbles and
+cold room beat both child-only projections but did not beat at least 95% of
+broken pairings. Hydraulic beat the radial child only; pendulum and acoustics
+were predicted better by their simpler children and broken controls. The
+frozen cross-domain verdict is **NOT SUPPORTED BY THIS CONSTRUCTION**.
+
+This result rejects the proposed *transferable four-state next-address parent
+operator in this construction*. It does not erase the exact two-axis/four-
+region coordinate, impose a universal gait, or test universal `e`/Phi poles.
+The qutrit pass is an identity-specific positive result. Reuse of the T342
+sources makes T343 a frozen cross-question test, not an untouched-source
+discovery; block inference with few named lineages remains a dependence
+caveat. Independent artifact validation reproduced every primary loss,
+randomisation p-value, eligibility gate, domain verdict and the `1/6` result.
+
+Frozen T343 protocol:
+`analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_PROTOCOL_v1_FROZEN.md`.
+
+SHA-256:
+`4820C769B1B54377A6B6A9250A86DB5053F1777825A20F8D57C9C67DF98E6212`.
+
+Computational addendum SHA-256:
+`90C41E1DA2781F4233C2633EAB8AACA4AE6CB41838C72688FD1B82830E9ECBBC`.
+
+Inference addendum SHA-256:
+`6C867E57F1F0FE3BDDEFFE41439F0B12D4C0B2503CE9AE9F953A002BB85680EC`.
+
+Primary record:
+`analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_REPORT_2026-08-05.md`.
+
+**Post-result control audit:** the registered circular shifts are not a clean
+causal broken-pair null for a next-state target. Across domains, the shifted
+current axis came from a later native time for a median `47.9%–61.0%` of
+transitions. In short blocks, `186–471` of 1,000 controls (domain-dependent)
+exposed the actual next-axis value in more than 5% of transitions. The frozen
+`1/6` score remains the correct answer to the registered construction, but its
+broken-pair gate must not be described as leakage-free evidence against
+coupling.
+
+A post-result past-only/no-wrap sensitivity compared each broken model with
+an intact model trained and scored on exactly the same retained transitions.
+Bubbles (`+0.0519` nats), cold room (`+0.1300`) and qutrit (`+0.0644`) then
+passed the causal pairing sensitivity; these are exactly the three eligible
+domains that had already beaten both one-axis children. Pendulum, acoustics
+and hydraulic did not. River remained too small. This is a coherent
+**pair-specific lead (`3/6`)**, but it is post-result and cannot replace or
+rescue T343. It must be frozen on new data before promotion.
+
+Control-audit record:
+`analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md`.
+
+## Update — 13 August 2026: stopped-pion → muon Di-ARA handover (T371)
+
+T371 used the public unbinned COHERENT CsI[Na] release associated with
+`arXiv:2110.07730v2` to test a specifically frozen two-stage lineage:
+
+\[
+\pi^+\to\nu_\mu+\mu^+
+\quad\longrightarrow\quad
+\mu^+\to e^++\nu_e+\bar\nu_\mu.
+\]
+
+The analysis retained the measured anti-coincident steady background,
+beam-related neutrons and neutrino-induced neutrons as explicit components in
+recoil-energy × arrival-time space. It recovered `60.18` prompt `nu_mu`
+recoils (95% bootstrap `[32.42,89.20]`) and `258.94` delayed
+`nu_e + anti-nu_mu` recoils (`[187.92,333.30]`). The prompt and delayed crests
+were respectively `0.25 us` and `0.75 us`; their fitted instantaneous
+contributions crossed at `0.492 us`. Zero of 1,000 time permutations fit as
+well. Both branches remained positive in every leave-one-energy-bin and
+leave-one-time-bin check. All six frozen gates passed: **TWO-STAGE DI-ARA
+HANDOVER RECOVERED**.
+
+The post-extraction ARA pair was `(0.377,1.623)`, but its sum of two is
+definitional. Its numerical proximity to `(2-Phi,Phi)` is not promoted: the
+intervals are broad, the detector-weighted standard decay model predicts
+`(0.341,1.659)`, and fixing the physical branch ratio fits slightly better by
+AIC than freeing it. The supported claim is the ordered two-stage geometry,
+not a Phi law.
+
+Status:
+
+- two-stage pion/muon population lineage recovered by the ARA-first
+  construction: **supported crosswalk/calibration**;
+- prompt and delayed branches both required and chronologically ordered:
+  **supported in this public record**;
+- delayed `nu_e` versus `anti-nu_mu` internal split: **not resolved by this
+  flavor-blind detector**;
+- event-level family linkage, new particle physics, universal Phi ratio or
+  proof of universal fractal spheres: **not established**.
+
+Primary record:
+`analysis/muon/T371_COHERENT_PION_MUON_DIARA_REPORT_2026-08-13.md`.
 
 - The muon-catalysis **cycle maps as a deep snap** on the rational pole (formation ~140 ps ≫ fusion ~1 ps;
   ~6.9 ns rung), and φ is correctly **absent** — a nuclear event is the integer/rational/snap regime, like

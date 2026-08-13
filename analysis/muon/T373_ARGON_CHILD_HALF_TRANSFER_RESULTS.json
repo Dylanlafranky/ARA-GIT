@@ -1,0 +1,127 @@
+{
+  "test": "T373",
+  "date": "2026-08-13",
+  "evidence_class": "prospective coordinate transfer to previously inspected independent public detector data",
+  "frozen_gate_verdict": "ASYMMETRY-SHIFTED HANDOVER TRANSFERS TO ARGON",
+  "scientific_interpretation": "ORIGINAL SAME-COORDINATE TRANSFER INTERPRETATION INVALIDATED; NESTED LIQUID CHILD-TO-PARENT 1.25 LANDMARK IS A POST-RESULT LEAD",
+  "source": "COHERENT CENNS-10 liquid-argon public 3D release",
+  "released_cube": {
+    "shape_energy_f90_time": [
+      12,
+      8,
+      10
+    ],
+    "observed_events": 3752.0,
+    "native_time_centers_us": [
+      0.15,
+      0.65,
+      1.15,
+      1.65,
+      2.15,
+      2.65,
+      3.15,
+      3.65,
+      4.15,
+      4.65
+    ]
+  },
+  "model_prediction": {
+    "prompt_share": 0.2438482479550339,
+    "prompt_events_in_released_128_event_template": 31.475199104571054,
+    "delayed_events_in_released_128_event_template": 97.60179598778302,
+    "handover_time_us": 0.7100342161625234,
+    "cumulative_ara_at_handover": 0.5654018853643029,
+    "displacement_from_child_half": 0.06540188536430291,
+    "signal_template_decomposition_nrmse": 0.023963197657713917
+  },
+  "event_measurement": {
+    "fit_success": true,
+    "fit_message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "fitted_events": {
+      "prompt_cevns": 77.5981624121378,
+      "delayed_cevns": 78.62654146328593,
+      "total_cevns": 156.22470387542373,
+      "prompt_brn": 537.3837609984082,
+      "delayed_brn": 13.42787118119407,
+      "steady_state": 3135.7737798386092
+    },
+    "prompt_share": 0.4967086541832456,
+    "handover_time_us": 1.005070722688033,
+    "cumulative_ara_at_handover": 1.2387250608782956,
+    "displacement_from_child_half": 0.7387250608782956,
+    "bootstrap_95pct": {
+      "prompt_share": [
+        0.23208017916627216,
+        0.891268521991493
+      ],
+      "handover_time_us": [
+        0.681155524086203,
+        1.1339283831833726
+      ],
+      "cumulative_ara_at_handover": [
+        0.5165225782151598,
+        1.8445952897951505
+      ],
+      "displacement": [
+        0.016522578215159782,
+        1.3445952897951505
+      ],
+      "total_cevns": [
+        77.95390280324567,
+        231.74742207553112
+      ],
+      "valid_replicates": 1947,
+      "total_replicates": 2000,
+      "valid_fraction": 0.9735,
+      "optimizer_success_fraction": 0.9925
+    }
+  },
+  "fixed_vs_free_mixture": {
+    "fixed_model_signal_events": 156.77011322651913,
+    "fixed_nll": -3216.923939597238,
+    "free_nll": -3218.180357668682,
+    "likelihood_ratio_2delta_nll": 2.5128361428878634,
+    "note": "No naive chi-square p-value is claimed because non-negative branch amplitudes create boundary issues."
+  },
+  "post_result_boundary_audit": {
+    "reason": "A crossing-conditioned bootstrap truncates mixtures whose prompt branch is already below the delayed branch at the first released bin.",
+    "prompt_share_that_places_handover_at_x_0_5": 0.22821368982501325,
+    "profile_delta_nll_at_model_prediction": 1.2564129848469747,
+    "profile_delta_nll_at_pure_x_0_5": 1.4174194162105778,
+    "conventional_profile_95pct_prompt_share_diagnostic": [
+      0.18359147869674186,
+      0.9814912280701754
+    ],
+    "pure_half_interpretation": "Compatible in the likelihood profile even though absent from the crossing-conditioned bootstrap interval; not an exclusion.",
+    "status": "post-result diagnostic; not a replacement for the frozen gate"
+  },
+  "originator_identity_correction": {
+    "status": "material methodology correction after result review",
+    "error": "The analysis compared the released source-model child cut with the fitted liquid-detector parent response as though they were the same ARA coordinate and rung.",
+    "corrected_working_reading": "The argon record retains the stopped-pion/muon source relation as a child inside a provisionally movement-heavy liquid parent. A cross-rung Phase-A-to-Phase-B projection sends the pure 0.5 child contribution to 0.25 beyond the parent ridge: 1 + 0.25 = 1.25.",
+    "candidate_liquid_handover_landmark": 1.25,
+    "observed_minus_candidate": -0.011274939121704408,
+    "absolute_relative_error_percent": 0.9019951297363527,
+    "prompt_share_that_places_handover_at_1_25": 0.5032314472084726,
+    "profile_delta_nll_at_1_25": 0.0007031287905192585,
+    "evidence_boundary": "The 1.25 reading was identified after viewing the argon result and is not a T373 prediction or confirmation. It requires a newly frozen same-identity test."
+  },
+  "gates": {
+    "transfer_prediction_inside_event_95pct": true,
+    "identifiability_valid_bootstrap_at_least_80pct": true,
+    "free_mixture_matches_or_improves_fixed": true,
+    "pure_child_half_inside_event_95pct": false,
+    "prediction_and_measurement_displacement_same_sign": true,
+    "signal_template_decomposition_nrmse_below_0_10": true,
+    "same_coordinate_transfer_premise_valid_after_originator_review": false,
+    "nested_child_parent_relation_retained_after_originator_review": true,
+    "post_result_liquid_1_25_landmark_likelihood_compatible": true
+  },
+  "boundaries": [
+    "The argon source files were inspected during T371; only this handover score and 3D branch fit were prospectively frozen.",
+    "The prediction uses the collaboration's released argon CEvNS signal template and therefore tests transfer/calibration, not a universal ARA correction law.",
+    "Prompt CEvNS competes with a large prompt-neutron background; the bootstrap interval is the relevant uncertainty statement.",
+    "The native release has only ten 0.5-us bins, so the equality time is linearly interpolated and the cumulative coordinate is integrated inside the containing native bin.",
+    "Passing does not identify individual neutrino events or establish particle-by-particle release times."
+  ]
+}

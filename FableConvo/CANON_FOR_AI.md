@@ -530,16 +530,20 @@ observable, or an AI-invented proxy.
 Before a musing becomes a mathematical test or public claim, apply
 `ARA_TRANSLATION_FIDELITY_PROTOCOL.md`:
 
-1. preserve Dylan's verbatim `USER PRIOR` and freeze a versioned claim packet;
-2. declare identity, ordered poles/direction, rung, observable, coupling and closure;
-3. AI supplies plain restatement, mathematics and independent back-translation;
-4. record AI assumptions/additions and information discarded;
-5. obtain Dylan's explicit `EXACT ENOUGH TO TEST` verdict;
-6. bind that packet/version to the test registration.
+1. present the concise WHO/WHAT/WHEN/WHERE/WHY/HOW test card (one or two precise
+   sentences per heading), explicitly naming the viewing direction, geometry
+   and rung, and obtain Dylan's correction or confirmation before freezing,
+   coding or running;
+2. preserve Dylan's verbatim `USER PRIOR` and freeze a versioned claim packet;
+3. declare identity, ordered poles/direction, rung, observable, coupling and closure;
+4. AI supplies plain restatement, mathematics and independent back-translation;
+5. record AI assumptions/additions and information discarded;
+6. obtain Dylan's explicit `EXACT ENOUGH TO TEST` verdict;
+7. bind that packet/version to the test registration.
 
 **Post-compaction execution rule (30 Jul 2026):** if context compacts after
-the idea is discussed but before the test runs, repeat the two-sentence
-back-translation and obtain a fresh `EXACT ENOUGH TO TEST`. Repository
+the idea is discussed but before the test runs, repeat the six-question test
+card and obtain a fresh `EXACT ENOUGH TO TEST`. Repository
 retrieval is mandatory preparation but cannot substitute for this renewed
 sign-off. Until then, do not freeze or execute. Any unreconfirmed run is a
 `PROXY TEST — CONSTRUCT INVALID FOR THE INTENDED CLAIM`.
@@ -555,7 +559,7 @@ log disagreement. Consensus demonstrates communicability only, because models
 can share training and priors.
 
 Low-energy rule: the librarian drafts and records the packet. Dylan need only
-confirm/correct a two-sentence back-translation in ordinary language.
+confirm or correct the concise six-line card in ordinary language.
 
 ## §9. Quantum `7.5:15` complement restoration (28 Jul 2026)
 

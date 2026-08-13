@@ -97,6 +97,20 @@ A plain-language key to the vocabulary used across this repository. Where a term
   domain-general lead and not a complex-exponential identity: the mathematical inverse of `1/e` is `e`. T333 and
   T334 instead support identity-specific reciprocal amplitudes. Any future dataset must justify endpoints before
   evaluation and report rather than clamp values outside them.
+- **Diameter/circumference Irrationality Di-ARA placement (T340)** — a typed candidate assigning reciprocal
+  `1/e <-> e` to radial or diameter change and the golden non-closing turn to angular or circumferential change.
+  Under principal-angle wrapping the frozen golden magnitude is `1/phi^2 ≈ 0.381966` turns, orientation-equivalent
+  to `1/phi` around the other direction. T340 found `0/3` exact joint passes across qutrit, bubble and river
+  holdouts, so this is **not a universal native-step law**. The radial/angular separation survives as Di-ARA
+  bookkeeping. A whole-cycle arc-length/diameter test would be a different, still-open measurement.
+- **Pure-axis Di-ARA gradient (T341)** — the correction that line and circle are the radial and angular pure limits
+  of one Di-ARA, while ordinary events can mix both. With
+  `X=2s/(1+s)` and `Y=1+delta/pi`, the mixing angle is
+  `gamma=atan2(|Y-1|,|X-1|)`: `0°` is line-pure and `90°` circle-pure.
+  T341 did not support one universal additive `e/Phi` gradient budget, but the qutrit 15° line cone recovered
+  `|log s|=1.016128` (`s=2.762479`) with `e` the closest fixed landmark; its 10° cone moved to `1.010681`.
+  This is an identity-specific lead, not yet a universal pole law. The qutrit circle cone preferred `1/e` over
+  `phi^-2`, and bubble/river did not reproduce the joint constants.
 - **Two rulers → one ruler at two angles (historical conjecture)** — the identity
   `φ=2 cos(36°)` is exact, but the former interpretation “Space sees ×2 while Time sees the same octave as ×φ” is
   superseded as a universal law. It remains a pentagonal projection hypothesis to test under declared geometry.
@@ -185,8 +199,9 @@ A plain-language key to the vocabulary used across this repository. Where a term
 
 ## Dynamics, energy, identity
 
-- **TE-ARA (Total-Energy ARA; Tiarna mnemonic)** — not a second geometry, but the same ARA `0–2` geometry used as
-  an identity's total-allocation view. The pure identity is only its two poles:
+- **TE-ARA (Total-Energy ARA; Tiarna mnemonic)** — a bookkeeping name for ordinary ARA when the same `0–2`
+  geometry is being read as a complete identity's total allocation. The name exists because this view recurred often
+  enough to require unambiguous accounting; it adds no object, axis, mechanism or law. The pure identity is only its two poles:
   \(\mathrm{TE\!-\!ARA}_{pure}(I)=t_A^{(I)}+t_B^{(I)}=2\). Real measured identities are embedded in other ARA
   systems, so the observed account can be \(t_A+t_B+\sum_jc_j+t_{Other}=2\), where \(c_j\) and `Other` describe
   environmental coupling rather than additional pure poles. Example: `A=0.25, B=1.25, Other=0.50, observed
@@ -194,6 +209,13 @@ A plain-language key to the vocabulary used across this repository. Where a term
   `TE-ARA=1.24` are corrected to
   `expressed A/B allocation=1.24, context/Other=0.76, observed TE-ARA total=2`; see
   `analysis/TE_ARA_CANONICAL_CORRECTION_2026-07-21.md`.
+- **TE-ARA gross capacity versus expressed total** — Phase A and Phase B each have canonical whole-phase weight
+  `1`, giving the ridge partition `1+1=2`. Each counter-wave can also traverse the complete `0–2` diameter and
+  therefore has directional path capacity `2`; counting both complete paths separately gives gross capacity `4`.
+  Because the waves oppose one another within one identity, `4` is not a simultaneous TE-ARA state. The expressed
+  pure allocation is constrained to `A+B=2`, running from `2+0` through `1+1` to `0+2`. “Energy 4” is historical
+  shorthand for gross two-path capacity, while “energy 2” names the opposition-limited same-slice account; neither
+  is automatically a quantity in joules.
 - **Perspective-unassigned TE-ARA closure** — the complete normalized identity before selecting a boundary,
   observable, time slice, projection, rung or pole orientation. Only the closure total `2` is assigned. It is the
   proposed sphere before selecting a diameter; it does not yet specify A/B component values or a physical magnitude.
@@ -310,10 +332,12 @@ A plain-language key to the vocabulary used across this repository. Where a term
 - **"π"** — used for the **circular / wave** measure (rotation, closure). π and φ are independent; "π present ⇒ φ present" is **false** in general. They meet *exactly* only in the pentagon (φ = 2cos(π/5), five-fold symmetry).
 - **"E"** — disruption / displacement-correction **events**, not the math constant e or energy E (energy is written out or as `E`-per-cycle in the Action steps; context distinguishes).
 - **Pole orientation (space vs time end) is a free, flip-symmetric choice.** Which end of the 0–2 scale is "space" and which is "time" is a coordinate label. Swapping 0 ↔ 2 changes **no** computed result (asymmetry and distance from 1.0 are invariant). Different docs use opposite orientations (body-mapping vs foundational/cosmic) — that's perspective, not contradiction. See `TWO_RULERS_PHI_AND_TWO.md` and `ARA_decomposition_rules.md`.
-- **Scale and position — do not conflate.** (1) Pure rung spacing is the TE-ARA octave
-  `Lambda_(k+1)=2 Lambda_k`. (2) The `0–2` coordinate is the declared within-identity relation. “Scaled by ×2” does
-  not mean “located at 2.0.” A Phi/shear projection is a separate conditional hypothesis, not a second canonical
-  rung law.
+- **Scale and position — distinguish without separating.** The `0–2` coordinate and the pure octave
+  `Lambda_(k+1)=2 Lambda_k` are two projections of the same recursive ARA wave/sphere. The first locates the current
+  Phase-A/Phase-B mixture within one cycle; the second describes a completed two-sided identity participating as a
+  child whole in a larger cycle. “Scaled by ×2” therefore does not mean “located at 2.0”: one is a cross-rung
+  operation and the other is a pole position, although both arise from ARA closure. A Phi/shear projection remains a
+  separate conditional hypothesis, not a second canonical rung law.
 - **Descriptive vs forecasting.** Many results describe/track shape; fewer are true strict-causal forecasts. Always check which (see `CLAIMS_STATUS.md`).
 - **An object does not have one context-free ARA number.** The whole coupled system, either component, their relative motion, and their interface can occupy different positions because they are different observables and boundaries. Compare ARA readings only after their measurement declarations are aligned or an explicit transformation between them is supplied.
 

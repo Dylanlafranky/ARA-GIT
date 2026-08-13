@@ -1,0 +1,22 @@
+# T365 independent validation
+
+**Result:** PASS (16/16)
+
+| check | passed | observed |
+|---|---:|---|
+| dense independent slip index | True | 22114 |
+| dense independent alarm | True | [22107] |
+| dense independent lead | True | 14.000000000 ms |
+| independent landmark r-2 h0.5 | True | 16.000000 ms |
+| independent landmark r-1 h0.5 | True | 14.000000 ms |
+| independent landmark r0 h1.0 | True | -2.000000 ms |
+| independent landmark r1 h1.0 | True | -10.000000 ms |
+| independent landmark r2 h1.0 | True | -24.000000 ms |
+| frozen protocol hash | True | 94477E040BA083A7EC91BAB887A8268CBF661C42A65C2D28E00BB23D206F5917 |
+| replication rows | True | 15 |
+| replication order count | True | 5 |
+| replication alarm count | True | 3 |
+| fluid/dry split | True | fluid=3/5; dry=0/10 |
+| frozen gate verdict retained | True | 6/7 pass; overall=False |
+| five finite Irrationality addresses | True | 5 |
+| required artifacts | True | T365_FAULT_TENSION_SCALE_LADDER_FORECAST_FIGURE.png; T365_FAULT_TENSION_SCALE_LADDER_FORECAST_REPORT_2026-08-12.md; T365_FAULT_TENSION_SCALE_LADDER_FORECAST_DENSE_TIMESERIES.csv |

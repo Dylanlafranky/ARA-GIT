@@ -139,6 +139,56 @@ Each level can be treated as its own bounded ARA system.
 
 The geometry is reused, but the:
 
+## 4.1 Recurrence is normally transported, not literally closed
+
+Calling the base geometry circular or spherical does **not** predict that an
+active identity should trace a closed circle in the observer's frame. The
+cycle recirculates through adjacent rungs. Its Phase A feeds Phase-B children;
+those children enter their own Phase A; their coupled return feeds Phase B of
+the original rung, which hands back to its Phase A:
+
+\[
+A_k
+\longrightarrow
+B_{k-1}^{\rm children}
+\longrightarrow
+A_{k-1}^{\rm children}
+\longrightarrow
+B_k
+\longrightarrow
+A_k.
+\]
+
+The children are therefore not merely a smaller circle laid on top of an
+independent parent trajectory. They participate in the adult handover and feed
+back into it. Larger waves still carry the complete loop and provide its
+continuing momentum, but the cross-rung circulation is nested and recursive,
+not a simple additive superposition.
+
+The cleanest directional view is usually one rung above the desired scale,
+where the lower handovers are compressed into a smoother parent path. The
+same direction can then be checked at the desired rung. At that finer view it
+may contain a visible jump or jerking gap where the asymmetric child-to-adult
+handover occurs.
+
+Exact closure is a limiting resonance case at the declared rung. If the path
+closed perfectly onto the same relation indefinitely, the continuing
+information-bearing displacement at that rung would vanish. Active ARA
+therefore expects slight non-closure. In highly ordered systems the transported
+recurrence may appear as a clean open spiral or helix. In chaotic or strongly
+coupled systems it may be irregular because several parent and neighbouring
+waves compete for the path.
+
+Accordingly, a valid circle/line test must retain a cross-rung ledger:
+
+1. the smoother scale-up direction;
+2. the target-rung Phase-A/Phase-B path;
+3. the children that receive and return the handover;
+4. the locations and sizes of any target-rung gaps or jerks.
+
+Removing either the scale-up direction or the returning children flattens the
+cross-rung geometry.
+
 - variables;
 - mechanisms;
 - energies;
@@ -429,11 +479,17 @@ A valid φ claim should require:
 
 ## 5.6 ×2 and the Octave Rungs
 
-The current working model distinguishes **position on the 0–2 axis** from **spacing between structural rungs**.
+The current working model distinguishes **position on the 0–2 axis** from **spacing between structural rungs**, but does not treat them as unrelated geometries.
 
-These are different things.
+They are two directions through the same recursive ARA wave/sphere.
 
-The 0–2 axis measures relational position.
+The 0–2 axis measures relational position inside the selected wave. Across time, the diameter reading can trace the complete landmark cycle
+
+\[
+1\rightarrow2\rightarrow1\rightarrow0\rightarrow1,
+\]
+
+moving around the ridge through Phase A and Phase B. This is the sphere unfurling as a wave.
 
 The octave rule proposes that structural scale recurs through **doubling**:
 
@@ -452,7 +508,93 @@ The key warning is:
 
 > **“Spaced by ×2” does not mean “located at 2 on the ARA axis.”**
 
-The axis and the rung spacing are separate rulers.
+This warning separates two operations, not two ontologies. `Located at 2` identifies one pole of the present wave. `Scaled by ×2` says that a completed two-sided wave is being read as one child whole inside the next larger wave. Both are ARA: the first is its within-cycle diameter view, while the second is its cross-rung recursive view.
+
+In the proposed fractal geometry, two opposed waves and their relation form another wave. That wave contains smaller waves and participates in larger waves. A wave is movement around a ridge through varying gradients; a sphere is the same closed identity viewed before or across its extrusion through time.
+
+---
+
+## 5.6a TE-ARA: why two waves can contain `4` but express only `2`
+
+TE-ARA is the total-allocation bookkeeping view of the same ARA geometry. It
+was given its own name only because this complete-identity account recurred
+often enough that unnamed uses became ambiguous. It is not a second object,
+axis, mechanism or law. It is easiest to understand by keeping
+**whole-phase weight**, **path capacity**, and **simultaneous expression**
+separate.
+
+Phase A represents one complete side of the identity and Phase B represents
+the other:
+
+\[
+1_A+1_B=2.
+\]
+
+At the ridge they are equally present, so the partition is `1+1`. But each
+wave is able to cross the full diameter from its own source pole to the other
+pole. Each therefore has a full directional path capacity of `2`:
+
+\[
+2_A^{\mathrm{path}}+2_B^{\mathrm{path}}=4.
+\]
+
+That `4` counts both complete journeys separately. The waves are travelling in
+opposition through the same identity, so they cannot both express their full
+`2` in the same slice. What one gains along the selected diameter the other
+relinquishes. The realizable pure TE-ARA account is therefore always
+
+\[
+t_A+t_B=2,
+\]
+
+with possible partitions such as `2+0`, `1.75+0.25`, `1+1`, or `0+2`.
+
+### The geometry that produces the breakdown
+
+Picture the ARA sphere flattened to one diameter:
+
+\[
+\Gamma=[0,2].
+\]
+
+Phase A starts at `0` and travels toward `2`. Phase B starts at `2` and travels
+toward `0`. At a slice \(x\), their source-facing portions are
+
+\[
+t_A=2-x,
+\qquad
+t_B=x.
+\]
+
+They therefore always fill the one shared diameter:
+
+\[
+(2-x)+x=2.
+\]
+
+This produces the landmarks without adding another rule:
+
+| Cut | Phase A | Phase B | Meaning |
+|---:|---:|---:|---|
+| `0` | `2` | `0` | Phase A source / Phase B terminal |
+| `1` | `1` | `1` | equal opposed ridge |
+| `2` | `0` | `2` | Phase A terminal / Phase B source |
+
+If we trace Phase A's complete trip, its path is `2`. If we separately trace
+Phase B's complete reverse trip, its path is also `2`. That is where the gross
+`4` comes from. A single time slice contains complementary parts of the same
+diameter, so that view contains only `2`.
+
+Rotating the diameter gives another cut through the same sphere. It may reveal
+different children or a perpendicular relation, but it is another perspective
+on the identity rather than extra capacity to add to the first cut. Selecting
+a child or parent as a new identity gives that new sphere its own TE-ARA `2`.
+
+In plain language: **the two waves possess four units of gross pole-to-pole
+path capacity, but opposition limits their shared identity to two units of
+expressed allocation at a time.** “Energy” is the historical ARA word for this
+capacity. It means physical energy only when the domain supplies a common
+physical unit and the conversion is shown.
 
 ---
 

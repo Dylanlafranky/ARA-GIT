@@ -1,0 +1,85 @@
+{
+  "test": "T350 tick-parent versus closure-front",
+  "run_date": "2026-08-11",
+  "evidence_class": "synthetic known-referee causal instrument calibration",
+  "claim_hash": "C4C5CE519F1F596172D1209AF033C88915004E6B04002EFF16F3B606B15241A5",
+  "protocol_hash": "C68DD4A2EB60A18034CF8A7B504F5FAE8D3ADBE7AC7ABC2E14BD32E3132EB35E",
+  "counts": {
+    "trajectories": 672,
+    "holdout_trajectories": 384,
+    "matched_pairs": 588,
+    "holdout_pairs": 336,
+    "prefix_measurements": 6048,
+    "cadence_pairs": 192
+  },
+  "parent_supported": true,
+  "pure_closure_front_supported": false,
+  "local_closure_locator_supported": true,
+  "dominant_verdict": "parent memory; local tick remains a closure locator",
+  "parent_checks": {
+    "max_reconstruction_error": 8.881784197001252e-16,
+    "retained_share": 1.0,
+    "median_retention": 0.8719611288832616,
+    "median_emergence": 0.25,
+    "median_closure_jump": 0.016212612392205283,
+    "cadence_median": 0.00033954572787348676,
+    "cadence_share": 1.0
+  },
+  "front_checks": {
+    "final_small_share": 0.0,
+    "median_final_distance": 0.41583598766483043,
+    "median_emergence": 0.25,
+    "median_closure_jump": 0.016212612392205283,
+    "local_median_error": 1.233502189279534e-11,
+    "local_p95_error": 7.925109457573847e-11
+  },
+  "gates": [
+    {
+      "hypothesis": "parent",
+      "gate": "P1 tick reconstruction",
+      "passed": true,
+      "detail": "max 8.88e-16"
+    },
+    {
+      "hypothesis": "parent",
+      "gate": "P2 retained history",
+      "passed": true,
+      "detail": "share 1.000; retention 0.872"
+    },
+    {
+      "hypothesis": "parent",
+      "gate": "P3 pre-closure emergence",
+      "passed": true,
+      "detail": "t 0.250; jump 0.016"
+    },
+    {
+      "hypothesis": "parent",
+      "gate": "P4 cadence stability",
+      "passed": true,
+      "detail": "median 0.000; share 1.000"
+    },
+    {
+      "hypothesis": "pure front",
+      "gate": "F1 current sufficiency",
+      "passed": false,
+      "detail": "small 0.000; median 0.416"
+    },
+    {
+      "hypothesis": "pure front",
+      "gate": "F2 boundary emergence",
+      "passed": false,
+      "detail": "t 0.250; jump 0.016"
+    },
+    {
+      "hypothesis": "local front",
+      "gate": "F3 handover locator",
+      "passed": true,
+      "detail": "median 1.23e-11; p95 7.93e-11"
+    }
+  ],
+  "boundaries": [
+    "Synthetic instrument relation only; not a universal physical causal result.",
+    "Tick reconstruction and local closure estimation are partly algebraic.",
+    "Retained history, causal emergence and cadence stability are the load-bearing comparisons."
+  ]
+}

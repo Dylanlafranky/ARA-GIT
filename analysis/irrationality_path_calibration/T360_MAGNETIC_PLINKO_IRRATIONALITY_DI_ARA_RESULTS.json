@@ -1,0 +1,64 @@
+{
+  "test": "T360 magnetic-Plinko Irrationality Di-ARA",
+  "active_protocol": "v1 + v2 + v4 + v5",
+  "verdict": "NOT SUPPORTED",
+  "n_paths": 5,
+  "n_events": 25,
+  "n_parent_runs_published": 400,
+  "d90_nearest_magnet": 0.1268102516518046,
+  "gates": {
+    "G0 extraction/lattice QA": true,
+    "G1 real connection geometry": false,
+    "G2 parent-channel inheritance": false,
+    "G3 connection-to-lock order": false,
+    "G4 coordinate non-redundancy": true
+  },
+  "G1": {
+    "real_median_alignment": 0.0784270955059503,
+    "positive_rate": 0.84,
+    "real_beats_each_wrong_layout": false,
+    "exact_wilcoxon_p": 0.0004559457302093506,
+    "layout_medians": {
+      "real": 0.0784270955059503,
+      "mirror": 0.07842709550595033,
+      "half_column_shift": -0.07795963741137635,
+      "cyclic_row_shift": -0.05594165849140861,
+      "stagger_inversion": -0.0779596374113764
+    }
+  },
+  "G2": {
+    "run_wins": 1,
+    "effect": 0.010827332754390583,
+    "exact_label_randomization_p": 0.4599609375,
+    "condition_means": {
+      "mirror": 0.7393534907016293,
+      "real": 0.6124843336466951,
+      "shift_minus": 0.5779294889287538,
+      "shift_plus": 0.4876880230465305
+    }
+  },
+  "G3": {
+    "joint_positive_rate": 0.28,
+    "real_beats_each_control": true,
+    "effect": 0.08,
+    "exact_label_randomization_p": 0.125,
+    "condition_means": {
+      "cyclic_row_shift": 0.2,
+      "real": 0.28,
+      "row_reversal": 0.2,
+      "wrong_lineage": 0.2
+    }
+  },
+  "G4": {
+    "spearman_rho": -0.13251764133301724,
+    "spearman_p": 0.0008885317937967016,
+    "iqr_x_C": 0.6909340869850726,
+    "iqr_x_P": 0.799980046760139
+  },
+  "limitations": [
+    "Five public source paths only.",
+    "Published tracker overlays supply spatial paths; no clock-time or force is inferred.",
+    "The 400-run parent field is aggregate and from the same experiment.",
+    "Magnetic steering is not discrete peg-collision physics."
+  ]
+}

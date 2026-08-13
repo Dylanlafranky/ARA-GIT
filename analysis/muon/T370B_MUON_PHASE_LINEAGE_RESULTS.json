@@ -1,0 +1,634 @@
+{
+  "test": "T370B muon parent-phase lineage across an in-band field ladder",
+  "status": "NOT_SUPPORTED",
+  "source": {
+    "doi": "10.5286/ISIS.E.RB1620201",
+    "url": "https://data.isis.stfc.ac.uk/doi-redirect/ISIS/investigation/82360483"
+  },
+  "selection": "Complete positive-count LCB1-88 T=135.0 acquisition family with 0 < F <= 520 G",
+  "run_count": 14,
+  "resolved_parent_phase_pass_count": 11,
+  "required": 10,
+  "field_frequency_spearman": 0.5984602081255584,
+  "recovered_slope_mhz_per_gauss": 0.0091429708791377,
+  "independent_slope_mhz_per_gauss": 0.013553896,
+  "slope_relative_error": 0.32543595737065556,
+  "duplicate_200G_frequency_difference_mhz": 0.010000000000000231,
+  "gates": {
+    "resolved_runs_at_least_10_of_14": true,
+    "field_frequency_spearman_at_least_0_90": false,
+    "slope_within_5_percent": false,
+    "duplicate_200G_within_0_10_mhz": true
+  },
+  "overall_pass": false,
+  "diagnostics_not_part_of_frozen_gate": {
+    "excluding_unresolved_520G": {
+      "run_count": 13,
+      "field_frequency_spearman": 0.9986254289035241,
+      "recovered_slope_mhz_per_gauss": 0.013575477313309823,
+      "slope_relative_error": 0.00159225903089591
+    },
+    "520G_at_twice_time_resolution": {
+      "run": "EMU00066663",
+      "title": "LCB1-88 T=135.0 F=520",
+      "frequency_mhz": 7.059999999999996,
+      "decay_per_us": 0.05,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.04338685446189414,
+        "no_phase": 0.04375981770138717,
+        "persistence": 0.04961628887649373,
+        "wrong_orientation": 0.04424896101939527
+      },
+      "holdout_correlation": 0.13052548049250282,
+      "improvement_vs_no_phase": 0.008522961453772293,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "expected_frequency_mhz": 7.04802592,
+      "frequency_relative_error": 0.001698926782606999
+    }
+  },
+  "runs": [
+    {
+      "run": "EMU00066627",
+      "title": "LCB1-88 T=135.0 F=40",
+      "start_time": "2016-10-21T20:13:36",
+      "sha256": "d54f48c64894d811e0daddc4d5fa9665bac13688d630179dd101711bdbc79c16",
+      "bytes": 1024894,
+      "raw_counts": 60098999,
+      "eligible_counts": 50165721,
+      "development_counts": 38627433,
+      "holdout_counts": 11538288,
+      "frequency_mhz": 0.5499999999999998,
+      "decay_per_us": 0.05,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.024357253393483595,
+        "no_phase": 0.03160461378242026,
+        "persistence": 0.036873059568022504,
+        "wrong_orientation": 0.036233727437917994
+      },
+      "holdout_correlation": 0.6395546956671735,
+      "improvement_vs_no_phase": 0.2293133666758469,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.21651888350689913,
+      "median_detector_improvement_bootstrap_95": [
+        0.17723731474572285,
+        0.2606013843189108
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 40.0,
+      "expected_frequency_mhz": 0.5421558399999999,
+      "frequency_relative_error": 0.01446845984357538,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066651",
+      "title": "LCB1-88 T=135.0 F=20",
+      "start_time": "2016-10-22T15:46:20",
+      "sha256": "680b0120ff0fcab33e48244d49e42929b097c2f7a12f9237206034b3b1a1d9da",
+      "bytes": 1011905,
+      "raw_counts": 10134087,
+      "eligible_counts": 8461280,
+      "development_counts": 6515711,
+      "holdout_counts": 1945569,
+      "frequency_mhz": 0.2799999999999999,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.05220409345772304,
+        "no_phase": 0.2308791832855069,
+        "persistence": 0.26540877801698814,
+        "wrong_orientation": 0.20816656359752964
+      },
+      "holdout_correlation": 0.9740698325877462,
+      "improvement_vs_no_phase": 0.7738899942609071,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.776634987453517,
+      "median_detector_improvement_bootstrap_95": [
+        0.766829418232859,
+        0.7865487723400064
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 20.0,
+      "expected_frequency_mhz": 0.27107791999999997,
+      "frequency_relative_error": 0.03291334093164041,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066652",
+      "title": "LCB1-88 T=135.0 F=25",
+      "start_time": "2016-10-22T15:52:26",
+      "sha256": "bbac36bb72f83f0e5f4ec119ae9603d717660031febf6630ba23b5fbfacb481a",
+      "bytes": 973073,
+      "raw_counts": 35359124,
+      "eligible_counts": 29510629,
+      "development_counts": 22724487,
+      "holdout_counts": 6786142,
+      "frequency_mhz": 0.32999999999999985,
+      "decay_per_us": 0.05,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03108665246745036,
+        "no_phase": 0.03538865496021481,
+        "persistence": 0.04425069147192595,
+        "wrong_orientation": 0.03873466617569044
+      },
+      "holdout_correlation": 0.4795389234186143,
+      "improvement_vs_no_phase": 0.12156445328597298,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.11789768980747978,
+      "median_detector_improvement_bootstrap_95": [
+        0.09771877254634248,
+        0.14236517486044944
+      ],
+      "circular_shift_better_count": 1,
+      "circular_shift_count": 95,
+      "field_gauss": 25.0,
+      "expected_frequency_mhz": 0.33884739999999997,
+      "frequency_relative_error": 0.026110278550167766,
+      "registered_detector_geometry_pass": false,
+      "ara_holdout_pass": false,
+      "resolved_parent_phase_pass": false
+    },
+    {
+      "run": "EMU00066654",
+      "title": "LCB1-88 T=135.0 F=60",
+      "start_time": "2016-10-22T16:37:16",
+      "sha256": "7ffcc4430ec5d7f857735fa0fcc80b4fb9b8de5a5c21d2a570402a3cbb6b114c",
+      "bytes": 976289,
+      "raw_counts": 35376446,
+      "eligible_counts": 29527142,
+      "development_counts": 22738555,
+      "holdout_counts": 6788587,
+      "frequency_mhz": 0.8199999999999996,
+      "decay_per_us": 0.05,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.030659691574187072,
+        "no_phase": 0.0357648018452096,
+        "persistence": 0.0434847543786269,
+        "wrong_orientation": 0.03909757647464657
+      },
+      "holdout_correlation": 0.5170872404543966,
+      "improvement_vs_no_phase": 0.14274118707877914,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.13623792181196637,
+      "median_detector_improvement_bootstrap_95": [
+        0.1161506721416351,
+        0.1501511627869746
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 60.0,
+      "expected_frequency_mhz": 0.8132337599999999,
+      "frequency_relative_error": 0.008320166147553567,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066655",
+      "title": "LCB1-88 T=135.0 F=80",
+      "start_time": "2016-10-22T16:57:33",
+      "sha256": "e772c1efe1f1bd36d29262d365f1d721e30b30b88c20f1ef2059d01da9e6367c",
+      "bytes": 973900,
+      "raw_counts": 35349969,
+      "eligible_counts": 29505925,
+      "development_counts": 22720359,
+      "holdout_counts": 6785566,
+      "frequency_mhz": 1.0899999999999996,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03035226854118906,
+        "no_phase": 0.03490645865211876,
+        "persistence": 0.04351456763708307,
+        "wrong_orientation": 0.03936162598292834
+      },
+      "holdout_correlation": 0.4957512075555492,
+      "improvement_vs_no_phase": 0.13046840862080034,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.12346031219839959,
+      "median_detector_improvement_bootstrap_95": [
+        0.10447612628178077,
+        0.13749702018593452
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 80.0,
+      "expected_frequency_mhz": 1.0843116799999999,
+      "frequency_relative_error": 0.0052460192995428655,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066656",
+      "title": "LCB1-88 T=135.0 F=100",
+      "start_time": "2016-10-22T17:17:50",
+      "sha256": "63fdbb19a528c165a6664c26955a583b84e612916b904638077b6a05c4456180",
+      "bytes": 972623,
+      "raw_counts": 35097706,
+      "eligible_counts": 29296265,
+      "development_counts": 22558131,
+      "holdout_counts": 6738134,
+      "frequency_mhz": 1.3599999999999994,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03085649767938798,
+        "no_phase": 0.03554937756832536,
+        "persistence": 0.04472429136807697,
+        "wrong_orientation": 0.03991128303140756
+      },
+      "holdout_correlation": 0.4979626001110871,
+      "improvement_vs_no_phase": 0.1320101844235595,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.12950327682998047,
+      "median_detector_improvement_bootstrap_95": [
+        0.1075153166917795,
+        0.1477429951296047
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 100.0,
+      "expected_frequency_mhz": 1.3553895999999999,
+      "frequency_relative_error": 0.0034015311907362802,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066657",
+      "title": "LCB1-88 T=135.0 F=150",
+      "start_time": "2016-10-22T17:37:58",
+      "sha256": "8d7348d4e2f871f805d3928d3234c2c072c81da4327b8639d9c8f521b5105d1a",
+      "bytes": 968411,
+      "raw_counts": 30178040,
+      "eligible_counts": 25192513,
+      "development_counts": 19393316,
+      "holdout_counts": 5799197,
+      "frequency_mhz": 2.039999999999999,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03237867373349999,
+        "no_phase": 0.03631747679923639,
+        "persistence": 0.042969141223511316,
+        "wrong_orientation": 0.040438179645501234
+      },
+      "holdout_correlation": 0.4540112836038139,
+      "improvement_vs_no_phase": 0.10845475547517158,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.09256192925748846,
+      "median_detector_improvement_bootstrap_95": [
+        0.07417223226507336,
+        0.11525294871989178
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 150.0,
+      "expected_frequency_mhz": 2.0330844,
+      "frequency_relative_error": 0.0034015311907362256,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066658",
+      "title": "LCB1-88 T=135.0 F=200",
+      "start_time": "2016-10-22T17:55:19",
+      "sha256": "b226ffebd0683eefebd36524fe3258979441de6070de41368997ddfbec65f7f3",
+      "bytes": 968518,
+      "raw_counts": 30383123,
+      "eligible_counts": 25362793,
+      "development_counts": 19529143,
+      "holdout_counts": 5833650,
+      "frequency_mhz": 2.719999999999999,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.032265202080202456,
+        "no_phase": 0.035615398038305525,
+        "persistence": 0.04191118513403601,
+        "wrong_orientation": 0.038941316962045835
+      },
+      "holdout_correlation": 0.42380895146378417,
+      "improvement_vs_no_phase": 0.09406594177326966,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.09036298657875558,
+      "median_detector_improvement_bootstrap_95": [
+        0.07111447332304044,
+        0.10587904219914779
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 200.0,
+      "expected_frequency_mhz": 2.7107791999999997,
+      "frequency_relative_error": 0.0034015311907362802,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066659",
+      "title": "LCB1-88 T=135.0 F=280",
+      "start_time": "2016-10-22T18:12:46",
+      "sha256": "d6bf912e9cfceea83ecd958e4ab76d6ff2cdde4c4a2afc0f2a5256b74ef6a17a",
+      "bytes": 968470,
+      "raw_counts": 30342372,
+      "eligible_counts": 25326313,
+      "development_counts": 19504533,
+      "holdout_counts": 5821780,
+      "frequency_mhz": 3.799999999999998,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.033460433834941725,
+        "no_phase": 0.0355260284852991,
+        "persistence": 0.039508560157353,
+        "wrong_orientation": 0.03757102966764574
+      },
+      "holdout_correlation": 0.33711644413435604,
+      "improvement_vs_no_phase": 0.058143134440488686,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.05808816531078426,
+      "median_detector_improvement_bootstrap_95": [
+        0.043670588636464336,
+        0.07067110234580454
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 280.0,
+      "expected_frequency_mhz": 3.7950908799999996,
+      "frequency_relative_error": 0.001293544780671612,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066660",
+      "title": "LCB1-88 T=135.0 F=400",
+      "start_time": "2016-10-22T18:30:18",
+      "sha256": "cc6a78cdc860fe798386015ac48a4adc59d6de256588c1fee6c3a3ff6b861d17",
+      "bytes": 968668,
+      "raw_counts": 30299871,
+      "eligible_counts": 25288503,
+      "development_counts": 19472077,
+      "holdout_counts": 5816426,
+      "frequency_mhz": 5.419999999999997,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03144577684220413,
+        "no_phase": 0.03228153716018895,
+        "persistence": 0.03592884895154471,
+        "wrong_orientation": 0.03358321570594646
+      },
+      "holdout_correlation": 0.22916181114354744,
+      "improvement_vs_no_phase": 0.025889731143767247,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.02197435183897689,
+      "median_detector_improvement_bootstrap_95": [
+        0.015081200557564175,
+        0.033309810408367446
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 400.0,
+      "expected_frequency_mhz": 5.4215583999999994,
+      "frequency_relative_error": 0.0002874450268768073,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066661",
+      "title": "LCB1-88 T=135.0 F=200",
+      "start_time": "2016-10-22T18:47:51",
+      "sha256": "d2dbfdb0455eab7716b64e827c05d2bd79f4b3b98dfa133c9143dd5fff5bfe28",
+      "bytes": 968537,
+      "raw_counts": 30313258,
+      "eligible_counts": 25307306,
+      "development_counts": 19486552,
+      "holdout_counts": 5820754,
+      "frequency_mhz": 2.7099999999999986,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03234794720285548,
+        "no_phase": 0.03587265247077613,
+        "persistence": 0.04242811469127722,
+        "wrong_orientation": 0.039253711068654905
+      },
+      "holdout_correlation": 0.43250243657058046,
+      "improvement_vs_no_phase": 0.09825605371088952,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.08683719498616799,
+      "median_detector_improvement_bootstrap_95": [
+        0.06286465593283308,
+        0.10957712945826163
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 200.0,
+      "expected_frequency_mhz": 2.7107791999999997,
+      "frequency_relative_error": 0.0002874450268768073,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066662",
+      "title": "LCB1-88 T=135.0 F=360",
+      "start_time": "2016-10-22T19:05:23",
+      "sha256": "79662fb53868441292b92850a58a199af948b573316625956130e3326a65cf45",
+      "bytes": 968111,
+      "raw_counts": 30082533,
+      "eligible_counts": 25109335,
+      "development_counts": 19334956,
+      "holdout_counts": 5774379,
+      "frequency_mhz": 4.889999999999997,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03264907349873854,
+        "no_phase": 0.03381918309112238,
+        "persistence": 0.0385505080955286,
+        "wrong_orientation": 0.03545333716554548
+      },
+      "holdout_correlation": 0.2625751748169923,
+      "improvement_vs_no_phase": 0.034598990437796906,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.033818168797498604,
+      "median_detector_improvement_bootstrap_95": [
+        0.025168341025437857,
+        0.04386899920646936
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95,
+      "field_gauss": 360.0,
+      "expected_frequency_mhz": 4.87940256,
+      "frequency_relative_error": 0.002171872451531663,
+      "registered_detector_geometry_pass": true,
+      "ara_holdout_pass": true,
+      "resolved_parent_phase_pass": true
+    },
+    {
+      "run": "EMU00066663",
+      "title": "LCB1-88 T=135.0 F=520",
+      "start_time": "2016-10-22T19:22:46",
+      "sha256": "3ce96801b78ffe49a4013b38a352ab7e8e4cc2177d6fc932e2e19595587ff009",
+      "bytes": 968689,
+      "raw_counts": 30093688,
+      "eligible_counts": 25118546,
+      "development_counts": 19341007,
+      "holdout_counts": 5777539,
+      "frequency_mhz": 0.1,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.04089733302733963,
+        "no_phase": 0.032932610780527366,
+        "persistence": 0.03560535403344087,
+        "wrong_orientation": 0.05436251724066873
+      },
+      "holdout_correlation": 0.02766482543152987,
+      "improvement_vs_no_phase": -0.24184909905538698,
+      "gates": {
+        "beats_no_phase": false,
+        "beats_persistence": false,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": false,
+      "median_detector_improvement": -0.09053421496475689,
+      "median_detector_improvement_bootstrap_95": [
+        -0.13400965275599264,
+        -0.03344244408972041
+      ],
+      "circular_shift_better_count": 36,
+      "circular_shift_count": 95,
+      "field_gauss": 520.0,
+      "expected_frequency_mhz": 7.04802592,
+      "frequency_relative_error": 0.9858116299322577,
+      "registered_detector_geometry_pass": false,
+      "ara_holdout_pass": false,
+      "resolved_parent_phase_pass": false
+    },
+    {
+      "run": "EMU00066669",
+      "title": "LCB1-88 T=135.0 F=230",
+      "start_time": "2016-10-22T21:15:11",
+      "sha256": "da04370005fe32b97322a7cf38810c89173eb5bd820cedb345f3089c6b8c20f4",
+      "bytes": 965843,
+      "raw_counts": 25084143,
+      "eligible_counts": 20940299,
+      "development_counts": 16126520,
+      "holdout_counts": 4813779,
+      "frequency_mhz": 3.1299999999999986,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.035095601614068515,
+        "no_phase": 0.037613352911805634,
+        "persistence": 0.04214813907596767,
+        "wrong_orientation": 0.04044610833701774
+      },
+      "holdout_correlation": 0.3624873623129452,
+      "improvement_vs_no_phase": 0.06693769905705149,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.07151989693303734,
+      "median_detector_improvement_bootstrap_95": [
+        0.05181138857682266,
+        0.09214999756418579
+      ],
+      "circular_shift_better_count": 1,
+      "circular_shift_count": 95,
+      "field_gauss": 230.0,
+      "expected_frequency_mhz": 3.11739608,
+      "frequency_relative_error": 0.004043092272060203,
+      "registered_detector_geometry_pass": false,
+      "ara_holdout_pass": false,
+      "resolved_parent_phase_pass": false
+    }
+  ],
+  "claim_boundary": "A pass recovers the established precessing parent-spin relation in ARA geometry from raw counts. The neutrino pair remains an unobserved conservation-derived daughter complement."
+}

@@ -1,0 +1,63 @@
+{
+  "test": "T372",
+  "date": "2026-08-13",
+  "evidence_class": "post-result native-resolution calibration on opened T371 data",
+  "verdict": "HANDOVER GRADIENT MAPPED; EXACT CHILD-HALF REMAINS UNCONFIRMED",
+  "theory_status": "strong ARA theory; requires frozen external replication",
+  "coarse_plot_audit": {
+    "handover_time_us": 0.49219498366627634,
+    "cumulative_ara_at_handover": 0.4943907667836702,
+    "warning": "Completed 0.5-us bins were plotted at bin centres; this is not the native integral."
+  },
+  "native_fit": {
+    "prompt_share": 0.18858562602717124,
+    "parent_asymmetry_delayed_minus_prompt": 0.6228287479456576,
+    "handover_time_us": 0.6360822416353671,
+    "cumulative_ara_at_handover": 0.4374027771116097,
+    "displacement_from_child_half": -0.06259722288839031,
+    "bootstrap_95pct": {
+      "prompt_share": [
+        0.09955055645479965,
+        0.29587375409582045
+      ],
+      "handover_time_us": [
+        0.5197071731192435,
+        0.7026342971046288
+      ],
+      "cumulative_ara_at_handover": [
+        0.1786752637726482,
+        0.6915829469555977
+      ],
+      "displacement": [
+        -0.3213247362273518,
+        0.19158294695559772
+      ],
+      "valid_replicates": 2000
+    }
+  },
+  "collaboration_source_crosscheck": {
+    "prompt_share": 0.17040624245114938,
+    "handover_time_us": 0.6199073948204583,
+    "cumulative_ara_at_handover": 0.3895207111630041,
+    "inside_fit_bootstrap_interval": true
+  },
+  "identity_specific_gradient": {
+    "share_that_places_handover_at_exact_half": 0.21347054505914212,
+    "observed_share_minus_exact_half_share": -0.024884919031970876,
+    "monotone_over_finite_sweep": true,
+    "interpretation": "Exact mathematical dependency after fixing branch shapes; not independent physical evidence."
+  },
+  "tests": {
+    "native_handover_resolved": true,
+    "collaboration_model_inside_fit_interval": true,
+    "exact_half_inside_fit_interval": true,
+    "all_energy_cuts_resolve_handover": true
+  },
+  "boundaries": [
+    "T372 is post-result and cannot independently confirm the theory.",
+    "Counterfactual parent-weight sweeps use fixed extracted shapes.",
+    "Energy bands are cuts of one experiment, not independent replications.",
+    "The pure x=0.5 landmark and identity-specific physical coordinate must remain distinct.",
+    "No universal Phi law is claimed."
+  ]
+}

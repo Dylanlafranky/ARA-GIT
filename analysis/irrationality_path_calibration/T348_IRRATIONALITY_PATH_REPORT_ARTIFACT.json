@@ -1,0 +1,226 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T348 — Known-referee Irrationality path calibration",
+    "description": "Frozen synthetic calibration of address openness, stochastic residual and retained closure history.",
+    "generatedAt": "2026-08-11T00:00:00+10:00",
+    "sources": [
+      {
+        "id": "t348-synthetic-run",
+        "label": "T348 fixed-seed known-referee synthetic run",
+        "path": "analysis/irrationality_path_calibration/t348_known_referee_irrationality_path.py",
+        "query": {
+          "description": "Generate 2,016 declared periodic, irrational, deterministic-chaotic, finite-stochastic and continuous-stochastic paths; calculate frozen raw-history coordinates and closure records without using family labels in the calculations.",
+          "engine": "Python, NumPy and pandas",
+          "language": "python",
+          "executed_at": "2026-08-11",
+          "filters": [
+            "Holdout rows only for reported coordinate medians",
+            "Horizon 4096",
+            "Chronological control for primary coordinates",
+            "Fixed ridge thresholds x_P=1 and x_R=1"
+          ],
+          "metric_definitions": [
+            "x_P: twice the clipped log-log support-growth slope across 16, 32, 64, 128 and 256 bins",
+            "x_R: twice the causal local-prediction loss divided by a matched no-history loss, capped at 2",
+            "closure coherence: median magnitude of the complex lag relation across lags 1 through 512",
+            "sector accuracy: share of holdout paths on the expected side of fixed ridges x_P=1 and x_R=1"
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T348 — Known-referee Irrationality path calibration\n\n**Frozen benchmark:** SUPPORTED — synthetic known-referee instrument only."
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "sourceId": "t348-synthetic-run",
+        "body": "## Technical summary\n\nAll five preregistered gates passed. Fixed ARA ridge cuts recovered the expected broad sector for **95.65%** of 1,104 untouched holdout paths; macro family accuracy was **90.00%**. This calibrates the measuring instrument under synthetic known conditions. It is not yet evidence for a universal physical law."
+      },
+      {
+        "id": "plane-chart-block",
+        "type": "chart",
+        "chartId": "holdout-plane",
+        "layout": "full"
+      },
+      {
+        "id": "findings",
+        "type": "markdown",
+        "sourceId": "t348-synthetic-run",
+        "body": "## Findings\n\nIrrational rotation and continuous stochastic motion both opened addresses, but the former remained relation-determined while the latter retained a maximal stochastic residual. Chronology destruction moved the three deterministic families on the history axis without changing their address-support coordinate. Retained closure history distinguished exact rational closure from coherent irrational non-closure and incoherent wandering."
+      },
+      {
+        "id": "gate-table-block",
+        "type": "table",
+        "tableId": "gate-table",
+        "layout": "full"
+      },
+      {
+        "id": "limitation",
+        "type": "markdown",
+        "sourceId": "t348-synthetic-run",
+        "body": "## Limitation\n\nOne of two deterministic-chaos parameter groups fell just below the fixed openness ridge, leaving deterministic chaos at **50%** sector accuracy. The current x_P coordinate measures support-growth dimension, not every possible meaning of non-closure. The uncompressed closure-history child remains necessary."
+      },
+      {
+        "id": "next-rung",
+        "type": "markdown",
+        "body": "## Next rung\n\nTransfer the frozen instrument unchanged to a controlled public physical system with independently documented periodic, quasiperiodic, chaotic and noise-dominated regimes. Freeze the physical observable and circular/path mapping before opening the regime labels."
+      }
+    ],
+    "charts": [
+      {
+        "id": "holdout-plane",
+        "title": "Holdout family median ARA coordinates",
+        "subtitle": "The two coordinates separate address openness from stochastic residual; closure coherence remains available as child/history context.",
+        "type": "scatter",
+        "dataset": "family_summary",
+        "source": {
+          "id": "t348-family-summary-query",
+          "label": "T348 reviewed holdout family summary",
+          "query": {
+            "description": "Return the five reviewed holdout family medians used by the report chart.",
+            "engine": "SQLite VALUES snapshot",
+            "language": "sql",
+            "executed_at": "2026-08-11",
+            "sql": "WITH family_summary(family,n_paths,median_x_p,median_x_r,median_closure,sector_accuracy,expected_sector) AS (VALUES ('periodic rational',336,0.0,0.0,1.0,1.0,'finite / determinate'),('irrational rotation',240,2.0,0.0000013961,1.0,1.0,'open / determinate'),('deterministic chaos',96,1.4965694135,0.0000667448,0.0499238386,0.5,'open / determinate'),('finite stochastic',336,0.0,2.0,0.0133898211,1.0,'finite / stochastic'),('continuous stochastic',96,1.9779974983,2.0,0.1097601024,1.0,'open / stochastic')) SELECT * FROM family_summary ORDER BY CASE family WHEN 'periodic rational' THEN 1 WHEN 'irrational rotation' THEN 2 WHEN 'deterministic chaos' THEN 3 WHEN 'finite stochastic' THEN 4 ELSE 5 END;"
+          }
+        },
+        "showDescription": true,
+        "encodings": {
+          "x": {
+            "field": "median_x_p",
+            "label": "Address openness x_P",
+            "format": "number"
+          },
+          "y": {
+            "field": "median_x_r",
+            "label": "Stochastic residual x_R",
+            "format": "number"
+          },
+          "color": {
+            "field": "family",
+            "label": "Known referee"
+          },
+          "label": {
+            "field": "family",
+            "label": "Known referee"
+          },
+          "tooltip": [
+            { "field": "family", "label": "Known referee" },
+            { "field": "n_paths", "label": "Holdout paths", "format": "number" },
+            { "field": "median_closure", "label": "Median closure coherence", "format": "number" },
+            { "field": "sector_accuracy", "label": "Sector accuracy", "format": "percent" }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate-table",
+        "title": "Frozen gate results",
+        "dataset": "gate_results",
+        "source": {
+          "id": "t348-gate-query",
+          "label": "T348 frozen gate table",
+          "query": {
+            "description": "Return the five independently reviewed frozen gate outcomes.",
+            "engine": "SQLite VALUES snapshot",
+            "language": "sql",
+            "executed_at": "2026-08-11",
+            "sql": "WITH gate_results(gate_order,gate,result,key_value) AS (VALUES (1,'Potential orientation','PASS','All five family medians passed'),(2,'Residual orientation','PASS','All five family medians passed'),(3,'Broad-sector recovery','PASS','95.65% versus 85% floor'),(4,'Closure independence','PASS','Irrational miss improved in 100%'),(5,'Order-destruction control','PASS','delta x_R +1.973 to +2.000; delta x_P 0')) SELECT * FROM gate_results ORDER BY gate_order ASC;"
+          }
+        },
+        "defaultSort": {
+          "field": "gate_order",
+          "direction": "asc"
+        },
+        "columns": [
+          { "field": "gate_order", "label": "Order", "type": "number" },
+          { "field": "gate", "label": "Frozen gate", "type": "text" },
+          { "field": "result", "label": "Result", "type": "text" },
+          { "field": "key_value", "label": "Key value", "type": "text" }
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-11T00:00:00+10:00",
+    "datasets": {
+      "family_summary": [
+        {
+          "family": "periodic rational",
+          "n_paths": 336,
+          "median_x_p": 0.0,
+          "median_x_r": 0.0,
+          "median_closure": 1.0,
+          "sector_accuracy": 1.0,
+          "expected_sector": "finite / determinate"
+        },
+        {
+          "family": "irrational rotation",
+          "n_paths": 240,
+          "median_x_p": 2.0,
+          "median_x_r": 0.0000013961,
+          "median_closure": 1.0,
+          "sector_accuracy": 1.0,
+          "expected_sector": "open / determinate"
+        },
+        {
+          "family": "deterministic chaos",
+          "n_paths": 96,
+          "median_x_p": 1.4965694135,
+          "median_x_r": 0.0000667448,
+          "median_closure": 0.0499238386,
+          "sector_accuracy": 0.5,
+          "expected_sector": "open / determinate"
+        },
+        {
+          "family": "finite stochastic",
+          "n_paths": 336,
+          "median_x_p": 0.0,
+          "median_x_r": 2.0,
+          "median_closure": 0.0133898211,
+          "sector_accuracy": 1.0,
+          "expected_sector": "finite / stochastic"
+        },
+        {
+          "family": "continuous stochastic",
+          "n_paths": 96,
+          "median_x_p": 1.9779974983,
+          "median_x_r": 2.0,
+          "median_closure": 0.1097601024,
+          "sector_accuracy": 1.0,
+          "expected_sector": "open / stochastic"
+        }
+      ],
+      "gate_results": [
+        { "gate_order": 1, "gate": "Potential orientation", "result": "PASS", "key_value": "All five family medians passed" },
+        { "gate_order": 2, "gate": "Residual orientation", "result": "PASS", "key_value": "All five family medians passed" },
+        { "gate_order": 3, "gate": "Broad-sector recovery", "result": "PASS", "key_value": "95.65% versus 85% floor" },
+        { "gate_order": 4, "gate": "Closure independence", "result": "PASS", "key_value": "Irrational miss improved in 100%" },
+        { "gate_order": 5, "gate": "Order-destruction control", "result": "PASS", "key_value": "Δx_R +1.973 to +2.000; Δx_P 0" }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t348-synthetic-run",
+      "label": "T348 fixed-seed known-referee synthetic run",
+      "path": "analysis/irrationality_path_calibration/t348_known_referee_irrationality_path.py",
+      "query": {
+        "description": "Frozen fixed-seed synthetic calibration with untouched parameter and seed holdouts.",
+        "engine": "Python, NumPy and pandas",
+        "language": "python",
+        "executed_at": "2026-08-11"
+      }
+    }
+  ]
+}

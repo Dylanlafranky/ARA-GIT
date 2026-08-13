@@ -1,0 +1,54 @@
+{
+  "test": "T348 known-referee Irrationality path calibration",
+  "orientation": {
+    "x_p": "0 finite/reused -> 2 open potential",
+    "x_r": "0 determinate -> 2 stochastic residual"
+  },
+  "evidence_boundary": "synthetic known-referee instrument calibration only",
+  "n_paths": 2016,
+  "n_calibration_paths": 912,
+  "n_holdout_paths": 1104,
+  "sector_accuracy_holdout": 0.9565217391304348,
+  "sector_accuracy_holdout_macro_family": 0.9,
+  "sector_accuracy_holdout_by_family": {
+    "periodic rational": 1.0,
+    "irrational rotation": 1.0,
+    "deterministic chaos": 0.5,
+    "finite stochastic": 1.0,
+    "continuous stochastic": 1.0
+  },
+  "irrational_best_miss_improvement_share": 1.0,
+  "gates": [
+    {
+      "gate": "G1 potential orientation",
+      "passed": true,
+      "detail": "{\"periodic rational x_P < 0.75\": true, \"finite stochastic x_P < 0.75\": true, \"irrational rotation x_P > 1.25\": true, \"deterministic chaos x_P > 1.25\": true, \"continuous stochastic x_P > 1.25\": true}"
+    },
+    {
+      "gate": "G2 residual orientation",
+      "passed": true,
+      "detail": "{\"periodic rational x_R < 0.75\": true, \"irrational rotation x_R < 0.75\": true, \"deterministic chaos x_R < 1.25\": true, \"finite stochastic x_R > 1.25\": true, \"continuous stochastic x_R > 1.25\": true}"
+    },
+    {
+      "gate": "G3 broad-sector recovery",
+      "passed": true,
+      "value": 0.9565217391304348,
+      "threshold": 0.85
+    },
+    {
+      "gate": "G4 closure independence",
+      "passed": true,
+      "value": 1.0,
+      "detail": "{\"periodic median rho > 0.90\": true, \"irrational median rho > 0.90\": true, \"chaos median rho < 0.25\": true, \"finite stochastic median rho < 0.25\": true, \"continuous stochastic median rho < 0.25\": true, \"periodic exact closure share >= 0.95\": true, \"irrational no exact closure share >= 0.95\": true, \"irrational miss improvement share >= 0.80\": true}"
+    },
+    {
+      "gate": "G5 order-destruction control",
+      "passed": true,
+      "detail": "{\"periodic rational delta x_R >= 0.50\": true, \"periodic rational abs delta x_P < 0.10\": true, \"irrational rotation delta x_R >= 0.50\": true, \"irrational rotation abs delta x_P < 0.10\": true, \"deterministic chaos delta x_R >= 0.50\": true, \"deterministic chaos abs delta x_P < 0.10\": true, \"periodic rational rho drop >= 0.50\": true, \"irrational rotation rho drop >= 0.50\": true}"
+    }
+  ],
+  "benchmark_verdict": "SUPPORTED [synthetic known-referee instrument only]",
+  "geometry_verdict": "SUPPORTED AS A FOUR-SECTOR SYNTHETIC CALIBRATION WITH LIMITATION: ordered paths separate finite/open and determinate/stochastic reference families, but one lower-dimensional deterministic-chaos parameter group falls on the finite side of the fixed x_P ridge; closure history remains independently informative.",
+  "protocol_sha256": "4EB33854992EF4B30B70142814804C276B95C8794871D55F679B68A5ABB23547",
+  "claim_sha256": "E03F55A4848028037D13B1731BACA7664E4BA5F8E3D8D3F51F9F59BC71832951"
+}

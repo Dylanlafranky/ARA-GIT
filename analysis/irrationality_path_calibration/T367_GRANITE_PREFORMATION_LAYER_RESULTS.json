@@ -1,0 +1,91 @@
+{
+  "verdict": "NOT SUPPORTED UNDER THE FROZEN T367 GATES",
+  "frozen_event_quantile": 0.975,
+  "frozen_isolation_s": 8.0,
+  "development_records": [
+    "Wgn19",
+    "Wgn20",
+    "Wgn21",
+    "Wgn22"
+  ],
+  "holdout_records": [
+    "Wgn23",
+    "Wgn24",
+    "Wgn25",
+    "Wgn26"
+  ],
+  "cluster_effect": NaN,
+  "cluster_ci_low": NaN,
+  "cluster_ci_high": NaN,
+  "shifted_relation_effect": NaN,
+  "shifted_relation_ci": [
+    NaN,
+    NaN
+  ],
+  "alarm_threshold": NaN,
+  "holdout_event_warning_share": 0.0,
+  "holdout_quiet_false_positive_share": 0.0,
+  "gates": [
+    {
+      "gate": 1,
+      "name": "source and causality QA",
+      "pass": true,
+      "detail": "All features trailing; specimen split fixed before scoring; source hashes recorded."
+    },
+    {
+      "gate": 2,
+      "name": "holdout event coverage",
+      "pass": true,
+      "detail": "59 events total; minimum 2 per specimen."
+    },
+    {
+      "gate": 3,
+      "name": "pre-onset organisation",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 4,
+      "name": "temporal direction",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 5,
+      "name": "child precedence",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 6,
+      "name": "not merely released waves",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 7,
+      "name": "relation specificity",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 8,
+      "name": "label specificity",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 9,
+      "name": "baseline value",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    },
+    {
+      "gate": 10,
+      "name": "false-warning boundary",
+      "pass": false,
+      "detail": "not scored: development early-stop assigned zero primary feature weights"
+    }
+  ],
+  "instrument_validity": "EARLY-STOP REJECTION: all predeclared organisation features received zero frozen weight on development specimens; downstream composite gates are not interpretable as ordinary negative scores."
+}

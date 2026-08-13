@@ -1,0 +1,11 @@
+gate,requirement,value,pass
+G1,single closure referee in >=2/3 records,3,True
+G2,double-minus-single x_P >=0.20 in >=2/3 and positive median,hits=3; median=0.667838,True
+G3a,double x_R <1.25 in >=2/3,3,True
+G3b,shuffle raises x_R >=0.25 in >=2/3,"hits=3; values={'free': 1.8373055971963126, 'driven1': 1.6518628993328144, 'driven2': 1.307579201847783}",True
+G3c,shuffle lowers best rho >=0.15 in >=2/3,"hits=3; values={'free': 0.6164652363886567, 'driven1': 0.6064243032405577, 'driven2': 0.3465541568974785}",True
+G3d,shuffle preserves x_P within 0.02 in all six,0.0,True
+G4,coherent nonzero one-cycle miss in >=2/3 doubles,0,False
+G5,broken lineage penalty >=0.15 in >=2/3 doubles,"hits=2; values={'free': 0.0025722025248998692, 'driven1': 0.5659053253204483, 'driven2': 0.4701937663705277}",True
+G6a,reversal preserves x_P and best rho in all six,max_dxP=0.000000; max_drho=0.000000,True
+G6b,reversal flips orientation within 0.02 in >=5/6,hits=6; max_error=0.000000,True

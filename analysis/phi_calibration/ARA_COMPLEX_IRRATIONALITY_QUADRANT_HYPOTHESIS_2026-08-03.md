@@ -459,16 +459,134 @@ Primary records:
 | Four modes arise from contraction/expansion crossed with forward/reverse phase | **Exact mathematical classification; empirically occupied in T333, T334 and T335** |
 | One reciprocal amplitude is shared across identities | **Not supported: T333 and T334 recover materially different amplitudes** |
 | Physical systems universally implement that classification with the same constants | **Not supported by T334/T335; shared form does not imply shared constant** |
+| `1/e <-> e` on the radial/diameter axis and a golden step on the angular/circumference axis | **Not supported as a universal local-step placement by T340; the typed two-axis decomposition remains useful** |
 
 Earlier frozen tests and null results are not re-labelled as successes by this
 revision. In particular, failures of standalone Phi operators remain failures
 of those operators. They helped reveal that the search had compressed a
 two-axis mechanism into one constant.
 
+## 9. T340 diameter/circumference placement test
+
+Dylan then made the two axes more physically explicit: exponential change may
+belong to a straight radial or diameter measurement, while golden non-closing
+may belong to movement around the circumference. T340 froze that distinction
+before applying one common quotient scorer to the recorded qutrit, bubble and
+river coordinates; the muon scheduling construction was retained only as a
+construction-positive diagnostic because it already contains exponential and
+Phi components.
+
+For
+
+\[
+q_n=\frac{z_{n+1}}{z_n}=s_ne^{i\Delta\theta_n},
+\]
+
+the frozen radial candidate was the reciprocal pair
+`1/e <-> e`. The frozen circumferential candidate was
+`phi^-2 = 0.381966...` turns under principal-angle wrapping, which is the same
+oriented golden turn as `1/phi` taken around the opposite direction. Rational,
+algebraic and calibration-fitted alternatives were scored separately.
+
+The universal placement was **not supported**. On the three primary real-data
+holdouts:
+
+- `0/3` selected `e` on the radial axis;
+- `0/3` selected the golden turn on the circumferential axis; and
+- `0/3` selected both.
+
+The qutrit holdout was especially informative because its estimates were very
+stable while disagreeing with the frozen constants: implied radial
+`alpha=1.807079` and angular `tau=0.267010` turns. Bubble holdout returned
+`alpha=1.248485`, `tau=0.021847`; river-thalweg holdout returned
+`alpha=1.092695`, `tau=0.157511`. Stability therefore does not rescue the
+universal constants.
+
+This result narrows rather than erases the geometry. Radial magnitude and
+angular traversal remain distinct observables and continue to generate the
+four Di-ARA sectors. What failed was the stronger claim that their native
+local increments are universally fixed by `e` and Phi. T340 did not integrate
+a separately declared complete circuit and therefore does not decide whether
+an arc-length/diameter or whole-cycle circumference construction has a golden
+relation; that would be a different frozen measurement.
+
+Primary records:
+
+- `analysis/phi_calibration/T340_DIAMETER_CIRCUMFERENCE_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md`
+- `analysis/phi_calibration/T340_DIAMETER_CIRCUMFERENCE_IRRATIONALITY_DI_ARA_REPORT_2026-08-04.md`
+- `analysis/phi_calibration/T340_DIAMETER_CIRCUMFERENCE_IRRATIONALITY_DI_ARA_RESULTS.json`
+
+## 10. T341 pure-axis gradient correction
+
+T341 implemented Dylan's correction that line and circle are not separate
+systems or constant step sizes. They are the two pure-axis limits of one
+Di-ARA, while ordinary observations occupy mixed gradients between them.
+
+For each local relation, T341 retained the exact ARA coordinates
+
+\[
+X=\frac{2s}{1+s},
+\qquad
+Y=1+\frac{\Delta\theta}{\pi},
+\]
+
+and defined the mixing angle
+
+\[
+\gamma=\operatorname{atan2}(|Y-1|,|X-1|).
+\]
+
+The frozen 15-degree cones selected movement near the pure radial axis and
+near the pure angular axis. The proposed limits were `|log s|=1`, equivalent
+to `1/e <-> e`, and `|delta|/(2pi)=phi^-2`. A separate frozen test asked
+whether intermediate events conserved the linear budget
+
+\[
+|\log s|+\frac{|\Delta\theta|/(2\pi)}{\phi^{-2}}=1.
+\]
+
+The universal joint package was **not supported** (`0/3` real-data holdout
+joint passes), but one component was unusually clean:
+
+- the recorded-qutrit line cone contained `20,942` holdout events;
+- its median was `|log s|=1.016128`, or `s=2.762479`;
+- `e` was the closest frozen radial landmark and passed the absolute fixed
+  gate;
+- tightening the cone from 20 to 15 to 10 degrees moved the median from
+  `1.021646` to `1.016128` to `1.010681`, closer to the exact line limit.
+
+That result remains a lead rather than a promoted universal law. The
+calibration-fitted qutrit value `1.025085` was slightly closer to the holdout
+than exact `1`, so the strong transfer gate failed. The qutrit circle cone
+settled at `0.350769` turns, closer to `1/e=0.367879` than to
+`phi^-2=0.381966`. Radial and angular magnitudes were effectively uncorrelated
+(`Spearman rho=0.000180`), and shuffling their event-wise pairing did not
+worsen the proposed budget (`p=0.510490`).
+
+Bubble and river records did not reproduce the constants. Their coverage was
+also asymmetric: bubble holdout contained only `12` circle-cone events and
+river holdout only `3` line-cone events, below the frozen eligibility floor.
+The correct conclusion is therefore:
+
+1. line and circle remain valid pure projections of one Di-ARA gradient;
+2. a qutrit `e`-line limit is a reproducible identity-specific lead;
+3. universal Phi-circle closure is not recovered;
+4. the proposed fixed additive `e/Phi` gradient budget is not supported; and
+5. new tests need identities that densely visit both pure axes without using
+   the target constants to select those visits.
+
+Primary records:
+
+- `analysis/phi_calibration/T341_PURE_AXIS_DI_ARA_GRADIENT_PROTOCOL_v1_FROZEN.md`
+- `analysis/phi_calibration/T341_PURE_AXIS_DI_ARA_GRADIENT_REPORT_2026-08-05.md`
+- `analysis/phi_calibration/T341_PURE_AXIS_DI_ARA_GRADIENT_RESULTS.json`
+
 ## Required next test
 
-After T333, the highest-value next test is cross-centre and cross-archive
-invariance. For a new dataset, before opening evaluation outcomes:
+After T341, the highest-value next test is an identity with dense visits to
+both pure axes and an independently identifiable complete circumference
+event. For a new dataset, before opening
+evaluation outcomes:
 
 1. define one physical identity and two independent raw cuts forming `z_n`;
 2. freeze the origin, scale, time direction and rung;
@@ -484,8 +602,148 @@ invariance. For a new dataset, before opening evaluation outcomes:
 7. score both non-closure and information retention. A candidate that merely
    avoids recurrence but loses predictive/reconstructive lineage does not
    satisfy the hypothesis.
+8. if a complete loop is physically identifiable, freeze its start, end,
+   accumulated arc and diameter before testing any Phi relation; do not infer
+   the loop retrospectively from closeness to Phi.
 
 The strong falsifier is straightforward: if ordered `sigma/omega` paths do
 not carry reproducible information beyond matched controls, or if random
 phase performs as well as structured irrational candidates at equal radial
 budget, this proposed ARA mechanism is not supported in that coordinate.
+
+## 11. Temporal carrier reading after T345 (9 August 2026)
+
+The line/circle result requires a distinction between a **state cut** and a
+**temporal handover cut**.
+
+At one declared identity and rung:
+
+- a circle-like path is recurrent movement at the declared child rung. In an
+  active system it is normally carried by a larger parent, so its observed
+  trajectory is expected to remain open rather than close literally;
+- a straight path is open directional traversal. It can represent growth,
+  decay or transfer, but is not automatically chaotic;
+- a crooked path with weak turn consistency is the incoherent or
+  random-like comparison;
+- the cross-rung circulation is recursive: adult Phase A feeds Phase-B
+  children, the children pass into their own Phase A, and their return feeds
+  adult Phase B before the next adult Phase A. The resulting path may be a
+  spiral, helix, cycloid or displaced looping arc. Exact closure is the
+  resonance limit, not the normal active information-bearing case;
+- ordered systems should expose a relatively clean transported recurrence;
+  chaotic systems may expose a squiggled version because other waves compete
+  for directional control.
+
+The corresponding temporal ARA lead is
+
+\[
+\mathrm{Phase\ A}_n
+\longrightarrow
+\mathrm{Phase\!\text{-}B\ connection\ storage}
+\longrightarrow
+\mathrm{handover/release}
+\longrightarrow
+\mathrm{Phase\ A}_{n+1}.
+\]
+
+Here movement geometry is the Phase-A view and the ordered connection pattern
+is the Phase-B/child-connection view. They are coupled views of one evolving
+identity, not a claim that the system first becomes a circle and only later
+creates Phase B. Phase-B children may already be present while the circular
+state is maintained, then decrease or redistribute during the release into
+the next movement state.
+
+This corrects the temporal ordering frozen in T345. T345 strongly recovered
+the line/circle/crooked distinction and found that circle-like paths were
+more relation-concentrated than crooked paths. Its registered claim that
+connection concentration should rise *after* the circle failed in both the
+laboratory and numerical representations; it decreased instead. That failure
+is retained. The post-result storage-at-circle/release-after-circle reading
+requires a new frozen test.
+
+The broader idea that this temporal Di-ARA is a coherent, persistent carrier
+or source wave--analogous in role, not yet identified with, light or gravity--
+is a **hypothesis tier** statement. T345 did not test universality, light or
+gravity. Cross-domain transfer is required before that interpretation can be
+promoted.
+
+## 12. T346 temporal handover result
+
+T346 froze the corrected storage-at-centre/release-after-centre mechanism.
+Movement alone identified a direct-to-recurrent-to-direct handover; only then
+was the ordered-connection concentration ledger opened.
+
+The primary mechanism was **not supported**. Laboratory `W=15` was formally
+ineligible (`192<200` coherent anchors). In the eligible numerical record,
+absolute connection build, release and centre peak were indistinguishable
+from zero, while their proposed positive magnitude coupling to movement ran
+significantly negative. The registered proportional release-to-opening
+translation therefore fails.
+
+One narrower structure survived. Numerical coherent recurrence had a more
+positive centre-peak profile than crooked curvature by `+0.214743` with a
+whole-track interval `[+0.198696,+0.231335]`, positive in all three hydraulic
+conditions. The sign of the absolute peak was strongly scale-dependent:
+negative at numerical `W=8`, near zero at `W=15`, and positive at `W=30`;
+laboratory `W=8` was already positive.
+
+This result reinforces three boundaries:
+
+1. `I_conn` is concentration/organisation of observed Phase-B children, not a
+   conserved amount or energy ledger;
+2. coherent recurrence differs from crooked recurrence, but its expression
+   depends on the declared rung;
+3. `C=(1-D)G` detects coherent arcs and U-turns, which are admissible open
+   projections of parent-carried recurrence, but it cannot yet distinguish
+   that mechanism from a generic reversal.
+
+The scale pattern is a post-result lead for a recursive cross-rung test. Read
+the smoother direction one rung above, then descend to the target rung and
+look for the same direction plus an asymmetry-dependent handover gap. The
+returning children must be retained, and intact ordering must beat reversed,
+shuffled and wrong-lineage controls. This does not repair T346 or establish a
+universal temporal carrier/source wave.
+
+Primary record:
+`analysis/hydraulics/T346_TEMPORAL_DI_ARA_STORAGE_HANDOVER_COMBINED_REPORT_2026-08-09.md`.
+
+## 13. T348/T349 path-history calibration and interface result
+
+T348 separated a second typed Irrationality Di-ARA from the older radial ×
+orientation state cut. Its axes were address openness `x_P` and stochastic
+residual `x_R`, with uncompressed closure history `C(H)`. All five frozen
+synthetic known-referee gates passed; untouched broad-sector accuracy was
+`95.65%`. Chronology destruction moved `x_R` by nearly the full 0–2 span while
+leaving `x_P` unchanged.
+
+T349 then crossed those five path histories with independently generated
+contraction, neutral and expansion states. All seven interface gates passed:
+radial accuracy was `100%`, history-sector accuracy remained `95.6522%`,
+radial inversion reflected only the radial coordinate, and phase reflection
+reflected only orientation. Endpoint-preserving interior shuffling left the
+start, finish, radius path and visited-value multiset unchanged while moving
+`x_R` by approximately `1.94–2.00` and collapsing rotation closure coherence.
+
+This supports two non-flattened instruments under known synthetic conditions:
+
+\[
+D_{\rm state}=(x_L,x_C),
+\qquad
+D_{\rm history}=\bigl(x_P,x_R,C(H)\bigr).
+\]
+
+It does not yet prove that `D_history` is the physical parent of `D_state`.
+The factors were independent by construction. A direct parent test must form a
+causal sequence of sliding-window state cuts and reconstruct or predict the
+held-out history identity.
+
+The separate fixed-amplitude test failed. No universal fixed reciprocal
+constant passed; `e` was closest only with mean log error `0.2833`, while Phi
+gave `0.4688`. This strengthens the present document's boundary: the typed
+two-axis geometry transfers, but universal `e/Phi` endpoints remain
+unsupported.
+
+Primary records:
+
+- `analysis/irrationality_path_calibration/T348_IRRATIONALITY_PATH_KNOWN_REFEREE_REPORT_2026-08-11.md`
+- `analysis/irrationality_path_calibration/T349_STATE_HISTORY_DI_ARA_INTERFACE_REPORT_2026-08-11.md`

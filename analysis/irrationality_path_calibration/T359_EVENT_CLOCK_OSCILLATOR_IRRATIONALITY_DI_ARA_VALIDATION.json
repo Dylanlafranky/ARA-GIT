@@ -1,0 +1,50 @@
+{
+  "test": "Independent validation of T359",
+  "checks": {
+    "claim_sha_matches": true,
+    "protocol_sha_matches": true,
+    "archive_md5_matches": true,
+    "pair_keyset_reproduced": true,
+    "pair_aggregation_reproduced": true,
+    "record_keyset_reproduced": true,
+    "record_aggregation_reproduced": true,
+    "frozen_gates_reproduced": true,
+    "json_gates_reproduced": true,
+    "all_arithmetic_reproduced": true
+  },
+  "maximum_pair_aggregation_difference": 6.661338147750939e-16,
+  "maximum_record_aggregation_difference": 4.440892098500626e-16,
+  "recomputed_gates": {
+    "G0": false,
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": false,
+    "G5": false,
+    "G6": true,
+    "overall": false
+  },
+  "gate_detail": {
+    "g0_record_component_counts": {
+      "event": 9,
+      "period": 11,
+      "share": 11,
+      "direction": 11
+    },
+    "structured_candidates": {
+      "50": true,
+      "100": false,
+      "150": false,
+      "190": false,
+      "240": false,
+      "290": true,
+      "340": true
+    },
+    "chronology_hits": 7,
+    "specificity_hits": 0,
+    "group_specific": false,
+    "lineage_hits": 0,
+    "orientation_hits": 9
+  },
+  "diagnosis": "The event clock is monotone and its record-median periods all lie in the frozen physical range. G0 fails only because the two shorter uncoupled control records contain 23 and 28 median events, below the frozen count of 30. Independently, G4 and G5 fail because event normalization makes coupled, uncoupled and wrong-record sequences almost equally deterministic."
+}

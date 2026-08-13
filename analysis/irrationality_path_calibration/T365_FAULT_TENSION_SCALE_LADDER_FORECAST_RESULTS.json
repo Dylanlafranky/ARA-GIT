@@ -1,0 +1,88 @@
+{
+  "test": "T365 fault-tension scale-ladder forecast",
+  "run_date": "2026-08-12",
+  "evidence_class": "causal retrospective forecasting audit on an already-open archive",
+  "verdict": "NOT SUPPORTED UNDER THE FROZEN GATES",
+  "all_gates_passed": false,
+  "dense": {
+    "slip_index": 22114,
+    "slip_time_s": 7774.6783700000005,
+    "calibration_end_index": 17819,
+    "alarm_index": 22107,
+    "alarm_time_s": 7774.66437,
+    "alarm_lead_ms": 14.000000000123691,
+    "holdout_alarm_bouts": 1,
+    "earlier_false_bouts": 0,
+    "protocol_sha256": "94477E040BA083A7EC91BAB887A8268CBF661C42A65C2D28E00BB23D206F5917"
+  },
+  "dense_landmark_leads_ms": {
+    "r-2_h0.5": 16.000000000531145,
+    "r-2_h0.75": 8.00000000072032,
+    "r-2_h1.0": 2.0000000004074536,
+    "r-1_h0.5": 14.000000000123691,
+    "r-1_h0.75": 3.9999999999054126,
+    "r-1_h1.0": 0.0,
+    "r+0_h0.5": 8.00000000072032,
+    "r+0_h0.75": 2.0000000004074536,
+    "r+0_h1.0": -1.999999999497959,
+    "r+1_h0.5": 3.9999999999054126,
+    "r+1_h0.75": -1.999999999497959,
+    "r+1_h1.0": -9.999999999308784,
+    "r+2_h0.5": 2.0000000004074536,
+    "r+2_h0.75": -3.9999999999054126,
+    "r+2_h1.0": -23.999999999432475
+  },
+  "replication": {
+    "grandchild_no_later_than_current": 5,
+    "forecast_horizon_contains_drop": 3,
+    "full_declared_order": 2,
+    "median_forecast_lead_rows": 50.0,
+    "fluid_grandchild_no_later_than_current": 5,
+    "fluid_forecast_horizon_contains_drop": 3,
+    "dry_forecast_horizon_contains_drop": 0
+  },
+  "irrationality_quadrants": {
+    "grandchild": "Ab",
+    "child": "Ab",
+    "current": "aB",
+    "parent": "aB",
+    "grandparent": "aB"
+  },
+  "gates": [
+    {
+      "gate": "G1 causality QA",
+      "passed": true,
+      "observed": "alarm=22107; calibration_end=17819; slip=22114"
+    },
+    {
+      "gate": "G2 primary dense forecast",
+      "passed": true,
+      "observed": "lead=14.000000000123691 ms; bouts=1"
+    },
+    {
+      "gate": "G3 dense false-alarm boundary",
+      "passed": true,
+      "observed": "earlier false bouts=0"
+    },
+    {
+      "gate": "G4 dense child ordering",
+      "passed": true,
+      "observed": "grandchild=16.0 ms; child=14.0 ms; current-full=-2.0 ms"
+    },
+    {
+      "gate": "G5 marker specificity",
+      "passed": true,
+      "observed": "real=0.0 bins; pseudo median=2060.5; shifted=[3335.0, 2221.0, 1107.0]"
+    },
+    {
+      "gate": "G6 repeated scale ordering",
+      "passed": false,
+      "observed": "grandchild<=current 5/15; alarm horizon contains drop 3/15"
+    },
+    {
+      "gate": "G7 Irrationality address",
+      "passed": true,
+      "observed": "finite rung addresses=5/5"
+    }
+  ]
+}

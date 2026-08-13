@@ -1,0 +1,278 @@
+{
+  "test": "T361 Irrationality Di-ARA wave recording and recovery",
+  "run_date": "2026-08-12",
+  "source_doi": "10.5281/zenodo.15122129",
+  "source_zip_md5": "abe81a3631481b58977925daf453ede5",
+  "claim_sha256": "180f60856b6a7ee45c3d1330f00c6396a380061b2f35f75d1950fda660c41dae",
+  "protocol_sha256": {
+    "T361_IRRATIONALITY_DI_ARA_WAVE_RECORDING_PROTOCOL_v1_FROZEN.md": "3d94fca5959a100d4e8b2824f6f8fa95c4ab4d7b8d0b42c6418c47ac8156bcbb",
+    "T361_IRRATIONALITY_DI_ARA_WAVE_RECORDING_PROTOCOL_v2_FROZEN.md": "28cdbc84e614f97b0988fc46a62035ead253a8ad0caf8bb2c21ce15bdd75e44c",
+    "T361_IRRATIONALITY_DI_ARA_WAVE_RECORDING_PROTOCOL_v3_FROZEN.md": "63e815b6d674bf2b377ffde52da7060461f5dac9cecbd17e5d990f2e86cda438"
+  },
+  "records": 9,
+  "pairs_per_record": 40,
+  "cycle_rows": 44556,
+  "verdict": "NOT SUPPORTED AS A COMPLETE PHYSICAL WAVE RECORDER",
+  "overall": false,
+  "gates": [
+    {
+      "gate": "G1 waveform",
+      "requirement": "waveform_r>=0.80 and RMSE<=0.30 in >=7/9 records",
+      "record_hits": 3,
+      "records_total": 9,
+      "passed": false,
+      "observed": "3/9 records"
+    },
+    {
+      "gate": "G2 movement",
+      "requirement": "direction/quadrant>=0.75 and turn_error<=0.10 in >=7/9",
+      "record_hits": 3,
+      "records_total": 9,
+      "passed": false,
+      "observed": "3/9 records"
+    },
+    {
+      "gate": "G3 closure",
+      "requirement": "endpoint<=0.20 and angular error<=0.15 in >=7/9",
+      "record_hits": 3,
+      "records_total": 9,
+      "passed": false,
+      "observed": "3/9 records"
+    },
+    {
+      "gate": "G4 four-state",
+      "requirement": "four-state improves RMSE or direction by >=0.05 in >=5/9",
+      "record_hits": 0,
+      "records_total": 9,
+      "passed": false,
+      "observed": "0/9 records"
+    },
+    {
+      "gate": "G5 lineage",
+      "requirement": "correct lineage improves RMSE or waveform_r by >=0.05 in >=5/9",
+      "record_hits": 3,
+      "records_total": 9,
+      "passed": false,
+      "observed": "3/9 records"
+    },
+    {
+      "gate": "G6 parent",
+      "requirement": "coarse parent r>=0.90 and RMSE<=0.20 in >=7/9",
+      "record_hits": 1,
+      "records_total": 9,
+      "passed": false,
+      "observed": "1/9 records"
+    }
+  ],
+  "primary_record_medians": [
+    {
+      "delta_r": 0,
+      "method": "primary",
+      "RMSE_ARA": 0.9911775866767654,
+      "MAE_ARA": 0.7277434153168487,
+      "waveform_r": -0.1434886514862032,
+      "direction_agreement": 0.5,
+      "quadrant_agreement": 0.5,
+      "turn_error": 0.3888888888888889,
+      "endpoint_error": 0.44305632342454365,
+      "angular_path_error": 0.10039443299456177,
+      "radial_path_error": 0.11565212805045089,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 50,
+      "method": "primary",
+      "RMSE_ARA": 0.8555369163334015,
+      "MAE_ARA": 0.6184390824033699,
+      "waveform_r": -0.031211146351744365,
+      "direction_agreement": 0.49206349206349204,
+      "quadrant_agreement": 0.4838709677419355,
+      "turn_error": 0.30158730158730157,
+      "endpoint_error": 0.5741224553532475,
+      "angular_path_error": 0.08664918269515584,
+      "radial_path_error": 0.11632423627415997,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 100,
+      "method": "primary",
+      "RMSE_ARA": 0.7967118283801629,
+      "MAE_ARA": 0.5822736338718588,
+      "waveform_r": -0.07467625611008938,
+      "direction_agreement": 0.49206349206349204,
+      "quadrant_agreement": 0.5,
+      "turn_error": 0.2857142857142857,
+      "endpoint_error": 0.4833234878161741,
+      "angular_path_error": 0.07376884293490467,
+      "radial_path_error": 0.11737716060817409,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 150,
+      "method": "primary",
+      "RMSE_ARA": 0.13883493323683133,
+      "MAE_ARA": 0.09004856763490549,
+      "waveform_r": 0.9700990976335107,
+      "direction_agreement": 0.9365079365079365,
+      "quadrant_agreement": 0.9354838709677419,
+      "turn_error": 0.031746031746031744,
+      "endpoint_error": 0.026913576027331354,
+      "angular_path_error": 0.016173614797380782,
+      "radial_path_error": 0.036474968116273654,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 170,
+      "method": "primary",
+      "RMSE_ARA": 0.06894320915800606,
+      "MAE_ARA": 0.04374320724860408,
+      "waveform_r": 0.992854229807246,
+      "direction_agreement": 0.9682539682539683,
+      "quadrant_agreement": 0.967741935483871,
+      "turn_error": 0.015873015873015872,
+      "endpoint_error": 0.02116782854845213,
+      "angular_path_error": 0.006822476521496956,
+      "radial_path_error": 0.01736130121857132,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 190,
+      "method": "primary",
+      "RMSE_ARA": 0.13693211907143582,
+      "MAE_ARA": 0.08243276652476525,
+      "waveform_r": 0.9710798214809029,
+      "direction_agreement": 0.9523809523809523,
+      "quadrant_agreement": 0.9516129032258065,
+      "turn_error": 0.023809523809523808,
+      "endpoint_error": 0.018169705949724863,
+      "angular_path_error": 0.012009281729943847,
+      "radial_path_error": 0.03176146728874559,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 240,
+      "method": "primary",
+      "RMSE_ARA": 1.0368105374466636,
+      "MAE_ARA": 0.8118246622392864,
+      "waveform_r": -0.06440648768118115,
+      "direction_agreement": 0.47619047619047616,
+      "quadrant_agreement": 0.46774193548387094,
+      "turn_error": 1.0,
+      "endpoint_error": 0.637530139659163,
+      "angular_path_error": 0.11486911081123116,
+      "radial_path_error": 0.11458578991788615,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 290,
+      "method": "primary",
+      "RMSE_ARA": 0.9776382564588891,
+      "MAE_ARA": 0.7347316243454243,
+      "waveform_r": -0.08905058835598575,
+      "direction_agreement": 0.47619047619047616,
+      "quadrant_agreement": 0.4838709677419355,
+      "turn_error": 1.0,
+      "endpoint_error": 0.9316742809897116,
+      "angular_path_error": 0.10340760998890516,
+      "radial_path_error": 0.1210219513169796,
+      "fallback_steps": 0.0
+    },
+    {
+      "delta_r": 340,
+      "method": "primary",
+      "RMSE_ARA": 0.9845753104376787,
+      "MAE_ARA": 0.7625887486625685,
+      "waveform_r": -0.09582999629974162,
+      "direction_agreement": 0.47619047619047616,
+      "quadrant_agreement": 0.4838709677419355,
+      "turn_error": 1.0,
+      "endpoint_error": 1.2047609229032306,
+      "angular_path_error": 0.10793627479840612,
+      "radial_path_error": 0.1159278307262102,
+      "fallback_steps": 0.0
+    }
+  ],
+  "parent_record_metrics": [
+    {
+      "delta_r": 0,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.38092015535251644,
+      "recovered_parent_child": 0.38092015535251644,
+      "parent_RMSE_ARA": 0.8383694867734177,
+      "parent_waveform_r": 0.06309816931694419
+    },
+    {
+      "delta_r": 50,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.38126938142347533,
+      "recovered_parent_child": 0.38126938142347533,
+      "parent_RMSE_ARA": 0.7235735576559686,
+      "parent_waveform_r": 0.3720876131061685
+    },
+    {
+      "delta_r": 100,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.39069025146442227,
+      "recovered_parent_child": 0.39069025146442227,
+      "parent_RMSE_ARA": 0.7799745403481728,
+      "parent_waveform_r": 0.33957594087190385
+    },
+    {
+      "delta_r": 150,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.1908781549290687,
+      "recovered_parent_child": 0.1908781549290687,
+      "parent_RMSE_ARA": 0.37664030190164843,
+      "parent_waveform_r": 0.584910169533472
+    },
+    {
+      "delta_r": 170,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.21795682207718353,
+      "recovered_parent_child": 0.21795682207718353,
+      "parent_RMSE_ARA": 0.3861704238570908,
+      "parent_waveform_r": 0.49536051560717514
+    },
+    {
+      "delta_r": 190,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.45942762793969827,
+      "recovered_parent_child": 0.45942762793969827,
+      "parent_RMSE_ARA": 0.0790681118000214,
+      "parent_waveform_r": 0.9798749896278122
+    },
+    {
+      "delta_r": 240,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.41164130549264044,
+      "recovered_parent_child": 0.41164130549264044,
+      "parent_RMSE_ARA": 1.0565778790418918,
+      "parent_waveform_r": -0.5693168613255513
+    },
+    {
+      "delta_r": 290,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.4096738533445012,
+      "recovered_parent_child": 0.4096738533445012,
+      "parent_RMSE_ARA": 0.951840308144895,
+      "parent_waveform_r": -0.935933700014802
+    },
+    {
+      "delta_r": 340,
+      "fraction_index": 0,
+      "fraction": 0.0,
+      "actual_parent_child": 0.41300574666715506,
+      "recovered_parent_child": 0.41300574666715506,
+      "parent_RMSE_ARA": 1.069329653439449,
+      "parent_waveform_r": -0.9301822094037625
+    }
+  ]
+}

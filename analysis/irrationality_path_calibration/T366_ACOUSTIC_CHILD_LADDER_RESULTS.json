@@ -1,0 +1,133 @@
+{
+  "test": "T366 acoustic child ladder",
+  "status": "NOT SUPPORTED UNDER THE FROZEN T366 GATES",
+  "protocol_sha256": "AF9AEEDC050B968A35C60E4A3D354F7798F37A75C8D9CB9BFE795A1C6D2E4C04",
+  "rng_seed": 36620260812,
+  "records": [
+    {
+      "record": "Wgn23",
+      "evidence_role": "primary holdout",
+      "stress_samples": 25399,
+      "ae_events_total": 16383,
+      "ae_events_synchronized": 11621,
+      "failure_time_s": 5334.3994,
+      "acoustic_associated": true,
+      "acoustic_lead_s": 0.5976,
+      "acoustic_false_bouts": 31,
+      "acoustic_total_bouts": 32,
+      "bulk_associated": false,
+      "bulk_lead_s": null,
+      "bulk_false_bouts": 49,
+      "bulk_total_bouts": 49,
+      "real_error_s": 0.0,
+      "pseudo_median_error_s": 0.0,
+      "pseudo_zero_share": 0.543
+    },
+    {
+      "record": "Wgn20",
+      "evidence_role": "disclosed development",
+      "stress_samples": 25140,
+      "ae_events_total": 13388,
+      "ae_events_synchronized": 6070,
+      "failure_time_s": 4993.54,
+      "acoustic_associated": true,
+      "acoustic_lead_s": 0.0996,
+      "acoustic_false_bouts": 45,
+      "acoustic_total_bouts": 46,
+      "bulk_associated": true,
+      "bulk_lead_s": 7.1718,
+      "bulk_false_bouts": 63,
+      "bulk_total_bouts": 65,
+      "real_error_s": 0.0,
+      "pseudo_median_error_s": 0.0,
+      "pseudo_zero_share": 0.678
+    }
+  ],
+  "gates": [
+    {
+      "gate": 1,
+      "name": "source and causality QA",
+      "pass": true,
+      "detail": "Four source hashes recorded; all features trailing; calibration ends before failure."
+    },
+    {
+      "gate": 2,
+      "name": "holdout acoustic forecast",
+      "pass": true,
+      "detail": "Wgn23 10-second frozen acoustic horizon."
+    },
+    {
+      "gate": 3,
+      "name": "false-alarm boundary",
+      "pass": false,
+      "detail": "Earlier Wgn23 acoustic bouts: 31."
+    },
+    {
+      "gate": 4,
+      "name": "child order",
+      "pass": true,
+      "detail": "Grandchild half -> child half -> current full/failure."
+    },
+    {
+      "gate": 5,
+      "name": "bulk comparison",
+      "pass": true,
+      "detail": "Acoustic warning must precede bulk stress warning or bulk must be silent."
+    },
+    {
+      "gate": 6,
+      "name": "marker specificity",
+      "pass": false,
+      "detail": "real 0.000s vs pseudo median 0.000s."
+    },
+    {
+      "gate": 7,
+      "name": "control specificity",
+      "pass": true,
+      "detail": "No broken-chronology control may match both lead and false-alarm burden."
+    },
+    {
+      "gate": 8,
+      "name": "development repeat",
+      "pass": true,
+      "detail": "Wgn20 scored unchanged and cannot rescue Wgn23."
+    },
+    {
+      "gate": 9,
+      "name": "irrationality address",
+      "pass": true,
+      "detail": "All finite Wgn23 rung addresses reported at the acoustic alarm."
+    }
+  ],
+  "source_qa": [
+    {
+      "record": "Wgn20",
+      "kind": "stress",
+      "file": "Fig5_stress_Wgn20.txt",
+      "sha256": "6FA451709B2928DE966F266DCE223591C72BEA5DEB5D5A8499286D707506EED6",
+      "rows": 25140
+    },
+    {
+      "record": "Wgn20",
+      "kind": "AE catalog",
+      "file": "AE_Wgn20_Pc_150_Axial.mat",
+      "sha256": "963CFDB6DB4B5A21E468AE9173CE77F868FC752C96B70F25F35D8E957A627CC6",
+      "rows": 13388
+    },
+    {
+      "record": "Wgn23",
+      "kind": "stress",
+      "file": "Fig5_stress_Wgn23.txt",
+      "sha256": "6888B7BD255FB6E9816F16F68F01C523CAF407B4999A45A7FFD5A44A88ECD098",
+      "rows": 25399
+    },
+    {
+      "record": "Wgn23",
+      "kind": "AE catalog",
+      "file": "AE_Wgn23_Pc_150_Axial.mat",
+      "sha256": "227A47D7DB3471962D383BDE02731B774ECB2FADC94F619E84BBEC7C82D89064",
+      "rows": 16383
+    }
+  ],
+  "evidence_boundary": "Event-level AE catalogue plus 10 Hz stress; not continuous raw-waveform recovery and not an independent earthquake predictor."
+}

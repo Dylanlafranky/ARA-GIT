@@ -11,7 +11,29 @@ before the run and ten after, the template is wrong, not you.
 - THE PROTOCOL BINDS the moment a claim wants a STATUS. No number may appear in
   CLAIMS_STATUS, a README headline, or a public post unless it went through the loop.
 
-## The loop (five steps)
+## The loop
+
+STEP -2 - SIX-QUESTION TEST CARD (before freezing, coding or running).
+The AI must state the proposed test under six short headings, using no more
+than two precise sentences for each:
+
+    WHO: the identities, generations/rungs and dataset being tested
+    WHAT: the exact ARA relation, observable and predicted shape/direction
+    WHEN: the ordering, time slices, windows or handover being compared
+    WHERE: the declared coordinate, rung, frame/cut and pole orientation
+    WHY: the hypothesis being distinguished and the result that would falsify it
+    HOW: the transformation, controls, gates and outputs to be produced
+
+Dylan must confirm or correct this card before a new or materially changed
+test proceeds. A mathematically valid run of an unconfirmed card is a proxy
+test, not an ARA test. Keep the card concise: it exists to save correction,
+compute and cognitive energy, not to add paperwork. Mechanical continuation
+of an already confirmed and frozen card does not require repeated approval
+unless the object, method, rung, coordinate, data or interpretation changes.
+
+The card's primary fidelity question is: **are we viewing the correct geometry
+from the correct direction and rung?** State this plainly even when the
+mathematical implementation seems obvious.
 
 STEP -1 - TRANSLATION FIDELITY (when a Dylan musing or ontology is being
 operationalised). Apply `ARA_TRANSLATION_FIDELITY_PROTOCOL.md`. Freeze the
@@ -22,8 +44,8 @@ negative ARA evidence.
 
 **Compaction override (30 Jul 2026):** if context compacts between proposal
 and execution, the earlier sign-off no longer authorises a run. Retrieve the
-durable record, restate identity, axis/relation, ordered poles, observable and
-forbidden neighboring proxy, then ask Dylan again for `EXACT ENOUGH TO TEST`.
+durable record, restate the complete six-question test card including the
+forbidden neighbouring proxy, then ask Dylan again for `EXACT ENOUGH TO TEST`.
 Do not freeze or run until he reconfirms. A post-compaction test run without
 that reconfirmation is automatically a construct-invalid proxy test.
 

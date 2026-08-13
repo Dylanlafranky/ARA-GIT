@@ -1,0 +1,170 @@
+{
+  "test": "T370 polarized-muon parent-phase handover",
+  "status": "SUPPORTED_AS_CROSSWALK",
+  "source": {
+    "url": "https://data.isis.stfc.ac.uk/doi-redirect/ISIS/investigation/82360483",
+    "doi": "10.5286/ISIS.E.RB1620201"
+  },
+  "protocol": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T370_POLARIZED_MUON_PHASE_HANDOVER_PROTOCOL_2026-08-12.md",
+  "parameters": {
+    "t_min_us": 0.25,
+    "t_split_us": 3.0,
+    "t_max_us": 6.0,
+    "rebin_raw_channels": 4
+  },
+  "decay_closure_crosswalk": {
+    "eligible_events": 1122159,
+    "michel_endpoint_mev_c": 52.83042343020834,
+    "visible_ara_median": 0.6596210981463283,
+    "hidden_packet_ara_median": 1.3403789018536716,
+    "closure_max_abs_error": 0.0,
+    "hidden_packet_mass_median_mev": 61.64532788589814,
+    "boundary": "Exact closure follows from stopped-parent energy conservation; it is a crosswalk, not an empirical ARA validation."
+  },
+  "runs": [
+    {
+      "run": "EMU00066666",
+      "title": "LCB1-88 T=135.0 F=1600",
+      "start_time": "2016-10-22T20:15:34",
+      "sha256": "d08917022e9e2ed3a52603c4941e1464fabe29f3daf5187e3d4f0f12105e93fa",
+      "bytes": 968897,
+      "raw_counts": 30263690,
+      "eligible_counts": 25258869,
+      "development_counts": 19447859,
+      "holdout_counts": 5811010,
+      "frequency_mhz": 0.2,
+      "decay_per_us": 0.9500000000000001,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03051619474659198,
+        "no_phase": 0.0320191179533132,
+        "persistence": 0.034782384150873195,
+        "wrong_orientation": 0.030499802480668713
+      },
+      "holdout_correlation": 0.3081762756301114,
+      "improvement_vs_no_phase": 0.04693830757338846,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": false,
+        "positive_correlation": true
+      },
+      "pass": false,
+      "median_detector_improvement": 0.005803377967428691,
+      "median_detector_improvement_bootstrap_95": [
+        0.001949886916000787,
+        0.024529022659524346
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95
+    },
+    {
+      "run": "EMU00066667",
+      "title": "LCB1-88 T=135.0 F=2200",
+      "start_time": "2016-10-22T20:33:12",
+      "sha256": "4d5d03e9617fe4f58805559eb9ad5e91970db4f92ccde275d77262bc965a49d4",
+      "bytes": 968277,
+      "raw_counts": 30114839,
+      "eligible_counts": 25134822,
+      "development_counts": 19353156,
+      "holdout_counts": 5781666,
+      "frequency_mhz": 0.2,
+      "decay_per_us": 0.35000000000000003,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03148608679344713,
+        "no_phase": 0.03208756655986342,
+        "persistence": 0.036301469187780065,
+        "wrong_orientation": 0.03153244563490722
+      },
+      "holdout_correlation": 0.1937307349457432,
+      "improvement_vs_no_phase": 0.01874494799392623,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.00601725386069224,
+      "median_detector_improvement_bootstrap_95": [
+        -0.0026519045045475666,
+        0.015830847282175986
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95
+    },
+    {
+      "run": "EMU00066668",
+      "title": "LCB1-88 T=135.0 F=3000",
+      "start_time": "2016-10-22T20:50:49",
+      "sha256": "ac85285b89b2c501be159c2f9caff8aa5a6a826b20d31bb5d786832f0017ad56",
+      "bytes": 977480,
+      "raw_counts": 40292683,
+      "eligible_counts": 33626990,
+      "development_counts": 25886275,
+      "holdout_counts": 7740715,
+      "frequency_mhz": 0.2,
+      "decay_per_us": 1.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.025782727918221265,
+        "no_phase": 0.028000459196584285,
+        "persistence": 0.030169375013803307,
+        "wrong_orientation": 0.02584635525936975
+      },
+      "holdout_correlation": 0.4108330940030271,
+      "improvement_vs_no_phase": 0.07920338958703776,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.027837638274750443,
+      "median_detector_improvement_bootstrap_95": [
+        0.01615040421263475,
+        0.04733537045480507
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95
+    },
+    {
+      "run": "EMU00066669",
+      "title": "LCB1-88 T=135.0 F=230",
+      "start_time": "2016-10-22T21:15:11",
+      "sha256": "da04370005fe32b97322a7cf38810c89173eb5bd820cedb345f3089c6b8c20f4",
+      "bytes": 965843,
+      "raw_counts": 25084143,
+      "eligible_counts": 20940299,
+      "development_counts": 16126520,
+      "holdout_counts": 4813779,
+      "frequency_mhz": 3.1199999999999988,
+      "decay_per_us": 0.0,
+      "holdout_rmse": {
+        "ara_parent_phase": 0.03500797379172843,
+        "no_phase": 0.037613352911805634,
+        "persistence": 0.04214813907596767,
+        "wrong_orientation": 0.04048072841621412
+      },
+      "holdout_correlation": 0.3678442057892575,
+      "improvement_vs_no_phase": 0.06926739889916744,
+      "gates": {
+        "beats_no_phase": true,
+        "beats_persistence": true,
+        "beats_wrong_orientation": true,
+        "positive_correlation": true
+      },
+      "pass": true,
+      "median_detector_improvement": 0.07581519997350572,
+      "median_detector_improvement_bootstrap_95": [
+        0.049594880159508636,
+        0.0898008852901574
+      ],
+      "circular_shift_better_count": 0,
+      "circular_shift_count": 95
+    }
+  ],
+  "cross_acquisition_pass_count": 3,
+  "cross_acquisition_required": 3,
+  "overall_pass": true,
+  "claim_boundary": "The empirical parent-phase model is the established polarized-muon phase relation written as ARA geometry. Passing recovers the same relation; it does not establish a distinct or hidden new field."
+}

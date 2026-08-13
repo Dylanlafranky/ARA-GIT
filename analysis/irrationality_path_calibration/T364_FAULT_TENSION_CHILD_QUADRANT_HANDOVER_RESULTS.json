@@ -1,0 +1,68 @@
+{
+  "test": "T364 fault-tension child-quadrant handover",
+  "run_date": "2026-08-12",
+  "evidence_class": "registered post-hoc mechanism analysis",
+  "all_descriptive_checks_passed": true,
+  "dense": {
+    "slip_time_s": 7774.6783700000005,
+    "child_cross_time_s": 7774.68037,
+    "child_cross_lag_s": 0.001999999999497959,
+    "child_half_ridge_onset_lead_s": 0.00800000000072032,
+    "child_x_S_at_cross": 1.7378343211822411,
+    "child_x_F_at_cross": 1.7602701895797708,
+    "child_u_at_cross": 1.4756686423644823,
+    "child_v_at_cross": 1.5205403791595415,
+    "child_handover_at_cross": 1.0149761703782052,
+    "approach_efficiency": 1.0,
+    "pseudo_error_percentile": 0.001,
+    "pseudo_error_median_s": 6.815804804804884,
+    "shifted_marker_errors_s": {
+      "shift_0.25": 5.77100000000064,
+      "shift_0.50": 3.86200000000008,
+      "shift_0.75": 11.138999999999214
+    },
+    "history_pre_time_s": 7774.67237,
+    "history_pre_x_R": 0.6980697050348444,
+    "history_open_time_s": 7774.70437,
+    "history_open_lag_s": 0.02599999999983993,
+    "history_open_x_R": 1.1992607418715415,
+    "history_reclose_time_s": 7774.960370000001,
+    "history_reclose_lag_s": 0.2820000000001528,
+    "history_reclose_x_R": 0.3875961086805828,
+    "history_coherence_before": 0.9601224560428298,
+    "history_coherence_open": 0.8983293043061301
+  },
+  "replication": {
+    "events": 15,
+    "cross_within_16_rows": 15,
+    "cross_lag_median_rows": 4.0,
+    "cross_lag_range_rows": [
+      -9.0,
+      10.0
+    ],
+    "history_open_side_at_event": 15,
+    "history_reclose_after_event_within_160_rows": 15
+  },
+  "checks": [
+    {
+      "check": "dense child crossing within 10 ms",
+      "passed": true,
+      "observed": "+0.002000 s"
+    },
+    {
+      "check": "dense specificity at or below pseudo 1st percentile",
+      "passed": true,
+      "observed": "pseudo share <= real: 0.0010"
+    },
+    {
+      "check": "replication child crossing within \u00b116 rows",
+      "passed": true,
+      "observed": "15/15"
+    },
+    {
+      "check": "stored-to-release crossing direction",
+      "passed": true,
+      "observed": "15/15"
+    }
+  ]
+}

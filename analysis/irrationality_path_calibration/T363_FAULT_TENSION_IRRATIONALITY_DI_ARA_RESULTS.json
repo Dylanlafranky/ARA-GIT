@@ -1,0 +1,76 @@
+{
+  "test": "T363 fault-tension Irrationality Di-ARA",
+  "run_date": "2026-08-12",
+  "verdict": "NOT SUPPORTED ON THIS PHYSICAL ARCHIVE",
+  "all_gates_passed": false,
+  "main_slip_time_s": 7774.6783700000005,
+  "tension_release_time_s": 7774.75637,
+  "release_slip_error_s": 0.07799999999951979,
+  "parent_handover_time_s": 7774.960370000001,
+  "parent_handover_error_s": 0.2820000000001528,
+  "raw_axis_correlation": 0.14983355826479547,
+  "physical_quadrant_occupancy": {
+    "Ab": 2234,
+    "aB": 12059,
+    "bA": 7116,
+    "Ba": 866
+  },
+  "parent_quadrant_occupancy": {
+    "aB": 1280,
+    "Ab": 86,
+    "bA": 11
+  },
+  "pre_storage": 2.0,
+  "post_storage": 0.8244128923048283,
+  "near_slip_max_x_F": 1.9791141257496025,
+  "reconnect_time_after_slip_s": null,
+  "release_parent_step_percentile": 0.6964415395787945,
+  "replication": {
+    "child": {
+      "all": 0,
+      "dry": 0,
+      "fluid": 0
+    },
+    "parent": {
+      "all": 6,
+      "dry": 5,
+      "fluid": 1
+    }
+  },
+  "gates": [
+    {
+      "gate": "G1 source and identity QA",
+      "passed": true,
+      "observed": "source=True; |r|=0.1498; release/slip error=0.0780 s"
+    },
+    {
+      "gate": "G2 dense child tension handover",
+      "passed": false,
+      "observed": "quadrants=4/4; storage drop=1.176; max x_F=1.979; reconnect=None"
+    },
+    {
+      "gate": "G3 dense Irrationality parent",
+      "passed": false,
+      "observed": "quadrants=3/4; handover error=0.2820 s; release-step percentile=0.6964"
+    },
+    {
+      "gate": "G4 chronology and marker specificity",
+      "passed": true,
+      "observed": "real=0.2820 s; shuffle median=20.1500 s; reversal=13.7660; storage_only=28.5500; signless_transfer=28.5500; wrong_marker_0.25=33.6980; wrong_marker_0.50=22.5600; wrong_marker_0.75=11.4220"
+    },
+    {
+      "gate": "G5 repeated child tension handover",
+      "passed": false,
+      "observed": "all=0/15; dry=0/10; fluid=0/5"
+    },
+    {
+      "gate": "G6 repeated Irrationality parent",
+      "passed": false,
+      "observed": "all=6/15; dry=5/10; fluid=1/5"
+    }
+  ],
+  "frozen_hashes": {
+    "T363_FAULT_TENSION_IRRATIONALITY_DI_ARA_CLAIM_PACKET_v1.md": "6CA197872CBF3324CDCAE13E41BAB21C3EE75BD6A2B7D8DB1301275C3548806B",
+    "T363_FAULT_TENSION_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md": "C746FAD21356EAE0A8B95DECABCE5F218DD667160BBC11B88AD13939E0D5BC80"
+  }
+}

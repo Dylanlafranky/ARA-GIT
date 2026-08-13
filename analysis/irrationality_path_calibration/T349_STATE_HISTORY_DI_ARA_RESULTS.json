@@ -1,0 +1,62 @@
+{
+  "test": "T349 state/history Di-ARA interface calibration",
+  "evidence_boundary": "synthetic known-referee instrument/interface calibration only",
+  "n_base_phase_paths": 1008,
+  "n_core_trajectories": 3024,
+  "n_holdout_core_trajectories": 1656,
+  "radial_accuracy_holdout": 1.0,
+  "history_sector_accuracy_holdout": 0.9565217391304348,
+  "primary_gates_passed": 7,
+  "primary_gates_total": 7,
+  "interface_verdict": "SUPPORTED [synthetic state/history interface calibration only]",
+  "constant_verdict": "NOT SUPPORTED [no frozen universal fixed amplitude passed]",
+  "gates": [
+    {
+      "gate": "G1 radial recovery",
+      "passed": true,
+      "value": 1.0,
+      "detail": "{\"medians\": {\"contraction\": 0.14710835386963794, \"expansion\": 1.8528916461303622, \"neutral\": 1.0}, \"min_family_accuracy\": 1.0}"
+    },
+    {
+      "gate": "G2 history recovery across radius",
+      "passed": true,
+      "value": 0.9565217391304348,
+      "detail": "{\"min_radial_accuracy\": 0.9565217391304348, \"irrational_improve\": 1.0, \"family_rho\": {\"continuous stochastic\": 0.10898395243785129, \"deterministic chaos\": 0.04442526552415155, \"finite stochastic\": 0.013457712428836161, \"irrational rotation\": 1.0000000000000002, \"periodic rational\": 1.0000000000000002}}"
+    },
+    {
+      "gate": "G3 radial inversion",
+      "passed": true,
+      "value": 0.0,
+      "detail": "{\"x_c\": 0.0, \"x_p\": 0.0, \"x_r\": 0.0, \"mean_rho\": 0.0}"
+    },
+    {
+      "gate": "G4 phase reflection",
+      "passed": true,
+      "value": 0.0,
+      "detail": "{\"x_l\": 0.0, \"x_p\": 0.0, \"x_r\": 0.0, \"mean_rho\": 3.469446951953614e-18}"
+    },
+    {
+      "gate": "G5 chronology specificity",
+      "passed": true,
+      "detail": "{\"periodic rational delta_x_r\": 1.9720609704403471, \"periodic rational abs_delta_x_l\": 0.0, \"periodic rational abs_delta_x_p\": 0.0, \"irrational rotation delta_x_r\": 1.9729265623155314, \"irrational rotation abs_delta_x_l\": 0.0, \"irrational rotation abs_delta_x_p\": 0.0, \"deterministic chaos delta_x_r\": 1.9999348856971437, \"deterministic chaos abs_delta_x_l\": 0.0, \"deterministic chaos abs_delta_x_p\": 0.0, \"periodic rational rho_drop\": 0.9866223469955199, \"irrational rotation rho_drop\": 0.9864845933921256}"
+    },
+    {
+      "gate": "G6 endpoint/history distinction",
+      "passed": true,
+      "detail": "{\"max_endpoint_error\": 0.0, \"periodic rational delta_x_r\": 1.9780545763235864, \"periodic rational abs_delta_x_l\": 0.0, \"periodic rational abs_delta_x_p\": 0.0, \"irrational rotation delta_x_r\": 1.970953951907089, \"irrational rotation abs_delta_x_l\": 0.0, \"irrational rotation abs_delta_x_p\": 0.0, \"deterministic chaos delta_x_r\": 1.9999348856971437, \"deterministic chaos abs_delta_x_l\": 0.0, \"deterministic chaos abs_delta_x_p\": 0.0, \"periodic rational rho_drop\": 0.9865488999207798, \"irrational rotation rho_drop\": 0.9865096389434904}"
+    },
+    {
+      "gate": "G7 factorial independence",
+      "passed": true,
+      "detail": "{\"max_x_l_range\": 0.0, \"max_x_p_range\": 0.0, \"max_x_r_range\": 0.0}"
+    },
+    {
+      "gate": "G8 fixed constant specificity (separate)",
+      "passed": false,
+      "value": 0.2833333333333334,
+      "detail": "{\"plastic\": 0.6688004256770382, \"sqrt2\": 0.6034264097200273, \"phi\": 0.46878817494039654, \"octave\": 0.3522842731466849, \"e\": 0.2833333333333334, \"calibration_fitted\": 0.3333333333333334}"
+    }
+  ],
+  "protocol_sha256": "4F6DF8E7AA0F2726EF3952ED791D3246C6588D2EE0C70F7AEE763D10F6D8075E",
+  "claim_sha256": "3137E226C627F6C6657327D95CC00B4215389D3EC1D2EDDE5B68B0279ADF8CD8"
+}

@@ -171,15 +171,22 @@ a physical identity uses that composition, and how `c` and the weights are
 measured, requires a frozen child-to-parent test. Di-ARA does not make the
 composition true merely by naming four sectors.
 
-## 2. The quadrant cycle and flips
+## 2. Quadrant geometry and admissible flips
 
-One oriented walk around the declared chart is
+One possible oriented walk around the declared chart is
 
 \[
 \boxed{
 Ab\rightarrow aB\rightarrow bA\rightarrow Ba\rightarrow Ab.
 }
 \]
+
+This is an example of a complete oriented walk through the four addresses, not
+a universal temporal sequence. Di-ARA fixes the two axes and their four mixed
+regions. It does not require every identity to visit those regions in this
+order, at one cadence, speed, proportion or sampling interval. The only broad
+framework-level continuity is Phase-A/Phase-B handover; its observable path is
+identity- and coupling-specific.
 
 The exact chart reflections are
 
@@ -207,9 +214,11 @@ On the canonical labels:
 - `F_y`: `Ba ↔ bA` and `Ab ↔ aB`;
 - `F_xy`: `Ba ↔ aB` and `Ab ↔ bA`.
 
-This distinguishes a one-axis handover from a full diagonal flip. A domain
-test must determine which transformation occurred; it may not select a
-different flip for each event after seeing the answer.
+This distinguishes a one-axis handover from a full diagonal flip. When a test
+claims a particular transformation, it must freeze that identity-specific
+rule before scoring; it may not select a different flip for each event after
+seeing the answer. A generic Di-ARA test need not claim any universal quadrant
+order at all.
 
 ## 3. Why Di-ARA is the minimal cross-rung store
 
@@ -389,6 +398,56 @@ remains one previously opened curved-flume archive. The reciprocal transform
 and reverse reflection are algebraic; the order, lineage and thalweg controls
 are the empirical load-bearing result. No Phi endpoint was tested.
 
+### T342 scope correction
+
+T342 populated all four mixed regions in all seven holdouts, but only one of
+six eligible domains passed an auxiliary rule requiring both adjacent
+handovers and shuffled-order information. After visual inspection, the
+originator clarified that this universal-gait requirement had been added
+during operationalisation and was not a Di-ARA axiom. Its frozen `1/6` verdict
+remains valid for that auxiliary rule. The intended question—whether an intact
+pair forms a stronger information-bearing parent than either axis alone or a
+broken pair—was not tested by T342.
+
+This is an important anti-flattening precedent: common geometry does not mean
+identical movement through the geometry.
+
+### T343 direct parent-coupling result
+
+T343 then removed the common-gait requirement and compared each domain's own
+calibration-only `4×4` intact parent relation against both one-axis children
+and 1,000 locally broken pairings. The already-formed radial and angular ARA
+axes were the two children; non-overlapping frozen T342 blocks were the
+inference units. Exact irrationality landmarks were not scored.
+
+Only qutrit passed all gates among six eligible domains. River had positive
+parent advantages but was too small and missed the broken-pair significance
+gate. Bubbles and cold room beat both children without reliably beating
+broken pairings; hydraulic beat one child; pendulum and acoustics favoured
+simpler models. The frozen verdict was **NOT SUPPORTED BY THIS CONSTRUCTION
+(`1/6`)**.
+
+This narrows the empirical claim. The exact four-address coordinate remains
+the minimal joint label for two binary distinctions, but a four-address label
+does not automatically carry transferable next-state information beyond its
+children. The stronger parent operator must be established per identity or
+derived from richer amplitude, activity, lineage or cross-rung information.
+The qutrit pass is an identity-specific positive, not a universal Di-ARA law.
+
+Primary record:
+[`analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_REPORT_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T343_INTACT_VS_BROKEN_DI_ARA_PARENT_COUPLING_REPORT_2026-08-05.md).
+
+A post-result data-quality audit then found that the circular broken controls
+wrapped later axis values into earlier predictor times. The frozen `1/6`
+verdict remains unchanged, but its broken-pair gate is not a leakage-free
+causal test. Under a past-only/no-wrap matched sensitivity, bubbles, cold room
+and qutrit—the same three domains that beat both child axes—showed positive
+intact-pair advantages. This `3/6` pair-specific pattern is a new lead only;
+it was found post-result and requires a freshly frozen replication.
+
+Control-audit record:
+[`analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md`](analysis/irrationality_te_ara_multimedium/T343_BROKEN_CONTROL_TEMPORAL_LEAKAGE_AUDIT_REPORT_2026-08-05.md).
+
 ### Maxwell
 
 Maxwell's equations contain coupled field directions, curls, flux and energy
@@ -447,13 +506,293 @@ A physical Di-ARA claim must predeclare:
 4. why the cuts are perpendicular or independently informative;
 5. the chart-to-label map for `Ab`, `aB`, `Ba`, `bA`;
 6. boundary handling at `x=1` or `y=1`;
-7. the proposed adjacent or diagonal flip;
+7. any identity-specific transition or flip being claimed (or an explicit
+   statement that no fixed order is assumed);
 8. intact-lineage, broken-lineage, order and projection controls;
 9. evaluation and untouched holdout rules.
 
 Four occupied quadrants alone establish only the coordinate classification.
 A storage claim additionally requires reconstruction or held-out prediction;
 a physical flip claim requires the frozen transformation to beat alternatives.
+
+## 10. State cuts versus temporal handover cuts
+
+Di-ARA can be used in two related ways that must not be flattened into one.
+
+1. A **state cut** locates an identity and its relatively fixed landmarks in
+   the two perpendicular ARA coordinates.
+2. A **temporal handover cut** follows how the same identity moves between
+   movement-heavy and connection-heavy expressions through time.
+
+For the temporal cut currently under test, the ARA translation is
+
+\[
+A_n \rightarrow B_{\mathrm{stored}} \rightarrow
+B_{\mathrm{released}} \rightarrow A_{n+1}.
+\]
+
+`A` denotes the movement/traversal view. `B` denotes the ordered connection
+pattern and its children. The two are coupled simultaneously; the arrows mark
+which contribution leads the declared time slice, not the creation of one
+phase from nothing.
+
+At a fixed rung, line, circle and crooked motion have different meanings:
+
+- **circle-like:** recurrent child geometry; when carried by a larger parent it
+  normally appears as an open spiral, helix, cycloid, U-turn or displaced arc;
+- **straight:** open directional traversal, growth, decay or transfer;
+- **crooked with inconsistent turning:** incoherent/random-like motion.
+
+Across rungs, the circulation is recursive rather than additive:
+
+\[
+A_k \rightarrow B_{k-1}^{\rm children}
+\rightarrow A_{k-1}^{\rm children}
+\rightarrow B_k \rightarrow A_k.
+\]
+
+The adult Phase A feeds its Phase-B children; the children pass through their
+own Phase-A expression; their coupled return feeds the adult Phase B and then
+the next adult Phase A. A perfectly closed circle is a resonance limit at the
+declared rung, not the default prediction for an active information-bearing
+system. Ordered systems may show a clean open spiral or helix; chaotic systems
+may look irregular because additional waves compete for dominance. The
+identity boundary and rung must therefore be declared before assigning any of
+these labels.
+
+T345 recovered the line/circle/crooked geometry and greater ordered-relation
+concentration in circle-like than crooked paths. It falsified its own delayed
+`circle -> later connection accumulation` rule: the successor lost connection
+concentration in both laboratory and numerical representations. A new test
+must instead ask whether connection is already stored during the circular
+state and whether the amount released is coupled to the next Phase-A opening.
+
+The proposal that this temporal organisation is an ever-present coherent
+carrier/source wave is not yet an empirical Di-ARA result. It is a cross-domain
+hypothesis to be tested separately; analogy to light or gravity does not
+identify it with either.
+
+### T346 result boundary
+
+T346 tested the preceding temporal translation with movement-only anchors.
+The positive concentration-build/release-to-movement mechanism did not pass.
+At the eligible numerical primary rung, the absolute connection peak was
+approximately zero and the magnitude correlations were significantly
+negative. Coherent recurrence did, however, have a substantially more positive
+connection-peak profile than crooked curvature in all three conditions.
+
+The registered sensitivities exposed a strong rung dependence, but only after
+the primary outcome was known: numerical recurrence moved from a connection
+trough at `W=8`, through neutral at `W=15`, to a peak at `W=30`; laboratory
+recurrence peaked at `W=8`. This motivates movement-only adaptive rung
+selection in a new freeze. It does not authorize fitting the rung to maximise
+`I_conn` on these opened data.
+
+It also motivates a stricter cross-rung test than fixed-window rung selection
+alone. A new test should first read the direction one rung above the target,
+where the child handovers are coarse-grained into a smoother path. It should
+then descend to the target rung and test whether the same direction is
+recovered together with the predicted asymmetric gaps or jerks at handover.
+The returning children must remain in the ledger, and intact child-to-adult
+ordering must beat reversed, shuffled and wrong-lineage controls.
+
+Support would require the scale-up direction and the target-rung reconstruction
+to agree beyond controls. The finer path need not be smooth: its discontinuity
+is itself a candidate measure of handover asymmetry.
+
+`I_conn` must therefore remain a concentration proxy. It cannot be used as a
+linear amount of Phase B or energy without an independently validated
+translation.
+
+## 11. Synthetic state/history interface calibration
+
+T348 and T349 establish a useful instrument-level distinction between two
+typed Di-ARA applications:
+
+\[
+D_{\rm state}=(x_L,x_C)
+\]
+
+for contraction/expansion × reverse/forward orientation, and
+
+\[
+D_{\rm history}=\bigl(x_P,x_R,C(H)\bigr)
+\]
+
+for reused/open addresses × determinate/stochastic residual with retained
+closure history.
+
+T349 independently crossed five phase-history referees with contraction,
+neutral and expansion. All seven frozen interface gates passed on synthetic
+holdouts. Radial inversion moved only `x_L`; phase reflection moved only
+`x_C`; chronology destruction moved `x_R` and closure history without moving
+radial state or address openness. The same effect survived when the initial
+state, final state and visited-value multiset were preserved.
+
+This is a calibrated example of why a scalar endpoint cannot replace retained
+relation. It supports using state and path/history as distinct ARA cuts.
+
+T350 then performed the causal discrimination that T349 left open. Different
+early paths were forced to merge and share the entire final half of their tick
+sequence. Their present state, endpoint and recent movement were therefore the
+same, while their earlier ordered histories differed.
+
+The history reading behaved as a parent compression of the tick sequence:
+
+\[
+\boxed{
+\{D_{\rm tick}(t_1),D_{\rm tick}(t_2),\ldots,D_{\rm tick}(t_n)\}
+\longrightarrow
+D_{\rm history}(t_1{:}t_n)
+}
+\]
+
+All four frozen parent-memory gates passed. Every holdout pair retained a
+history difference after the common suffix, median final/peak retention was
+`0.872`, half-final distinction appeared by normalized time `0.25`, and the
+closure tick supplied only `0.0162` of the peak history-distance change. The
+result also remained stable across untouched sampling cadences.
+
+The stronger alternative—that history remains unresolved and appears only at
+the current closing front—failed both frozen gates. However, the current tick
+remained an exact local locator of the declared closure within the common
+linear suffix. The clean instrument-level interpretation is therefore:
+
+\[
+\boxed{
+\text{ordered ticks form the history parent}
+}
+\qquad\text{and}\qquad
+\boxed{
+\text{the current tick can locate the local handover front}.
+}
+\]
+
+These are different roles and need not conflict. T350 is synthetic; it does
+not yet establish the same causal hierarchy in a physical identity or exclude
+top-down parent constraint.
+
+No universal `e/Phi` amplitude passed the separate T349 constant gate. That
+failure does not remove the state Di-ARA geometry and cannot be used to rescue
+the constants.
+
+Primary record:
+`analysis/irrationality_path_calibration/T349_STATE_HISTORY_DI_ARA_INTERFACE_REPORT_2026-08-11.md`.
+
+T350 causal record:
+`analysis/irrationality_path_calibration/T350_TICK_PARENT_CLOSURE_FRONT_REPORT_2026-08-11.md`.
+
+### Candidate contact is not yet Connection: T351
+
+T351 tested the next rung of this interpretation. Two lower-rung strands
+approached behind a moving parent seam, but the test kept two observations
+separate:
+
+\[
+G_i(t)=\text{candidate contact geometry}
+\]
+
+and
+
+\[
+K_i(t)=\text{independent same-pair lower-rung response}.
+\]
+
+`K` was not calculated as the remainder of `G`, as `2-G`, or as any other
+forced TE-ARA closure. It was reconstructed causally from the response of the
+same child pair to independent perturbation. This allowed an exact
+memory-only mimic to share the progressive zipper's entire visible phase path
+without sharing its lower-rung Connection response.
+
+The full frozen zipper signature did not pass. Order, onset-lag, pause-gain and
+reverse-unlock thresholds missed their predeclared gates, and the late-snap
+control retained more early response than allowed. Those failures are
+preserved.
+
+The identifiability result was nevertheless exact and important:
+
+\[
+\boxed{
+\text{same candidate geometry}\;\not\Rightarrow\;\text{same Connection}
+}
+\]
+
+Geometry-only discrimination was chance (`AUROC=0.500`), whereas the
+independent Connection channel separated progressive and memory-only cases
+with `AUROC=1.000`. The progressive case had accumulated a median `0.8103` of
+its final response by 80% parent progress, while the memory-only response was
+zero.
+
+In ARA language, proximity can mark a possible zipper tooth. A tooth is not
+counted as locked until a separately observable child-level consequence
+appears. This resolves the ambiguity Dylan identified: lower-rung connections
+may begin constructing before parent closure, but the unknown connection
+cannot be inferred from approach geometry alone.
+
+T351 record:
+`analysis/irrationality_path_calibration/T351_PROGRESSIVE_ZIPPER_TRANSFER_REPORT_2026-08-11.md`.
+
+## 12. Candidate child-half release clock: T371/T372
+
+T371 recovered two ordered physical release branches in the public COHERENT
+stopped-pion record. That provides a temporal Di-ARA cut with independently
+named flows rather than a coordinate manufactured from ARA landmarks.
+
+The proposed pure release clock is
+
+\[
+r_A(t_H)=r_B(t_H),
+\qquad
+x(t_H)=0.5,
+\]
+
+where `x(t)` is the combined cumulative release compressed onto the parent
+`0–2` diameter. The physical form permits an identity-specific displacement:
+
+\[
+x(t_H)=0.5+\Delta_H.
+\]
+
+T372 corrected a coarse-bin visual that had appeared to give `x_H=0.494`.
+Using the supplied native timing gave fitted `x_H=0.437` and source-model
+`x_H=0.390`; the fitted 95% interval `[0.179,0.692]` includes `0.5`. With the
+two branch shapes fixed, changing parent balance moved `x_H` monotonically.
+That exact gradient shows how parent asymmetry can displace an observed
+handover, but it is not independent confirmation because it is calculated
+from opened T371 shapes.
+
+T373 then attempted this coordinate on the independent COHERENT liquid-argon
+detector. Its released signal model predicted `x_H=0.565`, while the event
+cube preferred `x_H=1.239`. Originator review found that this was not a valid
+same-coordinate transfer: solid CsI and liquid argon had been compared without
+first declaring the response identity and rung. The original same-coordinate
+transfer interpretation is withdrawn. The stopped-pion/muon source relation
+and CEvNS interaction remain embedded as a child of the liquid response, so
+the corrected comparison is nested child-to-parent rather than unrelated.
+
+The corrected post-result lead treats the movement-heavy liquid parent as one
+further projection of its retained, provisionally connection-heavy child
+contribution:
+
+\[
+0.5/2=0.25,
+\qquad
+1+0.25=1.25.
+\]
+
+The observed `1.238725` is `0.902%` below `1.25`, but this landmark was
+recognized after seeing the result. It requires a new frozen same-identity
+liquid test and is not confirmation.
+
+The current status is therefore:
+
+> `0.5` is a strong candidate pure child-scale handover landmark; the observed
+> physical location is identity-specific and may be displaced by parent
+> asymmetry. Cross-medium transfer additionally requires an explicit
+> identity/rung mapping before comparison. T373 does not confirm external
+> transfer; its liquid quarter-above-ridge reading is a post-result lead.
+
+This rule contains no universal Phi claim.
 
 ## Canonical links
 
@@ -464,5 +803,7 @@ a physical flip claim requires the frozen transformation to beat alternatives.
 - `analysis/phi_calibration/T333_RECORDED_QUTRIT_RECIPROCAL_RADIAL_BREATHING_REPORT_2026-08-03.md`
 - `analysis/vertical_ara_bubbles/T334_BUBBLE_OCTAVE_RELATIVE_IRRATIONALITY_QUADRANT_REPORT_2026-08-03.md`
 - `analysis/hydraulics/T335_RIVER_IRRATIONALITY_DI_ARA_REPORT_2026-08-03.md`
+- `analysis/muon/T372_CHILD_HALF_HANDOVER_GRADIENT_REPORT_2026-08-13.md`
+- `analysis/muon/T373_ARGON_CHILD_HALF_TRANSFER_REPORT_2026-08-13.md`
 - `TheFormula/22 - Reciprocal-log Di-ARA ENSO handover predictor (03-08-26)/T336_ENSO_DI_ARA_HANDOVER_REPORT_2026-08-03.md`
 - `TheFormula/23 - Di-ARA traversal direction predictor (03-08-26)/T337_DI_ARA_ENSO_DIRECTION_REPORT_2026-08-03.md`

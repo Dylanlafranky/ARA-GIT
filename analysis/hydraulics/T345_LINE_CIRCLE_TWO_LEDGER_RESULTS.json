@@ -1,0 +1,717 @@
+{
+  "test": "T345_LINE_CIRCLE_TWO_LEDGER",
+  "representation": "lab",
+  "status": "frozen_post_T344_diagnostic",
+  "protocol_sha256": "65770ca22b4be2cdca94eecbb976f31d139b9df30847bec509b26920f52a7a23",
+  "tracks": 5365,
+  "primary_windows": 2476448,
+  "sensitivity_windows": {
+    "8": 2619530,
+    "30": 2209172
+  },
+  "optimisers_all_converged": true,
+  "gates": {
+    "A": {
+      "pass": true
+    },
+    "B": {
+      "pass": false
+    },
+    "C": {
+      "pass": false
+    },
+    "D": {
+      "pass": false
+    }
+  },
+  "components": {
+    "A1 structured minus random circularity": {
+      "name": "A1",
+      "group_col": "closure_class",
+      "a": 1,
+      "b": 2,
+      "metric": "circularity",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 8641,
+          "tracks": 845
+        },
+        "low:2": {
+          "windows": 4159,
+          "tracks": 372
+        },
+        "medium:1": {
+          "windows": 5069,
+          "tracks": 619
+        },
+        "medium:2": {
+          "windows": 1854,
+          "tracks": 200
+        },
+        "high:1": {
+          "windows": 3151,
+          "tracks": 491
+        },
+        "high:2": {
+          "windows": 3140,
+          "tracks": 275
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.19157476720445918,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": 0.1543190683416934,
+          "strata": 36
+        },
+        "high": {
+          "estimate": 0.17537515054728237,
+          "strata": 38
+        }
+      },
+      "pooled": {
+        "estimate": 0.17579419791387624,
+        "ci_low": 0.15725746291591158,
+        "ci_high": 0.18369454091105608,
+        "n_tracks": 2266,
+        "n_strata": 124,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "A2 closure minus structured directness": {
+      "name": "A2",
+      "group_col": "closure_class",
+      "a": 0,
+      "b": 1,
+      "metric": "directness",
+      "eligible": true,
+      "eligibility": {
+        "low:0": {
+          "windows": 600506,
+          "tracks": 1800
+        },
+        "low:1": {
+          "windows": 8641,
+          "tracks": 845
+        },
+        "medium:0": {
+          "windows": 618971,
+          "tracks": 1857
+        },
+        "medium:1": {
+          "windows": 5069,
+          "tracks": 619
+        },
+        "high:0": {
+          "windows": 793748,
+          "tracks": 1708
+        },
+        "high:1": {
+          "windows": 3151,
+          "tracks": 491
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.3580288873229954,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": 0.3586719326701693,
+          "strata": 50
+        },
+        "high": {
+          "estimate": 0.3817456854185342,
+          "strata": 48
+        }
+      },
+      "pooled": {
+        "estimate": 0.3659380668901884,
+        "ci_low": 0.3531596279147617,
+        "ci_high": 0.37432857417287535,
+        "n_tracks": 5365,
+        "n_strata": 148,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "B1 closure minus structured connection": {
+      "name": "B1",
+      "group_col": "closure_class",
+      "a": 0,
+      "b": 1,
+      "metric": "connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:0": {
+          "windows": 600506,
+          "tracks": 1800
+        },
+        "low:1": {
+          "windows": 8641,
+          "tracks": 845
+        },
+        "medium:0": {
+          "windows": 618971,
+          "tracks": 1857
+        },
+        "medium:1": {
+          "windows": 5069,
+          "tracks": 619
+        },
+        "high:0": {
+          "windows": 793748,
+          "tracks": 1708
+        },
+        "high:1": {
+          "windows": 3151,
+          "tracks": 491
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.09951883751580894,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.09851079846673837,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.06301469513912629,
+          "strata": 48
+        }
+      },
+      "pooled": {
+        "estimate": -0.08733910247165828,
+        "ci_low": -0.100893886456077,
+        "ci_high": -0.07347215680725128,
+        "n_tracks": 5365,
+        "n_strata": 148,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    },
+    "B2 structured minus random connection": {
+      "name": "B2",
+      "group_col": "closure_class",
+      "a": 1,
+      "b": 2,
+      "metric": "connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 8641,
+          "tracks": 845
+        },
+        "low:2": {
+          "windows": 4159,
+          "tracks": 372
+        },
+        "medium:1": {
+          "windows": 5069,
+          "tracks": 619
+        },
+        "medium:2": {
+          "windows": 1854,
+          "tracks": 200
+        },
+        "high:1": {
+          "windows": 3151,
+          "tracks": 491
+        },
+        "high:2": {
+          "windows": 3140,
+          "tracks": 275
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.13914864768633492,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": 0.15040663078493868,
+          "strata": 36
+        },
+        "high": {
+          "estimate": 0.08751463645722507,
+          "strata": 38
+        }
+      },
+      "pooled": {
+        "estimate": 0.12659376837055722,
+        "ci_low": 0.1009302402189917,
+        "ci_high": 0.15275827552479468,
+        "n_tracks": 2266,
+        "n_strata": 124,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 3,
+      "pass": true
+    },
+    "C circle-like minus crooked movement info": {
+      "name": "C",
+      "group_col": "path_class",
+      "a": 1,
+      "b": 2,
+      "metric": "information_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 6885,
+          "tracks": 812
+        },
+        "low:2": {
+          "windows": 17584,
+          "tracks": 1099
+        },
+        "medium:1": {
+          "windows": 4936,
+          "tracks": 698
+        },
+        "medium:2": {
+          "windows": 17904,
+          "tracks": 1051
+        },
+        "high:1": {
+          "windows": 2113,
+          "tracks": 454
+        },
+        "high:2": {
+          "windows": 19540,
+          "tracks": 961
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": 0.0008841354596642231,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": 0.000531653464942826,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.003688203362987296,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.0007574714794600823,
+        "ci_low": -0.0030428994579453136,
+        "ci_high": 0.0013783915409148798,
+        "n_tracks": 3486,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 2,
+      "pass": false
+    },
+    "D1 circle-like future connection change": {
+      "name": "D1",
+      "group_col": "path_class",
+      "group_value": 1,
+      "metric": "delta_connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 5502,
+          "tracks": 657
+        },
+        "medium:1": {
+          "windows": 4748,
+          "tracks": 665
+        },
+        "high:1": {
+          "windows": 2054,
+          "tracks": 442
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.17920959711850487,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.2225661618280977,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.1533897507690699,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.18505516990522416,
+        "ci_low": -0.20343879297337544,
+        "ci_high": -0.16681093394582555,
+        "n_tracks": 1764,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    },
+    "D2 circle-like minus crooked connection change": {
+      "name": "D2",
+      "group_col": "path_class",
+      "a": 1,
+      "b": 2,
+      "metric": "delta_connection_info_nats",
+      "eligible": true,
+      "eligibility": {
+        "low:1": {
+          "windows": 5502,
+          "tracks": 657
+        },
+        "low:2": {
+          "windows": 14457,
+          "tracks": 973
+        },
+        "medium:1": {
+          "windows": 4748,
+          "tracks": 665
+        },
+        "medium:2": {
+          "windows": 16296,
+          "tracks": 1001
+        },
+        "high:1": {
+          "windows": 2054,
+          "tracks": 442
+        },
+        "high:2": {
+          "windows": 18895,
+          "tracks": 956
+        }
+      },
+      "condition_effects": {
+        "low": {
+          "estimate": -0.23289743858777112,
+          "strata": 50
+        },
+        "medium": {
+          "estimate": -0.27069715226959146,
+          "strata": 50
+        },
+        "high": {
+          "estimate": -0.1734454787860683,
+          "strata": 50
+        }
+      },
+      "pooled": {
+        "estimate": -0.22568002321447697,
+        "ci_low": -0.24820072133796056,
+        "ci_high": -0.2044500487762087,
+        "n_tracks": 3285,
+        "n_strata": 150,
+        "bootstrap_valid": 2000
+      },
+      "direction_wins": 0,
+      "pass": false
+    }
+  },
+  "examples": {
+    "straight closure": {
+      "path_type": "straight closure",
+      "condition": "medium",
+      "track_id": "medium:65",
+      "frame": 815,
+      "score": 0.9999999841631061,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.06672203987778089,
+          -1.3853063965371534e-17
+        ],
+        [
+          0.13332703338363777,
+          -2.3288047817781433e-05
+        ],
+        [
+          0.2000374285328066,
+          -1.637045295605082e-05
+        ],
+        [
+          0.26665406676727604,
+          -4.6576095635562955e-05
+        ],
+        [
+          0.3333830866338347,
+          -5.823156089304474e-05
+        ],
+        [
+          0.3999927355913802,
+          -4.887680448559678e-05
+        ],
+        [
+          0.4667101200174725,
+          -8.151960871082617e-05
+        ],
+        [
+          0.5333144941882769,
+          -8.223565709025284e-05
+        ],
+        [
+          0.6000371534011103,
+          -0.00010480765652860762
+        ],
+        [
+          0.6666351669181894,
+          -0.00011644023908890724
+        ],
+        [
+          0.7333641867847481,
+          -0.00012809570434638905
+        ],
+        [
+          0.7999622003018271,
+          -0.00013972828690668866
+        ],
+        [
+          0.8666912201683858,
+          -0.0001513837521641705
+        ],
+        [
+          0.9332985657915875,
+          -0.00015838124666590317
+        ],
+        [
+          0.9999999703326747,
+          -0.00016631554347167315
+        ]
+      ]
+    },
+    "circle-like": {
+      "path_type": "circle-like",
+      "condition": "medium",
+      "track_id": "medium:1336",
+      "frame": 35,
+      "score": 0.976894093220359,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.09460866223958732,
+          1.9353860292102055e-17
+        ],
+        [
+          0.17636617534694135,
+          -0.006935404793807742
+        ],
+        [
+          0.2395786337204162,
+          -0.014252060679561095
+        ],
+        [
+          0.2984567315590473,
+          -0.036063906696469666
+        ],
+        [
+          0.32845542534723376,
+          -0.06686847690203593
+        ],
+        [
+          0.33407903314088144,
+          -0.0922405508771078
+        ],
+        [
+          0.3365842342348353,
+          -0.12082432859978047
+        ],
+        [
+          0.2849301831814217,
+          -0.16940094470209338
+        ],
+        [
+          0.23127021111229984,
+          -0.2192318517729642
+        ],
+        [
+          0.120779757411762,
+          -0.2504339821822392
+        ],
+        [
+          0.04374302943527705,
+          -0.24438678458886198
+        ],
+        [
+          0.009658444846610303,
+          -0.22466386923181136
+        ],
+        [
+          -0.016394001857572286,
+          -0.17672419026158015
+        ],
+        [
+          -0.022462696959126897,
+          -0.10039190479461775
+        ],
+        [
+          -0.02171603928804146,
+          -0.007892817351849771
+        ]
+      ]
+    },
+    "crooked/random-like": {
+      "path_type": "crooked/random-like",
+      "condition": "medium",
+      "track_id": "medium:856",
+      "frame": 237,
+      "score": 0.9893301986881967,
+      "points": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.13892051386294102,
+          -0.04117524942276356
+        ],
+        [
+          0.1846533216097631,
+          -0.11990302284130289
+        ],
+        [
+          0.2824619822814294,
+          -0.18815320609873792
+        ],
+        [
+          0.365173435256414,
+          -0.184624012561267
+        ],
+        [
+          0.35564152487634954,
+          -0.2240856402770349
+        ],
+        [
+          0.38026744140023094,
+          -0.1990366696778684
+        ],
+        [
+          0.36479432870076295,
+          -0.20903348540235112
+        ],
+        [
+          0.35564152487634954,
+          -0.2240856402770349
+        ],
+        [
+          0.34982944689464307,
+          -0.17642486295200813
+        ],
+        [
+          0.2662098353245079,
+          -0.14305239577067222
+        ],
+        [
+          0.24231432925335838,
+          -0.13265673692232022
+        ],
+        [
+          0.09370640605691573,
+          -0.093321208059523
+        ],
+        [
+          -9.032609220272239e-05,
+          -7.101475922427826e-05
+        ],
+        [
+          4.341860815339471e-05,
+          -0.0001380081646621543
+        ]
+      ]
+    }
+  },
+  "source_audits": [
+    {
+      "condition": "low",
+      "file": "Spheres_lab_low.xlsx",
+      "file_bytes": 25440750,
+      "sha256": "bf6bf4536bccabb6cb1991db52b2b630bed65de25475482d229bf1552cfbf549",
+      "sha256_matches_official": true,
+      "x_header_particles": 1902,
+      "y_header_particles": 1800,
+      "common_particle_ids": 1800,
+      "x_only_particle_ids": 102,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1800,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 866096,
+      "x_data_cells": 915309,
+      "y_data_cells": 868655,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -1.08,
+      "max_time_s": 25.52
+    },
+    {
+      "condition": "medium",
+      "file": "Spheres_lab_medium.xlsx",
+      "file_bytes": 24562936,
+      "sha256": "d42724a1f136a3b3b4d1e37a90cfb9e9bc2c4319d86392a89ff34e1ab62a70a7",
+      "sha256_matches_official": true,
+      "x_header_particles": 1857,
+      "y_header_particles": 1857,
+      "common_particle_ids": 1857,
+      "x_only_particle_ids": 0,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1857,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 918700,
+      "x_data_cells": 918700,
+      "y_data_cells": 918700,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -0.72,
+      "max_time_s": 28.99
+    },
+    {
+      "condition": "high",
+      "file": "Spheres_lab_high.xlsx",
+      "file_bytes": 32666637,
+      "sha256": "2dfd229ac0561a5fc6601ddf9052f13d391b8e54862ea5e09d099a40af91064e",
+      "sha256_matches_official": true,
+      "x_header_particles": 1800,
+      "y_header_particles": 1800,
+      "common_particle_ids": 1708,
+      "x_only_particle_ids": 0,
+      "y_only_particle_ids": 0,
+      "joined_tracks": 1708,
+      "tracks_without_overlap": 0,
+      "duplicate_join_frames": 0,
+      "joined_positions": 1128180,
+      "x_data_cells": 1191473,
+      "y_data_cells": 1128180,
+      "x_duplicate_particle_frames": 0,
+      "y_duplicate_particle_frames": 0,
+      "x_invalid_time_rows": 0,
+      "y_invalid_time_rows": 0,
+      "min_time_s": -0.73,
+      "max_time_s": 15.0
+    }
+  ]
+}

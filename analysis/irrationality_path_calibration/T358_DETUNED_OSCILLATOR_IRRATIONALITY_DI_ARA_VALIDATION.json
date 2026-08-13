@@ -1,0 +1,55 @@
+{
+  "test": "Independent validation of T358",
+  "checks": {
+    "claim_sha_matches_results": true,
+    "protocol_sha_matches_results": true,
+    "archive_md5_matches_results": true,
+    "pair_keyset_reproduced": true,
+    "pair_aggregation_reproduced": true,
+    "record_keyset_reproduced": true,
+    "record_aggregation_reproduced": true,
+    "frozen_gates_reproduced": true,
+    "json_gates_reproduced": true,
+    "all_export_arithmetic_reproduced": true
+  },
+  "maximum_pair_aggregation_difference": 4.440892098500626e-16,
+  "maximum_record_aggregation_difference": 2.220446049250313e-16,
+  "recomputed_gates": {
+    "G1": false,
+    "G2": false,
+    "G3": true,
+    "G4": true,
+    "G5": false,
+    "G6": true,
+    "overall": false
+  },
+  "gate_detail": {
+    "structured_candidate": {
+      "50": false,
+      "100": false,
+      "150": false,
+      "190": false,
+      "240": false,
+      "290": false,
+      "340": false
+    },
+    "chronology_hits": 7,
+    "shuffle_max_xp_change": 0.0,
+    "coupling_specificity_hits": 6,
+    "group_specific": true,
+    "lineage_hits": 0,
+    "reverse_max_xp_change": 0.0,
+    "reverse_max_rho_change": 2.220446049250313e-16,
+    "reverse_orientation_hits": 9
+  },
+  "primary_phase_interface_valid": false,
+  "median_backtrack_fraction_range": [
+    0.4592508541360134,
+    0.4639517194942517
+  ],
+  "maximum_backtrack_fraction_range": [
+    0.4647992437434698,
+    0.4702112272126487
+  ],
+  "interpretation": "Arithmetic and frozen gates reproduced, but the raw derivative phase-plane interface is not a trustworthy one-way physical clock. The frozen gate verdict is retained; the intended physical geometry question remains inconclusive."
+}

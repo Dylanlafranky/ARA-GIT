@@ -1,0 +1,272 @@
+{
+  "test": "T344_BAW_WEIR_IRRATIONALITY_DI_ARA",
+  "representation": "num",
+  "source_doi": "10.48437/99f329-73aee6",
+  "source_hashes_match": true,
+  "trajectory_tracks": 5400,
+  "ara_events": 10794600,
+  "next_state_events": 8309366,
+  "window_counts": {
+    "8": 8271557,
+    "15": 8233756,
+    "30": 8152754
+  },
+  "gates": {
+    "A_four_sectors": {
+      "pass": true
+    },
+    "B_intact_parent": {
+      "pass": false,
+      "components": {
+        "intact_vs_radial_child": {
+          "pass": false,
+          "estimate": -0.11876455737185708,
+          "ci": [
+            -0.12048488502969153,
+            -0.11710771172713197
+          ],
+          "fold_wins": 0
+        },
+        "intact_vs_turn_child": {
+          "pass": true,
+          "estimate": 0.014883211987043921,
+          "ci": [
+            0.0127420204415075,
+            0.016943256326756386
+          ],
+          "fold_wins": 3
+        },
+        "intact_vs_broken_parent": {
+          "pass": true,
+          "estimate": 0.024063309579369467,
+          "ci": [
+            0.023442976879875555,
+            0.02468757454199746
+          ],
+          "fold_wins": 3
+        }
+      }
+    },
+    "C_coupling_asymmetry": {
+      "pass": true,
+      "estimate": 0.024221892370270778,
+      "ci": [
+        0.02384177316274708,
+        0.02459957141464463
+      ],
+      "fold_wins": 3
+    },
+    "D_structured_nonclosure": {
+      "pass": false,
+      "information_condition_effects": {
+        "low": -0.0009149273197037966,
+        "medium": -0.0012349317681077782,
+        "high": -0.0001947621652231933
+      },
+      "traversal_condition_effects": {
+        "low": -0.2469100451309469,
+        "medium": -0.24054275140313197,
+        "high": -0.23609641372104917
+      },
+      "pooled_information": {
+        "estimate": -0.000778030236046005,
+        "ci": [
+          -0.00122664355699705,
+          -0.00030082193431901826
+        ]
+      },
+      "pooled_traversal": {
+        "estimate": -0.24118307008504275,
+        "ci": [
+          -0.2450673916116231,
+          -0.23716275135277823
+        ]
+      }
+    },
+    "E_numerical_replication": {
+      "status": "replication_run_complete"
+    }
+  },
+  "optimisers": [
+    {
+      "test_condition": "low",
+      "model": "additive_children",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 14,
+      "objective": 1.3364337735513026,
+      "gradient_max_abs": 2.8042009081263454e-08
+    },
+    {
+      "test_condition": "low",
+      "model": "intact_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 21,
+      "objective": 1.311212041106981,
+      "gradient_max_abs": 1.2772764314366488e-07
+    },
+    {
+      "test_condition": "low",
+      "model": "broken_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 21,
+      "objective": 1.3342931099067223,
+      "gradient_max_abs": 9.424690043623738e-08
+    },
+    {
+      "test_condition": "medium",
+      "model": "additive_children",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 15,
+      "objective": 1.3345394583020604,
+      "gradient_max_abs": 2.3376904428998452e-08
+    },
+    {
+      "test_condition": "medium",
+      "model": "intact_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 21,
+      "objective": 1.3082842295394324,
+      "gradient_max_abs": 1.363727294385919e-07
+    },
+    {
+      "test_condition": "medium",
+      "model": "broken_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 21,
+      "objective": 1.3320006149588386,
+      "gradient_max_abs": 1.6475214557495044e-07
+    },
+    {
+      "test_condition": "high",
+      "model": "additive_children",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 15,
+      "objective": 1.3303586955679205,
+      "gradient_max_abs": 2.6951115405178493e-08
+    },
+    {
+      "test_condition": "high",
+      "model": "intact_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 21,
+      "objective": 1.3019745421216973,
+      "gradient_max_abs": 9.639890099771971e-08
+    },
+    {
+      "test_condition": "high",
+      "model": "broken_parent",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 22,
+      "objective": 1.3271499779558467,
+      "gradient_max_abs": 1.1719010454907693e-07
+    },
+    {
+      "test_condition": "low",
+      "model": "window_8_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 11,
+      "objective": 1.3844745239338063,
+      "gradient_max_abs": 3.5557432192900257e-08
+    },
+    {
+      "test_condition": "medium",
+      "model": "window_8_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 11,
+      "objective": 1.3842813479005636,
+      "gradient_max_abs": 3.055029025945037e-08
+    },
+    {
+      "test_condition": "high",
+      "model": "window_8_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 11,
+      "objective": 1.3842463861836345,
+      "gradient_max_abs": 3.314392163833381e-08
+    },
+    {
+      "test_condition": "low",
+      "model": "window_15_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 8,
+      "objective": 1.3847504854917758,
+      "gradient_max_abs": 7.113817277795156e-08
+    },
+    {
+      "test_condition": "medium",
+      "model": "window_15_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 8,
+      "objective": 1.3845920239622869,
+      "gradient_max_abs": 1.3018586071588688e-07
+    },
+    {
+      "test_condition": "high",
+      "model": "window_15_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 9,
+      "objective": 1.3845984600940129,
+      "gradient_max_abs": 9.67098923159784e-08
+    },
+    {
+      "test_condition": "low",
+      "model": "window_30_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 9,
+      "objective": 1.3840601470841498,
+      "gradient_max_abs": 1.5755211113426434e-07
+    },
+    {
+      "test_condition": "medium",
+      "model": "window_30_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 8,
+      "objective": 1.383863786552105,
+      "gradient_max_abs": 5.6902518062148854e-08
+    },
+    {
+      "test_condition": "high",
+      "model": "window_30_intact",
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 9,
+      "objective": 1.3838099675272715,
+      "gradient_max_abs": 1.246616963982776e-07
+    }
+  ]
+}

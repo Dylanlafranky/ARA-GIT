@@ -1,0 +1,238 @@
+{
+  "test": "T371",
+  "date": "2026-08-13",
+  "verdict": "TWO-STAGE DI-ARA HANDOVER RECOVERED",
+  "evidence_class": "known-decay recovery/crosswalk on public unbinned data",
+  "source": "arXiv:2110.07730v2 ancillary release",
+  "hashes_sha256": {
+    "dataBeamOnC.txt": "b78333f0cc0c4182f913cecd91d55968e43a620683e9f51e0ceb1c1db596326f",
+    "dataBeamOnAC.txt": "fba5c06334521531eda353771b5297b44a70566b0d755e23b174c716abec9468",
+    "brnPE.txt": "0000b042b8d0d28b90370eb70d1409db1d8c510fcf2b3e636370b0d4443ac0b0",
+    "brnTrec.txt": "6f279d835242a868dfc048abaa42b8c400bf961036de7bc7e64636efdd46466f",
+    "ninPE.txt": "41cae0376003cc2dcd028a3913e7c16395471f612b56d311f80e2a6071c9950c",
+    "ninTrec.txt": "2bb034d648b312f4ee329ae95078dc748ff3f83b999c411b08f86d82ddf8e151",
+    "snsFlux2D.root": "1af0639911bb9219b66cbfa617057cd145d180c2ac8bc791c3008f1d666206ae",
+    "effCoefficients.txt": "f1e58e6b8ec4db53da3be21fe44ebc4621e9b248b920be09759b1000dada8c51",
+    "scintRespCoefficients.txt": "ea6b8f34b296bf6e99f2a4ac504030d99155daba3e3c252f51c87d2470319d13",
+    "Paper_CEvNSCsI_FullDataset_SupMaterials.pdf": "7f4aec67a7a5323a84d6db0379d973de46e4a782c6c8f3cd43e31c262c6b5753"
+  },
+  "analysis_bounds": {
+    "pe": [
+      0,
+      60
+    ],
+    "time_us": [
+      0,
+      6
+    ],
+    "energy_bins": [
+      0.0,
+      10.0,
+      20.0,
+      30.0,
+      40.0,
+      50.0,
+      60.0
+    ],
+    "time_bins_us": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.0,
+      2.5,
+      3.0,
+      3.5,
+      4.0,
+      4.5,
+      5.0,
+      5.5,
+      6.0
+    ]
+  },
+  "event_counts": {
+    "beam_coincident": 1578,
+    "anti_coincident": 1295
+  },
+  "fit": {
+    "steady_state": 1266.5671381236589,
+    "brn": 16.73367570425025,
+    "nin": 5.4839926509110954,
+    "prompt_nu_mu": 60.18234943264439,
+    "delayed_nu_e_plus_anti_nu_mu": 258.94244655776356,
+    "prompt_ci95": [
+      32.41800625243746,
+      89.19975958723363
+    ],
+    "delayed_ci95": [
+      187.9171525014198,
+      333.29511036890455
+    ],
+    "full_nll": -6149.398474558958,
+    "full_aic": -12288.796949117916,
+    "delta_aic_vs_prompt_only": 57.68351502021687,
+    "delta_aic_vs_delayed_only": 18.476548104019457,
+    "delta_aic_vs_fixed_expected_combined_single": -1.855679050717299,
+    "delta_aic_vs_swapped_order": 12.853923769576795
+  },
+  "timing": {
+    "prompt_peak_us": 0.25,
+    "delayed_peak_us": 0.75,
+    "instantaneous_branch_equality_us": 0.49219498366627634,
+    "bootstrap_branch_equality_ci95_us": [
+      0.3253400795961831,
+      0.7628841163742381
+    ],
+    "cumulative_release_ridge_us": 1.145953706882166
+  },
+  "ara_compression": {
+    "x_prompt": 0.3771712520543425,
+    "x_delayed": 1.6228287479456576,
+    "x_prompt_ci95": [
+      0.20143083131712058,
+      0.6005220956909733
+    ],
+    "x_delayed_ci95": [
+      1.3994779043090269,
+      1.7985691686828793
+    ],
+    "sum_forced_by_definition": 2.0,
+    "standard_model_detector_weighted_x_prompt": 0.3408124849022989,
+    "standard_model_detector_weighted_x_delayed": 1.6591875150977011,
+    "phi_pair_is_not_a_registered_gate": true
+  },
+  "permutation": {
+    "n": 1000,
+    "as_good_as_chronological": 0,
+    "p_upper": 0.000999000999000999,
+    "nll_percentiles": [
+      -6133.584695683914,
+      -6106.504443418831,
+      -6094.083852615204
+    ]
+  },
+  "leave_one_out": [
+    {
+      "axis": "energy",
+      "removed_bin": 0,
+      "prompt": 64.75811308830036,
+      "delayed": 253.55644093547446
+    },
+    {
+      "axis": "energy",
+      "removed_bin": 1,
+      "prompt": 21.424797839353346,
+      "delayed": 227.81481630691334
+    },
+    {
+      "axis": "energy",
+      "removed_bin": 2,
+      "prompt": 67.061411948976,
+      "delayed": 264.5135242814464
+    },
+    {
+      "axis": "energy",
+      "removed_bin": 3,
+      "prompt": 57.983112827327155,
+      "delayed": 269.8359222242352
+    },
+    {
+      "axis": "energy",
+      "removed_bin": 4,
+      "prompt": 59.58249972062606,
+      "delayed": 269.6638196571303
+    },
+    {
+      "axis": "energy",
+      "removed_bin": 5,
+      "prompt": 60.09620451990344,
+      "delayed": 256.0890160090162
+    },
+    {
+      "axis": "time",
+      "removed_bin": 0,
+      "prompt": 87.97763434954979,
+      "delayed": 238.58745634339118
+    },
+    {
+      "axis": "time",
+      "removed_bin": 1,
+      "prompt": 43.236626424548895,
+      "delayed": 268.5477136069592
+    },
+    {
+      "axis": "time",
+      "removed_bin": 2,
+      "prompt": 65.09819593162057,
+      "delayed": 217.91838280721961
+    },
+    {
+      "axis": "time",
+      "removed_bin": 3,
+      "prompt": 61.343639281256365,
+      "delayed": 250.5805800021002
+    },
+    {
+      "axis": "time",
+      "removed_bin": 4,
+      "prompt": 57.98715782671876,
+      "delayed": 280.031926930936
+    },
+    {
+      "axis": "time",
+      "removed_bin": 5,
+      "prompt": 58.45342579968249,
+      "delayed": 274.01952042088215
+    },
+    {
+      "axis": "time",
+      "removed_bin": 6,
+      "prompt": 60.59892991369715,
+      "delayed": 254.23392003332978
+    },
+    {
+      "axis": "time",
+      "removed_bin": 7,
+      "prompt": 60.99931378899642,
+      "delayed": 251.32729252685675
+    },
+    {
+      "axis": "time",
+      "removed_bin": 8,
+      "prompt": 60.73030103904534,
+      "delayed": 257.76357140079205
+    },
+    {
+      "axis": "time",
+      "removed_bin": 9,
+      "prompt": 59.724668999186875,
+      "delayed": 256.4746604452986
+    },
+    {
+      "axis": "time",
+      "removed_bin": 10,
+      "prompt": 60.092271754173304,
+      "delayed": 260.61409056842007
+    },
+    {
+      "axis": "time",
+      "removed_bin": 11,
+      "prompt": 59.965213763250524,
+      "delayed": 271.02342531883164
+    }
+  ],
+  "gates": {
+    "G1_source_and_boundaries": true,
+    "G2_both_95pct_above_zero": true,
+    "G3_aic_at_least_10_vs_each_single": true,
+    "G4_no_more_than_10_permutations_as_good": true,
+    "G5_delayed_crest_after_prompt": true,
+    "G6_leave_one_out_both_positive": true
+  },
+  "boundaries": [
+    "Ensemble populations are not individually linked pion-muon-neutrino events.",
+    "The detector does not distinguish nu_e from anti-nu_mu in the delayed branch.",
+    "x_prompt+x_delayed=2 is normalization bookkeeping, not evidence.",
+    "This recovers a known decay lineage and does not prove universal fractal geometry."
+  ]
+}

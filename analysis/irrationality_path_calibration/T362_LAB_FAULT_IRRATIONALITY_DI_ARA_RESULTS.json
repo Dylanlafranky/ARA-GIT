@@ -1,0 +1,99 @@
+{
+  "test": "T362 laboratory-fault Irrationality Di-ARA",
+  "run_date": "2026-08-12",
+  "verdict": "NOT SUPPORTED ON THIS PHYSICAL ARCHIVE",
+  "all_gates_passed": false,
+  "main_slip_time_s": 7774.6783700000005,
+  "ara_handover_time_s": 7774.7363700000005,
+  "ara_timing_error_s": 0.057999999999992724,
+  "raw_axis_correlation_excluding_rupture": -0.07548822967901887,
+  "physical_quadrant_occupancy": {
+    "Ab": 6074,
+    "aB": 8219,
+    "bA": 4100,
+    "Ba": 3882
+  },
+  "parent_quadrant_occupancy": {
+    "Ab": 341
+  },
+  "main_slip_risk_percentile": 0.7236812570145903,
+  "gates": [
+    {
+      "gate": "G1 independent physical traversal",
+      "passed": true,
+      "observed": "source QA=True; |r|=0.0755; qualifying quadrants=4/4"
+    },
+    {
+      "gate": "G2 Irrationality parent traversal",
+      "passed": false,
+      "observed": "qualifying quadrants=1/4; timing error=0.058 s"
+    },
+    {
+      "gate": "G3 broken-geometry discrimination",
+      "passed": false,
+      "observed": "real=0.058 s; shuffle median=22.534 s; wrong_pair=0.058 s; connection_only=29.126 s; movement_only=18.502 s"
+    },
+    {
+      "gate": "G4 two-axis movement record",
+      "passed": false,
+      "observed": "primary RMSE=0.7577; best control=0.7377; direction=0.528"
+    },
+    {
+      "gate": "G5 held-out rupture localization",
+      "passed": false,
+      "observed": "main-slip predicted-risk percentile=0.7237"
+    },
+    {
+      "gate": "G6 repeated connection handover",
+      "passed": false,
+      "observed": "all=9/15; dry=4/10; fluid=5/5"
+    }
+  ],
+  "prediction_metrics": [
+    {
+      "method": "two_axis_directional",
+      "RMSE": 0.7577366172157459,
+      "MAE": 0.6065144533900034,
+      "direction_agreement": 0.5277216610549944
+    },
+    {
+      "method": "direction_blind",
+      "RMSE": 0.7571627302793265,
+      "MAE": 0.6159809074001387,
+      "direction_agreement": 0.49696969696969695
+    },
+    {
+      "method": "connection_only",
+      "RMSE": 0.7377028040801092,
+      "MAE": 0.6031969329951556,
+      "direction_agreement": 0.49135802469135803
+    },
+    {
+      "method": "movement_only",
+      "RMSE": 0.7562244350153702,
+      "MAE": 0.6050606891211212,
+      "direction_agreement": 0.5261503928170594
+    },
+    {
+      "method": "wrong_pair",
+      "RMSE": 0.7437780651248407,
+      "MAE": 0.5947316902136622,
+      "direction_agreement": 0.5358024691358024
+    },
+    {
+      "method": "persistence",
+      "RMSE": 1.0103941856318823,
+      "MAE": 0.8211996401417272,
+      "direction_agreement": 0.458361391694725
+    }
+  ],
+  "replication": {
+    "all": 9,
+    "dry": 4,
+    "fluid": 5
+  },
+  "frozen_hashes": {
+    "T362_LAB_FAULT_IRRATIONALITY_DI_ARA_CLAIM_PACKET_v1.md": "34FB8445B4C49B421D5FAEE2FC75E8EE5386C827A8798F96C794EB89488DE8F8",
+    "T362_LAB_FAULT_IRRATIONALITY_DI_ARA_PROTOCOL_v1_FROZEN.md": "C015E113906130E10858807126F9A3EB3BBFA214C50739E043CFF785DCCB6299"
+  }
+}
