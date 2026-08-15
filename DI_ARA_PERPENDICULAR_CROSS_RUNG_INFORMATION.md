@@ -794,6 +794,271 @@ The current status is therefore:
 
 This rule contains no universal Phi claim.
 
+### Causal liquid-scintillator detector proxy: T385
+
+T385 tested whether an Irrationality Di-ARA cut of individual BUAP
+double-pulse waveforms contained advance information before the later
+decay-electron pulse. The frozen movement orientation was `0 -> 2`; a
+conservative `128 ns` visible-pulse guard was imposed, and row length plus
+distance to record end were forbidden because they reveal the acquisition
+buffer position. The source is a selected liquid-scintillator detector record,
+so the result is Class D and does not directly observe a neutrino or an
+internal muon child.
+
+The ARA-augmented model had internal-evaluation `AUROC=0.711` and improved
+log loss over the ordinary raw-waveform model by about `0.00862`, with an
+event-bootstrap 95% interval `[0.00618,0.01117]`. That calibration improvement
+did not satisfy the frozen geometry or discrimination gates:
+
+- the raw detector model had higher `AUROC=0.742`;
+- the radial coordinate remained at the ridge, with weighted medians `1.0`
+  both near and far from release;
+- the paired `256 ns - 1024 ns` radial change was only `0.00381`, with 95%
+  interval `[-0.0145,0.0235]`;
+- time reversal scored slightly higher (`0.714`) than the declared direction;
+- the secondary `1.25` landmark was absent from the median and was not a gate.
+
+The forbidden acquisition-layout model reached nearly perfect discrimination
+(`AUROC=0.99998`), demonstrating why future-looking buffer fields must remain
+excluded. T385 is therefore **not supported** as a movement-side causal
+handover predictor. It records real waveform/calibration structure but does
+not isolate the proposed pre-release Irrationality Di-ARA relation beyond the
+raw detector baseline.
+
+Primary record:
+`analysis/muon/T385_buap_causal_irrationality_di_ara/T385_BUAP_CAUSAL_IRRATIONALITY_DI_ARA_REPORT.html`.
+
+### Coupled state/path and determinacy/relation cuts: T386
+
+T386 retained T385's causal state/path Di-ARA and added a separately defined
+determinacy/relation pair. The second pair used an event-local AR(2) forecast
+error relative to persistence (`x_F`) and the correlation orientation between
+adjacent windows (`x_L=1-r`). Their declared ridge-centred couplings were
+
+\[
+C_{RF}=(x_R-1)(x_F-1),\qquad
+C_{HL}=(x_H-1)(x_L-1).
+\]
+
+This was a frozen post-result extension on the already-opened BUAP source, not
+an external holdout. It separated four cases: raw waveform, either Di-ARA
+alone, both pairs added without coupling, and both pairs plus the two coupling
+terms.
+
+The result was **calibration structure only**, not causal coupled-Di-ARA
+support. On internal evaluation, the raw model had `AUROC=0.74182` and log
+loss `0.64092`; the coupled model had lower log loss `0.63236` but worse
+`AUROC=0.71020`. The state/path component alone had slightly lower log loss
+`0.63230` than the coupled model. The coupled-minus-state event-bootstrap
+improvement was `-0.000054`, with 95% interval
+`[-0.000483,0.000441]`.
+
+Same-time coordinate alignment was not arbitrary: the observed coupling model
+beat all 100 within-target/lead-bin determinacy shuffles. That did not survive
+the stronger component comparison, and time reversal was also slightly better
+than the declared direction. The current evidence therefore says that the
+determinacy coordinates contain detector alignment structure, but does not
+show that the ridge-centred coupling adds a generalizable handover relation
+beyond the state/path cut.
+
+The retrospective event-centred map did expose a sharp detector transition
+inside the excluded final `128 ns`: median `x_R` rose from about `1.0` to
+`1.732` at the pulse minimum, while `x_F` crossed from about `0.886` at
+`128 ns` lead to `1.098` at the minimum and `1.281` after it. This is a useful
+description of the visible detector handover, not advance information. The
+relation coordinate `x_L` remained near its ridge `1`, so T386 did not recover
+a complete second rationality/determinism half-wave.
+
+Primary record:
+`analysis/muon/T386_coupled_di_ara_handover/T386_COUPLED_DI_ARA_REPORT.md`.
+
+### Full visible detector return: T387
+
+T387 tested the concern raised from the T386 visual: the cut appeared to show
+quiet geometry followed by an instantaneous jump, with no opposite `x_R` or
+`x_H` half. The same BUAP liquid-scintillator events were aligned to a frozen
+10%-amplitude onset rule and followed from `-1024 ns` to `+768 ns` at 64, 128
+and 256 ns adjacent-window cuts.
+
+The strict three-consecutive-sample onset rule retained 284 of 1,148 eligible
+evaluation events, so the result applies only to cleanly resolved pulse
+onsets. Within that cohort, the omitted return was recovered on **both** axes:
+
+- `x_R` expanded above ridge and later contracted below ridge at all three
+  window sizes, with bootstrap intervals wholly on the declared sides;
+- median `x_H` crossed ridge and returned to its original recurrent side at
+  all three sizes;
+- the median `(x_R,x_H)` trajectory returned `100.0%`, `98.8%` and `99.6%`
+  toward its pre-event point by `+768 ns`.
+
+The frozen fixed-time radial mirror gate failed: pulse-minimum plus
+one-window-later coordinates summed well above 2. The actual post-result
+extrema were much more complementary, however. Their `peak + trough - 2`
+residuals were `+0.0196`, `+0.00133` and `+0.00381`. This is recorded as
+instrument consistency rather than independent physical evidence because the
+same pulse moving between adjacent RMS windows approximately enforces
+`x_R(1/s)=2-x_R(s)`.
+
+The return time was neither physically fixed nor the frozen one-window
+translation: troughs occurred at 128, 256 and 464 ns, giving a fitted scale
+slope `1.732`. The post-result ratios were roughly two window durations
+(`2.0`, `2.0`, `1.8125`), but no Phi or universal timing claim is made from
+three window sizes. The frozen status is **non-mirrored two-axis return;
+timing mixed/undetermined**.
+
+T387 shows that T386's apparent missing opposite was largely caused by ending
+the visual shortly after the pulse. It recovers a complete visible detector
+loop, not the unobserved upstream muon-to-neutrino handover.
+
+Primary record:
+`analysis/muon/T387_full_pulse_return_wave/T387_FULL_PULSE_RETURN_REPORT.md`.
+
+### Same-event detector anti-phase identification: T388
+
+T388 asked which identity owns T387's visible opposite return. It applied the
+same `128 ns` state/path ARA cut to both chronological pulses in 650 paired
+liquid-scintillator events and compared the later pulse with four frozen maps
+of the first: direct, full diagonal reversal, radial-only reversal and
+path-only reversal.
+
+Direct repetition won decisively. Median paired two-axis RMSE was `0.19239`
+for the direct map, versus `1.33208`, `0.74184` and `1.12679` for the full,
+radial-only and path-only reversals. Every paired bootstrap difference favoured
+direct repetition, and loop handedness was retained in all events.
+
+The result assigns the observed expansion/opening and subsequent
+contraction/reclosure primarily to the detector's repeated impulse/recovery
+cycle. It removes that visible loop as a candidate for the upstream physical
+muon anti-phase. The ARA anti-coordinate remains mathematically
+`(2-x_R,2-x_H)`, but its physical muon-child identity has not been observed in
+this voltage source. T388 also did not recover advance information outside the
+frozen `128 ns` guard.
+
+Primary record:
+`analysis/muon/T388_same_event_antiphase/T388_SAME_EVENT_ANTIPHASE_REPORT.md`.
+
+### Population spin anti-phase and release timing: T389–T390
+
+T389 supplies a clean domain example of why a one-axis ARA cut and a geometric
+Di-ARA must not be conflated. T382's scalar spin coordinate retained
+`1-cos(theta)` but discarded the signed perpendicular quadrature. Restoring
+both measured detector-space components gives
+
+\[
+z=c+i s,
+\qquad
+(x_c,x_s)=(1-c,1-s),
+\]
+
+with full anti-phase at half a turn
+
+\[
+z\mapsto-z,
+\qquad
+(x_c,x_s)\mapsto(2-x_c,2-x_s).
+\]
+
+This full inversion beat direct repetition and either one-axis reflection in
+all three untouched silver holdouts. The most opposed relation occurred at
+`0.49–0.51` turns, and the pooled inversion advantage had a wholly positive
+field-bootstrap interval. This is recorded as a supported population spin
+anti-phase Di-ARA, subject to the failed broader T382 child qualification.
+
+T390 then showed that the recovered anti-phase does not itself define the
+release law. Detector-summed decay counts were not enriched at exactly 7.5
+turns: the pooled ratio was below one, ranked seventh among eight half-integer
+landmarks, and failed every frozen release gate. Geometry and handover timing
+must therefore remain separate claims.
+
+Primary record:
+`analysis/muon/T389_T390_FINDINGS_2026-08-15.md`.
+
+T391 then removed the possible decoder circularity. Only the cadence learned
+from calibration was retained; no cosine/sine detector basis or learned
+spatial projection entered the primary score. The complete raw 96-detector
+share pattern was phase-folded and tested directly:
+
+\[
+\mathbf y(\theta+\pi)\approx-\mathbf y(\theta).
+\]
+
+All six frozen gates passed across the 63, 160 and 400 G holdouts. The raw
+pattern reached its strongest opposition at `0.49–0.51` turns, the correct
+96-detector correspondence beat every cyclic label-shift control, and the
+correct cadence beat both wrong-field cadences in every holdout. The pooled
+full-inversion advantage was `0.50142`, with hierarchical-bootstrap 95%
+interval `[0.19135,0.68616]`.
+
+This establishes a useful compression hierarchy inside one measured
+identity: the raw high-dimensional detector field already carries the
+anti-phase, while T389's two-axis Di-ARA is its lower-dimensional geometric
+summary. The relation weakens at 400 G (`r=-0.25331`) but retains the correct
+orientation and half-turn location. T391 remains a population-spin result,
+not an individual decay or neutrino-handover result.
+
+Primary record:
+`analysis/muon/T391_raw_detector_antiphase/T391_RAW_DETECTOR_ANTIPHASE_REPORT.html`.
+
+### Energy-allocation child beneath the population spin anti-phase: T392
+
+T392 supplies a clean example of a supported parent relation acquiring a
+different child cut rather than being treated as its own release clock. T391
+established the population spin anti-phase. In an independent published TWIST
+population spectrum, T392 then measured where the charged daughter's
+spin-relative direction changes sign as energy allocation increases.
+
+The reversal occurred at
+
+\[
+x_e=\frac{2E_e}{m_\mu}=0.49019,
+\qquad
+95\%\ {\rm CI}=[0.48612,0.49446].
+\]
+
+The complementary joint-neutral account is
+
+\[
+x_N=2-x_e=1.50981.
+\]
+
+Thus the measured handover is consistent with the coarse child pair
+`(0.5,1.5)`. The distinction is essential: the directional reversal is the
+measured/model-assisted result, while `x_e+x_N=2` is forced conservation
+bookkeeping. This is a population crosswalk to the known polarized Michel
+spectrum. It does not provide an individual muon countdown or distinguish the
+two neutrino siblings.
+
+Primary record:
+`analysis/muon/T392_SPIN_CHILD_NEUTRAL_HANDOVER_FINDINGS_2026-08-15.md`.
+
+### The joint neutral complement contains two children: T393
+
+T393 retained T392's measured charged-daughter reversal and decomposed the
+joint neutral complement into its two physical children. At the frozen
+`x_e=0.49019`, parent-rung projection produced
+
+\[
+0.245095_{\ e^+}
++0.346518_{\ \nu_e}
++0.408387_{\ \bar\nu_\mu}
+=1.
+\]
+
+This is the ARA topology Dylan proposed: one charged branch is balanced in
+momentum by a coupled two-member neutral branch. The total energy and momentum
+closure is forced by decay kinematics. The nontrivial internal relation is the
+neutral allocation: Standard-Model V-A weighting gives the pair
+`(0.918044,1.081956)` rather than the shuffled-identity control `(1,1)`, with
+the anti-muon-neutrino child heavier in `68.93%` of the conditional events.
+
+The charged child projects to approximately `0.25` at the parent rung, but
+T392's interval excludes exact `0.5` at the child rung. The quarter landmark
+must therefore remain approximate and identity-dependent. This is a
+kinematic crosswalk, not an individual neutrino-release clock.
+
+Primary record:
+`analysis/muon/T393_JOINT_NEUTRINO_PAIR_PROJECTION_FINDINGS_2026-08-15.md`.
+
 ## Canonical links
 
 - `ARA_RECIPROCAL_LOG_TRANSLATION_PLAYBOOK.md`

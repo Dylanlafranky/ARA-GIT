@@ -1,0 +1,349 @@
+{
+  "test": "T378 independent 2017 CsI stopped-pion/muon holdout",
+  "verdict": "TWO POPULATIONS WITHOUT ALL FROZEN HANDOVER GATES",
+  "source": "COHERENT arXiv:1708.01294 data release, Zenodo 10.5281/zenodo.1228631",
+  "boundary": {
+    "pe": [
+      6,
+      30
+    ],
+    "time_us": [
+      0,
+      6
+    ],
+    "beam_exposure_GWhr": 7.47594,
+    "beam_on_C_counts": 547,
+    "beam_on_AC_counts": 405,
+    "beam_off_C_counts": 209,
+    "beam_off_AC_counts": 207
+  },
+  "hashes_sha256": {
+    "arrivalTimePDF_delayedNeutrinos.txt": "50f6c7830a718674f5983116e3b7b2d5100e1a1f041ba107dd3b25e3f07d8fe0",
+    "arrivalTimePDF_promptNeutrinos.txt": "017c47dcbdedd4ba65f6cb604f350d219dd1a212e15c669c8bd8b2015f8c8ee9",
+    "arrivalTimePDF_promptNeutrons.txt": "0119ea56f000eda98b7637282040b2641784e856fc3125e722e9eff9fb289652",
+    "coherentCollaboration_dataReleaseCompanion_april2018.pdf": "dd0bc860c53712cd0ebc17ce0ffdb8b88f62f7b64dbdac6389d79782a18556c1",
+    "coherent_parameters.yaml": "daa4f3feaeb5499cb1d876f8ea39f3cfd571f998a6ab92e9cdf552afc78b67e8",
+    "data_anticoincidence_beamOff.txt": "5ce17b22eb1c050705c28808e124ef571625a9c6668517c957db5367cb58cead",
+    "data_anticoincidence_beamOn.txt": "3008578093927748e872ef4e01343b9833bd90ee0548260a88114723681f5b3d",
+    "data_coincidence_beamOff.txt": "05f493ab3b085a1fdacce9d4969dd2764a64efd940a14c61de7bd7d471dd1b6b",
+    "data_coincidence_beamOn.txt": "e6cfa6d22345721a0af8abb9db938c0e5d9785c698c98d9305964aeebf31aa50",
+    "promptPDF.txt": "6e74171096abb2e9a3fac3c1b1c85f3973501627b88b2a83de7e7e5121601efa",
+    "README": "978ab4a7e7b01a463dd7e9d4e8938573ad736b78447db79717b5d5b57922f097"
+  },
+  "fit": {
+    "components": [
+      "steady",
+      "prompt_neutron",
+      "prompt_nu_mu",
+      "delayed_nu_e_plus_anti_nu_mu"
+    ],
+    "params": [
+      416.24700476452193,
+      5.621534880300772,
+      33.69769148374192,
+      79.56753862690039
+    ],
+    "prompt_ci95": [
+      16.419246217952796,
+      55.12610679446456
+    ],
+    "delayed_ci95": [
+      30.19199288252218,
+      128.5484038368413
+    ],
+    "delta_AIC_vs_prompt_only": 9.94646445162357,
+    "delta_AIC_vs_delayed_only": 12.841115938342341,
+    "meta": {
+      "steady_time_exponential_lambda_per_us": 0.127,
+      "prompt_neutron_expected": 5.419341500706415,
+      "qf": 0.0878,
+      "prompt_mean_pe": 12.563865930176497,
+      "delayed_mean_pe": 16.220660291862657
+    }
+  },
+  "timing": {
+    "prompt_peak_us": 0.75,
+    "delayed_peak_us": 1.25,
+    "t_h_us": 1.0394189324476857,
+    "x_h": 0.7494969093838694,
+    "x_h_bootstrap_95pct": [
+      0.2937607500459949,
+      1.2846179938098612
+    ],
+    "t_h_bootstrap_95pct": [
+      0.7873817934925806,
+      1.1836633167982986
+    ]
+  },
+  "ara": {
+    "x_prompt": 0.5950226993901762,
+    "x_delayed": 1.4049773006098238,
+    "sum_forced": 2.0,
+    "balance_product": 0.8359933859907803
+  },
+  "bootstrap": {
+    "columns": [
+      "prompt",
+      "delayed",
+      "x_prompt",
+      "t_h_us",
+      "x_h"
+    ],
+    "q025_q50_q975": [
+      [
+        16.419246217952796,
+        30.19199288252218,
+        0.2765406062048189,
+        0.7873817934925806,
+        0.2937607500459949
+      ],
+      [
+        33.77696503476882,
+        80.32899750149454,
+        0.5948124443321353,
+        1.039080062577807,
+        0.7486252683438946
+      ],
+      [
+        55.12610679446456,
+        128.5484038368413,
+        1.149342643801086,
+        1.1836633167982986,
+        1.2846179938098612
+      ]
+    ]
+  },
+  "permutation": {
+    "n": 1000,
+    "as_good": 17,
+    "observed_nll": -323.21850539691735,
+    "median_permuted_nll": -310.3923964827046
+  },
+  "beamoff_control": {
+    "params": [
+      199.18956763841658,
+      0.0,
+      0.0,
+      17.62086472913181
+    ],
+    "delta_AIC_vs_prompt_only": -0.2297601351866092,
+    "delta_AIC_vs_delayed_only": -2.0
+  },
+  "response_variants": {
+    "qf_low": {
+      "params": [
+        417.62690138155614,
+        5.788389094593327,
+        28.031813243528,
+        81.76222516562228
+      ],
+      "event": {
+        "t_h_us": 0.9959274335627908,
+        "x_h": 0.6457990211943483
+      }
+    },
+    "qf_high": {
+      "params": [
+        416.8968479113982,
+        5.512118072946183,
+        36.92668185572525,
+        75.48890249851198
+      ],
+      "event": {
+        "t_h_us": 1.0656322964045284,
+        "x_h": 0.8205265520269964
+      }
+    },
+    "time_only": {
+      "params": [
+        418.3453737701029,
+        5.424274734468706,
+        41.94774608170346,
+        67.92265352825562
+      ],
+      "event": {
+        "t_h_us": 1.10252896337445,
+        "x_h": 0.934963507564189
+      },
+      "delta_AIC_vs_prompt_only": 5.339645470041432,
+      "delta_AIC_vs_delayed_only": 15.176604600185783
+    }
+  },
+  "leave_one_out": [
+    {
+      "axis": "pe",
+      "dropped": 0,
+      "prompt": 31.187832591503103,
+      "delayed": 76.3169247042213
+    },
+    {
+      "axis": "pe",
+      "dropped": 1,
+      "prompt": 29.315211022247006,
+      "delayed": 79.24880060579306
+    },
+    {
+      "axis": "pe",
+      "dropped": 2,
+      "prompt": 18.27296413871234,
+      "delayed": 74.73773096583218
+    },
+    {
+      "axis": "pe",
+      "dropped": 3,
+      "prompt": 34.13784732520363,
+      "delayed": 60.72419688774163
+    },
+    {
+      "axis": "pe",
+      "dropped": 4,
+      "prompt": 30.64425717984472,
+      "delayed": 68.09893836122667
+    },
+    {
+      "axis": "pe",
+      "dropped": 5,
+      "prompt": 28.252382959914392,
+      "delayed": 68.33649411319742
+    },
+    {
+      "axis": "pe",
+      "dropped": 6,
+      "prompt": 30.17202007951598,
+      "delayed": 73.97919986475944
+    },
+    {
+      "axis": "pe",
+      "dropped": 7,
+      "prompt": 31.738861088355645,
+      "delayed": 71.66119786270478
+    },
+    {
+      "axis": "pe",
+      "dropped": 8,
+      "prompt": 33.421310915578474,
+      "delayed": 71.41111407235401
+    },
+    {
+      "axis": "pe",
+      "dropped": 9,
+      "prompt": 33.09603206538584,
+      "delayed": 73.97094455564633
+    },
+    {
+      "axis": "pe",
+      "dropped": 10,
+      "prompt": 33.37178793036123,
+      "delayed": 76.92253554122568
+    },
+    {
+      "axis": "pe",
+      "dropped": 11,
+      "prompt": 33.77706543411512,
+      "delayed": 77.58561360345584
+    },
+    {
+      "axis": "time",
+      "dropped": 0,
+      "prompt": 29.875031401294393,
+      "delayed": 86.31300444388292
+    },
+    {
+      "axis": "time",
+      "dropped": 1,
+      "prompt": 11.042353978504917,
+      "delayed": 68.25657061652855
+    },
+    {
+      "axis": "time",
+      "dropped": 2,
+      "prompt": 34.45076240681147,
+      "delayed": 43.3534480458332
+    },
+    {
+      "axis": "time",
+      "dropped": 3,
+      "prompt": 32.14449540237234,
+      "delayed": 71.17562426423854
+    },
+    {
+      "axis": "time",
+      "dropped": 4,
+      "prompt": 33.163567693932094,
+      "delayed": 73.29587702818796
+    },
+    {
+      "axis": "time",
+      "dropped": 5,
+      "prompt": 32.26055725067885,
+      "delayed": 84.60590054360716
+    },
+    {
+      "axis": "time",
+      "dropped": 6,
+      "prompt": 33.632724727952876,
+      "delayed": 67.96576171271083
+    },
+    {
+      "axis": "time",
+      "dropped": 7,
+      "prompt": 34.34413198134668,
+      "delayed": 68.61332767970005
+    },
+    {
+      "axis": "time",
+      "dropped": 8,
+      "prompt": 33.97338963036639,
+      "delayed": 78.28539007215716
+    },
+    {
+      "axis": "time",
+      "dropped": 9,
+      "prompt": 32.42842856514328,
+      "delayed": 76.76656347629147
+    },
+    {
+      "axis": "time",
+      "dropped": 10,
+      "prompt": 34.76737423157908,
+      "delayed": 78.87023316347322
+    },
+    {
+      "axis": "time",
+      "dropped": 11,
+      "prompt": 34.24522634579974,
+      "delayed": 77.19443806748274
+    }
+  ],
+  "gates": {
+    "G1_provenance_and_counts": true,
+    "G2_both_bootstrap_lower_bounds_positive": true,
+    "G3_AIC_at_least_10_vs_each_single": false,
+    "G4_no_more_than_10_of_1000_permutations_as_good": false,
+    "G5_delayed_crest_after_prompt": true,
+    "G6_leave_one_out_both_positive": true,
+    "G7_beamoff_not_equally_supported": true,
+    "G8_response_variants_keep_both_positive": true,
+    "T372_interval_overlap": true,
+    "exact_0_5_inside_xH_bootstrap": true
+  },
+  "te_ara_audit": {
+    "forced": "x_prompt + x_delayed = 2 by normalization",
+    "observed_coupling_evidence": [
+      "both branch yields",
+      "pair-vs-single AIC",
+      "chronology permutations",
+      "beam-on/off contrast",
+      "leave-one-out stability"
+    ],
+    "other": [
+      "prompt-neutron normalization",
+      "steady-background estimate",
+      "finite counts",
+      "2017 acceptance",
+      "quenching factor",
+      "light yield",
+      "reconstructed CEvNS PE response"
+    ]
+  }
+}

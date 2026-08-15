@@ -1,0 +1,6548 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T380 \u2014 Same-scale muon child cut",
+    "description": "Prospective deeper-cut test of adjacent QuarkNet counter-pair ARA relations.",
+    "generatedAt": "2026-08-14T00:00:00+10:00",
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T380 \u2014 Same-scale muon child cut"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "t380_frozen_results",
+        "body": "## Technical summary\n\n**The same-scale child cut did not pass every frozen gate.** The prospective parent-minus-child score was **+0.0007852 NLL per held-out event** with a chronological-block 95% interval of **-0.0071691 to +0.0085103**. The analysis used 682 calibration and 572 untouched holdout four-counter events. This is a deeper cut of the same detector data, not an independent archive replication."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "gate_card",
+          "delta_card",
+          "sample_card"
+        ]
+      },
+      {
+        "id": "plane_intro",
+        "type": "markdown",
+        "sourceId": "quarknet_t379_events",
+        "body": "## The two same-scale children occupy a full 0\u20132 \u00d7 0\u20132 plane\n\nEach point is one untouched incoming muon. The horizontal coordinate cuts counters 1\u20132 at their own scale; the vertical coordinate independently cuts counters 3\u20134. Both ridges are at 1. The daughter delay is retained as tooltip evidence only and never entered either coordinate."
+      },
+      {
+        "id": "plane_chart",
+        "type": "chart",
+        "chartId": "child_plane"
+      },
+      {
+        "id": "score_intro",
+        "type": "markdown",
+        "sourceId": "t380_frozen_results",
+        "body": "## Prospective scoring decides whether the deeper cut adds information\n\nLower negative log likelihood is better. `MP` already knows ordinary pulse geometry and the old parent cut. The registered test is whether `MC` improves beyond `MP`, while also beating two equally complex wrong pairings."
+      },
+      {
+        "id": "score_chart",
+        "type": "chart",
+        "chartId": "model_score"
+      },
+      {
+        "id": "run_intro",
+        "type": "markdown",
+        "sourceId": "t380_frozen_results",
+        "body": "## The effect must repeat in both untouched runs\n\nPositive values favor the same-scale child model. Separate run scores prevent a pooled average from hiding a sign reversal."
+      },
+      {
+        "id": "run_chart",
+        "type": "chart",
+        "chartId": "run_delta"
+      },
+      {
+        "id": "gate_intro",
+        "type": "markdown",
+        "sourceId": "t380_frozen_results",
+        "body": "## Frozen gate audit\n\nSupport required two positive run effects, an interval wholly above zero, dominance over both wrong pairings, and an observed increment above the 97.5th percentile of within-run outcome permutations."
+      },
+      {
+        "id": "gate_table",
+        "type": "table",
+        "tableId": "gate_audit"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Scope, data and metric definitions\n\nThe medium and source are unchanged from T379: four stacked solid-plastic scintillators in QuarkNet detector 6845. Only the cut changed. `xU=2q2/(q1+q2)` and `xL=2q4/(q3+q4)` are the two child-scale coordinates. Their shared direction is `C=((xU-1)+(xL-1))/2`; mismatch is `D=((xU-1)-(xL-1))/2`; coupling is `K=1-|D|`. The visible outcome is the delay to the later linked charged-electron candidate."
+      },
+      {
+        "id": "methods",
+        "type": "markdown",
+        "body": "## Frozen methodology\n\nFebruary 11\u201312 fixed calibration and March 17\u201318 fixed holdout. Every model used the same truncated-exponential plus uniform-background likelihood over 0.3\u201310 microseconds. The child model added `C`, `D`, `|D|` and their signed interaction after all parent terms. Uncertainty used 12 chronological blocks; the permutation control shuffled outcomes only within run."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and robustness boundary\n\nThis test directly measures the later electron, not either neutrino. The four prompt values are detector projections, not a complete internal-state measurement. The cohort is the previously opened fourfold subset of T379, so this is a registered deeper cut rather than an independent replication. A negative result would reject this cut as an individual countdown, not the previously observed population-scale handover."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nIf supported, freeze the same coordinate on another four-layer detector before expanding the feature set. If not supported, stop subdividing these four prompt amplitudes: the missing child state would require a genuinely new event-linked measurement such as spin/polarisation, local field, stopping material, or charged-daughter direction/energy."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\nWould the same-scale cut replicate in a detector with resolved stopping material? Does a spin-sensitive child coordinate add information that pulse geometry cannot? Can daughter energy or direction identify the otherwise hidden branch without using future timing?"
+      }
+    ],
+    "cards": [
+      {
+        "id": "gate_card",
+        "dataset": "summary",
+        "sourceId": "t380_frozen_results",
+        "description": "All four frozen support gates must pass.",
+        "metrics": [
+          {
+            "label": "Frozen gates passed",
+            "field": "gates_passed",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "delta_card",
+        "dataset": "summary",
+        "sourceId": "t380_frozen_results",
+        "description": "Positive means the child cut improves held-out timing prediction beyond the parent cut.",
+        "metrics": [
+          {
+            "label": "MP \u2212 MC NLL",
+            "field": "delta",
+            "format": "number",
+            "signed": true
+          },
+          {
+            "label": "CI low",
+            "field": "ci_low",
+            "format": "number",
+            "signed": true
+          },
+          {
+            "label": "CI high",
+            "field": "ci_high",
+            "format": "number",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "sample_card",
+        "dataset": "summary",
+        "sourceId": "t380_frozen_results",
+        "description": "Four-counter incoming muon / later electron event pairs.",
+        "metrics": [
+          {
+            "label": "Held-out events",
+            "field": "n_holdout",
+            "format": "number"
+          },
+          {
+            "label": "Calibration",
+            "field": "n_calibration",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "child_plane",
+        "title": "Same-scale child ARA plane",
+        "subtitle": "Untouched holdout events, n=572; ridge lines are xU=1 and xL=1",
+        "type": "scatter",
+        "intent": "relationship",
+        "question": "Where do the two adjacent child cuts jointly sit?",
+        "rationale": "A scatter plot preserves each event and shows joint occupancy across both 0\u20132 child axes.",
+        "dataset": "scatter",
+        "sourceId": "quarknet_t379_events",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "xU",
+            "type": "quantitative",
+            "label": "Upper child ARA xU",
+            "unit": "ARA 0\u20132"
+          },
+          "y": {
+            "field": "xL",
+            "type": "quantitative",
+            "label": "Lower child ARA xL",
+            "unit": "ARA 0\u20132"
+          },
+          "color": {
+            "field": "run",
+            "type": "nominal",
+            "label": "Holdout run"
+          },
+          "tooltip": [
+            {
+              "field": "event",
+              "label": "Event"
+            },
+            {
+              "field": "delay_us",
+              "label": "Later daughter delay",
+              "unit": "microseconds"
+            },
+            {
+              "field": "parent_x",
+              "label": "Parent ARA"
+            },
+            {
+              "field": "coupling",
+              "label": "Child coupling K"
+            }
+          ]
+        },
+        "combinationRationale": "Color distinguishes the two independent holdout days without encoding the future daughter time.",
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1,
+            "label": "upper child ridge",
+            "lineStyle": "dashed",
+            "color": "neutral"
+          },
+          {
+            "axis": "y",
+            "value": 1,
+            "label": "lower child ridge",
+            "lineStyle": "dashed",
+            "color": "neutral"
+          }
+        ]
+      },
+      {
+        "id": "model_score",
+        "title": "Held-out daughter-time model score",
+        "subtitle": "Mean negative log likelihood per event; lower is better",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Does the same-scale child cut beat parent and wrong-pair controls?",
+        "rationale": "Bars provide a direct model-by-model score comparison on one common likelihood scale.",
+        "dataset": "models",
+        "sourceId": "t380_frozen_results",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen model"
+          },
+          "y": {
+            "field": "mean_nll",
+            "type": "quantitative",
+            "label": "Mean held-out NLL"
+          },
+          "tooltip": [
+            {
+              "field": "features",
+              "label": "Features"
+            },
+            {
+              "field": "role",
+              "label": "Role"
+            }
+          ]
+        },
+        "valueFormat": "number"
+      },
+      {
+        "id": "run_delta",
+        "title": "Same-scale child increment in each holdout run",
+        "subtitle": "MP \u2212 MC mean NLL; positive favors the child cut",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Does the effect keep the same sign on both holdout days?",
+        "rationale": "Separate bars expose run-to-run sign changes hidden by a pooled score.",
+        "dataset": "runs",
+        "sourceId": "t380_frozen_results",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "run",
+            "type": "nominal",
+            "label": "Holdout run"
+          },
+          "y": {
+            "field": "delta",
+            "type": "quantitative",
+            "label": "MP \u2212 MC mean NLL"
+          },
+          "tooltip": [
+            {
+              "field": "n",
+              "label": "Events"
+            },
+            {
+              "field": "MP_nll",
+              "label": "MP NLL"
+            },
+            {
+              "field": "MC_nll",
+              "label": "MC NLL"
+            }
+          ]
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "no improvement",
+            "lineStyle": "solid",
+            "color": "neutral"
+          }
+        ],
+        "valueFormat": "number"
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate_audit",
+        "title": "Frozen support gates",
+        "subtitle": "0 of 4 passed",
+        "dataset": "gates",
+        "sourceId": "t380_frozen_results",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "passed",
+            "label": "Passed",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "quarknet_t379_events",
+        "label": "QuarkNet detector 6845 event-linked T379 reduction",
+        "path": "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT *, 2*q2/(q1+q2) AS xU, 2*q4/(q3+q4) AS xL FROM read_csv_auto('analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv') WHERE q1>0 AND q2>0 AND q3>0 AND q4>0",
+          "description": "Select four-counter event-linked candidates and construct both adjacent same-scale child cuts.",
+          "tables_used": [
+            "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv"
+          ],
+          "filters": [
+            "q1>0",
+            "q2>0",
+            "q3>0",
+            "q4>0"
+          ],
+          "metric_definitions": [
+            "xU=2*q2/(q1+q2)",
+            "xL=2*q4/(q3+q4)"
+          ]
+        }
+      },
+      {
+        "id": "t380_frozen_results",
+        "label": "T380 frozen same-scale child scoring output",
+        "path": "analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json')",
+          "description": "Read the frozen T380 prospective scores, run splits, uncertainty and gate results.",
+          "tables_used": [
+            "analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json"
+          ],
+          "metric_definitions": [
+            "delta=held-out mean NLL(MP)-mean NLL(MC); positive favors the same-scale child cut"
+          ]
+        }
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-14T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "summary": [
+        {
+          "verdict": "NOT SUPPORTED",
+          "n_calibration": 682,
+          "n_holdout": 572,
+          "delta": 0.0007851696435907653,
+          "ci_low": -0.0071691068465493685,
+          "ci_high": 0.008510302753982764,
+          "gates_passed": 0
+        }
+      ],
+      "scatter": [
+        {
+          "event": "0317.0-1949",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94214876,
+          "xL": 0.92045455,
+          "delay_us": 2.89625023,
+          "parent_x": 1.10107527,
+          "depth": 1.04411861,
+          "coupling": 0.98915289
+        },
+        {
+          "event": "0317.0-5508",
+          "run": "6845.2020.0317.0",
+          "xU": 1.07438017,
+          "xL": 1.07638889,
+          "delay_us": 1.08125009,
+          "parent_x": 1.00108625,
+          "depth": 1.0258527,
+          "coupling": 0.99899564
+        },
+        {
+          "event": "0317.0-9293",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03926097,
+          "xL": 0.91062395,
+          "delay_us": 1.57250013,
+          "parent_x": 1.07118261,
+          "depth": 1.03757644,
+          "coupling": 0.93568149
+        },
+        {
+          "event": "0317.0-10680",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00775194,
+          "xL": 0.9190372,
+          "delay_us": 6.2725005,
+          "parent_x": 0.99720423,
+          "depth": 0.98597568,
+          "coupling": 0.95564263
+        },
+        {
+          "event": "0317.0-10843",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.93195266,
+          "delay_us": 1.15000009,
+          "parent_x": 0.9687416,
+          "depth": 0.94945514,
+          "coupling": 0.97956822
+        },
+        {
+          "event": "0317.0-19519",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99212598,
+          "xL": 0.81712062,
+          "delay_us": 3.60500029,
+          "parent_x": 1.0111061,
+          "depth": 0.9752879,
+          "coupling": 0.91249732
+        },
+        {
+          "event": "0317.0-35890",
+          "run": "6845.2020.0317.0",
+          "xU": 0.92240117,
+          "xL": 0.5227882,
+          "delay_us": 0.36500003,
+          "parent_x": 0.95821459,
+          "depth": 0.88245762,
+          "coupling": 0.80019352
+        },
+        {
+          "event": "0317.0-36354",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01538462,
+          "xL": 1.14149822,
+          "delay_us": 0.33125003,
+          "parent_x": 1.04285825,
+          "depth": 1.05562014,
+          "coupling": 0.9369432
+        },
+        {
+          "event": "0317.0-38683",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9202454,
+          "xL": 0.88235294,
+          "delay_us": 0.46500004,
+          "parent_x": 1.06618423,
+          "depth": 1.01080456,
+          "coupling": 0.98105377
+        },
+        {
+          "event": "0317.0-42706",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.86049544,
+          "delay_us": 1.82000015,
+          "parent_x": 0.99606347,
+          "depth": 0.96881891,
+          "coupling": 0.94637675
+        },
+        {
+          "event": "0317.0-46704",
+          "run": "6845.2020.0317.0",
+          "xU": 0.76923077,
+          "xL": 0.80717489,
+          "delay_us": 2.59750021,
+          "parent_x": 1.09246785,
+          "depth": 0.99163095,
+          "coupling": 0.98102794
+        },
+        {
+          "event": "0317.0-47375",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89820359,
+          "xL": 0.78291815,
+          "delay_us": 2.13000017,
+          "parent_x": 1.03040489,
+          "depth": 0.96653934,
+          "coupling": 0.94235728
+        },
+        {
+          "event": "0317.0-47466",
+          "run": "6845.2020.0317.0",
+          "xU": 0.76923077,
+          "xL": 0.50980392,
+          "delay_us": 4.64750037,
+          "parent_x": 0.95707248,
+          "depth": 0.85307686,
+          "coupling": 0.87028658
+        },
+        {
+          "event": "0317.0-52331",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.95338983,
+          "delay_us": 7.74625062,
+          "parent_x": 0.99309619,
+          "depth": 0.98226927,
+          "coupling": 0.99282395
+        },
+        {
+          "event": "0317.0-57614",
+          "run": "6845.2020.0317.0",
+          "xU": 1.10151188,
+          "xL": 1.14606742,
+          "delay_us": 6.94125056,
+          "parent_x": 0.89464095,
+          "depth": 0.97024146,
+          "coupling": 0.97772223
+        },
+        {
+          "event": "0317.0-59603",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01538462,
+          "xL": 0.92364532,
+          "delay_us": 1.35875011,
+          "parent_x": 1.02533344,
+          "depth": 1.00633994,
+          "coupling": 0.95413035
+        },
+        {
+          "event": "0317.0-60369",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98360656,
+          "xL": 0.88235294,
+          "delay_us": 4.81750039,
+          "parent_x": 0.73953235,
+          "depth": 0.80841037,
+          "coupling": 0.94937319
+        },
+        {
+          "event": "0317.0-62312",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.92957746,
+          "delay_us": 1.59875013,
+          "parent_x": 0.93428736,
+          "depth": 0.93949612,
+          "coupling": 0.98091776
+        },
+        {
+          "event": "0317.0-66280",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0177706,
+          "xL": 0.92364532,
+          "delay_us": 2.21375018,
+          "parent_x": 1.04973135,
+          "depth": 1.02261005,
+          "coupling": 0.95293736
+        },
+        {
+          "event": "0317.0-70025",
+          "run": "6845.2020.0317.0",
+          "xU": 0.03293085,
+          "xL": 0.7879925,
+          "delay_us": 1.16375009,
+          "parent_x": 0.66013856,
+          "depth": 0.53414354,
+          "coupling": 0.62246917
+        },
+        {
+          "event": "0317.0-70224",
+          "run": "6845.2020.0317.0",
+          "xU": 0.8681672,
+          "xL": 0.92364532,
+          "delay_us": 1.53875012,
+          "parent_x": 1.04731963,
+          "depth": 0.99728604,
+          "coupling": 0.97226094
+        },
+        {
+          "event": "0317.0-73301",
+          "run": "6845.2020.0317.0",
+          "xU": 1.09311741,
+          "xL": 0.79034029,
+          "delay_us": 3.41500027,
+          "parent_x": 1.01734427,
+          "depth": 0.99126389,
+          "coupling": 0.84861144
+        },
+        {
+          "event": "0317.0-79462",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01321586,
+          "xL": 1.10542477,
+          "delay_us": 1.41625011,
+          "parent_x": 1.09425641,
+          "depth": 1.08405959,
+          "coupling": 0.95389554
+        },
+        {
+          "event": "0317.0-80242",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03163686,
+          "xL": 1.09147609,
+          "delay_us": 1.83125015,
+          "parent_x": 1.05406608,
+          "depth": 1.05710209,
+          "coupling": 0.97008039
+        },
+        {
+          "event": "0317.0-86790",
+          "run": "6845.2020.0317.0",
+          "xU": 0.86294416,
+          "xL": 0.88235294,
+          "delay_us": 2.5137502,
+          "parent_x": 1.1148859,
+          "depth": 1.03451175,
+          "coupling": 0.99029561
+        },
+        {
+          "event": "0317.0-91540",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03448276,
+          "xL": 0.92198582,
+          "delay_us": 6.99875056,
+          "parent_x": 0.86858316,
+          "depth": 0.90759754,
+          "coupling": 0.94375153
+        },
+        {
+          "event": "0317.0-91571",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.56603774,
+          "delay_us": 3.7487503,
+          "parent_x": 1.0153083,
+          "depth": 0.91889735,
+          "coupling": 0.83747431
+        },
+        {
+          "event": "0317.0-98498",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.89968976,
+          "delay_us": 1.52500012,
+          "parent_x": 1.14666864,
+          "depth": 1.06311915,
+          "coupling": 0.99569967
+        },
+        {
+          "event": "0317.0-110124",
+          "run": "6845.2020.0317.0",
+          "xU": 1.13513514,
+          "xL": 1.06904232,
+          "delay_us": 3.47125028,
+          "parent_x": 1.01083439,
+          "depth": 1.04113316,
+          "coupling": 0.96695359
+        },
+        {
+          "event": "0317.0-114747",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01123596,
+          "xL": 0.8125,
+          "delay_us": 0.30750002,
+          "parent_x": 1.06341734,
+          "depth": 1.01080033,
+          "coupling": 0.90063202
+        },
+        {
+          "event": "0317.0-115557",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.89968976,
+          "delay_us": 2.22000018,
+          "parent_x": 1.1346852,
+          "depth": 1.05897596,
+          "coupling": 0.99090768
+        },
+        {
+          "event": "0317.0-115756",
+          "run": "6845.2020.0317.0",
+          "xU": 0.82568807,
+          "xL": 0.78291815,
+          "delay_us": 1.46500012,
+          "parent_x": 1.04098171,
+          "depth": 0.96179671,
+          "coupling": 0.97861504
+        },
+        {
+          "event": "0317.0-117223",
+          "run": "6845.2020.0317.0",
+          "xU": 0.72463768,
+          "xL": 0.75566751,
+          "delay_us": 1.89500015,
+          "parent_x": 0.89351526,
+          "depth": 0.84184367,
+          "coupling": 0.98448509
+        },
+        {
+          "event": "0317.0-125243",
+          "run": "6845.2020.0317.0",
+          "xU": 0.82568807,
+          "xL": 1.0052356,
+          "delay_us": 1.62750013,
+          "parent_x": 1.10301018,
+          "depth": 1.0435766,
+          "coupling": 0.91022624
+        },
+        {
+          "event": "0317.0-127884",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94076655,
+          "xL": 1.16788321,
+          "delay_us": 8.14625065,
+          "parent_x": 0.75231667,
+          "depth": 0.84361057,
+          "coupling": 0.88644167
+        },
+        {
+          "event": "0317.0-131722",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98995696,
+          "xL": 1.16352201,
+          "delay_us": 1.52125012,
+          "parent_x": 1.07089487,
+          "depth": 1.07489389,
+          "coupling": 0.91321747
+        },
+        {
+          "event": "0317.0-132057",
+          "run": "6845.2020.0317.0",
+          "xU": 1.1033275,
+          "xL": 0.97733711,
+          "delay_us": 0.85625007,
+          "parent_x": 1.02018514,
+          "depth": 1.02647701,
+          "coupling": 0.93700481
+        },
+        {
+          "event": "0317.0-135849",
+          "run": "6845.2020.0317.0",
+          "xU": 1.16883117,
+          "xL": 0.90432503,
+          "delay_us": 2.79000022,
+          "parent_x": 0.9622069,
+          "depth": 0.98866338,
+          "coupling": 0.86774693
+        },
+        {
+          "event": "0317.0-148269",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18644068,
+          "xL": 0.66878981,
+          "delay_us": 3.02000024,
+          "parent_x": 0.85514894,
+          "depth": 0.89180142,
+          "coupling": 0.74117457
+        },
+        {
+          "event": "0317.0-148317",
+          "run": "6845.2020.0317.0",
+          "xU": 0.81081081,
+          "xL": 0.90534979,
+          "delay_us": 0.77000006,
+          "parent_x": 1.01815642,
+          "depth": 0.9650838,
+          "coupling": 0.95273051
+        },
+        {
+          "event": "0317.0-154270",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94452774,
+          "xL": 0.98016336,
+          "delay_us": 0.58875005,
+          "parent_x": 1.03937843,
+          "depth": 1.01393469,
+          "coupling": 0.98218219
+        },
+        {
+          "event": "0317.0-160269",
+          "run": "6845.2020.0317.0",
+          "xU": 0.58823529,
+          "xL": 0.95890411,
+          "delay_us": 1.50750012,
+          "parent_x": 0.9495935,
+          "depth": 0.88780488,
+          "coupling": 0.81466559
+        },
+        {
+          "event": "0317.0-163502",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00942127,
+          "xL": 0.48,
+          "delay_us": 6.71375054,
+          "parent_x": 0.91894169,
+          "depth": 0.868017,
+          "coupling": 0.73528937
+        },
+        {
+          "event": "0317.0-173011",
+          "run": "6845.2020.0317.0",
+          "xU": 0.85714286,
+          "xL": 0.83076923,
+          "delay_us": 1.02625008,
+          "parent_x": 1.07958478,
+          "depth": 1.00069204,
+          "coupling": 0.98681319
+        },
+        {
+          "event": "0317.0-176999",
+          "run": "6845.2020.0317.0",
+          "xU": 1.07142857,
+          "xL": 1.19363395,
+          "delay_us": 2.00000016,
+          "parent_x": 0.82948295,
+          "depth": 0.92702604,
+          "coupling": 0.93889731
+        },
+        {
+          "event": "0317.0-180653",
+          "run": "6845.2020.0317.0",
+          "xU": 0.56603774,
+          "xL": 0.80314961,
+          "delay_us": 8.41500067,
+          "parent_x": 1.11550285,
+          "depth": 0.97643098,
+          "coupling": 0.88144406
+        },
+        {
+          "event": "0317.0-191817",
+          "run": "6845.2020.0317.0",
+          "xU": 0.82568807,
+          "xL": 0.85257549,
+          "delay_us": 9.10125073,
+          "parent_x": 1.04186907,
+          "depth": 0.9744776,
+          "coupling": 0.98655629
+        },
+        {
+          "event": "0317.0-195863",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89820359,
+          "xL": 0.92198582,
+          "delay_us": 2.90250023,
+          "parent_x": 1.03217935,
+          "depth": 0.99161202,
+          "coupling": 0.98810889
+        },
+        {
+          "event": "0317.0-196138",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01321586,
+          "xL": 1.03686636,
+          "delay_us": 0.91250007,
+          "parent_x": 1.03537481,
+          "depth": 1.03206968,
+          "coupling": 0.98817475
+        },
+        {
+          "event": "0317.0-196439",
+          "run": "6845.2020.0317.0",
+          "xU": 1.16883117,
+          "xL": 0.92544987,
+          "delay_us": 5.87250047,
+          "parent_x": 1.0308049,
+          "depth": 1.03500055,
+          "coupling": 0.87830935
+        },
+        {
+          "event": "0317.0-201457",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03448276,
+          "xL": 0.99337748,
+          "delay_us": 6.62625053,
+          "parent_x": 1.04588745,
+          "depth": 1.03492063,
+          "coupling": 0.97944736
+        },
+        {
+          "event": "0317.0-205151",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88235294,
+          "xL": 0.92198582,
+          "delay_us": 9.79250078,
+          "parent_x": 0.79139383,
+          "depth": 0.82694107,
+          "coupling": 0.98018356
+        },
+        {
+          "event": "0317.0-209674",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99337748,
+          "xL": 1.05322763,
+          "delay_us": 5.95375048,
+          "parent_x": 1.10357757,
+          "depth": 1.07785242,
+          "coupling": 0.97007493
+        },
+        {
+          "event": "0317.0-210912",
+          "run": "6845.2020.0317.0",
+          "xU": 1.25,
+          "xL": 1.1971831,
+          "delay_us": 7.94375064,
+          "parent_x": 0.96598639,
+          "depth": 1.0521542,
+          "coupling": 0.97359155
+        },
+        {
+          "event": "0317.0-216343",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02661597,
+          "xL": 0.79365079,
+          "delay_us": 0.98000008,
+          "parent_x": 1.00428415,
+          "depth": 0.97273422,
+          "coupling": 0.88351741
+        },
+        {
+          "event": "0317.0-217351",
+          "run": "6845.2020.0317.0",
+          "xU": 0.84019769,
+          "xL": 1.04689204,
+          "delay_us": 0.97125008,
+          "parent_x": 1.1197863,
+          "depth": 1.06516568,
+          "coupling": 0.89665283
+        },
+        {
+          "event": "0317.0-218282",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9202454,
+          "xL": 0.84309133,
+          "delay_us": 1.34125011,
+          "parent_x": 1.04897897,
+          "depth": 0.99257894,
+          "coupling": 0.96142297
+        },
+        {
+          "event": "0317.0-218880",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.96899225,
+          "delay_us": 0.79875006,
+          "parent_x": 1.02419055,
+          "depth": 0.99747757,
+          "coupling": 0.97444107
+        },
+        {
+          "event": "0317.0-224287",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9202454,
+          "xL": 0.69767442,
+          "delay_us": 3.47875028,
+          "parent_x": 1.02686567,
+          "depth": 0.95323383,
+          "coupling": 0.88871451
+        },
+        {
+          "event": "0317.0-227113",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88111888,
+          "xL": 0.32012195,
+          "delay_us": 3.38125027,
+          "parent_x": 0.8717246,
+          "depth": 0.79335022,
+          "coupling": 0.71950154
+        },
+        {
+          "event": "0317.0-227406",
+          "run": "6845.2020.0317.0",
+          "xU": 1.07325383,
+          "xL": 1.10738255,
+          "delay_us": 1.49625012,
+          "parent_x": 1.12377735,
+          "depth": 1.11332836,
+          "coupling": 0.98293564
+        },
+        {
+          "event": "0317.0-228457",
+          "run": "6845.2020.0317.0",
+          "xU": 0.90909091,
+          "xL": 1.15384615,
+          "delay_us": 1.00500008,
+          "parent_x": 0.88135593,
+          "depth": 0.92655367,
+          "coupling": 0.87762238
+        },
+        {
+          "event": "0317.0-229083",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.93649085,
+          "delay_us": 5.78375046,
+          "parent_x": 1.06850694,
+          "depth": 1.02935327,
+          "coupling": 0.98437446
+        },
+        {
+          "event": "0317.0-229835",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03759398,
+          "xL": 1.09215017,
+          "delay_us": 0.37625003,
+          "parent_x": 1.0535226,
+          "depth": 1.05779243,
+          "coupling": 0.97272191
+        },
+        {
+          "event": "0317.0-233802",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18644068,
+          "xL": 0.56603774,
+          "delay_us": 9.10125073,
+          "parent_x": 1.16207799,
+          "depth": 1.05003945,
+          "coupling": 0.68979853
+        },
+        {
+          "event": "0317.0-247995",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94555874,
+          "xL": 1.04316547,
+          "delay_us": 2.39625019,
+          "parent_x": 1.00308201,
+          "depth": 1.00022551,
+          "coupling": 0.95119664
+        },
+        {
+          "event": "0317.0-249565",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02040816,
+          "xL": 1.06007067,
+          "delay_us": 3.46125028,
+          "parent_x": 1.09743093,
+          "depth": 1.07901115,
+          "coupling": 0.98016875
+        },
+        {
+          "event": "0317.0-255762",
+          "run": "6845.2020.0317.0",
+          "xU": 1.16883117,
+          "xL": 1.58469945,
+          "delay_us": 0.42000003,
+          "parent_x": 1.41204839,
+          "depth": 1.428847,
+          "coupling": 0.79206586
+        },
+        {
+          "event": "0317.0-262777",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94650206,
+          "xL": 0.9190372,
+          "delay_us": 0.65750005,
+          "parent_x": 1.02714662,
+          "depth": 0.99556336,
+          "coupling": 0.98626757
+        },
+        {
+          "event": "0317.0-265000",
+          "run": "6845.2020.0317.0",
+          "xU": 0.90410959,
+          "xL": 1.0052356,
+          "delay_us": 0.62125005,
+          "parent_x": 1.0483705,
+          "depth": 1.01795312,
+          "coupling": 0.94943699
+        },
+        {
+          "event": "0317.0-265430",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88803089,
+          "xL": 1.11895161,
+          "delay_us": 1.2312501,
+          "parent_x": 1.03620042,
+          "depth": 1.0266906,
+          "coupling": 0.88453964
+        },
+        {
+          "event": "0317.0-268949",
+          "run": "6845.2020.0317.0",
+          "xU": 0.91525424,
+          "xL": 1.0460251,
+          "delay_us": 1.66500013,
+          "parent_x": 1.01155101,
+          "depth": 1.00149899,
+          "coupling": 0.93461457
+        },
+        {
+          "event": "0317.0-269435",
+          "run": "6845.2020.0317.0",
+          "xU": 1.09634551,
+          "xL": 0.55084746,
+          "delay_us": 1.31875011,
+          "parent_x": 0.99516823,
+          "depth": 0.93841694,
+          "coupling": 0.72725097
+        },
+        {
+          "event": "0317.0-273451",
+          "run": "6845.2020.0317.0",
+          "xU": 1.13513514,
+          "xL": 0.95890411,
+          "delay_us": 7.60500061,
+          "parent_x": 0.99843283,
+          "depth": 1.01467446,
+          "coupling": 0.91188449
+        },
+        {
+          "event": "0317.0-278666",
+          "run": "6845.2020.0317.0",
+          "xU": 0.8681672,
+          "xL": 0.88235294,
+          "delay_us": 1.49625012,
+          "parent_x": 1.10827737,
+          "depth": 1.03086094,
+          "coupling": 0.99290713
+        },
+        {
+          "event": "0317.0-278781",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94339623,
+          "xL": 0.96534653,
+          "delay_us": 0.78250006,
+          "parent_x": 1.0337438,
+          "depth": 1.00740978,
+          "coupling": 0.98902485
+        },
+        {
+          "event": "0317.0-285459",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94214876,
+          "xL": 0.85948158,
+          "delay_us": 7.71625062,
+          "parent_x": 1.01003316,
+          "depth": 0.97348893,
+          "coupling": 0.95866641
+        },
+        {
+          "event": "0317.0-289858",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99212598,
+          "xL": 1.06007067,
+          "delay_us": 2.38375019,
+          "parent_x": 0.85753515,
+          "depth": 0.91210959,
+          "coupling": 0.96602766
+        },
+        {
+          "event": "0317.0-298865",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89481947,
+          "xL": 0.99861304,
+          "delay_us": 0.44750004,
+          "parent_x": 0.97601421,
+          "depth": 0.9658333,
+          "coupling": 0.94810321
+        },
+        {
+          "event": "0317.0-304156",
+          "run": "6845.2020.0317.0",
+          "xU": 1.07325383,
+          "xL": 0.96534653,
+          "delay_us": 9.44125076,
+          "parent_x": 0.73383664,
+          "depth": 0.83377798,
+          "coupling": 0.94604635
+        },
+        {
+          "event": "0317.0-308138",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.9190372,
+          "delay_us": 2.23000018,
+          "parent_x": 1.10691443,
+          "depth": 1.04411561,
+          "coupling": 0.9994186
+        },
+        {
+          "event": "0317.0-311452",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99212598,
+          "xL": 0.97297297,
+          "delay_us": 8.30250066,
+          "parent_x": 0.99058774,
+          "depth": 0.98793837,
+          "coupling": 0.99042349
+        },
+        {
+          "event": "0317.0-314320",
+          "run": "6845.2020.0317.0",
+          "xU": 0.92783505,
+          "xL": 1.06007067,
+          "delay_us": 8.40250067,
+          "parent_x": 1.10250791,
+          "depth": 1.0685821,
+          "coupling": 0.93388219
+        },
+        {
+          "event": "0317.0-319412",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98901099,
+          "xL": 0.98562628,
+          "delay_us": 1.38000011,
+          "parent_x": 1.05955942,
+          "depth": 1.03544556,
+          "coupling": 0.99830765
+        },
+        {
+          "event": "0317.0-321783",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.99770642,
+          "delay_us": 0.72750006,
+          "parent_x": 1.0836084,
+          "depth": 1.04278151,
+          "coupling": 0.96008399
+        },
+        {
+          "event": "0317.0-323113",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88695652,
+          "xL": 0.86049544,
+          "delay_us": 0.59375005,
+          "parent_x": 1.05806785,
+          "depth": 0.99636447,
+          "coupling": 0.98676946
+        },
+        {
+          "event": "0317.0-323709",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.88235294,
+          "delay_us": 3.42500027,
+          "parent_x": 1.03731953,
+          "depth": 0.99936439,
+          "coupling": 0.9573055
+        },
+        {
+          "event": "0317.0-326909",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83798883,
+          "xL": 1.08433735,
+          "delay_us": 4.71125038,
+          "parent_x": 0.98794822,
+          "depth": 0.97852502,
+          "coupling": 0.87682574
+        },
+        {
+          "event": "0317.0-328731",
+          "run": "6845.2020.0317.0",
+          "xU": 0.92240117,
+          "xL": 1.01465614,
+          "delay_us": 2.25125018,
+          "parent_x": 1.04472009,
+          "depth": 1.02001055,
+          "coupling": 0.95387251
+        },
+        {
+          "event": "0317.0-330055",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0177706,
+          "xL": 1.28854626,
+          "delay_us": 0.47250004,
+          "parent_x": 1.10525315,
+          "depth": 1.12597157,
+          "coupling": 0.86461217
+        },
+        {
+          "event": "0317.0-334616",
+          "run": "6845.2020.0317.0",
+          "xU": 1.50259067,
+          "xL": 1.05,
+          "delay_us": 9.9537508,
+          "parent_x": 1.07558506,
+          "depth": 1.13678697,
+          "coupling": 0.77370466
+        },
+        {
+          "event": "0317.0-336465",
+          "run": "6845.2020.0317.0",
+          "xU": 0.79497908,
+          "xL": 0.95092025,
+          "delay_us": 2.83125023,
+          "parent_x": 1.0691811,
+          "depth": 1.00556865,
+          "coupling": 0.92202942
+        },
+        {
+          "event": "0317.0-342799",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04100946,
+          "xL": 0.98562628,
+          "delay_us": 2.07000017,
+          "parent_x": 1.12804922,
+          "depth": 1.08862348,
+          "coupling": 0.97230841
+        },
+        {
+          "event": "0317.0-348474",
+          "run": "6845.2020.0317.0",
+          "xU": 0.63829787,
+          "xL": 0.85257549,
+          "delay_us": 9.81250079,
+          "parent_x": 1.18068025,
+          "depth": 1.04205169,
+          "coupling": 0.89286119
+        },
+        {
+          "event": "0317.0-354399",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.66079295,
+          "delay_us": 3.51250028,
+          "parent_x": 0.91355747,
+          "depth": 0.88488304,
+          "coupling": 0.84652551
+        },
+        {
+          "event": "0317.0-357854",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98995696,
+          "xL": 0.96199525,
+          "delay_us": 5.22375042,
+          "parent_x": 1.00857196,
+          "depth": 0.99766673,
+          "coupling": 0.98601915
+        },
+        {
+          "event": "0317.0-358232",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03448276,
+          "xL": 0.70680628,
+          "delay_us": 3.17000025,
+          "parent_x": 0.96070418,
+          "depth": 0.93283035,
+          "coupling": 0.83616176
+        },
+        {
+          "event": "0317.0-360954",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 1.01902174,
+          "delay_us": 4.28750034,
+          "parent_x": 1.05246224,
+          "depth": 1.03321715,
+          "coupling": 0.9743601
+        },
+        {
+          "event": "0317.0-362274",
+          "run": "6845.2020.0317.0",
+          "xU": 1.07325383,
+          "xL": 1.0177706,
+          "delay_us": 0.32625003,
+          "parent_x": 0.94068481,
+          "depth": 0.97617578,
+          "coupling": 0.97225838
+        },
+        {
+          "event": "0317.0-384623",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.9327984,
+          "delay_us": 0.36250003,
+          "parent_x": 1.08152819,
+          "depth": 1.0373007,
+          "coupling": 0.98252823
+        },
+        {
+          "event": "0317.0-386142",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.96534653,
+          "delay_us": 7.30250058,
+          "parent_x": 1.09885253,
+          "depth": 1.0547103,
+          "coupling": 0.9988023
+        },
+        {
+          "event": "0317.0-386580",
+          "run": "6845.2020.0317.0",
+          "xU": 1.14245416,
+          "xL": 0.76923077,
+          "delay_us": 8.22250066,
+          "parent_x": 0.93623406,
+          "depth": 0.94673668,
+          "coupling": 0.8133883
+        },
+        {
+          "event": "0317.0-386633",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 1.08433735,
+          "delay_us": 1.10625009,
+          "parent_x": 1.05905339,
+          "depth": 1.04137592,
+          "coupling": 0.91676852
+        },
+        {
+          "event": "0317.0-387540",
+          "run": "6845.2020.0317.0",
+          "xU": 1.14503817,
+          "xL": 0.98562628,
+          "delay_us": 5.11375041,
+          "parent_x": 0.87807077,
+          "depth": 0.94373075,
+          "coupling": 0.92029406
+        },
+        {
+          "event": "0317.0-388669",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.91428571,
+          "delay_us": 3.11750025,
+          "parent_x": 1.04503608,
+          "depth": 0.99776064,
+          "coupling": 0.9884017
+        },
+        {
+          "event": "0317.0-388890",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04477612,
+          "xL": 0.70143885,
+          "delay_us": 8.01250064,
+          "parent_x": 1.07608564,
+          "depth": 1.00407242,
+          "coupling": 0.82833136
+        },
+        {
+          "event": "0317.0-391182",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.95604396,
+          "delay_us": 1.40750011,
+          "parent_x": 1.0813621,
+          "depth": 1.04138042,
+          "coupling": 0.99415101
+        },
+        {
+          "event": "0317.0-397244",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18110236,
+          "xL": 0.79365079,
+          "delay_us": 2.42625019,
+          "parent_x": 0.96902371,
+          "depth": 0.97714164,
+          "coupling": 0.80627422
+        },
+        {
+          "event": "0317.0-399648",
+          "run": "6845.2020.0317.0",
+          "xU": 0.69053708,
+          "xL": 0.9190372,
+          "delay_us": 9.10750073,
+          "parent_x": 0.99206295,
+          "depth": 0.92933541,
+          "coupling": 0.88574994
+        },
+        {
+          "event": "0317.0-409383",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9054326,
+          "xL": 0.74380165,
+          "delay_us": 2.96375024,
+          "parent_x": 0.90114622,
+          "depth": 0.87829949,
+          "coupling": 0.91918453
+        },
+        {
+          "event": "0317.0-415328",
+          "run": "6845.2020.0317.0",
+          "xU": 0.92436975,
+          "xL": 0.81987578,
+          "delay_us": 3.84500031,
+          "parent_x": 0.97406035,
+          "depth": 0.94053291,
+          "coupling": 0.94775301
+        },
+        {
+          "event": "0317.0-419078",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98995696,
+          "xL": 1.04100946,
+          "delay_us": 2.66250021,
+          "parent_x": 1.0693278,
+          "depth": 1.0519695,
+          "coupling": 0.97447375
+        },
+        {
+          "event": "0317.0-420011",
+          "run": "6845.2020.0317.0",
+          "xU": 0.78066914,
+          "xL": 1.0,
+          "delay_us": 0.94875008,
+          "parent_x": 0.94302554,
+          "depth": 0.92337917,
+          "coupling": 0.89033457
+        },
+        {
+          "event": "0317.0-422025",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89481947,
+          "xL": 0.99770642,
+          "delay_us": 1.58250013,
+          "parent_x": 1.07096527,
+          "depth": 1.03061473,
+          "coupling": 0.94855652
+        },
+        {
+          "event": "0317.0-422177",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88695652,
+          "xL": 0.8356546,
+          "delay_us": 0.43875004,
+          "parent_x": 1.02511935,
+          "depth": 0.97029997,
+          "coupling": 0.97434904
+        },
+        {
+          "event": "0317.0-435281",
+          "run": "6845.2020.0317.0",
+          "xU": 0.76923077,
+          "xL": 0.76086957,
+          "delay_us": 3.13500025,
+          "parent_x": 0.99661476,
+          "depth": 0.91943128,
+          "coupling": 0.9958194
+        },
+        {
+          "event": "0317.0-436751",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.88235294,
+          "delay_us": 0.80625006,
+          "parent_x": 1.05573134,
+          "depth": 1.0113769,
+          "coupling": 0.9573055
+        },
+        {
+          "event": "0317.0-439485",
+          "run": "6845.2020.0317.0",
+          "xU": 0.84337349,
+          "xL": 1.00746269,
+          "delay_us": 3.31500027,
+          "parent_x": 0.95088147,
+          "depth": 0.94105038,
+          "coupling": 0.9179554
+        },
+        {
+          "event": "0317.0-444012",
+          "run": "6845.2020.0317.0",
+          "xU": 1.10456554,
+          "xL": 0.29850746,
+          "delay_us": 0.61125005,
+          "parent_x": 0.8557364,
+          "depth": 0.82371724,
+          "coupling": 0.59697096
+        },
+        {
+          "event": "0317.0-447418",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02040816,
+          "xL": 0.88235294,
+          "delay_us": 1.67375013,
+          "parent_x": 1.15376458,
+          "depth": 1.08276524,
+          "coupling": 0.93097239
+        },
+        {
+          "event": "0317.0-455938",
+          "run": "6845.2020.0317.0",
+          "xU": 0.72847682,
+          "xL": 0.92198582,
+          "delay_us": 9.44250076,
+          "parent_x": 0.88039024,
+          "depth": 0.85814634,
+          "coupling": 0.9032455
+        },
+        {
+          "event": "0317.0-464002",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83798883,
+          "xL": 0.59259259,
+          "delay_us": 2.61625021,
+          "parent_x": 0.97575666,
+          "depth": 0.88992622,
+          "coupling": 0.87730188
+        },
+        {
+          "event": "0317.0-465767",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.30259366,
+          "delay_us": 1.45750012,
+          "parent_x": 0.94610829,
+          "depth": 0.84843579,
+          "coupling": 0.66742586
+        },
+        {
+          "event": "0317.0-467722",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0177706,
+          "xL": 1.05322763,
+          "delay_us": 1.01375008,
+          "parent_x": 1.09142879,
+          "depth": 1.07332587,
+          "coupling": 0.98227148
+        },
+        {
+          "event": "0317.0-468029",
+          "run": "6845.2020.0317.0",
+          "xU": 0.95081967,
+          "xL": 0.45064378,
+          "delay_us": 1.99250016,
+          "parent_x": 0.92342942,
+          "depth": 0.85557998,
+          "coupling": 0.74991205
+        },
+        {
+          "event": "0317.0-469099",
+          "run": "6845.2020.0317.0",
+          "xU": 0.79812207,
+          "xL": 0.93649085,
+          "delay_us": 2.03125016,
+          "parent_x": 1.10083318,
+          "depth": 1.0253163,
+          "coupling": 0.93081561
+        },
+        {
+          "event": "0317.0-475821",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94214876,
+          "xL": 1.00436681,
+          "delay_us": 2.24500018,
+          "parent_x": 0.97763152,
+          "depth": 0.97594166,
+          "coupling": 0.96889097
+        },
+        {
+          "event": "0317.0-501473",
+          "run": "6845.2020.0317.0",
+          "xU": 1.16883117,
+          "xL": 0.75117371,
+          "delay_us": 5.49625044,
+          "parent_x": 0.99916931,
+          "depth": 0.98617151,
+          "coupling": 0.79117127
+        },
+        {
+          "event": "0317.0-509231",
+          "run": "6845.2020.0317.0",
+          "xU": 0.93078759,
+          "xL": 1.03686636,
+          "delay_us": 2.62250021,
+          "parent_x": 0.93176786,
+          "depth": 0.94791457,
+          "coupling": 0.94696062
+        },
+        {
+          "event": "0317.0-512688",
+          "run": "6845.2020.0317.0",
+          "xU": 0.91525424,
+          "xL": 0.96199525,
+          "delay_us": 2.84375023,
+          "parent_x": 1.09164573,
+          "depth": 1.04135267,
+          "coupling": 0.97662949
+        },
+        {
+          "event": "0317.0-526495",
+          "run": "6845.2020.0317.0",
+          "xU": 1.05121294,
+          "xL": 0.84309133,
+          "delay_us": 8.92375071,
+          "parent_x": 0.98436712,
+          "depth": 0.97250438,
+          "coupling": 0.8959392
+        },
+        {
+          "event": "0317.0-535057",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9947644,
+          "xL": 0.74380165,
+          "delay_us": 5.28500042,
+          "parent_x": 0.94131376,
+          "depth": 0.91975819,
+          "coupling": 0.87451863
+        },
+        {
+          "event": "0317.0-535924",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.94076655,
+          "delay_us": 1.2387501,
+          "parent_x": 1.07730205,
+          "depth": 1.02826979,
+          "coupling": 0.98855392
+        },
+        {
+          "event": "0317.0-539411",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94339623,
+          "xL": 0.93457944,
+          "delay_us": 2.25000018,
+          "parent_x": 0.91894793,
+          "depth": 0.925747,
+          "coupling": 0.99559161
+        },
+        {
+          "event": "0317.0-541714",
+          "run": "6845.2020.0317.0",
+          "xU": 1.14808652,
+          "xL": 1.06557377,
+          "delay_us": 0.62500005,
+          "parent_x": 1.21212958,
+          "depth": 1.17411253,
+          "coupling": 0.95874362
+        },
+        {
+          "event": "0317.0-545352",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.6068268,
+          "delay_us": 0.42250003,
+          "parent_x": 0.90374179,
+          "depth": 0.85670761,
+          "coupling": 0.85786885
+        },
+        {
+          "event": "0317.0-550547",
+          "run": "6845.2020.0317.0",
+          "xU": 1.13924051,
+          "xL": 1.21107266,
+          "delay_us": 3.99000032,
+          "parent_x": 1.07202473,
+          "depth": 1.1072643,
+          "coupling": 0.96408392
+        },
+        {
+          "event": "0317.0-552446",
+          "run": "6845.2020.0317.0",
+          "xU": 1.11111111,
+          "xL": 0.54817276,
+          "delay_us": 0.58000005,
+          "parent_x": 0.87787094,
+          "depth": 0.87325313,
+          "coupling": 0.71853082
+        },
+        {
+          "event": "0317.0-562729",
+          "run": "6845.2020.0317.0",
+          "xU": 1.06796117,
+          "xL": 0.98859316,
+          "delay_us": 4.68875038,
+          "parent_x": 1.03619798,
+          "depth": 1.03307888,
+          "coupling": 0.960316
+        },
+        {
+          "event": "0317.0-564305",
+          "run": "6845.2020.0317.0",
+          "xU": 1.05882353,
+          "xL": 0.98562628,
+          "delay_us": 5.13250041,
+          "parent_x": 0.89143119,
+          "depth": 0.93635358,
+          "coupling": 0.96340138
+        },
+        {
+          "event": "0317.0-565272",
+          "run": "6845.2020.0317.0",
+          "xU": 1.19496855,
+          "xL": 0.63621533,
+          "delay_us": 1.52875012,
+          "parent_x": 1.03947856,
+          "depth": 0.99450656,
+          "coupling": 0.72062339
+        },
+        {
+          "event": "0317.0-565878",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94214876,
+          "xL": 1.05322763,
+          "delay_us": 0.97000008,
+          "parent_x": 1.10275924,
+          "depth": 1.06963796,
+          "coupling": 0.94446056
+        },
+        {
+          "event": "0317.0-572028",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.95172414,
+          "delay_us": 2.23000018,
+          "parent_x": 0.94470234,
+          "depth": 0.94986019,
+          "coupling": 0.9919911
+        },
+        {
+          "event": "0317.0-581565",
+          "run": "6845.2020.0317.0",
+          "xU": 1.08433735,
+          "xL": 0.76566125,
+          "delay_us": 3.33500027,
+          "parent_x": 1.04453196,
+          "depth": 1.00232253,
+          "coupling": 0.84066195
+        },
+        {
+          "event": "0317.0-599053",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9202454,
+          "xL": 0.88235294,
+          "delay_us": 0.73375006,
+          "parent_x": 1.02625373,
+          "depth": 0.98443641,
+          "coupling": 0.98105377
+        },
+        {
+          "event": "0317.0-609067",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18644068,
+          "xL": 1.10059172,
+          "delay_us": 1.74625014,
+          "parent_x": 1.00252113,
+          "depth": 1.04948341,
+          "coupling": 0.95707552
+        },
+        {
+          "event": "0317.0-612794",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9947644,
+          "xL": 0.90771558,
+          "delay_us": 0.83125007,
+          "parent_x": 0.98550995,
+          "depth": 0.97429685,
+          "coupling": 0.95647559
+        },
+        {
+          "event": "0317.0-621079",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94452774,
+          "xL": 1.14149822,
+          "delay_us": 1.10250009,
+          "parent_x": 1.0299667,
+          "depth": 1.03529922,
+          "coupling": 0.90151476
+        },
+        {
+          "event": "0317.0-628264",
+          "run": "6845.2020.0317.0",
+          "xU": 0.85714286,
+          "xL": 0.9893617,
+          "delay_us": 2.00875016,
+          "parent_x": 1.06139732,
+          "depth": 1.01670195,
+          "coupling": 0.93389058
+        },
+        {
+          "event": "0317.0-639216",
+          "run": "6845.2020.0317.0",
+          "xU": 1.60142349,
+          "xL": 0.98562628,
+          "delay_us": 1.41500011,
+          "parent_x": 1.18680984,
+          "depth": 1.20320869,
+          "coupling": 0.6921014
+        },
+        {
+          "event": "0317.0-643578",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0880829,
+          "xL": 0.81987578,
+          "delay_us": 3.07250025,
+          "parent_x": 0.93509511,
+          "depth": 0.94429118,
+          "coupling": 0.86589644
+        },
+        {
+          "event": "0317.0-645130",
+          "run": "6845.2020.0317.0",
+          "xU": 0.70362473,
+          "xL": 0.75566751,
+          "delay_us": 5.30000042,
+          "parent_x": 0.83233964,
+          "depth": 0.79665422,
+          "coupling": 0.97397861
+        },
+        {
+          "event": "0317.0-646113",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89820359,
+          "xL": 0.88235294,
+          "delay_us": 4.83375039,
+          "parent_x": 0.9474208,
+          "depth": 0.92851219,
+          "coupling": 0.99207467
+        },
+        {
+          "event": "0317.0-654767",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02333932,
+          "xL": 1.05,
+          "delay_us": 2.65750021,
+          "parent_x": 0.95129564,
+          "depth": 0.97953723,
+          "coupling": 0.98666966
+        },
+        {
+          "event": "0317.0-659826",
+          "run": "6845.2020.0317.0",
+          "xU": 0.72,
+          "xL": 0.88235294,
+          "delay_us": 5.16000041,
+          "parent_x": 1.03330846,
+          "depth": 0.95683242,
+          "coupling": 0.91882353
+        },
+        {
+          "event": "0317.0-670483",
+          "run": "6845.2020.0317.0",
+          "xU": 0.93555094,
+          "xL": 0.81712062,
+          "delay_us": 2.94625024,
+          "parent_x": 0.94730173,
+          "depth": 0.92468659,
+          "coupling": 0.94078484
+        },
+        {
+          "event": "0317.0-670600",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 1.03184713,
+          "delay_us": 2.40500019,
+          "parent_x": 1.00766176,
+          "depth": 1.00512121,
+          "coupling": 0.9679474
+        },
+        {
+          "event": "0317.0-680919",
+          "run": "6845.2020.0317.0",
+          "xU": 0.74380165,
+          "xL": 0.82116788,
+          "delay_us": 1.45500012,
+          "parent_x": 0.97617457,
+          "depth": 0.91130409,
+          "coupling": 0.96131688
+        },
+        {
+          "event": "0317.0-685493",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.99770642,
+          "delay_us": 2.5012502,
+          "parent_x": 1.0836084,
+          "depth": 1.04278151,
+          "coupling": 0.96008399
+        },
+        {
+          "event": "0317.0-685831",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94555874,
+          "xL": 0.9893617,
+          "delay_us": 6.12125049,
+          "parent_x": 1.06282242,
+          "depth": 1.03149365,
+          "coupling": 0.97809852
+        },
+        {
+          "event": "0317.0-694141",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04477612,
+          "xL": 1.04316547,
+          "delay_us": 3.7712503,
+          "parent_x": 1.07608564,
+          "depth": 1.06536027,
+          "coupling": 0.99919467
+        },
+        {
+          "event": "0317.0-694291",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94555874,
+          "xL": 0.82474227,
+          "delay_us": 5.34875043,
+          "parent_x": 1.02592729,
+          "depth": 0.97847962,
+          "coupling": 0.93959176
+        },
+        {
+          "event": "0317.0-694549",
+          "run": "6845.2020.0317.0",
+          "xU": 1.06796117,
+          "xL": 1.12734864,
+          "delay_us": 1.15375009,
+          "parent_x": 1.13247137,
+          "depth": 1.12217707,
+          "coupling": 0.97030626
+        },
+        {
+          "event": "0317.0-705928",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00942127,
+          "xL": 1.04316547,
+          "delay_us": 1.92250015,
+          "parent_x": 0.97185099,
+          "depth": 0.98984014,
+          "coupling": 0.9831279
+        },
+        {
+          "event": "0317.0-711040",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02040816,
+          "xL": 0.98746082,
+          "delay_us": 1.40125011,
+          "parent_x": 0.95491113,
+          "depth": 0.97149984,
+          "coupling": 0.98352633
+        },
+        {
+          "event": "0317.0-724177",
+          "run": "6845.2020.0317.0",
+          "xU": 0.73891626,
+          "xL": 0.58951965,
+          "delay_us": 9.54750076,
+          "parent_x": 0.97433852,
+          "depth": 0.87160395,
+          "coupling": 0.9253017
+        },
+        {
+          "event": "0317.0-725596",
+          "run": "6845.2020.0317.0",
+          "xU": 1.17824773,
+          "xL": 1.21354657,
+          "delay_us": 1.32000011,
+          "parent_x": 1.14973298,
+          "depth": 1.16600194,
+          "coupling": 0.98235058
+        },
+        {
+          "event": "0317.0-728891",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89108911,
+          "xL": 0.98016336,
+          "delay_us": 4.88375039,
+          "parent_x": 1.08713232,
+          "depth": 1.03792384,
+          "coupling": 0.95546287
+        },
+        {
+          "event": "0317.0-733988",
+          "run": "6845.2020.0317.0",
+          "xU": 0.81712062,
+          "xL": 0.90909091,
+          "delay_us": 8.7387507,
+          "parent_x": 1.0134357,
+          "depth": 0.96353167,
+          "coupling": 0.95401486
+        },
+        {
+          "event": "0317.0-741238",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0177706,
+          "xL": 0.97643098,
+          "delay_us": 0.72625006,
+          "parent_x": 1.09589884,
+          "depth": 1.06230542,
+          "coupling": 0.97933019
+        },
+        {
+          "event": "0317.0-744331",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98901099,
+          "xL": 0.86306099,
+          "delay_us": 2.15250017,
+          "parent_x": 1.0025959,
+          "depth": 0.97702144,
+          "coupling": 0.937025
+        },
+        {
+          "event": "0317.0-753608",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04100946,
+          "xL": 0.95890411,
+          "delay_us": 4.9687504,
+          "parent_x": 1.07558898,
+          "depth": 1.04934387,
+          "coupling": 0.95894732
+        },
+        {
+          "event": "0317.0-758613",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99804305,
+          "xL": 1.09913793,
+          "delay_us": 4.37125035,
+          "parent_x": 0.86663165,
+          "depth": 0.92503745,
+          "coupling": 0.94945256
+        },
+        {
+          "event": "0317.0-770631",
+          "run": "6845.2020.0317.0",
+          "xU": 0.90128755,
+          "xL": 1.00101112,
+          "delay_us": 3.54750028,
+          "parent_x": 1.0873733,
+          "depth": 1.04341751,
+          "coupling": 0.95013822
+        },
+        {
+          "event": "0317.0-771589",
+          "run": "6845.2020.0317.0",
+          "xU": 0.78717201,
+          "xL": 0.73555166,
+          "delay_us": 4.12500033,
+          "parent_x": 1.16731617,
+          "depth": 1.03055857,
+          "coupling": 0.97418983
+        },
+        {
+          "event": "0317.0-775107",
+          "run": "6845.2020.0317.0",
+          "xU": 1.11111111,
+          "xL": 0.96397274,
+          "delay_us": 2.72250022,
+          "parent_x": 1.23123033,
+          "depth": 1.16099705,
+          "coupling": 0.92643081
+        },
+        {
+          "event": "0317.0-777384",
+          "run": "6845.2020.0317.0",
+          "xU": 1.09004739,
+          "xL": 1.01902174,
+          "delay_us": 9.53875076,
+          "parent_x": 0.98945511,
+          "depth": 1.01127309,
+          "coupling": 0.96448717
+        },
+        {
+          "event": "0317.0-779987",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.94444444,
+          "delay_us": 9.02125072,
+          "parent_x": 1.10007639,
+          "depth": 1.0516934,
+          "coupling": 0.98835125
+        },
+        {
+          "event": "0317.0-789633",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.53645117,
+          "delay_us": 2.70875022,
+          "parent_x": 0.90282521,
+          "depth": 0.85956742,
+          "coupling": 0.78435462
+        },
+        {
+          "event": "0317.0-795263",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83511777,
+          "xL": 0.74380165,
+          "delay_us": 2.94000024,
+          "parent_x": 0.93205753,
+          "depth": 0.88555897,
+          "coupling": 0.95434194
+        },
+        {
+          "event": "0317.0-810122",
+          "run": "6845.2020.0317.0",
+          "xU": 0.86183311,
+          "xL": 0.89855072,
+          "delay_us": 0.99375008,
+          "parent_x": 1.08772045,
+          "depth": 1.01908109,
+          "coupling": 0.98164119
+        },
+        {
+          "event": "0317.0-810941",
+          "run": "6845.2020.0317.0",
+          "xU": 1.10456554,
+          "xL": 1.17391304,
+          "delay_us": 0.41875003,
+          "parent_x": 1.06585569,
+          "depth": 1.09107804,
+          "coupling": 0.96532625
+        },
+        {
+          "event": "0317.0-827980",
+          "run": "6845.2020.0317.0",
+          "xU": 1.1409396,
+          "xL": 1.00746269,
+          "delay_us": 2.24000018,
+          "parent_x": 1.00486262,
+          "depth": 1.02786728,
+          "coupling": 0.93326154
+        },
+        {
+          "event": "0317.0-841151",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98814229,
+          "xL": 0.97888676,
+          "delay_us": 1.56000012,
+          "parent_x": 1.07239572,
+          "depth": 1.04265698,
+          "coupling": 0.99537223
+        },
+        {
+          "event": "0317.0-842943",
+          "run": "6845.2020.0317.0",
+          "xU": 1.0177706,
+          "xL": 1.00746269,
+          "delay_us": 2.81375023,
+          "parent_x": 1.04479188,
+          "depth": 1.03398985,
+          "coupling": 0.99484604
+        },
+        {
+          "event": "0317.0-845590",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94076655,
+          "xL": 1.08433735,
+          "delay_us": 8.10750065,
+          "parent_x": 0.92030492,
+          "depth": 0.94914695,
+          "coupling": 0.9282146
+        },
+        {
+          "event": "0317.0-854864",
+          "run": "6845.2020.0317.0",
+          "xU": 1.38755981,
+          "xL": 1.05,
+          "delay_us": 3.18750026,
+          "parent_x": 1.14641923,
+          "depth": 1.16230191,
+          "coupling": 0.8312201
+        },
+        {
+          "event": "0317.0-857484",
+          "run": "6845.2020.0317.0",
+          "xU": 0.80597015,
+          "xL": 0.95338983,
+          "delay_us": 1.14875009,
+          "parent_x": 1.08529137,
+          "depth": 1.01884985,
+          "coupling": 0.92629016
+        },
+        {
+          "event": "0317.0-858315",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 1.07638889,
+          "delay_us": 1.40750011,
+          "parent_x": 1.07903056,
+          "depth": 1.05381883,
+          "coupling": 0.92074275
+        },
+        {
+          "event": "0317.0-864486",
+          "run": "6845.2020.0317.0",
+          "xU": 1.11111111,
+          "xL": 1.03686636,
+          "delay_us": 6.94000056,
+          "parent_x": 1.2570601,
+          "depth": 1.19285542,
+          "coupling": 0.96287762
+        },
+        {
+          "event": "0317.0-868551",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94452774,
+          "xL": 0.48,
+          "delay_us": 0.99875008,
+          "parent_x": 0.88210647,
+          "depth": 0.83461974,
+          "coupling": 0.76773613
+        },
+        {
+          "event": "0317.0-877255",
+          "run": "6845.2020.0317.0",
+          "xU": 0.93333333,
+          "xL": 1.01593625,
+          "delay_us": 0.88375007,
+          "parent_x": 0.96876131,
+          "depth": 0.97028907,
+          "coupling": 0.95869854
+        },
+        {
+          "event": "0317.0-879230",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98734177,
+          "xL": 0.99706745,
+          "delay_us": 1.2612501,
+          "parent_x": 1.04327873,
+          "depth": 1.02632418,
+          "coupling": 0.99513716
+        },
+        {
+          "event": "0317.0-899298",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83798883,
+          "xL": 0.9486166,
+          "delay_us": 3.16500025,
+          "parent_x": 1.0868573,
+          "depth": 1.02394057,
+          "coupling": 0.94468611
+        },
+        {
+          "event": "0317.0-901449",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.64914992,
+          "delay_us": 0.96500008,
+          "parent_x": 0.9112275,
+          "depth": 0.88168068,
+          "coupling": 0.84070399
+        },
+        {
+          "event": "0317.0-906006",
+          "run": "6845.2020.0317.0",
+          "xU": 0.92240117,
+          "xL": 0.95604396,
+          "delay_us": 4.44375036,
+          "parent_x": 1.05748629,
+          "depth": 1.01838738,
+          "coupling": 0.98317861
+        },
+        {
+          "event": "0317.0-907563",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83333333,
+          "xL": 0.88235294,
+          "delay_us": 0.40125003,
+          "parent_x": 0.99706745,
+          "depth": 0.95063539,
+          "coupling": 0.9754902
+        },
+        {
+          "event": "0317.0-910873",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02661597,
+          "xL": 0.66666667,
+          "delay_us": 0.78000006,
+          "parent_x": 0.95427435,
+          "depth": 0.92113983,
+          "coupling": 0.82002535
+        },
+        {
+          "event": "0317.0-911060",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94339623,
+          "xL": 1.03184713,
+          "delay_us": 1.95750016,
+          "parent_x": 1.01931505,
+          "depth": 1.00903533,
+          "coupling": 0.95577455
+        },
+        {
+          "event": "0317.0-915041",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94555874,
+          "xL": 0.92674316,
+          "delay_us": 2.15625017,
+          "parent_x": 1.15501752,
+          "depth": 1.08157587,
+          "coupling": 0.99059221
+        },
+        {
+          "event": "0317.0-922227",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89481947,
+          "xL": 0.73170732,
+          "delay_us": 4.01375032,
+          "parent_x": 1.01469451,
+          "depth": 0.94715133,
+          "coupling": 0.91844393
+        },
+        {
+          "event": "0317.0-924305",
+          "run": "6845.2020.0317.0",
+          "xU": 0.85066163,
+          "xL": 0.54644809,
+          "delay_us": 4.32875035,
+          "parent_x": 0.93273162,
+          "depth": 0.85808336,
+          "coupling": 0.84789323
+        },
+        {
+          "event": "0317.0-924394",
+          "run": "6845.2020.0317.0",
+          "xU": 1.56462585,
+          "xL": 1.10059172,
+          "delay_us": 2.4950002,
+          "parent_x": 1.23475958,
+          "depth": 1.2492199,
+          "coupling": 0.76798293
+        },
+        {
+          "event": "0317.0-928645",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99804305,
+          "xL": 0.90647482,
+          "delay_us": 3.27500026,
+          "parent_x": 1.06774209,
+          "depth": 1.02821387,
+          "coupling": 0.95421588
+        },
+        {
+          "event": "0317.0-937658",
+          "run": "6845.2020.0317.0",
+          "xU": 1.09859155,
+          "xL": 1.01992966,
+          "delay_us": 2.4937502,
+          "parent_x": 1.00582209,
+          "depth": 1.0235586,
+          "coupling": 0.96066906
+        },
+        {
+          "event": "0317.0-947762",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18858954,
+          "xL": 1.19148936,
+          "delay_us": 5.79125046,
+          "parent_x": 0.96953028,
+          "depth": 1.04301861,
+          "coupling": 0.99855009
+        },
+        {
+          "event": "0317.0-949147",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99099099,
+          "xL": 1.08433735,
+          "delay_us": 0.33250003,
+          "parent_x": 1.11479538,
+          "depth": 1.09087093,
+          "coupling": 0.95332682
+        },
+        {
+          "event": "0317.0-952046",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99099099,
+          "xL": 1.13636364,
+          "delay_us": 0.98125008,
+          "parent_x": 1.00071073,
+          "depth": 1.02171681,
+          "coupling": 0.92731368
+        },
+        {
+          "event": "0317.0-953582",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00222717,
+          "xL": 1.06904232,
+          "delay_us": 6.48875052,
+          "parent_x": 0.91428571,
+          "depth": 0.95378089,
+          "coupling": 0.96659243
+        },
+        {
+          "event": "0317.0-956410",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 1.10974106,
+          "delay_us": 2.95625024,
+          "parent_x": 1.07386105,
+          "depth": 1.06390257,
+          "coupling": 0.92900044
+        },
+        {
+          "event": "0317.0-958982",
+          "run": "6845.2020.0317.0",
+          "xU": 0.47619048,
+          "xL": 1.1971831,
+          "delay_us": 7.5587506,
+          "parent_x": 1.0649168,
+          "depth": 0.99664089,
+          "coupling": 0.63950369
+        },
+        {
+          "event": "0317.0-968211",
+          "run": "6845.2020.0317.0",
+          "xU": 0.98995696,
+          "xL": 0.99770642,
+          "delay_us": 2.64875021,
+          "parent_x": 1.02607097,
+          "depth": 1.01535822,
+          "coupling": 0.99612527
+        },
+        {
+          "event": "0317.0-969077",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9202454,
+          "xL": 0.91062395,
+          "delay_us": 5.30500042,
+          "parent_x": 0.86743463,
+          "depth": 0.88364722,
+          "coupling": 0.99518927
+        },
+        {
+          "event": "0317.0-970482",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94890511,
+          "xL": 0.8041958,
+          "delay_us": 2.71375022,
+          "parent_x": 0.93559599,
+          "depth": 0.91746746,
+          "coupling": 0.92764535
+        },
+        {
+          "event": "0317.0-972680",
+          "run": "6845.2020.0317.0",
+          "xU": 1.13924051,
+          "xL": 1.02061856,
+          "delay_us": 0.74625006,
+          "parent_x": 1.12757919,
+          "depth": 1.10917369,
+          "coupling": 0.94068903
+        },
+        {
+          "event": "0317.0-972852",
+          "run": "6845.2020.0317.0",
+          "xU": 1.19496855,
+          "xL": 0.91428571,
+          "delay_us": 2.00375016,
+          "parent_x": 0.96203401,
+          "depth": 0.99467445,
+          "coupling": 0.85965858
+        },
+        {
+          "event": "0317.0-979862",
+          "run": "6845.2020.0317.0",
+          "xU": 0.93555094,
+          "xL": 1.05590062,
+          "delay_us": 6.39375051,
+          "parent_x": 0.91634553,
+          "depth": 0.94112765,
+          "coupling": 0.93982516
+        },
+        {
+          "event": "0317.0-982505",
+          "run": "6845.2020.0317.0",
+          "xU": 1.37254902,
+          "xL": 0.97297297,
+          "delay_us": 1.94250016,
+          "parent_x": 1.12002422,
+          "depth": 1.12961001,
+          "coupling": 0.80021198
+        },
+        {
+          "event": "0317.0-985920",
+          "run": "6845.2020.0317.0",
+          "xU": 0.85714286,
+          "xL": 0.96199525,
+          "delay_us": 3.25625026,
+          "parent_x": 1.00642462,
+          "depth": 0.97425171,
+          "coupling": 0.9475738
+        },
+        {
+          "event": "0317.0-988050",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.97888676,
+          "delay_us": 6.32250051,
+          "parent_x": 1.00542757,
+          "depth": 0.99473324,
+          "coupling": 0.99442759
+        },
+        {
+          "event": "0317.0-989519",
+          "run": "6845.2020.0317.0",
+          "xU": 0.87719298,
+          "xL": 0.95604396,
+          "delay_us": 3.08875025,
+          "parent_x": 1.05675715,
+          "depth": 1.01079015,
+          "coupling": 0.96057451
+        },
+        {
+          "event": "0317.0-991164",
+          "run": "6845.2020.0317.0",
+          "xU": 0.56179775,
+          "xL": 1.05,
+          "delay_us": 6.45375052,
+          "parent_x": 0.97234883,
+          "depth": 0.91461562,
+          "coupling": 0.75589888
+        },
+        {
+          "event": "0317.0-998613",
+          "run": "6845.2020.0317.0",
+          "xU": 1.12391931,
+          "xL": 1.00746269,
+          "delay_us": 0.95375008,
+          "parent_x": 0.98763916,
+          "depth": 1.01389635,
+          "coupling": 0.94177169
+        },
+        {
+          "event": "0317.0-1000369",
+          "run": "6845.2020.0317.0",
+          "xU": 1.05485232,
+          "xL": 0.95604396,
+          "delay_us": 4.73125038,
+          "parent_x": 1.03744344,
+          "depth": 1.02616172,
+          "coupling": 0.95059582
+        },
+        {
+          "event": "0317.0-1003553",
+          "run": "6845.2020.0317.0",
+          "xU": 1.23644252,
+          "xL": 0.93195266,
+          "delay_us": 3.67375029,
+          "parent_x": 1.10508301,
+          "depth": 1.09278842,
+          "coupling": 0.84775507
+        },
+        {
+          "event": "0317.0-1006574",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01538462,
+          "xL": 0.4047976,
+          "delay_us": 1.88000015,
+          "parent_x": 0.9271132,
+          "depth": 0.86218979,
+          "coupling": 0.69470649
+        },
+        {
+          "event": "0317.0-1006893",
+          "run": "6845.2020.0317.0",
+          "xU": 0.53351573,
+          "xL": 1.01298701,
+          "delay_us": 1.73375014,
+          "parent_x": 0.79899693,
+          "depth": 0.77435254,
+          "coupling": 0.76026436
+        },
+        {
+          "event": "0317.0-1012924",
+          "run": "6845.2020.0317.0",
+          "xU": 0.87289433,
+          "xL": 0.76566125,
+          "delay_us": 1.2537501,
+          "parent_x": 1.05286461,
+          "depth": 0.97405753,
+          "coupling": 0.94638346
+        },
+        {
+          "event": "0317.0-1017266",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 1.05322763,
+          "delay_us": 4.55500036,
+          "parent_x": 1.04319575,
+          "depth": 1.03290753,
+          "coupling": 0.95725715
+        },
+        {
+          "event": "0317.0-1019974",
+          "run": "6845.2020.0317.0",
+          "xU": 1.02661597,
+          "xL": 0.94076655,
+          "delay_us": 3.98250032,
+          "parent_x": 0.9577641,
+          "depth": 0.96701081,
+          "coupling": 0.95707529
+        },
+        {
+          "event": "0317.0-1023718",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01538462,
+          "xL": 1.03293413,
+          "delay_us": 5.0487504,
+          "parent_x": 0.92785832,
+          "depth": 0.95974766,
+          "coupling": 0.99122524
+        },
+        {
+          "event": "0317.0-1034624",
+          "run": "6845.2020.0317.0",
+          "xU": 1.08571429,
+          "xL": 1.02564103,
+          "delay_us": 1.53875012,
+          "parent_x": 0.9681924,
+          "depth": 0.99767261,
+          "coupling": 0.96996337
+        },
+        {
+          "event": "0317.0-1038195",
+          "run": "6845.2020.0317.0",
+          "xU": 1.17824773,
+          "xL": 0.56603774,
+          "delay_us": 2.43125019,
+          "parent_x": 0.93415812,
+          "depth": 0.9202045,
+          "coupling": 0.693895
+        },
+        {
+          "event": "0317.0-1039363",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04477612,
+          "xL": 1.0952381,
+          "delay_us": 3.59125029,
+          "parent_x": 1.13782594,
+          "depth": 1.11637882,
+          "coupling": 0.97476901
+        },
+        {
+          "event": "0317.0-1053563",
+          "run": "6845.2020.0317.0",
+          "xU": 1.05882353,
+          "xL": 0.93195266,
+          "delay_us": 2.4587502,
+          "parent_x": 1.05491076,
+          "depth": 1.03390877,
+          "coupling": 0.93656457
+        },
+        {
+          "event": "0317.0-1054242",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00775194,
+          "xL": 1.11627907,
+          "delay_us": 4.57125037,
+          "parent_x": 0.96676737,
+          "depth": 0.99791564,
+          "coupling": 0.94573643
+        },
+        {
+          "event": "0317.0-1054384",
+          "run": "6845.2020.0317.0",
+          "xU": 1.57245632,
+          "xL": 0.88235294,
+          "delay_us": 2.09875017,
+          "parent_x": 0.9699401,
+          "depth": 1.05921902,
+          "coupling": 0.65494831
+        },
+        {
+          "event": "0317.0-1057358",
+          "run": "6845.2020.0317.0",
+          "xU": 1.2195122,
+          "xL": 0.92045455,
+          "delay_us": 0.67875005,
+          "parent_x": 1.00206391,
+          "depth": 1.02460086,
+          "coupling": 0.85047118
+        },
+        {
+          "event": "0317.0-1059052",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94214876,
+          "xL": 1.04316547,
+          "delay_us": 7.95625064,
+          "parent_x": 1.07443939,
+          "depth": 1.0484319,
+          "coupling": 0.94949165
+        },
+        {
+          "event": "0317.0-1060819",
+          "run": "6845.2020.0317.0",
+          "xU": 1.01123596,
+          "xL": 1.03861518,
+          "delay_us": 0.79125006,
+          "parent_x": 0.94080802,
+          "depth": 0.9685771,
+          "coupling": 0.98631039
+        },
+        {
+          "event": "0317.0-1067726",
+          "run": "6845.2020.0317.0",
+          "xU": 1.09311741,
+          "xL": 0.88235294,
+          "delay_us": 4.33750035,
+          "parent_x": 0.8958946,
+          "depth": 0.93016508,
+          "coupling": 0.89461777
+        },
+        {
+          "event": "0317.0-1076100",
+          "run": "6845.2020.0317.0",
+          "xU": 0.87289433,
+          "xL": 1.05322763,
+          "delay_us": 2.04625016,
+          "parent_x": 1.06485774,
+          "depth": 1.03287482,
+          "coupling": 0.90983335
+        },
+        {
+          "event": "0317.0-1076334",
+          "run": "6845.2020.0317.0",
+          "xU": 0.91525424,
+          "xL": 0.98562628,
+          "delay_us": 1.2375001,
+          "parent_x": 1.1632455,
+          "depth": 1.09422508,
+          "coupling": 0.96481398
+        },
+        {
+          "event": "0317.0-1078120",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94452774,
+          "xL": 1.09215017,
+          "delay_us": 3.22500026,
+          "parent_x": 1.05202528,
+          "depth": 1.04207652,
+          "coupling": 0.92618878
+        },
+        {
+          "event": "0317.0-1081301",
+          "run": "6845.2020.0317.0",
+          "xU": 0.78156313,
+          "xL": 0.88235294,
+          "delay_us": 1.44625012,
+          "parent_x": 1.01613656,
+          "depth": 0.95501479,
+          "coupling": 0.94960509
+        },
+        {
+          "event": "0317.0-1082232",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89481947,
+          "xL": 0.92364532,
+          "delay_us": 1.76500014,
+          "parent_x": 1.03542538,
+          "depth": 0.99353125,
+          "coupling": 0.98558707
+        },
+        {
+          "event": "0317.0-1084188",
+          "run": "6845.2020.0317.0",
+          "xU": 0.90909091,
+          "xL": 0.88235294,
+          "delay_us": 1.09500009,
+          "parent_x": 1.01492537,
+          "depth": 0.97512438,
+          "coupling": 0.98663102
+        },
+        {
+          "event": "0317.0-1085361",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.93854749,
+          "delay_us": 2.65500021,
+          "parent_x": 1.09731801,
+          "depth": 1.04878672,
+          "coupling": 0.98540278
+        },
+        {
+          "event": "0317.0-1085874",
+          "run": "6845.2020.0317.0",
+          "xU": 1.12219451,
+          "xL": 0.88235294,
+          "delay_us": 2.4937502,
+          "parent_x": 1.03428608,
+          "depth": 1.02224476,
+          "coupling": 0.88007921
+        },
+        {
+          "event": "0317.0-1086330",
+          "run": "6845.2020.0317.0",
+          "xU": 0.88111888,
+          "xL": 0.96676737,
+          "delay_us": 2.88500023,
+          "parent_x": 1.07813931,
+          "depth": 1.027856,
+          "coupling": 0.95717575
+        },
+        {
+          "event": "0317.0-1089721",
+          "run": "6845.2020.0317.0",
+          "xU": 0.85714286,
+          "xL": 0.91649695,
+          "delay_us": 6.49125052,
+          "parent_x": 0.99216974,
+          "depth": 0.95697567,
+          "coupling": 0.97032296
+        },
+        {
+          "event": "0317.0-1092425",
+          "run": "6845.2020.0317.0",
+          "xU": 1.27035831,
+          "xL": 1.09396914,
+          "delay_us": 2.92000023,
+          "parent_x": 0.98881858,
+          "depth": 1.05359568,
+          "coupling": 0.91180542
+        },
+        {
+          "event": "0317.0-1094219",
+          "run": "6845.2020.0317.0",
+          "xU": 1.05121294,
+          "xL": 0.70362473,
+          "delay_us": 2.5312502,
+          "parent_x": 1.03126503,
+          "depth": 0.97817174,
+          "coupling": 0.8262059
+        },
+        {
+          "event": "0317.0-1094936",
+          "run": "6845.2020.0317.0",
+          "xU": 0.89481947,
+          "xL": 0.92198582,
+          "delay_us": 4.9775004,
+          "parent_x": 1.05589142,
+          "depth": 1.00698155,
+          "coupling": 0.98641683
+        },
+        {
+          "event": "0317.0-1102177",
+          "run": "6845.2020.0317.0",
+          "xU": 0.74235808,
+          "xL": 0.82474227,
+          "delay_us": 3.07000025,
+          "parent_x": 0.83272971,
+          "depth": 0.81403979,
+          "coupling": 0.95880791
+        },
+        {
+          "event": "0317.0-1103579",
+          "run": "6845.2020.0317.0",
+          "xU": 1.28309572,
+          "xL": 0.99861304,
+          "delay_us": 5.85500047,
+          "parent_x": 1.10577522,
+          "depth": 1.11245307,
+          "coupling": 0.85775866
+        },
+        {
+          "event": "0317.0-1108212",
+          "run": "6845.2020.0317.0",
+          "xU": 0.69767442,
+          "xL": 0.88235294,
+          "delay_us": 9.27875074,
+          "parent_x": 1.0763143,
+          "depth": 0.9832297,
+          "coupling": 0.90766074
+        },
+        {
+          "event": "0317.0-1110054",
+          "run": "6845.2020.0317.0",
+          "xU": 1.03759398,
+          "xL": 1.01992966,
+          "delay_us": 2.33875019,
+          "parent_x": 1.03854202,
+          "depth": 1.03516849,
+          "coupling": 0.99116784
+        },
+        {
+          "event": "0317.0-1110989",
+          "run": "6845.2020.0317.0",
+          "xU": 1.18110236,
+          "xL": 1.17391304,
+          "delay_us": 1.35375011,
+          "parent_x": 1.06707906,
+          "depth": 1.10380824,
+          "coupling": 0.99640534
+        },
+        {
+          "event": "0317.0-1120730",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.94076655,
+          "delay_us": 7.82625063,
+          "parent_x": 0.98710232,
+          "depth": 0.97621095,
+          "coupling": 0.98651231
+        },
+        {
+          "event": "0317.0-1121991",
+          "run": "6845.2020.0317.0",
+          "xU": 1.25581395,
+          "xL": 1.16788321,
+          "delay_us": 9.12000073,
+          "parent_x": 0.89190289,
+          "depth": 1.00013563,
+          "coupling": 0.95603463
+        },
+        {
+          "event": "0317.0-1122751",
+          "run": "6845.2020.0317.0",
+          "xU": 0.82568807,
+          "xL": 0.92741935,
+          "delay_us": 5.92875047,
+          "parent_x": 0.97854501,
+          "depth": 0.94418413,
+          "coupling": 0.94913436
+        },
+        {
+          "event": "0317.0-1124517",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00942127,
+          "xL": 0.95604396,
+          "delay_us": 1.18375009,
+          "parent_x": 1.01544792,
+          "depth": 1.00440539,
+          "coupling": 0.97331135
+        },
+        {
+          "event": "0317.0-1126757",
+          "run": "6845.2020.0317.0",
+          "xU": 1.13122172,
+          "xL": 1.05744125,
+          "delay_us": 0.48000004,
+          "parent_x": 0.98627932,
+          "depth": 1.02246543,
+          "coupling": 0.96310977
+        },
+        {
+          "event": "0317.0-1129316",
+          "run": "6845.2020.0317.0",
+          "xU": 0.94452774,
+          "xL": 0.78291815,
+          "delay_us": 3.31125026,
+          "parent_x": 1.03115324,
+          "depth": 0.97450403,
+          "coupling": 0.91919521
+        },
+        {
+          "event": "0317.0-1131722",
+          "run": "6845.2020.0317.0",
+          "xU": 0.71297989,
+          "xL": 0.98746082,
+          "delay_us": 0.47375004,
+          "parent_x": 0.99101985,
+          "depth": 0.94367587,
+          "coupling": 0.86275954
+        },
+        {
+          "event": "0317.0-1139004",
+          "run": "6845.2020.0317.0",
+          "xU": 1.43576826,
+          "xL": 0.99337748,
+          "delay_us": 1.1912501,
+          "parent_x": 1.31548618,
+          "depth": 1.25858705,
+          "coupling": 0.77880461
+        },
+        {
+          "event": "0317.0-1147474",
+          "run": "6845.2020.0317.0",
+          "xU": 0.83333333,
+          "xL": 0.82690187,
+          "delay_us": 2.30625018,
+          "parent_x": 1.14016342,
+          "depth": 1.03666457,
+          "coupling": 0.99678427
+        },
+        {
+          "event": "0317.0-1149238",
+          "run": "6845.2020.0317.0",
+          "xU": 0.9178744,
+          "xL": 0.79746835,
+          "delay_us": 2.02375016,
+          "parent_x": 1.03441221,
+          "depth": 0.97480803,
+          "coupling": 0.93979698
+        },
+        {
+          "event": "0317.0-1152493",
+          "run": "6845.2020.0317.0",
+          "xU": 1.14503817,
+          "xL": 1.09689214,
+          "delay_us": 5.27250042,
+          "parent_x": 0.93564251,
+          "depth": 0.99793315,
+          "coupling": 0.97592699
+        },
+        {
+          "event": "0317.0-1157843",
+          "run": "6845.2020.0317.0",
+          "xU": 0.87719298,
+          "xL": 0.76086957,
+          "delay_us": 0.41125003,
+          "parent_x": 1.00960219,
+          "depth": 0.94589239,
+          "coupling": 0.94183829
+        },
+        {
+          "event": "0317.0-1161851",
+          "run": "6845.2020.0317.0",
+          "xU": 1.00222717,
+          "xL": 1.2,
+          "delay_us": 3.01000024,
+          "parent_x": 0.94228504,
+          "depth": 0.99332548,
+          "coupling": 0.90111359
+        },
+        {
+          "event": "0317.0-1172982",
+          "run": "6845.2020.0317.0",
+          "xU": 1.04477612,
+          "xL": 0.77981651,
+          "delay_us": 4.29000034,
+          "parent_x": 0.95470097,
+          "depth": 0.94256649,
+          "coupling": 0.8675202
+        },
+        {
+          "event": "0317.0-1173114",
+          "run": "6845.2020.0317.0",
+          "xU": 0.96774194,
+          "xL": 0.93854749,
+          "delay_us": 0.51500004,
+          "parent_x": 1.07310128,
+          "depth": 1.03276006,
+          "coupling": 0.98540278
+        },
+        {
+          "event": "0317.0-1173478",
+          "run": "6845.2020.0317.0",
+          "xU": 0.99630996,
+          "xL": 0.98746082,
+          "delay_us": 1.3012501,
+          "parent_x": 0.99561104,
+          "depth": 0.99437563,
+          "coupling": 0.99557543
+        },
+        {
+          "event": "0318.0-2380",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.98562628,
+          "delay_us": 3.01500024,
+          "parent_x": 1.0487214,
+          "depth": 1.02485419,
+          "coupling": 0.99105783
+        },
+        {
+          "event": "0318.0-6715",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 0.68965517,
+          "delay_us": 7.66500061,
+          "parent_x": 1.22176712,
+          "depth": 1.06612054,
+          "coupling": 0.91625616
+        },
+        {
+          "event": "0318.0-7305",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01123596,
+          "xL": 0.58708415,
+          "delay_us": 4.20375034,
+          "parent_x": 1.09451138,
+          "depth": 0.98937974,
+          "coupling": 0.7879241
+        },
+        {
+          "event": "0318.0-7749",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 1.0460251,
+          "delay_us": 0.39625003,
+          "parent_x": 0.97638197,
+          "depth": 1.00710669,
+          "coupling": 0.97798886
+        },
+        {
+          "event": "0318.0-8268",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04100946,
+          "xL": 0.41666667,
+          "delay_us": 4.38875035,
+          "parent_x": 0.92513608,
+          "depth": 0.86749353,
+          "coupling": 0.6878286
+        },
+        {
+          "event": "0318.0-9305",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94339623,
+          "xL": 0.9893617,
+          "delay_us": 2.59250021,
+          "parent_x": 1.10898098,
+          "depth": 1.06228187,
+          "coupling": 0.97701726
+        },
+        {
+          "event": "0318.0-20143",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01538462,
+          "xL": 0.88235294,
+          "delay_us": 0.54375004,
+          "parent_x": 1.08647089,
+          "depth": 1.03868629,
+          "coupling": 0.93348416
+        },
+        {
+          "event": "0318.0-24127",
+          "run": "6845.2020.0318.0",
+          "xU": 0.86474501,
+          "xL": 1.01593625,
+          "delay_us": 0.31875003,
+          "parent_x": 0.96765255,
+          "depth": 0.95773347,
+          "coupling": 0.92440438
+        },
+        {
+          "event": "0318.0-25251",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84832905,
+          "xL": 0.93113482,
+          "delay_us": 3.35625027,
+          "parent_x": 1.0547989,
+          "depth": 1.00053286,
+          "coupling": 0.95859711
+        },
+        {
+          "event": "0318.0-29309",
+          "run": "6845.2020.0318.0",
+          "xU": 0.43902439,
+          "xL": 0.4398827,
+          "delay_us": 1.47500012,
+          "parent_x": 1.16693402,
+          "depth": 0.92446441,
+          "coupling": 0.99957085
+        },
+        {
+          "event": "0318.0-30267",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8681672,
+          "xL": 0.93649085,
+          "delay_us": 1.69875014,
+          "parent_x": 1.11415936,
+          "depth": 1.04484921,
+          "coupling": 0.96583818
+        },
+        {
+          "event": "0318.0-36388",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9947644,
+          "xL": 1.07638889,
+          "delay_us": 0.83250007,
+          "parent_x": 1.11885395,
+          "depth": 1.09271175,
+          "coupling": 0.95918775
+        },
+        {
+          "event": "0318.0-37510",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05360444,
+          "xL": 0.83333333,
+          "delay_us": 2.36875019,
+          "parent_x": 1.03133393,
+          "depth": 1.00089526,
+          "coupling": 0.88986445
+        },
+        {
+          "event": "0318.0-38499",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92436975,
+          "xL": 1.09147609,
+          "delay_us": 1.15500009,
+          "parent_x": 1.06305684,
+          "depth": 1.04643507,
+          "coupling": 0.91644683
+        },
+        {
+          "event": "0318.0-39771",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01538462,
+          "xL": 0.9893617,
+          "delay_us": 3.29875026,
+          "parent_x": 1.09821103,
+          "depth": 1.06583911,
+          "coupling": 0.98698854
+        },
+        {
+          "event": "0318.0-42572",
+          "run": "6845.2020.0318.0",
+          "xU": 1.15044248,
+          "xL": 1.09913793,
+          "delay_us": 9.90250079,
+          "parent_x": 1.07089794,
+          "depth": 1.0882558,
+          "coupling": 0.97434773
+        },
+        {
+          "event": "0318.0-44147",
+          "run": "6845.2020.0318.0",
+          "xU": 0.63829787,
+          "xL": 0.71570577,
+          "delay_us": 6.76250054,
+          "parent_x": 1.00068387,
+          "depth": 0.89279867,
+          "coupling": 0.96129605
+        },
+        {
+          "event": "0318.0-48212",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 1.05322763,
+          "delay_us": 3.7337503,
+          "parent_x": 1.14082687,
+          "depth": 1.08354866,
+          "coupling": 0.90195761
+        },
+        {
+          "event": "0318.0-48427",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90128755,
+          "xL": 0.67826087,
+          "delay_us": 3.42750027,
+          "parent_x": 1.01916473,
+          "depth": 0.94198885,
+          "coupling": 0.88848666
+        },
+        {
+          "event": "0318.0-53259",
+          "run": "6845.2020.0318.0",
+          "xU": 1.06796117,
+          "xL": 0.99861304,
+          "delay_us": 3.35750027,
+          "parent_x": 0.99115044,
+          "depth": 1.00529828,
+          "coupling": 0.96532594
+        },
+        {
+          "event": "0318.0-55212",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 0.97643098,
+          "delay_us": 2.13000017,
+          "parent_x": 1.04842802,
+          "depth": 1.03026292,
+          "coupling": 0.98160756
+        },
+        {
+          "event": "0318.0-56968",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94452774,
+          "xL": 0.92198582,
+          "delay_us": 1.67625013,
+          "parent_x": 1.03292762,
+          "depth": 0.9995803,
+          "coupling": 0.98872904
+        },
+        {
+          "event": "0318.0-64809",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92240117,
+          "xL": 0.96534653,
+          "delay_us": 0.55750004,
+          "parent_x": 0.99810847,
+          "depth": 0.98001673,
+          "coupling": 0.97852732
+        },
+        {
+          "event": "0318.0-64986",
+          "run": "6845.2020.0318.0",
+          "xU": 1.07913669,
+          "xL": 1.01071975,
+          "delay_us": 1.2800001,
+          "parent_x": 0.99447935,
+          "depth": 1.01135859,
+          "coupling": 0.96579153
+        },
+        {
+          "event": "0318.0-65492",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05360444,
+          "xL": 1.16022099,
+          "delay_us": 0.52000004,
+          "parent_x": 1.05968989,
+          "depth": 1.07649148,
+          "coupling": 0.94669172
+        },
+        {
+          "event": "0318.0-66415",
+          "run": "6845.2020.0318.0",
+          "xU": 0.77862595,
+          "xL": 0.88235294,
+          "delay_us": 2.72125022,
+          "parent_x": 1.00268462,
+          "depth": 0.94533264,
+          "coupling": 0.94813651
+        },
+        {
+          "event": "0318.0-68031",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9054326,
+          "xL": 0.65088757,
+          "delay_us": 8.38250067,
+          "parent_x": 0.92418114,
+          "depth": 0.87872401,
+          "coupling": 0.87272749
+        },
+        {
+          "event": "0318.0-70339",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 1.06904232,
+          "delay_us": 1.2462501,
+          "parent_x": 1.08869104,
+          "depth": 1.08533182,
+          "coupling": 0.98949746
+        },
+        {
+          "event": "0318.0-79238",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05882353,
+          "xL": 0.97888676,
+          "delay_us": 2.23500018,
+          "parent_x": 0.92488628,
+          "depth": 0.95720996,
+          "coupling": 0.96003161
+        },
+        {
+          "event": "0318.0-81395",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03926097,
+          "xL": 0.76566125,
+          "delay_us": 7.4600006,
+          "parent_x": 0.91198836,
+          "depth": 0.91282594,
+          "coupling": 0.86320014
+        },
+        {
+          "event": "0318.0-89514",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99804305,
+          "xL": 1.06904232,
+          "delay_us": 9.09875073,
+          "parent_x": 0.85052981,
+          "depth": 0.90976539,
+          "coupling": 0.96450037
+        },
+        {
+          "event": "0318.0-92777",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 1.06904232,
+          "delay_us": 0.63500005,
+          "parent_x": 1.0634298,
+          "depth": 1.05311721,
+          "coupling": 0.96097434
+        },
+        {
+          "event": "0318.0-95317",
+          "run": "6845.2020.0318.0",
+          "xU": 0.79714841,
+          "xL": 0.89755213,
+          "delay_us": 3.62125029,
+          "parent_x": 0.75153838,
+          "depth": 0.77931793,
+          "coupling": 0.94979814
+        },
+        {
+          "event": "0318.0-97171",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8681672,
+          "xL": 0.79746835,
+          "delay_us": 1.98000016,
+          "parent_x": 1.03360864,
+          "depth": 0.96628233,
+          "coupling": 0.96465058
+        },
+        {
+          "event": "0318.0-103434",
+          "run": "6845.2020.0318.0",
+          "xU": 1.0177706,
+          "xL": 1.03686636,
+          "delay_us": 3.22875026,
+          "parent_x": 1.08292721,
+          "depth": 1.06465489,
+          "coupling": 0.99045212
+        },
+        {
+          "event": "0318.0-106311",
+          "run": "6845.2020.0318.0",
+          "xU": 0.75728155,
+          "xL": 0.88235294,
+          "delay_us": 1.67250013,
+          "parent_x": 1.10035397,
+          "depth": 1.00893363,
+          "coupling": 0.93746431
+        },
+        {
+          "event": "0318.0-107711",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81861958,
+          "xL": 0.93854749,
+          "delay_us": 8.41500067,
+          "parent_x": 1.09492679,
+          "depth": 1.02470977,
+          "coupling": 0.94003605
+        },
+        {
+          "event": "0318.0-110601",
+          "run": "6845.2020.0318.0",
+          "xU": 0.98995696,
+          "xL": 0.84598698,
+          "delay_us": 0.71750006,
+          "parent_x": 1.05390248,
+          "depth": 1.00729892,
+          "coupling": 0.92801501
+        },
+        {
+          "event": "0318.0-111392",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89481947,
+          "xL": 1.01992966,
+          "delay_us": 5.43875044,
+          "parent_x": 1.05999767,
+          "depth": 1.02704102,
+          "coupling": 0.9374449
+        },
+        {
+          "event": "0318.0-117576",
+          "run": "6845.2020.0318.0",
+          "xU": 1.12627986,
+          "xL": 0.90909091,
+          "delay_us": 1.2812501,
+          "parent_x": 0.94793537,
+          "depth": 0.97307002,
+          "coupling": 0.89140552
+        },
+        {
+          "event": "0318.0-127965",
+          "run": "6845.2020.0318.0",
+          "xU": 1.02333932,
+          "xL": 1.0460251,
+          "delay_us": 1.89375015,
+          "parent_x": 1.04030832,
+          "depth": 1.03858535,
+          "coupling": 0.98865711
+        },
+        {
+          "event": "0318.0-130572",
+          "run": "6845.2020.0318.0",
+          "xU": 1.64095372,
+          "xL": 0.71186441,
+          "delay_us": 0.66500005,
+          "parent_x": 1.16446171,
+          "depth": 1.14297756,
+          "coupling": 0.53545535
+        },
+        {
+          "event": "0318.0-136595",
+          "run": "6845.2020.0318.0",
+          "xU": 0.61503417,
+          "xL": 1.15384615,
+          "delay_us": 8.87625071,
+          "parent_x": 0.97309942,
+          "depth": 0.9411306,
+          "coupling": 0.73059401
+        },
+        {
+          "event": "0318.0-140864",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01123596,
+          "xL": 0.88235294,
+          "delay_us": 2.40125019,
+          "parent_x": 0.98224496,
+          "depth": 0.97080951,
+          "coupling": 0.93555849
+        },
+        {
+          "event": "0318.0-142266",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03448276,
+          "xL": 0.94076655,
+          "delay_us": 1.14250009,
+          "parent_x": 1.02044444,
+          "depth": 1.00918519,
+          "coupling": 0.9531419
+        },
+        {
+          "event": "0318.0-149946",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 0.9327984,
+          "delay_us": 1.09625009,
+          "parent_x": 1.14028378,
+          "depth": 1.09365357,
+          "coupling": 0.9213755
+        },
+        {
+          "event": "0318.0-150213",
+          "run": "6845.2020.0318.0",
+          "xU": 0.83211679,
+          "xL": 0.96534653,
+          "delay_us": 1.1962501,
+          "parent_x": 0.99664649,
+          "depth": 0.96393375,
+          "coupling": 0.93338513
+        },
+        {
+          "event": "0318.0-152988",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94736842,
+          "xL": 0.82890542,
+          "delay_us": 1.2562501,
+          "parent_x": 1.02088419,
+          "depth": 0.97622276,
+          "coupling": 0.9407685
+        },
+        {
+          "event": "0318.0-157692",
+          "run": "6845.2020.0318.0",
+          "xU": 0.98814229,
+          "xL": 1.02061856,
+          "delay_us": 1.84125015,
+          "parent_x": 1.03670552,
+          "depth": 1.02612917,
+          "coupling": 0.98376187
+        },
+        {
+          "event": "0318.0-160715",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9178744,
+          "xL": 1.01992966,
+          "delay_us": 4.9550004,
+          "parent_x": 1.07266082,
+          "depth": 1.03931046,
+          "coupling": 0.94897237
+        },
+        {
+          "event": "0318.0-161194",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81081081,
+          "xL": 1.02564103,
+          "delay_us": 2.86625023,
+          "parent_x": 1.14215985,
+          "depth": 1.07260525,
+          "coupling": 0.89258489
+        },
+        {
+          "event": "0318.0-162063",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99212598,
+          "xL": 0.9017341,
+          "delay_us": 0.74750006,
+          "parent_x": 1.06851959,
+          "depth": 1.02695747,
+          "coupling": 0.95480406
+        },
+        {
+          "event": "0318.0-162227",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 1.05322763,
+          "delay_us": 0.63250005,
+          "parent_x": 1.05503697,
+          "depth": 1.04463197,
+          "coupling": 0.96888168
+        },
+        {
+          "event": "0318.0-162493",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04100946,
+          "xL": 0.99770642,
+          "delay_us": 0.94500008,
+          "parent_x": 1.07331333,
+          "depth": 1.05479909,
+          "coupling": 0.97834848
+        },
+        {
+          "event": "0318.0-164345",
+          "run": "6845.2020.0318.0",
+          "xU": 1.26436782,
+          "xL": 0.64285714,
+          "delay_us": 4.29500034,
+          "parent_x": 1.15078346,
+          "depth": 1.06944088,
+          "coupling": 0.68924466
+        },
+        {
+          "event": "0318.0-167744",
+          "run": "6845.2020.0318.0",
+          "xU": 1.62790698,
+          "xL": 0.98016336,
+          "delay_us": 3.00875024,
+          "parent_x": 0.82304922,
+          "depth": 1.00248099,
+          "coupling": 0.67612819
+        },
+        {
+          "event": "0318.0-170526",
+          "run": "6845.2020.0318.0",
+          "xU": 0.80597015,
+          "xL": 0.40336134,
+          "delay_us": 0.70875006,
+          "parent_x": 0.85573034,
+          "depth": 0.78172285,
+          "coupling": 0.7986956
+        },
+        {
+          "event": "0318.0-172606",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.08433735,
+          "delay_us": 3.94625032,
+          "parent_x": 1.03551795,
+          "depth": 1.03304872,
+          "coupling": 0.94170229
+        },
+        {
+          "event": "0318.0-174190",
+          "run": "6845.2020.0318.0",
+          "xU": 1.06317411,
+          "xL": 1.11627907,
+          "delay_us": 0.46875004,
+          "parent_x": 1.05476984,
+          "depth": 1.06690685,
+          "coupling": 0.97344752
+        },
+        {
+          "event": "0318.0-179109",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 0.98420413,
+          "delay_us": 0.53750004,
+          "parent_x": 1.01990551,
+          "depth": 1.00911368,
+          "coupling": 0.99660657
+        },
+        {
+          "event": "0318.0-183041",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8847185,
+          "xL": 0.92544987,
+          "delay_us": 0.41375003,
+          "parent_x": 0.9351664,
+          "depth": 0.92469887,
+          "coupling": 0.97963431
+        },
+        {
+          "event": "0318.0-188922",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09859155,
+          "xL": 0.98859316,
+          "delay_us": 0.61750005,
+          "parent_x": 0.96683771,
+          "depth": 0.99303056,
+          "coupling": 0.9450008
+        },
+        {
+          "event": "0318.0-189502",
+          "run": "6845.2020.0318.0",
+          "xU": 0.83511777,
+          "xL": 0.83076923,
+          "delay_us": 2.13625017,
+          "parent_x": 1.07923001,
+          "depth": 0.99707709,
+          "coupling": 0.99782573
+        },
+        {
+          "event": "0318.0-192707",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03030303,
+          "xL": 0.95890411,
+          "delay_us": 1.95375016,
+          "parent_x": 1.05558066,
+          "depth": 1.03459356,
+          "coupling": 0.96430054
+        },
+        {
+          "event": "0318.0-198612",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8847185,
+          "xL": 0.91535433,
+          "delay_us": 1.15500009,
+          "parent_x": 1.06841932,
+          "depth": 1.01264103,
+          "coupling": 0.98468208
+        },
+        {
+          "event": "0318.0-199662",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9947644,
+          "xL": 1.14149822,
+          "delay_us": 3.20625026,
+          "parent_x": 1.10553342,
+          "depth": 1.09564693,
+          "coupling": 0.92663309
+        },
+        {
+          "event": "0318.0-206990",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9202454,
+          "xL": 1.03293413,
+          "delay_us": 1.05000008,
+          "parent_x": 0.92633039,
+          "depth": 0.94169989,
+          "coupling": 0.94365563
+        },
+        {
+          "event": "0318.0-207538",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89820359,
+          "xL": 0.88235294,
+          "delay_us": 1.01750008,
+          "parent_x": 1.09096118,
+          "depth": 1.02382658,
+          "coupling": 0.99207467
+        },
+        {
+          "event": "0318.0-209116",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04895105,
+          "xL": 1.00746269,
+          "delay_us": 2.85250023,
+          "parent_x": 1.08410585,
+          "depth": 1.06489129,
+          "coupling": 0.97925582
+        },
+        {
+          "event": "0318.0-210193",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05882353,
+          "xL": 1.01465614,
+          "delay_us": 2.16000017,
+          "parent_x": 1.04691649,
+          "depth": 1.04317891,
+          "coupling": 0.97791631
+        },
+        {
+          "event": "0318.0-213655",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81967213,
+          "xL": 0.9190372,
+          "delay_us": 2.24000018,
+          "parent_x": 1.02509463,
+          "depth": 0.9735969,
+          "coupling": 0.95031747
+        },
+        {
+          "event": "0318.0-215359",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.86621752,
+          "delay_us": 1.10625009,
+          "parent_x": 1.06057609,
+          "depth": 1.01168565,
+          "coupling": 0.94923779
+        },
+        {
+          "event": "0318.0-219109",
+          "run": "6845.2020.0318.0",
+          "xU": 0.82568807,
+          "xL": 0.92045455,
+          "delay_us": 1.97250016,
+          "parent_x": 1.06240097,
+          "depth": 1.00027667,
+          "coupling": 0.95261676
+        },
+        {
+          "event": "0318.0-231376",
+          "run": "6845.2020.0318.0",
+          "xU": 0.76923077,
+          "xL": 1.00238663,
+          "delay_us": 0.49625004,
+          "parent_x": 1.38684319,
+          "depth": 1.23486416,
+          "coupling": 0.88342207
+        },
+        {
+          "event": "0318.0-234623",
+          "run": "6845.2020.0318.0",
+          "xU": 1.13122172,
+          "xL": 1.07638889,
+          "delay_us": 2.04375016,
+          "parent_x": 1.04644033,
+          "depth": 1.06513758,
+          "coupling": 0.97258358
+        },
+        {
+          "event": "0318.0-235401",
+          "run": "6845.2020.0318.0",
+          "xU": 1.02040816,
+          "xL": 1.11627907,
+          "delay_us": 4.06625033,
+          "parent_x": 0.76224241,
+          "depth": 0.86047714,
+          "coupling": 0.95206455
+        },
+        {
+          "event": "0318.0-241470",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9202454,
+          "xL": 1.13636364,
+          "delay_us": 0.48375004,
+          "parent_x": 1.0113328,
+          "depth": 1.01739824,
+          "coupling": 0.89194088
+        },
+        {
+          "event": "0318.0-261252",
+          "run": "6845.2020.0318.0",
+          "xU": 1.07913669,
+          "xL": 1.04689204,
+          "delay_us": 0.50875004,
+          "parent_x": 1.05262403,
+          "depth": 1.05580467,
+          "coupling": 0.98387767
+        },
+        {
+          "event": "0318.0-266450",
+          "run": "6845.2020.0318.0",
+          "xU": 0.91525424,
+          "xL": 0.86306099,
+          "delay_us": 2.4950002,
+          "parent_x": 1.10727084,
+          "depth": 1.0336333,
+          "coupling": 0.97390338
+        },
+        {
+          "event": "0318.0-268287",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92436975,
+          "xL": 0.80097087,
+          "delay_us": 4.74125038,
+          "parent_x": 0.98571963,
+          "depth": 0.94499688,
+          "coupling": 0.93830056
+        },
+        {
+          "event": "0318.0-271035",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94339623,
+          "xL": 0.86306099,
+          "delay_us": 5.98375048,
+          "parent_x": 1.07003232,
+          "depth": 1.01349341,
+          "coupling": 0.95983238
+        },
+        {
+          "event": "0318.0-283103",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9054326,
+          "xL": 0.95890411,
+          "delay_us": 1.2975001,
+          "parent_x": 1.05357053,
+          "depth": 1.01358056,
+          "coupling": 0.97326424
+        },
+        {
+          "event": "0318.0-287609",
+          "run": "6845.2020.0318.0",
+          "xU": 0.66079295,
+          "xL": 0.91649695,
+          "delay_us": 2.04625016,
+          "parent_x": 0.95328237,
+          "depth": 0.89641225,
+          "coupling": 0.872148
+        },
+        {
+          "event": "0318.0-290892",
+          "run": "6845.2020.0318.0",
+          "xU": 0.74380165,
+          "xL": 1.1023622,
+          "delay_us": 8.40625067,
+          "parent_x": 0.79727962,
+          "depth": 0.82709914,
+          "coupling": 0.82071972
+        },
+        {
+          "event": "0318.0-293893",
+          "run": "6845.2020.0318.0",
+          "xU": 0.70707071,
+          "xL": 0.95338983,
+          "delay_us": 1.2925001,
+          "parent_x": 1.14467601,
+          "depth": 1.04580018,
+          "coupling": 0.87684044
+        },
+        {
+          "event": "0318.0-297490",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94452774,
+          "xL": 0.88235294,
+          "delay_us": 0.42125003,
+          "parent_x": 1.01488593,
+          "depth": 0.98091648,
+          "coupling": 0.9689126
+        },
+        {
+          "event": "0318.0-299482",
+          "run": "6845.2020.0318.0",
+          "xU": 1.2195122,
+          "xL": 1.04448743,
+          "delay_us": 1.64625013,
+          "parent_x": 0.93893303,
+          "depth": 1.00507,
+          "coupling": 0.91248762
+        },
+        {
+          "event": "0318.0-301270",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99337748,
+          "xL": 1.02564103,
+          "delay_us": 0.70500006,
+          "parent_x": 1.06623271,
+          "depth": 1.04768104,
+          "coupling": 0.98386823
+        },
+        {
+          "event": "0318.0-303933",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87289433,
+          "xL": 0.96199525,
+          "delay_us": 4.07125033,
+          "parent_x": 1.04115306,
+          "depth": 1.0005281,
+          "coupling": 0.95544954
+        },
+        {
+          "event": "0318.0-311082",
+          "run": "6845.2020.0318.0",
+          "xU": 1.36049193,
+          "xL": 0.96774194,
+          "delay_us": 3.33750027,
+          "parent_x": 0.55203116,
+          "depth": 0.78538305,
+          "coupling": 0.803625
+        },
+        {
+          "event": "0318.0-314468",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 1.05,
+          "delay_us": 1.73500014,
+          "parent_x": 1.03113546,
+          "depth": 1.04389039,
+          "coupling": 0.9799763
+        },
+        {
+          "event": "0318.0-316386",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8681672,
+          "xL": 0.97643098,
+          "delay_us": 0.36875003,
+          "parent_x": 1.09350311,
+          "depth": 1.03812227,
+          "coupling": 0.94586811
+        },
+        {
+          "event": "0318.0-327916",
+          "run": "6845.2020.0318.0",
+          "xU": 1.16022099,
+          "xL": 0.79034029,
+          "delay_us": 4.02625032,
+          "parent_x": 1.02894254,
+          "depth": 1.00927102,
+          "coupling": 0.81505965
+        },
+        {
+          "event": "0318.0-333538",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99337748,
+          "xL": 0.95513748,
+          "delay_us": 1.18625009,
+          "parent_x": 0.98135984,
+          "depth": 0.97911119,
+          "coupling": 0.98088
+        },
+        {
+          "event": "0318.0-339063",
+          "run": "6845.2020.0318.0",
+          "xU": 0.98660171,
+          "xL": 0.88235294,
+          "delay_us": 4.09250033,
+          "parent_x": 0.9880964,
+          "depth": 0.97043019,
+          "coupling": 0.94787562
+        },
+        {
+          "event": "0318.0-340095",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94452774,
+          "xL": 0.92045455,
+          "delay_us": 0.61875005,
+          "parent_x": 1.05259223,
+          "depth": 1.01234752,
+          "coupling": 0.9879634
+        },
+        {
+          "event": "0318.0-350180",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.06007067,
+          "delay_us": 0.73625006,
+          "parent_x": 1.01235258,
+          "depth": 1.01306057,
+          "coupling": 0.95383563
+        },
+        {
+          "event": "0318.0-353275",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94339623,
+          "xL": 0.30821918,
+          "delay_us": 0.47125004,
+          "parent_x": 0.87212992,
+          "depth": 0.80355921,
+          "coupling": 0.68241148
+        },
+        {
+          "event": "0318.0-354129",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 0.99337748,
+          "delay_us": 1.09625009,
+          "parent_x": 1.0678453,
+          "depth": 1.04265193,
+          "coupling": 0.99880675
+        },
+        {
+          "event": "0318.0-354802",
+          "run": "6845.2020.0318.0",
+          "xU": 1.15044248,
+          "xL": 0.83969466,
+          "delay_us": 3.05875024,
+          "parent_x": 0.9879802,
+          "depth": 0.99096551,
+          "coupling": 0.84462609
+        },
+        {
+          "event": "0318.0-359271",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9178744,
+          "xL": 0.71186441,
+          "delay_us": 3.87250031,
+          "parent_x": 1.09095112,
+          "depth": 0.99580107,
+          "coupling": 0.89699501
+        },
+        {
+          "event": "0318.0-361173",
+          "run": "6845.2020.0318.0",
+          "xU": 1.33159269,
+          "xL": 1.2244898,
+          "delay_us": 2.22625018,
+          "parent_x": 0.92582478,
+          "depth": 1.04455433,
+          "coupling": 0.94644855
+        },
+        {
+          "event": "0318.0-362547",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92436975,
+          "xL": 0.84459459,
+          "delay_us": 0.71250006,
+          "parent_x": 1.02311514,
+          "depth": 0.97659682,
+          "coupling": 0.96011242
+        },
+        {
+          "event": "0318.0-366815",
+          "run": "6845.2020.0318.0",
+          "xU": 0.70362473,
+          "xL": 0.82474227,
+          "delay_us": 8.57125069,
+          "parent_x": 1.02200516,
+          "depth": 0.93650881,
+          "coupling": 0.93944123
+        },
+        {
+          "event": "0318.0-368849",
+          "run": "6845.2020.0318.0",
+          "xU": 0.88695652,
+          "xL": 0.95890411,
+          "delay_us": 0.61375005,
+          "parent_x": 0.98073424,
+          "depth": 0.96123525,
+          "coupling": 0.96402621
+        },
+        {
+          "event": "0318.0-374601",
+          "run": "6845.2020.0318.0",
+          "xU": 0.67357513,
+          "xL": 0.41666667,
+          "delay_us": 1.76875014,
+          "parent_x": 1.46274998,
+          "depth": 1.13705956,
+          "coupling": 0.87154577
+        },
+        {
+          "event": "0318.0-375025",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85066163,
+          "xL": 0.91772152,
+          "delay_us": 1.54375012,
+          "parent_x": 1.20290257,
+          "depth": 1.09893334,
+          "coupling": 0.96647005
+        },
+        {
+          "event": "0318.0-389542",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94214876,
+          "xL": 1.03184713,
+          "delay_us": 1.39750011,
+          "parent_x": 1.04427354,
+          "depth": 1.02584355,
+          "coupling": 0.95515081
+        },
+        {
+          "event": "0318.0-395286",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8681672,
+          "xL": 0.88235294,
+          "delay_us": 3.42250027,
+          "parent_x": 1.08959248,
+          "depth": 1.01836017,
+          "coupling": 0.99290713
+        },
+        {
+          "event": "0318.0-397515",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99212598,
+          "xL": 0.97643098,
+          "delay_us": 3.04000024,
+          "parent_x": 1.08324152,
+          "depth": 1.05003609,
+          "coupling": 0.9921525
+        },
+        {
+          "event": "0318.0-398116",
+          "run": "6845.2020.0318.0",
+          "xU": 0.88111888,
+          "xL": 0.86378738,
+          "delay_us": 3.38500027,
+          "parent_x": 1.03078515,
+          "depth": 0.97791888,
+          "coupling": 0.99133425
+        },
+        {
+          "event": "0318.0-402103",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.0052356,
+          "delay_us": 2.21875018,
+          "parent_x": 1.06011725,
+          "depth": 1.03595009,
+          "coupling": 0.98125317
+        },
+        {
+          "event": "0318.0-407176",
+          "run": "6845.2020.0318.0",
+          "xU": 0.93078759,
+          "xL": 0.76566125,
+          "delay_us": 8.66000069,
+          "parent_x": 0.92831662,
+          "depth": 0.90359202,
+          "coupling": 0.91743683
+        },
+        {
+          "event": "0318.0-411145",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87719298,
+          "xL": 0.83076923,
+          "delay_us": 7.79625062,
+          "parent_x": 1.2309149,
+          "depth": 1.10348365,
+          "coupling": 0.97678812
+        },
+        {
+          "event": "0318.0-417357",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9178744,
+          "xL": 0.88235294,
+          "delay_us": 9.9712508,
+          "parent_x": 0.98385222,
+          "depth": 0.95603497,
+          "coupling": 0.98223927
+        },
+        {
+          "event": "0318.0-420194",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03448276,
+          "xL": 0.95890411,
+          "delay_us": 4.75500038,
+          "parent_x": 1.08774834,
+          "depth": 1.05629139,
+          "coupling": 0.96221068
+        },
+        {
+          "event": "0318.0-421886",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05485232,
+          "xL": 0.86306099,
+          "delay_us": 0.32250003,
+          "parent_x": 1.01440922,
+          "depth": 0.99546444,
+          "coupling": 0.90410433
+        },
+        {
+          "event": "0318.0-424853",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9054326,
+          "xL": 0.92198582,
+          "delay_us": 6.57625053,
+          "parent_x": 1.17811915,
+          "depth": 1.09047391,
+          "coupling": 0.99172339
+        },
+        {
+          "event": "0318.0-428449",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03759398,
+          "xL": 0.67132867,
+          "delay_us": 0.95625008,
+          "parent_x": 0.95036345,
+          "depth": 0.9214261,
+          "coupling": 0.81686734
+        },
+        {
+          "event": "0318.0-429002",
+          "run": "6845.2020.0318.0",
+          "xU": 0.66079295,
+          "xL": 0.85066163,
+          "delay_us": 3.7887503,
+          "parent_x": 0.99052077,
+          "depth": 0.91195631,
+          "coupling": 0.90506566
+        },
+        {
+          "event": "0318.0-431084",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89655172,
+          "xL": 1.06007067,
+          "delay_us": 7.4625006,
+          "parent_x": 1.04566711,
+          "depth": 1.02445971,
+          "coupling": 0.91824053
+        },
+        {
+          "event": "0318.0-431492",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81967213,
+          "xL": 0.78291815,
+          "delay_us": 7.07000057,
+          "parent_x": 0.98466929,
+          "depth": 0.92363849,
+          "coupling": 0.98162301
+        },
+        {
+          "event": "0318.0-442177",
+          "run": "6845.2020.0318.0",
+          "xU": 1.24260355,
+          "xL": 1.16022099,
+          "delay_us": 9.33625075,
+          "parent_x": 0.94841985,
+          "depth": 1.03345887,
+          "coupling": 0.95880872
+        },
+        {
+          "event": "0318.0-450851",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81861958,
+          "xL": 0.59659091,
+          "delay_us": 0.44625004,
+          "parent_x": 0.97519588,
+          "depth": 0.88691687,
+          "coupling": 0.88898566
+        },
+        {
+          "event": "0318.0-452103",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 0.72948328,
+          "delay_us": 1.78000014,
+          "parent_x": 0.93354023,
+          "depth": 0.9296091,
+          "coupling": 0.81971794
+        },
+        {
+          "event": "0318.0-466483",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04477612,
+          "xL": 1.16022099,
+          "delay_us": 0.37625003,
+          "parent_x": 1.11655164,
+          "depth": 1.11410983,
+          "coupling": 0.94227756
+        },
+        {
+          "event": "0318.0-481269",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.94444444,
+          "delay_us": 7.76750062,
+          "parent_x": 1.02333294,
+          "depth": 1.00082909,
+          "coupling": 0.98835125
+        },
+        {
+          "event": "0318.0-485582",
+          "run": "6845.2020.0318.0",
+          "xU": 1.15384615,
+          "xL": 0.9486166,
+          "delay_us": 5.14375041,
+          "parent_x": 1.012,
+          "depth": 1.02466667,
+          "coupling": 0.89738522
+        },
+        {
+          "event": "0318.0-488606",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9202454,
+          "xL": 0.96976017,
+          "delay_us": 0.78625006,
+          "parent_x": 1.10659166,
+          "depth": 1.05360835,
+          "coupling": 0.97524262
+        },
+        {
+          "event": "0318.0-488986",
+          "run": "6845.2020.0318.0",
+          "xU": 0.74380165,
+          "xL": 0.70362473,
+          "delay_us": 9.49500076,
+          "parent_x": 0.89868263,
+          "depth": 0.84103792,
+          "coupling": 0.97991154
+        },
+        {
+          "event": "0318.0-501877",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87289433,
+          "xL": 1.03104213,
+          "delay_us": 1.2350001,
+          "parent_x": 1.0754499,
+          "depth": 1.03627805,
+          "coupling": 0.9209261
+        },
+        {
+          "event": "0318.0-505855",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9202454,
+          "xL": 0.4398827,
+          "delay_us": 1.09750009,
+          "parent_x": 0.93665236,
+          "depth": 0.85619456,
+          "coupling": 0.75981865
+        },
+        {
+          "event": "0318.0-509266",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 0.71428571,
+          "delay_us": 7.62125061,
+          "parent_x": 0.97959184,
+          "depth": 0.9154519,
+          "coupling": 0.92857143
+        },
+        {
+          "event": "0318.0-515015",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.86142322,
+          "delay_us": 0.99875008,
+          "parent_x": 0.97227174,
+          "depth": 0.95353336,
+          "coupling": 0.94684064
+        },
+        {
+          "event": "0318.0-515052",
+          "run": "6845.2020.0318.0",
+          "xU": 0.76923077,
+          "xL": 0.81712062,
+          "delay_us": 0.99125008,
+          "parent_x": 0.96097219,
+          "depth": 0.90472852,
+          "coupling": 0.97605507
+        },
+        {
+          "event": "0318.0-516772",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09311741,
+          "xL": 0.91649695,
+          "delay_us": 4.06125032,
+          "parent_x": 0.91126319,
+          "depth": 0.94505664,
+          "coupling": 0.91168977
+        },
+        {
+          "event": "0318.0-518497",
+          "run": "6845.2020.0318.0",
+          "xU": 0.67092652,
+          "xL": 1.2244898,
+          "delay_us": 8.91875071,
+          "parent_x": 0.79456775,
+          "depth": 0.82666126,
+          "coupling": 0.72321836
+        },
+        {
+          "event": "0318.0-520376",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84019769,
+          "xL": 0.73699422,
+          "delay_us": 0.96250008,
+          "parent_x": 0.97960628,
+          "depth": 0.91628696,
+          "coupling": 0.94839826
+        },
+        {
+          "event": "0318.0-526969",
+          "run": "6845.2020.0318.0",
+          "xU": 0.91234347,
+          "xL": 0.83776596,
+          "delay_us": 1.45750012,
+          "parent_x": 1.06228756,
+          "depth": 0.9991024,
+          "coupling": 0.96271124
+        },
+        {
+          "event": "0318.0-533231",
+          "run": "6845.2020.0318.0",
+          "xU": 1.08571429,
+          "xL": 0.57901086,
+          "delay_us": 5.71875046,
+          "parent_x": 1.14152933,
+          "depth": 1.02652151,
+          "coupling": 0.74664829
+        },
+        {
+          "event": "0318.0-539824",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 0.96976017,
+          "delay_us": 1.07250009,
+          "parent_x": 1.09607829,
+          "depth": 1.05717075,
+          "coupling": 0.98938459
+        },
+        {
+          "event": "0318.0-546333",
+          "run": "6845.2020.0318.0",
+          "xU": 0.9178744,
+          "xL": 0.82474227,
+          "delay_us": 9.70375078,
+          "parent_x": 0.88219412,
+          "depth": 0.88039411,
+          "coupling": 0.95343394
+        },
+        {
+          "event": "0318.0-546403",
+          "run": "6845.2020.0318.0",
+          "xU": 0.45317221,
+          "xL": 0.90909091,
+          "delay_us": 8.06375065,
+          "parent_x": 1.22933644,
+          "depth": 1.06402794,
+          "coupling": 0.77204065
+        },
+        {
+          "event": "0318.0-546853",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99804305,
+          "xL": 0.85427136,
+          "delay_us": 1.13500009,
+          "parent_x": 0.99184881,
+          "depth": 0.97014693,
+          "coupling": 0.92811415
+        },
+        {
+          "event": "0318.0-550637",
+          "run": "6845.2020.0318.0",
+          "xU": 0.72847682,
+          "xL": 1.06007067,
+          "delay_us": 6.75500054,
+          "parent_x": 1.02542037,
+          "depth": 0.9831097,
+          "coupling": 0.83420307
+        },
+        {
+          "event": "0318.0-552365",
+          "run": "6845.2020.0318.0",
+          "xU": 1.07325383,
+          "xL": 0.88235294,
+          "delay_us": 1.67375013,
+          "parent_x": 1.03524934,
+          "depth": 1.01497917,
+          "coupling": 0.90454955
+        },
+        {
+          "event": "0318.0-565900",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01538462,
+          "xL": 1.00238663,
+          "delay_us": 1.92250015,
+          "parent_x": 1.04107462,
+          "depth": 1.03025597,
+          "coupling": 0.99350101
+        },
+        {
+          "event": "0318.0-570419",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 0.49247606,
+          "delay_us": 4.06250033,
+          "parent_x": 0.93582973,
+          "depth": 0.8527231,
+          "coupling": 0.8176666
+        },
+        {
+          "event": "0318.0-571568",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84337349,
+          "xL": 1.04689204,
+          "delay_us": 0.99750008,
+          "parent_x": 1.01659449,
+          "depth": 0.9933368,
+          "coupling": 0.89824073
+        },
+        {
+          "event": "0318.0-572824",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.14606742,
+          "delay_us": 3.53500028,
+          "parent_x": 0.96365974,
+          "depth": 0.99366132,
+          "coupling": 0.91083726
+        },
+        {
+          "event": "0318.0-574782",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03448276,
+          "xL": 0.84960937,
+          "delay_us": 3.63750029,
+          "parent_x": 1.10672791,
+          "depth": 1.04854544,
+          "coupling": 0.90756331
+        },
+        {
+          "event": "0318.0-577383",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.95604396,
+          "delay_us": 6.50000052,
+          "parent_x": 1.0813621,
+          "depth": 1.04138042,
+          "coupling": 0.99415101
+        },
+        {
+          "event": "0318.0-578334",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 0.36206897,
+          "delay_us": 1.16750009,
+          "parent_x": 0.83532112,
+          "depth": 0.80396658,
+          "coupling": 0.67442655
+        },
+        {
+          "event": "0318.0-578950",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90909091,
+          "xL": 0.81712062,
+          "delay_us": 6.88250055,
+          "parent_x": 0.90096407,
+          "depth": 0.88986269,
+          "coupling": 0.95401486
+        },
+        {
+          "event": "0318.0-583244",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84832905,
+          "xL": 1.11627907,
+          "delay_us": 1.83250015,
+          "parent_x": 0.96419312,
+          "depth": 0.96863102,
+          "coupling": 0.86602499
+        },
+        {
+          "event": "0318.0-589920",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 0.99770642,
+          "delay_us": 1.98000016,
+          "parent_x": 1.04878599,
+          "depth": 1.03069483,
+          "coupling": 0.99664228
+        },
+        {
+          "event": "0318.0-593186",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.79034029,
+          "delay_us": 1.1900001,
+          "parent_x": 1.05876371,
+          "depth": 0.99711871,
+          "coupling": 0.91129917
+        },
+        {
+          "event": "0318.0-594583",
+          "run": "6845.2020.0318.0",
+          "xU": 0.80597015,
+          "xL": 0.88235294,
+          "delay_us": 5.19875042,
+          "parent_x": 0.71427129,
+          "depth": 0.75393058,
+          "coupling": 0.9618086
+        },
+        {
+          "event": "0318.0-595588",
+          "run": "6845.2020.0318.0",
+          "xU": 0.75075075,
+          "xL": 0.95890411,
+          "delay_us": 2.82625023,
+          "parent_x": 0.84953178,
+          "depth": 0.84607692,
+          "coupling": 0.89592332
+        },
+        {
+          "event": "0318.0-599922",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94214876,
+          "xL": 0.85578447,
+          "delay_us": 0.62750005,
+          "parent_x": 0.93520448,
+          "depth": 0.92405786,
+          "coupling": 0.95681785
+        },
+        {
+          "event": "0318.0-600472",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03926097,
+          "xL": 1.16554054,
+          "delay_us": 6.31625051,
+          "parent_x": 1.07034296,
+          "depth": 1.08250937,
+          "coupling": 0.93686021
+        },
+        {
+          "event": "0318.0-602164",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09634551,
+          "xL": 1.0460251,
+          "delay_us": 3.01500024,
+          "parent_x": 1.00148407,
+          "depth": 1.02470537,
+          "coupling": 0.97483979
+        },
+        {
+          "event": "0318.0-609098",
+          "run": "6845.2020.0318.0",
+          "xU": 1.02661597,
+          "xL": 0.53140097,
+          "delay_us": 5.74000046,
+          "parent_x": 0.99708981,
+          "depth": 0.92463623,
+          "coupling": 0.7523925
+        },
+        {
+          "event": "0318.0-614171",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85201794,
+          "xL": 0.94076655,
+          "delay_us": 2.10375017,
+          "parent_x": 1.0402084,
+          "depth": 0.99286442,
+          "coupling": 0.95562569
+        },
+        {
+          "event": "0318.0-620750",
+          "run": "6845.2020.0318.0",
+          "xU": 1.41104294,
+          "xL": 0.33797217,
+          "delay_us": 0.54750004,
+          "parent_x": 1.44423508,
+          "depth": 1.17487663,
+          "coupling": 0.46346461
+        },
+        {
+          "event": "0318.0-622412",
+          "run": "6845.2020.0318.0",
+          "xU": 1.27035831,
+          "xL": 1.12590799,
+          "delay_us": 1.12750009,
+          "parent_x": 1.06229403,
+          "depth": 1.106074,
+          "coupling": 0.92777484
+        },
+        {
+          "event": "0318.0-623420",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05485232,
+          "xL": 0.77873918,
+          "delay_us": 2.94875024,
+          "parent_x": 0.97864136,
+          "depth": 0.95900906,
+          "coupling": 0.86194343
+        },
+        {
+          "event": "0318.0-629712",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03163686,
+          "xL": 0.96976017,
+          "delay_us": 0.33875003,
+          "parent_x": 1.05250883,
+          "depth": 1.03469721,
+          "coupling": 0.96906165
+        },
+        {
+          "event": "0318.0-630099",
+          "run": "6845.2020.0318.0",
+          "xU": 0.82568807,
+          "xL": 0.79866889,
+          "delay_us": 6.73875054,
+          "parent_x": 0.96299634,
+          "depth": 0.91289036,
+          "coupling": 0.98649041
+        },
+        {
+          "event": "0318.0-639599",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92436975,
+          "xL": 1.02061856,
+          "delay_us": 1.89500015,
+          "parent_x": 1.06718009,
+          "depth": 1.03669578,
+          "coupling": 0.9518756
+        },
+        {
+          "event": "0318.0-641392",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87289433,
+          "xL": 0.28248588,
+          "delay_us": 2.56250021,
+          "parent_x": 0.81289767,
+          "depth": 0.75290628,
+          "coupling": 0.70479577
+        },
+        {
+          "event": "0318.0-654217",
+          "run": "6845.2020.0318.0",
+          "xU": 0.93333333,
+          "xL": 1.1023622,
+          "delay_us": 3.18500025,
+          "parent_x": 0.83244572,
+          "depth": 0.88952615,
+          "coupling": 0.91548556
+        },
+        {
+          "event": "0318.0-660695",
+          "run": "6845.2020.0318.0",
+          "xU": 0.72,
+          "xL": 0.93195266,
+          "delay_us": 2.06500017,
+          "parent_x": 1.06477653,
+          "depth": 0.98746472,
+          "coupling": 0.89402367
+        },
+        {
+          "event": "0318.0-661907",
+          "run": "6845.2020.0318.0",
+          "xU": 1.18329466,
+          "xL": 0.80314961,
+          "delay_us": 4.9887504,
+          "parent_x": 1.1074173,
+          "depth": 1.06254655,
+          "coupling": 0.80992747
+        },
+        {
+          "event": "0318.0-664981",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84639498,
+          "xL": 0.86306099,
+          "delay_us": 0.49875004,
+          "parent_x": 1.06846999,
+          "depth": 0.99741284,
+          "coupling": 0.991667
+        },
+        {
+          "event": "0318.0-666611",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94214876,
+          "xL": 1.03104213,
+          "delay_us": 1.44000012,
+          "parent_x": 1.11327959,
+          "depth": 1.07272984,
+          "coupling": 0.95555332
+        },
+        {
+          "event": "0318.0-673297",
+          "run": "6845.2020.0318.0",
+          "xU": 0.76923077,
+          "xL": 0.93854749,
+          "delay_us": 0.41250003,
+          "parent_x": 1.09413203,
+          "depth": 1.01670742,
+          "coupling": 0.91534164
+        },
+        {
+          "event": "0318.0-680082",
+          "run": "6845.2020.0318.0",
+          "xU": 0.86294416,
+          "xL": 0.9486166,
+          "delay_us": 4.91250039,
+          "parent_x": 1.03914773,
+          "depth": 0.99525093,
+          "coupling": 0.95716378
+        },
+        {
+          "event": "0318.0-688556",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90410959,
+          "xL": 0.90100111,
+          "delay_us": 0.96625008,
+          "parent_x": 1.01819211,
+          "depth": 0.9796371,
+          "coupling": 0.99844576
+        },
+        {
+          "event": "0318.0-692545",
+          "run": "6845.2020.0318.0",
+          "xU": 1.06471816,
+          "xL": 0.88235294,
+          "delay_us": 1.72250014,
+          "parent_x": 0.87454399,
+          "depth": 0.91135431,
+          "coupling": 0.90881739
+        },
+        {
+          "event": "0318.0-695192",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.62176166,
+          "delay_us": 2.81125022,
+          "parent_x": 0.97605689,
+          "depth": 0.9170025,
+          "coupling": 0.82700986
+        },
+        {
+          "event": "0318.0-700496",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.96534653,
+          "delay_us": 4.78250038,
+          "parent_x": 0.99884107,
+          "depth": 0.98807592,
+          "coupling": 0.9988023
+        },
+        {
+          "event": "0318.0-700526",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 0.93195266,
+          "delay_us": 2.84250023,
+          "parent_x": 1.00820283,
+          "depth": 0.97042008,
+          "coupling": 0.9625951
+        },
+        {
+          "event": "0318.0-701781",
+          "run": "6845.2020.0318.0",
+          "xU": 1.11111111,
+          "xL": 1.09296482,
+          "delay_us": 1.2225001,
+          "parent_x": 1.0169275,
+          "depth": 1.04524646,
+          "coupling": 0.99092686
+        },
+        {
+          "event": "0318.0-706077",
+          "run": "6845.2020.0318.0",
+          "xU": 0.91525424,
+          "xL": 0.91649695,
+          "delay_us": 3.41875027,
+          "parent_x": 0.82408476,
+          "depth": 0.85464527,
+          "coupling": 0.99937865
+        },
+        {
+          "event": "0318.0-711120",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.92198582,
+          "delay_us": 8.7400007,
+          "parent_x": 1.0948356,
+          "depth": 1.04412181,
+          "coupling": 0.97712194
+        },
+        {
+          "event": "0318.0-713856",
+          "run": "6845.2020.0318.0",
+          "xU": 0.79245283,
+          "xL": 0.9190372,
+          "delay_us": 7.57625061,
+          "parent_x": 0.84133011,
+          "depth": 0.84278756,
+          "coupling": 0.93670782
+        },
+        {
+          "event": "0318.0-722168",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 0.9375,
+          "delay_us": 1.49000012,
+          "parent_x": 0.85834032,
+          "depth": 0.89913384,
+          "coupling": 0.96214207
+        },
+        {
+          "event": "0318.0-727873",
+          "run": "6845.2020.0318.0",
+          "xU": 1.06317411,
+          "xL": 1.0052356,
+          "delay_us": 0.88375007,
+          "parent_x": 1.10680526,
+          "depth": 1.08157377,
+          "coupling": 0.97103074
+        },
+        {
+          "event": "0318.0-728419",
+          "run": "6845.2020.0318.0",
+          "xU": 0.69767442,
+          "xL": 1.01593625,
+          "delay_us": 5.0150004,
+          "parent_x": 1.10269083,
+          "depth": 1.02617609,
+          "coupling": 0.84086908
+        },
+        {
+          "event": "0318.0-731709",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.03104213,
+          "delay_us": 2.00125016,
+          "parent_x": 1.03163087,
+          "depth": 1.02121829,
+          "coupling": 0.9683499
+        },
+        {
+          "event": "0318.0-738995",
+          "run": "6845.2020.0318.0",
+          "xU": 1.18858954,
+          "xL": 1.02564103,
+          "delay_us": 0.71125006,
+          "parent_x": 0.9674002,
+          "depth": 1.01485724,
+          "coupling": 0.91852574
+        },
+        {
+          "event": "0318.0-741790",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94214876,
+          "xL": 0.68965517,
+          "delay_us": 1.92750015,
+          "parent_x": 0.84163853,
+          "depth": 0.83972389,
+          "coupling": 0.87375321
+        },
+        {
+          "event": "0318.0-743208",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94076655,
+          "xL": 1.01298701,
+          "delay_us": 1.08125009,
+          "parent_x": 1.06088005,
+          "depth": 1.03361176,
+          "coupling": 0.96388977
+        },
+        {
+          "event": "0318.0-746829",
+          "run": "6845.2020.0318.0",
+          "xU": 1.12970711,
+          "xL": 1.16554054,
+          "delay_us": 4.9937504,
+          "parent_x": 1.02101973,
+          "depth": 1.06334663,
+          "coupling": 0.98208329
+        },
+        {
+          "event": "0318.0-747513",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09859155,
+          "xL": 0.86306099,
+          "delay_us": 0.57250005,
+          "parent_x": 1.0151128,
+          "depth": 1.0030907,
+          "coupling": 0.88223472
+        },
+        {
+          "event": "0318.0-751622",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 1.02061856,
+          "delay_us": 1.16000009,
+          "parent_x": 1.09069187,
+          "depth": 1.06621221,
+          "coupling": 0.99629865
+        },
+        {
+          "event": "0318.0-752774",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90410959,
+          "xL": 0.9190372,
+          "delay_us": 3.11000025,
+          "parent_x": 1.02646171,
+          "depth": 0.98823144,
+          "coupling": 0.99253619
+        },
+        {
+          "event": "0318.0-753114",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94452774,
+          "xL": 0.88235294,
+          "delay_us": 0.94000008,
+          "parent_x": 1.01488593,
+          "depth": 0.98091648,
+          "coupling": 0.9689126
+        },
+        {
+          "event": "0318.0-755881",
+          "run": "6845.2020.0318.0",
+          "xU": 0.75728155,
+          "xL": 0.83333333,
+          "delay_us": 4.84875039,
+          "parent_x": 1.05591201,
+          "depth": 0.96975252,
+          "coupling": 0.96197411
+        },
+        {
+          "event": "0318.0-769348",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90410959,
+          "xL": 1.03042198,
+          "delay_us": 0.90000007,
+          "parent_x": 1.08066547,
+          "depth": 1.04456375,
+          "coupling": 0.9368438
+        },
+        {
+          "event": "0318.0-769639",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05485232,
+          "xL": 1.02564103,
+          "delay_us": 0.66625005,
+          "parent_x": 1.05150079,
+          "depth": 1.04749868,
+          "coupling": 0.98539435
+        },
+        {
+          "event": "0318.0-786821",
+          "run": "6845.2020.0318.0",
+          "xU": 1.02040816,
+          "xL": 0.86049544,
+          "delay_us": 0.44250004,
+          "parent_x": 1.04692032,
+          "depth": 1.01018029,
+          "coupling": 0.92004364
+        },
+        {
+          "event": "0318.0-787792",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94555874,
+          "xL": 0.81987578,
+          "delay_us": 5.07875041,
+          "parent_x": 0.9853875,
+          "depth": 0.95147018,
+          "coupling": 0.93715852
+        },
+        {
+          "event": "0318.0-791776",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85290482,
+          "xL": 0.96676737,
+          "delay_us": 0.59750005,
+          "parent_x": 1.01653924,
+          "depth": 0.98128539,
+          "coupling": 0.94306872
+        },
+        {
+          "event": "0318.0-793451",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.09215017,
+          "delay_us": 0.64000005,
+          "parent_x": 1.04092961,
+          "depth": 1.03811709,
+          "coupling": 0.93779588
+        },
+        {
+          "event": "0318.0-797496",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99099099,
+          "xL": 1.06007067,
+          "delay_us": 3.52750028,
+          "parent_x": 1.03544477,
+          "depth": 1.03254821,
+          "coupling": 0.96546016
+        },
+        {
+          "event": "0318.0-797730",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94452774,
+          "xL": 0.93649085,
+          "delay_us": 2.62875021,
+          "parent_x": 1.07956568,
+          "depth": 1.03310697,
+          "coupling": 0.99598156
+        },
+        {
+          "event": "0318.0-798343",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85201794,
+          "xL": 0.88235294,
+          "delay_us": 3.26000026,
+          "parent_x": 0.78194624,
+          "depth": 0.80925686,
+          "coupling": 0.9848325
+        },
+        {
+          "event": "0318.0-800469",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90128755,
+          "xL": 0.96976017,
+          "delay_us": 5.11000041,
+          "parent_x": 1.07206987,
+          "depth": 1.027377,
+          "coupling": 0.96576369
+        },
+        {
+          "event": "0318.0-800638",
+          "run": "6845.2020.0318.0",
+          "xU": 0.86474501,
+          "xL": 1.00746269,
+          "delay_us": 6.74500054,
+          "parent_x": 1.00040828,
+          "depth": 0.97898318,
+          "coupling": 0.92864116
+        },
+        {
+          "event": "0318.0-801687",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.9017341,
+          "delay_us": 0.98750008,
+          "parent_x": 1.08040593,
+          "depth": 1.03096539,
+          "coupling": 0.96699608
+        },
+        {
+          "event": "0318.0-813494",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94555874,
+          "xL": 0.92741935,
+          "delay_us": 9.09500073,
+          "parent_x": 0.94603831,
+          "depth": 0.94301836,
+          "coupling": 0.99093031
+        },
+        {
+          "event": "0318.0-818387",
+          "run": "6845.2020.0318.0",
+          "xU": 1.12219451,
+          "xL": 1.07317073,
+          "delay_us": 3.7762503,
+          "parent_x": 1.12721233,
+          "depth": 1.11632969,
+          "coupling": 0.97548811
+        },
+        {
+          "event": "0318.0-822536",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01123596,
+          "xL": 1.05590062,
+          "delay_us": 1.41875011,
+          "parent_x": 1.06651946,
+          "depth": 1.05603091,
+          "coupling": 0.97766767
+        },
+        {
+          "event": "0318.0-823679",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81712062,
+          "xL": 0.85257549,
+          "delay_us": 1.58875013,
+          "parent_x": 0.95962501,
+          "depth": 0.91779411,
+          "coupling": 0.98227257
+        },
+        {
+          "event": "0318.0-825759",
+          "run": "6845.2020.0318.0",
+          "xU": 1.27819549,
+          "xL": 0.83969466,
+          "delay_us": 7.4975006,
+          "parent_x": 0.9067705,
+          "depth": 0.96430889,
+          "coupling": 0.78074958
+        },
+        {
+          "event": "0318.0-830231",
+          "run": "6845.2020.0318.0",
+          "xU": 0.93333333,
+          "xL": 0.66543438,
+          "delay_us": 6.39375051,
+          "parent_x": 1.00616064,
+          "depth": 0.93695998,
+          "coupling": 0.86605052
+        },
+        {
+          "event": "0318.0-833707",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.58951965,
+          "delay_us": 2.24625018,
+          "parent_x": 0.97804471,
+          "depth": 0.9129574,
+          "coupling": 0.81088886
+        },
+        {
+          "event": "0318.0-835190",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90909091,
+          "xL": 1.51237397,
+          "delay_us": 0.39625003,
+          "parent_x": 1.27008149,
+          "depth": 1.2774544,
+          "coupling": 0.69835847
+        },
+        {
+          "event": "0318.0-838004",
+          "run": "6845.2020.0318.0",
+          "xU": 1.24260355,
+          "xL": 1.2244898,
+          "delay_us": 1.33125011,
+          "parent_x": 1.0651657,
+          "depth": 1.12109596,
+          "coupling": 0.99094312
+        },
+        {
+          "event": "0318.0-841923",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.51344743,
+          "delay_us": 1.17000009,
+          "parent_x": 0.98276704,
+          "depth": 0.90334773,
+          "coupling": 0.77285275
+        },
+        {
+          "event": "0318.0-847765",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85201794,
+          "xL": 0.93195266,
+          "delay_us": 7.06625057,
+          "parent_x": 0.91945424,
+          "depth": 0.90922486,
+          "coupling": 0.96003264
+        },
+        {
+          "event": "0318.0-849187",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.86049544,
+          "delay_us": 7.71375062,
+          "parent_x": 1.02045568,
+          "depth": 0.98464438,
+          "coupling": 0.94637675
+        },
+        {
+          "event": "0318.0-853401",
+          "run": "6845.2020.0318.0",
+          "xU": 0.78717201,
+          "xL": 0.84598698,
+          "delay_us": 0.32250003,
+          "parent_x": 1.0618297,
+          "depth": 0.98068572,
+          "coupling": 0.97059251
+        },
+        {
+          "event": "0318.0-857146",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89108911,
+          "xL": 0.86378738,
+          "delay_us": 0.51625004,
+          "parent_x": 1.11301132,
+          "depth": 1.03397273,
+          "coupling": 0.98634913
+        },
+        {
+          "event": "0318.0-864487",
+          "run": "6845.2020.0318.0",
+          "xU": 0.82568807,
+          "xL": 0.95172414,
+          "delay_us": 1.09625009,
+          "parent_x": 0.96562058,
+          "depth": 0.93926025,
+          "coupling": 0.93698197
+        },
+        {
+          "event": "0318.0-868662",
+          "run": "6845.2020.0318.0",
+          "xU": 1.13513514,
+          "xL": 1.06007067,
+          "delay_us": 0.35125003,
+          "parent_x": 0.92403449,
+          "depth": 0.98284101,
+          "coupling": 0.96246777
+        },
+        {
+          "event": "0318.0-873976",
+          "run": "6845.2020.0318.0",
+          "xU": 1.02040816,
+          "xL": 1.07638889,
+          "delay_us": 1.2062501,
+          "parent_x": 1.10609698,
+          "depth": 1.08785406,
+          "coupling": 0.97200964
+        },
+        {
+          "event": "0318.0-879624",
+          "run": "6845.2020.0318.0",
+          "xU": 1.11111111,
+          "xL": 1.03184713,
+          "delay_us": 4.04750032,
+          "parent_x": 1.20955316,
+          "depth": 1.16076014,
+          "coupling": 0.96036801
+        },
+        {
+          "event": "0318.0-880583",
+          "run": "6845.2020.0318.0",
+          "xU": 0.72,
+          "xL": 0.96534653,
+          "delay_us": 2.34750019,
+          "parent_x": 1.15284466,
+          "depth": 1.05570418,
+          "coupling": 0.87732673
+        },
+        {
+          "event": "0318.0-882161",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.98420413,
+          "delay_us": 0.52875004,
+          "parent_x": 1.08116097,
+          "depth": 1.046321,
+          "coupling": 0.9917689
+        },
+        {
+          "event": "0318.0-887387",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87289433,
+          "xL": 1.05744125,
+          "delay_us": 4.41500035,
+          "parent_x": 0.99387747,
+          "depth": 0.98411926,
+          "coupling": 0.90772654
+        },
+        {
+          "event": "0318.0-891959",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.96534653,
+          "delay_us": 3.09750025,
+          "parent_x": 1.04646268,
+          "depth": 1.01980465,
+          "coupling": 0.9988023
+        },
+        {
+          "event": "0318.0-892134",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03759398,
+          "xL": 1.1023622,
+          "delay_us": 2.5162502,
+          "parent_x": 0.98215652,
+          "depth": 1.01123777,
+          "coupling": 0.96761589
+        },
+        {
+          "event": "0318.0-894724",
+          "run": "6845.2020.0318.0",
+          "xU": 1.07913669,
+          "xL": 0.91234347,
+          "delay_us": 3.97250032,
+          "parent_x": 1.0605324,
+          "depth": 1.03725223,
+          "coupling": 0.91660339
+        },
+        {
+          "event": "0318.0-896794",
+          "run": "6845.2020.0318.0",
+          "xU": 0.87719298,
+          "xL": 0.88235294,
+          "delay_us": 8.93000071,
+          "parent_x": 1.02932829,
+          "depth": 0.97950173,
+          "coupling": 0.99742002
+        },
+        {
+          "event": "0318.0-896972",
+          "run": "6845.2020.0318.0",
+          "xU": 1.00942127,
+          "xL": 0.71186441,
+          "delay_us": 0.40250003,
+          "parent_x": 1.00152067,
+          "depth": 0.95448598,
+          "coupling": 0.85122157
+        },
+        {
+          "event": "0318.0-897192",
+          "run": "6845.2020.0318.0",
+          "xU": 0.75728155,
+          "xL": 0.83969466,
+          "delay_us": 5.68375045,
+          "parent_x": 1.12481553,
+          "depth": 1.01775413,
+          "coupling": 0.95879345
+        },
+        {
+          "event": "0318.0-907640",
+          "run": "6845.2020.0318.0",
+          "xU": 1.10456554,
+          "xL": 1.03104213,
+          "delay_us": 2.23375018,
+          "parent_x": 1.05601288,
+          "depth": 1.05925682,
+          "coupling": 0.9632383
+        },
+        {
+          "event": "0318.0-916095",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90909091,
+          "xL": 1.09913793,
+          "delay_us": 1.14375009,
+          "parent_x": 1.19356913,
+          "depth": 1.13654877,
+          "coupling": 0.90497649
+        },
+        {
+          "event": "0318.0-916310",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94650206,
+          "xL": 0.86306099,
+          "delay_us": 0.39000003,
+          "parent_x": 1.00190957,
+          "depth": 0.969507,
+          "coupling": 0.95827947
+        },
+        {
+          "event": "0318.0-920016",
+          "run": "6845.2020.0318.0",
+          "xU": 1.13924051,
+          "xL": 1.2642369,
+          "delay_us": 2.60500021,
+          "parent_x": 1.07829291,
+          "depth": 1.12107256,
+          "coupling": 0.9375018
+        },
+        {
+          "event": "0318.0-920165",
+          "run": "6845.2020.0318.0",
+          "xU": 1.13122172,
+          "xL": 1.15654206,
+          "delay_us": 1.1887501,
+          "parent_x": 1.0417982,
+          "depth": 1.07600248,
+          "coupling": 0.98733983
+        },
+        {
+          "event": "0318.0-934356",
+          "run": "6845.2020.0318.0",
+          "xU": 0.99212598,
+          "xL": 1.05590062,
+          "delay_us": 1.99375016,
+          "parent_x": 1.123215,
+          "depth": 1.09145743,
+          "coupling": 0.96811268
+        },
+        {
+          "event": "0318.0-941432",
+          "run": "6845.2020.0318.0",
+          "xU": 0.73891626,
+          "xL": 0.86378738,
+          "delay_us": 0.47375004,
+          "parent_x": 1.11057304,
+          "depth": 1.00980053,
+          "coupling": 0.93756444
+        },
+        {
+          "event": "0318.0-941715",
+          "run": "6845.2020.0318.0",
+          "xU": 1.16883117,
+          "xL": 1.11346766,
+          "delay_us": 0.82750007,
+          "parent_x": 1.06798797,
+          "depth": 1.09174777,
+          "coupling": 0.97231824
+        },
+        {
+          "event": "0318.0-941849",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 1.01298701,
+          "delay_us": 4.75625038,
+          "parent_x": 0.97549388,
+          "depth": 0.98803067,
+          "coupling": 0.99988558
+        },
+        {
+          "event": "0318.0-954947",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09004739,
+          "xL": 1.05,
+          "delay_us": 1.18500009,
+          "parent_x": 1.03113546,
+          "depth": 1.04389039,
+          "coupling": 0.9799763
+        },
+        {
+          "event": "0318.0-960477",
+          "run": "6845.2020.0318.0",
+          "xU": 0.88235294,
+          "xL": 1.01593625,
+          "delay_us": 3.12250025,
+          "parent_x": 0.87456446,
+          "depth": 0.89663182,
+          "coupling": 0.93320834
+        },
+        {
+          "event": "0318.0-962455",
+          "run": "6845.2020.0318.0",
+          "xU": 1.13122172,
+          "xL": 1.1827957,
+          "delay_us": 1.3037501,
+          "parent_x": 1.03058986,
+          "depth": 1.07299242,
+          "coupling": 0.97421301
+        },
+        {
+          "event": "0318.0-962471",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03759398,
+          "xL": 1.03104213,
+          "delay_us": 6.63000053,
+          "parent_x": 1.06639081,
+          "depth": 1.05562739,
+          "coupling": 0.99672407
+        },
+        {
+          "event": "0318.0-970498",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89108911,
+          "xL": 0.8125,
+          "delay_us": 0.44500004,
+          "parent_x": 1.00026048,
+          "depth": 0.95076843,
+          "coupling": 0.96070545
+        },
+        {
+          "event": "0318.0-972764",
+          "run": "6845.2020.0318.0",
+          "xU": 0.93078759,
+          "xL": 1.03448276,
+          "delay_us": 9.9850008,
+          "parent_x": 1.05096263,
+          "depth": 1.02906757,
+          "coupling": 0.94815242
+        },
+        {
+          "event": "0318.0-977026",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89481947,
+          "xL": 1.07708553,
+          "delay_us": 6.41625051,
+          "parent_x": 1.11186938,
+          "depth": 1.07329542,
+          "coupling": 0.90886697
+        },
+        {
+          "event": "0318.0-978904",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05121294,
+          "xL": 0.80717489,
+          "delay_us": 2.18250017,
+          "parent_x": 1.00613324,
+          "depth": 0.98023734,
+          "coupling": 0.87798097
+        },
+        {
+          "event": "0318.0-984801",
+          "run": "6845.2020.0318.0",
+          "xU": 0.85714286,
+          "xL": 1.00746269,
+          "delay_us": 7.64875061,
+          "parent_x": 0.89258951,
+          "depth": 0.90313628,
+          "coupling": 0.92484009
+        },
+        {
+          "event": "0318.0-986835",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09311741,
+          "xL": 0.82792208,
+          "delay_us": 1.70000014,
+          "parent_x": 1.02442574,
+          "depth": 1.00204414,
+          "coupling": 0.86740233
+        },
+        {
+          "event": "0318.0-997233",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94650206,
+          "xL": 0.97643098,
+          "delay_us": 1.07500009,
+          "parent_x": 1.01440922,
+          "depth": 0.99683353,
+          "coupling": 0.98503554
+        },
+        {
+          "event": "0318.0-997602",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04100946,
+          "xL": 1.09215017,
+          "delay_us": 0.98875008,
+          "parent_x": 1.0772884,
+          "depth": 1.07437763,
+          "coupling": 0.97442965
+        },
+        {
+          "event": "0318.0-1003784",
+          "run": "6845.2020.0318.0",
+          "xU": 1.0880829,
+          "xL": 1.19363395,
+          "delay_us": 2.05000016,
+          "parent_x": 0.90258866,
+          "depth": 0.98029827,
+          "coupling": 0.94722447
+        },
+        {
+          "event": "0318.0-1005593",
+          "run": "6845.2020.0318.0",
+          "xU": 0.76923077,
+          "xL": 0.83076923,
+          "delay_us": 2.65125021,
+          "parent_x": 1.07816712,
+          "depth": 0.98624646,
+          "coupling": 0.96923077
+        },
+        {
+          "event": "0318.0-1009581",
+          "run": "6845.2020.0318.0",
+          "xU": 0.83211679,
+          "xL": 1.00746269,
+          "delay_us": 0.95000008,
+          "parent_x": 0.99416515,
+          "depth": 0.96920283,
+          "coupling": 0.91232705
+        },
+        {
+          "event": "0318.0-1018663",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01538462,
+          "xL": 0.96976017,
+          "delay_us": 2.4375002,
+          "parent_x": 1.10811006,
+          "depth": 1.06877543,
+          "coupling": 0.97718778
+        },
+        {
+          "event": "0318.0-1024012",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.16352201,
+          "delay_us": 1.2637501,
+          "parent_x": 1.0817093,
+          "depth": 1.07901637,
+          "coupling": 0.90210996
+        },
+        {
+          "event": "0318.0-1030758",
+          "run": "6845.2020.0318.0",
+          "xU": 0.91525424,
+          "xL": 0.9893617,
+          "delay_us": 2.67625021,
+          "parent_x": 0.94427876,
+          "depth": 0.94626694,
+          "coupling": 0.96294627
+        },
+        {
+          "event": "0318.0-1034487",
+          "run": "6845.2020.0318.0",
+          "xU": 0.8681672,
+          "xL": 1.08433735,
+          "delay_us": 5.33125043,
+          "parent_x": 0.80541797,
+          "depth": 0.85535227,
+          "coupling": 0.89191493
+        },
+        {
+          "event": "0318.0-1039110",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94076655,
+          "xL": 0.99337748,
+          "delay_us": 2.77125022,
+          "parent_x": 0.93962081,
+          "depth": 0.94824178,
+          "coupling": 0.97369453
+        },
+        {
+          "event": "0318.0-1044515",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94339623,
+          "xL": 0.70680628,
+          "delay_us": 3.30625026,
+          "parent_x": 1.00575942,
+          "depth": 0.94531293,
+          "coupling": 0.88170503
+        },
+        {
+          "event": "0318.0-1045536",
+          "run": "6845.2020.0318.0",
+          "xU": 0.74380165,
+          "xL": 0.5834684,
+          "delay_us": 4.10125033,
+          "parent_x": 1.03545207,
+          "depth": 0.91056569,
+          "coupling": 0.91983337
+        },
+        {
+          "event": "0318.0-1045811",
+          "run": "6845.2020.0318.0",
+          "xU": 1.01321586,
+          "xL": 1.07638889,
+          "delay_us": 1.63500013,
+          "parent_x": 1.03306804,
+          "depth": 1.03732765,
+          "coupling": 0.96841349
+        },
+        {
+          "event": "0318.0-1049789",
+          "run": "6845.2020.0318.0",
+          "xU": 1.05882353,
+          "xL": 1.04448743,
+          "delay_us": 0.95625008,
+          "parent_x": 0.92105556,
+          "depth": 0.96477749,
+          "coupling": 0.99283195
+        },
+        {
+          "event": "0318.0-1062259",
+          "run": "6845.2020.0318.0",
+          "xU": 1.09311741,
+          "xL": 0.72115385,
+          "delay_us": 6.07125049,
+          "parent_x": 0.82982172,
+          "depth": 0.86614304,
+          "coupling": 0.81401822
+        },
+        {
+          "event": "0318.0-1063915",
+          "run": "6845.2020.0318.0",
+          "xU": 0.86614173,
+          "xL": 0.97888676,
+          "delay_us": 1.43250011,
+          "parent_x": 1.07043339,
+          "depth": 1.02245051,
+          "coupling": 0.94362749
+        },
+        {
+          "event": "0318.0-1064818",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.94076655,
+          "delay_us": 8.23250066,
+          "parent_x": 0.92833316,
+          "depth": 0.93729573,
+          "coupling": 0.98651231
+        },
+        {
+          "event": "0318.0-1067844",
+          "run": "6845.2020.0318.0",
+          "xU": 1.22891566,
+          "xL": 1.15384615,
+          "delay_us": 9.33000075,
+          "parent_x": 1.00120337,
+          "depth": 1.06458083,
+          "coupling": 0.96246525
+        },
+        {
+          "event": "0318.0-1074348",
+          "run": "6845.2020.0318.0",
+          "xU": 1.03448276,
+          "xL": 1.13636364,
+          "delay_us": 9.16250073,
+          "parent_x": 0.97868397,
+          "depth": 1.01390176,
+          "coupling": 0.94905956
+        },
+        {
+          "event": "0318.0-1076477",
+          "run": "6845.2020.0318.0",
+          "xU": 0.81312411,
+          "xL": 0.90100111,
+          "delay_us": 1.2425001,
+          "parent_x": 1.03844349,
+          "depth": 0.97854625,
+          "coupling": 0.9560615
+        },
+        {
+          "event": "0318.0-1081209",
+          "run": "6845.2020.0318.0",
+          "xU": 0.80597015,
+          "xL": 0.92957746,
+          "delay_us": 0.93375007,
+          "parent_x": 1.14477662,
+          "depth": 1.05542492,
+          "coupling": 0.93819634
+        },
+        {
+          "event": "0318.0-1083694",
+          "run": "6845.2020.0318.0",
+          "xU": 0.80597015,
+          "xL": 0.96308186,
+          "delay_us": 1.96750016,
+          "parent_x": 0.56271875,
+          "depth": 0.6585375,
+          "coupling": 0.92144414
+        },
+        {
+          "event": "0318.0-1085032",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.99770642,
+          "delay_us": 7.25125058,
+          "parent_x": 1.03693794,
+          "depth": 1.01905116,
+          "coupling": 0.98501776
+        },
+        {
+          "event": "0318.0-1091571",
+          "run": "6845.2020.0318.0",
+          "xU": 0.88111888,
+          "xL": 1.09913793,
+          "delay_us": 1.78375014,
+          "parent_x": 1.04442022,
+          "depth": 1.02793702,
+          "coupling": 0.89099048
+        },
+        {
+          "event": "0318.0-1093682",
+          "run": "6845.2020.0318.0",
+          "xU": 0.94214876,
+          "xL": 0.95513748,
+          "delay_us": 5.66250045,
+          "parent_x": 0.98053301,
+          "depth": 0.96986091,
+          "coupling": 0.99350564
+        },
+        {
+          "event": "0318.0-1098341",
+          "run": "6845.2020.0318.0",
+          "xU": 1.18329466,
+          "xL": 1.28686327,
+          "delay_us": 7.90750063,
+          "parent_x": 0.84311648,
+          "depth": 0.97106261,
+          "coupling": 0.9482157
+        },
+        {
+          "event": "0318.0-1101473",
+          "run": "6845.2020.0318.0",
+          "xU": 1.1409396,
+          "xL": 0.99770642,
+          "delay_us": 5.0587504,
+          "parent_x": 1.24321675,
+          "depth": 1.17944605,
+          "coupling": 0.92838341
+        },
+        {
+          "event": "0318.0-1108644",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04100946,
+          "xL": 0.96199525,
+          "delay_us": 1.48500012,
+          "parent_x": 1.05588212,
+          "depth": 1.03701962,
+          "coupling": 0.96049289
+        },
+        {
+          "event": "0318.0-1110265",
+          "run": "6845.2020.0318.0",
+          "xU": 0.90128755,
+          "xL": 0.91234347,
+          "delay_us": 2.76625022,
+          "parent_x": 1.00505675,
+          "depth": 0.97231899,
+          "coupling": 0.99447204
+        },
+        {
+          "event": "0318.0-1116859",
+          "run": "6845.2020.0318.0",
+          "xU": 0.91130012,
+          "xL": 0.70505288,
+          "delay_us": 2.5350002,
+          "parent_x": 0.93091307,
+          "depth": 0.89237571,
+          "coupling": 0.89687638
+        },
+        {
+          "event": "0318.0-1118337",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 1.02061856,
+          "delay_us": 1.50000012,
+          "parent_x": 1.11298361,
+          "depth": 1.07437819,
+          "coupling": 0.97356169
+        },
+        {
+          "event": "0318.0-1125692",
+          "run": "6845.2020.0318.0",
+          "xU": 0.92783505,
+          "xL": 0.8991009,
+          "delay_us": 5.84500047,
+          "parent_x": 1.04135241,
+          "depth": 0.99852622,
+          "coupling": 0.98563292
+        },
+        {
+          "event": "0318.0-1126879",
+          "run": "6845.2020.0318.0",
+          "xU": 0.89481947,
+          "xL": 1.00101112,
+          "delay_us": 0.65000005,
+          "parent_x": 1.13324023,
+          "depth": 1.07382342,
+          "coupling": 0.94690417
+        },
+        {
+          "event": "0318.0-1128974",
+          "run": "6845.2020.0318.0",
+          "xU": 0.96774194,
+          "xL": 0.29850746,
+          "delay_us": 1.88750015,
+          "parent_x": 0.90050401,
+          "depth": 0.82247527,
+          "coupling": 0.66538276
+        },
+        {
+          "event": "0318.0-1140287",
+          "run": "6845.2020.0318.0",
+          "xU": 1.04477612,
+          "xL": 0.90252708,
+          "delay_us": 0.38625003,
+          "parent_x": 1.07429402,
+          "depth": 1.03898517,
+          "coupling": 0.92887548
+        },
+        {
+          "event": "0318.0-1140683",
+          "run": "6845.2020.0318.0",
+          "xU": 0.84019769,
+          "xL": 0.86446105,
+          "delay_us": 0.54125004,
+          "parent_x": 1.13040528,
+          "depth": 1.03824065,
+          "coupling": 0.98786832
+        },
+        {
+          "event": "0318.0-1140925",
+          "run": "6845.2020.0318.0",
+          "xU": 1.26187246,
+          "xL": 1.23678647,
+          "delay_us": 0.98375008,
+          "parent_x": 1.0388826,
+          "depth": 1.10886898,
+          "coupling": 0.98745701
+        },
+        {
+          "event": "0318.0-1161925",
+          "run": "6845.2020.0318.0",
+          "xU": 0.68493151,
+          "xL": 0.85066163,
+          "delay_us": 2.84375023,
+          "parent_x": 1.00845943,
+          "depth": 0.92847214,
+          "coupling": 0.91713494
+        },
+        {
+          "event": "0318.0-1169041",
+          "run": "6845.2020.0318.0",
+          "xU": 1.00621118,
+          "xL": 0.76923077,
+          "delay_us": 2.40625019,
+          "parent_x": 0.873338,
+          "depth": 0.88313506,
+          "coupling": 0.88150979
+        }
+      ],
+      "heatmap": [
+        {
+          "xU_bin": "0.1",
+          "xL_bin": "0.7",
+          "xU_center": 0.1,
+          "xL_center": 0.7000000000000001,
+          "n": 1,
+          "mean_delay_us": 1.1637500931000075,
+          "median_delay_us": 1.1637500931000075
+        },
+        {
+          "xU_bin": "0.5",
+          "xL_bin": "0.5",
+          "xU_center": 0.5,
+          "xL_center": 0.5,
+          "n": 1,
+          "mean_delay_us": 1.4750001180000094,
+          "median_delay_us": 1.4750001180000094
+        },
+        {
+          "xU_bin": "0.5",
+          "xL_bin": "0.9",
+          "xU_center": 0.5,
+          "xL_center": 0.9,
+          "n": 3,
+          "mean_delay_us": 5.995417146300039,
+          "median_delay_us": 8.063750645100052
+        },
+        {
+          "xU_bin": "0.5",
+          "xL_bin": "1.1",
+          "xU_center": 0.5,
+          "xL_center": 1.1,
+          "n": 3,
+          "mean_delay_us": 5.248750419900034,
+          "median_delay_us": 6.453750516300041
+        },
+        {
+          "xU_bin": "0.7",
+          "xL_bin": "0.5",
+          "xU_center": 0.7000000000000001,
+          "xL_center": 0.5,
+          "n": 4,
+          "mean_delay_us": 5.016250401300032,
+          "median_delay_us": 4.374375349950029
+        },
+        {
+          "xU_bin": "0.7",
+          "xL_bin": "0.7",
+          "xU_center": 0.7000000000000001,
+          "xL_center": 0.7000000000000001,
+          "n": 6,
+          "mean_delay_us": 5.118750409500033,
+          "median_delay_us": 4.71250037700003
+        },
+        {
+          "xU_bin": "0.7",
+          "xL_bin": "0.9",
+          "xU_center": 0.7000000000000001,
+          "xL_center": 0.9,
+          "n": 31,
+          "mean_delay_us": 3.660080937967765,
+          "median_delay_us": 2.7212502177000175
+        },
+        {
+          "xU_bin": "0.7",
+          "xL_bin": "1.1",
+          "xU_center": 0.7000000000000001,
+          "xL_center": 1.1,
+          "n": 6,
+          "mean_delay_us": 5.082917073300034,
+          "median_delay_us": 5.885000470800038
+        },
+        {
+          "xU_bin": "0.7",
+          "xL_bin": "1.3",
+          "xU_center": 0.7000000000000001,
+          "xL_center": 1.3000000000000003,
+          "n": 1,
+          "mean_delay_us": 8.918750713500058,
+          "median_delay_us": 8.918750713500058
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "0.3",
+          "xU_center": 0.9,
+          "xL_center": 0.30000000000000004,
+          "n": 5,
+          "mean_delay_us": 1.9520001561600124,
+          "median_delay_us": 1.8875001510000122
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "0.5",
+          "xU_center": 0.9,
+          "xL_center": 0.5,
+          "n": 13,
+          "mean_delay_us": 2.0376924707077055,
+          "median_delay_us": 1.9925001594000127
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "0.7",
+          "xU_center": 0.9,
+          "xL_center": 0.7000000000000001,
+          "n": 30,
+          "mean_delay_us": 3.6240002899200237,
+          "median_delay_us": 3.1350002508000205
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "0.9",
+          "xU_center": 0.9,
+          "xL_center": 0.9,
+          "n": 175,
+          "mean_delay_us": 3.0368431000903056,
+          "median_delay_us": 2.2200001776000144
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "1.1",
+          "xU_center": 0.9,
+          "xL_center": 1.1,
+          "n": 83,
+          "mean_delay_us": 2.8946689062723077,
+          "median_delay_us": 2.001250160100013
+        },
+        {
+          "xU_bin": "0.9",
+          "xL_bin": "1.5",
+          "xU_center": 0.9,
+          "xL_center": 1.5,
+          "n": 1,
+          "mean_delay_us": 0.39625003170000256,
+          "median_delay_us": 0.39625003170000256
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "0.3",
+          "xU_center": 1.1,
+          "xL_center": 0.30000000000000004,
+          "n": 2,
+          "mean_delay_us": 0.8893750711500057,
+          "median_delay_us": 0.8893750711500057
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "0.5",
+          "xU_center": 1.1,
+          "xL_center": 0.5,
+          "n": 10,
+          "mean_delay_us": 4.207625336610027,
+          "median_delay_us": 4.296250343700028
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "0.7",
+          "xU_center": 1.1,
+          "xL_center": 0.7000000000000001,
+          "n": 21,
+          "mean_delay_us": 3.488512183842879,
+          "median_delay_us": 3.020000241600019
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "0.9",
+          "xU_center": 1.1,
+          "xL_center": 0.9,
+          "n": 63,
+          "mean_delay_us": 2.9587502367000185,
+          "median_delay_us": 2.368750189500015
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "1.1",
+          "xU_center": 1.1,
+          "xL_center": 1.1,
+          "n": 81,
+          "mean_delay_us": 2.503210076800016,
+          "median_delay_us": 1.7462501397000112
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "1.3",
+          "xU_center": 1.1,
+          "xL_center": 1.3000000000000003,
+          "n": 5,
+          "mean_delay_us": 3.259000260720021,
+          "median_delay_us": 2.605000208400017
+        },
+        {
+          "xU_bin": "1.1",
+          "xL_bin": "1.5",
+          "xU_center": 1.1,
+          "xL_center": 1.5,
+          "n": 1,
+          "mean_delay_us": 0.4200000336000027,
+          "median_delay_us": 0.4200000336000027
+        },
+        {
+          "xU_bin": "1.3",
+          "xL_bin": "0.7",
+          "xU_center": 1.3000000000000003,
+          "xL_center": 0.7000000000000001,
+          "n": 1,
+          "mean_delay_us": 4.295000343600028,
+          "median_delay_us": 4.295000343600028
+        },
+        {
+          "xU_bin": "1.3",
+          "xL_bin": "0.9",
+          "xU_center": 1.3000000000000003,
+          "xL_center": 0.9,
+          "n": 6,
+          "mean_delay_us": 3.8308336398000247,
+          "median_delay_us": 3.5056252804500225
+        },
+        {
+          "xU_bin": "1.3",
+          "xL_bin": "1.1",
+          "xU_center": 1.3000000000000003,
+          "xL_center": 1.1,
+          "n": 8,
+          "mean_delay_us": 5.576406696112536,
+          "median_delay_us": 5.565625445250036
+        },
+        {
+          "xU_bin": "1.3",
+          "xL_bin": "1.3",
+          "xU_center": 1.3000000000000003,
+          "xL_center": 1.3000000000000003,
+          "n": 3,
+          "mean_delay_us": 1.5137501211000097,
+          "median_delay_us": 1.3312501065000086
+        },
+        {
+          "xU_bin": "1.5",
+          "xL_bin": "0.3",
+          "xU_center": 1.5,
+          "xL_center": 0.30000000000000004,
+          "n": 1,
+          "mean_delay_us": 0.5475000438000035,
+          "median_delay_us": 0.5475000438000035
+        },
+        {
+          "xU_bin": "1.5",
+          "xL_bin": "0.9",
+          "xU_center": 1.5,
+          "xL_center": 0.9,
+          "n": 2,
+          "mean_delay_us": 1.6450001316000105,
+          "median_delay_us": 1.6450001316000105
+        },
+        {
+          "xU_bin": "1.5",
+          "xL_bin": "1.1",
+          "xU_center": 1.5,
+          "xL_center": 1.1,
+          "n": 2,
+          "mean_delay_us": 6.22437549795004,
+          "median_delay_us": 6.22437549795004
+        },
+        {
+          "xU_bin": "1.7",
+          "xL_bin": "0.7",
+          "xU_center": 1.7000000000000002,
+          "xL_center": 0.7000000000000001,
+          "n": 1,
+          "mean_delay_us": 0.6650000532000042,
+          "median_delay_us": 0.6650000532000042
+        },
+        {
+          "xU_bin": "1.7",
+          "xL_bin": "0.9",
+          "xU_center": 1.7000000000000002,
+          "xL_center": 0.9,
+          "n": 2,
+          "mean_delay_us": 2.2118751769500142,
+          "median_delay_us": 2.2118751769500142
+        }
+      ],
+      "models": [
+        {
+          "model": "M0 memoryless",
+          "mean_nll": 1.9793517063715012,
+          "role": "baseline",
+          "features": "intercept"
+        },
+        {
+          "model": "MG ordinary",
+          "mean_nll": 1.9153274065906434,
+          "role": "baseline",
+          "features": "total pulse + depth"
+        },
+        {
+          "model": "MP parent",
+          "mean_nll": 1.9116355869533939,
+          "role": "baseline",
+          "features": "ordinary + parent ARA"
+        },
+        {
+          "model": "MC same-scale child",
+          "mean_nll": 1.910850417309803,
+          "role": "actual",
+          "features": "parent + C, D, |D|, interaction"
+        },
+        {
+          "model": "wrong 13/24",
+          "mean_nll": 1.9119321178329007,
+          "role": "comparison",
+          "features": "wrong same-sized pair cut"
+        },
+        {
+          "model": "wrong 14/23",
+          "mean_nll": 1.9107853961833898,
+          "role": "comparison",
+          "features": "wrong same-sized pair cut"
+        }
+      ],
+      "runs": [
+        {
+          "run": "0317.0",
+          "n": 275,
+          "delta": -0.002314760292720966,
+          "MP_nll": 1.9306414816983613,
+          "MC_nll": 1.9329562419910822
+        },
+        {
+          "run": "0318.0",
+          "n": 297,
+          "delta": 0.003655475140175698,
+          "MP_nll": 1.894037536263609,
+          "MC_nll": 1.8903820611234334
+        }
+      ],
+      "gates": [
+        {
+          "gate": "positive in both holdout runs",
+          "passed": false
+        },
+        {
+          "gate": "bootstrap ci above zero",
+          "passed": false
+        },
+        {
+          "gate": "beats both wrong pairings",
+          "passed": false
+        },
+        {
+          "gate": "exceeds permutation q97 5",
+          "passed": false
+        }
+      ],
+      "quadrants": [
+        {
+          "quadrant": "UU: xU<1, xL<1",
+          "n": 269,
+          "share": 0.47027972027972026,
+          "mean_delay_us": 3.201793936440913,
+          "median_delay_us": 2.5012502001000163
+        },
+        {
+          "quadrant": "UL: xU<1, xL>=1",
+          "n": 94,
+          "share": 0.16433566433566432,
+          "mean_delay_us": 3.1469816347372532,
+          "median_delay_us": 2.1325001706000135
+        },
+        {
+          "quadrant": "LU: xU>=1, xL<1",
+          "n": 109,
+          "share": 0.19055944055944055,
+          "mean_delay_us": 3.116708964933048,
+          "median_delay_us": 2.4375001950000157
+        },
+        {
+          "quadrant": "LL: xU>=1, xL>=1",
+          "n": 100,
+          "share": 0.17482517482517482,
+          "mean_delay_us": 2.8107627248610174,
+          "median_delay_us": 1.9081251526500123
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "quarknet_t379_events",
+      "label": "QuarkNet detector 6845 event-linked T379 reduction",
+      "path": "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT *, 2*q2/(q1+q2) AS xU, 2*q4/(q3+q4) AS xL FROM read_csv_auto('analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv') WHERE q1>0 AND q2>0 AND q3>0 AND q4>0",
+        "description": "Select four-counter event-linked candidates and construct both adjacent same-scale child cuts.",
+        "tables_used": [
+          "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv"
+        ],
+        "filters": [
+          "q1>0",
+          "q2>0",
+          "q3>0",
+          "q4>0"
+        ],
+        "metric_definitions": [
+          "xU=2*q2/(q1+q2)",
+          "xL=2*q4/(q3+q4)"
+        ]
+      }
+    },
+    {
+      "id": "t380_frozen_results",
+      "label": "T380 frozen same-scale child scoring output",
+      "path": "analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json')",
+        "description": "Read the frozen T380 prospective scores, run splits, uncertainty and gate results.",
+        "tables_used": [
+          "analysis/muon/T380_same_scale_muon_child/T380_SAME_SCALE_MUON_CHILD_CUT_RESULTS.json"
+        ],
+        "metric_definitions": [
+          "delta=held-out mean NLL(MP)-mean NLL(MC); positive favors the same-scale child cut"
+        ]
+      }
+    }
+  ]
+}

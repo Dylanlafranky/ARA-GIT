@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>T392 spin-child neutral handover</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f5f7fb;color:#15243b;margin:0}main{max-width:1250px;margin:30px auto;padding:30px;background:white}
+h1,h2{color:#15243b}img{width:100%;border:1px solid #cbd2dc}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid #d8dee7;padding:10px;text-align:left}th{background:#edf2f8}.pass{color:#23724f;font-weight:bold}.fail{color:#b33b38;font-weight:bold}.boundary{background:#fff5e8;padding:16px;border-left:5px solid #d78b1f}
+</style></head><body><main>
+<h1>T392 - spin anti-phase child at the muon decay handover</h1>
+<p><strong>Registered verdict:</strong> SUPPORTED - POPULATION HANDOVER CHILD</p>
+<p>The published TWIST positron spin asymmetry reverses at <strong>x_e = 0.490189</strong>
+(95% bootstrap CI 0.486116 to 0.494456).
+The complementary joint-neutral energy coordinate is <strong>x_N = 1.509811</strong>.</p>
+<img src="T392_SPIN_CHILD_NEUTRAL_HANDOVER.png" alt="T392 labelled result figure">
+<h2>Exact identity read</h2>
+<table><tr><th>Object</th><th>ARA role</th><th>Measured or derived?</th></tr>
+<tr><td>Parent muon spin anti-phase</td><td>population parent</td><td>measured separately in T391</td></tr>
+<tr><td>Positron asymmetry A(p)</td><td>visible downstream child</td><td>published TWIST fit plus measured residual</td></tr>
+<tr><td>Joint two-neutrino packet</td><td>neutral downstream sibling</td><td>combined complement only</td></tr>
+<tr><td>x_e + x_N = 2</td><td>TE-ARA closure</td><td>forced by energy bookkeeping</td></tr></table>
+<h2>Frozen gates</h2><table><tr><th>Gate</th><th>Result</th><th>Exact read</th></tr><tr><td>directional reversal</td><td class=pass>PASS</td><td>low median -0.128470; high median +0.483328</td></tr><tr><td>unique handover</td><td class=pass>PASS</td><td>one local root at x_e=0.490189</td></tr><tr><td>coarse pair band</td><td class=pass>PASS</td><td>x_e=0.490189; x_N=1.509811</td></tr><tr><td>bootstrap stability</td><td class=pass>PASS</td><td>100.000% of roots inside [0.45,0.55]</td></tr><tr><td>wrong landmark control</td><td class=pass>PASS</td><td>distance to 0.5=0.009811; to 0.25=0.240189; to 0.75=0.259811</td></tr></table>
+<div class="boundary"><strong>Claim boundary.</strong> This is a population energy-allocation handover beneath the spin anti-phase. It does not predict the instant an individual muon decays and does not resolve the two neutrino siblings separately.</div>
+<h2>Source and reproduction</h2>
+<p>TWIST Collaboration, Figure 6 in <em>Measurement of P_mu xi in Polarized Muon Decay</em>, Phys. Rev. D 74, 072007 (2006). Official source: <a href="https://twist.triumf.ca/~e614/pubs/PmuXi_2006_PRD.pdf">TRIUMF PDF</a>.</p>
+<p>Protocol SHA-256: <code>C40A2C920A97C47D1C66D4A26B335D01CEBEF6B2AF8EF6180203CE4489D23B19</code><br>Source PDF SHA-256: <code>7BD41FBDAFB525BC4DCC53F3CFF68A1BBF59A0B2280216EDF7A2F80851B5E4D1</code></p>
+</main></body></html>

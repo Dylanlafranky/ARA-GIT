@@ -1,0 +1,91 @@
+{
+  "artifact": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T378_coherent_2017_holdout\\T378_results.json",
+  "overall_assessment": "SHARE WITH CAVEATS",
+  "checks": [
+    {
+      "name": "released_primary_grid_shape",
+      "pass": true,
+      "detail": "(12, 12)"
+    },
+    {
+      "name": "released_control_grid_shape",
+      "pass": true,
+      "detail": "(12, 12)"
+    },
+    {
+      "name": "released_boundary_counts",
+      "pass": true,
+      "detail": "[547, 405, 209, 207]"
+    },
+    {
+      "name": "all_templates_normalized",
+      "pass": true,
+      "detail": "[1.0, 0.9999999999999999, 1.0, 1.0]"
+    },
+    {
+      "name": "saved_fit_reproduces",
+      "pass": true,
+      "detail": "[0.0, 0.0, 0.0, 0.0]"
+    },
+    {
+      "name": "timing_export_has_12_rows",
+      "pass": true,
+      "detail": "(12, 8)"
+    },
+    {
+      "name": "bootstrap_has_1000_rows",
+      "pass": true,
+      "detail": "(1000, 5)"
+    },
+    {
+      "name": "both_branch_lower_bounds_positive",
+      "pass": true,
+      "detail": "[[16.419246217952796, 55.12610679446456], [30.19199288252218, 128.5484038368413]]"
+    },
+    {
+      "name": "handover_reproduces",
+      "pass": true,
+      "detail": "{'t_h_us': 1.0394189324476857, 'x_h': 0.7494969093838694}"
+    },
+    {
+      "name": "ARA_sum_to_two_is_explicitly_forced",
+      "pass": true,
+      "detail": "2; bookkeeping only"
+    },
+    {
+      "name": "beamoff_does_not_resolve_prompt",
+      "pass": true,
+      "detail": "[199.18956763841658, 0.0, 0.0, 17.62086472913181]"
+    },
+    {
+      "name": "near_threshold_gates_remain_failed",
+      "pass": true,
+      "detail": "deltaAIC=9.946464; permutations=17/1000"
+    }
+  ],
+  "failed_checks": [],
+  "calculation_spot_checks": {
+    "primary_counts_C_AC": [
+      547,
+      405
+    ],
+    "control_counts_C_AC": [
+      209,
+      207
+    ],
+    "fitted_signal_total": 113.2652301106423,
+    "fitted_background_total_in_C": 421.8685396448227,
+    "handover": {
+      "t_h_us": 1.0394189324476857,
+      "x_h": 0.7494969093838694
+    },
+    "ARA_sum": 2.0
+  },
+  "methodology_caveats": [
+    "The 2017 source releases count grids and timing PDFs but not ready-made flavor-specific CEvNS PE templates; the energy response is reconstructed from published physics and detector parameters.",
+    "Both branches remain positive under low/high quenching-factor and time-only alternatives, but exact yield balance and x_H are model-dependent.",
+    "The frozen pass thresholds were not relaxed after inspection: delta AIC missed 10 by 0.054 and 17/1000 chronology permutations were as good versus a maximum of 10.",
+    "This is an ensemble known-decay crosswalk, not an event-linked prediction of a private muon decay."
+  ],
+  "conclusion_boundary": "The holdout independently resolves prompt and delayed populations with correct order, but it does not pass every frozen high-stringency handover gate."
+}

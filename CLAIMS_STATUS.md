@@ -1,5 +1,146 @@
 # Claims Status
 
+### Update - 15 August 2026: T394 native neutral pair and causal release
+
+T394 completed the two follow-ups frozen after T393. Test 1 measured the two
+neutrinos at their own pair rung rather than only as projections into the
+three-daughter parent account. Across one million frozen Standard-Model `V-A`
+truth events, the native pair closed at `2` and had mean
+`(0.923816,1.076184)`. The split was a broad gradient, not a universal
+`(0.5,1.5)` landmark: `14.6393%` of native events lay near that coarse pair,
+versus `17.2380%` under a uniform phase-space control. The informative
+identity result was directional: the anti-muon-neutrino was heavier in
+`62.5081%` of events, while label shuffling returned the ordering to
+`50.0415%`; mean pair asymmetry rose monotonically across charged-energy
+quintiles.
+
+Test 2 used the Super-Kamiokande stopped-cosmic-muon archive and reconstructed
+a calibration-only population release anti-phase before revealing `374,340`
+untouched tagged daughter times. The reconstruction improved held-out mean NLL
+by `0.04363439` per event, block-bootstrap 95% interval
+`[0.04286623,0.04443180]`, and reduced KS from `0.0720300` to `0.0178327`.
+Independent sensitivity checks passed at 32, 64, 128 and 256 bins.
+
+The claim ceiling remains strict. Test 1 is a truth-model crosswalk rather
+than direct two-neutrino observation. Test 2 is a leakage-safe population
+distribution forecast and flexible empirical density estimate; it is not
+ARA-unique. The archive has no varying pre-decay field for a still-living
+individual muon, so advance prediction of which muon releases next is
+structurally untestable in this source.
+
+Primary record:
+`analysis/muon/T394_NATIVE_NEUTRAL_PAIR_AND_CAUSAL_RELEASE_FINDINGS_2026-08-15.md`.
+
+### Update - 15 August 2026: T393 joint neutrino-pair projection
+
+T393 decomposed T392's previously joint neutral complement into its two
+physical neutrino children using the massless Standard-Model `V-A` conditional
+decay weighting. It then applied the already-declared ARA child-to-parent
+halving without relabelling the parent population clock.
+
+**Verdict: KINEMATIC ARA CROSSWALK SUPPORTED; EXACT LANDMARK AND INDIVIDUAL
+TIMING NOT SUPPORTED.**
+
+- At T392's frozen reversal `x_e=0.49019`, the charged child projects to
+  `0.245095`, close to the proposed parent-quarter landmark.
+- The two neutral children project to distinct conditional means `0.346518`
+  and `0.408387`, jointly `0.754905`.
+- Inside their own neutral-pair ARA they read `0.918044` and `1.081956`, while
+  the identity-shuffled control reads `(1,1)`.
+- The muon-flavour neutral branch is heavier in `68.93%` of the conditional
+  handover distribution. A 400,000-event fixed-seed reproduction matched the
+  analytic means within `0.000173` child units.
+- The three parent shares summing to `1` and the joint-neutral momentum
+  opposing the charged daughter are forced conservation relations and are not
+  counted as independent evidence.
+- Exact `x_e=0.5` is outside the frozen T392 digitisation interval. T393 does
+  not establish a hidden `0.25` pre-decay clock for an individual muon.
+
+Primary record:
+`analysis/muon/T393_JOINT_NEUTRINO_PAIR_PROJECTION_FINDINGS_2026-08-15.md`.
+
+### Update - 15 August 2026: T392 spin-child neutral handover
+
+T392 pursued the proposed child beneath the T391 population spin anti-phase
+using the official TWIST polarized-muon daughter spectrum. It froze the
+charged-daughter energy coordinate and wrong-landmark controls before
+digitising the published asymmetry fit and data-minus-fit residuals.
+
+**Verdict: SUPPORTED AT THE POPULATION CROSSWALK CEILING.**
+
+- The daughter-direction relation reversed at `x_e=0.49019` with bootstrap
+  95% interval `[0.48612,0.49446]`.
+- All five frozen direction, uniqueness, coarse-band, stability and wrong-
+  landmark gates passed.
+- The joint-neutral complement is `x_N=1.50981`, recovering the ARA coarse
+  pair `(0.5,1.5)`.
+- The sign-reversal location is the empirical/model-assisted content. The
+  exact sum `x_e+x_N=2` is conservation bookkeeping, not a second finding.
+- The reversal is an established polarized Michel-spectrum feature. T392 is
+  therefore a strong ARA crosswalk and child-rung assignment, not a new muon-
+  decay law or an individual neutrino-creation clock.
+
+Primary record:
+`analysis/muon/T392_SPIN_CHILD_NEUTRAL_HANDOVER_FINDINGS_2026-08-15.md`.
+
+### Update — 14 August 2026: T380 same-scale muon child cut
+
+T380 followed the T379 four-counter lead one rung deeper. It kept the public
+QuarkNet source, solid-scintillator medium, linked incoming-muon/later-electron
+events and chronological split fixed, but replaced the coarse upper/lower
+parent cut with two adjacent child-scale cuts:
+
+`xU=2q2/(q1+q2)` and `xL=2q4/(q3+q4)`.
+
+**Verdict: SAME-SCALE CHILD CUT NOT SUPPORTED AS AN INDIVIDUAL HANDOVER CLOCK.**
+
+- The untouched child coordinates clustered near their own ridges (`xU`
+  median `0.9677`, `xL` median `0.9534`) and had strong median coupling
+  (`K=0.9527`). The requested same-scale cut therefore exposed a coherent
+  two-child plane rather than merely repeating the parent coordinate.
+- Adding the child relation after ordinary geometry and the parent cut gave a
+  small pooled improvement of `+0.0007852` NLL per event, but its
+  chronological-block 95% interval was `[-0.0071691, 0.0085103]`.
+- The sign reversed across the two untouched runs (`-0.0023148`,
+  `+0.0036555`).
+- One equally complex wrong pairing scored slightly better, and the observed
+  increment remained below the frozen 97.5% within-run permutation boundary.
+- All four frozen support gates failed. The result rejects these four prompt
+  amplitudes as a reproducible individual decay countdown; it does not erase
+  the earlier population-scale parent handover.
+
+Primary record:
+`analysis/muon/T380_SAME_SCALE_MUON_CHILD_CUT_REPORT_2026-08-14.md`.
+
+### Update — 14 August 2026: T379 individual-muon child handover
+
+T379 moved the earlier stopped-muon population handover to an independent,
+individual-event test. Four public QuarkNet solid-scintillator runs supplied
+2,396 calibration and 2,109 untouched holdout muon/electron pairs. The
+incoming ARA coordinate used only gain-normalised upper/lower prompt-counter
+relations; the later charged daughter was kept as the outcome.
+
+**Primary verdict: INDIVIDUAL ADVANCE INFORMATION NOT SUPPORTED.**  
+**Frozen `x_mu=0.50` landmark: NOT SUPPORTED.**
+
+- Ordinary prompt strength, multiplicity and stack depth scored `1.8040590`
+  held-out NLL; adding the ARA child terms scored `1.8046886`.
+- The registered improvement was negative in both holdout runs and pooled at
+  `-0.0006297`, with chronological-block 95% interval
+  `[-0.0014962, 0.0002848]`.
+- All frozen prompt-window and delay-window variants remained unsupported.
+- The `0.50` landmark had the predeclared direction in calibration but changed
+  sign across the two holdout runs; its pooled interval crossed zero.
+- `x_mu` was almost collinear with ordinary stack depth (`rho=0.9793`). The
+  visible timing gradient was therefore detector/event structure already
+  carried by the ordinary geometry control, not a separate individual clock.
+- This does not overturn the parent population crossing. It rejects the
+  stronger claim that this particular child cut predicts which individual
+  muon decays earlier.
+
+Primary record:
+`analysis/muon/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_REPORT_2026-08-14.md`.
+
 ### Update — 13 August 2026: T375 liquid-argon energy-placement mechanism
 
 T375 kept the T374 medium, source, interaction, event record and time-bearing

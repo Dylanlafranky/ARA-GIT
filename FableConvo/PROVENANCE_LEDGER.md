@@ -1,5 +1,63 @@
 # PROVENANCE LEDGER — risky predictions, timestamped, hits AND misses
 
+
+**15 August 2026 - T394 native neutral pair and causal population release.**
+T394 executed both follow-ups frozen after T393. Test 1 measured the two
+neutrinos at their native pair rung across one million frozen Standard-Model
+`V-A` truth events. The pair closed at `2` with mean
+`(0.923816,1.076184)`, but a universal `(0.5,1.5)` landmark was not
+supported: `14.6393%` of native events lay near it versus `17.2380%` under a
+uniform phase-space control. The identity-labelled direction was informative:
+the anti-muon-neutrino was heavier in `62.5081%` of events, while label
+shuffling returned the ordering to `50.0415%`; pair asymmetry also increased
+monotonically across charged-energy quintiles. Test 2 reconstructed a
+calibration-only population release anti-phase from the Super-Kamiokande
+stopped-cosmic-muon archive and froze it before revealing `374,340` holdout
+tagged daughter times. It improved mean NLL by `0.04363439` per event,
+block-bootstrap 95% interval `[0.04286623,0.04443180]`, and reduced KS from
+`0.0720300` to `0.0178327`; 32-, 64-, 128- and 256-bin sensitivity checks all
+passed. The result is population-level and not ARA-unique. This source has no
+varying pre-decay field for a still-living individual muon, so identifying
+which muon releases next remains structurally untestable here. Protocol
+SHA-256: `73285D4968422A57CFEC7F78C2A3ABA5FD903B8E460D939C62D1A770E49F10F6`.
+Primary record:
+`analysis/muon/T394_NATIVE_NEUTRAL_PAIR_AND_CAUSAL_RELEASE_FINDINGS_2026-08-15.md`.
+
+**15 August 2026 - T393 one-charged/two-neutral child projection.** Dylan
+corrected the T392 interpretation before execution: the neutral complement is
+not one child but a joint pair, and the charged daughter's `0.5`-like child
+coordinate should project to about `0.25` at the parent rung. T393 froze the
+distinction between forced energy/momentum conservation and the informative
+internal split, then used the massless Standard-Model `V-A` conditional
+weighting. At `x_e=0.49019`, the charged parent share was `0.245095`; the
+electron-neutrino and anti-muon-neutrino means were `0.346518` and `0.408387`,
+jointly `0.754905`. Their internal neutral ARA was
+`(0.918044,1.081956)` versus shuffled control `(1,1)`, and the muon-flavour
+branch was heavier in `68.93%` of the conditional distribution. All
+non-trivial frozen gates and independent validation passed. Exact `0.5` was
+outside the T392 digitisation interval, and individual decay timing remains
+unresolved. Protocol SHA-256:
+`E5D4E2BA98409A5E10A7D0BB5C8D8217C24CC08B19873ABBD64A94C801A7749E`.
+Primary record:
+`analysis/muon/T393_JOINT_NEUTRINO_PAIR_PROJECTION_FINDINGS_2026-08-15.md`.
+
+**15 August 2026 - T392 spin-child neutral-handover freeze and outcome.**
+After T391 recovered the raw population spin anti-phase, Dylan proposed that
+its child could be the neutrino-producing handover. Before scoring, T392 froze
+the identity as a population energy-allocation child, not a spin-turn clock:
+charged daughter `x_e=2E_e/m_mu`, directional reversal as the empirical
+target, joint-neutral `x_N=2-x_e` only after the root, coarse band
+`0.45-0.55`, wrong landmarks `0.25/0.75`, and a strict population-only claim
+ceiling. The official TWIST Figure 6 fit and data-minus-fit residuals yielded
+one root at `x_e=0.49019`, bootstrap 95% interval `[0.48612,0.49446]`; all
+five frozen gates passed. The complementary neutral account was `1.50981`.
+The exact closure to 2 was explicitly classified as forced bookkeeping. The
+result is a data-backed ARA crosswalk to the known polarized Michel-spectrum
+sign reversal, not individual decay timing, separate neutrino observation or
+a restoration of the failed 7.5-turn trigger. Independent validation passed
+all checks. Primary record:
+`analysis/muon/T392_SPIN_CHILD_NEUTRAL_HANDOVER_FINDINGS_2026-08-15.md`.
+
 **13 August 2026 — T375 liquid-argon energy-placement freeze and outcome.**
 T375 followed T374's order-versus-placement distinction without changing
 medium or identity. Before calculating the intermediate cuts, it froze a

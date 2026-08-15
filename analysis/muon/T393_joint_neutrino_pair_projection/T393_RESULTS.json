@@ -1,0 +1,156 @@
+{
+  "test_id": "T393",
+  "status": "KINEMATIC_CROSSWALK_SUPPORTED_EXACT_LANDMARK_NOT_IN_T392_INTERVAL",
+  "claim_boundary": "Tests the three-child decay decomposition and rung projection; does not predict an individual muon's decay time.",
+  "frozen_t392": {
+    "x_e_star": 0.49019,
+    "interval": [
+      0.48612,
+      0.49446
+    ],
+    "distance_to_exact_half_child": -0.009809999999999985,
+    "distance_to_exact_quarter_parent": -0.004904999999999993
+  },
+  "at_frozen_handover": {
+    "x_e": 0.49019,
+    "pair_total_child": 1.5098099999999999,
+    "mean_nu_e_child": 0.6930359939741135,
+    "mean_anti_nu_mu_child": 0.8167740060258863,
+    "sd_nu_e_child": 0.11938195638845517,
+    "charged_parent": 0.245095,
+    "nu_e_parent": 0.34651799698705676,
+    "anti_nu_mu_parent": 0.4083870030129432,
+    "joint_neutral_parent": 0.7549049999999999,
+    "pair_mass_coordinate_child": 0.50981,
+    "pair_mass_coordinate_parent": 0.254905,
+    "nu_e_internal_ara": 0.9180439843081097,
+    "anti_nu_mu_internal_ara": 1.0819560156918901,
+    "probability_anti_nu_mu_heavier": 0.6893215060258859
+  },
+  "at_exact_half": {
+    "x_e": 0.5,
+    "pair_total_child": 1.5,
+    "mean_nu_e_child": 0.6874999999999998,
+    "mean_anti_nu_mu_child": 0.8125000000000002,
+    "sd_nu_e_child": 0.12183492931011246,
+    "charged_parent": 0.25,
+    "nu_e_parent": 0.3437499999999999,
+    "anti_nu_mu_parent": 0.4062500000000001,
+    "joint_neutral_parent": 0.75,
+    "pair_mass_coordinate_child": 0.5,
+    "pair_mass_coordinate_parent": 0.25,
+    "nu_e_internal_ara": 0.9166666666666664,
+    "anti_nu_mu_internal_ara": 1.0833333333333337,
+    "probability_anti_nu_mu_heavier": 0.6874999999999998
+  },
+  "interval_endpoints": {
+    "low": {
+      "x_e": 0.48612,
+      "pair_total_child": 1.51388,
+      "mean_nu_e_child": 0.6953431281808493,
+      "mean_anti_nu_mu_child": 0.8185368718191506,
+      "sd_nu_e_child": 0.11836448947146518,
+      "charged_parent": 0.24306,
+      "nu_e_parent": 0.34767156409042466,
+      "anti_nu_mu_parent": 0.4092684359095753,
+      "joint_neutral_parent": 0.75694,
+      "pair_mass_coordinate_child": 0.51388,
+      "pair_mass_coordinate_parent": 0.25694,
+      "nu_e_internal_ara": 0.9186238383238425,
+      "anti_nu_mu_internal_ara": 1.0813761616761575,
+      "probability_anti_nu_mu_heavier": 0.6900668718191502
+    },
+    "high": {
+      "x_e": 0.49446,
+      "pair_total_child": 1.5055399999999999,
+      "mean_nu_e_child": 0.6906219729697473,
+      "mean_anti_nu_mu_child": 0.8149180270302526,
+      "sd_nu_e_child": 0.12044957453359079,
+      "charged_parent": 0.24723,
+      "nu_e_parent": 0.3453109864848736,
+      "anti_nu_mu_parent": 0.4074590135151263,
+      "joint_neutral_parent": 0.7527699999999999,
+      "pair_mass_coordinate_child": 0.50554,
+      "pair_mass_coordinate_parent": 0.25277,
+      "nu_e_internal_ara": 0.9174408823010313,
+      "anti_nu_mu_internal_ara": 1.0825591176989686,
+      "probability_anti_nu_mu_heavier": 0.6885330270302522
+    }
+  },
+  "monte_carlo": {
+    "seed": 393,
+    "n_accepted": 400000,
+    "mean_nu_e_child": 0.6928636891475166,
+    "mean_anti_nu_mu_child": 0.8169463108524835,
+    "probability_anti_nu_mu_heavier": 0.6899
+  },
+  "gates": {
+    "G1_approx_charged_quarter": {
+      "pass": true,
+      "value": 0.245095,
+      "target": 0.25,
+      "tolerance": 0.01
+    },
+    "G2_exact_half_inside_t392_interval": {
+      "pass": false,
+      "interval": [
+        0.48612,
+        0.49446
+      ],
+      "target": 0.5
+    },
+    "G3_parent_energy_closure_bookkeeping": {
+      "pass": true,
+      "value": 0.9999999999999999,
+      "residual": -1.1102230246251565e-16,
+      "evidential_weight": "none; forced by energy conservation"
+    },
+    "G4_distinct_neutral_siblings": {
+      "pass": true,
+      "value": 0.06186900602588641,
+      "threshold": 0.05
+    },
+    "G5_directional_neutral_ordering": {
+      "pass": true,
+      "value": 0.6893215060258859,
+      "threshold": 0.6
+    },
+    "G6_control_separation": {
+      "pass": true,
+      "v_minus_a": [
+        0.9180439843081097,
+        1.0819560156918901
+      ],
+      "identity_shuffled_control": [
+        1.0,
+        1.0
+      ]
+    },
+    "G7_monte_carlo_reproduction": {
+      "pass": true,
+      "nu_e_abs_error": 0.00017230482659691404,
+      "anti_nu_mu_abs_error": 0.00017230482659713608,
+      "tolerance": 0.0015
+    }
+  },
+  "interpretation": {
+    "forced": [
+      "three-child energy sum equals 2",
+      "parent energy shares sum to 1",
+      "joint neutral momentum is opposite the charged daughter in the muon rest frame"
+    ],
+    "informative": [
+      "the T392 directional reversal is within 0.01 parent units of the quarter landmark",
+      "V-A gives two distinct neutral-child means rather than a duplicated joint packet",
+      "the muon-flavour neutral child is heavier in about 69% of handover-slice decays"
+    ],
+    "not_supported": [
+      "the exact 0.5 child landmark lies inside the digitised T392 interval",
+      "0.25 is an individual-muon pre-decay clock"
+    ]
+  },
+  "sources": [
+    "https://pdg.lbl.gov/2025/reviews/rpp2025-rev-muon-decay-params.pdf",
+    "https://arxiv.org/abs/1010.4998"
+  ]
+}

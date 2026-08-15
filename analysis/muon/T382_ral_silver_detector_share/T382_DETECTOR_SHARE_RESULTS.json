@@ -1,0 +1,131 @@
+{
+  "test": "T382 RAL Silver 96-detector-share ARA traversal child",
+  "status": "PARENT_RECOVERED_96_DETECTOR_CHILD_NOT_QUALIFIED",
+  "source": {
+    "doi": "10.5286/ISIS.E.RB1620201",
+    "investigation": "Muon search for fluctuating loop currents in cuprates",
+    "instrument": "ISIS EMU",
+    "capability_class": "P_population_histograms"
+  },
+  "implementation": "96-detector time-varying shares; forward/backward bank result retained only as proxy diagnostic",
+  "parent": {
+    "tau_us": 2.1928000000000445,
+    "ridge_time_us": 1.5199331375318788,
+    "bootstrap_95_tau_us": [
+      2.192300000000061,
+      2.1933000000000615
+    ],
+    "population_coordinate": "xP(t)=2*(1-exp(-t/tau))"
+  },
+  "child": {
+    "gamma_mhz_per_g": 0.013819999999999976,
+    "relaxation_per_us": 0.0,
+    "phi0_rad": -0.06388861416772842,
+    "forward_backward_coefficient_amplitude": 0.04023320260934899,
+    "known_gamma_mhz_per_g_revealed_after_fit": 0.013553896,
+    "known_gamma_relative_error": 0.019633026548232117,
+    "native_coordinate": "xC(t)=1-cos(theta(t))",
+    "projection": "pC=xC/2",
+    "mean_holdout_gain": -0.9741272788596061,
+    "mean_reverse_gain": -1.413730010800327,
+    "correct_shift_gain": -0.9741272788596061,
+    "wrong_shift_95": -0.8822336048363406,
+    "detector_bootstrap_95": [
+      -1.0714271763549161,
+      -0.8724997714992724
+    ]
+  },
+  "alignment": {
+    "runs": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "phase_at_parent_ridge_rad": 1.967747848023743,
+        "distance_to_child_pole_rad": 1.1738448055660502,
+        "native_child_at_parent_ridge": 1.3866087022961544,
+        "projected_child_at_parent_ridge": 0.6933043511480772,
+        "pole_score": 0.3866087022961545,
+        "mirror_pole_score": 0.5009782667416685
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "phase_at_parent_ridge_rad": 2.2035631325374716,
+        "distance_to_child_pole_rad": 0.9380295210523215,
+        "native_child_at_parent_ridge": 1.5913781552268582,
+        "projected_child_at_parent_ridge": 0.7956890776134291,
+        "pole_score": 0.5913781552268581,
+        "mirror_pole_score": 0.689315678630827
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "phase_at_parent_ridge_rad": 2.4631480990054726,
+        "distance_to_child_pole_rad": 0.6784445545843205,
+        "native_child_at_parent_ridge": 1.7785498309495757,
+        "projected_child_at_parent_ridge": 0.8892749154747879,
+        "pole_score": 0.7785498309495757,
+        "mirror_pole_score": 0.8521755293526395
+      }
+    ],
+    "mean_direction_rad": 2.211404097024594,
+    "mean_resultant_length": 0.9796370398473105,
+    "mean_pole_score": 0.5855122294908628,
+    "run_bootstrap_95": [
+      0.38660870229615457,
+      0.7785498309495757
+    ],
+    "random_phase_97_5": 0.9769849516485702,
+    "mean_mirror_pole_score": 0.6808231582417116,
+    "reference_distances_rad": {
+      "pole_pi": 0.930188556565199,
+      "origin_0": 2.211404097024594,
+      "quarter_pi_2": 0.6406077702296975,
+      "quarter_3pi_2": 2.5009848833600956
+    }
+  },
+  "diagnostics": {
+    "bin_sensitivity": {
+      "1": -0.9741272788596061,
+      "2": -1.651022238981974,
+      "4": -2.6466325921104437
+    },
+    "release_modulation_mean_gain": 0.010836382835967107,
+    "bank_proxy_status": "PARENT_RECOVERED_CHILD_NOT_QUALIFIED"
+  },
+  "gates": {
+    "data_quality_pass": true,
+    "c01_parent_pass": true,
+    "c02_parent_only_pass": true,
+    "c03_c05_child_pass": false,
+    "c06_alignment_pass": false,
+    "c16_individual_prediction": null,
+    "child_components": {
+      "validation_gain_positive_each": false,
+      "holdout_gain_positive_each": false,
+      "holdout_orientation_covariance_positive_each": false,
+      "beats_reverse_pooled": true,
+      "beats_95_percent_detector_map_shifts": false,
+      "holdout_recovered_frequency_monotone": true
+    },
+    "alignment_components": {
+      "every_holdout_within_pi_over_4": false,
+      "mean_direction_closest_to_pi": false,
+      "run_bootstrap_lower_above_zero": true,
+      "beats_random_phase_97_5_percentile": false,
+      "beats_mirror": false
+    }
+  },
+  "plain_language": "The population parent passed, but the calibration-frozen 96-detector relation did not qualify as a stable traversal child under the frozen controls. C06 cannot be interpreted as child-mediated handover evidence.",
+  "claim_boundary": "Aggregate daughter histograms reconstruct a population parent and candidate spin child. Neither neutrino is observed, and individual advance prediction is unavailable.",
+  "artifacts": {
+    "run_summary": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_SHARE_RUNS.csv",
+    "shift_controls": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_SHARE_SHIFT_CONTROLS.csv",
+    "bin_sensitivity": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_SHARE_BIN_SENSITIVITY.csv",
+    "detector_bootstrap": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_BOOTSTRAP.csv",
+    "detector_pattern": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_PATTERN_AT_PARENT_RIDGE.csv",
+    "release_modulation": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_RELEASE_MODULATION.csv",
+    "figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_SHARE_FIGURE.svg",
+    "report": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_detector_share\\T382_DETECTOR_SHARE_REPORT.html"
+  }
+}

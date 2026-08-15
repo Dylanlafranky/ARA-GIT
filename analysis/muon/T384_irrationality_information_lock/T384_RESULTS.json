@@ -1,0 +1,98 @@
+{
+  "test": "T384 Irrationality Di-ARA information lock on RAL Silver",
+  "status": "IRRATIONALITY_INFORMATION_LOCK_NOT_SUPPORTED",
+  "plain_language": "Adding the raw Irrationality Di-ARA path did not satisfy the frozen held-out information-lock gates.",
+  "source": "same RAL Silver 96-detector archive as T382/T383",
+  "medium_change": false,
+  "parent": {
+    "tau_us": 2.1928000000000445,
+    "coordinate": "xP=2(1-exp(-t/tau))"
+  },
+  "child": {
+    "gamma_mhz_per_g": 0.013819999999999976,
+    "phi0_rad": -0.06388861416772842,
+    "amplitude_threshold": 0.20774617493626182,
+    "coordinate": "xC=1-cos(arg(zC)+phi0)"
+  },
+  "relation": {
+    "radial": "xL=2*abs(q)/(1+abs(q))",
+    "turning": "xT=1+arg(q)/pi",
+    "q": "((xP-1)+i(xC-1))_t / ((xP-1)+i(xC-1))_(t-1)",
+    "samples_per_cycle": 17,
+    "nearest_relations": 9
+  },
+  "cycle_counts": {
+    "calibration": 4,
+    "holdout": 13,
+    "validation": 2
+  },
+  "readability_median_amplitude": {
+    "EMU00066572": 4.810090674962567,
+    "EMU00066573": 0.34052524609988877,
+    "EMU00066574": 4.839723486040895,
+    "EMU00066575": 0.34382802830605746,
+    "EMU00066576": 4.861477042503894,
+    "EMU00066577": 0.3555780578863476,
+    "EMU00066571": 0.35088632793757535,
+    "EMU00066584": 4.862163916537271,
+    "EMU00066578": 0.35904733344647116,
+    "EMU00066579": 0.2979456291426426,
+    "EMU00066580": 0.2011539614905484,
+    "EMU00066581": 0.12572958472269682,
+    "EMU00066582": 0.1226044556383328,
+    "EMU00066583": 0.11990117219498267
+  },
+  "gates": {
+    "g1_observed_child_readability": true,
+    "g2_local_navigation": false,
+    "g3_wrong_relation": false,
+    "g4_recursive_restoration": false,
+    "g5_information_lock_contribution": false,
+    "by_run": {
+      "navigation": {
+        "EMU00066571": false,
+        "EMU00066584": false,
+        "EMU00066578": false,
+        "EMU00066579": false,
+        "EMU00066580": false
+      },
+      "wrong_relation": {
+        "EMU00066571": false,
+        "EMU00066584": false,
+        "EMU00066578": false,
+        "EMU00066579": false,
+        "EMU00066580": false
+      },
+      "restoration": {
+        "EMU00066571": false,
+        "EMU00066584": true,
+        "EMU00066578": false,
+        "EMU00066579": false,
+        "EMU00066580": false
+      },
+      "contribution": {
+        "EMU00066571": false,
+        "EMU00066584": true,
+        "EMU00066578": false,
+        "EMU00066579": false,
+        "EMU00066580": false
+      }
+    }
+  },
+  "tail_admissible_fields": [
+    63.0,
+    400.0
+  ],
+  "claim_boundary": "This source can test population-scale detector-pattern navigation. It contains no directly linked individual muon, charged daughter and neutrino record, so it cannot establish event-level neutrino timing.",
+  "artifacts": {
+    "protocol": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_IRRATIONALITY_INFORMATION_LOCK_PROTOCOL_2026-08-15.md",
+    "run_metrics": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_RUN_METRICS.csv",
+    "cycle_metrics": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_CYCLE_METRICS.csv",
+    "navigator_metrics": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_NAVIGATOR_METRICS.csv",
+    "example_path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_EXAMPLE_PATH.csv",
+    "tail_audit": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_7P5_TAIL_AUDIT.csv",
+    "figure_png": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_INFORMATION_LOCK_FIGURE.png",
+    "figure_svg": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_INFORMATION_LOCK_FIGURE.svg",
+    "report": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T384_irrationality_information_lock\\T384_INFORMATION_LOCK_REPORT.html"
+  }
+}

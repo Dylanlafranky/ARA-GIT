@@ -1,0 +1,110 @@
+{
+  "test": "T389 spin anti-phase Di-ARA",
+  "status": "SUPPORTED",
+  "source": {
+    "doi": "10.5286/ISIS.E.RB1620201",
+    "medium": "300 K silver",
+    "instrument": "ISIS EMU",
+    "capability": "aggregate 96-detector histograms"
+  },
+  "frozen_calibration": {
+    "gamma_mhz_per_g": 0.013819999999999976,
+    "relaxation_per_us": 0.0,
+    "phi0_rad": -0.06388861416772842,
+    "calibration_runs": [
+      "EMU00066572",
+      "EMU00066573",
+      "EMU00066574",
+      "EMU00066575",
+      "EMU00066576",
+      "EMU00066577"
+    ]
+  },
+  "coordinate": {
+    "projection": "z(t)=c(t)+i*s(t) from the calibration-frozen 96-detector basis",
+    "ara": "(x_c,x_s)=(1-c,1-s); full anti-phase maps to (2-x_c,2-x_s) after common normalization"
+  },
+  "pooled_full_inversion_advantage": 0.21876149117385202,
+  "bootstrap_95_full_inversion_advantage": [
+    0.16501578948032947,
+    0.24970001877615014
+  ],
+  "gates": {
+    "inversion_beats_controls_every_field": true,
+    "negative_half_correlation_every_field": true,
+    "minimum_near_half_every_field": true,
+    "bootstrap_advantage_lower_above_zero": true,
+    "primary_pass": true
+  },
+  "holdout_runs": [
+    {
+      "run": "EMU00066578",
+      "split": "holdout",
+      "field_g": 63.0,
+      "period_us": 1.148553970551078,
+      "n_half_pairs": 449,
+      "error_full_inversion": 0.4972757299594402,
+      "error_direct_repeat": 1.9378315316897867,
+      "error_cosine_axis_reflection": 1.8559368059335384,
+      "error_sine_axis_reflection": 0.7469757487355904,
+      "full_inversion_advantage": 0.24970001877615017,
+      "half_turn_correlation_real": -0.8764350227747744,
+      "half_turn_correlation_imag": 0.009793854212406925,
+      "minimum_correlation_turn_fraction": 0.51,
+      "minimum_correlation_real": -0.8891119110661955
+    },
+    {
+      "run": "EMU00066579",
+      "split": "holdout",
+      "field_g": 160.0,
+      "period_us": 0.452243125904487,
+      "n_half_pairs": 470,
+      "error_full_inversion": 0.544229016244026,
+      "error_direct_repeat": 1.9305473076501705,
+      "error_cosine_axis_reflection": 1.8454593284416165,
+      "error_sine_axis_reflection": 0.7857976815091025,
+      "full_inversion_advantage": 0.24156866526507648,
+      "half_turn_correlation_real": -0.852775481086972,
+      "half_turn_correlation_imag": 0.0317363837162448,
+      "minimum_correlation_turn_fraction": 0.51,
+      "minimum_correlation_real": -0.8727733444611303
+    },
+    {
+      "run": "EMU00066580",
+      "split": "holdout",
+      "field_g": 400.0,
+      "period_us": 0.1808972503617948,
+      "n_half_pairs": 479,
+      "error_full_inversion": 0.8030340873811045,
+      "error_direct_repeat": 1.9297447618960508,
+      "error_cosine_axis_reflection": 1.8524734890059322,
+      "error_sine_axis_reflection": 0.968049876861434,
+      "full_inversion_advantage": 0.16501578948032947,
+      "half_turn_correlation_real": -0.7073097886338863,
+      "half_turn_correlation_imag": 0.03318421144194201,
+      "minimum_correlation_turn_fraction": 0.49,
+      "minimum_correlation_real": -0.7077307446574382
+    }
+  ],
+  "claim_boundary": "A population detector-field test. T382's child remained unqualified; neutrinos and individual muons are not observed.",
+  "protocol_sha256": "26155BF3D3E39A142B0B3A7F0AB6C88E3CE8B5190DBB3F474D91BF678D445519",
+  "source_hashes": {
+    "EMU00066572": "A01EE39846193C08DC4B661E04C78ECA60A825337C5AFD1DE9320E666097CB39",
+    "EMU00066573": "4A50403866A1218A885733E3228DA24DD38C547CAB792B66020EC6363FB92F05",
+    "EMU00066574": "7242B168C30BF685F045AD8F755F8267BE9CBA07EB745D595605EBD8064F531A",
+    "EMU00066575": "C351F6D451A85C84E08E114B2FCFA8B8FC9CF750B78B6AC63AE50F18B3D2595B",
+    "EMU00066576": "FA55FFC01159D1CAA93838B8BADF0099D16D2A451414C16097D198245A2E58A0",
+    "EMU00066577": "12149F36B0441FF6C2A71F5AE8108ADBD8CB19CDEB4E4E9E59A86D6BCA32C751",
+    "EMU00066571": "F08F376BC995A88BDF4F5F3DE97E203DD7ACD286A4AC6EAF25818EBFF7F43908",
+    "EMU00066584": "BE23FD0CFBCF654E53F0D97C044930E5745F636CC4F0BD0E9FC4513573AD3A08",
+    "EMU00066578": "B2C575E52E38A23C61A3F5A8B1D86ACB5D56291AE028B2CC04E3844268CC482C",
+    "EMU00066579": "7E88216711AD466AA05ED90FC456A89C26AD56C8F44ABB93E275254816E422A5",
+    "EMU00066580": "A48FB41CA2CC4FA34CD23604B03F15F3D67D3CBDCB920187242DBAB3C68A5BB4"
+  },
+  "artifacts": {
+    "run_summary": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T389_spin_antiphase_diara\\T389_RUN_SUMMARY.csv",
+    "shift_curves": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T389_spin_antiphase_diara\\T389_SHIFT_CURVES.csv",
+    "figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T389_spin_antiphase_diara\\T389_SPIN_ANTIPHASE_DIARA.svg",
+    "report": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T389_spin_antiphase_diara\\T389_SPIN_ANTIPHASE_DIARA_REPORT.md"
+  }
+}

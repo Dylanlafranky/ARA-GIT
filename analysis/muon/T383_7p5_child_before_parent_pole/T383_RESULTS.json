@@ -1,0 +1,48 @@
+{
+  "test": "T383 7.5 child cycles before parent pole",
+  "status": "BOTH_REJECTED",
+  "discovery": {
+    "field_g": 63.0,
+    "t_star_us": 8.625833492697605,
+    "parent_ara": 1.9608580374535072,
+    "parent_completion_fraction": 0.9804290187267536,
+    "child_cycles": 7.5
+  },
+  "h1_literal_count_invariance": {
+    "pass": false,
+    "tolerance_cycles": 0.25,
+    "comparison_counts": [
+      {
+        "field_g": 160,
+        "accumulated_child_cycles": 19.063274830300827
+      },
+      {
+        "field_g": 400,
+        "accumulated_child_cycles": 47.6734393588802
+      }
+    ]
+  },
+  "h2_half_cycle_pole_lock": {
+    "pass": false,
+    "each_within_one_eighth_cycle": false,
+    "mean_fractional_phase": 0.8683570945905146,
+    "mean_closest_to_half": false,
+    "mean_pole_score": -0.22964998574144074,
+    "random_phase_97_5": 0.33814034602623577,
+    "mean_reverse_pole_score": -0.25959288746857345,
+    "beats_random": false,
+    "beats_reverse": true,
+    "reference_distances_cycles": {
+      "0.0": 0.1316429054094855,
+      "0.25": 0.3816429054094855,
+      "0.5": 0.36835709459051463,
+      "0.75": 0.11835709459051458
+    }
+  },
+  "claim_boundary": "The T382 child failed qualification. T383 tests only the frozen candidate geometry and cannot establish neutrino timing.",
+  "artifacts": {
+    "field_table": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T383_7p5_child_before_parent_pole\\T383_FIELD_PHASES.csv",
+    "figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T383_7p5_child_before_parent_pole\\T383_7P5_PARENT_POLE.svg",
+    "report": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T383_7p5_child_before_parent_pole\\T383_7P5_PARENT_POLE.html"
+  }
+}

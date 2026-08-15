@@ -1,0 +1,120 @@
+{
+  "test": "T382 RAL Silver ARA-native traversal-child handover",
+  "status": "PARENT_RECOVERED_CHILD_NOT_QUALIFIED",
+  "source": {
+    "doi": "10.5286/ISIS.E.RB1620201",
+    "investigation": "Muon search for fluctuating loop currents in cuprates",
+    "instrument": "ISIS EMU",
+    "capability_class": "P_population_histograms"
+  },
+  "phase_orientation": "Phase A traversal 0->2; Phase B return 2->0 within the spin child",
+  "parent": {
+    "tau_us": 2.1928000000000445,
+    "ridge_time_us": 1.5199331375318788,
+    "bootstrap_95_tau_us": [
+      2.192300000000061,
+      2.1933000000000615
+    ],
+    "population_coordinate": "xP(t)=2*(1-exp(-t/tau))"
+  },
+  "child": {
+    "alpha_forward_backward": 1.3652815033133967,
+    "gamma_mhz_per_g": 0.013915999999999965,
+    "relaxation_per_us": 0.0,
+    "phi0_rad": -0.07465359288425083,
+    "calibration_phase_concentration": 0.9974715407005869,
+    "known_gamma_mhz_per_g_revealed_after_fit": 0.013553896,
+    "known_gamma_relative_error": 0.026715860886048232,
+    "native_coordinate": "xC(t)=1-cos(theta(t))",
+    "projection": "pC=xC/2",
+    "mean_holdout_gain": 0.0008615390565436994,
+    "mean_reverse_gain": 0.0011008148062790306,
+    "correct_shift_gain": 0.0008615390565436994,
+    "wrong_shift_95": 0.008823132237116626
+  },
+  "alignment": {
+    "runs": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "phase_at_parent_ridge_rad": 2.014741399687793,
+        "distance_to_child_pole_rad": 1.1268512539020001,
+        "child_at_parent_ridge": 1.4295054524973652,
+        "projected_child_at_parent_ridge": 0.7147527262486826,
+        "pole_score": 0.42950545249736516,
+        "mirror_pole_score": 0.5590605098049453
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "phase_at_parent_ridge_rad": 2.339486484946214,
+        "distance_to_child_pole_rad": 0.8021061686435793,
+        "child_at_parent_ridge": 1.6951942922830343,
+        "projected_child_at_parent_ridge": 0.8475971461415172,
+        "pole_score": 0.6951942922830343,
+        "mirror_pole_score": 0.7943867759952725
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "phase_at_parent_ridge_rad": 2.8191039481021107,
+        "distance_to_child_pole_rad": 0.3224887054876824,
+        "child_at_parent_ridge": 1.9484496157480935,
+        "projected_child_at_parent_ridge": 0.9742248078740467,
+        "pole_score": 0.9484496157480934,
+        "mirror_pole_score": 0.9850415227642413
+      }
+    ],
+    "mean_direction_rad": 2.3896656559612968,
+    "mean_resultant_length": 0.9461588058356236,
+    "mean_pole_score": 0.6910497868428309,
+    "bootstrap_95": [
+      0.42950545249736516,
+      0.9484496157480934
+    ],
+    "random_phase_97_5": 0.9429617027571678,
+    "mean_mirror_pole_score": 0.7794962695214863,
+    "reference_distances_rad": {
+      "pole_pi": 0.7519269976284964,
+      "origin_0": 2.3896656559612968,
+      "quarter_pi_2": 0.8188693291664002,
+      "quarter_3pi_2": 2.322723324423393
+    }
+  },
+  "gates": {
+    "data_quality_pass": true,
+    "c01_parent_pass": true,
+    "c03_c05_child_pass": false,
+    "c06_alignment_pass": false,
+    "c16_individual_prediction": null,
+    "c01_components": {
+      "parent_beats_constant_every_holdout": true,
+      "holdout_ridge_drift_within_10_percent": true,
+      "parent_ridge_inside_window": true
+    },
+    "child_components": {
+      "validation_gain_positive_each": true,
+      "holdout_gain_positive_each": true,
+      "beats_reverse_pooled": false,
+      "beats_95_percent_detector_shifts": false,
+      "holdout_recovered_frequency_monotone": false,
+      "holdout_amplitude_positive_each": false
+    },
+    "alignment_components": {
+      "every_holdout_within_pi_over_4": false,
+      "mean_direction_closest_to_pi": true,
+      "bootstrap_lower_above_zero": true,
+      "beats_random_phase_97_5_percentile": false,
+      "beats_mirror": false
+    }
+  },
+  "plain_language": "The parent population cycle was recovered, but the frozen forward/backward spin relation did not qualify as a stable traversal child under the controls. No child-handover interpretation is made.",
+  "claim_boundary": "Aggregate daughter histograms reconstruct a population parent and candidate spin child. Neutrinos are not directly observed, and individual advance prediction is unavailable.",
+  "artifacts": {
+    "run_summary": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_traversal_child\\T382_RUN_SUMMARY.csv",
+    "holdout_series": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_traversal_child\\T382_HOLDOUT_SERIES.csv",
+    "shift_controls": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_traversal_child\\T382_DETECTOR_SHIFT_CONTROLS.csv",
+    "figure": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_traversal_child\\T382_ARA_NATIVE_CHILD_FIGURE.svg",
+    "report": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T382_ral_silver_traversal_child\\T382_ARA_NATIVE_CHILD_REPORT.html"
+  }
+}

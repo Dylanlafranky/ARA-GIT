@@ -1,0 +1,75 @@
+{
+  "test": "T392 spin-child to joint-neutral handover",
+  "status": "SUPPORTED_AT_POPULATION_CROSSWALK_CEILING",
+  "verdict": "SUPPORTED - POPULATION HANDOVER CHILD",
+  "source_capability": "published population momentum-asymmetry spectrum; figure digitisation",
+  "handover": {
+    "momentum_mev_c": 25.891257283930734,
+    "charged_energy_ara_x_e": 0.4901892405183295,
+    "joint_neutral_energy_ara_x_n": 1.5098107594816705,
+    "x_e_ci95": [
+      0.4861162886331069,
+      0.4944558581354782
+    ],
+    "x_e_bootstrap_median": 0.4901978659631975,
+    "bootstrap_roots": 20000
+  },
+  "quality": {
+    "digitised_points": 66,
+    "traced_fit_pixels_used": 51,
+    "residual_rms": 0.003970960223257968,
+    "low_allocation_median_asymmetry": -0.1284701481436839,
+    "high_allocation_median_asymmetry": 0.48332766916032033,
+    "bootstrap_band_fraction": 1.0
+  },
+  "gates": {
+    "directional_reversal": {
+      "pass": true,
+      "detail": "low median -0.128470; high median +0.483328"
+    },
+    "unique_handover": {
+      "pass": true,
+      "detail": "one local root at x_e=0.490189"
+    },
+    "coarse_pair_band": {
+      "pass": true,
+      "detail": "x_e=0.490189; x_N=1.509811"
+    },
+    "bootstrap_stability": {
+      "pass": true,
+      "detail": "100.000% of roots inside [0.45,0.55]"
+    },
+    "wrong_landmark_control": {
+      "pass": true,
+      "detail": "distance to 0.5=0.009811; to 0.25=0.240189; to 0.75=0.259811"
+    }
+  },
+  "model": {
+    "local_quadratic_coefficients": [
+      0.00023148537647819118,
+      0.007298540818297943,
+      -0.3441462878070681
+    ],
+    "fit_trace_cubic_coefficients": [
+      1.5968441806582675e-05,
+      -0.001038553222760185,
+      0.04045038867785001,
+      -0.6279574649552713
+    ]
+  },
+  "boundaries": [
+    "The directional reversal is empirical; x_e + x_N = 2 is conservation bookkeeping.",
+    "The neutral packet combines both neutrinos and does not identify either sibling separately.",
+    "The source is aggregate and cannot predict one muon's decay time.",
+    "T392 does not revive the rejected 7.5-turn trigger claim."
+  ],
+  "provenance": {
+    "protocol_sha256": "C40A2C920A97C47D1C66D4A26B335D01CEBEF6B2AF8EF6180203CE4489D23B19",
+    "source_pdf_sha256": "7BD41FBDAFB525BC4DCC53F3CFF68A1BBF59A0B2280216EDF7A2F80851B5E4D1",
+    "source_page_sha256": "2EF6CBD01460B84B21A8570D005E50B222E841282A7DCA4548359D26DB5C0F2D",
+    "source_url": "https://twist.triumf.ca/~e614/pubs/PmuXi_2006_PRD.pdf",
+    "source_figure": "Figure 6, PDF page 10 (one-indexed), 400-DPI render",
+    "seed": 392,
+    "bootstrap_replicates": 20000
+  }
+}

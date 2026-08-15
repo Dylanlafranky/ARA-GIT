@@ -1,0 +1,880 @@
+# T381 — ARA-native muon-to-neutrino handover master protocol
+
+**Status:** ARCHITECTURE FROZEN BEFORE NEW DATASET SELECTION OR EXECUTION  
+**Recorded:** 14 August 2026  
+**Purpose:** define an ARA-faithful test programme for the muon-to-neutrino handover before choosing observables because they produce a desired result  
+**Scope:** methodology only; no new outcome data are evaluated here  
+
+This is a master architecture freeze, not yet a dataset-specific preregistration. Every execution must add a source manifest, precise observable definitions, inclusion rules, frozen split and protocol hash before its outcome is opened. Previously opened muon datasets can be used for calibration or retrospective checks, but not as new blinded confirmation.
+
+## 1. Question
+
+The primary ARA hypothesis is:
+
+> The neutrino-release handover may be mediated by the muon's lower-rung Phase A traversal child. At the handover, the child approaches its native `2.0` singularity and projects one octave upward to the muon parent's `1.0` ridge.
+
+The competing direct hypothesis is:
+
+> The muon parent hands directly into the combined neutrino-release identity, with no lower-rung child coordinate providing reproducible advance information.
+
+The protocol must distinguish these from a third possibility:
+
+> The available observables measure only detector response, known population timing or another proxy and do not expose either physical ARA handover.
+
+## 2. Frozen ARA declaration
+
+### 2.1 Orientation for this programme
+
+For every T381-family test unless a source-specific protocol explicitly mirrors the line before outcome inspection:
+
+- **Phase A** is the traversal/release direction and is oriented `0 -> 2`.
+- **Phase B** is the retained-connection direction and is oriented `2 -> 0`.
+- `0` and `2` are singularity poles.
+- `1` is the ridge of the identity being measured.
+
+This is a declared coordinate orientation, not a claim that established particle-physics labels are intrinsically Phase A or Phase B. A reversed physical convention is represented by the frozen mirror `x -> 2-x`; it is not repaired after seeing an outcome.
+
+### 2.2 Physical decay identities
+
+Ordinary free muon decay has three directly relevant daughter branches:
+
+\[
+\mu^- \rightarrow e^- + \nu_\mu + \bar\nu_e,
+\]
+
+and the charge-conjugate branches for `mu+` decay. Therefore this protocol keeps separate:
+
+1. the whole muon parent;
+2. the candidate traversal child inside the muon identity;
+3. the candidate retained-connection child inside the muon identity;
+4. the visible charged daughter;
+5. the combined neutral-daughter release;
+6. the two individual neutrino siblings, when the data identify them;
+7. external `Other`, including stopping medium, capture, detector response and censoring.
+
+No test may silently compress these identities and later decompress them as though they had been measured separately.
+
+### 2.3 Native ARA coordinate
+
+For two non-negative, commensurable contributions `U_A` and `U_B` measured at one declared identity and rung:
+
+\[
+x=\frac{2U_A}{U_A+U_B}\in[0,2],
+\qquad
+2-x=\frac{2U_B}{U_A+U_B}.
+\]
+
+With the frozen orientation, increasing traversal contribution moves `x` toward `2`; equal measured contribution gives the ridge `x=1`.
+
+The raw scale
+
+\[
+\Lambda=U_A+U_B
+\]
+
+must be retained. Normalising to `x+(2-x)=2` is TE-ARA bookkeeping, not empirical proof of physical closure.
+
+If the two quantities do not have commensurable units or a predeclared defensible normalisation, no ARA ratio is calculated. They remain separate observables until a valid relation is established.
+
+### 2.4 Native child versus parent projection
+
+The candidate aligned one-octave projection is
+
+\[
+p_{A\uparrow}=\frac{x_{A,\mathrm{child}}}{2}.
+\]
+
+The mirrored projection is
+
+\[
+p_{B\uparrow}=\frac{2-x_{A,\mathrm{child}}}{2}.
+\]
+
+The principal child-mediated hypothesis is therefore
+
+\[
+\boxed{
+x_{A,\mathrm{child}}\rightarrow2
+\quad\Longrightarrow\quad
+p_{A\uparrow}\rightarrow1
+\quad\Longrightarrow\quad
+x_{\mu,\mathrm{parent}}\rightarrow1
+\quad\Longrightarrow\quad
+\text{neutral-daughter release}
+}
+\]
+
+The child coordinate, its calculated projection and the independently measured parent coordinate must occupy separate columns. The equation is not supported if the parent coordinate is merely constructed from the projected child.
+
+### 2.5 Three different quantities that must never be merged
+
+The following may all contain a numerical `0.5`, but they are different measurements:
+
+1. a **native child position** on its own `0-2` diameter;
+2. a **projected child contribution** one rung upward;
+3. a **cumulative population release fraction** transformed onto `0-2`.
+
+Any source-specific protocol must name which quantity is being plotted and tested.
+
+### 2.6 Information³
+
+Information³ is represented as the information set
+
+\[
+\{A, B, R_{AB}\},
+\]
+
+where `R_AB` is the relation generated by or measured between `A` and `B`. It also permits triangulation: two independently informative relations may predict or reconstruct a third.
+
+A relation deterministically calculated from the same two inputs is valid bookkeeping but is not an independent Information³ confirmation. Confirmation requires a held-out or separately measured third quantity.
+
+### 2.7 Di-ARA
+
+A Di-ARA test requires two independently meaningful ARA axes, each with its own identity, poles, ridge and raw magnitude. For this programme the preferred candidate axes are:
+
+1. **handover timing/progression**;
+2. **energy-momentum or directional allocation**.
+
+Two detector ratios or two source branches are not automatically a physical Di-ARA. Their persistence and relationship must first be established.
+
+## 3. Competing architectures
+
+### H-DIRECT — direct parent handover
+
+The parent muon's disappearance and combined neutral-daughter release form the primary handover. A lower-rung traversal coordinate does not add reproducible advance information after the parent state and ordinary physical covariates are known.
+
+### H-CHILD — traversal-child-mediated handover
+
+A pre-decay Phase A traversal child evolves at its native rung. Its approach to `x_child=2`, or a frozen identity-specific gradient toward it, precedes or coincides with the parent ridge and adds held-out information about the handover.
+
+### H-PROXY — measurement-only relation
+
+The candidate coordinate describes detector balance, stopping depth, population lifetime, selection or another proxy. It may be a valid ARA cut of that proxy identity but does not expose the physical muon child.
+
+The direct and child models are competitors. H-CHILD is not supported merely because H-DIRECT produces a recognisable ARA curve.
+
+## 4. Data qualification before any physics test
+
+### 4.1 Required data grain
+
+The ideal record contains, for every eligible parent muon:
+
+- a unique event and parent identifier;
+- muon charge;
+- parent creation or stopping time;
+- repeated pre-decay state measurements;
+- stopping location and medium;
+- magnetic field and polarization/spin information when available;
+- decay, capture or right-censor status;
+- exact daughter time;
+- charged-daughter energy and direction;
+- a direct neutrino-sensitive measurement or an independently measured missing four-momentum proxy;
+- detector calibration and run identifiers.
+
+The cohort must include parent muons without a detected charged daughter. A dataset conditional on finding the daughter can test linked-event structure but cannot estimate the unconditional individual handover hazard.
+
+### 4.2 Dataset capability classes
+
+- **Class G — gold:** event-linked pre-decay parent state, daughter state, neutral-sensitive information and censoring.
+- **Class S — silver:** event-linked parent and charged daughter with censoring, but no direct neutral measurement.
+- **Class P — population:** source-level timing or aggregate branch templates.
+- **Class D — detector proxy:** only pulse, counter or response geometry.
+
+Every result inherits the claim ceiling of its class. No statistical strength can raise a Class D test into a physical child observation.
+
+### 4.3 Source freeze
+
+Before outcome inspection, each execution records:
+
+- source URL, DOI or archive identifier;
+- exact files and hashes;
+- collection date and physical medium;
+- detector and run configuration;
+- population, eligibility and exclusions;
+- event grain and linkage keys;
+- null, duplicate and censoring handling;
+- calibration, validation and untouched holdout partitions;
+- all candidate child observables and their physical justification.
+
+## 5. Master cut register
+
+Each cut below receives its own result status. Passing one cut does not automatically pass another.
+
+### C01 — whole-muon parent cycle
+
+**Who:** every eligible parent muon, including decays, captures and censored events.  
+**What:** survival, disappearance and outcome allocation across time.  
+**Where:** the declared parent muon identity in one unchanged medium.  
+**When:** from creation or stopping until decay, capture or censoring.  
+**Why:** establish the parent cycle before assigning children.  
+**How:** fit survival with competing risks and retain raw counts, exposure and censoring.
+
+**ARA output:** a parent progression coordinate and raw scale. A population CDF is explicitly labelled `population parent coordinate`, not individual internal state.
+
+**Support ceiling:** parent crosswalk only.
+
+### C02 — direct parent-to-neutral handover
+
+**Who:** the surviving muon population and combined neutral-daughter release.  
+**What:** their equality or transition under H-DIRECT.  
+**Why:** establish the simpler competing architecture.  
+**How:** compare remaining-parent and cumulative-release contributions in common normalised units while retaining capture and censoring as `Other`.
+
+In a pure free-decay population,
+
+\[
+S_\mu(t)+F_{\mathrm{decay}}(t)=1.
+\]
+
+In real media,
+
+\[
+S_\mu(t)+F_{\mathrm{decay}}(t)+F_{\mathrm{capture}}(t)+F_{\mathrm{other}}(t)=1.
+\]
+
+The last two terms may not be discarded to force closure.
+
+### C03 — candidate Phase A traversal child
+
+**Who:** repeated pre-decay measurements from the same parent muon.  
+**What:** a lower-rung state that changes before the handover.  
+**Candidate observables:** spin phase/projection, directional evolution, kinetic-state evolution or another predeclared movement-bearing variable.  
+**Why:** test the user's primary child-mediated hypothesis.  
+**How:** select the primary child from physical lineage before seeing daughter time; construct a native ARA coordinate only from commensurable contributions.
+
+Detector pulse balance alone remains Class D unless its physical lineage to the traversal child is independently established.
+
+### C04 — candidate Phase B retained-connection child
+
+**Who:** the same muon and measurement period as C03.  
+**What:** the opposed retained-coupling contribution at that child rung.  
+**Candidate observables:** bound-state/capture coupling, local medium interaction or another predeclared state with the same measurement boundary as C03.  
+**Why:** Phase A cannot be inferred from a single isolated amplitude; its relation requires the opposed contribution or a defensible residual budget.  
+**How:** measure it directly where possible. If inferred as a TE-ARA residual, label it `residual`, not observed Phase B.
+
+### C05 — native child balance
+
+**Who:** C03 and C04 for the same event and time slice.  
+**What:** `x_child`, `2-x_child`, `Lambda_child` and any measured `Other`.  
+**Why:** determine whether the child approaches a ridge, pole or identity-specific gradient before release.  
+**How:** calculate the frozen native coordinate without using daughter time or outcome labels.
+
+### C06 — independent child-to-parent projection
+
+**Who:** the native child and independently measured parent.  
+**What:** the relationship between `x_child/2` and `x_parent`.  
+**Why:** test whether the child singularity is the parent ridge.  
+**How:** time-align but do not derive the parent from the child; estimate lead/lag and projection error on untouched events.
+
+Primary quantities:
+
+\[
+e_P(t)=x_{\mu,\mathrm{parent}}(t)-\frac{x_{A,\mathrm{child}}(t)}{2},
+\]
+
+\[
+\Delta t=t\!\left(x_{\mu,\mathrm{parent}}=1\right)
+-t\!\left(x_{A,\mathrm{child}}=2\right).
+\]
+
+The exact point hypothesis is a calibration target, not the only allowed physical outcome. The full oriented gradient and uncertainty are retained.
+
+### C07 — neutrino-release whole
+
+**Who:** both neutral daughters as one released identity.  
+**What:** combined release time, energy and momentum.  
+**Why:** this whole is more identifiable than either unobserved sibling alone.  
+**How:** use direct neutral-sensitive records when available; otherwise use an explicitly labelled missing-momentum proxy.
+
+### C08 — two-neutrino sibling split
+
+**Who:** muon-flavour and electron-flavour neutral daughters.  
+**What:** their energy, direction, flavour and ordering relations.  
+**Why:** determine whether they are sibling children, reversed paths or branches belonging to a larger Di-ARA.  
+**How:** run only when the data distinguish them. A combined missing four-vector cannot uniquely identify both siblings without additional constraints.
+
+### C09 — charged-versus-neutral daughter allocation
+
+**Who:** charged daughter and combined neutral daughters from the same parent event.  
+**What:** visible retained allocation versus neutral traversal allocation under the frozen orientation.  
+**Why:** test how the muon whole is redistributed at the handover.  
+**How:** construct a same-event ARA only after units, detector response and missing energy are reconciled.
+
+### C10 — energy Information³ lock
+
+Use two independently measured relations to predict a third energy allocation. The predicted quantity must then be compared with an independently observed or reserved measurement. If it is calculated solely by conservation from the other two, the result is an exact physics/ARA crosswalk, not empirical confirmation.
+
+### C11 — momentum Information³ lock
+
+Use parent momentum/direction and charged-daughter momentum to predict the combined neutral momentum. Score angular and magnitude error against a reserved neutral-sensitive or event-missing-momentum measurement. Preserve sign and handedness; do not replace vector error with magnitude-only agreement.
+
+### C12 — timing-allocation Di-ARA
+
+**Axis 1:** child/parent handover timing.  
+**Axis 2:** energy-momentum or directional allocation.  
+
+Each axis must pass its own construct gate before their four-quadrant relation is interpreted. The joint model must add held-out information beyond either axis alone.
+
+### C13 — spin-direction lineage
+
+Test whether a pre-decay spin or polarization trajectory is a traversal-bearing child and whether its oriented phase predicts daughter direction or release timing. Known parity/asymmetry laws are the physics baseline beside the ARA result, not a substitute for the ARA test.
+
+### C14 — medium/Other coupling
+
+Run the same identity first within one fixed medium. Replication across vacuum/free decay, solid stopping, liquid stopping and capture-capable materials requires a new source-specific identity declaration. Medium changes are measured as `Other` or a new parent coupling; landmarks are not transferred unchanged after the result.
+
+### C15 — same-medium rung replication
+
+Repeat C03-C06 in a second dataset with the same physical identity, medium class and observable definition. This is the primary confirmation of the child-projection rule.
+
+### C16 — individual advance prediction
+
+Ask whether pre-decay child state improves prediction of one muon's handover time beyond:
+
+1. the ordinary lifetime/competing-risk model;
+2. known parent covariates;
+3. detector geometry and calibration;
+4. parent ARA state alone.
+
+This is the first cut allowed to support individual advance information.
+
+### C17 — detector-response proxy
+
+Repeat useful pulse or counter cuts as detector ARA controls. They may expose measurement structure, gain drift or stopping depth. They cannot be called muon Phase A/Phase B children unless a separate lineage test supports that translation.
+
+### C18 — traversal-child grandchildren
+
+Only after C03-C06 succeed, decompose the traversal child at its own native rung. Test whether a grandchild changes earlier and whether its full native cycle projects first to the child ridge and then to the parent ridge. This cut is exploratory until the first child is established.
+
+## 6. Ordered execution procedure
+
+### Stage 0 — source and identity qualification
+
+1. Classify the dataset as G, S, P or D.
+2. Draw the proposed identity tree before inspecting outcomes.
+3. State Phase A/Phase B orientation and physical meaning.
+4. Name parent, child, sibling, medium and detector identities separately.
+5. Reject any proposed ratio with incompatible units or unclear denominator.
+6. Freeze the cohort and account for every exclusion.
+
+**Stop condition:** if no pre-decay variable can plausibly measure the muon's physical traversal child, do not run the child claim. Continue only as a proxy or population test.
+
+### Stage 1 — establish the direct baseline
+
+1. Fit the ordinary survival/competing-risk model.
+2. Reconstruct the direct parent-release ARA without child variables.
+3. Measure population ridge, uncertainty and medium dependence.
+4. Preserve this as H-DIRECT rather than describing it as a failed child model.
+
+### Stage 2 — establish native child coordinates
+
+1. Use calibration data only to normalise the predeclared Phase A and Phase B child observables.
+2. Retain raw magnitudes and `Other`.
+3. Test stability across runs without using daughter time.
+4. Reject a child coordinate dominated by detector channel, gain or stopping-depth redundancy unless that identity is the declared target.
+
+### Stage 3 — test the child-to-parent geometry
+
+1. Calculate native `x_child`.
+2. Calculate but separately store `x_child/2`.
+3. Measure `x_parent` independently.
+4. Align the series using physical timestamps only.
+5. estimate projection error, crossing order and lead/lag.
+6. Test aligned, mirrored and one-rung-misassigned alternatives using frozen definitions.
+
+### Stage 4 — reveal the daughter outcome
+
+1. Open linked daughter timing only after Stages 0-3 are frozen.
+2. Compare H-DIRECT, parent-only and child-mediated prospective models.
+3. Score both pooled and per-run holdout performance.
+4. Examine whether any advantage occurs before the handover rather than being reconstructed after it.
+
+### Stage 5 — reconstruct the released identity
+
+1. Keep the charged daughter and combined neutral system separate.
+2. Run energy and momentum Information³ tests.
+3. Decompose the two neutral siblings only if identifiable.
+4. Build timing-allocation Di-ARA only after each axis passes construct validation.
+
+### Stage 6 — replicate and descend
+
+1. Replicate in an untouched same-medium dataset.
+2. Then change medium with a newly declared identity and predicted directional change.
+3. Only then descend to traversal-child grandchildren.
+
+## 7. Statistical models and baselines
+
+### 7.1 Data splits
+
+- calibration for detector normalisation and nuisance estimation;
+- validation for protocol debugging without final claims;
+- chronological or source-independent untouched holdout for the frozen score;
+- external same-identity replication where available.
+
+No event may move between splits after its daughter outcome is inspected.
+
+### 7.2 Outcome model
+
+Use survival or competing-risk likelihoods that include:
+
+- observed decay;
+- nuclear capture;
+- accidental/background daughter;
+- right censoring;
+- detector efficiency.
+
+Conditioning only on events with a linked charged daughter receives a visible-daughter claim ceiling.
+
+### 7.3 Frozen model ladder
+
+- `M0`: ordinary lifetime plus background/censoring.
+- `MG`: `M0` plus ordinary physical and detector covariates.
+- `MP`: `MG` plus independently measured parent ARA state.
+- `MC`: `MP` plus native child state, projected child state and predeclared lead/lag terms.
+- `MD`: valid second ARA axis and frozen Di-ARA interaction, only after both axes pass construct gates.
+
+The primary predictive increment is
+
+\[
+\Delta_{child}=\operatorname{NLL}(MP)-\operatorname{NLL}(MC).
+\]
+
+Positive values favour the child model. Report effect size, interval and calibration, not only a p-value.
+
+### 7.4 Uncertainty
+
+- cluster/bootstrap by run or physical acquisition block;
+- report per-run effects before pooling;
+- use hierarchical estimates when detectors or media differ;
+- correct or gate families of secondary landmarks;
+- retain exact sample sizes and denominators;
+- disclose effective, not merely nominal, replication count.
+
+## 8. Controls and falsifiers
+
+### 8.1 Construct controls
+
+- native child versus projected child versus population CDF in separate columns;
+- raw magnitude beside every normalised coordinate;
+- independently measured parent versus parent manufactured from child;
+- observed Phase B versus TE-ARA residual Phase B;
+- physical child versus detector proxy labels.
+
+### 8.2 Negative controls
+
+- within-run outcome permutation;
+- time-shifted daughter links;
+- wrong detector pairing with matched complexity;
+- unrelated pre-decay channels;
+- stable non-decaying or through-going control events where appropriate;
+- phase mirror `x -> 2-x` with the direction prediction reversed;
+- shuffled child-parent event identities;
+- false rung projections `x`, `x/4` and other predeclared alternatives.
+
+### 8.3 Falsification conditions for H-CHILD
+
+H-CHILD is not supported if any core condition holds:
+
+1. the proposed child is principally detector geometry or stopping depth;
+2. the parent is derived from the same child ratio;
+3. the child effect appears only after daughter time is used to define it;
+4. `MC` fails to improve on `MP` in untouched runs;
+5. the effect is matched by wrong pairings, permutations or time shifts;
+6. the projected `2 -> 1` relationship reverses unpredictably across same-identity runs;
+7. only the pooled population effect survives while per-run direction is unstable;
+8. the cohort excludes unobserved decays without modelling that selection.
+
+Failure does not falsify all ARA geometry. It falsifies the declared child identity, observable or projection at the tested boundary.
+
+## 9. Decision gates
+
+### Gate A — physical construct validity
+
+Pass only if parent, child, phase orientation, rung, units, medium and detector proxy boundary were declared before outcome inspection and supported by the measurement design.
+
+### Gate B — direct handover
+
+Pass if the direct parent-release relation is reproducible with appropriate capture/censoring accounting and independently predicts held-out population release.
+
+### Gate C — child projection
+
+Pass only if:
+
+1. native child and parent are independently measured;
+2. the child approaches its frozen boundary before or at parent ridge/release;
+3. aligned projection beats mirrored and false-rung controls;
+4. the oriented relationship holds across untouched runs;
+5. uncertainty excludes a relationship too weak to distinguish from the controls.
+
+Exact `x_child=2` and `x_parent=1` are reported as a pure-geometry calibration. A stable identity-specific offset may support the gradient version but not the exact-point claim.
+
+### Gate D — individual advance information
+
+Pass only if:
+
+1. `MC` improves held-out NLL over `MP` in every primary holdout run;
+2. the block-bootstrap interval for `Delta_child` is wholly above zero;
+3. calibration and survival error improve, not only rank ordering;
+4. permutations and time shifts destroy the improvement;
+5. a non-zero useful lead time exists before the observed daughter event;
+6. the effect survives capture/censoring and ordinary-covariate controls.
+
+### Gate E — Information³ reconstruction
+
+Pass only when two relations predict a separately measured or reserved third quantity with held-out improvement over ordinary conservation/baseline models. Algebraic closure alone is labelled exact crosswalk.
+
+### Gate F — Di-ARA
+
+Pass only if two complete ARA axes are physically interpretable, separately stable and jointly add information beyond their one-axis models.
+
+## 10. Claim ladder
+
+Every result is assigned the highest level it actually earns:
+
+0. **Invalid/unclear cut** — identity or units are not defensible.
+1. **ARA crosswalk** — known structure represented faithfully in ARA.
+2. **Stable ARA measurement** — coordinate/gradient replicates at its declared identity.
+3. **Child projection supported** — independently measured native child predicts parent ridge/release.
+4. **Individual advance information** — child state improves held-out event timing.
+5. **Released-identity reconstruction** — Information³ recovers neutral energy/direction against independent measurement.
+6. **Cross-domain/rung law evidence** — same frozen projection replicates across appropriately declared identities.
+
+No level alone proves the universal fractal-sphere ontology.
+
+## 11. Required visual outputs
+
+Every execution produces saveable, labelled figures with units, source, sample size and split:
+
+1. identity/rung tree showing parent, children, daughters, medium and detector;
+2. representative individual time traces selected by a frozen rule;
+3. native child `0-2` coordinate over time;
+4. projected child and independently measured parent on the same labelled panel;
+5. parent-versus-child phase plane with ridge and poles;
+6. release-time distribution and competing-risk components;
+7. child state versus later handover time with exact axes and uncertainty;
+8. energy and momentum Information³ reconstruction plots;
+9. Di-ARA quadrant occupancy only when both axes qualify;
+10. model performance, calibration and lead-time plots;
+11. per-run and per-medium panels rather than pooled-only graphics;
+12. wrong-pairing, permutation and mirror controls beside the primary result.
+
+Colours must identify the declared phase orientation consistently. A chart title must state whether it shows native child, projected child, population parent, detector proxy or daughter outcome.
+
+## 12. Reporting requirements
+
+Every report must begin with:
+
+- the exact question answered;
+- dataset capability class;
+- phase orientation;
+- identity and rung table;
+- whether neutrinos were directly observed;
+- whether the cohort includes all parent muons;
+- whether the result is calibration, retrospective, holdout or external replication.
+
+It must then separate:
+
+1. forced mathematical identities;
+2. known-physics crosswalks;
+3. empirical measurements;
+4. post-result interpretations;
+5. unresolved ARA hypotheses.
+
+Negative and failed results remain in the lineage. Medium changes, cohort changes and altered observables are reported as new identities or tests, not quietly treated as equivalent repetitions.
+
+## 13. Execution priority
+
+The preferred order is:
+
+1. locate a Class G or strongest available Class S event-linked dataset;
+2. freeze C01-C06 and C16 first;
+3. execute H-DIRECT and H-CHILD side by side;
+4. add C07-C12 only where daughter information supports them;
+5. seek same-medium replication C15;
+6. change medium C14 only after the same-identity result is stable;
+7. attempt grandchildren C18 last.
+
+The minimum decisive experiment is not another re-pairing of detector counters. It is an independently measured pre-decay traversal-child coordinate, an independently measured parent coordinate and a linked decay outcome scored prospectively on untouched events.
+
+## 14. Frozen interpretation boundary
+
+A positive T381-family result would support a specific ARA architecture of muon handover at the tested identity and boundary. It would not by itself prove deterministic decay, identify both neutrino trajectories, or prove universal ARA ontology.
+
+A negative result would identify where the proposed architecture failed: child identity, measurement cut, projection, predictive value, medium transfer or Di-ARA coupling. It would not be rewritten as support by moving the landmark, reversing the phase orientation or changing the rung after outcome inspection.
+
+## 15. T385 execution update — detector waveform child cut
+
+T385 executed a causal Class-D version of C16 on individual BUAP
+liquid-scintillator double-pulse waveforms. It used only samples already
+observed, excluded the final `128 ns` before the detected second-pulse minimum,
+and compared elapsed-time, raw-waveform and ARA-augmented models.
+
+The result was **not supported** for individual advance movement-side
+information. The ARA model improved held-out log loss and Brier calibration
+over the raw detector model, but reduced AUROC from `0.742` to `0.711`, sat at
+the radial ridge rather than on the predicted movement side, and did not beat
+time reversal. The descriptive `1.25` liquid landmark was not recovered.
+
+This is an informative C17 detector-proxy result, not a passed C03 physical
+traversal-child result. It strengthens the master protocol's requirement for
+an independently measured pre-decay child and for all acquisition-buffer
+coordinates to remain outside the predictor.
+
+## 16. T386 execution update — coupled detector Di-ARAs
+
+T386 coupled T385's state/path detector cut to a new causal
+determinacy/relation cut while retaining the same BUAP source, identity,
+medium, splits and `128 ns` guard. It explicitly compared each pair alone,
+both pairs added, and ridge-centred cross-pair coupling.
+
+The result was **calibration structure only**. Coupling improved weighted log
+loss over the ordinary raw waveform on chronological validation and
+evaluation, but reduced evaluation AUROC from `0.74182` to `0.71020` and did
+not beat the state/path component's evaluation log loss (`0.63236` coupled
+versus `0.63230` state/path). The event-cluster bootstrap interval for coupled
+improvement over that component crossed zero. The same-time pairing beat 100
+within-lead shuffles, but time reversal scored slightly better; alignment
+structure therefore exists without a supported directional handover law.
+
+When the guard was opened only for a retrospective map, the determinacy
+forecast coordinate crossed its ridge at the visible second pulse while the
+state radial coordinate expanded sharply. That detector-level transition is
+not pre-decay forewarning and does not identify a neutrino child. T386 leaves
+the decisive C03 requirement unchanged: independently measured pre-decay
+child information linked to the later daughter outcome.
+
+## 17. T387 execution update — complete visible detector return
+
+T387 extended T386's event-centred state/path cut through `+768 ns` after the
+visible second-pulse onset at 64, 128 and 256 ns window sizes. A strict frozen
+onset rule retained 284 of 1,148 eligible evaluation events.
+
+Both detector coordinates completed an out-and-return trajectory. `x_R`
+crossed from expansion to contraction at every scale; `x_H` crossed its ridge
+and returned; and the median phase-plane path recovered at least 98.8% toward
+its pre-event point. The fixed pulse-minimum/one-window radial mirror gate
+failed. Post-result extrema were nevertheless nearly complementary around 2,
+which is partly expected from adjacent RMS-window exchange and is not an
+independent physical-law result.
+
+Return timing scaled strongly with window size (troughs 128, 256 and 464 ns)
+but met neither frozen physical-anchoring nor one-window-translation criteria.
+T387 is therefore recorded as a **non-mirrored two-axis detector return with
+mixed timing**, not as upstream muon-child observation or neutrino prediction.
+It explains why T386 looked one-sided: that plot stopped before the visible
+detector wave completed its return.
+
+## 18. T388 execution update — same-event anti-phase identification
+
+T388 used 650 evaluation events containing non-overlapping `-256 ns` to
+`+512 ns` ARA cuts around both the chronological stopped-muon pulse and the
+later charged-daughter pulse. The medium, detector boundary, `128 ns` ARA
+window and state/path coordinate definitions were unchanged.
+
+The four mappings frozen before scoring were direct repetition, full diagonal
+reversal, radial-only reversal and path-only reversal. Direct repetition was
+decisively closest to the second-pulse trajectory: median paired RMSE was
+`0.19239`, compared with `1.33208` for full reversal, `0.74184` for radial
+reversal and `1.12679` for path reversal. Every reversal-minus-direct
+bootstrap interval lay above zero, and the two loops retained the same
+handedness in `100.0%` of events.
+
+T388 therefore identifies the visible T387 out-and-return primarily as the
+liquid-scintillator/digitizer response repeated after both energy deposits.
+It is **not** the missing physical muon anti-phase and cannot lead the neutrino
+release because its opposed return occurs after the daughter pulse. The
+strict advance gate remains failed: no held-out opposed feature was recovered
+outside the final `128 ns` guard.
+
+The physical Phase-B retained-connection child of the muon's proposed
+traversal child remains unobserved. Finding it still requires C03-C05 data with
+an independently measured pre-decay state at the same physical rung, followed
+by a linked daughter or neutral-release record.
+
+Primary record:
+`analysis/muon/T388_same_event_antiphase/T388_SAME_EVENT_ANTIPHASE_REPORT.md`.
+
+## 19. T389 execution update — population spin anti-phase Di-ARA
+
+T389 returned to the 300 K RAL Silver population histograms and clarified
+what T382's Phase-A candidate actually measured. It was the directional
+96-detector spin imprint reconstructed from charged daughters, not detector
+voltage radius and not a continuous individual-muon trajectory. T382 had
+folded the relation to `xC=1-cos(theta)`; T389 restored the perpendicular sine
+quadrature and froze full anti-phase as simultaneous inversion of both axes.
+
+All four frozen gates passed in the untouched 63, 160 and 400 G holdouts. The
+half-turn real correlations were `-0.87644`, `-0.85278` and `-0.70731`; the
+most negative shifts were `0.51`, `0.51` and `0.49` turns. Full two-axis
+inversion beat direct repetition and both one-axis reflections in every field.
+Its pooled normalized-error advantage was `0.21876`, with field-bootstrap 95%
+interval `[0.16502,0.24970]`.
+
+This supports the **population spin anti-phase as a geometric Di-ARA**. It does
+not overturn T382's failed broad child qualification, observe either neutrino,
+or establish advance decay timing.
+
+## 20. T390 execution update — 7.5-turn release claim
+
+T390 tested the different claim that the detector-summed neutrino-producing
+decay rate is enriched at each field's own 7.5-turn time. It removed the
+frozen population parent, used fixed plus/minus one-eighth-turn windows, and
+compared 7.5 with half-integer, integer, quarter-turn, three-quarter-turn and
+field-permutation controls.
+
+The claim was **not supported**. The pooled observed/expected daughter-count
+ratio was `0.99868785`, ranked seventh of eight half-integer landmarks and was
+below the control 97.5th percentile `1.00180292`. The detector-bootstrap
+excess interval `[-0.00356218,+0.00106866]` crossed zero; all five frozen gates
+failed. The 63 G window was specifically depleted (`0.981570`), while the 160
+and 400 G windows were only slightly above one.
+
+The combined result is precise: the population spin anti-phase is measurable,
+but exactly 7.5 accumulated spins is not a supported trigger for population
+decay or neutrino production in this silver archive.
+
+Primary record:
+`analysis/muon/T389_T390_FINDINGS_2026-08-15.md`.
+
+## 21. T391 execution update — raw detector-field anti-phase
+
+T391 tested whether T389's recovered anti-phase was already present in the
+measured 96-detector field or was principally created by the learned
+cosine/sine decoder. It retained only T389's cadence coefficient learned from
+the 20/25 G calibration runs. The raw detector-share residuals were then
+phase-folded into 48 bins without any learned spatial detector projection.
+
+All six frozen gates passed in the untouched 63, 160 and 400 G holdouts. The
+raw half-turn correlations were `-0.75114`, `-0.70052` and `-0.25331`; their
+most negative temporal shifts occurred at `0.49`, `0.51` and `0.51` turns.
+Full 96-component inversion beat direct repetition and both one-bank
+inversions in every field. The correct detector correspondence beat all 95
+non-zero cyclic detector-label shifts in every field, and the correct cadence
+beat both wrong-field cadence controls. The mean normalized-error advantage
+was `0.50142`, with hierarchical-bootstrap 95% interval
+`[0.19135,0.68616]`.
+
+This is stronger localization of the T389 result: the population spin
+anti-phase exists in the raw detector-share field before two-axis
+compression. Its reduced correlation and larger inversion error at 400 G
+also show declining raw-field coherence at the highest primary field; the
+relation is supported but not exact.
+
+The identity boundary is unchanged. T391 measures a cadence-aligned
+population daughter-detector pattern, not individual muons, decay vertices or
+neutrinos. It validates the missing population spin anti-phase but does not
+establish that spin triggers decay or predict neutrino creation.
+
+Primary record:
+`analysis/muon/T391_raw_detector_antiphase/T391_RAW_DETECTOR_ANTIPHASE_REPORT.html`.
+
+## 22. T392 execution update - energy-allocation child beneath the spin anti-phase
+
+T392 moved one relation below T391 without reusing the failed 7.5-turn timing
+claim. It digitised the official TWIST polarized-muon daughter asymmetry and
+published data-minus-fit residuals. The tested child was the charged-daughter
+energy allocation relative to the parent spin axis; the two neutrinos were
+kept together as one joint neutral complement because the source does not
+resolve them separately.
+
+The daughter-direction relation changed sign at
+`p_e=25.8913 MeV/c`, corresponding to
+
+\[
+x_e=2E_e/m_\mu=0.49019
+\]
+
+with bootstrap 95% interval `[0.48612,0.49446]`. All five frozen gates
+passed. Only after measuring that root was the complementary neutral account
+formed, giving `x_N=2-x_e=1.50981`. The sum to 2 is conservation bookkeeping;
+the measured/model-assisted sign-reversal location is the empirical content.
+
+This supports a population energy-allocation child beneath the T391 spin
+anti-phase and recovers the ARA coarse pair `(0.5,1.5)` in a known polarized
+Michel-spectrum feature. It is a clean established-physics crosswalk, not a
+new decay law. It neither predicts an individual decay time nor observes the
+two neutrinos separately, and it does not restore T390's failed 7.5-turn
+trigger.
+
+Primary record:
+`analysis/muon/T392_SPIN_CHILD_NEUTRAL_HANDOVER_FINDINGS_2026-08-15.md`.
+
+## 23. T393 execution update - joint neutrino-pair child projection
+
+T393 decomposed T392's joint neutral complement into the two physical neutral
+children of ordinary positive-muon decay,
+
+\[
+\mu^+\rightarrow e^+ + \nu_e + \bar\nu_\mu.
+\]
+
+The frozen T392 reversal coordinate was retained without refitting:
+`x_e=0.49019`. Projecting the three child energy coordinates to the parent
+rung gave
+
+\[
+p_e=0.245095,
+\qquad
+p_{\nu_e}=0.346518,
+\qquad
+p_{\bar\nu_\mu}=0.408387,
+\]
+
+and therefore
+
+\[
+p_e+p_{\nu_e}+p_{\bar\nu_\mu}=1.
+\]
+
+That total closure is forced by energy conservation and carries no independent
+evidential weight. The informative result is inside the joint neutral branch:
+the Standard-Model V-A allocation gives the ordered internal ARA pair
+`(0.918044,1.081956)`, whereas a shuffled neutral-identity control collapses
+to `(1,1)`. The anti-muon-neutrino child is the more energetic neutral sibling
+with conditional probability `0.68932` at the frozen reversal.
+
+The charged projection lies close to the proposed parent-quarter landmark,
+but the exact landmark is not established: `x_e=0.5` is outside T392's frozen
+95% interval `[0.48612,0.49446]`. T393 therefore supports the one-charged plus
+two-neutral child topology as a kinematic ARA crosswalk. It does not yet
+predict an individual muon's decay time or directly observe either neutrino.
+
+Primary record:
+`analysis/muon/T393_JOINT_NEUTRINO_PAIR_PROJECTION_FINDINGS_2026-08-15.md`.
+
+## 24. T394 execution update - native neutral pair and causal population release
+
+T394 performed the two follow-ups frozen after T393 without equating a native
+pair position, a parent projection and a population release fraction.
+
+Test 1 measured the two neutrino siblings at their own pair rung:
+
+\[
+y_{\nu_e}=\frac{2E_{\nu_e}}{E_{\nu_e}+E_{\bar\nu_\mu}},
+\qquad
+y_{\bar\nu_\mu}=2-y_{\nu_e}.
+\]
+
+Across one million frozen Standard-Model `V-A` truth events, the mean pair was
+`(0.923816,1.076184)` and anti-muon-neutrino was heavier in `62.5081%` of
+events. Label shuffling returned that ordering to `50.0415%`, while the mean
+asymmetry rose monotonically across charged-energy quintiles. A fixed coarse
+pair was not supported: `14.6393%` lay near `(0.5,1.5)`, below the `17.2380%`
+uniform phase-space control.
+
+Test 2 reconstructed a population release complement using only calibration
+rows from the Super-Kamiokande stopped-cosmic-muon archive, froze it and then
+opened `374,340` tagged holdout daughter times. Relative to one truncated
+exponential, held-out NLL improved by `0.04363439` per event with 95% interval
+`[0.04286623,0.04443180]`; KS fell from `0.0720300` to `0.0178327`.
+Independent recomputation passed at 32, 64, 128 and 256 bins.
+
+The two ceilings differ. Test 1 is a truth-level native-pair crosswalk rather
+than direct two-neutrino observation. Test 2 is a leakage-safe population
+forecast conditional on a detected daughter and is not ARA-unique. Because
+the source has no changing pre-decay field for a still-living individual
+muon, the C03-C05 individual advance gate is
+`STRUCTURALLY_UNTESTABLE_NO_PRE_OUTCOME_VARIATION` in this archive.
+
+Primary record:
+`analysis/muon/T394_NATIVE_NEUTRAL_PAIR_AND_CAUSAL_RELEASE_FINDINGS_2026-08-15.md`.
