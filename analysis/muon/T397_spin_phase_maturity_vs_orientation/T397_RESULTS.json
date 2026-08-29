@@ -1,0 +1,358 @@
+{
+  "test": "T397 spin phase maturity versus orientation",
+  "status": "ORIENTATION_SUPPORTED_MATURITY_NOT_SUPPORTED",
+  "protocol_sha256": "62D2ADA024A2D7077FCB9A893871EB960BE324ACC431158B24011DC3161B41F5",
+  "source": {
+    "doi": "10.5286/ISIS.E.RB1620201",
+    "instrument": "ISIS EMU",
+    "medium": "300 K RAL Silver",
+    "grain": "aggregate 96-detector population histograms",
+    "previously_inspected_source": true
+  },
+  "frozen": {
+    "tau_us": 2.1928,
+    "gamma_mhz_per_g": 0.01382,
+    "analysis_window_us": [
+      0.25,
+      8.0
+    ],
+    "phase_bins_for_display": 48,
+    "primary_train_cycles": "odd",
+    "primary_test_cycles": "even",
+    "wrong_multipliers": [
+      0.5,
+      0.6,
+      0.7,
+      0.7999999999999999,
+      0.8999999999999999,
+      1.1,
+      1.2000000000000002,
+      1.3000000000000003,
+      1.4000000000000004,
+      1.5000000000000004
+    ]
+  },
+  "acceptance": {
+    "forward_backward_alpha": 1.3652815033133967,
+    "detector_weight_min": 0.7225025920462752,
+    "detector_weight_median": 1.0000396168525372,
+    "detector_weight_max": 2.117964908635506,
+    "calibration_share_min": 0.00498627372454516,
+    "calibration_share_max": 0.014616906416249251
+  },
+  "primary_pooled_gain": {
+    "O": 0.14414728675619715,
+    "U": -0.01642076813062987,
+    "V": -0.0162083491139271,
+    "W": 0.007127836520230857
+  },
+  "reverse_parity_pooled_gain": {
+    "O": 0.13555559553882235,
+    "U": -0.006969805724524436,
+    "V": -0.006619799427066697,
+    "W": 0.0010964805555992996
+  },
+  "bootstrap_95_gain": {
+    "O": [
+      0.024617795959083782,
+      0.25203261795530585
+    ],
+    "U": [
+      -0.038862736391796784,
+      0.009780899358708427
+    ],
+    "V": [
+      -0.03770975623646722,
+      0.009388127813727781
+    ],
+    "W": [
+      -0.01985306387665791,
+      0.028053433506467804
+    ]
+  },
+  "w_common_mode": {
+    "mean_phase_amplitude_fraction": 0.0006309886937602075,
+    "raw_u_mean_phase_amplitude_fraction": 0.000734353732172845,
+    "mean_phase_angle_rad": 5.991524243669788,
+    "phase_resultant_length": 0.9350457895564884,
+    "wrong_cadence_97_5_gain": 0.005638379314555087,
+    "wrong_cadence_max_gain": 0.006039920083082628
+  },
+  "orientation": {
+    "wrong_cadence_max_gain": 0.07477685237633291
+  },
+  "gates": {
+    "orientation_components": {
+      "positive_each_field": true,
+      "bootstrap_lower_above_zero": true,
+      "beats_every_wrong_cadence": true
+    },
+    "orientation_pass": true,
+    "maturity_components": {
+      "orientation_recovered": true,
+      "w_positive_each_field": false,
+      "w_bootstrap_lower_above_zero": false,
+      "w_beats_wrong_cadence_97_5": true,
+      "w_phase_resultant_at_least_0_70": true,
+      "w_survives_acceptance_ladder": true,
+      "reverse_w_nonnegative_each_field": false
+    },
+    "maturity_pass": false
+  },
+  "per_field": {
+    "O": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "channel": "O",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 215,
+        "n_test_bins": 270,
+        "n_train_cycles": 3,
+        "n_test_cycles": 4,
+        "phase_amplitude_fraction": 0.0027769821442649627,
+        "phase_angle_rad": null,
+        "null_sse": 378.75524704272823,
+        "phase_sse": 293.56332457456017,
+        "gain": 0.22492605220214246
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "channel": "O",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 245,
+        "n_test_bins": 240,
+        "n_train_cycles": 9,
+        "n_test_cycles": 9,
+        "phase_amplitude_fraction": 0.0022497203361046937,
+        "phase_angle_rad": null,
+        "null_sse": 312.0924199228781,
+        "phase_sse": 264.5216822001951,
+        "gain": 0.15242516218253022
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "channel": "O",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 244,
+        "n_test_bins": 241,
+        "n_train_cycles": 22,
+        "n_test_cycles": 22,
+        "phase_amplitude_fraction": 0.000907751073493017,
+        "phase_angle_rad": null,
+        "null_sse": 272.68362186355125,
+        "phase_sse": 266.55586106497753,
+        "gain": 0.022472052984685686
+      }
+    ],
+    "U": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "channel": "U",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 215,
+        "n_test_bins": 270,
+        "n_train_cycles": 3,
+        "n_test_cycles": 4,
+        "amplitude": 367611.06260044617,
+        "background": 191.63111111111112,
+        "beta_cos": -0.00034611283326715854,
+        "beta_sin": -0.00022182120451137908,
+        "phase_amplitude_fraction": 0.0004110945634803493,
+        "phase_angle_rad": 3.7115389216233567,
+        "null_sse": 442.97768321244996,
+        "phase_sse": 452.9733392219513,
+        "gain": -0.0225646943137483,
+        "poisson_nll_gain_per_test_bin": -0.018506130465754757
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "channel": "U",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 245,
+        "n_test_bins": 240,
+        "n_train_cycles": 9,
+        "n_test_cycles": 9,
+        "amplitude": 368984.22296533285,
+        "background": 192.37955555555556,
+        "beta_cos": 0.00014750040101104556,
+        "beta_sin": -0.0008008058730794188,
+        "phase_amplitude_fraction": 0.0008142766204778997,
+        "phase_angle_rad": 4.894537398583035,
+        "null_sse": 337.5650302780694,
+        "phase_sse": 340.1261272539664,
+        "gain": -0.007586973608573411,
+        "poisson_nll_gain_per_test_bin": -0.005341306204597155
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "channel": "U",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 244,
+        "n_test_bins": 241,
+        "n_train_cycles": 22,
+        "n_test_cycles": 22,
+        "amplitude": 366812.7407356053,
+        "background": 191.152,
+        "beta_cos": 0.0007820889426775402,
+        "beta_sin": -0.0005866980879478466,
+        "phase_amplitude_fraction": 0.000977690012560286,
+        "phase_angle_rad": 5.639576695240514,
+        "null_sse": 321.5337968560206,
+        "phase_sse": 327.0739867092366,
+        "gain": -0.017230505493942783,
+        "poisson_nll_gain_per_test_bin": -0.01150263777906964
+      }
+    ],
+    "V": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "channel": "V",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 215,
+        "n_test_bins": 270,
+        "n_train_cycles": 3,
+        "n_test_cycles": 4,
+        "amplitude": 421809.3628329607,
+        "background": 219.9714359588473,
+        "beta_cos": -0.00038869360859678913,
+        "beta_sin": -0.00022224054246601724,
+        "phase_amplitude_fraction": 0.0004477427610577122,
+        "phase_angle_rad": 3.6609906816445212,
+        "null_sse": 523.4374993322822,
+        "phase_sse": 537.2346599312739,
+        "gain": -0.026358754610802393,
+        "poisson_nll_gain_per_test_bin": null
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "channel": "V",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 245,
+        "n_test_bins": 240,
+        "n_train_cycles": 9,
+        "n_test_cycles": 9,
+        "amplitude": 423453.28907301393,
+        "background": 220.86988934065243,
+        "beta_cos": 0.0001649472848970361,
+        "beta_sin": -0.0007118149789601421,
+        "phase_amplitude_fraction": 0.0007306765160226045,
+        "phase_angle_rad": 4.940097693754881,
+        "null_sse": 399.434598454084,
+        "phase_sse": 400.8411363939621,
+        "gain": -0.0035213222523080567,
+        "poisson_nll_gain_per_test_bin": null
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "channel": "V",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 244,
+        "n_test_bins": 241,
+        "n_train_cycles": 22,
+        "n_test_cycles": 22,
+        "amplitude": 421034.2794871872,
+        "background": 219.4793370609517,
+        "beta_cos": 0.0007584361237565345,
+        "beta_sin": -0.0006403535061660326,
+        "phase_amplitude_fraction": 0.0009926116897749936,
+        "phase_angle_rad": 5.582005177012535,
+        "null_sse": 378.23738450841006,
+        "phase_sse": 384.12252269401506,
+        "gain": -0.015559377329276591,
+        "poisson_nll_gain_per_test_bin": null
+      }
+    ],
+    "W": [
+      {
+        "run": "EMU00066578",
+        "field_g": 63.0,
+        "channel": "W",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 215,
+        "n_test_bins": 270,
+        "n_train_cycles": 3,
+        "n_test_cycles": 4,
+        "amplitude": 370229.3843400594,
+        "background": 192.78269560008934,
+        "beta_cos": 0.0001506514320427579,
+        "beta_sin": 3.4894848363787384e-05,
+        "phase_amplitude_fraction": 0.00015463991858141098,
+        "phase_angle_rad": 0.2276125211546972,
+        "null_sse": 426.4679112132891,
+        "phase_sse": 422.0507928422852,
+        "gain": 0.010357446023165684,
+        "poisson_nll_gain_per_test_bin": null
+      },
+      {
+        "run": "EMU00066579",
+        "field_g": 160.0,
+        "channel": "W",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 245,
+        "n_test_bins": 240,
+        "n_train_cycles": 9,
+        "n_test_cycles": 9,
+        "amplitude": 371734.0351713401,
+        "background": 193.52089176001763,
+        "beta_cos": 0.0006474056415174173,
+        "beta_sin": -0.00040991197354268375,
+        "phase_amplitude_fraction": 0.0007662648959219237,
+        "phase_angle_rad": 5.718738953622263,
+        "null_sse": 380.3384840226348,
+        "phase_sse": 372.9056580386406,
+        "gain": 0.019542660804084955,
+        "poisson_nll_gain_per_test_bin": null
+      },
+      {
+        "run": "EMU00066580",
+        "field_g": 400.0,
+        "channel": "W",
+        "train_parity": "odd",
+        "cadence_multiplier": 1.0,
+        "n_train_bins": 244,
+        "n_test_bins": 241,
+        "n_train_cycles": 22,
+        "n_test_cycles": 22,
+        "amplitude": 369601.7575050748,
+        "background": 192.32216704017048,
+        "beta_cos": 0.0008433377887957389,
+        "beta_sin": -0.0004834092265956232,
+        "phase_amplitude_fraction": 0.0009720612667772875,
+        "phase_angle_rad": 5.762697681798196,
+        "null_sse": 343.6262995725449,
+        "phase_sse": 347.27614775141967,
+        "gain": -0.010621562387439498,
+        "poisson_nll_gain_per_test_bin": null
+      }
+    ]
+  },
+  "plain_language": "The spin phase predicts the detector-direction pattern, but the stricter balanced parent common mode does not pass the frozen maturity gates. In this source the recovered spin wave acts as an orientation organiser, not a measurable population release clock.",
+  "claim_boundary": "Population-level phase-dependent release only. No individual muon, neutrino, deterministic lifetime or causal spin trigger is observed.",
+  "artifacts": {
+    "run_scores": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T397_spin_phase_maturity_vs_orientation\\T397_RUN_SCORES.csv",
+    "controls": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T397_spin_phase_maturity_vs_orientation\\T397_WRONG_CADENCE_CONTROLS.csv",
+    "phase_profiles": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T397_spin_phase_maturity_vs_orientation\\T397_PHASE_PROFILES.csv",
+    "bootstrap": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T397_spin_phase_maturity_vs_orientation\\T397_BOOTSTRAP.csv",
+    "source_manifest": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\muon\\T397_spin_phase_maturity_vs_orientation\\T397_SOURCE_MANIFEST.csv"
+  }
+}

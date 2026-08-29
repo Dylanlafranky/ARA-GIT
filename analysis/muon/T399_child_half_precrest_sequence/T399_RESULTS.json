@@ -1,0 +1,98 @@
+{
+  "test": "T399",
+  "date": "2026-08-17",
+  "protocol_sha256": "27e0cdea23f2b9d98a44809dbefa38418826b3eb2f9e3b00a9561e8d983e1867",
+  "verdict": "CHILD-HALF PRE-CREST SEQUENCE NOT SUPPORTED",
+  "claim_tested": "joint delayed-neutrino population reaches cumulative child half before its release-rate crest",
+  "primary_native_landmarks": {
+    "prompt_crest_time_us": 0.5005,
+    "prompt_crest_ara": 0.24426853417882427,
+    "branch_equality_time_us": 0.6360743156046185,
+    "branch_equality_ara": 0.43738899334852777,
+    "child_half_time_us": 0.6866491864480065,
+    "child_half_ara": 0.5,
+    "delayed_crest_time_us": 0.7855,
+    "delayed_crest_ara": 0.6004256480941441,
+    "time_half_to_delayed_crest_us": 0.09885081355199343,
+    "ara_prompt_crest_to_half": 0.25573146582117573,
+    "full_four_landmark_order": true,
+    "half_before_delayed_crest": true
+  },
+  "leave_one_out": {
+    "n": 18,
+    "half_before_delayed_crest_fraction": 0.9444444444444444,
+    "full_four_landmark_order_fraction": 0.8333333333333334,
+    "quarter_delta_median": 0.2520328073506496,
+    "quarter_delta_range": [
+      0.17484869197741254,
+      0.3519928645773969
+    ]
+  },
+  "yield_sensitivity": {
+    "n": 10000,
+    "seed": 399,
+    "method": "independent split-normal positive-yield draws from registered T371 95% intervals; fixed native branch shapes",
+    "half_before_delayed_crest_fraction": 0.9313,
+    "full_four_landmark_order_fraction": 0.6414,
+    "quarter_window_fraction": 0.7692,
+    "child_half_time_us_95pct": [
+      0.5923226387819396,
+      0.8217592939441196
+    ],
+    "quarter_delta_95pct": [
+      0.16771140071624202,
+      0.33087833705431463
+    ]
+  },
+  "T378_independent_coarse_holdout": {
+    "prompt_peak_bin_center_us": 0.75,
+    "piecewise_uniform_child_half_time_us": 0.8170801485337662,
+    "delayed_peak_bin_center_us": 1.25,
+    "half_before_delayed_peak": true,
+    "boundary": "0.5-us released bins do not resolve the native four-landmark order or quarter displacement"
+  },
+  "circular_shift_control": {
+    "n_nonzero_shifts": 1199,
+    "as_good_as_real": 87,
+    "p_upper_add_one": 0.07333333333333333,
+    "observed_quarter_error": 0.00573146582117573,
+    "method": "circularly shift native delayed shape relative to prompt; require real order and quarter error no larger than observed"
+  },
+  "post_result_parent_asymmetry_diagnostic": {
+    "status": "diagnostic added after frozen-gate execution; not a new pass criterion",
+    "observed_prompt_share": 0.18858562602717124,
+    "prompt_share_threshold_for_child_half_before_delayed_crest": 0.12696649059030649,
+    "observed_margin_above_threshold": 0.06161913543686476,
+    "leave_one_out_failures": [
+      {
+        "axis": "energy",
+        "removed_bin": 1,
+        "prompt_share": 0.08596064438929907
+      }
+    ],
+    "interpretation": "the pre-crest placement is an identity-specific branch-balance result, not a yield-independent constant"
+  },
+  "gates": {
+    "G1_native_four_landmark_order": true,
+    "G2_native_child_half_before_delayed_crest": true,
+    "G3_native_quarter_compatibility": true,
+    "G4_leave_one_out_half_before_crest_at_least_90pct": true,
+    "G5_yield_sensitivity_half_before_crest_at_least_95pct": false,
+    "G6_T378_coarse_holdout_half_before_delayed_peak": true,
+    "G7_circular_shift_alignment_p_at_most_0p05": false,
+    "G8_population_not_individual_birth_boundary": true
+  },
+  "evidence_boundaries": [
+    "The result is population-level and does not time-tag an individual neutrino birth.",
+    "x=0.5 is a cumulative ARA landmark of the joint fitted population, not proof that either neutrino individually equals 0.5.",
+    "The quarter displacement was proposed after T398 and is therefore a calibration result here.",
+    "The yield ensemble is a fixed-shape sensitivity test, not a fresh detector bootstrap.",
+    "T378 independently checks only child-half-before-delayed-crest because its released time bins are coarse."
+  ],
+  "input_hashes_sha256": {
+    "T398_NATIVE_WAVE_OVERLAP.csv": "77b687a6c6e3a8db4d1ca251421661c39fc0c34d2c441f6e1653e9ca6a496bd0",
+    "T371_COHERENT_PION_MUON_DIARA_RESULTS.json": "8576ef3edf542736835c9aa85273682c45b7639d6f5e503a6530a857aecaedf8",
+    "T378_timing_components.csv": "462a11e5d5b35d1d3c7a41aee4a9001984d7b0d4bffac7ee13bd574e79a8d17b",
+    "T378_results.json": "06bbe62e429901fd3bea8c7285c0c72a9cc6e4fcfb4f87aec7bbf113adf23bb0"
+  }
+}

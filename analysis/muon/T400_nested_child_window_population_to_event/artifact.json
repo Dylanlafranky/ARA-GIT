@@ -1,0 +1,854 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T400 — Nested delayed-child window: population to event",
+    "description": "Frozen ARA child-window construction and transfer from a COHERENT CsI population fit to untouched detector-event candidates.",
+    "generatedAt": "2026-08-17T04:42:28.050358Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "population_child_curve",
+        "title": "Population child window",
+        "subtitle": "Objective delayed-child interval expanded from its parent cut to local ARA 0–2",
+        "type": "line",
+        "dataset": "population_curve",
+        "sourceId": "t400_curve",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "x",
+            "value": 0.7063064837018814,
+            "label": "Primary crest 0.706",
+            "color": "gold",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "local_child_ara",
+            "type": "quantitative",
+            "label": "Local delayed-child ARA (0–2)"
+          },
+          "y": {
+            "field": "delayed_rate_peak_normalized",
+            "type": "quantitative",
+            "label": "Delayed rate / peak"
+          },
+          "tooltip": [
+            {
+              "field": "local_child_ara",
+              "type": "quantitative",
+              "label": "Child ARA"
+            },
+            {
+              "field": "delayed_rate_peak_normalized",
+              "type": "quantitative",
+              "label": "Rate / peak"
+            }
+          ]
+        }
+      },
+      {
+        "id": "event_histogram",
+        "title": "Untouched event candidates",
+        "subtitle": "Effective delayed-event weight after the child mapping was frozen on calibration rows",
+        "type": "bar",
+        "dataset": "event_histogram",
+        "sourceId": "t400_events",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "bin_center",
+            "type": "quantitative",
+            "label": "Frozen local child ARA"
+          },
+          "y": {
+            "field": "effective_delayed_weight",
+            "type": "quantitative",
+            "label": "Effective delayed-event weight"
+          },
+          "tooltip": [
+            {
+              "field": "bin_center",
+              "type": "quantitative",
+              "label": "Bin centre"
+            },
+            {
+              "field": "effective_delayed_weight",
+              "type": "quantitative",
+              "label": "Effective weight"
+            }
+          ]
+        }
+      },
+      {
+        "id": "split_modes",
+        "title": "Mode stability across deterministic splits",
+        "subtitle": "Twelve of twenty modes fell inside the broad 0.5–1.5 event neighbourhood",
+        "type": "bar",
+        "dataset": "split_modes",
+        "sourceId": "t400_splits",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "mode",
+            "type": "quantitative",
+            "label": "Weighted mode on local ARA"
+          },
+          "y": {
+            "field": "split_count",
+            "type": "quantitative",
+            "label": "Split count"
+          },
+          "tooltip": [
+            {
+              "field": "mode",
+              "type": "quantitative",
+              "label": "Mode"
+            },
+            {
+              "field": "split_count",
+              "type": "quantitative",
+              "label": "Splits"
+            }
+          ]
+        }
+      },
+      {
+        "id": "landmark_comparison",
+        "title": "Population and event landmarks",
+        "subtitle": "Means and medians reproduce the ridge; the two modes do not",
+        "type": "bar",
+        "dataset": "landmarks",
+        "sourceId": "t400_results",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "landmark",
+            "type": "nominal",
+            "label": "Landmark"
+          },
+          "y": {
+            "field": "local_child_ara",
+            "type": "quantitative",
+            "label": "Local child ARA"
+          },
+          "tooltip": [
+            {
+              "field": "landmark",
+              "type": "nominal",
+              "label": "Landmark"
+            },
+            {
+              "field": "local_child_ara",
+              "type": "quantitative",
+              "label": "Child ARA"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "population_gates",
+        "title": "Frozen population gates",
+        "subtitle": "The primary crest gate failed even though robustness cuts were strong",
+        "dataset": "population_gates",
+        "sourceId": "t400_results",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "event_gates",
+        "title": "Frozen event-transfer gates",
+        "subtitle": "Only the mean-transfer gate passed",
+        "dataset": "event_gates",
+        "sourceId": "t400_results",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation",
+        "title": "Independent saved-artifact validation",
+        "subtitle": "Integrity and arithmetic pass; scientific gate failures remain failures",
+        "dataset": "validation",
+        "sourceId": "t400_validation",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t400_curve",
+        "label": "T400 local child population curve",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Frozen calibration-only population child coordinate and delayed-rate curve.",
+          "tables_used": [
+            "T400_LOCAL_CHILD_CURVE.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv')"
+        }
+      },
+      {
+        "id": "t400_events",
+        "label": "T400 untouched event histogram",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_PRIMARY_EVENT_HISTOGRAM.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Calibration-frozen delayed-membership weights in untouched event rows.",
+          "tables_used": [
+            "T400_PRIMARY_EVENT_HISTOGRAM.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_PRIMARY_EVENT_HISTOGRAM.csv')"
+        }
+      },
+      {
+        "id": "t400_splits",
+        "label": "T400 deterministic split ledger",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_REPEATED_SPLITS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Twenty deterministic population-to-event transfers.",
+          "tables_used": [
+            "T400_REPEATED_SPLITS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_REPEATED_SPLITS.csv')"
+        }
+      },
+      {
+        "id": "t400_results",
+        "label": "T400 saved results",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Primary values, gates, controls and evidence boundaries.",
+          "tables_used": [
+            "T400_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t400_validation",
+        "label": "T400 independent validation",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent saved-artifact and arithmetic validation.",
+          "tables_used": [
+            "T400_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t400_protocol",
+        "label": "Frozen T400 protocol",
+        "path": "analysis/muon/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_PROTOCOL_2026-08-17.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Predeclared coordinate, gates, controls and claim boundary.",
+          "tables_used": [
+            "T400 protocol"
+          ]
+        }
+      },
+      {
+        "id": "coherent_2022",
+        "label": "COHERENT CsI public measurement and ancillary data",
+        "path": "https://arxiv.org/abs/2110.07730"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T400 — Nested delayed-child window: population to event\n\n## Technical summary\n\n**The parent-to-child cut worked, but the frozen mode-at-ridge prediction did not.** The objective population interval runs from **0.568858 to 1.382809 µs** and expands cleanly to a local ARA 0–2. Population and event-weighted means/medians sit near the local ridge. The population crest is **0.706** and the untouched event mode is **1.875**, so neither density maximum supports a ridge-centred bell curve. This is a partial population-to-individual transfer, not an individual neutrino-birth clock."
+      },
+      {
+        "id": "population_text",
+        "type": "markdown",
+        "body": "## Population child cut\n\nThe boundaries are objective: prompt/delayed rate equality on the left, delayed crest inside, and the first return to the left-boundary delayed height on the right. The population weighted mean is **1.093** and median **1.114**, but the primary crest **0.706** misses the predeclared 0.75–1.25 gate. Sixteen of seventeen leave-one-out cuts pass that gate and the circular-shift control gives **p = 0.0183**; those are robustness evidence, not permission to replace the failed primary gate."
+      },
+      {
+        "id": "population_chart",
+        "type": "chart",
+        "chartId": "population_child_curve"
+      },
+      {
+        "id": "population_gate_table",
+        "type": "table",
+        "tableId": "population_gates"
+      },
+      {
+        "id": "event_text",
+        "type": "markdown",
+        "body": "## Transfer to untouched detector-event rows\n\nThe primary child window contains **91** beam-coincident holdout rows but only **8.983** effective delayed-event weights. Their weighted mean (**1.051**) and median (**1.038**) lie near the ridge; their mode (**1.875**) lies on the upper side. The event distribution is therefore centred but not peaked at 1.0."
+      },
+      {
+        "id": "event_chart",
+        "type": "chart",
+        "chartId": "event_histogram"
+      },
+      {
+        "id": "split_text",
+        "type": "markdown",
+        "body": "## Stability across calibration/holdout partitions\n\nOnly **60%** of twenty deterministic splits place the weighted mode in 0.5–1.5, below the frozen 70% gate. The bootstrap mode rate is **19.25%**. In contrast, the weighted-mean bootstrap interval **[0.932, 1.175]** contains 1.0."
+      },
+      {
+        "id": "split_chart",
+        "type": "chart",
+        "chartId": "split_modes"
+      },
+      {
+        "id": "landmark_chart",
+        "type": "chart",
+        "chartId": "landmark_comparison"
+      },
+      {
+        "id": "event_gate_table",
+        "type": "table",
+        "tableId": "event_gates"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope, data and definitions\n\n- **Parent identity:** fitted prompt plus delayed COHERENT CsI population release.\n- **Child identity:** delayed-dominant release interval nested inside that parent.\n- **Individual rows:** detector events, not neutrino-flavor tags or named parent-child links.\n- **Membership weight:** a calibration-frozen statistical delayed-branch score.\n- **Primary fit resolution:** released 0.5 µs timing components.\n\nThe saved full T398 fit gives a diagnostic crest of **0.890**, closer to the local ridge than the T400 timing-only primary. It is not substituted for the frozen result."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Methodology\n\nA deterministic 70/30 split fit the five timing components on calibration rows. The calibration population alone defined the child boundaries and local mapping. The mapping was then applied without refitting to holdout coincident and anti-coincident rows. Twenty deterministic split salts, 2,000 primary-event bootstraps, seventeen registered leave-one-bin-out population fits, a circular phase-shift control, and mode sensitivity across bin counts and kernel widths were recorded."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and robustness\n\nThe event window has fewer than ten effective delayed weights, and timing-only membership scores are nearly constant within each 0.5 µs source bin. Coincident and anti-coincident median scores therefore tie. T400 cannot identify both neutral children from one muon or time their individual births. Its positive result is narrower: an objective child coordinate exists and its centres transfer; its density modes do not."
+      },
+      {
+        "id": "validation_table",
+        "type": "table",
+        "tableId": "validation"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Next step\n\nTransfer this frozen coordinate to event-linked data containing a parent muon, charged-daughter momentum or direction, and neutral-sensitive timing in the same event record. That would provide a genuine population-to-individual test rather than a statistical mixture assignment.\n\n## Further questions\n\n- Is the two-sided event shape physical child asymmetry or only coarse timing resolution?\n- Does the full event-linked child retain a centre at 1.0 while its mode moves with parent asymmetry?\n- Can the two neutral children be separated without source-template assignment?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T04:42:28.050358Z",
+    "status": "ready",
+    "datasets": {
+      "population_curve": [
+        {
+          "local_child_ara": 0.006031574754375905,
+          "delayed_rate_peak_normalized": 0.7669910187709376
+        },
+        {
+          "local_child_ara": 0.09758519568173821,
+          "delayed_rate_peak_normalized": 0.8229276805444637
+        },
+        {
+          "local_child_ara": 0.18778082127394852,
+          "delayed_rate_peak_normalized": 0.871450404972985
+        },
+        {
+          "local_child_ara": 0.2756191603396924,
+          "delayed_rate_peak_normalized": 0.9118427815956648
+        },
+        {
+          "local_child_ara": 0.36036225768058494,
+          "delayed_rate_peak_normalized": 0.9439031837817429
+        },
+        {
+          "local_child_ara": 0.4416402936571859,
+          "delayed_rate_peak_normalized": 0.9678950366329566
+        },
+        {
+          "local_child_ara": 0.5193650286131295,
+          "delayed_rate_peak_normalized": 0.984499335775954
+        },
+        {
+          "local_child_ara": 0.5936875519379906,
+          "delayed_rate_peak_normalized": 0.9946355796701025
+        },
+        {
+          "local_child_ara": 0.6649150424596321,
+          "delayed_rate_peak_normalized": 0.9993614521440729
+        },
+        {
+          "local_child_ara": 0.7333747547702351,
+          "delayed_rate_peak_normalized": 0.999622260579917
+        },
+        {
+          "local_child_ara": 0.7993111731026252,
+          "delayed_rate_peak_normalized": 0.996248765279083
+        },
+        {
+          "local_child_ara": 0.863018878812247,
+          "delayed_rate_peak_normalized": 0.990030034689669
+        },
+        {
+          "local_child_ara": 0.9248392409223163,
+          "delayed_rate_peak_normalized": 0.9816909658782477
+        },
+        {
+          "local_child_ara": 0.9850540125986198,
+          "delayed_rate_peak_normalized": 0.9718656887299717
+        },
+        {
+          "local_child_ara": 1.0439696579765612,
+          "delayed_rate_peak_normalized": 0.9611364122621534
+        },
+        {
+          "local_child_ara": 1.1018617715473389,
+          "delayed_rate_peak_normalized": 0.9499535532352432
+        },
+        {
+          "local_child_ara": 1.1588939334425634,
+          "delayed_rate_peak_normalized": 0.9386033361156794
+        },
+        {
+          "local_child_ara": 1.2151441866265027,
+          "delayed_rate_peak_normalized": 0.9272186074904135
+        },
+        {
+          "local_child_ara": 1.2706257268394283,
+          "delayed_rate_peak_normalized": 0.9158194745268529
+        },
+        {
+          "local_child_ara": 1.3253661561509473,
+          "delayed_rate_peak_normalized": 0.9044741478438694
+        },
+        {
+          "local_child_ara": 1.37940495230583,
+          "delayed_rate_peak_normalized": 0.8932169254131729
+        },
+        {
+          "local_child_ara": 1.432761945849246,
+          "delayed_rate_peak_normalized": 0.8820751986195499
+        },
+        {
+          "local_child_ara": 1.4854497494328034,
+          "delayed_rate_peak_normalized": 0.8710590724631472
+        },
+        {
+          "local_child_ara": 1.5374777925201235,
+          "delayed_rate_peak_normalized": 0.8601669097590422
+        },
+        {
+          "local_child_ara": 1.5888545357932424,
+          "delayed_rate_peak_normalized": 0.849405849408466
+        },
+        {
+          "local_child_ara": 1.6395882237558044,
+          "delayed_rate_peak_normalized": 0.8387753006017441
+        },
+        {
+          "local_child_ara": 1.6896867081733968,
+          "delayed_rate_peak_normalized": 0.8282730492496065
+        },
+        {
+          "local_child_ara": 1.7391574839357777,
+          "delayed_rate_peak_normalized": 0.8178913792455814
+        },
+        {
+          "local_child_ara": 1.788007752430514,
+          "delayed_rate_peak_normalized": 0.8076300647327044
+        },
+        {
+          "local_child_ara": 1.836244930307765,
+          "delayed_rate_peak_normalized": 0.79749205521841
+        },
+        {
+          "local_child_ara": 1.8838763223500257,
+          "delayed_rate_peak_normalized": 0.7874759327902238
+        },
+        {
+          "local_child_ara": 1.9309094469471002,
+          "delayed_rate_peak_normalized": 0.7775852669955237
+        },
+        {
+          "local_child_ara": 1.9773518487101986,
+          "delayed_rate_peak_normalized": 0.7678198763816252
+        }
+      ],
+      "event_histogram": [
+        {
+          "bin_center": 0.125,
+          "effective_delayed_weight": 1.2879279896005518
+        },
+        {
+          "bin_center": 0.375,
+          "effective_delayed_weight": 0.6934996867079899
+        },
+        {
+          "bin_center": 0.625,
+          "effective_delayed_weight": 1.2879279896005498
+        },
+        {
+          "bin_center": 0.875,
+          "effective_delayed_weight": 1.089785221969696
+        },
+        {
+          "bin_center": 1.125,
+          "effective_delayed_weight": 0.7917514511189729
+        },
+        {
+          "bin_center": 1.375,
+          "effective_delayed_weight": 0.7860141152878768
+        },
+        {
+          "bin_center": 1.625,
+          "effective_delayed_weight": 1.473776466164769
+        },
+        {
+          "bin_center": 1.875,
+          "effective_delayed_weight": 1.5720282305757634
+        }
+      ],
+      "split_modes": [
+        {
+          "mode": 0.375,
+          "split_count": 1
+        },
+        {
+          "mode": 0.625,
+          "split_count": 5
+        },
+        {
+          "mode": 0.875,
+          "split_count": 6
+        },
+        {
+          "mode": 1.125,
+          "split_count": 1
+        },
+        {
+          "mode": 1.625,
+          "split_count": 3
+        },
+        {
+          "mode": 1.875,
+          "split_count": 4
+        }
+      ],
+      "landmarks": [
+        {
+          "landmark": "Population crest",
+          "local_child_ara": 0.7063064837018814
+        },
+        {
+          "landmark": "Population mean",
+          "local_child_ara": 1.0925127777611845
+        },
+        {
+          "landmark": "Population median",
+          "local_child_ara": 1.1142913342567329
+        },
+        {
+          "landmark": "Event mean",
+          "local_child_ara": 1.0507515862197472
+        },
+        {
+          "landmark": "Event median",
+          "local_child_ara": 1.038135527280485
+        },
+        {
+          "landmark": "Event mode",
+          "local_child_ara": 1.875
+        }
+      ],
+      "population_gates": [
+        {
+          "gate": "P1_ordered_objective_window",
+          "status": "PASS"
+        },
+        {
+          "gate": "P2_crest_near_local_ridge",
+          "status": "FAIL"
+        },
+        {
+          "gate": "P3_leave_one_out_ridge_fraction_ge_0p80",
+          "status": "PASS"
+        }
+      ],
+      "event_gates": [
+        {
+          "gate": "I1_effective_delayed_count_ge_10",
+          "status": "FAIL"
+        },
+        {
+          "gate": "I2_holdout_mode_in_broad_ridge",
+          "status": "FAIL"
+        },
+        {
+          "gate": "I3_holdout_mean_within_0p30_of_population",
+          "status": "PASS"
+        },
+        {
+          "gate": "I4_repeated_split_mode_fraction_ge_0p70",
+          "status": "FAIL"
+        },
+        {
+          "gate": "I5_C_median_membership_weight_gt_AC",
+          "status": "FAIL"
+        }
+      ],
+      "validation": [
+        {
+          "check": "protocol_hash_is_frozen_hash",
+          "status": "PASS"
+        },
+        {
+          "check": "raw_C_hash_matches",
+          "status": "PASS"
+        },
+        {
+          "check": "raw_AC_hash_matches",
+          "status": "PASS"
+        },
+        {
+          "check": "ordered_population_window",
+          "status": "PASS"
+        },
+        {
+          "check": "saved_curve_strictly_increases",
+          "status": "PASS"
+        },
+        {
+          "check": "saved_curve_spans_local_zero_to_two",
+          "status": "PASS"
+        },
+        {
+          "check": "population_gates_recompute",
+          "status": "PASS"
+        },
+        {
+          "check": "event_gates_recompute",
+          "status": "PASS"
+        },
+        {
+          "check": "histogram_effective_weight_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "saved_event_sample_weight_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "saved_event_coordinates_in_window",
+          "status": "PASS"
+        },
+        {
+          "check": "saved_membership_weights_are_probabilities",
+          "status": "PASS"
+        },
+        {
+          "check": "repeated_split_fraction_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "leave_one_out_fraction_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "phase_shift_p_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "bootstrap_mode_fraction_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "mode_sensitivity_saved",
+          "status": "PASS"
+        },
+        {
+          "check": "visual_exists",
+          "status": "PASS"
+        },
+        {
+          "check": "claim_boundaries_are_explicit",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t400_curve",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Frozen calibration-only population child coordinate and delayed-rate curve.",
+        "tables_used": [
+          "T400_LOCAL_CHILD_CURVE.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv')"
+      }
+    },
+    {
+      "id": "t400_events",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Calibration-frozen delayed-membership weights in untouched event rows.",
+        "tables_used": [
+          "T400_PRIMARY_EVENT_HISTOGRAM.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_PRIMARY_EVENT_HISTOGRAM.csv')"
+      }
+    },
+    {
+      "id": "t400_splits",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Twenty deterministic population-to-event transfers.",
+        "tables_used": [
+          "T400_REPEATED_SPLITS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_REPEATED_SPLITS.csv')"
+      }
+    },
+    {
+      "id": "t400_results",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Primary values, gates, controls and evidence boundaries.",
+        "tables_used": [
+          "T400_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t400_validation",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent saved-artifact and arithmetic validation.",
+        "tables_used": [
+          "T400_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t400_protocol",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Predeclared coordinate, gates, controls and claim boundary.",
+        "tables_used": [
+          "T400 protocol"
+        ]
+      }
+    },
+    {
+      "id": "coherent_2022",
+      "query": {
+        "engine": "web",
+        "description": "COHERENT CsI public measurement and ancillary data"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t400-nested-child-window-population-to-event",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

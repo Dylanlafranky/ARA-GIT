@@ -1,0 +1,1575 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T403 — Reverse component lineage",
+    "description": "Detector-to-source audit of the delayed-neutrino child components and their relation to the stopped-muon parent.",
+    "generatedAt": "2026-08-17T21:06:04.960491Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "source_overlay",
+        "title": "Detector footprint and delayed-neutrino source children",
+        "subtitle": "T402/T398/T400; eight fixed local-ARA bins; each curve centred and max-absolute normalized",
+        "type": "line",
+        "dataset": "source_overlay",
+        "sourceId": "t403_profiles",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ARA ridge",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "Within-window mean",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Local child ARA (0–2)"
+          },
+          "y": {
+            "field": "centered_maxabs",
+            "type": "quantitative",
+            "label": "Centred component (max |value| = 1)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Wave component"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Component"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "time_us",
+              "type": "quantitative",
+              "label": "Source time (microseconds)"
+            },
+            {
+              "field": "centered_maxabs",
+              "type": "quantitative",
+              "label": "Centred value"
+            }
+          ]
+        }
+      },
+      {
+        "id": "parent_components",
+        "title": "Reverse parent-component comparison",
+        "subtitle": "Upstream-facing derivatives are reversed explicitly; remaining parent stays in native direction",
+        "type": "line",
+        "dataset": "reverse_components",
+        "sourceId": "t403_profiles",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ARA ridge",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "Within-window mean",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Local child ARA (0–2)"
+          },
+          "y": {
+            "field": "centered_maxabs",
+            "type": "quantitative",
+            "label": "Centred component (max |value| = 1)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Parent relation"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Component"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "centered_maxabs",
+              "type": "quantitative",
+              "label": "Centred value"
+            }
+          ]
+        }
+      },
+      {
+        "id": "score_bars",
+        "title": "Best fixed orientation by candidate",
+        "subtitle": "Absolute centred cosine against T402; 1.0 is identical shape after centring",
+        "type": "bar",
+        "dataset": "score_rows",
+        "sourceId": "t403_scores",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.65,
+            "label": "Frozen component threshold",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "candidate_orientation",
+            "type": "nominal",
+            "label": "Candidate and orientation"
+          },
+          "y": {
+            "field": "absolute_cosine",
+            "type": "quantitative",
+            "label": "Absolute cosine"
+          },
+          "tooltip": [
+            {
+              "field": "candidate",
+              "type": "nominal",
+              "label": "Candidate"
+            },
+            {
+              "field": "orientation",
+              "type": "nominal",
+              "label": "Orientation"
+            },
+            {
+              "field": "absolute_cosine",
+              "type": "quantitative",
+              "label": "Absolute cosine"
+            },
+            {
+              "field": "registered_rank",
+              "type": "quantitative",
+              "label": "Alignment rank of 8"
+            }
+          ]
+        }
+      },
+      {
+        "id": "split_hist",
+        "title": "Selected relation across saved T402 splits",
+        "subtitle": "326 overlapping deterministic resampling probes; not independent experiments",
+        "type": "bar",
+        "dataset": "split_hist",
+        "sourceId": "t403_splits",
+        "palette": {
+          "kind": "single",
+          "name": "blue"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 0.0,
+            "label": "No relation",
+            "color": "neutral",
+            "lineStyle": "solid"
+          },
+          {
+            "axis": "x",
+            "value": 0.65,
+            "label": "+0.65 threshold",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "bin_center",
+            "type": "quantitative",
+            "label": "Cosine with selected source component"
+          },
+          "y": {
+            "field": "count",
+            "type": "quantitative",
+            "label": "Split count"
+          },
+          "tooltip": [
+            {
+              "field": "bin_center",
+              "type": "quantitative",
+              "label": "Cosine bin centre"
+            },
+            {
+              "field": "count",
+              "type": "quantitative",
+              "label": "Splits"
+            }
+          ]
+        }
+      },
+      {
+        "id": "silver_phase",
+        "title": "Separate silver muon phase comparison",
+        "subtitle": "160 G T397 W phase beside T402; normalized shape only, with no shared event or time origin",
+        "type": "line",
+        "dataset": "t397",
+        "sourceId": "t403_t397",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Native phase midpoint",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "Phase mean",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Native phase mapped to 0–2"
+          },
+          "y": {
+            "field": "centered_maxabs",
+            "type": "quantitative",
+            "label": "Centred component (max |value| = 1)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Separate trace"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Trace"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "Native phase"
+            },
+            {
+              "field": "centered_maxabs",
+              "type": "quantitative",
+              "label": "Centred value"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gates",
+        "title": "Frozen T403 gates",
+        "subtitle": "A same-archive component is present, but derivative specificity fails",
+        "dataset": "gates",
+        "sourceId": "t403_results",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          },
+          {
+            "field": "reason",
+            "label": "Reason",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "evidence",
+        "title": "Evidence classes stay separate",
+        "subtitle": "Measured, fitted, derived, independent-unlinked, and truth-model cuts",
+        "dataset": "evidence",
+        "sourceId": "t403_results",
+        "columns": [
+          {
+            "field": "cut",
+            "label": "Cut",
+            "type": "text"
+          },
+          {
+            "field": "class",
+            "label": "Evidence class",
+            "type": "text"
+          },
+          {
+            "field": "meaning",
+            "label": "What it can establish",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation",
+        "title": "Independent saved-output validation",
+        "subtitle": "Protocol, arithmetic, split summaries, flavor diagnostic, and verdict logic",
+        "dataset": "validation",
+        "sourceId": "t403_validation",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t403_profiles",
+        "label": "T403 component profiles",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_PROFILES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Eight-bin detector, fitted-source, and derived-parent component profiles on the frozen local ARA coordinate.",
+          "tables_used": [
+            "T403_COMPONENT_PROFILES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_PROFILES.csv')"
+        }
+      },
+      {
+        "id": "t403_scores",
+        "label": "T403 component scores",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_SCORES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Fixed direct/reversed cosine scores and circular-shift alignment ranks.",
+          "tables_used": [
+            "T403_COMPONENT_SCORES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_SCORES.csv')"
+        }
+      },
+      {
+        "id": "t403_splits",
+        "label": "T403 split robustness",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_SPLIT_ROBUSTNESS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Selected-component cosine across 326 saved T402 resampling probes.",
+          "tables_used": [
+            "T403_SPLIT_ROBUSTNESS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_SPLIT_ROBUSTNESS.csv')"
+        }
+      },
+      {
+        "id": "t403_t397",
+        "label": "T403 T397 phase comparison",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_T397_PHASE_PROFILES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Eight-bin silver W phase profiles retained as a separate shape comparison.",
+          "tables_used": [
+            "T403_T397_PHASE_PROFILES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_T397_PHASE_PROFILES.csv')"
+        }
+      },
+      {
+        "id": "t403_results",
+        "label": "T403 saved result",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Frozen gates, verdict, selected candidate, diagnostics, and evidence boundaries.",
+          "tables_used": [
+            "T403_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T403_reverse_component_lineage/T403_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t403_validation",
+        "label": "T403 independent validation",
+        "path": "analysis/muon/T403_reverse_component_lineage/T403_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent recomputation of scores, split summaries, flavor identifiability, and verdict logic.",
+          "tables_used": [
+            "T403_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T403_reverse_component_lineage/T403_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t403_protocol",
+        "label": "Frozen T403 protocol",
+        "path": "analysis/muon/T403_REVERSE_COMPONENT_LINEAGE_PROTOCOL_2026-08-18.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Predeclared reverse-lineage coordinate, candidates, alignment controls, gates, and claim boundary.",
+          "tables_used": [
+            "T403 protocol"
+          ]
+        }
+      },
+      {
+        "id": "t402_bins",
+        "label": "T402 detector footprint",
+        "path": "analysis/muon/T402_whole_shape_child_relation/T402_BIN_SUMMARY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Measured C and AC detector-source occupancies and the signed C-minus-AC footprint.",
+          "tables_used": [
+            "T402_BIN_SUMMARY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T402_whole_shape_child_relation/T402_BIN_SUMMARY.csv')"
+        }
+      },
+      {
+        "id": "t398_native",
+        "label": "T398 native neutrino release waveforms",
+        "path": "analysis/muon/T398_population_neutrino_wave_overlap/T398_NATIVE_WAVE_OVERLAP.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Fitted prompt/delayed source templates, flavor children, and derived remaining-parent curve.",
+          "tables_used": [
+            "T398_NATIVE_WAVE_OVERLAP.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T398_population_neutrino_wave_overlap/T398_NATIVE_WAVE_OVERLAP.csv')"
+        }
+      },
+      {
+        "id": "t397_phase",
+        "label": "T397 RAL Silver phase profiles",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Observed and fitted silver common-mode W phase profiles.",
+          "tables_used": [
+            "T397_PHASE_PROFILES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv')"
+        }
+      },
+      {
+        "id": "coherent_2022",
+        "label": "COHERENT CsI public measurement and ancillary data",
+        "path": "https://arxiv.org/abs/2110.07730"
+      },
+      {
+        "id": "ral_silver",
+        "label": "ISIS EMU RAL Silver public source",
+        "path": "https://doi.org/10.5286/ISIS.E.RB1620201"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T403 — Reverse component lineage\n\n## Technical summary\n\n**Yes: the detector contains a strong projection of the joint delayed-neutrino release branch. No: this cut does not yet isolate one neutrino flavor or an individual birth event.** The registered verdict is `PARTIAL COMPONENT RELATION`. On the unchanged local ARA coordinate, the best aggregate match is `anti_nu_mu release` in `direct` orientation (cosine **0.957**, alignment rank **1/8**). But the fitted `nu_e`, `anti_nu_mu`, and total delayed curves all score 0.950–0.957, so the detector is recovering their shared release shape rather than uniquely naming one child.",
+        "sourceId": "t403_results"
+      },
+      {
+        "id": "source_text",
+        "type": "markdown",
+        "body": "## The detector footprint is the common delayed-release component\n\nThe T402 detector contrast is positive on the early side, crosses near the local ridge, and becomes negative late. Sampling the T398 source templates at the same eight T400 bins reproduces that shape without a circular shift. Because every curve is centred first, the negative side means **below its own within-window average**, not negative neutrino intensity.",
+        "sourceId": "t403_profiles"
+      },
+      {
+        "id": "source_chart",
+        "type": "chart",
+        "chartId": "source_overlay"
+      },
+      {
+        "id": "flavor_text",
+        "type": "markdown",
+        "body": "## Timing alone does not decompress the two neutral children\n\nThe fitted `nu_e` and `anti_nu_mu` shapes are almost collinear in this window (centred cosine **0.99736**). Removing their unequal fitted weights leaves a flavor-specific shape contrast with detector cosine only **0.134**, ranked **8/8**. The tiny aggregate lead of `anti_nu_mu` is therefore not enough to identify that flavor as the recovered child.",
+        "sourceId": "t403_results"
+      },
+      {
+        "id": "parent_text",
+        "type": "markdown",
+        "body": "## Reverse traversal finds a release projection, not a derivative-only child\n\nThe upstream-facing release-gradient and remaining-parent-curvature components have absolute cosine about 0.769 and correct unshifted alignment, while the whole delayed-release rates remain stronger at about 0.95. This fails the frozen derivative-specificity gate. In plain language: the detector retains the broad release branch more clearly than a uniquely separated rate-change or parent-curvature component.",
+        "sourceId": "t403_scores"
+      },
+      {
+        "id": "parent_chart",
+        "type": "chart",
+        "chartId": "parent_components"
+      },
+      {
+        "id": "score_text",
+        "type": "markdown",
+        "body": "## Candidate ranking confirms a shared branch rather than one special waveform\n\nThe four delayed-rate candidates cluster tightly at the top. That crowding is the diagnostic result: the detector contrast locates the delayed branch, but the available timing cut is insufficient to tell its tightly coupled template children apart.",
+        "sourceId": "t403_scores"
+      },
+      {
+        "id": "score_chart",
+        "type": "chart",
+        "chartId": "score_bars"
+      },
+      {
+        "id": "robust_text",
+        "type": "markdown",
+        "body": "## The aggregate relation is not yet an event-level waveform\n\nAcross 326 saved T402 resampling probes, median cosine is **0.315** with 95% resampling interval **[-0.660, 0.814]**. Only **16.0%** reach absolute cosine 0.65, although **72.1%** retain the aggregate orientation. This supports a population-average projection and rejects an individual or split-stable reconstruction claim.",
+        "sourceId": "t403_splits"
+      },
+      {
+        "id": "split_chart",
+        "type": "chart",
+        "chartId": "split_hist"
+      },
+      {
+        "id": "silver_text",
+        "type": "markdown",
+        "body": "## The earlier silver spin trace is not the missing linked parent\n\nThe strongest T397 comparison is the fitted 160 G W phase with absolute cosine **0.723**, but its registered alignment ranks **3/8** and a different circular phase is better. The observed trace is weaker. More importantly, T397 uses different muons, silver, and a different detector; its phase can be compared as geometry but cannot be inserted into the COHERENT lineage.",
+        "sourceId": "t403_results"
+      },
+      {
+        "id": "silver_chart",
+        "type": "chart",
+        "chartId": "silver_phase"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope, data, and metric definitions\n\n- **Detector component:** T402 mean `C-AC` occupancy in eight local-child bins.\n- **Source components:** T398 fitted delayed total, `nu_e`, and `anti_nu_mu` templates sampled between T400's frozen boundaries.\n- **Parent components:** remaining-muon complement and its derivatives, all derived from the delayed template.\n- **Similarity:** centred cosine; offset and amplitude are removed, while order and shape are retained.\n- **Alignment control:** the registered zero shift ranked against all eight circular shifts.\n\nT395/T396 are omitted from waveform scores because they are truth-model statistical locks rather than observed temporal profiles.",
+        "sourceId": "t403_results"
+      },
+      {
+        "id": "evidence_table",
+        "type": "table",
+        "tableId": "evidence"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Methodology\n\nThe protocol was hashed before execution. T402's saved detector vector was reproduced, T400's frozen linear map converted its bin centres to source time, and T398 curves were interpolated without fitted shifts or smoothing parameters. Direct and reversed orientations were scored separately; each registered alignment was checked against non-zero circular shifts. A post-frozen diagnostic removed flavor-weight differences to test whether the aggregate match was flavor-specific. Independent validation recomputed the headline scores, split interval, flavor diagnostic, and verdict logic."
+      },
+      {
+        "id": "gates_table",
+        "type": "table",
+        "tableId": "gates"
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## Limitations, uncertainty, and robustness\n\nThe T402 curve is a detector response contrast, not a pristine neutrino field waveform. Its coordinate and the T398 source profiles come from the same COHERENT archive, so the aggregate match is not an independent replication. Derived remaining-parent and derivative curves reuse the same delayed template. The two fitted flavor children are not event tags. The resampling probes overlap and are not independent experiments. No result here measures the birth time of one neutrino from one named muon."
+      },
+      {
+        "id": "validation_table",
+        "type": "table",
+        "tableId": "validation"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nFreeze the detector crest, ridge crossing, and late deficit on an independent detector/source archive, then test them against that archive's independently supplied delayed-release template. To separate `nu_e` from `anti_nu_mu`, require flavor-sensitive information or an independently observed charged-daughter relation; timing alone leaves the child shapes almost identical here.\n\n## Further questions\n\n- Does the same centred delayed-release projection reproduce outside the COHERENT CsI archive?\n- Which detector or source variable generates the T402 C-minus-AC contrast?\n- Can charged-daughter direction or missing momentum separate the two neutral children event by event?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T21:06:04.960491Z",
+    "status": "ready",
+    "datasets": {
+      "source_overlay": [
+        {
+          "ara_x": 0.125,
+          "time_us": 0.619729890024402,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.1807349047388443,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.7214737274186941,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.827755662998503,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.823217564812986,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.7661684295155081,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.9249614022072781,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.22473145115937807,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 1.0267052396015701,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.13424971764838234,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.1284490769958622,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.18144349382800215,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.2301929143901542,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.32222742745816046,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3319367517844463,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -1.0,
+          "evidence_class": "measured detector source-difference diagnostic"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.619729890024402,
+          "series": "delayed total release",
+          "centered_maxabs": -0.2539307754701254,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.7214737274186941,
+          "series": "delayed total release",
+          "centered_maxabs": 0.7303662137859777,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.823217564812986,
+          "series": "delayed total release",
+          "centered_maxabs": 0.8219444395820258,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.9249614022072781,
+          "series": "delayed total release",
+          "centered_maxabs": 0.5091963830948107,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 1.0267052396015701,
+          "series": "delayed total release",
+          "centered_maxabs": 0.11384191556184575,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.1284490769958622,
+          "series": "delayed total release",
+          "centered_maxabs": -0.27509113452762735,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.2301929143901542,
+          "series": "delayed total release",
+          "centered_maxabs": -0.646327042026912,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3319367517844463,
+          "series": "delayed total release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.619729890024402,
+          "series": "nu_e release",
+          "centered_maxabs": -0.3246178699875068,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.7214737274186941,
+          "series": "nu_e release",
+          "centered_maxabs": 0.7213795845711596,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.823217564812986,
+          "series": "nu_e release",
+          "centered_maxabs": 0.8400843026122748,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.9249614022072781,
+          "series": "nu_e release",
+          "centered_maxabs": 0.5314791027427946,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 1.0267052396015701,
+          "series": "nu_e release",
+          "centered_maxabs": 0.1325616748410449,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.1284490769958622,
+          "series": "nu_e release",
+          "centered_maxabs": -0.2617558245135958,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.2301929143901542,
+          "series": "nu_e release",
+          "centered_maxabs": -0.639130970266175,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3319367517844463,
+          "series": "nu_e release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.619729890024402,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.21004875628986303,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.7214737274186941,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.7359450459372089,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.823217564812986,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.8106833483905517,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.9249614022072781,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.49536343752451906,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 1.0267052396015701,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.10222082911957353,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.1284490769958622,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.2833695951689339,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.2301929143901542,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.6507943095130507,
+          "evidence_class": "fitted source template"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3319367517844463,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted source template"
+        }
+      ],
+      "reverse_components": [
+        {
+          "ara_x": 0.125,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.1807349047388443
+        },
+        {
+          "ara_x": 0.375,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.827755662998503
+        },
+        {
+          "ara_x": 0.625,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.7661684295155081
+        },
+        {
+          "ara_x": 0.875,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": 0.22473145115937807
+        },
+        {
+          "ara_x": 1.125,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.13424971764838234
+        },
+        {
+          "ara_x": 1.375,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.18144349382800215
+        },
+        {
+          "ara_x": 1.625,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -0.32222742745816046
+        },
+        {
+          "ara_x": 1.875,
+          "series": "T402 detector C-AC",
+          "centered_maxabs": -1.0
+        },
+        {
+          "ara_x": 0.125,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.21711241887567467
+        },
+        {
+          "ara_x": 0.375,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.22820817228177645
+        },
+        {
+          "ara_x": 0.625,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.23978862748993748
+        },
+        {
+          "ara_x": 0.875,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.24975283741637216
+        },
+        {
+          "ara_x": 1.125,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.24365721837272153
+        },
+        {
+          "ara_x": 1.375,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": -0.11308737149710216
+        },
+        {
+          "ara_x": 1.625,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": 0.2916066459335843
+        },
+        {
+          "ara_x": 1.875,
+          "series": "release gradient viewed upstream",
+          "centered_maxabs": 1.0
+        },
+        {
+          "ara_x": 0.125,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.21672594565349612
+        },
+        {
+          "ara_x": 0.375,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.22786156856606818
+        },
+        {
+          "ara_x": 0.625,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.23947242200554242
+        },
+        {
+          "ara_x": 0.875,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.24948750193139393
+        },
+        {
+          "ara_x": 1.125,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.2435177381823356
+        },
+        {
+          "ara_x": 1.375,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": 0.11356703794088555
+        },
+        {
+          "ara_x": 1.625,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": -0.29063221427972197
+        },
+        {
+          "ara_x": 1.875,
+          "series": "remaining-parent curvature viewed upstream",
+          "centered_maxabs": -1.0
+        },
+        {
+          "ara_x": 0.125,
+          "series": "remaining muon",
+          "centered_maxabs": 1.0
+        },
+        {
+          "ara_x": 0.375,
+          "series": "remaining muon",
+          "centered_maxabs": 0.7149698478500669
+        },
+        {
+          "ara_x": 0.625,
+          "series": "remaining muon",
+          "centered_maxabs": 0.41249202244195904
+        },
+        {
+          "ara_x": 0.875,
+          "series": "remaining muon",
+          "centered_maxabs": 0.11526647759149655
+        },
+        {
+          "ara_x": 1.125,
+          "series": "remaining muon",
+          "centered_maxabs": -0.16881847822860502
+        },
+        {
+          "ara_x": 1.375,
+          "series": "remaining muon",
+          "centered_maxabs": -0.4389372323573981
+        },
+        {
+          "ara_x": 1.625,
+          "series": "remaining muon",
+          "centered_maxabs": -0.6955852924742314
+        },
+        {
+          "ara_x": 1.875,
+          "series": "remaining muon",
+          "centered_maxabs": -0.9393873448232857
+        }
+      ],
+      "score_rows": [
+        {
+          "candidate": "anti_nu_mu release",
+          "orientation": "direct",
+          "absolute_cosine": 0.9568845644706456,
+          "registered_rank": 1,
+          "candidate_orientation": "anti_nu_mu release [direct]"
+        },
+        {
+          "candidate": "flavor contrast (anti_nu_mu - nu_e)",
+          "orientation": "direct",
+          "absolute_cosine": 0.9565121821725522,
+          "registered_rank": 1,
+          "candidate_orientation": "flavor contrast (anti_nu_mu - nu_e) [direct]"
+        },
+        {
+          "candidate": "delayed total release",
+          "orientation": "direct",
+          "absolute_cosine": 0.9549315223466316,
+          "registered_rank": 1,
+          "candidate_orientation": "delayed total release [direct]"
+        },
+        {
+          "candidate": "nu_e release",
+          "orientation": "direct",
+          "absolute_cosine": 0.9502957884384295,
+          "registered_rank": 1,
+          "candidate_orientation": "nu_e release [direct]"
+        },
+        {
+          "candidate": "release gradient",
+          "orientation": "reversed",
+          "absolute_cosine": 0.7694957442363206,
+          "registered_rank": 1,
+          "candidate_orientation": "release gradient [reversed]"
+        },
+        {
+          "candidate": "remaining-muon curvature",
+          "orientation": "reversed",
+          "absolute_cosine": 0.7693285237043338,
+          "registered_rank": 1,
+          "candidate_orientation": "remaining-muon curvature [reversed]"
+        },
+        {
+          "candidate": "remaining muon",
+          "orientation": "reversed",
+          "absolute_cosine": 0.7319640497265829,
+          "registered_rank": 2,
+          "candidate_orientation": "remaining muon [reversed]"
+        },
+        {
+          "candidate": "released muon",
+          "orientation": "reversed",
+          "absolute_cosine": 0.7319640497265829,
+          "registered_rank": 2,
+          "candidate_orientation": "released muon [reversed]"
+        }
+      ],
+      "split_hist": [
+        {
+          "bin_center": -0.95,
+          "count": 0
+        },
+        {
+          "bin_center": -0.8500000000000001,
+          "count": 1
+        },
+        {
+          "bin_center": -0.75,
+          "count": 4
+        },
+        {
+          "bin_center": -0.6499999999999999,
+          "count": 9
+        },
+        {
+          "bin_center": -0.55,
+          "count": 2
+        },
+        {
+          "bin_center": -0.44999999999999996,
+          "count": 6
+        },
+        {
+          "bin_center": -0.3499999999999999,
+          "count": 15
+        },
+        {
+          "bin_center": -0.24999999999999994,
+          "count": 9
+        },
+        {
+          "bin_center": -0.14999999999999997,
+          "count": 22
+        },
+        {
+          "bin_center": -0.04999999999999999,
+          "count": 23
+        },
+        {
+          "bin_center": 0.050000000000000044,
+          "count": 14
+        },
+        {
+          "bin_center": 0.15000000000000013,
+          "count": 26
+        },
+        {
+          "bin_center": 0.2500000000000001,
+          "count": 28
+        },
+        {
+          "bin_center": 0.3500000000000001,
+          "count": 37
+        },
+        {
+          "bin_center": 0.45000000000000007,
+          "count": 34
+        },
+        {
+          "bin_center": 0.55,
+          "count": 41
+        },
+        {
+          "bin_center": 0.6500000000000001,
+          "count": 21
+        },
+        {
+          "bin_center": 0.7500000000000001,
+          "count": 20
+        },
+        {
+          "bin_center": 0.8500000000000001,
+          "count": 14
+        },
+        {
+          "bin_center": 0.9500000000000001,
+          "count": 0
+        }
+      ],
+      "t397": [
+        {
+          "ara_x": 0.125,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": 0.8228894228383824
+        },
+        {
+          "ara_x": 0.375,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": -0.015096207958535963
+        },
+        {
+          "ara_x": 0.625,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": -0.24837889800240867
+        },
+        {
+          "ara_x": 0.875,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": -0.24997841310492935
+        },
+        {
+          "ara_x": 1.125,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": -1.0
+        },
+        {
+          "ara_x": 1.375,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": -0.039265123591797194
+        },
+        {
+          "ara_x": 1.625,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": 0.7069406283079919
+        },
+        {
+          "ara_x": 1.875,
+          "series": "observed W residual",
+          "field_g": 160.0,
+          "centered_maxabs": 0.022888591511297053
+        },
+        {
+          "ara_x": 0.125,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": 0.5818089632302589
+        },
+        {
+          "ara_x": 0.375,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": -0.16883713637420372
+        },
+        {
+          "ara_x": 0.625,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": -0.8275594550840195
+        },
+        {
+          "ara_x": 0.875,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": -0.997509926622823
+        },
+        {
+          "ara_x": 1.125,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": -0.584650352525237
+        },
+        {
+          "ara_x": 1.375,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": 0.16753286948350604
+        },
+        {
+          "ara_x": 1.625,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": 0.8292150378925182
+        },
+        {
+          "ara_x": 1.875,
+          "series": "fitted W phase",
+          "field_g": 160.0,
+          "centered_maxabs": 1.0
+        },
+        {
+          "ara_x": 0.125,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": -0.1807349047388443
+        },
+        {
+          "ara_x": 0.375,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": 0.827755662998503
+        },
+        {
+          "ara_x": 0.625,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": 0.7661684295155081
+        },
+        {
+          "ara_x": 0.875,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": 0.22473145115937807
+        },
+        {
+          "ara_x": 1.125,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": -0.13424971764838234
+        },
+        {
+          "ara_x": 1.375,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": -0.18144349382800215
+        },
+        {
+          "ara_x": 1.625,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": -0.32222742745816046
+        },
+        {
+          "ara_x": 1.875,
+          "series": "T402 detector shape",
+          "field_g": 0.0,
+          "centered_maxabs": -1.0
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1_detector_integrity",
+          "status": "PASS",
+          "reason": "The eight-bin detector vector and all four saved topology windows reproduce T402."
+        },
+        {
+          "gate": "G2_component_selection",
+          "status": "PASS",
+          "reason": "At least one same-archive candidate exceeds the frozen 0.65 cosine threshold."
+        },
+        {
+          "gate": "G3_alignment_control",
+          "status": "PASS",
+          "reason": "The selected unshifted orientation ranks first of eight circular shifts."
+        },
+        {
+          "gate": "G4_derivative_specificity",
+          "status": "FAIL",
+          "reason": "Failed: derivative/curvature candidates do not beat the whole delayed-release rates by 0.10."
+        },
+        {
+          "gate": "G5_evidence_boundary",
+          "status": "PASS",
+          "reason": "T397 remains separate and individual-neutrino birth is not claimed."
+        }
+      ],
+      "evidence": [
+        {
+          "cut": "T402 detector footprint",
+          "class": "Measured diagnostic",
+          "meaning": "C-minus-AC detector response contrast; not a flavor tag"
+        },
+        {
+          "cut": "T398/T400 delayed branch",
+          "class": "Fitted source waveform",
+          "meaning": "Joint delayed release plus official nu_e and anti_nu_mu template children"
+        },
+        {
+          "cut": "Remaining parent and gradients",
+          "class": "Derived",
+          "meaning": "Calculated from the same delayed template; not independent evidence"
+        },
+        {
+          "cut": "T397 silver phase",
+          "class": "Independent but unlinked",
+          "meaning": "Different medium, detector and experiment; shape comparison only"
+        },
+        {
+          "cut": "T395/T396 locks",
+          "class": "Truth-model crosswalk",
+          "meaning": "Statistical parent/child relations, not observed time waveforms"
+        }
+      ],
+      "validation": [
+        {
+          "check": "protocol_hash_matches",
+          "status": "PASS"
+        },
+        {
+          "check": "eight_detector_bins",
+          "status": "PASS"
+        },
+        {
+          "check": "detector_coordinate_is_ordered_0_to_2",
+          "status": "PASS"
+        },
+        {
+          "check": "selected_candidate_matches_score_table",
+          "status": "PASS"
+        },
+        {
+          "check": "selected_cosine_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "max_whole_rate_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "split_count_is_326",
+          "status": "PASS"
+        },
+        {
+          "check": "split_median_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "split_95_interval_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "flavor_diagnostic_has_two_orientations",
+          "status": "PASS"
+        },
+        {
+          "check": "flavor_children_are_highly_collinear",
+          "status": "PASS"
+        },
+        {
+          "check": "flavor_specific_shape_not_selected",
+          "status": "PASS"
+        },
+        {
+          "check": "t397_is_explicitly_separate",
+          "status": "PASS"
+        },
+        {
+          "check": "individual_birth_boundary_present",
+          "status": "PASS"
+        },
+        {
+          "check": "gate_logic_matches_partial_verdict",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t403_profiles",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Eight-bin detector, fitted-source, and derived-parent component profiles on the frozen local ARA coordinate.",
+        "tables_used": [
+          "T403_COMPONENT_PROFILES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_PROFILES.csv')"
+      }
+    },
+    {
+      "id": "t403_scores",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Fixed direct/reversed cosine scores and circular-shift alignment ranks.",
+        "tables_used": [
+          "T403_COMPONENT_SCORES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_COMPONENT_SCORES.csv')"
+      }
+    },
+    {
+      "id": "t403_splits",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Selected-component cosine across 326 saved T402 resampling probes.",
+        "tables_used": [
+          "T403_SPLIT_ROBUSTNESS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_SPLIT_ROBUSTNESS.csv')"
+      }
+    },
+    {
+      "id": "t403_t397",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Eight-bin silver W phase profiles retained as a separate shape comparison.",
+        "tables_used": [
+          "T403_T397_PHASE_PROFILES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T403_reverse_component_lineage/T403_T397_PHASE_PROFILES.csv')"
+      }
+    },
+    {
+      "id": "t403_results",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Frozen gates, verdict, selected candidate, diagnostics, and evidence boundaries.",
+        "tables_used": [
+          "T403_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T403_reverse_component_lineage/T403_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t403_validation",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent recomputation of scores, split summaries, flavor identifiability, and verdict logic.",
+        "tables_used": [
+          "T403_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T403_reverse_component_lineage/T403_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t403_protocol",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Predeclared reverse-lineage coordinate, candidates, alignment controls, gates, and claim boundary.",
+        "tables_used": [
+          "T403 protocol"
+        ]
+      }
+    },
+    {
+      "id": "t402_bins",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Measured C and AC detector-source occupancies and the signed C-minus-AC footprint.",
+        "tables_used": [
+          "T402_BIN_SUMMARY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T402_whole_shape_child_relation/T402_BIN_SUMMARY.csv')"
+      }
+    },
+    {
+      "id": "t398_native",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Fitted prompt/delayed source templates, flavor children, and derived remaining-parent curve.",
+        "tables_used": [
+          "T398_NATIVE_WAVE_OVERLAP.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T398_population_neutrino_wave_overlap/T398_NATIVE_WAVE_OVERLAP.csv')"
+      }
+    },
+    {
+      "id": "t397_phase",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Observed and fitted silver common-mode W phase profiles.",
+        "tables_used": [
+          "T397_PHASE_PROFILES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv')"
+      }
+    },
+    {
+      "id": "coherent_2022",
+      "query": {
+        "engine": "web",
+        "description": "COHERENT CsI public measurement and ancillary data"
+      }
+    },
+    {
+      "id": "ral_silver",
+      "query": {
+        "engine": "web",
+        "description": "ISIS EMU RAL Silver public source"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t403-reverse-component-lineage",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

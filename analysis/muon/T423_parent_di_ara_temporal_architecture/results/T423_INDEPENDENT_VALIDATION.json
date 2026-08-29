@@ -1,0 +1,684 @@
+{
+  "test": "T423 parent Di-ARA temporal architecture",
+  "arithmetic_status": "PASS",
+  "scientific_adjudication": "UNAVAILABLE",
+  "reason": "The saved arithmetic is reproducible, but the archive contains four development rows and no out-of-sample prediction rows or Q=1 parent handover events.",
+  "check_count": 125,
+  "passed_count": 125,
+  "failed_count": 0,
+  "stage_diagnostics": {
+    "development": {
+      "opposite_crossing_intervals": 4,
+      "intervals_with_causal_rows": 2,
+      "causal_prediction_rows": 4,
+      "return_C1_intervals": 2,
+      "q_crossing_available_share": 0.0,
+      "raw_sequences": 26
+    },
+    "validation": {
+      "opposite_crossing_intervals": 7,
+      "intervals_with_causal_rows": 0,
+      "causal_prediction_rows": 0,
+      "return_C1_intervals": 3,
+      "q_crossing_available_share": 0.0,
+      "raw_sequences": 26
+    },
+    "holdout": {
+      "opposite_crossing_intervals": 5,
+      "intervals_with_causal_rows": 0,
+      "causal_prediction_rows": 0,
+      "return_C1_intervals": 1,
+      "q_crossing_available_share": 0.0,
+      "raw_sequences": 40
+    }
+  },
+  "warnings": [
+    {
+      "code": "UNDERDETERMINED_DEVELOPMENT_FIT",
+      "severity": "critical",
+      "detail": "All three models were fitted to four causal rows from two intervals while M2 has 15 features plus an intercept. Ridge regularization makes a numerical solution possible but does not make the comparison empirically identified."
+    },
+    {
+      "code": "NO_OUT_OF_SAMPLE_PREDICTION_ROWS",
+      "severity": "critical",
+      "detail": "Validation and holdout have zero intervals containing at least two native samples between successive crossings, so no frozen model can be scored out of sample."
+    },
+    {
+      "code": "NO_PARENT_Q_HANDOVER",
+      "severity": "critical",
+      "detail": "No selected child interval in any split contains a Q=1 crossing. The proposed PA\u2192PB internal parent traversal is therefore unobserved in this archive under the frozen cut."
+    },
+    {
+      "code": "G1_DOES_NOT_GUARD_MODEL_GRAIN",
+      "severity": "methodological",
+      "detail": "Frozen G1 counts opposite-direction crossing intervals, but the causal primary additionally needs native prediction slices inside them. G1 can therefore count an interval that supplies no model row."
+    }
+  ],
+  "checks": [
+    {
+      "check": "protocol hash",
+      "passed": true,
+      "detail": "0037867ce3a5e995c9eb1a96cfef370576ad76c12c4e625237e5a7591af37dd5"
+    },
+    {
+      "check": "analysis hash",
+      "passed": true,
+      "detail": "e9ce4a566e1ac6eb1631564fac9c770a9375736600f5691427724aa688363423"
+    },
+    {
+      "check": "DEVELOPMENT source hash",
+      "passed": true,
+      "detail": "ca78e91682c787a25e562fcebfa63c766b80327784607c654f64dec113e38053"
+    },
+    {
+      "check": "DEVELOPMENT protocol hash",
+      "passed": true,
+      "detail": "0037867ce3a5e995c9eb1a96cfef370576ad76c12c4e625237e5a7591af37dd5"
+    },
+    {
+      "check": "DEVELOPMENT analysis hash",
+      "passed": true,
+      "detail": "e9ce4a566e1ac6eb1631564fac9c770a9375736600f5691427724aa688363423"
+    },
+    {
+      "check": "DEVELOPMENT interval count",
+      "passed": true,
+      "detail": "saved=4 summary=4"
+    },
+    {
+      "check": "DEVELOPMENT prediction row count",
+      "passed": true,
+      "detail": "saved=4 summary=4"
+    },
+    {
+      "check": "DEVELOPMENT independent crossing interval count",
+      "passed": true,
+      "detail": "independent=4 saved=4"
+    },
+    {
+      "check": "DEVELOPMENT interval present EMU00070037|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070037', 'RF on', 0)"
+    },
+    {
+      "check": "DEVELOPMENT start time EMU00070037|RF on|0",
+      "passed": true,
+      "detail": "2.590766748709681"
+    },
+    {
+      "check": "DEVELOPMENT end time EMU00070037|RF on|0",
+      "passed": true,
+      "detail": "2.632195805169748"
+    },
+    {
+      "check": "DEVELOPMENT direction EMU00070037|RF on|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "DEVELOPMENT interval present EMU00070037|RF on|1",
+      "passed": true,
+      "detail": "('EMU00070037', 'RF on', 1)"
+    },
+    {
+      "check": "DEVELOPMENT start time EMU00070037|RF on|1",
+      "passed": true,
+      "detail": "2.632195805169748"
+    },
+    {
+      "check": "DEVELOPMENT end time EMU00070037|RF on|1",
+      "passed": true,
+      "detail": "2.732722862140415"
+    },
+    {
+      "check": "DEVELOPMENT direction EMU00070037|RF on|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "DEVELOPMENT interval present EMU00070055|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070055', 'RF on', 0)"
+    },
+    {
+      "check": "DEVELOPMENT start time EMU00070055|RF on|0",
+      "passed": true,
+      "detail": "2.2963060261491877"
+    },
+    {
+      "check": "DEVELOPMENT end time EMU00070055|RF on|0",
+      "passed": true,
+      "detail": "2.455280125063552"
+    },
+    {
+      "check": "DEVELOPMENT direction EMU00070055|RF on|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "DEVELOPMENT interval present EMU00070055|RF on|1",
+      "passed": true,
+      "detail": "('EMU00070055', 'RF on', 1)"
+    },
+    {
+      "check": "DEVELOPMENT start time EMU00070055|RF on|1",
+      "passed": true,
+      "detail": "2.455280125063552"
+    },
+    {
+      "check": "DEVELOPMENT end time EMU00070055|RF on|1",
+      "passed": true,
+      "detail": "2.5250427075884354"
+    },
+    {
+      "check": "DEVELOPMENT direction EMU00070055|RF on|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "DEVELOPMENT causal remaining EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.06572280682730458"
+    },
+    {
+      "check": "DEVELOPMENT M0 prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.06571549703350686"
+    },
+    {
+      "check": "DEVELOPMENT M0 error EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "7.309793797719011e-06"
+    },
+    {
+      "check": "DEVELOPMENT M1 prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.06571524497377441"
+    },
+    {
+      "check": "DEVELOPMENT M1 error EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "7.5618535301663625e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.06571801079953934"
+    },
+    {
+      "check": "DEVELOPMENT M2 error EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "4.796027765235911e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 wrong prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.0920179946141319"
+    },
+    {
+      "check": "DEVELOPMENT M2 reverse prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.0470015290008423"
+    },
+    {
+      "check": "DEVELOPMENT M2 shift prediction EMU00070037|RF on|1@6",
+      "passed": true,
+      "detail": "0.0470015290008423"
+    },
+    {
+      "check": "DEVELOPMENT causal remaining EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.001722915546176651"
+    },
+    {
+      "check": "DEVELOPMENT M0 prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.001732748852017736"
+    },
+    {
+      "check": "DEVELOPMENT M0 error EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "9.833305841084987e-06"
+    },
+    {
+      "check": "DEVELOPMENT M1 prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.001732378716171874"
+    },
+    {
+      "check": "DEVELOPMENT M1 error EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "9.463169995223113e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.0017294661481154147"
+    },
+    {
+      "check": "DEVELOPMENT M2 error EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "6.550601938763723e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 wrong prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.05415534248286554"
+    },
+    {
+      "check": "DEVELOPMENT M2 reverse prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.0037430501328025445"
+    },
+    {
+      "check": "DEVELOPMENT M2 shift prediction EMU00070037|RF on|1@7",
+      "passed": true,
+      "detail": "0.0037430501328025445"
+    },
+    {
+      "check": "DEVELOPMENT causal remaining EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.10828024141181869"
+    },
+    {
+      "check": "DEVELOPMENT M0 prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.1082771975376299"
+    },
+    {
+      "check": "DEVELOPMENT M0 error EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "3.043874188785045e-06"
+    },
+    {
+      "check": "DEVELOPMENT M1 prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.10827745825547724"
+    },
+    {
+      "check": "DEVELOPMENT M1 error EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "2.7831563414459914e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.1082777814995253"
+    },
+    {
+      "check": "DEVELOPMENT M2 error EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "2.459912293389932e-06"
+    },
+    {
+      "check": "DEVELOPMENT M2 wrong prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.125695696808861"
+    },
+    {
+      "check": "DEVELOPMENT M2 reverse prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.10325740842857173"
+    },
+    {
+      "check": "DEVELOPMENT M2 shift prediction EMU00070055|RF on|0@1",
+      "passed": true,
+      "detail": "0.10325740842857173"
+    },
+    {
+      "check": "DEVELOPMENT causal remaining EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.04428011171211166"
+    },
+    {
+      "check": "DEVELOPMENT M0 prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.04428063207425709"
+    },
+    {
+      "check": "DEVELOPMENT M0 error EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "5.2036214542861e-07"
+    },
+    {
+      "check": "DEVELOPMENT M1 prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.04428099355198808"
+    },
+    {
+      "check": "DEVELOPMENT M1 error EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "8.818398764195989e-07"
+    },
+    {
+      "check": "DEVELOPMENT M2 prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.04428081705023152"
+    },
+    {
+      "check": "DEVELOPMENT M2 error EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "7.0533811986212e-07"
+    },
+    {
+      "check": "DEVELOPMENT M2 wrong prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.06685250426967558"
+    },
+    {
+      "check": "DEVELOPMENT M2 reverse prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.06668684654345669"
+    },
+    {
+      "check": "DEVELOPMENT M2 shift prediction EMU00070055|RF on|0@2",
+      "passed": true,
+      "detail": "0.06668684654345669"
+    },
+    {
+      "check": "VALIDATION source hash",
+      "passed": true,
+      "detail": "b77f540450f8c822a6b9beb8124bfba4a8fa576ac599c9a252a0af85a80de882"
+    },
+    {
+      "check": "VALIDATION protocol hash",
+      "passed": true,
+      "detail": "0037867ce3a5e995c9eb1a96cfef370576ad76c12c4e625237e5a7591af37dd5"
+    },
+    {
+      "check": "VALIDATION analysis hash",
+      "passed": true,
+      "detail": "e9ce4a566e1ac6eb1631564fac9c770a9375736600f5691427724aa688363423"
+    },
+    {
+      "check": "VALIDATION interval count",
+      "passed": true,
+      "detail": "saved=7 summary=7"
+    },
+    {
+      "check": "VALIDATION prediction row count",
+      "passed": true,
+      "detail": "saved=0 summary=0"
+    },
+    {
+      "check": "VALIDATION independent crossing interval count",
+      "passed": true,
+      "detail": "independent=7 saved=7"
+    },
+    {
+      "check": "VALIDATION interval present EMU00069998|RF on|0",
+      "passed": true,
+      "detail": "('EMU00069998', 'RF on', 0)"
+    },
+    {
+      "check": "VALIDATION start time EMU00069998|RF on|0",
+      "passed": true,
+      "detail": "3.7548328613548816"
+    },
+    {
+      "check": "VALIDATION end time EMU00069998|RF on|0",
+      "passed": true,
+      "detail": "3.7599448281109025"
+    },
+    {
+      "check": "VALIDATION direction EMU00069998|RF on|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "VALIDATION interval present EMU00069998|RF on|1",
+      "passed": true,
+      "detail": "('EMU00069998', 'RF on', 1)"
+    },
+    {
+      "check": "VALIDATION start time EMU00069998|RF on|1",
+      "passed": true,
+      "detail": "3.7599448281109025"
+    },
+    {
+      "check": "VALIDATION end time EMU00069998|RF on|1",
+      "passed": true,
+      "detail": "3.821062157655875"
+    },
+    {
+      "check": "VALIDATION direction EMU00069998|RF on|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "VALIDATION interval present EMU00070034|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070034', 'RF on', 0)"
+    },
+    {
+      "check": "VALIDATION start time EMU00070034|RF on|0",
+      "passed": true,
+      "detail": "2.817465285449688"
+    },
+    {
+      "check": "VALIDATION end time EMU00070034|RF on|0",
+      "passed": true,
+      "detail": "2.9128925987642815"
+    },
+    {
+      "check": "VALIDATION direction EMU00070034|RF on|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "VALIDATION interval present EMU00070034|RF on|1",
+      "passed": true,
+      "detail": "('EMU00070034', 'RF on', 1)"
+    },
+    {
+      "check": "VALIDATION start time EMU00070034|RF on|1",
+      "passed": true,
+      "detail": "2.9128925987642815"
+    },
+    {
+      "check": "VALIDATION end time EMU00070034|RF on|1",
+      "passed": true,
+      "detail": "2.9303253776330784"
+    },
+    {
+      "check": "VALIDATION direction EMU00070034|RF on|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "VALIDATION interval present EMU00070052|RF off|0",
+      "passed": true,
+      "detail": "('EMU00070052', 'RF off', 0)"
+    },
+    {
+      "check": "VALIDATION start time EMU00070052|RF off|0",
+      "passed": true,
+      "detail": "2.718655562231315"
+    },
+    {
+      "check": "VALIDATION end time EMU00070052|RF off|0",
+      "passed": true,
+      "detail": "2.762863189027268"
+    },
+    {
+      "check": "VALIDATION direction EMU00070052|RF off|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "VALIDATION interval present EMU00070052|RF off|1",
+      "passed": true,
+      "detail": "('EMU00070052', 'RF off', 1)"
+    },
+    {
+      "check": "VALIDATION start time EMU00070052|RF off|1",
+      "passed": true,
+      "detail": "2.762863189027268"
+    },
+    {
+      "check": "VALIDATION end time EMU00070052|RF off|1",
+      "passed": true,
+      "detail": "2.812689997956302"
+    },
+    {
+      "check": "VALIDATION direction EMU00070052|RF off|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "VALIDATION interval present EMU00070058|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070058', 'RF on', 0)"
+    },
+    {
+      "check": "VALIDATION start time EMU00070058|RF on|0",
+      "passed": true,
+      "detail": "2.467851441297428"
+    },
+    {
+      "check": "VALIDATION end time EMU00070058|RF on|0",
+      "passed": true,
+      "detail": "2.476464099050819"
+    },
+    {
+      "check": "VALIDATION direction EMU00070058|RF on|0",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "HOLDOUT source hash",
+      "passed": true,
+      "detail": "eb65e9ab5e352173c830d99608c7321ad5ba0af6fe2299fb4b73d6a2ec269b41"
+    },
+    {
+      "check": "HOLDOUT protocol hash",
+      "passed": true,
+      "detail": "0037867ce3a5e995c9eb1a96cfef370576ad76c12c4e625237e5a7591af37dd5"
+    },
+    {
+      "check": "HOLDOUT analysis hash",
+      "passed": true,
+      "detail": "e9ce4a566e1ac6eb1631564fac9c770a9375736600f5691427724aa688363423"
+    },
+    {
+      "check": "HOLDOUT interval count",
+      "passed": true,
+      "detail": "saved=5 summary=5"
+    },
+    {
+      "check": "HOLDOUT prediction row count",
+      "passed": true,
+      "detail": "saved=0 summary=0"
+    },
+    {
+      "check": "HOLDOUT independent crossing interval count",
+      "passed": true,
+      "detail": "independent=5 saved=5"
+    },
+    {
+      "check": "HOLDOUT interval present EMU00070254|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070254', 'RF on', 0)"
+    },
+    {
+      "check": "HOLDOUT start time EMU00070254|RF on|0",
+      "passed": true,
+      "detail": "2.466270170626602"
+    },
+    {
+      "check": "HOLDOUT end time EMU00070254|RF on|0",
+      "passed": true,
+      "detail": "2.4818146168010253"
+    },
+    {
+      "check": "HOLDOUT direction EMU00070254|RF on|0",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "HOLDOUT interval present EMU00070266|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070266', 'RF on', 0)"
+    },
+    {
+      "check": "HOLDOUT start time EMU00070266|RF on|0",
+      "passed": true,
+      "detail": "2.465027359349108"
+    },
+    {
+      "check": "HOLDOUT end time EMU00070266|RF on|0",
+      "passed": true,
+      "detail": "2.4907957859192504"
+    },
+    {
+      "check": "HOLDOUT direction EMU00070266|RF on|0",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "HOLDOUT interval present EMU00070290|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070290', 'RF on', 0)"
+    },
+    {
+      "check": "HOLDOUT start time EMU00070290|RF on|0",
+      "passed": true,
+      "detail": "2.313528158443543"
+    },
+    {
+      "check": "HOLDOUT end time EMU00070290|RF on|0",
+      "passed": true,
+      "detail": "2.404826445642931"
+    },
+    {
+      "check": "HOLDOUT direction EMU00070290|RF on|0",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "HOLDOUT interval present EMU00070299|RF on|0",
+      "passed": true,
+      "detail": "('EMU00070299', 'RF on', 0)"
+    },
+    {
+      "check": "HOLDOUT start time EMU00070299|RF on|0",
+      "passed": true,
+      "detail": "2.3118644201114162"
+    },
+    {
+      "check": "HOLDOUT end time EMU00070299|RF on|0",
+      "passed": true,
+      "detail": "2.4098664027013523"
+    },
+    {
+      "check": "HOLDOUT direction EMU00070299|RF on|0",
+      "passed": true,
+      "detail": "R_to_U->U_to_R"
+    },
+    {
+      "check": "HOLDOUT interval present EMU00070299|RF on|1",
+      "passed": true,
+      "detail": "('EMU00070299', 'RF on', 1)"
+    },
+    {
+      "check": "HOLDOUT start time EMU00070299|RF on|1",
+      "passed": true,
+      "detail": "2.4098664027013523"
+    },
+    {
+      "check": "HOLDOUT end time EMU00070299|RF on|1",
+      "passed": true,
+      "detail": "2.411633960172562"
+    },
+    {
+      "check": "HOLDOUT direction EMU00070299|RF on|1",
+      "passed": true,
+      "detail": "U_to_R->R_to_U"
+    },
+    {
+      "check": "development model training rows",
+      "passed": true,
+      "detail": "all frozen models use four rows"
+    }
+  ]
+}

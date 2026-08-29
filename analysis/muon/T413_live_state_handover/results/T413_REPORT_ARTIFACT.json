@@ -1,0 +1,1555 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T413 \u2014 Live-state muonium handover",
+    "description": "Frozen causal test of an RF-on/RF-off ARA relation in a coupled muon\u2013electron spin system.",
+    "generatedAt": "2026-08-19T06:39:28.514744+00:00",
+    "sources": [
+      {
+        "id": "isis-rb1620447",
+        "label": "ISIS RB1620447 public RF-\u00b5SR dataset",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "ISIS DataGateway",
+          "url": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+          "description": "Public EMU Nexus runs from the RF-\u00b5SR acetone experiment.",
+          "filters": [
+            "300 K development and validation fields: 50\u2013500 G",
+            "202 K untouched holdout fields: 1800\u20132496 G",
+            "46 runs selected by frozen field and chronology rules"
+          ],
+          "tables_used": [
+            "ISIS investigation RB1620447 / raw Nexus dataset"
+          ]
+        }
+      },
+      {
+        "id": "t413-frozen-analysis",
+        "label": "T413 frozen causal analysis",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "Python 3.12",
+          "query": "python t413_live_state_handover.py --splits development,validation,holdout --suffix FULL",
+          "description": "Frozen RF-on/RF-off ARA relation, causal temporal state predictor, comparator scoring, and field bootstrap.",
+          "language": "shell",
+          "filters": [
+            "Corrected time 0.25\u20136.0 microseconds",
+            "Development before 2.5 microseconds",
+            "Future at or after 2.5 microseconds",
+            "Eight-bin rebinning"
+          ],
+          "metric_definitions": [
+            "ARA x = 2 R_on / (R_on + R_off)",
+            "Primary RMSE is count-weighted future error in the first causal spatial relation mode",
+            "Relational gate requires the full model to beat persistence, AR(1), no-cross-coupling, and broken-order controls"
+          ],
+          "tables_used": [
+            "T413_SOURCE_MANIFEST.csv",
+            "T413_FULL_RUN_METRICS.csv",
+            "T413_FULL_PREDICTIONS.csv",
+            "T413_FULL_RESULTS.json"
+          ]
+        }
+      },
+      {
+        "id": "t413-headline-sql",
+        "label": "T413 headline metrics",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"headline\";",
+          "description": "Frozen aggregate holdout metrics.",
+          "tables_used": [
+            "T413_REPORT_DATA.sqlite::headline"
+          ]
+        }
+      },
+      {
+        "id": "t413-model-medians-sql",
+        "label": "T413 model medians",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"model_medians\";",
+          "description": "Median future RMSE by model and split.",
+          "tables_used": [
+            "T413_REPORT_DATA.sqlite::model_medians"
+          ]
+        }
+      },
+      {
+        "id": "t413-holdout-fields-sql",
+        "label": "T413 holdout field detail",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"holdout_fields\";",
+          "description": "Per-run untouched holdout metrics.",
+          "tables_used": [
+            "T413_REPORT_DATA.sqlite::holdout_fields"
+          ]
+        }
+      },
+      {
+        "id": "t413-example-trajectory-sql",
+        "label": "T413 example trajectory",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"example_trajectory\";",
+          "description": "Observed and causally forecast first-mode trajectory at the fixed 2160 G example field.",
+          "tables_used": [
+            "T413_REPORT_DATA.sqlite::example_trajectory"
+          ]
+        }
+      },
+      {
+        "id": "t413-gates-sql",
+        "label": "T413 frozen gates",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"gates\";",
+          "description": "Predeclared interpretation gates and evidence.",
+          "tables_used": [
+            "T413_REPORT_DATA.sqlite::gates"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "holdout-card",
+        "description": "Untouched 202 K high-field branch runs.",
+        "dataset": "headline",
+        "sourceId": "t413-headline-sql",
+        "metrics": [
+          {
+            "label": "Holdout runs",
+            "field": "holdout_runs",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "ara-rmse-card",
+        "description": "Lower is better; count-weighted future error.",
+        "dataset": "headline",
+        "sourceId": "t413-headline-sql",
+        "metrics": [
+          {
+            "label": "Full Di-ARA RMSE",
+            "field": "ara_rmse",
+            "format": "number"
+          },
+          {
+            "label": "Gap vs AR(1)",
+            "field": "relative_gap_vs_ar1",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "harmonic-card",
+        "description": "Advantage over the frozen damped-harmonic comparator.",
+        "dataset": "headline",
+        "sourceId": "t413-headline-sql",
+        "metrics": [
+          {
+            "label": "Gain vs harmonic",
+            "field": "relative_gain_vs_harmonic",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "model-rmse-chart",
+        "title": "Median future error by model and split",
+        "subtitle": "Count-weighted A-mode RMSE; lower is better",
+        "showDescription": true,
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "model_medians",
+        "sourceId": "t413-model-medians-sql",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Predictor"
+          },
+          "y": {
+            "field": "rmse",
+            "type": "quantitative",
+            "label": "Future RMSE"
+          },
+          "color": {
+            "field": "split",
+            "type": "nominal",
+            "label": "Data split"
+          },
+          "tooltip": [
+            {
+              "field": "split",
+              "type": "nominal"
+            },
+            {
+              "field": "model",
+              "type": "nominal"
+            },
+            {
+              "field": "rmse",
+              "type": "quantitative"
+            },
+            {
+              "field": "run_count",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Predictor",
+        "yAxisTitle": "Future relation RMSE",
+        "layout": "full"
+      },
+      {
+        "id": "field-advantage-chart",
+        "title": "Full Di-ARA advantage over one-coordinate AR(1)",
+        "subtitle": "Untouched 202 K runs; positive values favour the full two-coordinate model",
+        "showDescription": true,
+        "type": "scatter",
+        "intent": "relationship",
+        "dataset": "holdout_fields",
+        "sourceId": "t413-holdout-fields-sql",
+        "encodings": {
+          "x": {
+            "field": "field_G",
+            "type": "quantitative",
+            "label": "Applied field",
+            "unit": "G"
+          },
+          "y": {
+            "field": "ara_advantage_vs_ar1",
+            "type": "quantitative",
+            "label": "AR(1) RMSE \u2212 Di-ARA RMSE"
+          },
+          "size": {
+            "field": "mode_variance_fraction",
+            "type": "quantitative",
+            "label": "First-mode variance share"
+          },
+          "tooltip": [
+            {
+              "field": "field_G",
+              "type": "quantitative",
+              "unit": "G"
+            },
+            {
+              "field": "ara_rmse",
+              "type": "quantitative"
+            },
+            {
+              "field": "ar1_rmse",
+              "type": "quantitative"
+            },
+            {
+              "field": "mode_variance_fraction",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Applied field (G)",
+        "yAxisTitle": "Positive favours full Di-ARA",
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "equal performance",
+            "lineStyle": "dashed"
+          }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "example-trajectory-chart",
+        "title": "Example causal forecast at 2160 G",
+        "subtitle": "Observed relation mode and predictions after the frozen 2.5 \u00b5s boundary",
+        "showDescription": true,
+        "type": "line",
+        "intent": "trend",
+        "dataset": "example_trajectory",
+        "sourceId": "t413-example-trajectory-sql",
+        "encodings": {
+          "x": {
+            "field": "time_us",
+            "type": "quantitative",
+            "label": "Corrected time",
+            "unit": "us"
+          },
+          "y": {
+            "fields": [
+              "observed_A",
+              "ara_prediction",
+              "ar1_prediction",
+              "harmonic_prediction"
+            ],
+            "type": "quantitative",
+            "label": "Centered live ARA relation mode A(t)"
+          },
+          "tooltip": [
+            {
+              "field": "time_us",
+              "type": "quantitative",
+              "unit": "us"
+            },
+            {
+              "field": "observed_A",
+              "type": "quantitative"
+            },
+            {
+              "field": "ara_prediction",
+              "type": "quantitative"
+            },
+            {
+              "field": "ar1_prediction",
+              "type": "quantitative"
+            },
+            {
+              "field": "harmonic_prediction",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Corrected time (\u00b5s)",
+        "yAxisTitle": "Centered live ARA relation mode A(t)",
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 2.5,
+            "label": "forecast begins",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "equal-rate ridge",
+            "lineStyle": "dotted"
+          }
+        ],
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate-table",
+        "title": "Frozen interpretation gates",
+        "subtitle": "The primary relational gate controls the overall verdict",
+        "showDescription": true,
+        "dataset": "gates",
+        "sourceId": "t413-gates-sql",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Verdict",
+            "type": "text"
+          },
+          {
+            "field": "evidence",
+            "label": "Evidence",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "field-table",
+        "title": "Untouched holdout detail",
+        "subtitle": "Twenty 202 K high-field runs, ordered by applied field",
+        "showDescription": true,
+        "dataset": "holdout_fields",
+        "sourceId": "t413-holdout-fields-sql",
+        "defaultSort": {
+          "field": "field_G",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "field_G",
+            "label": "Field (G)",
+            "format": "number"
+          },
+          {
+            "field": "ara_rmse",
+            "label": "Di-ARA RMSE",
+            "format": "number"
+          },
+          {
+            "field": "ar1_rmse",
+            "label": "AR(1) RMSE",
+            "format": "number"
+          },
+          {
+            "field": "ara_advantage_vs_ar1",
+            "label": "Advantage vs AR(1)",
+            "format": "number",
+            "movement": true
+          },
+          {
+            "field": "mode_variance_fraction",
+            "label": "First-mode share",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T413 \u2014 Live-state muonium handover"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "t413-frozen-analysis",
+        "body": "## Technical summary\n\n**The frozen temporal Di-ARA predictor is not supported in this operationalisation.** On 20 untouched 202 K runs, its median future RMSE was **0.04684**, compared with **0.04646** for the simpler one-coordinate AR(1). The bootstrap interval for the full model's improvement over the best simple comparator crossed zero.\n\nThe negative result is narrow rather than empty. The direct RF-on/RF-off ARA cut carried forecastable state: both causal state models beat persistence, and the full model beat the frozen damped-harmonic comparator by **18.6%**. What failed was the stronger claim that the causal perpendicular change coordinate added reliable information beyond the scalar live relation."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "holdout-card",
+          "ara-rmse-card",
+          "harmonic-card"
+        ]
+      },
+      {
+        "id": "finding-models",
+        "type": "markdown",
+        "sourceId": "t413-frozen-analysis",
+        "body": "## The second temporal cut did not improve the simplest state model\n\nThe ranking was stable enough to interpret: persistence was clearly worst, while AR(1), the diagonal two-state model, and full Di-ARA clustered tightly. Full cross-coupling lost to AR(1) on 13 of 20 holdout runs. That is the exact comparison the primary gate was designed to make."
+      },
+      {
+        "id": "model-chart",
+        "type": "chart",
+        "chartId": "model-rmse-chart",
+        "layout": "full"
+      },
+      {
+        "id": "model-chart-note",
+        "type": "markdown",
+        "body": "The bars compare the same future window and denominator for every model. The full relation model does useful smoothing relative to persistence and the harmonic fit, but the direct live coordinate with one-step memory is enough to match or slightly exceed it."
+      },
+      {
+        "id": "finding-fields",
+        "type": "markdown",
+        "sourceId": "t413-frozen-analysis",
+        "body": "## The field-by-field result is mixed\n\nThe full model beats AR(1) at 7 of 20 fields. Wins and losses alternate across the scan rather than forming one decisive region. The median first relation mode contains only about **12.1%** of development-window variance, so a weak first mode and count noise are material limitations."
+      },
+      {
+        "id": "field-chart",
+        "type": "chart",
+        "chartId": "field-advantage-chart",
+        "layout": "full"
+      },
+      {
+        "id": "field-chart-note",
+        "type": "markdown",
+        "body": "Points above zero favour the full temporal Di-ARA; points below zero favour scalar AR(1). Point size shows how much development variance the first spatial relation mode retained. There is no visual basis here for rescuing the failed aggregate gate with a selected field."
+      },
+      {
+        "id": "trajectory-heading",
+        "type": "markdown",
+        "body": "## The causal boundary is visible in the waveform\n\nThe example below was fixed at the central selected holdout field, not chosen for good model performance. Every fit stops at 2.5 \u00b5s; only the observed line continues from measured data."
+      },
+      {
+        "id": "trajectory-chart",
+        "type": "chart",
+        "chartId": "example-trajectory-chart",
+        "layout": "full"
+      },
+      {
+        "id": "trajectory-note",
+        "type": "markdown",
+        "body": "The forecast models mainly capture relaxation toward the equal-rate ridge. The full model's extra path coordinate changes the forecast slightly, but not enough to improve the population score reliably."
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "isis-rb1620447",
+        "body": "## Scope and measurement\n\nEach public Nexus run records 96 matched detector histories under independently switched RF-on and RF-off conditions. The direct ARA coordinate is `x = 2 R_on / (R_on + R_off)`, with `x = 1` the equal recorded-rate ridge. The first causal spatial relation mode is `A(t)`; its strictly backward first difference is the proposed perpendicular traversal coordinate `B(t)`. Development used 0.25\u20132.5 \u00b5s and scoring used 2.5\u20136.0 \u00b5s. The holdout changed both temperature and hyperfine branch."
+      },
+      {
+        "id": "methods",
+        "type": "markdown",
+        "sourceId": "t413-frozen-analysis",
+        "body": "## Frozen design and validation\n\nRuns were selected by temperature, field, and chronology before response inspection. Thirteen 300 K development runs and 13 interleaved validation runs preceded 20 untouched 202 K high-field holdouts. The protocol and implementation were hashed before holdout execution. A separate validator exactly recomputed all saved primary RMSE values and confirmed that no holdout split appeared in the pre-holdout result file."
+      },
+      {
+        "id": "gate-table-block",
+        "type": "table",
+        "tableId": "gate-table",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## What remains uncertain\n\nThis is an ensemble-state test, not an individual-muon or neutrino-timing test. RF-on/RF-off is a clean observed relation, but the perpendicular temporal cut is derived from its causal change rather than from an independently detected electron-spin channel. The leading mode is weak, and the harmonic comparator is not the strongest baseline in these short, noisy development windows. Accordingly, beating that harmonic fit does not outweigh the primary failure against AR(1)."
+      },
+      {
+        "id": "next-steps",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nKeep the direct paired-state ARA cut, but replace the derived path coordinate with a genuinely independent second observable\u2014such as a separately measured spin quadrature or electron-sensitive channel. Freeze that channel before forecasting. This directly tests whether Di-ARA adds information rather than asking a noisy derivative of the first axis to do so."
+      },
+      {
+        "id": "details-heading",
+        "type": "markdown",
+        "body": "## Holdout audit detail\n\nThe table preserves every untouched field result rather than showing only favorable examples."
+      },
+      {
+        "id": "field-table-block",
+        "type": "table",
+        "tableId": "field-table",
+        "layout": "full"
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does an independently measured second spin component turn the narrow orientation advantage into a stable relational gain?\n\n- Is the first-mode weakness specific to this sparse RF field subsample or intrinsic to the chosen ensemble cut?\n\n- Does the direct scalar ARA coordinate retain its AR(1) advantage under a wholly different muonium sample and instrument?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-19T06:39:28.514744+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "holdout_runs": 20,
+          "ara_rmse": 0.04684215,
+          "best_simple_rmse": 0.04645714,
+          "relative_gap_vs_ar1": -0.0082874,
+          "relative_gain_vs_harmonic": 0.18435936,
+          "relative_gain_vs_persistence": 0.37353738,
+          "orientation_win_share": 0.6,
+          "median_first_mode_share": 0.12108537
+        }
+      ],
+      "model_medians": [
+        {
+          "split": "Development",
+          "model": "Full temporal Di-ARA",
+          "rmse": 0.03252213,
+          "delta_vs_ara": 0.0,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "Persistence",
+          "rmse": 0.04483527,
+          "delta_vs_ara": 0.01231313,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "One-coordinate AR(1)",
+          "rmse": 0.0280428,
+          "delta_vs_ara": -0.00447933,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "No cross-coupling",
+          "rmse": 0.02787501,
+          "delta_vs_ara": -0.00464712,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "Damped harmonic",
+          "rmse": 0.04010762,
+          "delta_vs_ara": 0.00758549,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "Wrong orientation",
+          "rmse": 0.03270907,
+          "delta_vs_ara": 0.00018694,
+          "run_count": 13
+        },
+        {
+          "split": "Development",
+          "model": "Broken time order",
+          "rmse": 0.02861309,
+          "delta_vs_ara": -0.00390905,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "Full temporal Di-ARA",
+          "rmse": 0.03044851,
+          "delta_vs_ara": 0.0,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "Persistence",
+          "rmse": 0.05154847,
+          "delta_vs_ara": 0.02109996,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "One-coordinate AR(1)",
+          "rmse": 0.0280162,
+          "delta_vs_ara": -0.0024323,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "No cross-coupling",
+          "rmse": 0.02851336,
+          "delta_vs_ara": -0.00193515,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "Damped harmonic",
+          "rmse": 0.04048589,
+          "delta_vs_ara": 0.01003738,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "Wrong orientation",
+          "rmse": 0.029603,
+          "delta_vs_ara": -0.00084551,
+          "run_count": 13
+        },
+        {
+          "split": "Validation",
+          "model": "Broken time order",
+          "rmse": 0.0286162,
+          "delta_vs_ara": -0.00183231,
+          "run_count": 13
+        },
+        {
+          "split": "Holdout",
+          "model": "Full temporal Di-ARA",
+          "rmse": 0.04684215,
+          "delta_vs_ara": 0.0,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "Persistence",
+          "rmse": 0.07477246,
+          "delta_vs_ara": 0.02793031,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "One-coordinate AR(1)",
+          "rmse": 0.04645714,
+          "delta_vs_ara": -0.00038501,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "No cross-coupling",
+          "rmse": 0.04664674,
+          "delta_vs_ara": -0.00019541,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "Damped harmonic",
+          "rmse": 0.05742989,
+          "delta_vs_ara": 0.01058774,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "Wrong orientation",
+          "rmse": 0.04686611,
+          "delta_vs_ara": 2.396e-05,
+          "run_count": 20
+        },
+        {
+          "split": "Holdout",
+          "model": "Broken time order",
+          "rmse": 0.04801914,
+          "delta_vs_ara": 0.00117699,
+          "run_count": 20
+        }
+      ],
+      "holdout_fields": [
+        {
+          "field_G": 1800.0,
+          "ara_rmse": 0.05500246,
+          "ar1_rmse": 0.05306695,
+          "diagonal_rmse": 0.05499268,
+          "harmonic_rmse": 0.06981482,
+          "ara_advantage_vs_ar1": -0.00193551,
+          "ara_advantage_vs_diagonal": -9.78e-06,
+          "mode_variance_fraction": 0.13261108,
+          "future_correlation_ara": 0.03821023
+        },
+        {
+          "field_G": 1836.0,
+          "ara_rmse": 0.05030907,
+          "ar1_rmse": 0.04907386,
+          "diagonal_rmse": 0.04925382,
+          "harmonic_rmse": 0.05632809,
+          "ara_advantage_vs_ar1": -0.0012352,
+          "ara_advantage_vs_diagonal": -0.00105524,
+          "mode_variance_fraction": 0.1349561,
+          "future_correlation_ara": -0.15367811
+        },
+        {
+          "field_G": 1872.0,
+          "ara_rmse": 0.03447505,
+          "ar1_rmse": 0.03384546,
+          "diagonal_rmse": 0.03414044,
+          "harmonic_rmse": 0.05085517,
+          "ara_advantage_vs_ar1": -0.00062959,
+          "ara_advantage_vs_diagonal": -0.00033461,
+          "mode_variance_fraction": 0.11102836,
+          "future_correlation_ara": -0.13562107
+        },
+        {
+          "field_G": 1908.0,
+          "ara_rmse": 0.04843282,
+          "ar1_rmse": 0.04641074,
+          "diagonal_rmse": 0.04815688,
+          "harmonic_rmse": 0.06629838,
+          "ara_advantage_vs_ar1": -0.00202208,
+          "ara_advantage_vs_diagonal": -0.00027594,
+          "mode_variance_fraction": 0.10706075,
+          "future_correlation_ara": 0.18077241
+        },
+        {
+          "field_G": 1944.0,
+          "ara_rmse": 0.04249133,
+          "ar1_rmse": 0.04382078,
+          "diagonal_rmse": 0.04269701,
+          "harmonic_rmse": 0.06780093,
+          "ara_advantage_vs_ar1": 0.00132945,
+          "ara_advantage_vs_diagonal": 0.00020568,
+          "mode_variance_fraction": 0.11479428,
+          "future_correlation_ara": 0.22933814
+        },
+        {
+          "field_G": 1980.0,
+          "ara_rmse": 0.03518531,
+          "ar1_rmse": 0.03454137,
+          "diagonal_rmse": 0.03625439,
+          "harmonic_rmse": 0.04652202,
+          "ara_advantage_vs_ar1": -0.00064394,
+          "ara_advantage_vs_diagonal": 0.00106908,
+          "mode_variance_fraction": 0.12019175,
+          "future_correlation_ara": 0.1205739
+        },
+        {
+          "field_G": 2016.0,
+          "ara_rmse": 0.04654568,
+          "ar1_rmse": 0.04492077,
+          "diagonal_rmse": 0.04666481,
+          "harmonic_rmse": 0.05081083,
+          "ara_advantage_vs_ar1": -0.0016249,
+          "ara_advantage_vs_diagonal": 0.00011913,
+          "mode_variance_fraction": 0.13183709,
+          "future_correlation_ara": -0.18762347
+        },
+        {
+          "field_G": 2052.0,
+          "ara_rmse": 0.04801925,
+          "ar1_rmse": 0.04956307,
+          "diagonal_rmse": 0.04930093,
+          "harmonic_rmse": 0.07364662,
+          "ara_advantage_vs_ar1": 0.00154381,
+          "ara_advantage_vs_diagonal": 0.00128168,
+          "mode_variance_fraction": 0.12037545,
+          "future_correlation_ara": 0.10622107
+        },
+        {
+          "field_G": 2088.0,
+          "ara_rmse": 0.04428265,
+          "ar1_rmse": 0.04402324,
+          "diagonal_rmse": 0.04425689,
+          "harmonic_rmse": 0.06330432,
+          "ara_advantage_vs_ar1": -0.00025941,
+          "ara_advantage_vs_diagonal": -2.576e-05,
+          "mode_variance_fraction": 0.1134872,
+          "future_correlation_ara": 0.04775361
+        },
+        {
+          "field_G": 2124.0,
+          "ara_rmse": 0.0466294,
+          "ar1_rmse": 0.04660409,
+          "diagonal_rmse": 0.04662645,
+          "harmonic_rmse": 0.06665105,
+          "ara_advantage_vs_ar1": -2.531e-05,
+          "ara_advantage_vs_diagonal": -2.95e-06,
+          "mode_variance_fraction": 0.12142854,
+          "future_correlation_ara": 0.15539072
+        },
+        {
+          "field_G": 2160.0,
+          "ara_rmse": 0.04862695,
+          "ar1_rmse": 0.0526991,
+          "diagonal_rmse": 0.05210615,
+          "harmonic_rmse": 0.05867221,
+          "ara_advantage_vs_ar1": 0.00407215,
+          "ara_advantage_vs_diagonal": 0.0034792,
+          "mode_variance_fraction": 0.12428541,
+          "future_correlation_ara": 0.11451011
+        },
+        {
+          "field_G": 2196.0,
+          "ara_rmse": 0.07293892,
+          "ar1_rmse": 0.06074723,
+          "diagonal_rmse": 0.06258493,
+          "harmonic_rmse": 0.07369747,
+          "ara_advantage_vs_ar1": -0.01219169,
+          "ara_advantage_vs_diagonal": -0.01035399,
+          "mode_variance_fraction": 0.13509737,
+          "future_correlation_ara": -0.22833724
+        },
+        {
+          "field_G": 2232.0,
+          "ara_rmse": 0.05252485,
+          "ar1_rmse": 0.0554832,
+          "diagonal_rmse": 0.05649203,
+          "harmonic_rmse": 0.05346273,
+          "ara_advantage_vs_ar1": 0.00295835,
+          "ara_advantage_vs_diagonal": 0.00396718,
+          "mode_variance_fraction": 0.1207422,
+          "future_correlation_ara": 0.29789325
+        },
+        {
+          "field_G": 2268.0,
+          "ara_rmse": 0.0424231,
+          "ar1_rmse": 0.04294754,
+          "diagonal_rmse": 0.04253354,
+          "harmonic_rmse": 0.0501632,
+          "ara_advantage_vs_ar1": 0.00052444,
+          "ara_advantage_vs_diagonal": 0.00011044,
+          "mode_variance_fraction": 0.12258387,
+          "future_correlation_ara": -0.10747418
+        },
+        {
+          "field_G": 2304.0,
+          "ara_rmse": 0.04335473,
+          "ar1_rmse": 0.04260165,
+          "diagonal_rmse": 0.04306715,
+          "harmonic_rmse": 0.0529473,
+          "ara_advantage_vs_ar1": -0.00075308,
+          "ara_advantage_vs_diagonal": -0.00028759,
+          "mode_variance_fraction": 0.10762453,
+          "future_correlation_ara": -0.17832234
+        },
+        {
+          "field_G": 2340.0,
+          "ara_rmse": 0.04199161,
+          "ar1_rmse": 0.04199248,
+          "diagonal_rmse": 0.04184074,
+          "harmonic_rmse": 0.06034646,
+          "ara_advantage_vs_ar1": 8.7e-07,
+          "ara_advantage_vs_diagonal": -0.00015087,
+          "mode_variance_fraction": 0.12681106,
+          "future_correlation_ara": -0.00619116
+        },
+        {
+          "field_G": 2376.0,
+          "ara_rmse": 0.04853349,
+          "ar1_rmse": 0.04902853,
+          "diagonal_rmse": 0.04881133,
+          "harmonic_rmse": 0.0494289,
+          "ara_advantage_vs_ar1": 0.00049503,
+          "ara_advantage_vs_diagonal": 0.00027784,
+          "mode_variance_fraction": 0.12898941,
+          "future_correlation_ara": 0.23981296
+        },
+        {
+          "field_G": 2412.0,
+          "ara_rmse": 0.0470549,
+          "ar1_rmse": 0.04650354,
+          "diagonal_rmse": 0.04662867,
+          "harmonic_rmse": 0.05116703,
+          "ara_advantage_vs_ar1": -0.00055135,
+          "ara_advantage_vs_diagonal": -0.00042623,
+          "mode_variance_fraction": 0.10917541,
+          "future_correlation_ara": 0.34026708
+        },
+        {
+          "field_G": 2448.0,
+          "ara_rmse": 0.04732626,
+          "ar1_rmse": 0.0469543,
+          "diagonal_rmse": 0.04749334,
+          "harmonic_rmse": 0.05065808,
+          "ara_advantage_vs_ar1": -0.00037196,
+          "ara_advantage_vs_diagonal": 0.00016708,
+          "mode_variance_fraction": 0.12982786,
+          "future_correlation_ara": -0.07362691
+        },
+        {
+          "field_G": 2484.0,
+          "ara_rmse": 0.04193219,
+          "ar1_rmse": 0.0419044,
+          "diagonal_rmse": 0.04155553,
+          "harmonic_rmse": 0.05853168,
+          "ara_advantage_vs_ar1": -2.78e-05,
+          "ara_advantage_vs_diagonal": -0.00037667,
+          "mode_variance_fraction": 0.11848252,
+          "future_correlation_ara": -0.06028466
+        }
+      ],
+      "example_trajectory": [
+        {
+          "time_us": 0.307,
+          "window": "Development",
+          "observed_A": 0.070231,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 0.435,
+          "window": "Development",
+          "observed_A": -0.05074017,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 0.563,
+          "window": "Development",
+          "observed_A": -0.01885202,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 0.691,
+          "window": "Development",
+          "observed_A": -0.08384172,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 0.819,
+          "window": "Development",
+          "observed_A": -0.07096638,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 0.947,
+          "window": "Development",
+          "observed_A": 0.07260383,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.075,
+          "window": "Development",
+          "observed_A": 0.0636284,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.203,
+          "window": "Development",
+          "observed_A": -0.03728109,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.331,
+          "window": "Development",
+          "observed_A": -0.03401847,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.459,
+          "window": "Development",
+          "observed_A": 0.08535611,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.587,
+          "window": "Development",
+          "observed_A": 0.00620847,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.715,
+          "window": "Development",
+          "observed_A": -0.02844374,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.843,
+          "window": "Development",
+          "observed_A": 0.02221035,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 1.971,
+          "window": "Development",
+          "observed_A": 0.09703666,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.099,
+          "window": "Development",
+          "observed_A": 0.03061761,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.227,
+          "window": "Development",
+          "observed_A": -0.03828322,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.355,
+          "window": "Development",
+          "observed_A": 0.10175605,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.483,
+          "window": "Development",
+          "observed_A": -0.17606268,
+          "ara_prediction": null,
+          "ar1_prediction": null,
+          "diagonal_prediction": null,
+          "harmonic_prediction": null,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.611,
+          "window": "Untouched future",
+          "observed_A": -0.0350995,
+          "ara_prediction": 0.02143731,
+          "ar1_prediction": 0.04937684,
+          "diagonal_prediction": 0.04508345,
+          "harmonic_prediction": -0.01585798,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.739,
+          "window": "Untouched future",
+          "observed_A": 0.04116946,
+          "ara_prediction": 0.04112641,
+          "ar1_prediction": -0.01431317,
+          "diagonal_prediction": -0.0099143,
+          "harmonic_prediction": 0.05233782,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.867,
+          "window": "Untouched future",
+          "observed_A": 0.01715219,
+          "ara_prediction": -0.01300816,
+          "ar1_prediction": 0.00368021,
+          "diagonal_prediction": 0.00376332,
+          "harmonic_prediction": -0.01481218,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 2.995,
+          "window": "Untouched future",
+          "observed_A": -0.01542772,
+          "ara_prediction": -0.00434029,
+          "ar1_prediction": -0.00140319,
+          "diagonal_prediction": 0.00036178,
+          "harmonic_prediction": -0.03856503,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.123,
+          "window": "Untouched future",
+          "observed_A": -0.00339143,
+          "ara_prediction": 0.00697169,
+          "ar1_prediction": 3.295e-05,
+          "diagonal_prediction": 0.00120772,
+          "harmonic_prediction": 0.04430569,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.251,
+          "window": "Untouched future",
+          "observed_A": -0.01053278,
+          "ara_prediction": 0.00197637,
+          "ar1_prediction": -0.00037278,
+          "diagonal_prediction": 0.00099734,
+          "harmonic_prediction": 0.01321091,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.379,
+          "window": "Untouched future",
+          "observed_A": -0.00143768,
+          "ara_prediction": 0.00041092,
+          "ar1_prediction": -0.00025816,
+          "diagonal_prediction": 0.00104966,
+          "harmonic_prediction": -0.04907985,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.507,
+          "window": "Untouched future",
+          "observed_A": -0.06629407,
+          "ara_prediction": 0.00204776,
+          "ar1_prediction": -0.00029054,
+          "diagonal_prediction": 0.00103665,
+          "harmonic_prediction": 0.0232418,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.635,
+          "window": "Untouched future",
+          "observed_A": -0.00736185,
+          "ara_prediction": 0.00202734,
+          "ar1_prediction": -0.00028139,
+          "diagonal_prediction": 0.00103988,
+          "harmonic_prediction": 0.03766679,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.763,
+          "window": "Untouched future",
+          "observed_A": -0.03577992,
+          "ara_prediction": 0.00162471,
+          "ar1_prediction": -0.00028398,
+          "diagonal_prediction": 0.00103908,
+          "harmonic_prediction": -0.04420197,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 3.891,
+          "window": "Untouched future",
+          "observed_A": -0.01369761,
+          "ara_prediction": 0.00173075,
+          "ar1_prediction": -0.00028325,
+          "diagonal_prediction": 0.00103928,
+          "harmonic_prediction": -0.00444253,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.019,
+          "window": "Untouched future",
+          "observed_A": -0.08173114,
+          "ara_prediction": 0.00180446,
+          "ar1_prediction": -0.00028345,
+          "diagonal_prediction": 0.00103923,
+          "harmonic_prediction": 0.05111171,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.147,
+          "window": "Untouched future",
+          "observed_A": 0.04078097,
+          "ara_prediction": 0.00175956,
+          "ar1_prediction": -0.0002834,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.02541578,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.275,
+          "window": "Untouched future",
+          "observed_A": 0.00677813,
+          "ara_prediction": 0.00175246,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.030321,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.403,
+          "window": "Untouched future",
+          "observed_A": 0.1034798,
+          "ara_prediction": 0.00176542,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.04945303,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.531,
+          "window": "Untouched future",
+          "observed_A": -0.06276563,
+          "ara_prediction": 0.00176394,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.00156013,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.659,
+          "window": "Untouched future",
+          "observed_A": -0.00673925,
+          "ara_prediction": 0.00176108,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.04651617,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.787,
+          "window": "Untouched future",
+          "observed_A": -0.10382192,
+          "ara_prediction": 0.00176217,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.03319576,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 4.915,
+          "window": "Untouched future",
+          "observed_A": 0.08102063,
+          "ara_prediction": 0.00176261,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.02851508,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.043,
+          "window": "Untouched future",
+          "observed_A": 0.00422737,
+          "ara_prediction": 0.00176223,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.04809898,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.171,
+          "window": "Untouched future",
+          "observed_A": 0.02272939,
+          "ara_prediction": 0.00176221,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.00728838,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.299,
+          "window": "Untouched future",
+          "observed_A": -0.0772211,
+          "ara_prediction": 0.00176231,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.04724457,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.427,
+          "window": "Untouched future",
+          "observed_A": 0.06057321,
+          "ara_prediction": 0.00176229,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.0345876,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.555,
+          "window": "Untouched future",
+          "observed_A": 0.0986027,
+          "ara_prediction": 0.00176227,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.02038344,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.683,
+          "window": "Untouched future",
+          "observed_A": 0.05552854,
+          "ara_prediction": 0.00176228,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": 0.05204777,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.811,
+          "window": "Untouched future",
+          "observed_A": -0.0426745,
+          "ara_prediction": 0.00176228,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.01009476,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        },
+        {
+          "time_us": 5.939,
+          "window": "Untouched future",
+          "observed_A": -0.06539041,
+          "ara_prediction": 0.00176228,
+          "ar1_prediction": -0.00028341,
+          "diagonal_prediction": 0.00103924,
+          "harmonic_prediction": -0.04139725,
+          "field_G": 2160,
+          "run": "EMU00070275"
+        }
+      ],
+      "gates": [
+        {
+          "gate": "Relational predictive support",
+          "status": "NOT SUPPORTED",
+          "evidence": "Full model median RMSE 0.04684; AR(1) 0.04646; bootstrap interval versus best simple model crosses zero."
+        },
+        {
+          "gate": "Orientation support",
+          "status": "SUPPORTED",
+          "evidence": "Frozen orientation won on 60% of holdout runs and had a small positive median advantage."
+        },
+        {
+          "gate": "Added value beyond damped harmonic",
+          "status": "SUPPORTED IN ISOLATION",
+          "evidence": "Full model RMSE was 18.6% lower, but this does not override failure against the simpler AR(1) comparator."
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "isis-rb1620447",
+      "label": "ISIS RB1620447 public RF-\u00b5SR dataset",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "ISIS DataGateway",
+        "url": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "description": "Public EMU Nexus runs from the RF-\u00b5SR acetone experiment.",
+        "filters": [
+          "300 K development and validation fields: 50\u2013500 G",
+          "202 K untouched holdout fields: 1800\u20132496 G",
+          "46 runs selected by frozen field and chronology rules"
+        ],
+        "tables_used": [
+          "ISIS investigation RB1620447 / raw Nexus dataset"
+        ]
+      }
+    },
+    {
+      "id": "t413-frozen-analysis",
+      "label": "T413 frozen causal analysis",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "Python 3.12",
+        "query": "python t413_live_state_handover.py --splits development,validation,holdout --suffix FULL",
+        "description": "Frozen RF-on/RF-off ARA relation, causal temporal state predictor, comparator scoring, and field bootstrap.",
+        "language": "shell",
+        "filters": [
+          "Corrected time 0.25\u20136.0 microseconds",
+          "Development before 2.5 microseconds",
+          "Future at or after 2.5 microseconds",
+          "Eight-bin rebinning"
+        ],
+        "metric_definitions": [
+          "ARA x = 2 R_on / (R_on + R_off)",
+          "Primary RMSE is count-weighted future error in the first causal spatial relation mode",
+          "Relational gate requires the full model to beat persistence, AR(1), no-cross-coupling, and broken-order controls"
+        ],
+        "tables_used": [
+          "T413_SOURCE_MANIFEST.csv",
+          "T413_FULL_RUN_METRICS.csv",
+          "T413_FULL_PREDICTIONS.csv",
+          "T413_FULL_RESULTS.json"
+        ]
+      }
+    },
+    {
+      "id": "t413-headline-sql",
+      "label": "T413 headline metrics",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"headline\";",
+        "description": "Frozen aggregate holdout metrics.",
+        "tables_used": [
+          "T413_REPORT_DATA.sqlite::headline"
+        ]
+      }
+    },
+    {
+      "id": "t413-model-medians-sql",
+      "label": "T413 model medians",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"model_medians\";",
+        "description": "Median future RMSE by model and split.",
+        "tables_used": [
+          "T413_REPORT_DATA.sqlite::model_medians"
+        ]
+      }
+    },
+    {
+      "id": "t413-holdout-fields-sql",
+      "label": "T413 holdout field detail",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"holdout_fields\";",
+        "description": "Per-run untouched holdout metrics.",
+        "tables_used": [
+          "T413_REPORT_DATA.sqlite::holdout_fields"
+        ]
+      }
+    },
+    {
+      "id": "t413-example-trajectory-sql",
+      "label": "T413 example trajectory",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"example_trajectory\";",
+        "description": "Observed and causally forecast first-mode trajectory at the fixed 2160 G example field.",
+        "tables_used": [
+          "T413_REPORT_DATA.sqlite::example_trajectory"
+        ]
+      }
+    },
+    {
+      "id": "t413-gates-sql",
+      "label": "T413 frozen gates",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"gates\";",
+        "description": "Predeclared interpretation gates and evidence.",
+        "tables_used": [
+          "T413_REPORT_DATA.sqlite::gates"
+        ]
+      }
+    }
+  ]
+}

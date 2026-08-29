@@ -1,0 +1,87 @@
+{
+  "test": "T401",
+  "date": "2026-08-17",
+  "verdict": "NO STABLE MISSING-WINNER BAND",
+  "protocol_sha256": "0246a7bbc9c55f41e26cdd899f58e97918ae38769e279b8c081428c62e56410b",
+  "source": {
+    "identity": "COHERENT 2022 CsI delayed-child event distribution, with beam-coincident C and anti-coincident AC evaluated separately",
+    "beam_C_sha256": "b78333f0cc0c4182f913cecd91d55968e43a620683e9f51e0ceb1c1db596326f",
+    "beam_AC_sha256": "fba5c06334521531eda353771b5297b44a70566b0d755e23b174c716abec9468"
+  },
+  "coordinate": "T400 local child ARA 0-2 between calibration-only branch equality L and delayed-rate return R",
+  "splits": {
+    "requested": 200,
+    "valid": 164,
+    "invalid": 36,
+    "valid_fraction": 0.82,
+    "salts": [
+      400,
+      599
+    ],
+    "execution_note": "The frozen protocol requested 200 splits. Thirty-six calibration partitions did not form an ordered child window; distribution gates and the sampling null use the 164 valid transfers only."
+  },
+  "candidate_band": {
+    "range": [
+      1.25,
+      1.5
+    ],
+    "center": 1.375,
+    "mean_occupancy_C": 0.11861415469032918,
+    "mean_occupancy_AC": 0.13183440751565922,
+    "occupancy_ratio_to_C_neighbours": 0.9910564280790775,
+    "binned_mode_fraction_C": 0.07926829268292683,
+    "kde_mode_fraction_C": 0.10365853658536585,
+    "volatility_ratio_to_C_median": 1.0293362490660953,
+    "volatility_class": "intermediate"
+  },
+  "sampling_null": {
+    "pooled_effective_sample_size_rounded": 57,
+    "single_split_candidate_mode_probability": 0.075015,
+    "observed_candidate_winners": 13,
+    "observed_vs_null_two_sided_binomial_p": 0.767267610845773,
+    "experiments": 50000,
+    "valid_split_count_used": 164,
+    "simulated_probability_zero_candidate_winners": 0.0,
+    "exact_probability_zero_candidate_winners": 2.793117277587232e-06
+  },
+  "reflection": {
+    "C": {
+      "exchange_score": 0.04670128863761083,
+      "negative_pair_count": 2,
+      "reflection_rank_of_24": 13,
+      "pair_rhos": [
+        -0.1465292849763544,
+        0.009269108865098689,
+        0.0034687742304082268,
+        -0.05301375266959585
+      ]
+    },
+    "AC": {
+      "exchange_score": -0.05055465324571115,
+      "negative_pair_count": 1,
+      "reflection_rank_of_24": 2,
+      "pair_rhos": [
+        0.012008801194375638,
+        -0.11679878660528785,
+        0.15305048086732959,
+        0.15395811752642724
+      ]
+    }
+  },
+  "C_minus_AC_exchange_score": 0.09725594188332198,
+  "gates": {
+    "G1_occupied_but_nondominant": false,
+    "G2_continuous_missing_winner_persists": false,
+    "G3_beyond_sampling_argmax_null": false,
+    "G4_reflected_exchange": false,
+    "G5_C_exceeds_AC_control": false
+  },
+  "boundaries": [
+    "The candidate band was selected after inspecting T400 and is a registered follow-up, not an independent discovery interval.",
+    "Thirty-six of 200 calibration partitions did not form an ordered child window; all distribution calculations use the 164 valid transfers.",
+    "Overlapping deterministic splits test resampling stability and are not independent physical experiments.",
+    "CLR mirrored-pair correlations remove the trivial lower-half/upper-half sum constraint but do not establish causality.",
+    "The sampling-only null approximates weighted events by a multinomial effective sample size.",
+    "A statistical shadow cannot by itself label an individual event as a neutrino or hidden physical wave."
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "status": "frozen_posthoc_probability_diagnostic",
+  "definition": {
+    "phase_a": "T411D x_child_connection_ara",
+    "ridge_threshold": 0.9,
+    "phase_b_budget": "2 - phase_a",
+    "snapshot_stride_frames": 5,
+    "prediction_horizon": "one frozen child window"
+  },
+  "snapshots": {
+    "development": 3826,
+    "diagnostic": 6974,
+    "pooled": 10800,
+    "development_events": 41,
+    "diagnostic_events": 82
+  },
+  "primary": {
+    "development": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.09372842158644883,
+      "p_below": 0.015815567763836736,
+      "risk_difference": 0.0779128538226121,
+      "risk_ratio": 5.9263393503181465,
+      "event_count": 41,
+      "snapshot_count": 3826
+    },
+    "diagnostic": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.07044807964502355,
+      "p_below": 0.0910863058316322,
+      "risk_difference": -0.020638226186608655,
+      "risk_ratio": 0.7734211965434493,
+      "event_count": 82,
+      "snapshot_count": 6974
+    },
+    "pooled": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.07702373564037955,
+      "p_below": 0.04347130878154962,
+      "risk_difference": 0.033552426858829934,
+      "risk_ratio": 1.7718292317223834,
+      "event_count": 123,
+      "snapshot_count": 10800
+    }
+  },
+  "approaching_comparator": {
+    "development": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.11601626710303195,
+      "p_below": 0.039756386329428184,
+      "risk_difference": 0.07625988077360377,
+      "risk_ratio": 2.918179387374431,
+      "event_count": 41,
+      "snapshot_count": 1951
+    },
+    "diagnostic": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.07559279131526452,
+      "p_below": 0.049560361730338946,
+      "risk_difference": 0.02603242958492557,
+      "risk_ratio": 1.5252671424508493,
+      "event_count": 82,
+      "snapshot_count": 3420
+    },
+    "pooled": {
+      "threshold": 0.9,
+      "p_at_or_above": 0.08763295214986656,
+      "p_below": 0.042385245394307686,
+      "risk_difference": 0.04524770675555888,
+      "risk_ratio": 2.067534382179975,
+      "event_count": 123,
+      "snapshot_count": 5371
+    }
+  },
+  "calibration": {
+    "development_base_probability": 0.07224261498882938,
+    "diagnostic_brier": 0.06884814900955724,
+    "diagnostic_constant_brier": 0.06690238293094367,
+    "brier_improvement_fraction": -0.02908365880811729,
+    "diagnostic_auc": 0.4620971174175905
+  },
+  "circular_shift": {
+    "observed_risk_difference": 0.033552426858829934,
+    "reps": 1000,
+    "null_median": 0.016807989113985417,
+    "null_q95": 0.03625915749888966,
+    "p_ge_observed": 0.08691308691308691
+  },
+  "bootstrap_pooled_risk_difference": {
+    "reps": 1000,
+    "q025": 0.010212670404530475,
+    "median": 0.033322302936685366,
+    "q975": 0.05322225196891026
+  },
+  "by_fluid": {
+    "S1": {
+      "primary": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.09804134738601385,
+        "p_below": 0.009411571172757456,
+        "risk_difference": 0.08862977621325639,
+        "risk_ratio": 10.417107365643938,
+        "event_count": 34,
+        "snapshot_count": 773
+      },
+      "approaching_comparator": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.12580814811717342,
+        "p_below": 0.026087731892426438,
+        "risk_difference": 0.09972041622474698,
+        "risk_ratio": 4.822502340791725,
+        "event_count": 34,
+        "snapshot_count": 348
+      }
+    },
+    "S2": {
+      "primary": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.07245551202308438,
+        "p_below": 0.0801436462882847,
+        "risk_difference": -0.007688134265200319,
+        "risk_ratio": 0.904070570516029,
+        "event_count": 62,
+        "snapshot_count": 3319
+      },
+      "approaching_comparator": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.07927566295151971,
+        "p_below": 0.018671077329664398,
+        "risk_difference": 0.060604585621855306,
+        "risk_ratio": 4.2459072688627035,
+        "event_count": 62,
+        "snapshot_count": 1589
+      }
+    },
+    "S3": {
+      "primary": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.07925076818521404,
+        "p_below": 0.4017307546535913,
+        "risk_difference": -0.3224799864683773,
+        "risk_ratio": 0.1972733410802746,
+        "event_count": 7,
+        "snapshot_count": 3053
+      },
+      "approaching_comparator": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.08012126855701732,
+        "p_below": 0.4476920378572194,
+        "risk_difference": -0.36757076930020205,
+        "risk_ratio": 0.17896514072597838,
+        "event_count": 7,
+        "snapshot_count": 1603
+      }
+    },
+    "S4": {
+      "primary": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.06471673844857137,
+        "p_below": 0.24620435055430906,
+        "risk_difference": -0.1814876121057377,
+        "risk_ratio": 0.26285781832395283,
+        "event_count": 20,
+        "snapshot_count": 3655
+      },
+      "approaching_comparator": {
+        "threshold": 0.9,
+        "p_at_or_above": 0.06490676545259337,
+        "p_below": 0.4103216471123494,
+        "risk_difference": -0.34541488165975603,
+        "risk_ratio": 0.1581850870149714,
+        "event_count": 20,
+        "snapshot_count": 1831
+      }
+    }
+  },
+  "gates": {
+    "positive_development": true,
+    "positive_diagnostic": false,
+    "shift_p_le_0_05": false,
+    "diagnostic_brier_beats_constant": false,
+    "diagnostic_auc_gt_0_50": false
+  },
+  "gate_count": "1/5",
+  "verdict": "NOT_FULLY_SUPPORTED"
+}

@@ -1,0 +1,209 @@
+{
+  "test": "T445",
+  "generated_at": "2026-08-28T03:40:56+00:00",
+  "identity": "WGD 2038-4008 (GraLJ203802-400815)",
+  "method": "published-summary pre-delay lens reconstruction; Te-ARA solve; controlled external-shear path; tangent-normal residual split",
+  "cosmology": {
+    "H0_km_s_Mpc": 70.0,
+    "Omega_m": 0.3,
+    "Ddt_Mpc": 1417.0881036760236
+  },
+  "quality": {
+    "source_rows": 5,
+    "required_components_present": true,
+    "delay_covariance_positive_definite": true,
+    "source_rms_arcsec": 0.002512052164955143,
+    "source_lock_threshold_arcsec": 0.02,
+    "source_lock_pass": true,
+    "coordinate_convention_candidates": [
+      {
+        "x_sign": -1,
+        "cost": 7657.421910509818,
+        "source_rms_arcsec": 0.2431810232056954
+      },
+      {
+        "x_sign": 1,
+        "cost": 1.1435135072647407,
+        "source_rms_arcsec": 0.002512052164955143
+      }
+    ],
+    "selected_x_sign": 1,
+    "component_crosswalk": {
+      "A": "C",
+      "B": "B",
+      "C": "A",
+      "D": "D"
+    },
+    "component_crosswalk_check": "recovered from the pre-delay Fermat ordering, not from observed delays",
+    "full_posterior_available": false,
+    "full_posterior_gap": "TDCOSMO repository's linked Google Drive folder returns 404 as of the test date",
+    "uncertainty_mode": "local covariance approximation around an astrometry-locked reconstruction from published marginal summaries",
+    "accepted_uncertainty_draws": 2000,
+    "ac_blind_status": "model-informed sign; positive alternative was rejected using mass-model ordering in TDCOSMO-XVI"
+  },
+  "fit": {
+    "parameters": {
+      "theta_E_arcsec": 1.379349372350093,
+      "q": 0.6415420482677354,
+      "phi_mass_model_deg": 52.930095218984874,
+      "gamma": 2.2123979598701355,
+      "shear": 0.06399298070947107,
+      "phi_shear_model_deg": -31.88022309156618,
+      "center_x_arcsec": -0.011014329906337104,
+      "center_y_arcsec": -0.005412535868025724
+    },
+    "source_xy_arcsec": [
+      -0.13188287208879848,
+      -0.10563102558598567
+    ],
+    "source_rms_arcsec": 0.002512052164955143
+  },
+  "results": [
+    {
+      "pair": "AB",
+      "blind_status": "clean",
+      "geometric_a_arcsec2": 0.009775169274061746,
+      "potential_b_arcsec2": -0.13037614302229672,
+      "model_total_dphi_arcsec2": -0.12060097374823497,
+      "observed_dphi_arcsec2": -0.31250646013543676,
+      "observed_required_b_arcsec2": -0.3222816294094985,
+      "parallel_residual_arcsec2": 0.1884555694616004,
+      "perpendicular_residual_arcsec2": -0.036224495088439765,
+      "parallel_fraction": 0.8387729896687299,
+      "perpendicular_fraction": 0.16122701033127015,
+      "other_movement_ara": 1.6775459793374599,
+      "other_connection_ara": 0.3224540206625403,
+      "model_traversal_ara": 0.13949450938270996,
+      "model_connection_ara": 1.86050549061729,
+      "observed_traversal_ara": 0.058876489280240134,
+      "observed_connection_ara": 1.94112351071976,
+      "nearest_lambda": 1.0,
+      "nearest_distance_arcsec2": 0.19190548638720178,
+      "total_match_lambda": 11.473545941539532,
+      "within_fitted_shear_path": false,
+      "lambda_beyond_fitted_endpoint": 10.473545941539532,
+      "path_straightness": 1.0000000000000002,
+      "path_curvature_fraction": 0.0,
+      "tangent_x": 0.18876216501361884,
+      "tangent_y": -0.9820228332678275,
+      "normal_x": 0.9820228332678275,
+      "normal_y": 0.18876216501361884,
+      "model_delay_days": -4.78534771354807,
+      "observed_delay_days": -12.4,
+      "observed_delay_sigma_days": 3.7682887362833544,
+      "published_prediction_days": -5.0,
+      "reconstruction_minus_published_days": 0.2146522864519298
+    },
+    {
+      "pair": "AC",
+      "blind_status": "model-informed sign",
+      "geometric_a_arcsec2": 0.3498635963741703,
+      "potential_b_arcsec2": -0.6033670173985644,
+      "model_total_dphi_arcsec2": -0.25350342102439405,
+      "observed_dphi_arcsec2": -0.13357130957401736,
+      "observed_required_b_arcsec2": -0.48343490594818767,
+      "parallel_residual_arcsec2": -0.11858219226989397,
+      "perpendicular_residual_arcsec2": 0.017943662764649624,
+      "parallel_fraction": 0.8685694899320752,
+      "perpendicular_fraction": 0.1314305100679248,
+      "other_movement_ara": 1.7371389798641503,
+      "other_connection_ara": 0.2628610201358496,
+      "model_traversal_ara": 0.7340586660125529,
+      "model_connection_ara": 1.2659413339874472,
+      "observed_traversal_ara": 0.8397077287409477,
+      "observed_connection_ara": 1.1602922712590522,
+      "nearest_lambda": 0.1,
+      "nearest_distance_arcsec2": 0.017975809437098002,
+      "total_match_lambda": -0.09466978796129207,
+      "within_fitted_shear_path": false,
+      "lambda_beyond_fitted_endpoint": -1.094669787961292,
+      "path_straightness": 1.0,
+      "path_curvature_fraction": 0.0,
+      "tangent_x": 0.1496151660105978,
+      "tangent_y": -0.9887443057229818,
+      "normal_x": 0.9887443057229818,
+      "normal_y": 0.1496151660105978,
+      "model_delay_days": -10.058807806213522,
+      "observed_delay_days": -5.3,
+      "observed_delay_sigma_days": 2.7386127875258306,
+      "published_prediction_days": -10.0,
+      "reconstruction_minus_published_days": -0.05880780621352244
+    },
+    {
+      "pair": "AD",
+      "blind_status": "clean",
+      "geometric_a_arcsec2": 0.26705489105547864,
+      "potential_b_arcsec2": -0.8954591221639232,
+      "model_total_dphi_arcsec2": -0.6284042311084446,
+      "observed_dphi_arcsec2": -0.8392310582669391,
+      "observed_required_b_arcsec2": -1.1062859493224177,
+      "parallel_residual_arcsec2": 0.20369293214652595,
+      "perpendicular_residual_arcsec2": 0.05437959583583259,
+      "parallel_fraction": 0.7892856079607594,
+      "perpendicular_fraction": 0.21071439203924064,
+      "other_movement_ara": 1.5785712159215188,
+      "other_connection_ara": 0.4214287840784813,
+      "model_traversal_ara": 0.45944373662371885,
+      "model_connection_ara": 1.540556263376281,
+      "observed_traversal_ara": 0.3889127639748837,
+      "observed_connection_ara": 1.6110872360251163,
+      "nearest_lambda": 1.0,
+      "nearest_distance_arcsec2": 0.21082682715849455,
+      "total_match_lambda": 2.5424558730038624,
+      "within_fitted_shear_path": false,
+      "lambda_beyond_fitted_endpoint": 1.5424558730038624,
+      "path_straightness": 1.0000000000000002,
+      "path_curvature_fraction": 0.0,
+      "tangent_x": -0.25793489646813933,
+      "tangent_y": -0.9661622996080783,
+      "normal_x": 0.9661622996080783,
+      "normal_y": -0.25793489646813933,
+      "model_delay_days": -24.934564432260558,
+      "observed_delay_days": -33.3,
+      "observed_delay_sigma_days": 6.316644678941502,
+      "published_prediction_days": -24.2,
+      "reconstruction_minus_published_days": -0.7345644322605587
+    }
+  ],
+  "global_clean_fit": [
+    {
+      "measurement": "shared_lambda_fit",
+      "value": 1.5089846372179667,
+      "units": "fraction of fitted external-shear amplitude",
+      "note": "fit jointly to clean AB and AD delay outcomes"
+    },
+    {
+      "measurement": "shared_lambda_chi2",
+      "value": 3.850759455876563,
+      "units": "chi-square",
+      "note": "1 degree of freedom after fitting one shared lambda"
+    },
+    {
+      "measurement": "shared_lambda_p_value",
+      "value": 0.049723471078491004,
+      "units": "probability",
+      "note": "tests whether one shared shear-scaling coordinate fits both clean pairs"
+    },
+    {
+      "measurement": "fitted_endpoint_chi2",
+      "value": 4.090825860665153,
+      "units": "chi-square",
+      "note": "published-summary fitted endpoint versus clean observed delays"
+    },
+    {
+      "measurement": "fitted_endpoint_p_value",
+      "value": 0.12932677600137935,
+      "units": "probability",
+      "note": "2 degrees of freedom; observational covariance only"
+    }
+  ],
+  "interpretation_boundary": {
+    "established": "the observed-required Phase-B term can be solved and compared geometrically with a delay-blind controlled shear path",
+    "not_established": "a unique physical Other, chronological motion through posterior samples, or a new law of time",
+    "clean_blind_pairs": [
+      "AB",
+      "AD"
+    ],
+    "model_informed_pair": "AC"
+  }
+}

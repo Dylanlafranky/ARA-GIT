@@ -1,0 +1,96 @@
+{
+  "test": "T404 corrected child-release and Di-ARA audit",
+  "date": "2026-08-18",
+  "protocol_sha256": "f4faeb38c819d9ba8a499c53fcf68a9b9404687bed23cd06c2f6a858d14596b8",
+  "verdict": "THREE-STAGE HANDOVER SUPPORTED DESCRIPTIVELY; DETECTOR-TURN OCTAVE BOOTSTRAP-COMPATIBLE BUT POINT ESTIMATES SHORT; SOURCE-RELEASE OCTAVE REJECTED",
+  "coordinate_audit": {
+    "saved_T400_local_crest": 0.7063064837018814,
+    "corrected_reconstructed_local_crest": 0.7063064837018811,
+    "T403_linear_map_apparent_local_crest": 0.5323222374471249,
+    "T403_apparent_displacement": -0.1739842462547565,
+    "maximum_eight_bin_time_error_us": 0.07467105843151978
+  },
+  "registered_bandwidth_summary": {
+    "detector_crest_range": [
+      0.5,
+      0.5700000000000001
+    ],
+    "source_release_crest": 0.7063064837018814,
+    "detector_ridge_range": [
+      0.935973037112907,
+      1.0511772613056234
+    ],
+    "detector_to_ridge_ratio_range": [
+      1.7709888166680023,
+      1.871946074225814
+    ],
+    "source_to_ridge_ratio_range": [
+      1.325165574308905,
+      1.4882735548401187
+    ],
+    "detector_octave_residual_range": [
+      -0.1259561508325987,
+      -0.06402696288709298
+    ],
+    "source_octave_residual_range": [
+      -0.47663993029085583,
+      -0.36143570609813946
+    ]
+  },
+  "bootstrap": {
+    "seed": 40420260818,
+    "draws": 5000,
+    "valid_draws": 5000,
+    "three_stage_fraction": 0.9998,
+    "detector_octave_residual_median": 0.05202631029972593,
+    "detector_octave_residual_95_interval": [
+      -0.1626597740737126,
+      0.24553276729981002
+    ],
+    "circular_shift_errors_as_good_fraction": 0.044885714285714286,
+    "circular_shift_p_add_one": 0.04491300248564327,
+    "warning": "Saved splits overlap; this is robustness, not an independent sampling interval."
+  },
+  "diara": {
+    "axes": "remaining-parent storage versus delayed-child release flow",
+    "normalization": "Each fitted/derived within-window axis mapped separately to 0-2 for geometry display.",
+    "mean_detector_turn": 0.5475000000000001,
+    "child_release_maximum": 0.7063064837018814,
+    "mean_detector_handover": 0.9939431961005148,
+    "dependency_boundary": "Storage is the cumulative complement of the same delayed template whose rate defines flow; the phase portrait is descriptive, not independent confirmation."
+  },
+  "independent_holdout": {
+    "archive": "T378 COHERENT 2017 coarse timing",
+    "prompt_crest_time_us": 0.75,
+    "delayed_crest_time_us": 1.25,
+    "supports_only": "broad prompt-before-delayed chronology"
+  },
+  "individual_spin_audit": {
+    "T397_identity": "aggregate muSR asymmetry/phase profiles in RAL Silver",
+    "event_linked": false,
+    "can_test": "population spin-phase geometry",
+    "cannot_test": "one named spinning muon producing a charged daughter and two neutrinos",
+    "required_data": [
+      "event-linked muon spin or polarization",
+      "individual decay time",
+      "charged-daughter direction and energy",
+      "neutral-sensitive timing or independently reconstructed missing momentum"
+    ]
+  },
+  "gates": {
+    "G1_correct_inverse_map_reproduces_T400_crest": true,
+    "G2_three_stage_all_registered_bandwidths": true,
+    "G3_three_stage_bootstrap_at_least_90pct": true,
+    "G4_exact_detector_octave": true,
+    "G5_exact_source_octave_across_bandwidths": false,
+    "G6_independent_prompt_before_delayed_chronology": true,
+    "G7_individual_spinning_muon_event_link_available": false
+  },
+  "evidence_boundaries": [
+    "T402 detector C-minus-AC is measured but is not a pristine neutrino waveform.",
+    "T398/T400 source curves are fitted or derived from the same archive.",
+    "T402 saved splits overlap and are not independent experiments.",
+    "T378 is too coarse to reproduce the nested local coordinate.",
+    "No input is an event-linked individual muon-neutrino record."
+  ]
+}

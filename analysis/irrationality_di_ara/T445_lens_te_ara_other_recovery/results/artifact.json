@@ -1,0 +1,2406 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T445 \u2014 Lens Te-ARA and coarse Other recovery",
+    "description": "A delay-blind ARA reconstruction of one real quadruply imaged quasar, with a controlled external-shear path and conditional Other decomposition.",
+    "generatedAt": "2026-08-28T03:10:37+00:00",
+    "cards": [
+      {
+        "id": "source_lock",
+        "description": "RMS separation of the four independently back-projected source locations.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Source lock RMS",
+            "field": "source_rms_mas",
+            "format": "number",
+            "unit": "mas"
+          }
+        ]
+      },
+      {
+        "id": "outside",
+        "description": "Clean blind outcomes lying outside the 0\u2264\u03bb\u22641 named shear path.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Beyond known path",
+            "field": "outside_path",
+            "format": "number",
+            "unit": "/ 2"
+          }
+        ]
+      },
+      {
+        "id": "shared_lambda",
+        "description": "Best one-coordinate shear scaling fitted jointly to AB and AD.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Shared \u03bb",
+            "field": "shared_lambda",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "shared_p",
+        "description": "Observational-covariance-only compatibility of a single shared shear scaling.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Shared-\u03bb p",
+            "field": "shared_lambda_p",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "along",
+        "description": "Mean conditional residual share aligned with the known coupling line for clean pairs.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Along-line share",
+            "field": "mean_parallel_percent",
+            "format": "number",
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "id": "normal",
+        "description": "Mean conditional residual share normal to the known coupling line for clean pairs.",
+        "dataset": "headline",
+        "sourceId": "t445_analysis",
+        "metrics": [
+          {
+            "label": "Normal share",
+            "field": "mean_normal_percent",
+            "format": "number",
+            "unit": "%"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "source_lock_chart",
+        "title": "Four image paths lock to one source",
+        "subtitle": "Offsets are in milliarcseconds around the recovered source mean; labels use TDCOSMO component identities.",
+        "type": "scatter",
+        "dataset": "source_offsets",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "source_dx_mas",
+            "type": "quantitative",
+            "label": "Source x offset (mas)"
+          },
+          "y": {
+            "field": "source_dy_mas",
+            "type": "quantitative",
+            "label": "Source y offset (mas)"
+          },
+          "color": {
+            "field": "tdcosmo_component",
+            "type": "nominal",
+            "label": "Back-projected image"
+          },
+          "tooltip": [
+            {
+              "field": "gaia_component",
+              "type": "nominal",
+              "label": "Gaia label"
+            },
+            {
+              "field": "source_offset_mas",
+              "type": "quantitative",
+              "label": "Radial offset (mas)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "delay_bridge",
+        "title": "Pre-delay geometry reproduces the published blind model",
+        "subtitle": "The later observation was not used to fit the lens; AC is shown but is not a clean blind sign test.",
+        "type": "bar",
+        "dataset": "delays",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "pair",
+            "type": "nominal",
+            "label": "TDCOSMO image pair"
+          },
+          "y": {
+            "field": "delay_days",
+            "type": "quantitative",
+            "label": "Signed delay (days)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Measurement stage"
+          },
+          "tooltip": [
+            {
+              "field": "blind_status",
+              "type": "nominal",
+              "label": "Blind status"
+            },
+            {
+              "field": "observed_sigma_days",
+              "type": "quantitative",
+              "label": "Observed \u03c3 (days)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native_path",
+        "title": "Known external shear traces a straight A/B relation",
+        "subtitle": "\u03bb is a controlled coupling amplitude, not time. Each line runs from no shear to the fitted shear.",
+        "type": "line",
+        "dataset": "path_only",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "geometric_a_arcsec2",
+            "type": "quantitative",
+            "label": "Geometric A / traversal (arcsec\u00b2)"
+          },
+          "y": {
+            "field": "potential_b_arcsec2",
+            "type": "quantitative",
+            "label": "Potential B / connection (arcsec\u00b2)"
+          },
+          "color": {
+            "field": "pair",
+            "type": "nominal",
+            "label": "Image pair"
+          },
+          "tooltip": [
+            {
+              "field": "lambda",
+              "type": "quantitative",
+              "label": "Shear \u03bb"
+            },
+            {
+              "field": "total_dphi_arcsec2",
+              "type": "quantitative",
+              "label": "A+B (arcsec\u00b2)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lambda_required",
+        "title": "The clean outcomes lie beyond\u2014and disagree along\u2014the known path",
+        "subtitle": "The fitted named coupling ends at \u03bb=1. AB requires 11.47 and AD 2.54; a shared \u03bb=1.51 fits poorly at the 5% boundary under observation-only covariance.",
+        "type": "bar",
+        "dataset": "lambda_required",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "pair",
+            "type": "nominal",
+            "label": "TDCOSMO image pair"
+          },
+          "y": {
+            "field": "lambda",
+            "type": "quantitative",
+            "label": "Coupling coordinate \u03bb"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Endpoint"
+          },
+          "tooltip": [
+            {
+              "field": "blind_status",
+              "type": "nominal",
+              "label": "Blind status"
+            }
+          ]
+        }
+      },
+      {
+        "id": "native_decomposition",
+        "title": "Te-ARA solves the missing Phase-B amount in native units",
+        "subtitle": "A is frozen from delay-blind geometry. B_eff is the potential-side amount required by the later delay.",
+        "type": "bar",
+        "dataset": "native",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "pair",
+            "type": "nominal",
+            "label": "TDCOSMO image pair"
+          },
+          "y": {
+            "field": "fermat_arcsec2",
+            "type": "quantitative",
+            "label": "Differential Fermat potential (arcsec\u00b2)"
+          },
+          "color": {
+            "field": "component",
+            "type": "nominal",
+            "label": "Term"
+          },
+          "tooltip": [
+            {
+              "field": "blind_status",
+              "type": "nominal",
+              "label": "Blind status"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ara_pair",
+        "title": "The same fitted and outcome-required relations on the ARA 0\u20132 plane",
+        "subtitle": "Each point is a contribution share with x+y=2 by definition; location along the ridge is informative, not the ridge itself.",
+        "type": "scatter",
+        "dataset": "ara",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "traversal_ara",
+            "type": "quantitative",
+            "label": "Traversal share ARA (0\u20132)"
+          },
+          "y": {
+            "field": "connection_ara",
+            "type": "quantitative",
+            "label": "Connection share ARA (0\u20132)"
+          },
+          "color": {
+            "field": "point",
+            "type": "nominal",
+            "label": "Stage"
+          },
+          "tooltip": [
+            {
+              "field": "pair",
+              "type": "nominal",
+              "label": "Pair"
+            },
+            {
+              "field": "blind_status",
+              "type": "nominal",
+              "label": "Blind status"
+            }
+          ]
+        }
+      },
+      {
+        "id": "other_split",
+        "title": "Conditional coarse Other is movement-heavy, with a smaller normal remainder",
+        "subtitle": "This 0\u20132 split is conditional on Te-ARA holding A fixed; it does not independently identify a new physical identity.",
+        "type": "bar",
+        "dataset": "other",
+        "sourceId": "t445_analysis",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "pair",
+            "type": "nominal",
+            "label": "TDCOSMO image pair"
+          },
+          "y": {
+            "field": "ara_coordinate",
+            "type": "quantitative",
+            "label": "Conditional Other ARA (0\u20132)"
+          },
+          "color": {
+            "field": "other_component",
+            "type": "nominal",
+            "label": "Residual direction"
+          },
+          "tooltip": [
+            {
+              "field": "native_residual_arcsec2",
+              "type": "quantitative",
+              "label": "Signed residual (arcsec\u00b2)"
+            },
+            {
+              "field": "blind_status",
+              "type": "nominal",
+              "label": "Blind status"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "detail_table",
+        "title": "Pair-level native results and conditional residual shares",
+        "subtitle": "AB and AD are the clean blind outcomes; AC is retained as a labelled diagnostic only.",
+        "dataset": "detail",
+        "sourceId": "t445_analysis",
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "pair",
+            "label": "Pair"
+          },
+          {
+            "field": "blind_status",
+            "label": "Status"
+          },
+          {
+            "field": "model_delay_days",
+            "label": "Model delay (d)",
+            "format": "number"
+          },
+          {
+            "field": "observed_delay_days",
+            "label": "Observed delay (d)",
+            "format": "number"
+          },
+          {
+            "field": "observed_delay_sigma_days",
+            "label": "Observed \u03c3 (d)",
+            "format": "number"
+          },
+          {
+            "field": "total_match_lambda",
+            "label": "Required \u03bb",
+            "format": "number"
+          },
+          {
+            "field": "parallel_percent",
+            "label": "Along line (%)",
+            "format": "number"
+          },
+          {
+            "field": "perpendicular_percent",
+            "label": "Normal (%)",
+            "format": "number"
+          },
+          {
+            "field": "other_movement_ara",
+            "label": "Other movement (0\u20132)",
+            "format": "number"
+          },
+          {
+            "field": "other_connection_ara",
+            "label": "Other curvature (0\u20132)",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "uncertainty_table",
+        "title": "Local uncertainty intervals",
+        "subtitle": "16th/50th/84th percentiles from 2,000 accepted local draws per pair; not a replacement for the missing full posterior.",
+        "dataset": "uncertainty",
+        "sourceId": "t445_analysis",
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "pair",
+            "label": "Pair"
+          },
+          {
+            "field": "metric",
+            "label": "Metric"
+          },
+          {
+            "field": "q16",
+            "label": "q16",
+            "format": "number"
+          },
+          {
+            "field": "median",
+            "label": "Median",
+            "format": "number"
+          },
+          {
+            "field": "q84",
+            "label": "q84",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t445_analysis",
+        "label": "T445 reviewed SQLite outputs from WGD 2038\u22124008",
+        "href": "https://github.com/TDCOSMO/WGD2038-4008",
+        "query": {
+          "language": "sql",
+          "engine": "SQLite",
+          "sql": "SELECT * FROM decomposition ORDER BY CASE pair WHEN 'AB' THEN 1 WHEN 'AC' THEN 2 ELSE 3 END;",
+          "description": "Report-input query over the independently validated T445 decomposition table.",
+          "executed_at": "2026-08-28T03:10:37+00:00",
+          "tables_used": [
+            "decomposition",
+            "controlled_path",
+            "source_lock",
+            "global_clean_fit"
+          ],
+          "filters": [
+            "one fixed identity: WGD 2038\u22124008",
+            "clean primary outcomes: AB and AD",
+            "AC retained but labelled model-informed sign",
+            "external cosmology fixed at H0=70 km/s/Mpc and Omega_m=0.3"
+          ],
+          "metric_definitions": [
+            "A is the delay-blind geometric Fermat contribution; B is the lens-potential contribution.",
+            "B_eff is solved by Te-ARA as observed differential Fermat potential minus A.",
+            "Lambda scales only the named external-shear component from absent (0) to fitted (1); it is not time.",
+            "Parallel/normal shares are conditional on holding A fixed in the Te-ARA solve; their 0\u20132 normalization is secondary to native arcsec\u00b2."
+          ]
+        }
+      },
+      {
+        "id": "tdcosmo_ix",
+        "label": "TDCOSMO IX pre-delay lens model",
+        "href": "https://arxiv.org/abs/2202.11101"
+      },
+      {
+        "id": "tdcosmo_xvi",
+        "label": "TDCOSMO XVI later time-delay measurement",
+        "href": "https://arxiv.org/abs/2406.02683"
+      },
+      {
+        "id": "gaia_gral_x",
+        "label": "Gaia GraL X component astrometry",
+        "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/707/A345"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T445 \u2014 Te-ARA solve and circle/line Other recovery in WGD 2038\u22124008"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "t445_analysis",
+        "body": "## The procedure works as a diagnostic, but it does not yet identify a unique Other\n\nA delay-blind reconstruction locks the four images to one source at **2.51 mas RMS** and independently reproduces the old blind model delays to within **0.74 days**. The later clean AB and AD outcomes both lie beyond the fitted external-shear path, but at incompatible distances: **\u03bb=11.47** and **\u03bb=2.54**. Their conditional residuals are mostly aligned with the known line (**83.9%** and **78.9%**) while retaining smaller normal components (**16.1%** and **21.1%**). This validates the three-stage measurement grammar; it does not name the unresolved relation or prove a new time law."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "source_lock",
+          "outside",
+          "shared_lambda",
+          "shared_p",
+          "along",
+          "normal"
+        ]
+      },
+      {
+        "id": "anchor",
+        "type": "markdown",
+        "sourceId": "tdcosmo_ix",
+        "body": "## Identity and cut anchor\n\n**Who/where:** one quadruply imaged quasar, WGD 2038\u22124008. The four light paths are children of one source\u2013lens\u2013observer identity; the foreground lens is the connection-heavy parent; external shear is the named coupling. **What:** A is the geometric/traversal Fermat term and B the potential/connection term. **When:** the lens model predates the delay measurement; \u03bb is controlled coupling strength, not chronological time. **Why/how:** solve B_eff from the later delay, then compare it with the frozen A/B path and split the remainder into line-aligned and normal components."
+      },
+      {
+        "id": "source_lock_text",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## The pre-delay geometry is internally coherent\n\nThe Gaia and TDCOSMO letter conventions differ. The delay-blind Fermat ordering fixes the crosswalk as TDCOSMO A/B/C/D = Gaia C/B/A/D. With that identity correction, all four image positions back-project to one source well inside the frozen 20 mas ceiling."
+      },
+      {
+        "id": "source_lock_chart_block",
+        "type": "chart",
+        "chartId": "source_lock_chart",
+        "layout": "full"
+      },
+      {
+        "id": "bridge_text",
+        "type": "markdown",
+        "sourceId": "tdcosmo_xvi",
+        "body": "## The conventional science bridge is recovered before ARA interpretation\n\nThe reconstruction gives AB \u22124.79 d, AC \u221210.06 d, and AD \u221224.93 d, matching the published pre-delay model values \u22125.0, \u221210.0, and \u221224.2 d. The later observed outcomes are \u221212.4, \u22125.3, and \u221233.3 d. AC had its sign selected partly using model ordering, so AB and AD remain the primary clean test."
+      },
+      {
+        "id": "delay_chart_block",
+        "type": "chart",
+        "chartId": "delay_bridge",
+        "layout": "full"
+      },
+      {
+        "id": "path_text",
+        "type": "markdown",
+        "sourceId": "t445_analysis",
+        "body": "## The named coupling is a line, not the full route\n\nScaling external shear from absent to fitted produces an essentially perfectly straight path in the native A/B plane. That is the line-pole behaviour expected for this single controlled coordinate. The informative failure is relational: neither clean outcome occurs inside \u03bb\u2208[0,1], and one shared extension of the line does not fit both (best \u03bb=1.51, \u03c7\u00b2=3.85 for 1 degree of freedom, p=0.0497 using observational covariance only)."
+      },
+      {
+        "id": "native_path_block",
+        "type": "chart",
+        "chartId": "native_path",
+        "layout": "full"
+      },
+      {
+        "id": "lambda_block",
+        "type": "chart",
+        "chartId": "lambda_required",
+        "layout": "full"
+      },
+      {
+        "id": "teara_text",
+        "type": "markdown",
+        "sourceId": "t445_analysis",
+        "body": "## Te-ARA supplies the first landmark by solving the opposite phase\n\nThe later delay supplies the total differential Fermat potential. Holding the independently reconstructed A term fixed gives B_eff = \u0394\u03c6_obs \u2212 A. This is a legitimate conditional cut, but it also means the outcome residual is vertical in the A/B plane by construction; tangent/normal percentages must therefore be read as conditional geometry rather than an independently observed two-dimensional Other."
+      },
+      {
+        "id": "native_decomp_block",
+        "type": "chart",
+        "chartId": "native_decomposition",
+        "layout": "full"
+      },
+      {
+        "id": "ara_text",
+        "type": "markdown",
+        "sourceId": "t445_analysis",
+        "body": "## The 0\u20132 views preserve the relational shape without replacing the physics\n\nThe fitted and outcome-required A/B terms are normalized by total absolute participation, so each point lies on x+y=2 by definition. The movement/curvature split uses the same rule on |r_parallel| and |r_perpendicular|. For the clean pairs it is movement-heavy\u2014AB (1.68, 0.32), AD (1.58, 0.42)\u2014with a persistent smaller normal remainder."
+      },
+      {
+        "id": "ara_pair_block",
+        "type": "chart",
+        "chartId": "ara_pair",
+        "layout": "full"
+      },
+      {
+        "id": "other_block",
+        "type": "chart",
+        "chartId": "other_split",
+        "layout": "full"
+      },
+      {
+        "id": "detail_table_block",
+        "type": "table",
+        "tableId": "detail_table",
+        "layout": "full"
+      },
+      {
+        "id": "uncertainty_text",
+        "type": "markdown",
+        "sourceId": "t445_analysis",
+        "body": "## Uncertainty and robustness\n\nTwo thousand correlated delay draws and local lens-parameter draws were accepted per pair. AB and AD retain the same signed line-aligned and normal directions across their central 68% intervals. However, the original repository\u2019s linked full-posterior Drive folder now returns 404, so this is a local covariance approximation around published marginal summaries\u2014not the authors\u2019 full posterior. The fitted-endpoint disagreement itself is not decisive (\u03c7\u00b2=4.09 for 2 degrees of freedom, p=0.129 before adding model uncertainty)."
+      },
+      {
+        "id": "uncertainty_table_block",
+        "type": "table",
+        "tableId": "uncertainty_table",
+        "layout": "full"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Frozen methodology and audit trail\n\nThe identity, scale, lens family, cosmology, coupling ablation, A/B definitions, delay-leakage rule, and interpretation boundary were frozen first. The measured delay never enters the astrometric fit. Independent validation passed 17/17 checks: source locking, component sums, crosswalk, pre-delay prediction recovery, Te-ARA algebra, \u03bb recovery, covariance, draw counts, SQLite extracts, and static leakage inspection."
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## What this does not establish\n\nThe normal residual cannot be named as a new force, time component, or unique ARA identity. It can contain missing mass-profile freedom, external convergence, cosmology, microlensing/time-delay systematics, and the limitations of reconstructing a multivariate posterior from marginal summaries. Because \u03bb is a counterfactual coupling coordinate, this is a completed-handover reconstruction\u2014not a movie of time."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nKeep this identity and add a second independently constrained coupling coordinate\u2014preferably mass-sheet/external convergence or mass-profile slope\u2014so the known relation becomes a two-dimensional surface rather than a forced line. Then freeze that surface before applying the later delay. A residual normal to the full surface would be a materially stronger Information\u00b3 lock on an unresolved Other."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does a retrieved full posterior widen the shared-\u03bb compatibility enough to erase the normal remainder?\n- Does adding external convergence collapse AB and AD onto one common coupling surface?\n- Can the same three-stage procedure recover a deliberately hidden coupling in another real lens without a label crosswalk ambiguity?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-28T03:10:37+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "source_rms_mas": 2.512052165,
+          "blind_delay_pairs": 2,
+          "outside_path": 2,
+          "shared_lambda": 1.5089846372,
+          "shared_lambda_p": 0.0497234711,
+          "mean_parallel_percent": 81.4029298815,
+          "mean_normal_percent": 18.5970701185
+        }
+      ],
+      "source_offsets": [
+        {
+          "tdcosmo_component": "A",
+          "gaia_component": "C",
+          "image_x_arcsec": -1.4793161473,
+          "image_y_arcsec": 0.491,
+          "source_x_arcsec": -0.1289558085,
+          "source_y_arcsec": -0.1057311818,
+          "source_offset_mas": 2.9287766314,
+          "source_dx_mas": 2.9270635945,
+          "source_dy_mas": -0.1001562297
+        },
+        {
+          "tdcosmo_component": "B",
+          "gaia_component": "B",
+          "image_x_arcsec": 0.8279583397,
+          "image_y_arcsec": -1.215,
+          "source_x_arcsec": -0.1335665795,
+          "source_y_arcsec": -0.104352753,
+          "source_offset_mas": 2.1139658763,
+          "source_dx_mas": -1.6837074612,
+          "source_dy_mas": 1.2782726279
+        },
+        {
+          "tdcosmo_component": "C",
+          "gaia_component": "A",
+          "image_x_arcsec": -0.6857605086,
+          "image_y_arcsec": -1.185,
+          "source_x_arcsec": -0.1325091936,
+          "source_y_arcsec": -0.1039040472,
+          "source_offset_mas": 1.8370445865,
+          "source_dx_mas": -0.6263214888,
+          "source_dy_mas": 1.7269783454
+        },
+        {
+          "tdcosmo_component": "D",
+          "gaia_component": "D",
+          "image_x_arcsec": 0.6949345622,
+          "image_y_arcsec": 0.871,
+          "source_x_arcsec": -0.1324999067,
+          "source_y_arcsec": -0.1085361203,
+          "source_offset_mas": 2.9699002041,
+          "source_dx_mas": -0.6170346446,
+          "source_dy_mas": -2.9050947437
+        }
+      ],
+      "delays": [
+        {
+          "pair": "AB",
+          "blind_status": "clean",
+          "series": "pre-delay reconstruction",
+          "delay_days": -4.7853477135,
+          "observed_sigma_days": 3.7682887363
+        },
+        {
+          "pair": "AB",
+          "blind_status": "clean",
+          "series": "published pre-delay prediction",
+          "delay_days": -5.0,
+          "observed_sigma_days": 3.7682887363
+        },
+        {
+          "pair": "AB",
+          "blind_status": "clean",
+          "series": "later observed delay",
+          "delay_days": -12.4,
+          "observed_sigma_days": 3.7682887363
+        },
+        {
+          "pair": "AC",
+          "blind_status": "model-informed sign",
+          "series": "pre-delay reconstruction",
+          "delay_days": -10.0588078062,
+          "observed_sigma_days": 2.7386127875
+        },
+        {
+          "pair": "AC",
+          "blind_status": "model-informed sign",
+          "series": "published pre-delay prediction",
+          "delay_days": -10.0,
+          "observed_sigma_days": 2.7386127875
+        },
+        {
+          "pair": "AC",
+          "blind_status": "model-informed sign",
+          "series": "later observed delay",
+          "delay_days": -5.3,
+          "observed_sigma_days": 2.7386127875
+        },
+        {
+          "pair": "AD",
+          "blind_status": "clean",
+          "series": "pre-delay reconstruction",
+          "delay_days": -24.9345644323,
+          "observed_sigma_days": 6.3166446789
+        },
+        {
+          "pair": "AD",
+          "blind_status": "clean",
+          "series": "published pre-delay prediction",
+          "delay_days": -24.2,
+          "observed_sigma_days": 6.3166446789
+        },
+        {
+          "pair": "AD",
+          "blind_status": "clean",
+          "series": "later observed delay",
+          "delay_days": -33.3,
+          "observed_sigma_days": 6.3166446789
+        }
+      ],
+      "path_only": [
+        {
+          "pair": "AB",
+          "lambda": 0.0,
+          "geometric_a_arcsec2": 0.0054151072,
+          "potential_b_arcsec2": -0.1076932046,
+          "total_dphi_arcsec2": -0.1022780975,
+          "traversal_ara": 0.0957508262,
+          "connection_ara": 1.9042491738,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.025,
+          "geometric_a_arcsec2": 0.0055241087,
+          "potential_b_arcsec2": -0.1082602781,
+          "total_dphi_arcsec2": -0.1027361694,
+          "traversal_ara": 0.0970978332,
+          "connection_ara": 1.9029021668,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.05,
+          "geometric_a_arcsec2": 0.0056331103,
+          "potential_b_arcsec2": -0.1088273515,
+          "total_dphi_arcsec2": -0.1031942413,
+          "traversal_ara": 0.0984289276,
+          "connection_ara": 1.9015710724,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.075,
+          "geometric_a_arcsec2": 0.0057421118,
+          "potential_b_arcsec2": -0.109394425,
+          "total_dphi_arcsec2": -0.1036523132,
+          "traversal_ara": 0.0997443899,
+          "connection_ara": 1.9002556101,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.1,
+          "geometric_a_arcsec2": 0.0058511134,
+          "potential_b_arcsec2": -0.1099614985,
+          "total_dphi_arcsec2": -0.1041103851,
+          "traversal_ara": 0.1010444937,
+          "connection_ara": 1.8989555063,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.125,
+          "geometric_a_arcsec2": 0.0059601149,
+          "potential_b_arcsec2": -0.1105285719,
+          "total_dphi_arcsec2": -0.104568457,
+          "traversal_ara": 0.1023295064,
+          "connection_ara": 1.8976704936,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.15,
+          "geometric_a_arcsec2": 0.0060691165,
+          "potential_b_arcsec2": -0.1110956454,
+          "total_dphi_arcsec2": -0.1050265289,
+          "traversal_ara": 0.1035996894,
+          "connection_ara": 1.8964003106,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.175,
+          "geometric_a_arcsec2": 0.006178118,
+          "potential_b_arcsec2": -0.1116627188,
+          "total_dphi_arcsec2": -0.1054846008,
+          "traversal_ara": 0.1048552978,
+          "connection_ara": 1.8951447022,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.2,
+          "geometric_a_arcsec2": 0.0062871196,
+          "potential_b_arcsec2": -0.1122297923,
+          "total_dphi_arcsec2": -0.1059426727,
+          "traversal_ara": 0.1060965811,
+          "connection_ara": 1.8939034189,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.225,
+          "geometric_a_arcsec2": 0.0063961211,
+          "potential_b_arcsec2": -0.1127968658,
+          "total_dphi_arcsec2": -0.1064007446,
+          "traversal_ara": 0.107323783,
+          "connection_ara": 1.892676217,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.25,
+          "geometric_a_arcsec2": 0.0065051227,
+          "potential_b_arcsec2": -0.1133639392,
+          "total_dphi_arcsec2": -0.1068588165,
+          "traversal_ara": 0.1085371417,
+          "connection_ara": 1.8914628583,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.275,
+          "geometric_a_arcsec2": 0.0066141242,
+          "potential_b_arcsec2": -0.1139310127,
+          "total_dphi_arcsec2": -0.1073168885,
+          "traversal_ara": 0.1097368903,
+          "connection_ara": 1.8902631097,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.3,
+          "geometric_a_arcsec2": 0.0067231258,
+          "potential_b_arcsec2": -0.1144980861,
+          "total_dphi_arcsec2": -0.1077749604,
+          "traversal_ara": 0.1109232564,
+          "connection_ara": 1.8890767436,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.325,
+          "geometric_a_arcsec2": 0.0068321273,
+          "potential_b_arcsec2": -0.1150651596,
+          "total_dphi_arcsec2": -0.1082330323,
+          "traversal_ara": 0.1120964627,
+          "connection_ara": 1.8879035373,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.35,
+          "geometric_a_arcsec2": 0.0069411289,
+          "potential_b_arcsec2": -0.1156322331,
+          "total_dphi_arcsec2": -0.1086911042,
+          "traversal_ara": 0.113256727,
+          "connection_ara": 1.886743273,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.375,
+          "geometric_a_arcsec2": 0.0070501304,
+          "potential_b_arcsec2": -0.1161993065,
+          "total_dphi_arcsec2": -0.1091491761,
+          "traversal_ara": 0.1144042621,
+          "connection_ara": 1.8855957379,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.4,
+          "geometric_a_arcsec2": 0.007159132,
+          "potential_b_arcsec2": -0.11676638,
+          "total_dphi_arcsec2": -0.109607248,
+          "traversal_ara": 0.1155392765,
+          "connection_ara": 1.8844607235,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.425,
+          "geometric_a_arcsec2": 0.0072681336,
+          "potential_b_arcsec2": -0.1173334534,
+          "total_dphi_arcsec2": -0.1100653199,
+          "traversal_ara": 0.116661974,
+          "connection_ara": 1.883338026,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.45,
+          "geometric_a_arcsec2": 0.0073771351,
+          "potential_b_arcsec2": -0.1179005269,
+          "total_dphi_arcsec2": -0.1105233918,
+          "traversal_ara": 0.117772554,
+          "connection_ara": 1.882227446,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.475,
+          "geometric_a_arcsec2": 0.0074861367,
+          "potential_b_arcsec2": -0.1184676004,
+          "total_dphi_arcsec2": -0.1109814637,
+          "traversal_ara": 0.1188712115,
+          "connection_ara": 1.8811287885,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.5,
+          "geometric_a_arcsec2": 0.0075951382,
+          "potential_b_arcsec2": -0.1190346738,
+          "total_dphi_arcsec2": -0.1114395356,
+          "traversal_ara": 0.1199581377,
+          "connection_ara": 1.8800418623,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.525,
+          "geometric_a_arcsec2": 0.0077041398,
+          "potential_b_arcsec2": -0.1196017473,
+          "total_dphi_arcsec2": -0.1118976075,
+          "traversal_ara": 0.1210335192,
+          "connection_ara": 1.8789664808,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.55,
+          "geometric_a_arcsec2": 0.0078131413,
+          "potential_b_arcsec2": -0.1201688207,
+          "total_dphi_arcsec2": -0.1123556794,
+          "traversal_ara": 0.1220975393,
+          "connection_ara": 1.8779024607,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.575,
+          "geometric_a_arcsec2": 0.0079221429,
+          "potential_b_arcsec2": -0.1207358942,
+          "total_dphi_arcsec2": -0.1128137513,
+          "traversal_ara": 0.1231503768,
+          "connection_ara": 1.8768496232,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.6,
+          "geometric_a_arcsec2": 0.0080311444,
+          "potential_b_arcsec2": -0.1213029677,
+          "total_dphi_arcsec2": -0.1132718232,
+          "traversal_ara": 0.1241922072,
+          "connection_ara": 1.8758077928,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.625,
+          "geometric_a_arcsec2": 0.008140146,
+          "potential_b_arcsec2": -0.1218700411,
+          "total_dphi_arcsec2": -0.1137298951,
+          "traversal_ara": 0.1252232023,
+          "connection_ara": 1.8747767977,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.65,
+          "geometric_a_arcsec2": 0.0082491475,
+          "potential_b_arcsec2": -0.1224371146,
+          "total_dphi_arcsec2": -0.1141879671,
+          "traversal_ara": 0.1262435301,
+          "connection_ara": 1.8737564699,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.675,
+          "geometric_a_arcsec2": 0.0083581491,
+          "potential_b_arcsec2": -0.123004188,
+          "total_dphi_arcsec2": -0.114646039,
+          "traversal_ara": 0.1272533554,
+          "connection_ara": 1.8727466446,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.7,
+          "geometric_a_arcsec2": 0.0084671506,
+          "potential_b_arcsec2": -0.1235712615,
+          "total_dphi_arcsec2": -0.1151041109,
+          "traversal_ara": 0.1282528395,
+          "connection_ara": 1.8717471605,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.725,
+          "geometric_a_arcsec2": 0.0085761522,
+          "potential_b_arcsec2": -0.124138335,
+          "total_dphi_arcsec2": -0.1155621828,
+          "traversal_ara": 0.1292421404,
+          "connection_ara": 1.8707578596,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.75,
+          "geometric_a_arcsec2": 0.0086851537,
+          "potential_b_arcsec2": -0.1247054084,
+          "total_dphi_arcsec2": -0.1160202547,
+          "traversal_ara": 0.130221413,
+          "connection_ara": 1.869778587,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.775,
+          "geometric_a_arcsec2": 0.0087941553,
+          "potential_b_arcsec2": -0.1252724819,
+          "total_dphi_arcsec2": -0.1164783266,
+          "traversal_ara": 0.131190809,
+          "connection_ara": 1.868809191,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.8,
+          "geometric_a_arcsec2": 0.0089031568,
+          "potential_b_arcsec2": -0.1258395553,
+          "total_dphi_arcsec2": -0.1169363985,
+          "traversal_ara": 0.1321504771,
+          "connection_ara": 1.8678495229,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.825,
+          "geometric_a_arcsec2": 0.0090121584,
+          "potential_b_arcsec2": -0.1264066288,
+          "total_dphi_arcsec2": -0.1173944704,
+          "traversal_ara": 0.1331005629,
+          "connection_ara": 1.8668994371,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.85,
+          "geometric_a_arcsec2": 0.00912116,
+          "potential_b_arcsec2": -0.1269737023,
+          "total_dphi_arcsec2": -0.1178525423,
+          "traversal_ara": 0.1340412093,
+          "connection_ara": 1.8659587907,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.875,
+          "geometric_a_arcsec2": 0.0092301615,
+          "potential_b_arcsec2": -0.1275407757,
+          "total_dphi_arcsec2": -0.1183106142,
+          "traversal_ara": 0.1349725562,
+          "connection_ara": 1.8650274438,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.9,
+          "geometric_a_arcsec2": 0.0093391631,
+          "potential_b_arcsec2": -0.1281078492,
+          "total_dphi_arcsec2": -0.1187686861,
+          "traversal_ara": 0.135894741,
+          "connection_ara": 1.864105259,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.925,
+          "geometric_a_arcsec2": 0.0094481646,
+          "potential_b_arcsec2": -0.1286749226,
+          "total_dphi_arcsec2": -0.119226758,
+          "traversal_ara": 0.136807898,
+          "connection_ara": 1.863192102,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.95,
+          "geometric_a_arcsec2": 0.0095571662,
+          "potential_b_arcsec2": -0.1292419961,
+          "total_dphi_arcsec2": -0.1196848299,
+          "traversal_ara": 0.1377121592,
+          "connection_ara": 1.8622878408,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 0.975,
+          "geometric_a_arcsec2": 0.0096661677,
+          "potential_b_arcsec2": -0.1298090696,
+          "total_dphi_arcsec2": -0.1201429018,
+          "traversal_ara": 0.1386076541,
+          "connection_ara": 1.8613923459,
+          "point_type": "path"
+        },
+        {
+          "pair": "AB",
+          "lambda": 1.0,
+          "geometric_a_arcsec2": 0.0097751693,
+          "potential_b_arcsec2": -0.130376143,
+          "total_dphi_arcsec2": -0.1206009737,
+          "traversal_ara": 0.1394945094,
+          "connection_ara": 1.8605054906,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.0,
+          "geometric_a_arcsec2": 0.3303292374,
+          "potential_b_arcsec2": -0.4742725767,
+          "total_dphi_arcsec2": -0.1439433393,
+          "traversal_ara": 0.8210999071,
+          "connection_ara": 1.1789000929,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.025,
+          "geometric_a_arcsec2": 0.3308175964,
+          "potential_b_arcsec2": -0.4774999377,
+          "total_dphi_arcsec2": -0.1466823413,
+          "traversal_ara": 0.8185337629,
+          "connection_ara": 1.1814662371,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.05,
+          "geometric_a_arcsec2": 0.3313059554,
+          "potential_b_arcsec2": -0.4807272987,
+          "total_dphi_arcsec2": -0.1494213434,
+          "traversal_ara": 0.8159911031,
+          "connection_ara": 1.1840088969,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.075,
+          "geometric_a_arcsec2": 0.3317943143,
+          "potential_b_arcsec2": -0.4839546598,
+          "total_dphi_arcsec2": -0.1521603454,
+          "traversal_ara": 0.8134716068,
+          "connection_ara": 1.1865283932,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.1,
+          "geometric_a_arcsec2": 0.3322826733,
+          "potential_b_arcsec2": -0.4871820208,
+          "total_dphi_arcsec2": -0.1548993475,
+          "traversal_ara": 0.8109749589,
+          "connection_ara": 1.1890250411,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.125,
+          "geometric_a_arcsec2": 0.3327710323,
+          "potential_b_arcsec2": -0.4904093818,
+          "total_dphi_arcsec2": -0.1576383495,
+          "traversal_ara": 0.8085008501,
+          "connection_ara": 1.1914991499,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.15,
+          "geometric_a_arcsec2": 0.3332593913,
+          "potential_b_arcsec2": -0.4936367428,
+          "total_dphi_arcsec2": -0.1603773515,
+          "traversal_ara": 0.8060489765,
+          "connection_ara": 1.1939510235,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.175,
+          "geometric_a_arcsec2": 0.3337477502,
+          "potential_b_arcsec2": -0.4968641038,
+          "total_dphi_arcsec2": -0.1631163536,
+          "traversal_ara": 0.8036190396,
+          "connection_ara": 1.1963809604,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.2,
+          "geometric_a_arcsec2": 0.3342361092,
+          "potential_b_arcsec2": -0.5000914648,
+          "total_dphi_arcsec2": -0.1658553556,
+          "traversal_ara": 0.8012107465,
+          "connection_ara": 1.1987892535,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.225,
+          "geometric_a_arcsec2": 0.3347244682,
+          "potential_b_arcsec2": -0.5033188259,
+          "total_dphi_arcsec2": -0.1685943577,
+          "traversal_ara": 0.7988238091,
+          "connection_ara": 1.2011761909,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.25,
+          "geometric_a_arcsec2": 0.3352128272,
+          "potential_b_arcsec2": -0.5065461869,
+          "total_dphi_arcsec2": -0.1713333597,
+          "traversal_ara": 0.7964579448,
+          "connection_ara": 1.2035420552,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.275,
+          "geometric_a_arcsec2": 0.3357011861,
+          "potential_b_arcsec2": -0.5097735479,
+          "total_dphi_arcsec2": -0.1740723618,
+          "traversal_ara": 0.7941128756,
+          "connection_ara": 1.2058871244,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.3,
+          "geometric_a_arcsec2": 0.3361895451,
+          "potential_b_arcsec2": -0.5130009089,
+          "total_dphi_arcsec2": -0.1768113638,
+          "traversal_ara": 0.7917883286,
+          "connection_ara": 1.2082116714,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.325,
+          "geometric_a_arcsec2": 0.3366779041,
+          "potential_b_arcsec2": -0.5162282699,
+          "total_dphi_arcsec2": -0.1795503658,
+          "traversal_ara": 0.7894840355,
+          "connection_ara": 1.2105159645,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.35,
+          "geometric_a_arcsec2": 0.3371662631,
+          "potential_b_arcsec2": -0.519455631,
+          "total_dphi_arcsec2": -0.1822893679,
+          "traversal_ara": 0.7871997329,
+          "connection_ara": 1.2128002671,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.375,
+          "geometric_a_arcsec2": 0.337654622,
+          "potential_b_arcsec2": -0.522682992,
+          "total_dphi_arcsec2": -0.1850283699,
+          "traversal_ara": 0.7849351616,
+          "connection_ara": 1.2150648384,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.4,
+          "geometric_a_arcsec2": 0.338142981,
+          "potential_b_arcsec2": -0.525910353,
+          "total_dphi_arcsec2": -0.187767372,
+          "traversal_ara": 0.7826900672,
+          "connection_ara": 1.2173099328,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.425,
+          "geometric_a_arcsec2": 0.33863134,
+          "potential_b_arcsec2": -0.529137714,
+          "total_dphi_arcsec2": -0.190506374,
+          "traversal_ara": 0.7804641994,
+          "connection_ara": 1.2195358006,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.45,
+          "geometric_a_arcsec2": 0.339119699,
+          "potential_b_arcsec2": -0.532365075,
+          "total_dphi_arcsec2": -0.1932453761,
+          "traversal_ara": 0.7782573123,
+          "connection_ara": 1.2217426877,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.475,
+          "geometric_a_arcsec2": 0.3396080579,
+          "potential_b_arcsec2": -0.535592436,
+          "total_dphi_arcsec2": -0.1959843781,
+          "traversal_ara": 0.7760691642,
+          "connection_ara": 1.2239308358,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.5,
+          "geometric_a_arcsec2": 0.3400964169,
+          "potential_b_arcsec2": -0.5388197971,
+          "total_dphi_arcsec2": -0.1987233802,
+          "traversal_ara": 0.7738995174,
+          "connection_ara": 1.2261004826,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.525,
+          "geometric_a_arcsec2": 0.3405847759,
+          "potential_b_arcsec2": -0.5420471581,
+          "total_dphi_arcsec2": -0.2014623822,
+          "traversal_ara": 0.7717481382,
+          "connection_ara": 1.2282518618,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.55,
+          "geometric_a_arcsec2": 0.3410731348,
+          "potential_b_arcsec2": -0.5452745191,
+          "total_dphi_arcsec2": -0.2042013842,
+          "traversal_ara": 0.7696147969,
+          "connection_ara": 1.2303852031,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.575,
+          "geometric_a_arcsec2": 0.3415614938,
+          "potential_b_arcsec2": -0.5485018801,
+          "total_dphi_arcsec2": -0.2069403863,
+          "traversal_ara": 0.7674992676,
+          "connection_ara": 1.2325007324,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.6,
+          "geometric_a_arcsec2": 0.3420498528,
+          "potential_b_arcsec2": -0.5517292411,
+          "total_dphi_arcsec2": -0.2096793883,
+          "traversal_ara": 0.7654013282,
+          "connection_ara": 1.2345986718,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.625,
+          "geometric_a_arcsec2": 0.3425382118,
+          "potential_b_arcsec2": -0.5549566021,
+          "total_dphi_arcsec2": -0.2124183904,
+          "traversal_ara": 0.7633207601,
+          "connection_ara": 1.2366792399,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.65,
+          "geometric_a_arcsec2": 0.3430265707,
+          "potential_b_arcsec2": -0.5581839632,
+          "total_dphi_arcsec2": -0.2151573924,
+          "traversal_ara": 0.7612573485,
+          "connection_ara": 1.2387426515,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.675,
+          "geometric_a_arcsec2": 0.3435149297,
+          "potential_b_arcsec2": -0.5614113242,
+          "total_dphi_arcsec2": -0.2178963945,
+          "traversal_ara": 0.7592108821,
+          "connection_ara": 1.2407891179,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.7,
+          "geometric_a_arcsec2": 0.3440032887,
+          "potential_b_arcsec2": -0.5646386852,
+          "total_dphi_arcsec2": -0.2206353965,
+          "traversal_ara": 0.7571811529,
+          "connection_ara": 1.2428188471,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.725,
+          "geometric_a_arcsec2": 0.3444916477,
+          "potential_b_arcsec2": -0.5678660462,
+          "total_dphi_arcsec2": -0.2233743985,
+          "traversal_ara": 0.7551679566,
+          "connection_ara": 1.2448320434,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.75,
+          "geometric_a_arcsec2": 0.3449800066,
+          "potential_b_arcsec2": -0.5710934072,
+          "total_dphi_arcsec2": -0.2261134006,
+          "traversal_ara": 0.7531710918,
+          "connection_ara": 1.2468289082,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.775,
+          "geometric_a_arcsec2": 0.3454683656,
+          "potential_b_arcsec2": -0.5743207682,
+          "total_dphi_arcsec2": -0.2288524026,
+          "traversal_ara": 0.7511903607,
+          "connection_ara": 1.2488096393,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.8,
+          "geometric_a_arcsec2": 0.3459567246,
+          "potential_b_arcsec2": -0.5775481293,
+          "total_dphi_arcsec2": -0.2315914047,
+          "traversal_ara": 0.7492255685,
+          "connection_ara": 1.2507744315,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.825,
+          "geometric_a_arcsec2": 0.3464450836,
+          "potential_b_arcsec2": -0.5807754903,
+          "total_dphi_arcsec2": -0.2343304067,
+          "traversal_ara": 0.7472765237,
+          "connection_ara": 1.2527234763,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.85,
+          "geometric_a_arcsec2": 0.3469334425,
+          "potential_b_arcsec2": -0.5840028513,
+          "total_dphi_arcsec2": -0.2370694088,
+          "traversal_ara": 0.7453430376,
+          "connection_ara": 1.2546569624,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.875,
+          "geometric_a_arcsec2": 0.3474218015,
+          "potential_b_arcsec2": -0.5872302123,
+          "total_dphi_arcsec2": -0.2398084108,
+          "traversal_ara": 0.7434249247,
+          "connection_ara": 1.2565750753,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.9,
+          "geometric_a_arcsec2": 0.3479101605,
+          "potential_b_arcsec2": -0.5904575733,
+          "total_dphi_arcsec2": -0.2425474129,
+          "traversal_ara": 0.7415220024,
+          "connection_ara": 1.2584779976,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.925,
+          "geometric_a_arcsec2": 0.3483985195,
+          "potential_b_arcsec2": -0.5936849343,
+          "total_dphi_arcsec2": -0.2452864149,
+          "traversal_ara": 0.7396340909,
+          "connection_ara": 1.2603659091,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.95,
+          "geometric_a_arcsec2": 0.3488868784,
+          "potential_b_arcsec2": -0.5969122954,
+          "total_dphi_arcsec2": -0.2480254169,
+          "traversal_ara": 0.7377610133,
+          "connection_ara": 1.2622389867,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 0.975,
+          "geometric_a_arcsec2": 0.3493752374,
+          "potential_b_arcsec2": -0.6001396564,
+          "total_dphi_arcsec2": -0.250764419,
+          "traversal_ara": 0.7359025955,
+          "connection_ara": 1.2640974045,
+          "point_type": "path"
+        },
+        {
+          "pair": "AC",
+          "lambda": 1.0,
+          "geometric_a_arcsec2": 0.3498635964,
+          "potential_b_arcsec2": -0.6033670174,
+          "total_dphi_arcsec2": -0.253503421,
+          "traversal_ara": 0.734058666,
+          "connection_ara": 1.265941334,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.0,
+          "geometric_a_arcsec2": 0.2958558749,
+          "potential_b_arcsec2": -0.7875775397,
+          "total_dphi_arcsec2": -0.4917216648,
+          "traversal_ara": 0.546145007,
+          "connection_ara": 1.453854993,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.025,
+          "geometric_a_arcsec2": 0.2951358503,
+          "potential_b_arcsec2": -0.7902745793,
+          "total_dphi_arcsec2": -0.4951387289,
+          "traversal_ara": 0.5438235017,
+          "connection_ara": 1.4561764983,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.05,
+          "geometric_a_arcsec2": 0.2944158257,
+          "potential_b_arcsec2": -0.7929716188,
+          "total_dphi_arcsec2": -0.4985557931,
+          "traversal_ara": 0.5415104381,
+          "connection_ara": 1.4584895619,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.075,
+          "geometric_a_arcsec2": 0.2936958011,
+          "potential_b_arcsec2": -0.7956686584,
+          "total_dphi_arcsec2": -0.5019728573,
+          "traversal_ara": 0.53920577,
+          "connection_ara": 1.46079423,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.1,
+          "geometric_a_arcsec2": 0.2929757765,
+          "potential_b_arcsec2": -0.798365698,
+          "total_dphi_arcsec2": -0.5053899214,
+          "traversal_ara": 0.5369094521,
+          "connection_ara": 1.4630905479,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.125,
+          "geometric_a_arcsec2": 0.2922557519,
+          "potential_b_arcsec2": -0.8010627375,
+          "total_dphi_arcsec2": -0.5088069856,
+          "traversal_ara": 0.5346214388,
+          "connection_ara": 1.4653785612,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.15,
+          "geometric_a_arcsec2": 0.2915357273,
+          "potential_b_arcsec2": -0.8037597771,
+          "total_dphi_arcsec2": -0.5122240497,
+          "traversal_ara": 0.5323416853,
+          "connection_ara": 1.4676583147,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.175,
+          "geometric_a_arcsec2": 0.2908157027,
+          "potential_b_arcsec2": -0.8064568166,
+          "total_dphi_arcsec2": -0.5156411139,
+          "traversal_ara": 0.5300701469,
+          "connection_ara": 1.4699298531,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.2,
+          "geometric_a_arcsec2": 0.2900956781,
+          "potential_b_arcsec2": -0.8091538562,
+          "total_dphi_arcsec2": -0.5190581781,
+          "traversal_ara": 0.5278067792,
+          "connection_ara": 1.4721932208,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.225,
+          "geometric_a_arcsec2": 0.2893756536,
+          "potential_b_arcsec2": -0.8118508958,
+          "total_dphi_arcsec2": -0.5224752422,
+          "traversal_ara": 0.5255515384,
+          "connection_ara": 1.4744484616,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.25,
+          "geometric_a_arcsec2": 0.288655629,
+          "potential_b_arcsec2": -0.8145479353,
+          "total_dphi_arcsec2": -0.5258923064,
+          "traversal_ara": 0.5233043806,
+          "connection_ara": 1.4766956194,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.275,
+          "geometric_a_arcsec2": 0.2879356044,
+          "potential_b_arcsec2": -0.8172449749,
+          "total_dphi_arcsec2": -0.5293093705,
+          "traversal_ara": 0.5210652626,
+          "connection_ara": 1.4789347374,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.3,
+          "geometric_a_arcsec2": 0.2872155798,
+          "potential_b_arcsec2": -0.8199420144,
+          "total_dphi_arcsec2": -0.5327264347,
+          "traversal_ara": 0.5188341412,
+          "connection_ara": 1.4811658588,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.325,
+          "geometric_a_arcsec2": 0.2864955552,
+          "potential_b_arcsec2": -0.822639054,
+          "total_dphi_arcsec2": -0.5361434988,
+          "traversal_ara": 0.5166109736,
+          "connection_ara": 1.4833890264,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.35,
+          "geometric_a_arcsec2": 0.2857755306,
+          "potential_b_arcsec2": -0.8253360936,
+          "total_dphi_arcsec2": -0.539560563,
+          "traversal_ara": 0.5143957175,
+          "connection_ara": 1.4856042825,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.375,
+          "geometric_a_arcsec2": 0.285055506,
+          "potential_b_arcsec2": -0.8280331331,
+          "total_dphi_arcsec2": -0.5429776272,
+          "traversal_ara": 0.5121883307,
+          "connection_ara": 1.4878116693,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.4,
+          "geometric_a_arcsec2": 0.2843354814,
+          "potential_b_arcsec2": -0.8307301727,
+          "total_dphi_arcsec2": -0.5463946913,
+          "traversal_ara": 0.5099887712,
+          "connection_ara": 1.4900112288,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.425,
+          "geometric_a_arcsec2": 0.2836154568,
+          "potential_b_arcsec2": -0.8334272123,
+          "total_dphi_arcsec2": -0.5498117555,
+          "traversal_ara": 0.5077969976,
+          "connection_ara": 1.4922030024,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.45,
+          "geometric_a_arcsec2": 0.2828954322,
+          "potential_b_arcsec2": -0.8361242518,
+          "total_dphi_arcsec2": -0.5532288196,
+          "traversal_ara": 0.5056129686,
+          "connection_ara": 1.4943870314,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.475,
+          "geometric_a_arcsec2": 0.2821754076,
+          "potential_b_arcsec2": -0.8388212914,
+          "total_dphi_arcsec2": -0.5566458838,
+          "traversal_ara": 0.5034366432,
+          "connection_ara": 1.4965633568,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.5,
+          "geometric_a_arcsec2": 0.281455383,
+          "potential_b_arcsec2": -0.8415183309,
+          "total_dphi_arcsec2": -0.5600629479,
+          "traversal_ara": 0.5012679807,
+          "connection_ara": 1.4987320193,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.525,
+          "geometric_a_arcsec2": 0.2807353584,
+          "potential_b_arcsec2": -0.8442153705,
+          "total_dphi_arcsec2": -0.5634800121,
+          "traversal_ara": 0.4991069407,
+          "connection_ara": 1.5008930593,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.55,
+          "geometric_a_arcsec2": 0.2800153338,
+          "potential_b_arcsec2": -0.8469124101,
+          "total_dphi_arcsec2": -0.5668970763,
+          "traversal_ara": 0.4969534832,
+          "connection_ara": 1.5030465168,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.575,
+          "geometric_a_arcsec2": 0.2792953092,
+          "potential_b_arcsec2": -0.8496094496,
+          "total_dphi_arcsec2": -0.5703141404,
+          "traversal_ara": 0.4948075682,
+          "connection_ara": 1.5051924318,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.6,
+          "geometric_a_arcsec2": 0.2785752846,
+          "potential_b_arcsec2": -0.8523064892,
+          "total_dphi_arcsec2": -0.5737312046,
+          "traversal_ara": 0.4926691562,
+          "connection_ara": 1.5073308438,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.625,
+          "geometric_a_arcsec2": 0.27785526,
+          "potential_b_arcsec2": -0.8550035287,
+          "total_dphi_arcsec2": -0.5771482687,
+          "traversal_ara": 0.4905382079,
+          "connection_ara": 1.5094617921,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.65,
+          "geometric_a_arcsec2": 0.2771352354,
+          "potential_b_arcsec2": -0.8577005683,
+          "total_dphi_arcsec2": -0.5805653329,
+          "traversal_ara": 0.4884146843,
+          "connection_ara": 1.5115853157,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.675,
+          "geometric_a_arcsec2": 0.2764152108,
+          "potential_b_arcsec2": -0.8603976079,
+          "total_dphi_arcsec2": -0.5839823971,
+          "traversal_ara": 0.4862985467,
+          "connection_ara": 1.5137014533,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.7,
+          "geometric_a_arcsec2": 0.2756951862,
+          "potential_b_arcsec2": -0.8630946474,
+          "total_dphi_arcsec2": -0.5873994612,
+          "traversal_ara": 0.4841897567,
+          "connection_ara": 1.5158102433,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.725,
+          "geometric_a_arcsec2": 0.2749751616,
+          "potential_b_arcsec2": -0.865791687,
+          "total_dphi_arcsec2": -0.5908165254,
+          "traversal_ara": 0.4820882759,
+          "connection_ara": 1.5179117241,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.75,
+          "geometric_a_arcsec2": 0.274255137,
+          "potential_b_arcsec2": -0.8684887265,
+          "total_dphi_arcsec2": -0.5942335895,
+          "traversal_ara": 0.4799940665,
+          "connection_ara": 1.5200059335,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.775,
+          "geometric_a_arcsec2": 0.2735351124,
+          "potential_b_arcsec2": -0.8711857661,
+          "total_dphi_arcsec2": -0.5976506537,
+          "traversal_ara": 0.4779070908,
+          "connection_ara": 1.5220929092,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.8,
+          "geometric_a_arcsec2": 0.2728150878,
+          "potential_b_arcsec2": -0.8738828057,
+          "total_dphi_arcsec2": -0.6010677178,
+          "traversal_ara": 0.4758273114,
+          "connection_ara": 1.5241726886,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.825,
+          "geometric_a_arcsec2": 0.2720950632,
+          "potential_b_arcsec2": -0.8765798452,
+          "total_dphi_arcsec2": -0.604484782,
+          "traversal_ara": 0.4737546911,
+          "connection_ara": 1.5262453089,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.85,
+          "geometric_a_arcsec2": 0.2713750386,
+          "potential_b_arcsec2": -0.8792768848,
+          "total_dphi_arcsec2": -0.6079018462,
+          "traversal_ara": 0.4716891931,
+          "connection_ara": 1.5283108069,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.875,
+          "geometric_a_arcsec2": 0.270655014,
+          "potential_b_arcsec2": -0.8819739244,
+          "total_dphi_arcsec2": -0.6113189103,
+          "traversal_ara": 0.4696307806,
+          "connection_ara": 1.5303692194,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.9,
+          "geometric_a_arcsec2": 0.2699349894,
+          "potential_b_arcsec2": -0.8846709639,
+          "total_dphi_arcsec2": -0.6147359745,
+          "traversal_ara": 0.4675794173,
+          "connection_ara": 1.5324205827,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.925,
+          "geometric_a_arcsec2": 0.2692149648,
+          "potential_b_arcsec2": -0.8873680035,
+          "total_dphi_arcsec2": -0.6181530386,
+          "traversal_ara": 0.465535067,
+          "connection_ara": 1.534464933,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.95,
+          "geometric_a_arcsec2": 0.2684949402,
+          "potential_b_arcsec2": -0.890065043,
+          "total_dphi_arcsec2": -0.6215701028,
+          "traversal_ara": 0.4634976939,
+          "connection_ara": 1.5365023061,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 0.975,
+          "geometric_a_arcsec2": 0.2677749157,
+          "potential_b_arcsec2": -0.8927620826,
+          "total_dphi_arcsec2": -0.624987167,
+          "traversal_ara": 0.4614672622,
+          "connection_ara": 1.5385327378,
+          "point_type": "path"
+        },
+        {
+          "pair": "AD",
+          "lambda": 1.0,
+          "geometric_a_arcsec2": 0.2670548911,
+          "potential_b_arcsec2": -0.8954591222,
+          "total_dphi_arcsec2": -0.6284042311,
+          "traversal_ara": 0.4594437366,
+          "connection_ara": 1.5405562634,
+          "point_type": "path"
+        }
+      ],
+      "lambda_required": [
+        {
+          "pair": "AB",
+          "series": "fitted shear endpoint",
+          "lambda": 1.0,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "series": "outcome-required",
+          "lambda": 11.4735459415,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AC",
+          "series": "fitted shear endpoint",
+          "lambda": 1.0,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "series": "outcome-required",
+          "lambda": -0.094669788,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AD",
+          "series": "fitted shear endpoint",
+          "lambda": 1.0,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "series": "outcome-required",
+          "lambda": 2.542455873,
+          "blind_status": "clean"
+        }
+      ],
+      "native": [
+        {
+          "pair": "AB",
+          "component": "geometric A / traversal",
+          "fermat_arcsec2": 0.0097751693,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "component": "model potential B / connection",
+          "fermat_arcsec2": -0.130376143,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "component": "Te-ARA solved B_eff",
+          "fermat_arcsec2": -0.3222816294,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "component": "model total",
+          "fermat_arcsec2": -0.1206009737,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "component": "observed-required total",
+          "fermat_arcsec2": -0.3125064601,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AC",
+          "component": "geometric A / traversal",
+          "fermat_arcsec2": 0.3498635964,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "component": "model potential B / connection",
+          "fermat_arcsec2": -0.6033670174,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "component": "Te-ARA solved B_eff",
+          "fermat_arcsec2": -0.4834349059,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "component": "model total",
+          "fermat_arcsec2": -0.253503421,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "component": "observed-required total",
+          "fermat_arcsec2": -0.1335713096,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AD",
+          "component": "geometric A / traversal",
+          "fermat_arcsec2": 0.2670548911,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "component": "model potential B / connection",
+          "fermat_arcsec2": -0.8954591222,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "component": "Te-ARA solved B_eff",
+          "fermat_arcsec2": -1.1062859493,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "component": "model total",
+          "fermat_arcsec2": -0.6284042311,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "component": "observed-required total",
+          "fermat_arcsec2": -0.8392310583,
+          "blind_status": "clean"
+        }
+      ],
+      "ara": [
+        {
+          "pair": "AB",
+          "point": "pre-delay fitted",
+          "traversal_ara": 0.1394945094,
+          "connection_ara": 1.8605054906,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "point": "later outcome required",
+          "traversal_ara": 0.0588764893,
+          "connection_ara": 1.9411235107,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AC",
+          "point": "pre-delay fitted",
+          "traversal_ara": 0.734058666,
+          "connection_ara": 1.265941334,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "point": "later outcome required",
+          "traversal_ara": 0.8397077287,
+          "connection_ara": 1.1602922713,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AD",
+          "point": "pre-delay fitted",
+          "traversal_ara": 0.4594437366,
+          "connection_ara": 1.5405562634,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "point": "later outcome required",
+          "traversal_ara": 0.388912764,
+          "connection_ara": 1.611087236,
+          "blind_status": "clean"
+        }
+      ],
+      "other": [
+        {
+          "pair": "AB",
+          "other_component": "along known line / movement",
+          "ara_coordinate": 1.6775459793,
+          "native_residual_arcsec2": 0.1884555695,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AB",
+          "other_component": "normal to line / curvature",
+          "ara_coordinate": 0.3224540207,
+          "native_residual_arcsec2": -0.0362244951,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AC",
+          "other_component": "along known line / movement",
+          "ara_coordinate": 1.7371389799,
+          "native_residual_arcsec2": -0.1185821923,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AC",
+          "other_component": "normal to line / curvature",
+          "ara_coordinate": 0.2628610201,
+          "native_residual_arcsec2": 0.0179436628,
+          "blind_status": "model-informed sign"
+        },
+        {
+          "pair": "AD",
+          "other_component": "along known line / movement",
+          "ara_coordinate": 1.5785712159,
+          "native_residual_arcsec2": 0.2036929321,
+          "blind_status": "clean"
+        },
+        {
+          "pair": "AD",
+          "other_component": "normal to line / curvature",
+          "ara_coordinate": 0.4214287841,
+          "native_residual_arcsec2": 0.0543795958,
+          "blind_status": "clean"
+        }
+      ],
+      "detail": [
+        {
+          "pair": "AB",
+          "blind_status": "clean",
+          "model_delay_days": -4.7853477135,
+          "observed_delay_days": -12.4,
+          "observed_delay_sigma_days": 3.7682887363,
+          "total_match_lambda": 11.4735459415,
+          "other_movement_ara": 1.6775459793,
+          "other_connection_ara": 0.3224540207,
+          "parallel_percent": 83.8772989669,
+          "perpendicular_percent": 16.1227010331
+        },
+        {
+          "pair": "AC",
+          "blind_status": "model-informed sign",
+          "model_delay_days": -10.0588078062,
+          "observed_delay_days": -5.3,
+          "observed_delay_sigma_days": 2.7386127875,
+          "total_match_lambda": -0.094669788,
+          "other_movement_ara": 1.7371389799,
+          "other_connection_ara": 0.2628610201,
+          "parallel_percent": 86.8569489932,
+          "perpendicular_percent": 13.1430510068
+        },
+        {
+          "pair": "AD",
+          "blind_status": "clean",
+          "model_delay_days": -24.9345644323,
+          "observed_delay_days": -33.3,
+          "observed_delay_sigma_days": 6.3166446789,
+          "total_match_lambda": 2.542455873,
+          "other_movement_ara": 1.5785712159,
+          "other_connection_ara": 0.4214287841,
+          "parallel_percent": 78.9285607961,
+          "perpendicular_percent": 21.0714392039
+        }
+      ],
+      "uncertainty": [
+        {
+          "pair": "AB",
+          "metric": "geometric_a_arcsec2",
+          "q16": 0.0044040217,
+          "median": 0.0095313729,
+          "q84": 0.0143993918
+        },
+        {
+          "pair": "AB",
+          "metric": "potential_b_arcsec2",
+          "q16": -0.1372519175,
+          "median": -0.1300082236,
+          "q84": -0.1223374371
+        },
+        {
+          "pair": "AB",
+          "metric": "observed_dphi_arcsec2",
+          "q16": -0.4078923453,
+          "median": -0.3137868876,
+          "q84": -0.2148698977
+        },
+        {
+          "pair": "AB",
+          "metric": "parallel_residual_arcsec2",
+          "q16": 0.0930384512,
+          "median": 0.1908182247,
+          "q84": 0.2814672474
+        },
+        {
+          "pair": "AB",
+          "metric": "perpendicular_residual_arcsec2",
+          "q16": -0.0539692421,
+          "median": -0.0358095055,
+          "q84": -0.0173688494
+        },
+        {
+          "pair": "AC",
+          "metric": "geometric_a_arcsec2",
+          "q16": 0.3465345428,
+          "median": 0.3496912352,
+          "q84": 0.352828987
+        },
+        {
+          "pair": "AC",
+          "metric": "potential_b_arcsec2",
+          "q16": -0.6099532596,
+          "median": -0.6032009556,
+          "q84": -0.5958074955
+        },
+        {
+          "pair": "AC",
+          "metric": "observed_dphi_arcsec2",
+          "q16": -0.2054712213,
+          "median": -0.135953567,
+          "q84": -0.0650269813
+        },
+        {
+          "pair": "AC",
+          "metric": "parallel_residual_arcsec2",
+          "q16": -0.1864422207,
+          "median": -0.1154601472,
+          "q84": -0.047590036
+        },
+        {
+          "pair": "AC",
+          "metric": "perpendicular_residual_arcsec2",
+          "q16": 0.0072399527,
+          "median": 0.0174662353,
+          "q84": 0.0282443898
+        },
+        {
+          "pair": "AD",
+          "metric": "geometric_a_arcsec2",
+          "q16": 0.2622360724,
+          "median": 0.266836142,
+          "q84": 0.2717275727
+        },
+        {
+          "pair": "AD",
+          "metric": "potential_b_arcsec2",
+          "q16": -0.9053729441,
+          "median": -0.8951204474,
+          "q84": -0.8848781769
+        },
+        {
+          "pair": "AD",
+          "metric": "observed_dphi_arcsec2",
+          "q16": -0.9954147896,
+          "median": -0.8420068642,
+          "q84": -0.6724397897
+        },
+        {
+          "pair": "AD",
+          "metric": "parallel_residual_arcsec2",
+          "q16": 0.0434061097,
+          "median": 0.2073239179,
+          "q84": 0.3557250685
+        },
+        {
+          "pair": "AD",
+          "metric": "perpendicular_residual_arcsec2",
+          "q16": 0.0115071445,
+          "median": 0.0554203724,
+          "q84": 0.09471815
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t445_analysis",
+      "label": "T445 reviewed SQLite outputs from WGD 2038\u22124008",
+      "href": "https://github.com/TDCOSMO/WGD2038-4008",
+      "query": {
+        "language": "sql",
+        "engine": "SQLite",
+        "sql": "SELECT * FROM decomposition ORDER BY CASE pair WHEN 'AB' THEN 1 WHEN 'AC' THEN 2 ELSE 3 END;",
+        "description": "Report-input query over the independently validated T445 decomposition table.",
+        "executed_at": "2026-08-28T03:10:37+00:00",
+        "tables_used": [
+          "decomposition",
+          "controlled_path",
+          "source_lock",
+          "global_clean_fit"
+        ],
+        "filters": [
+          "one fixed identity: WGD 2038\u22124008",
+          "clean primary outcomes: AB and AD",
+          "AC retained but labelled model-informed sign",
+          "external cosmology fixed at H0=70 km/s/Mpc and Omega_m=0.3"
+        ],
+        "metric_definitions": [
+          "A is the delay-blind geometric Fermat contribution; B is the lens-potential contribution.",
+          "B_eff is solved by Te-ARA as observed differential Fermat potential minus A.",
+          "Lambda scales only the named external-shear component from absent (0) to fitted (1); it is not time.",
+          "Parallel/normal shares are conditional on holding A fixed in the Te-ARA solve; their 0\u20132 normalization is secondary to native arcsec\u00b2."
+        ]
+      }
+    },
+    {
+      "id": "tdcosmo_ix",
+      "label": "TDCOSMO IX pre-delay lens model",
+      "href": "https://arxiv.org/abs/2202.11101"
+    },
+    {
+      "id": "tdcosmo_xvi",
+      "label": "TDCOSMO XVI later time-delay measurement",
+      "href": "https://arxiv.org/abs/2406.02683"
+    },
+    {
+      "id": "gaia_gral_x",
+      "label": "Gaia GraL X component astrometry",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/707/A345"
+    }
+  ]
+}

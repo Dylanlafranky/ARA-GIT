@@ -1,0 +1,252 @@
+{
+  "test_id": "T396",
+  "test": "Information3 spin/child lock",
+  "protocol_sha256": "76BF6A48147DAB008E16343648ED17CD40BFC4360C3B8FD590EE7693B05C7B44",
+  "primary_seed": 396,
+  "primary_n": 1000000,
+  "split_counts": {
+    "calibration": 499615,
+    "validation": 200326,
+    "holdout": 300059
+  },
+  "coordinates": {
+    "parent": "P=x_e",
+    "relation": "R=1+cos(theta_eS)",
+    "child": "C=2*x_nu_e/(2-P)"
+  },
+  "selected_resolutions": {
+    "parent_bins": 64,
+    "relation_bins": 8,
+    "joint_parent_bins": 16,
+    "joint_relation_bins": 12,
+    "child_bins": 64
+  },
+  "generator_validation": {
+    "mean_x_e": 0.6998777893249053,
+    "expected_mean_x_e": 0.7,
+    "mean_x_nu_e": 0.5999766446222865,
+    "expected_mean_x_nu_e": 0.6,
+    "mean_cos_e_spin": 0.11027843922388511,
+    "expected_mean_cos_e_spin": 0.1111111111111111,
+    "all_within_0p0025": true
+  },
+  "gate_A_exact_composition": {
+    "errors": {
+      "max_abs_nu_e_error": 1.1102230246251565e-16,
+      "max_abs_anti_nu_mu_error": 2.220446049250313e-16,
+      "max_abs_total_closure_error": 4.440892098500626e-16
+    },
+    "pass": true,
+    "classification": "forced nested-coordinate identity; not independent evidence"
+  },
+  "holdout_models": {
+    "joint_information3": {
+      "mean_nll": -0.0765520135630199,
+      "child_mae": 0.22495900659399004,
+      "nu_e_absolute_mae": 0.13671873687501743,
+      "anti_nu_mu_absolute_mae": 0.13671873687501743,
+      "direction_brier": 0.22214572900870183
+    },
+    "parent_only": {
+      "mean_nll": -0.06104562887077319,
+      "child_mae": 0.23247212582625257,
+      "nu_e_absolute_mae": 0.14160229527275875,
+      "anti_nu_mu_absolute_mae": 0.14160229527275875,
+      "direction_brier": 0.23053467880195028
+    },
+    "relation_only": {
+      "mean_nll": 0.17397569574784957,
+      "child_mae": 0.22808521028646334,
+      "nu_e_absolute_mae": 0.1390858777586178,
+      "anti_nu_mu_absolute_mae": 0.1390858777586178,
+      "direction_brier": 0.22469548108444995
+    },
+    "unconditional": {
+      "mean_nll": 0.19955061532423754,
+      "child_mae": 0.2337705303028358,
+      "nu_e_absolute_mae": 0.1425158997190531,
+      "anti_nu_mu_absolute_mae": 0.1425158997190531,
+      "direction_brier": 0.2344602441402998
+    },
+    "additive_factorized": {
+      "mean_nll": -0.08193088404780693,
+      "child_mae": 0.22623207954189412,
+      "nu_e_absolute_mae": 0.13753452352737233,
+      "anti_nu_mu_absolute_mae": 0.13753452352737233,
+      "direction_brier": 0.2238791839260229
+    },
+    "relation_shuffled_calibration": {
+      "mean_nll": -0.04019217519884266,
+      "child_mae": 0.23259773578137036,
+      "nu_e_absolute_mae": 0.14169208678471218,
+      "anti_nu_mu_absolute_mae": 0.14169208678471218,
+      "direction_brier": 0.23080011673445905
+    },
+    "wrong_event_relation": {
+      "mean_nll": 0.0017521672070686485,
+      "child_mae": 0.2379233824831544,
+      "nu_e_absolute_mae": 0.14509962964491763,
+      "anti_nu_mu_absolute_mae": 0.14509962964491763,
+      "direction_brier": 0.23956758263258013
+    },
+    "mirrored_orientation": {
+      "mean_nll": 0.08739771786452731,
+      "child_mae": 0.25176177798673244,
+      "nu_e_absolute_mae": 0.15386502491938958,
+      "anti_nu_mu_absolute_mae": 0.15386502491938958,
+      "direction_brier": 0.2586257994931296
+    },
+    "phase_space": {
+      "mean_nll": 0.025771659198687465,
+      "child_mae": 0.24438769642344912,
+      "nu_e_absolute_mae": 0.14984121415903673,
+      "anti_nu_mu_absolute_mae": 0.14984121415903673,
+      "direction_brier": 0.25
+    },
+    "analytic_va_oracle": {
+      "mean_nll": -0.11601449483990683
+    }
+  },
+  "primary_incremental_gain_nats_per_event": 0.015506384692246702,
+  "primary_gain_ci95": [
+    0.014412248157009087,
+    0.01664196616331892
+  ],
+  "primary_gate": {
+    "positive_gain": true,
+    "gain_ci_excludes_zero": true,
+    "beats_relation_only": true,
+    "beats_unconditional": true,
+    "zero_polarization_falsifier": true,
+    "pass": true
+  },
+  "sensitivity": [
+    {
+      "polarization": 1.0,
+      "seed": 396,
+      "n": 1000000,
+      "holdout_n": 300059,
+      "parent_mean_nll": -0.06104562887077319,
+      "joint_mean_nll": -0.0765520135630199,
+      "incremental_gain": 0.015506384692246702,
+      "gain_ci95_low": 0.014412248157009087,
+      "gain_ci95_high": 0.01664196616331892,
+      "additive_mean_nll": -0.08193088404780693,
+      "additive_incremental_gain": 0.02088525517703373,
+      "additive_gain_ci95_low": 0.02012820818062417,
+      "additive_gain_ci95_high": 0.02165296996521722,
+      "mean_parent": 0.6998777893249053,
+      "mean_x_nue": 0.5999766446222865,
+      "mean_cos_e_spin": 0.11027843922388511
+    },
+    {
+      "polarization": 0.85,
+      "seed": 1396,
+      "n": 500000,
+      "holdout_n": 150263,
+      "parent_mean_nll": -0.05538954791669032,
+      "joint_mean_nll": -0.05167138829593785,
+      "incremental_gain": -0.0037181596207524785,
+      "gain_ci95_low": -0.005184912607547491,
+      "gain_ci95_high": -0.002215014577057448,
+      "additive_mean_nll": -0.06891741764317723,
+      "additive_incremental_gain": 0.013527869726486912,
+      "additive_gain_ci95_low": 0.012467604061157793,
+      "additive_gain_ci95_high": 0.014611607135754224,
+      "mean_parent": 0.7003468481965608,
+      "mean_x_nue": 0.5999293532847899,
+      "mean_cos_e_spin": 0.09463599591530875
+    },
+    {
+      "polarization": 0.5,
+      "seed": 2396,
+      "n": 500000,
+      "holdout_n": 150263,
+      "parent_mean_nll": -0.05438873216472878,
+      "joint_mean_nll": -0.03478414706232489,
+      "incremental_gain": -0.019604585102403906,
+      "gain_ci95_low": -0.020856246906634318,
+      "gain_ci95_high": -0.01834977375598223,
+      "additive_mean_nll": -0.05810817866562467,
+      "additive_incremental_gain": 0.003719446500895879,
+      "additive_gain_ci95_low": 0.0031415938141687904,
+      "additive_gain_ci95_high": 0.004291154480349621,
+      "mean_parent": 0.6999243678785427,
+      "mean_x_nue": 0.6001361279348868,
+      "mean_cos_e_spin": 0.05653251549115986
+    },
+    {
+      "polarization": 0.0,
+      "seed": 3396,
+      "n": 500000,
+      "holdout_n": 150263,
+      "parent_mean_nll": -0.05526741852730034,
+      "joint_mean_nll": -0.027447471015228445,
+      "incremental_gain": -0.027819947512071893,
+      "gain_ci95_low": -0.028782174190344813,
+      "gain_ci95_high": -0.02686840528405111,
+      "additive_mean_nll": -0.0540226249367098,
+      "additive_incremental_gain": -0.0012447935905905427,
+      "additive_gain_ci95_low": -0.0014314988987391105,
+      "additive_gain_ci95_high": -0.0010513140083618366,
+      "mean_parent": 0.7005857371095319,
+      "mean_x_nue": 0.5999025859457149,
+      "mean_cos_e_spin": -0.00015676359883928616
+    }
+  ],
+  "control_ordering": [
+    [
+      "analytic_va_oracle",
+      -0.11601449483990683
+    ],
+    [
+      "additive_factorized",
+      -0.08193088404780693
+    ],
+    [
+      "joint_information3",
+      -0.0765520135630199
+    ],
+    [
+      "parent_only",
+      -0.06104562887077319
+    ],
+    [
+      "relation_shuffled_calibration",
+      -0.04019217519884266
+    ],
+    [
+      "wrong_event_relation",
+      0.0017521672070686485
+    ],
+    [
+      "phase_space",
+      0.025771659198687465
+    ],
+    [
+      "mirrored_orientation",
+      0.08739771786452731
+    ],
+    [
+      "relation_only",
+      0.17397569574784957
+    ],
+    [
+      "unconditional",
+      0.19955061532423754
+    ]
+  ],
+  "sources": [
+    {
+      "title": "Muon polarization in the MEG experiment: predictions and measurements",
+      "url": "https://doi.org/10.1140/epjc/s10052-016-4047-3",
+      "role": "positive-muon Michel energy-angle distribution"
+    },
+    {
+      "title": "Corrections to the fluxes of a Neutrino Factory",
+      "url": "https://arxiv.org/abs/hep-ph/0203052",
+      "role": "polarized muon matrix element and neutrino spectra"
+    }
+  ],
+  "claim_boundary": "Fresh leading-order polarized V-A truth crosswalk. It tests incremental event-level information from two observed relations; it is not direct two-neutrino measurement or a pre-decay clock."
+}

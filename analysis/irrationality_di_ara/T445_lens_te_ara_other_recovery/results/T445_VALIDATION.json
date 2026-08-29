@@ -1,0 +1,93 @@
+{
+  "test": "T445",
+  "status": "PASS",
+  "checks_passed": 17,
+  "checks_total": 17,
+  "checks": [
+    {
+      "check": "controlled_path_row_count",
+      "pass": true,
+      "detail": "rows=126; expected 41\u00d73 path + 3 outcome"
+    },
+    {
+      "check": "fermat_components_sum",
+      "pass": true,
+      "detail": "A+B equals the model differential Fermat potential for every controlled point"
+    },
+    {
+      "check": "ara_pair_sums_to_two",
+      "pass": true,
+      "detail": "native terms are retained; the secondary contribution-share display sums to 2 by definition"
+    },
+    {
+      "check": "source_lock",
+      "pass": true,
+      "detail": "independently recomputed RMS=0.002512 arcsec"
+    },
+    {
+      "check": "component_crosswalk",
+      "pass": true,
+      "detail": "TDCOSMO A/B/C/D = Gaia C/B/A/D"
+    },
+    {
+      "check": "pre_delay_prediction_reproduction",
+      "pass": true,
+      "detail": "reconstructed=[-4.785, -10.059, -24.935] days"
+    },
+    {
+      "check": "te_ara_solve",
+      "pass": true,
+      "detail": "B_eff = observed total \u2212 delay-blind A"
+    },
+    {
+      "check": "total_match_lambda_AB",
+      "pass": true,
+      "detail": "lambda=11.473546"
+    },
+    {
+      "check": "total_match_lambda_AC",
+      "pass": true,
+      "detail": "lambda=-0.094670"
+    },
+    {
+      "check": "total_match_lambda_AD",
+      "pass": true,
+      "detail": "lambda=2.542456"
+    },
+    {
+      "check": "clean_pairs_outside_controlled_path",
+      "pass": true,
+      "detail": "both independently clean delay pairs lie beyond \u03bb\u2208[0,1]"
+    },
+    {
+      "check": "uncertainty_draw_count",
+      "pass": true,
+      "detail": "rows=6000 = 2000 draws \u00d7 3 pairs"
+    },
+    {
+      "check": "uncertainty_pair_balance",
+      "pass": true,
+      "detail": "{'AB': 2000, 'AC': 2000, 'AD': 2000}"
+    },
+    {
+      "check": "delay_covariance_positive_definite",
+      "pass": true,
+      "detail": "eigenvalues=[3.7716, 9.2047, 48.6237]"
+    },
+    {
+      "check": "global_p_value_consistency",
+      "pass": true,
+      "detail": "p=0.049723"
+    },
+    {
+      "check": "sqlite_extract_counts",
+      "pass": true,
+      "detail": "{'decomposition': 3, 'controlled_path': 126, 'uncertainty_samples': 6000, 'source_lock': 4, 'model_parameters': 8, 'global_clean_fit': 5}"
+    },
+    {
+      "check": "no_delay_leakage_into_fit",
+      "pass": true,
+      "detail": "astrometric lens fit contains no measured-delay variable"
+    }
+  ]
+}

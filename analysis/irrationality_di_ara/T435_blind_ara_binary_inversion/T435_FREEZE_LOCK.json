@@ -1,0 +1,31 @@
+{
+  "test": "T435_blind_ara_binary_inversion",
+  "status": "FROZEN_BEFORE_HORIZON_REVEAL",
+  "source": "SXS:BBH:0305 Lev6, Zenodo record 13182440",
+  "inference_input": "data/SXS_BBH_0305_Lev6_Strain_N4.h5",
+  "hidden_answer_keys": [
+    "data/SXS_BBH_0305_Lev6_Horizons.h5",
+    "data/SXS_BBH_0305_Lev6_metadata.json"
+  ],
+  "primary_rules": {
+    "child_phase": "unwrap(arg(h22))/2",
+    "child_pair": "antipodal unordered pair",
+    "child_asymmetry": "sqrt(P_odd/(P_even+P_odd+eps)), waveform-only p05/p95 map",
+    "relation": "reverse empirical rank of abs(0.5*dphi22/dt), mapped 0..2",
+    "handover": "median(max modal power, max cadence derivative, max absolute modal-concentration derivative)"
+  },
+  "allowed_scoring_symmetries": [
+    "constant planar rotation",
+    "global handedness reversal",
+    "A/B label swap"
+  ],
+  "primary_gates": {
+    "orientation_coherence": 0.8,
+    "orientation_margin_over_unhalved": 0.1,
+    "relation_spearman": 0.7,
+    "relation_margin_over_scrambled": 0.2,
+    "child_radius_median_spearman": 0.5,
+    "handover_error": "at most one inferred parent cycle; otherwise unscorable if clocks are incompatible"
+  },
+  "evidence_class": "single-simulation crosswalk and blind inversion calibration"
+}

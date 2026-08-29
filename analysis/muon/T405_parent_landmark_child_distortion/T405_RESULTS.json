@@ -1,0 +1,48 @@
+{
+  "test": "T405 parent landmark versus child distortion",
+  "date": "2026-08-18",
+  "protocol_sha256": "bd7b78f28e2f1e26749a8be586967f9b70b6139ad65bd388fc751db70110b03e",
+  "verdict": "PARTICIPATION-DEPENDENT CHILD DISPLACEMENT REPRODUCED; STRUCTURALLY ENCODED BY THE CUT",
+  "primary": {
+    "valid_splits": 20,
+    "parent_reference": 0.5,
+    "median_child_crest": 0.9482763242011505,
+    "child_crest_range": [
+      0.6403803483478678,
+      1.057813896977887
+    ],
+    "median_displacement": 0.4482763242011505,
+    "prompt_participation_range": [
+      0.10975686718504116,
+      0.34080220652373755
+    ],
+    "spearman_rho": 1.0,
+    "permutation_draws": 50000,
+    "permutation_as_large": 0,
+    "permutation_p_add_one": 1.999960000799984e-05,
+    "loo_rho_range": [
+      1.0,
+      1.0
+    ]
+  },
+  "boundary_mediation_diagnostic": {
+    "rho_prompt_participation_vs_left_boundary": 1.0,
+    "rho_left_boundary_vs_displacement": 1.0,
+    "partial_rank_rho_prompt_vs_displacement_given_left_boundary": null,
+    "interpretation": "Prompt participation, equality-boundary position and child displacement have identical ranks here. Conditioning is non-identifiable: the boundary carries the measured participation effect and cannot supply independent evidence."
+  },
+  "gates": {
+    "G1_at_least_15_valid_splits": true,
+    "G2_primary_rho_at_least_0p70": true,
+    "G3_permutation_p_at_most_0p05": true,
+    "G4_all_LOO_positive_and_min_at_least_0p60": true,
+    "G5_median_child_crest_above_parent_0p5": true
+  },
+  "boundaries": [
+    "The deterministic splits overlap heavily and are not external replications.",
+    "Prompt and delayed fractions are complements, not independent variables.",
+    "The equality boundary is part of the coordinate construction and is a mechanism diagnostic, not a second predictor.",
+    "The perfect rank relation is structurally encoded by the fitted cut and validates the coordinate response; it is not external physical confirmation.",
+    "This test supports displacement tracking inside T400; it does not name a physical energy carrier or predict an individual decay."
+  ]
+}

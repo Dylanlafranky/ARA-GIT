@@ -1,0 +1,34 @@
+{
+  "test": "T415 independent validation",
+  "status": "passed",
+  "checks": {
+    "protocol_hash_matches_freeze": true,
+    "analysis_hash_matches_freeze": true,
+    "t414_loader_hash_matches_freeze": true,
+    "split_counts_are_13_and_13": true,
+    "development_source_hashes_match": true,
+    "validation_source_hashes_match": true,
+    "all_15_model_horizon_rows_present": true,
+    "all_195_field_rows_present": true,
+    "all_390_period_rows_present": true,
+    "primary_median_recomputes": true,
+    "primary_field_wins_recompute": true,
+    "frozen_gates_recompute": true,
+    "posthoc_strength_rate_correlation_recomputes": true,
+    "posthoc_full_array_summary_matches": true
+  },
+  "notes": {
+    "frozen_primary_median_improvement_fraction": 0.30546712338775706,
+    "frozen_primary_field_wins": 13,
+    "recomputed_gates": {
+      "median_improvement_positive": true,
+      "at_least_10_of_13_fields_improve": true,
+      "beats_wrong_frequency_control": false,
+      "beats_broken_history_control": true,
+      "both_rf_period_medians_positive": true,
+      "full_array_supported": false
+    },
+    "posthoc_strength_vs_current_log_rate_correlation": -0.9675399906441512,
+    "posthoc_full_array_median_improvement_fraction": -0.0021512635731562035
+  }
+}

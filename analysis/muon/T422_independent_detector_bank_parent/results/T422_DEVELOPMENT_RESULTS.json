@@ -1,0 +1,313 @@
+{
+  "analysis_sha256": "22e962b52790d769c117a16acc3aa66e65b60e5b68b98529f13c2d31562dfcdf",
+  "boundaries": [
+    "Population-level detector relation, not an individual muon or neutrino event.",
+    "Opposing banks are disjoint measurements of one source but can share source and instrument systematics.",
+    "A pass does not identify H as a unique physical parent."
+  ],
+  "calibration_rows": 208,
+  "causal_boundary_us": 2.25,
+  "coordinates": {
+    "candidate_parent": "other-bank lag-angle H with ridge at 1",
+    "child": "U/R crossing from one bank",
+    "orientation": "all coordinates 0-2; U=R child crossover; H=1 candidate-parent ridge"
+  },
+  "directions": {
+    "B_to_F": {
+      "attempted_sequences": 26,
+      "direction": "B_to_F",
+      "eligibility_rate": 0.4230769230769231,
+      "eligible_sequences": 11,
+      "event_count": 17,
+      "field_balanced_parent_ridge_distance": 0.18752186320642145,
+      "field_count": 6,
+      "median_crossing_coordinate": 0.8311090417391745,
+      "median_other_bank_H": 1.115197164388755,
+      "mismatch_lineage_effect": {
+        "ci95": [
+          -0.12186582762393483,
+          0.02229545651240719
+        ],
+        "field_count": 6,
+        "median": -0.04180224676601957
+      },
+      "rf_exposure": {
+        "RF off": -0.02677236322438359,
+        "RF on": 0.006587881052283473
+      },
+      "ridge_exposure": {
+        "ci95": [
+          -0.0595699301116982,
+          0.21709974895204642
+        ],
+        "field_count": 6,
+        "median": 0.058438597754807114
+      },
+      "same_bank_exposure": {
+        "ci95": [
+          -0.006461222953088208,
+          0.14706515092897002
+        ],
+        "field_count": 6,
+        "median": 0.05124924033655309
+      },
+      "shift": {
+        "empirical_p": 0.2077922077922078,
+        "null_median": 0.24518067229031792,
+        "real_distance": 0.18752186320642145
+      },
+      "wrong_frequency_effect": {
+        "ci95": [
+          -0.15575579369925732,
+          -0.00738240020080394
+        ],
+        "field_count": 6,
+        "median": -0.07440059723776948
+      }
+    },
+    "F_to_B": {
+      "attempted_sequences": 26,
+      "direction": "F_to_B",
+      "eligibility_rate": 0.5,
+      "eligible_sequences": 13,
+      "event_count": 17,
+      "field_balanced_parent_ridge_distance": 0.20036346087494494,
+      "field_count": 7,
+      "median_crossing_coordinate": 0.833587252201871,
+      "median_other_bank_H": 0.8940584031185312,
+      "mismatch_lineage_effect": {
+        "ci95": [
+          -0.0841052159517075,
+          -0.007920867909764928
+        ],
+        "field_count": 7,
+        "median": -0.06630894355259004
+      },
+      "rf_exposure": {
+        "RF off": 0.03729953133989061,
+        "RF on": 0.030400763155120303
+      },
+      "ridge_exposure": {
+        "ci95": [
+          -0.03697818019959154,
+          0.0628424379492058
+        ],
+        "field_count": 7,
+        "median": 0.043398282670922494
+      },
+      "same_bank_exposure": {
+        "ci95": [
+          -0.03628356036914071,
+          0.19271185963560766
+        ],
+        "field_count": 7,
+        "median": 0.021003494088606023
+      },
+      "shift": {
+        "empirical_p": 0.5414585414585414,
+        "null_median": 0.19325223390682011,
+        "real_distance": 0.20036346087494494
+      },
+      "wrong_frequency_effect": {
+        "ci95": [
+          -0.16994319995986573,
+          -0.057087122131949775
+        ],
+        "field_count": 7,
+        "median": -0.1514795392737382
+      }
+    }
+  },
+  "gates": {
+    "G1_availability": {
+      "direction_rates": {
+        "B_to_F": 0.4230769230769231,
+        "F_to_B": 0.5
+      },
+      "minimum_rate": 0.9,
+      "pass": false
+    },
+    "G2_bidirectional_independent_ridge": {
+      "effects": {
+        "B_to_F": {
+          "ci95": [
+            -0.0595699301116982,
+            0.21709974895204642
+          ],
+          "field_count": 6,
+          "median": 0.058438597754807114
+        },
+        "F_to_B": {
+          "ci95": [
+            -0.03697818019959154,
+            0.0628424379492058
+          ],
+          "field_count": 7,
+          "median": 0.043398282670922494
+        }
+      },
+      "pass": false
+    },
+    "G3_timing_specificity": {
+      "empirical_p": {
+        "B_to_F": 0.2077922077922078,
+        "F_to_B": 0.5414585414585414
+      },
+      "pass": false
+    },
+    "G4_frequency_specificity": {
+      "effects": {
+        "B_to_F": {
+          "ci95": [
+            -0.15575579369925732,
+            -0.00738240020080394
+          ],
+          "field_count": 6,
+          "median": -0.07440059723776948
+        },
+        "F_to_B": {
+          "ci95": [
+            -0.16994319995986573,
+            -0.057087122131949775
+          ],
+          "field_count": 7,
+          "median": -0.1514795392737382
+        }
+      },
+      "pass": false
+    },
+    "G5_lineage_specificity": {
+      "effects": {
+        "B_to_F": {
+          "ci95": [
+            -0.12186582762393483,
+            0.02229545651240719
+          ],
+          "field_count": 6,
+          "median": -0.04180224676601957
+        },
+        "F_to_B": {
+          "ci95": [
+            -0.0841052159517075,
+            -0.007920867909764928
+          ],
+          "field_count": 7,
+          "median": -0.06630894355259004
+        }
+      },
+      "pass": false
+    },
+    "G6_RF_robustness": {
+      "effects": {
+        "B_to_F": {
+          "RF off": -0.02677236322438359,
+          "RF on": 0.006587881052283473
+        },
+        "F_to_B": {
+          "RF off": 0.03729953133989061,
+          "RF on": 0.030400763155120303
+        }
+      },
+      "pass": false
+    },
+    "G7_ring_correspondence_secondary": {
+      "available": false,
+      "effect": {
+        "ci95": [
+          0.3256921509277704,
+          0.3256921509277704
+        ],
+        "field_count": 1,
+        "median": 0.3256921509277704
+      },
+      "pass": false
+    }
+  },
+  "identity": "muoniated-acetone detector-population spin relation",
+  "primary_supported": false,
+  "protocol_sha256": "120223805795eaa9471dd8e7973b1e1a15f198ff5a75e95cb1606e5730ccd70b",
+  "raw_population": "ISIS EMU 96 detector spectra split into disjoint forward/backward banks",
+  "ring_correspondence_effect": {
+    "ci95": [
+      0.3256921509277704,
+      0.3256921509277704
+    ],
+    "field_count": 1,
+    "median": 0.3256921509277704
+  },
+  "ring_eligibility": [
+    {
+      "attempted_sequences": 26,
+      "direction": "F_to_B",
+      "eligibility_rate": 0.0,
+      "eligible_sequences": 0,
+      "ring": "inner",
+      "split": "development",
+      "wrong_ring": "middle"
+    },
+    {
+      "attempted_sequences": 26,
+      "direction": "F_to_B",
+      "eligibility_rate": 0.0,
+      "eligible_sequences": 0,
+      "ring": "middle",
+      "split": "development",
+      "wrong_ring": "outer"
+    },
+    {
+      "attempted_sequences": 26,
+      "direction": "F_to_B",
+      "eligibility_rate": 0.0,
+      "eligible_sequences": 0,
+      "ring": "outer",
+      "split": "development",
+      "wrong_ring": "inner"
+    },
+    {
+      "attempted_sequences": 26,
+      "direction": "B_to_F",
+      "eligibility_rate": 0.0,
+      "eligible_sequences": 0,
+      "ring": "inner",
+      "split": "development",
+      "wrong_ring": "middle"
+    },
+    {
+      "attempted_sequences": 26,
+      "direction": "B_to_F",
+      "eligibility_rate": 0.038461538461538464,
+      "eligible_sequences": 1,
+      "ring": "middle",
+      "split": "development",
+      "wrong_ring": "outer"
+    },
+    {
+      "attempted_sequences": 26,
+      "direction": "B_to_F",
+      "eligibility_rate": 0.0,
+      "eligible_sequences": 0,
+      "ring": "outer",
+      "split": "development",
+      "wrong_ring": "inner"
+    }
+  ],
+  "secondary_ring_supported": false,
+  "source_hashes": {
+    "EMU00069983": "63f337d6a4f7ec50c21c14b8884afb25d4325452c3af094cbc9f765da7248283",
+    "EMU00069989": "943b5338df2d51a273f9e5c73b2a94d2f84633abd37bedad6d667092f36d78fe",
+    "EMU00069995": "8188af5f798d83b8e1070de55383f5ecc3d1310a928cb62a58fcf6af0b41aa4b",
+    "EMU00070001": "5c853e8d27285df36bbd3149725b4e2b8f194e821b3c9aff13d7307817d572f0",
+    "EMU00070007": "43003a00c85ea42ff748f1dcf4d818b1ff188e1153e16866473c58e868d81025",
+    "EMU00070013": "288ec2ef6f6185708399ebe871a5185fb696f7b39611b24ce17db9cc2c477138",
+    "EMU00070019": "167be2d74a5b6a2a46f7c8e9ca6b8b9d73a5496b8b1b2971438468adf1668a1b",
+    "EMU00070025": "3ce18dce7fb177f1999029aa1667ed2dff2a8ecfa4cbc5e0bd87b48dbec82751",
+    "EMU00070031": "a964fbde26d71e9801121de5932a8f2cf8518a0746681a9058da7d18d632a178",
+    "EMU00070037": "a39d97aecdf40964cd3521adca67afcb1a68a9f10a301a1ee6dcbdb64ea4ad53",
+    "EMU00070043": "2f8eaf3de5446561db7d19f39425f8a04b35db76b92d75fbcacd51e84c937af8",
+    "EMU00070049": "b43accf4a1ef3ed98fd873e6fe985001da4bf5e9cd504f2116181cf52015cc2e",
+    "EMU00070055": "3f119191ac7e599b9288fe9737b24ede11464e1924d015427517dc1bf91e0a9a"
+  },
+  "stage": "development",
+  "test": "T422 independent detector-bank parent test",
+  "timeline_rows": 12272
+}

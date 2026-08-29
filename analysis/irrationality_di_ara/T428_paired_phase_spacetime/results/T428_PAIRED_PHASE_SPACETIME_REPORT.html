@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>T428 paired-phase spacetime Di-ARA</title>
+<style>
+:root{--bg:#0d1117;--panel:#111827;--line:#334155;--text:#e5e7eb;--muted:#a9b4c4;--blue:#60a5fa;--violet:#a78bfa;--amber:#f59e0b;--green:#34d399;--red:#f87171}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.58 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1520px;margin:auto;padding:34px}h1{font-size:clamp(2rem,4vw,3.2rem);line-height:1.08;margin:.2rem 0}h2{margin-top:2.5rem;color:#bfdbfe}h3{color:#ddd6fe}a{color:#7dd3fc}.lead{font-size:1.17rem;color:#cbd5e1;max-width:1150px}.badge{display:inline-block;border-radius:999px;padding:8px 13px;font-weight:800;margin-right:8px}.fail{background:#7f1d1d}.signal{background:#064e3b}.note,.boundary{border-left:4px solid var(--amber);padding:13px 17px;background:#1b2433;border-radius:3px}.boundary{border-color:var(--blue)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}.card,.figure{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:16px}.card strong{font-size:1.75rem;display:block}.figure{margin:20px 0}.figure img{width:100%;height:auto;display:block;border-radius:8px}.caption{color:var(--muted);margin:.85rem .2rem .2rem}.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table{width:100%;border-collapse:collapse;background:var(--panel);font-size:.91rem}th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}th{background:#1e293b;color:#dbeafe}th:first-child,td:first-child{text-align:left}.yes{color:var(--green);font-weight:700}.no{color:var(--red);font-weight:700}code{color:#fbbf24}ul{max-width:1180px}.links a{margin-right:14px}.small{font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body><main>
+<h1>T428 — Corrected paired-phase spacetime Di-ARA</h1>
+<p class="lead">A frozen correction to T427: instead of plotting two leading-side summaries as though they were one ARA pair, T428 separately measures traversal change/persistence and spectral concentration/dispersion, then tests their coupled relation in five untouched binary-black-hole strain records.</p>
+<p><span class="badge fail">PRIMARY CLAIM NOT SUPPORTED</span><span class="badge signal">LOCAL CHRONOLOGICAL PAIRING RETAINED</span></p>
+
+<h2>Answer first</h2>
+<p>The correction produced a cleaner instrument, but it did <strong>not</strong> recover a black-hole-event-specific parent handover. All five holdouts contain short paired runs and pass the frozen H1/L1 agreement threshold; four of five are sensitive to circularly breaking the within-trace chronology. However, none of the five event windows closes better than the required 75% of its own off-source windows, matched events beat wrong-event detector pairings only 55% of the time, and the short runs recur throughout the pre-event background rather than concentrating at the published event time.</p>
+<p class="note"><strong>ARA reading:</strong> T427 really had flattened distinct sides. T428 repairs that. The connection pair behaves oppositionally, but the corrected four-feature relation is a recurring local child-scale organization of these processed strain histories—not yet the parent-scale black-hole handover. The traversal anti-phase remains unresolved or is being measured at the wrong rung/cut.</p>
+
+<div class="grid">
+  <div class="card"><strong>0 / 5</strong>whole-window closure gates passed</div>
+  <div class="card"><strong>5 / 5</strong>persistent local paired runs found</div>
+  <div class="card"><strong>5 / 5</strong>H1/L1 agreement gates passed</div>
+  <div class="card"><strong>4 / 5</strong>circular chronology controls passed</div>
+  <div class="card"><strong>55%</strong>matched-event wins versus wrong events</div>
+  <div class="card"><strong>1 / 5</strong>runs within ±64 ms of native event time</div>
+</div>
+
+<h2>What was corrected</h2>
+<div class="grid">
+  <div class="card"><h3>Traversal ARA</h3><p><code>T_A</code> measures spectral power/change. <code>T_B</code> measures adjacent-frame complex spectral persistence after hop-phase removal. Neither is defined from the other.</p></div>
+  <div class="card"><h3>Connection ARA</h3><p><code>K_A</code> measures spectral concentration using one minus normalized entropy. <code>K_B</code> measures effective spectral width. They are related functionals, but no <code>2-K_A</code> mirror is imposed.</p></div>
+  <div class="card"><h3>Local projection</h3><p>Each feature is independently placed on 0–2 using its own detector-specific off-source empirical CDF. The local off-source median is the child ridge at 1.</p></div>
+  <div class="card"><h3>Coupled test</h3><p>The two measured pairs are scored for TE-ARA closure, within-pair gap, four-coordinate H1/L1 agreement, wrong-event identity, and circular time-shift specificity.</p></div>
+</div>
+
+<h2>Holdout paths</h2>
+<div class="figure"><img src="T428_HOLDOUT_DI_ARA_GALLERY.png" alt="Five holdout coupled paired-phase Di-ARA paths"><p class="caption">Orange rings mark frames below the development-frozen coupled-gap threshold. The paths do repeatedly reach the paired region, but the cloud shape and event-window closure vary strongly—especially GW170814, which is displaced toward a different traversal regime.</p></div>
+
+<h2>Frozen controls</h2>
+<div class="figure"><img src="T428_CONTROLS.png" alt="T428 closure, detector agreement and wrong-event controls"><p class="caption">Left: no holdout reaches the frozen 0.75 closure percentile. Centre: every holdout clears the development H1/L1 agreement threshold. Right: matched detector pairs overlap wrong-event pairs heavily, yielding only 55% matched wins rather than the required 75%.</p></div>
+
+<h2>Post-result timing diagnostic</h2>
+<p class="boundary"><strong>This diagnostic is exploratory and did not alter the frozen T428 verdict.</strong> It was added after seeing that all five traces contained persistent low-gap runs, to ask whether those runs were specifically tied to the physical event time.</p>
+<div class="figure"><img src="T428_POSTHOC_TIMING_DIAGNOSTIC.png" alt="Timing of persistent paired runs relative to event"><p class="caption">The orange bands and run-centre dots show repeated paired episodes across the full 1.75-second slice. Only GW170809 has a persistent run within ±64 ms. Therefore the local crossing is real to this instrument, but it does not presently locate the binary-black-hole handover.</p></div>
+
+<h2>Holdout results</h2>
+<div class="tablewrap"><table>
+<thead><tr><th>Event</th><th>Closure percentile</th><th>Local paired run</th><th>Median H1/L1 agreement</th><th>Traversal ρ</th><th>Connection ρ</th><th>Circular-null p</th></tr></thead>
+<tbody>
+<tr><td>GW170104</td><td>0.375</td><td class="yes">yes</td><td>0.568</td><td>−0.006</td><td>−0.316</td><td class="yes">0.002</td></tr>
+<tr><td>GW170608</td><td>0.500</td><td class="yes">yes</td><td>0.617</td><td>0.019</td><td>−0.390</td><td class="yes">0.019</td></tr>
+<tr><td>GW170809</td><td>0.531</td><td class="yes">yes</td><td>0.609</td><td>0.113</td><td>−0.376</td><td class="yes">0.003</td></tr>
+<tr><td>GW170814</td><td class="no">0.000</td><td class="yes">yes</td><td>0.644</td><td>0.102</td><td>−0.545</td><td class="yes">0.001</td></tr>
+<tr><td>GW170818</td><td>0.406</td><td class="yes">yes</td><td>0.606</td><td>0.071</td><td>−0.296</td><td class="no">0.056</td></tr>
+</tbody></table></div>
+<p>The consistently negative connection correlations are the cleanest structural result. The traversal correlations cluster near zero, so <code>T_B</code> is not a global anti-phase of <code>T_A</code>. That does not forbid a local or delayed handover, but it rejects this pair as a complete parent-wide inverse relation.</p>
+
+<h2>Scientific and ARA interpretation</h2>
+<ul>
+  <li><strong>Supported descriptively:</strong> separately measured connection concentration and dispersion oppose one another across all five events; the coupled four-feature system repeatedly enters short low-gap states.</li>
+  <li><strong>Supported by one control:</strong> preserving the correct within-trace chronology matters in four of five circular-shift tests.</li>
+  <li><strong>Not supported:</strong> these states are not selectively concentrated in the physical event window and do not identify the published merger/handover.</li>
+  <li><strong>Not identified physically:</strong> the coordinates are features of received, whitened detector strain. They are not literal internal black-hole components, and the test does not yet establish which object/rung owns the recurring local pair.</li>
+  <li><strong>Likely methodological source of recurrence:</strong> all four coordinates are extracted from overlapping adjacent STFT frames, so background strain and preprocessing can preserve local temporal relation even without an astrophysical event. Event-versus-off-source and matched-versus-wrong-event controls are what prevent that from being overcalled.</li>
+</ul>
+
+<h2>Best next test</h2>
+<p>Do not tune a smaller window around whichever T428 crossing looks best. The next informative test is an <strong>event-locked child-versus-background contrast</strong>: freeze a short window from an independent development event using a physically external landmark (native strain-energy onset or peak, not an ARA crossing), calculate the same four histories in that window and identically placed off-source windows, and demand both:</p>
+<ol>
+  <li>the event-locked path beats its own off-source and wrong-event controls, and</li>
+  <li>the traversal pair acquires reproducible opposition or a reproducible lagged handover that is absent under time reversal/circular shifts.</li>
+</ol>
+<p>If that fails, <code>T_B</code> should be retired as the missing traversal anti-phase. If it passes, the short event-locked path becomes a defensible child handover candidate rather than a post-hoc segment of a long trace.</p>
+
+<h2>Scope, sources and reproduction</h2>
+<p>Development event: GW150914. Untouched holdouts: GW170104, GW170608, GW170809, GW170814 and GW170818. Public 32-second, 4096 Hz H1/L1 strain records were inherited from T427’s frozen <a href="https://gwosc.org/">Gravitational Wave Open Science Center</a> source set. The fixed analysis slice is −1.50 to +0.25 seconds; calibration uses off-source intervals [−12,−4] and [+4,+12] seconds. The STFT is fixed at 64 ms with a 4 ms hop over 30–512 Hz.</p>
+<p>Frozen protocol SHA-256: <code>dbd4748eae616f05099ba8f4b9c683a61331f8521f36b760e5a03bb6c394ba62</code>.</p>
+<p class="links"><a href="../T428_FROZEN_PROTOCOL.md">Frozen protocol</a><a href="T428_RESULTS.json">Machine-readable results</a><a href="T428_HOLDOUT_SUMMARY.csv">Holdout summary CSV</a><a href="T428_CONSENSUS_COORDINATES.csv">Coordinate histories CSV</a><a href="T428_POSTHOC_TIMING_DIAGNOSTIC.json">Timing diagnostic JSON</a></p>
+<p class="links"><a href="T428_GW170104_PAIRED_PHASE.png">GW170104 detail</a><a href="T428_GW170608_PAIRED_PHASE.png">GW170608 detail</a><a href="T428_GW170809_PAIRED_PHASE.png">GW170809 detail</a><a href="T428_GW170814_PAIRED_PHASE.png">GW170814 detail</a><a href="T428_GW170818_PAIRED_PHASE.png">GW170818 detail</a></p>
+<p class="small">The post-result timing diagnostic is intentionally separated from the frozen primary gates. No failed gate was relaxed and T427 remains unchanged.</p>
+</main></body></html>

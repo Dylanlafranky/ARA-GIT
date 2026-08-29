@@ -1,0 +1,29 @@
+{
+  "test": "T398 independent saved-artifact validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_matches": true,
+    "all_frozen_gates_pass": true,
+    "native_overlap_has_1200_rows": true,
+    "native_time_is_strictly_increasing": true,
+    "display_crossing_reconstructs_native_handover": true,
+    "flavor_children_close_exactly": true,
+    "survival_and_release_are_complements": true,
+    "T371_binned_delayed_peak_after_prompt": true,
+    "T378_holdout_delayed_peak_after_prompt": true,
+    "T397_comparison_is_separate_and_complete": true,
+    "verdict_preserves_individual_event_boundary": true
+  },
+  "recomputed": {
+    "display_sample_crossing_us": 0.6360828113817386,
+    "reported_native_1ns_crossing_us": 0.6360822416353671,
+    "crossing_abs_difference_us": 5.697463715259588e-07,
+    "max_abs_flavor_closure_error": 0.0,
+    "max_abs_survival_release_complement_error": 0.0,
+    "T371_prompt_peak_us": 0.25,
+    "T371_delayed_peak_us": 0.75,
+    "T378_prompt_peak_us": 0.75,
+    "T378_delayed_peak_us": 1.25
+  },
+  "boundary": "Validation checks the saved population-level artifact; it cannot create event linkage absent from the source data."
+}

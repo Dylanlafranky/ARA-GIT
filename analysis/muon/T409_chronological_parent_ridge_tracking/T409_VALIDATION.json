@@ -1,0 +1,86 @@
+{
+  "test": "T409/T409B independent validation",
+  "status": "PASS_WITH_METHOD_BOUNDARY",
+  "checks_passed": 18,
+  "checks_total": 18,
+  "checks": [
+    {
+      "check": "source_hash",
+      "pass": true
+    },
+    {
+      "check": "holdout_count_2109",
+      "pass": true
+    },
+    {
+      "check": "nonpole_count_1425",
+      "pass": true
+    },
+    {
+      "check": "zero_pole_count_576",
+      "pass": true
+    },
+    {
+      "check": "two_pole_count_108",
+      "pass": true
+    },
+    {
+      "check": "direct_kde_R1_centre",
+      "pass": true
+    },
+    {
+      "check": "direct_kde_R2_centre",
+      "pass": true
+    },
+    {
+      "check": "direct_kde_T409B_local_crest",
+      "pass": true
+    },
+    {
+      "check": "full_block_rows_36",
+      "pass": true
+    },
+    {
+      "check": "control_block_rows_36",
+      "pass": true
+    },
+    {
+      "check": "motion_recomputed_R1",
+      "pass": true
+    },
+    {
+      "check": "motion_recomputed_R2",
+      "pass": true
+    },
+    {
+      "check": "motion_recomputed_R3",
+      "pass": true
+    },
+    {
+      "check": "T409B_post_hoc_label",
+      "pass": true
+    },
+    {
+      "check": "T409B_resolved_10_blocks",
+      "pass": true
+    },
+    {
+      "check": "T409B_global_draws_5000",
+      "pass": true
+    },
+    {
+      "check": "T409B_within_draws_5000",
+      "pass": true
+    },
+    {
+      "check": "T409B_nonmobile_reading",
+      "pass": true
+    }
+  ],
+  "method_boundary": [
+    "Pooled centres were independently recomputed with direct Gaussian sums rather than T409's histogram convolution.",
+    "Motion statistics were recomputed from saved block rows.",
+    "The 5,000-draw permutation arrays were not saved, so the validator confirms draw counts and registered p-values but does not reproduce every null draw independently.",
+    "T409's broad R3 maximum is an interval-edge capture; T409B is the relevant marked-interior sensitivity and remains explicitly post-hoc."
+  ]
+}

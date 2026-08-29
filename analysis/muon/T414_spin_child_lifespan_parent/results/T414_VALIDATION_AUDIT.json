@@ -1,0 +1,43 @@
+{
+  "test": "T414 independent validation",
+  "status": "passed",
+  "checks": {
+    "protocol_hash_matches_freeze": true,
+    "analysis_code_matches_both_freezes": true,
+    "sealed_validation_result_matches_freeze": true,
+    "92_unique_run_period_rows": true,
+    "split_run_counts_13_13_20": true,
+    "tau_is_development_objective_minimum": true,
+    "all_frequency_values_follow_frozen_development_slope": true,
+    "alias_classification_matches_nyquist": true,
+    "phase_profiles_stay_on_local_0_to_2_ARA": true,
+    "frozen_gates_recompute_from_flat_metrics": true,
+    "combined_run_reproduces_sealed_split_rows": true,
+    "all_46_source_files_match_saved_hashes": true,
+    "detector_shares_sum_to_96": true,
+    "detector_permutation_leaves_release_total_exact": true
+  },
+  "notes": {
+    "split_run_counts": {
+      "development": 13,
+      "validation": 13,
+      "holdout": 20
+    },
+    "tau_dev_us": 2.202999999999956,
+    "recomputed_gates": {
+      "validation": {
+        "spin_child_calibration_supported": true,
+        "release_statistical_gate_without_phase": false,
+        "release_phase_reproduction": false,
+        "total_release_phase_lock_supported": false
+      },
+      "holdout": {
+        "spin_child_calibration_supported": false,
+        "release_statistical_gate_without_phase": false,
+        "release_phase_reproduction": false,
+        "total_release_phase_lock_supported": false
+      }
+    },
+    "posthoc_samples_per_cycle_vs_log_direction_ratio_correlation": 0.8094659093262905
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "test": "T397 independent validation",
+  "passed": true,
+  "checks": {
+    "protocol_hash": true,
+    "all_source_quality": true,
+    "source_rows_11": true,
+    "pooled_gain_O": true,
+    "bootstrap_ci_O": true,
+    "pooled_gain_U": true,
+    "bootstrap_ci_U": true,
+    "pooled_gain_V": true,
+    "bootstrap_ci_V": true,
+    "pooled_gain_W": true,
+    "bootstrap_ci_W": true,
+    "w_phase_resultant": true,
+    "wrong_w_97_5": true,
+    "independent_w_raw_recompute": true,
+    "orientation_gate_recomputed": true,
+    "maturity_gate_recomputed": true,
+    "status_matches_gates": true,
+    "claim_boundary_retained": true
+  },
+  "independent_w_rows": [
+    {
+      "run": "EMU00066578",
+      "gain_match": true,
+      "amplitude_match": true,
+      "angle_match": true
+    },
+    {
+      "run": "EMU00066579",
+      "gain_match": true,
+      "amplitude_match": true,
+      "angle_match": true
+    },
+    {
+      "run": "EMU00066580",
+      "gain_match": true,
+      "amplitude_match": true,
+      "angle_match": true
+    }
+  ],
+  "assessment": "READY_TO_SHARE_WITH_CAVEATS",
+  "required_caveats": [
+    "The archive contains aggregate detector histograms, not individual parent-daughter records.",
+    "The source was inspected in prior tests; T397 is a locked reanalysis, not a source-blind replication.",
+    "The strict common-mode pooled gain is small and its cycle/field bootstrap interval crosses zero."
+  ]
+}

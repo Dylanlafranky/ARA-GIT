@@ -1,0 +1,6050 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T437 \u2014 Four ARA timing instruments on one black-hole merger",
+    "description": "State, path/history, dynamic and reverse-facing Rationality timing on SXS:BBH:0305.",
+    "generatedAt": "2026-08-27T00:35:30.498082+00:00",
+    "sources": [
+      {
+        "id": "sxs0305",
+        "label": "SXS:BBH:0305 Lev6 waveform",
+        "href": "https://zenodo.org/records/13182440",
+        "query": {
+          "description": "T437 reads the sealed T435 waveform-only artifact; common-horizon time is opened only by the scorer.",
+          "language": "Python",
+          "tables_used": [
+            "T435_WAVEFORM_ONLY_PREDICTION.npz",
+            "T435_SCORED_RESULT.json"
+          ],
+          "metric_definitions": [
+            "Signed error is predicted time minus first common-horizon time in simulation mass units M.",
+            "One-cycle success requires absolute error no greater than 11.3710 M."
+          ]
+        }
+      },
+      {
+        "id": "t437",
+        "label": "T437 sealed prediction and scorer",
+        "query": {
+          "description": "Four independently defined ARA clocks, sealed before horizon scoring.",
+          "language": "Python",
+          "tables_used": [
+            "T437_WAVEFORM_ONLY_FOUR_INSTRUMENT_CLOCKS.npz",
+            "T437_SCORED_RESULT.json"
+          ]
+        }
+      },
+      {
+        "id": "timing_errors_source",
+        "label": "T437 primary timing errors",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ERRORS.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ERRORS.csv', header=true)",
+          "description": "Reviewed rows for T437 primary timing errors.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_TIMING_ERRORS.csv"
+          ]
+        }
+      },
+      {
+        "id": "state_history_source",
+        "label": "T437 state coordinate history",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_STATE_HISTORY.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_STATE_HISTORY.csv', header=true)",
+          "description": "Reviewed rows for T437 state coordinate history.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_STATE_HISTORY.csv"
+          ]
+        }
+      },
+      {
+        "id": "path_history_source",
+        "label": "T437 causal path/history coordinates",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_HISTORY.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_HISTORY.csv', header=true)",
+          "description": "Reviewed rows for T437 causal path/history coordinates.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_PATH_HISTORY.csv"
+          ]
+        }
+      },
+      {
+        "id": "rational_history_source",
+        "label": "T437 reverse Rationality coordinates",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_RATIONAL_HISTORY.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_RATIONAL_HISTORY.csv', header=true)",
+          "description": "Reviewed rows for T437 reverse Rationality coordinates.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_RATIONAL_HISTORY.csv"
+          ]
+        }
+      },
+      {
+        "id": "path_plane_source",
+        "label": "T437 forward/reverse path plane",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_PLANE.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_PLANE.csv', header=true)",
+          "description": "Reviewed rows for T437 forward/reverse path plane.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_PATH_PLANE.csv"
+          ]
+        }
+      },
+      {
+        "id": "timing_all_source",
+        "label": "T437 primary clocks and controls",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ALL.csv",
+        "query": {
+          "engine": "DuckDB",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ALL.csv', header=true)",
+          "description": "Reviewed rows for T437 primary clocks and controls.",
+          "language": "SQL",
+          "tables_used": [
+            "T437_ARTIFACT_TIMING_ALL.csv"
+          ]
+        }
+      }
+    ],
+    "cards": [],
+    "charts": [
+      {
+        "id": "error_chart",
+        "title": "Absolute timing error by instrument",
+        "subtitle": "Only the state/power-crest crosswalk falls within one local parent cycle.",
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "timing_errors",
+        "encodings": {
+          "x": {
+            "field": "clock",
+            "type": "nominal",
+            "label": "Clock"
+          },
+          "y": {
+            "field": "absolute_error_M",
+            "type": "quantitative",
+            "label": "Absolute error",
+            "unit": "M"
+          },
+          "color": {
+            "field": "status",
+            "type": "nominal",
+            "label": "One-cycle gate"
+          }
+        },
+        "xAxisTitle": "Timing instrument",
+        "yAxisTitle": "Absolute error / M",
+        "layout": "full",
+        "maxRows": 20,
+        "source": {
+          "id": "timing_errors_source",
+          "label": "T437 primary timing errors",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ERRORS.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ERRORS.csv', header=true)",
+            "description": "Reviewed rows for T437 primary timing errors.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_TIMING_ERRORS.csv"
+            ]
+          }
+        }
+      },
+      {
+        "id": "state_chart",
+        "title": "State Irrationality Di-ARA coordinates",
+        "subtitle": "The radial ridge read is the waveform-power crest, not an independent landmark.",
+        "type": "line",
+        "intent": "trend",
+        "dataset": "state_history",
+        "encodings": {
+          "x": {
+            "field": "time_M",
+            "type": "quantitative",
+            "label": "Simulation time",
+            "unit": "M"
+          },
+          "y": {
+            "field": "coordinate",
+            "type": "quantitative",
+            "label": "ARA coordinate"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Coordinate"
+          }
+        },
+        "xAxisTitle": "Simulation time / M",
+        "yAxisTitle": "Independent ARA coordinate / 0\u20132",
+        "layout": "full",
+        "maxRows": 1200,
+        "source": {
+          "id": "state_history_source",
+          "label": "T437 state coordinate history",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_STATE_HISTORY.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_STATE_HISTORY.csv', header=true)",
+            "description": "Reviewed rows for T437 state coordinate history.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_STATE_HISTORY.csv"
+            ]
+          }
+        }
+      },
+      {
+        "id": "path_chart",
+        "title": "Causal path/history Irrationality Di-ARA",
+        "subtitle": "The path geometry remains coherent but selects a much earlier boundary.",
+        "type": "line",
+        "intent": "trend",
+        "dataset": "path_history",
+        "encodings": {
+          "x": {
+            "field": "time_M",
+            "type": "quantitative",
+            "label": "Simulation time",
+            "unit": "M"
+          },
+          "y": {
+            "field": "coordinate",
+            "type": "quantitative",
+            "label": "Coordinate"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Coordinate"
+          }
+        },
+        "xAxisTitle": "Simulation time / M",
+        "yAxisTitle": "Coordinate / 0\u20132 (rho / 0\u20131)",
+        "layout": "full",
+        "maxRows": 1600,
+        "source": {
+          "id": "path_history_source",
+          "label": "T437 causal path/history coordinates",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_HISTORY.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_HISTORY.csv', header=true)",
+            "description": "Reviewed rows for T437 causal path/history coordinates.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_PATH_HISTORY.csv"
+            ]
+          }
+        }
+      },
+      {
+        "id": "rational_chart",
+        "title": "Reverse-facing Rationality reconstruction",
+        "subtitle": "Reading the settled waveform backward did not localize the common horizon.",
+        "type": "line",
+        "intent": "trend",
+        "dataset": "rational_history",
+        "encodings": {
+          "x": {
+            "field": "time_M",
+            "type": "quantitative",
+            "label": "Forward-time anchor",
+            "unit": "M"
+          },
+          "y": {
+            "field": "coordinate",
+            "type": "quantitative",
+            "label": "Coordinate"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Coordinate"
+          }
+        },
+        "xAxisTitle": "Forward-time anchor / M",
+        "yAxisTitle": "Coordinate / 0\u20132 (rho / 0\u20131)",
+        "layout": "full",
+        "maxRows": 1600,
+        "source": {
+          "id": "rational_history_source",
+          "label": "T437 reverse Rationality coordinates",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_RATIONAL_HISTORY.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_RATIONAL_HISTORY.csv', header=true)",
+            "description": "Reviewed rows for T437 reverse Rationality coordinates.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_RATIONAL_HISTORY.csv"
+            ]
+          }
+        }
+      },
+      {
+        "id": "plane_chart",
+        "title": "Path boundary from forward and reverse support",
+        "subtitle": "Both views occupy a narrow determined/coherent band; neither supplied a specific event clock.",
+        "type": "scatter",
+        "intent": "relationship",
+        "dataset": "path_plane",
+        "encodings": {
+          "x": {
+            "field": "x_P",
+            "type": "quantitative",
+            "label": "Address openness"
+          },
+          "y": {
+            "field": "x_R",
+            "type": "quantitative",
+            "label": "Unresolved residual"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Support direction"
+          },
+          "tooltip": [
+            "@{field=time_M; type=quantitative; label=Time; unit=M}"
+          ]
+        },
+        "xAxisTitle": "x_P / reused 0 \u2192 open 2",
+        "yAxisTitle": "x_R / determined 0 \u2192 unresolved 2",
+        "layout": "full",
+        "maxRows": 1200,
+        "source": {
+          "id": "path_plane_source",
+          "label": "T437 forward/reverse path plane",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_PLANE.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_PLANE.csv', header=true)",
+            "description": "Reviewed rows for T437 forward/reverse path plane.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_PATH_PLANE.csv"
+            ]
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "timing_table",
+        "title": "All primary clocks and controls",
+        "subtitle": "Retrospective and causal clocks are kept distinct.",
+        "dataset": "timing_all",
+        "defaultSort": {
+          "field": "absolute_error_M",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "columns": [
+          {
+            "field": "clock",
+            "label": "Clock",
+            "type": "text"
+          },
+          {
+            "field": "support",
+            "label": "Support",
+            "type": "text"
+          },
+          {
+            "field": "predicted_time_M",
+            "label": "Predicted / M",
+            "format": "number"
+          },
+          {
+            "field": "signed_error_M",
+            "label": "Signed error / M",
+            "format": "number",
+            "movement": true
+          },
+          {
+            "field": "absolute_error_M",
+            "label": "Absolute error / M",
+            "format": "number"
+          },
+          {
+            "field": "error_parent_cycles",
+            "label": "Parent cycles",
+            "format": "number"
+          },
+          {
+            "field": "status",
+            "label": "Gate",
+            "type": "text"
+          }
+        ],
+        "source": {
+          "id": "timing_all_source",
+          "label": "T437 primary clocks and controls",
+          "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ALL.csv",
+          "query": {
+            "engine": "DuckDB",
+            "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ALL.csv', header=true)",
+            "description": "Reviewed rows for T437 primary clocks and controls.",
+            "language": "SQL",
+            "tables_used": [
+              "T437_ARTIFACT_TIMING_ALL.csv"
+            ]
+          }
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T437 \u2014 Four ARA timing instruments on one black-hole merger"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## Technical Summary\n\nThe state cut localized the event to 7.25 M (0.64 parent cycles), but its selected read is exactly the waveform-power maximum and is therefore a standard crest crosswalk. The causal path/history clock missed by 173.39 M, the unchanged dynamic clock by 99.24 M, and the experimental reverse Rationality reconstruction by 200.53 M. The proposed reverse-facing explanation is not supported by this implementation."
+      },
+      {
+        "id": "error_block",
+        "type": "chart",
+        "chartId": "error_chart"
+      },
+      {
+        "id": "state_finding",
+        "type": "markdown",
+        "body": "## State Result\n\nThe one-parent-cycle radius relation approaches its ridge at the amplitude crest. This improves on the T435 median clock, but it does not add an independent ARA landmark: changing from total power to the state radius coordinate restates the same crest relation."
+      },
+      {
+        "id": "state_block",
+        "type": "chart",
+        "chartId": "state_chart"
+      },
+      {
+        "id": "path_finding",
+        "type": "markdown",
+        "body": "## Path/History Result\n\nThe retained history is extremely coherent, yet the open-to-reused boundary occurs repeatedly and does not single out common-horizon formation. On this nearly deterministic chirp, support openness and local predictability describe the path but do not provide the missing event-time relation."
+      },
+      {
+        "id": "path_block",
+        "type": "chart",
+        "chartId": "path_chart"
+      },
+      {
+        "id": "rational_finding",
+        "type": "markdown",
+        "body": "## Reverse Rationality Result\n\nThe future-supported reverse read is a valid retrospective test of the user's settled-event idea, but its frozen boundary appears roughly 200.53 M early. Reversing support improves the internal distance compared with the causal path read, yet that lower geometric distance is not event specificity."
+      },
+      {
+        "id": "rational_block",
+        "type": "chart",
+        "chartId": "rational_chart"
+      },
+      {
+        "id": "plane_block",
+        "type": "chart",
+        "chartId": "plane_chart"
+      },
+      {
+        "id": "table_block",
+        "type": "table",
+        "tableId": "timing_table"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Scope, Data and Method\n\nAll clocks use the sealed T435 SXS:BBH:0305 waveform-only artifact. State compares radius one local parent cycle apart. Path/history uses 128-sample past-only windows. Dynamic is imported unchanged from failed T436. Rationality uses 128 future samples read backward. The first common horizon is opened only by the separate scorer."
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## Limitations and Robustness\n\nOnly one local SXS collision is available. Hashing prevents within-test retuning but does not turn historically known data into blind discovery. A quarter-record state control also fell within one cycle, so one-event timing proximity is not specific. Chronology shuffling strongly damaged both path distances, confirming that those instruments retain real order even though their selected clocks were wrong."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Next Step\n\nDo not tune another clock on BBH:0305. Acquire several additional SXS waveforms, freeze the state/crest crosswalk and path coordinates on a development subset, then test untouched mass-ratio/spin systems. The unresolved ARA question is whether a cross-instrument relation predicts the offset between common-horizon formation and the amplitude crest across systems."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-27T00:35:30.498082+00:00",
+    "datasets": {
+      "primary_timing": [
+        {
+          "state_error": 7.251741661793858,
+          "state_cycles": 0.6377378288918617,
+          "path_error": 173.39328153726183,
+          "path_cycles": 15.248675431255604,
+          "dynamic_error": 99.24373398084845,
+          "dynamic_cycles": 8.727763121171556,
+          "rationality_error": 200.53155162374924,
+          "rationality_cycles": 17.635288503260185
+        }
+      ],
+      "timing_errors": [
+        {
+          "clock": "State Irr-Di-ARA",
+          "instrument": "state",
+          "support": "causal past/current",
+          "predicted_time_M": 3692.748009530485,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 7.251741661793858,
+          "absolute_error_M": 7.251741661793858,
+          "error_parent_cycles": 0.6377378288918617,
+          "improvement_vs_T435_M": 30.2904516589565,
+          "within_one_parent_cycle": true,
+          "status": "within one cycle"
+        },
+        {
+          "clock": "Path/history Irr-Di-ARA",
+          "instrument": "path/history",
+          "support": "causal past-only",
+          "predicted_time_M": 3512.1029863314293,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -173.39328153726183,
+          "absolute_error_M": 173.39328153726183,
+          "error_parent_cycles": 15.248675431255604,
+          "improvement_vs_T435_M": -135.85108821651147,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Dynamic Irr-Di-ARA (T436 unchanged)",
+          "instrument": "dynamic",
+          "support": "causal past-only",
+          "predicted_time_M": 3586.2525338878427,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -99.24373398084845,
+          "absolute_error_M": 99.24373398084845,
+          "error_parent_cycles": 8.727763121171556,
+          "improvement_vs_T435_M": -61.70154066009809,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Experimental Rationality reconstruction",
+          "instrument": "rationality",
+          "support": "retrospective future-read-backward",
+          "predicted_time_M": 3484.964716244942,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -200.53155162374924,
+          "absolute_error_M": 200.53155162374924,
+          "error_parent_cycles": 17.635288503260185,
+          "improvement_vs_T435_M": -162.98935830299888,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "T435 median clock",
+          "instrument": "baseline",
+          "support": "causal waveform-only",
+          "predicted_time_M": 3723.0384611894415,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 37.54219332075036,
+          "absolute_error_M": 37.54219332075036,
+          "error_parent_cycles": 3.3015622972828504,
+          "improvement_vs_T435_M": 0.0,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Waveform-power maximum",
+          "instrument": "physics crosswalk",
+          "support": "waveform-only",
+          "predicted_time_M": 3692.748009530485,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 7.251741661793858,
+          "absolute_error_M": 7.251741661793858,
+          "error_parent_cycles": 0.6377378288918617,
+          "improvement_vs_T435_M": 30.2904516589565,
+          "within_one_parent_cycle": true,
+          "status": "within one cycle"
+        }
+      ],
+      "timing_all": [
+        {
+          "clock": "State Irr-Di-ARA",
+          "instrument": "state",
+          "support": "causal past/current",
+          "predicted_time_M": 3692.748009530485,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 7.251741661793858,
+          "absolute_error_M": 7.251741661793858,
+          "error_parent_cycles": 0.6377378288918617,
+          "improvement_vs_T435_M": 30.2904516589565,
+          "within_one_parent_cycle": true,
+          "status": "within one cycle"
+        },
+        {
+          "clock": "Path/history Irr-Di-ARA",
+          "instrument": "path/history",
+          "support": "causal past-only",
+          "predicted_time_M": 3512.1029863314293,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -173.39328153726183,
+          "absolute_error_M": 173.39328153726183,
+          "error_parent_cycles": 15.248675431255604,
+          "improvement_vs_T435_M": -135.85108821651147,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Dynamic Irr-Di-ARA (T436 unchanged)",
+          "instrument": "dynamic",
+          "support": "causal past-only",
+          "predicted_time_M": 3586.2525338878427,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -99.24373398084845,
+          "absolute_error_M": 99.24373398084845,
+          "error_parent_cycles": 8.727763121171556,
+          "improvement_vs_T435_M": -61.70154066009809,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Experimental Rationality reconstruction",
+          "instrument": "rationality",
+          "support": "retrospective future-read-backward",
+          "predicted_time_M": 3484.964716244942,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -200.53155162374924,
+          "absolute_error_M": 200.53155162374924,
+          "error_parent_cycles": 17.635288503260185,
+          "improvement_vs_T435_M": -162.98935830299888,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "T435 median clock",
+          "instrument": "baseline",
+          "support": "causal waveform-only",
+          "predicted_time_M": 3723.0384611894415,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 37.54219332075036,
+          "absolute_error_M": 37.54219332075036,
+          "error_parent_cycles": 3.3015622972828504,
+          "improvement_vs_T435_M": 0.0,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Waveform-power maximum",
+          "instrument": "physics crosswalk",
+          "support": "waveform-only",
+          "predicted_time_M": 3692.748009530485,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": 7.251741661793858,
+          "absolute_error_M": 7.251741661793858,
+          "error_parent_cycles": 0.6377378288918617,
+          "improvement_vs_T435_M": 30.2904516589565,
+          "within_one_parent_cycle": true,
+          "status": "within one cycle"
+        },
+        {
+          "clock": "State quarter-record roll",
+          "instrument": "control",
+          "support": "chronology roll",
+          "predicted_time_M": 3675.149359105519,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -10.346908763171996,
+          "absolute_error_M": 10.346908763171996,
+          "error_parent_cycles": 0.9099352180639033,
+          "improvement_vs_T435_M": 27.19528455757836,
+          "within_one_parent_cycle": true,
+          "status": "within one cycle"
+        },
+        {
+          "clock": "Path/history control: full_parent_phase",
+          "instrument": "control",
+          "support": "full_parent_phase",
+          "predicted_time_M": 3502.6986792958114,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -182.7975885728797,
+          "absolute_error_M": 182.7975885728797,
+          "error_parent_cycles": 16.07571569700658,
+          "improvement_vs_T435_M": -145.25539525212935,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Path/history control: quarter_record_roll",
+          "instrument": "control",
+          "support": "quarter_record_roll",
+          "predicted_time_M": 3592.252337598878,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -93.24393026981306,
+          "absolute_error_M": 93.24393026981306,
+          "error_parent_cycles": 8.200124110999408,
+          "improvement_vs_T435_M": -55.701736949062706,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Path/history control: chronology_shuffle",
+          "instrument": "control",
+          "support": "chronology_shuffle",
+          "predicted_time_M": 3527.6533980743516,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -157.84286979433955,
+          "absolute_error_M": 157.84286979433955,
+          "error_parent_cycles": 13.8811300489436,
+          "improvement_vs_T435_M": -120.30067647358919,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Rationality control: full_parent_phase",
+          "instrument": "control",
+          "support": "full_parent_phase",
+          "predicted_time_M": 3484.964716244942,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -200.53155162374924,
+          "absolute_error_M": 200.53155162374924,
+          "error_parent_cycles": 17.635288503260185,
+          "improvement_vs_T435_M": -162.98935830299888,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Rationality control: quarter_record_roll",
+          "instrument": "control",
+          "support": "quarter_record_roll",
+          "predicted_time_M": 3632.350990526237,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -53.14527734245394,
+          "absolute_error_M": 53.14527734245394,
+          "error_parent_cycles": 4.6737398226412274,
+          "improvement_vs_T435_M": -15.60308402170358,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        },
+        {
+          "clock": "Rationality control: chronology_shuffle",
+          "instrument": "control",
+          "support": "chronology_shuffle",
+          "predicted_time_M": 3401.642141466687,
+          "actual_common_horizon_M": 3685.496267868691,
+          "signed_error_M": -283.8541264020041,
+          "absolute_error_M": 283.8541264020041,
+          "error_parent_cycles": 24.962901705027132,
+          "improvement_vs_T435_M": -246.31193308125376,
+          "within_one_parent_cycle": false,
+          "status": "outside one cycle"
+        }
+      ],
+      "state_history": [
+        {
+          "time_M": 3567.153766590609,
+          "series": "state x_L",
+          "coordinate": 1.0000487514720608
+        },
+        {
+          "time_M": 3567.153766590609,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3673.3494412034856,
+          "series": "state x_L",
+          "coordinate": 1.0004802891718727
+        },
+        {
+          "time_M": 3673.3494412034856,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3684.7488163355024,
+          "series": "state x_L",
+          "coordinate": 1.0004987353317303
+        },
+        {
+          "time_M": 3684.7488163355024,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3696.147462464395,
+          "series": "state x_L",
+          "coordinate": 0.9989381447668743
+        },
+        {
+          "time_M": 3696.147462464395,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3707.544417129707,
+          "series": "state x_L",
+          "coordinate": 0.9940868766299266
+        },
+        {
+          "time_M": 3707.544417129707,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3718.9400193398474,
+          "series": "state x_L",
+          "coordinate": 0.9938608505478732
+        },
+        {
+          "time_M": 3718.9400193398474,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3730.3359350151304,
+          "series": "state x_L",
+          "coordinate": 0.996899853378894
+        },
+        {
+          "time_M": 3730.3359350151304,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3741.732708832812,
+          "series": "state x_L",
+          "coordinate": 0.9993518227161882
+        },
+        {
+          "time_M": 3741.732708832812,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3753.2302888838253,
+          "series": "state x_L",
+          "coordinate": 0.9999953229971196
+        },
+        {
+          "time_M": 3753.2302888838253,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3764.6285430814974,
+          "series": "state x_L",
+          "coordinate": 1.000009494075314
+        },
+        {
+          "time_M": 3764.6285430814974,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3776.027206422338,
+          "series": "state x_L",
+          "coordinate": 0.9999887870600579
+        },
+        {
+          "time_M": 3776.027206422338,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3787.4261187755687,
+          "series": "state x_L",
+          "coordinate": 0.999998304981081
+        },
+        {
+          "time_M": 3787.4261187755687,
+          "series": "state x_C",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3798.825187931276,
+          "series": "state x_L",
+          "coordinate": 1.0000002646328388
+        },
+        {
+          "time_M": 3798.825187931276,
+          "series": "state x_C",
+          "coordinate": 0.0
+        }
+      ],
+      "path_history": [
+        {
+          "time_M": 256.860780235259,
+          "series": "x_P openness",
+          "coordinate": 1.8593067768177907
+        },
+        {
+          "time_M": 256.860780235259,
+          "series": "x_R residual",
+          "coordinate": 0.755235310637736
+        },
+        {
+          "time_M": 256.860780235259,
+          "series": "rho coherence",
+          "coordinate": 0.9999929630577948
+        },
+        {
+          "time_M": 351.36596508202877,
+          "series": "x_P openness",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 351.36596508202877,
+          "series": "x_R residual",
+          "coordinate": 0.7387026723789037
+        },
+        {
+          "time_M": 351.36596508202877,
+          "series": "rho coherence",
+          "coordinate": 0.999998421512394
+        },
+        {
+          "time_M": 444.7325871928268,
+          "series": "x_P openness",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 444.7325871928268,
+          "series": "x_R residual",
+          "coordinate": 0.7411278737063723
+        },
+        {
+          "time_M": 444.7325871928268,
+          "series": "rho coherence",
+          "coordinate": 0.9999997160528087
+        },
+        {
+          "time_M": 540.4275339946226,
+          "series": "x_P openness",
+          "coordinate": 1.5405499757656589
+        },
+        {
+          "time_M": 540.4275339946226,
+          "series": "x_R residual",
+          "coordinate": 0.7430042322643579
+        },
+        {
+          "time_M": 540.4275339946226,
+          "series": "rho coherence",
+          "coordinate": 0.9999999615528941
+        },
+        {
+          "time_M": 631.6231484223132,
+          "series": "x_P openness",
+          "coordinate": 1.6102842772504846
+        },
+        {
+          "time_M": 631.6231484223132,
+          "series": "x_R residual",
+          "coordinate": 0.7417766350969578
+        },
+        {
+          "time_M": 631.6231484223132,
+          "series": "rho coherence",
+          "coordinate": 0.9999999688432849
+        },
+        {
+          "time_M": 721.8957813417181,
+          "series": "x_P openness",
+          "coordinate": 1.5680506805156451
+        },
+        {
+          "time_M": 721.8957813417181,
+          "series": "x_R residual",
+          "coordinate": 0.7417111800623934
+        },
+        {
+          "time_M": 721.8957813417181,
+          "series": "rho coherence",
+          "coordinate": 0.9999998876688478
+        },
+        {
+          "time_M": 810.6204935276352,
+          "series": "x_P openness",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 810.6204935276352,
+          "series": "x_R residual",
+          "coordinate": 0.7399394324367117
+        },
+        {
+          "time_M": 810.6204935276352,
+          "series": "rho coherence",
+          "coordinate": 0.9999998476342773
+        },
+        {
+          "time_M": 900.843509162097,
+          "series": "x_P openness",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 900.843509162097,
+          "series": "x_R residual",
+          "coordinate": 0.7408063150199365
+        },
+        {
+          "time_M": 900.843509162097,
+          "series": "rho coherence",
+          "coordinate": 0.9999999550339052
+        },
+        {
+          "time_M": 987.0962011300768,
+          "series": "x_P openness",
+          "coordinate": 1.7895724753329645
+        },
+        {
+          "time_M": 987.0962011300768,
+          "series": "x_R residual",
+          "coordinate": 0.7424005103799511
+        },
+        {
+          "time_M": 987.0962011300768,
+          "series": "rho coherence",
+          "coordinate": 0.9999999567287925
+        },
+        {
+          "time_M": 1072.2693042209726,
+          "series": "x_P openness",
+          "coordinate": 1.7451721264666986
+        },
+        {
+          "time_M": 1072.2693042209726,
+          "series": "x_R residual",
+          "coordinate": 0.7414160825727442
+        },
+        {
+          "time_M": 1072.2693042209726,
+          "series": "rho coherence",
+          "coordinate": 0.9999999562157135
+        },
+        {
+          "time_M": 1156.2222338160343,
+          "series": "x_P openness",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 1156.2222338160343,
+          "series": "x_R residual",
+          "coordinate": 0.7438799430226957
+        },
+        {
+          "time_M": 1156.2222338160343,
+          "series": "rho coherence",
+          "coordinate": 0.9999997618930496
+        },
+        {
+          "time_M": 1242.364990230541,
+          "series": "x_P openness",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 1242.364990230541,
+          "series": "x_R residual",
+          "coordinate": 0.7429716463465607
+        },
+        {
+          "time_M": 1242.364990230541,
+          "series": "rho coherence",
+          "coordinate": 0.9999996273517004
+        },
+        {
+          "time_M": 1324.131414621401,
+          "series": "x_P openness",
+          "coordinate": 1.5680506805156451
+        },
+        {
+          "time_M": 1324.131414621401,
+          "series": "x_R residual",
+          "coordinate": 0.7380012991537224
+        },
+        {
+          "time_M": 1324.131414621401,
+          "series": "rho coherence",
+          "coordinate": 0.9999994493381399
+        },
+        {
+          "time_M": 1403.8874532080633,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1403.8874532080633,
+          "series": "x_R residual",
+          "coordinate": 0.7352969920445653
+        },
+        {
+          "time_M": 1403.8874532080633,
+          "series": "rho coherence",
+          "coordinate": 0.9999994334630851
+        },
+        {
+          "time_M": 1482.265564781653,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1482.265564781653,
+          "series": "x_R residual",
+          "coordinate": 0.7403457999674791
+        },
+        {
+          "time_M": 1482.265564781653,
+          "series": "rho coherence",
+          "coordinate": 0.9999999668979788
+        },
+        {
+          "time_M": 1562.5216935569479,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1562.5216935569479,
+          "series": "x_R residual",
+          "coordinate": 0.7395321635640244
+        },
+        {
+          "time_M": 1562.5216935569479,
+          "series": "rho coherence",
+          "coordinate": 0.9999999708043197
+        },
+        {
+          "time_M": 1638.881930124916,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1638.881930124916,
+          "series": "x_R residual",
+          "coordinate": 0.73698752830416
+        },
+        {
+          "time_M": 1638.881930124916,
+          "series": "rho coherence",
+          "coordinate": 0.9999998392306061
+        },
+        {
+          "time_M": 1714.0026278759738,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1714.0026278759738,
+          "series": "x_R residual",
+          "coordinate": 0.7388421006820479
+        },
+        {
+          "time_M": 1714.0026278759738,
+          "series": "rho coherence",
+          "coordinate": 0.9999998599735782
+        },
+        {
+          "time_M": 1787.2357666290243,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1787.2357666290243,
+          "series": "x_R residual",
+          "coordinate": 0.7302967644727927
+        },
+        {
+          "time_M": 1787.2357666290243,
+          "series": "rho coherence",
+          "coordinate": 0.999998236103485
+        },
+        {
+          "time_M": 1861.8613337748425,
+          "series": "x_P openness",
+          "coordinate": 1.7977790076334568
+        },
+        {
+          "time_M": 1861.8613337748425,
+          "series": "x_R residual",
+          "coordinate": 0.7397541431103245
+        },
+        {
+          "time_M": 1861.8613337748425,
+          "series": "rho coherence",
+          "coordinate": 0.9999998310528256
+        },
+        {
+          "time_M": 1932.8645083049717,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1932.8645083049717,
+          "series": "x_R residual",
+          "coordinate": 0.7377930564594387
+        },
+        {
+          "time_M": 1932.8645083049717,
+          "series": "rho coherence",
+          "coordinate": 0.9999999325836882
+        },
+        {
+          "time_M": 2002.6995393741713,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 2002.6995393741713,
+          "series": "x_R residual",
+          "coordinate": 0.7399691482270436
+        },
+        {
+          "time_M": 2002.6995393741713,
+          "series": "rho coherence",
+          "coordinate": 0.9999998196566394
+        },
+        {
+          "time_M": 2070.2658201541544,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 2070.2658201541544,
+          "series": "x_R residual",
+          "coordinate": 0.7280887772217752
+        },
+        {
+          "time_M": 2070.2658201541544,
+          "series": "rho coherence",
+          "coordinate": 0.9999978948844102
+        },
+        {
+          "time_M": 2138.6675408156625,
+          "series": "x_P openness",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 2138.6675408156625,
+          "series": "x_R residual",
+          "coordinate": 0.7373983105404947
+        },
+        {
+          "time_M": 2138.6675408156625,
+          "series": "rho coherence",
+          "coordinate": 0.9999999237610273
+        },
+        {
+          "time_M": 2203.663942973454,
+          "series": "x_P openness",
+          "coordinate": 1.449348119698628
+        },
+        {
+          "time_M": 2203.663942973454,
+          "series": "x_R residual",
+          "coordinate": 0.73519252971621
+        },
+        {
+          "time_M": 2203.663942973454,
+          "series": "rho coherence",
+          "coordinate": 0.9999999447330175
+        },
+        {
+          "time_M": 2267.469706332841,
+          "series": "x_P openness",
+          "coordinate": 1.720576881743684
+        },
+        {
+          "time_M": 2267.469706332841,
+          "series": "x_R residual",
+          "coordinate": 0.7335021908707536
+        },
+        {
+          "time_M": 2267.469706332841,
+          "series": "rho coherence",
+          "coordinate": 0.9999998263531487
+        },
+        {
+          "time_M": 2328.520371062041,
+          "series": "x_P openness",
+          "coordinate": 1.750977500432693
+        },
+        {
+          "time_M": 2328.520371062041,
+          "series": "x_R residual",
+          "coordinate": 0.7296019609688168
+        },
+        {
+          "time_M": 2328.520371062041,
+          "series": "rho coherence",
+          "coordinate": 0.9999989030948873
+        },
+        {
+          "time_M": 2390.48419959101,
+          "series": "x_P openness",
+          "coordinate": 1.750977500432693
+        },
+        {
+          "time_M": 2390.48419959101,
+          "series": "x_R residual",
+          "coordinate": 0.7326034241014491
+        },
+        {
+          "time_M": 2390.48419959101,
+          "series": "rho coherence",
+          "coordinate": 0.9999999398518721
+        },
+        {
+          "time_M": 2449.070702003682,
+          "series": "x_P openness",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2449.070702003682,
+          "series": "x_R residual",
+          "coordinate": 0.7312545745935201
+        },
+        {
+          "time_M": 2449.070702003682,
+          "series": "rho coherence",
+          "coordinate": 0.999999893237701
+        },
+        {
+          "time_M": 2505.1184757277774,
+          "series": "x_P openness",
+          "coordinate": 1.720576881743684
+        },
+        {
+          "time_M": 2505.1184757277774,
+          "series": "x_R residual",
+          "coordinate": 0.7249629502514443
+        },
+        {
+          "time_M": 2505.1184757277774,
+          "series": "rho coherence",
+          "coordinate": 0.9999971347814033
+        },
+        {
+          "time_M": 2559.6941628568175,
+          "series": "x_P openness",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2559.6941628568175,
+          "series": "x_R residual",
+          "coordinate": 0.7276677104505072
+        },
+        {
+          "time_M": 2559.6941628568175,
+          "series": "rho coherence",
+          "coordinate": 0.9999997105142189
+        },
+        {
+          "time_M": 2614.601554793328,
+          "series": "x_P openness",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2614.601554793328,
+          "series": "x_R residual",
+          "coordinate": 0.7266630419380281
+        },
+        {
+          "time_M": 2614.601554793328,
+          "series": "rho coherence",
+          "coordinate": 0.9999991085211315
+        },
+        {
+          "time_M": 2664.8957168201887,
+          "series": "x_P openness",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2664.8957168201887,
+          "series": "x_R residual",
+          "coordinate": 0.7260627597664395
+        },
+        {
+          "time_M": 2664.8957168201887,
+          "series": "rho coherence",
+          "coordinate": 0.999999709199243
+        },
+        {
+          "time_M": 2713.7503946883025,
+          "series": "x_P openness",
+          "coordinate": 1.6186218808782966
+        },
+        {
+          "time_M": 2713.7503946883025,
+          "series": "x_R residual",
+          "coordinate": 0.7253477406955199
+        },
+        {
+          "time_M": 2713.7503946883025,
+          "series": "rho coherence",
+          "coordinate": 0.9999997270840484
+        },
+        {
+          "time_M": 2760.4419953660745,
+          "series": "x_P openness",
+          "coordinate": 2.0
+        },
+        {
+          "time_M": 2760.4419953660745,
+          "series": "x_R residual",
+          "coordinate": 0.7173101179053272
+        },
+        {
+          "time_M": 2760.4419953660745,
+          "series": "rho coherence",
+          "coordinate": 0.999998256144986
+        },
+        {
+          "time_M": 2806.6221932588755,
+          "series": "x_P openness",
+          "coordinate": 1.5287712379549447
+        },
+        {
+          "time_M": 2806.6221932588755,
+          "series": "x_R residual",
+          "coordinate": 0.7150347797333692
+        },
+        {
+          "time_M": 2806.6221932588755,
+          "series": "rho coherence",
+          "coordinate": 0.9999977924927084
+        },
+        {
+          "time_M": 2848.3252794651075,
+          "series": "x_P openness",
+          "coordinate": 1.5287712379549447
+        },
+        {
+          "time_M": 2848.3252794651075,
+          "series": "x_R residual",
+          "coordinate": 0.7019181961303472
+        },
+        {
+          "time_M": 2848.3252794651075,
+          "series": "rho coherence",
+          "coordinate": 0.9999932573234059
+        },
+        {
+          "time_M": 2887.8603675038,
+          "series": "x_P openness",
+          "coordinate": 1.4949064372133896
+        },
+        {
+          "time_M": 2887.8603675038,
+          "series": "x_R residual",
+          "coordinate": 0.7142066602719432
+        },
+        {
+          "time_M": 2887.8603675038,
+          "series": "rho coherence",
+          "coordinate": 0.9999990576187321
+        },
+        {
+          "time_M": 2924.4787838606558,
+          "series": "x_P openness",
+          "coordinate": 1.7817348152961758
+        },
+        {
+          "time_M": 2924.4787838606558,
+          "series": "x_R residual",
+          "coordinate": 0.6998970858271871
+        },
+        {
+          "time_M": 2924.4787838606558,
+          "series": "rho coherence",
+          "coordinate": 0.9999932529374282
+        },
+        {
+          "time_M": 2959.4129144710423,
+          "series": "x_P openness",
+          "coordinate": 1.4307573148634822
+        },
+        {
+          "time_M": 2959.4129144710423,
+          "series": "x_R residual",
+          "coordinate": 0.6885102808587683
+        },
+        {
+          "time_M": 2959.4129144710423,
+          "series": "rho coherence",
+          "coordinate": 0.9999919054468374
+        },
+        {
+          "time_M": 2989.920886931601,
+          "series": "x_P openness",
+          "coordinate": 1.3614709844115211
+        },
+        {
+          "time_M": 2989.920886931601,
+          "series": "x_R residual",
+          "coordinate": 0.6817113819127665
+        },
+        {
+          "time_M": 2989.920886931601,
+          "series": "rho coherence",
+          "coordinate": 0.9999879562800968
+        },
+        {
+          "time_M": 3016.7584024346147,
+          "series": "x_P openness",
+          "coordinate": 1.5931568569324175
+        },
+        {
+          "time_M": 3016.7584024346147,
+          "series": "x_R residual",
+          "coordinate": 0.6875250967535907
+        },
+        {
+          "time_M": 3016.7584024346147,
+          "series": "rho coherence",
+          "coordinate": 0.9999909523164074
+        },
+        {
+          "time_M": 3039.4046299808906,
+          "series": "x_P openness",
+          "coordinate": 1.5931568569324175
+        },
+        {
+          "time_M": 3039.4046299808906,
+          "series": "x_R residual",
+          "coordinate": 0.6716339488738179
+        },
+        {
+          "time_M": 3039.4046299808906,
+          "series": "rho coherence",
+          "coordinate": 0.9999860496482103
+        },
+        {
+          "time_M": 3057.290700367128,
+          "series": "x_P openness",
+          "coordinate": 1.8844129532345624
+        },
+        {
+          "time_M": 3057.290700367128,
+          "series": "x_R residual",
+          "coordinate": 0.646089273066653
+        },
+        {
+          "time_M": 3057.290700367128,
+          "series": "rho coherence",
+          "coordinate": 0.999979103745104
+        },
+        {
+          "time_M": 3070.0386496731912,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3070.0386496731912,
+          "series": "x_R residual",
+          "coordinate": 0.597379016039125
+        },
+        {
+          "time_M": 3070.0386496731912,
+          "series": "rho coherence",
+          "coordinate": 0.9999719859319088
+        },
+        {
+          "time_M": 3078.3406910588833,
+          "series": "x_P openness",
+          "coordinate": 1.316992500144231
+        },
+        {
+          "time_M": 3078.3406910588833,
+          "series": "x_R residual",
+          "coordinate": 0.6868531394635942
+        },
+        {
+          "time_M": 3078.3406910588833,
+          "series": "rho coherence",
+          "coordinate": 0.999970897116446
+        },
+        {
+          "time_M": 3089.540350708464,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3089.540350708464,
+          "series": "x_R residual",
+          "coordinate": 0.7061410864910062
+        },
+        {
+          "time_M": 3089.540350708464,
+          "series": "rho coherence",
+          "coordinate": 0.9999999957708987
+        },
+        {
+          "time_M": 3100.740010175398,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3100.740010175398,
+          "series": "x_R residual",
+          "coordinate": 0.7061854942403805
+        },
+        {
+          "time_M": 3100.740010175398,
+          "series": "rho coherence",
+          "coordinate": 0.9999999955922594
+        },
+        {
+          "time_M": 3112.3396573039863,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3112.3396573039863,
+          "series": "x_R residual",
+          "coordinate": 0.706238039791098
+        },
+        {
+          "time_M": 3112.3396573039863,
+          "series": "rho coherence",
+          "coordinate": 0.9999999953638398
+        },
+        {
+          "time_M": 3123.539316439667,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3123.539316439667,
+          "series": "x_R residual",
+          "coordinate": 0.7062976166223353
+        },
+        {
+          "time_M": 3123.539316439667,
+          "series": "rho coherence",
+          "coordinate": 0.9999999950842939
+        },
+        {
+          "time_M": 3134.7389754199157,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3134.7389754199157,
+          "series": "x_R residual",
+          "coordinate": 0.7063685667755925
+        },
+        {
+          "time_M": 3134.7389754199157,
+          "series": "rho coherence",
+          "coordinate": 0.9999999947246039
+        },
+        {
+          "time_M": 3145.93863424202,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3145.93863424202,
+          "series": "x_R residual",
+          "coordinate": 0.7064534777334069
+        },
+        {
+          "time_M": 3145.93863424202,
+          "series": "rho coherence",
+          "coordinate": 0.9999999942593673
+        },
+        {
+          "time_M": 3157.538280706596,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3157.538280706596,
+          "series": "x_R residual",
+          "coordinate": 0.706547199948951
+        },
+        {
+          "time_M": 3157.538280706596,
+          "series": "rho coherence",
+          "coordinate": 0.9999999937153372
+        },
+        {
+          "time_M": 3168.7379391894374,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3168.7379391894374,
+          "series": "x_R residual",
+          "coordinate": 0.7066253106768203
+        },
+        {
+          "time_M": 3168.7379391894374,
+          "series": "rho coherence",
+          "coordinate": 0.9999999932562533
+        },
+        {
+          "time_M": 3179.4218183171097,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3179.4218183171097,
+          "series": "x_R residual",
+          "coordinate": 0.674731275390776
+        },
+        {
+          "time_M": 3179.4218183171097,
+          "series": "rho coherence",
+          "coordinate": 0.9999960632032827
+        },
+        {
+          "time_M": 3187.9533146268896,
+          "series": "x_P openness",
+          "coordinate": 0.7169925001442312
+        },
+        {
+          "time_M": 3187.9533146268896,
+          "series": "x_R residual",
+          "coordinate": 0.8066885242136663
+        },
+        {
+          "time_M": 3187.9533146268896,
+          "series": "rho coherence",
+          "coordinate": 0.9999571312871693
+        },
+        {
+          "time_M": 3199.5529604062426,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3199.5529604062426,
+          "series": "x_R residual",
+          "coordinate": 0.7067908692515068
+        },
+        {
+          "time_M": 3199.5529604062426,
+          "series": "rho coherence",
+          "coordinate": 0.999999992313031
+        },
+        {
+          "time_M": 3210.752618202384,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3210.752618202384,
+          "series": "x_R residual",
+          "coordinate": 0.7068594549533143
+        },
+        {
+          "time_M": 3210.752618202384,
+          "series": "rho coherence",
+          "coordinate": 0.9999999918890818
+        },
+        {
+          "time_M": 3221.9522757877085,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3221.9522757877085,
+          "series": "x_R residual",
+          "coordinate": 0.7069358048519424
+        },
+        {
+          "time_M": 3221.9522757877085,
+          "series": "rho coherence",
+          "coordinate": 0.9999999913874995
+        },
+        {
+          "time_M": 3233.151933140779,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3233.151933140779,
+          "series": "x_R residual",
+          "coordinate": 0.7070249833493055
+        },
+        {
+          "time_M": 3233.151933140779,
+          "series": "rho coherence",
+          "coordinate": 0.9999999907566707
+        },
+        {
+          "time_M": 3244.7515779873297,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3244.7515779873297,
+          "series": "x_R residual",
+          "coordinate": 0.7071313617276557
+        },
+        {
+          "time_M": 3244.7515779873297,
+          "series": "rho coherence",
+          "coordinate": 0.9999999899483027
+        },
+        {
+          "time_M": 3254.9825423308757,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3254.9825423308757,
+          "series": "x_R residual",
+          "coordinate": 0.6365487372353348
+        },
+        {
+          "time_M": 3254.9825423308757,
+          "series": "rho coherence",
+          "coordinate": 0.9999885491642762
+        },
+        {
+          "time_M": 3263.937630274766,
+          "series": "x_P openness",
+          "coordinate": 1.2
+        },
+        {
+          "time_M": 3263.937630274766,
+          "series": "x_R residual",
+          "coordinate": 0.9736268754556411
+        },
+        {
+          "time_M": 3263.937630274766,
+          "series": "rho coherence",
+          "coordinate": 0.9999381913708196
+        },
+        {
+          "time_M": 3275.1372865924386,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3275.1372865924386,
+          "series": "x_R residual",
+          "coordinate": 0.7073601846628598
+        },
+        {
+          "time_M": 3275.1372865924386,
+          "series": "rho coherence",
+          "coordinate": 0.9999999881893457
+        },
+        {
+          "time_M": 3286.7369303275677,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3286.7369303275677,
+          "series": "x_R residual",
+          "coordinate": 0.707440630606606
+        },
+        {
+          "time_M": 3286.7369303275677,
+          "series": "rho coherence",
+          "coordinate": 0.9999999875626365
+        },
+        {
+          "time_M": 3297.9365860510416,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3297.9365860510416,
+          "series": "x_R residual",
+          "coordinate": 0.7075313458007327
+        },
+        {
+          "time_M": 3297.9365860510416,
+          "series": "rho coherence",
+          "coordinate": 0.9999999867969196
+        },
+        {
+          "time_M": 3308.713347569722,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3308.713347569722,
+          "series": "x_R residual",
+          "coordinate": 0.6832082217707373
+        },
+        {
+          "time_M": 3308.713347569722,
+          "series": "rho coherence",
+          "coordinate": 0.9999963759672639
+        },
+        {
+          "time_M": 3317.1327880787558,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3317.1327880787558,
+          "series": "x_R residual",
+          "coordinate": 0.755050475810884
+        },
+        {
+          "time_M": 3317.1327880787558,
+          "series": "rho coherence",
+          "coordinate": 0.9999526002853247
+        },
+        {
+          "time_M": 3328.7324306766395,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3328.7324306766395,
+          "series": "x_R residual",
+          "coordinate": 0.7078718195196843
+        },
+        {
+          "time_M": 3328.7324306766395,
+          "series": "rho coherence",
+          "coordinate": 0.999999983427029
+        },
+        {
+          "time_M": 3339.9320853002732,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3339.9320853002732,
+          "series": "x_R residual",
+          "coordinate": 0.7080255546875425
+        },
+        {
+          "time_M": 3339.9320853002732,
+          "series": "rho coherence",
+          "coordinate": 0.9999999816970615
+        },
+        {
+          "time_M": 3350.9011548979765,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3350.9011548979765,
+          "series": "x_R residual",
+          "coordinate": 0.6979434869733209
+        },
+        {
+          "time_M": 3350.9011548979765,
+          "series": "rho coherence",
+          "coordinate": 0.9999986659683581
+        },
+        {
+          "time_M": 3359.118159999378,
+          "series": "x_P openness",
+          "coordinate": 0.6000000000000001
+        },
+        {
+          "time_M": 3359.118159999378,
+          "series": "x_R residual",
+          "coordinate": 0.6361570013221155
+        },
+        {
+          "time_M": 3359.118159999378,
+          "series": "rho coherence",
+          "coordinate": 0.9999619203784943
+        },
+        {
+          "time_M": 3370.7178015263135,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3370.7178015263135,
+          "series": "x_R residual",
+          "coordinate": 0.708407185101664
+        },
+        {
+          "time_M": 3370.7178015263135,
+          "series": "rho coherence",
+          "coordinate": 0.9999999771211749
+        },
+        {
+          "time_M": 3381.914257507209,
+          "series": "x_P openness",
+          "coordinate": 1.284412953234562
+        },
+        {
+          "time_M": 3381.914257507209,
+          "series": "x_R residual",
+          "coordinate": 0.7084636117609729
+        },
+        {
+          "time_M": 3381.914257507209,
+          "series": "rho coherence",
+          "coordinate": 0.999999977689833
+        },
+        {
+          "time_M": 3389.966617270651,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3389.966617270651,
+          "series": "x_R residual",
+          "coordinate": 0.5433262565147031
+        },
+        {
+          "time_M": 3389.966617270651,
+          "series": "rho coherence",
+          "coordinate": 0.9999560993360489
+        },
+        {
+          "time_M": 3401.1421569573026,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3401.1421569573026,
+          "series": "x_R residual",
+          "coordinate": 0.7269836696515737
+        },
+        {
+          "time_M": 3401.1421569573026,
+          "series": "rho coherence",
+          "coordinate": 0.9999780468792148
+        },
+        {
+          "time_M": 3412.3463586291127,
+          "series": "x_P openness",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3412.3463586291127,
+          "series": "x_R residual",
+          "coordinate": 0.6864308165872246
+        },
+        {
+          "time_M": 3412.3463586291127,
+          "series": "rho coherence",
+          "coordinate": 0.9999961580006294
+        },
+        {
+          "time_M": 3420.7545982560596,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3420.7545982560596,
+          "series": "x_R residual",
+          "coordinate": 0.7448150201580327
+        },
+        {
+          "time_M": 3420.7545982560596,
+          "series": "rho coherence",
+          "coordinate": 0.9999418762621659
+        },
+        {
+          "time_M": 3431.951876586966,
+          "series": "x_P openness",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3431.951876586966,
+          "series": "x_R residual",
+          "coordinate": 0.7095121191457163
+        },
+        {
+          "time_M": 3431.951876586966,
+          "series": "rho coherence",
+          "coordinate": 0.9999999602507382
+        },
+        {
+          "time_M": 3440.1785361396164,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3440.1785361396164,
+          "series": "x_R residual",
+          "coordinate": 0.5454729055904958
+        },
+        {
+          "time_M": 3440.1785361396164,
+          "series": "rho coherence",
+          "coordinate": 0.9999503361703435
+        },
+        {
+          "time_M": 3451.1102605764245,
+          "series": "x_P openness",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3451.1102605764245,
+          "series": "x_R residual",
+          "coordinate": 0.7382709918794228
+        },
+        {
+          "time_M": 3451.1102605764245,
+          "series": "rho coherence",
+          "coordinate": 0.9999579949242803
+        },
+        {
+          "time_M": 3459.5397427796556,
+          "series": "x_P openness",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3459.5397427796556,
+          "series": "x_R residual",
+          "coordinate": 0.5592247468791564
+        },
+        {
+          "time_M": 3459.5397427796556,
+          "series": "rho coherence",
+          "coordinate": 0.9999591249674272
+        },
+        {
+          "time_M": 3470.4237705095925,
+          "series": "x_P openness",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3470.4237705095925,
+          "series": "x_R residual",
+          "coordinate": 0.69606727856853
+        },
+        {
+          "time_M": 3470.4237705095925,
+          "series": "rho coherence",
+          "coordinate": 0.9999957989333084
+        },
+        {
+          "time_M": 3478.725888681678,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3478.725888681678,
+          "series": "x_R residual",
+          "coordinate": 0.6898812038831669
+        },
+        {
+          "time_M": 3478.725888681678,
+          "series": "rho coherence",
+          "coordinate": 0.9999402350527626
+        },
+        {
+          "time_M": 3487.772700191425,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3487.772700191425,
+          "series": "x_R residual",
+          "coordinate": 0.5742147980730357
+        },
+        {
+          "time_M": 3487.772700191425,
+          "series": "rho coherence",
+          "coordinate": 0.9999523684066117
+        },
+        {
+          "time_M": 3497.7727539071643,
+          "series": "x_P openness",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3497.7727539071643,
+          "series": "x_R residual",
+          "coordinate": 0.7664764240500398
+        },
+        {
+          "time_M": 3497.7727539071643,
+          "series": "rho coherence",
+          "coordinate": 0.9999167606643912
+        },
+        {
+          "time_M": 3506.120996256388,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3506.120996256388,
+          "series": "x_R residual",
+          "coordinate": 0.8010019402341901
+        },
+        {
+          "time_M": 3506.120996256388,
+          "series": "rho coherence",
+          "coordinate": 0.9999267661275899
+        },
+        {
+          "time_M": 3514.3243295647662,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3514.3243295647662,
+          "series": "x_R residual",
+          "coordinate": 0.614827709625002
+        },
+        {
+          "time_M": 3514.3243295647662,
+          "series": "rho coherence",
+          "coordinate": 0.999946079492045
+        },
+        {
+          "time_M": 3522.3889195992397,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3522.3889195992397,
+          "series": "x_R residual",
+          "coordinate": 0.5467304394564034
+        },
+        {
+          "time_M": 3522.3889195992397,
+          "series": "rho coherence",
+          "coordinate": 0.9999373665125073
+        },
+        {
+          "time_M": 3530.7353779058412,
+          "series": "x_P openness",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3530.7353779058412,
+          "series": "x_R residual",
+          "coordinate": 0.5569934657826467
+        },
+        {
+          "time_M": 3530.7353779058412,
+          "series": "rho coherence",
+          "coordinate": 0.9999508561033059
+        },
+        {
+          "time_M": 3538.774046891673,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3538.774046891673,
+          "series": "x_R residual",
+          "coordinate": 0.5614738146909407
+        },
+        {
+          "time_M": 3538.774046891673,
+          "series": "rho coherence",
+          "coordinate": 0.9999506450913778
+        },
+        {
+          "time_M": 3546.74745103633,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3546.74745103633,
+          "series": "x_R residual",
+          "coordinate": 0.5747555323233791
+        },
+        {
+          "time_M": 3546.74745103633,
+          "series": "rho coherence",
+          "coordinate": 0.999960902688812
+        },
+        {
+          "time_M": 3554.290493892229,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3554.290493892229,
+          "series": "x_R residual",
+          "coordinate": 0.6384566758688068
+        },
+        {
+          "time_M": 3554.290493892229,
+          "series": "rho coherence",
+          "coordinate": 0.9999695175330964
+        },
+        {
+          "time_M": 3561.9603596472903,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3561.9603596472903,
+          "series": "x_R residual",
+          "coordinate": 0.8661677027509377
+        },
+        {
+          "time_M": 3561.9603596472903,
+          "series": "rho coherence",
+          "coordinate": 0.9999689350631495
+        },
+        {
+          "time_M": 3568.983389026781,
+          "series": "x_P openness",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3568.983389026781,
+          "series": "x_R residual",
+          "coordinate": 0.6849398586629137
+        },
+        {
+          "time_M": 3568.983389026781,
+          "series": "rho coherence",
+          "coordinate": 0.9999791826213313
+        },
+        {
+          "time_M": 3575.8976424757884,
+          "series": "x_P openness",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3575.8976424757884,
+          "series": "x_R residual",
+          "coordinate": 0.7297764478887537
+        },
+        {
+          "time_M": 3575.8976424757884,
+          "series": "rho coherence",
+          "coordinate": 0.9999861542484423
+        },
+        {
+          "time_M": 3584.252599110388,
+          "series": "x_P openness",
+          "coordinate": 1.284412953234562
+        },
+        {
+          "time_M": 3584.252599110388,
+          "series": "x_R residual",
+          "coordinate": 0.9010491874742633
+        },
+        {
+          "time_M": 3584.252599110388,
+          "series": "rho coherence",
+          "coordinate": 0.999829497085716
+        },
+        {
+          "time_M": 3595.852219340078,
+          "series": "x_P openness",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3595.852219340078,
+          "series": "x_R residual",
+          "coordinate": 0.7189537027731847
+        },
+        {
+          "time_M": 3595.852219340078,
+          "series": "rho coherence",
+          "coordinate": 0.9999993709880263
+        },
+        {
+          "time_M": 3607.051848710426,
+          "series": "x_P openness",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3607.051848710426,
+          "series": "x_R residual",
+          "coordinate": 0.7209001142345978
+        },
+        {
+          "time_M": 3607.051848710426,
+          "series": "rho coherence",
+          "coordinate": 0.9999991106935564
+        },
+        {
+          "time_M": 3618.251473068217,
+          "series": "x_P openness",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3618.251473068217,
+          "series": "x_R residual",
+          "coordinate": 0.7233365741311593
+        },
+        {
+          "time_M": 3618.251473068217,
+          "series": "rho coherence",
+          "coordinate": 0.9999986967952895
+        },
+        {
+          "time_M": 3629.4510908415,
+          "series": "x_P openness",
+          "coordinate": 1.1591718566439546
+        },
+        {
+          "time_M": 3629.4510908415,
+          "series": "x_R residual",
+          "coordinate": 0.7265059040813392
+        },
+        {
+          "time_M": 3629.4510908415,
+          "series": "rho coherence",
+          "coordinate": 0.99999799312648
+        },
+        {
+          "time_M": 3641.050685360228,
+          "series": "x_P openness",
+          "coordinate": 1.2416739708939157
+        },
+        {
+          "time_M": 3641.050685360228,
+          "series": "x_R residual",
+          "coordinate": 0.7310950299175908
+        },
+        {
+          "time_M": 3641.050685360228,
+          "series": "rho coherence",
+          "coordinate": 0.9999965919775846
+        },
+        {
+          "time_M": 3652.2502800911952,
+          "series": "x_P openness",
+          "coordinate": 1.6756589711823786
+        },
+        {
+          "time_M": 3652.2502800911952,
+          "series": "x_R residual",
+          "coordinate": 0.737599103136873
+        },
+        {
+          "time_M": 3652.2502800911952,
+          "series": "rho coherence",
+          "coordinate": 0.9999936922845913
+        },
+        {
+          "time_M": 3663.44985302053,
+          "series": "x_P openness",
+          "coordinate": 1.7124484848442143
+        },
+        {
+          "time_M": 3663.44985302053,
+          "series": "x_R residual",
+          "coordinate": 0.7475534838365563
+        },
+        {
+          "time_M": 3663.44985302053,
+          "series": "rho coherence",
+          "coordinate": 0.9999867134249032
+        },
+        {
+          "time_M": 3674.6493822704065,
+          "series": "x_P openness",
+          "coordinate": 1.4690498338243956
+        },
+        {
+          "time_M": 3674.6493822704065,
+          "series": "x_R residual",
+          "coordinate": 0.7643053583450338
+        },
+        {
+          "time_M": 3674.6493822704065,
+          "series": "rho coherence",
+          "coordinate": 0.9999660879215262
+        },
+        {
+          "time_M": 3686.2487020345084,
+          "series": "x_P openness",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 3686.2487020345084,
+          "series": "x_R residual",
+          "coordinate": 0.7964423460100779
+        },
+        {
+          "time_M": 3686.2487020345084,
+          "series": "rho coherence",
+          "coordinate": 0.999883798217671
+        },
+        {
+          "time_M": 3697.4472123886503,
+          "series": "x_P openness",
+          "coordinate": 1.7141371736342077
+        },
+        {
+          "time_M": 3697.4472123886503,
+          "series": "x_R residual",
+          "coordinate": 0.8469302168763592
+        },
+        {
+          "time_M": 3697.4472123886503,
+          "series": "rho coherence",
+          "coordinate": 0.9996132411379562
+        },
+        {
+          "time_M": 3708.6440241886326,
+          "series": "x_P openness",
+          "coordinate": 1.9725177862321248
+        },
+        {
+          "time_M": 3708.6440241886326,
+          "series": "x_R residual",
+          "coordinate": 0.8691506898971372
+        },
+        {
+          "time_M": 3708.6440241886326,
+          "series": "rho coherence",
+          "coordinate": 0.9996743713323701
+        },
+        {
+          "time_M": 3719.8396706811545,
+          "series": "x_P openness",
+          "coordinate": 1.8783975252439598
+        },
+        {
+          "time_M": 3719.8396706811545,
+          "series": "x_R residual",
+          "coordinate": 0.8624486110668433
+        },
+        {
+          "time_M": 3719.8396706811545,
+          "series": "rho coherence",
+          "coordinate": 0.9999636400795946
+        },
+        {
+          "time_M": 3731.435585661539,
+          "series": "x_P openness",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3731.435585661539,
+          "series": "x_R residual",
+          "coordinate": 0.8583473858675245
+        },
+        {
+          "time_M": 3731.435585661539,
+          "series": "rho coherence",
+          "coordinate": 0.9999988108183684
+        },
+        {
+          "time_M": 3742.6324903967284,
+          "series": "x_P openness",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3742.6324903967284,
+          "series": "x_R residual",
+          "coordinate": 0.8603736845783854
+        },
+        {
+          "time_M": 3742.6324903967284,
+          "series": "rho coherence",
+          "coordinate": 0.9999983583011252
+        },
+        {
+          "time_M": 3753.830183042864,
+          "series": "x_P openness",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3753.830183042864,
+          "series": "x_R residual",
+          "coordinate": 0.8661748429973796
+        },
+        {
+          "time_M": 3753.830183042864,
+          "series": "rho coherence",
+          "coordinate": 0.9999899609731722
+        },
+        {
+          "time_M": 3765.0284904290224,
+          "series": "x_P openness",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3765.0284904290224,
+          "series": "x_R residual",
+          "coordinate": 0.8810015036975724
+        },
+        {
+          "time_M": 3765.0284904290224,
+          "series": "rho coherence",
+          "coordinate": 0.9999354965378332
+        },
+        {
+          "time_M": 3776.6271440779215,
+          "series": "x_P openness",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3776.6271440779215,
+          "series": "x_R residual",
+          "coordinate": 0.9133087853374219
+        },
+        {
+          "time_M": 3776.6271440779215,
+          "series": "rho coherence",
+          "coordinate": 0.9994942718616461
+        },
+        {
+          "time_M": 3787.8260838596243,
+          "series": "x_P openness",
+          "coordinate": 1.8783975252439598
+        },
+        {
+          "time_M": 3787.8260838596243,
+          "series": "x_R residual",
+          "coordinate": 1.0206372135931476
+        },
+        {
+          "time_M": 3787.8260838596243,
+          "series": "rho coherence",
+          "coordinate": 0.9962233341690865
+        },
+        {
+          "time_M": 3799.0251726352544,
+          "series": "x_P openness",
+          "coordinate": 1.8540123345455526
+        },
+        {
+          "time_M": 3799.0251726352544,
+          "series": "x_R residual",
+          "coordinate": 1.3902145919599633
+        },
+        {
+          "time_M": 3799.0251726352544,
+          "series": "rho coherence",
+          "coordinate": 0.958218169046103
+        },
+        {
+          "time_M": 3810.2243593597977,
+          "series": "x_P openness",
+          "coordinate": 1.1674204530903312
+        },
+        {
+          "time_M": 3810.2243593597977,
+          "series": "x_R residual",
+          "coordinate": 0.01678765647253767
+        },
+        {
+          "time_M": 3810.2243593597977,
+          "series": "rho coherence",
+          "coordinate": 0.9805146727181296
+        },
+        {
+          "time_M": 3821.823587331654,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326939
+        },
+        {
+          "time_M": 3821.823587331654,
+          "series": "x_R residual",
+          "coordinate": 0.01615904681970338
+        },
+        {
+          "time_M": 3821.823587331654,
+          "series": "rho coherence",
+          "coordinate": 0.9973995876573258
+        },
+        {
+          "time_M": 3833.022889907116,
+          "series": "x_P openness",
+          "coordinate": 1.1509775004326939
+        },
+        {
+          "time_M": 3833.022889907116,
+          "series": "x_R residual",
+          "coordinate": 0.02343469131134042
+        },
+        {
+          "time_M": 3833.022889907116,
+          "series": "rho coherence",
+          "coordinate": 0.9995817759948136
+        },
+        {
+          "time_M": 3844.2222289545357,
+          "series": "x_P openness",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3844.2222289545357,
+          "series": "x_R residual",
+          "coordinate": 0.02536947357686777
+        },
+        {
+          "time_M": 3844.2222289545357,
+          "series": "rho coherence",
+          "coordinate": 0.9999347472361546
+        }
+      ],
+      "rational_history": [
+        {
+          "time_M": 148.85927454929885,
+          "series": "reverse x_P",
+          "coordinate": 1.8593067768177907
+        },
+        {
+          "time_M": 148.85927454929885,
+          "series": "reverse x_R",
+          "coordinate": 0.7316316876365242
+        },
+        {
+          "time_M": 148.85927454929885,
+          "series": "reverse rho",
+          "coordinate": 0.9999929630577948
+        },
+        {
+          "time_M": 244.119555514191,
+          "series": "reverse x_P",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 244.119555514191,
+          "series": "reverse x_R",
+          "coordinate": 0.7468957379878473
+        },
+        {
+          "time_M": 244.119555514191,
+          "series": "reverse rho",
+          "coordinate": 0.999998421512394
+        },
+        {
+          "time_M": 338.7787401284723,
+          "series": "reverse x_P",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 338.7787401284723,
+          "series": "reverse x_R",
+          "coordinate": 0.745314868111422
+        },
+        {
+          "time_M": 338.7787401284723,
+          "series": "reverse rho",
+          "coordinate": 0.9999997160528087
+        },
+        {
+          "time_M": 435.6045998106294,
+          "series": "reverse x_P",
+          "coordinate": 1.5405499757656589
+        },
+        {
+          "time_M": 435.6045998106294,
+          "series": "reverse x_R",
+          "coordinate": 0.7424461767216439
+        },
+        {
+          "time_M": 435.6045998106294,
+          "series": "reverse rho",
+          "coordinate": 0.999999961552894
+        },
+        {
+          "time_M": 528.1264171216029,
+          "series": "reverse x_P",
+          "coordinate": 1.6102842772504846
+        },
+        {
+          "time_M": 528.1264171216029,
+          "series": "reverse x_R",
+          "coordinate": 0.7436570362662728
+        },
+        {
+          "time_M": 528.1264171216029,
+          "series": "reverse rho",
+          "coordinate": 0.999999968843285
+        },
+        {
+          "time_M": 619.4903116525595,
+          "series": "reverse x_P",
+          "coordinate": 1.5680506805156451
+        },
+        {
+          "time_M": 619.4903116525595,
+          "series": "reverse x_R",
+          "coordinate": 0.7437292311159354
+        },
+        {
+          "time_M": 619.4903116525595,
+          "series": "reverse rho",
+          "coordinate": 0.9999998876688478
+        },
+        {
+          "time_M": 709.9203426192953,
+          "series": "reverse x_P",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 709.9203426192953,
+          "series": "reverse x_R",
+          "coordinate": 0.7445973480410631
+        },
+        {
+          "time_M": 709.9203426192953,
+          "series": "reverse rho",
+          "coordinate": 0.9999998476342773
+        },
+        {
+          "time_M": 801.9642141967462,
+          "series": "reverse x_P",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 801.9642141967462,
+          "series": "reverse x_R",
+          "coordinate": 0.7424363788830634
+        },
+        {
+          "time_M": 801.9642141967462,
+          "series": "reverse rho",
+          "coordinate": 0.9999999550339053
+        },
+        {
+          "time_M": 889.2185640057368,
+          "series": "reverse x_P",
+          "coordinate": 1.7895724753329645
+        },
+        {
+          "time_M": 889.2185640057368,
+          "series": "reverse x_R",
+          "coordinate": 0.7405900754222098
+        },
+        {
+          "time_M": 889.2185640057368,
+          "series": "reverse rho",
+          "coordinate": 0.9999999567287925
+        },
+        {
+          "time_M": 975.5888344227245,
+          "series": "reverse x_P",
+          "coordinate": 1.7451721264666986
+        },
+        {
+          "time_M": 975.5888344227245,
+          "series": "reverse x_R",
+          "coordinate": 0.7415846596909422
+        },
+        {
+          "time_M": 975.5888344227245,
+          "series": "reverse rho",
+          "coordinate": 0.9999999562157135
+        },
+        {
+          "time_M": 1061.0008495613251,
+          "series": "reverse x_P",
+          "coordinate": 1.8170731800829516
+        },
+        {
+          "time_M": 1061.0008495613251,
+          "series": "reverse x_R",
+          "coordinate": 0.7385695262832835
+        },
+        {
+          "time_M": 1061.0008495613251,
+          "series": "reverse rho",
+          "coordinate": 0.9999997618930496
+        },
+        {
+          "time_M": 1147.990093209059,
+          "series": "reverse x_P",
+          "coordinate": 1.8421793564997233
+        },
+        {
+          "time_M": 1147.990093209059,
+          "series": "reverse x_R",
+          "coordinate": 0.7396775107252058
+        },
+        {
+          "time_M": 1147.990093209059,
+          "series": "reverse rho",
+          "coordinate": 0.9999996273517004
+        },
+        {
+          "time_M": 1231.2809543486485,
+          "series": "reverse x_P",
+          "coordinate": 1.5680506805156451
+        },
+        {
+          "time_M": 1231.2809543486485,
+          "series": "reverse x_R",
+          "coordinate": 0.7440540980030363
+        },
+        {
+          "time_M": 1231.2809543486485,
+          "series": "reverse rho",
+          "coordinate": 0.9999994493381401
+        },
+        {
+          "time_M": 1313.2868269183998,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1313.2868269183998,
+          "series": "reverse x_R",
+          "coordinate": 0.7449521668422352
+        },
+        {
+          "time_M": 1313.2868269183998,
+          "series": "reverse rho",
+          "coordinate": 0.9999994334630851
+        },
+        {
+          "time_M": 1393.3037701647659,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1393.3037701647659,
+          "series": "reverse x_R",
+          "coordinate": 0.7390231596745163
+        },
+        {
+          "time_M": 1393.3037701647659,
+          "series": "reverse rho",
+          "coordinate": 0.9999999668979787
+        },
+        {
+          "time_M": 1474.5993294482153,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1474.5993294482153,
+          "series": "reverse x_R",
+          "coordinate": 0.7401251967136872
+        },
+        {
+          "time_M": 1474.5993294482153,
+          "series": "reverse rho",
+          "coordinate": 0.9999999708043197
+        },
+        {
+          "time_M": 1552.2169500392117,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1552.2169500392117,
+          "series": "reverse x_R",
+          "coordinate": 0.7424425273727256
+        },
+        {
+          "time_M": 1552.2169500392117,
+          "series": "reverse rho",
+          "coordinate": 0.999999839230606
+        },
+        {
+          "time_M": 1628.737119184293,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1628.737119184293,
+          "series": "reverse x_R",
+          "coordinate": 0.7396019437460037
+        },
+        {
+          "time_M": 1628.737119184293,
+          "series": "reverse rho",
+          "coordinate": 0.9999998599735782
+        },
+        {
+          "time_M": 1703.9905929676179,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1703.9905929676179,
+          "series": "reverse x_R",
+          "coordinate": 0.7462956600204301
+        },
+        {
+          "time_M": 1703.9905929676179,
+          "series": "reverse rho",
+          "coordinate": 0.9999982361034849
+        },
+        {
+          "time_M": 1780.136188977976,
+          "series": "reverse x_P",
+          "coordinate": 1.7977790076334568
+        },
+        {
+          "time_M": 1780.136188977976,
+          "series": "reverse x_R",
+          "coordinate": 0.7362365922607204
+        },
+        {
+          "time_M": 1780.136188977976,
+          "series": "reverse rho",
+          "coordinate": 0.9999998310528255
+        },
+        {
+          "time_M": 1852.2192408996393,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1852.2192408996393,
+          "series": "reverse x_R",
+          "coordinate": 0.7379460392663615
+        },
+        {
+          "time_M": 1852.2192408996393,
+          "series": "reverse rho",
+          "coordinate": 0.9999999325836881
+        },
+        {
+          "time_M": 1923.385709241561,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1923.385709241561,
+          "series": "reverse x_R",
+          "coordinate": 0.7360855155274528
+        },
+        {
+          "time_M": 1923.385709241561,
+          "series": "reverse rho",
+          "coordinate": 0.9999998196566393
+        },
+        {
+          "time_M": 1993.4053020484878,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 1993.4053020484878,
+          "series": "reverse x_R",
+          "coordinate": 0.7447124470620152
+        },
+        {
+          "time_M": 1993.4053020484878,
+          "series": "reverse rho",
+          "coordinate": 0.9999978948844102
+        },
+        {
+          "time_M": 2063.743788140596,
+          "series": "reverse x_P",
+          "coordinate": 1.4961496268993926
+        },
+        {
+          "time_M": 2063.743788140596,
+          "series": "reverse x_R",
+          "coordinate": 0.7342960500814895
+        },
+        {
+          "time_M": 2063.743788140596,
+          "series": "reverse rho",
+          "coordinate": 0.9999999237610274
+        },
+        {
+          "time_M": 2129.8707233765767,
+          "series": "reverse x_P",
+          "coordinate": 1.449348119698628
+        },
+        {
+          "time_M": 2129.8707233765767,
+          "series": "reverse x_R",
+          "coordinate": 0.7367920530467621
+        },
+        {
+          "time_M": 2129.8707233765767,
+          "series": "reverse rho",
+          "coordinate": 0.9999999447330175
+        },
+        {
+          "time_M": 2194.9988053411384,
+          "series": "reverse x_P",
+          "coordinate": 1.720576881743684
+        },
+        {
+          "time_M": 2194.9988053411384,
+          "series": "reverse x_R",
+          "coordinate": 0.7381570846604465
+        },
+        {
+          "time_M": 2194.9988053411384,
+          "series": "reverse rho",
+          "coordinate": 0.9999998263531487
+        },
+        {
+          "time_M": 2259.0468708565118,
+          "series": "reverse x_P",
+          "coordinate": 1.750977500432693
+        },
+        {
+          "time_M": 2259.0468708565118,
+          "series": "reverse x_R",
+          "coordinate": 0.7378502466756784
+        },
+        {
+          "time_M": 2259.0468708565118,
+          "series": "reverse rho",
+          "coordinate": 0.9999989030948873
+        },
+        {
+          "time_M": 2322.578030034301,
+          "series": "reverse x_P",
+          "coordinate": 1.750977500432693
+        },
+        {
+          "time_M": 2322.578030034301,
+          "series": "reverse x_R",
+          "coordinate": 0.7345150364136741
+        },
+        {
+          "time_M": 2322.578030034301,
+          "series": "reverse rho",
+          "coordinate": 0.9999999398518721
+        },
+        {
+          "time_M": 2382.5603257767602,
+          "series": "reverse x_P",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2382.5603257767602,
+          "series": "reverse x_R",
+          "coordinate": 0.7344280777164875
+        },
+        {
+          "time_M": 2382.5603257767602,
+          "series": "reverse rho",
+          "coordinate": 0.9999998932377012
+        },
+        {
+          "time_M": 2441.268139123779,
+          "series": "reverse x_P",
+          "coordinate": 1.720576881743684
+        },
+        {
+          "time_M": 2441.268139123779,
+          "series": "reverse x_R",
+          "coordinate": 0.7389292710458722
+        },
+        {
+          "time_M": 2441.268139123779,
+          "series": "reverse rho",
+          "coordinate": 0.9999971347814034
+        },
+        {
+          "time_M": 2497.7085234233223,
+          "series": "reverse x_P",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2497.7085234233223,
+          "series": "reverse x_R",
+          "coordinate": 0.733885354112423
+        },
+        {
+          "time_M": 2497.7085234233223,
+          "series": "reverse rho",
+          "coordinate": 0.9999997105142187
+        },
+        {
+          "time_M": 2554.3822366151667,
+          "series": "reverse x_P",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2554.3822366151667,
+          "series": "reverse x_R",
+          "coordinate": 0.7329336103672153
+        },
+        {
+          "time_M": 2554.3822366151667,
+          "series": "reverse rho",
+          "coordinate": 0.9999991085211315
+        },
+        {
+          "time_M": 2607.7151633718336,
+          "series": "reverse x_P",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 2607.7151633718336,
+          "series": "reverse x_R",
+          "coordinate": 0.7303700194269479
+        },
+        {
+          "time_M": 2607.7151633718336,
+          "series": "reverse rho",
+          "coordinate": 0.9999997091992431
+        },
+        {
+          "time_M": 2658.258092504396,
+          "series": "reverse x_P",
+          "coordinate": 1.6186218808782966
+        },
+        {
+          "time_M": 2658.258092504396,
+          "series": "reverse x_R",
+          "coordinate": 0.7297313410727447
+        },
+        {
+          "time_M": 2658.258092504396,
+          "series": "reverse rho",
+          "coordinate": 0.9999997270840483
+        },
+        {
+          "time_M": 2707.31350483162,
+          "series": "reverse x_P",
+          "coordinate": 2.0
+        },
+        {
+          "time_M": 2707.31350483162,
+          "series": "reverse x_R",
+          "coordinate": 0.7358976617022248
+        },
+        {
+          "time_M": 2707.31350483162,
+          "series": "reverse rho",
+          "coordinate": 0.9999982561449864
+        },
+        {
+          "time_M": 2755.9283947608706,
+          "series": "reverse x_P",
+          "coordinate": 1.5287712379549447
+        },
+        {
+          "time_M": 2755.9283947608706,
+          "series": "reverse x_R",
+          "coordinate": 0.7350933041822667
+        },
+        {
+          "time_M": 2755.9283947608706,
+          "series": "reverse rho",
+          "coordinate": 0.9999977924927084
+        },
+        {
+          "time_M": 2800.782242520703,
+          "series": "reverse x_P",
+          "coordinate": 1.5287712379549447
+        },
+        {
+          "time_M": 2800.782242520703,
+          "series": "reverse x_R",
+          "coordinate": 0.7448050657051497
+        },
+        {
+          "time_M": 2800.782242520703,
+          "series": "reverse rho",
+          "coordinate": 0.9999932573234059
+        },
+        {
+          "time_M": 2842.919957728715,
+          "series": "reverse x_P",
+          "coordinate": 1.4949064372133896
+        },
+        {
+          "time_M": 2842.919957728715,
+          "series": "reverse x_R",
+          "coordinate": 0.7283528568931253
+        },
+        {
+          "time_M": 2842.919957728715,
+          "series": "reverse rho",
+          "coordinate": 0.9999990576187321
+        },
+        {
+          "time_M": 2882.6799187899624,
+          "series": "reverse x_P",
+          "coordinate": 1.7817348152961758
+        },
+        {
+          "time_M": 2882.6799187899624,
+          "series": "reverse x_R",
+          "coordinate": 0.7394026089856452
+        },
+        {
+          "time_M": 2882.6799187899624,
+          "series": "reverse rho",
+          "coordinate": 0.9999932529374282
+        },
+        {
+          "time_M": 2920.9991864882354,
+          "series": "reverse x_P",
+          "coordinate": 1.4307573148634822
+        },
+        {
+          "time_M": 2920.9991864882354,
+          "series": "reverse x_R",
+          "coordinate": 0.7459203362411926
+        },
+        {
+          "time_M": 2920.9991864882354,
+          "series": "reverse rho",
+          "coordinate": 0.9999919054468374
+        },
+        {
+          "time_M": 2955.07555775189,
+          "series": "reverse x_P",
+          "coordinate": 1.3614709844115211
+        },
+        {
+          "time_M": 2955.07555775189,
+          "series": "reverse x_R",
+          "coordinate": 0.7487295398182617
+        },
+        {
+          "time_M": 2955.07555775189,
+          "series": "reverse rho",
+          "coordinate": 0.9999879562800968
+        },
+        {
+          "time_M": 2986.0349001947134,
+          "series": "reverse x_P",
+          "coordinate": 1.5931568569324175
+        },
+        {
+          "time_M": 2986.0349001947134,
+          "series": "reverse x_R",
+          "coordinate": 0.7389682439193282
+        },
+        {
+          "time_M": 2986.0349001947134,
+          "series": "reverse rho",
+          "coordinate": 0.9999909523164074
+        },
+        {
+          "time_M": 3013.3505058444553,
+          "series": "reverse x_P",
+          "coordinate": 1.5931568569324175
+        },
+        {
+          "time_M": 3013.3505058444553,
+          "series": "reverse x_R",
+          "coordinate": 0.7482182488611587
+        },
+        {
+          "time_M": 3013.3505058444553,
+          "series": "reverse rho",
+          "coordinate": 0.9999860496482103
+        },
+        {
+          "time_M": 3036.6508708282304,
+          "series": "reverse x_P",
+          "coordinate": 1.8844129532345624
+        },
+        {
+          "time_M": 3036.6508708282304,
+          "series": "reverse x_R",
+          "coordinate": 0.7682869943671394
+        },
+        {
+          "time_M": 3036.6508708282304,
+          "series": "reverse rho",
+          "coordinate": 0.999979103745104
+        },
+        {
+          "time_M": 3055.7555850739714,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3055.7555850739714,
+          "series": "reverse x_R",
+          "coordinate": 0.8197879210818013
+        },
+        {
+          "time_M": 3055.7555850739714,
+          "series": "reverse rho",
+          "coordinate": 0.9999719859319087
+        },
+        {
+          "time_M": 3068.7382685130647,
+          "series": "reverse x_P",
+          "coordinate": 1.316992500144231
+        },
+        {
+          "time_M": 3068.7382685130647,
+          "series": "reverse x_R",
+          "coordinate": 0.759673409062447
+        },
+        {
+          "time_M": 3068.7382685130647,
+          "series": "reverse rho",
+          "coordinate": 0.9999708971164459
+        },
+        {
+          "time_M": 3076.8407366265874,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3076.8407366265874,
+          "series": "reverse x_R",
+          "coordinate": 0.7031374306879832
+        },
+        {
+          "time_M": 3076.8407366265874,
+          "series": "reverse rho",
+          "coordinate": 0.9999999957708987
+        },
+        {
+          "time_M": 3088.0403963020813,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3088.0403963020813,
+          "series": "reverse x_R",
+          "coordinate": 0.7031372883755193
+        },
+        {
+          "time_M": 3088.0403963020813,
+          "series": "reverse rho",
+          "coordinate": 0.9999999955922596
+        },
+        {
+          "time_M": 3099.6400436282333,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3099.6400436282333,
+          "series": "reverse x_R",
+          "coordinate": 0.7031320443258181
+        },
+        {
+          "time_M": 3099.6400436282333,
+          "series": "reverse rho",
+          "coordinate": 0.9999999953638398
+        },
+        {
+          "time_M": 3110.839702943594,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3110.839702943594,
+          "series": "reverse x_R",
+          "coordinate": 0.703119741531761
+        },
+        {
+          "time_M": 3110.839702943594,
+          "series": "reverse rho",
+          "coordinate": 0.9999999950842939
+        },
+        {
+          "time_M": 3122.039362100145,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3122.039362100145,
+          "series": "reverse x_R",
+          "coordinate": 0.7030980431626229
+        },
+        {
+          "time_M": 3122.039362100145,
+          "series": "reverse rho",
+          "coordinate": 0.9999999947246039
+        },
+        {
+          "time_M": 3133.2390211012757,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3133.2390211012757,
+          "series": "reverse x_R",
+          "coordinate": 0.7030646286698405
+        },
+        {
+          "time_M": 3133.2390211012757,
+          "series": "reverse rho",
+          "coordinate": 0.9999999942593674
+        },
+        {
+          "time_M": 3144.8386677577123,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3144.8386677577123,
+          "series": "reverse x_R",
+          "coordinate": 0.7030267012534325
+        },
+        {
+          "time_M": 3144.8386677577123,
+          "series": "reverse rho",
+          "coordinate": 0.9999999937153372
+        },
+        {
+          "time_M": 3156.0383264325023,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3156.0383264325023,
+          "series": "reverse x_R",
+          "coordinate": 0.7030047547105641
+        },
+        {
+          "time_M": 3156.0383264325023,
+          "series": "reverse rho",
+          "coordinate": 0.9999999932562533
+        },
+        {
+          "time_M": 3167.2379849383656,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3167.2379849383656,
+          "series": "reverse x_R",
+          "coordinate": 0.7304497571483661
+        },
+        {
+          "time_M": 3167.2379849383656,
+          "series": "reverse rho",
+          "coordinate": 0.9999960632032827
+        },
+        {
+          "time_M": 3178.1803191034123,
+          "series": "reverse x_P",
+          "coordinate": 0.7169925001442312
+        },
+        {
+          "time_M": 3178.1803191034123,
+          "series": "reverse x_R",
+          "coordinate": 0.637785857372572
+        },
+        {
+          "time_M": 3178.1803191034123,
+          "series": "reverse rho",
+          "coordinate": 0.9999571312871695
+        },
+        {
+          "time_M": 3186.8533482064186,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3186.8533482064186,
+          "series": "reverse x_R",
+          "coordinate": 0.7030050339818896
+        },
+        {
+          "time_M": 3186.8533482064186,
+          "series": "reverse rho",
+          "coordinate": 0.999999992313031
+        },
+        {
+          "time_M": 3198.0530062220682,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3198.0530062220682,
+          "series": "reverse x_R",
+          "coordinate": 0.7030006386794615
+        },
+        {
+          "time_M": 3198.0530062220682,
+          "series": "reverse rho",
+          "coordinate": 0.9999999918890818
+        },
+        {
+          "time_M": 3209.2526640450624,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3209.2526640450624,
+          "series": "reverse x_R",
+          "coordinate": 0.7029909116925782
+        },
+        {
+          "time_M": 3209.2526640450624,
+          "series": "reverse rho",
+          "coordinate": 0.9999999913874995
+        },
+        {
+          "time_M": 3220.4523216597836,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3220.4523216597836,
+          "series": "reverse x_R",
+          "coordinate": 0.7029712415891264
+        },
+        {
+          "time_M": 3220.4523216597836,
+          "series": "reverse rho",
+          "coordinate": 0.9999999907566706
+        },
+        {
+          "time_M": 3232.051966804537,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3232.051966804537,
+          "series": "reverse x_R",
+          "coordinate": 0.7029401639401518
+        },
+        {
+          "time_M": 3232.051966804537,
+          "series": "reverse rho",
+          "coordinate": 0.9999999899483027
+        },
+        {
+          "time_M": 3243.251623928565,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3243.251623928565,
+          "series": "reverse x_R",
+          "coordinate": 0.7728073532491502
+        },
+        {
+          "time_M": 3243.251623928565,
+          "series": "reverse rho",
+          "coordinate": 0.9999885491642762
+        },
+        {
+          "time_M": 3253.8898219660077,
+          "series": "reverse x_P",
+          "coordinate": 1.2
+        },
+        {
+          "time_M": 3253.8898219660077,
+          "series": "reverse x_R",
+          "coordinate": 0.45296076600627494
+        },
+        {
+          "time_M": 3253.8898219660077,
+          "series": "reverse rho",
+          "coordinate": 0.9999381913708196
+        },
+        {
+          "time_M": 3262.4376762814472,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3262.4376762814472,
+          "series": "reverse x_R",
+          "coordinate": 0.7029243315469573
+        },
+        {
+          "time_M": 3262.4376762814472,
+          "series": "reverse rho",
+          "coordinate": 0.9999999881893457
+        },
+        {
+          "time_M": 3274.0373203599124,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3274.0373203599124,
+          "series": "reverse x_R",
+          "coordinate": 0.7029311809870055
+        },
+        {
+          "time_M": 3274.0373203599124,
+          "series": "reverse rho",
+          "coordinate": 0.9999999875626366
+        },
+        {
+          "time_M": 3285.2369764139125,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3285.2369764139125,
+          "series": "reverse x_R",
+          "coordinate": 0.7029279721121146
+        },
+        {
+          "time_M": 3285.2369764139125,
+          "series": "reverse rho",
+          "coordinate": 0.9999999867969194
+        },
+        {
+          "time_M": 3296.4366321764096,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3296.4366321764096,
+          "series": "reverse x_R",
+          "coordinate": 0.7229340503606908
+        },
+        {
+          "time_M": 3296.4366321764096,
+          "series": "reverse rho",
+          "coordinate": 0.9999963759672638
+        },
+        {
+          "time_M": 3307.4426942097343,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3307.4426942097343,
+          "series": "reverse x_R",
+          "coordinate": 0.6907676402150231
+        },
+        {
+          "time_M": 3307.4426942097343,
+          "series": "reverse rho",
+          "coordinate": 0.9999526002853247
+        },
+        {
+          "time_M": 3316.032821953836,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3316.032821953836,
+          "series": "reverse x_R",
+          "coordinate": 0.7028503560808389
+        },
+        {
+          "time_M": 3316.032821953836,
+          "series": "reverse rho",
+          "coordinate": 0.999999983427029
+        },
+        {
+          "time_M": 3327.232476910279,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3327.232476910279,
+          "series": "reverse x_R",
+          "coordinate": 0.7028021964924385
+        },
+        {
+          "time_M": 3327.232476910279,
+          "series": "reverse rho",
+          "coordinate": 0.9999999816970617
+        },
+        {
+          "time_M": 3338.4321315727357,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3338.4321315727357,
+          "series": "reverse x_R",
+          "coordinate": 0.710256923224942
+        },
+        {
+          "time_M": 3338.4321315727357,
+          "series": "reverse rho",
+          "coordinate": 0.9999986659683582
+        },
+        {
+          "time_M": 3349.5639122811162,
+          "series": "reverse x_P",
+          "coordinate": 0.6000000000000001
+        },
+        {
+          "time_M": 3349.5639122811162,
+          "series": "reverse x_R",
+          "coordinate": 0.8045597470646805
+        },
+        {
+          "time_M": 3349.5639122811162,
+          "series": "reverse rho",
+          "coordinate": 0.9999619203784943
+        },
+        {
+          "time_M": 3358.0181939784748,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3358.0181939784748,
+          "series": "reverse x_R",
+          "coordinate": 0.7027421838484345
+        },
+        {
+          "time_M": 3358.0181939784748,
+          "series": "reverse rho",
+          "coordinate": 0.9999999771211749
+        },
+        {
+          "time_M": 3369.2178478956525,
+          "series": "reverse x_P",
+          "coordinate": 1.284412953234562
+        },
+        {
+          "time_M": 3369.2178478956525,
+          "series": "reverse x_R",
+          "coordinate": 0.7027767135809404
+        },
+        {
+          "time_M": 3369.2178478956525,
+          "series": "reverse rho",
+          "coordinate": 0.9999999776898331
+        },
+        {
+          "time_M": 3380.4175015632363,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3380.4175015632363,
+          "series": "reverse x_R",
+          "coordinate": 0.8759933598817191
+        },
+        {
+          "time_M": 3380.4175015632363,
+          "series": "reverse rho",
+          "coordinate": 0.9999560993360489
+        },
+        {
+          "time_M": 3389.1922584057106,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3389.1922584057106,
+          "series": "reverse x_R",
+          "coordinate": 0.676553615998723
+        },
+        {
+          "time_M": 3389.1922584057106,
+          "series": "reverse rho",
+          "coordinate": 0.9999780468792148
+        },
+        {
+          "time_M": 3400.042191034446,
+          "series": "reverse x_P",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3400.042191034446,
+          "series": "reverse x_R",
+          "coordinate": 0.7209688192352535
+        },
+        {
+          "time_M": 3400.042191034446,
+          "series": "reverse rho",
+          "coordinate": 0.9999961580006294
+        },
+        {
+          "time_M": 3411.064248064776,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3411.064248064776,
+          "series": "reverse x_R",
+          "coordinate": 0.702117708459403
+        },
+        {
+          "time_M": 3411.064248064776,
+          "series": "reverse rho",
+          "coordinate": 0.9999418762621659
+        },
+        {
+          "time_M": 3419.254644806374,
+          "series": "reverse x_P",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3419.254644806374,
+          "series": "reverse x_R",
+          "coordinate": 0.7024400197591918
+        },
+        {
+          "time_M": 3419.254644806374,
+          "series": "reverse rho",
+          "coordinate": 0.9999999602507381
+        },
+        {
+          "time_M": 3430.45429705662,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3430.45429705662,
+          "series": "reverse x_R",
+          "coordinate": 0.874718758724316
+        },
+        {
+          "time_M": 3430.45429705662,
+          "series": "reverse rho",
+          "coordinate": 0.9999503361703435
+        },
+        {
+          "time_M": 3439.3833911670185,
+          "series": "reverse x_P",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3439.3833911670185,
+          "series": "reverse x_R",
+          "coordinate": 0.6634013246947844
+        },
+        {
+          "time_M": 3439.3833911670185,
+          "series": "reverse rho",
+          "coordinate": 0.9999579949242803
+        },
+        {
+          "time_M": 3450.0509372848855,
+          "series": "reverse x_P",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3450.0509372848855,
+          "series": "reverse x_R",
+          "coordinate": 0.8682381763827096
+        },
+        {
+          "time_M": 3450.0509372848855,
+          "series": "reverse rho",
+          "coordinate": 0.9999591249674271
+        },
+        {
+          "time_M": 3458.31449113069,
+          "series": "reverse x_P",
+          "coordinate": 1.033985000288462
+        },
+        {
+          "time_M": 3458.31449113069,
+          "series": "reverse x_R",
+          "coordinate": 0.7108403097148114
+        },
+        {
+          "time_M": 3458.31449113069,
+          "series": "reverse rho",
+          "coordinate": 0.9999957989333084
+        },
+        {
+          "time_M": 3469.123370241972,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3469.123370241972,
+          "series": "reverse x_R",
+          "coordinate": 0.7584416820975847
+        },
+        {
+          "time_M": 3469.123370241972,
+          "series": "reverse rho",
+          "coordinate": 0.9999402350527626
+        },
+        {
+          "time_M": 3477.22593561193,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3477.22593561193,
+          "series": "reverse x_R",
+          "coordinate": 0.8426788161673416
+        },
+        {
+          "time_M": 3477.22593561193,
+          "series": "reverse rho",
+          "coordinate": 0.9999523684066117
+        },
+        {
+          "time_M": 3487.127801292273,
+          "series": "reverse x_P",
+          "coordinate": 1.6679700005769251
+        },
+        {
+          "time_M": 3487.127801292273,
+          "series": "reverse x_R",
+          "coordinate": 0.6276579692613758
+        },
+        {
+          "time_M": 3487.127801292273,
+          "series": "reverse rho",
+          "coordinate": 0.9999167606643912
+        },
+        {
+          "time_M": 3496.541520584117,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3496.541520584117,
+          "series": "reverse x_R",
+          "coordinate": 0.6415381090877558
+        },
+        {
+          "time_M": 3496.541520584117,
+          "series": "reverse rho",
+          "coordinate": 0.9999267661275899
+        },
+        {
+          "time_M": 3504.7640496917666,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3504.7640496917666,
+          "series": "reverse x_R",
+          "coordinate": 0.8256655813244667
+        },
+        {
+          "time_M": 3504.7640496917666,
+          "series": "reverse rho",
+          "coordinate": 0.999946079492045
+        },
+        {
+          "time_M": 3512.827569638662,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3512.827569638662,
+          "series": "reverse x_R",
+          "coordinate": 0.8738049686379065
+        },
+        {
+          "time_M": 3512.827569638662,
+          "series": "reverse rho",
+          "coordinate": 0.9999373665125073
+        },
+        {
+          "time_M": 3521.824848887662,
+          "series": "reverse x_P",
+          "coordinate": 1.5101493570766484
+        },
+        {
+          "time_M": 3521.824848887662,
+          "series": "reverse x_R",
+          "coordinate": 0.8546862704879591
+        },
+        {
+          "time_M": 3521.824848887662,
+          "series": "reverse rho",
+          "coordinate": 0.9999508561033059
+        },
+        {
+          "time_M": 3529.8926756801798,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3529.8926756801798,
+          "series": "reverse x_R",
+          "coordinate": 0.848071091146027
+        },
+        {
+          "time_M": 3529.8926756801798,
+          "series": "reverse rho",
+          "coordinate": 0.9999506450913778
+        },
+        {
+          "time_M": 3537.974914876618,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3537.974914876618,
+          "series": "reverse x_R",
+          "coordinate": 0.8410547474023686
+        },
+        {
+          "time_M": 3537.974914876618,
+          "series": "reverse rho",
+          "coordinate": 0.9999609026888119
+        },
+        {
+          "time_M": 3545.610243424013,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326936
+        },
+        {
+          "time_M": 3545.610243424013,
+          "series": "reverse x_R",
+          "coordinate": 0.7950888518662962
+        },
+        {
+          "time_M": 3545.610243424013,
+          "series": "reverse rho",
+          "coordinate": 0.9999695175330964
+        },
+        {
+          "time_M": 3553.526078233112,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3553.526078233112,
+          "series": "reverse x_R",
+          "coordinate": 0.5797263600055331
+        },
+        {
+          "time_M": 3553.526078233112,
+          "series": "reverse rho",
+          "coordinate": 0.9999689350631495
+        },
+        {
+          "time_M": 3561.0561105892357,
+          "series": "reverse x_P",
+          "coordinate": 0.9101493570766489
+        },
+        {
+          "time_M": 3561.0561105892357,
+          "series": "reverse x_R",
+          "coordinate": 0.7267353831686705
+        },
+        {
+          "time_M": 3561.0561105892357,
+          "series": "reverse rho",
+          "coordinate": 0.9999791826213312
+        },
+        {
+          "time_M": 3567.8622029617727,
+          "series": "reverse x_P",
+          "coordinate": 1.7509775004326937
+        },
+        {
+          "time_M": 3567.8622029617727,
+          "series": "reverse x_R",
+          "coordinate": 0.6772088829464401
+        },
+        {
+          "time_M": 3567.8622029617727,
+          "series": "reverse rho",
+          "coordinate": 0.9999861542484423
+        },
+        {
+          "time_M": 3575.0557218686113,
+          "series": "reverse x_P",
+          "coordinate": 1.284412953234562
+        },
+        {
+          "time_M": 3575.0557218686113,
+          "series": "reverse x_R",
+          "coordinate": 0.5386887090397032
+        },
+        {
+          "time_M": 3575.0557218686113,
+          "series": "reverse rho",
+          "coordinate": 0.9998294970857159
+        },
+        {
+          "time_M": 3583.152634941332,
+          "series": "reverse x_P",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3583.152634941332,
+          "series": "reverse x_R",
+          "coordinate": 0.6992037492276528
+        },
+        {
+          "time_M": 3583.152634941332,
+          "series": "reverse rho",
+          "coordinate": 0.9999993709880263
+        },
+        {
+          "time_M": 3594.3522686614333,
+          "series": "reverse x_P",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3594.3522686614333,
+          "series": "reverse x_R",
+          "coordinate": 0.6983910067454786
+        },
+        {
+          "time_M": 3594.3522686614333,
+          "series": "reverse rho",
+          "coordinate": 0.9999991106935564
+        },
+        {
+          "time_M": 3605.5518986110224,
+          "series": "reverse x_P",
+          "coordinate": 1.4493481196986289
+        },
+        {
+          "time_M": 3605.5518986110224,
+          "series": "reverse x_R",
+          "coordinate": 0.697381254850146
+        },
+        {
+          "time_M": 3605.5518986110224,
+          "series": "reverse rho",
+          "coordinate": 0.9999986967952894
+        },
+        {
+          "time_M": 3616.7515237183625,
+          "series": "reverse x_P",
+          "coordinate": 1.1591718566439546
+        },
+        {
+          "time_M": 3616.7515237183625,
+          "series": "reverse x_R",
+          "coordinate": 0.6960675213132408
+        },
+        {
+          "time_M": 3616.7515237183625,
+          "series": "reverse rho",
+          "coordinate": 0.9999979931264801
+        },
+        {
+          "time_M": 3628.3511287326146,
+          "series": "reverse x_P",
+          "coordinate": 1.2416739708939157
+        },
+        {
+          "time_M": 3628.3511287326146,
+          "series": "reverse x_R",
+          "coordinate": 0.6941020561054306
+        },
+        {
+          "time_M": 3628.3511287326146,
+          "series": "reverse rho",
+          "coordinate": 0.9999965919775846
+        },
+        {
+          "time_M": 3639.550738481866,
+          "series": "reverse x_P",
+          "coordinate": 1.6756589711823786
+        },
+        {
+          "time_M": 3639.550738481866,
+          "series": "reverse x_R",
+          "coordinate": 0.6912786140392174
+        },
+        {
+          "time_M": 3639.550738481866,
+          "series": "reverse rho",
+          "coordinate": 0.9999936922845913
+        },
+        {
+          "time_M": 3650.7503353947886,
+          "series": "reverse x_P",
+          "coordinate": 1.7124484848442143
+        },
+        {
+          "time_M": 3650.7503353947886,
+          "series": "reverse x_R",
+          "coordinate": 0.6870823514467488
+        },
+        {
+          "time_M": 3650.7503353947886,
+          "series": "reverse rho",
+          "coordinate": 0.9999867134249032
+        },
+        {
+          "time_M": 3661.949911957007,
+          "series": "reverse x_P",
+          "coordinate": 1.4690498338243956
+        },
+        {
+          "time_M": 3661.949911957007,
+          "series": "reverse x_R",
+          "coordinate": 0.6804483730948531
+        },
+        {
+          "time_M": 3661.949911957007,
+          "series": "reverse rho",
+          "coordinate": 0.9999660879215262
+        },
+        {
+          "time_M": 3673.549432245843,
+          "series": "reverse x_P",
+          "coordinate": 1.6710995856284994
+        },
+        {
+          "time_M": 3673.549432245843,
+          "series": "reverse x_R",
+          "coordinate": 0.6703789225201063
+        },
+        {
+          "time_M": 3673.549432245843,
+          "series": "reverse rho",
+          "coordinate": 0.9998837982176711
+        },
+        {
+          "time_M": 3684.7488163355024,
+          "series": "reverse x_P",
+          "coordinate": 1.7141371736342077
+        },
+        {
+          "time_M": 3684.7488163355024,
+          "series": "reverse x_R",
+          "coordinate": 0.6717245442169235
+        },
+        {
+          "time_M": 3684.7488163355024,
+          "series": "reverse rho",
+          "coordinate": 0.9996132411379564
+        },
+        {
+          "time_M": 3695.9474988591364,
+          "series": "reverse x_P",
+          "coordinate": 1.9725177862321248
+        },
+        {
+          "time_M": 3695.9474988591364,
+          "series": "reverse x_R",
+          "coordinate": 0.746480341445552
+        },
+        {
+          "time_M": 3695.9474988591364,
+          "series": "reverse rho",
+          "coordinate": 0.9996743713323701
+        },
+        {
+          "time_M": 3707.1445563841553,
+          "series": "reverse x_P",
+          "coordinate": 1.8783975252439598
+        },
+        {
+          "time_M": 3707.1445563841553,
+          "series": "reverse x_R",
+          "coordinate": 0.8267122709500432
+        },
+        {
+          "time_M": 3707.1445563841553,
+          "series": "reverse rho",
+          "coordinate": 0.9999636400795946
+        },
+        {
+          "time_M": 3718.740097228921,
+          "series": "reverse x_P",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3718.740097228921,
+          "series": "reverse x_R",
+          "coordinate": 0.8524101632006417
+        },
+        {
+          "time_M": 3718.740097228921,
+          "series": "reverse rho",
+          "coordinate": 0.9999988108183684
+        },
+        {
+          "time_M": 3729.936064116189,
+          "series": "reverse x_P",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3729.936064116189,
+          "series": "reverse x_R",
+          "coordinate": 0.8529482846096531
+        },
+        {
+          "time_M": 3729.936064116189,
+          "series": "reverse rho",
+          "coordinate": 0.9999983583011252
+        },
+        {
+          "time_M": 3741.1328573279498,
+          "series": "reverse x_P",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3741.1328573279498,
+          "series": "reverse x_R",
+          "coordinate": 0.8499032422462667
+        },
+        {
+          "time_M": 3741.1328573279498,
+          "series": "reverse rho",
+          "coordinate": 0.9999899609731722
+        },
+        {
+          "time_M": 3752.3304510288735,
+          "series": "reverse x_P",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3752.3304510288735,
+          "series": "reverse x_R",
+          "coordinate": 0.8366067334043247
+        },
+        {
+          "time_M": 3752.3304510288735,
+          "series": "reverse rho",
+          "coordinate": 0.9999354965378331
+        },
+        {
+          "time_M": 3763.9286363983674,
+          "series": "reverse x_P",
+          "coordinate": 1.9177150461561965
+        },
+        {
+          "time_M": 3763.9286363983674,
+          "series": "reverse x_R",
+          "coordinate": 0.8120883262904726
+        },
+        {
+          "time_M": 3763.9286363983674,
+          "series": "reverse rho",
+          "coordinate": 0.999494271861646
+        },
+        {
+          "time_M": 3775.127301236533,
+          "series": "reverse x_P",
+          "coordinate": 1.8783975252439598
+        },
+        {
+          "time_M": 3775.127301236533,
+          "series": "reverse x_R",
+          "coordinate": 0.7279573104456889
+        },
+        {
+          "time_M": 3775.127301236533,
+          "series": "reverse rho",
+          "coordinate": 0.9962233341690864
+        },
+        {
+          "time_M": 3786.326215818407,
+          "series": "reverse x_P",
+          "coordinate": 1.8540123345455526
+        },
+        {
+          "time_M": 3786.326215818407,
+          "series": "reverse x_R",
+          "coordinate": 0.4169549867687578
+        },
+        {
+          "time_M": 3786.326215818407,
+          "series": "reverse rho",
+          "coordinate": 0.958218169046103
+        },
+        {
+          "time_M": 3797.5252881530196,
+          "series": "reverse x_P",
+          "coordinate": 1.1674204530903312
+        },
+        {
+          "time_M": 3797.5252881530196,
+          "series": "reverse x_R",
+          "coordinate": 0.043303580544722345
+        },
+        {
+          "time_M": 3797.5252881530196,
+          "series": "reverse rho",
+          "coordinate": 0.9805146727181295
+        },
+        {
+          "time_M": 3809.124435865418,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326939
+        },
+        {
+          "time_M": 3809.124435865418,
+          "series": "reverse x_R",
+          "coordinate": 0.30823997455419183
+        },
+        {
+          "time_M": 3809.124435865418,
+          "series": "reverse rho",
+          "coordinate": 0.9973995876573258
+        },
+        {
+          "time_M": 3820.3236839033384,
+          "series": "reverse x_P",
+          "coordinate": 1.1509775004326939
+        },
+        {
+          "time_M": 3820.3236839033384,
+          "series": "reverse x_R",
+          "coordinate": 0.33197243937305854
+        },
+        {
+          "time_M": 3820.3236839033384,
+          "series": "reverse rho",
+          "coordinate": 0.9995817759948136
+        },
+        {
+          "time_M": 3831.522981015821,
+          "series": "reverse x_P",
+          "coordinate": 0.0
+        },
+        {
+          "time_M": 3831.522981015821,
+          "series": "reverse x_R",
+          "coordinate": 0.3193828753267689
+        },
+        {
+          "time_M": 3831.522981015821,
+          "series": "reverse rho",
+          "coordinate": 0.9999347472361546
+        }
+      ],
+      "path_plane": [
+        {
+          "method": "causal path/history",
+          "time_M": 256.860780235259,
+          "x_P": 1.8593067768177907,
+          "x_R": 0.755235310637736
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 351.36596508202877,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7387026723789037
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 444.7325871928268,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.7411278737063723
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 540.4275339946226,
+          "x_P": 1.5405499757656589,
+          "x_R": 0.7430042322643579
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 631.6231484223132,
+          "x_P": 1.6102842772504846,
+          "x_R": 0.7417766350969578
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 721.8957813417181,
+          "x_P": 1.5680506805156451,
+          "x_R": 0.7417111800623934
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 810.6204935276352,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.7399394324367117
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 900.843509162097,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7408063150199365
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 987.0962011300768,
+          "x_P": 1.7895724753329645,
+          "x_R": 0.7424005103799511
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1072.2693042209726,
+          "x_P": 1.7451721264666986,
+          "x_R": 0.7414160825727442
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1156.2222338160343,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7438799430226957
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1242.364990230541,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.7429716463465607
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1324.131414621401,
+          "x_P": 1.5680506805156451,
+          "x_R": 0.7380012991537224
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1403.8874532080633,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7352969920445653
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1482.265564781653,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7403457999674791
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1562.5216935569479,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7395321635640244
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1638.881930124916,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.73698752830416
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1714.0026278759738,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7388421006820479
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1787.2357666290243,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7302967644727927
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1861.8613337748425,
+          "x_P": 1.7977790076334568,
+          "x_R": 0.7397541431103245
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 1932.8645083049717,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7377930564594387
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2002.6995393741713,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7399691482270436
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2070.2658201541544,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7280887772217752
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2138.6675408156625,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7373983105404947
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2203.663942973454,
+          "x_P": 1.449348119698628,
+          "x_R": 0.73519252971621
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2267.469706332841,
+          "x_P": 1.720576881743684,
+          "x_R": 0.7335021908707536
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2328.520371062041,
+          "x_P": 1.750977500432693,
+          "x_R": 0.7296019609688168
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2390.48419959101,
+          "x_P": 1.750977500432693,
+          "x_R": 0.7326034241014491
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2449.070702003682,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7312545745935201
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2505.1184757277774,
+          "x_P": 1.720576881743684,
+          "x_R": 0.7249629502514443
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2559.6941628568175,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7276677104505072
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2614.601554793328,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7266630419380281
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2664.8957168201887,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7260627597664395
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2713.7503946883025,
+          "x_P": 1.6186218808782966,
+          "x_R": 0.7253477406955199
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2760.4419953660745,
+          "x_P": 2.0,
+          "x_R": 0.7173101179053272
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2806.6221932588755,
+          "x_P": 1.5287712379549447,
+          "x_R": 0.7150347797333692
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2848.3252794651075,
+          "x_P": 1.5287712379549447,
+          "x_R": 0.7019181961303472
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2887.8603675038,
+          "x_P": 1.4949064372133896,
+          "x_R": 0.7142066602719432
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2924.4787838606558,
+          "x_P": 1.7817348152961758,
+          "x_R": 0.6998970858271871
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2959.4129144710423,
+          "x_P": 1.4307573148634822,
+          "x_R": 0.6885102808587683
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 2989.920886931601,
+          "x_P": 1.3614709844115211,
+          "x_R": 0.6817113819127665
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3016.7584024346147,
+          "x_P": 1.5931568569324175,
+          "x_R": 0.6875250967535907
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3039.4046299808906,
+          "x_P": 1.5931568569324175,
+          "x_R": 0.6716339488738179
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3057.290700367128,
+          "x_P": 1.8844129532345624,
+          "x_R": 0.646089273066653
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3070.0386496731912,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.597379016039125
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3078.3406910588833,
+          "x_P": 1.316992500144231,
+          "x_R": 0.6868531394635942
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3089.540350708464,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7061410864910062
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3100.740010175398,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7061854942403805
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3112.3396573039863,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.706238039791098
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3123.539316439667,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7062976166223353
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3134.7389754199157,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7063685667755925
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3145.93863424202,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7064534777334069
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3157.538280706596,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.706547199948951
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3168.7379391894374,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7066253106768203
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3179.4218183171097,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.674731275390776
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3187.9533146268896,
+          "x_P": 0.7169925001442312,
+          "x_R": 0.8066885242136663
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3199.5529604062426,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7067908692515068
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3210.752618202384,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7068594549533143
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3221.9522757877085,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7069358048519424
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3233.151933140779,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7070249833493055
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3244.7515779873297,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7071313617276557
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3254.9825423308757,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.6365487372353348
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3263.937630274766,
+          "x_P": 1.2,
+          "x_R": 0.9736268754556411
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3275.1372865924386,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7073601846628598
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3286.7369303275677,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.707440630606606
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3297.9365860510416,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7075313458007327
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3308.713347569722,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.6832082217707373
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3317.1327880787558,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.755050475810884
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3328.7324306766395,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7078718195196843
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3339.9320853002732,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7080255546875425
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3350.9011548979765,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.6979434869733209
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3359.118159999378,
+          "x_P": 0.6000000000000001,
+          "x_R": 0.6361570013221155
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3370.7178015263135,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.708407185101664
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3381.914257507209,
+          "x_P": 1.284412953234562,
+          "x_R": 0.7084636117609729
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3389.966617270651,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.5433262565147031
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3401.1421569573026,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7269836696515737
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3412.3463586291127,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.6864308165872246
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3420.7545982560596,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7448150201580327
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3431.951876586966,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.7095121191457163
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3440.1785361396164,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.5454729055904958
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3451.1102605764245,
+          "x_P": 1.033985000288462,
+          "x_R": 0.7382709918794228
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3459.5397427796556,
+          "x_P": 1.033985000288462,
+          "x_R": 0.5592247468791564
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3470.4237705095925,
+          "x_P": 1.033985000288462,
+          "x_R": 0.69606727856853
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3478.725888681678,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.6898812038831669
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3487.772700191425,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.5742147980730357
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3497.7727539071643,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.7664764240500398
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3506.120996256388,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.8010019402341901
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3514.3243295647662,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.614827709625002
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3522.3889195992397,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.5467304394564034
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3530.7353779058412,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.5569934657826467
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3538.774046891673,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.5614738146909407
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3546.74745103633,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.5747555323233791
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3554.290493892229,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.6384566758688068
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3561.9603596472903,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.8661677027509377
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3568.983389026781,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.6849398586629137
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3575.8976424757884,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.7297764478887537
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3584.252599110388,
+          "x_P": 1.284412953234562,
+          "x_R": 0.9010491874742633
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3595.852219340078,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.7189537027731847
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3607.051848710426,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.7209001142345978
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3618.251473068217,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.7233365741311593
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3629.4510908415,
+          "x_P": 1.1591718566439546,
+          "x_R": 0.7265059040813392
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3641.050685360228,
+          "x_P": 1.2416739708939157,
+          "x_R": 0.7310950299175908
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3652.2502800911952,
+          "x_P": 1.6756589711823786,
+          "x_R": 0.737599103136873
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3663.44985302053,
+          "x_P": 1.7124484848442143,
+          "x_R": 0.7475534838365563
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3674.6493822704065,
+          "x_P": 1.4690498338243956,
+          "x_R": 0.7643053583450338
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3686.2487020345084,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7964423460100779
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3697.4472123886503,
+          "x_P": 1.7141371736342077,
+          "x_R": 0.8469302168763592
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3708.6440241886326,
+          "x_P": 1.9725177862321248,
+          "x_R": 0.8691506898971372
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3719.8396706811545,
+          "x_P": 1.8783975252439598,
+          "x_R": 0.8624486110668433
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3731.435585661539,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8583473858675245
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3742.6324903967284,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8603736845783854
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3753.830183042864,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8661748429973796
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3765.0284904290224,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8810015036975724
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3776.6271440779215,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.9133087853374219
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3787.8260838596243,
+          "x_P": 1.8783975252439598,
+          "x_R": 1.0206372135931476
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3799.0251726352544,
+          "x_P": 1.8540123345455526,
+          "x_R": 1.3902145919599633
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3810.2243593597977,
+          "x_P": 1.1674204530903312,
+          "x_R": 0.01678765647253767
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3821.823587331654,
+          "x_P": 1.1509775004326939,
+          "x_R": 0.01615904681970338
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3833.022889907116,
+          "x_P": 1.1509775004326939,
+          "x_R": 0.02343469131134042
+        },
+        {
+          "method": "causal path/history",
+          "time_M": 3844.2222289545357,
+          "x_P": 0.0,
+          "x_R": 0.02536947357686777
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 148.85927454929885,
+          "x_P": 1.8593067768177907,
+          "x_R": 0.7316316876365242
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 244.119555514191,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7468957379878473
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 338.7787401284723,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.745314868111422
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 435.6045998106294,
+          "x_P": 1.5405499757656589,
+          "x_R": 0.7424461767216439
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 528.1264171216029,
+          "x_P": 1.6102842772504846,
+          "x_R": 0.7436570362662728
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 619.4903116525595,
+          "x_P": 1.5680506805156451,
+          "x_R": 0.7437292311159354
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 709.9203426192953,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.7445973480410631
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 801.9642141967462,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7424363788830634
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 889.2185640057368,
+          "x_P": 1.7895724753329645,
+          "x_R": 0.7405900754222098
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 975.5888344227245,
+          "x_P": 1.7451721264666986,
+          "x_R": 0.7415846596909422
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1061.0008495613251,
+          "x_P": 1.8170731800829516,
+          "x_R": 0.7385695262832835
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1147.990093209059,
+          "x_P": 1.8421793564997233,
+          "x_R": 0.7396775107252058
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1231.2809543486485,
+          "x_P": 1.5680506805156451,
+          "x_R": 0.7440540980030363
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1313.2868269183998,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7449521668422352
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1393.3037701647659,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7390231596745163
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1474.5993294482153,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7401251967136872
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1552.2169500392117,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7424425273727256
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1628.737119184293,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7396019437460037
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1703.9905929676179,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7462956600204301
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1780.136188977976,
+          "x_P": 1.7977790076334568,
+          "x_R": 0.7362365922607204
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1852.2192408996393,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7379460392663615
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1923.385709241561,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7360855155274528
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 1993.4053020484878,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7447124470620152
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2063.743788140596,
+          "x_P": 1.4961496268993926,
+          "x_R": 0.7342960500814895
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2129.8707233765767,
+          "x_P": 1.449348119698628,
+          "x_R": 0.7367920530467621
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2194.9988053411384,
+          "x_P": 1.720576881743684,
+          "x_R": 0.7381570846604465
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2259.0468708565118,
+          "x_P": 1.750977500432693,
+          "x_R": 0.7378502466756784
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2322.578030034301,
+          "x_P": 1.750977500432693,
+          "x_R": 0.7345150364136741
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2382.5603257767602,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7344280777164875
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2441.268139123779,
+          "x_P": 1.720576881743684,
+          "x_R": 0.7389292710458722
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2497.7085234233223,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.733885354112423
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2554.3822366151667,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7329336103672153
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2607.7151633718336,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.7303700194269479
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2658.258092504396,
+          "x_P": 1.6186218808782966,
+          "x_R": 0.7297313410727447
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2707.31350483162,
+          "x_P": 2.0,
+          "x_R": 0.7358976617022248
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2755.9283947608706,
+          "x_P": 1.5287712379549447,
+          "x_R": 0.7350933041822667
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2800.782242520703,
+          "x_P": 1.5287712379549447,
+          "x_R": 0.7448050657051497
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2842.919957728715,
+          "x_P": 1.4949064372133896,
+          "x_R": 0.7283528568931253
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2882.6799187899624,
+          "x_P": 1.7817348152961758,
+          "x_R": 0.7394026089856452
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2920.9991864882354,
+          "x_P": 1.4307573148634822,
+          "x_R": 0.7459203362411926
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2955.07555775189,
+          "x_P": 1.3614709844115211,
+          "x_R": 0.7487295398182617
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 2986.0349001947134,
+          "x_P": 1.5931568569324175,
+          "x_R": 0.7389682439193282
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3013.3505058444553,
+          "x_P": 1.5931568569324175,
+          "x_R": 0.7482182488611587
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3036.6508708282304,
+          "x_P": 1.8844129532345624,
+          "x_R": 0.7682869943671394
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3055.7555850739714,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.8197879210818013
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3068.7382685130647,
+          "x_P": 1.316992500144231,
+          "x_R": 0.759673409062447
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3076.8407366265874,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7031374306879832
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3088.0403963020813,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7031372883755193
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3099.6400436282333,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7031320443258181
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3110.839702943594,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.703119741531761
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3122.039362100145,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7030980431626229
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3133.2390211012757,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7030646286698405
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3144.8386677577123,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7030267012534325
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3156.0383264325023,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7030047547105641
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3167.2379849383656,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7304497571483661
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3178.1803191034123,
+          "x_P": 0.7169925001442312,
+          "x_R": 0.637785857372572
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3186.8533482064186,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7030050339818896
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3198.0530062220682,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7030006386794615
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3209.2526640450624,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7029909116925782
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3220.4523216597836,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7029712415891264
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3232.051966804537,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7029401639401518
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3243.251623928565,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7728073532491502
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3253.8898219660077,
+          "x_P": 1.2,
+          "x_R": 0.45296076600627494
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3262.4376762814472,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7029243315469573
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3274.0373203599124,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.7029311809870055
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3285.2369764139125,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7029279721121146
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3296.4366321764096,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.7229340503606908
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3307.4426942097343,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.6907676402150231
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3316.032821953836,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7028503560808389
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3327.232476910279,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7028021964924385
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3338.4321315727357,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.710256923224942
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3349.5639122811162,
+          "x_P": 0.6000000000000001,
+          "x_R": 0.8045597470646805
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3358.0181939784748,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.7027421838484345
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3369.2178478956525,
+          "x_P": 1.284412953234562,
+          "x_R": 0.7027767135809404
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3380.4175015632363,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.8759933598817191
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3389.1922584057106,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.676553615998723
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3400.042191034446,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.7209688192352535
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3411.064248064776,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.702117708459403
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3419.254644806374,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.7024400197591918
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3430.45429705662,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.874718758724316
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3439.3833911670185,
+          "x_P": 1.033985000288462,
+          "x_R": 0.6634013246947844
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3450.0509372848855,
+          "x_P": 1.033985000288462,
+          "x_R": 0.8682381763827096
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3458.31449113069,
+          "x_P": 1.033985000288462,
+          "x_R": 0.7108403097148114
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3469.123370241972,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.7584416820975847
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3477.22593561193,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.8426788161673416
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3487.127801292273,
+          "x_P": 1.6679700005769251,
+          "x_R": 0.6276579692613758
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3496.541520584117,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.6415381090877558
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3504.7640496917666,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.8256655813244667
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3512.827569638662,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.8738049686379065
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3521.824848887662,
+          "x_P": 1.5101493570766484,
+          "x_R": 0.8546862704879591
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3529.8926756801798,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.848071091146027
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3537.974914876618,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.8410547474023686
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3545.610243424013,
+          "x_P": 1.1509775004326936,
+          "x_R": 0.7950888518662962
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3553.526078233112,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.5797263600055331
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3561.0561105892357,
+          "x_P": 0.9101493570766489,
+          "x_R": 0.7267353831686705
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3567.8622029617727,
+          "x_P": 1.7509775004326937,
+          "x_R": 0.6772088829464401
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3575.0557218686113,
+          "x_P": 1.284412953234562,
+          "x_R": 0.5386887090397032
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3583.152634941332,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.6992037492276528
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3594.3522686614333,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.6983910067454786
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3605.5518986110224,
+          "x_P": 1.4493481196986289,
+          "x_R": 0.697381254850146
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3616.7515237183625,
+          "x_P": 1.1591718566439546,
+          "x_R": 0.6960675213132408
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3628.3511287326146,
+          "x_P": 1.2416739708939157,
+          "x_R": 0.6941020561054306
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3639.550738481866,
+          "x_P": 1.6756589711823786,
+          "x_R": 0.6912786140392174
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3650.7503353947886,
+          "x_P": 1.7124484848442143,
+          "x_R": 0.6870823514467488
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3661.949911957007,
+          "x_P": 1.4690498338243956,
+          "x_R": 0.6804483730948531
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3673.549432245843,
+          "x_P": 1.6710995856284994,
+          "x_R": 0.6703789225201063
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3684.7488163355024,
+          "x_P": 1.7141371736342077,
+          "x_R": 0.6717245442169235
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3695.9474988591364,
+          "x_P": 1.9725177862321248,
+          "x_R": 0.746480341445552
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3707.1445563841553,
+          "x_P": 1.8783975252439598,
+          "x_R": 0.8267122709500432
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3718.740097228921,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8524101632006417
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3729.936064116189,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8529482846096531
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3741.1328573279498,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8499032422462667
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3752.3304510288735,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8366067334043247
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3763.9286363983674,
+          "x_P": 1.9177150461561965,
+          "x_R": 0.8120883262904726
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3775.127301236533,
+          "x_P": 1.8783975252439598,
+          "x_R": 0.7279573104456889
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3786.326215818407,
+          "x_P": 1.8540123345455526,
+          "x_R": 0.4169549867687578
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3797.5252881530196,
+          "x_P": 1.1674204530903312,
+          "x_R": 0.043303580544722345
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3809.124435865418,
+          "x_P": 1.1509775004326939,
+          "x_R": 0.30823997455419183
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3820.3236839033384,
+          "x_P": 1.1509775004326939,
+          "x_R": 0.33197243937305854
+        },
+        {
+          "method": "reverse Rationality",
+          "time_M": 3831.522981015821,
+          "x_P": 0.0,
+          "x_R": 0.3193828753267689
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "sxs0305",
+      "label": "SXS:BBH:0305 Lev6 waveform",
+      "href": "https://zenodo.org/records/13182440",
+      "query": {
+        "description": "T437 reads the sealed T435 waveform-only artifact; common-horizon time is opened only by the scorer.",
+        "language": "Python",
+        "tables_used": [
+          "T435_WAVEFORM_ONLY_PREDICTION.npz",
+          "T435_SCORED_RESULT.json"
+        ],
+        "metric_definitions": [
+          "Signed error is predicted time minus first common-horizon time in simulation mass units M.",
+          "One-cycle success requires absolute error no greater than 11.3710 M."
+        ]
+      }
+    },
+    {
+      "id": "t437",
+      "label": "T437 sealed prediction and scorer",
+      "query": {
+        "description": "Four independently defined ARA clocks, sealed before horizon scoring.",
+        "language": "Python",
+        "tables_used": [
+          "T437_WAVEFORM_ONLY_FOUR_INSTRUMENT_CLOCKS.npz",
+          "T437_SCORED_RESULT.json"
+        ]
+      }
+    },
+    {
+      "id": "timing_errors_source",
+      "label": "T437 primary timing errors",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ERRORS.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ERRORS.csv', header=true)",
+        "description": "Reviewed rows for T437 primary timing errors.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_TIMING_ERRORS.csv"
+        ]
+      }
+    },
+    {
+      "id": "state_history_source",
+      "label": "T437 state coordinate history",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_STATE_HISTORY.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_STATE_HISTORY.csv', header=true)",
+        "description": "Reviewed rows for T437 state coordinate history.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_STATE_HISTORY.csv"
+        ]
+      }
+    },
+    {
+      "id": "path_history_source",
+      "label": "T437 causal path/history coordinates",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_HISTORY.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_HISTORY.csv', header=true)",
+        "description": "Reviewed rows for T437 causal path/history coordinates.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_PATH_HISTORY.csv"
+        ]
+      }
+    },
+    {
+      "id": "rational_history_source",
+      "label": "T437 reverse Rationality coordinates",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_RATIONAL_HISTORY.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_RATIONAL_HISTORY.csv', header=true)",
+        "description": "Reviewed rows for T437 reverse Rationality coordinates.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_RATIONAL_HISTORY.csv"
+        ]
+      }
+    },
+    {
+      "id": "path_plane_source",
+      "label": "T437 forward/reverse path plane",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_PATH_PLANE.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_PATH_PLANE.csv', header=true)",
+        "description": "Reviewed rows for T437 forward/reverse path plane.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_PATH_PLANE.csv"
+        ]
+      }
+    },
+    {
+      "id": "timing_all_source",
+      "label": "T437 primary clocks and controls",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T437_four_instrument_spacetime_timing\\results\\T437_ARTIFACT_TIMING_ALL.csv",
+      "query": {
+        "engine": "DuckDB",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T437_four_instrument_spacetime_timing/results/T437_ARTIFACT_TIMING_ALL.csv', header=true)",
+        "description": "Reviewed rows for T437 primary clocks and controls.",
+        "language": "SQL",
+        "tables_used": [
+          "T437_ARTIFACT_TIMING_ALL.csv"
+        ]
+      }
+    }
+  ]
+}

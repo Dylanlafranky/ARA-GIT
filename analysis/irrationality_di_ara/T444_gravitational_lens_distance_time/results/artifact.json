@@ -1,0 +1,968 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Real gravitational-lens distance/time decomposition",
+    "description": "A geometry-first ARA audit of travelled-path and Connection-potential contributions in real strong-lens time delays.",
+    "generatedAt": "2026-08-28T01:20:42+00:00",
+    "cards": [
+      {
+        "id": "eligible",
+        "description": "Real double-image lens systems meeting the frozen astrometric and redshift eligibility cut.",
+        "dataset": "headline",
+        "sourceId": "gaia_gral_x",
+        "metrics": [
+          {
+            "label": "Eligible systems",
+            "field": "eligible_systems",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "pm_rho",
+        "description": "Spearman rank relation between observed delay magnitude and point-mass landmark prediction.",
+        "dataset": "headline",
+        "sourceId": "gaia_gral_x",
+        "metrics": [
+          {
+            "label": "Point-mass rank \u03c1",
+            "field": "pm_rho",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "sis_rho",
+        "description": "Spearman rank relation between observed delay magnitude and SIS landmark prediction.",
+        "dataset": "headline",
+        "sourceId": "gaia_gral_x",
+        "metrics": [
+          {
+            "label": "SIS rank \u03c1",
+            "field": "sis_rho",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "pm_factor",
+        "description": "Median multiplicative miss of the point-mass landmark across eligible systems.",
+        "dataset": "headline",
+        "sourceId": "gaia_gral_x",
+        "metrics": [
+          {
+            "label": "Point-mass median miss",
+            "field": "pm_factor",
+            "format": "number",
+            "unit": "\u00d7"
+          }
+        ]
+      },
+      {
+        "id": "sis_factor",
+        "description": "Median multiplicative miss of the SIS landmark across eligible systems.",
+        "dataset": "headline",
+        "sourceId": "gaia_gral_x",
+        "metrics": [
+          {
+            "label": "SIS median miss",
+            "field": "sis_factor",
+            "format": "number",
+            "unit": "\u00d7"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "observed_predicted",
+        "title": "Observed and landmark-predicted A\u2013B delays",
+        "subtitle": "Both axes are log10(days); the models use image/deflector geometry and redshifts, not the observed delay.",
+        "type": "scatter",
+        "dataset": "comparison",
+        "sourceId": "gaia_gral_x",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "observed_log10_days",
+            "type": "quantitative",
+            "label": "Observed log10(days)"
+          },
+          "y": {
+            "field": "predicted_log10_days",
+            "type": "quantitative",
+            "label": "Predicted log10(days)"
+          },
+          "color": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen lens landmark"
+          },
+          "tooltip": [
+            {
+              "field": "name",
+              "type": "nominal",
+              "label": "Lens"
+            },
+            {
+              "field": "observed_days",
+              "type": "quantitative",
+              "label": "Observed days"
+            },
+            {
+              "field": "predicted_days",
+              "type": "quantitative",
+              "label": "Predicted days"
+            }
+          ]
+        }
+      },
+      {
+        "id": "contributions",
+        "title": "Point-mass geometric and potential delay terms",
+        "subtitle": "Native days are retained; the two components jointly produce the landmark total.",
+        "type": "bar",
+        "dataset": "contributions",
+        "sourceId": "gaia_gral_x",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "name",
+            "type": "nominal",
+            "label": "Lens system"
+          },
+          "y": {
+            "field": "days",
+            "type": "quantitative",
+            "label": "Component delay (days)"
+          },
+          "color": {
+            "field": "component",
+            "type": "nominal",
+            "label": "Fermat component"
+          },
+          "tooltip": [
+            {
+              "field": "observed_days",
+              "type": "quantitative",
+              "label": "Observed total days"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ara_cut",
+        "title": "Path/Connection contribution ARA",
+        "subtitle": "A simple two-term cut with x+y=2; it is not asserted to be an independent Di-ARA.",
+        "type": "scatter",
+        "dataset": "ara",
+        "sourceId": "gaia_gral_x",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "path_ara",
+            "type": "quantitative",
+            "label": "Travelled-path contribution (0\u20132)"
+          },
+          "y": {
+            "field": "connection_ara",
+            "type": "quantitative",
+            "label": "Connection-potential contribution (0\u20132)"
+          },
+          "color": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen lens landmark"
+          },
+          "tooltip": [
+            {
+              "field": "name",
+              "type": "nominal",
+              "label": "Lens"
+            },
+            {
+              "field": "radius_ratio",
+              "type": "quantitative",
+              "label": "Inner/outer radius"
+            }
+          ]
+        }
+      },
+      {
+        "id": "residual_geometry",
+        "title": "Prediction miss and independently visible non-axisymmetry",
+        "subtitle": "A larger departure from 180\u00b0 is one observable warning that the two limiting models omit relation structure.",
+        "type": "scatter",
+        "dataset": "residuals",
+        "sourceId": "gaia_gral_x",
+        "layout": "full",
+        "encodings": {
+          "x": {
+            "field": "axisymmetry_error_deg",
+            "type": "quantitative",
+            "label": "Departure from 180\u00b0 alignment"
+          },
+          "y": {
+            "field": "factor_error",
+            "type": "quantitative",
+            "label": "Prediction factor error"
+          },
+          "color": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Frozen lens landmark"
+          },
+          "tooltip": [
+            {
+              "field": "name",
+              "type": "nominal",
+              "label": "Lens"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "system_detail",
+        "title": "Eligible real lens systems",
+        "subtitle": "Published delay and frozen model results in native units.",
+        "dataset": "system_detail",
+        "sourceId": "gaia_gral_x",
+        "defaultSort": {
+          "field": "observed_days",
+          "direction": "desc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "name",
+            "label": "Lens"
+          },
+          {
+            "field": "observed_days",
+            "label": "Observed days",
+            "format": "number"
+          },
+          {
+            "field": "observed_error_days",
+            "label": "Delay error (d)",
+            "format": "number"
+          },
+          {
+            "field": "opening_angle_deg",
+            "label": "A\u2013G\u2013B opening (\u00b0)",
+            "format": "number"
+          },
+          {
+            "field": "pm_geo_days",
+            "label": "PM path (d)",
+            "format": "number"
+          },
+          {
+            "field": "pm_potential_days",
+            "label": "PM Connection (d)",
+            "format": "number"
+          },
+          {
+            "field": "pm_total_days",
+            "label": "PM total (d)",
+            "format": "number"
+          },
+          {
+            "field": "sis_total_days",
+            "label": "SIS total (d)",
+            "format": "number"
+          },
+          {
+            "field": "pm_factor_error",
+            "label": "PM miss (\u00d7)",
+            "format": "number"
+          },
+          {
+            "field": "sis_factor_error",
+            "label": "SIS miss (\u00d7)",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "gaia_gral_x",
+        "label": "Gaia GraL X catalogue and T444 derived lens rows",
+        "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/707/A345",
+        "query": {
+          "language": "sql",
+          "engine": "SQLite",
+          "sql": "SELECT * FROM t444_system_results ORDER BY observed_days DESC;",
+          "description": "Actual report-input query over the reviewed T444 eligible-system table derived from VizieR tables A1 and B1.",
+          "executed_at": "2026-08-28T01:20:42+00:00",
+          "tables_used": [
+            "t444_system_results"
+          ],
+          "filters": [
+            "Type = Double",
+            "exactly one A, B, and G component",
+            "opening angle at G >= 150 degrees",
+            "finite source/lens redshifts",
+            "published non-zero tAB"
+          ],
+          "metric_definitions": [
+            "Observed delay is the absolute published A-B delay in days; its original sign remains in the detailed CSV.",
+            "Point-mass and SIS values are frozen conventional axisymmetric landmark predictions using H0=70 km/s/Mpc and Omega_m=0.3.",
+            "Factor error is max(predicted/observed, observed/predicted), so 1 is exact and 2 is a factor-of-two miss."
+          ]
+        }
+      },
+      {
+        "id": "fermat_delay_theory",
+        "label": "Geometric and potential gravitational-lensing delay relation",
+        "href": "https://arxiv.org/abs/2004.11845"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Real gravitational-lens distance/time decomposition"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## Known physics gives a real landmark, while residuals preserve the missing relations\n\nAcross **7** real double-image quasars, the point-mass and SIS landmarks achieved rank correlations of **0.63** and **0.63** with published delay magnitude. Their median multiplicative misses were **2.52\u00d7** and **1.83\u00d7**. The cut therefore recovers genuine arrival-scale structure without predicting every system from identity geometry alone."
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "eligible",
+          "pm_rho",
+          "sis_rho",
+          "pm_factor",
+          "sis_factor"
+        ]
+      },
+      {
+        "id": "comparison_text",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## The same source arrives through two paths, but neither path is isolated\n\nThe x-axis is a published delay measured by repeating quasar variability. The y-axis is computed from image/deflector astrometry and redshifts only. Closeness to the diagonal is recovery of established lensing structure; displacement from it retains lens-profile, ellipticity, environment, cosmology, and measurement effects."
+      },
+      {
+        "id": "comparison_chart",
+        "type": "chart",
+        "chartId": "observed_predicted",
+        "layout": "full"
+      },
+      {
+        "id": "decomposition_text",
+        "type": "markdown",
+        "sourceId": "fermat_delay_theory",
+        "body": "## Travelled path and Connection potential are separable terms in the arrival relation\n\nThe conventional Fermat delay contains a geometric path term and a lens-potential term. In the concentrated point-mass landmark both contribute. In the ideal extended SIS landmark the two geometric image terms cancel differentially, so the potential term carries the A\u2013B delay. This is a physical model-family distinction, not a relabelling of the light identity."
+      },
+      {
+        "id": "contribution_chart",
+        "type": "chart",
+        "chartId": "contributions",
+        "layout": "full"
+      },
+      {
+        "id": "ara_text",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## The 0\u20132 view is a contribution cut, not a newly assumed Di-ARA\n\nEach native component is divided by the total absolute component amount and mapped to 0\u20132. The ridge x+y=2 is therefore definitional for this cut. The informative shape is the model-dependent position along that ridge: concentrated mass shares delay between path and potential, while ideal SIS sits on the Connection pole."
+      },
+      {
+        "id": "ara_chart",
+        "type": "chart",
+        "chartId": "ara_cut",
+        "layout": "full"
+      },
+      {
+        "id": "residual_text",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## An identity-only forecast leaves observable relation structure unresolved\n\nThe opening-angle diagnostic is measured independently of the delay. It does not identify all missing couplings, but it makes the methodological point testable: even before timing, the sky geometry can warn that a one-parent axisymmetric relation is incomplete. A future predictor needs the path direction, the opposing lens field, and relevant external overlaps."
+      },
+      {
+        "id": "residual_chart",
+        "type": "chart",
+        "chartId": "residual_geometry",
+        "layout": "full"
+      },
+      {
+        "id": "table",
+        "type": "table",
+        "tableId": "system_detail",
+        "layout": "full"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "gaia_gral_x",
+        "body": "## Scope and data quality\n\nThe parent is the foreground deflector; the children are the two observed light paths of one quasar signal. Eligibility required an exact A/B/G double, both redshifts, a published A\u2013B delay, and an opening angle of at least 150\u00b0. Catalogue signs are preserved in CSV, while the cross-system comparison uses magnitudes because literature sign conventions differ."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Frozen methodology and controls\n\nThe lens families, cosmology conversion, eligibility, and evaluation were frozen before scoring. Delays were not fitted. Controls permuted observed delays 10,000 times, and leave-one-system-out summaries test whether one lens drives the aggregate. Native days remain primary; ARA coordinates are secondary visualization."
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## What this does not establish\n\nNeither axisymmetric landmark is a modern full lens model. The residual cannot be assigned to a new force or ARA identity: it combines mass profile, ellipticity, external shear, line-of-sight convergence, microlensing/time-delay systematics, cosmology, and astrometry. The catalogue contains completed handovers, so this is reconstruction rather than live pre-event prediction."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nChoose one system with public posterior lens models and line-of-sight data. Freeze a full model, remove one independently measured coupling at a time, and test whether the resulting delay displacement follows the ARA relation predicted from that removed identity. That is the clean bridge from a landmark recovery to an external-overlap test."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does independently published external shear reduce residuals in the predicted direction?\n- Does the path/potential share remain stable across posterior lens models?\n- Can a future monitored transient turn the completed-handover reconstruction into a genuinely chronological prediction?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-28T01:20:42+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "eligible_systems": 7,
+          "pm_rho": 0.6306562238868914,
+          "sis_rho": 0.6306562238868914,
+          "pm_factor": 2.5229927546224697,
+          "sis_factor": 1.8294963859382865
+        }
+      ],
+      "comparison": [
+        {
+          "name": "PKS1830-211",
+          "model": "Point mass",
+          "observed_log10_days": 1.3979400086720377,
+          "predicted_log10_days": 1.7794948227472056,
+          "observed_days": 25.0,
+          "predicted_days": 60.185908805543384
+        },
+        {
+          "name": "PKS1830-211",
+          "model": "SIS",
+          "observed_log10_days": 1.3979400086720377,
+          "predicted_log10_days": 1.499842933462069,
+          "observed_days": 25.0,
+          "predicted_days": 31.611342005580973
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "Point mass",
+          "observed_log10_days": 1.3979400086720377,
+          "predicted_log10_days": 1.1771056928777988,
+          "observed_days": 25.0,
+          "predicted_days": 15.035078255249012
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "SIS",
+          "observed_log10_days": 1.3979400086720377,
+          "predicted_log10_days": 0.8771204713838808,
+          "observed_days": 25.0,
+          "predicted_days": 7.535645702492724
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "Point mass",
+          "observed_log10_days": 1.510545010206612,
+          "predicted_log10_days": 2.1109747622894175,
+          "observed_days": 32.4,
+          "predicted_days": 129.11442404900603
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "SIS",
+          "observed_log10_days": 1.510545010206612,
+          "predicted_log10_days": 1.841072020676839,
+          "observed_days": 32.4,
+          "predicted_days": 69.35408089446467
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "Point mass",
+          "observed_log10_days": 1.958085848521085,
+          "predicted_log10_days": 2.71510286310416,
+          "observed_days": 90.8,
+          "predicted_days": 518.9229318161355
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "SIS",
+          "observed_log10_days": 1.958085848521085,
+          "predicted_log10_days": 2.507391463187207,
+          "observed_days": 90.8,
+          "predicted_days": 321.655856520903
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "Point mass",
+          "observed_log10_days": 2.1119342763326814,
+          "predicted_log10_days": 2.6357156071352357,
+          "observed_days": 129.4,
+          "predicted_days": 432.23069692318495
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "SIS",
+          "observed_log10_days": 2.1119342763326814,
+          "predicted_log10_days": 2.3742658322331383,
+          "observed_days": 129.4,
+          "predicted_days": 236.73683234041428
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "Point mass",
+          "observed_log10_days": 2.2100508498751372,
+          "predicted_log10_days": 2.6119668532139566,
+          "observed_days": 162.2,
+          "predicted_days": 409.22942479976456
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "SIS",
+          "observed_log10_days": 2.2100508498751372,
+          "predicted_log10_days": 2.3251564771267694,
+          "observed_days": 162.2,
+          "predicted_days": 211.4250671152624
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "Point mass",
+          "observed_log10_days": 2.2342641243787895,
+          "predicted_log10_days": 2.4080409241486893,
+          "observed_days": 171.5,
+          "predicted_days": 255.88269972286471
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "SIS",
+          "observed_log10_days": 2.2342641243787895,
+          "predicted_log10_days": 2.1415462858062404,
+          "observed_days": 171.5,
+          "predicted_days": 138.5307820018999
+        }
+      ],
+      "contributions": [
+        {
+          "name": "PKS1830-211",
+          "component": "geometric path",
+          "days": 31.611342005580973,
+          "observed_days": 25.0
+        },
+        {
+          "name": "PKS1830-211",
+          "component": "Connection potential",
+          "days": 28.574566799962412,
+          "observed_days": 25.0
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "component": "geometric path",
+          "days": 7.535645702492724,
+          "observed_days": 25.0
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "component": "Connection potential",
+          "days": 7.4994325527562875,
+          "observed_days": 25.0
+        },
+        {
+          "name": "HE2149-2745",
+          "component": "geometric path",
+          "days": 69.35408089446466,
+          "observed_days": 32.4
+        },
+        {
+          "name": "HE2149-2745",
+          "component": "Connection potential",
+          "days": 59.76034315454137,
+          "observed_days": 32.4
+        },
+        {
+          "name": "WGD2021-4115",
+          "component": "geometric path",
+          "days": 321.655856520903,
+          "observed_days": 90.8
+        },
+        {
+          "name": "WGD2021-4115",
+          "component": "Connection potential",
+          "days": 197.2670752952325,
+          "observed_days": 90.8
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "component": "geometric path",
+          "days": 236.73683234041434,
+          "observed_days": 129.4
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "component": "Connection potential",
+          "days": 195.49386458277064,
+          "observed_days": 129.4
+        },
+        {
+          "name": "HE1104-1805",
+          "component": "geometric path",
+          "days": 211.42506711526246,
+          "observed_days": 162.2
+        },
+        {
+          "name": "HE1104-1805",
+          "component": "Connection potential",
+          "days": 197.8043576845021,
+          "observed_days": 162.2
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "component": "geometric path",
+          "days": 138.5307820018999,
+          "observed_days": 171.5
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "component": "Connection potential",
+          "days": 117.35191772096482,
+          "observed_days": 171.5
+        }
+      ],
+      "ara": [
+        {
+          "name": "PKS1830-211",
+          "model": "Point mass",
+          "path_ara": 1.0504565813807045,
+          "connection_ara": 0.9495434186192955,
+          "radius_ratio": 0.4555302547561358
+        },
+        {
+          "name": "PKS1830-211",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.4555302547561358
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "Point mass",
+          "path_ara": 1.0024085774029008,
+          "connection_ara": 0.9975914225970993,
+          "radius_ratio": 0.8435883315764642
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.8435883315764642
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "Point mass",
+          "path_ara": 1.074304151612696,
+          "connection_ara": 0.9256958483873038,
+          "radius_ratio": 0.38321913153167386
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.38321913153167386
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "Point mass",
+          "path_ara": 1.239705693464601,
+          "connection_ara": 0.7602943065353993,
+          "radius_ratio": 0.16610677223831755
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.16610677223831755
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "Point mass",
+          "path_ara": 1.0954188771210143,
+          "connection_ara": 0.904581122878986,
+          "radius_ratio": 0.33551828100141023
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.33551828100141023
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "Point mass",
+          "path_ara": 1.0332837978046787,
+          "connection_ara": 0.9667162021953212,
+          "radius_ratio": 0.5292455964896302
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.5292455964896302
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "Point mass",
+          "path_ara": 1.0827678631805626,
+          "connection_ara": 0.9172321368194373,
+          "radius_ratio": 0.36268897300868047
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "SIS",
+          "path_ara": 0.0,
+          "connection_ara": 2.0,
+          "radius_ratio": 0.36268897300868047
+        }
+      ],
+      "residuals": [
+        {
+          "name": "PKS1830-211",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 18.112369661155128,
+          "factor_error": 2.4074363522217355
+        },
+        {
+          "name": "PKS1830-211",
+          "model": "SIS",
+          "axisymmetry_error_deg": 18.112369661155128,
+          "factor_error": 1.264453680223239
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 11.872165264888196,
+          "factor_error": 1.662778176180896
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "model": "SIS",
+          "axisymmetry_error_deg": 11.872165264888196,
+          "factor_error": 3.317565738491424
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 8.021498229153252,
+          "factor_error": 3.9850130879322845
+        },
+        {
+          "name": "HE2149-2745",
+          "model": "SIS",
+          "axisymmetry_error_deg": 8.021498229153252,
+          "factor_error": 2.1405580522982923
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 24.488506151923133,
+          "factor_error": 5.715010262292242
+        },
+        {
+          "name": "WGD2021-4115",
+          "model": "SIS",
+          "axisymmetry_error_deg": 24.488506151923133,
+          "factor_error": 3.542465380186156
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 0.1628320272114081,
+          "factor_error": 3.340268136964335
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "model": "SIS",
+          "axisymmetry_error_deg": 0.1628320272114081,
+          "factor_error": 1.8294963859382865
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 0.08547523178074812,
+          "factor_error": 2.5229927546224697
+        },
+        {
+          "name": "HE1104-1805",
+          "model": "SIS",
+          "axisymmetry_error_deg": 0.08547523178074812,
+          "factor_error": 1.3034837676649964
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "Point mass",
+          "axisymmetry_error_deg": 11.053724885102497,
+          "factor_error": 1.4920274036318641
+        },
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "model": "SIS",
+          "axisymmetry_error_deg": 11.053724885102497,
+          "factor_error": 1.237992000923289
+        }
+      ],
+      "system_detail": [
+        {
+          "name": "SDSSJ162026.14+120342.0",
+          "observed_days": 171.5,
+          "observed_error_days": 8.7,
+          "opening_angle_deg": 168.9462751148975,
+          "radius_ratio_inner_outer": 0.36268897300868047,
+          "pm_geo_days": 138.5307820018999,
+          "pm_potential_days": 117.35191772096482,
+          "pm_total_days": 255.88269972286471,
+          "sis_total_days": 138.5307820018999,
+          "pm_factor_error": 1.4920274036318641,
+          "sis_factor_error": 1.237992000923289,
+          "delay_bibcode": "2020A&A...640A.105M"
+        },
+        {
+          "name": "HE1104-1805",
+          "observed_days": 162.2,
+          "observed_error_days": 6.3,
+          "opening_angle_deg": 179.91452476821925,
+          "radius_ratio_inner_outer": 0.5292455964896302,
+          "pm_geo_days": 211.42506711526246,
+          "pm_potential_days": 197.8043576845021,
+          "pm_total_days": 409.22942479976456,
+          "sis_total_days": 211.4250671152624,
+          "pm_factor_error": 2.5229927546224697,
+          "sis_factor_error": 1.3034837676649964,
+          "delay_bibcode": "2008ApJ...676...80M"
+        },
+        {
+          "name": "SDSSJ0832+0404",
+          "observed_days": 129.4,
+          "observed_error_days": 11.9,
+          "opening_angle_deg": 179.8371679727886,
+          "radius_ratio_inner_outer": 0.33551828100141023,
+          "pm_geo_days": 236.73683234041434,
+          "pm_potential_days": 195.49386458277064,
+          "pm_total_days": 432.23069692318495,
+          "sis_total_days": 236.73683234041428,
+          "pm_factor_error": 3.340268136964335,
+          "sis_factor_error": 1.8294963859382865,
+          "delay_bibcode": "2025arXiv250402932D"
+        },
+        {
+          "name": "WGD2021-4115",
+          "observed_days": 90.8,
+          "observed_error_days": 9.7,
+          "opening_angle_deg": 155.51149384807687,
+          "radius_ratio_inner_outer": 0.16610677223831755,
+          "pm_geo_days": 321.655856520903,
+          "pm_potential_days": 197.2670752952325,
+          "pm_total_days": 518.9229318161355,
+          "sis_total_days": 321.655856520903,
+          "pm_factor_error": 5.715010262292242,
+          "sis_factor_error": 3.542465380186156,
+          "delay_bibcode": "2025arXiv250402932D"
+        },
+        {
+          "name": "HE2149-2745",
+          "observed_days": 32.4,
+          "observed_error_days": 18.3,
+          "opening_angle_deg": 171.97850177084675,
+          "radius_ratio_inner_outer": 0.38321913153167386,
+          "pm_geo_days": 69.35408089446466,
+          "pm_potential_days": 59.76034315454137,
+          "pm_total_days": 129.11442404900603,
+          "sis_total_days": 69.35408089446467,
+          "pm_factor_error": 3.9850130879322845,
+          "sis_factor_error": 2.1405580522982923,
+          "delay_bibcode": "2020A&A...640A.105M"
+        },
+        {
+          "name": "PKS1830-211",
+          "observed_days": 25.0,
+          "observed_error_days": 3.0,
+          "opening_angle_deg": 161.88763033884487,
+          "radius_ratio_inner_outer": 0.4555302547561358,
+          "pm_geo_days": 31.611342005580973,
+          "pm_potential_days": 28.574566799962412,
+          "pm_total_days": 60.185908805543384,
+          "sis_total_days": 31.611342005580973,
+          "pm_factor_error": 2.4074363522217355,
+          "sis_factor_error": 1.264453680223239,
+          "delay_bibcode": "2023A&A...674A.101M"
+        },
+        {
+          "name": "SDSSJ1442+4055",
+          "observed_days": 25.0,
+          "observed_error_days": 1.5,
+          "opening_angle_deg": 168.1278347351118,
+          "radius_ratio_inner_outer": 0.8435883315764642,
+          "pm_geo_days": 7.535645702492724,
+          "pm_potential_days": 7.4994325527562875,
+          "pm_total_days": 15.035078255249012,
+          "sis_total_days": 7.535645702492724,
+          "pm_factor_error": 1.662778176180896,
+          "sis_factor_error": 3.317565738491424,
+          "delay_bibcode": "2019ApJ...873..117S"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "gaia_gral_x",
+      "label": "Gaia GraL X catalogue and T444 derived lens rows",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/707/A345",
+      "query": {
+        "language": "sql",
+        "engine": "SQLite",
+        "sql": "SELECT * FROM t444_system_results ORDER BY observed_days DESC;",
+        "description": "Actual report-input query over the reviewed T444 eligible-system table derived from VizieR tables A1 and B1.",
+        "executed_at": "2026-08-28T01:20:42+00:00",
+        "tables_used": [
+          "t444_system_results"
+        ],
+        "filters": [
+          "Type = Double",
+          "exactly one A, B, and G component",
+          "opening angle at G >= 150 degrees",
+          "finite source/lens redshifts",
+          "published non-zero tAB"
+        ],
+        "metric_definitions": [
+          "Observed delay is the absolute published A-B delay in days; its original sign remains in the detailed CSV.",
+          "Point-mass and SIS values are frozen conventional axisymmetric landmark predictions using H0=70 km/s/Mpc and Omega_m=0.3.",
+          "Factor error is max(predicted/observed, observed/predicted), so 1 is exact and 2 is a factor-of-two miss."
+        ]
+      }
+    },
+    {
+      "id": "fermat_delay_theory",
+      "label": "Geometric and potential gravitational-lensing delay relation",
+      "href": "https://arxiv.org/abs/2004.11845"
+    }
+  ]
+}

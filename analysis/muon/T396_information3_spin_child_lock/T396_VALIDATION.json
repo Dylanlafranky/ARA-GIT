@@ -1,0 +1,45 @@
+{
+  "test_id": "T396-independent-validation",
+  "overall_assessment": "Ready to share with explicit truth-model and sparse-joint caveats",
+  "sample_rows": 20000,
+  "checks": {
+    "protocol_hash_matches": true,
+    "fresh_primary_seed_396": true,
+    "primary_population_is_one_million": true,
+    "deterministic_split_sums_to_population": true,
+    "generator_marginals_match_analytic_means": true,
+    "exact_composition_is_machine_precision": true,
+    "exact_composition_labelled_forced": true,
+    "sample_children_obey_event_support": true,
+    "parent_resolution_is_validation_winner": true,
+    "relation_resolution_is_validation_winner": true,
+    "joint_resolution_is_validation_winner": true,
+    "primary_gain_ci_excludes_zero": true,
+    "joint_beats_parent": true,
+    "joint_beats_relation_only": true,
+    "wrong_event_pairing_degrades": true,
+    "mirrored_orientation_degrades": true,
+    "shuffled_relation_degrades": true,
+    "oracle_is_best_nll": true,
+    "zero_polarization_has_no_positive_additive_gain": true,
+    "additive_gain_falls_monotonically_with_polarization": true,
+    "no_missing_momentum_shortcut": true
+  },
+  "overall_pass": true,
+  "spot_checks": {
+    "max_sample_support_error": 0.0,
+    "sample_mean_joint_minus_parent_gain": 0.015233210138988776,
+    "reported_full_gain": 0.015506384692246702,
+    "additive_gain_by_polarization": [
+      0.02088525517703373,
+      0.013527869726486912,
+      0.003719446500895879,
+      -0.0012447935905905427
+    ]
+  },
+  "required_caveats": [
+    "The population is generated from the leading-order polarized V-A law; it is not direct two-neutrino observation.",
+    "The factorized fusion outperformed the denser joint histogram, so the result supports complementary cuts but does not require a learned nonlinear P-by-R interaction.",
+    "The fixed dense joint histogram loses holdout advantage below full polarization at the smaller sensitivity sample size; the lower-variance factorized control retains the expected graded signal."
+  ]
+}

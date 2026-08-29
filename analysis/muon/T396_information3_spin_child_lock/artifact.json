@@ -1,0 +1,1902 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T396 — Muon Information³ spin/child lock",
+    "description": "Frozen holdout test of whether two observed muon-decay relations constrain the hidden neutral-child split.",
+    "generatedAt": "2026-08-16T05:33:38Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "nll_comparison",
+        "title": "Two-cut fusion beats either observed cut alone",
+        "subtitle": "Mean holdout negative log likelihood; lower is better.",
+        "type": "horizontalBar",
+        "dataset": "nll_models",
+        "sourceId": "t396_results",
+        "valueFormat": "number",
+        "palette": {
+          "kind": "identity",
+          "name": "blue"
+        },
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Estimator or control"
+          },
+          "y": {
+            "field": "mean_nll",
+            "type": "quantitative",
+            "label": "Mean holdout NLL"
+          },
+          "tooltip": [
+            {
+              "field": "gain_vs_parent",
+              "type": "quantitative",
+              "label": "Gain vs parent-only"
+            },
+            {
+              "field": "child_mae",
+              "type": "quantitative",
+              "label": "Child-coordinate MAE"
+            }
+          ]
+        }
+      },
+      {
+        "id": "polarization_sensitivity",
+        "title": "Incremental information collapses with polarization",
+        "subtitle": "Gain relative to the parent cut; positive values mean the spin relation helps.",
+        "type": "line",
+        "dataset": "sensitivity",
+        "sourceId": "t396_results",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "No incremental information",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "polarization",
+            "type": "quantitative",
+            "label": "Muon polarization"
+          },
+          "y": {
+            "field": "gain",
+            "type": "quantitative",
+            "label": "NLL gain vs parent-only"
+          },
+          "color": {
+            "field": "estimator",
+            "type": "nominal",
+            "label": "Estimator"
+          },
+          "tooltip": [
+            {
+              "field": "ci_low",
+              "type": "quantitative",
+              "label": "95% CI low"
+            },
+            {
+              "field": "ci_high",
+              "type": "quantitative",
+              "label": "95% CI high"
+            },
+            {
+              "field": "holdout_n",
+              "type": "quantitative",
+              "label": "Holdout events"
+            }
+          ]
+        }
+      },
+      {
+        "id": "child_surface",
+        "title": "The hidden neutral child varies across both observed ARA cuts",
+        "subtitle": "Observed mean child coordinate in the frozen full-polarization population.",
+        "type": "heatmap",
+        "dataset": "child_surface",
+        "sourceId": "t396_results",
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "encodings": {
+          "x": {
+            "field": "parent_cut",
+            "type": "ordinal",
+            "label": "Parent cut P = xₑ"
+          },
+          "y": {
+            "field": "observed_child_mean",
+            "type": "quantitative",
+            "label": "Mean hidden child C"
+          },
+          "color": {
+            "field": "spin_relation",
+            "type": "nominal",
+            "label": "Spin relation R = 1 + cos θₑS"
+          },
+          "tooltip": [
+            {
+              "field": "predicted_child_mean",
+              "type": "quantitative",
+              "label": "Fitted mean child C"
+            },
+            {
+              "field": "n",
+              "type": "quantitative",
+              "label": "Events"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "model_table",
+        "title": "Holdout model and control ordering",
+        "subtitle": "All values were scored only after the frozen calibration and validation stages.",
+        "dataset": "nll_models",
+        "sourceId": "t396_results",
+        "defaultSort": {
+          "field": "mean_nll",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "model",
+            "label": "Estimator or control",
+            "type": "text"
+          },
+          {
+            "field": "mean_nll",
+            "label": "Mean NLL",
+            "format": "number"
+          },
+          {
+            "field": "gain_vs_parent",
+            "label": "Gain vs parent",
+            "format": "number"
+          },
+          {
+            "field": "child_mae",
+            "label": "Child MAE",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "validation_table",
+        "title": "Independent validation checks",
+        "subtitle": "A second script reconstructed the principal checks from saved outputs.",
+        "dataset": "validation_checks",
+        "sourceId": "t396_validation",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t396_results",
+        "label": "T396 report reproduction queries",
+        "path": "analysis/muon/T396_information3_spin_child_lock/T396_REPORT_RESULTS.sql"
+      },
+      {
+        "id": "t396_validation",
+        "label": "T396 validation reproduction query",
+        "path": "analysis/muon/T396_information3_spin_child_lock/T396_REPORT_VALIDATION.sql"
+      },
+      {
+        "id": "t396_protocol",
+        "label": "Frozen T396 protocol",
+        "path": "analysis/muon/T396_INFORMATION3_SPIN_CHILD_LOCK_PROTOCOL_2026-08-16.md"
+      },
+      {
+        "id": "meg_polarized_muon",
+        "label": "MEG polarized muon-decay distribution",
+        "path": "https://doi.org/10.1140/epjc/s10052-016-4047-3"
+      },
+      {
+        "id": "polarized_va_matrix",
+        "label": "Polarized V-A muon decay matrix element",
+        "path": "https://arxiv.org/abs/hep-ph/0203052"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T396 — Two observed muon relations constrain the hidden neutral split\n\n## Technical summary\n\nThe frozen truth-level test **passed**. Adding the independently observed charged-daughter/spin relation to the charged-versus-neutral parent cut improved holdout prediction of the hidden neutral-child split by **0.015506 nats/event** using the predeclared dense joint estimator; the fixed block-bootstrap 95% interval was **[0.014412, 0.016642]**.\n\nThe lower-variance factorized fusion improved holdout NLL by **0.020885 nats/event** and outperformed the dense estimator. Therefore the evidence supports the ARA/Information³ statement that **two independently observed relations constrain a third hidden relation**, but it does **not** require a learned nonlinear parent-by-spin interaction.\n\nWhen polarization was removed, the factorized increment became **−0.001245 nats/event**. The information gain therefore tracks the physical spin coupling rather than surviving as an arbitrary binning advantage.\n"
+      },
+      {
+        "id": "nll_text",
+        "type": "markdown",
+        "body": "## The second observed relation carries real holdout information\n\nThe analytic oracle provides the attainable reference for this generator. Both two-cut estimators sit between that oracle and either one-cut model. Shuffling the relation, pairing it with the wrong event, mirroring its orientation or replacing the dynamics with phase space all degrade performance, which is the control pattern expected if the signed spin relation is carrying the additional information."
+      },
+      {
+        "id": "nll_chart",
+        "type": "chart",
+        "chartId": "nll_comparison"
+      },
+      {
+        "id": "polarization_text",
+        "type": "markdown",
+        "body": "## The signal follows the physical coupling\n\nThe factorized estimator retains a positive increment at 100%, 85% and 50% polarization, and falls slightly below zero at 0%. The dense fixed-resolution histogram pays a sparsity penalty at the smaller sensitivity samples, so it should not be mistaken for evidence that the physical relation reverses. The lower-variance factorized result is the appropriate graded sensitivity check."
+      },
+      {
+        "id": "polarization_chart",
+        "type": "chart",
+        "chartId": "polarization_sensitivity"
+      },
+      {
+        "id": "surface_text",
+        "type": "markdown",
+        "body": "## The hidden child is a surface, not a one-axis lookup\n\nAt fixed charged-versus-neutral parent position, the expected hidden split changes with the charged daughter’s orientation relative to the muon spin. Conversely, the same spin relation does not determine the split without the parent energy cut. In ARA language, the two measured cuts jointly narrow the third relation."
+      },
+      {
+        "id": "surface_chart",
+        "type": "chart",
+        "chartId": "child_surface"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Scope and coordinate definitions\n\n- **Parent cut:** `P = xₑ`, the charged-daughter share on a normalized 0–1 energy coordinate.\n- **Independent relation cut:** `R = 1 + cos(θₑS)`, the signed charged-daughter direction relative to the parent muon spin, mapped to ARA 0–2.\n- **Hidden child:** `C = 2xνₑ/(2−P)`, the electron-neutrino share inside the joint neutral branch, mapped to ARA 0–2.\n- **Information³ question:** whether `(P,R)` predicts `C` more strongly than either `P` or `R` alone.\n\nThe event generator used the leading-order polarized Standard-Model V-A law. No missing-momentum variable, second neutrino momentum or truth child label was allowed into either observed input."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Frozen method\n\nThe protocol hash was fixed before scoring. One million fully polarized positive-muon decays were generated with seed 396 and split deterministically: 499,615 calibration events, 200,326 validation events and 300,059 untouched holdout events. Histogram resolutions were selected only on validation data. The primary comparison used block-bootstrap confidence intervals; independent checks reloaded the saved outputs and reconstructed the gates without importing the main test module."
+      },
+      {
+        "id": "model_table_block",
+        "type": "table",
+        "tableId": "model_table"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Robustness and limitations\n\n**What is supported:** two independently observed relations contain complementary event-level information about the hidden neutral split, and the increment follows polarization.\n\n**What is not supported yet:** this is not direct two-neutrino observation; the population was generated from a known truth law. Exact neutral-branch recomposition was forced by the coordinate definition and is not independent evidence. The factorized estimator outperforming the dense grid means the result does not establish a necessary nonlinear parent-by-relation interaction. At lower polarization and smaller samples, the dense grid becomes variance-limited.\n\nThe independent validator classified the result as: **Ready to share with explicit truth-model and sparse-joint caveats.**"
+      },
+      {
+        "id": "validation_table_block",
+        "type": "table",
+        "tableId": "validation_table"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nMove from the truth-law crosswalk to event-linked experimental data containing (1) a known or reconstructed muon-spin direction, (2) the charged-daughter energy and direction and (3) an independently neutral-sensitive target or constrained missing-momentum measurement. Freeze the same parent and relation cuts, predict the neutral child without using the target, then score only afterward. That would convert the present generator validation into an empirical Information³ test.\n\n## Further questions\n\n- Does the factorized advantage persist with detector smearing, radiative corrections and acceptance effects?\n- Can an event-linked neutral-sensitive archive be found without reconstructing the target from the same inputs?\n- Which ARA child coordinate remains stable across positive- and negative-muon conventions?\n- Does calibration learned in one detector or polarization regime transfer to another?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-16T05:33:38Z",
+    "status": "ready",
+    "datasets": {
+      "nll_models": [
+        {
+          "model": "Analytic V-A oracle",
+          "mean_nll": -0.11601449483990683,
+          "gain_vs_parent": 0.05496886596913365,
+          "child_mae": null
+        },
+        {
+          "model": "Factorized two-cut fusion",
+          "mean_nll": -0.08193088404780693,
+          "gain_vs_parent": 0.020885255177033747,
+          "child_mae": 0.22623207954189412
+        },
+        {
+          "model": "Dense joint Information³",
+          "mean_nll": -0.0765520135630199,
+          "gain_vs_parent": 0.01550638469224671,
+          "child_mae": 0.22495900659399004
+        },
+        {
+          "model": "Parent cut only",
+          "mean_nll": -0.06104562887077319,
+          "gain_vs_parent": 0.0,
+          "child_mae": 0.23247212582625257
+        },
+        {
+          "model": "Shuffled relation",
+          "mean_nll": -0.04019217519884266,
+          "gain_vs_parent": -0.020853453671930526,
+          "child_mae": 0.23259773578137036
+        },
+        {
+          "model": "Wrong-event relation",
+          "mean_nll": 0.0017521672070686485,
+          "gain_vs_parent": -0.06279779607784183,
+          "child_mae": 0.2379233824831544
+        },
+        {
+          "model": "Unpolarized phase space",
+          "mean_nll": 0.025771659198687465,
+          "gain_vs_parent": -0.08681728806946065,
+          "child_mae": 0.24438769642344912
+        },
+        {
+          "model": "Mirrored orientation",
+          "mean_nll": 0.08739771786452731,
+          "gain_vs_parent": -0.1484433467353005,
+          "child_mae": 0.25176177798673244
+        },
+        {
+          "model": "Spin relation only",
+          "mean_nll": 0.17397569574784957,
+          "gain_vs_parent": -0.23502132461862277,
+          "child_mae": 0.22808521028646334
+        },
+        {
+          "model": "Unconditional",
+          "mean_nll": 0.19955061532423754,
+          "gain_vs_parent": -0.2605962441950107,
+          "child_mae": 0.2337705303028358
+        }
+      ],
+      "sensitivity": [
+        {
+          "polarization": 1.0,
+          "estimator": "Factorized two-cut fusion",
+          "gain": 0.02088525517703373,
+          "ci_low": 0.02012820818062417,
+          "ci_high": 0.02165296996521722,
+          "holdout_n": 300059
+        },
+        {
+          "polarization": 1.0,
+          "estimator": "Dense joint histogram",
+          "gain": 0.015506384692246702,
+          "ci_low": 0.014412248157009087,
+          "ci_high": 0.01664196616331892,
+          "holdout_n": 300059
+        },
+        {
+          "polarization": 0.85,
+          "estimator": "Factorized two-cut fusion",
+          "gain": 0.013527869726486912,
+          "ci_low": 0.012467604061157793,
+          "ci_high": 0.014611607135754224,
+          "holdout_n": 150263
+        },
+        {
+          "polarization": 0.85,
+          "estimator": "Dense joint histogram",
+          "gain": -0.0037181596207524785,
+          "ci_low": -0.005184912607547491,
+          "ci_high": -0.002215014577057448,
+          "holdout_n": 150263
+        },
+        {
+          "polarization": 0.5,
+          "estimator": "Factorized two-cut fusion",
+          "gain": 0.003719446500895879,
+          "ci_low": 0.0031415938141687904,
+          "ci_high": 0.004291154480349621,
+          "holdout_n": 150263
+        },
+        {
+          "polarization": 0.5,
+          "estimator": "Dense joint histogram",
+          "gain": -0.019604585102403906,
+          "ci_low": -0.020856246906634318,
+          "ci_high": -0.01834977375598223,
+          "holdout_n": 150263
+        },
+        {
+          "polarization": 0.0,
+          "estimator": "Factorized two-cut fusion",
+          "gain": -0.0012447935905905427,
+          "ci_low": -0.0014314988987391105,
+          "ci_high": -0.0010513140083618366,
+          "holdout_n": 150263
+        },
+        {
+          "polarization": 0.0,
+          "estimator": "Dense joint histogram",
+          "gain": -0.027819947512071893,
+          "ci_low": -0.028782174190344813,
+          "ci_high": -0.02686840528405111,
+          "holdout_n": 150263
+        }
+      ],
+      "child_surface": [
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.9866463794326066,
+          "predicted_child_mean": 0.9968750000000001,
+          "n": 19
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9891072034339967,
+          "predicted_child_mean": 0.9942708333333332,
+          "n": 8
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9920980741541172,
+          "predicted_child_mean": 0.9936951754385963,
+          "n": 17
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9942996280104537,
+          "predicted_child_mean": 0.9945913461538461,
+          "n": 13
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9962663303028008,
+          "predicted_child_mean": 0.995625,
+          "n": 9
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9945921331262902,
+          "predicted_child_mean": 0.9976728723404255,
+          "n": 15
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9933748005874402,
+          "predicted_child_mean": 0.9958545918367346,
+          "n": 12
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9857131178110603,
+          "predicted_child_mean": 0.9972426470588236,
+          "n": 5
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9967285094044084,
+          "predicted_child_mean": 0.9976851851851851,
+          "n": 11
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9957909669886833,
+          "predicted_child_mean": 0.9983377659574467,
+          "n": 10
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9992439953766769,
+          "predicted_child_mean": 0.999652777777778,
+          "n": 15
+        },
+        {
+          "parent_cut": "0.031",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9995336941687829,
+          "predicted_child_mean": 0.9978693181818181,
+          "n": 4
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.9704972901079247,
+          "predicted_child_mean": 0.9767945544554457,
+          "n": 86
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9782667610306731,
+          "predicted_child_mean": 0.9802591463414633,
+          "n": 80
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9805139382301998,
+          "predicted_child_mean": 0.9829937845303868,
+          "n": 98
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9822904437597942,
+          "predicted_child_mean": 0.9812334656084655,
+          "n": 100
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9822386340052702,
+          "predicted_child_mean": 0.9880628881987576,
+          "n": 72
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.984676801376008,
+          "predicted_child_mean": 0.9870065789473684,
+          "n": 80
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9840248465915736,
+          "predicted_child_mean": 0.988425925925926,
+          "n": 87
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9845693585364584,
+          "predicted_child_mean": 0.9917156040268456,
+          "n": 90
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9853764314728793,
+          "predicted_child_mean": 0.9938577586206896,
+          "n": 65
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.994523650559838,
+          "predicted_child_mean": 0.9926658163265306,
+          "n": 64
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9965276052652822,
+          "predicted_child_mean": 0.9955520072992701,
+          "n": 64
+        },
+        {
+          "parent_cut": "0.094",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9922780494470979,
+          "predicted_child_mean": 0.9987454379562044,
+          "n": 64
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.9594594142927052,
+          "predicted_child_mean": 0.9610934035476718,
+          "n": 289
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9596270988126471,
+          "predicted_child_mean": 0.9640771028037383,
+          "n": 248
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9616598406505329,
+          "predicted_child_mean": 0.9652647243107768,
+          "n": 234
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9664209056581863,
+          "predicted_child_mean": 0.9668298192771084,
+          "n": 229
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9683826658031605,
+          "predicted_child_mean": 0.9682591623036649,
+          "n": 226
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.971630887362628,
+          "predicted_child_mean": 0.974140625,
+          "n": 224
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9681760314566578,
+          "predicted_child_mean": 0.9769669618528609,
+          "n": 206
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9701971917769041,
+          "predicted_child_mean": 0.9815894846796658,
+          "n": 175
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9802726314267083,
+          "predicted_child_mean": 0.9825841690544412,
+          "n": 184
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9849739976719178,
+          "predicted_child_mean": 0.98544921875,
+          "n": 178
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9931821284259554,
+          "predicted_child_mean": 0.9941463864306785,
+          "n": 179
+        },
+        {
+          "parent_cut": "0.156",
+          "spin_relation": "1.917",
+          "observed_child_mean": 1.000658348322375,
+          "predicted_child_mean": 0.9982401877133106,
+          "n": 164
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.9392076473258565,
+          "predicted_child_mean": 0.9415908365261814,
+          "n": 455
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9415981281289977,
+          "predicted_child_mean": 0.9434212610899873,
+          "n": 437
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9484720157893246,
+          "predicted_child_mean": 0.946320564516129,
+          "n": 450
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.950713646750433,
+          "predicted_child_mean": 0.9483105742296922,
+          "n": 427
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9560427393156014,
+          "predicted_child_mean": 0.9568250713266762,
+          "n": 417
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9618082123862896,
+          "predicted_child_mean": 0.9628186968838528,
+          "n": 391
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9628316812029878,
+          "predicted_child_mean": 0.9657649253731344,
+          "n": 402
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9705360173051139,
+          "predicted_child_mean": 0.9750937993680885,
+          "n": 347
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9776951051335805,
+          "predicted_child_mean": 0.9785416666666666,
+          "n": 341
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9859113755705166,
+          "predicted_child_mean": 0.9807169732441472,
+          "n": 308
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9893659550709032,
+          "predicted_child_mean": 0.9866111359570662,
+          "n": 347
+        },
+        {
+          "parent_cut": "0.219",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9901547058384159,
+          "predicted_child_mean": 1.0022865853658536,
+          "n": 315
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.920568276974204,
+          "predicted_child_mean": 0.9218243927125505,
+          "n": 738
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9249116922676135,
+          "predicted_child_mean": 0.9270445616211745,
+          "n": 683
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9304149995608035,
+          "predicted_child_mean": 0.937217377260982,
+          "n": 667
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9359198815022554,
+          "predicted_child_mean": 0.941684222846442,
+          "n": 630
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.944018211948372,
+          "predicted_child_mean": 0.9422998366013073,
+          "n": 627
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.94176496602771,
+          "predicted_child_mean": 0.9495226945244957,
+          "n": 598
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9544684755994175,
+          "predicted_child_mean": 0.9569196428571429,
+          "n": 626
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9588050177861669,
+          "predicted_child_mean": 0.9591981132075471,
+          "n": 573
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9620330302743392,
+          "predicted_child_mean": 0.9728360355648537,
+          "n": 532
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9742163316427916,
+          "predicted_child_mean": 0.9754835150571132,
+          "n": 545
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9852516199185751,
+          "predicted_child_mean": 0.9869397948164147,
+          "n": 515
+        },
+        {
+          "parent_cut": "0.281",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.995631730600188,
+          "predicted_child_mean": 0.9946474913494809,
+          "n": 477
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.9003423335035375,
+          "predicted_child_mean": 0.9034039505428226,
+          "n": 959
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.9074759116329305,
+          "predicted_child_mean": 0.9058223265436027,
+          "n": 913
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.9124185362842826,
+          "predicted_child_mean": 0.9183192457737321,
+          "n": 961
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9176272772561702,
+          "predicted_child_mean": 0.9224204104718814,
+          "n": 897
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9259770452043642,
+          "predicted_child_mean": 0.9299363678950656,
+          "n": 890
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9306841696657249,
+          "predicted_child_mean": 0.9382647156084656,
+          "n": 894
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9471274562321561,
+          "predicted_child_mean": 0.9453441295546561,
+          "n": 780
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9564082115454284,
+          "predicted_child_mean": 0.9573574561403508,
+          "n": 852
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9645642003413428,
+          "predicted_child_mean": 0.9635416666666666,
+          "n": 791
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9758477914287371,
+          "predicted_child_mean": 0.9721006816507001,
+          "n": 739
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9856880516192584,
+          "predicted_child_mean": 0.982966686091686,
+          "n": 759
+        },
+        {
+          "parent_cut": "0.344",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9935137515333556,
+          "predicted_child_mean": 0.9920378352490422,
+          "n": 775
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.87874895447105,
+          "predicted_child_mean": 0.8800150451354063,
+          "n": 1222
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.8896617882226032,
+          "predicted_child_mean": 0.8846966911764704,
+          "n": 1200
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8952967342541291,
+          "predicted_child_mean": 0.8916615099009901,
+          "n": 1216
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.9100451209020772,
+          "predicted_child_mean": 0.9059455634544498,
+          "n": 1159
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9160834564699332,
+          "predicted_child_mean": 0.9111685342606903,
+          "n": 1206
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9248634178766237,
+          "predicted_child_mean": 0.9240426300578035,
+          "n": 1162
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9426460232600999,
+          "predicted_child_mean": 0.9369697773064687,
+          "n": 1164
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9469768562914369,
+          "predicted_child_mean": 0.9445617105985722,
+          "n": 1142
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9568176551125275,
+          "predicted_child_mean": 0.9591700250138967,
+          "n": 1043
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9732497264258031,
+          "predicted_child_mean": 0.9712695765661253,
+          "n": 1106
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9831293334687949,
+          "predicted_child_mean": 0.9825526847575058,
+          "n": 1039
+        },
+        {
+          "parent_cut": "0.406",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9931470017597139,
+          "predicted_child_mean": 0.9958291832669324,
+          "n": 1068
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.8510209196317097,
+          "predicted_child_mean": 0.8545421035386632,
+          "n": 1478
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.8683348149383048,
+          "predicted_child_mean": 0.8647490326741186,
+          "n": 1447
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8732681040493149,
+          "predicted_child_mean": 0.8793715027977619,
+          "n": 1420
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8883964545666322,
+          "predicted_child_mean": 0.8928249794153973,
+          "n": 1402
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8970371004765775,
+          "predicted_child_mean": 0.9090997611134192,
+          "n": 1428
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.911968286670098,
+          "predicted_child_mean": 0.9201381633932303,
+          "n": 1407
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9261564696061337,
+          "predicted_child_mean": 0.9269132389417115,
+          "n": 1426
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9428799977271368,
+          "predicted_child_mean": 0.9415665996614473,
+          "n": 1376
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9524289250218729,
+          "predicted_child_mean": 0.9495558716187206,
+          "n": 1403
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9676258699720277,
+          "predicted_child_mean": 0.9651216979122283,
+          "n": 1444
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9749877733330126,
+          "predicted_child_mean": 0.9768859786700126,
+          "n": 1397
+        },
+        {
+          "parent_cut": "0.469",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9925594905001806,
+          "predicted_child_mean": 0.9944142178524081,
+          "n": 1412
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.8307887182278914,
+          "predicted_child_mean": 0.8333725780409043,
+          "n": 1645
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.8471312799928662,
+          "predicted_child_mean": 0.8463736631016042,
+          "n": 1676
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8578629251047412,
+          "predicted_child_mean": 0.8557779554096094,
+          "n": 1708
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.873113939543931,
+          "predicted_child_mean": 0.8755188308283818,
+          "n": 1683
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8946838343355232,
+          "predicted_child_mean": 0.8873747291440954,
+          "n": 1661
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9106382780034429,
+          "predicted_child_mean": 0.9015176673751327,
+          "n": 1721
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9246564566759812,
+          "predicted_child_mean": 0.9272348938719617,
+          "n": 1748
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9353599500515376,
+          "predicted_child_mean": 0.9346858919382504,
+          "n": 1700
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9592970924961365,
+          "predicted_child_mean": 0.9524157209612818,
+          "n": 1734
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9674668105200509,
+          "predicted_child_mean": 0.9687978479074515,
+          "n": 1777
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9781575476440668,
+          "predicted_child_mean": 0.9738573696524064,
+          "n": 1716
+        },
+        {
+          "parent_cut": "0.531",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9990808040062115,
+          "predicted_child_mean": 0.9955798041513224,
+          "n": 1769
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.7952255910702296,
+          "predicted_child_mean": 0.8028583930315858,
+          "n": 1839
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.8210998818704492,
+          "predicted_child_mean": 0.8275815217391304,
+          "n": 1867
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8379724088353746,
+          "predicted_child_mean": 0.843232421875,
+          "n": 1869
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8599120263712554,
+          "predicted_child_mean": 0.8632626547127896,
+          "n": 1861
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8743832627546558,
+          "predicted_child_mean": 0.8894017238783498,
+          "n": 2000
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.8951157151788542,
+          "predicted_child_mean": 0.8963391786570742,
+          "n": 1970
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9192757342333365,
+          "predicted_child_mean": 0.9110167215697508,
+          "n": 1983
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9275800568811536,
+          "predicted_child_mean": 0.932720432760079,
+          "n": 2005
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9419906335016834,
+          "predicted_child_mean": 0.949103763666947,
+          "n": 2036
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9578184270784569,
+          "predicted_child_mean": 0.9593681675321125,
+          "n": 2133
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9787546633934996,
+          "predicted_child_mean": 0.9755531885651458,
+          "n": 2098
+        },
+        {
+          "parent_cut": "0.594",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9908864450362125,
+          "predicted_child_mean": 0.9976368115739446,
+          "n": 2222
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.7650508322081223,
+          "predicted_child_mean": 0.7748632090012331,
+          "n": 1862
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.79344823441535,
+          "predicted_child_mean": 0.7976708074534162,
+          "n": 1934
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8283517362056606,
+          "predicted_child_mean": 0.8237479938721913,
+          "n": 2010
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8470808783888902,
+          "predicted_child_mean": 0.8535598281642917,
+          "n": 2201
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8687055532480987,
+          "predicted_child_mean": 0.8716436483454851,
+          "n": 2253
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.8912508569139042,
+          "predicted_child_mean": 0.8947971204188482,
+          "n": 2202
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9077947190635544,
+          "predicted_child_mean": 0.9120172369103162,
+          "n": 2379
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9197769868799389,
+          "predicted_child_mean": 0.9311554908279623,
+          "n": 2408
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9388578925895192,
+          "predicted_child_mean": 0.9432412790697674,
+          "n": 2448
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9639856131420326,
+          "predicted_child_mean": 0.9585371748300915,
+          "n": 2450
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9834006058527331,
+          "predicted_child_mean": 0.972134643916914,
+          "n": 2549
+        },
+        {
+          "parent_cut": "0.656",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9918451120723496,
+          "predicted_child_mean": 0.9912783392897029,
+          "n": 2534
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.7414101820949288,
+          "predicted_child_mean": 0.7411193942696979,
+          "n": 1875
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.7806414796360766,
+          "predicted_child_mean": 0.7841216216216216,
+          "n": 1965
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8085213921119027,
+          "predicted_child_mean": 0.814721944603084,
+          "n": 2104
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8317385904438672,
+          "predicted_child_mean": 0.838511866059818,
+          "n": 2213
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8561504823399289,
+          "predicted_child_mean": 0.8638921241500881,
+          "n": 2319
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.897346728661048,
+          "predicted_child_mean": 0.8839491391852571,
+          "n": 2483
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9102137702468078,
+          "predicted_child_mean": 0.9117782909930715,
+          "n": 2569
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9359249248468825,
+          "predicted_child_mean": 0.9334456372772956,
+          "n": 2605
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.946957915830746,
+          "predicted_child_mean": 0.9447140403830141,
+          "n": 2843
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9649061827498628,
+          "predicted_child_mean": 0.9677380832662913,
+          "n": 2949
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9798851955123171,
+          "predicted_child_mean": 0.9833577781983346,
+          "n": 3091
+        },
+        {
+          "parent_cut": "0.719",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9966204935217962,
+          "predicted_child_mean": 0.997961446405106,
+          "n": 3161
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.7054964851704398,
+          "predicted_child_mean": 0.7147330465587045,
+          "n": 1770
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.7660840818362432,
+          "predicted_child_mean": 0.7582076477757465,
+          "n": 1953
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8022798600135846,
+          "predicted_child_mean": 0.7932427177601811,
+          "n": 2122
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8350181963159498,
+          "predicted_child_mean": 0.8393145959862689,
+          "n": 2277
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8525648601864826,
+          "predicted_child_mean": 0.8567539353520788,
+          "n": 2495
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.8910920232677982,
+          "predicted_child_mean": 0.8913680366847827,
+          "n": 2710
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9123338858634575,
+          "predicted_child_mean": 0.9101120220038452,
+          "n": 2846
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9410886185187624,
+          "predicted_child_mean": 0.9345703125,
+          "n": 2985
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9554878340545867,
+          "predicted_child_mean": 0.9576527154608337,
+          "n": 3228
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9754687163197683,
+          "predicted_child_mean": 0.9705249909698395,
+          "n": 3348
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9772265551749096,
+          "predicted_child_mean": 0.9840120003416468,
+          "n": 3490
+        },
+        {
+          "parent_cut": "0.781",
+          "spin_relation": "1.917",
+          "observed_child_mean": 0.9900774969775985,
+          "predicted_child_mean": 0.9949728694541973,
+          "n": 3826
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.6827397940087843,
+          "predicted_child_mean": 0.6892523364485981,
+          "n": 1500
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.7429851865485294,
+          "predicted_child_mean": 0.7615291262135923,
+          "n": 1721
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.801400496596776,
+          "predicted_child_mean": 0.8086968203379781,
+          "n": 2000
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8415997114191831,
+          "predicted_child_mean": 0.8460592139680878,
+          "n": 2216
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.8750449469134463,
+          "predicted_child_mean": 0.8762984154929578,
+          "n": 2573
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9059230525115606,
+          "predicted_child_mean": 0.9040851103331211,
+          "n": 2775
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9210381530419568,
+          "predicted_child_mean": 0.9206168187227292,
+          "n": 3094
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9409341098756762,
+          "predicted_child_mean": 0.9401721014492752,
+          "n": 3224
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9523012694571236,
+          "predicted_child_mean": 0.9546566038533042,
+          "n": 3625
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9679972356442925,
+          "predicted_child_mean": 0.9760098084646278,
+          "n": 3797
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9816638615580563,
+          "predicted_child_mean": 0.9753531710249475,
+          "n": 4174
+        },
+        {
+          "parent_cut": "0.844",
+          "spin_relation": "1.917",
+          "observed_child_mean": 1.0010936135956363,
+          "predicted_child_mean": 0.9884520208963431,
+          "n": 4299
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.6634690678497314,
+          "predicted_child_mean": 0.6694054423459245,
+          "n": 1149
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.7558804588659692,
+          "predicted_child_mean": 0.7800235478806907,
+          "n": 1507
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.8526254802489909,
+          "predicted_child_mean": 0.833430829228243,
+          "n": 1800
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.8684828820171331,
+          "predicted_child_mean": 0.8665532349681351,
+          "n": 2166
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9062556902316661,
+          "predicted_child_mean": 0.9126851198871652,
+          "n": 2416
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9256129878942768,
+          "predicted_child_mean": 0.9258696994648002,
+          "n": 2853
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9527463719878019,
+          "predicted_child_mean": 0.9548438961646398,
+          "n": 3239
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.962633487166665,
+          "predicted_child_mean": 0.9584657190635452,
+          "n": 3626
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.9755728190355744,
+          "predicted_child_mean": 0.9717557251908396,
+          "n": 3945
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9775369376503275,
+          "predicted_child_mean": 0.9695937015367264,
+          "n": 4229
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.750",
+          "observed_child_mean": 0.9922964492384594,
+          "predicted_child_mean": 0.9859623146082164,
+          "n": 4554
+        },
+        {
+          "parent_cut": "0.906",
+          "spin_relation": "1.917",
+          "observed_child_mean": 1.0003071264378427,
+          "predicted_child_mean": 0.9878139044090853,
+          "n": 4895
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.083",
+          "observed_child_mean": 0.7421606629116009,
+          "predicted_child_mean": 0.7463708697764819,
+          "n": 573
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.250",
+          "observed_child_mean": 0.8774872006488661,
+          "predicted_child_mean": 0.8563068808604523,
+          "n": 1038
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.417",
+          "observed_child_mean": 0.920424927183805,
+          "predicted_child_mean": 0.9172302318668252,
+          "n": 1520
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.583",
+          "observed_child_mean": 0.951463167578705,
+          "predicted_child_mean": 0.9464345952023989,
+          "n": 1955
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.750",
+          "observed_child_mean": 0.9663164718942769,
+          "predicted_child_mean": 0.9687143536121673,
+          "n": 2426
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "0.917",
+          "observed_child_mean": 0.9709746402997937,
+          "predicted_child_mean": 0.9621756890791398,
+          "n": 2745
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.083",
+          "observed_child_mean": 0.9843391869167136,
+          "predicted_child_mean": 0.9810066341418932,
+          "n": 3358
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.250",
+          "observed_child_mean": 0.9767197475582607,
+          "predicted_child_mean": 0.9857260061311115,
+          "n": 3799
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.417",
+          "observed_child_mean": 0.985105059271812,
+          "predicted_child_mean": 0.9942346026945285,
+          "n": 4233
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.583",
+          "observed_child_mean": 0.9914023113933117,
+          "predicted_child_mean": 0.9917041818295897,
+          "n": 4825
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.750",
+          "observed_child_mean": 1.0019518072851732,
+          "predicted_child_mean": 0.994384850504114,
+          "n": 5319
+        },
+        {
+          "parent_cut": "0.969",
+          "spin_relation": "1.917",
+          "observed_child_mean": 1.0037065161298235,
+          "predicted_child_mean": 1.0005032796501707,
+          "n": 5564
+        }
+      ],
+      "validation_checks": [
+        {
+          "check": "Protocol hash matches",
+          "status": "PASS"
+        },
+        {
+          "check": "Fresh primary seed 396",
+          "status": "PASS"
+        },
+        {
+          "check": "Primary population is one million",
+          "status": "PASS"
+        },
+        {
+          "check": "Deterministic split sums to population",
+          "status": "PASS"
+        },
+        {
+          "check": "Generator marginals match analytic means",
+          "status": "PASS"
+        },
+        {
+          "check": "Exact composition is machine precision",
+          "status": "PASS"
+        },
+        {
+          "check": "Exact composition labelled forced",
+          "status": "PASS"
+        },
+        {
+          "check": "Sample children obey event support",
+          "status": "PASS"
+        },
+        {
+          "check": "Parent resolution is validation winner",
+          "status": "PASS"
+        },
+        {
+          "check": "Relation resolution is validation winner",
+          "status": "PASS"
+        },
+        {
+          "check": "Joint resolution is validation winner",
+          "status": "PASS"
+        },
+        {
+          "check": "Primary gain ci excludes zero",
+          "status": "PASS"
+        },
+        {
+          "check": "Joint beats parent",
+          "status": "PASS"
+        },
+        {
+          "check": "Joint beats relation only",
+          "status": "PASS"
+        },
+        {
+          "check": "Wrong event pairing degrades",
+          "status": "PASS"
+        },
+        {
+          "check": "Mirrored orientation degrades",
+          "status": "PASS"
+        },
+        {
+          "check": "Shuffled relation degrades",
+          "status": "PASS"
+        },
+        {
+          "check": "Oracle is best nll",
+          "status": "PASS"
+        },
+        {
+          "check": "Zero polarization has no positive additive gain",
+          "status": "PASS"
+        },
+        {
+          "check": "Additive gain falls monotonically with polarization",
+          "status": "PASS"
+        },
+        {
+          "check": "No missing momentum shortcut",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t396_results",
+      "path": "analysis/muon/T396_information3_spin_child_lock/T396_REPORT_RESULTS.sql"
+    },
+    {
+      "id": "t396_validation",
+      "path": "analysis/muon/T396_information3_spin_child_lock/T396_REPORT_VALIDATION.sql"
+    },
+    {
+      "id": "t396_protocol",
+      "query": {
+        "engine": "file",
+        "language": "markdown",
+        "description": "Predeclared T396 protocol."
+      }
+    },
+    {
+      "id": "meg_polarized_muon",
+      "query": {
+        "engine": "web",
+        "language": "publication",
+        "description": "Primary-source polarized Michel energy-angle distribution."
+      }
+    },
+    {
+      "id": "polarized_va_matrix",
+      "query": {
+        "engine": "web",
+        "language": "publication",
+        "description": "Primary-source polarized V-A matrix element and neutrino-factory flux derivation."
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t396-information3-spin-child-lock",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

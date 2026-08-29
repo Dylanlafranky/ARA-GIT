@@ -1,0 +1,165 @@
+{
+  "status": "frozen_diagnostic_cross_identity_di_ara",
+  "geometry": {
+    "child_axis": "u = x_child - 1",
+    "parent_axis": "v = x_parent - 1",
+    "radial_flow": "u*du + v*dv",
+    "circulation": "u*dv - v*du",
+    "outcome": "parent handover within one frozen child window"
+  },
+  "data": {
+    "events": 123,
+    "snapshots": 10308,
+    "fluids": [
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ]
+  },
+  "overall": {
+    "constant": {
+      "brier": 0.0718179385142055,
+      "auc": 0.48519193916243386,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    },
+    "child_position": {
+      "brier": 0.07312220073937965,
+      "auc": 0.40210407651414215,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    },
+    "child_state": {
+      "brier": 0.07315515275339923,
+      "auc": 0.40220649659692903,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    },
+    "parent_state": {
+      "brier": 0.07123536359851111,
+      "auc": 0.6703076355394388,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    },
+    "additive": {
+      "brier": 0.0740307824133107,
+      "auc": 0.6138143791482836,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    },
+    "di_ara": {
+      "brier": 0.07490886501756931,
+      "auc": 0.6275737075241438,
+      "base_probability": 0.07784902696450778,
+      "events": 123,
+      "snapshots": 10308,
+      "weight": 111.33717189827257
+    }
+  },
+  "by_fluid_di_ara": {
+    "S1": {
+      "model": "di_ara",
+      "brier": 0.09199627955767242,
+      "auc": 0.5784348478629046,
+      "base_probability": 0.08645762117851347,
+      "events": 34,
+      "snapshots": 564,
+      "weight": 26.69065775640851
+    },
+    "S2": {
+      "model": "di_ara",
+      "brier": 0.06962214127588597,
+      "auc": 0.6527058750281942,
+      "base_probability": 0.07549782729172844,
+      "events": 62,
+      "snapshots": 3103,
+      "weight": 57.91870285098796
+    },
+    "S3": {
+      "model": "di_ara",
+      "brier": 0.08325527074354332,
+      "auc": 0.560471637096121,
+      "base_probability": 0.08804406426261421,
+      "events": 7,
+      "snapshots": 3043,
+      "weight": 6.976873907555452
+    },
+    "S4": {
+      "model": "di_ara",
+      "brier": 0.064372353849795,
+      "auc": 0.7114922368021886,
+      "base_probability": 0.06950916474664687,
+      "events": 20,
+      "snapshots": 3598,
+      "weight": 19.750937383320657
+    }
+  },
+  "by_fluid_constant": {
+    "S1": {
+      "model": "constant",
+      "brier": 0.0791109123323077,
+      "auc": 0.5,
+      "base_probability": 0.08645762117851347,
+      "events": 34,
+      "snapshots": 564,
+      "weight": 26.69065775640851
+    },
+    "S2": {
+      "model": "constant",
+      "brier": 0.06982192003036185,
+      "auc": 0.5,
+      "base_probability": 0.07549782729172844,
+      "events": 62,
+      "snapshots": 3103,
+      "weight": 57.91870285098796
+    },
+    "S3": {
+      "model": "constant",
+      "brier": 0.08041060773074983,
+      "auc": 0.5,
+      "base_probability": 0.08804406426261421,
+      "events": 7,
+      "snapshots": 3043,
+      "weight": 6.976873907555452
+    },
+    "S4": {
+      "model": "constant",
+      "brier": 0.06478042765028375,
+      "auc": 0.5,
+      "base_probability": 0.06950916474664687,
+      "events": 20,
+      "snapshots": 3598,
+      "weight": 19.750937383320657
+    }
+  },
+  "parent_alignment_null": {
+    "reps": 1000,
+    "observed_child_state_brier": 0.07315515275339923,
+    "observed_di_ara_brier": 0.07490886501756931,
+    "observed_improvement_over_child_state": -0.0017537122641700792,
+    "null_improvement_median": -0.008483145963562179,
+    "null_improvement_q95": -0.006613306855342335,
+    "p_ge_observed": 0.000999000999000999
+  },
+  "gates": {
+    "di_ara_brier_below_constant": false,
+    "di_ara_auc_above_half": true,
+    "di_ara_brier_below_child_state": false,
+    "di_ara_brier_below_additive": false,
+    "improves_constant_in_three_of_four_fluids": false,
+    "aligned_parent_beats_shift_control_p_le_005": true
+  },
+  "gate_count": 2,
+  "supported": false
+}

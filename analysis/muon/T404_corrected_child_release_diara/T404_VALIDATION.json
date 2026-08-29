@@ -1,0 +1,45 @@
+{
+  "test": "T404 independent saved-output validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_matches": true,
+    "mapping_has_eight_registered_bins": true,
+    "corrected_times_are_monotonic": true,
+    "linear_and_corrected_maps_are_not_equal": true,
+    "corrected_crest_reproduces_saved_T400": true,
+    "four_registered_bandwidths_present": true,
+    "three_stage_order_recomputes": true,
+    "registered_detector_ratio_range_recomputes": true,
+    "registered_source_residual_range_recomputes": true,
+    "bootstrap_count_is_5000": true,
+    "bootstrap_all_valid": true,
+    "bootstrap_order_fraction_recomputes": true,
+    "bootstrap_interval_recomputes": true,
+    "diara_coordinates_are_bounded": true,
+    "diara_has_all_four_registered_stages": true,
+    "detector_profile_keeps_eight_bins": true,
+    "gate_logic_coordinate": true,
+    "gate_logic_three_stage": true,
+    "source_octave_is_rejected": true,
+    "individual_event_claim_is_blocked": true
+  },
+  "recomputed": {
+    "three_stage_fraction": 0.9998,
+    "detector_octave_residual_95_interval": [
+      -0.1626597740737126,
+      0.24553276729980997
+    ],
+    "source_octave_residual_range": [
+      -0.4766399302908558,
+      -0.3614357060981394
+    ]
+  },
+  "confidence": "Share with caveats",
+  "required_caveats": [
+    "T404 is a correction audit performed after the T403 mapping defect was seen.",
+    "The saved T402 resampling probes overlap and are not independent experiments.",
+    "The Di-ARA storage and flow axes are derived from the same fitted delayed template.",
+    "The source-release octave is rejected; the detector-turn octave remains bootstrap-compatible but its registered point estimates are systematically shorter than 2:1.",
+    "No individual spinning-muon decay is event-linked in these inputs."
+  ]
+}

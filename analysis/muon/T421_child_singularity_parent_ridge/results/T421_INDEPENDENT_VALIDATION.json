@@ -1,0 +1,106 @@
+{
+  "all_checks_pass": true,
+  "checks": {
+    "development_all": true,
+    "freeze_analysis_hash": true,
+    "freeze_protocol_hash": true,
+    "holdout_all": true,
+    "orientation_is_development_frozen": true,
+    "selected_lag_is_development_frozen": true,
+    "validation_all": true
+  },
+  "stages": {
+    "development": {
+      "checks": {
+        "analysis_hash": true,
+        "lag_event_count": true,
+        "literal_ci_lower": true,
+        "literal_ci_upper": true,
+        "literal_gate": true,
+        "literal_median": true,
+        "protocol_hash": true,
+        "zero_event_count": true
+      },
+      "frozen_lag_event_count": 21,
+      "recomputed_zero_lag_exposure": {
+        "ci95": [
+          0.030232661752168433,
+          0.3344440532349447
+        ],
+        "field_count": 13,
+        "median": 0.10011117106649492
+      },
+      "reported_zero_lag_exposure": {
+        "ci95": [
+          0.030232661752168433,
+          0.3344440532349447
+        ],
+        "field_count": 13,
+        "median": 0.10011117106649492
+      },
+      "zero_lag_event_count": 30
+    },
+    "holdout": {
+      "checks": {
+        "analysis_hash": true,
+        "frozen_offset_unavailable": true,
+        "lag_event_count": true,
+        "literal_ci_lower": true,
+        "literal_ci_upper": true,
+        "literal_gate": true,
+        "literal_median": true,
+        "protocol_hash": true,
+        "zero_event_count": true
+      },
+      "frozen_lag_event_count": 0,
+      "recomputed_zero_lag_exposure": {
+        "ci95": [
+          0.01412072759409777,
+          0.34101364479793395
+        ],
+        "field_count": 8,
+        "median": 0.14224323553807694
+      },
+      "reported_zero_lag_exposure": {
+        "ci95": [
+          0.01412072759409777,
+          0.34101364479793395
+        ],
+        "field_count": 8,
+        "median": 0.14224323553807694
+      },
+      "zero_lag_event_count": 14
+    },
+    "validation": {
+      "checks": {
+        "analysis_hash": true,
+        "lag_event_count": true,
+        "literal_ci_lower": true,
+        "literal_ci_upper": true,
+        "literal_gate": true,
+        "literal_median": true,
+        "protocol_hash": true,
+        "zero_event_count": true
+      },
+      "frozen_lag_event_count": 28,
+      "recomputed_zero_lag_exposure": {
+        "ci95": [
+          0.03620127572847065,
+          0.17050435339219483
+        ],
+        "field_count": 13,
+        "median": 0.0606873360750978
+      },
+      "reported_zero_lag_exposure": {
+        "ci95": [
+          0.03620127572847065,
+          0.17050435339219483
+        ],
+        "field_count": 13,
+        "median": 0.0606873360750978
+      },
+      "zero_lag_event_count": 32
+    }
+  },
+  "test": "T421 independent saved-artifact validation"
+}

@@ -233,6 +233,7 @@ reports.
 | Recorded predictions and outcomes | [MASTER_PREDICTION_LEDGER.md](MASTER_PREDICTION_LEDGER.md) |
 | Timestamped conceptual provenance | [FableConvo/PROVENANCE_LEDGER.md](FableConvo/PROVENANCE_LEDGER.md) |
 | The testing rules used for new work | [FableConvo/TEST_PROTOCOL.md](FableConvo/TEST_PROTOCOL.md) |
+| Required post-test bridge map and report structure | [FableConvo/POST_TEST_REPORT_TEMPLATE.md](FableConvo/POST_TEST_REPORT_TEMPLATE.md) |
 
 ---
 
@@ -258,6 +259,13 @@ remain valid controls or secondary views when declared.
 Failures remain part of the record. Poles, constants and scale boundaries
 must not be changed after looking at the target and then reported as if they
 were frozen.
+
+Every durable report must also preserve the relational bridge from the real
+identity and raw measurement, through each transformation, to the declared ARA
+cut and its established-science translation. Changes of identity, rung, axis,
+direction, medium, dataset, observable or question belong in the report's Pivot
+Log; they must never occur silently. Use the
+[post-test report template](FableConvo/POST_TEST_REPORT_TEMPLATE.md).
 
 ---
 

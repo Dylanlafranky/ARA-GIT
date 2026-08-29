@@ -1,0 +1,2482 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T430 \u2014 Remaining Traversal and Connection-Facing State",
+    "description": "Frozen inverse-gradient ARA test on four previously unseen binary-black-hole strain events.",
+    "generatedAt": "2026-08-24T00:00:00+10:00",
+    "sources": [
+      {
+        "id": "t430-analysis",
+        "label": "T430 frozen ARA analysis",
+        "path": "analysis/irrationality_di_ara/T430_remaining_traversal_connection"
+      },
+      {
+        "id": "gwosc-gwtc1",
+        "label": "GWOSC GWTC-1 public event records",
+        "href": "https://gwosc.org/GWTC-1/"
+      },
+      {
+        "id": "t430-gates",
+        "label": "T430 frozen gate query",
+        "query": {
+          "engine": "SQLite",
+          "language": "sql",
+          "sql": "SELECT gate, passes, required, events FROM gate_results ORDER BY rowid",
+          "description": "Return all five frozen confirmation gates and the required three-of-four count.",
+          "tables_used": [
+            "gate_results"
+          ],
+          "metric_definitions": [
+            "passes is the number of four untouched confirmation events meeting the frozen gate; required is three."
+          ]
+        }
+      },
+      {
+        "id": "t430-paths",
+        "label": "T430 reviewed path sample query",
+        "query": {
+          "engine": "SQLite",
+          "language": "sql",
+          "sql": "SELECT event, time_s, M_rem, C_acc, TE_ARA_sum, TE_ARA_residual, C_amount, C_density, local_period_ARA, frequency_hz FROM ara_path_samples ORDER BY event, time_s",
+          "description": "Return deterministic chronological samples of remaining traversal and independently measured connection-facing state.",
+          "tables_used": [
+            "ara_path_samples"
+          ],
+          "filters": [
+            "approximately 40 evenly spaced rows per event"
+          ]
+        }
+      },
+      {
+        "id": "t430-controls",
+        "label": "T430 matched off-source comparison query",
+        "query": {
+          "engine": "SQLite",
+          "language": "sql",
+          "sql": "SELECT event, series, median_residual, closure_occupancy FROM control_comparison ORDER BY event, series",
+          "description": "Compare event-window closure statistics with each event's matched-duration off-source median.",
+          "tables_used": [
+            "control_comparison"
+          ],
+          "metric_definitions": [
+            "median_residual is median absolute deviation of M_rem+C_acc from 2.",
+            "closure_occupancy is the fraction with absolute residual at most 0.50."
+          ]
+        }
+      },
+      {
+        "id": "t430-summary",
+        "label": "T430 exact event score query",
+        "query": {
+          "engine": "SQLite",
+          "language": "sql",
+          "sql": "SELECT event, inverse_rho, inverse_shift_p, connection_time_rho, connection_time_shift_p, median_te_ara_residual, residual_offsource_percentile, closure_occupancy, occupancy_offsource_percentile, detector_connection_rho, detector_connection_shift_p, inverse_pass, closure_control_pass, agreement_pass FROM event_summary ORDER BY event",
+          "description": "Return the frozen per-event inverse-gradient, closure and detector-agreement scores.",
+          "tables_used": [
+            "event_summary"
+          ],
+          "metric_definitions": [
+            "rho is Spearman rank correlation.",
+            "p is a one-sided circular-shift probability."
+          ]
+        }
+      }
+    ],
+    "charts": [
+      {
+        "id": "chart-gates",
+        "title": "Frozen confirmation gates",
+        "subtitle": "Passing events out of four; three were required for every gate.",
+        "type": "bar",
+        "dataset": "gate_results",
+        "sourceId": "t430-gates",
+        "encodings": {
+          "x": {
+            "field": "gate",
+            "type": "nominal",
+            "label": "Gate"
+          },
+          "y": {
+            "field": "passes",
+            "type": "quantitative",
+            "label": "Passing events",
+            "unit": "events"
+          }
+        },
+        "layout": "full"
+      },
+      {
+        "id": "chart-path",
+        "title": "Remaining traversal and connection-facing state",
+        "subtitle": "Chronological samples from four untouched events; the pure TE-ARA shore would run from (2,0) to (0,2).",
+        "type": "scatter",
+        "dataset": "path_samples",
+        "sourceId": "t430-paths",
+        "encodings": {
+          "x": {
+            "field": "M_rem",
+            "type": "quantitative",
+            "label": "Remaining traversal",
+            "unit": "0\u20132"
+          },
+          "y": {
+            "field": "C_acc",
+            "type": "quantitative",
+            "label": "Connection-facing state",
+            "unit": "0\u20132"
+          },
+          "color": {
+            "field": "event",
+            "type": "nominal",
+            "label": "Event"
+          },
+          "tooltip": [
+            {
+              "field": "event",
+              "type": "text"
+            },
+            {
+              "field": "time_s",
+              "type": "quantitative",
+              "label": "Seconds to event"
+            },
+            {
+              "field": "TE_ARA_sum",
+              "type": "quantitative",
+              "label": "M+C"
+            },
+            {
+              "field": "TE_ARA_residual",
+              "type": "quantitative",
+              "label": "Closure residual"
+            }
+          ]
+        },
+        "layout": "full",
+        "maxRows": 1000
+      },
+      {
+        "id": "chart-residual",
+        "title": "Event and off-source TE-ARA residual",
+        "subtitle": "Event windows did not show uniquely smaller closure residuals.",
+        "type": "bar",
+        "dataset": "control_comparison",
+        "sourceId": "t430-controls",
+        "encodings": {
+          "x": {
+            "field": "event",
+            "type": "nominal",
+            "label": "Event"
+          },
+          "y": {
+            "field": "median_residual",
+            "type": "quantitative",
+            "label": "Median absolute residual"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Window type"
+          }
+        },
+        "options": {
+          "grouping": "grouped"
+        },
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "table-events",
+        "title": "Untouched event scorecard",
+        "subtitle": "Exact frozen metrics; all event gates were false.",
+        "dataset": "event_summary",
+        "sourceId": "t430-summary",
+        "defaultSort": {
+          "field": "event",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "event",
+            "label": "Event",
+            "type": "text"
+          },
+          {
+            "field": "inverse_rho",
+            "label": "Inverse rho",
+            "format": "number"
+          },
+          {
+            "field": "inverse_shift_p",
+            "label": "Inverse p",
+            "format": "number"
+          },
+          {
+            "field": "median_te_ara_residual",
+            "label": "Median residual",
+            "format": "number"
+          },
+          {
+            "field": "residual_offsource_percentile",
+            "label": "Residual control pct",
+            "format": "percent"
+          },
+          {
+            "field": "closure_occupancy",
+            "label": "Closure occupancy",
+            "format": "percent"
+          },
+          {
+            "field": "occupancy_offsource_percentile",
+            "label": "Occupancy control pct",
+            "format": "percent"
+          },
+          {
+            "field": "detector_connection_rho",
+            "label": "H1/L1 rho",
+            "format": "number"
+          },
+          {
+            "field": "detector_connection_shift_p",
+            "label": "H1/L1 p",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T430 \u2014 Remaining Traversal and Connection-Facing State"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "body": "## Technical Summary\n\n**The frozen T430 construction was not supported.** Zero of four untouched events passed any of the five prespecified gates. The correction from T429 was conceptually necessary\u2014remaining traversal was separated from connection-facing state\u2014but the chosen strain features did not recover a shared, event-specific inverse gradient."
+      },
+      {
+        "id": "findings",
+        "type": "markdown",
+        "body": "## Findings\n\nMedian `M_rem+C_acc` values were near 2 (1.87\u20132.04), but this is not independent closure evidence: `M_rem` is window-normalized around a midpoint of 1 and the empirical-CDF connection features are centered near 1. Matched off-source windows were at least as closed. The event inverse correlations ranged from \u22120.068 to +0.296 and none beat its temporal-shift control."
+      },
+      {
+        "id": "gates",
+        "type": "chart",
+        "chartId": "chart-gates"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Definitions\n\n`M_rem` is the phase-cycle budget still present between each sample and the frozen endpoint, oriented 2\u21920. `C_acc` is the frozen name for the mean of spectral amount and spectral concentration, each mapped independently from off-source data. Importantly, `C_acc` is an instantaneous connection-facing state\u2014not a cumulative integral."
+      },
+      {
+        "id": "path",
+        "type": "chart",
+        "chartId": "chart-path"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "body": "## Methodology\n\nEach event remained its own identity. H1 and L1 were independent observations, aligned only within \u00b18 ms. The primary interval was \u22120.50 to \u22120.03 s with a 64 ms STFT and 4 ms hop. Four GWTC-1 events absent from T427\u2013T429 were held untouched until the protocol and hash were frozen. Every event comparison used 66 equal-duration off-source windows plus circular-shift controls."
+      },
+      {
+        "id": "residual",
+        "type": "chart",
+        "chartId": "chart-residual"
+      },
+      {
+        "id": "scorecard",
+        "type": "table",
+        "tableId": "table-events"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and Robustness\n\nTwo frozen gates are rank-redundant: because `M_rem` is strictly decreasing, rho(`M_rem`,`C_acc`) is exactly the negative of rho(time,`C_acc`). They must be treated as one underlying ordering result. H1/L1 connection histories also failed to replicate, suggesting that per-frame amount/concentration at this weak-signal scale is dominated by detector-specific structure. The official event time defines the endpoint, so the test is retrospective."
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Next Steps\n\nDo not move the current goalposts. T430 remains failed. A new test should distinguish two alternatives before running: (1) **state gradient**\u2014compare remaining traversal with the instantaneous connection child using a coherently reconstructed source signal; or (2) **stored accumulation**\u2014define a genuinely causal cumulative connection budget and freeze how it is normalized. The latter is closer to the word \u2018accumulation\u2019 but is a different instrument."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Open Questions\n\nIs connection meant to be the instantaneous density at each time slice, or the stored total built across prior slices? Is the relevant ARA identity the binary system, the detector-visible coherent mode, or a shorter child near merger? Those choices change the relational cut and must be named before another validation set is opened."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-24T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "gate_results": [
+        {
+          "gate": "Inverse gradient",
+          "passes": 0,
+          "required": 3,
+          "events": 4
+        },
+        {
+          "gate": "Residual vs control",
+          "passes": 0,
+          "required": 3,
+          "events": 4
+        },
+        {
+          "gate": "Connection growth",
+          "passes": 0,
+          "required": 3,
+          "events": 4
+        },
+        {
+          "gate": "Closure occupancy",
+          "passes": 0,
+          "required": 3,
+          "events": 4
+        },
+        {
+          "gate": "Detector agreement",
+          "passes": 0,
+          "required": 3,
+          "events": 4
+        }
+      ],
+      "path_samples": [
+        {
+          "event": "GW151012",
+          "time_s": -0.4969239235,
+          "M_rem": 2.0,
+          "C_acc": 0.6951427874,
+          "TE_ARA_sum": 2.6951427874,
+          "TE_ARA_residual": 0.6951427874,
+          "C_amount": 0.9597266292,
+          "C_density": 0.4305589456,
+          "local_period_ARA": 1.1344886502,
+          "frequency_hz": 229.5830481135
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4852051735,
+          "M_rem": 1.9534196943,
+          "C_acc": 1.0676104467,
+          "TE_ARA_sum": 3.021030141,
+          "TE_ARA_residual": 1.021030141,
+          "C_amount": 1.1242372468,
+          "C_density": 1.0109836466,
+          "local_period_ARA": 1.1996582866,
+          "frequency_hz": 219.4141062564
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4734864235,
+          "M_rem": 1.9075480428,
+          "C_acc": 0.9937759336,
+          "TE_ARA_sum": 2.9013239764,
+          "TE_ARA_residual": 0.9013239764,
+          "C_amount": 1.4051745179,
+          "C_density": 0.5823773493,
+          "local_period_ARA": 1.2328533073,
+          "frequency_hz": 221.8243934054
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4617676735,
+          "M_rem": 1.8597782481,
+          "C_acc": 0.7373688064,
+          "TE_ARA_sum": 2.5971470545,
+          "TE_ARA_residual": 0.5971470545,
+          "C_amount": 1.2904564315,
+          "C_density": 0.1842811814,
+          "local_period_ARA": 0.9116426654,
+          "frequency_hz": 241.1001609588
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4500489235,
+          "M_rem": 1.8093728172,
+          "C_acc": 0.8253600195,
+          "TE_ARA_sum": 2.6347328367,
+          "TE_ARA_residual": 0.6347328367,
+          "C_amount": 1.3910178179,
+          "C_density": 0.2597022211,
+          "local_period_ARA": 0.8076641445,
+          "frequency_hz": 241.1001609588
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4383301735,
+          "M_rem": 1.7587421197,
+          "C_acc": 0.9094459361,
+          "TE_ARA_sum": 2.6681880558,
+          "TE_ARA_residual": 0.6681880558,
+          "C_amount": 1.3673419575,
+          "C_density": 0.4515499146,
+          "local_period_ARA": 1.0246521845,
+          "frequency_hz": 244.332658587
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4266114235,
+          "M_rem": 1.7076608891,
+          "C_acc": 0.7803270686,
+          "TE_ARA_sum": 2.4879879577,
+          "TE_ARA_residual": 0.4879879577,
+          "C_amount": 1.0017085672,
+          "C_density": 0.5589455699,
+          "local_period_ARA": 0.6106907493,
+          "frequency_hz": 254.7031812321
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4148926735,
+          "M_rem": 1.6514892131,
+          "C_acc": 1.2136929461,
+          "TE_ARA_sum": 2.8651821592,
+          "TE_ARA_residual": 0.8651821592,
+          "C_amount": 0.9936538931,
+          "C_density": 1.433731999,
+          "local_period_ARA": 0.0546741518,
+          "frequency_hz": 275.6704609705
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.4031739235,
+          "M_rem": 1.5938563675,
+          "C_acc": 0.9859653405,
+          "TE_ARA_sum": 2.579821708,
+          "TE_ARA_residual": 0.579821708,
+          "C_amount": 1.3814986576,
+          "C_density": 0.5904320234,
+          "local_period_ARA": 0.4869416646,
+          "frequency_hz": 261.0756327692
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3914551735,
+          "M_rem": 1.5417733792,
+          "C_acc": 0.8136441299,
+          "TE_ARA_sum": 2.355417509,
+          "TE_ARA_residual": 0.355417509,
+          "C_amount": 1.405906761,
+          "C_density": 0.2213814987,
+          "local_period_ARA": 1.1283866244,
+          "frequency_hz": 240.6349546328
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3797364235,
+          "M_rem": 1.4915259044,
+          "C_acc": 0.6612155236,
+          "TE_ARA_sum": 2.1527414279,
+          "TE_ARA_residual": 0.1527414279,
+          "C_amount": 1.0527215035,
+          "C_density": 0.2697095436,
+          "local_period_ARA": 0.9255552844,
+          "frequency_hz": 237.094785149
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3680176735,
+          "M_rem": 1.4419578545,
+          "C_acc": 0.9765682206,
+          "TE_ARA_sum": 2.4185260751,
+          "TE_ARA_residual": 0.4185260751,
+          "C_amount": 1.2667805711,
+          "C_density": 0.6863558701,
+          "local_period_ARA": 0.9514278741,
+          "frequency_hz": 237.094785149
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3562989235,
+          "M_rem": 1.3927700786,
+          "C_acc": 1.0888454967,
+          "TE_ARA_sum": 2.4816155753,
+          "TE_ARA_residual": 0.4816155753,
+          "C_amount": 1.3919941421,
+          "C_density": 0.7856968514,
+          "local_period_ARA": 1.1737856969,
+          "frequency_hz": 230.7054410936
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3445801735,
+          "M_rem": 1.3445916515,
+          "C_acc": 1.2287039297,
+          "TE_ARA_sum": 2.5732955812,
+          "TE_ARA_residual": 0.5732955812,
+          "C_amount": 1.6731754943,
+          "C_density": 0.7842323651,
+          "local_period_ARA": 1.1586526727,
+          "frequency_hz": 230.1868131479
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3328614235,
+          "M_rem": 1.2964876776,
+          "C_acc": 1.4902367586,
+          "TE_ARA_sum": 2.7867244362,
+          "TE_ARA_residual": 0.7867244362,
+          "C_amount": 1.5023187698,
+          "C_density": 1.4781547474,
+          "local_period_ARA": 1.3575787161,
+          "frequency_hz": 230.044279172
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3211426735,
+          "M_rem": 1.2483936367,
+          "C_acc": 0.7651940444,
+          "TE_ARA_sum": 2.0135876811,
+          "TE_ARA_residual": 0.0135876811,
+          "C_amount": 1.1642665365,
+          "C_density": 0.3661215524,
+          "local_period_ARA": 0.8572125946,
+          "frequency_hz": 243.6860517532
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.3094239235,
+          "M_rem": 1.1942363741,
+          "C_acc": 0.8686844032,
+          "TE_ARA_sum": 2.0629207773,
+          "TE_ARA_residual": 0.0629207773,
+          "C_amount": 1.000244081,
+          "C_density": 0.7371247254,
+          "local_period_ARA": 0.1974615572,
+          "frequency_hz": 274.7172663313
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2977051735,
+          "M_rem": 1.1368028074,
+          "C_acc": 0.751647547,
+          "TE_ARA_sum": 1.8884503544,
+          "TE_ARA_residual": 0.1115496456,
+          "C_amount": 0.706614596,
+          "C_density": 0.7966804979,
+          "local_period_ARA": 0.1591408348,
+          "frequency_hz": 274.7172663313
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2859864235,
+          "M_rem": 1.0802145256,
+          "C_acc": 0.6410788382,
+          "TE_ARA_sum": 1.7212933637,
+          "TE_ARA_residual": 0.2787066363,
+          "C_amount": 0.7881376617,
+          "C_density": 0.4940200146,
+          "local_period_ARA": 0.6670734684,
+          "frequency_hz": 251.1517224406
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2742676735,
+          "M_rem": 1.029588163,
+          "C_acc": 0.7527459116,
+          "TE_ARA_sum": 1.7823340746,
+          "TE_ARA_residual": 0.2176659254,
+          "C_amount": 0.6753722236,
+          "C_density": 0.8301195997,
+          "local_period_ARA": 1.251647547,
+          "frequency_hz": 227.3445483981
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2625489235,
+          "M_rem": 0.9826636842,
+          "C_acc": 0.9740053698,
+          "TE_ARA_sum": 1.956669054,
+          "TE_ARA_residual": 0.043330946,
+          "C_amount": 0.4522821577,
+          "C_density": 1.4957285819,
+          "local_period_ARA": 1.4481327801,
+          "frequency_hz": 223.0027384632
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2508301735,
+          "M_rem": 0.9360417779,
+          "C_acc": 0.8735660239,
+          "TE_ARA_sum": 1.8096078018,
+          "TE_ARA_residual": 0.1903921982,
+          "C_amount": 0.7366365633,
+          "C_density": 1.0104954845,
+          "local_period_ARA": 1.1298511106,
+          "frequency_hz": 229.7904212968
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2391114235,
+          "M_rem": 0.8867164451,
+          "C_acc": 1.2212594581,
+          "TE_ARA_sum": 2.1079759033,
+          "TE_ARA_residual": 0.1079759033,
+          "C_amount": 1.440810349,
+          "C_density": 1.0017085672,
+          "local_period_ARA": 0.943861362,
+          "frequency_hz": 244.5444799552
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2273926735,
+          "M_rem": 0.8352300585,
+          "C_acc": 1.2302904564,
+          "TE_ARA_sum": 2.0655205149,
+          "TE_ARA_residual": 0.0655205149,
+          "C_amount": 1.5904320234,
+          "C_density": 0.8701488894,
+          "local_period_ARA": 0.8435440566,
+          "frequency_hz": 247.133671688
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2156739235,
+          "M_rem": 0.7835632361,
+          "C_acc": 1.1729314132,
+          "TE_ARA_sum": 1.9564946493,
+          "TE_ARA_residual": 0.0435053507,
+          "C_amount": 1.1613375641,
+          "C_density": 1.1845252624,
+          "local_period_ARA": 0.8274347083,
+          "frequency_hz": 245.3456886621
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.2039551735,
+          "M_rem": 0.7333965578,
+          "C_acc": 0.9765682206,
+          "TE_ARA_sum": 1.7099647785,
+          "TE_ARA_residual": 0.2900352215,
+          "C_amount": 0.4864535026,
+          "C_density": 1.4666829387,
+          "local_period_ARA": 1.2069807176,
+          "frequency_hz": 236.93413556
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1922364235,
+          "M_rem": 0.683862094,
+          "C_acc": 0.8807664144,
+          "TE_ARA_sum": 1.5646285085,
+          "TE_ARA_residual": 0.4353714915,
+          "C_amount": 0.8359775445,
+          "C_density": 0.9255552844,
+          "local_period_ARA": 1.0004881621,
+          "frequency_hz": 236.93413556
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1805176735,
+          "M_rem": 0.6330038101,
+          "C_acc": 1.2531120332,
+          "TE_ARA_sum": 1.8861158433,
+          "TE_ARA_residual": 0.1138841567,
+          "C_amount": 1.2150353918,
+          "C_density": 1.2911886746,
+          "local_period_ARA": 0.5423480596,
+          "frequency_hz": 258.0755310088
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1687989235,
+          "M_rem": 0.5780698775,
+          "C_acc": 0.9624115206,
+          "TE_ARA_sum": 1.5404813981,
+          "TE_ARA_residual": 0.4595186019,
+          "C_amount": 1.1042226019,
+          "C_density": 0.8206004393,
+          "local_period_ARA": 0.2741030022,
+          "frequency_hz": 265.1036922581
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1570801735,
+          "M_rem": 0.5226461657,
+          "C_acc": 0.5853063217,
+          "TE_ARA_sum": 1.1079524874,
+          "TE_ARA_residual": 0.8920475126,
+          "C_amount": 0.8423236515,
+          "C_density": 0.3282889919,
+          "local_period_ARA": 0.5443007078,
+          "frequency_hz": 260.2087133361
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1453614235,
+          "M_rem": 0.4689696989,
+          "C_acc": 0.6139858433,
+          "TE_ARA_sum": 1.0829555422,
+          "TE_ARA_residual": 0.9170444578,
+          "C_amount": 0.8860141567,
+          "C_density": 0.3419575299,
+          "local_period_ARA": 0.8313400049,
+          "frequency_hz": 249.0340972343
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1336426735,
+          "M_rem": 0.4184302136,
+          "C_acc": 0.9901147181,
+          "TE_ARA_sum": 1.4085449317,
+          "TE_ARA_residual": 0.5914550683,
+          "C_amount": 1.2460336832,
+          "C_density": 0.734195753,
+          "local_period_ARA": 1.1542592141,
+          "frequency_hz": 225.3511758929
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1219239235,
+          "M_rem": 0.3713173329,
+          "C_acc": 1.517451794,
+          "TE_ARA_sum": 1.8887691269,
+          "TE_ARA_residual": 0.1112308731,
+          "C_amount": 1.4530144008,
+          "C_density": 1.5818891872,
+          "local_period_ARA": 1.3670978765,
+          "frequency_hz": 225.3511758929
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.1102051735,
+          "M_rem": 0.3242937266,
+          "C_acc": 1.3387844764,
+          "TE_ARA_sum": 1.663078203,
+          "TE_ARA_residual": 0.336921797,
+          "C_amount": 1.5167195509,
+          "C_density": 1.160849402,
+          "local_period_ARA": 1.1728093727,
+          "frequency_hz": 224.0701190159
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0984864235,
+          "M_rem": 0.2772633609,
+          "C_acc": 1.4060288016,
+          "TE_ARA_sum": 1.6832921625,
+          "TE_ARA_residual": 0.3167078375,
+          "C_amount": 1.321698804,
+          "C_density": 1.4903587991,
+          "local_period_ARA": 1.3192579937,
+          "frequency_hz": 226.9143079441
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0867676735,
+          "M_rem": 0.2297169954,
+          "C_acc": 0.6702465218,
+          "TE_ARA_sum": 0.8999635173,
+          "TE_ARA_residual": 1.1000364827,
+          "C_amount": 0.5679765682,
+          "C_density": 0.7725164755,
+          "local_period_ARA": 1.2304124969,
+          "frequency_hz": 227.679788341
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0750489235,
+          "M_rem": 0.1805477589,
+          "C_acc": 0.4552111301,
+          "TE_ARA_sum": 0.635758889,
+          "TE_ARA_residual": 1.364241111,
+          "C_amount": 0.2548206004,
+          "C_density": 0.6556016598,
+          "local_period_ARA": 0.7432267513,
+          "frequency_hz": 243.4868839596
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0633301735,
+          "M_rem": 0.1296433495,
+          "C_acc": 0.6243592873,
+          "TE_ARA_sum": 0.7540026368,
+          "TE_ARA_residual": 1.2459973632,
+          "C_amount": 0.8723456187,
+          "C_density": 0.3763729558,
+          "local_period_ARA": 0.8032706859,
+          "frequency_hz": 243.4868839596
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0516114235,
+          "M_rem": 0.0793292725,
+          "C_acc": 0.8107151574,
+          "TE_ARA_sum": 0.8900444299,
+          "TE_ARA_residual": 1.1099555701,
+          "C_amount": 1.4779106663,
+          "C_density": 0.1435196485,
+          "local_period_ARA": 1.0524774225,
+          "frequency_hz": 233.7965592213
+        },
+        {
+          "event": "GW151012",
+          "time_s": -0.0398926735,
+          "M_rem": 0.0310362038,
+          "C_acc": 1.1026360752,
+          "TE_ARA_sum": 1.133672279,
+          "TE_ARA_residual": 0.866327721,
+          "C_amount": 1.3807664144,
+          "C_density": 0.8245057359,
+          "local_period_ARA": 1.209665609,
+          "frequency_hz": 225.233126553
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4977049828,
+          "M_rem": 2.0,
+          "C_acc": 0.992677569,
+          "TE_ARA_sum": 2.992677569,
+          "TE_ARA_residual": 0.992677569,
+          "C_amount": 0.9914571638,
+          "C_density": 0.9938979741,
+          "local_period_ARA": 1.1088601416,
+          "frequency_hz": 227.4913539873
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4859862328,
+          "M_rem": 1.9535379804,
+          "C_acc": 1.3541615816,
+          "TE_ARA_sum": 3.3076995621,
+          "TE_ARA_residual": 1.3076995621,
+          "C_amount": 1.433731999,
+          "C_density": 1.2745911643,
+          "local_period_ARA": 1.1896509641,
+          "frequency_hz": 227.4913539873
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4742674828,
+          "M_rem": 1.9070010398,
+          "C_acc": 1.3116914816,
+          "TE_ARA_sum": 3.2186925214,
+          "TE_ARA_residual": 1.2186925214,
+          "C_amount": 1.6333902856,
+          "C_density": 0.9899926776,
+          "local_period_ARA": 1.0275811569,
+          "frequency_hz": 236.4972959028
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4625487328,
+          "M_rem": 1.8564659627,
+          "C_acc": 1.1761044667,
+          "TE_ARA_sum": 3.0325704294,
+          "TE_ARA_residual": 1.0325704294,
+          "C_amount": 1.4110324628,
+          "C_density": 0.9411764706,
+          "local_period_ARA": 0.4766902612,
+          "frequency_hz": 270.3099669968
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4508299828,
+          "M_rem": 1.7995564811,
+          "C_acc": 1.0208689285,
+          "TE_ARA_sum": 2.8204254096,
+          "TE_ARA_residual": 0.8204254096,
+          "C_amount": 1.3795460093,
+          "C_density": 0.6621918477,
+          "local_period_ARA": 0.0942152795,
+          "frequency_hz": 291.0053190179
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4391112328,
+          "M_rem": 1.7401225967,
+          "C_acc": 1.0684647303,
+          "TE_ARA_sum": 2.808587327,
+          "TE_ARA_residual": 0.808587327,
+          "C_amount": 1.1776909934,
+          "C_density": 0.9592384672,
+          "local_period_ARA": 0.0639492311,
+          "frequency_hz": 291.0053190179
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4273924828,
+          "M_rem": 1.680856278,
+          "C_acc": 1.2831340005,
+          "TE_ARA_sum": 2.9639902785,
+          "TE_ARA_residual": 0.9639902785,
+          "C_amount": 1.4371491335,
+          "C_density": 1.1291188675,
+          "local_period_ARA": 0.2970466195,
+          "frequency_hz": 280.6034937535
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4156737328,
+          "M_rem": 1.6246949961,
+          "C_acc": 1.258725897,
+          "TE_ARA_sum": 2.8834208931,
+          "TE_ARA_residual": 0.8834208931,
+          "C_amount": 1.6956309495,
+          "C_density": 0.8218208445,
+          "local_period_ARA": 0.3529411765,
+          "frequency_hz": 268.4075006943
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.4039549828,
+          "M_rem": 1.5699599817,
+          "C_acc": 1.1649987796,
+          "TE_ARA_sum": 2.7349587613,
+          "TE_ARA_residual": 0.7349587613,
+          "C_amount": 1.6321698804,
+          "C_density": 0.6978276788,
+          "local_period_ARA": 0.4037100317,
+          "frequency_hz": 264.6684037856
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3922362328,
+          "M_rem": 1.5173433075,
+          "C_acc": 1.0540639492,
+          "TE_ARA_sum": 2.5714072567,
+          "TE_ARA_residual": 0.5714072567,
+          "C_amount": 1.1974615572,
+          "C_density": 0.9106663412,
+          "local_period_ARA": 0.909201855,
+          "frequency_hz": 240.2002763623
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3805174828,
+          "M_rem": 1.469803643,
+          "C_acc": 0.713448865,
+          "TE_ARA_sum": 2.183252508,
+          "TE_ARA_residual": 0.183252508,
+          "C_amount": 0.7217476202,
+          "C_density": 0.7051501098,
+          "local_period_ARA": 1.3348791799,
+          "frequency_hz": 222.1695439224
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3687987328,
+          "M_rem": 1.4248402058,
+          "C_acc": 0.5883573346,
+          "TE_ARA_sum": 2.0131975404,
+          "TE_ARA_residual": 0.0131975404,
+          "C_amount": 0.6829387357,
+          "C_density": 0.4937759336,
+          "local_period_ARA": 1.468879668,
+          "frequency_hz": 218.4288071504
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3570799828,
+          "M_rem": 1.3802290883,
+          "C_acc": 1.1464486209,
+          "TE_ARA_sum": 2.5266777093,
+          "TE_ARA_residual": 0.5266777093,
+          "C_amount": 1.077129607,
+          "C_density": 1.2157676349,
+          "local_period_ARA": 1.4320234318,
+          "frequency_hz": 218.4288071504
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3453612328,
+          "M_rem": 1.3352644266,
+          "C_acc": 1.2247986331,
+          "TE_ARA_sum": 2.5600630597,
+          "TE_ARA_residual": 0.5600630597,
+          "C_amount": 1.2806931901,
+          "C_density": 1.1689040762,
+          "local_period_ARA": 1.1989260434,
+          "frequency_hz": 228.1012733026
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3336424828,
+          "M_rem": 1.2876046072,
+          "C_acc": 0.9250671223,
+          "TE_ARA_sum": 2.2126717295,
+          "TE_ARA_residual": 0.2126717295,
+          "C_amount": 1.2174762021,
+          "C_density": 0.6326580425,
+          "local_period_ARA": 0.7800829876,
+          "frequency_hz": 245.9946755084
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3219237328,
+          "M_rem": 1.2356487172,
+          "C_acc": 0.7190627288,
+          "TE_ARA_sum": 1.954711446,
+          "TE_ARA_residual": 0.045288554,
+          "C_amount": 1.1613375641,
+          "C_density": 0.2767878936,
+          "local_period_ARA": 0.3202343178,
+          "frequency_hz": 262.5144516654
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.3102049828,
+          "M_rem": 1.1820337055,
+          "C_acc": 0.796924579,
+          "TE_ARA_sum": 1.9789582845,
+          "TE_ARA_residual": 0.0210417155,
+          "C_amount": 1.2428606297,
+          "C_density": 0.3509885282,
+          "local_period_ARA": 0.4898706371,
+          "frequency_hz": 262.5144516654
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2984862328,
+          "M_rem": 1.1294899308,
+          "C_acc": 1.1036123993,
+          "TE_ARA_sum": 2.2331023301,
+          "TE_ARA_residual": 0.2331023301,
+          "C_amount": 1.2845984867,
+          "C_density": 0.9226263119,
+          "local_period_ARA": 0.7849646082,
+          "frequency_hz": 249.491352115
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2867674828,
+          "M_rem": 1.0785347104,
+          "C_acc": 1.1066634123,
+          "TE_ARA_sum": 2.1851981227,
+          "TE_ARA_residual": 0.1851981227,
+          "C_amount": 1.2457896021,
+          "C_density": 0.9675372224,
+          "local_period_ARA": 0.8457407859,
+          "frequency_hz": 249.491352115
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2750487328,
+          "M_rem": 1.0274785446,
+          "C_acc": 0.9376372956,
+          "TE_ARA_sum": 1.9651158402,
+          "TE_ARA_residual": 0.0348841598,
+          "C_amount": 1.1254576519,
+          "C_density": 0.7498169392,
+          "local_period_ARA": 0.7193068099,
+          "frequency_hz": 256.3659982647
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2633299828,
+          "M_rem": 0.9751192711,
+          "C_acc": 0.7775201367,
+          "TE_ARA_sum": 1.7526394078,
+          "TE_ARA_residual": 0.2473605922,
+          "C_amount": 0.7461557237,
+          "C_density": 0.8088845497,
+          "local_period_ARA": 0.4530144008,
+          "frequency_hz": 256.3659982647
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2516112328,
+          "M_rem": 0.9229894201,
+          "C_acc": 0.6545032951,
+          "TE_ARA_sum": 1.5774927152,
+          "TE_ARA_residual": 0.4225072848,
+          "C_amount": 0.5955577252,
+          "C_density": 0.713448865,
+          "local_period_ARA": 1.0917744691,
+          "frequency_hz": 233.6396648194
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2398924828,
+          "M_rem": 0.8784807702,
+          "C_acc": 1.2017329753,
+          "TE_ARA_sum": 2.0802137456,
+          "TE_ARA_residual": 0.0802137456,
+          "C_amount": 1.0939711984,
+          "C_density": 1.3094947523,
+          "local_period_ARA": 1.6692701977,
+          "frequency_hz": 204.4133844139
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2281737328,
+          "M_rem": 0.8367321125,
+          "C_acc": 1.524286063,
+          "TE_ARA_sum": 2.3610181755,
+          "TE_ARA_residual": 0.3610181755,
+          "C_amount": 1.4427629973,
+          "C_density": 1.6058091286,
+          "local_period_ARA": 1.5286795216,
+          "frequency_hz": 204.4133844139
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2164549828,
+          "M_rem": 0.7942891959,
+          "C_acc": 1.3656333903,
+          "TE_ARA_sum": 2.1599225861,
+          "TE_ARA_residual": 0.1599225861,
+          "C_amount": 1.4383695387,
+          "C_density": 1.2928972419,
+          "local_period_ARA": 1.3253600195,
+          "frequency_hz": 215.6638924584
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.2047362328,
+          "M_rem": 0.7492120129,
+          "C_acc": 1.5034171345,
+          "TE_ARA_sum": 2.2526291474,
+          "TE_ARA_residual": 0.2526291474,
+          "C_amount": 1.1979497193,
+          "C_density": 1.8088845497,
+          "local_period_ARA": 1.1137417623,
+          "frequency_hz": 230.8761854416
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1930174828,
+          "M_rem": 0.7011874131,
+          "C_acc": 1.2886258238,
+          "TE_ARA_sum": 1.9898132369,
+          "TE_ARA_residual": 0.0101867631,
+          "C_amount": 1.0082987552,
+          "C_density": 1.5689528924,
+          "local_period_ARA": 0.9033439102,
+          "frequency_hz": 244.1358597269
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1812987328,
+          "M_rem": 0.649716086,
+          "C_acc": 1.0896997803,
+          "TE_ARA_sum": 1.7394158664,
+          "TE_ARA_residual": 0.2605841336,
+          "C_amount": 0.9729070051,
+          "C_density": 1.2064925555,
+          "local_period_ARA": 0.5255064681,
+          "frequency_hz": 270.6971012708
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1695799828,
+          "M_rem": 0.5932475754,
+          "C_acc": 0.8282889919,
+          "TE_ARA_sum": 1.4215365673,
+          "TE_ARA_residual": 0.5784634327,
+          "C_amount": 0.8969978033,
+          "C_density": 0.7595801806,
+          "local_period_ARA": 0.2921649988,
+          "frequency_hz": 279.3804496539
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1578612328,
+          "M_rem": 0.5361879127,
+          "C_acc": 0.4970710276,
+          "TE_ARA_sum": 1.0332589403,
+          "TE_ARA_residual": 0.9667410597,
+          "C_amount": 0.5252623871,
+          "C_density": 0.468879668,
+          "local_period_ARA": 0.4024896266,
+          "frequency_hz": 272.7751572161
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1461424828,
+          "M_rem": 0.4829792097,
+          "C_acc": 0.6487673908,
+          "TE_ARA_sum": 1.1317466005,
+          "TE_ARA_residual": 0.8682533995,
+          "C_amount": 0.5338052233,
+          "C_density": 0.7637295582,
+          "local_period_ARA": 0.9628996827,
+          "frequency_hz": 248.6223135815
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1344237328,
+          "M_rem": 0.4322014786,
+          "C_acc": 0.5438125458,
+          "TE_ARA_sum": 0.9760140244,
+          "TE_ARA_residual": 1.0239859756,
+          "C_amount": 0.6441298511,
+          "C_density": 0.4434952404,
+          "local_period_ARA": 0.9245789602,
+          "frequency_hz": 248.6223135815
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1227049828,
+          "M_rem": 0.3806463464,
+          "C_acc": 0.6730534537,
+          "TE_ARA_sum": 1.0536998001,
+          "TE_ARA_residual": 0.9463001999,
+          "C_amount": 0.5225774957,
+          "C_density": 0.8235294118,
+          "local_period_ARA": 0.4071271662,
+          "frequency_hz": 255.3440121393
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.1109862328,
+          "M_rem": 0.3284957996,
+          "C_acc": 0.8134000488,
+          "TE_ARA_sum": 1.1418958485,
+          "TE_ARA_residual": 0.8581041515,
+          "C_amount": 0.5296558457,
+          "C_density": 1.0971442519,
+          "local_period_ARA": 0.5840859165,
+          "frequency_hz": 256.9004776927
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0992674828,
+          "M_rem": 0.276027366,
+          "C_acc": 0.8270685868,
+          "TE_ARA_sum": 1.1030959527,
+          "TE_ARA_residual": 0.8969040473,
+          "C_amount": 0.6590187942,
+          "C_density": 0.9951183793,
+          "local_period_ARA": 0.6534049304,
+          "frequency_hz": 256.9004776927
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0875487328,
+          "M_rem": 0.2236235723,
+          "C_acc": 1.3686844032,
+          "TE_ARA_sum": 1.5923079755,
+          "TE_ARA_residual": 0.4076920245,
+          "C_amount": 0.9214059068,
+          "C_density": 1.8159628997,
+          "local_period_ARA": 0.5572370027,
+          "frequency_hz": 256.4257337877
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0758299828,
+          "M_rem": 0.1712520986,
+          "C_acc": 1.3668537955,
+          "TE_ARA_sum": 1.538105894,
+          "TE_ARA_residual": 0.461894106,
+          "C_amount": 1.3951671955,
+          "C_density": 1.3385403954,
+          "local_period_ARA": 0.776421772,
+          "frequency_hz": 248.8883814703
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0641112328,
+          "M_rem": 0.1222477324,
+          "C_acc": 1.4066390041,
+          "TE_ARA_sum": 1.5288867366,
+          "TE_ARA_residual": 0.4711132634,
+          "C_amount": 1.6585306322,
+          "C_density": 1.1547473761,
+          "local_period_ARA": 1.3419575299,
+          "frequency_hz": 221.9451450282
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0523924828,
+          "M_rem": 0.0770224482,
+          "C_acc": 1.5816451062,
+          "TE_ARA_sum": 1.6586675544,
+          "TE_ARA_residual": 0.3413324456,
+          "C_amount": 1.7617769099,
+          "C_density": 1.4015133024,
+          "local_period_ARA": 1.601171589,
+          "frequency_hz": 221.1813427003
+        },
+        {
+          "event": "GW151226",
+          "time_s": -0.0406737328,
+          "M_rem": 0.0318491627,
+          "C_acc": 1.1828166951,
+          "TE_ARA_sum": 1.2146658579,
+          "TE_ARA_residual": 0.7853341421,
+          "C_amount": 1.7754454479,
+          "C_density": 0.5901879424,
+          "local_period_ARA": 1.1764705882,
+          "frequency_hz": 229.6304158038
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4984862804,
+          "M_rem": 2.0,
+          "C_acc": 1.1253356114,
+          "TE_ARA_sum": 3.1253356114,
+          "TE_ARA_residual": 1.1253356114,
+          "C_amount": 1.6399804735,
+          "C_density": 0.6106907493,
+          "local_period_ARA": 0.5367341958,
+          "frequency_hz": 249.3762304996
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4867675304,
+          "M_rem": 1.9482545745,
+          "C_acc": 1.0053697828,
+          "TE_ARA_sum": 2.9536243572,
+          "TE_ARA_residual": 0.9536243572,
+          "C_amount": 1.6023919941,
+          "C_density": 0.4083475714,
+          "local_period_ARA": 0.4217720283,
+          "frequency_hz": 249.3762304996
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4750487804,
+          "M_rem": 1.8973637868,
+          "C_acc": 1.2383451306,
+          "TE_ARA_sum": 3.1357089174,
+          "TE_ARA_residual": 1.1357089174,
+          "C_amount": 1.4764461801,
+          "C_density": 1.000244081,
+          "local_period_ARA": 1.1022699536,
+          "frequency_hz": 237.0199856691
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4633300304,
+          "M_rem": 1.8481822751,
+          "C_acc": 1.2687332194,
+          "TE_ARA_sum": 3.1169154945,
+          "TE_ARA_residual": 1.1169154945,
+          "C_amount": 1.3793019282,
+          "C_density": 1.1581645106,
+          "local_period_ARA": 1.0895777398,
+          "frequency_hz": 237.0199856691
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4516112804,
+          "M_rem": 1.7980088685,
+          "C_acc": 1.1806199658,
+          "TE_ARA_sum": 2.9786288344,
+          "TE_ARA_residual": 0.9786288344,
+          "C_amount": 1.4090798145,
+          "C_density": 0.9521601172,
+          "local_period_ARA": 0.524530144,
+          "frequency_hz": 252.4891023252
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4398925304,
+          "M_rem": 1.7456175239,
+          "C_acc": 0.9050524774,
+          "TE_ARA_sum": 2.6506700013,
+          "TE_ARA_residual": 0.6506700013,
+          "C_amount": 1.4996338784,
+          "C_density": 0.3104710764,
+          "local_period_ARA": 0.4466682939,
+          "frequency_hz": 252.4891023252
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4281737804,
+          "M_rem": 1.6926925796,
+          "C_acc": 0.8036368074,
+          "TE_ARA_sum": 2.4963293871,
+          "TE_ARA_residual": 0.4963293871,
+          "C_amount": 1.3422016109,
+          "C_density": 0.2650720039,
+          "local_period_ARA": 0.6243592873,
+          "frequency_hz": 256.3464593412
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4164550304,
+          "M_rem": 1.6395008356,
+          "C_acc": 0.7038076641,
+          "TE_ARA_sum": 2.3433084997,
+          "TE_ARA_residual": 0.3433084997,
+          "C_amount": 0.7044178667,
+          "C_density": 0.7031974616,
+          "local_period_ARA": 0.5613863803,
+          "frequency_hz": 256.3464593412
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.4047362804,
+          "M_rem": 1.5863090915,
+          "C_acc": 0.4738833293,
+          "TE_ARA_sum": 2.0601924208,
+          "TE_ARA_residual": 0.0601924208,
+          "C_amount": 0.4740053698,
+          "C_density": 0.4737612887,
+          "local_period_ARA": 0.39858433,
+          "frequency_hz": 256.3464593412
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3930175304,
+          "M_rem": 1.5339915843,
+          "C_acc": 0.7959482548,
+          "TE_ARA_sum": 2.3299398391,
+          "TE_ARA_residual": 0.3299398391,
+          "C_amount": 0.4322675128,
+          "C_density": 1.1596289968,
+          "local_period_ARA": 0.8655113498,
+          "frequency_hz": 234.5009665498
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3812987804,
+          "M_rem": 1.4863648534,
+          "C_acc": 1.0319746156,
+          "TE_ARA_sum": 2.518339469,
+          "TE_ARA_residual": 0.518339469,
+          "C_amount": 0.7856968514,
+          "C_density": 1.2782523798,
+          "local_period_ARA": 1.1098364657,
+          "frequency_hz": 223.2514716483
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3695800304,
+          "M_rem": 1.4409522328,
+          "C_acc": 0.9952404198,
+          "TE_ARA_sum": 2.4361926526,
+          "TE_ARA_residual": 0.4361926526,
+          "C_amount": 1.1584085917,
+          "C_density": 0.832072248,
+          "local_period_ARA": 1.4366609714,
+          "frequency_hz": 213.5574468291
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3578612804,
+          "M_rem": 1.3966391844,
+          "C_acc": 0.9989016353,
+          "TE_ARA_sum": 2.3955408197,
+          "TE_ARA_residual": 0.3955408197,
+          "C_amount": 0.9782767879,
+          "C_density": 1.0195264828,
+          "local_period_ARA": 1.2931413229,
+          "frequency_hz": 213.5574468291
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3461425304,
+          "M_rem": 1.3519105484,
+          "C_acc": 1.1542592141,
+          "TE_ARA_sum": 2.5061697625,
+          "TE_ARA_residual": 0.5061697625,
+          "C_amount": 0.9480107396,
+          "C_density": 1.3605076886,
+          "local_period_ARA": 1.0971442519,
+          "frequency_hz": 226.9544431905
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3344237804,
+          "M_rem": 1.3037392898,
+          "C_acc": 1.1507200391,
+          "TE_ARA_sum": 2.4544593289,
+          "TE_ARA_residual": 0.4544593289,
+          "C_amount": 1.3456187454,
+          "C_density": 0.9558213327,
+          "local_period_ARA": 0.7298022944,
+          "frequency_hz": 234.7497017426
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3227050304,
+          "M_rem": 1.2550288607,
+          "C_acc": 1.0920185502,
+          "TE_ARA_sum": 2.3470474108,
+          "TE_ARA_residual": 0.3470474108,
+          "C_amount": 1.4735172077,
+          "C_density": 0.7105198926,
+          "local_period_ARA": 1.0712716622,
+          "frequency_hz": 229.3938528075
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.3109862804,
+          "M_rem": 1.2086577029,
+          "C_acc": 1.3280449109,
+          "TE_ARA_sum": 2.5367026138,
+          "TE_ARA_residual": 0.5367026138,
+          "C_amount": 1.1981938003,
+          "C_density": 1.4578960215,
+          "local_period_ARA": 1.3653893093,
+          "frequency_hz": 220.517184358
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2992675304,
+          "M_rem": 1.162900513,
+          "C_acc": 0.9300707835,
+          "TE_ARA_sum": 2.0929712965,
+          "TE_ARA_residual": 0.0929712965,
+          "C_amount": 0.9362948499,
+          "C_density": 0.9238467171,
+          "local_period_ARA": 1.1098364657,
+          "frequency_hz": 225.1366643054
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2875487804,
+          "M_rem": 1.1148436879,
+          "C_acc": 0.6865999512,
+          "TE_ARA_sum": 1.8014436391,
+          "TE_ARA_residual": 0.1985563609,
+          "C_amount": 0.7647058824,
+          "C_density": 0.60849402,
+          "local_period_ARA": 0.8721015377,
+          "frequency_hz": 240.7710435461
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2758300304,
+          "M_rem": 1.0645893082,
+          "C_acc": 1.2939956065,
+          "TE_ARA_sum": 2.3585849147,
+          "TE_ARA_residual": 0.3585849147,
+          "C_amount": 1.2350500366,
+          "C_density": 1.3529411765,
+          "local_period_ARA": 0.6787893581,
+          "frequency_hz": 242.9243839176
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2641112804,
+          "M_rem": 1.0140290134,
+          "C_acc": 1.402123505,
+          "TE_ARA_sum": 2.4161525185,
+          "TE_ARA_residual": 0.4161525185,
+          "C_amount": 1.2206492556,
+          "C_density": 1.5835977545,
+          "local_period_ARA": 0.6968513546,
+          "frequency_hz": 244.4189808387
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2523925304,
+          "M_rem": 0.9633653427,
+          "C_acc": 0.9035879912,
+          "TE_ARA_sum": 1.8669533339,
+          "TE_ARA_residual": 0.1330466661,
+          "C_amount": 1.0444227484,
+          "C_density": 0.7627532341,
+          "local_period_ARA": 0.6509641201,
+          "frequency_hz": 242.9243839176
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2406737804,
+          "M_rem": 0.9133238301,
+          "C_acc": 0.7500610203,
+          "TE_ARA_sum": 1.6633848504,
+          "TE_ARA_residual": 0.3366151496,
+          "C_amount": 1.1462045399,
+          "C_density": 0.3539175006,
+          "local_period_ARA": 1.0021967293,
+          "frequency_hz": 231.2085161237
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2289550304,
+          "M_rem": 0.8660626947,
+          "C_acc": 0.6405906761,
+          "TE_ARA_sum": 1.5066533708,
+          "TE_ARA_residual": 0.4933466292,
+          "C_amount": 1.1230168416,
+          "C_density": 0.1581645106,
+          "local_period_ARA": 1.1376617037,
+          "frequency_hz": 225.0689802521
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2172362804,
+          "M_rem": 0.8193610098,
+          "C_acc": 0.7290700513,
+          "TE_ARA_sum": 1.548431061,
+          "TE_ARA_residual": 0.451568939,
+          "C_amount": 0.971930681,
+          "C_density": 0.4862094215,
+          "local_period_ARA": 1.1254576519,
+          "frequency_hz": 225.0689802521
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.2055175304,
+          "M_rem": 0.7717404738,
+          "C_acc": 0.5645594337,
+          "TE_ARA_sum": 1.3362999075,
+          "TE_ARA_residual": 0.6637000925,
+          "C_amount": 0.9172565292,
+          "C_density": 0.2118623383,
+          "local_period_ARA": 0.6658530632,
+          "frequency_hz": 244.1960286483
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1937987804,
+          "M_rem": 0.719339495,
+          "C_acc": 1.0200146449,
+          "TE_ARA_sum": 1.7393541399,
+          "TE_ARA_residual": 0.2606458601,
+          "C_amount": 1.1505979985,
+          "C_density": 0.8894312912,
+          "local_period_ARA": 0.4105443007,
+          "frequency_hz": 260.0713071093
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1820800304,
+          "M_rem": 0.6653748472,
+          "C_acc": 1.0777398096,
+          "TE_ARA_sum": 1.7431146568,
+          "TE_ARA_residual": 0.2568853432,
+          "C_amount": 1.1718330486,
+          "C_density": 0.9836465707,
+          "local_period_ARA": 0.468391506,
+          "frequency_hz": 260.0713071093
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1703612804,
+          "M_rem": 0.6121452826,
+          "C_acc": 0.7216255797,
+          "TE_ARA_sum": 1.3337708623,
+          "TE_ARA_residual": 0.6662291377,
+          "C_amount": 0.3221869661,
+          "C_density": 1.1210641933,
+          "local_period_ARA": 0.6902611667,
+          "frequency_hz": 251.6993881003
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1586425304,
+          "M_rem": 0.5599178032,
+          "C_acc": 0.8058335367,
+          "TE_ARA_sum": 1.36575134,
+          "TE_ARA_residual": 0.63424866,
+          "C_amount": 0.3578227972,
+          "C_density": 1.2538442763,
+          "local_period_ARA": 0.6377837442,
+          "frequency_hz": 251.6993881003
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1469237804,
+          "M_rem": 0.507416242,
+          "C_acc": 0.9256773249,
+          "TE_ARA_sum": 1.4330935669,
+          "TE_ARA_residual": 0.5669064331,
+          "C_amount": 0.6751281425,
+          "C_density": 1.1762265072,
+          "local_period_ARA": 0.4227483525,
+          "frequency_hz": 254.1393966679
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1352050304,
+          "M_rem": 0.4544568502,
+          "C_acc": 1.0447888699,
+          "TE_ARA_sum": 1.4992457201,
+          "TE_ARA_residual": 0.5007542799,
+          "C_amount": 0.9492311447,
+          "C_density": 1.1403465951,
+          "local_period_ARA": 0.5133024164,
+          "frequency_hz": 257.7427983871
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1234862804,
+          "M_rem": 0.4010619088,
+          "C_acc": 0.5203807664,
+          "TE_ARA_sum": 0.9214426752,
+          "TE_ARA_residual": 1.0785573248,
+          "C_amount": 0.8467171101,
+          "C_density": 0.1940444227,
+          "local_period_ARA": 0.3929704662,
+          "frequency_hz": 255.8905980908
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1117675304,
+          "M_rem": 0.3479647557,
+          "C_acc": 0.3461069075,
+          "TE_ARA_sum": 0.6940716632,
+          "TE_ARA_residual": 1.3059283368,
+          "C_amount": 0.489382475,
+          "C_density": 0.20283134,
+          "local_period_ARA": 0.4439834025,
+          "frequency_hz": 255.8905980908
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.1000487804,
+          "M_rem": 0.2948676026,
+          "C_acc": 0.4000488162,
+          "TE_ARA_sum": 0.6949164188,
+          "TE_ARA_residual": 1.3050835812,
+          "C_amount": 0.496460825,
+          "C_density": 0.3036368074,
+          "local_period_ARA": 0.691969734,
+          "frequency_hz": 255.3269987461
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.0883300304,
+          "M_rem": 0.2423585609,
+          "C_acc": 0.9249450818,
+          "TE_ARA_sum": 1.1673036427,
+          "TE_ARA_residual": 0.8326963573,
+          "C_amount": 1.034903588,
+          "C_density": 0.8149865755,
+          "local_period_ARA": 0.5601659751,
+          "frequency_hz": 250.4594274653
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.0766112804,
+          "M_rem": 0.1907791628,
+          "C_acc": 1.4010251403,
+          "TE_ARA_sum": 1.5918043031,
+          "TE_ARA_residual": 0.4081956969,
+          "C_amount": 1.5533317061,
+          "C_density": 1.2487185746,
+          "local_period_ARA": 0.9604588723,
+          "frequency_hz": 245.438646656
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.0648925304,
+          "M_rem": 0.1398507837,
+          "C_acc": 1.2881376617,
+          "TE_ARA_sum": 1.4279884454,
+          "TE_ARA_residual": 0.5720115546,
+          "C_amount": 1.6141078838,
+          "C_density": 0.9621674396,
+          "local_period_ARA": 0.9201855016,
+          "frequency_hz": 245.438646656
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.0531737804,
+          "M_rem": 0.0876345965,
+          "C_acc": 0.7207712961,
+          "TE_ARA_sum": 0.8084058925,
+          "TE_ARA_residual": 1.1915941075,
+          "C_amount": 1.2601903832,
+          "C_density": 0.1813522089,
+          "local_period_ARA": 0.4749816939,
+          "frequency_hz": 255.5716392907
+        },
+        {
+          "event": "GW170729",
+          "time_s": -0.0414550304,
+          "M_rem": 0.0346036272,
+          "C_acc": 0.4979253112,
+          "TE_ARA_sum": 0.5325289384,
+          "TE_ARA_residual": 1.4674710616,
+          "C_amount": 0.82548206,
+          "C_density": 0.1703685624,
+          "local_period_ARA": 0.6199658287,
+          "frequency_hz": 255.5716392907
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4992675781,
+          "M_rem": 2.0,
+          "C_acc": 1.0704173786,
+          "TE_ARA_sum": 3.0704173786,
+          "TE_ARA_residual": 1.0704173786,
+          "C_amount": 1.2289480107,
+          "C_density": 0.9118867464,
+          "local_period_ARA": 0.3485477178,
+          "frequency_hz": 248.9020523134
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4875488281,
+          "M_rem": 1.9495177699,
+          "C_acc": 0.7185745668,
+          "TE_ARA_sum": 2.6680923366,
+          "TE_ARA_residual": 0.6680923366,
+          "C_amount": 1.2697095436,
+          "C_density": 0.1674395899,
+          "local_period_ARA": 0.7734927996,
+          "frequency_hz": 241.8493216594
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4758300781,
+          "M_rem": 1.8995215311,
+          "C_acc": 0.8589211618,
+          "TE_ARA_sum": 2.7584426929,
+          "TE_ARA_residual": 0.7584426929,
+          "C_amount": 0.9494752258,
+          "C_density": 0.7683670979,
+          "local_period_ARA": 0.4378813766,
+          "frequency_hz": 255.7715480782
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4641113281,
+          "M_rem": 1.8448929919,
+          "C_acc": 0.905418599,
+          "TE_ARA_sum": 2.7503115909,
+          "TE_ARA_residual": 0.7503115909,
+          "C_amount": 0.7678789358,
+          "C_density": 1.0429582621,
+          "local_period_ARA": 0.2833780815,
+          "frequency_hz": 268.500298066
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4523925781,
+          "M_rem": 1.7893873369,
+          "C_acc": 1.0868928484,
+          "TE_ARA_sum": 2.8762801853,
+          "TE_ARA_residual": 0.8762801853,
+          "C_amount": 0.8935806688,
+          "C_density": 1.2802050281,
+          "local_period_ARA": 0.1969733952,
+          "frequency_hz": 266.7041912564
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4406738281,
+          "M_rem": 1.7348548147,
+          "C_acc": 1.0320966561,
+          "TE_ARA_sum": 2.7669514708,
+          "TE_ARA_residual": 0.7669514708,
+          "C_amount": 0.9616792775,
+          "C_density": 1.1025140347,
+          "local_period_ARA": 0.2035635831,
+          "frequency_hz": 260.69689116
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4289550781,
+          "M_rem": 1.6814325199,
+          "C_acc": 0.8489138394,
+          "TE_ARA_sum": 2.5303463593,
+          "TE_ARA_residual": 0.5303463593,
+          "C_amount": 0.6460824994,
+          "C_density": 1.0517451794,
+          "local_period_ARA": 0.3573346351,
+          "frequency_hz": 249.1658775055
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4172363281,
+          "M_rem": 1.629923768,
+          "C_acc": 0.6393702709,
+          "TE_ARA_sum": 2.2692940389,
+          "TE_ARA_residual": 0.2692940389,
+          "C_amount": 0.7212594581,
+          "C_density": 0.5574810837,
+          "local_period_ARA": 0.559433732,
+          "frequency_hz": 249.1658775055
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.4055175781,
+          "M_rem": 1.5778633245,
+          "C_acc": 0.9310471076,
+          "TE_ARA_sum": 2.5089104321,
+          "TE_ARA_residual": 0.5089104321,
+          "C_amount": 1.0463753966,
+          "C_density": 0.8157188186,
+          "local_period_ARA": 0.2006346107,
+          "frequency_hz": 269.7415268936
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3937988281,
+          "M_rem": 1.5203010929,
+          "C_acc": 1.2058823529,
+          "TE_ARA_sum": 2.7261834458,
+          "TE_ARA_residual": 0.7261834458,
+          "C_amount": 0.9765682206,
+          "C_density": 1.4351964852,
+          "local_period_ARA": 0.0407615328,
+          "frequency_hz": 283.0772032212
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3820800781,
+          "M_rem": 1.4617820309,
+          "C_acc": 0.8734439834,
+          "TE_ARA_sum": 2.3352260143,
+          "TE_ARA_residual": 0.3352260143,
+          "C_amount": 0.6307053942,
+          "C_density": 1.1161825726,
+          "local_period_ARA": 0.0844520381,
+          "frequency_hz": 283.0772032212
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3703613281,
+          "M_rem": 1.4073494129,
+          "C_acc": 0.5691969734,
+          "TE_ARA_sum": 1.9765463863,
+          "TE_ARA_residual": 0.0234536137,
+          "C_amount": 0.3485477178,
+          "C_density": 0.7898462289,
+          "local_period_ARA": 0.895045155,
+          "frequency_hz": 224.3632347923
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3586425781,
+          "M_rem": 1.3625518756,
+          "C_acc": 0.8498901635,
+          "TE_ARA_sum": 2.2124420392,
+          "TE_ARA_residual": 0.2124420392,
+          "C_amount": 1.0641933122,
+          "C_density": 0.6355870149,
+          "local_period_ARA": 1.1239931657,
+          "frequency_hz": 211.9352809747
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3469238281,
+          "M_rem": 1.3188081073,
+          "C_acc": 1.0851842812,
+          "TE_ARA_sum": 2.4039923885,
+          "TE_ARA_residual": 0.4039923885,
+          "C_amount": 1.2636075177,
+          "C_density": 0.9067610447,
+          "local_period_ARA": 1.0849402001,
+          "frequency_hz": 211.4382569838
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3352050781,
+          "M_rem": 1.2750098969,
+          "C_acc": 0.9073712473,
+          "TE_ARA_sum": 2.1823811441,
+          "TE_ARA_residual": 0.1823811441,
+          "C_amount": 0.9602147913,
+          "C_density": 0.8545277032,
+          "local_period_ARA": 1.0637051501,
+          "frequency_hz": 215.6442442367
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3234863281,
+          "M_rem": 1.2280564761,
+          "C_acc": 1.0484500854,
+          "TE_ARA_sum": 2.2765065615,
+          "TE_ARA_residual": 0.2765065615,
+          "C_amount": 1.0390529656,
+          "C_density": 1.0578472053,
+          "local_period_ARA": 0.3290212351,
+          "frequency_hz": 246.4318574785
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3117675781,
+          "M_rem": 1.1771129137,
+          "C_acc": 0.8503783256,
+          "TE_ARA_sum": 2.0274912393,
+          "TE_ARA_residual": 0.0274912393,
+          "C_amount": 1.2836221626,
+          "C_density": 0.4171344887,
+          "local_period_ARA": 0.4117647059,
+          "frequency_hz": 246.4318574785
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.3000488281,
+          "M_rem": 1.1264138554,
+          "C_acc": 0.8101049548,
+          "TE_ARA_sum": 1.9365188102,
+          "TE_ARA_residual": 0.0634811898,
+          "C_amount": 1.1484012692,
+          "C_density": 0.4718086405,
+          "local_period_ARA": 0.8891872102,
+          "frequency_hz": 235.1222420508
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2883300781,
+          "M_rem": 1.0799107714,
+          "C_acc": 1.1067854528,
+          "TE_ARA_sum": 2.1866962241,
+          "TE_ARA_residual": 0.1866962241,
+          "C_amount": 1.2631193556,
+          "C_density": 0.9504515499,
+          "local_period_ARA": 1.1449841347,
+          "frequency_hz": 215.8616361706
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2766113281,
+          "M_rem": 1.0352868302,
+          "C_acc": 0.6486453503,
+          "TE_ARA_sum": 1.6839321804,
+          "TE_ARA_residual": 0.3160678196,
+          "C_amount": 0.9011471809,
+          "C_density": 0.3961435196,
+          "local_period_ARA": 1.062972907,
+          "frequency_hz": 215.8616361706
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2648925781,
+          "M_rem": 0.9883398095,
+          "C_acc": 0.7487185746,
+          "TE_ARA_sum": 1.7370583841,
+          "TE_ARA_residual": 0.2629416159,
+          "C_amount": 0.7002684891,
+          "C_density": 0.79716866,
+          "local_period_ARA": 0.468391506,
+          "frequency_hz": 239.8040995222
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2531738281,
+          "M_rem": 0.9387663687,
+          "C_acc": 0.9275079326,
+          "TE_ARA_sum": 1.8662743014,
+          "TE_ARA_residual": 0.1337256986,
+          "C_amount": 0.9526482792,
+          "C_density": 0.902367586,
+          "local_period_ARA": 0.5267268733,
+          "frequency_hz": 239.8040995222
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2414550781,
+          "M_rem": 0.8893235892,
+          "C_acc": 1.0283134,
+          "TE_ARA_sum": 1.9176369892,
+          "TE_ARA_residual": 0.0823630108,
+          "C_amount": 0.9938979741,
+          "C_density": 1.062728826,
+          "local_period_ARA": 0.5460092751,
+          "frequency_hz": 237.111023953
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2297363281,
+          "M_rem": 0.8403422665,
+          "C_acc": 0.9530144008,
+          "TE_ARA_sum": 1.7933566673,
+          "TE_ARA_residual": 0.2066433327,
+          "C_amount": 0.9275079326,
+          "C_density": 0.9785208689,
+          "local_period_ARA": 0.5860385648,
+          "frequency_hz": 235.4330326757
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2180175781,
+          "M_rem": 0.7925436929,
+          "C_acc": 0.8736880644,
+          "TE_ARA_sum": 1.6662317573,
+          "TE_ARA_residual": 0.3337682427,
+          "C_amount": 0.7793507444,
+          "C_density": 0.9680253844,
+          "local_period_ARA": 1.0012204052,
+          "frequency_hz": 218.314160294
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.2062988281,
+          "M_rem": 0.7485148531,
+          "C_acc": 0.8745423481,
+          "TE_ARA_sum": 1.6230572011,
+          "TE_ARA_residual": 0.3769427989,
+          "C_amount": 0.6907493288,
+          "C_density": 1.0583353673,
+          "local_period_ARA": 1.3307298023,
+          "frequency_hz": 210.3173033284
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1945800781,
+          "M_rem": 0.7050370627,
+          "C_acc": 0.6368074201,
+          "TE_ARA_sum": 1.3418444827,
+          "TE_ARA_residual": 0.6581555173,
+          "C_amount": 0.6043446424,
+          "C_density": 0.6692701977,
+          "local_period_ARA": 1.1371735416,
+          "frequency_hz": 211.7443220929
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1828613281,
+          "M_rem": 0.6593489892,
+          "C_acc": 1.0413717354,
+          "TE_ARA_sum": 1.7007207246,
+          "TE_ARA_residual": 0.2992792754,
+          "C_amount": 0.9807175982,
+          "C_density": 1.1020258726,
+          "local_period_ARA": 0.4813278008,
+          "frequency_hz": 240.5516480692
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1711425781,
+          "M_rem": 0.6079779943,
+          "C_acc": 1.1953868684,
+          "TE_ARA_sum": 1.8033648627,
+          "TE_ARA_residual": 0.1966351373,
+          "C_amount": 0.9958506224,
+          "C_density": 1.3949231145,
+          "local_period_ARA": 0.2550646815,
+          "frequency_hz": 257.9998010288
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1594238281,
+          "M_rem": 0.5546430518,
+          "C_acc": 1.2750793263,
+          "TE_ARA_sum": 1.8297223781,
+          "TE_ARA_residual": 0.1702776219,
+          "C_amount": 0.9633878448,
+          "C_density": 1.5867708079,
+          "local_period_ARA": 0.308030266,
+          "frequency_hz": 257.9998010288
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1477050781,
+          "M_rem": 0.5015148626,
+          "C_acc": 1.0601659751,
+          "TE_ARA_sum": 1.5616808377,
+          "TE_ARA_residual": 0.4383191623,
+          "C_amount": 0.8264583842,
+          "C_density": 1.293873566,
+          "local_period_ARA": 0.3229192092,
+          "frequency_hz": 252.1090455307
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1359863281,
+          "M_rem": 0.4497608231,
+          "C_acc": 0.2979009031,
+          "TE_ARA_sum": 0.7476617262,
+          "TE_ARA_residual": 1.2523382738,
+          "C_amount": 0.4207957042,
+          "C_density": 0.175006102,
+          "local_period_ARA": 0.4283622163,
+          "frequency_hz": 249.4741061359
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1242675781,
+          "M_rem": 0.3981883527,
+          "C_acc": 0.2215035392,
+          "TE_ARA_sum": 0.6196918919,
+          "TE_ARA_residual": 1.3803081081,
+          "C_amount": 0.147180864,
+          "C_density": 0.2958262143,
+          "local_period_ARA": 0.2814254332,
+          "frequency_hz": 255.8010270834
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1125488281,
+          "M_rem": 0.3434214288,
+          "C_acc": 0.5024408103,
+          "TE_ARA_sum": 0.8458622392,
+          "TE_ARA_residual": 1.1541377608,
+          "C_amount": 0.356602392,
+          "C_density": 0.6482792287,
+          "local_period_ARA": 0.0876250915,
+          "frequency_hz": 271.4227337472
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.1008300781,
+          "M_rem": 0.287311634,
+          "C_acc": 0.7389553332,
+          "TE_ARA_sum": 1.0262669672,
+          "TE_ARA_residual": 0.9737330328,
+          "C_amount": 0.6033683183,
+          "C_density": 0.8745423481,
+          "local_period_ARA": 0.2926531608,
+          "frequency_hz": 271.4227337472
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0891113281,
+          "M_rem": 0.233799373,
+          "C_acc": 0.7493287772,
+          "TE_ARA_sum": 0.9831281502,
+          "TE_ARA_residual": 1.0168718498,
+          "C_amount": 0.8191359531,
+          "C_density": 0.6795216012,
+          "local_period_ARA": 0.7173541616,
+          "frequency_hz": 231.0803634394
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0773925781,
+          "M_rem": 0.1871211258,
+          "C_acc": 0.965096412,
+          "TE_ARA_sum": 1.1522175378,
+          "TE_ARA_residual": 0.8477824622,
+          "C_amount": 0.79009031,
+          "C_density": 1.140102514,
+          "local_period_ARA": 1.181840371,
+          "frequency_hz": 223.1583697356
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0656738281,
+          "M_rem": 0.1409887692,
+          "C_acc": 0.9744935319,
+          "TE_ARA_sum": 1.115482301,
+          "TE_ARA_residual": 0.884517699,
+          "C_amount": 1.0151330242,
+          "C_density": 0.9338540395,
+          "local_period_ARA": 0.5606541372,
+          "frequency_hz": 236.4897005077
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0539550781,
+          "M_rem": 0.0921004967,
+          "C_acc": 1.0646814742,
+          "TE_ARA_sum": 1.1567819709,
+          "TE_ARA_residual": 0.8432180291,
+          "C_amount": 1.2326092263,
+          "C_density": 0.8967537222,
+          "local_period_ARA": 0.3685623627,
+          "frequency_hz": 236.4897005077
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0422363281,
+          "M_rem": 0.0432613077,
+          "C_acc": 1.2976568221,
+          "TE_ARA_sum": 1.3409181298,
+          "TE_ARA_residual": 0.6590818702,
+          "C_amount": 1.2772760557,
+          "C_density": 1.3180375885,
+          "local_period_ARA": 0.9277520137,
+          "frequency_hz": 223.654074343
+        },
+        {
+          "event": "GW170823",
+          "time_s": -0.0305175781,
+          "M_rem": 0.0,
+          "C_acc": 1.5361239932,
+          "TE_ARA_sum": 1.5361239932,
+          "TE_ARA_residual": 0.4638760068,
+          "C_amount": 1.4820600439,
+          "C_density": 1.5901879424,
+          "local_period_ARA": 1.4635098853,
+          "frequency_hz": 182.2323618298
+        }
+      ],
+      "control_comparison": [
+        {
+          "event": "GW151012",
+          "series": "event",
+          "median_residual": 0.4848017665,
+          "closure_occupancy": 0.5083333333
+        },
+        {
+          "event": "GW151012",
+          "series": "off-source median",
+          "median_residual": 0.5165189083,
+          "closure_occupancy": 0.4813360882
+        },
+        {
+          "event": "GW151226",
+          "series": "event",
+          "median_residual": 0.4665036847,
+          "closure_occupancy": 0.5083333333
+        },
+        {
+          "event": "GW151226",
+          "series": "off-source median",
+          "median_residual": 0.5281321396,
+          "closure_occupancy": 0.475
+        },
+        {
+          "event": "GW170729",
+          "series": "event",
+          "median_residual": 0.5015964371,
+          "closure_occupancy": 0.4833333333
+        },
+        {
+          "event": "GW170729",
+          "series": "off-source median",
+          "median_residual": 0.5181632238,
+          "closure_occupancy": 0.4833333333
+        },
+        {
+          "event": "GW170823",
+          "series": "event",
+          "median_residual": 0.4383191623,
+          "closure_occupancy": 0.5289256198
+        },
+        {
+          "event": "GW170823",
+          "series": "off-source median",
+          "median_residual": 0.5252714886,
+          "closure_occupancy": 0.4771694215
+        }
+      ],
+      "event_summary": [
+        {
+          "event": "GW151012",
+          "inverse_rho": -0.0285019793,
+          "inverse_shift_p": 0.3893053473,
+          "connection_time_rho": 0.0285019793,
+          "connection_time_shift_p": 0.391804098,
+          "median_te_ara_residual": 0.4848017665,
+          "residual_offsource_percentile": 0.3939393939,
+          "closure_occupancy": 0.5083333333,
+          "occupancy_offsource_percentile": 0.5606060606,
+          "detector_connection_rho": -0.022994892,
+          "detector_connection_shift_p": 0.7086456772,
+          "inverse_pass": 0,
+          "closure_control_pass": 0,
+          "agreement_pass": 0
+        },
+        {
+          "event": "GW151226",
+          "inverse_rho": 0.0097576221,
+          "inverse_shift_p": 0.5537231384,
+          "connection_time_rho": -0.0097576221,
+          "connection_time_shift_p": 0.5457271364,
+          "median_te_ara_residual": 0.4665036847,
+          "residual_offsource_percentile": 0.3333333333,
+          "closure_occupancy": 0.5083333333,
+          "occupancy_offsource_percentile": 0.6060606061,
+          "detector_connection_rho": 0.1493343242,
+          "detector_connection_shift_p": 0.2263868066,
+          "inverse_pass": 0,
+          "closure_control_pass": 0,
+          "agreement_pass": 0
+        },
+        {
+          "event": "GW170729",
+          "inverse_rho": 0.2957224386,
+          "inverse_shift_p": 0.9900049975,
+          "connection_time_rho": -0.2957224386,
+          "connection_time_shift_p": 0.9870064968,
+          "median_te_ara_residual": 0.5015964371,
+          "residual_offsource_percentile": 0.4545454545,
+          "closure_occupancy": 0.4833333333,
+          "occupancy_offsource_percentile": 0.4848484848,
+          "detector_connection_rho": -0.0210640359,
+          "detector_connection_shift_p": 0.4962518741,
+          "inverse_pass": 0,
+          "closure_control_pass": 0,
+          "agreement_pass": 0
+        },
+        {
+          "event": "GW170823",
+          "inverse_rho": -0.0683107584,
+          "inverse_shift_p": 0.3223388306,
+          "connection_time_rho": 0.0683107584,
+          "connection_time_shift_p": 0.3128435782,
+          "median_te_ara_residual": 0.4383191623,
+          "residual_offsource_percentile": 0.2272727273,
+          "closure_occupancy": 0.5289256198,
+          "occupancy_offsource_percentile": 0.6666666667,
+          "detector_connection_rho": 0.072277159,
+          "detector_connection_shift_p": 0.4042978511,
+          "inverse_pass": 0,
+          "closure_control_pass": 0,
+          "agreement_pass": 0
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t430-analysis",
+      "label": "T430 frozen ARA analysis",
+      "path": "analysis/irrationality_di_ara/T430_remaining_traversal_connection"
+    },
+    {
+      "id": "gwosc-gwtc1",
+      "label": "GWOSC GWTC-1 public event records",
+      "href": "https://gwosc.org/GWTC-1/"
+    },
+    {
+      "id": "t430-gates",
+      "label": "T430 frozen gate query",
+      "query": {
+        "engine": "SQLite",
+        "language": "sql",
+        "sql": "SELECT gate, passes, required, events FROM gate_results ORDER BY rowid",
+        "description": "Return all five frozen confirmation gates and the required three-of-four count.",
+        "tables_used": [
+          "gate_results"
+        ],
+        "metric_definitions": [
+          "passes is the number of four untouched confirmation events meeting the frozen gate; required is three."
+        ]
+      }
+    },
+    {
+      "id": "t430-paths",
+      "label": "T430 reviewed path sample query",
+      "query": {
+        "engine": "SQLite",
+        "language": "sql",
+        "sql": "SELECT event, time_s, M_rem, C_acc, TE_ARA_sum, TE_ARA_residual, C_amount, C_density, local_period_ARA, frequency_hz FROM ara_path_samples ORDER BY event, time_s",
+        "description": "Return deterministic chronological samples of remaining traversal and independently measured connection-facing state.",
+        "tables_used": [
+          "ara_path_samples"
+        ],
+        "filters": [
+          "approximately 40 evenly spaced rows per event"
+        ]
+      }
+    },
+    {
+      "id": "t430-controls",
+      "label": "T430 matched off-source comparison query",
+      "query": {
+        "engine": "SQLite",
+        "language": "sql",
+        "sql": "SELECT event, series, median_residual, closure_occupancy FROM control_comparison ORDER BY event, series",
+        "description": "Compare event-window closure statistics with each event's matched-duration off-source median.",
+        "tables_used": [
+          "control_comparison"
+        ],
+        "metric_definitions": [
+          "median_residual is median absolute deviation of M_rem+C_acc from 2.",
+          "closure_occupancy is the fraction with absolute residual at most 0.50."
+        ]
+      }
+    },
+    {
+      "id": "t430-summary",
+      "label": "T430 exact event score query",
+      "query": {
+        "engine": "SQLite",
+        "language": "sql",
+        "sql": "SELECT event, inverse_rho, inverse_shift_p, connection_time_rho, connection_time_shift_p, median_te_ara_residual, residual_offsource_percentile, closure_occupancy, occupancy_offsource_percentile, detector_connection_rho, detector_connection_shift_p, inverse_pass, closure_control_pass, agreement_pass FROM event_summary ORDER BY event",
+        "description": "Return the frozen per-event inverse-gradient, closure and detector-agreement scores.",
+        "tables_used": [
+          "event_summary"
+        ],
+        "metric_definitions": [
+          "rho is Spearman rank correlation.",
+          "p is a one-sided circular-shift probability."
+        ]
+      }
+    }
+  ]
+}

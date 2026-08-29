@@ -1,0 +1,37 @@
+{
+  "status": "frozen_retrospective_causal_channel_crossing",
+  "source": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T411_time_facing_filament_breakup\\results\\T411J_parity_oriented_closure\\T411J_SCORED_SNAPSHOTS.csv",
+  "events": {
+    "development": 41,
+    "diagnostic": 82
+  },
+  "definition": "D(t)=H_grandchild_flip(t)-H_child_flip(t); crossing D(t-1)<0<=D(t)",
+  "shift_control": {
+    "observed_auc": 0.6524993218351389,
+    "auc_null_mean": 0.5875381719158288,
+    "auc_null_95": 0.6188274785915888,
+    "p_auc_null_ge_observed": 0.0014992503748125937,
+    "observed_crossing_concentration": 0.06293706293706294,
+    "crossing_concentration_null_mean": 0.06179626165356488,
+    "crossing_concentration_null_95": 0.07143206939974814,
+    "p_crossing_null_ge_observed": 0.4017991004497751
+  },
+  "gates": {
+    "diagnostic_D_auc_above_chance": true,
+    "diagnostic_D_beats_both_absolute_channels": true,
+    "time_shift_auc_p_le_005": true,
+    "forward_crossing_concentration_above_shift_95": false,
+    "D_auc_above_chance_in_at_least_three_of_four_fluids": true
+  },
+  "gates_passed": 4,
+  "gates_total": 5,
+  "conclusion": "NOT YET SUPPORTED: the frozen channel crossing passed 4/5 gates.",
+  "claim_boundary": "same-source retrospective causal audit; not independent replication",
+  "protocol_erratum": "Cross-fluid gate uses each fluid's prescribed partition because diagnostic contains only S2 and S4.",
+  "validation": {
+    "unique_partition_name_time": true,
+    "all_predictors_precede_target": true,
+    "stored_switch_matches_recalculation": true,
+    "coordinates_inside_0_2": true
+  }
+}

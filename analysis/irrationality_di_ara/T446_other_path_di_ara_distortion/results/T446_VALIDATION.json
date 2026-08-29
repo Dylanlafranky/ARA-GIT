@@ -1,0 +1,128 @@
+{
+  "test": "T446",
+  "status": "PASS",
+  "checks_passed": 24,
+  "checks_total": 24,
+  "checks": [
+    {
+      "check": "input_columns",
+      "pass": true,
+      "detail": "required=['draw', 'geometric_a_arcsec2', 'observed_dphi_arcsec2', 'pair', 'potential_b_arcsec2', 'tangent_x', 'tangent_y']"
+    },
+    {
+      "check": "input_rows",
+      "pass": true,
+      "detail": "rows=6000, draws=2000"
+    },
+    {
+      "check": "input_pair_balance",
+      "pass": true,
+      "detail": "each draw contains AB, AC and AD"
+    },
+    {
+      "check": "unit_tangents",
+      "pass": true,
+      "detail": "max_abs_error=3.331e-16"
+    },
+    {
+      "check": "spatial_order",
+      "pass": true,
+      "detail": "recovered=['A', 'C', 'B', 'D']"
+    },
+    {
+      "check": "path_output_rows",
+      "pass": true,
+      "detail": "rows=4000"
+    },
+    {
+      "check": "transfer_output_rows",
+      "pass": true,
+      "detail": "rows=12000"
+    },
+    {
+      "check": "scenario_balance",
+      "pass": true,
+      "detail": "{'alternate_AC_+7.9d': 2000, 'selected_AC_-5.3d': 2000}"
+    },
+    {
+      "check": "transfer_balance",
+      "pass": true,
+      "detail": "2,000 draws in each scenario \u00d7 holdout"
+    },
+    {
+      "check": "path_metrics_bounded",
+      "pass": true,
+      "detail": "columns=['known_directness_D', 'known_turn_consistency_G', 'known_historical_circularity_C', 'outcome_directness_D', 'outcome_turn_consistency_G', 'outcome_historical_circularity_C']"
+    },
+    {
+      "check": "manual_D",
+      "pass": true,
+      "detail": "manual=0.445485538211, saved=0.445485538211"
+    },
+    {
+      "check": "manual_G",
+      "pass": true,
+      "detail": "manual=0.0328895380492, saved=0.0328895380492"
+    },
+    {
+      "check": "manual_C",
+      "pass": true,
+      "detail": "manual=0.0182377244899, saved=0.0182377244899"
+    },
+    {
+      "check": "AC_sensitivity_shift",
+      "pass": true,
+      "detail": "actual=0.332668167241, expected=0.332668167241"
+    },
+    {
+      "check": "holdout_excluded_from_angle",
+      "pass": true,
+      "detail": "both angle-calibration children differ from the holdout"
+    },
+    {
+      "check": "saved_directions_unit_length",
+      "pass": true,
+      "detail": "target and three prediction directions have unit norm"
+    },
+    {
+      "check": "manual_terminal_delta",
+      "pass": true,
+      "detail": "manual=3.08693917061, saved=3.08693917061"
+    },
+    {
+      "check": "path_summary_matches_draws",
+      "pass": true,
+      "detail": "median outcome D reconciles"
+    },
+    {
+      "check": "transfer_summary_matches_draws",
+      "pass": true,
+      "detail": "median error ratios reconcile"
+    },
+    {
+      "check": "topology_roles",
+      "pass": true,
+      "detail": "{'AC': 'first-child reconstruction', 'AB': 'internal-child interpolation', 'AD': 'terminal forward continuation'}"
+    },
+    {
+      "check": "selected_terminal_improves",
+      "pass": true,
+      "detail": "ratio=0.593, fraction=0.732"
+    },
+    {
+      "check": "alternate_terminal_reverses",
+      "pass": true,
+      "detail": "ratio=1.901, fraction=0.168"
+    },
+    {
+      "check": "verdict_records_sensitivity",
+      "pass": true,
+      "detail": "terminal_continuation_improves_only_for_selected_AC; AC_sign_sensitive"
+    },
+    {
+      "check": "visuals_exist",
+      "pass": true,
+      "detail": "{'T446_OTHER_PATH_GEOMETRY.png': 452347, 'T446_DISTORTION_TRANSFER.png': 253757}"
+    }
+  ]
+}

@@ -1,5 +1,490 @@
 # Claims Status
 
+### Update - 23 August 2026: T423 parent Di-ARA temporal architecture
+
+T423 froze three nested chronological readings of the full-detector T421
+relation: direct child alternation M0, traversal through compressed parent H
+in M1, and traversal through decompressed parent H/Q in M2. The causal target
+was remaining physical time to the next opposite-direction child `U=R`
+crossover. Development alone fitted the models; validation and the high-field
+holdout remained untouched.
+
+The archive contained `4`, `7` and `5` opposite child intervals in
+development, validation and holdout respectively. Only two development
+intervals contained sufficient native samples for causal prediction, giving
+four training rows. Validation and holdout supplied zero prediction rows, and
+no selected interval contained a `Q=1` candidate PA/PB handover.
+
+- **Benchmark status:** **SUGGESTIVE / INCONCLUSIVE — SCIENTIFICALLY
+  UNAVAILABLE [pre-registered].** No out-of-sample nested architecture
+  comparison was possible.
+- **ARA geometry status:** successive child U/R handovers remain observed,
+  while the temporal route through H/Q remains unresolved. T423 neither
+  selects nor rejects M0, M1 or M2 and does not invalidate T421.
+- **Method status:** independent validation passed `125/125` arithmetic and
+  provenance checks. The audit exposed a future gate requirement: count
+  native causal rows and development degrees of freedom, not only interpolated
+  crossing intervals.
+
+Findings:
+`analysis/muon/T423_parent_di_ara_temporal_architecture/T423_FINDINGS.md`.
+
+Portable report:
+`analysis/muon/T423_parent_di_ara_temporal_architecture/results/T423_PARENT_DI_ARA_TEMPORAL_ARCHITECTURE_REPORT.html`.
+
+### Update - 22 August 2026: T422 independent detector-bank parent test
+
+T422 asked whether T421's reconstructed `H=1` candidate-parent ridge survives
+when the child `U=R` crossing and `H` are obtained from disjoint EMU detector
+banks. Forward detectors 1-48 and backward detectors 49-96 were reversed in
+both directions; the banks were not assigned as physical ARA phases.
+
+Validation returned opposing-bank median `H=0.985` and `0.989` at the child
+crossings, and real timing beat 1,000 circular shifts in both directions
+(`p=0.0050`, `0.0090`). Only one direction had a positive 95% lower bound for
+ridge exposure. Development did not reproduce timing specificity;
+wrong-frequency and different-field controls were not beaten; and the
+high-field/temperature holdout produced no post-calibration crossings.
+
+The registered claim is therefore **NOT SUPPORTED [PRE-REGISTERED]**. A
+validation-only timed cross-bank ridge geometry is retained, but `H` is not
+identified as a unique physical parent. It may instead be a generic/shared
+coordinate or belong to the combined 96-detector identity. This result does
+not invalidate T421's earlier same-view geometry.
+
+Independent validation passed `119/119` saved-artifact checks. The next named
+bridge is a physically different parent observable, such as the detector-total
+population/decay envelope, evaluated at the full-detector `U=R` crossing.
+
+Primary record:
+`analysis/muon/T422_independent_detector_bank_parent/T422_FINDINGS.md`.
+Portable report:
+`analysis/muon/T422_independent_detector_bank_parent/results/T422_INDEPENDENT_DETECTOR_BANK_PARENT_REPORT.html`.
+
+### Update - 18 August 2026: T409 chronological parent-ridge tracking
+
+T409 followed the three vertical parent-coordinate structures Dylan marked in
+the T408 individual-event scatter. The frozen primary used all 2,109 held-out
+records, divided each of the two runs into six chronological event blocks and
+compared ridge-centre motion with 5,000 global-order and 5,000 within-run
+shuffles. Exact `x_mu` poles at 0 and 2 were retained in population accounting
+but excluded from density-centre estimation.
+
+Two dominant non-pole bands resolve at `0.761` and `1.041`, containing `584`
+and `560` events and resolving in all `12/12` blocks. The first broad upper-
+band estimator failed operationally by selecting its lower boundary at
+`1.180`. A separately frozen post-result interior-crest sensitivity recovered
+the line actually marked by Dylan at `1.395`; it contains `90` events and
+resolves in `10/12` blocks.
+
+The third crest is real as sparse population structure but is not a resolved
+travelling ridge. Its chronological motion is `M=0.04060`, below the global
+shuffle median `0.04646` (`p=0.74545`) and consistent with within-run shuffles
+(`p=0.67187`). R2 is the only band with block displacement above both shuffle
+controls (`p=0.01640`); that is a new directional lead requiring unchanged
+replication, not confirmation of the proposed moving upper line.
+
+The registered verdict is **UPPER STRUCTURE RESOLVED, BUT NOT AS A
+CHRONOLOGICALLY TRAVELLING RIDGE**. T409 supports a descriptive three-band
+parent-coordinate account while rejecting the stronger movement-loaded R3
+interpretation in this cut. It does not identify an individual neutrino-
+release instant. Independent validation passed all `18/18` saved-source,
+density and motion checks, with the boundary that full permutation arrays were
+not retained for replay.
+
+Primary record:
+`analysis/muon/T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_FINDINGS_2026-08-18.md`.
+Validated report artifact and visuals:
+`analysis/muon/T409_chronological_parent_ridge_tracking/artifact.json`,
+`analysis/muon/T409_chronological_parent_ridge_tracking/T409_CHRONOLOGICAL_PARENT_RIDGES.png`,
+and
+`analysis/muon/T409_chronological_parent_ridge_tracking/T409B_MARKED_UPPER_INTERIOR_SENSITIVITY.png`.
+
+### Update - 18 August 2026: T408 nested parent/child windows in individual muons
+
+T408 replaced T407's unsuccessful fixed-band transfer with a nested test. It
+first conditioned held-out event-linked stopped muons on the transferred
+parent daughter-delay window (`0.568858-1.382809 microseconds`), then asked
+whether the two separately decompressed same-lineage incoming child relations
+predicted a smaller child-window outcome. Of 2,109 holdout records, 527 occupy
+the parent window; 62 occupy the frozen pure child window and 51 the narrower
+secondary observed window.
+
+The nested model improved on the parent-only model in both held-out runs. For
+the pure local `0.50-0.75` window, mean held-out log-loss improvement is
+`+0.00237581`, and the same-lineage model beats the crossed-lineage control by
+`+0.00103748`. The 95% chronological-block interval nevertheless crosses zero
+(`[-0.00099095,+0.00513850]`) and permutation `p=0.175165`; the frozen primary
+passes three of five gates.
+
+The secondary local `0.50-0.706306` window is stronger: improvement
+`+0.00386585`, positive in both runs, ahead of the crossed-lineage control by
+`+0.00198596`, and permutation `p=0.0327934`. Its block interval still crosses
+zero (`[-0.00184017,+0.00796394]`), so it passes four of five gates but cannot
+replace the primary verdict. One chronological block on 18 March reverses
+strongly and channel topology remains a competing explanation.
+
+The registered verdict is **NESTED INDIVIDUAL WINDOW RELATION NOT SUPPORTED**.
+The result is retained as a directional, near-support signal: decompressed
+children contain information lost by the fixed parent band, but the relation
+is not yet stable enough to confirm. The linked outcome is charged-daughter
+timing, not direct observation of either neutrino or an exact creation instant.
+
+Primary record:
+`analysis/muon/T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md`.
+Report artifact and visual:
+`analysis/muon/T408_nested_windows_individual_muon/artifact.json` and
+`analysis/muon/T408_nested_windows_individual_muon/T408_NESTED_WINDOWS_INDIVIDUAL_MUON.png`.
+
+### Update - 18 August 2026: T406/T407 grandchild quarter and individual-muon transfer
+
+T406 froze Dylan's proposed `0.5 parent + 0.25 grandchild = 0.75`
+construction before calculation. The corrected primary population crest is
+`0.706306`, only `0.043694` below that endpoint and equivalent to `82.52%` of
+the proposed quarter capacity (`x_G=1.65045` after decompression). The fixed
+landmark did not replicate raw: only `7/20 = 35%` of deterministic split
+crests fell within `0.75 +/- 0.10`, with median `0.948276` and range
+`0.640380-1.057814`.
+
+The displacement is nevertheless highly structured. Prompt participation
+versus split crest has Spearman `rho=1.000`, and leave-one-split-out monotone
+prediction has median absolute error `0.000728`. Because the equality boundary
+used to construct the coordinate carries the same ordering, this is retained
+as a **participation-displaced, quarter-compatible population relation**, not
+independent proof of a universal physical `0.25` carrier.
+
+T407 then transferred the pure `0.75 +/- 0.05` band and observed
+`0.706306 +/- 0.05` band to 2,109 event-linked held-out stopped-muon records.
+Neither added predictive information about later charged-daughter timing
+beyond prompt strength, multiplicity and detector depth. Mean NLL improvements
+were `-0.00000282` and `-0.00051254`; both uncertainty intervals crossed zero,
+neither improved both runs and permutation gates failed. The descriptive
+shorter delay near these bands is therefore explained by ordinary event
+geometry in this archive.
+
+The individual verdict is **GRANDCHILD BAND TRANSFER NOT SUPPORTED**. This
+rejects the static incoming detector ratio as an individual neutrino-release
+clock; it does not reject population handover geometry. The archive observes a
+later charged daughter, not either neutrino or an individual spin trajectory.
+The next strict cut requires dynamic pre-decay spin/maturity, daughter
+direction relative to polarization, or independently reconstructed missing
+momentum.
+
+Primary record:
+`analysis/muon/T406_T407_GRANDCHILD_AND_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md`.
+Combined portable report:
+`analysis/muon/T407_individual_muon_grandchild_transfer/T406_T407_GRANDCHILD_TO_INDIVIDUAL_MUON_REPORT.html`.
+
+### Update - 18 August 2026: T404/T405 corrected child release and distortion-aware Di-ARA
+
+T404 audited T403's inverse coordinate and found a real implementation error.
+T403 had mapped the eight local-child bins linearly into source time, while
+T400 defines them by cumulative parent ARA. The attractive source crest near
+`0.532` was therefore an artefact; the correct child release crest is
+`0.706306`.
+
+The correction did not erase the detector geometry. Across all four registered
+T402 bandwidths the order is detector/parent turn `0.50-0.57`, displaced child
+release maximum `0.706`, then detector/parent handover `0.936-1.051`. The order
+survived `99.98%` of 5,000 saved-split bootstrap means. Exact release-crest
+doubling is absent in this child time slice, but this is not treated as a
+rejection of the pure parent landmark.
+
+T405 tested the missing parent-versus-child condition across 20 valid T400
+repeated splits. Prompt participation and displacement of the child crest from
+the parent `0.5` reference have Spearman `rho=1.000`; every leave-one-out result
+is also `1.000`. The equality-boundary position has the same perfect rank.
+Consequently the result validates that the ARA cut translates a parent
+landmark into participation-dependent child coordinates, but the relation is
+structurally encoded by the coordinate construction and is not independent
+physical confirmation of an energy carrier.
+
+The candidate Di-ARA is remaining-parent storage versus delayed-child release
+flow. It is a useful descriptive phase portrait but its two axes derive from
+the same fitted delayed template. T397 remains aggregate muSR phase data; no
+current input event-links an individual spinning muon to its charged daughter
+and both neutrinos.
+
+Integrated report:
+`analysis/muon/T404_corrected_child_release_diara/T404_CORRECTED_CHILD_RELEASE_DIARA_REPORT.html`.
+T405 visual:
+`analysis/muon/T405_parent_landmark_child_distortion/T405_PARENT_LANDMARK_CHILD_DISTORTION.png`.
+
+### Update - 18 August 2026: T403 reverse detector-to-muon component lineage
+
+T403 reversed the usual parent-to-child direction. It began with T402's
+measured detector-source contrast, retained the unchanged T400 local child ARA
+coordinate and sampled the fitted T398 delayed-source components at the same
+eight bin centres. T397 silver spin phase was kept as a separate exploratory
+comparison rather than inserted into the COHERENT event lineage.
+
+The aggregate detector footprint strongly matches the common delayed-release
+branch. Direct centred cosines are `0.9569` for `anti_nu_mu`, `0.9549` for
+the delayed total and `0.9503` for `nu_e`; each registered unshifted alignment
+ranks `1/8`. This locates a delayed-release component but does not distinguish
+the two neutrino children. Their fitted shapes are themselves nearly collinear
+on this window (cosine `0.99736`), while their area-normalized flavor-shape
+contrast matches the detector by only `0.1341` and ranks `8/8`.
+
+The stronger derivative-specific claim failed. Reversed release-gradient and
+remaining-parent-curvature components reach absolute cosine about `0.769`, but
+do not beat the whole delayed branch. Across the `326` saved T402 resampling
+probes, the selected relation has median cosine `0.315`, 95% resampling interval
+`[-0.660,0.814]`, and only `15.95%` reach absolute cosine `0.65`. T397's best
+fitted shape comparison reaches `0.723` but its fixed alignment ranks `3/8`
+and it remains a different medium, detector and experiment.
+
+The frozen verdict is **PARTIAL COMPONENT RELATION**: the detector contains a
+population-level projection of the joint delayed-neutrino release branch, not
+a flavor-resolved child, split-stable individual waveform, or individual
+neutrino-birth clock. Independent saved-output validation passed; confidence
+is `Share with caveats`.
+
+Primary record:
+`analysis/muon/T403_REVERSE_COMPONENT_LINEAGE_FINDINGS_2026-08-18.md`.
+Portable report:
+`analysis/muon/T403_reverse_component_lineage/T403_REVERSE_COMPONENT_LINEAGE_REPORT.html`.
+
+### Update - 17 August 2026: T402 whole-shape child relation
+
+T402 followed the broader shape visible after T401 while retaining the same
+COHERENT CsI delayed-child identity, medium and local child ARA cut. It used
+fresh deterministic salts `600–999`; `326/400` calibration-to-holdout
+transfers formed valid ordered child windows.
+
+The registered raw two-lobe claim failed. C had a stable lower-lobe-versus-
+saddle contrast (`+0.02774`, resampling interval
+`[+0.02238,+0.03306]`), but its apparent upper lobe was weak
+(`+0.00392`, interval `[-0.00103,+0.00881]`) and positive in only
+`55.52%` of valid partitions. The frozen overall verdict is therefore **NO
+STABLE WHOLE SHAPE**.
+
+A narrower source-specific relation did replicate. The aggregate C-minus-AC
+axis was positive in `3/4` lower-half bins and negative in all `4/4`
+upper-half bins; its split-wise lower-positive and upper-negative fractions
+were both `73.62%`. All four frozen KDE bandwidths placed the positive crest
+near `0.50–0.57`, the ridge-nearest crossing near `0.94–1.05`, and the
+negative trough near `1.88–1.91`. Thus the **source-specific child-rung
+handover axis is supported descriptively and continuously**.
+
+Exact reflected anti-phase was not identified: reflected cosine was `0.204`,
+the exact reverse ranked `19/24`, no bin-count sensitivity exceeded the
+registered cosine gate, and unshifted source alignment ranked `3/8`. T402
+therefore supports a stable, asymmetric source-difference handover across the
+child ridge, not an exact mirror reconstruction and not an individual-neutrino
+birth tag. Independent saved-output validation passed.
+
+Primary record:
+`analysis/muon/T402_WHOLE_SHAPE_CHILD_RELATION_FINDINGS_2026-08-17.md`.
+Portable report:
+`analysis/muon/T402_whole_shape_child_relation/T402_WHOLE_SHAPE_CHILD_RELATION_REPORT.html`.
+
+### Update - 17 August 2026: T401 winner projection / candidate child anti-phase
+
+T401 tested Dylan's survivor-bias reading of T400's apparently empty
+`1.25â€“1.50` mode band. It kept every split's complete delayed-child
+distribution instead of compressing each split to its single winning bin,
+expanded the audit from 20 to 200 deterministic partitions, removed fixed-bin
+edges with a continuous KDE mode and compared the exact ARA reflection against
+all 24 lower-to-upper pairings and the AC source control.
+
+The visual gap did not survive. Of 200 requested partitions, 164 formed valid
+ordered child windows. The candidate band carried `11.8614%` mean C occupancy,
+`99.1056%` of the mean of its two neighbours, and won `13/164 = 7.9268%` of
+binned splits and `17/164 = 10.3659%` of continuous-mode splits. A
+sampling-only winner model predicted `7.5015%`; observed versus null gave
+`p=0.76727`. Its volatility was ordinary (`1.02934` times the median bin).
+
+The exact reflected anti-phase mapping was also weak: C exchange score
+`0.04670`, only `2/4` negative pairs and rank `13/24`. Every frozen scientific
+gate failed. Claim status is therefore **not supported for this candidate
+band**. The useful survivor-bias correction remains: T400's graph omitted most
+of each distribution, but the omitted information fills rather than reveals
+the proposed hidden band. This result does not deny an anti-phase in the
+physical identity; it prevents this projection artifact from locating one.
+
+Thirty-six partitions could not form the ordered calibration child window;
+that `82%` validity rate is retained as a source-resolution boundary. The
+independent saved-output validator passed all integrity and arithmetic checks.
+
+Primary records:
+`analysis/muon/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T401_winner_projection_child_antiphase/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_REPORT.html`.
+
+### Update - 17 August 2026: T400 nested child window, population to event
+
+T400 cut the delayed-dominant interval from the fitted COHERENT CsI parent,
+expanded it to its own local ARA `0–2`, froze the construction on calibration
+events, and transferred it unchanged to untouched detector-event rows. The
+objective child window ran from `0.568858` to `1.382809 microseconds`, with the
+delayed crest at `0.785500 microseconds`.
+
+The population weighted mean and median landed near the local `1.0` ridge at
+`1.09251` and `1.11429`. The event-candidate weighted mean and median also
+landed near it at `1.05075` and `1.03814`. However, the stronger frozen
+density claim failed: the primary population crest was `0.70631`, below the
+predeclared `0.75–1.25` interval, and the primary event mode was `1.875`.
+Only `60%` of deterministic splits put the event mode inside its broad ridge
+window, with `8.98271` effective delayed weights in the primary holdout.
+
+Claim status is **partial**: the parent-to-child coordinate and ridge-centred
+balance transfer, but a bell-like density maximum at the ridge and an
+individual neutrino-creation clock are not supported by this archive. The
+saved full T398 population fit places the crest closer to the ridge at
+`0.88996`, demonstrating source-resolution sensitivity; it is diagnostic and
+does not replace the frozen T400 primary result. Independent validation passed
+all integrity and arithmetic checks.
+
+Primary records:
+`analysis/muon/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T400_nested_child_window_population_to_event/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_REPORT.html`.
+
+### Update - 17 August 2026: T399 child-half before delayed-neutrino crest
+
+T399 froze the visual reading suggested by T398: prompt crest, branch
+equality, cumulative child half and delayed-neutrino crest should occur in
+that order, with the prompt crest roughly one quarter ARA unit below child
+half. The best-fit native COHERENT identity does show this sequence at
+`0.500500`, `0.636074`, `0.686649` and `0.785500 microseconds`. Its cumulative
+ARA coordinates are `0.244269`, `0.437389`, `0.500000` and `0.600426`, so the
+prompt-to-half displacement is `0.255731`.
+
+The stronger frozen robustness verdict did not pass. Child half preceded the
+delayed crest in `17/18 = 94.44%` of registered leave-one-bin-out fits and in
+`93.13%` of 10,000 fixed-shape yield-sensitivity draws, below the predeclared
+95% sensitivity gate. The independent coarse T378 release retained the order.
+A circular-shift alignment control returned `p_upper = 0.07333`, above the
+frozen 0.05 threshold.
+
+Post-result diagnosis showed why: for these branch shapes the prompt share
+must exceed `0.126966` for child half to remain before the delayed crest. The
+fitted share is `0.188586`; the single leave-one-out failure falls to
+`0.085961`. Claim status is therefore **observed in the fitted population and
+directionally robust, but not supported at the frozen high-stringency
+threshold**. The placement is identity- and parent-asymmetry-dependent, not a
+universal fixed child-half clock. No individual neutrino birth was observed.
+
+Primary records:
+`analysis/muon/T399_CHILD_HALF_PRECREST_SEQUENCE_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T399_child_half_precrest_sequence/T399_CHILD_HALF_PRECREST_SEQUENCE_REPORT.html`.
+
+### Update - 17 August 2026: T398 population neutrino wave overlap
+
+T398 placed the stopped-pion source, inferred remaining-muon population and
+delayed neutrino release on one evidence-graded time axis. The official
+COHERENT 2022 CsI fit requires a delayed `nu_e + anti_nu_mu` population:
+`258.94245` fitted events with 95% interval `[187.91715,333.29511]`; removing
+it costs `57.68352` AIC units. The fitted prompt and delayed rates are equal at
+`0.6360822416 microseconds`, inside the frozen T372 interval.
+
+The official flavor templates divide the delayed branch into `38.7220% nu_e`
+and `61.2780% anti_nu_mu` and close exactly to the combined delayed waveform.
+An earlier independent COHERENT CsI source again resolves positive prompt and
+delayed populations in the correct order, but retains its partial T378
+high-stringency verdict.
+
+Claim status:
+
+- **supported:** population-level prompt-to-delayed neutrino release ordering;
+- **supported:** detector-weighted flavor-template closure into the delayed
+  branch;
+- **not observed:** an individual muon's exact neutrino birth time or event-
+  linked neutral pair;
+- **not joined:** T397 RAL Silver phase and COHERENT CsI events.
+
+All eight frozen gates and all eleven independent saved-artifact checks passed.
+Primary records:
+`analysis/muon/T398_POPULATION_NEUTRINO_WAVE_OVERLAP_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T398_population_neutrino_wave_overlap/T398_POPULATION_NEUTRINO_WAVE_OVERLAP_REPORT.html`.
+
+### Update - 17 August 2026: T397 spin phase maturity versus orientation
+
+T397 froze a detector-level separation between two proposed roles for muon
+spin phase in the same 300 K RAL Silver identity. The full signed 96-detector
+field `O` tested whether spin phase organises charged-daughter direction. The
+raw total `U`, bank-balanced total `V` and detector-normalized common mode `W`
+formed an acceptance ladder for the stronger claim that spin phase marks
+population release maturity.
+
+Odd spin cycles trained fixed phase coefficients and even cycles were held
+out at 63, 160 and 400 G. The pooled weighted-SSE gain was `14.4147%` for `O`,
+hierarchical 95% interval `[2.4618%,25.2033%]`, and remained positive in every
+field. Orientation therefore passed. The strict common mode gained only
+`0.7128%`, interval `[-1.9853%,2.8053%]`, with phase amplitude `0.06310%` of
+the parent envelope. Although its phase was coherent and its physical cadence
+beat the frozen wrong-cadence controls, `W` reversed sign at 400 G and failed
+reverse-parity field consistency.
+
+Classification: **orientation supported; maturity not supported**. The result
+supports spin phase as a population-level organiser of charged-daughter
+direction. It does not establish a universal phase-of-release clock, an
+individual neutrino-creation time, the failed exact 7.5-turn trigger or new
+particle physics. The source was inspected previously, so this is a locked
+new-question test rather than a source-blind replication. Independent
+validation passed all checks.
+
+Protocol SHA-256:
+`62D2ADA024A2D7077FCB9A893871EB960BE324ACC431158B24011DC3161B41F5`.
+Primary records:
+`analysis/muon/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_REPORT.html`.
+
+### Update - 16 August 2026: T396 independent spin relation / hidden-child lock
+
+T396 executed the next strict test frozen after T395. It added an independently
+observed charged-daughter/spin relation,
+`R=1+cos(theta_eS)`, to the parent charged-versus-neutral coordinate `P=x_e`
+and asked whether the pair predicted the hidden neutral-child split
+`C=2*x_nu_e/(2-P)` more strongly than either observed cut alone. The primary
+population contained one million fresh polarized positive-muon `V-A` truth
+events; `300,059` events remained untouched until final scoring.
+
+The predeclared dense joint estimator improved holdout NLL by
+`0.01550638` nats/event over the parent-only model, with block-bootstrap 95%
+interval `[0.01441225,0.01664197]`. Shuffled, wrong-event, mirrored and
+phase-space relations degraded the result. A lower-variance factorized fusion
+performed better still, gaining `0.02088526` nats/event over parent-only. Its
+gain fell monotonically with polarization (`0.020885`, `0.013528`, `0.003719`,
+`-0.001245` at `P_mu=1,0.85,0.5,0`) and vanished under the zero-polarization
+falsifier.
+
+This supports the ARA/Information³ statement that two independently observed
+event-level relations contain complementary information about a third hidden
+relation in the frozen truth model. Because factorized fusion beat the dense
+grid, the result does not require a learned nonlinear `P x R` interaction.
+It remains a leading-order Standard-Model truth crosswalk, not direct
+two-neutrino observation, an individual pre-decay clock or an empirical
+detector result. Independent validation passed every frozen check.
+
+Primary records:
+`analysis/muon/T396_INFORMATION3_SPIN_CHILD_LOCK_FINDINGS_2026-08-16.md` and
+`analysis/muon/T396_information3_spin_child_lock/T396_INFORMATION3_SPIN_CHILD_LOCK_REPORT.html`.
+
+### Update - 16 August 2026: T395 Information³ parent/child neutrino lock
+
+T395 tested whether the T392–T394 parent charged-versus-joint-neutral cut and
+the native two-neutrino child cut form one event-level Information³ hierarchy.
+With both cuts supplied, the two absolute neutral branches reconstructed to
+machine precision; this was classified as a forced nested-coordinate identity,
+not independent evidence. In the non-trivial blinded gate, a calibration-only
+parent-conditioned model predicted the hidden child distribution in `300,059`
+untouched truth events with `0.26429817` nats/event gain over the unconditional
+child model, block-bootstrap 95% interval `[0.26256574,0.26603493]`. It also
+beat parent-shuffled, identity-reversed and phase-space controls. Individual
+point reconstruction improved only modestly, so the supported claim is a
+strong statistical parent-to-child lock in the frozen Standard-Model `V-A`
+truth crosswalk, not exact prediction of an individual neutrino split, direct
+two-neutrino observation or pre-decay timing. The independent validator passed
+all checks.
+
+Primary record:
+`analysis/muon/T395_INFORMATION3_PARENT_CHILD_LOCK_FINDINGS_2026-08-16.md`.
+
 ### Update - 15 August 2026: T394 native neutral pair and causal release
 
 T394 completed the two follow-ups frozen after T393. Test 1 measured the two

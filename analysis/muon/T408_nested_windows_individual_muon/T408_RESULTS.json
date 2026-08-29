@@ -1,0 +1,290 @@
+{
+  "test": "T408 nested windows in individual muons",
+  "date": "2026-08-18",
+  "protocol_sha256": "5db709f64b3b8a1eb3684c0afa0a6ea282cdb6fce7fc4a5998711cbc78fb2c0b",
+  "event_source_sha256": "0e5acb531ccd5641ce51c2d7a512d22ce76da634563c8dedbb0586db504ee0c9",
+  "curve_source_sha256": "598792cda7ad569f15cfcd653f4c08737eed723ae1dbee30ed20fe6e1e59052a",
+  "verdict": "NESTED INDIVIDUAL WINDOW RELATION NOT SUPPORTED",
+  "windows_us": {
+    "parent": [
+      0.568857971327256,
+      1.3828086704815923
+    ],
+    "pure": [
+      0.7142712786591984,
+      0.8018035139192562
+    ],
+    "observed": [
+      0.7142712786591984,
+      0.7856152553250793
+    ],
+    "t_at_0p5": 0.7142712786591984,
+    "t_at_0p75": 0.8018035139192562,
+    "t_at_0p706306": 0.7856152553250793
+  },
+  "all_event_counts": {
+    "calibration": 2396,
+    "holdout": 2109
+  },
+  "parent_window_counts": {
+    "calibration": 599,
+    "holdout": 527
+  },
+  "pure": {
+    "n_calibration": 599,
+    "n_holdout": 527,
+    "positive_calibration": 59,
+    "positive_holdout": 62,
+    "positive_rate_calibration": 0.09849749582637729,
+    "positive_rate_holdout": 0.11764705882352941,
+    "models": {
+      "MG": {
+        "mean_logloss": 0.3679135239544168,
+        "auc": 0.5128858827610129,
+        "brier": 0.10441990700741076
+      },
+      "MP": {
+        "mean_logloss": 0.3687783783982659,
+        "auc": 0.515938258758238,
+        "brier": 0.10442433767972793
+      },
+      "MN": {
+        "mean_logloss": 0.36640257143363303,
+        "auc": 0.5443114810960805,
+        "brier": 0.10432363599546253
+      },
+      "MW": {
+        "mean_logloss": 0.36744004928850393,
+        "auc": 0.5368192854665279,
+        "brier": 0.10421609704410754
+      }
+    },
+    "contrasts": {
+      "MG_minus_MP": -0.0008648544438490654,
+      "MP_minus_MN": {
+        "draws": 20000,
+        "block_means": [
+          0.006432009089499193,
+          0.009635253645635635,
+          0.0013733335871407926,
+          -0.0006422719114620803,
+          -0.00020914148953066726,
+          -0.0008183315502657594,
+          0.007552201720724458,
+          0.0031931129785592147,
+          0.005096444491476469,
+          0.003706399935740356,
+          -0.012279959595797762,
+          0.005472128067751151
+        ],
+        "mean": 0.0023758069646328955,
+        "ci95": [
+          -0.0009909473532485375,
+          0.0051384963347682125
+        ]
+      },
+      "MN_minus_MW": 0.0010374778548709052
+    },
+    "by_run": {
+      "6845.2020.0317.0": {
+        "n": 270,
+        "positive": 33,
+        "MP_minus_MN_logloss": 0.002628475228502852,
+        "model_logloss": {
+          "MG": 0.3818377034817745,
+          "MP": 0.38299182230858947,
+          "MN": 0.3803633470800866,
+          "MW": 0.38025893651773995
+        }
+      },
+      "6845.2020.0318.0": {
+        "n": 257,
+        "positive": 29,
+        "MP_minus_MN_logloss": 0.002110357815820101,
+        "model_logloss": {
+          "MG": 0.35328500849765976,
+          "MP": 0.3538459665080427,
+          "MN": 0.3517356086922226,
+          "MW": 0.3539727358570107
+        }
+      }
+    },
+    "permutation": {
+      "draws": 5000,
+      "mean": -3.111100348515361e-05,
+      "ci95": [
+        -0.005184153140701683,
+        0.005009777122713533
+      ],
+      "p_upper_add_one": 0.17516496700659867
+    },
+    "gates": {
+      "G1_sample_size": true,
+      "G2_both_holdout_runs_positive": true,
+      "G3_bootstrap_ci_strictly_positive": false,
+      "G4_nested_beats_wrong_lineage": true,
+      "G5_permutation_p_at_most_0p05": false
+    },
+    "supported": false
+  },
+  "observed": {
+    "n_calibration": 599,
+    "n_holdout": 527,
+    "positive_calibration": 48,
+    "positive_holdout": 51,
+    "positive_rate_calibration": 0.08013355592654424,
+    "positive_rate_holdout": 0.0967741935483871,
+    "models": {
+      "MG": {
+        "mean_logloss": 0.3193716736550572,
+        "auc": 0.5672062942824189,
+        "brier": 0.0872799319692642
+      },
+      "MP": {
+        "mean_logloss": 0.31996845553572034,
+        "auc": 0.5632105783489867,
+        "brier": 0.08721049789611988
+      },
+      "MN": {
+        "mean_logloss": 0.316102606676044,
+        "auc": 0.5994603723842478,
+        "brier": 0.08708374848656975
+      },
+      "MW": {
+        "mean_logloss": 0.31808856938040714,
+        "auc": 0.5754448838358873,
+        "brier": 0.08708493074628035
+      }
+    },
+    "contrasts": {
+      "MG_minus_MP": -0.0005967818806631001,
+      "MP_minus_MN": {
+        "draws": 20000,
+        "block_means": [
+          0.005956640378832929,
+          0.013127047729004178,
+          0.007241188950619241,
+          -0.005822730342037514,
+          0.008475260028323032,
+          0.0055610335638071,
+          0.007989021107544864,
+          0.003111698897327198,
+          0.00521084464153948,
+          0.008597539546684244,
+          -0.022183400335678363,
+          0.008711125459422245
+        ],
+        "mean": 0.0038658488596762563,
+        "ci95": [
+          -0.0018401730350233905,
+          0.007963943032036966
+        ]
+      },
+      "MN_minus_MW": 0.001985962704363131
+    },
+    "by_run": {
+      "6845.2020.0317.0": {
+        "n": 270,
+        "positive": 26,
+        "MP_minus_MN_logloss": 0.0057564067180914955,
+        "model_logloss": {
+          "MG": 0.3201842672835693,
+          "MP": 0.3215058336846393,
+          "MN": 0.3157494269665478,
+          "MW": 0.31754840591518163
+        }
+      },
+      "6845.2020.0318.0": {
+        "n": 257,
+        "positive": 25,
+        "MP_minus_MN_logloss": 0.0018796596699014922,
+        "model_logloss": {
+          "MG": 0.31851797606868254,
+          "MP": 0.3183533111769338,
+          "MN": 0.31647365150703227,
+          "MW": 0.3186560562893988
+        }
+      }
+    },
+    "permutation": {
+      "draws": 5000,
+      "mean": -0.002705642969123982,
+      "ci95": [
+        -0.010044003775557406,
+        0.004249629822440291
+      ],
+      "p_upper_add_one": 0.03279344131173765
+    },
+    "gates": {
+      "G1_sample_size": true,
+      "G2_both_holdout_runs_positive": true,
+      "G3_bootstrap_ci_strictly_positive": false,
+      "G4_nested_beats_wrong_lineage": true,
+      "G5_permutation_p_at_most_0p05": true
+    },
+    "supported": false
+  },
+  "boundaries": [
+    "The larger and smaller outcome windows are transferred from T400; they are not fitted to T379 delays.",
+    "The four-counter child decomposition uses only the incoming prompt cluster and calibration-only gain normalization.",
+    "The linked later signal is a charged-daughter candidate, not a direct observation of either neutrino.",
+    "A positive classifier changes an event-level probability; it cannot identify an exact deterministic neutrino-birth instant."
+  ],
+  "descriptive_diagnostics": {
+    "worst_pure_block": {
+      "file": "6845.2020.0318.0",
+      "block": 5,
+      "n": 43,
+      "pure_positive": 5,
+      "pure_positive_rate": 0.11627906976744186,
+      "pure_parent_minus_nested_logloss": -0.012279959595797734,
+      "observed_positive": 4,
+      "observed_positive_rate": 0.09302325581395349,
+      "observed_parent_minus_nested_logloss": -0.022183400335678338
+    },
+    "worst_observed_block": {
+      "file": "6845.2020.0318.0",
+      "block": 5,
+      "n": 43,
+      "pure_positive": 5,
+      "pure_positive_rate": 0.11627906976744186,
+      "pure_parent_minus_nested_logloss": -0.012279959595797734,
+      "observed_positive": 4,
+      "observed_positive_rate": 0.09302325581395349,
+      "observed_parent_minus_nested_logloss": -0.022183400335678338
+    },
+    "topologies": [
+      {
+        "topology": "both pairs",
+        "n": 359,
+        "pure_positive": 35,
+        "pure_positive_rate": 0.09749303621169916,
+        "observed_positive": 25,
+        "observed_positive_rate": 0.06963788300835655,
+        "mean_nested_probability_pure": 0.09000200438401022,
+        "mean_nested_probability_observed": 0.06846742938523515
+      },
+      {
+        "topology": "A only",
+        "n": 150,
+        "pure_positive": 25,
+        "pure_positive_rate": 0.16666666666666666,
+        "observed_positive": 25,
+        "observed_positive_rate": 0.16666666666666666,
+        "mean_nested_probability_pure": 0.09964358528797114,
+        "mean_nested_probability_observed": 0.09045658153226839
+      },
+      {
+        "topology": "B only",
+        "n": 18,
+        "pure_positive": 2,
+        "pure_positive_rate": 0.1111111111111111,
+        "observed_positive": 1,
+        "observed_positive_rate": 0.05555555555555555,
+        "mean_nested_probability_pure": 0.10413848990898625,
+        "mean_nested_probability_observed": 0.0926157568710808
+      }
+    ],
+    "boundary": "These diagnostics explain the frozen uncertainty result; they are not additional confirmation gates."
+  }
+}

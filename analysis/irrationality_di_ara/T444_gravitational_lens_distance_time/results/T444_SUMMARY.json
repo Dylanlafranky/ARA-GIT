@@ -1,0 +1,113 @@
+{
+  "test": "T444",
+  "generated_at": "2026-08-28T01:20:42+00:00",
+  "frozen_cosmology": {
+    "H0_km_s_Mpc": 70.0,
+    "Omega_m": 0.3
+  },
+  "quality": {
+    "a1_rows": 1090,
+    "a1_systems": 364,
+    "b1_rows": 73,
+    "eligible_systems": 7,
+    "exclusions": {
+      "not_in_delay_table": 291,
+      "not_double": 35,
+      "ambiguous_components": 21,
+      "missing_redshift": 1,
+      "missing_tAB": 0,
+      "invalid_coordinates": 0,
+      "opening_below_150_deg": 9
+    },
+    "source_hashes": {
+      "tablea1.tsv": "f2c2dafb98a66f1ecbaa8d62a153e726eac099e15174cbb059d47cc7c1be5c52",
+      "tableb1.tsv": "5b1be971c466ad8ee88c9ea827c6a4d1243788de16f763069bbb83fa9b90923d",
+      "ReadMe.txt": "92398b525883297510eb476eb51a8ab9d2b2678cfa0746fed155774ce247ed01"
+    },
+    "null_cells_eligible": 0,
+    "duplicate_eligible_names": 0
+  },
+  "models": {
+    "pm": {
+      "spearman_rho": 0.6306562238868914,
+      "median_absolute_error_days": 96.71442404900603,
+      "median_factor_error": 2.5229927546224697,
+      "within_factor_2_count": 2,
+      "within_factor_2_share": 0.2857142857142857,
+      "median_predicted_observed_ratio": 2.5229927546224697
+    },
+    "sis": {
+      "spearman_rho": 0.6306562238868914,
+      "median_absolute_error_days": 36.954080894464674,
+      "median_factor_error": 1.8294963859382865,
+      "within_factor_2_count": 4,
+      "within_factor_2_share": 0.5714285714285714,
+      "median_predicted_observed_ratio": 1.3034837676649964
+    }
+  },
+  "permutation_controls": {
+    "pm": {
+      "real_rho": 0.6306562238868914,
+      "rho_two_sided_p": 0.1396860313968603,
+      "real_median_factor_error": 2.5229927546224697,
+      "factor_error_p": 0.21957804219578042
+    },
+    "sis": {
+      "real_rho": 0.6306562238868914,
+      "rho_two_sided_p": 0.1464853514648535,
+      "real_median_factor_error": 1.8294963859382865,
+      "factor_error_p": 0.0887911208879112
+    }
+  },
+  "residual_relations": {
+    "pm": {
+      "axisymmetry_error_deg": {
+        "n": 7,
+        "spearman_rho": 0.03571428571428572,
+        "p_value": 0.9394082054712856
+      },
+      "radius_ratio_inner_outer": {
+        "n": 7,
+        "spearman_rho": -0.5357142857142858,
+        "p_value": 0.21521745567801298
+      },
+      "max_separation_arcsec": {
+        "n": 7,
+        "spearman_rho": -0.07142857142857144,
+        "p_value": 0.879048193148154
+      },
+      "z_lens": {
+        "n": 7,
+        "spearman_rho": 0.25,
+        "p_value": 0.5887244480896832
+      }
+    },
+    "sis": {
+      "axisymmetry_error_deg": {
+        "n": 7,
+        "spearman_rho": 0.3214285714285715,
+        "p_value": 0.4820720382996778
+      },
+      "radius_ratio_inner_outer": {
+        "n": 7,
+        "spearman_rho": -0.14285714285714288,
+        "p_value": 0.7599453002180927
+      },
+      "max_separation_arcsec": {
+        "n": 7,
+        "spearman_rho": -0.14285714285714288,
+        "p_value": 0.7599453002180927
+      },
+      "z_lens": {
+        "n": 7,
+        "spearman_rho": -0.39285714285714296,
+        "p_value": 0.3833168704269727
+      }
+    }
+  },
+  "interpretation": {
+    "claim_type": "descriptive reconstruction with frozen conventional landmarks",
+    "ara_result": "travelled-path and Connection-potential terms are separately recoverable, but exact prediction remains coupling/model dependent",
+    "not_established": "a new physical force, unique ARA identity, or live future prediction"
+  }
+}

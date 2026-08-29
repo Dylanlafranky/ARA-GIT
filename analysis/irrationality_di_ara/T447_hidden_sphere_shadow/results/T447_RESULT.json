@@ -1,0 +1,124 @@
+{
+  "test": "T447",
+  "generated_at": "2026-08-29T00:17:47.096739+00:00",
+  "source": {
+    "identity": "EuRoC MH_01_easy micro-aerial vehicle",
+    "source_file": "MH_01_easy_state_groundtruth.csv",
+    "official_dataset_url": "https://projects.asl.ethz.ch/datasets/euroc-mav/",
+    "mirror_download_url": "https://sourceforge.net/projects/kimera-vio/files/dataset/MH_01_easy/mav0/state_groundtruth_estimate0/data.csv/download"
+  },
+  "quality": {
+    "source_rows": 36382,
+    "valid_unique_rows": 36382,
+    "duplicate_timestamps_removed": 0,
+    "duration_seconds": 181.904999936,
+    "median_sample_interval_seconds": 0.004999936000004368,
+    "raw_norm_min": 0.9999992220061974,
+    "raw_norm_median": 1.0000004341371558,
+    "raw_norm_max": 1.000067540593134,
+    "negative_adjacent_quaternion_dots": 0,
+    "source_sha256": "aae2d7c5684724c8afe364d2fd8499a6ed77a9169adf03736531f67d8e7b2117",
+    "development_rows": 25467,
+    "holdout_rows": 10915
+  },
+  "primary": {
+    "radius_normalized": 1.0,
+    "radius_raw_development_median": 1.000000431306907,
+    "rank_two": 2,
+    "rank_redundant": 2,
+    "rank_three": 3,
+    "three_cut": {
+      "mae": 1.292395213090906e-16,
+      "median_abs_error": 1.1102230246251565e-16,
+      "p95_abs_error": 3.3306690738754696e-16,
+      "max_abs_error": 5.551115123125783e-16,
+      "rmse": 1.6617112241316098e-16,
+      "correlation": 1.0
+    },
+    "two_cut": {
+      "mae": 0.14425721971475913,
+      "median_abs_error": 0.15701132302995796,
+      "p95_abs_error": 0.1704870517780883,
+      "max_abs_error": 0.17383015601282809,
+      "rmse": 0.14662823515922863,
+      "correlation": 0.21245299853930255
+    },
+    "raw_three_cut": {
+      "mae": 1.748541221762369e-06,
+      "median_abs_error": 7.748319800215953e-07,
+      "p95_abs_error": 7.275005056839303e-06,
+      "max_abs_error": 4.3969456901882253e-05,
+      "rmse": 3.60698694383035e-06,
+      "correlation": 0.9999999918047396
+    },
+    "shuffled_third_mae_median": 0.028586072857619833,
+    "shuffled_third_mae_q05": 0.028212881351100953,
+    "shuffled_third_mae_q95": 0.02883938320263672,
+    "three_vs_two_mae_ratio": 8.958963826187477e-16,
+    "three_vs_shuffle_median_mae_ratio": 4.521065973378041e-15
+  },
+  "axis_scan": [
+    {
+      "hidden_component": "w",
+      "visible_components": "x,y,z",
+      "source_sign_changes": 0,
+      "minimum_abs_hidden": 0.1693679749,
+      "maximum_shadow_radius": 0.985552885,
+      "median_shadow_radius": 0.8294739398,
+      "boundary_reached_within_0_001": false,
+      "primary_or_exploratory": "primary"
+    },
+    {
+      "hidden_component": "x",
+      "visible_components": "w,y,z",
+      "source_sign_changes": 4,
+      "minimum_abs_hidden": 1.1e-05,
+      "maximum_shadow_radius": 0.9999999999,
+      "median_shadow_radius": 0.9884784058,
+      "boundary_reached_within_0_001": true,
+      "primary_or_exploratory": "exploratory axis scan"
+    },
+    {
+      "hidden_component": "y",
+      "visible_components": "w,x,z",
+      "source_sign_changes": 0,
+      "minimum_abs_hidden": 0.2857178127,
+      "maximum_shadow_radius": 0.9583137959,
+      "median_shadow_radius": 0.6105093102,
+      "boundary_reached_within_0_001": false,
+      "primary_or_exploratory": "exploratory axis scan"
+    },
+    {
+      "hidden_component": "z",
+      "visible_components": "w,x,y",
+      "source_sign_changes": 15,
+      "minimum_abs_hidden": 1e-06,
+      "maximum_shadow_radius": 1.0,
+      "median_shadow_radius": 0.9957094337,
+      "boundary_reached_within_0_001": true,
+      "primary_or_exploratory": "exploratory axis scan"
+    }
+  ],
+  "phi_reference": {
+    "reference_angle_degrees": 36.0,
+    "weighted_or_invariant": false,
+    "fraction_xy_tangents_within_10_degrees": 0.03222222222222222,
+    "median_absolute_angle_distance_degrees": 96.71889059149186
+  },
+  "branch": {
+    "primary_hidden_coordinate": "w",
+    "source_sign_changes": 0,
+    "minimum_abs_w": 0.16936797488188435,
+    "maximum_visible_shadow_radius": 0.9855528849759456,
+    "identifiable": false,
+    "reason": "The primary w coordinate never reaches zero, so this trajectory remains on one mirror branch in this view."
+  },
+  "verdict": {
+    "independent_third_cut": "confirmed_in_known_S3_calibration",
+    "redundant_difference": "no_new_rank_and_no_new_information",
+    "event_linkage": "required; shuffled_third_is_materially_worse",
+    "primary_w_branch": "not_identifiable_in_MH_01_easy",
+    "physical_time_claim": "not_tested",
+    "phi_direction_claim": "coordinate_dependent_reference_only"
+  }
+}

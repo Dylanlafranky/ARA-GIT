@@ -1,0 +1,1302 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T409 \u2014 Three parent-coordinate bands, but no travelling upper ridge",
+    "description": "Chronological density-ridge tracking of the three vertical structures marked in T408.",
+    "generatedAt": "2026-08-18T05:31:58.325350+00:00",
+    "sources": [
+      {
+        "id": "t379_events",
+        "label": "T379 event-linked held-out muon records",
+        "path": "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "The event-linked incoming two-pole coordinate, wrong-lineage control, charged-daughter delay and chronological event index used by T409.",
+          "tables_used": [
+            "T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv') WHERE split = 'holdout'",
+          "filters": [
+            "Held-out rows only.",
+            "Exact x_mu poles 0 and 2 excluded from density-centre estimation but retained in population accounting."
+          ],
+          "metric_definitions": [
+            "x_mu = incoming charged-detector two-pole ARA coordinate on 0\u20132.",
+            "Chronological block = one of six equal-count event-index blocks within each run."
+          ]
+        }
+      },
+      {
+        "id": "t409_results",
+        "label": "T409 chronological ridge results",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Frozen-zone pooled centres, block motion, shuffled-order nulls, gates and boundaries.",
+          "tables_used": [
+            "T409_RESULTS.json",
+            "T409_BLOCK_RIDGES.csv"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_RESULTS.json', format='auto')",
+          "filters": [
+            "R1 0.60\u20130.90; R2 0.90\u20131.18; broad R3 1.18\u20131.55.",
+            "Six chronological blocks per held-out run."
+          ],
+          "metric_definitions": [
+            "motion_M = count-weighted root-mean-square block-centre displacement from pooled centre.",
+            "Permutation p-values are upper-tail add-one values from 5,000 shuffles."
+          ]
+        }
+      },
+      {
+        "id": "t409b_results",
+        "label": "T409B marked upper-interior sensitivity",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409B_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Post-hoc strictly interior local-crest repair for the marked structure near x_mu 1.35.",
+          "tables_used": [
+            "T409B_RESULTS.json",
+            "T409B_BLOCK_CRESTS.csv"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409B_RESULTS.json', format='auto')",
+          "filters": [
+            "Search interval 1.25\u20131.50.",
+            "Strictly interior local maxima only; five-event and 1.10 contrast resolution thresholds."
+          ],
+          "metric_definitions": [
+            "Marked R3 centre = highest strictly interior Gaussian-smoothed local maximum in the frozen sensitivity interval."
+          ]
+        }
+      },
+      {
+        "id": "t409_protocol",
+        "label": "T409/T409B frozen method records",
+        "path": "analysis/muon/T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_PROTOCOL_2026-08-18.md",
+        "query": {
+          "description": "Pre-calculation T409 protocol plus the post-edge-capture T409B sensitivity protocol.",
+          "tables_used": [
+            "T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_PROTOCOL_2026-08-18.md",
+            "T409B_MARKED_UPPER_INTERIOR_SENSITIVITY_PROTOCOL_2026-08-18.md"
+          ],
+          "filters": [
+            "T409B is explicitly post-hoc and cannot upgrade the visual observation to confirmatory status."
+          ]
+        }
+      },
+      {
+        "id": "t409_validation",
+        "label": "T409 independent validation",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Independent direct-Gaussian centre checks, population/pole counts and saved-block motion recomputation.",
+          "tables_used": [
+            "T409_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t409_report_track",
+        "label": "T409 reviewed chronological ridge-track rows",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_TRACK.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Reviewed R1/R2 frozen block centres joined to the T409B marked-interior crest rows for one report comparison.",
+          "tables_used": [
+            "T409_REPORT_RIDGE_TRACK.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_TRACK.csv') ORDER BY global_block, ridge",
+          "filters": [
+            "Resolved block centres only.",
+            "Marked R3 rows retain post-hoc estimator status."
+          ]
+        }
+      },
+      {
+        "id": "t409_report_motion",
+        "label": "T409 reviewed motion-control rows",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_MOTION.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Observed motion and two 95th-percentile shuffle controls for each reported ridge.",
+          "tables_used": [
+            "T409_REPORT_MOTION.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_MOTION.csv')",
+          "metric_definitions": [
+            "motion_M is the count-weighted RMS chronological block-centre displacement from the pooled centre."
+          ]
+        }
+      },
+      {
+        "id": "t409_report_occupancy",
+        "label": "T409 reviewed ridge occupancy rows",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_OCCUPANCY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Non-pole zone event counts, shares, centres and resolution counts for R1, R2 and marked R3.",
+          "tables_used": [
+            "T409_REPORT_OCCUPANCY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_OCCUPANCY.csv') ORDER BY centre",
+          "filters": [
+            "Exact x_mu poles 0 and 2 excluded from zone shares."
+          ]
+        }
+      },
+      {
+        "id": "t409_report_summary",
+        "label": "T409 reviewed ridge summary rows",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_SUMMARY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Reader-facing centre, occupancy, motion, permutation and method-status summary.",
+          "tables_used": [
+            "T409_REPORT_RIDGE_SUMMARY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_SUMMARY.csv') ORDER BY centre"
+        }
+      },
+      {
+        "id": "t409_report_gates",
+        "label": "T409 reviewed gates and repair status",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_GATES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Frozen T409 gate outcomes plus explicit broad-R3 edge-capture and T409B sensitivity status.",
+          "tables_used": [
+            "T409_REPORT_GATES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_GATES.csv') ORDER BY gate"
+        }
+      },
+      {
+        "id": "t409_report_validation",
+        "label": "T409 reviewed validation row",
+        "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_VALIDATION.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "description": "Compact independent validation status and retained method boundary.",
+          "tables_used": [
+            "T409_REPORT_VALIDATION.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_VALIDATION.csv')"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T409 \u2014 Three parent-coordinate bands, but no travelling upper ridge"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "t409_report_summary",
+        "body": "## Technical summary\n\n**The vertical structure you marked is real as a population-density pattern, but the third band is not a resolved travelling branch in chronological order.** The two dominant non-pole centres are `0.761` and `1.041`. Repairing the broad-R3 edge capture recovers the marked upper-interior crest at `1.395`, present in `10/12` blocks, but its motion is smaller than shuffled-order expectation (`M=0.0406`, shuffle median `0.0465`, global `p=0.745`). R1 is persistent and only marginally more mobile than shuffled order (`p=0.070`). R2 is also persistent but does show excess block displacement (`p=0.016`). The clean reading is therefore **two strong bands, one weaker third crest, and no evidence that the third is uniquely movement-loaded in this cut**."
+      },
+      {
+        "id": "findings",
+        "type": "markdown",
+        "sourceId": "t409_report_summary",
+        "body": "## The three recovered centres\n\n- **R1:** centre `0.761`, `584` non-pole events, resolved in all 12 blocks.\n- **R2:** centre `1.041`, `560` non-pole events, resolved in all 12 blocks.\n- **Marked R3:** local crest `1.395`, only `90` non-pole events, resolved in 10 blocks.\n\nThe original frozen broad R3 estimator selected `1.180`, exactly its lower boundary. That output is preserved as a failed operationalization; the `1.395` post-hoc local-crest sensitivity is the relevant description of the line drawn near `1.35`."
+      },
+      {
+        "id": "track_chart_block",
+        "type": "chart",
+        "chartId": "ridge_track"
+      },
+      {
+        "id": "motion_text",
+        "type": "markdown",
+        "sourceId": "t409_report_motion",
+        "body": "## Chronology does not single out the upper crest as movement\n\nThe marked R3 centre ranges from `1.302` to `1.438`, but sparse crests move that much under random event ordering. Its observed motion is below both the global and within-run shuffle medians, so the visible wobble is not evidence of a travelling branch. R2 is the only band whose block displacement exceeds its shuffle control at this resolution. That may represent a genuine regime-sensitive relation, but it is not the originally proposed moving upper line and it needs a fresh frozen replication."
+      },
+      {
+        "id": "motion_chart_block",
+        "type": "chart",
+        "chartId": "motion_control"
+      },
+      {
+        "id": "strength_text",
+        "type": "markdown",
+        "sourceId": "t409_report_occupancy",
+        "body": "## The third crest is structurally weaker\n\nAfter excluding exact `0` and `2` topology poles, R1 and R2 contain roughly `41.0%` and `39.3%` of the 1,425 usable coordinates. The marked R3 interval contains `6.3%`. Its lower occupancy explains why its apparent block centre is less stable and why a visual stripe can look mobile without exceeding an order-shuffled control."
+      },
+      {
+        "id": "occupancy_chart_block",
+        "type": "chart",
+        "chartId": "ridge_occupancy"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "t379_events",
+        "body": "## Scope, population and metric definitions\n\n- **Population:** 2,109 held-out event-linked stopped-muon candidates from runs dated 17 and 18 March 2020.\n- **Usable non-pole coordinates:** 1,425. Exact `x_mu=0` (`576` events) and `x_mu=2` (`108` events) remain in population accounting but are excluded from density centres because they are detector/topology poles.\n- **Chronology:** six equal-count event-index blocks per run.\n- **Ridge centre:** maximum of a Gaussian-smoothed density with bandwidth `0.035 ARA`; marked R3 uses a strictly interior local maximum.\n- **Motion:** count-weighted RMS block-centre displacement from the pooled centre.\n- **Observation boundary:** the coordinate is derived from the incoming charged-detector channels; neither neutrino is directly observed."
+      },
+      {
+        "id": "summary_table_block",
+        "type": "table",
+        "tableId": "ridge_summary"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "t409_protocol",
+        "body": "## Method and repair boundary\n\nT409 froze three zones before calculation and compared chronological motion with 5,000 global-order and 5,000 within-run shuffles. The first broad R3 calculation failed to isolate the marked line because its maximum sat on the interval boundary. T409B was frozen only after that failure and searched for a strictly interior local crest in `1.25\u20131.50`. It is therefore a transparent sensitivity, not a new confirmatory gate."
+      },
+      {
+        "id": "gate_table_block",
+        "type": "table",
+        "tableId": "gate_table"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "sourceId": "t409_validation",
+        "body": "## Limitations, uncertainty and validation\n\nAll 18 independent arithmetic/source checks passed. Direct Gaussian sums reproduced the pooled centres and saved block rows reproduced every motion statistic. The full permutation arrays were not retained, so validation confirms the registered draw counts and p-values but does not independently replay every null draw. More importantly, this is a diagnostic prompted by the T408 visual: stable density bands can reflect physical relation, detector/channel response, low-multiplicity ratios, or mixtures of those effects."
+      },
+      {
+        "id": "validation_table_block",
+        "type": "table",
+        "tableId": "validation_table"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nFreeze the three centres on these two runs and test them unchanged on a genuinely independent event source. For the movement question, pair `x_mu` with a second incoming cut that can represent the missing anti-phase or maturity direction; chronology alone does not supply it. The present result supports a three-band parent-coordinate description, not a neutrino-release timestamp or a uniquely moving R3 branch."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does R2's excess chronological displacement replicate in a fresh run?\n- Does a spin/polarization-sensitive second axis convert one of these vertical bands into a coherent Di-ARA path?\n- Which part of the band structure survives detector-topology matching or calibration transfer?\n- Does the marked R3 crest strengthen when the same-scale anti-phase is observed rather than inferred?"
+      }
+    ],
+    "charts": [
+      {
+        "id": "ridge_track",
+        "title": "Resolved parent-coordinate ridge centres across chronological blocks",
+        "subtitle": "R1 and R2 use frozen broad zones; marked R3 uses the post-hoc strictly interior crest and leaves gaps where unresolved.",
+        "type": "line",
+        "dataset": "ridge_track",
+        "sourceId": "t409_report_track",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold-pink"
+        },
+        "encodings": {
+          "x": {
+            "field": "global_block",
+            "type": "quantitative",
+            "label": "Chronological block (1\u201312)"
+          },
+          "y": {
+            "field": "centre",
+            "type": "quantitative",
+            "label": "Resolved centre on x_mu"
+          },
+          "color": {
+            "field": "ridge",
+            "type": "nominal",
+            "label": "Ridge"
+          },
+          "tooltip": [
+            {
+              "field": "block_label",
+              "type": "nominal",
+              "label": "Block"
+            },
+            {
+              "field": "events_in_zone",
+              "type": "quantitative",
+              "label": "Events in zone"
+            },
+            {
+              "field": "peak_to_median",
+              "type": "quantitative",
+              "label": "Peak/median density"
+            },
+            {
+              "field": "estimator",
+              "type": "nominal",
+              "label": "Estimator"
+            }
+          ]
+        }
+      },
+      {
+        "id": "motion_control",
+        "title": "Chronological motion against shuffled-order controls",
+        "subtitle": "Observed M must exceed shuffled movement to support chronological travel; marked R3 remains below both null thresholds.",
+        "type": "bar",
+        "dataset": "motion",
+        "sourceId": "t409_report_motion",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "ridge",
+            "type": "nominal",
+            "label": "Ridge"
+          },
+          "y": {
+            "field": "motion_M",
+            "type": "quantitative",
+            "label": "Motion M (ARA units)"
+          },
+          "color": {
+            "field": "comparison",
+            "type": "nominal",
+            "label": "Observed or shuffled control"
+          },
+          "tooltip": [
+            {
+              "field": "global_p",
+              "type": "quantitative",
+              "label": "Global shuffle p"
+            },
+            {
+              "field": "within_run_p",
+              "type": "quantitative",
+              "label": "Within-run shuffle p"
+            },
+            {
+              "field": "resolved_blocks",
+              "type": "quantitative",
+              "label": "Resolved blocks"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ridge_occupancy",
+        "title": "Events inside each recovered non-pole coordinate zone",
+        "subtitle": "The marked upper crest is present but much less populated than the two dominant bands.",
+        "type": "bar",
+        "dataset": "occupancy",
+        "sourceId": "t409_report_occupancy",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold-pink"
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        },
+        "encodings": {
+          "x": {
+            "field": "ridge",
+            "type": "nominal",
+            "label": "Recovered ridge"
+          },
+          "y": {
+            "field": "events",
+            "type": "quantitative",
+            "label": "Events in zone"
+          },
+          "tooltip": [
+            {
+              "field": "centre",
+              "type": "quantitative",
+              "label": "Pooled centre"
+            },
+            {
+              "field": "share_nonpole",
+              "type": "quantitative",
+              "label": "Share of non-pole coordinates"
+            },
+            {
+              "field": "resolved_blocks",
+              "type": "quantitative",
+              "label": "Resolved blocks"
+            },
+            {
+              "field": "method_status",
+              "type": "nominal",
+              "label": "Method status"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "ridge_summary",
+        "title": "Recovered ridge summary",
+        "subtitle": "Centres, occupancy, chronological motion and method status for the two frozen bands and repaired marked crest.",
+        "dataset": "ridge_summary",
+        "sourceId": "t409_report_summary",
+        "defaultSort": {
+          "field": "centre",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "ridge",
+            "label": "Ridge",
+            "type": "text"
+          },
+          {
+            "field": "zone",
+            "label": "Search zone",
+            "type": "text"
+          },
+          {
+            "field": "centre",
+            "label": "Centre",
+            "type": "number"
+          },
+          {
+            "field": "events",
+            "label": "Events",
+            "type": "number"
+          },
+          {
+            "field": "share_nonpole",
+            "label": "Share of non-pole",
+            "type": "percent"
+          },
+          {
+            "field": "resolved_blocks",
+            "label": "Resolved blocks",
+            "type": "number"
+          },
+          {
+            "field": "motion_M",
+            "label": "Motion M",
+            "type": "number"
+          },
+          {
+            "field": "global_p",
+            "label": "Global shuffle p",
+            "type": "number"
+          },
+          {
+            "field": "reading",
+            "label": "Reading",
+            "type": "text"
+          },
+          {
+            "field": "method_status",
+            "label": "Method status",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "gate_table",
+        "title": "Frozen gates and edge-capture repair",
+        "subtitle": "The broad R3 gate result is retained, but its boundary centre prevents it from answering the marked-line question.",
+        "dataset": "gates",
+        "sourceId": "t409_report_gates",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation_table",
+        "title": "Independent saved-output validation",
+        "subtitle": "Direct-density and saved-block arithmetic checks all passed; permutation arrays were not independently replayed.",
+        "dataset": "validation",
+        "sourceId": "t409_report_validation",
+        "defaultSort": {
+          "field": "validator",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "validator",
+            "label": "Validator",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "checks",
+            "label": "Checks",
+            "type": "number"
+          },
+          {
+            "field": "passed",
+            "label": "Passed",
+            "type": "number"
+          },
+          {
+            "field": "boundary",
+            "label": "Boundary",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-18T05:31:58.325350+00:00",
+    "datasets": {
+      "ridge_track": [
+        {
+          "global_block": 1,
+          "block_label": "0317.0 block 1",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.75,
+          "events_in_zone": 54,
+          "peak_to_median": 1.4967849710875285,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 1,
+          "block_label": "0317.0 block 1",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 1.034,
+          "events_in_zone": 49,
+          "peak_to_median": 1.5087676443254256,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 1,
+          "block_label": "0317.0 block 1",
+          "run": "6845.2020.0317.0",
+          "ridge": "R3 marked",
+          "centre": 1.401,
+          "events_in_zone": 8,
+          "peak_to_median": 1.8940151155603002,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 2,
+          "block_label": "0317.0 block 2",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.796,
+          "events_in_zone": 52,
+          "peak_to_median": 1.5783023160306238,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 2,
+          "block_label": "0317.0 block 2",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 1.032,
+          "events_in_zone": 51,
+          "peak_to_median": 1.6484730617530208,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 2,
+          "block_label": "0317.0 block 2",
+          "run": "6845.2020.0317.0",
+          "ridge": "R3 marked",
+          "centre": 1.371,
+          "events_in_zone": 7,
+          "peak_to_median": 1.5039073150175573,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 3,
+          "block_label": "0317.0 block 3",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.747,
+          "events_in_zone": 49,
+          "peak_to_median": 1.2891265467318787,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 3,
+          "block_label": "0317.0 block 3",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 0.916,
+          "events_in_zone": 43,
+          "peak_to_median": 1.2342333986605651,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 3,
+          "block_label": "0317.0 block 3",
+          "run": "6845.2020.0317.0",
+          "ridge": "R3 marked",
+          "centre": 1.4020000000000001,
+          "events_in_zone": 9,
+          "peak_to_median": 1.3325888260831886,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 4,
+          "block_label": "0317.0 block 4",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.72,
+          "events_in_zone": 51,
+          "peak_to_median": 1.4327237700564355,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 4,
+          "block_label": "0317.0 block 4",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 1.0190000000000001,
+          "events_in_zone": 37,
+          "peak_to_median": 1.1952515131956738,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 4,
+          "block_label": "0317.0 block 4",
+          "run": "6845.2020.0317.0",
+          "ridge": "R3 marked",
+          "centre": 1.438,
+          "events_in_zone": 5,
+          "peak_to_median": 1.2972028787080616,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 5,
+          "block_label": "0317.0 block 5",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.743,
+          "events_in_zone": 49,
+          "peak_to_median": 1.328180323581359,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 5,
+          "block_label": "0317.0 block 5",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 1.054,
+          "events_in_zone": 41,
+          "peak_to_median": 1.1972982287867944,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 6,
+          "block_label": "0317.0 block 6",
+          "run": "6845.2020.0317.0",
+          "ridge": "R1",
+          "centre": 0.756,
+          "events_in_zone": 50,
+          "peak_to_median": 1.8452840078731092,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 6,
+          "block_label": "0317.0 block 6",
+          "run": "6845.2020.0317.0",
+          "ridge": "R2",
+          "centre": 1.016,
+          "events_in_zone": 56,
+          "peak_to_median": 1.503769594052339,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 6,
+          "block_label": "0317.0 block 6",
+          "run": "6845.2020.0317.0",
+          "ridge": "R3 marked",
+          "centre": 1.302,
+          "events_in_zone": 5,
+          "peak_to_median": 3.4227033467285546,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 7,
+          "block_label": "0318.0 block 1",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.625,
+          "events_in_zone": 43,
+          "peak_to_median": 1.120528537911304,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 7,
+          "block_label": "0318.0 block 1",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 1.055,
+          "events_in_zone": 62,
+          "peak_to_median": 1.542502243511859,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 7,
+          "block_label": "0318.0 block 1",
+          "run": "6845.2020.0318.0",
+          "ridge": "R3 marked",
+          "centre": 1.335,
+          "events_in_zone": 7,
+          "peak_to_median": 1.1273237350996403,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 8,
+          "block_label": "0318.0 block 2",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.744,
+          "events_in_zone": 45,
+          "peak_to_median": 1.6123314932130604,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 8,
+          "block_label": "0318.0 block 2",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 1.057,
+          "events_in_zone": 50,
+          "peak_to_median": 2.0875170944054076,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 8,
+          "block_label": "0318.0 block 2",
+          "run": "6845.2020.0318.0",
+          "ridge": "R3 marked",
+          "centre": 1.3980000000000001,
+          "events_in_zone": 9,
+          "peak_to_median": 2.0002349764081937,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 9,
+          "block_label": "0318.0 block 3",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.772,
+          "events_in_zone": 41,
+          "peak_to_median": 1.4438252684601827,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 9,
+          "block_label": "0318.0 block 3",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 0.977,
+          "events_in_zone": 39,
+          "peak_to_median": 1.4546762585444306,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 9,
+          "block_label": "0318.0 block 3",
+          "run": "6845.2020.0318.0",
+          "ridge": "R3 marked",
+          "centre": 1.353,
+          "events_in_zone": 7,
+          "peak_to_median": 2.109896313544825,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 10,
+          "block_label": "0318.0 block 4",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.8170000000000001,
+          "events_in_zone": 53,
+          "peak_to_median": 1.5742658910037248,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 10,
+          "block_label": "0318.0 block 4",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 1.045,
+          "events_in_zone": 46,
+          "peak_to_median": 1.6810804052484896,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 10,
+          "block_label": "0318.0 block 4",
+          "run": "6845.2020.0318.0",
+          "ridge": "R3 marked",
+          "centre": 1.413,
+          "events_in_zone": 9,
+          "peak_to_median": 2.1125308402199665,
+          "estimator": "post-hoc strictly interior local maximum"
+        },
+        {
+          "global_block": 11,
+          "block_label": "0318.0 block 5",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.768,
+          "events_in_zone": 47,
+          "peak_to_median": 1.412405621928699,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 11,
+          "block_label": "0318.0 block 5",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 1.045,
+          "events_in_zone": 47,
+          "peak_to_median": 1.595218557424587,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 12,
+          "block_label": "0318.0 block 6",
+          "run": "6845.2020.0318.0",
+          "ridge": "R1",
+          "centre": 0.755,
+          "events_in_zone": 50,
+          "peak_to_median": 1.2780621493083417,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 12,
+          "block_label": "0318.0 block 6",
+          "run": "6845.2020.0318.0",
+          "ridge": "R2",
+          "centre": 1.033,
+          "events_in_zone": 39,
+          "peak_to_median": 1.5915313325136184,
+          "estimator": "frozen broad-zone maximum"
+        },
+        {
+          "global_block": 12,
+          "block_label": "0318.0 block 6",
+          "run": "6845.2020.0318.0",
+          "ridge": "R3 marked",
+          "centre": 1.34,
+          "events_in_zone": 8,
+          "peak_to_median": 1.2297728658839475,
+          "estimator": "post-hoc strictly interior local maximum"
+        }
+      ],
+      "motion": [
+        {
+          "ridge": "R1",
+          "comparison": "observed M",
+          "motion_M": 0.044688802189093095,
+          "global_p": 0.07038592281543692,
+          "within_run_p": 0.0665866826634673,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R1",
+          "comparison": "global shuffle q95",
+          "motion_M": 0.046232870816215674,
+          "global_p": 0.07038592281543692,
+          "within_run_p": 0.0665866826634673,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R1",
+          "comparison": "within-run shuffle q95",
+          "motion_M": 0.04595922898625976,
+          "global_p": 0.07038592281543692,
+          "within_run_p": 0.0665866826634673,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R2",
+          "comparison": "observed M",
+          "motion_M": 0.04068441259956232,
+          "global_p": 0.016396720655868825,
+          "within_run_p": 0.016396720655868825,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R2",
+          "comparison": "global shuffle q95",
+          "motion_M": 0.03355758640552575,
+          "global_p": 0.016396720655868825,
+          "within_run_p": 0.016396720655868825,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R2",
+          "comparison": "within-run shuffle q95",
+          "motion_M": 0.034814643104761074,
+          "global_p": 0.016396720655868825,
+          "within_run_p": 0.016396720655868825,
+          "resolved_blocks": 12
+        },
+        {
+          "ridge": "R3 marked",
+          "comparison": "observed M",
+          "motion_M": 0.04060288899320582,
+          "global_p": 0.7454509098180364,
+          "within_run_p": 0.671865626874625,
+          "resolved_blocks": 10
+        },
+        {
+          "ridge": "R3 marked",
+          "comparison": "global shuffle q95",
+          "motion_M": 0.06316538968941993,
+          "global_p": 0.7454509098180364,
+          "within_run_p": 0.671865626874625,
+          "resolved_blocks": 10
+        },
+        {
+          "ridge": "R3 marked",
+          "comparison": "within-run shuffle q95",
+          "motion_M": 0.06317256836050834,
+          "global_p": 0.7454509098180364,
+          "within_run_p": 0.671865626874625,
+          "resolved_blocks": 10
+        }
+      ],
+      "occupancy": [
+        {
+          "ridge": "R1",
+          "events": 584,
+          "share_nonpole": 0.40982456140350876,
+          "centre": 0.761,
+          "resolved_blocks": 12,
+          "method_status": "frozen primary"
+        },
+        {
+          "ridge": "R2",
+          "events": 560,
+          "share_nonpole": 0.3929824561403509,
+          "centre": 1.041,
+          "resolved_blocks": 12,
+          "method_status": "frozen primary"
+        },
+        {
+          "ridge": "R3 marked",
+          "events": 90,
+          "share_nonpole": 0.06315789473684211,
+          "centre": 1.395,
+          "resolved_blocks": 10,
+          "method_status": "post-hoc edge-capture repair"
+        }
+      ],
+      "ridge_summary": [
+        {
+          "ridge": "R1",
+          "zone": "0.60\u20130.90",
+          "centre": 0.761,
+          "events": 584,
+          "share_nonpole": 0.40982456140350876,
+          "resolved_blocks": 12,
+          "motion_M": 0.044688802189093095,
+          "global_p": 0.07038592281543692,
+          "reading": "persistent; weak chronological excess",
+          "method_status": "frozen primary"
+        },
+        {
+          "ridge": "R2",
+          "zone": "0.90\u20131.18",
+          "centre": 1.041,
+          "events": 560,
+          "share_nonpole": 0.3929824561403509,
+          "resolved_blocks": 12,
+          "motion_M": 0.04068441259956232,
+          "global_p": 0.016396720655868825,
+          "reading": "persistent; chronological displacement exceeds shuffle",
+          "method_status": "frozen primary"
+        },
+        {
+          "ridge": "R3 marked",
+          "zone": "1.25\u20131.50",
+          "centre": 1.395,
+          "events": 90,
+          "share_nonpole": 0.06315789473684211,
+          "resolved_blocks": 10,
+          "motion_M": 0.04060288899320582,
+          "global_p": 0.7454509098180364,
+          "reading": "weak crest present; travel not resolved",
+          "method_status": "post-hoc edge-capture repair"
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1_R1_resolved_at_least_10_of_12",
+          "status": "PASS"
+        },
+        {
+          "gate": "G2_R2_resolved_at_least_10_of_12",
+          "status": "PASS"
+        },
+        {
+          "gate": "G3_R3_resolved_at_least_8_of_12",
+          "status": "PASS"
+        },
+        {
+          "gate": "G4_R3_motion_at_least_1p5x_both_lower",
+          "status": "PASS"
+        },
+        {
+          "gate": "G5_R3_global_shuffle_p_at_most_0p05",
+          "status": "FAIL"
+        },
+        {
+          "gate": "G6_R3_within_run_shuffle_p_at_most_0p05",
+          "status": "FAIL"
+        },
+        {
+          "gate": "T409 broad R3 centre is strictly interior",
+          "status": "FAIL \u2014 centre hit lower boundary 1.180"
+        },
+        {
+          "gate": "T409B marked crest resolved in at least 8/12 blocks",
+          "status": "PASS \u2014 10/12"
+        },
+        {
+          "gate": "T409B marked crest exceeds global shuffle",
+          "status": "FAIL \u2014 p=0.745"
+        }
+      ],
+      "validation": [
+        {
+          "validator": "T409/T409B independent validation",
+          "status": "PASS_WITH_METHOD_BOUNDARY",
+          "checks": 18,
+          "passed": 18,
+          "boundary": "Direct Gaussian pooled centres and saved-block motion were independently recomputed; full permutation arrays were not retained."
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "t379_events",
+      "label": "T379 event-linked held-out muon records",
+      "path": "analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "The event-linked incoming two-pole coordinate, wrong-lineage control, charged-daughter delay and chronological event index used by T409.",
+        "tables_used": [
+          "T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T379_individual_muon_child/T379_INDIVIDUAL_MUON_CHILD_HANDOVER_EVENTS.csv') WHERE split = 'holdout'",
+        "filters": [
+          "Held-out rows only.",
+          "Exact x_mu poles 0 and 2 excluded from density-centre estimation but retained in population accounting."
+        ],
+        "metric_definitions": [
+          "x_mu = incoming charged-detector two-pole ARA coordinate on 0\u20132.",
+          "Chronological block = one of six equal-count event-index blocks within each run."
+        ]
+      }
+    },
+    {
+      "id": "t409_results",
+      "label": "T409 chronological ridge results",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_RESULTS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Frozen-zone pooled centres, block motion, shuffled-order nulls, gates and boundaries.",
+        "tables_used": [
+          "T409_RESULTS.json",
+          "T409_BLOCK_RIDGES.csv"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_RESULTS.json', format='auto')",
+        "filters": [
+          "R1 0.60\u20130.90; R2 0.90\u20131.18; broad R3 1.18\u20131.55.",
+          "Six chronological blocks per held-out run."
+        ],
+        "metric_definitions": [
+          "motion_M = count-weighted root-mean-square block-centre displacement from pooled centre.",
+          "Permutation p-values are upper-tail add-one values from 5,000 shuffles."
+        ]
+      }
+    },
+    {
+      "id": "t409b_results",
+      "label": "T409B marked upper-interior sensitivity",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409B_RESULTS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Post-hoc strictly interior local-crest repair for the marked structure near x_mu 1.35.",
+        "tables_used": [
+          "T409B_RESULTS.json",
+          "T409B_BLOCK_CRESTS.csv"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409B_RESULTS.json', format='auto')",
+        "filters": [
+          "Search interval 1.25\u20131.50.",
+          "Strictly interior local maxima only; five-event and 1.10 contrast resolution thresholds."
+        ],
+        "metric_definitions": [
+          "Marked R3 centre = highest strictly interior Gaussian-smoothed local maximum in the frozen sensitivity interval."
+        ]
+      }
+    },
+    {
+      "id": "t409_protocol",
+      "label": "T409/T409B frozen method records",
+      "path": "analysis/muon/T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_PROTOCOL_2026-08-18.md",
+      "query": {
+        "description": "Pre-calculation T409 protocol plus the post-edge-capture T409B sensitivity protocol.",
+        "tables_used": [
+          "T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_PROTOCOL_2026-08-18.md",
+          "T409B_MARKED_UPPER_INTERIOR_SENSITIVITY_PROTOCOL_2026-08-18.md"
+        ],
+        "filters": [
+          "T409B is explicitly post-hoc and cannot upgrade the visual observation to confirmatory status."
+        ]
+      }
+    },
+    {
+      "id": "t409_validation",
+      "label": "T409 independent validation",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_VALIDATION.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Independent direct-Gaussian centre checks, population/pole counts and saved-block motion recomputation.",
+        "tables_used": [
+          "T409_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t409_report_track",
+      "label": "T409 reviewed chronological ridge-track rows",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_TRACK.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Reviewed R1/R2 frozen block centres joined to the T409B marked-interior crest rows for one report comparison.",
+        "tables_used": [
+          "T409_REPORT_RIDGE_TRACK.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_TRACK.csv') ORDER BY global_block, ridge",
+        "filters": [
+          "Resolved block centres only.",
+          "Marked R3 rows retain post-hoc estimator status."
+        ]
+      }
+    },
+    {
+      "id": "t409_report_motion",
+      "label": "T409 reviewed motion-control rows",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_MOTION.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Observed motion and two 95th-percentile shuffle controls for each reported ridge.",
+        "tables_used": [
+          "T409_REPORT_MOTION.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_MOTION.csv')",
+        "metric_definitions": [
+          "motion_M is the count-weighted RMS chronological block-centre displacement from the pooled centre."
+        ]
+      }
+    },
+    {
+      "id": "t409_report_occupancy",
+      "label": "T409 reviewed ridge occupancy rows",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_OCCUPANCY.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Non-pole zone event counts, shares, centres and resolution counts for R1, R2 and marked R3.",
+        "tables_used": [
+          "T409_REPORT_OCCUPANCY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_OCCUPANCY.csv') ORDER BY centre",
+        "filters": [
+          "Exact x_mu poles 0 and 2 excluded from zone shares."
+        ]
+      }
+    },
+    {
+      "id": "t409_report_summary",
+      "label": "T409 reviewed ridge summary rows",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_SUMMARY.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Reader-facing centre, occupancy, motion, permutation and method-status summary.",
+        "tables_used": [
+          "T409_REPORT_RIDGE_SUMMARY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_RIDGE_SUMMARY.csv') ORDER BY centre"
+      }
+    },
+    {
+      "id": "t409_report_gates",
+      "label": "T409 reviewed gates and repair status",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_GATES.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Frozen T409 gate outcomes plus explicit broad-R3 edge-capture and T409B sensitivity status.",
+        "tables_used": [
+          "T409_REPORT_GATES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_GATES.csv') ORDER BY gate"
+      }
+    },
+    {
+      "id": "t409_report_validation",
+      "label": "T409 reviewed validation row",
+      "path": "analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_VALIDATION.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "description": "Compact independent validation status and retained method boundary.",
+        "tables_used": [
+          "T409_REPORT_VALIDATION.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T409_chronological_parent_ridge_tracking/T409_REPORT_VALIDATION.csv')"
+      }
+    }
+  ],
+  "package_info": {
+    "artifact_name": "T409 chronological parent ridge tracking",
+    "artifact_version": "1.0.0",
+    "delivery": "mcp-app"
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "stage": "material_holdout_scored",
+  "frozen_model_sha256": "62de4692f866c60c5a1e95386eadb958fd9f6f0bcf5a6acae715ec70d8371124",
+  "source_files": [
+    "SN103_ToyouraSand_060.mp4",
+    "SN103_ToyouraSand_120.mp4"
+  ],
+  "instrument_checks": {
+    "correlation": -0.9621154432335342,
+    "absolute_correlation_below_0_98": true,
+    "sum_std": 0.133684733796937,
+    "sum_std_above_0_05": true,
+    "complement_rmse": 0.1338014896530538,
+    "not_exact_complements": true
+  },
+  "structural_null": {
+    "event_count": 17,
+    "observed_median_d_eq": 1.1552830681302966,
+    "null_median_d_eq": 1.2113962302052905,
+    "improvement_fraction": 0.046321063807078774,
+    "empirical_p": 0.022397760223977603,
+    "permutations": 10000
+  },
+  "metrics": [
+    {
+      "model": "joint_di_ara",
+      "average_precision": 0.2593734989582867,
+      "brier": 0.0980771920360075,
+      "positive_frames": 187,
+      "total_frames": 2347,
+      "threshold": 0.4701725232178677,
+      "flagged_frames": 271
+    },
+    {
+      "model": "traversal_only",
+      "average_precision": 0.2198425201445646,
+      "brier": 0.07279297970191373,
+      "positive_frames": 187,
+      "total_frames": 2347,
+      "threshold": 0.15014975744031753,
+      "flagged_frames": 348
+    },
+    {
+      "model": "connection_only",
+      "average_precision": 0.21143629109736634,
+      "brier": 0.10008531978261637,
+      "positive_frames": 187,
+      "total_frames": 2347,
+      "threshold": 0.22266844067635508,
+      "flagged_frames": 327
+    },
+    {
+      "model": "amount_only",
+      "average_precision": 0.0675859745764259,
+      "brier": 0.0766625801970473,
+      "positive_frames": 187,
+      "total_frames": 2347,
+      "threshold": 0.13644870982004856,
+      "flagged_frames": 1261
+    },
+    {
+      "model": "elapsed_only",
+      "average_precision": 0.3166336171410983,
+      "brier": 0.0925123000009558,
+      "positive_frames": 187,
+      "total_frames": 2347,
+      "threshold": 0.1202730979596926,
+      "flagged_frames": 1499
+    }
+  ],
+  "warning_leads": [
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g0",
+      "gravity_index": 0,
+      "event_type": "terminal_closure",
+      "lead_frames": 73,
+      "lead_s": 2.433333333333333,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g1",
+      "gravity_index": 1,
+      "event_type": "terminal_closure",
+      "lead_frames": 68,
+      "lead_s": 2.2666666666666666,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g2",
+      "gravity_index": 2,
+      "event_type": "terminal_closure",
+      "lead_frames": 47,
+      "lead_s": 1.5666666666666667,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g3",
+      "gravity_index": 3,
+      "event_type": "terminal_closure",
+      "lead_frames": 40,
+      "lead_s": 1.3333333333333333,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g4",
+      "gravity_index": 4,
+      "event_type": "terminal_closure",
+      "lead_frames": 31,
+      "lead_s": 1.0333333333333334,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g5",
+      "gravity_index": 5,
+      "event_type": "terminal_closure",
+      "lead_frames": 35,
+      "lead_s": 1.1666666666666667,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g6",
+      "gravity_index": 6,
+      "event_type": "terminal_closure",
+      "lead_frames": 24,
+      "lead_s": 0.8,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_060.mp4",
+      "run_id": "SN103_ToyouraSand_060_g7",
+      "gravity_index": 7,
+      "event_type": "terminal_closure",
+      "lead_frames": 31,
+      "lead_s": 1.0333333333333334,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g0",
+      "gravity_index": 0,
+      "event_type": "terminal_closure",
+      "lead_frames": 73,
+      "lead_s": 2.433333333333333,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g0",
+      "gravity_index": 0,
+      "event_type": "microjam_release",
+      "lead_frames": 25,
+      "lead_s": 0.8333333333333334,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g1",
+      "gravity_index": 1,
+      "event_type": "terminal_closure",
+      "lead_frames": 72,
+      "lead_s": 2.4,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g2",
+      "gravity_index": 2,
+      "event_type": "terminal_closure",
+      "lead_frames": 57,
+      "lead_s": 1.9,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g3",
+      "gravity_index": 3,
+      "event_type": "terminal_closure",
+      "lead_frames": 50,
+      "lead_s": 1.6666666666666667,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g4",
+      "gravity_index": 4,
+      "event_type": "terminal_closure",
+      "lead_frames": 50,
+      "lead_s": 1.6666666666666667,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g5",
+      "gravity_index": 5,
+      "event_type": "terminal_closure",
+      "lead_frames": 56,
+      "lead_s": 1.8666666666666667,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g6",
+      "gravity_index": 6,
+      "event_type": "terminal_closure",
+      "lead_frames": 25,
+      "lead_s": 0.8333333333333334,
+      "forecast_found": true
+    },
+    {
+      "video": "SN103_ToyouraSand_120.mp4",
+      "run_id": "SN103_ToyouraSand_120_g7",
+      "gravity_index": 7,
+      "event_type": "terminal_closure",
+      "lead_frames": 36,
+      "lead_s": 1.2,
+      "forecast_found": true
+    }
+  ],
+  "gates": {
+    "instrument_valid": true,
+    "structural_improvement_at_least_20pct": false,
+    "structural_p_below_0_05": true,
+    "joint_ap_beats_every_baseline": false,
+    "joint_brier_improves_at_least_10pct": false,
+    "positive_median_warning_lead": true
+  },
+  "primary_gate_pass": false
+}

@@ -1,0 +1,179 @@
+{
+  "analysis_sha256": "e55c7e64d6080de90bb219099a15ceda2d7d36e7ef4caf27df0d069efe2c165a",
+  "arms": {
+    "R_to_U": {
+      "arm": "R_to_U",
+      "effects": {
+        "baseline_minus_transfer": {
+          "ci95": [
+            -0.0009474698575999395,
+            0.000646222574701108
+          ],
+          "median": 8.668857518302135e-05
+        },
+        "reverse_minus_transfer": {
+          "ci95": [
+            0.004600443950998468,
+            0.010837205759589859
+          ],
+          "median": 0.006892374238826399
+        },
+        "rf_baseline_minus_transfer": {
+          "RF off": 0.0001448718319305186,
+          "RF on": -0.0004607938687531993
+        },
+        "shift": {
+          "empirical_p": 0.000999000999000999,
+          "null_median": 0.011146536737041437,
+          "observed_transfer_mse": 0.006698107642251071
+        },
+        "wrong_minus_transfer": {
+          "ci95": [
+            -0.0009243219032931665,
+            0.002005145133376668
+          ],
+          "median": 0.0009741641737396243
+        }
+      },
+      "errors": {
+        "baseline_mse": 0.0055953702873935895,
+        "reverse_mse": 0.015324277016643174,
+        "transfer_mse": 0.006698107642251071,
+        "wrong_frequency_mse": 0.006487541914843261
+      },
+      "passes": {
+        "added_information": false,
+        "direction_specificity": true,
+        "frequency_specificity": false,
+        "rf_robustness": false,
+        "timing_specificity": true
+      },
+      "prediction_rows": 676,
+      "stage": "validation"
+    },
+    "U_to_R": {
+      "arm": "U_to_R",
+      "effects": {
+        "baseline_minus_transfer": {
+          "ci95": [
+            -0.0004612234914190992,
+            0.00020212075979973926
+          ],
+          "median": -2.710511362478225e-05
+        },
+        "reverse_minus_transfer": {
+          "ci95": [
+            -0.0007987715878713275,
+            0.0007238801297958157
+          ],
+          "median": 0.00018438553623038195
+        },
+        "rf_baseline_minus_transfer": {
+          "RF off": -6.592010507379398e-05,
+          "RF on": 0.00018779173906315668
+        },
+        "shift": {
+          "empirical_p": 0.9410589410589411,
+          "null_median": 0.0037599032005171547,
+          "observed_transfer_mse": 0.004204795375646578
+        },
+        "wrong_minus_transfer": {
+          "ci95": [
+            -0.0013687491853209173,
+            1.798981123608194e-05
+          ],
+          "median": -0.0006798761445494421
+        }
+      },
+      "errors": {
+        "baseline_mse": 0.004172046818020483,
+        "reverse_mse": 0.0042006408320784585,
+        "transfer_mse": 0.004204795375646578,
+        "wrong_frequency_mse": 0.003316286733441006
+      },
+      "passes": {
+        "added_information": false,
+        "direction_specificity": false,
+        "frequency_specificity": false,
+        "rf_robustness": false,
+        "timing_specificity": false
+      },
+      "prediction_rows": 676,
+      "stage": "validation"
+    }
+  },
+  "availability_fraction": 1.0,
+  "eligible_sequences": 26,
+  "gates": {
+    "G1_availability": {
+      "pass": true,
+      "threshold": ">=0.75 of run/period histories with >=8 non-overlap pairs",
+      "value": 1.0
+    },
+    "G2_bidirectional_added_information": {
+      "arms": {
+        "R_to_U": false,
+        "U_to_R": false
+      },
+      "pass": false
+    },
+    "G3_bidirectional_timing_specificity": {
+      "arms": {
+        "R_to_U": true,
+        "U_to_R": false
+      },
+      "pass": false
+    },
+    "G4_bidirectional_frequency_specificity": {
+      "arms": {
+        "R_to_U": false,
+        "U_to_R": false
+      },
+      "pass": false
+    },
+    "G5_bidirectional_direction_specificity": {
+      "arms": {
+        "R_to_U": true,
+        "U_to_R": false
+      },
+      "pass": false
+    },
+    "G6_rf_robustness": {
+      "arms": {
+        "R_to_U": false,
+        "U_to_R": false
+      },
+      "pass": false
+    }
+  },
+  "identity": "muoniated-acetone detector-population spin relation",
+  "primary_horizon": {
+    "median_us": 2.04800021648407,
+    "native_bins": 128,
+    "reads": 32,
+    "shared_native_bins": 0
+  },
+  "primary_prediction_rows": 676,
+  "protocol_sha256": "2d6af7c23d56fc7240d66c0d956fc07a28893c149fdbdb13772b64914a3ccf33",
+  "run_count": 13,
+  "run_period_sequences": 26,
+  "source_hashes": {
+    "EMU00069986": "9fd89231ef8b362b5fc462549851537999e381e5c5a707205bd64a7cd77ff39f",
+    "EMU00069992": "bacd2c8576e7e1e966e387e7972f8b64ff5ee9a4b4604a5624d33dffeb9cdf76",
+    "EMU00069998": "59871987c95cf45057d0024409427184447c30ddd5ca6c22f6ff39e139ca59b0",
+    "EMU00070004": "73c56b5ea79148126653e388636399edf51a5a78e7a0f4c11849cc43d782776e",
+    "EMU00070010": "c95b98cae7cc71193af56288d3e8fd41602639b0437f92fd2c6f38a6da3cd79c",
+    "EMU00070016": "a690a8fd64a712378d63e5e75a89fde1c494d8fd16de991560dd057b38aa4b72",
+    "EMU00070022": "04005f86076f3d930cac9d2fa45a448f72fdc7add5055627890579781939c628",
+    "EMU00070028": "93b8c530e8f10eaf125ff9898c6046a468cf5280879342e706bc1bc18b2053ec",
+    "EMU00070034": "16501cae1fe98d8d7cce1c4c8eeda79dae9068c02ce9223adf6358e774d42f45",
+    "EMU00070040": "bd65cfd586d88b7c7690cf7cec5d83c6b89cebdcb752f83ac93485deefd0443d",
+    "EMU00070046": "591bda9acfd3a6e91163631abf6ed2a12ba0968ea156231be0008f8b6f9ea5b2",
+    "EMU00070052": "5ddd5d4c48dd9ca5472d8d99da32069e264f225fa09ee8ae58457f7c4027db6a",
+    "EMU00070058": "78f4e7d2116b3d45cd4ade83ca5a64ad7ba6846a0981bb982c71de5c3a23ee46"
+  },
+  "stage": "validation",
+  "stage_supported": false,
+  "test": "T419 direct dynamic Irrationality Di-ARA handover",
+  "timeline_rows": 1534
+}

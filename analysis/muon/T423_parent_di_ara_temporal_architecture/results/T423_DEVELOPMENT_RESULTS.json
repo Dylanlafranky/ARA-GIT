@@ -1,0 +1,199 @@
+{
+  "analysis_sha256": "e9ce4a566e1ac6eb1631564fac9c770a9375736600f5691427724aa688363423",
+  "boundaries": [
+    "Population-level relation, not an individual muon or neutrino event.",
+    "PA/PB are development-frozen temporal labels, not physical sign assignments.",
+    "Order landmarks are descriptive; nested row prediction is the causal primary."
+  ],
+  "identity": "full-detector muoniated-acetone ensemble spin relation",
+  "orientation": "U=R child crossover; H=1 parent ridge; Q=1 candidate PA/PB handover",
+  "protocol_sha256": "0037867ce3a5e995c9eb1a96cfef370576ad76c12c4e625237e5a7591af37dd5",
+  "source_sha256": "ca78e91682c787a25e562fcebfa63c766b80327784607c654f64dec113e38053",
+  "stage": "development",
+  "summary": {
+    "RF_M1_over_M2": {
+      "RF off": {
+        "ci95": [
+          null,
+          null
+        ],
+        "field_count": 0,
+        "median": null
+      },
+      "RF on": {
+        "ci95": [
+          2.4987290230676917e-07,
+          2.839196910694921e-06
+        ],
+        "field_count": 2,
+        "median": 1.544534906500845e-06
+      }
+    },
+    "effects_us": {
+      "M0_over_M1": {
+        "ci95": [
+          -5.037994182596761e-08,
+          5.9038056707261255e-08
+        ],
+        "field_count": 2,
+        "median": 4.329057440646822e-09
+      },
+      "M0_over_M2": {
+        "ci95": [
+          1.9949296048080156e-07,
+          2.898234967402182e-06
+        ],
+        "field_count": 2,
+        "median": 1.5488639639414919e-06
+      },
+      "M1_over_M2": {
+        "ci95": [
+          2.4987290230676917e-07,
+          2.839196910694921e-06
+        ],
+        "field_count": 2,
+        "median": 1.544534906500845e-06
+      },
+      "parent_ridge_exposure": {
+        "ci95": [
+          null,
+          null
+        ],
+        "field_count": 0,
+        "median": null
+      },
+      "reverse_over_M2": {
+        "ci95": [
+          0.010365032891692088,
+          0.01371320128208937
+        ],
+        "field_count": 2,
+        "median": 0.01203911708689073
+      },
+      "shift_over_M2": {
+        "ci95": [
+          0.010365032891692088,
+          0.01371320128208937
+        ],
+        "field_count": 2,
+        "median": 0.01203911708689073
+      },
+      "wrong_over_M2": {
+        "ci95": [
+          0.01999234135209649,
+          0.03935813404690611
+        ],
+        "field_count": 2,
+        "median": 0.029675237699501297
+      }
+    },
+    "expected_orientation_share": 0.0,
+    "field_balanced_mae_us": {
+      "M0": 5.176833993254413e-06,
+      "M1": 5.172504935813766e-06,
+      "M2": 3.6279700293129213e-06,
+      "M2_reverse": 0.012042745056920042,
+      "M2_shift": 0.012042745056920042,
+      "M2_wrong": 0.029678865669530614
+    },
+    "gates": {
+      "G1_availability": {
+        "pass": false,
+        "threshold": 20,
+        "value": 4
+      },
+      "G2_M2_beats_M0": {
+        "effect": {
+          "ci95": [
+            1.9949296048080156e-07,
+            2.898234967402182e-06
+          ],
+          "field_count": 2,
+          "median": 1.5488639639414919e-06
+        },
+        "pass": true
+      },
+      "G3_M2_beats_M1": {
+        "effect": {
+          "ci95": [
+            2.4987290230676917e-07,
+            2.839196910694921e-06
+          ],
+          "field_count": 2,
+          "median": 1.544534906500845e-06
+        },
+        "pass": true
+      },
+      "G5_parent_order": {
+        "expected_share": 0.0,
+        "opposite_share": 0.0,
+        "pass": false
+      },
+      "G6_parent_ridge_at_phase_crossing": {
+        "effect": {
+          "ci95": [
+            null,
+            null
+          ],
+          "field_count": 0,
+          "median": null
+        },
+        "pass": false
+      },
+      "G7_specificity": {
+        "pass": true,
+        "reverse": {
+          "ci95": [
+            0.010365032891692088,
+            0.01371320128208937
+          ],
+          "field_count": 2,
+          "median": 0.01203911708689073
+        },
+        "wrong": {
+          "ci95": [
+            0.01999234135209649,
+            0.03935813404690611
+          ],
+          "field_count": 2,
+          "median": 0.029675237699501297
+        }
+      },
+      "G8_RF_robustness": {
+        "effects": {
+          "RF off": {
+            "ci95": [
+              null,
+              null
+            ],
+            "field_count": 0,
+            "median": null
+          },
+          "RF on": {
+            "ci95": [
+              2.4987290230676917e-07,
+              2.839196910694921e-06
+            ],
+            "field_count": 2,
+            "median": 1.544534906500845e-06
+          }
+        },
+        "pass": false
+      }
+    },
+    "interval_count": 4,
+    "opposite_orientation_share": 0.0,
+    "order_shift_null": {
+      "draws": 1000,
+      "expected_share_p": 1.0,
+      "ridge_exposure_p": null
+    },
+    "parent_q_alternation_share": null,
+    "parent_q_available_share": 0.0,
+    "prediction_interval_count": 2,
+    "prediction_row_count": 4,
+    "return_C1_count": 2,
+    "stage": "development"
+  },
+  "test": "T423 parent Di-ARA temporal architecture"
+}

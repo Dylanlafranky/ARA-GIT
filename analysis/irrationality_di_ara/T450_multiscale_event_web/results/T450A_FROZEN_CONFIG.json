@@ -1,0 +1,220 @@
+{
+  "status": "frozen from development before experiment-4 exposure",
+  "protocol": "T450A_FROZEN_PROTOCOL.md",
+  "development_sources": [
+    "20220217_cam1_flid1.h5",
+    "20220217_cam4_flid15.h5",
+    "20220313_cam3_flid16.h5",
+    "20220313_cam4_flid23.h5",
+    "20220326_cam3_flid24.h5",
+    "20220326_cam4_flid31.h5"
+  ],
+  "feature_order": [
+    "traversal_speed",
+    "rotation_speed",
+    "core_bend",
+    "core_span",
+    "articulation_speed",
+    "lr_articulation_balance"
+  ],
+  "feature_meta": {
+    "traversal_speed": {
+      "aggregation": "mean",
+      "min_finite": 0.8,
+      "units": "body lengths/s"
+    },
+    "rotation_speed": {
+      "aggregation": "mean",
+      "min_finite": 0.8,
+      "units": "rad/s"
+    },
+    "core_bend": {
+      "aggregation": "median",
+      "min_finite": 0.8,
+      "units": "body lengths"
+    },
+    "core_span": {
+      "aggregation": "median",
+      "min_finite": 0.8,
+      "units": "body lengths"
+    },
+    "articulation_speed": {
+      "aggregation": "mean",
+      "min_finite": 0.5,
+      "units": "body lengths/s"
+    },
+    "lr_articulation_balance": {
+      "aggregation": "median",
+      "min_finite": 0.5,
+      "units": "signed share"
+    }
+  },
+  "scales_frames": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    128,
+    256,
+    512,
+    1024
+  ],
+  "winsor": {
+    "traversal_speed": {
+      "q005": 0.00192517067739503,
+      "q995": 7.532677446749662,
+      "raw_median": 0.06644083507038862,
+      "raw_mad": 0.05630887195563626
+    },
+    "rotation_speed": {
+      "q005": 0.00016784473338998253,
+      "q995": 9.171851683459078,
+      "raw_median": 0.045560122326806805,
+      "raw_mad": 0.04323792164209377
+    },
+    "core_bend": {
+      "q005": -0.10230850912335454,
+      "q995": 0.10013552458423633,
+      "raw_median": 0.006570672322767629,
+      "raw_mad": 0.017270199256923448
+    },
+    "core_span": {
+      "q005": 0.7902473392803636,
+      "q995": 1.0923050327134913,
+      "raw_median": 0.9999994581019804,
+      "raw_mad": 0.019389660505799378
+    },
+    "articulation_speed": {
+      "q005": 0.004243484136941849,
+      "q995": 8.43447112208577,
+      "raw_median": 0.10368752125239676,
+      "raw_mad": 0.09341406230268964
+    },
+    "lr_articulation_balance": {
+      "q005": -0.887600220591092,
+      "q995": 0.8933787920242421,
+      "raw_median": -0.001107223681919677,
+      "raw_mad": 0.1659213510896475
+    }
+  },
+  "descriptor_scaling": {
+    "traversal_speed": {
+      "persistence": {
+        "median": 0.3669126929943411,
+        "mad": 0.2890161607605996
+      },
+      "retained_dispersion": {
+        "median": 0.7393414539852216,
+        "mad": 0.2594875637399303
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.10315994099797962,
+        "mad": 0.08109504317022315
+      }
+    },
+    "rotation_speed": {
+      "persistence": {
+        "median": 0.4151434157006558,
+        "mad": 0.17973406663442082
+      },
+      "retained_dispersion": {
+        "median": 1.0,
+        "mad": 0.4830784169278422
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.10820960719224923,
+        "mad": 0.08912548215856579
+      }
+    },
+    "core_bend": {
+      "persistence": {
+        "median": 0.7266215590908035,
+        "mad": 0.17461542967125337
+      },
+      "retained_dispersion": {
+        "median": 0.8814285283471317,
+        "mad": 0.1185714716528683
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.14318193356539793,
+        "mad": 0.11454828833512509
+      }
+    },
+    "core_span": {
+      "persistence": {
+        "median": 0.7716580072757862,
+        "mad": 0.16486313611369663
+      },
+      "retained_dispersion": {
+        "median": 0.9103830000417876,
+        "mad": 0.10406564718637634
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.11149814497480096,
+        "mad": 0.09762904028832692
+      }
+    },
+    "articulation_speed": {
+      "persistence": {
+        "median": 0.46330801124428456,
+        "mad": 0.2242800677583287
+      },
+      "retained_dispersion": {
+        "median": 1.0,
+        "mad": 0.3683388307461436
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.0883222236188573,
+        "mad": 0.0683246009931301
+      }
+    },
+    "lr_articulation_balance": {
+      "persistence": {
+        "median": 0.13811548892261344,
+        "mad": 0.09525632459991494
+      },
+      "retained_dispersion": {
+        "median": 0.26911675013361075,
+        "mad": 0.18804590976369523
+      },
+      "abs_reversal_asymmetry": {
+        "median": 0.07639731125347327,
+        "mad": 0.06063600452139409
+      }
+    }
+  },
+  "rungs": [
+    {
+      "feature": "core_span",
+      "scale_frames": 64,
+      "support_flies": 4,
+      "support_fraction": 0.6666666666666666,
+      "supporting_sources": [
+        "20220217_cam1_flid1.h5",
+        "20220217_cam4_flid15.h5",
+        "20220313_cam3_flid16.h5",
+        "20220313_cam4_flid23.h5"
+      ],
+      "median_local_score": 1.7782376114260967,
+      "median_local_null_z": 1.5974199494229686,
+      "direction_vector": {
+        "persistence": -0.4427343293847119,
+        "retained_dispersion": -0.3554222392023142,
+        "abs_reversal_asymmetry": 0.321025709994223
+      },
+      "scale_seconds_at_99_96fps": 0.6402561024409764,
+      "rung_label": "micro"
+    }
+  ],
+  "common_parent_candidates": [],
+  "amount_ara_mappings": {
+    "core_span|64": {
+      "median": 0.9999682086266551,
+      "mad": 0.01574297084848736,
+      "units": "body lengths"
+    }
+  }
+}

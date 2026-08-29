@@ -125,6 +125,18 @@ Additional calibration and cross-domain records:
   Verdict: **mixed / partial calibration**, because Phi failed the one-step
   gate and the source is previously opened rather than an external holdout.
 
+- [`T432_persistent_meristem_lineage/T432_RESULT.md`](T432_persistent_meristem_lineage/T432_RESULT.md)
+  — frozen whole-parent longitudinal test using raw qDII–CLV3–PIN1–PI
+  meristem images. E35 identities developed the candidate-blind lineage
+  instrument; E37 identities were untouched transfer targets at `10 h` and
+  `14 h`. Across 11 persistent holdout children, `sqrt(2)-1` ranked first
+  (`0.477789` parent radii) and exact Phi second (`0.528354`). Exact Phi
+  retained ordered-lineage, phase, child-order and PIN1-time structure but
+  failed the random-increment control (`p=0.129435`). Verdict: **ordered
+  temporal whole-identity structure supported; exact Phi not supported as the
+  unique generator**. The E37 radial detector reached its frozen search
+  ceiling, so angular rankings are stronger than absolute radial magnitude.
+
 - [`../phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md`](../phi_cross_scale/PHASE_LINEAGE_RESULT_2026-07-31.md)
   — freezes the clarified ARA-octave meaning of child → parent →
   grandparent and tests the six Fibonacci-type sunflower scale families.
@@ -222,6 +234,11 @@ python validate_t325_phi_circle_train_phyllotaxis.py
 T325 reuses the checksum-locked public Source Data 21 workbook already stored
 under the ignored `data/` directory. The protocol, compact CSV/JSON outputs,
 technical report and independent validation record remain versionable.
+
+T432's frozen protocol, source manifest, extraction amendment, lineage tables,
+candidate scores, controls, validation record and portable report live under
+`T432_persistent_meristem_lineage/`. The raw checksum-recorded CZI volumes are
+stored in the repository's external data cache rather than committed.
 
 ## Evidential boundary
 

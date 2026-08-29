@@ -878,3 +878,329 @@ muon, the C03-C05 individual advance gate is
 
 Primary record:
 `analysis/muon/T394_NATIVE_NEUTRAL_PAIR_AND_CAUSAL_RELEASE_FINDINGS_2026-08-15.md`.
+
+## 25. T395 execution update - Information³ parent/child lock
+
+T395 tested the event-level hierarchy already exposed across T392–T394 without
+joining the independent Super-K population timing cut. The parent coordinate
+was `P=x_e` against joint-neutral `N=2-P`; the child coordinate was
+`C=2*x_nu_e/N` against `2-C`; their third composed relation restored the two
+absolute neutral branches. Supplying both cuts closed to machine precision,
+which was correctly classified as a nested-coordinate identity rather than
+new evidence.
+
+For the blinded gate, the child cut was hidden on validation and holdout. A
+calibration-only conditional child model was selected on validation and then
+scored on `300,059` untouched truth events. It gained `0.26429817` nats/event
+over ignoring the parent, with block-bootstrap 95% interval
+`[0.26256574,0.26603493]`, and beat shuffled-parent, reversed-identity and
+phase-space controls. Absolute point reconstruction improved only modestly,
+so this is a distributional parent-to-child Information³ lock in the frozen
+truth model, not exact individual decay prediction or direct neutral
+observation. Independent validation passed.
+
+Primary record:
+`analysis/muon/T395_INFORMATION3_PARENT_CHILD_LOCK_FINDINGS_2026-08-16.md`.
+
+## 26. T396 execution update - independent spin relation / hidden-child lock
+
+T396 added the independent charged-daughter/spin relation requested after
+T395. At each truth event it used:
+
+\[
+P=x_e,
+\qquad
+R=1+\cos\theta_{eS},
+\qquad
+C=\frac{2x_{\nu_e}}{2-P}.
+\]
+
+The frozen question was whether `(P,R)` predicts hidden child `C` better than
+`P`, `R` or an unconditional child distribution alone. The primary run used
+one million fresh fully polarized positive-muon `V-A` truth events and held
+out `300,059` until final scoring. The selected dense joint histogram gained
+`0.01550638` nats/event over parent-only, with 95% interval
+`[0.01441225,0.01664197]`. Shuffling the relation, pairing it with another
+event, mirroring its orientation and replacing the dynamics with phase space
+all degraded performance.
+
+A factorized two-cut fusion gained `0.02088526` nats/event and outperformed
+the dense grid. Its incremental information fell monotonically with physical
+polarization and vanished at zero polarization. This distinguishes the
+supported statement—two independent cuts contain complementary information
+about the hidden child—from the stronger unsupported claim that a nonlinear
+`P x R` interaction is required.
+
+The result is a leading-order truth-model crosswalk. Exact branch
+recomposition remains definitional, and no individual neutrino or pre-decay
+clock was directly observed. Independent validation passed all checks.
+
+Primary records:
+`analysis/muon/T396_INFORMATION3_SPIN_CHILD_LOCK_FINDINGS_2026-08-16.md` and
+`analysis/muon/T396_information3_spin_child_lock/T396_INFORMATION3_SPIN_CHILD_LOCK_REPORT.html`.
+
+## 27. T397 execution update - spin phase maturity versus orientation
+
+T397 returned from the truth-level child reconstruction to the previously
+inspected detector-level RAL Silver population. It froze a direct separation
+between two possible meanings of muon spin phase:
+
+1. **orientation organiser:** phase predicts where the charged-daughter
+   signal appears across the 96 detectors;
+2. **population maturity:** the same phase survives in an acceptance-balanced
+   parent total strongly enough to mark release stage.
+
+All runs used the same 300 K silver medium. Calibration fields learned only
+detector shares and forward/backward balance. Three held-out fields (63, 160
+and 400 G) were then scored by training cosine/sine phase coefficients on odd
+spin cycles and testing on even cycles. The frozen acceptance ladder was:
+
+- `O`: full signed detector-orientation field;
+- `U`: raw forward plus backward total;
+- `V`: calibration-only bank-balanced total;
+- `W`: detector-normalized common mode.
+
+The pooled held-out weighted-SSE gains were `14.4147%` for `O`, `-1.6421%`
+for `U`, `-1.6208%` for `V` and `+0.7128%` for `W`. The hierarchical 95%
+interval for `O` was `[2.4618%,25.2033%]`; for `W` it was
+`[-1.9853%,2.8053%]`. Orientation passed every frozen field, uncertainty and
+wrong-cadence gate.
+
+The strict `W` residue was phase coherent (resultant length `0.9350`) and the
+physical cadence beat the frozen wrong-cadence envelope. Its physical phase
+amplitude, however, was only `0.06310%` of the parent envelope; `W` became
+negative at 400 G and also failed reverse-parity field consistency. The
+frozen verdict was therefore:
+
+> **ORIENTATION SUPPORTED; MATURITY NOT SUPPORTED.**
+
+Spin phase is supported as a population-level organiser of charged-daughter
+direction in this source. A weak common-mode coupling remains a lead, not a
+neutrino-creation clock. T397 does not measure an individual muon or either
+neutrino, does not restore the failed 7.5-turn trigger and is not an untouched
+source replication. Independent validation passed all saved-value, source,
+gate and claim-boundary checks.
+
+Protocol SHA-256:
+`62D2ADA024A2D7077FCB9A893871EB960BE324ACC431158B24011DC3161B41F5`.
+
+Primary records:
+`analysis/muon/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_REPORT.html`.
+
+## 28. T398 execution update - population neutrino wave overlap
+
+T398 answered whether the stopped-muon neutrino release had actually been
+seen as an ordered waveform. It kept three evidence grains separate:
+
+1. measured COHERENT CsI timing counts;
+2. fitted prompt and delayed population components;
+3. flavor-resolved source templates and derived ARA bookkeeping curves.
+
+The reconstructed native prompt and delayed rates reproduce T372 to numerical
+precision and are equal at `0.6360822416 microseconds`, inside the frozen T372
+bootstrap interval `[0.51970717,0.70263430]`. At that equality time the
+cumulative 0-2 ARA coordinate is `0.43740278`, so instantaneous branch equality
+and the cumulative parent ridge remain distinct cuts.
+
+The primary T371 fit contains `60.18235` prompt `nu_mu` events and `258.94245`
+delayed `nu_e + anti_nu_mu` events. Removing the delayed population costs
+`57.68352` AIC units. Reopening the official flavor source divides the delayed
+template into `38.7220% nu_e` and `61.2780% anti_nu_mu`; the two close exactly
+to the combined delayed branch. The independent T378 source again resolves
+positive prompt and delayed populations in the correct order, while retaining
+its original partial high-stringency handover verdict.
+
+All eight frozen T398 gates and all eleven independent saved-artifact checks
+passed. The promoted claim is deliberately bounded:
+
+> **POPULATION NEUTRINO RELEASE WAVEFORM OBSERVED; INDIVIDUAL BIRTH UNOBSERVED.**
+
+T398 does not link one muon to its own two neutrinos. The remaining-muon curve
+is the tail integral of the delayed template and is not independent evidence.
+The T397 RAL Silver phase trace remains a separate experiment and is shown
+only as a comparison.
+
+Primary records:
+`analysis/muon/T398_POPULATION_NEUTRINO_WAVE_OVERLAP_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T398_population_neutrino_wave_overlap/T398_POPULATION_NEUTRINO_WAVE_OVERLAP_REPORT.html`.
+
+## 29. T399 execution update - child-half before delayed-neutrino crest
+
+T399 froze the landmark order visible after T398 rather than treating the
+delayed release crest as the creation point. The best-fit native COHERENT
+identity follows
+
+\[
+t_P=0.500500
+<t_H=0.636074
+<t_{1/2}=0.686649
+<t_D=0.785500\ \mu s.
+\]
+
+The corresponding cumulative ARA values are `0.244269`, `0.437389`, `0.5`
+and `0.600426`. Thus child half occurs `0.098851 microseconds` before the
+delayed crest and the prompt-crest-to-half displacement is `0.255731`, close
+to the proposed quarter.
+
+The high-stringency frozen verdict did not pass. Child half remained before
+the delayed crest in `94.44%` of the registered leave-one-bin-out fits and
+`93.13%` of 10,000 fixed-shape yield-sensitivity draws; the latter missed the
+frozen 95% gate. The independent T378 coarse release retained the order, but
+the circular-shift alignment control gave `p_upper=0.07333` and missed its
+0.05 gate.
+
+A post-result diagnostic located the relevant parent-asymmetry boundary. For
+these branch shapes the fitted prompt share must exceed `0.126966` for child
+half to precede the delayed crest. The observed share is `0.188586`; the lone
+leave-one-out failure reduces it to `0.085961`. The result therefore supports
+an identity-specific asymmetric placement, not a universal fixed `x=0.5`
+release clock.
+
+The claim remains population-level. T399 does not directly observe a named
+muon creating either named daughter neutrino.
+
+Primary records:
+`analysis/muon/T399_CHILD_HALF_PRECREST_SEQUENCE_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T399_child_half_precrest_sequence/T399_CHILD_HALF_PRECREST_SEQUENCE_REPORT.html`.
+
+## 30. T400 execution update — nested child window, population to event
+
+T400 tested the next-rung reading directly. The fitted delayed-dominant
+population interval was bounded objectively by prompt/delayed equality on the
+left and the delayed branch's return to that height on the right. That parent
+interval was expanded to a local child coordinate `x_C in [0,2]`, frozen on a
+deterministic 70% calibration split, and applied unchanged to untouched
+unbinned detector-event rows.
+
+The child window was valid and ordered: `L=0.568858 µs`, delayed crest
+`M=0.785500 µs`, and `R=1.382809 µs`. On the local child ARA, the population
+weighted mean and median were `1.09251` and `1.11429`. The primary crest was
+`0.70631`, below the frozen `0.75–1.25` population ridge gate, although
+`16/17` leave-one-out cuts passed that neighbourhood and the circular-shift
+control returned `p_upper=0.01833`.
+
+At event grain, the weighted mean and median remained near the ridge at
+`1.05075` and `1.03814`, but the eight-bin mode was `1.875`; the child window
+contained only `8.98271` effective delayed weights, `12/20` deterministic
+splits put their mode in the broad event ridge, and the coincident/background
+median membership scores tied. The frozen verdict is therefore **nested child
+ridge not supported; population-to-event transfer partial**.
+
+This distinguishes a ridge as a balance coordinate from a ridge as a density
+maximum. T400 supports the former construction in this archive but not the
+stronger bell-curve claim. It does not identify the two neutrinos from one
+named muon or time an individual birth. Independent saved-artifact validation
+passed after verifying protocol and source hashes, arithmetic, gate truth,
+coordinates, controls and claim boundaries.
+
+Primary records:
+`analysis/muon/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T400_nested_child_window_population_to_event/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_REPORT.html`.
+
+## 31. T401 execution update — winner projection and candidate child anti-phase
+
+T401 followed Dylan's observation that T400's winner-only mode histogram could
+hide an occupied child relation in the same way that survivor selection hides
+damage on unreturned aircraft. The registered follow-up retained every
+split's complete C and AC distribution, expanded the analysis to 200
+deterministic partitions, measured continuous KDE modes, compared the exact
+reflection `x -> 2-x` with all 24 lower-to-upper pairings, and added a
+sampling-only winner null.
+
+The apparent `1.25â€“1.50` hole did not survive. Of 200 requested partitions,
+164 produced ordered calibration child windows. The candidate bin at `1.375`
+held `0.118614` mean C occupancy—`0.991056` of its two-neighbour average—and
+won `13/164` binned modes and `17/164` KDE modes. Its volatility was ordinary
+at `1.02934` times the median bin. The sampling-only model predicted a
+`0.075015` winner fraction; observed versus null gave `p=0.76727`.
+
+The reflected anti-phase gate also failed: C exchange score `0.04670`, only
+two of four negative reflected relations, exact-reflection rank `13/24`, and
+no qualifying advantage over AC. All five frozen gates failed. The result is
+**no stable missing-winner band**.
+
+The methodological correction is retained. A winner-only plot discards most
+of each split's information and must not be used to assign a hidden child
+identity. In this case, restoring the omitted distribution filled the visual
+gap rather than exposing a perpendicular Phase B. This does not deny that the
+physical system has an anti-phase; it rejects this particular projection as a
+locator for it. Thirty-six invalid calibration windows are retained as a
+source-resolution boundary. Independent saved-output validation passed all
+checks.
+
+Primary records:
+`analysis/muon/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T401_winner_projection_child_antiphase/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_REPORT.html`.
+
+## 32. T402 execution update — whole-shape child relation
+
+T402 retained the complete T401 distributions and tested the broader shape
+that remained visually apparent after the narrow missing-bin claim failed. It
+did not change the COHERENT CsI identity, medium, rung, local child coordinate
+or event-membership rule. Fresh deterministic salts `600–999` produced
+`326/400` valid calibration-to-holdout transfers.
+
+The registered raw whole-shape claim failed. C's lower-lobe-versus-saddle
+contrast was stable at `+0.02774` with resampling interval
+`[+0.02238,+0.03306]`, but the upper-lobe contrast was only `+0.00392`, its
+interval crossed zero, and it was positive in `55.52%` of partitions. The
+frozen overall verdict is **no stable whole shape**.
+
+A narrower source-specific axis did replicate. C-minus-AC was positive in
+three of four lower-half bins and negative in all four upper-half bins. Its
+split-wise lower-positive and upper-negative rates were both `73.62%`. All
+four frozen KDE bandwidths placed the positive crest near `0.50–0.57`, the
+ridge-nearest crossing near `0.94–1.05`, and the negative trough near
+`1.88–1.91`.
+
+This stable relation is asymmetric rather than an exact reflected anti-phase:
+the eight-bin reflected cosine was `0.204`, exact reverse rank `19/24`, no
+bin-count sensitivity passed, and the unshifted source pairing ranked `3/8`
+against cyclic AC shifts. T402 therefore supports a robust source-difference
+handover across the local child ridge, not a mirror-exact child waveform or an
+individual-neutrino creation clock. Independent saved-output validation
+passed.
+
+Primary records:
+`analysis/muon/T402_WHOLE_SHAPE_CHILD_RELATION_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T402_whole_shape_child_relation/T402_WHOLE_SHAPE_CHILD_RELATION_REPORT.html`.
+
+## 33. T403 execution update — reverse detector-to-muon component lineage
+
+T403 reversed the cut: it started with the T402 detector-source footprint and
+searched upstream through the fitted T398/T400 delayed branch for its component
+shape. The unchanged T400 local child ARA coordinate supplied eight fixed bin
+centres. No continuous shift, offset, amplitude or smoothing parameter was fit.
+Direct and reversed candidates were ranked against all circular shifts.
+
+The aggregate footprint locates the common delayed-release branch. Direct
+centred cosine is `0.9569` for `anti_nu_mu`, `0.9549` for the delayed total and
+`0.9503` for `nu_e`, with the unshifted position ranked `1/8` for all three.
+This does not identify one neutrino flavor: the two fitted child shapes have
+centred cosine `0.99736`, and their weight-removed flavor-shape contrast scores
+only `0.1341` against the detector and ranks `8/8`.
+
+The reversed release-gradient and remaining-parent-curvature candidates reach
+absolute cosine about `0.769`, but fail the frozen derivative-specificity gate
+because the whole delayed rates remain stronger. Split robustness is also
+limited: median cosine `0.315`, 95% resampling interval `[-0.660,0.814]`, with
+`15.95%` of `326` probes above absolute cosine `0.65`. The T397 fitted silver W
+phase reaches an exploratory `0.723` but ranks `3/8` in the fixed alignment and
+has no event link to COHERENT.
+
+The verdict is **partial component relation**. The detector carries a
+population-level projection of the joint delayed-neutral release branch, but
+does not yet decompress `nu_e` from `anti_nu_mu`, recover an individual
+waveform, or time one neutrino birth. Independent validation passed.
+
+Primary records:
+`analysis/muon/T403_REVERSE_COMPONENT_LINEAGE_FINDINGS_2026-08-18.md`
+and
+`analysis/muon/T403_reverse_component_lineage/T403_REVERSE_COMPONENT_LINEAGE_REPORT.html`.

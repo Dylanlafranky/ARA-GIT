@@ -1,0 +1,31 @@
+{
+  "test_id": "T395-independent-validation",
+  "sample_rows": 20000,
+  "checks": {
+    "protocol_hash_matches": true,
+    "exact_gate_passes": true,
+    "exact_gate_is_labelled_forced": true,
+    "sample_parent_closure_max_lt_1e_12": true,
+    "sample_child_coordinate_max_error_lt_1e_12": true,
+    "sample_prediction_composition_max_error_lt_1e_12": true,
+    "validation_selected_actual_nll_winner": true,
+    "primary_gain_ci_excludes_zero": true,
+    "conditional_beats_unconditional_nll": true,
+    "conditional_beats_parent_shuffle_nll": true,
+    "conditional_beats_phase_space_nll": true,
+    "no_superk_population_time_join_in_t395": true
+  },
+  "sample_spot_checks": {
+    "max_parent_closure_error": 2.220446049250313e-16,
+    "max_child_coordinate_error": 0.0,
+    "max_prediction_composition_error": 0.0,
+    "sample_child_mae": 0.23200038958671798,
+    "reported_full_child_mae": 0.23307877845684277,
+    "sample_nu_e_absolute_mae": 0.14114610427271665,
+    "reported_full_nu_e_absolute_mae": 0.14196222462609084,
+    "sample_anti_nu_mu_absolute_mae": 0.14114610427271665,
+    "reported_full_anti_nu_mu_absolute_mae": 0.14196222462609084
+  },
+  "overall_pass": true,
+  "claim_boundary": "Validation supports the frozen truth-model statistical lock and exact nested coordinate composition, not direct neutrino observation or an individual pre-decay forecast."
+}

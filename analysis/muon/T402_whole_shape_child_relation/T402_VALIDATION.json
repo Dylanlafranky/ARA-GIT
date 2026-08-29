@@ -1,0 +1,49 @@
+{
+  "test": "T402 independent saved-output validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_matches_frozen_file": true,
+    "requested_split_accounting_is_400": true,
+    "saved_valid_and_invalid_counts_match": true,
+    "distribution_row_count_is_valid_x2x8": true,
+    "each_distribution_sums_to_one": true,
+    "summary_has_two_sources_and_eight_bins": true,
+    "mean_differential_recalculates": true,
+    "raw_lower_contrast_recalculates": true,
+    "raw_upper_contrast_recalculates": true,
+    "source_split_fractions_recalculate": true,
+    "topology_has_four_bandwidths": true,
+    "reflection_has_24_unique_assignments": true,
+    "exact_reflection_metrics_match": true,
+    "alignment_has_eight_shifts": true,
+    "unshifted_alignment_rank_matches": true,
+    "bin_sensitivity_has_four_counts": true,
+    "G2_recalculates": true,
+    "G3_recalculates": true,
+    "G4_recalculates": true,
+    "G5_recalculates": true,
+    "G1_failure_matches_saved_interval_and_fractions": true,
+    "verdict_matches_frozen_ladder": true,
+    "static_figure_exists": true
+  },
+  "recalculated": {
+    "valid_splits": 326,
+    "invalid_splits": 74,
+    "mean_C_minus_AC_by_bin": [
+      -0.005809822550660981,
+      0.026608659374762034,
+      0.024628904006315983,
+      0.0072241156442643395,
+      -0.004315530739015069,
+      -0.0058326005352195565,
+      -0.010358177227542037,
+      -0.03214554797290489
+    ],
+    "mean_C_lower_minus_saddle": 0.02774136192615822,
+    "mean_C_upper_minus_saddle": 0.003918892020430639,
+    "exact_reflection_cosine": 0.20396946262098514,
+    "exact_reflection_rank": 19,
+    "unshifted_alignment_rank": 3,
+    "topology_bandwidth_pass_count": 4
+  }
+}

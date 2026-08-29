@@ -1,0 +1,415 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Muon tests: a population lead-up was recovered, not an individual emission movie",
+    "description": "Evidence-graded rundown of the T371-T409 muon and neutrino-handover tests.",
+    "generatedAt": "2026-08-18T06:36:02.344429+00:00",
+    "sources": [
+      {
+        "id": "t399_landmarks",
+        "label": "T399 native population landmarks",
+        "path": "analysis/muon/T399_child_half_precrest_sequence/T399_NATIVE_LANDMARKS.csv",
+        "query": {
+          "engine": "python",
+          "language": "python",
+          "description": "Frozen T399 fitted-population landmark order and cumulative ARA placement.",
+          "tables_used": [
+            "T399_NATIVE_LANDMARKS.csv"
+          ],
+          "filters": [
+            "Best-fit COHERENT population identity; not an individual muon trajectory."
+          ],
+          "metric_definitions": [
+            "Cumulative ARA is the integrated prompt-plus-delayed fitted release compressed to 0-2."
+          ]
+        }
+      },
+      {
+        "id": "muon_ladder",
+        "label": "T371-T409 evidence-grain review",
+        "path": "analysis/muon/muon_evidence_rundown_2026-08-18/MUON_EVIDENCE_LADDER.csv",
+        "query": {
+          "engine": "document-review",
+          "language": "text",
+          "description": "Evidence-graded synthesis of the saved T371-T409 findings and session record.",
+          "tables_used": [
+            "MUON_EVIDENCE_LADDER.csv"
+          ],
+          "filters": [
+            "Preserves population, event-linked, detector-template and truth-model boundaries."
+          ]
+        }
+      },
+      {
+        "id": "t408_individual",
+        "label": "T408 nested individual windows",
+        "path": "analysis/muon/T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md",
+        "query": {
+          "description": "Latest directional individual-event result after parent conditioning and child decompression.",
+          "tables_used": [
+            "T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md"
+          ]
+        }
+      },
+      {
+        "id": "rundown_record",
+        "label": "Muon evidence rundown",
+        "path": "analysis/muon/MUON_TEST_RUNDOWN_2026-08-18.md",
+        "query": {
+          "description": "Reader-facing audit distinguishing population lead-up, decay-product split and individual prediction.",
+          "tables_used": [
+            "MUON_TEST_RUNDOWN_2026-08-18.md"
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Muon tests: a population lead-up was recovered, not an individual emission movie"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "sourceId": "rundown_record",
+        "body": "## Technical summary\n\n**Yes, the tests recovered a split and a lead-up, but not as two neutrinos appearing at separately measured times.** The strongest lead-up is a fitted population sequence. The strongest split is charged daughter versus a joint neutral branch, followed by an asymmetric two-neutrino decomposition in templates and Standard-Model truth models. Population spin anti-phase and daughter orientation are also recovered. What remains unconfirmed is an individual pre-decay countdown that predicts one named muon's release."
+      },
+      {
+        "id": "population_text",
+        "type": "markdown",
+        "sourceId": "t399_landmarks",
+        "body": "## The lead-up we actually recovered\n\nThe fitted COHERENT population moves through four ordered landmarks: prompt crest, equality of prompt and delayed rates, cumulative child-half, and the delayed muon-decay-neutrino crest. Read this as an ensemble release history, not one muon's internal movie. T399 recovered the order in the best-fit identity but missed two predeclared high-stringency robustness gates, so the sequence is directional rather than universal."
+      },
+      {
+        "id": "population_chart",
+        "type": "chart",
+        "chartId": "landmark_chart"
+      },
+      {
+        "id": "ladder_text",
+        "type": "markdown",
+        "sourceId": "muon_ladder",
+        "body": "## The evidence changes as we move down the rung\n\nPopulation handovers, spin anti-phase and daughter-allocation relations are the strongest results. Event-linked tests are stricter: the incoming detector coordinates usually failed to improve individual daughter-time prediction, while T408 supplied a small, directionally positive nested-child signal that did not clear its full frozen confirmation rule. This is why population lead-up and individual birth prediction must remain separate claims."
+      },
+      {
+        "id": "ladder_table",
+        "type": "table",
+        "tableId": "evidence_table"
+      },
+      {
+        "id": "dots",
+        "type": "markdown",
+        "sourceId": "t408_individual",
+        "body": "## What the individual dots contain\n\nEach T408/T409 dot links an incoming stopped-muon detector record to a later charged-daughter candidate. A genuine decay implies that the decay products existed, but neither neutrino is plotted or directly measured. The dots can test whether incoming relations change the probability of later timing windows; they cannot show the neutrino waveform or distinguish the two neutral children."
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "sourceId": "rundown_record",
+        "body": "## The corrected conclusion\n\nThe project has evidence for a structured population approach to the muon-decay handover and for multiple nested daughter relations. It has not shown that the two neutrinos are born in temporally separated stages, nor that one living muon's decay instant is predictable. The decisive dataset must join repeated pre-decay spin or another dynamic state, charged-daughter energy/direction, neutral-sensitive timing or missing momentum, and the held-out decay time under one event key."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does T408's nested-child improvement replicate on untouched dates or another detector?\n- Can an event-level spin/polarisation axis supply the missing same-scale anti-phase?\n- Can a neutral-sensitive or missing-momentum record turn the current distribution lock into a true individual Information-cubed lock?"
+      }
+    ],
+    "charts": [
+      {
+        "id": "landmark_chart",
+        "title": "Fitted population landmarks before the delayed-release crest",
+        "subtitle": "COHERENT best-fit population identity; cumulative ARA versus time after the source pulse.",
+        "type": "line",
+        "dataset": "landmarks",
+        "sourceId": "t399_landmarks",
+        "source": {
+          "query": {
+            "sql": "SELECT \"order\", landmark, time_us, cumulative_ara, evidence_grain FROM \"MUON_POPULATION_LANDMARKS.csv\" ORDER BY \"order\" ASC",
+            "description": "Read the four frozen T399 population landmarks in chronological order from the reviewed CSV extract."
+          },
+          "tables": [
+            "MUON_POPULATION_LANDMARKS.csv"
+          ]
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "encodings": {
+          "x": {
+            "field": "time_us",
+            "type": "quantitative",
+            "label": "Time after source pulse (microseconds)"
+          },
+          "y": {
+            "field": "cumulative_ara",
+            "type": "quantitative",
+            "label": "Cumulative population ARA (0-2)"
+          },
+          "tooltip": [
+            {
+              "field": "landmark",
+              "type": "nominal",
+              "label": "Landmark"
+            },
+            {
+              "field": "cumulative_ara",
+              "type": "quantitative",
+              "label": "Cumulative ARA"
+            },
+            {
+              "field": "evidence_grain",
+              "type": "nominal",
+              "label": "Evidence grain"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "evidence_table",
+        "title": "Evidence ladder across the muon programme",
+        "subtitle": "Saved T371-T409 results grouped by measurement grain and claim ceiling.",
+        "dataset": "ladder",
+        "sourceId": "muon_ladder",
+        "source": {
+          "query": {
+            "sql": "SELECT test_group, grain, measured_or_modelled, result, status, claim_boundary FROM \"MUON_EVIDENCE_LADDER.csv\" ORDER BY test_group ASC",
+            "description": "Read the evidence-graded T371-T409 audit rows from the reviewed CSV synthesis."
+          },
+          "tables": [
+            "MUON_EVIDENCE_LADDER.csv"
+          ]
+        },
+        "defaultSort": {
+          "field": "test_group",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "test_group",
+            "label": "Tests",
+            "type": "text"
+          },
+          {
+            "field": "grain",
+            "label": "Evidence grain",
+            "type": "text"
+          },
+          {
+            "field": "measured_or_modelled",
+            "label": "What was measured/modelled",
+            "type": "text"
+          },
+          {
+            "field": "result",
+            "label": "Result",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "claim_boundary",
+            "label": "Claim boundary",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "status": "ready",
+    "generatedAt": "2026-08-18T06:36:02.344429+00:00",
+    "datasets": {
+      "landmarks": [
+        {
+          "order": 1,
+          "landmark": "Prompt neutrino crest",
+          "time_us": 0.5005,
+          "cumulative_ara": 0.244269,
+          "evidence_grain": "Fitted population",
+          "source_test": "T399"
+        },
+        {
+          "order": 2,
+          "landmark": "Prompt/delayed rate equality",
+          "time_us": 0.636074,
+          "cumulative_ara": 0.437389,
+          "evidence_grain": "Fitted population",
+          "source_test": "T399"
+        },
+        {
+          "order": 3,
+          "landmark": "Cumulative child-half",
+          "time_us": 0.686649,
+          "cumulative_ara": 0.5,
+          "evidence_grain": "Derived population",
+          "source_test": "T399"
+        },
+        {
+          "order": 4,
+          "landmark": "Delayed muon-decay-neutrino crest",
+          "time_us": 0.7855,
+          "cumulative_ara": 0.600426,
+          "evidence_grain": "Fitted population",
+          "source_test": "T399"
+        }
+      ],
+      "ladder": [
+        {
+          "test_group": "T371-T372",
+          "grain": "Population source",
+          "measured_or_modelled": "Measured detector counts plus fitted physical branches",
+          "result": "Ordered prompt and delayed handover recovered; native equality gradient mapped",
+          "status": "Supported with exact-half unresolved",
+          "claim_boundary": "Not an individual linked decay"
+        },
+        {
+          "test_group": "T373-T375",
+          "grain": "Population detector medium",
+          "measured_or_modelled": "Measured liquid-argon energy and timing",
+          "result": "Prompt-to-delayed order retained and energy resolution restores placement",
+          "status": "Supported mechanism within one archive",
+          "claim_boundary": "Not universal same-coordinate transfer"
+        },
+        {
+          "test_group": "T376-T380",
+          "grain": "Individual detector events",
+          "measured_or_modelled": "Incoming pulse relations linked to later charged daughter",
+          "result": "Static parent and child cuts do not predict individual delay",
+          "status": "Not supported as individual clock",
+          "claim_boundary": "Neutrinos unobserved"
+        },
+        {
+          "test_group": "T382-T391",
+          "grain": "Population spin field",
+          "measured_or_modelled": "Aggregate detector shares over spin phase",
+          "result": "Two-axis spin anti-phase recovered but exact 7.5-turn release rejected",
+          "status": "Mixed: geometry supported / trigger rejected",
+          "claim_boundary": "No individual trajectory or neutrino"
+        },
+        {
+          "test_group": "T392-T393",
+          "grain": "Daughter allocation",
+          "measured_or_modelled": "Polarized daughter asymmetry plus Standard-Model neutral decomposition",
+          "result": "Charged/joint-neutral reversal near half and asymmetric two-child neutral pair",
+          "status": "Supported crosswalk",
+          "claim_boundary": "Mostly template/truth-level neutral children"
+        },
+        {
+          "test_group": "T394-T396",
+          "grain": "Truth model plus population timing",
+          "measured_or_modelled": "Standard-Model event truth and tagged-decay distributions",
+          "result": "Population anti-phase forecast and Information-cubed distribution locks pass",
+          "status": "Supported at stated model/population grains",
+          "claim_boundary": "No direct two-neutrino event measurement"
+        },
+        {
+          "test_group": "T397",
+          "grain": "Population spin field",
+          "measured_or_modelled": "Aggregate daughter detector orientation and common-mode phase",
+          "result": "Orientation passes; population maturity fails",
+          "status": "Mixed",
+          "claim_boundary": "No individual creation clock"
+        },
+        {
+          "test_group": "T398-T399",
+          "grain": "Population waveform",
+          "measured_or_modelled": "Fitted COHERENT prompt/delayed templates",
+          "result": "Full lead-up sequence visible; high-stringency child-half sequence misses two gates",
+          "status": "Directional support",
+          "claim_boundary": "Not individual birth"
+        },
+        {
+          "test_group": "T400-T405",
+          "grain": "Population/event-weight detector footprint",
+          "measured_or_modelled": "Delayed child window and source contrast",
+          "result": "Stable ridge-crossing footprint survives; exact mirror and missing-band stories fail",
+          "status": "Partial component relation",
+          "claim_boundary": "Detector response not pristine neutrino waveform"
+        },
+        {
+          "test_group": "T406-T409",
+          "grain": "Individual event-linked transfer",
+          "measured_or_modelled": "Incoming parent/child coordinates and later daughter windows",
+          "result": "Nested children give near-support but static landmarks and upper-band travel do not confirm",
+          "status": "Directional only",
+          "claim_boundary": "No exact individual neutrino handover"
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "t399_landmarks",
+      "label": "T399 native population landmarks",
+      "path": "analysis/muon/T399_child_half_precrest_sequence/T399_NATIVE_LANDMARKS.csv",
+      "query": {
+        "engine": "python",
+        "language": "python",
+        "description": "Frozen T399 fitted-population landmark order and cumulative ARA placement.",
+        "tables_used": [
+          "T399_NATIVE_LANDMARKS.csv"
+        ],
+        "filters": [
+          "Best-fit COHERENT population identity; not an individual muon trajectory."
+        ],
+        "metric_definitions": [
+          "Cumulative ARA is the integrated prompt-plus-delayed fitted release compressed to 0-2."
+        ]
+      }
+    },
+    {
+      "id": "muon_ladder",
+      "label": "T371-T409 evidence-grain review",
+      "path": "analysis/muon/muon_evidence_rundown_2026-08-18/MUON_EVIDENCE_LADDER.csv",
+      "query": {
+        "engine": "document-review",
+        "language": "text",
+        "description": "Evidence-graded synthesis of the saved T371-T409 findings and session record.",
+        "tables_used": [
+          "MUON_EVIDENCE_LADDER.csv"
+        ],
+        "filters": [
+          "Preserves population, event-linked, detector-template and truth-model boundaries."
+        ]
+      }
+    },
+    {
+      "id": "t408_individual",
+      "label": "T408 nested individual windows",
+      "path": "analysis/muon/T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md",
+      "query": {
+        "description": "Latest directional individual-event result after parent conditioning and child decompression.",
+        "tables_used": [
+          "T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md"
+        ]
+      }
+    },
+    {
+      "id": "rundown_record",
+      "label": "Muon evidence rundown",
+      "path": "analysis/muon/MUON_TEST_RUNDOWN_2026-08-18.md",
+      "query": {
+        "description": "Reader-facing audit distinguishing population lead-up, decay-product split and individual prediction.",
+        "tables_used": [
+          "MUON_TEST_RUNDOWN_2026-08-18.md"
+        ]
+      }
+    }
+  ],
+  "package_info": {
+    "artifact_name": "Muon evidence rundown",
+    "artifact_version": "1.0.0",
+    "delivery": "mcp-app"
+  }
+}

@@ -1,0 +1,252 @@
+{
+  "affine_closure": [
+    0.07354254359917466,
+    0.23047037894680986
+  ],
+  "analysis_sha256": "ce3a07591897a48436186bc0f0b52683386982203b8f8494b544f60549ca3032",
+  "availability_fraction": 1.0,
+  "coordinate_independence": {
+    "corr_H_R": 0.3238483956705548,
+    "corr_H_U": -0.5274833695647962,
+    "median_U_plus_R_plus_H": 2.131535712712753,
+    "std_U_plus_R_plus_H": 0.34545972384814666
+  },
+  "crossings": {
+    "direction_counts": {
+      "R_to_U": 10,
+      "U_to_R": 4
+    },
+    "effects": {
+      "E2_minus_E3": {
+        "ci95": [
+          -0.49124079340133053,
+          -0.10620344668530601
+        ],
+        "median": -0.25829597334009313
+      },
+      "H_cross_minus_history": {
+        "ci95": [
+          0.030098908002040625,
+          0.35856654345937633
+        ],
+        "median": 0.09382410146546305
+      },
+      "shifted_minus_correct": {
+        "ci95": [
+          -0.35856654345937633,
+          -0.030098908002040625
+        ],
+        "median": -0.09382410146546305
+      },
+      "wrong_minus_correct": {
+        "ci95": [
+          -0.03158150915455127,
+          0.06520654136942472
+        ],
+        "median": 0.040025402224152795
+      }
+    },
+    "event_count": 14,
+    "field_count": 8,
+    "median_E2": 0.3479923945645647,
+    "median_E3_affine": 0.05645444325842994,
+    "median_E3_correct": 0.6273673086923037,
+    "median_E3_shifted": 0.45436788453378535,
+    "median_E3_wrong": 0.6631869961257968,
+    "median_H": 1.0064436855026795,
+    "median_crossing_coordinate": 0.8260038027177177,
+    "median_parent_ARA": 1.3475431712194403,
+    "passes": {
+      "closure_gain": false,
+      "crossing_exposure": true,
+      "frequency_specificity": false,
+      "shift_specificity": false
+    },
+    "sequence_count": 9
+  },
+  "eligible_sequences": 40,
+  "gates": {
+    "G1_availability": {
+      "pass": true,
+      "value": 1.0
+    },
+    "G2_independent_not_complement": {
+      "corr_H_R": 0.3238483956705548,
+      "corr_H_U": -0.5274833695647962,
+      "median_U_plus_R_plus_H": 2.131535712712753,
+      "pass": true,
+      "std_U_plus_R_plus_H": 0.34545972384814666
+    },
+    "G3_crossing_exposure": {
+      "pass": true
+    },
+    "G4_three_part_closure": {
+      "parts": {
+        "closure_gain": false,
+        "crossing_exposure": true,
+        "frequency_specificity": false,
+        "shift_specificity": false
+      },
+      "pass": false
+    },
+    "G5_future_openness_added_information": {
+      "pass": false
+    },
+    "G6_prediction_specificity": {
+      "parts": {
+        "added_information": false,
+        "direction_specificity": false,
+        "frequency_specificity": false,
+        "rf_robustness": false,
+        "timing_specificity": false
+      },
+      "pass": false
+    },
+    "G7_rf_robustness": {
+      "effects": {
+        "RF off": -2.7972960953440433e-05,
+        "RF on": -0.00010667132403606038
+      },
+      "pass": false
+    }
+  },
+  "identity": "muoniated-acetone detector-population spin relation",
+  "predictions": {
+    "future_R": {
+      "effects": {
+        "baseline_minus_transfer": {
+          "ci95": [
+            -0.001043557383284762,
+            0.0026360644236002643
+          ],
+          "median": 0.00018637551352465717
+        },
+        "reverse_minus_transfer": {
+          "ci95": [
+            4.292652212888222e-06,
+            0.0004497913721895749
+          ],
+          "median": 0.000206345544887422
+        },
+        "rf_baseline_minus_transfer": {
+          "RF off": 0.0002706755281292371,
+          "RF on": -0.0010068067654928478
+        },
+        "shift": {
+          "empirical_p": 0.11188811188811189,
+          "null_median": 0.018382535665281773,
+          "observed_transfer_mse": 0.018137821283912406
+        },
+        "wrong_minus_transfer": {
+          "ci95": [
+            -0.0020278489606460593,
+            0.0007931772157835594
+          ],
+          "median": -0.0006817304642503612
+        }
+      },
+      "errors": {
+        "baseline_mse": 0.014744649173885897,
+        "reverse_mse": 0.01860868155505048,
+        "transfer_mse": 0.018137821283912406,
+        "wrong_frequency_mse": 0.015136461900054543
+      },
+      "passes": {
+        "added_information": false,
+        "direction_specificity": true,
+        "frequency_specificity": false,
+        "rf_robustness": false,
+        "timing_specificity": false
+      },
+      "prediction_rows": 1040,
+      "stage": "holdout",
+      "target": "future_R"
+    },
+    "future_U": {
+      "effects": {
+        "baseline_minus_transfer": {
+          "ci95": [
+            -0.00017935419693491003,
+            1.9263542344292572e-05
+          ],
+          "median": -5.9586016774959224e-05
+        },
+        "reverse_minus_transfer": {
+          "ci95": [
+            -9.144015744429559e-05,
+            0.00010111283400712605
+          ],
+          "median": -7.009454544822449e-07
+        },
+        "rf_baseline_minus_transfer": {
+          "RF off": -2.7972960953440433e-05,
+          "RF on": -0.00010667132403606038
+        },
+        "shift": {
+          "empirical_p": 0.2897102897102897,
+          "null_median": 0.003722087559360206,
+          "observed_transfer_mse": 0.0036774918794204494
+        },
+        "wrong_minus_transfer": {
+          "ci95": [
+            -5.949729286123173e-05,
+            6.879340051176128e-05
+          ],
+          "median": 3.195533348959679e-05
+        }
+      },
+      "errors": {
+        "baseline_mse": 0.003642046487883358,
+        "reverse_mse": 0.00358209486159723,
+        "transfer_mse": 0.0036774918794204494,
+        "wrong_frequency_mse": 0.0037310355737233116
+      },
+      "passes": {
+        "added_information": false,
+        "direction_specificity": false,
+        "frequency_specificity": false,
+        "rf_robustness": false,
+        "timing_specificity": false
+      },
+      "prediction_rows": 1040,
+      "stage": "holdout",
+      "target": "future_U"
+    }
+  },
+  "primary_horizon": {
+    "median_us": 2.04800021648407,
+    "native_bins": 128,
+    "reads": 32,
+    "shared_native_bins": 0
+  },
+  "primary_prediction_rows": 1040,
+  "protocol_sha256": "a9374ec6b58892bd708b7019ced69173ec007a786b23a1d301032d35b887c1c3",
+  "run_count": 20,
+  "run_period_sequences": 40,
+  "source_hashes": {
+    "EMU00070245": "6e351f55c47c8a64e1eadd13bcbafa041f29a533342746070b02f324086bc815",
+    "EMU00070248": "cc4c9367d9754019c0154dc799759c1ddd69c39078f52257194597cb4fb409b6",
+    "EMU00070251": "138ff73c03dfad9b23c05e47c42113795be6099832b989dcbbb0a83083661398",
+    "EMU00070254": "5bbb6eaa752788fe473e1c04c77f9d4e93e000707c9ed80d67c2743df0dede34",
+    "EMU00070257": "e603fe6380c756c1789902e827719ae8ead8211d1585e66768b2d7f652dd5747",
+    "EMU00070260": "6984f811a3fbf88acc32d6bdc8cfd216b49a445d1aba1dad7dbe9ed86ca69ce4",
+    "EMU00070263": "a4f9e6cc39a3c9ac5ce61e31537afa106e59a30a525f349e9699a7174d240519",
+    "EMU00070266": "84d34560f7821d37918cd404878b0d7cb7ad1d5decac2c1d618306bec8b57422",
+    "EMU00070269": "484df3781a4ffad34239ffa5a5055b30eb0c2f4c600ea1f112ab951c2cf8ce64",
+    "EMU00070272": "a90b9b86c120a809b69fa468878ddaf366f2177481a2991dd0dd90d5261aab25",
+    "EMU00070275": "ee53a1de06e5d5eb9eca788a0287862db1de2fee6eca44e260f76df74a30df2d",
+    "EMU00070278": "c1e5e913ca1187f3ef91e6d640318fc162d7822b72775c4335f179913a48d845",
+    "EMU00070281": "f3eb02b656b0692b7751d60dee70af66c13272a7acf85f9b8ffe5b067690a1a9",
+    "EMU00070284": "80f6993fa714f97140370efd1af7b7d85fd81bd41528626b62d49e7da671a793",
+    "EMU00070287": "e916dea6dd0422227bb2b5462036ff6526242005de1c693cd3ae8bc073e26740",
+    "EMU00070290": "d1154cdb635b7251043fff5b7846dc3a127c5b452688b53bd6c52b53d1b5dbc6",
+    "EMU00070293": "7ce6caae7edc8e5839ef4a44192bd1a4331b127f6648e599d5cf0c9301afd0f2",
+    "EMU00070296": "fcc74ad93554c38eb92164ce4c9abbaf7a20cc358c8b4c613a55d7b5f6f0a546",
+    "EMU00070299": "7b8d1fe12b396ab6f65ede79bfc1f048b0b01348d4a7501a6610724bf5bfe147",
+    "EMU00070302": "784258b2eb5a546b014cc27cac22caf1276e249962de552cf267b465bbb1d579"
+  },
+  "stage": "holdout",
+  "stage_supported": false,
+  "test": "T420 independent Information^3 handover channel",
+  "timeline_rows": 2360
+}

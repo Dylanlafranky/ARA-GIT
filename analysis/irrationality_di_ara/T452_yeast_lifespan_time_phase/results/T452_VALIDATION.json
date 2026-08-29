@@ -1,0 +1,46 @@
+{
+  "assessment": "Share with caveats",
+  "checks_passed": 22,
+  "checks_total": 22,
+  "failed_checks": [],
+  "checks": {
+    "225_unique_cells": true,
+    "frozen_cohort_counts_94_12_119": true,
+    "generation_grain_unique": true,
+    "interval_grain_unique": true,
+    "all_cells_have_at_least_three_G1": true,
+    "all_spans_positive": true,
+    "interval_counts_reconcile": true,
+    "generation_counts_reconcile": true,
+    "maturity_formula_all_rows": true,
+    "elapsed_formula_all_rows": true,
+    "remaining_formula_all_rows": true,
+    "shadow_formula_all_rows": true,
+    "counter_phase_identity_all_rows": true,
+    "forced_endpoints_exactly_close": true,
+    "holdout_shadow_r_matches": true,
+    "external_shadow_r_matches": true,
+    "crossings_match": true,
+    "holdout_observed_above_shuffle_95": true,
+    "external_observed_above_shuffle_95": true,
+    "minimum_empirical_p_is_resolution_limit": true,
+    "portable_html_exists_and_is_self_contained": true,
+    "report_contains_core_caveats": true
+  },
+  "independently_recomputed": {
+    "holdout_shadow_correlation": 0.9850635614835971,
+    "external_shadow_correlation": 0.9847546471263847,
+    "crossings_A": {
+      "development": 1.455087062778486,
+      "external": 1.453249714937292,
+      "holdout": 1.4040062983501065
+    }
+  },
+  "required_caveats": [
+    "Completed-life normalization uses the future terminal boundary and is not prospective prediction.",
+    "The first and last shadow values are forced to zero.",
+    "The numeric workbook stops at the last G1 before the omitted death image.",
+    "The holdout contains 12 cells; the external cohort strengthens the core curve but lacks fluorescence.",
+    "Portable HTML passed structural/payload verification; browser interaction was not verified because Chromium was unavailable."
+  ]
+}

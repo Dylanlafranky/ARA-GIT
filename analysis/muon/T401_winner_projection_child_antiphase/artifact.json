@@ -1,0 +1,961 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T401 — Winner projection and candidate child anti-phase",
+    "description": "Frozen full-distribution audit of the apparent missing winner band in the COHERENT CsI delayed-child ARA coordinate.",
+    "generatedAt": "2026-08-17T06:52:49.313255Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "occupancy",
+        "title": "Full-distribution occupancy",
+        "subtitle": "164 valid calibration-to-holdout transfers; each source sums to one within each split",
+        "type": "bar",
+        "dataset": "occupancy",
+        "sourceId": "t401_bins",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "bin_center",
+            "type": "quantitative",
+            "label": "Local child ARA bin"
+          },
+          "y": {
+            "field": "mean_occupancy",
+            "type": "quantitative",
+            "label": "Mean share of split weight"
+          },
+          "color": {
+            "field": "source",
+            "type": "nominal",
+            "label": "Source"
+          },
+          "tooltip": [
+            {
+              "field": "source",
+              "type": "nominal",
+              "label": "Source"
+            },
+            {
+              "field": "bin_center",
+              "type": "quantitative",
+              "label": "ARA bin"
+            },
+            {
+              "field": "mean_occupancy",
+              "type": "quantitative",
+              "label": "Mean occupancy"
+            }
+          ]
+        }
+      },
+      {
+        "id": "winners",
+        "title": "Binned and continuous winner locations",
+        "subtitle": "The candidate 1.25–1.50 band is selected by both methods",
+        "type": "bar",
+        "dataset": "winners",
+        "sourceId": "t401_modes",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "bin_center",
+            "type": "quantitative",
+            "label": "Local child ARA mode region"
+          },
+          "y": {
+            "field": "winner_fraction",
+            "type": "quantitative",
+            "label": "Fraction of valid C splits"
+          },
+          "color": {
+            "field": "method",
+            "type": "nominal",
+            "label": "Mode method"
+          },
+          "tooltip": [
+            {
+              "field": "method",
+              "type": "nominal",
+              "label": "Method"
+            },
+            {
+              "field": "bin_center",
+              "type": "quantitative",
+              "label": "ARA region"
+            },
+            {
+              "field": "winner_fraction",
+              "type": "quantitative",
+              "label": "Winner fraction"
+            }
+          ]
+        }
+      },
+      {
+        "id": "mirror",
+        "title": "Reflected-pair exchange across splits",
+        "subtitle": "Centred-log-ratio Spearman relations; negative values indicate exchange",
+        "type": "bar",
+        "dataset": "mirror",
+        "sourceId": "t401_mirror",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "No relation",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "reflected_pair",
+            "type": "nominal",
+            "label": "Predeclared reflected ARA pair"
+          },
+          "y": {
+            "field": "spearman_rho",
+            "type": "quantitative",
+            "label": "Spearman ρ after CLR"
+          },
+          "color": {
+            "field": "source",
+            "type": "nominal",
+            "label": "Source"
+          },
+          "tooltip": [
+            {
+              "field": "source",
+              "type": "nominal",
+              "label": "Source"
+            },
+            {
+              "field": "reflected_pair",
+              "type": "nominal",
+              "label": "Pair"
+            },
+            {
+              "field": "spearman_rho",
+              "type": "quantitative",
+              "label": "Spearman ρ"
+            }
+          ]
+        }
+      },
+      {
+        "id": "null",
+        "title": "Observed winners versus sampling-only null",
+        "subtitle": "Multinomial effective sample size 57; candidate observed-versus-null p=0.767",
+        "type": "bar",
+        "dataset": "null",
+        "sourceId": "t401_null",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "encodings": {
+          "x": {
+            "field": "bin_center",
+            "type": "quantitative",
+            "label": "Local child ARA winning bin"
+          },
+          "y": {
+            "field": "winner_fraction",
+            "type": "quantitative",
+            "label": "Fraction of winners"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Series"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Series"
+            },
+            {
+              "field": "bin_center",
+              "type": "quantitative",
+              "label": "ARA bin"
+            },
+            {
+              "field": "winner_fraction",
+              "type": "quantitative",
+              "label": "Winner fraction"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gates",
+        "title": "Frozen scientific gates",
+        "subtitle": "All five gates failed without threshold changes",
+        "dataset": "gates",
+        "sourceId": "t401_results",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          },
+          {
+            "field": "reason",
+            "label": "Reason",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation",
+        "title": "Independent saved-output validation",
+        "subtitle": "Integrity and arithmetic passed; scientific failures remain failures",
+        "dataset": "validation",
+        "sourceId": "t401_validation",
+        "defaultSort": {
+          "field": "check",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t401_bins",
+        "label": "T401 per-bin distribution summary",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_BIN_SUMMARY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Mean occupancy, variability and winner fractions for C and AC across valid splits.",
+          "tables_used": [
+            "T401_BIN_SUMMARY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_BIN_SUMMARY.csv')"
+        }
+      },
+      {
+        "id": "t401_modes",
+        "label": "T401 split-mode ledger",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_SPLIT_MODES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Binned and weighted-KDE modes for every valid split and source.",
+          "tables_used": [
+            "T401_SPLIT_MODES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_SPLIT_MODES.csv')"
+        }
+      },
+      {
+        "id": "t401_mirror",
+        "label": "T401 reflected-pair relations",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_MIRROR_RELATIONS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "CLR Spearman relations for the four predeclared ARA reflection pairs.",
+          "tables_used": [
+            "T401_MIRROR_RELATIONS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_MIRROR_RELATIONS.csv')"
+        }
+      },
+      {
+        "id": "t401_null",
+        "label": "T401 sampling-only winner null",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_SAMPLING_NULL.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Pooled occupancy, observed dominance and simulated winner frequencies.",
+          "tables_used": [
+            "T401_SAMPLING_NULL.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_SAMPLING_NULL.csv')"
+        }
+      },
+      {
+        "id": "t401_results",
+        "label": "T401 saved result",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Frozen gates, verdict, metrics and evidence boundaries.",
+          "tables_used": [
+            "T401_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t401_validation",
+        "label": "T401 independent validation",
+        "path": "analysis/muon/T401_winner_projection_child_antiphase/T401_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent saved-output integrity and arithmetic validation.",
+          "tables_used": [
+            "T401_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t401_protocol",
+        "label": "Frozen T401 protocol",
+        "path": "analysis/muon/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_PROTOCOL_2026-08-17.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Predeclared identity, coordinate, measurements, controls and verdict ladder.",
+          "tables_used": [
+            "T401 protocol"
+          ]
+        }
+      },
+      {
+        "id": "coherent_2022",
+        "label": "COHERENT CsI public measurement and ancillary data",
+        "path": "https://arxiv.org/abs/2110.07730"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T401 — Winner projection and candidate child anti-phase\n\n## Technical summary\n\n**The apparent missing band was a winner-only projection artifact, not a stable child anti-phase shadow.** The `1.25–1.50` band retained **11.86%** of C weight, almost exactly its neighbour average, and became the binned winner in **7.93%** and KDE winner in **10.37%** of 164 valid transfers. Its observed winner rate matches the sampling-only null (`p=0.767`). The exact reflection was weak and ranked 13th of 24 pairings. All frozen gates failed.",
+        "sourceId": "t401_results"
+      },
+      {
+        "id": "occupancy_text",
+        "type": "markdown",
+        "body": "## Restoring the omitted distribution fills the visual hole\n\nT400 retained only each split's largest bin. T401 keeps all eight bins. The candidate's occupancy ratio to its immediate neighbours is **0.991** and its volatility is **1.029** times the median bin, classified **intermediate**. It is therefore an ordinary occupied part of this child coordinate, not a quiet null or unusually turbulent seam.",
+        "sourceId": "t401_results"
+      },
+      {
+        "id": "occupancy_chart",
+        "type": "chart",
+        "chartId": "occupancy"
+      },
+      {
+        "id": "winner_text",
+        "type": "markdown",
+        "body": "## The gap disappears under both discrete and continuous modes\n\nThe candidate won **13** of 164 binned splits and 17 KDE splits. A sampling-only model expected a **7.50%** winner rate, nearly identical to the observed **7.93%**. The original zero among twenty splits should not be promoted into a physical child identity.",
+        "sourceId": "t401_results"
+      },
+      {
+        "id": "winner_chart",
+        "type": "chart",
+        "chartId": "winners"
+      },
+      {
+        "id": "null_chart",
+        "type": "chart",
+        "chartId": "null"
+      },
+      {
+        "id": "reflection_text",
+        "type": "markdown",
+        "body": "## The exact reflected pairing is not selected\n\nC gives an exchange score of **0.0467**, only **2/4** negative reflected relations and exact-reflection rank **13/24**. AC gives score **-0.0506** and rank **2/24**; its rank does not indicate exchange because the score has the wrong sign. This cut does not identify a reflected child Phase B.",
+        "sourceId": "t401_results"
+      },
+      {
+        "id": "mirror_chart",
+        "type": "chart",
+        "chartId": "mirror"
+      },
+      {
+        "id": "gates_table",
+        "type": "table",
+        "tableId": "gates"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope, data and metric definitions\n\n- **Identity:** the same COHERENT CsI delayed-child window used by T400; no medium or rung was changed.\n- **Coordinate:** local child ARA `0–2`, bounded by calibration-only branch equality and delayed-rate return.\n- **Occupancy:** a bin's mean share of delayed-membership weight across valid holdouts.\n- **Dominance:** the fraction of splits in which that bin is the largest.\n- **Valid transfers:** 164/200 (82%); 36 calibration partitions did not form an ordered child interval.\n- **Control:** AC records use the same frozen scoring denominator as C.\n\nThe partitions overlap heavily. They measure resampling stability, not 164 independent physical experiments.",
+        "sourceId": "t401_results"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Methodology\n\nThe protocol was hashed before execution. Salts 400–599 independently froze a 70% calibration fit and transferred it to the untouched 30%. T401 saved each complete weighted distribution, calculated a fixed-bandwidth `h=0.15` KDE mode, compared CLR-transformed reflected pairs with all 24 assignments, and simulated 50,000 200-draw winner experiments using the actual valid split count. Total lower-versus-upper anticorrelation was excluded because probability closure forces it."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and robustness\n\nThe candidate interval was selected after T400 and is not an independent discovery interval. The multinomial null approximates weighted records using an effective sample size. Thirty-six invalid windows show sensitivity to calibration resolution. Most importantly, this source still contains statistical detector-event weights rather than a named muon linked to both named neutral daughters. A failed shadow test cannot prove that the physical identity lacks anti-phase; it only rejects this visual gap as its locator."
+      },
+      {
+        "id": "validation_table",
+        "type": "table",
+        "tableId": "validation"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nStop extracting new identities from this winner histogram. Transfer the frozen child coordinate to a finer-time or event-linked source with an independently observed parent phase and charged-daughter relation, reconstruct the anti-phase before revealing the target handover, and test it on untouched events.\n\n## Further questions\n\n- Do invalid calibration windows share a measurable source-resolution condition?\n- Does a finer-time event record retain ridge-centred balance without coarse-bin mode instability?\n- Can an independently measured second relation turn the existing population lock into an individual Information³ test?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T06:52:49.313255Z",
+    "status": "ready",
+    "datasets": {
+      "occupancy": [
+        {
+          "source": "C",
+          "bin_center": 0.125,
+          "mean_occupancy": 0.09596682292060196
+        },
+        {
+          "source": "C",
+          "bin_center": 0.375,
+          "mean_occupancy": 0.11693281342897723
+        },
+        {
+          "source": "C",
+          "bin_center": 0.625,
+          "mean_occupancy": 0.15783281780733002
+        },
+        {
+          "source": "C",
+          "bin_center": 0.875,
+          "mean_occupancy": 0.1409675862384174
+        },
+        {
+          "source": "C",
+          "bin_center": 1.125,
+          "mean_occupancy": 0.11545141151174561
+        },
+        {
+          "source": "C",
+          "bin_center": 1.375,
+          "mean_occupancy": 0.11861415469032918
+        },
+        {
+          "source": "C",
+          "bin_center": 1.625,
+          "mean_occupancy": 0.12391771284827482
+        },
+        {
+          "source": "C",
+          "bin_center": 1.875,
+          "mean_occupancy": 0.1303166805543236
+        },
+        {
+          "source": "AC",
+          "bin_center": 0.125,
+          "mean_occupancy": 0.09797247189219845
+        },
+        {
+          "source": "AC",
+          "bin_center": 0.375,
+          "mean_occupancy": 0.09217248830857976
+        },
+        {
+          "source": "AC",
+          "bin_center": 0.625,
+          "mean_occupancy": 0.1256629827975498
+        },
+        {
+          "source": "AC",
+          "bin_center": 0.875,
+          "mean_occupancy": 0.12566845297818777
+        },
+        {
+          "source": "AC",
+          "bin_center": 1.125,
+          "mean_occupancy": 0.12940199458241594
+        },
+        {
+          "source": "AC",
+          "bin_center": 1.375,
+          "mean_occupancy": 0.13183440751565922
+        },
+        {
+          "source": "AC",
+          "bin_center": 1.625,
+          "mean_occupancy": 0.14677039110817422
+        },
+        {
+          "source": "AC",
+          "bin_center": 1.875,
+          "mean_occupancy": 0.1505168108172347
+        }
+      ],
+      "winners": [
+        {
+          "method": "8-bin mode",
+          "bin_center": 0.125,
+          "winner_fraction": 0.024390243902439025
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 0.125,
+          "winner_fraction": 0.006097560975609756
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 0.375,
+          "winner_fraction": 0.054878048780487805
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 0.375,
+          "winner_fraction": 0.04878048780487805
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 0.625,
+          "winner_fraction": 0.3231707317073171
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 0.625,
+          "winner_fraction": 0.4329268292682927
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 0.875,
+          "winner_fraction": 0.18292682926829268
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 0.875,
+          "winner_fraction": 0.2073170731707317
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 1.125,
+          "winner_fraction": 0.09146341463414634
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 1.125,
+          "winner_fraction": 0.036585365853658534
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 1.375,
+          "winner_fraction": 0.07926829268292683
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 1.375,
+          "winner_fraction": 0.10365853658536585
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 1.625,
+          "winner_fraction": 0.10975609756097561
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 1.625,
+          "winner_fraction": 0.11585365853658537
+        },
+        {
+          "method": "8-bin mode",
+          "bin_center": 1.875,
+          "winner_fraction": 0.13414634146341464
+        },
+        {
+          "method": "KDE mode h=0.15",
+          "bin_center": 1.875,
+          "winner_fraction": 0.04878048780487805
+        }
+      ],
+      "mirror": [
+        {
+          "source": "C",
+          "reflected_pair": "0.125↔1.875",
+          "spearman_rho": -0.1465292849763544
+        },
+        {
+          "source": "C",
+          "reflected_pair": "0.375↔1.625",
+          "spearman_rho": 0.009269108865098689
+        },
+        {
+          "source": "C",
+          "reflected_pair": "0.625↔1.375",
+          "spearman_rho": 0.0034687742304082268
+        },
+        {
+          "source": "C",
+          "reflected_pair": "0.875↔1.125",
+          "spearman_rho": -0.05301375266959585
+        },
+        {
+          "source": "AC",
+          "reflected_pair": "0.125↔1.875",
+          "spearman_rho": 0.012008801194375638
+        },
+        {
+          "source": "AC",
+          "reflected_pair": "0.375↔1.625",
+          "spearman_rho": -0.11679878660528785
+        },
+        {
+          "source": "AC",
+          "reflected_pair": "0.625↔1.375",
+          "spearman_rho": 0.15305048086732959
+        },
+        {
+          "source": "AC",
+          "reflected_pair": "0.875↔1.125",
+          "spearman_rho": 0.15395811752642724
+        }
+      ],
+      "null": [
+        {
+          "series": "Observed",
+          "bin_center": 0.125,
+          "winner_fraction": 0.024390243902439025
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 0.125,
+          "winner_fraction": 0.040895
+        },
+        {
+          "series": "Observed",
+          "bin_center": 0.375,
+          "winner_fraction": 0.054878048780487805
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 0.375,
+          "winner_fraction": 0.10159
+        },
+        {
+          "series": "Observed",
+          "bin_center": 0.625,
+          "winner_fraction": 0.3231707317073171
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 0.625,
+          "winner_fraction": 0.334635
+        },
+        {
+          "series": "Observed",
+          "bin_center": 0.875,
+          "winner_fraction": 0.18292682926829268
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 0.875,
+          "winner_fraction": 0.187585
+        },
+        {
+          "series": "Observed",
+          "bin_center": 1.125,
+          "winner_fraction": 0.09146341463414634
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 1.125,
+          "winner_fraction": 0.06899
+        },
+        {
+          "series": "Observed",
+          "bin_center": 1.375,
+          "winner_fraction": 0.07926829268292683
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 1.375,
+          "winner_fraction": 0.075015
+        },
+        {
+          "series": "Observed",
+          "bin_center": 1.625,
+          "winner_fraction": 0.10975609756097561
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 1.625,
+          "winner_fraction": 0.086695
+        },
+        {
+          "series": "Observed",
+          "bin_center": 1.875,
+          "winner_fraction": 0.13414634146341464
+        },
+        {
+          "series": "Sampling-only null",
+          "bin_center": 1.875,
+          "winner_fraction": 0.104595
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1_occupied_but_nondominant",
+          "status": "FAIL",
+          "reason": "Band won 7.93%, above the 1% missing-winner ceiling."
+        },
+        {
+          "gate": "G2_continuous_missing_winner_persists",
+          "status": "FAIL",
+          "reason": "KDE modes entered the band in 10.37%, above the 5% ceiling."
+        },
+        {
+          "gate": "G3_beyond_sampling_argmax_null",
+          "status": "FAIL",
+          "reason": "Observed 13 winners; their rate matches the sampling null (p=0.767)."
+        },
+        {
+          "gate": "G4_reflected_exchange",
+          "status": "FAIL",
+          "reason": "C score 0.0467, 2/4 negative pairs, exact reflection rank 13/24."
+        },
+        {
+          "gate": "G5_C_exceeds_AC_control",
+          "status": "FAIL",
+          "reason": "C score advantage 0.0973 and poorer exact-reflection rank."
+        }
+      ],
+      "validation": [
+        {
+          "check": "protocol_hash_matches_frozen_file",
+          "status": "PASS"
+        },
+        {
+          "check": "requested_split_accounting_is_200",
+          "status": "PASS"
+        },
+        {
+          "check": "valid_split_count_is_164",
+          "status": "PASS"
+        },
+        {
+          "check": "invalid_split_count_is_36",
+          "status": "PASS"
+        },
+        {
+          "check": "distribution_row_count_is_164x2x8",
+          "status": "PASS"
+        },
+        {
+          "check": "mode_row_count_is_164x2",
+          "status": "PASS"
+        },
+        {
+          "check": "each_distribution_sums_to_one",
+          "status": "PASS"
+        },
+        {
+          "check": "summary_has_two_sources_and_eight_bins",
+          "status": "PASS"
+        },
+        {
+          "check": "candidate_occupancy_recalculates",
+          "status": "PASS"
+        },
+        {
+          "check": "candidate_binned_winner_count_recalculates",
+          "status": "PASS"
+        },
+        {
+          "check": "candidate_kde_winner_count_recalculates",
+          "status": "PASS"
+        },
+        {
+          "check": "mirror_relations_are_four_per_source",
+          "status": "PASS"
+        },
+        {
+          "check": "all_pairings_are_24_per_source",
+          "status": "PASS"
+        },
+        {
+          "check": "C_reflection_score_recalculates",
+          "status": "PASS"
+        },
+        {
+          "check": "exact_reflection_is_unique_per_source",
+          "status": "PASS"
+        },
+        {
+          "check": "sampling_null_has_eight_bins",
+          "status": "PASS"
+        },
+        {
+          "check": "observed_gap_is_consistent_with_null",
+          "status": "PASS"
+        },
+        {
+          "check": "all_frozen_gates_failed",
+          "status": "PASS"
+        },
+        {
+          "check": "verdict_matches_gate_state",
+          "status": "PASS"
+        },
+        {
+          "check": "static_figure_exists",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t401_bins",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Mean occupancy, variability and winner fractions for C and AC across valid splits.",
+        "tables_used": [
+          "T401_BIN_SUMMARY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_BIN_SUMMARY.csv')"
+      }
+    },
+    {
+      "id": "t401_modes",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Binned and weighted-KDE modes for every valid split and source.",
+        "tables_used": [
+          "T401_SPLIT_MODES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_SPLIT_MODES.csv')"
+      }
+    },
+    {
+      "id": "t401_mirror",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "CLR Spearman relations for the four predeclared ARA reflection pairs.",
+        "tables_used": [
+          "T401_MIRROR_RELATIONS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_MIRROR_RELATIONS.csv')"
+      }
+    },
+    {
+      "id": "t401_null",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Pooled occupancy, observed dominance and simulated winner frequencies.",
+        "tables_used": [
+          "T401_SAMPLING_NULL.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_SAMPLING_NULL.csv')"
+      }
+    },
+    {
+      "id": "t401_results",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Frozen gates, verdict, metrics and evidence boundaries.",
+        "tables_used": [
+          "T401_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t401_validation",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent saved-output integrity and arithmetic validation.",
+        "tables_used": [
+          "T401_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T401_winner_projection_child_antiphase/T401_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t401_protocol",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Predeclared identity, coordinate, measurements, controls and verdict ladder.",
+        "tables_used": [
+          "T401 protocol"
+        ]
+      }
+    },
+    {
+      "id": "coherent_2022",
+      "query": {
+        "engine": "web",
+        "description": "COHERENT CsI public measurement and ancillary data"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t401-winner-projection-child-antiphase",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

@@ -1,6 +1,335 @@
 # ARA Framework — Master Prediction Ledger
 ## Dylan La Franchi, April 2026
 
+### T443 — delayed connection in genuine NANOGrav time slices
+
+**REGISTERED:** 27 August 2026 after T442 recovered the official
+Hellings–Downs instrument, before summarizing or scoring the Figure 9
+time-slice trajectories | **STATUS: STAGED CONNECTION EMERGENCE RECOVERED;
+EXPOSURE/CHILD PARTICIPATION DOMINATES; EARLY-STATE FORECAST NOT SUPPORTED;
+INDEPENDENT PRE-CONNECTION PARENT AMOUNT UNRESOLVED**
+
+**Orientation:** the array-wide correlated process is the measured parent;
+pulsars and their pair relations are the children. Native signed HD coefficient
+is the amount channel, HD coefficient divided by fit error is connection
+recognition, and monopole/dipole are competing relation identities. The primary
+time cut is 21 official fixed-start cumulative six-month slices. Posterior-noise
+rows are uncertainty evaluations, not chronological events. No affine midpoint
+is called a TE-ARA ridge.
+
+**Outcome:** SCOS median HD S/N changes from `-2.839` to `+5.013`, while fit
+precision improves `20.16×`. The median HD coefficient becomes persistently
+positive at `11.535` years in both SCOS and MCOS. Under the stricter joint MCOS
+fit, HD is largest in only `2/21` slices and becomes persistently larger than
+monopole/dipole only at `15.535` years, finishing with a `+0.446` S/N margin.
+This is a staged transition from unresolved correlation to positive relation to
+HD-specific identity.
+
+**Child/exposure result:** affine `N_psr sqrt(T)` accounts for `R²=0.940` of the
+SCOS S/N trajectory. At matched duration, later fixed-end windows contain a
+median `35.5` more pulsars and have median SCOS S/N `5.72` higher. This supports
+parent visibility through accumulated child/pair participation, while chronology
+and membership remain entangled in this public aggregate product.
+
+**Prediction and boundary:** exposure-only rolling MAE is `0.486`; adding the
+current multichannel state worsens it to `0.597`, with shuffle-control
+`p=0.738`. The released signed HD coefficient is not an independent common
+process amplitude and is negative early, so this test cannot establish that a
+positive process was "already there" before its spatial connection became
+recognizable. A CURN/common-process history plus pair-level participation is the
+required next cut.
+
+Frozen protocol:
+`analysis/pulsar/T443_delayed_connection_timeslices/T443_FROZEN_PROTOCOL.md`.
+
+Findings:
+`analysis/pulsar/T443_delayed_connection_timeslices/T443_FINDINGS.md`.
+
+Portable report:
+`analysis/pulsar/T443_delayed_connection_timeslices/T443_DELAYED_CONNECTION_REPORT.html`.
+
+Geometry-first figure:
+`analysis/pulsar/T443_delayed_connection_timeslices/results/T443_GEOMETRY_FIRST.png`.
+
+### T442 — NANOGrav 15-year optimal-statistic spacetime geometry
+
+**REGISTERED:** 27 August 2026 after T441 localized the missing observable to
+a noise-aware, frequency-resolved pair relation, before opening or scoring the
+official NANOGrav Figure 4 correlation arrays | **STATUS: ESTABLISHED
+SPACETIME RELATION RECOVERED [EXACT SCIENCE CROSSWALK]; ARA TEMPORAL
+ACCUMULATION TEST REMAINS OPEN**
+
+**Orientation:** one pulsar pair is the relational observation. Angular
+separation / Hellings–Downs response is the independently fixed
+Space/Connection scaffold; the signed optimal-statistic pair coefficient is
+the time-facing shared relation; pair uncertainty controls participation in
+the common parent. Posterior noise draws are not chronology. No complement,
+TE-ARA ridge or Phase assignment is forced.
+
+**Outcome:** the official arrays contain `2,211 = 67 choose 2` pulsar pairs and
+`20,000` posterior noise states. The raw pair medians remain extremely noisy
+(fixed-gamma Pearson `0.0102`, Spearman `0.0836` versus Hellings–Downs), but the
+published inverse-variance/template weighting recovers Hellings–Downs S/N
+`4.486 ± 1.021` for fixed `gamma=13/3` and `4.983 ± 1.100` for varied `gamma`,
+reproducing the published approximately `4 ± 1` and `5 ± 1` results. The two
+spectral treatments retain near-identical pair geometry (Pearson `0.99966`).
+
+**Geometry verdict:** T441 and T442 expose different cuts of the same array.
+Ordinary zero-lag residual similarity does not reveal the shared parent;
+noise- and spectrum-aware pair participation does. The reliable weighted
+pairs trace the known positive–negative–positive angular relation even though
+equal treatment of every pair hides it. A fixed median-state label permutation
+put the correct pair ordering above all `2,000` controls (`p=0.000500`), a
+diagnostic distinct from the official physical sky scramble.
+
+**Impurity and boundary:** simultaneous fixed-gamma HD/monopole/dipole fitting
+retains HD as the strongest component (`S/N=2.894`), monopole participation
+(`2.360`) and weak dipole (`0.564`). This agrees with the publication's warning
+that correlation templates can excite one another. T442 is a known-science
+calibration, not an independent prediction of the Hellings–Downs formula. Its
+secondary affine 0–2 midpoint is zero correlation, not demonstrated TE-ARA
+closure.
+
+**Next locked direction:** use the official Figure 9 six-month accumulation
+products to test genuine chronology with the recovered instrument, separating
+longer baseline from the addition of new pulsars/pair identities.
+
+Frozen protocol:
+`analysis/pulsar/T442_ng15_optimal_geometry/T442_FROZEN_PROTOCOL.md`.
+
+Findings:
+`analysis/pulsar/T442_ng15_optimal_geometry/T442_FINDINGS.md`.
+
+Geometry-first figure:
+`analysis/pulsar/T442_ng15_optimal_geometry/results/T442_GEOMETRY_FIRST.png`.
+
+### T441 — pulsar spatial-connection / signed-timing geometry
+
+**REGISTERED:** 27 August 2026 after selecting pulsar timing as a
+spacetime-facing calibration, before calculating any pair geometry |
+**STATUS: COMMON PAIR RELATION NOT RECOVERED BY THE 11-YEAR ZERO-LAG CUT;
+SPATIAL SCAFFOLD AND INSTRUMENT BOUNDARY RETAINED [GEOMETRY-FIRST CROSSWALK]**
+
+**Orientation:** one pulsar pair is the relational observation. Spatial
+Connection is independently fixed by sky separation / the established
+Hellings–Downs coordinate. The Time-facing coordinate is independently built
+from signed published residual histories. Neither pulsar is pre-labelled
+Phase A or Phase B, and no complement or sum-to-two relation is forced.
+
+**Outcome:** `36` retained pulsars produced all `630` possible pairs. The
+Hellings–Downs versus empirical timing association was only Spearman `+0.0302`
+and Pearson `+0.0435`; sky-label and independent history-shift controls gave
+two-sided `p=0.447` and `p=0.506`. Angular-bin medians remained near zero, and
+the apparent early association did not accumulate: non-overlapping thirds
+were `+0.111`, `-0.078`, `-0.016` and the full result was `+0.030`.
+
+**Geometry verdict:** the array provides an independent Space/Connection
+scaffold and signed individual timing histories, but ordinary zero-lag
+correlation of timing-model-filtered 11-year residuals does not recover one
+common pair-level Time/Connection parent. The affine 0–2 view is a broad band
+around zero timing correlation; its `1` is not a demonstrated TE-ARA ridge.
+This narrows the missing observable to a noise-aware, frequency-resolved
+shared phase/cross-power relation rather than residual movement alone.
+
+**Science boundary:** the later NANOGrav 15-year result recovers the
+Hellings–Downs pattern with joint, frequency-weighted noise analysis. T441 is
+therefore an instrument/scale boundary, not evidence that spacetime lacks the
+relation. The correct next calibration is the 15-year optimal-statistic pair
+geometry, followed by causal accumulation slices only after that known
+relation is recovered.
+
+Frozen protocol:
+`analysis/pulsar/T441_pulsar_spacetime_geometry/T441_FROZEN_PROTOCOL.md`.
+
+Findings:
+`analysis/pulsar/T441_pulsar_spacetime_geometry/T441_FINDINGS.md`.
+
+Geometry-first figure:
+`analysis/pulsar/T441_pulsar_spacetime_geometry/results/T441_GEOMETRY_FIRST.png`.
+
+### T440 — real-strain two-ended Space/Time child reconstruction
+
+**REGISTERED:** 27 August 2026 before scoring the locked T431/T432 real-GWOSC
+evaluation events | **STATUS: CHILD LOCALIZER NOT SUPPORTED [PRE-REGISTERED];
+PARENT SPACE/TIME GEOMETRY RETAINED [DESCRIPTIVE]**
+
+**Orientation:** one binary-black-hole event is the measured parent identity;
+H1 and L1 are independent detector views, not the two black holes. A
+Space/Connection parent and a Time/Movement parent are built independently on
+their own 0–2 coordinates. Candidate child evidence is independently derived
+from the local magnitude of change at each parent end. No coordinate is forced
+to complement another or sum to two.
+
+**Claim:** if real strain exposes one common two-ended transition child, the
+independent Space-end and Time-end child histories should overlap and localize
+the same time in each detector, then reproduce between H1 and L1 after allowing
+for propagation and sampling uncertainty.
+
+**Frozen benchmark verdict:** **NOT SUPPORTED [pre-registered].** `0/10` locked
+events passed all four registered localization gates in both detectors; the
+protocol required `7/10`. Only `1/10` passed the within-detector two-end timing
+component. This rejects the registered **magnitude-derived child localizer**.
+It does not establish that the parent relation or every possible child
+handover is absent.
+
+**ARA geometry verdict:** **a persistent inverse, record-specific parent band
+and an event-aligned separation/reversal were recovered [descriptive].** All
+`20/20` locked detector streams had a negative Space/Time parent relation
+(median Spearman `-0.589`, range `-0.830` to `-0.049`) while the parent sum
+retained substantial variation (median standard deviation `0.368`), so this
+was push/pull without a forced mirror. In the event-aligned population median,
+Space exceeded Time most strongly at `-49.4 ms`; their ordering crossed between
+`+17.3` and `+21.2 ms`, and Time led by `+60.4 ms`. Correct same-record pairing
+had median overlap `0.9146`, above all 5,000 wrong-event pairings
+(`p=0.00020`).
+
+**Child-shape boundary:** the independently mapped magnitude-child plane
+occupied `93.0%` of a descriptive `20×20` grid, versus `62.25%` for the parent
+plane. Absolute differentiation plus separate off-source ECDF mapping appears
+to magnify texture and nearly saturate the child plane. The failed timing gates
+therefore locate the weakness in this operational child cut rather than erase
+the clearer parent geometry.
+
+**Control boundary:** opposing parent motion also occurred in `98.125%` of
+matched off-source windows. This locates broad opposition at the persistent
+record/background level; sign alone is not a merger-localizer. The
+event-aligned reversal remains post-hoc until compared with identically aligned
+and phase-preserving off-source histories.
+
+> **Non-erasure instruction:** never summarize T440 only as “failed the
+> gates.” Report its two verdicts separately. The gates decide the frozen child
+> localization claim; they do not decide whether the measured data contain
+> relational geometry.
+
+Frozen protocol:
+`analysis/irrationality_di_ara/T440_real_strain_two_ended_child/T440_FROZEN_PROTOCOL.md`.
+
+Findings:
+`analysis/irrationality_di_ara/T440_real_strain_two_ended_child/T440_FINDINGS.md`.
+
+Geometry-first figure:
+`analysis/irrationality_di_ara/T440_real_strain_two_ended_child/results/T440_GEOMETRY_FIRST.png`.
+
+### T423 — parent Di-ARA temporal architecture
+
+**REGISTERED:** 23 August 2026 after T422 rejected the opposing detector bank
+as an independently specific parent, and after Dylan proposed the two nested
+architectures, before calculating any T423 development, validation or holdout
+comparison | **STATUS: SUGGESTIVE / INCONCLUSIVE — SCIENTIFICALLY UNAVAILABLE
+[PRE-REGISTERED]**
+
+**Orientation:** the full-detector `U=R` crossover is the child singularity;
+`H=1` is the compressed candidate-parent ridge; `Q=1` is the candidate
+internal parent `PA/PB` handover. All coordinates remain separate 0–2 cuts.
+
+**Claim:** if T422's `H` belongs to the parent directly after the child rather
+than to an opposing detector bank, a decompressed parent history should add
+causal held-out information in the order
+`child C1 -> parent PA -> parent PB -> child C2 -> child C1`.
+
+**Test:** compare child-only M0, scalar-parent M1 (`H`) and decompressed-parent
+M2 (`H,Q`) predictors of the next opposite child crossing on full-detector
+T421 histories. Fit development only; score validation and high-field holdout;
+preserve wrong-frequency, reversed-history, circular, field and RF controls.
+
+**Prediction:** M2 beats M0 and M1 with positive validation field-bootstrap
+lower bounds, transfers directionally to holdout, exhibits the development-
+frozen `Q=1` orientation between child crossings, exposes `H` near its ridge
+there, and beats wrong-frequency/reversed histories in both RF conditions.
+
+**Falsifier:** the child-only model wins, M2 loses to M1 or controls, parent
+order reverses, or the improvement cannot transfer. Missing intervals are an
+availability failure, not support.
+
+**Boundary:** this is a population-level temporal-architecture test. Even a
+pass does not identify a microscopic parent or an individual neutrino-release
+instant.
+
+Frozen protocol:
+`analysis/muon/T423_parent_di_ara_temporal_architecture/T423_FROZEN_PROTOCOL.md`.
+
+**Outcome:** the frozen T421 timelines contained `4` development, `7`
+validation and `5` holdout opposite-direction child intervals. Only two
+development intervals contained native causal prediction slices, yielding
+four total training rows. Validation and holdout yielded zero prediction rows.
+No selected child interval in any split contained a `Q=1` candidate PA/PB
+handover.
+
+**Benchmark verdict:** **SUGGESTIVE / INCONCLUSIVE — SCIENTIFICALLY
+UNAVAILABLE [pre-registered].** The architecture comparison could not be
+scored out of sample. Although development M2 was numerically closest, its 15
+features were fitted to four rows, so the result is underdetermined and cannot
+be used as evidence.
+
+**Geometry verdict:** **successive child U/R handovers are present, but the
+route through H/Q is unresolved.** T423 selects neither direct C1→C2,
+compressed C1→H→C2 nor decompressed C1→PA→PB→C2. T421's earlier
+child-singularity/parent-ridge relation remains intact; the chronological path
+between those landmarks was below the archive's usable temporal grain.
+
+Independent saved-artifact validation passed `125/125` checks. It also found
+that frozen G1 counted interpolated child intervals without guarding the
+number of native causal slices inside them. Future versions must pre-register
+both interval availability and model-row/degrees-of-freedom availability.
+
+Findings:
+`analysis/muon/T423_parent_di_ara_temporal_architecture/T423_FINDINGS.md`.
+
+Portable report:
+`analysis/muon/T423_parent_di_ara_temporal_architecture/results/T423_PARENT_DI_ARA_TEMPORAL_ARCHITECTURE_REPORT.html`.
+
+### T422 — independent detector-bank parent test
+
+**REGISTERED:** 22 August 2026 after T421 recovered a child-crossover / candidate-parent-ridge relation from one reconstructed spin history, before calculating any bank-split T422 outcome | **STATUS: NOT SUPPORTED [PRE-REGISTERED]; VALIDATION-ONLY CROSS-BANK RIDGE GEOMETRY RETAINED**
+
+**Orientation:** `U=R` is the child singularity/crossover; independently reconstructed opposing-bank `H=1` is the candidate parent ridge. Both coordinates run from 0 to 2.
+
+**Claim:** if T421's `H` is a shared parent-scale relation rather than only same-cut mathematical reuse, a child `U=R` crossing in either EMU detector bank will expose `H≈1` in the disjoint opposing bank.
+
+**Test:** reconstruct `U,R` from forward detectors 1–48 and `H` from backward detectors 49–96, then reverse; score simultaneous zero-lag ridge exposure on the unchanged development, validation, and high-field holdout partitions. Preserve RF-on/off and compare with same-bank, circular-shift, wrong-frequency, mismatched-run, and calibrated ring controls.
+
+**Prediction:** field-balanced ridge exposure `median_history|H_other-1|-|H_other(crossing)-1|` has a positive 95% bootstrap lower bound in both bank directions; real timing, frequency, and lineage beat their frozen controls, and both RF conditions retain positive direction.
+
+**Falsifier:** either bank direction has non-positive exposure, loses to shifted/wrong-frequency/mismatched lineage, or reverses in one RF condition. Such a result rejects the registered independent-parent reading for this instrument, while leaving the earlier same-view geometry intact.
+
+**Rivals:** same-bank mathematical reuse, common-mode detector response, circular timing coincidence, wrong-frequency reconstruction, different-field lineage, and axial-ring mismatch. Even a pass does not identify `H` as a unique microscopic parent.
+
+Frozen protocol: `analysis/muon/T422_independent_detector_bank_parent/T422_FROZEN_PROTOCOL.md`.
+
+**Outcome:** development produced crossings in `13/26` forward-to-backward and
+`11/26` backward-to-forward sequences, but neither ridge exposure excluded zero
+and neither direction beat timing, wrong-frequency or neighbouring-field
+controls. Validation again produced crossings in only `13/26` and `14/26`
+sequences. Its opposing-bank median `H` values were `0.985` and `0.989`; real
+timing beat circular shifts in both directions (`p=0.0050`, `0.0090`), and all
+four RF-condition effects were positive. Only forward-to-backward exposure had
+a positive bootstrap lower bound, while frequency and lineage specificity
+failed. The high-field/temperature holdout had no post-calibration `U=R`
+crossings in either direction, so event-conditioned transfer could not be
+tested there.
+
+**Claim verdict:** **NOT SUPPORTED [pre-registered].** The frozen bidirectional,
+specific and holdout requirements were not met.
+
+**Geometry verdict:** **A validation-only, timed cross-bank ridge exposure was
+recovered, but it is not yet a unique parent identity.** The disjoint-bank
+result shows that the T421 shape is not necessarily confined to literal
+same-cut arithmetic. Its failure to beat wrong-frequency and lineage controls,
+and its absence as an event in holdout, instead favour `H` as a generic/shared
+coordinate or a parent of the combined 96-detector identity. T421's earlier
+same-view child-singularity/parent-ridge geometry remains intact.
+
+Independent saved-artifact validation passed `119/119` checks. The clean next
+bridge is a physically different parent observable—such as detector-total
+population/decay amplitude—read at the full-detector `U=R` crossing, rather
+than another subdivision of the same reconstructed phase history.
+
+Findings:
+`analysis/muon/T422_independent_detector_bank_parent/T422_FINDINGS.md`.
+
+Portable report:
+`analysis/muon/T422_independent_detector_bank_parent/results/T422_INDEPENDENT_DETECTOR_BANK_PARENT_REPORT.html`.
+
 ### T375 — liquid-argon progressive energy-placement mechanism
 
 **REGISTERED:** 13 August 2026 after T374 separated order from placement,

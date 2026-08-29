@@ -1,0 +1,97 @@
+{
+  "test": "T400",
+  "date": "2026-08-17",
+  "verdict": "NESTED CHILD RIDGE NOT SUPPORTED",
+  "protocol_sha256": "9a7c0e53988235e0ecc3b52c9c2a224afc3141efaf207654ba61423dc35ed263",
+  "source": {
+    "identity": "COHERENT 2022 CsI public unbinned beam-coincident/anti-coincident events and official source templates",
+    "data_dir": "F:\\SystemFormulaFolder\\external_data\\coherent_csi_2110_07730\\anc",
+    "beam_C_sha256": "b78333f0cc0c4182f913cecd91d55968e43a620683e9f51e0ceb1c1db596326f",
+    "beam_AC_sha256": "fba5c06334521531eda353771b5297b44a70566b0d755e23b174c716abec9468"
+  },
+  "coordinate": "x_C=2*(x_P-x_P(L))/(x_P(R)-x_P(L)); L is branch equality; R is delayed-rate return to D(L)",
+  "primary_population": {
+    "left_time_us": 0.568857971327256,
+    "delayed_crest_time_us": 0.7855,
+    "right_time_us": 1.3828086704815923,
+    "left_parent_ara": 0.2683213164248686,
+    "crest_parent_ara": 0.5000501797289413,
+    "right_parent_ara": 0.924492167609865,
+    "local_crest_ara": 0.7063064837018814,
+    "local_weighted_mean": 1.0925127777611845,
+    "local_weighted_median": 1.1142913342567329,
+    "local_weighted_skewness": -0.16948141966317123,
+    "window_delayed_mass_fraction": 0.3309817880520328,
+    "loo_valid": 17,
+    "loo_ridge_fraction": 0.9411764705882353,
+    "phase_shift_controls": 1199,
+    "phase_shift_as_good": 21,
+    "phase_shift_p_upper": 0.018333333333333333
+  },
+  "full_fit_population_reference_not_primary": {
+    "local_crest_ara": 0.889963458138262,
+    "local_weighted_mean": 1.1227082500345003,
+    "local_weighted_median": 1.1603316564721053,
+    "note": "Uses the saved full T398 fit and is reported only as a post-primary source-resolution comparison."
+  },
+  "primary_event_transfer": {
+    "salt": 400,
+    "valid": true,
+    "fit_success": true,
+    "n_calibration_C": 6198,
+    "n_holdout_C": 2718,
+    "n_calibration_AC": 5934,
+    "n_holdout_AC": 2598,
+    "n_prompt": 26.31227914866174,
+    "n_delayed": 180.876344530696,
+    "left_time_us": 0.568857971327256,
+    "mode_time_us": 0.7855,
+    "right_time_us": 1.3828086704815923,
+    "population_local_mode": 0.7063064837018814,
+    "population_local_mean": 1.0925127777611845,
+    "population_local_median": 1.1142913342567329,
+    "population_skewness": -0.16948141966317123,
+    "holdout_C_events_in_window": 91,
+    "holdout_AC_events_in_window": 62,
+    "effective_delayed_holdout": 8.98271115102617,
+    "holdout_weighted_mode": 1.875,
+    "holdout_weighted_mean": 1.0507515862197472,
+    "holdout_weighted_median": 1.038135527280485,
+    "mean_delayed_weight_C": 0.0987111115497382,
+    "mean_delayed_weight_AC": 0.0987805511235282,
+    "median_delayed_weight_C": 0.09907138381542706,
+    "median_delayed_weight_AC": 0.09907138381542706,
+    "C_median_weight_greater_than_AC": false
+  },
+  "repeated_splits": {
+    "requested": 20,
+    "valid": 20,
+    "broad_ridge_mode_fraction": 0.6
+  },
+  "event_bootstrap": {
+    "replicates": 2000,
+    "broad_ridge_mode_fraction": 0.1925,
+    "weighted_mean_ci95": [
+      0.9322780131532311,
+      1.1747091501765587
+    ]
+  },
+  "population_gates": {
+    "P1_ordered_objective_window": true,
+    "P2_crest_near_local_ridge": false,
+    "P3_leave_one_out_ridge_fraction_ge_0p80": true
+  },
+  "event_gates": {
+    "I1_effective_delayed_count_ge_10": false,
+    "I2_holdout_mode_in_broad_ridge": false,
+    "I3_holdout_mean_within_0p30_of_population": true,
+    "I4_repeated_split_mode_fraction_ge_0p70": false,
+    "I5_C_median_membership_weight_gt_AC": false
+  },
+  "boundaries": [
+    "The holdout rows are individual detector events, not neutrino flavor tags.",
+    "Delayed membership is a calibration-frozen statistical weight.",
+    "The result cannot identify both neutrinos from one named muon or time their birth independently.",
+    "The population curve and event transfer use the same physical source; repeated deterministic splits limit but do not create a new experiment."
+  ]
+}

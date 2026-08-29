@@ -1,0 +1,1170 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T406/T407 \u2014 Grandchild completion and individual-muon transfer",
+    "description": "Frozen test of the proposed 0.5+0.25 endpoint followed by event-linked individual stopped-muon timing transfer.",
+    "generatedAt": "2026-08-17T23:55:55.459891Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "participation_crest",
+        "title": "Prompt participation versus observed child crest",
+        "subtitle": "20 deterministic T400 splits; pure parent and projected-grandchild references are fixed",
+        "type": "scatter",
+        "dataset": "splits",
+        "sourceId": "t406_splits",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.5,
+            "label": "parent 0.5",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0.75,
+            "label": "pure endpoint 0.75",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "prompt_participation",
+            "type": "quantitative",
+            "label": "Prompt participation q"
+          },
+          "y": {
+            "field": "observed_child_crest",
+            "type": "quantitative",
+            "label": "Observed child release crest (ARA)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Split type"
+          },
+          "tooltip": [
+            {
+              "field": "salt",
+              "type": "quantitative",
+              "label": "Split salt"
+            },
+            {
+              "field": "grandchild_ara",
+              "type": "quantitative",
+              "label": "Decompressed x_G"
+            }
+          ]
+        }
+      },
+      {
+        "id": "grandchild_coordinate",
+        "title": "Decompressed grandchild coordinate across splits",
+        "subtitle": "The proposed full grandchild endpoint maps to x_G=2; observed values vary with participation",
+        "type": "scatter",
+        "dataset": "splits",
+        "sourceId": "t406_splits",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 2.0,
+            "label": "proposed completion x_G=2",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "salt",
+            "type": "quantitative",
+            "label": "Deterministic split salt"
+          },
+          "y": {
+            "field": "grandchild_ara",
+            "type": "quantitative",
+            "label": "Grandchild ARA x_G"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Split type"
+          },
+          "tooltip": [
+            {
+              "field": "observed_child_crest",
+              "type": "quantitative",
+              "label": "Observed child crest"
+            }
+          ]
+        }
+      },
+      {
+        "id": "individual_scores",
+        "title": "Individual timing score by frozen ARA band",
+        "subtitle": "Positive held-out NLL improvement would beat ordinary prompt depth and strength",
+        "type": "bar",
+        "dataset": "models",
+        "sourceId": "t407_models",
+        "palette": {
+          "kind": "single",
+          "name": "blue"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "no improvement",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "centre_label",
+            "type": "nominal",
+            "label": "ARA band centre (\u00b10.05)"
+          },
+          "y": {
+            "field": "nll_improvement",
+            "type": "quantitative",
+            "label": "Held-out NLL improvement"
+          },
+          "tooltip": [
+            {
+              "field": "holdout_band_n",
+              "type": "quantitative",
+              "label": "Band events"
+            },
+            {
+              "field": "ci95_low",
+              "type": "quantitative",
+              "label": "95% low"
+            },
+            {
+              "field": "ci95_high",
+              "type": "quantitative",
+              "label": "95% high"
+            },
+            {
+              "field": "permutation_p",
+              "type": "quantitative",
+              "label": "Permutation p"
+            }
+          ]
+        }
+      },
+      {
+        "id": "individual_delay_shape",
+        "title": "Individual charged-daughter timing across incoming ARA",
+        "subtitle": "Held-out medians in 0.1-wide x_mu bins; counts remain visible in the source data",
+        "type": "line",
+        "dataset": "binned",
+        "sourceId": "t407_events",
+        "palette": {
+          "kind": "single",
+          "name": "blue"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 0.7063064837018814,
+            "label": "observed child 0.706",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "x",
+            "value": 0.75,
+            "label": "pure 0.75",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "bin_mid",
+            "type": "quantitative",
+            "label": "Incoming individual-muon ARA x_mu"
+          },
+          "y": {
+            "field": "median_delay_us",
+            "type": "quantitative",
+            "label": "Median daughter delay (microseconds)"
+          },
+          "tooltip": [
+            {
+              "field": "n",
+              "type": "quantitative",
+              "label": "Events"
+            },
+            {
+              "field": "mean_delay_us",
+              "type": "quantitative",
+              "label": "Mean delay (microseconds)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "individual_examples",
+        "title": "Observed versus predicted timing for named individual events",
+        "subtitle": "Six earliest holdout events in the 0.75 band plus six earliest outside it",
+        "type": "scatter",
+        "dataset": "examples",
+        "sourceId": "t407_events",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "encodings": {
+          "x": {
+            "field": "predicted_median_us",
+            "type": "quantitative",
+            "label": "Model-predicted median delay (microseconds)"
+          },
+          "y": {
+            "field": "actual_delay_us",
+            "type": "quantitative",
+            "label": "Observed daughter delay (microseconds)"
+          },
+          "color": {
+            "field": "band",
+            "type": "nominal",
+            "label": "0.75 band membership"
+          },
+          "tooltip": [
+            {
+              "field": "event",
+              "type": "nominal",
+              "label": "Event"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gates",
+        "title": "Frozen interpretation gates",
+        "subtitle": "T406 supports displacement compatibility; both T407 candidate bands fail prediction",
+        "dataset": "gates",
+        "sourceId": "t407_results",
+        "defaultSort": {
+          "field": "test",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "test",
+            "label": "Test",
+            "type": "text"
+          },
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation",
+        "title": "Independent saved-output validation",
+        "subtitle": "Both calculation pipelines passed integrity and arithmetic checks",
+        "dataset": "validation",
+        "sourceId": "t407_validation",
+        "defaultSort": {
+          "field": "test",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "test",
+            "label": "Test",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "checks",
+            "label": "Checks",
+            "type": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t406_splits",
+        "label": "T406 split results",
+        "path": "analysis/muon/T406_grandchild_quarter_completion/T406_SPLIT_RESULTS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Observed child crests, prompt participation, decompressed grandchild coordinates and leave-one-out predictions for 20 deterministic T400 splits.",
+          "tables_used": [
+            "T406_SPLIT_RESULTS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T406_grandchild_quarter_completion/T406_SPLIT_RESULTS.csv')"
+        }
+      },
+      {
+        "id": "t406_results",
+        "label": "T406 saved results",
+        "path": "analysis/muon/T406_grandchild_quarter_completion/T406_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Frozen geometry, gates, verdict and evidence boundaries for the quarter-completion test.",
+          "tables_used": [
+            "T406_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T406_grandchild_quarter_completion/T406_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t406_validation",
+        "label": "T406 independent validation",
+        "path": "analysis/muon/T406_grandchild_quarter_completion/T406_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent saved-artifact recomputation for T406.",
+          "tables_used": [
+            "T406_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T406_grandchild_quarter_completion/T406_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t407_models",
+        "label": "T407 model summary",
+        "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_MODEL_SUMMARY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Calibration direction, held-out timing score, uncertainty and permutation result for each frozen ARA band.",
+          "tables_used": [
+            "T407_MODEL_SUMMARY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_MODEL_SUMMARY.csv')"
+        }
+      },
+      {
+        "id": "t407_events",
+        "label": "T407 individual holdout event scores",
+        "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_HOLDOUT_EVENT_SCORES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "2,109 event-linked stopped-muon records with observed charged-daughter delay and calibration-frozen timing predictions.",
+          "tables_used": [
+            "T407_HOLDOUT_EVENT_SCORES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_HOLDOUT_EVENT_SCORES.csv')"
+        }
+      },
+      {
+        "id": "t407_results",
+        "label": "T407 saved results",
+        "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Individual timing-transfer verdict, model diagnostics, gates and scope boundaries.",
+          "tables_used": [
+            "T407_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t407_validation",
+        "label": "T407 independent validation",
+        "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent integrity and arithmetic checks for T407.",
+          "tables_used": [
+            "T407_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t406_protocol",
+        "label": "T406 frozen protocol",
+        "path": "analysis/muon/T406_GRANDCHILD_QUARTER_COMPLETION_PROTOCOL_2026-08-18.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Pre-run quarter-completion coordinates, gates and verdict logic.",
+          "tables_used": [
+            "T406_GRANDCHILD_QUARTER_COMPLETION_PROTOCOL_2026-08-18.md"
+          ]
+        }
+      },
+      {
+        "id": "t407_protocol",
+        "label": "T407 frozen protocol",
+        "path": "analysis/muon/T407_INDIVIDUAL_MUON_GRANDCHILD_TRANSFER_PROTOCOL_2026-08-18.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Pre-run individual-muon timing-transfer models, controls and gates.",
+          "tables_used": [
+            "T407_INDIVIDUAL_MUON_GRANDCHILD_TRANSFER_PROTOCOL_2026-08-18.md"
+          ]
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T406/T407 \u2014 Grandchild completion and individual-muon transfer"
+      },
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "## Technical summary\n\n**The proposed `0.5 + 0.25 = 0.75` construction is compatible with the primary population crest, but it is not a replicated fixed child point and it does not predict one muon's later decay timing through the tested incoming-pulse cut.** The primary crest is `0.706306`, only `0.043694` below the pure endpoint and equal to `82.52%` of the proposed quarter capacity (`x_G=1.650`). Yet only `7/20` split crests fall within `0.75\u00b10.10`. Their displacement is almost perfectly predicted from participation, with leave-one-split-out median absolute error `0.00073`, but that relation is mediated by the equality boundary used to construct the coordinate.\n\nOn 2,109 event-linked held-out stopped muons, neither the pure `0.75\u00b10.05` band nor the observed `0.706306\u00b10.05` band improved charged-daughter timing over ordinary prompt strength, multiplicity and depth. This narrows the missing individual cut to a maturity/spin or neutral-sensitive relation rather than a static incoming upper/lower pulse ratio.",
+        "sourceId": "t407_results"
+      },
+      {
+        "id": "t406_result",
+        "type": "markdown",
+        "body": "## T406: the quarter is a parent-compatible reference, not a fixed observed child point\n\nThe primary observation passes the broad proximity gate, but the raw replication gate fails: `35%`, not the required `75%`, of valid splits lie within `0.75\u00b10.10`. The median observed crest is `0.9483` and the full range is `0.6404\u20131.0578`. The correct verdict is **participation-displaced quarter-compatible**\u2014stronger than coincidence with one point, weaker than identifying a universal `0.25` physical carrier.",
+        "sourceId": "t406_results"
+      },
+      {
+        "id": "participation_chart",
+        "type": "chart",
+        "chartId": "participation_crest"
+      },
+      {
+        "id": "t406_decompressed",
+        "type": "markdown",
+        "body": "## Decompression exposes why the exact claim fails\n\nMapping `0.5\u21920` and `0.75\u21922` puts the primary result at `x_G=1.650`, not at the completion pole `2`. Across splits the values range well beyond that pole. Participation predicts those observed positions with tiny internal error, but the equality boundary carries the same ordering; this is a coordinate-response validation, not independent proof of the grandchild mechanism.",
+        "sourceId": "t406_splits"
+      },
+      {
+        "id": "grandchild_chart",
+        "type": "chart",
+        "chartId": "grandchild_coordinate"
+      },
+      {
+        "id": "t407_result",
+        "type": "markdown",
+        "body": "## T407: the individual-muon transfer fails the frozen predictive gates\n\nBoth candidate bands pointed toward higher handover hazard in calibration. On holdout, the pure `0.75` model changed mean NLL by only `-0.0000028` and its 95% block interval was `[-0.0000151, +0.0000083]`. The observed `0.706306` band was worse (`-0.0005125`, interval `[-0.0019486, +0.0010149]`). Neither improved both held-out runs; neither survived the permutation gate. Negative values mean the added band was marginally worse than ordinary prompt geometry.",
+        "sourceId": "t407_models"
+      },
+      {
+        "id": "scores_chart",
+        "type": "chart",
+        "chartId": "individual_scores"
+      },
+      {
+        "id": "delay_text",
+        "type": "markdown",
+        "body": "## The descriptive short delay near 0.75 is real but not unique predictive information\n\nThe `0.75\u00b10.05` band contains `259` holdout events with median daughter delay `1.669 microseconds`; the `0.706306\u00b10.05` band contains `213` with median `1.599 microseconds`. The timing curve therefore has visible structure. The model test shows that the same structure is already explained by prompt strength, multiplicity and detector depth, so it cannot be used as advance ARA information for an individual muon from this cut alone.",
+        "sourceId": "t407_results"
+      },
+      {
+        "id": "delay_chart",
+        "type": "chart",
+        "chartId": "individual_delay_shape"
+      },
+      {
+        "id": "examples_text",
+        "type": "markdown",
+        "body": "## Individual rows remain stochastic around the population relation\n\nThe fixed-rule examples make the boundary visible: the model supplies an event-specific timing distribution, while actual daughter arrivals remain widely spread. A population crest or short median must not be translated into an exact neutrino-birth timestamp for one event.",
+        "sourceId": "t407_events"
+      },
+      {
+        "id": "examples_chart",
+        "type": "chart",
+        "chartId": "individual_examples"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Scope, identities and metric definitions\n\n- **T406 parent reference:** `0.5` on the corrected T404/T405 child coordinate.\n- **Projected grandchild capacity:** `0.25` at that parent scale; pure endpoint `0.75`.\n- **Decompressed coordinate:** `x_G = 2(x-0.5)/0.25`; pure completion is `x_G=2`.\n- **T407 individual coordinate:** `x_mu=2B/(A+B)` from the incoming event's gain-normalized lower versus total prompt counter relation.\n- **Outcome:** time to the same event's later charged-daughter pulse cluster, observed from `0.30\u201310.0 microseconds`.\n\nT406 and T407 therefore use related ARA logic but not identical physical axes: the first is a population timing child; the second is an individual incoming detector relation.",
+        "sourceId": "t407_protocol"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Methodology and robustness\n\nT406 froze the `0.75` endpoint before calculation, scored all 20 valid registered splits and used leave-one-split-out monotone interpolation without recentering any value to `0.75`. T407 froze the `0.75` and `0.706306` bands before fitting, trained only on the two T379 calibration runs, and scored two separate holdout runs with a truncated exponential-plus-uniform timing likelihood. Chronological block bootstrap and within-run delay permutation tested uncertainty and alignment. Controls at `0.50`, `1.00`, `1.25` and `1.50` were reported without selecting a replacement landmark.",
+        "sourceId": "t407_protocol"
+      },
+      {
+        "id": "gates_table_block",
+        "type": "table",
+        "tableId": "gates"
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## Limitations and uncertainty\n\nThe participation result is internally precise but structurally mediated by the coordinate's equality boundary. T407 is external at the detector/archive level, yet its holdout had been generated and inspected earlier in the project, so this is not a pristine new prospective holdout. Most importantly, QuarkNet links the incoming stopped-muon candidate to a later charged daughter but does not directly observe either neutrino and does not resolve an individual spin trajectory. Failure here rejects this static incoming-pulse landmark as the missing clock; it does not reject population handover geometry or a different phase/maturity cut.",
+        "sourceId": "t407_results"
+      },
+      {
+        "id": "validation_block",
+        "type": "table",
+        "tableId": "validation"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next step\n\nKeep the T406 result as a **parent-compatible, participation-displaced hypothesis**. For individual prediction, freeze a genuinely dynamic pre-decay input\u2014spin phase/maturity, charged-daughter direction relative to polarization, or independently reconstructed missing momentum\u2014and test it on a new event-linked holdout. Do not reuse `0.75` as a universal event clock unless that new measurement independently restores it."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does an event-linked spin or polarization phase provide the missing pre-decay maturity axis?\n- Can a neutral-sensitive archive distinguish the joint neutrino pair rather than only the charged daughter?\n- Does participation displacement learned in one source predict the child crest of a genuinely independent source without rebuilding the equality boundary?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T23:55:55.459891Z",
+    "status": "ready",
+    "datasets": {
+      "splits": [
+        {
+          "salt": 400,
+          "prompt_participation": 0.1269967369896827,
+          "observed_child_crest": 0.7063064837018814,
+          "grandchild_ara": 1.6504518696150514,
+          "loo_predicted_child_crest": 0.7048105199529882,
+          "series": "primary salt 400"
+        },
+        {
+          "salt": 401,
+          "prompt_participation": 0.172463713732056,
+          "observed_child_crest": 0.8496564971154434,
+          "grandchild_ara": 2.7972519769235475,
+          "loo_predicted_child_crest": 0.8480601545509415,
+          "series": "registered split"
+        },
+        {
+          "salt": 402,
+          "prompt_participation": 0.2912097286340187,
+          "observed_child_crest": 1.0348876082427962,
+          "grandchild_ara": 4.27910086594237,
+          "loo_predicted_child_crest": 1.0334843390820259,
+          "series": "registered split"
+        },
+        {
+          "salt": 403,
+          "prompt_participation": 0.16687901810426364,
+          "observed_child_crest": 0.834411440220271,
+          "grandchild_ara": 2.6752915217621682,
+          "loo_predicted_child_crest": 0.8337631313659799,
+          "series": "registered split"
+        },
+        {
+          "salt": 404,
+          "prompt_participation": 0.2372070981290278,
+          "observed_child_crest": 0.9803821405671476,
+          "grandchild_ara": 3.8430571245371805,
+          "loo_predicted_child_crest": 0.9789474083667081,
+          "series": "registered split"
+        },
+        {
+          "salt": 405,
+          "prompt_participation": 0.20050588079345213,
+          "observed_child_crest": 0.9161705078351534,
+          "grandchild_ara": 3.3293640626812273,
+          "loo_predicted_child_crest": 0.9156218042443635,
+          "series": "registered split"
+        },
+        {
+          "salt": 406,
+          "prompt_participation": 0.24119990884214024,
+          "observed_child_crest": 0.9857770532443296,
+          "grandchild_ara": 3.886216425954637,
+          "loo_predicted_child_crest": 0.9857778109699739,
+          "series": "registered split"
+        },
+        {
+          "salt": 407,
+          "prompt_participation": 0.25647683248224673,
+          "observed_child_crest": 1.0045308239984272,
+          "grandchild_ara": 4.0362465919874175,
+          "loo_predicted_child_crest": 1.0040668777981694,
+          "series": "registered split"
+        },
+        {
+          "salt": 408,
+          "prompt_participation": 0.1556578710163787,
+          "observed_child_crest": 0.8017252998865315,
+          "grandchild_ara": 2.413802399092252,
+          "loo_predicted_child_crest": 0.8016928843470427,
+          "series": "registered split"
+        },
+        {
+          "salt": 409,
+          "prompt_participation": 0.34080220652373755,
+          "observed_child_crest": 1.057813896977887,
+          "grandchild_ara": 4.462511175823096,
+          "loo_predicted_child_crest": 1.0634377892773859,
+          "series": "registered split"
+        },
+        {
+          "salt": 410,
+          "prompt_participation": 0.15607132344840757,
+          "observed_child_crest": 0.8030057444782822,
+          "grandchild_ara": 2.4240459558262577,
+          "loo_predicted_child_crest": 0.8029296477226999,
+          "series": "registered split"
+        },
+        {
+          "salt": 411,
+          "prompt_participation": 0.19907526363979505,
+          "observed_child_crest": 0.9130974398023652,
+          "grandchild_ara": 3.304779518418922,
+          "loo_predicted_child_crest": 0.9127771864671645,
+          "series": "registered split"
+        },
+        {
+          "salt": 412,
+          "prompt_participation": 0.27817954183605115,
+          "observed_child_crest": 1.0251212055268428,
+          "grandchild_ara": 4.200969644214743,
+          "loo_predicted_child_crest": 1.0241290148848825,
+          "series": "registered split"
+        },
+        {
+          "salt": 413,
+          "prompt_participation": 0.24681077501171822,
+          "observed_child_crest": 0.993161011016894,
+          "grandchild_ara": 3.945288088135152,
+          "loo_predicted_child_crest": 0.9927030921764912,
+          "series": "registered split"
+        },
+        {
+          "salt": 414,
+          "prompt_participation": 0.26355861692827437,
+          "observed_child_crest": 1.01205700179418,
+          "grandchild_ara": 4.096456014353439,
+          "loo_predicted_child_crest": 1.0112496461172953,
+          "series": "registered split"
+        },
+        {
+          "salt": 415,
+          "prompt_participation": 0.31242900618062447,
+          "observed_child_crest": 1.0471034571206437,
+          "grandchild_ara": 4.376827656965149,
+          "loo_predicted_child_crest": 1.0446971459889303,
+          "series": "registered split"
+        },
+        {
+          "salt": 416,
+          "prompt_participation": 0.13502312361761717,
+          "observed_child_crest": 0.7348073513482943,
+          "grandchild_ara": 1.8784588107863547,
+          "loo_predicted_child_crest": 0.734174384214036,
+          "series": "registered split"
+        },
+        {
+          "salt": 417,
+          "prompt_participation": 0.10975686718504116,
+          "observed_child_crest": 0.6403803483478678,
+          "grandchild_ara": 1.1230427867829427,
+          "loo_predicted_child_crest": 0.6450894915084809,
+          "series": "registered split"
+        },
+        {
+          "salt": 418,
+          "prompt_participation": 0.24166678967268915,
+          "observed_child_crest": 0.986408728701878,
+          "grandchild_ara": 3.891269829615024,
+          "loo_predicted_child_crest": 0.9863914732346486,
+          "series": "registered split"
+        },
+        {
+          "salt": 419,
+          "prompt_participation": 0.14175018328779926,
+          "observed_child_crest": 0.7575309752079844,
+          "grandchild_ara": 2.0602478016638752,
+          "loo_predicted_child_crest": 0.7566230307032988,
+          "series": "registered split"
+        }
+      ],
+      "models": [
+        {
+          "model": "M050",
+          "centre_label": "0.500",
+          "centre": 0.5,
+          "holdout_band_n": 48,
+          "nll_improvement": -3.691420887049324e-06,
+          "ci95_low": -0.0012258471894232062,
+          "ci95_high": 0.0010522127492024573,
+          "permutation_p": 0.2958520739630185,
+          "supported": false
+        },
+        {
+          "model": "M0706",
+          "centre_label": "0.706",
+          "centre": 0.7063064837018814,
+          "holdout_band_n": 213,
+          "nll_improvement": -0.0005125358509754492,
+          "ci95_low": -0.0019486483009376044,
+          "ci95_high": 0.0010149396562395678,
+          "permutation_p": 0.7746126936531734,
+          "supported": false
+        },
+        {
+          "model": "M075",
+          "centre_label": "0.750",
+          "centre": 0.75,
+          "holdout_band_n": 259,
+          "nll_improvement": -2.8180472917273286e-06,
+          "ci95_low": -1.5144905396954071e-05,
+          "ci95_high": 8.33155136358184e-06,
+          "permutation_p": 0.671664167916042,
+          "supported": false
+        },
+        {
+          "model": "M100",
+          "centre_label": "1.000",
+          "centre": 1.0,
+          "holdout_band_n": 256,
+          "nll_improvement": -0.00011002937742567498,
+          "ci95_low": -0.0004054854430362297,
+          "ci95_high": 0.00018182192890073702,
+          "permutation_p": 0.5382308845577212,
+          "supported": false
+        },
+        {
+          "model": "M125",
+          "centre_label": "1.250",
+          "centre": 1.25,
+          "holdout_band_n": 36,
+          "nll_improvement": -0.00013304158670002656,
+          "ci95_low": -0.0005112358619542558,
+          "ci95_high": 0.00025510744564597956,
+          "permutation_p": 0.3268365817091454,
+          "supported": false
+        },
+        {
+          "model": "M150",
+          "centre_label": "1.500",
+          "centre": 1.5,
+          "holdout_band_n": 20,
+          "nll_improvement": -0.0002566236915229136,
+          "ci95_low": -0.0010591465050587311,
+          "ci95_high": 0.0005187725073957104,
+          "permutation_p": 0.4197901049475262,
+          "supported": false
+        }
+      ],
+      "binned": [
+        {
+          "bin_mid": 0.05,
+          "median_delay_us": 1.7212501377000111,
+          "mean_delay_us": 2.349375187950015,
+          "n": 576
+        },
+        {
+          "bin_mid": 0.25,
+          "median_delay_us": 1.1537500923000075,
+          "mean_delay_us": 1.7393183209636476,
+          "n": 11
+        },
+        {
+          "bin_mid": 0.35000000000000003,
+          "median_delay_us": 2.037500163000013,
+          "mean_delay_us": 2.9190443511706077,
+          "n": 17
+        },
+        {
+          "bin_mid": 0.45,
+          "median_delay_us": 2.5681252054500163,
+          "mean_delay_us": 2.7448216481571603,
+          "n": 28
+        },
+        {
+          "bin_mid": 0.55,
+          "median_delay_us": 1.9675001574000128,
+          "mean_delay_us": 2.554886568027289,
+          "n": 77
+        },
+        {
+          "bin_mid": 0.6500000000000001,
+          "median_delay_us": 1.6706251336500109,
+          "mean_delay_us": 2.6126390979000167,
+          "n": 162
+        },
+        {
+          "bin_mid": 0.75,
+          "median_delay_us": 1.6687501335000108,
+          "mean_delay_us": 2.4362019323478923,
+          "n": 259
+        },
+        {
+          "bin_mid": 0.8500000000000001,
+          "median_delay_us": 2.2700001816000146,
+          "mean_delay_us": 2.8939189431699575,
+          "n": 163
+        },
+        {
+          "bin_mid": 0.95,
+          "median_delay_us": 2.622500209800017,
+          "mean_delay_us": 3.377023750824884,
+          "n": 181
+        },
+        {
+          "bin_mid": 1.05,
+          "median_delay_us": 2.001250160100013,
+          "mean_delay_us": 2.7259686481116217,
+          "n": 293
+        },
+        {
+          "bin_mid": 1.1500000000000001,
+          "median_delay_us": 2.2156251772500144,
+          "mean_delay_us": 2.895729398325019,
+          "n": 96
+        },
+        {
+          "bin_mid": 1.25,
+          "median_delay_us": 2.8725002298000186,
+          "mean_delay_us": 3.6392364022500234,
+          "n": 36
+        },
+        {
+          "bin_mid": 1.35,
+          "median_delay_us": 1.851250148100012,
+          "mean_delay_us": 2.764738593272111,
+          "n": 43
+        },
+        {
+          "bin_mid": 1.4500000000000002,
+          "median_delay_us": 1.7637501411000112,
+          "mean_delay_us": 2.510521034175016,
+          "n": 36
+        },
+        {
+          "bin_mid": 1.55,
+          "median_delay_us": 4.210625336850027,
+          "mean_delay_us": 3.812812805025024,
+          "n": 12
+        },
+        {
+          "bin_mid": 1.6500000000000001,
+          "median_delay_us": 2.133125170650014,
+          "mean_delay_us": 2.936458568250019,
+          "n": 6
+        },
+        {
+          "bin_mid": 1.75,
+          "median_delay_us": 3.350000268000022,
+          "mean_delay_us": 2.906666899200019,
+          "n": 3
+        },
+        {
+          "bin_mid": 1.85,
+          "median_delay_us": 3.06875024550002,
+          "mean_delay_us": 3.06875024550002,
+          "n": 2
+        }
+      ],
+      "examples": [
+        {
+          "event": "0317.0 #5222",
+          "actual_delay_us": 2.4537501963000157,
+          "predicted_median_us": 1.663678044664476,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #19515",
+          "actual_delay_us": 7.303750584300047,
+          "predicted_median_us": 1.8579634716742197,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #21615",
+          "actual_delay_us": 1.5712501257000102,
+          "predicted_median_us": 1.566400588796306,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #32221",
+          "actual_delay_us": 0.471250037700003,
+          "predicted_median_us": 1.762552445920241,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #51410",
+          "actual_delay_us": 1.0637500851000068,
+          "predicted_median_us": 1.7668056133260206,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #60369",
+          "actual_delay_us": 4.817500385400031,
+          "predicted_median_us": 1.9093292624607403,
+          "band": "0.75 band"
+        },
+        {
+          "event": "0317.0 #551",
+          "actual_delay_us": 1.6825001346000108,
+          "predicted_median_us": 1.80492898332758,
+          "band": "outside band"
+        },
+        {
+          "event": "0317.0 #1270",
+          "actual_delay_us": 0.5862500469000038,
+          "predicted_median_us": 1.8134714358316868,
+          "band": "outside band"
+        },
+        {
+          "event": "0317.0 #1949",
+          "actual_delay_us": 2.8962502317000185,
+          "predicted_median_us": 2.3454737022522814,
+          "band": "outside band"
+        },
+        {
+          "event": "0317.0 #2998",
+          "actual_delay_us": 1.54625012370001,
+          "predicted_median_us": 1.593989882334535,
+          "band": "outside band"
+        },
+        {
+          "event": "0317.0 #5508",
+          "actual_delay_us": 1.081250086500007,
+          "predicted_median_us": 2.133020769503201,
+          "band": "outside band"
+        },
+        {
+          "event": "0317.0 #7005",
+          "actual_delay_us": 0.4925000394000032,
+          "predicted_median_us": 1.5764040336072074,
+          "band": "outside band"
+        }
+      ],
+      "gates": [
+        {
+          "test": "T406",
+          "gate": "G1_primary_within_0p10_of_0p75",
+          "status": "PASS"
+        },
+        {
+          "test": "T406",
+          "gate": "G2_at_least_75pct_splits_within_0p10",
+          "status": "FAIL"
+        },
+        {
+          "test": "T406",
+          "gate": "G3_positive_spearman",
+          "status": "PASS"
+        },
+        {
+          "test": "T406",
+          "gate": "G4_loo_median_absolute_error_at_most_0p05",
+          "status": "PASS"
+        },
+        {
+          "test": "T407 M075",
+          "gate": "G1_calibration_higher_hazard",
+          "status": "PASS"
+        },
+        {
+          "test": "T407 M075",
+          "gate": "G2_both_holdout_runs_positive",
+          "status": "FAIL"
+        },
+        {
+          "test": "T407 M075",
+          "gate": "G3_bootstrap_ci_strictly_positive",
+          "status": "FAIL"
+        },
+        {
+          "test": "T407 M075",
+          "gate": "G4_permutation_p_at_most_0p05",
+          "status": "FAIL"
+        },
+        {
+          "test": "T407 M0706",
+          "gate": "G1_calibration_higher_hazard",
+          "status": "PASS"
+        },
+        {
+          "test": "T407 M0706",
+          "gate": "G2_both_holdout_runs_positive",
+          "status": "FAIL"
+        },
+        {
+          "test": "T407 M0706",
+          "gate": "G3_bootstrap_ci_strictly_positive",
+          "status": "FAIL"
+        },
+        {
+          "test": "T407 M0706",
+          "gate": "G4_permutation_p_at_most_0p05",
+          "status": "FAIL"
+        }
+      ],
+      "validation": [
+        {
+          "test": "T406",
+          "status": "PASS",
+          "checks": 7
+        },
+        {
+          "test": "T407",
+          "status": "PASS",
+          "checks": 9
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "t406_splits",
+      "label": "T406 split results",
+      "path": "analysis/muon/T406_grandchild_quarter_completion/T406_SPLIT_RESULTS.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Observed child crests, prompt participation, decompressed grandchild coordinates and leave-one-out predictions for 20 deterministic T400 splits.",
+        "tables_used": [
+          "T406_SPLIT_RESULTS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T406_grandchild_quarter_completion/T406_SPLIT_RESULTS.csv')"
+      }
+    },
+    {
+      "id": "t406_results",
+      "label": "T406 saved results",
+      "path": "analysis/muon/T406_grandchild_quarter_completion/T406_RESULTS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Frozen geometry, gates, verdict and evidence boundaries for the quarter-completion test.",
+        "tables_used": [
+          "T406_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T406_grandchild_quarter_completion/T406_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t406_validation",
+      "label": "T406 independent validation",
+      "path": "analysis/muon/T406_grandchild_quarter_completion/T406_VALIDATION.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent saved-artifact recomputation for T406.",
+        "tables_used": [
+          "T406_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T406_grandchild_quarter_completion/T406_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t407_models",
+      "label": "T407 model summary",
+      "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_MODEL_SUMMARY.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Calibration direction, held-out timing score, uncertainty and permutation result for each frozen ARA band.",
+        "tables_used": [
+          "T407_MODEL_SUMMARY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_MODEL_SUMMARY.csv')"
+      }
+    },
+    {
+      "id": "t407_events",
+      "label": "T407 individual holdout event scores",
+      "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_HOLDOUT_EVENT_SCORES.csv",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "2,109 event-linked stopped-muon records with observed charged-daughter delay and calibration-frozen timing predictions.",
+        "tables_used": [
+          "T407_HOLDOUT_EVENT_SCORES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_HOLDOUT_EVENT_SCORES.csv')"
+      }
+    },
+    {
+      "id": "t407_results",
+      "label": "T407 saved results",
+      "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_RESULTS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Individual timing-transfer verdict, model diagnostics, gates and scope boundaries.",
+        "tables_used": [
+          "T407_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t407_validation",
+      "label": "T407 independent validation",
+      "path": "analysis/muon/T407_individual_muon_grandchild_transfer/T407_VALIDATION.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent integrity and arithmetic checks for T407.",
+        "tables_used": [
+          "T407_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T407_individual_muon_grandchild_transfer/T407_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t406_protocol",
+      "label": "T406 frozen protocol",
+      "path": "analysis/muon/T406_GRANDCHILD_QUARTER_COMPLETION_PROTOCOL_2026-08-18.md",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Pre-run quarter-completion coordinates, gates and verdict logic.",
+        "tables_used": [
+          "T406_GRANDCHILD_QUARTER_COMPLETION_PROTOCOL_2026-08-18.md"
+        ]
+      }
+    },
+    {
+      "id": "t407_protocol",
+      "label": "T407 frozen protocol",
+      "path": "analysis/muon/T407_INDIVIDUAL_MUON_GRANDCHILD_TRANSFER_PROTOCOL_2026-08-18.md",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Pre-run individual-muon timing-transfer models, controls and gates.",
+        "tables_used": [
+          "T407_INDIVIDUAL_MUON_GRANDCHILD_TRANSFER_PROTOCOL_2026-08-18.md"
+        ]
+      }
+    }
+  ]
+}

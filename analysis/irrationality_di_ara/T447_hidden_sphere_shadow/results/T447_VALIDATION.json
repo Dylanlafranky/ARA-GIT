@@ -1,0 +1,143 @@
+{
+  "test": "T447",
+  "checks_passed": 27,
+  "checks_total": 27,
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "source_columns",
+      "pass": true,
+      "detail": "['#timestamp', 'p_RS_R_x [m]', 'p_RS_R_y [m]', 'p_RS_R_z [m]', 'q_RS_w []', 'q_RS_x []', 'q_RS_y []', 'q_RS_z []', 'v_RS_R_x [m s^-1]', 'v_RS_R_y [m s^-1]', 'v_RS_R_z [m s^-1]', 'b_w_RS_S_x [rad s^-1]', 'b_w_RS_S_y [rad s^-1]', 'b_w_RS_S_z [rad s^-1]', 'b_a_RS_S_x [m s^-2]', 'b_a_RS_S_y [m s^-2]', 'b_a_RS_S_z [m s^-2]']"
+    },
+    {
+      "check": "source_rows",
+      "pass": true,
+      "detail": "rows=36382"
+    },
+    {
+      "check": "source_hash",
+      "pass": true,
+      "detail": "aae2d7c5684724c8afe364d2fd8499a6ed77a9169adf03736531f67d8e7b2117"
+    },
+    {
+      "check": "timestamps_strictly_increase",
+      "pass": true,
+      "detail": "minimum_delta_ns=4999680"
+    },
+    {
+      "check": "normalization_identity",
+      "pass": true,
+      "detail": "max_norm_error=3.331e-16"
+    },
+    {
+      "check": "raw_norm_range",
+      "pass": true,
+      "detail": "range=(0.999999222,1.000067541)"
+    },
+    {
+      "check": "no_quaternion_sign_jump",
+      "pass": true,
+      "detail": "adjacent quaternion dot products remain non-negative"
+    },
+    {
+      "check": "manual_three_cut_mae",
+      "pass": true,
+      "detail": "manual=1.19144273009e-16, saved=1.29239521309e-16; difference is below one tenth of float64 epsilon"
+    },
+    {
+      "check": "manual_two_cut_mae",
+      "pass": true,
+      "detail": "manual=0.144257219715, saved=0.144257219715"
+    },
+    {
+      "check": "three_cut_exact_after_normalization",
+      "pass": true,
+      "detail": "MAE=1.292e-16"
+    },
+    {
+      "check": "two_cut_not_identifiable",
+      "pass": true,
+      "detail": "MAE=0.144257"
+    },
+    {
+      "check": "rank_two",
+      "pass": true,
+      "detail": "rank=2"
+    },
+    {
+      "check": "redundant_axis_adds_no_rank",
+      "pass": true,
+      "detail": "rank=2"
+    },
+    {
+      "check": "independent_third_adds_rank",
+      "pass": true,
+      "detail": "rank=3"
+    },
+    {
+      "check": "redundant_prediction_equals_two_cut",
+      "pass": true,
+      "detail": "two=0.144257219715, redundant=0.144257219715"
+    },
+    {
+      "check": "shuffle_count",
+      "pass": true,
+      "detail": "rows=200"
+    },
+    {
+      "check": "event_linked_beats_shuffled",
+      "pass": true,
+      "detail": "linked=1.292e-16, shuffle_min=0.027955"
+    },
+    {
+      "check": "shuffle_summary",
+      "pass": true,
+      "detail": "median=0.0285860728576"
+    },
+    {
+      "check": "raw_recorded_sensitivity",
+      "pass": true,
+      "detail": "MAE=1.74854122176e-06"
+    },
+    {
+      "check": "raw_result_still_precise",
+      "pass": true,
+      "detail": "MAE=1.749e-06"
+    },
+    {
+      "check": "axis_scan_sign_changes",
+      "pass": true,
+      "detail": "manual=[0, 4, 0, 15], saved=[0, 4, 0, 15]"
+    },
+    {
+      "check": "primary_w_no_crossing",
+      "pass": true,
+      "detail": "w_crossings=0"
+    },
+    {
+      "check": "exploratory_axes_expose_boundary",
+      "pass": true,
+      "detail": "x=4, z=15"
+    },
+    {
+      "check": "sample_record_trace",
+      "pass": true,
+      "detail": "row_id=25467, manual=0.482697934704"
+    },
+    {
+      "check": "holdout_sample_bounded",
+      "pass": true,
+      "detail": "rows=1200"
+    },
+    {
+      "check": "visual_outputs",
+      "pass": true,
+      "detail": "{'T447_GEOMETRY_FIRST.png': 821478, 'T447_PAIR_PLANES_AND_BOUNDARY.png': 324166}"
+    },
+    {
+      "check": "required_outputs",
+      "pass": true,
+      "detail": "['T447_RESULT.json', 'T447_ANALYSIS.sqlite', 'T447_METHOD_METRICS.csv', 'T447_AXIS_SCAN.csv', 'T447_SHUFFLED_THIRD_CONTROLS.csv']"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "test": "T455",
+  "checks_passed": 10,
+  "checks_total": 10,
+  "all_passed": true,
+  "assessment": "Share with caveats",
+  "checks": [
+    {
+      "check": "official source checksum",
+      "passed": true,
+      "detail": "sha256=bb744a8738e8161e8ccc44f5b1dfce2c3f92a23b7e1a14f776e05a086299ad2e"
+    },
+    {
+      "check": "daily sequence is chronological and gap-free",
+      "passed": true,
+      "detail": "rows=15551; start=1984-01-01; end=2026-07-29"
+    },
+    {
+      "check": "exact two-clock ARA formula",
+      "passed": true,
+      "detail": "max diff=2.22e-16"
+    },
+    {
+      "check": "pole amount ARA formula",
+      "passed": true,
+      "detail": "max diff=4.44e-16"
+    },
+    {
+      "check": "signed traversal ARA formula and bounds",
+      "passed": true,
+      "detail": "max diff=6.66e-16; range=0.002639\u20131.995686"
+    },
+    {
+      "check": "all forecasts are prospective with frozen chronological splits",
+      "passed": true,
+      "detail": "rows=55334; minimum lead=1 day(s)"
+    },
+    {
+      "check": "forecast metrics reproduce from the event ledger",
+      "passed": true,
+      "detail": "max numeric diff=7.22e-14"
+    },
+    {
+      "check": "frozen gate accounting",
+      "passed": true,
+      "detail": "3/6 gates passed"
+    },
+    {
+      "check": "seasonal diagnostic cannot silently alter frozen result",
+      "passed": true,
+      "detail": "12 rows explicitly labelled post-result"
+    },
+    {
+      "check": "bounded report artifact structure",
+      "passed": true,
+      "detail": "datasets=14; max rows=686; bytes=495147"
+    }
+  ]
+}

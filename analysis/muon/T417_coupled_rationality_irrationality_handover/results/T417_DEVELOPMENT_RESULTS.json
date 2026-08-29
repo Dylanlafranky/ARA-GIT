@@ -1,0 +1,65 @@
+{
+  "boundary": "post-T416 locked evaluation; population ensemble only",
+  "eligible_sequences": 16,
+  "gates": {
+    "G1_availability": {
+      "pass": false,
+      "threshold": ">=20 of 26 sequences",
+      "value": 16
+    },
+    "G2_ordering": {
+      "pass": true,
+      "threshold": ">=0.80",
+      "value": 1.0
+    },
+    "G3_positive_lead": {
+      "ci95": [
+        1.1154705089182797,
+        1.9829896789009918
+      ],
+      "pass": true,
+      "threshold": "field-bootstrap lower 95% bound >0 us",
+      "value": 1.490870726811456
+    },
+    "G4_coupling_specificity": {
+      "empirical_p": NaN,
+      "null_median_parent_ARA_mad": NaN,
+      "observed_parent_ARA_mad": 0.0426109273478823,
+      "pass": false,
+      "relative_improvement": NaN,
+      "threshold": ">=25% tighter and p<0.05"
+    },
+    "G5_state_alignment": {
+      "mirror_null_median_distance_us": 0.05054849884587087,
+      "mirror_observed_distance_us": 0.07174232480161491,
+      "mirror_p": 0.977022977022977,
+      "pass": false,
+      "same_null_median_distance_us": 0.04574653625987102,
+      "same_observed_distance_us": 0.06555717600636513,
+      "same_p": 0.9370629370629371,
+      "threshold": "either relation p<0.05 against shifted xC",
+      "winner": "same-coordinate xL=xC",
+      "winner_p": 0.9370629370629371
+    }
+  },
+  "handover_parent_ARA_mad": 0.0426109273478823,
+  "hashes": {
+    "protocol_sha256": "b52c9728df2f123377f02d717942f09709b79d5f8b542e3a32749db934b17561",
+    "script_sha256": "2a511c5784302f2289e4aefe37ead8b8916764c1f8db81841d96cc79d36c243d",
+    "source_sha256": "079d0bb136afa6663683b0b2606c2e118a36b271eadefe31a5a7b62a4e67453f"
+  },
+  "lead_ci95_us": [
+    1.1154705089182797,
+    1.9829896789009918
+  ],
+  "median_handover_parent_ARA": 1.419460805228419,
+  "median_lead_us": 1.490870726811456,
+  "ordered_sequences": 16,
+  "primary_coupled_handover": "NOT SUPPORTED",
+  "run_period_sequences": 26,
+  "source": "analysis\\muon\\T416_dual_irrationality_time_tracking\\results\\T416_DEVELOPMENT_TIMELINE.csv",
+  "stage": "development",
+  "state_alignment": "NOT SUPPORTED",
+  "status": "NOT SUPPORTED",
+  "test": "T417 coupled Rationality/Irrationality Di-ARA handover"
+}

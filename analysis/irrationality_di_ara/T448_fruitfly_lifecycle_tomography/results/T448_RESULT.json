@@ -1,0 +1,108 @@
+{
+  "test": "T448 individual fruit-fly lifecycle tomography",
+  "data_quality": {
+    "rows": 5147,
+    "flies": 47,
+    "development_flies": 31,
+    "holdout_flies": 16,
+    "core_missing_cells": 0,
+    "environment_missing_rows": 7,
+    "environment_match_rate": 0.9986399844569652,
+    "max_composition_sum_error": 4.440892098500626e-16,
+    "median_unstereotyped_share": 0.1447884709439331,
+    "p95_unstereotyped_share": 0.2913615446178471,
+    "median_edge_share": 0.0142084611622426,
+    "p95_edge_share": 0.21205593348450485
+  },
+  "development_center_logratio": {
+    "z_traversal_maintenance": -0.03652265985630375,
+    "z_action_intake": 2.572608849666051,
+    "z_participation_quiescence": -1.8528714420117045
+  },
+  "shared_robust_scale": 4.128735525156308,
+  "terminal_center_standardized": {
+    "w_traversal_maintenance": 0.014271627267130604,
+    "w_action_intake": 0.12216252716143769,
+    "w_participation_quiescence": -0.2386896981118478
+  },
+  "terminal_covariance_eigenvalues": [
+    0.8284249818656377,
+    0.24929836503590738,
+    0.03941252867659989
+  ],
+  "terminal_axis_sd_ratio": 4.584684383920396,
+  "terminal_radius90": 1.491296464550738,
+  "metrics": [
+    {
+      "metric": "d_1",
+      "label": "T\u2194G",
+      "auc": 0.645427795382526,
+      "paired_win_rate": 0.6170212765957447,
+      "median_control_minus_terminal": 0.047252815440737485,
+      "pairs": 94
+    },
+    {
+      "metric": "d_2",
+      "label": "Action\u2194Intake",
+      "auc": 0.3810547759167044,
+      "paired_win_rate": 0.40425531914893614,
+      "median_control_minus_terminal": -0.14055852407571728,
+      "pairs": 94
+    },
+    {
+      "metric": "d_3",
+      "label": "Participation\u2194Idle",
+      "auc": 0.2830466274332277,
+      "paired_win_rate": 0.2872340425531915,
+      "median_control_minus_terminal": -0.15887434369072917,
+      "pairs": 94
+    },
+    {
+      "metric": "d_12",
+      "label": "T\u2194G + Action\u2194Intake",
+      "auc": 0.40176550475328204,
+      "paired_win_rate": 0.40425531914893614,
+      "median_control_minus_terminal": -0.1391626916952988,
+      "pairs": 94
+    },
+    {
+      "metric": "d_13",
+      "label": "T\u2194G + Participation\u2194Idle",
+      "auc": 0.33838841104572204,
+      "paired_win_rate": 0.32978723404255317,
+      "median_control_minus_terminal": -0.14061373874165878,
+      "pairs": 94
+    },
+    {
+      "metric": "d_23",
+      "label": "Action\u2194Intake + Participation\u2194Idle",
+      "auc": 0.3770937075599819,
+      "paired_win_rate": 0.3829787234042553,
+      "median_control_minus_terminal": -0.09027124354005672,
+      "pairs": 94
+    },
+    {
+      "metric": "d_123",
+      "label": "all three cuts",
+      "auc": 0.397012222725215,
+      "paired_win_rate": 0.39361702127659576,
+      "median_control_minus_terminal": -0.07226203511982349,
+      "pairs": 94
+    }
+  ],
+  "actual_three_cut_paired_win": 0.39361702127659576,
+  "shuffle_95pct": 0.59375,
+  "shuffle_p_value": 0.9675162418790605,
+  "median_final24_spearman": -0.16826086956521735,
+  "gates": {
+    "A_paired_win_at_least_0_65": false,
+    "B_three_cut_auc_margin_at_least_0_02": false,
+    "C_exceeds_95pct_shift_null": false,
+    "supporting_median_spearman_at_least_0_25": false
+  },
+  "lead_summary": {
+    "flies_with_3h_entry_in_final48": 16,
+    "median_lead_hours": 47.5,
+    "flies_with_early_false_alert": 14
+  }
+}

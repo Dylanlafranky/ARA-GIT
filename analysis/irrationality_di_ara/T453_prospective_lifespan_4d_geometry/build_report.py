@@ -1,0 +1,180 @@
+"""Build the durable T453 HTML report from frozen analysis outputs."""
+
+from __future__ import annotations
+
+import html
+import json
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+
+ROOT = Path(r"F:\SystemFormulaFolder\GIT\ARA-GIT\analysis\irrationality_di_ara\T453_prospective_lifespan_4d_geometry")
+RESULTS = ROOT / "results"
+
+
+def read(name):
+    return pd.read_csv(RESULTS / name)
+
+
+def metric(frame, split, outcome, model, field):
+    row = frame[(frame.split == split) & (frame.outcome == outcome) & (frame.model == model)]
+    return float(row.iloc[0][field])
+
+
+def cls(frame, split, model, field):
+    row = frame[(frame.split == split) & (frame.model == model)]
+    return float(row.iloc[0][field])
+
+
+def f(value, digits=2):
+    return "unavailable" if not np.isfinite(value) else f"{value:.{digits}f}"
+
+
+def table_html(frame, columns, labels=None, formats=None):
+    labels = labels or {c: c for c in columns}
+    formats = formats or {}
+    head = "".join(f"<th>{html.escape(labels.get(c, c))}</th>" for c in columns)
+    body = []
+    for _, row in frame.iterrows():
+        cells = []
+        for col in columns:
+            value = row[col]
+            if col in formats:
+                value = formats[col](value)
+            elif isinstance(value, (float, np.floating)):
+                value = f"{value:.3f}"
+            cells.append(f"<td>{html.escape(str(value))}</td>")
+        body.append("<tr>" + "".join(cells) + "</tr>")
+    return f"<div class='table-wrap'><table><thead><tr>{head}</tr></thead><tbody>{''.join(body)}</tbody></table></div>"
+
+
+def main():
+    result = json.loads((RESULTS / "T453_RESULT.json").read_text(encoding="utf-8"))
+    reg = read("T453_REGRESSION_METRICS.csv")
+    classification = read("T453_CLASSIFICATION_METRICS.csv")
+    gates = read("T453_FROZEN_GATES.csv")
+    boots = read("T453_BOOTSTRAP_IMPROVEMENTS.csv")
+    landmarks = read("T453_FOUR_COORDINATE_LANDMARKS.csv")
+
+    hold_reg = reg[(reg.split == "holdout") & (reg.outcome == "remaining_divisions")].copy()
+    hold_reg["model_label"] = hold_reg.model.map({
+        "age_only": "Age only", "raw_linear": "Raw linear", "raw_polynomial": "Raw polynomial",
+        "ara_2d": "Two-coordinate ARA", "sphere4_candidate": "Four-coordinate candidate",
+    })
+    ext_reg = reg[(reg.split == "external") & (reg.outcome == "remaining_divisions")].copy()
+    ext_reg["model_label"] = ext_reg.model.map({
+        "age_only": "Age only", "raw_linear": "Raw linear", "raw_polynomial": "Raw polynomial", "ara_2d": "Two-coordinate ARA",
+    })
+    hold_cls = classification[classification.split == "holdout"].copy()
+    hold_cls["model_label"] = hold_cls.model.map({
+        "age_only": "Age only", "raw_linear": "Raw linear", "raw_polynomial": "Raw polynomial",
+        "ara_2d": "Two-coordinate ARA", "sphere4_candidate": "Four-coordinate candidate",
+    })
+
+    sphere_boot = boots[(boots.split == "holdout") & (boots.outcome == "remaining_divisions") & (boots.baseline == "raw_polynomial") & (boots.candidate == "sphere4_candidate")].iloc[0]
+    ara_boot = boots[(boots.split == "external") & (boots.outcome == "remaining_divisions") & (boots.baseline == "age_only") & (boots.candidate == "ara_2d")].iloc[0]
+    hold_land = landmarks[landmarks.split == "holdout"].copy()
+
+    gate_cards = "".join(
+        f"<div class='gate {'pass' if bool(row.passed) else 'fail'}'><span>{row.gate}</span><b>{'PASS' if bool(row.passed) else 'FAIL'}</b><small>{html.escape(row.statement)}</small></div>"
+        for _, row in gates.iterrows()
+    )
+
+    css = """
+    :root{--bg:#0b1018;--panel:#121a27;--ink:#edf2f7;--muted:#aab7c7;--blue:#5aa0f0;--purple:#b184ed;--orange:#ef9b36;--green:#4dc48a;--red:#ef6a6a;--line:#2a384b}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55} main{max-width:1500px;margin:auto;padding:28px}
+    h1{font-size:clamp(2rem,4vw,4.4rem);line-height:1.02;margin:.2em 0}.kicker{color:var(--blue);font-weight:800;letter-spacing:.1em;text-transform:uppercase}.lede{font-size:1.25rem;max-width:1050px;color:#d7e0eb}
+    h2{font-size:2rem;margin:0 0 12px} h3{font-size:1.25rem}.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;margin:22px 0}.answer{border-left:6px solid var(--blue)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}.metric{background:#0e1520;border:1px solid var(--line);border-radius:14px;padding:18px}.metric b{font-size:2.1rem;display:block}.metric small{color:var(--muted)}
+    img{display:block;width:100%;height:auto;background:white;border-radius:12px;margin:14px 0}.caption{color:var(--muted);margin-top:8px}.plain{background:#0d2130;border-left:4px solid var(--blue);padding:14px 16px;border-radius:8px}.warning{background:#2a1d13;border-left-color:var(--orange)}
+    .table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}table{border-collapse:collapse;width:100%;min-width:700px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}th{background:#172234;color:#dbe9f7;position:sticky;top:0}td{font-variant-numeric:tabular-nums}
+    .gates{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.gate{border:1px solid var(--line);border-radius:12px;padding:14px}.gate span{font-weight:800;margin-right:8px}.gate b{float:right}.gate small{display:block;color:var(--muted);margin-top:8px}.gate.pass{border-left:5px solid var(--green)}.gate.fail{border-left:5px solid var(--red)}
+    code{background:#09101a;border:1px solid var(--line);border-radius:5px;padding:2px 6px}.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:850px){.two{grid-template-columns:1fr}main{padding:15px}}
+    a{color:#87bbf4}.toc a{margin-right:18px;white-space:nowrap}.tag{display:inline-block;padding:5px 10px;border-radius:999px;background:#18263a;color:#bed8f5;margin-right:6px}
+    """
+
+    report = f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>T453 prospective lifespan and 4D geometry</title><style>{css}</style></head><body><main>
+    <p class='kicker'>ARA test T453 · frozen prospective analysis</p>
+    <h1>Did we find more than a redrawing of lifespan?</h1>
+    <p class='lede'><b>Yes, a little—but not yet a hidden Time wave.</b> Prefix-only ARA variables carry some information about the unseen remainder of a yeast cell's observed life. The four-coordinate candidate improves one holdout comparison, but it barely differs from the two-coordinate ARA and does not improve the slowdown event. The visible “sphere radius” is still dominated by generation and clock.</p>
+    <p class='toc'><a href='#boundary'>What was tested</a><a href='#prediction'>Prediction</a><a href='#sphere'>4D candidate</a><a href='#event'>Slowdown</a><a href='#verdict'>Verdict</a></p>
+
+    <section class='panel answer'>
+      <h2>Answer first</h2>
+      <div class='grid'>
+        <div class='metric'><b>{result['holdout_ara_vs_age_improvement_pct']:.1f}%</b><small>same-platform holdout improvement: two-coordinate ARA versus age alone</small></div>
+        <div class='metric'><b>{result['external_ara_vs_age_improvement_pct']:.1f}%</b><small>hard external-transfer improvement: two-coordinate ARA versus age alone</small></div>
+        <div class='metric'><b>{result['holdout_sphere_vs_raw_poly_improvement_pct']:.1f}%</b><small>four-coordinate candidate versus matched nonlinear raw control</small></div>
+        <div class='metric'><b>{result['gates_passed']}/{result['gates_total']}</b><small>predeclared gates passed; a mixed result, not a framework verdict</small></div>
+      </div>
+      <p class='plain'><b>The precise conclusion:</b> this is not merely a completed-lifespan inversion, because the future endpoint was unavailable to every predictor and the two-coordinate ARA improved on age in both holdouts. But the fourth-coordinate result is not an independent sphere discovery: it improves the raw polynomial by 9.0%, misses its 10% gate, differs from two-coordinate ARA by only 0.4%, and loses to the raw polynomial on slowdown AUROC.</p>
+    </section>
+
+    <section id='boundary' class='panel'>
+      <h2>1. The test boundary</h2>
+      <p><span class='tag'>Who: 217 usable cells</span><span class='tag'>What: timestamp, size, Rpl13A</span><span class='tag'>When: prefix only</span><span class='tag'>Where: frozen experiment splits</span></p>
+      <p>The original source contains 225 cells. Eight were too short to supply the required five-G1 prefix plus an unseen future, leaving 86 development cells, 12 untouched same-platform cells, and 119 external-platform cells.</p>
+      <img src='T453_01_NO_LOOKAHEAD_SCOPE.png' alt='No-lookahead design and cohort counts'>
+      <p class='caption'><b>How to read it:</b> blue observations are legally visible. Hollow red observations are the answer and cannot enter a predictor. The right panel shows how often the fixed sustained-slowdown proxy exists; it is not a death label.</p>
+      <div class='plain warning'><b>Important:</b> “remaining life” here means the remaining part of the published observed G1 sequence. The terminal image itself was omitted in the source study. This test predicts the recorded endpoint, not a metaphysical death time.</div>
+    </section>
+
+    <section id='prediction' class='panel'>
+      <h2>2. Can the visible prefix predict the unseen remainder?</h2>
+      <img src='T453_02_HOLDOUT_PREDICTIONS.png' alt='Predicted versus actual remaining divisions on untouched Experiment 9'>
+      <p class='caption'>Each dot is one legal prefix prediction. The dashed diagonal is perfect prediction. All models compress long remaining lifespans toward the middle, so the task remains difficult. The ARA models reduce error modestly; they do not solve individual lifespan.</p>
+      <img src='T453_03_MODEL_COMPARISON.png' alt='Model errors and frozen gates'>
+      <p class='caption'>The gates preserve honesty, but the bars show the actual geometry of the result. On Experiment 9, two-coordinate ARA is 5.2% better than age; the four-coordinate candidate is only 0.4% better than that ARA model. On the much larger external transfer, two-coordinate ARA is 11.4% better than age.</p>
+      <div class='two'>
+        <div><h3>Untouched Experiment 9</h3>{table_html(hold_reg, ['model_label','cell_mean_mae','rmse','bias'], {'model_label':'model','cell_mean_mae':'mean per-cell MAE','rmse':'RMSE','bias':'bias'})}</div>
+        <div><h3>External Experiments 1–6</h3>{table_html(ext_reg, ['model_label','cell_mean_mae','rmse','bias'], {'model_label':'model','cell_mean_mae':'mean per-cell MAE','rmse':'RMSE','bias':'bias'})}</div>
+      </div>
+      <p class='plain'><b>Robustness:</b> the four-coordinate candidate's mean MAE gain over the raw polynomial is {sphere_boot.mean_mae_gain:.3f} divisions, with a cell-cluster bootstrap interval [{sphere_boot.ci_low:.3f}, {sphere_boot.ci_high:.3f}]. The external two-coordinate gain over age is {ara_boot.mean_mae_gain:.3f} divisions, interval [{ara_boot.ci_low:.3f}, {ara_boot.ci_high:.3f}]. The 12-cell same-platform result is still small-sample evidence.</p>
+    </section>
+
+    <section id='sphere' class='panel'>
+      <h2>3. What the “4D sphere” candidate actually did</h2>
+      <p>Four independent observed quantities were mapped to 0–2 coordinates: generation, elapsed clock, cell size, and Rpl13A concentration. Three two-dimensional disk cuts were then inspected, and their four ridge-centred components were summed into a shared radius². This is the proposed projection test—not an assumption that a physical S³ has already been found.</p>
+      <img src='T453_05_FOUR_COORDINATE_GEOMETRY.png' alt='Three disk projections and shared four-coordinate radius'>
+      <p class='caption'><b>Generation/clock:</b> a strong diagonal maturity path. <b>Clock/size:</b> size rises gradually while clock traverses. <b>Size/Rpl13A:</b> a compact near-ridge child cloud. <b>Shared radius:</b> long-lived cells move outward and often cross radius² = 1 around G1 11.</p>
+      <div class='grid'>
+        <div class='metric'><b>{result['holdout_radius_crossing_cells']}/12</b><small>holdout cells that cross radius² = 1 during an eligible prefix</small></div>
+        <div class='metric'><b>G1 {result['holdout_radius_crossing_median_prefix_g1']:.0f}</b><small>median observed crossing location</small></div>
+        <div class='metric'><b>{result['holdout_radius_crossing_median_remaining_divisions']:.1f}</b><small>median divisions still remaining at that crossing</small></div>
+        <div class='metric'><b>{100*result['holdout_radius_median_generation_clock_fraction']:.1f}%</b><small>median radius² supplied by generation plus clock</small></div>
+      </div>
+      <p class='plain warning'><b>This directly addresses the concern:</b> the radius is mostly modelling lifespan position. Only six holdout cells cross it, and they still have a median 4.5 divisions remaining. Size and Rpl13A bend the path enough to help prediction against the raw control, but they do not presently supply a common terminal boundary.</p>
+      <img src='T453_06_ERROR_GEOMETRY.png' alt='Prediction error across clock and candidate radius'>
+      <p class='caption'>The four-coordinate candidate is most helpful relative to the raw polynomial through the middle radii, but two-coordinate ARA is often equally good or better. That is why this run supports a prospective relational signal without identifying a distinct fourth-dimensional object.</p>
+    </section>
+
+    <section id='event' class='panel'>
+      <h2>4. Does it foresee a local handover?</h2>
+      <p>The fixed event is the first pair of consecutive intervals more than 1.25× the cell's first-three-interval median. The model asks, before seeing it, whether that slowdown begins within the next two divisions.</p>
+      <img src='T453_04_INDIVIDUAL_SLOWDOWN_RISK.png' alt='Prefix-only slowdown risk for individual holdout cells'>
+      <p class='caption'>The red line is revealed only after prediction. Some cells show a rising ARA or four-coordinate risk before the line; others do not. These are probabilities, not exact death forecasts.</p>
+      {table_html(hold_cls, ['model_label','auroc','brier','positives','negatives'], {'model_label':'model','auroc':'AUROC','brier':'Brier','positives':'positive prefixes','negatives':'negative prefixes'})}
+      <p class='plain'><b>Event result:</b> age alone is below chance (AUROC {cls(classification,'holdout','age_only','auroc'):.3f}); two-coordinate ARA reaches {cls(classification,'holdout','ara_2d','auroc'):.3f}; the raw polynomial is best at {cls(classification,'holdout','raw_polynomial','auroc'):.3f}; and the four-coordinate candidate returns {cls(classification,'holdout','sphere4_candidate','auroc'):.3f}. Therefore the fourth-coordinate construction does not add the missing handover information in this cut.</p>
+    </section>
+
+    <section id='verdict' class='panel answer'>
+      <h2>5. ARA-grounded verdict</h2>
+      <div class='gates'>{gate_cards}</div>
+      <h3>What is supported</h3>
+      <ul><li>A prefix-only relational construction carries some prospective information about the unseen observed remainder.</li><li>The two-coordinate generation/clock ARA transfers across a different experimental platform for remaining divisions.</li><li>Size and Rpl13A create visible additional cuts and slightly improve one matched holdout comparison.</li></ul>
+      <h3>What is not supported yet</h3>
+      <ul><li>A universal death ridge or common termination crossing.</li><li>A four-coordinate advantage over the already-working two-coordinate ARA.</li><li>A four-dimensional sphere, S³ topology, or “Time itself.”</li><li>Precise individual lifespan prediction; errors remain roughly 2.3 divisions on Experiment 9 and 3.3 divisions externally.</li></ul>
+      <p class='plain'><b>Best next test:</b> preserve this exact prefix-only design but add genuinely time-facing children measured in the same individual cells—preferably damage/repair, mitochondrial state, or another independent internal process. The new coordinate must beat both two-coordinate ARA and a matched raw nonlinear model. Merely adding more lifespan-correlated measurements would enlarge the same visible disk without locating the hidden direction.</p>
+    </section>
+
+    <section class='panel'><h2>Files and traceability</h2><p>The frozen method is in <code>FROZEN_PROTOCOL.md</code>. Raw prefix states, predictions, all metrics, bootstrap intervals, gates, and four-coordinate landmarks are beside this report as CSV/JSON files. The source is the published S1 workbook materialised in T451 and parsed through T452's raw-unit tables.</p><p>Source paper: <a href='https://pmc.ncbi.nlm.nih.gov/articles/PMC5132237/'>The Natural Variation in Lifespans of Single Yeast Cells Is Related to Variation in Cell Size, Ribosomal Protein, and Division Time</a>.</p></section>
+    </main></body></html>"""
+    out = RESULTS / "T453_PROSPECTIVE_LIFESPAN_4D_REPORT.html"
+    out.write_text(report, encoding="utf-8")
+    print(out)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,3800 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T439 \u2014 The half-cycle belongs to the crest, not the relational-child turn",
+    "description": "Frozen nine-simulation confirmation of the T438 Space\u2013Time relational-child timing landmark.",
+    "generatedAt": "2026-08-27T03:40:52.128693+00:00",
+    "sources": [
+      {
+        "id": "t439_score",
+        "label": "T439 frozen holdout score",
+        "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM read_json_auto('analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json')",
+          "description": "Loads the sealed T439 waveform predictions and scores them against first common-horizon times.",
+          "tables_used": [
+            "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json",
+            "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_HOLDOUT_SCORES.csv"
+          ],
+          "filters": [
+            "Nine frozen non-precessing SXS holdouts",
+            "SXS:BBH:0305 excluded from gates"
+          ],
+          "metric_definitions": [
+            "Absolute offset is |child-landmark time minus first common-horizon time| divided by the frozen local parent cycle.",
+            "The power-crest baseline uses the same horizon and cycle denominator."
+          ]
+        }
+      },
+      {
+        "id": "t439_protocol",
+        "label": "T439 frozen protocol",
+        "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/T439_FROZEN_PROTOCOL.md"
+      },
+      {
+        "id": "t439_predictions",
+        "label": "Sealed waveform-only predictions",
+        "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "sql",
+          "sql": "SELECT * FROM read_json_auto('analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json')",
+          "description": "Loads the sealed per-simulation waveform-only landmark inventory; time-series arrays are preserved in the referenced NPZ artifacts.",
+          "tables_used": [
+            "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json"
+          ]
+        }
+      },
+      {
+        "id": "t439_validation",
+        "label": "Independent T439 validation",
+        "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_VALIDATION.json"
+      },
+      {
+        "id": "sxs_catalog",
+        "label": "SXS public numerical-relativity catalog",
+        "href": "https://data.black-holes.org/waveforms/index.html"
+      },
+      {
+        "id": "sxs_catalog_paper",
+        "label": "SXS catalog paper",
+        "href": "https://arxiv.org/abs/1904.04831"
+      }
+    ],
+    "cards": [
+      {
+        "id": "median_child",
+        "dataset": "headline",
+        "sourceId": "t439_score",
+        "description": "Median unsigned distance from the child-turn landmark to first common-horizon formation, in frozen parent cycles.",
+        "metrics": [
+          {
+            "label": "Child-turn median",
+            "field": "median_child_offset",
+            "format": "number",
+            "unit": "parent cycles"
+          },
+          {
+            "label": "Crest baseline",
+            "field": "median_crest_offset",
+            "format": "number",
+            "unit": "parent cycles"
+          }
+        ]
+      },
+      {
+        "id": "broad_count",
+        "dataset": "headline",
+        "sourceId": "t439_score",
+        "description": "Holdouts inside the frozen 0.25\u20130.75-cycle half-cycle band.",
+        "metrics": [
+          {
+            "label": "Frozen-band count",
+            "field": "broad_count",
+            "format": "number",
+            "unit": "of 9"
+          }
+        ]
+      },
+      {
+        "id": "shuffle_p",
+        "dataset": "headline",
+        "sourceId": "t439_score",
+        "description": "Empirical probability that chronology-destroying controls were at least as close to a half-cycle as the ordered landmark.",
+        "metrics": [
+          {
+            "label": "Chronology-control p",
+            "field": "shuffle_p",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "offset_comparison",
+        "title": "Child-turn and waveform-crest offsets",
+        "type": "bar",
+        "dataset": "offset_rows",
+        "sourceId": "t439_score",
+        "encodings": {
+          "x": {
+            "field": "simulation",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "absolute_offset_cycles",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "landmark",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        }
+      },
+      {
+        "id": "activity_histories",
+        "title": "Representative relational-child activity histories",
+        "type": "line",
+        "dataset": "activity_rows",
+        "sourceId": "t439_predictions",
+        "encodings": {
+          "x": {
+            "field": "time_from_horizon_cycles",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "activity_fraction",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "simulation",
+            "type": "nominal"
+          }
+        }
+      },
+      {
+        "id": "control_quantiles",
+        "title": "Ordered result against chronology-shuffle controls",
+        "type": "line",
+        "dataset": "control_rows",
+        "sourceId": "t439_score",
+        "encodings": {
+          "x": {
+            "field": "quantile",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "half_cycle_deviation",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "holdouts",
+        "title": "Exact holdout offsets",
+        "dataset": "exact_rows",
+        "sourceId": "t439_score",
+        "columns": [
+          {
+            "field": "simulation",
+            "label": "SXS simulation"
+          },
+          {
+            "field": "q",
+            "label": "Mass ratio q",
+            "format": "number"
+          },
+          {
+            "field": "chi_eff",
+            "label": "Effective spin",
+            "format": "number"
+          },
+          {
+            "field": "signed_child_cycles",
+            "label": "Signed child offset",
+            "format": "number",
+            "unit": "cycles",
+            "movement": true
+          },
+          {
+            "field": "absolute_child_cycles",
+            "label": "Absolute child offset",
+            "format": "number",
+            "unit": "cycles"
+          },
+          {
+            "field": "crest_cycles",
+            "label": "Crest offset",
+            "format": "number",
+            "unit": "cycles"
+          },
+          {
+            "field": "broad_half_cycle_band",
+            "label": "In 0.25\u20130.75 band"
+          }
+        ],
+        "defaultSort": {
+          "field": "q",
+          "direction": "asc"
+        }
+      },
+      {
+        "id": "gates",
+        "title": "Frozen confirmation gates",
+        "dataset": "gate_rows",
+        "sourceId": "t439_score",
+        "columns": [
+          {
+            "field": "order",
+            "label": "#",
+            "format": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate"
+          },
+          {
+            "field": "required",
+            "label": "Required"
+          },
+          {
+            "field": "observed",
+            "label": "Observed",
+            "format": "number"
+          },
+          {
+            "field": "passed",
+            "label": "Pass"
+          }
+        ],
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T439 \u2014 The half-cycle belongs to the crest, not the relational-child turn"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "sourceId": "t439_score",
+        "body": "## Technical summary\n\n**The frozen half-cycle claim was not supported for the Space\u2013Time relational-child turn.** Its median unsigned offset was `0.174` parent cycles, and only `2/9` holdouts occupied the predeclared 0.25\u20130.75 band. The waveform power crest\u2014not the child turn\u2014had a median offset of `0.503` cycles. The ordered child landmark was nevertheless non-random under the frozen chronology control (`p=0.0010`) and beat the crest in all 9 systems. This separates a recurring near-horizon child reorientation from the broader half-cycle crest relation."
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "cardIds": [
+          "median_child",
+          "broad_count",
+          "shuffle_p"
+        ]
+      },
+      {
+        "id": "main_finding",
+        "type": "markdown",
+        "sourceId": "t439_score",
+        "body": "## The holdouts move the child landmark inward\n\nEvery bar uses the same frozen local parent-cycle denominator. The blue child-turn bars cluster near the common horizon; the orange crest bars retain the approximate half-cycle relation. The implication is specific: T438's `0.427`-cycle child result does not generalize, while a separate crest-scale half-cycle relation remains visible."
+      },
+      {
+        "id": "offset_chart",
+        "type": "chart",
+        "chartId": "offset_comparison"
+      },
+      {
+        "id": "trajectory_finding",
+        "type": "markdown",
+        "sourceId": "t439_predictions",
+        "body": "## Ordered Space\u2013Time activity still finds a sharp near-horizon turn\n\nTime zero is first common-horizon formation; each history is divided by its own maximum only to compare shape. The peaks are obtained from waveform data before the horizon is revealed. They are therefore useful timing landmarks, but their post-hoc concentration near `0.17` cycles must be confirmed by a newly frozen test before it can be assigned an ARA rung."
+      },
+      {
+        "id": "activity_chart",
+        "type": "chart",
+        "chartId": "activity_histories"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "t439_protocol",
+        "body": "## Scope, coordinates, and denominator\n\nThe cohort contains nine untouched, non-precessing public SXS simulations spanning mass ratios `q=1\u20138` plus aligned-spin variants. Space/Connection is the smoothed radial log-amplitude step; Time/Traversal is the smoothed half-phase step; the child landmark is the strongest ordered change in their path direction inside the waveform-only late-parent basin. One parent cycle is `\u03c0/\u03c9` at the frozen T435 waveform handover estimate."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "sourceId": "t439_protocol",
+        "body": "## Sealed holdout design\n\nThe cohort, landmark, cycle denominator, five gates, and controls were hashed before the holdout products were scored. Waveform-only predictions were then written and SHA-256 sealed before `Horizons.h5` supplied first common-horizon times. The unchanged implementation reproduces T438's development value to within `1.4\u00d710\u207b\u2077` cycles."
+      },
+      {
+        "id": "gate_table",
+        "type": "table",
+        "tableId": "gates"
+      },
+      {
+        "id": "control_finding",
+        "type": "markdown",
+        "sourceId": "t439_score",
+        "body": "## Chronology matters, but this control does not prove a new clock\n\nThe observed mean distance from a half-cycle is below every one of the 1,000 chronology-shuffle ensemble values. This shows that the selected ordered trajectory is not reproduced after temporal order is destroyed. However, the shuffle can place maxima anywhere in a long eligible basin; the paired crest comparison is the stronger practical baseline."
+      },
+      {
+        "id": "control_chart",
+        "type": "chart",
+        "chartId": "control_quantiles"
+      },
+      {
+        "id": "limits",
+        "type": "markdown",
+        "body": "## Limitations and robustness boundary\n\nThese are numerical-relativity simulations generated within general relativity, not independent detector events. The primary endpoint was unsigned; seven landmarks followed the horizon and two led it. The new `0.174`-cycle median is an exploratory outcome, not a frozen child-rung prediction. It may reflect a physical redistribution stage, waveform extraction, common-horizon convention, or their interaction."
+      },
+      {
+        "id": "exact_table",
+        "type": "table",
+        "tableId": "holdouts"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nFreeze the newly observed near-horizon window on a fresh cohort, but do not call it `0.25`, `1/6`, or a grandchild landmark yet. The decisive comparison should test two predeclared candidates simultaneously: (1) crest at one half-cycle and (2) relational-child turning inside `0.08\u20130.32` cycles, with sign scored separately and a short late-basin control that cannot win merely by preferring the record end."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Does the near-horizon child offset survive precessing and eccentric binaries?\n- Is its variation explained by mass ratio, aligned spin, or numerical resolution?\n- Does an independent horizon-shear or mode-phase observable identify the same child turn?\n- Is the crest half-cycle relation a genuine cross-scale handover or a waveform/common-horizon convention?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-27T03:40:52.128693+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "median_child_offset": 0.17378898334298307,
+          "median_crest_offset": 0.5025595208965793,
+          "broad_count": 2,
+          "shuffle_p": 0.000999000999000999
+        }
+      ],
+      "offset_rows": [
+        {
+          "simulation": "0001",
+          "mass_ratio": 1.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.1508879177637907
+        },
+        {
+          "simulation": "0001",
+          "mass_ratio": 1.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.5434378819653461
+        },
+        {
+          "simulation": "0004",
+          "mass_ratio": 1.0,
+          "chi_eff": -0.25,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.104441228317738
+        },
+        {
+          "simulation": "0004",
+          "mass_ratio": 1.0,
+          "chi_eff": -0.25,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.304729237582275
+        },
+        {
+          "simulation": "0176",
+          "mass_ratio": 1.0,
+          "chi_eff": 0.96,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.1996144074982064
+        },
+        {
+          "simulation": "0176",
+          "mass_ratio": 1.0,
+          "chi_eff": 0.96,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.2279220673429457
+        },
+        {
+          "simulation": "0007",
+          "mass_ratio": 1.5,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.173788983342983
+        },
+        {
+          "simulation": "0007",
+          "mass_ratio": 1.5,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.5590748426802428
+        },
+        {
+          "simulation": "1166",
+          "mass_ratio": 2.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.1883894498006199
+        },
+        {
+          "simulation": "1166",
+          "mass_ratio": 2.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.5696691519498139
+        },
+        {
+          "simulation": "1178",
+          "mass_ratio": 3.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.3084933390504185
+        },
+        {
+          "simulation": "1178",
+          "mass_ratio": 3.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.5025595208965793
+        },
+        {
+          "simulation": "1906",
+          "mass_ratio": 4.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.3038541085359836
+        },
+        {
+          "simulation": "1906",
+          "mass_ratio": 4.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.5038777711310981
+        },
+        {
+          "simulation": "0181",
+          "mass_ratio": 6.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.0895171875840795
+        },
+        {
+          "simulation": "0181",
+          "mass_ratio": 6.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.2337767491903234
+        },
+        {
+          "simulation": "0063",
+          "mass_ratio": 8.0,
+          "chi_eff": 0.0,
+          "landmark": "Space\u2013Time child turn",
+          "absolute_offset_cycles": 0.1586230914555931
+        },
+        {
+          "simulation": "0063",
+          "mass_ratio": 8.0,
+          "chi_eff": 0.0,
+          "landmark": "Waveform power crest",
+          "absolute_offset_cycles": 0.2939612577904043
+        }
+      ],
+      "activity_rows": [
+        {
+          "time_from_horizon_cycles": -1.4963158908122256,
+          "activity_fraction": 0.027464234960363508,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.487780303686479,
+          "activity_fraction": 0.02694982297887998,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.470709156800499,
+          "activity_fraction": 0.025871742476965283,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.4536380463395828,
+          "activity_fraction": 0.024725591198441272,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.43656697223389,
+          "activity_fraction": 0.023508868610870988,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.4194959344179257,
+          "activity_fraction": 0.022219574972793487,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.402424932831472,
+          "activity_fraction": 0.02085494926053024,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3853539674183457,
+          "activity_fraction": 0.019411800087786694,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3682830381263997,
+          "activity_fraction": 0.017898608705050185,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3512121449081425,
+          "activity_fraction": 0.016319846007899357,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3426767118126015,
+          "activity_fraction": 0.015507517803266412,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3256058726218445,
+          "activity_fraction": 0.013843228734951222,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.3085350693995499,
+          "activity_fraction": 0.012134522477060393,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2914643021084695,
+          "activity_fraction": 0.010392221641708495,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2743935707150797,
+          "activity_fraction": 0.008628290816113993,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2573228751872538,
+          "activity_fraction": 0.006855885850176359,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2402522154959696,
+          "activity_fraction": 0.005085709491916322,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2231815916140667,
+          "activity_fraction": 0.0033295127019636614,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.2061110035159366,
+          "activity_fraction": 0.001609237529996564,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.1975757228782593,
+          "activity_fraction": 0.0007657742120175745,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.180505188411712,
+          "activity_fraction": 0.0008784451915174994,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.1634346896718237,
+          "activity_fraction": 0.0024474831427925524,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.146364226638884,
+          "activity_fraction": 0.0039311445121826775,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.1292937992925616,
+          "activity_fraction": 0.005323259511876342,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.1122234076150084,
+          "activity_fraction": 0.006621310330083215,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0951530515882208,
+          "activity_fraction": 0.007828375354395081,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0780827311949719,
+          "activity_fraction": 0.008951014905345613,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0610124464184996,
+          "activity_fraction": 0.009998506046053991,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0524773173818212,
+          "activity_fraction": 0.010497941494324549,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0354070860005602,
+          "activity_fraction": 0.011459078303909395,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0183368901965,
+          "activity_fraction": 0.012388803565745479,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.0012667299534992,
+          "activity_fraction": 0.013313252277907507,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.9841966052563482,
+          "activity_fraction": 0.01426435504823488,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.9671265160895273,
+          "activity_fraction": 0.015274693337475827,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.9500564624370502,
+          "activity_fraction": 0.01636688680205344,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.9329864442833973,
+          "activity_fraction": 0.01755684120446569,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.9159164616122721,
+          "activity_fraction": 0.01885436041726611,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8988465144073788,
+          "activity_fraction": 0.020264794629491753,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8903115540996862,
+          "activity_fraction": 0.02101314747951297,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8732416600627899,
+          "activity_fraction": 0.022597073520025098,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8561718014500659,
+          "activity_fraction": 0.024299204301200236,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8391019782435108,
+          "activity_fraction": 0.026125824413792593,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8220321904254319,
+          "activity_fraction": 0.028084489311018056,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.8049624379767392,
+          "activity_fraction": 0.030185946274629782,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.7878927208783431,
+          "activity_fraction": 0.03244906094646927,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.770823039110533,
+          "activity_fraction": 0.034900350527835,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.7537533926531329,
+          "activity_fraction": 0.037572864982441175,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.7452185826592017,
+          "activity_fraction": 0.039003473920675776,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.7281489891275298,
+          "activity_fraction": 0.042075297252628305,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.7110794308530338,
+          "activity_fraction": 0.045447204881352246,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6940099078133649,
+          "activity_fraction": 0.04916814827007899,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6769404199852428,
+          "activity_fraction": 0.05327071114778656,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.659870967345853,
+          "activity_fraction": 0.0577703260236377,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6428015498706737,
+          "activity_fraction": 0.06267188510429368,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6257321675362697,
+          "activity_fraction": 0.06796784563209786,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6086628203174983,
+          "activity_fraction": 0.07363815318075537,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.6001281598689281,
+          "activity_fraction": 0.07660583106662287,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.5830588652777436,
+          "activity_fraction": 0.08278914568334321,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.565989605740577,
+          "activity_fraction": 0.08928006691277698,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.5489203812319752,
+          "activity_fraction": 0.09605129922698062,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.5318511917272613,
+          "activity_fraction": 0.10307630195838799,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.514782037201603,
+          "activity_fraction": 0.11033217265625223,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.49771291763032344,
+          "activity_fraction": 0.11780223615366063,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.48064383298843527,
+          "activity_fraction": 0.12547459269625147,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.4635747832521927,
+          "activity_fraction": 0.13334359423661113,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.45504027146604487,
+          "activity_fraction": 0.1373510220780399,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.4379712740423312,
+          "activity_fraction": 0.14550992897429366,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.42090231146497636,
+          "activity_fraction": 0.15385481110985205,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.4038333837099241,
+          "activity_fraction": 0.16237181845616222,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.38676449075513597,
+          "activity_fraction": 0.17103829246477362,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.3696956325784182,
+          "activity_fraction": 0.17982316893054714,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.3526268091577322,
+          "activity_fraction": 0.18868888346969517,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.3355580204727467,
+          "activity_fraction": 0.19759484526359875,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.31848926650250947,
+          "activity_fraction": 0.20650059026536874,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.3014205472279309,
+          "activity_fraction": 0.21536800190854383,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.2928862005954025,
+          "activity_fraction": 0.2197768792257231,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.27581753332869313,
+          "activity_fraction": 0.22852767555866055,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.25874890071216844,
+          "activity_fraction": 0.23716427628962627,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.24168030272875635,
+          "activity_fraction": 0.24567951378335956,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.2246117393621607,
+          "activity_fraction": 0.2540827923649156,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.2075432105977926,
+          "activity_fraction": 0.2623857500181668,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.19047471642121838,
+          "activity_fraction": 0.2706153626028055,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.17340625681909075,
+          "activity_fraction": 0.278810962274881,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.1563378317794592,
+          "activity_fraction": 0.28702247000174175,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.14780363221652484,
+          "activity_fraction": 0.2911526273885369,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.13073525899867652,
+          "activity_fraction": 0.2995031897289749,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.11366692031569849,
+          "activity_fraction": 0.30803906771624545,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.09659861615827871,
+          "activity_fraction": 0.3168264602085663,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.07953034651803632,
+          "activity_fraction": 0.3259531878071794,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.06246211138721127,
+          "activity_fraction": 0.33550876493342197,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.045393910758819524,
+          "activity_fraction": 0.34638699434125675,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.02832574462727383,
+          "activity_fraction": 0.39344825503404185,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.011257612987297357,
+          "activity_fraction": 0.4468435554243563,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -0.0027235601002119692,
+          "activity_fraction": 0.47139003527584283,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.01434451980970512,
+          "activity_fraction": 0.5162260398937911,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.03141256523705465,
+          "activity_fraction": 0.5554451837333428,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.04848057618354383,
+          "activity_fraction": 0.5891061789244059,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.06554855265025906,
+          "activity_fraction": 0.6172690762011576,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.08261649463751077,
+          "activity_fraction": 0.6400198358092676,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.09968440214405731,
+          "activity_fraction": 0.6574673680600815,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.1167522751691227,
+          "activity_fraction": 0.6697327949654828,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.13382011370991334,
+          "activity_fraction": 0.6769291152211238,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.142354020047949,
+          "activity_fraction": 0.6786553673702174,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.15942180685712823,
+          "activity_fraction": 0.6784096589975703,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.17648955917380701,
+          "activity_fraction": 0.6732920061469022,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.19355727699363978,
+          "activity_fraction": 0.6633991131597535,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.21062496031228084,
+          "activity_fraction": 0.6488638623447885,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.22769260912445335,
+          "activity_fraction": 0.6298491093966099,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.24476022342534615,
+          "activity_fraction": 0.6065483484089139,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.26182780320952714,
+          "activity_fraction": 0.5791819101158523,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.2788953484718747,
+          "activity_fraction": 0.5479888620923377,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.2959628592069568,
+          "activity_fraction": 0.5132124138962978,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.30449660162506614,
+          "activity_fraction": 0.4945536423476487,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.321564060559162,
+          "activity_fraction": 0.4548334628393713,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.3386314849532659,
+          "activity_fraction": 0.4120809859276691,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.3556988748011698,
+          "activity_fraction": 0.3664848730422783,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.37276623009868326,
+          "activity_fraction": 0.31824924675923,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.38983355084037435,
+          "activity_fraction": 0.2675875145130341,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.4069008370218973,
+          "activity_fraction": 0.21472972103778992,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.42396808863906177,
+          "activity_fraction": 0.159932249355267,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.44103530568783245,
+          "activity_fraction": 0.10345815787939602,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.44956890124819715,
+          "activity_fraction": 0.07467769014789509,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.4666360664396436,
+          "activity_fraction": 0.01619921470928182,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.48370319705726433,
+          "activity_fraction": 0.043293650710678165,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5007702931010592,
+          "activity_fraction": 0.10358704553285818,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5178373545725804,
+          "activity_fraction": 0.16451988941882534,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5349043814755526,
+          "activity_fraction": 0.22599623364435803,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5519713738152529,
+          "activity_fraction": 0.2879919409306751,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5690383315988201,
+          "activity_fraction": 0.3505262251874628,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.5861052548378946,
+          "activity_fraction": 0.413626109680869,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.594638703506836,
+          "activity_fraction": 0.44538939449573683,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6117055749528395,
+          "activity_fraction": 0.509311741732362,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6287724118914433,
+          "activity_fraction": 0.5736542333249608,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6458392143418923,
+          "activity_fraction": 0.6381842015507369,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6629059823271561,
+          "activity_fraction": 0.7025329068155478,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6799727158720672,
+          "activity_fraction": 0.7661937733385359,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.6970394150044064,
+          "activity_fraction": 0.8285362698335724,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.7141060797549035,
+          "activity_fraction": 0.8888262666766409,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.7311727101561506,
+          "activity_fraction": 0.9462583689113864,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": 0.7482393062433786,
+          "activity_fraction": 1.0,
+          "simulation": "0001"
+        },
+        {
+          "time_from_horizon_cycles": -1.4924891213297453,
+          "activity_fraction": 0.03842590716433551,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.4769633097108499,
+          "activity_fraction": 0.03806280821326133,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.4614374986943683,
+          "activity_fraction": 0.037677048929716496,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.445911688288703,
+          "activity_fraction": 0.03726770866133465,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.430385878502362,
+          "activity_fraction": 0.036835366968932526,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.414860069343818,
+          "activity_fraction": 0.036381260881378406,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3993342608217556,
+          "activity_fraction": 0.035906931543833516,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3838084529450358,
+          "activity_fraction": 0.03541380806749817,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3682826457228379,
+          "activity_fraction": 0.03490274935788716,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3527568391643754,
+          "activity_fraction": 0.034374788039745405,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3372310332789688,
+          "activity_fraction": 0.03383024808535319,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3217052280762558,
+          "activity_fraction": 0.03326934032837421,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.3061794235659445,
+          "activity_fraction": 0.032692493635333435,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.290653619758026,
+          "activity_fraction": 0.032100319968349035,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.2673649153854991,
+          "activity_fraction": 0.031182632703370728,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.251839113378468,
+          "activity_fraction": 0.030549969252728657,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.2363133121102627,
+          "activity_fraction": 0.029899661683855255,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.2207875115916504,
+          "activity_fraction": 0.029230334680912243,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.2052617118338578,
+          "activity_fraction": 0.028539388097118097,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.189735912847864,
+          "activity_fraction": 0.027824247699374506,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.1742101146456367,
+          "activity_fraction": 0.027082222296762302,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.158684317238579,
+          "activity_fraction": 0.026311463480560043,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.1431585206388704,
+          "activity_fraction": 0.02550714858612239,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.1276327248586553,
+          "activity_fraction": 0.02466709372226494,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.1121069299102193,
+          "activity_fraction": 0.02378884288893374,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0965811358065185,
+          "activity_fraction": 0.022867955410659196,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0810553425603326,
+          "activity_fraction": 0.02190314282909949,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0655295501850772,
+          "activity_fraction": 0.020893037658682223,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0422408632843576,
+          "activity_fraction": 0.01929000529634758,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0267150731456312,
+          "activity_fraction": 0.018159723776167733,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.0111892839262004,
+          "activity_fraction": 0.01697914116270857,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9956634956403632,
+          "activity_fraction": 0.015747055476545098,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9801377083030526,
+          "activity_fraction": 0.014461743726171622,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9646119219292727,
+          "activity_fraction": 0.01312047293455685,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9490861365343801,
+          "activity_fraction": 0.01172040796056292,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9335603521341204,
+          "activity_fraction": 0.010261649358727238,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9180345687443092,
+          "activity_fraction": 0.008745189400948405,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.9025087863815391,
+          "activity_fraction": 0.007174704209396971,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.8869830050624378,
+          "activity_fraction": 0.005552580501726778,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.8714572248040569,
+          "activity_fraction": 0.003879741480721195,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.8559314456236595,
+          "activity_fraction": 0.002157146938876784,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.8404056675389326,
+          "activity_fraction": 0.0003829315265055251,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.817117002506329,
+          "activity_fraction": 0.002376598095705594,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.8015912272410579,
+          "activity_fraction": 0.004285390244195634,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7860654531366977,
+          "activity_fraction": 0.006249482428910423,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7705396802125593,
+          "activity_fraction": 0.008270482548208887,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7550139084884475,
+          "activity_fraction": 0.010350518018552794,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7394881379847326,
+          "activity_fraction": 0.012490142910615388,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7239623687219962,
+          "activity_fraction": 0.01469107647924459,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.7084366007213848,
+          "activity_fraction": 0.016956797051713067,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6929108340045396,
+          "activity_fraction": 0.019290733632679538,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6773850685933483,
+          "activity_fraction": 0.021696689680129694,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6618593045103346,
+          "activity_fraction": 0.024177117438800837,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6463335417783395,
+          "activity_fraction": 0.02673697656396849,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6308077804709349,
+          "activity_fraction": 0.029382796007154606,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.6152820208242288,
+          "activity_fraction": 0.03212094740435187,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.591993384570451,
+          "activity_fraction": 0.03641380547556287,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.576467629256261,
+          "activity_fraction": 0.03940783370294612,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.5609418757288727,
+          "activity_fraction": 0.042511825740287924,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.5454161240200939,
+          "activity_fraction": 0.04573086153603966,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.5298903741621213,
+          "activity_fraction": 0.04906808003038495,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.5143646261882105,
+          "activity_fraction": 0.05252882445913224,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.49883888013189975,
+          "activity_fraction": 0.05611854059504138,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.48331313614061505,
+          "activity_fraction": 0.05984320544632637,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.4677873944514176,
+          "activity_fraction": 0.06370935281616996,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.4522616551059651,
+          "activity_fraction": 0.06772154057766856,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.4367359181468685,
+          "activity_fraction": 0.07188322862922245,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.42121018376427105,
+          "activity_fraction": 0.07619373651376572,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.40568445219311555,
+          "activity_fraction": 0.08065144628646433,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.39015872348497993,
+          "activity_fraction": 0.08525447057276997,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.3668701359065305,
+          "activity_fraction": 0.09243093268327239,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.3513444145886988,
+          "activity_fraction": 0.09739990371498372,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.3358186963228299,
+          "activity_fraction": 0.10252055812513425,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.3202929813867953,
+          "activity_fraction": 0.10779766112523353,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.3047672701915597,
+          "activity_fraction": 0.11323534347848989,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.28924156298639914,
+          "activity_fraction": 0.11883725079384988,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.2737158598458033,
+          "activity_fraction": 0.12460434528596466,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.2581901608458507,
+          "activity_fraction": 0.1305386283702698,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.24266446606374945,
+          "activity_fraction": 0.13664448521705289,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.22713877557843748,
+          "activity_fraction": 0.14292266835275097,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.21161308947008844,
+          "activity_fraction": 0.14937834037697145,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.19608740782042924,
+          "activity_fraction": 0.15601674414112804,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.18056173071266957,
+          "activity_fraction": 0.1628425773994181,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.16503605823125472,
+          "activity_fraction": 0.16986041228769622,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.1417475587198112,
+          "activity_fraction": 0.18076072662249099,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.1262218993895138,
+          "activity_fraction": 0.18828819418880413,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.11069624586772459,
+          "activity_fraction": 0.19603243546453242,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.0951705982626832,
+          "activity_fraction": 0.2039987930176074,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.07964495679934173,
+          "activity_fraction": 0.21219091940881113,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.06411932194610319,
+          "activity_fraction": 0.2206106557466837,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.04859369382797625,
+          "activity_fraction": 0.2292603102733848,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.03306807256919292,
+          "activity_fraction": 0.23814256407472803,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.017542458295644464,
+          "activity_fraction": 0.24726224173886127,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -0.002016851325236301,
+          "activity_fraction": 0.2566249005437871,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.013508747905119004,
+          "activity_fraction": 0.2662387569857718,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.02903433925487936,
+          "activity_fraction": 0.27610925064003017,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.04455992258173752,
+          "activity_fraction": 0.28624196824892256,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.0600854976814644,
+          "activity_fraction": 0.29663814010597744,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.08337384381086341,
+          "activity_fraction": 0.31272666991889236,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.09889939658353239,
+          "activity_fraction": 0.32378035997574234,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.11442494011982184,
+          "activity_fraction": 0.33509686603364325,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.12995047425941988,
+          "activity_fraction": 0.3466778772575753,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.14547599851132942,
+          "activity_fraction": 0.3585268951228498,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.161001512486968,
+          "activity_fraction": 0.37064794942222506,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.1765270160123967,
+          "activity_fraction": 0.38304264112922937,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.19205250891286463,
+          "activity_fraction": 0.3957094010888992,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.20757799101295007,
+          "activity_fraction": 0.4086447239140386,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.22310346207711007,
+          "activity_fraction": 0.42184097381400015,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.23862892151860515,
+          "activity_fraction": 0.46128130403453527,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.25415436907594446,
+          "activity_fraction": 0.519614180193579,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.26967980456315066,
+          "activity_fraction": 0.5631285570172988,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.2852052277943877,
+          "activity_fraction": 0.5924626727349678,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.30849333905041854,
+          "activity_fraction": 0.611329415878358,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.32401872947918126,
+          "activity_fraction": 0.6081521373370974,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.33954410573349225,
+          "activity_fraction": 0.5932038322583151,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.3550694668878073,
+          "activity_fraction": 0.567226863650464,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.370594811737157,
+          "activity_fraction": 0.5309889656120469,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.3861201396718903,
+          "activity_fraction": 0.4852795356851857,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.4016454504668432,
+          "activity_fraction": 0.430910450069204,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.4171707439005234,
+          "activity_fraction": 0.3687154817551063,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.43269601971931265,
+          "activity_fraction": 0.29955242301802143,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.44822127671767675,
+          "activity_fraction": 0.22430276733675933,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.4637465141733827,
+          "activity_fraction": 0.14387612057008994,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.4792717318677976,
+          "activity_fraction": 0.05920488935639846,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.49479692958952587,
+          "activity_fraction": 0.02874302319698538,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5103221071345503,
+          "activity_fraction": 0.11896746112650818,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5336098351946836,
+          "activity_fraction": 0.2563127446977555,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5491349614602383,
+          "activity_fraction": 0.34766646910124527,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5646600669029344,
+          "activity_fraction": 0.43758132661127147,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5801851513600239,
+          "activity_fraction": 0.524943544028915,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.5957102146792443,
+          "activity_fraction": 0.6086156730202044,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.6112352567198417,
+          "activity_fraction": 0.687434182644797,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.6267602773528533,
+          "activity_fraction": 0.7602110478681534,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.642285276461249,
+          "activity_fraction": 0.8257325048730861,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.657810253940955,
+          "activity_fraction": 0.8827530378663616,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.6733352084523556,
+          "activity_fraction": 0.9299964125680464,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.6888601387756541,
+          "activity_fraction": 0.9661694089976229,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.7043850448328657,
+          "activity_fraction": 0.9899517782060526,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.7199099265617862,
+          "activity_fraction": 1.0,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": 0.7431971851381922,
+          "activity_fraction": 0.9863273557347668,
+          "simulation": "1178"
+        },
+        {
+          "time_from_horizon_cycles": -1.4967051244399456,
+          "activity_fraction": 0.039791782277581886,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.4810884678901814,
+          "activity_fraction": 0.040298059024711556,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.4654718198264842,
+          "activity_fraction": 0.04077676246879018,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.4498551801688924,
+          "activity_fraction": 0.041228712164609,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.4342385488386284,
+          "activity_fraction": 0.04165563183925584,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.418621925757909,
+          "activity_fraction": 0.04206065558504874,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.4030053108501337,
+          "activity_fraction": 0.042448229099750635,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.3873887040399342,
+          "activity_fraction": 0.04281988378673287,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.371772105252604,
+          "activity_fraction": 0.04317637723691612,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.3561555144150463,
+          "activity_fraction": 0.04352041557727565,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.3353334055396429,
+          "activity_fraction": 0.043962639934621746,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.319716832971872,
+          "activity_fraction": 0.04427523498670322,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.304100268116831,
+          "activity_fraction": 0.04456802388618531,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2884837109054945,
+          "activity_fraction": 0.04483920219257741,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2728671612700684,
+          "activity_fraction": 0.04508856195912244,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2572506191436577,
+          "activity_fraction": 0.04531661351906519,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2416340844603144,
+          "activity_fraction": 0.045522577772555604,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2260175571551801,
+          "activity_fraction": 0.045701472429882345,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.2104010371644842,
+          "activity_fraction": 0.045846447212167935,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.1947845244255457,
+          "activity_fraction": 0.04594988418413935,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.1739625186142222,
+          "activity_fraction": 0.046011530324397,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.1583460225579187,
+          "activity_fraction": 0.045989481748638206,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.1427295335517889,
+          "activity_fraction": 0.04589929283490245,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.1271130515379328,
+          "activity_fraction": 0.0457354558586652,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.111496576459114,
+          "activity_fraction": 0.045498410345077234,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.0958801082590894,
+          "activity_fraction": 0.04519160566715977,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.0802636468828,
+          "activity_fraction": 0.04482130075555032,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.0646471922761336,
+          "activity_fraction": 0.04439542893086151,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.0490307443857352,
+          "activity_fraction": 0.04392413632745748,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.033414303159197,
+          "activity_fraction": 0.0434166970390502,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -1.012592391801045,
+          "activity_fraction": 0.04269525166929504,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.9969759659254019,
+          "activity_fraction": 0.042118410944452345,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.981359546546027,
+          "activity_fraction": 0.04150684069370403,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.965743133615152,
+          "activity_fraction": 0.04085525437652905,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.9501267270859078,
+          "activity_fraction": 0.04015750288736283,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.9345103269126566,
+          "activity_fraction": 0.03939722702591785,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.9188939330509438,
+          "activity_fraction": 0.038565578775375746,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.9032775454574985,
+          "activity_fraction": 0.03766141525930295,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.8876611640903282,
+          "activity_fraction": 0.036677930342033,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.8720447889083397,
+          "activity_fraction": 0.0356061118796981,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.8512229648851549,
+          "activity_fraction": 0.034020346791495404,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.8356066039820416,
+          "activity_fraction": 0.032704500448903294,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.8199902491349127,
+          "activity_fraction": 0.031274626262796465,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.80437390030722,
+          "activity_fraction": 0.029730354396121574,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7887575574629361,
+          "activity_fraction": 0.028076840969193873,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7731412205673589,
+          "activity_fraction": 0.026319644690049094,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7575248895868755,
+          "activity_fraction": 0.024465579765358604,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7419085644888669,
+          "activity_fraction": 0.02252691758109139,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7262922452425133,
+          "activity_fraction": 0.020517961083674936,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.7106759318183677,
+          "activity_fraction": 0.018451019789710178,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6898541895952628,
+          "activity_fraction": 0.015621330222150688,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6742378896518952,
+          "activity_fraction": 0.013454294023919209,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6586215954460403,
+          "activity_fraction": 0.01125095382807884,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6430053069566307,
+          "activity_fraction": 0.009014123974536596,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6273890241642559,
+          "activity_fraction": 0.006744823729520914,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.6117727470516362,
+          "activity_fraction": 0.004437458211714346,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5961564756028643,
+          "activity_fraction": 0.0020781948346970855,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5805402098038798,
+          "activity_fraction": 0.0003485037351168256,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5649239496416159,
+          "activity_fraction": 0.002845960706748127,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5493076951042373,
+          "activity_fraction": 0.005418135662841193,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5284860311195532,
+          "activity_fraction": 0.008964780554892427,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.5128697896675494,
+          "activity_fraction": 0.011707792332302413,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.49725355380909014,
+          "activity_fraction": 0.014533463615739622,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.48163732353745287,
+          "activity_fraction": 0.017466479442494996,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.46602109884719317,
+          "activity_fraction": 0.020527142837871788,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.4504048797344763,
+          "activity_fraction": 0.023708670614721167,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.4347886661972665,
+          "activity_fraction": 0.027003788772225396,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.419172458235848,
+          "activity_fraction": 0.030410740834740806,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.4035562558524457,
+          "activity_fraction": 0.033944242806899165,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.3879400590517466,
+          "activity_fraction": 0.03764273723185395,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.36711847201441056,
+          "activity_fraction": 0.04289538785127703,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.35150228827200647,
+          "activity_fraction": 0.047070579550942224,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.33588611014568187,
+          "activity_fraction": 0.05140329406712138,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.3202699376507757,
+          "activity_fraction": 0.05586244616456612,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.30465377080470996,
+          "activity_fraction": 0.06047389173961296,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.28903760962755776,
+          "activity_fraction": 0.0653186184634232,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.2734214541415227,
+          "activity_fraction": 0.0704877059136317,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.2578053043712228,
+          "activity_fraction": 0.07600130636851248,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.2421891603435484,
+          "activity_fraction": 0.08177672195431783,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.22657302208780453,
+          "activity_fraction": 0.08770904702379669,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.20575151344758097,
+          "activity_fraction": 0.09582169543819799,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.19013538878841452,
+          "activity_fraction": 0.10229808249168354,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.1745192700181141,
+          "activity_fraction": 0.10936567677687015,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.15890315717782025,
+          "activity_fraction": 0.1170821338677592,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.14328705031151395,
+          "activity_fraction": 0.1252609552756849,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.12767094946649027,
+          "activity_fraction": 0.13363235833503237,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.11205485469283735,
+          "activity_fraction": 0.1421291443226595,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.09643876604348395,
+          "activity_fraction": 0.15098529596855947,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.08082268357448337,
+          "activity_fraction": 0.16050700958643782,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.06520660734463482,
+          "activity_fraction": 0.17076731597255293,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.04438518218381838,
+          "activity_fraction": 0.18524878300207492,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.028769120756167204,
+          "activity_fraction": 0.19645211354871395,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": -0.01315306578317037,
+          "activity_fraction": 0.20802442603705174,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.002462982665152805,
+          "activity_fraction": 0.22025759878625337,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.01807902451627386,
+          "activity_fraction": 0.2333793018119403,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.03369505969577064,
+          "activity_fraction": 0.24741355077413665,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.04931108812694855,
+          "activity_fraction": 0.2622638713883719,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.06492710973150338,
+          "activity_fraction": 0.2779039200267409,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.08054312442947391,
+          "activity_fraction": 0.29434751958216454,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.09615913213962068,
+          "activity_fraction": 0.33563206853689204,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.11698046474124303,
+          "activity_fraction": 0.4142689137283302,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.1325964558264651,
+          "activity_fraction": 0.45066023514505227,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.14821243964899378,
+          "activity_fraction": 0.4686343564552194,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.1638284161272109,
+          "activity_fraction": 0.4689962131180897,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.17944438518058717,
+          "activity_fraction": 0.45258045576801437,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.19506034673081832,
+          "activity_fraction": 0.42029823845348974,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.21067630070225135,
+          "activity_fraction": 0.3731924289002163,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.22629224702259446,
+          "activity_fraction": 0.3124929601839398,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.24190818562400607,
+          "activity_fraction": 0.23993146727112066,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.2575241164438523,
+          "activity_fraction": 0.15773801191149694,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.2783453453354557,
+          "activity_fraction": 0.03680206843786401,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.2939612577904043,
+          "activity_fraction": 0.05977254396191865,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.3095771623038177,
+          "activity_fraction": 0.15923681276307441,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.32519305884634375,
+          "activity_fraction": 0.26007502490197837,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.34080894739833534,
+          "activity_fraction": 0.36007987705001,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.35642482795141284,
+          "activity_fraction": 0.45658693859110117,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.37204070050945837,
+          "activity_fraction": 0.5472101872516799,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.3876565650891364,
+          "activity_fraction": 0.6299165294740252,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.40327242172131417,
+          "activity_fraction": 0.703197775307397,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.41888827045115623,
+          "activity_fraction": 0.7658963064311869,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.43970938990464914,
+          "activity_fraction": 0.8304663259603867,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.4553252204561697,
+          "activity_fraction": 0.861411788857876,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.47094104336531134,
+          "activity_fraction": 0.8731175642739828,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.48655685874313914,
+          "activity_fraction": 0.8607587987792574,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5021726667156312,
+          "activity_fraction": 0.827853544812557,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5177884674234414,
+          "activity_fraction": 0.8309478446440477,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5334042610203853,
+          "activity_fraction": 0.8309522189249073,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5490200476726815,
+          "activity_fraction": 0.8270349308168423,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5646358275568698,
+          "activity_fraction": 0.8218519484061624,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.5802516008581533,
+          "activity_fraction": 0.8187287980274935,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6010726220183956,
+          "activity_fraction": 0.8232087855706108,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6166883807119641,
+          "activity_fraction": 0.8355847199247636,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6323041334742477,
+          "activity_fraction": 0.8556447770452531,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6479198805020014,
+          "activity_fraction": 0.881435569772309,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6635356219879084,
+          "activity_fraction": 0.9107680875489312,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6791513581180714,
+          "activity_fraction": 0.9405384949960007,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.6947670890691245,
+          "activity_fraction": 0.9671085827622616,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.7103828150061982,
+          "activity_fraction": 0.987616098366968,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.7259985360803615,
+          "activity_fraction": 0.9990089268425898,
+          "simulation": "0063"
+        },
+        {
+          "time_from_horizon_cycles": 0.7468194901793299,
+          "activity_fraction": 0.9930689571344263,
+          "simulation": "0063"
+        }
+      ],
+      "control_rows": [
+        {
+          "quantile": 0.0,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 7.35425898487238
+        },
+        {
+          "quantile": 0.0,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.01,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 10.891324347937163
+        },
+        {
+          "quantile": 0.01,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.02,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 11.604071983559965
+        },
+        {
+          "quantile": 0.02,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.03,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 12.112447871038283
+        },
+        {
+          "quantile": 0.03,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.04,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 12.438806813108979
+        },
+        {
+          "quantile": 0.04,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.05,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 12.725556618526092
+        },
+        {
+          "quantile": 0.05,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.06,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 12.999148901648548
+        },
+        {
+          "quantile": 0.06,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.07,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.129574463975567
+        },
+        {
+          "quantile": 0.07,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.08,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.274472007626201
+        },
+        {
+          "quantile": 0.08,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.09,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.581380918030389
+        },
+        {
+          "quantile": 0.09,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.1,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.7306920494883
+        },
+        {
+          "quantile": 0.1,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.11,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.821037963414216
+        },
+        {
+          "quantile": 0.11,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.12,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 13.97871652316125
+        },
+        {
+          "quantile": 0.12,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.13,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.171111662549174
+        },
+        {
+          "quantile": 0.13,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.14,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.34862411113651
+        },
+        {
+          "quantile": 0.14,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.15,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.432042625923359
+        },
+        {
+          "quantile": 0.15,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.16,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.517209906727462
+        },
+        {
+          "quantile": 0.16,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.17,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.63301601896645
+        },
+        {
+          "quantile": 0.17,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.18,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.745997366490768
+        },
+        {
+          "quantile": 0.18,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.19,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 14.940517884644805
+        },
+        {
+          "quantile": 0.19,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.2,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.004849655615295
+        },
+        {
+          "quantile": 0.2,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.21,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.154196957800607
+        },
+        {
+          "quantile": 0.21,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.22,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.251016928205628
+        },
+        {
+          "quantile": 0.22,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.23,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.346300847735895
+        },
+        {
+          "quantile": 0.23,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.24,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.46237369652373
+        },
+        {
+          "quantile": 0.24,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.25,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.61478484749088
+        },
+        {
+          "quantile": 0.25,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.26,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.749483536746999
+        },
+        {
+          "quantile": 0.26,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.27,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.843775215317189
+        },
+        {
+          "quantile": 0.27,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.28,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 15.933329950635741
+        },
+        {
+          "quantile": 0.28,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.29,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.093599545627647
+        },
+        {
+          "quantile": 0.29,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.3,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.220128450747502
+        },
+        {
+          "quantile": 0.3,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.31,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.33204590971905
+        },
+        {
+          "quantile": 0.31,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.32,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.460282489734396
+        },
+        {
+          "quantile": 0.32,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.33,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.561195241194092
+        },
+        {
+          "quantile": 0.33,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.34,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.63160351891355
+        },
+        {
+          "quantile": 0.34,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.35000000000000003,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.703618330682595
+        },
+        {
+          "quantile": 0.35000000000000003,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.36,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.805095277110965
+        },
+        {
+          "quantile": 0.36,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.37,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.880048973156725
+        },
+        {
+          "quantile": 0.37,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.38,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 16.95527035417866
+        },
+        {
+          "quantile": 0.38,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.39,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.108414303921894
+        },
+        {
+          "quantile": 0.39,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.4,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.19366309952658
+        },
+        {
+          "quantile": 0.4,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.41000000000000003,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.33847348193486
+        },
+        {
+          "quantile": 0.41000000000000003,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.42,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.493009927720525
+        },
+        {
+          "quantile": 0.42,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.43,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.619046896978414
+        },
+        {
+          "quantile": 0.43,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.44,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.720889410716634
+        },
+        {
+          "quantile": 0.44,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.45,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.81402958430663
+        },
+        {
+          "quantile": 0.45,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.46,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.88519452348168
+        },
+        {
+          "quantile": 0.46,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.47000000000000003,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 17.958693939111342
+        },
+        {
+          "quantile": 0.47000000000000003,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.48,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.03404714371444
+        },
+        {
+          "quantile": 0.48,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.49,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.151790878343263
+        },
+        {
+          "quantile": 0.49,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.5,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.34541703779598
+        },
+        {
+          "quantile": 0.5,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.51,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.454780631221205
+        },
+        {
+          "quantile": 0.51,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.52,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.540577911769113
+        },
+        {
+          "quantile": 0.52,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.53,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.673113495514265
+        },
+        {
+          "quantile": 0.53,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.54,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.75060383552142
+        },
+        {
+          "quantile": 0.54,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.55,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.857057698882887
+        },
+        {
+          "quantile": 0.55,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.56,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 18.967640844500764
+        },
+        {
+          "quantile": 0.56,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.5700000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.10182278011715
+        },
+        {
+          "quantile": 0.5700000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.58,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.23031096224981
+        },
+        {
+          "quantile": 0.58,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.59,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.35527778564775
+        },
+        {
+          "quantile": 0.59,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.6,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.47832502022386
+        },
+        {
+          "quantile": 0.6,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.61,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.637630078716466
+        },
+        {
+          "quantile": 0.61,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.62,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.75168464674131
+        },
+        {
+          "quantile": 0.62,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.63,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.859192432385754
+        },
+        {
+          "quantile": 0.63,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.64,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 19.931366373942904
+        },
+        {
+          "quantile": 0.64,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.65,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.038200104910224
+        },
+        {
+          "quantile": 0.65,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.66,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.150166376026046
+        },
+        {
+          "quantile": 0.66,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.67,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.23015544060255
+        },
+        {
+          "quantile": 0.67,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.68,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.299320083410297
+        },
+        {
+          "quantile": 0.68,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.6900000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.414941843082723
+        },
+        {
+          "quantile": 0.6900000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.7000000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.595342363653366
+        },
+        {
+          "quantile": 0.7000000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.71,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.771622840033256
+        },
+        {
+          "quantile": 0.71,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.72,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 20.932015198609243
+        },
+        {
+          "quantile": 0.72,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.73,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.098754579472203
+        },
+        {
+          "quantile": 0.73,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.74,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.177069157966027
+        },
+        {
+          "quantile": 0.74,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.75,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.29596359374343
+        },
+        {
+          "quantile": 0.75,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.76,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.402888928962163
+        },
+        {
+          "quantile": 0.76,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.77,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.539888043352367
+        },
+        {
+          "quantile": 0.77,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.78,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.661390958202052
+        },
+        {
+          "quantile": 0.78,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.79,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.732260734423605
+        },
+        {
+          "quantile": 0.79,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.8,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 21.982841292014708
+        },
+        {
+          "quantile": 0.8,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.81,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 22.16939193587453
+        },
+        {
+          "quantile": 0.81,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.8200000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 22.293087372133808
+        },
+        {
+          "quantile": 0.8200000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.8300000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 22.4238895158634
+        },
+        {
+          "quantile": 0.8300000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.84,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 22.71055578174757
+        },
+        {
+          "quantile": 0.84,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.85,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 22.85248641442879
+        },
+        {
+          "quantile": 0.85,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.86,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 23.006469515416974
+        },
+        {
+          "quantile": 0.86,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.87,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 23.268211438772294
+        },
+        {
+          "quantile": 0.87,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.88,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 23.557283441812547
+        },
+        {
+          "quantile": 0.88,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.89,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 23.736209889144707
+        },
+        {
+          "quantile": 0.89,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.9,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 23.965251976543467
+        },
+        {
+          "quantile": 0.9,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.91,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 24.145987293512114
+        },
+        {
+          "quantile": 0.91,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.92,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 24.69489769638812
+        },
+        {
+          "quantile": 0.92,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.93,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 25.34505563048608
+        },
+        {
+          "quantile": 0.93,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.9400000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 25.635591377016304
+        },
+        {
+          "quantile": 0.9400000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.9500000000000001,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 25.988153537671792
+        },
+        {
+          "quantile": 0.9500000000000001,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.96,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 26.27821253492998
+        },
+        {
+          "quantile": 0.96,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.97,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 27.066271501689467
+        },
+        {
+          "quantile": 0.97,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.98,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 28.18898319836491
+        },
+        {
+          "quantile": 0.98,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 0.99,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 29.411003007223492
+        },
+        {
+          "quantile": 0.99,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        },
+        {
+          "quantile": 1.0,
+          "series": "Chronology-shuffle mean deviation",
+          "half_cycle_deviation": 34.063418230119396
+        },
+        {
+          "quantile": 1.0,
+          "series": "Observed ordered mean deviation",
+          "half_cycle_deviation": 0.31359892073895407
+        }
+      ],
+      "exact_rows": [
+        {
+          "simulation": "0001",
+          "q": 1.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.15088791776379076,
+          "absolute_child_cycles": 0.15088791776379076,
+          "crest_cycles": 0.5434378819653461,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "0004",
+          "q": 1.0,
+          "chi_eff": -0.25,
+          "signed_child_cycles": -0.10444122831773804,
+          "absolute_child_cycles": 0.10444122831773804,
+          "crest_cycles": 0.30472923758227505,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "0176",
+          "q": 1.0,
+          "chi_eff": 0.96,
+          "signed_child_cycles": -0.19961440749820647,
+          "absolute_child_cycles": 0.19961440749820647,
+          "crest_cycles": 0.22792206734294573,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "0007",
+          "q": 1.5,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.17378898334298307,
+          "absolute_child_cycles": 0.17378898334298307,
+          "crest_cycles": 0.5590748426802428,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "1166",
+          "q": 2.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.1883894498006199,
+          "absolute_child_cycles": 0.1883894498006199,
+          "crest_cycles": 0.5696691519498139,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "1178",
+          "q": 3.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.30849333905041854,
+          "absolute_child_cycles": 0.30849333905041854,
+          "crest_cycles": 0.5025595208965793,
+          "broad_half_cycle_band": true
+        },
+        {
+          "simulation": "1906",
+          "q": 4.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.30385410853598366,
+          "absolute_child_cycles": 0.30385410853598366,
+          "crest_cycles": 0.5038777711310981,
+          "broad_half_cycle_band": true
+        },
+        {
+          "simulation": "0181",
+          "q": 6.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.08951718758407953,
+          "absolute_child_cycles": 0.08951718758407953,
+          "crest_cycles": 0.23377674919032349,
+          "broad_half_cycle_band": false
+        },
+        {
+          "simulation": "0063",
+          "q": 8.0,
+          "chi_eff": 0.0,
+          "signed_child_cycles": 0.15862309145559314,
+          "absolute_child_cycles": 0.15862309145559314,
+          "crest_cycles": 0.2939612577904043,
+          "broad_half_cycle_band": false
+        }
+      ],
+      "gate_rows": [
+        {
+          "order": 1,
+          "gate": "Median absolute offset",
+          "required": "0.40\u20130.60 cycles",
+          "observed": 0.17378898334298307,
+          "passed": false
+        },
+        {
+          "order": 2,
+          "gate": "Broad half-cycle band",
+          "required": "at least 6 of 9",
+          "observed": 2,
+          "passed": false
+        },
+        {
+          "order": 3,
+          "gate": "Within one parent cycle",
+          "required": "at least 7 of 9",
+          "observed": 9,
+          "passed": true
+        },
+        {
+          "order": 4,
+          "gate": "Chronology control",
+          "required": "empirical p \u2264 0.05",
+          "observed": 0.000999000999000999,
+          "passed": true
+        },
+        {
+          "order": 5,
+          "gate": "Power-crest baseline",
+          "required": "child median smaller",
+          "observed": 0.5025595208965793,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t439_score",
+      "label": "T439 frozen holdout score",
+      "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json')",
+        "description": "Loads the sealed T439 waveform predictions and scores them against first common-horizon times.",
+        "tables_used": [
+          "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_SCORED_RESULT.json",
+          "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_HOLDOUT_SCORES.csv"
+        ],
+        "filters": [
+          "Nine frozen non-precessing SXS holdouts",
+          "SXS:BBH:0305 excluded from gates"
+        ],
+        "metric_definitions": [
+          "Absolute offset is |child-landmark time minus first common-horizon time| divided by the frozen local parent cycle.",
+          "The power-crest baseline uses the same horizon and cycle denominator."
+        ]
+      }
+    },
+    {
+      "id": "t439_protocol",
+      "label": "T439 frozen protocol",
+      "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/T439_FROZEN_PROTOCOL.md"
+    },
+    {
+      "id": "t439_predictions",
+      "label": "Sealed waveform-only predictions",
+      "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json')",
+        "description": "Loads the sealed per-simulation waveform-only landmark inventory; time-series arrays are preserved in the referenced NPZ artifacts.",
+        "tables_used": [
+          "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_WAVEFORM_ONLY_PREDICTIONS.json"
+        ]
+      }
+    },
+    {
+      "id": "t439_validation",
+      "label": "Independent T439 validation",
+      "path": "analysis/irrationality_di_ara/T439_spacetime_child_halfcycle_confirmation/results/T439_VALIDATION.json"
+    },
+    {
+      "id": "sxs_catalog",
+      "label": "SXS public numerical-relativity catalog",
+      "href": "https://data.black-holes.org/waveforms/index.html"
+    },
+    {
+      "id": "sxs_catalog_paper",
+      "label": "SXS catalog paper",
+      "href": "https://arxiv.org/abs/1904.04831"
+    }
+  ]
+}

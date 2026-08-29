@@ -1,0 +1,89 @@
+{
+  "test_id": "T395-information3-parent-child-lock",
+  "protocol_sha256": "04D8CCA433751FC1ADDF20CA07B4CE71ACE233362EDDF9EF0DA7678E77511ED3",
+  "source_class": "frozen Standard-Model V-A truth crosswalk",
+  "seed": 394,
+  "n": 1000000,
+  "split": {
+    "calibration": 499615,
+    "validation": 200326,
+    "holdout": 300059
+  },
+  "coordinates": {
+    "parent": "P=x_e; N=2-P",
+    "child": "C=2*x_nu_e/N; anti_child=2-C",
+    "composed": "x_nu_e=N*C/2; x_anti_nu_mu=N*(2-C)/2"
+  },
+  "gate_A_exact_composition": {
+    "max_abs_nu_e_error": 1.1102230246251565e-16,
+    "max_abs_anti_nu_mu_error": 2.220446049250313e-16,
+    "max_abs_total_closure_error": 4.440892098500626e-16,
+    "pass": true,
+    "classification": "coordinate identity; not independent evidence"
+  },
+  "validation_model_selection": [
+    {
+      "parent_bins": 8,
+      "mean_nll": -0.027011786849950307,
+      "child_mae": 0.23373957119023908,
+      "direction_brier": 0.23107628050081394
+    },
+    {
+      "parent_bins": 16,
+      "mean_nll": -0.048696203201986324,
+      "child_mae": 0.23360218428576424,
+      "direction_brier": 0.23089532592303785
+    },
+    {
+      "parent_bins": 32,
+      "mean_nll": -0.05776856635599766,
+      "child_mae": 0.23357924385792933,
+      "direction_brier": 0.23087759058531063
+    },
+    {
+      "parent_bins": 64,
+      "mean_nll": -0.058583310806372996,
+      "child_mae": 0.23359349584826763,
+      "direction_brier": 0.230874089592624
+    }
+  ],
+  "selected_parent_bins": 64,
+  "holdout_models": {
+    "conditional_information_lock": {
+      "mean_nll": -0.06274454677981357,
+      "child_mae": 0.23307877845684277,
+      "direction_brier": 0.230187182637145,
+      "nu_e_absolute_mae": 0.14196222462609084,
+      "anti_nu_mu_absolute_mae": 0.14196222462609084
+    },
+    "unconditional_child": {
+      "mean_nll": 0.20155362217495099,
+      "child_mae": 0.23436964986983186,
+      "direction_brier": 0.23403420293097243,
+      "nu_e_absolute_mae": 0.14286492813850618,
+      "anti_nu_mu_absolute_mae": 0.14286492813850618
+    },
+    "parent_shuffled": {
+      "mean_nll": 0.20879926699888673,
+      "child_mae": 0.23441857578595968,
+      "direction_brier": 0.2341868098425146
+    },
+    "identity_reversed": {
+      "mean_nll": 0.2612708249085826
+    },
+    "phase_space": {
+      "mean_nll": 0.026073858173522483
+    },
+    "symmetric_point": {
+      "nu_e_absolute_mae": 0.15031155784303502,
+      "anti_nu_mu_absolute_mae": 0.15031155784303502
+    }
+  },
+  "primary_information_gain_nats_per_event": 0.2642981689547646,
+  "primary_gain_ci95": [
+    0.2625657401314294,
+    0.26603492578553617
+  ],
+  "primary_gate_pass": true,
+  "claim_boundary": "A positive gate is a parent-to-child statistical lock in the frozen truth model. It is not direct neutrino observation or individual pre-decay timing."
+}

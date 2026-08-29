@@ -1,0 +1,2796 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T397 - Spin phase maturity versus orientation",
+    "description": "Frozen ARA-first detector-level test of whether muon spin phase marks population release maturity or only daughter orientation.",
+    "generatedAt": "2026-08-16T23:40:12Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "field_gains",
+        "title": "Orientation generalises; parent totals do not",
+        "subtitle": "Held-out relative weighted-SSE gain by magnetic field. Positive is better than the no-phase baseline.",
+        "type": "line",
+        "dataset": "field_gains",
+        "sourceId": "t397_run_scores_field_gain",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "No phase gain",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "field_g",
+            "type": "quantitative",
+            "label": "Applied magnetic field (G)"
+          },
+          "y": {
+            "field": "gain_pct",
+            "type": "quantitative",
+            "label": "Held-out SSE gain (%)"
+          },
+          "color": {
+            "field": "channel",
+            "type": "nominal",
+            "label": "ARA cut"
+          },
+          "tooltip": [
+            {
+              "field": "run",
+              "type": "nominal",
+              "label": "EMU run"
+            },
+            {
+              "field": "gain_pct",
+              "type": "quantitative",
+              "label": "Gain (%)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "w_phase_profiles",
+        "title": "The strict common mode contains only a tiny phase-shaped residue",
+        "subtitle": "Phase-folded W residuals after the exponential parent envelope was removed; one turn equals 2*pi spin phase.",
+        "type": "line",
+        "dataset": "w_phase_profiles",
+        "sourceId": "t397_phase_profiles",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "Parent envelope",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "phase_turn",
+            "type": "quantitative",
+            "label": "Muon spin phase (turns)"
+          },
+          "y": {
+            "field": "residual_pct",
+            "type": "quantitative",
+            "label": "Fractional residual (%)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Field and trace"
+          },
+          "tooltip": [
+            {
+              "field": "field_g",
+              "type": "quantitative",
+              "label": "Field (G)"
+            },
+            {
+              "field": "residual_pct",
+              "type": "quantitative",
+              "label": "Residual (%)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cadence_controls",
+        "title": "The physical spin cadence is the strongest tested cadence",
+        "subtitle": "Pooled held-out gain for the physical frequency (1.0) and predeclared wrong-frequency multipliers.",
+        "type": "line",
+        "dataset": "cadence_controls",
+        "sourceId": "t397_cadence_controls",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1,
+            "label": "Physical cadence",
+            "color": "gold",
+            "lineStyle": "solid"
+          },
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "No phase gain",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "cadence_multiplier",
+            "type": "quantitative",
+            "label": "Frequency multiplier"
+          },
+          "y": {
+            "field": "gain_pct",
+            "type": "quantitative",
+            "label": "Held-out SSE gain (%)"
+          },
+          "color": {
+            "field": "channel",
+            "type": "nominal",
+            "label": "ARA cut"
+          },
+          "tooltip": [
+            {
+              "field": "status",
+              "type": "nominal",
+              "label": "Cadence class"
+            },
+            {
+              "field": "gain_pct",
+              "type": "quantitative",
+              "label": "Gain (%)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "phase_amplitudes",
+        "title": "Orientation is much larger than the common-mode residue",
+        "subtitle": "Fitted phase amplitude as a percentage of each parent envelope.",
+        "type": "line",
+        "dataset": "phase_amplitudes",
+        "sourceId": "t397_run_scores_phase_amplitude",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "encodings": {
+          "x": {
+            "field": "field_g",
+            "type": "quantitative",
+            "label": "Applied magnetic field (G)"
+          },
+          "y": {
+            "field": "amplitude_pct",
+            "type": "quantitative",
+            "label": "Phase amplitude / parent envelope (%)"
+          },
+          "color": {
+            "field": "channel",
+            "type": "nominal",
+            "label": "ARA cut"
+          },
+          "tooltip": [
+            {
+              "field": "run",
+              "type": "nominal",
+              "label": "EMU run"
+            },
+            {
+              "field": "amplitude_pct",
+              "type": "quantitative",
+              "label": "Amplitude (%)"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate_table",
+        "title": "Frozen decision gates",
+        "subtitle": "The orientation family passed; the stronger maturity family did not.",
+        "dataset": "gates",
+        "sourceId": "t397_gate_results",
+        "columns": [
+          {
+            "field": "family",
+            "label": "Claim family",
+            "type": "text"
+          },
+          {
+            "field": "gate",
+            "label": "Frozen gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "source_table",
+        "title": "Source partition",
+        "subtitle": "All runs used the same RAL Silver medium at 300 K and the same 96-detector EMU geometry.",
+        "dataset": "source_runs",
+        "sourceId": "t397_source_manifest",
+        "columns": [
+          {
+            "field": "run",
+            "label": "EMU run",
+            "type": "text"
+          },
+          {
+            "field": "split",
+            "label": "Split",
+            "type": "text"
+          },
+          {
+            "field": "field_g",
+            "label": "Field (G)",
+            "format": "number"
+          },
+          {
+            "field": "temperature_k",
+            "label": "Temperature (K)",
+            "format": "number"
+          },
+          {
+            "field": "detectors",
+            "label": "Detectors",
+            "format": "number"
+          },
+          {
+            "field": "native_bins",
+            "label": "Native bins",
+            "format": "number"
+          },
+          {
+            "field": "quality",
+            "label": "Source QA",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation_table",
+        "title": "Independent artifact validation",
+        "subtitle": "A separate script reconstructed principal numbers and gates from saved outputs.",
+        "dataset": "validation_checks",
+        "sourceId": "t397_validation_checks",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t397_run_scores_field_gain",
+        "label": "T397 held-out field gains",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RUN_SCORES.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT CAST(field_g AS DOUBLE) AS field_g, CASE channel WHEN 'O' THEN 'Orientation contrast O' WHEN 'U' THEN 'Raw total U' WHEN 'V' THEN 'Bank-balanced total V' ELSE 'Detector-normalized common mode W' END AS channel, 100 * CAST(gain AS DOUBLE) AS gain_pct, run FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RUN_SCORES.csv') WHERE score_family = 'primary' AND run <> 'POOLED' AND channel IN ('O','U','V','W') ORDER BY channel, field_g",
+          "description": "Primary per-field held-out weighted-SSE gains for the four frozen ARA cuts.",
+          "tables_used": [
+            "T397_RUN_SCORES.csv"
+          ],
+          "filters": [
+            "score_family = primary",
+            "exclude pooled rows"
+          ],
+          "metric_definitions": {
+            "gain_pct": "100 * (null_sse - phase_sse) / null_sse"
+          }
+        }
+      },
+      {
+        "id": "t397_run_scores_phase_amplitude",
+        "label": "T397 phase amplitude by field",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RUN_SCORES.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT CAST(field_g AS DOUBLE) AS field_g, CASE channel WHEN 'O' THEN 'Orientation contrast O' WHEN 'U' THEN 'Raw total U' WHEN 'V' THEN 'Bank-balanced total V' ELSE 'Detector-normalized common mode W' END AS channel, 100 * CAST(phase_amplitude_fraction AS DOUBLE) AS amplitude_pct, run FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RUN_SCORES.csv') WHERE score_family = 'primary' AND run <> 'POOLED' AND channel IN ('O','U','V','W') ORDER BY channel, field_g",
+          "description": "Fitted phase amplitude relative to each channel's parent envelope.",
+          "tables_used": [
+            "T397_RUN_SCORES.csv"
+          ],
+          "filters": [
+            "score_family = primary",
+            "exclude pooled rows"
+          ],
+          "metric_definitions": {
+            "amplitude_pct": "100 * phase_amplitude_fraction"
+          }
+        }
+      },
+      {
+        "id": "t397_phase_profiles",
+        "label": "T397 strict common-mode phase profiles",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT CAST(phase_turn AS DOUBLE) AS phase_turn, 100 * CAST(observed_fractional_residual AS DOUBLE) AS residual_pct, CAST(CAST(field_g AS INTEGER) AS VARCHAR) || ' G observed' AS series, CAST(field_g AS INTEGER) AS field_g FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv') UNION ALL SELECT CAST(phase_turn AS DOUBLE), 100 * CAST(predicted_fractional_residual AS DOUBLE), CAST(CAST(field_g AS INTEGER) AS VARCHAR) || ' G fitted phase', CAST(field_g AS INTEGER) FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_PHASE_PROFILES.csv') ORDER BY field_g, series, phase_turn",
+          "description": "Observed and odd-cycle-trained W phase profiles at each held-out field.",
+          "tables_used": [
+            "T397_PHASE_PROFILES.csv"
+          ],
+          "metric_definitions": {
+            "residual_pct": "100 * fractional residual after the exponential parent envelope"
+          }
+        }
+      },
+      {
+        "id": "t397_cadence_controls",
+        "label": "T397 cadence controls",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_WRONG_CADENCE_CONTROLS.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "WITH wrong AS (SELECT CAST(replace(control,'multiplier_','') AS DOUBLE) AS cadence_multiplier, 100 * CAST(gain AS DOUBLE) AS gain_pct, CASE channel WHEN 'O' THEN 'Orientation contrast O' ELSE 'Detector-normalized common mode W' END AS channel, 'wrong cadence' AS status FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_WRONG_CADENCE_CONTROLS.csv') WHERE run = 'POOLED' AND channel IN ('O','W') AND control LIKE 'multiplier_%'), physical AS (SELECT 1.0 AS cadence_multiplier, 100 * CAST(gain AS DOUBLE) AS gain_pct, CASE channel WHEN 'O' THEN 'Orientation contrast O' ELSE 'Detector-normalized common mode W' END AS channel, 'physical cadence' AS status FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RUN_SCORES.csv') WHERE score_family = 'primary' AND run = 'POOLED' AND channel IN ('O','W')) SELECT * FROM wrong UNION ALL SELECT * FROM physical ORDER BY channel, cadence_multiplier",
+          "description": "Pooled physical-cadence score compared with all predeclared wrong-frequency multipliers.",
+          "tables_used": [
+            "T397_WRONG_CADENCE_CONTROLS.csv",
+            "T397_RUN_SCORES.csv"
+          ],
+          "metric_definitions": {
+            "gain_pct": "100 * held-out relative weighted-SSE gain"
+          }
+        }
+      },
+      {
+        "id": "t397_gate_results",
+        "label": "T397 frozen gate results",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT * FROM (VALUES ('Orientation','Positive each field','PASS'),('Orientation','Bootstrap lower above zero','PASS'),('Orientation','Beats every wrong cadence','PASS'),('Maturity','Orientation recovered','PASS'),('Maturity','W positive each field','FAIL'),('Maturity','W bootstrap lower above zero','FAIL'),('Maturity','W beats wrong cadence 97.5','PASS'),('Maturity','W phase resultant at least 0.70','PASS'),('Maturity','W survives acceptance ladder','PASS'),('Maturity','Reverse W nonnegative each field','FAIL')) AS t(family, gate, status)",
+          "description": "Verbatim frozen gate outcomes saved in T397_RESULTS.json.",
+          "tables_used": [
+            "T397_RESULTS.json"
+          ]
+        }
+      },
+      {
+        "id": "t397_source_manifest",
+        "label": "T397 source partition",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_SOURCE_MANIFEST.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT run, split, CAST(field_g AS DOUBLE) AS field_g, CAST(temperature_k AS DOUBLE) AS temperature_k, CAST(detectors AS INTEGER) AS detectors, CAST(native_bins AS INTEGER) AS native_bins, CASE WHEN lower(CAST(all_quality_gates_pass AS VARCHAR)) = 'true' THEN 'PASS' ELSE 'FAIL' END AS quality FROM read_csv_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_SOURCE_MANIFEST.csv') ORDER BY CASE split WHEN 'calibration' THEN 1 WHEN 'validation' THEN 2 ELSE 3 END, run",
+          "description": "Run split, field, medium temperature, detector count, native bins and quality gate.",
+          "tables_used": [
+            "T397_SOURCE_MANIFEST.csv"
+          ]
+        }
+      },
+      {
+        "id": "t397_validation_checks",
+        "label": "T397 independent validation checks",
+        "path": "analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT initcap(replace(j.key, '_', ' ')) AS check, CASE WHEN CAST(j.value AS BOOLEAN) THEN 'PASS' ELSE 'FAIL' END AS status FROM read_json_auto('analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_VALIDATION.json', format='auto') AS t, json_each(to_json(t.checks)) AS j ORDER BY j.key",
+          "description": "Independent recomputation checks from the saved T397 validation artifact.",
+          "tables_used": [
+            "T397_VALIDATION.json"
+          ]
+        }
+      },
+      {
+        "id": "ral_silver_source",
+        "label": "ISIS experiment RB1620201",
+        "path": "https://doi.org/10.5286/ISIS.E.RB1620201"
+      },
+      {
+        "id": "emu_manual",
+        "label": "Official ISIS EMU user guide",
+        "path": "https://www.isis.stfc.ac.uk/Pages/emu-manual15431.pdf"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T397 - Spin phase: maturity clock or orientation organiser?\n\n## Technical summary\n\nThe frozen detector-level test returned **ORIENTATION SUPPORTED; MATURITY NOT SUPPORTED**.\n\n- The full 96-detector orientation field reduced held-out weighted squared error by **14.41%**, with hierarchical 95% interval **[2.46%, 25.20%]**.\n- The strict detector-normalized common mode reduced error by only **0.713%**, with interval **[-1.985%, 2.805%]**. Its fitted phase amplitude was **0.0631%** of the parent envelope.\n- The common-mode phase was coherent across fields (resultant length **0.935**) and beat the wrong-cadence envelope, but it changed sign at 400 G and failed the reverse-parity field-consistency gate.\n\nWithin this 300 K RAL Silver population, spin phase therefore behaves as a strong **orientation organiser** for the charged daughter. A weak population-wide release residue remains a lead, not a confirmed neutrino-creation clock.\n"
+      },
+      {
+        "id": "finding_one_text",
+        "type": "markdown",
+        "body": "## Key finding 1 - spin phase carries direction\n\nThe signed detector contrast O stayed positive at 63, 160 and 400 G and its hierarchical confidence interval excluded zero. This is the expected pattern if the spin waveform organises **where** the charged daughter appears. The percentage is an error-reduction score, not a decay probability or released-energy share."
+      },
+      {
+        "id": "field_gains_chart",
+        "type": "chart",
+        "chartId": "field_gains"
+      },
+      {
+        "id": "finding_two_text",
+        "type": "markdown",
+        "body": "## Key finding 2 - the population release residue is small and unstable\n\nAcceptance equalisation exposes a coherent W-phase trace, but its magnitude is about six hundredths of one percent of the parent envelope. The pooled gain is positive and cadence-specific, yet the field-level sign change and confidence interval spanning zero prevent promotion to a release clock. The visible trace is a candidate residual coupling, not evidence that an individual neutrino creation time was measured."
+      },
+      {
+        "id": "profiles_chart",
+        "type": "chart",
+        "chartId": "w_phase_profiles"
+      },
+      {
+        "id": "controls_text",
+        "type": "markdown",
+        "body": "## Key finding 3 - the physical cadence matters, but cadence alone is insufficient\n\nBoth the orientation field and strict common mode scored best at the independently known spin frequency. That rejects a generic smooth-wave explanation within the tested multiplier family. It does not repair the failed maturity gates: a cadence-specific residual can arise from imperfect detector cancellation or another weak coupling without being a population release clock."
+      },
+      {
+        "id": "cadence_chart",
+        "type": "chart",
+        "chartId": "cadence_controls"
+      },
+      {
+        "id": "amplitudes_chart",
+        "type": "chart",
+        "chartId": "phase_amplitudes"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "body": "## Scope, identities and ARA cuts\n\n- **Identity:** positive-muon populations in 300 K RAL Silver.\n- **Parent envelope:** exponential population survival over 0.25-8.00 microseconds.\n- **Orientation child O:** signed structure across all 96 detectors.\n- **Raw parent total U:** forward plus backward counts.\n- **Bank-balanced total V:** forward plus calibration-only alpha times backward.\n- **Strict common mode W:** all detectors normalized by calibration-only detector shares, then summed.\n- **ARA question:** does the muon waveform only orient the released charged child, or does a same-phase trace survive in an acceptance-balanced parent total strongly enough to act as a population maturity coordinate?\n\nThe archive contains population histograms, not named parent-daughter events. T397 therefore cannot directly observe either neutrino or predict one muon's exact decay time."
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Frozen method\n\nThe protocol fixed the muon lifetime at 2.1928 microseconds and the spin-frequency conversion at 0.01382 MHz/G. Calibration runs learned only detector acceptance and forward/backward balance. For each held-out field, odd spin cycles fitted cosine and sine coefficients and even cycles were scored; parity was reversed as a sensitivity test. The null was the same exponential parent without a phase term. Wrong-cadence multipliers, field permutation, the U-to-V-to-W acceptance ladder and a hierarchical cycle-plus-field bootstrap were frozen before final scoring."
+      },
+      {
+        "id": "gate_table_block",
+        "type": "table",
+        "tableId": "gate_table"
+      },
+      {
+        "id": "source_table_block",
+        "type": "table",
+        "tableId": "source_table"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Robustness and limitations\n\n**Supported:** spin phase generalises as a detector-orientation organiser across all three held-out fields.\n\n**Unresolved lead:** W is phase-coherent and narrowly cadence-specific, but its pooled 95% interval crosses zero, 400 G reverses sign and reverse parity fails field consistency.\n\n**Not supported:** a universal spin-phase maturity clock, an individual neutrino-creation timestamp, a restored 7.5-turn trigger or new particle physics.\n\nThe source was used in earlier muon analyses. T397 is a locked new question on an already inspected source, not a source-blind replication. The result may still contain detector-acceptance leakage. Independent validation classifies it as ready to share only with these caveats."
+      },
+      {
+        "id": "validation_table_block",
+        "type": "table",
+        "tableId": "validation_table"
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Next test\n\nFreeze the same O/U/V/W construction on an untouched same-medium EMU silver series, preserving 96-detector data and using calibration runs from that series only. The decisive replication asks whether W remains positive at each field, keeps a non-zero hierarchical interval and survives reverse parity while O again passes. If W fails, spin should remain classified as an orientation organiser. If W passes, the next rung is an event-linked archive with independently observed charged-daughter direction and a neutral-sensitive target.\n\n## Further questions\n\n- Is the small W residue physical or residual detector acceptance?\n- Why does its sign change at 400 G?\n- Does the phase angle transfer across independent silver campaigns?\n- Can event-linked data separate population maturity from individual decay timing?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-16T23:40:12Z",
+    "status": "ready",
+    "datasets": {
+      "field_gains": [
+        {
+          "field_g": 63.0,
+          "channel": "Orientation contrast O",
+          "gain_pct": 22.492605220214244,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Orientation contrast O",
+          "gain_pct": 15.242516218253021,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Orientation contrast O",
+          "gain_pct": 2.2472052984685686,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Raw total U",
+          "gain_pct": -2.25646943137483,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Raw total U",
+          "gain_pct": -0.7586973608573411,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Raw total U",
+          "gain_pct": -1.7230505493942783,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Bank-balanced total V",
+          "gain_pct": -2.6358754610802393,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Bank-balanced total V",
+          "gain_pct": -0.3521322252308057,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Bank-balanced total V",
+          "gain_pct": -1.5559377329276591,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Detector-normalized common mode W",
+          "gain_pct": 1.0357446023165684,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Detector-normalized common mode W",
+          "gain_pct": 1.9542660804084955,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Detector-normalized common mode W",
+          "gain_pct": -1.0621562387439498,
+          "run": "EMU00066580"
+        }
+      ],
+      "phase_amplitudes": [
+        {
+          "field_g": 63.0,
+          "channel": "Orientation contrast O",
+          "amplitude_pct": 0.2776982144264963,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Orientation contrast O",
+          "amplitude_pct": 0.22497203361046939,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Orientation contrast O",
+          "amplitude_pct": 0.09077510734930169,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Raw total U",
+          "amplitude_pct": 0.04110945634803493,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Raw total U",
+          "amplitude_pct": 0.08142766204778996,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Raw total U",
+          "amplitude_pct": 0.0977690012560286,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Bank-balanced total V",
+          "amplitude_pct": 0.04477427610577122,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Bank-balanced total V",
+          "amplitude_pct": 0.07306765160226045,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Bank-balanced total V",
+          "amplitude_pct": 0.09926116897749937,
+          "run": "EMU00066580"
+        },
+        {
+          "field_g": 63.0,
+          "channel": "Detector-normalized common mode W",
+          "amplitude_pct": 0.015463991858141098,
+          "run": "EMU00066578"
+        },
+        {
+          "field_g": 160.0,
+          "channel": "Detector-normalized common mode W",
+          "amplitude_pct": 0.07662648959219237,
+          "run": "EMU00066579"
+        },
+        {
+          "field_g": 400.0,
+          "channel": "Detector-normalized common mode W",
+          "amplitude_pct": 0.09720612667772875,
+          "run": "EMU00066580"
+        }
+      ],
+      "w_phase_profiles": [
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.12353878711555573,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.015221216097659451,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.047141395558892116,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.015443072637412882,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.29606853822511353,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.01538951002482313,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": -0.034990865424098024,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": 0.015075946029028056,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": -0.23622110164402133,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": 0.014502763628785833,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.15755849341160785,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.013713140413327149,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.06259280692562638,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.01264549394534653,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": 0.1308963009260085,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": 0.01139106348514185,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": -0.02801538567385786,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": 0.0099073890745598,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": 0.008161546152460028,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": 0.008288057535241025,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": -0.33026311994321544,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": 0.006432808643737016,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": -0.3343537000301488,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": 0.004512913207585675,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": -0.16478298336631816,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": 0.0025638000649622324,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": -0.1253820516953276,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": 0.0005223081100408162,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": -0.08126984209561046,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": -0.0014809767719299578,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": 0.03334660294582204,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": -0.0035041025476107617,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": -0.20253673752797866,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": -0.005424218280486649,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.0778883411913241,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.007290284455070818,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": -0.06826714227972032,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": -0.008995608091793363,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": -0.266832724456868,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": -0.01057668160618289,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": -0.19377871695404433,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": -0.011950298356045604,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": -0.19675961043523538,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": -0.013137985723703558,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": -0.13778814881604584,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": -0.014085726470400366,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": -0.13636279914798646,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": -0.014798612307557676,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": -0.16293634798364778,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": -0.015255505412610471,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.18802232113167158,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.015444713492740387,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.03595959301629299,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.015379436433165711,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": -0.3336011773492418,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": -0.01503199411735866,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": 0.05821834200402023,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": -0.014449024907529424,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": -0.20582106684923981,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": -0.013588749977318324,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": -0.028147084515589046,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": -0.012528052602310704,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": -0.11607700908017685,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": -0.011213926135140013,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": -0.1919072523325201,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": -0.009748216923330435,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": -0.1159207575452066,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": -0.008070324488268712,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": -0.173486712573286,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": -0.006300087786418807,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": 0.13851171511778482,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": -0.004373454018844848,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": -0.20275313868432904,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": -0.002420060228201298,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": -0.18724137292271714,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": -0.0003767716582686319,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.2604986568511225,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.001625883783187813,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.013790132955880175,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.0036457521767535943,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": -0.48763736168696187,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": 0.00556036026296623,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": -0.04397027232972502,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": 0.007418335865142597,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": 0.07001252280825197,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": 0.009113641836521438,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": -0.1016983571502707,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": 0.010682352085339299,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": -0.03918439801518493,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": 0.012042141253505691,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": -0.05975181107280832,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": 0.013214035015223722,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": 0.4654041114642873,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": 0.014140776745572332,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.2529165879381774,
+          "series": "63 G observed",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.014840802001928059,
+          "series": "63 G fitted phase",
+          "field_g": 63
+        },
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.21578225766437395,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.06262816050183453,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.19320231304925062,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.05426399659702708,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.13289070045012533,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.04656802533988301,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": -0.10073317161523428,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": 0.03908662963455943,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": 0.3821354151251125,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": 0.03200763625468191,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.08302269353802741,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.023012419463509463,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.21397391884840858,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.012247671550769768,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": -0.019254177469938443,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": 0.002395389224527261,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": 0.007345603858225613,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": -0.01005031286441399,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": 0.002278959195532748,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": -0.017909809171226317,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": 0.2621507438042303,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": -0.026712632004711877,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": -0.28532765440086066,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": -0.03528762861980313,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": 0.11205650923103894,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": -0.04475060995226668,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": 0.004639842739061911,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": -0.054880736819910576,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": 0.13178779979553468,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": -0.06015299162556944,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": -0.1782236983763336,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": -0.06531854169731902,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": 0.007863290721935241,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": -0.06931526842449343,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.09882250091100414,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.07301851615677028,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": 0.0704487611462392,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": -0.07582369598503469,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": -0.14660739612716286,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": -0.07662115158382447,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": -0.12085395054073451,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": -0.07609908099535316,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": 0.1493646523105478,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": -0.07475452133120455,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": 0.12998666131207037,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": -0.07203349620172005,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": -0.10442159083918938,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": -0.06747155926897817,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": 0.010795265227873187,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": -0.06225341106270831,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.12611519170676783,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.05427187478514121,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.5454773365486212,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.04758993519888724,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": -0.32581095526684395,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": -0.04085979313001101,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": 0.05601456347567592,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": -0.03255827004033935,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": 0.25949576824192006,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": -0.02218204571456282,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": -0.037284399822625415,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": -0.012584595610483121,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": 0.04737759556409026,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": -0.0002519502445744786,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": -0.0045371065156596235,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": 0.007807114551703039,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": -0.06291512771556436,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": 0.016815026010432575,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": 0.10937583424495967,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": 0.026000999321169914,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": 0.10823654756512084,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": 0.03606392348601128,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": 0.22490567168066544,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": 0.0471940170443673,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": 0.2949777235203196,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": 0.053280942366096685,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.2774631469843411,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.05934012822638633,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.19777373716744953,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.0644209500214667,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": -0.11660969185776764,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": 0.06928948247363943,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": -0.0725441709515612,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": 0.07375692565074615,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": -0.06136052478363951,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": 0.07592443084994026,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": 0.08317059099171191,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": 0.07660720942022545,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": 0.025346751602947745,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": 0.07630762227414697,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": -0.24699558120170073,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": 0.0748660472826125,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": 0.06806699021569161,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": 0.07167496098644272,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.3458084949928397,
+          "series": "160 G observed",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.06763908181530368,
+          "series": "160 G fitted phase",
+          "field_g": 160
+        },
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.020189899226649155,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.010416666666666666,
+          "residual_pct": 0.08205949390103577,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.06423787274961455,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.03125,
+          "residual_pct": 0.07252997204000973,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.14953521556208169,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.052083333333333336,
+          "residual_pct": 0.06381092176974065,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": 0.1500370117233998,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.07291666666666667,
+          "residual_pct": 0.05419437181389356,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": 0.3417027232557103,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.09375,
+          "residual_pct": 0.043744471248747946,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.29834395225911226,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.11458333333333333,
+          "residual_pct": 0.032245056641796256,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.00483438204996569,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.13541666666666666,
+          "residual_pct": 0.019446018135487766,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": 0.11176573377648323,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.15625,
+          "residual_pct": 0.00413307684838856,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": 0.17305941819377807,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.17708333333333334,
+          "residual_pct": -0.0082375379082138,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": 0.21267707980838985,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.19791666666666666,
+          "residual_pct": -0.018859243516785477,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": 0.29722614188700525,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.21875,
+          "residual_pct": -0.030564295729430445,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": -0.05778259478140896,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.23958333333333334,
+          "residual_pct": -0.041918080163488226,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": -0.0897543637018727,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.2604166666666667,
+          "residual_pct": -0.05260200814398351,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": -0.020658163131028952,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.28125,
+          "residual_pct": -0.06243582601752089,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": -0.007082312099568528,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3020833333333333,
+          "residual_pct": -0.07364921835871976,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": 0.2592267001050644,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3229166666666667,
+          "residual_pct": -0.07998419991301108,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": 0.17973264588566512,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.34375,
+          "residual_pct": -0.08620899493480969,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.1457566294560774,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3645833333333333,
+          "residual_pct": -0.09177294579055269,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": -0.07675873200349148,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.3854166666666667,
+          "residual_pct": -0.09589826077919579,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": 0.23095469592672963,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.40625,
+          "residual_pct": -0.09697558377196631,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": 0.2437838049330677,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4270833333333333,
+          "residual_pct": -0.09699878203473057,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": 0.02915414594600196,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4479166666666667,
+          "residual_pct": -0.09532231162036443,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": 0.014229842483685393,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.46875,
+          "residual_pct": -0.09197621060511027,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": 0.10959957244435004,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.4895833333333333,
+          "residual_pct": -0.08743266617280751,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": 0.23816231606227284,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5104166666666666,
+          "residual_pct": -0.07966399251832246,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.1540541942817864,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.53125,
+          "residual_pct": -0.07194579186614951,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.14899554338109497,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5520833333333334,
+          "residual_pct": -0.06428859988975769,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": 0.029392927188152587,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.5729166666666666,
+          "residual_pct": -0.05475883836851455,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": -0.08091557294510435,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.59375,
+          "residual_pct": -0.044195243913888356,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": 0.021155324631755127,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6145833333333334,
+          "residual_pct": -0.03296232089647257,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": 0.05922157282888882,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6354166666666666,
+          "residual_pct": -0.0212324937800592,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": 0.06180584012938196,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.65625,
+          "residual_pct": -0.005689357523749945,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": -0.1818227458251824,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6770833333333334,
+          "residual_pct": 0.004691069279075075,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": 0.06777036843758329,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.6979166666666666,
+          "residual_pct": 0.01668902477860704,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": 0.04732599212534659,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.71875,
+          "residual_pct": 0.030471493881669184,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": 0.1150023578254257,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.7395833333333334,
+          "residual_pct": 0.04576900549492833,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": 0.07490857922691908,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.7604166666666666,
+          "residual_pct": 0.053896404371993625,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": -0.029812599306200442,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.78125,
+          "residual_pct": 0.06354136107540997,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.11515542603916237,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8020833333333334,
+          "residual_pct": 0.07276873051084451,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.04504216398160726,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8229166666666666,
+          "residual_pct": 0.08062316476773185,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": 0.18074821029302254,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.84375,
+          "residual_pct": 0.08667846062597608,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": 0.13930052573779586,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8645833333333334,
+          "residual_pct": 0.09256154502282243,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": -0.1098395687108124,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.8854166666666666,
+          "residual_pct": 0.0955641278020229,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": -0.048575826075745406,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.90625,
+          "residual_pct": 0.09692427081653675,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": 0.09897510342173246,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9270833333333334,
+          "residual_pct": 0.09702996494974345,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": -0.037368654297513786,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9479166666666666,
+          "residual_pct": 0.09550751817852764,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": -0.09261049678438027,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.96875,
+          "residual_pct": 0.09257585643684671,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.33840155903693986,
+          "series": "400 G observed",
+          "field_g": 400
+        },
+        {
+          "phase_turn": 0.9895833333333334,
+          "residual_pct": 0.0882076211138002,
+          "series": "400 G fitted phase",
+          "field_g": 400
+        }
+      ],
+      "cadence_controls": [
+        {
+          "cadence_multiplier": 0.5,
+          "gain_pct": -0.19572532242237983,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.6,
+          "gain_pct": -3.4021156499517202,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.7,
+          "gain_pct": -1.843388457608519,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.8,
+          "gain_pct": 0.23281546685604004,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.9,
+          "gain_pct": 0.6039920083082628,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.0,
+          "gain_pct": 0.7127836520230857,
+          "channel": "Detector-normalized common mode W",
+          "status": "physical cadence"
+        },
+        {
+          "cadence_multiplier": 1.1,
+          "gain_pct": 0.4892660744432509,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.2,
+          "gain_pct": -1.3244145326216206,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.3,
+          "gain_pct": -1.0220806085790013,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.4,
+          "gain_pct": -1.5636900377641316,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.5,
+          "gain_pct": -3.3217333094580415,
+          "channel": "Detector-normalized common mode W",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.5,
+          "gain_pct": -186.14521687877087,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.6,
+          "gain_pct": -12.77592923437636,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.7,
+          "gain_pct": -4.759375039875979,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.8,
+          "gain_pct": -1.2443799386285814,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 0.9,
+          "gain_pct": 3.9043605945258686,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.0,
+          "gain_pct": 14.414728675619715,
+          "channel": "Orientation contrast O",
+          "status": "physical cadence"
+        },
+        {
+          "cadence_multiplier": 1.1,
+          "gain_pct": 1.8155326939566896,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.2,
+          "gain_pct": -1.2906953741678384,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.3,
+          "gain_pct": -3.693973670827866,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.4,
+          "gain_pct": -11.397827501041547,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        },
+        {
+          "cadence_multiplier": 1.5,
+          "gain_pct": -24.777201612635082,
+          "channel": "Orientation contrast O",
+          "status": "wrong cadence"
+        }
+      ],
+      "gates": [
+        {
+          "family": "Orientation",
+          "gate": "Positive each field",
+          "status": "PASS"
+        },
+        {
+          "family": "Orientation",
+          "gate": "Bootstrap lower above zero",
+          "status": "PASS"
+        },
+        {
+          "family": "Orientation",
+          "gate": "Beats every wrong cadence",
+          "status": "PASS"
+        },
+        {
+          "family": "Maturity",
+          "gate": "Orientation recovered",
+          "status": "PASS"
+        },
+        {
+          "family": "Maturity",
+          "gate": "W positive each field",
+          "status": "FAIL"
+        },
+        {
+          "family": "Maturity",
+          "gate": "W bootstrap lower above zero",
+          "status": "FAIL"
+        },
+        {
+          "family": "Maturity",
+          "gate": "W beats wrong cadence 97 5",
+          "status": "PASS"
+        },
+        {
+          "family": "Maturity",
+          "gate": "W phase resultant at least 0 70",
+          "status": "PASS"
+        },
+        {
+          "family": "Maturity",
+          "gate": "W survives acceptance ladder",
+          "status": "PASS"
+        },
+        {
+          "family": "Maturity",
+          "gate": "Reverse w nonnegative each field",
+          "status": "FAIL"
+        }
+      ],
+      "source_runs": [
+        {
+          "run": "EMU00066572",
+          "split": "calibration",
+          "field_g": 20.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066573",
+          "split": "calibration",
+          "field_g": 25.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066574",
+          "split": "calibration",
+          "field_g": 20.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066575",
+          "split": "calibration",
+          "field_g": 25.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066576",
+          "split": "calibration",
+          "field_g": 20.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066577",
+          "split": "calibration",
+          "field_g": 25.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066571",
+          "split": "validation",
+          "field_g": 25.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066584",
+          "split": "validation",
+          "field_g": 20.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066578",
+          "split": "holdout",
+          "field_g": 63.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066579",
+          "split": "holdout",
+          "field_g": 160.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        },
+        {
+          "run": "EMU00066580",
+          "split": "holdout",
+          "field_g": 400.0,
+          "temperature_k": 300.0,
+          "detectors": 96,
+          "native_bins": 2048,
+          "quality": "PASS"
+        }
+      ],
+      "validation_checks": [
+        {
+          "check": "Protocol hash",
+          "status": "PASS"
+        },
+        {
+          "check": "All source quality",
+          "status": "PASS"
+        },
+        {
+          "check": "Source rows 11",
+          "status": "PASS"
+        },
+        {
+          "check": "Pooled gain o",
+          "status": "PASS"
+        },
+        {
+          "check": "Bootstrap ci o",
+          "status": "PASS"
+        },
+        {
+          "check": "Pooled gain u",
+          "status": "PASS"
+        },
+        {
+          "check": "Bootstrap ci u",
+          "status": "PASS"
+        },
+        {
+          "check": "Pooled gain v",
+          "status": "PASS"
+        },
+        {
+          "check": "Bootstrap ci v",
+          "status": "PASS"
+        },
+        {
+          "check": "Pooled gain w",
+          "status": "PASS"
+        },
+        {
+          "check": "Bootstrap ci w",
+          "status": "PASS"
+        },
+        {
+          "check": "W phase resultant",
+          "status": "PASS"
+        },
+        {
+          "check": "Wrong w 97 5",
+          "status": "PASS"
+        },
+        {
+          "check": "Independent w raw recompute",
+          "status": "PASS"
+        },
+        {
+          "check": "Orientation gate recomputed",
+          "status": "PASS"
+        },
+        {
+          "check": "Maturity gate recomputed",
+          "status": "PASS"
+        },
+        {
+          "check": "Status matches gates",
+          "status": "PASS"
+        },
+        {
+          "check": "Claim boundary retained",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t397_results",
+      "query": {
+        "engine": "file",
+        "language": "json",
+        "description": "Saved frozen T397 results."
+      }
+    },
+    {
+      "id": "t397_validation",
+      "query": {
+        "engine": "file",
+        "language": "json",
+        "description": "Independent T397 result and gate validation."
+      }
+    },
+    {
+      "id": "t397_protocol",
+      "query": {
+        "engine": "file",
+        "language": "markdown",
+        "description": "Predeclared T397 protocol."
+      }
+    },
+    {
+      "id": "ral_silver_source",
+      "query": {
+        "engine": "web",
+        "language": "dataset",
+        "description": "Official ISIS experiment DOI and data record."
+      }
+    },
+    {
+      "id": "emu_manual",
+      "query": {
+        "engine": "web",
+        "language": "documentation",
+        "description": "Official EMU detector geometry and instrument guide."
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t397-spin-phase-maturity-vs-orientation",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

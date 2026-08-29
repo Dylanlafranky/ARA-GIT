@@ -1,0 +1,49 @@
+{
+  "test": "T406 grandchild quarter completion",
+  "date": "2026-08-18",
+  "protocol_sha256": "735e187bb2728164e44974b8f44cadf821b57a0116df483fa961e164b88c61f0",
+  "source_sha256": "ae2f0bf71a47fc532ce8e2c74b08741a8a01f9567d1c01861a58d9804997f433",
+  "verdict": "PARTICIPATION-DISPLACED QUARTER-COMPATIBLE",
+  "geometry": {
+    "parent_reference": 0.5,
+    "projected_grandchild_capacity": 0.25,
+    "pure_endpoint": 0.75
+  },
+  "primary": {
+    "salt": 400,
+    "observed_child_crest": 0.7063064837018814,
+    "displacement_from_pure_endpoint": -0.04369351629811857,
+    "completion_fraction": 0.8252259348075257,
+    "grandchild_ara": 1.6504518696150514
+  },
+  "replication": {
+    "valid_splits": 20,
+    "raw_in_0p75_plusminus_0p10": 7,
+    "raw_fraction_in_band": 0.35,
+    "median_observed_child_crest": 0.9482763242011505,
+    "observed_range": [
+      0.6403803483478678,
+      1.057813896977887
+    ]
+  },
+  "participation": {
+    "spearman_rho": 1.0,
+    "spearman_p": 0.0
+  },
+  "loo_prediction": {
+    "median_absolute_error": 0.0007278322655878688,
+    "mean_absolute_error": 0.0012287884266553196,
+    "maximum_absolute_error": 0.005623892299498889
+  },
+  "gates": {
+    "G1_primary_within_0p10_of_0p75": true,
+    "G2_at_least_75pct_splits_within_0p10": false,
+    "G3_positive_spearman": true,
+    "G4_loo_median_absolute_error_at_most_0p05": true
+  },
+  "boundaries": [
+    "The 0.75 endpoint is a frozen geometric proposal, not fitted from these split crests.",
+    "The participation relation is structurally mediated by the fitted equality boundary and is not independent physical confirmation.",
+    "A participation-predictable displacement cannot by itself prove that the underlying carrier is a projected grandchild of weight 0.25."
+  ]
+}

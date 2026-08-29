@@ -1,0 +1,76 @@
+{
+  "test": "T402",
+  "protocol_sha256": "0ec1547c2e172382b9ab1a94d0297dcff266e7469315872354deec6391b76413",
+  "identity": "COHERENT CsI delayed-child identity; C and AC source records; unchanged T400 local child rung",
+  "coordinate": "calibration-frozen local child ARA 0-2 between branch equality L and delayed-rate return R",
+  "fresh_salts": [
+    600,
+    999
+  ],
+  "splits": {
+    "requested": 400,
+    "valid": 326,
+    "invalid": 74,
+    "valid_fraction": 0.815,
+    "interpretation": "overlapping deterministic resampling stability probes, not independent experiments"
+  },
+  "raw_C_shape": {
+    "mean_lower_minus_saddle": 0.02774136192615822,
+    "lower_resampling_interval_95": [
+      0.022379780538941973,
+      0.03306009826545179
+    ],
+    "fraction_splits_lower_positive": 0.7484662576687117,
+    "mean_upper_minus_saddle": 0.003918892020430639,
+    "upper_resampling_interval_95": [
+      -0.0010311982007945326,
+      0.008807431379985773
+    ],
+    "fraction_splits_upper_positive": 0.5552147239263804
+  },
+  "source_difference": {
+    "mean_C_minus_AC_by_bin": [
+      -0.005809822550660981,
+      0.026608659374762034,
+      0.024628904006315983,
+      0.0072241156442643395,
+      -0.004315530739015069,
+      -0.0058326005352195565,
+      -0.010358177227542037,
+      -0.03214554797290489
+    ],
+    "lower_positive_bin_count": 3,
+    "upper_negative_bin_count": 4,
+    "fraction_splits_mean_lower_positive": 0.7361963190184049,
+    "fraction_splits_mean_upper_negative": 0.7361963190184049,
+    "fraction_splits_C_lower_contrast_exceeds_AC": 0.6288343558282209
+  },
+  "reflection": {
+    "primary_eight_bin_cosine": 0.20396946262098514,
+    "primary_normalized_error": 0.8925709108289002,
+    "exact_mapping_rank_of_24": 19,
+    "bin_sensitivities_passing_cosine_0_65": 0
+  },
+  "alignment": {
+    "unshifted_error": 0.8925709108289002,
+    "unshifted_rank_of_8": 3
+  },
+  "continuous_topology": {
+    "bandwidths_passing_registered_windows": 4,
+    "bandwidth_count": 4
+  },
+  "gates": {
+    "G1_raw_whole_shape": false,
+    "G2_source_specific_two_sided_difference": true,
+    "G3_continuous_topology": true,
+    "G4_exact_static_reflection": false,
+    "G5_correct_source_alignment": false
+  },
+  "verdict": "NO STABLE WHOLE SHAPE",
+  "boundaries": [
+    "The broad shape was selected after inspecting T401 and is a registered follow-up.",
+    "C and AC acquisition context can differ; subtraction does not automatically isolate one physical component.",
+    "Probability closure forces each differential to sum to zero; location, topology and controls carry the evidence.",
+    "This population/statistical relation does not directly show individual neutrino creation."
+  ]
+}

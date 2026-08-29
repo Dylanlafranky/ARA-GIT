@@ -1,0 +1,2091 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T404/T405 — Corrected child release and distortion-aware Di-ARA audit",
+    "description": "Coordinate correction, three-stage handover replication, parent-versus-child landmark displacement, and storage-flow Di-ARA reconstruction.",
+    "generatedAt": "2026-08-17T23:13:09.230970Z",
+    "cards": [],
+    "charts": [
+      {
+        "id": "coordinate_map",
+        "title": "T403 used the wrong inverse coordinate",
+        "subtitle": "The registered T400 child coordinate is cumulative parent ARA, not linear time",
+        "type": "line",
+        "dataset": "mapping",
+        "sourceId": "t404_mapping",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 0.7063064837018814,
+            "label": "True release crest 0.706",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Local child ARA (0-2)"
+          },
+          "y": {
+            "field": "time_us",
+            "type": "quantitative",
+            "label": "Source time (microseconds)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Mapping"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Map"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "Child ARA"
+            },
+            {
+              "field": "time_us",
+              "type": "quantitative",
+              "label": "Time (us)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "landmark_sequence",
+        "title": "The corrected relation is three-stage",
+        "subtitle": "All four registered detector bandwidths place release maximum between turn and handover",
+        "type": "line",
+        "dataset": "landmarks",
+        "sourceId": "t404_landmarks",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 1.0,
+            "label": "ARA ridge 1.0",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "stage_order",
+            "type": "quantitative",
+            "label": "Ordered stage: 1 turn, 2 release, 3 handover"
+          },
+          "y": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Local child ARA (0-2)"
+          },
+          "color": {
+            "field": "bandwidth",
+            "type": "nominal",
+            "label": "KDE bandwidth"
+          },
+          "tooltip": [
+            {
+              "field": "stage",
+              "type": "nominal",
+              "label": "Stage"
+            },
+            {
+              "field": "bandwidth",
+              "type": "nominal",
+              "label": "Bandwidth"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "ARA"
+            }
+          ]
+        }
+      },
+      {
+        "id": "octave_residual",
+        "title": "Detector-turn octave is broad, not an exact point estimate",
+        "subtitle": "Saved overlapping split bootstrap; exact doubling is residual 0",
+        "type": "bar",
+        "dataset": "bootstrap_hist",
+        "sourceId": "t404_bootstrap",
+        "palette": {
+          "kind": "single",
+          "name": "blue"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 0.0,
+            "label": "Exact octave",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "residual",
+            "type": "quantitative",
+            "label": "Handover - 2 x detector turn"
+          },
+          "y": {
+            "field": "count",
+            "type": "quantitative",
+            "label": "Bootstrap count"
+          },
+          "tooltip": [
+            {
+              "field": "residual",
+              "type": "quantitative",
+              "label": "Residual"
+            },
+            {
+              "field": "count",
+              "type": "quantitative",
+              "label": "Count"
+            }
+          ]
+        }
+      },
+      {
+        "id": "storage_flow_diara",
+        "title": "Candidate storage-flow Di-ARA",
+        "subtitle": "Derived remaining-parent storage versus delayed-child release flow; each axis mapped separately to 0-2",
+        "type": "line",
+        "dataset": "diara",
+        "sourceId": "t404_diara",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Storage ridge",
+            "color": "neutral",
+            "lineStyle": "solid"
+          },
+          {
+            "axis": "y",
+            "value": 1.0,
+            "label": "Flow ridge",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "storage_ara",
+            "type": "quantitative",
+            "label": "Remaining-parent storage (0-2)"
+          },
+          "y": {
+            "field": "release_flow_ara",
+            "type": "quantitative",
+            "label": "Delayed-child release flow (0-2)"
+          },
+          "color": {
+            "field": "stage",
+            "type": "nominal",
+            "label": "Ordered stage"
+          },
+          "tooltip": [
+            {
+              "field": "stage",
+              "type": "nominal",
+              "label": "Stage"
+            },
+            {
+              "field": "local_child_ara",
+              "type": "quantitative",
+              "label": "Local child ARA"
+            },
+            {
+              "field": "quadrant",
+              "type": "nominal",
+              "label": "Quadrant"
+            }
+          ]
+        }
+      },
+      {
+        "id": "corrected_profiles",
+        "title": "Detector and source components on the corrected map",
+        "subtitle": "Centred, max-absolute normalized shapes; amplitude and offset are intentionally removed",
+        "type": "line",
+        "dataset": "profiles",
+        "sourceId": "t404_profiles",
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "referenceLines": [
+          {
+            "axis": "x",
+            "value": 1.0,
+            "label": "Local ridge",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          },
+          {
+            "axis": "y",
+            "value": 0.0,
+            "label": "Within-window mean",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "ara_x",
+            "type": "quantitative",
+            "label": "Local child ARA (0-2)"
+          },
+          "y": {
+            "field": "centered_maxabs",
+            "type": "quantitative",
+            "label": "Centred component (max |value| = 1)"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal",
+            "label": "Component"
+          },
+          "tooltip": [
+            {
+              "field": "series",
+              "type": "nominal",
+              "label": "Component"
+            },
+            {
+              "field": "ara_x",
+              "type": "quantitative",
+              "label": "ARA"
+            },
+            {
+              "field": "time_us",
+              "type": "quantitative",
+              "label": "Time (us)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "distortion_relation",
+        "title": "Parent landmark, child expression",
+        "subtitle": "Greater prompt participation moves the equality boundary and displaces the child crest; rho = 1.000 inside T400",
+        "type": "line",
+        "dataset": "distortion",
+        "sourceId": "t405_distortion",
+        "palette": {
+          "kind": "single",
+          "name": "blue"
+        },
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0.5,
+            "label": "Pure parent landmark 0.5",
+            "color": "neutral",
+            "lineStyle": "dashed"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "prompt_participation",
+            "type": "quantitative",
+            "label": "Prompt participation q"
+          },
+          "y": {
+            "field": "child_crest",
+            "type": "quantitative",
+            "label": "Child release crest on local ARA"
+          },
+          "tooltip": [
+            {
+              "field": "salt",
+              "type": "quantitative",
+              "label": "Split salt"
+            },
+            {
+              "field": "prompt_participation",
+              "type": "quantitative",
+              "label": "Prompt participation"
+            },
+            {
+              "field": "child_crest",
+              "type": "quantitative",
+              "label": "Child crest"
+            },
+            {
+              "field": "child_displacement",
+              "type": "quantitative",
+              "label": "Displacement from 0.5"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "gates",
+        "title": "T404 interpretation gates",
+        "subtitle": "Exact source-release doubling fails; the three-stage relation survives",
+        "dataset": "gates",
+        "sourceId": "t404_results",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Result",
+            "type": "text"
+          },
+          {
+            "field": "meaning",
+            "label": "Meaning",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "evidence",
+        "title": "Evidence classes and boundaries",
+        "subtitle": "Measured, fitted, derived, robustness, and independent cuts are not interchangeable",
+        "dataset": "evidence",
+        "sourceId": "t404_results",
+        "columns": [
+          {
+            "field": "cut",
+            "label": "Cut",
+            "type": "text"
+          },
+          {
+            "field": "class",
+            "label": "Evidence class",
+            "type": "text"
+          },
+          {
+            "field": "boundary",
+            "label": "What it cannot establish",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "validation",
+        "title": "Independent saved-output validation",
+        "subtitle": "All coordinate, landmark, bootstrap, Di-ARA, and scope checks passed",
+        "dataset": "validation",
+        "sourceId": "t404_validation",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "t404_mapping",
+        "label": "T404 corrected coordinate mapping",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_COORDINATE_MAPPING.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Correct and linear source-time maps for the eight fixed local-child bins.",
+          "tables_used": [
+            "T404_COORDINATE_MAPPING.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_COORDINATE_MAPPING.csv')"
+        }
+      },
+      {
+        "id": "t404_landmarks",
+        "label": "T404 registered landmarks",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_REGISTERED_LANDMARKS.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Detector turn, child release maximum, handover, ratios, and octave residuals for four registered KDE bandwidths.",
+          "tables_used": [
+            "T404_REGISTERED_LANDMARKS.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_REGISTERED_LANDMARKS.csv')"
+        }
+      },
+      {
+        "id": "t404_bootstrap",
+        "label": "T404 bootstrap",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_BOOTSTRAP.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Five thousand resamples of the saved overlapping T402 split histograms.",
+          "tables_used": [
+            "T404_BOOTSTRAP.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_BOOTSTRAP.csv')"
+        }
+      },
+      {
+        "id": "t404_diara",
+        "label": "T404 storage-flow Di-ARA",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_STORAGE_FLOW_DIARA.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Candidate remaining-parent storage versus delayed-child release-flow phase portrait.",
+          "tables_used": [
+            "T404_STORAGE_FLOW_DIARA.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_STORAGE_FLOW_DIARA.csv')"
+        }
+      },
+      {
+        "id": "t404_profiles",
+        "label": "T404 corrected profiles",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_CORRECTED_PROFILES.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Detector and fitted-source curves sampled with the corrected inverse coordinate.",
+          "tables_used": [
+            "T404_CORRECTED_PROFILES.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_CORRECTED_PROFILES.csv')"
+        }
+      },
+      {
+        "id": "t404_results",
+        "label": "T404 saved results",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Verdict, gates, audit metrics, evidence boundaries, and individual-event requirements.",
+          "tables_used": [
+            "T404_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T404_corrected_child_release_diara/T404_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t404_validation",
+        "label": "T404 independent validation",
+        "path": "analysis/muon/T404_corrected_child_release_diara/T404_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent recomputation of mapping, landmark, bootstrap, Di-ARA, and scope checks.",
+          "tables_used": [
+            "T404_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T404_corrected_child_release_diara/T404_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "t404_protocol",
+        "label": "T404 frozen correction protocol",
+        "path": "analysis/muon/T404_CORRECTED_CHILD_RELEASE_DIARA_PROTOCOL_2026-08-18.md",
+        "query": {
+          "engine": "file",
+          "language": "md",
+          "description": "Pre-run audit identities, evaluations, gates, and claim boundary.",
+          "tables_used": [
+            "T404_CORRECTED_CHILD_RELEASE_DIARA_PROTOCOL_2026-08-18.md"
+          ]
+        }
+      },
+      {
+        "id": "t400_curve",
+        "label": "T400 local child curve",
+        "path": "analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Registered cumulative parent-ARA child coordinate and delayed-release curve.",
+          "tables_used": [
+            "T400_LOCAL_CHILD_CURVE.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv')"
+        }
+      },
+      {
+        "id": "t402_topology",
+        "label": "T402 KDE topology",
+        "path": "analysis/muon/T402_whole_shape_child_relation/T402_KDE_TOPOLOGY.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Four pre-existing detector topology bandwidths.",
+          "tables_used": [
+            "T402_KDE_TOPOLOGY.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T402_whole_shape_child_relation/T402_KDE_TOPOLOGY.csv')"
+        }
+      },
+      {
+        "id": "t378_holdout",
+        "label": "T378 independent holdout",
+        "path": "analysis/muon/T398_population_neutrino_wave_overlap/T398_T378_INDEPENDENT_HOLDOUT.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Independent coarse COHERENT timing chronology.",
+          "tables_used": [
+            "T398_T378_INDEPENDENT_HOLDOUT.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T398_population_neutrino_wave_overlap/T398_T378_INDEPENDENT_HOLDOUT.csv')"
+        }
+      },
+      {
+        "id": "t405_distortion",
+        "label": "T405 split participation",
+        "path": "analysis/muon/T405_parent_landmark_child_distortion/T405_SPLIT_PARTICIPATION.csv",
+        "query": {
+          "engine": "duckdb",
+          "language": "csv",
+          "description": "Prompt participation and child-crest displacement across the valid T400 repeated splits.",
+          "tables_used": [
+            "T405_SPLIT_PARTICIPATION.csv"
+          ],
+          "sql": "SELECT * FROM read_csv_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_SPLIT_PARTICIPATION.csv')"
+        }
+      },
+      {
+        "id": "t405_results",
+        "label": "T405 distortion-aware results",
+        "path": "analysis/muon/T405_parent_landmark_child_distortion/T405_RESULTS.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Participation relation, equality-boundary diagnostic, gates, and structural evidence boundary.",
+          "tables_used": [
+            "T405_RESULTS.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_RESULTS.json', format='auto')"
+        }
+      },
+      {
+        "id": "t405_validation",
+        "label": "T405 independent validation",
+        "path": "analysis/muon/T405_parent_landmark_child_distortion/T405_VALIDATION.json",
+        "query": {
+          "engine": "duckdb",
+          "language": "json",
+          "description": "Independent recomputation and structural-encoding audit.",
+          "tables_used": [
+            "T405_VALIDATION.json"
+          ],
+          "sql": "SELECT * FROM read_json_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_VALIDATION.json', format='auto')"
+        }
+      },
+      {
+        "id": "coherent_csi",
+        "label": "COHERENT CsI measurement",
+        "path": "https://arxiv.org/abs/2110.07730"
+      },
+      {
+        "id": "ral_silver",
+        "label": "RAL Silver muSR source",
+        "path": "https://doi.org/10.5286/ISIS.E.RB1620201"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "summary",
+        "type": "markdown",
+        "body": "# T404/T405 — Corrected child release and distortion-aware Di-ARA audit\n\n## Answer first\n\n**The three-stage handover replicates, and the difference between its parent landmark and child expression is participation-dependent.** T403's apparent source crest at `0.532` came from an invalid linear time conversion. The correct cumulative-ARA child crest is **0.706306**. Across every registered detector bandwidth, the order is parent/aggregate detector turn **0.50–0.57** → displaced child release maximum **0.706** → parent handover **0.936–1.051**. It survives **99.98%** of 5,000 saved-split bootstrap means. T405 then shows that child displacement from the pure `0.5` reference varies monotonically with branch participation (rho **1.000**).",
+        "sourceId": "t404_results"
+      },
+      {
+        "id": "coordinate_text",
+        "type": "markdown",
+        "body": "## The coordinate correction changes the interpretation\n\nT400 defines local position by cumulative parent ARA. T403 instead spread eight bins uniformly through time, moving the source crest by **0.174 ARA units** and creating the attractive `0.532 -> 1.032` appearance. The corrected inverse reproduces the saved T400 crest to machine precision; the maximum eight-bin time discrepancy is **0.075 microseconds**.",
+        "sourceId": "t404_mapping"
+      },
+      {
+        "id": "coordinate_chart",
+        "type": "chart",
+        "chartId": "coordinate_map"
+      },
+      {
+        "id": "sequence_text",
+        "type": "markdown",
+        "body": "## What remains is a stable three-stage sequence\n\nThe detector relation starts turning first, the inferred delayed child reaches its maximum next, and the detector relation crosses its local handover last. This is compatible with an early accumulation/turn signal, a release maximum, and a later coarse parent handover. It is not the same claim as saying the release maximum doubles into the ridge.",
+        "sourceId": "t404_landmarks"
+      },
+      {
+        "id": "sequence_chart",
+        "type": "chart",
+        "chartId": "landmark_sequence"
+      },
+      {
+        "id": "octave_text",
+        "type": "markdown",
+        "body": "## Pure landmarks and distorted child coordinates must stay separate\n\n- **Parent/aggregate turn to handover:** registered point ratios are **1.771–1.872**, close to but systematically short of the pure 2:1 limit. The broad binned bootstrap interval for the residual is **[-0.163, 0.246]**, so the pure limit remains statistically compatible at this coarse robustness level.\n- **Observed child release maximum to parent handover:** ratios are **1.325–1.488**. This rejects exact equality for the observed child time slice, not the existence of a parent `0.5` reference. T405 tests the missing condition—participation-dependent displacement—directly.\n\nThe bootstrap is broad because it resamples overlapping saved splits and uses an eight-bin estimator. The continuous point estimates should be read as a parent landmark plus a displaced child expression, not as every car being forced to travel at the speed limit.",
+        "sourceId": "t404_bootstrap"
+      },
+      {
+        "id": "octave_chart",
+        "type": "chart",
+        "chartId": "octave_residual"
+      },
+      {
+        "id": "diara_text",
+        "type": "markdown",
+        "body": "## The candidate Di-ARA is storage versus release flow\n\nThe cleanest two-axis reconstruction is **remaining-parent storage** against **delayed-child release flow**. In the frozen child window the path rises into maximum flow, turns, crosses the release/handover interval, and then exits while storage continues falling. The detector turn at **0.548**, release maximum at **0.706**, and detector handover at **0.994** label positions along this path.\n\nThis is a useful ARA phase portrait, not independent proof: remaining storage is the cumulative complement of the same fitted delayed template whose rate supplies the flow axis.",
+        "sourceId": "t404_diara"
+      },
+      {
+        "id": "diara_chart",
+        "type": "chart",
+        "chartId": "storage_flow_diara"
+      },
+      {
+        "id": "distortion_text",
+        "type": "markdown",
+        "body": "## T405 recovers the parent-versus-child rule\n\nAcross 20 valid T400 repeated splits, the parent reference remains `0.5` while child crests range **0.640–1.058**. Prompt participation and child displacement have Spearman rho **1.000**; every leave-one-out rho is also 1.000.\n\nThat perfection is structurally informative but not independent physics. Prompt participation moves the equality boundary used to construct the local child coordinate, and the three quantities have identical ranks. T405 therefore validates that the ARA cut translates one parent landmark into participation-dependent child positions. A different measurement is still required to show that a particular external physical energy channel causes the displacement.",
+        "sourceId": "t405_results"
+      },
+      {
+        "id": "distortion_chart",
+        "type": "chart",
+        "chartId": "distortion_relation"
+      },
+      {
+        "id": "profiles_text",
+        "type": "markdown",
+        "body": "## Corrected component shapes retain a broad relation\n\nSampling the fitted source components at the correct times still leaves a structured detector/source relation, but the source maximum no longer occupies the detector's early half-scale landmark. The measured detector diagnostic and fitted source wave must therefore remain distinct components of the candidate Di-ARA.",
+        "sourceId": "t404_profiles"
+      },
+      {
+        "id": "profiles_chart",
+        "type": "chart",
+        "chartId": "corrected_profiles"
+      },
+      {
+        "id": "individual",
+        "type": "markdown",
+        "body": "## Can we see this in one spinning muon?\n\n**Not with the current files.** T397 measures aggregate muSR asymmetry in silver. T398–T404 measure population source timing and detector distributions. None links one muon's spin trajectory and decay time to its charged daughter plus the two neutral children. The individual test is now well specified, but the data must contain event-linked spin/polarization, decay time, charged-daughter direction and energy, and neutral-sensitive timing or independently reconstructed missing momentum.",
+        "sourceId": "t404_results"
+      },
+      {
+        "id": "gates_table",
+        "type": "table",
+        "tableId": "gates"
+      },
+      {
+        "id": "evidence_table",
+        "type": "table",
+        "tableId": "evidence"
+      },
+      {
+        "id": "method",
+        "type": "markdown",
+        "body": "## Method and robustness\n\nThe protocol was written before executing T404, while explicitly recording that this is a post-discovery coordinate audit. The exact T400 cumulative coordinate was rebuilt from its saved primary fit and native prompt/delayed templates. All four pre-existing T402 KDE bandwidths were reported. Five thousand fixed-seed bootstrap means resampled the 326 saved split identities; a frozen quadratic crest and linear zero crossing produced binned landmarks. Seven non-zero circular shifts per bootstrap were controls. T378 was restricted to independent chronology because its twelve coarse bins cannot reproduce the nested coordinate.",
+        "sourceId": "t404_protocol"
+      },
+      {
+        "id": "validation_table",
+        "type": "table",
+        "tableId": "validation"
+      },
+      {
+        "id": "next",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nUse an event-level decay archive, or a detector with independently linked polarization and charged-daughter kinematics, to test whether independently measured participation predicts the child displacement before the outcome is read. Freeze the parent landmark, participation variable, child crest, and handover definitions in advance. Until that dataset is available, the supported result is a distortion-aware population geometry—not an individual neutrino birth predictor."
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-17T23:13:09.230970Z",
+    "status": "ready",
+    "datasets": {
+      "mapping": [
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.619729890024402,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.7214737274186941,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.823217564812986,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.9249614022072781,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 1.0267052396015701,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.1284490769958622,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.2301929143901542,
+          "series": "T403 linear assumption"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "Correct cumulative-ARA inverse"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3319367517844463,
+          "series": "T403 linear assumption"
+        }
+      ],
+      "landmarks": [
+        {
+          "stage_order": 1,
+          "stage": "Detector turn",
+          "ara_x": 0.5,
+          "bandwidth": "h=0.10"
+        },
+        {
+          "stage_order": 2,
+          "stage": "Child release maximum",
+          "ara_x": 0.7063064837018814,
+          "bandwidth": "h=0.10"
+        },
+        {
+          "stage_order": 3,
+          "stage": "Detector handover",
+          "ara_x": 0.935973037112907,
+          "bandwidth": "h=0.10"
+        },
+        {
+          "stage_order": 1,
+          "stage": "Detector turn",
+          "ara_x": 0.55,
+          "bandwidth": "h=0.15"
+        },
+        {
+          "stage_order": 2,
+          "stage": "Child release maximum",
+          "ara_x": 0.7063064837018814,
+          "bandwidth": "h=0.15"
+        },
+        {
+          "stage_order": 3,
+          "stage": "Detector handover",
+          "ara_x": 0.9740438491674014,
+          "bandwidth": "h=0.15"
+        },
+        {
+          "stage_order": 1,
+          "stage": "Detector turn",
+          "ara_x": 0.5700000000000001,
+          "bandwidth": "h=0.20"
+        },
+        {
+          "stage_order": 2,
+          "stage": "Child release maximum",
+          "ara_x": 0.7063064837018814,
+          "bandwidth": "h=0.20"
+        },
+        {
+          "stage_order": 3,
+          "stage": "Detector handover",
+          "ara_x": 1.0145786368161276,
+          "bandwidth": "h=0.20"
+        },
+        {
+          "stage_order": 1,
+          "stage": "Detector turn",
+          "ara_x": 0.5700000000000001,
+          "bandwidth": "h=0.25"
+        },
+        {
+          "stage_order": 2,
+          "stage": "Child release maximum",
+          "ara_x": 0.7063064837018814,
+          "bandwidth": "h=0.25"
+        },
+        {
+          "stage_order": 3,
+          "stage": "Detector handover",
+          "ara_x": 1.0511772613056234,
+          "bandwidth": "h=0.25"
+        }
+      ],
+      "bootstrap_hist": [
+        {
+          "residual": -0.5024032065945669,
+          "count": 1
+        },
+        {
+          "residual": -0.4771797738152753,
+          "count": 0
+        },
+        {
+          "residual": -0.4519563410359838,
+          "count": 0
+        },
+        {
+          "residual": -0.4267329082566923,
+          "count": 0
+        },
+        {
+          "residual": -0.4015094754774008,
+          "count": 0
+        },
+        {
+          "residual": -0.37628604269810917,
+          "count": 0
+        },
+        {
+          "residual": -0.35106260991881766,
+          "count": 0
+        },
+        {
+          "residual": -0.32583917713952615,
+          "count": 0
+        },
+        {
+          "residual": -0.30061574436023464,
+          "count": 3
+        },
+        {
+          "residual": -0.275392311580943,
+          "count": 3
+        },
+        {
+          "residual": -0.2501688788016515,
+          "count": 17
+        },
+        {
+          "residual": -0.22494544602236,
+          "count": 22
+        },
+        {
+          "residual": -0.19972201324306843,
+          "count": 33
+        },
+        {
+          "residual": -0.17449858046377692,
+          "count": 50
+        },
+        {
+          "residual": -0.14927514768448535,
+          "count": 98
+        },
+        {
+          "residual": -0.12405171490519383,
+          "count": 157
+        },
+        {
+          "residual": -0.09882828212590226,
+          "count": 224
+        },
+        {
+          "residual": -0.0736048493466107,
+          "count": 263
+        },
+        {
+          "residual": -0.04838141656731919,
+          "count": 309
+        },
+        {
+          "residual": -0.023157983788027622,
+          "count": 327
+        },
+        {
+          "residual": 0.002065448991263945,
+          "count": 362
+        },
+        {
+          "residual": 0.027288881770555454,
+          "count": 418
+        },
+        {
+          "residual": 0.052512314549846964,
+          "count": 471
+        },
+        {
+          "residual": 0.07773574732913847,
+          "count": 500
+        },
+        {
+          "residual": 0.1029591801084301,
+          "count": 479
+        },
+        {
+          "residual": 0.1281826128877216,
+          "count": 398
+        },
+        {
+          "residual": 0.1534060456670131,
+          "count": 295
+        },
+        {
+          "residual": 0.17862947844630472,
+          "count": 221
+        },
+        {
+          "residual": 0.20385291122559623,
+          "count": 111
+        },
+        {
+          "residual": 0.22907634400488774,
+          "count": 95
+        },
+        {
+          "residual": 0.25429977678417925,
+          "count": 60
+        },
+        {
+          "residual": 0.2795232095634709,
+          "count": 21
+        },
+        {
+          "residual": 0.3047466423427624,
+          "count": 18
+        },
+        {
+          "residual": 0.3299700751220539,
+          "count": 6
+        },
+        {
+          "residual": 0.3551935079013455,
+          "count": 8
+        },
+        {
+          "residual": 0.38041694068063703,
+          "count": 8
+        },
+        {
+          "residual": 0.40564037345992854,
+          "count": 8
+        },
+        {
+          "residual": 0.43086380623922005,
+          "count": 5
+        },
+        {
+          "residual": 0.45608723901851167,
+          "count": 3
+        },
+        {
+          "residual": 0.4813106717978032,
+          "count": 3
+        },
+        {
+          "residual": 0.5065341045770948,
+          "count": 1
+        },
+        {
+          "residual": 0.5317575373563863,
+          "count": 2
+        }
+      ],
+      "diara": [
+        {
+          "storage_ara": 2.0,
+          "release_flow_ara": 0.0257788273912691,
+          "local_child_ara": 0.006031574754375567,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-low"
+        },
+        {
+          "storage_ara": 1.945291699267009,
+          "release_flow_ara": 0.499714816535773,
+          "local_child_ara": 0.09758519568173804,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-low"
+        },
+        {
+          "storage_ara": 1.8870014580092036,
+          "release_flow_ara": 0.9108345485484778,
+          "local_child_ara": 0.18778082127394818,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-low"
+        },
+        {
+          "storage_ara": 1.825666547346414,
+          "release_flow_ara": 1.2530680741398712,
+          "local_child_ara": 0.2756191603396921,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.7618557157713086,
+          "release_flow_ara": 1.524707066183204,
+          "local_child_ara": 0.3603622576805848,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.696134062831233,
+          "release_flow_ara": 1.7279834532955793,
+          "local_child_ara": 0.44164029365718555,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.6290333575699576,
+          "release_flow_ara": 1.8686671245923918,
+          "local_child_ara": 0.5193650286131292,
+          "stage": "pre-turn storage",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.5610291715325566,
+          "release_flow_ara": 1.9545487382580977,
+          "local_child_ara": 0.5936875519379903,
+          "stage": "turn to release",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.4925281089737148,
+          "release_flow_ara": 1.9945897592005037,
+          "local_child_ara": 0.6649150424596317,
+          "stage": "turn to release",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.4238668261635299,
+          "release_flow_ara": 1.996799517525364,
+          "local_child_ara": 0.7333747547702347,
+          "stage": "release to handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.355322025022293,
+          "release_flow_ara": 1.9682168173501475,
+          "local_child_ara": 0.7993111731026246,
+          "stage": "release to handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.287114996840262,
+          "release_flow_ara": 1.9155272191569281,
+          "local_child_ara": 0.8630188788122467,
+          "stage": "release to handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.2194144931887998,
+          "release_flow_ara": 1.8448725769173462,
+          "local_child_ara": 0.9248392409223158,
+          "stage": "release to handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.1523432813890395,
+          "release_flow_ara": 1.7616256991765864,
+          "local_child_ara": 0.9850540125986191,
+          "stage": "release to handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.0859820435817427,
+          "release_flow_ara": 1.6707194832109582,
+          "local_child_ara": 1.043969657976561,
+          "stage": "post-handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 1.0203759867853126,
+          "release_flow_ara": 1.5759701866612204,
+          "local_child_ara": 1.1018617715473387,
+          "stage": "post-handover",
+          "quadrant": "storage-high / flow-high"
+        },
+        {
+          "storage_ara": 0.9555449837169138,
+          "release_flow_ara": 1.4798029109066402,
+          "local_child_ara": 1.1588939334425625,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.8914951576276559,
+          "release_flow_ara": 1.3833432286323804,
+          "local_child_ara": 1.215144186626502,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.8282280300852857,
+          "release_flow_ara": 1.2867615023515386,
+          "local_child_ara": 1.2706257268394276,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.7657417835796118,
+          "release_flow_ara": 1.1906356619244256,
+          "local_child_ara": 1.3253661561509469,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.7040317120497204,
+          "release_flow_ara": 1.0952563046557908,
+          "local_child_ara": 1.3794049523058294,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.6430907068205558,
+          "release_flow_ara": 1.0008555102341858,
+          "local_child_ara": 1.4327619458492453,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-high"
+        },
+        {
+          "storage_ara": 0.5829103225093367,
+          "release_flow_ara": 0.9075188955535727,
+          "local_child_ara": 1.4854497494328025,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.5234820531015758,
+          "release_flow_ara": 0.8152325891952625,
+          "local_child_ara": 1.5374777925201228,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.46479714060664834,
+          "release_flow_ara": 0.7240570771108472,
+          "local_child_ara": 1.5888545357932418,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.4068465066076506,
+          "release_flow_ara": 0.6339873535320405,
+          "local_child_ara": 1.6395882237558035,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.3496213044211889,
+          "release_flow_ara": 0.5450046590878882,
+          "local_child_ara": 1.6896867081733962,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.2931129804212982,
+          "release_flow_ara": 0.45704361732514787,
+          "local_child_ara": 1.739157483935777,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.2373133345419156,
+          "release_flow_ara": 0.37010231461972076,
+          "local_child_ara": 1.7880077524305134,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.1822139259962718,
+          "release_flow_ara": 0.28420574133891163,
+          "local_child_ara": 1.8362449303077637,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.12780640442163083,
+          "release_flow_ara": 0.1993418838993257,
+          "local_child_ara": 1.883876322350025,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.07408221686631229,
+          "release_flow_ara": 0.11554098609660088,
+          "local_child_ara": 1.9309094469470993,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.021032764930471272,
+          "release_flow_ara": 0.03280151053192112,
+          "local_child_ara": 1.977351848710198,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        },
+        {
+          "storage_ara": 0.0,
+          "release_flow_ara": 0.0,
+          "local_child_ara": 1.9957650815017505,
+          "stage": "post-handover",
+          "quadrant": "storage-low / flow-low"
+        }
+      ],
+      "profiles": [
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "detector C-AC",
+          "centered_maxabs": -0.1807349047388443,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "detector C-AC",
+          "centered_maxabs": 0.827755662998503,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "detector C-AC",
+          "centered_maxabs": 0.7661684295155081,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "detector C-AC",
+          "centered_maxabs": 0.22473145115937807,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "detector C-AC",
+          "centered_maxabs": -0.13424971764838234,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "detector C-AC",
+          "centered_maxabs": -0.18144349382800215,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "detector C-AC",
+          "centered_maxabs": -0.32222742745816046,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "detector C-AC",
+          "centered_maxabs": -1.0,
+          "evidence_class": "measured detector diagnostic"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "delayed total release",
+          "centered_maxabs": -0.5778270468617258,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "delayed total release",
+          "centered_maxabs": 0.37253253195576513,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "delayed total release",
+          "centered_maxabs": 0.7908790307306908,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "delayed total release",
+          "centered_maxabs": 0.715918128752884,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "delayed total release",
+          "centered_maxabs": 0.34387528308374543,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "delayed total release",
+          "centered_maxabs": -0.0974562778000232,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "delayed total release",
+          "centered_maxabs": -0.5479216498613373,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "delayed total release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "nu_e release",
+          "centered_maxabs": -0.6602201603197619,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "nu_e release",
+          "centered_maxabs": 0.34692677251250614,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "nu_e release",
+          "centered_maxabs": 0.8050538757405763,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "nu_e release",
+          "centered_maxabs": 0.747134829274688,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "nu_e release",
+          "centered_maxabs": 0.37311387096545995,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "nu_e release",
+          "centered_maxabs": -0.07588179055594384,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "nu_e release",
+          "centered_maxabs": -0.5361273976175247,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "nu_e release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.5272153903545012,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.3882613938370288,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.7821718420279751,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.6967426314596147,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": 0.3259148819711028,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.11070884821384976,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -0.5551665107273783,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "anti_nu_mu release",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.125,
+          "time_us": 0.6030474991625504,
+          "series": "remaining muon",
+          "centered_maxabs": 0.8732555309478681,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.375,
+          "time_us": 0.6749251576353916,
+          "series": "remaining muon",
+          "centered_maxabs": 0.6873114398058772,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.625,
+          "time_us": 0.7563670325535641,
+          "series": "remaining muon",
+          "centered_maxabs": 0.45808364978674604,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 0.875,
+          "time_us": 0.8502903437757583,
+          "series": "remaining muon",
+          "centered_maxabs": 0.18894162577670287,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.125,
+          "time_us": 0.9555998961998557,
+          "series": "remaining muon",
+          "centered_maxabs": -0.10407652045020349,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.375,
+          "time_us": 1.0684517050774953,
+          "series": "remaining muon",
+          "centered_maxabs": -0.40234799650918623,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.625,
+          "time_us": 1.188280609315914,
+          "series": "remaining muon",
+          "centered_maxabs": -0.7011677293578095,
+          "evidence_class": "fitted or derived source relation"
+        },
+        {
+          "ara_x": 1.875,
+          "time_us": 1.3158174941535077,
+          "series": "remaining muon",
+          "centered_maxabs": -1.0,
+          "evidence_class": "fitted or derived source relation"
+        }
+      ],
+      "distortion": [
+        {
+          "prompt_participation": 0.10975686718504116,
+          "child_crest": 0.6403803483478678,
+          "child_displacement": 0.14038034834786783,
+          "salt": 417
+        },
+        {
+          "prompt_participation": 0.1269967369896827,
+          "child_crest": 0.7063064837018814,
+          "child_displacement": 0.20630648370188143,
+          "salt": 400
+        },
+        {
+          "prompt_participation": 0.13502312361761717,
+          "child_crest": 0.7348073513482943,
+          "child_displacement": 0.23480735134829434,
+          "salt": 416
+        },
+        {
+          "prompt_participation": 0.14175018328779926,
+          "child_crest": 0.7575309752079844,
+          "child_displacement": 0.2575309752079844,
+          "salt": 419
+        },
+        {
+          "prompt_participation": 0.1556578710163787,
+          "child_crest": 0.8017252998865315,
+          "child_displacement": 0.3017252998865315,
+          "salt": 408
+        },
+        {
+          "prompt_participation": 0.15607132344840757,
+          "child_crest": 0.8030057444782822,
+          "child_displacement": 0.3030057444782822,
+          "salt": 410
+        },
+        {
+          "prompt_participation": 0.16687901810426364,
+          "child_crest": 0.834411440220271,
+          "child_displacement": 0.33441144022027103,
+          "salt": 403
+        },
+        {
+          "prompt_participation": 0.172463713732056,
+          "child_crest": 0.8496564971154434,
+          "child_displacement": 0.34965649711544344,
+          "salt": 401
+        },
+        {
+          "prompt_participation": 0.19907526363979505,
+          "child_crest": 0.9130974398023652,
+          "child_displacement": 0.41309743980236524,
+          "salt": 411
+        },
+        {
+          "prompt_participation": 0.20050588079345213,
+          "child_crest": 0.9161705078351534,
+          "child_displacement": 0.4161705078351534,
+          "salt": 405
+        },
+        {
+          "prompt_participation": 0.2372070981290278,
+          "child_crest": 0.9803821405671476,
+          "child_displacement": 0.48038214056714756,
+          "salt": 404
+        },
+        {
+          "prompt_participation": 0.24119990884214024,
+          "child_crest": 0.9857770532443296,
+          "child_displacement": 0.4857770532443296,
+          "salt": 406
+        },
+        {
+          "prompt_participation": 0.24166678967268915,
+          "child_crest": 0.986408728701878,
+          "child_displacement": 0.486408728701878,
+          "salt": 418
+        },
+        {
+          "prompt_participation": 0.24681077501171822,
+          "child_crest": 0.993161011016894,
+          "child_displacement": 0.493161011016894,
+          "salt": 413
+        },
+        {
+          "prompt_participation": 0.25647683248224673,
+          "child_crest": 1.0045308239984272,
+          "child_displacement": 0.5045308239984272,
+          "salt": 407
+        },
+        {
+          "prompt_participation": 0.26355861692827437,
+          "child_crest": 1.01205700179418,
+          "child_displacement": 0.5120570017941799,
+          "salt": 414
+        },
+        {
+          "prompt_participation": 0.27817954183605115,
+          "child_crest": 1.0251212055268428,
+          "child_displacement": 0.5251212055268428,
+          "salt": 412
+        },
+        {
+          "prompt_participation": 0.2912097286340187,
+          "child_crest": 1.0348876082427962,
+          "child_displacement": 0.5348876082427962,
+          "salt": 402
+        },
+        {
+          "prompt_participation": 0.31242900618062447,
+          "child_crest": 1.0471034571206437,
+          "child_displacement": 0.5471034571206437,
+          "salt": 415
+        },
+        {
+          "prompt_participation": 0.34080220652373755,
+          "child_crest": 1.057813896977887,
+          "child_displacement": 0.557813896977887,
+          "salt": 409
+        }
+      ],
+      "gates": [
+        {
+          "gate": "G1_correct_inverse_map_reproduces_T400_crest",
+          "status": "PASS",
+          "meaning": "Correct inverse recovers the registered T400 source crest."
+        },
+        {
+          "gate": "G2_three_stage_all_registered_bandwidths",
+          "status": "PASS",
+          "meaning": "Turn < release maximum < handover for all four KDE bandwidths."
+        },
+        {
+          "gate": "G3_three_stage_bootstrap_at_least_90pct",
+          "status": "PASS",
+          "meaning": "At least 90% of saved-split bootstraps retain the order."
+        },
+        {
+          "gate": "G4_exact_detector_octave",
+          "status": "PASS",
+          "meaning": "Broad binned bootstrap interval contains zero and circular-shift control is <= 0.05."
+        },
+        {
+          "gate": "G5_exact_source_octave_across_bandwidths",
+          "status": "FAIL",
+          "meaning": "Ridge minus twice the source release crest crosses zero across bandwidths."
+        },
+        {
+          "gate": "G6_independent_prompt_before_delayed_chronology",
+          "status": "PASS",
+          "meaning": "T378 independently retains prompt-before-delayed chronology."
+        },
+        {
+          "gate": "G7_individual_spinning_muon_event_link_available",
+          "status": "FAIL",
+          "meaning": "Current inputs event-link one spin trajectory to its daughters."
+        }
+      ],
+      "evidence": [
+        {
+          "cut": "T402 detector turn and handover",
+          "class": "Measured diagnostic",
+          "boundary": "C-minus-AC detector relation; not a pristine neutrino waveform."
+        },
+        {
+          "cut": "T398/T400 child release",
+          "class": "Fitted source",
+          "boundary": "Population delayed-release template on the corrected cumulative-ARA coordinate."
+        },
+        {
+          "cut": "Storage-flow Di-ARA",
+          "class": "Derived",
+          "boundary": "Remaining fraction and release rate derive from the same delayed template."
+        },
+        {
+          "cut": "Saved T402 split bootstrap",
+          "class": "Overlapping robustness probes",
+          "boundary": "Not independent experiments or a raw-event confidence interval."
+        },
+        {
+          "cut": "T378 COHERENT 2017",
+          "class": "Independent coarse archive",
+          "boundary": "Supports chronology only; bins are too coarse for the nested coordinate."
+        },
+        {
+          "cut": "T397 RAL Silver",
+          "class": "Independent aggregate spin data",
+          "boundary": "Population muSR phase, not an event-linked individual decay."
+        }
+      ],
+      "validation": [
+        {
+          "check": "T404: protocol_hash_matches",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: mapping_has_eight_registered_bins",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: corrected_times_are_monotonic",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: linear_and_corrected_maps_are_not_equal",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: corrected_crest_reproduces_saved_T400",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: four_registered_bandwidths_present",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: three_stage_order_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: registered_detector_ratio_range_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: registered_source_residual_range_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: bootstrap_count_is_5000",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: bootstrap_all_valid",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: bootstrap_order_fraction_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: bootstrap_interval_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: diara_coordinates_are_bounded",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: diara_has_all_four_registered_stages",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: detector_profile_keeps_eight_bins",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: gate_logic_coordinate",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: gate_logic_three_stage",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: source_octave_is_rejected",
+          "status": "PASS"
+        },
+        {
+          "check": "T404: individual_event_claim_is_blocked",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: protocol_hash_matches",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: twenty_valid_splits",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: prompt_fraction_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: displacement_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: primary_rho_recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: all_loo_rho_one",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: boundary_relations_are_rank_identical",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: partial_relation_marked_non_identifiable",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: structural_boundary_is_explicit",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: all_registered_gates_pass",
+          "status": "PASS"
+        },
+        {
+          "check": "T405: diagnostics_saved",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t404_mapping",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Correct and linear source-time maps for the eight fixed local-child bins.",
+        "tables_used": [
+          "T404_COORDINATE_MAPPING.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_COORDINATE_MAPPING.csv')"
+      }
+    },
+    {
+      "id": "t404_landmarks",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Detector turn, child release maximum, handover, ratios, and octave residuals for four registered KDE bandwidths.",
+        "tables_used": [
+          "T404_REGISTERED_LANDMARKS.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_REGISTERED_LANDMARKS.csv')"
+      }
+    },
+    {
+      "id": "t404_bootstrap",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Five thousand resamples of the saved overlapping T402 split histograms.",
+        "tables_used": [
+          "T404_BOOTSTRAP.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_BOOTSTRAP.csv')"
+      }
+    },
+    {
+      "id": "t404_diara",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Candidate remaining-parent storage versus delayed-child release-flow phase portrait.",
+        "tables_used": [
+          "T404_STORAGE_FLOW_DIARA.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_STORAGE_FLOW_DIARA.csv')"
+      }
+    },
+    {
+      "id": "t404_profiles",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Detector and fitted-source curves sampled with the corrected inverse coordinate.",
+        "tables_used": [
+          "T404_CORRECTED_PROFILES.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T404_corrected_child_release_diara/T404_CORRECTED_PROFILES.csv')"
+      }
+    },
+    {
+      "id": "t404_results",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Verdict, gates, audit metrics, evidence boundaries, and individual-event requirements.",
+        "tables_used": [
+          "T404_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T404_corrected_child_release_diara/T404_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t404_validation",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent recomputation of mapping, landmark, bootstrap, Di-ARA, and scope checks.",
+        "tables_used": [
+          "T404_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T404_corrected_child_release_diara/T404_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "t404_protocol",
+      "query": {
+        "engine": "file",
+        "language": "md",
+        "description": "Pre-run audit identities, evaluations, gates, and claim boundary.",
+        "tables_used": [
+          "T404_CORRECTED_CHILD_RELEASE_DIARA_PROTOCOL_2026-08-18.md"
+        ]
+      }
+    },
+    {
+      "id": "t400_curve",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Registered cumulative parent-ARA child coordinate and delayed-release curve.",
+        "tables_used": [
+          "T400_LOCAL_CHILD_CURVE.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T400_nested_child_window_population_to_event/T400_LOCAL_CHILD_CURVE.csv')"
+      }
+    },
+    {
+      "id": "t402_topology",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Four pre-existing detector topology bandwidths.",
+        "tables_used": [
+          "T402_KDE_TOPOLOGY.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T402_whole_shape_child_relation/T402_KDE_TOPOLOGY.csv')"
+      }
+    },
+    {
+      "id": "t378_holdout",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Independent coarse COHERENT timing chronology.",
+        "tables_used": [
+          "T398_T378_INDEPENDENT_HOLDOUT.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T398_population_neutrino_wave_overlap/T398_T378_INDEPENDENT_HOLDOUT.csv')"
+      }
+    },
+    {
+      "id": "t405_distortion",
+      "query": {
+        "engine": "duckdb",
+        "language": "csv",
+        "description": "Prompt participation and child-crest displacement across the valid T400 repeated splits.",
+        "tables_used": [
+          "T405_SPLIT_PARTICIPATION.csv"
+        ],
+        "sql": "SELECT * FROM read_csv_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_SPLIT_PARTICIPATION.csv')"
+      }
+    },
+    {
+      "id": "t405_results",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Participation relation, equality-boundary diagnostic, gates, and structural evidence boundary.",
+        "tables_used": [
+          "T405_RESULTS.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_RESULTS.json', format='auto')"
+      }
+    },
+    {
+      "id": "t405_validation",
+      "query": {
+        "engine": "duckdb",
+        "language": "json",
+        "description": "Independent recomputation and structural-encoding audit.",
+        "tables_used": [
+          "T405_VALIDATION.json"
+        ],
+        "sql": "SELECT * FROM read_json_auto('analysis/muon/T405_parent_landmark_child_distortion/T405_VALIDATION.json', format='auto')"
+      }
+    },
+    {
+      "id": "coherent_csi",
+      "query": {
+        "engine": "web",
+        "description": "COHERENT CsI measurement"
+      }
+    },
+    {
+      "id": "ral_silver",
+      "query": {
+        "engine": "web",
+        "description": "RAL Silver muSR source"
+      }
+    }
+  ],
+  "package_info": {
+    "originUrl": "artifact://t404-corrected-child-release-diara",
+    "controls": {
+      "edit": false,
+      "refresh": false
+    }
+  }
+}

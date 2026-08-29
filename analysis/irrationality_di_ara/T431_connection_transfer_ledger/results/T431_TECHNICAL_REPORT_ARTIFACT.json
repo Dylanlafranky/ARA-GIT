@@ -1,0 +1,4448 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T431 \u2014 Connection-transfer ledger in binary-black-hole strain",
+    "description": "Frozen ARA test of old connection to mobile/unresolved transfer to new connection in four untouched gravitational-wave events.",
+    "generatedAt": "2026-08-25T00:00:00+10:00",
+    "cards": [
+      {
+        "id": "headline_metrics",
+        "dataset": "headline",
+        "sourceId": "t431_events",
+        "metrics": [
+          {
+            "label": "ARA morphology",
+            "field": "shape_rate",
+            "format": "percent"
+          },
+          {
+            "label": "Source-specific gate",
+            "field": "source_specific_rate",
+            "format": "percent"
+          },
+          {
+            "label": "Detector replication",
+            "field": "detector_replication_rate",
+            "format": "percent"
+          },
+          {
+            "label": "Strongest event percentile",
+            "field": "strongest_percentile",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "event_vs_control",
+        "title": "Event ledger strength and matched off-source 95th percentile",
+        "type": "bar",
+        "dataset": "event_control",
+        "sourceId": "t431_events",
+        "encodings": {
+          "x": {
+            "field": "event",
+            "type": "nominal"
+          },
+          "y": {
+            "field": "value",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "series",
+            "type": "nominal"
+          }
+        },
+        "options": {
+          "orientation": "vertical",
+          "grouping": "grouped"
+        }
+      },
+      {
+        "id": "ara_plane",
+        "title": "Confirmation ARA trajectories",
+        "type": "scatter",
+        "dataset": "ara_plane",
+        "sourceId": "t431_histories",
+        "encodings": {
+          "x": {
+            "field": "connection_C",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "movement_M",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "event",
+            "type": "nominal"
+          }
+        }
+      },
+      {
+        "id": "strongest_history",
+        "title": "GW190828_063405 component histories",
+        "type": "line",
+        "dataset": "history_long",
+        "sourceId": "t431_histories",
+        "encodings": {
+          "x": {
+            "field": "time_s",
+            "type": "quantitative"
+          },
+          "y": {
+            "field": "ara_coordinate",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "component",
+            "type": "nominal"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "event_table",
+        "title": "Untouched confirmation events",
+        "dataset": "event_summary",
+        "sourceId": "t431_events",
+        "columns": [
+          {
+            "field": "event",
+            "label": "Event"
+          },
+          {
+            "field": "connection_break",
+            "label": "Connection break",
+            "format": "number"
+          },
+          {
+            "field": "movement_excursion",
+            "label": "Movement excursion",
+            "format": "number"
+          },
+          {
+            "field": "ledger_strength",
+            "label": "Ledger strength",
+            "format": "number"
+          },
+          {
+            "field": "offsource_percentile_pct",
+            "label": "Off-source percentile",
+            "format": "number",
+            "unit": "%"
+          },
+          {
+            "field": "empirical_p",
+            "label": "Empirical p",
+            "format": "number"
+          },
+          {
+            "field": "network_shape",
+            "label": "Shape"
+          },
+          {
+            "field": "detector_replication",
+            "label": "H1/L1 replication"
+          }
+        ],
+        "defaultSort": {
+          "field": "offsource_percentile_pct",
+          "direction": "desc"
+        }
+      },
+      {
+        "id": "gate_table",
+        "title": "Frozen gate outcomes",
+        "dataset": "gate_summary",
+        "sourceId": "t431_gate_summary",
+        "columns": [
+          {
+            "field": "order",
+            "label": "#",
+            "format": "number"
+          },
+          {
+            "field": "gate",
+            "label": "Gate"
+          },
+          {
+            "field": "required",
+            "label": "Required"
+          },
+          {
+            "field": "observed",
+            "label": "Observed"
+          },
+          {
+            "field": "passed",
+            "label": "Pass"
+          }
+        ],
+        "defaultSort": {
+          "field": "order",
+          "direction": "asc"
+        }
+      },
+      {
+        "id": "source_sample_table",
+        "title": "Deterministic reviewed source sample",
+        "dataset": "reviewed_source_sample",
+        "sourceId": "t431_histories",
+        "columns": [
+          {
+            "field": "event",
+            "label": "Event"
+          },
+          {
+            "field": "time_s",
+            "label": "Time",
+            "format": "number",
+            "unit": "s"
+          },
+          {
+            "field": "connection_C",
+            "label": "Connection C",
+            "format": "number"
+          },
+          {
+            "field": "movement_M",
+            "label": "Movement M",
+            "format": "number"
+          },
+          {
+            "field": "unresolved_H",
+            "label": "Unresolved H",
+            "format": "number"
+          },
+          {
+            "field": "phase_coherence_ARA",
+            "label": "Phase coherence",
+            "format": "number"
+          }
+        ],
+        "defaultSort": {
+          "field": "time_s",
+          "direction": "asc"
+        }
+      }
+    ],
+    "sources": [
+      {
+        "id": "t431_events",
+        "label": "T431 untouched confirmation event ledger",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_EVENTS.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_EVENTS.csv')",
+          "description": "Loads the four untouched confirmation-event ledger rows.",
+          "metric_definitions": [
+            "ledger_strength = connection_break_depth + movement_excursion",
+            "ledger_offsource_percentile is the fraction of matched off-source ledgers below the event ledger"
+          ]
+        }
+      },
+      {
+        "id": "t431_controls",
+        "label": "T431 matched off-source controls",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_CONTROLS.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_CONTROLS.csv')",
+          "description": "Loads the 82 matched off-source control windows for each confirmation event."
+        }
+      },
+      {
+        "id": "t431_histories",
+        "label": "T431 time-resolved ARA histories",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_HISTORIES.csv",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_HISTORIES.csv')",
+          "description": "Loads the time-resolved connection, movement, unresolved and coherence ARA histories."
+        }
+      },
+      {
+        "id": "t431_protocol",
+        "label": "Frozen T431 protocol",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\T431_FROZEN_PROTOCOL.md"
+      },
+      {
+        "id": "t431_gate_summary",
+        "label": "Frozen T431 gate outcomes",
+        "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_SUMMARY.json",
+        "query": {
+          "engine": "duckdb",
+          "sql": "SELECT * FROM (VALUES (1, 'Network transfer shape', '3 of 4', '3 of 4', true), (2, 'Above matched off-source 95th percentile', '3 of 4', '0 of 4', false), (3, 'Full H1/L1 component replication', '2 of 4', '1 of 4', false), (4, 'Positive unresolved mobile excess', '3 of 4', '2 of 4', false), (5, 'Phase coherence at or above off-source P90', '3 of 4', '2 of 4', false)) AS gates(order_id, gate, required, observed, passed)",
+          "description": "Reconstructs the five predeclared frozen gate outcomes from the confirmation summary."
+        }
+      },
+      {
+        "id": "gwosc",
+        "label": "Gravitational Wave Open Science Center event strain",
+        "href": "https://gwosc.org/api/"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T431 \u2014 Connection-transfer ledger in binary-black-hole strain\n\nFrozen confirmation test of the proposed ARA transfer sequence `old connection \u2192 mobile/unresolved \u2192 new connection` in four previously unseen binary-black-hole strain events."
+      },
+      {
+        "id": "headline",
+        "type": "metric-strip",
+        "cardIds": [
+          "headline_metrics"
+        ]
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## Technical summary\n\n**Frozen verdict: NOT SUPPORTED.** The qualitative ARA transfer shape occurred in 3 of 4 untouched events, so the morphology is real enough to keep investigating. But none of the four event ledgers exceeded its own matched off-source 95th percentile, only one replicated the full component direction in both H1 and L1, and the unresolved/coherence gates each passed in only two events. The strongest event, GW190828_063405, reached the 93.90th off-source percentile\u2014close to, but below, the frozen threshold."
+      },
+      {
+        "id": "event_vs_control_block",
+        "type": "chart",
+        "chartId": "event_vs_control"
+      },
+      {
+        "id": "event_table_block",
+        "type": "table",
+        "tableId": "event_table"
+      },
+      {
+        "id": "ara_reading",
+        "type": "markdown",
+        "body": "## ARA reading\n\nAt this measurement scale, each gravitational-wave event is one parent identity and H1/L1 are independent views of it\u2014not the two black holes. Connection is the mean of network amount, spectral concentration and detector phase coherence; movement is spectral redistribution. The tested relation was a connection-heavy state, followed by a movement-facing trough, followed by reclosure into a later connection-heavy state. Three events traced that order, but the same shape was common in matched off-source strain. ARA therefore recovered a useful path description here, not yet a merger-specific transfer law."
+      },
+      {
+        "id": "ara_plane_block",
+        "type": "chart",
+        "chartId": "ara_plane"
+      },
+      {
+        "id": "strongest_history_block",
+        "type": "chart",
+        "chartId": "strongest_history"
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "body": "## Methodology\n\nThe test retained the earlier 30\u2013512 Hz whitening and 64 ms time-frequency construction, mapped detector features independently onto 0\u20132 ARA coordinates using detector-specific off-source empirical distributions, and froze three non-overlapping temporal regions before opening the new events. The old landmark maximized connection before the merger, the mobile landmark maximized movement minus connection around the handover, and the new landmark maximized connection afterward. The ledger strength was `connection break + movement excursion`. Every event was compared against 82 identically measured off-source windows. Support required all five predeclared gates."
+      },
+      {
+        "id": "gate_table_block",
+        "type": "table",
+        "tableId": "gate_table"
+      },
+      {
+        "id": "data_quality",
+        "type": "markdown",
+        "body": "## Data quality and validation\n\nThe four holdouts were absent from development, each used both H1 and L1 source files, the downloaded file hashes and event GPS values matched the frozen manifest, and all event/control counts and ledger arithmetic were independently recomputed. Source, protocol and analysis hashes were frozen before confirmation scoring. The validation audit passed every integrity check. The first ten deterministic history rows are included below for inspection."
+      },
+      {
+        "id": "source_sample_block",
+        "type": "table",
+        "tableId": "source_sample_table"
+      },
+      {
+        "id": "physics_crosswalk",
+        "type": "markdown",
+        "body": "## Established-physics crosswalk\n\nThe connection trough and movement excursion correspond descriptively to rapid time-frequency redistribution during the merger and ringdown. This is only a crosswalk: the ARA coordinates were constructed from strain observables and do not identify literal spacetime bonds breaking or a liquid gravitational medium. The source-specific comparison is decisive because whitening noise and instrumental transients can generate similar local morphology away from the published merger time."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations\n\nThe sample contains four confirmation events, the tested connection coordinate combines three measured relations, and the three temporal regions are fixed population windows rather than identity-specific physical boundaries. The full two-detector component direction was inconsistent in three events. The morphology should therefore remain an unresolved ARA lead, not evidence that black-hole connections literally liquefy or that the transfer mechanism is universal."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Next test\n\nFreeze a follow-up around GW190828_063405's distinguishing relation without reusing its outcome as confirmation: derive a candidate feature on development events, then test it on a larger untouched O3 set. The most informative direction is not another morphology-only gate. It is an independent relation\u2014such as detector-consistent phase evolution or a source-parameter-informed timescale\u2014that must rise specifically at the mobile landmark while remaining absent from matched off-source windows."
+      },
+      {
+        "id": "questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Why did GW190828_063405 approach the source-specific threshold while the other events did not?\n- Is the repeated ARA shape generated by a merger relation, by a common detector/noise process, or by the coordinate construction itself?\n- Does an independently measured phase or source-timescale relation identify the same mobile landmark without being built from connection and movement?\n- Does the geometry become cleaner when events are aligned by a physically estimated merger/ringdown scale rather than absolute seconds?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T00:00:00+10:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "shape_rate": 0.75,
+          "source_specific_rate": 0.0,
+          "detector_replication_rate": 0.25,
+          "strongest_percentile": 0.9390000000000001
+        }
+      ],
+      "event_summary": [
+        {
+          "event": "GW190412",
+          "connection_break": 0.6811,
+          "movement_excursion": -0.0463,
+          "ledger_strength": 0.6348,
+          "offsource_p95": 1.1177,
+          "offsource_percentile_pct": 53.66,
+          "empirical_p": 0.4699,
+          "phase_coherence_percentile_pct": 69.51,
+          "unresolved_mobile_excess": 0.1379,
+          "network_shape": false,
+          "detector_replication": false
+        },
+        {
+          "event": "GW190521_074359",
+          "connection_break": 0.0278,
+          "movement_excursion": 0.494,
+          "ledger_strength": 0.5218,
+          "offsource_p95": 0.9922,
+          "offsource_percentile_pct": 41.46,
+          "empirical_p": 0.5904,
+          "phase_coherence_percentile_pct": 91.46,
+          "unresolved_mobile_excess": -0.1241,
+          "network_shape": true,
+          "detector_replication": false
+        },
+        {
+          "event": "GW190727_060333",
+          "connection_break": 0.7834,
+          "movement_excursion": 0.026,
+          "ledger_strength": 0.8094,
+          "offsource_p95": 0.9085,
+          "offsource_percentile_pct": 82.93,
+          "empirical_p": 0.1807,
+          "phase_coherence_percentile_pct": 96.34,
+          "unresolved_mobile_excess": 0.3177,
+          "network_shape": true,
+          "detector_replication": false
+        },
+        {
+          "event": "GW190828_063405",
+          "connection_break": 0.7107,
+          "movement_excursion": 0.3243,
+          "ledger_strength": 1.0349,
+          "offsource_p95": 1.0364,
+          "offsource_percentile_pct": 93.9,
+          "empirical_p": 0.0723,
+          "phase_coherence_percentile_pct": 79.27,
+          "unresolved_mobile_excess": -0.1201,
+          "network_shape": true,
+          "detector_replication": true
+        }
+      ],
+      "event_control": [
+        {
+          "event": "GW190412",
+          "series": "Event ledger",
+          "value": 0.6348
+        },
+        {
+          "event": "GW190412",
+          "series": "Off-source 95th percentile",
+          "value": 1.1177
+        },
+        {
+          "event": "GW190521_074359",
+          "series": "Event ledger",
+          "value": 0.5218
+        },
+        {
+          "event": "GW190521_074359",
+          "series": "Off-source 95th percentile",
+          "value": 0.9922
+        },
+        {
+          "event": "GW190727_060333",
+          "series": "Event ledger",
+          "value": 0.8094
+        },
+        {
+          "event": "GW190727_060333",
+          "series": "Off-source 95th percentile",
+          "value": 0.9085
+        },
+        {
+          "event": "GW190828_063405",
+          "series": "Event ledger",
+          "value": 1.0349
+        },
+        {
+          "event": "GW190828_063405",
+          "series": "Off-source 95th percentile",
+          "value": 1.0364
+        }
+      ],
+      "gate_summary": [
+        {
+          "order": 1,
+          "gate": "Network transfer shape",
+          "required": "3 of 4",
+          "observed": "3 of 4",
+          "passed": true
+        },
+        {
+          "order": 2,
+          "gate": "Above matched off-source 95th percentile",
+          "required": "3 of 4",
+          "observed": "0 of 4",
+          "passed": false
+        },
+        {
+          "order": 3,
+          "gate": "Full H1/L1 component replication",
+          "required": "2 of 4",
+          "observed": "1 of 4",
+          "passed": false
+        },
+        {
+          "order": 4,
+          "gate": "Positive unresolved mobile excess",
+          "required": "3 of 4",
+          "observed": "2 of 4",
+          "passed": false
+        },
+        {
+          "order": 5,
+          "gate": "Phase coherence at or above off-source P90",
+          "required": "3 of 4",
+          "observed": "2 of 4",
+          "passed": false
+        }
+      ],
+      "history_long": [
+        {
+          "time_s": -0.217236,
+          "component": "Connection C",
+          "ara_coordinate": 0.9112
+        },
+        {
+          "time_s": -0.217236,
+          "component": "Movement M",
+          "ara_coordinate": 0.6317
+        },
+        {
+          "time_s": -0.217236,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4571
+        },
+        {
+          "time_s": -0.21333,
+          "component": "Connection C",
+          "ara_coordinate": 0.9112
+        },
+        {
+          "time_s": -0.21333,
+          "component": "Movement M",
+          "ara_coordinate": 0.6158
+        },
+        {
+          "time_s": -0.21333,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4729
+        },
+        {
+          "time_s": -0.209424,
+          "component": "Connection C",
+          "ara_coordinate": 0.9112
+        },
+        {
+          "time_s": -0.209424,
+          "component": "Movement M",
+          "ara_coordinate": 0.5897
+        },
+        {
+          "time_s": -0.209424,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4991
+        },
+        {
+          "time_s": -0.205518,
+          "component": "Connection C",
+          "ara_coordinate": 0.9112
+        },
+        {
+          "time_s": -0.205518,
+          "component": "Movement M",
+          "ara_coordinate": 0.5738
+        },
+        {
+          "time_s": -0.205518,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.5149
+        },
+        {
+          "time_s": -0.201611,
+          "component": "Connection C",
+          "ara_coordinate": 0.9112
+        },
+        {
+          "time_s": -0.201611,
+          "component": "Movement M",
+          "ara_coordinate": 0.4723
+        },
+        {
+          "time_s": -0.201611,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6165
+        },
+        {
+          "time_s": -0.197705,
+          "component": "Connection C",
+          "ara_coordinate": 0.931
+        },
+        {
+          "time_s": -0.197705,
+          "component": "Movement M",
+          "ara_coordinate": 0.3273
+        },
+        {
+          "time_s": -0.197705,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7417
+        },
+        {
+          "time_s": -0.193799,
+          "component": "Connection C",
+          "ara_coordinate": 0.9679
+        },
+        {
+          "time_s": -0.193799,
+          "component": "Movement M",
+          "ara_coordinate": 0.3073
+        },
+        {
+          "time_s": -0.193799,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7248
+        },
+        {
+          "time_s": -0.189893,
+          "component": "Connection C",
+          "ara_coordinate": 0.9679
+        },
+        {
+          "time_s": -0.189893,
+          "component": "Movement M",
+          "ara_coordinate": 0.3073
+        },
+        {
+          "time_s": -0.189893,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7248
+        },
+        {
+          "time_s": -0.185986,
+          "component": "Connection C",
+          "ara_coordinate": 0.9679
+        },
+        {
+          "time_s": -0.185986,
+          "component": "Movement M",
+          "ara_coordinate": 0.3073
+        },
+        {
+          "time_s": -0.185986,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7248
+        },
+        {
+          "time_s": -0.18208,
+          "component": "Connection C",
+          "ara_coordinate": 0.9679
+        },
+        {
+          "time_s": -0.18208,
+          "component": "Movement M",
+          "ara_coordinate": 0.3202
+        },
+        {
+          "time_s": -0.18208,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7119
+        },
+        {
+          "time_s": -0.178174,
+          "component": "Connection C",
+          "ara_coordinate": 0.9303
+        },
+        {
+          "time_s": -0.178174,
+          "component": "Movement M",
+          "ara_coordinate": 0.3202
+        },
+        {
+          "time_s": -0.178174,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.7495
+        },
+        {
+          "time_s": -0.174268,
+          "component": "Connection C",
+          "ara_coordinate": 0.9303
+        },
+        {
+          "time_s": -0.174268,
+          "component": "Movement M",
+          "ara_coordinate": 0.4633
+        },
+        {
+          "time_s": -0.174268,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6065
+        },
+        {
+          "time_s": -0.170361,
+          "component": "Connection C",
+          "ara_coordinate": 0.9303
+        },
+        {
+          "time_s": -0.170361,
+          "component": "Movement M",
+          "ara_coordinate": 0.8045
+        },
+        {
+          "time_s": -0.170361,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2652
+        },
+        {
+          "time_s": -0.166455,
+          "component": "Connection C",
+          "ara_coordinate": 0.9303
+        },
+        {
+          "time_s": -0.166455,
+          "component": "Movement M",
+          "ara_coordinate": 0.8897
+        },
+        {
+          "time_s": -0.166455,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1801
+        },
+        {
+          "time_s": -0.162549,
+          "component": "Connection C",
+          "ara_coordinate": 0.9972
+        },
+        {
+          "time_s": -0.162549,
+          "component": "Movement M",
+          "ara_coordinate": 0.8972
+        },
+        {
+          "time_s": -0.162549,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1055
+        },
+        {
+          "time_s": -0.158643,
+          "component": "Connection C",
+          "ara_coordinate": 1.1302
+        },
+        {
+          "time_s": -0.158643,
+          "component": "Movement M",
+          "ara_coordinate": 0.9287
+        },
+        {
+          "time_s": -0.158643,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.154736,
+          "component": "Connection C",
+          "ara_coordinate": 1.1619
+        },
+        {
+          "time_s": -0.154736,
+          "component": "Movement M",
+          "ara_coordinate": 0.9912
+        },
+        {
+          "time_s": -0.154736,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.15083,
+          "component": "Connection C",
+          "ara_coordinate": 1.1619
+        },
+        {
+          "time_s": -0.15083,
+          "component": "Movement M",
+          "ara_coordinate": 0.9912
+        },
+        {
+          "time_s": -0.15083,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.146924,
+          "component": "Connection C",
+          "ara_coordinate": 1.1619
+        },
+        {
+          "time_s": -0.146924,
+          "component": "Movement M",
+          "ara_coordinate": 1.1704
+        },
+        {
+          "time_s": -0.146924,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.143018,
+          "component": "Connection C",
+          "ara_coordinate": 1.2204
+        },
+        {
+          "time_s": -0.143018,
+          "component": "Movement M",
+          "ara_coordinate": 1.1704
+        },
+        {
+          "time_s": -0.143018,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.139111,
+          "component": "Connection C",
+          "ara_coordinate": 1.2296
+        },
+        {
+          "time_s": -0.139111,
+          "component": "Movement M",
+          "ara_coordinate": 1.1704
+        },
+        {
+          "time_s": -0.139111,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.135205,
+          "component": "Connection C",
+          "ara_coordinate": 1.2296
+        },
+        {
+          "time_s": -0.135205,
+          "component": "Movement M",
+          "ara_coordinate": 1.1828
+        },
+        {
+          "time_s": -0.135205,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.131299,
+          "component": "Connection C",
+          "ara_coordinate": 1.2296
+        },
+        {
+          "time_s": -0.131299,
+          "component": "Movement M",
+          "ara_coordinate": 1.1997
+        },
+        {
+          "time_s": -0.131299,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.127393,
+          "component": "Connection C",
+          "ara_coordinate": 1.2556
+        },
+        {
+          "time_s": -0.127393,
+          "component": "Movement M",
+          "ara_coordinate": 1.1965
+        },
+        {
+          "time_s": -0.127393,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.123486,
+          "component": "Connection C",
+          "ara_coordinate": 1.3449
+        },
+        {
+          "time_s": -0.123486,
+          "component": "Movement M",
+          "ara_coordinate": 1.1965
+        },
+        {
+          "time_s": -0.123486,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.11958,
+          "component": "Connection C",
+          "ara_coordinate": 1.3471
+        },
+        {
+          "time_s": -0.11958,
+          "component": "Movement M",
+          "ara_coordinate": 1.1987
+        },
+        {
+          "time_s": -0.11958,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.115674,
+          "component": "Connection C",
+          "ara_coordinate": 1.3529
+        },
+        {
+          "time_s": -0.115674,
+          "component": "Movement M",
+          "ara_coordinate": 1.1987
+        },
+        {
+          "time_s": -0.115674,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.111768,
+          "component": "Connection C",
+          "ara_coordinate": 1.3689
+        },
+        {
+          "time_s": -0.111768,
+          "component": "Movement M",
+          "ara_coordinate": 1.1997
+        },
+        {
+          "time_s": -0.111768,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.107861,
+          "component": "Connection C",
+          "ara_coordinate": 1.4216
+        },
+        {
+          "time_s": -0.107861,
+          "component": "Movement M",
+          "ara_coordinate": 1.1997
+        },
+        {
+          "time_s": -0.107861,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.103955,
+          "component": "Connection C",
+          "ara_coordinate": 1.5803
+        },
+        {
+          "time_s": -0.103955,
+          "component": "Movement M",
+          "ara_coordinate": 1.1997
+        },
+        {
+          "time_s": -0.103955,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.100049,
+          "component": "Connection C",
+          "ara_coordinate": 1.7336
+        },
+        {
+          "time_s": -0.100049,
+          "component": "Movement M",
+          "ara_coordinate": 1.2216
+        },
+        {
+          "time_s": -0.100049,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.096143,
+          "component": "Connection C",
+          "ara_coordinate": 1.812
+        },
+        {
+          "time_s": -0.096143,
+          "component": "Movement M",
+          "ara_coordinate": 1.3805
+        },
+        {
+          "time_s": -0.096143,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.092236,
+          "component": "Connection C",
+          "ara_coordinate": 1.8321
+        },
+        {
+          "time_s": -0.092236,
+          "component": "Movement M",
+          "ara_coordinate": 1.4096
+        },
+        {
+          "time_s": -0.092236,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.08833,
+          "component": "Connection C",
+          "ara_coordinate": 1.8728
+        },
+        {
+          "time_s": -0.08833,
+          "component": "Movement M",
+          "ara_coordinate": 1.4774
+        },
+        {
+          "time_s": -0.08833,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.084424,
+          "component": "Connection C",
+          "ara_coordinate": 1.9164
+        },
+        {
+          "time_s": -0.084424,
+          "component": "Movement M",
+          "ara_coordinate": 1.4813
+        },
+        {
+          "time_s": -0.084424,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.080518,
+          "component": "Connection C",
+          "ara_coordinate": 1.9164
+        },
+        {
+          "time_s": -0.080518,
+          "component": "Movement M",
+          "ara_coordinate": 1.609
+        },
+        {
+          "time_s": -0.080518,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.076611,
+          "component": "Connection C",
+          "ara_coordinate": 1.9164
+        },
+        {
+          "time_s": -0.076611,
+          "component": "Movement M",
+          "ara_coordinate": 1.6324
+        },
+        {
+          "time_s": -0.076611,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.072705,
+          "component": "Connection C",
+          "ara_coordinate": 1.9164
+        },
+        {
+          "time_s": -0.072705,
+          "component": "Movement M",
+          "ara_coordinate": 1.6485
+        },
+        {
+          "time_s": -0.072705,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.068799,
+          "component": "Connection C",
+          "ara_coordinate": 1.9029
+        },
+        {
+          "time_s": -0.068799,
+          "component": "Movement M",
+          "ara_coordinate": 1.6524
+        },
+        {
+          "time_s": -0.068799,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.064893,
+          "component": "Connection C",
+          "ara_coordinate": 1.7619
+        },
+        {
+          "time_s": -0.064893,
+          "component": "Movement M",
+          "ara_coordinate": 1.6524
+        },
+        {
+          "time_s": -0.064893,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.060986,
+          "component": "Connection C",
+          "ara_coordinate": 1.7619
+        },
+        {
+          "time_s": -0.060986,
+          "component": "Movement M",
+          "ara_coordinate": 1.6524
+        },
+        {
+          "time_s": -0.060986,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.05708,
+          "component": "Connection C",
+          "ara_coordinate": 1.7491
+        },
+        {
+          "time_s": -0.05708,
+          "component": "Movement M",
+          "ara_coordinate": 1.6324
+        },
+        {
+          "time_s": -0.05708,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.053174,
+          "component": "Connection C",
+          "ara_coordinate": 1.7413
+        },
+        {
+          "time_s": -0.053174,
+          "component": "Movement M",
+          "ara_coordinate": 1.6065
+        },
+        {
+          "time_s": -0.053174,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.049268,
+          "component": "Connection C",
+          "ara_coordinate": 1.6853
+        },
+        {
+          "time_s": -0.049268,
+          "component": "Movement M",
+          "ara_coordinate": 1.5436
+        },
+        {
+          "time_s": -0.049268,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.045361,
+          "component": "Connection C",
+          "ara_coordinate": 1.6853
+        },
+        {
+          "time_s": -0.045361,
+          "component": "Movement M",
+          "ara_coordinate": 1.4955
+        },
+        {
+          "time_s": -0.045361,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.041455,
+          "component": "Connection C",
+          "ara_coordinate": 1.6677
+        },
+        {
+          "time_s": -0.041455,
+          "component": "Movement M",
+          "ara_coordinate": 1.4628
+        },
+        {
+          "time_s": -0.041455,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.037549,
+          "component": "Connection C",
+          "ara_coordinate": 1.5347
+        },
+        {
+          "time_s": -0.037549,
+          "component": "Movement M",
+          "ara_coordinate": 1.4577
+        },
+        {
+          "time_s": -0.037549,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.033643,
+          "component": "Connection C",
+          "ara_coordinate": 1.3507
+        },
+        {
+          "time_s": -0.033643,
+          "component": "Movement M",
+          "ara_coordinate": 1.4559
+        },
+        {
+          "time_s": -0.033643,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.029736,
+          "component": "Connection C",
+          "ara_coordinate": 1.1875
+        },
+        {
+          "time_s": -0.029736,
+          "component": "Movement M",
+          "ara_coordinate": 1.4508
+        },
+        {
+          "time_s": -0.029736,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.02583,
+          "component": "Connection C",
+          "ara_coordinate": 0.9515
+        },
+        {
+          "time_s": -0.02583,
+          "component": "Movement M",
+          "ara_coordinate": 1.4347
+        },
+        {
+          "time_s": -0.02583,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.021924,
+          "component": "Connection C",
+          "ara_coordinate": 0.8069
+        },
+        {
+          "time_s": -0.021924,
+          "component": "Movement M",
+          "ara_coordinate": 1.3854
+        },
+        {
+          "time_s": -0.021924,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": -0.018018,
+          "component": "Connection C",
+          "ara_coordinate": 0.8069
+        },
+        {
+          "time_s": -0.018018,
+          "component": "Movement M",
+          "ara_coordinate": 1.1648
+        },
+        {
+          "time_s": -0.018018,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0283
+        },
+        {
+          "time_s": -0.014111,
+          "component": "Connection C",
+          "ara_coordinate": 0.8069
+        },
+        {
+          "time_s": -0.014111,
+          "component": "Movement M",
+          "ara_coordinate": 0.9468
+        },
+        {
+          "time_s": -0.014111,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2463
+        },
+        {
+          "time_s": -0.010205,
+          "component": "Connection C",
+          "ara_coordinate": 0.8069
+        },
+        {
+          "time_s": -0.010205,
+          "component": "Movement M",
+          "ara_coordinate": 0.9468
+        },
+        {
+          "time_s": -0.010205,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2463
+        },
+        {
+          "time_s": -0.006299,
+          "component": "Connection C",
+          "ara_coordinate": 0.906
+        },
+        {
+          "time_s": -0.006299,
+          "component": "Movement M",
+          "ara_coordinate": 0.9468
+        },
+        {
+          "time_s": -0.006299,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1472
+        },
+        {
+          "time_s": -0.002393,
+          "component": "Connection C",
+          "ara_coordinate": 1.0136
+        },
+        {
+          "time_s": -0.002393,
+          "component": "Movement M",
+          "ara_coordinate": 0.9468
+        },
+        {
+          "time_s": -0.002393,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0396
+        },
+        {
+          "time_s": 0.001514,
+          "component": "Connection C",
+          "ara_coordinate": 1.0653
+        },
+        {
+          "time_s": 0.001514,
+          "component": "Movement M",
+          "ara_coordinate": 1.0002
+        },
+        {
+          "time_s": 0.001514,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": 0.00542,
+          "component": "Connection C",
+          "ara_coordinate": 1.0653
+        },
+        {
+          "time_s": 0.00542,
+          "component": "Movement M",
+          "ara_coordinate": 1.0002
+        },
+        {
+          "time_s": 0.00542,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": 0.009326,
+          "component": "Connection C",
+          "ara_coordinate": 1.0653
+        },
+        {
+          "time_s": 0.009326,
+          "component": "Movement M",
+          "ara_coordinate": 1.0002
+        },
+        {
+          "time_s": 0.009326,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": 0.013232,
+          "component": "Connection C",
+          "ara_coordinate": 1.0805
+        },
+        {
+          "time_s": 0.013232,
+          "component": "Movement M",
+          "ara_coordinate": 1.0002
+        },
+        {
+          "time_s": 0.013232,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.0
+        },
+        {
+          "time_s": 0.017139,
+          "component": "Connection C",
+          "ara_coordinate": 1.0805
+        },
+        {
+          "time_s": 0.017139,
+          "component": "Movement M",
+          "ara_coordinate": 0.7842
+        },
+        {
+          "time_s": 0.017139,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1352
+        },
+        {
+          "time_s": 0.021045,
+          "component": "Connection C",
+          "ara_coordinate": 1.0805
+        },
+        {
+          "time_s": 0.021045,
+          "component": "Movement M",
+          "ara_coordinate": 0.7842
+        },
+        {
+          "time_s": 0.021045,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1352
+        },
+        {
+          "time_s": 0.024951,
+          "component": "Connection C",
+          "ara_coordinate": 1.0805
+        },
+        {
+          "time_s": 0.024951,
+          "component": "Movement M",
+          "ara_coordinate": 0.7376
+        },
+        {
+          "time_s": 0.024951,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1818
+        },
+        {
+          "time_s": 0.028857,
+          "component": "Connection C",
+          "ara_coordinate": 1.1189
+        },
+        {
+          "time_s": 0.028857,
+          "component": "Movement M",
+          "ara_coordinate": 0.7025
+        },
+        {
+          "time_s": 0.028857,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1787
+        },
+        {
+          "time_s": 0.032764,
+          "component": "Connection C",
+          "ara_coordinate": 1.1189
+        },
+        {
+          "time_s": 0.032764,
+          "component": "Movement M",
+          "ara_coordinate": 0.6685
+        },
+        {
+          "time_s": 0.032764,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2126
+        },
+        {
+          "time_s": 0.03667,
+          "component": "Connection C",
+          "ara_coordinate": 1.1189
+        },
+        {
+          "time_s": 0.03667,
+          "component": "Movement M",
+          "ara_coordinate": 0.6478
+        },
+        {
+          "time_s": 0.03667,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2333
+        },
+        {
+          "time_s": 0.040576,
+          "component": "Connection C",
+          "ara_coordinate": 1.1189
+        },
+        {
+          "time_s": 0.040576,
+          "component": "Movement M",
+          "ara_coordinate": 0.641
+        },
+        {
+          "time_s": 0.040576,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2402
+        },
+        {
+          "time_s": 0.044482,
+          "component": "Connection C",
+          "ara_coordinate": 1.0594
+        },
+        {
+          "time_s": 0.044482,
+          "component": "Movement M",
+          "ara_coordinate": 0.6307
+        },
+        {
+          "time_s": 0.044482,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.3099
+        },
+        {
+          "time_s": 0.048389,
+          "component": "Connection C",
+          "ara_coordinate": 0.9863
+        },
+        {
+          "time_s": 0.048389,
+          "component": "Movement M",
+          "ara_coordinate": 0.5516
+        },
+        {
+          "time_s": 0.048389,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.462
+        },
+        {
+          "time_s": 0.052295,
+          "component": "Connection C",
+          "ara_coordinate": 0.7964
+        },
+        {
+          "time_s": 0.052295,
+          "component": "Movement M",
+          "ara_coordinate": 0.5423
+        },
+        {
+          "time_s": 0.052295,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6613
+        },
+        {
+          "time_s": 0.056201,
+          "component": "Connection C",
+          "ara_coordinate": 0.7964
+        },
+        {
+          "time_s": 0.056201,
+          "component": "Movement M",
+          "ara_coordinate": 0.5423
+        },
+        {
+          "time_s": 0.056201,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6613
+        },
+        {
+          "time_s": 0.060107,
+          "component": "Connection C",
+          "ara_coordinate": 0.7964
+        },
+        {
+          "time_s": 0.060107,
+          "component": "Movement M",
+          "ara_coordinate": 0.4057
+        },
+        {
+          "time_s": 0.060107,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.798
+        },
+        {
+          "time_s": 0.064014,
+          "component": "Connection C",
+          "ara_coordinate": 0.7964
+        },
+        {
+          "time_s": 0.064014,
+          "component": "Movement M",
+          "ara_coordinate": 0.4057
+        },
+        {
+          "time_s": 0.064014,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.798
+        },
+        {
+          "time_s": 0.06792,
+          "component": "Connection C",
+          "ara_coordinate": 0.9657
+        },
+        {
+          "time_s": 0.06792,
+          "component": "Movement M",
+          "ara_coordinate": 0.4057
+        },
+        {
+          "time_s": 0.06792,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6286
+        },
+        {
+          "time_s": 0.071826,
+          "component": "Connection C",
+          "ara_coordinate": 0.9712
+        },
+        {
+          "time_s": 0.071826,
+          "component": "Movement M",
+          "ara_coordinate": 0.4057
+        },
+        {
+          "time_s": 0.071826,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.6231
+        },
+        {
+          "time_s": 0.075732,
+          "component": "Connection C",
+          "ara_coordinate": 0.9712
+        },
+        {
+          "time_s": 0.075732,
+          "component": "Movement M",
+          "ara_coordinate": 0.5336
+        },
+        {
+          "time_s": 0.075732,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4952
+        },
+        {
+          "time_s": 0.079639,
+          "component": "Connection C",
+          "ara_coordinate": 0.9712
+        },
+        {
+          "time_s": 0.079639,
+          "component": "Movement M",
+          "ara_coordinate": 0.5765
+        },
+        {
+          "time_s": 0.079639,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4523
+        },
+        {
+          "time_s": 0.083545,
+          "component": "Connection C",
+          "ara_coordinate": 0.9712
+        },
+        {
+          "time_s": 0.083545,
+          "component": "Movement M",
+          "ara_coordinate": 0.5973
+        },
+        {
+          "time_s": 0.083545,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4315
+        },
+        {
+          "time_s": 0.087451,
+          "component": "Connection C",
+          "ara_coordinate": 0.9677
+        },
+        {
+          "time_s": 0.087451,
+          "component": "Movement M",
+          "ara_coordinate": 0.6795
+        },
+        {
+          "time_s": 0.087451,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.3528
+        },
+        {
+          "time_s": 0.091357,
+          "component": "Connection C",
+          "ara_coordinate": 0.9548
+        },
+        {
+          "time_s": 0.091357,
+          "component": "Movement M",
+          "ara_coordinate": 0.8467
+        },
+        {
+          "time_s": 0.091357,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1984
+        },
+        {
+          "time_s": 0.095264,
+          "component": "Connection C",
+          "ara_coordinate": 0.9521
+        },
+        {
+          "time_s": 0.095264,
+          "component": "Movement M",
+          "ara_coordinate": 0.8545
+        },
+        {
+          "time_s": 0.095264,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1934
+        },
+        {
+          "time_s": 0.09917,
+          "component": "Connection C",
+          "ara_coordinate": 0.9334
+        },
+        {
+          "time_s": 0.09917,
+          "component": "Movement M",
+          "ara_coordinate": 0.8567
+        },
+        {
+          "time_s": 0.09917,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2098
+        },
+        {
+          "time_s": 0.103076,
+          "component": "Connection C",
+          "ara_coordinate": 0.9321
+        },
+        {
+          "time_s": 0.103076,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.103076,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1921
+        },
+        {
+          "time_s": 0.106982,
+          "component": "Connection C",
+          "ara_coordinate": 0.9334
+        },
+        {
+          "time_s": 0.106982,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.106982,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1908
+        },
+        {
+          "time_s": 0.110889,
+          "component": "Connection C",
+          "ara_coordinate": 0.9439
+        },
+        {
+          "time_s": 0.110889,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.110889,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1804
+        },
+        {
+          "time_s": 0.114795,
+          "component": "Connection C",
+          "ara_coordinate": 0.944
+        },
+        {
+          "time_s": 0.114795,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.114795,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1802
+        },
+        {
+          "time_s": 0.118701,
+          "component": "Connection C",
+          "ara_coordinate": 0.944
+        },
+        {
+          "time_s": 0.118701,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.118701,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1802
+        },
+        {
+          "time_s": 0.122607,
+          "component": "Connection C",
+          "ara_coordinate": 0.944
+        },
+        {
+          "time_s": 0.122607,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.122607,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1802
+        },
+        {
+          "time_s": 0.126514,
+          "component": "Connection C",
+          "ara_coordinate": 0.993
+        },
+        {
+          "time_s": 0.126514,
+          "component": "Movement M",
+          "ara_coordinate": 0.8758
+        },
+        {
+          "time_s": 0.126514,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1312
+        },
+        {
+          "time_s": 0.13042,
+          "component": "Connection C",
+          "ara_coordinate": 0.993
+        },
+        {
+          "time_s": 0.13042,
+          "component": "Movement M",
+          "ara_coordinate": 0.8094
+        },
+        {
+          "time_s": 0.13042,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.1976
+        },
+        {
+          "time_s": 0.134326,
+          "component": "Connection C",
+          "ara_coordinate": 0.993
+        },
+        {
+          "time_s": 0.134326,
+          "component": "Movement M",
+          "ara_coordinate": 0.7962
+        },
+        {
+          "time_s": 0.134326,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2108
+        },
+        {
+          "time_s": 0.138232,
+          "component": "Connection C",
+          "ara_coordinate": 0.993
+        },
+        {
+          "time_s": 0.138232,
+          "component": "Movement M",
+          "ara_coordinate": 0.7962
+        },
+        {
+          "time_s": 0.138232,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.2108
+        },
+        {
+          "time_s": 0.142139,
+          "component": "Connection C",
+          "ara_coordinate": 0.9168
+        },
+        {
+          "time_s": 0.142139,
+          "component": "Movement M",
+          "ara_coordinate": 0.7962
+        },
+        {
+          "time_s": 0.142139,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.287
+        },
+        {
+          "time_s": 0.146045,
+          "component": "Connection C",
+          "ara_coordinate": 0.7645
+        },
+        {
+          "time_s": 0.146045,
+          "component": "Movement M",
+          "ara_coordinate": 0.7698
+        },
+        {
+          "time_s": 0.146045,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4657
+        },
+        {
+          "time_s": 0.149951,
+          "component": "Connection C",
+          "ara_coordinate": 0.7645
+        },
+        {
+          "time_s": 0.149951,
+          "component": "Movement M",
+          "ara_coordinate": 0.7698
+        },
+        {
+          "time_s": 0.149951,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4657
+        },
+        {
+          "time_s": 0.153857,
+          "component": "Connection C",
+          "ara_coordinate": 0.7645
+        },
+        {
+          "time_s": 0.153857,
+          "component": "Movement M",
+          "ara_coordinate": 0.7698
+        },
+        {
+          "time_s": 0.153857,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4657
+        },
+        {
+          "time_s": 0.157764,
+          "component": "Connection C",
+          "ara_coordinate": 0.7645
+        },
+        {
+          "time_s": 0.157764,
+          "component": "Movement M",
+          "ara_coordinate": 0.7698
+        },
+        {
+          "time_s": 0.157764,
+          "component": "Unresolved H",
+          "ara_coordinate": 0.4657
+        }
+      ],
+      "ara_plane": [
+        {
+          "event": "GW190412",
+          "time_s": -0.218799,
+          "connection_C": 0.9029,
+          "movement_M": 0.8514
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.214893,
+          "connection_C": 0.9029,
+          "movement_M": 0.7754
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.210986,
+          "connection_C": 0.9029,
+          "movement_M": 0.7647
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.20708,
+          "connection_C": 0.7772,
+          "movement_M": 0.7208
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.203174,
+          "connection_C": 0.6454,
+          "movement_M": 0.7208
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.199268,
+          "connection_C": 0.6454,
+          "movement_M": 0.7203
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.195361,
+          "connection_C": 0.6454,
+          "movement_M": 0.7203
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.191455,
+          "connection_C": 0.6454,
+          "movement_M": 0.7064
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.187549,
+          "connection_C": 0.674,
+          "movement_M": 0.6937
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.183643,
+          "connection_C": 0.6893,
+          "movement_M": 0.6937
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.179736,
+          "connection_C": 0.7024,
+          "movement_M": 0.6937
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.17583,
+          "connection_C": 0.7418,
+          "movement_M": 0.6937
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.171924,
+          "connection_C": 0.848,
+          "movement_M": 0.7037
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.168018,
+          "connection_C": 0.8907,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.164111,
+          "connection_C": 0.9468,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.160205,
+          "connection_C": 0.9698,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.156299,
+          "connection_C": 0.972,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.152393,
+          "connection_C": 0.9927,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.148486,
+          "connection_C": 1.0255,
+          "movement_M": 0.7515
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.14458,
+          "connection_C": 1.0564,
+          "movement_M": 0.6275
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.140674,
+          "connection_C": 1.1161,
+          "movement_M": 0.5926
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.136768,
+          "connection_C": 1.2016,
+          "movement_M": 0.5897
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.132861,
+          "connection_C": 1.2952,
+          "movement_M": 0.5838
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.128955,
+          "connection_C": 1.4193,
+          "movement_M": 0.5655
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.125049,
+          "connection_C": 1.4895,
+          "movement_M": 0.5463
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.121143,
+          "connection_C": 1.4895,
+          "movement_M": 0.5463
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.117236,
+          "connection_C": 1.5001,
+          "movement_M": 0.5655
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.11333,
+          "connection_C": 1.5238,
+          "movement_M": 0.5655
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.109424,
+          "connection_C": 1.5315,
+          "movement_M": 0.7171
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.105518,
+          "connection_C": 1.5462,
+          "movement_M": 1.0276
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.101611,
+          "connection_C": 1.6292,
+          "movement_M": 1.1657
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.097705,
+          "connection_C": 1.7148,
+          "movement_M": 1.2634
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.093799,
+          "connection_C": 1.7843,
+          "movement_M": 1.2634
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.089893,
+          "connection_C": 1.84,
+          "movement_M": 1.2848
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.085986,
+          "connection_C": 1.8689,
+          "movement_M": 1.31
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.08208,
+          "connection_C": 1.8689,
+          "movement_M": 1.3105
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.078174,
+          "connection_C": 1.8689,
+          "movement_M": 1.3105
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.074268,
+          "connection_C": 1.8689,
+          "movement_M": 1.31
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.070361,
+          "connection_C": 1.8457,
+          "movement_M": 1.31
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.066455,
+          "connection_C": 1.7821,
+          "movement_M": 1.2826
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.062549,
+          "connection_C": 1.6168,
+          "movement_M": 1.279
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.058643,
+          "connection_C": 1.2954,
+          "movement_M": 1.279
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.054736,
+          "connection_C": 1.121,
+          "movement_M": 1.2023
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.05083,
+          "connection_C": 1.121,
+          "movement_M": 1.1992
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.046924,
+          "connection_C": 1.1209,
+          "movement_M": 1.1992
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.043018,
+          "connection_C": 1.1193,
+          "movement_M": 1.1799
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.039111,
+          "connection_C": 1.1164,
+          "movement_M": 1.1799
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.035205,
+          "connection_C": 1.1164,
+          "movement_M": 1.1557
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.031299,
+          "connection_C": 1.1164,
+          "movement_M": 1.1535
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.027393,
+          "connection_C": 1.0862,
+          "movement_M": 1.1301
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.023486,
+          "connection_C": 1.074,
+          "movement_M": 1.0317
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.01958,
+          "connection_C": 1.0159,
+          "movement_M": 0.9644
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.015674,
+          "connection_C": 0.9772,
+          "movement_M": 0.9221
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.011768,
+          "connection_C": 0.8269,
+          "movement_M": 0.9221
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.007861,
+          "connection_C": 0.7108,
+          "movement_M": 0.8548
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.003955,
+          "connection_C": 0.657,
+          "movement_M": 0.7527
+        },
+        {
+          "event": "GW190412",
+          "time_s": -4.9e-05,
+          "connection_C": 0.6475,
+          "movement_M": 0.6214
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.003857,
+          "connection_C": 0.6,
+          "movement_M": 0.6214
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.007764,
+          "connection_C": 0.6,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.01167,
+          "connection_C": 0.6,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.015576,
+          "connection_C": 0.6,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.019482,
+          "connection_C": 0.6316,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.023389,
+          "connection_C": 0.7245,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.027295,
+          "connection_C": 0.7903,
+          "movement_M": 0.6693
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.031201,
+          "connection_C": 0.8209,
+          "movement_M": 0.7476
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.035107,
+          "connection_C": 0.8809,
+          "movement_M": 0.7476
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.039014,
+          "connection_C": 0.8809,
+          "movement_M": 0.7476
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.04292,
+          "connection_C": 0.8809,
+          "movement_M": 0.7476
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.046826,
+          "connection_C": 0.8809,
+          "movement_M": 0.6942
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.050732,
+          "connection_C": 0.868,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.054639,
+          "connection_C": 0.812,
+          "movement_M": 0.545
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.058545,
+          "connection_C": 0.75,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.062451,
+          "connection_C": 0.6548,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.066357,
+          "connection_C": 0.5517,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.070264,
+          "connection_C": 0.3992,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.07417,
+          "connection_C": 0.3992,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.078076,
+          "connection_C": 0.3992,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.081982,
+          "connection_C": 0.3855,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.085889,
+          "connection_C": 0.3787,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.089795,
+          "connection_C": 0.3855,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.093701,
+          "connection_C": 0.3855,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.097607,
+          "connection_C": 0.3855,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.101514,
+          "connection_C": 0.3787,
+          "movement_M": 0.466
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.10542,
+          "connection_C": 0.3787,
+          "movement_M": 0.4669
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.109326,
+          "connection_C": 0.3787,
+          "movement_M": 0.4669
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.113232,
+          "connection_C": 0.3883,
+          "movement_M": 0.5282
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.117139,
+          "connection_C": 0.5057,
+          "movement_M": 0.5282
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.121045,
+          "connection_C": 0.8232,
+          "movement_M": 0.4921
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.124951,
+          "connection_C": 0.9147,
+          "movement_M": 0.4921
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.128857,
+          "connection_C": 0.9147,
+          "movement_M": 0.4669
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.132764,
+          "connection_C": 0.9147,
+          "movement_M": 0.4921
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.13667,
+          "connection_C": 0.9147,
+          "movement_M": 0.5282
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.140576,
+          "connection_C": 0.9147,
+          "movement_M": 0.5431
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.144482,
+          "connection_C": 0.9147,
+          "movement_M": 0.5431
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.148389,
+          "connection_C": 0.8351,
+          "movement_M": 0.5431
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.152295,
+          "connection_C": 0.8328,
+          "movement_M": 0.5172
+        },
+        {
+          "event": "GW190412",
+          "time_s": 0.156201,
+          "connection_C": 0.8328,
+          "movement_M": 0.5172
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.218018,
+          "connection_C": 1.0972,
+          "movement_M": 0.6956
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.214111,
+          "connection_C": 1.2229,
+          "movement_M": 0.6956
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.210205,
+          "connection_C": 1.2763,
+          "movement_M": 0.7159
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.206299,
+          "connection_C": 1.2763,
+          "movement_M": 0.8035
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.202393,
+          "connection_C": 1.2763,
+          "movement_M": 0.9104
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.198486,
+          "connection_C": 1.2763,
+          "movement_M": 0.9268
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.19458,
+          "connection_C": 1.2574,
+          "movement_M": 0.9268
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.190674,
+          "connection_C": 1.2547,
+          "movement_M": 0.9268
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.186768,
+          "connection_C": 1.2346,
+          "movement_M": 0.9268
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.182861,
+          "connection_C": 1.2282,
+          "movement_M": 0.9102
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.178955,
+          "connection_C": 1.2076,
+          "movement_M": 0.9102
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.175049,
+          "connection_C": 1.2023,
+          "movement_M": 0.9102
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.171143,
+          "connection_C": 1.1868,
+          "movement_M": 0.9102
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.167236,
+          "connection_C": 1.1164,
+          "movement_M": 0.9683
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.16333,
+          "connection_C": 1.032,
+          "movement_M": 1.052
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.159424,
+          "connection_C": 0.9445,
+          "movement_M": 1.0561
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.155518,
+          "connection_C": 0.9445,
+          "movement_M": 1.0561
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.151611,
+          "connection_C": 0.9445,
+          "movement_M": 1.052
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.147705,
+          "connection_C": 0.9445,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.143799,
+          "connection_C": 0.974,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.139893,
+          "connection_C": 1.0892,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.135986,
+          "connection_C": 1.211,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.13208,
+          "connection_C": 1.32,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.128174,
+          "connection_C": 1.4919,
+          "movement_M": 1.0442
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.124268,
+          "connection_C": 1.5694,
+          "movement_M": 1.1074
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.120361,
+          "connection_C": 1.6139,
+          "movement_M": 1.1074
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.116455,
+          "connection_C": 1.649,
+          "movement_M": 1.1443
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.112549,
+          "connection_C": 1.6632,
+          "movement_M": 1.1443
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.108643,
+          "connection_C": 1.6632,
+          "movement_M": 1.1921
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.104736,
+          "connection_C": 1.666,
+          "movement_M": 1.1987
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.10083,
+          "connection_C": 1.6759,
+          "movement_M": 1.2102
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.096924,
+          "connection_C": 1.682,
+          "movement_M": 1.2643
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.093018,
+          "connection_C": 1.682,
+          "movement_M": 1.342
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.089111,
+          "connection_C": 1.6889,
+          "movement_M": 1.4869
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.085205,
+          "connection_C": 1.6964,
+          "movement_M": 1.4918
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.081299,
+          "connection_C": 1.6977,
+          "movement_M": 1.6761
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.077393,
+          "connection_C": 1.7127,
+          "movement_M": 1.6978
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.073486,
+          "connection_C": 1.7391,
+          "movement_M": 1.6978
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.06958,
+          "connection_C": 1.7391,
+          "movement_M": 1.7044
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.065674,
+          "connection_C": 1.7391,
+          "movement_M": 1.7044
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.061768,
+          "connection_C": 1.7391,
+          "movement_M": 1.7044
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.057861,
+          "connection_C": 1.6338,
+          "movement_M": 1.7044
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.053955,
+          "connection_C": 1.6338,
+          "movement_M": 1.7025
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.050049,
+          "connection_C": 1.6102,
+          "movement_M": 1.6973
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.046143,
+          "connection_C": 1.5789,
+          "movement_M": 1.6724
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.042236,
+          "connection_C": 1.563,
+          "movement_M": 1.6717
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.03833,
+          "connection_C": 1.563,
+          "movement_M": 1.6717
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.034424,
+          "connection_C": 1.5035,
+          "movement_M": 1.6361
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.030518,
+          "connection_C": 1.4285,
+          "movement_M": 1.6324
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.026611,
+          "connection_C": 1.4282,
+          "movement_M": 1.6324
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.022705,
+          "connection_C": 1.4153,
+          "movement_M": 1.6097
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.018799,
+          "connection_C": 1.39,
+          "movement_M": 1.5094
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.014893,
+          "connection_C": 1.3185,
+          "movement_M": 0.9817
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.010986,
+          "connection_C": 1.1553,
+          "movement_M": 0.7178
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.00708,
+          "connection_C": 1.0325,
+          "movement_M": 0.524
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": -0.003174,
+          "connection_C": 0.8531,
+          "movement_M": 0.3185
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.000732,
+          "connection_C": 0.8531,
+          "movement_M": 0.3185
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.004639,
+          "connection_C": 0.8531,
+          "movement_M": 0.3185
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.008545,
+          "connection_C": 0.8487,
+          "movement_M": 0.2314
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.012451,
+          "connection_C": 0.8278,
+          "movement_M": 0.2253
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.016357,
+          "connection_C": 0.8278,
+          "movement_M": 0.2253
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.020264,
+          "connection_C": 0.8278,
+          "movement_M": 0.2753
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.02417,
+          "connection_C": 0.7387,
+          "movement_M": 0.3354
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.028076,
+          "connection_C": 0.6845,
+          "movement_M": 0.3354
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.031982,
+          "connection_C": 0.6357,
+          "movement_M": 0.3354
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.035889,
+          "connection_C": 0.6357,
+          "movement_M": 0.3659
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.039795,
+          "connection_C": 0.6357,
+          "movement_M": 0.4235
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.043701,
+          "connection_C": 0.6357,
+          "movement_M": 0.4933
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.047607,
+          "connection_C": 0.9702,
+          "movement_M": 0.4933
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.051514,
+          "connection_C": 1.1729,
+          "movement_M": 0.579
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.05542,
+          "connection_C": 1.1729,
+          "movement_M": 0.5802
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.059326,
+          "connection_C": 1.1729,
+          "movement_M": 0.6058
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.063232,
+          "connection_C": 1.1729,
+          "movement_M": 0.6058
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.067139,
+          "connection_C": 1.0122,
+          "movement_M": 0.7349
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.071045,
+          "connection_C": 0.9838,
+          "movement_M": 0.7762
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.074951,
+          "connection_C": 0.9838,
+          "movement_M": 0.7762
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.078857,
+          "connection_C": 0.9608,
+          "movement_M": 0.7762
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.082764,
+          "connection_C": 0.8441,
+          "movement_M": 0.7762
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.08667,
+          "connection_C": 0.8441,
+          "movement_M": 0.6944
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.090576,
+          "connection_C": 0.8441,
+          "movement_M": 0.6471
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.094482,
+          "connection_C": 0.8017,
+          "movement_M": 0.6039
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.098389,
+          "connection_C": 0.6467,
+          "movement_M": 0.5995
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.102295,
+          "connection_C": 0.6467,
+          "movement_M": 0.5309
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.106201,
+          "connection_C": 0.6467,
+          "movement_M": 0.5092
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.110107,
+          "connection_C": 0.6467,
+          "movement_M": 0.5031
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.114014,
+          "connection_C": 0.6502,
+          "movement_M": 0.4411
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.11792,
+          "connection_C": 0.6815,
+          "movement_M": 0.4347
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.121826,
+          "connection_C": 0.7217,
+          "movement_M": 0.414
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.125732,
+          "connection_C": 0.788,
+          "movement_M": 0.3808
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.129639,
+          "connection_C": 0.8171,
+          "movement_M": 0.3808
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.133545,
+          "connection_C": 0.8266,
+          "movement_M": 0.3808
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.137451,
+          "connection_C": 0.8334,
+          "movement_M": 0.3808
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.141357,
+          "connection_C": 0.8368,
+          "movement_M": 0.5109
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.145264,
+          "connection_C": 0.8511,
+          "movement_M": 0.5109
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.14917,
+          "connection_C": 0.8511,
+          "movement_M": 0.5109
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.153076,
+          "connection_C": 0.8334,
+          "movement_M": 0.5109
+        },
+        {
+          "event": "GW190521_074359",
+          "time_s": 0.156982,
+          "connection_C": 0.8334,
+          "movement_M": 0.5109
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.218018,
+          "connection_C": 0.9675,
+          "movement_M": 0.9507
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.214111,
+          "connection_C": 0.9675,
+          "movement_M": 0.9507
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.210205,
+          "connection_C": 0.9675,
+          "movement_M": 0.7562
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.206299,
+          "connection_C": 0.9126,
+          "movement_M": 0.7562
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.202393,
+          "connection_C": 0.7624,
+          "movement_M": 0.5445
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.198486,
+          "connection_C": 0.7282,
+          "movement_M": 0.5445
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.19458,
+          "connection_C": 0.7093,
+          "movement_M": 0.5445
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.190674,
+          "connection_C": 0.7039,
+          "movement_M": 0.5206
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.186768,
+          "connection_C": 0.5955,
+          "movement_M": 0.5206
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.182861,
+          "connection_C": 0.5955,
+          "movement_M": 0.5885
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.178955,
+          "connection_C": 0.5955,
+          "movement_M": 0.6207
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.175049,
+          "connection_C": 0.5955,
+          "movement_M": 0.6837
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.171143,
+          "connection_C": 0.6886,
+          "movement_M": 0.6837
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.167236,
+          "connection_C": 0.9482,
+          "movement_M": 0.6873
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.16333,
+          "connection_C": 1.1432,
+          "movement_M": 0.7269
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.159424,
+          "connection_C": 1.2524,
+          "movement_M": 0.7269
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.155518,
+          "connection_C": 1.2541,
+          "movement_M": 0.8321
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.151611,
+          "connection_C": 1.2541,
+          "movement_M": 0.8584
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.147705,
+          "connection_C": 1.2541,
+          "movement_M": 0.8924
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.143799,
+          "connection_C": 1.2541,
+          "movement_M": 0.8924
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.139893,
+          "connection_C": 1.2399,
+          "movement_M": 0.8924
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.135986,
+          "connection_C": 1.1881,
+          "movement_M": 0.8924
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.13208,
+          "connection_C": 1.1802,
+          "movement_M": 0.8763
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.128174,
+          "connection_C": 1.1709,
+          "movement_M": 0.8416
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.124268,
+          "connection_C": 1.1435,
+          "movement_M": 0.8265
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.120361,
+          "connection_C": 1.1289,
+          "movement_M": 0.7718
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.116455,
+          "connection_C": 0.9904,
+          "movement_M": 0.7342
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.112549,
+          "connection_C": 0.9904,
+          "movement_M": 0.7342
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.108643,
+          "connection_C": 0.9904,
+          "movement_M": 0.7342
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.104736,
+          "connection_C": 0.9904,
+          "movement_M": 0.7342
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.10083,
+          "connection_C": 1.1222,
+          "movement_M": 0.8125
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.096924,
+          "connection_C": 1.1438,
+          "movement_M": 0.834
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.093018,
+          "connection_C": 1.1438,
+          "movement_M": 0.834
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.089111,
+          "connection_C": 1.1438,
+          "movement_M": 0.8374
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.085205,
+          "connection_C": 1.1438,
+          "movement_M": 0.8489
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.081299,
+          "connection_C": 0.9848,
+          "movement_M": 0.8721
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.077393,
+          "connection_C": 0.7235,
+          "movement_M": 0.8721
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.073486,
+          "connection_C": 0.7235,
+          "movement_M": 0.8721
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.06958,
+          "connection_C": 0.7235,
+          "movement_M": 0.8721
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.065674,
+          "connection_C": 0.7235,
+          "movement_M": 0.917
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.061768,
+          "connection_C": 1.0579,
+          "movement_M": 0.9646
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.057861,
+          "connection_C": 1.3459,
+          "movement_M": 1.1277
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.053955,
+          "connection_C": 1.5826,
+          "movement_M": 1.1277
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.050049,
+          "connection_C": 1.7519,
+          "movement_M": 1.1277
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.046143,
+          "connection_C": 1.7519,
+          "movement_M": 1.1464
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.042236,
+          "connection_C": 1.7519,
+          "movement_M": 1.2087
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.03833,
+          "connection_C": 1.7519,
+          "movement_M": 1.3659
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.034424,
+          "connection_C": 1.5681,
+          "movement_M": 1.3822
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.030518,
+          "connection_C": 1.3274,
+          "movement_M": 1.3822
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.026611,
+          "connection_C": 1.2409,
+          "movement_M": 1.3822
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.022705,
+          "connection_C": 1.2409,
+          "movement_M": 1.3822
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.018799,
+          "connection_C": 1.2409,
+          "movement_M": 1.3822
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.014893,
+          "connection_C": 1.2409,
+          "movement_M": 1.3734
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.010986,
+          "connection_C": 1.2484,
+          "movement_M": 1.3734
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.00708,
+          "connection_C": 1.2484,
+          "movement_M": 1.3566
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": -0.003174,
+          "connection_C": 1.2588,
+          "movement_M": 1.3322
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.000732,
+          "connection_C": 1.2744,
+          "movement_M": 1.268
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.004639,
+          "connection_C": 1.2831,
+          "movement_M": 1.2448
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.008545,
+          "connection_C": 1.2831,
+          "movement_M": 1.2448
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.012451,
+          "connection_C": 1.2484,
+          "movement_M": 1.1054
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.016357,
+          "connection_C": 1.2345,
+          "movement_M": 1.0098
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.020264,
+          "connection_C": 1.2345,
+          "movement_M": 1.009
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.02417,
+          "connection_C": 1.1593,
+          "movement_M": 0.8557
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.028076,
+          "connection_C": 0.9767,
+          "movement_M": 0.5394
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.031982,
+          "connection_C": 0.9712,
+          "movement_M": 0.4437
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.035889,
+          "connection_C": 0.969,
+          "movement_M": 0.4437
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.039795,
+          "connection_C": 0.944,
+          "movement_M": 0.4437
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.043701,
+          "connection_C": 0.9371,
+          "movement_M": 0.4428
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.047607,
+          "connection_C": 0.9371,
+          "movement_M": 0.4428
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.051514,
+          "connection_C": 0.9371,
+          "movement_M": 0.4437
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.05542,
+          "connection_C": 0.9371,
+          "movement_M": 0.4437
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.059326,
+          "connection_C": 0.9007,
+          "movement_M": 0.4232
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.063232,
+          "connection_C": 0.8901,
+          "movement_M": 0.4232
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.067139,
+          "connection_C": 0.8717,
+          "movement_M": 0.3791
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.071045,
+          "connection_C": 0.8282,
+          "movement_M": 0.4301
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.074951,
+          "connection_C": 0.8257,
+          "movement_M": 0.4301
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.078857,
+          "connection_C": 0.7996,
+          "movement_M": 0.4301
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.082764,
+          "connection_C": 0.747,
+          "movement_M": 0.4301
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.08667,
+          "connection_C": 0.5672,
+          "movement_M": 0.5211
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.090576,
+          "connection_C": 0.5672,
+          "movement_M": 0.6087
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.094482,
+          "connection_C": 0.5672,
+          "movement_M": 0.6412
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.098389,
+          "connection_C": 0.5672,
+          "movement_M": 1.0486
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.102295,
+          "connection_C": 0.5842,
+          "movement_M": 1.0486
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.106201,
+          "connection_C": 0.829,
+          "movement_M": 1.0486
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.110107,
+          "connection_C": 0.8856,
+          "movement_M": 1.0486
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.114014,
+          "connection_C": 0.8947,
+          "movement_M": 0.991
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.11792,
+          "connection_C": 0.9937,
+          "movement_M": 0.8243
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.121826,
+          "connection_C": 1.0043,
+          "movement_M": 0.7276
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.125732,
+          "connection_C": 1.0954,
+          "movement_M": 0.6868
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.129639,
+          "connection_C": 1.1676,
+          "movement_M": 0.6771
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.133545,
+          "connection_C": 1.2027,
+          "movement_M": 0.6668
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.137451,
+          "connection_C": 1.2621,
+          "movement_M": 0.6544
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.141357,
+          "connection_C": 1.2621,
+          "movement_M": 0.6439
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.145264,
+          "connection_C": 1.2621,
+          "movement_M": 0.6129
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.14917,
+          "connection_C": 1.2621,
+          "movement_M": 0.5458
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.153076,
+          "connection_C": 1.2497,
+          "movement_M": 0.5458
+        },
+        {
+          "event": "GW190727_060333",
+          "time_s": 0.156982,
+          "connection_C": 1.1723,
+          "movement_M": 0.5458
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.217236,
+          "connection_C": 0.9112,
+          "movement_M": 0.6317
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.21333,
+          "connection_C": 0.9112,
+          "movement_M": 0.6158
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.209424,
+          "connection_C": 0.9112,
+          "movement_M": 0.5897
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.205518,
+          "connection_C": 0.9112,
+          "movement_M": 0.5738
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.201611,
+          "connection_C": 0.9112,
+          "movement_M": 0.4723
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.197705,
+          "connection_C": 0.931,
+          "movement_M": 0.3273
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.193799,
+          "connection_C": 0.9679,
+          "movement_M": 0.3073
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.189893,
+          "connection_C": 0.9679,
+          "movement_M": 0.3073
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.185986,
+          "connection_C": 0.9679,
+          "movement_M": 0.3073
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.18208,
+          "connection_C": 0.9679,
+          "movement_M": 0.3202
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.178174,
+          "connection_C": 0.9303,
+          "movement_M": 0.3202
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.174268,
+          "connection_C": 0.9303,
+          "movement_M": 0.4633
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.170361,
+          "connection_C": 0.9303,
+          "movement_M": 0.8045
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.166455,
+          "connection_C": 0.9303,
+          "movement_M": 0.8897
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.162549,
+          "connection_C": 0.9972,
+          "movement_M": 0.8972
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.158643,
+          "connection_C": 1.1302,
+          "movement_M": 0.9287
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.154736,
+          "connection_C": 1.1619,
+          "movement_M": 0.9912
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.15083,
+          "connection_C": 1.1619,
+          "movement_M": 0.9912
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.146924,
+          "connection_C": 1.1619,
+          "movement_M": 1.1704
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.143018,
+          "connection_C": 1.2204,
+          "movement_M": 1.1704
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.139111,
+          "connection_C": 1.2296,
+          "movement_M": 1.1704
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.135205,
+          "connection_C": 1.2296,
+          "movement_M": 1.1828
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.131299,
+          "connection_C": 1.2296,
+          "movement_M": 1.1997
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.127393,
+          "connection_C": 1.2556,
+          "movement_M": 1.1965
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.123486,
+          "connection_C": 1.3449,
+          "movement_M": 1.1965
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.11958,
+          "connection_C": 1.3471,
+          "movement_M": 1.1987
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.115674,
+          "connection_C": 1.3529,
+          "movement_M": 1.1987
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.111768,
+          "connection_C": 1.3689,
+          "movement_M": 1.1997
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.107861,
+          "connection_C": 1.4216,
+          "movement_M": 1.1997
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.103955,
+          "connection_C": 1.5803,
+          "movement_M": 1.1997
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.100049,
+          "connection_C": 1.7336,
+          "movement_M": 1.2216
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.096143,
+          "connection_C": 1.812,
+          "movement_M": 1.3805
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.092236,
+          "connection_C": 1.8321,
+          "movement_M": 1.4096
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.08833,
+          "connection_C": 1.8728,
+          "movement_M": 1.4774
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.084424,
+          "connection_C": 1.9164,
+          "movement_M": 1.4813
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.080518,
+          "connection_C": 1.9164,
+          "movement_M": 1.609
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.076611,
+          "connection_C": 1.9164,
+          "movement_M": 1.6324
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.072705,
+          "connection_C": 1.9164,
+          "movement_M": 1.6485
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.068799,
+          "connection_C": 1.9029,
+          "movement_M": 1.6524
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.064893,
+          "connection_C": 1.7619,
+          "movement_M": 1.6524
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.060986,
+          "connection_C": 1.7619,
+          "movement_M": 1.6524
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.05708,
+          "connection_C": 1.7491,
+          "movement_M": 1.6324
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.053174,
+          "connection_C": 1.7413,
+          "movement_M": 1.6065
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.049268,
+          "connection_C": 1.6853,
+          "movement_M": 1.5436
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.045361,
+          "connection_C": 1.6853,
+          "movement_M": 1.4955
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.041455,
+          "connection_C": 1.6677,
+          "movement_M": 1.4628
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.037549,
+          "connection_C": 1.5347,
+          "movement_M": 1.4577
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.033643,
+          "connection_C": 1.3507,
+          "movement_M": 1.4559
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.029736,
+          "connection_C": 1.1875,
+          "movement_M": 1.4508
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.02583,
+          "connection_C": 0.9515,
+          "movement_M": 1.4347
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.021924,
+          "connection_C": 0.8069,
+          "movement_M": 1.3854
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.018018,
+          "connection_C": 0.8069,
+          "movement_M": 1.1648
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.014111,
+          "connection_C": 0.8069,
+          "movement_M": 0.9468
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.010205,
+          "connection_C": 0.8069,
+          "movement_M": 0.9468
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.006299,
+          "connection_C": 0.906,
+          "movement_M": 0.9468
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": -0.002393,
+          "connection_C": 1.0136,
+          "movement_M": 0.9468
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.001514,
+          "connection_C": 1.0653,
+          "movement_M": 1.0002
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.00542,
+          "connection_C": 1.0653,
+          "movement_M": 1.0002
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.009326,
+          "connection_C": 1.0653,
+          "movement_M": 1.0002
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.013232,
+          "connection_C": 1.0805,
+          "movement_M": 1.0002
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.017139,
+          "connection_C": 1.0805,
+          "movement_M": 0.7842
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.021045,
+          "connection_C": 1.0805,
+          "movement_M": 0.7842
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.024951,
+          "connection_C": 1.0805,
+          "movement_M": 0.7376
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.028857,
+          "connection_C": 1.1189,
+          "movement_M": 0.7025
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.032764,
+          "connection_C": 1.1189,
+          "movement_M": 0.6685
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.03667,
+          "connection_C": 1.1189,
+          "movement_M": 0.6478
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.040576,
+          "connection_C": 1.1189,
+          "movement_M": 0.641
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.044482,
+          "connection_C": 1.0594,
+          "movement_M": 0.6307
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.048389,
+          "connection_C": 0.9863,
+          "movement_M": 0.5516
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.052295,
+          "connection_C": 0.7964,
+          "movement_M": 0.5423
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.056201,
+          "connection_C": 0.7964,
+          "movement_M": 0.5423
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.060107,
+          "connection_C": 0.7964,
+          "movement_M": 0.4057
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.064014,
+          "connection_C": 0.7964,
+          "movement_M": 0.4057
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.06792,
+          "connection_C": 0.9657,
+          "movement_M": 0.4057
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.071826,
+          "connection_C": 0.9712,
+          "movement_M": 0.4057
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.075732,
+          "connection_C": 0.9712,
+          "movement_M": 0.5336
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.079639,
+          "connection_C": 0.9712,
+          "movement_M": 0.5765
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.083545,
+          "connection_C": 0.9712,
+          "movement_M": 0.5973
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.087451,
+          "connection_C": 0.9677,
+          "movement_M": 0.6795
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.091357,
+          "connection_C": 0.9548,
+          "movement_M": 0.8467
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.095264,
+          "connection_C": 0.9521,
+          "movement_M": 0.8545
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.09917,
+          "connection_C": 0.9334,
+          "movement_M": 0.8567
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.103076,
+          "connection_C": 0.9321,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.106982,
+          "connection_C": 0.9334,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.110889,
+          "connection_C": 0.9439,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.114795,
+          "connection_C": 0.944,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.118701,
+          "connection_C": 0.944,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.122607,
+          "connection_C": 0.944,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.126514,
+          "connection_C": 0.993,
+          "movement_M": 0.8758
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.13042,
+          "connection_C": 0.993,
+          "movement_M": 0.8094
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.134326,
+          "connection_C": 0.993,
+          "movement_M": 0.7962
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.138232,
+          "connection_C": 0.993,
+          "movement_M": 0.7962
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.142139,
+          "connection_C": 0.9168,
+          "movement_M": 0.7962
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.146045,
+          "connection_C": 0.7645,
+          "movement_M": 0.7698
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.149951,
+          "connection_C": 0.7645,
+          "movement_M": 0.7698
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.153857,
+          "connection_C": 0.7645,
+          "movement_M": 0.7698
+        },
+        {
+          "event": "GW190828_063405",
+          "time_s": 0.157764,
+          "connection_C": 0.7645,
+          "movement_M": 0.7698
+        }
+      ],
+      "reviewed_source_sample": [
+        {
+          "event": "GW190412",
+          "time_s": -0.218799,
+          "connection_C": 0.9029,
+          "movement_M": 0.8514,
+          "unresolved_H": 0.2457,
+          "phase_coherence_ARA": 0.9717
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.214893,
+          "connection_C": 0.9029,
+          "movement_M": 0.7754,
+          "unresolved_H": 0.3216,
+          "phase_coherence_ARA": 1.0591
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.210986,
+          "connection_C": 0.9029,
+          "movement_M": 0.7647,
+          "unresolved_H": 0.3324,
+          "phase_coherence_ARA": 0.9902
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.20708,
+          "connection_C": 0.7772,
+          "movement_M": 0.7208,
+          "unresolved_H": 0.5021,
+          "phase_coherence_ARA": 0.7027
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.203174,
+          "connection_C": 0.6454,
+          "movement_M": 0.7208,
+          "unresolved_H": 0.6338,
+          "phase_coherence_ARA": 0.2673
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.199268,
+          "connection_C": 0.6454,
+          "movement_M": 0.7203,
+          "unresolved_H": 0.6343,
+          "phase_coherence_ARA": 0.0168
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.195361,
+          "connection_C": 0.6454,
+          "movement_M": 0.7203,
+          "unresolved_H": 0.6343,
+          "phase_coherence_ARA": 0.1711
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.191455,
+          "connection_C": 0.6454,
+          "movement_M": 0.7064,
+          "unresolved_H": 0.6482,
+          "phase_coherence_ARA": 0.4664
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.187549,
+          "connection_C": 0.674,
+          "movement_M": 0.6937,
+          "unresolved_H": 0.6323,
+          "phase_coherence_ARA": 0.6012
+        },
+        {
+          "event": "GW190412",
+          "time_s": -0.183643,
+          "connection_C": 0.6893,
+          "movement_M": 0.6937,
+          "unresolved_H": 0.617,
+          "phase_coherence_ARA": 0.5895
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "t431_events",
+      "label": "T431 untouched confirmation event ledger",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_EVENTS.csv",
+      "query": {
+        "engine": "duckdb",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_EVENTS.csv')",
+        "description": "Loads the four untouched confirmation-event ledger rows.",
+        "metric_definitions": [
+          "ledger_strength = connection_break_depth + movement_excursion",
+          "ledger_offsource_percentile is the fraction of matched off-source ledgers below the event ledger"
+        ]
+      }
+    },
+    {
+      "id": "t431_controls",
+      "label": "T431 matched off-source controls",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_CONTROLS.csv",
+      "query": {
+        "engine": "duckdb",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_CONTROLS.csv')",
+        "description": "Loads the 82 matched off-source control windows for each confirmation event."
+      }
+    },
+    {
+      "id": "t431_histories",
+      "label": "T431 time-resolved ARA histories",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_HISTORIES.csv",
+      "query": {
+        "engine": "duckdb",
+        "sql": "SELECT * FROM read_csv_auto('F:/SystemFormulaFolder/GIT/ARA-GIT/analysis/irrationality_di_ara/T431_connection_transfer_ledger/results/T431_CONFIRMATION_HISTORIES.csv')",
+        "description": "Loads the time-resolved connection, movement, unresolved and coherence ARA histories."
+      }
+    },
+    {
+      "id": "t431_protocol",
+      "label": "Frozen T431 protocol",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\T431_FROZEN_PROTOCOL.md"
+    },
+    {
+      "id": "t431_gate_summary",
+      "label": "Frozen T431 gate outcomes",
+      "path": "F:\\SystemFormulaFolder\\GIT\\ARA-GIT\\analysis\\irrationality_di_ara\\T431_connection_transfer_ledger\\results\\T431_CONFIRMATION_SUMMARY.json",
+      "query": {
+        "engine": "duckdb",
+        "sql": "SELECT * FROM (VALUES (1, 'Network transfer shape', '3 of 4', '3 of 4', true), (2, 'Above matched off-source 95th percentile', '3 of 4', '0 of 4', false), (3, 'Full H1/L1 component replication', '2 of 4', '1 of 4', false), (4, 'Positive unresolved mobile excess', '3 of 4', '2 of 4', false), (5, 'Phase coherence at or above off-source P90', '3 of 4', '2 of 4', false)) AS gates(order_id, gate, required, observed, passed)",
+        "description": "Reconstructs the five predeclared frozen gate outcomes from the confirmation summary."
+      }
+    },
+    {
+      "id": "gwosc",
+      "label": "Gravitational Wave Open Science Center event strain",
+      "href": "https://gwosc.org/api/"
+    }
+  ]
+}

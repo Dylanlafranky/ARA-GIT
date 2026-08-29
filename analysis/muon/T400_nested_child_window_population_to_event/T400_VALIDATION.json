@@ -1,0 +1,45 @@
+{
+  "test": "T400 independent saved-artifact validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_is_frozen_hash": true,
+    "raw_C_hash_matches": true,
+    "raw_AC_hash_matches": true,
+    "ordered_population_window": true,
+    "saved_curve_strictly_increases": true,
+    "saved_curve_spans_local_zero_to_two": true,
+    "population_gates_recompute": true,
+    "event_gates_recompute": true,
+    "histogram_effective_weight_recomputes": true,
+    "saved_event_sample_weight_recomputes": true,
+    "saved_event_coordinates_in_window": true,
+    "saved_membership_weights_are_probabilities": true,
+    "repeated_split_fraction_recomputes": true,
+    "leave_one_out_fraction_recomputes": true,
+    "phase_shift_p_recomputes": true,
+    "bootstrap_mode_fraction_recomputes": true,
+    "mode_sensitivity_saved": true,
+    "visual_exists": true,
+    "claim_boundaries_are_explicit": true
+  },
+  "recomputed": {
+    "effective_delayed_weight": 8.98271115102617,
+    "split_ridge_fraction": 0.6,
+    "loo_ridge_fraction": 0.9411764705882353,
+    "phase_shift_p_upper": 0.018333333333333333,
+    "bootstrap_mode_fraction": 0.1925,
+    "population_gates": {
+      "P1_ordered_objective_window": true,
+      "P2_crest_near_local_ridge": false,
+      "P3_leave_one_out_ridge_fraction_ge_0p80": true
+    },
+    "event_gates": {
+      "I1_effective_delayed_count_ge_10": false,
+      "I2_holdout_mode_in_broad_ridge": false,
+      "I3_holdout_mean_within_0p30_of_population": true,
+      "I4_repeated_split_mode_fraction_ge_0p70": false,
+      "I5_C_median_membership_weight_gt_AC": false
+    }
+  },
+  "note": "Validation checks arithmetic and evidence boundaries; it does not convert failed scientific gates into passes."
+}

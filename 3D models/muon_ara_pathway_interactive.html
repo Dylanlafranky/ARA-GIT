@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Muon ARA pathway — interactive test map</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f7f8f5, #0d1117);
+      --surface: light-dark(#ffffff, #151a22);
+      --surface-2: light-dark(#eef1ec, #1c2430);
+      --text: light-dark(#17201c, #edf3ef);
+      --muted: light-dark(#5b6860, #a9b6ad);
+      --line: light-dark(#c9d2cb, #35413a);
+      --grid: light-dark(#dfe5e0, #263129);
+      --phase-a: light-dark(#1677b8, #62b7f0);
+      --phase-b: light-dark(#d06b21, #f1a35e);
+      --supported: light-dark(#207b4d, #6fcd99);
+      --partial: light-dark(#2569a7, #75b4ef);
+      --unresolved: light-dark(#9a6813, #f0c266);
+      --rejected: light-dark(#a4463f, #f18a83);
+      --crosswalk: light-dark(#7451a5, #b99ae6);
+      --ring-parent: light-dark(#6d83a0, #8aa5c5);
+      --ring-child: light-dark(#8b6a9b, #b68ac8);
+      --focus: light-dark(#0b6da8, #7cc7f2);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); }
+    button, select, a { font: inherit; }
+    a { color: var(--phase-a); }
+    a:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    .shell { max-width: 1560px; margin: 0 auto; padding: 24px; }
+    header { display: flex; gap: 28px; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+    h1 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 500; letter-spacing: -0.025em; }
+    .subtitle { margin: 6px 0 0; color: var(--muted); max-width: 78ch; }
+    .boundary { max-width: 36ch; color: var(--muted); font-size: .875rem; text-align: right; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin: 18px 0 12px; }
+    .field { display: grid; gap: 4px; color: var(--muted); font-size: .8rem; }
+    select, button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 10px;
+    }
+    button { cursor: pointer; }
+    button:hover { background: var(--surface-2); }
+
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(290px, 380px); gap: 18px; align-items: stretch; }
+    .map-wrap, .detail {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+    .map-wrap { min-width: 0; overflow: hidden; position: relative; }
+    .map-caption { display: flex; justify-content: space-between; gap: 18px; padding: 14px 16px 8px; color: var(--muted); font-size: .83rem; }
+    .map-caption strong { color: var(--text); font-weight: 500; }
+    #map { display: block; width: 100%; min-height: 610px; touch-action: none; }
+    .map-help { position: absolute; right: 14px; bottom: 12px; color: var(--muted); font-size: .75rem; background: var(--surface); padding: 4px 7px; border-radius: 6px; }
+
+    .detail { padding: 18px; min-height: 610px; }
+    .detail h2 { margin: 0 0 4px; font-size: 1.22rem; font-weight: 500; }
+    .detail .kicker { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; }
+    .status { display: inline-flex; align-items: center; gap: 7px; margin: 12px 0 16px; font-size: .85rem; font-weight: 500; }
+    .status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; }
+    .status.supported { color: var(--supported); }
+    .status.partial { color: var(--partial); }
+    .status.unresolved { color: var(--unresolved); }
+    .status.rejected { color: var(--rejected); }
+    .status.crosswalk { color: var(--crosswalk); }
+    .detail h3 { font-size: .9rem; font-weight: 500; margin: 18px 0 6px; }
+    .detail p { margin: 0 0 10px; line-height: 1.52; }
+    .tests { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tests a { border: 1px solid var(--line); border-radius: 7px; padding: 5px 7px; text-decoration: none; font-size: .8rem; }
+    .tests a:hover { background: var(--surface-2); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 12px 18px; margin: 16px 0 0; color: var(--muted); font-size: .8rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .legend i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .legend .edge { width: 22px; height: 0; border-top: 2px solid var(--line); border-radius: 0; }
+    .legend .edge.dashed { border-top-style: dashed; }
+
+    .timeline-section { margin-top: 22px; }
+    .timeline-section h2 { margin: 0 0 4px; font-size: 1.12rem; font-weight: 500; }
+    .timeline-section > p { margin: 0 0 12px; color: var(--muted); font-size: .86rem; }
+    .timeline { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    .timeline button { min-height: 70px; text-align: left; padding: 9px; display: grid; align-content: start; gap: 3px; }
+    .timeline button[aria-pressed="true"] { border-color: var(--focus); background: var(--surface-2); }
+    .timeline strong { font-weight: 500; font-size: .85rem; }
+    .timeline small { color: var(--muted); font-size: .73rem; line-height: 1.25; }
+
+    .footer-note { margin: 16px 0 0; color: var(--muted); font-size: .78rem; }
+
+    .scale-ring { fill: none; stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .scale-ring.parent { stroke: var(--ring-parent); opacity: .54; }
+    .scale-ring.child { stroke: var(--ring-child); opacity: .54; }
+    .scale-ring.observation { stroke: var(--line); stroke-dasharray: 7 7; opacity: .8; }
+    .scale-axis { stroke: var(--grid); stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+    .scale-axis.ridge { stroke: var(--line); stroke-dasharray: 5 5; }
+    .ring-label, .axis-label { fill: var(--muted); font-size: 12px; }
+    .ring-label { font-weight: 500; }
+    .physics-anchor { fill: var(--surface-2); stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+    .physics-text { fill: var(--text); font-size: 12px; }
+    .physics-note { fill: var(--muted); font-size: 11px; }
+    .edge-path { fill: none; stroke: var(--line); stroke-width: 2; vector-effect: non-scaling-stroke; marker-end: url(#arrow); opacity: .82; }
+    .edge-path.inference { stroke-dasharray: 7 6; }
+    .edge-path.observation { stroke-dasharray: 2 6; }
+    .edge-path.active { stroke: var(--focus); stroke-width: 3; opacity: 1; }
+    .node { cursor: pointer; text-decoration: none; }
+    .node circle.main { fill: var(--surface-2); stroke-width: 4; vector-effect: non-scaling-stroke; }
+    .node circle.halo { fill: none; stroke: var(--line); stroke-width: 1.2; vector-effect: non-scaling-stroke; opacity: .75; }
+    .node text { fill: var(--text); text-anchor: middle; pointer-events: none; }
+    .node .node-id { font-size: 11px; fill: var(--muted); }
+    .node .node-label { font-size: 12px; font-weight: 500; }
+    .node.supported circle.main { stroke: var(--supported); }
+    .node.partial circle.main { stroke: var(--partial); }
+    .node.unresolved circle.main { stroke: var(--unresolved); }
+    .node.rejected circle.main { stroke: var(--rejected); }
+    .node.crosswalk circle.main { stroke: var(--crosswalk); }
+    .node.dimmed { opacity: .15; pointer-events: none; }
+    .node.selected circle.halo { stroke: var(--focus); stroke-width: 4; opacity: 1; }
+    .node:hover circle.halo, .node:focus circle.halo { stroke: var(--focus); stroke-width: 3; opacity: 1; }
+
+    @media (max-width: 980px) {
+      .layout { grid-template-columns: 1fr; }
+      .detail { min-height: 0; }
+      #map { min-height: 560px; }
+      .timeline { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      .shell { padding: 14px; }
+      header { align-items: start; flex-direction: column; gap: 8px; }
+      .boundary { text-align: left; }
+      .map-caption { flex-direction: column; gap: 4px; }
+      #map { min-height: 500px; }
+      .timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .map-help { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <h1>Muon ARA pathway</h1>
+        <p class="subtitle">An interactive map of the route from source-scale population relations, through the muon parent, its child cuts, delayed daughters, irrationality handover, and the unresolved parent architecture.</p>
+      </div>
+      <div class="boundary">This is a map of the tests and their relational location. It is not a claim that detector coordinates are literal particle substructure.</div>
+    </header>
+
+    <div class="toolbar" aria-label="Map controls">
+      <label class="field">Show layer
+        <select id="layer-filter">
+          <option value="all">All mapped relations</option>
+          <option value="source">Source and medium</option>
+          <option value="parent">Muon parent</option>
+          <option value="child">Children and grandchildren</option>
+          <option value="handover">Irrationality and parent handover</option>
+          <option value="observation">Detector and event cuts</option>
+        </select>
+      </label>
+      <button id="fit-view" type="button">Fit pathway</button>
+      <button id="reset-view" type="button">Reset position</button>
+    </div>
+
+    <section class="layout" aria-label="Muon pathway map and selected relation">
+      <div class="map-wrap">
+        <div class="map-caption">
+          <span><strong>ARA scale map</strong> — circle size marks relational scale; overlap marks tested coupling.</span>
+          <span>Solid arrow = measured/tested route · dashed = reconstruction or open route</span>
+        </div>
+        <svg id="map" viewBox="0 0 1120 720" role="img" aria-labelledby="map-title map-desc">
+          <title id="map-title">Muon ARA test pathway across source, parent, child and observation scales</title>
+          <desc id="map-desc">Interactive circle map. Selecting a node opens its ARA reading, scientific anchor, claim status, and links to the corresponding tests.</desc>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--line)"></path>
+            </marker>
+          </defs>
+          <g id="viewport">
+            <g aria-hidden="true">
+              <circle class="scale-ring parent" cx="318" cy="380" r="255"></circle>
+              <circle class="scale-ring parent" cx="444" cy="380" r="184"></circle>
+              <circle class="scale-ring child" cx="674" cy="380" r="134"></circle>
+              <circle class="scale-ring child" cx="879" cy="380" r="92"></circle>
+              <ellipse class="scale-ring observation" cx="728" cy="405" rx="360" ry="272"></ellipse>
+              <line class="scale-axis" x1="44" y1="380" x2="1052" y2="380"></line>
+              <line class="scale-axis ridge" x1="444" y1="148" x2="444" y2="612"></line>
+              <text class="ring-label" x="92" y="145">scale +1 · source / larger parent</text>
+              <text class="ring-label" x="362" y="207">scale 0 · muon parent identity</text>
+              <text class="ring-label" x="615" y="250">scale −1 · child relations</text>
+              <text class="ring-label" x="838" y="287">scale −2 · grandchild / event window</text>
+              <text class="ring-label" x="793" y="681">perpendicular observation lens</text>
+              <text class="axis-label" x="430" y="140">parent ridge cut</text>
+              <text class="axis-label" x="48" y="369">connection-facing</text>
+              <text class="axis-label" x="946" y="369">movement-facing</text>
+            </g>
+
+            <g aria-label="Established physics anchor">
+              <rect class="physics-anchor" x="54" y="54" width="1000" height="58" rx="8"></rect>
+              <text class="physics-text" x="78" y="78">Established anchor: π⁺ → μ⁺ + νμ (prompt), then μ⁺ → e⁺ + νe + anti-νμ (delayed)</text>
+              <text class="physics-note" x="78" y="99">ARA map below separates what was observed, reconstructed, crosswalked, rejected, and left unresolved.</text>
+            </g>
+
+            <g id="edges"></g>
+            <g id="nodes"></g>
+          </g>
+        </svg>
+        <div class="map-help">Drag to pan · wheel to zoom · select a node for evidence</div>
+      </div>
+
+      <aside class="detail" id="detail" aria-live="polite">
+        <div class="kicker" id="detail-tier">Scale +1 · source</div>
+        <h2 id="detail-title">Prompt → delayed population branch</h2>
+        <div class="status supported" id="detail-status">Supported within population scope</div>
+        <h3>ARA reading</h3>
+        <p id="detail-ara"></p>
+        <h3>Scientific anchor</h3>
+        <p id="detail-science"></p>
+        <h3>Boundary</h3>
+        <p id="detail-boundary"></p>
+        <h3>Open the tests</h3>
+        <div class="tests" id="detail-tests"></div>
+      </aside>
+    </section>
+
+    <div class="legend" aria-label="Claim-status and edge legend">
+      <span><i style="background:var(--supported)"></i> supported</span>
+      <span><i style="background:var(--partial)"></i> partial / directional</span>
+      <span><i style="background:var(--crosswalk)"></i> crosswalk / reconstruction</span>
+      <span><i style="background:var(--unresolved)"></i> unresolved / unavailable</span>
+      <span><i style="background:var(--rejected)"></i> tested and not supported</span>
+      <span><i class="edge"></i> tested relation</span>
+      <span><i class="edge dashed"></i> inferred or open relation</span>
+    </div>
+
+    <section class="timeline-section">
+      <h2>Walk the test sequence</h2>
+      <p>These stages compress the full T369–T423 history. Select a stage to jump to its relational node; every detail panel links back to the recorded result.</p>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <p class="footer-note">Evidence labels follow the frozen records. “Supported” always inherits the experiment, aggregation level, medium, and measurement boundaries of its linked test.</p>
+  </main>
+
+  <script>
+    const base = "../analysis/muon/";
+    const tests = {
+      T369: ["T369", base + "T369_MUON_CAPTURE_DAUGHTER_CLOSURE_REPORT_2026-08-12.md"],
+      T370: ["T370", base + "T370_POLARIZED_MUON_PHASE_HANDOVER_REPORT_2026-08-12.md"],
+      T371: ["T371", base + "T371_COHERENT_PION_MUON_DIARA_REPORT_2026-08-13.md"],
+      T372: ["T372", base + "T372_CHILD_HALF_HANDOVER_GRADIENT_REPORT_2026-08-13.md"],
+      T373_375: ["T373–375", base + "T375_LIQUID_ARGON_ENERGY_PLACEMENT_REPORT_2026-08-13.md"],
+      T376: ["T376", base + "T376_EVENT_LINKED_MUON_HANDOVER_REPORT_2026-08-13.md"],
+      T379: ["T379", base + "T379_INDIVIDUAL_MUON_CHILD_HANDOVER_REPORT_2026-08-14.md"],
+      T380: ["T380", base + "T380_SAME_SCALE_MUON_CHILD_CUT_REPORT_2026-08-14.md"],
+      T382: ["T382", base + "T382_ral_silver_traversal_child/T382_ARA_NATIVE_CHILD_REPORT.html"],
+      T389_391: ["T389–391", base + "T391_raw_detector_antiphase/T391_RAW_DETECTOR_ANTIPHASE_REPORT.html"],
+      T392: ["T392", base + "T392_spin_child_neutral_handover/T392_SPIN_CHILD_NEUTRAL_HANDOVER_REPORT.html"],
+      T393: ["T393", base + "T393_JOINT_NEUTRINO_PAIR_PROJECTION_FINDINGS_2026-08-15.md"],
+      T394: ["T394", base + "T394_NATIVE_NEUTRAL_PAIR_AND_CAUSAL_RELEASE_FINDINGS_2026-08-15.md"],
+      T395: ["T395", base + "T395_INFORMATION3_PARENT_CHILD_LOCK_FINDINGS_2026-08-16.md"],
+      T396: ["T396", base + "T396_information3_spin_child_lock/T396_INFORMATION3_SPIN_CHILD_LOCK_REPORT.html"],
+      T397: ["T397", base + "T397_spin_phase_maturity_vs_orientation/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_REPORT.html"],
+      T398: ["T398", base + "T398_population_neutrino_wave_overlap/T398_POPULATION_NEUTRINO_WAVE_OVERLAP_REPORT.html"],
+      T399: ["T399", base + "T399_child_half_precrest_sequence/T399_CHILD_HALF_PRECREST_SEQUENCE_REPORT.html"],
+      T400: ["T400", base + "T400_nested_child_window_population_to_event/T400_NESTED_CHILD_WINDOW_POPULATION_TO_EVENT_REPORT.html"],
+      T401: ["T401", base + "T401_winner_projection_child_antiphase/T401_WINNER_PROJECTION_CHILD_ANTIPHASE_REPORT.html"],
+      T402: ["T402", base + "T402_whole_shape_child_relation/T402_WHOLE_SHAPE_CHILD_RELATION_REPORT.html"],
+      T403: ["T403", base + "T403_reverse_component_lineage/T403_REVERSE_COMPONENT_LINEAGE_REPORT.html"],
+      T404_405: ["T404–405", base + "T404_corrected_child_release_diara/T404_CORRECTED_CHILD_RELEASE_DIARA_REPORT.html"],
+      T406_407: ["T406–407", base + "T407_individual_muon_grandchild_transfer/T406_T407_GRANDCHILD_TO_INDIVIDUAL_MUON_REPORT.html"],
+      T408: ["T408", base + "T408_NESTED_WINDOWS_INDIVIDUAL_MUON_FINDINGS_2026-08-18.md"],
+      T409: ["T409", base + "T409_CHRONOLOGICAL_PARENT_RIDGE_TRACKING_FINDINGS_2026-08-18.md"],
+      T413: ["T413", base + "T413_live_state_handover/results/T413_LIVE_STATE_HANDOVER_REPORT.html"],
+      T414: ["T414", base + "T414_spin_child_lifespan_parent/results/T414_SPIN_CHILD_LIFESPAN_PARENT_REPORT.html"],
+      T415: ["T415", base + "T415_multichannel_state_array/results/T415_MULTICHANNEL_STATE_ARRAY_REPORT.html"],
+      T416: ["T416", base + "T416_dual_irrationality_time_tracking/results/T416_DUAL_IRRATIONALITY_TIME_TRACKING_REPORT.html"],
+      T417: ["T417", base + "T417_coupled_rationality_irrationality_handover/results/T417_COUPLED_RATIONALITY_IRRATIONALITY_HANDOVER_REPORT.html"],
+      T418: ["T418", base + "T418_parent_boundary_child_continuation/results/T418_PARENT_BOUNDARY_CHILD_CONTINUATION_REPORT.html"],
+      T419: ["T419", base + "T419_dynamic_irrationality_handover/results/T419_DYNAMIC_IRRATIONALITY_HANDOVER_REPORT.html"],
+      T420: ["T420", base + "T420_information3_handover/results/T420_INFORMATION3_HANDOVER_REPORT.html"],
+      T421: ["T421", base + "T421_child_singularity_parent_ridge/results/T421_CHILD_SINGULARITY_PARENT_RIDGE_REPORT.html"],
+      T422: ["T422", base + "T422_independent_detector_bank_parent/results/T422_INDEPENDENT_DETECTOR_BANK_PARENT_REPORT.html"],
+      T423: ["T423", base + "T423_parent_di_ara_temporal_architecture/results/T423_PARENT_DI_ARA_TEMPORAL_ARCHITECTURE_REPORT.html"]
+    };
+
+    const nodes = [
+      {
+        id:"source", x:150, y:320, r:37, label:["Prompt → delayed","population branch"], tier:"Scale +1 · source / larger parent", layer:"source", status:"supported", statusText:"Supported within population scope",
+        ara:"The stopped-pion source resolves an ordered prompt branch and a delayed muon-decay branch. T372 places their population equality on an asymmetry-dependent handover gradient rather than forcing an exact landmark.",
+        science:"COHERENT source data require prompt pion-decay neutrinos followed by the delayed νe + anti-νμ population from muon decay.",
+        boundary:"This is population timing. It does not observe an individual muon's two neutrinos being born.", refs:["T371","T372","T398"]
+      },
+      {
+        id:"medium", x:164, y:495, r:31, label:["Medium / rung","translation"], tier:"Scale +1 ↔ 0 · medium bridge", layer:"source", status:"partial", statusText:"Medium dependence retained",
+        ara:"The same relational landmark moves when the identity changes from solid/source-level cuts to liquid-argon energy placement. The ARA coordinate must be re-established for the new medium and rung.",
+        science:"Detector medium, recoil-energy restoration, and aggregation change which physical mixture a coordinate represents.",
+        boundary:"The liquid-argon result cannot be copied as the same identity or same 0–2 coordinate as silver or CsI.", refs:["T373_375"]
+      },
+      {
+        id:"capture", x:267, y:270, r:29, label:["Capture / daughter","closure start"], tier:"Scale 0 · initial daughter cut", layer:"parent", status:"crosswalk", statusText:"Foundational crosswalk / calibration",
+        ara:"The earliest branch decomposed daughter amount and anti-phase-like closure, establishing the vocabulary later reused for decay, spin, and neutral-child tests.",
+        science:"Muon capture and daughter-energy observables are a separate physical channel from free positive-muon decay.",
+        boundary:"Useful geometry calibration; not the same decay identity as μ+ → e+ + two neutrinos.", refs:["T369"]
+      },
+      {
+        id:"muon", x:430, y:382, r:48, label:["Muon parent","lifespan envelope"], tier:"Scale 0 · muon parent identity", layer:"parent", status:"supported", statusText:"Parent envelope recovered",
+        ara:"The population survival/release envelope is the slow parent traversal. Faster spin and detector-share relations ride inside it as child-scale motion rather than replacing the parent.",
+        science:"Muon populations decay exponentially while their polarization can precess many times within the lifetime envelope.",
+        boundary:"Recovered at population level. The available μSR archives do not track one muon's complete hidden pre-decay state into its decay daughters.", refs:["T370","T382","T413","T414"]
+      },
+      {
+        id:"spin", x:590, y:278, r:36, label:["Spin / cadence","traversal child"], tier:"Scale −1 · child of the muon parent", layer:"child", status:"partial", statusText:"Orientation supported; release clock rejected",
+        ara:"Spin is a faster child traversal carried by the parent lifetime. Its perpendicular cuts recover anti-phase structure, but it does not supply a universal 7.5-turn trigger or a direct individual decay clock.",
+        science:"Muon spin phase robustly organises charged-daughter detector direction. Total decay rate is not strongly phase-locked in these data.",
+        boundary:"Population μSR phase, not event-linked spin trajectories. Exact 7.5-turn release was decisively rejected.", refs:["T389_391","T397","T414"]
+      },
+      {
+        id:"statearray", x:570, y:472, r:32, label:["Multichannel","state array"], tier:"Scale 0 ↔ −1 · parent plus children", layer:"parent", status:"rejected", statusText:"Frozen predictive array not supported",
+        ara:"An array of spin, strength, rate, curvature, parent state and coupling coordinates was tested so the muon was not reduced to spin alone. Current parent amount explained much of the remaining structure.",
+        science:"Detector asymmetry channels share acceptance and population-envelope effects.",
+        boundary:"The multichannel relation is informative diagnostically, but the frozen out-of-sample predictor failed its full gate.", refs:["T415"]
+      },
+      {
+        id:"neutralpair", x:727, y:300, r:38, label:["Charged daughter ↔","joint neutral pair"], tier:"Scale −1 · decay children", layer:"child", status:"crosswalk", statusText:"Kinematic truth-model crosswalk",
+        ara:"The spent parent budget separates into a charged daughter and a joint neutral complement. That neutral complement then decompresses into two unequal children rather than one fixed 0.5/1.5 split.",
+        science:"In μ+ decay, e+, νe and anti-νμ are produced together. Conservation laws constrain their joint energy and direction distributions.",
+        boundary:"The two neutrino children are truth-model components, not two directly observed neutrinos in the event-linked detector archive.", refs:["T392","T393","T394"]
+      },
+      {
+        id:"info3", x:729, y:463, r:34, label:["Information³","distribution locks"], tier:"Scale −1 ↔ −2 · relational lock", layer:"child", status:"supported", statusText:"Strong distribution-level locks",
+        ara:"Parent amount plus a second independent relation constrains the third component distribution. The lock is much stronger than a single-coordinate reconstruction.",
+        science:"Energy amount, spin-relative orientation and internal neutral division jointly constrain Standard-Model decay distributions.",
+        boundary:"This tightens hidden-child distributions; it does not determine the exact daughters or release time of one muon.", refs:["T395","T396"]
+      },
+      {
+        id:"release", x:872, y:300, r:35, label:["Delayed release","waveform"], tier:"Scale −2 · delayed population children", layer:"child", status:"supported", statusText:"Population waveform supported",
+        ara:"Prompt crest, branch equality, child half and delayed crest appear in the proposed order in the fitted population, with placement displaced by parent asymmetry.",
+        science:"Official source templates close νe and anti-νμ into the delayed neutrino waveform and are strongly required by the data.",
+        boundary:"The high-stringency T399 robustness threshold narrowly failed. The order is directional, not a universal fixed child-half clock.", refs:["T398","T399"]
+      },
+      {
+        id:"window", x:889, y:457, r:32, label:["Nested child","release window"], tier:"Scale −2 · decompressed local ARA", layer:"child", status:"partial", statusText:"Ridge balance transfers; exact mode does not",
+        ara:"The delayed-dominant parent interval was expanded to its own 0–2 child scale. Means and medians transfer near its ridge, while the density crest and exact mirror claims do not.",
+        science:"This is a detector-weighted delayed-source window, not a directly imaged neutrino waveform.",
+        boundary:"Several attractive gap, mirror and whole-shape readings failed. The surviving result is an asymmetric source-difference handover axis.", refs:["T400","T401","T402","T403","T404_405"]
+      },
+      {
+        id:"events", x:1010, y:410, r:35, label:["Individual event","linked cuts"], tier:"Scale −2 · event-linked observation", layer:"observation", status:"unresolved", statusText:"Directional signal; individual clock unresolved",
+        ara:"Parent conditioning followed by child decompression contains weak additional information about later charged-daughter timing, but fixed population landmarks do not transfer as a reliable individual release clock.",
+        science:"Each dot links an incoming stopped-muon candidate to a later charged-daughter candidate. The neutrinos are implied by the decay, not measured in that row.",
+        boundary:"T408 improved directionally but retained an interval crossing zero. T409 found stable bands, not a travelling upper ridge or neutrino-birth instant.", refs:["T376","T379","T380","T406_407","T408","T409"]
+      },
+      {
+        id:"irrationality", x:563, y:615, r:38, label:["Dual irrationality","time histories"], tier:"Perpendicular Di-ARA · opening / closure history", layer:"handover", status:"partial", statusText:"Order-sensitive history supported",
+        ara:"Openness U and closure R retain different histories. Chronological order preserved more lagged closure coherence than shuffled time, but the full dual-Irrationality-Di-ARA handover was not recovered.",
+        science:"These are population-level detector-share residual histories reconstructed from RF-μSR, not a new force or literal hidden particle.",
+        boundary:"The closure coordinate often saturates at 2, weakening determinacy controls. Use it as a navigator and history cut, not a universal identity label.", refs:["T416","T417"]
+      },
+      {
+        id:"dynamic", x:726, y:606, r:36, label:["Opening ↔ closure","dynamic handover"], tier:"Perpendicular Di-ARA · child crossover", layer:"handover", status:"rejected", statusText:"Dynamic predictor not supported",
+        ara:"T418/T419 asked whether the boundary cloud continues into a causal opening/closure handover. Crossings are visible, but the frozen future-prediction identity did not survive validation and holdout.",
+        science:"The tested histories are constructed detector-population observables under changing field conditions.",
+        boundary:"Local crossings are descriptive. They are not automatically physical events, and no neutrino creation was observed at them.", refs:["T418","T419"]
+      },
+      {
+        id:"parentH", x:733, y:165, r:40, label:["Child U=R ↔","parent H≈1"], tier:"Scale −1 singularity ↔ scale 0 ridge", layer:"handover", status:"partial", statusText:"Same-view hierarchy observed; full claim unresolved",
+        ara:"At exact child U=R crossings, the independently derived lag-angle parent coordinate H sits close to its 1.0 ridge. This is the cleanest current child-singularity / parent-ridge geometry.",
+        science:"H is an unsigned lag-angle amount reconstructed from detector-population relations. It may be a generic/shared parent coordinate rather than a unique physical parent.",
+        boundary:"T420's full Information³ prediction failed. T421's narrow and full frozen hierarchies were not supported out of sample, despite the recurring ridge exposure.", refs:["T420","T421"]
+      },
+      {
+        id:"parentQ", x:902, y:164, r:34, label:["Candidate Q","signed parent"], tier:"Scale 0 · decompressed parent orientation", layer:"handover", status:"unresolved", statusText:"Derived coordinate; PA/PB route unconfirmed",
+        ara:"Q is the signed companion to unsigned H, derived from the same complex lag relation. It is not a forced mirror, but it is not an independent energy observable either.",
+        science:"Q records the sign/orientation of the mean complex lag phase; H records its unsigned angular amount.",
+        boundary:"No selected T423 interval contained the required Q=1 candidate handover. The proposed PA→PB route remains scientifically unavailable.", refs:["T421","T423"]
+      },
+      {
+        id:"independent", x:1020, y:218, r:30, label:["Independent","parent probe"], tier:"Observation lens · disjoint detector banks", layer:"observation", status:"rejected", statusText:"Unique-parent claim not supported",
+        ara:"T422 separated the child crossing and candidate parent across disjoint detector banks. Validation showed timed ridge geometry, but development, controls and high-field holdout did not support a unique parent identity.",
+        science:"Detector-bank separation reduces shared-channel leakage but does not by itself create a physically different parent observable.",
+        boundary:"The validation-only geometry is retained. The next strict bridge needs a physically different parent observable, such as a population/decay envelope.", refs:["T422"]
+      }
+    ];
+
+    const edges = [
+      ["source","muon","tested"], ["medium","muon","tested"], ["capture","muon","inference"],
+      ["muon","spin","tested"], ["muon","statearray","tested"], ["muon","neutralpair","tested"],
+      ["spin","neutralpair","inference"], ["neutralpair","info3","tested"], ["neutralpair","release","tested"],
+      ["release","window","tested"], ["window","events","observation"], ["info3","events","inference"],
+      ["statearray","irrationality","tested"], ["irrationality","dynamic","tested"], ["dynamic","parentH","inference"],
+      ["parentH","parentQ","inference"], ["parentH","independent","observation"], ["parentQ","independent","observation"]
+    ].map(([from,to,type]) => ({from,to,type}));
+
+    const timeline = [
+      ["T369–370","Daughter closure and muon phase parent","capture"],
+      ["T371–375","Source branch, child half, medium translation","source"],
+      ["T376–380","Event-linked and same-scale child cuts","events"],
+      ["T382–391","Traversal child, cadence and anti-phase","spin"],
+      ["T392–394","Charged daughter and joint neutral pair","neutralpair"],
+      ["T395–397","Information³ locks and spin orientation","info3"],
+      ["T398–405","Population waveform and nested child window","release"],
+      ["T406–409","Grandchild transfer and individual bands","events"],
+      ["T413–415","Parent envelope and multichannel state","muon"],
+      ["T416–419","Irrationality histories and dynamic crossing","irrationality"],
+      ["T420–421","Child singularity / parent ridge","parentH"],
+      ["T422–423","Independent parent and temporal architecture","parentQ"]
+    ];
+
+    const svg = document.getElementById("map");
+    const viewport = document.getElementById("viewport");
+    const nodeLayer = document.getElementById("nodes");
+    const edgeLayer = document.getElementById("edges");
+    const byId = Object.fromEntries(nodes.map(n => [n.id, n]));
+    let selected = "source";
+    let transform = {x:0, y:0, k:1};
+    let drag = null;
+
+    function curvedPath(a,b) {
+      const dx = b.x-a.x, dy = b.y-a.y;
+      const len = Math.max(1, Math.hypot(dx,dy));
+      const sx = a.x + dx/len*(a.r+5), sy = a.y + dy/len*(a.r+5);
+      const ex = b.x - dx/len*(b.r+8), ey = b.y - dy/len*(b.r+8);
+      const bend = Math.min(42, len*.16);
+      const mx=(sx+ex)/2 - dy/len*bend, my=(sy+ey)/2 + dx/len*bend;
+      return `M ${sx} ${sy} Q ${mx} ${my} ${ex} ${ey}`;
+    }
+
+    function renderGraph() {
+      edgeLayer.innerHTML = edges.map((e,i) => {
+        const active = e.from===selected || e.to===selected;
+        return `<path id="edge-${i}" class="edge-path ${e.type} ${active?'active':''}" d="${curvedPath(byId[e.from],byId[e.to])}"></path>`;
+      }).join("");
+      nodeLayer.innerHTML = nodes.map(n => {
+        const lines = n.label.map((t,i) => `<text class="node-label" x="${n.x}" y="${n.y + 4 + (i-(n.label.length-1)/2)*15}">${t}</text>`).join("");
+        return `<a class="node ${n.status} ${n.id===selected?'selected':''}" href="#detail" data-id="${n.id}" aria-label="${n.label.join(' ')}; ${n.statusText}">
+          <circle class="halo" cx="${n.x}" cy="${n.y}" r="${n.r+7}"></circle>
+          <circle class="main" cx="${n.x}" cy="${n.y}" r="${n.r}"></circle>
+          ${lines}
+        </a>`;
+      }).join("");
+      nodeLayer.querySelectorAll("a.node").forEach(el => el.addEventListener("click", e => {
+        e.preventDefault(); selectNode(el.dataset.id, true);
+      }));
+      applyFilter();
+    }
+
+    function selectNode(id, scroll=false) {
+      selected = id;
+      const n = byId[id];
+      document.getElementById("detail-tier").textContent = n.tier;
+      document.getElementById("detail-title").textContent = n.label.join(" ");
+      const status = document.getElementById("detail-status");
+      status.className = `status ${n.status}`;
+      status.textContent = n.statusText;
+      document.getElementById("detail-ara").textContent = n.ara;
+      document.getElementById("detail-science").textContent = n.science;
+      document.getElementById("detail-boundary").textContent = n.boundary;
+      document.getElementById("detail-tests").innerHTML = n.refs.map(key => {
+        const [label,href] = tests[key];
+        return `<a href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
+      }).join("");
+      document.querySelectorAll("#timeline button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.node===id)));
+      renderGraph();
+      if (scroll && matchMedia("(max-width: 980px)").matches) document.getElementById("detail").scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function applyFilter() {
+      const layer = document.getElementById("layer-filter").value;
+      nodeLayer.querySelectorAll(".node").forEach(el => {
+        const n = byId[el.dataset.id];
+        el.classList.toggle("dimmed", layer!=="all" && n.layer!==layer);
+      });
+    }
+
+    function applyTransform() {
+      viewport.setAttribute("transform", `translate(${transform.x} ${transform.y}) scale(${transform.k})`);
+    }
+
+    function fitView() { transform={x:0,y:0,k:1}; applyTransform(); }
+    function resetView() { transform={x:18,y:12,k:.96}; applyTransform(); }
+
+    svg.addEventListener("wheel", e => {
+      e.preventDefault();
+      const rect=svg.getBoundingClientRect();
+      const sx=(e.clientX-rect.left)/rect.width*1120;
+      const sy=(e.clientY-rect.top)/rect.height*720;
+      const old=transform.k;
+      const next=Math.min(2.5,Math.max(.55,old*Math.exp(-e.deltaY*.001)));
+      transform.x = sx-(sx-transform.x)*next/old;
+      transform.y = sy-(sy-transform.y)*next/old;
+      transform.k=next; applyTransform();
+    }, {passive:false});
+    svg.addEventListener("pointerdown", e => { drag={x:e.clientX,y:e.clientY,tx:transform.x,ty:transform.y}; svg.setPointerCapture(e.pointerId); });
+    svg.addEventListener("pointermove", e => {
+      if(!drag) return;
+      const rect=svg.getBoundingClientRect();
+      transform.x=drag.tx+(e.clientX-drag.x)/rect.width*1120;
+      transform.y=drag.ty+(e.clientY-drag.y)/rect.height*720;
+      applyTransform();
+    });
+    svg.addEventListener("pointerup", () => drag=null);
+    svg.addEventListener("pointercancel", () => drag=null);
+
+    document.getElementById("layer-filter").addEventListener("change", applyFilter);
+    document.getElementById("fit-view").addEventListener("click", fitView);
+    document.getElementById("reset-view").addEventListener("click", resetView);
+
+    document.getElementById("timeline").innerHTML = timeline.map(([id,desc,node]) => `<button type="button" data-node="${node}" aria-pressed="false"><strong>${id}</strong><small>${desc}</small></button>`).join("");
+    document.querySelectorAll("#timeline button").forEach(button => button.addEventListener("click", () => selectNode(button.dataset.node, true)));
+
+    resetView();
+    selectNode("source");
+  </script>
+</body>
+</html>

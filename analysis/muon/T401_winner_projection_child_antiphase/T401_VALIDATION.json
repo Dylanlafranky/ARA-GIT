@@ -1,0 +1,34 @@
+{
+  "test": "T401 independent saved-output validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_matches_frozen_file": true,
+    "requested_split_accounting_is_200": true,
+    "valid_split_count_is_164": true,
+    "invalid_split_count_is_36": true,
+    "distribution_row_count_is_164x2x8": true,
+    "mode_row_count_is_164x2": true,
+    "each_distribution_sums_to_one": true,
+    "summary_has_two_sources_and_eight_bins": true,
+    "candidate_occupancy_recalculates": true,
+    "candidate_binned_winner_count_recalculates": true,
+    "candidate_kde_winner_count_recalculates": true,
+    "mirror_relations_are_four_per_source": true,
+    "all_pairings_are_24_per_source": true,
+    "C_reflection_score_recalculates": true,
+    "exact_reflection_is_unique_per_source": true,
+    "sampling_null_has_eight_bins": true,
+    "observed_gap_is_consistent_with_null": true,
+    "all_frozen_gates_failed": true,
+    "verdict_matches_gate_state": true,
+    "static_figure_exists": true
+  },
+  "recalculated": {
+    "valid_splits": 164,
+    "invalid_splits": 36,
+    "candidate_mean_occupancy_C": 0.11861415469032918,
+    "candidate_binned_winners_C": 13,
+    "candidate_kde_winners_C": 17,
+    "C_reflection_exchange_score": 0.04670128863761083
+  }
+}

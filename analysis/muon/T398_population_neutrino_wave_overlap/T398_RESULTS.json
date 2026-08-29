@@ -1,0 +1,88 @@
+{
+  "test": "T398",
+  "date": "2026-08-17",
+  "protocol_sha256": "8aee1b49cb564e7f2af3726cb52d4732c463352dea67f98e6624509333a57d83",
+  "verdict": "POPULATION NEUTRINO RELEASE WAVEFORM OBSERVED; INDIVIDUAL BIRTH UNOBSERVED",
+  "primary_identity": "COHERENT CsI stopped-pion -> stopped-muon -> delayed neutrino population",
+  "time_window_us": [
+    0.0,
+    6.0
+  ],
+  "handover": {
+    "reconstructed_native_equality_us": 0.6360822416353671,
+    "saved_T372_equality_us": 0.6360822416353671,
+    "T372_bootstrap_95pct_us": [
+      0.5197071731192435,
+      0.7026342971046288
+    ],
+    "cumulative_ara_at_handover": 0.4374027771116097,
+    "interpretation": "instantaneous equality of fitted prompt and combined delayed population rates"
+  },
+  "T371_population_fit": {
+    "prompt_nu_mu": 60.18234943264439,
+    "prompt_ci95": [
+      32.41800625243746,
+      89.19975958723363
+    ],
+    "delayed_nu_e_plus_anti_nu_mu": 258.94244655776356,
+    "delayed_ci95": [
+      187.9171525014198,
+      333.29511036890455
+    ],
+    "delta_aic_vs_prompt_only": 57.68351502021687,
+    "prompt_peak_us_binned": 0.25,
+    "delayed_peak_us_binned": 0.75,
+    "nu_e_template_share_of_delayed": 0.3872199700005979,
+    "anti_nu_mu_template_share_of_delayed": 0.6127800299994021
+  },
+  "T378_independent_holdout": {
+    "verdict": "TWO POPULATIONS WITHOUT ALL FROZEN HANDOVER GATES",
+    "prompt_nu_mu": 33.69769148374192,
+    "prompt_ci95": [
+      16.419246217952796,
+      55.12610679446456
+    ],
+    "delayed_nu_e_plus_anti_nu_mu": 79.56753862690039,
+    "delayed_ci95": [
+      30.19199288252218,
+      128.5484038368413
+    ],
+    "prompt_peak_us": 0.75,
+    "delayed_peak_us": 1.25,
+    "handover_us": 1.0394189324476857,
+    "strict_frozen_handover_gates_all_pass": false
+  },
+  "reconstruction_checks": {
+    "max_abs_prompt_error_vs_T372": 1.6653345369377348e-16,
+    "max_abs_delayed_error_vs_T372": 9.71445146547012e-17,
+    "max_abs_flavor_closure_error": 0.0,
+    "remaining_plus_released_max_abs_error": 0.0
+  },
+  "gates": {
+    "G1_native_profiles_reproduce_T372": true,
+    "G2_T371_delayed_yield_interval_positive": true,
+    "G3_T371_delayed_branch_required_delta_AIC_at_least_10": true,
+    "G4_T371_delayed_crest_after_prompt": true,
+    "G5_native_handover_inside_T372_bootstrap_interval": true,
+    "G6_flavor_children_close_to_combined_delayed_branch": true,
+    "G7_T378_positive_populations_and_correct_order": true,
+    "G8_claim_boundary_is_population_not_individual": true
+  },
+  "evidence_boundaries": [
+    "COHERENT measures population timing distributions, not a named muon and its named daughter neutrinos.",
+    "The delayed CsI branch combines nu_e and anti-nu_mu; the separate curves are released source-template components.",
+    "The remaining-muon curve is derived from the tail integral of the delayed template and is not independent evidence.",
+    "T397 RAL Silver is a separate medium and detector and is not event-linked to T371 or T378.",
+    "The T378 holdout resolves the two populations in the correct order but retains its partial high-stringency verdict."
+  ],
+  "input_hashes_sha256": {
+    "T371_COHERENT_PION_MUON_DIARA_COMPONENTS.csv": "290fa750e0513ac7710e75787878eda0df9a31b9ec071f26c979c358b312d737",
+    "T371_COHERENT_PION_MUON_DIARA_RESULTS.json": "8576ef3edf542736835c9aa85273682c45b7639d6f5e503a6530a857aecaedf8",
+    "T372_CHILD_HALF_HANDOVER_NATIVE_SERIES.csv": "495718722595165c4195a7b6679ecfb55f0fd17edf578981be6f56cd9dbb3986",
+    "T372_CHILD_HALF_HANDOVER_GRADIENT_RESULTS.json": "7cf5ddc8dce44beba268976338d8132629ff1eecaf2aeb80862c38a5d1458f68",
+    "T378_timing_components.csv": "462a11e5d5b35d1d3c7a41aee4a9001984d7b0d4bffac7ee13bd574e79a8d17b",
+    "T378_results.json": "06bbe62e429901fd3bea8c7285c0c72a9cc6e4fcfb4f87aec7bbf113adf23bb0",
+    "T397_PHASE_PROFILES.csv": "f579211f8db8c58553684f089ff7c7cb829904d5663ca9cb6ccd95813daa3041",
+    "snsFlux2D.root": "1af0639911bb9219b66cbfa617057cd145d180c2ac8bc791c3008f1d666206ae"
+  }
+}

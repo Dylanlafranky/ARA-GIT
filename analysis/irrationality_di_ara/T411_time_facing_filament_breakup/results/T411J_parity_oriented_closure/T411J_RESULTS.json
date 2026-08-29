@@ -1,0 +1,64 @@
+{
+  "status": "frozen_coefficient_free_parity_closure",
+  "formula": {
+    "oriented_triplet": "(v,-u,w)",
+    "agreement": "1-(abs(z1-z2)+abs(z2-z3)+abs(z3-z1))/4",
+    "ridge_gate": "1-abs((z1+z2+z3)/3)",
+    "handover_score": "agreement*ridge_gate"
+  },
+  "checks": {
+    "rows": 10206,
+    "events": 123,
+    "fluids": 4,
+    "unique_name_time": true,
+    "all_predictors_precede_target": true,
+    "event_weights_sum_to_one": true,
+    "coordinates_inside_0_2": true
+  },
+  "gates": {
+    "child_flip_auc_above_chance": true,
+    "child_flip_auc_best_of_four": false,
+    "child_flip_auc_above_chance_in_at_least_three_fluids": true,
+    "aligned_child_beats_shift_control_p_le_005": false
+  },
+  "gates_passed": 2,
+  "gates_total": 4,
+  "shift_null": {
+    "observed_auc": 0.5641094603885969,
+    "null_mean_auc": 0.5536283463994901,
+    "null_median_auc": 0.5536320597394744,
+    "null_95_low": 0.5321098367285229,
+    "null_95_high": 0.5758897424981049,
+    "null_max_auc": 0.5939558581527628,
+    "p_null_ge_observed": 0.17882117882117882
+  },
+  "posthoc_grandchild_shift_audit": {
+    "status": "posthoc_best_control_timing_audit",
+    "observed_auc": 0.5764170110730926,
+    "null_mean_auc": 0.6069250032716998,
+    "null_median_auc": 0.6065921498170473,
+    "null_95_low": 0.5662556092440435,
+    "null_95_high": 0.6479632605353554,
+    "null_max_auc": 0.6638559723951309,
+    "p_null_ge_observed": 0.9200799200799201
+  },
+  "posthoc_grandchild_minus_child_auc_bootstrap": {
+    "status": "posthoc_event_cluster_bootstrap",
+    "observed_auc_difference": 0.012307550684495738,
+    "bootstrap_mean": 0.011860814816158393,
+    "bootstrap_95_low": -0.0017304357926283542,
+    "bootstrap_95_high": 0.025967549606654622,
+    "fraction_difference_le_zero": 0.045
+  },
+  "posthoc_channel_switch": {
+    "status": "posthoc_channel_crossing_audit",
+    "definition": "handover_grandchild_flip - handover_child_flip",
+    "observed_auc": 0.5983471359399606,
+    "null_mean_auc": 0.5848369139429301,
+    "null_median_auc": 0.5858046392999108,
+    "null_95_low": 0.5528032376014402,
+    "null_95_high": 0.6183855432078611,
+    "null_max_auc": 0.6347106532882708,
+    "p_null_ge_observed": 0.2127872127872128
+  }
+}

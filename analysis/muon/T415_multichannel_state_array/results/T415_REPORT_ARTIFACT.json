@@ -1,0 +1,4893 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "T415 \u2014 What predicts later muon release?",
+    "description": "Frozen multichannel ARA forecast and stronger-parent-baseline diagnostic on resolved public RF-\u00b5SR data.",
+    "generatedAt": "2026-08-19T14:26:44.929100+00:00",
+    "sources": [
+      {
+        "id": "isis-rb1620447",
+        "label": "ISIS RB1620447 public RF-\u00b5SR dataset",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "ISIS DataGateway",
+          "url": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+          "description": "Twenty-six resolved 300 K EMU runs used for T415; 13 development and 13 interleaved validation fields.",
+          "filters": [
+            "Magnetic field 50\u2013500 G",
+            "Corrected time 0.25\u20136.00 microseconds at native 0.016-microsecond spacing",
+            "RF-on and RF-off analysed separately",
+            "High-field 202 K branch excluded after the frozen T414 sampling failure"
+          ],
+          "tables_used": [
+            "ISIS investigation RB1620447 / raw NeXus dataset"
+          ]
+        }
+      },
+      {
+        "id": "t415-analysis",
+        "label": "T415 frozen multichannel analysis and parent-history diagnostic",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "Python 3.12",
+          "query": "python t415_multichannel_state_array.py --stage development && python t415_multichannel_state_array.py --stage validation",
+          "description": "Nested ridge models, whole-run validation, wrong-frequency and broken-history controls, followed by a labelled stronger-parent-baseline diagnostic.",
+          "language": "shell",
+          "filters": [
+            "Primary forecast horizon 0.064 microseconds",
+            "Development-only model fitting and regularisation",
+            "Validation replicate is the magnetic field, not the time bin"
+          ],
+          "metric_definitions": [
+            "Improvement = 1 - model RMSE / parent-baseline RMSE",
+            "Spin cuts are 1+sin(theta) and 1+cos(theta)",
+            "Share strength is the lagged 96-detector share displacement from the early reference",
+            "Parent-history diagnostic adds current normalized log rate and one-bin slope"
+          ],
+          "tables_used": [
+            "T415_MODEL_SUMMARY.csv",
+            "T415_FIELD_METRICS.csv",
+            "T415_POSTHOC_PARENT_HISTORY_SUMMARY.csv",
+            "T415_VALIDATION_AUDIT.json"
+          ]
+        }
+      },
+      {
+        "id": "t415-headline",
+        "label": "T415 headline metrics",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"headline\";",
+          "description": "Frozen and diagnostic headline values.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::headline"
+          ]
+        }
+      },
+      {
+        "id": "t415-models",
+        "label": "T415 nested model comparison",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"model_improvement\";",
+          "description": "Median validation-field improvement by model and horizon.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::model_improvement"
+          ]
+        }
+      },
+      {
+        "id": "t415-fields",
+        "label": "T415 field-level comparison",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"primary_fields\";",
+          "description": "Primary frozen and stronger-baseline field-level improvements.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::primary_fields"
+          ]
+        }
+      },
+      {
+        "id": "t415-diagnostic",
+        "label": "T415 parent-history diagnostic",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"diagnostic_models\";",
+          "description": "Incremental value after current parent rate and slope are included.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::diagnostic_models"
+          ]
+        }
+      },
+      {
+        "id": "t415-profile",
+        "label": "T415 284 G example profile",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"example_profile\";",
+          "description": "Observed and predicted normalized release profiles at the primary horizon.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::example_profile"
+          ]
+        }
+      },
+      {
+        "id": "t415-strength-rate",
+        "label": "T415 strength/rate relation",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"strength_rate\";",
+          "description": "Current parent log rate across lagged share-strength deciles.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::strength_rate"
+          ]
+        }
+      },
+      {
+        "id": "t415-controls",
+        "label": "T415 frozen controls",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"controls\";",
+          "description": "Correct, wrong-frequency and broken-history validation comparisons.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::controls"
+          ]
+        }
+      },
+      {
+        "id": "t415-gates",
+        "label": "T415 frozen gates",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"gates\";",
+          "description": "Prespecified primary interpretation gates.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::gates"
+          ]
+        }
+      },
+      {
+        "id": "t415-audit",
+        "label": "T415 independent audit",
+        "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "query": {
+          "engine": "SQLite",
+          "sql": "SELECT * FROM \"audit\";",
+          "description": "Independent provenance and arithmetic checks.",
+          "tables_used": [
+            "T415_REPORT_DATA.sqlite::audit"
+          ]
+        }
+      }
+    ],
+    "cards": [
+      {
+        "id": "frozen-gain-card",
+        "description": "Frozen M4 median validation-field improvement at 0.064 microseconds.",
+        "dataset": "headline",
+        "sourceId": "t415-headline",
+        "metrics": [
+          {
+            "field": "frozen_apparent_improvement_percent",
+            "label": "Median improvement",
+            "format": "number",
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "id": "diagnostic-gain-card",
+        "description": "Incremental M4-equivalent value beyond current parent rate and slope.",
+        "dataset": "headline",
+        "sourceId": "t415-headline",
+        "metrics": [
+          {
+            "field": "posthoc_incremental_improvement_percent",
+            "label": "Median improvement",
+            "format": "number",
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "id": "correlation-card",
+        "description": "The near-perfect inverse relation identifies the original proxy.",
+        "dataset": "headline",
+        "sourceId": "t415-headline",
+        "metrics": [
+          {
+            "field": "strength_parent_correlation",
+            "label": "Correlation",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "gate-card",
+        "description": "The correct array did not beat the wrong-frequency control.",
+        "dataset": "headline",
+        "sourceId": "t415-headline",
+        "metrics": [
+          {
+            "field": "frozen_gate_supported",
+            "label": "Supported",
+            "format": "text"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "nested-model-chart",
+        "title": "Nested model improvement over the time-only parent",
+        "subtitle": "Median across 13 validation fields; three future horizons",
+        "showDescription": true,
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "model_improvement",
+        "sourceId": "t415-models",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Nested model"
+          },
+          "y": {
+            "field": "median_improvement_percent",
+            "type": "quantitative",
+            "label": "Improvement",
+            "unit": "%"
+          },
+          "color": {
+            "field": "horizon",
+            "type": "nominal",
+            "label": "Forecast horizon"
+          },
+          "tooltip": [
+            {
+              "field": "model",
+              "type": "nominal"
+            },
+            {
+              "field": "horizon",
+              "type": "nominal"
+            },
+            {
+              "field": "median_improvement_percent",
+              "type": "quantitative",
+              "unit": "%"
+            },
+            {
+              "field": "field_wins",
+              "type": "quantitative"
+            },
+            {
+              "field": "field_count",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Nested ARA state array",
+        "yAxisTitle": "Median improvement over M0 (%)",
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "no improvement",
+            "lineStyle": "dashed"
+          }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "field-comparison-chart",
+        "title": "Primary-horizon improvement by validation field",
+        "subtitle": "Frozen time-only baseline versus the stronger parent-rate-and-slope baseline",
+        "showDescription": true,
+        "type": "scatter",
+        "intent": "relationship",
+        "dataset": "primary_fields",
+        "sourceId": "t415-fields",
+        "encodings": {
+          "x": {
+            "field": "field_G",
+            "type": "quantitative",
+            "label": "Magnetic field",
+            "unit": "G"
+          },
+          "y": {
+            "field": "improvement_percent",
+            "type": "quantitative",
+            "label": "Improvement",
+            "unit": "%"
+          },
+          "color": {
+            "field": "analysis",
+            "type": "nominal",
+            "label": "Baseline"
+          },
+          "tooltip": [
+            {
+              "field": "run",
+              "type": "nominal"
+            },
+            {
+              "field": "field_G",
+              "type": "quantitative",
+              "unit": "G"
+            },
+            {
+              "field": "analysis",
+              "type": "nominal"
+            },
+            {
+              "field": "improvement_percent",
+              "type": "quantitative",
+              "unit": "%"
+            }
+          ]
+        },
+        "xAxisTitle": "Magnetic field (G)",
+        "yAxisTitle": "Improvement over stated baseline (%)",
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "baseline parity",
+            "lineStyle": "dashed"
+          }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "diagnostic-model-chart",
+        "title": "Incremental value after current parent history is available",
+        "subtitle": "Primary 0.064-microsecond horizon; median across 13 validation fields",
+        "showDescription": true,
+        "type": "bar",
+        "intent": "comparison",
+        "dataset": "diagnostic_models",
+        "sourceId": "t415-diagnostic",
+        "encodings": {
+          "x": {
+            "field": "model",
+            "type": "nominal",
+            "label": "Diagnostic model"
+          },
+          "y": {
+            "field": "median_improvement_percent",
+            "type": "quantitative",
+            "label": "Improvement",
+            "unit": "%"
+          },
+          "tooltip": [
+            {
+              "field": "model",
+              "type": "nominal"
+            },
+            {
+              "field": "median_improvement_percent",
+              "type": "quantitative",
+              "unit": "%"
+            },
+            {
+              "field": "field_wins",
+              "type": "quantitative"
+            },
+            {
+              "field": "field_count",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Characteristics added beyond parent history",
+        "yAxisTitle": "Median improvement (%)",
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "no added value",
+            "lineStyle": "dashed"
+          }
+        ],
+        "layout": "full"
+      },
+      {
+        "id": "strength-rate-chart",
+        "title": "Lagged share strength and the current parent rate",
+        "subtitle": "Ten equal-count strength bins across validation; \u03c1 = \u22120.968 before binning",
+        "showDescription": true,
+        "type": "line",
+        "intent": "trend",
+        "dataset": "strength_rate",
+        "sourceId": "t415-strength-rate",
+        "encodings": {
+          "x": {
+            "field": "mean_strength",
+            "type": "quantitative",
+            "label": "Mean share strength"
+          },
+          "y": {
+            "field": "mean_current_log_rate",
+            "type": "quantitative",
+            "label": "Mean current log release rate"
+          },
+          "tooltip": [
+            {
+              "field": "strength_decile",
+              "type": "quantitative"
+            },
+            {
+              "field": "mean_strength",
+              "type": "quantitative"
+            },
+            {
+              "field": "mean_current_log_rate",
+              "type": "quantitative"
+            },
+            {
+              "field": "sample_bins",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Lagged detector-share strength",
+        "yAxisTitle": "Current normalized log release rate",
+        "layout": "full"
+      },
+      {
+        "id": "example-profile-chart",
+        "title": "Observed and predicted release profile at 284 G",
+        "subtitle": "RF on; four-bin-ahead ensemble forecast",
+        "showDescription": true,
+        "type": "line",
+        "intent": "trend",
+        "dataset": "example_profile",
+        "sourceId": "t415-profile",
+        "encodings": {
+          "x": {
+            "field": "target_time_us",
+            "type": "quantitative",
+            "label": "Target time",
+            "unit": "\u00b5s"
+          },
+          "y": {
+            "fields": [
+              "observed_normalized_rate",
+              "parent_prediction",
+              "full_array_prediction"
+            ],
+            "type": "quantitative",
+            "label": "Normalized release rate"
+          },
+          "tooltip": [
+            {
+              "field": "target_time_us",
+              "type": "quantitative",
+              "unit": "\u00b5s"
+            },
+            {
+              "field": "observed_normalized_rate",
+              "type": "quantitative"
+            },
+            {
+              "field": "parent_prediction",
+              "type": "quantitative"
+            },
+            {
+              "field": "full_array_prediction",
+              "type": "quantitative"
+            }
+          ]
+        },
+        "xAxisTitle": "Corrected target time (\u00b5s)",
+        "yAxisTitle": "Release rate / early reference",
+        "layout": "full"
+      }
+    ],
+    "tables": [
+      {
+        "id": "gate-table",
+        "title": "Frozen primary interpretation gates",
+        "subtitle": "The complete array is supported only if every row passes",
+        "showDescription": true,
+        "dataset": "gates",
+        "sourceId": "t415-gates",
+        "defaultSort": {
+          "field": "gate",
+          "direction": "asc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "gate",
+            "label": "Gate",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          },
+          {
+            "field": "meaning",
+            "label": "Meaning",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "control-table",
+        "title": "Correct array and frozen controls",
+        "subtitle": "Primary four-bin horizon across 13 validation fields",
+        "showDescription": true,
+        "dataset": "controls",
+        "sourceId": "t415-controls",
+        "defaultSort": {
+          "field": "median_improvement_percent",
+          "direction": "desc"
+        },
+        "density": "spacious",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "control",
+            "label": "Condition",
+            "type": "text"
+          },
+          {
+            "field": "median_improvement_percent",
+            "label": "Median improvement (%)",
+            "type": "number"
+          },
+          {
+            "field": "field_wins",
+            "label": "Field wins",
+            "type": "number"
+          },
+          {
+            "field": "field_count",
+            "label": "Fields",
+            "type": "number"
+          },
+          {
+            "field": "interpretation",
+            "label": "Interpretation",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "audit-table",
+        "title": "Independent T415 audit",
+        "subtitle": "Hashes, source files, split counts, rows, gates and post-hoc recomputation",
+        "showDescription": true,
+        "dataset": "audit",
+        "sourceId": "t415-audit",
+        "defaultSort": {
+          "field": "check",
+          "direction": "asc"
+        },
+        "density": "dense",
+        "layout": "full",
+        "columns": [
+          {
+            "field": "check",
+            "label": "Check",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "Status",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# T415 \u2014 What predicts later muon release?"
+      },
+      {
+        "id": "technical-summary",
+        "type": "markdown",
+        "sourceId": "t415-analysis",
+        "body": "## Technical summary\n\n**The characteristic array did not provide spin-specific prediction of later ensemble release.** Against a time-only parent curve, the frozen full array appeared to improve the four-bin-ahead forecast by 30.5% in all 13 validation fields. It nevertheless failed its prespecified gate because a wrong spin frequency performed fractionally better.\n\nA stronger-baseline diagnostic located the apparent success: lagged detector-share strength correlated \u22120.968 with the parent\u2019s current log release rate. Once current parent rate and slope were included, the complete array changed median error by \u22120.22% and improved only 5 of 13 fields. The array had recovered omitted parent history, not a spin-to-release handover."
+      },
+      {
+        "id": "headline-strip",
+        "type": "metric-strip",
+        "cardIds": [
+          "frozen-gain-card",
+          "diagnostic-gain-card",
+          "correlation-card",
+          "gate-card"
+        ],
+        "dataset": "headline"
+      },
+      {
+        "id": "frozen-heading",
+        "type": "markdown",
+        "sourceId": "t415-models",
+        "body": "## The frozen array found a repeatable signal, but not in spin\n\nSpin alone stayed at baseline across all three horizons. The large improvement entered only when lagged detector-share strength was added and persisted after environmental and Information-lock terms. That made the temporal channel worth investigating, but did not identify its physical owner."
+      },
+      {
+        "id": "nested-model-block",
+        "type": "chart",
+        "chartId": "nested-model-chart",
+        "layout": "full"
+      },
+      {
+        "id": "control-heading",
+        "type": "markdown",
+        "sourceId": "t415-controls",
+        "body": "## The wrong-frequency control prevents a spin-handover claim\n\nThe correct M4 array improved every validation field, yet the wrong-frequency version was fractionally better in median. Breaking temporal history destroyed performance. The predictive information was therefore time-ordered, but not locked to the calibrated spin phase."
+      },
+      {
+        "id": "control-table-block",
+        "type": "table",
+        "tableId": "control-table",
+        "layout": "full"
+      },
+      {
+        "id": "baseline-heading",
+        "type": "markdown",
+        "sourceId": "t415-fields",
+        "body": "## A complete parent baseline removes the apparent 30% gain\n\nThe upper field band in the next figure is the frozen comparison against parent time alone. The near-zero band uses the parent\u2019s observed current rate and one-bin slope as well. That second comparison answers the stricter question: do the children add information after the parent state is actually known? Here they do not."
+      },
+      {
+        "id": "field-comparison-block",
+        "type": "chart",
+        "chartId": "field-comparison-chart",
+        "layout": "full"
+      },
+      {
+        "id": "diagnostic-heading",
+        "type": "markdown",
+        "sourceId": "t415-diagnostic",
+        "body": "## No characteristic adds stable value beyond current parent history\n\nSpin, share strength and the complete diagnostic array all sit slightly below parent-history parity. The differences are small, but they consistently reject the earlier interpretation that the 30% gain represented a child-driven handover."
+      },
+      {
+        "id": "diagnostic-model-block",
+        "type": "chart",
+        "chartId": "diagnostic-model-chart",
+        "layout": "full"
+      },
+      {
+        "id": "proxy-heading",
+        "type": "markdown",
+        "sourceId": "t415-strength-rate",
+        "body": "## Share strength was an inverse image of the current parent rate\n\nAs release counts fall, detector-share estimates become more dispersed. The strength coordinate therefore carried a near-direct inverse encoding of the parent\u2019s current count level. The ordered deciles make that relation visible; it is parent information wearing a child-channel label."
+      },
+      {
+        "id": "strength-rate-block",
+        "type": "chart",
+        "chartId": "strength-rate-chart",
+        "layout": "full"
+      },
+      {
+        "id": "profile-heading",
+        "type": "markdown",
+        "sourceId": "t415-profile",
+        "body": "## The array tracks the profile closely for the wrong reason\n\nAt 284 G the frozen full array visually follows the observed release curve better than the time-only parent. The stronger-baseline diagnostic shows why visual agreement alone was insufficient: present parent history already contains the information used to obtain that improvement."
+      },
+      {
+        "id": "profile-block",
+        "type": "chart",
+        "chartId": "example-profile-chart",
+        "layout": "full"
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Scope and definitions\n\nThe replicate is one magnetic field, with RF-on and RF-off errors pooled for the primary score. The target is the future detector-summed ensemble release profile at 0.016, 0.064 or 0.128 microseconds. Parent maturity is `2(1-exp(-t/\u03c4))`. Spin is represented by the perpendicular `1+sin(\u03b8)` and `1+cos(\u03b8)` cuts. Share strength is a lagged displacement of the 96-detector share vector from its early reference.\n\nThis archive does not contain continuously observed individual muons. T415 therefore cannot identify an individual decay or neutrino handover."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "sourceId": "t415-analysis",
+        "body": "## Frozen design and diagnostic sequence\n\nThirteen development fields fixed nested ridge models and regularisation by leave-one-run-out validation. Thirteen interleaved fields were then scored once. The frozen gate required positive improvement in at least 10 fields, both RF periods, and superiority to wrong-frequency and shifted-history controls. After that gate failed, a labelled post-hoc model added current parent log rate and slope to test the omitted-parent-state explanation. No frozen result was overwritten."
+      },
+      {
+        "id": "gate-table-block",
+        "type": "table",
+        "tableId": "gate-table",
+        "layout": "full"
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Limitations and uncertainty\n\nThe development/validation archive was reused from T414, so this is not independent external confirmation. Detector angles are unavailable, individual arrivals and decays are not linked, and the share-strength coordinate is affected by multinomial count precision. The diagnostic is post-hoc and explains the frozen failure; it is not a replacement confirmatory test. Incomplete detector acceptance can also couple directional redistribution into observed totals."
+      },
+      {
+        "id": "next-step",
+        "type": "markdown",
+        "body": "## Recommended next test\n\nUse event-level or finely time-tagged data with absolute detector geometry. Make current parent rate and slope part of the baseline from the beginning. Derive spin coherence from a count-noise-corrected directional estimator, then ask whether perpendicular spin phase or coherence improves untouched, whole-run forecasts beyond that parent history. The ideal target remains a calibrated probability of release in the next interval, not retrospective curve reconstruction."
+      },
+      {
+        "id": "further-questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- Can a detector-pair or absolute-angle coherence estimator separate physical polarization from declining count precision?\n- Does any characteristic add information at an event-level grain after current parent history is controlled?\n- Is there an external archive with matched low-field resolution that can provide a genuinely untouched replication branch?"
+      },
+      {
+        "id": "audit-heading",
+        "type": "markdown",
+        "body": "## Independent audit\n\nAll frozen hashes, source hashes, split counts, result rows, gates and post-hoc headline calculations were recomputed successfully."
+      },
+      {
+        "id": "audit-table-block",
+        "type": "table",
+        "tableId": "audit-table",
+        "layout": "full"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-19T14:26:44.929100+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "resolved_runs": 26,
+          "validation_fields": 13,
+          "primary_horizon_us": 0.064,
+          "frozen_apparent_improvement_percent": 30.55,
+          "posthoc_incremental_improvement_percent": -0.22,
+          "strength_parent_correlation": -0.968,
+          "frozen_gate_supported": "No",
+          "independent_audit": "Passed"
+        }
+      ],
+      "model_improvement": [
+        {
+          "horizon": "0.016 \u00b5s",
+          "horizon_bins": 1,
+          "model": "M0 parent",
+          "median_improvement_percent": 0.0,
+          "field_wins": 0,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.016 \u00b5s",
+          "horizon_bins": 1,
+          "model": "M1 + spin",
+          "median_improvement_percent": -0.0082,
+          "field_wins": 5,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.016 \u00b5s",
+          "horizon_bins": 1,
+          "model": "M2 + strength",
+          "median_improvement_percent": 30.7892,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.016 \u00b5s",
+          "horizon_bins": 1,
+          "model": "M3 + environment",
+          "median_improvement_percent": 31.7629,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.016 \u00b5s",
+          "horizon_bins": 1,
+          "model": "M4 full array",
+          "median_improvement_percent": 31.7749,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.064 \u00b5s",
+          "horizon_bins": 4,
+          "model": "M0 parent",
+          "median_improvement_percent": 0.0,
+          "field_wins": 0,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.064 \u00b5s",
+          "horizon_bins": 4,
+          "model": "M1 + spin",
+          "median_improvement_percent": -0.0455,
+          "field_wins": 5,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.064 \u00b5s",
+          "horizon_bins": 4,
+          "model": "M2 + strength",
+          "median_improvement_percent": 30.0602,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 0.0
+        },
+        {
+          "horizon": "0.064 \u00b5s",
+          "horizon_bins": 4,
+          "model": "M3 + environment",
+          "median_improvement_percent": 30.6486,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.064 \u00b5s",
+          "horizon_bins": 4,
+          "model": "M4 full array",
+          "median_improvement_percent": 30.5467,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.128 \u00b5s",
+          "horizon_bins": 8,
+          "model": "M0 parent",
+          "median_improvement_percent": 0.0,
+          "field_wins": 0,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.128 \u00b5s",
+          "horizon_bins": 8,
+          "model": "M1 + spin",
+          "median_improvement_percent": -0.021,
+          "field_wins": 5,
+          "field_count": 13,
+          "lambda": 0.1
+        },
+        {
+          "horizon": "0.128 \u00b5s",
+          "horizon_bins": 8,
+          "model": "M2 + strength",
+          "median_improvement_percent": 28.4192,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.128 \u00b5s",
+          "horizon_bins": 8,
+          "model": "M3 + environment",
+          "median_improvement_percent": 29.4882,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        },
+        {
+          "horizon": "0.128 \u00b5s",
+          "horizon_bins": 8,
+          "model": "M4 full array",
+          "median_improvement_percent": 29.4562,
+          "field_wins": 13,
+          "field_count": 13,
+          "lambda": 1.0
+        }
+      ],
+      "primary_fields": [
+        {
+          "field_G": 68.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 30.5467,
+          "rmse_log_rate": 0.05710828,
+          "baseline_rmse_log_rate": 0.08222545,
+          "run": "EMU00069986"
+        },
+        {
+          "field_G": 104.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 24.249,
+          "rmse_log_rate": 0.06259797,
+          "baseline_rmse_log_rate": 0.08263647,
+          "run": "EMU00069992"
+        },
+        {
+          "field_G": 140.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 30.4604,
+          "rmse_log_rate": 0.05691399,
+          "baseline_rmse_log_rate": 0.08184399,
+          "run": "EMU00069998"
+        },
+        {
+          "field_G": 176.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 31.9569,
+          "rmse_log_rate": 0.05601614,
+          "baseline_rmse_log_rate": 0.0823245,
+          "run": "EMU00070004"
+        },
+        {
+          "field_G": 212.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 28.9203,
+          "rmse_log_rate": 0.05797809,
+          "baseline_rmse_log_rate": 0.08156775,
+          "run": "EMU00070010"
+        },
+        {
+          "field_G": 248.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 30.9175,
+          "rmse_log_rate": 0.05654874,
+          "baseline_rmse_log_rate": 0.08185686,
+          "run": "EMU00070016"
+        },
+        {
+          "field_G": 284.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 28.0461,
+          "rmse_log_rate": 0.05911081,
+          "baseline_rmse_log_rate": 0.08215094,
+          "run": "EMU00070022"
+        },
+        {
+          "field_G": 320.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 34.4794,
+          "rmse_log_rate": 0.05364171,
+          "baseline_rmse_log_rate": 0.08187001,
+          "run": "EMU00070028"
+        },
+        {
+          "field_G": 356.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 34.7644,
+          "rmse_log_rate": 0.05443165,
+          "baseline_rmse_log_rate": 0.08343861,
+          "run": "EMU00070034"
+        },
+        {
+          "field_G": 392.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 28.6603,
+          "rmse_log_rate": 0.05819481,
+          "baseline_rmse_log_rate": 0.0815742,
+          "run": "EMU00070040"
+        },
+        {
+          "field_G": 428.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 37.1129,
+          "rmse_log_rate": 0.05179931,
+          "baseline_rmse_log_rate": 0.08236867,
+          "run": "EMU00070046"
+        },
+        {
+          "field_G": 464.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 29.363,
+          "rmse_log_rate": 0.05812161,
+          "baseline_rmse_log_rate": 0.0822821,
+          "run": "EMU00070052"
+        },
+        {
+          "field_G": 500.0,
+          "analysis": "Frozen: time-only parent baseline",
+          "improvement_percent": 32.7263,
+          "rmse_log_rate": 0.05499595,
+          "baseline_rmse_log_rate": 0.08174953,
+          "run": "EMU00070058"
+        },
+        {
+          "field_G": 68.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.2151,
+          "rmse_log_rate": 0.01148226,
+          "baseline_rmse_log_rate": 0.01145761,
+          "run": "EMU00069986"
+        },
+        {
+          "field_G": 104.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.2751,
+          "rmse_log_rate": 0.01175096,
+          "baseline_rmse_log_rate": 0.01171872,
+          "run": "EMU00069992"
+        },
+        {
+          "field_G": 140.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": 0.1268,
+          "rmse_log_rate": 0.01093266,
+          "baseline_rmse_log_rate": 0.01094654,
+          "run": "EMU00069998"
+        },
+        {
+          "field_G": 176.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": 0.3571,
+          "rmse_log_rate": 0.01093186,
+          "baseline_rmse_log_rate": 0.01097104,
+          "run": "EMU00070004"
+        },
+        {
+          "field_G": 212.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": 0.1365,
+          "rmse_log_rate": 0.01078996,
+          "baseline_rmse_log_rate": 0.01080472,
+          "run": "EMU00070010"
+        },
+        {
+          "field_G": 248.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.252,
+          "rmse_log_rate": 0.01155873,
+          "baseline_rmse_log_rate": 0.01152967,
+          "run": "EMU00070016"
+        },
+        {
+          "field_G": 284.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": 0.1704,
+          "rmse_log_rate": 0.0116498,
+          "baseline_rmse_log_rate": 0.01166968,
+          "run": "EMU00070022"
+        },
+        {
+          "field_G": 320.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.2515,
+          "rmse_log_rate": 0.01181018,
+          "baseline_rmse_log_rate": 0.01178055,
+          "run": "EMU00070028"
+        },
+        {
+          "field_G": 356.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.7794,
+          "rmse_log_rate": 0.01175687,
+          "baseline_rmse_log_rate": 0.01166594,
+          "run": "EMU00070034"
+        },
+        {
+          "field_G": 392.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": 0.4152,
+          "rmse_log_rate": 0.01185639,
+          "baseline_rmse_log_rate": 0.01190582,
+          "run": "EMU00070040"
+        },
+        {
+          "field_G": 428.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.2643,
+          "rmse_log_rate": 0.01163884,
+          "baseline_rmse_log_rate": 0.01160817,
+          "run": "EMU00070046"
+        },
+        {
+          "field_G": 464.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.0733,
+          "rmse_log_rate": 0.0111862,
+          "baseline_rmse_log_rate": 0.01117801,
+          "run": "EMU00070052"
+        },
+        {
+          "field_G": 500.0,
+          "analysis": "Diagnostic: parent rate + slope baseline",
+          "improvement_percent": -0.8974,
+          "rmse_log_rate": 0.01104696,
+          "baseline_rmse_log_rate": 0.01094871,
+          "run": "EMU00070058"
+        }
+      ],
+      "diagnostic_models": [
+        {
+          "model": "D0 parent + history",
+          "median_improvement_percent": 0.0,
+          "field_wins": 0,
+          "field_count": 13,
+          "median_rmse_log_rate": 0.01152967,
+          "lambda": 0.1
+        },
+        {
+          "model": "D1 + spin",
+          "median_improvement_percent": -0.128,
+          "field_wins": 4,
+          "field_count": 13,
+          "median_rmse_log_rate": 0.01154443,
+          "lambda": 0.1
+        },
+        {
+          "model": "D2 + strength",
+          "median_improvement_percent": -0.1956,
+          "field_wins": 5,
+          "field_count": 13,
+          "median_rmse_log_rate": 0.01156254,
+          "lambda": 0.0
+        },
+        {
+          "model": "D3 full diagnostic",
+          "median_improvement_percent": -0.2151,
+          "field_wins": 5,
+          "field_count": 13,
+          "median_rmse_log_rate": 0.01155873,
+          "lambda": 0.0
+        }
+      ],
+      "example_profile": [
+        {
+          "target_time_us": 0.571,
+          "observed_normalized_rate": 0.91261922,
+          "parent_prediction": 0.74883716,
+          "full_array_prediction": 0.82930048,
+          "parent_ARA": 0.41115637,
+          "spin_cut_A_ARA": 0.69632587,
+          "spin_cut_B_ARA": 1.95277596,
+          "share_strength": 0.04223084
+        },
+        {
+          "target_time_us": 0.587,
+          "observed_normalized_rate": 0.9096664,
+          "parent_prediction": 0.75288854,
+          "full_array_prediction": 0.82864001,
+          "parent_ARA": 0.42265408,
+          "spin_cut_A_ARA": 1.07820901,
+          "spin_cut_B_ARA": 1.99693698,
+          "share_strength": 0.04357947
+        },
+        {
+          "target_time_us": 0.603,
+          "observed_normalized_rate": 0.90201751,
+          "parent_prediction": 0.75667317,
+          "full_array_prediction": 0.84153115,
+          "parent_ARA": 0.43406858,
+          "spin_cut_A_ARA": 1.44853404,
+          "spin_cut_B_ARA": 1.89376575,
+          "share_strength": 0.03854136
+        },
+        {
+          "target_time_us": 0.619,
+          "observed_normalized_rate": 0.8991892,
+          "parent_prediction": 0.76019263,
+          "full_array_prediction": 0.81977212,
+          "parent_ARA": 0.44540041,
+          "spin_cut_A_ARA": 1.7525706,
+          "spin_cut_B_ARA": 1.65851158,
+          "share_strength": 0.05071907
+        },
+        {
+          "target_time_us": 0.635,
+          "observed_normalized_rate": 0.88314432,
+          "parent_prediction": 0.76344888,
+          "full_array_prediction": 0.79508564,
+          "parent_ARA": 0.45665031,
+          "spin_cut_A_ARA": 1.94539114,
+          "spin_cut_B_ARA": 1.32593803,
+          "share_strength": 0.04582995
+        },
+        {
+          "target_time_us": 0.651,
+          "observed_normalized_rate": 0.88348229,
+          "parent_prediction": 0.76644408,
+          "full_array_prediction": 0.81360038,
+          "parent_ARA": 0.4678188,
+          "spin_cut_A_ARA": 1.99849712,
+          "spin_cut_B_ARA": 0.94519575,
+          "share_strength": 0.04510031
+        },
+        {
+          "target_time_us": 0.667,
+          "observed_normalized_rate": 0.87757664,
+          "parent_prediction": 0.7691807,
+          "full_array_prediction": 0.83019438,
+          "parent_ARA": 0.47890647,
+          "spin_cut_A_ARA": 1.90404027,
+          "spin_cut_B_ARA": 0.57255271,
+          "share_strength": 0.04048029
+        },
+        {
+          "target_time_us": 0.683,
+          "observed_normalized_rate": 0.86757972,
+          "parent_prediction": 0.77166142,
+          "full_array_prediction": 0.83183543,
+          "parent_ARA": 0.48991383,
+          "spin_cut_A_ARA": 1.67598203,
+          "spin_cut_B_ARA": 0.26308189,
+          "share_strength": 0.04473438
+        },
+        {
+          "target_time_us": 0.699,
+          "observed_normalized_rate": 0.86302596,
+          "parent_prediction": 0.77388923,
+          "full_array_prediction": 0.8229945,
+          "parent_ARA": 0.50084161,
+          "spin_cut_A_ARA": 1.34802259,
+          "spin_cut_B_ARA": 0.06251385,
+          "share_strength": 0.04255473
+        },
+        {
+          "target_time_us": 0.715,
+          "observed_normalized_rate": 0.8571203,
+          "parent_prediction": 0.77586727,
+          "full_array_prediction": 0.81289073,
+          "parent_ARA": 0.51169031,
+          "spin_cut_A_ARA": 0.96863066,
+          "spin_cut_B_ARA": 0.00049214,
+          "share_strength": 0.04808805
+        },
+        {
+          "target_time_us": 0.731,
+          "observed_normalized_rate": 0.85923709,
+          "parent_prediction": 0.77759892,
+          "full_array_prediction": 0.79090774,
+          "parent_ARA": 0.5224605,
+          "spin_cut_A_ARA": 0.59387465,
+          "spin_cut_B_ARA": 0.08618262,
+          "share_strength": 0.04904148
+        },
+        {
+          "target_time_us": 0.747,
+          "observed_normalized_rate": 0.84258741,
+          "parent_prediction": 0.77908776,
+          "full_array_prediction": 0.80843221,
+          "parent_ARA": 0.53315268,
+          "spin_cut_A_ARA": 0.27913984,
+          "spin_cut_B_ARA": 0.30691946,
+          "share_strength": 0.04133592
+        },
+        {
+          "target_time_us": 0.763,
+          "observed_normalized_rate": 0.8370731,
+          "parent_prediction": 0.78033756,
+          "full_array_prediction": 0.81139105,
+          "parent_ARA": 0.54376756,
+          "spin_cut_A_ARA": 0.07093466,
+          "spin_cut_B_ARA": 0.63008433,
+          "share_strength": 0.04887125
+        },
+        {
+          "target_time_us": 0.779,
+          "observed_normalized_rate": 0.83636157,
+          "parent_prediction": 0.78135224,
+          "full_array_prediction": 0.80472629,
+          "parent_ARA": 0.55430562,
+          "spin_cut_A_ARA": 3.134e-05,
+          "spin_cut_B_ARA": 1.00791716,
+          "share_strength": 0.04211251
+        },
+        {
+          "target_time_us": 0.795,
+          "observed_normalized_rate": 0.81956959,
+          "parent_prediction": 0.78213588,
+          "full_array_prediction": 0.80560841,
+          "parent_ARA": 0.56476735,
+          "spin_cut_A_ARA": 0.07690721,
+          "spin_cut_B_ARA": 1.38457729,
+          "share_strength": 0.04911899
+        },
+        {
+          "target_time_us": 0.811,
+          "observed_normalized_rate": 0.82061909,
+          "parent_prediction": 0.78269274,
+          "full_array_prediction": 0.78791255,
+          "parent_ARA": 0.57515345,
+          "spin_cut_A_ARA": 0.2902023,
+          "spin_cut_B_ARA": 1.70440558,
+          "share_strength": 0.04692553
+        },
+        {
+          "target_time_us": 0.827,
+          "observed_normalized_rate": 0.81688359,
+          "parent_prediction": 0.78302715,
+          "full_array_prediction": 0.77350223,
+          "parent_ARA": 0.58546439,
+          "spin_cut_A_ARA": 0.60839479,
+          "spin_cut_B_ARA": 1.92013334,
+          "share_strength": 0.05375964
+        },
+        {
+          "target_time_us": 0.843,
+          "observed_normalized_rate": 0.81096015,
+          "parent_prediction": 0.78314362,
+          "full_array_prediction": 0.789353,
+          "parent_ARA": 0.59570072,
+          "spin_cut_A_ARA": 0.98446063,
+          "spin_cut_B_ARA": 1.99987926,
+          "share_strength": 0.04072849
+        },
+        {
+          "target_time_us": 0.859,
+          "observed_normalized_rate": 0.80123005,
+          "parent_prediction": 0.78304672,
+          "full_array_prediction": 0.81281531,
+          "parent_ARA": 0.60586289,
+          "spin_cut_A_ARA": 1.36282027,
+          "spin_cut_B_ARA": 1.93185914,
+          "share_strength": 0.04652673
+        },
+        {
+          "target_time_us": 0.875,
+          "observed_normalized_rate": 0.79580467,
+          "parent_prediction": 0.78274114,
+          "full_array_prediction": 0.81728129,
+          "parent_ARA": 0.61595161,
+          "spin_cut_A_ARA": 1.68756342,
+          "spin_cut_B_ARA": 1.72612433,
+          "share_strength": 0.03858894
+        },
+        {
+          "target_time_us": 0.891,
+          "observed_normalized_rate": 0.7843847,
+          "parent_prediction": 0.78223165,
+          "full_array_prediction": 0.82266417,
+          "parent_ARA": 0.62596731,
+          "spin_cut_A_ARA": 1.91069507,
+          "spin_cut_B_ARA": 1.41307929,
+          "share_strength": 0.04462815
+        },
+        {
+          "target_time_us": 0.907,
+          "observed_normalized_rate": 0.79101967,
+          "parent_prediction": 0.7815231,
+          "full_array_prediction": 0.77830404,
+          "parent_ARA": 0.63591054,
+          "spin_cut_A_ARA": 1.9992397,
+          "spin_cut_B_ARA": 1.03898735,
+          "share_strength": 0.05186949
+        },
+        {
+          "target_time_us": 0.923,
+          "observed_normalized_rate": 0.77276906,
+          "parent_prediction": 0.7806204,
+          "full_array_prediction": 0.77222637,
+          "parent_ARA": 0.64578173,
+          "spin_cut_A_ARA": 1.94011276,
+          "spin_cut_B_ARA": 0.65913638,
+          "share_strength": 0.04555857
+        },
+        {
+          "target_time_us": 0.939,
+          "observed_normalized_rate": 0.78032901,
+          "parent_prediction": 0.7795285,
+          "full_array_prediction": 0.77762673,
+          "parent_ARA": 0.65558157,
+          "spin_cut_A_ARA": 1.74205143,
+          "spin_cut_B_ARA": 0.32965704,
+          "share_strength": 0.04977489
+        },
+        {
+          "target_time_us": 0.955,
+          "observed_normalized_rate": 0.76679226,
+          "parent_prediction": 0.77825242,
+          "full_array_prediction": 0.75222335,
+          "parent_ARA": 0.66531042,
+          "spin_cut_A_ARA": 1.43432867,
+          "spin_cut_B_ARA": 0.09924554,
+          "share_strength": 0.05331301
+        },
+        {
+          "target_time_us": 0.971,
+          "observed_normalized_rate": 0.76533363,
+          "parent_prediction": 0.77679717,
+          "full_array_prediction": 0.76144151,
+          "parent_ARA": 0.67496894,
+          "spin_cut_A_ARA": 1.06241676,
+          "spin_cut_B_ARA": 0.00194983,
+          "share_strength": 0.04523386
+        },
+        {
+          "target_time_us": 0.987,
+          "observed_normalized_rate": 0.75434058,
+          "parent_prediction": 0.77516783,
+          "full_array_prediction": 0.77078668,
+          "parent_ARA": 0.68455756,
+          "spin_cut_A_ARA": 0.68128059,
+          "spin_cut_B_ARA": 0.05215089,
+          "share_strength": 0.05008504
+        },
+        {
+          "target_time_us": 1.003,
+          "observed_normalized_rate": 0.7561016,
+          "parent_prediction": 0.77336948,
+          "full_array_prediction": 0.75572162,
+          "parent_ARA": 0.6940768,
+          "spin_cut_A_ARA": 0.34724634,
+          "spin_cut_B_ARA": 0.24242977,
+          "share_strength": 0.04914784
+        },
+        {
+          "target_time_us": 1.019,
+          "observed_normalized_rate": 0.74686957,
+          "parent_prediction": 0.77140721,
+          "full_array_prediction": 0.74389168,
+          "parent_ARA": 0.70352708,
+          "spin_cut_A_ARA": 0.10968056,
+          "spin_cut_B_ARA": 0.54466354,
+          "share_strength": 0.05365622
+        },
+        {
+          "target_time_us": 1.035,
+          "observed_normalized_rate": 0.74704745,
+          "parent_prediction": 0.76928609,
+          "full_array_prediction": 0.75020107,
+          "parent_ARA": 0.71290904,
+          "spin_cut_A_ARA": 0.00368839,
+          "spin_cut_B_ARA": 0.91419106,
+          "share_strength": 0.04526498
+        },
+        {
+          "target_time_us": 1.051,
+          "observed_normalized_rate": 0.73632122,
+          "parent_prediction": 0.76701121,
+          "full_array_prediction": 0.76802969,
+          "parent_ARA": 0.72222311,
+          "spin_cut_A_ARA": 0.04493606,
+          "spin_cut_B_ARA": 1.29639985,
+          "share_strength": 0.04727905
+        },
+        {
+          "target_time_us": 1.067,
+          "observed_normalized_rate": 0.73061123,
+          "parent_prediction": 0.76458764,
+          "full_array_prediction": 0.73788292,
+          "parent_ARA": 0.73146977,
+          "spin_cut_A_ARA": 0.22732778,
+          "spin_cut_B_ARA": 1.6348052,
+          "share_strength": 0.0548381
+        },
+        {
+          "target_time_us": 1.083,
+          "observed_normalized_rate": 0.72764062,
+          "parent_prediction": 0.76202042,
+          "full_array_prediction": 0.71996171,
+          "parent_ARA": 0.74064946,
+          "spin_cut_A_ARA": 0.52390628,
+          "spin_cut_B_ARA": 1.87939455,
+          "share_strength": 0.05213268
+        },
+        {
+          "target_time_us": 1.099,
+          "observed_normalized_rate": 0.7230335,
+          "parent_prediction": 0.75931455,
+          "full_array_prediction": 0.73577456,
+          "parent_ARA": 0.74976278,
+          "spin_cut_A_ARA": 0.89084609,
+          "spin_cut_B_ARA": 1.99402486,
+          "share_strength": 0.04834561
+        },
+        {
+          "target_time_us": 1.115,
+          "observed_normalized_rate": 0.71381925,
+          "parent_prediction": 0.75647503,
+          "full_array_prediction": 0.73930338,
+          "parent_ARA": 0.75881016,
+          "spin_cut_A_ARA": 1.27391719,
+          "spin_cut_B_ARA": 1.96175328,
+          "share_strength": 0.0500887
+        },
+        {
+          "target_time_us": 1.131,
+          "observed_normalized_rate": 0.7141928,
+          "parent_prediction": 0.75350681,
+          "full_array_prediction": 0.73163063,
+          "parent_ARA": 0.767792,
+          "spin_cut_A_ARA": 1.6165052,
+          "spin_cut_B_ARA": 1.78735084,
+          "share_strength": 0.04992455
+        },
+        {
+          "target_time_us": 1.147,
+          "observed_normalized_rate": 0.70922992,
+          "parent_prediction": 0.75041476,
+          "full_array_prediction": 0.71151112,
+          "parent_ARA": 0.77670891,
+          "spin_cut_A_ARA": 1.8679858,
+          "spin_cut_B_ARA": 1.49658902,
+          "share_strength": 0.0561739
+        },
+        {
+          "target_time_us": 1.163,
+          "observed_normalized_rate": 0.69925079,
+          "parent_prediction": 0.74720375,
+          "full_array_prediction": 0.69911298,
+          "parent_ARA": 0.78556128,
+          "spin_cut_A_ARA": 1.99119118,
+          "spin_cut_B_ARA": 1.13243882,
+          "share_strength": 0.05314767
+        },
+        {
+          "target_time_us": 1.179,
+          "observed_normalized_rate": 0.69483933,
+          "parent_prediction": 0.74387856,
+          "full_array_prediction": 0.71513696,
+          "parent_ARA": 0.7943496,
+          "spin_cut_A_ARA": 1.96791344,
+          "spin_cut_B_ARA": 0.74871617,
+          "share_strength": 0.04942027
+        },
+        {
+          "target_time_us": 1.195,
+          "observed_normalized_rate": 0.69302495,
+          "parent_prediction": 0.74044397,
+          "full_array_prediction": 0.73333549,
+          "parent_ARA": 0.80307426,
+          "spin_cut_A_ARA": 1.80159441,
+          "spin_cut_B_ARA": 0.40213179,
+          "share_strength": 0.04567786
+        },
+        {
+          "target_time_us": 1.211,
+          "observed_normalized_rate": 0.6899476,
+          "parent_prediction": 0.73690459,
+          "full_array_prediction": 0.72683016,
+          "parent_ARA": 0.81173585,
+          "spin_cut_A_ARA": 1.51681108,
+          "spin_cut_B_ARA": 0.14390053,
+          "share_strength": 0.0509156
+        },
+        {
+          "target_time_us": 1.227,
+          "observed_normalized_rate": 0.67884782,
+          "parent_prediction": 0.73326507,
+          "full_array_prediction": 0.69167006,
+          "parent_ARA": 0.82033475,
+          "spin_cut_A_ARA": 1.15565087,
+          "spin_cut_B_ARA": 0.01218787,
+          "share_strength": 0.05741016
+        },
+        {
+          "target_time_us": 1.243,
+          "observed_normalized_rate": 0.67306668,
+          "parent_prediction": 0.72952995,
+          "full_array_prediction": 0.68707964,
+          "parent_ARA": 0.82887143,
+          "spin_cut_A_ARA": 0.7714878,
+          "spin_cut_B_ARA": 0.02645895,
+          "share_strength": 0.0508763
+        },
+        {
+          "target_time_us": 1.259,
+          "observed_normalized_rate": 0.67162584,
+          "parent_prediction": 0.72570371,
+          "full_array_prediction": 0.69757042,
+          "parent_ARA": 0.83734627,
+          "spin_cut_A_ARA": 0.42109774,
+          "spin_cut_B_ARA": 0.18460306,
+          "share_strength": 0.05276423
+        },
+        {
+          "target_time_us": 1.275,
+          "observed_normalized_rate": 0.66541779,
+          "parent_prediction": 0.7217907,
+          "full_array_prediction": 0.68171689,
+          "parent_ARA": 0.84575985,
+          "spin_cut_A_ARA": 0.1562579,
+          "spin_cut_B_ARA": 0.46325121,
+          "share_strength": 0.05568987
+        },
+        {
+          "target_time_us": 1.291,
+          "observed_normalized_rate": 0.65728862,
+          "parent_prediction": 0.71779526,
+          "full_array_prediction": 0.67122067,
+          "parent_ARA": 0.85411254,
+          "spin_cut_A_ARA": 0.01611043,
+          "spin_cut_B_ARA": 0.82122273,
+          "share_strength": 0.05534827
+        },
+        {
+          "target_time_us": 1.307,
+          "observed_normalized_rate": 0.65698623,
+          "parent_prediction": 0.71372167,
+          "full_array_prediction": 0.68623609,
+          "parent_ARA": 0.86240473,
+          "spin_cut_A_ARA": 0.02136641,
+          "spin_cut_B_ARA": 1.20561203,
+          "share_strength": 0.04839837
+        },
+        {
+          "target_time_us": 1.323,
+          "observed_normalized_rate": 0.65102721,
+          "parent_prediction": 0.70957401,
+          "full_array_prediction": 0.7007791,
+          "parent_ARA": 0.87063696,
+          "spin_cut_A_ARA": 0.17124918,
+          "spin_cut_B_ARA": 1.5596178,
+          "share_strength": 0.04901118
+        },
+        {
+          "target_time_us": 1.339,
+          "observed_normalized_rate": 0.63967839,
+          "parent_prediction": 0.70535639,
+          "full_array_prediction": 0.66466216,
+          "parent_ARA": 0.87880963,
+          "spin_cut_A_ARA": 0.44360882,
+          "spin_cut_B_ARA": 1.83092049,
+          "share_strength": 0.06088023
+        },
+        {
+          "target_time_us": 1.355,
+          "observed_normalized_rate": 0.63827313,
+          "parent_prediction": 0.70107279,
+          "full_array_prediction": 0.6578018,
+          "parent_ARA": 0.88692316,
+          "spin_cut_A_ARA": 0.7981947,
+          "spin_cut_B_ARA": 1.97942566,
+          "share_strength": 0.04965679
+        },
+        {
+          "target_time_us": 1.371,
+          "observed_normalized_rate": 0.64154614,
+          "parent_prediction": 0.69672716,
+          "full_array_prediction": 0.68335999,
+          "parent_ARA": 0.89497791,
+          "spin_cut_A_ARA": 1.18260152,
+          "spin_cut_B_ARA": 1.983187,
+          "share_strength": 0.05019775
+        },
+        {
+          "target_time_us": 1.387,
+          "observed_normalized_rate": 0.63987406,
+          "parent_prediction": 0.69232324,
+          "full_array_prediction": 0.68113962,
+          "parent_ARA": 0.90297443,
+          "spin_cut_A_ARA": 1.54002542,
+          "spin_cut_B_ARA": 1.84164871,
+          "share_strength": 0.04911596
+        },
+        {
+          "target_time_us": 1.403,
+          "observed_normalized_rate": 0.63019733,
+          "parent_prediction": 0.6878648,
+          "full_array_prediction": 0.68075106,
+          "parent_ARA": 0.91091309,
+          "spin_cut_A_ARA": 1.81764169,
+          "spin_cut_B_ARA": 1.57572742,
+          "share_strength": 0.04902255
+        },
+        {
+          "target_time_us": 1.419,
+          "observed_normalized_rate": 0.62043165,
+          "parent_prediction": 0.68335546,
+          "full_array_prediction": 0.66901089,
+          "parent_ARA": 0.91879429,
+          "spin_cut_A_ARA": 1.97442285,
+          "spin_cut_B_ARA": 1.2247223,
+          "share_strength": 0.05221511
+        },
+        {
+          "target_time_us": 1.435,
+          "observed_normalized_rate": 0.6139212,
+          "parent_prediction": 0.67879883,
+          "full_array_prediction": 0.66521558,
+          "parent_ARA": 0.92661841,
+          "spin_cut_A_ARA": 1.98719946,
+          "spin_cut_B_ARA": 0.84050945,
+          "share_strength": 0.04900126
+        },
+        {
+          "target_time_us": 1.451,
+          "observed_normalized_rate": 0.61669615,
+          "parent_prediction": 0.67419828,
+          "full_array_prediction": 0.65645215,
+          "parent_ARA": 0.93438597,
+          "spin_cut_A_ARA": 1.85408351,
+          "spin_cut_B_ARA": 0.47986409,
+          "share_strength": 0.05449492
+        },
+        {
+          "target_time_us": 1.467,
+          "observed_normalized_rate": 0.60796218,
+          "parent_prediction": 0.66955723,
+          "full_array_prediction": 0.65295395,
+          "parent_ARA": 0.94209731,
+          "spin_cut_A_ARA": 1.59474689,
+          "spin_cut_B_ARA": 0.19608699,
+          "share_strength": 0.04869981
+        },
+        {
+          "target_time_us": 1.483,
+          "observed_normalized_rate": 0.6128717,
+          "parent_prediction": 0.66487899,
+          "full_array_prediction": 0.65467102,
+          "parent_ARA": 0.9497528,
+          "spin_cut_A_ARA": 1.24751844,
+          "spin_cut_B_ARA": 0.03111682,
+          "share_strength": 0.0528679
+        },
+        {
+          "target_time_us": 1.499,
+          "observed_normalized_rate": 0.59860563,
+          "parent_prediction": 0.66016669,
+          "full_array_prediction": 0.64350922,
+          "parent_ARA": 0.95735294,
+          "spin_cut_A_ARA": 0.86370818,
+          "spin_cut_B_ARA": 0.00933127,
+          "share_strength": 0.0515778
+        },
+        {
+          "target_time_us": 1.515,
+          "observed_normalized_rate": 0.59157933,
+          "parent_prediction": 0.65542347,
+          "full_array_prediction": 0.63706537,
+          "parent_ARA": 0.96489808,
+          "spin_cut_A_ARA": 0.50003979,
+          "spin_cut_B_ARA": 0.13395162,
+          "share_strength": 0.05429696
+        },
+        {
+          "target_time_us": 1.531,
+          "observed_normalized_rate": 0.59385621,
+          "parent_prediction": 0.65065234,
+          "full_array_prediction": 0.60578789,
+          "parent_ARA": 0.97238863,
+          "spin_cut_A_ARA": 0.21025799,
+          "spin_cut_B_ARA": 0.38656088,
+          "share_strength": 0.06349875
+        },
+        {
+          "target_time_us": 1.547,
+          "observed_normalized_rate": 0.57985696,
+          "parent_prediction": 0.64585626,
+          "full_array_prediction": 0.60261196,
+          "parent_ARA": 0.97982491,
+          "spin_cut_A_ARA": 0.03718893,
+          "spin_cut_B_ARA": 0.72982441,
+          "share_strength": 0.05336016
+        },
+        {
+          "target_time_us": 1.563,
+          "observed_normalized_rate": 0.58028388,
+          "parent_prediction": 0.641038,
+          "full_array_prediction": 0.62728035,
+          "parent_ARA": 0.98720743,
+          "spin_cut_A_ARA": 0.00640707,
+          "spin_cut_B_ARA": 1.1130181,
+          "share_strength": 0.05204236
+        },
+        {
+          "target_time_us": 1.579,
+          "observed_normalized_rate": 0.58257854,
+          "parent_prediction": 0.63620036,
+          "full_array_prediction": 0.62906411,
+          "parent_ARA": 0.99453654,
+          "spin_cut_A_ARA": 0.12246327,
+          "spin_cut_B_ARA": 1.47950942,
+          "share_strength": 0.05114693
+        },
+        {
+          "target_time_us": 1.595,
+          "observed_normalized_rate": 0.57528542,
+          "parent_prediction": 0.631346,
+          "full_array_prediction": 0.59777357,
+          "parent_ARA": 1.0018126,
+          "spin_cut_A_ARA": 0.36820617,
+          "spin_cut_B_ARA": 1.77513648,
+          "share_strength": 0.06382438
+        },
+        {
+          "target_time_us": 1.611,
+          "observed_normalized_rate": 0.57596136,
+          "parent_prediction": 0.62647753,
+          "full_array_prediction": 0.57103688,
+          "parent_ARA": 1.00903596,
+          "spin_cut_A_ARA": 0.70731592,
+          "spin_cut_B_ARA": 1.9562092,
+          "share_strength": 0.06074054
+        },
+        {
+          "target_time_us": 1.627,
+          "observed_normalized_rate": 0.5666226,
+          "parent_prediction": 0.62159738,
+          "full_array_prediction": 0.58157047,
+          "parent_ARA": 1.01620709,
+          "spin_cut_A_ARA": 1.0896822,
+          "spin_cut_B_ARA": 1.99597043,
+          "share_strength": 0.05759769
+        },
+        {
+          "target_time_us": 1.643,
+          "observed_normalized_rate": 0.56845478,
+          "parent_prediction": 0.61670801,
+          "full_array_prediction": 0.58001853,
+          "parent_ARA": 1.02332634,
+          "spin_cut_A_ARA": 1.4587948,
+          "spin_cut_B_ARA": 1.88854225,
+          "share_strength": 0.05991205
+        },
+        {
+          "target_time_us": 1.659,
+          "observed_normalized_rate": 0.56157078,
+          "parent_prediction": 0.61181178,
+          "full_array_prediction": 0.57707182,
+          "parent_ARA": 1.03039401,
+          "spin_cut_A_ARA": 1.76010258,
+          "spin_cut_B_ARA": 1.6498031,
+          "share_strength": 0.05727298
+        },
+        {
+          "target_time_us": 1.675,
+          "observed_normalized_rate": 0.55580743,
+          "parent_prediction": 0.60691088,
+          "full_array_prediction": 0.58333099,
+          "parent_ARA": 1.03741059,
+          "spin_cut_A_ARA": 1.94908121,
+          "spin_cut_B_ARA": 1.31503153,
+          "share_strength": 0.05571031
+        },
+        {
+          "target_time_us": 1.691,
+          "observed_normalized_rate": 0.55470457,
+          "parent_prediction": 0.6020075,
+          "full_array_prediction": 0.5733434,
+          "parent_ARA": 1.0443764,
+          "spin_cut_A_ARA": 1.99779994,
+          "spin_cut_B_ARA": 0.93370304,
+          "share_strength": 0.06029696
+        },
+        {
+          "target_time_us": 1.707,
+          "observed_normalized_rate": 0.54230625,
+          "parent_prediction": 0.59710375,
+          "full_array_prediction": 0.58271391,
+          "parent_ARA": 1.05129179,
+          "spin_cut_A_ARA": 1.89905888,
+          "spin_cut_B_ARA": 0.56217225,
+          "share_strength": 0.04983253
+        },
+        {
+          "target_time_us": 1.723,
+          "observed_normalized_rate": 0.54561484,
+          "parent_prediction": 0.59220168,
+          "full_array_prediction": 0.58128142,
+          "parent_ARA": 1.0581571,
+          "spin_cut_A_ARA": 1.66745261,
+          "spin_cut_B_ARA": 0.25534772,
+          "share_strength": 0.06005535
+        },
+        {
+          "target_time_us": 1.739,
+          "observed_normalized_rate": 0.53435496,
+          "parent_prediction": 0.58730316,
+          "full_array_prediction": 0.56404443,
+          "parent_ARA": 1.06497277,
+          "spin_cut_A_ARA": 1.33720565,
+          "spin_cut_B_ARA": 0.05856899,
+          "share_strength": 0.05571441
+        },
+        {
+          "target_time_us": 1.755,
+          "observed_normalized_rate": 0.53417708,
+          "parent_prediction": 0.58241009,
+          "full_array_prediction": 0.56331999,
+          "parent_ARA": 1.07173912,
+          "spin_cut_A_ARA": 0.95712477,
+          "spin_cut_B_ARA": 0.00091957,
+          "share_strength": 0.05926267
+        },
+        {
+          "target_time_us": 1.771,
+          "observed_normalized_rate": 0.52958775,
+          "parent_prediction": 0.57752427,
+          "full_array_prediction": 0.55026882,
+          "parent_ARA": 1.0784565,
+          "spin_cut_A_ARA": 0.58338021,
+          "spin_cut_B_ARA": 0.09091917,
+          "share_strength": 0.06024122
+        },
+        {
+          "target_time_us": 1.787,
+          "observed_normalized_rate": 0.52619022,
+          "parent_prediction": 0.57264745,
+          "full_array_prediction": 0.55629628,
+          "parent_ARA": 1.08512523,
+          "spin_cut_A_ARA": 0.27120774,
+          "spin_cut_B_ARA": 0.31526513,
+          "share_strength": 0.05473181
+        },
+        {
+          "target_time_us": 1.803,
+          "observed_normalized_rate": 0.52343306,
+          "parent_prediction": 0.56778123,
+          "full_array_prediction": 0.5436094,
+          "parent_ARA": 1.09174575,
+          "spin_cut_A_ARA": 0.06673717,
+          "spin_cut_B_ARA": 0.64080577,
+          "share_strength": 0.06520787
+        },
+        {
+          "target_time_us": 1.819,
+          "observed_normalized_rate": 0.52483832,
+          "parent_prediction": 0.56292721,
+          "full_array_prediction": 0.51065006,
+          "parent_ARA": 1.09831835,
+          "spin_cut_A_ARA": 0.00018878,
+          "spin_cut_B_ARA": 1.01942992,
+          "share_strength": 0.06891859
+        },
+        {
+          "target_time_us": 1.835,
+          "observed_normalized_rate": 0.52069369,
+          "parent_prediction": 0.55808696,
+          "full_array_prediction": 0.51785854,
+          "parent_ARA": 1.10484335,
+          "spin_cut_A_ARA": 0.08139628,
+          "spin_cut_B_ARA": 1.39517996,
+          "share_strength": 0.05954581
+        },
+        {
+          "target_time_us": 1.851,
+          "observed_normalized_rate": 0.5106612,
+          "parent_prediction": 0.55326186,
+          "full_array_prediction": 0.52412136,
+          "parent_ARA": 1.11132117,
+          "spin_cut_A_ARA": 0.29835962,
+          "spin_cut_B_ARA": 1.71253124,
+          "share_strength": 0.06445074
+        },
+        {
+          "target_time_us": 1.867,
+          "observed_normalized_rate": 0.51306259,
+          "parent_prediction": 0.54845332,
+          "full_array_prediction": 0.51319923,
+          "parent_ARA": 1.11775212,
+          "spin_cut_A_ARA": 0.61901483,
+          "spin_cut_B_ARA": 1.92458115,
+          "share_strength": 0.06300673
+        },
+        {
+          "target_time_us": 1.883,
+          "observed_normalized_rate": 0.50662329,
+          "parent_prediction": 0.54366269,
+          "full_array_prediction": 0.51593664,
+          "parent_ARA": 1.12413653,
+          "spin_cut_A_ARA": 0.99597391,
+          "spin_cut_B_ARA": 1.9999919,
+          "share_strength": 0.06135834
+        },
+        {
+          "target_time_us": 1.899,
+          "observed_normalized_rate": 0.50295894,
+          "parent_prediction": 0.53889126,
+          "full_array_prediction": 0.50936046,
+          "parent_ARA": 1.1304747,
+          "spin_cut_A_ARA": 1.37352531,
+          "spin_cut_B_ARA": 1.92761999,
+          "share_strength": 0.06458751
+        },
+        {
+          "target_time_us": 1.915,
+          "observed_normalized_rate": 0.49975708,
+          "parent_prediction": 0.53414017,
+          "full_array_prediction": 0.51344709,
+          "parent_ARA": 1.13676704,
+          "spin_cut_A_ARA": 1.69587818,
+          "spin_cut_B_ARA": 1.71815984,
+          "share_strength": 0.0575638
+        },
+        {
+          "target_time_us": 1.931,
+          "observed_normalized_rate": 0.49321105,
+          "parent_prediction": 0.52941063,
+          "full_array_prediction": 0.52768042,
+          "parent_ARA": 1.1430138,
+          "spin_cut_A_ARA": 1.91538959,
+          "spin_cut_B_ARA": 1.40256913,
+          "share_strength": 0.05613269
+        },
+        {
+          "target_time_us": 1.947,
+          "observed_normalized_rate": 0.49161012,
+          "parent_prediction": 0.52470368,
+          "full_array_prediction": 0.49655548,
+          "parent_ARA": 1.14921541,
+          "spin_cut_A_ARA": 1.99962228,
+          "spin_cut_B_ARA": 1.02748276,
+          "share_strength": 0.07168208
+        },
+        {
+          "target_time_us": 1.963,
+          "observed_normalized_rate": 0.4886573,
+          "parent_prediction": 0.52002039,
+          "full_array_prediction": 0.48146393,
+          "parent_ARA": 1.15537213,
+          "spin_cut_A_ARA": 1.93612586,
+          "spin_cut_B_ARA": 0.64833486,
+          "share_strength": 0.06207717
+        },
+        {
+          "target_time_us": 1.979,
+          "observed_normalized_rate": 0.48220021,
+          "parent_prediction": 0.51536173,
+          "full_array_prediction": 0.50494088,
+          "parent_ARA": 1.16148431,
+          "spin_cut_A_ARA": 1.73428415,
+          "spin_cut_B_ARA": 0.32115776,
+          "share_strength": 0.05821325
+        },
+        {
+          "target_time_us": 1.995,
+          "observed_normalized_rate": 0.48253819,
+          "parent_prediction": 0.51072865,
+          "full_array_prediction": 0.4808849,
+          "parent_ARA": 1.16755225,
+          "spin_cut_A_ARA": 1.42392631,
+          "spin_cut_B_ARA": 0.09430332,
+          "share_strength": 0.07369426
+        },
+        {
+          "target_time_us": 2.011,
+          "observed_normalized_rate": 0.47972766,
+          "parent_prediction": 0.50612204,
+          "full_array_prediction": 0.46659286,
+          "parent_ARA": 1.17357628,
+          "spin_cut_A_ARA": 1.05091855,
+          "spin_cut_B_ARA": 0.00129719,
+          "share_strength": 0.063851
+        },
+        {
+          "target_time_us": 2.027,
+          "observed_normalized_rate": 0.4666534,
+          "parent_prediction": 0.50154271,
+          "full_array_prediction": 0.48966614,
+          "parent_ARA": 1.17955672,
+          "spin_cut_A_ARA": 0.6703858,
+          "spin_cut_B_ARA": 0.05588429,
+          "share_strength": 0.06000578
+        },
+        {
+          "target_time_us": 2.043,
+          "observed_normalized_rate": 0.46930383,
+          "parent_prediction": 0.49699154,
+          "full_array_prediction": 0.48992426,
+          "parent_ARA": 1.18549379,
+          "spin_cut_A_ARA": 0.33856938,
+          "spin_cut_B_ARA": 0.24999364,
+          "share_strength": 0.06240735
+        },
+        {
+          "target_time_us": 2.059,
+          "observed_normalized_rate": 0.46492795,
+          "parent_prediction": 0.49246913,
+          "full_array_prediction": 0.48594184,
+          "parent_ARA": 1.19138799,
+          "spin_cut_A_ARA": 0.10449699,
+          "spin_cut_B_ARA": 0.55494454,
+          "share_strength": 0.06041523
+        },
+        {
+          "target_time_us": 2.075,
+          "observed_normalized_rate": 0.46622648,
+          "parent_prediction": 0.48797624,
+          "full_array_prediction": 0.47225078,
+          "parent_ARA": 1.19723953,
+          "spin_cut_A_ARA": 0.00276646,
+          "spin_cut_B_ARA": 0.92566792,
+          "share_strength": 0.0683476
+        },
+        {
+          "target_time_us": 2.091,
+          "observed_normalized_rate": 0.45503776,
+          "parent_prediction": 0.48351353,
+          "full_array_prediction": 0.45782779,
+          "parent_ARA": 1.20304873,
+          "spin_cut_A_ARA": 0.04841201,
+          "spin_cut_B_ARA": 1.30737646,
+          "share_strength": 0.06638337
+        },
+        {
+          "target_time_us": 2.107,
+          "observed_normalized_rate": 0.46295347,
+          "parent_prediction": 0.4790816,
+          "full_array_prediction": 0.46533152,
+          "parent_ARA": 1.20881589,
+          "spin_cut_A_ARA": 0.23468792,
+          "spin_cut_B_ARA": 1.6436594,
+          "share_strength": 0.06240296
+        },
+        {
+          "target_time_us": 2.123,
+          "observed_normalized_rate": 0.45341904,
+          "parent_prediction": 0.47468105,
+          "full_array_prediction": 0.44860237,
+          "parent_ARA": 1.21454131,
+          "spin_cut_A_ARA": 0.53406542,
+          "spin_cut_B_ARA": 1.88481917,
+          "share_strength": 0.07408211
+        },
+        {
+          "target_time_us": 2.139,
+          "observed_normalized_rate": 0.4500393,
+          "parent_prediction": 0.47031238,
+          "full_array_prediction": 0.44062949,
+          "parent_ARA": 1.22022531,
+          "spin_cut_A_ARA": 0.90230104,
+          "spin_cut_B_ARA": 1.99521601,
+          "share_strength": 0.0648844
+        },
+        {
+          "target_time_us": 2.155,
+          "observed_normalized_rate": 0.44721099,
+          "parent_prediction": 0.46597611,
+          "full_array_prediction": 0.45117677,
+          "parent_ARA": 1.22586817,
+          "spin_cut_A_ARA": 1.28497508,
+          "spin_cut_B_ARA": 1.95853493,
+          "share_strength": 0.06643873
+        },
+        {
+          "target_time_us": 2.171,
+          "observed_normalized_rate": 0.44440047,
+          "parent_prediction": 0.46167276,
+          "full_array_prediction": 0.45392655,
+          "parent_ARA": 1.23147011,
+          "spin_cut_A_ARA": 1.62552961,
+          "spin_cut_B_ARA": 1.78020043,
+          "share_strength": 0.06157077
+        },
+        {
+          "target_time_us": 2.187,
+          "observed_normalized_rate": 0.43863712,
+          "parent_prediction": 0.45740262,
+          "full_array_prediction": 0.4676357,
+          "parent_ARA": 1.2370316,
+          "spin_cut_A_ARA": 1.87364581,
+          "spin_cut_B_ARA": 1.48656242,
+          "share_strength": 0.0572459
+        },
+        {
+          "target_time_us": 2.203,
+          "observed_normalized_rate": 0.43360308,
+          "parent_prediction": 0.45316614,
+          "full_array_prediction": 0.46217455,
+          "parent_ARA": 1.24255284,
+          "spin_cut_A_ARA": 1.99265033,
+          "spin_cut_B_ARA": 1.12101783,
+          "share_strength": 0.06307096
+        },
+        {
+          "target_time_us": 2.219,
+          "observed_normalized_rate": 0.42976085,
+          "parent_prediction": 0.44896368,
+          "full_array_prediction": 0.44550338,
+          "parent_ARA": 1.24803413,
+          "spin_cut_A_ARA": 1.9649561,
+          "spin_cut_B_ARA": 0.73758862,
+          "share_strength": 0.06501729
+        },
+        {
+          "target_time_us": 2.235,
+          "observed_normalized_rate": 0.43225119,
+          "parent_prediction": 0.44479558,
+          "full_array_prediction": 0.42878146,
+          "parent_ARA": 1.25347575,
+          "spin_cut_A_ARA": 1.79465589,
+          "spin_cut_B_ARA": 0.39293986,
+          "share_strength": 0.07149134
+        },
+        {
+          "target_time_us": 2.251,
+          "observed_normalized_rate": 0.42396192,
+          "parent_prediction": 0.44066211,
+          "full_array_prediction": 0.41246301,
+          "parent_ARA": 1.25887799,
+          "spin_cut_A_ARA": 1.50691752,
+          "spin_cut_B_ARA": 0.13800544,
+          "share_strength": 0.0734817
+        },
+        {
+          "target_time_us": 2.267,
+          "observed_normalized_rate": 0.42138265,
+          "parent_prediction": 0.43656356,
+          "full_array_prediction": 0.41951768,
+          "parent_ARA": 1.26424114,
+          "spin_cut_A_ARA": 1.14426438,
+          "spin_cut_B_ARA": 0.01046082,
+          "share_strength": 0.06550898
+        },
+        {
+          "target_time_us": 2.283,
+          "observed_normalized_rate": 0.41659765,
+          "parent_prediction": 0.43250021,
+          "full_array_prediction": 0.44624543,
+          "parent_ARA": 1.2695654,
+          "spin_cut_A_ARA": 0.76029674,
+          "spin_cut_B_ARA": 0.0291538,
+          "share_strength": 0.05613927
+        },
+        {
+          "target_time_us": 2.299,
+          "observed_normalized_rate": 0.41553036,
+          "parent_prediction": 0.42847216,
+          "full_array_prediction": 0.44120809,
+          "parent_ARA": 1.27485121,
+          "spin_cut_A_ARA": 0.41174792,
+          "spin_cut_B_ARA": 0.19132238,
+          "share_strength": 0.06746841
+        },
+        {
+          "target_time_us": 2.315,
+          "observed_normalized_rate": 0.41802069,
+          "parent_prediction": 0.42447964,
+          "full_array_prediction": 0.41504567,
+          "parent_ARA": 1.28009877,
+          "spin_cut_A_ARA": 0.15013389,
+          "spin_cut_B_ARA": 0.47300133,
+          "share_strength": 0.0700765
+        },
+        {
+          "target_time_us": 2.331,
+          "observed_normalized_rate": 0.41275541,
+          "parent_prediction": 0.42052283,
+          "full_array_prediction": 0.41705097,
+          "parent_ARA": 1.28530835,
+          "spin_cut_A_ARA": 0.01411727,
+          "spin_cut_B_ARA": 0.83256273,
+          "share_strength": 0.06444482
+        },
+        {
+          "target_time_us": 2.347,
+          "observed_normalized_rate": 0.40967807,
+          "parent_prediction": 0.41660185,
+          "full_array_prediction": 0.42727986,
+          "parent_ARA": 1.29048024,
+          "spin_cut_A_ARA": 0.02379925,
+          "spin_cut_B_ARA": 1.21686885,
+          "share_strength": 0.06228378
+        },
+        {
+          "target_time_us": 2.363,
+          "observed_normalized_rate": 0.40430606,
+          "parent_prediction": 0.41271681,
+          "full_array_prediction": 0.4112071,
+          "parent_ARA": 1.2956147,
+          "spin_cut_A_ARA": 0.17774899,
+          "spin_cut_B_ARA": 1.56912501,
+          "share_strength": 0.07262797
+        },
+        {
+          "target_time_us": 2.379,
+          "observed_normalized_rate": 0.40339886,
+          "parent_prediction": 0.40886781,
+          "full_array_prediction": 0.41015157,
+          "parent_ARA": 1.300712,
+          "spin_cut_A_ARA": 0.45321504,
+          "spin_cut_B_ARA": 1.83727308,
+          "share_strength": 0.06091772
+        },
+        {
+          "target_time_us": 2.395,
+          "observed_normalized_rate": 0.39832925,
+          "parent_prediction": 0.40505497,
+          "full_array_prediction": 0.41207572,
+          "parent_ARA": 1.30577235,
+          "spin_cut_A_ARA": 0.809482,
+          "spin_cut_B_ARA": 1.9816837,
+          "share_strength": 0.06983432
+        },
+        {
+          "target_time_us": 2.411,
+          "observed_normalized_rate": 0.39806243,
+          "parent_prediction": 0.40127822,
+          "full_array_prediction": 0.39846517,
+          "parent_ARA": 1.31079614,
+          "spin_cut_A_ARA": 1.19390948,
+          "spin_cut_B_ARA": 1.98101943,
+          "share_strength": 0.0675645
+        },
+        {
+          "target_time_us": 2.427,
+          "observed_normalized_rate": 0.39201447,
+          "parent_prediction": 0.39753765,
+          "full_array_prediction": 0.4021446,
+          "parent_ARA": 1.31578359,
+          "spin_cut_A_ARA": 1.54968006,
+          "spin_cut_B_ARA": 1.83537526,
+          "share_strength": 0.06578825
+        },
+        {
+          "target_time_us": 2.443,
+          "observed_normalized_rate": 0.39199668,
+          "parent_prediction": 0.39383326,
+          "full_array_prediction": 0.39417319,
+          "parent_ARA": 1.32073494,
+          "spin_cut_A_ARA": 1.82421621,
+          "spin_cut_B_ARA": 1.56627523,
+          "share_strength": 0.07104341
+        },
+        {
+          "target_time_us": 2.459,
+          "observed_normalized_rate": 0.38372521,
+          "parent_prediction": 0.39016506,
+          "full_array_prediction": 0.38268605,
+          "parent_ARA": 1.32565046,
+          "spin_cut_A_ARA": 1.97694563,
+          "spin_cut_B_ARA": 1.21348825,
+          "share_strength": 0.0716911
+        },
+        {
+          "target_time_us": 2.475,
+          "observed_normalized_rate": 0.38783426,
+          "parent_prediction": 0.386533,
+          "full_array_prediction": 0.37298933,
+          "parent_ARA": 1.33053041,
+          "spin_cut_A_ARA": 1.98529721,
+          "spin_cut_B_ARA": 0.82915092,
+          "share_strength": 0.07616252
+        },
+        {
+          "target_time_us": 2.491,
+          "observed_normalized_rate": 0.38788763,
+          "parent_prediction": 0.38293705,
+          "full_array_prediction": 0.38571878,
+          "parent_ARA": 1.33537504,
+          "spin_cut_A_ARA": 1.84803671,
+          "spin_cut_B_ARA": 0.47006252,
+          "share_strength": 0.06138377
+        },
+        {
+          "target_time_us": 2.507,
+          "observed_normalized_rate": 0.37888684,
+          "parent_prediction": 0.37937716,
+          "full_array_prediction": 0.40498322,
+          "parent_ARA": 1.34018462,
+          "spin_cut_A_ARA": 1.58544917,
+          "spin_cut_B_ARA": 0.18929088,
+          "share_strength": 0.06255174
+        },
+        {
+          "target_time_us": 2.523,
+          "observed_normalized_rate": 0.37894021,
+          "parent_prediction": 0.37585329,
+          "full_array_prediction": 0.3819536,
+          "parent_ARA": 1.34495932,
+          "spin_cut_A_ARA": 1.23634666,
+          "spin_cut_B_ARA": 0.0283312,
+          "share_strength": 0.07525954
+        },
+        {
+          "target_time_us": 2.539,
+          "observed_normalized_rate": 0.37132689,
+          "parent_prediction": 0.37236527,
+          "full_array_prediction": 0.37420426,
+          "parent_ARA": 1.34969954,
+          "spin_cut_A_ARA": 0.85231101,
+          "spin_cut_B_ARA": 0.01096615,
+          "share_strength": 0.06598478
+        },
+        {
+          "target_time_us": 2.555,
+          "observed_normalized_rate": 0.37397732,
+          "parent_prediction": 0.36891303,
+          "full_array_prediction": 0.38267206,
+          "parent_ARA": 1.35440546,
+          "spin_cut_A_ARA": 0.49010156,
+          "spin_cut_B_ARA": 0.13976539,
+          "share_strength": 0.06832823
+        },
+        {
+          "target_time_us": 2.571,
+          "observed_normalized_rate": 0.36931684,
+          "parent_prediction": 0.36549647,
+          "full_array_prediction": 0.38036141,
+          "parent_ARA": 1.35907732,
+          "spin_cut_A_ARA": 0.20324742,
+          "spin_cut_B_ARA": 0.39569434,
+          "share_strength": 0.0659785
+        },
+        {
+          "target_time_us": 2.587,
+          "observed_normalized_rate": 0.37106007,
+          "parent_prediction": 0.36211547,
+          "full_array_prediction": 0.38762098,
+          "parent_ARA": 1.36371537,
+          "spin_cut_A_ARA": 0.0341413,
+          "spin_cut_B_ARA": 0.74093057,
+          "share_strength": 0.06194287
+        },
+        {
+          "target_time_us": 2.603,
+          "observed_normalized_rate": 0.36109873,
+          "parent_prediction": 0.35876988,
+          "full_array_prediction": 0.38932305,
+          "parent_ARA": 1.36831986,
+          "spin_cut_A_ARA": 0.00777454,
+          "spin_cut_B_ARA": 1.12445334,
+          "share_strength": 0.06334496
+        },
+        {
+          "target_time_us": 2.619,
+          "observed_normalized_rate": 0.36250399,
+          "parent_prediction": 0.35545955,
+          "full_array_prediction": 0.38709001,
+          "parent_ARA": 1.37289103,
+          "spin_cut_A_ARA": 0.12804375,
+          "spin_cut_B_ARA": 1.48958379,
+          "share_strength": 0.06172859
+        },
+        {
+          "target_time_us": 2.635,
+          "observed_normalized_rate": 0.35432146,
+          "parent_prediction": 0.35218439,
+          "full_array_prediction": 0.38611165,
+          "parent_ARA": 1.37742906,
+          "spin_cut_A_ARA": 0.37717044,
+          "spin_cut_B_ARA": 1.78235755,
+          "share_strength": 0.0623082
+        },
+        {
+          "target_time_us": 2.651,
+          "observed_normalized_rate": 0.35677622,
+          "parent_prediction": 0.34894411,
+          "full_array_prediction": 0.37360375,
+          "parent_ARA": 1.38193431,
+          "spin_cut_A_ARA": 0.71834477,
+          "spin_cut_B_ARA": 1.95951568,
+          "share_strength": 0.06837163
+        },
+        {
+          "target_time_us": 2.667,
+          "observed_normalized_rate": 0.34951866,
+          "parent_prediction": 0.3457386,
+          "full_array_prediction": 0.34562131,
+          "parent_ARA": 1.38640696,
+          "spin_cut_A_ARA": 1.1011435,
+          "spin_cut_B_ARA": 1.99487185,
+          "share_strength": 0.08032397
+        },
+        {
+          "target_time_us": 2.683,
+          "observed_normalized_rate": 0.35202679,
+          "parent_prediction": 0.34256766,
+          "full_array_prediction": 0.33777207,
+          "parent_ARA": 1.39084724,
+          "spin_cut_A_ARA": 1.46899475,
+          "spin_cut_B_ARA": 1.88320095,
+          "share_strength": 0.07241496
+        },
+        {
+          "target_time_us": 2.699,
+          "observed_normalized_rate": 0.34800667,
+          "parent_prediction": 0.33943111,
+          "full_array_prediction": 0.34539623,
+          "parent_ARA": 1.39525539,
+          "spin_cut_A_ARA": 1.76753564,
+          "spin_cut_B_ARA": 1.64100627,
+          "share_strength": 0.07309943
+        },
+        {
+          "target_time_us": 2.715,
+          "observed_normalized_rate": 0.34361301,
+          "parent_prediction": 0.33632873,
+          "full_array_prediction": 0.34258918,
+          "parent_ARA": 1.39963164,
+          "spin_cut_A_ARA": 1.95264633,
+          "spin_cut_B_ARA": 1.30408052,
+          "share_strength": 0.07294497
+        },
+        {
+          "target_time_us": 2.731,
+          "observed_normalized_rate": 0.34297264,
+          "parent_prediction": 0.33326032,
+          "full_array_prediction": 0.33414653,
+          "parent_ARA": 1.40397623,
+          "spin_cut_A_ARA": 1.99697025,
+          "spin_cut_B_ARA": 0.92221626,
+          "share_strength": 0.07807258
+        },
+        {
+          "target_time_us": 2.747,
+          "observed_normalized_rate": 0.34926963,
+          "parent_prediction": 0.3302257,
+          "full_array_prediction": 0.3247006,
+          "parent_ARA": 1.4082893,
+          "spin_cut_A_ARA": 1.89395958,
+          "spin_cut_B_ARA": 0.55185241,
+          "share_strength": 0.07885137
+        },
+        {
+          "target_time_us": 2.763,
+          "observed_normalized_rate": 0.3346478,
+          "parent_prediction": 0.32722457,
+          "full_array_prediction": 0.32226153,
+          "parent_ARA": 1.41257124,
+          "spin_cut_A_ARA": 1.65883471,
+          "spin_cut_B_ARA": 0.24771227,
+          "share_strength": 0.07866669
+        },
+        {
+          "target_time_us": 2.779,
+          "observed_normalized_rate": 0.33423867,
+          "parent_prediction": 0.32425674,
+          "full_array_prediction": 0.32611649,
+          "parent_ARA": 1.41682218,
+          "spin_cut_A_ARA": 1.326344,
+          "spin_cut_B_ARA": 0.05474892,
+          "share_strength": 0.07442184
+        },
+        {
+          "target_time_us": 2.795,
+          "observed_normalized_rate": 0.33028971,
+          "parent_prediction": 0.32132198,
+          "full_array_prediction": 0.32724561,
+          "parent_ARA": 1.42104236,
+          "spin_cut_A_ARA": 0.94562456,
+          "spin_cut_B_ARA": 0.00147944,
+          "share_strength": 0.07656065
+        },
+        {
+          "target_time_us": 2.811,
+          "observed_normalized_rate": 0.32922243,
+          "parent_prediction": 0.31842003,
+          "full_array_prediction": 0.31725168,
+          "parent_ARA": 1.425232,
+          "spin_cut_A_ARA": 0.57294099,
+          "spin_cut_B_ARA": 0.09577624,
+          "share_strength": 0.08104121
+        },
+        {
+          "target_time_us": 2.827,
+          "observed_normalized_rate": 0.3301652,
+          "parent_prediction": 0.31555067,
+          "full_array_prediction": 0.32455552,
+          "parent_ARA": 1.42939133,
+          "spin_cut_A_ARA": 0.26337031,
+          "spin_cut_B_ARA": 0.32370369,
+          "share_strength": 0.06909339
+        },
+        {
+          "target_time_us": 2.843,
+          "observed_normalized_rate": 0.32859984,
+          "parent_prediction": 0.31271363,
+          "full_array_prediction": 0.332233,
+          "parent_ARA": 1.43352055,
+          "spin_cut_A_ARA": 0.06266239,
+          "spin_cut_B_ARA": 0.65157754,
+          "share_strength": 0.07379423
+        },
+        {
+          "target_time_us": 2.859,
+          "observed_normalized_rate": 0.32242737,
+          "parent_prediction": 0.30990867,
+          "full_array_prediction": 0.33056417,
+          "parent_ARA": 1.4376199,
+          "spin_cut_A_ARA": 0.00047885,
+          "spin_cut_B_ARA": 1.03094297,
+          "share_strength": 0.06876228
+        },
+        {
+          "target_time_us": 2.875,
+          "observed_normalized_rate": 0.32032837,
+          "parent_prediction": 0.30713557,
+          "full_array_prediction": 0.32274195,
+          "parent_ARA": 1.44168952,
+          "spin_cut_A_ARA": 0.08600713,
+          "spin_cut_B_ARA": 1.40573024,
+          "share_strength": 0.07836617
+        },
+        {
+          "target_time_us": 2.891,
+          "observed_normalized_rate": 0.3178914,
+          "parent_prediction": 0.30439399,
+          "full_array_prediction": 0.31857002,
+          "parent_ARA": 1.44572975,
+          "spin_cut_A_ARA": 0.30660995,
+          "spin_cut_B_ARA": 1.72056245,
+          "share_strength": 0.0703472
+        },
+        {
+          "target_time_us": 2.907,
+          "observed_normalized_rate": 0.31616595,
+          "parent_prediction": 0.30168369,
+          "full_array_prediction": 0.32659403,
+          "parent_ARA": 1.44974074,
+          "spin_cut_A_ARA": 0.62968538,
+          "spin_cut_B_ARA": 1.92890639,
+          "share_strength": 0.07042598
+        },
+        {
+          "target_time_us": 2.923,
+          "observed_normalized_rate": 0.31591692,
+          "parent_prediction": 0.29900443,
+          "full_array_prediction": 0.32453457,
+          "parent_ARA": 1.4537227,
+          "spin_cut_A_ARA": 1.00748772,
+          "spin_cut_B_ARA": 1.99997197,
+          "share_strength": 0.07029192
+        },
+        {
+          "target_time_us": 2.939,
+          "observed_normalized_rate": 0.31209247,
+          "parent_prediction": 0.29635591,
+          "full_array_prediction": 0.31415263,
+          "parent_ARA": 1.45767586,
+          "spin_cut_A_ARA": 1.3841835,
+          "spin_cut_B_ARA": 1.92325676,
+          "share_strength": 0.07707147
+        },
+        {
+          "target_time_us": 2.955,
+          "observed_normalized_rate": 0.31260833,
+          "parent_prediction": 0.29373788,
+          "full_array_prediction": 0.31150652,
+          "parent_ARA": 1.4616004,
+          "spin_cut_A_ARA": 1.70410274,
+          "spin_cut_B_ARA": 1.71009812,
+          "share_strength": 0.0708147
+        },
+        {
+          "target_time_us": 2.971,
+          "observed_normalized_rate": 0.30707622,
+          "parent_prediction": 0.29115006,
+          "full_array_prediction": 0.29453924,
+          "parent_ARA": 1.46549654,
+          "spin_cut_A_ARA": 1.91996621,
+          "spin_cut_B_ARA": 1.39199768,
+          "share_strength": 0.09004243
+        },
+        {
+          "target_time_us": 2.987,
+          "observed_normalized_rate": 0.30309169,
+          "parent_prediction": 0.28859221,
+          "full_array_prediction": 0.27148377,
+          "parent_ARA": 1.46936443,
+          "spin_cut_A_ARA": 1.99987245,
+          "spin_cut_B_ARA": 1.01597165,
+          "share_strength": 0.09010376
+        },
+        {
+          "target_time_us": 3.003,
+          "observed_normalized_rate": 0.30688055,
+          "parent_prediction": 0.28606398,
+          "full_array_prediction": 0.268282,
+          "parent_ARA": 1.47320439,
+          "spin_cut_A_ARA": 1.93201487,
+          "spin_cut_B_ARA": 0.63757995,
+          "share_strength": 0.09181634
+        },
+        {
+          "target_time_us": 3.019,
+          "observed_normalized_rate": 0.30175758,
+          "parent_prediction": 0.28356512,
+          "full_array_prediction": 0.28737528,
+          "parent_ARA": 1.47701656,
+          "spin_cut_A_ARA": 1.72641954,
+          "spin_cut_B_ARA": 0.31274847,
+          "share_strength": 0.07091808
+        },
+        {
+          "target_time_us": 3.035,
+          "observed_normalized_rate": 0.29964079,
+          "parent_prediction": 0.28109535,
+          "full_array_prediction": 0.3046633,
+          "parent_ARA": 1.48080115,
+          "spin_cut_A_ARA": 1.41347035,
+          "spin_cut_B_ARA": 0.08948242,
+          "share_strength": 0.07592197
+        },
+        {
+          "target_time_us": 3.051,
+          "observed_normalized_rate": 0.29421542,
+          "parent_prediction": 0.2786544,
+          "full_array_prediction": 0.3027274,
+          "parent_ARA": 1.48455834,
+          "spin_cut_A_ARA": 1.03941647,
+          "spin_cut_B_ARA": 0.00077713,
+          "share_strength": 0.07116878
+        },
+        {
+          "target_time_us": 3.067,
+          "observed_normalized_rate": 0.29569183,
+          "parent_prediction": 0.27624198,
+          "full_array_prediction": 0.29855457,
+          "parent_ARA": 1.48828835,
+          "spin_cut_A_ARA": 0.65953744,
+          "spin_cut_B_ARA": 0.05974193,
+          "share_strength": 0.07834769
+        },
+        {
+          "target_time_us": 3.083,
+          "observed_normalized_rate": 0.29343274,
+          "parent_prediction": 0.27385781,
+          "full_array_prediction": 0.29973238,
+          "parent_ARA": 1.49199137,
+          "spin_cut_A_ARA": 0.32997364,
+          "spin_cut_B_ARA": 0.25766269,
+          "share_strength": 0.06868223
+        },
+        {
+          "target_time_us": 3.099,
+          "observed_normalized_rate": 0.28830976,
+          "parent_prediction": 0.27150161,
+          "full_array_prediction": 0.308189,
+          "parent_ARA": 1.49566759,
+          "spin_cut_A_ARA": 0.09942964,
+          "spin_cut_B_ARA": 0.56528973,
+          "share_strength": 0.06998771
+        },
+        {
+          "target_time_us": 3.115,
+          "observed_normalized_rate": 0.28752709,
+          "parent_prediction": 0.26917312,
+          "full_array_prediction": 0.29502278,
+          "parent_ARA": 1.49931715,
+          "spin_cut_A_ARA": 0.00197672,
+          "spin_cut_B_ARA": 0.93715463,
+          "share_strength": 0.07839777
+        },
+        {
+          "target_time_us": 3.131,
+          "observed_normalized_rate": 0.28852322,
+          "parent_prediction": 0.26687199,
+          "full_array_prediction": 0.27973528,
+          "parent_ARA": 1.50294035,
+          "spin_cut_A_ARA": 0.0520141,
+          "spin_cut_B_ARA": 1.31831233,
+          "share_strength": 0.08197495
+        },
+        {
+          "target_time_us": 3.147,
+          "observed_normalized_rate": 0.2840584,
+          "parent_prediction": 0.26459798,
+          "full_array_prediction": 0.2746549,
+          "parent_ARA": 1.50653734,
+          "spin_cut_A_ARA": 0.24214951,
+          "spin_cut_B_ARA": 1.65242826,
+          "share_strength": 0.08148922
+        },
+        {
+          "target_time_us": 3.163,
+          "observed_normalized_rate": 0.27900658,
+          "parent_prediction": 0.2623508,
+          "full_array_prediction": 0.2609017,
+          "parent_ARA": 1.51010829,
+          "spin_cut_A_ARA": 0.5442838,
+          "spin_cut_B_ARA": 1.89012513,
+          "share_strength": 0.09342176
+        },
+        {
+          "target_time_us": 3.179,
+          "observed_normalized_rate": 0.27984262,
+          "parent_prediction": 0.26013017,
+          "full_array_prediction": 0.26553678,
+          "parent_ARA": 1.51365341,
+          "spin_cut_A_ARA": 0.91376607,
+          "spin_cut_B_ARA": 1.99627492,
+          "share_strength": 0.07547833
+        },
+        {
+          "target_time_us": 3.195,
+          "observed_normalized_rate": 0.27763689,
+          "parent_prediction": 0.25793581,
+          "full_array_prediction": 0.26863197,
+          "parent_ARA": 1.51717287,
+          "spin_cut_A_ARA": 1.29599242,
+          "spin_cut_B_ARA": 1.95519029,
+          "share_strength": 0.08899981
+        },
+        {
+          "target_time_us": 3.211,
+          "observed_normalized_rate": 0.2759826,
+          "parent_prediction": 0.25576743,
+          "full_array_prediction": 0.25917674,
+          "parent_ARA": 1.52066686,
+          "spin_cut_A_ARA": 1.63447555,
+          "spin_cut_B_ARA": 1.77294293,
+          "share_strength": 0.08308718
+        },
+        {
+          "target_time_us": 3.227,
+          "observed_normalized_rate": 0.27669412,
+          "parent_prediction": 0.25362479,
+          "full_array_prediction": 0.2666074,
+          "parent_ARA": 1.52413552,
+          "spin_cut_A_ARA": 1.87919001,
+          "spin_cut_B_ARA": 1.47647133,
+          "share_strength": 0.08041344
+        },
+        {
+          "target_time_us": 3.243,
+          "observed_normalized_rate": 0.27249613,
+          "parent_prediction": 0.25150753,
+          "full_array_prediction": 0.2712852,
+          "parent_ARA": 1.52757912,
+          "spin_cut_A_ARA": 1.99397789,
+          "spin_cut_B_ARA": 1.10958079,
+          "share_strength": 0.07729377
+        },
+        {
+          "target_time_us": 3.259,
+          "observed_normalized_rate": 0.27286968,
+          "parent_prediction": 0.24941543,
+          "full_array_prediction": 0.26765467,
+          "parent_ARA": 1.53099781,
+          "spin_cut_A_ARA": 1.96187082,
+          "spin_cut_B_ARA": 0.72649586,
+          "share_strength": 0.08266654
+        },
+        {
+          "target_time_us": 3.275,
+          "observed_normalized_rate": 0.27068174,
+          "parent_prediction": 0.24734819,
+          "full_array_prediction": 0.25461917,
+          "parent_ARA": 1.53439176,
+          "spin_cut_A_ARA": 1.78761375,
+          "spin_cut_B_ARA": 0.38383072,
+          "share_strength": 0.08889019
+        },
+        {
+          "target_time_us": 3.291,
+          "observed_normalized_rate": 0.26723085,
+          "parent_prediction": 0.24530554,
+          "full_array_prediction": 0.24937737,
+          "parent_ARA": 1.53776114,
+          "spin_cut_A_ARA": 1.49695923,
+          "spin_cut_B_ARA": 0.13222611,
+          "share_strength": 0.08671147
+        },
+        {
+          "target_time_us": 3.307,
+          "observed_normalized_rate": 0.2643136,
+          "parent_prediction": 0.2432872,
+          "full_array_prediction": 0.24898951,
+          "parent_ARA": 1.54110615,
+          "spin_cut_A_ARA": 1.13286162,
+          "spin_cut_B_ARA": 0.0088654,
+          "share_strength": 0.08812407
+        },
+        {
+          "target_time_us": 3.323,
+          "observed_normalized_rate": 0.26429581,
+          "parent_prediction": 0.2412929,
+          "full_array_prediction": 0.24847777,
+          "parent_ARA": 1.54442695,
+          "spin_cut_A_ARA": 0.74912907,
+          "spin_cut_B_ARA": 0.03197945,
+          "share_strength": 0.08597492
+        },
+        {
+          "target_time_us": 3.339,
+          "observed_normalized_rate": 0.25903053,
+          "parent_prediction": 0.2393224,
+          "full_array_prediction": 0.24668357,
+          "parent_ARA": 1.54772366,
+          "spin_cut_A_ARA": 0.40247609,
+          "spin_cut_B_ARA": 0.19814891,
+          "share_strength": 0.08873577
+        },
+        {
+          "target_time_us": 3.355,
+          "observed_normalized_rate": 0.25460128,
+          "parent_prediction": 0.23737537,
+          "full_array_prediction": 0.24783322,
+          "parent_ARA": 1.55099657,
+          "spin_cut_A_ARA": 0.14412255,
+          "spin_cut_B_ARA": 0.48282131,
+          "share_strength": 0.08343721
+        },
+        {
+          "target_time_us": 3.371,
+          "observed_normalized_rate": 0.25476138,
+          "parent_prediction": 0.23545156,
+          "full_array_prediction": 0.24809626,
+          "parent_ARA": 1.5542458,
+          "spin_cut_A_ARA": 0.0122548,
+          "spin_cut_B_ARA": 0.84392493,
+          "share_strength": 0.08711633
+        },
+        {
+          "target_time_us": 3.387,
+          "observed_normalized_rate": 0.25422773,
+          "parent_prediction": 0.23355071,
+          "full_array_prediction": 0.23568456,
+          "parent_ARA": 1.55747151,
+          "spin_cut_A_ARA": 0.02636091,
+          "spin_cut_B_ARA": 1.22809409,
+          "share_strength": 0.09502798
+        },
+        {
+          "target_time_us": 3.403,
+          "observed_normalized_rate": 0.25388976,
+          "parent_prediction": 0.23167256,
+          "full_array_prediction": 0.22550155,
+          "parent_ARA": 1.56067388,
+          "spin_cut_A_ARA": 0.18435619,
+          "spin_cut_B_ARA": 1.57855439,
+          "share_strength": 0.09686352
+        },
+        {
+          "target_time_us": 3.419,
+          "observed_normalized_rate": 0.2524845,
+          "parent_prediction": 0.22981683,
+          "full_array_prediction": 0.22499665,
+          "parent_ARA": 1.56385308,
+          "spin_cut_A_ARA": 0.46289134,
+          "spin_cut_B_ARA": 1.84351306,
+          "share_strength": 0.09416207
+        },
+        {
+          "target_time_us": 3.435,
+          "observed_normalized_rate": 0.24954946,
+          "parent_prediction": 0.22798326,
+          "full_array_prediction": 0.23895356,
+          "parent_ARA": 1.56700927,
+          "spin_cut_A_ARA": 0.82080305,
+          "spin_cut_B_ARA": 1.98381322,
+          "share_strength": 0.08020471
+        },
+        {
+          "target_time_us": 3.451,
+          "observed_normalized_rate": 0.24780623,
+          "parent_prediction": 0.2261716,
+          "full_array_prediction": 0.23878937,
+          "parent_ARA": 1.57014262,
+          "spin_cut_A_ARA": 1.20519737,
+          "spin_cut_B_ARA": 1.97872061,
+          "share_strength": 0.09290613
+        },
+        {
+          "target_time_us": 3.467,
+          "observed_normalized_rate": 0.24513801,
+          "parent_prediction": 0.22438161,
+          "full_array_prediction": 0.23044845,
+          "parent_ARA": 1.57325324,
+          "spin_cut_A_ARA": 1.55926184,
+          "spin_cut_B_ARA": 1.82899107,
+          "share_strength": 0.08788912
+        },
+        {
+          "target_time_us": 3.483,
+          "observed_normalized_rate": 0.2451558,
+          "parent_prediction": 0.22261299,
+          "full_array_prediction": 0.23412239,
+          "parent_ARA": 1.57634141,
+          "spin_cut_A_ARA": 1.83068147,
+          "spin_cut_B_ARA": 1.55674796,
+          "share_strength": 0.08759199
+        },
+        {
+          "target_time_us": 3.499,
+          "observed_normalized_rate": 0.23809391,
+          "parent_prediction": 0.22086549,
+          "full_array_prediction": 0.24740887,
+          "parent_ARA": 1.57940723,
+          "spin_cut_A_ARA": 1.9793389,
+          "spin_cut_B_ARA": 1.2022259,
+          "share_strength": 0.0724056
+        },
+        {
+          "target_time_us": 3.515,
+          "observed_normalized_rate": 0.23962369,
+          "parent_prediction": 0.21913888,
+          "full_array_prediction": 0.24718495,
+          "parent_ARA": 1.58245086,
+          "spin_cut_A_ARA": 1.98326481,
+          "spin_cut_B_ARA": 0.81781789,
+          "share_strength": 0.08684258
+        },
+        {
+          "target_time_us": 3.531,
+          "observed_normalized_rate": 0.23823622,
+          "parent_prediction": 0.21743289,
+          "full_array_prediction": 0.23591475,
+          "parent_ARA": 1.58547246,
+          "spin_cut_A_ARA": 1.84187899,
+          "spin_cut_B_ARA": 0.46033365,
+          "share_strength": 0.08304927
+        },
+        {
+          "target_time_us": 3.547,
+          "observed_normalized_rate": 0.23852083,
+          "parent_prediction": 0.21574729,
+          "full_array_prediction": 0.2350612,
+          "parent_ARA": 1.5884722,
+          "spin_cut_A_ARA": 1.57607615,
+          "spin_cut_B_ARA": 0.18260397,
+          "share_strength": 0.08671005
+        },
+        {
+          "target_time_us": 3.563,
+          "observed_normalized_rate": 0.23432283,
+          "parent_prediction": 0.21408182,
+          "full_array_prediction": 0.22994773,
+          "parent_ARA": 1.59145024,
+          "spin_cut_A_ARA": 1.22513793,
+          "spin_cut_B_ARA": 0.0256731,
+          "share_strength": 0.08753321
+        },
+        {
+          "target_time_us": 3.579,
+          "observed_normalized_rate": 0.2337714,
+          "parent_prediction": 0.21243627,
+          "full_array_prediction": 0.22137959,
+          "parent_ARA": 1.59440667,
+          "spin_cut_A_ARA": 0.84093342,
+          "spin_cut_B_ARA": 0.01273214,
+          "share_strength": 0.09531568
+        },
+        {
+          "target_time_us": 3.595,
+          "observed_normalized_rate": 0.2318325,
+          "parent_prediction": 0.21081034,
+          "full_array_prediction": 0.22549592,
+          "parent_ARA": 1.59734176,
+          "spin_cut_A_ARA": 0.48023093,
+          "spin_cut_B_ARA": 0.1456932,
+          "share_strength": 0.0815482
+        },
+        {
+          "target_time_us": 3.611,
+          "observed_normalized_rate": 0.23334449,
+          "parent_prediction": 0.20920381,
+          "full_array_prediction": 0.22998899,
+          "parent_ARA": 1.60025561,
+          "spin_cut_A_ARA": 0.19634247,
+          "spin_cut_B_ARA": 0.40490792,
+          "share_strength": 0.0891166
+        },
+        {
+          "target_time_us": 3.627,
+          "observed_normalized_rate": 0.2285417,
+          "parent_prediction": 0.20761646,
+          "full_array_prediction": 0.22605639,
+          "parent_ARA": 1.60314837,
+          "spin_cut_A_ARA": 0.03122249,
+          "spin_cut_B_ARA": 0.75206829,
+          "share_strength": 0.0846915
+        },
+        {
+          "target_time_us": 3.643,
+          "observed_normalized_rate": 0.22729653,
+          "parent_prediction": 0.20604804,
+          "full_array_prediction": 0.22539171,
+          "parent_ARA": 1.6060202,
+          "spin_cut_A_ARA": 0.00927322,
+          "spin_cut_B_ARA": 1.13586922,
+          "share_strength": 0.08854575
+        },
+        {
+          "target_time_us": 3.659,
+          "observed_normalized_rate": 0.22453937,
+          "parent_prediction": 0.20449833,
+          "full_array_prediction": 0.22148866,
+          "parent_ARA": 1.60887124,
+          "spin_cut_A_ARA": 0.13373843,
+          "spin_cut_B_ARA": 1.49959073,
+          "share_strength": 0.08782043
+        },
+        {
+          "target_time_us": 3.675,
+          "observed_normalized_rate": 0.22096396,
+          "parent_prediction": 0.20296708,
+          "full_array_prediction": 0.22643424,
+          "parent_ARA": 1.61170166,
+          "spin_cut_A_ARA": 0.38622405,
+          "spin_cut_B_ARA": 1.78948026,
+          "share_strength": 0.08165738
+        },
+        {
+          "target_time_us": 3.691,
+          "observed_normalized_rate": 0.22286729,
+          "parent_prediction": 0.2014541,
+          "full_array_prediction": 0.21222666,
+          "parent_ARA": 1.61451155,
+          "spin_cut_A_ARA": 0.72941096,
+          "spin_cut_B_ARA": 1.96269495,
+          "share_strength": 0.10280326
+        },
+        {
+          "target_time_us": 3.707,
+          "observed_normalized_rate": 0.21811786,
+          "parent_prediction": 0.19995912,
+          "full_array_prediction": 0.20939706,
+          "parent_ARA": 1.61730114,
+          "spin_cut_A_ARA": 1.11259139,
+          "spin_cut_B_ARA": 1.99364137,
+          "share_strength": 0.08391311
+        },
+        {
+          "target_time_us": 3.723,
+          "observed_normalized_rate": 0.21804671,
+          "parent_prediction": 0.19848193,
+          "full_array_prediction": 0.2158033,
+          "parent_ARA": 1.62007055,
+          "spin_cut_A_ARA": 1.47913252,
+          "spin_cut_B_ARA": 1.87774257,
+          "share_strength": 0.09386256
+        },
+        {
+          "target_time_us": 3.739,
+          "observed_normalized_rate": 0.21872266,
+          "parent_prediction": 0.1970223,
+          "full_array_prediction": 0.2047876,
+          "parent_ARA": 1.62281992,
+          "spin_cut_A_ARA": 1.77486508,
+          "spin_cut_B_ARA": 1.63212665,
+          "share_strength": 0.09609014
+        },
+        {
+          "target_time_us": 3.755,
+          "observed_normalized_rate": 0.21874045,
+          "parent_prediction": 0.19558003,
+          "full_array_prediction": 0.205291,
+          "parent_ARA": 1.6255494,
+          "spin_cut_A_ARA": 1.95608426,
+          "spin_cut_B_ARA": 1.29309194,
+          "share_strength": 0.09206667
+        },
+        {
+          "target_time_us": 3.771,
+          "observed_normalized_rate": 0.21231894,
+          "parent_prediction": 0.19415489,
+          "full_array_prediction": 0.20551223,
+          "parent_ARA": 1.62825912,
+          "spin_cut_A_ARA": 1.9960086,
+          "spin_cut_B_ARA": 0.91074266,
+          "share_strength": 0.09475276
+        },
+        {
+          "target_time_us": 3.787,
+          "observed_normalized_rate": 0.21495158,
+          "parent_prediction": 0.19274668,
+          "full_array_prediction": 0.1989773,
+          "parent_ARA": 1.63094923,
+          "spin_cut_A_ARA": 1.88873788,
+          "spin_cut_B_ARA": 0.54158426,
+          "share_strength": 0.09930108
+        },
+        {
+          "target_time_us": 3.803,
+          "observed_normalized_rate": 0.21093146,
+          "parent_prediction": 0.19135517,
+          "full_array_prediction": 0.19906249,
+          "parent_ARA": 1.63361988,
+          "spin_cut_A_ARA": 1.65012509,
+          "spin_cut_B_ARA": 0.2401728,
+          "share_strength": 0.09348218
+        },
+        {
+          "target_time_us": 3.819,
+          "observed_normalized_rate": 0.21030888,
+          "parent_prediction": 0.18998018,
+          "full_array_prediction": 0.20532621,
+          "parent_ARA": 1.63627116,
+          "spin_cut_A_ARA": 1.31543908,
+          "spin_cut_B_ARA": 0.05105417,
+          "share_strength": 0.09029556
+        },
+        {
+          "target_time_us": 3.835,
+          "observed_normalized_rate": 0.20402968,
+          "parent_prediction": 0.18862145,
+          "full_array_prediction": 0.20964494,
+          "parent_ARA": 1.63890329,
+          "spin_cut_A_ARA": 0.93413156,
+          "spin_cut_B_ARA": 0.00217168,
+          "share_strength": 0.0870774
+        },
+        {
+          "target_time_us": 3.851,
+          "observed_normalized_rate": 0.20328257,
+          "parent_prediction": 0.18727881,
+          "full_array_prediction": 0.20207536,
+          "parent_ARA": 1.64151638,
+          "spin_cut_A_ARA": 0.56255839,
+          "spin_cut_B_ARA": 0.10075318,
+          "share_strength": 0.0986046
+        },
+        {
+          "target_time_us": 3.867,
+          "observed_normalized_rate": 0.20395852,
+          "parent_prediction": 0.18595206,
+          "full_array_prediction": 0.19104866,
+          "parent_ARA": 1.64411056,
+          "spin_cut_A_ARA": 0.2556325,
+          "spin_cut_B_ARA": 0.33222981,
+          "share_strength": 0.10019031
+        },
+        {
+          "target_time_us": 3.883,
+          "observed_normalized_rate": 0.20778297,
+          "parent_prediction": 0.18464098,
+          "full_array_prediction": 0.19764417,
+          "parent_ARA": 1.64668596,
+          "spin_cut_A_ARA": 0.05871291,
+          "spin_cut_B_ARA": 0.6623928,
+          "share_strength": 0.08885206
+        },
+        {
+          "target_time_us": 3.899,
+          "observed_normalized_rate": 0.20198404,
+          "parent_prediction": 0.18334538,
+          "full_array_prediction": 0.19894169,
+          "parent_ARA": 1.64924273,
+          "spin_cut_A_ARA": 0.00090137,
+          "spin_cut_B_ARA": 1.04244905,
+          "share_strength": 0.0972207
+        },
+        {
+          "target_time_us": 3.915,
+          "observed_normalized_rate": 0.20271335,
+          "parent_prediction": 0.18206508,
+          "full_array_prediction": 0.19166786,
+          "parent_ARA": 1.65178099,
+          "spin_cut_A_ARA": 0.09074154,
+          "spin_cut_B_ARA": 1.41623197,
+          "share_strength": 0.09713121
+        },
+        {
+          "target_time_us": 3.931,
+          "observed_normalized_rate": 0.20064993,
+          "parent_prediction": 0.18079988,
+          "full_array_prediction": 0.18932258,
+          "parent_ARA": 1.65430085,
+          "spin_cut_A_ARA": 0.31495221,
+          "spin_cut_B_ARA": 1.72849813,
+          "share_strength": 0.09912208
+        },
+        {
+          "target_time_us": 3.947,
+          "observed_normalized_rate": 0.19707452,
+          "parent_prediction": 0.17954954,
+          "full_array_prediction": 0.18542042,
+          "parent_ARA": 1.65680255,
+          "spin_cut_A_ARA": 0.6404104,
+          "spin_cut_B_ARA": 1.93311056,
+          "share_strength": 0.10123843
+        },
+        {
+          "target_time_us": 3.963,
+          "observed_normalized_rate": 0.19517119,
+          "parent_prediction": 0.17831395,
+          "full_array_prediction": 0.18570021,
+          "parent_ARA": 1.65928607,
+          "spin_cut_A_ARA": 1.01900054,
+          "spin_cut_B_ARA": 1.99981947,
+          "share_strength": 0.09763524
+        },
+        {
+          "target_time_us": 3.979,
+          "observed_normalized_rate": 0.19542023,
+          "parent_prediction": 0.17709285,
+          "full_array_prediction": 0.19511964,
+          "parent_ARA": 1.66175169,
+          "spin_cut_A_ARA": 1.39479337,
+          "spin_cut_B_ARA": 1.91876993,
+          "share_strength": 0.08752802
+        },
+        {
+          "target_time_us": 3.995,
+          "observed_normalized_rate": 0.19734134,
+          "parent_prediction": 0.17588612,
+          "full_array_prediction": 0.18607149,
+          "parent_ARA": 1.6641994,
+          "spin_cut_A_ARA": 1.71223188,
+          "spin_cut_B_ARA": 1.70194426,
+          "share_strength": 0.10870232
+        },
+        {
+          "target_time_us": 4.011,
+          "observed_normalized_rate": 0.19390824,
+          "parent_prediction": 0.17469355,
+          "full_array_prediction": 0.17389147,
+          "parent_ARA": 1.66662939,
+          "spin_cut_A_ARA": 1.92441635,
+          "spin_cut_B_ARA": 1.38138486,
+          "share_strength": 0.10377576
+        },
+        {
+          "target_time_us": 4.027,
+          "observed_normalized_rate": 0.19495774,
+          "parent_prediction": 0.17351492,
+          "full_array_prediction": 0.18446866,
+          "parent_ARA": 1.66904188,
+          "spin_cut_A_ARA": 1.99999009,
+          "spin_cut_B_ARA": 1.00445266,
+          "share_strength": 0.09249809
+        },
+        {
+          "target_time_us": 4.043,
+          "observed_normalized_rate": 0.19225394,
+          "parent_prediction": 0.17235012,
+          "full_array_prediction": 0.18738106,
+          "parent_ARA": 1.67143683,
+          "spin_cut_A_ARA": 1.92778031,
+          "spin_cut_B_ARA": 0.62687309,
+          "share_strength": 0.09885808
+        },
+        {
+          "target_time_us": 4.059,
+          "observed_normalized_rate": 0.18679299,
+          "parent_prediction": 0.17119891,
+          "full_array_prediction": 0.18679027,
+          "parent_ARA": 1.67381452,
+          "spin_cut_A_ARA": 1.71845461,
+          "spin_cut_B_ARA": 0.30442615,
+          "share_strength": 0.09220805
+        },
+        {
+          "target_time_us": 4.075,
+          "observed_normalized_rate": 0.18777134,
+          "parent_prediction": 0.17006116,
+          "full_array_prediction": 0.18323212,
+          "parent_ARA": 1.67617497,
+          "spin_cut_A_ARA": 1.40295429,
+          "spin_cut_B_ARA": 0.0847799,
+          "share_strength": 0.10287226
+        },
+        {
+          "target_time_us": 4.091,
+          "observed_normalized_rate": 0.18350219,
+          "parent_prediction": 0.16893667,
+          "full_array_prediction": 0.177564,
+          "parent_ARA": 1.67851837,
+          "spin_cut_A_ARA": 1.02789764,
+          "spin_cut_B_ARA": 0.00038921,
+          "share_strength": 0.09914604
+        },
+        {
+          "target_time_us": 4.107,
+          "observed_normalized_rate": 0.18574349,
+          "parent_prediction": 0.16782531,
+          "full_array_prediction": 0.18497217,
+          "parent_ARA": 1.68084475,
+          "spin_cut_A_ARA": 0.64872882,
+          "spin_cut_B_ARA": 0.06372624,
+          "share_strength": 0.09138064
+        },
+        {
+          "target_time_us": 4.123,
+          "observed_normalized_rate": 0.1822926,
+          "parent_prediction": 0.1667269,
+          "full_array_prediction": 0.19772133,
+          "parent_ARA": 1.68315429,
+          "spin_cut_A_ARA": 0.32147105,
+          "spin_cut_B_ARA": 0.26542634,
+          "share_strength": 0.08117202
+        },
+        {
+          "target_time_us": 4.139,
+          "observed_normalized_rate": 0.17983784,
+          "parent_prediction": 0.16564122,
+          "full_array_prediction": 0.17629046,
+          "parent_ARA": 1.68544719,
+          "spin_cut_A_ARA": 0.09448179,
+          "spin_cut_B_ARA": 0.5756926,
+          "share_strength": 0.11911994
+        },
+        {
+          "target_time_us": 4.155,
+          "observed_normalized_rate": 0.18220366,
+          "parent_prediction": 0.16456819,
+          "full_array_prediction": 0.16327951,
+          "parent_ARA": 1.68772342,
+          "spin_cut_A_ARA": 0.001319,
+          "spin_cut_B_ARA": 0.94865544,
+          "share_strength": 0.099912
+        },
+        {
+          "target_time_us": 4.171,
+          "observed_normalized_rate": 0.17635137,
+          "parent_prediction": 0.16350757,
+          "full_array_prediction": 0.17485869,
+          "parent_ARA": 1.68998325,
+          "spin_cut_A_ARA": 0.05574567,
+          "spin_cut_B_ARA": 1.32921688,
+          "share_strength": 0.10050084
+        },
+        {
+          "target_time_us": 4.187,
+          "observed_normalized_rate": 0.17901959,
+          "parent_prediction": 0.16245927,
+          "full_array_prediction": 0.17479568,
+          "parent_ARA": 1.69222667,
+          "spin_cut_A_ARA": 0.24971538,
+          "spin_cut_B_ARA": 1.66111496,
+          "share_strength": 0.09894533
+        },
+        {
+          "target_time_us": 4.203,
+          "observed_normalized_rate": 0.17514178,
+          "parent_prediction": 0.16142306,
+          "full_array_prediction": 0.17499095,
+          "parent_ARA": 1.69445391,
+          "spin_cut_A_ARA": 0.55457291,
+          "spin_cut_B_ARA": 1.89531821,
+          "share_strength": 0.09914754
+        },
+        {
+          "target_time_us": 4.219,
+          "observed_normalized_rate": 0.17487496,
+          "parent_prediction": 0.16039887,
+          "full_array_prediction": 0.17787347,
+          "parent_ARA": 1.69666497,
+          "spin_cut_A_ARA": 0.92524829,
+          "spin_cut_B_ARA": 1.99720218,
+          "share_strength": 0.09380122
+        },
+        {
+          "target_time_us": 4.235,
+          "observed_normalized_rate": 0.1731673,
+          "parent_prediction": 0.15938649,
+          "full_array_prediction": 0.17702841,
+          "parent_ARA": 1.69886003,
+          "spin_cut_A_ARA": 1.30697052,
+          "spin_cut_B_ARA": 1.95171902,
+          "share_strength": 0.09930143
+        },
+        {
+          "target_time_us": 4.251,
+          "observed_normalized_rate": 0.17115724,
+          "parent_prediction": 0.15838576,
+          "full_array_prediction": 0.16578197,
+          "parent_ARA": 1.70103927,
+          "spin_cut_A_ARA": 1.64333729,
+          "spin_cut_B_ARA": 1.76558287,
+          "share_strength": 0.10961604
+        },
+        {
+          "target_time_us": 4.267,
+          "observed_normalized_rate": 0.16989428,
+          "parent_prediction": 0.15739658,
+          "full_array_prediction": 0.15827965,
+          "parent_ARA": 1.70320267,
+          "spin_cut_A_ARA": 1.88462034,
+          "spin_cut_B_ARA": 1.46631197,
+          "share_strength": 0.11025317
+        },
+        {
+          "target_time_us": 4.283,
+          "observed_normalized_rate": 0.17058802,
+          "parent_prediction": 0.15641874,
+          "full_array_prediction": 0.16275536,
+          "parent_ARA": 1.70535049,
+          "spin_cut_A_ARA": 1.99517481,
+          "spin_cut_B_ARA": 1.09811775,
+          "share_strength": 0.10150451
+        },
+        {
+          "target_time_us": 4.299,
+          "observed_normalized_rate": 0.16639002,
+          "parent_prediction": 0.15545216,
+          "full_array_prediction": 0.16260008,
+          "parent_ARA": 1.7074827,
+          "spin_cut_A_ARA": 1.9586564,
+          "spin_cut_B_ARA": 0.71543382,
+          "share_strength": 0.10966997
+        },
+        {
+          "target_time_us": 4.315,
+          "observed_normalized_rate": 0.16505592,
+          "parent_prediction": 0.15449663,
+          "full_array_prediction": 0.15885322,
+          "parent_ARA": 1.70959954,
+          "spin_cut_A_ARA": 1.78045998,
+          "spin_cut_B_ARA": 0.37479426,
+          "share_strength": 0.10647492
+        },
+        {
+          "target_time_us": 4.331,
+          "observed_normalized_rate": 0.1649314,
+          "parent_prediction": 0.15355207,
+          "full_array_prediction": 0.15486882,
+          "parent_ARA": 1.711701,
+          "spin_cut_A_ARA": 1.48693001,
+          "spin_cut_B_ARA": 0.12655901,
+          "share_strength": 0.11525015
+        },
+        {
+          "target_time_us": 4.347,
+          "observed_normalized_rate": 0.16311701,
+          "parent_prediction": 0.15261832,
+          "full_array_prediction": 0.1520235,
+          "parent_ARA": 1.71378725,
+          "spin_cut_A_ARA": 1.12144125,
+          "spin_cut_B_ARA": 0.00740138,
+          "share_strength": 0.11013828
+        },
+        {
+          "target_time_us": 4.363,
+          "observed_normalized_rate": 0.16251222,
+          "parent_prediction": 0.1516952,
+          "full_array_prediction": 0.15849423,
+          "parent_ARA": 1.71585847,
+          "spin_cut_A_ARA": 0.7379947,
+          "spin_cut_B_ARA": 0.03493357,
+          "share_strength": 0.10355311
+        },
+        {
+          "target_time_us": 4.379,
+          "observed_normalized_rate": 0.16518043,
+          "parent_prediction": 0.15078264,
+          "full_array_prediction": 0.15659982,
+          "parent_ARA": 1.71791463,
+          "spin_cut_A_ARA": 0.39327889,
+          "spin_cut_B_ARA": 0.20508523,
+          "share_strength": 0.11207148
+        },
+        {
+          "target_time_us": 4.395,
+          "observed_normalized_rate": 0.16329489,
+          "parent_prediction": 0.14988044,
+          "full_array_prediction": 0.15530866,
+          "parent_ARA": 1.71995598,
+          "spin_cut_A_ARA": 0.13821883,
+          "spin_cut_B_ARA": 0.49271979,
+          "share_strength": 0.10470596
+        },
+        {
+          "target_time_us": 4.411,
+          "observed_normalized_rate": 0.16071562,
+          "parent_prediction": 0.14898853,
+          "full_array_prediction": 0.16034515,
+          "parent_ARA": 1.7219825,
+          "spin_cut_A_ARA": 0.01052245,
+          "spin_cut_B_ARA": 0.85531352,
+          "share_strength": 0.10291053
+        },
+        {
+          "target_time_us": 4.427,
+          "observed_normalized_rate": 0.15961275,
+          "parent_prediction": 0.14810672,
+          "full_array_prediction": 0.14532039,
+          "parent_ARA": 1.72399441,
+          "spin_cut_A_ARA": 0.0290544,
+          "spin_cut_B_ARA": 1.2393003,
+          "share_strength": 0.12823318
+        },
+        {
+          "target_time_us": 4.443,
+          "observed_normalized_rate": 0.15381383,
+          "parent_prediction": 0.14723494,
+          "full_array_prediction": 0.14518732,
+          "parent_ARA": 1.7259917,
+          "spin_cut_A_ARA": 0.19107491,
+          "spin_cut_B_ARA": 1.58791173,
+          "share_strength": 0.10279862
+        },
+        {
+          "target_time_us": 4.459,
+          "observed_normalized_rate": 0.15721136,
+          "parent_prediction": 0.14637303,
+          "full_array_prediction": 0.16080607,
+          "parent_ARA": 1.72797454,
+          "spin_cut_A_ARA": 0.47263885,
+          "spin_cut_B_ARA": 1.84964123,
+          "share_strength": 0.10118626
+        },
+        {
+          "target_time_us": 4.475,
+          "observed_normalized_rate": 0.15532582,
+          "parent_prediction": 0.14552084,
+          "full_array_prediction": 0.16171441,
+          "parent_ARA": 1.72994309,
+          "spin_cut_A_ARA": 0.83214789,
+          "spin_cut_B_ARA": 1.98581219,
+          "share_strength": 0.10045287
+        },
+        {
+          "target_time_us": 4.491,
+          "observed_normalized_rate": 0.15111003,
+          "parent_prediction": 0.1446783,
+          "full_array_prediction": 0.1543818,
+          "parent_ARA": 1.73189734,
+          "spin_cut_A_ARA": 1.21645241,
+          "spin_cut_B_ARA": 1.97629317,
+          "share_strength": 0.11206676
+        },
+        {
+          "target_time_us": 4.507,
+          "observed_normalized_rate": 0.15166147,
+          "parent_prediction": 0.14384524,
+          "full_array_prediction": 0.15667391,
+          "parent_ARA": 1.7338375,
+          "spin_cut_A_ARA": 1.56877895,
+          "spin_cut_B_ARA": 1.82249043,
+          "share_strength": 0.0959224
+        },
+        {
+          "target_time_us": 4.523,
+          "observed_normalized_rate": 0.15342249,
+          "parent_prediction": 0.14302158,
+          "full_array_prediction": 0.15598918,
+          "parent_ARA": 1.73576356,
+          "spin_cut_A_ARA": 1.83703976,
+          "spin_cut_B_ARA": 1.54714207,
+          "share_strength": 0.11237769
+        },
+        {
+          "target_time_us": 4.539,
+          "observed_normalized_rate": 0.14927786,
+          "parent_prediction": 0.14220715,
+          "full_array_prediction": 0.15207726,
+          "parent_ARA": 1.73767574,
+          "spin_cut_A_ARA": 1.98160455,
+          "spin_cut_B_ARA": 1.19092542,
+          "share_strength": 0.10152463
+        },
+        {
+          "target_time_us": 4.555,
+          "observed_normalized_rate": 0.14879758,
+          "parent_prediction": 0.14140189,
+          "full_array_prediction": 0.15414505,
+          "parent_ARA": 1.73957403,
+          "spin_cut_A_ARA": 1.98110094,
+          "spin_cut_B_ARA": 0.80650335,
+          "share_strength": 0.10813365
+        },
+        {
+          "target_time_us": 4.571,
+          "observed_normalized_rate": 0.14648512,
+          "parent_prediction": 0.14060566,
+          "full_array_prediction": 0.1524443,
+          "parent_ARA": 1.74145858,
+          "spin_cut_A_ARA": 1.83560966,
+          "spin_cut_B_ARA": 0.45067633,
+          "share_strength": 0.10343328
+        },
+        {
+          "target_time_us": 4.587,
+          "observed_normalized_rate": 0.14563129,
+          "parent_prediction": 0.13981831,
+          "full_array_prediction": 0.15295209,
+          "parent_ARA": 1.74332955,
+          "spin_cut_A_ARA": 1.56662201,
+          "spin_cut_B_ARA": 0.17602215,
+          "share_strength": 0.10639286
+        },
+        {
+          "target_time_us": 4.603,
+          "observed_normalized_rate": 0.1475702,
+          "parent_prediction": 0.13903978,
+          "full_array_prediction": 0.15141508,
+          "parent_ARA": 1.74518693,
+          "spin_cut_A_ARA": 1.21390496,
+          "spin_cut_B_ARA": 0.02314552,
+          "share_strength": 0.10506535
+        },
+        {
+          "target_time_us": 4.619,
+          "observed_normalized_rate": 0.14678752,
+          "parent_prediction": 0.13826992,
+          "full_array_prediction": 0.15074231,
+          "parent_ARA": 1.74703092,
+          "spin_cut_A_ARA": 0.82956556,
+          "spin_cut_B_ARA": 0.01463098,
+          "share_strength": 0.10655505
+        },
+        {
+          "target_time_us": 4.635,
+          "observed_normalized_rate": 0.14303423,
+          "parent_prediction": 0.13750866,
+          "full_array_prediction": 0.14701046,
+          "parent_ARA": 1.74886151,
+          "spin_cut_A_ARA": 0.47042431,
+          "spin_cut_B_ARA": 0.15173731,
+          "share_strength": 0.11043911
+        },
+        {
+          "target_time_us": 4.651,
+          "observed_normalized_rate": 0.14454622,
+          "parent_prediction": 0.13675584,
+          "full_array_prediction": 0.14839998,
+          "parent_ARA": 1.75067891,
+          "spin_cut_A_ARA": 0.18953731,
+          "spin_cut_B_ARA": 0.41420973,
+          "share_strength": 0.10328724
+        },
+        {
+          "target_time_us": 4.667,
+          "observed_normalized_rate": 0.139192,
+          "parent_prediction": 0.13601141,
+          "full_array_prediction": 0.14619805,
+          "parent_ARA": 1.7524831,
+          "spin_cut_A_ARA": 0.02843074,
+          "spin_cut_B_ARA": 0.76324448,
+          "share_strength": 0.11306717
+        },
+        {
+          "target_time_us": 4.683,
+          "observed_normalized_rate": 0.13915642,
+          "parent_prediction": 0.1352752,
+          "full_array_prediction": 0.14122047,
+          "parent_ARA": 1.75427429,
+          "spin_cut_A_ARA": 0.01090494,
+          "spin_cut_B_ARA": 1.14727849,
+          "share_strength": 0.11127058
+        },
+        {
+          "target_time_us": 4.699,
+          "observed_normalized_rate": 0.13983237,
+          "parent_prediction": 0.13454718,
+          "full_array_prediction": 0.13321461,
+          "parent_ARA": 1.75605246,
+          "spin_cut_A_ARA": 0.1395509,
+          "spin_cut_B_ARA": 1.5095364,
+          "share_strength": 0.12670522
+        },
+        {
+          "target_time_us": 4.715,
+          "observed_normalized_rate": 0.13689733,
+          "parent_prediction": 0.1338272,
+          "full_array_prediction": 0.1289991,
+          "parent_ARA": 1.75781777,
+          "spin_cut_A_ARA": 0.39535453,
+          "spin_cut_B_ARA": 1.79649473,
+          "share_strength": 0.11893966
+        },
+        {
+          "target_time_us": 4.731,
+          "observed_normalized_rate": 0.13796462,
+          "parent_prediction": 0.13311514,
+          "full_array_prediction": 0.14063764,
+          "parent_ARA": 1.75957035,
+          "spin_cut_A_ARA": 0.74052415,
+          "spin_cut_B_ARA": 1.9657496,
+          "share_strength": 0.10414833
+        },
+        {
+          "target_time_us": 4.747,
+          "observed_normalized_rate": 0.13954776,
+          "parent_prediction": 0.13241096,
+          "full_array_prediction": 0.15111587,
+          "parent_ARA": 1.7613102,
+          "spin_cut_A_ARA": 1.12403008,
+          "spin_cut_B_ARA": 1.99227846,
+          "share_strength": 0.09981436
+        },
+        {
+          "target_time_us": 4.763,
+          "observed_normalized_rate": 0.13796462,
+          "parent_prediction": 0.1317145,
+          "full_array_prediction": 0.14219209,
+          "parent_ARA": 1.76303751,
+          "spin_cut_A_ARA": 1.48921683,
+          "spin_cut_B_ARA": 1.8721622,
+          "share_strength": 0.11887149
+        },
+        {
+          "target_time_us": 4.779,
+          "observed_normalized_rate": 0.13670166,
+          "parent_prediction": 0.13102571,
+          "full_array_prediction": 0.13295277,
+          "parent_ARA": 1.76475227,
+          "spin_cut_A_ARA": 1.78209539,
+          "spin_cut_B_ARA": 1.62315873,
+          "share_strength": 0.11637786
+        },
+        {
+          "target_time_us": 4.795,
+          "observed_normalized_rate": 0.13602571,
+          "parent_prediction": 0.13034446,
+          "full_array_prediction": 0.13349016,
+          "parent_ARA": 1.76645468,
+          "spin_cut_A_ARA": 1.95939869,
+          "spin_cut_B_ARA": 1.28205344,
+          "share_strength": 0.1171471
+        },
+        {
+          "target_time_us": 4.811,
+          "observed_normalized_rate": 0.13387335,
+          "parent_prediction": 0.12967068,
+          "full_array_prediction": 0.13553158,
+          "parent_ARA": 1.76814471,
+          "spin_cut_A_ARA": 1.99491432,
+          "spin_cut_B_ARA": 0.89927515,
+          "share_strength": 0.11168682
+        },
+        {
+          "target_time_us": 4.827,
+          "observed_normalized_rate": 0.13257482,
+          "parent_prediction": 0.12900428,
+          "full_array_prediction": 0.13329529,
+          "parent_ARA": 1.76982251,
+          "spin_cut_A_ARA": 1.88340093,
+          "spin_cut_B_ARA": 0.53138204,
+          "share_strength": 0.12067399
+        },
+        {
+          "target_time_us": 4.843,
+          "observed_normalized_rate": 0.13291279,
+          "parent_prediction": 0.12834513,
+          "full_array_prediction": 0.1246757,
+          "parent_ARA": 1.77148822,
+          "spin_cut_A_ARA": 1.6413292,
+          "spin_cut_B_ARA": 0.23273417,
+          "share_strength": 0.12795662
+        },
+        {
+          "target_time_us": 4.859,
+          "observed_normalized_rate": 0.1314008,
+          "parent_prediction": 0.12769318,
+          "full_array_prediction": 0.12600482,
+          "parent_ARA": 1.77314183,
+          "spin_cut_A_ARA": 1.30448686,
+          "spin_cut_B_ARA": 0.04748347,
+          "share_strength": 0.11694531
+        },
+        {
+          "target_time_us": 4.875,
+          "observed_normalized_rate": 0.13099168,
+          "parent_prediction": 0.1270483,
+          "full_array_prediction": 0.13006893,
+          "parent_ARA": 1.77478352,
+          "spin_cut_A_ARA": 0.92263579,
+          "spin_cut_B_ARA": 0.0029971,
+          "share_strength": 0.11881173
+        },
+        {
+          "target_time_us": 4.891,
+          "observed_normalized_rate": 0.12693599,
+          "parent_prediction": 0.12641046,
+          "full_array_prediction": 0.13175942,
+          "parent_ARA": 1.77641328,
+          "spin_cut_A_ARA": 0.55222863,
+          "spin_cut_B_ARA": 0.10585191,
+          "share_strength": 0.11271317
+        },
+        {
+          "target_time_us": 4.907,
+          "observed_normalized_rate": 0.12652686,
+          "parent_prediction": 0.12577951,
+          "full_array_prediction": 0.13700201,
+          "parent_ARA": 1.77803129,
+          "spin_cut_A_ARA": 0.24798578,
+          "spin_cut_B_ARA": 0.34085312,
+          "share_strength": 0.10796322
+        },
+        {
+          "target_time_us": 4.923,
+          "observed_normalized_rate": 0.12497929,
+          "parent_prediction": 0.12515541,
+          "full_array_prediction": 0.13351446,
+          "parent_ARA": 1.77963755,
+          "spin_cut_A_ARA": 0.05488633,
+          "spin_cut_B_ARA": 0.67325827,
+          "share_strength": 0.11813802
+        },
+        {
+          "target_time_us": 4.939,
+          "observed_normalized_rate": 0.12793212,
+          "parent_prediction": 0.12453806,
+          "full_array_prediction": 0.12352588,
+          "parent_ARA": 1.78123219,
+          "spin_cut_A_ARA": 0.00145633,
+          "spin_cut_B_ARA": 1.0539495,
+          "share_strength": 0.12675276
+        },
+        {
+          "target_time_us": 4.955,
+          "observed_normalized_rate": 0.12442786,
+          "parent_prediction": 0.12392735,
+          "full_array_prediction": 0.12252209,
+          "parent_ARA": 1.78281533,
+          "spin_cut_A_ARA": 0.09559661,
+          "spin_cut_B_ARA": 1.42667847,
+          "share_strength": 0.11967083
+        },
+        {
+          "target_time_us": 4.971,
+          "observed_normalized_rate": 0.12344952,
+          "parent_prediction": 0.12332325,
+          "full_array_prediction": 0.12973463,
+          "parent_ARA": 1.78438697,
+          "spin_cut_A_ARA": 0.32338953,
+          "spin_cut_B_ARA": 1.73634114,
+          "share_strength": 0.11162076
+        },
+        {
+          "target_time_us": 4.987,
+          "observed_normalized_rate": 0.12291587,
+          "parent_prediction": 0.12272562,
+          "full_array_prediction": 0.1307222,
+          "parent_ARA": 1.78594728,
+          "spin_cut_A_ARA": 0.65118313,
+          "spin_cut_B_ARA": 1.93719091,
+          "share_strength": 0.11694184
+        },
+        {
+          "target_time_us": 5.003,
+          "observed_normalized_rate": 0.12055005,
+          "parent_prediction": 0.12213443,
+          "full_array_prediction": 0.12621948,
+          "parent_ARA": 1.78749626,
+          "spin_cut_A_ARA": 1.03051661,
+          "spin_cut_B_ARA": 1.99953426,
+          "share_strength": 0.11998382
+        },
+        {
+          "target_time_us": 5.019,
+          "observed_normalized_rate": 0.1216707,
+          "parent_prediction": 0.12154957,
+          "full_array_prediction": 0.12270187,
+          "parent_ARA": 1.78903407,
+          "spin_cut_A_ARA": 1.40535086,
+          "spin_cut_B_ARA": 1.91416119,
+          "share_strength": 0.12363077
+        },
+        {
+          "target_time_us": 5.035,
+          "observed_normalized_rate": 0.12263126,
+          "parent_prediction": 0.12097098,
+          "full_array_prediction": 0.12006908,
+          "parent_ARA": 1.79056071,
+          "spin_cut_A_ARA": 1.7202706,
+          "spin_cut_B_ARA": 1.6936932,
+          "share_strength": 0.12502956
+        },
+        {
+          "target_time_us": 5.051,
+          "observed_normalized_rate": 0.12220435,
+          "parent_prediction": 0.12039858,
+          "full_array_prediction": 0.11600111,
+          "parent_ARA": 1.7920763,
+          "spin_cut_A_ARA": 1.92874834,
+          "spin_cut_B_ARA": 1.37071083,
+          "share_strength": 0.13194749
+        },
+        {
+          "target_time_us": 5.067,
+          "observed_normalized_rate": 0.11832654,
+          "parent_prediction": 0.11983227,
+          "full_array_prediction": 0.12099079,
+          "parent_ARA": 1.79358097,
+          "spin_cut_A_ARA": 1.99997503,
+          "spin_cut_B_ARA": 0.99293307,
+          "share_strength": 0.11344786
+        },
+        {
+          "target_time_us": 5.083,
+          "observed_normalized_rate": 0.11887797,
+          "parent_prediction": 0.11927201,
+          "full_array_prediction": 0.12952254,
+          "parent_ARA": 1.7950747,
+          "spin_cut_A_ARA": 1.92342056,
+          "spin_cut_B_ARA": 0.61621037,
+          "share_strength": 0.11371869
+        },
+        {
+          "target_time_us": 5.099,
+          "observed_normalized_rate": 0.11647657,
+          "parent_prediction": 0.11871769,
+          "full_array_prediction": 0.1188403,
+          "parent_ARA": 1.79655767,
+          "spin_cut_A_ARA": 1.71039434,
+          "spin_cut_B_ARA": 0.29619614,
+          "share_strength": 0.13481746
+        },
+        {
+          "target_time_us": 5.115,
+          "observed_normalized_rate": 0.11681455,
+          "parent_prediction": 0.11816928,
+          "full_array_prediction": 0.10875837,
+          "parent_ARA": 1.79802987,
+          "spin_cut_A_ARA": 1.39239007,
+          "spin_cut_B_ARA": 0.08020109,
+          "share_strength": 0.13546944
+        },
+        {
+          "target_time_us": 5.131,
+          "observed_normalized_rate": 0.11596072,
+          "parent_prediction": 0.11762666,
+          "full_array_prediction": 0.10950148,
+          "parent_ARA": 1.79949145,
+          "spin_cut_A_ARA": 1.01638664,
+          "spin_cut_B_ARA": 0.00013427,
+          "share_strength": 0.13202337
+        },
+        {
+          "target_time_us": 5.147,
+          "observed_normalized_rate": 0.11441315,
+          "parent_prediction": 0.11708981,
+          "full_array_prediction": 0.11650217,
+          "parent_ARA": 1.80094241,
+          "spin_cut_A_ARA": 0.63797218,
+          "spin_cut_B_ARA": 0.06783271,
+          "share_strength": 0.11872171
+        },
+        {
+          "target_time_us": 5.163,
+          "observed_normalized_rate": 0.1147867,
+          "parent_prediction": 0.11655862,
+          "full_array_prediction": 0.11771068,
+          "parent_ARA": 1.80238288,
+          "spin_cut_A_ARA": 0.31305841,
+          "spin_cut_B_ARA": 0.27328737,
+          "share_strength": 0.12819259
+        },
+        {
+          "target_time_us": 5.179,
+          "observed_normalized_rate": 0.11316799,
+          "parent_prediction": 0.11603303,
+          "full_array_prediction": 0.11108526,
+          "parent_ARA": 1.80381296,
+          "spin_cut_A_ARA": 0.08965649,
+          "spin_cut_B_ARA": 0.58614654,
+          "share_strength": 0.13250938
+        },
+        {
+          "target_time_us": 5.195,
+          "observed_normalized_rate": 0.11256319,
+          "parent_prediction": 0.11551298,
+          "full_array_prediction": 0.11621753,
+          "parent_ARA": 1.80523265,
+          "spin_cut_A_ARA": 0.00079404,
+          "spin_cut_B_ARA": 0.96015729,
+          "share_strength": 0.11630905
+        },
+        {
+          "target_time_us": 5.211,
+          "observed_normalized_rate": 0.11286559,
+          "parent_prediction": 0.11499839,
+          "full_array_prediction": 0.12043896,
+          "parent_ARA": 1.80664211,
+          "spin_cut_A_ARA": 0.05959874,
+          "spin_cut_B_ARA": 1.34006687,
+          "share_strength": 0.12242186
+        },
+        {
+          "target_time_us": 5.227,
+          "observed_normalized_rate": 0.10984161,
+          "parent_prediction": 0.11448922,
+          "full_array_prediction": 0.11281831,
+          "parent_ARA": 1.80804133,
+          "spin_cut_A_ARA": 0.25737695,
+          "spin_cut_B_ARA": 1.66970964,
+          "share_strength": 0.13216672
+        },
+        {
+          "target_time_us": 5.243,
+          "observed_normalized_rate": 0.11128245,
+          "parent_prediction": 0.11398537,
+          "full_array_prediction": 0.11155927,
+          "parent_ARA": 1.80943047,
+          "spin_cut_A_ARA": 0.5649108,
+          "spin_cut_B_ARA": 1.90038736,
+          "share_strength": 0.12503593
+        },
+        {
+          "target_time_us": 5.259,
+          "observed_normalized_rate": 0.1124031,
+          "parent_prediction": 0.11348681,
+          "full_array_prediction": 0.1160684,
+          "parent_ARA": 1.81080951,
+          "spin_cut_A_ARA": 0.93673467,
+          "spin_cut_B_ARA": 1.99799674,
+          "share_strength": 0.12163013
+        },
+        {
+          "target_time_us": 5.275,
+          "observed_normalized_rate": 0.10713781,
+          "parent_prediction": 0.11299344,
+          "full_array_prediction": 0.11715675,
+          "parent_ARA": 1.81217861,
+          "spin_cut_A_ARA": 1.31791885,
+          "spin_cut_B_ARA": 1.94811793,
+          "share_strength": 0.12220526
+        },
+        {
+          "target_time_us": 5.291,
+          "observed_normalized_rate": 0.10644408,
+          "parent_prediction": 0.11250523,
+          "full_array_prediction": 0.12123388,
+          "parent_ARA": 1.81353776,
+          "spin_cut_A_ARA": 1.6521093,
+          "spin_cut_B_ARA": 1.75812497,
+          "share_strength": 0.11243705
+        },
+        {
+          "target_time_us": 5.307,
+          "observed_normalized_rate": 0.10562582,
+          "parent_prediction": 0.1120221,
+          "full_array_prediction": 0.13063087,
+          "parent_ARA": 1.81488708,
+          "spin_cut_A_ARA": 1.88993065,
+          "spin_cut_B_ARA": 1.45609586,
+          "share_strength": 0.10244976
+        },
+        {
+          "target_time_us": 5.323,
+          "observed_normalized_rate": 0.10494988,
+          "parent_prediction": 0.11154398,
+          "full_array_prediction": 0.1236083,
+          "parent_ARA": 1.81622668,
+          "spin_cut_A_ARA": 1.99623854,
+          "spin_cut_B_ARA": 1.08665316,
+          "share_strength": 0.126145
+        },
+        {
+          "target_time_us": 5.339,
+          "observed_normalized_rate": 0.10642629,
+          "parent_prediction": 0.11107084,
+          "full_array_prediction": 0.09947661,
+          "parent_ARA": 1.81755654,
+          "spin_cut_A_ARA": 1.95531646,
+          "spin_cut_B_ARA": 0.70441506,
+          "share_strength": 0.15778827
+        },
+        {
+          "target_time_us": 5.355,
+          "observed_normalized_rate": 0.10418499,
+          "parent_prediction": 0.11060258,
+          "full_array_prediction": 0.1029155,
+          "parent_ARA": 1.81887682,
+          "spin_cut_A_ARA": 1.77320985,
+          "spin_cut_B_ARA": 0.36584976,
+          "share_strength": 0.11635991
+        },
+        {
+          "target_time_us": 5.371,
+          "observed_normalized_rate": 0.10441623,
+          "parent_prediction": 0.11013919,
+          "full_array_prediction": 0.10564734,
+          "parent_ARA": 1.8201875,
+          "spin_cut_A_ARA": 1.47684125,
+          "spin_cut_B_ARA": 0.12101057,
+          "share_strength": 0.15017915
+        },
+        {
+          "target_time_us": 5.387,
+          "observed_normalized_rate": 0.10217493,
+          "parent_prediction": 0.10968057,
+          "full_array_prediction": 0.09683792,
+          "parent_ARA": 1.82148874,
+          "spin_cut_A_ARA": 1.10999332,
+          "spin_cut_B_ARA": 0.00606767,
+          "share_strength": 0.13770096
+        },
+        {
+          "target_time_us": 5.403,
+          "observed_normalized_rate": 0.10092976,
+          "parent_prediction": 0.10922668,
+          "full_array_prediction": 0.10280658,
+          "parent_ARA": 1.82278052,
+          "spin_cut_A_ARA": 0.72690064,
+          "spin_cut_B_ARA": 0.03801417,
+          "share_strength": 0.13380717
+        },
+        {
+          "target_time_us": 5.419,
+          "observed_normalized_rate": 0.10233502,
+          "parent_prediction": 0.10877748,
+          "full_array_prediction": 0.10322709,
+          "parent_ARA": 1.82406295,
+          "spin_cut_A_ARA": 0.38416674,
+          "spin_cut_B_ARA": 0.21212349,
+          "share_strength": 0.1355869
+        },
+        {
+          "target_time_us": 5.435,
+          "observed_normalized_rate": 0.10076967,
+          "parent_prediction": 0.10833287,
+          "full_array_prediction": 0.10612518,
+          "parent_ARA": 1.82533615,
+          "spin_cut_A_ARA": 0.13243531,
+          "spin_cut_B_ARA": 0.50267565,
+          "share_strength": 0.12606088
+        },
+        {
+          "target_time_us": 5.451,
+          "observed_normalized_rate": 0.09733656,
+          "parent_prediction": 0.10789284,
+          "full_array_prediction": 0.10021317,
+          "parent_ARA": 1.82660009,
+          "spin_cut_A_ARA": 0.00892217,
+          "spin_cut_B_ARA": 0.8667156,
+          "share_strength": 0.14868616
+        },
+        {
+          "target_time_us": 5.467,
+          "observed_normalized_rate": 0.09936441,
+          "parent_prediction": 0.10745731,
+          "full_array_prediction": 0.09627297,
+          "parent_ARA": 1.82785492,
+          "spin_cut_A_ARA": 0.03187397,
+          "spin_cut_B_ARA": 1.25046356,
+          "share_strength": 0.13617054
+        },
+        {
+          "target_time_us": 5.483,
+          "observed_normalized_rate": 0.09813703,
+          "parent_prediction": 0.10702624,
+          "full_array_prediction": 0.10772816,
+          "parent_ARA": 1.82910063,
+          "spin_cut_A_ARA": 0.19789754,
+          "spin_cut_B_ARA": 1.59718643,
+          "share_strength": 0.11987746
+        },
+        {
+          "target_time_us": 5.499,
+          "observed_normalized_rate": 0.09831491,
+          "parent_prediction": 0.10659956,
+          "full_array_prediction": 0.10583631,
+          "parent_ARA": 1.83033737,
+          "spin_cut_A_ARA": 0.48246613,
+          "spin_cut_B_ARA": 1.85566272,
+          "share_strength": 0.13967042
+        },
+        {
+          "target_time_us": 5.515,
+          "observed_normalized_rate": 0.09774569,
+          "parent_prediction": 0.10617724,
+          "full_array_prediction": 0.10119648,
+          "parent_ARA": 1.83156512,
+          "spin_cut_A_ARA": 0.8435093,
+          "spin_cut_B_ARA": 1.98767943,
+          "share_strength": 0.1313525
+        },
+        {
+          "target_time_us": 5.531,
+          "observed_normalized_rate": 0.09596688,
+          "parent_prediction": 0.10575922,
+          "full_array_prediction": 0.10876965,
+          "parent_ARA": 1.83278399,
+          "spin_cut_A_ARA": 1.22767875,
+          "spin_cut_B_ARA": 1.9737363,
+          "share_strength": 0.12101056
+        },
+        {
+          "target_time_us": 5.547,
+          "observed_normalized_rate": 0.09747887,
+          "parent_prediction": 0.10534544,
+          "full_array_prediction": 0.10614038,
+          "parent_ARA": 1.83399407,
+          "spin_cut_A_ARA": 1.57821111,
+          "spin_cut_B_ARA": 1.81588719,
+          "share_strength": 0.13719166
+        },
+        {
+          "target_time_us": 5.563,
+          "observed_normalized_rate": 0.09520199,
+          "parent_prediction": 0.10493586,
+          "full_array_prediction": 0.09989695,
+          "parent_ARA": 1.83519536,
+          "spin_cut_A_ARA": 1.84328387,
+          "spin_cut_B_ARA": 1.53746843,
+          "share_strength": 0.13629121
+        },
+        {
+          "target_time_us": 5.579,
+          "observed_normalized_rate": 0.09570006,
+          "parent_prediction": 0.10453043,
+          "full_array_prediction": 0.09983374,
+          "parent_ARA": 1.83638799,
+          "spin_cut_A_ARA": 1.98373773,
+          "spin_cut_B_ARA": 1.17961092,
+          "share_strength": 0.13692792
+        },
+        {
+          "target_time_us": 5.595,
+          "observed_normalized_rate": 0.09463277,
+          "parent_prediction": 0.1041291,
+          "full_array_prediction": 0.10022802,
+          "parent_ARA": 1.83757195,
+          "spin_cut_A_ARA": 1.97880805,
+          "spin_cut_B_ARA": 0.79522014,
+          "share_strength": 0.13468086
+        },
+        {
+          "target_time_us": 5.611,
+          "observed_normalized_rate": 0.09272944,
+          "parent_prediction": 0.10373182,
+          "full_array_prediction": 0.09741836,
+          "parent_ARA": 1.83874738,
+          "spin_cut_A_ARA": 1.82922312,
+          "spin_cut_B_ARA": 0.44108228,
+          "share_strength": 0.14353531
+        },
+        {
+          "target_time_us": 5.627,
+          "observed_normalized_rate": 0.09230253,
+          "parent_prediction": 0.10333855,
+          "full_array_prediction": 0.09428923,
+          "parent_ARA": 1.83991428,
+          "spin_cut_A_ARA": 1.55709747,
+          "spin_cut_B_ARA": 0.16955289,
+          "share_strength": 0.14215436
+        },
+        {
+          "target_time_us": 5.643,
+          "observed_normalized_rate": 0.0929429,
+          "parent_prediction": 0.10294923,
+          "full_array_prediction": 0.09262355,
+          "parent_ARA": 1.84107272,
+          "spin_cut_A_ARA": 1.20264363,
+          "spin_cut_B_ARA": 0.02074745,
+          "share_strength": 0.14704509
+        },
+        {
+          "target_time_us": 5.659,
+          "observed_normalized_rate": 0.09166215,
+          "parent_prediction": 0.10256382,
+          "full_array_prediction": 0.09464957,
+          "parent_ARA": 1.84222282,
+          "spin_cut_A_ARA": 0.81823167,
+          "spin_cut_B_ARA": 0.01665862,
+          "share_strength": 0.13567907
+        },
+        {
+          "target_time_us": 5.675,
+          "observed_normalized_rate": 0.08847808,
+          "parent_prediction": 0.10218229,
+          "full_array_prediction": 0.09526654,
+          "parent_ARA": 1.84336456,
+          "spin_cut_A_ARA": 0.46069282,
+          "spin_cut_B_ARA": 0.15789088,
+          "share_strength": 0.14414573
+        },
+        {
+          "target_time_us": 5.691,
+          "observed_normalized_rate": 0.09066602,
+          "parent_prediction": 0.10180456,
+          "full_array_prediction": 0.09826585,
+          "parent_ARA": 1.84449808,
+          "spin_cut_A_ARA": 0.18284646,
+          "spin_cut_B_ARA": 0.42357994,
+          "share_strength": 0.12731173
+        },
+        {
+          "target_time_us": 5.707,
+          "observed_normalized_rate": 0.08897615,
+          "parent_prediction": 0.10143063,
+          "full_array_prediction": 0.099632,
+          "parent_ARA": 1.84562335,
+          "spin_cut_A_ARA": 0.02576922,
+          "spin_cut_B_ARA": 0.77444647,
+          "share_strength": 0.13937345
+        },
+        {
+          "target_time_us": 5.723,
+          "observed_normalized_rate": 0.08821126,
+          "parent_prediction": 0.10106041,
+          "full_array_prediction": 0.09045715,
+          "parent_ARA": 1.84674052,
+          "spin_cut_A_ARA": 0.01266621,
+          "spin_cut_B_ARA": 1.15865681,
+          "share_strength": 0.15104694
+        },
+        {
+          "target_time_us": 5.739,
+          "observed_normalized_rate": 0.08625457,
+          "parent_prediction": 0.1006939,
+          "full_array_prediction": 0.09413433,
+          "parent_ARA": 1.84784957,
+          "spin_cut_A_ARA": 0.14547455,
+          "spin_cut_B_ARA": 1.51940953,
+          "share_strength": 0.12953988
+        },
+        {
+          "target_time_us": 5.755,
+          "observed_normalized_rate": 0.08657475,
+          "parent_prediction": 0.10033104,
+          "full_array_prediction": 0.09877081,
+          "parent_ARA": 1.8489506,
+          "spin_cut_A_ARA": 0.40456516,
+          "spin_cut_B_ARA": 1.80340361,
+          "share_strength": 0.13805763
+        },
+        {
+          "target_time_us": 5.771,
+          "observed_normalized_rate": 0.08438682,
+          "parent_prediction": 0.09997177,
+          "full_array_prediction": 0.09734053,
+          "parent_ARA": 1.85004369,
+          "spin_cut_A_ARA": 0.75166064,
+          "spin_cut_B_ARA": 1.96867309,
+          "share_strength": 0.1332426
+        },
+        {
+          "target_time_us": 5.787,
+          "observed_normalized_rate": 0.08292819,
+          "parent_prediction": 0.09961607,
+          "full_array_prediction": 0.0915986,
+          "parent_ARA": 1.85112883,
+          "spin_cut_A_ARA": 1.1354466,
+          "spin_cut_B_ARA": 1.99078465,
+          "share_strength": 0.15319308
+        },
+        {
+          "target_time_us": 5.803,
+          "observed_normalized_rate": 0.08484931,
+          "parent_prediction": 0.09926389,
+          "full_array_prediction": 0.08423148,
+          "parent_ARA": 1.85220616,
+          "spin_cut_A_ARA": 1.49922616,
+          "spin_cut_B_ARA": 1.86647172,
+          "share_strength": 0.15480657
+        },
+        {
+          "target_time_us": 5.819,
+          "observed_normalized_rate": 0.08458249,
+          "parent_prediction": 0.0989152,
+          "full_array_prediction": 0.08639194,
+          "parent_ARA": 1.85327566,
+          "spin_cut_A_ARA": 1.78921838,
+          "spin_cut_B_ARA": 1.61411266,
+          "share_strength": 0.14661179
+        },
+        {
+          "target_time_us": 5.835,
+          "observed_normalized_rate": 0.08433345,
+          "parent_prediction": 0.09856994,
+          "full_array_prediction": 0.08990386,
+          "parent_ARA": 1.85433745,
+          "spin_cut_A_ARA": 1.96258256,
+          "spin_cut_B_ARA": 1.27098858,
+          "share_strength": 0.14425969
+        },
+        {
+          "target_time_us": 5.851,
+          "observed_normalized_rate": 0.08339068,
+          "parent_prediction": 0.0982281,
+          "full_array_prediction": 0.08734602,
+          "parent_ARA": 1.85539152,
+          "spin_cut_A_ARA": 1.99368866,
+          "spin_cut_B_ARA": 0.88782674,
+          "share_strength": 0.153608
+        },
+        {
+          "target_time_us": 5.867,
+          "observed_normalized_rate": 0.08223445,
+          "parent_prediction": 0.09788962,
+          "full_array_prediction": 0.08117804,
+          "parent_ARA": 1.85643797,
+          "spin_cut_A_ARA": 1.87794688,
+          "spin_cut_B_ARA": 0.52124194,
+          "share_strength": 0.16243788
+        },
+        {
+          "target_time_us": 5.883,
+          "observed_normalized_rate": 0.0817186,
+          "parent_prediction": 0.09755446,
+          "full_array_prediction": 0.07774542,
+          "parent_ARA": 1.85747688,
+          "spin_cut_A_ARA": 1.63245266,
+          "spin_cut_B_ARA": 0.22540099,
+          "share_strength": 0.16377054
+        },
+        {
+          "target_time_us": 5.899,
+          "observed_normalized_rate": 0.0782677,
+          "parent_prediction": 0.09722259,
+          "full_array_prediction": 0.08408796,
+          "parent_ARA": 1.85850823,
+          "spin_cut_A_ARA": 1.29349975,
+          "spin_cut_B_ARA": 0.04404085,
+          "share_strength": 0.14132088
+        },
+        {
+          "target_time_us": 5.915,
+          "observed_normalized_rate": 0.0812739,
+          "parent_prediction": 0.09689397,
+          "full_array_prediction": 0.09076501,
+          "parent_ARA": 1.85953216,
+          "spin_cut_A_ARA": 0.91116179,
+          "spin_cut_B_ARA": 0.00395393,
+          "share_strength": 0.14304818
+        },
+        {
+          "target_time_us": 5.931,
+          "observed_normalized_rate": 0.08004652,
+          "parent_prediction": 0.09656857,
+          "full_array_prediction": 0.09001886,
+          "parent_ARA": 1.86054864,
+          "spin_cut_A_ARA": 0.54196341,
+          "spin_cut_B_ARA": 0.11106666,
+          "share_strength": 0.14242663
+        },
+        {
+          "target_time_us": 5.947,
+          "observed_normalized_rate": 0.07883692,
+          "parent_prediction": 0.09624634,
+          "full_array_prediction": 0.08610579,
+          "parent_ARA": 1.8615578,
+          "spin_cut_A_ARA": 0.24044645,
+          "spin_cut_B_ARA": 0.34955523,
+          "share_strength": 0.15315922
+        },
+        {
+          "target_time_us": 5.963,
+          "observed_normalized_rate": 0.07869462,
+          "parent_prediction": 0.09592727,
+          "full_array_prediction": 0.08700174,
+          "parent_ARA": 1.86255963,
+          "spin_cut_A_ARA": 0.05118699,
+          "spin_cut_B_ARA": 0.68416162,
+          "share_strength": 0.1394679
+        },
+        {
+          "target_time_us": 5.979,
+          "observed_normalized_rate": 0.07750282,
+          "parent_prediction": 0.09561129,
+          "full_array_prediction": 0.09385149,
+          "parent_ARA": 1.86355423,
+          "spin_cut_A_ARA": 0.00214443,
+          "spin_cut_B_ARA": 1.0654543,
+          "share_strength": 0.13331871
+        },
+        {
+          "target_time_us": 5.995,
+          "observed_normalized_rate": 0.07819655,
+          "parent_prediction": 0.09529839,
+          "full_array_prediction": 0.08753649,
+          "parent_ARA": 1.86454161,
+          "spin_cut_A_ARA": 0.10056918,
+          "spin_cut_B_ARA": 1.43706316,
+          "share_strength": 0.15602373
+        }
+      ],
+      "strength_rate": [
+        {
+          "strength_decile": 1,
+          "mean_strength": 0.04482686,
+          "mean_current_log_rate": -0.21273928,
+          "se_current_log_rate": 0.00374744,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 2,
+          "mean_strength": 0.05295817,
+          "mean_current_log_rate": -0.43344771,
+          "se_current_log_rate": 0.00516588,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 3,
+          "mean_strength": 0.06116319,
+          "mean_current_log_rate": -0.67745377,
+          "se_current_log_rate": 0.00539168,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 4,
+          "mean_strength": 0.06994476,
+          "mean_current_log_rate": -0.92639315,
+          "se_current_log_rate": 0.00572503,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 5,
+          "mean_strength": 0.07915056,
+          "mean_current_log_rate": -1.16845565,
+          "se_current_log_rate": 0.00608774,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 6,
+          "mean_strength": 0.08904848,
+          "mean_current_log_rate": -1.40923585,
+          "se_current_log_rate": 0.00579173,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 7,
+          "mean_strength": 0.10023828,
+          "mean_current_log_rate": -1.67099144,
+          "se_current_log_rate": 0.00588309,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 8,
+          "mean_strength": 0.11233556,
+          "mean_current_log_rate": -1.91185196,
+          "se_current_log_rate": 0.00603243,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 9,
+          "mean_strength": 0.12571598,
+          "mean_current_log_rate": -2.14425328,
+          "se_current_log_rate": 0.00576611,
+          "sample_bins": 884
+        },
+        {
+          "strength_decile": 10,
+          "mean_strength": 0.14451282,
+          "mean_current_log_rate": -2.36101939,
+          "se_current_log_rate": 0.00424398,
+          "sample_bins": 884
+        }
+      ],
+      "controls": [
+        {
+          "control": "Correct M4 array",
+          "median_improvement_percent": 30.5467,
+          "field_wins": 13,
+          "field_count": 13,
+          "interpretation": "Apparent improvement against the time-only parent baseline."
+        },
+        {
+          "control": "Wrong Frequency",
+          "median_improvement_percent": 30.623,
+          "field_wins": 13,
+          "field_count": 13,
+          "interpretation": "Wrong spin frequency; should lose if spin phase is the information source."
+        },
+        {
+          "control": "Broken History",
+          "median_improvement_percent": -382.852,
+          "field_wins": 0,
+          "field_count": 13,
+          "interpretation": "Lagged share-strength history circularly displaced in time."
+        }
+      ],
+      "gates": [
+        {
+          "gate": "Median Improvement Positive",
+          "status": "PASS",
+          "meaning": "M4 median improvement over the time-only parent baseline is positive."
+        },
+        {
+          "gate": "At Least 10 Of 13 Fields Improve",
+          "status": "PASS",
+          "meaning": "At least ten validation fields improve."
+        },
+        {
+          "gate": "Beats Wrong Frequency Control",
+          "status": "FAIL",
+          "meaning": "Correct spin frequency beats the wrong-frequency control."
+        },
+        {
+          "gate": "Beats Broken History Control",
+          "status": "PASS",
+          "meaning": "Correct temporal history beats the shifted-history control."
+        },
+        {
+          "gate": "Both Rf Period Medians Positive",
+          "status": "PASS",
+          "meaning": "RF-on and RF-off each improve in median."
+        },
+        {
+          "gate": "Full Array Supported",
+          "status": "FAIL",
+          "meaning": "Every frozen primary condition passes."
+        }
+      ],
+      "audit": [
+        {
+          "check": "Protocol Hash Matches Freeze",
+          "status": "PASS"
+        },
+        {
+          "check": "Analysis Hash Matches Freeze",
+          "status": "PASS"
+        },
+        {
+          "check": "T414 Loader Hash Matches Freeze",
+          "status": "PASS"
+        },
+        {
+          "check": "Split Counts Are 13 And 13",
+          "status": "PASS"
+        },
+        {
+          "check": "Development Source Hashes Match",
+          "status": "PASS"
+        },
+        {
+          "check": "Validation Source Hashes Match",
+          "status": "PASS"
+        },
+        {
+          "check": "All 15 Model Horizon Rows Present",
+          "status": "PASS"
+        },
+        {
+          "check": "All 195 Field Rows Present",
+          "status": "PASS"
+        },
+        {
+          "check": "All 390 Period Rows Present",
+          "status": "PASS"
+        },
+        {
+          "check": "Primary Median Recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "Primary Field Wins Recompute",
+          "status": "PASS"
+        },
+        {
+          "check": "Frozen Gates Recompute",
+          "status": "PASS"
+        },
+        {
+          "check": "Posthoc Strength Rate Correlation Recomputes",
+          "status": "PASS"
+        },
+        {
+          "check": "Posthoc Full Array Summary Matches",
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "isis-rb1620447",
+      "label": "ISIS RB1620447 public RF-\u00b5SR dataset",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "ISIS DataGateway",
+        "url": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+        "description": "Twenty-six resolved 300 K EMU runs used for T415; 13 development and 13 interleaved validation fields.",
+        "filters": [
+          "Magnetic field 50\u2013500 G",
+          "Corrected time 0.25\u20136.00 microseconds at native 0.016-microsecond spacing",
+          "RF-on and RF-off analysed separately",
+          "High-field 202 K branch excluded after the frozen T414 sampling failure"
+        ],
+        "tables_used": [
+          "ISIS investigation RB1620447 / raw NeXus dataset"
+        ]
+      }
+    },
+    {
+      "id": "t415-analysis",
+      "label": "T415 frozen multichannel analysis and parent-history diagnostic",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "Python 3.12",
+        "query": "python t415_multichannel_state_array.py --stage development && python t415_multichannel_state_array.py --stage validation",
+        "description": "Nested ridge models, whole-run validation, wrong-frequency and broken-history controls, followed by a labelled stronger-parent-baseline diagnostic.",
+        "language": "shell",
+        "filters": [
+          "Primary forecast horizon 0.064 microseconds",
+          "Development-only model fitting and regularisation",
+          "Validation replicate is the magnetic field, not the time bin"
+        ],
+        "metric_definitions": [
+          "Improvement = 1 - model RMSE / parent-baseline RMSE",
+          "Spin cuts are 1+sin(theta) and 1+cos(theta)",
+          "Share strength is the lagged 96-detector share displacement from the early reference",
+          "Parent-history diagnostic adds current normalized log rate and one-bin slope"
+        ],
+        "tables_used": [
+          "T415_MODEL_SUMMARY.csv",
+          "T415_FIELD_METRICS.csv",
+          "T415_POSTHOC_PARENT_HISTORY_SUMMARY.csv",
+          "T415_VALIDATION_AUDIT.json"
+        ]
+      }
+    },
+    {
+      "id": "t415-headline",
+      "label": "T415 headline metrics",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"headline\";",
+        "description": "Frozen and diagnostic headline values.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::headline"
+        ]
+      }
+    },
+    {
+      "id": "t415-models",
+      "label": "T415 nested model comparison",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"model_improvement\";",
+        "description": "Median validation-field improvement by model and horizon.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::model_improvement"
+        ]
+      }
+    },
+    {
+      "id": "t415-fields",
+      "label": "T415 field-level comparison",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"primary_fields\";",
+        "description": "Primary frozen and stronger-baseline field-level improvements.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::primary_fields"
+        ]
+      }
+    },
+    {
+      "id": "t415-diagnostic",
+      "label": "T415 parent-history diagnostic",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"diagnostic_models\";",
+        "description": "Incremental value after current parent rate and slope are included.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::diagnostic_models"
+        ]
+      }
+    },
+    {
+      "id": "t415-profile",
+      "label": "T415 284 G example profile",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"example_profile\";",
+        "description": "Observed and predicted normalized release profiles at the primary horizon.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::example_profile"
+        ]
+      }
+    },
+    {
+      "id": "t415-strength-rate",
+      "label": "T415 strength/rate relation",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"strength_rate\";",
+        "description": "Current parent log rate across lagged share-strength deciles.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::strength_rate"
+        ]
+      }
+    },
+    {
+      "id": "t415-controls",
+      "label": "T415 frozen controls",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"controls\";",
+        "description": "Correct, wrong-frequency and broken-history validation comparisons.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::controls"
+        ]
+      }
+    },
+    {
+      "id": "t415-gates",
+      "label": "T415 frozen gates",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"gates\";",
+        "description": "Prespecified primary interpretation gates.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::gates"
+        ]
+      }
+    },
+    {
+      "id": "t415-audit",
+      "label": "T415 independent audit",
+      "href": "https://data.isis.stfc.ac.uk/doi/STUDY/103197258",
+      "query": {
+        "engine": "SQLite",
+        "sql": "SELECT * FROM \"audit\";",
+        "description": "Independent provenance and arithmetic checks.",
+        "tables_used": [
+          "T415_REPORT_DATA.sqlite::audit"
+        ]
+      }
+    }
+  ]
+}

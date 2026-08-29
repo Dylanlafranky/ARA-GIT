@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>T399 child-half before crest</title>
+<style>body{margin:0;background:#eef2f7;font-family:Inter,Segoe UI,Arial,sans-serif;color:#172033}main{max-width:1500px;margin:20px auto;padding:0 18px 40px}img{width:100%;height:auto;display:block}section{background:white;border:1px solid #d9dee8;border-radius:16px;padding:24px;margin-top:18px;line-height:1.55}code{background:#f1f4f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%}th,td{text-align:left;padding:9px;border-bottom:1px solid #e1e5ec}.pass{color:#287453;font-weight:700}.fail{color:#a63d4b;font-weight:700}</style></head><body><main>
+<img src="T399_CHILD_HALF_PRECREST_SEQUENCE.svg" alt="T399 child-half pre-crest test">
+<section><h2>Result</h2><p><strong>CHILD-HALF PRE-CREST SEQUENCE NOT SUPPORTED</strong></p>
+<p>The native sequence is <code>prompt crest → branch equality → child half → delayed crest</code>. Child half occurs 0.098851 μs before the delayed-rate maximum. The earlier prompt crest is 0.255731 ARA units below child half.</p>
+<p>This is a joint population timing result. It does not directly observe one muon producing one named pair of neutrinos.</p></section>
+<section><h2>Frozen gates</h2><table><thead><tr><th>Gate</th><th>Status</th></tr></thead><tbody>
+<tr><td>G1_native_four_landmark_order</td><td class="pass">PASS</td></tr><tr><td>G2_native_child_half_before_delayed_crest</td><td class="pass">PASS</td></tr><tr><td>G3_native_quarter_compatibility</td><td class="pass">PASS</td></tr><tr><td>G4_leave_one_out_half_before_crest_at_least_90pct</td><td class="pass">PASS</td></tr><tr><td>G5_yield_sensitivity_half_before_crest_at_least_95pct</td><td class="fail">FAIL</td></tr><tr><td>G6_T378_coarse_holdout_half_before_delayed_peak</td><td class="pass">PASS</td></tr><tr><td>G7_circular_shift_alignment_p_at_most_0p05</td><td class="fail">FAIL</td></tr><tr><td>G8_population_not_individual_birth_boundary</td><td class="pass">PASS</td></tr>
+</tbody></table></section>
+<section><h2>Reproduction</h2><p>Run <code>python analysis/muon/t399_child_half_precrest_sequence.py</code>, then <code>python analysis/muon/validate_t399_child_half_precrest_sequence.py</code>.</p></section>
+</main></body></html>

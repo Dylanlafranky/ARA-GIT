@@ -1,6 +1,74 @@
 # PROVENANCE LEDGER — risky predictions, timestamped, hits AND misses
 
 
+**17 August 2026 - T397 spin phase maturity versus orientation.** Dylan
+refined the interpretation before execution: spin is the muon waveform and
+lifespan, so it may indicate handover stage, while daughter identities receive
+the spent TE-ARA budget. T397 froze the stricter empirical split between spin
+as a detector-orientation organiser and spin as a population-wide maturity
+clock. It retained the same 300 K RAL Silver medium and used calibration-only
+acceptance corrections before opening three held-out fields.
+
+The orientation field passed: pooled held-out weighted-SSE gain `14.4147%`,
+hierarchical 95% interval `[2.4618%,25.2033%]`, positive at 63, 160 and 400 G,
+and stronger than every frozen wrong cadence. The detector-normalized common
+mode left a small coherent residue: gain `0.7128%`, interval
+`[-1.9853%,2.8053%]`, phase amplitude `0.06310%` and phase resultant `0.9350`.
+It failed because the 400 G gain was negative and reverse parity was not
+field-consistent.
+
+Classification: **orientation supported; maturity not supported**. The weak
+common-mode trace is preserved as an unresolved coupling lead, not relabelled
+as an individual neutrino-creation clock. Aggregate histograms, prior source
+inspection and possible acceptance leakage remain explicit ceilings.
+Independent validation passed. Protocol SHA-256:
+`62D2ADA024A2D7077FCB9A893871EB960BE324ACC431158B24011DC3161B41F5`.
+Primary records:
+`analysis/muon/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_FINDINGS_2026-08-17.md`
+and
+`analysis/muon/T397_spin_phase_maturity_vs_orientation/T397_SPIN_PHASE_MATURITY_VS_ORIENTATION_REPORT.html`.
+
+**16 August 2026 - T396 independent spin relation / hidden-child lock.** The
+protocol froze `P=x_e`, the independent signed orientation
+`R=1+cos(theta_eS)` and hidden neutral child `C=2*x_nu_e/(2-P)` before
+scoring. One million fresh polarized positive-muon `V-A` truth events were
+split deterministically into `499,615` calibration, `200,326` validation and
+`300,059` holdout events. The primary dense joint estimator gained
+`0.01550638` nats/event over parent-only, 95% interval
+`[0.01441225,0.01664197]`, and beat relation-only, unconditional, shuffled,
+wrong-event, mirrored-orientation and phase-space controls. Factorized
+two-cut fusion gained `0.02088526` nats/event and outperformed the dense grid.
+Its gain decreased monotonically with polarization and became `-0.00124479`
+at zero polarization, satisfying the physical-coupling falsifier.
+
+Classification: **supported truth-model Information³ crosswalk with explicit
+ceiling**. Two independently observed relations constrain a third hidden
+relation; the result does not require a nonlinear interaction and is not
+direct neutrino observation or an individual creation-time prediction.
+Independent validation passed all checks. Protocol SHA-256:
+`76BF6A48147DAB008E16343648ED17CD40BFC4360C3B8FD590EE7693B05C7B44`.
+Primary records:
+`analysis/muon/T396_INFORMATION3_SPIN_CHILD_LOCK_FINDINGS_2026-08-16.md` and
+`analysis/muon/T396_information3_spin_child_lock/T396_INFORMATION3_SPIN_CHILD_LOCK_REPORT.html`.
+
+**16 August 2026 - T395 Information³ parent/child neutrino lock.** T395 froze
+the event-level parent cut `P=x_e`, joint-neutral complement `N=2-P`, child
+cut `C=2*x_nu_e/N`, and composed third relation before scoring. It explicitly
+excluded the unrelated Super-K population-time curve because it has no shared
+event key. Exact composition reconstructed both neutral branches to machine
+precision and was classified as forced coordinate bookkeeping. For the
+non-trivial gate, `499,615` calibration and `200,326` validation events were
+used to freeze a parent-conditioned child distribution before revealing
+`300,059` holdout truth events. The model gained `0.26429817` nats/event over
+the unconditional child, 95% interval `[0.26256574,0.26603493]`, and beat
+parent-shuffled, identity-reversed and phase-space controls. Point prediction
+improved only modestly, preserving the boundary between a statistical
+Information³ lock and exact individual reconstruction. Independent validation
+passed. Protocol SHA-256:
+`04D8CCA433751FC1ADDF20CA07B4CE71ACE233362EDDF9EF0DA7678E77511ED3`.
+Primary record:
+`analysis/muon/T395_INFORMATION3_PARENT_CHILD_LOCK_FINDINGS_2026-08-16.md`.
+
 **15 August 2026 - T394 native neutral pair and causal population release.**
 T394 executed both follow-ups frozen after T393. Test 1 measured the two
 neutrinos at their native pair rung across one million frozen Standard-Model

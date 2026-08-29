@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>T409 — Combined Di-ARA droplet handover</title>
+  <style>
+    :root { --bg:#0c111a; --card:#141c29; --ink:#edf2f7; --muted:#aeb9c8; --line:#2a3647; --blue:#76a7e8; --orange:#f0a14a; --purple:#a78bfa; --green:#63c18a; --red:#ef6a6a; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif; }
+    main { max-width:1220px; margin:auto; padding:42px 24px 80px; }
+    h1 { font-size:clamp(2rem,4vw,3.2rem); line-height:1.08; margin:0 0 12px; }
+    h2 { margin:42px 0 14px; font-size:1.55rem; }
+    h3 { color:var(--blue); margin-top:28px; }
+    p, li { max-width:92ch; }
+    .lede { font-size:1.16rem; color:#dce5ef; max-width:92ch; }
+    .tag { display:inline-block; padding:5px 10px; border:1px solid var(--red); color:#ffb0b0; border-radius:999px; font-weight:700; letter-spacing:.02em; }
+    .grid { display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px; }
+    .metric { font-size:2rem; font-weight:750; line-height:1.1; color:var(--blue); }
+    .metric.fail { color:var(--red); }
+    .metric.local { color:var(--green); }
+    .small { color:var(--muted); font-size:.92rem; }
+    table { border-collapse:collapse; width:100%; background:var(--card); }
+    th,td { border:1px solid var(--line); padding:10px 12px; text-align:left; }
+    th { background:#192333; }
+    .figure { margin:22px 0 36px; background:#fff; border-radius:12px; overflow:hidden; }
+    .figure img { display:block; width:100%; height:auto; }
+    code { background:#1a2534; padding:.12em .35em; border-radius:5px; }
+    a { color:#8ec5ff; }
+    .callout { border-left:5px solid var(--orange); padding:14px 18px; background:#191d25; border-radius:0 10px 10px 0; }
+    .supported { border-left-color:var(--green); }
+    .failed { border-left-color:var(--red); }
+    .formula { font:1.1rem ui-monospace,SFMono-Regular,Consolas,monospace; overflow:auto; padding:14px; background:#101824; border:1px solid var(--line); border-radius:10px; }
+  </style>
+</head>
+<body><main>
+  <span class="tag">FROZEN UNIVERSAL GATE: NOT SUPPORTED</span>
+  <h1>Combined Rationality/Irrationality Di-ARA at droplet handover</h1>
+  <p class="lede">The two measured movement components form structured, identity-specific paths, but equality is not a universal handover rule. Two of four held-out fibre events crossed near handover; two never crossed. A separate flat-substrate small-droplet transfer did cross within 0.017 event units, showing a strong local rule rather than a universal one.</p>
+
+  <div class="grid">
+    <section class="card"><div class="metric fail">2 / 4</div><div>holdouts within the frozen tolerance</div></section>
+    <section class="card"><div class="metric fail">p = 1.0</div><div>strict missing-crossing-aware frozen control</div></section>
+    <section class="card"><div class="metric">p = 0.471</div><div>post-hoc close-approach control</div></section>
+    <section class="card"><div class="metric local">0.017</div><div>S1 separate transfer crossing error</div></section>
+  </div>
+
+  <h2>Who / What / When / Where / Why / How</h2>
+  <div class="grid">
+    <section class="card"><b>Who</b><br>Eight water-droplet lobe handovers on pre-wetted fibres; one separate small-droplet flat-substrate transfer.</section>
+    <section class="card"><b>What</b><br><span style="color:var(--orange)">R</span>: coherent affine flow. <span style="color:var(--purple)">I</span>: non-affine residual flow.</section>
+    <section class="card"><b>When</b><br>Encoded frames before persistent lobe loss, through direct handover and reclosure.</section>
+    <section class="card"><b>Where</b><br>Local droplet-pair ROIs; not a molecular bridge cut or whole-apparatus average.</section>
+    <section class="card"><b>Why</b><br>Test equality/ridge landmarks in a combined Rationality/Irrationality Di-ARA.</section>
+    <section class="card"><b>How</b><br>Dense flow → RANSAC affine fit → independent 0–2 scaling → frozen holdout controls.</section>
+  </div>
+
+  <h2>Frozen result</h2>
+  <p>Protocol SHA-256: <code>A3899462E5DFF426A0CA10A5418A7AAB4194093301BE3C66162C9B06B77E7A65</code>.</p>
+  <table>
+    <thead><tr><th>Holdout</th><th>Nearest R=I crossing</th><th>|u−1|</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>E3</td><td>1.0769</td><td>0.0769</td><td>pass</td></tr>
+      <tr><td>E4</td><td>0.9865</td><td>0.0135</td><td>pass</td></tr>
+      <tr><td>E6</td><td>absent</td><td>undefined</td><td>fail</td></tr>
+      <tr><td>E8</td><td>absent</td><td>undefined</td><td>fail</td></tr>
+    </tbody>
+  </table>
+  <div class="figure"><img src="results/T409_ALL_EVENT_WAVES.png" alt="All registered droplet event waves"></div>
+  <div class="figure"><img src="results/T409_HOLDOUT_CONTROL.png" alt="Frozen holdout control"></div>
+
+  <h2>Post-hoc close approach</h2>
+  <div class="callout failed"><b>Also not supported.</b> Held-out median separation at direct handover was 0.2517 ARA units versus 0.2604 under 10,000 circular shifts: only a 3.37% reduction, empirical <i>p</i> = 0.4713.</div>
+  <div class="figure"><img src="results/T409_POSTHOC_CLOSE_APPROACH_CONTROL.png" alt="Post-hoc close approach control"></div>
+
+  <h2>Separate S1 transfer control</h2>
+  <p>A small central droplet disappears into the larger left droplet at registered encoded frame 40. Applying the frozen fibre scaling without refitting gives <code>R=0.3041</code>, <code>I=0.2676</code>, and a nearest equality crossing at <code>u=0.9827</code>. This is strong local correspondence, but one different identity/substrate cannot rescue the fibre gate.</p>
+  <div class="figure"><img src="results/T409_S1_TRANSFER_CONTROL.png" alt="Separate S1 transfer control"></div>
+
+  <h2>What the geometry actually says</h2>
+  <div class="callout supported"><b>The decomposition itself is sound.</b> Each handover retained 892–3,289 valid flow vectors, target-frame RANSAC inlier fractions were 0.622–1.000, and neither channel clipped to an ARA pole.</div>
+  <p>The decisive observation is that R and I mostly travel together: within-event Spearman correlations are 0.555–0.966. Their relation-plane paths largely follow a diagonal.</p>
+  <div class="figure"><img src="results/T409_COMBINED_RELATION_PLANE.png" alt="Combined Di-ARA relation plane"></div>
+  <p><b>Interpretation:</b> coherent and non-affine movement are two distinct participations in a shared movement budget. This cut does not yet establish a phase/anti-phase pair. It therefore allows equality but gives no reason that every identity must hand over at equality.</p>
+
+  <h2>Claim status</h2>
+  <div class="grid">
+    <section class="card"><h3>Supported</h3><ul><li>Stable two-component movement extraction.</li><li>Structured identity-specific relation paths.</li><li>Equality can mark some local handovers.</li><li>Different handovers retain different dominant modes.</li></ul></section>
+    <section class="card"><h3 style="color:var(--red)">Not supported</h3><ul><li>Universal R=I handover.</li><li>Universal close approach at handover.</li><li>Calling the two non-negative magnitudes the complete opposing pair.</li></ul></section>
+    <section class="card"><h3 style="color:var(--orange)">Unresolved</h3><ul><li>Whether a balance/direction coordinate supplies the missing anti-phase.</li><li>Whether handover landmarks are class-conditional.</li><li>Which physical identity controls the dominant mode.</li></ul></section>
+  </div>
+
+  <h2>Next ARA-faithful cut</h2>
+  <p>Freeze a new test that separates common movement amount from relational balance:</p>
+  <div class="formula">A(t) = [R(t)+I(t)]/2<br>B(t) = [R(t)−I(t)]/[R(t)+I(t)+ε]<br>x<sub>B</sub>(t) = 1+B(t) ∈ [0,2]</div>
+  <p><code>A</code> records the shared movement budget; <code>xB</code> records which mode leads without defining either original wave as <code>2−other</code>. Signed convergence/expansion and rotation can then supply physical direction. This is a proposed new test, not a retroactive T409 result.</p>
+
+  <h2>Source and reproducibility</h2>
+  <ul>
+    <li><a href="https://pubs.aip.org/aip/apl/article-abstract/125/6/061601/3306700/Short-time-asymmetric-droplet-coalescence-dynamics?redirectedFrom=fulltext">Primary AIP study</a></li>
+    <li><a href="https://figshare.com/articles/media/Video_S1/26128957">Figshare Video S1 entry</a> (supplementary media are CC BY-NC 4.0)</li>
+    <li><a href="T409_FROZEN_PROTOCOL.md">Frozen protocol</a></li>
+    <li><a href="T409_COMBINED_HANDOVER_FINDINGS.md">Full findings in Markdown</a></li>
+    <li><a href="results/T409_SOURCE_HASHES.csv">Source video hashes</a></li>
+    <li><a href="results/T409_RESULTS.json">Frozen machine-readable result</a></li>
+    <li><a href="results/T409_POSTHOC_CLOSE_APPROACH_RESULTS.json">Post-hoc machine-readable result</a></li>
+    <li><a href="results/T409_S1_TRANSFER_CONTROL_RESULTS.json">S1 control result</a></li>
+  </ul>
+  <p class="small">The source reports 20,000-fps acquisition; the published MP4s are slowed and encoded at 29.970 fps. All inference uses encoded frames and dimensionless event position rather than unverified microseconds.</p>
+</main></body></html>

@@ -1,0 +1,187 @@
+{
+  "status": "frozen_diagnostic_three_rung_grandchild_lock",
+  "geometry": {
+    "d_pc": "abs(r_child - r_parent)",
+    "d_cg": "abs(r_grandchild - r_child)",
+    "x_grandchild": "2*d_pc/(d_pc+d_cg)",
+    "grandchild_window": "odd(max(3, child_window//2))",
+    "outcome": "parent handover within one frozen child window"
+  },
+  "data": {
+    "source_eligible_events": 123,
+    "events_with_three_rung_snapshots": 123,
+    "snapshots": 10206,
+    "fluids": [
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ],
+    "event_counts": {
+      "S1": 34,
+      "S2": 62,
+      "S3": 7,
+      "S4": 20
+    },
+    "snapshot_counts": {
+      "S1": 496,
+      "S2": 3073,
+      "S3": 3042,
+      "S4": 3595
+    }
+  },
+  "overall": {
+    "constant": {
+      "brier": 0.07801415381538901,
+      "auc": 0.48316439000701505,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    },
+    "parent_state": {
+      "brier": 0.08474087878799941,
+      "auc": 0.6167213675408529,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    },
+    "parent_child": {
+      "brier": 0.08888763605858986,
+      "auc": 0.6116585124367934,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    },
+    "parent_grandchild": {
+      "brier": 0.08300364634265904,
+      "auc": 0.639531670383554,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    },
+    "three_rung_additive": {
+      "brier": 0.0862908891511684,
+      "auc": 0.680163360993159,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    },
+    "three_point_lock": {
+      "brier": 0.08809018320996771,
+      "auc": 0.6873256250879471,
+      "base_probability": 0.08524524942769394,
+      "events": 123,
+      "snapshots": 10206,
+      "weight": 123.0
+    }
+  },
+  "by_fluid_lock": {
+    "S1": {
+      "model": "three_point_lock",
+      "brier": 0.12717502701341493,
+      "auc": 0.6406312252973753,
+      "base_probability": 0.08838519697925999,
+      "events": 34,
+      "snapshots": 496,
+      "weight": 34.0
+    },
+    "S2": {
+      "model": "three_point_lock",
+      "brier": 0.07824319948310894,
+      "auc": 0.6836077951579799,
+      "base_probability": 0.08838508365712654,
+      "events": 62,
+      "snapshots": 3073,
+      "weight": 62.0
+    },
+    "S3": {
+      "model": "three_point_lock",
+      "brier": 0.07345812325860443,
+      "auc": 0.7924882229258264,
+      "base_probability": 0.0880906466175538,
+      "events": 7,
+      "snapshots": 3042,
+      "weight": 7.0
+    },
+    "S4": {
+      "model": "three_point_lock",
+      "brier": 0.05729281928034673,
+      "auc": 0.8351249392862178,
+      "base_probability": 0.0691779634623397,
+      "events": 20,
+      "snapshots": 3595,
+      "weight": 20.0
+    }
+  },
+  "by_fluid_parent": {
+    "S1": {
+      "model": "parent_state",
+      "brier": 0.10298515151182484,
+      "auc": 0.6218527583706741,
+      "base_probability": 0.08838519697925999,
+      "events": 34,
+      "snapshots": 496,
+      "weight": 34.0
+    },
+    "S2": {
+      "model": "parent_state",
+      "brier": 0.08156953160143753,
+      "auc": 0.6142425754724309,
+      "base_probability": 0.08838508365712654,
+      "events": 62,
+      "snapshots": 3073,
+      "weight": 62.0
+    },
+    "S3": {
+      "model": "parent_state",
+      "brier": 0.08264988515745368,
+      "auc": 0.528485425881595,
+      "base_probability": 0.0880906466175538,
+      "events": 7,
+      "snapshots": 3042,
+      "weight": 7.0
+    },
+    "S4": {
+      "model": "parent_state",
+      "brier": 0.06428863920652891,
+      "auc": 0.6748376628805155,
+      "base_probability": 0.0691779634623397,
+      "events": 20,
+      "snapshots": 3595,
+      "weight": 20.0
+    }
+  },
+  "grandchild_alignment_null": {
+    "reps": 1000,
+    "observed_parent_child_brier": 0.08888763605858986,
+    "observed_three_point_lock_brier": 0.08809018320996771,
+    "observed_improvement_over_parent_child": 0.0007974528486221488,
+    "null_improvement_median": -0.012164871669382883,
+    "null_improvement_q95": -0.009370917469007504,
+    "p_ge_observed": 0.000999000999000999
+  },
+  "posthoc_parent_grandchild_alignment": {
+    "status": "posthoc_audit_not_frozen_gate",
+    "reps": 1000,
+    "observed_parent_state_brier": 0.08474087878799941,
+    "observed_parent_grandchild_brier": 0.08300364634265904,
+    "observed_improvement_over_parent_state": 0.001737232445340367,
+    "null_improvement_median": 0.003374887512161348,
+    "null_improvement_q95": 0.004519260781594678,
+    "p_ge_observed": 0.994005994005994
+  },
+  "gates": {
+    "lock_brier_below_parent_state": false,
+    "lock_brier_below_parent_child": true,
+    "lock_auc_above_parent_state": true,
+    "improves_parent_in_three_of_four_fluids": true,
+    "aligned_grandchild_beats_shift_control_p_le_005": true
+  },
+  "gate_count": 4,
+  "supported": false
+}

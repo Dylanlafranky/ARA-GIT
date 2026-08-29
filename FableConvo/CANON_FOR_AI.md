@@ -364,6 +364,13 @@ is worth more than a hit you cannot.
   parent/current/child readings and the same views for controls when available. A NULL
   prediction does not mean no geometry; rich post-hoc geometry does not rescue a NULL.
   Label post-hoc work explicitly and link the full record. See TEST_PROTOCOL.md.
+- RELATIONAL BRIDGE REPORTING (22 Aug 2026): a durable post-test report must preserve
+  `physical identity -> raw measurement -> transformation -> ARA identity/tier/cut
+  -> established translation -> bounded finding`. An ARA landmark is not itself a
+  named physical mechanism. Record every change of identity, rung, axis, direction,
+  medium, dataset, observable or question in a Pivot Log; if the anchor is unknown,
+  say `UNANCHORED` or `IDENTITY UNRESOLVED`. Use
+  `POST_TEST_REPORT_TEMPLATE.md`; exploration that seeks no status remains free.
 
 ## 4. Reasoning guards
 

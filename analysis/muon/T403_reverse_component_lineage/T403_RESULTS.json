@@ -1,0 +1,116 @@
+{
+  "test": "T403",
+  "date": "2026-08-18",
+  "protocol_sha256": "57c1bf2c25c648ed99d9c864e1df2afe99dc294b33ec6f15f9dad994f1886900",
+  "verdict": "PARTIAL COMPONENT RELATION",
+  "question": "Can the detector-side delayed-neutrino footprint be reverse-traced to a component already present upstream?",
+  "coordinate": {
+    "local_ara": "T402/T400 frozen local child ARA 0-2",
+    "left_time_us": 0.568857971327256,
+    "right_time_us": 1.3828086704815923,
+    "sample_x": [
+      0.125,
+      0.375,
+      0.625,
+      0.875,
+      1.125,
+      1.375,
+      1.625,
+      1.875
+    ],
+    "sample_time_us": [
+      0.619729890024402,
+      0.7214737274186941,
+      0.823217564812986,
+      0.9249614022072781,
+      1.0267052396015701,
+      1.1284490769958622,
+      1.2301929143901542,
+      1.3319367517844463
+    ]
+  },
+  "selected_same_archive_candidate": {
+    "candidate": "anti_nu_mu release",
+    "orientation": "direct",
+    "cosine": 0.9568845644706456,
+    "absolute_cosine": 0.9568845644706456,
+    "registered_shift_rank_of_8": 1,
+    "best_shift": 0,
+    "best_shift_absolute_cosine": 0.9568845644706456,
+    "max_whole_positive_rate_absolute_cosine": 0.9568845644706456,
+    "margin_over_whole_positive_rates": 0.0
+  },
+  "detector_landmarks_from_T402": {
+    "positive_crest_x_range": [
+      0.5,
+      0.5700000000000001
+    ],
+    "ridge_crossing_x_range": [
+      0.935973037112907,
+      1.0511772613056234
+    ],
+    "negative_trough_x_range": [
+      1.88,
+      1.91
+    ]
+  },
+  "split_robustness": {
+    "n": 326,
+    "median_cosine": 0.3152992320724698,
+    "resampling_interval_95": [
+      -0.6603716869859441,
+      0.8143315460873897
+    ],
+    "fraction_absolute_cosine_at_least_0p65": 0.15950920245398773,
+    "fraction_same_sign_as_primary": 0.7208588957055214,
+    "note": "Overlapping deterministic T402 resampling probes, not independent experiments."
+  },
+  "t397_exploratory_best": {
+    "run": "EMU00066579",
+    "field_g": 160.0,
+    "series": "fitted W phase",
+    "orientation": "direct",
+    "cosine": -0.7234927855817135,
+    "absolute_cosine": 0.7234927855817135,
+    "registered_shift_rank_of_8": 3,
+    "best_shift": 3,
+    "best_shift_absolute_cosine": 0.8199765492037964,
+    "sign_transitions": 2,
+    "same_archive": false
+  },
+  "post_frozen_flavor_identifiability": {
+    "nu_e_vs_anti_nu_mu_centered_cosine": 0.9973630638053195,
+    "area_normalized_flavor_shape_contrast_direct_cosine": 0.13412264015708653,
+    "area_normalized_flavor_shape_contrast_direct_rank_of_8": 8,
+    "classification": "diagnostic only; does not alter the frozen gates"
+  },
+  "gates": {
+    "G1_detector_integrity": true,
+    "G2_component_selection": true,
+    "G3_alignment_control": true,
+    "G4_derivative_specificity": false,
+    "G5_evidence_boundary": true
+  },
+  "evidence_classes": {
+    "T402": "measured detector source-difference diagnostic; not a flavor tag",
+    "T398_T400": "fitted source templates and a derived remaining-parent complement",
+    "T397": "independent silver muon phase trace; separate medium and experiment",
+    "T395_T396": "truth-model statistical locks; not temporal waveform observations and therefore excluded from waveform scoring"
+  },
+  "boundaries": [
+    "The detector footprint is a C-minus-AC response contrast, not a pristine neutrino field waveform.",
+    "The remaining-muon curve, release gradient and remaining-parent curvature are derived from the same delayed source template and are not independent confirmations.",
+    "T397 has no shared event key or time origin with COHERENT and cannot establish a causal precursor match.",
+    "T395 and T396 recover event-level statistical relations in a frozen V-A truth model but do not contain observed time waveforms.",
+    "No individual neutrino birth time is measured."
+  ],
+  "input_hashes_sha256": {
+    "T402_BIN_SUMMARY.csv": "17318930d32d66b8281672597f505f06c775eeaa589fa3f2aa15e641560272fe",
+    "T402_RESULTS.json": "05e6f28b73d84a83b235d594bbbca306ca95c995af691aca8a227cefc39b948b",
+    "T400_RESULTS.json": "87fcdfba4515f5b0107b99ba32bc8513310e89a2a15b714c52bd210ffbf551fc",
+    "T398_NATIVE_WAVE_OVERLAP.csv": "77b687a6c6e3a8db4d1ca251421661c39fc0c34d2c441f6e1653e9ca6a496bd0",
+    "T398_RESULTS.json": "91cfeecf678d7ae786877db6514aa4e793fdf4d5248f7c2c8a160c20bb3742a9",
+    "T397_PHASE_PROFILES.csv": "f579211f8db8c58553684f089ff7c7cb829904d5663ca9cb6ccd95813daa3041",
+    "T397_RESULTS.json": "eca5926ec36832487f0b0ca92d4ac6bc0f00d48f8e18ce1f53f2a42a7bbe3336"
+  }
+}

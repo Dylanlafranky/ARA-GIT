@@ -1,0 +1,104 @@
+{
+  "test": "T436_irrationality_timing_transfer",
+  "verdict": "NOT SUPPORTED",
+  "evidence_class": "known-answer method-transfer calibration on one numerical-relativity simulation",
+  "prediction_sha256_verified": true,
+  "source": "SXS:BBH:0305 Lev6 combined waveform; T435 horizon answer key used only by scorer",
+  "actual_common_horizon_time_M": 3685.496267868691,
+  "T435": {
+    "predicted_time_M": 3723.0384611894415,
+    "absolute_error_M": 37.54219332075036,
+    "parent_waveform_cycle_M": 11.371038902293975
+  },
+  "T436": {
+    "predicted_time_M": 3586.2525338878427,
+    "signed_error_M": -99.24373398084845,
+    "absolute_error_M": 99.24373398084845,
+    "error_parent_cycles": 8.727763121171556,
+    "timing_improvement_M": -61.70154066009809,
+    "timing_error_reduction_fraction": -1.6435251966483895,
+    "coordinates_at_prediction": {
+      "U": 0.6895535875131371,
+      "R": 1.999630020801975,
+      "H": 0.04797850981240067,
+      "child_distance_abs_U_minus_R": 1.310076433288838,
+      "parent_distance_abs_H_minus_1": 0.9520214901875993,
+      "joint_lock_distance": 1.6194582979619514,
+      "relation_ara": 0.32918293671259113
+    }
+  },
+  "gates": {
+    "improves_on_T435": false,
+    "within_one_parent_waveform_cycle": false,
+    "joint_lock_specificity": false
+  },
+  "timing_comparison": [
+    {
+      "clock": "T436 joint Irr-Di-ARA",
+      "predicted_time_M": 3586.2525338878427,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": -99.24373398084845,
+      "absolute_error_M": 99.24373398084845,
+      "error_in_T435_parent_cycles": 8.727763121171556
+    },
+    {
+      "clock": "T435 frozen median",
+      "predicted_time_M": 3723.0384611894415,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": 37.54219332075036,
+      "absolute_error_M": 37.54219332075036,
+      "error_in_T435_parent_cycles": 3.3015622972828504
+    },
+    {
+      "clock": "Child-only |U-R|",
+      "predicted_time_M": 3586.2525338878427,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": -99.24373398084845,
+      "absolute_error_M": 99.24373398084845,
+      "error_in_T435_parent_cycles": 8.727763121171556
+    },
+    {
+      "clock": "Parent-only |H-1|",
+      "predicted_time_M": 3692.6480234158453,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": 7.151755547154153,
+      "absolute_error_M": 7.151755547154153,
+      "error_in_T435_parent_cycles": 0.6289447788021699
+    },
+    {
+      "clock": "Wrong rung / full phase",
+      "predicted_time_M": 3692.6480234158453,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": 7.151755547154153,
+      "absolute_error_M": 7.151755547154153,
+      "error_in_T435_parent_cycles": 0.6289447788021699
+    },
+    {
+      "clock": "Quarter-shift control",
+      "predicted_time_M": 3681.849007592213,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": -3.6472602764779367,
+      "absolute_error_M": 3.6472602764779367,
+      "error_in_T435_parent_cycles": 0.3207499602997704
+    },
+    {
+      "clock": "Reverse-time control",
+      "predicted_time_M": 3642.2506426917475,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": -43.24562517694358,
+      "absolute_error_M": 43.24562517694358,
+      "error_in_T435_parent_cycles": 3.8031375627621213
+    },
+    {
+      "clock": "Waveform power maximum",
+      "predicted_time_M": 3692.6480234158453,
+      "actual_common_horizon_M": 3685.496267868691,
+      "signed_error_M": 7.151755547154153,
+      "absolute_error_M": 7.151755547154153,
+      "error_in_T435_parent_cycles": 0.6289447788021699
+    }
+  ],
+  "nearest_observed_child_crossing_posthoc": null,
+  "nearest_observed_child_crossing_error_M": null,
+  "caveat": "The horizon answer was already known historically before T436; this is not blind confirmation."
+}

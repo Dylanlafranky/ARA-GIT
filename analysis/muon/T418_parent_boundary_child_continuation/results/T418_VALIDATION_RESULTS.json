@@ -1,0 +1,96 @@
+{
+  "analysis_sha256": "43f6b18115467e8a97352f9b8c3d608cdb1c5e64a7bc28c0928d651ba840f804",
+  "availability_fraction": 1.0,
+  "boundary": "population spin identity; post-T417 locked reanalysis",
+  "child_post_boundary": {
+    "maximum": 1.3082833924158548,
+    "median": 1.0679870675796463,
+    "q10": 1.0137564511497563,
+    "q90": 1.1574856436841547
+  },
+  "eligible_sequences": 26,
+  "errors": {
+    "baseline_mse": 0.06674885830389754,
+    "child_mse": 0.06617464094932435,
+    "reverse_mse": 0.06696341091211662,
+    "wrong_frequency_mse": 0.06687346779562182
+  },
+  "gates": {
+    "G1_availability": {
+      "pass": true,
+      "threshold": ">=0.75 of run/period sequences with >=4 post-boundary origins",
+      "value": 1.0
+    },
+    "G2_added_future_state_information": {
+      "ci95": [
+        -0.0005723061697737106,
+        0.0005742173545732025
+      ],
+      "pass": false,
+      "threshold": "field-bootstrap lower 95% bound for baseline-child MSE >0",
+      "value": 0.00012126848508259291
+    },
+    "G3_timing_specificity": {
+      "empirical_p": 0.04095904095904096,
+      "null_median": 0.06694616040845408,
+      "pass": true,
+      "threshold": "observed child MSE below at least 95% of circular shifts",
+      "value": 0.06617464094932435
+    },
+    "G4_frequency_specificity": {
+      "ci95": [
+        -0.000725530737725251,
+        0.0008090368955631019
+      ],
+      "pass": false,
+      "threshold": "field-bootstrap lower 95% bound for wrong-child MSE >0",
+      "value": -0.00020293914271471078
+    },
+    "G5_direction_specificity": {
+      "ci95": [
+        -0.0007413131643141703,
+        0.0007462330551435518
+      ],
+      "pass": false,
+      "threshold": "field-bootstrap lower 95% bound for reverse-child MSE >0",
+      "value": 0.0002513097528783377
+    },
+    "G6_rf_robustness": {
+      "pass": false,
+      "threshold": "median baseline-child MSE >0 in RF-on and RF-off",
+      "values": {
+        "RF off": 2.005701233778745e-06,
+        "RF on": -2.638893165765599e-05
+      }
+    }
+  },
+  "null_loss_quality": {
+    "fraction_le_1e12": 0.0,
+    "median": 0.9056628729540352,
+    "minimum": 0.3827757028203196
+  },
+  "parent_boundary_rows": 752,
+  "prediction_rows": 658,
+  "protocol_sha256": "9e71d60104f2cc5ab742525f2c72f92c45ffc40d4c313e5e716f20c1a0f0fc44",
+  "run_count": 13,
+  "run_period_sequences": 26,
+  "source_hashes": {
+    "EMU00069986": "9fd89231ef8b362b5fc462549851537999e381e5c5a707205bd64a7cd77ff39f",
+    "EMU00069992": "bacd2c8576e7e1e966e387e7972f8b64ff5ee9a4b4604a5624d33dffeb9cdf76",
+    "EMU00069998": "59871987c95cf45057d0024409427184447c30ddd5ca6c22f6ff39e139ca59b0",
+    "EMU00070004": "73c56b5ea79148126653e388636399edf51a5a78e7a0f4c11849cc43d782776e",
+    "EMU00070010": "c95b98cae7cc71193af56288d3e8fd41602639b0437f92fd2c6f38a6da3cd79c",
+    "EMU00070016": "a690a8fd64a712378d63e5e75a89fde1c494d8fd16de991560dd057b38aa4b72",
+    "EMU00070022": "04005f86076f3d930cac9d2fa45a448f72fdc7add5055627890579781939c628",
+    "EMU00070028": "93b8c530e8f10eaf125ff9898c6046a468cf5280879342e706bc1bc18b2053ec",
+    "EMU00070034": "16501cae1fe98d8d7cce1c4c8eeda79dae9068c02ce9223adf6358e774d42f45",
+    "EMU00070040": "bd65cfd586d88b7c7690cf7cec5d83c6b89cebdcb752f83ac93485deefd0443d",
+    "EMU00070046": "591bda9acfd3a6e91163631abf6ed2a12ba0968ea156231be0008f8b6f9ea5b2",
+    "EMU00070052": "5ddd5d4c48dd9ca5472d8d99da32069e264f225fa09ee8ae58457f7c4027db6a",
+    "EMU00070058": "78f4e7d2116b3d45cd4ade83ca5a64ad7ba6846a0981bb982c71de5c3a23ee46"
+  },
+  "stage": "validation",
+  "stage_supported": false,
+  "test": "T418 parent-boundary child continuation",
+  "timeline_rows": 1534
+}

@@ -1,0 +1,23 @@
+{
+  "test": "T405 independent saved-output validation",
+  "status": "PASS",
+  "checks": {
+    "protocol_hash_matches": true,
+    "twenty_valid_splits": true,
+    "prompt_fraction_recomputes": true,
+    "displacement_recomputes": true,
+    "primary_rho_recomputes": true,
+    "all_loo_rho_one": true,
+    "boundary_relations_are_rank_identical": true,
+    "partial_relation_marked_non_identifiable": true,
+    "structural_boundary_is_explicit": true,
+    "all_registered_gates_pass": true,
+    "diagnostics_saved": true
+  },
+  "recomputed": {
+    "rho_prompt_vs_displacement": 1.0,
+    "rho_prompt_vs_left_boundary": 1.0,
+    "rho_left_boundary_vs_displacement": 1.0
+  },
+  "interpretation": "The parent-to-child displacement is perfectly monotonic in participation inside T400, but the same rank is carried by the equality boundary that constructs the local coordinate. This validates the distortion-aware ARA instrument; it is not independent physical confirmation."
+}

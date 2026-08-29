@@ -1,0 +1,22 @@
+{
+  "frozen_before_holdout": true,
+  "development_fluids": ["S1", "S3"],
+  "holdout_fluids": ["S2", "S4"],
+  "source_coverage_min": 0.9,
+  "minimum_reliable_frames": 40,
+  "ara_ridge": 1.0,
+  "persistent_frames": 5,
+  "minimum_crossing_fraction": 0.75,
+  "development_median_cross_u": 0.5337058983773006,
+  "frozen_median_cross_u_interval": [0.4007599780711838, 0.7349610220859937],
+  "temporal_order_gate": "holdout observed median Spearman rho must exceed the holdout circular-shift q95",
+  "maximum_absolute_bo0_cross_spearman": 0.35,
+  "maximum_absolute_height_proxy_cross_spearman": 0.35,
+  "maximum_S2_plate_median_cross_u_difference": 0.15,
+  "development_result_file": "results/T411C_DEVELOPMENT_RESULTS.json",
+  "notes": [
+    "The residual rate is inferred and is not named time.",
+    "Gravity is a frozen rival, not assumed absent.",
+    "The test is descriptive of the handover along the observed lifetime; it is not a causal or real-time forecast test."
+  ]
+}
